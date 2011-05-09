@@ -9,6 +9,7 @@
 
   <modules>
     <module>mvc</module>
+    <module>webass</module>
   </modules>
 
   <build>
