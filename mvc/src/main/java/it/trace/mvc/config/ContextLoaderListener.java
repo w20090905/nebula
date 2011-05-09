@@ -1,5 +1,6 @@
 package it.trace.mvc.config;
 
+import it.trace.mvc.PackageUtil;
 import it.trace.mvc.config.builder.ConfigurationBuilder;
 
 import javax.servlet.ServletContextEvent;
@@ -25,7 +26,14 @@ public class ContextLoaderListener implements ServletContextListener {
         //        for (Class c : cl) {
         //            System.out.println(c);
         //        }
-        System.out.println(ContextLoaderListener.class.getClassLoader().getResource(""));
+
+        //        System.out.println(ContextLoaderListener.class.getClassLoader().getResource(""));
+
+        for (String c : PackageUtil.findClassesInPackage("it")) {
+            System.out.println(c);
+        }
+        System.out.println("end");
+
     }
 
 }
