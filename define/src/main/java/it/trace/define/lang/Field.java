@@ -1,9 +1,7 @@
 package it.trace.define.lang;
 
-import it.trace.define.anotation.Dependent;
 import it.trace.define.anotation.DisplayName;
 
-@Dependent
 public class Field {
 
     public static final String Scala = "Scala";
