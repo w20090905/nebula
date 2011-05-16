@@ -1,6 +1,8 @@
 package it.trace.mvc;
 
-import it.trace.mvc.config.ConfigurationManager;
+import it.trace.mvc.config.Configuration;
+import it.trace.mvc.config.builder.ConfigurationFactory;
+import it.trace.mvc.inject.ContainerManager;
 import it.trace.mvc.mapper.ActionMapper;
 import it.trace.mvc.mapper.ActionMapping;
 
@@ -17,9 +19,19 @@ import javax.servlet.http.HttpServletResponse;
 
 public class DispatcherFilter implements Filter {
 
+    private ActionMapper mapper;
+    private Configuration configuration;
+    private ActionInvocation invocation;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        // TODO Auto-generated method stub
+
+        //        ConfigurationManager.init();
+
+        configuration = new ConfigurationFactory().create(filterConfig);
+
+        mapper = ContainerManager.getInstance(ActionMapper.class);
+        invocation = ContainerManager.getInstance(ActionInvocation.class);
 
     }
 
@@ -29,13 +41,14 @@ public class DispatcherFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 
-        ActionMapper mapper = BeanFactory.getBean(ActionMapper.class);
-        ActionMapping mapping = mapper.getActionMapping(request, response, ConfigurationManager.getConfiguration());
+        // TODO ActionMapping -> delete???
+        ActionMapping mapping = mapper.getActionMapping(request, response, configuration);
 
-        ActionInvocation invocation = BeanFactory.getBean(ActionInvocation.class);
-        invocation.invoke(request, response, mapping);
-
-        chain.doFilter(request, response);
+        if (mapping != null) {
+            invocation.invoke(request, response, mapping);
+        } else {
+            chain.doFilter(request, response);
+        }
     }
 
 

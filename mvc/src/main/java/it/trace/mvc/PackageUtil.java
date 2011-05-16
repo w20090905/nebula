@@ -12,13 +12,22 @@ import java.util.regex.Pattern;
 
 public class PackageUtil {
 
-    public static List<String> findClassesInPackage(String packageName) throws IOException {
-        return findClassesInPackage(packageName, null);
+    private static final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+
+    public static List<String> findClassNamesInPackage(String packageName) throws IOException {
+        return findClassNamesInPackage(packageName, null, true);
     }
 
-    public static List<String> findClassesInPackage(String packageName, Pattern pattern) throws IOException {
+    //    public static List<Class<?>> findClassesInPackage(String packageName, Pattern pattern, boolean recursive) throws IOException {
+    //        List<Class<?>> classes = new ArrayList<Class<?>>();
+    //
+    //        for (String className : findClassNamesInPackage(packageName, pattern, recursive)) {
+    //
+    //        }
+    //    }
+
+    public static List<String> findClassNamesInPackage(String packageName, Pattern pattern, boolean recursive) throws IOException {
         String packageOnly = packageName;
-        boolean recursive = false;
         if (packageName.endsWith(".*")) {
             packageOnly = packageName.substring(0, packageName.lastIndexOf(".*"));
             recursive = true;
@@ -27,8 +36,7 @@ public class PackageUtil {
         List<String> vResult = new ArrayList<String>();
         String packageDirName = packageOnly.replace('.', '/');
 
-        Enumeration<URL> dirs =
-            Thread.currentThread().getContextClassLoader().getResources(packageDirName);
+        Enumeration<URL> dirs = classLoader.getResources(packageDirName);
         while (dirs.hasMoreElements()) {
             URL url = dirs.nextElement();
             String protocol = url.getProtocol();
