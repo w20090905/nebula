@@ -1,14 +1,12 @@
 package it.trace.define.lang;
 
 import it.trace.define.anotation.DisplayName;
-import it.trace.define.anotation.FrameType;
 import it.trace.define.anotation.Inline;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-@FrameType
 @DisplayName("Type")
 public class Type {
 
