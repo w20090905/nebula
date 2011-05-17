@@ -16,6 +16,12 @@ public class Configuration {
         namespaceConfigs.put(namespaceConfig.getName(), namespaceConfig);
     }
 
+    public void addNamespaceConfigs(Iterable<NamespaceConfig> namespaceConfigs) {
+        for (NamespaceConfig namespaceConfig : namespaceConfigs) {
+            this.namespaceConfigs.put(namespaceConfig.getName(), namespaceConfig);
+        }
+    }
+
     public void removeNamespaceConfig(String name) {
         namespaceConfigs.remove(name);
     }

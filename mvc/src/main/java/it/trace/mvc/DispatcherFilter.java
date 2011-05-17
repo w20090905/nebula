@@ -26,8 +26,6 @@ public class DispatcherFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
-        //        ConfigurationManager.init();
-
         configuration = new ConfigurationFactory().create(filterConfig);
 
         mapper = ContainerManager.getInstance(ActionMapper.class);

@@ -15,6 +15,8 @@ public class ConfigurationFactory {
     private String configFilePath = "./setting.properties";
     private Properties properties = null;
 
+    private PackageBasedActionConfigBuilder builder = null;
+
     public void init() {
 
         this.properties = new Properties();
@@ -34,9 +36,21 @@ public class ConfigurationFactory {
 
     public Configuration create(FilterConfig filterConfig) {
 
+        Configuration config = new Configuration();
+
         init();
 
-        return null;
+        String actonPackages = filterConfig.getInitParameter(FILTER_ACTION_PACKAGE_PARAM_NAME);
+        if (actonPackages != null) {
+            builder = new PackageBasedActionConfigBuilder();
+            for (String p : actonPackages.split("\\s")) {
+                config.addNamespaceConfigs(builder.builder(p));
+            }
+        } else {
+            // TODO throw Exception
+        }
+
+        return config;
     }
 
     public String getConfigFilePath() {
