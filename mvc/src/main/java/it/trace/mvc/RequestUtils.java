@@ -2,9 +2,9 @@ package it.trace.mvc;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class RequestUtil {
+public class RequestUtils {
 
-    private RequestUtil() {
+    private RequestUtils() {
 
     }
 

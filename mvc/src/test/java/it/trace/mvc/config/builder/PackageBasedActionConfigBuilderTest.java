@@ -32,7 +32,7 @@ public class PackageBasedActionConfigBuilderTest {
 
         // NamespaceConfig -> /
         nc = ncl.get(0);
-        Assert.assertEquals("/", nc.getName());
+        Assert.assertEquals("", nc.getName());
         Assert.assertEquals(4, nc.getActionConfigs().size());
         // ActionConfig -> person/edit
         ac = nc.getActionConfig("person/edit");

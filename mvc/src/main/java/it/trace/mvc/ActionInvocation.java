@@ -3,6 +3,7 @@ package it.trace.mvc;
 import it.trace.mvc.config.ActionConfig;
 import it.trace.mvc.config.DataBinder;
 import it.trace.mvc.config.ResultConfig;
+import it.trace.mvc.inject.ContainerManager;
 import it.trace.mvc.mapper.ActionMapping;
 
 import java.lang.reflect.InvocationTargetException;
@@ -18,14 +19,7 @@ public class ActionInvocation {
 
         ActionConfig actionConfig = mapping.getActionConfig();
 
-        Object actionInstance = null;
-        try {
-            actionInstance = actionConfig.getMethod().getClass().newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        Object actionInstance = ContainerManager.getInstance(actionConfig.getActionClass());
 
         DataBinder dataBinder = actionConfig.getDataBinder();
         dataBinder.bind(request, response, mapping.getParamters(), actionInstance);

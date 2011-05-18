@@ -40,7 +40,7 @@ public class PackageBasedActionConfigBuilder {
                 namespaceConfig = configs.get(c.getPackage());
             } else {
                 // TODO 太长
-                String namespace = rootPackage.length() == c.getPackage().getName().length() ? "/" : c.getPackage().getName().substring(rootPackage.length()).replace('.', '/');
+                String namespace = c.getPackage().getName().substring(rootPackage.length()).replace('.', '/');
                 namespaceConfig = new NamespaceConfig(namespace);
                 configs.put(c.getPackage(), namespaceConfig);
             }
@@ -79,7 +79,7 @@ public class PackageBasedActionConfigBuilder {
                 ResultConfig rc;
                 rc = new ResultConfig();
                 rc.setName("success");
-                rc.setTemplate(new JspTemplate("/" + simpleActionName + "/" + m.getName() + ".jsp"));
+                rc.setTemplate(new JspTemplate("/" + simpleActionName + "/" + m.getName() + ".jsp"));   // TODO
                 actionConfig.addResultConfig(rc);
 
                 namespaceConfig.addActionConfig(actionConfig);

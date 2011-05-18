@@ -58,7 +58,7 @@ public class ActionConfig {
     }
 
     public Class<?> getActionClass() {
-        return this.method.getClass();
+        return this.method.getDeclaringClass();
     }
 
 }
