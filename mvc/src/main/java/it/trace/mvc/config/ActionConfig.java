@@ -2,15 +2,15 @@ package it.trace.mvc.config;
 
 import java.lang.reflect.Method;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ActionConfig {
 
-    protected String name;
-    protected Method method;
-    protected DataBinder dataBinder;
-    protected Map<String, ResultConfig> resultConfigs = new HashMap<String, ResultConfig>();
+    private String name;
+    private Method method;
+    private DataBinder dataBinder;
+    private final Map<String, ResultConfig> resultConfigs = new LinkedHashMap<String, ResultConfig>();
 
     public ActionConfig(String name, Method method) {
         this.name = name;
@@ -57,5 +57,8 @@ public class ActionConfig {
         return Collections.unmodifiableMap(resultConfigs);
     }
 
+    public Class<?> getActionClass() {
+        return this.method.getClass();
+    }
 
 }

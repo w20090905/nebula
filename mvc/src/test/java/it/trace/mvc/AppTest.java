@@ -40,7 +40,7 @@ public class AppTest {
         throw new RuntimeException();
     }
 
-    @Test(timeout = 1)
+    @Test(timeout = 100)
     public void timeout() throws InterruptedException {
         Thread.sleep(50);
     }

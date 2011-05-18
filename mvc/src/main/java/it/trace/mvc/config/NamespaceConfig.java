@@ -1,13 +1,13 @@
 package it.trace.mvc.config;
 
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class NamespaceConfig {
 
-    protected String name;
-    protected Map<String, ActionConfig> actionConfigs = new HashMap<String, ActionConfig>();
+    private String name;
+    private final Map<String, ActionConfig> actionConfigs = new LinkedHashMap<String, ActionConfig>();
 
     public NamespaceConfig(String name) {
         this.name = name;

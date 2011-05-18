@@ -14,7 +14,10 @@ public class JspTemplate implements Template {
     @Override
     public void render(HttpServletRequest request, HttpServletResponse response, Object model) {
         try {
-            // TODO
+
+            // ++++++++++++++++++++++++++++++++++++++++++++++
+
+            // ----------------------------------------------
 
             request.getRequestDispatcher(this.path).forward(request, response);
         } catch (Exception e) {

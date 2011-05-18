@@ -28,7 +28,7 @@ public class ActionInvocation {
         }
 
         DataBinder dataBinder = actionConfig.getDataBinder();
-        dataBinder.bind(request, response, mapping.getParams(), actionInstance);
+        dataBinder.bind(request, response, mapping.getParamters(), actionInstance);
 
         Object resultCode = null;
         try {

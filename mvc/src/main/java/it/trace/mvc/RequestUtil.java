@@ -2,10 +2,13 @@ package it.trace.mvc;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 public class RequestUtil {
 
-    public static String getServletPath(HttpServletRequest request) {
+    private RequestUtil() {
+
+    }
+
+    public final static String getServletPath(HttpServletRequest request) {
         String servletPath = request.getServletPath();
 
         String requestUri = request.getRequestURI();
@@ -29,6 +32,22 @@ public class RequestUtil {
         }
 
         return requestUri.substring(startIndex, endIndex);
+    }
+
+    public final static boolean isGet(HttpServletRequest request) {
+        return "get".equalsIgnoreCase(request.getMethod());
+    }
+
+    public final static boolean isPost(HttpServletRequest request) {
+        return "post".equalsIgnoreCase(request.getMethod());
+    }
+
+    public final static boolean isPut(HttpServletRequest request) {
+        return "put".equalsIgnoreCase(request.getMethod());
+    }
+
+    public final static boolean isDelete(HttpServletRequest request) {
+        return "delete".equalsIgnoreCase(request.getMethod());
     }
 
 }

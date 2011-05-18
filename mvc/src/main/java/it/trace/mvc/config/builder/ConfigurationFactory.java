@@ -10,7 +10,7 @@ import javax.servlet.FilterConfig;
 
 public class ConfigurationFactory {
 
-    private final static String FILTER_ACTION_PACKAGE_PARAM_NAME = "actionPackage";
+    private final static String FILTER_ACTION_PACKAGE_PARAM_NAME = "actionPackages";
 
     private String configFilePath = "./setting.properties";
     private Properties properties = null;
