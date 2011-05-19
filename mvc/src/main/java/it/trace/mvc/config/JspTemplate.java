@@ -1,7 +1,6 @@
 package it.trace.mvc.config;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,9 +21,8 @@ public class JspTemplate implements Template {
 
             // ++++++++++++++++++++++++++++++++++++++++++++++
             Class<?> c = model.getClass();
-            for (Method m : c.getDeclaredMethods()) {
-                if (Modifier.isPublic(m.getModifiers())
-                        && m.getParameterTypes().length == 0
+            for (Method m : c.getMethods()) {
+                if (m.getParameterTypes().length == 0
                         && m.getName().startsWith("get")
                         && !void.class.equals(m.getReturnType())) {
 

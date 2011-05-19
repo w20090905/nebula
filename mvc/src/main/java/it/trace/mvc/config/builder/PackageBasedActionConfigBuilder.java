@@ -14,9 +14,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.xbean.finder.ClassFinder;
 
@@ -65,15 +62,12 @@ public class PackageBasedActionConfigBuilder {
                 ActionConfig actionConfig = new ActionConfig(simpleActionName + "/" + m.getName(), m);
 
                 // TODO
-                actionConfig.setDataBinder(new DataBinder() {
-
-                    @Override
-                    public void bind(HttpServletRequest request, HttpServletResponse response,
-                            Map<String, Object> extraParams, Object instance) {
-                        // TODO Auto-generated method stub
-
-                    }
-                });
+                try {
+                    actionConfig.setDataBinder((DataBinder) c.getMethod("createDataBinder", null).invoke(null, null));
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
 
                 // TODO
                 ResultConfig rc;

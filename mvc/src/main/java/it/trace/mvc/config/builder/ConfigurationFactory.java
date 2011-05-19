@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletConfig;
 
 public class ConfigurationFactory {
 
@@ -41,6 +42,25 @@ public class ConfigurationFactory {
         init();
 
         String actonPackages = filterConfig.getInitParameter(FILTER_ACTION_PACKAGE_PARAM_NAME);
+        if (actonPackages != null) {
+            builder = new PackageBasedActionConfigBuilder();
+            for (String p : actonPackages.split("\\s")) {
+                config.addNamespaceConfigs(builder.builder(p));
+            }
+        } else {
+            // TODO throw Exception
+        }
+
+        return config;
+    }
+
+    public Configuration create(ServletConfig servletConfig) {
+
+        Configuration config = new Configuration();
+
+        init();
+
+        String actonPackages = servletConfig.getInitParameter(FILTER_ACTION_PACKAGE_PARAM_NAME);
         if (actonPackages != null) {
             builder = new PackageBasedActionConfigBuilder();
             for (String p : actonPackages.split("\\s")) {

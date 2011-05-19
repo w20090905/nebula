@@ -72,7 +72,7 @@ public class RestfulActionMapper implements ActionMapper {
                     methodName = "create";
                 }
             } else {
-                if (RequestUtils.isGet(request) && "new".equals(id)) {
+                if (RequestUtils.isGet(request)) {
                     if ("new".equals(id)) {
                         methodName = "editNew";
                     } else {

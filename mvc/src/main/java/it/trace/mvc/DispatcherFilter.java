@@ -39,6 +39,8 @@ public class DispatcherFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 
+        System.out.println(request.getMethod());
+
         // TODO ActionMapping -> delete???
         ActionMapping mapping = mapper.getActionMapping(request, response, configuration);
 

@@ -5,8 +5,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public interface DataBinder {
+public interface DataBinder<T> {
 
-    void bind(HttpServletRequest request, HttpServletResponse response, Map<String, Object> extraParams, Object instance);
+    void bind(HttpServletRequest request, HttpServletResponse response, Map<String, Object> extraParams, T instance);
 
 }

@@ -5,10 +5,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class DefaultDataBinder implements DataBinder {
+
+public class DefaultDataBinder<T> implements DataBinder<T> {
 
     @Override
-    public void bind(HttpServletRequest request, HttpServletResponse response, Map<String, Object> extraParams, Object instance) {
+    public void bind(HttpServletRequest request, HttpServletResponse response,
+            Map<String, Object> extraParams, T instance) {
+        // TODO Auto-generated method stub
 
     }
 
