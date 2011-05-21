@@ -34,20 +34,4 @@ public class RequestUtils {
         return requestUri.substring(startIndex, endIndex);
     }
 
-    public final static boolean isGet(HttpServletRequest request) {
-        return "get".equalsIgnoreCase(request.getMethod());
-    }
-
-    public final static boolean isPost(HttpServletRequest request) {
-        return "post".equalsIgnoreCase(request.getMethod());
-    }
-
-    public final static boolean isPut(HttpServletRequest request) {
-        return "put".equalsIgnoreCase(request.getMethod());
-    }
-
-    public final static boolean isDelete(HttpServletRequest request) {
-        return "delete".equalsIgnoreCase(request.getMethod());
-    }
-
 }
