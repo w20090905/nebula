@@ -11,17 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 
  * <ul>
- *  <li><code>GET:    /movie/                  => method="list"</code></li>
- *  <li><code>GET:    /movie/Thrillers         => method="view", id="Thrillers"</code></li>
- *  <li><code>GET:    /movie/Thrillers!edit    => method="edit", id="Thrillers"</code></li>
- *  <li><code>GET:    /movie/Thrillers!remove  => method="edit", id="Thrillers"</code></li>
- *  <li><code>GET:    /movie/new               => method="editNew"</code></li>
- *  <li><code>POST:   /movie/                  => method="create"</code></li>
- *  <li><code>PUT:    /movie/Thrillers         => method="update", id="Thrillers"</code></li>
- *  <li><code>DELETE: /movie/Thrillers         => method="remove", id="Thrillers"</code></li>
+ *  <li><code>GET:    /movie/                       => method="list"</code></li>
+ *  <li><code>GET:    /movie/Thrillers              => method="view", id="Thrillers"</code></li>
+ *  <li><code>GET:    /movie/Thrillers!editable     => method="edit", id="Thrillers"</code></li>
+ *  <li><code>GET:    /movie/Thrillers!removable    => method="edit", id="Thrillers"</code></li>
+ *  <li><code>GET:    /movie/new                    => method="editNew"</code></li>
+ *  <li><code>POST:   /movie/                       => method="create"</code></li>
+ *  <li><code>PUT:    /movie/Thrillers              => method="update", id="Thrillers"</code></li>
+ *  <li><code>DELETE: /movie/Thrillers              => method="remove", id="Thrillers"</code></li>
  * </ul>
  */
 public class RestfulActionMapper implements ActionMapper {
+
+    public static final String HTTP_METHOD_PARAM = "__http_method";
 
     @Override
     public ActionMapping getActionMapping(HttpServletRequest request, HttpServletResponse response, Configuration config) {
@@ -59,6 +61,12 @@ public class RestfulActionMapper implements ActionMapper {
 
         if (name.length() > 0) {
 
+            int exclamation = name.lastIndexOf("!");
+            if (exclamation > -1) {
+                methodName = name.substring(exclamation + 1);
+                name = name.substring(0, exclamation);
+            }
+
             int lastSlashPos = name.lastIndexOf('/');
             if (lastSlashPos > -1) {
                 id = name.substring(lastSlashPos + 1);
@@ -66,21 +74,22 @@ public class RestfulActionMapper implements ActionMapper {
             }
 
             if (id == null) {
-                if (RequestUtils.isGet(request)) {
+                if (isGet(request)) {
                     methodName = "list";
-                } else if (RequestUtils.isPost(request)) {
+                } else if (isPost(request)) {
                     methodName = "create";
                 }
-            } else {
-                if (RequestUtils.isGet(request)) {
+            } else if (methodName == null) {
+                if (isGet(request)) {
                     if ("new".equals(id)) {
                         methodName = "editNew";
+                        id = null;
                     } else {
                         methodName = "view";
                     }
-                } else if (RequestUtils.isDelete(request)) {
+                } else if (isDelete(request)) {
                     methodName = "remove";
-                } else if (RequestUtils.isPut(request)) {
+                } else if (isPut(request)) {
                     methodName = "update";
                 }
             }
@@ -106,6 +115,30 @@ public class RestfulActionMapper implements ActionMapper {
         }
 
         return mapping;
+    }
+
+    public final static boolean isGet(HttpServletRequest request) {
+        return "get".equalsIgnoreCase(request.getMethod());
+    }
+
+    public final static boolean isPost(HttpServletRequest request) {
+        return "post".equalsIgnoreCase(request.getMethod());
+    }
+
+    public final static boolean isPut(HttpServletRequest request) {
+        if ("put".equalsIgnoreCase(request.getMethod())) {
+            return true;
+        } else {
+            return isPost(request) && "put".equalsIgnoreCase(request.getParameter(HTTP_METHOD_PARAM));
+        }
+    }
+
+    public final static boolean isDelete(HttpServletRequest request) {
+        if ("delete".equalsIgnoreCase(request.getMethod())) {
+            return true;
+        } else {
+            return isPost(request) && "delete".equalsIgnoreCase(request.getParameter(HTTP_METHOD_PARAM));
+        }
     }
 
 }
