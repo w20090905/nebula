@@ -1,8 +1,8 @@
 package it.trace.mvc.config.builder;
 
-import it.trace.mvc.config.ActionConfig;
 import it.trace.mvc.config.NamespaceConfig;
-import it.trace.mvc.config.ResultConfig;
+import it.trace.mvc.refact.ActionConfig;
+import it.trace.mvc.result.Result;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+
 
 public class PackageBasedActionConfigBuilderTest {
 
@@ -28,7 +29,7 @@ public class PackageBasedActionConfigBuilderTest {
 
         NamespaceConfig nc;
         ActionConfig ac;
-        ResultConfig rc;
+        Result rc;
 
         // NamespaceConfig -> /
         nc = ncl.get(0);

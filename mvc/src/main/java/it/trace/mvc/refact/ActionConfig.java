@@ -1,16 +1,21 @@
-package it.trace.mvc.config;
+package it.trace.mvc.refact;
+
+import it.trace.mvc.DataBinder;
+import it.trace.mvc.inject.ContainerManager;
+import it.trace.mvc.result.Result;
 
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+
 public class ActionConfig {
 
     private String name;
     private Method method;
     private DataBinder dataBinder;
-    private final Map<String, ResultConfig> resultConfigs = new LinkedHashMap<String, ResultConfig>();
+    private final Map<String, Result> resultConfigs = new LinkedHashMap<String, Result>();
 
     public ActionConfig(String name, Method method) {
         this.name = name;
@@ -41,24 +46,29 @@ public class ActionConfig {
         this.dataBinder = dataBinder;
     }
 
-    public ResultConfig getResultConfig(Object name) {
+    public Result getResultConfig(Object name) {
         return resultConfigs.get(name);
     }
 
-    public void addResultConfig(ResultConfig resultConfig) {
-        resultConfigs.put(resultConfig.getName(), resultConfig);
+    public void addResultConfig(String name, Result resultConfig) {
+        resultConfigs.put(name, resultConfig);
     }
 
     public void removeResultConfig(String name) {
         resultConfigs.remove(name);
     }
 
-    public Map<String, ResultConfig> getResultConfigs() {
+    public Map<String, Result> getResultConfigs() {
         return Collections.unmodifiableMap(resultConfigs);
     }
 
     public Class<?> getActionClass() {
         return this.method.getDeclaringClass();
+    }
+
+    public HttpExecutor getExecutor(String id){
+        ContainerManager.getInstance(this.getActionClass());
+        return null;
     }
 
 }

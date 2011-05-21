@@ -1,4 +1,4 @@
-package it.trace.mvc.config;
+package it.trace.mvc;
 
 import java.util.Map;
 

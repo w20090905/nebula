@@ -1,10 +1,10 @@
 package it.trace.mvc.config.builder;
 
-import it.trace.mvc.config.ActionConfig;
-import it.trace.mvc.config.DataBinder;
-import it.trace.mvc.config.JspTemplate;
+import it.trace.mvc.DataBinder;
 import it.trace.mvc.config.NamespaceConfig;
-import it.trace.mvc.config.ResultConfig;
+import it.trace.mvc.refact.ActionConfig;
+import it.trace.mvc.result.ForwardResult;
+import it.trace.mvc.result.RetryResult;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -16,6 +16,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.xbean.finder.ClassFinder;
+
 
 public class PackageBasedActionConfigBuilder {
 
@@ -70,11 +71,21 @@ public class PackageBasedActionConfigBuilder {
                 }
 
                 // TODO
-                ResultConfig rc;
-                rc = new ResultConfig();
-                rc.setName("success");
-                rc.setTemplate(new JspTemplate("/" + simpleActionName + "/" + m.getName() + ".jsp"));   // TODO
-                actionConfig.addResultConfig(rc);
+
+                if("edit".equals(m.getName())){
+                    actionConfig.addResultConfig("fail",new RetryResult(""));
+                    actionConfig.addResultConfig("success", new ForwardResult("/" + simpleActionName + "/" ));
+                }else if("edit".equals(m.getName())){
+
+                }
+
+                //                Result rc;
+                //                rc = new Result();
+                //                rc.setName("success");
+                //                rc.setTemplate(new JspTemplate("/" + simpleActionName + "/" + m.getName() + ".jsp"));   // TODO
+                //                actionConfig.addResultConfig(rc);
+
+
 
                 namespaceConfig.addActionConfig(actionConfig);
             }

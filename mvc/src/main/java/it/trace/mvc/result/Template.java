@@ -1,4 +1,4 @@
-package it.trace.mvc.config;
+package it.trace.mvc.result;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

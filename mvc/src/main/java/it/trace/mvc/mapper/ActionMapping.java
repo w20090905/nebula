@@ -1,10 +1,12 @@
 package it.trace.mvc.mapper;
 
-import it.trace.mvc.config.ActionConfig;
+
+import it.trace.mvc.refact.ActionConfig;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
 
 public class ActionMapping {
 

@@ -1,4 +1,5 @@
-package it.trace.mvc.config;
+package it.trace.mvc.result;
+
 
 import java.lang.reflect.Method;
 
@@ -6,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+
 
 public class JspTemplate implements Template {
 

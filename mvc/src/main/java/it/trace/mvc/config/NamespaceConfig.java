@@ -1,8 +1,11 @@
 package it.trace.mvc.config;
 
+import it.trace.mvc.refact.ActionConfig;
+
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
 
 public class NamespaceConfig {
 

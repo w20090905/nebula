@@ -1,12 +1,13 @@
 package it.trace.mvc.mapper;
 
-import it.trace.mvc.RequestUtils;
-import it.trace.mvc.config.ActionConfig;
 import it.trace.mvc.config.Configuration;
 import it.trace.mvc.config.NamespaceConfig;
+import it.trace.mvc.refact.ActionConfig;
+import it.trace.mvc.util.RequestUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 /**
  * 
@@ -17,16 +18,16 @@ import javax.servlet.http.HttpServletResponse;
  *  <li><code>GET:    /movie/Thrillers!removable    => method="edit", id="Thrillers"</code></li>
  *  <li><code>GET:    /movie/new                    => method="editNew"</code></li>
  *  <li><code>POST:   /movie/                       => method="create"</code></li>
- *  <li><code>PUT:    /movie/Thrillers              => method="update", id="Thrillers"</code></li>
+ *  <li><code>PUT:    /movie/Thrillers`               => method="update", id="Thrillers"</code></li>
  *  <li><code>DELETE: /movie/Thrillers              => method="remove", id="Thrillers"</code></li>
  * </ul>
  */
-public class RestfulActionMapper implements ActionMapper {
+public class RestfulActionConfigFinder implements ActionMapper {
 
     public static final String HTTP_METHOD_PARAM = "__http_method";
 
     @Override
-    public ActionMapping getActionMapping(HttpServletRequest request, HttpServletResponse response, Configuration config) {
+    public ActionMapping find(HttpServletRequest request, HttpServletResponse response, Configuration config) {
 
         String uri = RequestUtils.getServletPath(request);   // This path must start with a "/" character.
 
@@ -98,7 +99,7 @@ public class RestfulActionMapper implements ActionMapper {
             // no name, do nothing now.
         }
 
-        NamespaceConfig nsc = config.getNamespaceConfig(namespace);
+        NamespaceConfig nsc = config.getNamespace(namespace);
         if (nsc == null) {
             return null;
         }

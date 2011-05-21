@@ -1,5 +1,7 @@
 package it.trace.mvc.config;
 
+import it.trace.mvc.result.Template;
+
 public abstract class TemplateFactory {
 
     private static TemplateFactory instance;

@@ -8,7 +8,7 @@ public class Configuration {
 
     protected Map<String, NamespaceConfig> namespaceConfigs = new HashMap<String, NamespaceConfig>();
 
-    public NamespaceConfig getNamespaceConfig(String name) {
+    public NamespaceConfig getNamespace(String name) {
         return namespaceConfigs.get(name);
     }
 

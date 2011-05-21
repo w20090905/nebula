@@ -1,15 +1,15 @@
 package it.trace.mvc;
 
-import it.trace.mvc.config.ActionConfig;
-import it.trace.mvc.config.DataBinder;
-import it.trace.mvc.config.ResultConfig;
 import it.trace.mvc.inject.ContainerManager;
 import it.trace.mvc.mapper.ActionMapping;
+import it.trace.mvc.refact.ActionConfig;
+import it.trace.mvc.result.Result;
 
 import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 public class ActionInvocation {
 
@@ -35,8 +35,9 @@ public class ActionInvocation {
             e.printStackTrace();
         }
 
-        ResultConfig resultConfig = actionConfig.getResultConfig(resultCode);
-        resultConfig.getTemplate().render(request, response, actionInstance);
+        Result resultConfig = actionConfig.getResultConfig(resultCode);
+        resultConfig.execute(request, response, actionInstance);
+        //resultConfig.getTemplate().render(request, response, actionInstance);
 
     }
 
