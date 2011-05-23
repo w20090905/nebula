@@ -1,10 +1,9 @@
 package it.trace.mvc.http;
 
+import it.trace.mvc.HttpMethod;
 import it.trace.mvc.config.Configuration;
-import it.trace.mvc.config.builder.ConfigurationFactory;
-import it.trace.mvc.refact.ActionExecutorFinder;
-import it.trace.mvc.refact.HttpExecutor;
-import it.trace.mvc.util.RequestUtils;
+import it.trace.mvc.executor.SimpleRESTfulExecutorFinder;
+import it.trace.mvc.executor.HttpExecutor;
 
 import java.io.IOException;
 
@@ -20,20 +19,14 @@ import javax.servlet.http.HttpServletResponse;
 
 public class DispatcherFilter implements Filter {
 
-    //private ActionMapper finder;
     private Configuration configuration;
-    //    private ActionInvocation invocation;
-    ActionExecutorFinder finder;
+    SimpleRESTfulExecutorFinder finder;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
-        configuration = new ConfigurationFactory().create(filterConfig);
-
-        //finder = ContainerManager.getInstance(ActionMapper.class);
-        //invocation = ContainerManager.getInstance(ActionInvocation.class);
-
-        finder =  new ActionExecutorFinder(configuration);
+        //        configuration = new ConfigurationFactory().create(filterConfig);
+        finder = new SimpleRESTfulExecutorFinder(configuration);
 
     }
 
@@ -43,16 +36,14 @@ public class DispatcherFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 
-        System.out.println(request.getMethod());
+        HttpExecutor executor = finder.find(HttpMethod.parse(request), getServletPath(request));
 
-        // TODO ActionMapping -> delete???
-        HttpExecutor ex = finder.find(request.getMethod(), RequestUtils.getServletPath(request));
-
-        if (ex != null) {
-            ex.execute(request, response);
+        if (executor != null) {
+            executor.execute(request, response);
         } else {
             chain.doFilter(request, response);
         }
+
     }
 
 
@@ -60,6 +51,32 @@ public class DispatcherFilter implements Filter {
     public void destroy() {
         // TODO Auto-generated method stub
 
+    }
+
+    private String getServletPath(HttpServletRequest request) {
+        String servletPath = request.getServletPath();
+
+        String requestUri = request.getRequestURI();
+        // Detecting other characters that the servlet container cut off (like anything after ';')
+        if (requestUri != null && servletPath != null && !requestUri.endsWith(servletPath)) {
+            int pos = requestUri.indexOf(servletPath);
+            if (pos > -1) {
+                servletPath = requestUri.substring(requestUri.indexOf(servletPath));
+            }
+        }
+
+        if (null != servletPath && !"".equals(servletPath)) {
+            return servletPath;
+        }
+
+        int startIndex = "".equals(request.getContextPath()) ? 0 : request.getContextPath().length();
+        int endIndex = request.getPathInfo() == null ? requestUri.length() : requestUri.lastIndexOf(request.getPathInfo());
+
+        if (startIndex > endIndex) { // this should not happen
+            endIndex = startIndex;
+        }
+
+        return requestUri.substring(startIndex, endIndex);
     }
 
 }

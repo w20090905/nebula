@@ -22,7 +22,7 @@ public class GuiceContainerContextListener implements ServletContextListener {
         String moduleClassParamValue = sce.getServletContext().getInitParameter(MODULE_CLASS_PARAM_NAME);
 
         List<Module> modules = new ArrayList<Module>();
-        if (moduleClassParamValue != null && !"".equals(moduleClassParamValue)) {
+        if (moduleClassParamValue != null && !moduleClassParamValue.isEmpty()) {
             for (String className : moduleClassParamValue.split("\\s+")) {
 
                 Class<?> clazz;

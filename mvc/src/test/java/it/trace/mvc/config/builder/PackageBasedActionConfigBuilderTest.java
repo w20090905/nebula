@@ -1,8 +1,9 @@
 package it.trace.mvc.config.builder;
 
-import it.trace.mvc.config.NamespaceConfig;
-import it.trace.mvc.refact.ActionConfig;
-import it.trace.mvc.result.Result;
+import it.trace.mvc.zzz.config.NamespaceConfig;
+import it.trace.mvc.zzz.config.builder.PackageBasedActionConfigBuilder;
+import it.trace.mvc.zzz.refact.ActionConfig;
+import it.trace.mvc.zzz.result.Result;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,7 +1,7 @@
 package it.trace.mvc.mapper;
 
-import it.trace.mvc.config.Configuration;
-import it.trace.mvc.config.NamespaceConfig;
+import it.trace.mvc.zzz.config.Configuration;
+import it.trace.mvc.zzz.config.NamespaceConfig;
 
 import org.junit.Test;
 

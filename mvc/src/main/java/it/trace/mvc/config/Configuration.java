@@ -6,27 +6,22 @@ import java.util.Map;
 
 public class Configuration {
 
-    protected Map<String, NamespaceConfig> namespaceConfigs = new HashMap<String, NamespaceConfig>();
+    private final Map<Object, Namespace> namespaces = new HashMap<Object, Namespace>();
 
-    public NamespaceConfig getNamespace(String name) {
-        return namespaceConfigs.get(name);
+    public Namespace getNamespace(String key) {
+        return namespaces.get(key);
     }
 
-    public void addNamespaceConfig(NamespaceConfig namespaceConfig) {
-        namespaceConfigs.put(namespaceConfig.getName(), namespaceConfig);
+    public Map<Object, Namespace> getNamespaces() {
+        return Collections.unmodifiableMap(namespaces);
     }
 
-    public void addNamespaceConfigs(Iterable<NamespaceConfig> namespaceConfigs) {
-        for (NamespaceConfig namespaceConfig : namespaceConfigs) {
-            this.namespaceConfigs.put(namespaceConfig.getName(), namespaceConfig);
-        }
+    public void addNamespace(Object key, Namespace namespace) {
+        namespaces.put(key, namespace);
     }
 
-    public void removeNamespaceConfig(String name) {
-        namespaceConfigs.remove(name);
+    public void removeNamespace(Object key) {
+        namespaces.remove(key);
     }
 
-    public Map<String, NamespaceConfig> getNamespaceConfigs() {
-        return Collections.unmodifiableMap(namespaceConfigs);
-    }
 }
