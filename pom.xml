@@ -10,6 +10,7 @@
   <modules>
     <module>mvc</module>
     <module>webass</module>
+    <module>generator</module>
   </modules>
 
   <build>
