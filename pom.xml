@@ -11,6 +11,7 @@
     <module>mvc</module>
     <module>webass</module>
     <module>asdf</module>
+    <module>generator</module>
   </modules>
 
   <build>
