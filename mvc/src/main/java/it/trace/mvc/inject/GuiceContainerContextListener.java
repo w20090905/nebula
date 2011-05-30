@@ -24,7 +24,6 @@ public class GuiceContainerContextListener implements ServletContextListener {
         List<Module> modules = new ArrayList<Module>();
         if (moduleClassParamValue != null && !moduleClassParamValue.isEmpty()) {
             for (String className : moduleClassParamValue.split("\\s+")) {
-
                 Class<?> clazz;
                 try {
                     clazz = ClassUtils.getClass(className);
@@ -56,6 +55,7 @@ public class GuiceContainerContextListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
+        ContainerManager.setContainer(null);
     }
 
 }

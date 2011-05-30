@@ -1,6 +1,8 @@
 package it.trace.mvc.result;
 
 
+import it.trace.mvc.result.template.Template;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +20,10 @@ public class DisplayResult implements Result {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Template getTemplate() {
         return template;
     }
@@ -26,13 +32,9 @@ public class DisplayResult implements Result {
         this.template = template;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp, Object data) {
-        // TODO Auto-generated method stub
+    public void execute(HttpServletRequest request, HttpServletResponse response, Object data) {
+        template.render(request, response, data);
     }
 
 }

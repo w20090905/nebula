@@ -14,11 +14,21 @@ public class Operation {
 
     private String name;
     private Method method = null;
-    private DataBinder<Object> dataBind = null;
+    private DataBinder<Object> dataBinder = null;
     private final Map<Object, Result> results = new LinkedHashMap<Object, Result>();
 
     public Operation(String name) {
         this.name = name;
+    }
+
+    public Operation(Method method) {
+        this.name = method.getName();
+        this.method = method;
+    }
+
+    public Operation(String name, Method method) {
+        this.name = name;
+        this.method = method;
     }
 
     public String getName() {
@@ -37,12 +47,12 @@ public class Operation {
         this.method = method;
     }
 
-    public DataBinder<Object> getDataBind() {
-        return dataBind;
+    public DataBinder<Object> getDataBinder() {
+        return dataBinder;
     }
 
-    public void setDataBind(DataBinder<Object> dataBind) {
-        this.dataBind = dataBind;
+    public void setDataBinder(DataBinder<Object> dataBinder) {
+        this.dataBinder = dataBinder;
     }
 
     public Map<Object, Result> getResults() {
@@ -64,6 +74,10 @@ public class Operation {
     public ActionExecutor getExecutor(){
         Object instance = ContainerManager.getInstance(method.getDeclaringClass());
         return new ActionExecutor(this, instance);
+    }
+
+    public Class<?> getOperationClass() {
+        return method.getDeclaringClass();
     }
 
 }

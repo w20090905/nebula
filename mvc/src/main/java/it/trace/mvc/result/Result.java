@@ -5,5 +5,5 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface Result {
 
-    void execute(HttpServletRequest req, HttpServletResponse resp, Object result);
+    void execute(HttpServletRequest request, HttpServletResponse response, Object data);
 }

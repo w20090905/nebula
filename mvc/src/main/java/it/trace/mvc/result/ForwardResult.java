@@ -1,9 +1,7 @@
 package it.trace.mvc.result;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 public class ForwardResult implements Result {
     protected String path;
@@ -21,9 +19,12 @@ public class ForwardResult implements Result {
     }
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp, Object data) {
-        // TODO Forword to path
-
+    public void execute(HttpServletRequest request, HttpServletResponse response, Object data) {
+        try {
+            request.getRequestDispatcher(this.path).forward(request, response);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
