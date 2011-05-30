@@ -7,6 +7,7 @@ import it.trace.mvc.config.Namespace;
 import it.trace.mvc.config.Operation;
 import it.trace.mvc.config.Resource;
 import it.trace.mvc.result.DisplayResult;
+import it.trace.mvc.result.RedirectResult;
 import it.trace.mvc.result.template.JspTemplate;
 
 import java.lang.reflect.Method;
@@ -124,9 +125,9 @@ public class RESTfulConventionConfigBuilder {
         } else if ("editNew".equals(method.getName())) {
             o.addResult("success", new DisplayResult(new JspTemplate("/" + resource.getName() + "/editNew.jsp")));    // TODO
         } else if ("create".equals(method.getName())) {
-            o.addResult("success", new DisplayResult(new JspTemplate("/" + resource.getName() + "/list.jsp")));    // TODO
+            o.addResult("success", new RedirectResult(""));    // TODO
         } else if ("update".equals(method.getName())) {
-            o.addResult("success", new DisplayResult(new JspTemplate("/" + resource.getName() + "/list.jsp")));    // TODO
+            o.addResult("success", new RedirectResult(""));    // TODO
         } else if ("remove".equals(method.getName())) {
 
         } else {
