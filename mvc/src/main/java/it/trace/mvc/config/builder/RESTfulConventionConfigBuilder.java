@@ -127,9 +127,9 @@ public class RESTfulConventionConfigBuilder {
         } else if ("create".equals(method.getName())) {
             o.addResult("success", new RedirectResult(""));    // TODO
         } else if ("update".equals(method.getName())) {
-            o.addResult("success", new RedirectResult(""));    // TODO
+            o.addResult("success", new RedirectResult("../"));    // TODO
         } else if ("remove".equals(method.getName())) {
-
+            o.addResult("success", new RedirectResult("../"));    // TODO
         } else {
 
         }
