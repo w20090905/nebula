@@ -19,9 +19,10 @@ public enum HttpMethod {
         if ("GET".equalsIgnoreCase(request.getMethod())) {
             return GET;
         } else if ("POST".equalsIgnoreCase(request.getMethod())) {
-            if ("PUT".equalsIgnoreCase(request.getParameter(HTTP_METHOD_PARAM_NAME))) {
+            String httpMethodParamValue = request.getParameter(HTTP_METHOD_PARAM_NAME);
+            if ("PUT".equalsIgnoreCase(httpMethodParamValue)) {
                 return PUT;
-            } else if ("DELETE".equalsIgnoreCase(request.getParameter(HTTP_METHOD_PARAM_NAME))) {
+            } else if ("DELETE".equalsIgnoreCase(httpMethodParamValue)) {
                 return DELETE;
             }
             return POST;

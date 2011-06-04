@@ -1,4 +1,4 @@
-package it.trace.mvc.result;
+package it.trace.mvc.result.template;
 
 
 import java.lang.reflect.Method;
@@ -37,7 +37,7 @@ public class JspTemplate implements Template {
 
             request.getRequestDispatcher(this.path).forward(request, response);
         } catch (Exception e) {
-            e.printStackTrace();    // TODO
+            throw new RuntimeException(e);  // TODO
         }
     }
 

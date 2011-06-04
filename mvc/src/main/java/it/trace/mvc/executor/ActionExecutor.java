@@ -1,6 +1,7 @@
 package it.trace.mvc.executor;
 
 import it.trace.mvc.Constants;
+import it.trace.mvc.binder.Context;
 import it.trace.mvc.binder.DataBinder;
 import it.trace.mvc.config.Operation;
 import it.trace.mvc.result.Result;
@@ -26,9 +27,9 @@ public class ActionExecutor implements HttpExecutor {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        DataBinder<Object> dataBinder = operation.getDataBind();
+        DataBinder<Object> dataBinder = operation.getDataBinder();
         if (dataBinder != null) {
-            dataBinder.bind(request, response, id, action);
+            dataBinder.bind(new Context(request, id), action);
         }
 
         Object resultCode;

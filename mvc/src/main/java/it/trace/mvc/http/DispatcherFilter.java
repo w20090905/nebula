@@ -2,8 +2,10 @@ package it.trace.mvc.http;
 
 import it.trace.mvc.HttpMethod;
 import it.trace.mvc.config.Configuration;
-import it.trace.mvc.executor.SimpleRESTfulExecutorFinder;
+import it.trace.mvc.config.builder.RESTfulConventionConfigBuilder;
+import it.trace.mvc.executor.ExecutorFinder;
 import it.trace.mvc.executor.HttpExecutor;
+import it.trace.mvc.inject.ContainerManager;
 
 import java.io.IOException;
 
@@ -19,14 +21,19 @@ import javax.servlet.http.HttpServletResponse;
 
 public class DispatcherFilter implements Filter {
 
+    private final static String PACKAGES_PARAM_NAME = "actionPackages";
+
     private Configuration configuration;
-    SimpleRESTfulExecutorFinder finder;
+    private ExecutorFinder finder;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
-        //        configuration = new ConfigurationFactory().create(filterConfig);
-        finder = new SimpleRESTfulExecutorFinder(configuration);
+        String[] packages = filterConfig.getInitParameter(PACKAGES_PARAM_NAME).split("\\s+");
+        configuration = RESTfulConventionConfigBuilder.createConfiguration(packages);
+
+        finder = ContainerManager.getInstance(ExecutorFinder.class);
+        finder.init(configuration);
 
     }
 
@@ -36,7 +43,7 @@ public class DispatcherFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 
-        HttpExecutor executor = finder.find(HttpMethod.parse(request), getServletPath(request));
+        HttpExecutor executor = finder.find(HttpMethod.parse(request), getPath(request));
 
         if (executor != null) {
             executor.execute(request, response);
@@ -46,14 +53,13 @@ public class DispatcherFilter implements Filter {
 
     }
 
-
     @Override
     public void destroy() {
-        // TODO Auto-generated method stub
-
+        finder = null;
+        configuration = null;
     }
 
-    private String getServletPath(HttpServletRequest request) {
+    private String getPath(HttpServletRequest request) {
         String servletPath = request.getServletPath();
 
         String requestUri = request.getRequestURI();
@@ -65,7 +71,7 @@ public class DispatcherFilter implements Filter {
             }
         }
 
-        if (null != servletPath && !"".equals(servletPath)) {
+        if (servletPath != null && servletPath.isEmpty()) {
             return servletPath;
         }
 

@@ -1,32 +1,31 @@
 package it.trace.mvc.executor;
 
 import it.trace.mvc.HttpMethod;
-import it.trace.mvc.config.Configuration;
+import it.trace.mvc.config.Namespace;
+import it.trace.mvc.config.Operation;
 import it.trace.mvc.config.Resource;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class SimpleRESTfulExecutorFinder {
+public class SimpleRESTfulExecutorFinder extends ExecutorFinder {
+
+    protected static Pattern URI_PATTERN = Pattern.compile("/([^/]+)/([^/]+)/(?:([^/!]*)(?:!([^/]*)|)(?:/|)|)$");
 
     protected Map<String, ActionExecutor> cache = new HashMap<String, ActionExecutor>();
-    protected Configuration configuration;
-
-    public SimpleRESTfulExecutorFinder(Configuration configuration) {
-        this.configuration = configuration;
-    }
 
     /**
      * <ul>
-     *  <li><code>/user/            => namespace=""</code></li>
-     *  <li><code>/manage/user/     => namespace="manage"</code></li>
-     *  <li><code>/manage/admin/user/     => namespace="manage.admin"</code></li>
+     *  <li><code>/user/                  => namespace=""</code></li>
+     *  <li><code>/manage/user/           => namespace="manage"</code></li>
      * </ul>
      * <ul>
      *  <li><code>GET:    /user/                  => method="list"</code></li>
      *  <li><code>GET:    /user/Tom/              => method="view", id="Tom"</code></li>
-     *  <li><code>GET:    /user/Tom!editable/     => method="edit", id="Tom"</code></li>
-     *  <li><code>GET:    /user/Tom!removable/    => method="edit", id="Tom"</code></li>
+     *  <li><code>GET:    /user/Tom!editable/     => method="editable", id="Tom"</code></li>
+     *  <li><code>GET:    /user/Tom!removable/    => method="removable", id="Tom"</code></li>
      *  <li><code>GET:    /user/new/              => method="editNew"</code></li>
      *  <li><code>POST:   /user/                  => method="create"</code></li>
      *  <li><code>PUT:    /user/Tom/              => method="update", id="Tom"</code></li>
@@ -37,55 +36,66 @@ public class SimpleRESTfulExecutorFinder {
         assert path != null : "参数”path“不能为空。";
         assert path.startsWith("/") : "参数”path“必须以”/“开头。";
 
+        String cacheKey = httpMethod + path;
 
-        ActionExecutor ex = cache.get(path);
+        ActionExecutor ex = cache.get(cacheKey);
         if (ex != null) {
-            return ex;
+            return cache.get(cacheKey);
         }
 
-        String[] sa = path.substring(1).split("/");
-        if (sa.length < 2) {
+        Matcher m = URI_PATTERN.matcher(path);
+        if (!m.matches()) {
             return null;
         }
 
-        String ns = sa[0];
-        String name = sa[1];
-        String id = null;
-        String method = null;
+        String ns = m.group(1);
+        String rs = m.group(2);
+        String id = m.group(3);
+        String me = m.group(4);
 
-        if (sa.length == 3) {
-            id = sa[2];
-            int exclamation = id.indexOf("!");
-            if (exclamation > -1) {
-                method = id.substring(exclamation + 1);
-                id = id.substring(0, exclamation);
-            }
+        Namespace n = config.getNamespace(ns);
+        if (n == null) {
+            return null;
         }
 
-        if (HttpMethod.GET.equals(httpMethod)) {
-            Resource r = configuration.getNamespace(ns).getResource(name);
-            if (id == null) {
-                r.getOperation("list").getExecutor();
+        Resource r = n.getResource(rs);
+        if (r == null) {
+            return null;
+        }
+
+        Operation o = null;
+        if (me != null && !me.isEmpty()) {
+            o = r.getOperation(me);
+        } else if (HttpMethod.GET.equals(httpMethod)) {
+            if (id == null || id.isEmpty()) {
+                o = r.getOperation("list");
             } else {
-
+                if ("new".equals(id)) {
+                    o = r.getOperation("editNew");
+                    id = null;
+                } else {
+                    o = r.getOperation("view");
+                }
+            }
+        } else if (HttpMethod.POST.equals(httpMethod)) {
+            o = r.getOperation("create");
+        } else if (id != null && !id.isEmpty()) {
+            if (HttpMethod.PUT.equals(httpMethod)) {
+                o = r.getOperation("update");
+            } else if (HttpMethod.DELETE.equals(httpMethod)) {
+                o = r.getOperation("remove");
             }
         }
-        else if (HttpMethod.POST.equals(httpMethod)) {
-            if (sa.length == 2) {
-                ex = configuration.getNamespace(sa[0]).getResource(sa[1]).getOperation("create").getExecutor();
-            }
-        } else if (HttpMethod.PUT.equals(httpMethod)) {
-            if (sa.length == 3) {
-                ex = configuration.getNamespace(sa[0]).getResource(sa[1]).getOperation("update").getExecutor();
-                ex.setId(sa[2]);
-            }
-        } else if (HttpMethod.DELETE.equals(httpMethod)) {
-            if (sa.length == 3) {
-                ex = configuration.getNamespace(sa[0]).getResource(sa[1]).getOperation("remove").getExecutor();
-                ex.setId(sa[2]);
+
+        if (o != null) {
+            ex = o.getExecutor();
+            cache.put(cacheKey, ex);
+            if (id != null && !id.isEmpty()) {
+                ex.setId(id);
             }
         }
 
         return ex;
     }
+
 }

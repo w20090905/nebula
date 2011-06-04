@@ -1,14 +1,12 @@
 package it.trace.mvc.result;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-public class RetryResult implements Result {
+public class RedirectResult implements Result {
     protected String path;
 
-    public RetryResult(String path) {
+    public RedirectResult(String path) {
         this.path = path;
     }
 
@@ -23,11 +21,9 @@ public class RetryResult implements Result {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response, Object data) {
         try {
-            request.getRequestDispatcher(this.path).forward(request, response);
+            response.sendRedirect(this.path);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
-
 }
