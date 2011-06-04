@@ -89,7 +89,7 @@ public class SimpleRESTfulExecutorFinder extends ExecutorFinder {
 
         if (o != null) {
             ex = o.getExecutor();
-            cache.put(cacheKey, ex);
+            //            cache.put(cacheKey, ex);
             if (id != null && !id.isEmpty()) {
                 ex.setId(id);
             }

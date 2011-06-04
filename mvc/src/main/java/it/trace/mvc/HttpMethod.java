@@ -12,7 +12,7 @@ public enum HttpMethod {
     OPTIONS,
     TRACE;
 
-    public final static String HTTP_METHOD_PARAM_NAME = "__httpMethod";
+    public final static String HTTP_METHOD_PARAM_NAME = "__http_method";
 
     public static HttpMethod parse(HttpServletRequest request) {
 

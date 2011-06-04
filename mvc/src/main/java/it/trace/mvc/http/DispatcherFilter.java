@@ -8,6 +8,7 @@ import it.trace.mvc.executor.HttpExecutor;
 import it.trace.mvc.inject.ContainerManager;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -17,7 +18,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 public class DispatcherFilter implements Filter {
 
@@ -42,6 +42,21 @@ public class DispatcherFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
+
+        // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //        for (Object name : request.getParameterMap().keySet()) {
+        //            System.out.println(name + " : " + request.getParameter((String) name));
+        //        }
+        System.out.println("HttpMethod : " + request.getMethod() + " | URL : "+ getPath(request));
+        System.out.println("size = " + request.getParameterMap().size());
+        System.out.println("request = " +request);
+        for (@SuppressWarnings("rawtypes") Enumeration e = request.getParameterNames(); e.hasMoreElements();) {
+            Object name = e.nextElement();
+            System.out.println(name + " : " + request.getParameter((String) name));
+
+        }
+
+        // -----------------------------------------------------------
 
         HttpExecutor executor = finder.find(HttpMethod.parse(request), getPath(request));
 
