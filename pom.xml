@@ -8,10 +8,9 @@
   <name>nebula</name>
 
   <modules>
-    <module>mvc</module>
-    <module>webass</module>
-    <module>asdf</module>
     <module>generator</module>
+    <module>nebula-rest</module>
+    <module>nebula-rest-sample</module>
   </modules>
 
   <build>
