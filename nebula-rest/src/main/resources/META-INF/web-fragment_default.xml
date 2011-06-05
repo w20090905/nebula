@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-fragment xmlns=http://java.sun.com/xml/ns/javaee
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.0"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+    http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd"
+	metadata-complete="true">
+
+	<name>web-fragment_default</name>
+
+	<ordering>
+		<after>
+			<others />
+		</after>
+	</ordering>
+
+	<filter>
+		<filter-name>nebule.rest</filter-name>
+		<filter-class>it.trace.nebula.rest.dispatch.DispatcherFilter</filter-class>
+		<async-supported>false</async-supported>
+	</filter>
+	<filter-mapping>
+		<filter-name>nebule.rest</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+
+</web-fragment>

@@ -1,20 +1,18 @@
 <?xml version="1.0"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>nebula</artifactId>
-		<groupId>it.trace</groupId>
-		<version>0.0.1-SNAPSHOT</version>
+		<groupId>it.trace.nebula</groupId>
+		<version>0.0.1</version>
 	</parent>
+	
 	<groupId>it.trace.nebula</groupId>
 	<artifactId>nebula-rest</artifactId>
 	<name>nebula-rest</name>
-	<!-- <url>http://maven.apache.org</url> -->
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+	<packaging>jar</packaging>
+	<version>0.0.1</version>
 	<dependencies>
         <dependency>
             <groupId>javax</groupId>
@@ -22,11 +20,6 @@
             <version>6.0</version>
             <scope>provided</scope>
         </dependency>
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.2.2</version>
-		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
@@ -41,8 +34,6 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
