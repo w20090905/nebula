@@ -13,8 +13,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tt.Dtest;
-
 import net.sf.json.JSON;
 
 public class MyFilter implements Filter {
@@ -29,7 +27,6 @@ public class MyFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 
-    		new Dtest().SayHello();
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 

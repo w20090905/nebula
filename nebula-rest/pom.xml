@@ -7,19 +7,15 @@
 		<groupId>it.trace.nebula</groupId>
 		<version>0.0.1</version>
 	</parent>
-	
-	<groupId>it.trace.nebula</groupId>
 	<artifactId>nebula-rest</artifactId>
 	<name>nebula-rest</name>
-	<packaging>jar</packaging>
-	<version>0.0.1</version>
+	<url>http://maven.apache.org</url>
+
 	<dependencies>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
-            <scope>provided</scope>
-        </dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
@@ -36,4 +32,5 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 	</dependencies>
+
 </project>
