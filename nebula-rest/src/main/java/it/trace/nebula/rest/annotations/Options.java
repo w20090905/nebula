@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@HttpMethod(HttpMethod.POST)
-public @interface Post {
+@HttpMethod(HttpMethod.OPTIONS)
+public @interface Options {
 
 }
