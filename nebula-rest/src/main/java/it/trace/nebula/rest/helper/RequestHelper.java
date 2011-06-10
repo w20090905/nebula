@@ -39,7 +39,7 @@ public class RequestHelper {
     public static String getAccept(HttpServletRequest request) {
         // 获取客户端中的请求数据类型
         String accept = request.getHeader("accept");
-        if (accept == null || accept.indexOf(MimeType.WILDCARD) != -1) {
+        if (accept == null) {
             accept = MimeType.WILDCARD;
         }
         return accept.toLowerCase();

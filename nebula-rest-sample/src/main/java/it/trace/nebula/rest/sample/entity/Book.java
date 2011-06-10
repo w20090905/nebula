@@ -1,55 +1,69 @@
 package it.trace.nebula.rest.sample.entity;
 
 public class Book {
-	private int bookId;
-	private int bookType;
-	private String bookName;
-	private String bookDesc;
-	private String bookPublisher;
-	private int bookCount;
-	private float bookPrice;
-	
-	public int getBookId() {
-		return bookId;
-	}
-	public void setBookId(int bookId) {
-		this.bookId = bookId;
-	}
-	public int getBookType() {
-		return bookType;
-	}
-	public void setBookType(int bookType) {
-		this.bookType = bookType;
-	}
-	public String getBookName() {
-		return bookName;
-	}
-	public void setBookName(String bookName) {
-		this.bookName = bookName;
-	}
-	public String getBookDesc() {
-		return bookDesc;
-	}
-	public void setBookDesc(String bookDesc) {
-		this.bookDesc = bookDesc;
-	}
-	public String getBookPublisher() {
-		return bookPublisher;
-	}
-	public void setBookPublisher(String bookPublisher) {
-		this.bookPublisher = bookPublisher;
-	}
-	public int getBookCount() {
-		return bookCount;
-	}
-	public void setBookCount(int bookCount) {
-		this.bookCount = bookCount;
-	}
-	public float getBookPrice() {
-		return bookPrice;
-	}
-	public void setBookPrice(float bookPrice) {
-		this.bookPrice = bookPrice;
-	}
-	
+
+    private long id;
+    private int type;
+    private java.lang.String name;
+    private java.lang.String description;
+    private java.lang.String publisher;
+    private int count;
+    private float price;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public java.lang.String getName() {
+        return name;
+    }
+
+    public void setName(java.lang.String name) {
+        this.name = name;
+    }
+
+    public java.lang.String getDescription() {
+        return description;
+    }
+
+    public void setDescription(java.lang.String description) {
+        this.description = description;
+    }
+
+    public java.lang.String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(java.lang.String publisher) {
+        this.publisher = publisher;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
 }

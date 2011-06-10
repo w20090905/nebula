@@ -1,6 +1,5 @@
 package it.trace.nebula.rest.dispatch;
 
-import it.trace.nebula.rest.annotations.MimeType;
 import it.trace.nebula.rest.context.ApplicationContext;
 import it.trace.nebula.rest.executor.Executor;
 import it.trace.nebula.rest.helper.RequestHelper;
@@ -19,26 +18,15 @@ import javax.servlet.http.HttpServletResponse;
 
 public class DispatcherFilter implements Filter {
 
-    //    public static final String PARAM_JSP_TEMPLATES_BASE_PATH = "jsp.templates.base.path";
-    //
-    //    public static final String PARAM_PROPERTY_PACKAGES  = "scan.packages";
-    //
-    //    public static final String PARAM_EXCLUDED_URL  = "excluded.url";
-
     protected Pattern excludedUrlPattern;
 
     protected ExecutorFinder finder;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
-        //        if (filterConfig.getInitParameter(PARAM_EXCLUDED_URL) != null) {
-        //            excludedUrlPattern = Pattern.compile(filterConfig.getInitParameter(PARAM_EXCLUDED_URL));
-        //        }
         ApplicationContext context = ApplicationContext.getInstance();
         excludedUrlPattern = null;
         finder = new SimpleRESTfulExecutorFinder(context);
-
     }
 
     @Override
@@ -53,8 +41,7 @@ public class DispatcherFilter implements Filter {
             return;
         }
 
-        //        Executor executor = finder.lookup(RequestHelper.getHttpMethod(request), RequestHelper.getAccept(request), url);
-        Executor executor = finder.lookup(RequestHelper.getHttpMethod(request), MimeType.TEXT_HTML, url);
+        Executor executor = finder.lookup(RequestHelper.getHttpMethod(request), RequestHelper.getAccept(request), url);
 
         if (executor != null) {
             executor.process(request, response);

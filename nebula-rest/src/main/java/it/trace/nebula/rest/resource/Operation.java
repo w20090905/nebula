@@ -71,7 +71,20 @@ public class Operation {
     }
 
     public ActionExecutor getExecutor(String accpet){
-        ActionExecutor e = new ActionExecutor(this, accpet);
+
+        Result result = null;
+        for (Map.Entry<Object, Result> e : results.entrySet()) {
+            if (accpet.contains((String) e.getKey())) {
+                result = e.getValue();
+                break;
+            }
+        }
+
+        if (result == null) {
+            return null;
+        }
+
+        ActionExecutor e = new ActionExecutor(this, accpet, result);
         return e;
     }
 

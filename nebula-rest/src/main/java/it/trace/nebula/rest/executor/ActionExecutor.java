@@ -29,6 +29,12 @@ public class ActionExecutor implements Executor {
         this.result = operation.getResult(accpet);
     }
 
+    public ActionExecutor(Operation operation, String accpet, Result result) {
+        this.operation = operation;
+        this.accpet = accpet;
+        this.result = result;
+    }
+
     public Operation getOperation() {
         return operation;
     }
@@ -47,7 +53,7 @@ public class ActionExecutor implements Executor {
         DataBinder<Object> dataBinder = operation.getDataBinder();
         Object[] input = null;
         if (dataBinder != null) {
-            input = dataBinder.bind(new Context(request));
+            input = dataBinder.bind(new Context(request, (String) this.resourceId), operation.getMethod());
         }
 
         Object action;
@@ -62,6 +68,7 @@ public class ActionExecutor implements Executor {
             returnValue = operation.getMethod().invoke(action, input);
             result.onSuccess(request, response, returnValue);
         } catch (Exception e) {
+            e.printStackTrace();
             result.onFailure(request, response, e);
         }
     }

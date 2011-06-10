@@ -7,6 +7,7 @@ import it.trace.nebula.rest.resource.Hierarchy;
 import it.trace.nebula.rest.resource.Operation;
 import it.trace.nebula.rest.resource.Resource;
 import it.trace.nebula.rest.result.HtmlResult;
+import it.trace.nebula.rest.result.RedirectResult;
 import it.trace.nebula.rest.result.template.jsp.JspTemplate;
 
 import java.lang.reflect.Method;
@@ -123,11 +124,11 @@ public class RESTfulConventionConfigBuilder {
         } else if ("editNew".equals(method.getName())) {
             o.addResult(MimeType.TEXT_HTML, new HtmlResult(new JspTemplate("/" + resource.getName() + "/editNew.jsp")));    // TODO
         } else if ("create".equals(method.getName())) {
-            o.addResult(MimeType.TEXT_HTML, new HtmlResult(new JspTemplate("")));    // TODO
+            o.addResult(MimeType.TEXT_HTML, new RedirectResult(""));    // TODO
         } else if ("update".equals(method.getName())) {
-            o.addResult(MimeType.TEXT_HTML, new HtmlResult(new JspTemplate("../")));    // TODO
+            o.addResult(MimeType.TEXT_HTML, new RedirectResult("../"));    // TODO
         } else if ("remove".equals(method.getName())) {
-            o.addResult(MimeType.TEXT_HTML, new HtmlResult(new JspTemplate("../")));    // TODO
+            o.addResult(MimeType.TEXT_HTML, new RedirectResult("../"));    // TODO
         } else {
 
         }
