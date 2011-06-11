@@ -1,12 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" contentType="text/html; charset=utf-8"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<% request.setCharacterEncoding("utf-8"); %>
 <html>
 <head>
 <title>Book Update</title>
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
-<link type="text/css" rel="stylesheet" href="<c:out value='/css/main.css'/>"/>
 </head>
 <body>
 <form action="<%=request.getContextPath()%>/simple/book/${result.id}/" method="post">

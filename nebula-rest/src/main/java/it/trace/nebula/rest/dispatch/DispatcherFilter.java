@@ -35,6 +35,14 @@ public class DispatcherFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("url = " + request.getServletPath());
+        System.out.println("method = " + RequestHelper.getHttpMethod(request));
+        System.out.println("accept = " + RequestHelper.getAccept(request));
+        System.out.println("12345");
+        System.out.println("------------------------------------------");
+
+
         String url = request.getServletPath();
         if (isExcludedUrl(url)) {
             chain.doFilter(request, response);

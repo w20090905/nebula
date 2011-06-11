@@ -5,8 +5,9 @@ import it.trace.nebula.rest.binder.DataBinder;
 import it.trace.nebula.rest.sample.entity.Book;
 
 import java.lang.reflect.Method;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BookResource {
@@ -35,8 +36,8 @@ public class BookResource {
     }
 
 
-    public Collection<Book> list() {
-        return books.values();
+    public List<Book> list() {
+        return new ArrayList<Book>(books.values());
     }
 
     public Book editable(long id) {

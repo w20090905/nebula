@@ -7,6 +7,7 @@ import it.trace.nebula.rest.resource.Hierarchy;
 import it.trace.nebula.rest.resource.Operation;
 import it.trace.nebula.rest.resource.Resource;
 import it.trace.nebula.rest.result.HtmlResult;
+import it.trace.nebula.rest.result.JsonResult;
 import it.trace.nebula.rest.result.RedirectResult;
 import it.trace.nebula.rest.result.template.jsp.JspTemplate;
 
@@ -115,20 +116,36 @@ public class RESTfulConventionConfigBuilder {
 
         if ("list".equals(method.getName())) {
             o.addResult(MimeType.TEXT_HTML, new HtmlResult(new JspTemplate("/" + resource.getName() + "/list.jsp")));    // TODO
+            o.addResult(MimeType.APPLICATION_JSON, new JsonResult());
+            o.addResult(MimeType.WILDCARD, new HtmlResult(new JspTemplate("/" + resource.getName() + "/list.jsp")));    // TODO
         } else if ("view".equals(method.getName())) {
             o.addResult(MimeType.TEXT_HTML, new HtmlResult(new JspTemplate("/" + resource.getName() + "/view.jsp")));    // TODO
+            o.addResult(MimeType.APPLICATION_JSON, new JsonResult());
+            o.addResult(MimeType.WILDCARD, new HtmlResult(new JspTemplate("/" + resource.getName() + "/view.jsp")));    // TODO
         } else if ("editable".equals(method.getName())) {
             o.addResult(MimeType.TEXT_HTML, new HtmlResult(new JspTemplate("/" + resource.getName() + "/editable.jsp")));    // TODO
+            o.addResult(MimeType.APPLICATION_JSON, new JsonResult());
+            o.addResult(MimeType.WILDCARD, new HtmlResult(new JspTemplate("/" + resource.getName() + "/editable.jsp")));    // TODO
         } else if ("removable".equals(method.getName())) {
             o.addResult(MimeType.TEXT_HTML, new HtmlResult(new JspTemplate("/" + resource.getName() + "/removable.jsp")));    // TODO
+            o.addResult(MimeType.APPLICATION_JSON, new JsonResult());
+            o.addResult(MimeType.WILDCARD, new HtmlResult(new JspTemplate("/" + resource.getName() + "/removable.jsp")));    // TODO
         } else if ("editNew".equals(method.getName())) {
             o.addResult(MimeType.TEXT_HTML, new HtmlResult(new JspTemplate("/" + resource.getName() + "/editNew.jsp")));    // TODO
+            o.addResult(MimeType.APPLICATION_JSON, new JsonResult());
+            o.addResult(MimeType.WILDCARD, new HtmlResult(new JspTemplate("/" + resource.getName() + "/editNew.jsp")));    // TODO
         } else if ("create".equals(method.getName())) {
             o.addResult(MimeType.TEXT_HTML, new RedirectResult(""));    // TODO
+            o.addResult(MimeType.APPLICATION_JSON, new JsonResult());
+            o.addResult(MimeType.WILDCARD, new RedirectResult(""));    // TODO
         } else if ("update".equals(method.getName())) {
             o.addResult(MimeType.TEXT_HTML, new RedirectResult("../"));    // TODO
+            o.addResult(MimeType.APPLICATION_JSON, new JsonResult());
+            o.addResult(MimeType.WILDCARD, new RedirectResult("../"));    // TODO
         } else if ("remove".equals(method.getName())) {
             o.addResult(MimeType.TEXT_HTML, new RedirectResult("../"));    // TODO
+            o.addResult(MimeType.APPLICATION_JSON, new JsonResult());
+            o.addResult(MimeType.WILDCARD, new RedirectResult("../"));    // TODO
         } else {
 
         }
