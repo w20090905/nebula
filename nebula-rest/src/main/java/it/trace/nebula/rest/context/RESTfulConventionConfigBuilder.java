@@ -147,7 +147,9 @@ public class RESTfulConventionConfigBuilder {
             o.addResult(MimeType.APPLICATION_JSON, new JsonResult());
             o.addResult(MimeType.WILDCARD, new RedirectResult("../"));    // TODO
         } else {
-
+            o.addResult(MimeType.TEXT_HTML, new HtmlResult(new JspTemplate("/" + resource.getName() + "/" + method.getName() + ".jsp")));    // TODO
+            o.addResult(MimeType.APPLICATION_JSON, new JsonResult());
+            o.addResult(MimeType.WILDCARD, new HtmlResult(new JspTemplate("/" + resource.getName() + "/" + method.getName() + ".jsp")));    // TODO
         }
 
         return o;

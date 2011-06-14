@@ -39,7 +39,7 @@ public class DispatcherFilter implements Filter {
         System.out.println("url = " + request.getServletPath());
         System.out.println("method = " + RequestHelper.getHttpMethod(request));
         System.out.println("accept = " + RequestHelper.getAccept(request));
-        System.out.println("12345");
+        System.out.println("shanghai");
         System.out.println("------------------------------------------");
 
 
