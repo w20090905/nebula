@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+<meta charset="utf-8" />
+<title>○○××管理系统</title>
+<meta name="description" content="nebule-rest的展示工程" />
+<meta name="keywords" content="nebule-rest" />
+<!-- Favicons -->
+<link rel="shortcut icon" type="image/png" href="/nebula-rest-sample/img/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/nebula-rest-sample/img/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/nebula-rest-sample/img/favicons/apple.png" />
+<!-- Stylesheet -->
+<link rel="stylesheet" href="/nebula-rest-sample/css/style.css" type="text/css" />
+<link rel="stylesheet" href="/nebula-rest-sample/css/custom.css" type="text/css" />
+<!-- Admin template javascript load -->
+<script type="text/javascript" src="/nebula-rest-sample/scripts/administry.js"></script>
+<!-- jQuery with plugins -->
+<script type="text/javascript" src="/nebula-rest-sample/scripts/jquery-1.6.1.js"></script>
+<script type="text/javascript" src="/nebula-rest-sample/scripts//jquery.ui.core.min.js"></script> 
+<script type="text/javascript" src="/nebula-rest-sample/scripts//jquery.ui.widget.min.js"></script> 
+<script type="text/javascript" src="/nebula-rest-sample/scripts//jquery.ui.tabs.min.js"></script> 
+<!-- jQuery tooltips -->
+<script type="text/javascript" src="/nebula-rest-sample/scripts/jquery.tipTip.min.js"></script>
+<!-- Superfish navigation -->
+<script type="text/javascript" src="/nebula-rest-sample/scripts/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/nebula-rest-sample/scripts/jquery.supersubs.min.js"></script>
+<!-- jQuery form validation -->
+<script type="text/javascript" src="/nebula-rest-sample/scripts/jquery.validate.js"></script>
+<!-- jQuery popup box -->
+<script type="text/javascript" src="/nebula-rest-sample/scripts/jquery.nyroModal.pack.js"></script>
+<!-- jQuery graph plugins -->
+<script type="text/javascript" src="/nebula-rest-sample/scripts/flot/jquery.flot.min.js"></script>
+<!-- jQuery data tables --> 
+<script type="text/javascript" SRC="/nebula-rest-sample/scripts/jquery.dataTables.min.js"></script> 
+<script type="text/javascript">
+<!--
+
+$(document).ready(function(){
+    
+    /* setup navigation, content boxes, etc... */
+    Administry.setup();
+
+    Administry.inclue("#topnav", "/nebula-rest-sample/templates/administry/topnav.html");
+    Administry.inclue("#menu", "/nebula-rest-sample/templates/administry/menu.html");
+    Administry.inclue("#aside-links", "/nebula-rest-sample/templates/administry/aside-links.html");
+    Administry.inclue("#main-section", "/nebula-rest-sample/templates/administry/dashboard.html");
+    Administry.inclue("#side-section", "/nebula-rest-sample/templates/administry/side-section.html");
+    Administry.inclue("#bottom", "/nebula-rest-sample/templates/administry/footer.html");
+    Administry.inclue("#animated", "/nebula-rest-sample/templates/administry/footer-animated.html");
+
+});
+
+//-->
+</script>
+</head>
+<body>
+    <!-- Header -->
+    <header id="top">
+        <div class="wrapper">
+            <!-- Title/Logo - can use text instead of image -->
+            <div id="title"><img src="/nebula-rest-sample/img/logo.png" alt="Administry" /></div>
+            <!-- Top navigation -->
+            <div id="topnav">
+            </div>
+            <!-- End of Top navigation -->
+            <!-- Main navigation -->
+            <nav id="menu">
+            </nav>
+            <!-- End of Main navigation -->
+            <!-- Aside links --> 
+            <aside id="aside-links"></aside> 
+            <!-- End of Aside links --> 
+        </div>
+    </header>
+    <!-- End of Header -->
+    <!-- Page title -->
+    <div id="pagetitle">
+        <div class="wrapper">
+            <h1>自定义面板</h1>
+        </div>
+    </div>
+    <!-- End of Page title -->
+    <!-- Page content -->
+    <div id="page">
+        <!-- Wrapper -->
+        <div class="wrapper">
+                <!-- Left column/section -->
+                <section id="main-section" class="column width6 first">
+                </section>
+                <!-- End of Left column/section -->
+                <!-- Right column/section -->
+                <aside id="side-section" class="column width2">
+                </aside>
+                <!-- End of Right column/section -->
+        </div>
+        <!-- End of Wrapper -->
+    </div>
+    <!-- End of Page content -->
+    <!-- Page footer -->
+    <footer id="bottom">
+    </footer>
+    <!-- End of Page footer -->
+    <!-- Animated footer -->
+    <footer id="animated">
+    </footer>
+    <!-- End of Animated footer -->
+    <!-- Scroll to top link -->
+    <a href="#" id="totop">^ scroll to top</a>
+</body>
+</html>

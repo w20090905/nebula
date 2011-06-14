@@ -1,0 +1,99 @@
+<h3>用户一览</h3>
+<hr/>
+<p><a id="add" href="javascript:void(0);">追加</a></p>
+<table class="display stylized" id="example">
+	<caption>用户一览</caption>
+	<thead>
+		<tr>
+			<th>用户名</th>
+			<th>密码</th>
+			<th>姓名</th>
+			<th>性别</th>
+			<th>E-Mail</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="gradeA odd">
+			<td>Data 1</td>
+			<td>Data 2</td>
+			<td>Data 3</td>
+			<td>Data 4</td>
+			<td>Data 5</td>
+		</tr>
+		<tr class="gradeA">
+			<td>Highlighted data 1</td>
+			<td>Highlighted data 2</td>
+			<td>Highlighted data 3</td>
+			<td>Highlighted data 4</td>
+			<td>Highlighted data 5</td>
+		</tr>
+		<tr class="gradeA">
+			<td>Highlighted data 1</td>
+			<td>Highlighted data 2</td>
+			<td>Highlighted data 3</td>
+			<td>Highlighted data 4</td>
+			<td>Highlighted data 5</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<th>用户名</th>
+			<th>密码</th>
+			<th>姓名</th>
+			<th>性别</th>
+			<th>E-Mail</th>
+		</tr>
+	</tfoot>
+</table>
+
+<script type="text/javascript">
+<!--
+
+/* datatable */
+$("#example").dataTable({
+	oLanguage: {
+		sLengthMenu: "每页显示 _MENU_ 条记录",
+		sZeroRecords: "未找到记录 - 抱歉",
+		sInfo: "_START_  - _END_  / _TOTAL_",
+		sInfoEmpty: "Showing 0 to 0 of 0 records",
+		sInfoFiltered: "(filtered from _MAX_ total records)"
+	},
+	bPaginate: false,
+	bLengthChange: false,
+	bFilter: false,
+	bInfo: false,
+	bServerSide: true,
+	sAjaxSource: "/nebula-rest-sample/administry/user/",
+	fnServerData: function( sUrl, aoData, fnCallback ) {
+		$.ajax( {
+			"url": sUrl,
+			"data": aoData,
+			"success": fnCallback,
+			"dataType": "json",
+			"cache": false
+			}
+		},
+	aoColumns : [ {
+			"sName" : "username",
+			"bSearchable" : false,
+			"bSortable" : false,
+			"fnRender" : function(oObj) {
+				return '<a href=\"Details/' + oObj.aData[0] + '\">View</a>';
+			} //自定义列的样式
+		}, 
+		{
+			"sName" : "password"
+		}, {
+			"sName" : "name"
+		}, {
+			"sName" : "sex"
+		}, {
+			"sName" : "mail"
+		} ]
+	});
+
+	$("#add").click(function() {
+		$('#example').dataTable().fnAddData([ "1", "2", "3", "4", "5" ]);
+	});
+//-->
+</script>

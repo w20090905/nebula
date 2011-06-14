@@ -337,11 +337,13 @@ table.stylized tfoot td {
 	background-color:#f2f2f2 !important;
 	border-bottom:2px solid #ddd;
 }
+/* 有冲突
 table.stylized tr:nth-child(even) td {
 }
 table.stylized tbody tr:nth-child(odd) th,table.stylized tbody tr:nth-child(odd) td {
 	background:#FAFDFE;
 }
+*/
 table.stylized caption {
 	margin-bottom:1em;
 	text-align:left;
