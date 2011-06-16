@@ -8,7 +8,7 @@ public class User {
 
     private String firstName = null;
 
-    private String secondName = null;
+    private String lastName = null;
 
     private Character sex = null;
 
@@ -47,12 +47,12 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Character getSex() {
@@ -72,7 +72,7 @@ public class User {
     }
 
     public String getName() {
-        return firstName + " " + secondName;
+        return firstName + " " + lastName;
     }
 
 }

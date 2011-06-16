@@ -21,16 +21,37 @@ public class UserResource {
         user = new User();
         user.setUsername("admin");
         user.setPassword("admin");
+        user.setFirstName("admin");
+        user.setLastName("admin");
+        user.setSex('男');
+        user.setMail("admin@g.cn");
         users.put(user.getUsername(), user);
 
         user = new User();
         user.setUsername("user");
         user.setPassword("user");
+        user.setFirstName("admin");
+        user.setLastName("admin");
+        user.setSex('男');
+        user.setMail("admin@g.cn");
         users.put(user.getUsername(), user);
 
         user = new User();
         user.setUsername("tom");
         user.setPassword("12345");
+        user.setFirstName("admin");
+        user.setLastName("admin");
+        user.setSex('男');
+        user.setMail("admin@g.cn");
+        users.put(user.getUsername(), user);
+
+        user = new User();
+        user.setUsername("cat");
+        user.setPassword("12345");
+        user.setFirstName("admin");
+        user.setLastName("admin");
+        user.setSex('男');
+        user.setMail("admin@g.cn");
         users.put(user.getUsername(), user);
 
     }
@@ -47,9 +68,16 @@ public class UserResource {
         return false;
     }
 
+    public boolean userExist(String username) {
+        return users.containsKey(username);
+    }
 
     public List<User> list() {
         return new ArrayList<User>(users.values());
+    }
+
+    public User view(String username) {
+        return users.get(username);
     }
 
     public User editable(String username) {
@@ -85,6 +113,21 @@ public class UserResource {
                     String username = context.getParameter("username");
                     String password = context.getParameter("password");
                     return new Object[] { username, password };
+                } else if ("userExist".equals(method.getName())) {
+                    String username = context.getParameter("username");
+                    return new Object[] { username };
+                } else if ("view".equals(method.getName())) {
+                    String username = context.getId();
+                    return new Object[] { username };
+                } else if ("create".equals(method.getName())) {
+                    User user = new User();
+                    user.setUsername(context.getParameter("username", String.class));
+                    user.setPassword(context.getParameter("password", String.class));
+                    user.setFirstName(context.getParameter("firstname", String.class));
+                    user.setLastName(context.getParameter("lastname", String.class));
+                    user.setSex(context.getParameter("sex", String.class).charAt(0));
+                    user.setMail(context.getParameter("email", String.class));
+                    return new Object[] { user };
                 }
 
                 return null;

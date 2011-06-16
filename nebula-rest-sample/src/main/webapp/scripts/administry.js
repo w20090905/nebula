@@ -79,39 +79,6 @@ Administry.setup = function () {
             $(this).parent().toggleClass("content-box-closed"); // Toggle the class "content-box-closed" on the content
         });
     }
-	
-	// setup nyro popup window
-	$.nyroModalSettings({
-		debug: false,
-		processHandler: function(settings) {
-			var url = settings.url;
-			if (url && url.indexOf('http://www.youtube.com/watch?v=') == 0) {
-				$.nyroModalSettings({
-					type: 'swf',
-					height: 355,
-					width: 425,
-					url: url.replace(new RegExp("watch\\?v=", "i"), 'v/')
-				});
-			}
-		},
-		endShowContent: function(elts, settings) {
-			$('.resizeLink', elts.contentWrapper).click(function(e) {
-				e.preventDefault();
-				$.nyroModalSettings({
-					width: Math.random()*1000,
-					height: Math.random()*1000
-				});
-				return false;
-			});
-			$('.bgLink', elts.contentWrapper).click(function(e) {
-				e.preventDefault();
-				$.nyroModalSettings({
-					bgColor: '#'+parseInt(255*Math.random()).toString(16)+parseInt(255*Math.random()).toString(16)+parseInt(255*Math.random()).toString(16)
-				});
-				return false;
-			});
-		}
-	});
     
 	// custom tooltips to replace the default browser tooltips for <a title=""> <div title=""> and <span title="">
     $("a[title], div[title], span[title]").tipTip();
