@@ -119,9 +119,28 @@ public class UserResource {
                 } else if ("view".equals(method.getName())) {
                     String username = context.getId();
                     return new Object[] { username };
+                } else if ("remove".equals(method.getName())) {
+                    String username = context.getId();
+                    return new Object[] { username };
                 } else if ("create".equals(method.getName())) {
                     User user = new User();
                     user.setUsername(context.getParameter("username", String.class));
+                    user.setPassword(context.getParameter("password", String.class));
+                    user.setFirstName(context.getParameter("firstname", String.class));
+                    user.setLastName(context.getParameter("lastname", String.class));
+                    user.setSex(context.getParameter("sex", String.class).charAt(0));
+                    user.setMail(context.getParameter("email", String.class));
+                    return new Object[] { user };
+                } else if ("update".equals(method.getName())) {
+                    User user = new User();
+                    user.setUsername(context.getId());
+
+                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++");
+                    System.out.println(context.getParameter("password", String.class));
+                    System.out.println(context.getParameter("firstname", String.class));
+                    System.out.println(context.getParameter("lastname", String.class));
+                    System.out.println("---------------------------------------------");
+
                     user.setPassword(context.getParameter("password", String.class));
                     user.setFirstName(context.getParameter("firstname", String.class));
                     user.setLastName(context.getParameter("lastname", String.class));
