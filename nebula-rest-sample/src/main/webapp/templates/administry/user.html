@@ -62,7 +62,7 @@ var oTable = $("#example").dataTable({
 		$('td:eq(0)', nRow).addClass("title");
 		
 		var el = $('td:eq(5)', nRow);
-		el.html('<a title="编辑" href="#" onclick="javascript: user.toUpdate(\'' + aData.username + '\')"><img src="/nebula-rest-sample/img/page_save.png"/></a>');
+		el.html('<a title="编辑" href="javascript: void(0);" onclick="javascript: user.toUpdate(\'' + aData.username + '\')"><img src="/nebula-rest-sample/img/page_save.png"/></a>');
 		el.append('&nbsp;');
 		el.append('<a name="user.delete" title="删除" href="' + aData.username + '"><img src="/nebula-rest-sample/img/delete.png"/></a>');
 
