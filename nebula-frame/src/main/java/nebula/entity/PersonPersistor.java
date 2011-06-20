@@ -2,6 +2,6 @@ package nebula.entity;
 
 import nebula.persistor.Persistor;
 
-public interface PersonPersistor extends Persistor<Person> {
+public interface PersonPersistor extends Persistor<PersonImp> {
 
 }

@@ -1,120 +1,35 @@
 package nebula.entity;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class Person {
-    String name;
-    String sex;
-    long height;
-    String birthday;
+import nebula.entity.PersonImp.WorkExperience;
 
-    Company company;
-    String company_name;
+public interface Person {
 
-    ArrayList<WorkExperience> workExperiences = new ArrayList<Person.WorkExperience>();
+     List<WorkExperience> getWorkExperiences();
 
-    public ArrayList<WorkExperience> getWorkExperiences() {
-        return workExperiences;
-    }
+     String getCompany_name();
 
-    public String getCompany_name() {
-        return company_name;
-    }
+     void setCompany_name(String company_name);
 
-    public void setCompany_name(String company_name) {
-        this.company_name = company_name;
-    }
+     Company getCompany();
 
-    public Company getCompany() {
-        return company;
-    }
+     void setCompany(Company company);
 
-    public void setCompany(Company company) {
-        this.company = company;
-    }
+     String getName();
 
-    public String getName() {
-        return name;
-    }
+     void setName(String name);
 
-    public void setName(String name) {
-        this.name = name;
-    }
+     String getSex();
 
-    public String getSex() {
-        return sex;
-    }
+     void setSex(String sex);
 
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
+     long getHeight();
 
-    public long getHeight() {
-        return height;
-    }
+     void setHeight(long height);
 
-    public void setHeight(long height) {
-        this.height = height;
-    }
+     String getBirthday();
 
-    public String getBirthday() {
-        return birthday;
-    }
+     void setBirthday(String birthday);
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
-
-    public class WorkExperience {
-        Long index;
-        String from;
-        String to;
-        String company_name;
-        Company company;
-
-        public Person getPerson() {
-            return Person.this;
-        }
-
-        public String getFrom() {
-            return from;
-        }
-
-        public void setFrom(String from) {
-            this.from = from;
-        }
-
-        public String getTo() {
-            return to;
-        }
-
-        public void setTo(String to) {
-            this.to = to;
-        }
-
-        public Long getIndex() {
-            return index;
-        }
-
-        public void setIndex(Long index) {
-            this.index = index;
-        }
-
-        public String getCompany_name() {
-            return company_name;
-        }
-
-        public void setCompany_name(String company_name) {
-            this.company_name = company_name;
-        }
-
-        public Company getCompany() {
-            return company;
-        }
-
-        public void setCompany(Company company) {
-            this.company = company;
-        }
-
-    }
 }

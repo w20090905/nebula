@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import nebula.entity.Person.WorkExperience;
+import nebula.entity.PersonImp.WorkExperience;
 import nebula.entity.PersonDbPersistor.InnerPerson.InnerWorkExperience;
 import nebula.persistor.Manageable;
 import nebula.persistor.NebulaContext;
@@ -27,7 +27,7 @@ public class PersonDbPersistor implements PersonPersistor {
     }
 
     @Override
-    public Person get(String... keys) {
+    public PersonImp get(String... keys) {
         try {
             PreparedStatement p;
             ResultSet r;
@@ -81,12 +81,12 @@ public class PersonDbPersistor implements PersonPersistor {
     }
 
     @Override
-    public Person merge(Person v) {
+    public PersonImp merge(PersonImp v) {
         return v;
     }
 
     @Override
-    public void persist(Person v) {
+    public void persist(PersonImp v) {
         try {
             int i = 0;
             PreparedStatement p;
@@ -145,7 +145,7 @@ public class PersonDbPersistor implements PersonPersistor {
     }
 
     @Override
-    public void remove(Person v) {
+    public void remove(PersonImp v) {
         try {
 
             PreparedStatement p;
@@ -193,14 +193,14 @@ public class PersonDbPersistor implements PersonPersistor {
     }
 
     @Override
-    public List<Person> list() {
+    public List<PersonImp> list() {
         try {
             int i = 0;
             Statement p = cp.get().createStatement();
             ResultSet r = p.executeQuery("select name,sex,birthday,company_name,lastModified "
                     + "from person p order by p.lastModified desc \n");
 
-            ArrayList<Person> ps = new ArrayList<Person>();
+            ArrayList<PersonImp> ps = new ArrayList<PersonImp>();
 
             while (r.next()) {
 
@@ -243,12 +243,11 @@ public class PersonDbPersistor implements PersonPersistor {
         }
     }
 
-    public class InnerPerson extends Person implements Manageable {
+    public class InnerPerson extends PersonImp implements Manageable {
         long lastModified;
 
         @Override
         public long getLastModified() {
-            // TODO Auto-generated method stub
             return lastModified;
         }
 
@@ -257,14 +256,13 @@ public class PersonDbPersistor implements PersonPersistor {
 
             @Override
             public long getLastModified() {
-                // TODO Auto-generated method stub
                 return lastModified;
             }
         }
     }
 
     @Override
-    public List<Person> query(String cause, Object... params) {
+    public List<PersonImp> query(String cause, Object... params) {
         // TODO Auto-generated method stub
         return null;
     }
