@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import nebula.entity.PersonImp.WorkExperience;
+import nebula.entity.PersonImp.WorkExperienceImp;
 import nebula.entity.PersonDbPersistor.InnerPerson.InnerWorkExperience;
 import nebula.persistor.Manageable;
 import nebula.persistor.NebulaContext;
@@ -118,7 +118,7 @@ public class PersonDbPersistor implements PersonPersistor {
                         .prepareStatement(
                                 "insert into WorkExperience(person_name,index,from_,to_,company_name,lastModified) values(?,?,?,?,?,?)");
 
-                for (WorkExperience w : v.workExperiences) {
+                for (WorkExperienceImp w : v.workExperiences) {
                     i = 0;
                     p.setString(++i, v.name);
                     p.setLong(++i, w.index);
@@ -251,7 +251,7 @@ public class PersonDbPersistor implements PersonPersistor {
             return lastModified;
         }
 
-        class InnerWorkExperience extends WorkExperience implements Manageable {
+        class InnerWorkExperience extends WorkExperienceImp implements Manageable {
             long lastModified;
 
             @Override

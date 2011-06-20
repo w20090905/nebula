@@ -2,7 +2,7 @@ package nebula.entity;
 
 import java.util.List;
 
-import nebula.entity.PersonImp.WorkExperience;
+import nebula.entity.PersonImp.WorkExperienceImp;
 
 public class PersonAgent implements Person {
     PersonImp src;
@@ -12,7 +12,7 @@ public class PersonAgent implements Person {
     }
 
     @Override
-    public List<WorkExperience> getWorkExperiences() {
+    public List<WorkExperienceImp> getWorkExperiences() {
         return src.workExperiences;
     }
 

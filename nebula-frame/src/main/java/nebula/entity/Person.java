@@ -2,11 +2,11 @@ package nebula.entity;
 
 import java.util.List;
 
-import nebula.entity.PersonImp.WorkExperience;
+import nebula.entity.PersonImp.WorkExperienceImp;
 
 public interface Person {
 
-     List<WorkExperience> getWorkExperiences();
+     List<WorkExperienceImp> getWorkExperiences();
 
      String getCompany_name();
 
