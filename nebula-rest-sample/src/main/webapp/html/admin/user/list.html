@@ -1,0 +1,170 @@
+<h3>用户一览</h3>
+<hr/>
+<p><a id="adduser" href="/nebula-rest-sample/templates/administry/user-add.html" title="添加新用户" class="nyroModal" rev="modal"><span class="icon icon-add">&nbsp;</span>添加</a></p>
+<table class="display stylized" id="example">
+	<caption>用户一览</caption>
+	<thead>
+		<tr>
+			<th>用户名</th>
+			<th>密码</th>
+			<th>姓名</th>
+			<th>性别</th>
+			<th>E-Mail</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+	<tfoot>
+		<tr>
+			<th>用户名</th>
+			<th>密码</th>
+			<th>姓名</th>
+			<th>性别</th>
+			<th>E-Mail</th>
+			<th></th>
+		</tr>
+	</tfoot>
+</table>
+<script type="text/javascript">
+<!--
+
+/* datatable */
+var oTable = $("#example").dataTable({
+	oLanguage: {
+		sLengthMenu: "每页显示 _MENU_ 条记录",
+		sZeroRecords: "未找到记录 - 抱歉",
+		sInfo: "_START_  - _END_  / _TOTAL_",
+		sInfoEmpty: "Showing 0 to 0 of 0 records",
+		sProcessing: "正在加载数据...",
+		sInfoFiltered: "(filtered from _MAX_ total records)",
+		oPaginate: {  
+            sFirst: "首页",  
+            sPrevious: "前页",  
+            sNext: "后页",  
+            sLast: "尾页" 
+		}
+	},
+	bServerSide: true,
+	bProcessing: true,
+	bPaginate: false,		// 分页
+	bLengthChange: false,	// 是否允许用户自定义每页条目数
+	bFilter: false,			// 是否使用内置过滤器（搜索框）
+	bInfo: false,			// 是否显示分页信息（一共几条，当前几条）
+	sAjaxSource: "/nebula-rest-sample/administry/user/",
+	sAjaxDataProp: "aaData",    // Could be delete, default is "aaData"
+	fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+		
+		nRow.className = "gradeA " + nRow.className;
+		
+		$('td:eq(0)', nRow).html('<div><a href="#"><b>' + aData.username + 
+				'</b></a><div class="listingDetails"><div class="pad"><b>这货的详细信息:</b><hr/><ul><li>年龄：不详</li><li>星座：不详</li><li>擅长：扯淡</li><li>爱好：吹牛</li></ul></div></div></div>');
+		$('td:eq(0)', nRow).addClass("title");
+		
+		var el = $('td:eq(5)', nRow);
+		el.html('<a title="编辑" href="javascript: void(0);" onclick="javascript: user.toUpdate(\'' + aData.username + '\')"><img src="/nebula-rest-sample/img/page_save.png"/></a>');
+		el.append('&nbsp;');
+		el.append('<a name="user.delete" title="删除" href="' + aData.username + '"><img src="/nebula-rest-sample/img/delete.png"/></a>');
+
+		return nRow;
+	},
+	fnServerData: function( sUrl, aoData, fnCallback ) {
+		$.ajax( {
+			url: sUrl,
+			data: aoData,
+			dataType: "json",
+			cache: false,
+			// success: fnCallback,	// JSON默认数据在“aaData”中
+			success: function(json) {
+				fnCallback({
+					aaData: json
+				});
+
+				$("a[name='user.delete']").click(function(e) {
+					e.preventDefault();
+					var username = $(this).attr("href");
+					$.nmManual("/nebula-rest-sample/templates/administry/user-del.html", {
+						sizes : { minH : 5 },
+						callbacks: {
+							beforeShowCont: function() {
+								$("#usernameToDel").attr("value", username);
+							}
+						}
+					});
+				});
+
+				$("a[title]").tipTip();
+
+				/* expandable rows */
+				Administry.expandableRows();
+			}
+		});
+	},
+	aoColumns : [ 
+	    {mDataProp : "username"}, 
+		{mDataProp : "password"}, 
+		{mDataProp : "name"},
+		{mDataProp : "sex"}, 
+		{mDataProp : "mail"},
+		{mDataProp : "username"}
+	]
+});
+
+$("#adduser__").click(function() {
+	$('#example').dataTable().fnAddData({
+		username : "jih",
+		password : "pwd",
+		name : "jihua",
+		sex : "M",
+		mail : "jih@g.com"
+	});
+});
+
+
+/*
+$(function() {
+	var nm = $('#adduser').click(function(e) {
+		e.preventDefault();
+		$.nmManual("/nebula-rest-sample/templates/administry/user-add.html", {
+			sizes : {
+				initW : 1200,
+				initH : 1200,
+				w : 1200,
+				h : 1200,
+				minW : 500,
+				minH : 700
+			}
+		});
+	});
+});
+*/
+
+user.toUpdate = function(username) {
+	$.nmManual("/nebula-rest-sample/templates/administry/user-upd.html", {
+		sizes : {
+			minW : 400
+		},
+		callbacks: {
+			beforeShowCont: function() {
+				$.getJSON("/nebula-rest-sample/administry/user/" + username + "/", function(json) {
+					$("#username").attr("value", json.username);
+					$("#password").attr("value", json.password);
+					$("#password_confirm").attr("value", json.password);
+					$("#firstname").attr("value", json.firstName);
+					$("#lastname").attr("value", json.lastName);
+					$("#sex").attr("value", json.sex);
+					$("#email").attr("value", json.mail);
+				});
+			}
+		}
+	});
+};
+
+$(".nyroModal").nyroModal({
+	sizes : {
+		minW : 400
+	}
+});
+
+//-->
+</script>

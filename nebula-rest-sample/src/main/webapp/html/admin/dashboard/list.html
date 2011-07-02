@@ -1,0 +1,128 @@
+<script type="text/javascript">
+<!--
+
+/* progress bar animations - setting initial values */
+Administry.progress("#progress1", 1, 5);
+Administry.progress("#progress2", 3, 5);
+Administry.progress("#progress3", 1, 5);
+
+/* flot graphs */
+var onduty = [{
+    label: '加班时间',
+    data: [[1, 6],[2,6],[3,5],[4,2],[5,0],[6,1],[7,5],[8,0],[9,1],[10,3]]
+},{
+    label: '休假时间',
+    data: [[1, 0],[2,1.5],[3,0.5],[4,1],[5,0],[6,4],[7,0],[8,0],[9,0],[10,1]]
+}
+];
+var plot = $.plot($("#placeholder"), onduty, {
+    bars: { show: false, lineWidth: 1 },
+    legend: { position: "ne" },
+    xaxis: { ticks: [[1, "周日"], [2, "周一"], [3, "周二"], [4, "周三"], [5, "周四"], [6, "周五"], [7, "周六"], [8, "周日"], [9, "周一"], [10, "周二"]] },
+    yaxis: { min: 0, max: 7 },
+    grid: { color: "#666" },
+    colors: ["#0a0", "#f00"]
+});
+
+//-->
+</script>
+
+<div class="colgroup leading">
+    <div class="column width3 first">
+        <h3>欢迎回来, <a href="#">Admin</a></h3>
+        <p>有<b>3件新任务</b>待收。<br /><a href="#">详细...</a></p>
+    </div>
+    <div class="column width3">
+        <h4>上次登录</h4>
+        <p>
+            Monday July 12th, 2010 at 11:32am from 127.0.0.1<br />
+            No error login attempts.
+        </p>
+    </div>
+</div>
+<div class="colgroup leading">
+    <div class="column width3 first">
+        <h4>任务: <a href="#">4</a></h4>
+        <hr/>
+        <table class="no-style full">
+            <tbody>
+                <tr>
+                    <td class="ta-left"><a href="#">需求分析</a></td>
+                    <td class="ta-right">高</td>
+                    <td class="ta-right">2011/06/02</td>
+                </tr>
+                <tr>
+                    <td class="ta-left"><a href="#">基本设计</a></td>
+                    <td class="ta-right">高</td>
+                    <td class="ta-right">2011/06/02</td>
+                </tr>
+                <tr>
+                    <td class="ta-left"><a href="#">详细设计</a></td>
+                    <td class="ta-right">中</td>
+                    <td class="ta-right">2011/06/05</td>
+                </tr>
+                <tr>
+                    <td class="ta-left"><a href="#">编码</a></td>
+                    <td class="ta-right">低</td>
+                    <td class="ta-right">2011/06/10</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="column width3">
+        <h4>进度</h4>
+        <hr/>
+        <table class="no-style full">
+            <tbody>
+                <tr>
+                    <td>进行中</td>
+                    <td class="ta-right">1/5</td>
+                    <td><div id="progress1" class="progress full progress-green"><span><b></b></span></div></td>
+                </tr>
+                <tr>
+                    <td>待完成</td>
+                    <td class="ta-right">3/5</td>
+                    <td><div id="progress2" class="progress full progress-blue"><span><b></b></span></div></td>
+                </tr>
+                <tr>
+                    <td>已延迟</td>
+                    <td class="ta-right">1/5</td>
+                    <td><div id="progress3" class="progress full progress-red"><span><b></b></span></div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="colgroup leading">
+    <div class="column width3 first">
+        <h4>公告: <a href="#">5</a></h4>
+        <hr/>
+        <table class="no-style full">
+            <tbody>
+                <tr>
+                    <td class="ta-left"><a href="#">这一次，徐武终于飞出“疯人院”</a></td>
+                    <td class="ta-right">2011/06/14</td>
+                </tr>
+                <tr>
+                    <td class="ta-left"><a href="#">哈药总厂就污染事件致歉</a></td>
+                    <td class="ta-right">2011/06/13</td>
+                </tr>
+                <tr>
+                    <td class="ta-left"><a href="#">台湾发现食品添加有毒化学物</a></td>
+                    <td class="ta-right">2011/06/12</td>
+                </tr>
+                <tr>
+                    <td class="ta-left"><a href="#">美航母舰员救援遭核辐射</a></td>
+                    <td class="ta-right">2011/06/11</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="column width3">
+        <h4>出勤</h4>
+        <hr/>
+        <p><b>近期出勤一览</b></p>
+        <div id="placeholder" style="height:100px"></div>
+    </div>
+</div>
+<div class="clear">&nbsp;</div>

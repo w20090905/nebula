@@ -1,0 +1,29 @@
+<html>
+<head>
+<script type="text/javascript" src="/nebula-rest-sample/scripts/jquery-1.6.1.js"></script>
+<script type="text/javascript" src="/nebula-rest-sample/scripts/jquery.cookie.js"></script>
+<script type="text/javascript" src="/nebula-rest-sample/scripts/jquery.md5.js"></script>
+<script type="text/javascript">
+<!--
+
+/*
+$(document).ready(function(){
+	alert($("form").serialize());
+});
+*/
+$.cookie('the_cookie', 'the_value');
+$(document).ready(function(){
+	$("#name").attr("value", $.md5("12345"));
+});
+//-->
+</script>
+</head>
+<body>
+<form action="#" method="POST">
+<input type="text" id="name" name="name" value="name  ++"/>
+<input type="text" name="sex" value="sex"/>
+<input type="text" name="age" value="age"/>
+<input type="submit" value="submit"/>
+</form>
+</body>
+</html>
