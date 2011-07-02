@@ -1,1 +1,0 @@
-<jsp:forward page="/site.html"></jsp:forward>
