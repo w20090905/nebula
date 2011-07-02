@@ -49,13 +49,13 @@ $(document).ready(function(){
     /* setup navigation, content boxes, etc... */
     Administry.setup();
 
-    Administry.inclue("#topnav", "/nebula-rest-sample/templates/administry/topnav.html");
-    Administry.inclue("#menu", "/nebula-rest-sample/templates/administry/menu.html");
-    Administry.inclue("#aside-links", "/nebula-rest-sample/templates/administry/aside-links.html");
-    Administry.inclue("#main-section", "/nebula-rest-sample/templates/administry/dashboard.html");
-    Administry.inclue("#side-section", "/nebula-rest-sample/templates/administry/side-section.html");
-    Administry.inclue("#bottom", "/nebula-rest-sample/templates/administry/footer.html");
-    Administry.inclue("#animated", "/nebula-rest-sample/templates/administry/footer-animated.html");
+    Administry.include("#topnav", "/nebula-rest-sample/templates/administry/topnav.html");
+    Administry.include("#menu", "/nebula-rest-sample/templates/administry/menu.html");
+    Administry.include("#aside-links", "/nebula-rest-sample/templates/administry/aside-links.html");
+    Administry.include("#main-section", "/nebula-rest-sample/templates/administry/dashboard.html");
+    Administry.include("#side-section", "/nebula-rest-sample/templates/administry/side-section.html");
+    Administry.include("#bottom", "/nebula-rest-sample/templates/administry/footer.html");
+    Administry.include("#animated", "/nebula-rest-sample/templates/administry/footer-animated.html");
 
 });
 
@@ -82,6 +82,8 @@ $(document).ready(function(){
         <!-- Wrapper -->
         <div class="wrapper">
                 <section id="main-section" class="column width6 first">
+                </section>
+                <section id="hidden-section" style="display:none">
                 </section>
                 <aside id="side-section" class="column width2">
                 </aside>

@@ -129,8 +129,38 @@ Administry.expandableRows = function() {
 	}
 }
 
-Administry.inclue = function(el, url) {
+Administry.include = function(el, url) {
 	$.get(url, function(data) {
 		$(el).html(data);
 	});
 }
+
+Administry.navigate = function(url) {
+	$.get(url, function(data) {		
+		$("#main-section").html(data);
+		//var prop = $("#hidden-section > span");
+		var prop = $("#main-section > span");
+		if(prop){
+			var define = eval(prop.html());
+			if( define.style = "list"){
+				var oTable = $("#example").dataTable({
+					sAjaxSource: "./user/",
+					aoColumns : [ 
+					    {mDataProp : "username"}, 
+						{mDataProp : "password"}, 
+						{mDataProp : "name"},
+						{mDataProp : "sex"}, 
+						{mDataProp : "mail"},
+						{mDataProp : "username"}
+					],
+					sAjaxDataProp: ""    // Could be delete, default is "aaData"
+					
+				}
+				);
+			}			
+		}
+		
+		//$("#main-section").html(data);
+	});
+}
+
