@@ -1,5 +1,5 @@
 <h3>用户一览</h3>
-<p><a id="adduser" href="/nebula-rest-sample/templates/administry/user-add.html" title="添加新用户" class="nyroModal" rev="modal"><span class="icon icon-add">&nbsp;</span>添加</a></p>
+<a id="adduser" href="/nebula-rest-sample/templates/administry/user-add.html" title="添加新用户" class="nyroModal" rev="modal"><span class="icon icon-add">&nbsp;</span>添加</a>
 <table id="user" class="toplevel display stylized">
 	<caption>用户一览</caption>
 	<thead>
@@ -14,7 +14,7 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td>username</td>
+			<td class"primary">username</td>
 			<td>password</td>
 			<td>name</td>
 			<td>sex</td>
@@ -37,28 +37,6 @@
 <!--
 /* datatable */
 var oTable = $("#example").dataTable({
-	oLanguage: {
-		sLengthMenu: "每页显示 _MENU_ 条记录",
-		sZeroRecords: "未找到记录 - 抱歉",
-		sInfo: "_START_  - _END_  / _TOTAL_",
-		sInfoEmpty: "Showing 0 to 0 of 0 records",
-		sProcessing: "正在加载数据...",
-		sInfoFiltered: "(filtered from _MAX_ total records)",
-		oPaginate: {  
-            sFirst: "首页",  
-            sPrevious: "前页",  
-            sNext: "后页",  
-            sLast: "尾页" 
-		}
-	},
-	bServerSide: true,
-	bProcessing: true,
-	bPaginate: false,		// 分页
-	bLengthChange: false,	// 是否允许用户自定义每页条目数
-	bFilter: false,			// 是否使用内置过滤器（搜索框）
-	bInfo: false,			// 是否显示分页信息（一共几条，当前几条）
-	sAjaxSource: "/nebula-rest-sample/administry/user/",
-	sAjaxDataProp: "aaData",    // Could be delete, default is "aaData"
 	fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
 		
 		nRow.className = "gradeA " + nRow.className;
