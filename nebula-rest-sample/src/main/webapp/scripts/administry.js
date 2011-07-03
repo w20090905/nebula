@@ -137,30 +137,40 @@ Administry.include = function(el, url) {
 
 Administry.navigate = function(url) {
 	$.get(url, function(data) {		
-		$("#main-section").html(data);
-		//var prop = $("#hidden-section > span");
-		var prop = $("#main-section > span");
-		if(prop){
-			var define = eval(prop.html());
-			if( define.style = "list"){
-				var oTable = $("#example").dataTable({
-					sAjaxSource: "./user/",
-					aoColumns : [ 
-					    {mDataProp : "username"}, 
-						{mDataProp : "password"}, 
-						{mDataProp : "name"},
-						{mDataProp : "sex"}, 
-						{mDataProp : "mail"},
-						{mDataProp : "username"}
-					],
-					sAjaxDataProp: ""    // Could be delete, default is "aaData"
-					
-				}
-				);
-			}			
+		//var panel = $("<div/>");
+		//panel.appendTo("#main-section");
+		//panel.html(data);
+		
+		var panel = $("#main-section").html(data);
+		
+		var layer = $("table.toplevel",panel);
+		if(layer){//if is list page
+			var tds = $("td",layer);
+			var columns = new Array(tds.lenght);
+			$("td").each(function (index,e){
+				columns[index]={ "mDataProp": e.innerHTML};
+			});
+			
+			var oTable = layer.dataTable({
+				sAjaxSource: "./administry/"+ layer.attr("id") + "/",
+				aoColumns : columns,
+				sAjaxDataProp: ""    // Could be delete, default is "aaData"				
+			});
 		}
 		
-		//$("#main-section").html(data);
+		var popup = $("a.nyroModal",panel).click(function(e) {
+				e.preventDefault();
+				$.nmManual(e.target.href, {
+					sizes : {
+						initW : 1200,
+						initH : 1200,
+						w : 1200,
+						h : 1200,
+						minW : 500,
+						minH : 700
+					}
+				});
+			});
 	});
 }
 
