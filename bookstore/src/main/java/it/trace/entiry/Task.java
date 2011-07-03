@@ -4,13 +4,22 @@ import java.sql.Date;
 
 public class Task {
 	private long id;
-	private long administratorId;
-	private long borrowId;
+	private long parent;
 	private java.lang.String name;
 	private java.lang.String status;
+	private long borrowId;
+	private long administratorId;
 	private java.lang.String memo;
 	private Date createDate;
 	private Date updateDate;
+	
+	public long getParent() {
+		return parent;
+	}
+
+	public void setParent(long parent) {
+		this.parent = parent;
+	}
 
 	public long getId() {
 		return id;

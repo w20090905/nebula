@@ -2,7 +2,6 @@ package it.trace.service;
 
 import it.trace.dao.AdministratorDao;
 import it.trace.entiry.Administrator;
-import it.trace.entiry.Customer;
 
 import java.util.List;
 

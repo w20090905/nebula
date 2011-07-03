@@ -4,38 +4,34 @@
 
 <html>
 <head>
-<title>Book Update</title>
+<title>Book removable</title>
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
 <link type="text/css" rel="stylesheet" href="<c:out value='/css/main.css'/>"/>
 </head>
 <body>
-<form action="<%=request.getContextPath()%>/brm/book/${book.id}/" method="post">
+<form action="<%=request.getContextPath()%>/brm/administrator/${result.id}/" method="post">
     <input type="hidden" name="__http_method" value="delete"/> 
-    <input type="hidden" name="id" value="${book.id}">
+    <input type="hidden" name="id" value="${result.id}">
     <table border=1>
         <tr>
-            <td><label>type</label></td>
-            <td>${book.type}</td>
-        </tr>
-        <tr>
             <td><label>name</label></td>
-            <td>${book.name}</td>
+            <td>${result.name}</td>
         </tr>
         <tr>
-            <td><label>description</label></td>
-            <td>${book.description}</td>
+            <td><label>password</label></td>
+            <td>${result.password}</td>
         </tr>
         <tr>
-            <td><label>publisher</label></td>
-            <td>${book.publisher}</td>
+            <td><label>groupId</label></td>
+            <td>${result.groupId}</td>
         </tr>
         <tr>
-            <td><label>count</label></td>
-            <td>${book.count}</td>
+            <td><label>role</label></td>
+            <td>${result.role}</td>
         </tr>
         <tr>
-            <td><label>price</label></td>
-            <td>${book.price}</td>
+            <td><label>memo</label></td>
+            <td>${result.memo}</td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Delete"/></td>

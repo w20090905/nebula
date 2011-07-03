@@ -27,7 +27,7 @@ public class AdministratorResource {
         return list;
     }
 
-    private Long id;
+    private static Long id;
     public void setId(Long id) {
         this.id = id;
     }
@@ -47,38 +47,35 @@ public class AdministratorResource {
     	}
     }
 
-    public String list() {
+    public List<Administrator> list() {
         this.list = manager.selectAll();
-        return "success";
+        return list;
     }
 
     public String editNew() {
         return "success";
     }
 
-    public String create() {
-        manager.insert(this.administrator);
+    public void create(Administrator a) {
+        manager.insert(a);
+    }
+
+    // TODO 名字
+    public Administrator editable(long id) {
+    	return manager.select(id);
+    }
+
+    public String update(Administrator a) {
+        manager.update(a);
         return "success";
     }
 
     // TODO 名字
-    public String editable() {
-        this.administrator = manager.select(id);
-        return "success";
+    public Administrator removable(long id) {
+    	return manager.select(id);
     }
 
-    public String update() {
-        manager.update(this.administrator);
-        return "success";
-    }
-
-    // TODO 名字
-    public String removable() {
-        this.administrator = manager.select(id);
-        return "success";
-    }
-
-    public String remove() {
+    public String remove(long id) {
         manager.delete(id);
         return "success";
     }
@@ -93,11 +90,12 @@ public class AdministratorResource {
                 	Administrator administrator = new Administrator();
                     if (context.getId() != null)
                     	administrator.setId(Long.parseLong(context.getId()));
-                    administrator.setName((String) context.getParameter("administrator.name"));
-                    administrator.setPassword((String) context.getParameter("administrator.password"));
-                    administrator.setRole(Integer.parseInt((String) context.getParameter("administrator.role")));
-                    administrator.setMemo((String) context.getParameter("administrator.memo"));
-                    return new Object[] { administrator };
+	                    administrator.setGroupId(Long.parseLong((String) context.getParameter("result.groupId")));
+	                    administrator.setName((String) context.getParameter("result.name"));
+	                    administrator.setPassword((String) context.getParameter("result.password"));
+	                    administrator.setRole(Integer.parseInt((String) context.getParameter("result.role")));
+	                    administrator.setMemo((String) context.getParameter("result.memo"));
+	                    return new Object[] { administrator };
                 } else if ("editable".equals(method.getName()) || "removable".equals(method.getName()) || "remove".equals(method.getName())) {
                     return new Object[] { Long.parseLong((String) context.getParameter("id")) };
                 }
