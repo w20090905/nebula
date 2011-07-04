@@ -87,7 +87,25 @@ Administry.setup = function () {
     $("*[data-href]").each(function(){
     	Administry.include($(this),$(this).attr("data-href"));
     });
-}
+    
+
+    // build animated dropdown navigation
+	$('nav.menu ul').supersubs({
+		minWidth:    12,   // minimum width of sub-menus in em units 
+		maxWidth:    27,   // maximum width of sub-menus in em units cur
+		extraWidth:  1     // extra width can ensure lines don't sometimes turn over 
+						   // due to slight rounding differences and font-family 
+	}).superfish();
+	
+	$('nav.menu a[href]').live("click",function(e) {
+		e.preventDefault();
+		$("nav.menu ul").children(".current").removeClass("current");
+		$(this).parent().addClass("current");
+
+		Administry.navigate(Administry.rebase($(this).attr("href")));
+	});
+	
+};
 
 // progress() - animate a progress bar "el" to the value "val"
 Administry.progress = function (el, val, max) {
@@ -136,42 +154,19 @@ Administry.expandableRows = function() {
 
 Administry.include = function(el, url) {
 	$.get(Administry.rebase(url), function(data) {
-		$(el).html(data);
-		
-	    // build animated dropdown navigation
-		$('nav.menu ul').supersubs({
-			minWidth:    12,   // minimum width of sub-menus in em units 
-			maxWidth:    27,   // maximum width of sub-menus in em units cur
-			extraWidth:  1     // extra width can ensure lines don't sometimes turn over 
-							   // due to slight rounding differences and font-family 
-		}).superfish();
-		
-		$('nav.menu a[href]').click(function(e) {
-			e.preventDefault();
-			$("nav.menu ul").children(".current").removeClass("current");
-			$(this).parent().addClass("current");
-						
-			Administry.navigate(Administry.rebase($(this).attr("href")));
-		});
+		$(el).html(data);		
 	});
-}
+};
 
 Administry.navigate = function(url) {
 	$.get(url, function(data) {		
+		
 
 		var panel = $("#main-section").html(data);
 		
-		var layer = $("table.toplevel",panel);
-		if(layer){//if is list page
-			var tds = $("td",layer);
-			var columns = new Array(tds.lenght);
-			$("td").each(function (index,e){
-				/*if($(this).hasClass("primary")){
-					columns[index]=	{
-					  "mDataProp": e.innerHTML,
-					  "sClass":$(this).css
-					};
-				}else*/
+		$("table.toplevel",panel).each(function(){
+			var columns = new Array();
+			$("td",$(this)).each(function (index,e){
 				if($(this).hasClass("actions")){
 					columns[index]=	{
 							  "mDataProp": "",
@@ -183,17 +178,17 @@ Administry.navigate = function(url) {
 				}else{
 					columns[index]={ 
 							"mDataProp": e.innerHTML,
-							"sClass":$(this).css
+							"sClass": $(this).css
 						};
 				}
 			});
 			
-			var oTable = layer.dataTable({
-				sAjaxSource: "./administry/"+ layer.attr("id") + "/",
+			$(this).dataTable({
+				sAjaxSource: "./administry/"+ $(this).attr("id") + "/",
 				aoColumns : columns,
 				sAjaxDataProp: ""    // Could be delete, default is "aaData"				
 			});
-		}
+		});
 		
 		$("a.nyroModal",panel).click(function(e) {
 				e.preventDefault();
@@ -209,7 +204,7 @@ Administry.navigate = function(url) {
 				});
 			});
 	});
-}
+};
 
 Administry.rebase = function(href){
 	if(href.substring(0,"/".length)=="/"){
