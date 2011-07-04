@@ -135,16 +135,7 @@ Administry.expandableRows = function() {
 }
 
 Administry.include = function(el, url) {
-	var href = url;
-	if(href.substring(0,"./templates/administry/".length)!="./templates/administry/"){
-		if(href.substring(0,"./".length)=="./"){
-			href = "./templates/administry/" + href.substring("./".length);
-		}else{					
-			href = "./templates/administry/" + href;
-		}
-	};
-	
-	$.get(href, function(data) {
+	$.get(Administry.rebase(url), function(data) {
 		$(el).html(data);
 		
 	    // build animated dropdown navigation
@@ -159,18 +150,8 @@ Administry.include = function(el, url) {
 			e.preventDefault();
 			$("nav.menu ul").children(".current").removeClass("current");
 			$(this).parent().addClass("current");
-			
-			var href = $(this).attr("href");
-			
-			if(href.substring(0,"./templates/administry/".length)!="./templates/administry/"){
-				if(href.substring(0,"./".length)=="./"){
-					href = "./templates/administry/" + href.substring("./".length);
-				}else{					
-					href = "./templates/administry/" + href;
-				}
-			}
 						
-			Administry.navigate(href);
+			Administry.navigate(Administry.rebase($(this).attr("href")));
 		});
 	});
 }
@@ -216,7 +197,7 @@ Administry.navigate = function(url) {
 		
 		$("a.nyroModal",panel).click(function(e) {
 				e.preventDefault();
-				$.nmManual(e.target.href, {
+				$.nmManual(Administry.rebase($(this).attr("href")), {
 					sizes : {
 						initW : 1200,
 						initH : 1200,
@@ -229,6 +210,21 @@ Administry.navigate = function(url) {
 			});
 	});
 }
+
+Administry.rebase = function(href){
+	if(href.substring(0,"/".length)=="/"){
+		
+	}else if(href.substring(0,"http".length)=="http"){	
+		
+	}else if(href.substring(0,"./".length)=="./"){
+		if(href.substring(0,"./templates/administry/".length)!="./templates/administry/"){
+			href = "./templates/administry/" + href.substring("./".length);			
+		}		
+	}else{
+		href = "./templates/administry/" + href;		
+	}
+	return href;
+};
 
 /*
 Administry.popup = function(context) {
