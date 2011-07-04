@@ -82,6 +82,11 @@ Administry.setup = function () {
     
 	// custom tooltips to replace the default browser tooltips for <a title=""> <div title=""> and <span title="">
     $("a[title], div[title], span[title]").tipTip();
+    
+
+    $("*[data-href]").each(function(){
+    	Administry.include($(this),$(this).attr("data-href"));
+    });
 }
 
 // progress() - animate a progress bar "el" to the value "val"
@@ -132,15 +137,27 @@ Administry.expandableRows = function() {
 Administry.include = function(el, url) {
 	$.get(url, function(data) {
 		$(el).html(data);
+		
+	    // build animated dropdown navigation
+		$('nav.menu ul').supersubs({
+			minWidth:    12,   // minimum width of sub-menus in em units 
+			maxWidth:    27,   // maximum width of sub-menus in em units cur
+			extraWidth:  1     // extra width can ensure lines don't sometimes turn over 
+							   // due to slight rounding differences and font-family 
+		}).superfish();
+		
+		$('nav.menu a[href]').click(function(e) {
+			e.preventDefault();
+			$("nav.menu ul").children(".current").removeClass("current");
+			$(this).parent().addClass("current");
+			Administry.navigate(e.target.href);
+		});
 	});
 }
 
 Administry.navigate = function(url) {
 	$.get(url, function(data) {		
-		//var panel = $("<div/>");
-		//panel.appendTo("#main-section");
-		//panel.html(data);
-		
+
 		var panel = $("#main-section").html(data);
 		
 		var layer = $("table.toplevel",panel);
@@ -148,7 +165,25 @@ Administry.navigate = function(url) {
 			var tds = $("td",layer);
 			var columns = new Array(tds.lenght);
 			$("td").each(function (index,e){
-				columns[index]={ "mDataProp": e.innerHTML};
+				if($(this).hasClass("primary")){
+					columns[index]=	{
+					  "mDataProp": e.innerHTML,
+					  "sClass":$(this).css
+					};
+				}else if($(this).hasClass("actions")){
+					columns[index]=	{
+							  "mDataProp": "",
+							  "sClass":$(this).css,
+							  "fnRender": function(obj) {
+									return e.innerHTML;	
+							  }
+						};
+				}else{
+					columns[index]={ 
+							"mDataProp": e.innerHTML,
+							"sClass":$(this).css
+						};
+				}
 			});
 			
 			var oTable = layer.dataTable({
@@ -158,7 +193,7 @@ Administry.navigate = function(url) {
 			});
 		}
 		
-		var popup = $("a.nyroModal",panel).click(function(e) {
+		$("a.nyroModal",panel).click(function(e) {
 				e.preventDefault();
 				$.nmManual(e.target.href, {
 					sizes : {
@@ -174,3 +209,20 @@ Administry.navigate = function(url) {
 	});
 }
 
+/*
+Administry.popup = function(context) {
+    $("a.nyroModal",$(this)).click(function(e) {
+		e.preventDefault();
+		$.nmManual(e.target.href, {
+			sizes : {
+				initW : 1200,
+				initH : 1200,
+				w : 1200,
+				h : 1200,
+				minW : 500,
+				minH : 700
+			}
+		});
+	});
+}
+*/
