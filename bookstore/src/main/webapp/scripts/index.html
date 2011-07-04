@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript" src="wz_jsgraphics.js" ></script>
+<script type="text/javascript" src="jquery.js" ></script>
+<script type="text/javascript" src="jquery.ui.flow.js" ></script>
+<style type="text/css">
+	.before{
+		padding:5px;width:40px;height:20px;border:1px solid black;
+		background:#AAAAAA;
+		font-size:9pt;
+		color:white;
+		font-weight:bolder;
+		float: left;
+		cursor:hand;
+	};
+	.hover{
+		background: green;
+		color: black;
+	}
+</style>
+</head>
+
+<body>
+<xmp>
+<div id="spanBefore">
+<div class="before" begin=-1 id="1" next="2,3,11">环节一</div>
+<div class="before" id="2" next="4">环节二</div>
+<div class="before" id="3" next="5">环节三</div>
+<div class="before" id="4" next="6">环节四</div>
+<div class="before" id="5" next="6">环节五</div>
+<div class="before" id="6" next="7,8">环节六</div>
+<div class="before" id="7" next="9">环节七</div>
+<div class="before" id="8" next="10,11">环节八</div>
+<div class="before" id="9" next="12">环节九</div>
+<div class="before" id="10" next="12">环节10</div>
+<div class="before" id="11" next="12">环节11</div>
+<div class="before" id="12" next="-1">环节12</div>
+</div>
+<div style="position:relative; width:300px; height:300px;" id="draw"></div>
+<script type="text/javascript">
+	$("#spanBefore").flow({hover:function(){
+		$(this).addClass("hover");
+	},remove:function(){
+		$(this).removeClass("hover");
+	},click:function(){
+		alert($(this).attr("id") + "->" + $(this).attr("next") + " Click");
+	}});
+</script>
+</xmp>
+<div id="spanBefore">
+	<div class="before" begin=-1 id="1" next="2,3,11">环节一</div>
+	<div class="before" id="2" next="4">环节二</div>
+	<div class="before" id="3" next="5">环节三</div>
+	<div class="before" id="4" next="6">环节四</div>
+	<div class="before" id="5" next="6">环节五</div>
+	<div class="before" id="6" next="7,8">环节六</div>
+	<div class="before" id="7" next="9">环节七</div>
+	<div class="before" id="8" next="10,11">环节八</div>
+	<div class="before" id="9" next="12">环节九</div>
+	<div class="before" id="10" next="12">环节10</div>
+	<div class="before" id="11" next="12">环节11</div>
+	<div class="before" id="12" next="-1">环节12</div>
+</div>
+
+<div style="padding:30px;border:1px dotted black;">
+<div style="position:relative; width:300px; height:300px;" id="draw"></div>
+</div>
+<input type=button value='生成流程图' onclick="createFlow();" />
+<script type="text/javascript">
+	var createFlow = function(){
+		$("#spanBefore").flow({hover:function(){
+			$(this).addClass("hover");
+		},remove:function(){
+			$(this).removeClass("hover");
+		},click:function(){
+			alert($(this).attr("id") + "->" + $(this).attr("next") + " Click");
+		}});
+	}
+</script>
+</body>
+</html>

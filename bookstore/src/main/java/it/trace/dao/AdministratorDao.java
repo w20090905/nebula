@@ -23,6 +23,7 @@ public class AdministratorDao extends AbstractBaseDao {
         + " password = ?,"
         + " role = ?,"
         + " memo = ?"
+        + " where"
         + " id = ?";
 
     	return super.update(sql, administrator.getGroupId(), administrator.getName(), administrator.getPassword(), administrator.getRole(), administrator.getMemo(), administrator.getId());
@@ -35,7 +36,7 @@ public class AdministratorDao extends AbstractBaseDao {
         + " password,"
         + " role,"
         + " memo "
-        + " ) values ( "
+        + " ) values ( "	
         + " ?,"
         + " ?,"
         + " ?,"
