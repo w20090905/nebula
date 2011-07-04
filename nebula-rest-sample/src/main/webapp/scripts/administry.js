@@ -135,7 +135,16 @@ Administry.expandableRows = function() {
 }
 
 Administry.include = function(el, url) {
-	$.get(url, function(data) {
+	var href = url;
+	if(href.substring(0,"./templates/administry/".length)!="./templates/administry/"){
+		if(href.substring(0,"./".length)=="./"){
+			href = "./templates/administry/" + href.substring("./".length);
+		}else{					
+			href = "./templates/administry/" + href;
+		}
+	};
+	
+	$.get(href, function(data) {
 		$(el).html(data);
 		
 	    // build animated dropdown navigation
@@ -150,7 +159,18 @@ Administry.include = function(el, url) {
 			e.preventDefault();
 			$("nav.menu ul").children(".current").removeClass("current");
 			$(this).parent().addClass("current");
-			Administry.navigate(e.target.href);
+			
+			var href = $(this).attr("href");
+			
+			if(href.substring(0,"./templates/administry/".length)!="./templates/administry/"){
+				if(href.substring(0,"./".length)=="./"){
+					href = "./templates/administry/" + href.substring("./".length);
+				}else{					
+					href = "./templates/administry/" + href;
+				}
+			}
+						
+			Administry.navigate(href);
 		});
 	});
 }
@@ -165,12 +185,13 @@ Administry.navigate = function(url) {
 			var tds = $("td",layer);
 			var columns = new Array(tds.lenght);
 			$("td").each(function (index,e){
-				if($(this).hasClass("primary")){
+				/*if($(this).hasClass("primary")){
 					columns[index]=	{
 					  "mDataProp": e.innerHTML,
 					  "sClass":$(this).css
 					};
-				}else if($(this).hasClass("actions")){
+				}else*/
+				if($(this).hasClass("actions")){
 					columns[index]=	{
 							  "mDataProp": "",
 							  "sClass":$(this).css,
