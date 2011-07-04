@@ -100,38 +100,77 @@ Administry.progress = function (el, val, max) {
 }
 
 //expandableRows() - expandable table rows
-Administry.expandableRows = function () {
- var titles_total = $('td.title').length;
- if (titles_total) { /* setting z-index for IE7 */
-     $('td.title').each(function (i, e) {
-         $(e).children('div').css('z-index', String(titles_total - i));
-     });
+Administry.expandableRows = function() {
+	var titles_total = $('td.title').length;
+	if (titles_total) { /* setting z-index for IE7 */
+		$('td.title').each(function(i, e) {
+			$(e).children('div').css('z-index', String(titles_total - i));
+		});
 
-     $('td.title').find('a').click(function () {
-         // hide previously opened containers
-         $('.opened').hide();
-         // remove highlighted class from rows
-         $('td.highlighted').removeClass('highlighted');
+		$('td.title').find('a').click(function() {
+			// hide previously opened containers
+			$('.opened').hide();
+			// remove highlighted class from rows
+			$('td.highlighted').removeClass('highlighted');
 
-         // locate the row we clicked onto
-         var tr = $(this).parents("tr");
-         var div = $(this).parent().find('.listingDetails');
+			// locate the row we clicked onto
+			var tr = $(this).parents("tr");
+			var div = $(this).parent().find('.listingDetails');
 
-         if (!$(div).hasClass('opened')) {
-             $(div).addClass('opened').width($(tr).width() - 2).show();
-             $(tr).find('td').addClass('highlighted');
-         } else {
-             $(div).removeClass('opened');
-             $(tr).find('td').removeClass('highlighted');
-         }
-         return false;
-     });
- }
+			if (!$(div).hasClass('opened')) {
+				$(div).addClass('opened').width($(tr).width() - 2).show();
+				$(tr).find('td').addClass('highlighted');
+			} else {
+				$(div).removeClass('opened');
+				$(tr).find('td').removeClass('highlighted');
+			}
+			return false;
+		});
+	}
 }
 
-Administry.inclue = function(el, url) {
+Administry.include = function(el, url) {
 	$.get(url, function(data) {
-		var e = $(el).empty();
-		e.append(data);
+		$(el).html(data);
 	});
 }
+
+Administry.navigate = function(url) {
+	$.get(url, function(data) {		
+		//var panel = $("<div/>");
+		//panel.appendTo("#main-section");
+		//panel.html(data);
+		
+		var panel = $("#main-section").html(data);
+		
+		var layer = $("table.toplevel",panel);
+		if(layer){//if is list page
+			var tds = $("td",layer);
+			var columns = new Array(tds.lenght);
+			$("td").each(function (index,e){
+				columns[index]={ "mDataProp": e.innerHTML};
+			});
+			
+			var oTable = layer.dataTable({
+				sAjaxSource: "./administry/"+ layer.attr("id") + "/",
+				aoColumns : columns,
+				sAjaxDataProp: ""    // Could be delete, default is "aaData"				
+			});
+		}
+		
+		var popup = $("a.nyroModal",panel).click(function(e) {
+				e.preventDefault();
+				$.nmManual(e.target.href, {
+					sizes : {
+						initW : 1200,
+						initH : 1200,
+						w : 1200,
+						h : 1200,
+						minW : 500,
+						minH : 700
+					}
+				});
+			});
+	});
+}
+

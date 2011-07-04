@@ -17,8 +17,8 @@
 <script type="text/javascript" src="/nebula-rest-sample/scripts/administry.js"></script>
 <!-- jQuery with plugins -->
 <script type="text/javascript" src="/nebula-rest-sample/scripts/jquery-1.6.1.js"></script>
+<!-- <script type="text/javascript" src="/nebula-rest-sample/scripts/interface.js"></script> -->
 <!-- <script type="text/javascript" src="/nebula-rest-sample/scripts/jquery.fisheye.js"></script> -->
-<script type="text/javascript" src="/nebula-rest-sample/scripts/jquery.jqDock.min.js"></script>
 <script type="text/javascript" src="/nebula-rest-sample/scripts//jquery.ui.core.min.js"></script> 
 <script type="text/javascript" src="/nebula-rest-sample/scripts//jquery.ui.widget.min.js"></script> 
 <script type="text/javascript" src="/nebula-rest-sample/scripts//jquery.ui.tabs.min.js"></script> 
@@ -39,6 +39,8 @@
 <script type="text/javascript" src="/nebula-rest-sample/scripts/flot/jquery.flot.min.js"></script>
 <!-- jQuery data tables -->
 <script type="text/javascript" src="/nebula-rest-sample/scripts/jquery.dataTables.min.js"></script>
+<!-- jQuery md5 -->
+<script type="text/javascript" src="/nebula-rest-sample/scripts/jquery.md5.js"></script>
 <script type="text/javascript">
 <!--
 
@@ -47,13 +49,13 @@ $(document).ready(function(){
     /* setup navigation, content boxes, etc... */
     Administry.setup();
 
-    Administry.inclue("#topnav", "/nebula-rest-sample/templates/administry/topnav.html");
-    Administry.inclue("#menu", "/nebula-rest-sample/templates/administry/menu.html");
-    Administry.inclue("#aside-links", "/nebula-rest-sample/templates/administry/aside-links.html");
-    Administry.inclue("#main-section", "/nebula-rest-sample/templates/administry/dashboard.html");
-    Administry.inclue("#side-section", "/nebula-rest-sample/templates/administry/side-section.html");
-    Administry.inclue("#bottom", "/nebula-rest-sample/templates/administry/footer.html");
-    Administry.inclue("#animated", "/nebula-rest-sample/templates/administry/footer-animated.html");
+    Administry.include("#topnav", "/nebula-rest-sample/templates/administry/topnav.html");
+    Administry.include("#menu", "/nebula-rest-sample/templates/administry/menu.html");
+    Administry.include("#aside-links", "/nebula-rest-sample/templates/administry/aside-links.html");
+    Administry.include("#main-section", "/nebula-rest-sample/templates/administry/dashboard.html");
+    Administry.include("#side-section", "/nebula-rest-sample/templates/administry/side-section.html");
+    Administry.include("#bottom", "/nebula-rest-sample/templates/administry/footer.html");
+    Administry.include("#animated", "/nebula-rest-sample/templates/administry/footer-animated.html");
 
 });
 
@@ -80,6 +82,8 @@ $(document).ready(function(){
         <!-- Wrapper -->
         <div class="wrapper">
                 <section id="main-section" class="column width6 first">
+                </section>
+                <section id="hidden-section" style="display:none">
                 </section>
                 <aside id="side-section" class="column width2">
                 </aside>

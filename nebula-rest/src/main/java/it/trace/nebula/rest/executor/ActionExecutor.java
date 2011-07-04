@@ -1,8 +1,11 @@
 package it.trace.nebula.rest.executor;
 
+import it.trace.nebula.rest.annotations.HttpMethod;
 import it.trace.nebula.rest.binder.Context;
 import it.trace.nebula.rest.binder.DataBinder;
+import it.trace.nebula.rest.binder.PutContext;
 import it.trace.nebula.rest.exception.ValidationException;
+import it.trace.nebula.rest.helper.RequestHelper;
 import it.trace.nebula.rest.resource.Operation;
 import it.trace.nebula.rest.result.Result;
 
@@ -53,7 +56,20 @@ public class ActionExecutor implements Executor {
         DataBinder<Object> dataBinder = operation.getDataBinder();
         Object[] input = null;
         if (dataBinder != null) {
-            input = dataBinder.bind(new Context(request, (String) this.resourceId), operation.getMethod());
+
+            Context context;
+
+            // TODO ======================================
+
+            if (HttpMethod.PUT.equals(RequestHelper.getHttpMethod(request))) {
+                context = new PutContext(request, (String) this.resourceId);
+            } else {
+                context = new Context(request, (String) this.resourceId);
+            }
+
+            // ===========================================
+
+            input = dataBinder.bind(context, operation.getMethod());
         }
 
         Object action;

@@ -20,7 +20,7 @@ public class UserResource {
 
         user = new User();
         user.setUsername("admin");
-        user.setPassword("admin");
+        user.setPassword("21232f297a57a5a743894a0e4a801fc3");
         user.setFirstName("admin");
         user.setLastName("admin");
         user.setSex('男');
@@ -29,7 +29,7 @@ public class UserResource {
 
         user = new User();
         user.setUsername("user");
-        user.setPassword("user");
+        user.setPassword("ee11cbb19052e40b07aac0ca060c23ee");
         user.setFirstName("admin");
         user.setLastName("admin");
         user.setSex('男');
@@ -38,7 +38,7 @@ public class UserResource {
 
         user = new User();
         user.setUsername("tom");
-        user.setPassword("12345");
+        user.setPassword("827ccb0eea8a706c4c34a16891f84e7b");
         user.setFirstName("admin");
         user.setLastName("admin");
         user.setSex('男');
@@ -47,7 +47,7 @@ public class UserResource {
 
         user = new User();
         user.setUsername("cat");
-        user.setPassword("12345");
+        user.setPassword("827ccb0eea8a706c4c34a16891f84e7b");
         user.setFirstName("admin");
         user.setLastName("admin");
         user.setSex('男');

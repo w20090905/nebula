@@ -32,22 +32,22 @@
 	
 	$("#dashboard").click(function() {
 		setCurrent("#dashboard");
-		Administry.inclue("#main-section", "/nebula-rest-sample/templates/administry/dashboard.html");
+		Administry.navigate("/nebula-rest-sample/templates/administry/dashboard.html");
 	});
 	
 	$("#user").click(function() {
 		setCurrent("#user");
-		Administry.inclue("#main-section", "/nebula-rest-sample/templates/administry/user.html");
+		Administry.navigate("/nebula-rest-sample/templates/administry/user.html");
 	});
 	
 	$("#project").click(function() {
 		setCurrent("#project");
-		//Administry.inclue("#main-section", "/nebula-rest-sample/templates/administry/user.html");
+		//Administry.inclue("#main", "/nebula-rest-sample/templates/administry/user.html");
 	});
 	
 	$("#duty").click(function() {
 		setCurrent("#duty");
-		//Administry.inclue("#main-section", "/nebula-rest-sample/templates/administry/user.html");
+		//Administry.inclue("#main", "/nebula-rest-sample/templates/administry/user.html");
 	});
 	
 	function setCurrent(ela) {

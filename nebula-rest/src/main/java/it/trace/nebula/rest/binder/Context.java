@@ -8,10 +8,10 @@ public class Context {
 
     public static final String ID_PARAM_NAME = "id";
 
-    private HttpServletRequest request = null;
-    private HttpSession session = null;
-    private ServletContext app = null;
-    private String id = null;
+    protected HttpServletRequest request = null;
+    protected HttpSession session = null;
+    protected ServletContext app = null;
+    protected String id = null;
 
     public Context() {
     }

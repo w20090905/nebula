@@ -1,10 +1,10 @@
 
 <form id="sampleform" method="post" action="#">
 	<fieldset>
-		<legend>添加新用户</legend>
+		<legend>更新用户</legend>
 		<p>
 			<label class="required" for="username">用户名:</label><br/>
-			<input type="text" id="username" class="full" value="" name="username" title="用户名"/>
+			<input type="text" id="username" class="full" value="" name="username" disabled="disabled"/>
 			<small>e.g. ui.templates</small>
 		</p>
 		<p>
@@ -57,28 +57,6 @@ jQuery.validator.addMethod("userExist", function(value, element) {
 var validator = $("#sampleform").validate({
 	onkeyup: false,
 	rules: {
-		username: {
-			required: true,
-			minlength: 3,
-			//remote: "/nebula-rest-sample/administry/user/!userExist/"	// 简单写法，用GET方法，后跟元素名 + 值
-			remote: {
-				url: "/nebula-rest-sample/administry/user/!userExist/",
-				type: "GET",
-				data: {
-					username: function() {
-						return $("#username").val();
-					}
-				},
-				dataType: "json",
-				dataFilter: function(data, type) {
-					if ("true" == data) {
-						return "false";
-					} else {
-						return"true";
-					}
-				}
-			}
-		},
 		password: {
 			required: true,
 			minlength: 5
@@ -97,11 +75,6 @@ var validator = $("#sampleform").validate({
 		}
 	},
 	messages: {
-		username: {
-			required: "用户名不能为空！",
-			minlength: jQuery.format("用户名不能少于 {0} 位"),
-			remote: "用户已存在！"
-		},
 		password: {
 			required: "密码不能为空！",
 			minlength: jQuery.format("密码不能少于 {0} 位")
@@ -131,20 +104,18 @@ var validator = $("#sampleform").validate({
 	// specifying a submitHandler prevents the default submit, good for the demo
 	submitHandler: function(form) {
 		$.ajax({
-			type : "POST",
-			url : "/nebula-rest-sample/administry/user/",
-        	data : $.each($(form).serializeArray(), function(i, f) {
-						if (f.name == "password" || f.name == "password_confirm")
-			        		f.value = $.md5(f.value);
-					}),
+			type : "PUT",
+			url : "/nebula-rest-sample/administry/user/" + $("#username").val() + "/",
+			data : $(form).serialize(),
 			dataType : "json",
 			async : true,
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
 			success : function(data) {
 				$.nmTop().close();
 				oTable.fnDraw();
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
-				alert("创建用户时发生错误！");
+				alert("更新时发生错误！");
 			}
 		});
 	}
