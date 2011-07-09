@@ -1,4 +1,4 @@
-package it.trace.define.anotation;
+package nebula.lang.anotation;
 
 public @interface Attribute {
 

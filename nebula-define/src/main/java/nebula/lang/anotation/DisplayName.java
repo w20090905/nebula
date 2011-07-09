@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.trace.define.anotation;
+package nebula.lang.anotation;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.TYPE;
