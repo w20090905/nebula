@@ -1,6 +1,6 @@
-package it.trace.define.lang;
+package nebula.lang;
 
-import it.trace.define.anotation.DisplayName;
+import nebula.lang.anotation.DisplayName;
 
 public class Field {
 

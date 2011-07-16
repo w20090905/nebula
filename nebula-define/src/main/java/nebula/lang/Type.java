@@ -1,10 +1,11 @@
-package it.trace.define.lang;
+package nebula.lang;
 
-import it.trace.define.anotation.DisplayName;
-import it.trace.define.anotation.Inline;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import nebula.lang.anotation.DisplayName;
+import nebula.lang.anotation.Inline;
 
 
 @DisplayName("Type")
