@@ -6,6 +6,22 @@ import nebula.entity.PersonImp.WorkExperienceImp;
 
 public interface Person {
 
+    String getName();
+
+    void setName(String name);
+
+    String getSex();
+
+    void setSex(String sex);
+
+    long getHeight();
+
+    void setHeight(long height);
+
+    String getBirthday();
+
+    void setBirthday(String birthday);
+    
      List<WorkExperienceImp> getWorkExperiences();
 
      String getCompany_name();
@@ -16,20 +32,5 @@ public interface Person {
 
      void setCompany(Company company);
 
-     String getName();
-
-     void setName(String name);
-
-     String getSex();
-
-     void setSex(String sex);
-
-     long getHeight();
-
-     void setHeight(long height);
-
-     String getBirthday();
-
-     void setBirthday(String birthday);
 
 }
