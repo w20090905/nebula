@@ -8,12 +8,34 @@ import it.trace.nebula.rest.binder.DataBinder;
 import it.trace.service.AdministratorManager;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.inject.Inject;
 
 public class AdministratorResource {
+	
+	public static final Map<Object, Administrator> admins = new LinkedHashMap<Object, Administrator>();
+	static {
 
+		Administrator admin;
+		admin = new Administrator();
+		admin.setId(1);
+		admin.setName("test_admin");
+		admin.setRole(1);
+		admin.setMemo("test memo");
+        admins.put(admin.getId(), admin);
+        
+    	admin = new Administrator();
+		admin.setId(2);
+		admin.setName("test_admin2");
+		admin.setRole(2);
+		admin.setMemo("test memo 2");
+        admins.put(admin.getId(), admin);
+
+    }
     private Administrator administrator;
     public Administrator getAdministrator() {
         return administrator;
@@ -48,8 +70,10 @@ public class AdministratorResource {
     }
 
     public List<Administrator> list() {
-        this.list = manager.selectAll();
-        return list;
+        //this.list = manager.selectAll();
+        //return list;
+    	System.out.println("admin:--------------"+admins.size());
+    	 return new ArrayList<Administrator>(admins.values());
     }
 
     public String editNew() {
