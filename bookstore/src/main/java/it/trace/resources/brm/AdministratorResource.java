@@ -70,10 +70,10 @@ public class AdministratorResource {
     }
 
     public List<Administrator> list() {
-        //this.list = manager.selectAll();
-        //return list;
-    	System.out.println("admin:--------------"+admins.size());
-    	 return new ArrayList<Administrator>(admins.values());
+        this.list = manager.selectAll();
+        return list;
+//    	System.out.println("admin:--------------"+admins.size());
+//    	 return new ArrayList<Administrator>(admins.values());
     }
 
     public String editNew() {
@@ -114,11 +114,11 @@ public class AdministratorResource {
                 	Administrator administrator = new Administrator();
                     if (context.getId() != null)
                     	administrator.setId(Long.parseLong(context.getId()));
-	                    administrator.setGroupId(Long.parseLong((String) context.getParameter("result.groupId")));
-	                    administrator.setName((String) context.getParameter("result.name"));
-	                    administrator.setPassword((String) context.getParameter("result.password"));
-	                    administrator.setRole(Integer.parseInt((String) context.getParameter("result.role")));
-	                    administrator.setMemo((String) context.getParameter("result.memo"));
+	                    administrator.setGroupId(Long.parseLong((String) context.getParameter("groupId")));
+	                    administrator.setName((String) context.getParameter("name"));
+	                    administrator.setPassword((String) context.getParameter("password"));
+	                    administrator.setRole(Integer.parseInt((String) context.getParameter("role")));
+	                    administrator.setMemo((String) context.getParameter("memo"));
 	                    return new Object[] { administrator };
                 } else if ("editable".equals(method.getName()) || "removable".equals(method.getName()) || "remove".equals(method.getName())) {
                     return new Object[] { Long.parseLong((String) context.getParameter("id")) };
