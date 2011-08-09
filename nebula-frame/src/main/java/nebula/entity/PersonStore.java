@@ -18,5 +18,11 @@ public class PersonStore implements Store<Person>{
     
     public Person get(String... key){        
         return new PersonAgent(ps.get(0));
+    }
+
+//    @Override
+    public void persist(Person v) {
+        // TODO Auto-generated method stub
+        
     }    
 }
