@@ -5,8 +5,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import junit.framework.TestCase;
-import nebula.entity.Company;
-import nebula.entity.CompanyDbPersistor;
+import nebula.data.n.CompanyDbPersistor;
+import nebula.data.n.VV;
 import nebula.persistor.NebulaContext;
 import nebula.persistor.db.ConnectionProvider;
 import nebula.persistor.db.DbConfiguration;
@@ -61,11 +61,9 @@ public class CompanyDbPersistorTest extends TestCase {
             }
             try {
                 conn.createStatement().execute(
-                        "create table company (" 
-                        + " name            varchar(40) NOT NULL"                                
-                        + ",fullname        varchar(40) " 
-                        + ",lastModified    BIGINT"                                
-                        + ",PRIMARY KEY(name) " + ")");
+                        "create table company (" + " name            varchar(40) NOT NULL"
+                                + ",fullname        varchar(40) " + ",lastModified    BIGINT" + ",PRIMARY KEY(name) "
+                                + ")");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -82,45 +80,39 @@ public class CompanyDbPersistorTest extends TestCase {
     }
 
     public void testInsert() {
-        Company company = new Company();
+        VV company = new VV(4);
 
-        company.setName("jixian");
-
+        company.data[0] = "jixian";
+        
         p.persist(company);
 
         company = p.get("jixian");
         assertNotNull(company);
     }
 
-    public void testGetCompany() {
-        Company company = p.get("jixian");
-        assertNotNull(company);
-        // PrintObejct.print(company.getClass(), company);
-    }
-
     public void testListCompany() {
-        Company company = new Company();
-        company.setName("linzhi");
+        VV company = new VV(4);
+        company.data[0] = "linzhi";
 
         p.persist(company);
-        company = new Company();
+        company = new VV(4);
 
-        company.setName("linweishen");
+        company.data[0] = "linweishen";
         p.persist(company);
 
-        List<Company> ps = p.list();
+        List<VV> ps = p.list();
 
         assertEquals(3, ps.size());
 
         assertNotNull(ps.get(0));
         PrintObejct.print(ps.getClass(), ps);
-        assertEquals("linweishen", ps.get(0).getName());
-        assertEquals("linzhi", ps.get(1).getName());
-        assertEquals("jixian", ps.get(2).getName());
+        assertEquals("linweishen", (String)ps.get(0).data[0]);
+        assertEquals("linzhi", (String)ps.get(1).data[0]);
+        assertEquals("jixian", (String)ps.get(2).data[0]);
     }
 
     public void testRemove() {
-        Company company = p.get("jixian");
+        VV company = p.get("jixian");
         p.remove(company);
     }
 
