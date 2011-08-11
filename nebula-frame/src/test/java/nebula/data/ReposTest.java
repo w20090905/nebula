@@ -18,12 +18,10 @@ public class ReposTest extends TestCase {
                 return new DefaultStore<T>();
             }
 
-        });
-        repos.bindTo("nebula.*", new StoreProvider() {
-
             @Override
-            public <T> Store<T> get(Class<T> clz) {
-                return new DbStore<T>();
+            public Store<?> get(String name) {
+                // TODO Auto-generated method stub
+                return null;
             }
 
         });
@@ -32,6 +30,26 @@ public class ReposTest extends TestCase {
             @Override
             public <T> Store<T> get(Class<T> clz) {
                 return new DbStore<T>();
+            }
+
+            @Override
+            public Store<?> get(String name) {
+                // TODO Auto-generated method stub
+                return null;
+            }
+
+        });
+        repos.bindTo("nebula.*", new StoreProvider() {
+
+            @Override
+            public <T> Store<T> get(Class<T> clz) {
+                return new DbStore<T>();
+            }
+
+            @Override
+            public Store<?> get(String name) {
+                // TODO Auto-generated method stub
+                return null;
             }
 
         });

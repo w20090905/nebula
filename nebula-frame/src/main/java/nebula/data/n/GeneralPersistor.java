@@ -1,4 +1,4 @@
-package nebula.entity;
+package nebula.data.n;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import nebula.persistor.Manageable;
 import nebula.persistor.NebulaContext;
 import nebula.persistor.Persistor;
 import nebula.persistor.PersistorException;
@@ -15,18 +14,18 @@ import nebula.persistor.db.ConnectionProvider;
 
 import com.google.inject.Inject;
 
-public class CompanyDbPersistor implements Persistor<Company> {
+public class GeneralPersistor implements Persistor<VV> {
     final NebulaContext context;
     final ConnectionProvider cp;
 
     @Inject
-    protected CompanyDbPersistor(ConnectionProvider cp, NebulaContext context) {
+    protected GeneralPersistor(ConnectionProvider cp, NebulaContext context) {
         this.context = context;
         this.cp = cp;
     }
 
     @Override
-    public Company get(String... keys) {
+    public VV get(String... keys) {
         try {
             PreparedStatement p;
             ResultSet r;
@@ -40,15 +39,23 @@ public class CompanyDbPersistor implements Persistor<Company> {
                 throw new PersistorException();
             }
 
-            InnerCompany v;
-            v = new InnerCompany();
+            // ------ start
+
+            Object[] al = new Object[10];
             i = 0;
 
-            v.name = r.getString(++i);
-            v.fullName = r.getString(++i);
-            v.lastModified = r.getLong(++i);
+            // v.name
+            al[1] = r.getString(++i);
+            // v.fullName
+            al[2] = r.getString(++i);
+            // v.lastModified
+            al[3] = r.getLong(++i);
+
+            // ------ end
 
             r.close();
+
+            VV v = new VV(al);
 
             return v;
         } catch (SQLException e) {
@@ -57,12 +64,12 @@ public class CompanyDbPersistor implements Persistor<Company> {
     }
 
     @Override
-    public Company merge(Company v) {
+    public VV merge(VV v) {
         return v;
     }
 
     @Override
-    public void persist(Company v) {
+    public void persist(VV v) {
         try {
             int i = 0;
             PreparedStatement p;
@@ -70,8 +77,11 @@ public class CompanyDbPersistor implements Persistor<Company> {
             p = cp.get().prepareStatement("insert into company(name,fullName,lastModified) values(?,?,?)");
 
             i = 0;
-            p.setString(++i, v.name);
-            p.setString(++i, v.fullName);
+
+            Object[] data = v.data;
+
+            p.setString(++i, (String) data[1]);// .name);
+            p.setString(++i, (String) data[2]);// .fullName);
             p.setLong(++i, context.getTime());
 
             boolean result = p.execute();
@@ -90,12 +100,12 @@ public class CompanyDbPersistor implements Persistor<Company> {
     }
 
     @Override
-    public void remove(Company v) {
+    public void remove(VV v) {
         try {
 
             PreparedStatement p;
             p = cp.get().prepareStatement("delete from company where company.name = ?");
-            p.setString(1, v.name);
+            p.setString(1, (String) v.data[0]);
 
             boolean result = p.execute();
             if (result) {// if is result then error
@@ -126,23 +136,31 @@ public class CompanyDbPersistor implements Persistor<Company> {
     }
 
     @Override
-    public List<Company> list() {
+    public List<VV> list() {
         try {
             int i = 0;
             Statement p = cp.get().createStatement();
             ResultSet r = p.executeQuery("select name,fullname,lastModified "
                     + "from company p order by p.lastModified desc \n");
 
-            ArrayList<Company> ps = new ArrayList<Company>();
+            ArrayList<VV> ps = new ArrayList<VV>();
 
             while (r.next()) {
-
-                InnerCompany v = new InnerCompany();
+                // ------ start
+                Object[] al = new Object[10];
                 i = 0;
-                v.name = r.getString(++i);
-                v.fullName = r.getString(++i);
-                v.lastModified = r.getLong(++i);
-                ps.add(v);
+
+                // v.name
+                al[1] = r.getString(++i);
+                // v.fullName
+                al[2] = r.getString(++i);
+                // v.lastModified
+                al[3] = r.getLong(++i);
+
+                r.close();
+
+                // ------ end
+                ps.add(new VV(al));
             }
             r.close();
 
@@ -152,18 +170,8 @@ public class CompanyDbPersistor implements Persistor<Company> {
         }
     }
 
-    public class InnerCompany extends Company implements Manageable {
-        long lastModified;
-
-        @Override
-        public long getLastModified() {
-            // TODO Auto-generated method stub
-            return lastModified;
-        }
-    }
-
     @Override
-    public List<Company> query(String cause, Object... params) {
+    public List<VV> query(String cause, Object... params) {
         // TODO Auto-generated method stub
         return null;
     }
