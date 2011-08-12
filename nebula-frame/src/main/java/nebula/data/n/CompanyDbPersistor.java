@@ -53,24 +53,15 @@ public class CompanyDbPersistor implements Persistor<VV> {
             if (!r.next()) {
                 throw new PersistorException();
             }
-
-            // ------ start
-
+            
             Object[] al = new Object[10];            
             for(int i=0;i<o.length;i++){
                 o[i].reader(context,al, r);              
             }
-            // v.name
-            // v.fullName
-            // v.lastModified
-
-            // ------ end
 
             r.close();
-
-            VV v = new VV(al);
-
-            return v;
+            
+            return new VV(al);
         } catch (SQLException e) {
             throw new PersistorException(e);
         }
