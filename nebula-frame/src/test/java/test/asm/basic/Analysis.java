@@ -53,7 +53,7 @@ import org.objectweb.asm.util.TraceMethodVisitor;
 public class Analysis implements Opcodes {
 
     public static void main(final String[] args) throws Exception {
-        ClassReader cr = new ClassReader("test.Analysis");
+        ClassReader cr = new ClassReader("test.asm.basic.Analysis");
         ClassNode cn = new ClassNode();
         cr.accept(cn, ClassReader.SKIP_DEBUG);
 

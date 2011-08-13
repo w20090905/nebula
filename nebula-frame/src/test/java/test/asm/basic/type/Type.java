@@ -1,8 +1,9 @@
-package test.asm.basic;
+package test.asm.basic.type;
 
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 import nebula.lang.anotation.DisplayName;
 import nebula.lang.anotation.Inline;

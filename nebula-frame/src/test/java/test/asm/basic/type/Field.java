@@ -1,6 +1,7 @@
-package test.asm.basic;
+package test.asm.basic.type;
 
 import java.util.List;
+
 
 import nebula.lang.anotation.DisplayName;
 

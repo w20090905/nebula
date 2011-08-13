@@ -1,4 +1,4 @@
-package test.asm.basic;
+package test.asm.basic.type;
 
 import java.io.IOException;
 
@@ -7,6 +7,8 @@ import nebula.lang.system.DisplayName;
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.FieldVisitor;
+
+import util.PrintObejct;
 
 public class TypeRead {
 
@@ -19,8 +21,9 @@ public class TypeRead {
             // ClassAdapter accessClassAdaptor = new
             // AccessClassAdapter(classWriter);
 
-            ClassReader classReader = new ClassReader("test.asm.basic.Field");
-            classReader.accept(new AccessClassAdapter("test.asm.basic.Field"), ClassReader.EXPAND_FRAMES);
+            String name = "test.asm.basic.type.Field";
+            ClassReader classReader = new ClassReader(name);
+            classReader.accept(new AccessClassAdapter(name), ClassReader.EXPAND_FRAMES);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -55,10 +58,10 @@ public class TypeRead {
             if (access == 25) {
                 return null;
             }
-            
-            Field f = new Field(name);            
+
+            final Field f = new Field(name);
             f.type_name = desc;
-            
+
             System.out.println("+++ Field  { access : " + access + " name:  " + name + " desc:  " + desc
                     + " signature:  " + signature + " value:  " + value + " };");
 
@@ -69,11 +72,25 @@ public class TypeRead {
                     return new AnnotationNopAdapter() {
                         @Override
                         public void visit(String s, Object obj) {
-                            System.out.println("visit -----  " + s + "  -----  " + obj);
+                            if (DisplayName.class.getName().equals(name)) {
+                                f.displayName = (String) obj;
+                            }
                         }
                     };
                 }
+
+                @Override
+                public void visitEnd() {
+                    type.fields.add(f);
+                }
+                
             };
         }
+
+        @Override
+        public void visitEnd() {
+            PrintObejct.print(Type.class, type);
+        }
+        
     }
 }

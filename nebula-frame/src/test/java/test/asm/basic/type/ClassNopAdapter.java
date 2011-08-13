@@ -1,4 +1,4 @@
-package test.asm.basic;
+package test.asm.basic.type;
 
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.Attribute;
