@@ -2,9 +2,6 @@ package test.asm.basic.type;
 
 import java.util.List;
 
-
-import nebula.lang.anotation.DisplayName;
-
 @DisplayName("字段")
 public class Field {
 

@@ -1,13 +1,7 @@
 package test.asm.basic.type;
 
-
 import java.util.ArrayList;
 import java.util.List;
-
-
-import nebula.lang.anotation.DisplayName;
-import nebula.lang.anotation.Inline;
-
 
 @DisplayName("Type")
 public class Type {
@@ -33,7 +27,6 @@ public class Type {
     @DisplayName("定义在")
     Type declaringType = null;
 
-    final @Inline
     @DisplayName("字段")
     List<Field> fields;
 
