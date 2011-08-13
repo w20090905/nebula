@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Enumeration;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,6 +31,7 @@ public class PrintObejct {
         return indent;
     }
 
+    @SuppressWarnings("unchecked")
     private static void print(Class<?> clz, Object instance, int level) {
         Log log = LogFactory.getLog(instance.getClass());
         // Class<?> clz = instance.getClass();
@@ -63,6 +65,13 @@ public class PrintObejct {
                     } else if (m.getName().endsWith("Stream") || m.getName().endsWith("Reader")
                             || m.getName().endsWith("Writer")) {
                         log.trace(indent(level) + m.getName() + "[[ " + m.getReturnType().getName() + " ]]");
+                    } else if (List.class.isAssignableFrom(returnType)) {
+                        List<Object> l = (List<Object>) m.invoke(instance);
+                        for (Object o : l) {
+                            print(o.getClass(), o);
+                        }
+                        
+                        log.trace(indent(level) + m.getName() + ": " + m.invoke(instance).toString());
                     } else {
                         Object returnValue = m.invoke(instance);
                         if (returnValue == null) {

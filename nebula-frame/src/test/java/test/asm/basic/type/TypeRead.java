@@ -7,6 +7,8 @@ import nebula.lang.system.DisplayName;
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.signature.SignatureReader;
+import org.objectweb.asm.signature.SignatureVisitor;
 
 import util.PrintObejct;
 
@@ -15,13 +17,8 @@ public class TypeRead {
     public static void main(String[] args) {
 
         try {
-            // ClassWriter classWriter = new
-            // ClassWriter(ClassWriter.COMPUTE_MAXS);
 
-            // ClassAdapter accessClassAdaptor = new
-            // AccessClassAdapter(classWriter);
-
-            String name = "test.asm.basic.type.Field";
+            String name = Field.class.getName();// "test.asm.basic.type.Field";
             ClassReader classReader = new ClassReader(name);
             classReader.accept(new AccessClassAdapter(name), ClassReader.EXPAND_FRAMES);
 
@@ -65,6 +62,105 @@ public class TypeRead {
             System.out.println("+++ Field  { access : " + access + " name:  " + name + " desc:  " + desc
                     + " signature:  " + signature + " value:  " + value + " };");
 
+            if(signature!=null){
+                SignatureReader sr=new SignatureReader(signature);
+                sr.accept(new SignatureNopAdapter());
+                
+//                {
+//
+//                    @Override
+//                    public void visitFormalTypeParameter(String name) {
+//                        // TODO Auto-generated method stub
+//                        super.visitFormalTypeParameter(name);
+//                    }
+//
+//                    @Override
+//                    public SignatureVisitor visitInterfaceBound() {
+//                        // TODO Auto-generated method stub
+//                        return super.visitInterfaceBound();
+//                    }
+//
+//                    @Override
+//                    public SignatureVisitor visitSuperclass() {
+//                        // TODO Auto-generated method stub
+//                        return super.visitSuperclass();
+//                    }
+//
+//                    @Override
+//                    public SignatureVisitor visitInterface() {
+//                        // TODO Auto-generated method stub
+//                        return super.visitInterface();
+//                    }
+//
+//                    @Override
+//                    public SignatureVisitor visitParameterType() {
+//                        // TODO Auto-generated method stub
+//                        return super.visitParameterType();
+//                    }
+//
+//                    @Override
+//                    public SignatureVisitor visitReturnType() {
+//                        // TODO Auto-generated method stub
+//                        return super.visitReturnType();
+//                    }
+//
+//                    @Override
+//                    public SignatureVisitor visitExceptionType() {
+//                        // TODO Auto-generated method stub
+//                        return super.visitExceptionType();
+//                    }
+//
+//                    @Override
+//                    public void visitBaseType(char descriptor) {
+//                        // TODO Auto-generated method stub
+//                        super.visitBaseType(descriptor);
+//                    }
+//
+//                    @Override
+//                    public void visitTypeVariable(String name) {
+//                        // TODO Auto-generated method stub
+//                        super.visitTypeVariable(name);
+//                    }
+//
+//                    @Override
+//                    public SignatureVisitor visitArrayType() {
+//                        // TODO Auto-generated method stub
+//                        return super.visitArrayType();
+//                    }
+//
+//                    @Override
+//                    public void visitClassType(String name) {
+//                        // TODO Auto-generated method stub
+//                        super.visitClassType(name);
+//                    }
+//
+//                    @Override
+//                    public void visitInnerClassType(String name) {
+//                        // TODO Auto-generated method stub
+//                        super.visitInnerClassType(name);
+//                    }
+//
+//                    @Override
+//                    public void visitTypeArgument() {
+//                        // TODO Auto-generated method stub
+//                        super.visitTypeArgument();
+//                    }
+//
+//                    @Override
+//                    public SignatureVisitor visitTypeArgument(char wildcard) {
+//                        // TODO Auto-generated method stub
+//                        return super.visitTypeArgument(wildcard);
+//                    }
+//
+//                    @Override
+//                    public void visitEnd() {
+//                        // TODO Auto-generated method stub
+//                        super.visitEnd();
+//                    }
+//                    
+//                });
+            }
+            
             return new FieldNopAdapter() {
                 @Override
                 public AnnotationVisitor visitAnnotation(String s, boolean flag) {
