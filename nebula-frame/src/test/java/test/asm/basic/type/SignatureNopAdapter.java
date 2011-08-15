@@ -12,92 +12,73 @@ public class SignatureNopAdapter implements SignatureVisitor {
 
     @Override
     public SignatureVisitor visitClassBound() {
-        // TODO Auto-generated method stub
-        return null;
+        return this;
     }
 
     @Override
     public SignatureVisitor visitInterfaceBound() {
-        // TODO Auto-generated method stub
-        return null;
+        return this;
     }
 
     @Override
     public SignatureVisitor visitSuperclass() {
-        // TODO Auto-generated method stub
-        return null;
+        return this;
     }
 
     @Override
     public SignatureVisitor visitInterface() {
-        // TODO Auto-generated method stub
-        return null;
+        return this;
     }
 
     @Override
     public SignatureVisitor visitParameterType() {
-        // TODO Auto-generated method stub
-        return null;
+        return this;
     }
 
     @Override
     public SignatureVisitor visitReturnType() {
-        // TODO Auto-generated method stub
-        return null;
+        return this;
     }
 
     @Override
     public SignatureVisitor visitExceptionType() {
-        // TODO Auto-generated method stub
-        return null;
+        return this;
     }
 
     @Override
     public void visitBaseType(char descriptor) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void visitTypeVariable(String name) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public SignatureVisitor visitArrayType() {
-        // TODO Auto-generated method stub
-        return null;
+        return this;
     }
 
     @Override
     public void visitClassType(String name) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void visitInnerClassType(String name) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void visitTypeArgument() {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public SignatureVisitor visitTypeArgument(char wildcard) {
-        // TODO Auto-generated method stub
-        return null;
+        return this;
     }
 
     @Override
     public void visitEnd() {
-        // TODO Auto-generated method stub
-
     }
 
 }

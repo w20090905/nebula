@@ -28,26 +28,26 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-import org.objectweb.asm.FieldVisitor;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.lang.reflect.Method;
+
 import org.objectweb.asm.ClassAdapter;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodAdapter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
-
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.lang.reflect.Method;
 
 /**
  * @author Eric Bruneton
  */
 public class ReadByAdapt extends ClassLoader {
 
-    protected synchronized Class loadClass(
+    protected synchronized Class<?> loadClass(
         final String name,
         final boolean resolve) throws ClassNotFoundException
     {
@@ -91,7 +91,7 @@ public class ReadByAdapt extends ClassLoader {
     public static void main(final String args[]) throws Exception {
         // loads the application class (in args[0]) with an Adapt class loader
         ClassLoader loader = new ReadByAdapt();
-        Class c = loader.loadClass(args[0]);
+        Class<?> c = loader.loadClass(args[0]);
         // calls the 'main' static method of this class with the
         // application arguments (in args[1] ... args[n]) as parameter
         Method m = c.getMethod("main", new Class[] { String[].class });

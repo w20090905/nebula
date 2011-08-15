@@ -2,4 +2,5 @@ db
 .settings
 target
 *.log
-
+*.class
+*.class.*

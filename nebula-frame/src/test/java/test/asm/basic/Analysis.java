@@ -114,7 +114,7 @@ public class Analysis implements Opcodes {
         // for each xLOAD instruction, we find the xSTORE instructions that can
         // produce the value loaded by this instruction, and we put them in
         // 'stores'
-        Set stores = new HashSet();
+        Set<?> stores = new HashSet<Object>();
         for (int i = 0; i < m.instructions.size(); ++i) {
             Object insn = m.instructions.get(i);
             int opcode = ((AbstractInsnNode) insn).getOpcode();
@@ -124,8 +124,8 @@ public class Analysis implements Opcodes {
                         : ((VarInsnNode) insn).var;
                 Frame f = frames[i];
                 if (f != null) {
-                    Set s = ((SourceValue) f.getLocal(var)).insns;
-                    Iterator j = s.iterator();
+                    Set<?> s = ((SourceValue) f.getLocal(var)).insns;
+                    Iterator<?> j = s.iterator();
                     while (j.hasNext()) {
                         insn = j.next();
                         if (insn instanceof VarInsnNode) {

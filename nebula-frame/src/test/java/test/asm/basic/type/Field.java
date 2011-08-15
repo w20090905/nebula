@@ -1,93 +1,46 @@
 package test.asm.basic.type;
 
-import java.util.List;
-
 @DisplayName("字段")
+@A("child")
 public class Field {
 
-    public static final String Scala = "Scala";
-    public static final String Inline = "Inline";
-    public static final String Reference = "Reference";
-    public static final String Cascade = "Cascade";
+	public static final String Scala = "Scala";
+	public static final String Inline = "Inline";
+	public static final String Reference = "Reference";
+	public static final String Cascade = "Cascade";
 
-    public static final String PrimaryKey = "PrimaryKey";
-    public static final String Core = "Core";
-    public static final String Important = "Important";
-    public static final String Normal = "Normal";
-    // importance
+	public static final String PrimaryKey = "PrimaryKey";
+	public static final String Core = "Core";
+	public static final String Important = "Important";
+	public static final String Normal = "Normal";
 
-    @DisplayName("名称")
-    String name;
-    @DisplayName("显示名称")
-    String displayName;
-    @DisplayName("重要性")
-    String importance = Normal;
+	@DisplayName("名称")
+	String name;
+	@DisplayName("显示名称")
+	String displayName;
 
-    List<String> tests;
-    
-    String type_name;
-    @DisplayName("类型")
-    
-    Type type;
-    @DisplayName("数组")
-    boolean array = false;
+	@DisplayName("重要性")
+	@A("VL:Key,Core,Important,Normal;VL-zh:Key->主键,Core->核心,Important->重点,Normal->一般,attach->附属")
+	String importance = Normal;
 
-    @DisplayName("引用类型")
-    String refer;
+	@A("hidden")
+	String type_name;
+	@DisplayName("类型")
+	Type type;
 
-    public Field(String name) {
-        super();
-        this.name = name;
-        this.displayName = name;
-//        this.type = type;
-    }
+	@DisplayName("数组")
+	String array = "1";
 
-    public String getName() {
-        return name;
-    }
+	@A("Alias:VL")
+	String[] valueList;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	@DisplayName("引用类型")
+	@A("VL:Scala,Inline,Reference,Cascade")
+	String refer;
 
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    public String getImportance() {
-        return importance;
-    }
-
-    public void setImportance(String importance) {
-        this.importance = importance;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
-
-    public boolean isArray() {
-        return array;
-    }
-
-    public void setArray(boolean array) {
-        this.array = array;
-    }
-
-    public String getRefer() {
-        return refer;
-    }
-
-    public void setRefer(String refer) {
-        this.refer = refer;
-    }
+	public Field(String name) {
+		this.name = name;
+		this.displayName = name;
+	}
 
 }

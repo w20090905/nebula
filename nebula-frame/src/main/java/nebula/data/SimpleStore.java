@@ -18,16 +18,16 @@ public class SimpleStore<T> implements Store<T> {
             datas.put(t.getIndentified(), (T) t);
         }
     }
-
-    @Override
-    public T get(String... keys) {
-        assert (keys.length <= 1);
-        return datas.get(keys[0]);
-    }
-
-    @Override
-    public void persist(T v) {
-        p.persist(v);
-        datas.put(((Indentiable) v).getIndentified(), p.get(((Indentiable) v).getIndentified()));
-    }
+//
+//    @Override
+//    public T get(String... keys) {
+//        assert (keys.length <= 1);
+//        return datas.get(keys[0]);
+//    }
+//
+//    @Override
+//    public void persist(T v) {
+//        p.persist(v);
+//        datas.put(((Indentiable) v).getIndentified(), p.get(((Indentiable) v).getIndentified()));
+//    }
 }
