@@ -100,11 +100,11 @@ public class FlexBL implements Enumeration<FlexBL.Entry> ,Iterable<FlexBL.Entry>
 	Entry entry = new Entry();
 
 	public class Entry {
-		String getKey() {
+		public String getKey() {
 			return FlexBL.this.getKey();
 		}
 
-		String getValue() {
+		public String getValue() {
 			return FlexBL.this.getValue();
 		}
 	}

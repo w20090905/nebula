@@ -11,6 +11,7 @@ import org.objectweb.asm.signature.SignatureReader;
 import test.asm.basic.util.A;
 import test.asm.basic.util.AnnotationNopAdapter;
 import test.asm.basic.util.ClassNopAdapter;
+import test.asm.basic.util.FieldNopAdapter;
 import test.asm.basic.util.FlexBL;
 import test.asm.basic.util.SignatureNopAdapter;
 import util.PrintObejct;

@@ -1,28 +1,24 @@
-package test.asm.basic.type;
+package test.asm.basic.util;
 
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.Attribute;
 import org.objectweb.asm.FieldVisitor;
 
-public class FieldAdapter implements FieldVisitor {
-    final FieldVisitor fv;
-    public FieldAdapter(FieldVisitor fv){
-        this.fv = fv;
+public class FieldNopAdapter implements FieldVisitor {
+    public FieldNopAdapter(){
     }
 
     @Override
     public AnnotationVisitor visitAnnotation(String s, boolean flag) {
-        return fv.visitAnnotation(s, flag);
+        return null;
     }
 
     @Override
     public void visitAttribute(Attribute attribute) {
-        fv.visitAttribute(attribute);
     }
 
     @Override
     public void visitEnd() {
-        fv.visitEnd();
     }
 
 }
