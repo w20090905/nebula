@@ -50,7 +50,7 @@ public class TypeReaderAdapter extends ClassNopAdapter {
         if (access == 25) {
             return null;
         }
-
+        
         final Field f = new Field(name);
         f.type_name = desc;
 
