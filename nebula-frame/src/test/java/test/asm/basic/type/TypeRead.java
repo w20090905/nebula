@@ -13,120 +13,141 @@ import org.objectweb.asm.signature.SignatureReader;
 import util.PrintObejct;
 
 public class TypeRead {
+    TypeRead() {
+        Type type = new Type("system.Type");
+        type.fields.add(new Field("name"));
+        type.fields.add(new Field("displayName"));
+        type.fields.add(new Field("importance"));
+        type.fields.add(new Field("type_name"));
 
-	public static void main(String[] args) {
-		try {
-			String name = Field.class.getName();// "test.asm.basic.type.Field";
-			ClassReader classReader = new ClassReader(name);
-			classReader.accept(new AccessClassAdapter(name), ClassReader.EXPAND_FRAMES);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+        type.fields.add(new Field("type"));
+        type.fields.add(new Field("array"));
+        type.fields.add(new Field("valueList"));
+        type.fields.add(new Field("refer"));
 
-	static class AccessClassAdapter extends ClassNopAdapter {
-		final String className;
-		Type type;
+        // String name;
+        // String displayName;
+        // String importance = Normal;
+        // String type_name;
+        // Type type;
+        //
+        // String array = "1";
+        // String[] valueList;
+        // String refer;
+    }
 
-		public AccessClassAdapter(String className) {
-			this.className = className;
-			type = new Type(className);
-		}
+    public static void main(String[] args) {
+        try {
+            String name = Field.class.getName();// "test.asm.basic.type.Field";
+            ClassReader classReader = new ClassReader(name);
+            classReader.accept(new AccessClassAdapter(name), ClassReader.EXPAND_FRAMES);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-		@Override
-		public AnnotationVisitor visitAnnotation(String s, boolean flag) {
-			final String name = s;
-			return new AnnotationNopAdapter() {
-				@Override
-				public void visit(String s, Object obj) {
-					if (A.class.getName().equals(name)) {
-						FlexBL fb = new FlexBL((String)obj);
-						for(FlexBL.Entry e: fb){
-							String key =e.getKey();
-							String value = e.getValue();
-							
-						}
-					} else if (DisplayName.class.getName().equals(name)) {
-						type.displayName = (String) obj;
-					}
-				}
-			};
-		}
+    static class AccessClassAdapter extends ClassNopAdapter {
+        final String className;
+        Type type;
 
-		public FieldVisitor visitField(final int access, final String name, final String desc, final String signature,
-				final Object value) {
+        public AccessClassAdapter(String className) {
+            this.className = className;
+            type = new Type(className);
+        }
 
-			if (access == 25) {
-				return null;
-			}
+        @Override
+        public AnnotationVisitor visitAnnotation(String s, boolean flag) {
+            final String name = s;
+            return new AnnotationNopAdapter() {
+                @Override
+                public void visit(String s, Object obj) {
+                    if (A.class.getName().equals(name)) {
+                        FlexBL fb = new FlexBL((String) obj);
+                        for (FlexBL.Entry e : fb) {
+                            String key = e.getKey();
+                            String value = e.getValue();
+                        }
+                    } else if (DisplayName.class.getName().equals(name)) {
+                        type.displayName = (String) obj;
+                    }
+                }
+            };
+        }
 
-			final Field f = new Field(name);
-			f.type_name = desc;
+        public FieldVisitor visitField(final int access, final String name, final String desc, final String signature,
+                final Object value) {
 
-			System.out.println("+++ Field  { access : " + access + " name:  " + name + " desc:  " + desc
-					+ " signature:  " + signature + " value:  " + value + " };");
+            if (access == 25) {
+                return null;
+            }
 
-			f.type_name = desc;
+            final Field f = new Field(name);
+            f.type_name = desc;
 
-			if (desc.charAt(0) == '[') {
-				f.array = "n";
-				f.type_name = desc.substring(1);
-			}
+            System.out.println("+++ Field  { access : " + access + " name:  " + name + " desc:  " + desc
+                    + " signature:  " + signature + " value:  " + value + " };");
 
-			if (signature != null) {
-				new SignatureReader(signature).accept(new SignatureNopAdapter() {
-					Stack<String> s = new Stack<String>();
+            f.type_name = desc;
 
-					@Override
-					public void visitClassType(String name) {
-						if (s.size() < 1) {
-							if ("java/util/List".indexOf(name) < 0) {
-								throw new UnsupportedOperationException(name + " is Unsupported");
-							}
-							f.array = "n";
-							s.push(name);
-						} else {
-							f.type_name = name;
-						}
-					}
-				});
-			}
+            if (desc.charAt(0) == '[') {
+                f.array = "n";
+                f.type_name = desc.substring(1);
+            }
 
-			switch (f.type_name.charAt(0)) {
-			case 'L':
-				f.array = "1";
-				f.type_name = desc.substring(0, desc.length() - 1);
-				break;
-			default:
+            if (signature != null) {
+                new SignatureReader(signature).accept(new SignatureNopAdapter() {
+                    Stack<String> s = new Stack<String>();
 
-			}
+                    @Override
+                    public void visitClassType(String name) {
+                        if (s.size() < 1) {
+                            if ("java/util/List".indexOf(name) < 0) {
+                                throw new UnsupportedOperationException(name + " is Unsupported");
+                            }
+                            f.array = "n";
+                            s.push(name);
+                        } else {
+                            f.type_name = name;
+                        }
+                    }
+                });
+            }
 
-			return new FieldNopAdapter() {
-				@Override
-				public AnnotationVisitor visitAnnotation(String s, boolean flag) {
-					final String name = s;
-					return new AnnotationNopAdapter() {
-						@Override
-						public void visit(String s, Object obj) {
-							if (DisplayName.class.getName().equals(name)) {
-								f.displayName = (String) obj;
-							}
-						}
-					};
-				}
+            switch (f.type_name.charAt(0)) {
+            case 'L':
+                f.array = "1";
+                f.type_name = desc.substring(0, desc.length() - 1);
+                break;
+            default:
 
-				@Override
-				public void visitEnd() {
-					type.fields.add(f);
-				}
+            }
 
-			};
-		}
+            return new FieldNopAdapter() {
+                @Override
+                public AnnotationVisitor visitAnnotation(String s, boolean flag) {
+                    final String name = s;
+                    return new AnnotationNopAdapter() {
+                        @Override
+                        public void visit(String s, Object obj) {
+                            if (DisplayName.class.getName().equals(name)) {
+                                f.displayName = (String) obj;
+                            }
+                        }
+                    };
+                }
 
-		@Override
-		public void visitEnd() {
-			PrintObejct.print(Type.class, type);
-		}
+                @Override
+                public void visitEnd() {
+                    type.fields.add(f);
+                }
 
-	}
+            };
+        }
+
+        @Override
+        public void visitEnd() {
+            PrintObejct.print(Type.class, type);
+        }
+
+    }
 }
