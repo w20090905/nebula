@@ -1,5 +1,10 @@
 package test.asm.basic.type;
 
+import java.util.List;
+
+import test.asm.basic.util.A;
+import test.asm.basic.util.DisplayName;
+
 @DisplayName("字段")
 @A("child")
 public class Field {
@@ -32,7 +37,7 @@ public class Field {
 	String array = "1";
 
 	@A("Alias:VL")
-	String[] valueList;
+	List<String> valueList;
 
 	@DisplayName("引用类型")
 	@A("VL:Scala,Inline,Reference,Cascade")

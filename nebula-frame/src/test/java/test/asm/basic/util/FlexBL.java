@@ -1,4 +1,4 @@
-package test.asm.basic.type;
+package test.asm.basic.util;
 
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -99,7 +99,7 @@ public class FlexBL implements Enumeration<FlexBL.Entry> ,Iterable<FlexBL.Entry>
 
 	Entry entry = new Entry();
 
-	class Entry {
+	public class Entry {
 		String getKey() {
 			return FlexBL.this.getKey();
 		}
