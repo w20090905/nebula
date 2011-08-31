@@ -38,6 +38,13 @@ jnebula.include = function(el, url) {
 };
 
 /*
+ * 重新设置链接
+ */
+jnebula.rebase = function(href) {
+	return "./" + href;
+};
+
+/*
  * 通过HTTP的doGet方法，取得请求的页面及数据，并将其按规则呈现于客户端， 同时在该页面中添加默认行为。
  */
 jnebula.navigate = function(url) {
@@ -45,22 +52,24 @@ jnebula.navigate = function(url) {
 
 		// 替换“工作区”为当前请求的返回值
 		var ws = $("#main-section").html(data);	// “工作区”的ID必须为“main-section”
-
-		// 处理列表
-		jnebula.processList(ws);
-
-		// 处理用于插入空表单
+		
 		jnebula.nyroModal(ws);
-
-		// 处理用于更新的表单
-
+		jnebula.validate(ws);
+		jnebula.dataTables(ws);
+		
 	});
 };
 
 /*
+ * 通过HTTP的doGet方法，取得请求的页面及数据，并将其按规则呈现于客户端， 同时在该页面中添加默认行为。
+ */
+jnebula.popUp = function(url) {
+	jnebula.nmManual(url, [ jnebula.validate ]);
+};
+/*
  * 在给定元素内部，处理复数条数据的请求、表现，并添加默认行为。
  */
-jnebula.processList = function(el) {
+jnebula.dataTables = function(el) {
 
 	$("table.toplevel", el).each(function() {
 		
@@ -68,7 +77,7 @@ jnebula.processList = function(el) {
 
 		var url = this.id;									// 取得数据请求的URL
 		var pkName = $("tbody td.primary", this).html();	// 取得主键的字段名
-		var updateUrl = "/nebula-rest-sample/html/" + url + "editable.html";
+		var updateUrl = jnebula.rebase("./html/" + url + "editable.html");
 
 		$("tbody td", this).each(function(index) {
 			if ($(this).hasClass("actions")) {
@@ -76,9 +85,7 @@ jnebula.processList = function(el) {
 					"mDataProp" : "",
 					"sClass" : this.className,				// TODO 有问题，对于class “a b”,只能取得“a”
 					"fnRender" : function(obj) {
-						//  obj["username"]
-						// ' + updateUrl + '
-						return '<a href="' + updateUrl + '" class="nyroModal" rev="modal" onclick="javascript: $.nmManual(\'' + updateUrl + '\'); return false;">' + "Edit" + '</a>';
+						return '<a href="' + url + obj.aData[pkName] + '" class="nyroModal" rev="modal" onclick="javascript: jnebula.popUp(\'' + updateUrl + '\'); return false;">' + "Edit" + '</a>';
 					}
 				};
 			} else {
@@ -97,60 +104,65 @@ jnebula.processList = function(el) {
 	});
 };
 
-jnebula.rebase = function(href) {
-	return "./" + href;
+/*
+ * 处理窗口弹出式的链接。
+ */
+jnebula.nyroModal = function(panel, callback) {
+	$("a.nyroModal", panel).click(function(e) {
+		e.preventDefault();
+		jnebula.popUp(jnebula.rebase($(this).attr("href")));
+	});
 };
 
 /*
- * 模态窗口。
+ * 弹出窗口页面。
  */
-jnebula.nyroModal = function(panel, callback) {
+jnebula.nmManual = function(url, callbacks) {
+	$.nmManual(url, {
+		sizes : {
+			initW : 1200,
+			initH : 1200,
+			w : 1200,
+			h : 1200,
+			minW : 500,
+			minH : 700
+		},
+		callbacks: {
+			beforeShowCont: function() {
+				var validator = $("form").validate({
+					onkeyup : false,
+					rules : { },
+					messages : { },
+					errorPlacement : function(error, element) {
+						error.insertAfter(element.parent().find('label:first'));
+					},
+					submitHandler: function(form) {
+						e.preventDefault();
+						$.ajax({
+							type : form.method,
+							url : form.action,
+				        	data : $.each($(form).serializeArray(), function(i, f) {
+								if (f.name == "password" || f.name == "password_confirm")
+					        		f.value = $.md5(f.value);
+							}),
+							dataType : "json",
+							async : false,
+							success : function(data) {
+								$.nmTop().close();
+							},
+							error : function(XMLHttpRequest, textStatus, errorThrown) {
+								alert("错误！");
+							}
+						});
+					}
+				});
 
-	$("a.nyroModal", panel).click(function(e) {
-		e.preventDefault();
-		$.nmManual(jnebula.rebase($(this).attr("href")), {
-			sizes : {
-				initW : 1200,
-				initH : 1200,
-				w : 1200,
-				h : 1200,
-				minW : 500,
-				minH : 700
-			},
-			callbacks: {
-				beforeShowCont: function() {
-					var validator = $("form").validate({
-						onkeyup : false,
-						rules : { },
-						messages : { },
-						errorPlacement : function(error, element) {
-							error.insertAfter(element.parent().find('label:first'));
-						},
-						submitHandler: function(form) {
-							e.preventDefault();
-							$.ajax({
-								type : form.method,
-								url : form.action,
-					        	data : $.each($(form).serializeArray(), function(i, f) {
-									if (f.name == "password" || f.name == "password_confirm")
-						        		f.value = $.md5(f.value);
-								}),
-								dataType : "json",
-								async : false,
-								success : function(data) {
-									$.nmTop().close();
-								},
-								error : function(XMLHttpRequest, textStatus, errorThrown) {
-									alert("错误！");
-								}
-							});
-						}
-					});
-					jnebula.validate($("form"));
-				}
+				$.each(callbacks, function(i, f) {
+					f($("form"));
+				});
+
 			}
-		});
-		
+		}
 	});
 };
 
