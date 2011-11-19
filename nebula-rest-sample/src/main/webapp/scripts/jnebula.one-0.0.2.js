@@ -77,15 +77,23 @@ jnebula.dataTables = function(el) {
 
 		var url = this.id;									// 取得数据请求的URL
 		var pkName = $("tbody td.primary", this).html();	// 取得主键的字段名
-		var updateUrl = jnebula.rebase("./html/" + url + "editable.html");
+		var updateUrl = jnebula.rebase("html/" + url + "editable.html");
 
 		$("tbody td", this).each(function(index) {
 			if ($(this).hasClass("actions")) {
 				columns[index] = {
 					"mDataProp" : "",
 					"sClass" : this.className,				// TODO 有问题，对于class “a b”,只能取得“a”
+					"bSortable" : false,
 					"fnRender" : function(obj) {
-						return '<a href="' + url + obj.aData[pkName] + '" class="nyroModal" rev="modal" onclick="javascript: jnebula.popUp(\'' + updateUrl + '\'); return false;">' + "Edit" + '</a>';
+						return '<a href="'
+								+ url
+								+ obj.aData[pkName]
+								+ '" class="nyroModal" rev="modal" onclick="javascript:jnebula.popUp(\''
+								+ updateUrl
+								+ '\'); return false;">'
+								+ "Edit"
+								+ '</a>';
 					}
 				};
 			} else {
@@ -101,6 +109,19 @@ jnebula.dataTables = function(el) {
 			aoColumns : columns,
 			sAjaxDataProp : ""
 		});
+	});
+};
+
+jnebula.jtemplates = function(url, el) {
+	$.ajax({
+		type : "GET",
+		url : url,
+		dataType : "json",
+		async : false,
+		success : function(data) {
+			el.setTemplate(el.html());
+			el.processTemplate(data);
+		}
 	});
 };
 
@@ -128,7 +149,7 @@ jnebula.nmManual = function(url, callbacks) {
 			minH : 700
 		},
 		callbacks: {
-			beforeShowCont: function() {
+			beforeShowCont: function(e) {
 				var validator = $("form").validate({
 					onkeyup : false,
 					rules : { },
@@ -156,11 +177,10 @@ jnebula.nmManual = function(url, callbacks) {
 						});
 					}
 				});
-
 				$.each(callbacks, function(i, f) {
 					f($("form"));
 				});
-
+				jnebula.jtemplates("http://localhost:8080/nebula-rest-sample/admin/user/admin/", $("form"));        
 			}
 		}
 	});
@@ -169,8 +189,8 @@ jnebula.nmManual = function(url, callbacks) {
 /*
  * 为给定表单添加校验行为。
  */
-jnebula.validate = function(form) {
-	$.each($(form).find("input, select, textarea").not(":submit, :button, :reset, :image, [disabled]"), function(i, f) {
+jnebula.validate = function(el) {
+	$.each($(el).find("input, select, textarea").not(":submit, :button, :reset, :image, [disabled]"), function(i, f) {
 
 		var jf = $(f);
 

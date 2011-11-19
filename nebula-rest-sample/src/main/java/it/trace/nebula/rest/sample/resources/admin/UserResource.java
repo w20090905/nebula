@@ -24,7 +24,7 @@ public class UserResource {
         user.setFirstName("admin");
         user.setLastName("admin");
         user.setSex('男');
-        user.setMail("admin@g.cn");
+        user.setEmail("admin@g.cn");
         users.put(user.getUsername(), user);
 
         user = new User();
@@ -33,7 +33,7 @@ public class UserResource {
         user.setFirstName("admin");
         user.setLastName("admin");
         user.setSex('男');
-        user.setMail("admin@g.cn");
+        user.setEmail("admin@g.cn");
         users.put(user.getUsername(), user);
 
         user = new User();
@@ -42,7 +42,7 @@ public class UserResource {
         user.setFirstName("admin");
         user.setLastName("admin");
         user.setSex('男');
-        user.setMail("admin@g.cn");
+        user.setEmail("admin@g.cn");
         users.put(user.getUsername(), user);
 
         user = new User();
@@ -51,7 +51,7 @@ public class UserResource {
         user.setFirstName("admin");
         user.setLastName("admin");
         user.setSex('男');
-        user.setMail("admin@g.cn");
+        user.setEmail("admin@g.cn");
         users.put(user.getUsername(), user);
 
     }
@@ -126,10 +126,10 @@ public class UserResource {
                     User user = new User();
                     user.setUsername(context.getParameter("username", String.class));
                     user.setPassword(context.getParameter("password", String.class));
-                    user.setFirstName(context.getParameter("firstname", String.class));
-                    user.setLastName(context.getParameter("lastname", String.class));
+                    user.setFirstName(context.getParameter("firstName", String.class));
+                    user.setLastName(context.getParameter("lastName", String.class));
                     user.setSex(context.getParameter("sex", String.class).charAt(0));
-                    user.setMail(context.getParameter("email", String.class));
+                    user.setEmail(context.getParameter("email", String.class));
                     return new Object[] { user };
                 } else if ("update".equals(method.getName())) {
                     User user = new User();
@@ -137,15 +137,15 @@ public class UserResource {
 
                     System.out.println("+++++++++++++++++++++++++++++++++++++++++++++");
                     System.out.println(context.getParameter("password", String.class));
-                    System.out.println(context.getParameter("firstname", String.class));
-                    System.out.println(context.getParameter("lastname", String.class));
+                    System.out.println(context.getParameter("firstName", String.class));
+                    System.out.println(context.getParameter("lastName", String.class));
                     System.out.println("---------------------------------------------");
 
                     user.setPassword(context.getParameter("password", String.class));
-                    user.setFirstName(context.getParameter("firstname", String.class));
-                    user.setLastName(context.getParameter("lastname", String.class));
+                    user.setFirstName(context.getParameter("firstName", String.class));
+                    user.setLastName(context.getParameter("lastName", String.class));
                     user.setSex(context.getParameter("sex", String.class).charAt(0));
-                    user.setMail(context.getParameter("email", String.class));
+                    user.setEmail(context.getParameter("email", String.class));
                     return new Object[] { user };
                 }
 
