@@ -97,7 +97,7 @@
 							return true;
 						}
 						
-						if ($(e).is(":radio")) {
+						if ($(e).is(":radio,:checkbox")) {
 							e.checked = e.value == v ? true : false;
 						} else {
 							e.value = v;
@@ -135,7 +135,11 @@
 						async : false,
 						success : function(data) {
 							$.nmTop().close();
-							oTable.fnDraw();
+							// ++++++++++++++++++++++++++++++++++++++++++++
+							$("table.toplevel").each(function(i, e) {
+								$(e).data("oTable").fnDraw();
+							});
+							//---------------------------------------------
 							return false;
 						},
 						error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -181,11 +185,17 @@
 					}
 				});
 
-				$(this).dataTable({
+				var oTable = $(this).dataTable({
 					sAjaxSource : $$.rebase(url),
 					aoColumns : columns,
-					sAjaxDataProp : ""
+					sAjaxDataProp : function(data) {
+						return data;
+					},
+					bServerSide : true
 				});
+				
+				$(this).data("oTable", oTable);
+				
 			});
 		},
 		
