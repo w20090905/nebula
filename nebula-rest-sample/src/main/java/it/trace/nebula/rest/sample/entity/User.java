@@ -12,7 +12,7 @@ public class User {
 
     private Character sex = null;
 
-    private String mail = null;
+    private String email = null;
 
     public User() {
 
@@ -63,12 +63,12 @@ public class User {
         this.sex = sex;
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
