@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<form method="post" action="crm/company/">
+	<fieldset>
+		<legend>编辑公司信息</legend>
+		<p>
+			<label class="required" for="name">公司名称:</label><br/>
+			<input title="公司名称" type="text" id="name" class="full" name="name" required="required" />
+			<small>e.g. ui.templates</small>
+		</p>
+		<p>
+			<label class="required" for="tel">电话:</label><br/>
+			<input title="电话" type="text" id="tel" class="full" name="tel" required="required" />
+		</p>
+		<p>
+			<label class="required" for="address">地址:</label><br/>
+			<input title="地址" type="text" id="address" class="full" name="address" required="required" />
+		</p>
+		<p>
+			<label class="required" for="description">备注:</label><br/>
+			<textarea id="description" class="full" name="description"></textarea>
+		</p>
+		<p class="box">
+			<input type="submit" class="btn btn-green big" value="提交"/>&nbsp;&nbsp;或&nbsp;&nbsp;<input type="button" class="btn big nyroModalClose" value="取消"/>
+		</p>
+	</fieldset>
+</form>
