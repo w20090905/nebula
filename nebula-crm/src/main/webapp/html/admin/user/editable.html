@@ -1,19 +1,27 @@
 
-<form id="sampleform" method="put" action="admin/user/">
+<form id="sampleform" method="put" action="administry/user/">
 	<fieldset>
-		<legend>变更新用户</legend>
+		<legend>添加新用户</legend>
 		<p>
 			<label class="required" for="username">用户名:</label><br/>
-			<input title="用户名" type="text" id="username" class="full" name="username" required="required" minlength="3" disabled="disabled"/>
+			<input title="用户名" type="text" id="username" class="full" name="username" required="required" minlength="3" exists="administry/user/!userExist/"/>
 			<small>e.g. ui.templates</small>
 		</p>
 		<p>
-			<label class="required" for="firstName">姓:</label><br/>
-			<input title="姓" type="text" id="firstName" class="full" name="firstName" required="required"/>
+			<label class="required" for="password">密码:</label><br/>
+			<input title="密码" type="password" id="password" class="full" name="password" required="required" minlength="5"/>
 		</p>
 		<p>
-			<label class="required" for="lastName">名:</label><br/>
-			<input title="名" type="text" id="lastName" class="full" name="lastName" required="required"/>
+			<label class="required" for="password_confirm">确认密码:</label><br/>
+			<input title="确认密码" type="password" id="password_confirm" class="full" name="password_confirm" required="required" minlength="5" equalto="#password"/>
+		</p>
+		<p>
+			<label class="required" for="firstname">姓:</label><br/>
+			<input title="姓" type="text" id="firstname" class="full" name="firstname" required="required"/>
+		</p>
+		<p>
+			<label class="required" for="lastname">名:</label><br/>
+			<input title="名" type="text" id="lastname" class="full" name="lastname" required="required"/>
 		</p>
 		<p>
 			<label class="required">性别:</label><br/>
@@ -24,7 +32,7 @@
 		</p>
 		<p>
 			<label class="required" for="email">电子邮箱:</label><br/>
-			<input title="电子邮箱" type="email" id="email" name="email" class="full" name="email" required="required"/>
+			<input title="电子邮箱" type="email" id="email" class="full" name="email" required="required"/>
 		</p>
 		<p class="box">
 			<input type="submit" class="btn btn-green big" value="提交"/>&nbsp;&nbsp;或&nbsp;&nbsp;<input type="button" class="btn big nyroModalClose" value="取消"/>

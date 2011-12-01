@@ -135,13 +135,7 @@ public class UserResource {
                     User user = new User();
                     user.setUsername(context.getId());
 
-                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++");
-                    System.out.println(context.getParameter("password", String.class));
-                    System.out.println(context.getParameter("firstName", String.class));
-                    System.out.println(context.getParameter("lastName", String.class));
-                    System.out.println("---------------------------------------------");
-
-                    user.setPassword(context.getParameter("password", String.class));
+                    //                    user.setPassword(context.getParameter("password", String.class));
                     user.setFirstName(context.getParameter("firstName", String.class));
                     user.setLastName(context.getParameter("lastName", String.class));
                     user.setSex(context.getParameter("sex", String.class).charAt(0));
