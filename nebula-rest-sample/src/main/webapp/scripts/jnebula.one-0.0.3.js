@@ -5,7 +5,7 @@
 	window.jnebula = window.$$ = jnebula;
 })();
 
-(function($, $$) {
+(function($, $$, document) {
 	
 	$.extend($$, {
 		
@@ -156,42 +156,73 @@
 				
 				var columns = new Array();
 
-				var url = this.id;									// 取得数据请求的URL
-				var pkName = $("tbody td.primary", this).html();	// 取得主键的字段名
-				var updateUrl = $$.rebase("html/" + url + "editable.html");
-
-				$("tbody td", this).each(function(index) {
+				var index = 0;
+				$("tbody td", this).each(function() {
 					if ($(this).hasClass("actions")) {
+						var h = this.innerHTML;
 						columns[index] = {
-							"mDataProp" : "",
-							"sClass" : this.className,				// TODO 有问题，对于class “a b”,只能取得“a”
-							"bSortable" : false,
-							"fnRender" : function(obj) {
-								var ownUrl = url + obj.aData[pkName] + "/";
-								return '<a href="'
-										+ ownUrl
-										+ '" class="nyroModal" rev="modal" onclick="javascript:$$.popUp(\''
-										+ updateUrl
-										+ '\',{url:\'' + ownUrl + '\'}); return false;">'
-										+ "Edit"
-										+ '</a>';
+							sClass : $(this).attr("class"),
+							mDataProp : null,
+							bSortable : false,
+							fnRender : function(obj) {
+								return h;
 							}
 						};
 					} else {
-						columns[index] = {
-							"mDataProp" : this.innerHTML,
-							"sClass" : this.className				// TODO 有问题，对于class “a b”,只能取得“a”
+						columns[index++] = {
+							sClass : $(this).attr("class"),
+							mDataProp : this.innerHTML
 						};
 					}
 				});
 
+				var url = this.id;									// 取得数据请求的URL
+				var pkName = $("tbody td.primary", this).html();	// 取得主键的字段名
+				
 				var oTable = $(this).dataTable({
 					sAjaxSource : $$.rebase(url),
 					aoColumns : columns,
+					bServerSide : true,
 					sAjaxDataProp : function(data) {
 						return data;
 					},
-					bServerSide : true
+					fnRowCallback : function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+						var ownUrl = url + aData[pkName] + "/";
+						$("td.actions", nRow).each(function() {
+							var content = this.innerHTML;
+							this.innerHTML = "";
+							if (/.*edit.*/.test(content)) {
+								var updateUrl = $$.rebase("html/" + url + "editable.html");
+								var a = $(document.createElement("a"));
+								a.attr("href", ownUrl);
+								a.addClass("nyroModal");
+								a.attr("rev", "modal");
+								a.html("<img src='img/page_save.png'/>");
+								a.click(function() {
+									$$.popUp(updateUrl, { url : ownUrl });
+									return false;
+								});
+								$(this).append(a);
+							}
+					
+							if (/.*delete.*/.test(content)) {
+								var removeUrl = $$.rebase("html/" + url + "removable.html");
+								var a = $(document.createElement("a"));
+								a.attr("href", ownUrl);
+								a.addClass("nyroModal");
+								a.attr("rev", "modal");
+								a.html("<img src='img/delete.png'/>");
+								a.click(function() {
+									$$.popUp(removeUrl, { url : ownUrl });
+									return false;
+								});
+								$(this).append(a);
+							}
+
+						});
+						
+						return nRow;
+					}
 				});
 				
 				$(this).data("oTable", oTable);
@@ -281,4 +312,4 @@
 		
 	});
 
-})(jQuery, jnebula);
+})(jQuery, jnebula, document);
