@@ -1,4 +1,4 @@
-﻿package compiler;
+﻿package nebula.compiler;
 
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -23,30 +23,30 @@ public class Test {
 		};
 
 		for (String s : testStr) {
-			System.out.println("Input expr: " + s);
+			System.out.println("Input Nebula: " + s);
 			run(s);
 			System.out.println();
 		}
 
 	}
 	
-	public static void run(String expr) throws Exception {
-		ANTLRStringStream in = new ANTLRStringStream(expr);
+	public static void run(String Nebula) throws Exception {
+		ANTLRStringStream in = new ANTLRStringStream(Nebula);
         //词法分析器
-		ExprLexer lexer = new ExprLexer(in);
+		NebulaLexer lexer = new NebulaLexer(in);
 
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
         //语法分析器 
-		ExprParser parser = new ExprParser(tokens);
+		NebulaParser parser = new NebulaParser(tokens);
 
 
-		ExprParser.prog_return ret = parser.prog();
+		NebulaParser.prog_return ret = parser.prog();
 		CommonTree t = (CommonTree)ret.getTree();
 		
 		CommonTreeNodeStream nodes = new CommonTreeNodeStream(t);
 		nodes.setTokenStream(tokens);		
         //编译器
-		ExprTree c_walker = new ExprTree(nodes);
+		NebulaTree c_walker = new NebulaTree(nodes);
 		c_walker.prog();
 	}
 }

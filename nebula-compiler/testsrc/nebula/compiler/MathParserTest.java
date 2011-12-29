@@ -1,8 +1,10 @@
-package compiler;
+package nebula.compiler;
 
 import java.io.IOException;
 
 import junit.framework.TestCase;
+
+import nebula.compiler.Processor;
 
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.CommonTree;
@@ -14,7 +16,6 @@ import org.antlr.runtime.tree.CommonTree;
  */
 public class MathParserTest extends TestCase {
 
-	private static final String SCRIPT = "type Person{\n name; \n age;\n}\n\n";
 
 	private Processor processor = new Processor();
 
@@ -22,9 +23,22 @@ public class MathParserTest extends TestCase {
 	 * Unit test for AST generation.
 	 */
 	public void testGetAST() throws IOException, RecognitionException {
+		String SCRIPT = "type Person{\n name; \n age;\n}\n\n";
 		CommonTree ast = processor.getAST(SCRIPT);
 		String actual = ast.toStringTree();
-		String expected = "(PROG (TYPE Person (FIELD name) (FIELD age)))";
+		String expected = "(PROG (type Person (FIELD name) (FIELD age)))";
+		System.out.println("expected = \"" + expected + '"');
+		System.out.println("  actual = \"" + actual + '"');
+		assertEquals("correct AST", expected, actual);
+	}
+	/**
+	 * Unit test for AST generation.
+	 */
+	public void testGetAST_ad() throws IOException, RecognitionException {
+		String SCRIPT = "type Person{\n name!; \n age;roles*;\n}\n\n";
+		CommonTree ast = processor.getAST(SCRIPT);
+		String actual = ast.toStringTree();
+		String expected = "(PROG (type Person (FIELD name !) (FIELD age) (FIELD roles *)))";
 		System.out.println("expected = \"" + expected + '"');
 		System.out.println("  actual = \"" + actual + '"');
 		assertEquals("correct AST", expected, actual);
