@@ -7,16 +7,15 @@ options {
 
 @header {package nebula.compiler;}
 
-typeBody : field+;
-
-typeDef scope { String name;} :
-	^(TYPE n=NAME{$typeDef::name = $n.text; System.out.println("type: " + n);} typeBody);
-field : 
-	^(FIELD n=NAME){System.out.println("field: " + n + " in Type " + $typeDef::name);};
+typeDefinition scope { String name;} :
+	^(TYPE n=NAME{$typeDefinition::name = $n.text; System.out.println("type: " + n);} fieldDefinition*);
+	
+fieldDefinition : 
+	^(FIELD n=NAME IMPORTANCE? CARDINALITY?){System.out.println("field: " + n + " in Type " + $typeDefinition::name);};
 
 prog : 
-	^(PROG typeDef) {System.out.println("RET");}
-  	|^(PROG stat ) {System.out.println("RET");};
+	^(PROG typeDefinition*) {System.out.println("RET");}
+  	|^(PROG stat* ) {System.out.println("RET");};
 
 
 stat 
@@ -24,9 +23,9 @@ stat
 ;
 
 expr 
-:     ^('+' e1=expr e2=expr) {System.out.println("ADD");}
+:     	  ^('+' e1=expr e2=expr) {System.out.println("ADD");}
 	| ^('-' e1=expr e2=expr) {System.out.println("SUB");}
-    | ^('*' e1=expr e2=expr) {System.out.println("MUL");}
+	| ^('*' e1=expr e2=expr) {System.out.println("MUL");}
 	| ^('/' e1=expr e2=expr) {System.out.println("DIV");}
 	| a=atom  
 ;

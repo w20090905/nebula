@@ -12,14 +12,12 @@ tokens{
 @header {package nebula.compiler;}
 @lexer::header{package nebula.compiler;}
 
-typeDef : TYPE NAME '{' NEWLINE? typeBody '}' terminator  -> ^(TYPE NAME typeBody);
+typeDefinition : TYPE NAME '{' NEWLINE? fieldDefinition* '}' terminator  -> ^(TYPE NAME fieldDefinition*);
 
-typeBody : field* ;
-
-field : NAME importance? multiple? ';' NEWLINE? -> ^(FIELD NAME importance? multiple?);
+fieldDefinition : NAME IMPORTANCE? CARDINALITY? ';' NEWLINE? -> ^(FIELD NAME IMPORTANCE? CARDINALITY?);
 
 //Sample 
-prog : typeDef ->  ^(PROG typeDef)
+prog : typeDefinition* ->  ^(PROG typeDefinition*)
 	| stat -> ^(PROG stat);
 
 fragment stat : expr EOF  -> ^(STAT expr);
@@ -29,9 +27,6 @@ atom :   '(' expr ')' -> expr
 	   | NUMBER -> ^(NUM NUMBER)
 	   | NAME  -> ^(VAR NAME)	
 ;
-
-importance : IMPORTANCE;
-multiple : MULTIPLE;
 
 terminator: NEWLINE | EOF;
 
@@ -57,7 +52,7 @@ SIGN: '+' | '-';
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 TYPE : 'type';
 IMPORTANCE : PIVOTAL | IMPORTANT | UNIMPORTANT;
-MULTIPLE : ONE_OR_MORE | ANY | OPTIONALLY;
+CARDINALITY : ONE_OR_MORE | ANY | OPTIONALLY;
 
 fragment PIVOTAL     : '!';
 fragment IMPORTANT   : '#';
