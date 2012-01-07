@@ -153,45 +153,24 @@
 		renderTable : function(el) {
 
 			$("table.toplevel", el).each(function() {
-				
-				var columns = new Array();
-
-				var index = 0;
-				$("tbody td", this).each(function() {
-					if ($(this).hasClass("actions")) {
-						var h = this.innerHTML;
-						columns[index] = {
-							sClass : $(this).attr("class"),
-							mDataProp : null,
-							bSortable : false,
-							fnRender : function(obj) {
-								return h;
-							}
-						};
-					} else {
-						columns[index++] = {
-							sClass : $(this).attr("class"),
-							mDataProp : this.innerHTML
-						};
-					}
-				});
 
 				var url = this.id;									// 取得数据请求的URL
 				var pkName = $("tbody td.primary", this).html();	// 取得主键的字段名
 				
-				var oTable = $(this).dataTable({
-					sAjaxSource : $$.rebase(url),
-					aoColumns : columns,
-					bServerSide : true,
-					sAjaxDataProp : function(data) {
-						return data;
-					},
-					fnRowCallback : function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-						var ownUrl = url + aData[pkName] + "/";
-						$("td.actions", nRow).each(function() {
-							var content = this.innerHTML;
-							this.innerHTML = "";
-							if (/.*edit.*/.test(content)) {
+				var columns = new Array();
+				var callbacks = new Array();
+
+				$("tbody td", this).each(function(index) {
+					if ($(this).hasClass("actions")) {
+						columns[index] = {
+							sClass : $(this).attr("class"),
+							mDataProp : null,
+							bSortable : false
+						};
+						if (/.*edit.*/.test($(this).html())) {
+							callbacks[callbacks.length] = function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+								var td = $("td:eq(" + index + ")", nRow);
+								var ownUrl = url + aData[pkName] + "/";
 								var updateUrl = $$.rebase("html/" + url + "editable.html");
 								var a = $(document.createElement("a"));
 								a.attr("href", ownUrl);
@@ -202,10 +181,13 @@
 									$$.popUp(updateUrl, { url : ownUrl });
 									return false;
 								});
-								$(this).append(a);
-							}
-					
-							if (/.*delete.*/.test(content)) {
+								td.append(a);
+							};
+						}
+						if (/.*delete.*/.test($(this).html())) {
+							callbacks[callbacks.length] = function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+								var td = $("td:eq(" + index + ")", nRow);
+								var ownUrl = url + aData[pkName] + "/";
 								var removeUrl = $$.rebase("html/" + url + "removable.html");
 								var a = $(document.createElement("a"));
 								a.attr("href", ownUrl);
@@ -216,18 +198,65 @@
 									$$.popUp(removeUrl, { url : ownUrl });
 									return false;
 								});
-								$(this).append(a);
-							}
-
+								td.append(a);
+							};
+						}
+					} else if ($(this).is("td[refer]")) {
+						columns[index] = {
+							sClass : $(this).attr("class"),
+							mDataProp : this.innerHTML
+						};
+						var refer = $(this).attr("refer");
+						var referby = $(this).attr("referby");
+						callbacks[callbacks.length] = function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+							var td = $("td:eq(" + index + ")", nRow);
+							var ownUrl = refer + $$._getData(aData, referby) + "" + "/";
+							var referUrl = $$.rebase("html/" + refer + "editable.html");
+							var a = $(document.createElement("a"));
+							a.attr("href", ownUrl);
+							a.html(td.html());
+							a.click(function() {
+								$$.popUp(referUrl, { url : ownUrl });
+								return false;
+							});
+							td.empty();
+							td.append(a);
+						};
+					} else {
+						columns[index] = {
+							sClass : $(this).attr("class"),
+							mDataProp : this.innerHTML
+						};
+					}
+				});
+				
+				var oTable = $(this).dataTable({
+					sAjaxSource : $$.rebase(url),
+					aoColumns : columns,
+					bServerSide : true,
+					sAjaxDataProp : function(data) {
+						return data;
+					},
+					fnRowCallback : function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+						$.each(callbacks, function(i, f) {
+							f(nRow, aData, iDisplayIndex, iDisplayIndexFull);
 						});
-						
 						return nRow;
 					}
 				});
 				
 				$(this).data("oTable", oTable);
-				
+
 			});
+		},
+		
+		_getData : function(data, name) {
+			var result = data;
+			var ns = name.split(".");
+			for (var i = 0; i < ns.length; i++) {
+				result = result[ns[i]];
+			}
+			return result;
 		},
 		
 		renderValidator : function(el) {

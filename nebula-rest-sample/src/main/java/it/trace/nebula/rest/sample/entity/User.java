@@ -3,16 +3,13 @@ package it.trace.nebula.rest.sample.entity;
 public class User {
 
     private String username = null;
-
     private String password = null;
-
     private String firstName = null;
-
     private String lastName = null;
-
     private Character sex = null;
-
     private String email = null;
+
+    private Book book = null;
 
     public User() {
 
@@ -73,6 +70,14 @@ public class User {
 
     public String getName() {
         return firstName + " " + lastName;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 
 }

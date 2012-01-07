@@ -2,6 +2,7 @@ package it.trace.nebula.rest.sample.resources.admin;
 
 import it.trace.nebula.rest.binder.Context;
 import it.trace.nebula.rest.binder.DataBinder;
+import it.trace.nebula.rest.sample.entity.Book;
 import it.trace.nebula.rest.sample.entity.User;
 
 import java.lang.reflect.Method;
@@ -17,6 +18,7 @@ public class UserResource {
     static {
 
         User user;
+        Book book;
 
         user = new User();
         user.setUsername("admin");
@@ -26,6 +28,14 @@ public class UserResource {
         user.setSex('男');
         user.setEmail("admin@g.cn");
         users.put(user.getUsername(), user);
+        book = new Book();
+        book.setId(1);
+        book.setName("Think in Java");
+        book.setDescription("讲JAVA的");
+        book.setType(1);
+        book.setPublisher("上海教育出版社");
+        book.setPrice(66.6F);
+        user.setBook(book);
 
         user = new User();
         user.setUsername("user");
@@ -35,6 +45,14 @@ public class UserResource {
         user.setSex('男');
         user.setEmail("admin@g.cn");
         users.put(user.getUsername(), user);
+        book = new Book();
+        book.setId(2);
+        book.setName("Think in C++");
+        book.setDescription("讲C++的");
+        book.setType(1);
+        book.setPublisher("上海外文出版社");
+        book.setPrice(55.5F);
+        user.setBook(book);
 
         user = new User();
         user.setUsername("tom");
@@ -44,6 +62,14 @@ public class UserResource {
         user.setSex('男');
         user.setEmail("admin@g.cn");
         users.put(user.getUsername(), user);
+        book = new Book();
+        book.setId(3);
+        book.setName("时尚快照");
+        book.setDescription("讲时尚的");
+        book.setType(2);
+        book.setPublisher("上海文艺出版社");
+        book.setPrice(44.4F);
+        user.setBook(book);
 
         user = new User();
         user.setUsername("cat");
@@ -53,6 +79,14 @@ public class UserResource {
         user.setSex('男');
         user.setEmail("admin@g.cn");
         users.put(user.getUsername(), user);
+        book = new Book();
+        book.setId(4);
+        book.setName("中国地图");
+        book.setDescription("讲地图的");
+        book.setType(3);
+        book.setPublisher("上海地理出版社");
+        book.setPrice(33.3F);
+        user.setBook(book);
 
     }
 

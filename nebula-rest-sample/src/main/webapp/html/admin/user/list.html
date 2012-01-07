@@ -8,15 +8,18 @@
 			<th>姓名</th>
 			<th>性别</th>
 			<th>E-Mail</th>
+			<th>书名</th>
 			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td class="primary" toOne="">username</td>
+			<!-- <td refer="company" referby="id">companyName</td> -->
+			<td class="primary">username</td>
 			<td>name</td>
 			<td>sex</td>
 			<td>email</td>
+			<td refer="admin/book/" referby="book.id">book.name</td>
 			<td class="actions">edit,delete</td>
 		</tr>	
 	</tbody>
@@ -26,6 +29,7 @@
 			<th>姓名</th>
 			<th>性别</th>
 			<th>E-Mail</th>
+			<th>书名</th>
 			<th></th>
 		</tr>
 	</tfoot>

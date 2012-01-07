@@ -1,0 +1,111 @@
+
+<form id="sampleform" method="put" action="admin/user/">
+	<fieldset>
+		<legend>变更新用户</legend>
+		<p>
+			<label class="required" for="name">名称:</label><br/>
+			<input title="名称" type="text" id="name" class="full" name="name" required="required" minlength="3" disabled="disabled"/>
+			<small>e.g. ui.templates</small>
+		</p>
+		<p>
+			<label class="required" for="description">说明:</label><br/>
+			<input title="说明" type="text" id="description" class="full" name="description" required="required"/>
+		</p>
+		<p>
+			<label class="required" for="type">类型:</label><br/>
+			<input title="类型" type="text" id="type" class="full" name="type" required="required"/>
+		</p>
+		<p>
+			<label class="required" for="publisher">出版社:</label><br/>
+			<input title="出版社" type="text" id="publisher" class="full" name="publisher" required="required"/>
+		</p>
+		<p>
+			<label class="required" for="price">价格:</label><br/>
+			<input title="价格" type="text" id="price" class="full" name="price" required="required"/>
+		</p>
+		<p class="box">
+			<input type="submit" class="btn btn-green big" value="提交"/>&nbsp;&nbsp;或&nbsp;&nbsp;<input type="button" class="btn big nyroModalClose" value="取消"/>
+		</p>
+	</fieldset>
+</form>
+
+<!--
+Administry.setup();
+
+/*
+jQuery.validator.addMethod("userExist", function(value, element) {
+	$.getJSON("/nebula-rest-sample/administry/user/!userExist/", { username: value }, function(json) {
+		alert(json);
+		return !json;
+	});
+}, "用户名已存在!");
+*/
+
+// validate form on keyup and submit
+var validator = $("#sampleform").validate({
+	onkeyup: false,
+	rules: {
+		password: {
+			required: true,
+			minlength: 5
+		},
+		password_confirm: {
+			required: true,
+			minlength: 5,
+			equalTo: "#password"
+		},
+		firstname: "required",
+		lastname: "required",
+		sex: "required",
+		email: {
+			required: true,
+			email: true
+		}
+	},
+	messages: {
+		password: {
+			required: "密码不能为空！",
+			minlength: jQuery.format("密码不能少于 {0} 位")
+		},
+		password_confirm: {
+			required: "确认密码不能为空！",
+			minlength: jQuery.format("确认密码不能少于 {0} 位"),
+			equalTo: "确认密码与密码不一致！"
+		},
+		firstname: "姓不能为空！",
+		lastname: "名不能为空！",
+		sex: "性别不能为空！",
+		email: {
+			required: "请输入一个有效的邮箱地址！",
+			email: "输入一个有效的邮箱地址！"
+		}
+	},
+	// the errorPlacement has to take the layout into account
+	errorPlacement: function(error, element) {
+		error.insertAfter(element.parent().find('label:first'));
+	},
+	// set new class to error-labels to indicate valid fields
+	success: function(label) {
+		// set &nbsp; as text for IE
+		label.html("&nbsp;").addClass("ok");
+	},
+	// specifying a submitHandler prevents the default submit, good for the demo
+	submitHandler: function(form) {
+		$.ajax({
+			type : "PUT",
+			url : "/nebula-rest-sample/administry/user/" + $("#username").val() + "/",
+			data : $(form).serialize(),
+			dataType : "json",
+			async : true,
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			success : function(data) {
+				$.nmTop().close();
+				oTable.fnDraw();
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("更新时发生错误！");
+			}
+		});
+	}
+});
+//-->
