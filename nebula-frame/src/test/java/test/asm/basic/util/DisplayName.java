@@ -1,7 +1,7 @@
 /**
  * 
  */
-package test.asm.basic.type;
+package test.asm.basic.util;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.TYPE;

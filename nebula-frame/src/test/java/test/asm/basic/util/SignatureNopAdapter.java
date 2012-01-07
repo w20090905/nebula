@@ -1,4 +1,4 @@
-package test.asm.basic.type;
+package test.asm.basic.util;
 
 import org.objectweb.asm.signature.SignatureVisitor;
 

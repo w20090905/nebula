@@ -3,6 +3,9 @@ package test.asm.basic.type;
 import java.util.ArrayList;
 import java.util.List;
 
+import test.asm.basic.util.A;
+import test.asm.basic.util.DisplayName;
+
 @DisplayName("Type")
 public class Type {
 

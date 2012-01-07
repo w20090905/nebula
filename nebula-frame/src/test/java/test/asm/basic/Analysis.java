@@ -50,6 +50,7 @@ import org.objectweb.asm.util.TraceMethodVisitor;
 /**
  * @author Eric Bruneton
  */
+@SuppressWarnings("unchecked")
 public class Analysis implements Opcodes {
 
     public static void main(final String[] args) throws Exception {
@@ -57,7 +58,7 @@ public class Analysis implements Opcodes {
         ClassNode cn = new ClassNode();
         cr.accept(cn, ClassReader.SKIP_DEBUG);
 
-        List methods = cn.methods;
+        List<Object> methods = (List<Object>)cn.methods;
         for (int i = 0; i < methods.size(); ++i) {
             MethodNode method = (MethodNode) methods.get(i);
             if (method.instructions.size() > 0) {
@@ -114,7 +115,7 @@ public class Analysis implements Opcodes {
         // for each xLOAD instruction, we find the xSTORE instructions that can
         // produce the value loaded by this instruction, and we put them in
         // 'stores'
-        Set<?> stores = new HashSet<Object>();
+        Set<Object> stores = new HashSet<Object>();
         for (int i = 0; i < m.instructions.size(); ++i) {
             Object insn = m.instructions.get(i);
             int opcode = ((AbstractInsnNode) insn).getOpcode();
