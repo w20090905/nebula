@@ -65,6 +65,7 @@
 						
 						var el = e.elts.cont[0];
 
+						$$.renderTable(el);
 						$$.renderTemplate(el, args);
 						$$.renderValidator(el);
 						$$.renderSubmit(el);
@@ -222,6 +223,33 @@
 							td.empty();
 							td.append(a);
 						};
+					} else if ($(this).is("td[refers]")) {
+						columns[index] = {
+							sClass : $(this).attr("class"),
+							mDataProp : null,
+							bSortable : false
+						};
+						var refers = $(this).attr("refers");
+						var referby = $(this).attr("referby");
+						var actionUrl = refers;
+						if (refers.indexOf("!") > 0) {
+							actionUrl = refers.substring(0, refers.indexOf("!")) + "/";
+						}
+						var method = refers.substring(refers.indexOf("!"));
+						callbacks[callbacks.length] = function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+							var td = $("td:eq(" + index + ")", nRow);
+							var ownUrl = actionUrl + $$._getData(aData, referby)  + method;
+							var referUrl = $$.rebase("html/" + actionUrl + "list.html");
+							var a = $(document.createElement("a"));
+							a.attr("href", ownUrl);
+							a.html("+");
+							a.click(function() {
+								$$.popUp(referUrl, { url : ownUrl });
+								return false;
+							});
+							td.empty();
+							td.append(a);
+						};
 					} else {
 						columns[index] = {
 							sClass : $(this).attr("class"),
@@ -269,6 +297,9 @@
 					error.insertAfter(element.parent().find('label:first'));
 				}
 			});
+			
+			if (validator == undefined)
+				return;
 			
 			validator.onsubmit = false;
 			

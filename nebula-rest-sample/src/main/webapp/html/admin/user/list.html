@@ -9,6 +9,7 @@
 			<th>性别</th>
 			<th>E-Mail</th>
 			<th>书名</th>
+			<th>多书</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -20,6 +21,7 @@
 			<td>sex</td>
 			<td>email</td>
 			<td refer="admin/book/" referby="book.id">book.name</td>
+			<td refers="admin/book!getByUser/" referby="username">link</td>
 			<td class="actions">edit,delete</td>
 		</tr>	
 	</tbody>
@@ -30,6 +32,7 @@
 			<th>性别</th>
 			<th>E-Mail</th>
 			<th>书名</th>
+			<th>多书</th>
 			<th></th>
 		</tr>
 	</tfoot>
