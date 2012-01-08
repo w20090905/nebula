@@ -23,7 +23,7 @@ public class Processor {
 		}
 	}
 
-	private void processFile(String filePath) throws IOException, RecognitionException {
+	public void processFile(String filePath) throws IOException, RecognitionException {
 		CommonTree ast = getAST(new FileReader(filePath));
 		// System.out.println(ast.toStringTree()); // for debugging
 		processAST(ast);

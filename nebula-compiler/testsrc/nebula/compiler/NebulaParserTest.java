@@ -14,7 +14,7 @@ import org.antlr.runtime.tree.CommonTree;
  * 
  * @author R. Mark Volkmann, Object Computing, Inc.
  */
-public class MathParserTest extends TestCase {
+public class NebulaParserTest extends TestCase {
 
 
 	private Processor processor = new Processor();
@@ -23,7 +23,7 @@ public class MathParserTest extends TestCase {
 	 * Unit test for AST generation.
 	 */
 	public void testGetAST() throws IOException, RecognitionException {
-		String SCRIPT = "type Person{\n name; \n age;\n}\n\n";
+		String SCRIPT = "type Person{\n name!; \n age[1,4];\n}\n\n";
 		CommonTree ast = processor.getAST(SCRIPT);
 		String actual = ast.toStringTree();
 		String expected = "(PROG (type Person (FIELD name) (FIELD age)))";

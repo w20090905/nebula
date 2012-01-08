@@ -16,7 +16,7 @@ import org.antlr.runtime.tree.CommonTree;
  * 
  * @author R. Mark Volkmann, Object Computing, Inc.
  */
-public class MathTreeTest extends TestCase {
+public class NebulaTreeTest extends TestCase {
 
 	private Processor processor = new Processor();
 
@@ -24,7 +24,7 @@ public class MathTreeTest extends TestCase {
 	 * Unit test for processAST.
 	 */
 	public void testProcessAST() throws IOException, RecognitionException {
-		String TYPE_DEFINE = "type Person{\n name; \n age;\n}\n\n";
+		String TYPE_DEFINE = "type Person{\n name!; \n age;\n}\n\n";
 		CommonTree ast = processor.getAST(TYPE_DEFINE);
 
 		System.out.println("ast = " + ast);

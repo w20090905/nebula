@@ -2,19 +2,21 @@ grammar Nebula;
 
 options{
 	output = AST;
+	k = 5;
 	ASTLabelType = CommonTree; 
 }
 
 tokens{
-	PROG; STAT; NUM; VAR; FIELD;
+	PROG; STAT; NUM; VAR; FIELD; RANGE;
 }
 
 @header {package nebula.compiler;}
 @lexer::header{package nebula.compiler;}
 
+
 typeDefinition : TYPE NAME '{' NEWLINE? fieldDefinition* '}' terminator  -> ^(TYPE NAME fieldDefinition*);
 
-fieldDefinition : NAME IMPORTANCE? CARDINALITY? ';' NEWLINE? -> ^(FIELD NAME IMPORTANCE? CARDINALITY?);
+fieldDefinition : NAME IMPORTANCE? cardinaltiry? BYREF? NAME? ';' NEWLINE? -> ^(FIELD NAME IMPORTANCE? cardinaltiry? NAME?);
 
 //Sample 
 prog : typeDefinition* ->  ^(PROG typeDefinition*)
@@ -24,11 +26,39 @@ fragment stat : expr EOF  -> ^(STAT expr);
 expr : multExpr (('+'|'-')^ multExpr )*;
 multExpr : atom (('*'|'/')^ atom )*;
 atom :   '(' expr ')' -> expr
-	   | NUMBER -> ^(NUM NUMBER)
+	   | INTEGER -> ^(NUM INTEGER)
 	   | NAME  -> ^(VAR NAME)	
 ;
 
 terminator: NEWLINE | EOF;
+
+cardinaltiry: '[]' -> ^(RANGE) |
+	'[' '..' INTEGER ']' -> ^(RANGE '..' INTEGER) |
+	'[' INTEGER ('..' INTEGER?)?  ']' -> ^(RANGE INTEGER '..'? INTEGER?);
+
+/*
+
+cardinaltiry : '[]' -> ^(RANGE)| 
+	'[' integer_range (',' integer_range)* ']' -> integer_range*;
+
+integer_range: '..' INTEGER -> ^(RANGE '..' INTEGER) |
+	INTEGER ('..' INTEGER?)? -> ^(RANGE INTEGER '..'? INTEGER?);
+
+    '[]' |                          // 0~*
+    '[..' INTEGER ']' |             // 0~m
+//    '[' INTEGER '..]'|// n~m
+    '[' INTEGER ('..' INTEGER?)  ']'|   // n~m
+    '[' INTEGER (','  INTEGER)+  ']' |
+    '[' INTEGER ']'                 // n
+    ;
+  */  
+/*CARDINALITY : ONE_OR_MORE | ANY | OPTIONALLY;
+//===============================================
+//===============================================
+//===============================================
+//===============================================
+//===============================================
+//===============================================*/
 
 /*
 APOSTROPHE: '\''; // for derivative
@@ -44,34 +74,32 @@ PRINT: 'print';
 RELATION: '<' | '<=' | '=' | '>=' | '>';
 RIGHT_PAREN: ')';
 */
-SIGN: '+' | '-';
+//SIGN: '+' | '-';
 
 //VARIABLES: 'variables'; // for list command
 
 
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 TYPE : 'type';
-IMPORTANCE : PIVOTAL | IMPORTANT | UNIMPORTANT;
-CARDINALITY : ONE_OR_MORE | ANY | OPTIONALLY;
+BYREF : 'byref';
+IMPORTANCE : KEY | IMPORTANT | REQUIRE | UNIMPORTANT;
 
-fragment PIVOTAL     : '!';
-fragment IMPORTANT   : '#';
-fragment UNIMPORTANT : '~';
+fragment KEY         : '!';
+fragment IMPORTANT   : '*';
+fragment REQUIRE     : '#';
+fragment UNIMPORTANT : '?';
 
-fragment ONE_OR_MORE : '+';  // 1 | n
-fragment ANY: '*';           // 0 | n
-fragment OPTIONALLY : '?';   // 0 | 1
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-NUMBER: INTEGER | FLOAT;
-fragment FLOAT: INTEGER '.' '0'..'9'+;
-fragment INTEGER: '0' | SIGN? '1'..'9' '0'..'9'*;
+//number: INTEGER | flort;
+//flort: INTEGER '.' '0'..'9'+;
+INTEGER: '0' | ('+'|'-')? '1'..'9' '0'..'9'*;
 NAME: LETTER (LETTER | DIGIT | '_')*;
 STRING_LITERAL: '"' NONCONTROL_CHAR* '"';
 
 // Note that NONCONTROL_CHAR does not include the double-quote character.
-fragment NONCONTROL_CHAR: LETTER | DIGIT | SPACE ;//| SYMBOL | SPACE;
+fragment NONCONTROL_CHAR: LETTER | DIGIT | SPACE; //SYMBOL
 fragment LETTER: LOWER | UPPER;
 fragment LOWER: 'a'..'z';
 fragment UPPER: 'A'..'Z';
@@ -80,7 +108,7 @@ fragment SPACE: ' ' | '\t';
 
 // Note that SYMBOL omits the double-quote character,
 // digits, uppercase letters and lowercase letters.
-fragment SYMBOL: '!' | '#'..'/' | ':'..'@' | '['..'`' | '{'..'~';
+//fragment SYMBOL: '!'; | '#'..'/' | ':'..'@' | '['..'`' | '{'..'~';
 
 // Windows uses \r\n. UNIX and Mac OS X use \n.
 // To use newlines as a terminator,
