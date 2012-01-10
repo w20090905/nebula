@@ -49,8 +49,8 @@ public class InputCharStreamTest extends TestCase {
 		assertEquals(4, input.getCharPositionInLine());
 		
 
-		text = input.substring(input.index()-1,input.index()-1);
-		assertEquals("4", text);
+		text = input.substring(input.index()-4,input.index()-1);
+		assertEquals("1234", text);
 		
 		input.consume();
 		assertEquals(5, input.index());
@@ -77,9 +77,13 @@ public class InputCharStreamTest extends TestCase {
 		assertEquals(3, input.getCharPositionInLine());
 		
 		System.out.println(input);
-		
+
 		text = input.substring(input.index()-2,input.index()-1);
 		assertEquals("67", text);
+
+		text = input.substring(input.index()-6,input.index()-1);
+		assertEquals("34\n567", text);
+		
 
 		input.consume();
 		assertEquals(9, input.index());
@@ -94,6 +98,7 @@ public class InputCharStreamTest extends TestCase {
 		assertEquals(5, input.getCharPositionInLine());
 		
 
+		System.out.println(input);
 		input.consume();
 		input.consume();
 		input.consume();
@@ -101,8 +106,12 @@ public class InputCharStreamTest extends TestCase {
 		assertEquals(3, input.getLine());
 		assertEquals(2, input.getCharPositionInLine());
 
+		text = input.substring(input.index()-6,input.index()-1);
+		assertEquals("789\n98", text);
+
 		text = input.substring(input.index()-2,input.index()-1);
 		assertEquals("98", text);
+		System.out.println(input);
 	}
 
 	public void testLA() {
@@ -128,7 +137,8 @@ public class InputCharStreamTest extends TestCase {
 
 		text = input.substring(input.index()-2,input.index()-1);
 		assertEquals("12", text);
-		
+
+		System.out.println(input);
 		c = input.LA(1); //2
 		assertEquals('3', c);
 		assertEquals(2, input.index());
@@ -143,7 +153,8 @@ public class InputCharStreamTest extends TestCase {
 		assertEquals(2, input.index());
 		assertEquals(1, input.getLine());
 		assertEquals(2, input.getCharPositionInLine());
-		
+
+		System.out.println(input);
 
 		text = input.substring(input.index(),input.index()+1);
 		assertEquals("34", text);
@@ -159,7 +170,8 @@ public class InputCharStreamTest extends TestCase {
 		assertEquals(4, input.index());
 		assertEquals(1, input.getLine());
 		assertEquals(4, input.getCharPositionInLine());
-		
+
+		System.out.println(input);
 		input.consume();
 		assertEquals(5, input.index());
 		assertEquals(2, input.getLine());
@@ -174,7 +186,8 @@ public class InputCharStreamTest extends TestCase {
 		assertEquals(7, input.index());
 		assertEquals(2, input.getLine());
 		assertEquals(2, input.getCharPositionInLine());
-		
+
+		System.out.println(input);
 		input.consume();
 		assertEquals(8, input.index());
 		assertEquals(2, input.getLine());
@@ -210,6 +223,7 @@ public class InputCharStreamTest extends TestCase {
 		assertEquals(2, input.getCharPositionInLine());
 		
 
+		System.out.println(input);
 		c = input.LA(1); //2
 		assertEquals('7', c);
 		assertEquals(13, input.index());
@@ -248,7 +262,13 @@ public class InputCharStreamTest extends TestCase {
 		input.consume();
 		c = input.LA(2); //2
 		assertEquals('\n', c);
+		
+		System.out.println(input);
+		
 		input.consume();
+		text = input.substring(input.index()-7,input.index());
+		assertEquals("7654321\n", text);
+		
 		c = input.LA(2); //2
 		assertEquals(-1, c);
 		input.consume();
