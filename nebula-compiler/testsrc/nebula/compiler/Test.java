@@ -1,5 +1,8 @@
 ﻿package nebula.compiler;
 
+import nebula.lang.system.Type;
+import nebula.lang.system.Type.Field;
+
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.tree.CommonTree;

@@ -16,8 +16,11 @@ tokens{
 
 typeDefinition : TYPE NAME '{' NEWLINE? fieldDefinition* '}' terminator  -> ^(TYPE NAME fieldDefinition*);
 
-fieldDefinition : NAME IMPORTANCE? cardinaltiry? BYREF? NAME? ';' NEWLINE? -> ^(FIELD NAME IMPORTANCE? cardinaltiry? NAME?);
+fieldDefinition : NAME IMPORTANCE? cardinaltiry? reference? ';' NEWLINE? -> ^(FIELD NAME IMPORTANCE? cardinaltiry? NAME?);
 
+reference 	:BYREF NAME  -> ^(BYREF NAME)|
+		 BYVAL NAME  -> ^(BYVAL NAME)|
+		 NAME -> ^(BYVAL NAME);
 //Sample 
 prog : typeDefinition* ->  ^(PROG typeDefinition*)
 	| stat -> ^(PROG stat);
@@ -82,6 +85,7 @@ RIGHT_PAREN: ')';
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 TYPE : 'type';
 BYREF : 'byref';
+BYVAL :	'byval';
 IMPORTANCE : KEY | IMPORTANT | REQUIRE | UNIMPORTANT;
 
 fragment KEY         : '!';

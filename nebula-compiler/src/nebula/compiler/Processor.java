@@ -39,7 +39,9 @@ public class Processor {
 	}
 
 	private CommonTokenStream getTokenStream(Reader reader) throws IOException {
-		NebulaLexer lexer = new NebulaLexer(new ANTLRReaderStream(reader));
+		
+		//NebulaLexer lexer = new NebulaLexer(new ANTLRReaderStream(reader));
+		NebulaLexer lexer = new NebulaLexer(new InputCharStream(reader));
 		return new CommonTokenStream(lexer);
 	}
 
