@@ -14,9 +14,9 @@ tokens{
 @lexer::header{package nebula.compiler;}
 
 
-typeDefinition : TYPE NAME '{' NEWLINE? fieldDefinition* '}' terminator  -> ^(TYPE NAME fieldDefinition*);
+typeDefinition : TYPE NAME '{' NEWLINE? (fieldDefinition NEWLINE*)* '}' terminator  -> ^(TYPE NAME fieldDefinition*);
 
-fieldDefinition : NAME IMPORTANCE? cardinaltiry? reference? ';' NEWLINE? -> ^(FIELD NAME IMPORTANCE? cardinaltiry? NAME?);
+fieldDefinition : NAME IMPORTANCE? cardinaltiry? reference? ';' -> ^(FIELD NAME IMPORTANCE? cardinaltiry? NAME?);
 
 reference 	:BYREF NAME  -> ^(BYREF NAME)|
 		 BYVAL NAME  -> ^(BYVAL NAME)|
@@ -117,7 +117,7 @@ fragment SPACE: ' ' | '\t';
 // Windows uses \r\n. UNIX and Mac OS X use \n.
 // To use newlines as a terminator,
 // they can't be written to the hidden channel!
-NEWLINE: ('\r'? '\n')+;
+NEWLINE: ('\r'? '\n');
 WHITESPACE: SPACE+ { $channel = HIDDEN; };
 
 // Single-line comments begin with //, are followed by any characters
