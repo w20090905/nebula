@@ -93,6 +93,10 @@ public class BookResource {
         books.remove(id);
     }
 
+    public List<Book> getByUser(String userName) {
+        return new ArrayList<Book>(books.values());
+    }
+
     public static DataBinder<Book> createDataBinder() {
         return new DataBinder<Book>() {
 
@@ -111,6 +115,8 @@ public class BookResource {
                     return new Object[] { id };
                 } else if ("editable".equals(method.getName()) || "removable".equals(method.getName()) || "remove".equals(method.getName())) {
                     return new Object[] { Long.parseLong((String) context.getParameter("id")) };
+                } else if ("getByUser".equals(method.getName())) {
+                    return new Object[] { context.getId() };
                 }
 
                 return null;
