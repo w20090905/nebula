@@ -8,6 +8,7 @@
  */
 grammar Assembler;
 
+
 // START: members
 @members {
     // Define the functionality required by the parser for code generation
@@ -19,11 +20,15 @@ grammar Assembler;
     protected void defineFunction(Token idToken, int nargs, int nlocals) {;}
     protected void defineDataSize(int n) {;}
     protected void defineLabel(Token idToken) {;}
+    
+    protected void defineClass(Token idToken){;}
+    protected void defineField(Token idToken){;}
+    
 }
 // END: members
 
 program
-    :   globals?
+    :   globals? classDeclaration fieldDeclaration+
         ( functionDeclaration | instr | label | NEWLINE )+
         {checkForUnresolvedReferences();}
     ;
@@ -32,6 +37,9 @@ program
 // START: data
 globals : NEWLINE* '.globals' INT NEWLINE {defineDataSize($INT.int);} ;
 // END: data
+
+classDeclaration : NEWLINE* '.class' ID NEWLINE {defineClass($ID);} ;
+fieldDeclaration : NEWLINE* '.field' ID NEWLINE {defineField($ID);} ;
 
 //  .def fact: args=1, locals=0
 // START: func
@@ -53,7 +61,9 @@ instr
 
 // START: operand
 operand
-    :   ID   // basic code label; E.g., "loop"
+    : 	FIELD
+    |  	CLASS // field call ; E.g., ".name"
+    |   ID   // basic code label; E.g., "loop"
     |   REG  // register name; E.g., "r0"
     |   FUNC // function label; E.g., "f()"
     |   INT
@@ -68,7 +78,12 @@ label
     :   ID ':' {defineLabel($ID);}
     ;
 
-REG :   'r' INT ;
+FIELD : CLASS '.' ID {setText($CLASS.text + "." + $ID.text);} ;
+
+CLASS : '@' ID {setText($ID.text);} ;
+
+REG :   'r' INT {setText($INT.text);};
+
 
 ID  :   LETTER (LETTER | '0'..'9')* ;
 
@@ -76,8 +91,10 @@ FUNC:   ID '()' {setText($ID.text);} ;
 
 fragment
 LETTER
-    :   ('a'..'z' | 'A'..'Z')
+    :   LOWER | UPPER
     ;
+fragment LOWER: 'a'..'z';
+fragment UPPER: 'A'..'Z';
     
 INT :   '-'? '0'..'9'+ ;
 

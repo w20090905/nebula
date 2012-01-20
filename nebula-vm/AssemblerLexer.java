@@ -1,162 +1,60 @@
-/***
- * Excerpted from "Language Implementation Patterns",
- * published by The Pragmatic Bookshelf.
- * Copyrights apply to this code. It may not be used to create training material, 
- * courses, books, articles, and the like. Contact us if you are in doubt.
- * We make no guarantees that this code is fit for any purpose. 
- * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book information.
-***/
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 Assembler.g 2009-09-24 16:02:25
+// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Assembler.g 2012-01-20 17:11:47
 
 import org.antlr.runtime.*;
 import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings({"all", "warnings", "unchecked"})
 public class AssemblerLexer extends Lexer {
-    public static final int STR_CHARS=13;
-    public static final int LETTER=12;
-    public static final int T__21=21;
-    public static final int T__20=20;
-    public static final int CHAR=9;
-    public static final int INT=5;
-    public static final int FLOAT=11;
-    public static final int ID=6;
     public static final int EOF=-1;
-    public static final int REG=7;
     public static final int T__19=19;
-    public static final int WS=14;
-    public static final int T__16=16;
-    public static final int T__15=15;
-    public static final int T__18=18;
-    public static final int NEWLINE=4;
-    public static final int T__17=17;
+    public static final int T__20=20;
+    public static final int T__21=21;
+    public static final int T__22=22;
+    public static final int T__23=23;
+    public static final int T__24=24;
+    public static final int T__25=25;
+    public static final int T__26=26;
+    public static final int T__27=27;
+    public static final int CHAR=4;
+    public static final int CLASS=5;
+    public static final int FIELD=6;
+    public static final int FLOAT=7;
     public static final int FUNC=8;
-    public static final int STRING=10;
+    public static final int ID=9;
+    public static final int INT=10;
+    public static final int LETTER=11;
+    public static final int LOWER=12;
+    public static final int NEWLINE=13;
+    public static final int REG=14;
+    public static final int STRING=15;
+    public static final int STR_CHARS=16;
+    public static final int UPPER=17;
+    public static final int WS=18;
 
     // delegates
     // delegators
+    public Lexer[] getDelegates() {
+        return new Lexer[] {};
+    }
 
-    public AssemblerLexer() {;} 
+    public AssemblerLexer() {} 
     public AssemblerLexer(CharStream input) {
         this(input, new RecognizerSharedState());
     }
     public AssemblerLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
-
     }
-    public String getGrammarFileName() { return "Assembler.g"; }
-
-    // $ANTLR start "T__15"
-    public final void mT__15() throws RecognitionException {
-        try {
-            int _type = T__15;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Assembler.g:3:7: ( '.globals' )
-            // Assembler.g:3:9: '.globals'
-            {
-            match(".globals"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__15"
-
-    // $ANTLR start "T__16"
-    public final void mT__16() throws RecognitionException {
-        try {
-            int _type = T__16;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Assembler.g:4:7: ( '.def' )
-            // Assembler.g:4:9: '.def'
-            {
-            match(".def"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__16"
-
-    // $ANTLR start "T__17"
-    public final void mT__17() throws RecognitionException {
-        try {
-            int _type = T__17;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Assembler.g:5:7: ( ':' )
-            // Assembler.g:5:9: ':'
-            {
-            match(':'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__17"
-
-    // $ANTLR start "T__18"
-    public final void mT__18() throws RecognitionException {
-        try {
-            int _type = T__18;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Assembler.g:6:7: ( 'args' )
-            // Assembler.g:6:9: 'args'
-            {
-            match("args"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__18"
+    public String getGrammarFileName() { return "D:\\Projects\\nebula\\nebula-vm\\Assembler.g"; }
 
     // $ANTLR start "T__19"
     public final void mT__19() throws RecognitionException {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Assembler.g:7:7: ( '=' )
-            // Assembler.g:7:9: '='
-            {
-            match('='); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__19"
-
-    // $ANTLR start "T__20"
-    public final void mT__20() throws RecognitionException {
-        try {
-            int _type = T__20;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Assembler.g:8:7: ( ',' )
-            // Assembler.g:8:9: ','
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:2:7: ( ',' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:2:9: ','
             {
             match(','); 
 
@@ -166,6 +64,30 @@ public class AssemblerLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__19"
+
+    // $ANTLR start "T__20"
+    public final void mT__20() throws RecognitionException {
+        try {
+            int _type = T__20;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:3:7: ( '.class' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:3:9: '.class'
+            {
+            match(".class"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "T__20"
@@ -175,10 +97,11 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Assembler.g:9:7: ( 'locals' )
-            // Assembler.g:9:9: 'locals'
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:4:7: ( '.def' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:4:9: '.def'
             {
-            match("locals"); 
+            match(".def"); 
+
 
 
             }
@@ -187,20 +110,245 @@ public class AssemblerLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "T__21"
+
+    // $ANTLR start "T__22"
+    public final void mT__22() throws RecognitionException {
+        try {
+            int _type = T__22;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:5:7: ( '.field' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:5:9: '.field'
+            {
+            match(".field"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__22"
+
+    // $ANTLR start "T__23"
+    public final void mT__23() throws RecognitionException {
+        try {
+            int _type = T__23;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:6:7: ( '.globals' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:6:9: '.globals'
+            {
+            match(".globals"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__23"
+
+    // $ANTLR start "T__24"
+    public final void mT__24() throws RecognitionException {
+        try {
+            int _type = T__24;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:7:7: ( ':' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:7:9: ':'
+            {
+            match(':'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__24"
+
+    // $ANTLR start "T__25"
+    public final void mT__25() throws RecognitionException {
+        try {
+            int _type = T__25;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:8:7: ( '=' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:8:9: '='
+            {
+            match('='); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__25"
+
+    // $ANTLR start "T__26"
+    public final void mT__26() throws RecognitionException {
+        try {
+            int _type = T__26;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:9:7: ( 'args' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:9:9: 'args'
+            {
+            match("args"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__26"
+
+    // $ANTLR start "T__27"
+    public final void mT__27() throws RecognitionException {
+        try {
+            int _type = T__27;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:10:7: ( 'locals' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:10:9: 'locals'
+            {
+            match("locals"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__27"
+
+    // $ANTLR start "FIELD"
+    public final void mFIELD() throws RecognitionException {
+        try {
+            int _type = FIELD;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            CommonToken CLASS1=null;
+            CommonToken ID2=null;
+
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:81:7: ( CLASS '.' ID )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:81:9: CLASS '.' ID
+            {
+            int CLASS1Start85 = getCharIndex();
+            int CLASS1StartLine85 = getLine();
+            int CLASS1StartCharPos85 = getCharPositionInLine();
+            mCLASS(); 
+            CLASS1 = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, CLASS1Start85, getCharIndex()-1);
+            CLASS1.setLine(CLASS1StartLine85);
+            CLASS1.setCharPositionInLine(CLASS1StartCharPos85);
+
+
+            match('.'); 
+
+            int ID2Start89 = getCharIndex();
+            int ID2StartLine89 = getLine();
+            int ID2StartCharPos89 = getCharPositionInLine();
+            mID(); 
+            ID2 = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, ID2Start89, getCharIndex()-1);
+            ID2.setLine(ID2StartLine89);
+            ID2.setCharPositionInLine(ID2StartCharPos89);
+
+
+            setText((CLASS1!=null?CLASS1.getText():null) + "." + (ID2!=null?ID2.getText():null));
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "FIELD"
+
+    // $ANTLR start "CLASS"
+    public final void mCLASS() throws RecognitionException {
+        try {
+            int _type = CLASS;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            CommonToken ID3=null;
+
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:83:7: ( '@' ID )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:83:9: '@' ID
+            {
+            match('@'); 
+
+            int ID3Start101 = getCharIndex();
+            int ID3StartLine101 = getLine();
+            int ID3StartCharPos101 = getCharPositionInLine();
+            mID(); 
+            ID3 = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, ID3Start101, getCharIndex()-1);
+            ID3.setLine(ID3StartLine101);
+            ID3.setCharPositionInLine(ID3StartCharPos101);
+
+
+            setText((ID3!=null?ID3.getText():null));
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "CLASS"
 
     // $ANTLR start "REG"
     public final void mREG() throws RecognitionException {
         try {
             int _type = REG;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Assembler.g:71:5: ( 'r' INT )
-            // Assembler.g:71:9: 'r' INT
+            CommonToken INT4=null;
+
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:85:5: ( 'r' INT )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:85:9: 'r' INT
             {
             match('r'); 
+
+            int INT4Start115 = getCharIndex();
+            int INT4StartLine115 = getLine();
+            int INT4StartCharPos115 = getCharPositionInLine();
             mINT(); 
+            INT4 = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, INT4Start115, getCharIndex()-1);
+            INT4.setLine(INT4StartLine115);
+            INT4.setCharPositionInLine(INT4StartCharPos115);
+
+
+            setText((INT4!=null?INT4.getText():null));
 
             }
 
@@ -208,6 +356,7 @@ public class AssemblerLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "REG"
@@ -217,33 +366,35 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Assembler.g:73:5: ( LETTER ( LETTER | '0' .. '9' )* )
-            // Assembler.g:73:9: LETTER ( LETTER | '0' .. '9' )*
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:88:5: ( LETTER ( LETTER | '0' .. '9' )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:88:9: LETTER ( LETTER | '0' .. '9' )*
             {
             mLETTER(); 
-            // Assembler.g:73:16: ( LETTER | '0' .. '9' )*
+
+
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:88:16: ( LETTER | '0' .. '9' )*
             loop1:
             do {
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( ((LA1_0>='0' && LA1_0<='9')||(LA1_0>='A' && LA1_0<='Z')||(LA1_0>='a' && LA1_0<='z')) ) {
+                if ( ((LA1_0 >= '0' && LA1_0 <= '9')||(LA1_0 >= 'A' && LA1_0 <= 'Z')||(LA1_0 >= 'a' && LA1_0 <= 'z')) ) {
                     alt1=1;
                 }
 
 
                 switch (alt1) {
             	case 1 :
-            	    // Assembler.g:
+            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:
             	    {
-            	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+            	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
             	        input.consume();
-
             	    }
             	    else {
             	        MismatchedSetException mse = new MismatchedSetException(null,input);
             	        recover(mse);
-            	        throw mse;}
+            	        throw mse;
+            	    }
 
 
             	    }
@@ -261,6 +412,7 @@ public class AssemblerLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "ID"
@@ -270,17 +422,25 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = FUNC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            CommonToken ID1=null;
+            CommonToken ID5=null;
 
-            // Assembler.g:75:5: ( ID '()' )
-            // Assembler.g:75:9: ID '()'
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:90:5: ( ID '()' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:90:9: ID '()'
             {
-            int ID1Start109 = getCharIndex();
+            int ID5Start147 = getCharIndex();
+            int ID5StartLine147 = getLine();
+            int ID5StartCharPos147 = getCharPositionInLine();
             mID(); 
-            ID1 = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, ID1Start109, getCharIndex()-1);
+            ID5 = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, ID5Start147, getCharIndex()-1);
+            ID5.setLine(ID5StartLine147);
+            ID5.setCharPositionInLine(ID5StartCharPos147);
+
+
             match("()"); 
 
-            setText((ID1!=null?ID1.getText():null));
+
+
+            setText((ID5!=null?ID5.getText():null));
 
             }
 
@@ -288,6 +448,7 @@ public class AssemblerLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "FUNC"
@@ -295,36 +456,90 @@ public class AssemblerLexer extends Lexer {
     // $ANTLR start "LETTER"
     public final void mLETTER() throws RecognitionException {
         try {
-            // Assembler.g:79:5: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
-            // Assembler.g:79:9: ( 'a' .. 'z' | 'A' .. 'Z' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:95:5: ( LOWER | UPPER )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:
             {
-            if ( (input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+            if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
-
             }
             else {
                 MismatchedSetException mse = new MismatchedSetException(null,input);
                 recover(mse);
-                throw mse;}
+                throw mse;
+            }
 
 
             }
 
+
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "LETTER"
+
+    // $ANTLR start "LOWER"
+    public final void mLOWER() throws RecognitionException {
+        try {
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:96:15: ( 'a' .. 'z' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:
+            {
+            if ( (input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
+                input.consume();
+            }
+            else {
+                MismatchedSetException mse = new MismatchedSetException(null,input);
+                recover(mse);
+                throw mse;
+            }
+
+
+            }
+
+
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "LOWER"
+
+    // $ANTLR start "UPPER"
+    public final void mUPPER() throws RecognitionException {
+        try {
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:97:15: ( 'A' .. 'Z' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:
+            {
+            if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') ) {
+                input.consume();
+            }
+            else {
+                MismatchedSetException mse = new MismatchedSetException(null,input);
+                recover(mse);
+                throw mse;
+            }
+
+
+            }
+
+
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "UPPER"
 
     // $ANTLR start "INT"
     public final void mINT() throws RecognitionException {
         try {
             int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Assembler.g:82:5: ( ( '-' )? ( '0' .. '9' )+ )
-            // Assembler.g:82:9: ( '-' )? ( '0' .. '9' )+
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:99:5: ( ( '-' )? ( '0' .. '9' )+ )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:99:9: ( '-' )? ( '0' .. '9' )+
             {
-            // Assembler.g:82:9: ( '-' )?
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:99:9: ( '-' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -333,7 +548,7 @@ public class AssemblerLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // Assembler.g:82:9: '-'
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:99:9: '-'
                     {
                     match('-'); 
 
@@ -342,23 +557,32 @@ public class AssemblerLexer extends Lexer {
 
             }
 
-            // Assembler.g:82:14: ( '0' .. '9' )+
+
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:99:14: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
                 int alt3=2;
                 int LA3_0 = input.LA(1);
 
-                if ( ((LA3_0>='0' && LA3_0<='9')) ) {
+                if ( ((LA3_0 >= '0' && LA3_0 <= '9')) ) {
                     alt3=1;
                 }
 
 
                 switch (alt3) {
             	case 1 :
-            	    // Assembler.g:82:14: '0' .. '9'
+            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:
             	    {
-            	    matchRange('0','9'); 
+            	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+            	        input.consume();
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;
+            	    }
+
 
             	    }
             	    break;
@@ -379,6 +603,7 @@ public class AssemblerLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "INT"
@@ -388,11 +613,13 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = CHAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Assembler.g:84:5: ( '\\'' . '\\'' )
-            // Assembler.g:84:9: '\\'' . '\\''
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:101:5: ( '\\'' . '\\'' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:101:9: '\\'' . '\\''
             {
             match('\''); 
+
             matchAny(); 
+
             match('\''); 
 
             }
@@ -401,6 +628,7 @@ public class AssemblerLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "CHAR"
@@ -410,17 +638,25 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            CommonToken STR_CHARS2=null;
+            CommonToken STR_CHARS6=null;
 
-            // Assembler.g:86:7: ( '\\\"' STR_CHARS '\\\"' )
-            // Assembler.g:86:9: '\\\"' STR_CHARS '\\\"'
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:103:7: ( '\\\"' STR_CHARS '\\\"' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:103:9: '\\\"' STR_CHARS '\\\"'
             {
             match('\"'); 
-            int STR_CHARS2Start193 = getCharIndex();
+
+            int STR_CHARS6Start233 = getCharIndex();
+            int STR_CHARS6StartLine233 = getLine();
+            int STR_CHARS6StartCharPos233 = getCharPositionInLine();
             mSTR_CHARS(); 
-            STR_CHARS2 = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, STR_CHARS2Start193, getCharIndex()-1);
+            STR_CHARS6 = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, STR_CHARS6Start233, getCharIndex()-1);
+            STR_CHARS6.setLine(STR_CHARS6StartLine233);
+            STR_CHARS6.setCharPositionInLine(STR_CHARS6StartCharPos233);
+
+
             match('\"'); 
-            setText((STR_CHARS2!=null?STR_CHARS2.getText():null));
+
+            setText((STR_CHARS6!=null?STR_CHARS6.getText():null));
 
             }
 
@@ -428,6 +664,7 @@ public class AssemblerLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "STRING"
@@ -435,32 +672,32 @@ public class AssemblerLexer extends Lexer {
     // $ANTLR start "STR_CHARS"
     public final void mSTR_CHARS() throws RecognitionException {
         try {
-            // Assembler.g:88:20: ( (~ '\"' )* )
-            // Assembler.g:88:22: (~ '\"' )*
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:105:20: ( (~ '\"' )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:105:22: (~ '\"' )*
             {
-            // Assembler.g:88:22: (~ '\"' )*
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:105:22: (~ '\"' )*
             loop4:
             do {
                 int alt4=2;
                 int LA4_0 = input.LA(1);
 
-                if ( ((LA4_0>='\u0000' && LA4_0<='!')||(LA4_0>='#' && LA4_0<='\uFFFF')) ) {
+                if ( ((LA4_0 >= '\u0000' && LA4_0 <= '!')||(LA4_0 >= '#' && LA4_0 <= '\uFFFF')) ) {
                     alt4=1;
                 }
 
 
                 switch (alt4) {
             	case 1 :
-            	    // Assembler.g:88:22: ~ '\"'
+            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:
             	    {
-            	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='\uFFFF') ) {
+            	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '\uFFFF') ) {
             	        input.consume();
-
             	    }
             	    else {
             	        MismatchedSetException mse = new MismatchedSetException(null,input);
             	        recover(mse);
-            	        throw mse;}
+            	        throw mse;
+            	    }
 
 
             	    }
@@ -474,8 +711,10 @@ public class AssemblerLexer extends Lexer {
 
             }
 
+
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "STR_CHARS"
@@ -485,11 +724,11 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = FLOAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Assembler.g:91:5: ( INT '.' ( INT )* | '.' ( INT )+ )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:108:5: ( INT '.' ( INT )* | '.' ( INT )+ )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
-            if ( (LA7_0=='-'||(LA7_0>='0' && LA7_0<='9')) ) {
+            if ( (LA7_0=='-'||(LA7_0 >= '0' && LA7_0 <= '9')) ) {
                 alt7=1;
             }
             else if ( (LA7_0=='.') ) {
@@ -500,29 +739,34 @@ public class AssemblerLexer extends Lexer {
                     new NoViableAltException("", 7, 0, input);
 
                 throw nvae;
+
             }
             switch (alt7) {
                 case 1 :
-                    // Assembler.g:91:9: INT '.' ( INT )*
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:108:9: INT '.' ( INT )*
                     {
                     mINT(); 
+
+
                     match('.'); 
-                    // Assembler.g:91:17: ( INT )*
+
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:108:17: ( INT )*
                     loop5:
                     do {
                         int alt5=2;
                         int LA5_0 = input.LA(1);
 
-                        if ( (LA5_0=='-'||(LA5_0>='0' && LA5_0<='9')) ) {
+                        if ( (LA5_0=='-'||(LA5_0 >= '0' && LA5_0 <= '9')) ) {
                             alt5=1;
                         }
 
 
                         switch (alt5) {
                     	case 1 :
-                    	    // Assembler.g:91:17: INT
+                    	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:108:17: INT
                     	    {
                     	    mINT(); 
+
 
                     	    }
                     	    break;
@@ -536,26 +780,28 @@ public class AssemblerLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Assembler.g:92:9: '.' ( INT )+
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:109:9: '.' ( INT )+
                     {
                     match('.'); 
-                    // Assembler.g:92:13: ( INT )+
+
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:109:13: ( INT )+
                     int cnt6=0;
                     loop6:
                     do {
                         int alt6=2;
                         int LA6_0 = input.LA(1);
 
-                        if ( (LA6_0=='-'||(LA6_0>='0' && LA6_0<='9')) ) {
+                        if ( (LA6_0=='-'||(LA6_0 >= '0' && LA6_0 <= '9')) ) {
                             alt6=1;
                         }
 
 
                         switch (alt6) {
                     	case 1 :
-                    	    // Assembler.g:92:13: INT
+                    	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:109:13: INT
                     	    {
                     	    mINT(); 
+
 
                     	    }
                     	    break;
@@ -578,6 +824,7 @@ public class AssemblerLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "FLOAT"
@@ -587,10 +834,10 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Assembler.g:95:5: ( ( ' ' | '\\t' )+ )
-            // Assembler.g:95:9: ( ' ' | '\\t' )+
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:112:5: ( ( ' ' | '\\t' )+ )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:112:9: ( ' ' | '\\t' )+
             {
-            // Assembler.g:95:9: ( ' ' | '\\t' )+
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:112:9: ( ' ' | '\\t' )+
             int cnt8=0;
             loop8:
             do {
@@ -604,16 +851,16 @@ public class AssemblerLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // Assembler.g:
+            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:
             	    {
             	    if ( input.LA(1)=='\t'||input.LA(1)==' ' ) {
             	        input.consume();
-
             	    }
             	    else {
             	        MismatchedSetException mse = new MismatchedSetException(null,input);
             	        recover(mse);
-            	        throw mse;}
+            	        throw mse;
+            	    }
 
 
             	    }
@@ -628,6 +875,7 @@ public class AssemblerLexer extends Lexer {
                 cnt8++;
             } while (true);
 
+
             skip();
 
             }
@@ -636,6 +884,7 @@ public class AssemblerLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "WS"
@@ -645,10 +894,10 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = NEWLINE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Assembler.g:98:5: ( ( ';' ( . )* )? ( '\\r' )? '\\n' )
-            // Assembler.g:98:9: ( ';' ( . )* )? ( '\\r' )? '\\n'
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:115:5: ( ( ';' ( . )* )? ( '\\r' )? '\\n' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:115:9: ( ';' ( . )* )? ( '\\r' )? '\\n'
             {
-            // Assembler.g:98:9: ( ';' ( . )* )?
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:115:9: ( ';' ( . )* )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -657,10 +906,11 @@ public class AssemblerLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // Assembler.g:98:10: ';' ( . )*
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:115:10: ';' ( . )*
                     {
                     match(';'); 
-                    // Assembler.g:98:14: ( . )*
+
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:115:14: ( . )*
                     loop9:
                     do {
                         int alt9=2;
@@ -672,14 +922,14 @@ public class AssemblerLexer extends Lexer {
                         else if ( (LA9_0=='\n') ) {
                             alt9=2;
                         }
-                        else if ( ((LA9_0>='\u0000' && LA9_0<='\t')||(LA9_0>='\u000B' && LA9_0<='\f')||(LA9_0>='\u000E' && LA9_0<='\uFFFF')) ) {
+                        else if ( ((LA9_0 >= '\u0000' && LA9_0 <= '\t')||(LA9_0 >= '\u000B' && LA9_0 <= '\f')||(LA9_0 >= '\u000E' && LA9_0 <= '\uFFFF')) ) {
                             alt9=1;
                         }
 
 
                         switch (alt9) {
                     	case 1 :
-                    	    // Assembler.g:98:14: .
+                    	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:115:14: .
                     	    {
                     	    matchAny(); 
 
@@ -697,7 +947,8 @@ public class AssemblerLexer extends Lexer {
 
             }
 
-            // Assembler.g:98:19: ( '\\r' )?
+
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:115:19: ( '\\r' )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -706,7 +957,7 @@ public class AssemblerLexer extends Lexer {
             }
             switch (alt11) {
                 case 1 :
-                    // Assembler.g:98:19: '\\r'
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:115:19: '\\r'
                     {
                     match('\r'); 
 
@@ -714,6 +965,7 @@ public class AssemblerLexer extends Lexer {
                     break;
 
             }
+
 
             match('\n'); 
 
@@ -723,124 +975,173 @@ public class AssemblerLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "NEWLINE"
 
     public void mTokens() throws RecognitionException {
-        // Assembler.g:1:8: ( T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | REG | ID | FUNC | INT | CHAR | STRING | FLOAT | WS | NEWLINE )
-        int alt12=16;
+        // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:8: ( T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | FIELD | CLASS | REG | ID | FUNC | INT | CHAR | STRING | FLOAT | WS | NEWLINE )
+        int alt12=20;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // Assembler.g:1:10: T__15
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:10: T__19
                 {
-                mT__15(); 
+                mT__19(); 
+
 
                 }
                 break;
             case 2 :
-                // Assembler.g:1:16: T__16
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:16: T__20
                 {
-                mT__16(); 
+                mT__20(); 
+
 
                 }
                 break;
             case 3 :
-                // Assembler.g:1:22: T__17
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:22: T__21
                 {
-                mT__17(); 
+                mT__21(); 
+
 
                 }
                 break;
             case 4 :
-                // Assembler.g:1:28: T__18
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:28: T__22
                 {
-                mT__18(); 
+                mT__22(); 
+
 
                 }
                 break;
             case 5 :
-                // Assembler.g:1:34: T__19
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:34: T__23
                 {
-                mT__19(); 
+                mT__23(); 
+
 
                 }
                 break;
             case 6 :
-                // Assembler.g:1:40: T__20
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:40: T__24
                 {
-                mT__20(); 
+                mT__24(); 
+
 
                 }
                 break;
             case 7 :
-                // Assembler.g:1:46: T__21
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:46: T__25
                 {
-                mT__21(); 
+                mT__25(); 
+
 
                 }
                 break;
             case 8 :
-                // Assembler.g:1:52: REG
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:52: T__26
                 {
-                mREG(); 
+                mT__26(); 
+
 
                 }
                 break;
             case 9 :
-                // Assembler.g:1:56: ID
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:58: T__27
                 {
-                mID(); 
+                mT__27(); 
+
 
                 }
                 break;
             case 10 :
-                // Assembler.g:1:59: FUNC
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:64: FIELD
                 {
-                mFUNC(); 
+                mFIELD(); 
+
 
                 }
                 break;
             case 11 :
-                // Assembler.g:1:64: INT
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:70: CLASS
                 {
-                mINT(); 
+                mCLASS(); 
+
 
                 }
                 break;
             case 12 :
-                // Assembler.g:1:68: CHAR
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:76: REG
                 {
-                mCHAR(); 
+                mREG(); 
+
 
                 }
                 break;
             case 13 :
-                // Assembler.g:1:73: STRING
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:80: ID
                 {
-                mSTRING(); 
+                mID(); 
+
 
                 }
                 break;
             case 14 :
-                // Assembler.g:1:80: FLOAT
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:83: FUNC
                 {
-                mFLOAT(); 
+                mFUNC(); 
+
 
                 }
                 break;
             case 15 :
-                // Assembler.g:1:86: WS
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:88: INT
                 {
-                mWS(); 
+                mINT(); 
+
 
                 }
                 break;
             case 16 :
-                // Assembler.g:1:89: NEWLINE
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:92: CHAR
+                {
+                mCHAR(); 
+
+
+                }
+                break;
+            case 17 :
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:97: STRING
+                {
+                mSTRING(); 
+
+
+                }
+                break;
+            case 18 :
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:104: FLOAT
+                {
+                mFLOAT(); 
+
+
+                }
+                break;
+            case 19 :
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:110: WS
+                {
+                mWS(); 
+
+
+                }
+                break;
+            case 20 :
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:113: NEWLINE
                 {
                 mNEWLINE(); 
+
 
                 }
                 break;
@@ -852,58 +1153,68 @@ public class AssemblerLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\3\uffff\1\23\2\uffff\3\23\1\uffff\1\31\7\uffff\1\23\1\uffff\1\23"+
-        "\1\uffff\1\23\1\30\2\uffff\2\23\1\36\1\23\1\uffff\1\23\1\41\1\uffff";
+        "\5\uffff\2\26\1\uffff\2\26\1\uffff\1\35\11\uffff\1\26\1\uffff\1"+
+        "\26\1\uffff\1\26\1\40\1\uffff\1\33\1\uffff\2\26\1\uffff\1\40\1\uffff"+
+        "\1\45\1\26\1\uffff\1\26\1\50\1\uffff";
     static final String DFA12_eofS =
-        "\42\uffff";
+        "\51\uffff";
     static final String DFA12_minS =
-        "\1\11\1\55\1\uffff\1\50\2\uffff\3\50\1\60\1\56\7\uffff\1\50\1\uffff"+
-        "\1\50\1\uffff\2\50\2\uffff\4\50\1\uffff\2\50\1\uffff";
+        "\1\11\1\uffff\1\55\2\uffff\2\50\1\101\2\50\1\60\1\56\11\uffff\1"+
+        "\50\1\uffff\1\50\1\uffff\1\50\1\56\1\uffff\1\50\1\uffff\2\50\1\uffff"+
+        "\1\56\1\uffff\2\50\1\uffff\2\50\1\uffff";
     static final String DFA12_maxS =
-        "\1\172\1\147\1\uffff\1\172\2\uffff\3\172\2\71\7\uffff\1\172\1\uffff"+
-        "\1\172\1\uffff\2\172\2\uffff\4\172\1\uffff\2\172\1\uffff";
+        "\1\172\1\uffff\1\147\2\uffff\5\172\2\71\11\uffff\1\172\1\uffff\1"+
+        "\172\1\uffff\2\172\1\uffff\1\172\1\uffff\2\172\1\uffff\1\172\1\uffff"+
+        "\2\172\1\uffff\2\172\1\uffff";
     static final String DFA12_acceptS =
-        "\2\uffff\1\3\1\uffff\1\5\1\6\5\uffff\1\14\1\15\1\17\1\20\1\1\1\2"+
-        "\1\16\1\uffff\1\11\1\uffff\1\12\2\uffff\1\10\1\13\4\uffff\1\4\2"+
-        "\uffff\1\7";
+        "\1\uffff\1\1\1\uffff\1\6\1\7\7\uffff\1\20\1\21\1\23\1\24\1\2\1\3"+
+        "\1\4\1\5\1\22\1\uffff\1\15\1\uffff\1\16\2\uffff\1\14\1\uffff\1\17"+
+        "\2\uffff\1\13\1\uffff\1\12\2\uffff\1\10\2\uffff\1\11";
     static final String DFA12_specialS =
-        "\42\uffff}>";
+        "\51\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\1\15\1\16\2\uffff\1\16\22\uffff\1\15\1\uffff\1\14\4\uffff\1"+
-            "\13\4\uffff\1\5\1\11\1\1\1\uffff\12\12\1\2\1\16\1\uffff\1\4"+
-            "\3\uffff\32\10\6\uffff\1\3\12\10\1\6\5\10\1\7\10\10",
-            "\1\21\2\uffff\12\21\52\uffff\1\20\2\uffff\1\17",
+            "\1\16\1\17\2\uffff\1\17\22\uffff\1\16\1\uffff\1\15\4\uffff\1"+
+            "\14\4\uffff\1\1\1\12\1\2\1\uffff\12\13\1\3\1\17\1\uffff\1\4"+
+            "\2\uffff\1\7\32\11\6\uffff\1\5\12\11\1\6\5\11\1\10\10\11",
             "",
-            "\1\25\7\uffff\12\24\7\uffff\32\24\6\uffff\21\24\1\22\10\24",
-            "",
-            "",
-            "\1\25\7\uffff\12\24\7\uffff\32\24\6\uffff\16\24\1\26\13\24",
-            "\1\25\4\uffff\1\30\2\uffff\12\27\7\uffff\32\24\6\uffff\32\24",
-            "\1\25\7\uffff\12\24\7\uffff\32\24\6\uffff\32\24",
-            "\12\12",
-            "\1\21\1\uffff\12\12",
+            "\1\24\2\uffff\12\24\51\uffff\1\20\1\21\1\uffff\1\22\1\23",
             "",
             "",
-            "",
+            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\21\27\1\25\10\27",
+            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\16\27\1\31\13\27",
+            "\32\32\6\uffff\32\32",
+            "\1\30\4\uffff\1\33\2\uffff\12\34\7\uffff\32\27\6\uffff\32\27",
+            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\12\13",
+            "\1\24\1\uffff\12\13",
             "",
             "",
             "",
             "",
-            "\1\25\7\uffff\12\24\7\uffff\32\24\6\uffff\6\24\1\32\23\24",
-            "",
-            "\1\25\7\uffff\12\24\7\uffff\32\24\6\uffff\32\24",
-            "",
-            "\1\25\7\uffff\12\24\7\uffff\32\24\6\uffff\2\24\1\33\27\24",
-            "\1\25\7\uffff\12\27\7\uffff\32\24\6\uffff\32\24",
             "",
             "",
-            "\1\25\7\uffff\12\24\7\uffff\32\24\6\uffff\22\24\1\34\7\24",
-            "\1\25\7\uffff\12\24\7\uffff\32\24\6\uffff\1\35\31\24",
-            "\1\25\7\uffff\12\24\7\uffff\32\24\6\uffff\32\24",
-            "\1\25\7\uffff\12\24\7\uffff\32\24\6\uffff\13\24\1\37\16\24",
             "",
-            "\1\25\7\uffff\12\24\7\uffff\32\24\6\uffff\22\24\1\40\7\24",
-            "\1\25\7\uffff\12\24\7\uffff\32\24\6\uffff\32\24",
+            "",
+            "",
+            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\6\27\1\36\23\27",
+            "",
+            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\32\27",
+            "",
+            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\2\27\1\37\27\27",
+            "\1\42\1\uffff\12\41\7\uffff\32\41\6\uffff\32\41",
+            "",
+            "\1\30\7\uffff\12\34\7\uffff\32\27\6\uffff\32\27",
+            "",
+            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\22\27\1\43\7\27",
+            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\1\44\31\27",
+            "",
+            "\1\42\1\uffff\12\41\7\uffff\32\41\6\uffff\32\41",
+            "",
+            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\13\27\1\46\16\27",
+            "",
+            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\22\27\1\47\7\27",
+            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\32\27",
             ""
     };
 
@@ -937,7 +1248,7 @@ public class AssemblerLexer extends Lexer {
             this.transition = DFA12_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | REG | ID | FUNC | INT | CHAR | STRING | FLOAT | WS | NEWLINE );";
+            return "1:1: Tokens : ( T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | FIELD | CLASS | REG | ID | FUNC | INT | CHAR | STRING | FLOAT | WS | NEWLINE );";
         }
     }
  
