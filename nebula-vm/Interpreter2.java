@@ -88,6 +88,8 @@ public class Interpreter2 {
 
 	/** Execute the bytecodes in code memory starting at mainAddr */
 	public void exec() throws Exception {
+		long start = System.nanoTime();
+
 		// SIMULATE "call main()"; set up stack as if we'd called main()
 		if (mainFunction == null) {
 			mainFunction = new FunctionSymbol("main", 0, 0, 0);
@@ -96,48 +98,48 @@ public class Interpreter2 {
 		calls[++fp] = f;
 		ip = mainFunction.address;
 		cpu();
+
+		long end = System.nanoTime();
+		System.out.println(this.getClass().getName() + " : " + (end - start));
 	}
 
 	/** Simulate the fetch-execute cycle */
 	protected void cpu() {
 
-		int i = 0, j = 0, k = 0, addr = 0, fieldIndex = 0;
-		short opcode = code[ip];
-		while (opcode != BytecodeDefinition.INSTR_HALT && ip < codeSize) {
-			if (trace) trace();
-			ip++; // jump to next instruction or first byte of operand
+		int a = 0, b = 0, c = 0, addr = 0, fieldIndex = 0;
+		short opcode = code[ip++];
+		Outter: while (ip < codeSize) {
+			//if (trace) trace();
+			//ip++; // jump to next instruction or first byte of operand
 			int r[] = calls[fp].registers; // shortcut to current registers
 			switch (opcode) {
 			case BytecodeDefinition.INSTR_IADD:
-				i = code[ip++];
-				j = code[ip++];
-				k = code[ip++];
-				r[k] = r[i] + r[j];
+				r[code[ip++]] = r[code[ip++]] + r[code[ip++]];
 				break;
 			// ...
 			case BytecodeDefinition.INSTR_ISUB:
-				i = code[ip++];
-				j = code[ip++];
-				k = code[ip++];
-				r[k] = r[i] - r[j];
+				a = code[ip++];
+				b = code[ip++];
+				c = code[ip++];
+				r[c] = r[a] - r[b];
 				break;
 			case BytecodeDefinition.INSTR_IMUL:
-				i = code[ip++];
-				j = code[ip++];
-				k = code[ip++];
-				r[k] = r[i] * r[j];
+				a = code[ip++];
+				b = code[ip++];
+				c = code[ip++];
+				r[c] = r[a] * r[b];
 				break;
 			case BytecodeDefinition.INSTR_ILT:
-				i = code[ip++];
-				j = code[ip++];
-				k = code[ip++];
-				r[k] = r[i] < r[j] ? 0 : -1;
+				a = code[ip++];
+				b = code[ip++];
+				c = code[ip++];
+				r[c] = r[a] < r[b] ? 0 : -1;
 				break;
 			case BytecodeDefinition.INSTR_IEQ:
-				i = code[ip++];
-				j = code[ip++];
-				k = code[ip++];
-				r[k] = r[i] == r[j] ? 0 : -1;
+				a = code[ip++];
+				b = code[ip++];
+				c = code[ip++];
+				r[c] = r[a] == r[b] ? 0 : -1;
 				break;
 			// case BytecodeDefinition.INSTR_FADD:
 			// i = code[ip++];
@@ -185,78 +187,79 @@ public class Interpreter2 {
 				ip = f.returnAddress;
 				break;
 			case BytecodeDefinition.INSTR_BR:
-				ip = code[ip++];
+				ip = code[ip];
 				break;
 			case BytecodeDefinition.INSTR_BRT:
-				i = code[ip++];
+				a = code[ip++];
 				addr = code[ip++];
-				int bv = r[i];
+				int bv = r[a];
 				if (bv == 0) ip = addr;
 				break;
 			case BytecodeDefinition.INSTR_BRF:
-				i = code[ip++];
+				a = code[ip++];
 				addr = code[ip++];
-				int bv2 = r[i];
+				int bv2 = r[a];
 				if (bv2 != 0) ip = addr;
 				break;
 			case BytecodeDefinition.INSTR_CCONST:
-				i = code[ip++];
-				r[i] = (char) code[ip++];
+				a = code[ip++];
+				r[a] = (char) code[ip++];
 				break;
 			case BytecodeDefinition.INSTR_ICONST:
-				i = code[ip++];
-				r[i] = code[ip++] & 0xFF<< 8 | code[ip++]& 0xFF;
+				r[code[ip++]] =  ((code[ip++] & 0xFF) << 8) | (code[ip++] & 0xFF);
 				break;
 			// case BytecodeDefinition.INSTR_FCONST:
 			case BytecodeDefinition.INSTR_SCONST:
-				i = code[ip++];
+				a = code[ip++];
 				int constIndex = code[ip++];
-				r[i] = constIndex;// constPool[constIndex];
+				r[a] = constIndex;// constPool[constIndex];
 				break;
 			case BytecodeDefinition.INSTR_GLOAD:
-				i = code[ip++];
+				a = code[ip++];
 				addr = code[ip++];
-				r[i] = globals[addr];
+				r[a] = globals[addr];
 				break;
 			case BytecodeDefinition.INSTR_GSTORE:
-				i = code[ip++];
+				a = code[ip++];
 				addr = code[ip++];
-				globals[addr] = r[i];
+				globals[addr] = r[a];
 				break;
 			case BytecodeDefinition.INSTR_FLOAD:
-				i = code[ip++];
-				j = code[ip++];
+				a = code[ip++];
+				b = code[ip++];
 				fieldIndex = ((FieldSymbol) constPool[code[ip++]]).offset;
-				r[i] = structPool[r[j]][fieldIndex];
+				r[a] = structPool[r[b]][fieldIndex];
 				break;
 			case BytecodeDefinition.INSTR_FSTORE:
-				i = code[ip++];
-				j = code[ip++];
+				a = code[ip++];
+				b = code[ip++];
 				fieldIndex = ((FieldSymbol) constPool[code[ip++]]).offset;
-				structPool[r[j]][fieldIndex] = r[i];
+				structPool[r[b]][fieldIndex] = r[a];
 				break;
 			case BytecodeDefinition.INSTR_MOVE:
-				i = code[ip++];
-				j = code[ip++];
-				r[j] = r[i];
+				a = code[ip++];
+				b = code[ip++];
+				r[b] = r[a];
 				break;
 			case BytecodeDefinition.INSTR_PRINT:
-				i = code[ip++];
-				System.out.println(r[i]);
+				a = code[ip++];
+				System.out.println(r[a]);
 				break;
 			case BytecodeDefinition.INSTR_STRUCT:
-				i = code[ip++];
+				a = code[ip++];
 				int nfields = ((ClassSymbol) constPool[code[ip++]]).getLength();
-				r[i] = newStruct(nfields);
+				r[a] = newStruct(nfields);
 				break;
 			case BytecodeDefinition.INSTR_NULL:
-				i = code[ip++];
-				r[i] = 0;
+				a = code[ip++];
+				r[a] = 0;
 				break;
+			case BytecodeDefinition.INSTR_HALT:				
+				break Outter;
 			default:
 				throw new Error("invalid opcode: " + opcode + " at ip=" + (ip - 1));
 			}
-			opcode = code[ip];
+			opcode = code[ip++];
 		}
 	}
 
@@ -285,11 +288,11 @@ public class Interpreter2 {
 	 * Return with ip pointing *after* last byte of operand. The byte-order is
 	 * high byte down to low byte, left to right.
 	 */
-//	protected int code[ip++] {
-//		int word = BytecodeAssembler.getInt(code, ip);
-//		ip += 4;
-//		return word;
-//	}
+	// protected int code[ip++] {
+	// int word = BytecodeAssembler.getInt(code, ip);
+	// ip += 4;
+	// return word;
+	// }
 
 	// Tracing, dumping, ...
 

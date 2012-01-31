@@ -98,15 +98,15 @@ public class BytecodeAssembler2 extends AssemblerParser {
 		case FIELD:
 			int i = text.indexOf('.');
 			ClassSymbol c = new ClassSymbol(text.substring(1, i));
-			c = (ClassSymbol) getConstantPool()[getConstantPoolIndex(c)];			
-			v = getConstantPoolIndex(new FieldSymbol(c,text.substring(i+1)));
+			c = (ClassSymbol) getConstantPool()[getConstantPoolIndex(c)];
+			v = getConstantPoolIndex(new FieldSymbol(c, text.substring(i + 1)));
 			break;
 		case INT:
 			ensureCapacity(ip + 2); // expand code array if necessary
 			v = Integer.valueOf(text);
-			code[ip++] = (byte) (v >> (8 * 1) & 0xFF);
-			code[ip++] =(byte) (v & 0xFF);
-			//TODO  break
+			code[ip++] = (byte) (v >> 8 & 0xFF);
+			code[ip++] = (byte) (v & 0xFF);
+			// TODO break
 			return;
 		case CHAR:
 			v = Character.valueOf(text.charAt(1));
@@ -129,7 +129,7 @@ public class BytecodeAssembler2 extends AssemblerParser {
 		}
 		ensureCapacity(ip + 1); // expand code array if necessary
 		assert v < 0XFF;
-		code[ip++] = (byte)v;
+		code[ip++] = (byte) v;
 	}
 
 	protected int getConstantPoolIndex(Object o) {
@@ -185,7 +185,7 @@ public class BytecodeAssembler2 extends AssemblerParser {
 
 	@Override
 	protected void defineField(Token idToken) {
-		FieldSymbol field = new FieldSymbol(this.currentClass,idToken.getText());
+		FieldSymbol field = new FieldSymbol(this.currentClass, idToken.getText());
 		this.currentClass.add(field);
 		getConstantPoolIndex(field);
 	}
@@ -239,25 +239,25 @@ public class BytecodeAssembler2 extends AssemblerParser {
 			code = bigger;
 		}
 	}
-	
-//	public static int getInt(byte[] memory, int index) {
-//		int b1 = memory[index++] & 0xFF; // mask off sign-extended bits
-//		int b2 = memory[index++] & 0xFF;
-//		int b3 = memory[index++] & 0xFF;
-//		int b4 = memory[index++] & 0xFF;
-//		int word = b1 << (8 * 3) | b2 << (8 * 2) | b3 << (8 * 1) | b4;
-//		return word;
-//	}
-//
-//	/**
-//	 * Write value at index into a byte array highest to lowest byte, left to
-//	 * right.
-//	 */
-//	public static void writeInt(byte[] bytes, int index, int value) {
-//		bytes[index + 0] = (byte) ((value >> (8 * 3)) & 0xFF); // get highest
-//																// byte
-//		bytes[index + 1] = (byte) ((value >> (8 * 2)) & 0xFF);
-//		bytes[index + 2] = (byte) ((value >> (8 * 1)) & 0xFF);
-//		bytes[index + 3] = (byte) (value & 0xFF);
-//	}
+
+	// public static int getInt(byte[] memory, int index) {
+	// int b1 = memory[index++] & 0xFF; // mask off sign-extended bits
+	// int b2 = memory[index++] & 0xFF;
+	// int b3 = memory[index++] & 0xFF;
+	// int b4 = memory[index++] & 0xFF;
+	// int word = b1 << (8 * 3) | b2 << (8 * 2) | b3 << (8 * 1) | b4;
+	// return word;
+	// }
+	//
+	// /**
+	// * Write value at index into a byte array highest to lowest byte, left to
+	// * right.
+	// */
+	// public static void writeInt(byte[] bytes, int index, int value) {
+	// bytes[index + 0] = (byte) ((value >> (8 * 3)) & 0xFF); // get highest
+	// // byte
+	// bytes[index + 1] = (byte) ((value >> (8 * 2)) & 0xFF);
+	// bytes[index + 2] = (byte) ((value >> (8 * 1)) & 0xFF);
+	// bytes[index + 3] = (byte) (value & 0xFF);
+	// }
 }

@@ -88,6 +88,7 @@ public class Interpreter {
 
 	/** Execute the bytecodes in code memory starting at mainAddr */
 	public void exec() throws Exception {
+		long start = System.nanoTime();
 		// SIMULATE "call main()"; set up stack as if we'd called main()
 		if (mainFunction == null) {
 			mainFunction = new FunctionSymbol("main", 0, 0, 0);
@@ -96,6 +97,9 @@ public class Interpreter {
 		calls[++fp] = f;
 		ip = mainFunction.address;
 		cpu();
+		
+		long end = System.nanoTime();
+		System.out.println(this.getClass().getName() + " : " + (end - start));
 	}
 
 	/** Simulate the fetch-execute cycle */
@@ -109,10 +113,7 @@ public class Interpreter {
 			Object r[] = calls[fp].registers; // shortcut to current registers
 			switch (opcode) {
 			case BytecodeDefinition.INSTR_IADD:
-				i = getRegOperand();
-				j = getRegOperand();
-				k = getRegOperand();
-				r[k] = ((Integer) r[i]) + ((Integer) r[j]);
+				r[getRegOperand()] = ((Integer) r[getRegOperand()]) + ((Integer) r[getRegOperand()]);
 				break;
 			// ...
 			case BytecodeDefinition.INSTR_ISUB:

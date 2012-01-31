@@ -28,7 +28,7 @@ grammar Assembler;
 // END: members
 
 program
-    :   globals? classDeclaration fieldDeclaration+
+    :   globals? classDeclaration? fieldDeclaration*
         ( functionDeclaration | instr | label | NEWLINE )+
         {checkForUnresolvedReferences();}
     ;
