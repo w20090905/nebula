@@ -88,18 +88,22 @@ public class Interpreter {
 
 	/** Execute the bytecodes in code memory starting at mainAddr */
 	public void exec() throws Exception {
-		long start = System.nanoTime();
 		// SIMULATE "call main()"; set up stack as if we'd called main()
 		if (mainFunction == null) {
 			mainFunction = new FunctionSymbol("main", 0, 0, 0);
 		}
-		StackFrame f = new StackFrame(mainFunction, ip);
-		calls[++fp] = f;
-		ip = mainFunction.address;
-		cpu();
-		
+
+		long start = System.nanoTime();
+		for (int i = 0; i < 100; i++) {
+			fp = -1;
+			ip=0;
+			StackFrame f = new StackFrame(mainFunction, ip);
+			calls[++fp] = f;
+			ip = mainFunction.address;
+			cpu();
+		}
 		long end = System.nanoTime();
-		System.out.println(this.getClass().getName() + " : " + (end - start));
+		System.out.println(this.getClass().getName() + " : " + (end - start)/100);
 	}
 
 	/** Simulate the fetch-execute cycle */
