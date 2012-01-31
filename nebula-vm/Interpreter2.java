@@ -86,6 +86,10 @@ public class Interpreter2 {
 		return hasErrors;
 	}
 
+	static byte CONST_TRUE = 1;
+	static byte CONST_FALSE = 0;
+	
+
 	/** Execute the bytecodes in code memory starting at mainAddr */
 	public void exec() throws Exception {
 		long start = System.nanoTime();
@@ -110,8 +114,10 @@ public class Interpreter2 {
 		short opcode = code[ip++];
 		Outter: while (ip < codeSize) {
 			//if (trace) trace();
-			//ip++; // jump to next instruction or first byte of operand
-			int r[] = calls[fp].registers; // shortcut to current registers
+			// ip++; // jump to next instruction or first byte of operand
+
+			int r[] = calls[fp].registers;
+
 			switch (opcode) {
 			case BytecodeDefinition.INSTR_IADD:
 				r[code[ip++]] = r[code[ip++]] + r[code[ip++]];
@@ -130,10 +136,7 @@ public class Interpreter2 {
 				r[c] = r[a] * r[b];
 				break;
 			case BytecodeDefinition.INSTR_ILT:
-				a = code[ip++];
-				b = code[ip++];
-				c = code[ip++];
-				r[c] = r[a] < r[b] ? 0 : -1;
+				r[code[ip++]] = r[code[ip++]] < r[code[ip++]] ? CONST_TRUE : CONST_FALSE;
 				break;
 			case BytecodeDefinition.INSTR_IEQ:
 				a = code[ip++];
@@ -141,41 +144,41 @@ public class Interpreter2 {
 				c = code[ip++];
 				r[c] = r[a] == r[b] ? 0 : -1;
 				break;
-			// case BytecodeDefinition.INSTR_FADD:
-			// i = code[ip++];
-			// j = code[ip++];
-			// k = code[ip++];
-			// r[k] = ((Float) r[i]) + ((Float) r[j]);
-			// break;
-			// case BytecodeDefinition.INSTR_FSUB:
-			// i = code[ip++];
-			// j = code[ip++];
-			// k = code[ip++];
-			// r[k] = ((Float) r[i]) - ((Float) r[j]);
-			// break;
-			// case BytecodeDefinition.INSTR_FMUL:
-			// i = code[ip++];
-			// j = code[ip++];
-			// k = code[ip++];
-			// r[k] = ((Float) r[i]) * ((Float) r[j]);
-			// break;
-			// case BytecodeDefinition.INSTR_FLT:
-			// i = code[ip++];
-			// j = code[ip++];
-			// k = code[ip++];
-			// r[k] = ((Float) r[i]).floatValue() < ((Float) r[j]).floatValue();
-			// break;
-			// case BytecodeDefinition.INSTR_FEQ:
-			// i = code[ip++];
-			// j = code[ip++];
-			// k = code[ip++];
-			// r[k] = ((Float) r[i]).intValue() == ((Float) r[j]).intValue();
-			// break;
-			// case BytecodeDefinition.INSTR_ITOF:
-			// i = code[ip++];
-			// j = code[ip++];
-			// r[j] = (float) (((Integer) r[i]).intValue());
-			// break;
+			case BytecodeDefinition.INSTR_FADD:
+//				i = code[ip++];
+//				j = code[ip++];
+//				k = code[ip++];
+//				r[k] = ((Float) r[i]) + ((Float) r[j]);
+				break;
+			case BytecodeDefinition.INSTR_FSUB:
+//				i = code[ip++];
+//				j = code[ip++];
+//				k = code[ip++];
+//				r[k] = ((Float) r[i]) - ((Float) r[j]);
+				break;
+			case BytecodeDefinition.INSTR_FMUL:
+//				i = code[ip++];
+//				j = code[ip++];
+//				k = code[ip++];
+//				r[k] = ((Float) r[i]) * ((Float) r[j]);
+				break;
+			case BytecodeDefinition.INSTR_FLT:
+//				i = code[ip++];
+//				j = code[ip++];
+//				k = code[ip++];
+//				r[k] = ((Float) r[i]).floatValue() < ((Float) r[j]).floatValue();
+				break;
+			case BytecodeDefinition.INSTR_FEQ:
+//				i = code[ip++];
+//				j = code[ip++];
+//				k = code[ip++];
+//				r[k] = ((Float) r[i]).intValue() == ((Float) r[j]).intValue();
+				break;
+			case BytecodeDefinition.INSTR_ITOF:
+//				i = code[ip++];
+//				j = code[ip++];
+//				r[j] = (float) (((Integer) r[i]).intValue());
+				break;
 			case BytecodeDefinition.INSTR_CALL:
 				int funcStringIndex = code[ip++];
 				int baseRegisterIndex = code[ip++];
@@ -190,25 +193,21 @@ public class Interpreter2 {
 				ip = code[ip];
 				break;
 			case BytecodeDefinition.INSTR_BRT:
-				a = code[ip++];
-				addr = code[ip++];
-				int bv = r[a];
-				if (bv == 0) ip = addr;
+				if (r[code[ip++]] == CONST_TRUE) ip = code[ip++];
+				else ip++;
 				break;
 			case BytecodeDefinition.INSTR_BRF:
-				a = code[ip++];
-				addr = code[ip++];
-				int bv2 = r[a];
-				if (bv2 != 0) ip = addr;
+				if (r[code[ip++]] != CONST_TRUE) ip = code[ip++];
+				else ip++;
 				break;
 			case BytecodeDefinition.INSTR_CCONST:
 				a = code[ip++];
 				r[a] = (char) code[ip++];
 				break;
 			case BytecodeDefinition.INSTR_ICONST:
-				r[code[ip++]] =  ((code[ip++] & 0xFF) << 8) | (code[ip++] & 0xFF);
+				r[code[ip++]] = ((code[ip++] & 0xFF) << 8) | (code[ip++] & 0xFF);
 				break;
-			// case BytecodeDefinition.INSTR_FCONST:
+			//case BytecodeDefinition.INSTR_FCONST:
 			case BytecodeDefinition.INSTR_SCONST:
 				a = code[ip++];
 				int constIndex = code[ip++];
@@ -254,7 +253,7 @@ public class Interpreter2 {
 				a = code[ip++];
 				r[a] = 0;
 				break;
-			case BytecodeDefinition.INSTR_HALT:				
+			case BytecodeDefinition.INSTR_HALT:
 				break Outter;
 			default:
 				throw new Error("invalid opcode: " + opcode + " at ip=" + (ip - 1));
