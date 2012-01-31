@@ -125,11 +125,12 @@ public class Interpreter2 {
 
 		int a = 0, b = 0, c = 0, addr = 0, fieldIndex = 0;
 		short opcode = code[ip++];
+		int r[] = calls[fp].registers;
 		Outter: while (ip < codeSize) {
 			// if (trace) trace();
 			// ip++; // jump to next instruction or first byte of operand
 
-			int r[] = calls[fp].registers;
+			
 
 			switch (opcode) {
 			case BytecodeDefinition.INSTR_IADD:
@@ -198,11 +199,13 @@ public class Interpreter2 {
 				int funcStringIndex = code[ip++];
 				int baseRegisterIndex = code[ip++];
 				call(funcStringIndex, baseRegisterIndex);
+				r = calls[fp].registers;
 				break;
 			case BytecodeDefinition.INSTR_RET:
 				StackFrame2 f = calls[fp--]; // pop stack frame
 				calls[fp].registers[0] = f.registers[0];
 				ip = f.returnAddress;
+				r = calls[fp].registers;
 				break;
 			case BytecodeDefinition.INSTR_BR:
 				ip = code[ip];
