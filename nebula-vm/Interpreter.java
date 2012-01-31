@@ -93,8 +93,19 @@ public class Interpreter {
 			mainFunction = new FunctionSymbol("main", 0, 0, 0);
 		}
 
+
+		for (int i = 0; i < 5; i++) {
+			fp = -1;
+			ip=0;
+			StackFrame f = new StackFrame(mainFunction, ip);
+			calls[++fp] = f;
+			ip = mainFunction.address;
+			cpu();
+		}
+		
+		int max = 100;
 		long start = System.nanoTime();
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < max; i++) {
 			fp = -1;
 			ip=0;
 			StackFrame f = new StackFrame(mainFunction, ip);
@@ -103,7 +114,7 @@ public class Interpreter {
 			cpu();
 		}
 		long end = System.nanoTime();
-		System.out.println(this.getClass().getName() + " : " + (end - start)/100);
+		System.out.println(this.getClass().getName() + " : " + (end - start)/max);
 	}
 
 	/** Simulate the fetch-execute cycle */
@@ -248,7 +259,7 @@ public class Interpreter {
 				break;
 			case BytecodeDefinition.INSTR_PRINT:
 				i = getRegOperand();
-				System.out.println(r[i]);
+				//System.out.println(r[i]);
 				break;
 			case BytecodeDefinition.INSTR_STRUCT:
 				i = getRegOperand();

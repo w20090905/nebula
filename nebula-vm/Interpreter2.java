@@ -97,8 +97,18 @@ public class Interpreter2 {
 			mainFunction = new FunctionSymbol("main", 0, 0, 0);
 		}
 
+		for (int i = 0; i < 5; i++) {
+			fp = -1;
+			ip=0;
+			StackFrame2 f = new StackFrame2(mainFunction, ip);
+			calls[++fp] = f;
+			ip = mainFunction.address;
+			cpu();
+		}
+		
+		int max = 100;
 		long start = System.nanoTime();
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < max; i++) {
 			fp = -1;
 			ip=0;
 			StackFrame2 f = new StackFrame2(mainFunction, ip);
@@ -107,7 +117,7 @@ public class Interpreter2 {
 			cpu();
 		}
 		long end = System.nanoTime();
-		System.out.println(this.getClass().getName() + " : " + (end - start)/100);
+		System.out.println(this.getClass().getName() + " : " + (end - start)/max);
 	}
 
 	/** Simulate the fetch-execute cycle */
@@ -247,7 +257,7 @@ public class Interpreter2 {
 				break;
 			case BytecodeDefinition.INSTR_PRINT:
 				a = code[ip++];
-				System.out.println(r[a]);
+				//System.out.println(r[a]);
 				break;
 			case BytecodeDefinition.INSTR_STRUCT:
 				a = code[ip++];
