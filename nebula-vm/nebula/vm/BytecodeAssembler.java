@@ -1,4 +1,5 @@
 package nebula.vm;
+
 /***
  * Excerpted from "Language Implementation Patterns",
  * published by The Pragmatic Bookshelf.
@@ -29,9 +30,12 @@ public class BytecodeAssembler extends AssemblerParser {
 	 * put FunctionSymbols in here too.
 	 */
 	protected List<Object> constPool = new ArrayList<Object>();
+	
 	protected int ip = 0; // Instruction address pointer; used to fill code
-	protected byte[] code = new byte[INITIAL_CODE_SIZE]; // code memory
+	protected int[] code = new int[INITIAL_CODE_SIZE]; // code memory
+	
 	protected int dataSize; // set via .globals
+	
 	protected FunctionSymbol mainFunction;
 
 	protected ClassSymbol currentClass;
@@ -46,7 +50,7 @@ public class BytecodeAssembler extends AssemblerParser {
 		}
 	}
 
-	public byte[] getMachineCode() {
+	public int[] getMachineCode() {
 		return code;
 	}
 
@@ -65,76 +69,85 @@ public class BytecodeAssembler extends AssemblerParser {
 
 	/** Generate code for an instruction with no operands */
 	protected void gen(Token instrToken) {
+		code[ip++] = doGenOpcode(instrToken);
+	}
+
+	protected int doGenOpcode(Token instrToken) {
 		// System.out.println("Gen "+instrToken);
 		String instrName = instrToken.getText();
 		Integer opcodeI = instructionOpcodeMapping.get(instrName);
 		if (opcodeI == null) {
 			System.err.println("line " + instrToken.getLine() + ": Unknown instruction: " + instrName);
-			return;
+			return -1;
 		}
-		int opcode = opcodeI.intValue();
 		ensureCapacity(ip + 1);
-		code[ip++] = (byte) (opcode & 0xFF);
+		int op = opcodeI.intValue();
+		return (op & 0xFF) << BytecodeDefinition.OFOP;
 	}
 
 	/** Generate code for an instruction with one operand */
-	protected void gen(Token instrToken, Token operandToken) {
-		gen(instrToken);
-		genOperand(operandToken);
+	protected void gen(Token instrToken, Token oTokenAX) {
+		int op = doGenOpcode(instrToken);
+		code[ip++] = genOperand(oTokenAX, op, BytecodeDefinition.OFA_);
 	}
 
-	protected void gen(Token instrToken, Token oToken1, Token oToken2) {
-		gen(instrToken, oToken1);
-		genOperand(oToken2);
+	protected void gen(Token instrToken, Token oTokenAX, Token oTokenBX) {
+		int op = doGenOpcode(instrToken);
+		op = genOperand(oTokenAX, op, BytecodeDefinition.OFA_);
+		code[ip++] = genOperand(oTokenBX, op, BytecodeDefinition.OFB_);
 	}
 
-	protected void gen(Token instrToken, Token oToken1, Token oToken2, Token oToken3) {
-		gen(instrToken, oToken1, oToken2);
-		genOperand(oToken3);
+	protected void gen(Token instrToken, Token oTokenAX, Token oTokenBX, Token oTokenCX) {
+		int op = doGenOpcode(instrToken);
+		op = genOperand(oTokenAX, op, BytecodeDefinition.OFA_);
+		op = genOperand(oTokenBX, op, BytecodeDefinition.OFB_);
+		code[ip++] = genOperand(oTokenCX, op, BytecodeDefinition.OFC_);
 	}
 
-	protected void genOperand(Token operandToken) {
+	protected int genOperand(Token operandToken, int op, int offset) {
 		String text = operandToken.getText();
 		int v = 0;
 		switch (operandToken.getType()) { // switch on token type
 		case CLASS:
 			v = getConstantPoolIndex(new ClassSymbol(text));
+			op |= (v & BytecodeDefinition.MKX_) << offset;
 			break;
 		case FIELD:
 			int i = text.indexOf('.');
 			ClassSymbol c = new ClassSymbol(text.substring(1, i));
 			c = (ClassSymbol) getConstantPool()[getConstantPoolIndex(c)];
 			v = getConstantPoolIndex(new FieldSymbol(c, text.substring(i + 1)));
+			op |= (v & BytecodeDefinition.MKX_) << offset;
 			break;
 		case INT:
-			ensureCapacity(ip + 2); // expand code array if necessary
 			v = Integer.valueOf(text);
-			code[ip++] = (byte) (v >> 8 & 0xFF);
-			code[ip++] = (byte) (v & 0xFF);
-			// TODO break
-			return;
+			op |= (v & BytecodeDefinition.MKXX) << (offset-BytecodeDefinition.OFT);
+			break;
 		case CHAR:
 			v = Character.valueOf(text.charAt(1));
+			op |= (v & BytecodeDefinition.MKXX) <<  (offset-BytecodeDefinition.OFT);
 			break;
 		case FLOAT:
 			v = getConstantPoolIndex(Float.valueOf(text));
+			op |= (v & BytecodeDefinition.MKX_) << offset;
 			break;
 		case STRING:
 			v = getConstantPoolIndex(text);
+			op |= (v & BytecodeDefinition.MKX_) << offset;
 			break;
 		case ID:
-			v = getLabelAddress(text);
+			v = getLabelAddress(text, offset-BytecodeDefinition.OFT);
+			op |= (v & BytecodeDefinition.MKXX) << (offset-BytecodeDefinition.OFT);
 			break;
 		case FUNC:
 			v = getFunctionIndex(text);
 			break;
 		case REG:
 			v = getRegisterNumber(operandToken);
+			op |= (v & BytecodeDefinition.MKX_) << offset;
 			break;
 		}
-		ensureCapacity(ip + 1); // expand code array if necessary
-		assert v < 0XFF;
-		code[ip++] = (byte) v;
+		return op;
 	}
 
 	protected int getConstantPoolIndex(Object o) {
@@ -162,18 +175,18 @@ public class BytecodeAssembler extends AssemblerParser {
 	}
 
 	/** Compute the code address of a label */
-	protected int getLabelAddress(String id) {
+	protected int getLabelAddress(String id, int offset) {
 		LabelSymbol sym = (LabelSymbol) labels.get(id);
 		if (sym == null) {
 			// assume it's a forward code reference; record opnd address
-			sym = new LabelSymbol(id, ip, true);
+			sym = new LabelSymbol(id, ip-1, offset, true);
 			sym.isDefined = false;
 			labels.put(id, sym); // add to symbol table
 		} else {
 			if (sym.isForwardRef) {
 				// address is unknown, must simply add to forward ref list
 				// record where in code memory we should patch later
-				sym.addForwardReference(ip);
+				sym.addForwardReference(ip-1, offset);
 			} else {
 				// all is well; it's defined--just grab address
 				return sym.address;
@@ -221,7 +234,7 @@ public class BytecodeAssembler extends AssemblerParser {
 		String id = idToken.getText();
 		LabelSymbol sym = (LabelSymbol) labels.get(id);
 		if (sym == null) {
-			LabelSymbol csym = new LabelSymbol(id, ip, false);
+			LabelSymbol csym = new LabelSymbol(id, ip, 0, false);
 			labels.put(id, csym); // add to symbol table
 		} else {
 			if (sym.isForwardRef) {
@@ -239,7 +252,7 @@ public class BytecodeAssembler extends AssemblerParser {
 	protected void ensureCapacity(int index) {
 		if (index >= code.length) { // expand
 			int newSize = Math.max(index, code.length) * 2;
-			byte[] bigger = new byte[newSize];
+			int[] bigger = new int[newSize];
 			System.arraycopy(code, 0, bigger, 0, code.length);
 			code = bigger;
 		}
