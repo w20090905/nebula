@@ -141,7 +141,7 @@ public class Interpreter3 {
 			mainFunction = new FunctionSymbol("main", 0, 0, 0);
 		}
 
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 1; i++) {
 			fp = -1;
 			ip = 0;
 			StackFrame f = new StackFrame(mainFunction, ip);
@@ -150,7 +150,7 @@ public class Interpreter3 {
 			cpu();
 		}
 
-		int max = 100;
+		int max = 1;
 		long start = System.nanoTime();
 		for (int i = 0; i < max; i++) {
 			fp = -1;
