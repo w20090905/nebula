@@ -171,40 +171,38 @@ public class Interpreter3 {
 		int r[] = calls[fp].registers;
 		Outter: while (ip < codeSize) {
 			// if (trace) trace();
-			// ip++; // jump to next instruction or first byte of operand
-
-			switch (op >> OFOP) {
+			switch ((op >>> OFOP) & 0xFFFFFFFF) {
 			case INSTR_IADD:
-				r[(op & MKA_) >> OFA_] = r[(op & MKB_) >> OFB_] + r[(op & MKC_) >> OFC_];
+				r[(op & MKA_) >>> OFA_] = r[(op & MKB_) >>> OFB_] + r[(op & MKC_) >>> OFC_];
 				break;
 			// ...
 			case INSTR_ISUB:
-				r[(op & MKA_) >> OFA_] = r[(op & MKB_) >> OFB_] - r[(op & MKC_) >> OFC_];
+				r[(op & MKA_) >>> OFA_] = r[(op & MKB_) >>> OFB_] - r[(op & MKC_) >>> OFC_];
 				break;
 			case INSTR_IMUL:
-				r[(op & MKA_) >> OFA_] = r[(op & MKB_) >> OFB_] * r[(op & MKC_) >> OFC_];
+				r[(op & MKA_) >>> OFA_] = r[(op & MKB_) >>> OFB_] * r[(op & MKC_) >>> OFC_];
 				break;
 			case INSTR_ILT:
-				r[(op & MKA_) >> OFA_] = r[(op & MKB_) >> OFB_] < r[(op & MKC_) >> OFC_] ? CONST_TRUE : CONST_FALSE;
+				r[(op & MKA_) >>> OFA_] = r[(op & MKB_) >>> OFB_] < r[(op & MKC_) >>> OFC_] ? CONST_TRUE : CONST_FALSE;
 				break;
 			case INSTR_IEQ:
-				r[(op & MKA_) >> OFA_] = r[(op & MKB_) >> OFB_] == r[(op & MKC_) >> OFC_] ? CONST_TRUE : CONST_FALSE;
+				r[(op & MKA_) >>> OFA_] = r[(op & MKB_) >>> OFB_] == r[(op & MKC_) >>> OFC_] ? CONST_TRUE : CONST_FALSE;
 				break;
 			case INSTR_FADD:
-				r[(op & MKA_) >> OFA_] = float_add(r[(op & MKB_) >> OFB_], r[(op & MKC_) >> OFC_]);
+				r[(op & MKA_) >>> OFA_] = float_add(r[(op & MKB_) >>> OFB_], r[(op & MKC_) >>> OFC_]);
 				break;
 			case INSTR_FSUB:
-				r[(op & MKA_) >> OFA_] = float_sub(r[(op & MKB_) >> OFB_], r[(op & MKC_) >> OFC_]);
+				r[(op & MKA_) >>> OFA_] = float_sub(r[(op & MKB_) >>> OFB_], r[(op & MKC_) >>> OFC_]);
 				break;
 			case INSTR_FMUL:
-				r[(op & MKA_) >> OFA_] = float_mul(r[(op & MKB_) >> OFB_], r[(op & MKC_) >> OFC_]);
+				r[(op & MKA_) >>> OFA_] = float_mul(r[(op & MKB_) >>> OFB_], r[(op & MKC_) >>> OFC_]);
 				break;
 			case INSTR_FLT:
-				r[(op & MKA_) >> OFA_] = float_lt(r[(op & MKB_) >> OFB_], r[(op & MKC_) >> OFC_]) ? CONST_TRUE
+				r[(op & MKA_) >>> OFA_] = float_lt(r[(op & MKB_) >>> OFB_], r[(op & MKC_) >>> OFC_]) ? CONST_TRUE
 						: CONST_FALSE;
 				break;
 			case INSTR_FEQ:
-				r[(op & MKA_) >> OFA_] = r[(op & MKB_) >> OFB_] == r[(op & MKC_) >> OFC_] ? CONST_TRUE : CONST_FALSE;
+				r[(op & MKA_) >>> OFA_] = r[(op & MKB_) >>> OFB_] == r[(op & MKC_) >>> OFC_] ? CONST_TRUE : CONST_FALSE;
 				break;
 			case INSTR_ITOF:
 				// i = code[ip++];
@@ -212,8 +210,8 @@ public class Interpreter3 {
 				// r[j] = (float) (((Integer) r[i]).intValue());
 				break;
 			case INSTR_CALL:
-				int funcStringIndex = (op & MKA_) >> OFA_;
-				int baseRegisterIndex = (op & MKB_) >> OFB_;
+				int funcStringIndex = (op & MKA_) >>> OFA_;
+				int baseRegisterIndex = (op & MKB_) >>> OFB_;
 				call(funcStringIndex, baseRegisterIndex);
 				r = calls[fp].registers;
 				break;
@@ -224,62 +222,62 @@ public class Interpreter3 {
 				r = calls[fp].registers;
 				break;
 			case INSTR_BR:
-				ip = (op & MKAX) >> OFAX;
+				ip = (op & MKAX) >>> OFAX;
 				break;
 			case INSTR_BRT:
-				if (r[(op & MKA_) >> OFA_] == CONST_TRUE) ip = (op & MKBX) >> OFBX;
+				if (r[(op & MKA_) >>> OFA_] == CONST_TRUE) ip = (op & MKBX) >>> OFBX;
 				break;
 			case INSTR_BRF:
-				if (r[(op & MKA_) >> OFA_] != CONST_TRUE) ip = (op & MKBX) >> OFBX;
+				if (r[(op & MKA_) >>> OFA_] != CONST_TRUE) ip = (op & MKBX) >>> OFBX;
 				break;
 			case INSTR_CCONST:
-				r[(op & MKA_) >> OFA_] = (op & MKBX) >> OFBX;
+				r[(op & MKA_) >>> OFA_] = (op & MKBX) >>> OFBX;
 				break;
 			case INSTR_ICONST:
-				r[(op & MKA_) >> OFA_] = (op & MKBX) >> OFBX;
+				r[(op & MKA_) >>> OFA_] = (op & MKBX) >>> OFBX;
 				break;
 			// case INSTR_FCONST:
 			case INSTR_SCONST:
-				r[(op & MKA_) >> OFA_] = (op & MKB_) >> OFB_;
+				r[(op & MKA_) >>> OFA_] = (op & MKB_) >>> OFB_;
 				break;
 			case INSTR_GLOAD:
-				r[(op & MKA_) >> OFA_] = globals[(op & MKB_) >> OFB_];
+				r[(op & MKA_) >>> OFA_] = globals[(op & MKB_) >>> OFB_];
 				break;
 			case INSTR_GSTORE:
-				globals[(op & MKA_) >> OFA_] = r[(op & MKB_) >> OFB_];
+				globals[(op & MKA_) >>> OFA_] = r[(op & MKB_) >>> OFB_];
 				break;
 			case INSTR_FLOAD:
-				a = (op & MKA_) >> OFA_;
-				b = (op & MKB_) >> OFB_;
-				c = (op & MKC_) >> OFC_;
+				a = (op & MKA_) >>> OFA_;
+				b = (op & MKB_) >>> OFB_;
+				c = (op & MKC_) >>> OFC_;
 				r[a] = structPool[r[b]][((FieldSymbol) constPool[c]).offset];
 				break;
 			case INSTR_FSTORE:
-				a = (op & MKA_) >> OFA_;
-				b = (op & MKB_) >> OFB_;
-				c = (op & MKC_) >> OFC_;
+				a = (op & MKA_) >>> OFA_;
+				b = (op & MKB_) >>> OFB_;
+				c = (op & MKC_) >>> OFC_;
 				structPool[r[a]][((FieldSymbol) constPool[b]).offset] = r[c];
 				break;
 			case INSTR_MOVE:
-				r[(op & MKA_) >> OFA_] = r[(op & MKB_) >> OFB_];
+				r[(op & MKA_) >>> OFA_] = r[(op & MKB_) >>> OFB_];
 				break;
 			case INSTR_PRINT:
-				a = (op & MKA_) >> OFA_;
+				a = (op & MKA_) >>> OFA_;
 //				System.out.println(r[a]);
 				break;
 			case INSTR_STRUCT:
-				a = (op & MKA_) >> OFA_;
-				b = (op & MKB_) >> OFB_;
+				a = (op & MKA_) >>> OFA_;
+				b = (op & MKB_) >>> OFB_;
 				int nfields = ((ClassSymbol) constPool[b]).getLength();
 				r[a] = newStruct(nfields);
 				break;
 			case INSTR_NULL:
-				r[(op & MKA_) >> OFA_] = 0;
+				r[(op & MKA_) >>> OFA_] = 0;
 				break;
 			case INSTR_HALT:
 				break Outter;
 			default:
-				throw new Error("invalid opcode: " + Integer.toBinaryString(op) + " at ip=" + (ip - 1));
+				throw new Error("Address : " + ip + " ;invalid opcode: " + Integer.toBinaryString(op) + " at ip=" + (ip - 1));
 			}
 			op = code[ip++];
 		}

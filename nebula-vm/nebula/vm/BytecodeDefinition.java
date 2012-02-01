@@ -15,7 +15,7 @@ public class BytecodeDefinition {
 	public static final int INT = AssemblerParser.INT;
 	public static final int POOL = 1000; // unique imaginary token
 
-	public static final int OFT = 8;
+	public static final int OFT = 9;
 	public static final int OFOP = OFT * 3;
 	public static final int OFA_ = OFT * 2;	
 	public static final int OFAX = OFT * 1;
@@ -23,14 +23,14 @@ public class BytecodeDefinition {
 	public static final int OFBX = OFT * 0;
 	public static final int OFC_ = OFT * 0;
 	
-	public static final int MKOP = 0xFF000000;
-	public static final int MKA_ = 0x00FF0000;
-	public static final int MKAX = 0x00FFFF00;
-	public static final int MKB_ = 0x0000FF00;
-	public static final int MKBX = 0x0000FFFF;
-	public static final int MKC_ = 0x000000FF;
-	public static final int MKX_ = 0x000000FF;
-	public static final int MKXX = 0x0000FFFF;
+	public static final int MKOP = 0xF8000000;
+	public static final int MKA_ = 0x07FC0000;
+	public static final int MKAX = 0x07FFFE00;
+	public static final int MKB_ = 0x0003FE00;
+	public static final int MKBX = 0x0003FFFF;
+	public static final int MKC_ = 0x000001FF;
+	public static final int MKX_ = 0x000001FF;
+	public static final int MKXX = 0x0003FFFF;
 
 	public static class Instruction {
 		String name; // E.g., "iadd", "call"
