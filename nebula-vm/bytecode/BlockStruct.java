@@ -19,34 +19,34 @@ public class BlockStruct {
 			CONSTANT_pool_count = readU2(in);
 			constant_pool = new cp_info[CONSTANT_pool_count];
 			for (int i = 0; i < CONSTANT_pool_count - 1; i++)
-				constant_pool[i+1] = readInfo(in);
+				constant_pool[i + 1] = readInfo(in);
 
-			//Class Info
+			// Class Info
 			access_flags = readU2(in);
 			this_class = readU2(in);
-			
-			//Extends
+
+			// Extends
 			super_class = readU2(in);
 
-			//Implements
+			// Implements
 			interfaces_count = readU2(in);
 			int[] interfaces = new int[interfaces_count];
 			for (int i = 0; i < interfaces_count; i++)
 				interfaces[i] = readU2(in);
 
-			//Fields
+			// Fields
 			fields_count = readU2(in);
 			field_info fields[] = new field_info[fields_count];
 			for (int i = 0; i < fields_count; i++)
-				fields[i] = new field_info().load(in,constant_pool);
+				fields[i] = new field_info().load(in, constant_pool);
 
-			//Method
+			// Method
 			methods_count = readU2(in);
-			method_info methods[] = new method_info[methods_count];
+			MethodInfo methods[] = new MethodInfo[methods_count];
 			for (int i = 0; i < methods_count; i++)
-				methods[i] = new method_info().load(in,constant_pool);
+				methods[i] = new MethodInfo().load(in, constant_pool);
 
-			//Attribute
+			// Attribute
 			int attributes_count = readU2(in);
 			attribute_info attributes[] = new attribute_info[attributes_count];
 			for (int i = 0; i < attributes_count; i++)
@@ -139,7 +139,6 @@ public class BlockStruct {
 		}
 	}
 
-
 	long magic;
 	int minor_version;
 	int major_version;
@@ -153,7 +152,7 @@ public class BlockStruct {
 	int fields_count;
 	field_info[] fields;
 	int methods_count;
-	method_info[] methods;
+	MethodInfo[] methods;
 	int attributes_count;
 	attribute_info[] attributes;
 
@@ -228,10 +227,10 @@ public class BlockStruct {
 	attribute_info readAttr(InputStream in, cp_info[] CONSTANT_pool) {
 		String tag;
 		attribute_info info = null;
-		
+
 		int attribute_name_index = readU2(in);
-		long attribute_length=readU4(in);
-		
+		long attribute_length = readU4(in);
+
 		tag = ((CONSTANT_Utf8_info) CONSTANT_pool[attribute_name_index]).text;
 		switch (tag) {
 		case "LocalVariableTable": // 7;
@@ -250,9 +249,9 @@ public class BlockStruct {
 			info = new attribute_info_unknown();
 		}
 
-		info.attribute_name_index =attribute_name_index;
+		info.attribute_name_index = attribute_name_index;
 		info.attribute_length = attribute_length;
-		
+
 		info.load(in);
 		return info;
 	}
@@ -269,6 +268,7 @@ public class BlockStruct {
 		@Override
 		public CONSTANT_Class_info load(InputStream in) {
 			name_index = readU2(in);
+			System.out.println(name_index);
 			return this;
 		}
 	}
@@ -311,15 +311,16 @@ public class BlockStruct {
 
 	public class CONSTANT_String_info extends cp_info {
 		int string_index;
-//		String string;
+
+		// String string;
 
 		@Override
 		public CONSTANT_String_info load(InputStream in) {
-			string_index =readU2(in);
+			string_index = readU2(in);
 			return this;
 		}
-		
-		public String getString(){
+
+		public String getString() {
 			return ((CONSTANT_Utf8_info) constant_pool[string_index]).text;
 		}
 	}
@@ -396,19 +397,19 @@ public class BlockStruct {
 	public class field_info {
 		int access_flags;
 		int name_index;
-//		String name;
-		
+		// String name;
+
 		int descriptor_index;
 		String descriptor;
-		
+
 		int attributes_count;
 		attribute_info attributes[];
 
-		public field_info load(InputStream in,cp_info[] constant_pool) {
+		public field_info load(InputStream in, cp_info[] constant_pool) {
 			access_flags = readU2(in);
 			name_index = readU2(in);
 			descriptor_index = readU2(in);
-			
+
 			attributes_count = readU2(in);
 			attributes = new attribute_info[attributes_count];
 			for (int i = 0; i < attributes_count; i++)
@@ -416,19 +417,20 @@ public class BlockStruct {
 			return this;
 		}
 
-		public String getName(){
+		public String getName() {
 			return ((CONSTANT_Utf8_info) constant_pool[name_index]).text;
 		}
-		
-		public String getDescriptor(){
-			return ((CONSTANT_Utf8_info) constant_pool[descriptor_index]).text;			
+
+		public String getDescriptor() {
+			return ((CONSTANT_Utf8_info) constant_pool[descriptor_index]).text;
 		}
+
 		@Override
 		public String toString() {
-			return "field_info [access_flags=" + access_flags + ", name=" + this.getName() + ", descriptor=" + this.getDescriptor()
-					+ ", attributes=" + Arrays.toString(attributes) + "]";
+			return "field_info [access_flags=" + access_flags + ", name=" + this.getName() + ", descriptor="
+					+ this.getDescriptor() + ", attributes=" + Arrays.toString(attributes) + "]";
 		}
-		
+
 	}
 
 	public class ConstantValue_attribute extends attribute_info {
@@ -440,26 +442,26 @@ public class BlockStruct {
 		}
 	}
 
-//    method_info {
-//    	u2 access_flags;
-//    	u2 name_index;
-//    	u2 descriptor_index;
-//    	u2 attributes_count;
-//    	attribute_info attributes[attributes_count];
-//    }
-	public class method_info {
+	// method_info {
+	// u2 access_flags;
+	// u2 name_index;
+	// u2 descriptor_index;
+	// u2 attributes_count;
+	// attribute_info attributes[attributes_count];
+	// }
+	public class MethodInfo {
 		int access_flags;
 		int name_index;
 		int descriptor_index;
-		
+
 		int attributes_count;
 		attribute_info attributes[];
 
-		public method_info load(InputStream in,cp_info[] constant_pool) {
+		public MethodInfo load(InputStream in, cp_info[] constant_pool) {
 			access_flags = readU2(in);
 			name_index = readU2(in);
 			descriptor_index = readU2(in);
-			
+
 			attributes_count = readU2(in);
 			attributes = new attribute_info[attributes_count];
 			for (int i = 0; i < attributes_count; i++)
@@ -468,23 +470,24 @@ public class BlockStruct {
 			return this;
 		}
 	}
-//
-//    Code_attribute {
-//    	u2 attribute_name_index;
-//    	u4 attribute_length;
-//    	u2 max_stack;
-//    	u2 max_locals;
-//    	u4 code_length;
-//    	u1 code[code_length];
-//    	u2 exception_table_length;
-//    	{    	u2 start_pc;
-//    	      	u2 end_pc;
-//    	      	u2  handler_pc;
-//    	      	u2  catch_type;
-//    	}	exception_table[exception_table_length];
-//    	u2 attributes_count;
-//    	attribute_info attributes[attributes_count];
-//    }
+
+	//
+	// Code_attribute {
+	// u2 attribute_name_index;
+	// u4 attribute_length;
+	// u2 max_stack;
+	// u2 max_locals;
+	// u4 code_length;
+	// u1 code[code_length];
+	// u2 exception_table_length;
+	// { u2 start_pc;
+	// u2 end_pc;
+	// u2 handler_pc;
+	// u2 catch_type;
+	// } exception_table[exception_table_length];
+	// u2 attributes_count;
+	// attribute_info attributes[attributes_count];
+	// }
 	public class Code_attribute extends attribute_info {
 		int max_stack;
 		int max_locals;
@@ -497,7 +500,7 @@ public class BlockStruct {
 		attribute_info attributes[];
 
 		public Code_attribute load(InputStream in) {
-			
+
 			max_stack = readU2(in);
 			max_locals = readU2(in);
 			code_length = readU4(in);
@@ -506,12 +509,12 @@ public class BlockStruct {
 			exception_table = new exception_table_class[attributes_count];
 			for (int i = 0; i < exception_table_length; i++)
 				exception_table[i] = new exception_table_class().load(in);
-			
+
 			attributes_count = readU2(in);
 			attributes = new attribute_info[attributes_count];
 			for (int i = 0; i < attributes_count; i++)
 				attributes[i] = readAttr(in, constant_pool);
-			
+
 			return this;
 		}
 
@@ -539,8 +542,8 @@ public class BlockStruct {
 
 		@Override
 		public String toString() {
-			return this.getClass().getName() +  " [attribute_name" + constant_pool[attribute_name_index] + ", attribute_length="
-					+ attribute_length + "]";
+			return this.getClass().getName() + " [attribute_name" + constant_pool[attribute_name_index]
+					+ ", attribute_length=" + attribute_length + "]";
 		}
 
 	}
@@ -553,7 +556,6 @@ public class BlockStruct {
 			return this;
 		}
 	}
-
 
 	public class Exceptions_attribute extends attribute_info {
 		int number_of_exceptions;
@@ -613,7 +615,7 @@ public class BlockStruct {
 			sourcefile_index = readU2(in);
 			return this;
 		}
-		
+
 	}
 
 	public class LineNumberTable_attribute extends attribute_info {

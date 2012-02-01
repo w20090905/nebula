@@ -99,25 +99,25 @@ public class Interpreter2 {
 
 		for (int i = 0; i < 5; i++) {
 			fp = -1;
-			ip=0;
+			ip = 0;
 			StackFrame2 f = new StackFrame2(mainFunction, ip);
 			calls[++fp] = f;
 			ip = mainFunction.address;
 			cpu();
 		}
-		
+
 		int max = 100;
 		long start = System.nanoTime();
 		for (int i = 0; i < max; i++) {
 			fp = -1;
-			ip=0;
+			ip = 0;
 			StackFrame2 f = new StackFrame2(mainFunction, ip);
 			calls[++fp] = f;
 			ip = mainFunction.address;
 			cpu();
 		}
 		long end = System.nanoTime();
-		System.out.println(this.getClass().getName() + " : " + (end - start)/max);
+		System.out.println(this.getClass().getName() + " : " + (end - start) / max);
 	}
 
 	/** Simulate the fetch-execute cycle */
@@ -129,8 +129,6 @@ public class Interpreter2 {
 		Outter: while (ip < codeSize) {
 			// if (trace) trace();
 			// ip++; // jump to next instruction or first byte of operand
-
-			
 
 			switch (opcode) {
 			case BytecodeDefinition.INSTR_IADD:
@@ -260,7 +258,7 @@ public class Interpreter2 {
 				break;
 			case BytecodeDefinition.INSTR_PRINT:
 				a = code[ip++];
-				//System.out.println(r[a]);
+				// System.out.println(r[a]);
 				break;
 			case BytecodeDefinition.INSTR_STRUCT:
 				a = code[ip++];
@@ -318,29 +316,29 @@ public class Interpreter2 {
 	}
 
 	protected void trace() {
-		// disasm.disassembleInstruction(ip);
-		// int[] r = calls[fp].registers;
-		// if (r.length > 0) {
-		// System.out.print("\t" + calls[fp].sym.name + ".registers=[");
-		// ;
-		// for (int i = 0; i < r.length; i++) {
-		// if (i == 1) System.out.print(" |");
-		// if (i == calls[fp].sym.nargs + 1 && i == 1) System.out.print("|");
-		// else if (i == calls[fp].sym.nargs + 1) System.out.print(" |");
-		// System.out.print(" ");
-		// if (r[i] == null) System.out.print("?");
-		// else System.out.print(r[i]);
-		// }
-		// System.out.print(" ]");
-		// }
-		// if (fp >= 0) {
-		// System.out.print("  calls=[");
-		// for (int i = 0; i <= fp; i++) {
-		// System.out.print(" " + calls[i].sym.name);
-		// }
-		// System.out.print(" ]");
-		// }
-		// System.out.println();
+		disasm.disassembleInstruction(ip);
+		int[] r = calls[fp].registers;
+		if (r.length > 0) {
+			System.out.print("\t" + calls[fp].sym.name + ".registers=[");
+			;
+			for (int i = 0; i < r.length; i++) {
+				if (i == 1) System.out.print(" |");
+				if (i == calls[fp].sym.nargs + 1 && i == 1) System.out.print("|");
+				else if (i == calls[fp].sym.nargs + 1) System.out.print(" |");
+				System.out.print(" ");
+				if (r[i] == 0) System.out.print("?");
+				else System.out.print(r[i]);
+			}
+			System.out.print(" ]");
+		}
+		if (fp >= 0) {
+			System.out.print("  calls=[");
+			for (int i = 0; i <= fp; i++) {
+				System.out.print(" " + calls[i].sym.name);
+			}
+			System.out.print(" ]");
+		}
+		System.out.println();
 	}
 
 	public void coredump() {
