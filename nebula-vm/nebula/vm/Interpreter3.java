@@ -8,6 +8,8 @@ package nebula.vm;
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book information.
  ***/
+import static nebula.vm.BytecodeDefinition.CONST_FALSE;
+import static nebula.vm.BytecodeDefinition.CONST_TRUE;
 import static nebula.vm.BytecodeDefinition.INSTR_BR;
 import static nebula.vm.BytecodeDefinition.INSTR_BRF;
 import static nebula.vm.BytecodeDefinition.INSTR_BRT;
@@ -66,6 +68,8 @@ public class Interpreter3 {
 	int[] code; // byte-addressable code memory.
 	int codeSize;
 	int[] globals; // global variable space
+	protected String[] poolString;
+	protected String[] poolDecimal;
 	protected Object[] constPool;
 	/** Stack of stack frames, grows upwards */
 	StackFrame[] calls = new StackFrame[DEFAULT_CALL_STACK_SIZE];
@@ -130,9 +134,6 @@ public class Interpreter3 {
 		return hasErrors;
 	}
 
-	static byte CONST_TRUE = 1;
-	static byte CONST_FALSE = 0;
-
 	/** Execute the bytecodes in code memory starting at mainAddr */
 	public void exec() throws Exception {
 
@@ -141,7 +142,7 @@ public class Interpreter3 {
 			mainFunction = new FunctionSymbol("main", 0, 0, 0);
 		}
 
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 10; i++) {
 			fp = -1;
 			ip = 0;
 			StackFrame f = new StackFrame(mainFunction, ip);
@@ -150,8 +151,9 @@ public class Interpreter3 {
 			cpu();
 		}
 
-		int max = 1;
-		long start = System.nanoTime();
+		int max = 1000;
+		long start = 0, end = 0;
+		start = System.nanoTime();
 		for (int i = 0; i < max; i++) {
 			fp = -1;
 			ip = 0;
@@ -160,7 +162,7 @@ public class Interpreter3 {
 			ip = mainFunction.address;
 			cpu();
 		}
-		long end = System.nanoTime();
+		end = System.nanoTime();
 		System.out.println(this.getClass().getName() + " : " + (end - start) / max);
 	}
 
@@ -263,7 +265,7 @@ public class Interpreter3 {
 				break;
 			case INSTR_PRINT:
 				a = (op & MKA_) >>> OFA_;
-//				System.out.println(r[a]);
+				System.out.println(r[a]);
 				break;
 			case INSTR_STRUCT:
 				a = (op & MKA_) >>> OFA_;
@@ -277,7 +279,8 @@ public class Interpreter3 {
 			case INSTR_HALT:
 				break Outter;
 			default:
-				throw new Error("Address : " + ip + " ;invalid opcode: " + Integer.toBinaryString(op) + " at ip=" + (ip - 1));
+				throw new Error("Address : " + ip + " ;invalid opcode: " + Integer.toBinaryString(op) + " at ip="
+						+ (ip - 1));
 			}
 			op = code[ip++];
 		}

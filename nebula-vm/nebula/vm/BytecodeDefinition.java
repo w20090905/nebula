@@ -23,6 +23,9 @@ public class BytecodeDefinition {
 	public static final int OFBX = OFT * 0;
 	public static final int OFC_ = OFT * 0;
 	
+	public static byte CONST_TRUE = 1;
+	public static byte CONST_FALSE = 0;
+	
 	public static final int MKOP = 0xF8000000;
 	public static final int MKA_ = 0x07FC0000;
 	public static final int MKAX = 0x07FFFE00;
