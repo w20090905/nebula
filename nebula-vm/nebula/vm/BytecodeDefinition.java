@@ -17,21 +17,21 @@ public class BytecodeDefinition {
 
 	public static final int OFT = 9;
 	public static final int OFOP = OFT * 3;
-	public static final int OFA_ = OFT * 2;	
-	public static final int OFAX = OFT * 1;
-	public static final int OFB_ = OFT * 1;	
-	public static final int OFBX = OFT * 0;
-	public static final int OFC_ = OFT * 0;
+	public static final int OFFSET_A_ = OFT * 2;	
+	public static final int OFFSET_AX = OFT * 1;
+	public static final int OFFSET_B_ = OFT * 1;	
+	public static final int OFFSET_BX = OFT * 0;
+	public static final int OFFSET_C_ = OFT * 0;
 	
-	public static byte CONST_TRUE = 1;
-	public static byte CONST_FALSE = 0;
+	public static byte _TRUE = 1;
+	public static byte _FALSE = 0;
 	
 	public static final int MKOP = 0xF8000000;
-	public static final int MKA_ = 0x07FC0000;
-	public static final int MKAX = 0x07FFFE00;
-	public static final int MKB_ = 0x0003FE00;
-	public static final int MKBX = 0x0003FFFF;
-	public static final int MKC_ = 0x000001FF;
+	public static final int MASK_A_ = 0x07FC0000;
+	public static final int MASK_AX = 0x07FFFE00;
+	public static final int MASK_B_ = 0x0003FE00;
+	public static final int MASK_BX = 0x0003FFFF;
+	public static final int MASK_C_ = 0x000001FF;
 	public static final int MKX_ = 0x000001FF;
 	public static final int MKXX = 0x0003FFFF;
 

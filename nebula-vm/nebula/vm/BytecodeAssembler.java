@@ -15,6 +15,7 @@ import java.util.Map;
 
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
+import static nebula.vm.BytecodeDefinition.*;
 
 /**
  * Subclass the AssemblerParser to actually implement the necessary symbol table
@@ -29,7 +30,7 @@ public class BytecodeAssembler extends AssemblerParser {
 	 * All float and string literals have unique int index in constant pool. We
 	 * put FunctionSymbols in here too.
 	 */
-	protected List<Object> constPool = new ArrayList<Object>();
+	protected List<Object> poolLocalK = new ArrayList<Object>();
 	
 	protected int ip = 0; // Instruction address pointer; used to fill code
 	protected int[] code = new int[INITIAL_CODE_SIZE]; // code memory
@@ -43,7 +44,7 @@ public class BytecodeAssembler extends AssemblerParser {
 	/**
 	 * Create an assembler attached to a lexer and define the instruction set.
 	 */
-	public BytecodeAssembler(TokenStream lexer, BytecodeDefinition.Instruction[] instructions) {
+	public BytecodeAssembler(TokenStream lexer, Instruction[] instructions) {
 		super(lexer);
 		for (int i = 1; i < instructions.length; i++) {
 			instructionOpcodeMapping.put(instructions[i].name.toLowerCase(), i);
@@ -82,26 +83,26 @@ public class BytecodeAssembler extends AssemblerParser {
 		}
 		ensureCapacity(ip + 1);
 		int op = opcodeI.intValue();
-		return (op & 0xFF) << BytecodeDefinition.OFOP;
+		return (op & 0xFF) << OFOP;
 	}
 
 	/** Generate code for an instruction with one operand */
 	protected void gen(Token instrToken, Token oTokenAX) {
 		int op = doGenOpcode(instrToken);
-		code[ip++] = genOperand(oTokenAX, op, BytecodeDefinition.OFA_);
+		code[ip++] = genOperand(oTokenAX, op, OFFSET_A_);
 	}
 
 	protected void gen(Token instrToken, Token oTokenAX, Token oTokenBX) {
 		int op = doGenOpcode(instrToken);
-		op = genOperand(oTokenAX, op, BytecodeDefinition.OFA_);
-		code[ip++] = genOperand(oTokenBX, op, BytecodeDefinition.OFB_);
+		op = genOperand(oTokenAX, op, OFFSET_A_);
+		code[ip++] = genOperand(oTokenBX, op, OFFSET_B_);
 	}
 
 	protected void gen(Token instrToken, Token oTokenAX, Token oTokenBX, Token oTokenCX) {
 		int op = doGenOpcode(instrToken);
-		op = genOperand(oTokenAX, op, BytecodeDefinition.OFA_);
-		op = genOperand(oTokenBX, op, BytecodeDefinition.OFB_);
-		code[ip++] = genOperand(oTokenCX, op, BytecodeDefinition.OFC_);
+		op = genOperand(oTokenAX, op, OFFSET_A_);
+		op = genOperand(oTokenBX, op, OFFSET_B_);
+		code[ip++] = genOperand(oTokenCX, op, OFFSET_C_);
 	}
 
 	protected int genOperand(Token operandToken, int op, int offset) {
@@ -109,58 +110,58 @@ public class BytecodeAssembler extends AssemblerParser {
 		int v = 0;
 		switch (operandToken.getType()) { // switch on token type
 		case CLASS:
-			v = getConstantPoolIndex(new ClassSymbol(text));
-			op |= (v & BytecodeDefinition.MKX_) << offset;
+			v = toLocalConstantPoolIndex(new ClassSymbol(text));
+			op |= (v & MKX_) << offset;
 			break;
 		case FIELD:
 			int i = text.indexOf('.');
 			ClassSymbol c = new ClassSymbol(text.substring(1, i));
-			c = (ClassSymbol) getConstantPool()[getConstantPoolIndex(c)];
-			v = getConstantPoolIndex(new FieldSymbol(c, text.substring(i + 1)));
-			op |= (v & BytecodeDefinition.MKX_) << offset;
+			c = (ClassSymbol) getConstantPool()[toLocalConstantPoolIndex(c)];
+			v = toLocalConstantPoolIndex(new FieldSymbol(c, text.substring(i + 1)));
+			op |= (v & MKX_) << offset;
 			break;
 		case INT:
 			v = Integer.valueOf(text);
-			op |= (v & BytecodeDefinition.MKXX) << (offset-BytecodeDefinition.OFT);
+			op |= (v & MKXX) << (offset-OFT);
 			break;
 		case CHAR:
 			v = Character.valueOf(text.charAt(1));
-			op |= (v & BytecodeDefinition.MKXX) <<  (offset-BytecodeDefinition.OFT);
+			op |= (v & MKXX) <<  (offset-OFT);
 			break;
 		case FLOAT:
-			v = getConstantPoolIndex(Float.valueOf(text));
-			op |= (v & BytecodeDefinition.MKX_) << offset;
+			v = toLocalConstantPoolIndex(Float.valueOf(text));
+			op |= (v & MKX_) << offset;
 			break;
 		case STRING:
-			v = getConstantPoolIndex(text);
-			op |= (v & BytecodeDefinition.MKX_) << offset;
+			v = toLocalConstantPoolIndex(text);
+			op |= (v & MKX_) << offset;
 			break;
 		case ID:
-			v = getLabelAddress(text, offset-BytecodeDefinition.OFT);
-			op |= (v & BytecodeDefinition.MKXX) << (offset-BytecodeDefinition.OFT);
+			v = getLabelAddress(text, offset-OFT);
+			op |= (v & MKXX) << (offset-OFT);
 			break;
 		case FUNC:
 			v = getFunctionIndex(text);
 			break;
 		case REG:
-			v = getRegisterNumber(operandToken);
-			op |= (v & BytecodeDefinition.MKX_) << offset;
+			v = toRegisterNumber(operandToken);
+			op |= (v & MKX_) << offset;
 			break;
 		}
 		return op;
 	}
 
-	protected int getConstantPoolIndex(Object o) {
-		if (constPool.contains(o)) return constPool.indexOf(o);
-		constPool.add(o);
-		return constPool.size() - 1;
+	protected int toLocalConstantPoolIndex(Object o) {
+		if (poolLocalK.contains(o)) return poolLocalK.indexOf(o);
+		poolLocalK.add(o);
+		return poolLocalK.size() - 1;
 	}
 
 	public Object[] getConstantPool() {
-		return constPool.toArray();
+		return poolLocalK.toArray();
 	}
 
-	protected int getRegisterNumber(Token rtoken) { // convert "rN" -> N
+	protected int toRegisterNumber(Token rtoken) { // convert "rN" -> N
 		return Integer.valueOf(rtoken.getText());
 	}
 
@@ -198,14 +199,14 @@ public class BytecodeAssembler extends AssemblerParser {
 	@Override
 	protected void defineClass(Token idToken) {
 		this.currentClass = new ClassSymbol(idToken.getText());
-		getConstantPoolIndex(this.currentClass);
+		toLocalConstantPoolIndex(this.currentClass);
 	}
 
 	@Override
 	protected void defineField(Token idToken) {
 		FieldSymbol field = new FieldSymbol(this.currentClass, idToken.getText());
 		this.currentClass.add(field);
-		getConstantPoolIndex(field);
+		toLocalConstantPoolIndex(field);
 	}
 
 	protected void defineFunction(Token idToken, int args, int locals) {
@@ -214,16 +215,16 @@ public class BytecodeAssembler extends AssemblerParser {
 		if (name.equals("main")) mainFunction = f;
 		// Did someone referred to this function before it was defined?
 		// if so, replace element in constant pool (at same index)
-		if (constPool.contains(f)) constPool.set(constPool.indexOf(f), f);
-		else getConstantPoolIndex(f); // save into constant pool
+		if (poolLocalK.contains(f)) poolLocalK.set(poolLocalK.indexOf(f), f);
+		else toLocalConstantPoolIndex(f); // save into constant pool
 	}
 
 	protected int getFunctionIndex(String id) {
-		int i = constPool.indexOf(new FunctionSymbol(id));
+		int i = poolLocalK.indexOf(new FunctionSymbol(id));
 		if (i >= 0) return i; // already in system; return index.
 		// must be a forward function reference
 		// create the constant pool entry; we'll fill in later
-		return getConstantPoolIndex(new FunctionSymbol(id));
+		return toLocalConstantPoolIndex(new FunctionSymbol(id));
 	}
 
 	protected void defineDataSize(int n) {

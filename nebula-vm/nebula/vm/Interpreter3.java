@@ -8,14 +8,13 @@ package nebula.vm;
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book information.
  ***/
-import static nebula.vm.BytecodeDefinition.CONST_FALSE;
-import static nebula.vm.BytecodeDefinition.CONST_TRUE;
 import static nebula.vm.BytecodeDefinition.INSTR_BR;
 import static nebula.vm.BytecodeDefinition.INSTR_BRF;
 import static nebula.vm.BytecodeDefinition.INSTR_BRT;
 import static nebula.vm.BytecodeDefinition.INSTR_CALL;
 import static nebula.vm.BytecodeDefinition.INSTR_CCONST;
 import static nebula.vm.BytecodeDefinition.INSTR_FADD;
+import static nebula.vm.BytecodeDefinition.INSTR_FCONST;
 import static nebula.vm.BytecodeDefinition.INSTR_FEQ;
 import static nebula.vm.BytecodeDefinition.INSTR_FLOAD;
 import static nebula.vm.BytecodeDefinition.INSTR_FLT;
@@ -38,21 +37,24 @@ import static nebula.vm.BytecodeDefinition.INSTR_PRINT;
 import static nebula.vm.BytecodeDefinition.INSTR_RET;
 import static nebula.vm.BytecodeDefinition.INSTR_SCONST;
 import static nebula.vm.BytecodeDefinition.INSTR_STRUCT;
-import static nebula.vm.BytecodeDefinition.MKAX;
-import static nebula.vm.BytecodeDefinition.MKA_;
-import static nebula.vm.BytecodeDefinition.MKBX;
-import static nebula.vm.BytecodeDefinition.MKB_;
-import static nebula.vm.BytecodeDefinition.MKC_;
-import static nebula.vm.BytecodeDefinition.OFAX;
-import static nebula.vm.BytecodeDefinition.OFA_;
-import static nebula.vm.BytecodeDefinition.OFBX;
-import static nebula.vm.BytecodeDefinition.OFB_;
-import static nebula.vm.BytecodeDefinition.OFC_;
+import static nebula.vm.BytecodeDefinition.MASK_AX;
+import static nebula.vm.BytecodeDefinition.MASK_A_;
+import static nebula.vm.BytecodeDefinition.MASK_BX;
+import static nebula.vm.BytecodeDefinition.MASK_B_;
+import static nebula.vm.BytecodeDefinition.MASK_C_;
+import static nebula.vm.BytecodeDefinition.OFFSET_AX;
+import static nebula.vm.BytecodeDefinition.OFFSET_A_;
+import static nebula.vm.BytecodeDefinition.OFFSET_BX;
+import static nebula.vm.BytecodeDefinition.OFFSET_B_;
+import static nebula.vm.BytecodeDefinition.OFFSET_C_;
 import static nebula.vm.BytecodeDefinition.OFOP;
+import static nebula.vm.BytecodeDefinition._FALSE;
+import static nebula.vm.BytecodeDefinition._TRUE;
 import static nebula.vm.BytecodeDefinition.instructions;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -69,8 +71,10 @@ public class Interpreter3 {
 	int codeSize;
 	int[] globals; // global variable space
 	protected String[] poolString;
-	protected String[] poolDecimal;
-	protected Object[] constPool;
+	protected BigDecimal[] poolDecimal;
+	protected ClassSymbol poolClass;
+	
+	protected Object[] poolK;
 	/** Stack of stack frames, grows upwards */
 	StackFrame[] calls = new StackFrame[DEFAULT_CALL_STACK_SIZE];
 	int fp = -1; // frame pointer register
@@ -122,7 +126,7 @@ public class Interpreter3 {
 			assembler.program();
 			interp.code = assembler.getMachineCode();
 			interp.codeSize = assembler.getCodeMemorySize();
-			interp.constPool = assembler.getConstantPool();
+			interp.poolK = assembler.getConstantPool();
 			interp.mainFunction = assembler.getMainFunction();
 			interp.globals = new int[assembler.getDataSize()];
 			// interp.disasm = new DisAssembler(interp.code, interp.codeSize,
@@ -142,7 +146,7 @@ public class Interpreter3 {
 			mainFunction = new FunctionSymbol("main", 0, 0, 0);
 		}
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 1; i++) {
 			fp = -1;
 			ip = 0;
 			StackFrame f = new StackFrame(mainFunction, ip);
@@ -151,7 +155,7 @@ public class Interpreter3 {
 			cpu();
 		}
 
-		int max = 1000;
+		int max = 1;
 		long start = 0, end = 0;
 		start = System.nanoTime();
 		for (int i = 0; i < max; i++) {
@@ -168,134 +172,84 @@ public class Interpreter3 {
 
 	/** Simulate the fetch-execute cycle */
 	protected void cpu() {
-		int a = 0, b = 0, c = 0;
 		int op = code[ip++];
 		int r[] = calls[fp].registers;
-		Outter: while (ip < codeSize) {
+		Outter: for(;ip < codeSize;op = code[ip++]) {
 			// if (trace) trace();
 			switch ((op >>> OFOP) & 0xFFFFFFFF) {
-			case INSTR_IADD:
-				r[(op & MKA_) >>> OFA_] = r[(op & MKB_) >>> OFB_] + r[(op & MKC_) >>> OFC_];
-				break;
-			// ...
-			case INSTR_ISUB:
-				r[(op & MKA_) >>> OFA_] = r[(op & MKB_) >>> OFB_] - r[(op & MKC_) >>> OFC_];
-				break;
-			case INSTR_IMUL:
-				r[(op & MKA_) >>> OFA_] = r[(op & MKB_) >>> OFB_] * r[(op & MKC_) >>> OFC_];
-				break;
-			case INSTR_ILT:
-				r[(op & MKA_) >>> OFA_] = r[(op & MKB_) >>> OFB_] < r[(op & MKC_) >>> OFC_] ? CONST_TRUE : CONST_FALSE;
-				break;
-			case INSTR_IEQ:
-				r[(op & MKA_) >>> OFA_] = r[(op & MKB_) >>> OFB_] == r[(op & MKC_) >>> OFC_] ? CONST_TRUE : CONST_FALSE;
-				break;
-			case INSTR_FADD:
-				r[(op & MKA_) >>> OFA_] = float_add(r[(op & MKB_) >>> OFB_], r[(op & MKC_) >>> OFC_]);
-				break;
-			case INSTR_FSUB:
-				r[(op & MKA_) >>> OFA_] = float_sub(r[(op & MKB_) >>> OFB_], r[(op & MKC_) >>> OFC_]);
-				break;
-			case INSTR_FMUL:
-				r[(op & MKA_) >>> OFA_] = float_mul(r[(op & MKB_) >>> OFB_], r[(op & MKC_) >>> OFC_]);
-				break;
-			case INSTR_FLT:
-				r[(op & MKA_) >>> OFA_] = float_lt(r[(op & MKB_) >>> OFB_], r[(op & MKC_) >>> OFC_]) ? CONST_TRUE
-						: CONST_FALSE;
-				break;
-			case INSTR_FEQ:
-				r[(op & MKA_) >>> OFA_] = r[(op & MKB_) >>> OFB_] == r[(op & MKC_) >>> OFC_] ? CONST_TRUE : CONST_FALSE;
-				break;
-			case INSTR_ITOF:
-				// i = code[ip++];
-				// j = code[ip++];
-				// r[j] = (float) (((Integer) r[i]).intValue());
-				break;
-			case INSTR_CALL:
-				int funcStringIndex = (op & MKA_) >>> OFA_;
-				int baseRegisterIndex = (op & MKB_) >>> OFB_;
-				call(funcStringIndex, baseRegisterIndex);
-				r = calls[fp].registers;
-				break;
+			case INSTR_IADD:	r[A(op)] = r[B(op)] + r[C(op)];		break;
+			case INSTR_ISUB:	r[A(op)] = r[B(op)] - r[C(op)];		break;
+			case INSTR_IMUL:	r[A(op)] = r[B(op)] * r[C(op)];		break;
+			case INSTR_ILT:		r[A(op)] = r[B(op)] < r[C(op)] ? _TRUE : _FALSE;	break;
+			case INSTR_IEQ:		r[A(op)] = r[B(op)] == r[C(op)] ? _TRUE : _FALSE;	break;
+			case INSTR_FADD:	r[A(op)] = addF(r[B(op)], r[C(op)]);	break;
+			case INSTR_FSUB:	r[A(op)] = subF(r[B(op)], r[C(op)]);	break;
+			case INSTR_FMUL:	r[A(op)] = mulF(r[B(op)], r[C(op)]);	break;
+			case INSTR_FLT:		r[A(op)] = ltF(r[B(op)], r[C(op)]) ? _TRUE	: _FALSE;	break;
+			case INSTR_FEQ:		r[A(op)] = r[B(op)] == r[C(op)] ? _TRUE : _FALSE;	break;
+			case INSTR_ITOF:// r[j] = (float) (((Integer) r[i]).intValue());break;
+			case INSTR_CALL:	call(A(op), B(op));	r = calls[fp].registers;	break;
 			case INSTR_RET:
 				StackFrame f = calls[fp--]; // pop stack frame
 				calls[fp].registers[0] = f.registers[0];
 				ip = f.returnAddress;
 				r = calls[fp].registers;
 				break;
-			case INSTR_BR:
-				ip = (op & MKAX) >>> OFAX;
-				break;
-			case INSTR_BRT:
-				if (r[(op & MKA_) >>> OFA_] == CONST_TRUE) ip = (op & MKBX) >>> OFBX;
-				break;
-			case INSTR_BRF:
-				if (r[(op & MKA_) >>> OFA_] != CONST_TRUE) ip = (op & MKBX) >>> OFBX;
-				break;
-			case INSTR_CCONST:
-				r[(op & MKA_) >>> OFA_] = (op & MKBX) >>> OFBX;
-				break;
-			case INSTR_ICONST:
-				r[(op & MKA_) >>> OFA_] = (op & MKBX) >>> OFBX;
-				break;
-			// case INSTR_FCONST:
-			case INSTR_SCONST:
-				r[(op & MKA_) >>> OFA_] = (op & MKB_) >>> OFB_;
-				break;
-			case INSTR_GLOAD:
-				r[(op & MKA_) >>> OFA_] = globals[(op & MKB_) >>> OFB_];
-				break;
-			case INSTR_GSTORE:
-				globals[(op & MKA_) >>> OFA_] = r[(op & MKB_) >>> OFB_];
-				break;
-			case INSTR_FLOAD:
-				a = (op & MKA_) >>> OFA_;
-				b = (op & MKB_) >>> OFB_;
-				c = (op & MKC_) >>> OFC_;
-				r[a] = structPool[r[b]][((FieldSymbol) constPool[c]).offset];
-				break;
-			case INSTR_FSTORE:
-				a = (op & MKA_) >>> OFA_;
-				b = (op & MKB_) >>> OFB_;
-				c = (op & MKC_) >>> OFC_;
-				structPool[r[a]][((FieldSymbol) constPool[b]).offset] = r[c];
-				break;
-			case INSTR_MOVE:
-				r[(op & MKA_) >>> OFA_] = r[(op & MKB_) >>> OFB_];
-				break;
-			case INSTR_PRINT:
-				a = (op & MKA_) >>> OFA_;
-				System.out.println(r[a]);
-				break;
-			case INSTR_STRUCT:
-				a = (op & MKA_) >>> OFA_;
-				b = (op & MKB_) >>> OFB_;
-				int nfields = ((ClassSymbol) constPool[b]).getLength();
-				r[a] = newStruct(nfields);
-				break;
-			case INSTR_NULL:
-				r[(op & MKA_) >>> OFA_] = 0;
-				break;
-			case INSTR_HALT:
-				break Outter;
+			case INSTR_BR:		ip = AX(op);break;
+			case INSTR_BRT:		if (r[A(op)] == _TRUE) ip = BX(op);	break;
+			case INSTR_BRF:		if (r[A(op)] != _TRUE) ip = BX(op);	break;
+			
+			case INSTR_CCONST:	r[A(op)] = BX(op);	break;
+			case INSTR_ICONST:	r[A(op)] = BX(op);	break;
+			
+			case INSTR_FCONST:	r[A(op)] = B(op);	break; // TODO not implements
+			case INSTR_SCONST:  r[A(op)] = B(op); 	break; // TODO not implements
+			
+			case INSTR_GLOAD:	r[A(op)] = globals[BX(op)];	break;
+			case INSTR_GSTORE:	globals[AX(op)] = r[B(op)];	break;
+			
+			case INSTR_FLOAD:	r[A(op)] = poolH[r[B(op)]][((FieldSymbol) poolK[C(op)]).offset];break;
+			case INSTR_FSTORE:	poolH[r[A(op)]][((FieldSymbol) poolK[B(op)]).offset] = r[C(op)];break;
+			
+			case INSTR_MOVE:	r[A(op)] = r[B(op)];	break;
+			case INSTR_PRINT:	System.out.println(r[A(op)]);	break;
+			case INSTR_STRUCT:	r[A(op)] = newStruct(((ClassSymbol) poolK[B(op)]).getLength());break;
+			case INSTR_NULL:	r[A(op)] = 0;	break;
+			case INSTR_HALT:	break Outter;
 			default:
 				throw new Error("Address : " + ip + " ;invalid opcode: " + Integer.toBinaryString(op) + " at ip="
 						+ (ip - 1));
 			}
-			op = code[ip++];
+			
 		}
 	}
 
-	int[][] structPool = new int[100][];
+	static final int A(int op){
+		return (op & MASK_A_) >>> OFFSET_A_;
+	}
+	static final int B(int op){
+		return (op & MASK_B_) >>> OFFSET_B_;
+	}
+	static final int C(int op){
+		return (op & MASK_C_) >>> OFFSET_C_;
+	}	
+	static final int AX(int op){
+		return (op & MASK_AX) >>> OFFSET_AX;
+	}
+	static final int BX(int op){
+		return (op & MASK_BX) >>> OFFSET_BX;
+	}
+
+	int[][] poolH = new int[100][];
 	int structPoolSize = 0;
 
 	protected int newStruct(int size) {
-		structPool[structPoolSize] = new int[size];
+		poolH[structPoolSize] = new int[size];
 		return structPoolSize++;
 	}
 
 	protected void call(int functionConstPoolIndex, int baseRegisterIndex) {
-		FunctionSymbol fs = (FunctionSymbol) constPool[functionConstPoolIndex];
+		FunctionSymbol fs = (FunctionSymbol) poolK[functionConstPoolIndex];
 		StackFrame f = new StackFrame(fs, ip);
 		StackFrame callingFrame = calls[fp];
 		calls[++fp] = f; // push new stack frame
@@ -350,7 +304,7 @@ public class Interpreter3 {
 	}
 
 	public void coredump() {
-		if (constPool.length > 0) dumpConstantPool();
+		if (poolK.length > 0) dumpConstantPool();
 		if (globals.length > 0) dumpDataMemory();
 		dumpCodeMemory();
 	}
@@ -358,7 +312,7 @@ public class Interpreter3 {
 	protected void dumpConstantPool() {
 		System.out.println("Constant pool:");
 		int addr = 0;
-		for (Object o : constPool) {
+		for (Object o : poolK) {
 			if (o instanceof String) {
 				System.out.printf("%04d: \"%s\"\n", addr, o);
 			} else {
@@ -369,19 +323,19 @@ public class Interpreter3 {
 		System.out.println();
 	}
 
-	static final boolean float_lt(int b, int c) {
+	static final boolean ltF(int b, int c) {
 		return true;
 	}
 
-	static final int float_add(int b, int c) {
+	static final int addF(int b, int c) {
 		return 0;
 	}
 
-	static final int float_sub(int b, int c) {
+	static final int subF(int b, int c) {
 		return 0;
 	}
 
-	static final int float_mul(int b, int c) {
+	static final int mulF(int b, int c) {
 		return 0;
 	}
 
