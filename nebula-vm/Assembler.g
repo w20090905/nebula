@@ -18,6 +18,7 @@ grammar Assembler;
     protected void gen(Token instrToken, Token oToken1, Token oToken2, Token oToken3) {;}
     protected void checkForUnresolvedReferences() {;}
     protected void defineFunction(Token idToken, int nargs, int nlocals) {;}
+    protected void finishFunction(){};
     protected void defineDataSize(int n) {;}
     protected void defineLabel(Token idToken) {;}
     
@@ -29,7 +30,7 @@ grammar Assembler;
 
 program
     :   globals? classDeclaration? fieldDeclaration*
-        ( functionDeclaration | instr | label | NEWLINE )+
+        ( functionDeclaration | instr | label | NEWLINE+{finishFunction();} )+
         {checkForUnresolvedReferences();}
     ;
    
@@ -61,8 +62,8 @@ instr
 
 // START: operand
 operand
-    : 	FIELD
-    |  	CLASS // field call ; E.g., ".name"
+    :   FIELD
+    |   CLASS // field call ; E.g., ".name"
     |   ID   // basic code label; E.g., "loop"
     |   REG  // register name; E.g., "r0"
     |   FUNC // function label; E.g., "f()"
@@ -79,6 +80,7 @@ label
     ;
 
 FIELD : CLASS '.' ID {setText($CLASS.text + "." + $ID.text);} ;
+FUNC : CLASS '.' ID '()' {setText($CLASS.text + "." + $ID.text);} ;
 
 CLASS : '@' ID {setText($ID.text);} ;
 
@@ -86,8 +88,6 @@ REG :   'r' INT {setText($INT.text);};
 
 
 ID  :   LETTER (LETTER | '0'..'9')* ;
-
-FUNC:   ID '()' {setText($ID.text);} ;
 
 fragment
 LETTER

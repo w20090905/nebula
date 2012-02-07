@@ -1,5 +1,5 @@
 ; T t
-.class T
+.class Loop
 .field name
 
 .def main: args=0, locals=5

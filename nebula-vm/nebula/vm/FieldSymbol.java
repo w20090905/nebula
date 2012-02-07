@@ -1,4 +1,5 @@
 package nebula.vm;
+
 /***
  * Excerpted from "Language Implementation Patterns", published by The Pragmatic
  * Bookshelf. Copyrights apply to this code. It may not be used to create
@@ -8,14 +9,17 @@ package nebula.vm;
  * information.
  ***/
 public class FieldSymbol {
-	String name;
-	ClassSymbol definedClass;
+	final String name;
+	final ClassSymbol definedClass;
 	int offset;
 	int lenght = 1;
+	
+	final int hashcode;
 
 	public FieldSymbol(ClassSymbol clazz, String name) {
 		this.definedClass = clazz;
 		this.name = name;
+		hashcode=(definedClass + name).hashCode();
 	}
 
 	public FieldSymbol defineAt(int offset) {
@@ -29,7 +33,7 @@ public class FieldSymbol {
 
 	@Override
 	public int hashCode() {
-		return name.hashCode();
+		return this.hashcode;
 	}
 
 	@Override

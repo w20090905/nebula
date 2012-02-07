@@ -1,7 +1,5 @@
 package nebula.vm;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /***
  * Excerpted from "Language Implementation Patterns", published by The Pragmatic
@@ -13,7 +11,9 @@ import java.util.List;
  ***/
 public class ClassSymbol {
 	String name;
-	List<FieldSymbol> fields = new ArrayList<>();
+	Object[] poolLocalK;
+	FunctionSymbol[] functions;
+	FieldSymbol[] fields;
 
 	public ClassSymbol(String name) {
 		this.name = name;
@@ -25,31 +25,42 @@ public class ClassSymbol {
 	}
 
 	public int getLength() {
-		return this.fields.size() + 1;
+		return this.fields.length + 1;
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		return o instanceof ClassSymbol && name.equals(((ClassSymbol) o).name);
 	}
-
-	public ClassSymbol add(FieldSymbol field) {
-		fields.add(field);
-		field.defineAt(fields.size());
-		return this;
+	
+	public FunctionSymbol getEntryPoint(){
+		for(int i=0;i<functions.length;i++){
+			if(functions[i].name.equals("main")){
+				return functions[i];
+			}
+		}
+		throw new RuntimeException("Cann't find entry point");
 	}
 
 	public FieldSymbol getField(String name) {
-		for (int i = 0; i < fields.size(); i++) {
-			FieldSymbol field = fields.get(i);
+		for (int i = 0; i < fields.length; i++) {
+			FieldSymbol field = fields[i];
 			if (field.name.equals(name)) {
 				return field;
 			}
-
 		}
-		return null;
+		throw new RuntimeException("Cann't resolve " + this.name + "." + name);
 	}
 
+	public FunctionSymbol getFunction(String name) {
+		for (int i = 0; i < functions.length; i++) {
+			FunctionSymbol func = functions[i];
+			if (func.name.equals(name)) {
+				return func;
+			}
+		}
+		throw new RuntimeException("Cann't resolve " + this.name + "." + name);
+	}
 	@Override
 	public String toString() {
 		return "FunctionSymbol{" + "name='" + name + '\'' + '}';

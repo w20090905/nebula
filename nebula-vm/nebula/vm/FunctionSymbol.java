@@ -1,42 +1,47 @@
 package nebula.vm;
-/***
- * Excerpted from "Language Implementation Patterns",
- * published by The Pragmatic Bookshelf.
- * Copyrights apply to this code. It may not be used to create training material, 
- * courses, books, articles, and the like. Contact us if you are in doubt.
- * We make no guarantees that this code is fit for any purpose. 
- * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book information.
-***/
+
 public class FunctionSymbol {
-    String name;
-    int nargs; // how many arguments are there?
-    int nlocals; // how many locals are there?
-    int address;
+	final ClassSymbol definedClass;
+	final String name;
+	final int hashcode;
 
-    public FunctionSymbol(String name) { this.name = name; }    
+	final int nargs; // how many arguments are there?
+	final int nlocals; // how many locals are there?
+	int[] code;
 
-    public FunctionSymbol(String name, int nargs, int nlocals, int address) {
-        this.name = name;
-        this.nargs = nargs;
-        this.nlocals = nlocals;
-        this.address = address;
-    }
+	boolean resolved = false;
 
-    @Override
-    public int hashCode() { return name.hashCode(); }
+	public FunctionSymbol(ClassSymbol parent, String name) {
+		this(parent, name, 0, 0, null);
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        return o instanceof FunctionSymbol && name.equals(((FunctionSymbol)o).name);
-    }
+	public FunctionSymbol(ClassSymbol parent, String name, int nargs, int nlocals, int[] code) {
+		this.definedClass = parent;
+		this.name = name;
+		this.nargs = nargs;
+		this.nlocals = nlocals;
+		this.code = code;
+		hashcode = (parent.name + name).hashCode();
+	}
 
-    @Override
-    public String toString() {
-        return "FunctionSymbol{" +
-               "name='" + name + '\'' +
-               ", args=" + nargs +
-               ", locals=" + nlocals +
-               ", address=" + address +
-               '}';
-    }
+	@Override
+	public int hashCode() {
+		return this.hashcode;
+	}
+
+	public Object[] getConstPool() {
+		return this.definedClass.poolLocalK;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		return o instanceof FunctionSymbol && definedClass.name.equals(((FunctionSymbol) o).definedClass.name)
+				&& name.equals(((FunctionSymbol) o).name);
+	}
+
+	@Override
+	public String toString() {
+		return "FunctionSymbol{" + "name='" + name + '\'' + ", args=" + nargs + ", locals=" + nlocals + ", address="
+				+ code.length + '}';
+	}
 }
