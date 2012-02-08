@@ -342,10 +342,18 @@ public class Interpreter3 {
 				break Outter;
 			}
 			case BytecodeDefinition.INSTR_OMOVE:{
-				int a = A(op);
+				int ra = A(op);
+				if((maskObject & (1L << ra)) > 0){
+					int index = r[ra];
+					if(poolH[index][0]<2){
+						poolH[index] = null;
+					}else{
+						poolH[index][0]--;
+					}
+				}
 				int index = r[B(op)];				
 				poolH[index][0]++;
-				r[a] = index;
+				r[ra] = index;
 				break;				
 			}
 			default:
