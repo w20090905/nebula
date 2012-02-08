@@ -70,6 +70,8 @@ public class Interpreter3 {
 	public static final int DEFAULT_String_POOL_SIZE = 10000;
 	public static final int DEFAULT_Decimal_POOL_SIZE = 10000;
 
+	public static final int DEFAULT_Object_POOL_SIZE = 10000;
+
 	public static final int DEFAULT_PREPAREED_NUMBER_STRING_RANGE = 1000;
 
 	@Deprecated
@@ -77,6 +79,9 @@ public class Interpreter3 {
 	final ClassSymbol[] poolClass = new ClassSymbol[DEFAULT_Class_POOL_SIZE];
 	final String[] poolString = new String[DEFAULT_String_POOL_SIZE];
 	final BigDecimal[] poolDecimal = new BigDecimal[DEFAULT_Decimal_POOL_SIZE];
+
+	int[][] poolH = new int[DEFAULT_Object_POOL_SIZE][];
+	int pPoolH = 0;
 
 	final Map<String, Integer> mapString = new HashMap<>(DEFAULT_Decimal_POOL_SIZE * 2);
 	int pPoolString = 0;
@@ -108,6 +113,16 @@ public class Interpreter3 {
 		for (int i = 0; i < DEFAULT_PREPAREED_NUMBER_STRING_RANGE; i++) {
 			indexOf(String.valueOf(i));
 		}
+
+		poolH[0] = new int[1];
+		poolH[0][0] = Integer.MAX_VALUE;
+		pPoolH = 1;
+	}
+
+	private void __halt() {
+		for (int i = 0; i < pPoolH; i++)
+			poolH[i] = null;
+		pPoolH = 0;
 	}
 
 	protected boolean contain(ClassSymbol v) {
@@ -160,10 +175,10 @@ public class Interpreter3 {
 
 	public void resolve(ClassSymbol classSymbol) {
 		this.indexOf(classSymbol);
-		int offset =1;
-		for(FieldSymbol f: classSymbol.fields){
+		int offset = 1;
+		for (FieldSymbol f : classSymbol.fields) {
 			f.defineAt(offset);
-			offset+=f.lenght;
+			offset += f.lenght;
 		}
 	}
 
@@ -254,7 +269,7 @@ public class Interpreter3 {
 
 			case INSTR_CALL: {
 				currentFrame.maskObject = maskObject;
-				call(currentFrame, B(op), C(op), A(op), ip);
+				__call(currentFrame, B(op), C(op), A(op), ip);
 				ip = 0;
 
 				currentFrame = calls[fp];
@@ -331,14 +346,13 @@ public class Interpreter3 {
 						poolH[index][0]--;
 					}
 				}
-				r[ra] = newStruct(((ClassSymbol) poolK[B(op)]).getLength());	
+				r[ra] = __newStruct(((ClassSymbol) poolK[B(op)]).getLength());	
 				maskObject |= (1L << ra);
 				break;
 			}
 			case INSTR_NULL:	r[A(op)] = 0;	break;
 			case INSTR_HALT:{
-				for(int i=0;i<structPoolSize;i++)poolH[i]=null;	
-				structPoolSize =0;
+				__halt();
 				break Outter;
 			}
 			case BytecodeDefinition.INSTR_OMOVE:{
@@ -446,41 +460,38 @@ public class Interpreter3 {
 		return func;
 	}
 
-	static final int A(int op) {
+	private static final int A(int op) {
 		return (op & MASK_A_) >>> OFFSET_A_;
 	}
 
-	static final int B(int op) {
+	private static final int B(int op) {
 		return (op & MASK_B_) >>> OFFSET_B_;
 	}
 
-	static final int C(int op) {
+	private static final int C(int op) {
 		return (op & MASK_C_) >>> OFFSET_C_;
 	}
 
-	static final int AX(int op) {
+	private static final int AX(int op) {
 		return (op & MASK_AX) >>> OFFSET_AX;
 	}
 
-	static final int BX(int op) {
+	private static final int BX(int op) {
 		return (op & MASK_BX) >>> OFFSET_BX;
 	}
 
-	int[][] poolH = new int[100][];
-	int structPoolSize = 0;
-
-	protected int newStruct(int size) {
+	private int __newStruct(int size) {
 		int index = 0;
-		for (; index < structPoolSize; index++) {
+		for (; index < pPoolH; index++) {
 			if (poolH[index] == null) break;
 		}
 		poolH[index] = new int[size];
 		poolH[index][0] = 1;
-		structPoolSize = structPoolSize > index+1 ? structPoolSize : index+1;
+		pPoolH = pPoolH > index + 1 ? pPoolH : index + 1;
 		return index;
 	}
 
-	protected void call(StackFrame currentFrame, int functionConstPoolIndex, int baseRegisterIndex, int firstResult,
+	private void __call(StackFrame currentFrame, int functionConstPoolIndex, int baseRegisterIndex, int firstResult,
 			int ip) {
 		final FunctionSymbol fs = (FunctionSymbol) currentFrame.sym.getConstPool()[functionConstPoolIndex];
 		if (!fs.resolved) resolve(fs);
