@@ -1,5 +1,5 @@
 package nebula.vm;
-// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Assembler.g 2012-01-30 16:18:52
+// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Assembler.g 2012-02-08 10:44:41
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -72,6 +72,7 @@ public class AssemblerParser extends Parser {
         protected void gen(Token instrToken, Token oToken1, Token oToken2, Token oToken3) {;}
         protected void checkForUnresolvedReferences() {;}
         protected void defineFunction(Token idToken, int nargs, int nlocals) {;}
+        protected void finishFunction(){};
         protected void defineDataSize(int n) {;}
         protected void defineLabel(Token idToken) {;}
         
@@ -82,18 +83,18 @@ public class AssemblerParser extends Parser {
 
 
     // $ANTLR start "program"
-    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:30:1: program : ( globals )? ( classDeclaration )? ( fieldDeclaration )* ( functionDeclaration | instr | label | NEWLINE )+ ;
+    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:31:1: program : ( globals )? ( classDeclaration )? ( fieldDeclaration )* ( functionDeclaration | instr | label | ( NEWLINE )+ )+ ;
     public final void program() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:31:5: ( ( globals )? ( classDeclaration )? ( fieldDeclaration )* ( functionDeclaration | instr | label | NEWLINE )+ )
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:31:9: ( globals )? ( classDeclaration )? ( fieldDeclaration )* ( functionDeclaration | instr | label | NEWLINE )+
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:32:5: ( ( globals )? ( classDeclaration )? ( fieldDeclaration )* ( functionDeclaration | instr | label | ( NEWLINE )+ )+ )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:32:9: ( globals )? ( classDeclaration )? ( fieldDeclaration )* ( functionDeclaration | instr | label | ( NEWLINE )+ )+
             {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:31:9: ( globals )?
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:32:9: ( globals )?
             int alt1=2;
             alt1 = dfa1.predict(input);
             switch (alt1) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:31:9: globals
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:32:9: globals
                     {
                     pushFollow(FOLLOW_globals_in_program27);
                     globals();
@@ -107,12 +108,12 @@ public class AssemblerParser extends Parser {
             }
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:31:18: ( classDeclaration )?
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:32:18: ( classDeclaration )?
             int alt2=2;
             alt2 = dfa2.predict(input);
             switch (alt2) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:31:18: classDeclaration
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:32:18: classDeclaration
                     {
                     pushFollow(FOLLOW_classDeclaration_in_program30);
                     classDeclaration();
@@ -126,14 +127,14 @@ public class AssemblerParser extends Parser {
             }
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:31:36: ( fieldDeclaration )*
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:32:36: ( fieldDeclaration )*
             loop3:
             do {
                 int alt3=2;
                 alt3 = dfa3.predict(input);
                 switch (alt3) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:31:36: fieldDeclaration
+            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:32:36: fieldDeclaration
             	    {
             	    pushFollow(FOLLOW_fieldDeclaration_in_program33);
             	    fieldDeclaration();
@@ -150,26 +151,26 @@ public class AssemblerParser extends Parser {
             } while (true);
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:32:9: ( functionDeclaration | instr | label | NEWLINE )+
-            int cnt4=0;
-            loop4:
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:33:9: ( functionDeclaration | instr | label | ( NEWLINE )+ )+
+            int cnt5=0;
+            loop5:
             do {
-                int alt4=5;
+                int alt5=5;
                 switch ( input.LA(1) ) {
                 case 21:
                     {
-                    alt4=1;
+                    alt5=1;
                     }
                     break;
                 case ID:
                     {
-                    int LA4_3 = input.LA(2);
+                    int LA5_3 = input.LA(2);
 
-                    if ( ((LA4_3 >= CHAR && LA4_3 <= INT)||(LA4_3 >= NEWLINE && LA4_3 <= STRING)) ) {
-                        alt4=2;
+                    if ( ((LA5_3 >= CHAR && LA5_3 <= INT)||(LA5_3 >= NEWLINE && LA5_3 <= STRING)) ) {
+                        alt5=2;
                     }
-                    else if ( (LA4_3==24) ) {
-                        alt4=3;
+                    else if ( (LA5_3==24) ) {
+                        alt5=3;
                     }
 
 
@@ -177,15 +178,15 @@ public class AssemblerParser extends Parser {
                     break;
                 case NEWLINE:
                     {
-                    alt4=4;
+                    alt5=4;
                     }
                     break;
 
                 }
 
-                switch (alt4) {
+                switch (alt5) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:32:11: functionDeclaration
+            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:33:11: functionDeclaration
             	    {
             	    pushFollow(FOLLOW_functionDeclaration_in_program46);
             	    functionDeclaration();
@@ -196,7 +197,7 @@ public class AssemblerParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:32:33: instr
+            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:33:33: instr
             	    {
             	    pushFollow(FOLLOW_instr_in_program50);
             	    instr();
@@ -207,7 +208,7 @@ public class AssemblerParser extends Parser {
             	    }
             	    break;
             	case 3 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:32:41: label
+            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:33:41: label
             	    {
             	    pushFollow(FOLLOW_label_in_program54);
             	    label();
@@ -218,20 +219,51 @@ public class AssemblerParser extends Parser {
             	    }
             	    break;
             	case 4 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:32:49: NEWLINE
+            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:33:49: ( NEWLINE )+
             	    {
-            	    match(input,NEWLINE,FOLLOW_NEWLINE_in_program58); 
+            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:33:49: ( NEWLINE )+
+            	    int cnt4=0;
+            	    loop4:
+            	    do {
+            	        int alt4=2;
+            	        int LA4_0 = input.LA(1);
+
+            	        if ( (LA4_0==NEWLINE) ) {
+            	            alt4=1;
+            	        }
+
+
+            	        switch (alt4) {
+            	    	case 1 :
+            	    	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:33:49: NEWLINE
+            	    	    {
+            	    	    match(input,NEWLINE,FOLLOW_NEWLINE_in_program58); 
+
+            	    	    }
+            	    	    break;
+
+            	    	default :
+            	    	    if ( cnt4 >= 1 ) break loop4;
+            	                EarlyExitException eee =
+            	                    new EarlyExitException(4, input);
+            	                throw eee;
+            	        }
+            	        cnt4++;
+            	    } while (true);
+
+
+            	    finishFunction();
 
             	    }
             	    break;
 
             	default :
-            	    if ( cnt4 >= 1 ) break loop4;
+            	    if ( cnt5 >= 1 ) break loop5;
                         EarlyExitException eee =
-                            new EarlyExitException(4, input);
+                            new EarlyExitException(5, input);
                         throw eee;
                 }
-                cnt4++;
+                cnt5++;
             } while (true);
 
 
@@ -255,45 +287,45 @@ public class AssemblerParser extends Parser {
 
 
     // $ANTLR start "globals"
-    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:38:1: globals : ( NEWLINE )* '.globals' INT NEWLINE ;
+    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:39:1: globals : ( NEWLINE )* '.globals' INT NEWLINE ;
     public final void globals() throws RecognitionException {
         Token INT1=null;
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:38:9: ( ( NEWLINE )* '.globals' INT NEWLINE )
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:38:11: ( NEWLINE )* '.globals' INT NEWLINE
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:39:9: ( ( NEWLINE )* '.globals' INT NEWLINE )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:39:11: ( NEWLINE )* '.globals' INT NEWLINE
             {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:38:11: ( NEWLINE )*
-            loop5:
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:39:11: ( NEWLINE )*
+            loop6:
             do {
-                int alt5=2;
-                int LA5_0 = input.LA(1);
+                int alt6=2;
+                int LA6_0 = input.LA(1);
 
-                if ( (LA5_0==NEWLINE) ) {
-                    alt5=1;
+                if ( (LA6_0==NEWLINE) ) {
+                    alt6=1;
                 }
 
 
-                switch (alt5) {
+                switch (alt6) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:38:11: NEWLINE
+            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:39:11: NEWLINE
             	    {
-            	    match(input,NEWLINE,FOLLOW_NEWLINE_in_globals89); 
+            	    match(input,NEWLINE,FOLLOW_NEWLINE_in_globals91); 
 
             	    }
             	    break;
 
             	default :
-            	    break loop5;
+            	    break loop6;
                 }
             } while (true);
 
 
-            match(input,23,FOLLOW_23_in_globals92); 
+            match(input,23,FOLLOW_23_in_globals94); 
 
-            INT1=(Token)match(input,INT,FOLLOW_INT_in_globals94); 
+            INT1=(Token)match(input,INT,FOLLOW_INT_in_globals96); 
 
-            match(input,NEWLINE,FOLLOW_NEWLINE_in_globals96); 
+            match(input,NEWLINE,FOLLOW_NEWLINE_in_globals98); 
 
             defineDataSize((INT1!=null?Integer.valueOf(INT1.getText()):0));
 
@@ -315,45 +347,45 @@ public class AssemblerParser extends Parser {
 
 
     // $ANTLR start "classDeclaration"
-    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:41:1: classDeclaration : ( NEWLINE )* '.class' ID NEWLINE ;
+    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:42:1: classDeclaration : ( NEWLINE )* '.class' ID NEWLINE ;
     public final void classDeclaration() throws RecognitionException {
         Token ID2=null;
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:41:18: ( ( NEWLINE )* '.class' ID NEWLINE )
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:41:20: ( NEWLINE )* '.class' ID NEWLINE
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:42:18: ( ( NEWLINE )* '.class' ID NEWLINE )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:42:20: ( NEWLINE )* '.class' ID NEWLINE
             {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:41:20: ( NEWLINE )*
-            loop6:
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:42:20: ( NEWLINE )*
+            loop7:
             do {
-                int alt6=2;
-                int LA6_0 = input.LA(1);
+                int alt7=2;
+                int LA7_0 = input.LA(1);
 
-                if ( (LA6_0==NEWLINE) ) {
-                    alt6=1;
+                if ( (LA7_0==NEWLINE) ) {
+                    alt7=1;
                 }
 
 
-                switch (alt6) {
+                switch (alt7) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:41:20: NEWLINE
+            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:42:20: NEWLINE
             	    {
-            	    match(input,NEWLINE,FOLLOW_NEWLINE_in_classDeclaration108); 
+            	    match(input,NEWLINE,FOLLOW_NEWLINE_in_classDeclaration110); 
 
             	    }
             	    break;
 
             	default :
-            	    break loop6;
+            	    break loop7;
                 }
             } while (true);
 
 
-            match(input,20,FOLLOW_20_in_classDeclaration111); 
+            match(input,20,FOLLOW_20_in_classDeclaration113); 
 
-            ID2=(Token)match(input,ID,FOLLOW_ID_in_classDeclaration113); 
+            ID2=(Token)match(input,ID,FOLLOW_ID_in_classDeclaration115); 
 
-            match(input,NEWLINE,FOLLOW_NEWLINE_in_classDeclaration115); 
+            match(input,NEWLINE,FOLLOW_NEWLINE_in_classDeclaration117); 
 
             defineClass(ID2);
 
@@ -375,45 +407,45 @@ public class AssemblerParser extends Parser {
 
 
     // $ANTLR start "fieldDeclaration"
-    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:42:1: fieldDeclaration : ( NEWLINE )* '.field' ID NEWLINE ;
+    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:43:1: fieldDeclaration : ( NEWLINE )* '.field' ID NEWLINE ;
     public final void fieldDeclaration() throws RecognitionException {
         Token ID3=null;
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:42:18: ( ( NEWLINE )* '.field' ID NEWLINE )
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:42:20: ( NEWLINE )* '.field' ID NEWLINE
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:43:18: ( ( NEWLINE )* '.field' ID NEWLINE )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:43:20: ( NEWLINE )* '.field' ID NEWLINE
             {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:42:20: ( NEWLINE )*
-            loop7:
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:43:20: ( NEWLINE )*
+            loop8:
             do {
-                int alt7=2;
-                int LA7_0 = input.LA(1);
+                int alt8=2;
+                int LA8_0 = input.LA(1);
 
-                if ( (LA7_0==NEWLINE) ) {
-                    alt7=1;
+                if ( (LA8_0==NEWLINE) ) {
+                    alt8=1;
                 }
 
 
-                switch (alt7) {
+                switch (alt8) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:42:20: NEWLINE
+            	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:43:20: NEWLINE
             	    {
-            	    match(input,NEWLINE,FOLLOW_NEWLINE_in_fieldDeclaration125); 
+            	    match(input,NEWLINE,FOLLOW_NEWLINE_in_fieldDeclaration127); 
 
             	    }
             	    break;
 
             	default :
-            	    break loop7;
+            	    break loop8;
                 }
             } while (true);
 
 
-            match(input,22,FOLLOW_22_in_fieldDeclaration128); 
+            match(input,22,FOLLOW_22_in_fieldDeclaration130); 
 
-            ID3=(Token)match(input,ID,FOLLOW_ID_in_fieldDeclaration130); 
+            ID3=(Token)match(input,ID,FOLLOW_ID_in_fieldDeclaration132); 
 
-            match(input,NEWLINE,FOLLOW_NEWLINE_in_fieldDeclaration132); 
+            match(input,NEWLINE,FOLLOW_NEWLINE_in_fieldDeclaration134); 
 
             defineField(ID3);
 
@@ -435,37 +467,37 @@ public class AssemblerParser extends Parser {
 
 
     // $ANTLR start "functionDeclaration"
-    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:46:1: functionDeclaration : '.def' name= ID ':' 'args' '=' a= INT ',' 'locals' '=' lo= INT NEWLINE ;
+    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:47:1: functionDeclaration : '.def' name= ID ':' 'args' '=' a= INT ',' 'locals' '=' lo= INT NEWLINE ;
     public final void functionDeclaration() throws RecognitionException {
         Token name=null;
         Token a=null;
         Token lo=null;
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:47:5: ( '.def' name= ID ':' 'args' '=' a= INT ',' 'locals' '=' lo= INT NEWLINE )
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:47:9: '.def' name= ID ':' 'args' '=' a= INT ',' 'locals' '=' lo= INT NEWLINE
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:48:5: ( '.def' name= ID ':' 'args' '=' a= INT ',' 'locals' '=' lo= INT NEWLINE )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:48:9: '.def' name= ID ':' 'args' '=' a= INT ',' 'locals' '=' lo= INT NEWLINE
             {
-            match(input,21,FOLLOW_21_in_functionDeclaration151); 
+            match(input,21,FOLLOW_21_in_functionDeclaration153); 
 
-            name=(Token)match(input,ID,FOLLOW_ID_in_functionDeclaration155); 
+            name=(Token)match(input,ID,FOLLOW_ID_in_functionDeclaration157); 
 
-            match(input,24,FOLLOW_24_in_functionDeclaration157); 
+            match(input,24,FOLLOW_24_in_functionDeclaration159); 
 
-            match(input,26,FOLLOW_26_in_functionDeclaration159); 
+            match(input,26,FOLLOW_26_in_functionDeclaration161); 
 
-            match(input,25,FOLLOW_25_in_functionDeclaration161); 
+            match(input,25,FOLLOW_25_in_functionDeclaration163); 
 
-            a=(Token)match(input,INT,FOLLOW_INT_in_functionDeclaration165); 
+            a=(Token)match(input,INT,FOLLOW_INT_in_functionDeclaration167); 
 
-            match(input,19,FOLLOW_19_in_functionDeclaration167); 
+            match(input,19,FOLLOW_19_in_functionDeclaration169); 
 
-            match(input,27,FOLLOW_27_in_functionDeclaration169); 
+            match(input,27,FOLLOW_27_in_functionDeclaration171); 
 
-            match(input,25,FOLLOW_25_in_functionDeclaration171); 
+            match(input,25,FOLLOW_25_in_functionDeclaration173); 
 
-            lo=(Token)match(input,INT,FOLLOW_INT_in_functionDeclaration175); 
+            lo=(Token)match(input,INT,FOLLOW_INT_in_functionDeclaration177); 
 
-            match(input,NEWLINE,FOLLOW_NEWLINE_in_functionDeclaration177); 
+            match(input,NEWLINE,FOLLOW_NEWLINE_in_functionDeclaration179); 
 
             defineFunction(name, (a!=null?Integer.valueOf(a.getText()):0), (lo!=null?Integer.valueOf(lo.getText()):0));
 
@@ -487,7 +519,7 @@ public class AssemblerParser extends Parser {
 
 
     // $ANTLR start "instr"
-    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:53:1: instr : ( ID NEWLINE | ID operand NEWLINE | ID a= operand ',' b= operand NEWLINE | ID a= operand ',' b= operand ',' c= operand NEWLINE );
+    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:54:1: instr : ( ID NEWLINE | ID operand NEWLINE | ID a= operand ',' b= operand NEWLINE | ID a= operand ',' b= operand ',' c= operand NEWLINE );
     public final void instr() throws RecognitionException {
         Token ID4=null;
         Token ID5=null;
@@ -503,37 +535,37 @@ public class AssemblerParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:54:5: ( ID NEWLINE | ID operand NEWLINE | ID a= operand ',' b= operand NEWLINE | ID a= operand ',' b= operand ',' c= operand NEWLINE )
-            int alt8=4;
-            int LA8_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:55:5: ( ID NEWLINE | ID operand NEWLINE | ID a= operand ',' b= operand NEWLINE | ID a= operand ',' b= operand ',' c= operand NEWLINE )
+            int alt9=4;
+            int LA9_0 = input.LA(1);
 
-            if ( (LA8_0==ID) ) {
-                int LA8_1 = input.LA(2);
+            if ( (LA9_0==ID) ) {
+                int LA9_1 = input.LA(2);
 
-                if ( (LA8_1==NEWLINE) ) {
-                    alt8=1;
+                if ( (LA9_1==NEWLINE) ) {
+                    alt9=1;
                 }
-                else if ( ((LA8_1 >= CHAR && LA8_1 <= INT)||(LA8_1 >= REG && LA8_1 <= STRING)) ) {
-                    int LA8_3 = input.LA(3);
+                else if ( ((LA9_1 >= CHAR && LA9_1 <= INT)||(LA9_1 >= REG && LA9_1 <= STRING)) ) {
+                    int LA9_3 = input.LA(3);
 
-                    if ( (LA8_3==NEWLINE) ) {
-                        alt8=2;
+                    if ( (LA9_3==NEWLINE) ) {
+                        alt9=2;
                     }
-                    else if ( (LA8_3==19) ) {
-                        int LA8_5 = input.LA(4);
+                    else if ( (LA9_3==19) ) {
+                        int LA9_5 = input.LA(4);
 
-                        if ( ((LA8_5 >= CHAR && LA8_5 <= INT)||(LA8_5 >= REG && LA8_5 <= STRING)) ) {
-                            int LA8_6 = input.LA(5);
+                        if ( ((LA9_5 >= CHAR && LA9_5 <= INT)||(LA9_5 >= REG && LA9_5 <= STRING)) ) {
+                            int LA9_6 = input.LA(5);
 
-                            if ( (LA8_6==NEWLINE) ) {
-                                alt8=3;
+                            if ( (LA9_6==NEWLINE) ) {
+                                alt9=3;
                             }
-                            else if ( (LA8_6==19) ) {
-                                alt8=4;
+                            else if ( (LA9_6==19) ) {
+                                alt9=4;
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("", 8, 6, input);
+                                    new NoViableAltException("", 9, 6, input);
 
                                 throw nvae;
 
@@ -541,7 +573,7 @@ public class AssemblerParser extends Parser {
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 8, 5, input);
+                                new NoViableAltException("", 9, 5, input);
 
                             throw nvae;
 
@@ -549,7 +581,7 @@ public class AssemblerParser extends Parser {
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 8, 3, input);
+                            new NoViableAltException("", 9, 3, input);
 
                         throw nvae;
 
@@ -557,7 +589,7 @@ public class AssemblerParser extends Parser {
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 8, 1, input);
+                        new NoViableAltException("", 9, 1, input);
 
                     throw nvae;
 
@@ -565,93 +597,93 @@ public class AssemblerParser extends Parser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 8, 0, input);
+                    new NoViableAltException("", 9, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt8) {
+            switch (alt9) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:54:9: ID NEWLINE
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:55:9: ID NEWLINE
                     {
-                    ID4=(Token)match(input,ID,FOLLOW_ID_in_instr208); 
+                    ID4=(Token)match(input,ID,FOLLOW_ID_in_instr210); 
 
-                    match(input,NEWLINE,FOLLOW_NEWLINE_in_instr210); 
+                    match(input,NEWLINE,FOLLOW_NEWLINE_in_instr212); 
 
                     gen(ID4);
 
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:55:9: ID operand NEWLINE
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:56:9: ID operand NEWLINE
                     {
-                    ID5=(Token)match(input,ID,FOLLOW_ID_in_instr246); 
+                    ID5=(Token)match(input,ID,FOLLOW_ID_in_instr248); 
 
-                    pushFollow(FOLLOW_operand_in_instr248);
+                    pushFollow(FOLLOW_operand_in_instr250);
                     operand6=operand();
 
                     state._fsp--;
 
 
-                    match(input,NEWLINE,FOLLOW_NEWLINE_in_instr250); 
+                    match(input,NEWLINE,FOLLOW_NEWLINE_in_instr252); 
 
                     gen(ID5,(operand6!=null?((Token)operand6.start):null));
 
                     }
                     break;
                 case 3 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:56:9: ID a= operand ',' b= operand NEWLINE
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:57:9: ID a= operand ',' b= operand NEWLINE
                     {
-                    ID7=(Token)match(input,ID,FOLLOW_ID_in_instr278); 
+                    ID7=(Token)match(input,ID,FOLLOW_ID_in_instr280); 
 
-                    pushFollow(FOLLOW_operand_in_instr282);
+                    pushFollow(FOLLOW_operand_in_instr284);
                     a=operand();
 
                     state._fsp--;
 
 
-                    match(input,19,FOLLOW_19_in_instr284); 
+                    match(input,19,FOLLOW_19_in_instr286); 
 
-                    pushFollow(FOLLOW_operand_in_instr288);
+                    pushFollow(FOLLOW_operand_in_instr290);
                     b=operand();
 
                     state._fsp--;
 
 
-                    match(input,NEWLINE,FOLLOW_NEWLINE_in_instr290); 
+                    match(input,NEWLINE,FOLLOW_NEWLINE_in_instr292); 
 
                     gen(ID7,(a!=null?((Token)a.start):null),(b!=null?((Token)b.start):null));
 
                     }
                     break;
                 case 4 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:57:9: ID a= operand ',' b= operand ',' c= operand NEWLINE
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:58:9: ID a= operand ',' b= operand ',' c= operand NEWLINE
                     {
-                    ID8=(Token)match(input,ID,FOLLOW_ID_in_instr302); 
+                    ID8=(Token)match(input,ID,FOLLOW_ID_in_instr304); 
 
-                    pushFollow(FOLLOW_operand_in_instr306);
+                    pushFollow(FOLLOW_operand_in_instr308);
                     a=operand();
 
                     state._fsp--;
 
 
-                    match(input,19,FOLLOW_19_in_instr308); 
+                    match(input,19,FOLLOW_19_in_instr310); 
 
-                    pushFollow(FOLLOW_operand_in_instr312);
+                    pushFollow(FOLLOW_operand_in_instr314);
                     b=operand();
 
                     state._fsp--;
 
 
-                    match(input,19,FOLLOW_19_in_instr314); 
+                    match(input,19,FOLLOW_19_in_instr316); 
 
-                    pushFollow(FOLLOW_operand_in_instr318);
+                    pushFollow(FOLLOW_operand_in_instr320);
                     c=operand();
 
                     state._fsp--;
 
 
-                    match(input,NEWLINE,FOLLOW_NEWLINE_in_instr320); 
+                    match(input,NEWLINE,FOLLOW_NEWLINE_in_instr322); 
 
                     gen(ID8,(a!=null?((Token)a.start):null),(b!=null?((Token)b.start):null),(c!=null?((Token)c.start):null));
 
@@ -678,14 +710,14 @@ public class AssemblerParser extends Parser {
 
 
     // $ANTLR start "operand"
-    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:63:1: operand : ( FIELD | CLASS | ID | REG | FUNC | INT | CHAR | STRING | FLOAT );
+    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:64:1: operand : ( FUNC | FIELD | CLASS | ID | REG | INT | CHAR | STRING | FLOAT );
     public final AssemblerParser.operand_return operand() throws RecognitionException {
         AssemblerParser.operand_return retval = new AssemblerParser.operand_return();
         retval.start = input.LT(1);
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:64:5: ( FIELD | CLASS | ID | REG | FUNC | INT | CHAR | STRING | FLOAT )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:65:5: ( FUNC | FIELD | CLASS | ID | REG | INT | CHAR | STRING | FLOAT )
             // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:
             {
             if ( (input.LA(1) >= CHAR && input.LA(1) <= INT)||(input.LA(1) >= REG && input.LA(1) <= STRING) ) {
@@ -719,17 +751,17 @@ public class AssemblerParser extends Parser {
 
 
     // $ANTLR start "label"
-    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:77:1: label : ID ':' ;
+    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:78:1: label : ID ':' ;
     public final void label() throws RecognitionException {
         Token ID9=null;
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:78:5: ( ID ':' )
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:78:9: ID ':'
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:79:5: ( ID ':' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:79:9: ID ':'
             {
-            ID9=(Token)match(input,ID,FOLLOW_ID_in_label458); 
+            ID9=(Token)match(input,ID,FOLLOW_ID_in_label462); 
 
-            match(input,24,FOLLOW_24_in_label460); 
+            match(input,24,FOLLOW_24_in_label464); 
 
             defineLabel(ID9);
 
@@ -803,7 +835,7 @@ public class AssemblerParser extends Parser {
             this.transition = DFA1_transition;
         }
         public String getDescription() {
-            return "31:9: ( globals )?";
+            return "32:9: ( globals )?";
         }
     }
     static final String DFA2_eotS =
@@ -855,7 +887,7 @@ public class AssemblerParser extends Parser {
             this.transition = DFA2_transition;
         }
         public String getDescription() {
-            return "31:18: ( classDeclaration )?";
+            return "32:18: ( classDeclaration )?";
         }
     }
     static final String DFA3_eotS =
@@ -907,7 +939,7 @@ public class AssemblerParser extends Parser {
             this.transition = DFA3_transition;
         }
         public String getDescription() {
-            return "()* loopback of 31:36: ( fieldDeclaration )*";
+            return "()* loopback of 32:36: ( fieldDeclaration )*";
         }
     }
  
@@ -919,47 +951,47 @@ public class AssemblerParser extends Parser {
     public static final BitSet FOLLOW_instr_in_program50 = new BitSet(new long[]{0x0000000000202202L});
     public static final BitSet FOLLOW_label_in_program54 = new BitSet(new long[]{0x0000000000202202L});
     public static final BitSet FOLLOW_NEWLINE_in_program58 = new BitSet(new long[]{0x0000000000202202L});
-    public static final BitSet FOLLOW_NEWLINE_in_globals89 = new BitSet(new long[]{0x0000000000802000L});
-    public static final BitSet FOLLOW_23_in_globals92 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_INT_in_globals94 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_NEWLINE_in_globals96 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_NEWLINE_in_classDeclaration108 = new BitSet(new long[]{0x0000000000102000L});
-    public static final BitSet FOLLOW_20_in_classDeclaration111 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_ID_in_classDeclaration113 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_NEWLINE_in_classDeclaration115 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_NEWLINE_in_fieldDeclaration125 = new BitSet(new long[]{0x0000000000402000L});
-    public static final BitSet FOLLOW_22_in_fieldDeclaration128 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_ID_in_fieldDeclaration130 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_NEWLINE_in_fieldDeclaration132 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_functionDeclaration151 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_ID_in_functionDeclaration155 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_24_in_functionDeclaration157 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_26_in_functionDeclaration159 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_25_in_functionDeclaration161 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_INT_in_functionDeclaration165 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_functionDeclaration167 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_27_in_functionDeclaration169 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_25_in_functionDeclaration171 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_INT_in_functionDeclaration175 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_NEWLINE_in_functionDeclaration177 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_instr208 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_NEWLINE_in_instr210 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_instr246 = new BitSet(new long[]{0x000000000000C7F0L});
-    public static final BitSet FOLLOW_operand_in_instr248 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_NEWLINE_in_instr250 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_instr278 = new BitSet(new long[]{0x000000000000C7F0L});
-    public static final BitSet FOLLOW_operand_in_instr282 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_instr284 = new BitSet(new long[]{0x000000000000C7F0L});
-    public static final BitSet FOLLOW_operand_in_instr288 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_NEWLINE_in_instr290 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_instr302 = new BitSet(new long[]{0x000000000000C7F0L});
-    public static final BitSet FOLLOW_operand_in_instr306 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_instr308 = new BitSet(new long[]{0x000000000000C7F0L});
-    public static final BitSet FOLLOW_operand_in_instr312 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_instr314 = new BitSet(new long[]{0x000000000000C7F0L});
-    public static final BitSet FOLLOW_operand_in_instr318 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_NEWLINE_in_instr320 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_label458 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_24_in_label460 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NEWLINE_in_globals91 = new BitSet(new long[]{0x0000000000802000L});
+    public static final BitSet FOLLOW_23_in_globals94 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_INT_in_globals96 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_NEWLINE_in_globals98 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NEWLINE_in_classDeclaration110 = new BitSet(new long[]{0x0000000000102000L});
+    public static final BitSet FOLLOW_20_in_classDeclaration113 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_ID_in_classDeclaration115 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_NEWLINE_in_classDeclaration117 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NEWLINE_in_fieldDeclaration127 = new BitSet(new long[]{0x0000000000402000L});
+    public static final BitSet FOLLOW_22_in_fieldDeclaration130 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_ID_in_fieldDeclaration132 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_NEWLINE_in_fieldDeclaration134 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_functionDeclaration153 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_ID_in_functionDeclaration157 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_24_in_functionDeclaration159 = new BitSet(new long[]{0x0000000004000000L});
+    public static final BitSet FOLLOW_26_in_functionDeclaration161 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_25_in_functionDeclaration163 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_INT_in_functionDeclaration167 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_functionDeclaration169 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_27_in_functionDeclaration171 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_25_in_functionDeclaration173 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_INT_in_functionDeclaration177 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_NEWLINE_in_functionDeclaration179 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_instr210 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_NEWLINE_in_instr212 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_instr248 = new BitSet(new long[]{0x000000000000C7F0L});
+    public static final BitSet FOLLOW_operand_in_instr250 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_NEWLINE_in_instr252 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_instr280 = new BitSet(new long[]{0x000000000000C7F0L});
+    public static final BitSet FOLLOW_operand_in_instr284 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_instr286 = new BitSet(new long[]{0x000000000000C7F0L});
+    public static final BitSet FOLLOW_operand_in_instr290 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_NEWLINE_in_instr292 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_instr304 = new BitSet(new long[]{0x000000000000C7F0L});
+    public static final BitSet FOLLOW_operand_in_instr308 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_instr310 = new BitSet(new long[]{0x000000000000C7F0L});
+    public static final BitSet FOLLOW_operand_in_instr314 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_instr316 = new BitSet(new long[]{0x000000000000C7F0L});
+    public static final BitSet FOLLOW_operand_in_instr320 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_NEWLINE_in_instr322 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_label462 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_24_in_label464 = new BitSet(new long[]{0x0000000000000002L});
 
 }

@@ -74,8 +74,9 @@ public class Interpreter3 {
 	protected BigDecimal[] poolDecimal;
 	protected ClassSymbol[] poolClass = new ClassSymbol[DEFAULT_CLASS_POOL_SIZE];
 
-	Map<String, Integer> mapString = new HashMap<>();	
+	Map<String, Integer> mapString = new HashMap<>();
 	int pPoolString = 0;
+
 	protected int indexOf(String v) {
 		Integer i = mapString.get(v);
 		if (i >= 0) return i.intValue();
@@ -88,9 +89,10 @@ public class Interpreter3 {
 
 	Map<ClassSymbol, Integer> mapClass = new HashMap<>();
 	int pPoolClass = 0;
+
 	protected int indexOf(ClassSymbol v) {
 		Integer i = mapClass.get(v);
-		if (i!=null) return i.intValue();
+		if (i != null) return i.intValue();
 		else {
 			mapClass.put(v, ++pPoolClass);
 			poolClass[pPoolClass] = v;
@@ -104,7 +106,7 @@ public class Interpreter3 {
 
 	// protected Object[] poolK;
 	/** Stack of stack frames, grows upwards */
-	StackFrame[] calls = new StackFrame[DEFAULT_CALL_STACK_SIZE];
+	final StackFrame[] calls = new StackFrame[DEFAULT_CALL_STACK_SIZE];
 	int fp = -1; // frame pointer register
 	// FunctionSymbol mainFunction;
 
@@ -188,22 +190,23 @@ public class Interpreter3 {
 
 		for (int i = 0; i < 1; i++) {
 			fp = -1;
-			StackFrame f = new StackFrame(mainFunction, 0);
+			StackFrame f = new StackFrame(mainFunction, 0, 0);
 			calls[++fp] = f;
 			cpu();
 		}
 
-		int max = 10;
+		int max = 10000;
 		long start = 0, end = 0;
 		start = System.nanoTime();
 		for (int i = 0; i < max; i++) {
 			fp = -1;
-			StackFrame f = new StackFrame(mainFunction, 0);
+			StackFrame f = new StackFrame(mainFunction, 0, 0);
 			calls[++fp] = f;
 			cpu();
 		}
 		end = System.nanoTime();
-		System.out.println(this.getClass().getName() + " : " + (end - start) / max);
+		System.out.println(this.getClass().getName() + "(" + max + " times)" + " cost : " + (end - start) + "  |  "
+				+ (end - start) / max + " / every time");
 	}
 
 	/** Simulate the fetch-execute cycle */
@@ -214,7 +217,7 @@ public class Interpreter3 {
 		Object[] poolK = currentFrame.sym.getConstPool();
 		int ip = 0;
 		int op = code[ip++];
-		
+
 		//@formatter:off
 		Outter: for (; ;op = code[ip++]) {
 			// if (trace) trace();
@@ -234,7 +237,7 @@ public class Interpreter3 {
 			case INSTR_ITOF:// r[j] = (float) (((Integer)					// r[i]).intValue());break;
 
 			case INSTR_CALL: {
-				call(currentFrame, A(op), B(op), ip);
+				call(currentFrame, B(op), C(op), A(op), ip);
 				ip = 0;
 
 				currentFrame = calls[fp];
@@ -244,12 +247,18 @@ public class Interpreter3 {
 				break;
 			}
 			case INSTR_RET: {
+				int retFirstResult = A(op);
+				int top = BX(op);				
 				StackFrame retFrame = calls[fp--]; // pop stack frame
-				calls[fp].registers[0] = retFrame.registers[0];
+				currentFrame = calls[fp];
 				ip = retFrame.returnAddress;
 				
-				currentFrame = calls[fp];
+				int[] rRet = retFrame.registers;
 				r = currentFrame.registers;
+				
+				int firstResult = currentFrame.firstResult;
+				for(int a=0;a<top;a++)	r[firstResult+a] = rRet[retFirstResult+a];					
+								
 				code = currentFrame.sym.code;
 				poolK = currentFrame.sym.getConstPool();
 				
@@ -272,7 +281,9 @@ public class Interpreter3 {
 			case INSTR_FSTORE:	poolH[r[A(op)]][((FieldSymbol) poolK[B(op)]).offset] = r[C(op)];break;
 
 			case INSTR_MOVE:	r[A(op)] = r[B(op)];	break;
-			case INSTR_PRINT:	System.out.println(r[A(op)]);	break;
+			case INSTR_PRINT:	
+				//System.out.println(r[A(op)]);	
+				break;
 			case INSTR_STRUCT:	r[A(op)] = newStruct(((ClassSymbol) poolK[B(op)]).getLength());	break;
 			case INSTR_NULL:	r[A(op)] = 0;	break;
 			
@@ -281,13 +292,11 @@ public class Interpreter3 {
 				throw new Error("Address : " + ip + " ;invalid opcode: " + Integer.toBinaryString(op) + " at ip="
 						+ (ip - 1));
 			}
-
-
 		}
 		//@formatter:on
 	}
 
-	/** Simulate the fetch-execute cycle */
+	/** Resolve Symbol */
 	protected FunctionSymbol resolve(FunctionSymbol func) {
 		if (func.resolved) return func;
 
@@ -301,7 +310,7 @@ public class Interpreter3 {
 			switch ((op >>> OFOP) & 0xFFFFFFFF) {
 
 			case INSTR_CALL: {
-				int index = A(op);
+				int index = B(op);
 
 				FunctionSymbol fs = (FunctionSymbol) poolK[index];
 				ClassSymbol clzSymbol = fs.definedClass;
@@ -389,15 +398,18 @@ public class Interpreter3 {
 		return structPoolSize++;
 	}
 
-	protected void call(StackFrame currentFrame, int functionConstPoolIndex, int baseRegisterIndex, int ip) {
-		FunctionSymbol fs = (FunctionSymbol) currentFrame.sym.getConstPool()[functionConstPoolIndex];
+	protected void call(StackFrame currentFrame, int functionConstPoolIndex, int baseRegisterIndex, int firstResult,
+			int ip) {
+		final FunctionSymbol fs = (FunctionSymbol) currentFrame.sym.getConstPool()[functionConstPoolIndex];
 		if (!fs.resolved) resolve(fs);
-		StackFrame f = new StackFrame(fs, ip);
-		StackFrame callingFrame = calls[fp];
+		final StackFrame f = new StackFrame(fs, ip, firstResult);
+		final StackFrame callingFrame = calls[fp];
 		calls[++fp] = f; // push new stack frame
 		// move arguments from calling stack frame to new stack frame
+		final int[] r = f.registers;
+		final int[] rCalling = callingFrame.registers;
 		for (int a = 0; a < fs.nargs; a++) { // move args, leaving room for r0
-			f.registers[a + 1] = callingFrame.registers[baseRegisterIndex + a];
+			r[a + 1] = rCalling[baseRegisterIndex + a];
 		}
 	}
 

@@ -1,5 +1,5 @@
 package nebula.vm;
-// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Assembler.g 2012-01-30 16:18:52
+// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Assembler.g 2012-02-08 10:44:42
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -250,16 +250,16 @@ public class AssemblerLexer extends Lexer {
     }
     // $ANTLR end "T__27"
 
-    // $ANTLR start "FIELD"
-    public final void mFIELD() throws RecognitionException {
+    // $ANTLR start "FUNC"
+    public final void mFUNC() throws RecognitionException {
         try {
-            int _type = FIELD;
+            int _type = FUNC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
             CommonToken CLASS1=null;
             CommonToken ID2=null;
 
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:81:7: ( CLASS '.' ID )
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:81:9: CLASS '.' ID
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:82:6: ( CLASS '.' ID '()' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:82:8: CLASS '.' ID '()'
             {
             int CLASS1Start85 = getCharIndex();
             int CLASS1StartLine85 = getLine();
@@ -281,7 +281,55 @@ public class AssemblerLexer extends Lexer {
             ID2.setCharPositionInLine(ID2StartCharPos89);
 
 
+            match("()"); 
+
+
+
             setText((CLASS1!=null?CLASS1.getText():null) + "." + (ID2!=null?ID2.getText():null));
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "FUNC"
+
+    // $ANTLR start "FIELD"
+    public final void mFIELD() throws RecognitionException {
+        try {
+            int _type = FIELD;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            CommonToken CLASS3=null;
+            CommonToken ID4=null;
+
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:84:7: ( CLASS '.' ID )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:84:9: CLASS '.' ID
+            {
+            int CLASS3Start101 = getCharIndex();
+            int CLASS3StartLine101 = getLine();
+            int CLASS3StartCharPos101 = getCharPositionInLine();
+            mCLASS(); 
+            CLASS3 = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, CLASS3Start101, getCharIndex()-1);
+            CLASS3.setLine(CLASS3StartLine101);
+            CLASS3.setCharPositionInLine(CLASS3StartCharPos101);
+
+
+            match('.'); 
+
+            int ID4Start105 = getCharIndex();
+            int ID4StartLine105 = getLine();
+            int ID4StartCharPos105 = getCharPositionInLine();
+            mID(); 
+            ID4 = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, ID4Start105, getCharIndex()-1);
+            ID4.setLine(ID4StartLine105);
+            ID4.setCharPositionInLine(ID4StartCharPos105);
+
+
+            setText((CLASS3!=null?CLASS3.getText():null) + "." + (ID4!=null?ID4.getText():null));
 
             }
 
@@ -299,23 +347,23 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = CLASS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            CommonToken ID3=null;
+            CommonToken ID5=null;
 
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:83:7: ( '@' ID )
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:83:9: '@' ID
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:86:7: ( '@' ID )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:86:9: '@' ID
             {
             match('@'); 
 
-            int ID3Start101 = getCharIndex();
-            int ID3StartLine101 = getLine();
-            int ID3StartCharPos101 = getCharPositionInLine();
+            int ID5Start117 = getCharIndex();
+            int ID5StartLine117 = getLine();
+            int ID5StartCharPos117 = getCharPositionInLine();
             mID(); 
-            ID3 = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, ID3Start101, getCharIndex()-1);
-            ID3.setLine(ID3StartLine101);
-            ID3.setCharPositionInLine(ID3StartCharPos101);
+            ID5 = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, ID5Start117, getCharIndex()-1);
+            ID5.setLine(ID5StartLine117);
+            ID5.setCharPositionInLine(ID5StartCharPos117);
 
 
-            setText((ID3!=null?ID3.getText():null));
+            setText((ID5!=null?ID5.getText():null));
 
             }
 
@@ -333,23 +381,23 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = REG;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            CommonToken INT4=null;
+            CommonToken INT6=null;
 
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:85:5: ( 'r' INT )
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:85:9: 'r' INT
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:88:5: ( 'r' INT )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:88:9: 'r' INT
             {
             match('r'); 
 
-            int INT4Start115 = getCharIndex();
-            int INT4StartLine115 = getLine();
-            int INT4StartCharPos115 = getCharPositionInLine();
+            int INT6Start131 = getCharIndex();
+            int INT6StartLine131 = getLine();
+            int INT6StartCharPos131 = getCharPositionInLine();
             mINT(); 
-            INT4 = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, INT4Start115, getCharIndex()-1);
-            INT4.setLine(INT4StartLine115);
-            INT4.setCharPositionInLine(INT4StartCharPos115);
+            INT6 = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, INT6Start131, getCharIndex()-1);
+            INT6.setLine(INT6StartLine131);
+            INT6.setCharPositionInLine(INT6StartCharPos131);
 
 
-            setText((INT4!=null?INT4.getText():null));
+            setText((INT6!=null?INT6.getText():null));
 
             }
 
@@ -367,13 +415,13 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:88:5: ( LETTER ( LETTER | '0' .. '9' )* )
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:88:9: LETTER ( LETTER | '0' .. '9' )*
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:91:5: ( LETTER ( LETTER | '0' .. '9' )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:91:9: LETTER ( LETTER | '0' .. '9' )*
             {
             mLETTER(); 
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:88:16: ( LETTER | '0' .. '9' )*
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:91:16: ( LETTER | '0' .. '9' )*
             loop1:
             do {
                 int alt1=2;
@@ -418,46 +466,10 @@ public class AssemblerLexer extends Lexer {
     }
     // $ANTLR end "ID"
 
-    // $ANTLR start "FUNC"
-    public final void mFUNC() throws RecognitionException {
-        try {
-            int _type = FUNC;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            CommonToken ID5=null;
-
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:90:5: ( ID '()' )
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:90:9: ID '()'
-            {
-            int ID5Start147 = getCharIndex();
-            int ID5StartLine147 = getLine();
-            int ID5StartCharPos147 = getCharPositionInLine();
-            mID(); 
-            ID5 = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, ID5Start147, getCharIndex()-1);
-            ID5.setLine(ID5StartLine147);
-            ID5.setCharPositionInLine(ID5StartCharPos147);
-
-
-            match("()"); 
-
-
-
-            setText((ID5!=null?ID5.getText():null));
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "FUNC"
-
     // $ANTLR start "LETTER"
     public final void mLETTER() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:95:5: ( LOWER | UPPER )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:96:5: ( LOWER | UPPER )
             // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
@@ -483,7 +495,7 @@ public class AssemblerLexer extends Lexer {
     // $ANTLR start "LOWER"
     public final void mLOWER() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:96:15: ( 'a' .. 'z' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:97:15: ( 'a' .. 'z' )
             // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:
             {
             if ( (input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
@@ -509,7 +521,7 @@ public class AssemblerLexer extends Lexer {
     // $ANTLR start "UPPER"
     public final void mUPPER() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:97:15: ( 'A' .. 'Z' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:98:15: ( 'A' .. 'Z' )
             // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') ) {
@@ -537,10 +549,10 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:99:5: ( ( '-' )? ( '0' .. '9' )+ )
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:99:9: ( '-' )? ( '0' .. '9' )+
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:100:5: ( ( '-' )? ( '0' .. '9' )+ )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:100:9: ( '-' )? ( '0' .. '9' )+
             {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:99:9: ( '-' )?
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:100:9: ( '-' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -549,7 +561,7 @@ public class AssemblerLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:99:9: '-'
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:100:9: '-'
                     {
                     match('-'); 
 
@@ -559,7 +571,7 @@ public class AssemblerLexer extends Lexer {
             }
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:99:14: ( '0' .. '9' )+
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:100:14: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -614,8 +626,8 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = CHAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:101:5: ( '\\'' . '\\'' )
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:101:9: '\\'' . '\\''
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:102:5: ( '\\'' . '\\'' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:102:9: '\\'' . '\\''
             {
             match('\''); 
 
@@ -639,25 +651,25 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            CommonToken STR_CHARS6=null;
+            CommonToken STR_CHARS7=null;
 
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:103:7: ( '\\\"' STR_CHARS '\\\"' )
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:103:9: '\\\"' STR_CHARS '\\\"'
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:104:7: ( '\\\"' STR_CHARS '\\\"' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:104:9: '\\\"' STR_CHARS '\\\"'
             {
             match('\"'); 
 
-            int STR_CHARS6Start233 = getCharIndex();
-            int STR_CHARS6StartLine233 = getLine();
-            int STR_CHARS6StartCharPos233 = getCharPositionInLine();
+            int STR_CHARS7Start236 = getCharIndex();
+            int STR_CHARS7StartLine236 = getLine();
+            int STR_CHARS7StartCharPos236 = getCharPositionInLine();
             mSTR_CHARS(); 
-            STR_CHARS6 = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, STR_CHARS6Start233, getCharIndex()-1);
-            STR_CHARS6.setLine(STR_CHARS6StartLine233);
-            STR_CHARS6.setCharPositionInLine(STR_CHARS6StartCharPos233);
+            STR_CHARS7 = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.DEFAULT_CHANNEL, STR_CHARS7Start236, getCharIndex()-1);
+            STR_CHARS7.setLine(STR_CHARS7StartLine236);
+            STR_CHARS7.setCharPositionInLine(STR_CHARS7StartCharPos236);
 
 
             match('\"'); 
 
-            setText((STR_CHARS6!=null?STR_CHARS6.getText():null));
+            setText((STR_CHARS7!=null?STR_CHARS7.getText():null));
 
             }
 
@@ -673,10 +685,10 @@ public class AssemblerLexer extends Lexer {
     // $ANTLR start "STR_CHARS"
     public final void mSTR_CHARS() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:105:20: ( (~ '\"' )* )
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:105:22: (~ '\"' )*
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:106:20: ( (~ '\"' )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:106:22: (~ '\"' )*
             {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:105:22: (~ '\"' )*
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:106:22: (~ '\"' )*
             loop4:
             do {
                 int alt4=2;
@@ -725,7 +737,7 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = FLOAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:108:5: ( INT '.' ( INT )* | '.' ( INT )+ )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:109:5: ( INT '.' ( INT )* | '.' ( INT )+ )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -744,14 +756,14 @@ public class AssemblerLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:108:9: INT '.' ( INT )*
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:109:9: INT '.' ( INT )*
                     {
                     mINT(); 
 
 
                     match('.'); 
 
-                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:108:17: ( INT )*
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:109:17: ( INT )*
                     loop5:
                     do {
                         int alt5=2;
@@ -764,7 +776,7 @@ public class AssemblerLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:108:17: INT
+                    	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:109:17: INT
                     	    {
                     	    mINT(); 
 
@@ -781,11 +793,11 @@ public class AssemblerLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:109:9: '.' ( INT )+
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:110:9: '.' ( INT )+
                     {
                     match('.'); 
 
-                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:109:13: ( INT )+
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:110:13: ( INT )+
                     int cnt6=0;
                     loop6:
                     do {
@@ -799,7 +811,7 @@ public class AssemblerLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:109:13: INT
+                    	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:110:13: INT
                     	    {
                     	    mINT(); 
 
@@ -835,10 +847,10 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:112:5: ( ( ' ' | '\\t' )+ )
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:112:9: ( ' ' | '\\t' )+
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:113:5: ( ( ' ' | '\\t' )+ )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:113:9: ( ' ' | '\\t' )+
             {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:112:9: ( ' ' | '\\t' )+
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:113:9: ( ' ' | '\\t' )+
             int cnt8=0;
             loop8:
             do {
@@ -895,10 +907,10 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = NEWLINE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:115:5: ( ( ';' ( . )* )? ( '\\r' )? '\\n' )
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:115:9: ( ';' ( . )* )? ( '\\r' )? '\\n'
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:116:5: ( ( ';' ( . )* )? ( '\\r' )? '\\n' )
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:116:9: ( ';' ( . )* )? ( '\\r' )? '\\n'
             {
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:115:9: ( ';' ( . )* )?
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:116:9: ( ';' ( . )* )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -907,11 +919,11 @@ public class AssemblerLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:115:10: ';' ( . )*
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:116:10: ';' ( . )*
                     {
                     match(';'); 
 
-                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:115:14: ( . )*
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:116:14: ( . )*
                     loop9:
                     do {
                         int alt9=2;
@@ -930,7 +942,7 @@ public class AssemblerLexer extends Lexer {
 
                         switch (alt9) {
                     	case 1 :
-                    	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:115:14: .
+                    	    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:116:14: .
                     	    {
                     	    matchAny(); 
 
@@ -949,7 +961,7 @@ public class AssemblerLexer extends Lexer {
             }
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:115:19: ( '\\r' )?
+            // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:116:19: ( '\\r' )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -958,7 +970,7 @@ public class AssemblerLexer extends Lexer {
             }
             switch (alt11) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:115:19: '\\r'
+                    // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:116:19: '\\r'
                     {
                     match('\r'); 
 
@@ -982,7 +994,7 @@ public class AssemblerLexer extends Lexer {
     // $ANTLR end "NEWLINE"
 
     public void mTokens() throws RecognitionException {
-        // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:8: ( T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | FIELD | CLASS | REG | ID | FUNC | INT | CHAR | STRING | FLOAT | WS | NEWLINE )
+        // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:8: ( T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | FUNC | FIELD | CLASS | REG | ID | INT | CHAR | STRING | FLOAT | WS | NEWLINE )
         int alt12=20;
         alt12 = dfa12.predict(input);
         switch (alt12) {
@@ -1059,41 +1071,41 @@ public class AssemblerLexer extends Lexer {
                 }
                 break;
             case 10 :
-                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:64: FIELD
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:64: FUNC
+                {
+                mFUNC(); 
+
+
+                }
+                break;
+            case 11 :
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:69: FIELD
                 {
                 mFIELD(); 
 
 
                 }
                 break;
-            case 11 :
-                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:70: CLASS
+            case 12 :
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:75: CLASS
                 {
                 mCLASS(); 
 
 
                 }
                 break;
-            case 12 :
-                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:76: REG
+            case 13 :
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:81: REG
                 {
                 mREG(); 
 
 
                 }
                 break;
-            case 13 :
-                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:80: ID
+            case 14 :
+                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:85: ID
                 {
                 mID(); 
-
-
-                }
-                break;
-            case 14 :
-                // D:\\Projects\\nebula\\nebula-vm\\Assembler.g:1:83: FUNC
-                {
-                mFUNC(); 
 
 
                 }
@@ -1154,25 +1166,27 @@ public class AssemblerLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\5\uffff\2\26\1\uffff\2\26\1\uffff\1\35\11\uffff\1\26\1\uffff\1"+
-        "\26\1\uffff\1\26\1\40\1\uffff\1\33\1\uffff\2\26\1\uffff\1\40\1\uffff"+
-        "\1\45\1\26\1\uffff\1\26\1\50\1\uffff";
+        "\5\uffff\2\11\1\uffff\1\11\2\uffff\1\32\11\uffff\2\11\1\35\1\uffff"+
+        "\1\30\1\uffff\2\11\1\uffff\1\35\1\uffff\1\43\1\11\1\45\1\uffff\1"+
+        "\11\1\uffff\1\45\1\uffff\1\51\1\uffff";
     static final String DFA12_eofS =
-        "\51\uffff";
+        "\52\uffff";
     static final String DFA12_minS =
-        "\1\11\1\uffff\1\55\2\uffff\2\50\1\101\2\50\1\60\1\56\11\uffff\1"+
-        "\50\1\uffff\1\50\1\uffff\1\50\1\56\1\uffff\1\50\1\uffff\2\50\1\uffff"+
-        "\1\56\1\uffff\2\50\1\uffff\2\50\1\uffff";
+        "\1\11\1\uffff\1\55\2\uffff\1\162\1\157\1\101\1\55\1\uffff\1\60\1"+
+        "\56\11\uffff\1\147\1\143\1\56\1\uffff\1\60\1\uffff\1\163\1\141\1"+
+        "\uffff\1\56\1\101\1\60\1\154\1\50\1\uffff\1\163\1\uffff\1\50\1\uffff"+
+        "\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\172\1\uffff\1\147\2\uffff\5\172\2\71\11\uffff\1\172\1\uffff\1"+
-        "\172\1\uffff\2\172\1\uffff\1\172\1\uffff\2\172\1\uffff\1\172\1\uffff"+
-        "\2\172\1\uffff\2\172\1\uffff";
+        "\1\172\1\uffff\1\147\2\uffff\1\162\1\157\1\172\1\71\1\uffff\2\71"+
+        "\11\uffff\1\147\1\143\1\172\1\uffff\1\172\1\uffff\1\163\1\141\1"+
+        "\uffff\3\172\1\154\1\172\1\uffff\1\163\1\uffff\1\172\1\uffff\1\172"+
+        "\1\uffff";
     static final String DFA12_acceptS =
-        "\1\uffff\1\1\1\uffff\1\6\1\7\7\uffff\1\20\1\21\1\23\1\24\1\2\1\3"+
-        "\1\4\1\5\1\22\1\uffff\1\15\1\uffff\1\16\2\uffff\1\14\1\uffff\1\17"+
-        "\2\uffff\1\13\1\uffff\1\12\2\uffff\1\10\2\uffff\1\11";
+        "\1\uffff\1\1\1\uffff\1\6\1\7\4\uffff\1\16\2\uffff\1\20\1\21\1\23"+
+        "\1\24\1\2\1\3\1\4\1\5\1\22\3\uffff\1\15\1\uffff\1\17\2\uffff\1\14"+
+        "\5\uffff\1\10\1\uffff\1\13\1\uffff\1\12\1\uffff\1\11";
     static final String DFA12_specialS =
-        "\51\uffff}>";
+        "\52\uffff}>";
     static final String[] DFA12_transitionS = {
             "\1\16\1\17\2\uffff\1\17\22\uffff\1\16\1\uffff\1\15\4\uffff\1"+
             "\14\4\uffff\1\1\1\12\1\2\1\uffff\12\13\1\3\1\17\1\uffff\1\4"+
@@ -1181,11 +1195,11 @@ public class AssemblerLexer extends Lexer {
             "\1\24\2\uffff\12\24\51\uffff\1\20\1\21\1\uffff\1\22\1\23",
             "",
             "",
-            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\21\27\1\25\10\27",
-            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\16\27\1\31\13\27",
-            "\32\32\6\uffff\32\32",
-            "\1\30\4\uffff\1\33\2\uffff\12\34\7\uffff\32\27\6\uffff\32\27",
-            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\1\25",
+            "\1\26",
+            "\32\27\6\uffff\32\27",
+            "\1\30\2\uffff\12\31",
+            "",
             "\12\13",
             "\1\24\1\uffff\12\13",
             "",
@@ -1197,25 +1211,26 @@ public class AssemblerLexer extends Lexer {
             "",
             "",
             "",
-            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\6\27\1\36\23\27",
+            "\1\33",
+            "\1\34",
+            "\1\37\1\uffff\12\36\7\uffff\32\36\6\uffff\32\36",
             "",
-            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\12\31\7\uffff\32\11\6\uffff\32\11",
             "",
-            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\2\27\1\37\27\27",
-            "\1\42\1\uffff\12\41\7\uffff\32\41\6\uffff\32\41",
+            "\1\40",
+            "\1\41",
             "",
-            "\1\30\7\uffff\12\34\7\uffff\32\27\6\uffff\32\27",
+            "\1\37\1\uffff\12\36\7\uffff\32\36\6\uffff\32\36",
+            "\32\42\6\uffff\32\42",
+            "\12\11\7\uffff\32\11\6\uffff\32\11",
+            "\1\44",
+            "\1\47\7\uffff\12\46\7\uffff\32\46\6\uffff\32\46",
             "",
-            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\22\27\1\43\7\27",
-            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\1\44\31\27",
+            "\1\50",
             "",
-            "\1\42\1\uffff\12\41\7\uffff\32\41\6\uffff\32\41",
+            "\1\47\7\uffff\12\46\7\uffff\32\46\6\uffff\32\46",
             "",
-            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\32\27",
-            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\13\27\1\46\16\27",
-            "",
-            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\22\27\1\47\7\27",
-            "\1\30\7\uffff\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\12\11\7\uffff\32\11\6\uffff\32\11",
             ""
     };
 
@@ -1249,7 +1264,7 @@ public class AssemblerLexer extends Lexer {
             this.transition = DFA12_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | FIELD | CLASS | REG | ID | FUNC | INT | CHAR | STRING | FLOAT | WS | NEWLINE );";
+            return "1:1: Tokens : ( T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | FUNC | FIELD | CLASS | REG | ID | INT | CHAR | STRING | FLOAT | WS | NEWLINE );";
         }
     }
  

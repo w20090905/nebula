@@ -145,7 +145,7 @@ public class BytecodeAssembler extends AssemblerParser {
 			c = new ClassSymbol(text.substring(1, i));
 			c = (ClassSymbol) poolLocalK.get(toLocalConstantPoolIndex(c));
 			v = toLocalConstantPoolIndex(new FunctionSymbol(c, text.substring(i + 1)));
-			op |= (v & MKXX) << (offset - OFT);			
+			op |= (v & MKX_) << (offset);			
 			break;
 		case REG:
 			v = toRegisterNumber(operandToken);

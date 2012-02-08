@@ -62,11 +62,11 @@ instr
 
 // START: operand
 operand
-    :   FIELD
-    |   CLASS // field call ; E.g., ".name"
+    :   FUNC // function label; E.g., "f()"
+    |   FIELD // field call; @T.age
+    |   CLASS // class ; E.g., ".name"
     |   ID   // basic code label; E.g., "loop"
     |   REG  // register name; E.g., "r0"
-    |   FUNC // function label; E.g., "f()"
     |   INT
 // ...
 // END: operand
@@ -79,8 +79,9 @@ label
     :   ID ':' {defineLabel($ID);}
     ;
 
-FIELD : CLASS '.' ID {setText($CLASS.text + "." + $ID.text);} ;
 FUNC : CLASS '.' ID '()' {setText($CLASS.text + "." + $ID.text);} ;
+
+FIELD : CLASS '.' ID {setText($CLASS.text + "." + $ID.text);} ;
 
 CLASS : '@' ID {setText($ID.text);} ;
 
