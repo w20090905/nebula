@@ -51,6 +51,7 @@ import static nebula.vm.BytecodeDefinition.OFOP;
 import static nebula.vm.BytecodeDefinition._FALSE;
 import static nebula.vm.BytecodeDefinition._TRUE;
 import static nebula.vm.BytecodeDefinition.instructions;
+import nebula.vm.DisAssembler;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -73,6 +74,8 @@ public class Interpreter3 {
 	public static final int DEFAULT_Object_POOL_SIZE = 10000;
 
 	public static final int DEFAULT_PREPAREED_NUMBER_STRING_RANGE = 1000;
+
+	DisAssembler disasm = new DisAssembler();
 
 	@Deprecated
 	int[] globals; // global variable space
@@ -129,11 +132,9 @@ public class Interpreter3 {
 		return mapClass.containsKey(v);
 	}
 
-	// protected Object[] poolK;
 	/** Stack of stack frames, grows upwards */
 	final StackFrame[] calls = new StackFrame[DEFAULT_CALL_STACK_SIZE];
 	int fp = -1; // frame pointer register
-	// FunctionSymbol mainFunction;
 
 	boolean trace = false;
 
@@ -225,7 +226,7 @@ public class Interpreter3 {
 			cpu();
 		}
 
-		int max = 10000;
+		int max = 10;
 		long start = 0, end = 0;
 		start = System.nanoTime();
 		for (int i = 0; i < max; i++) {
@@ -251,7 +252,7 @@ public class Interpreter3 {
 
 		//@formatter:off
 		Outter: for (; ;op = code[ip++]) {
-			// if (trace) trace();
+			if (trace) trace(ip-1);
 			switch ((op >>> OFOP) & 0xFFFFFFFF) {
 			case INSTR_IADD:	r[A(op)] = r[B(op)] + r[C(op)];	break;
 			case INSTR_ISUB:	r[A(op)] = r[B(op)] - r[C(op)];	break;
@@ -518,55 +519,65 @@ public class Interpreter3 {
 	// }
 
 	// Tracing, dumping, ...
-
 	public void disassemble() {
-		// disasm.disassemble();
+//		disasm.disassemble();
 	}
 
-	protected void trace() {
-		// disasm.disassembleInstruction(ip);
-		// int[] r = calls[fp].registers;
-		// if (r.length > 0) {
-		// System.out.print("\t" + calls[fp].sym.name + ".registers=[");
-		// ;
-		// for (int i = 0; i < r.length; i++) {
-		// if (i == 1) System.out.print(" |");
-		// if (i == calls[fp].sym.nargs + 1 && i == 1) System.out.print("|");
-		// else if (i == calls[fp].sym.nargs + 1) System.out.print(" |");
-		// System.out.print(" ");
-		// if (r[i] == 0) System.out.print("?");
-		// else System.out.print(r[i]);
-		// }
-		// System.out.print(" ]");
-		// }
-		// if (fp >= 0) {
-		// System.out.print("  calls=[");
-		// for (int i = 0; i <= fp; i++) {
-		// System.out.print(" " + calls[i].sym.name);
-		// }
-		// System.out.print(" ]");
-		// }
-		// System.out.println();
+	protected void trace(int ip) {
+		StackFrame currentfFrame = calls[fp];
+		if(ip==0){
+			System.out.println("");
+			System.out.println("Enter .function " +currentfFrame.sym.definedClass.name + "." + currentfFrame.sym.name);
+		}
+		disasm.disassembleInstruction(currentfFrame.sym.code,currentfFrame.sym.getConstPool(), ip);
+		int[] r = currentfFrame.registers;
+		if (r.length > 0) {
+			System.out.print("\t\t" + calls[fp].sym.name + ".registers=[");
+			;
+			for (int i = 0; i < r.length; i++) {
+				if (i == 1) System.out.print(" |");
+				if (i == calls[fp].sym.nargs + 1 && i == 1) System.out.print("|");
+				else if (i == calls[fp].sym.nargs + 1) System.out.print(" |");
+				System.out.print(" ");
+				if (r[i] == 0) System.out.print("_");
+				else System.out.print(r[i]);
+			}
+			System.out.print(" ]");
+		}
+		if (fp >= 0) {
+			System.out.print("  calls=[");
+			for (int i = 0; i <= fp; i++) {
+				System.out.print(" " + calls[i].sym.name);
+			}
+			System.out.print(" ]");
+		}
+		System.out.println();
 	}
 
 	public void coredump() {
-		// if (poolK.length > 0) dumpConstantPool();
-		// if (globals.length > 0) dumpDataMemory();
-		// dumpCodeMemory();
+		for (int i = 1; i < poolClass.length; i++) {
+			ClassSymbol clz = poolClass[i];
+
+			if (clz.poolLocalK.length > 0) dumpConstantPool(clz.poolLocalK);
+//			if (globals.length > 0) dumpDataMemory();
+			for (FunctionSymbol f : clz.functions) {
+				dumpCodeMemory(f.code);
+			}
+		}
 	}
 
-	protected void dumpConstantPool() {
-		// System.out.println("Constant pool:");
-		// int addr = 0;
-		// for (Object o : poolK) {
-		// if (o instanceof String) {
-		// System.out.printf("%04d: \"%s\"\n", addr, o);
-		// } else {
-		// System.out.printf("%04d: %s\n", addr, o);
-		// }
-		// addr++;
-		// }
-		// System.out.println();
+	protected void dumpConstantPool(Object[] poolK) {
+		System.out.println("Constant pool:");
+		int addr = 0;
+		for (Object o : poolK) {
+			if (o instanceof String) {
+				System.out.printf("%04d: \"%s\"\n", addr, o);
+			} else {
+				System.out.printf("%04d: %s\n", addr, o);
+			}
+			addr++;
+		}
+		System.out.println();
 	}
 
 	static final boolean ltF(int b, int c) {
@@ -603,13 +614,13 @@ public class Interpreter3 {
 		System.out.println();
 	}
 
-	public void dumpCodeMemory() {
-		// System.out.println("Code memory:");
-		// for (int i = 0; code != null && i < codeSize; i++) {
-		// if (i % 8 == 0 && i != 0) System.out.println();
-		// if (i % 8 == 0) System.out.printf("%04d:", i);
-		// System.out.printf(" %3d", code[i]);
-		// }
-		// System.out.println();
+	public void dumpCodeMemory(int[] code) {
+		System.out.println("Code memory:");
+		for (int i = 0; code != null && i < code.length; i++) {
+			if (i % 8 == 0 && i != 0) System.out.println();
+			if (i % 8 == 0) System.out.printf("%04d:", i);
+			System.out.printf(" %3d", code[i]);
+		}
+		System.out.println();
 	}
 }
