@@ -65,24 +65,25 @@ import org.antlr.runtime.CommonTokenStream;
 public class Interpreter3 {
 	public static final int DEFAULT_OPERAND_STACK_SIZE = 100;
 	public static final int DEFAULT_CALL_STACK_SIZE = 1000;
-	
+
 	public static final int DEFAULT_Class_POOL_SIZE = 1000;
 	public static final int DEFAULT_String_POOL_SIZE = 10000;
 	public static final int DEFAULT_Decimal_POOL_SIZE = 10000;
-	
+
 	public static final int DEFAULT_PREPAREED_NUMBER_STRING_RANGE = 1000;
 
-	@Deprecated int[] globals; // global variable space
+	@Deprecated
+	int[] globals; // global variable space
 	final ClassSymbol[] poolClass = new ClassSymbol[DEFAULT_Class_POOL_SIZE];
 	final String[] poolString = new String[DEFAULT_String_POOL_SIZE];
 	final BigDecimal[] poolDecimal = new BigDecimal[DEFAULT_Decimal_POOL_SIZE];
 
-	final Map<String, Integer> mapString = new HashMap<>(DEFAULT_Decimal_POOL_SIZE*2);
+	final Map<String, Integer> mapString = new HashMap<>(DEFAULT_Decimal_POOL_SIZE * 2);
 	int pPoolString = 0;
 
 	protected int indexOf(String v) {
 		Integer i = mapString.get(v);
-		if (i !=null) return i.intValue();
+		if (i != null) return i.intValue();
 		else {
 			mapString.put(v, ++pPoolString);
 			poolString[pPoolString] = v;
@@ -90,7 +91,7 @@ public class Interpreter3 {
 		}
 	}
 
-	final Map<ClassSymbol, Integer> mapClass = new HashMap<>(DEFAULT_Class_POOL_SIZE*2);
+	final Map<ClassSymbol, Integer> mapClass = new HashMap<>(DEFAULT_Class_POOL_SIZE * 2);
 	int pPoolClass = 0;
 
 	protected int indexOf(ClassSymbol v) {
@@ -104,7 +105,7 @@ public class Interpreter3 {
 	}
 
 	public Interpreter3() {
-		for(int i=0;i<DEFAULT_PREPAREED_NUMBER_STRING_RANGE;i++){
+		for (int i = 0; i < DEFAULT_PREPAREED_NUMBER_STRING_RANGE; i++) {
 			indexOf(String.valueOf(i));
 		}
 	}
@@ -265,7 +266,7 @@ public class Interpreter3 {
 				int[] rRet = retFrame.registers;
 				r = currentFrame.registers;
 				
-				int firstResult = currentFrame.firstResult;
+				int firstResult = retFrame.firstResult;
 				for(int a=0;a<top;a++)	r[firstResult+a] = rRet[retFirstResult+a];					
 								
 				code = currentFrame.sym.code;
@@ -318,13 +319,13 @@ public class Interpreter3 {
 			// if (trace) trace();
 			switch ((op >>> OFOP) & 0xFFFFFFFF) {
 
-			case INSTR_SCONST:{
+			case INSTR_SCONST: {
 				int index = B(op);
 				String str = (String) poolK[index];
 				poolK[index] = indexOf(str);
 				break;
 			}
-				
+
 			case INSTR_CALL: {
 				int index = B(op);
 
@@ -383,6 +384,7 @@ public class Interpreter3 {
 			}
 
 		}
+		func.resolved = true;
 		return func;
 	}
 
