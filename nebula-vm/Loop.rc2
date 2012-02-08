@@ -12,7 +12,7 @@
     iconst r5, 0	; j=0
 	struct r6, @T    ; T t = new T()
 	
-	iconst r7, 1
+	iconst r7, 717
 	fstore r6, @T.age, r7 ; t.age = 1
 ; while i<n:
 start:
@@ -29,5 +29,5 @@ start:
 done:
 ; print "looped "+n+" times."
 	sconst r4, "done"
-	print r5
+	print r8
 	halt
