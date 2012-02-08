@@ -17,3 +17,10 @@
 	fload r3, r1, @T.name ;#3
 	print r3
 	halt
+	
+.def sayHello: args=1,locals=3
+; 
+	sconst r1, "wangshilian"
+	print r1
+	ret r1,1
+	

@@ -65,21 +65,24 @@ import org.antlr.runtime.CommonTokenStream;
 public class Interpreter3 {
 	public static final int DEFAULT_OPERAND_STACK_SIZE = 100;
 	public static final int DEFAULT_CALL_STACK_SIZE = 1000;
-	public static final int DEFAULT_CLASS_POOL_SIZE = 1000;
-	public static final int DEFAULT_STRING_POOL_SIZE = 1000;
+	
+	public static final int DEFAULT_Class_POOL_SIZE = 1000;
+	public static final int DEFAULT_String_POOL_SIZE = 10000;
+	public static final int DEFAULT_Decimal_POOL_SIZE = 10000;
+	
+	public static final int DEFAULT_PREPAREED_NUMBER_STRING_RANGE = 1000;
 
-	int[] globals; // global variable space
-	protected String[] poolString = new String[DEFAULT_CLASS_POOL_SIZE];
+	@Deprecated int[] globals; // global variable space
+	final ClassSymbol[] poolClass = new ClassSymbol[DEFAULT_Class_POOL_SIZE];
+	final String[] poolString = new String[DEFAULT_String_POOL_SIZE];
+	final BigDecimal[] poolDecimal = new BigDecimal[DEFAULT_Decimal_POOL_SIZE];
 
-	protected BigDecimal[] poolDecimal;
-	protected ClassSymbol[] poolClass = new ClassSymbol[DEFAULT_CLASS_POOL_SIZE];
-
-	Map<String, Integer> mapString = new HashMap<>();
+	final Map<String, Integer> mapString = new HashMap<>(DEFAULT_Decimal_POOL_SIZE*2);
 	int pPoolString = 0;
 
 	protected int indexOf(String v) {
 		Integer i = mapString.get(v);
-		if (i >= 0) return i.intValue();
+		if (i !=null) return i.intValue();
 		else {
 			mapString.put(v, ++pPoolString);
 			poolString[pPoolString] = v;
@@ -87,7 +90,7 @@ public class Interpreter3 {
 		}
 	}
 
-	Map<ClassSymbol, Integer> mapClass = new HashMap<>();
+	final Map<ClassSymbol, Integer> mapClass = new HashMap<>(DEFAULT_Class_POOL_SIZE*2);
 	int pPoolClass = 0;
 
 	protected int indexOf(ClassSymbol v) {
@@ -97,6 +100,12 @@ public class Interpreter3 {
 			mapClass.put(v, ++pPoolClass);
 			poolClass[pPoolClass] = v;
 			return pPoolString;
+		}
+	}
+
+	public Interpreter3() {
+		for(int i=0;i<DEFAULT_PREPAREED_NUMBER_STRING_RANGE;i++){
+			indexOf(String.valueOf(i));
 		}
 	}
 
@@ -271,8 +280,8 @@ public class Interpreter3 {
 
 			case INSTR_CCONST:	r[A(op)] = BX(op);	break;
 			case INSTR_ICONST:	r[A(op)] = BX(op);	break;
-			case INSTR_FCONST:	r[A(op)] = B(op);	break; // TODO not implements
-			case INSTR_SCONST:	r[A(op)] = B(op);	break; // TODO not implements
+			case INSTR_FCONST:	r[A(op)] = ((Integer)poolK[B(op)]).intValue();	break; // TODO not implements
+			case INSTR_SCONST:	r[A(op)] = ((Integer)poolK[B(op)]).intValue();	break; // TODO not implements
 
 			case INSTR_GLOAD:	r[A(op)] = globals[BX(op)];	break;
 			case INSTR_GSTORE:	globals[AX(op)] = r[B(op)];	break;
@@ -282,7 +291,7 @@ public class Interpreter3 {
 
 			case INSTR_MOVE:	r[A(op)] = r[B(op)];	break;
 			case INSTR_PRINT:	
-				//System.out.println(r[A(op)]);	
+				System.out.println(poolString[r[A(op)]]);	
 				break;
 			case INSTR_STRUCT:	r[A(op)] = newStruct(((ClassSymbol) poolK[B(op)]).getLength());	break;
 			case INSTR_NULL:	r[A(op)] = 0;	break;
@@ -296,7 +305,7 @@ public class Interpreter3 {
 		//@formatter:on
 	}
 
-	/** Resolve Symbol */
+	/** Resolve Function Symbol */
 	protected FunctionSymbol resolve(FunctionSymbol func) {
 		if (func.resolved) return func;
 
@@ -309,6 +318,13 @@ public class Interpreter3 {
 			// if (trace) trace();
 			switch ((op >>> OFOP) & 0xFFFFFFFF) {
 
+			case INSTR_SCONST:{
+				int index = B(op);
+				String str = (String) poolK[index];
+				poolK[index] = indexOf(str);
+				break;
+			}
+				
 			case INSTR_CALL: {
 				int index = B(op);
 
