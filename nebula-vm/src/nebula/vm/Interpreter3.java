@@ -160,6 +160,11 @@ public class Interpreter3 {
 
 	public void resolve(ClassSymbol classSymbol) {
 		this.indexOf(classSymbol);
+		int offset =1;
+		for(FieldSymbol f: classSymbol.fields){
+			f.defineAt(offset);
+			offset+=f.lenght;
+		}
 	}
 
 	public ClassSymbol loadClass(String className) {
@@ -225,6 +230,7 @@ public class Interpreter3 {
 		int[] r = currentFrame.registers;
 		int[] code = currentFrame.sym.code;
 		Object[] poolK = currentFrame.sym.getConstPool();
+		long maskObject = currentFrame.maskObject;
 		int ip = 0;
 		int op = code[ip++];
 
@@ -247,6 +253,7 @@ public class Interpreter3 {
 			case INSTR_ITOF:// r[j] = (float) (((Integer)					// r[i]).intValue());break;
 
 			case INSTR_CALL: {
+				currentFrame.maskObject = maskObject;
 				call(currentFrame, B(op), C(op), A(op), ip);
 				ip = 0;
 
@@ -260,17 +267,34 @@ public class Interpreter3 {
 				int retFirstResult = A(op);
 				int top = BX(op);				
 				StackFrame retFrame = calls[fp--]; // pop stack frame
+				int[] rRet = retFrame.registers;
+				
+				// clear ref object, don't deal args and ret param
+				for(int a=retFrame.sym.nargs;a<retFirstResult;a++){				
+					if((maskObject & (1L << a)) > 0){
+						int index = rRet[a];
+						if(poolH[index][0]<2){
+							poolH[index] = null;
+						}else{
+							poolH[index][0]--;
+						}
+					}
+				}
+				
 				currentFrame = calls[fp];
 				ip = retFrame.returnAddress;
 				
-				int[] rRet = retFrame.registers;
 				r = currentFrame.registers;
 				
 				int firstResult = retFrame.firstResult;
-				for(int a=0;a<top;a++)	r[firstResult+a] = rRet[retFirstResult+a];					
+
+				for(int a=0;a<top;a++)	{
+					r[firstResult+a] = rRet[retFirstResult+a];					
+				}
 								
 				code = currentFrame.sym.code;
 				poolK = currentFrame.sym.getConstPool();
+				maskObject = currentFrame.maskObject;
 				
 				break;
 			}
@@ -290,14 +314,40 @@ public class Interpreter3 {
 			case INSTR_FLOAD:	r[A(op)] = poolH[r[B(op)]][((FieldSymbol) poolK[C(op)]).offset];break;
 			case INSTR_FSTORE:	poolH[r[A(op)]][((FieldSymbol) poolK[B(op)]).offset] = r[C(op)];break;
 
-			case INSTR_MOVE:	r[A(op)] = r[B(op)];	break;
+			case INSTR_MOVE:	{
+				r[A(op)] = r[B(op)];				
+				break;
+			}
 			case INSTR_PRINT:	
 				System.out.println(poolString[r[A(op)]]);	
 				break;
-			case INSTR_STRUCT:	r[A(op)] = newStruct(((ClassSymbol) poolK[B(op)]).getLength());	break;
+			case INSTR_STRUCT:{
+				int ra = A(op);
+				if((maskObject & (1L << ra)) > 0){
+					int index = r[ra];
+					if(poolH[index][0]<2){
+						poolH[index] = null;
+					}else{
+						poolH[index][0]--;
+					}
+				}
+				r[ra] = newStruct(((ClassSymbol) poolK[B(op)]).getLength());	
+				maskObject |= (1L << ra);
+				break;
+			}
 			case INSTR_NULL:	r[A(op)] = 0;	break;
-			
-			case INSTR_HALT:	break Outter;
+			case INSTR_HALT:{
+				for(int i=0;i<structPoolSize;i++)poolH[i]=null;	
+				structPoolSize =0;
+				break Outter;
+			}
+			case BytecodeDefinition.INSTR_OMOVE:{
+				int a = A(op);
+				int index = r[B(op)];				
+				poolH[index][0]++;
+				r[a] = index;
+				break;				
+			}
 			default:
 				throw new Error("Address : " + ip + " ;invalid opcode: " + Integer.toBinaryString(op) + " at ip="
 						+ (ip - 1));
@@ -412,8 +462,14 @@ public class Interpreter3 {
 	int structPoolSize = 0;
 
 	protected int newStruct(int size) {
-		poolH[structPoolSize] = new int[size];
-		return structPoolSize++;
+		int index = 0;
+		for (; index < structPoolSize; index++) {
+			if (poolH[index] == null) break;
+		}
+		poolH[index] = new int[size];
+		poolH[index][0] = 1;
+		structPoolSize = structPoolSize > index+1 ? structPoolSize : index+1;
+		return index;
 	}
 
 	protected void call(StackFrame currentFrame, int functionConstPoolIndex, int baseRegisterIndex, int firstResult,

@@ -8,12 +8,13 @@
 	
 .def f: args=1, locals=10 ; int f(int x)
 	iconst 	r2,2  		; get int 2 into 1st non-arg register
-	imul 	r3,r1,r2  	; mult arg by 2
-	iconst 	r4,30     	; get int 2 into a reg
-	call 	r5,@T4.g(),r3 	; leave result in r0; args=[r3,r4]
-	ret     r5,1      	; return value in r0
+	struct  r3,@T
+	imul 	r4,r1,r2  	; mult arg by 2
+	iconst 	r5,30     	; get int 2 into a reg
+	call 	r6,@T4.g(),r4 	; leave result in r0; args=[r3,r4]
+	ret     r6,1      	; return value in r0
 	
 .def g: args=2, locals=1 ; int g(int x, int y)
-  	sconst r2,"Hello world"   	; return x+y
-  	;print r2
-	ret  r2,1      		; return value in r2
+  	sconst r3,"Hello world"   	; return x+y
+  	;print r1
+	ret  r3,1      		; return value in r2

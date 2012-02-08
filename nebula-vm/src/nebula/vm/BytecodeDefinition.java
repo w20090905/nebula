@@ -94,6 +94,7 @@ public class BytecodeDefinition {
 	public static final short INSTR_STRUCT = 27; // create new struct
 	public static final short INSTR_NULL = 28; // load null into register
 	public static final short INSTR_HALT = 29;
+	public static final short INSTR_OMOVE = 30;
 
 	// 
 	public static Instruction[] instructions = new Instruction[] {

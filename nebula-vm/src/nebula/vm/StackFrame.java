@@ -5,6 +5,7 @@ public class StackFrame {
 	final int firstResult;
 	final int returnAddress;
 	final int[] registers;
+	long maskObject;
 
 	public StackFrame(FunctionSymbol sym, int returnAddress, int firstResult) {
 		this.sym = sym;
