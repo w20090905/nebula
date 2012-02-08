@@ -62,6 +62,11 @@ public class BytecodeAssembler extends AssemblerParser {
 	}
 
 	public ClassSymbol finished() {
+		if (currentFunction != null) {
+			int[] code = new int[ip];
+			System.arraycopy(codeBuffer, 0, code, 0, ip);
+			currentFunction.code = code;
+		}
 		currentClass.poolLocalK = poolLocalK.toArray();
 		currentClass.fields = this.fields.toArray(new FieldSymbol[0]);
 		currentClass.functions = this.functions.toArray(new FunctionSymbol[0]);
@@ -145,7 +150,7 @@ public class BytecodeAssembler extends AssemblerParser {
 			c = new ClassSymbol(text.substring(1, i));
 			c = (ClassSymbol) poolLocalK.get(toLocalConstantPoolIndex(c));
 			v = toLocalConstantPoolIndex(new FunctionSymbol(c, text.substring(i + 1)));
-			op |= (v & MKX_) << (offset);			
+			op |= (v & MKX_) << (offset);
 			break;
 		case REG:
 			v = toRegisterNumber(operandToken);
@@ -232,13 +237,13 @@ public class BytecodeAssembler extends AssemblerParser {
 														// pool
 	}
 
-//	protected int getFunctionIndexx(String id) {
-//		int i = poolLocalK.indexOf(new FunctionSymbol(id));
-//		if (i >= 0) return i; // already in system; return index.
-//		// must be a forward function reference
-//		// create the constant pool entry; we'll fill in later
-//		return toLocalConstantPoolIndex(new FunctionSymbol(id));
-//	}
+	// protected int getFunctionIndexx(String id) {
+	// int i = poolLocalK.indexOf(new FunctionSymbol(id));
+	// if (i >= 0) return i; // already in system; return index.
+	// // must be a forward function reference
+	// // create the constant pool entry; we'll fill in later
+	// return toLocalConstantPoolIndex(new FunctionSymbol(id));
+	// }
 
 	// protected void defineDataSize(int n) {
 	// dataSize = n;

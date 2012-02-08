@@ -226,7 +226,7 @@ public class Interpreter3 {
 			cpu();
 		}
 
-		int max = 10;
+		int max = 1;
 		long start = 0, end = 0;
 		start = System.nanoTime();
 		for (int i = 0; i < max; i++) {
@@ -520,16 +520,19 @@ public class Interpreter3 {
 
 	// Tracing, dumping, ...
 	public void disassemble() {
-//		disasm.disassemble();
+		for (int i = 1; i <= pPoolClass; i++) {
+			ClassSymbol clz = poolClass[i];
+			disasm.disassemble(clz);
+		}
 	}
 
 	protected void trace(int ip) {
 		StackFrame currentfFrame = calls[fp];
-		if(ip==0){
+		if (ip == 0) {
 			System.out.println("");
-			System.out.println("Enter .function " +currentfFrame.sym.definedClass.name + "." + currentfFrame.sym.name);
+			System.out.println("Enter .function " + currentfFrame.sym.definedClass.name + "." + currentfFrame.sym.name);
 		}
-		disasm.disassembleInstruction(currentfFrame.sym.code,currentfFrame.sym.getConstPool(), ip);
+		disasm.disassembleInstruction(currentfFrame.sym.code, currentfFrame.sym.getConstPool(), ip);
 		int[] r = currentfFrame.registers;
 		if (r.length > 0) {
 			System.out.print("\t\t" + calls[fp].sym.name + ".registers=[");
@@ -555,12 +558,14 @@ public class Interpreter3 {
 	}
 
 	public void coredump() {
-		for (int i = 1; i < poolClass.length; i++) {
+		for (int i = 1; i <= pPoolClass; i++) {
 			ClassSymbol clz = poolClass[i];
 
 			if (clz.poolLocalK.length > 0) dumpConstantPool(clz.poolLocalK);
-//			if (globals.length > 0) dumpDataMemory();
+			// if (globals.length > 0) dumpDataMemory();
 			for (FunctionSymbol f : clz.functions) {
+				System.out.println("");
+				System.out.println(".def " + f.name + " args=" + f.nargs + ", locals=" + f.nlocals + " ");
 				dumpCodeMemory(f.code);
 			}
 		}
@@ -619,7 +624,7 @@ public class Interpreter3 {
 		for (int i = 0; code != null && i < code.length; i++) {
 			if (i % 8 == 0 && i != 0) System.out.println();
 			if (i % 8 == 0) System.out.printf("%04d:", i);
-			System.out.printf(" %3d", code[i]);
+			System.out.printf(" %3d", (code[i] >>> OFOP) & 0xFFFFFFFF);
 		}
 		System.out.println();
 	}
