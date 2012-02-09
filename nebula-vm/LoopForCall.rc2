@@ -3,7 +3,6 @@
 .field name
 
 .def main: args=0, locals=8
-
 	iconst r1,0
 	iconst r2,10
 	
