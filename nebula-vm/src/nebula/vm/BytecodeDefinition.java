@@ -86,9 +86,10 @@ public class BytecodeDefinition {
 	public static final short INSTR_MOVE = 25; // reg to reg move
 	public static final short INSTR_PRINT = 26; // print reg
 	public static final short INSTR_STRUCT = 27; // create new struct
-	public static final short INSTR_NULL = 28; // load null into register
-	public static final short INSTR_HALT = 29;
-	public static final short INSTR_OMOVE = 30;
+	public static final short INSTR_FORPREP = 28; // load null into register
+	public static final short INSTR_FORLOOP = 29; // load null into register
+	public static final short INSTR_NULL = 30; // load null into register
+	public static final short INSTR_HALT = 31;
 
 	//@formatter:off
 	public static Instruction[] instructions = new Instruction[] {
@@ -120,6 +121,8 @@ public class BytecodeDefinition {
 			new Instruction("move", REG, REG),
 			new Instruction("print", REG), 
 			new Instruction("struct", REG, INT), 
+			new Instruction("forprep", REG, INT), // goto done
+			new Instruction("forloop", REG, INT), // goto for
 			new Instruction("null", REG),
 			new Instruction("halt") 
 	};

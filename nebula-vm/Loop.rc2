@@ -21,6 +21,7 @@ start:
 	
 ;	j=j+1
 	iadd r5, r4,  r5
+	
 	br r0,start
 done:
 ; print "looped "+n+" times."

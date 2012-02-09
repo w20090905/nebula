@@ -8,17 +8,19 @@ package nebula.vm;
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book information.
  ***/
+import static nebula.vm.BytecodeDefinition.FALSE;
 import static nebula.vm.BytecodeDefinition.INSTR_BR;
 import static nebula.vm.BytecodeDefinition.INSTR_BRF;
 import static nebula.vm.BytecodeDefinition.INSTR_BRT;
 import static nebula.vm.BytecodeDefinition.INSTR_CALL;
-import static nebula.vm.BytecodeDefinition.INSTR_CCONST;
+import static nebula.vm.BytecodeDefinition.*;
 import static nebula.vm.BytecodeDefinition.INSTR_FADD;
 import static nebula.vm.BytecodeDefinition.INSTR_FCONST;
 import static nebula.vm.BytecodeDefinition.INSTR_FEQ;
 import static nebula.vm.BytecodeDefinition.INSTR_FLOAD;
 import static nebula.vm.BytecodeDefinition.INSTR_FLT;
 import static nebula.vm.BytecodeDefinition.INSTR_FMUL;
+import static nebula.vm.BytecodeDefinition.INSTR_FORPREP;
 import static nebula.vm.BytecodeDefinition.INSTR_FSTORE;
 import static nebula.vm.BytecodeDefinition.INSTR_FSUB;
 import static nebula.vm.BytecodeDefinition.INSTR_GLOAD;
@@ -45,7 +47,6 @@ import static nebula.vm.BytecodeDefinition.OFFSET_BX;
 import static nebula.vm.BytecodeDefinition.OFFSET_B_;
 import static nebula.vm.BytecodeDefinition.OFFSET_C_;
 import static nebula.vm.BytecodeDefinition.OFFSET_OP;
-import static nebula.vm.BytecodeDefinition.FALSE;
 import static nebula.vm.BytecodeDefinition.TRUE;
 import static nebula.vm.BytecodeDefinition.instructions;
 
@@ -236,9 +237,9 @@ public class Interpreter3 {
 			cpu();
 		}
 		end = System.nanoTime();
-		System.out.println(mainFunction.definedClass.name + " -> (" + max + " times)" + " cost : " + (end - start) + "  \t||  "
-				+ (end - start) / max + " / every time \t|| " + (max * ((float) (1000 * 1000 * 1000) / (end - start)))
-				+ " times / every second");
+		System.out.println(mainFunction.definedClass.name + " -> (" + max + " times)" + " cost : " + (end - start)
+				+ "  \t||  " + (end - start) / max + " / every time \t|| "
+				+ (max * ((float) (1000 * 1000 * 1000) / (end - start))) + " times / every second");
 	}
 
 	/** Simulate the fetch-execute cycle */
@@ -255,7 +256,7 @@ public class Interpreter3 {
 		int rb = 0;
 
 		Outter: for (;; op = code[ip++]) {
-//			if (trace) trace(ip - 1);
+			// if (trace) trace(ip - 1);
 			ra = A(op);
 
 			switch (OP_CODE(op)) {
@@ -347,7 +348,7 @@ public class Interpreter3 {
 				break;
 			}
 			case INSTR_PRINT:
-				// System.out.println(poolString[r[ra]]);
+				// System.out.println(r[ra]);
 				break;
 			case INSTR_STRUCT: {
 				if ((maskObject & (1L << ra)) > 0) {
@@ -362,6 +363,16 @@ public class Interpreter3 {
 				maskObject |= (1L << ra);
 				break;
 			}
+			case INSTR_FORPREP: {
+				if (r[ra] >= r[ra + 1]) ip = BX(op);
+
+				break;
+			}
+			case INSTR_FORLOOP: {
+				r[ra] += r[ra + 2];
+				ip = BX(op);
+				break;
+			}
 
 			case INSTR_NULL:
 				poolH[r[ra]][0]--;
@@ -371,20 +382,20 @@ public class Interpreter3 {
 				__halt();
 				break Outter;
 			}
-			case BytecodeDefinition.INSTR_OMOVE: {
-				if ((maskObject & (1L << ra)) > 0) {
-					int index = r[ra];
-					if (poolH[index][0] < 2) {
-						poolH[index] = null;
-					} else {
-						poolH[index][0]--;
-					}
-				}
-				int index = r[B(op)];
-				poolH[index][0]++;
-				r[ra] = index;
-				break;
-			}
+			// case BytecodeDefinition.INSTR_OMOVE: {
+			// if ((maskObject & (1L << ra)) > 0) {
+			// int index = r[ra];
+			// if (poolH[index][0] < 2) {
+			// poolH[index] = null;
+			// } else {
+			// poolH[index][0]--;
+			// }
+			// }
+			// int index = r[B(op)];
+			// poolH[index][0]++;
+			// r[ra] = index;
+			// break;
+			// }
 			default:
 				throw new Error("Address : " + ip + " ;invalid opcode: " + Integer.toBinaryString(op) + " at ip="
 						+ (ip - 1));
