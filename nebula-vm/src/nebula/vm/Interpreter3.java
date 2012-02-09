@@ -37,21 +37,17 @@ import static nebula.vm.BytecodeDefinition.INSTR_PRINT;
 import static nebula.vm.BytecodeDefinition.INSTR_RET;
 import static nebula.vm.BytecodeDefinition.INSTR_SCONST;
 import static nebula.vm.BytecodeDefinition.INSTR_STRUCT;
-import static nebula.vm.BytecodeDefinition.MASK_AX;
-import static nebula.vm.BytecodeDefinition.MASK_A_;
-import static nebula.vm.BytecodeDefinition.MASK_BX;
-import static nebula.vm.BytecodeDefinition.MASK_B_;
-import static nebula.vm.BytecodeDefinition.MASK_C_;
+import static nebula.vm.BytecodeDefinition.MASK_XX;
+import static nebula.vm.BytecodeDefinition.MASK_X_;
 import static nebula.vm.BytecodeDefinition.OFFSET_AX;
 import static nebula.vm.BytecodeDefinition.OFFSET_A_;
 import static nebula.vm.BytecodeDefinition.OFFSET_BX;
 import static nebula.vm.BytecodeDefinition.OFFSET_B_;
 import static nebula.vm.BytecodeDefinition.OFFSET_C_;
-import static nebula.vm.BytecodeDefinition.OFOP;
-import static nebula.vm.BytecodeDefinition._FALSE;
-import static nebula.vm.BytecodeDefinition._TRUE;
+import static nebula.vm.BytecodeDefinition.OFFSET_OP;
+import static nebula.vm.BytecodeDefinition.FALSE;
+import static nebula.vm.BytecodeDefinition.TRUE;
 import static nebula.vm.BytecodeDefinition.instructions;
-import nebula.vm.DisAssembler;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -75,7 +71,7 @@ public class Interpreter3 {
 
 	public static final int DEFAULT_PREPAREED_NUMBER_STRING_RANGE = 1000;
 
-	DisAssembler disasm = new DisAssembler();
+	private DisAssembler disasm = new DisAssembler();
 
 	@Deprecated
 	int[] globals; // global variable space
@@ -83,13 +79,13 @@ public class Interpreter3 {
 	final String[] poolString = new String[DEFAULT_String_POOL_SIZE];
 	final BigDecimal[] poolDecimal = new BigDecimal[DEFAULT_Decimal_POOL_SIZE];
 
-	int[][] poolH = new int[DEFAULT_Object_POOL_SIZE][];
+	final int[][] poolH = new int[DEFAULT_Object_POOL_SIZE][];
 	int pPoolH = 0;
 
 	final Map<String, Integer> mapString = new HashMap<>(DEFAULT_Decimal_POOL_SIZE * 2);
 	int pPoolString = 0;
 
-	protected int indexOf(String v) {
+	private int indexOf(String v) {
 		Integer i = mapString.get(v);
 		if (i != null) return i.intValue();
 		else {
@@ -102,7 +98,7 @@ public class Interpreter3 {
 	final Map<ClassSymbol, Integer> mapClass = new HashMap<>(DEFAULT_Class_POOL_SIZE * 2);
 	int pPoolClass = 0;
 
-	protected int indexOf(ClassSymbol v) {
+	private int indexOf(ClassSymbol v) {
 		Integer i = mapClass.get(v);
 		if (i != null) return i.intValue();
 		else {
@@ -113,6 +109,11 @@ public class Interpreter3 {
 	}
 
 	public Interpreter3() {
+		this(false);
+	}
+
+	public Interpreter3(boolean trace) {
+		this.trace = trace;
 		for (int i = 0; i < DEFAULT_PREPAREED_NUMBER_STRING_RANGE; i++) {
 			indexOf(String.valueOf(i));
 		}
@@ -128,7 +129,7 @@ public class Interpreter3 {
 		pPoolH = 0;
 	}
 
-	protected boolean contain(ClassSymbol v) {
+	private boolean contain(ClassSymbol v) {
 		return mapClass.containsKey(v);
 	}
 
@@ -136,7 +137,7 @@ public class Interpreter3 {
 	final StackFrame[] calls = new StackFrame[DEFAULT_CALL_STACK_SIZE];
 	int fp = -1; // frame pointer register
 
-	boolean trace = false;
+	final private boolean trace;
 
 	public static void main(String[] args) throws Exception {
 		// PROCESS ARGS
@@ -165,10 +166,9 @@ public class Interpreter3 {
 		if (filename != null) input = new FileInputStream(filename);
 		else input = System.in;
 
-		Interpreter3 interpreter = new Interpreter3();
+		Interpreter3 interpreter = new Interpreter3(trace);
 		ClassSymbol clz = load(input);
 		interpreter.resolve(clz);
-		interpreter.trace = trace;
 		interpreter.exec(interpreter.resolve(clz.getEntryPoint()));
 		if (disassemble) interpreter.disassemble();
 		if (dump) interpreter.coredump();
@@ -226,7 +226,7 @@ public class Interpreter3 {
 			cpu();
 		}
 
-		int max = 1;
+		int max = 1000;
 		long start = 0, end = 0;
 		start = System.nanoTime();
 		for (int i = 0; i < max; i++) {
@@ -236,8 +236,9 @@ public class Interpreter3 {
 			cpu();
 		}
 		end = System.nanoTime();
-		System.out.println(this.getClass().getName() + "(" + max + " times)" + " cost : " + (end - start) + "  |  "
-				+ (end - start) / max + " / every time");
+		System.out.println(mainFunction.definedClass.name + " -> (" + max + " times)" + " cost : " + (end - start) + "  \t||  "
+				+ (end - start) / max + " / every time \t|| " + (max * ((float) (1000 * 1000 * 1000) / (end - start)))
+				+ " times / every second");
 	}
 
 	/** Simulate the fetch-execute cycle */
@@ -250,27 +251,34 @@ public class Interpreter3 {
 		int ip = 0;
 		int op = code[ip++];
 
-		//@formatter:off
-		Outter: for (; ;op = code[ip++]) {
-			if (trace) trace(ip-1);
-			switch ((op >>> OFOP) & 0xFFFFFFFF) {
-			case INSTR_IADD:	r[A(op)] = r[B(op)] + r[C(op)];	break;
-			case INSTR_ISUB:	r[A(op)] = r[B(op)] - r[C(op)];	break;
-			case INSTR_IMUL:	r[A(op)] = r[B(op)] * r[C(op)];	break;
-			case INSTR_ILT:		r[A(op)] = r[B(op)] < r[C(op)] ? _TRUE : _FALSE;	break;
-			case INSTR_IEQ:		r[A(op)] = r[B(op)] == r[C(op)] ? _TRUE : _FALSE;	break;
+		int ra = 0;
+		int rb = 0;
+
+		Outter: for (;; op = code[ip++]) {
+//			if (trace) trace(ip - 1);
+			ra = A(op);
+
+			switch (OP_CODE(op)) {
+
+			//@formatter:off
+			case INSTR_IADD:	r[ra] = r[B(op)] + r[C(op)];	break;
+			case INSTR_ISUB:	r[ra] = r[B(op)] - r[C(op)];	break;
+			case INSTR_IMUL:	r[ra] = r[B(op)] * r[C(op)];	break;
+			case INSTR_ILT:		r[ra] = r[B(op)] < r[C(op)] ? TRUE : FALSE;	break;
+			case INSTR_IEQ:		r[ra] = r[B(op)] == r[C(op)] ? TRUE : FALSE;	break;
 			
-			case INSTR_FADD:	r[A(op)] = addF(r[B(op)], r[C(op)]);	break;
-			case INSTR_FSUB:	r[A(op)] = subF(r[B(op)], r[C(op)]);	break;
-			case INSTR_FMUL:	r[A(op)] = mulF(r[B(op)], r[C(op)]);	break;
-			case INSTR_FLT:		r[A(op)] = ltF(r[B(op)], r[C(op)]) ? _TRUE : _FALSE;	break;
-			case INSTR_FEQ:		r[A(op)] = r[B(op)] == r[C(op)] ? _TRUE : _FALSE;	break;
+			case INSTR_FADD:	r[ra] = addF(r[B(op)], r[C(op)]);	break;
+			case INSTR_FSUB:	r[ra] = subF(r[B(op)], r[C(op)]);	break;
+			case INSTR_FMUL:	r[ra] = mulF(r[B(op)], r[C(op)]);	break;
+			case INSTR_FLT:		r[ra] = ltF(r[B(op)], r[C(op)]) ? TRUE : FALSE;	break;
+			case INSTR_FEQ:		r[ra] = eqF(r[B(op)],r[C(op)]) ? TRUE : FALSE;	break;
 			
-			case INSTR_ITOF:// r[j] = (float) (((Integer)					// r[i]).intValue());break;
+			case INSTR_ITOF:	/*r[j] = (float) (((Integer)r[i]).intValue());*/	break;
+			//@formatter:on
 
 			case INSTR_CALL: {
 				currentFrame.maskObject = maskObject;
-				__call(currentFrame, B(op), C(op), A(op), ip);
+				__call(currentFrame, B(op), C(op), ra, ip);
 				ip = 0;
 
 				currentFrame = calls[fp];
@@ -279,104 +287,110 @@ public class Interpreter3 {
 				poolK = currentFrame.sym.getConstPool();
 				break;
 			}
+
 			case INSTR_RET: {
-				int retFirstResult = A(op);
-				int top = BX(op);				
+				rb = BX(op);
 				StackFrame retFrame = calls[fp--]; // pop stack frame
 				int[] rRet = retFrame.registers;
-				
-				// clear ref object, don't deal args and ret param
-				for(int a=retFrame.sym.nargs;a<retFirstResult;a++){				
-					if((maskObject & (1L << a)) > 0){
-						int index = rRet[a];
-						if(poolH[index][0]<2){
-							poolH[index] = null;
-						}else{
-							poolH[index][0]--;
+
+				if (maskObject > 0) {
+					// clear ref object, don't deal args and ret param
+					for (int a = retFrame.sym.nargs; a < ra; a++) {
+						if ((maskObject & (1L << a)) > 0) {
+							int index = rRet[a];
+							if (poolH[index][0] < 2) {
+								poolH[index] = null;
+							} else {
+								poolH[index][0]--;
+							}
 						}
 					}
 				}
-				
+
 				currentFrame = calls[fp];
 				ip = retFrame.returnAddress;
-				
+
 				r = currentFrame.registers;
-				
+
 				int firstResult = retFrame.firstResult;
 
-				for(int a=0;a<top;a++)	{
-					r[firstResult+a] = rRet[retFirstResult+a];					
+				for (int a = 0; a < rb; a++) {
+					r[firstResult + a] = rRet[ra + a];
 				}
-								
+
 				code = currentFrame.sym.code;
 				poolK = currentFrame.sym.getConstPool();
 				maskObject = currentFrame.maskObject;
-				
+
 				break;
 			}
 
-			case INSTR_BR:	ip = AX(op);	break;
-			case INSTR_BRT:	if (r[A(op)] == _TRUE) ip = BX(op);	break;
-			case INSTR_BRF:	if (r[A(op)] != _TRUE) ip = BX(op);	break;
+			//@formatter:off
+			case INSTR_BR:	ip = BX(op);	break;
+			case INSTR_BRT:	if (r[ra] == TRUE) ip = BX(op);	break;
+			case INSTR_BRF:	if (r[ra] != TRUE) ip = BX(op);	break;
 
-			case INSTR_CCONST:	r[A(op)] = BX(op);	break;
-			case INSTR_ICONST:	r[A(op)] = BX(op);	break;
-			case INSTR_FCONST:	r[A(op)] = ((Integer)poolK[B(op)]).intValue();	break; // TODO not implements
-			case INSTR_SCONST:	r[A(op)] = ((Integer)poolK[B(op)]).intValue();	break; // TODO not implements
+			case INSTR_CCONST:	r[ra] = BX(op);	break;
+			case INSTR_ICONST:	r[ra] = BX(op);	break;
+			case INSTR_FCONST:	r[ra] = ((Integer)poolK[B(op)]).intValue();	break; // TODO not implements
+			case INSTR_SCONST:	r[ra] = ((Integer)poolK[B(op)]).intValue();	break; // TODO not implements
 
-			case INSTR_GLOAD:	r[A(op)] = globals[BX(op)];	break;
+			case INSTR_GLOAD:	r[ra] = globals[BX(op)];	break;
 			case INSTR_GSTORE:	globals[AX(op)] = r[B(op)];	break;
 
-			case INSTR_FLOAD:	r[A(op)] = poolH[r[B(op)]][((FieldSymbol) poolK[C(op)]).offset];break;
-			case INSTR_FSTORE:	poolH[r[A(op)]][((FieldSymbol) poolK[B(op)]).offset] = r[C(op)];break;
+			case INSTR_FLOAD:	r[ra] = poolH[r[B(op)]][((FieldSymbol) poolK[C(op)]).offset];break;
+			case INSTR_FSTORE:	poolH[r[ra]][((FieldSymbol) poolK[B(op)]).offset] = r[C(op)];break;
+			//@formatter:on
 
-			case INSTR_MOVE:	{
-				r[A(op)] = r[B(op)];				
+			case INSTR_MOVE: {
+				r[ra] = r[B(op)];
 				break;
 			}
-			case INSTR_PRINT:	
-				System.out.println(poolString[r[A(op)]]);	
+			case INSTR_PRINT:
+				// System.out.println(poolString[r[ra]]);
 				break;
-			case INSTR_STRUCT:{
-				int ra = A(op);
-				if((maskObject & (1L << ra)) > 0){
+			case INSTR_STRUCT: {
+				if ((maskObject & (1L << ra)) > 0) {
 					int index = r[ra];
-					if(poolH[index][0]<2){
+					if (poolH[index][0] < 2) {
 						poolH[index] = null;
-					}else{
+					} else {
 						poolH[index][0]--;
 					}
 				}
-				r[ra] = __newStruct(((ClassSymbol) poolK[B(op)]).getLength());	
+				r[ra] = __newStruct(((ClassSymbol) poolK[B(op)]).getLength());
 				maskObject |= (1L << ra);
 				break;
 			}
-			case INSTR_NULL:	r[A(op)] = 0;	break;
-			case INSTR_HALT:{
+
+			case INSTR_NULL:
+				poolH[r[ra]][0]--;
+				maskObject |= (1L << ra);
+				break;
+			case INSTR_HALT: {
 				__halt();
 				break Outter;
 			}
-			case BytecodeDefinition.INSTR_OMOVE:{
-				int ra = A(op);
-				if((maskObject & (1L << ra)) > 0){
+			case BytecodeDefinition.INSTR_OMOVE: {
+				if ((maskObject & (1L << ra)) > 0) {
 					int index = r[ra];
-					if(poolH[index][0]<2){
+					if (poolH[index][0] < 2) {
 						poolH[index] = null;
-					}else{
+					} else {
 						poolH[index][0]--;
 					}
 				}
-				int index = r[B(op)];				
+				int index = r[B(op)];
 				poolH[index][0]++;
 				r[ra] = index;
-				break;				
+				break;
 			}
 			default:
 				throw new Error("Address : " + ip + " ;invalid opcode: " + Integer.toBinaryString(op) + " at ip="
 						+ (ip - 1));
 			}
 		}
-		//@formatter:on
+		// @formatter:on
 	}
 
 	/** Resolve Function Symbol */
@@ -390,7 +404,7 @@ public class Interpreter3 {
 
 		for (; ip < code.length; op = code[ip++]) {
 			// if (trace) trace();
-			switch ((op >>> OFOP) & 0xFFFFFFFF) {
+			switch (OP_CODE(op)) {
 
 			case INSTR_SCONST: {
 				int index = B(op);
@@ -461,24 +475,28 @@ public class Interpreter3 {
 		return func;
 	}
 
-	private static final int A(int op) {
-		return (op & MASK_A_) >>> OFFSET_A_;
+	private int OP_CODE(int op) {
+		return (op >>> OFFSET_OP);
 	}
 
-	private static final int B(int op) {
-		return (op & MASK_B_) >>> OFFSET_B_;
+	private int A(int op) {
+		return op >>> OFFSET_A_ & MASK_X_;
 	}
 
-	private static final int C(int op) {
-		return (op & MASK_C_) >>> OFFSET_C_;
+	private int B(int op) {
+		return op >>> OFFSET_B_ & MASK_X_;
 	}
 
-	private static final int AX(int op) {
-		return (op & MASK_AX) >>> OFFSET_AX;
+	private int C(int op) {
+		return op >>> OFFSET_C_ & MASK_X_;
 	}
 
-	private static final int BX(int op) {
-		return (op & MASK_BX) >>> OFFSET_BX;
+	private int AX(int op) {
+		return op >>> OFFSET_AX & MASK_XX;
+	}
+
+	private int BX(int op) {
+		return op >>> OFFSET_BX & MASK_XX;
 	}
 
 	private int __newStruct(int size) {
@@ -585,25 +603,29 @@ public class Interpreter3 {
 		System.out.println();
 	}
 
-	static final boolean ltF(int b, int c) {
+	private boolean ltF(int b, int c) {
 		return true;
 	}
 
-	static final int addF(int b, int c) {
+	private boolean eqF(int b, int c) {
+		return true;
+	}
+
+	private int addF(int b, int c) {
 		return 0;
 	}
 
-	static final int subF(int b, int c) {
+	private int subF(int b, int c) {
 		return 0;
 	}
 
-	static final int mulF(int b, int c) {
+	private int mulF(int b, int c) {
 		return 0;
 	}
 
-	static final int float_div(int b, int c) {
-		return 0;
-	}
+	// private int divF(int b, int c) {
+	// return 0;
+	// }
 
 	protected void dumpDataMemory() {
 		System.out.println("Data memory:");
@@ -624,7 +646,7 @@ public class Interpreter3 {
 		for (int i = 0; code != null && i < code.length; i++) {
 			if (i % 8 == 0 && i != 0) System.out.println();
 			if (i % 8 == 0) System.out.printf("%04d:", i);
-			System.out.printf(" %3d", (code[i] >>> OFOP) & 0xFFFFFFFF);
+			System.out.printf(" %3d", (code[i] >>> OFFSET_OP) & 0xFFFFFFFF);
 		}
 		System.out.println();
 	}

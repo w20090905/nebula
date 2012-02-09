@@ -1,29 +1,31 @@
 ; T t
-.class Loop
+.class LoopCall
 .field name
 
 .def main: args=0, locals=8
-; n = 10000
+; n = 100000000
 	iconst r1, 10000
 ; i = 0
 	iconst r2, 0
 ; get 1 into a register
-    iconst r4, 1
-    iconst r5, 0	; j=0
-	
+    iconst r3, 1
 	
 ; while i<n:
 start:
-	ilt r3, r2, r1
-	brf r3, done
+	ilt r5, r2, r1
+	brf r5, done
 ;         i = i + 1
-	iadd r2, r4,  r2
+	iadd r2, r2,  r3
 	
-;	j=j+1
-	iadd r5, r4,  r5
+	call r6,@LoopCall.add(),r2
+
 	br r0,start
 done:
 ; print "looped "+n+" times."
 	sconst r4, "done"
 	print r8
 	halt
+
+.def add: args=2, locals=1
+	iadd r3,r1,r2
+	ret r3,1

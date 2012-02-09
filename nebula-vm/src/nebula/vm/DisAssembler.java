@@ -8,17 +8,14 @@ package nebula.vm;
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book information.
  ***/
-import static nebula.vm.BytecodeDefinition.MASK_AX;
-import static nebula.vm.BytecodeDefinition.MASK_A_;
-import static nebula.vm.BytecodeDefinition.MASK_BX;
-import static nebula.vm.BytecodeDefinition.MASK_B_;
-import static nebula.vm.BytecodeDefinition.MASK_C_;
+import static nebula.vm.BytecodeDefinition.MASK_XX;
+import static nebula.vm.BytecodeDefinition.MASK_X_;
 import static nebula.vm.BytecodeDefinition.OFFSET_AX;
 import static nebula.vm.BytecodeDefinition.OFFSET_A_;
 import static nebula.vm.BytecodeDefinition.OFFSET_BX;
 import static nebula.vm.BytecodeDefinition.OFFSET_B_;
 import static nebula.vm.BytecodeDefinition.OFFSET_C_;
-import static nebula.vm.BytecodeDefinition.OFOP;
+import static nebula.vm.BytecodeDefinition.OFFSET_OP;
 import static nebula.vm.BytecodeDefinition.REG;
 
 public class DisAssembler {
@@ -52,29 +49,33 @@ public class DisAssembler {
 		System.out.println();
 	}
 
+	private static final int OP_CODE(int op) {
+		return (op >>> OFFSET_OP);
+	}
+
 	private static final int A(int op) {
-		return (op & MASK_A_) >>> OFFSET_A_;
+		return op >>> OFFSET_A_ & MASK_X_;
 	}
 
 	private static final int B(int op) {
-		return (op & MASK_B_) >>> OFFSET_B_;
+		return op >>> OFFSET_B_ & MASK_X_;
 	}
 
 	private static final int C(int op) {
-		return (op & MASK_C_) >>> OFFSET_C_;
+		return op >>> OFFSET_C_ & MASK_X_;
 	}
 
 	private static final int AX(int op) {
-		return (op & MASK_AX) >>> OFFSET_AX;
+		return op >>> OFFSET_AX & MASK_XX;
 	}
 
 	private static final int BX(int op) {
-		return (op & MASK_BX) >>> OFFSET_BX;
+		return op >>> OFFSET_BX & MASK_XX;
 	}
 
 	public int disassembleInstruction(int[] code, Object[] constPool, int ip) {
 		int op = code[ip];
-		BytecodeDefinition.Instruction I = BytecodeDefinition.instructions[(op >>> OFOP) & 0xFFFFFFFF];
+		BytecodeDefinition.Instruction I = BytecodeDefinition.instructions[OP_CODE(op)];
 		String instrName = I.name;
 		System.out.printf("%04d:\t%-11s", ip, instrName);
 		ip++;
