@@ -13,13 +13,14 @@ import static nebula.vm.BytecodeDefinition.INSTR_BR;
 import static nebula.vm.BytecodeDefinition.INSTR_BRF;
 import static nebula.vm.BytecodeDefinition.INSTR_BRT;
 import static nebula.vm.BytecodeDefinition.INSTR_CALL;
-import static nebula.vm.BytecodeDefinition.*;
+import static nebula.vm.BytecodeDefinition.INSTR_CCONST;
 import static nebula.vm.BytecodeDefinition.INSTR_FADD;
 import static nebula.vm.BytecodeDefinition.INSTR_FCONST;
 import static nebula.vm.BytecodeDefinition.INSTR_FEQ;
 import static nebula.vm.BytecodeDefinition.INSTR_FLOAD;
 import static nebula.vm.BytecodeDefinition.INSTR_FLT;
 import static nebula.vm.BytecodeDefinition.INSTR_FMUL;
+import static nebula.vm.BytecodeDefinition.INSTR_FORLOOP;
 import static nebula.vm.BytecodeDefinition.INSTR_FORPREP;
 import static nebula.vm.BytecodeDefinition.INSTR_FSTORE;
 import static nebula.vm.BytecodeDefinition.INSTR_FSUB;
@@ -222,7 +223,7 @@ public class Interpreter3 {
 
 		for (int i = 0; i < 1; i++) {
 			fp = -1;
-			StackFrame f = new StackFrame(mainFunction, 0, 0);
+			StackFrame f = new StackFrame(mainFunction, 0, 0, 0);
 			calls[++fp] = f;
 			cpu();
 		}
@@ -232,7 +233,7 @@ public class Interpreter3 {
 		start = System.nanoTime();
 		for (int i = 0; i < max; i++) {
 			fp = -1;
-			StackFrame f = new StackFrame(mainFunction, 0, 0);
+			StackFrame f = new StackFrame(mainFunction, 0, 0, 0);
 			calls[++fp] = f;
 			cpu();
 		}
@@ -244,11 +245,15 @@ public class Interpreter3 {
 
 	/** Simulate the fetch-execute cycle */
 	protected void cpu() {
+		StackFrame frameTo = null;
+		FunctionSymbol funcTo = null;
+		int[] rTo = null;
+
 		StackFrame currentFrame = calls[fp];
 		int[] r = currentFrame.registers;
 		int[] code = currentFrame.sym.code;
 		Object[] poolK = currentFrame.sym.getConstPool();
-		long maskObject = currentFrame.maskObject;
+		long maskObject = 0;
 		int ip = 0;
 		int op = code[ip++];
 
@@ -256,7 +261,7 @@ public class Interpreter3 {
 		int rb = 0;
 
 		Outter: for (;; op = code[ip++]) {
-			// if (trace) trace(ip - 1);
+			 if (trace) trace(ip - 1);
 			ra = A(op);
 
 			switch (OP_CODE(op)) {
@@ -278,27 +283,48 @@ public class Interpreter3 {
 			//@formatter:on
 
 			case INSTR_CALL: {
-				currentFrame.maskObject = maskObject;
-				__call(currentFrame, B(op), C(op), ra, ip);
-				ip = 0;
+				// 1、backup current frame status
 
-				currentFrame = calls[fp];
-				r = currentFrame.registers;
-				code = currentFrame.sym.code;
-				poolK = currentFrame.sym.getConstPool();
+				// 2、Prepare new frame
+				funcTo = (FunctionSymbol) currentFrame.sym.getConstPool()[B(op)];
+				if (!funcTo.resolved) resolve(funcTo);
+
+				frameTo = new StackFrame(funcTo, ip, ra, maskObject);
+				rTo = frameTo.registers;
+
+				for (int to = 1, from = C(op); to <= funcTo.nargs; from++, to++) {
+					rTo[to] = r[from];
+				}
+
+				// 3、push new frame to stack
+				calls[++fp] = frameTo;
+
+				// 4、new function exec
+				ip = 0;
+				maskObject = 0;
+
+				r = rTo;
+				code = funcTo.code;
+				poolK = funcTo.getConstPool();
+
+				currentFrame = frameTo;
 				break;
 			}
 
 			case INSTR_RET: {
-				rb = BX(op);
-				StackFrame retFrame = calls[fp--]; // pop stack frame
-				int[] rRet = retFrame.registers;
+				rb = ra + BX(op);
 
+				// 1、pop stack frame
+				frameTo = calls[--fp];
+				rTo = frameTo.registers;
+
+				// 2、clear object
 				if (maskObject > 0) {
 					// clear ref object, don't deal args and ret param
-					for (int a = retFrame.sym.nargs; a < ra; a++) {
+					int index = 0;
+					for (int a = frameTo.sym.nargs; a < ra; a++) {
 						if ((maskObject & (1L << a)) > 0) {
-							int index = rRet[a];
+							index = rTo[a];
 							if (poolH[index][0] < 2) {
 								poolH[index] = null;
 							} else {
@@ -308,20 +334,20 @@ public class Interpreter3 {
 					}
 				}
 
-				currentFrame = calls[fp];
-				ip = retFrame.returnAddress;
-
-				r = currentFrame.registers;
-
-				int firstResult = retFrame.firstResult;
-
-				for (int a = 0; a < rb; a++) {
-					r[firstResult + a] = rRet[ra + a];
+				// 2、Prepare new frame
+				for (int from = ra, to = currentFrame.firstResult; from < rb; from++, to++) {
+					rTo[to] = r[from];
 				}
 
-				code = currentFrame.sym.code;
-				poolK = currentFrame.sym.getConstPool();
-				maskObject = currentFrame.maskObject;
+				// 4、return function exec
+				ip = currentFrame.returnAddress;
+				maskObject = currentFrame.returnMaskObject;
+
+				r = rTo;
+				code = frameTo.sym.code;
+				poolK = frameTo.sym.getConstPool();
+
+				currentFrame = frameTo;
 
 				break;
 			}
@@ -343,7 +369,7 @@ public class Interpreter3 {
 			case INSTR_FSTORE:	poolH[r[ra]][((FieldSymbol) poolK[B(op)]).offset] = r[C(op)];break;
 			//@formatter:on
 
-			case INSTR_MOVE: {
+			case INSTR_MOVE: { // TODO object copy
 				r[ra] = r[B(op)];
 				break;
 			}
@@ -376,7 +402,7 @@ public class Interpreter3 {
 
 			case INSTR_NULL:
 				poolH[r[ra]][0]--;
-				maskObject |= (1L << ra);
+				maskObject &= (~(1L << ra));
 				break;
 			case INSTR_HALT: {
 				__halt();
@@ -521,20 +547,23 @@ public class Interpreter3 {
 		return index;
 	}
 
-	private void __call(StackFrame currentFrame, int functionConstPoolIndex, int baseRegisterIndex, int firstResult,
-			int ip) {
-		final FunctionSymbol fs = (FunctionSymbol) currentFrame.sym.getConstPool()[functionConstPoolIndex];
-		if (!fs.resolved) resolve(fs);
-		final StackFrame f = new StackFrame(fs, ip, firstResult);
-		final StackFrame callingFrame = calls[fp];
-		calls[++fp] = f; // push new stack frame
-		// move arguments from calling stack frame to new stack frame
-		final int[] r = f.registers;
-		final int[] rCalling = callingFrame.registers;
-		for (int a = 0; a < fs.nargs; a++) { // move args, leaving room for r0
-			r[a + 1] = rCalling[baseRegisterIndex + a];
-		}
-	}
+	//
+	// private void __call(StackFrame currentFrame, int functionConstPoolIndex,
+	// int baseRegisterIndex, int firstResult,
+	// int ip) {
+	// final FunctionSymbol fs = (FunctionSymbol)
+	// currentFrame.sym.getConstPool()[functionConstPoolIndex];
+	// if (!fs.resolved) resolve(fs);
+	// final StackFrame f = new StackFrame(fs, ip, firstResult);
+	// final StackFrame callingFrame = calls[fp];
+	// calls[++fp] = f; // push new stack frame
+	// // move arguments from calling stack frame to new stack frame
+	// final int[] r = f.registers;
+	// final int[] rCalling = callingFrame.registers;
+	// for (int a = 0; a < fs.nargs; a++) { // move args, leaving room for r0
+	// r[a + 1] = rCalling[baseRegisterIndex + a];
+	// }
+	// }
 
 	/**
 	 * Pull off 4 bytes starting at ip and return 32-bit signed int value.

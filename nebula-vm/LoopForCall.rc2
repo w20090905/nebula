@@ -8,12 +8,12 @@
 	iconst r2,10
 	
 	iconst r3,0
-	iconst r4,10000
+	iconst r4, 10000
 	iconst r5,1
 start:
 	forprep r3,done
 	
-	call r6,@LoopCall.add(),r3
+	call r6,@LoopForCall.add(),r3
 	
 	forloop r3,start
 done:
@@ -21,3 +21,7 @@ done:
 	print r4
 	print r1
 	halt
+
+.def add: args=2, locals=1
+	iadd r3,r1,r2
+	ret r3,1
