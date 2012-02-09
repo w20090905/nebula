@@ -262,7 +262,7 @@ public class Interpreter3 {
 		int rb = 0;
 
 		Outter: for (;; op = code[ip++]) {
-			if (trace) trace(ip - 1);
+			if (trace) trace(ip - 1, base);
 			ra = A(op);
 
 			switch (OP_CODE(op)) {
@@ -383,7 +383,7 @@ public class Interpreter3 {
 				break;
 			}
 			case INSTR_PRINT:
-				// System.out.println(r[base+ra]);
+				System.out.println(r[base + ra]);
 				break;
 			case INSTR_STRUCT: {
 				if ((maskObject & (1L << ra)) > 0) {
@@ -417,20 +417,7 @@ public class Interpreter3 {
 				__halt();
 				break Outter;
 			}
-			// case BytecodeDefinition.INSTR_OMOVE: {
-			// if ((maskObject & (1L << ra)) > 0) {
-			// int index = r[base+ra];
-			// if (poolH[index][0] < 2) {
-			// poolH[index] = null;
-			// } else {
-			// poolH[index][0]--;
-			// }
-			// }
-			// int index = r[base+B(op)];
-			// poolH[index][0]++;
-			// r[base+ra] = index;
-			// break;
-			// }
+
 			default:
 				throw new Error("Address : " + ip + " ;invalid opcode: " + Integer.toBinaryString(op) + " at ip="
 						+ (ip - 1));
@@ -593,37 +580,36 @@ public class Interpreter3 {
 		}
 	}
 
-	protected void trace(int ip) {
-		// StackFrame currentfFrame = calls[fp];
-		// if (ip == 0) {
-		// System.out.println("");
-		// System.out.println("Enter .function " +
-		// currentfFrame.sym.definedClass.name + "." + currentfFrame.sym.name);
-		// }
-		// disasm.disassembleInstruction(currentfFrame.sym.code,
-		// currentfFrame.sym.getConstPool(), ip);
+	protected void trace(int ip, int base) {
+		FunctionSymbol func = calls[fp];
+		if (ip == 0) {
+			System.out.println("");
+			System.out.println("Enter .function " + func.definedClass.name + "." + func.name);
+		}
+		disasm.disassembleInstruction(func.code, func.getConstPool(), ip);
+
 		// int[] r = currentfFrame.registers;
 		// if (r.length > 0) {
-		// System.out.print("\t\t" + calls[fp].sym.name + ".registers=[");
-		// ;
-		// for (int i = 0; i < r.length; i++) {
-		// if (i == 1) System.out.print(" |");
-		// if (i == calls[fp].sym.nargs + 1 && i == 1) System.out.print("|");
-		// else if (i == calls[fp].sym.nargs + 1) System.out.print(" |");
-		// System.out.print(" ");
-		// if (r[i] == 0) System.out.print("_");
-		// else System.out.print(r[i]);
+		System.out.print("\t\t" + func.name + ".registers=[");
+		int cnt = func.nargs + func.nlocals + 1;
+		for (int i = 0; i < cnt; i++) {
+			if (i == 1) System.out.print(" |");
+			if (i == func.nargs + 1 && i == 1) System.out.print("|");
+			else if (i == func.nargs + 1) System.out.print(" |");
+			System.out.print(" ");
+			if (r[base + i] == 0) System.out.print("_");
+			else System.out.print(r[base + i]);
+		}
+		System.out.print(" ]");
 		// }
-		// System.out.print(" ]");
-		// }
-		// if (fp >= 0) {
-		// System.out.print("  calls=[");
-		// for (int i = 0; i <= fp; i++) {
-		// System.out.print(" " + calls[i].sym.name);
-		// }
-		// System.out.print(" ]");
-		// }
-		// System.out.println();
+		if (fp >= 0) {
+			System.out.print("  calls=[");
+			for (int i = 0; i <= fp; i++) {
+				System.out.print(" " + func.name);
+			}
+			System.out.print(" ]");
+		}
+		System.out.println();
 	}
 
 	public void coredump() {

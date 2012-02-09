@@ -17,8 +17,7 @@ start:
 	forloop r3,start
 done:
 	sconst r4, "done"
-	print r4
-	print r1
+	print r6
 	halt
 
 .def add: args=2, locals=1

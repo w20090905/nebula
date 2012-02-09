@@ -4,7 +4,7 @@
 
 .def main: args=0, locals=8
 ; n = 100000000
-	iconst r1, 10000
+	iconst r1, 10
 ; i = 0
 	iconst r2, 0
 ; get 1 into a register
@@ -22,8 +22,7 @@ start:
 	br r0,start
 done:
 ; print "looped "+n+" times."
-	sconst r4, "done"
-	print r8
+	print r6
 	halt
 
 .def add: args=2, locals=1
