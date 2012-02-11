@@ -15,25 +15,19 @@ public class BytecodeDefinition {
 	public static final int INT = AssemblerParser.INT;
 	public static final int POOL = 1000; // unique imaginary token
 
-	public static final int OFT = 9;
-	public static final int OFOP = OFT * 3;
-	public static final int OFFSET_A_ = OFT * 2;	
-	public static final int OFFSET_AX = OFT * 1;
-	public static final int OFFSET_B_ = OFT * 1;	
-	public static final int OFFSET_BX = OFT * 0;
-	public static final int OFFSET_C_ = OFT * 0;
-	
-	public static byte _TRUE = 1;
-	public static byte _FALSE = 0;
-	
-	public static final int MKOP = 0xF8000000;
-	public static final int MASK_A_ = 0x07FC0000;
-	public static final int MASK_AX = 0x07FFFE00;
-	public static final int MASK_B_ = 0x0003FE00;
-	public static final int MASK_BX = 0x0003FFFF;
-	public static final int MASK_C_ = 0x000001FF;
-	public static final int MKX_ = 0x000001FF;
-	public static final int MKXX = 0x0003FFFF;
+	public static final int OFFSET_X_ = 9;
+	public static final int OFFSET_OP = OFFSET_X_ * 3;
+	public static final int OFFSET_A_ = OFFSET_X_ * 2;
+	public static final int OFFSET_AX = OFFSET_X_ * 1;
+	public static final int OFFSET_B_ = OFFSET_X_ * 1;
+	public static final int OFFSET_BX = OFFSET_X_ * 0;
+	public static final int OFFSET_C_ = OFFSET_X_ * 0;
+
+	public static byte TRUE = 1;
+	public static byte FALSE = 0;
+
+	public static final int MASK_X_ = 0x000001FF;
+	public static final int MASK_XX = (MASK_X_ << OFFSET_X_) | MASK_X_;
 
 	public static class Instruction {
 		String name; // E.g., "iadd", "call"
@@ -92,10 +86,12 @@ public class BytecodeDefinition {
 	public static final short INSTR_MOVE = 25; // reg to reg move
 	public static final short INSTR_PRINT = 26; // print reg
 	public static final short INSTR_STRUCT = 27; // create new struct
-	public static final short INSTR_NULL = 28; // load null into register
-	public static final short INSTR_HALT = 29;
+	public static final short INSTR_FORPREP = 28; // load null into register
+	public static final short INSTR_FORLOOP = 29; // load null into register
+	public static final short INSTR_NULL = 30; // load null into register
+	public static final short INSTR_HALT = 31;
 
-	// 
+	//@formatter:off
 	public static Instruction[] instructions = new Instruction[] {
 			null, // <INVALID>
 			new Instruction("iadd", REG, REG, REG), // index is the opcode
@@ -109,9 +105,9 @@ public class BytecodeDefinition {
 			new Instruction("flt", REG, REG, REG),
 			new Instruction("feq", REG, REG, REG), 
 			new Instruction("itof", REG, REG),
-			new Instruction("call", FUNC, REG), 
-			new Instruction("ret"), 
-			new Instruction("br", INT),
+			new Instruction("call", REG,FUNC, REG), 
+			new Instruction("ret",REG,INT), 
+			new Instruction("br", REG, INT),
 			new Instruction("brt", REG, INT), 
 			new Instruction("brf", REG, INT), 
 			new Instruction("cconst", REG, INT),
@@ -121,10 +117,14 @@ public class BytecodeDefinition {
 			new Instruction("gload", REG, INT),
 			new Instruction("gstore", REG, INT), 
 			new Instruction("fload", REG, REG, POOL),
-			new Instruction("fstore", REG, REG, POOL), 
+			new Instruction("fstore", REG, POOL, REG), 
 			new Instruction("move", REG, REG),
 			new Instruction("print", REG), 
 			new Instruction("struct", REG, INT), 
+			new Instruction("forprep", REG, INT), // goto done
+			new Instruction("forloop", REG, INT), // goto for
 			new Instruction("null", REG),
-			new Instruction("halt") };
+			new Instruction("halt") 
+	};
+	//@formatter:on
 }

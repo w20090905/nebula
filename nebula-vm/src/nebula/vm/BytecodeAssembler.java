@@ -8,13 +8,13 @@ package nebula.vm;
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book information.
  ***/
-import static nebula.vm.BytecodeDefinition.MKXX;
-import static nebula.vm.BytecodeDefinition.MKX_;
+import static nebula.vm.BytecodeDefinition.MASK_XX;
+import static nebula.vm.BytecodeDefinition.MASK_X_;
 import static nebula.vm.BytecodeDefinition.OFFSET_A_;
 import static nebula.vm.BytecodeDefinition.OFFSET_B_;
 import static nebula.vm.BytecodeDefinition.OFFSET_C_;
-import static nebula.vm.BytecodeDefinition.OFOP;
-import static nebula.vm.BytecodeDefinition.OFT;
+import static nebula.vm.BytecodeDefinition.OFFSET_OP;
+import static nebula.vm.BytecodeDefinition.OFFSET_X_;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,6 +62,11 @@ public class BytecodeAssembler extends AssemblerParser {
 	}
 
 	public ClassSymbol finished() {
+		if (currentFunction != null) {
+			int[] code = new int[ip];
+			System.arraycopy(codeBuffer, 0, code, 0, ip);
+			currentFunction.code = code;
+		}
 		currentClass.poolLocalK = poolLocalK.toArray();
 		currentClass.fields = this.fields.toArray(new FieldSymbol[0]);
 		currentClass.functions = this.functions.toArray(new FunctionSymbol[0]);
@@ -83,7 +88,7 @@ public class BytecodeAssembler extends AssemblerParser {
 		}
 		ensureCapacity(ip + 1);
 		int op = opcodeI.intValue();
-		return (op & 0xFF) << OFOP;
+		return (op & 0xFF) << OFFSET_OP;
 	}
 
 	/** Generate code for an instruction with one operand */
@@ -111,45 +116,45 @@ public class BytecodeAssembler extends AssemblerParser {
 		switch (operandToken.getType()) { // switch on token type
 		case CLASS:
 			v = toLocalConstantPoolIndex(new ClassSymbol(text));
-			op |= (v & MKX_) << offset;
+			op |= (v & MASK_X_) << offset;
 			break;
 		case FIELD:
 			int i = text.indexOf('.');
 			ClassSymbol c = new ClassSymbol(text.substring(1, i));
 			c = (ClassSymbol) poolLocalK.get(toLocalConstantPoolIndex(c));
 			v = toLocalConstantPoolIndex(new FieldSymbol(c, text.substring(i + 1)));
-			op |= (v & MKX_) << offset;
+			op |= (v & MASK_X_) << offset;
 			break;
 		case INT:
 			v = Integer.valueOf(text);
-			op |= (v & MKXX) << (offset - OFT);
+			op |= (v & MASK_XX) << (offset - OFFSET_X_);
 			break;
 		case CHAR:
 			v = Character.valueOf(text.charAt(1));
-			op |= (v & MKXX) << (offset - OFT);
+			op |= (v & MASK_XX) << (offset - OFFSET_X_);
 			break;
 		case FLOAT:
 			v = toLocalConstantPoolIndex(Float.valueOf(text));
-			op |= (v & MKX_) << offset;
+			op |= (v & MASK_X_) << offset;
 			break;
 		case STRING:
 			v = toLocalConstantPoolIndex(text);
-			op |= (v & MKX_) << offset;
+			op |= (v & MASK_X_) << offset;
 			break;
 		case ID:
-			v = getLabelAddress(text, offset - OFT);
-			op |= (v & MKXX) << (offset - OFT);
+			v = getLabelAddress(text, offset - OFFSET_X_);
+			op |= (v & MASK_XX) << (offset - OFFSET_X_);
 			break;
 		case FUNC:
 			i = text.indexOf('.');
 			c = new ClassSymbol(text.substring(1, i));
 			c = (ClassSymbol) poolLocalK.get(toLocalConstantPoolIndex(c));
 			v = toLocalConstantPoolIndex(new FunctionSymbol(c, text.substring(i + 1)));
-			op |= (v & MKX_) << (offset);			
+			op |= (v & MASK_X_) << (offset);
 			break;
 		case REG:
 			v = toRegisterNumber(operandToken);
-			op |= (v & MKX_) << offset;
+			op |= (v & MASK_X_) << offset;
 			break;
 		}
 		return op;
@@ -232,13 +237,13 @@ public class BytecodeAssembler extends AssemblerParser {
 														// pool
 	}
 
-//	protected int getFunctionIndexx(String id) {
-//		int i = poolLocalK.indexOf(new FunctionSymbol(id));
-//		if (i >= 0) return i; // already in system; return index.
-//		// must be a forward function reference
-//		// create the constant pool entry; we'll fill in later
-//		return toLocalConstantPoolIndex(new FunctionSymbol(id));
-//	}
+	// protected int getFunctionIndexx(String id) {
+	// int i = poolLocalK.indexOf(new FunctionSymbol(id));
+	// if (i >= 0) return i; // already in system; return index.
+	// // must be a forward function reference
+	// // create the constant pool entry; we'll fill in later
+	// return toLocalConstantPoolIndex(new FunctionSymbol(id));
+	// }
 
 	// protected void defineDataSize(int n) {
 	// dataSize = n;

@@ -8,6 +8,7 @@ package nebula.vm;
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book information.
  ***/
+import static nebula.vm.BytecodeDefinition.FALSE;
 import static nebula.vm.BytecodeDefinition.INSTR_BR;
 import static nebula.vm.BytecodeDefinition.INSTR_BRF;
 import static nebula.vm.BytecodeDefinition.INSTR_BRT;
@@ -19,6 +20,8 @@ import static nebula.vm.BytecodeDefinition.INSTR_FEQ;
 import static nebula.vm.BytecodeDefinition.INSTR_FLOAD;
 import static nebula.vm.BytecodeDefinition.INSTR_FLT;
 import static nebula.vm.BytecodeDefinition.INSTR_FMUL;
+import static nebula.vm.BytecodeDefinition.INSTR_FORLOOP;
+import static nebula.vm.BytecodeDefinition.INSTR_FORPREP;
 import static nebula.vm.BytecodeDefinition.INSTR_FSTORE;
 import static nebula.vm.BytecodeDefinition.INSTR_FSUB;
 import static nebula.vm.BytecodeDefinition.INSTR_GLOAD;
@@ -37,19 +40,15 @@ import static nebula.vm.BytecodeDefinition.INSTR_PRINT;
 import static nebula.vm.BytecodeDefinition.INSTR_RET;
 import static nebula.vm.BytecodeDefinition.INSTR_SCONST;
 import static nebula.vm.BytecodeDefinition.INSTR_STRUCT;
-import static nebula.vm.BytecodeDefinition.MASK_AX;
-import static nebula.vm.BytecodeDefinition.MASK_A_;
-import static nebula.vm.BytecodeDefinition.MASK_BX;
-import static nebula.vm.BytecodeDefinition.MASK_B_;
-import static nebula.vm.BytecodeDefinition.MASK_C_;
+import static nebula.vm.BytecodeDefinition.MASK_XX;
+import static nebula.vm.BytecodeDefinition.MASK_X_;
 import static nebula.vm.BytecodeDefinition.OFFSET_AX;
 import static nebula.vm.BytecodeDefinition.OFFSET_A_;
 import static nebula.vm.BytecodeDefinition.OFFSET_BX;
 import static nebula.vm.BytecodeDefinition.OFFSET_B_;
 import static nebula.vm.BytecodeDefinition.OFFSET_C_;
-import static nebula.vm.BytecodeDefinition.OFOP;
-import static nebula.vm.BytecodeDefinition._FALSE;
-import static nebula.vm.BytecodeDefinition._TRUE;
+import static nebula.vm.BytecodeDefinition.OFFSET_OP;
+import static nebula.vm.BytecodeDefinition.TRUE;
 import static nebula.vm.BytecodeDefinition.instructions;
 
 import java.io.FileInputStream;
@@ -65,24 +64,39 @@ import org.antlr.runtime.CommonTokenStream;
 public class Interpreter3 {
 	public static final int DEFAULT_OPERAND_STACK_SIZE = 100;
 	public static final int DEFAULT_CALL_STACK_SIZE = 1000;
-	
+
 	public static final int DEFAULT_Class_POOL_SIZE = 1000;
 	public static final int DEFAULT_String_POOL_SIZE = 10000;
 	public static final int DEFAULT_Decimal_POOL_SIZE = 10000;
-	
+
+	public static final int DEFAULT_Object_POOL_SIZE = 10000;
+	public static final int DEFAULT_Stack_SIZE = 64 * 1024;
+
 	public static final int DEFAULT_PREPAREED_NUMBER_STRING_RANGE = 1000;
 
-	@Deprecated int[] globals; // global variable space
+	private DisAssembler disasm = new DisAssembler();
+
+	@Deprecated
+	int[] globals; // global variable space
 	final ClassSymbol[] poolClass = new ClassSymbol[DEFAULT_Class_POOL_SIZE];
 	final String[] poolString = new String[DEFAULT_String_POOL_SIZE];
 	final BigDecimal[] poolDecimal = new BigDecimal[DEFAULT_Decimal_POOL_SIZE];
 
-	final Map<String, Integer> mapString = new HashMap<>(DEFAULT_Decimal_POOL_SIZE*2);
+	final int[][] poolH = new int[DEFAULT_Object_POOL_SIZE][];
+	int pPoolH = 0;
+
+	/** Stack of stack frames, grows upwards */
+	final FunctionSymbol[] calls = new FunctionSymbol[DEFAULT_CALL_STACK_SIZE];
+	int fp = -1; // frame pointer register
+
+	final int[] r = new int[DEFAULT_Stack_SIZE];
+
+	final Map<String, Integer> mapString = new HashMap<>(DEFAULT_Decimal_POOL_SIZE * 2);
 	int pPoolString = 0;
 
-	protected int indexOf(String v) {
+	private int indexOf(String v) {
 		Integer i = mapString.get(v);
-		if (i !=null) return i.intValue();
+		if (i != null) return i.intValue();
 		else {
 			mapString.put(v, ++pPoolString);
 			poolString[pPoolString] = v;
@@ -90,10 +104,10 @@ public class Interpreter3 {
 		}
 	}
 
-	final Map<ClassSymbol, Integer> mapClass = new HashMap<>(DEFAULT_Class_POOL_SIZE*2);
+	final Map<ClassSymbol, Integer> mapClass = new HashMap<>(DEFAULT_Class_POOL_SIZE * 2);
 	int pPoolClass = 0;
 
-	protected int indexOf(ClassSymbol v) {
+	private int indexOf(ClassSymbol v) {
 		Integer i = mapClass.get(v);
 		if (i != null) return i.intValue();
 		else {
@@ -104,22 +118,31 @@ public class Interpreter3 {
 	}
 
 	public Interpreter3() {
-		for(int i=0;i<DEFAULT_PREPAREED_NUMBER_STRING_RANGE;i++){
-			indexOf(String.valueOf(i));
-		}
+		this(false);
 	}
 
-	protected boolean contain(ClassSymbol v) {
+	public Interpreter3(boolean trace) {
+		this.trace = trace;
+		for (int i = 0; i < DEFAULT_PREPAREED_NUMBER_STRING_RANGE; i++) {
+			indexOf(String.valueOf(i));
+		}
+
+		poolH[0] = new int[1];
+		poolH[0][0] = Integer.MAX_VALUE;
+		pPoolH = 1;
+	}
+
+	private void __halt() {
+		for (int i = 0; i < pPoolH; i++)
+			poolH[i] = null;
+		pPoolH = 0;
+	}
+
+	private boolean contain(ClassSymbol v) {
 		return mapClass.containsKey(v);
 	}
 
-	// protected Object[] poolK;
-	/** Stack of stack frames, grows upwards */
-	final StackFrame[] calls = new StackFrame[DEFAULT_CALL_STACK_SIZE];
-	int fp = -1; // frame pointer register
-	// FunctionSymbol mainFunction;
-
-	boolean trace = false;
+	final private boolean trace;
 
 	public static void main(String[] args) throws Exception {
 		// PROCESS ARGS
@@ -148,10 +171,9 @@ public class Interpreter3 {
 		if (filename != null) input = new FileInputStream(filename);
 		else input = System.in;
 
-		Interpreter3 interpreter = new Interpreter3();
+		Interpreter3 interpreter = new Interpreter3(trace);
 		ClassSymbol clz = load(input);
 		interpreter.resolve(clz);
-		interpreter.trace = trace;
 		interpreter.exec(interpreter.resolve(clz.getEntryPoint()));
 		if (disassemble) interpreter.disassemble();
 		if (dump) interpreter.coredump();
@@ -159,6 +181,11 @@ public class Interpreter3 {
 
 	public void resolve(ClassSymbol classSymbol) {
 		this.indexOf(classSymbol);
+		int offset = 1;
+		for (FieldSymbol f : classSymbol.fields) {
+			f.defineAt(offset);
+			offset += f.lenght;
+		}
 	}
 
 	public ClassSymbol loadClass(String className) {
@@ -199,110 +226,204 @@ public class Interpreter3 {
 
 		for (int i = 0; i < 1; i++) {
 			fp = -1;
-			StackFrame f = new StackFrame(mainFunction, 0, 0);
-			calls[++fp] = f;
+			calls[++fp] = mainFunction;
 			cpu();
 		}
 
-		int max = 10000;
+		int max = 100;
 		long start = 0, end = 0;
 		start = System.nanoTime();
 		for (int i = 0; i < max; i++) {
 			fp = -1;
-			StackFrame f = new StackFrame(mainFunction, 0, 0);
-			calls[++fp] = f;
+			calls[++fp] = mainFunction;
 			cpu();
 		}
 		end = System.nanoTime();
-		System.out.println(this.getClass().getName() + "(" + max + " times)" + " cost : " + (end - start) + "  |  "
-				+ (end - start) / max + " / every time");
+		System.out.println(mainFunction.definedClass.name + " -> (" + max + " times)" + " cost : " + (end - start)
+				+ "  \t||  " + (end - start) / max + " / every time \t|| "
+				+ (max * ((float) (1000 * 1000 * 1000) / (end - start))) + " times / every second");
 	}
 
 	/** Simulate the fetch-execute cycle */
 	protected void cpu() {
-		StackFrame currentFrame = calls[fp];
-		int[] r = currentFrame.registers;
-		int[] code = currentFrame.sym.code;
-		Object[] poolK = currentFrame.sym.getConstPool();
+		FunctionSymbol funcTo = null;
+		int baseTo = 0;
+
+		FunctionSymbol func = calls[fp];
+		int[] code = func.code;
+		Object[] poolK = func.getConstPool();
+		int maskObject = 0;
 		int ip = 0;
 		int op = code[ip++];
 
-		//@formatter:off
-		Outter: for (; ;op = code[ip++]) {
-			// if (trace) trace();
-			switch ((op >>> OFOP) & 0xFFFFFFFF) {
-			case INSTR_IADD:	r[A(op)] = r[B(op)] + r[C(op)];	break;
-			case INSTR_ISUB:	r[A(op)] = r[B(op)] - r[C(op)];	break;
-			case INSTR_IMUL:	r[A(op)] = r[B(op)] * r[C(op)];	break;
-			case INSTR_ILT:		r[A(op)] = r[B(op)] < r[C(op)] ? _TRUE : _FALSE;	break;
-			case INSTR_IEQ:		r[A(op)] = r[B(op)] == r[C(op)] ? _TRUE : _FALSE;	break;
+		int base = 0;
+
+		int ra = 0;
+		int rb = 0;
+
+		Outter: for (;; op = code[ip++]) {
+			if (trace) trace(ip - 1, base);
+			ra = A(op);
+
+			switch (OP_CODE(op)) {
+
+			//@formatter:off
+			case INSTR_IADD:	r[base+ra] = r[base+B(op)] + r[base+C(op)];	break;
+			case INSTR_ISUB:	r[base+ra] = r[base+B(op)] - r[base+C(op)];	break;
+			case INSTR_IMUL:	r[base+ra] = r[base+B(op)] * r[base+C(op)];	break;
+			case INSTR_ILT:		r[base+ra] = r[base+B(op)] < r[base+C(op)] ? TRUE : FALSE;	break;
+			case INSTR_IEQ:		r[base+ra] = r[base+B(op)] == r[base+C(op)] ? TRUE : FALSE;	break;
 			
-			case INSTR_FADD:	r[A(op)] = addF(r[B(op)], r[C(op)]);	break;
-			case INSTR_FSUB:	r[A(op)] = subF(r[B(op)], r[C(op)]);	break;
-			case INSTR_FMUL:	r[A(op)] = mulF(r[B(op)], r[C(op)]);	break;
-			case INSTR_FLT:		r[A(op)] = ltF(r[B(op)], r[C(op)]) ? _TRUE : _FALSE;	break;
-			case INSTR_FEQ:		r[A(op)] = r[B(op)] == r[C(op)] ? _TRUE : _FALSE;	break;
+			case INSTR_FADD:	r[base+ra] = addF(r[base+B(op)], r[base+C(op)]);	break;
+			case INSTR_FSUB:	r[base+ra] = subF(r[base+B(op)], r[base+C(op)]);	break;
+			case INSTR_FMUL:	r[base+ra] = mulF(r[base+B(op)], r[base+C(op)]);	break;
+			case INSTR_FLT:		r[base+ra] = ltF(r[base+B(op)], r[base+C(op)]) ? TRUE : FALSE;	break;
+			case INSTR_FEQ:		r[base+ra] = eqF(r[base+B(op)],r[base+C(op)]) ? TRUE : FALSE;	break;
 			
-			case INSTR_ITOF:// r[j] = (float) (((Integer)					// r[i]).intValue());break;
+			case INSTR_ITOF:	/*r[base+j] = (float) (((Integer)r[base+i]).intValue());*/	break;
+			//@formatter:on
 
 			case INSTR_CALL: {
-				call(currentFrame, B(op), C(op), A(op), ip);
+				// 1、backup current frame status
+				baseTo = base + func.nargs + func.nlocals + 1 + 4;
+
+				r[baseTo - 4] = base;
+				r[baseTo - 3] = ip;
+				r[baseTo - 2] = ra;
+				r[baseTo - 1] = maskObject;
+
+				// 2、Prepare new frame
+				funcTo = (FunctionSymbol) poolK[B(op)];
+				if (!funcTo.resolved) resolve(funcTo);
+
+				int cnt = funcTo.nargs;
+				if (cnt == 1) {
+					r[baseTo + 1] = r[base + 1];
+				} else if (cnt == 2) {
+					r[baseTo + 1] = r[base + 1];
+					r[baseTo + 2] = r[base + 2];
+				} else {
+					for (int to = 1, from = base + C(op); to <= cnt; from++, to++) {
+						r[baseTo + to] = r[from];
+					}
+				}
+
+				// 3、push new frame to stack
+				calls[++fp] = funcTo;
+
+				// 4、new function exec
 				ip = 0;
+				maskObject = 0;
 
-				currentFrame = calls[fp];
-				r = currentFrame.registers;
-				code = currentFrame.sym.code;
-				poolK = currentFrame.sym.getConstPool();
+				base = baseTo;
+				code = funcTo.code;
+				poolK = funcTo.getConstPool();
+
+				func = funcTo;
 				break;
 			}
+
 			case INSTR_RET: {
-				int retFirstResult = A(op);
-				int top = BX(op);				
-				StackFrame retFrame = calls[fp--]; // pop stack frame
-				currentFrame = calls[fp];
-				ip = retFrame.returnAddress;
-				
-				int[] rRet = retFrame.registers;
-				r = currentFrame.registers;
-				
-				int firstResult = currentFrame.firstResult;
-				for(int a=0;a<top;a++)	r[firstResult+a] = rRet[retFirstResult+a];					
-								
-				code = currentFrame.sym.code;
-				poolK = currentFrame.sym.getConstPool();
-				
+				baseTo = r[base - 4];
+
+				// 1、pop stack frame
+				funcTo = calls[--fp];
+
+				// 2、clear object
+				if (maskObject > 0) {
+					// clear ref object, don't deal args and ret param
+					int index = 0;
+					for (int a = func.nargs; a < ra; a++) {
+						if ((maskObject & (1L << a)) > 0) {
+							index = r[base + a];
+							if (poolH[index][0] < 2) poolH[index] = null;
+							else poolH[index][0]--;
+
+						}
+					}
+				}
+
+				// 2、Prepare new frame
+				rb = base + ra + BX(op);
+				for (int from = base + ra, to = baseTo + r[base - 2]; from < rb; from++, to++) {
+					r[to] = r[from];
+				}
+
+				// 4、return function exec
+				ip = r[base - 3];
+				maskObject = r[base - 1];
+
+				base = baseTo;
+				code = funcTo.code;
+				poolK = funcTo.getConstPool();
+				func = funcTo;
+
 				break;
 			}
 
-			case INSTR_BR:	ip = AX(op);	break;
-			case INSTR_BRT:	if (r[A(op)] == _TRUE) ip = BX(op);	break;
-			case INSTR_BRF:	if (r[A(op)] != _TRUE) ip = BX(op);	break;
+			//@formatter:off
+			case INSTR_BR:	ip = BX(op);	break;
+			case INSTR_BRT:	if (r[base+ra] == TRUE) ip = BX(op);	break;
+			case INSTR_BRF:	if (r[base+ra] != TRUE) ip = BX(op);	break;
 
-			case INSTR_CCONST:	r[A(op)] = BX(op);	break;
-			case INSTR_ICONST:	r[A(op)] = BX(op);	break;
-			case INSTR_FCONST:	r[A(op)] = ((Integer)poolK[B(op)]).intValue();	break; // TODO not implements
-			case INSTR_SCONST:	r[A(op)] = ((Integer)poolK[B(op)]).intValue();	break; // TODO not implements
+			case INSTR_CCONST:	r[base+ra] = BX(op);	break;
+			case INSTR_ICONST:	r[base+ra] = BX(op);	break;
+			case INSTR_FCONST:	r[base+ra] = ((Integer)poolK[B(op)]).intValue();	break; // TODO not implements
+			case INSTR_SCONST:	r[base+ra] = ((Integer)poolK[B(op)]).intValue();	break; // TODO not implements
 
-			case INSTR_GLOAD:	r[A(op)] = globals[BX(op)];	break;
-			case INSTR_GSTORE:	globals[AX(op)] = r[B(op)];	break;
+			case INSTR_GLOAD:	r[base+ra] = globals[BX(op)];	break;
+			case INSTR_GSTORE:	globals[AX(op)] = r[base+B(op)];	break;
 
-			case INSTR_FLOAD:	r[A(op)] = poolH[r[B(op)]][((FieldSymbol) poolK[C(op)]).offset];break;
-			case INSTR_FSTORE:	poolH[r[A(op)]][((FieldSymbol) poolK[B(op)]).offset] = r[C(op)];break;
+			case INSTR_FLOAD:	r[base+ra] = poolH[r[base+B(op)]][((FieldSymbol) poolK[C(op)]).offset];break;
+			case INSTR_FSTORE:	poolH[r[base+ra]][((FieldSymbol) poolK[B(op)]).offset] = r[base+C(op)];break;
+			//@formatter:on
 
-			case INSTR_MOVE:	r[A(op)] = r[B(op)];	break;
-			case INSTR_PRINT:	
-				System.out.println(poolString[r[A(op)]]);	
+			case INSTR_MOVE: { // TODO object copy
+				r[base + ra] = r[base + B(op)];
 				break;
-			case INSTR_STRUCT:	r[A(op)] = newStruct(((ClassSymbol) poolK[B(op)]).getLength());	break;
-			case INSTR_NULL:	r[A(op)] = 0;	break;
-			
-			case INSTR_HALT:	break Outter;
+			}
+			case INSTR_PRINT:
+				System.out.println(r[base + ra]);
+				break;
+			case INSTR_STRUCT: {
+				if ((maskObject & (1L << ra)) > 0) {
+					int index = r[base + ra];
+					if (poolH[index][0] < 2) {
+						poolH[index] = null;
+					} else {
+						poolH[index][0]--;
+					}
+				}
+				r[base + ra] = __newStruct(((ClassSymbol) poolK[B(op)]).getLength());
+				maskObject |= (1L << ra);
+				break;
+			}
+			case INSTR_FORPREP: {
+				if (r[base + ra] >= r[base + ra + 1]) ip = BX(op);
+
+				break;
+			}
+			case INSTR_FORLOOP: {
+				r[base + ra] += r[base + ra + 2];
+				ip = BX(op);
+				break;
+			}
+
+			case INSTR_NULL:
+				poolH[r[base + ra]][0]--;
+				maskObject &= (~(1L << ra));
+				break;
+			case INSTR_HALT: {
+				__halt();
+				break Outter;
+			}
+
 			default:
 				throw new Error("Address : " + ip + " ;invalid opcode: " + Integer.toBinaryString(op) + " at ip="
 						+ (ip - 1));
 			}
 		}
-		//@formatter:on
+		// @formatter:on
 	}
 
 	/** Resolve Function Symbol */
@@ -316,15 +437,15 @@ public class Interpreter3 {
 
 		for (; ip < code.length; op = code[ip++]) {
 			// if (trace) trace();
-			switch ((op >>> OFOP) & 0xFFFFFFFF) {
+			switch (OP_CODE(op)) {
 
-			case INSTR_SCONST:{
+			case INSTR_SCONST: {
 				int index = B(op);
 				String str = (String) poolK[index];
 				poolK[index] = indexOf(str);
 				break;
 			}
-				
+
 			case INSTR_CALL: {
 				int index = B(op);
 
@@ -383,51 +504,62 @@ public class Interpreter3 {
 			}
 
 		}
+		func.resolved = true;
 		return func;
 	}
 
-	static final int A(int op) {
-		return (op & MASK_A_) >>> OFFSET_A_;
+	private int OP_CODE(int op) {
+		return (op >>> OFFSET_OP);
 	}
 
-	static final int B(int op) {
-		return (op & MASK_B_) >>> OFFSET_B_;
+	private int A(int op) {
+		return op >>> OFFSET_A_ & MASK_X_;
 	}
 
-	static final int C(int op) {
-		return (op & MASK_C_) >>> OFFSET_C_;
+	private int B(int op) {
+		return op >>> OFFSET_B_ & MASK_X_;
 	}
 
-	static final int AX(int op) {
-		return (op & MASK_AX) >>> OFFSET_AX;
+	private int C(int op) {
+		return op >>> OFFSET_C_ & MASK_X_;
 	}
 
-	static final int BX(int op) {
-		return (op & MASK_BX) >>> OFFSET_BX;
+	private int AX(int op) {
+		return op >>> OFFSET_AX & MASK_XX;
 	}
 
-	int[][] poolH = new int[100][];
-	int structPoolSize = 0;
-
-	protected int newStruct(int size) {
-		poolH[structPoolSize] = new int[size];
-		return structPoolSize++;
+	private int BX(int op) {
+		return op >>> OFFSET_BX & MASK_XX;
 	}
 
-	protected void call(StackFrame currentFrame, int functionConstPoolIndex, int baseRegisterIndex, int firstResult,
-			int ip) {
-		final FunctionSymbol fs = (FunctionSymbol) currentFrame.sym.getConstPool()[functionConstPoolIndex];
-		if (!fs.resolved) resolve(fs);
-		final StackFrame f = new StackFrame(fs, ip, firstResult);
-		final StackFrame callingFrame = calls[fp];
-		calls[++fp] = f; // push new stack frame
-		// move arguments from calling stack frame to new stack frame
-		final int[] r = f.registers;
-		final int[] rCalling = callingFrame.registers;
-		for (int a = 0; a < fs.nargs; a++) { // move args, leaving room for r0
-			r[a + 1] = rCalling[baseRegisterIndex + a];
+	private int __newStruct(int size) {
+		int index = 0;
+		for (; index < pPoolH; index++) {
+			if (poolH[index] == null) break;
 		}
+		poolH[index] = new int[size];
+		poolH[index][0] = 1;
+		pPoolH = pPoolH > index + 1 ? pPoolH : index + 1;
+		return index;
 	}
+
+	//
+	// private void __call(StackFrame currentFrame, int functionConstPoolIndex,
+	// int baseRegisterIndex, int firstResult,
+	// int ip) {
+	// final FunctionSymbol fs = (FunctionSymbol)
+	// currentFrame.sym.getConstPool()[functionConstPoolIndex];
+	// if (!fs.resolved) resolve(fs);
+	// final StackFrame f = new StackFrame(fs, ip, firstResult);
+	// final StackFrame callingFrame = calls[fp];
+	// calls[++fp] = f; // push new stack frame
+	// // move arguments from calling stack frame to new stack frame
+	// final int[] r = f.registers;
+	// final int[] rCalling = callingFrame.registers;
+	// for (int a = 0; a < fs.nargs; a++) { // move args, leaving room for r0
+	// r[a + 1] = rCalling[baseRegisterIndex + a];
+	// }
+	// }
 
 	/**
 	 * Pull off 4 bytes starting at ip and return 32-bit signed int value.
@@ -441,76 +573,96 @@ public class Interpreter3 {
 	// }
 
 	// Tracing, dumping, ...
-
 	public void disassemble() {
-		// disasm.disassemble();
+		for (int i = 1; i <= pPoolClass; i++) {
+			ClassSymbol clz = poolClass[i];
+			disasm.disassemble(clz);
+		}
 	}
 
-	protected void trace() {
-		// disasm.disassembleInstruction(ip);
-		// int[] r = calls[fp].registers;
+	protected void trace(int ip, int base) {
+		FunctionSymbol func = calls[fp];
+		if (ip == 0) {
+			System.out.println("");
+			System.out.println("Enter .function " + func.definedClass.name + "." + func.name);
+		}
+		disasm.disassembleInstruction(func.code, func.getConstPool(), ip);
+
+		// int[] r = currentfFrame.registers;
 		// if (r.length > 0) {
-		// System.out.print("\t" + calls[fp].sym.name + ".registers=[");
-		// ;
-		// for (int i = 0; i < r.length; i++) {
-		// if (i == 1) System.out.print(" |");
-		// if (i == calls[fp].sym.nargs + 1 && i == 1) System.out.print("|");
-		// else if (i == calls[fp].sym.nargs + 1) System.out.print(" |");
-		// System.out.print(" ");
-		// if (r[i] == 0) System.out.print("?");
-		// else System.out.print(r[i]);
+		System.out.print("\t\t" + func.name + ".registers=[");
+		int cnt = func.nargs + func.nlocals + 1;
+		for (int i = 0; i < cnt; i++) {
+			if (i == 1) System.out.print(" |");
+			if (i == func.nargs + 1 && i == 1) System.out.print("|");
+			else if (i == func.nargs + 1) System.out.print(" |");
+			System.out.print(" ");
+			if (r[base + i] == 0) System.out.print("_");
+			else System.out.print(r[base + i]);
+		}
+		System.out.print(" ]");
 		// }
-		// System.out.print(" ]");
-		// }
-		// if (fp >= 0) {
-		// System.out.print("  calls=[");
-		// for (int i = 0; i <= fp; i++) {
-		// System.out.print(" " + calls[i].sym.name);
-		// }
-		// System.out.print(" ]");
-		// }
-		// System.out.println();
+		if (fp >= 0) {
+			System.out.print("  calls=[");
+			for (int i = 0; i <= fp; i++) {
+				System.out.print(" " + func.name);
+			}
+			System.out.print(" ]");
+		}
+		System.out.println();
 	}
 
 	public void coredump() {
-		// if (poolK.length > 0) dumpConstantPool();
-		// if (globals.length > 0) dumpDataMemory();
-		// dumpCodeMemory();
+		for (int i = 1; i <= pPoolClass; i++) {
+			ClassSymbol clz = poolClass[i];
+
+			if (clz.poolLocalK.length > 0) dumpConstantPool(clz.poolLocalK);
+			// if (globals.length > 0) dumpDataMemory();
+			for (FunctionSymbol f : clz.functions) {
+				System.out.println("");
+				System.out.println(".def " + f.name + " args=" + f.nargs + ", locals=" + f.nlocals + " ");
+				dumpCodeMemory(f.code);
+			}
+		}
 	}
 
-	protected void dumpConstantPool() {
-		// System.out.println("Constant pool:");
-		// int addr = 0;
-		// for (Object o : poolK) {
-		// if (o instanceof String) {
-		// System.out.printf("%04d: \"%s\"\n", addr, o);
-		// } else {
-		// System.out.printf("%04d: %s\n", addr, o);
-		// }
-		// addr++;
-		// }
-		// System.out.println();
+	protected void dumpConstantPool(Object[] poolK) {
+		System.out.println("Constant pool:");
+		int addr = 0;
+		for (Object o : poolK) {
+			if (o instanceof String) {
+				System.out.printf("%04d: \"%s\"\n", addr, o);
+			} else {
+				System.out.printf("%04d: %s\n", addr, o);
+			}
+			addr++;
+		}
+		System.out.println();
 	}
 
-	static final boolean ltF(int b, int c) {
+	private boolean ltF(int b, int c) {
 		return true;
 	}
 
-	static final int addF(int b, int c) {
+	private boolean eqF(int b, int c) {
+		return true;
+	}
+
+	private int addF(int b, int c) {
 		return 0;
 	}
 
-	static final int subF(int b, int c) {
+	private int subF(int b, int c) {
 		return 0;
 	}
 
-	static final int mulF(int b, int c) {
+	private int mulF(int b, int c) {
 		return 0;
 	}
 
-	static final int float_div(int b, int c) {
-		return 0;
-	}
+	// private int divF(int b, int c) {
+	// return 0;
+	// }
 
 	protected void dumpDataMemory() {
 		System.out.println("Data memory:");
@@ -526,13 +678,13 @@ public class Interpreter3 {
 		System.out.println();
 	}
 
-	public void dumpCodeMemory() {
-		// System.out.println("Code memory:");
-		// for (int i = 0; code != null && i < codeSize; i++) {
-		// if (i % 8 == 0 && i != 0) System.out.println();
-		// if (i % 8 == 0) System.out.printf("%04d:", i);
-		// System.out.printf(" %3d", code[i]);
-		// }
-		// System.out.println();
+	public void dumpCodeMemory(int[] code) {
+		System.out.println("Code memory:");
+		for (int i = 0; code != null && i < code.length; i++) {
+			if (i % 8 == 0 && i != 0) System.out.println();
+			if (i % 8 == 0) System.out.printf("%04d:", i);
+			System.out.printf(" %3d", (code[i] >>> OFFSET_OP) & 0xFFFFFFFF);
+		}
+		System.out.println();
 	}
 }
