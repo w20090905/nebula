@@ -8,11 +8,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Query;
+
 public class ContactManager extends BaseDao<Contact> {
 
 	@SuppressWarnings("unchecked")
 	public List<Contact> selectAll() {
 		return this.getSession().createCriteria(Contact.class).list();
+	}
+	
+	public List<Contact> getContactByCompany(int companyId){
+		 String HQL = "select c from Contact c where c.company.id ="+companyId;
+		 Query query = getSession().createQuery(HQL);
+		 System.out.println("HQL:"+HQL);
+		return query.list();
+		
 	}
 
 	public Contact select(int id) {

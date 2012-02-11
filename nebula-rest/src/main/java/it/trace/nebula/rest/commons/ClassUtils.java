@@ -144,4 +144,10 @@ public class ClassUtils {
 		
 		return methods;
 	}
+	
+	public static void main(String[] args) {
+		ClassUtils am = new ClassUtils();
+		am.getClasses("");
+	}
+		
 }

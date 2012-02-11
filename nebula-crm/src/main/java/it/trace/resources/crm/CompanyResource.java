@@ -1,6 +1,7 @@
 package it.trace.resources.crm;
 
 import it.trace.entity.Company;
+import it.trace.entity.Contact;
 import it.trace.manager.CompanyManager;
 import it.trace.nebula.rest.binder.Context;
 import it.trace.nebula.rest.binder.DataBinder;
@@ -41,6 +42,10 @@ public class CompanyResource {
 		this.manager = manager;
 	}
 
+	public List<Contact> getByContact(int companyId) {
+		return manager.select(companyId).getContactList();
+	}
+
 	public List<Company> list() {
 		this.list = manager.selectAll();
 		return list;
@@ -54,7 +59,7 @@ public class CompanyResource {
 		manager.insert(company);
 		return "success";
 	}
-	
+
 	public Company view(String id) {
 		return manager.select(Integer.valueOf(id));
 	}
@@ -69,41 +74,42 @@ public class CompanyResource {
 	}
 
 	public String removable() {
-//		this.company = manager.select(id);
+		// this.company = manager.select(id);
 		return "success";
 	}
 
-	public String remove() {
+	public void remove(Integer id) {
+		System.out.println("delete ");
 		manager.delete(id);
-		return "success";
 	}
 
 	public static DataBinder<Company> createDataBinder() {
 		return new DataBinder<Company>() {
-
 			@Override
 			public Object[] bind(Context context, Method method) {
+				System.out.println("method.getName()" + method.getName());
 
 				if ("update".equals(method.getName())
 						|| "create".equals(method.getName())) {
 					Company company = new Company();
 					if (context.getId() != null)
 						company.setId(Integer.parseInt(context.getId()));
-					company.setName((String) context
-							.getParameter("name"));
+					company.setName((String) context.getParameter("name"));
 					company.setTel((String) context.getParameter("tel"));
 					company.setAddress((String) context.getParameter("address"));
-					company.setDescription((String) context.getParameter("description"));
+					company.setDescription((String) context
+							.getParameter("description"));
 					return new Object[] { company };
-				} else if ("editable".equals(method.getName())
-						|| "removable".equals(method.getName())
-						|| "remove".equals(method.getName())) {
+				} else if ("editable".equals(method.getName())) {
 					return new Object[] { Long.parseLong((String) context
 							.getParameter("id")) };
 				} else if ("view".equals(method.getName())) {
-                    String id = context.getId();
-                    return new Object[] { id };
-                } 
+					String id = context.getId();
+					return new Object[] { id };
+				} else if ("delete".equals(method.getName())) {
+					return new Object[] { Long.parseLong((String) context
+							.getParameter("id")) };
+				}
 
 				return null;
 			}

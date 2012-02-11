@@ -68,8 +68,10 @@ public abstract class BaseDao<T> {
 		Transaction tx = beginTransaction(session);
 		try {
 			session.delete(t);
+			System.out.println("delete success!");
 			tx.commit();
 		} catch (Exception e) {
+			System.out.println("delete error!");
 			tx.rollback();
 			log.error("删除对象失败");
 		}
@@ -85,6 +87,8 @@ public abstract class BaseDao<T> {
 			session.delete(getObject(clazz, id));
 			tx.commit();
 		} catch (Exception e) {
+			System.out.println("remove error:"+e.getMessage());
+			e.printStackTrace();
 			tx.rollback();
 			log.error("根据主键删除对象失败");
 		}

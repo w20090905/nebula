@@ -81,6 +81,8 @@ public class ActionExecutor implements Executor {
 
         Object returnValue;
         try {
+        	System.out.println("action:"+action);
+        	System.out.println("input:"+input);
             returnValue = operation.getMethod().invoke(action, input);
             result.onSuccess(request, response, returnValue);
         } catch (Exception e) {

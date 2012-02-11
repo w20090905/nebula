@@ -5,7 +5,7 @@
 	window.jnebula = window.$$ = jnebula;
 })();
 
-(function($, $$) {
+(function($, $$, document) {
 	
 	$.extend($$, {
 		
@@ -65,6 +65,7 @@
 						
 						var el = e.elts.cont[0];
 
+						$$.renderTable(el);
 						$$.renderTemplate(el, args);
 						$$.renderValidator(el);
 						$$.renderSubmit(el);
@@ -153,50 +154,137 @@
 		renderTable : function(el) {
 
 			$("table.toplevel", el).each(function() {
-				
-				var columns = new Array();
 
 				var url = this.id;									// 取得数据请求的URL
 				var pkName = $("tbody td.primary", this).html();	// 取得主键的字段名
-				var updateUrl = $$.rebase("html/" + url + "editable.html");
+				
+				var columns = new Array();
+				var callbacks = new Array();
 
 				$("tbody td", this).each(function(index) {
 					if ($(this).hasClass("actions")) {
 						columns[index] = {
-							"mDataProp" : "",
-							"sClass" : this.className,				// TODO 有问题，对于class “a b”,只能取得“a”
-							"bSortable" : false,
-							"fnRender" : function(obj) {
-								var ownUrl = url + obj.aData[pkName] + "/";
-								return '<a href="'
-										+ ownUrl
-										+ '" class="nyroModal" rev="modal" onclick="javascript:$$.popUp(\''
-										+ updateUrl
-										+ '\',{url:\'' + ownUrl + '\'}); return false;">'
-										+ "Edit"
-										+ '</a>';
-							}
+							sClass : $(this).attr("class"),
+							mDataProp : null,
+							bSortable : false
+						};
+						if (/.*edit.*/.test($(this).html())) {
+							callbacks[callbacks.length] = function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+								var td = $("td:eq(" + index + ")", nRow);
+								var ownUrl = url + aData[pkName] + "/";
+								var updateUrl = $$.rebase("html/" + url + "editable.html");
+								var a = $(document.createElement("a"));
+								a.attr("href", ownUrl);
+								a.addClass("nyroModal");
+								a.attr("rev", "modal");
+								a.html("<img src='img/page_save.png'/>");
+								a.click(function() {
+									$$.popUp(updateUrl, { url : ownUrl });
+									return false;
+								});
+								td.append(a);
+							};
+						}
+						if (/.*delete.*/.test($(this).html())) {
+							callbacks[callbacks.length] = function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+								var td = $("td:eq(" + index + ")", nRow);
+								var ownUrl = url + aData[pkName] + "/";
+								var removeUrl = $$.rebase("html/" + url + "removable.html");
+								var a = $(document.createElement("a"));
+								a.attr("href", ownUrl);
+								a.addClass("nyroModal");
+								a.attr("rev", "modal");
+								a.html("<img src='img/delete.png'/>");
+								a.click(function() {
+									$$.popUp(removeUrl, { url : ownUrl });
+									return false;
+								});
+								td.append(a);
+							};
+						}
+					} else if ($(this).is("td[refer]")) {
+						columns[index] = {
+							sClass : $(this).attr("class"),
+							mDataProp : this.innerHTML
+						};
+						var refer = $(this).attr("refer");
+						var referby = $(this).attr("referby");
+						callbacks[callbacks.length] = function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+							var td = $("td:eq(" + index + ")", nRow);
+							var ownUrl = refer + $$._getData(aData, referby) + "" + "/";
+							var referUrl = $$.rebase("html/" + refer + "editable.html");
+							var a = $(document.createElement("a"));
+							a.attr("href", ownUrl);
+							a.html(td.html());
+							a.click(function() {
+								$$.popUp(referUrl, { url : ownUrl });
+								return false;
+							});
+							td.empty();
+							td.append(a);
+						};
+					} else if ($(this).is("td[refers]")) {
+						columns[index] = {
+							sClass : $(this).attr("class"),
+							mDataProp : null,
+							bSortable : false
+						};
+						var refers = $(this).attr("refers");
+						var referby = $(this).attr("referby");
+						var actionUrl = refers;
+						if (refers.indexOf("!") > 0) {
+							actionUrl = refers.substring(0, refers.indexOf("!")) + "/";
+						}
+						var method = refers.substring(refers.indexOf("!"));
+						callbacks[callbacks.length] = function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+							var td = $("td:eq(" + index + ")", nRow);
+							var ownUrl = actionUrl + $$._getData(aData, referby)  + method;
+							var referUrl = $$.rebase("html/" + actionUrl + "list.html");
+							var a = $(document.createElement("a"));
+							a.attr("href", ownUrl);
+							a.html("+");
+							a.click(function() {
+								$$.popUp(referUrl, { url : ownUrl });
+								return false;
+							});
+							td.empty();
+							td.append(a);
 						};
 					} else {
 						columns[index] = {
-							"mDataProp" : this.innerHTML,
-							"sClass" : this.className				// TODO 有问题，对于class “a b”,只能取得“a”
+							sClass : $(this).attr("class"),
+							mDataProp : this.innerHTML
 						};
 					}
 				});
-
+				
 				var oTable = $(this).dataTable({
 					sAjaxSource : $$.rebase(url),
 					aoColumns : columns,
+					bServerSide : true,
 					sAjaxDataProp : function(data) {
 						return data;
 					},
-					bServerSide : true
+					fnRowCallback : function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+						$.each(callbacks, function(i, f) {
+							f(nRow, aData, iDisplayIndex, iDisplayIndexFull);
+						});
+						return nRow;
+					}
 				});
 				
 				$(this).data("oTable", oTable);
-				
+
 			});
+		},
+		
+		_getData : function(data, name) {
+			var result = data;
+			var ns = name.split(".");
+			for (var i = 0; i < ns.length; i++) {
+				result = result[ns[i]];
+			}
+			return result;
 		},
 		
 		renderValidator : function(el) {
@@ -209,6 +297,9 @@
 					error.insertAfter(element.parent().find('label:first'));
 				}
 			});
+			
+			if (validator == undefined)
+				return;
 			
 			validator.onsubmit = false;
 			
@@ -281,4 +372,4 @@
 		
 	});
 
-})(jQuery, jnebula);
+})(jQuery, jnebula, document);

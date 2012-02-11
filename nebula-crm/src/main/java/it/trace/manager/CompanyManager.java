@@ -29,9 +29,8 @@ public class CompanyManager extends BaseDao<Company> {
 		return 1;
 	}
 
-	public int delete(long id) {
+	public void delete(Integer id) {
 		super.removeObject(Company.class, id);
-		return 1;
 	}
 
 	public static void main(String[] args) {
@@ -50,10 +49,7 @@ public class CompanyManager extends BaseDao<Company> {
 		touchList.add(touch);
 		con.setTouchList(touchList);
 		contactList.add(con);
-		
 		com.setContactList(contactList);
-		
-		
 		cm.insert(com);
 		
 		List<Company> list = cm.selectAll();

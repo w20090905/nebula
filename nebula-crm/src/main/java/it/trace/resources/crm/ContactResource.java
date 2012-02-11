@@ -24,10 +24,6 @@ public class ContactResource {
 
 	private List<Contact> list;
 
-	public List<Contact> getList() {
-		return list;
-	}
-
 	private Long id;
 
 	public void setId(Long id) {
@@ -54,14 +50,19 @@ public class ContactResource {
 		manager.insert(contact);
 		return "success";
 	}
-	
+
 	public Contact view(String id) {
 		return manager.select(Integer.valueOf(id));
 	}
 
+	public List<Contact> getByContact(int companyId) {
+		this.list = manager.getContactByCompany(companyId);
+		return list;
+	}
+
 	// TODO 名字
 	public String editable() {
-//		this.contact = manager.select(id);
+		// this.contact = manager.select(id);
 		return "success";
 	}
 
@@ -72,7 +73,7 @@ public class ContactResource {
 
 	// TODO 名字
 	public String removable() {
-//		this.contact = manager.select(id);
+		// this.contact = manager.select(id);
 		return "success";
 	}
 
@@ -102,10 +103,12 @@ public class ContactResource {
 						|| "remove".equals(method.getName())) {
 					return new Object[] { Long.parseLong((String) context
 							.getParameter("id")) };
-				}else if ("view".equals(method.getName())) {
-                    String id = context.getId();
-                    return new Object[] { id };
-                } 
+				} else if ("view".equals(method.getName())) {
+					String id = context.getId();
+					return new Object[] { id };
+				} else if ("getByContact".equals(method.getName())) {
+					return new Object[] { Integer.valueOf(context.getId()) };
+				}
 
 				return null;
 			}

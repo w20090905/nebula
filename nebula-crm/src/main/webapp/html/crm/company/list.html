@@ -7,6 +7,7 @@
 			<th>ID</th>
 			<th>公司名称</th>
 			<th>电话</th>
+			<th>联系人</th>
 			<th>地址</th>
 			<th>备注</th>
 			<th></th>
@@ -15,8 +16,9 @@
 	<tbody>
 		<tr>
 			<td class="primary">id</td>
-			<td>name</td>
+			<td refer="crm/company/" referby="id">name</td>
 			<td>tel</td>
+			<td refers="crm/contact!getByContact/" referby="id">link</td>
 			<td>address</td>
 			<td>description</td>
 			<td class="actions">edit,delete</td>
@@ -27,6 +29,7 @@
 			<th>ID</th>
 			<th>公司名称</th>
 			<th>电话</th>
+			<th>联系人</th>
 			<th>地址</th>
 			<th>备注</th>
 			<th></th>

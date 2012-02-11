@@ -36,10 +36,10 @@ public class DispatcherFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
 
         System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("context = " + request.getContextPath());
         System.out.println("url = " + request.getServletPath());
         System.out.println("method = " + RequestHelper.getHttpMethod(request));
-        System.out.println("accept = " + RequestHelper.getAccept(request));
-        System.out.println("shanghai");
+        System.out.println("accepdt = " + RequestHelper.getAccept(request));
         System.out.println("------------------------------------------");
 
 
