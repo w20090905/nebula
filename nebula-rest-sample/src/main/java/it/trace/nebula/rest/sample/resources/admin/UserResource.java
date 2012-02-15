@@ -119,6 +119,8 @@ public class UserResource {
     }
 
     public void update(User user) {
+        User u = users.get(user.getUsername());
+        user.setBook(u.getBook());
         users.put(user.getUsername(), user);
     }
 
