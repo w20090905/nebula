@@ -154,7 +154,7 @@
 						return false;
 					}
 					$.ajax({
-						type : form.method,
+						type : $(form).attr("method"),
 						url : form.action,
 			        	data : $.each($(form).serializeArray(), function(i, f) {
 							if (f.name == "password" || f.name == "password_confirm") {
@@ -164,7 +164,9 @@
 						dataType : "json",
 						async : false,
 						success : function(data) {
-							$.nmTop().close();
+							if ($.nmTop() != undefined) {
+								$.nmTop().close();
+							}
 							// ++++++++++++++++++++++++++++++++++++++++++++
 							$("table.toplevel").each(function(i, e) {
 								$(e).data("oTable").fnDraw();
