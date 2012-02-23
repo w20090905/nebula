@@ -3,7 +3,24 @@
 			
 	};
 	window.jnebula = window.$$ = jnebula;
+
+	$.address.init();
+	$.address.autoUpdate(false);
+	$.address.strict(false);
+	$.address.change(function(event) {
+		var url = $.address.value();
+		if (url == "") {
+			return;
+		}
+		$.get(url, function(data) {
+			var ws = $("#main-section").html(data);
+			$$.renderTable(ws);
+			$$.renderPopup(ws);
+		});
+	});
+
 })();
+
 
 (function($, $$, document) {
 	
@@ -39,15 +56,23 @@
 			});
 		},
 		
-		navigate : function(url) {
+		navigate : function(url, args) {
+			
+			$.address.value(url);
+			$.address.update();
+
 			$.get(url, function(data) {
 
 				var ws = $("#main-section").html(data);
 				
 				$$.renderTable(ws);
 				$$.renderPopup(ws);
+				$$.renderTemplate(ws, args);
+				$$.renderValidator(ws);
+				$$.renderSubmit(ws);
 				
 			});
+			
 		},
 
 		popUp : function(url, args) {
@@ -90,9 +115,9 @@
 				dataType : "json",
 				async : false,
 				success : function(data) {
-					$.each($(el).find("input, select, textarea").not("input[name='password'], input[name='password_confirm'], :submit, :button, :reset, :image"), function(i, e) {
+					$.each($(el).find("input, select, textarea, span[name]").not("input[name='password'], input[name='password_confirm'], :submit, :button, :reset, :image"), function(i, e) {
 						
-						var v = data[e.name];
+						var v = data[$(e).attr("name")];
 						
 						if (v == undefined) {
 							return true;
@@ -102,6 +127,10 @@
 							e.checked = e.value == v ? true : false;
 						} else {
 							e.value = v;
+						}
+
+						if ($(e).is("span")) {
+							e.innerHTML = v;
 						}
 						
 					});
@@ -125,7 +154,7 @@
 						return false;
 					}
 					$.ajax({
-						type : form.method,
+						type : $(form).attr("method"),
 						url : form.action,
 			        	data : $.each($(form).serializeArray(), function(i, f) {
 							if (f.name == "password" || f.name == "password_confirm") {
@@ -135,7 +164,9 @@
 						dataType : "json",
 						async : false,
 						success : function(data) {
-							$.nmTop().close();
+							if ($.nmTop() != undefined) {
+								$.nmTop().close();
+							}
 							// ++++++++++++++++++++++++++++++++++++++++++++
 							$("table.toplevel").each(function(i, e) {
 								$(e).data("oTable").fnDraw();
@@ -179,7 +210,7 @@
 								a.attr("rev", "modal");
 								a.html("<img src='img/page_save.png'/>");
 								a.click(function() {
-									$$.popUp(updateUrl, { url : ownUrl });
+									$$.navigate(updateUrl, { url : ownUrl });
 									return false;
 								});
 								td.append(a);
@@ -196,7 +227,7 @@
 								a.attr("rev", "modal");
 								a.html("<img src='img/delete.png'/>");
 								a.click(function() {
-									$$.popUp(removeUrl, { url : ownUrl });
+									$$.navigate(removeUrl, { url : ownUrl });
 									return false;
 								});
 								td.append(a);
@@ -212,12 +243,12 @@
 						callbacks[callbacks.length] = function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
 							var td = $("td:eq(" + index + ")", nRow);
 							var ownUrl = refer + $$._getData(aData, referby) + "" + "/";
-							var referUrl = $$.rebase("html/" + refer + "editable.html");
+							var referUrl = $$.rebase("html/" + refer + "view.html");
 							var a = $(document.createElement("a"));
 							a.attr("href", ownUrl);
 							a.html(td.html());
 							a.click(function() {
-								$$.popUp(referUrl, { url : ownUrl });
+								$$.navigate(referUrl, { url : ownUrl });
 								return false;
 							});
 							td.empty();
@@ -244,7 +275,7 @@
 							a.attr("href", ownUrl);
 							a.html("+");
 							a.click(function() {
-								$$.popUp(referUrl, { url : ownUrl });
+								$$.navigate(referUrl, { url : ownUrl });
 								return false;
 							});
 							td.empty();

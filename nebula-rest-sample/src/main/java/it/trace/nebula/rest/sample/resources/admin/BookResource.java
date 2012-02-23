@@ -94,7 +94,7 @@ public class BookResource {
     }
 
     public List<Book> getByUser(String userName) {
-        return new ArrayList<Book>(books.values());
+        return new ArrayList<Book>(books.values()).subList(0, 1);
     }
 
     public static DataBinder<Book> createDataBinder() {
