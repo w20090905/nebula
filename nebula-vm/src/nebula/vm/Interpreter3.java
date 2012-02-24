@@ -582,10 +582,10 @@ public class Interpreter3 {
 
 	protected void trace(int ip, int base) {
 		FunctionSymbol func = calls[fp];
-		if (ip == 0) {
-			System.out.println("");
-			System.out.println("Enter .function " + func.definedClass.name + "." + func.name);
-		}
+//		if (ip == 0) {
+//			System.out.println("");
+//			System.out.println("Enter .function " + func.definedClass.name + "." + func.name);
+//		}
 		disasm.disassembleInstruction(func.code, func.getConstPool(), ip);
 
 		// int[] r = currentfFrame.registers;

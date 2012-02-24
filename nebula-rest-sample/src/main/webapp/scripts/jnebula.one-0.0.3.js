@@ -56,7 +56,7 @@
 			});
 		},
 		
-		navigate : function(url, args) {
+		navigate : function(url) {
 			
 			$.address.value(url);
 			$.address.update();
@@ -75,7 +75,7 @@
 			
 		},
 
-		popUp : function(url, args) {
+		popUp : function(url) {
 			$.nmManual(url, {
 				sizes : {
 					initW : 1200,
@@ -106,7 +106,7 @@
 			if (args == undefined || args["url"] == undefined) {
 				return;
 			}
-
+alert(args["url"]);
 			$("form", el).attr("action", args["url"]);
 			
 			$.ajax({
