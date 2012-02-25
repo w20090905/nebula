@@ -3,6 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="testsrc"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/nebula-compiler/lib/antlr-3.4-complete.jar" sourcepath="D:/antlr/antlr-3.4/runtime/Java/src/main"/>
+	<classpathentry kind="lib" path="lib/antlr-3.4-complete.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

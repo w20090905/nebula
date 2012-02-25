@@ -9,7 +9,7 @@ package nebula.vm;
  * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book
  * information.
  ***/
-public class ClassSymbol {
+public class ClassSymbol implements Type{
 	String name;
 	Object[] poolLocalK;
 	FunctionSymbol[] functions;
@@ -32,10 +32,10 @@ public class ClassSymbol {
 	public boolean equals(Object o) {
 		return o instanceof ClassSymbol && name.equals(((ClassSymbol) o).name);
 	}
-	
-	public FunctionSymbol getEntryPoint(){
-		for(int i=0;i<functions.length;i++){
-			if(functions[i].name.equals("main")){
+
+	public FunctionSymbol getEntryPoint() {
+		for (int i = 0; i < functions.length; i++) {
+			if (functions[i].name.equals("main")) {
 				return functions[i];
 			}
 		}
@@ -64,5 +64,10 @@ public class ClassSymbol {
 	@Override
 	public String toString() {
 		return "FunctionSymbol{" + "name='" + name + '\'' + '}';
+	}
+
+	@Override
+	public String getName() {
+		return this.name;
 	}
 }
