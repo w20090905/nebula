@@ -1,12 +1,9 @@
-grammar Expr;
+grammar Nebula;
 
 // START:members
 @lexer::header {package nebula.vm;}
 @header {
 package nebula.vm;
-import java.util.ArrayList;
-import java.util.List;
-import static nebula.vm.BytecodeDefinition.*;
 import nebula.vm.VariableSymbol;
 }
 
@@ -33,11 +30,10 @@ import nebula.vm.VariableSymbol;
 
 }
 
-
 // END:members
 
 // START:stat
-prog:   stat+ ;
+program:   stat+ ;
                 
 stat:   // evaluate expr and emit result
         // $expr.value is return attribute 'value' from expr call

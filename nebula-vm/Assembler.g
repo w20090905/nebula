@@ -1,5 +1,7 @@
 grammar Assembler;
 
+@lexer::header {package nebula.vm;}
+@header {package nebula.vm;}
 
 // START: members
 @members {
@@ -19,6 +21,7 @@ grammar Assembler;
     
 }
 // END: members
+
 
 program
     :   globals? classDeclaration? fieldDeclaration*

@@ -51,6 +51,7 @@ import static nebula.vm.BytecodeDefinition.OFFSET_OP;
 import static nebula.vm.BytecodeDefinition.TRUE;
 import static nebula.vm.BytecodeDefinition.instructions;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -61,7 +62,7 @@ import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 
 /** A simple stack-based interpreter */
-public class Interpreter3 {
+public class Interpreter {
 	public static final int DEFAULT_OPERAND_STACK_SIZE = 100;
 	public static final int DEFAULT_CALL_STACK_SIZE = 1000;
 
@@ -117,11 +118,11 @@ public class Interpreter3 {
 		}
 	}
 
-	public Interpreter3() {
+	public Interpreter() {
 		this(false);
 	}
 
-	public Interpreter3(boolean trace) {
+	public Interpreter(boolean trace) {
 		this.trace = trace;
 		for (int i = 0; i < DEFAULT_PREPAREED_NUMBER_STRING_RANGE; i++) {
 			indexOf(String.valueOf(i));
@@ -171,8 +172,8 @@ public class Interpreter3 {
 		if (filename != null) input = new FileInputStream(filename);
 		else input = System.in;
 
-		Interpreter3 interpreter = new Interpreter3(trace);
-		ClassSymbol clz = load(input);
+		Interpreter interpreter = new Interpreter(trace);
+		ClassSymbol clz = loadFromASM(input);
 		interpreter.resolve(clz);
 		interpreter.exec(interpreter.resolve(clz.getEntryPoint()));
 		if (disassemble) interpreter.disassemble();
@@ -188,7 +189,7 @@ public class Interpreter3 {
 		}
 	}
 
-	public ClassSymbol loadClass(String className) {
+	private ClassSymbol loadClass(String className) {
 		ClassSymbol classSymbol = load(className + ".rc2");
 		this.resolve(classSymbol);
 		return classSymbol;
@@ -196,22 +197,45 @@ public class Interpreter3 {
 
 	public static ClassSymbol load(String filename) {
 		try {
-			InputStream input = new FileInputStream(filename);
-			return load(input);
+			File file = new File(filename);
+			if (!file.exists() || !file.isFile()) {
+				file = new File(filename + ".b");
+			}
+			if (!file.exists() || !file.isFile()) {
+				file = new File(filename + ".n");
+			}
+			if (!file.exists() || !file.isFile()) {
+				file = new File(filename + ".asm");
+			}
+			if (!file.exists() || !file.isFile()) {
+				throw new RuntimeException("Can't find file " + filename);
+			}
+			filename = file.getName();
+			String ext = filename.substring(filename.lastIndexOf('.') + 1);
+			InputStream input = new FileInputStream(file);
+			ClassSymbol clz = null;
+			//@formatter:off
+			switch (ext) {
+			case "n":	clz = loadFromSource(input);	break;
+			case "asm":	clz = loadFromASM(input);		break;
+			default:	clz = loadFromBin(input);		break;
+			}
+			//@formatter:on
+			return clz;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public static ClassSymbol load(InputStream input) throws Exception {
+	private static ClassSymbol loadFromASM(InputStream input) throws Exception {
 		boolean hasErrors = false;
 		try {
-			AssemblerLexer assemblerLexer = new AssemblerLexer(new ANTLRInputStream(input));
-			CommonTokenStream tokens = new CommonTokenStream(assemblerLexer);
-			BytecodeAssembler assembler = new BytecodeAssembler(tokens, instructions);
-			assembler.program();
-			ClassSymbol clz = assembler.finished();
-			hasErrors = assembler.getNumberOfSyntaxErrors() > 0;
+			AssemblerLexer lexer = new AssemblerLexer(new ANTLRInputStream(input));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			AsmCompiler parser = new AsmCompiler(tokens, instructions);
+			parser.program();
+			ClassSymbol clz = parser.finished();
+			hasErrors = parser.getNumberOfSyntaxErrors() > 0;
 			if (!hasErrors) {
 				return clz;
 			}
@@ -221,16 +245,55 @@ public class Interpreter3 {
 		}
 	}
 
+	private static ClassSymbol loadFromSource(InputStream input) throws Exception {
+		boolean hasErrors = false;
+		try {
+			NebulaLexer lexer = new NebulaLexer(new ANTLRInputStream(input));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			SourceCompiler parser = new SourceCompiler(tokens);
+			parser.program();
+			ClassSymbol clz = parser.finished();
+			hasErrors = parser.getNumberOfSyntaxErrors() > 0;
+			if (!hasErrors) {
+				return clz;
+			}
+			throw new RuntimeException("ERROR");
+		} finally {
+			input.close();
+		}
+	}
+
+	private static ClassSymbol loadFromBin(InputStream input) throws Exception {
+		// boolean hasErrors = false;
+		// try {
+		// AssemblerLexer assemblerLexer = new AssemblerLexer(new
+		// ANTLRInputStream(input));
+		// CommonTokenStream tokens = new CommonTokenStream(assemblerLexer);
+		// BytecodeAssembler assembler = new BytecodeAssembler(tokens,
+		// instructions);
+		// assembler.program();
+		// ClassSymbol clz = assembler.finished();
+		// hasErrors = assembler.getNumberOfSyntaxErrors() > 0;
+		// if (!hasErrors) {
+		// return clz;
+		// }
+		// throw new RuntimeException("ERROR");
+		// } finally {
+		// input.close();
+		// }
+		throw new UnsupportedOperationException("loadFromBin");
+	}
+
 	/** Execute the bytecodes in code memory starting at mainAddr */
 	public void exec(FunctionSymbol mainFunction) throws Exception {
 
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 0; i++) {
 			fp = -1;
 			calls[++fp] = mainFunction;
 			cpu();
 		}
 
-		int max = 100;
+		int max = 1;
 		long start = 0, end = 0;
 		start = System.nanoTime();
 		for (int i = 0; i < max; i++) {
@@ -427,7 +490,7 @@ public class Interpreter3 {
 	}
 
 	/** Resolve Function Symbol */
-	protected FunctionSymbol resolve(FunctionSymbol func) {
+	public FunctionSymbol resolve(FunctionSymbol func) {
 		if (func.resolved) return func;
 
 		Object[] poolK = func.getConstPool();
@@ -573,19 +636,20 @@ public class Interpreter3 {
 	// }
 
 	// Tracing, dumping, ...
-	public void disassemble() {
+	private void disassemble() {
 		for (int i = 1; i <= pPoolClass; i++) {
 			ClassSymbol clz = poolClass[i];
 			disasm.disassemble(clz);
 		}
 	}
 
-	protected void trace(int ip, int base) {
+	private void trace(int ip, int base) {
 		FunctionSymbol func = calls[fp];
-//		if (ip == 0) {
-//			System.out.println("");
-//			System.out.println("Enter .function " + func.definedClass.name + "." + func.name);
-//		}
+		// if (ip == 0) {
+		// System.out.println("");
+		// System.out.println("Enter .function " + func.definedClass.name + "."
+		// + func.name);
+		// }
 		disasm.disassembleInstruction(func.code, func.getConstPool(), ip);
 
 		// int[] r = currentfFrame.registers;
@@ -612,7 +676,7 @@ public class Interpreter3 {
 		System.out.println();
 	}
 
-	public void coredump() {
+	private void coredump() {
 		for (int i = 1; i <= pPoolClass; i++) {
 			ClassSymbol clz = poolClass[i];
 
@@ -678,7 +742,7 @@ public class Interpreter3 {
 		System.out.println();
 	}
 
-	public void dumpCodeMemory(int[] code) {
+	private void dumpCodeMemory(int[] code) {
 		System.out.println("Code memory:");
 		for (int i = 0; code != null && i < code.length; i++) {
 			if (i % 8 == 0 && i != 0) System.out.println();

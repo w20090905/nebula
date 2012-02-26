@@ -30,7 +30,7 @@ import org.antlr.runtime.TokenStream;
  * Subclass the AssemblerParser to actually implement the necessary symbol table
  * management and code generation functions.
  */
-public class BytecodeAssembler extends AssemblerParser {
+public class AsmCompiler extends AssemblerParser {
 	public static final int INITIAL_CODE_SIZE = 1024;
 	protected Map<String, Integer> instructionOpcodeMapping = new HashMap<String, Integer>();
 	protected Map<String, LabelSymbol> labels = // label scope
@@ -54,7 +54,7 @@ public class BytecodeAssembler extends AssemblerParser {
 	/**
 	 * Create an assembler attached to a lexer and define the instruction set.
 	 */
-	public BytecodeAssembler(TokenStream lexer, Instruction[] instructions) {
+	public AsmCompiler(TokenStream lexer, Instruction[] instructions) {
 		super(lexer);
 		for (int i = 1; i < instructions.length; i++) {
 			instructionOpcodeMapping.put(instructions[i].name.toLowerCase(), i);

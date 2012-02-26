@@ -1,9 +1,6 @@
-// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Expr.g 2012-02-24 21:51:53
+// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Nebula.g 2012-02-26 13:09:51
 
 package nebula.vm;
-import java.util.ArrayList;
-import java.util.List;
-import static nebula.vm.BytecodeDefinition.*;
 import nebula.vm.VariableSymbol;
 
 
@@ -13,7 +10,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked"})
-public class ExprParser extends Parser {
+public class NebulaParser extends Parser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "ID", "INT", "NEWLINE", "WS", "'('", "')'", "'*'", "'+'", "'-'", "'='"
     };
@@ -38,15 +35,15 @@ public class ExprParser extends Parser {
     // delegators
 
 
-    public ExprParser(TokenStream input) {
+    public NebulaParser(TokenStream input) {
         this(input, new RecognizerSharedState());
     }
-    public ExprParser(TokenStream input, RecognizerSharedState state) {
+    public NebulaParser(TokenStream input, RecognizerSharedState state) {
         super(input, state);
     }
 
-    public String[] getTokenNames() { return ExprParser.tokenNames; }
-    public String getGrammarFileName() { return "D:\\Projects\\nebula\\nebula-vm\\Expr.g"; }
+    public String[] getTokenNames() { return NebulaParser.tokenNames; }
+    public String getGrammarFileName() { return "D:\\Projects\\nebula\\nebula-vm\\Nebula.g"; }
 
 
       /** Map variable name to Integer object holding value */
@@ -72,14 +69,14 @@ public class ExprParser extends Parser {
 
 
 
-    // $ANTLR start "prog"
-    // D:\\Projects\\nebula\\nebula-vm\\Expr.g:40:1: prog : ( stat )+ ;
-    public final void prog() throws RecognitionException {
+    // $ANTLR start "program"
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:36:1: program : ( stat )+ ;
+    public final void program() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Expr.g:40:5: ( ( stat )+ )
-            // D:\\Projects\\nebula\\nebula-vm\\Expr.g:40:9: ( stat )+
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:36:8: ( ( stat )+ )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:36:12: ( stat )+
             {
-            // D:\\Projects\\nebula\\nebula-vm\\Expr.g:40:9: ( stat )+
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:36:12: ( stat )+
             int cnt1=0;
             loop1:
             do {
@@ -93,9 +90,9 @@ public class ExprParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Expr.g:40:9: stat
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:36:12: stat
             	    {
-            	    pushFollow(FOLLOW_stat_in_prog36);
+            	    pushFollow(FOLLOW_stat_in_program35);
             	    stat();
 
             	    state._fsp--;
@@ -127,12 +124,12 @@ public class ExprParser extends Parser {
         }
         return ;
     }
-    // $ANTLR end "prog"
+    // $ANTLR end "program"
 
 
 
     // $ANTLR start "stat"
-    // D:\\Projects\\nebula\\nebula-vm\\Expr.g:42:1: stat : ( expr NEWLINE | ID '=' expr NEWLINE | NEWLINE );
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:38:1: stat : ( expr NEWLINE | ID '=' expr NEWLINE | NEWLINE );
     public final void stat() throws RecognitionException {
         Token ID2=null;
         VariableSymbol expr1 =null;
@@ -141,7 +138,7 @@ public class ExprParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Expr.g:42:5: ( expr NEWLINE | ID '=' expr NEWLINE | NEWLINE )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:38:5: ( expr NEWLINE | ID '=' expr NEWLINE | NEWLINE )
             int alt2=3;
             switch ( input.LA(1) ) {
             case INT:
@@ -184,43 +181,43 @@ public class ExprParser extends Parser {
 
             switch (alt2) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Expr.g:44:9: expr NEWLINE
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:40:9: expr NEWLINE
                     {
-                    pushFollow(FOLLOW_expr_in_stat81);
+                    pushFollow(FOLLOW_expr_in_stat80);
                     expr1=expr();
 
                     state._fsp--;
 
 
-                    match(input,NEWLINE,FOLLOW_NEWLINE_in_stat83); 
+                    match(input,NEWLINE,FOLLOW_NEWLINE_in_stat82); 
 
                      eval(expr1);
 
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Expr.g:48:9: ID '=' expr NEWLINE
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:44:9: ID '=' expr NEWLINE
                     {
-                    ID2=(Token)match(input,ID,FOLLOW_ID_in_stat116); 
+                    ID2=(Token)match(input,ID,FOLLOW_ID_in_stat115); 
 
-                    match(input,13,FOLLOW_13_in_stat118); 
+                    match(input,13,FOLLOW_13_in_stat117); 
 
-                    pushFollow(FOLLOW_expr_in_stat120);
+                    pushFollow(FOLLOW_expr_in_stat119);
                     expr3=expr();
 
                     state._fsp--;
 
 
-                    match(input,NEWLINE,FOLLOW_NEWLINE_in_stat122); 
+                    match(input,NEWLINE,FOLLOW_NEWLINE_in_stat121); 
 
                     evalSet((ID2!=null?ID2.getText():null),expr3);
 
                     }
                     break;
                 case 3 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Expr.g:52:9: NEWLINE
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:48:9: NEWLINE
                     {
-                    match(input,NEWLINE,FOLLOW_NEWLINE_in_stat154); 
+                    match(input,NEWLINE,FOLLOW_NEWLINE_in_stat153); 
 
                     }
                     break;
@@ -242,7 +239,7 @@ public class ExprParser extends Parser {
 
 
     // $ANTLR start "expr"
-    // D:\\Projects\\nebula\\nebula-vm\\Expr.g:60:1: expr returns [VariableSymbol value] : e= multExpr ( '+' e= multExpr | '-' e= multExpr )* ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:56:1: expr returns [VariableSymbol value] : e= multExpr ( '+' e= multExpr | '-' e= multExpr )* ;
     public final VariableSymbol expr() throws RecognitionException {
         VariableSymbol value = null;
 
@@ -251,10 +248,10 @@ public class ExprParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Expr.g:61:5: (e= multExpr ( '+' e= multExpr | '-' e= multExpr )* )
-            // D:\\Projects\\nebula\\nebula-vm\\Expr.g:61:9: e= multExpr ( '+' e= multExpr | '-' e= multExpr )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:57:5: (e= multExpr ( '+' e= multExpr | '-' e= multExpr )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:57:9: e= multExpr ( '+' e= multExpr | '-' e= multExpr )*
             {
-            pushFollow(FOLLOW_multExpr_in_expr183);
+            pushFollow(FOLLOW_multExpr_in_expr182);
             e=multExpr();
 
             state._fsp--;
@@ -262,7 +259,7 @@ public class ExprParser extends Parser {
 
             value = e;
 
-            // D:\\Projects\\nebula\\nebula-vm\\Expr.g:62:9: ( '+' e= multExpr | '-' e= multExpr )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:58:9: ( '+' e= multExpr | '-' e= multExpr )*
             loop3:
             do {
                 int alt3=3;
@@ -278,11 +275,11 @@ public class ExprParser extends Parser {
 
                 switch (alt3) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Expr.g:62:13: '+' e= multExpr
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:58:13: '+' e= multExpr
             	    {
-            	    match(input,11,FOLLOW_11_in_expr199); 
+            	    match(input,11,FOLLOW_11_in_expr198); 
 
-            	    pushFollow(FOLLOW_multExpr_in_expr203);
+            	    pushFollow(FOLLOW_multExpr_in_expr202);
             	    e=multExpr();
 
             	    state._fsp--;
@@ -293,11 +290,11 @@ public class ExprParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Expr.g:63:13: '-' e= multExpr
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:59:13: '-' e= multExpr
             	    {
-            	    match(input,12,FOLLOW_12_in_expr219); 
+            	    match(input,12,FOLLOW_12_in_expr218); 
 
-            	    pushFollow(FOLLOW_multExpr_in_expr223);
+            	    pushFollow(FOLLOW_multExpr_in_expr222);
             	    e=multExpr();
 
             	    state._fsp--;
@@ -332,7 +329,7 @@ public class ExprParser extends Parser {
 
 
     // $ANTLR start "multExpr"
-    // D:\\Projects\\nebula\\nebula-vm\\Expr.g:74:1: multExpr returns [VariableSymbol value] : e= atom ( '*' e= atom )* ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:70:1: multExpr returns [VariableSymbol value] : e= atom ( '*' e= atom )* ;
     public final VariableSymbol multExpr() throws RecognitionException {
         VariableSymbol value = null;
 
@@ -341,10 +338,10 @@ public class ExprParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Expr.g:75:5: (e= atom ( '*' e= atom )* )
-            // D:\\Projects\\nebula\\nebula-vm\\Expr.g:75:9: e= atom ( '*' e= atom )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:71:5: (e= atom ( '*' e= atom )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:71:9: e= atom ( '*' e= atom )*
             {
-            pushFollow(FOLLOW_atom_in_multExpr265);
+            pushFollow(FOLLOW_atom_in_multExpr264);
             e=atom();
 
             state._fsp--;
@@ -352,7 +349,7 @@ public class ExprParser extends Parser {
 
             value = e;
 
-            // D:\\Projects\\nebula\\nebula-vm\\Expr.g:76:5: ( '*' e= atom )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:72:5: ( '*' e= atom )*
             loop4:
             do {
                 int alt4=2;
@@ -365,11 +362,11 @@ public class ExprParser extends Parser {
 
                 switch (alt4) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Expr.g:76:6: '*' e= atom
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:72:6: '*' e= atom
             	    {
-            	    match(input,10,FOLLOW_10_in_multExpr275); 
+            	    match(input,10,FOLLOW_10_in_multExpr274); 
 
-            	    pushFollow(FOLLOW_atom_in_multExpr279);
+            	    pushFollow(FOLLOW_atom_in_multExpr278);
             	    e=atom();
 
             	    state._fsp--;
@@ -404,7 +401,7 @@ public class ExprParser extends Parser {
 
 
     // $ANTLR start "atom"
-    // D:\\Projects\\nebula\\nebula-vm\\Expr.g:82:1: atom returns [VariableSymbol value] : ( INT | ID | '(' expr ')' );
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:78:1: atom returns [VariableSymbol value] : ( INT | ID | '(' expr ')' );
     public final VariableSymbol atom() throws RecognitionException {
         VariableSymbol value = null;
 
@@ -415,7 +412,7 @@ public class ExprParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Expr.g:83:5: ( INT | ID | '(' expr ')' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:79:5: ( INT | ID | '(' expr ')' )
             int alt5=3;
             switch ( input.LA(1) ) {
             case INT:
@@ -443,35 +440,35 @@ public class ExprParser extends Parser {
 
             switch (alt5) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Expr.g:84:9: INT
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:80:9: INT
                     {
-                    INT4=(Token)match(input,INT,FOLLOW_INT_in_atom324); 
+                    INT4=(Token)match(input,INT,FOLLOW_INT_in_atom323); 
 
                     value = defineInt((INT4!=null?INT4.getText():null));
 
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Expr.g:86:9: ID
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:82:9: ID
                     {
-                    ID5=(Token)match(input,ID,FOLLOW_ID_in_atom337); 
+                    ID5=(Token)match(input,ID,FOLLOW_ID_in_atom336); 
 
                     value = resolve((ID5!=null?ID5.getText():null));
 
                     }
                     break;
                 case 3 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Expr.g:96:9: '(' expr ')'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:92:9: '(' expr ')'
                     {
-                    match(input,8,FOLLOW_8_in_atom366); 
+                    match(input,8,FOLLOW_8_in_atom365); 
 
-                    pushFollow(FOLLOW_expr_in_atom368);
+                    pushFollow(FOLLOW_expr_in_atom367);
                     expr6=expr();
 
                     state._fsp--;
 
 
-                    match(input,9,FOLLOW_9_in_atom370); 
+                    match(input,9,FOLLOW_9_in_atom369); 
 
                     value = expr6;
 
@@ -497,26 +494,26 @@ public class ExprParser extends Parser {
 
  
 
-    public static final BitSet FOLLOW_stat_in_prog36 = new BitSet(new long[]{0x0000000000000172L});
-    public static final BitSet FOLLOW_expr_in_stat81 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_NEWLINE_in_stat83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_stat116 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_stat118 = new BitSet(new long[]{0x0000000000000130L});
-    public static final BitSet FOLLOW_expr_in_stat120 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_NEWLINE_in_stat122 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_NEWLINE_in_stat154 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_multExpr_in_expr183 = new BitSet(new long[]{0x0000000000001802L});
-    public static final BitSet FOLLOW_11_in_expr199 = new BitSet(new long[]{0x0000000000000130L});
-    public static final BitSet FOLLOW_multExpr_in_expr203 = new BitSet(new long[]{0x0000000000001802L});
-    public static final BitSet FOLLOW_12_in_expr219 = new BitSet(new long[]{0x0000000000000130L});
-    public static final BitSet FOLLOW_multExpr_in_expr223 = new BitSet(new long[]{0x0000000000001802L});
-    public static final BitSet FOLLOW_atom_in_multExpr265 = new BitSet(new long[]{0x0000000000000402L});
-    public static final BitSet FOLLOW_10_in_multExpr275 = new BitSet(new long[]{0x0000000000000130L});
-    public static final BitSet FOLLOW_atom_in_multExpr279 = new BitSet(new long[]{0x0000000000000402L});
-    public static final BitSet FOLLOW_INT_in_atom324 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_atom337 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_8_in_atom366 = new BitSet(new long[]{0x0000000000000130L});
-    public static final BitSet FOLLOW_expr_in_atom368 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_9_in_atom370 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_stat_in_program35 = new BitSet(new long[]{0x0000000000000172L});
+    public static final BitSet FOLLOW_expr_in_stat80 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_NEWLINE_in_stat82 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_stat115 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_stat117 = new BitSet(new long[]{0x0000000000000130L});
+    public static final BitSet FOLLOW_expr_in_stat119 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_NEWLINE_in_stat121 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NEWLINE_in_stat153 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_multExpr_in_expr182 = new BitSet(new long[]{0x0000000000001802L});
+    public static final BitSet FOLLOW_11_in_expr198 = new BitSet(new long[]{0x0000000000000130L});
+    public static final BitSet FOLLOW_multExpr_in_expr202 = new BitSet(new long[]{0x0000000000001802L});
+    public static final BitSet FOLLOW_12_in_expr218 = new BitSet(new long[]{0x0000000000000130L});
+    public static final BitSet FOLLOW_multExpr_in_expr222 = new BitSet(new long[]{0x0000000000001802L});
+    public static final BitSet FOLLOW_atom_in_multExpr264 = new BitSet(new long[]{0x0000000000000402L});
+    public static final BitSet FOLLOW_10_in_multExpr274 = new BitSet(new long[]{0x0000000000000130L});
+    public static final BitSet FOLLOW_atom_in_multExpr278 = new BitSet(new long[]{0x0000000000000402L});
+    public static final BitSet FOLLOW_INT_in_atom323 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_atom336 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_8_in_atom365 = new BitSet(new long[]{0x0000000000000130L});
+    public static final BitSet FOLLOW_expr_in_atom367 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_atom369 = new BitSet(new long[]{0x0000000000000002L});
 
 }

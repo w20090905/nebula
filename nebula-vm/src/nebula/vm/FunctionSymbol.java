@@ -5,8 +5,8 @@ public class FunctionSymbol {
 	final String name;
 	final int hashcode;
 
-	final int nargs; // how many arguments are there?
-	final int nlocals; // how many locals are there?
+	int nargs; // how many arguments are there?
+	int nlocals; // how many locals are there?
 	int[] code;
 
 	boolean resolved = false;

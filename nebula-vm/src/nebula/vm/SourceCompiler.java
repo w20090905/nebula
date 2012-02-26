@@ -1,9 +1,15 @@
 package nebula.vm;
 
+import static nebula.vm.BytecodeDefinition.INSTR_HALT;
+import static nebula.vm.BytecodeDefinition.INSTR_IADD;
+import static nebula.vm.BytecodeDefinition.INSTR_ICONST;
+import static nebula.vm.BytecodeDefinition.INSTR_IMUL;
+import static nebula.vm.BytecodeDefinition.INSTR_ISUB;
+import static nebula.vm.BytecodeDefinition.INSTR_MOVE;
 import static nebula.vm.BytecodeDefinition.MASK_XX;
 import static nebula.vm.BytecodeDefinition.MASK_X_;
 import static nebula.vm.BytecodeDefinition.OFFSET_A_;
-import static nebula.vm.BytecodeDefinition.*;
+import static nebula.vm.BytecodeDefinition.OFFSET_BX;
 import static nebula.vm.BytecodeDefinition.OFFSET_B_;
 import static nebula.vm.BytecodeDefinition.OFFSET_C_;
 import static nebula.vm.BytecodeDefinition.OFFSET_OP;
@@ -12,11 +18,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 import org.antlr.runtime.TokenStream;
 
-public class Compiler extends ExprParser {
+public class SourceCompiler extends NebulaParser {
 	public static final int INITIAL_CODE_SIZE = 1024;
 	protected Map<String, Integer> instructionOpcodeMapping = new HashMap<String, Integer>();
 	protected Map<String, LabelSymbol> labels = // label scope
@@ -28,7 +33,7 @@ public class Compiler extends ExprParser {
 	protected List<Object> poolLocalK = new ArrayList<>();
 	protected List<FunctionSymbol> functions = new ArrayList<>();
 	protected List<FieldSymbol> fields = new ArrayList<>();
-
+	
 	protected int ip = 0; // Instruction address pointer; used to fill code
 	protected int[] codeBuffer = new int[INITIAL_CODE_SIZE]; // code memory
 
@@ -37,14 +42,19 @@ public class Compiler extends ExprParser {
 	protected FunctionSymbol currentFunction;
 	protected ClassSymbol currentClass;
 
-	public Compiler(TokenStream input) {
+	public SourceCompiler(TokenStream input) {
 		super(input);
-		currentClass = new ClassSymbol("default");
-		currentFunction = new FunctionSymbol(currentClass, "default");
 	}
 
 	List<VariableSymbol> locals = new ArrayList<>();
-	Stack<VariableSymbol> tmps = new Stack<>();
+	short maxLocals = 0;
+	
+	private void addLocals(VariableSymbol var){
+		locals.add(var);
+		maxLocals = maxLocals>(short)locals.size()?maxLocals:(short)locals.size();
+	}
+	
+	
 
 	@Override
 	protected VariableSymbol resolve(String name) {
@@ -67,7 +77,7 @@ public class Compiler extends ExprParser {
 
 	protected VariableSymbol defineVariable(String name, Type type) {
 		VariableSymbol var = new VariableSymbol(name, type, (short) locals.size());
-		locals.add(var);
+		addLocals(var);
 		System.out.println("var " + var);
 		return var;
 	}
@@ -75,7 +85,7 @@ public class Compiler extends ExprParser {
 	protected VariableSymbol defineInt(String value, Type type) {
 		VariableSymbol var = new VariableSymbol(value,type,ip,1);
 		System.out.println("const	" + var);
-		locals.add(var);
+		addLocals(var);
 		gen(INSTR_ICONST, var.reg, Integer.parseInt(value));
 		return var;
 	}
@@ -118,21 +128,27 @@ public class Compiler extends ExprParser {
 	};
 
 	public ClassSymbol finished() {
+
+		if(currentClass==null){
+			currentClass = new ClassSymbol("Anonymous");	
+			toLocalConstantPoolIndex(this.currentClass);		
+		}
+		if(functions.size()==0){
+			currentFunction = new FunctionSymbol(currentClass, "main");
+			currentFunction.nlocals = maxLocals;
+			toLocalConstantPoolIndex(currentFunction); // save into constant
+			this.functions.add(currentFunction);
+			gen(INSTR_HALT);
+		}
+		
 		if (currentFunction != null) {
 			int[] code = new int[ip];
 			System.arraycopy(codeBuffer, 0, code, 0, ip);
-			currentFunction.code = code;
+			this.currentFunction.code = code;
 		}
-		currentClass.poolLocalK = poolLocalK.toArray();
+
+		currentClass.poolLocalK = this.poolLocalK.toArray();
 		currentClass.fields = this.fields.toArray(new FieldSymbol[0]);
-		if(this.functions.size()==0){
-			toLocalConstantPoolIndex(this.currentClass);			
-			this.functions.add(currentFunction);
-			
-			if (poolLocalK.contains(currentFunction)) poolLocalK.set(poolLocalK.indexOf(currentFunction), currentFunction);
-			else toLocalConstantPoolIndex(currentFunction); // save into constant
-				
-		}
 		currentClass.functions = this.functions.toArray(new FunctionSymbol[0]);
 		return currentClass;
 	}
@@ -166,7 +182,7 @@ public class Compiler extends ExprParser {
 		} else {
 			// add new temp variable
 			var = new VariableSymbol("Temp" + locals.size(), SymbolTable._int, ip, 1);
-			locals.add(var);
+			addLocals(var);
 		}
 		System.out.println("bop 	" + var);
 		return var;
