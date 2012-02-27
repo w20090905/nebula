@@ -168,12 +168,13 @@ public class Interpreter {
 			}
 		}
 
-		InputStream input = null;
-		if (filename != null) input = new FileInputStream(filename);
-		else input = System.in;
-
+		ClassSymbol clz = null;
+		if (filename != null) {
+			clz = load(filename);
+		} else {
+			clz = loadFromSource(System.in);
+		}
 		Interpreter interpreter = new Interpreter(trace);
-		ClassSymbol clz = loadFromASM(input);
 		interpreter.resolve(clz);
 		interpreter.exec(interpreter.resolve(clz.getEntryPoint()));
 		if (disassemble) interpreter.disassemble();
