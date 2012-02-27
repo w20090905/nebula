@@ -5,6 +5,8 @@ import it.trace.entity.Touch;
 
 import java.util.List;
 
+import org.hibernate.Query;
+
 public class TouchManager extends BaseDao<Touch> {
 
 	@SuppressWarnings("unchecked")
@@ -38,5 +40,12 @@ public class TouchManager extends BaseDao<Touch> {
 			System.out.println(admin.getMemo() + "\t");
 
 		}
+	}
+
+	public List<Touch> getTouchByContact(int contactId) {
+		 String HQL = "select t from Touch t where t.contact.id ="+contactId;
+		 Query query = getSession().createQuery(HQL);
+		 System.out.println("HQL:"+HQL);
+		return query.list();
 	}
 }
