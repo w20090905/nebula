@@ -28,7 +28,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package test.asm.src;
+package test.asm.compile;
 /**
  * An integer or boolean expression of at most two variables.
  *

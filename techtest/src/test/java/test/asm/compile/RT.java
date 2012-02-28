@@ -27,7 +27,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package test.asm.src;
+package test.asm.compile;
 import java.lang.invoke.CallSite;
 import java.lang.invoke.ConstantCallSite;
 import java.lang.invoke.MethodHandle;
