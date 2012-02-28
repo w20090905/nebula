@@ -22,7 +22,6 @@ grammar Assembler;
 }
 // END: members
 
-
 program
     :   globals? classDeclaration? fieldDeclaration*
         ( functionDeclaration | instr | label | NEWLINE+{finishFunction();} )+
