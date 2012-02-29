@@ -252,7 +252,7 @@ public class Interpreter {
 			NebulaLexer lexer = new NebulaLexer(new ANTLRInputStream(input));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			SourceCompiler parser = new SourceCompiler(tokens);
-			parser.program();
+			parser.compilationUnit();
 			ClassSymbol clz = parser.finished();
 			hasErrors = parser.getNumberOfSyntaxErrors() > 0;
 			if (!hasErrors) {

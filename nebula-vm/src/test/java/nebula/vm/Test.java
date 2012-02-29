@@ -34,7 +34,7 @@ public class Test {
 			NebulaLexer assemblerLexer = new NebulaLexer(new ANTLRInputStream(input));
 			CommonTokenStream tokens = new CommonTokenStream(assemblerLexer);
 			SourceCompiler parser = new SourceCompiler(tokens);
-			parser.program();
+			parser.compilationUnit();
 			ClassSymbol clz = parser.finished();
 			hasErrors = parser.getNumberOfSyntaxErrors() > 0;
 			if (!hasErrors) {

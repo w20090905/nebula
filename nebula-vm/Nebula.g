@@ -1,5 +1,9 @@
 grammar Nebula;
 
+options {
+  language = Java;
+}
+
 // START:members
 @lexer::header {package nebula.vm;}
 @header {
@@ -10,12 +14,14 @@ import nebula.vm.VariableSymbol;
 @members {
   /** Map variable name to Integer object holding value */
 
-	protected void gen(short op) {;}
-	protected void gen(short op, short a) {;}
-	protected void gen(short op, short a, short b) {;}
-	protected void gen(short op, short a, short b, short c) {;}
-	protected void gen(short op, short a, int bx) {;}
-	
+  protected void enterClass(String name) {};
+  protected void exitClass() {};
+  
+  protected void enterFunction(String name,String typeName) {;};
+  protected void exitFunction() {;};
+  
+  protected void defineField(String name,String typeName){;};
+  
   protected VariableSymbol resolve(String name) {return null;};
   protected VariableSymbol defineVariable(String name) {return null;};
   protected VariableSymbol defineInt(String name) {return null;};
@@ -32,70 +38,139 @@ import nebula.vm.VariableSymbol;
 
 // END:members
 
-// START:stat
-program:   stat+ ;
-                
-stat:   // evaluate expr and emit result
-        // $expr.value is return attribute 'value' from expr call
-        expr NEWLINE   { eval($expr.value);}
-
-        // match assignment and stored value
-        // $ID.text is text property of token matched for ID reference
-    |   ID '=' expr NEWLINE  {evalSet($ID.text,$expr.value);}
-        
-
-        // do nothing: empty statement
-    |   NEWLINE
+compilationUnit
+    :   ( classDefinition | varDeclaration | methodDeclaration )+ EOF
     ;
-// END:stat
 
-// START:expr
-/** return value of multExpr or, if '+'|'-' present, return
- *  the addition or subtraction of results from both multExpr references.
- */
-expr returns [VariableSymbol value]
-    :   e=multExpr {$value = $e.value;}
-        (   '+' e=multExpr {$value = add($value,$e.value);}
-        |   '-' e=multExpr {$value = sub($value,$e.value);}
+// START: class
+classDefinition
+    :   'class' Identifier superClass? 
+            {enterClass($Identifier.text);} 
+         '{' classMember+ '}' ';'
+            {exitClass();}         
+    ;
+    
+superClass
+  : ':' 'public' Identifier //-> ^(EXTENDS ID)
+  ;
+// END: class
+
+classMember
+  : type Identifier ('=' expression)? ';' //-> ^(FIELD_DECL type ID expression?)
+  | methodDeclaration
+  | 'public' ':' //-> // throw away; just making input valid C++
+  ;
+  
+// START: method
+methodDeclaration
+    :   type Identifier '(' formalParameters? ')' 
+          {enterFunction($Identifier.text,$type.text);}
+        block
+          {exitFunction();}
+        //-> ^(METHOD_DECL type ID formalParameters? block)
+    ;
+// END: method
+
+formalParameters
+    :   type Identifier (',' type Identifier)* //-> ^(ARG_DECL type ID)+
+    ;
+
+type:   'float'
+    |   'int'
+    | 'void'
+    | Identifier // class type name
+    ;
+
+// START: block
+block
+    :   '{' statement* '}' ;
+// END: block
+
+// START: var
+varDeclaration
+    :   type Identifier ('=' expression)? ';' //-> ^(VAR_DECL type ID expression?)
+    ;
+// END: var
+
+
+statement
+    :   block
+    | varDeclaration
+    |   'return' expression? ';' 
+    |   postfixExpression // handles function calls like f(i);
+        (   '=' expression  )?
+        ';' 
+    | ';' 
+    ;
+
+
+expressionList
+    :   expression (',' expression)* | ;
+//END: expressionList
+
+
+expression returns [VariableSymbol value]
+    :   addExpression //-> ^(EXPR addExpression)
+    ;
+
+
+// START:addExpression
+addExpression returns [VariableSymbol value]
+    :   e=multExpression {$value = $e.value;}
+        (   '+' e=multExpression {$value = add($value,$e.value);}
+        |   '-' e=multExpression {$value = sub($value,$e.value);}
         )*
     ;
-// END:expr
+// END:addExpression
 
-// START:multExpr
-/** return the value of an atom or, if '*' present, return
- *  multiplication of results from both atom references.
- *  $value is the return value of this method, $e.value
- *  is the return value of the rule labeled with e.
- */
-multExpr returns [VariableSymbol value]
-    :   e=atom {$value = $e.value;} 
-    ('*' e=atom  {$value = mul($value,$e.value);}
+// START:multExpression
+multExpression returns [VariableSymbol value]
+    :   e=postfixExpression {$value = $e.value;} 
+    ('*' e=postfixExpression  {$value = mul($value,$e.value);}
     )*
     ; 
-// END:multExpr
+// END:multExpression
+
+
+// START: call
+postfixExpression returns [VariableSymbol value]
+    :   (primary)
+      ( options {backtrack=true;}
+    : '.' Identifier '(' expressionList ')'// -> ^(CALL ^('.' $postfixExpression ID))
+    | '.' Identifier             // -> ^('.' $postfixExpression ID)
+    | '(' expressionList ')' //       -> ^(CALL $postfixExpression)
+    )*
+    ;
+// END: call
+
+
+suffix[VariableSymbol expr] returns [VariableSymbol value]
+options {backtrack=true;}
+  : '.' Identifier '(' expressionList ')'// -> ^(CALL ^('.' {$expr} ID))
+  | '.' Identifier              //-> ^('.' {$expr} Identifier)
+  | '(' expressionList ')'        //-> ^(CALL {$expr})
+  ;
+  
 
 // START:atom
-atom returns [VariableSymbol value]
+primary returns [VariableSymbol value]
     :   // value of an INT is the int computed from char sequence
-        INT {$value = defineInt($INT.text);}
-
-    |   ID {$value = resolve($ID.text);}// variable reference
-//        {
-//        // look up value of variable
-//        Integer v = (Integer)memory.get($ID.text);
-//        // if found, set return value else error
-//        if ( v!=null ) $value = v.intValue();
-//        else System.err.println("undefined variable "+$ID.text);
-//        }
-
+        Integer {$value = defineInt($Integer.text);}
+    |   Identifier {$value = resolve($Identifier.text);}// variable reference
         // value of parenthesized expression is just the expr value
-    |   '(' expr ')' {$value = $expr.value;}
+    |   '(' expression ')' {$value = $expression.value;}
     ;
 // END:atom
 
-// START:tokens
-ID  :   ('a'..'z'|'A'..'Z')+ ;
-INT :   '0'..'9'+ ;
+
+Identifier :  Letter (Letter | Digit)*;  
+Integer :  Digit Digit*;
+fragment Digit :  '0'..'9';
+fragment Letter : 'a'..'z' | 'A'..'Z';
+
 NEWLINE:'\r'? '\n' ;
-WS  :   (' '|'\t')+ {skip();} ;
-// END:tokens
+Whitespace :  (' ' | '\t' | '\f')+ {$channel=HIDDEN;};    
+SingleLineComment :
+  '//' (~('\n'|'\r'))* ('\n'|'\r'('\n')?)? {$channel=HIDDEN;};
+MultiLineComment :
+    '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
