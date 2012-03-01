@@ -16,17 +16,7 @@
  */
 package test.pdf;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
-import org.apache.pdfbox.cos.COSName;
-import org.apache.pdfbox.pdfparser.BaseParser;
-import org.apache.pdfbox.pdmodel.PDDocument;
 
 
 /**
@@ -38,96 +28,96 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 public class TestPDFParser extends TestCase
 {
     //private static Logger log = Logger.getLogger(TestFDF.class);
-
-    /**
-     * Constructor.
-     *
-     * @param name The name of the test to run.
-     */
-    public TestPDFParser( String name )
-    {
-        super( name );
-    }
-
-    /**
-     * This will get the suite of test that this class holds.
-     *
-     * @return All of the tests that this class holds.
-     */
-    public static Test suite()
-    {
-        return new TestSuite( TestPDFParser.class );
-    }
-
-    /**
-     * infamous main method.
-     *
-     * @param args The command line arguments.
-     */
-    public static void main( String[] args )
-    {
-        String[] arg = {TestPDFParser.class.getName() };
-        junit.textui.TestRunner.main( arg );
-    }
-
-    /**
-     * This will test some cos name parsing.
-     *
-     * @throws Exception If there is an exception while parsing.
-     */
-    public void testCOSName() throws Exception
-    {
-        TestParser parser = new TestParser(new ByteArrayInputStream( "/PANTONE#20116#20CV".getBytes() ) );
-        COSName name = parser.parseCOSName();
-        assertTrue("Failed to parse COSName",name.getName().equals( "PANTONE 116 CV" ));
-
-    }
-
-    /**
-     * Test some trouble PDFs, these should all parse without an issue.
-     *
-     * @throws Exception If there is an error parsing the PDF.
-     */
-    public void testParsingTroublePDFs() throws Exception
-    {
-        PDDocument doc = null;
-        try
-        {
-           doc = PDDocument.load( "src/test/resources/pdfparser/genko_oc_shiryo1.pdf");
-        }
-        finally
-        {
-            if( doc != null )
-            {
-                doc.close();
-            }
-        }
-    }
-
-    /**
-     * A simple class used to test parsing of the cos name.
-     */
-    private class TestParser extends BaseParser
-    {
-        /**
-         * Constructor.
-         * @param input The input stream.
-         * @throws IOException If there is an error during parsing.
-         */
-        public TestParser( InputStream input) throws IOException
-        {
-            super( input, false );
-        }
-
-        /**
-         * Expose the parseCOSName as public.
-         *
-         * @return The parsed cos name.
-         * @throws IOException If there is an error parsing the COSName.
-         */
-        public COSName parseCOSName() throws IOException
-        {
-            return super.parseCOSName();
-        }
-    }
+//
+//    /**
+//     * Constructor.
+//     *
+//     * @param name The name of the test to run.
+//     */
+//    public TestPDFParser( String name )
+//    {
+//        super( name );
+//    }
+//
+//    /**
+//     * This will get the suite of test that this class holds.
+//     *
+//     * @return All of the tests that this class holds.
+//     */
+//    public static Test suite()
+//    {
+//        return new TestSuite( TestPDFParser.class );
+//    }
+//
+//    /**
+//     * infamous main method.
+//     *
+//     * @param args The command line arguments.
+//     */
+//    public static void main( String[] args )
+//    {
+//        String[] arg = {TestPDFParser.class.getName() };
+//        junit.textui.TestRunner.main( arg );
+//    }
+//
+//    /**
+//     * This will test some cos name parsing.
+//     *
+//     * @throws Exception If there is an exception while parsing.
+//     */
+//    public void testCOSName() throws Exception
+//    {
+//        TestParser parser = new TestParser(new ByteArrayInputStream( "/PANTONE#20116#20CV".getBytes() ) );
+//        COSName name = parser.parseCOSName();
+//        assertTrue("Failed to parse COSName",name.getName().equals( "PANTONE 116 CV" ));
+//
+//    }
+//
+//    /**
+//     * Test some trouble PDFs, these should all parse without an issue.
+//     *
+//     * @throws Exception If there is an error parsing the PDF.
+//     */
+//    public void testParsingTroublePDFs() throws Exception
+//    {
+//        PDDocument doc = null;
+//        try
+//        {
+//           doc = PDDocument.load( "src/test/resources/pdfparser/genko_oc_shiryo1.pdf");
+//        }
+//        finally
+//        {
+//            if( doc != null )
+//            {
+//                doc.close();
+//            }
+//        }
+//    }
+//
+//    /**
+//     * A simple class used to test parsing of the cos name.
+//     */
+//    private class TestParser extends BaseParser
+//    {
+//        /**
+//         * Constructor.
+//         * @param input The input stream.
+//         * @throws IOException If there is an error during parsing.
+//         */
+//        public TestParser( InputStream input) throws IOException
+//        {
+//            super( input, false );
+//        }
+//
+//        /**
+//         * Expose the parseCOSName as public.
+//         *
+//         * @return The parsed cos name.
+//         * @throws IOException If there is an error parsing the COSName.
+//         */
+//        public COSName parseCOSName() throws IOException
+//        {
+//            return super.parseCOSName();
+//        }
+//    }
 }
