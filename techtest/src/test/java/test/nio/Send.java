@@ -21,7 +21,7 @@ public class Send {
         SocketChannel sc = SocketChannel.open();
         ByteBuffer buffer = ByteBuffer.allocate(1024);
         Selector se = Selector.open();
-        buffer.put("我是中国人,我爱我的祖国,hadeslee".getBytes());
+        buffer.put("我是祖国,hadeslee".getBytes());
         buffer.flip();
 
         sc.configureBlocking(false);

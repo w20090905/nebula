@@ -5,10 +5,6 @@ import java.io.InputStreamReader;
 
 import junit.framework.TestCase;
 
-import nebula.compiler.InputCharStream;
-import nebula.compiler.NebLexer;
-import nebula.compiler.Processor;
-
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.Lexer;
@@ -21,8 +17,6 @@ public class NebLexerTest extends TestCase {
 
     private static final String SCRIPT =
         "dsfdsfds\nsdfsdf\n";
-
-    private Processor processor = new Processor();
 
     /**
      * Unit test for AST generation.
