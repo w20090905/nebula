@@ -63,7 +63,7 @@ public class ClassSymbol implements Type{
 	}
 	@Override
 	public String toString() {
-		return "FunctionSymbol{" + "name='" + name + '\'' + '}';
+		return "Class {" + "name='" + name + '\'' + '}';
 	}
 
 	@Override

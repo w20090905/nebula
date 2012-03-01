@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Nebula.g 2012-02-29 10:14:45
+// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Nebula.g 2012-02-29 17:10:39
 
 package nebula.vm;
 import nebula.vm.VariableSymbol;
@@ -14,7 +14,7 @@ import java.util.HashMap;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class NebulaParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Digit", "Identifier", "Integer", "Letter", "MultiLineComment", "NEWLINE", "SingleLineComment", "Whitespace", "'('", "')'", "'*'", "'+'", "','", "'-'", "'.'", "':'", "';'", "'='", "'class'", "'float'", "'int'", "'public'", "'return'", "'void'", "'{'", "'}'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Digit", "Identifier", "Integer", "Letter", "MultiLineComment", "NEWLINE", "SingleLineComment", "Whitespace", "'('", "')'", "'*'", "'+'", "','", "'-'", "'.'", "':'", "';'", "'='", "'['", "']'", "'class'", "'float'", "'int'", "'public'", "'return'", "'super'", "'this'", "'void'", "'{'", "'}'"
     };
 
     public static final int EOF=-1;
@@ -36,6 +36,10 @@ public class NebulaParser extends Parser {
     public static final int T__27=27;
     public static final int T__28=28;
     public static final int T__29=29;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int T__33=33;
     public static final int Digit=4;
     public static final int Identifier=5;
     public static final int Integer=6;
@@ -103,10 +107,10 @@ public class NebulaParser extends Parser {
                 int alt1=4;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==22) ) {
+                if ( (LA1_0==24) ) {
                     alt1=1;
                 }
-                else if ( (LA1_0==Identifier||(LA1_0 >= 23 && LA1_0 <= 24)||LA1_0==27) ) {
+                else if ( (LA1_0==Identifier||(LA1_0 >= 25 && LA1_0 <= 26)||LA1_0==31) ) {
                     int LA1_3 = input.LA(2);
 
                     if ( (LA1_3==Identifier) ) {
@@ -200,7 +204,7 @@ public class NebulaParser extends Parser {
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:47:5: ( 'class' Identifier ( superClass )? '{' ( classMember )+ '}' ';' )
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:47:9: 'class' Identifier ( superClass )? '{' ( classMember )+ '}' ';'
             {
-            match(input,22,FOLLOW_22_in_classDefinition88); if (state.failed) return ;
+            match(input,24,FOLLOW_24_in_classDefinition88); if (state.failed) return ;
 
             Identifier1=(Token)match(input,Identifier,FOLLOW_Identifier_in_classDefinition90); if (state.failed) return ;
 
@@ -229,7 +233,7 @@ public class NebulaParser extends Parser {
 
             if ( state.backtracking==0 ) {enterClass((Identifier1!=null?Identifier1.getText():null));}
 
-            match(input,28,FOLLOW_28_in_classDefinition120); if (state.failed) return ;
+            match(input,32,FOLLOW_32_in_classDefinition120); if (state.failed) return ;
 
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:49:14: ( classMember )+
             int cnt3=0;
@@ -238,7 +242,7 @@ public class NebulaParser extends Parser {
                 int alt3=2;
                 int LA3_0 = input.LA(1);
 
-                if ( (LA3_0==Identifier||(LA3_0 >= 23 && LA3_0 <= 25)||LA3_0==27) ) {
+                if ( (LA3_0==Identifier||(LA3_0 >= 25 && LA3_0 <= 27)||LA3_0==31) ) {
                     alt3=1;
                 }
 
@@ -267,7 +271,7 @@ public class NebulaParser extends Parser {
             } while (true);
 
 
-            match(input,29,FOLLOW_29_in_classDefinition125); if (state.failed) return ;
+            match(input,33,FOLLOW_33_in_classDefinition125); if (state.failed) return ;
 
             match(input,20,FOLLOW_20_in_classDefinition127); if (state.failed) return ;
 
@@ -299,7 +303,7 @@ public class NebulaParser extends Parser {
             {
             match(input,19,FOLLOW_19_in_superClass169); if (state.failed) return ;
 
-            match(input,25,FOLLOW_25_in_superClass171); if (state.failed) return ;
+            match(input,27,FOLLOW_27_in_superClass171); if (state.failed) return ;
 
             match(input,Identifier,FOLLOW_Identifier_in_superClass173); if (state.failed) return ;
 
@@ -323,12 +327,16 @@ public class NebulaParser extends Parser {
     // $ANTLR start "classMember"
     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:58:1: classMember : ( type Identifier ( '=' expression )? ';' | methodDeclaration | 'public' ':' );
     public final void classMember() throws RecognitionException {
+        Token Identifier2=null;
+        NebulaParser.type_return type3 =null;
+
+
         try {
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:59:3: ( type Identifier ( '=' expression )? ';' | methodDeclaration | 'public' ':' )
             int alt5=3;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0==Identifier||(LA5_0 >= 23 && LA5_0 <= 24)||LA5_0==27) ) {
+            if ( (LA5_0==Identifier||(LA5_0 >= 25 && LA5_0 <= 26)||LA5_0==31) ) {
                 int LA5_1 = input.LA(2);
 
                 if ( (LA5_1==Identifier) ) {
@@ -358,7 +366,7 @@ public class NebulaParser extends Parser {
 
                 }
             }
-            else if ( (LA5_0==25) ) {
+            else if ( (LA5_0==27) ) {
                 alt5=3;
             }
             else {
@@ -374,12 +382,12 @@ public class NebulaParser extends Parser {
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:59:5: type Identifier ( '=' expression )? ';'
                     {
                     pushFollow(FOLLOW_type_in_classMember188);
-                    type();
+                    type3=type();
 
                     state._fsp--;
                     if (state.failed) return ;
 
-                    match(input,Identifier,FOLLOW_Identifier_in_classMember190); if (state.failed) return ;
+                    Identifier2=(Token)match(input,Identifier,FOLLOW_Identifier_in_classMember190); if (state.failed) return ;
 
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:59:21: ( '=' expression )?
                     int alt4=2;
@@ -408,12 +416,14 @@ public class NebulaParser extends Parser {
 
                     match(input,20,FOLLOW_20_in_classMember199); if (state.failed) return ;
 
+                    if ( state.backtracking==0 ) {defineField((Identifier2!=null?Identifier2.getText():null),(type3!=null?input.toString(type3.start,type3.stop):null));}
+
                     }
                     break;
                 case 2 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:60:5: methodDeclaration
                     {
-                    pushFollow(FOLLOW_methodDeclaration_in_classMember206);
+                    pushFollow(FOLLOW_methodDeclaration_in_classMember207);
                     methodDeclaration();
 
                     state._fsp--;
@@ -424,9 +434,9 @@ public class NebulaParser extends Parser {
                 case 3 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:61:5: 'public' ':'
                     {
-                    match(input,25,FOLLOW_25_in_classMember212); if (state.failed) return ;
+                    match(input,27,FOLLOW_27_in_classMember213); if (state.failed) return ;
 
-                    match(input,19,FOLLOW_19_in_classMember214); if (state.failed) return ;
+                    match(input,19,FOLLOW_19_in_classMember215); if (state.failed) return ;
 
                     }
                     break;
@@ -450,36 +460,36 @@ public class NebulaParser extends Parser {
     // $ANTLR start "methodDeclaration"
     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:65:1: methodDeclaration : type Identifier '(' ( formalParameters )? ')' block ;
     public final void methodDeclaration() throws RecognitionException {
-        Token Identifier2=null;
-        NebulaParser.type_return type3 =null;
+        Token Identifier4=null;
+        NebulaParser.type_return type5 =null;
 
 
         try {
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:66:5: ( type Identifier '(' ( formalParameters )? ')' block )
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:66:9: type Identifier '(' ( formalParameters )? ')' block
             {
-            pushFollow(FOLLOW_type_in_methodDeclaration235);
-            type3=type();
+            pushFollow(FOLLOW_type_in_methodDeclaration236);
+            type5=type();
 
             state._fsp--;
             if (state.failed) return ;
 
-            Identifier2=(Token)match(input,Identifier,FOLLOW_Identifier_in_methodDeclaration237); if (state.failed) return ;
+            Identifier4=(Token)match(input,Identifier,FOLLOW_Identifier_in_methodDeclaration238); if (state.failed) return ;
 
-            match(input,12,FOLLOW_12_in_methodDeclaration239); if (state.failed) return ;
+            match(input,12,FOLLOW_12_in_methodDeclaration240); if (state.failed) return ;
 
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:66:29: ( formalParameters )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
-            if ( (LA6_0==Identifier||(LA6_0 >= 23 && LA6_0 <= 24)||LA6_0==27) ) {
+            if ( (LA6_0==Identifier||(LA6_0 >= 25 && LA6_0 <= 26)||LA6_0==31) ) {
                 alt6=1;
             }
             switch (alt6) {
                 case 1 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:66:29: formalParameters
                     {
-                    pushFollow(FOLLOW_formalParameters_in_methodDeclaration241);
+                    pushFollow(FOLLOW_formalParameters_in_methodDeclaration242);
                     formalParameters();
 
                     state._fsp--;
@@ -491,11 +501,11 @@ public class NebulaParser extends Parser {
             }
 
 
-            match(input,13,FOLLOW_13_in_methodDeclaration244); if (state.failed) return ;
+            match(input,13,FOLLOW_13_in_methodDeclaration245); if (state.failed) return ;
 
-            if ( state.backtracking==0 ) {enterFunction((Identifier2!=null?Identifier2.getText():null),(type3!=null?input.toString(type3.start,type3.stop):null));}
+            if ( state.backtracking==0 ) {enterFunction((Identifier4!=null?Identifier4.getText():null),(type5!=null?input.toString(type5.start,type5.stop):null));}
 
-            pushFollow(FOLLOW_block_in_methodDeclaration267);
+            pushFollow(FOLLOW_block_in_methodDeclaration268);
             block();
 
             state._fsp--;
@@ -527,13 +537,13 @@ public class NebulaParser extends Parser {
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:75:5: ( type Identifier ( ',' type Identifier )* )
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:75:9: type Identifier ( ',' type Identifier )*
             {
-            pushFollow(FOLLOW_type_in_formalParameters308);
+            pushFollow(FOLLOW_type_in_formalParameters309);
             type();
 
             state._fsp--;
             if (state.failed) return ;
 
-            match(input,Identifier,FOLLOW_Identifier_in_formalParameters310); if (state.failed) return ;
+            match(input,Identifier,FOLLOW_Identifier_in_formalParameters311); if (state.failed) return ;
 
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:75:25: ( ',' type Identifier )*
             loop7:
@@ -550,15 +560,15 @@ public class NebulaParser extends Parser {
             	case 1 :
             	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:75:26: ',' type Identifier
             	    {
-            	    match(input,16,FOLLOW_16_in_formalParameters313); if (state.failed) return ;
+            	    match(input,16,FOLLOW_16_in_formalParameters314); if (state.failed) return ;
 
-            	    pushFollow(FOLLOW_type_in_formalParameters315);
+            	    pushFollow(FOLLOW_type_in_formalParameters316);
             	    type();
 
             	    state._fsp--;
             	    if (state.failed) return ;
 
-            	    match(input,Identifier,FOLLOW_Identifier_in_formalParameters317); if (state.failed) return ;
+            	    match(input,Identifier,FOLLOW_Identifier_in_formalParameters318); if (state.failed) return ;
 
             	    }
             	    break;
@@ -600,7 +610,7 @@ public class NebulaParser extends Parser {
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:78:5: ( 'float' | 'int' | 'void' | Identifier )
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:
             {
-            if ( input.LA(1)==Identifier||(input.LA(1) >= 23 && input.LA(1) <= 24)||input.LA(1)==27 ) {
+            if ( input.LA(1)==Identifier||(input.LA(1) >= 25 && input.LA(1) <= 26)||input.LA(1)==31 ) {
                 input.consume();
                 state.errorRecovery=false;
                 state.failed=false;
@@ -639,7 +649,7 @@ public class NebulaParser extends Parser {
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:86:5: ( '{' ( statement )* '}' )
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:86:9: '{' ( statement )* '}'
             {
-            match(input,28,FOLLOW_28_in_block381); if (state.failed) return ;
+            match(input,32,FOLLOW_32_in_block382); if (state.failed) return ;
 
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:86:13: ( statement )*
             loop8:
@@ -647,7 +657,7 @@ public class NebulaParser extends Parser {
                 int alt8=2;
                 int LA8_0 = input.LA(1);
 
-                if ( ((LA8_0 >= Identifier && LA8_0 <= Integer)||LA8_0==12||LA8_0==20||(LA8_0 >= 23 && LA8_0 <= 24)||(LA8_0 >= 26 && LA8_0 <= 28)) ) {
+                if ( (LA8_0==Identifier||LA8_0==12||LA8_0==20||(LA8_0 >= 25 && LA8_0 <= 26)||(LA8_0 >= 28 && LA8_0 <= 32)) ) {
                     alt8=1;
                 }
 
@@ -656,7 +666,7 @@ public class NebulaParser extends Parser {
             	case 1 :
             	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:86:13: statement
             	    {
-            	    pushFollow(FOLLOW_statement_in_block383);
+            	    pushFollow(FOLLOW_statement_in_block384);
             	    statement();
 
             	    state._fsp--;
@@ -671,7 +681,7 @@ public class NebulaParser extends Parser {
             } while (true);
 
 
-            match(input,29,FOLLOW_29_in_block386); if (state.failed) return ;
+            match(input,33,FOLLOW_33_in_block387); if (state.failed) return ;
 
             }
 
@@ -697,13 +707,13 @@ public class NebulaParser extends Parser {
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:91:5: ( type Identifier ( '=' expression )? ';' )
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:91:9: type Identifier ( '=' expression )? ';'
             {
-            pushFollow(FOLLOW_type_in_varDeclaration403);
+            pushFollow(FOLLOW_type_in_varDeclaration404);
             type();
 
             state._fsp--;
             if (state.failed) return ;
 
-            match(input,Identifier,FOLLOW_Identifier_in_varDeclaration405); if (state.failed) return ;
+            match(input,Identifier,FOLLOW_Identifier_in_varDeclaration406); if (state.failed) return ;
 
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:91:25: ( '=' expression )?
             int alt9=2;
@@ -716,9 +726,9 @@ public class NebulaParser extends Parser {
                 case 1 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:91:26: '=' expression
                     {
-                    match(input,21,FOLLOW_21_in_varDeclaration408); if (state.failed) return ;
+                    match(input,21,FOLLOW_21_in_varDeclaration409); if (state.failed) return ;
 
-                    pushFollow(FOLLOW_expression_in_varDeclaration410);
+                    pushFollow(FOLLOW_expression_in_varDeclaration411);
                     expression();
 
                     state._fsp--;
@@ -730,7 +740,7 @@ public class NebulaParser extends Parser {
             }
 
 
-            match(input,20,FOLLOW_20_in_varDeclaration414); if (state.failed) return ;
+            match(input,20,FOLLOW_20_in_varDeclaration415); if (state.failed) return ;
 
             }
 
@@ -756,7 +766,7 @@ public class NebulaParser extends Parser {
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:97:5: ( block | varDeclaration | 'return' ( expression )? ';' | postfixExpression ( '=' expression )? ';' | ';' )
             int alt12=5;
             switch ( input.LA(1) ) {
-            case 28:
+            case 32:
                 {
                 alt12=1;
                 }
@@ -768,7 +778,7 @@ public class NebulaParser extends Parser {
                 if ( (LA12_2==Identifier) ) {
                     alt12=2;
                 }
-                else if ( (LA12_2==12||LA12_2==18||(LA12_2 >= 20 && LA12_2 <= 21)) ) {
+                else if ( (LA12_2==12||LA12_2==18||(LA12_2 >= 20 && LA12_2 <= 22)) ) {
                     alt12=4;
                 }
                 else {
@@ -781,20 +791,21 @@ public class NebulaParser extends Parser {
                 }
                 }
                 break;
-            case 26:
+            case 28:
                 {
                 alt12=3;
                 }
                 break;
-            case Integer:
             case 12:
+            case 29:
+            case 30:
                 {
                 alt12=4;
                 }
                 break;
-            case 23:
-            case 24:
-            case 27:
+            case 25:
+            case 26:
+            case 31:
                 {
                 alt12=2;
                 }
@@ -817,7 +828,7 @@ public class NebulaParser extends Parser {
                 case 1 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:97:9: block
                     {
-                    pushFollow(FOLLOW_block_in_statement436);
+                    pushFollow(FOLLOW_block_in_statement437);
                     block();
 
                     state._fsp--;
@@ -828,7 +839,7 @@ public class NebulaParser extends Parser {
                 case 2 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:98:7: varDeclaration
                     {
-                    pushFollow(FOLLOW_varDeclaration_in_statement444);
+                    pushFollow(FOLLOW_varDeclaration_in_statement445);
                     varDeclaration();
 
                     state._fsp--;
@@ -839,20 +850,20 @@ public class NebulaParser extends Parser {
                 case 3 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:99:9: 'return' ( expression )? ';'
                     {
-                    match(input,26,FOLLOW_26_in_statement454); if (state.failed) return ;
+                    match(input,28,FOLLOW_28_in_statement455); if (state.failed) return ;
 
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:99:18: ( expression )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
-                    if ( ((LA10_0 >= Identifier && LA10_0 <= Integer)||LA10_0==12) ) {
+                    if ( (LA10_0==Identifier||LA10_0==12||(LA10_0 >= 29 && LA10_0 <= 30)) ) {
                         alt10=1;
                     }
                     switch (alt10) {
                         case 1 :
                             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:99:18: expression
                             {
-                            pushFollow(FOLLOW_expression_in_statement456);
+                            pushFollow(FOLLOW_expression_in_statement457);
                             expression();
 
                             state._fsp--;
@@ -864,14 +875,14 @@ public class NebulaParser extends Parser {
                     }
 
 
-                    match(input,20,FOLLOW_20_in_statement459); if (state.failed) return ;
+                    match(input,20,FOLLOW_20_in_statement460); if (state.failed) return ;
 
                     }
                     break;
                 case 4 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:100:9: postfixExpression ( '=' expression )? ';'
                     {
-                    pushFollow(FOLLOW_postfixExpression_in_statement470);
+                    pushFollow(FOLLOW_postfixExpression_in_statement471);
                     postfixExpression();
 
                     state._fsp--;
@@ -888,9 +899,9 @@ public class NebulaParser extends Parser {
                         case 1 :
                             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:101:13: '=' expression
                             {
-                            match(input,21,FOLLOW_21_in_statement485); if (state.failed) return ;
+                            match(input,21,FOLLOW_21_in_statement486); if (state.failed) return ;
 
-                            pushFollow(FOLLOW_expression_in_statement487);
+                            pushFollow(FOLLOW_expression_in_statement488);
                             expression();
 
                             state._fsp--;
@@ -902,14 +913,14 @@ public class NebulaParser extends Parser {
                     }
 
 
-                    match(input,20,FOLLOW_20_in_statement501); if (state.failed) return ;
+                    match(input,20,FOLLOW_20_in_statement502); if (state.failed) return ;
 
                     }
                     break;
                 case 5 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:103:7: ';'
                     {
-                    match(input,20,FOLLOW_20_in_statement510); if (state.failed) return ;
+                    match(input,20,FOLLOW_20_in_statement511); if (state.failed) return ;
 
                     }
                     break;
@@ -938,10 +949,10 @@ public class NebulaParser extends Parser {
             int alt14=2;
             int LA14_0 = input.LA(1);
 
-            if ( ((LA14_0 >= Identifier && LA14_0 <= Integer)||LA14_0==12) ) {
+            if ( (LA14_0==Identifier||LA14_0==12||(LA14_0 >= 29 && LA14_0 <= 30)) ) {
                 alt14=1;
             }
-            else if ( (LA14_0==13) ) {
+            else if ( (LA14_0==13||LA14_0==23) ) {
                 alt14=2;
             }
             else {
@@ -956,7 +967,7 @@ public class NebulaParser extends Parser {
                 case 1 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:108:9: expression ( ',' expression )*
                     {
-                    pushFollow(FOLLOW_expression_in_expressionList531);
+                    pushFollow(FOLLOW_expression_in_expressionList532);
                     expression();
 
                     state._fsp--;
@@ -977,9 +988,9 @@ public class NebulaParser extends Parser {
                     	case 1 :
                     	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:108:21: ',' expression
                     	    {
-                    	    match(input,16,FOLLOW_16_in_expressionList534); if (state.failed) return ;
+                    	    match(input,16,FOLLOW_16_in_expressionList535); if (state.failed) return ;
 
-                    	    pushFollow(FOLLOW_expression_in_expressionList536);
+                    	    pushFollow(FOLLOW_expression_in_expressionList537);
                     	    expression();
 
                     	    state._fsp--;
@@ -1019,20 +1030,25 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "expression"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:112:1: expression returns [VariableSymbol value] : addExpression ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:112:1: expression returns [VariableSymbol value] : e= addExpression ;
     public final VariableSymbol expression() throws RecognitionException {
         VariableSymbol value = null;
 
 
+        VariableSymbol e =null;
+
+
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:113:5: ( addExpression )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:113:9: addExpression
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:113:5: (e= addExpression )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:113:9: e= addExpression
             {
-            pushFollow(FOLLOW_addExpression_in_expression561);
-            addExpression();
+            pushFollow(FOLLOW_addExpression_in_expression564);
+            e=addExpression();
 
             state._fsp--;
             if (state.failed) return value;
+
+            if ( state.backtracking==0 ) {value = e;}
 
             }
 
@@ -1052,7 +1068,7 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "addExpression"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:118:1: addExpression returns [VariableSymbol value] : e= multExpression ( '+' e= multExpression | '-' e= multExpression )* ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:117:1: addExpression returns [VariableSymbol value] : e= multExpression ( '+' e= multExpression | '-' e= multExpression )* ;
     public final VariableSymbol addExpression() throws RecognitionException {
         VariableSymbol value = null;
 
@@ -1061,10 +1077,10 @@ public class NebulaParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:119:5: (e= multExpression ( '+' e= multExpression | '-' e= multExpression )* )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:119:9: e= multExpression ( '+' e= multExpression | '-' e= multExpression )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:118:5: (e= multExpression ( '+' e= multExpression | '-' e= multExpression )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:118:9: e= multExpression ( '+' e= multExpression | '-' e= multExpression )*
             {
-            pushFollow(FOLLOW_multExpression_in_addExpression589);
+            pushFollow(FOLLOW_multExpression_in_addExpression593);
             e=multExpression();
 
             state._fsp--;
@@ -1072,7 +1088,7 @@ public class NebulaParser extends Parser {
 
             if ( state.backtracking==0 ) {value = e;}
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:120:9: ( '+' e= multExpression | '-' e= multExpression )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:119:9: ( '+' e= multExpression | '-' e= multExpression )*
             loop15:
             do {
                 int alt15=3;
@@ -1088,11 +1104,11 @@ public class NebulaParser extends Parser {
 
                 switch (alt15) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:120:13: '+' e= multExpression
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:119:13: '+' e= multExpression
             	    {
-            	    match(input,15,FOLLOW_15_in_addExpression605); if (state.failed) return value;
+            	    match(input,15,FOLLOW_15_in_addExpression609); if (state.failed) return value;
 
-            	    pushFollow(FOLLOW_multExpression_in_addExpression609);
+            	    pushFollow(FOLLOW_multExpression_in_addExpression613);
             	    e=multExpression();
 
             	    state._fsp--;
@@ -1103,11 +1119,11 @@ public class NebulaParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:121:13: '-' e= multExpression
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:120:13: '-' e= multExpression
             	    {
-            	    match(input,17,FOLLOW_17_in_addExpression625); if (state.failed) return value;
+            	    match(input,17,FOLLOW_17_in_addExpression629); if (state.failed) return value;
 
-            	    pushFollow(FOLLOW_multExpression_in_addExpression629);
+            	    pushFollow(FOLLOW_multExpression_in_addExpression633);
             	    e=multExpression();
 
             	    state._fsp--;
@@ -1142,7 +1158,7 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "multExpression"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:127:1: multExpression returns [VariableSymbol value] : e= postfixExpression ( '*' e= postfixExpression )* ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:126:1: multExpression returns [VariableSymbol value] : e= postfixExpression ( '*' e= postfixExpression )* ;
     public final VariableSymbol multExpression() throws RecognitionException {
         VariableSymbol value = null;
 
@@ -1151,10 +1167,10 @@ public class NebulaParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:128:5: (e= postfixExpression ( '*' e= postfixExpression )* )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:128:9: e= postfixExpression ( '*' e= postfixExpression )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:127:5: (e= postfixExpression ( '*' e= postfixExpression )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:127:9: e= postfixExpression ( '*' e= postfixExpression )*
             {
-            pushFollow(FOLLOW_postfixExpression_in_multExpression669);
+            pushFollow(FOLLOW_postfixExpression_in_multExpression673);
             e=postfixExpression();
 
             state._fsp--;
@@ -1162,7 +1178,7 @@ public class NebulaParser extends Parser {
 
             if ( state.backtracking==0 ) {value = e;}
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:129:5: ( '*' e= postfixExpression )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:128:9: ( '*' e= postfixExpression )*
             loop16:
             do {
                 int alt16=2;
@@ -1175,11 +1191,11 @@ public class NebulaParser extends Parser {
 
                 switch (alt16) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:129:6: '*' e= postfixExpression
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:129:11: '*' e= postfixExpression
             	    {
-            	    match(input,14,FOLLOW_14_in_multExpression679); if (state.failed) return value;
+            	    match(input,14,FOLLOW_14_in_multExpression702); if (state.failed) return value;
 
-            	    pushFollow(FOLLOW_postfixExpression_in_multExpression683);
+            	    pushFollow(FOLLOW_postfixExpression_in_multExpression706);
             	    e=postfixExpression();
 
             	    state._fsp--;
@@ -1214,35 +1230,40 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "postfixExpression"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:136:1: postfixExpression returns [VariableSymbol value] : ( primary ) ( options {backtrack=true; } : '.' Identifier '(' expressionList ')' | '.' Identifier | '(' expressionList ')' )* ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:136:1: postfixExpression returns [VariableSymbol value] : (e= primary ) ( options {backtrack=true; } : '.' Identifier '(' expressionList ')' | '.' Identifier | '(' expressionList ')' | '[' Integer ']' | '[' expressionList ']' )* ;
     public final VariableSymbol postfixExpression() throws RecognitionException {
         VariableSymbol value = null;
 
 
+        VariableSymbol e =null;
+
+
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:137:5: ( ( primary ) ( options {backtrack=true; } : '.' Identifier '(' expressionList ')' | '.' Identifier | '(' expressionList ')' )* )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:137:9: ( primary ) ( options {backtrack=true; } : '.' Identifier '(' expressionList ')' | '.' Identifier | '(' expressionList ')' )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:137:5: ( (e= primary ) ( options {backtrack=true; } : '.' Identifier '(' expressionList ')' | '.' Identifier | '(' expressionList ')' | '[' Integer ']' | '[' expressionList ']' )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:137:9: (e= primary ) ( options {backtrack=true; } : '.' Identifier '(' expressionList ')' | '.' Identifier | '(' expressionList ')' | '[' Integer ']' | '[' expressionList ']' )*
             {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:137:9: ( primary )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:137:10: primary
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:137:9: (e= primary )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:137:10: e= primary
             {
-            pushFollow(FOLLOW_primary_in_postfixExpression721);
-            primary();
+            pushFollow(FOLLOW_primary_in_postfixExpression751);
+            e=primary();
 
             state._fsp--;
             if (state.failed) return value;
 
+            if ( state.backtracking==0 ) {value = e;}
+
             }
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:138:7: ( options {backtrack=true; } : '.' Identifier '(' expressionList ')' | '.' Identifier | '(' expressionList ')' )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:138:9: ( options {backtrack=true; } : '.' Identifier '(' expressionList ')' | '.' Identifier | '(' expressionList ')' | '[' Integer ']' | '[' expressionList ']' )*
             loop17:
             do {
-                int alt17=4;
-                int LA17_0 = input.LA(1);
-
-                if ( (LA17_0==18) ) {
-                    int LA17_8 = input.LA(2);
+                int alt17=6;
+                switch ( input.LA(1) ) {
+                case 18:
+                    {
+                    int LA17_9 = input.LA(2);
 
                     if ( (synpred1_Nebula()) ) {
                         alt17=1;
@@ -1252,53 +1273,97 @@ public class NebulaParser extends Parser {
                     }
 
 
-                }
-                else if ( (LA17_0==12) ) {
+                    }
+                    break;
+                case 12:
+                    {
                     alt17=3;
-                }
+                    }
+                    break;
+                case 22:
+                    {
+                    int LA17_11 = input.LA(2);
 
+                    if ( (synpred4_Nebula()) ) {
+                        alt17=4;
+                    }
+                    else if ( (synpred5_Nebula()) ) {
+                        alt17=5;
+                    }
+
+
+                    }
+                    break;
+
+                }
 
                 switch (alt17) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:139:7: '.' Identifier '(' expressionList ')'
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:139:12: '.' Identifier '(' expressionList ')'
             	    {
-            	    match(input,18,FOLLOW_18_in_postfixExpression745); if (state.failed) return value;
+            	    match(input,18,FOLLOW_18_in_postfixExpression783); if (state.failed) return value;
 
-            	    match(input,Identifier,FOLLOW_Identifier_in_postfixExpression747); if (state.failed) return value;
+            	    match(input,Identifier,FOLLOW_Identifier_in_postfixExpression785); if (state.failed) return value;
 
-            	    match(input,12,FOLLOW_12_in_postfixExpression749); if (state.failed) return value;
+            	    match(input,12,FOLLOW_12_in_postfixExpression787); if (state.failed) return value;
 
-            	    pushFollow(FOLLOW_expressionList_in_postfixExpression751);
+            	    pushFollow(FOLLOW_expressionList_in_postfixExpression789);
             	    expressionList();
 
             	    state._fsp--;
             	    if (state.failed) return value;
 
-            	    match(input,13,FOLLOW_13_in_postfixExpression753); if (state.failed) return value;
+            	    match(input,13,FOLLOW_13_in_postfixExpression791); if (state.failed) return value;
 
             	    }
             	    break;
             	case 2 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:140:7: '.' Identifier
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:140:12: '.' Identifier
             	    {
-            	    match(input,18,FOLLOW_18_in_postfixExpression761); if (state.failed) return value;
+            	    match(input,18,FOLLOW_18_in_postfixExpression804); if (state.failed) return value;
 
-            	    match(input,Identifier,FOLLOW_Identifier_in_postfixExpression763); if (state.failed) return value;
+            	    match(input,Identifier,FOLLOW_Identifier_in_postfixExpression806); if (state.failed) return value;
 
             	    }
             	    break;
             	case 3 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:141:7: '(' expressionList ')'
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:141:12: '(' expressionList ')'
             	    {
-            	    match(input,12,FOLLOW_12_in_postfixExpression784); if (state.failed) return value;
+            	    match(input,12,FOLLOW_12_in_postfixExpression832); if (state.failed) return value;
 
-            	    pushFollow(FOLLOW_expressionList_in_postfixExpression786);
+            	    pushFollow(FOLLOW_expressionList_in_postfixExpression834);
             	    expressionList();
 
             	    state._fsp--;
             	    if (state.failed) return value;
 
-            	    match(input,13,FOLLOW_13_in_postfixExpression788); if (state.failed) return value;
+            	    match(input,13,FOLLOW_13_in_postfixExpression836); if (state.failed) return value;
+
+            	    }
+            	    break;
+            	case 4 :
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:142:12: '[' Integer ']'
+            	    {
+            	    match(input,22,FOLLOW_22_in_postfixExpression850); if (state.failed) return value;
+
+            	    match(input,Integer,FOLLOW_Integer_in_postfixExpression852); if (state.failed) return value;
+
+            	    match(input,23,FOLLOW_23_in_postfixExpression854); if (state.failed) return value;
+
+            	    }
+            	    break;
+            	case 5 :
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:143:12: '[' expressionList ']'
+            	    {
+            	    match(input,22,FOLLOW_22_in_postfixExpression867); if (state.failed) return value;
+
+            	    pushFollow(FOLLOW_expressionList_in_postfixExpression869);
+            	    expressionList();
+
+            	    state._fsp--;
+            	    if (state.failed) return value;
+
+            	    match(input,23,FOLLOW_23_in_postfixExpression871); if (state.failed) return value;
 
             	    }
             	    break;
@@ -1326,51 +1391,42 @@ public class NebulaParser extends Parser {
 
 
 
-    // $ANTLR start "suffix"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:147:1: suffix[VariableSymbol expr] returns [VariableSymbol value] options {backtrack=true; } : ( '.' Identifier '(' expressionList ')' | '.' Identifier | '(' expressionList ')' );
-    public final VariableSymbol suffix(VariableSymbol expr) throws RecognitionException {
+    // $ANTLR start "primary"
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:158:1: primary returns [VariableSymbol value] : ( 'this' | 'super' Integer | Identifier | '(' expression ')' );
+    public final VariableSymbol primary() throws RecognitionException {
         VariableSymbol value = null;
 
 
+        Token Integer6=null;
+        Token Identifier7=null;
+        VariableSymbol expression8 =null;
+
+
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:149:3: ( '.' Identifier '(' expressionList ')' | '.' Identifier | '(' expressionList ')' )
-            int alt18=3;
-            int LA18_0 = input.LA(1);
-
-            if ( (LA18_0==18) ) {
-                int LA18_1 = input.LA(2);
-
-                if ( (LA18_1==Identifier) ) {
-                    int LA18_3 = input.LA(3);
-
-                    if ( (LA18_3==12) ) {
-                        alt18=1;
-                    }
-                    else if ( (LA18_3==EOF) ) {
-                        alt18=2;
-                    }
-                    else {
-                        if (state.backtracking>0) {state.failed=true; return value;}
-                        NoViableAltException nvae =
-                            new NoViableAltException("", 18, 3, input);
-
-                        throw nvae;
-
-                    }
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:159:5: ( 'this' | 'super' Integer | Identifier | '(' expression ')' )
+            int alt18=4;
+            switch ( input.LA(1) ) {
+            case 30:
+                {
+                alt18=1;
                 }
-                else {
-                    if (state.backtracking>0) {state.failed=true; return value;}
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 18, 1, input);
-
-                    throw nvae;
-
+                break;
+            case 29:
+                {
+                alt18=2;
                 }
-            }
-            else if ( (LA18_0==12) ) {
+                break;
+            case Identifier:
+                {
                 alt18=3;
-            }
-            else {
+                }
+                break;
+            case 12:
+                {
+                alt18=4;
+                }
+                break;
+            default:
                 if (state.backtracking>0) {state.failed=true; return value;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 18, 0, input);
@@ -1378,139 +1434,49 @@ public class NebulaParser extends Parser {
                 throw nvae;
 
             }
+
             switch (alt18) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:149:5: '.' Identifier '(' expressionList ')'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:159:9: 'this'
                     {
-                    match(input,18,FOLLOW_18_in_suffix825); if (state.failed) return value;
-
-                    match(input,Identifier,FOLLOW_Identifier_in_suffix827); if (state.failed) return value;
-
-                    match(input,12,FOLLOW_12_in_suffix829); if (state.failed) return value;
-
-                    pushFollow(FOLLOW_expressionList_in_suffix831);
-                    expressionList();
-
-                    state._fsp--;
-                    if (state.failed) return value;
-
-                    match(input,13,FOLLOW_13_in_suffix833); if (state.failed) return value;
+                    match(input,30,FOLLOW_30_in_primary912); if (state.failed) return value;
 
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:150:5: '.' Identifier
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:160:9: 'super' Integer
                     {
-                    match(input,18,FOLLOW_18_in_suffix839); if (state.failed) return value;
+                    match(input,29,FOLLOW_29_in_primary922); if (state.failed) return value;
 
-                    match(input,Identifier,FOLLOW_Identifier_in_suffix841); if (state.failed) return value;
+                    Integer6=(Token)match(input,Integer,FOLLOW_Integer_in_primary932); if (state.failed) return value;
+
+                    if ( state.backtracking==0 ) {value = defineInt((Integer6!=null?Integer6.getText():null));}
 
                     }
                     break;
                 case 3 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:151:5: '(' expressionList ')'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:162:9: Identifier
                     {
-                    match(input,12,FOLLOW_12_in_suffix861); if (state.failed) return value;
+                    Identifier7=(Token)match(input,Identifier,FOLLOW_Identifier_in_primary944); if (state.failed) return value;
 
-                    pushFollow(FOLLOW_expressionList_in_suffix863);
-                    expressionList();
+                    if ( state.backtracking==0 ) {value = resolve((Identifier7!=null?Identifier7.getText():null));}
+
+                    }
+                    break;
+                case 4 :
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:163:9: '(' expression ')'
+                    {
+                    match(input,12,FOLLOW_12_in_primary956); if (state.failed) return value;
+
+                    pushFollow(FOLLOW_expression_in_primary958);
+                    expression8=expression();
 
                     state._fsp--;
                     if (state.failed) return value;
 
-                    match(input,13,FOLLOW_13_in_suffix865); if (state.failed) return value;
+                    match(input,13,FOLLOW_13_in_primary960); if (state.failed) return value;
 
-                    }
-                    break;
-
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-
-        finally {
-        	// do for sure before leaving
-        }
-        return value;
-    }
-    // $ANTLR end "suffix"
-
-
-
-    // $ANTLR start "primary"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:156:1: primary returns [VariableSymbol value] : ( Integer | Identifier | '(' expression ')' );
-    public final VariableSymbol primary() throws RecognitionException {
-        VariableSymbol value = null;
-
-
-        Token Integer4=null;
-        Token Identifier5=null;
-        VariableSymbol expression6 =null;
-
-
-        try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:157:5: ( Integer | Identifier | '(' expression ')' )
-            int alt19=3;
-            switch ( input.LA(1) ) {
-            case Integer:
-                {
-                alt19=1;
-                }
-                break;
-            case Identifier:
-                {
-                alt19=2;
-                }
-                break;
-            case 12:
-                {
-                alt19=3;
-                }
-                break;
-            default:
-                if (state.backtracking>0) {state.failed=true; return value;}
-                NoViableAltException nvae =
-                    new NoViableAltException("", 19, 0, input);
-
-                throw nvae;
-
-            }
-
-            switch (alt19) {
-                case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:158:9: Integer
-                    {
-                    Integer4=(Token)match(input,Integer,FOLLOW_Integer_in_primary907); if (state.failed) return value;
-
-                    if ( state.backtracking==0 ) {value = defineInt((Integer4!=null?Integer4.getText():null));}
-
-                    }
-                    break;
-                case 2 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:159:9: Identifier
-                    {
-                    Identifier5=(Token)match(input,Identifier,FOLLOW_Identifier_in_primary919); if (state.failed) return value;
-
-                    if ( state.backtracking==0 ) {value = resolve((Identifier5!=null?Identifier5.getText():null));}
-
-                    }
-                    break;
-                case 3 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:161:9: '(' expression ')'
-                    {
-                    match(input,12,FOLLOW_12_in_primary940); if (state.failed) return value;
-
-                    pushFollow(FOLLOW_expression_in_primary942);
-                    expression6=expression();
-
-                    state._fsp--;
-                    if (state.failed) return value;
-
-                    match(input,13,FOLLOW_13_in_primary944); if (state.failed) return value;
-
-                    if ( state.backtracking==0 ) {value = expression6;}
+                    if ( state.backtracking==0 ) {value = expression8;}
 
                     }
                     break;
@@ -1531,22 +1497,22 @@ public class NebulaParser extends Parser {
 
     // $ANTLR start synpred1_Nebula
     public final void synpred1_Nebula_fragment() throws RecognitionException {
-        // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:139:7: ( '.' Identifier '(' expressionList ')' )
-        // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:139:7: '.' Identifier '(' expressionList ')'
+        // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:139:12: ( '.' Identifier '(' expressionList ')' )
+        // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:139:12: '.' Identifier '(' expressionList ')'
         {
-        match(input,18,FOLLOW_18_in_synpred1_Nebula745); if (state.failed) return ;
+        match(input,18,FOLLOW_18_in_synpred1_Nebula783); if (state.failed) return ;
 
-        match(input,Identifier,FOLLOW_Identifier_in_synpred1_Nebula747); if (state.failed) return ;
+        match(input,Identifier,FOLLOW_Identifier_in_synpred1_Nebula785); if (state.failed) return ;
 
-        match(input,12,FOLLOW_12_in_synpred1_Nebula749); if (state.failed) return ;
+        match(input,12,FOLLOW_12_in_synpred1_Nebula787); if (state.failed) return ;
 
-        pushFollow(FOLLOW_expressionList_in_synpred1_Nebula751);
+        pushFollow(FOLLOW_expressionList_in_synpred1_Nebula789);
         expressionList();
 
         state._fsp--;
         if (state.failed) return ;
 
-        match(input,13,FOLLOW_13_in_synpred1_Nebula753); if (state.failed) return ;
+        match(input,13,FOLLOW_13_in_synpred1_Nebula791); if (state.failed) return ;
 
         }
 
@@ -1555,20 +1521,70 @@ public class NebulaParser extends Parser {
 
     // $ANTLR start synpred2_Nebula
     public final void synpred2_Nebula_fragment() throws RecognitionException {
-        // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:140:7: ( '.' Identifier )
-        // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:140:7: '.' Identifier
+        // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:140:12: ( '.' Identifier )
+        // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:140:12: '.' Identifier
         {
-        match(input,18,FOLLOW_18_in_synpred2_Nebula761); if (state.failed) return ;
+        match(input,18,FOLLOW_18_in_synpred2_Nebula804); if (state.failed) return ;
 
-        match(input,Identifier,FOLLOW_Identifier_in_synpred2_Nebula763); if (state.failed) return ;
+        match(input,Identifier,FOLLOW_Identifier_in_synpred2_Nebula806); if (state.failed) return ;
 
         }
 
     }
     // $ANTLR end synpred2_Nebula
 
+    // $ANTLR start synpred4_Nebula
+    public final void synpred4_Nebula_fragment() throws RecognitionException {
+        // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:142:12: ( '[' Integer ']' )
+        // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:142:12: '[' Integer ']'
+        {
+        match(input,22,FOLLOW_22_in_synpred4_Nebula850); if (state.failed) return ;
+
+        match(input,Integer,FOLLOW_Integer_in_synpred4_Nebula852); if (state.failed) return ;
+
+        match(input,23,FOLLOW_23_in_synpred4_Nebula854); if (state.failed) return ;
+
+        }
+
+    }
+    // $ANTLR end synpred4_Nebula
+
+    // $ANTLR start synpred5_Nebula
+    public final void synpred5_Nebula_fragment() throws RecognitionException {
+        // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:143:12: ( '[' expressionList ']' )
+        // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:143:12: '[' expressionList ']'
+        {
+        match(input,22,FOLLOW_22_in_synpred5_Nebula867); if (state.failed) return ;
+
+        pushFollow(FOLLOW_expressionList_in_synpred5_Nebula869);
+        expressionList();
+
+        state._fsp--;
+        if (state.failed) return ;
+
+        match(input,23,FOLLOW_23_in_synpred5_Nebula871); if (state.failed) return ;
+
+        }
+
+    }
+    // $ANTLR end synpred5_Nebula
+
     // Delegated rules
 
+    public final boolean synpred5_Nebula() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred5_Nebula_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred2_Nebula() {
         state.backtracking++;
         int start = input.mark();
@@ -1597,105 +1613,123 @@ public class NebulaParser extends Parser {
         state.failed=false;
         return success;
     }
+    public final boolean synpred4_Nebula() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred4_Nebula_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
 
 
  
 
-    public static final BitSet FOLLOW_classDefinition_in_compilationUnit55 = new BitSet(new long[]{0x0000000009C00020L});
-    public static final BitSet FOLLOW_varDeclaration_in_compilationUnit59 = new BitSet(new long[]{0x0000000009C00020L});
-    public static final BitSet FOLLOW_methodDeclaration_in_compilationUnit63 = new BitSet(new long[]{0x0000000009C00020L});
+    public static final BitSet FOLLOW_classDefinition_in_compilationUnit55 = new BitSet(new long[]{0x0000000087000020L});
+    public static final BitSet FOLLOW_varDeclaration_in_compilationUnit59 = new BitSet(new long[]{0x0000000087000020L});
+    public static final BitSet FOLLOW_methodDeclaration_in_compilationUnit63 = new BitSet(new long[]{0x0000000087000020L});
     public static final BitSet FOLLOW_EOF_in_compilationUnit68 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_classDefinition88 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_Identifier_in_classDefinition90 = new BitSet(new long[]{0x0000000010080000L});
-    public static final BitSet FOLLOW_superClass_in_classDefinition92 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_28_in_classDefinition120 = new BitSet(new long[]{0x000000000B800020L});
-    public static final BitSet FOLLOW_classMember_in_classDefinition122 = new BitSet(new long[]{0x000000002B800020L});
-    public static final BitSet FOLLOW_29_in_classDefinition125 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_24_in_classDefinition88 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_Identifier_in_classDefinition90 = new BitSet(new long[]{0x0000000100080000L});
+    public static final BitSet FOLLOW_superClass_in_classDefinition92 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_32_in_classDefinition120 = new BitSet(new long[]{0x000000008E000020L});
+    public static final BitSet FOLLOW_classMember_in_classDefinition122 = new BitSet(new long[]{0x000000028E000020L});
+    public static final BitSet FOLLOW_33_in_classDefinition125 = new BitSet(new long[]{0x0000000000100000L});
     public static final BitSet FOLLOW_20_in_classDefinition127 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_superClass169 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_25_in_superClass171 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_19_in_superClass169 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_27_in_superClass171 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_Identifier_in_superClass173 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_type_in_classMember188 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_Identifier_in_classMember190 = new BitSet(new long[]{0x0000000000300000L});
-    public static final BitSet FOLLOW_21_in_classMember193 = new BitSet(new long[]{0x0000000000001060L});
+    public static final BitSet FOLLOW_21_in_classMember193 = new BitSet(new long[]{0x0000000060001020L});
     public static final BitSet FOLLOW_expression_in_classMember195 = new BitSet(new long[]{0x0000000000100000L});
     public static final BitSet FOLLOW_20_in_classMember199 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_methodDeclaration_in_classMember206 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_25_in_classMember212 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_classMember214 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_type_in_methodDeclaration235 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_Identifier_in_methodDeclaration237 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_methodDeclaration239 = new BitSet(new long[]{0x0000000009802020L});
-    public static final BitSet FOLLOW_formalParameters_in_methodDeclaration241 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_methodDeclaration244 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_block_in_methodDeclaration267 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_type_in_formalParameters308 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_Identifier_in_formalParameters310 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_16_in_formalParameters313 = new BitSet(new long[]{0x0000000009800020L});
-    public static final BitSet FOLLOW_type_in_formalParameters315 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_Identifier_in_formalParameters317 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_28_in_block381 = new BitSet(new long[]{0x000000003D901060L});
-    public static final BitSet FOLLOW_statement_in_block383 = new BitSet(new long[]{0x000000003D901060L});
-    public static final BitSet FOLLOW_29_in_block386 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_type_in_varDeclaration403 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_Identifier_in_varDeclaration405 = new BitSet(new long[]{0x0000000000300000L});
-    public static final BitSet FOLLOW_21_in_varDeclaration408 = new BitSet(new long[]{0x0000000000001060L});
-    public static final BitSet FOLLOW_expression_in_varDeclaration410 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_varDeclaration414 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_block_in_statement436 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_varDeclaration_in_statement444 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_statement454 = new BitSet(new long[]{0x0000000000101060L});
-    public static final BitSet FOLLOW_expression_in_statement456 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_statement459 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_postfixExpression_in_statement470 = new BitSet(new long[]{0x0000000000300000L});
-    public static final BitSet FOLLOW_21_in_statement485 = new BitSet(new long[]{0x0000000000001060L});
-    public static final BitSet FOLLOW_expression_in_statement487 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_statement501 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_statement510 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_expression_in_expressionList531 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_16_in_expressionList534 = new BitSet(new long[]{0x0000000000001060L});
-    public static final BitSet FOLLOW_expression_in_expressionList536 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_addExpression_in_expression561 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_multExpression_in_addExpression589 = new BitSet(new long[]{0x0000000000028002L});
-    public static final BitSet FOLLOW_15_in_addExpression605 = new BitSet(new long[]{0x0000000000001060L});
-    public static final BitSet FOLLOW_multExpression_in_addExpression609 = new BitSet(new long[]{0x0000000000028002L});
-    public static final BitSet FOLLOW_17_in_addExpression625 = new BitSet(new long[]{0x0000000000001060L});
-    public static final BitSet FOLLOW_multExpression_in_addExpression629 = new BitSet(new long[]{0x0000000000028002L});
-    public static final BitSet FOLLOW_postfixExpression_in_multExpression669 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_14_in_multExpression679 = new BitSet(new long[]{0x0000000000001060L});
-    public static final BitSet FOLLOW_postfixExpression_in_multExpression683 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_primary_in_postfixExpression721 = new BitSet(new long[]{0x0000000000041002L});
-    public static final BitSet FOLLOW_18_in_postfixExpression745 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_Identifier_in_postfixExpression747 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_postfixExpression749 = new BitSet(new long[]{0x0000000000003060L});
-    public static final BitSet FOLLOW_expressionList_in_postfixExpression751 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_postfixExpression753 = new BitSet(new long[]{0x0000000000041002L});
-    public static final BitSet FOLLOW_18_in_postfixExpression761 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_Identifier_in_postfixExpression763 = new BitSet(new long[]{0x0000000000041002L});
-    public static final BitSet FOLLOW_12_in_postfixExpression784 = new BitSet(new long[]{0x0000000000003060L});
-    public static final BitSet FOLLOW_expressionList_in_postfixExpression786 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_postfixExpression788 = new BitSet(new long[]{0x0000000000041002L});
-    public static final BitSet FOLLOW_18_in_suffix825 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_Identifier_in_suffix827 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_suffix829 = new BitSet(new long[]{0x0000000000003060L});
-    public static final BitSet FOLLOW_expressionList_in_suffix831 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_suffix833 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_suffix839 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_Identifier_in_suffix841 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_suffix861 = new BitSet(new long[]{0x0000000000003060L});
-    public static final BitSet FOLLOW_expressionList_in_suffix863 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_suffix865 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_Integer_in_primary907 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_Identifier_in_primary919 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_primary940 = new BitSet(new long[]{0x0000000000001060L});
-    public static final BitSet FOLLOW_expression_in_primary942 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_primary944 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_synpred1_Nebula745 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_Identifier_in_synpred1_Nebula747 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_synpred1_Nebula749 = new BitSet(new long[]{0x0000000000003060L});
-    public static final BitSet FOLLOW_expressionList_in_synpred1_Nebula751 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_synpred1_Nebula753 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_synpred2_Nebula761 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_Identifier_in_synpred2_Nebula763 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_methodDeclaration_in_classMember207 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_classMember213 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_classMember215 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_type_in_methodDeclaration236 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_Identifier_in_methodDeclaration238 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_methodDeclaration240 = new BitSet(new long[]{0x0000000086002020L});
+    public static final BitSet FOLLOW_formalParameters_in_methodDeclaration242 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_methodDeclaration245 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_block_in_methodDeclaration268 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_type_in_formalParameters309 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_Identifier_in_formalParameters311 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_16_in_formalParameters314 = new BitSet(new long[]{0x0000000086000020L});
+    public static final BitSet FOLLOW_type_in_formalParameters316 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_Identifier_in_formalParameters318 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_32_in_block382 = new BitSet(new long[]{0x00000003F6101020L});
+    public static final BitSet FOLLOW_statement_in_block384 = new BitSet(new long[]{0x00000003F6101020L});
+    public static final BitSet FOLLOW_33_in_block387 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_type_in_varDeclaration404 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_Identifier_in_varDeclaration406 = new BitSet(new long[]{0x0000000000300000L});
+    public static final BitSet FOLLOW_21_in_varDeclaration409 = new BitSet(new long[]{0x0000000060001020L});
+    public static final BitSet FOLLOW_expression_in_varDeclaration411 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_varDeclaration415 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_block_in_statement437 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_varDeclaration_in_statement445 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_statement455 = new BitSet(new long[]{0x0000000060101020L});
+    public static final BitSet FOLLOW_expression_in_statement457 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_statement460 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_postfixExpression_in_statement471 = new BitSet(new long[]{0x0000000000300000L});
+    public static final BitSet FOLLOW_21_in_statement486 = new BitSet(new long[]{0x0000000060001020L});
+    public static final BitSet FOLLOW_expression_in_statement488 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_statement502 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_statement511 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_expression_in_expressionList532 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_16_in_expressionList535 = new BitSet(new long[]{0x0000000060001020L});
+    public static final BitSet FOLLOW_expression_in_expressionList537 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_addExpression_in_expression564 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_multExpression_in_addExpression593 = new BitSet(new long[]{0x0000000000028002L});
+    public static final BitSet FOLLOW_15_in_addExpression609 = new BitSet(new long[]{0x0000000060001020L});
+    public static final BitSet FOLLOW_multExpression_in_addExpression613 = new BitSet(new long[]{0x0000000000028002L});
+    public static final BitSet FOLLOW_17_in_addExpression629 = new BitSet(new long[]{0x0000000060001020L});
+    public static final BitSet FOLLOW_multExpression_in_addExpression633 = new BitSet(new long[]{0x0000000000028002L});
+    public static final BitSet FOLLOW_postfixExpression_in_multExpression673 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_14_in_multExpression702 = new BitSet(new long[]{0x0000000060001020L});
+    public static final BitSet FOLLOW_postfixExpression_in_multExpression706 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_primary_in_postfixExpression751 = new BitSet(new long[]{0x0000000000441002L});
+    public static final BitSet FOLLOW_18_in_postfixExpression783 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_Identifier_in_postfixExpression785 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_postfixExpression787 = new BitSet(new long[]{0x0000000060003020L});
+    public static final BitSet FOLLOW_expressionList_in_postfixExpression789 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_postfixExpression791 = new BitSet(new long[]{0x0000000000441002L});
+    public static final BitSet FOLLOW_18_in_postfixExpression804 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_Identifier_in_postfixExpression806 = new BitSet(new long[]{0x0000000000441002L});
+    public static final BitSet FOLLOW_12_in_postfixExpression832 = new BitSet(new long[]{0x0000000060003020L});
+    public static final BitSet FOLLOW_expressionList_in_postfixExpression834 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_postfixExpression836 = new BitSet(new long[]{0x0000000000441002L});
+    public static final BitSet FOLLOW_22_in_postfixExpression850 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_Integer_in_postfixExpression852 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_23_in_postfixExpression854 = new BitSet(new long[]{0x0000000000441002L});
+    public static final BitSet FOLLOW_22_in_postfixExpression867 = new BitSet(new long[]{0x0000000060801020L});
+    public static final BitSet FOLLOW_expressionList_in_postfixExpression869 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_23_in_postfixExpression871 = new BitSet(new long[]{0x0000000000441002L});
+    public static final BitSet FOLLOW_30_in_primary912 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_primary922 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_Integer_in_primary932 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_Identifier_in_primary944 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_primary956 = new BitSet(new long[]{0x0000000060001020L});
+    public static final BitSet FOLLOW_expression_in_primary958 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_primary960 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_synpred1_Nebula783 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_Identifier_in_synpred1_Nebula785 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_synpred1_Nebula787 = new BitSet(new long[]{0x0000000060003020L});
+    public static final BitSet FOLLOW_expressionList_in_synpred1_Nebula789 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_synpred1_Nebula791 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_synpred2_Nebula804 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_Identifier_in_synpred2_Nebula806 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_synpred4_Nebula850 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_Integer_in_synpred4_Nebula852 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_23_in_synpred4_Nebula854 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_synpred5_Nebula867 = new BitSet(new long[]{0x0000000060801020L});
+    public static final BitSet FOLLOW_expressionList_in_synpred5_Nebula869 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_23_in_synpred5_Nebula871 = new BitSet(new long[]{0x0000000000000002L});
 
 }

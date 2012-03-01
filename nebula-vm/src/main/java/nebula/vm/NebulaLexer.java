@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Nebula.g 2012-02-29 10:14:45
+// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Nebula.g 2012-02-29 17:10:39
 package nebula.vm;
 
 import org.antlr.runtime.*;
@@ -27,6 +27,10 @@ public class NebulaLexer extends Lexer {
     public static final int T__27=27;
     public static final int T__28=28;
     public static final int T__29=29;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int T__33=33;
     public static final int Digit=4;
     public static final int Identifier=5;
     public static final int Integer=6;
@@ -266,12 +270,10 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:19:7: ( 'class' )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:19:9: 'class'
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:19:7: ( '[' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:19:9: '['
             {
-            match("class"); 
-
-
+            match('['); 
 
             }
 
@@ -289,12 +291,10 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:20:7: ( 'float' )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:20:9: 'float'
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:20:7: ( ']' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:20:9: ']'
             {
-            match("float"); 
-
-
+            match(']'); 
 
             }
 
@@ -312,10 +312,10 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:21:7: ( 'int' )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:21:9: 'int'
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:21:7: ( 'class' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:21:9: 'class'
             {
-            match("int"); 
+            match("class"); 
 
 
 
@@ -335,10 +335,10 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:22:7: ( 'public' )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:22:9: 'public'
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:22:7: ( 'float' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:22:9: 'float'
             {
-            match("public"); 
+            match("float"); 
 
 
 
@@ -358,10 +358,10 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:23:7: ( 'return' )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:23:9: 'return'
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:23:7: ( 'int' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:23:9: 'int'
             {
-            match("return"); 
+            match("int"); 
 
 
 
@@ -381,10 +381,10 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:24:7: ( 'void' )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:24:9: 'void'
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:24:7: ( 'public' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:24:9: 'public'
             {
-            match("void"); 
+            match("public"); 
 
 
 
@@ -404,10 +404,12 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:25:7: ( '{' )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:25:9: '{'
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:25:7: ( 'return' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:25:9: 'return'
             {
-            match('{'); 
+            match("return"); 
+
+
 
             }
 
@@ -425,10 +427,12 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:26:7: ( '}' )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:26:9: '}'
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:26:7: ( 'super' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:26:9: 'super'
             {
-            match('}'); 
+            match("super"); 
+
+
 
             }
 
@@ -441,18 +445,106 @@ public class NebulaLexer extends Lexer {
     }
     // $ANTLR end "T__29"
 
+    // $ANTLR start "T__30"
+    public final void mT__30() throws RecognitionException {
+        try {
+            int _type = T__30;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:27:7: ( 'this' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:27:9: 'this'
+            {
+            match("this"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__30"
+
+    // $ANTLR start "T__31"
+    public final void mT__31() throws RecognitionException {
+        try {
+            int _type = T__31;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:28:7: ( 'void' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:28:9: 'void'
+            {
+            match("void"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__31"
+
+    // $ANTLR start "T__32"
+    public final void mT__32() throws RecognitionException {
+        try {
+            int _type = T__32;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:29:7: ( '{' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:29:9: '{'
+            {
+            match('{'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__32"
+
+    // $ANTLR start "T__33"
+    public final void mT__33() throws RecognitionException {
+        try {
+            int _type = T__33;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:30:7: ( '}' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:30:9: '}'
+            {
+            match('}'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__33"
+
     // $ANTLR start "Identifier"
     public final void mIdentifier() throws RecognitionException {
         try {
             int _type = Identifier;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:166:12: ( Letter ( Letter | Digit )* )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:166:15: Letter ( Letter | Digit )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:168:12: ( Letter ( Letter | Digit )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:168:15: Letter ( Letter | Digit )*
             {
             mLetter(); 
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:166:22: ( Letter | Digit )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:168:22: ( Letter | Digit )*
             loop1:
             do {
                 int alt1=2;
@@ -502,13 +594,13 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = Integer;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:167:9: ( Digit ( Digit )* )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:167:12: Digit ( Digit )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:169:9: ( Digit ( Digit )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:169:12: Digit ( Digit )*
             {
             mDigit(); 
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:167:18: ( Digit )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:169:18: ( Digit )*
             loop2:
             do {
                 int alt2=2;
@@ -556,7 +648,7 @@ public class NebulaLexer extends Lexer {
     // $ANTLR start "Digit"
     public final void mDigit() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:168:16: ( '0' .. '9' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:170:16: ( '0' .. '9' )
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:
             {
             if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
@@ -582,7 +674,7 @@ public class NebulaLexer extends Lexer {
     // $ANTLR start "Letter"
     public final void mLetter() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:169:17: ( 'a' .. 'z' | 'A' .. 'Z' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:171:17: ( 'a' .. 'z' | 'A' .. 'Z' )
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
@@ -610,10 +702,10 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = NEWLINE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:171:8: ( ( '\\r' )? '\\n' )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:171:9: ( '\\r' )? '\\n'
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:173:8: ( ( '\\r' )? '\\n' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:173:9: ( '\\r' )? '\\n'
             {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:171:9: ( '\\r' )?
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:173:9: ( '\\r' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -622,7 +714,7 @@ public class NebulaLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:171:9: '\\r'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:173:9: '\\r'
                     {
                     match('\r'); 
 
@@ -633,6 +725,8 @@ public class NebulaLexer extends Lexer {
 
 
             match('\n'); 
+
+            _channel=HIDDEN;
 
             }
 
@@ -650,10 +744,10 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = Whitespace;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:172:12: ( ( ' ' | '\\t' | '\\f' )+ )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:172:15: ( ' ' | '\\t' | '\\f' )+
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:174:12: ( ( ' ' | '\\t' | '\\f' )+ )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:174:15: ( ' ' | '\\t' | '\\f' )+
             {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:172:15: ( ' ' | '\\t' | '\\f' )+
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:174:15: ( ' ' | '\\t' | '\\f' )+
             int cnt4=0;
             loop4:
             do {
@@ -710,14 +804,14 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = SingleLineComment;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:173:19: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )? )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:174:3: '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )?
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:175:19: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )? )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:3: '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )?
             {
             match("//"); 
 
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:174:8: (~ ( '\\n' | '\\r' ) )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:8: (~ ( '\\n' | '\\r' ) )*
             loop5:
             do {
                 int alt5=2;
@@ -751,7 +845,7 @@ public class NebulaLexer extends Lexer {
             } while (true);
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:174:24: ( '\\n' | '\\r' ( '\\n' )? )?
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:24: ( '\\n' | '\\r' ( '\\n' )? )?
             int alt7=3;
             int LA7_0 = input.LA(1);
 
@@ -763,18 +857,18 @@ public class NebulaLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:174:25: '\\n'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:25: '\\n'
                     {
                     match('\n'); 
 
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:174:30: '\\r' ( '\\n' )?
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:30: '\\r' ( '\\n' )?
                     {
                     match('\r'); 
 
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:174:34: ( '\\n' )?
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:34: ( '\\n' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -783,7 +877,7 @@ public class NebulaLexer extends Lexer {
                     }
                     switch (alt6) {
                         case 1 :
-                            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:174:35: '\\n'
+                            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:35: '\\n'
                             {
                             match('\n'); 
 
@@ -817,14 +911,14 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = MultiLineComment;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:175:18: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:5: '/*' ( options {greedy=false; } : . )* '*/'
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:177:18: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:178:5: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:10: ( options {greedy=false; } : . )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:178:10: ( options {greedy=false; } : . )*
             loop8:
             do {
                 int alt8=2;
@@ -849,7 +943,7 @@ public class NebulaLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:38: .
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:178:38: .
             	    {
             	    matchAny(); 
 
@@ -880,406 +974,9 @@ public class NebulaLexer extends Lexer {
     // $ANTLR end "MultiLineComment"
 
     public void mTokens() throws RecognitionException {
-        // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | Identifier | Integer | NEWLINE | Whitespace | SingleLineComment | MultiLineComment )
-        int alt9=24;
-        switch ( input.LA(1) ) {
-        case '(':
-            {
-            alt9=1;
-            }
-            break;
-        case ')':
-            {
-            alt9=2;
-            }
-            break;
-        case '*':
-            {
-            alt9=3;
-            }
-            break;
-        case '+':
-            {
-            alt9=4;
-            }
-            break;
-        case ',':
-            {
-            alt9=5;
-            }
-            break;
-        case '-':
-            {
-            alt9=6;
-            }
-            break;
-        case '.':
-            {
-            alt9=7;
-            }
-            break;
-        case ':':
-            {
-            alt9=8;
-            }
-            break;
-        case ';':
-            {
-            alt9=9;
-            }
-            break;
-        case '=':
-            {
-            alt9=10;
-            }
-            break;
-        case 'c':
-            {
-            int LA9_11 = input.LA(2);
-
-            if ( (LA9_11=='l') ) {
-                int LA9_24 = input.LA(3);
-
-                if ( (LA9_24=='a') ) {
-                    int LA9_32 = input.LA(4);
-
-                    if ( (LA9_32=='s') ) {
-                        int LA9_38 = input.LA(5);
-
-                        if ( (LA9_38=='s') ) {
-                            int LA9_44 = input.LA(6);
-
-                            if ( ((LA9_44 >= '0' && LA9_44 <= '9')||(LA9_44 >= 'A' && LA9_44 <= 'Z')||(LA9_44 >= 'a' && LA9_44 <= 'z')) ) {
-                                alt9=19;
-                            }
-                            else {
-                                alt9=11;
-                            }
-                        }
-                        else {
-                            alt9=19;
-                        }
-                    }
-                    else {
-                        alt9=19;
-                    }
-                }
-                else {
-                    alt9=19;
-                }
-            }
-            else {
-                alt9=19;
-            }
-            }
-            break;
-        case 'f':
-            {
-            int LA9_12 = input.LA(2);
-
-            if ( (LA9_12=='l') ) {
-                int LA9_25 = input.LA(3);
-
-                if ( (LA9_25=='o') ) {
-                    int LA9_33 = input.LA(4);
-
-                    if ( (LA9_33=='a') ) {
-                        int LA9_39 = input.LA(5);
-
-                        if ( (LA9_39=='t') ) {
-                            int LA9_45 = input.LA(6);
-
-                            if ( ((LA9_45 >= '0' && LA9_45 <= '9')||(LA9_45 >= 'A' && LA9_45 <= 'Z')||(LA9_45 >= 'a' && LA9_45 <= 'z')) ) {
-                                alt9=19;
-                            }
-                            else {
-                                alt9=12;
-                            }
-                        }
-                        else {
-                            alt9=19;
-                        }
-                    }
-                    else {
-                        alt9=19;
-                    }
-                }
-                else {
-                    alt9=19;
-                }
-            }
-            else {
-                alt9=19;
-            }
-            }
-            break;
-        case 'i':
-            {
-            int LA9_13 = input.LA(2);
-
-            if ( (LA9_13=='n') ) {
-                int LA9_26 = input.LA(3);
-
-                if ( (LA9_26=='t') ) {
-                    int LA9_34 = input.LA(4);
-
-                    if ( ((LA9_34 >= '0' && LA9_34 <= '9')||(LA9_34 >= 'A' && LA9_34 <= 'Z')||(LA9_34 >= 'a' && LA9_34 <= 'z')) ) {
-                        alt9=19;
-                    }
-                    else {
-                        alt9=13;
-                    }
-                }
-                else {
-                    alt9=19;
-                }
-            }
-            else {
-                alt9=19;
-            }
-            }
-            break;
-        case 'p':
-            {
-            int LA9_14 = input.LA(2);
-
-            if ( (LA9_14=='u') ) {
-                int LA9_27 = input.LA(3);
-
-                if ( (LA9_27=='b') ) {
-                    int LA9_35 = input.LA(4);
-
-                    if ( (LA9_35=='l') ) {
-                        int LA9_41 = input.LA(5);
-
-                        if ( (LA9_41=='i') ) {
-                            int LA9_46 = input.LA(6);
-
-                            if ( (LA9_46=='c') ) {
-                                int LA9_51 = input.LA(7);
-
-                                if ( ((LA9_51 >= '0' && LA9_51 <= '9')||(LA9_51 >= 'A' && LA9_51 <= 'Z')||(LA9_51 >= 'a' && LA9_51 <= 'z')) ) {
-                                    alt9=19;
-                                }
-                                else {
-                                    alt9=14;
-                                }
-                            }
-                            else {
-                                alt9=19;
-                            }
-                        }
-                        else {
-                            alt9=19;
-                        }
-                    }
-                    else {
-                        alt9=19;
-                    }
-                }
-                else {
-                    alt9=19;
-                }
-            }
-            else {
-                alt9=19;
-            }
-            }
-            break;
-        case 'r':
-            {
-            int LA9_15 = input.LA(2);
-
-            if ( (LA9_15=='e') ) {
-                int LA9_28 = input.LA(3);
-
-                if ( (LA9_28=='t') ) {
-                    int LA9_36 = input.LA(4);
-
-                    if ( (LA9_36=='u') ) {
-                        int LA9_42 = input.LA(5);
-
-                        if ( (LA9_42=='r') ) {
-                            int LA9_47 = input.LA(6);
-
-                            if ( (LA9_47=='n') ) {
-                                int LA9_52 = input.LA(7);
-
-                                if ( ((LA9_52 >= '0' && LA9_52 <= '9')||(LA9_52 >= 'A' && LA9_52 <= 'Z')||(LA9_52 >= 'a' && LA9_52 <= 'z')) ) {
-                                    alt9=19;
-                                }
-                                else {
-                                    alt9=15;
-                                }
-                            }
-                            else {
-                                alt9=19;
-                            }
-                        }
-                        else {
-                            alt9=19;
-                        }
-                    }
-                    else {
-                        alt9=19;
-                    }
-                }
-                else {
-                    alt9=19;
-                }
-            }
-            else {
-                alt9=19;
-            }
-            }
-            break;
-        case 'v':
-            {
-            int LA9_16 = input.LA(2);
-
-            if ( (LA9_16=='o') ) {
-                int LA9_29 = input.LA(3);
-
-                if ( (LA9_29=='i') ) {
-                    int LA9_37 = input.LA(4);
-
-                    if ( (LA9_37=='d') ) {
-                        int LA9_43 = input.LA(5);
-
-                        if ( ((LA9_43 >= '0' && LA9_43 <= '9')||(LA9_43 >= 'A' && LA9_43 <= 'Z')||(LA9_43 >= 'a' && LA9_43 <= 'z')) ) {
-                            alt9=19;
-                        }
-                        else {
-                            alt9=16;
-                        }
-                    }
-                    else {
-                        alt9=19;
-                    }
-                }
-                else {
-                    alt9=19;
-                }
-            }
-            else {
-                alt9=19;
-            }
-            }
-            break;
-        case '{':
-            {
-            alt9=17;
-            }
-            break;
-        case '}':
-            {
-            alt9=18;
-            }
-            break;
-        case 'A':
-        case 'B':
-        case 'C':
-        case 'D':
-        case 'E':
-        case 'F':
-        case 'G':
-        case 'H':
-        case 'I':
-        case 'J':
-        case 'K':
-        case 'L':
-        case 'M':
-        case 'N':
-        case 'O':
-        case 'P':
-        case 'Q':
-        case 'R':
-        case 'S':
-        case 'T':
-        case 'U':
-        case 'V':
-        case 'W':
-        case 'X':
-        case 'Y':
-        case 'Z':
-        case 'a':
-        case 'b':
-        case 'd':
-        case 'e':
-        case 'g':
-        case 'h':
-        case 'j':
-        case 'k':
-        case 'l':
-        case 'm':
-        case 'n':
-        case 'o':
-        case 'q':
-        case 's':
-        case 't':
-        case 'u':
-        case 'w':
-        case 'x':
-        case 'y':
-        case 'z':
-            {
-            alt9=19;
-            }
-            break;
-        case '0':
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-        case '9':
-            {
-            alt9=20;
-            }
-            break;
-        case '\n':
-        case '\r':
-            {
-            alt9=21;
-            }
-            break;
-        case '\t':
-        case '\f':
-        case ' ':
-            {
-            alt9=22;
-            }
-            break;
-        case '/':
-            {
-            int LA9_23 = input.LA(2);
-
-            if ( (LA9_23=='/') ) {
-                alt9=23;
-            }
-            else if ( (LA9_23=='*') ) {
-                alt9=24;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 9, 23, input);
-
-                throw nvae;
-
-            }
-            }
-            break;
-        default:
-            NoViableAltException nvae =
-                new NoViableAltException("", 9, 0, input);
-
-            throw nvae;
-
-        }
-
+        // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | Identifier | Integer | NEWLINE | Whitespace | SingleLineComment | MultiLineComment )
+        int alt9=28;
+        alt9 = dfa9.predict(input);
         switch (alt9) {
             case 1 :
                 // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:10: T__12
@@ -1426,47 +1123,79 @@ public class NebulaLexer extends Lexer {
                 }
                 break;
             case 19 :
-                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:118: Identifier
+                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:118: T__30
+                {
+                mT__30(); 
+
+
+                }
+                break;
+            case 20 :
+                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:124: T__31
+                {
+                mT__31(); 
+
+
+                }
+                break;
+            case 21 :
+                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:130: T__32
+                {
+                mT__32(); 
+
+
+                }
+                break;
+            case 22 :
+                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:136: T__33
+                {
+                mT__33(); 
+
+
+                }
+                break;
+            case 23 :
+                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:142: Identifier
                 {
                 mIdentifier(); 
 
 
                 }
                 break;
-            case 20 :
-                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:129: Integer
+            case 24 :
+                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:153: Integer
                 {
                 mInteger(); 
 
 
                 }
                 break;
-            case 21 :
-                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:137: NEWLINE
+            case 25 :
+                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:161: NEWLINE
                 {
                 mNEWLINE(); 
 
 
                 }
                 break;
-            case 22 :
-                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:145: Whitespace
+            case 26 :
+                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:169: Whitespace
                 {
                 mWhitespace(); 
 
 
                 }
                 break;
-            case 23 :
-                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:156: SingleLineComment
+            case 27 :
+                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:180: SingleLineComment
                 {
                 mSingleLineComment(); 
 
 
                 }
                 break;
-            case 24 :
-                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:174: MultiLineComment
+            case 28 :
+                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:198: MultiLineComment
                 {
                 mMultiLineComment(); 
 
@@ -1479,6 +1208,136 @@ public class NebulaLexer extends Lexer {
     }
 
 
+    protected DFA9 dfa9 = new DFA9(this);
+    static final String DFA9_eotS =
+        "\15\uffff\10\27\7\uffff\10\27\2\uffff\2\27\1\60\7\27\1\uffff\3\27"+
+        "\1\73\1\74\1\75\1\76\2\27\1\101\4\uffff\1\102\1\103\3\uffff";
+    static final String DFA9_eofS =
+        "\104\uffff";
+    static final String DFA9_minS =
+        "\1\11\14\uffff\2\154\1\156\1\165\1\145\1\165\1\150\1\157\6\uffff"+
+        "\1\52\1\141\1\157\1\164\1\142\1\164\1\160\2\151\2\uffff\1\163\1"+
+        "\141\1\60\1\154\1\165\1\145\1\163\1\144\1\163\1\164\1\uffff\1\151"+
+        "\2\162\4\60\1\143\1\156\1\60\4\uffff\2\60\3\uffff";
+    static final String DFA9_maxS =
+        "\1\175\14\uffff\2\154\1\156\1\165\1\145\1\165\1\150\1\157\6\uffff"+
+        "\1\57\1\141\1\157\1\164\1\142\1\164\1\160\2\151\2\uffff\1\163\1"+
+        "\141\1\172\1\154\1\165\1\145\1\163\1\144\1\163\1\164\1\uffff\1\151"+
+        "\2\162\4\172\1\143\1\156\1\172\4\uffff\2\172\3\uffff";
+    static final String DFA9_acceptS =
+        "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\10"+
+        "\uffff\1\25\1\26\1\27\1\30\1\31\1\32\11\uffff\1\33\1\34\12\uffff"+
+        "\1\17\12\uffff\1\23\1\24\1\15\1\16\2\uffff\1\22\1\20\1\21";
+    static final String DFA9_specialS =
+        "\104\uffff}>";
+    static final String[] DFA9_transitionS = {
+            "\1\32\1\31\1\uffff\1\32\1\31\22\uffff\1\32\7\uffff\1\1\1\2\1"+
+            "\3\1\4\1\5\1\6\1\7\1\33\12\30\1\10\1\11\1\uffff\1\12\3\uffff"+
+            "\32\27\1\13\1\uffff\1\14\3\uffff\2\27\1\15\2\27\1\16\2\27\1"+
+            "\17\6\27\1\20\1\27\1\21\1\22\1\23\1\27\1\24\4\27\1\25\1\uffff"+
+            "\1\26",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\1\34",
+            "\1\35",
+            "\1\36",
+            "\1\37",
+            "\1\40",
+            "\1\41",
+            "\1\42",
+            "\1\43",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\1\45\4\uffff\1\44",
+            "\1\46",
+            "\1\47",
+            "\1\50",
+            "\1\51",
+            "\1\52",
+            "\1\53",
+            "\1\54",
+            "\1\55",
+            "",
+            "",
+            "\1\56",
+            "\1\57",
+            "\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\1\61",
+            "\1\62",
+            "\1\63",
+            "\1\64",
+            "\1\65",
+            "\1\66",
+            "\1\67",
+            "",
+            "\1\70",
+            "\1\71",
+            "\1\72",
+            "\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\1\77",
+            "\1\100",
+            "\12\27\7\uffff\32\27\6\uffff\32\27",
+            "",
+            "",
+            "",
+            "",
+            "\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\12\27\7\uffff\32\27\6\uffff\32\27",
+            "",
+            "",
+            ""
+    };
+
+    static final short[] DFA9_eot = DFA.unpackEncodedString(DFA9_eotS);
+    static final short[] DFA9_eof = DFA.unpackEncodedString(DFA9_eofS);
+    static final char[] DFA9_min = DFA.unpackEncodedStringToUnsignedChars(DFA9_minS);
+    static final char[] DFA9_max = DFA.unpackEncodedStringToUnsignedChars(DFA9_maxS);
+    static final short[] DFA9_accept = DFA.unpackEncodedString(DFA9_acceptS);
+    static final short[] DFA9_special = DFA.unpackEncodedString(DFA9_specialS);
+    static final short[][] DFA9_transition;
+
+    static {
+        int numStates = DFA9_transitionS.length;
+        DFA9_transition = new short[numStates][];
+        for (int i=0; i<numStates; i++) {
+            DFA9_transition[i] = DFA.unpackEncodedString(DFA9_transitionS[i]);
+        }
+    }
+
+    class DFA9 extends DFA {
+
+        public DFA9(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 9;
+            this.eot = DFA9_eot;
+            this.eof = DFA9_eof;
+            this.min = DFA9_min;
+            this.max = DFA9_max;
+            this.accept = DFA9_accept;
+            this.special = DFA9_special;
+            this.transition = DFA9_transition;
+        }
+        public String getDescription() {
+            return "1:1: Tokens : ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | Identifier | Integer | NEWLINE | Whitespace | SingleLineComment | MultiLineComment );";
+        }
+    }
  
 
 }

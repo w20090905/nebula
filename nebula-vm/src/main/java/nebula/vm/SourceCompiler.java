@@ -109,6 +109,27 @@ public class SourceCompiler extends NebulaParser {
 		fields.add(field);
 	}
 
+	@Override
+	protected void enterFunction(String name, String returnTypeName) {
+		if (currentFunction != null) {
+			int[] code = new int[ip];
+			System.arraycopy(codeBuffer, 0, code, 0, ip);
+			currentFunction.code = code;
+		}
+
+		ip = 0;
+		currentFunction = new FunctionSymbol(currentClass, name);
+		functions.add(currentFunction);
+		// if (name.equals("main")) mainFunction = f;
+		// Did someone referred to this function before it was defined?
+		// if so, replace element in constant pool (at same index)
+		if (poolLocalK.contains(currentFunction))
+			poolLocalK.set(poolLocalK.indexOf(currentFunction), currentFunction);
+		else
+			toLocalConstantPoolIndex(currentFunction); // save into constant
+														// pool
+	}
+
 	protected void enterFunction(String name, int args, int locals) {
 		if (currentFunction != null) {
 			int[] code = new int[ip];

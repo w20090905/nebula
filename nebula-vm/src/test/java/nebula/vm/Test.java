@@ -1,4 +1,5 @@
 package nebula.vm;
+
 /***
  * Excerpted from "The Definitive ANTLR Reference",
  * published by The Pragmatic Bookshelf.
@@ -10,23 +11,24 @@ package nebula.vm;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
+import junit.framework.TestCase;
+
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 
-public class Test {
-	public static void main(String[] args) throws Exception {
+public class Test extends TestCase {
+	public static void testCls() throws Exception {
 
+		String filename = "code/cls.n";
 		InputStream input = null;
-		if (args.length > 0) input = new FileInputStream(args[0]);
-		else input = System.in;
+		input = new FileInputStream(filename);
 
 		Interpreter interpreter = new Interpreter(true);
 		ClassSymbol clz = load(input);
 		interpreter.resolve(clz);
 		interpreter.exec(interpreter.resolve(clz.getEntryPoint()));
-			
+
 	}
-	
 
 	public static ClassSymbol load(InputStream input) throws Exception {
 		boolean hasErrors = false;

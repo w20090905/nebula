@@ -56,7 +56,7 @@ superClass
 // END: class
 
 classMember
-  : type Identifier ('=' expression)? ';' //-> ^(FIELD_DECL type ID expression?)
+  : type Identifier ('=' expression)? ';' {defineField($Identifier.text,$type.text);}
   | methodDeclaration
   | 'public' ':' //-> // throw away; just making input valid C++
   ;
@@ -110,9 +110,8 @@ expressionList
 
 
 expression returns [VariableSymbol value]
-    :   addExpression //-> ^(EXPR addExpression)
+    :   e=addExpression {$value = $e.value;} //-> ^(EXPR addExpression)
     ;
-
 
 // START:addExpression
 addExpression returns [VariableSymbol value]
@@ -126,38 +125,41 @@ addExpression returns [VariableSymbol value]
 // START:multExpression
 multExpression returns [VariableSymbol value]
     :   e=postfixExpression {$value = $e.value;} 
-    ('*' e=postfixExpression  {$value = mul($value,$e.value);}
-    )*
+        (    
+          '*' e=postfixExpression  {$value = mul($value,$e.value);} 
+        )*
     ; 
 // END:multExpression
 
 
 // START: call
 postfixExpression returns [VariableSymbol value]
-    :   (primary)
-      ( options {backtrack=true;}
-    : '.' Identifier '(' expressionList ')'// -> ^(CALL ^('.' $postfixExpression ID))
-    | '.' Identifier             // -> ^('.' $postfixExpression ID)
-    | '(' expressionList ')' //       -> ^(CALL $postfixExpression)
-    )*
+    :   (e=primary{$value = $e.value;})
+        ( options {backtrack=true;}
+         : '.' Identifier '(' expressionList ')'// -> ^(CALL ^('.' $postfixExpression ID))
+         | '.' Identifier             // -> ^('.' $postfixExpression ID)
+         | '(' expressionList ')' //       -> ^(CALL $postfixExpression)
+         | '[' Integer ']'
+         | '[' expressionList ']'
+        )*
     ;
 // END: call
 
-
+/*
 suffix[VariableSymbol expr] returns [VariableSymbol value]
 options {backtrack=true;}
   : '.' Identifier '(' expressionList ')'// -> ^(CALL ^('.' {$expr} ID))
   | '.' Identifier              //-> ^('.' {$expr} Identifier)
   | '(' expressionList ')'        //-> ^(CALL {$expr})
   ;
-  
+*/  
 
 // START:atom
 primary returns [VariableSymbol value]
-    :   // value of an INT is the int computed from char sequence
+    :   'this'
+    |   'super'
         Integer {$value = defineInt($Integer.text);}
-    |   Identifier {$value = resolve($Identifier.text);}// variable reference
-        // value of parenthesized expression is just the expr value
+    |   Identifier {$value = resolve($Identifier.text);}
     |   '(' expression ')' {$value = $expression.value;}
     ;
 // END:atom
@@ -168,7 +170,7 @@ Integer :  Digit Digit*;
 fragment Digit :  '0'..'9';
 fragment Letter : 'a'..'z' | 'A'..'Z';
 
-NEWLINE:'\r'? '\n' ;
+NEWLINE:'\r'? '\n'  {$channel=HIDDEN;};    
 Whitespace :  (' ' | '\t' | '\f')+ {$channel=HIDDEN;};    
 SingleLineComment :
   '//' (~('\n'|'\r'))* ('\n'|'\r'('\n')?)? {$channel=HIDDEN;};

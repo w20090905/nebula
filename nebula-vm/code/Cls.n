@@ -1,0 +1,22 @@
+class Cls {
+
+	String name;
+
+	void main() {
+		
+		Cls a;
+		a.name = 2;
+		
+		a!run
+		
+		int a = 3;
+		int b = 4 - 3;
+		int e = 100;
+		int d = 2 + a * b + b * a * 6 + 6 + 9;
+		d = 2 + a * b + d * a * 6 + 6 + 9;
+		d = 2 + a * b + a * a * 6 + 6 + 9;
+		d = 2 + a * b + b * a * 6 + 6 + 9;
+		int uii = 2 + a * b + b * a * 6 + 6 + 9;
+		return;
+	}
+}
