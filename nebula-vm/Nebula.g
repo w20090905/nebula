@@ -42,14 +42,14 @@ import nebula.vm.Type;
 // END:members
 
 compilationUnit
-    :   ( classDefinition | varDeclaration | methodDeclaration )+ EOF
+    :   ( classDefinition | fieldDeclaration | methodDeclaration )+ EOF
     ;
 
 // START: class
 classDefinition
     :   'class' Identifier superClass? 
             {enterClass($Identifier.text);} 
-         '{' classMember+ '}' ';'
+         '{' classMember+ '}'
             {exitClass();}         
     ;
     
@@ -90,16 +90,20 @@ block
     :   '{' statement* '}' ;
 // END: block
 
+fieldDeclaration
+    :   type ID=Identifier ('=' expression)? ';' {defineField($ID.text,$type.type);}//-> ^(VAR_DECL type ID expression?)
+    ;
+    
 // START: var
 varDeclaration
-    :   type ID=Identifier ('=' expression)? ';' {defineField($ID.text,$type.type);}//-> ^(VAR_DECL type ID expression?)
+    :   type ID=Identifier ('=' e=expression)? ';' {evalSet($ID.text,$e.value);}//-> ^(VAR_DECL type ID expression?)
     ;
 // END: var
 
 
 statement
     :   block
-    | varDeclaration
+    |   varDeclaration
     |   'return' expression? ';' 
     |   postfixExpression // handles function calls like f(i);
         (   '=' expression  )?
@@ -109,6 +113,9 @@ statement
 
 
 expressionList
+    @init{
+          ArrayList list = new ArrayList();
+    }
     :   expression (',' expression)* | ;
 //END: expressionList
 

@@ -318,14 +318,17 @@ public class Interpreter {
 		Object[] poolK = func.getConstPool();
 		int maskObject = 0;
 		int ip = 0;
-		int op = code[ip++];
+		int op = 0;
 
 		int base = 0;
 
 		int ra = 0;
 		int rb = 0;
 
-		Outter: for (;; op = code[ip++]) {
+		int length = code.length;
+
+		Outter: for (; ip < length;) {
+			op = code[ip++];
 			if (trace) trace(ip - 1, base);
 			ra = A(op);
 
@@ -497,9 +500,10 @@ public class Interpreter {
 		Object[] poolK = func.getConstPool();
 		int[] code = func.code;
 		int ip = 0;
-		int op = code[ip++];
+		int op = 0;
 
-		for (; ip < code.length; op = code[ip++]) {
+		for (; ip < code.length;) {
+			op = code[ip++];
 			// if (trace) trace();
 			switch (OP_CODE(op)) {
 
