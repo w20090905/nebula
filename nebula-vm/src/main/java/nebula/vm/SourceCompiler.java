@@ -103,14 +103,14 @@ public class SourceCompiler extends NebulaParser {
 	}
 
 	@Override
-	protected void defineField(String name, String typeName) {
+	protected void defineField(String name, Type type) {
 		FieldSymbol field = new FieldSymbol(this.currentClass, name);
 		toLocalConstantPoolIndex(field);
 		fields.add(field);
 	}
 
 	@Override
-	protected void enterFunction(String name, String returnTypeName) {
+	protected void enterFunction(String name, Type returnType) {
 		if (currentFunction != null) {
 			int[] code = new int[ip];
 			System.arraycopy(codeBuffer, 0, code, 0, ip);

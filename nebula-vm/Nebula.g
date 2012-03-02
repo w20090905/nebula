@@ -9,6 +9,7 @@ options {
 @header {
 package nebula.vm;
 import nebula.vm.VariableSymbol;
+import nebula.vm.Type;
 }
 
 @members {
@@ -17,11 +18,13 @@ import nebula.vm.VariableSymbol;
   protected void enterClass(String name) {};
   protected void exitClass() {};
   
-  protected void enterFunction(String name,String typeName) {;};
+  protected void enterFunction(String name,Type type) {;};
   protected void exitFunction() {;};
   
-  protected void defineField(String name,String typeName){;};
+  protected void defineField(String name,Type type){;};
   
+  protected Type resolveType(String name){return null;};
+    
   protected VariableSymbol resolve(String name) {return null;};
   protected VariableSymbol defineVariable(String name) {return null;};
   protected VariableSymbol defineInt(String name) {return null;};
@@ -56,7 +59,7 @@ superClass
 // END: class
 
 classMember
-  : type Identifier ('=' expression)? ';' {defineField($Identifier.text,$type.text);}
+  : type e=Identifier ('=' expression)? ';' {defineField($e.text,$type.type);}
   | methodDeclaration
   | 'public' ':' //-> // throw away; just making input valid C++
   ;
@@ -64,7 +67,7 @@ classMember
 // START: method
 methodDeclaration
     :   type Identifier '(' formalParameters? ')' 
-          {enterFunction($Identifier.text,$type.text);}
+          {enterFunction($Identifier.text,$type.type);}
         block
           {exitFunction();}
         //-> ^(METHOD_DECL type ID formalParameters? block)
@@ -75,10 +78,11 @@ formalParameters
     :   type Identifier (',' type Identifier)* //-> ^(ARG_DECL type ID)+
     ;
 
-type:   'float'
-    |   'int'
-    | 'void'
-    | Identifier // class type name
+type returns [Type type]
+    :   'decimal' {$type = BuiltInTypeSymbol.DECIMAL;}
+    |   'int' {$type = BuiltInTypeSymbol.INT;}
+    |   'void' {$type = BuiltInTypeSymbol.VOID;}
+    |   ID=Identifier {$type = resolveType($ID.text);}
     ;
 
 // START: block
@@ -88,7 +92,7 @@ block
 
 // START: var
 varDeclaration
-    :   type Identifier ('=' expression)? ';' //-> ^(VAR_DECL type ID expression?)
+    :   type ID=Identifier ('=' expression)? ';' {defineField($ID.text,$type.type);}//-> ^(VAR_DECL type ID expression?)
     ;
 // END: var
 
@@ -145,20 +149,11 @@ postfixExpression returns [VariableSymbol value]
     ;
 // END: call
 
-/*
-suffix[VariableSymbol expr] returns [VariableSymbol value]
-options {backtrack=true;}
-  : '.' Identifier '(' expressionList ')'// -> ^(CALL ^('.' {$expr} ID))
-  | '.' Identifier              //-> ^('.' {$expr} Identifier)
-  | '(' expressionList ')'        //-> ^(CALL {$expr})
-  ;
-*/  
-
 // START:atom
 primary returns [VariableSymbol value]
     :   'this'
     |   'super'
-        Integer {$value = defineInt($Integer.text);}
+    |   Integer {$value = defineInt($Integer.text);}
     |   Identifier {$value = resolve($Identifier.text);}
     |   '(' expression ')' {$value = $expression.value;}
     ;

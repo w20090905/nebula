@@ -6,9 +6,7 @@ class Cls {
 		
 		Cls a;
 		a.name = 2;
-		
-		a!run
-		
+				
 		int a = 3;
 		int b = 4 - 3;
 		int e = 100;
