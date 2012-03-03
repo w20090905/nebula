@@ -4,7 +4,6 @@ options {
   language = Java;
 }
 
-// START:members
 @lexer::header {package nebula.vm;}
 @header {
 package nebula.vm;
@@ -12,13 +11,14 @@ import nebula.vm.VariableSymbol;
 import nebula.vm.Type;
 }
 
+// START:members
 @members {
   /** Map variable name to Integer object holding value */
 
-  protected void enterClass(String name) {};
+  protected void enterClass(String name,Type superType) {};
   protected void exitClass() {};
   
-  protected void enterFunction(String name,Type type) {;};
+  protected void enterFunction(String name,Type returnType,List<VariableSymbol> list) {;};
   protected void exitFunction() {;};
   
   protected void defineField(String name,Type type){;};
@@ -26,8 +26,15 @@ import nebula.vm.Type;
   protected Type resolveType(String name){return null;};
     
   protected VariableSymbol resolve(String name) {return null;};
-  protected VariableSymbol defineVariable(String name) {return null;};
+  protected VariableSymbol defineVariable(String name,Type type) {return null;};
   protected VariableSymbol defineInt(String name) {return null;};
+  
+  protected VariableSymbol call(VariableSymbol name,List<VariableSymbol> list){return null;};
+  protected VariableSymbol getField(VariableSymbol obj,String text){return null;};  
+  protected VariableSymbol index(VariableSymbol obj,VariableSymbol i){return null;};
+  protected VariableSymbol index(VariableSymbol obj,List<VariableSymbol> cause){return null;};
+  protected void ret(VariableSymbol a) {;};
+  
     
   protected VariableSymbol eval(VariableSymbol a) {return null;};
   protected VariableSymbol evalSet(String id,VariableSymbol b) {return null;};
@@ -35,47 +42,52 @@ import nebula.vm.Type;
   protected VariableSymbol add(VariableSymbol a, VariableSymbol b) {return null;};
   protected VariableSymbol sub(VariableSymbol a, VariableSymbol b) {return null;};
   protected VariableSymbol mul(VariableSymbol a, VariableSymbol b) {return null;};  
-  protected VariableSymbol load(VariableSymbol a, VariableSymbol b) {return null;};
-
+  protected VariableSymbol load(VariableSymbol a, VariableSymbol b) {return null;}; 
 }
 
 // END:members
 
 compilationUnit
-    :   ( classDefinition | fieldDeclaration | methodDeclaration )+ EOF
+    :   ( classDefinition )+ EOF
     ;
 
 // START: class
 classDefinition
     :   'class' Identifier superClass? 
-            {enterClass($Identifier.text);} 
+            {enterClass($Identifier.text,$superClass.type);} 
          '{' classMember+ '}'
             {exitClass();}         
     ;
     
-superClass
-  : ':' 'public' Identifier //-> ^(EXTENDS ID)
+superClass returns[Type type]
+  : 'extends' id=Identifier {$type=resolveType($id.text);}
   ;
-// END: class
 
 classMember
-  : type e=Identifier ('=' expression)? ';' {defineField($e.text,$type.type);}
+  : fieldDeclaration
   | methodDeclaration
-  | 'public' ':' //-> // throw away; just making input valid C++
-  ;
+  ;  
+// END: class
+
+//TODO fieldDeclaration
+fieldDeclaration
+    :   type ID=Identifier ('=' expression)? ';' {defineField($ID.text,$type.type);}
+    ;
   
 // START: method
 methodDeclaration
-    :   type Identifier '(' formalParameters? ')' 
-          {enterFunction($Identifier.text,$type.type);}
+    :   type name=Identifier '(' params=formalParameters? ')' 
+          {enterFunction($name.text,$type.type,$params.list);}
         block
           {exitFunction();}
-        //-> ^(METHOD_DECL type ID formalParameters? block)
     ;
 // END: method
 
-formalParameters
-    :   type Identifier (',' type Identifier)* //-> ^(ARG_DECL type ID)+
+formalParameters returns [List<VariableSymbol> list]
+    @init{$list = new ArrayList<>(); }    
+    :   t=type ID=Identifier{$list.add(defineVariable($ID.text,$t.type));}
+        ( ',' t=type ID=Identifier{$list.add(defineVariable($ID.text),$t.type);} 
+        )* 
     ;
 
 type returns [Type type]
@@ -90,13 +102,10 @@ block
     :   '{' statement* '}' ;
 // END: block
 
-fieldDeclaration
-    :   type ID=Identifier ('=' expression)? ';' {defineField($ID.text,$type.type);}//-> ^(VAR_DECL type ID expression?)
-    ;
     
 // START: var
 varDeclaration
-    :   type ID=Identifier ('=' e=expression)? ';' {evalSet($ID.text,$e.value);}//-> ^(VAR_DECL type ID expression?)
+    :   type ID=Identifier ('=' e=expression)? ';' {evalSet($ID.text,$e.value);}
     ;
 // END: var
 
@@ -104,20 +113,18 @@ varDeclaration
 statement
     :   block
     |   varDeclaration
-    |   'return' expression? ';' 
+    |   'return' e=expression? ';' {ret($e.value);}
     |   postfixExpression // handles function calls like f(i);
         (   '=' expression  )?
         ';' 
     | ';' 
     ;
 
-
-expressionList
-    @init{
-          ArrayList list = new ArrayList();
-    }
-    :   expression (',' expression)* | ;
-//END: expressionList
+// START: expressionList
+expressionList returns [List<VariableSymbol> list]
+    @init{$list = new ArrayList<>(); }    
+    :   e=expression{list.add(e);} (',' expression{list.add(e);})* | ;
+// END: expressionList
 
 
 expression returns [VariableSymbol value]
@@ -136,8 +143,7 @@ addExpression returns [VariableSymbol value]
 // START:multExpression
 multExpression returns [VariableSymbol value]
     :   e=postfixExpression {$value = $e.value;} 
-        (    
-          '*' e=postfixExpression  {$value = mul($value,$e.value);} 
+        (   '*' e=postfixExpression  {$value = mul($value,$e.value);} 
         )*
     ; 
 // END:multExpression
@@ -147,25 +153,24 @@ multExpression returns [VariableSymbol value]
 postfixExpression returns [VariableSymbol value]
     :   (e=primary{$value = $e.value;})
         ( options {backtrack=true;}
-         : '.' Identifier '(' expressionList ')'// -> ^(CALL ^('.' $postfixExpression ID))
-         | '.' Identifier             // -> ^('.' $postfixExpression ID)
-         | '(' expressionList ')' //       -> ^(CALL $postfixExpression)
-         | '[' Integer ']'
-         | '[' expressionList ']'
+         : '.' name=Identifier '(' expressionList ')' {$value = call(getField($value,$name.text),$params.list);}
+         | '.' name=Identifier            { $value = getField($value,$name.text);}
+         | '(' params=expressionList ')'  { $value = call($value,$params.list);}
+         | '[' Integer ']'                { $value = index($value,defineInt($Integer.text));}
+         | '[' cause=expressionList ']'   { $value = index($value,$cause.list);}
         )*
     ;
 // END: call
 
 // START:atom
 primary returns [VariableSymbol value]
-    :   'this'
-    |   'super'
+    :   ID='this'{$value = resolve($ID.text);}
+    |   ID='super'{$value = resolve($ID.text);}
     |   Integer {$value = defineInt($Integer.text);}
     |   Identifier {$value = resolve($Identifier.text);}
     |   '(' expression ')' {$value = $expression.value;}
     ;
 // END:atom
-
 
 Identifier :  Letter (Letter | Digit)*;  
 Integer :  Digit Digit*;

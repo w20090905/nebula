@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
 
 public class SourceCompiler extends NebulaParser {
@@ -97,7 +96,7 @@ public class SourceCompiler extends NebulaParser {
 	}
 
 	@Override
-	protected void enterClass(String name) {
+	protected void enterClass(String name, Type superType) {
 		this.currentClass = new ClassSymbol(name);
 		toLocalConstantPoolIndex(this.currentClass);
 	}
@@ -110,7 +109,7 @@ public class SourceCompiler extends NebulaParser {
 	}
 
 	@Override
-	protected void enterFunction(String name, Type returnType) {
+	protected void enterFunction(String name, Type returnType, List<VariableSymbol> list) {
 		if (currentFunction != null) {
 			int[] code = new int[ip];
 			System.arraycopy(codeBuffer, 0, code, 0, ip);
@@ -150,7 +149,27 @@ public class SourceCompiler extends NebulaParser {
 														// pool
 	}
 
-	// protected int getFunctionIndexx(String id) {
+	protected VariableSymbol call(VariableSymbol name, List<VariableSymbol> list) {
+		return null;
+	};
+
+	protected VariableSymbol getField(VariableSymbol obj, String text) {
+		return null;
+	};
+
+	protected VariableSymbol index(VariableSymbol obj, VariableSymbol i) {
+		return null;
+	};
+
+	protected VariableSymbol index(VariableSymbol obj, List<VariableSymbol> cause) {
+		return null;
+	};
+
+	protected void ret(VariableSymbol a) {
+		;
+	};
+
+	// protected int getFunctionIndex(String id) {
 	// int i = poolLocalK.indexOf(new FunctionSymbol(id));
 	// if (i >= 0) return i; // already in system; return index.
 	// // must be a forward function reference
@@ -162,25 +181,6 @@ public class SourceCompiler extends NebulaParser {
 	// dataSize = n;
 	// }
 
-	protected void defineLabel(Token idToken) {
-		String id = idToken.getText();
-		LabelSymbol sym = (LabelSymbol) labels.get(id);
-		if (sym == null) {
-			LabelSymbol csym = new LabelSymbol(id, ip, 0, false);
-			labels.put(id, csym); // add to symbol table
-		} else {
-			if (sym.isForwardRef) {
-				// we have found definition of forward
-				sym.isDefined = true;
-				sym.address = ip;
-				sym.resolveForwardReferences(codeBuffer);
-			} else {
-				// redefinition of symbol
-				System.err.println("line " + idToken.getLine() + ": redefinition of symbol " + id);
-			}
-		}
-	}
-
 	protected void ensureCapacity(int index) {
 		if (index >= codeBuffer.length) { // expand
 			int newSize = Math.max(index, codeBuffer.length) * 2;
@@ -190,7 +190,6 @@ public class SourceCompiler extends NebulaParser {
 		}
 	}
 
-	@Override
 	protected VariableSymbol defineVariable(String name) {
 		return defineVariable(name, SymbolTable._int);
 	};
@@ -199,6 +198,7 @@ public class SourceCompiler extends NebulaParser {
 		return defineInt(name, SymbolTable._int);
 	};
 
+	@Override
 	protected VariableSymbol defineVariable(String name, Type type) {
 		VariableSymbol var = new VariableSymbol(name, type, (short) locals.size());
 		addLocals(var);

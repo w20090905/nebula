@@ -17,9 +17,8 @@ import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 
 public class Test extends TestCase {
-	public static void testCls() throws Exception {
 
-		String filename = "code/cls.n";
+	private void parse(String filename) throws Exception {
 		InputStream input = null;
 		input = new FileInputStream(filename);
 
@@ -27,10 +26,17 @@ public class Test extends TestCase {
 		ClassSymbol clz = load(input);
 		interpreter.resolve(clz);
 		interpreter.exec(interpreter.resolve(clz.getEntryPoint()));
-
 	}
 
-	public static ClassSymbol load(InputStream input) throws Exception {
+	public void testClsDefineOnly() throws Exception {
+		parse("code/ClsDefineOnly.n");
+	}
+
+	public void testClsFieldGet() throws Exception {
+		parse("code/ClsFieldGet.n");
+	}
+
+	public ClassSymbol load(InputStream input) throws Exception {
 		boolean hasErrors = false;
 		try {
 			NebulaLexer assemblerLexer = new NebulaLexer(new ANTLRInputStream(input));
