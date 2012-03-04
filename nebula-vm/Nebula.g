@@ -71,7 +71,7 @@ classMember
 
 //TODO fieldDeclaration
 fieldDeclaration
-    :   type ID=Identifier ('=' expression)? ';' {defineField($ID.text,$type.type);}
+    :   type ID=Identifier ('=' e=expression)? ';' {defineField($ID.text,$type.type);}
     ;
   
 // START: method
