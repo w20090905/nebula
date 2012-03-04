@@ -86,7 +86,7 @@ methodDeclaration
 formalParameters returns [List<VariableSymbol> list]
     @init{$list = new ArrayList<>(); }    
     :   t=type ID=Identifier{$list.add(defineVariable($ID.text,$t.type));}
-        ( ',' t=type ID=Identifier{$list.add(defineVariable($ID.text),$t.type);} 
+        ( ',' t=type ID=Identifier{$list.add(defineVariable($ID.text,$t.type));} 
         )* 
     ;
 

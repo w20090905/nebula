@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Nebula.g 2012-03-03 21:55:48
+// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Nebula.g 2012-03-04 12:37:14
 
 package nebula.vm;
 import nebula.vm.VariableSymbol;
@@ -671,7 +671,7 @@ public class NebulaParser extends Parser {
 
             	    ID=(Token)match(input,Identifier,FOLLOW_Identifier_in_formalParameters356); if (state.failed) return list;
 
-            	    if ( state.backtracking==0 ) {list.add(defineVariable((ID!=null?ID.getText():null)),t);}
+            	    if ( state.backtracking==0 ) {list.add(defineVariable((ID!=null?ID.getText():null),t));}
 
             	    }
             	    break;
