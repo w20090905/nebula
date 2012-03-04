@@ -11,7 +11,7 @@ import java.util.Vector;
  * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book information.
  ***/
 /** Represents a variable definition (name,type) in symbol table */
-public class VariableSymbol extends Symbol {
+public class Var extends Symbol {
 	public short reg;
 	/** Is this ref'd before def'd. */
 	public boolean resolved = false;
@@ -26,12 +26,12 @@ public class VariableSymbol extends Symbol {
 		this.reg = regIndex;
 	}
 
-	public VariableSymbol(String name, Type type, short reg) {
+	public Var(String name, Type type, short reg) {
 		super(name, type);
 		this.reg = reg;
 	}
 
-	public VariableSymbol(String name, Type type, int ip, int offset) {
+	public Var(String name, Type type, int ip, int offset) {
 		super(name, type);
 		resolved = false;
 		// if (forward) {

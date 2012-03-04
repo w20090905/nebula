@@ -46,16 +46,16 @@ public class SourceCompiler extends NebulaParser {
 		super(input);
 	}
 
-	List<VariableSymbol> locals = new ArrayList<>();
+	List<Var> locals = new ArrayList<>();
 	short maxLocals = 0;
 
-	private void addLocals(VariableSymbol var) {
+	private void addLocals(Var var) {
 		locals.add(var);
 		maxLocals = maxLocals > (short) locals.size() ? maxLocals : (short) locals.size();
 	}
 
 	@Override
-	protected VariableSymbol resolve(String name) {
+	protected Var resolve(String name) {
 		for (int i = 0; i < locals.size(); i++) {
 			if (locals.get(i).getName().equals(name)) {
 				return locals.get(i);
@@ -88,7 +88,7 @@ public class SourceCompiler extends NebulaParser {
 				// record where in code memory we should patch later
 				sym.addForwardReference(ip - 1, offset);
 			} else {
-				// all is well; it's defined--just grab address
+				// all is well; it's defd--just grab address
 				return sym.address;
 			}
 		}
@@ -102,14 +102,14 @@ public class SourceCompiler extends NebulaParser {
 	}
 
 	@Override
-	protected void defineField(String name, Type type) {
+	protected void defField(String name, Type type) {
 		FieldSymbol field = new FieldSymbol(this.currentClass, name);
 		toLocalConstantPoolIndex(field);
 		fields.add(field);
 	}
 
 	@Override
-	protected void enterFunction(String name, Type returnType, List<VariableSymbol> list) {
+	protected void enterFunction(String name, Type returnType, List<Var> list) {
 		if (currentFunction != null) {
 			int[] code = new int[ip];
 			System.arraycopy(codeBuffer, 0, code, 0, ip);
@@ -120,7 +120,7 @@ public class SourceCompiler extends NebulaParser {
 		currentFunction = new FunctionSymbol(currentClass, name);
 		functions.add(currentFunction);
 		// if (name.equals("main")) mainFunction = f;
-		// Did someone referred to this function before it was defined?
+		// Did someone referred to this function before it was defd?
 		// if so, replace element in constant pool (at same index)
 		if (poolLocalK.contains(currentFunction))
 			poolLocalK.set(poolLocalK.indexOf(currentFunction), currentFunction);
@@ -140,7 +140,7 @@ public class SourceCompiler extends NebulaParser {
 		currentFunction = new FunctionSymbol(currentClass, name, args, locals, codeBuffer);
 		functions.add(currentFunction);
 		// if (name.equals("main")) mainFunction = f;
-		// Did someone referred to this function before it was defined?
+		// Did someone referred to this function before it was defd?
 		// if so, replace element in constant pool (at same index)
 		if (poolLocalK.contains(currentFunction))
 			poolLocalK.set(poolLocalK.indexOf(currentFunction), currentFunction);
@@ -149,23 +149,23 @@ public class SourceCompiler extends NebulaParser {
 														// pool
 	}
 
-	protected VariableSymbol call(VariableSymbol name, List<VariableSymbol> list) {
+	protected Var call(Var name, List<Var> list) {
 		return null;
 	};
 
-	protected VariableSymbol getField(VariableSymbol obj, String text) {
+	protected Var getField(Var obj, String text) {
 		return null;
 	};
 
-	protected VariableSymbol index(VariableSymbol obj, VariableSymbol i) {
+	protected Var index(Var obj, Var i) {
 		return null;
 	};
 
-	protected VariableSymbol index(VariableSymbol obj, List<VariableSymbol> cause) {
+	protected Var index(Var obj, List<Var> cause) {
 		return null;
 	};
 
-	protected void ret(VariableSymbol a) {
+	protected void ret(Var a) {
 		;
 	};
 
@@ -177,7 +177,7 @@ public class SourceCompiler extends NebulaParser {
 	// return toLocalConstantPoolIndex(new FunctionSymbol(id));
 	// }
 
-	// protected void defineDataSize(int n) {
+	// protected void defDataSize(int n) {
 	// dataSize = n;
 	// }
 
@@ -190,24 +190,24 @@ public class SourceCompiler extends NebulaParser {
 		}
 	}
 
-	protected VariableSymbol defineVariable(String name) {
-		return defineVariable(name, SymbolTable._int);
+	protected Var defVariable(String name) {
+		return defVariable(name, SymbolTable._int);
 	};
 
-	protected VariableSymbol defineInt(String name) {
-		return defineInt(name, SymbolTable._int);
+	protected Var defInt(String value) {
+		return defInt(value, SymbolTable._int);
 	};
 
 	@Override
-	protected VariableSymbol defineVariable(String name, Type type) {
-		VariableSymbol var = new VariableSymbol(name, type, (short) locals.size());
+	protected Var defVariable(String name, Type type) {
+		Var var = new Var(name, type, (short) locals.size());
 		addLocals(var);
 		System.out.println("var " + var);
 		return var;
 	}
 
-	protected VariableSymbol defineInt(String value, Type type) {
-		VariableSymbol var = new VariableSymbol(value, type, ip, 1);
+	protected Var defInt(String value, Type type) {
+		Var var = new Var(value, type, ip, 1);
 		System.out.println("const	" + var);
 		addLocals(var);
 		gen(INSTR_ICONST, var.reg, java.lang.Integer.parseInt(value));
@@ -215,7 +215,7 @@ public class SourceCompiler extends NebulaParser {
 	}
 
 	@Override
-	protected VariableSymbol eval(VariableSymbol a) {
+	protected Var eval(Var a) {
 		if (!a.resolved) {
 			a.reg = (short) locals.indexOf(a);
 			a.resolveForwardReferences(codeBuffer);
@@ -226,8 +226,8 @@ public class SourceCompiler extends NebulaParser {
 	};
 
 	@Override
-	protected VariableSymbol evalSet(String id, VariableSymbol b) {
-		VariableSymbol var = resolve(id);
+	protected Var evalSet(String id, Var b) {
+		Var var = resolve(id);
 		if (!b.resolved) {
 			if (var == null) {
 				b.setName(id);
@@ -284,8 +284,8 @@ public class SourceCompiler extends NebulaParser {
 		return poolLocalK.size() - 1;
 	}
 
-	private VariableSymbol bop(VariableSymbol a, VariableSymbol b) {
-		VariableSymbol var;
+	private Var bop(Var a, Var b) {
+		Var var;
 		if (!a.resolved) {
 			var = a;
 			a.addReference(ip, 1);
@@ -306,7 +306,7 @@ public class SourceCompiler extends NebulaParser {
 			a.addReference(ip, 3);
 		} else {
 			// add new temp variable
-			var = new VariableSymbol("Temp" + locals.size(), SymbolTable._int, ip, 1);
+			var = new Var("Temp" + locals.size(), SymbolTable._int, ip, 1);
 			addLocals(var);
 		}
 		System.out.println("bop 	" + var);
@@ -314,29 +314,29 @@ public class SourceCompiler extends NebulaParser {
 	};
 
 	@Override
-	protected VariableSymbol add(VariableSymbol a, VariableSymbol b) {
-		VariableSymbol var = bop(a, b);
+	protected Var add(Var a, Var b) {
+		Var var = bop(a, b);
 		gen(INSTR_IADD, var.reg, a.reg, b.reg);
 		return var;
 	}
 
 	@Override
-	protected VariableSymbol sub(VariableSymbol a, VariableSymbol b) {
-		VariableSymbol var = bop(a, b);
+	protected Var sub(Var a, Var b) {
+		Var var = bop(a, b);
 		gen(INSTR_ISUB, var.reg, a.reg, b.reg);
 		return var;
 	}
 
 	@Override
-	protected VariableSymbol mul(VariableSymbol a, VariableSymbol b) {
-		VariableSymbol var = bop(a, b);
+	protected Var mul(Var a, Var b) {
+		Var var = bop(a, b);
 		gen(INSTR_IMUL, var.reg, a.reg, b.reg);
 		return var;
 	}
 
 	@Override
-	protected VariableSymbol load(VariableSymbol a, VariableSymbol b) {
-		VariableSymbol var = bop(a, b);
+	protected Var load(Var a, Var b) {
+		Var var = bop(a, b);
 		gen(INSTR_ICONST, a.reg, java.lang.Integer.parseInt(b.getName()));
 		return var;
 	}

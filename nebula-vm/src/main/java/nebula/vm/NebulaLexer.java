@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Nebula.g 2012-03-04 22:15:17
+// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Nebula.g 2012-03-04 22:28:40
 package nebula.vm;
 
 import org.antlr.runtime.*;
@@ -31,8 +31,8 @@ public class NebulaLexer extends Lexer {
     public static final int T__31=31;
     public static final int T__32=32;
     public static final int Digit=4;
-    public static final int Identifier=5;
-    public static final int Integer=6;
+    public static final int ID=5;
+    public static final int INT=6;
     public static final int Letter=7;
     public static final int MultiLineComment=8;
     public static final int NEWLINE=9;
@@ -511,18 +511,18 @@ public class NebulaLexer extends Lexer {
     }
     // $ANTLR end "T__32"
 
-    // $ANTLR start "Identifier"
-    public final void mIdentifier() throws RecognitionException {
+    // $ANTLR start "ID"
+    public final void mID() throws RecognitionException {
         try {
-            int _type = Identifier;
+            int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:12: ( Letter ( Letter | Digit )* )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:15: Letter ( Letter | Digit )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:4: ( Letter ( Letter | Digit )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:7: Letter ( Letter | Digit )*
             {
             mLetter(); 
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:22: ( Letter | Digit )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:14: ( Letter | Digit )*
             loop1:
             do {
                 int alt1=2;
@@ -565,20 +565,20 @@ public class NebulaLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "Identifier"
+    // $ANTLR end "ID"
 
-    // $ANTLR start "Integer"
-    public final void mInteger() throws RecognitionException {
+    // $ANTLR start "INT"
+    public final void mINT() throws RecognitionException {
         try {
-            int _type = Integer;
+            int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:177:9: ( Digit ( Digit )* )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:177:12: Digit ( Digit )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:177:5: ( Digit ( Digit )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:177:8: Digit ( Digit )*
             {
             mDigit(); 
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:177:18: ( Digit )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:177:14: ( Digit )*
             loop2:
             do {
                 int alt2=2;
@@ -621,7 +621,7 @@ public class NebulaLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "Integer"
+    // $ANTLR end "INT"
 
     // $ANTLR start "Digit"
     public final void mDigit() throws RecognitionException {
@@ -952,7 +952,7 @@ public class NebulaLexer extends Lexer {
     // $ANTLR end "MultiLineComment"
 
     public void mTokens() throws RecognitionException {
-        // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | Identifier | Integer | NEWLINE | Whitespace | SingleLineComment | MultiLineComment )
+        // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | ID | INT | NEWLINE | Whitespace | SingleLineComment | MultiLineComment )
         int alt9=27;
         alt9 = dfa9.predict(input);
         switch (alt9) {
@@ -1125,23 +1125,23 @@ public class NebulaLexer extends Lexer {
                 }
                 break;
             case 22 :
-                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:136: Identifier
+                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:136: ID
                 {
-                mIdentifier(); 
+                mID(); 
 
 
                 }
                 break;
             case 23 :
-                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:147: Integer
+                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:139: INT
                 {
-                mInteger(); 
+                mINT(); 
 
 
                 }
                 break;
             case 24 :
-                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:155: NEWLINE
+                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:143: NEWLINE
                 {
                 mNEWLINE(); 
 
@@ -1149,7 +1149,7 @@ public class NebulaLexer extends Lexer {
                 }
                 break;
             case 25 :
-                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:163: Whitespace
+                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:151: Whitespace
                 {
                 mWhitespace(); 
 
@@ -1157,7 +1157,7 @@ public class NebulaLexer extends Lexer {
                 }
                 break;
             case 26 :
-                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:174: SingleLineComment
+                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:162: SingleLineComment
                 {
                 mSingleLineComment(); 
 
@@ -1165,7 +1165,7 @@ public class NebulaLexer extends Lexer {
                 }
                 break;
             case 27 :
-                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:192: MultiLineComment
+                // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:1:180: MultiLineComment
                 {
                 mMultiLineComment(); 
 
@@ -1309,7 +1309,7 @@ public class NebulaLexer extends Lexer {
             this.transition = DFA9_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | Identifier | Integer | NEWLINE | Whitespace | SingleLineComment | MultiLineComment );";
+            return "1:1: Tokens : ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | ID | INT | NEWLINE | Whitespace | SingleLineComment | MultiLineComment );";
         }
     }
  
