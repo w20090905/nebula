@@ -16,7 +16,7 @@ import nebula.vm.Type;
   /** Map variable name to Integer object holding value */
 
   protected void enterClass(String name,Type superType) {};
-  protected void exitClass() {};
+  protected void exitClass() {;};
   
   protected void enterFunction(String name,Type returnType,List<VariableSymbol> list) {;};
   protected void exitFunction() {;};
@@ -101,20 +101,21 @@ type returns [Type type]
 block
     :   '{' statement* '}' ;
 // END: block
-
     
 // START: var
 varDeclaration
-    :   type ID=Identifier ('=' e=expression)? ';' {evalSet($ID.text,$e.value);}
+    :   type ID=Identifier ('=' e=expression)? ';' {
+          defineVariable($ID.text,$type.type);  
+          evalSet($ID.text,$e.value);
+        }
     ;
 // END: var
-
 
 statement
     :   block
     |   varDeclaration
     |   'return' e=expression? ';' {ret($e.value);}
-    |   postfixExpression // handles function calls like f(i);
+    |   postfixExpression
         (   '=' expression  )?
         ';' 
     | ';' 
