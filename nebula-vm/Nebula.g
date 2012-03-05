@@ -103,7 +103,7 @@ statement
     |   varDeclaration
     |   'return' e=expr? ';' {ret($e.value);}
     |   to=postfixexpr
-        (   '=' from=expr  )?{evalSet(to,from);}
+        (   '=' from=expr  )?{evalSet($to.value,$from.value);System.out.println("#  #############");}
         ';' 
     | ';' 
     ;

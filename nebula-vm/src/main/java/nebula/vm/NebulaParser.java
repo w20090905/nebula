@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Nebula.g 2012-03-05 15:49:03
+// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Nebula.g 2012-03-05 21:04:26
 
 package nebula.vm;
 import nebula.vm.Var;
@@ -1087,7 +1087,7 @@ public class NebulaParser extends Parser {
                     }
 
 
-                    if ( state.backtracking==0 ) {evalSet(to,from);}
+                    if ( state.backtracking==0 ) {evalSet(to,from);System.out.println("#  #############");}
 
                     match(input,19,FOLLOW_19_in_statement585); if (state.failed) return ;
 
