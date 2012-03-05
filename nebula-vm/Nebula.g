@@ -3,7 +3,6 @@ grammar Nebula;
 options {
   language = Java;
 }
-
 @lexer::header {package nebula.vm;}
 @header {
 package nebula.vm;
@@ -11,8 +10,7 @@ import nebula.vm.Var;
 import nebula.vm.Type;
 }
 
-// START:members
-@members {
+@members {  // START:members
   /** Map variable name to INT object holding value */
 
   protected void enterClass(String name,Type superType) {};
@@ -29,13 +27,13 @@ import nebula.vm.Type;
   protected Var defVariable(String name,Type type) {return null;};
   protected Var defInt(String name) {return null;};
   
-  protected Var call(Var name,List<Var> list){return null;};
-  protected Var getField(Var obj,String text){return null;};  
+  protected Var invoke(Var name,String funcName,List<Var> list){return null;};
+  protected Var invokeStatic(String name,List<Var> list){return null;};
+  protected Var refField(Var obj,String text){return null;};  
   protected Var index(Var obj,Var i){return null;};
   protected Var index(Var obj,List<Var> cause){return null;};
   protected void ret(Var a) {;};
-  
-    
+      
   protected Var eval(Var a) {return null;};
   protected Var evalSet(String id,Var b) {return null;};
 
@@ -43,16 +41,13 @@ import nebula.vm.Type;
   protected Var sub(Var a, Var b) {return null;};
   protected Var mul(Var a, Var b) {return null;};  
   protected Var load(Var a, Var b) {return null;}; 
-}
-
-// END:members
+}// END:members
 
 compilationUnit
     :   ( classDefinition )+ EOF
     ;
 
-// START: class
-classDefinition
+classDefinition // START: class
     :   'class' ID superClass? 
             {enterClass($ID.text,$superClass.type);} 
          '{' classMember+ '}'
@@ -66,22 +61,18 @@ superClass returns[Type type]
 classMember
   : fieldDeclaration
   | methodDeclaration
-  ;  
-// END: class
+  ; // END: class
 
-//TODO fieldDeclaration
-fieldDeclaration
+fieldDeclaration  //TODO fieldDeclaration
     :   type ID ('=' e=expr)? ';' {defField($ID.text,$type.type);}
     ;
-  
-// START: method
-methodDeclaration
+
+methodDeclaration // START: method
     :   type name=ID '(' params=formalParameters? ')' 
           {enterFunction($name.text,$type.type,$params.list);}
         block
           {exitFunction();}
-    ;
-// END: method
+    ; // END: method
 
 formalParameters returns [List<Var> list]
     @init{$list = new ArrayList<>(); }    
@@ -97,19 +88,16 @@ type returns [Type type]
     |   ID {$type = resolveType($ID.text);}
     ;
 
-// START: block
-block
-    :   '{' statement* '}' ;
-// END: block
+block // START: block
+    :   '{' statement* '}' 
+    ; // END: block
     
-// START: var
-varDeclaration
+varDeclaration  // START: var
     :   type ID ('=' e=expr)? ';' {
           defVariable($ID.text,$type.type);  
           evalSet($ID.text,$e.value);
         }
-    ;
-// END: var
+    ; // END: var
 
 statement
     :   block
@@ -121,57 +109,46 @@ statement
     | ';' 
     ;
 
-// START: exprList
-exprList returns [List<Var> list]
+exprList returns [List<Var> list] // START: exprList
     @init{$list = new ArrayList<>(); }    
-    :   e=expr{list.add(e);} (',' expr{list.add(e);})* | ;
-// END: exprList
-
+    :   e=expr{list.add(e);} (',' expr{list.add(e);})* | 
+    ; // END: exprList
 
 expr returns [Var value]
     :   e=addexpr {$value = $e.value;} //-> ^(EXPR addexpr)
-    ;
-
-// START:addexpr
+    ; // START:addexpr
+    
 addexpr returns [Var value]
     :   e=multexpr {$value = $e.value;}
         (   '+' e=multexpr {$value = add($value,$e.value);}
         |   '-' e=multexpr {$value = sub($value,$e.value);}
         )*
-    ;
-// END:addexpr
+    ; // END:addexpr
 
-// START:multexpr
-multexpr returns [Var value]
+multexpr returns [Var value]  // START:multexpr
     :   e=postfixexpr {$value = $e.value;} 
         (   '*' e=postfixexpr  {$value = mul($value,$e.value);} 
         )*
-    ; 
-// END:multexpr
+    ; // END:multexpr
 
-
-// START: call
-postfixexpr returns [Var value]
+postfixexpr returns [Var value] // START: call
     :   (e=primary{$value = $e.value;})
         ( options {backtrack=true;}
-         : '.' name=ID '(' exprList ')' {$value = call(getField($value,$name.text),$params.list);}
-         | '.' name=ID            { $value = getField($value,$name.text);}
-         | '(' params=exprList ')'  { $value = call($value,$params.list);}
+         : '.' name=ID '(' exprList ')' {$value = invoke($value,$name.text,$params.list);}
+         | '.' name=ID            { $value = refField($value,$name.text);}
+         | '(' params=exprList ')'  { $value = invokeStatic($e.text,$params.list);}
          | '[' INT ']'                { $value = index($value,defInt($INT.text));}
          | '[' cause=exprList ']'   { $value = index($value,$cause.list);}
         )*
-    ;
-// END: call
+    ; // END: call
 
-// START:atom
-primary returns [Var value]
+primary returns [Var value] // START:atom
     :   id='this'{$value = resolve($id.text);}
     |   id='super'{$value = resolve($id.text);}
     |   INT {$value = defInt($INT.text);}
     |   ID {$value = resolve($ID.text);}
     |   '(' expr ')' {$value = $expr.value;}
-    ;
-// END:atom
+    ; // END:atom
 
 ID :  Letter (Letter | Digit)*;  
 INT :  Digit Digit*;

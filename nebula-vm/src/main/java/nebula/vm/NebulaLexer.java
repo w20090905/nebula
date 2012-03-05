@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Nebula.g 2012-03-04 22:28:40
+// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Nebula.g 2012-03-05 14:04:06
 package nebula.vm;
 
 import org.antlr.runtime.*;
@@ -516,13 +516,13 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:4: ( Letter ( Letter | Digit )* )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:7: Letter ( Letter | Digit )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:153:4: ( Letter ( Letter | Digit )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:153:7: Letter ( Letter | Digit )*
             {
             mLetter(); 
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:176:14: ( Letter | Digit )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:153:14: ( Letter | Digit )*
             loop1:
             do {
                 int alt1=2;
@@ -572,13 +572,13 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:177:5: ( Digit ( Digit )* )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:177:8: Digit ( Digit )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:154:5: ( Digit ( Digit )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:154:8: Digit ( Digit )*
             {
             mDigit(); 
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:177:14: ( Digit )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:154:14: ( Digit )*
             loop2:
             do {
                 int alt2=2;
@@ -626,7 +626,7 @@ public class NebulaLexer extends Lexer {
     // $ANTLR start "Digit"
     public final void mDigit() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:178:16: ( '0' .. '9' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:155:16: ( '0' .. '9' )
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:
             {
             if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
@@ -652,7 +652,7 @@ public class NebulaLexer extends Lexer {
     // $ANTLR start "Letter"
     public final void mLetter() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:179:17: ( 'a' .. 'z' | 'A' .. 'Z' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:156:17: ( 'a' .. 'z' | 'A' .. 'Z' )
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
@@ -680,10 +680,10 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = NEWLINE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:181:8: ( ( '\\r' )? '\\n' )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:181:9: ( '\\r' )? '\\n'
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:158:8: ( ( '\\r' )? '\\n' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:158:9: ( '\\r' )? '\\n'
             {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:181:9: ( '\\r' )?
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:158:9: ( '\\r' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -692,7 +692,7 @@ public class NebulaLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:181:9: '\\r'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:158:9: '\\r'
                     {
                     match('\r'); 
 
@@ -722,10 +722,10 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = Whitespace;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:182:12: ( ( ' ' | '\\t' | '\\f' )+ )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:182:15: ( ' ' | '\\t' | '\\f' )+
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:159:12: ( ( ' ' | '\\t' | '\\f' )+ )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:159:15: ( ' ' | '\\t' | '\\f' )+
             {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:182:15: ( ' ' | '\\t' | '\\f' )+
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:159:15: ( ' ' | '\\t' | '\\f' )+
             int cnt4=0;
             loop4:
             do {
@@ -782,14 +782,14 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = SingleLineComment;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:183:19: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )? )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:184:3: '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )?
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:160:19: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )? )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:161:3: '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )?
             {
             match("//"); 
 
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:184:8: (~ ( '\\n' | '\\r' ) )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:161:8: (~ ( '\\n' | '\\r' ) )*
             loop5:
             do {
                 int alt5=2;
@@ -823,7 +823,7 @@ public class NebulaLexer extends Lexer {
             } while (true);
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:184:24: ( '\\n' | '\\r' ( '\\n' )? )?
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:161:24: ( '\\n' | '\\r' ( '\\n' )? )?
             int alt7=3;
             int LA7_0 = input.LA(1);
 
@@ -835,18 +835,18 @@ public class NebulaLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:184:25: '\\n'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:161:25: '\\n'
                     {
                     match('\n'); 
 
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:184:30: '\\r' ( '\\n' )?
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:161:30: '\\r' ( '\\n' )?
                     {
                     match('\r'); 
 
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:184:34: ( '\\n' )?
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:161:34: ( '\\n' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -855,7 +855,7 @@ public class NebulaLexer extends Lexer {
                     }
                     switch (alt6) {
                         case 1 :
-                            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:184:35: '\\n'
+                            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:161:35: '\\n'
                             {
                             match('\n'); 
 
@@ -889,14 +889,14 @@ public class NebulaLexer extends Lexer {
         try {
             int _type = MultiLineComment;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:185:18: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:186:5: '/*' ( options {greedy=false; } : . )* '*/'
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:162:18: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:163:5: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:186:10: ( options {greedy=false; } : . )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:163:10: ( options {greedy=false; } : . )*
             loop8:
             do {
                 int alt8=2;
@@ -921,7 +921,7 @@ public class NebulaLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:186:38: .
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:163:38: .
             	    {
             	    matchAny(); 
 
