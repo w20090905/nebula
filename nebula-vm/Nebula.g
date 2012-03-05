@@ -23,7 +23,7 @@ import nebula.vm.Type;
   
   protected Type resolveType(String name){return null;};
     
-  protected Var resolve(String name) {return null;};
+  protected Var v(String name) {return null;};
   protected Var defVariable(String name,Type type) {return null;};
   protected Var defInt(String name) {return null;};
   
@@ -35,7 +35,7 @@ import nebula.vm.Type;
   protected void ret(Var a) {;};
       
   protected Var eval(Var a) {return null;};
-  protected Var evalSet(String id,Var b) {return null;};
+  protected Var evalSet(Var vTo, Var vFrom) {return null;};
 
   protected Var add(Var a, Var b) {return null;};
   protected Var sub(Var a, Var b) {return null;};
@@ -94,8 +94,7 @@ block // START: block
     
 varDeclaration  // START: var
     :   type ID ('=' e=expr)? ';' {
-          defVariable($ID.text,$type.type);  
-          evalSet($ID.text,$e.value);
+          evalSet(defVariable($ID.text,$type.type),$e.value);
         }
     ; // END: var
 
@@ -103,8 +102,8 @@ statement
     :   block
     |   varDeclaration
     |   'return' e=expr? ';' {ret($e.value);}
-    |   postfixexpr
-        (   '=' expr  )?
+    |   to=postfixexpr
+        (   '=' from=expr  )?{evalSet(to,from);}
         ';' 
     | ';' 
     ;
@@ -143,10 +142,10 @@ postfixexpr returns [Var value] // START: call
     ; // END: call
 
 primary returns [Var value] // START:atom
-    :   id='this'{$value = resolve($id.text);}
-    |   id='super'{$value = resolve($id.text);}
+    :   id='this'{$value = v($id.text);}
+    |   id='super'{$value = v($id.text);}
     |   INT {$value = defInt($INT.text);}
-    |   ID {$value = resolve($ID.text);}
+    |   ID {$value =v($ID.text);}
     |   '(' expr ')' {$value = $expr.value;}
     ; // END:atom
 

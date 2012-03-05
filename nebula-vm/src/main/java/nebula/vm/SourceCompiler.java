@@ -48,9 +48,18 @@ public class SourceCompiler extends NebulaParser {
 
 	List<Var> locals = new ArrayList<>();
 	short maxLocals = 0;
+
 	private void push(Var var) {
 		locals.add(var);
+		var.reg = (short) (locals.size() - 1);
 		maxLocals = maxLocals > (short) locals.size() ? maxLocals : (short) locals.size();
+	}
+
+	private int toLocalConstantPoolIndex(Object o) {
+		if (poolLocalK.contains(o))
+			return poolLocalK.indexOf(o);
+		poolLocalK.add(o);
+		return poolLocalK.size() - 1;
 	}
 
 	@Override
@@ -68,12 +77,6 @@ public class SourceCompiler extends NebulaParser {
 
 	@Override
 	protected void enterFunction(String name, Type returnType, List<Var> list) {
-		if (currentFunction != null) {
-			int[] code = new int[ip];
-			System.arraycopy(codeBuffer, 0, code, 0, ip);
-			currentFunction.code = code;
-		}
-
 		ip = 0;
 		currentFunction = new FunctionSymbol(currentClass, name);
 		functions.add(currentFunction);
@@ -82,6 +85,8 @@ public class SourceCompiler extends NebulaParser {
 		else
 			toLocalConstantPoolIndex(currentFunction); // save into constant
 														// pool
+		locals.clear();
+		locals.add(new Var("ret", BuiltInTypeSymbol.INT, NOT_APPLIED));
 	}
 
 	@Override
@@ -133,7 +138,7 @@ public class SourceCompiler extends NebulaParser {
 	};
 
 	@Override
-	protected Var resolve(String name) {
+	protected Var v(String name) {
 		for (int i = 0; i < locals.size(); i++) {
 			if (locals.get(i).getName().equals(name)) {
 				return locals.get(i);
@@ -152,106 +157,73 @@ public class SourceCompiler extends NebulaParser {
 		return type;
 	};
 
+	private final static short NOT_APPLIED = 0;
+
 	@Override
 	protected Var defInt(String value) {
-		Var var = new Var(value, SymbolTable._int, ip, 1);
-		System.out.println("const	" + var);
-		push(var);
-		gen(INSTR_ICONST, var.reg, java.lang.Integer.parseInt(value));
-		return var;
+		Var v = new Var(value, SymbolTable._int, ip, 1);
+		System.out.println("const \t" + v.name);
+		gen(INSTR_ICONST, NOT_APPLIED, Integer.parseInt(value));
+		return v;
 	};
 
 	@Override
 	protected Var defVariable(String name, Type type) {
 		Var var = new Var(name, type, (short) locals.size());
 		push(var);
-		System.out.println("var " + var);
+		System.out.println("define \t" + var.name + " \tlocals[ " + var.reg + " ]");
 		return var;
 	}
 
 	@Override
-	protected Var eval(Var a) {
-		if (!a.applied) {
-			a.reg = (short) locals.indexOf(a);
-			a.resolveForwardReferences(codeBuffer);
-			locals.remove(a.reg);
+	protected Var eval(Var b) {
+		if (!b.applied) {
+			apply(b, NOT_APPLIED);
 		}
-		System.out.println("eval 	" + a);
-		return a;
+		return b;
 	};
 
+	private void apply(Var b, short reg) {
+		b.reg = reg;
+		b.resolveForwardReferences(codeBuffer);
+	}
+
+	private void apply(Var b) {
+		push(b);
+		b.resolveForwardReferences(codeBuffer);
+	}
+
 	@Override
-	protected Var evalSet(String id, Var b) {
-		Var var = resolve(id);
-		if (!b.applied) {
-			if (var == null) {
-				b.setName(id);
-				b.reg = (short) locals.indexOf(b);
-				b.resolveForwardReferences(codeBuffer);
-				var = b;
-			} else {
-				b.setName(var.getName());
-				b.reg = var.reg;
-				b.resolveForwardReferences(codeBuffer);
-				var = b;
-			}
-		} else if (var == null) {
-			b.setName(id);
-			b.resolveForwardReferences(codeBuffer);
-			var = b;
+	protected Var evalSet(Var vTo, Var vFrom) {
+		if (!vFrom.applied) {
+			apply(vFrom, vTo.reg);
 		} else {
-			gen(INSTR_MOVE, var.reg, b.reg);
+			gen(INSTR_MOVE, vTo.reg, vFrom.reg);
 		}
-		System.out.println("evalSet	" + var);
-		return var;
+		return vTo;
 	};
 
 	public ClassSymbol finished() {
-
-		if (currentClass == null) {//("Anonymous");
-			throw new UnsupportedOperationException("currentClass");
-		}
-		if (functions.size() == 0) {
-			throw new UnsupportedOperationException("functions");
-		}
-
 		return currentClass;
 	}
 
-	private int toLocalConstantPoolIndex(Object o) {
-		if (poolLocalK.contains(o))
-			return poolLocalK.indexOf(o);
-		poolLocalK.add(o);
-		return poolLocalK.size() - 1;
-	}
-
 	private Var bop(Var a, Var b) {
-		Var var;
-		if (!a.applied) {
-			var = a;
-			a.addReference(ip, 1);
+		Var v = null;
+		if (!a.applied && !b.applied) {
 			a.addReference(ip, 2);
-			if (!b.applied) {
-				b.addReference(ip, 3);
-				short i = (short) locals.indexOf(b);
-				b.reg = i;
-				b.resolveForwardReferences(codeBuffer);
-				if (i + 1 == locals.size()) {
-					locals.remove(i);
-				}
-				System.out.println("bop rm	" + b);
-			}
+			apply(b);
+			v = a;
+		} else if (!a.applied) {
+			a.addReference(ip, 2);
+			v = a;
 		} else if (!b.applied) {
-			var = b;
-			a.addReference(ip, 1);
-			a.addReference(ip, 3);
+			b.addReference(ip, 3);
+			v = b;
 		} else {
-			// add new temp variable
-			var = new Var("Temp" + locals.size(), SymbolTable._int, ip, 1);
-			push(var);
+			v = new Var("tmp", a.type, ip, 1);
 		}
-		System.out.println("bop 	" + var);
-		return var;
+		v.addReference(ip, 1);
+		return v;
 	};
 
 	@Override

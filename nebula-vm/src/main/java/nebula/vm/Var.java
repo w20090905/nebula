@@ -29,6 +29,7 @@ public class Var extends Symbol {
 	public Var(String name, Type type, short reg) {
 		super(name, type);
 		this.reg = reg;
+		this.applied = true;
 	}
 
 	public Var(String name, Type type, int ip, int offset) {

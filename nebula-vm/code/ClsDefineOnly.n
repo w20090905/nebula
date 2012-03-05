@@ -3,6 +3,7 @@ class ClsDefineOnly {
 		int a = 3;
 		int b = 5;
 		int c = a +b;
-		d =  c +1;
+		c = c + 11;
+		int d =  c + 1 + 3;
 	}
 }
