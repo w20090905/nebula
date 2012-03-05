@@ -14,7 +14,7 @@ import java.util.Vector;
 public class Var extends Symbol {
 	public short reg;
 	/** Is this ref'd before def'd. */
-	public boolean resolved = false;
+	public boolean applied = false;
 	/** List of operands in memory we need to update after seeing def */
 	Vector<Address> forwardReferences = null;
 
@@ -33,7 +33,7 @@ public class Var extends Symbol {
 
 	public Var(String name, Type type, int ip, int offset) {
 		super(name, type);
-		resolved = false;
+		applied = false;
 		// if (forward) {
 		// if forward reference, then address is address to update
 		addReference(ip, offset);
@@ -60,7 +60,7 @@ public class Var extends Symbol {
 	}
 
 	public void resolveForwardReferences(int[] code) {
-		resolved = true;
+		applied = true;
 		// need to patch up all references to this symbol
 		Vector<Address> opndsToPatch = forwardReferences;
 		for (Address addrToPatch : opndsToPatch) {
@@ -76,7 +76,7 @@ public class Var extends Symbol {
 
 	@Override
 	public String toString() {
-		return "[ " + reg + " \t: " + name  + "    \tresolved=" + resolved + ", type=" + type + "]";
+		return "[ " + reg + " \t: " + name  + "    \tresolved=" + applied + ", type=" + type + "]";
 	}
 
 }

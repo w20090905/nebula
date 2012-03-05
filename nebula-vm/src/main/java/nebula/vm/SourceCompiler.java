@@ -171,7 +171,7 @@ public class SourceCompiler extends NebulaParser {
 
 	@Override
 	protected Var eval(Var a) {
-		if (!a.resolved) {
+		if (!a.applied) {
 			a.reg = (short) locals.indexOf(a);
 			a.resolveForwardReferences(codeBuffer);
 			locals.remove(a.reg);
@@ -183,7 +183,7 @@ public class SourceCompiler extends NebulaParser {
 	@Override
 	protected Var evalSet(String id, Var b) {
 		Var var = resolve(id);
-		if (!b.resolved) {
+		if (!b.applied) {
 			if (var == null) {
 				b.setName(id);
 				b.reg = (short) locals.indexOf(b);
@@ -227,11 +227,11 @@ public class SourceCompiler extends NebulaParser {
 
 	private Var bop(Var a, Var b) {
 		Var var;
-		if (!a.resolved) {
+		if (!a.applied) {
 			var = a;
 			a.addReference(ip, 1);
 			a.addReference(ip, 2);
-			if (!b.resolved) {
+			if (!b.applied) {
 				b.addReference(ip, 3);
 				short i = (short) locals.indexOf(b);
 				b.reg = i;
@@ -241,7 +241,7 @@ public class SourceCompiler extends NebulaParser {
 				}
 				System.out.println("bop rm	" + b);
 			}
-		} else if (!b.resolved) {
+		} else if (!b.applied) {
 			var = b;
 			a.addReference(ip, 1);
 			a.addReference(ip, 3);
