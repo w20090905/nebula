@@ -14,7 +14,7 @@ import java.util.Vector;
 public class Var extends Symbol {
 	public short reg;
 	/** Is this ref'd before def'd. */
-	public boolean applied = false;
+	public boolean applied = true;
 	/** List of operands in memory we need to update after seeing def */
 	Vector<Address> forwardReferences = null;
 
@@ -29,7 +29,6 @@ public class Var extends Symbol {
 	public Var(String name, Type type, short reg) {
 		super(name, type);
 		this.reg = reg;
-		this.applied = true;
 	}
 
 	public Var(String name, Type type, int ip, int offset) {
