@@ -93,20 +93,35 @@ block // START: block
     ; // END: block
     
 varDeclaration  // START: var
-    :   type ID ('=' e=expr)? ';' {
-          evalSet(defVariable($ID.text,$type.type),$e.value);
+    :   type ID ('=' from=expr)? ';' {
+          if(from != null){
+              Var value = defVariable($ID.text,$type.type);
+              evalSet(value,from);
+          } else {
+              defVariable($ID.text,$type.type);
+          }
         }
     ; // END: var
 
 statement
     :   block
     |   varDeclaration
-    |   'return' e=expr? ';' {ret($e.value);}
-    |   to=postfixexpr
-        (   '=' from=expr  )?{evalSet($to.value,$from.value);System.out.println("#  #############");}
-        ';' 
-    | ';' 
+    |   'return' expr? ';' {ret($expr.value);}
+    |   exprStatement ';' 
+    |   ';' 
     ;
+
+exprStatement:
+      to=postfixexpr
+        (   '=' from=expr  )?{
+          if(from != null){
+              evalSet(to.value,from);
+          } else {
+              Var value = to.value;
+              if(!to.isDone){value = refField(value,to.refItem);};
+              eval(value);
+          }
+        };
 
 exprList returns [List<Var> list] // START: exprList
     @init{$list = new ArrayList<>(); }    
@@ -125,19 +140,19 @@ addexpr returns [Var value]
     ; // END:addexpr
 
 multexpr returns [Var value]  // START:multexpr
-    :   e=postfixexpr {$value = $e.value;} 
-        (   '*' e=postfixexpr  {$value = mul($value,$e.value);} 
+    :   e=postfixexpr {$value = $e.value; if(!$e.isDone){$value = refField($e.value,$e.refItem);}; } 
+        (   '*' e=postfixexpr  {Var eValue = $e.value; if(!$e.isDone){eValue = refField($e.value,$e.refItem);}; $value = mul($value,eValue);} 
         )*
     ; // END:multexpr
 
-postfixexpr returns [Var value] // START: call
-    :   (e=primary{$value = $e.value;})
+postfixexpr returns [Var value,boolean isDone,String refItem] // START: call
+    @init{$isDone = true;}
+    :  (e=primary{$value = $e.value;})
         ( options {backtrack=true;}
-         : '.' name=ID '(' exprList ')' {$value = invoke($value,$name.text,$params.list);}
-         | '.' name=ID            { $value = refField($value,$name.text);}
-         | '(' params=exprList ')'  { $value = invokeStatic($e.text,$params.list);}
-         | '[' INT ']'                { $value = index($value,defInt($INT.text));}
-         | '[' cause=exprList ']'   { $value = index($value,$cause.list);}
+         : '.' name=ID '(' params=exprList ')' { if(!$isDone){$value = refField($value,$refItem);};  $value = invoke($value,$name.text,$params.list);}
+         | '.' name=ID                  { $isDone=false;$refItem = $name.text;}
+         | '[' INT ']'                  { if(!$isDone){$value = refField($value,$refItem);};  $value = index($value,defInt($INT.text));}
+         | '[' cause=exprList ']'       { if(!$isDone){$value = refField($value,$refItem);};  $value = index($value,$cause.list);}
         )*
     ; // END: call
 

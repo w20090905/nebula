@@ -3,7 +3,7 @@ package nebula.vm;
 import static nebula.vm.BytecodeDefinition.INSTR_IADD;
 import static nebula.vm.BytecodeDefinition.INSTR_ICONST;
 import static nebula.vm.BytecodeDefinition.INSTR_IMUL;
-import static nebula.vm.BytecodeDefinition.INSTR_ISUB;
+import static nebula.vm.BytecodeDefinition.*;
 import static nebula.vm.BytecodeDefinition.INSTR_MOVE;
 import static nebula.vm.BytecodeDefinition.INSTR_RET;
 import static nebula.vm.BytecodeDefinition.MASK_XX;
@@ -55,11 +55,11 @@ public class SourceCompiler extends NebulaParser {
 		maxLocals = maxLocals > (short) locals.size() ? maxLocals : (short) locals.size();
 	}
 
-	private int toLocalConstantPoolIndex(Object o) {
+	private short toLocalConstantPoolIndex(Object o) {
 		if (poolLocalK.contains(o))
-			return poolLocalK.indexOf(o);
+			return (short) poolLocalK.indexOf(o);
 		poolLocalK.add(o);
-		return poolLocalK.size() - 1;
+		return (short) (poolLocalK.size() - 1);
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class SourceCompiler extends NebulaParser {
 
 	@Override
 	protected void exitFunction() {
-		if (codeBuffer[ip - 1] >>> OFFSET_OP == INSTR_RET) {
+		if (ip == 0 || codeBuffer[ip - 1] >>> OFFSET_OP == INSTR_RET) {
 			gen(INSTR_RET);
 		}
 
@@ -109,7 +109,10 @@ public class SourceCompiler extends NebulaParser {
 
 	@Override
 	protected Var refField(Var obj, String text) {
-		return null;
+		short index = toLocalConstantPoolIndex(new FieldSymbol((ClassSymbol) obj.type, text));
+		Var v = new Var("tmp", SymbolTable._int, ip, 1);
+		gen(INSTR_FLOAD, NOT_APPLIED, obj.reg, index);
+		return v;
 	};
 
 	@Override

@@ -29,11 +29,11 @@ public class Test extends TestCase {
 	}
 
 	public void testClsDefineOnly() throws Exception {
-		parse("code/ClsDefineOnly.n");
+		parse("ClsDefineOnly.n");
 	}
 
 	public void testClsFieldGet() throws Exception {
-		parse("code/ClsFieldGet.n");
+		parse("ClsFieldGet.n");
 	}
 
 	public ClassSymbol load(InputStream input) throws Exception {

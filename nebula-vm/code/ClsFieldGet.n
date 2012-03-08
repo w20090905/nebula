@@ -1,5 +1,0 @@
-class ClsDefineOnly {
-	void main() {
-		int a;
-	}
-}
