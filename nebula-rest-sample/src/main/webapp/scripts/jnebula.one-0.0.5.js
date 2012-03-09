@@ -54,6 +54,8 @@
                 var el = $("#main-section").html(data);
                 $$.processTemplate(el, dataUrl);
                 $$.renderLink(el);
+                $$.renderValidator(el);
+                $$.renderSubmit(el);
             });
 
         },
@@ -98,13 +100,51 @@
         renderSubmit : function(el) {
             $.each($("form", el), function(i, form) {
                 $(":submit", form).click(function(e) {
-
+                    e.preventDefault();
+                    if (!$(form).valid()) {
+                        return false;
+                    }
+                    $.ajax({
+                        type : $(form).attr("method"),
+                        url : form.action,
+                        data : $.each($(form).serializeArray(), function(i, f) {
+                            if (f.name == "password" || f.name == "password_confirm") {
+                                f.value = $.md5(f.value);
+                            }
+                        }),
+                        dataType : "json",
+                        async : false,
+                        success : function(data) {
+                            return false;
+                        },
+                        error : function(XMLHttpRequest, textStatus, errorThrown) {
+                            alert("错误！");
+                        }
+                    });
                 });
             });
         },
 
         renderValidator : function(el) {
-
+            
+            var validator = $("form", el).validate({
+                onkeyup : false,
+                rules : { },
+                messages : { },
+                errorPlacement : function(error, element) {
+                    error.insertAfter(element.parent().find('label:first'));
+                }
+            });
+            
+            if (validator == undefined) {
+                return;
+            }
+            
+            validator.onsubmit = false;
+            
+            
+            
+            
         },
 
         processTemplate : function(el, dataUrl) {
@@ -175,8 +215,6 @@
                                 var updateUrl = $$.rebase("html/" + url + "editable.html");
                                 var a = $(document.createElement("a"));
                                 a.attr("href", ownUrl);
-                                a.addClass("nyroModal");
-                                a.attr("rev", "modal");
                                 a.html("<img src='img/page_save.png'/>");
                                 a.click(function() {
                                     $$.navigate(updateUrl, ownUrl);
@@ -192,8 +230,6 @@
                                 var removeUrl = $$.rebase("html/" + url + "removable.html");
                                 var a = $(document.createElement("a"));
                                 a.attr("href", ownUrl);
-                                a.addClass("nyroModal");
-                                a.attr("rev", "modal");
                                 a.html("<img src='img/delete.png'/>");
                                 a.click(function() {
                                     $$.navigate(removeUrl, ownUrl);
