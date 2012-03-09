@@ -1,0 +1,20 @@
+group simple;
+
+vardef(type,name) ::= "<type> <name>;"
+
+method(type,name,args) ::= <<
+<type> <name>(<args; separator=",">) {
+  <statements; separator="\n">
+}
+>>
+
+upper() ::= "UPPER "
+down() ::= "DOWN "
+
+table(type,name) ::= "<type> <name:{v | <v:(v)()>}>;"
+
+
+line() ::= <<
+
+--<it>--
+>>

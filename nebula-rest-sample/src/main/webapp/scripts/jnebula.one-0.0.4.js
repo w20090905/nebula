@@ -1,4 +1,5 @@
 (function() {
+
     var jnebula = {};
     window.jnebula = window.$$ = jnebula;
 })();

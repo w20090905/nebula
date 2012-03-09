@@ -1,0 +1,8 @@
+class ClsFieldGet {
+	void main() {
+		Person p;
+		p.age = 1;
+		p.name = 5;
+		p.age = p.name;
+	}
+}
