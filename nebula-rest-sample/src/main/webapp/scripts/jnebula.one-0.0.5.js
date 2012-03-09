@@ -1,57 +1,33 @@
 (function() {
-	var jnebula = {
-	    settings : {
-	        
-	        onClose : function() { }
-	        
-	    }
-	};
+	var jnebula = {};
 	window.jnebula = window.$$ = jnebula;
-
 })();
 
 (function($, $$) {
 
-    $.extend($$, {
+	$.extend($$, {
         
         setup : function() {
-
-            $('nav.menu ul').supersubs({
-                minWidth : 12,
-                maxWidth : 27,
-                extraWidth : 1
-            }).superfish();
-    
-            $("*[data-href]").each(function() {
-                $$.include(this, $(this).attr("data-href"));
-            });
-    
-//            $('nav.menu a[href]').live("click", function(e) {
-//                e.preventDefault();
-//                $("nav.menu ul").children(".current").removeClass("current");
-//                $(this).parent().addClass("current");
-//                $$.navigate($$.rebase($(this).attr("href")));
-//            });
+        	
         },
 
-        rebase : function(url) {
-            return "./" + url;
-        },
-        
-        include : function(el, url) {
-            $.get($$.rebase(url), function(data) {
-                $(el).html(data);
-                $$.renderLink(el);
-            });
-        },
+		rebase : function(href) {
+			return href;
+		},
+
+		include : function(el, url) {
+			$.get($$.rebase(url), function(data) {
+				var e = $(el).html(data);
+			});
+		},
         
         navigate : function(templateUrl, dataUrl) {
 
             $.get(templateUrl, function(data) {
                 var el = $("#main-section").html(data);
-                
                 $$.renderTemplate(el, dataUrl);
                 $$.renderLink(el);
+				$$.renderValidator(el);
             });
             
         },
@@ -82,7 +58,7 @@
                 });
             });
         },
-        
+
         renderTemplate : function(el, url) {
 
             //$("form", el).attr("action", url);
@@ -245,6 +221,89 @@
                 
             });
         },
+
+		renderValidator : function(el) {
+			
+			var validator = $("form", el).validate({
+				onkeyup : false,
+				rules : { },
+				messages : { },
+				errorPlacement : function(error, element) {
+					error.insertAfter(element.parent().find('label:first'));
+				}
+			});
+			
+			if (validator == undefined)
+				return;
+			
+			validator.onsubmit = false;
+			
+			$.each($(el).find("input, select, textarea").not(":submit, :button, :reset, :image, [disabled]"), function(i, f) {
+
+				var jf = $(f);
+
+				if (f.required) {
+					jf.rules("add", {
+						required : true,
+						messages : {
+							required : f.title + "不能为空！"
+						}
+					});
+				}
+
+				if (jf.is("[minlength]")) {
+					jf.rules("add", {
+						minlength : jf.attr("minlength"),
+						messages : {
+							minlength : f.title + "不能少于 {0} 位"
+						}
+					});
+				}
+
+				if (jf.is("[exists]")) {
+					jf.rules("add", {
+						remote : {
+							url : jf.attr("exists"),
+							type : "GET",
+							data : {
+								username : function() {
+									return jf.val();
+								}
+							},
+							dataFilter : function(data, type) {
+								if ("true" == data) {
+									return "false";
+								} else {
+									return "true";
+								}
+							}
+						},
+						messages : {
+							remote : f.title + "已存在！"
+						}
+					});
+				}
+
+				if (jf.is("input[type='email']")) {
+					jf.rules("add", {
+						email : true,
+						messages : {
+							email : "输入一个有效的邮箱地址！"
+						}
+					});
+				}
+
+				if (jf.is("[equalto]")) {
+					jf.rules("add", {
+						equalTo : jf.attr("equalto"),
+						messages : {
+							equalTo : f.title + "与" + $(jf.attr("equalto")).attr("title") + "不一致！"
+						}
+					});
+				}
+
+			});
+		},
         
         getData : function(data, name) {
             if (name.length == 0) {
@@ -260,7 +319,7 @@
             }
             return result;
         }
-        
-    });
+
+	});
 
 })(jQuery, jnebula);
