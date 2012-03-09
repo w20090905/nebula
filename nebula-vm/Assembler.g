@@ -1,13 +1,7 @@
-/** A generic bytecode assembler whose instructions take 0..3 operands.
- *  Instruction set is dictated externally with a String[].  Implement
- *  specifics by subclassing and defining gen() methods. Comments start
- *  with ';' and all instructions end with '\n'.  Handles both register (rN)
- *  and stack-based assembly instructions.  Labels are "ID:".  "main:" label
- *  is where we start execution.  Use .globals and .def for global data
- *  and function definitions, respectively.
- */
 grammar Assembler;
 
+@lexer::header {package nebula.vm;}
+@header {package nebula.vm;}
 
 // START: members
 @members {

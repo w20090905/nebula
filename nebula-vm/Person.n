@@ -1,0 +1,4 @@
+class Person {
+	int name;
+	int age;
+}
