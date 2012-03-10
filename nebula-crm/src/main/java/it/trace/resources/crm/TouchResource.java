@@ -6,6 +6,7 @@ import it.trace.nebula.rest.binder.Context;
 import it.trace.nebula.rest.binder.DataBinder;
 
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.List;
 
 import com.google.inject.Inject;
@@ -94,6 +95,7 @@ public class TouchResource {
 					if (context.getId() != null)
 						touch.setId(Integer.parseInt(context.getId()));
 					touch.setMemo((String) context.getParameter("memo"));
+					touch.setTouchDate(new Date());
 					return new Object[] { touch };
 				} else if ("editable".equals(method.getName())
 						|| "removable".equals(method.getName())
