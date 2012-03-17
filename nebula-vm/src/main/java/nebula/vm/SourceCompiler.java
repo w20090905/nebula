@@ -50,7 +50,12 @@ public class SourceCompiler extends NebulaParser {
 	List<VariableSymbol> locals = new ArrayList<>();
 	short maxLocals = 0;
 
+<<<<<<< HEAD
+	@Override
+	protected void push(Var var) {
+=======
 	private void addLocals(VariableSymbol var) {
+>>>>>>> 4f361c897c997c9b3a550342d78c0a89882573c9
 		locals.add(var);
 		maxLocals = maxLocals > (short) locals.size() ? maxLocals : (short) locals.size();
 	}
@@ -128,6 +133,11 @@ public class SourceCompiler extends NebulaParser {
 		else
 			toLocalConstantPoolIndex(currentFunction); // save into constant
 														// pool
+<<<<<<< HEAD
+		locals.clear();
+		// locals.add(new Var("ret", BuiltInTypeSymbol.INT, NOT_APPLIED));
+=======
+>>>>>>> 4f361c897c997c9b3a550342d78c0a89882573c9
 	}
 
 	protected void enterFunction(String name, int args, int locals) {
@@ -150,6 +160,40 @@ public class SourceCompiler extends NebulaParser {
 														// pool
 	}
 
+<<<<<<< HEAD
+	// @Override
+	// protected Var refField(Var obj, String text) {
+	// short index = toLocalConstantPoolIndex(new FieldSymbol((ClassSymbol)
+	// obj.type, text));
+	// gen(INSTR_FLOAD, top.reg, obj.reg, index);
+	// return top;
+	// };
+	//
+	// @Override
+	// protected Var invoke(Var name, String funcName, List<Var> list) {
+	// return null;
+	// };
+	//
+	// @Override
+	// protected Var invokeStatic(String name, List<Var> list) {
+	// return null;
+	// };
+	//
+	// @Override
+	// protected Var index(Var obj, Var i) {
+	// return null;
+	// };
+	//
+	// @Override
+	// protected Var index(Var obj, List<Var> cause) {
+	// return null;
+	// };
+	//
+	// @Override
+	// protected void ret(Var a) {
+	// ;
+	// };
+=======
 	// protected int getFunctionIndexx(String id) {
 	// int i = poolLocalK.indexOf(new FunctionSymbol(id));
 	// if (i >= 0) return i; // already in system; return index.
@@ -161,6 +205,7 @@ public class SourceCompiler extends NebulaParser {
 	// protected void defineDataSize(int n) {
 	// dataSize = n;
 	// }
+>>>>>>> 4f361c897c997c9b3a550342d78c0a89882573c9
 
 	protected void defineLabel(Token idToken) {
 		String id = idToken.getText();
@@ -195,6 +240,53 @@ public class SourceCompiler extends NebulaParser {
 		return defineVariable(name, SymbolTable._int);
 	};
 
+<<<<<<< HEAD
+	// @Override
+	// protected Var defInt(String value) {
+	// Var v = new Var(value, SymbolTable._int, ip, 1);
+	// System.out.println("const \t" + v.name);
+	// gen(INSTR_ICONST, NOT_APPLIED, Integer.parseInt(value));
+	// return v;
+	// };
+	//
+	// @Override
+	// protected Var opNew(Type type) {
+	// ClassSymbol clz = (ClassSymbol)type;
+	// short iCont = toLocalConstantPoolIndex(clz);
+	// top.addReference(ip, 1);
+	// gen(INSTR_STRUCT, top.reg, iCont);
+	// return top;
+	// }
+	//
+	// @Override
+	// protected Var eval(Var b) {
+	// if (!b.applied) {
+	// apply(b, NOT_APPLIED);
+	// }
+	// return b;
+	// };
+
+	private void apply(Var b, short reg) {
+		b.reg = reg;
+		b.resolveForwardReferences(codeBuffer);
+	}
+
+	private void apply(Var b) {
+		push(b);
+		b.resolveForwardReferences(codeBuffer);
+	}
+
+	//
+	// @Override
+	// protected Var evalSet(Var vTo, Var vFrom) {
+	// if (!vFrom.applied) {
+	// apply(vFrom, vTo.reg);
+	// } else {
+	// gen(INSTR_MOVE, vTo.reg, vFrom.reg);
+	// }
+	// return vTo;
+	// };
+=======
 	protected VariableSymbol defineInt(String name) {
 		return defineInt(name, SymbolTable._int);
 	};
@@ -250,6 +342,7 @@ public class SourceCompiler extends NebulaParser {
 		System.out.println("evalSet	" + var);
 		return var;
 	};
+>>>>>>> 4f361c897c997c9b3a550342d78c0a89882573c9
 
 	public ClassSymbol finished() {
 
@@ -277,6 +370,55 @@ public class SourceCompiler extends NebulaParser {
 		return currentClass;
 	}
 
+<<<<<<< HEAD
+	//
+	// private Var bop(Var a, Var b) {
+	// Var v = null;
+	// if (!a.applied && !b.applied) {
+	// a.addReference(ip, 2);
+	// apply(b);
+	// v = a;
+	// } else if (!a.applied) {
+	// a.addReference(ip, 2);
+	// v = a;
+	// } else if (!b.applied) {
+	// b.addReference(ip, 3);
+	// v = b;
+	// } else {
+	// // v = new Var("tmp", a.type, ip, 1);
+	// }
+	// v.addReference(ip, 1);
+	// return v;
+	// };
+	//
+	// @Override
+	// protected Var add(Var a, Var b) {
+	// Var var = bop(a, b);
+	// gen(INSTR_IADD, var.reg, a.reg, b.reg);
+	// return var;
+	// }
+	//
+	// @Override
+	// protected Var sub(Var a, Var b) {
+	// Var var = bop(a, b);
+	// gen(INSTR_ISUB, var.reg, a.reg, b.reg);
+	// return var;
+	// }
+	//
+	// @Override
+	// protected Var mul(Var a, Var b) {
+	// Var var = bop(a, b);
+	// gen(INSTR_IMUL, var.reg, a.reg, b.reg);
+	// return var;
+	// }
+	//
+	// @Override
+	// protected Var load(Var a, Var b) {
+	// Var var = bop(a, b);
+	// gen(INSTR_ICONST, a.reg, java.lang.Integer.parseInt(b.getName()));
+	// return var;
+	// }
+=======
 	protected int toLocalConstantPoolIndex(Object o) {
 		if (poolLocalK.contains(o))
 			return poolLocalK.indexOf(o);
@@ -340,6 +482,7 @@ public class SourceCompiler extends NebulaParser {
 		gen(INSTR_ICONST, a.reg, java.lang.Integer.parseInt(b.getName()));
 		return var;
 	}
+>>>>>>> 4f361c897c997c9b3a550342d78c0a89882573c9
 
 	protected void gen(short op) {
 		gen(op, (short) 0, (short) 0, (short) 0);

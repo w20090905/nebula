@@ -2,6 +2,11 @@ package nebula.vm;
 
 import java.util.Vector;
 
+<<<<<<< HEAD:nebula-vm/src/main/java/nebula/vm/Var.java
+public class Var extends Symbol {
+	public short reg;
+	public boolean applied = true;
+=======
 /***
  * Excerpted from "Language Implementation Patterns",
  * published by The Pragmatic Bookshelf.
@@ -16,22 +21,35 @@ public class VariableSymbol extends Symbol {
 	/** Is this ref'd before def'd. */
 	public boolean resolved = false;
 	/** List of operands in memory we need to update after seeing def */
+>>>>>>> 4f361c897c997c9b3a550342d78c0a89882573c9:nebula-vm/src/main/java/nebula/vm/VariableSymbol.java
 	Vector<Address> forwardReferences = null;
 
-	public void setName(String name) {
-		this.name = name;
+	public short category;
+	public final static short LOCAL = 0;
+	public final static short PARAM = 1;
+	public final static short ICONST = 2;
+	public final static short DCONST = 3;
+	public final static short SCONST = 4;
+
+	public Var(short category, String name, Type type) {
+		super(name, type);
+		this.reg = 0;
 	}
 
-	public void setIndex(short regIndex) {
-		this.reg = regIndex;
-	}
-
+<<<<<<< HEAD:nebula-vm/src/main/java/nebula/vm/Var.java
+	public Var(short category, String name, Type type, short reg) {
+=======
 	public VariableSymbol(String name, Type type, short reg) {
+>>>>>>> 4f361c897c997c9b3a550342d78c0a89882573c9:nebula-vm/src/main/java/nebula/vm/VariableSymbol.java
 		super(name, type);
 		this.reg = reg;
 	}
 
+<<<<<<< HEAD:nebula-vm/src/main/java/nebula/vm/Var.java
+	public Var(short category, String name, Type type, int ip, int offset) {
+=======
 	public VariableSymbol(String name, Type type, int ip, int offset) {
+>>>>>>> 4f361c897c997c9b3a550342d78c0a89882573c9:nebula-vm/src/main/java/nebula/vm/VariableSymbol.java
 		super(name, type);
 		resolved = false;
 		// if (forward) {
@@ -50,6 +68,10 @@ public class VariableSymbol extends Symbol {
 			this.ip = ip;
 			this.offset = offset;
 		}
+	}
+
+	public void clearReference() {
+		forwardReferences.clear();
 	}
 
 	public void addReference(int ip, int offset) {

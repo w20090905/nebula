@@ -25,8 +25,18 @@ public class Test extends TestCase {
 
 		Interpreter interpreter = new Interpreter(true);
 		ClassSymbol clz = load(input);
+<<<<<<< HEAD
+		// interpreter.resolve(clz);
+		// interpreter.exec(interpreter.resolve(clz.getEntryPoint()));
+	}
+
+	public void testClsDefineOnly() throws Exception {
+		parse("ClsDefineOnly.n");
+	}
+=======
 		interpreter.resolve(clz);
 		interpreter.exec(interpreter.resolve(clz.getEntryPoint()));
+>>>>>>> 4f361c897c997c9b3a550342d78c0a89882573c9
 
 	}
 
@@ -38,6 +48,8 @@ public class Test extends TestCase {
 			SourceCompiler parser = new SourceCompiler(tokens);
 			parser.compilationUnit();
 			ClassSymbol clz = parser.finished();
+
+			// new DisAssembler().disassemble(clz);
 			hasErrors = parser.getNumberOfSyntaxErrors() > 0;
 			if (!hasErrors) {
 				return clz;
