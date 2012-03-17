@@ -2,26 +2,9 @@ package nebula.vm;
 
 import java.util.Vector;
 
-<<<<<<< HEAD:nebula-vm/src/main/java/nebula/vm/Var.java
 public class Var extends Symbol {
 	public short reg;
 	public boolean applied = true;
-=======
-/***
- * Excerpted from "Language Implementation Patterns",
- * published by The Pragmatic Bookshelf.
- * Copyrights apply to this code. It may not be used to create training material, 
- * courses, books, articles, and the like. Contact us if you are in doubt.
- * We make no guarantees that this code is fit for any purpose. 
- * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book information.
- ***/
-/** Represents a variable definition (name,type) in symbol table */
-public class VariableSymbol extends Symbol {
-	public short reg;
-	/** Is this ref'd before def'd. */
-	public boolean resolved = false;
-	/** List of operands in memory we need to update after seeing def */
->>>>>>> 4f361c897c997c9b3a550342d78c0a89882573c9:nebula-vm/src/main/java/nebula/vm/VariableSymbol.java
 	Vector<Address> forwardReferences = null;
 
 	public short category;
@@ -36,22 +19,14 @@ public class VariableSymbol extends Symbol {
 		this.reg = 0;
 	}
 
-<<<<<<< HEAD:nebula-vm/src/main/java/nebula/vm/Var.java
 	public Var(short category, String name, Type type, short reg) {
-=======
-	public VariableSymbol(String name, Type type, short reg) {
->>>>>>> 4f361c897c997c9b3a550342d78c0a89882573c9:nebula-vm/src/main/java/nebula/vm/VariableSymbol.java
 		super(name, type);
 		this.reg = reg;
 	}
 
-<<<<<<< HEAD:nebula-vm/src/main/java/nebula/vm/Var.java
 	public Var(short category, String name, Type type, int ip, int offset) {
-=======
-	public VariableSymbol(String name, Type type, int ip, int offset) {
->>>>>>> 4f361c897c997c9b3a550342d78c0a89882573c9:nebula-vm/src/main/java/nebula/vm/VariableSymbol.java
 		super(name, type);
-		resolved = false;
+		applied = false;
 		// if (forward) {
 		// if forward reference, then address is address to update
 		addReference(ip, offset);
@@ -82,7 +57,7 @@ public class VariableSymbol extends Symbol {
 	}
 
 	public void resolveForwardReferences(int[] code) {
-		resolved = true;
+		applied = true;
 		// need to patch up all references to this symbol
 		Vector<Address> opndsToPatch = forwardReferences;
 		for (Address addrToPatch : opndsToPatch) {
@@ -98,7 +73,7 @@ public class VariableSymbol extends Symbol {
 
 	@Override
 	public String toString() {
-		return "[ " + reg + " \t: " + name  + "    \tresolved=" + resolved + ", type=" + type + "]";
+		return "[ " + reg + " \t: " + name  + "    \tresolved=" + applied + ", type=" + type + "]";
 	}
 
 }

@@ -191,7 +191,7 @@ public class Interpreter {
 	}
 
 	private ClassSymbol loadClass(String className) {
-		ClassSymbol classSymbol = load(className + ".rc2");
+		ClassSymbol classSymbol = load(className);
 		this.resolve(classSymbol);
 		return classSymbol;
 	}
@@ -391,10 +391,17 @@ public class Interpreter {
 			}
 
 			case INSTR_RET: {
-				baseTo = r[base - 4];
 
 				// 1、pop stack frame
-				funcTo = calls[--fp];
+				fp--;
+				if (fp < 0) {
+					return;
+				}
+				// TODO need refact
+
+				funcTo = calls[fp];
+
+				baseTo = r[base - 4];
 
 				// 2、clear object
 				if (maskObject > 0) {

@@ -21,8 +21,8 @@ T__31=31
 T__32=32
 T__33=33
 Digit=4
-Identifier=5
-Integer=6
+ID=5
+INT=6
 Letter=7
 MultiLineComment=8
 NEWLINE=9
@@ -35,19 +35,15 @@ Whitespace=11
 ','=16
 '-'=17
 '.'=18
-':'=19
-';'=20
-'='=21
-'['=22
-']'=23
-'class'=24
-'decimal'=25
+';'=19
+'='=20
+'['=21
+']'=22
+'class'=23
+'decimal'=24
+'extends'=25
 'int'=26
-<<<<<<< HEAD
 'new'=27
-=======
-'public'=27
->>>>>>> 4f361c897c997c9b3a550342d78c0a89882573c9
 'return'=28
 'super'=29
 'this'=30
