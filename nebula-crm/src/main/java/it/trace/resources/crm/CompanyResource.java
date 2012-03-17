@@ -68,8 +68,8 @@ public class CompanyResource {
 		return manager.select(id);
 	}
 
-	public String update() {
-		manager.update(this.company);
+	public String update(Company company) {
+		manager.update(company);
 		return "success";
 	}
 
@@ -79,7 +79,6 @@ public class CompanyResource {
 	}
 
 	public void remove(Integer id) {
-		System.out.println("delete ");
 		manager.delete(id);
 	}
 
@@ -106,9 +105,9 @@ public class CompanyResource {
 				} else if ("view".equals(method.getName())) {
 					String id = context.getId();
 					return new Object[] { id };
-				} else if ("delete".equals(method.getName())) {
-					return new Object[] { Long.parseLong((String) context
-							.getParameter("id")) };
+				} else if ("remove".equals(method.getName())) {
+					return new Object[] { Integer.valueOf(((String) context
+							.getParameter("id"))) };
 				}
 
 				return null;

@@ -1,5 +1,6 @@
 package it.trace.resources.crm;
 
+import it.trace.entity.Company;
 import it.trace.entity.Contact;
 import it.trace.manager.ContactManager;
 import it.trace.nebula.rest.binder.Context;
@@ -24,9 +25,9 @@ public class ContactResource {
 
 	private List<Contact> list;
 
-	private Long id;
+	private Integer id;
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -66,8 +67,8 @@ public class ContactResource {
 		return "success";
 	}
 
-	public String update() {
-		manager.update(this.contact);
+	public String update(Contact contact) {
+		manager.update(contact);
 		return "success";
 	}
 
@@ -77,7 +78,7 @@ public class ContactResource {
 		return "success";
 	}
 
-	public String remove() {
+	public String remove(Integer id) {
 		manager.delete(id);
 		return "success";
 	}
@@ -93,21 +94,25 @@ public class ContactResource {
 					Contact contact = new Contact();
 					if (context.getId() != null)
 						contact.setId(Integer.parseInt(context.getId()));
+					if (context.getParameter("company"))
+						contact.setCompany((Company)context.getParameter("company"));
 					contact.setName((String) context.getParameter("name"));
 					contact.setCellphone((String) context
 							.getParameter("cellphone"));
 					contact.setEmail((String) context.getParameter("email"));
 					return new Object[] { contact };
 				} else if ("editable".equals(method.getName())
-						|| "removable".equals(method.getName())
-						|| "remove".equals(method.getName())) {
-					return new Object[] { Long.parseLong((String) context
-							.getParameter("id")) };
+						|| "removable".equals(method.getName())) {
+					return new Object[] { Integer.valueOf(((String) context
+							.getParameter("id"))) };
 				} else if ("view".equals(method.getName())) {
 					String id = context.getId();
 					return new Object[] { id };
 				} else if ("getByContact".equals(method.getName())) {
 					return new Object[] { Integer.valueOf(context.getId()) };
+				} else if ("remove".equals(method.getName())) {
+					return new Object[] { Integer.valueOf(((String) context
+							.getParameter("id"))) };
 				}
 
 				return null;

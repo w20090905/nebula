@@ -38,7 +38,7 @@ public class ContactManager extends BaseDao<Contact> {
 		return 1;
 	}
 
-	public int delete(long id) {
+	public int delete(Integer id) {
 		super.removeObject(Contact.class, id);
 		return 1;
 	}

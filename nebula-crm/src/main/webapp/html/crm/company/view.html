@@ -17,8 +17,8 @@
 		<span id="description" name="description"></span>
 	</p>
 </fieldset>
-
-<table class="toplevel display stylized" id="crm/contact/">
+<a id="adduser" href="/crm/company/" title="添加新用户" template="html/crm/contact/editNew.html"><span class="icon icon-add">&nbsp;</span>添加</a>
+<table class="toplevel display stylized" id="crm/contact/" name="contactList">
 	<caption>联系人一览</caption>
 	<thead>
 		<tr>
@@ -27,6 +27,7 @@
 			<th>手机</th>
 			<th>电子邮件</th>
 			<th>通讯地址</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -36,6 +37,7 @@
 			<td>cellphone</td>
 			<td>email</td>
 			<td>address</td>
+			<td class="actions">edit,delete</td>
 		</tr>	
 	</tbody>
 </table>
