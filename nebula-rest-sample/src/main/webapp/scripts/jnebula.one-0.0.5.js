@@ -153,7 +153,7 @@
                 return;
             }
 
-            $("form", el).attr("action", dataUrl);
+            //$("form", el).attr("action", dataUrl);
 
             $.ajax({
                 type : "GET",
@@ -169,8 +169,16 @@
         },
 
         processValueTemplate : function(el, data) {
-            $.each($(el).find("input, select, textarea, span[name], a[href]").not("input[type='password'], :submit, :button, :reset, :image"), function(i, e) {
+            $.each($(el).find("input, select, textarea, span[name], a[href], form[action]").not("input[type='password'], :submit, :button, :reset, :image"), function(i, e) {
 
+                if ($(e).is("form[action]")) {
+                	var vn = /\{(.*)\}/.exec($(e).attr("action"));
+                	if (vn != null) {
+                		//$(e).attr("href", $(e).attr("href").replace(/\{(.*)\}/, "$1"));
+                		form.action = $(e).attr("action").replace(/\{(.*)\}/, $$.getData(data, vn[1]));
+                	}
+                }
+            	
                 if ($(e).is("a[href]")) {
                 	var vn = /\{(.*)\}/.exec($(e).attr("href"));
                 	if (vn != null) {
