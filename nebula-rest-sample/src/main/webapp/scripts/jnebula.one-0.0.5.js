@@ -84,8 +84,8 @@
             $("a[template]", el).each(function(e) {
                 var ja = $(this);
                 ja.click(function() {
-                    e.preventDefault();
                     $$.navigate(ja.attr("template"), $$.rebase(ja.attr("href")));
+                    return false;
                 });
             });
         },
@@ -175,7 +175,7 @@
                 	var vn = /\{(.*)\}/.exec($(e).attr("href"));
                 	if (vn != null) {
                 		//$(e).attr("href", $(e).attr("href").replace(/\{(.*)\}/, "$1"));
-                		$(e).attr("href", $(e).attr("href").replace(/\{(.*)\}/, $$.getData(data, vn[1])));
+                		e.href = $(e).attr("href").replace(/\{(.*)\}/, $$.getData(data, vn[1]));
                 	}
                 }
 
