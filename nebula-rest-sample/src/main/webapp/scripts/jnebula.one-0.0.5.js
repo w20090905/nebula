@@ -169,7 +169,15 @@
         },
 
         processValueTemplate : function(el, data) {
-            $.each($(el).find("input, select, textarea, span[name]").not("input[type='password'], :submit, :button, :reset, :image"), function(i, e) {
+            $.each($(el).find("input, select, textarea, span[name], a[href]").not("input[type='password'], :submit, :button, :reset, :image"), function(i, e) {
+
+                if ($(e).is("a[href]")) {
+                	var vn = /\{(.*)\}/.exec($(e).attr("href"));
+                	if (vn != null) {
+                		//$(e).attr("href", $(e).attr("href").replace(/\{(.*)\}/, "$1"));
+                		$(e).attr("href", $(e).attr("href").replace(/\{(.*)\}/, $$.getData(data, vn[1])));
+                	}
+                }
 
                 var v = data[$(e).attr("name")];
 
