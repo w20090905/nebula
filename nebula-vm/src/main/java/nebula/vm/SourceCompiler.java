@@ -1,10 +1,5 @@
 package nebula.vm;
 
-import static nebula.vm.BytecodeDefinition.INSTR_IADD;
-import static nebula.vm.BytecodeDefinition.INSTR_ICONST;
-import static nebula.vm.BytecodeDefinition.INSTR_IMUL;
-import static nebula.vm.BytecodeDefinition.*;
-import static nebula.vm.BytecodeDefinition.INSTR_MOVE;
 import static nebula.vm.BytecodeDefinition.INSTR_RET;
 import static nebula.vm.BytecodeDefinition.MASK_XX;
 import static nebula.vm.BytecodeDefinition.MASK_X_;
@@ -31,7 +26,7 @@ public class SourceCompiler extends NebulaParser {
 	 * put FunctionSymbols in here too.
 	 */
 	protected List<Object> poolLocalK = new ArrayList<>();
-	protected List<FunctionSymbol> functions = new ArrayList<>();
+	protected List<MethodSymbol> functions = new ArrayList<>();
 	protected List<FieldSymbol> fields = new ArrayList<>();
 
 	protected int ip = 0; // Instruction address pointer; used to fill code
@@ -39,7 +34,7 @@ public class SourceCompiler extends NebulaParser {
 
 	// protected int dataSize; // set via .globals
 
-	protected FunctionSymbol currentFunction;
+	protected MethodSymbol currentFunction;
 	protected ClassSymbol currentClass;
 
 	public SourceCompiler(TokenStream input) {
@@ -49,12 +44,12 @@ public class SourceCompiler extends NebulaParser {
 	List<Var> locals = new ArrayList<>();
 	short maxLocals = 0;
 
-	@Override
-	protected void push(Var var) {
-		locals.add(var);
-		var.reg = (short) (locals.size() - 1);
-		maxLocals = maxLocals > (short) locals.size() ? maxLocals : (short) locals.size();
-	}
+//	@Override
+//	protected void push(Var var) {
+//		locals.add(var);
+//		var.reg = (short) (locals.size() - 1);
+//		maxLocals = maxLocals > (short) locals.size() ? maxLocals : (short) locals.size();
+//	}
 
 	private short toLocalConstantPoolIndex(Object o) {
 		if (poolLocalK.contains(o))
@@ -73,13 +68,13 @@ public class SourceCompiler extends NebulaParser {
 	protected void exitClass() {
 		currentClass.poolLocalK = this.poolLocalK.toArray();
 		currentClass.fields = this.fields.toArray(new FieldSymbol[0]);
-		currentClass.functions = this.functions.toArray(new FunctionSymbol[0]);
+		currentClass.functions = this.functions.toArray(new MethodSymbol[0]);
 	};
 
 	@Override
 	protected void enterFunction(String name, Type returnType, List<Var> list) {
 		ip = 0;
-		currentFunction = new FunctionSymbol(currentClass, name);
+		currentFunction = new MethodSymbol(currentClass, name);
 		functions.add(currentFunction);
 		if (poolLocalK.contains(currentFunction))
 			poolLocalK.set(poolLocalK.indexOf(currentFunction), currentFunction);
@@ -101,12 +96,12 @@ public class SourceCompiler extends NebulaParser {
 		this.currentFunction.code = code;
 	};
 
-	@Override
-	protected void defField(String name, Type type) {
-		FieldSymbol field = new FieldSymbol(this.currentClass, name);
-		toLocalConstantPoolIndex(field);
-		fields.add(field);
-	}
+//	@Override
+//	protected void defField(String name, Type type) {
+//		FieldSymbol field = new FieldSymbol(this.currentClass, name);
+//		toLocalConstantPoolIndex(field);
+//		fields.add(field);
+//	}
 
 	// @Override
 	// protected Var refField(Var obj, String text) {
@@ -186,15 +181,15 @@ public class SourceCompiler extends NebulaParser {
 	// return b;
 	// };
 
-	private void apply(Var b, short reg) {
-		b.reg = reg;
-		b.resolveForwardReferences(codeBuffer);
-	}
-
-	private void apply(Var b) {
-		push(b);
-		b.resolveForwardReferences(codeBuffer);
-	}
+//	private void apply(Var b, short reg) {
+//		b.reg = reg;
+//		b.resolveForwardReferences(codeBuffer);
+//	}
+//
+//	private void apply(Var b) {
+//		push(b);
+//		b.resolveForwardReferences(codeBuffer);
+//	}
 
 	//
 	// @Override

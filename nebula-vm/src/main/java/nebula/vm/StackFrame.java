@@ -1,13 +1,13 @@
 package nebula.vm;
 
 public class StackFrame {
-	final FunctionSymbol sym;
+	final MethodSymbol sym;
 	final int firstResult;
 	final int returnAddress;
 	final int[] registers;
 	final long returnMaskObject;
 
-	public StackFrame(FunctionSymbol sym, int returnAddress, int firstResult,long maskObject) {
+	public StackFrame(MethodSymbol sym, int returnAddress, int firstResult,long maskObject) {
 		this.sym = sym;
 		this.returnAddress = returnAddress;
 		this.firstResult = firstResult;

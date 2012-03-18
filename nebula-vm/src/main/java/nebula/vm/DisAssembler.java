@@ -33,13 +33,13 @@ public class DisAssembler {
 		}
 		System.out.println();
 
-		for (FunctionSymbol f : clz.functions) {
+		for (MethodSymbol f : clz.functions) {
 			System.out.println(".def " + f.name + " args=" + f.nargs + ", locals=" + f.nlocals + " ");
 			this.disassemble(f);
 		}
 	}
 
-	public void disassemble(FunctionSymbol func) {
+	public void disassemble(MethodSymbol func) {
 		int i = 0;
 		int[] code = func.code;
 		while (i < func.code.length) {
@@ -138,8 +138,8 @@ public class DisAssembler {
 		buf.append(poolIndex);
 		String s = constPool[poolIndex].toString();
 		if (constPool[poolIndex] instanceof String) s = '"' + s + '"';
-		else if (constPool[poolIndex] instanceof FunctionSymbol) {
-			FunctionSymbol fs = (FunctionSymbol) constPool[poolIndex];
+		else if (constPool[poolIndex] instanceof MethodSymbol) {
+			MethodSymbol fs = (MethodSymbol) constPool[poolIndex];
 			s = "@" + fs.definedClass.name + "." + fs.name + "()";
 		} else if (constPool[poolIndex] instanceof FieldSymbol) {
 			FieldSymbol fs = (FieldSymbol) constPool[poolIndex];
