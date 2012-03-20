@@ -6,12 +6,10 @@ options {
 @lexer::header {package nebula.vm;}
 @header {
 package nebula.vm;
-import nebula.vm.Var;
-import nebula.vm.Type;
 }
 
 @members {  // START:members
-  /** Map variable name to INT object holding value */
+  /** Map variable name to INT object holding v */
   Map<String,Var> locals = new HashMap<>();
   short maxLocals = 0;
 
@@ -21,38 +19,50 @@ import nebula.vm.Type;
     maxLocals = maxLocals > (short) locals.size() ? maxLocals : (short) locals.size();
   } 
   
-  Stack<Var> tmp = new Stack<Var>();
+  Stack<TempVar> tmps = new Stack<TempVar>();
   int tmpCount = 0;
-  protected Var popTmp(Type type){      
-      Var v = tmp.empty()?new TempVar("tmp" + (++tmpCount),type):tmp.pop();
+  protected Var popTmp(Type type){
+      TempVar v = null;
+      for(TempVar tv:tmps){
+          if(tv.applied){
+              v = tv;
+              break;
+          }
+      }
+      if(v ==null){
+          int index = locals.size() + tmps.size() + 1;
+          v = new TempVar("tmp"+index,index,type);
+          tmps.push(v);
+      }
       v.applied = false;
       return v;
   }
   
   protected Var pick(Var a,Var b){
       assert a.type.equals(b.type); 
-      if(!b.applied)resolveTmp(b);
-      if(!a.applied)resolveTmp(a);
+      if(!a.applied)releaseTmp(a);
+      if(!b.applied)releaseTmp(b);
       return popTmp(a.type);
   }
-  
-  protected void resolveTmp(Var v){
-        assert !v.applied;
-        //Resolved
-        tmp.push(v);
-        v.applied = true;
+
+  protected void releaseTmp(Var v){
+			assert !v.applied;
+			//Resolved
+			//        tmps.push(v);
+			v.applied = true;
   }
   
   protected void clearTmp(){
-      if(!tmp.empty()){
+      if(!tmps.empty()){
       }
-      for(Var v : tmp){
+      for(Var v : tmps){
         if(!v.applied){
             info("TMP VAR NOT CLEANED!!!");
         }
       }
-      tmp.clear();
+      tmps.clear();
       tmpCount = 0;
+      info("\n");
   }
   
   protected Var v(String name) {
@@ -70,26 +80,36 @@ import nebula.vm.Type;
   protected void enterFunction(String name,Type returnType,List<Var> list) {;};
   protected void exitFunction() {;};
 
-  protected void defineField(String name,Type type){info("define field " + name);};
+  protected void defineField(String name,Type type){
+      info("define field " + name + "\n");
+  };
   
   protected Type resolveType(String name){return null;};
  
-  protected Var add(Var a, Var b) {Var v=pick(a,b);info(v.name +  " = " + a.name + " + " + b.name + ";\n ");return v;};
-  protected Var sub(Var a, Var b) {Var v=pick(a,b);info(v.name +  " = " + a.name + " - " + b.name + ";\n ");return v;};
-  protected Var mul(Var a, Var b) {Var v=pick(a,b);info(v.name +  " = " + a.name + " * " + b.name + ";\n ");return v;};
-  
-  
+  protected Var add(Var a, Var b) {Var v=pick(a,b);info(v.name +  " = " + a.name + " + " + b.name + ";\n");return v;};
+  protected Var sub(Var a, Var b) {Var v=pick(a,b);info(v.name +  " = " + a.name + " - " + b.name + ";\n");return v;};
+  protected Var mul(Var a, Var b) {Var v=pick(a,b);info(v.name +  " = " + a.name + " * " + b.name + ";\n");return v;};
+
   protected Var getField(Var obj,FieldSymbol field) {
-      info(" (" + obj.name + "." + field.name + ") ");
-      return popTmp(null);
+      Var var = popTmp(BuiltInTypeSymbol.FLEX);
+      info(var.name +  " = " + obj.name + "." + field.name + "\n");
+      return var;
   };
-  protected Var setField(Var obj, FieldSymbol field, Var value) {
-      return value;
+  
+  protected Var setField(Var obj, FieldSymbol field, Var v) {
+      info(" " + obj.name + "." + field.name + " = " + v.name + "\n");  
+      return v;
   };  
     
-  protected Var invoke(Var obj,MethodSymbol field,List<Var> params) {
-      info(" " + obj.name + "." + field.name + "(" + params + ")) "); 
-      return popTmp(null);
+  protected Var invoke(Var obj,MethodSymbol method,List<Var> params) {
+      String txtParams = "";
+      for(Var v:params){
+          txtParams += v.name + " ";
+          releaseTmp(v);
+      }
+      Var var = popTmp(BuiltInTypeSymbol.FLEX);
+      info(var.name + " =  " + obj.name + "." + method.definedClass.name + "_" +  method.name + "("  + txtParams +  ")\n"); 
+      return var;
   };
     
   protected Var set(Var to,Var from){
@@ -97,29 +117,40 @@ import nebula.vm.Type;
         from.name = to.name;
         assert from.type.equals(to.type); 
         from.reg = to.reg;
-        resolveTmp(from);        
+        releaseTmp(from);        
         return to;
   };
   protected Var set(String text,Type type,Var v){
         info("HIDE " + text + " = " + v.name + ";\n");
         v.name = text;
-        v.type = type; 
-        resolveTmp(v);
+        v.type = type;
+        releaseTmp(v);
         push(v);
         return v;
   };
 
-
+  protected Var createObject(Type type){
+        Var var = popTmp(type);
+        info(var.name  + " = new " + type.getName() + ";\n");
+        return var;
+  }
   
   protected Var loadI(String text){
       Var v=popTmp(BuiltInTypeSymbol.INT);
-      info(v.name + " = " + Integer.parseInt(text) + ";\n ");
+      info(v.name + " = " + Integer.parseInt(text) + ";\n");
       return v;
   };
   
   protected Var top=null;
   
   protected void info(String str){
+      if(str.length() > 2){
+		      String txtTemps = "";      
+		      for(TempVar v : tmps){
+		        txtTemps += "" + (v.applied?" ":v.index) + " ";
+		      }
+		      str = "tmps["+ txtTemps +"]\t" + str;
+      }
       System.out.print(str);
   }
 }// END:members
@@ -143,21 +174,23 @@ superClass returns[Type type]
 classMember
   : fieldDeclaration | methodDeclaration
   ; 
-  
+
 fieldDeclaration
   :   type ID ('=' e=expr)? ';' {defineField($ID.text,$type.type);}
   ;
-   
+  
 methodDeclaration // START: method
-  :   type name=ID '(' params=formalParameters? ')' 
-        {enterFunction($name.text,$type.type,$params.list);}
+  :   type name=ID 
+      ('()' {enterFunction($name.text,$type.type,new ArrayList<Var>());}
+       | ('(' formalParameters? ')') {enterFunction($name.text,$type.type,$formalParameters.list);}
+      )        
       block
         {exitFunction();}
   ; // END: method
 
 formalParameters returns [List<Var> list]
   @init{$list = new ArrayList<>(); }    
-  : t=type id=ID{$list.add(new Param($id.text,$t.type));}
+  :   t=type id=ID{$list.add(new Param($id.text,$t.type));}
     ( ',' t=type id=ID{$list.add(new Param($id.text,$t.type));} 
      )* 
     ;
@@ -166,11 +199,11 @@ formalParameters returns [List<Var> list]
 
 
 // *************   START:  BLOCK   *************
-block // START: block
+block
     @init{info("Block{\n");}
-    @after{info("}Block\n");}
+    @after{info("\n}Block\n");}
     :   '{' statement* '}' 
-    ; // END: block
+    ;
   
 statement
     @after{clearTmp();}
@@ -182,99 +215,80 @@ statement
     ;   
 
 varDeclaration
-    :   type ID
-        ('=' v=expr  {set($ID.text,$type.type,v);} 
-        )? 
+    :   type ID ('=' expr {set($ID.text,$type.type,$expr.v);} )? 
     ; 
-    
+        
 exprStatement
     options {backtrack=true;}
     :   to=postfixexpr 
         ('=' from=expr  )?
         {   if(from==null){
                 assert to.field == null;
+                releaseTmp(to.v);
             } else if (to.field==null){
-                set(to.value,from);
+                set(to.v,from);
             } else {
-                setField(to.value,to.field,from);
+                setField(to.v,to.field,from);
             }
         }
     ;
     
-expr returns [Var value]
-    :   e=addexpr {$value = $e.value;}
+expr returns [Var v]
+    :   e=addexpr {v = $e.v;}
     ;
     
-addexpr returns [Var value]
-    :   a=multexpr {$value = a;}
-        (   '+' b=multexpr  {$value=add(a,b);}
-        |   '-' c=multexpr  {$value=sub(a,c);}
+addexpr returns [Var v]
+    :   a=multexpr {v = a;}
+        (   '+' b=multexpr  {v=add(v,b);}
+        |   '-' c=multexpr  {v=sub(v,c);}
         )*
     ; // END:addexpr
     
-multexpr returns [Var value]
-    :   a=postfixExprValue {$value=a;} 
-        (   '*' b=postfixExprValue {$value=mul(a,b);} 
+multexpr returns [Var v]
+    :   a=postfixExprValue {v=a;} 
+        (   '*' b=postfixExprValue {v=mul(v,b);} 
         )*
     ;
     
-postfixExprValue returns [Var value]
-    :p=postfixexpr{$value=$p.value; if($p.field!=null){$value=getField($value,$p.field);} }
+postfixExprValue returns [Var v]
+    :   p=postfixexpr {v=$p.v; if($p.field!=null){v=getField(v,$p.field);} }
     ;
 
-postfixexpr returns [Var value,FieldSymbol field]
-    :   (e=primary{$value = $e.value;})
+postfixexpr returns [Var v,FieldSymbol field]
+    :   (p=primary {$v = p;})
         ( options {backtrack=true;}
-         : '.' m=refMethod[$value.type] '(' params=exprList ')' {if($field!=null){$value=getField($value,$field);$field=null;} $value = invoke($value,m,params);}
-         | '.' f=refField[$value.type] { if($field!=null){$value=getField($value,$field);$field=null;}$field=f; }
+         : '.' mID=ID '()' {if($field!=null){$v=getField($v,$field);$field=null;} MethodSymbol m = new MethodSymbol((ClassSymbol)$v.type,$mID.text);  $v = invoke($v,m,new ArrayList<Var>());}
+         | '.' mID=ID '(' params=exprList ')' {if($field!=null){$v=getField($v,$field);$field=null;} MethodSymbol m = new MethodSymbol((ClassSymbol)$v.type,$mID.text);  $v = invoke($v,m,params);}
+         | '.' fID=ID { if($field!=null){$v=getField($v,$field);$field=null;} $field=new FieldSymbol((ClassSymbol)$v.type,$fID.text); }
         )*
     ;
     
-refMethod[Type objType] returns [MethodSymbol value]
-    : ID {$value =new MethodSymbol((ClassSymbol)objType,$ID.text);}
-    ;
-    
-refField[Type objType] returns [FieldSymbol value]
-    : ID{$value = new FieldSymbol((ClassSymbol)objType,$ID.text);}
-    ;
-
 exprList returns [List<Var> list]
     @init{$list = new ArrayList<>(); }    
     :   e=expr{list.add(e);} 
-        (',' expr{list.add(e);})* | 
+        (',' e=expr{list.add(e);})* | 
     ; 
 
-primary returns [Var value] // START:atom
-    :   ('new' type '(' ps=exprList ')'){;} // TODO new object
-    |   ref=ref_this      {$value = ref;}
-    |   ref=ref_super     {$value = ref;}
-    |   ref=ref_const     {$value = ref;}
-    |   ID                {$value = locals.get($ID.text);}
-    |   '(' v=expr ')'    {$value = v;}
+primary returns [Var v] // START:atom
+    :   ('new' type '()') {v = createObject($type.type);}
+    |   'this'          {v = locals.get("this");}
+    |   'super'         {v = locals.get("super");} 
+    |   INT             {v = loadI($INT.text);}
+    |   ID              {v = locals.get($ID.text);}
+    |   '(' expr ')'    {v = $expr.v;}
     ; // END:atom
     
 // *************   END  :  BLOCK   *************
 
 // *************   START:  BASIC   *************
 
-ref_this returns [Var value]
-    :   'this'{$value = locals.get("this");}
-    ;
-
-ref_super returns [Var value]
-    :   'super'{$value = locals.get("super");}
-    ;
-    
-ref_const returns [Var value]
-    :   INT {$value = loadI($INT.text);}
-    ;
-    
 type returns [Type type]
     :   'decimal' {$type = BuiltInTypeSymbol.DECIMAL;}
     |   'int'     {$type = BuiltInTypeSymbol.INT;}
     |   'void'    {$type = BuiltInTypeSymbol.VOID;}
     |   ID        {$type = resolveType($ID.text);}
     ;    
+    
 // *************   END  :  BASIC   *************
 
 ID :  Letter (Letter | Digit)*;  

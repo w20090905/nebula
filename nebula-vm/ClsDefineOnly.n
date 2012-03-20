@@ -3,7 +3,15 @@ class ClsDefineOnly {
 		int a = 3;
 		int b = 5;
 		int c = a + b;
+		c = a + b + a * b;
 		c = c + 11;
 		int d =  c - 1 * 10  + (3+4*a *(a*b))+ 3;
+		Person p = new Person();
+		
+		int g = p.cr(a+b+c*d,d+2,4+4).sayHello();
+		c = c + 11;
+		c = c + 11;
+		c = c + 11;
+		c = c + 11;
 	}
 }

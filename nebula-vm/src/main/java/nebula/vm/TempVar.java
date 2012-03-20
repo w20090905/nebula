@@ -4,9 +4,12 @@ import java.util.Vector;
 
 public class TempVar extends Var {
 	Vector<Address> forwardReferences = null;
+	
+	final int index;
 
-	public TempVar(String name, Type type) {
+	public TempVar(String name,int index, Type type) {
 		super(name, BuiltInTypeSymbol.INT);
+		this.index = index;
 		this.applied = false;
 	}
 
