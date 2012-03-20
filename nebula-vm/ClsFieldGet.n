@@ -6,5 +6,6 @@ class ClsFieldGet {
 		int i=10;
 		int k=i+10;
 		int j = s.age;
+		
 	}
 }
