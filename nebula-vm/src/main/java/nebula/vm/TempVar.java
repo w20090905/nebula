@@ -3,12 +3,10 @@ package nebula.vm;
 import java.util.Vector;
 
 public class TempVar extends Var {
-	public boolean applied = true;
 	Vector<Address> forwardReferences = null;
 
 	public TempVar(String name, Type type) {
 		super(name, BuiltInTypeSymbol.INT);
-		this.reg = 0;
 		this.applied = false;
 	}
 

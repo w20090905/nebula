@@ -10,6 +10,7 @@ package nebula.vm;
  ***/
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Stack;
 
 import junit.framework.TestCase;
 
@@ -21,7 +22,6 @@ public class Test extends TestCase {
 	private void parse(String filename) throws Exception {
 		InputStream input = null;
 		input = new FileInputStream(filename);
-
 		Interpreter interpreter = new Interpreter(true);
 		ClassSymbol clz = load(input);
 		// interpreter.resolve(clz);
