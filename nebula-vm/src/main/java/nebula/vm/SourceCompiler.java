@@ -41,16 +41,6 @@ public class SourceCompiler extends NebulaParser {
 		super(input);
 	}
 
-	List<Var> locals = new ArrayList<>();
-	short maxLocals = 0;
-
-//	@Override
-//	protected void push(Var var) {
-//		locals.add(var);
-//		var.reg = (short) (locals.size() - 1);
-//		maxLocals = maxLocals > (short) locals.size() ? maxLocals : (short) locals.size();
-//	}
-
 	private short toLocalConstantPoolIndex(Object o) {
 		if (poolLocalK.contains(o))
 			return (short) poolLocalK.indexOf(o);
@@ -59,9 +49,10 @@ public class SourceCompiler extends NebulaParser {
 	}
 
 	@Override
-	protected void enterClass(String name, Type superType) {
+	protected ClassSymbol enterClass(String name, Type superType) {
 		this.currentClass = new ClassSymbol(name);
 		toLocalConstantPoolIndex(this.currentClass);
+		return this.currentClass;
 	}
 
 	@Override
@@ -72,9 +63,9 @@ public class SourceCompiler extends NebulaParser {
 	};
 
 	@Override
-	protected void enterFunction(String name, Type returnType, List<Var> list) {
+	protected MethodSymbol enterFunction(ClassSymbol clz, String name, Type returnType, List<Var> list) {
 		ip = 0;
-		currentFunction = new MethodSymbol(currentClass, name);
+		this.currentFunction = new MethodSymbol(clz, name);
 		functions.add(currentFunction);
 		if (poolLocalK.contains(currentFunction))
 			poolLocalK.set(poolLocalK.indexOf(currentFunction), currentFunction);
@@ -82,6 +73,7 @@ public class SourceCompiler extends NebulaParser {
 			toLocalConstantPoolIndex(currentFunction); // save into constant
 														// pool
 		locals.clear();
+		return this.currentFunction;
 		// locals.add(new Var("ret", BuiltInTypeSymbol.INT, NOT_APPLIED));
 	}
 
