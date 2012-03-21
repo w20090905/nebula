@@ -14,4 +14,5 @@ public class BuiltInTypeSymbol extends Symbol implements Type {
 	public static final Type VOID = new BuiltInTypeSymbol("void", 0);
 	public static final Type INT = new BuiltInTypeSymbol("int", 1);
 	public static final Type DECIMAL = new BuiltInTypeSymbol("decimal", 2);
+	public static final Type FLEX = new BuiltInTypeSymbol("#", 2);
 }

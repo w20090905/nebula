@@ -1,0 +1,9 @@
+class ClsDefineOnly {
+	void main() {
+		int a = 3;
+		int b = 5;
+		int c = a + b;
+		c = c + 11;
+		int d =  c - 1 * 10  + (3+4*a *(a*b))+ 3;
+	}
+}

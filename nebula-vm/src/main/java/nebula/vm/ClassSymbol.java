@@ -12,7 +12,7 @@ package nebula.vm;
 public class ClassSymbol implements Type{
 	String name;
 	Object[] poolLocalK;
-	FunctionSymbol[] functions;
+	MethodSymbol[] functions;
 	FieldSymbol[] fields;
 
 	public ClassSymbol(String name) {
@@ -33,7 +33,7 @@ public class ClassSymbol implements Type{
 		return o instanceof ClassSymbol && name.equals(((ClassSymbol) o).name);
 	}
 
-	public FunctionSymbol getEntryPoint() {
+	public MethodSymbol getEntryPoint() {
 		for (int i = 0; i < functions.length; i++) {
 			if (functions[i].name.equals("main")) {
 				return functions[i];
@@ -52,9 +52,9 @@ public class ClassSymbol implements Type{
 		throw new RuntimeException("Cann't resolve " + this.name + "." + name);
 	}
 
-	public FunctionSymbol getFunction(String name) {
+	public MethodSymbol getFunction(String name) {
 		for (int i = 0; i < functions.length; i++) {
-			FunctionSymbol func = functions[i];
+			MethodSymbol func = functions[i];
 			if (func.name.equals(name)) {
 				return func;
 			}
