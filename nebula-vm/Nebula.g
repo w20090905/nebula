@@ -19,32 +19,30 @@ package nebula.vm;
     maxLocals = maxLocals > (short) locals.size() ? maxLocals : (short) locals.size();
   } 
   
+  protected Var v(String name) {
+      Var var = locals.get(name);
+	    return var;
+  };
+  
   Stack<TempVar> tmps = new Stack<TempVar>();
-  int tmpCount = 0;
   protected Var popTmp(Type type){
       TempVar v = null;
       for(TempVar tv:tmps){
           if(tv.applied){
               v = tv;
+              v.type = type;
               break;
           }
       }
       if(v ==null){
           int index = locals.size() + tmps.size() + 1;
-          v = new TempVar("tmp"+index,index,type);
+          v = new TempVar("tmp"+index,(short)index,type);
           tmps.push(v);
       }
       v.applied = false;
       return v;
   }
   
-  protected Var pick(Var a,Var b){
-      assert a.type.equals(b.type); 
-      if(!a.applied)releaseTmp(a);
-      if(!b.applied)releaseTmp(b);
-      return popTmp(a.type);
-  }
-
   protected void releaseTmp(Var v){
 			assert !v.applied;
 			//Resolved
@@ -53,33 +51,30 @@ package nebula.vm;
   }
   
   protected void clearTmp(){
-      if(!tmps.empty()){
-      }
       for(Var v : tmps){
         if(!v.applied){
             info("TMP VAR NOT CLEANED!!!");
         }
       }
+      short max = (short)(locals.size() + tmps.size() + 1);
+      maxLocals = maxLocals > max ? maxLocals : max ;
       tmps.clear();
-      tmpCount = 0;
       info("\n");
   }
+    
+  protected Var pick(Var a,Var b){
+      assert a.type.equals(b.type); 
+      if(!a.applied)releaseTmp(a);
+      if(!b.applied)releaseTmp(b);
+      return popTmp(a.type);
+  }
   
-  protected Var v(String name) {
-    for (int i = 0; i < locals.size(); i++) {
-      if (locals.get(i).getName().equals(name)) {
-        return locals.get(i);
-      }
-    }
-    return null;
-  };
-
+  
   protected ClassSymbol enterClass(String name,Type superType) {return null;};
   protected void exitClass() {;};
   
   protected MethodSymbol enterFunction(ClassSymbol clz, String name,Type returnType,List<Var> list) {
       MethodSymbol m = new MethodSymbol(clz, name);
-      locals.clear();
       maxLocals = 0;
       
       Var varThis = new Var("this",clz);
@@ -94,30 +89,31 @@ package nebula.vm;
   
   protected Type resolveType(String name){return null;};
  
-  protected Var add(Var a, Var b) {Var v=pick(a,b);info("ADD  : " + v.name +  " = " + a.name + " + " + b.name + ";\n");return v;};
-  protected Var sub(Var a, Var b) {Var v=pick(a,b);info("SUB  : " + v.name +  " = " + a.name + " - " + b.name + ";\n");return v;};
-  protected Var mul(Var a, Var b) {Var v=pick(a,b);info("MUL  : " + v.name +  " = " + a.name + " * " + b.name + ";\n");return v;};
+  protected Var add(Var a, Var b) {Var v=pick(a,b);info("ADD  : " + v.getName() +  " = " + a.getName() + " + " + b.getName() + ";\n");return v;};
+  protected Var sub(Var a, Var b) {Var v=pick(a,b);info("SUB  : " + v.getName() +  " = " + a.getName() + " - " + b.getName() + ";\n");return v;};
+  protected Var mul(Var a, Var b) {Var v=pick(a,b);info("MUL  : " + v.getName() +  " = " + a.getName() + " * " + b.getName() + ";\n");return v;};
 
   protected Var getField(Var obj,FieldSymbol field) {
       Var var = popTmp(BuiltInTypeSymbol.FLEX);
-      info("GETF : " + var.name +  " = " + obj.name + "." + field.name + "\n");
+      info("GETF : " + var.getName() +  " = " + obj.getName() + "." + field.name + "\n");
       return var;
   };
   
   protected Var setField(Var obj, FieldSymbol field, Var v) {
       releaseTmp(v);
-      info("SETF : " + obj.name + "." + field.name + " = " + v.name + "\n");  
+      info("SETF : " + obj.getName() + "." + field.name + " = " + v.getName() + "\n");  
       return v;
   };  
     
   protected Var invoke(Var obj,MethodSymbol method,List<Var> params) {
+      releaseTmp(obj);
       String txtParams = "";
       for(Var v:params){
-          txtParams += v.name + " ";
+          txtParams += v.getName() + " ";
           releaseTmp(v);
       }
       Var var = popTmp(BuiltInTypeSymbol.FLEX);
-      info("CALL : " + var.name + " =  " + obj.name + "." + method.definedClass.name + "_" +  method.name + "("  + txtParams +  ")\n"); 
+      info("CALL : " + var.getName() + " =  " + obj.getName() + "." + method.definedClass.getName() + "_" +  method.name + "("  + txtParams +  ")\n"); 
       return var;
   };
     
@@ -125,8 +121,8 @@ package nebula.vm;
         if(from.applied){
           to = move(to,from);        
         } else {
-		        info("HIDE : " + to.name + " = " + from.name + ";\n");
-		        from.name = to.name;
+		        info("HIDE : " + to.getName() + " = " + from.getName() + ";\n");
+		        from.name = to.getName();
 		        assert from.type.equals(to.type); 
 		        from.reg = to.reg;
 		        releaseTmp(from);
@@ -140,7 +136,7 @@ package nebula.vm;
           pushLocal(to);
           to = move(to,v);
         } else {
-	        info("HIDE : " + text + " = " + v.name + ";\n");
+	        info("HIDE : " + text + " = " + v.getName() + ";\n");
 	        to = v;
 	        to.name = text;
 	        to.type = type;
@@ -151,19 +147,19 @@ package nebula.vm;
   };
   
   protected Var move(Var to,Var from){
-        info("MOVE : " + to.name +  " = " + from.name + ";\n");
+        info("MOVE : " + to.getName() +  " = " + from.getName() + ";\n");
         return to;
   }
 
   protected Var createObject(Type type){
         Var var = popTmp(type);
-        info("NEWO : " + var.name  + " = new " + type.getName() + ";\n");
+        info("NEWO : " + var.getName()  + " = new " + type.getName() + ";\n");
         return var;
   }
   
   protected Var loadI(String text){
       Var v=popTmp(BuiltInTypeSymbol.INT);
-      info("LOADI: " + v.name + " = " + Integer.parseInt(text) + ";\n");
+      info("LOADI: " + v.getName() + " = " + Integer.parseInt(text) + ";\n");
       return v;
   };
   
@@ -173,7 +169,7 @@ package nebula.vm;
       if(str.length() > 2){
 		      String txtTemps = "";      
 		      for(TempVar v : tmps){
-		        txtTemps += "" + (v.applied?" ":v.index) + " ";
+		        txtTemps += "" + (v.applied?" ":v.reg) + " ";
 		      }
 		      str = "tmps["+ txtTemps +"]\t" + str;
       }
@@ -218,8 +214,8 @@ methodDeclaration[ClassSymbol clz]
 
 formalParameters returns [List<Var> list]
   @init{$list = new ArrayList<>(); }    
-  :   t=type id=ID{$list.add(new Param($id.text,$t.type));}
-    ( ',' t=type id=ID{$list.add(new Param($id.text,$t.type));} 
+  :   t=type id=ID{$list.add(new Var($id.text,$t.type));}
+    ( ',' t=type id=ID{$list.add(new Var($id.text,$t.type));} 
      )* 
     ;
   
@@ -234,11 +230,12 @@ block
     ;
   
 statement
+    @init{tmps.clear();}
     @after{clearTmp();}
     :   block
-    |   varDeclaration  ';' {clearTmp();}
-    |   'return' expr?  ';' {clearTmp();}
-    |   exprStatement   ';' {clearTmp();}
+    |   varDeclaration  ';'
+    |   'return' expr?  ';'
+    |   exprStatement   ';'
     |   ';' 
     ;   
 
@@ -287,6 +284,9 @@ postfixexpr returns [Var v,FieldSymbol field]
         ( options {backtrack=true;}
          : '.' mID=ID '()' {
 	              if($field!=null){$v=getField($v,$field);$field=null;} 
+	              if($v.type == BuiltInTypeSymbol.FLEX){
+	                  $v.type = BuiltInTypeSymbol.FLEXCLASS;
+	              }
 	              MethodSymbol m = new MethodSymbol((ClassSymbol)$v.type,$mID.text);  
 	              $v = invoke($v,m,new ArrayList<Var>());
 	           }
@@ -309,10 +309,10 @@ exprList returns [List<Var> list]
 
 primary returns [Var v] // START:atom
     :   ('new' type '()') {v = createObject($type.type);}
-    |   'this'          {v = locals.get("this");}
-    |   'super'         {v = locals.get("super");} 
+    |   'this'          {v = v("this");}
+    |   'super'         {v = v("super");} 
     |   INT             {v = loadI($INT.text);}
-    |   ID              {v = locals.get($ID.text);}
+    |   ID              {v = v($ID.text);}
     |   '(' expr ')'    {v = $expr.v;}
     ; // END:atom
     

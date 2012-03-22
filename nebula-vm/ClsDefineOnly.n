@@ -9,7 +9,7 @@ class ClsDefineOnly {
 		int d =  c - 1 * 10  + (3+4*a *(a*b))+ 3;
 		Person p = new Person();
 		
-		int g = p.cr(a,4,d+2,4+4);
+		int g = p.cr(a,4,d+2,4+4).hello();
 		c = c + 11;
 		c = c + 11;
 		c = c + 11;

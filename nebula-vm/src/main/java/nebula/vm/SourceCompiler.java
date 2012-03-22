@@ -128,15 +128,15 @@ public class SourceCompiler extends NebulaParser {
 	// ;
 	// };
 
-	@Override
-	protected Var v(String name) {
-		for (int i = 0; i < locals.size(); i++) {
-			if (locals.get(i).getName().equals(name)) {
-				return locals.get(i);
-			}
-		}
-		return null;
-	};
+//	@Override
+//	protected Var v(String name) {
+//		for (int i = 0; i < locals.size(); i++) {
+//			if (locals.get(i).getName().equals(name)) {
+//				return locals.get(i);
+//			}
+//		}
+//		return null;
+//	};
 
 	@Override
 	protected Type resolveType(String name) {

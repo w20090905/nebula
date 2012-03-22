@@ -22,7 +22,7 @@ public class Test extends TestCase {
 	private void parse(String filename) throws Exception {
 		InputStream input = null;
 		input = new FileInputStream(filename);
-		Interpreter interpreter = new Interpreter(true);
+//		Interpreter interpreter = new Interpreter(true);
 		ClassSymbol clz = load(input);
 		// interpreter.resolve(clz);
 		// interpreter.exec(interpreter.resolve(clz.getEntryPoint()));
