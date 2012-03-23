@@ -11,14 +11,16 @@ package nebula.vm;
 public class FieldSymbol {
 	final String name;
 	final ClassSymbol definedClass;
+	final Type type;
 	int offset;
 	int lenght = 1;
 	
 	final int hashcode;
 
-	public FieldSymbol(ClassSymbol clazz, String name) {
+	public FieldSymbol(ClassSymbol clazz, String name, Type type) {
 		this.definedClass = clazz;
 		this.name = name;
+		this.type = type;
 		hashcode=(definedClass + name).hashCode();
 	}
 

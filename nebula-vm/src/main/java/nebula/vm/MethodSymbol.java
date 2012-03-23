@@ -3,6 +3,7 @@ package nebula.vm;
 public class MethodSymbol {
 	final ClassSymbol definedClass;
 	final String name;
+	final Type returnType;
 	final int hashcode;
 
 	int nargs; // how many arguments are there?
@@ -11,13 +12,14 @@ public class MethodSymbol {
 
 	boolean resolved = false;
 
-	public MethodSymbol(ClassSymbol parent, String name) {
-		this(parent, name, 0, 0, null);
+	public MethodSymbol(ClassSymbol parent, String name, Type returnType) {
+		this(parent, name, returnType, 0, 0, null);
 	}
 
-	public MethodSymbol(ClassSymbol parent, String name, int nargs, int nlocals, int[] code) {
+	public MethodSymbol(ClassSymbol parent, String name, Type returnType, int nargs, int nlocals, int[] code) {
 		this.definedClass = parent;
 		this.name = name;
+		this.returnType = returnType;
 		this.nargs = nargs;
 		this.nlocals = nlocals;
 		this.code = code;

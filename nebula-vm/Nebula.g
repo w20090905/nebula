@@ -70,11 +70,11 @@ package nebula.vm;
   }
   
   
-  protected ClassSymbol enterClass(String name,Type superType) {return null;};
+  protected ClassSymbol enterClass(String name,Type superType)  {return new ClassSymbol(name);/*TODO add super class support*/};
   protected void exitClass() {;};
   
   protected MethodSymbol enterFunction(ClassSymbol clz, String name,Type returnType,List<Var> list) {
-      MethodSymbol m = new MethodSymbol(clz, name);
+      MethodSymbol m = new MethodSymbol(clz, name,returnType);
       maxLocals = 0;
       
       Var varThis = new Var("this",clz);
@@ -83,11 +83,12 @@ package nebula.vm;
   };
   protected void exitFunction() {;};
 
-  protected void defineField(ClassSymbol clz,String name,Type type){
+  protected FieldSymbol defineField(ClassSymbol clz,String name,Type type){
       info("define field " + name + "\n");
+      return new FieldSymbol(clz,name,type);
   };
   
-  protected Type resolveType(String name){return null;};
+  protected Type resolveType(String name){return new ClassSymbol(name);};
  
   protected Var add(Var a, Var b) {Var v=pick(a,b);info("ADD  : " + v.getName() +  " = " + a.getName() + " + " + b.getName() + ";\n");return v;};
   protected Var sub(Var a, Var b) {Var v=pick(a,b);info("SUB  : " + v.getName() +  " = " + a.getName() + " - " + b.getName() + ";\n");return v;};
@@ -113,7 +114,7 @@ package nebula.vm;
           releaseTmp(v);
       }
       Var var = popTmp(BuiltInTypeSymbol.FLEX);
-      info("CALL : " + var.getName() + " =  " + obj.getName() + "." + method.definedClass.getName() + "_" +  method.name + "("  + txtParams +  ")\n"); 
+      info("CALL : " + var.getName() + " = " + obj.getName() + "." + method.definedClass.getName() + "_" +  method.name + "("  + txtParams +  ");\n"); 
       return var;
   };
     
@@ -182,8 +183,7 @@ compilationUnit
     ;
     
 // *************   START:  Class   *************
-classDefinition
-    @init{ClassSymbol clz = null;}
+classDefinition returns[ClassSymbol clz]
     :   'class' ID superClass? 
             {clz=enterClass($ID.text,$superClass.type);} 
          '{' classMember[clz]+ '}'
@@ -199,14 +199,14 @@ classMember[ClassSymbol clz]
       | methodDeclaration[clz]
   ; 
 
-fieldDeclaration[ClassSymbol clz]
-  :   type ID ('=' e=expr)? ';' {defineField(clz, $ID.text,$type.type);}
+fieldDeclaration[ClassSymbol clz] returns[FieldSymbol field]
+  :   type ID ('=' e=expr)? ';' {field = defineField(clz, $ID.text,$type.type);}
   ;
   
-methodDeclaration[ClassSymbol clz]
+methodDeclaration[ClassSymbol clz] returns[MethodSymbol m]
   :   type name=ID 
-      ('()' {enterFunction(clz, $name.text, $type.type, new ArrayList<Var>());}
-       | ('(' formalParameters? ')') {enterFunction(clz, $name.text, $type.type, $formalParameters.list);}
+      ('()' {m=enterFunction(clz, $name.text, $type.type, new ArrayList<Var>());}
+       | ('(' formalParameters? ')') {m=enterFunction(clz, $name.text, $type.type, $formalParameters.list);}
       )        
       block
         {exitFunction();}
@@ -287,17 +287,17 @@ postfixexpr returns [Var v,FieldSymbol field]
 	              if($v.type == BuiltInTypeSymbol.FLEX){
 	                  $v.type = BuiltInTypeSymbol.FLEXCLASS;
 	              }
-	              MethodSymbol m = new MethodSymbol((ClassSymbol)$v.type,$mID.text);  
+	              MethodSymbol m = new MethodSymbol((ClassSymbol)$v.type,$mID.text,BuiltInTypeSymbol.FLEX);  
 	              $v = invoke($v,m,new ArrayList<Var>());
 	           }
          | '.' mID=ID '(' params=exprList ')' {
                 if($field!=null){$v=getField($v,$field);$field=null;} 
-                MethodSymbol m = new MethodSymbol((ClassSymbol)$v.type,$mID.text);
+                MethodSymbol m = new MethodSymbol((ClassSymbol)$v.type,$mID.text,BuiltInTypeSymbol.FLEX);
                 $v = invoke($v,m,params);
              }
          | '.' fID=ID { 
                 if($field!=null){$v=getField($v,$field);$field=null;} 
-                $field=new FieldSymbol((ClassSymbol)$v.type,$fID.text); }
+                $field=new FieldSymbol((ClassSymbol)$v.type,$fID.text,BuiltInTypeSymbol.FLEX); }
         )*
     ;
     
