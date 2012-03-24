@@ -175,7 +175,7 @@
                 	var vn = /\{(.*)\}/.exec($(e).attr("action"));
                 	if (vn != null) {
                 		//$(e).attr("href", $(e).attr("href").replace(/\{(.*)\}/, "$1"));
-                		form.action = $(e).attr("action").replace(/\{(.*)\}/, $$.getData(data, vn[1]));
+                		e.action = $(e).attr("action").replace(/\{(.*)\}/, $$.getData(data, vn[1]));
                 	}
                 }
             	
