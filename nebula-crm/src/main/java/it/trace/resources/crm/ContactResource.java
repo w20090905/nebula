@@ -3,11 +3,14 @@ package it.trace.resources.crm;
 import it.trace.entity.Company;
 import it.trace.entity.Contact;
 import it.trace.manager.ContactManager;
+import it.trace.manager.CompanyManager;
 import it.trace.nebula.rest.binder.Context;
 import it.trace.nebula.rest.binder.DataBinder;
 
 import java.lang.reflect.Method;
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.google.inject.Inject;
 
@@ -31,15 +34,15 @@ public class ContactResource {
 		this.id = id;
 	}
 
-	private ContactManager manager = new ContactManager();
+	private ContactManager contManager = new ContactManager();
 
 	@Inject
 	public void setManager(ContactManager manager) {
-		this.manager = manager;
+		this.contManager = manager;
 	}
 
 	public List<Contact> list() {
-		this.list = manager.selectAll();
+		this.list = contManager.selectAll();
 		return list;
 	}
 
@@ -48,16 +51,16 @@ public class ContactResource {
 	}
 
 	public String create(Contact contact) {
-		manager.insert(contact);
+		contManager.insert(contact);
 		return "success";
 	}
 
 	public Contact view(String id) {
-		return manager.select(Integer.valueOf(id));
+		return contManager.select(Integer.valueOf(id));
 	}
 
 	public List<Contact> getByContact(int companyId) {
-		this.list = manager.getContactByCompany(companyId);
+		this.list = contManager.getContactByCompany(companyId);
 		return list;
 	}
 
@@ -68,7 +71,7 @@ public class ContactResource {
 	}
 
 	public String update(Contact contact) {
-		manager.update(contact);
+		contManager.update(contact);
 		return "success";
 	}
 
@@ -79,7 +82,7 @@ public class ContactResource {
 	}
 
 	public String remove(Integer id) {
-		manager.delete(id);
+		contManager.delete(id);
 		return "success";
 	}
 
@@ -89,13 +92,17 @@ public class ContactResource {
 			@Override
 			public Object[] bind(Context context, Method method) {
 
+				CompanyManager comManager = new CompanyManager();
 				if ("update".equals(method.getName())
 						|| "create".equals(method.getName())) {
 					Contact contact = new Contact();
 					if (context.getId() != null)
 						contact.setId(Integer.parseInt(context.getId()));
-					if (context.getParameter("company"))
-						contact.setCompany((Company)context.getParameter("company"));
+					if (StringUtils.isNotEmpty((String)context.getParameter("id"))) {
+						Company company = comManager.select(Integer.valueOf((String) context
+								.getParameter("id")));
+						contact.setCompany(company);
+					}
 					contact.setName((String) context.getParameter("name"));
 					contact.setCellphone((String) context
 							.getParameter("cellphone"));
