@@ -19,6 +19,10 @@ public class ClassSymbol implements Type{
 		this.name = name;
 	}
 
+	public ClassSymbol(String name,ClassSymbol superType) {
+		this.name = name;
+	}
+	
 	@Override
 	public int hashCode() {
 		return name.hashCode();

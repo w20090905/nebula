@@ -122,7 +122,7 @@ public class AsmCompiler extends AssemblerParser {
 			int i = text.indexOf('.');
 			ClassSymbol c = new ClassSymbol(text.substring(1, i));
 			c = (ClassSymbol) poolLocalK.get(toLocalConstantPoolIndex(c));
-			v = toLocalConstantPoolIndex(new FieldSymbol(c, text.substring(i + 1)));
+			v = toLocalConstantPoolIndex(new FieldSymbol(c, text.substring(i + 1), BuiltInTypeSymbol.FLEX));
 			op |= (v & MASK_X_) << offset;
 			break;
 		case INT:
@@ -149,7 +149,7 @@ public class AsmCompiler extends AssemblerParser {
 			i = text.indexOf('.');
 			c = new ClassSymbol(text.substring(1, i));
 			c = (ClassSymbol) poolLocalK.get(toLocalConstantPoolIndex(c));
-			v = toLocalConstantPoolIndex(new MethodSymbol(c, text.substring(i + 1)));
+			v = toLocalConstantPoolIndex(new MethodSymbol(c, text.substring(i + 1), BuiltInTypeSymbol.FLEX));
 			op |= (v & MASK_X_) << (offset);
 			break;
 		case REG:
@@ -161,7 +161,8 @@ public class AsmCompiler extends AssemblerParser {
 	}
 
 	protected int toLocalConstantPoolIndex(Object o) {
-		if (poolLocalK.contains(o)) return poolLocalK.indexOf(o);
+		if (poolLocalK.contains(o))
+			return poolLocalK.indexOf(o);
 		poolLocalK.add(o);
 		return poolLocalK.size() - 1;
 	}
@@ -213,7 +214,7 @@ public class AsmCompiler extends AssemblerParser {
 
 	@Override
 	protected void defineField(Token idToken) {
-		FieldSymbol field = new FieldSymbol(this.currentClass, idToken.getText());
+		FieldSymbol field = new FieldSymbol(this.currentClass, idToken.getText(), BuiltInTypeSymbol.FLEX);
 		toLocalConstantPoolIndex(field);
 		fields.add(field);
 	}
@@ -227,13 +228,15 @@ public class AsmCompiler extends AssemblerParser {
 		}
 
 		ip = 0;
-		currentFunction = new MethodSymbol(currentClass, name, args, locals, codeBuffer);
+		currentFunction = new MethodSymbol(currentClass, name, BuiltInTypeSymbol.FLEX, args, locals, codeBuffer);
 		functions.add(currentFunction);
 		// if (name.equals("main")) mainFunction = f;
 		// Did someone referred to this function before it was defined?
 		// if so, replace element in constant pool (at same index)
-		if (poolLocalK.contains(currentFunction)) poolLocalK.set(poolLocalK.indexOf(currentFunction), currentFunction);
-		else toLocalConstantPoolIndex(currentFunction); // save into constant
+		if (poolLocalK.contains(currentFunction))
+			poolLocalK.set(poolLocalK.indexOf(currentFunction), currentFunction);
+		else
+			toLocalConstantPoolIndex(currentFunction); // save into constant
 														// pool
 	}
 

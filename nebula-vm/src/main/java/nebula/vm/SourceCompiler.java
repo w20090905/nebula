@@ -41,52 +41,52 @@ public class SourceCompiler extends NebulaParser {
 		super(input);
 	}
 
-	private short toLocalConstantPoolIndex(Object o) {
-		if (poolLocalK.contains(o))
-			return (short) poolLocalK.indexOf(o);
-		poolLocalK.add(o);
-		return (short) (poolLocalK.size() - 1);
-	}
+//	private short toLocalConstantPoolIndex(Object o) {
+//		if (poolLocalK.contains(o))
+//			return (short) poolLocalK.indexOf(o);
+//		poolLocalK.add(o);
+//		return (short) (poolLocalK.size() - 1);
+//	}
 
-	@Override
-	protected ClassSymbol enterClass(String name, Type superType) {
-		this.currentClass = new ClassSymbol(name);
-		toLocalConstantPoolIndex(this.currentClass);
-		return this.currentClass;
-	}
+//	@Override
+//	protected ClassSymbol enterClass(String name, Type superType) {
+//		this.currentClass = new ClassSymbol(name);
+//		toLocalConstantPoolIndex(this.currentClass);
+//		return this.currentClass;
+//	}
+//
+//	@Override
+//	protected void exitClass() {
+//		currentClass.poolLocalK = this.poolLocalK.toArray();
+//		currentClass.fields = this.fields.toArray(new FieldSymbol[0]);
+//		currentClass.functions = this.functions.toArray(new MethodSymbol[0]);
+//	};
 
-	@Override
-	protected void exitClass() {
-		currentClass.poolLocalK = this.poolLocalK.toArray();
-		currentClass.fields = this.fields.toArray(new FieldSymbol[0]);
-		currentClass.functions = this.functions.toArray(new MethodSymbol[0]);
-	};
+//	@Override
+//	protected MethodSymbol enterFunction(ClassSymbol clz, String name, Type returnType, List<Var> list) {
+//		ip = 0;
+//		this.currentFunction = new MethodSymbol(clz, name);
+//		functions.add(currentFunction);
+//		if (poolLocalK.contains(currentFunction))
+//			poolLocalK.set(poolLocalK.indexOf(currentFunction), currentFunction);
+//		else
+//			toLocalConstantPoolIndex(currentFunction); // save into constant
+//														// pool
+//		locals.clear();
+//		return this.currentFunction;
+//		// locals.add(new Var("ret", BuiltInTypeSymbol.INT, NOT_APPLIED));
+//	}
 
-	@Override
-	protected MethodSymbol enterFunction(ClassSymbol clz, String name, Type returnType, List<Var> list) {
-		ip = 0;
-		this.currentFunction = new MethodSymbol(clz, name);
-		functions.add(currentFunction);
-		if (poolLocalK.contains(currentFunction))
-			poolLocalK.set(poolLocalK.indexOf(currentFunction), currentFunction);
-		else
-			toLocalConstantPoolIndex(currentFunction); // save into constant
-														// pool
-		locals.clear();
-		return this.currentFunction;
-		// locals.add(new Var("ret", BuiltInTypeSymbol.INT, NOT_APPLIED));
-	}
-
-	@Override
-	protected void exitFunction() {
-		if (ip == 0 || codeBuffer[ip - 1] >>> OFFSET_OP == INSTR_RET) {
-			gen(INSTR_RET);
-		}
-
-		int[] code = new int[ip];
-		System.arraycopy(codeBuffer, 0, code, 0, ip);
-		this.currentFunction.code = code;
-	};
+//	@Override
+//	protected void exitFunction() {
+//		if (ip == 0 || codeBuffer[ip - 1] >>> OFFSET_OP == INSTR_RET) {
+//			gen(INSTR_RET);
+//		}
+//
+//		int[] code = new int[ip];
+//		System.arraycopy(codeBuffer, 0, code, 0, ip);
+//		this.currentFunction.code = code;
+//	};
 
 //	@Override
 //	protected void defField(String name, Type type) {
@@ -138,15 +138,15 @@ public class SourceCompiler extends NebulaParser {
 //		return null;
 //	};
 
-	@Override
-	protected Type resolveType(String name) {
-		Type type = new ClassSymbol(name);
-		if (poolLocalK.contains(type))
-			type = (Type) poolLocalK.get(poolLocalK.indexOf(type));
-		else
-			toLocalConstantPoolIndex(type);
-		return type;
-	};
+//	@Override
+//	protected Type resolveType(String name) {
+//		Type type = new ClassSymbol(name);
+//		if (poolLocalK.contains(type))
+//			type = (Type) poolLocalK.get(poolLocalK.indexOf(type));
+//		else
+//			toLocalConstantPoolIndex(type);
+//		return type;
+//	};
 
 	// @Override
 	// protected Var defInt(String value) {
