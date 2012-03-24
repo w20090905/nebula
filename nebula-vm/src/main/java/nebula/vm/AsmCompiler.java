@@ -69,7 +69,7 @@ public class AsmCompiler extends AssemblerParser {
 		}
 		currentClass.poolLocalK = poolLocalK.toArray();
 		currentClass.fields = this.fields.toArray(new FieldSymbol[0]);
-		currentClass.functions = this.functions.toArray(new MethodSymbol[0]);
+		currentClass.methods = this.functions.toArray(new MethodSymbol[0]);
 		return currentClass;
 	}
 

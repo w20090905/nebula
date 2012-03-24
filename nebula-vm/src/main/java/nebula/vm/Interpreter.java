@@ -252,8 +252,8 @@ public class Interpreter {
 			NebulaLexer lexer = new NebulaLexer(new ANTLRInputStream(input));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			SourceCompiler parser = new SourceCompiler(tokens);
-			parser.compilationUnit();
-			ClassSymbol clz = parser.finished();
+//			parser.compilationUnit();
+			ClassSymbol clz = parser.classDefinition();
 			hasErrors = parser.getNumberOfSyntaxErrors() > 0;
 			if (!hasErrors) {
 				return clz;
@@ -694,7 +694,7 @@ public class Interpreter {
 
 			if (clz.poolLocalK.length > 0) dumpConstantPool(clz.poolLocalK);
 			// if (globals.length > 0) dumpDataMemory();
-			for (MethodSymbol f : clz.functions) {
+			for (MethodSymbol f : clz.methods) {
 				System.out.println("");
 				System.out.println(".def " + f.name + " args=" + f.nargs + ", locals=" + f.nlocals + " ");
 				dumpCodeMemory(f.code);

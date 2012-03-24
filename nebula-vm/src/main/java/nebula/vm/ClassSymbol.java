@@ -12,7 +12,7 @@ package nebula.vm;
 public class ClassSymbol implements Type{
 	String name;
 	Object[] poolLocalK;
-	MethodSymbol[] functions;
+	MethodSymbol[] methods;
 	FieldSymbol[] fields;
 
 	public ClassSymbol(String name) {
@@ -38,9 +38,9 @@ public class ClassSymbol implements Type{
 	}
 
 	public MethodSymbol getEntryPoint() {
-		for (int i = 0; i < functions.length; i++) {
-			if (functions[i].name.equals("main")) {
-				return functions[i];
+		for (int i = 0; i < methods.length; i++) {
+			if (methods[i].name.equals("main")) {
+				return methods[i];
 			}
 		}
 		throw new RuntimeException("Cann't find entry point");
@@ -57,8 +57,8 @@ public class ClassSymbol implements Type{
 	}
 
 	public MethodSymbol getFunction(String name) {
-		for (int i = 0; i < functions.length; i++) {
-			MethodSymbol func = functions[i];
+		for (int i = 0; i < methods.length; i++) {
+			MethodSymbol func = methods[i];
 			if (func.name.equals(name)) {
 				return func;
 			}

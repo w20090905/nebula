@@ -26,29 +26,13 @@ public class TestNebulaParser extends TestCase {
 		return parse(new ANTLRFileStream(filename));
 	}
 
-	public void testClassDefineFile() throws Exception {
-		String filename = "ClsDefineOnly.n";
-		NebulaParser parser = loadFromFile(filename);
-		ClassSymbol v = parser.classDefinition();
-		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
-		System.out.println(sb.toString());
-
-		assertEquals("ClsDefineOnly", v.name);
-//		String actual = sb.toString();
-//		//@formatter:off
-//			String expected = "" + 
-//					"|]\tdefine field i\n";
-//			//@formatter:on
-//		assertEquals(expected, actual);
-	}
-
 	private NebulaParser parse(CharStream stream) throws Exception {
 		NebulaLexer assemblerLexer = new NebulaLexer(stream);
 		CommonTokenStream tokens = new CommonTokenStream(assemblerLexer);
 		sb.setLength(0);
 		NebulaParser parser = new NebulaParser(tokens) {
 			protected void info(String str) {
-				if (str.length() > 2 && str.charAt(str.length() - 1) == '\n') {
+				if (str.charAt(str.length() - 1) == '\n') {
 					String txtTemps = "";
 					for (TempVar v : tmps) {
 						txtTemps += "" + (v.applied ? " " : v.reg) + " ";
@@ -73,15 +57,27 @@ public class TestNebulaParser extends TestCase {
 		// return sb.toString();
 	}
 
-	// public void testClsDefineOnly() throws Exception {
-	// NebulaParser result = loadFromFile("ClsDefineOnly.n");
-	// System.out.println(result);
-	// }
-	//
-	// public void testClsFieldGet() throws Exception {
-	// NebulaParser result = loadFromFile("ClsFieldGet.n");
-	// System.out.println(result);
-	// }
+	public void testClassDefineFile() throws Exception {
+		String filename = "ClsDefineOnly.n";
+		NebulaParser parser = loadFromFile(filename);
+		ClassSymbol v = parser.classDefinition();
+		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
+		System.out.println(sb.toString());
+
+		assertEquals("ClsDefineOnly", v.name);
+	}
+
+	public void testClsFieldGet() throws Exception {
+		NebulaParser result = loadFromFile("ClsFieldGet.n");
+		System.out.println(result);
+		String filename = "ClsFieldGet.n";
+		NebulaParser parser = loadFromFile(filename);
+		ClassSymbol v = parser.classDefinition();
+		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
+		System.out.println(sb.toString());
+
+		assertEquals("ClsFieldGet", v.name);
+	}
 
 	public void test_classDefinition() throws Exception {
 		//@formatter:off
@@ -120,11 +116,11 @@ public class TestNebulaParser extends TestCase {
 		String actual = sb.toString();
 		//@formatter:off
 		String expected = "" +
-				"|          |\tBlock{\n" + 
+				"|          |\tFUNC func() {\n" + 
 				"|1         |\tLOADI: tmp1#I = 0;\n" + 
 				"|1         |\tHIDE : i = tmp1#I;\n" + 
-				"\n" +
-				"|          |\t\n" + "}Block\n";
+				"|          |\t\n" +
+				"|          |\t}\n";
 		//@formatter:on
 		assertEquals(expected, actual);
 	}
@@ -145,13 +141,13 @@ public class TestNebulaParser extends TestCase {
 		String actual = sb.toString();
 		//@formatter:off
 		String expected = "" +
-				"|          |\tBlock{\n" +
+				"|          |\tFUNC func() {\n" +
 				"|1         |\tLOADI: tmp1#I = 1;\n" + 
 				"|1 2       |\tLOADI: tmp2#I = 2;\n" + 
 				"|1         |\tADD  : tmp1#I = tmp1#I + tmp2#I;\n" + 
 				"|1         |\tHIDE : i = tmp1#I;\n" + 
-				"\n" +
-				"|          |\t\n" + "}Block\n";
+				"|          |\t\n" +
+				"|          |\t}\n";
 		//@formatter:on
 		assertEquals(expected, actual);
 	}
@@ -172,11 +168,12 @@ public class TestNebulaParser extends TestCase {
 		String actual = sb.toString();
 		//@formatter:off
 		String expected = "" +
-				"|          |\tBlock{\n" + 
-				"|1         |\tCALL : tmp1#* = this#Test.Test_test();\n" + 
+				"|          |\tFUNC func() {\n" +
+				"|1         |\tMOVE : tmp1#Test = this#Test;\n" + 
+				"|1         |\tCALL : tmp1#* = tmp1#Test.Test_test(tmp1#Test );\n" + 
 				"|1         |\tHIDE : i = tmp1#*;\n" + 
-				"\n" +
-				"|          |\t\n" + "}Block\n";
+				"|          |\t\n" +
+				"|          |\t}\n";
 		//@formatter:on
 		assertEquals(expected, actual);
 	}
@@ -197,11 +194,11 @@ public class TestNebulaParser extends TestCase {
 		String actual = sb.toString();
 		//@formatter:off
 		String expected = "" +
-				"|          |\tBlock{\n" + 
+				"|          |\tFUNC func() {\n" + 
 				"|3         |\tADD  : tmp3#I = a#I + b#I;\n" + 
 				"|3         |\tHIDE : c = tmp3#I;\n" + 
-				"\n" +
-				"|          |\t\n" + "}Block\n";
+				"|          |\t\n" +
+				"|          |\t}\n";
 		//@formatter:on
 		assertEquals(expected, actual);
 	}

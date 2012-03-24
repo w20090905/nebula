@@ -1,6 +1,6 @@
 class ClsFieldGet {
 	int i;
-	void dd( ){
+	void dd(){
 		Person s = new Person();
 		s.age = 9;
 		int i=10;

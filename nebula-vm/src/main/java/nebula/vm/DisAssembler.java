@@ -33,7 +33,7 @@ public class DisAssembler {
 		}
 		System.out.println();
 
-		for (MethodSymbol f : clz.functions) {
+		for (MethodSymbol f : clz.methods) {
 			System.out.println(".def " + f.name + " args=" + f.nargs + ", locals=" + f.nlocals + " ");
 			this.disassemble(f);
 		}

@@ -10,8 +10,8 @@ package nebula.vm;
 
 @members {  // START:members
   /** Method info */  
-  protected Map<String,Var> locals = new HashMap<>();
-  protected List<Var> params = null;
+  private Map<String,Var> locals = new HashMap<>();
+  private List<Var> params = null;
   protected short maxLocals = 0;
 
   protected void pushLocal(Var var) {
@@ -26,7 +26,7 @@ package nebula.vm;
   };
   
   Stack<TempVar> tmps = new Stack<TempVar>();
-  protected Var popTmp(Type type){
+  protected TempVar popTmp(Type type){
       TempVar v = null;
       for(TempVar tv:tmps){
           if(tv.applied){
@@ -44,7 +44,7 @@ package nebula.vm;
       return v;
   }
   
-  protected void releaseTmp(Var v){
+  protected void resolveTemp(Var v){
 			assert !v.applied;
 			//Resolved
 			//        tmps.push(v);
@@ -63,37 +63,45 @@ package nebula.vm;
       info("\n");
   }
     
-  protected Var pick(Var a,Var b){
+  protected TempVar pick(Var a,Var b){
       assert a.type.equals(b.type); 
-      if(!a.applied)releaseTmp(a);
-      if(!b.applied)releaseTmp(b);
+      if(!a.applied)resolveTemp(a);
+      if(!b.applied)resolveTemp(b);
       return popTmp(a.type);
   }
+  
+  protected ClassSymbol resolveType(String name){return new ClassSymbol(name);};
     
   protected ClassSymbol enterClass(String name,Type superType)  {return new ClassSymbol(name);/*TODO add super class support*/};
-  protected void exitClass() {;};
-  
-  protected MethodSymbol enterFunction(ClassSymbol clz, String name,Type returnType,List<Var> params) {
-      MethodSymbol m = new MethodSymbol(clz, name,returnType);
-      maxLocals = 0;
-      
-      for(Var v : params){
-          pushLocal(v);
-      }
-      
-      Var varThis = new Var("this",clz);
-      pushLocal(varThis);
-      return m;
-  };
-  protected void exitFunction() {;};
-
+  protected ClassSymbol exitClass(ClassSymbol clz) {return clz;};
+    
   protected FieldSymbol defineField(ClassSymbol clz,String name,Type type){
       info("define field " + name + "\n");
       return new FieldSymbol(clz,name,type);
   };
   
-  protected ClassSymbol resolveType(String name){return new ClassSymbol(name);};
- 
+  protected MethodSymbol enterMethod(ClassSymbol clz, String name,Type returnType,List<Var> params) {
+      MethodSymbol m = new MethodSymbol(clz, name,returnType);
+      maxLocals = 0;
+      
+      String str = "";
+      for(Var v : params){
+          pushLocal(v);
+          str += v.name + " ";
+      }
+      
+      Var varThis = new Var("this",clz);
+      pushLocal(varThis);
+      
+      info("FUNC " + name + "() {\n");
+      
+      return m;
+  };
+  protected MethodSymbol exitMethod(MethodSymbol method) {      
+      info("}\n");
+      return method;
+  };
+
   protected Var add(Var a, Var b) {Var v=pick(a,b);info("ADD  : " + v.getName() +  " = " + a.getName() + " + " + b.getName() + ";\n");return v;};
   protected Var sub(Var a, Var b) {Var v=pick(a,b);info("SUB  : " + v.getName() +  " = " + a.getName() + " - " + b.getName() + ";\n");return v;};
   protected Var mul(Var a, Var b) {Var v=pick(a,b);info("MUL  : " + v.getName() +  " = " + a.getName() + " * " + b.getName() + ";\n");return v;};
@@ -105,21 +113,22 @@ package nebula.vm;
   };
   
   protected Var setField(Var obj, FieldSymbol field, Var v) {
-      releaseTmp(v);
+      resolveTemp(v);
       info("SETF : " + obj.getName() + "." + field.name + " = " + v.getName() + "\n");  
       return v;
   };  
     
   protected Var invoke(Var obj,MethodSymbol method,List<Var> params) {
-      releaseTmp(obj);
-      String txtParams = "";
-      for(Var v:params){
-          txtParams += v.getName() + " ";
-          releaseTmp(v);
-      }
-      Var var = popTmp(BuiltInTypeSymbol.FLEX);
-      info("CALL : " + var.getName() + " = " + obj.getName() + "." + method.definedClass.getName() + "_" +  method.name + "("  + txtParams +  ");\n"); 
-      return var;
+	       resolveTemp(obj);
+	       String txtParams = "";
+	       for(Var v:params){
+	           txtParams += v.getName() + " ";
+	           resolveTemp(v);
+	       }
+	       String str = " = " + obj.getName() + "." + method.definedClass.getName() + "_" +  method.name + "("  + txtParams +  ");\n";
+	       Var var = popTmp(BuiltInTypeSymbol.FLEX);
+	       info("CALL : " + var.getName() + str); 
+	       return var;
   };
     
   protected Var set(Var to,Var from){
@@ -130,10 +139,11 @@ package nebula.vm;
 		        from.name = to.getName();
 		        assert from.type.equals(to.type); 
 		        from.reg = to.reg;
-		        releaseTmp(from);
+		        resolveTemp(from);
         }        
         return to;
   };
+  
   protected Var set(String text,Type type,Var v){
         Var to = null;
         if(v.applied){
@@ -145,7 +155,7 @@ package nebula.vm;
 	        to = v;
 	        to.name = text;
 	        to.type = type;
-	        releaseTmp(v);
+	        resolveTemp(v);
 	        pushLocal(to);        
         }
         return v;
@@ -156,9 +166,9 @@ package nebula.vm;
         return to;
   }
 
-  protected Var createObject(Type type){
-        Var var = popTmp(type);
-        info("NEWO : " + var.getName()  + " = new " + type.getName() + ";\n");
+  protected Var createObject(ClassSymbol clz){
+        Var var = popTmp(clz);
+        info("NEWO : " + var.getName()  + " = new " + clz.getName() + ";\n");
         return var;
   }
   
@@ -167,16 +177,15 @@ package nebula.vm;
       info("LOADI: " + v.getName() + " = " + Integer.parseInt(text) + ";\n");
       return v;
   };
-  
-  protected Var top=null;
-  
+    
   protected void info(String str){
-      if(str.length() > 2 && str.charAt(str.length()-1) == '\n'){
+      if(str.charAt(str.length()-1) == '\n'){
 		      String txtTemps = "";      
 		      for(TempVar v : tmps){
 		        txtTemps += "" + (v.applied?" ":v.reg) + " ";
 		      }
-		      str = str.substring(1) +  "\t\ttmps["+ txtTemps +"];\n";
+		      str ="|" +  txtTemps  + "|" + "\t\t" + str;
+		      
       }
       System.out.print(str);
   }
@@ -191,7 +200,7 @@ classDefinition returns[ClassSymbol clz]
     :   'class' ID superClass? 
             {clz=enterClass($ID.text,$superClass.type);} 
          '{' classMember[clz]+ '}'
-            {exitClass();}         
+            {clz=exitClass(clz);}         
     ;
 
 superClass returns[Type type]
@@ -209,11 +218,11 @@ fieldDeclaration[ClassSymbol clz] returns[FieldSymbol field]
   
 methodDeclaration[ClassSymbol clz] returns[MethodSymbol m]
   :   type name=ID 
-      ('()' {m=enterFunction(clz, $name.text, $type.type, new ArrayList<Var>());}
-       | ('(' formalParameters? ')') {m=enterFunction(clz, $name.text, $type.type, $formalParameters.list);}
+      ('()' {m=enterMethod(clz, $name.text, $type.type, new ArrayList<Var>());}
+       | ('(' formalParameters ')') {m=enterMethod(clz, $name.text, $type.type, $formalParameters.list);}
       )        
       block
-        {exitFunction();}
+        {m=exitMethod(m);}
   ; // END: method
 
 formalParameters returns [List<Var> list]
@@ -228,8 +237,6 @@ formalParameters returns [List<Var> list]
 
 // *************   START:  BLOCK   *************
 block
-    @init{info("Block{\n");}
-    @after{info("\n}Block\n");}
     :   '{' statement* '}' 
     ;
   
@@ -253,7 +260,7 @@ exprStatement
         ('=' from=expr  )?
         {   if(from==null){
                 assert to.field == null;
-                releaseTmp(to.v);
+                resolveTemp(to.v);
             } else if (to.field==null){
                 set(to.v,from);
             } else {
@@ -291,28 +298,30 @@ postfixexpr returns [Var v,FieldSymbol field]
 	              if($v.type == BuiltInTypeSymbol.FLEX){
 	                  $v.type = BuiltInTypeSymbol.FLEXCLASS;
 	              }
+	              if($v.applied)$v=move(popTmp($v.type),$v); 
+                List<Var> list = new ArrayList<>();
+	              list.add($v);
 	              MethodSymbol m = new MethodSymbol((ClassSymbol)$v.type,$mID.text,BuiltInTypeSymbol.FLEX);  
-	              $v = invoke($v,m,new ArrayList<Var>());
+	              $v = invoke($v,m,list);
 	           }
-         | '.' mID=ID '(' params=exprList ')' {
-                if($field!=null){$v=getField($v,$field);$field=null;} 
-                MethodSymbol m = new MethodSymbol((ClassSymbol)$v.type,$mID.text,BuiltInTypeSymbol.FLEX);
-                $v = invoke($v,m,params);
-             }
+         | '.' mID=ID '(' {if($field!=null){$v=getField($v,$field);$field=null;}} params=exprList[$v] ')' {                 
+	                MethodSymbol m = new MethodSymbol((ClassSymbol)$v.type,$mID.text,BuiltInTypeSymbol.FLEX);
+	                $v = invoke($v,m,params);
+	              }
          | '.' fID=ID { 
                 if($field!=null){$v=getField($v,$field);$field=null;} 
                 $field=new FieldSymbol((ClassSymbol)$v.type,$fID.text,BuiltInTypeSymbol.FLEX); }
         )*
     ;
     
-exprList returns [List<Var> list]
-    @init{$list = new ArrayList<>(); }    
+exprList[Var inst] returns [List<Var> list]
+    @init{$list = new ArrayList<>(); if(inst.applied)inst=move(popTmp(inst.type),inst); list.add(inst);}    
     :   e=expr{if(e.applied)e=move(popTmp(e.type),e); list.add(e);} 
         (',' e=expr{if(e.applied)e=move(popTmp(e.type),e);list.add(e);})* | 
     ; 
 
 primary returns [Var v] // START:atom
-    :   ('new' type '()') {v = createObject($type.type);}
+    :   ('new' type '()') {v = createObject((ClassSymbol)$type.type);}
     |   'this'          {v = v("this");}
     |   'super'         {v = v("super");} 
     |   INT             {v = loadI($INT.text);}
