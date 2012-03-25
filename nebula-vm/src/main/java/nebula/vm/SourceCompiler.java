@@ -102,7 +102,7 @@ public class SourceCompiler extends NebulaParser {
 		int[] code = new int[ip];
 		System.arraycopy(codeBuffer, 0, code, 0, ip);
 		method.code = code;
-		method.nlocals = super.maxLocals - 1 - method.nargs;
+		method.nlocals = super.maxLocals - method.nargs;
 		return method;
 	};
 

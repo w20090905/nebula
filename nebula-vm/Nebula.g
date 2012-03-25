@@ -170,7 +170,7 @@ package nebula.vm;
 
   private Map<String, Var> locals = new HashMap<>();
   private List<Var> params = null;
-  protected short maxLocals = 0;
+  protected int maxLocals = 0;
 
   protected Var pushLocal(String name, Type type) {
     Var var = new Var(name, type, locals.size());
@@ -207,9 +207,10 @@ package nebula.vm;
   }
 
   protected void clearTmp() {
-    short max = (short) (locals.size() + tmps.size() + 1);
-    maxLocals = maxLocals > max ? maxLocals : max;
-    tmps.clear();
+		maxLocals =  Math.max(maxLocals,locals.size());
+		if(tmps.size()>0) maxLocals =  Math.max(maxLocals,tmps.get(tmps.size()-1).reg);
+		
+		tmps.clear();
   }
 
   protected void info(String str) {
@@ -276,7 +277,6 @@ block
     ;
   
 statement
-    @init{tmps.clear();}
     @after{clearTmp();}
     :   block
     |   varDeclaration  ';'

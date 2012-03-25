@@ -124,7 +124,7 @@ public class TestSourceCompiler extends TestCase {
 		System.out.println(actual);
 		//@formatter:off
 		String expected = "" +
-				".def funcSayHello: args=0, locals=3\n" +
+				".def funcSayHello: args=0, locals=2\n" +
 				"0000: ICONST     r1, 9\n" +
 				"\n";
 		//@formatter:on
@@ -152,7 +152,7 @@ public class TestSourceCompiler extends TestCase {
 		System.out.println(actual);
 		//@formatter:off
 		String expected = "" +
-				".def funcSayHello: args=0, locals=4\n" +
+				".def funcSayHello: args=0, locals=3\n" +
 				"0000: ICONST     r1, 1\n" + 
 				"0001: ICONST     r2, 2\n" + 
 				"0002: IADD       r1, r1, r2\n" + 
@@ -181,7 +181,7 @@ public class TestSourceCompiler extends TestCase {
 		System.out.println(actual);
 		//@formatter:off
 		String expected = "" +
-				".def funcSayHello: args=0, locals=3\n" +
+				".def funcSayHello: args=0, locals=2\n" +
 				"0000: CALL       r1, #2:@Test.test(), r0\n" + 
 				"\n";
 		//@formatter:on
@@ -208,7 +208,7 @@ public class TestSourceCompiler extends TestCase {
 		System.out.println(actual);
 		//@formatter:off
 		String expected = "" +
-				".def funcSayHello: args=0, locals=3\n" +
+				".def funcSayHello: args=0, locals=2\n" +
 				"0000: ICONST     r1, 2\n" +
 				"0001: CALL       r1, #2:@Test.test(), r1\n" +
 				"\n";
@@ -237,7 +237,7 @@ public class TestSourceCompiler extends TestCase {
 		System.out.println(actual);
 		//@formatter:off
 		String expected = "" +
-				".def funcSayHello2a: args=0, locals=5\n" +
+				".def funcSayHello2a: args=0, locals=4\n" +
 				"0000: ICONST     r1, 10\n" +
 				"0001: ICONST     r2, 2\n" +
 				"0002: ICONST     r3, 9\n" +
@@ -268,7 +268,7 @@ public class TestSourceCompiler extends TestCase {
 		System.out.println(actual);
 		//@formatter:off
 		String expected = "" +
-				".def funcSayHello: args=2, locals=3\n" +
+				".def funcSayHello: args=2, locals=2\n" +
 				"0000: IADD       r3, r1, r2\n" + 
 				"\n";
 		//@formatter:on
