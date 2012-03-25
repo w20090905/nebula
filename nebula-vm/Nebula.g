@@ -294,7 +294,7 @@ varDeclaration returns[Var v]
     ; 
     
 returnStatement
-    :'return' v=expr?  ';' {opReturn(v);}
+    :'return' v=expr? {opReturn(v);}
     ;
         
 exprStatement returns[Var v]

@@ -77,7 +77,7 @@ public class SourceCompiler extends NebulaParser {
 	@Override
 	protected MethodSymbol enterMethod(ClassSymbol clz, String name, Type returnType, List<Var> params) {
 		MethodSymbol m = new MethodSymbol(clz, name, returnType);
-		this.maxLocals = 0;
+		super.maxLocals = 0;
 
 		pushLocal("this", clz);
 
@@ -87,7 +87,7 @@ public class SourceCompiler extends NebulaParser {
 
 		m.nargs = params.size();
 		this.methods.add(m);
-		this.indexOfPool(m);
+		poolLocalK.set(indexOfPool(m),m);
 		ip = 0;
 
 		return m;
@@ -95,7 +95,7 @@ public class SourceCompiler extends NebulaParser {
 
 	@Override
 	protected MethodSymbol exitMethod(MethodSymbol method) {
-		if (ip == 0 || codeBuffer[ip - 1] >>> OFFSET_OP == INSTR_RET) {
+		if (ip == 0 || codeBuffer[ip - 1] >>> OFFSET_OP != INSTR_RET) {
 			gen(INSTR_RET, UNKNOWN);
 		}
 

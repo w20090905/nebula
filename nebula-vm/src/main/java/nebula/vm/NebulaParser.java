@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Nebula.g 2012-03-25 20:01:37
+// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Nebula.g 2012-03-25 20:28:00
 
 package nebula.vm;
 
@@ -1193,14 +1193,14 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "returnStatement"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:296:1: returnStatement : 'return' (v= expr )? ';' ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:296:1: returnStatement : 'return' (v= expr )? ;
     public final void returnStatement() throws RecognitionException {
         Var v =null;
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:297:5: ( 'return' (v= expr )? ';' )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:297:6: 'return' (v= expr )? ';'
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:297:5: ( 'return' (v= expr )? )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:297:6: 'return' (v= expr )?
             {
             match(input,27,FOLLOW_27_in_returnStatement566); if (state.failed) return ;
 
@@ -1226,8 +1226,6 @@ public class NebulaParser extends Parser {
 
             }
 
-
-            match(input,20,FOLLOW_20_in_returnStatement574); if (state.failed) return ;
 
             if ( state.backtracking==0 ) {opReturn(v);}
 
@@ -1263,7 +1261,7 @@ public class NebulaParser extends Parser {
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:302:5: (to= postfixexpr ( '=' from= expr )? )
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:302:9: to= postfixexpr ( '=' from= expr )?
             {
-            pushFollow(FOLLOW_postfixexpr_in_exprStatement619);
+            pushFollow(FOLLOW_postfixexpr_in_exprStatement616);
             to=postfixexpr();
 
             state._fsp--;
@@ -1280,9 +1278,9 @@ public class NebulaParser extends Parser {
                 case 1 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:303:10: '=' from= expr
                     {
-                    match(input,21,FOLLOW_21_in_exprStatement631); if (state.failed) return v;
+                    match(input,21,FOLLOW_21_in_exprStatement628); if (state.failed) return v;
 
-                    pushFollow(FOLLOW_expr_in_exprStatement635);
+                    pushFollow(FOLLOW_expr_in_exprStatement632);
                     from=expr();
 
                     state._fsp--;
@@ -1339,7 +1337,7 @@ public class NebulaParser extends Parser {
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:321:5: (e= addexpr )
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:321:9: e= addexpr
             {
-            pushFollow(FOLLOW_addexpr_in_expr678);
+            pushFollow(FOLLOW_addexpr_in_expr675);
             e=addexpr();
 
             state._fsp--;
@@ -1381,7 +1379,7 @@ public class NebulaParser extends Parser {
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:325:5: (a= multexpr ( '+' b= multexpr | '-' c= multexpr )* )
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:325:9: a= multexpr ( '+' b= multexpr | '-' c= multexpr )*
             {
-            pushFollow(FOLLOW_multexpr_in_addexpr709);
+            pushFollow(FOLLOW_multexpr_in_addexpr706);
             a=multexpr();
 
             state._fsp--;
@@ -1407,9 +1405,9 @@ public class NebulaParser extends Parser {
             	case 1 :
             	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:326:13: '+' b= multexpr
             	    {
-            	    match(input,16,FOLLOW_16_in_addexpr725); if (state.failed) return v;
+            	    match(input,16,FOLLOW_16_in_addexpr722); if (state.failed) return v;
 
-            	    pushFollow(FOLLOW_multexpr_in_addexpr729);
+            	    pushFollow(FOLLOW_multexpr_in_addexpr726);
             	    b=multexpr();
 
             	    state._fsp--;
@@ -1422,9 +1420,9 @@ public class NebulaParser extends Parser {
             	case 2 :
             	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:327:13: '-' c= multexpr
             	    {
-            	    match(input,18,FOLLOW_18_in_addexpr746); if (state.failed) return v;
+            	    match(input,18,FOLLOW_18_in_addexpr743); if (state.failed) return v;
 
-            	    pushFollow(FOLLOW_multexpr_in_addexpr750);
+            	    pushFollow(FOLLOW_multexpr_in_addexpr747);
             	    c=multexpr();
 
             	    state._fsp--;
@@ -1473,7 +1471,7 @@ public class NebulaParser extends Parser {
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:332:5: (a= postfixExprValue ( '*' b= postfixExprValue )* )
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:332:9: a= postfixExprValue ( '*' b= postfixExprValue )*
             {
-            pushFollow(FOLLOW_postfixExprValue_in_multexpr794);
+            pushFollow(FOLLOW_postfixExprValue_in_multexpr791);
             a=postfixExprValue();
 
             state._fsp--;
@@ -1496,9 +1494,9 @@ public class NebulaParser extends Parser {
             	case 1 :
             	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:333:13: '*' b= postfixExprValue
             	    {
-            	    match(input,15,FOLLOW_15_in_multexpr811); if (state.failed) return v;
+            	    match(input,15,FOLLOW_15_in_multexpr808); if (state.failed) return v;
 
-            	    pushFollow(FOLLOW_postfixExprValue_in_multexpr815);
+            	    pushFollow(FOLLOW_postfixExprValue_in_multexpr812);
             	    b=postfixExprValue();
 
             	    state._fsp--;
@@ -1545,7 +1543,7 @@ public class NebulaParser extends Parser {
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:338:5: (p= postfixexpr )
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:338:9: p= postfixexpr
             {
-            pushFollow(FOLLOW_postfixexpr_in_postfixExprValue858);
+            pushFollow(FOLLOW_postfixexpr_in_postfixExprValue855);
             p=postfixexpr();
 
             state._fsp--;
@@ -1596,7 +1594,7 @@ public class NebulaParser extends Parser {
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:342:9: (p= primary )
             // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:342:10: p= primary
             {
-            pushFollow(FOLLOW_primary_in_postfixexpr886);
+            pushFollow(FOLLOW_primary_in_postfixexpr883);
             p=primary();
 
             state._fsp--;
@@ -1653,11 +1651,11 @@ public class NebulaParser extends Parser {
             	case 1 :
             	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:344:12: '.' mID= ID '()'
             	    {
-            	    match(input,19,FOLLOW_19_in_postfixexpr919); if (state.failed) return retval;
+            	    match(input,19,FOLLOW_19_in_postfixexpr916); if (state.failed) return retval;
 
-            	    mID=(Token)match(input,ID,FOLLOW_ID_in_postfixexpr923); if (state.failed) return retval;
+            	    mID=(Token)match(input,ID,FOLLOW_ID_in_postfixexpr920); if (state.failed) return retval;
 
-            	    match(input,13,FOLLOW_13_in_postfixexpr925); if (state.failed) return retval;
+            	    match(input,13,FOLLOW_13_in_postfixexpr922); if (state.failed) return retval;
 
             	    if ( state.backtracking==0 ) {
             	    	              if(retval.field!=null){retval.v =opFLoad(retval.v,retval.field);retval.field =null;} 
@@ -1673,19 +1671,19 @@ public class NebulaParser extends Parser {
             	case 2 :
             	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:352:12: '.' mID= ID '(' params= exprList ')'
             	    {
-            	    match(input,19,FOLLOW_19_in_postfixexpr940); if (state.failed) return retval;
+            	    match(input,19,FOLLOW_19_in_postfixexpr937); if (state.failed) return retval;
 
-            	    mID=(Token)match(input,ID,FOLLOW_ID_in_postfixexpr944); if (state.failed) return retval;
+            	    mID=(Token)match(input,ID,FOLLOW_ID_in_postfixexpr941); if (state.failed) return retval;
 
-            	    match(input,12,FOLLOW_12_in_postfixexpr946); if (state.failed) return retval;
+            	    match(input,12,FOLLOW_12_in_postfixexpr943); if (state.failed) return retval;
 
-            	    pushFollow(FOLLOW_exprList_in_postfixexpr950);
+            	    pushFollow(FOLLOW_exprList_in_postfixexpr947);
             	    params=exprList();
 
             	    state._fsp--;
             	    if (state.failed) return retval;
 
-            	    match(input,14,FOLLOW_14_in_postfixexpr952); if (state.failed) return retval;
+            	    match(input,14,FOLLOW_14_in_postfixexpr949); if (state.failed) return retval;
 
             	    if ( state.backtracking==0 ) {                 
             	                      if(retval.field!=null){retval.v =opFLoad(retval.v,retval.field);retval.field =null;}
@@ -1698,9 +1696,9 @@ public class NebulaParser extends Parser {
             	case 3 :
             	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:357:12: '.' fID= ID
             	    {
-            	    match(input,19,FOLLOW_19_in_postfixexpr967); if (state.failed) return retval;
+            	    match(input,19,FOLLOW_19_in_postfixexpr964); if (state.failed) return retval;
 
-            	    fID=(Token)match(input,ID,FOLLOW_ID_in_postfixexpr971); if (state.failed) return retval;
+            	    fID=(Token)match(input,ID,FOLLOW_ID_in_postfixexpr968); if (state.failed) return retval;
 
             	    if ( state.backtracking==0 ) { 
             	                    if(retval.field!=null){retval.v =opFLoad(retval.v,retval.field);retval.field =null;} 
@@ -1768,7 +1766,7 @@ public class NebulaParser extends Parser {
                 case 1 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:365:9: e= expr ( ',' e= expr )*
                     {
-                    pushFollow(FOLLOW_expr_in_exprList1025);
+                    pushFollow(FOLLOW_expr_in_exprList1022);
                     e=expr();
 
                     state._fsp--;
@@ -1791,9 +1789,9 @@ public class NebulaParser extends Parser {
                     	case 1 :
                     	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:366:10: ',' e= expr
                     	    {
-                    	    match(input,17,FOLLOW_17_in_exprList1038); if (state.failed) return list;
+                    	    match(input,17,FOLLOW_17_in_exprList1035); if (state.failed) return list;
 
-                    	    pushFollow(FOLLOW_expr_in_exprList1042);
+                    	    pushFollow(FOLLOW_expr_in_exprList1039);
                     	    e=expr();
 
                     	    state._fsp--;
@@ -1897,15 +1895,15 @@ public class NebulaParser extends Parser {
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:370:9: ( 'new' type '()' )
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:370:10: 'new' type '()'
                     {
-                    match(input,26,FOLLOW_26_in_primary1074); if (state.failed) return v;
+                    match(input,26,FOLLOW_26_in_primary1071); if (state.failed) return v;
 
-                    pushFollow(FOLLOW_type_in_primary1076);
+                    pushFollow(FOLLOW_type_in_primary1073);
                     type10=type();
 
                     state._fsp--;
                     if (state.failed) return v;
 
-                    match(input,13,FOLLOW_13_in_primary1078); if (state.failed) return v;
+                    match(input,13,FOLLOW_13_in_primary1075); if (state.failed) return v;
 
                     }
 
@@ -1917,7 +1915,7 @@ public class NebulaParser extends Parser {
                 case 2 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:371:9: 'this'
                     {
-                    match(input,29,FOLLOW_29_in_primary1091); if (state.failed) return v;
+                    match(input,29,FOLLOW_29_in_primary1088); if (state.failed) return v;
 
                     if ( state.backtracking==0 ) {v = v("this");}
 
@@ -1926,7 +1924,7 @@ public class NebulaParser extends Parser {
                 case 3 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:372:9: 'super'
                     {
-                    match(input,28,FOLLOW_28_in_primary1112); if (state.failed) return v;
+                    match(input,28,FOLLOW_28_in_primary1109); if (state.failed) return v;
 
                     if ( state.backtracking==0 ) {v = v("super");}
 
@@ -1935,7 +1933,7 @@ public class NebulaParser extends Parser {
                 case 4 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:373:9: INT
                     {
-                    INT11=(Token)match(input,INT,FOLLOW_INT_in_primary1133); if (state.failed) return v;
+                    INT11=(Token)match(input,INT,FOLLOW_INT_in_primary1130); if (state.failed) return v;
 
                     if ( state.backtracking==0 ) {v = opILoad((INT11!=null?INT11.getText():null));}
 
@@ -1944,7 +1942,7 @@ public class NebulaParser extends Parser {
                 case 5 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:374:9: ID
                     {
-                    ID12=(Token)match(input,ID,FOLLOW_ID_in_primary1157); if (state.failed) return v;
+                    ID12=(Token)match(input,ID,FOLLOW_ID_in_primary1154); if (state.failed) return v;
 
                     if ( state.backtracking==0 ) {v = v((ID12!=null?ID12.getText():null));}
 
@@ -1953,15 +1951,15 @@ public class NebulaParser extends Parser {
                 case 6 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:375:9: '(' expr ')'
                     {
-                    match(input,12,FOLLOW_12_in_primary1182); if (state.failed) return v;
+                    match(input,12,FOLLOW_12_in_primary1179); if (state.failed) return v;
 
-                    pushFollow(FOLLOW_expr_in_primary1184);
+                    pushFollow(FOLLOW_expr_in_primary1181);
                     expr13=expr();
 
                     state._fsp--;
                     if (state.failed) return v;
 
-                    match(input,14,FOLLOW_14_in_primary1186); if (state.failed) return v;
+                    match(input,14,FOLLOW_14_in_primary1183); if (state.failed) return v;
 
                     if ( state.backtracking==0 ) {v = expr13;}
 
@@ -2029,7 +2027,7 @@ public class NebulaParser extends Parser {
                 case 1 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:383:9: 'decimal'
                     {
-                    match(input,23,FOLLOW_23_in_type1223); if (state.failed) return type;
+                    match(input,23,FOLLOW_23_in_type1220); if (state.failed) return type;
 
                     if ( state.backtracking==0 ) {type = BuiltInTypeSymbol.DECIMAL;}
 
@@ -2038,7 +2036,7 @@ public class NebulaParser extends Parser {
                 case 2 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:384:9: 'int'
                     {
-                    match(input,25,FOLLOW_25_in_type1235); if (state.failed) return type;
+                    match(input,25,FOLLOW_25_in_type1232); if (state.failed) return type;
 
                     if ( state.backtracking==0 ) {type = BuiltInTypeSymbol.INT;}
 
@@ -2047,7 +2045,7 @@ public class NebulaParser extends Parser {
                 case 3 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:385:9: 'void'
                     {
-                    match(input,30,FOLLOW_30_in_type1251); if (state.failed) return type;
+                    match(input,30,FOLLOW_30_in_type1248); if (state.failed) return type;
 
                     if ( state.backtracking==0 ) {type = BuiltInTypeSymbol.VOID;}
 
@@ -2056,7 +2054,7 @@ public class NebulaParser extends Parser {
                 case 4 :
                     // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:386:9: ID
                     {
-                    ID14=(Token)match(input,ID,FOLLOW_ID_in_type1266); if (state.failed) return type;
+                    ID14=(Token)match(input,ID,FOLLOW_ID_in_type1263); if (state.failed) return type;
 
                     if ( state.backtracking==0 ) {type = resolveType((ID14!=null?ID14.getText():null));}
 
@@ -2126,49 +2124,48 @@ public class NebulaParser extends Parser {
     public static final BitSet FOLLOW_ID_in_varDeclaration523 = new BitSet(new long[]{0x0000000000200002L});
     public static final BitSet FOLLOW_21_in_varDeclaration526 = new BitSet(new long[]{0x0000000034001060L});
     public static final BitSet FOLLOW_expr_in_varDeclaration530 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_returnStatement566 = new BitSet(new long[]{0x0000000034101060L});
-    public static final BitSet FOLLOW_expr_in_returnStatement570 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_returnStatement574 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_postfixexpr_in_exprStatement619 = new BitSet(new long[]{0x0000000000200002L});
-    public static final BitSet FOLLOW_21_in_exprStatement631 = new BitSet(new long[]{0x0000000034001060L});
-    public static final BitSet FOLLOW_expr_in_exprStatement635 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_addexpr_in_expr678 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_multexpr_in_addexpr709 = new BitSet(new long[]{0x0000000000050002L});
-    public static final BitSet FOLLOW_16_in_addexpr725 = new BitSet(new long[]{0x0000000034001060L});
-    public static final BitSet FOLLOW_multexpr_in_addexpr729 = new BitSet(new long[]{0x0000000000050002L});
-    public static final BitSet FOLLOW_18_in_addexpr746 = new BitSet(new long[]{0x0000000034001060L});
-    public static final BitSet FOLLOW_multexpr_in_addexpr750 = new BitSet(new long[]{0x0000000000050002L});
-    public static final BitSet FOLLOW_postfixExprValue_in_multexpr794 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_15_in_multexpr811 = new BitSet(new long[]{0x0000000034001060L});
-    public static final BitSet FOLLOW_postfixExprValue_in_multexpr815 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_postfixexpr_in_postfixExprValue858 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_primary_in_postfixexpr886 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_postfixexpr919 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ID_in_postfixexpr923 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_postfixexpr925 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_postfixexpr940 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ID_in_postfixexpr944 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_postfixexpr946 = new BitSet(new long[]{0x0000000034005060L});
-    public static final BitSet FOLLOW_exprList_in_postfixexpr950 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_postfixexpr952 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_postfixexpr967 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ID_in_postfixexpr971 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_expr_in_exprList1025 = new BitSet(new long[]{0x0000000000020002L});
-    public static final BitSet FOLLOW_17_in_exprList1038 = new BitSet(new long[]{0x0000000034001060L});
-    public static final BitSet FOLLOW_expr_in_exprList1042 = new BitSet(new long[]{0x0000000000020002L});
-    public static final BitSet FOLLOW_26_in_primary1074 = new BitSet(new long[]{0x0000000042800020L});
-    public static final BitSet FOLLOW_type_in_primary1076 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_primary1078 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_primary1091 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_primary1112 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_INT_in_primary1133 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_primary1157 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_primary1182 = new BitSet(new long[]{0x0000000034001060L});
-    public static final BitSet FOLLOW_expr_in_primary1184 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_primary1186 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_type1223 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_25_in_type1235 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_type1251 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_type1266 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_returnStatement566 = new BitSet(new long[]{0x0000000034001062L});
+    public static final BitSet FOLLOW_expr_in_returnStatement570 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_postfixexpr_in_exprStatement616 = new BitSet(new long[]{0x0000000000200002L});
+    public static final BitSet FOLLOW_21_in_exprStatement628 = new BitSet(new long[]{0x0000000034001060L});
+    public static final BitSet FOLLOW_expr_in_exprStatement632 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_addexpr_in_expr675 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_multexpr_in_addexpr706 = new BitSet(new long[]{0x0000000000050002L});
+    public static final BitSet FOLLOW_16_in_addexpr722 = new BitSet(new long[]{0x0000000034001060L});
+    public static final BitSet FOLLOW_multexpr_in_addexpr726 = new BitSet(new long[]{0x0000000000050002L});
+    public static final BitSet FOLLOW_18_in_addexpr743 = new BitSet(new long[]{0x0000000034001060L});
+    public static final BitSet FOLLOW_multexpr_in_addexpr747 = new BitSet(new long[]{0x0000000000050002L});
+    public static final BitSet FOLLOW_postfixExprValue_in_multexpr791 = new BitSet(new long[]{0x0000000000008002L});
+    public static final BitSet FOLLOW_15_in_multexpr808 = new BitSet(new long[]{0x0000000034001060L});
+    public static final BitSet FOLLOW_postfixExprValue_in_multexpr812 = new BitSet(new long[]{0x0000000000008002L});
+    public static final BitSet FOLLOW_postfixexpr_in_postfixExprValue855 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_primary_in_postfixexpr883 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_19_in_postfixexpr916 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ID_in_postfixexpr920 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_postfixexpr922 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_19_in_postfixexpr937 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ID_in_postfixexpr941 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_postfixexpr943 = new BitSet(new long[]{0x0000000034005060L});
+    public static final BitSet FOLLOW_exprList_in_postfixexpr947 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_postfixexpr949 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_19_in_postfixexpr964 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ID_in_postfixexpr968 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_expr_in_exprList1022 = new BitSet(new long[]{0x0000000000020002L});
+    public static final BitSet FOLLOW_17_in_exprList1035 = new BitSet(new long[]{0x0000000034001060L});
+    public static final BitSet FOLLOW_expr_in_exprList1039 = new BitSet(new long[]{0x0000000000020002L});
+    public static final BitSet FOLLOW_26_in_primary1071 = new BitSet(new long[]{0x0000000042800020L});
+    public static final BitSet FOLLOW_type_in_primary1073 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_primary1075 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_primary1088 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_primary1109 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_INT_in_primary1130 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_primary1154 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_primary1179 = new BitSet(new long[]{0x0000000034001060L});
+    public static final BitSet FOLLOW_expr_in_primary1181 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_primary1183 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_type1220 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_25_in_type1232 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_type1248 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_type1263 = new BitSet(new long[]{0x0000000000000002L});
 
 }

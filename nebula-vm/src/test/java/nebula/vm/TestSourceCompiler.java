@@ -120,120 +120,199 @@ public class TestSourceCompiler extends TestCase {
 		assertEquals("funcSayHello", method.name);
 		assertEquals("V", method.returnType.getName());
 
-		String actual = disassemble(method);
+		String actual = disassemble(clz.methods[0]);
 		System.out.println(actual);
 		//@formatter:off
 		String expected = "" +
 				".def funcSayHello: args=0, locals=2\n" +
 				"0000: ICONST     r1, 9\n" +
+				"0001: RET        r0, 0\n" + 
 				"\n";
 		//@formatter:on
 		assertEquals(expected, actual);
+		
+		Interpreter cpu = new Interpreter();
+		cpu.resolve(clz);
+		
+		actual = disassemble(clz.methods[0]);
+		System.out.println(actual);
+		//@formatter:off
+		expected = "" +
+				".def funcSayHello: args=0, locals=2\n" +
+				"0000: ICONST     r1, 9\n" +
+				"0001: RET        r0, 0\n" + 
+				"\n";
+		//@formatter:on
+		assertEquals(expected, actual);
+		
+		cpu.exec(clz.methods[0]);
 	}
 
 	public void test_methodDefinition_add_1_2() throws Exception {
 		//@formatter:off
 		String text = "" +
-				"void funcSayHello(){" +
+				"class Test {" +
+				"	void funcSayHello(){" +
 				"	int i = 1+2;" +
+				"	}" +
 				"}";
 		//@formatter:on		
 		NebulaParser parser = loadFromString(text);
 
-		ClassSymbol clz = parser.enterClass("test", null);
-		MethodSymbol method = parser.methodDeclaration(clz);
-		clz = parser.exitClass(clz);
+		ClassSymbol clz = parser.classDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
 
-		assertEquals("funcSayHello", method.name);
-		assertEquals("V", method.returnType.getName());
+		assertEquals("funcSayHello", clz.methods[0].name);
 
-		String actual = disassemble(method);
+		String actual = disassemble(clz.methods[0]);
 		System.out.println(actual);
 		//@formatter:off
 		String expected = "" +
 				".def funcSayHello: args=0, locals=3\n" +
 				"0000: ICONST     r1, 1\n" + 
 				"0001: ICONST     r2, 2\n" + 
-				"0002: IADD       r1, r1, r2\n" + 
+				"0002: IADD       r1, r1, r2\n" +
+				"0003: RET        r0, 0\n" + 
 				"\n";
 		//@formatter:on
 		assertEquals(expected, actual);
+		
+		Interpreter cpu = new Interpreter();
+		cpu.resolve(clz);
+		
+		actual = disassemble(clz.methods[0]);
+		System.out.println(actual);
+		//@formatter:off
+		expected = "" +
+				".def funcSayHello: args=0, locals=3\n" +
+				"0000: ICONST     r1, 1\n" + 
+				"0001: ICONST     r2, 2\n" + 
+				"0002: IADD       r1, r1, r2\n" +
+				"0003: RET        r0, 0\n" + 
+				"\n";
+		//@formatter:on
+		assertEquals(expected, actual);
+		
+		cpu.exec(clz.methods[0]);
 	}
 
 	public void test_methodDefinition_invoke() throws Exception {
 		//@formatter:off
 		String text = "" +
-				"void funcSayHello(){" +
-				"	int i = this.test();" +
+				"class Test {" +
+				"	void funcSayHello(){" +
+				"		int i = this.test();" +
+				"	}" +
+				"	void test(){" +
+				"		return 4;" +
+				"	}" +
 				"}";
 		//@formatter:on		
 		NebulaParser parser = loadFromString(text);
 
-		ClassSymbol clz = parser.enterClass("Test", null);
-		MethodSymbol method = parser.methodDeclaration(clz);
-		clz = parser.exitClass(clz);
+		ClassSymbol clz = parser.classDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
 
-		assertEquals("funcSayHello", method.name);
+		assertEquals("funcSayHello", clz.methods[0].name);
 
-		String actual = disassemble(method);
+		String actual = disassemble(clz.methods[0]);
 		System.out.println(actual);
 		//@formatter:off
 		String expected = "" +
 				".def funcSayHello: args=0, locals=2\n" +
-				"0000: CALL       r1, #2:@Test.test(), r0\n" + 
+				"0000: CALL       r1, #2:@Test.test(), r0\n" +
+				"0001: RET        r0, 0\n" + 
 				"\n";
 		//@formatter:on
 		assertEquals(expected, actual);
+		
+		Interpreter cpu = new Interpreter();
+		cpu.resolve(clz);
+		
+		actual = disassemble(clz.methods[0]);
+		System.out.println(actual);
+		//@formatter:off
+		expected = "" +
+				".def funcSayHello: args=0, locals=2\n" +
+				"0000: CALL       r1, #2:@Test.test(), r0\n" +
+				"0001: RET        r0, 0\n" + 
+				"\n";
+		//@formatter:on
+		assertEquals(expected, actual);
+		
+		cpu.exec(clz.methods[0]);
 	}
 
 	public void test_methodDefinition_invoke_1() throws Exception {
 		//@formatter:off
 		String text = "" +
-				"void funcSayHello(){" +
-				"	int i = this.test(2);" +
+				"class Test {" +
+				"	void funcSayHello(){" +
+				"		int i = this.test(2);" +
+				"	}" +
+				"	void test(){" +
+				"		return 4;" +
+				"	}" +
 				"}";
 		//@formatter:on		
 		NebulaParser parser = loadFromString(text);
 
-		ClassSymbol clz = parser.enterClass("Test", null);
-		MethodSymbol method = parser.methodDeclaration(clz);
-		clz = parser.exitClass(clz);
+		ClassSymbol clz =  parser.classDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
 
-		assertEquals("funcSayHello", method.name);
+		assertEquals("funcSayHello", clz.methods[0].name);
 
-		String actual = disassemble(method);
+		String actual = disassemble( clz.methods[0]);
 		System.out.println(actual);
 		//@formatter:off
 		String expected = "" +
 				".def funcSayHello: args=0, locals=2\n" +
 				"0000: ICONST     r1, 2\n" +
 				"0001: CALL       r1, #2:@Test.test(), r1\n" +
+				"0002: RET        r0, 0\n" +
 				"\n";
 		//@formatter:on
 		assertEquals(expected, actual);
+
+		Interpreter cpu = new Interpreter();
+		cpu.resolve(clz);
+		
+		actual = disassemble(clz.methods[0]);
+		System.out.println(actual);
+		//@formatter:off
+		expected = "" +
+				".def funcSayHello: args=0, locals=2\n" +
+				"0000: ICONST     r1, 2\n" +
+				"0001: CALL       r1, #2:@Test.test(), r1\n" +
+				"0002: RET        r0, 0\n" +
+				"\n";
+		//@formatter:on
+		assertEquals(expected, actual);
+		
+		cpu.exec(clz.methods[0]);
 	}
 
 	public void test_methodDefinition_invoke_1_a() throws Exception {
 		//@formatter:off
 		String text = "" +
-				"void funcSayHello2a(){" +
-				"	int a = 10;" +
-				"	int i = this.test(2,a+9);" +
+				"class Test {" +
+				"	void funcSayHello2a(){" +
+				"		int a = 10;" +
+				"		int i = this.test(2,a+9);" +
+				"	}" +
+				"	int test(int a,int b ){" +
+				"		return a + b + b;" +
+				"	}" +
 				"}";
 		//@formatter:on		
 		NebulaParser parser = loadFromString(text);
 
-		ClassSymbol clz = parser.enterClass("Test", null);
-		MethodSymbol method = parser.methodDeclaration(clz);
-		clz = parser.exitClass(clz);
+		ClassSymbol clz =  parser.classDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
 
-		assertEquals("funcSayHello2a", method.name);
+		assertEquals("funcSayHello2a", clz.methods[0].name);
 
-		String actual = disassemble(method);
+		String actual = disassemble( clz.methods[0]);
 		System.out.println(actual);
 		//@formatter:off
 		String expected = "" +
@@ -243,36 +322,75 @@ public class TestSourceCompiler extends TestCase {
 				"0002: ICONST     r3, 9\n" +
 				"0003: IADD       r3, r1, r3\n" +
 				"0004: CALL       r2, #2:@Test.test(), r2\n" +
+				"0005: RET        r0, 0\n" +
 				"\n" ;
 		//@formatter:on
 		assertEquals(expected, actual);
+		
+		Interpreter cpu = new Interpreter();
+		cpu.resolve(clz);
+		
+		actual = disassemble(clz.methods[0]);
+		System.out.println(actual);
+		//@formatter:off
+		expected = "" +
+				".def funcSayHello2a: args=0, locals=4\n" +
+				"0000: ICONST     r1, 10\n" +
+				"0001: ICONST     r2, 2\n" +
+				"0002: ICONST     r3, 9\n" +
+				"0003: IADD       r3, r1, r3\n" +
+				"0004: CALL       r2, #2:@Test.test(), r2\n" +
+				"0005: RET        r0, 0\n" +
+				"\n" ;
+		//@formatter:on
+		assertEquals(expected, actual);
+		
+		cpu.exec(clz.methods[0]);
 	}
 
 	public void test_methodDefinition_params() throws Exception {
 		//@formatter:off
 		String text = "" +
-				"void funcSayHello(int a, int b){" +
-				"	int c = a + b;" +
+				"class Test {" +
+				"	void funcSayHello(int a, int b){" +
+				"		int c = a + b;" +
+				"	}" +
 				"}";
 		//@formatter:on		
 		NebulaParser parser = loadFromString(text);
 
-		ClassSymbol clz = parser.enterClass("test", null);
-		MethodSymbol method = parser.methodDeclaration(clz);
-		clz = parser.exitClass(clz);
+		ClassSymbol clz =  parser.classDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
 
-		assertEquals("funcSayHello", method.name);
+		assertEquals("funcSayHello", clz.methods[0].name);
 
-		String actual = disassemble(method);
+		String actual = disassemble( clz.methods[0]);
 		System.out.println(actual);
 		//@formatter:off
 		String expected = "" +
 				".def funcSayHello: args=2, locals=2\n" +
-				"0000: IADD       r3, r1, r2\n" + 
+				"0000: IADD       r3, r1, r2\n" +
+				"0001: RET        r0, 0\n" + 
 				"\n";
 		//@formatter:on
 		assertEquals(expected, actual);
+		
+
+		Interpreter cpu = new Interpreter();
+		cpu.resolve(clz);
+		
+		actual = disassemble(clz.methods[0]);
+		System.out.println(actual);
+		//@formatter:off
+		expected = "" +
+				".def funcSayHello: args=2, locals=2\n" +
+				"0000: IADD       r3, r1, r2\n" +
+				"0001: RET        r0, 0\n" + 
+				"\n";
+		//@formatter:on
+		assertEquals(expected, actual);
+		
+		cpu.exec(clz.methods[0]);
 	}
 
 }
