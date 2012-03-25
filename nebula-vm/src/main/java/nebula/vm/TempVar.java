@@ -4,10 +4,9 @@ import java.util.Vector;
 
 public class TempVar extends Var {
 	Vector<Address> forwardReferences = null;
-	
-	public TempVar(String name,short index, Type type) {
-		super(name, type);
-		this.reg = index;
+
+	public TempVar(String name, short index, Type type) {
+		super(name, type, index);
 		this.applied = false;
 	}
 
@@ -42,6 +41,21 @@ public class TempVar extends Var {
 			 * addr+" to be "+getAddress());
 			 */
 			code[addrToPatch.ip] = code[addrToPatch.ip]
+					| (this.reg << (BytecodeDefinition.OFFSET_X_ * (3 - addrToPatch.offset)));
+			// BytecodeAssembler2.writeInt(code, addrToPatch, address);
+		}
+	}
+
+	public void resolveForwardReferences(short reg, int[] code) {
+		applied = true;
+		// need to patch up all references to this symbol
+		Vector<Address> opndsToPatch = forwardReferences;
+		for (Address addrToPatch : opndsToPatch) {
+			/*
+			 * System.out.println("updating operand at addr "+
+			 * addr+" to be "+getAddress());
+			 */
+			code[addrToPatch.ip] = code[addrToPatch.ip]
 					| (reg << (BytecodeDefinition.OFFSET_X_ * (3 - addrToPatch.offset)));
 			// BytecodeAssembler2.writeInt(code, addrToPatch, address);
 		}
@@ -49,7 +63,7 @@ public class TempVar extends Var {
 
 	@Override
 	public String toString() {
-		return "[ " + name  + ":" + type + " | " + reg + "  " + applied + "]";
+		return "[ " + name + ":" + type + " | " + reg + "  " + applied + "]";
 	}
 
 }

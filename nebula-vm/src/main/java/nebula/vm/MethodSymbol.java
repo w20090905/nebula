@@ -43,7 +43,6 @@ public class MethodSymbol {
 
 	@Override
 	public String toString() {
-		return "FunctionSymbol{" + "name='" + name + '\'' + ", args=" + nargs + ", locals=" + nlocals + ", address="
-				+ code.length + '}';
+		return "MethodSymbol{" + "name='" + name + '\'' + ", args=" + nargs + ", locals=" + nlocals + '}';
 	}
 }

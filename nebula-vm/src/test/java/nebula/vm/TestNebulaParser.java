@@ -37,34 +37,23 @@ public class TestNebulaParser extends TestCase {
 					for (TempVar v : tmps) {
 						txtTemps += "" + (v.applied ? " " : v.reg) + " ";
 					}
-					str = String.format("|%1$-10s|\t%2$s", txtTemps, str);
+					str = String.format("|%1$-10s|  %2$s", txtTemps, str);
 				}
 				sb.append(str);
 			};
 		};
 
 		return parser;
-		// parser.compilationUnit();
-		// // new DisAssembler().disassemble(clz);
-		// boolean hasErrors = parser.getNumberOfSyntaxErrors() > 0;
-		// if (hasErrors) {
-		// throw new RuntimeException("ERROR");
-		// }
-		//
-		// // ClassSymbol clz = load(input);
-		// // interpreter.resolve(clz);
-		// // interpreter.exec(interpreter.resolve(clz.getEntryPoint()));
-		// return sb.toString();
 	}
 
 	public void testClassDefineFile() throws Exception {
 		String filename = "ClsDefineOnly.n";
 		NebulaParser parser = loadFromFile(filename);
-		ClassSymbol v = parser.classDefinition();
+		ClassSymbol clz = parser.classDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
 		System.out.println(sb.toString());
 
-		assertEquals("ClsDefineOnly", v.name);
+		assertEquals("ClsDefineOnly", clz.name);
 	}
 
 	public void testClsFieldGet() throws Exception {
@@ -72,11 +61,11 @@ public class TestNebulaParser extends TestCase {
 		System.out.println(result);
 		String filename = "ClsFieldGet.n";
 		NebulaParser parser = loadFromFile(filename);
-		ClassSymbol v = parser.classDefinition();
+		ClassSymbol clz = parser.classDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
 		System.out.println(sb.toString());
 
-		assertEquals("ClsFieldGet", v.name);
+		assertEquals("ClsFieldGet", clz.name);
 	}
 
 	public void test_classDefinition() throws Exception {
@@ -87,15 +76,16 @@ public class TestNebulaParser extends TestCase {
 				"}";
 		//@formatter:on		
 		NebulaParser parser = loadFromString(text);
-		ClassSymbol v = parser.classDefinition();
+		ClassSymbol clz = parser.classDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
-		System.out.println(sb.toString());
-
-		assertEquals("Test", v.name);
+		
+		assertEquals("Test", clz.name);
+		
 		String actual = sb.toString();
+		System.out.println(actual);
 		//@formatter:off
 		String expected = "" + 
-				"|          |\tdefine field i\n";
+				"|          |  FIELD : i\n";
 		//@formatter:on
 		assertEquals(expected, actual);
 	}
@@ -103,24 +93,28 @@ public class TestNebulaParser extends TestCase {
 	public void test_methodDefinition_define_i() throws Exception {
 		//@formatter:off
 		String text = "" +
-				"void func(){" +
-				"	int i = 0;" +
+				"void funcSayHello(){" +
+				"	int i = 9;" +
 				"}";
 		//@formatter:on		
 		NebulaParser parser = loadFromString(text);
-		MethodSymbol v = parser.methodDeclaration(new ClassSymbol("Test"));
+		
+		ClassSymbol clz = parser.enterClass("Test",null);
+		MethodSymbol method = parser.methodDeclaration(clz);
+		clz = parser.exitClass(clz);		
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
-		System.out.println(sb.toString());
 
-		assertEquals("func", v.name);
+		assertEquals("funcSayHello", method.name);
+		assertEquals("V",method.returnType.getName());
+		
 		String actual = sb.toString();
+		System.out.println(actual);
 		//@formatter:off
 		String expected = "" +
-				"|          |\tFUNC func() {\n" + 
-				"|1         |\tLOADI: tmp1#I = 0;\n" + 
-				"|1         |\tHIDE : i = tmp1#I;\n" + 
-				"|          |\t\n" +
-				"|          |\t}\n";
+				"|          |  FUNC  : funcSayHello() {\n" + 
+				"|1         |  ICONST: tmp1#I = 9;\n" + 
+				"|1         |  HIDE  : i#I = tmp1#I;\n" + 
+				"|          |  }\n";
 		//@formatter:on
 		assertEquals(expected, actual);
 	}
@@ -128,26 +122,30 @@ public class TestNebulaParser extends TestCase {
 	public void test_methodDefinition_add_1_2() throws Exception {
 		//@formatter:off
 		String text = "" +
-				"void func(){" +
+				"void funcSayHello(){" +
 				"	int i = 1+2;" +
 				"}";
 		//@formatter:on		
 		NebulaParser parser = loadFromString(text);
-		MethodSymbol v = parser.methodDeclaration(new ClassSymbol("Test"));
+		
+		ClassSymbol clz = parser.enterClass("test",null);
+		MethodSymbol method = parser.methodDeclaration(clz);
+		clz = parser.exitClass(clz);		
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
-		System.out.println(sb.toString());
 
-		assertEquals("func", v.name);
+		assertEquals("funcSayHello", method.name);
+		assertEquals("V",method.returnType.getName());
+		
 		String actual = sb.toString();
+		System.out.println(actual);
 		//@formatter:off
 		String expected = "" +
-				"|          |\tFUNC func() {\n" +
-				"|1         |\tLOADI: tmp1#I = 1;\n" + 
-				"|1 2       |\tLOADI: tmp2#I = 2;\n" + 
-				"|1         |\tADD  : tmp1#I = tmp1#I + tmp2#I;\n" + 
-				"|1         |\tHIDE : i = tmp1#I;\n" + 
-				"|          |\t\n" +
-				"|          |\t}\n";
+				"|          |  FUNC  : funcSayHello() {\n" +
+				"|1         |  ICONST: tmp1#I = 1;\n" + 
+				"|1 2       |  ICONST: tmp2#I = 2;\n" + 
+				"|1         |  IADD  : tmp1#I = tmp1#I + tmp2#I;\n" + 
+				"|1         |  HIDE  : i#I = tmp1#I;\n" + 
+				"|          |  }\n";
 		//@formatter:on
 		assertEquals(expected, actual);
 	}
@@ -155,50 +153,117 @@ public class TestNebulaParser extends TestCase {
 	public void test_methodDefinition_invoke() throws Exception {
 		//@formatter:off
 		String text = "" +
-				"void func(){" +
+				"void funcSayHello(){" +
 				"	int i = this.test();" +
 				"}";
 		//@formatter:on		
 		NebulaParser parser = loadFromString(text);
-		MethodSymbol v = parser.methodDeclaration(new ClassSymbol("Test"));
+		
+		ClassSymbol clz = parser.enterClass("Test",null);
+		MethodSymbol method = parser.methodDeclaration(clz);
+		clz = parser.exitClass(clz);		
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
-		System.out.println(sb.toString());
 
-		assertEquals("func", v.name);
+		assertEquals("funcSayHello", method.name);
+		
 		String actual = sb.toString();
+		System.out.println(actual);
 		//@formatter:off
 		String expected = "" +
-				"|          |\tFUNC func() {\n" +
-				"|1         |\tMOVE : tmp1#Test = this#Test;\n" + 
-				"|1         |\tCALL : tmp1#* = tmp1#Test.Test_test(tmp1#Test );\n" + 
-				"|1         |\tHIDE : i = tmp1#*;\n" + 
-				"|          |\t\n" +
-				"|          |\t}\n";
+				"|          |  FUNC  : funcSayHello() {\n" +
+				"|1         |  CALL  : tmp1#* = this#Test.Test_test();\n" + 
+				"|1         |  HIDE  : i#I = tmp1#*;\n" + 
+				"|          |  }\n";
+		//@formatter:on
+		assertEquals(expected, actual);
+	}
+	
+	public void test_methodDefinition_invoke_1() throws Exception {
+		//@formatter:off
+		String text = "" +
+				"void funcSayHello(){" +
+				"	int we = this.test(2);" +
+				"}";
+		//@formatter:on		
+		NebulaParser parser = loadFromString(text);
+		
+		ClassSymbol clz = parser.enterClass("Test",null);
+		MethodSymbol method = parser.methodDeclaration(clz);
+		clz = parser.exitClass(clz);		
+		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
+
+		assertEquals("funcSayHello", method.name);
+		
+		String actual = sb.toString();
+		System.out.println(actual);
+		//@formatter:off
+		String expected = "" +
+				"|          |  FUNC  : funcSayHello() {\n" +
+				"|1         |  ICONST: tmp1#I = 2;\n" + 
+				"|1         |  CALL  : tmp1#* = this#Test.Test_test(tmp1#I );\n" + 
+				"|1         |  HIDE  : we#I = tmp1#*;\n" + 
+				"|          |  }\n";
 		//@formatter:on
 		assertEquals(expected, actual);
 	}
 
+	public void test_methodDefinition_invoke_1_a() throws Exception {
+		//@formatter:off
+		String text = "" +
+				"void funcSayHello2a(){" +
+				"	int a = 10;" +
+				"	int i = this.test(2,a+9);" +
+				"}";
+		//@formatter:on		
+		NebulaParser parser = loadFromString(text);
+		
+		ClassSymbol clz = parser.enterClass("Test",null);
+		MethodSymbol method = parser.methodDeclaration(clz);
+		clz = parser.exitClass(clz);		
+		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
+
+		assertEquals("funcSayHello2a", method.name);
+		
+		String actual = sb.toString();
+		System.out.println(actual);
+		//@formatter:off
+		String expected = "" +
+				"|          |  FUNC  : funcSayHello2a() {\n" +
+				"|1         |  ICONST: tmp1#I = 10;\n" + 
+				"|1         |  HIDE  : a#I = tmp1#I;\n" + 
+				"|2         |  ICONST: tmp2#I = 2;\n" + 
+				"|2 3       |  ICONST: tmp3#I = 9;\n" + 
+				"|2 3       |  IADD  : tmp3#I = a#I + tmp3#I;\n" + 
+				"|2         |  CALL  : tmp2#* = this#Test.Test_test(tmp2#I tmp3#I );\n" + 
+				"|2         |  HIDE  : i#I = tmp2#*;\n" + 
+				"|          |  }\n";
+		//@formatter:on
+		assertEquals(expected, actual);
+	}
 	public void test_methodDefinition_params() throws Exception {
 		//@formatter:off
 		String text = "" +
-				"void func(int a, int b){" +
+				"void funcSayHello(int a, int b){" +
 				"	int c = a + b;" +
 				"}";
 		//@formatter:on		
 		NebulaParser parser = loadFromString(text);
-		MethodSymbol v = parser.methodDeclaration(new ClassSymbol("Test"));
+		
+		ClassSymbol clz = parser.enterClass("test",null);
+		MethodSymbol method = parser.methodDeclaration(clz);
+		clz = parser.exitClass(clz);		
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
-		System.out.println(sb.toString());
 
-		assertEquals("func", v.name);
+		assertEquals("funcSayHello", method.name);
+		
 		String actual = sb.toString();
+		System.out.println(actual);
 		//@formatter:off
 		String expected = "" +
-				"|          |\tFUNC func() {\n" + 
-				"|3         |\tADD  : tmp3#I = a#I + b#I;\n" + 
-				"|3         |\tHIDE : c = tmp3#I;\n" + 
-				"|          |\t\n" +
-				"|          |\t}\n";
+				"|          |  FUNC  : funcSayHello() {\n" + 
+				"|3         |  IADD  : tmp3#I = a#I + b#I;\n" + 
+				"|3         |  HIDE  : c#I = tmp3#I;\n" + 
+				"|          |  }\n";
 		//@formatter:on
 		assertEquals(expected, actual);
 	}

@@ -42,18 +42,7 @@ public class SourceCompiler extends NebulaParser {
 		super(input);
 	}
 
-	protected void resolveTemp(TempVar v) {
-		assert !v.applied;
-		v.resolveForwardReferences(codeBuffer);
-	}
-
-	private short indexOfPool(Object o) {
-		if (poolLocalK.contains(o))
-			return (short) poolLocalK.indexOf(o);
-		poolLocalK.add(o);
-		return (short) (poolLocalK.size() - 1);
-	}
-
+	// ************** START:members **************
 	@Override
 	protected ClassSymbol resolveType(String name) {
 		ClassSymbol clz = new ClassSymbol(name);
@@ -88,17 +77,17 @@ public class SourceCompiler extends NebulaParser {
 	@Override
 	protected MethodSymbol enterMethod(ClassSymbol clz, String name, Type returnType, List<Var> params) {
 		MethodSymbol m = new MethodSymbol(clz, name, returnType);
-		maxLocals = 0;
+		this.maxLocals = 0;
 
-		for (Var v : params)
-			pushLocal(v);
+		pushLocal("this", clz);
 
-		Var varThis = new Var("this", clz);
-		pushLocal(varThis);
+		for (Var v : params) {
+			pushLocal(v.name, v.type);
+		}
 
+		m.nargs = params.size();
 		this.methods.add(m);
 		this.indexOfPool(m);
-
 		ip = 0;
 
 		return m;
@@ -113,121 +102,139 @@ public class SourceCompiler extends NebulaParser {
 		int[] code = new int[ip];
 		System.arraycopy(codeBuffer, 0, code, 0, ip);
 		method.code = code;
+		method.nlocals = super.maxLocals - 1 - method.nargs;
 		return method;
 	};
 
 	@Override
-	protected Var add(Var a, Var b) {
-		gen(INSTR_IADD, UNKNOWN, a.reg, b.reg);
-		TempVar v = pick(a, b);
+	protected Var opIAdd(Var a, Var b) {
+		if (!a.applied) resolveTemp(a);
+		if (!b.applied) resolveTemp(b);
+		TempVar v = popTmp(a.type);
+
 		v.addReference(ip, 1);
+		gen(INSTR_IADD, v.reg, a.reg, b.reg);
 		return v;
 	};
 
 	@Override
-	protected Var sub(Var a, Var b) {
-		gen(INSTR_ISUB, UNKNOWN, a.reg, b.reg);
-		TempVar v = pick(a, b);
+	protected Var opISub(Var a, Var b) {
+		if (!a.applied) resolveTemp(a);
+		if (!b.applied) resolveTemp(b);
+		TempVar v = popTmp(a.type);
+
 		v.addReference(ip, 1);
+
+		gen(INSTR_ISUB, v.reg, a.reg, b.reg);
 		return v;
 	};
 
 	@Override
-	protected Var mul(Var a, Var b) {
-		gen(INSTR_IMUL, UNKNOWN, a.reg, b.reg);
-		TempVar v = pick(a, b);
+	protected Var opIMul(Var a, Var b) {
+		if (!a.applied) resolveTemp(a);
+		if (!b.applied) resolveTemp(b);
+		TempVar v = popTmp(a.type);
+
 		v.addReference(ip, 1);
+		gen(INSTR_IMUL, v.reg, a.reg, b.reg);
 		return v;
 	};
 
 	@Override
-	protected Var getField(Var obj, FieldSymbol field) {
+	protected Var opFLoad(Var obj, FieldSymbol field) {
+		if (!obj.applied) resolveTemp(obj);
+		TempVar v = popTmp(BuiltInTypeSymbol.FLEX);
+
+		v.addReference(ip, 1);
 		short index = indexOfPool(field);
 		gen(INSTR_FLOAD, UNKNOWN, obj.reg, index);
-		TempVar v = popTmp(BuiltInTypeSymbol.FLEX);
-		v.addReference(ip, 1);
+
 		return v;
 	};
 
 	@Override
-	protected Var setField(Var obj, FieldSymbol field, Var v) {
+	protected Var opFStore(Var obj, FieldSymbol field, Var v) {
+		if (!obj.applied) resolveTemp(obj);
+		if (!v.applied) resolveTemp(v);
+
 		short index = indexOfPool(field);
-		resolveTemp(v);
-		
 		gen(INSTR_FSTORE, v.reg, obj.reg, index);
 
 		return v;
 	};
 
 	@Override
-	protected Var invoke(Var obj, MethodSymbol method, List<Var> params) {
-		short index = indexOfPool(method);
-
-		gen(INSTR_CALL, (short) 0, index, params.get(0).reg);
-
-		resolveTemp(obj);
-		for (Var v : params) {
-			resolveTemp(v);
+	protected Var opInvoke(Var obj, MethodSymbol method, List<Var> params) {
+		if (!obj.applied) resolveTemp(obj);
+		for (Var vp : params) {
+			if (!vp.applied) resolveTemp(vp);
 		}
 		TempVar v = popTmp(BuiltInTypeSymbol.FLEX);
+
+		short index = indexOfPool(method);
+		short reg = 0;
+		if (params.size() > 0) reg = params.get(0).reg;
+
 		v.addReference(ip, 1);
+		gen(INSTR_CALL, (short) 0, index, reg);
 
 		return v;
 	};
 
 	@Override
-	protected Var set(Var to, Var from) {
-		if (from.applied) {
-			to = move(to, from);
+	protected Var opMove(Var to, Var from) {
+		if (!from.applied) resolveTemp(from);
+
+		if (to.applied) {
+			gen(INSTR_MOVE, to.reg, from.reg);
 		} else {
-			TempVar tmp = (TempVar) from;
-			tmp.reg = to.reg;
-			tmp.resolveForwardReferences(codeBuffer);
-			resolveTemp(from);
+			((TempVar) to).addReference(ip, 1);
+			gen(INSTR_MOVE, to.reg, from.reg);
 		}
-		return to;
-	};
 
-	@Override
-	protected Var set(String text, Type type, Var from) {
-		Var to = new Var(text, type);
-		pushLocal(to);
-
-		if (from.applied) {
-			pushLocal(to);
-			to = move(to, from);
-		} else {
-			TempVar tmp = (TempVar) from;
-			tmp.reg = to.reg;
-			tmp.resolveForwardReferences(codeBuffer);
-			resolveTemp(from);
-		}
-		return to;
-	};
-
-	@Override
-	protected Var move(Var to, Var from) {
-		gen(INSTR_MOVE, to.reg, from.reg);
 		return to;
 	}
 
 	@Override
-	protected Var createObject(ClassSymbol clz) {
-		short index = indexOfPool(clz);
-		gen(INSTR_STRUCT, UNKNOWN, index);
+	protected Var opNew(ClassSymbol clz) {
+		TempVar v = popTmp(clz);
 
-		TempVar tmp = popTmp(clz);
-		tmp.addReference(ip, 1);
-		return tmp;
+		v.addReference(ip, 1);
+		gen(INSTR_STRUCT, v.reg, indexOfPool(clz));
+
+		return v;
 	}
 
 	@Override
-	protected Var loadI(String text) {
-		gen(INSTR_ICONST, UNKNOWN, Integer.parseInt(text));
-		TempVar tmp = popTmp(BuiltInTypeSymbol.INT);
-		tmp.addReference(ip, 1);
-		return tmp;
+	protected Var opILoad(String text) {
+		TempVar v = popTmp(BuiltInTypeSymbol.INT);
+
+		v.addReference(ip, 1);
+		gen(INSTR_ICONST, v.reg, Integer.parseInt(text));
+
+		return v;
 	};
+
+	private short indexOfPool(Object o) {
+		if (poolLocalK.contains(o)) return (short) poolLocalK.indexOf(o);
+		poolLocalK.add(o);
+		return (short) (poolLocalK.size() - 1);
+	}
+
+	// ************** END :members **************
+
+	// ************** START: Deal local **************
+	@Override
+	protected void resolveTemp(Var v) {
+		assert !v.applied;
+		((TempVar) v).resolveForwardReferences(codeBuffer);
+	}
+
+	@Override
+	protected void resolveTemp(Var v, short reg) {
+		assert !v.applied;
+		((TempVar) v).resolveForwardReferences(reg, codeBuffer);
+	}
 
 	private void gen(short op, short a) {
 		gen(op, a, (short) 0, (short) 0);
@@ -251,4 +258,5 @@ public class SourceCompiler extends NebulaParser {
 				| ((bx & MASK_XX) << OFFSET_BX);
 	}
 	// @formatter:on
+	// ************** END : Deal local **************
 }

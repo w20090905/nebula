@@ -2,11 +2,12 @@ package nebula.vm;
 
 
 public class Var extends Symbol {
-	public short reg;
+	public final short reg;
 	public boolean applied = true;
 
-	public Var(String name, Type type) {
+	public Var(String name, Type type, int regIndex) {
 		super(name, type);
+		reg = (short)regIndex;
 	}
 	
 	public String getName(){

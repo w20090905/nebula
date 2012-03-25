@@ -18,35 +18,63 @@ import static nebula.vm.BytecodeDefinition.OFFSET_C_;
 import static nebula.vm.BytecodeDefinition.OFFSET_OP;
 import static nebula.vm.BytecodeDefinition.REG;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+
 public class DisAssembler {
 	BytecodeDefinition def;
 
+	Writer out = null;
+	
 	public DisAssembler() {
+		out = new OutputStreamWriter(System.out);
 	}
+	
+	public DisAssembler(Writer out){
+		this.out = out;
+	}
+	
+	private void println(String str){
+		print(str);
+		print("\n");
+	}
+	
+	private void print(String format,Object... params){
+		print(String.format(format,params));
+	}
+	
+	private void print(String str){
+		try {
+			this.out.write(str);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}	
 
 	public void disassemble(ClassSymbol clz) {
-		System.out.println(".class " + clz.name);
-		System.out.println();
+		println(".class " + clz.name);
+		println("");
 
 		for (FieldSymbol f : clz.fields) {
-			System.out.println(".field " + f.name);
+			println(".field " + f.name);
 		}
-		System.out.println();
+		println("");
 
 		for (MethodSymbol f : clz.methods) {
-			System.out.println(".def " + f.name + " args=" + f.nargs + ", locals=" + f.nlocals + " ");
 			this.disassemble(f);
 		}
 	}
 
 	public void disassemble(MethodSymbol func) {
+		print(".def %s: args=%d, locals=%d\n",func.name,func.nargs,func.nlocals);
 		int i = 0;
 		int[] code = func.code;
 		while (i < func.code.length) {
 			i = disassembleInstruction(code, func.getConstPool(), i);
-			System.out.println();
+			println("");
 		}
-		System.out.println();
+		println("");
 	}
 
 	private static final int OP_CODE(int op) {
@@ -76,11 +104,11 @@ public class DisAssembler {
 	public int disassembleInstruction(int[] code, Object[] constPool, int ip) {
 		int op = code[ip];
 		BytecodeDefinition.Instruction I = BytecodeDefinition.instructions[OP_CODE(op)];
-		String instrName = I.name;
-		System.out.printf("%04d:\t%-11s", ip, instrName);
+		String instrName = I.name.toUpperCase();
+		print(String.format("%04d: %-11s", ip, instrName));
 		ip++;
 		if (I.n == 0) {
-			System.out.print("  ");
+			print("  ");
 			return ip;
 		}
 		String[] operands = new String[I.n];
@@ -126,8 +154,8 @@ public class DisAssembler {
 
 		for (int i = 0; i < operands.length; i++) {
 			String s = operands[i];
-			if (i > 0) System.out.print(", ");
-			System.out.print(s);
+			if (i > 0) print(", ");
+			print(s);
 		}
 		return ip;
 	}
