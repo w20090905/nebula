@@ -14,7 +14,7 @@ public class TouchManager extends BaseDao<Touch> {
 		return this.getSession().createCriteria(Touch.class).list();
 	}
 
-	public Touch select(long id) {
+	public Touch select(Integer id) {
 		return super.getObject(Touch.class, id);
 	}
 
