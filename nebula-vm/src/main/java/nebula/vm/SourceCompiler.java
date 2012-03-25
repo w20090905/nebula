@@ -87,7 +87,7 @@ public class SourceCompiler extends NebulaParser {
 
 		m.nargs = params.size();
 		this.methods.add(m);
-		poolLocalK.set(indexOfPool(m),m);
+		poolLocalK.set(indexOfPool(m), m);
 		ip = 0;
 
 		return m;
@@ -113,7 +113,7 @@ public class SourceCompiler extends NebulaParser {
 		TempVar v = popTmp(a.type);
 
 		v.addReference(ip, 1);
-		gen(INSTR_IADD, v.reg, a.reg, b.reg);
+		gen(INSTR_IADD, UNKNOWN, a.reg, b.reg);
 		return v;
 	};
 
@@ -124,8 +124,7 @@ public class SourceCompiler extends NebulaParser {
 		TempVar v = popTmp(a.type);
 
 		v.addReference(ip, 1);
-
-		gen(INSTR_ISUB, v.reg, a.reg, b.reg);
+		gen(INSTR_ISUB, UNKNOWN, a.reg, b.reg);
 		return v;
 	};
 
@@ -136,7 +135,7 @@ public class SourceCompiler extends NebulaParser {
 		TempVar v = popTmp(a.type);
 
 		v.addReference(ip, 1);
-		gen(INSTR_IMUL, v.reg, a.reg, b.reg);
+		gen(INSTR_IMUL, UNKNOWN, a.reg, b.reg);
 		return v;
 	};
 
@@ -145,8 +144,9 @@ public class SourceCompiler extends NebulaParser {
 		if (!obj.applied) resolveTemp(obj);
 		TempVar v = popTmp(BuiltInTypeSymbol.FLEX);
 
-		v.addReference(ip, 1);
 		short index = indexOfPool(field);
+
+		v.addReference(ip, 1);
 		gen(INSTR_FLOAD, UNKNOWN, obj.reg, index);
 
 		return v;
@@ -158,6 +158,7 @@ public class SourceCompiler extends NebulaParser {
 		if (!v.applied) resolveTemp(v);
 
 		short index = indexOfPool(field);
+
 		gen(INSTR_FSTORE, v.reg, obj.reg, index);
 
 		return v;
@@ -170,13 +171,16 @@ public class SourceCompiler extends NebulaParser {
 			if (!vp.applied) resolveTemp(vp);
 		}
 		TempVar v = popTmp(BuiltInTypeSymbol.FLEX);
-
+		;
 		short index = indexOfPool(method);
-		short reg = 0;
-		if (params.size() > 0) reg = params.get(0).reg;
-
-		v.addReference(ip, 1);
-		gen(INSTR_CALL, (short) 0, index, reg);
+		if (params.size() > 0) {
+			TempVar ov = (TempVar) params.get(0);
+			assert v.reg == ov.reg;
+			v.applied = true;
+		} else {
+			v.addReference(ip, 3);
+		}
+		gen(INSTR_CALL, obj.reg, index, v.reg);
 
 		return v;
 	};
@@ -200,7 +204,7 @@ public class SourceCompiler extends NebulaParser {
 		TempVar v = popTmp(clz);
 
 		v.addReference(ip, 1);
-		gen(INSTR_STRUCT, v.reg, indexOfPool(clz));
+		gen(INSTR_STRUCT, UNKNOWN, indexOfPool(clz));
 
 		return v;
 	}
@@ -210,10 +214,18 @@ public class SourceCompiler extends NebulaParser {
 		TempVar v = popTmp(BuiltInTypeSymbol.INT);
 
 		v.addReference(ip, 1);
-		gen(INSTR_ICONST, v.reg, Integer.parseInt(text));
+		gen(INSTR_ICONST, UNKNOWN, Integer.parseInt(text));
 
 		return v;
 	};
+
+	@Override
+	protected Var opReturn(Var v) {
+		if (!v.applied) resolveTemp(v);
+		gen(INSTR_RET, v.reg);
+
+		return v;
+	}
 
 	private short indexOfPool(Object o) {
 		if (poolLocalK.contains(o)) return (short) poolLocalK.indexOf(o);
@@ -232,8 +244,8 @@ public class SourceCompiler extends NebulaParser {
 
 	@Override
 	protected void resolveTemp(Var v, short reg) {
-		assert !v.applied;
-		((TempVar) v).resolveForwardReferences(reg, codeBuffer);
+		assert !v.applied || v.reg == reg;
+		if (!v.applied) ((TempVar) v).resolveForwardReferences(reg, codeBuffer);
 	}
 
 	private void gen(short op, short a) {

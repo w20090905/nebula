@@ -200,8 +200,8 @@ public class TestNebulaParser extends TestCase {
 		String expected = "" +
 				"|          |  FUNC  : funcSayHello() {\n" +
 				"|1         |  ICONST: tmp1#I = 2;\n" + 
-				"|1         |  CALL  : tmp1#* = this#Test.Test_test(tmp1#I );\n" + 
-				"|1         |  HIDE  : we#I = tmp1#*;\n" + 
+				"|          |  CALL  : tmp1#* = this#Test.Test_test(tmp1#I );\n" + 
+				"|          |  HIDE  : we#I = tmp1#*;\n" + 
 				"|          |  }\n";
 		//@formatter:on
 		assertEquals(expected, actual);
@@ -234,8 +234,8 @@ public class TestNebulaParser extends TestCase {
 				"|2         |  ICONST: tmp2#I = 2;\n" + 
 				"|2 3       |  ICONST: tmp3#I = 9;\n" + 
 				"|2 3       |  IADD  : tmp3#I = a#I + tmp3#I;\n" + 
-				"|2         |  CALL  : tmp2#* = this#Test.Test_test(tmp2#I tmp3#I );\n" + 
-				"|2         |  HIDE  : i#I = tmp2#*;\n" + 
+				"|          |  CALL  : tmp2#* = this#Test.Test_test(tmp2#I tmp3#I );\n" + 
+				"|          |  HIDE  : i#I = tmp2#*;\n" + 
 				"|          |  }\n";
 		//@formatter:on
 		assertEquals(expected, actual);

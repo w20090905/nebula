@@ -1,5 +1,7 @@
 package nebula.vm;
 
+import static nebula.vm.BytecodeDefinition.MASK_X_;
+
 import java.util.Vector;
 
 public class TempVar extends Var {
@@ -33,31 +35,21 @@ public class TempVar extends Var {
 
 	public void resolveForwardReferences(int[] code) {
 		applied = true;
-		// need to patch up all references to this symbol
 		Vector<Address> opndsToPatch = forwardReferences;
 		for (Address addrToPatch : opndsToPatch) {
-			/*
-			 * System.out.println("updating operand at addr "+
-			 * addr+" to be "+getAddress());
-			 */
+
 			code[addrToPatch.ip] = code[addrToPatch.ip]
-					| (this.reg << (BytecodeDefinition.OFFSET_X_ * (3 - addrToPatch.offset)));
-			// BytecodeAssembler2.writeInt(code, addrToPatch, address);
+					| ((reg & MASK_X_)  << (BytecodeDefinition.OFFSET_X_ * (3 - addrToPatch.offset)));
 		}
 	}
 
-	public void resolveForwardReferences(short reg, int[] code) {
+	public void resolveForwardReferences(short givenReg, int[] code) {
 		applied = true;
-		// need to patch up all references to this symbol
 		Vector<Address> opndsToPatch = forwardReferences;
 		for (Address addrToPatch : opndsToPatch) {
-			/*
-			 * System.out.println("updating operand at addr "+
-			 * addr+" to be "+getAddress());
-			 */
+
 			code[addrToPatch.ip] = code[addrToPatch.ip]
-					| (reg << (BytecodeDefinition.OFFSET_X_ * (3 - addrToPatch.offset)));
-			// BytecodeAssembler2.writeInt(code, addrToPatch, address);
+					| ((givenReg & MASK_X_) << (BytecodeDefinition.OFFSET_X_ * (3 - addrToPatch.offset)));
 		}
 	}
 

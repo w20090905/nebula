@@ -119,11 +119,12 @@ public class Interpreter {
 	}
 
 	public Interpreter() {
-		this(false);
+		this(false, false);
 	}
 
-	public Interpreter(boolean trace) {
+	public Interpreter(boolean trace, boolean checkPerformance) {
 		this.trace = trace;
+		this.checkPerformance = checkPerformance;
 		for (int i = 0; i < DEFAULT_PREPAREED_NUMBER_STRING_RANGE; i++) {
 			indexOf(String.valueOf(i));
 		}
@@ -144,20 +145,25 @@ public class Interpreter {
 	}
 
 	final private boolean trace;
+	final private boolean checkPerformance;
 
 	public static void main(String[] args) throws Exception {
 		// PROCESS ARGS
 		boolean trace = false;
 		boolean disassemble = false;
+		boolean checkPerformance = false;
 		boolean dump = false;
 		String filename = null;
 		int i = 0;
 		while (i < args.length) {
-			if (args[i].equals("-trace")) {
+			if (args[i].equals("-t") || args[i].equals("-trace")) {
 				trace = true;
 				i++;
-			} else if (args[i].equals("-dis")) {
+			} else if (args[i].equals("-d") || args[i].equals("-dis")) {
 				disassemble = true;
+				i++;
+			} else if (args[i].equals("-p")) {
+				checkPerformance = true;
 				i++;
 			} else if (args[i].equals("-dump")) {
 				dump = true;
@@ -174,7 +180,7 @@ public class Interpreter {
 		} else {
 			clz = loadFromSource(System.in);
 		}
-		Interpreter interpreter = new Interpreter(trace);
+		Interpreter interpreter = new Interpreter(trace, checkPerformance);
 		interpreter.resolve(clz);
 		interpreter.exec(interpreter.resolve(clz.getEntryPoint()));
 		if (disassemble) interpreter.disassemble();
@@ -252,7 +258,7 @@ public class Interpreter {
 			NebulaLexer lexer = new NebulaLexer(new ANTLRInputStream(input));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			SourceCompiler parser = new SourceCompiler(tokens);
-//			parser.compilationUnit();
+			// parser.compilationUnit();
 			ClassSymbol clz = parser.classDefinition();
 			hasErrors = parser.getNumberOfSyntaxErrors() > 0;
 			if (!hasErrors) {
@@ -286,12 +292,22 @@ public class Interpreter {
 	}
 
 	/** Execute the bytecodes in code memory starting at mainAddr */
-	public void exec(MethodSymbol mainFunction) throws Exception {
+	public int exec(MethodSymbol mainFunction) throws Exception {
+		int ret = 0;
+		if (!checkPerformance) {
+			fp = -1;
+			calls[++fp] = mainFunction;
+			ret = cpu();
+			if(trace)System.out.println("return " + ret);
+			return ret;
+		}
+
 
 		for (int i = 0; i < 0; i++) {
 			fp = -1;
 			calls[++fp] = mainFunction;
-			cpu();
+			ret = cpu();
+			if(trace)System.out.println("return " + ret);
 		}
 
 		int max = 1;
@@ -300,16 +316,18 @@ public class Interpreter {
 		for (int i = 0; i < max; i++) {
 			fp = -1;
 			calls[++fp] = mainFunction;
-			cpu();
+			ret = cpu();
+			if(trace)System.out.println("return " + ret);
 		}
 		end = System.nanoTime();
 		System.out.println(mainFunction.definedClass.name + " -> (" + max + " times)" + " cost : " + (end - start)
 				+ "  \t||  " + (end - start) / max + " / every time \t|| "
 				+ (max * ((float) (1000 * 1000 * 1000) / (end - start))) + " times / every second");
+		return ret;
 	}
 
 	/** Simulate the fetch-execute cycle */
-	protected void cpu() {
+	protected int cpu() {
 		MethodSymbol funcTo = null;
 		int baseTo = 0;
 
@@ -395,7 +413,7 @@ public class Interpreter {
 				// 1、pop stack frame
 				fp--;
 				if (fp < 0) {
-					return;
+					return r[base + ra];
 				}
 				// TODO need refact
 
@@ -498,6 +516,7 @@ public class Interpreter {
 			}
 		}
 		// @formatter:on
+		return 0;
 	}
 
 	/** Resolve Function Symbol */
@@ -666,7 +685,7 @@ public class Interpreter {
 
 		// int[] r = currentfFrame.registers;
 		// if (r.length > 0) {
-		System.out.print("\t\t" + func.name + ".registers=[");
+		System.out.print("\t[");
 		int cnt = func.nargs + func.nlocals + 1;
 		for (int i = 0; i < cnt; i++) {
 			if (i == 1) System.out.print(" |");
@@ -676,14 +695,14 @@ public class Interpreter {
 			if (r[base + i] == 0) System.out.print("_");
 			else System.out.print(r[base + i]);
 		}
-		System.out.print(" ]");
+		System.out.print(" ]\t");
 		// }
 		if (fp >= 0) {
-			System.out.print("  calls=[");
+			System.out.print("{");
 			for (int i = 0; i <= fp; i++) {
 				System.out.print(" " + func.name);
 			}
-			System.out.print(" ]");
+			System.out.print(" }");
 		}
 		System.out.println();
 	}

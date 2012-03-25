@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Nebula.g 2012-03-25 20:28:00
+// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-vm\\Nebula.g 2012-03-25 21:58:21
 
 package nebula.vm;
 
@@ -154,13 +154,17 @@ public class NebulaParser extends Parser {
         info("FSTORE: " + obj.getName() + "." + field.name + " = " + v.getName() + "\n");
         return v;
       };
-
       protected Var opInvoke(Var obj, MethodSymbol method, List<Var> params) {
         if (!obj.applied) resolveTemp(obj);
         for (Var vp : params) {
           if (!vp.applied) resolveTemp(vp);
         }
         TempVar v = popTmp(BuiltInTypeSymbol.FLEX);
+        if (params.size() > 0) {
+          TempVar ov = (TempVar)params.get(0);
+          assert v.reg == ov.reg;
+          v.applied = true;
+        }
 
         String txtParams = "";
         for (Var vp : params) {
@@ -213,7 +217,7 @@ public class NebulaParser extends Parser {
       }
 
       protected void resolveTemp(Var v, short reg) {
-        assert !v.applied;
+        assert !v.applied || v.reg == reg;
         Var to = null;
         for(Var tv : locals.values()){
             if(tv.reg == reg){
@@ -286,13 +290,13 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "compilationUnit"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:230:1: compilationUnit : ( classDefinition )+ EOF ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:234:1: compilationUnit : ( classDefinition )+ EOF ;
     public final void compilationUnit() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:231:5: ( ( classDefinition )+ EOF )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:231:9: ( classDefinition )+ EOF
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:235:5: ( ( classDefinition )+ EOF )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:235:9: ( classDefinition )+ EOF
             {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:231:9: ( classDefinition )+
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:235:9: ( classDefinition )+
             int cnt1=0;
             loop1:
             do {
@@ -306,7 +310,7 @@ public class NebulaParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:231:11: classDefinition
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:235:11: classDefinition
             	    {
             	    pushFollow(FOLLOW_classDefinition_in_compilationUnit51);
             	    classDefinition();
@@ -348,7 +352,7 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "classDefinition"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:235:1: classDefinition returns [ClassSymbol clz] : 'class' ID ( superClass )? '{' ( classMember[clz] )+ '}' ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:239:1: classDefinition returns [ClassSymbol clz] : 'class' ID ( superClass )? '{' ( classMember[clz] )+ '}' ;
     public final ClassSymbol classDefinition() throws RecognitionException {
         ClassSymbol clz = null;
 
@@ -358,14 +362,14 @@ public class NebulaParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:236:5: ( 'class' ID ( superClass )? '{' ( classMember[clz] )+ '}' )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:236:9: 'class' ID ( superClass )? '{' ( classMember[clz] )+ '}'
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:240:5: ( 'class' ID ( superClass )? '{' ( classMember[clz] )+ '}' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:240:9: 'class' ID ( superClass )? '{' ( classMember[clz] )+ '}'
             {
             match(input,22,FOLLOW_22_in_classDefinition83); if (state.failed) return clz;
 
             ID1=(Token)match(input,ID,FOLLOW_ID_in_classDefinition85); if (state.failed) return clz;
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:236:20: ( superClass )?
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:240:20: ( superClass )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -374,7 +378,7 @@ public class NebulaParser extends Parser {
             }
             switch (alt2) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:236:20: superClass
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:240:20: superClass
                     {
                     pushFollow(FOLLOW_superClass_in_classDefinition87);
                     superClass2=superClass();
@@ -392,7 +396,7 @@ public class NebulaParser extends Parser {
 
             match(input,31,FOLLOW_31_in_classDefinition115); if (state.failed) return clz;
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:238:14: ( classMember[clz] )+
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:242:14: ( classMember[clz] )+
             int cnt3=0;
             loop3:
             do {
@@ -406,7 +410,7 @@ public class NebulaParser extends Parser {
 
                 switch (alt3) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:238:14: classMember[clz]
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:242:14: classMember[clz]
             	    {
             	    pushFollow(FOLLOW_classMember_in_classDefinition117);
             	    classMember(clz);
@@ -450,7 +454,7 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "superClass"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:242:1: superClass returns [Type type] : 'extends' ID ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:246:1: superClass returns [Type type] : 'extends' ID ;
     public final Type superClass() throws RecognitionException {
         Type type = null;
 
@@ -458,8 +462,8 @@ public class NebulaParser extends Parser {
         Token ID3=null;
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:243:3: ( 'extends' ID )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:243:5: 'extends' ID
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:247:3: ( 'extends' ID )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:247:5: 'extends' ID
             {
             match(input,24,FOLLOW_24_in_superClass162); if (state.failed) return type;
 
@@ -485,10 +489,10 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "classMember"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:246:1: classMember[ClassSymbol clz] : ( fieldDeclaration[clz] | methodDeclaration[clz] );
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:250:1: classMember[ClassSymbol clz] : ( fieldDeclaration[clz] | methodDeclaration[clz] );
     public final void classMember(ClassSymbol clz) throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:247:3: ( fieldDeclaration[clz] | methodDeclaration[clz] )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:251:3: ( fieldDeclaration[clz] | methodDeclaration[clz] )
             int alt4=2;
             switch ( input.LA(1) ) {
             case 23:
@@ -630,7 +634,7 @@ public class NebulaParser extends Parser {
 
             switch (alt4) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:247:7: fieldDeclaration[clz]
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:251:7: fieldDeclaration[clz]
                     {
                     pushFollow(FOLLOW_fieldDeclaration_in_classMember184);
                     fieldDeclaration(clz);
@@ -641,7 +645,7 @@ public class NebulaParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:248:9: methodDeclaration[clz]
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:252:9: methodDeclaration[clz]
                     {
                     pushFollow(FOLLOW_methodDeclaration_in_classMember196);
                     methodDeclaration(clz);
@@ -669,7 +673,7 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "fieldDeclaration"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:251:1: fieldDeclaration[ClassSymbol clz] returns [FieldSymbol field] : type ID ( '=' e= expr )? ';' ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:255:1: fieldDeclaration[ClassSymbol clz] returns [FieldSymbol field] : type ID ( '=' e= expr )? ';' ;
     public final FieldSymbol fieldDeclaration(ClassSymbol clz) throws RecognitionException {
         FieldSymbol field = null;
 
@@ -681,8 +685,8 @@ public class NebulaParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:252:3: ( type ID ( '=' e= expr )? ';' )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:252:7: type ID ( '=' e= expr )? ';'
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:256:3: ( type ID ( '=' e= expr )? ';' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:256:7: type ID ( '=' e= expr )? ';'
             {
             pushFollow(FOLLOW_type_in_fieldDeclaration217);
             type5=type();
@@ -692,7 +696,7 @@ public class NebulaParser extends Parser {
 
             ID4=(Token)match(input,ID,FOLLOW_ID_in_fieldDeclaration219); if (state.failed) return field;
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:252:15: ( '=' e= expr )?
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:256:15: ( '=' e= expr )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -701,7 +705,7 @@ public class NebulaParser extends Parser {
             }
             switch (alt5) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:252:16: '=' e= expr
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:256:16: '=' e= expr
                     {
                     match(input,21,FOLLOW_21_in_fieldDeclaration222); if (state.failed) return field;
 
@@ -739,7 +743,7 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "methodDeclaration"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:255:1: methodDeclaration[ClassSymbol clz] returns [MethodSymbol m] : type name= ID ( '()' | ( '(' formalParameters ')' ) ) block ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:259:1: methodDeclaration[ClassSymbol clz] returns [MethodSymbol m] : type name= ID ( '()' | ( '(' formalParameters ')' ) ) block ;
     public final MethodSymbol methodDeclaration(ClassSymbol clz) throws RecognitionException {
         MethodSymbol m = null;
 
@@ -751,8 +755,8 @@ public class NebulaParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:256:3: ( type name= ID ( '()' | ( '(' formalParameters ')' ) ) block )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:256:7: type name= ID ( '()' | ( '(' formalParameters ')' ) ) block
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:260:3: ( type name= ID ( '()' | ( '(' formalParameters ')' ) ) block )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:260:7: type name= ID ( '()' | ( '(' formalParameters ')' ) ) block
             {
             pushFollow(FOLLOW_type_in_methodDeclaration253);
             type6=type();
@@ -762,7 +766,7 @@ public class NebulaParser extends Parser {
 
             name=(Token)match(input,ID,FOLLOW_ID_in_methodDeclaration257); if (state.failed) return m;
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:257:7: ( '()' | ( '(' formalParameters ')' ) )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:261:7: ( '()' | ( '(' formalParameters ')' ) )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -782,7 +786,7 @@ public class NebulaParser extends Parser {
             }
             switch (alt6) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:257:8: '()'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:261:8: '()'
                     {
                     match(input,13,FOLLOW_13_in_methodDeclaration267); if (state.failed) return m;
 
@@ -791,10 +795,10 @@ public class NebulaParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:258:10: ( '(' formalParameters ')' )
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:262:10: ( '(' formalParameters ')' )
                     {
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:258:10: ( '(' formalParameters ')' )
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:258:11: '(' formalParameters ')'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:262:10: ( '(' formalParameters ')' )
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:262:11: '(' formalParameters ')'
                     {
                     match(input,12,FOLLOW_12_in_methodDeclaration281); if (state.failed) return m;
 
@@ -843,7 +847,7 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "formalParameters"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:264:1: formalParameters returns [List<Var> list] : t= type id= ID ( ',' t= type id= ID )* ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:268:1: formalParameters returns [List<Var> list] : t= type id= ID ( ',' t= type id= ID )* ;
     public final List<Var> formalParameters() throws RecognitionException {
         List<Var> list = null;
 
@@ -854,8 +858,8 @@ public class NebulaParser extends Parser {
 
         list = new ArrayList<>(); 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:266:3: (t= type id= ID ( ',' t= type id= ID )* )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:266:7: t= type id= ID ( ',' t= type id= ID )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:270:3: (t= type id= ID ( ',' t= type id= ID )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:270:7: t= type id= ID ( ',' t= type id= ID )*
             {
             pushFollow(FOLLOW_type_in_formalParameters354);
             t=type();
@@ -867,7 +871,7 @@ public class NebulaParser extends Parser {
 
             if ( state.backtracking==0 ) {list.add(new Var((id!=null?id.getText():null),t,0));}
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:267:5: ( ',' t= type id= ID )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:271:5: ( ',' t= type id= ID )*
             loop7:
             do {
                 int alt7=2;
@@ -880,7 +884,7 @@ public class NebulaParser extends Parser {
 
                 switch (alt7) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:267:7: ',' t= type id= ID
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:271:7: ',' t= type id= ID
             	    {
             	    match(input,17,FOLLOW_17_in_formalParameters367); if (state.failed) return list;
 
@@ -921,15 +925,15 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "block"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:275:1: block : '{' ( statement )* '}' ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:279:1: block : '{' ( statement )* '}' ;
     public final void block() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:276:5: ( '{' ( statement )* '}' )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:276:9: '{' ( statement )* '}'
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:280:5: ( '{' ( statement )* '}' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:280:9: '{' ( statement )* '}'
             {
             match(input,31,FOLLOW_31_in_block411); if (state.failed) return ;
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:276:13: ( statement )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:280:13: ( statement )*
             loop8:
             do {
                 int alt8=2;
@@ -942,7 +946,7 @@ public class NebulaParser extends Parser {
 
                 switch (alt8) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:276:13: statement
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:280:13: statement
             	    {
             	    pushFollow(FOLLOW_statement_in_block413);
             	    statement();
@@ -979,10 +983,10 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "statement"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:279:1: statement : ( block | varDeclaration ';' | returnStatement ';' | exprStatement ';' | ';' );
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:283:1: statement : ( block | varDeclaration ';' | returnStatement ';' | exprStatement ';' | ';' );
     public final void statement() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:281:5: ( block | varDeclaration ';' | returnStatement ';' | exprStatement ';' | ';' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:285:5: ( block | varDeclaration ';' | returnStatement ';' | exprStatement ';' | ';' )
             int alt9=5;
             switch ( input.LA(1) ) {
             case 31:
@@ -1047,7 +1051,7 @@ public class NebulaParser extends Parser {
 
             switch (alt9) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:281:9: block
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:285:9: block
                     {
                     pushFollow(FOLLOW_block_in_statement446);
                     block();
@@ -1058,7 +1062,7 @@ public class NebulaParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:282:9: varDeclaration ';'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:286:9: varDeclaration ';'
                     {
                     pushFollow(FOLLOW_varDeclaration_in_statement456);
                     varDeclaration();
@@ -1071,7 +1075,7 @@ public class NebulaParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:283:9: returnStatement ';'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:287:9: returnStatement ';'
                     {
                     pushFollow(FOLLOW_returnStatement_in_statement469);
                     returnStatement();
@@ -1084,7 +1088,7 @@ public class NebulaParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:284:9: exprStatement ';'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:288:9: exprStatement ';'
                     {
                     pushFollow(FOLLOW_exprStatement_in_statement481);
                     exprStatement();
@@ -1097,7 +1101,7 @@ public class NebulaParser extends Parser {
                     }
                     break;
                 case 5 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:285:9: ';'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:289:9: ';'
                     {
                     match(input,20,FOLLOW_20_in_statement495); if (state.failed) return ;
 
@@ -1122,20 +1126,20 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "varDeclaration"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:288:1: varDeclaration returns [Var v] : type ID ( '=' e= expr )? ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:292:1: varDeclaration returns [Var v] : type ID ( '=' from= expr )? ;
     public final Var varDeclaration() throws RecognitionException {
         Var v = null;
 
 
         Token ID8=null;
-        Var e =null;
+        Var from =null;
 
         Type type9 =null;
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:289:5: ( type ID ( '=' e= expr )? )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:289:9: type ID ( '=' e= expr )?
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:293:5: ( type ID ( '=' from= expr )? )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:293:9: type ID ( '=' from= expr )?
             {
             pushFollow(FOLLOW_type_in_varDeclaration521);
             type9=type();
@@ -1145,7 +1149,7 @@ public class NebulaParser extends Parser {
 
             ID8=(Token)match(input,ID,FOLLOW_ID_in_varDeclaration523); if (state.failed) return v;
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:289:17: ( '=' e= expr )?
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:293:17: ( '=' from= expr )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1154,12 +1158,12 @@ public class NebulaParser extends Parser {
             }
             switch (alt10) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:289:18: '=' e= expr
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:293:18: '=' from= expr
                     {
                     match(input,21,FOLLOW_21_in_varDeclaration526); if (state.failed) return v;
 
                     pushFollow(FOLLOW_expr_in_varDeclaration530);
-                    e=expr();
+                    from=expr();
 
                     state._fsp--;
                     if (state.failed) return v;
@@ -1172,7 +1176,16 @@ public class NebulaParser extends Parser {
 
             if ( state.backtracking==0 ) { 
                         v = pushLocal((ID8!=null?ID8.getText():null),type9);
-                        if(e!=null) resolveTemp(e, v.reg);
+                        if(from!=null) {
+                            if(!from.applied ){
+            			              resolveTemp(from, v.reg);
+            			          } else {
+            			              if(v.reg != from.reg)
+            			                  v = opMove(v, from);
+            			              else 
+            			                  resolveTemp(from, v.reg);
+            			          }
+            			      }
                     }
 
             }
@@ -1193,18 +1206,18 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "returnStatement"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:296:1: returnStatement : 'return' (v= expr )? ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:309:1: returnStatement : 'return' (v= expr )? ;
     public final void returnStatement() throws RecognitionException {
         Var v =null;
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:297:5: ( 'return' (v= expr )? )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:297:6: 'return' (v= expr )?
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:310:5: ( 'return' (v= expr )? )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:310:6: 'return' (v= expr )?
             {
             match(input,27,FOLLOW_27_in_returnStatement566); if (state.failed) return ;
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:297:16: (v= expr )?
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:310:16: (v= expr )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -1213,7 +1226,7 @@ public class NebulaParser extends Parser {
             }
             switch (alt11) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:297:16: v= expr
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:310:16: v= expr
                     {
                     pushFollow(FOLLOW_expr_in_returnStatement570);
                     v=expr();
@@ -1247,7 +1260,7 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "exprStatement"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:300:1: exprStatement returns [Var v] options {backtrack=true; } : to= postfixexpr ( '=' from= expr )? ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:313:1: exprStatement returns [Var v] options {backtrack=true; } : to= postfixexpr ( '=' from= expr )? ;
     public final Var exprStatement() throws RecognitionException {
         Var v = null;
 
@@ -1258,8 +1271,8 @@ public class NebulaParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:302:5: (to= postfixexpr ( '=' from= expr )? )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:302:9: to= postfixexpr ( '=' from= expr )?
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:315:5: (to= postfixexpr ( '=' from= expr )? )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:315:9: to= postfixexpr ( '=' from= expr )?
             {
             pushFollow(FOLLOW_postfixexpr_in_exprStatement616);
             to=postfixexpr();
@@ -1267,7 +1280,7 @@ public class NebulaParser extends Parser {
             state._fsp--;
             if (state.failed) return v;
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:303:9: ( '=' from= expr )?
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:316:9: ( '=' from= expr )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1276,7 +1289,7 @@ public class NebulaParser extends Parser {
             }
             switch (alt12) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:303:10: '=' from= expr
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:316:10: '=' from= expr
                     {
                     match(input,21,FOLLOW_21_in_exprStatement628); if (state.failed) return v;
 
@@ -1325,7 +1338,7 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "expr"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:320:1: expr returns [Var v] : e= addexpr ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:333:1: expr returns [Var v] : e= addexpr ;
     public final Var expr() throws RecognitionException {
         Var v = null;
 
@@ -1334,8 +1347,8 @@ public class NebulaParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:321:5: (e= addexpr )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:321:9: e= addexpr
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:334:5: (e= addexpr )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:334:9: e= addexpr
             {
             pushFollow(FOLLOW_addexpr_in_expr675);
             e=addexpr();
@@ -1363,7 +1376,7 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "addexpr"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:324:1: addexpr returns [Var v] : a= multexpr ( '+' b= multexpr | '-' c= multexpr )* ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:337:1: addexpr returns [Var v] : a= multexpr ( '+' b= multexpr | '-' c= multexpr )* ;
     public final Var addexpr() throws RecognitionException {
         Var v = null;
 
@@ -1376,8 +1389,8 @@ public class NebulaParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:325:5: (a= multexpr ( '+' b= multexpr | '-' c= multexpr )* )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:325:9: a= multexpr ( '+' b= multexpr | '-' c= multexpr )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:338:5: (a= multexpr ( '+' b= multexpr | '-' c= multexpr )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:338:9: a= multexpr ( '+' b= multexpr | '-' c= multexpr )*
             {
             pushFollow(FOLLOW_multexpr_in_addexpr706);
             a=multexpr();
@@ -1387,7 +1400,7 @@ public class NebulaParser extends Parser {
 
             if ( state.backtracking==0 ) {v = a;}
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:326:9: ( '+' b= multexpr | '-' c= multexpr )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:339:9: ( '+' b= multexpr | '-' c= multexpr )*
             loop13:
             do {
                 int alt13=3;
@@ -1403,7 +1416,7 @@ public class NebulaParser extends Parser {
 
                 switch (alt13) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:326:13: '+' b= multexpr
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:339:13: '+' b= multexpr
             	    {
             	    match(input,16,FOLLOW_16_in_addexpr722); if (state.failed) return v;
 
@@ -1418,7 +1431,7 @@ public class NebulaParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:327:13: '-' c= multexpr
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:340:13: '-' c= multexpr
             	    {
             	    match(input,18,FOLLOW_18_in_addexpr743); if (state.failed) return v;
 
@@ -1457,7 +1470,7 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "multexpr"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:331:1: multexpr returns [Var v] : a= postfixExprValue ( '*' b= postfixExprValue )* ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:344:1: multexpr returns [Var v] : a= postfixExprValue ( '*' b= postfixExprValue )* ;
     public final Var multexpr() throws RecognitionException {
         Var v = null;
 
@@ -1468,8 +1481,8 @@ public class NebulaParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:332:5: (a= postfixExprValue ( '*' b= postfixExprValue )* )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:332:9: a= postfixExprValue ( '*' b= postfixExprValue )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:345:5: (a= postfixExprValue ( '*' b= postfixExprValue )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:345:9: a= postfixExprValue ( '*' b= postfixExprValue )*
             {
             pushFollow(FOLLOW_postfixExprValue_in_multexpr791);
             a=postfixExprValue();
@@ -1479,7 +1492,7 @@ public class NebulaParser extends Parser {
 
             if ( state.backtracking==0 ) {v=a;}
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:333:9: ( '*' b= postfixExprValue )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:346:9: ( '*' b= postfixExprValue )*
             loop14:
             do {
                 int alt14=2;
@@ -1492,7 +1505,7 @@ public class NebulaParser extends Parser {
 
                 switch (alt14) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:333:13: '*' b= postfixExprValue
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:346:13: '*' b= postfixExprValue
             	    {
             	    match(input,15,FOLLOW_15_in_multexpr808); if (state.failed) return v;
 
@@ -1531,7 +1544,7 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "postfixExprValue"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:337:1: postfixExprValue returns [Var v] : p= postfixexpr ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:350:1: postfixExprValue returns [Var v] : p= postfixexpr ;
     public final Var postfixExprValue() throws RecognitionException {
         Var v = null;
 
@@ -1540,8 +1553,8 @@ public class NebulaParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:338:5: (p= postfixexpr )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:338:9: p= postfixexpr
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:351:5: (p= postfixexpr )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:351:9: p= postfixexpr
             {
             pushFollow(FOLLOW_postfixexpr_in_postfixExprValue855);
             p=postfixexpr();
@@ -1574,7 +1587,7 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "postfixexpr"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:341:1: postfixexpr returns [Var v,FieldSymbol field] : (p= primary ) ( options {backtrack=true; } : '.' mID= ID '()' | '.' mID= ID '(' params= exprList ')' | '.' fID= ID )* ;
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:354:1: postfixexpr returns [Var v,FieldSymbol field] : (p= primary ) ( options {backtrack=true; } : '.' mID= ID '()' | '.' mID= ID '(' params= exprList ')' | '.' fID= ID )* ;
     public final NebulaParser.postfixexpr_return postfixexpr() throws RecognitionException {
         NebulaParser.postfixexpr_return retval = new NebulaParser.postfixexpr_return();
         retval.start = input.LT(1);
@@ -1588,11 +1601,11 @@ public class NebulaParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:342:5: ( (p= primary ) ( options {backtrack=true; } : '.' mID= ID '()' | '.' mID= ID '(' params= exprList ')' | '.' fID= ID )* )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:342:9: (p= primary ) ( options {backtrack=true; } : '.' mID= ID '()' | '.' mID= ID '(' params= exprList ')' | '.' fID= ID )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:355:5: ( (p= primary ) ( options {backtrack=true; } : '.' mID= ID '()' | '.' mID= ID '(' params= exprList ')' | '.' fID= ID )* )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:355:9: (p= primary ) ( options {backtrack=true; } : '.' mID= ID '()' | '.' mID= ID '(' params= exprList ')' | '.' fID= ID )*
             {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:342:9: (p= primary )
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:342:10: p= primary
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:355:9: (p= primary )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:355:10: p= primary
             {
             pushFollow(FOLLOW_primary_in_postfixexpr883);
             p=primary();
@@ -1605,7 +1618,7 @@ public class NebulaParser extends Parser {
             }
 
 
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:343:9: ( options {backtrack=true; } : '.' mID= ID '()' | '.' mID= ID '(' params= exprList ')' | '.' fID= ID )*
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:356:9: ( options {backtrack=true; } : '.' mID= ID '()' | '.' mID= ID '(' params= exprList ')' | '.' fID= ID )*
             loop15:
             do {
                 int alt15=4;
@@ -1649,7 +1662,7 @@ public class NebulaParser extends Parser {
 
                 switch (alt15) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:344:12: '.' mID= ID '()'
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:357:12: '.' mID= ID '()'
             	    {
             	    match(input,19,FOLLOW_19_in_postfixexpr916); if (state.failed) return retval;
 
@@ -1669,7 +1682,7 @@ public class NebulaParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:352:12: '.' mID= ID '(' params= exprList ')'
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:365:12: '.' mID= ID '(' params= exprList ')'
             	    {
             	    match(input,19,FOLLOW_19_in_postfixexpr937); if (state.failed) return retval;
 
@@ -1694,7 +1707,7 @@ public class NebulaParser extends Parser {
             	    }
             	    break;
             	case 3 :
-            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:357:12: '.' fID= ID
+            	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:370:12: '.' fID= ID
             	    {
             	    match(input,19,FOLLOW_19_in_postfixexpr964); if (state.failed) return retval;
 
@@ -1734,7 +1747,7 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "exprList"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:363:1: exprList returns [List<Var> list] : (e= expr ( ',' e= expr )* |);
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:376:1: exprList returns [List<Var> list] : (e= expr ( ',' e= expr )* |);
     public final List<Var> exprList() throws RecognitionException {
         List<Var> list = null;
 
@@ -1744,7 +1757,7 @@ public class NebulaParser extends Parser {
 
         list = new ArrayList<>();
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:365:5: (e= expr ( ',' e= expr )* |)
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:378:5: (e= expr ( ',' e= expr )* |)
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -1764,7 +1777,7 @@ public class NebulaParser extends Parser {
             }
             switch (alt17) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:365:9: e= expr ( ',' e= expr )*
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:378:9: e= expr ( ',' e= expr )*
                     {
                     pushFollow(FOLLOW_expr_in_exprList1022);
                     e=expr();
@@ -1774,7 +1787,7 @@ public class NebulaParser extends Parser {
 
                     if ( state.backtracking==0 ) {if(e.applied)e=opMove(popTmp(e.type),e); list.add(e);}
 
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:366:9: ( ',' e= expr )*
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:379:9: ( ',' e= expr )*
                     loop16:
                     do {
                         int alt16=2;
@@ -1787,7 +1800,7 @@ public class NebulaParser extends Parser {
 
                         switch (alt16) {
                     	case 1 :
-                    	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:366:10: ',' e= expr
+                    	    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:379:10: ',' e= expr
                     	    {
                     	    match(input,17,FOLLOW_17_in_exprList1035); if (state.failed) return list;
 
@@ -1811,7 +1824,7 @@ public class NebulaParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:367:5: 
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:380:5: 
                     {
                     }
                     break;
@@ -1833,7 +1846,7 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "primary"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:369:1: primary returns [Var v] : ( ( 'new' type '()' ) | 'this' | 'super' | INT | ID | '(' expr ')' );
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:382:1: primary returns [Var v] : ( ( 'new' type '()' ) | 'this' | 'super' | INT | ID | '(' expr ')' );
     public final Var primary() throws RecognitionException {
         Var v = null;
 
@@ -1846,7 +1859,7 @@ public class NebulaParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:370:5: ( ( 'new' type '()' ) | 'this' | 'super' | INT | ID | '(' expr ')' )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:383:5: ( ( 'new' type '()' ) | 'this' | 'super' | INT | ID | '(' expr ')' )
             int alt18=6;
             switch ( input.LA(1) ) {
             case 26:
@@ -1890,10 +1903,10 @@ public class NebulaParser extends Parser {
 
             switch (alt18) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:370:9: ( 'new' type '()' )
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:383:9: ( 'new' type '()' )
                     {
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:370:9: ( 'new' type '()' )
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:370:10: 'new' type '()'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:383:9: ( 'new' type '()' )
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:383:10: 'new' type '()'
                     {
                     match(input,26,FOLLOW_26_in_primary1071); if (state.failed) return v;
 
@@ -1913,7 +1926,7 @@ public class NebulaParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:371:9: 'this'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:384:9: 'this'
                     {
                     match(input,29,FOLLOW_29_in_primary1088); if (state.failed) return v;
 
@@ -1922,7 +1935,7 @@ public class NebulaParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:372:9: 'super'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:385:9: 'super'
                     {
                     match(input,28,FOLLOW_28_in_primary1109); if (state.failed) return v;
 
@@ -1931,7 +1944,7 @@ public class NebulaParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:373:9: INT
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:386:9: INT
                     {
                     INT11=(Token)match(input,INT,FOLLOW_INT_in_primary1130); if (state.failed) return v;
 
@@ -1940,7 +1953,7 @@ public class NebulaParser extends Parser {
                     }
                     break;
                 case 5 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:374:9: ID
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:387:9: ID
                     {
                     ID12=(Token)match(input,ID,FOLLOW_ID_in_primary1154); if (state.failed) return v;
 
@@ -1949,7 +1962,7 @@ public class NebulaParser extends Parser {
                     }
                     break;
                 case 6 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:375:9: '(' expr ')'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:388:9: '(' expr ')'
                     {
                     match(input,12,FOLLOW_12_in_primary1179); if (state.failed) return v;
 
@@ -1983,7 +1996,7 @@ public class NebulaParser extends Parser {
 
 
     // $ANTLR start "type"
-    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:382:1: type returns [Type type] : ( 'decimal' | 'int' | 'void' | ID );
+    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:395:1: type returns [Type type] : ( 'decimal' | 'int' | 'void' | ID );
     public final Type type() throws RecognitionException {
         Type type = null;
 
@@ -1991,7 +2004,7 @@ public class NebulaParser extends Parser {
         Token ID14=null;
 
         try {
-            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:383:5: ( 'decimal' | 'int' | 'void' | ID )
+            // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:396:5: ( 'decimal' | 'int' | 'void' | ID )
             int alt19=4;
             switch ( input.LA(1) ) {
             case 23:
@@ -2025,7 +2038,7 @@ public class NebulaParser extends Parser {
 
             switch (alt19) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:383:9: 'decimal'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:396:9: 'decimal'
                     {
                     match(input,23,FOLLOW_23_in_type1220); if (state.failed) return type;
 
@@ -2034,7 +2047,7 @@ public class NebulaParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:384:9: 'int'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:397:9: 'int'
                     {
                     match(input,25,FOLLOW_25_in_type1232); if (state.failed) return type;
 
@@ -2043,7 +2056,7 @@ public class NebulaParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:385:9: 'void'
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:398:9: 'void'
                     {
                     match(input,30,FOLLOW_30_in_type1248); if (state.failed) return type;
 
@@ -2052,7 +2065,7 @@ public class NebulaParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:386:9: ID
+                    // D:\\Projects\\nebula\\nebula-vm\\Nebula.g:399:9: ID
                     {
                     ID14=(Token)match(input,ID,FOLLOW_ID_in_type1263); if (state.failed) return type;
 

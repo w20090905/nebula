@@ -26,31 +26,32 @@ public class DisAssembler {
 	BytecodeDefinition def;
 
 	Writer out = null;
-	
+
 	public DisAssembler() {
 		out = new OutputStreamWriter(System.out);
 	}
-	
-	public DisAssembler(Writer out){
+
+	public DisAssembler(Writer out) {
 		this.out = out;
 	}
-	
-	private void println(String str){
+
+	private void println(String str) {
 		print(str);
 		print("\n");
 	}
-	
-	private void print(String format,Object... params){
-		print(String.format(format,params));
+
+	private void print(String format, Object... params) {
+		print(String.format(format, params));
 	}
-	
-	private void print(String str){
+
+	private void print(String str) {
 		try {
 			this.out.write(str);
+			this.out.flush();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-	}	
+	}
 
 	public void disassemble(ClassSymbol clz) {
 		println(".class " + clz.name);
@@ -67,7 +68,7 @@ public class DisAssembler {
 	}
 
 	public void disassemble(MethodSymbol func) {
-		print(".def %s: args=%d, locals=%d\n",func.name,func.nargs,func.nlocals);
+		print(".def %s: args=%d, locals=%d\n", func.name, func.nargs, func.nlocals);
 		int i = 0;
 		int[] code = func.code;
 		while (i < func.code.length) {
@@ -105,58 +106,58 @@ public class DisAssembler {
 		int op = code[ip];
 		BytecodeDefinition.Instruction I = BytecodeDefinition.instructions[OP_CODE(op)];
 		String instrName = I.name.toUpperCase();
-		print(String.format("%04d: %-11s", ip, instrName));
-		ip++;
-		if (I.n == 0) {
-			print("  ");
-			return ip;
-		}
-		String[] operands = new String[I.n];
-		switch (I.n) {
-		case 3:
-			switch (I.type[2]) {
-			case REG:
-				operands[2] = "r" + String.valueOf(C(op));
-				break;
-			case BytecodeDefinition.FUNC:
-			case BytecodeDefinition.POOL:
-				operands[2] = showConstPoolOperand(constPool, C(op));
-				break;
-			}
-		case 2:
-			switch (I.type[1]) {
-			case REG:
-				operands[1] = "r" + String.valueOf(B(op));
-				break;
-			case BytecodeDefinition.FUNC:
-			case BytecodeDefinition.POOL:
-				operands[1] = showConstPoolOperand(constPool, B(op));
-				break;
-			case BytecodeDefinition.INT:
-				operands[1] = String.valueOf(BX(op));
-				break;
-			}
-		case 1:
-			switch (I.type[0]) {
-			case REG:
-				operands[0] = "r" + String.valueOf(A(op));
-				break;
-			case BytecodeDefinition.FUNC:
-			case BytecodeDefinition.POOL:
-				operands[0] = showConstPoolOperand(constPool, A(op));
-				break;
-			case BytecodeDefinition.INT:
-				operands[0] = String.valueOf(AX(op));
-				break;
-			}
-			break;
-		}
 
-		for (int i = 0; i < operands.length; i++) {
-			String s = operands[i];
-			if (i > 0) print(", ");
-			print(s);
+		String ops = "";
+		if (I.n > 0) {
+			String[] operands = new String[I.n];
+			switch (I.n) {
+			case 3:
+				switch (I.type[2]) {
+				case REG:
+					operands[2] = "r" + String.valueOf(C(op));
+					break;
+				case BytecodeDefinition.FUNC:
+				case BytecodeDefinition.POOL:
+					operands[2] = showConstPoolOperand(constPool, C(op));
+					break;
+				}
+			case 2:
+				switch (I.type[1]) {
+				case REG:
+					operands[1] = "r" + String.valueOf(B(op));
+					break;
+				case BytecodeDefinition.FUNC:
+				case BytecodeDefinition.POOL:
+					operands[1] = showConstPoolOperand(constPool, B(op));
+					break;
+				case BytecodeDefinition.INT:
+					operands[1] = String.valueOf(BX(op));
+					break;
+				}
+			case 1:
+				switch (I.type[0]) {
+				case REG:
+					operands[0] = "r" + String.valueOf(A(op));
+					break;
+				case BytecodeDefinition.FUNC:
+				case BytecodeDefinition.POOL:
+					operands[0] = showConstPoolOperand(constPool, A(op));
+					break;
+				case BytecodeDefinition.INT:
+					operands[0] = String.valueOf(AX(op));
+					break;
+				}
+				break;
+			}
+
+			for (int i = 0; i < operands.length; i++) {
+				String s = operands[i];
+				if (i > 0) ops+=", ";
+				ops += s;
+			}
 		}
+		print(String.format("%04d: %-7s %-12s", ip, instrName,ops));
+		ip++;
 		return ip;
 	}
 

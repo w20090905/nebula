@@ -97,13 +97,17 @@ package nebula.vm;
     info("FSTORE: " + obj.getName() + "." + field.name + " = " + v.getName() + "\n");
     return v;
   };
-
   protected Var opInvoke(Var obj, MethodSymbol method, List<Var> params) {
     if (!obj.applied) resolveTemp(obj);
     for (Var vp : params) {
       if (!vp.applied) resolveTemp(vp);
     }
     TempVar v = popTmp(BuiltInTypeSymbol.FLEX);
+    if (params.size() > 0) {
+      TempVar ov = (TempVar)params.get(0);
+      assert v.reg == ov.reg;
+      v.applied = true;
+    }
 
     String txtParams = "";
     for (Var vp : params) {
@@ -156,7 +160,7 @@ package nebula.vm;
   }
 
   protected void resolveTemp(Var v, short reg) {
-    assert !v.applied;
+    assert !v.applied || v.reg == reg;
     Var to = null;
     for(Var tv : locals.values()){
         if(tv.reg == reg){
@@ -208,7 +212,7 @@ package nebula.vm;
 
   protected void clearTmp() {
 		maxLocals =  Math.max(maxLocals,locals.size());
-		if(tmps.size()>0) maxLocals =  Math.max(maxLocals,tmps.get(tmps.size()-1).reg);
+		if(tmps.size()>0) maxLocals =  Math.max(maxLocals,tmps.get(tmps.size()-1).reg+1);
 		
 		tmps.clear();
   }
@@ -286,10 +290,19 @@ statement
     ;   
 
 varDeclaration returns[Var v]
-    :   type ID ('=' e=expr  )? 
+    :   type ID ('=' from=expr  )? 
         { 
             v = pushLocal($ID.text,$type.type);
-            if(e!=null) resolveTemp($expr.v, v.reg);
+            if(from!=null) {
+                if(!from.applied ){
+			              resolveTemp(from, v.reg);
+			          } else {
+			              if(v.reg != from.reg)
+			                  v = opMove(v, from);
+			              else 
+			                  resolveTemp(from, v.reg);
+			          }
+			      }
         }
     ; 
     
