@@ -79,6 +79,8 @@ public class SourceCompiler extends NebulaParser {
 		MethodSymbol m = new MethodSymbol(clz, name, returnType);
 		super.maxLocals = 0;
 
+		initLocals();
+		
 		pushLocal("this", clz);
 
 		for (Var v : params) {

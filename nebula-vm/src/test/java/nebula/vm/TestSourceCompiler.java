@@ -340,6 +340,7 @@ public class TestSourceCompiler extends TestCase {
                 "    void funcSayHello2a(){" +
                 "        int a = 10;" +
                 "        int i = this.test(2,a+9);" +
+                "        return i;" +
                 "    }" +
                 "    int test(int a,int b ){" +
                 "        return a + b + b;" +
@@ -356,26 +357,40 @@ public class TestSourceCompiler extends TestCase {
         String actual = disassemble(clz.methods[0]);
         System.out.println(actual);
         //@formatter:off
-        String expected = "" +
+        String expectedMain = "" +
                 ".def funcSayHello2a: args=0, locals=4\n" +
                 "0000: ICONST  r1, 10      \n" +
                 "0001: ICONST  r2, 2       \n" +
                 "0002: ICONST  r3, 9       \n" +
                 "0003: IADD    r3, r1, r3  \n" +
                 "0004: CALL    r0, #2:@Test.test(), r2\n" +
-                "0005: RET     r0, 0       \n" +
+                "0005: RET     r2, 0       \n" +
                 "\n" ;
         //@formatter:on
-        assertEquals(expected, actual);
+        assertEquals(expectedMain, actual);
+        
+        actual = disassemble(clz.methods[1]);
+        System.out.println(actual);
+        //@formatter:off
+        String expectedTest = "" +
+                ".def test: args=2, locals=2\n" +
+                "0000: IADD    r3, r1, r2  \n" +
+                "0001: IADD    r3, r3, r2  \n" +
+                "0002: RET     r3, 0       \n" +
+                "\n" ;
+        //@formatter:on
+        assertEquals(expectedTest, actual);
+        
 
         cpu.resolve(clz);
 
         actual = disassemble(clz.methods[0]);
         System.out.println(actual);
 
-        assertEquals(expected, actual);
+        assertEquals(expectedMain, actual);
 
-        cpu.exec(clz.methods[0]);
+        int result = cpu.exec(clz.methods[0]);
+        assertEquals(40,result);
     }
 
     public void test_methodDefinition_params() throws Exception {

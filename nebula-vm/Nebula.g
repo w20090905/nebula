@@ -175,7 +175,11 @@ package nebula.vm;
   private Map<String, Var> locals = new HashMap<>();
   private List<Var> params = null;
   protected int maxLocals = 0;
-
+  
+  protected void initLocals(){
+    locals.clear();
+  }
+  
   protected Var pushLocal(String name, Type type) {
     Var var = new Var(name, type, locals.size());
     locals.put(var.name, var);
@@ -183,7 +187,7 @@ package nebula.vm;
     maxLocals = maxLocals > (short) locals.size() ? maxLocals : (short) locals.size();
     return var;
   }
-
+  
   protected Var v(String name) {
     Var var = locals.get(name);
     return var;
