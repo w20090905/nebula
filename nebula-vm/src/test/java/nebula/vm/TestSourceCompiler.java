@@ -18,7 +18,7 @@ import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
 
 public class TestSourceCompiler extends TestCase {
-    Interpreter cpu = new Interpreter(true, false);
+    VMInterpreter cpu = new VMInterpreter(true, false);
 
     private NebulaParser loadFromString(String code) throws Exception {
         return parse(new ANTLRStringStream(code));

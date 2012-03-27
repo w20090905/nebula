@@ -62,7 +62,7 @@ import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 
 /** A simple stack-based interpreter */
-public class Interpreter {
+public class VMInterpreter {
     public static final int DEFAULT_OPERAND_STACK_SIZE = 100;
     public static final int DEFAULT_CALL_STACK_SIZE = 1000;
 
@@ -118,11 +118,11 @@ public class Interpreter {
         }
     }
 
-    public Interpreter() {
+    public VMInterpreter() {
         this(false, false);
     }
 
-    public Interpreter(boolean trace, boolean checkPerformance) {
+    public VMInterpreter(boolean trace, boolean checkPerformance) {
         this.trace = trace;
         this.checkPerformance = checkPerformance;
         for (int i = 0; i < DEFAULT_PREPAREED_NUMBER_STRING_RANGE; i++) {
@@ -180,7 +180,7 @@ public class Interpreter {
         } else {
             clz = loadFromSource(System.in);
         }
-        Interpreter interpreter = new Interpreter(trace, checkPerformance);
+        VMInterpreter interpreter = new VMInterpreter(trace, checkPerformance);
         interpreter.resolve(clz);
         interpreter.exec(interpreter.resolve(clz.getEntryPoint()));
         if (disassemble) interpreter.disassemble();
