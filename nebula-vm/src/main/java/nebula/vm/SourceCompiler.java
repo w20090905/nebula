@@ -161,7 +161,7 @@ public class SourceCompiler extends NebulaParser {
 
 		short index = indexOfPool(field);
 
-		gen(INSTR_FSTORE, v.reg, obj.reg, index);
+		gen(INSTR_FSTORE, obj.reg, index, v.reg);
 
 		return v;
 	};

@@ -114,7 +114,7 @@ public class VMInterpreter {
         else {
             mapClass.put(v, ++pPoolClass);
             poolClass[pPoolClass] = v;
-            return pPoolString;
+            return pPoolClass;
         }
     }
 
@@ -297,6 +297,7 @@ public class VMInterpreter {
         if (!checkPerformance) {
             fp = -1;
             calls[++fp] = mainFunction;
+            r[0] = __new(mainFunction.definedClass);
             ret = cpu();
             if (trace) System.out.println("return " + ret);
             return ret;
@@ -382,7 +383,7 @@ public class VMInterpreter {
 
                 int cnt = funcTo.nargs;
                 int from = base + C(op);
-                r[baseTo] = ra; // set object 
+                r[baseTo] = ra; // set object
                 if (cnt == 1) {
                     r[baseTo + 1] = r[from];
                 } else if (cnt == 2) {
@@ -420,10 +421,6 @@ public class VMInterpreter {
                 funcTo = calls[fp];
 
                 baseTo = r[base - 4];
-                ip = r[base - 3];
-                rb= r[base - 2];
-                maskObject = r[base - 1];
-
                 // 2、clear object
                 if (maskObject > 0) {
                     // clear ref object, don't deal args and ret param
@@ -438,13 +435,18 @@ public class VMInterpreter {
                     }
                 }
 
-                // 2、Prepare new frame |  return one object
-                
-                //rb = base + ra + BX(op);
-                r[baseTo + rb] = r[base+ra];
-//                for (int from = base + ra, to = baseTo + r[base - 2]; from < rb; from++, to++) {
-//                    r[to] = r[from];
-//                }
+                // 2、Prepare new frame | return one object
+
+                ip = r[base - 3];
+
+                rb = r[base - 2];
+                maskObject = r[base - 1];
+                // rb = base + ra + BX(op);
+                r[baseTo + rb] = r[base + ra];
+                // for (int from = base + ra, to = baseTo + r[base - 2]; from <
+                // rb; from++, to++) {
+                // r[to] = r[from];
+                // }
 
                 // 4、return function exec
 
@@ -489,7 +491,7 @@ public class VMInterpreter {
                         poolH[index][0]--;
                     }
                 }
-                r[base + ra] = __newStruct(((ClassSymbol) poolK[B(op)]).getLength());
+                r[base + ra] = __new((ClassSymbol) poolK[B(op)]);
                 maskObject |= (1L << ra);
                 break;
             }
@@ -629,12 +631,12 @@ public class VMInterpreter {
         return op >>> OFFSET_BX & MASK_XX;
     }
 
-    private int __newStruct(int size) {
+    private int __new(ClassSymbol clz) {
         int index = 0;
         for (; index < pPoolH; index++) {
             if (poolH[index] == null) break;
         }
-        poolH[index] = new int[size];
+        poolH[index] = new int[1 + clz.getLength()];
         poolH[index][0] = 1;
         pPoolH = pPoolH > index + 1 ? pPoolH : index + 1;
         return index;
@@ -694,9 +696,9 @@ public class VMInterpreter {
             if (i == 1) System.out.print(" |");
             if (i == func.nargs + 1 && i == 1) System.out.print("|");
             else if (i == func.nargs + 1) System.out.print(" |");
-            
+
             System.out.print(" ");
-            
+
             if (r[base + i] == 0) System.out.print("_");
             else System.out.print(r[base + i]);
         }

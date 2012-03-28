@@ -20,13 +20,18 @@ package nebula.vm;
     return v;/* TODO add super class support */
   };
 
-  protected ClassSymbol exitClass(ClassSymbol clz) {
+  protected ClassSymbol exitClass(ClassSymbol clz) {  
+    clz.fields = this.fields.toArray(new FieldSymbol[0]);
+    clz.methods = this.methods.toArray(new MethodSymbol[0]);
+    
     return clz;
   };
 
   protected FieldSymbol defineField(ClassSymbol clz, String name, Type type) {
     FieldSymbol f = new FieldSymbol(clz, name, type);
     info("FIELD : " + f.name + "\n");
+    
+    fields.add(f);
     return f;
   };
 
@@ -39,6 +44,8 @@ package nebula.vm;
     for (Var v : params) {
       pushLocal(v.name, v.type);
     }
+    m.nargs = params.size();
+    this.methods.add(m);
 
     String str = "";
     for (Var v : params) {
@@ -50,6 +57,8 @@ package nebula.vm;
   };
 
   protected MethodSymbol exitMethod(MethodSymbol method) {
+    method.nlocals = maxLocals - method.nargs;
+    
     info("}\n");
     return method;
   };
@@ -172,8 +181,10 @@ package nebula.vm;
     v.applied = true;
   }
 
+  protected List<MethodSymbol> methods = new ArrayList<>();
+  protected List<FieldSymbol> fields = new ArrayList<>();
+  
   private Map<String, Var> locals = new HashMap<>();
-  private List<Var> params = null;
   protected int maxLocals = 0;
   
   protected void initLocals(){
@@ -323,7 +334,7 @@ exprStatement returns[Var v]
               assert from!=null;
               v = opFStore(to.v,to.field,from);              
           } else if( from == null ){
-              resolveTemp(to.v);               
+              if(!to.v.applied)resolveTemp(to.v);               
               v = to.v;     
           } else if(!from.applied ){
               resolveTemp(from, to.v.reg);

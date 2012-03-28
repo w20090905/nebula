@@ -240,6 +240,58 @@ public class TestNebulaParser extends TestCase {
 		//@formatter:on
 		assertEquals(expected, actual);
 	}
+	
+    public void test_method_complex_compute() throws Exception {
+        //@formatter:off
+        String text = "" +
+                "class Test {" +
+                "   void funcSayHello2a(){\n" +
+                "       int a = 10;\n" +
+                "       Person p = new Person();\n" +
+                "       p.age = a; \n" +
+                "       int d = this.test(p.age+1,10);\n" +
+                "       return a;\n" +
+                "    }" +
+                "    int test(int a,int b ){" +
+                "        return a + b + b;" +
+                "    }" +
+                "}";
+        //@formatter:on     
+        NebulaParser parser = loadFromString(text);
+        
+        ClassSymbol clz = parser.classDefinition();
+        assertTrue(parser.getNumberOfSyntaxErrors() == 0);
+
+        assertEquals("funcSayHello2a", clz.methods[0].name);
+        
+        String actual = sb.toString();
+        System.out.println(actual);
+        //@formatter:off
+        String expectedMain = "" +
+                "|          |  FUNC  : funcSayHello2a() {\n" + 
+                "|1         |  ICONST: tmp1#I = 10;\n" + 
+                "|1         |  HIDE  : a#I = tmp1#I;\n" + 
+                "|2         |  STRUCT: tmp2#Person = new Person;\n" + 
+                "|2         |  HIDE  : p#Person = tmp2#Person;\n" + 
+                "|          |  FSTORE: p#Person.age = a#I\n" + 
+                "|3         |  FLOAD : tmp3#* = p#Person.age\n" + 
+                "|3 4       |  ICONST: tmp4#I = 1;\n" + 
+                "|3         |  IADD  : tmp3#* = tmp3#* + tmp4#I;\n" + 
+                "|3 4       |  ICONST: tmp4#I = 10;\n" + 
+                "|          |  CALL  : tmp3#* = this#Test.Test_test(tmp3#* tmp4#I );\n" + 
+                "|          |  HIDE  : d#I = tmp3#*;\n" + 
+                "|          |  RET   : ;\n" + 
+                "|          |  }\n" + 
+                "|          |  FUNC  : test() {\n" + 
+                "|5         |  IADD  : tmp5#I = a#I + b#I;\n" + 
+                "|5         |  IADD  : tmp5#I = tmp5#I + b#I;\n" + 
+                "|5         |  RET   : ;\n" + 
+                "|          |  }\n";
+        //@formatter:on
+        assertEquals(expectedMain, actual);
+    }
+    
+    
 	public void test_methodDefinition_params() throws Exception {
 		//@formatter:off
 		String text = "" +

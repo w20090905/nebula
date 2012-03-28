@@ -392,6 +392,77 @@ public class TestSourceCompiler extends TestCase {
         int result = cpu.exec(clz.methods[0]);
         assertEquals(40,result);
     }
+    
+    public void test_method_complex_compute() throws Exception {
+        
+        NebulaParser parser = loadFromFile("Person.n");
+        ClassSymbol clzPerson =  parser.classDefinition();
+        
+        
+        //@formatter:off
+        String text = "" +
+                "class Test {" +
+                "   void funcSayHello2a(){" +
+                "       int a = 10;" +
+                "       Person p = new Person();" +
+                "       p.age = 9;" +
+                "       int d = this.test(p.age+1,10);" +
+                "       return d;" +
+                "    }" +
+                "    int test(int a,int b ){" +
+                "        return a + b + b;" +
+                "    }" +
+                "}";
+        //@formatter:on        
+        parser = loadFromString(text);
+
+        ClassSymbol clz = parser.classDefinition();
+        assertTrue(parser.getNumberOfSyntaxErrors() == 0);
+
+        assertEquals("funcSayHello2a", clz.methods[0].name);
+
+        String actual = disassemble(clz.methods[0]);
+        System.out.println(actual);
+        //@formatter:off
+        String expectedMain = "" +
+                ".def funcSayHello2a: args=0, locals=5\n" +
+                "0000: ICONST  r1, 10      \n" +
+                "0001: STRUCT  r2, 1024    \n" +
+                "0002: ICONST  r3, 9       \n" +
+                "0003: FSTORE  r2, #3:@Person.age, r3\n" +
+                "0004: FLOAD   r3, r2, #3:@Person.age\n" +
+                "0005: ICONST  r4, 1       \n" +
+                "0006: IADD    r3, r3, r4  \n" +
+                "0007: ICONST  r4, 10      \n" +
+                "0008: CALL    r0, #4:@Test.test(), r3\n" +
+                "0009: RET     r3, 0       \n" +
+                "\n" ;
+        //@formatter:on
+        assertEquals(expectedMain, actual);
+        
+        actual = disassemble(clz.methods[1]);
+        System.out.println(actual);
+        //@formatter:off
+        String expectedTest = "" +
+                ".def test: args=2, locals=2\n" +
+                "0000: IADD    r3, r1, r2  \n" +
+                "0001: IADD    r3, r3, r2  \n" +
+                "0002: RET     r3, 0       \n" +
+                "\n" ;
+        //@formatter:on
+        assertEquals(expectedTest, actual);
+        
+        cpu.resolve(clzPerson);
+        cpu.resolve(clz);
+
+        actual = disassemble(clz.methods[0]);
+        System.out.println(actual);
+
+        assertEquals(expectedMain, actual);
+        cpu.resolve(clz.methods[0]);
+        int result = cpu.exec(clz.methods[0]);
+        assertEquals(30,result);
+    }
 
     public void test_methodDefinition_params() throws Exception {
         //@formatter:off
