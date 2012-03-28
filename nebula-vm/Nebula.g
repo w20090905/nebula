@@ -62,7 +62,17 @@ package nebula.vm;
     info("}\n");
     return method;
   };
+  
+  protected Var opIEq(Var a, Var b) {
+    if (!a.applied) resolveTemp(a);
+    if (!b.applied) resolveTemp(b);
+    TempVar v = popTmp(a.type);
 
+    info("IEQ  : " + v.getName() + " = " + a.getName() + " + " + b.getName() + ";\n");
+
+    return v;
+  };
+  
   protected Var opIAdd(Var a, Var b) {
     if (!a.applied) resolveTemp(a);
     if (!b.applied) resolveTemp(b);
@@ -274,18 +284,23 @@ fieldDeclaration[ClassSymbol clz] returns[FieldSymbol field]
 methodDeclaration[ClassSymbol clz] returns[MethodSymbol m]
   :   type name=ID 
       ('()' {m=enterMethod(clz, $name.text, $type.type, new ArrayList<Var>());}
-       | ('(' formalParameters ')') {m=enterMethod(clz, $name.text, $type.type, $formalParameters.list);}
+       | ('(' params=paramDeclarationList ')') {m=enterMethod(clz, $name.text, $type.type, $params.list);}
       )        
       block
         {m=exitMethod(m);}
   ; // END: method
 
-formalParameters returns [List<Var> list]
+paramDeclarationList returns [List<Var> list]
   @init{$list = new ArrayList<>(); }    
-  :   t=type id=ID{$list.add(new Var($id.text,$t.type,0));}
-    ( ',' t=type id=ID{$list.add(new Var($id.text,$t.type,0));} 
+  :   v=paramDeclaration{$list.add(v);}
+    ( ',' v=paramDeclaration{$list.add(v);} 
      )* 
     ;
+    
+paramDeclaration returns[Var v]
+  : t=type id=ID {v=new Var($id.text,$t.type,0);}
+;
+
   
 // *************   END  :  Class   *************
 
@@ -301,8 +316,19 @@ statement
     |   varDeclaration  ';'
     |   returnStatement ';'
     |   exprStatement   ';'
+    |   ifStatement
     |   ';' 
-    ;   
+    ;  
+    
+ifStatement
+    : 'if' '(' expr ')' 
+      'then' t=statement
+      ('else' e=statement)?
+    ;
+    
+forStatement
+    :
+    ;
 
 varDeclaration returns[Var v]
     :   type ID ('=' from=expr  )? 
@@ -346,7 +372,13 @@ exprStatement returns[Var v]
     ;
     
 expr returns [Var v]
-    :   e=addexpr {v = $e.v;}
+    :   e=eqexpr {v = $e.v;}
+    ;
+    
+eqexpr returns [Var v]
+    :   a=addexpr {v = a;}
+        (   '==' b=addexpr  {v=opIEq(v,b);}
+        )*
     ;
     
 addexpr returns [Var v]
