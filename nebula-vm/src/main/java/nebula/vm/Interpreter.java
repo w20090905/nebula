@@ -87,7 +87,7 @@ public class Interpreter {
 	int pPoolH = 0;
 
 	/** Stack of stack frames, grows upwards */
-	final FunctionSymbol[] calls = new FunctionSymbol[DEFAULT_CALL_STACK_SIZE];
+	final MethodSymbol[] calls = new MethodSymbol[DEFAULT_CALL_STACK_SIZE];
 	int fp = -1; // frame pointer register
 
 	final int[] r = new int[DEFAULT_Stack_SIZE];
@@ -286,7 +286,7 @@ public class Interpreter {
 	}
 
 	/** Execute the bytecodes in code memory starting at mainAddr */
-	public void exec(FunctionSymbol mainFunction) throws Exception {
+	public void exec(MethodSymbol mainFunction) throws Exception {
 
 		for (int i = 0; i < 0; i++) {
 			fp = -1;
@@ -310,10 +310,10 @@ public class Interpreter {
 
 	/** Simulate the fetch-execute cycle */
 	protected void cpu() {
-		FunctionSymbol funcTo = null;
+		MethodSymbol funcTo = null;
 		int baseTo = 0;
 
-		FunctionSymbol func = calls[fp];
+		MethodSymbol func = calls[fp];
 		int[] code = func.code;
 		Object[] poolK = func.getConstPool();
 		int maskObject = 0;
@@ -360,7 +360,7 @@ public class Interpreter {
 				r[baseTo - 1] = maskObject;
 
 				// 2、Prepare new frame
-				funcTo = (FunctionSymbol) poolK[B(op)];
+				funcTo = (MethodSymbol) poolK[B(op)];
 				if (!funcTo.resolved) resolve(funcTo);
 
 				int cnt = funcTo.nargs;
@@ -501,7 +501,7 @@ public class Interpreter {
 	}
 
 	/** Resolve Function Symbol */
-	public FunctionSymbol resolve(FunctionSymbol func) {
+	public MethodSymbol resolve(MethodSymbol func) {
 		if (func.resolved) return func;
 
 		Object[] poolK = func.getConstPool();
@@ -524,7 +524,7 @@ public class Interpreter {
 			case INSTR_CALL: {
 				int index = B(op);
 
-				FunctionSymbol fs = (FunctionSymbol) poolK[index];
+				MethodSymbol fs = (MethodSymbol) poolK[index];
 				ClassSymbol clzSymbol = fs.definedClass;
 
 				if (!contain(clzSymbol)) {
@@ -656,7 +656,7 @@ public class Interpreter {
 	}
 
 	private void trace(int ip, int base) {
-		FunctionSymbol func = calls[fp];
+		MethodSymbol func = calls[fp];
 		// if (ip == 0) {
 		// System.out.println("");
 		// System.out.println("Enter .function " + func.definedClass.name + "."
@@ -694,7 +694,7 @@ public class Interpreter {
 
 			if (clz.poolLocalK.length > 0) dumpConstantPool(clz.poolLocalK);
 			// if (globals.length > 0) dumpDataMemory();
-			for (FunctionSymbol f : clz.functions) {
+			for (MethodSymbol f : clz.functions) {
 				System.out.println("");
 				System.out.println(".def " + f.name + " args=" + f.nargs + ", locals=" + f.nlocals + " ");
 				dumpCodeMemory(f.code);

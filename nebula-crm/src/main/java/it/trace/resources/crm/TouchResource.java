@@ -1,12 +1,17 @@
 package it.trace.resources.crm;
 
+import it.trace.entity.Contact;
 import it.trace.entity.Touch;
+import it.trace.manager.ContactManager;
 import it.trace.manager.TouchManager;
 import it.trace.nebula.rest.binder.Context;
 import it.trace.nebula.rest.binder.DataBinder;
 
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.google.inject.Inject;
 
@@ -88,12 +93,19 @@ public class TouchResource {
 			@Override
 			public Object[] bind(Context context, Method method) {
 
+				ContactManager conManager = new ContactManager();
 				if ("update".equals(method.getName())
 						|| "create".equals(method.getName())) {
 					Touch touch = new Touch();
 					if (context.getId() != null)
 						touch.setId(Integer.parseInt(context.getId()));
+					if (StringUtils.isNotEmpty((String)context.getParameter("id"))) {
+						Contact contact = conManager.select(Integer.valueOf((String) context
+								.getParameter("id")));
+						touch.setContact(contact);
+					}
 					touch.setMemo((String) context.getParameter("memo"));
+					touch.setTouchDate(new Date());
 					return new Object[] { touch };
 				} else if ("editable".equals(method.getName())
 						|| "removable".equals(method.getName())

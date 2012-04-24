@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="css/custom.css" type="text/css" />
 <link rel="stylesheet" href="css/nyroModal.css" type="text/css" />
 <!-- javascript -->
-<script type="text/javascript" src="scripts/jquery-1.6.1.js"></script>
+<script type="text/javascript" src="scripts/jquery-1.7.1.js"></script>
 <!-- <script type="text/javascript" src="scripts/jquery.ui.core.min.js"></script> -->
 <!-- <script type="text/javascript" src="scripts/jquery.ui.widget.min.js"></script> -->
 <!-- <script type="text/javascript" src="scripts/jquery.ui.tabs.min.js"></script> -->
@@ -36,7 +36,7 @@
 <script type="text/javascript" src="scripts/jquery-jtemplates.js"></script>
 <script type="text/javascript" src="scripts/jquery.address-1.4.js"></script>
 <!-- <script type="text/javascript" src="scripts/admin.js"></script> -->
-<script type="text/javascript" src="scripts/jnebula.one-0.0.3.js"></script>
+<script type="text/javascript" src="scripts/jnebula.one-0.0.5.js"></script>
 <script type="text/javascript">
 <!--
 
@@ -48,16 +48,16 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-    <header id="top" data-href="common/header.html"></header>
-    <div id="pagetitle" data-href="common/nav.html"></div>
+    <header id="top" template="common/header.html"></header>
+    <div id="pagetitle" template="common/nav.html"></div>
     <div id="page">
         <div class="wrapper">
-			<section id="main-section" class="column width6 first" data-href="html/admin/dashboard/list.html"></section>
-			<aside id="side-section" class="column width2" data-href="common/sidebar.html"></aside>
+			<section id="main-section" class="column width6 first" template="html/admin/dashboard/list.html"></section>
+			<aside id="side-section" class="column width2" template="common/sidebar.html"></aside>
         </div>
     </div>
-    <footer id="bottom" data-href="common/footer.html"></footer>
-    <footer id="animated" data-href="common/footer-animated.html"></footer>
+    <footer id="bottom" template="common/footer.html"></footer>
+    <footer id="animated" template="common/footer-animated.html"></footer>
     <a href="#" id="totop">^ scroll to top</a>
 </body>
 </html>

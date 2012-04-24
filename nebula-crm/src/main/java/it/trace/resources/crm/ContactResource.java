@@ -1,12 +1,16 @@
 package it.trace.resources.crm;
 
+import it.trace.entity.Company;
 import it.trace.entity.Contact;
 import it.trace.manager.ContactManager;
+import it.trace.manager.CompanyManager;
 import it.trace.nebula.rest.binder.Context;
 import it.trace.nebula.rest.binder.DataBinder;
 
 import java.lang.reflect.Method;
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.google.inject.Inject;
 
@@ -24,21 +28,21 @@ public class ContactResource {
 
 	private List<Contact> list;
 
-	private Long id;
+	private Integer id;
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	private ContactManager manager = new ContactManager();
+	private ContactManager contManager = new ContactManager();
 
 	@Inject
 	public void setManager(ContactManager manager) {
-		this.manager = manager;
+		this.contManager = manager;
 	}
 
 	public List<Contact> list() {
-		this.list = manager.selectAll();
+		this.list = contManager.selectAll();
 		return list;
 	}
 
@@ -47,16 +51,16 @@ public class ContactResource {
 	}
 
 	public String create(Contact contact) {
-		manager.insert(contact);
+		contManager.insert(contact);
 		return "success";
 	}
 
 	public Contact view(String id) {
-		return manager.select(Integer.valueOf(id));
+		return contManager.select(Integer.valueOf(id));
 	}
 
 	public List<Contact> getByContact(int companyId) {
-		this.list = manager.getContactByCompany(companyId);
+		this.list = contManager.getContactByCompany(companyId);
 		return list;
 	}
 
@@ -66,8 +70,8 @@ public class ContactResource {
 		return "success";
 	}
 
-	public String update() {
-		manager.update(this.contact);
+	public String update(Contact contact) {
+		contManager.update(contact);
 		return "success";
 	}
 
@@ -77,8 +81,8 @@ public class ContactResource {
 		return "success";
 	}
 
-	public String remove() {
-		manager.delete(id);
+	public String remove(Integer id) {
+		contManager.delete(id);
 		return "success";
 	}
 
@@ -88,26 +92,34 @@ public class ContactResource {
 			@Override
 			public Object[] bind(Context context, Method method) {
 
+				CompanyManager comManager = new CompanyManager();
 				if ("update".equals(method.getName())
 						|| "create".equals(method.getName())) {
 					Contact contact = new Contact();
 					if (context.getId() != null)
 						contact.setId(Integer.parseInt(context.getId()));
+					if (StringUtils.isNotEmpty((String)context.getParameter("id"))) {
+						Company company = comManager.select(Integer.valueOf((String) context
+								.getParameter("id")));
+						contact.setCompany(company);
+					}
 					contact.setName((String) context.getParameter("name"));
 					contact.setCellphone((String) context
 							.getParameter("cellphone"));
 					contact.setEmail((String) context.getParameter("email"));
 					return new Object[] { contact };
 				} else if ("editable".equals(method.getName())
-						|| "removable".equals(method.getName())
-						|| "remove".equals(method.getName())) {
-					return new Object[] { Long.parseLong((String) context
-							.getParameter("id")) };
+						|| "removable".equals(method.getName())) {
+					return new Object[] { Integer.valueOf(((String) context
+							.getParameter("id"))) };
 				} else if ("view".equals(method.getName())) {
 					String id = context.getId();
 					return new Object[] { id };
 				} else if ("getByContact".equals(method.getName())) {
 					return new Object[] { Integer.valueOf(context.getId()) };
+				} else if ("remove".equals(method.getName())) {
+					return new Object[] { Integer.valueOf(((String) context
+							.getParameter("id"))) };
 				}
 
 				return null;

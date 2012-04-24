@@ -88,9 +88,7 @@
 			<version>1.2.14</version>
 		</dependency>
 	</dependencies>
-
 	<build>
-
 		<resources>
 			<resource>
 				<directory>src/main/java</directory>

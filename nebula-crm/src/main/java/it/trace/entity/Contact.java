@@ -48,7 +48,7 @@ public class Contact implements java.io.Serializable {
 	@Column(name = "address")
 	private String address;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "company_id")
 	private Company company;
 
@@ -79,7 +79,7 @@ public class Contact implements java.io.Serializable {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-
+	@JsonIgnore
 	public Company getCompany() {
 		return company;
 	}
@@ -88,7 +88,6 @@ public class Contact implements java.io.Serializable {
 		this.company = company;
 	}
 
-	@JsonIgnore
 	public List<Touch> getTouchList() {
 		return touchList;
 	}

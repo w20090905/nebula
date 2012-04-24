@@ -1,6 +1,6 @@
 package nebula.vm;
 
-public class FunctionSymbol {
+public class MethodSymbol {
 	final ClassSymbol definedClass;
 	final String name;
 	final int hashcode;
@@ -11,11 +11,11 @@ public class FunctionSymbol {
 
 	boolean resolved = false;
 
-	public FunctionSymbol(ClassSymbol parent, String name) {
+	public MethodSymbol(ClassSymbol parent, String name) {
 		this(parent, name, 0, 0, null);
 	}
 
-	public FunctionSymbol(ClassSymbol parent, String name, int nargs, int nlocals, int[] code) {
+	public MethodSymbol(ClassSymbol parent, String name, int nargs, int nlocals, int[] code) {
 		this.definedClass = parent;
 		this.name = name;
 		this.nargs = nargs;
@@ -35,8 +35,8 @@ public class FunctionSymbol {
 
 	@Override
 	public boolean equals(Object o) {
-		return o instanceof FunctionSymbol && definedClass.name.equals(((FunctionSymbol) o).definedClass.name)
-				&& name.equals(((FunctionSymbol) o).name);
+		return o instanceof MethodSymbol && definedClass.name.equals(((MethodSymbol) o).definedClass.name)
+				&& name.equals(((MethodSymbol) o).name);
 	}
 
 	@Override

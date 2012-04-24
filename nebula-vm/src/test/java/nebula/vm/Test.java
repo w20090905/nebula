@@ -10,6 +10,7 @@ package nebula.vm;
  ***/
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Stack;
 
 import junit.framework.TestCase;
 
@@ -21,11 +22,10 @@ public class Test extends TestCase {
 	private void parse(String filename) throws Exception {
 		InputStream input = null;
 		input = new FileInputStream(filename);
-
 		Interpreter interpreter = new Interpreter(true);
 		ClassSymbol clz = load(input);
-		interpreter.resolve(clz);
-		interpreter.exec(interpreter.resolve(clz.getEntryPoint()));
+		// interpreter.resolve(clz);
+		// interpreter.exec(interpreter.resolve(clz.getEntryPoint()));
 	}
 
 	public void testClsDefineOnly() throws Exception {
@@ -44,6 +44,8 @@ public class Test extends TestCase {
 			SourceCompiler parser = new SourceCompiler(tokens);
 			parser.compilationUnit();
 			ClassSymbol clz = parser.finished();
+
+			// new DisAssembler().disassemble(clz);
 			hasErrors = parser.getNumberOfSyntaxErrors() > 0;
 			if (!hasErrors) {
 				return clz;

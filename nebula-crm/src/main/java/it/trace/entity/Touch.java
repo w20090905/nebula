@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @Entity
@@ -55,10 +56,11 @@ public class Touch implements java.io.Serializable {
 		this.touchDate = touchDate;
 	}
 
+	@JsonIgnore
 	public Contact getContact() {
 		return contact;
 	}
-
+	
 	public void setContact(Contact contact) {
 		this.contact = contact;
 	}

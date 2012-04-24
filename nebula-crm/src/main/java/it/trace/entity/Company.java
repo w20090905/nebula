@@ -13,9 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "Company")
@@ -48,7 +46,7 @@ public class Company implements java.io.Serializable{
 	private String description;
 	
 	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
+//	@Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
 	private List<Contact> contactList = new ArrayList<Contact>();
 
 	public int getId() {
@@ -107,7 +105,6 @@ public class Company implements java.io.Serializable{
 		this.description = description;
 	}
 
-	@JsonIgnore
 	public List<Contact> getContactList() {
 		return contactList;
 	}

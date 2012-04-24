@@ -40,7 +40,7 @@ public class AsmCompiler extends AssemblerParser {
 	 * put FunctionSymbols in here too.
 	 */
 	protected List<Object> poolLocalK = new ArrayList<>();
-	protected List<FunctionSymbol> functions = new ArrayList<>();
+	protected List<MethodSymbol> functions = new ArrayList<>();
 	protected List<FieldSymbol> fields = new ArrayList<>();
 
 	protected int ip = 0; // Instruction address pointer; used to fill code
@@ -48,7 +48,7 @@ public class AsmCompiler extends AssemblerParser {
 
 	// protected int dataSize; // set via .globals
 
-	protected FunctionSymbol currentFunction;
+	protected MethodSymbol currentFunction;
 	protected ClassSymbol currentClass;
 
 	/**
@@ -69,7 +69,7 @@ public class AsmCompiler extends AssemblerParser {
 		}
 		currentClass.poolLocalK = poolLocalK.toArray();
 		currentClass.fields = this.fields.toArray(new FieldSymbol[0]);
-		currentClass.functions = this.functions.toArray(new FunctionSymbol[0]);
+		currentClass.functions = this.functions.toArray(new MethodSymbol[0]);
 		return currentClass;
 	}
 
@@ -149,7 +149,7 @@ public class AsmCompiler extends AssemblerParser {
 			i = text.indexOf('.');
 			c = new ClassSymbol(text.substring(1, i));
 			c = (ClassSymbol) poolLocalK.get(toLocalConstantPoolIndex(c));
-			v = toLocalConstantPoolIndex(new FunctionSymbol(c, text.substring(i + 1)));
+			v = toLocalConstantPoolIndex(new MethodSymbol(c, text.substring(i + 1)));
 			op |= (v & MASK_X_) << (offset);
 			break;
 		case REG:
@@ -227,7 +227,7 @@ public class AsmCompiler extends AssemblerParser {
 		}
 
 		ip = 0;
-		currentFunction = new FunctionSymbol(currentClass, name, args, locals, codeBuffer);
+		currentFunction = new MethodSymbol(currentClass, name, args, locals, codeBuffer);
 		functions.add(currentFunction);
 		// if (name.equals("main")) mainFunction = f;
 		// Did someone referred to this function before it was defined?
