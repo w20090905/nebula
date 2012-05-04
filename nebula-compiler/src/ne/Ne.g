@@ -43,16 +43,11 @@ options {
 typeDefinition returns[Type type]: 'type' ID{type = new Type($ID.text);} '{' fieldDefinition[type]* '}' ';';
 fieldDefinition[Type resideType] returns[Field field]
     :   i=fieldImportance
-        name=ID
-        {
-            field = new Field(resideType,$name.text);
-        }
-        (type=ID{field.type = resolveType($type.text);})?
+        name=ID  { field = new Field(resideType,$name.text); }
+        (type=ID { field.type = resolveType($type.text); } 
+           | {field.type = resolveType(field.name);} )
         ';'{
             field.importance = i;
-            if(field.type ==null){
-                field.type = resolveType(field.name);
-            }
             resideType.fields.add(field);
           }
         ;
