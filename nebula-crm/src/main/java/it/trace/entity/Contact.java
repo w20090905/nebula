@@ -3,21 +3,19 @@ package it.trace.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.JoinColumn;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "Contact")
@@ -52,8 +50,8 @@ public class Contact implements java.io.Serializable {
 	@JoinColumn(name = "company_id")
 	private Company company;
 
-	@OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
+	@OneToMany(mappedBy = "contact", fetch = FetchType.LAZY)
+//	@Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
 	private List<Touch> touchList = new ArrayList<Touch>();
 
 	public int getId() {
