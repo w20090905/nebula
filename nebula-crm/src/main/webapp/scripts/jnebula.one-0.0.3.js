@@ -154,7 +154,7 @@
 						return false;
 					}
 					$.ajax({
-						type : form.method,
+						type : $(form).attr("method"),
 						url : form.action,
 			        	data : $.each($(form).serializeArray(), function(i, f) {
 							if (f.name == "password" || f.name == "password_confirm") {
@@ -164,7 +164,9 @@
 						dataType : "json",
 						async : false,
 						success : function(data) {
-							$.nmTop().close();
+							if ($.nmTop() != undefined) {
+								$.nmTop().close();
+							}
 							// ++++++++++++++++++++++++++++++++++++++++++++
 							$("table.toplevel").each(function(i, e) {
 								$(e).data("oTable").fnDraw();
@@ -208,7 +210,7 @@
 								a.attr("rev", "modal");
 								a.html("<img src='img/page_save.png'/>");
 								a.click(function() {
-									$$.navigate(updateUrl, { url : ownUrl });
+									$$.popUp(updateUrl, { url : ownUrl });
 									return false;
 								});
 								td.append(a);
@@ -225,7 +227,7 @@
 								a.attr("rev", "modal");
 								a.html("<img src='img/delete.png'/>");
 								a.click(function() {
-									$$.navigate(removeUrl, { url : ownUrl });
+									$$.popUp(removeUrl, { url : ownUrl });
 									return false;
 								});
 								td.append(a);
@@ -246,7 +248,7 @@
 							a.attr("href", ownUrl);
 							a.html(td.html());
 							a.click(function() {
-								$$.navigate(referUrl, { url : ownUrl });
+								$$.popUp(referUrl, { url : ownUrl });
 								return false;
 							});
 							td.empty();
@@ -273,7 +275,7 @@
 							a.attr("href", ownUrl);
 							a.html("+");
 							a.click(function() {
-								$$.navigate(referUrl, { url : ownUrl });
+								$$.popUp(referUrl, { url : ownUrl });
 								return false;
 							});
 							td.empty();
