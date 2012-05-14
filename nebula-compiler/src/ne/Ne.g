@@ -42,12 +42,16 @@ options {
 
 typeDefinition returns[Type type]: 'type' ID{type = new Type($ID.text);} '{' fieldDefinition[type]* '}' ';';
 fieldDefinition[Type resideType] returns[Field field]
-    :   i=fieldImportance
+    :   imp=fieldImportance
+        inline=inlineDefinition
         name=ID  { field = new Field(resideType,$name.text); }
         (type=ID { field.type = resolveType($type.text); } 
            | {field.type = resolveType(field.name);} )
         ';'{
-            field.importance = i;
+            field.importance = imp;
+            if(inline!=""){
+                field.inline = inline;
+            }
             resideType.fields.add(field);
           }
         ;
@@ -58,6 +62,12 @@ fieldImportance returns[String v]
       | '#'{v=Field.REQUIRE;} 
       | '?'{v=Field.UNIMPORTANT;}
       |    {v=Field.REQUIRE;}
+    ;
+
+inlineDefinition returns[String v] 
+    :   '@'{v=Field.INLINE;} 
+        |'%'{v=Field.CASCADE;} 
+        |{v="";}
     ;
 
 // *************   END  :  BASIC   *************

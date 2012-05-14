@@ -3,10 +3,10 @@ package ne;
 
 public class Field {
 
-    public static final String Scala = "Scala";
-    public static final String Inline = "Inline";
-    public static final String Reference = "Reference";
-    public static final String Cascade = "Cascade";
+    public static final String SCALA = "Scala";
+    public static final String INLINE = "Inline";
+    public static final String REFERENCE = "Reference";
+    public static final String CASCADE = "Cascade";
 
     public static final String KEY = "Key";
     public static final String CORE = "Core";
@@ -17,6 +17,7 @@ public class Field {
     final String name;
     String displayName;
     String importance = UNIMPORTANT;
+    String inline="";
 
     final Type resideType;
     boolean array = false;
@@ -24,14 +25,14 @@ public class Field {
     int to = -1;
     
     Type type;
-    String type_name;
+    String _typeName;
 
     public String getType_name() {
-		return type_name;
+		return _typeName;
 	}
 
 	public void setType_name(String type_name) {
-		this.type_name = type_name;
+		this._typeName = type_name;
 	}
 
 	String refer;

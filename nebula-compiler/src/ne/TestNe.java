@@ -160,4 +160,51 @@ public class TestNe extends TestCase {
 		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
 		assertEquals("Age", type.fields.get(i).type.name);
 	}
+	
+
+	public void test_type_inline() throws Exception {
+		//@formatter:off
+		String text = "" +
+				"type Person { \n" +
+				"	!Name Text;\n" +
+				"	Sex;\n" +
+				"	@Length;\n" +
+				"	!%Height;\n" +
+				"	Age;\n" +
+				"};";
+		//@formatter:on
+		NeParser parser = loadFromString(text);
+		Type type = parser.typeDefinition();
+		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
+		
+		assertEquals("Person", type.name);
+
+		assertEquals(5, type.fields.size());
+		int i=0;
+		
+		assertEquals("Name", type.fields.get(i).name);
+		assertEquals(Field.KEY, type.fields.get(i).importance);
+		assertEquals("Text", type.fields.get(i).type.name);
+
+		++i;
+		assertEquals("Sex", type.fields.get(i).name);
+		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
+		assertEquals("Sex", type.fields.get(i).type.name);
+		assertEquals("", type.fields.get(i).inline);
+
+		++i;
+		assertEquals("Length", type.fields.get(i).name);
+		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
+		assertEquals(Field.INLINE, type.fields.get(i).inline);
+
+		++i;
+		assertEquals("Height", type.fields.get(i).name);
+		assertEquals(Field.KEY, type.fields.get(i).importance);
+		assertEquals(Field.CASCADE, type.fields.get(i).inline);
+
+		++i;
+		assertEquals("Age", type.fields.get(i).name);
+		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
+		assertEquals("Age", type.fields.get(i).type.name);
+	}
 }
