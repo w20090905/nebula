@@ -39,7 +39,6 @@ options {
   }
 }
 
-
 typeDefinition returns[Type type]: 'type' ID{type = new Type($ID.text);} '{' fieldDefinition[type]* '}' ';';
 fieldDefinition[Type resideType] returns[Field field]
     :   imp=fieldImportance
@@ -57,17 +56,25 @@ fieldDefinition[Type resideType] returns[Field field]
         ;
 
 fieldImportance returns[String v] 
-    :   '!'{v=Field.KEY;} 
-      | '*'{v=Field.CORE;} 
-      | '#'{v=Field.REQUIRE;} 
-      | '?'{v=Field.UNIMPORTANT;}
-      |    {v=Field.REQUIRE;}
+    :   '!' {v=Field.KEY;} 
+      | '*' {v=Field.CORE;} 
+      | '#' {v=Field.REQUIRE;} 
+      | '?' {v=Field.UNIMPORTANT;}
+      |     {v=Field.REQUIRE;}
     ;
 
 inlineDefinition returns[String v] 
-    :   '@'{v=Field.INLINE;} 
-        |'%'{v=Field.CASCADE;} 
-        |{v="";}
+    :   '&' {v=Field.INLINE;} 
+      | '%' {v=Field.CASCADE;} 
+      |     {v="";}
+    ;
+    
+arrayDefinition
+    :  ('[' (
+            (INT ('..' INT)?)
+            | ('..' INT?)
+        ) ']')
+        |
     ;
 
 // *************   END  :  BASIC   *************
