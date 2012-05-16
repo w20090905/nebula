@@ -44,13 +44,21 @@ fieldDefinition[Type resideType] returns[Field field]
     :   imp=fieldImportance
         inline=inlineDefinition
         name=ID  { field = new Field(resideType,$name.text); }
+        range=arrayDefinition
         (type=ID { field.type = resolveType($type.text); } 
            | {field.type = resolveType(field.name);} )
         ';'{
             field.importance = imp;
             if(inline!=""){
-                field.inline = inline;
+                field.refer = inline;
             }
+            if(range.from!=null){
+                field.rangeFrom = Integer.parseInt(range.from);
+            }
+            if(range.to!=null){
+                field.rangeTo = Integer.parseInt(range.to);
+            }
+            
             resideType.fields.add(field);
           }
         ;
@@ -69,14 +77,16 @@ inlineDefinition returns[String v]
       |     {v="";}
     ;
     
-arrayDefinition
-    :  ('[' (
-            (INT ('..' INT)?)
-            | ('..' INT?)
+arrayDefinition returns[String from,String to]
+    :  '[]'
+        |  ( '[' (
+            ('..' rangeTo=INT? {$to=$rangeTo.text;})
+            | (rangeFrom=INT ('..' rangeTo=INT?)? {$from=$rangeFrom.text;$to=$rangeTo.text;})
+            |
         ) ']')
         |
     ;
-
+//{$from=$rangeFrom.text;$to=$rangeTo.text;})
 // *************   END  :  BASIC   *************
 
 

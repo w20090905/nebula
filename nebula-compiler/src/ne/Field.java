@@ -17,12 +17,11 @@ public class Field {
     final String name;
     String displayName;
     String importance = UNIMPORTANT;
-    String inline="";
 
     final Type resideType;
     boolean array = false;
-    int from = 0;
-    int to = -1;
+    int rangeFrom = 0;
+    int rangeTo = Integer.MAX_VALUE;
     
     Type type;
     String _typeName;
@@ -68,22 +67,6 @@ public class Field {
 		this.array = array;
 	}
 
-	public int getFrom() {
-		return from;
-	}
-
-	public void setFrom(int from) {
-		this.from = from;
-	}
-
-	public int getTo() {
-		return to;
-	}
-
-	public void setTo(int to) {
-		this.to = to;
-	}
-
 	public Type getType() {
 		return type;
 	}
@@ -113,7 +96,6 @@ public class Field {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Field [name=").append(name).append(", displayName=").append(displayName)
 				.append(", importance=").append(importance).append(", array=").append(array).append(", from=")
-				.append(from).append(", to=").append(to).append(", type=").append(type).append(", refer=")
 				.append(refer).append("]");
 		return builder.toString();
 	}
