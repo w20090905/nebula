@@ -232,12 +232,14 @@ public class TestNe extends TestCase {
 		assertEquals("Name", type.fields.get(i).name);
 		assertEquals(Field.KEY, type.fields.get(i).importance);
 		assertEquals("Text", type.fields.get(i).type.name);
+		assertEquals(false, type.fields.get(i).array);
 
 		++i;
 		assertEquals("Sex", type.fields.get(i).name);
 		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
 		assertEquals(1, type.fields.get(i).rangeFrom);
 		assertEquals(Integer.MAX_VALUE, type.fields.get(i).rangeTo);
+		assertEquals(true, type.fields.get(i).array);
 
 		++i;
 		assertEquals("Length", type.fields.get(i).name);
@@ -245,6 +247,7 @@ public class TestNe extends TestCase {
 		assertEquals(Field.INLINE, type.fields.get(i).refer);
 		assertEquals(0, type.fields.get(i).rangeFrom);
 		assertEquals(Integer.MAX_VALUE, type.fields.get(i).rangeTo);
+		assertEquals(true, type.fields.get(i).array);
 
 		++i;
 		assertEquals("Height", type.fields.get(i).name);
@@ -252,6 +255,7 @@ public class TestNe extends TestCase {
 		assertEquals(Field.CASCADE, type.fields.get(i).refer);
 		assertEquals(1, type.fields.get(i).rangeFrom);
 		assertEquals(5, type.fields.get(i).rangeTo);
+		assertEquals(true, type.fields.get(i).array);
 
 		++i;
 		assertEquals("Age", type.fields.get(i).name);
@@ -259,5 +263,6 @@ public class TestNe extends TestCase {
 		assertEquals("Age", type.fields.get(i).type.name);
 		assertEquals(0, type.fields.get(i).rangeFrom);
 		assertEquals(5, type.fields.get(i).rangeTo);
+		assertEquals(true, type.fields.get(i).array);
 	}
 }

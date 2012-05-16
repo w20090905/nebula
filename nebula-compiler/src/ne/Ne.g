@@ -52,13 +52,22 @@ fieldDefinition[Type resideType] returns[Field field]
             if(inline!=""){
                 field.refer = inline;
             }
-            if(range.from!=null){
+            if(range.from=="f"){
+            }else if(range.from!=null){
                 field.rangeFrom = Integer.parseInt(range.from);
-            }
-            if(range.to!=null){
-                field.rangeTo = Integer.parseInt(range.to);
+                field.array = true;                
+            }else{
+                field.array = true;
             }
             
+            if(range.to=="f"){
+            }else if(range.to!=null){
+                field.rangeTo = Integer.parseInt(range.to);
+                field.array = true;                
+            }else{
+                field.array = true;
+            }
+                        
             resideType.fields.add(field);
           }
         ;
@@ -84,9 +93,9 @@ arrayDefinition returns[String from,String to]
             | (rangeFrom=INT ('..' rangeTo=INT?)? {$from=$rangeFrom.text;$to=$rangeTo.text;})
             |
         ) ']')
-        |
+        | {$from = "f";$to = "f";}
     ;
-//{$from=$rangeFrom.text;$to=$rangeTo.text;})
+    
 // *************   END  :  BASIC   *************
 
 
