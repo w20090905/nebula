@@ -8,6 +8,8 @@ package ne;
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/tpantlr for more book information.
  ***/
+import java.math.BigDecimal;
+
 import junit.framework.TestCase;
 
 import org.antlr.runtime.ANTLRStringStream;
@@ -21,19 +23,18 @@ public class TestNe extends TestCase {
 		return parse(new ANTLRStringStream(code));
 	}
 
-//	private NeParser loadFromFile(String filename) throws Exception {
-//		return parse(new ANTLRFileStream(filename));
-//	}
+	// private NeParser loadFromFile(String filename) throws Exception {
+	// return parse(new ANTLRFileStream(filename));
+	// }
 
 	private NeParser parse(CharStream stream) throws Exception {
+		TypeLoader loader = new FolderTypeLoader("nesrc", new SystemTypeLoader());
 		NeLexer assemblerLexer = new NeLexer(stream);
 		CommonTokenStream tokens = new CommonTokenStream(assemblerLexer);
 		sb.setLength(0);
-		NeParser parser = new NeParser(tokens);
-
+		NeParser parser = new NeParser(tokens, loader);
 		return parser;
 	}
-
 
 	public void test_type_1() throws Exception {
 		//@formatter:off
@@ -45,12 +46,13 @@ public class TestNe extends TestCase {
 		NeParser parser = loadFromString(text);
 		Type type = parser.typeDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
-		
+
 		assertEquals("Person", type.name);
 
 		assertEquals(1, type.fields.size());
 		assertEquals("Name", type.fields.get(0).name);
 	}
+
 	public void test_type_with_importance() throws Exception {
 		//@formatter:off
 		String text = "" +
@@ -65,7 +67,7 @@ public class TestNe extends TestCase {
 		NeParser parser = loadFromString(text);
 		Type type = parser.typeDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
-		
+
 		assertEquals("Person", type.name);
 
 		assertEquals(5, type.fields.size());
@@ -75,7 +77,7 @@ public class TestNe extends TestCase {
 		assertEquals("NameUnimportance", type.fields.get(3).name);
 		assertEquals("NameRequire", type.fields.get(4).name);
 	}
-	
+
 	public void test_type_with_importance_2() throws Exception {
 		//@formatter:off
 		String text = "" +
@@ -90,14 +92,14 @@ public class TestNe extends TestCase {
 		NeParser parser = loadFromString(text);
 		Type type = parser.typeDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
-		
+
 		assertEquals("Person", type.name);
 
 		assertEquals(5, type.fields.size());
-		int i=0;
+		int i = 0;
 		assertEquals("Name", type.fields.get(i).name);
 		assertEquals(Field.KEY, type.fields.get(i).importance);
-		
+
 		++i;
 		assertEquals("Sex", type.fields.get(i).name);
 		assertEquals(Field.CORE, type.fields.get(i).importance);
@@ -113,9 +115,8 @@ public class TestNe extends TestCase {
 		++i;
 		assertEquals("Age", type.fields.get(i).name);
 		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
-		
-	}
 
+	}
 
 	public void test_type_inline() throws Exception {
 		//@formatter:off
@@ -131,12 +132,12 @@ public class TestNe extends TestCase {
 		NeParser parser = loadFromString(text);
 		Type type = parser.typeDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
-		
+
 		assertEquals("Person", type.name);
 
 		assertEquals(5, type.fields.size());
-		int i=0;
-		
+		int i = 0;
+
 		assertEquals("Name", type.fields.get(i).name);
 		assertEquals(Field.KEY, type.fields.get(i).importance);
 		assertEquals("Text", type.fields.get(i).type.name);
@@ -162,6 +163,7 @@ public class TestNe extends TestCase {
 		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
 		assertEquals("Age", type.fields.get(i).type.name);
 	}
+
 	public void test_type_type() throws Exception {
 		//@formatter:off
 		String text = "" +
@@ -176,12 +178,12 @@ public class TestNe extends TestCase {
 		NeParser parser = loadFromString(text);
 		Type type = parser.typeDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
-		
+
 		assertEquals("Person", type.name);
 
 		assertEquals(5, type.fields.size());
-		int i=0;
-		
+		int i = 0;
+
 		assertEquals("Name", type.fields.get(i).name);
 		assertEquals(Field.KEY, type.fields.get(i).importance);
 		assertEquals("Text", type.fields.get(i).type.name);
@@ -206,7 +208,6 @@ public class TestNe extends TestCase {
 		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
 		assertEquals("Age", type.fields.get(i).type.name);
 	}
-	
 
 	public void test_type_array() throws Exception {
 		//@formatter:off
@@ -223,12 +224,12 @@ public class TestNe extends TestCase {
 		NeParser parser = loadFromString(text);
 		Type type = parser.typeDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
-		
+
 		assertEquals("Person", type.name);
 
 		assertEquals(5, type.fields.size());
-		int i=0;
-		
+		int i = 0;
+
 		assertEquals("Name", type.fields.get(i).name);
 		assertEquals(Field.KEY, type.fields.get(i).importance);
 		assertEquals("Text", type.fields.get(i).type.name);
@@ -264,5 +265,52 @@ public class TestNe extends TestCase {
 		assertEquals(0, type.fields.get(i).rangeFrom);
 		assertEquals(5, type.fields.get(i).rangeTo);
 		assertEquals(true, type.fields.get(i).array);
+	}
+
+	public void test_type_attr() throws Exception {
+		//@formatter:off
+		String text = "" +
+				"type Name { \n" +
+				"	@length=1;" +
+				"	@match=\"dd\";" +
+				"	@max=3.8;" +
+				"	Age;" +
+				"};";
+		//@formatter:on
+
+		NeParser parser = loadFromString(text);
+		Type type = parser.typeDefinition();
+		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
+
+		assertEquals("Name", type.name);
+
+		assertEquals(1, type.fields.size());
+		int i = 0;
+		assertEquals("Age", type.fields.get(i).name);
+
+		assertEquals(3, type.attrs.size());
+		assertEquals(1, type.attrs.get("length"));
+		assertEquals("dd", type.attrs.get("match"));
+		assertEquals(new BigDecimal("3.8"), type.attrs.get("max"));
+	}
+
+	public void test_type_extends() throws Exception {
+		//@formatter:off
+		String text = "" +
+				"type Name : String { \n" +
+				"	@MaxLength=120;\n" +
+				"};";
+		//@formatter:on
+
+		NeParser parser = loadFromString(text);
+		Type type = parser.typeDefinition();
+		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
+
+		assertEquals("Name", type.name);
+		assertEquals("String", type.superType.name);
+
+		assertEquals(0, type.fields.size());
+		int i = 0;
+		assertEquals(new Integer("120"), type.attrs.get("MaxLength"));
 	}
 }

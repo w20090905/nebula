@@ -2,7 +2,7 @@ type Person {
 	Name!				Text;
 	@Company*				;
 	BirthdayDay#					;
-	Age = Today.year - BirthdayDay.year;
+	/*Age = Today.year - BirthdayDay.year;*/
 	Alias?					;
 	Roles1[]				;	
 	Roles2[1..]				;	

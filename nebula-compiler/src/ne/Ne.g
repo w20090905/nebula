@@ -6,24 +6,20 @@ options {
 
 @header {
     package ne;
-
-    import java.util.HashMap;
-    import java.util.Map;
+    import java.math.BigDecimal;
 }
 @lexer::header{
     package ne;
 }
 
 @members {
-    Map<String,Type> types = new HashMap<>();
-    
+    TypeLoader loader;
+    public NeParser(TokenStream input,TypeLoader loader) {
+        this(input);
+        this.loader = loader;
+    }
     protected Type resolveType(String name){
-        Type type =  types.get(name);
-        if(type==null){
-            types.put(name,new Type(name));
-            type =  types.get(name);
-        }
-        return type;
+        return loader.findType(name);
     }
 
     protected void info(String str) {
@@ -39,7 +35,20 @@ options {
   }
 }
 
-typeDefinition returns[Type type]: 'type' ID{type = new Type($ID.text);} '{' fieldDefinition[type]* '}' ';';
+typeDefinition returns[Type type]
+    :   'type' typeID=ID 
+        (':' superTypeID=ID)? { 
+            if($superTypeID==null){
+                type = new Type($typeID.text);
+            }else{
+                type = new Type($typeID.text,resolveType($superTypeID.text)); 
+           } 
+        }
+        '{' 
+            ('@' attrDefinition[type] ';')* 
+            fieldDefinition[type]* 
+        '}' ';';
+
 fieldDefinition[Type resideType] returns[Field field]
     :   imp=fieldImportance
         inline=inlineDefinition
@@ -96,9 +105,29 @@ arrayDefinition returns[String from,String to]
         | {$from = "f";$to = "f";}
     ;
     
+attrDefinition[Type resideType]
+    :   ID '=' (
+        INT         {resideType.attrs.put($ID.text,new Integer($INT.text));} 
+        | STRING    {resideType.attrs.put($ID.text,$STRING.text.substring(1,$STRING.text.length()-1));} 
+        | decimal   {resideType.attrs.put($ID.text,new BigDecimal($decimal.text));}
+        )
+    ;
+    
+decimal
+    :   INT '.' INT*
+        | '.' INT+
+    ;
+    
+    
+    
 // *************   END  :  BASIC   *************
 
+STRING : CHAR_ | STRING_; 
 
+fragment CHAR_:   '\'' d=. '\'' ;
+
+fragment STRING_: '\"' .* '\"' ;
+    
 ID :  Letter (Letter | Digit)*;  
 INT :  Digit Digit*;
 fragment Digit :  '0'..'9';

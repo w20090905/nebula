@@ -1,7 +1,9 @@
 package ne;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class Type {
@@ -24,12 +26,23 @@ public class Type {
 
     List<Field> fields;
 
+    Map<String,Object> attrs = new HashMap<>();
     // Type declaringType;
+    
+    Type superType;
 
-    public Type(String name) {
+    Type(String name) {
         super();
         this.name = name;
 
+        this.fields = new ArrayList<Field>();
+    }
+    
+    Type(String name,Type superType) {
+        super();
+        this.superType = superType;
+        
+        this.name = name;
         this.fields = new ArrayList<Field>();
     }
 
