@@ -39,7 +39,7 @@ typeDefinition returns[Type type]
     :   'type' typeID=ID 
         (':' superTypeID=ID)? { 
             if($superTypeID==null){
-                type = new Type($typeID.text);
+                type = new Type($typeID.text,Type.ENTITY);
             }else{
                 type = new Type($typeID.text,resolveType($superTypeID.text)); 
            } 

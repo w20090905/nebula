@@ -294,7 +294,7 @@ public class TestNe extends TestCase {
 		assertEquals(new BigDecimal("3.8"), type.attrs.get("max"));
 	}
 
-	public void test_type_extends() throws Exception {
+	public void test_buildin_extends() throws Exception {
 		//@formatter:off
 		String text = "" +
 				"type Name : String { \n" +
@@ -310,7 +310,6 @@ public class TestNe extends TestCase {
 		assertEquals("String", type.superType.name);
 
 		assertEquals(0, type.fields.size());
-		int i = 0;
 		assertEquals(new Integer("120"), type.attrs.get("MaxLength"));
 	}
 }

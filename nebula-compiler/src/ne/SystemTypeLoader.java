@@ -4,16 +4,29 @@ import java.io.InputStream;
 
 public class SystemTypeLoader extends TypeLoader {
 
-	public SystemTypeLoader(){
+	public SystemTypeLoader() {
 		super(null);
-		this.types.put("BuildInType", new Type("BuildInType"));
-		this.types.put("String", new Type("String",types.get("BuildInType")));
-		this.types.put("Number", new Type("String",types.get("BuildInType")));
-		this.types.put("Int", new Type("String",types.get("Number")));
-		this.types.put("Decimal", new Type("String",types.get("Number")));
-		this.types.put("Entity", new Type("Entity"));
+
+		init();
 	}
-	
+
+	private void init() {
+		Type entity = Type.ENTITY;
+		
+		Type buildInType = Type.BUILDERINTYPE;
+		Type string = new Type("String", buildInType,"String");
+		Type number = new Type("String", buildInType);
+		Type typeInt = new Type("String", number,"BigDecimal");
+		Type decimal = new Type("String", number,"Integer");
+
+		this.types.put("BuildInType", buildInType);
+		this.types.put("String", string);
+		this.types.put("Number", number);
+		this.types.put("Int", typeInt);
+		this.types.put("Decimal", decimal);
+		this.types.put("Entity", entity);
+	}
+
 	@Override
 	public Type findType(String name) {
 		return this.types.get(name);

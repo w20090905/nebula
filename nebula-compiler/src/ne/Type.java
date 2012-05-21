@@ -29,18 +29,36 @@ public class Type {
     Map<String,Object> attrs = new HashMap<>();
     // Type declaringType;
     
-    Type superType;
+    final Type superType;    
+    final String rawType;
 
-    Type(String name) {
+    static Type BUILDERINTYPE = new Type("BuildInType");
+    static Type ENTITY = new Type("ENTITY");
+    
+    
+    
+    private Type(String name) {
         super();
         this.name = name;
-
-        this.fields = new ArrayList<Field>();
+        superType = null;
+        rawType = null;
+        
+        //this.fields = new ArrayList<Field>();
     }
     
     Type(String name,Type superType) {
         super();
         this.superType = superType;
+        this.rawType = superType.rawType;
+        
+        this.name = name;
+        this.fields = new ArrayList<Field>();
+    }
+    
+    Type(String name,Type superType,String rawType) {
+        super();
+        this.superType = superType;
+        this.rawType = rawType;
         
         this.name = name;
         this.fields = new ArrayList<Field>();
