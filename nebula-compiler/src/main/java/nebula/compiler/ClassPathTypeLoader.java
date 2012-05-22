@@ -9,6 +9,10 @@ public class ClassPathTypeLoader extends TypeLoader {
 		super(parent);
 	}
 
+	public ClassPathTypeLoader() {
+		super(new SystemTypeLoader());
+	}
+
 	@Override
 	protected InputStream loadClassData(String name) {
 		ClassLoader clzLoader = this.getClass().getClassLoader();

@@ -12,14 +12,6 @@ import java.math.BigDecimal;
 
 import junit.framework.TestCase;
 
-import nebula.compiler.ClassPathTypeLoader;
-import nebula.compiler.Field;
-import nebula.compiler.NeLexer;
-import nebula.compiler.NeParser;
-import nebula.compiler.SystemTypeLoader;
-import nebula.compiler.Type;
-import nebula.compiler.TypeLoader;
-
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -27,20 +19,20 @@ import org.antlr.runtime.CommonTokenStream;
 public class NebulaParserAdvTest extends TestCase {
 	final StringBuilder sb = new StringBuilder();
 
-	private NeParser loadFromString(String code) throws Exception {
+	private NebulaParser loadFromString(String code) throws Exception {
 		return parse(new ANTLRStringStream(code));
 	}
 
-	// private NeParser loadFromFile(String filename) throws Exception {
+	// private NebulaParser loadFromFile(String filename) throws Exception {
 	// return parse(new ANTLRFileStream(filename));
 	// }
 
-	private NeParser parse(CharStream stream) throws Exception {
+	private NebulaParser parse(CharStream stream) throws Exception {
 		TypeLoader loader = new ClassPathTypeLoader(new SystemTypeLoader());
-		NeLexer assemblerLexer = new NeLexer(stream);
+		NebulaLexer assemblerLexer = new NebulaLexer(stream);
 		CommonTokenStream tokens = new CommonTokenStream(assemblerLexer);
 		sb.setLength(0);
-		NeParser parser = new NeParser(tokens, loader);
+		NebulaParser parser = new NebulaParser(tokens, loader);
 		return parser;
 	}
 
@@ -51,7 +43,7 @@ public class NebulaParserAdvTest extends TestCase {
 				"	Name;" +
 				"};";
 		//@formatter:on		
-		NeParser parser = loadFromString(text);
+		NebulaParser parser = loadFromString(text);
 		Type type = parser.typeDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
 
@@ -72,7 +64,7 @@ public class NebulaParserAdvTest extends TestCase {
 				"	Age;\n" +
 				"};";
 		//@formatter:on		
-		NeParser parser = loadFromString(text);
+		NebulaParser parser = loadFromString(text);
 		Type type = parser.typeDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
 
@@ -112,7 +104,7 @@ public class NebulaParserAdvTest extends TestCase {
 				"	Age;\n" +
 				"};";
 		//@formatter:on
-		NeParser parser = loadFromString(text);
+		NebulaParser parser = loadFromString(text);
 		Type type = parser.typeDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
 
@@ -158,7 +150,7 @@ public class NebulaParserAdvTest extends TestCase {
 				"	Age;\n" +
 				"};";
 		//@formatter:on
-		NeParser parser = loadFromString(text);
+		NebulaParser parser = loadFromString(text);
 		Type type = parser.typeDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
 
@@ -204,7 +196,7 @@ public class NebulaParserAdvTest extends TestCase {
 				"};";
 
 		//@formatter:on
-		NeParser parser = loadFromString(text);
+		NebulaParser parser = loadFromString(text);
 		Type type = parser.typeDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
 
@@ -261,7 +253,7 @@ public class NebulaParserAdvTest extends TestCase {
 				"};";
 		//@formatter:on
 
-		NeParser parser = loadFromString(text);
+		NebulaParser parser = loadFromString(text);
 		Type type = parser.typeDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
 
@@ -285,7 +277,7 @@ public class NebulaParserAdvTest extends TestCase {
 				"};";
 		//@formatter:on
 
-		NeParser parser = loadFromString(text);
+		NebulaParser parser = loadFromString(text);
 		Type type = parser.typeDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
 
