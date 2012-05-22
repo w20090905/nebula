@@ -55,6 +55,9 @@ public abstract class TypeLoader {
 			CommonTokenStream tokens = new CommonTokenStream(assemblerLexer);
 			NebulaParser parser = new NebulaParser(tokens, this);
 			Type type = parser.typeDefinition();
+			if(parser.getNumberOfSyntaxErrors() >0){
+				throw new NebulaRuntimeException("Parser ERROR!");				
+			}
 			return type;
 		} catch (RecognitionException e) {
 			throw new NebulaRuntimeException(e);
