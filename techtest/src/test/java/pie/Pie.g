@@ -12,6 +12,12 @@ tokens {
 	MUL='*'; EQ='=='; LT='<'; STRUCT='struct'; DOT='.'; NEW='new';
 	}
 
+@header {
+    package pie;
+}
+@lexer::header{
+    package pie;
+}
 @members {
     Interpreter interp;
     Scope currentScope;

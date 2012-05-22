@@ -9,7 +9,6 @@ import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 
-//TODO fix file loader sequence error
 public abstract class TypeLoader {
 	TypeLoader parent;
 
@@ -21,9 +20,9 @@ public abstract class TypeLoader {
 
 	protected final Type defineNebula(String name, InputStream is) {
 		try {
-			NeLexer assemblerLexer = new NeLexer(new ANTLRInputStream(is));
+			NebulaLexer assemblerLexer = new NebulaLexer(new ANTLRInputStream(is));
 			CommonTokenStream tokens = new CommonTokenStream(assemblerLexer);
-			NeParser parser = new NeParser(tokens, this);
+			NebulaParser parser = new NebulaParser(tokens, this);
 			Type type = parser.typeDefinition();
 			return type;
 		} catch (RecognitionException e) {

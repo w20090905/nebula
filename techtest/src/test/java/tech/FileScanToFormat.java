@@ -4,12 +4,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.LineNumberReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Pattern;
-
-import nebula.compiler.InputCharStream;
 
 public class FileScanToFormat {
 	public static void main(String[] args) {
@@ -54,7 +49,7 @@ public class FileScanToFormat {
 		String indentSpace = "";
 		String leadNum = "";
 
-		int cntLine = 0;
+//		int cntLine = 0;
 		boolean newLined = false;
 		try {
 			OutterWhile: while (true) {

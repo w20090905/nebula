@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g 2012-05-22 10:42:18
+// $ANTLR 3.4 D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g 2012-05-22 14:41:57
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -40,15 +40,15 @@ public class AssemblerLexer extends Lexer {
     public AssemblerLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
     }
-    public String getGrammarFileName() { return "D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g"; }
+    public String getGrammarFileName() { return "D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g"; }
 
     // $ANTLR start "T__15"
     public final void mT__15() throws RecognitionException {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:2:7: ( ',' )
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:2:9: ','
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:2:7: ( ',' )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:2:9: ','
             {
             match(','); 
 
@@ -68,8 +68,8 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:3:7: ( '.def' )
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:3:9: '.def'
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:3:7: ( '.def' )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:3:9: '.def'
             {
             match(".def"); 
 
@@ -91,8 +91,8 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:4:7: ( '.globals' )
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:4:9: '.globals'
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:4:7: ( '.globals' )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:4:9: '.globals'
             {
             match(".globals"); 
 
@@ -114,8 +114,8 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:5:7: ( ':' )
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:5:9: ':'
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:5:7: ( ':' )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:5:9: ':'
             {
             match(':'); 
 
@@ -135,8 +135,8 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:6:7: ( '=' )
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:6:9: '='
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:6:7: ( '=' )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:6:9: '='
             {
             match('='); 
 
@@ -156,8 +156,8 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:7:7: ( 'args' )
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:7:9: 'args'
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:7:7: ( 'args' )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:7:9: 'args'
             {
             match("args"); 
 
@@ -179,8 +179,8 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:8:7: ( 'locals' )
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:8:9: 'locals'
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:8:7: ( 'locals' )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:8:9: 'locals'
             {
             match("locals"); 
 
@@ -202,8 +202,8 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = REG;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:71:5: ( 'r' INT )
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:71:9: 'r' INT
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:71:5: ( 'r' INT )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:71:9: 'r' INT
             {
             match('r'); 
 
@@ -226,13 +226,13 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:73:5: ( LETTER ( LETTER | '0' .. '9' )* )
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:73:9: LETTER ( LETTER | '0' .. '9' )*
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:73:5: ( LETTER ( LETTER | '0' .. '9' )* )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:73:9: LETTER ( LETTER | '0' .. '9' )*
             {
             mLETTER(); 
 
 
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:73:16: ( LETTER | '0' .. '9' )*
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:73:16: ( LETTER | '0' .. '9' )*
             loop1:
             do {
                 int alt1=2;
@@ -245,7 +245,7 @@ public class AssemblerLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:
+            	    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:
             	    {
             	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
             	        input.consume();
@@ -284,8 +284,8 @@ public class AssemblerLexer extends Lexer {
             int _channel = DEFAULT_TOKEN_CHANNEL;
             CommonToken ID1=null;
 
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:75:5: ( ID '()' )
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:75:9: ID '()'
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:75:5: ( ID '()' )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:75:9: ID '()'
             {
             int ID1Start104 = getCharIndex();
             int ID1StartLine104 = getLine();
@@ -316,8 +316,8 @@ public class AssemblerLexer extends Lexer {
     // $ANTLR start "LETTER"
     public final void mLETTER() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:80:5: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:80:5: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -344,10 +344,10 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:82:5: ( ( '-' )? ( '0' .. '9' )+ )
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:82:9: ( '-' )? ( '0' .. '9' )+
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:82:5: ( ( '-' )? ( '0' .. '9' )+ )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:82:9: ( '-' )? ( '0' .. '9' )+
             {
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:82:9: ( '-' )?
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:82:9: ( '-' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -356,7 +356,7 @@ public class AssemblerLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:82:9: '-'
+                    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:82:9: '-'
                     {
                     match('-'); 
 
@@ -366,7 +366,7 @@ public class AssemblerLexer extends Lexer {
             }
 
 
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:82:14: ( '0' .. '9' )+
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:82:14: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -380,7 +380,7 @@ public class AssemblerLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:
+            	    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:
             	    {
             	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
             	        input.consume();
@@ -421,8 +421,8 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = CHAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:84:5: ( '\\'' . '\\'' )
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:84:9: '\\'' . '\\''
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:84:5: ( '\\'' . '\\'' )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:84:9: '\\'' . '\\''
             {
             match('\''); 
 
@@ -448,8 +448,8 @@ public class AssemblerLexer extends Lexer {
             int _channel = DEFAULT_TOKEN_CHANNEL;
             CommonToken STR_CHARS2=null;
 
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:86:7: ( '\\\"' STR_CHARS '\\\"' )
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:86:9: '\\\"' STR_CHARS '\\\"'
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:86:7: ( '\\\"' STR_CHARS '\\\"' )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:86:9: '\\\"' STR_CHARS '\\\"'
             {
             match('\"'); 
 
@@ -480,10 +480,10 @@ public class AssemblerLexer extends Lexer {
     // $ANTLR start "STR_CHARS"
     public final void mSTR_CHARS() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:88:20: ( (~ '\"' )* )
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:88:22: (~ '\"' )*
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:88:20: ( (~ '\"' )* )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:88:22: (~ '\"' )*
             {
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:88:22: (~ '\"' )*
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:88:22: (~ '\"' )*
             loop4:
             do {
                 int alt4=2;
@@ -496,7 +496,7 @@ public class AssemblerLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:
+            	    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:
             	    {
             	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '\uFFFF') ) {
             	        input.consume();
@@ -532,7 +532,7 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = FLOAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:91:5: ( INT '.' ( INT )* | '.' ( INT )+ )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:91:5: ( INT '.' ( INT )* | '.' ( INT )+ )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -551,14 +551,14 @@ public class AssemblerLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:91:9: INT '.' ( INT )*
+                    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:91:9: INT '.' ( INT )*
                     {
                     mINT(); 
 
 
                     match('.'); 
 
-                    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:91:17: ( INT )*
+                    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:91:17: ( INT )*
                     loop5:
                     do {
                         int alt5=2;
@@ -571,7 +571,7 @@ public class AssemblerLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:91:17: INT
+                    	    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:91:17: INT
                     	    {
                     	    mINT(); 
 
@@ -588,11 +588,11 @@ public class AssemblerLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:92:9: '.' ( INT )+
+                    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:92:9: '.' ( INT )+
                     {
                     match('.'); 
 
-                    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:92:13: ( INT )+
+                    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:92:13: ( INT )+
                     int cnt6=0;
                     loop6:
                     do {
@@ -606,7 +606,7 @@ public class AssemblerLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:92:13: INT
+                    	    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:92:13: INT
                     	    {
                     	    mINT(); 
 
@@ -642,10 +642,10 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:95:5: ( ( ' ' | '\\t' )+ )
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:95:9: ( ' ' | '\\t' )+
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:95:5: ( ( ' ' | '\\t' )+ )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:95:9: ( ' ' | '\\t' )+
             {
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:95:9: ( ' ' | '\\t' )+
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:95:9: ( ' ' | '\\t' )+
             int cnt8=0;
             loop8:
             do {
@@ -659,7 +659,7 @@ public class AssemblerLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:
+            	    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:
             	    {
             	    if ( input.LA(1)=='\t'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -702,10 +702,10 @@ public class AssemblerLexer extends Lexer {
         try {
             int _type = NEWLINE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:98:5: ( ( ';' ( . )* )? ( '\\r' )? '\\n' )
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:98:9: ( ';' ( . )* )? ( '\\r' )? '\\n'
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:98:5: ( ( ';' ( . )* )? ( '\\r' )? '\\n' )
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:98:9: ( ';' ( . )* )? ( '\\r' )? '\\n'
             {
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:98:9: ( ';' ( . )* )?
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:98:9: ( ';' ( . )* )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -714,11 +714,11 @@ public class AssemblerLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:98:10: ';' ( . )*
+                    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:98:10: ';' ( . )*
                     {
                     match(';'); 
 
-                    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:98:14: ( . )*
+                    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:98:14: ( . )*
                     loop9:
                     do {
                         int alt9=2;
@@ -737,7 +737,7 @@ public class AssemblerLexer extends Lexer {
 
                         switch (alt9) {
                     	case 1 :
-                    	    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:98:14: .
+                    	    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:98:14: .
                     	    {
                     	    matchAny(); 
 
@@ -756,7 +756,7 @@ public class AssemblerLexer extends Lexer {
             }
 
 
-            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:98:19: ( '\\r' )?
+            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:98:19: ( '\\r' )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -765,7 +765,7 @@ public class AssemblerLexer extends Lexer {
             }
             switch (alt11) {
                 case 1 :
-                    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:98:19: '\\r'
+                    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:98:19: '\\r'
                     {
                     match('\r'); 
 
@@ -789,12 +789,12 @@ public class AssemblerLexer extends Lexer {
     // $ANTLR end "NEWLINE"
 
     public void mTokens() throws RecognitionException {
-        // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:1:8: ( T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | REG | ID | FUNC | INT | CHAR | STRING | FLOAT | WS | NEWLINE )
+        // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:1:8: ( T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | REG | ID | FUNC | INT | CHAR | STRING | FLOAT | WS | NEWLINE )
         int alt12=16;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:1:10: T__15
+                // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:1:10: T__15
                 {
                 mT__15(); 
 
@@ -802,7 +802,7 @@ public class AssemblerLexer extends Lexer {
                 }
                 break;
             case 2 :
-                // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:1:16: T__16
+                // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:1:16: T__16
                 {
                 mT__16(); 
 
@@ -810,7 +810,7 @@ public class AssemblerLexer extends Lexer {
                 }
                 break;
             case 3 :
-                // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:1:22: T__17
+                // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:1:22: T__17
                 {
                 mT__17(); 
 
@@ -818,7 +818,7 @@ public class AssemblerLexer extends Lexer {
                 }
                 break;
             case 4 :
-                // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:1:28: T__18
+                // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:1:28: T__18
                 {
                 mT__18(); 
 
@@ -826,7 +826,7 @@ public class AssemblerLexer extends Lexer {
                 }
                 break;
             case 5 :
-                // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:1:34: T__19
+                // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:1:34: T__19
                 {
                 mT__19(); 
 
@@ -834,7 +834,7 @@ public class AssemblerLexer extends Lexer {
                 }
                 break;
             case 6 :
-                // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:1:40: T__20
+                // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:1:40: T__20
                 {
                 mT__20(); 
 
@@ -842,7 +842,7 @@ public class AssemblerLexer extends Lexer {
                 }
                 break;
             case 7 :
-                // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:1:46: T__21
+                // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:1:46: T__21
                 {
                 mT__21(); 
 
@@ -850,7 +850,7 @@ public class AssemblerLexer extends Lexer {
                 }
                 break;
             case 8 :
-                // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:1:52: REG
+                // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:1:52: REG
                 {
                 mREG(); 
 
@@ -858,7 +858,7 @@ public class AssemblerLexer extends Lexer {
                 }
                 break;
             case 9 :
-                // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:1:56: ID
+                // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:1:56: ID
                 {
                 mID(); 
 
@@ -866,7 +866,7 @@ public class AssemblerLexer extends Lexer {
                 }
                 break;
             case 10 :
-                // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:1:59: FUNC
+                // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:1:59: FUNC
                 {
                 mFUNC(); 
 
@@ -874,7 +874,7 @@ public class AssemblerLexer extends Lexer {
                 }
                 break;
             case 11 :
-                // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:1:64: INT
+                // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:1:64: INT
                 {
                 mINT(); 
 
@@ -882,7 +882,7 @@ public class AssemblerLexer extends Lexer {
                 }
                 break;
             case 12 :
-                // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:1:68: CHAR
+                // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:1:68: CHAR
                 {
                 mCHAR(); 
 
@@ -890,7 +890,7 @@ public class AssemblerLexer extends Lexer {
                 }
                 break;
             case 13 :
-                // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:1:73: STRING
+                // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:1:73: STRING
                 {
                 mSTRING(); 
 
@@ -898,7 +898,7 @@ public class AssemblerLexer extends Lexer {
                 }
                 break;
             case 14 :
-                // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:1:80: FLOAT
+                // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:1:80: FLOAT
                 {
                 mFLOAT(); 
 
@@ -906,7 +906,7 @@ public class AssemblerLexer extends Lexer {
                 }
                 break;
             case 15 :
-                // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:1:86: WS
+                // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:1:86: WS
                 {
                 mWS(); 
 
@@ -914,7 +914,7 @@ public class AssemblerLexer extends Lexer {
                 }
                 break;
             case 16 :
-                // D:\\Projects\\nebula\\techtest\\src\\test\\java\\assembler\\Assembler.g:1:89: NEWLINE
+                // D:\\Projects\\nebula\\techtest\\target\\test-classes\\assembler\\Assembler.g:1:89: NEWLINE
                 {
                 mNEWLINE(); 
 

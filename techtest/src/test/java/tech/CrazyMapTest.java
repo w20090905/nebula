@@ -20,7 +20,7 @@ public class CrazyMapTest extends TestCase {
 	}
 
 	public void testNewMapStringArray() {
-	    CrazyMap map = CrazyMap.newMap("name","sex","age");
+//	    CrazyMap map = CrazyMap.newMap("name","sex","age");
 	}
 
 	public void testCode() {
