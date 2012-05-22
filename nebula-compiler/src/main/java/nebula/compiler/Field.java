@@ -1,4 +1,4 @@
-package ne;
+package nebula.compiler;
 
 
 public class Field {

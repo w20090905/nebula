@@ -1,25 +1,30 @@
-grammar Ne;
+grammar Nebula;
 
 options {
   language = Java;
 }
 
 @header {
-    package ne;
+    package nebula.compiler;
     import java.math.BigDecimal;
 }
 @lexer::header{
-    package ne;
+    package nebula.compiler;
 }
 
 @members {
     TypeLoader loader;
-    public NeParser(TokenStream input,TypeLoader loader) {
+    public NebulaParser(TokenStream input,TypeLoader loader) {
         this(input);
         this.loader = loader;
     }
     protected Type resolveType(String name){
-        return loader.findType(name);
+        Type type = loader.findType(name);
+        if(type!=null){
+            return type;
+        } else {
+            throw new RuntimeException("Can't find type :" + name);
+        }
     }
 
     protected void info(String str) {

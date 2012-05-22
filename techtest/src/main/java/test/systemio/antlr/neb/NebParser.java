@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Projects\\nebula\\techtest\\target\\test-classes\\test\\systemio\\antlr\\neb\\Neb.g 2012-03-01 14:22:29
+// $ANTLR 3.4 D:\\Projects\\nebula\\techtest\\src\\test\\java\\test\\systemio\\antlr\\neb\\Neb.g 2012-05-22 10:42:15
 package test.systemio.antlr.neb;
 
 import org.antlr.runtime.*;
@@ -38,18 +38,18 @@ public class NebParser extends Parser {
     }
 
     public String[] getTokenNames() { return NebParser.tokenNames; }
-    public String getGrammarFileName() { return "D:\\Projects\\nebula\\techtest\\target\\test-classes\\test\\systemio\\antlr\\neb\\Neb.g"; }
+    public String getGrammarFileName() { return "D:\\Projects\\nebula\\techtest\\src\\test\\java\\test\\systemio\\antlr\\neb\\Neb.g"; }
 
 
 
     // $ANTLR start "echo"
-    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\test\\systemio\\antlr\\neb\\Neb.g:10:1: echo : ( state | emptyLine )* ;
+    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\test\\systemio\\antlr\\neb\\Neb.g:10:1: echo : ( state | emptyLine )* ;
     public final void echo() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\test\\systemio\\antlr\\neb\\Neb.g:10:6: ( ( state | emptyLine )* )
-            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\test\\systemio\\antlr\\neb\\Neb.g:10:8: ( state | emptyLine )*
+            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\test\\systemio\\antlr\\neb\\Neb.g:10:6: ( ( state | emptyLine )* )
+            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\test\\systemio\\antlr\\neb\\Neb.g:10:8: ( state | emptyLine )*
             {
-            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\test\\systemio\\antlr\\neb\\Neb.g:10:8: ( state | emptyLine )*
+            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\test\\systemio\\antlr\\neb\\Neb.g:10:8: ( state | emptyLine )*
             loop1:
             do {
                 int alt1=3;
@@ -65,7 +65,7 @@ public class NebParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\test\\systemio\\antlr\\neb\\Neb.g:10:9: state
+            	    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\test\\systemio\\antlr\\neb\\Neb.g:10:9: state
             	    {
             	    pushFollow(FOLLOW_state_in_echo39);
             	    state();
@@ -76,7 +76,7 @@ public class NebParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\test\\systemio\\antlr\\neb\\Neb.g:10:15: emptyLine
+            	    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\test\\systemio\\antlr\\neb\\Neb.g:10:15: emptyLine
             	    {
             	    pushFollow(FOLLOW_emptyLine_in_echo41);
             	    emptyLine();
@@ -111,14 +111,14 @@ public class NebParser extends Parser {
 
 
     // $ANTLR start "state"
-    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\test\\systemio\\antlr\\neb\\Neb.g:12:1: state : id NEWLINE ;
+    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\test\\systemio\\antlr\\neb\\Neb.g:12:1: state : id NEWLINE ;
     public final void state() throws RecognitionException {
         NebParser.id_return id1 =null;
 
 
         try {
-            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\test\\systemio\\antlr\\neb\\Neb.g:12:7: ( id NEWLINE )
-            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\test\\systemio\\antlr\\neb\\Neb.g:12:9: id NEWLINE
+            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\test\\systemio\\antlr\\neb\\Neb.g:12:7: ( id NEWLINE )
+            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\test\\systemio\\antlr\\neb\\Neb.g:12:9: id NEWLINE
             {
             pushFollow(FOLLOW_id_in_state51);
             id1=id();
@@ -148,11 +148,11 @@ public class NebParser extends Parser {
 
 
     // $ANTLR start "emptyLine"
-    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\test\\systemio\\antlr\\neb\\Neb.g:14:1: emptyLine : NEWLINE ;
+    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\test\\systemio\\antlr\\neb\\Neb.g:14:1: emptyLine : NEWLINE ;
     public final void emptyLine() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\test\\systemio\\antlr\\neb\\Neb.g:15:2: ( NEWLINE )
-            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\test\\systemio\\antlr\\neb\\Neb.g:15:3: NEWLINE
+            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\test\\systemio\\antlr\\neb\\Neb.g:15:2: ( NEWLINE )
+            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\test\\systemio\\antlr\\neb\\Neb.g:15:3: NEWLINE
             {
             match(input,NEWLINE,FOLLOW_NEWLINE_in_emptyLine62); 
 
@@ -177,15 +177,15 @@ public class NebParser extends Parser {
 
 
     // $ANTLR start "id"
-    // D:\\Projects\\nebula\\techtest\\target\\test-classes\\test\\systemio\\antlr\\neb\\Neb.g:17:1: id : NAME ;
+    // D:\\Projects\\nebula\\techtest\\src\\test\\java\\test\\systemio\\antlr\\neb\\Neb.g:17:1: id : NAME ;
     public final NebParser.id_return id() throws RecognitionException {
         NebParser.id_return retval = new NebParser.id_return();
         retval.start = input.LT(1);
 
 
         try {
-            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\test\\systemio\\antlr\\neb\\Neb.g:17:5: ( NAME )
-            // D:\\Projects\\nebula\\techtest\\target\\test-classes\\test\\systemio\\antlr\\neb\\Neb.g:17:7: NAME
+            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\test\\systemio\\antlr\\neb\\Neb.g:17:5: ( NAME )
+            // D:\\Projects\\nebula\\techtest\\src\\test\\java\\test\\systemio\\antlr\\neb\\Neb.g:17:7: NAME
             {
             match(input,NAME,FOLLOW_NAME_in_id71); 
 

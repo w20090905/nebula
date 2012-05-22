@@ -1,4 +1,4 @@
-package ne;
+package nebula.compiler;
 
 /***
  * Excerpted from "The Definitive ANTLR Reference",
@@ -12,11 +12,19 @@ import java.math.BigDecimal;
 
 import junit.framework.TestCase;
 
+import nebula.compiler.ClassPathTypeLoader;
+import nebula.compiler.Field;
+import nebula.compiler.NeLexer;
+import nebula.compiler.NeParser;
+import nebula.compiler.SystemTypeLoader;
+import nebula.compiler.Type;
+import nebula.compiler.TypeLoader;
+
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
 
-public class TestNe extends TestCase {
+public class NebulaParserAdvTest extends TestCase {
 	final StringBuilder sb = new StringBuilder();
 
 	private NeParser loadFromString(String code) throws Exception {
@@ -28,7 +36,7 @@ public class TestNe extends TestCase {
 	// }
 
 	private NeParser parse(CharStream stream) throws Exception {
-		TypeLoader loader = new FolderTypeLoader("nesrc", new SystemTypeLoader());
+		TypeLoader loader = new ClassPathTypeLoader(new SystemTypeLoader());
 		NeLexer assemblerLexer = new NeLexer(stream);
 		CommonTokenStream tokens = new CommonTokenStream(assemblerLexer);
 		sb.setLength(0);
@@ -52,33 +60,8 @@ public class TestNe extends TestCase {
 		assertEquals(1, type.fields.size());
 		assertEquals("Name", type.fields.get(0).name);
 	}
-
+	
 	public void test_type_with_importance() throws Exception {
-		//@formatter:off
-		String text = "" +
-				"type Person { \n" +
-				"	!NameKey;\n" +
-				"	*NameImportance;\n" +
-				"	#NameRequire;\n" +
-				"	?NameUnimportance;\n" +
-				"	 NameRequire;\n" +
-				"};";
-		//@formatter:on		
-		NeParser parser = loadFromString(text);
-		Type type = parser.typeDefinition();
-		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
-
-		assertEquals("Person", type.name);
-
-		assertEquals(5, type.fields.size());
-		assertEquals("NameKey", type.fields.get(0).name);
-		assertEquals("NameImportance", type.fields.get(1).name);
-		assertEquals("NameRequire", type.fields.get(2).name);
-		assertEquals("NameUnimportance", type.fields.get(3).name);
-		assertEquals("NameRequire", type.fields.get(4).name);
-	}
-
-	public void test_type_with_importance_2() throws Exception {
 		//@formatter:off
 		String text = "" +
 				"type Person { \n" +

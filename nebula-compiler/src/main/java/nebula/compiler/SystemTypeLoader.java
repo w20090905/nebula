@@ -1,4 +1,4 @@
-package ne;
+package nebula.compiler;
 
 import java.io.InputStream;
 

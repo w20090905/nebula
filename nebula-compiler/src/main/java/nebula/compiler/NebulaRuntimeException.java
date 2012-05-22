@@ -1,4 +1,4 @@
-package ne;
+package nebula.compiler;
 
 public class NebulaRuntimeException  extends RuntimeException {
 
@@ -6,10 +6,6 @@ public class NebulaRuntimeException  extends RuntimeException {
 
 	public NebulaRuntimeException() {
 		super();
-	}
-
-	public NebulaRuntimeException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
 	}
 
 	public NebulaRuntimeException(String message, Throwable cause) {

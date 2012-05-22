@@ -1,4 +1,4 @@
-package ne;
+package nebula.compiler;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,13 +7,20 @@ import java.io.InputStream;
 
 public class FolderTypeLoader extends TypeLoader {
 	String path;
-	public FolderTypeLoader(String root,TypeLoader loader){
+
+	public FolderTypeLoader(TypeLoader loader, String root) {
 		super(loader);
 		this.path = root;
 	}
+
 	@Override
 	protected InputStream loadClassData(String name) {
-		String filename = this.path + "/" + name;
+		String filename = null;
+		if (this.path != null) {
+			filename = this.path + "/" + name;
+		} else {
+			filename = name;
+		}
 		File file = new File(filename);
 		if (file.exists()) {
 			try {
