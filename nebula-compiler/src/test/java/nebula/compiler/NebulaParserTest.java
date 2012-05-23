@@ -12,11 +12,10 @@ public class NebulaParserTest extends TestCase {
 
 	public void testTypeDefinition() {
 		try {
-
 			//@formatter:off
 			String text = "" +
 					"type Person { " +
-					"	Name;" +
+					"	姓名  Name;" +
 					"};";
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
@@ -28,7 +27,7 @@ public class NebulaParserTest extends TestCase {
 			assertEquals("Person", type.name);
 
 			assertEquals(1, type.fields.size());
-			assertEquals("Name", type.fields.get(0).name);	
+			assertEquals("姓名", type.fields.get(0).name);	
 			assertEquals(Field.REQUIRE, type.fields.get(0).importance);			
 			
 		} catch (RecognitionException e) {
