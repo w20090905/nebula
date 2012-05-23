@@ -55,6 +55,30 @@ public class NebulaParserTest extends TestCase {
 			fail(e.toString());
 		}
 	}
+	
+	public void testFieldDefinition_subType() {
+		try {
+			//@formatter:off
+			String text = "!Detail{Name;Age Height;};";
+			//@formatter:on		
+			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+
+			Type type = new Type("Test", null,null);
+			Field v = parser.fieldDefinition(type);
+
+			assertEquals(0, parser.getNumberOfSyntaxErrors());
+			assertEquals("Detail", v.name);
+			assertEquals("Detail", v.type.name);
+			assertEquals("Name", v.type.fields.get(0).name);
+			assertEquals("Name", v.type.fields.get(0).type.name);
+			assertEquals("Age", v.type.fields.get(1).name);
+			assertEquals("Height", v.type.fields.get(1).type.name);
+		} catch (RecognitionException e) {
+			fail(e.toString());
+		}
+	}
 
 	/*
 	 *  '!' {v=Field.KEY;} 

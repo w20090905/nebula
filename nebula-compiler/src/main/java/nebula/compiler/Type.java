@@ -28,35 +28,25 @@ public class Type {
 
     Map<String,Object> attrs = new HashMap<>();
     // Type declaringType;
-    
+
+    final Type residedType;    
     final Type superType;    
     final String rawType;
 
     static Type BUILDERINTYPE = new Type("BuildInType");
     static Type ENTITY = new Type("ENTITY");
     
-    
-    
     private Type(String name) {
-        super();
-        this.name = name;
-        superType = null;
-        rawType = null;
-        
-        //this.fields = new ArrayList<Field>();
+        this(name,null,null);
     }
     
     Type(String name,Type superType) {
-        super();
-        this.superType = superType;
-        this.rawType = superType.rawType;
-        
-        this.name = name;
-        this.fields = new ArrayList<Field>();
+        this(name,superType,superType.rawType);
     }
     
     Type(String name,Type superType,String rawType) {
         super();
+        this.residedType = null;
         this.superType = superType;
         this.rawType = rawType;
         
@@ -64,6 +54,22 @@ public class Type {
         this.fields = new ArrayList<Field>();
     }
 
+    Type(Type residedType,String name,Type superType) {
+    	this(residedType, name, superType, superType.rawType);
+    }
+    
+    Type(Type residedType,String name,Type superType,String rawType) {
+        super();
+        this.residedType = residedType;
+        this.superType = superType;
+        this.rawType = rawType;
+        
+        standalone = false;
+        
+        this.name = name;
+        this.fields = new ArrayList<Field>();
+    }
+    
     public String getName() {
         return name;
     }

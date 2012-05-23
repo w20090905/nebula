@@ -54,13 +54,23 @@ typeDefinition returns[Type type]
             fieldDefinition[type]* 
         '}' ';';
 
+nestedTypeDefinition[Type resideType,String name] returns[Type type]
+    :   '{' 
+            {type = new Type(resideType,name,Type.ENTITY);}
+            fieldDefinition[type]* 
+        '}';
+
 fieldDefinition[Type resideType] returns[Field field]
     :   imp=fieldImportance
         inline=inlineDefinition
         name=ID  { field = new Field(resideType,$name.text); }
         range=arrayDefinition
-        (type=ID { field.type = resolveType($type.text); } 
-           | {field.type = resolveType(field.name);} )
+        (
+            type=ID { field.type = resolveType($type.text); }
+            | nestedType = nestedTypeDefinition[resideType,$name.text] {field.type = nestedType;}
+           | {field.type = resolveType(field.name);} 
+        )
+        
         ';'{
             field.importance = imp;
             if(inline!=""){
@@ -81,7 +91,7 @@ fieldDefinition[Type resideType] returns[Field field]
             }else{
                 field.array = true;
             }
-                        
+                   
             resideType.fields.add(field);
           }
         ;
