@@ -36,6 +36,24 @@ public class NebulaParserAdvTest extends TestCase {
 		assertEquals(1, type.fields.size());
 		assertEquals("Name", type.fields.get(0).name);
 	}
+	
+	public void test_type_Person() throws Exception {
+		Type type = new ClassPathTypeLoader().findType("Person");
+
+		assertEquals("Person", type.name);
+
+		assertEquals(8, type.fields.size());
+		int i=0;
+		assertEquals("Name", type.fields.get(i).name);
+		
+		i=7;
+		assertEquals("Education", type.fields.get(i).name);
+		assertEquals("Education", type.fields.get(i).type.name);
+		assertEquals(true, type.fields.get(i).array);
+		assertEquals(0, type.fields.get(i).rangeFrom);
+		assertEquals(5, type.fields.get(i).rangeTo);
+	}
+	
 
 	public void test_type_with_importance() throws Exception {
 		//@formatter:off
