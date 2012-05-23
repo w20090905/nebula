@@ -20,12 +20,6 @@ public class NebulaParserAdvTest extends TestCase {
 		compiler = new Compiler();
 	}
 
-	@Override
-	protected void tearDown() throws Exception {
-		// TODO Auto-generated method stub
-		super.tearDown();
-	}
-
 	final StringBuilder sb = new StringBuilder();
 
 	public void test_type_1() throws Exception {

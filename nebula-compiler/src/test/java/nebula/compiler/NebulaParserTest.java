@@ -11,15 +11,125 @@ import junit.framework.TestCase;
 public class NebulaParserTest extends TestCase {
 
 	public void testTypeDefinition() {
-		fail("Not yet implemented");
+		try {
+
+			//@formatter:off
+			String text = "" +
+					"type Person { " +
+					"	Name;" +
+					"};";
+			//@formatter:on		
+			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+
+			Type type = parser.typeDefinition();
+			
+			assertEquals("Person", type.name);
+
+			assertEquals(1, type.fields.size());
+			assertEquals("Name", type.fields.get(0).name);	
+			assertEquals(Field.REQUIRE, type.fields.get(0).importance);			
+			
+		} catch (RecognitionException e) {
+			fail(e.toString());
+		}
 	}
 
 	public void testFieldDefinition() {
-		fail("Not yet implemented");
+		try {
+			//@formatter:off
+			String text = "!Name;";
+			//@formatter:on		
+			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+
+			Type type = new Type("Test", null,null);
+			Field v = parser.fieldDefinition(type);
+
+			assertEquals(0, parser.getNumberOfSyntaxErrors());
+			assertEquals("Name", v.name);
+			assertEquals(Field.KEY, v.importance);
+		} catch (RecognitionException e) {
+			fail(e.toString());
+		}
 	}
 
-	public void testFieldImportance() {
-		fail("Not yet implemented");
+	/*
+	 *  '!' {v=Field.KEY;} 
+      | '*' {v=Field.CORE;} 
+      | '#' {v=Field.REQUIRE;} 
+      | '?' {v=Field.UNIMPORTANT;}
+      |     {v=Field.REQUIRE;}
+	 */
+	public void testFieldImportance_KEY() {
+		try {
+			//@formatter:off
+			String text = "!";
+			//@formatter:on		
+			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			
+			String v = parser.fieldImportance();
+
+			assertEquals(0, parser.getNumberOfSyntaxErrors());
+			assertEquals(Field.KEY, v);
+		} catch (RecognitionException e) {
+			fail(e.toString());
+		}
+	}
+	public void testFieldImportance_CORE() {
+		try {
+			//@formatter:off
+			String text = "*";
+			//@formatter:on		
+			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			
+			String v = parser.fieldImportance();
+
+			assertEquals(0, parser.getNumberOfSyntaxErrors());
+			assertEquals(Field.CORE, v);
+		} catch (RecognitionException e) {
+			fail(e.toString());
+		}
+	}
+	public void testFieldImportance_REQUIRE() {
+		try {
+			//@formatter:off
+			String text = "#";
+			//@formatter:on		
+			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			
+			String v = parser.fieldImportance();
+
+			assertEquals(0, parser.getNumberOfSyntaxErrors());
+			assertEquals(Field.REQUIRE, v);
+		} catch (RecognitionException e) {
+			fail(e.toString());
+		}
+	}
+	public void testFieldImportance_UNIMPORTANT() {
+		try {
+			//@formatter:off
+			String text = "?";
+			//@formatter:on		
+			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			
+			String v = parser.fieldImportance();
+
+			assertEquals(0, parser.getNumberOfSyntaxErrors());
+			assertEquals(Field.UNIMPORTANT, v);
+		} catch (RecognitionException e) {
+			fail(e.toString());
+		}
 	}
 
 	public void testInlineDefinition_Inline() {
