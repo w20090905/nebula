@@ -320,4 +320,69 @@ public class NebulaParserTest extends TestCase {
 			fail(e.toString());
 		}
 	}
+	
+	
+	public void testAliasDefinition() {
+		try {
+			//@formatter:off
+			String text = "" +
+					"type Person|zh:员工  { " +
+					"	Name|zh:姓名;" +
+					"};";
+			//@formatter:on		
+			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+
+			Type type = parser.typeDefinition();
+			
+			assertEquals("Person", type.name);
+
+			assertEquals(1, type.fields.size());
+			assertEquals("Name", type.fields.get(0).name);	
+			assertEquals("员工", type.nameAlias.get("zh"));	
+			assertEquals(Field.REQUIRE, type.fields.get(0).importance);	
+			assertEquals("姓名", type.fields.get(0).nameAlias.get("zh"));			
+			
+		} catch (RecognitionException e) {
+			fail(e.toString());
+		}
+	}
+	
+	
+	public void testNestTypeAliasDefinition() {
+		try {
+			//@formatter:off
+			String text = "" +
+					"type Person|zh:员工  { " +
+					"	Name|zh:姓名;" +
+					"	Detail |zh:明细{" +
+					"		Name;" +
+					"		Age;" +
+					"	};" +
+					"};";
+			//@formatter:on		
+			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+
+			Type type = parser.typeDefinition();
+			
+			assertEquals("Person", type.name);
+			assertEquals("员工", type.nameAlias.get("zh"));	
+
+			assertEquals(2, type.fields.size());
+			int i=0;
+			assertEquals("Name", type.fields.get(i).name);	
+			assertEquals(Field.REQUIRE, type.fields.get(i).importance);	
+			assertEquals("姓名", type.fields.get(i).nameAlias.get("zh"));			
+
+			i++;	
+			assertEquals("Detail", type.fields.get(i).name);
+			assertEquals("明细", type.fields.get(i).nameAlias.get("zh"));	
+			assertEquals("明细", type.fields.get(i).type.nameAlias.get("zh"));			
+		} catch (RecognitionException e) {
+			fail(e.toString());
+		}
+	}
 }

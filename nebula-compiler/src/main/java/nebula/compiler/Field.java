@@ -15,6 +15,7 @@ public class Field {
     public static final String UNIMPORTANT = "Unimportant";
 
     final String name;
+    Alias nameAlias;
     String displayName;
     String importance = UNIMPORTANT;
 

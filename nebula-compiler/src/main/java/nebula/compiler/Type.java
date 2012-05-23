@@ -16,6 +16,7 @@ public class Type {
     public static final String Eembedded = "Eembedded";
 
     String name;
+    Alias nameAlias;
     String displayName;
 
     boolean standalone = true;

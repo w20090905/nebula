@@ -41,22 +41,25 @@ options {
 }
 
 typeDefinition returns[Type type]
-    :   'type' typeID=ID 
+    :   'type' typeID=ID ('|' alias=aliasLiteral[$typeID.text])?
         (':' superTypeID=ID)? { 
             if($superTypeID==null){
                 type = new Type($typeID.text,Type.ENTITY);
             }else{
                 type = new Type($typeID.text,resolveType($superTypeID.text)); 
            } 
+           if(alias!=null){
+                type.nameAlias = alias;
+           }
         }
         '{' 
             ('@' attrDefinition[type] ';')* 
             fieldDefinition[type]* 
         '}' ';';
 
-nestedTypeDefinition[Type resideType,String name] returns[Type type]
+nestedTypeDefinition[Type resideType,String name,Alias nameAlias] returns[Type type]
     :   '{' 
-            {type = new Type(resideType,name,Type.ENTITY);}
+            {type = new Type(resideType,name,Type.ENTITY);if(nameAlias!=null)type.nameAlias=nameAlias;}
             fieldDefinition[type]* 
         '}';
 
@@ -64,10 +67,11 @@ fieldDefinition[Type resideType] returns[Field field]
     :   imp=fieldImportance
         inline=inlineDefinition
         name=ID  { field = new Field(resideType,$name.text); }
+        ('|' alias=aliasLiteral[$name.text] {field.nameAlias =alias; })?
         range=arrayDefinition
         (
             type=ID { field.type = resolveType($type.text); }
-            | nestedType = nestedTypeDefinition[resideType,$name.text] {field.type = nestedType;}
+            | nestedType = nestedTypeDefinition[resideType,$name.text,alias] {field.type = nestedType;}
            | {field.type = resolveType(field.name);} 
         )
         
@@ -125,7 +129,7 @@ arrayDefinition returns[String from,String to]
 attrDefinition[Type resideType]
     :   ID '=' (
         INT         {resideType.attrs.put($ID.text,new Integer($INT.text));} 
-        | STRING    {resideType.attrs.put($ID.text,$STRING.text.substring(1,$STRING.text.length()-1));} 
+        | StringLiteral    {resideType.attrs.put($ID.text,$StringLiteral.text.substring(1,$StringLiteral.text.length()-1));} 
         | decimal   {resideType.attrs.put($ID.text,new BigDecimal($decimal.text));}
         )
     ;
@@ -135,15 +139,21 @@ decimal
         | '.' INT+
     ;
     
-    
+aliasLiteral[String defaultName] returns[Alias alias]
+    @init{alias = new Alias(defaultName);}
+    :   language=flexID ':' value=flexID {alias.add(language,value);}
+        ('|' language=flexID ':' value=flexID {alias.add(language,value);} )*
+    ;
+
+flexID returns[String text]
+    :   StringLiteral {text = $StringLiteral.text.substring(1,$StringLiteral.text.length()-1);}
+      | ID  {text = $ID.text;}
+    ;
     
 // *************   END  :  BASIC   *************
 
-STRING : CHAR_ | STRING_; 
-
-fragment CHAR_:   '\'' d=. '\'' ;
-
-fragment STRING_: '\"' .* '\"' ;
+StringLiteral :
+  '"' (~('"'|'\n'|'\r'))* '"';
 
 /*ID :  Letter (Letter | Digit | '-' | '_')*;*/  
 INT :  Digit Digit*;
