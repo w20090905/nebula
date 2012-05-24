@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
+<head>
+	<title>The Perfect 2 Column Liquid Layout (left menu): No CSS hacks. SEO friendly. iPhone compatible.</title>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+	<meta name="description" content="The Perfect 2 Column Liquid Layout (left menu): No CSS hacks. SEO friendly. iPhone compatible." />
+	<meta name="keywords" content="The Perfect 2 Column Liquid Layout (left menu): No CSS hacks. SEO friendly. iPhone compatible." />
+	<meta name="robots" content="index, follow" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="css/screen.css" media="screen" />
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+ <script>
+     jQuery.noConflict();
+     
+     // Put all your code in your document ready area
+     jQuery(document).ready(function($){
+    	 $("div[src]").each(function(i){
+    		 $(this).load($(this).attr("src"));
+    	 });
+    	 $("#header a[href]").click(function(){
+    		 $("#main").load($(this).attr("href"));
+    		 return false;
+    	 });
+     });
+   </script>
+</head>
+<body>
+
+<div id="header">
+	<div id="options"><a href="blog/perfect-multi-column-liquid-layouts" title="Perfect multi-column liquid layouts - iPhone compatible">&laquo; Back to the CSS article</a> by <a href="http://matthewjamestaylor.com">Matthew James Taylor</a></div>
+	<h1>Nebula </h1>
+	<h2>Demo System</h2>
+	<ul>
+		<li><a href="dddd">3 Column </a></li>
+		<li><a href="blog/perfect-3-column-blog-style.htm">3 Column </a></li>
+		<li><a href="blog/perfect-2-column-left-menu.htm" class="active">2 Column </a></li>
+		<li><a href="blog/perfect-2-column-right-menu.htm">2 Column </a></li>
+		<li><a href="blog/perfect-2-column-double-page.htm">2 Column </a></li>
+		<li><a href="blog/perfect-full-page.htm">1 Column </a></li>
+		<li><a href="blog/perfect-stacked-columns.htm">Stacked</a></li>
+	</ul>
+	<p id="layoutdims">Measure columns in: <a href="blog/ultimate-2-column-left-menu-pixels.htm">Pixel widths</a> | <a href="blog/ultimate-2-column-left-menu-ems.htm">Em widths</a> | <strong>Percentage widths</strong></p>
+</div>
+<div class="colmask leftmenu">
+	<div class="colleft">
+		<div id="main" class="col1">
+			<!-- Column 1 start -->
+			Main
+			<!-- Column 1 end -->
+		</div>
+		<div class="col2" src="menu.html">
+			<!-- Column 2 start -->
+			<!-- Column 2 end -->
+		</div>
+	</div>
+</div>
+<div id="footer">
+	<p>This page uses the <a href="blog/perfect-2-column-left-menu.htm">Perfect 'Left Menu' 2 Column Liquid Layout</a> by <a href="http://matthewjamestaylor.com">Matthew James Taylor</a>. View more <a href="blog/-website-layouts">website layouts</a> and <a href="blog/-web-design">web design articles</a>.</p>
+</div>
+
+</body>
+</html>
