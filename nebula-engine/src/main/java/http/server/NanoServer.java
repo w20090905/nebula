@@ -21,7 +21,8 @@ public class NanoServer {
         int port = 80;
         Injector injector =  Guice.createInjector(new ConfigModule());
         
-        Container container = injector.getInstance(Container.class);
+        BasicResourceContainer container =(BasicResourceContainer)injector.getInstance(Container.class);
+
         Connection connection = new SocketConnection(container);
         SocketAddress address1 = new InetSocketAddress(port);
         connection.connect(address1);
