@@ -20,6 +20,8 @@ public class Type {
 	boolean standalone = true;
 
 	String master;
+	
+	boolean entity;
 
 	Type declaringType = null;
 
@@ -33,7 +35,7 @@ public class Type {
 	final String rawType;
 
 	static Type BUILDERINTYPE = new Type("BuildInType");
-	static Type ENTITY = new Type("ENTITY");
+	static Type ENTITY = new Type("Entity");
 
 	private Type(String name) {
 		this(name, null, null);
@@ -63,8 +65,18 @@ public class Type {
 
 		if (this.superType != null) {
 			attrs = new Properties(this.superType.attrs);
+			if(superType.entity){
+				this.entity=true;
+			}else{
+				this.entity=false;
+			}
 		} else {
 			attrs = new Properties();
+			if("Entity".equals(name)){
+				this.entity=true;				
+			}else{
+				this.entity=false;
+			}
 		}
 		this.name = name;
 		this.fields = new ArrayList<Field>();
