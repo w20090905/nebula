@@ -14,10 +14,21 @@
      
      // Put all your code in your document ready area
      jQuery(document).ready(function($){
-    	 $("div[src]").each(function(i){
+    	 /*$("div[src]").each(function(i){
     		 $(this).load($(this).attr("src"));
-    	 });
+    	 });*/
     	 $("#header a[href]").click(function(){
+    		 var menu =$(this);
+    		 $("#header a.active").removeClass("active");
+    		 $("#main").load($(this).attr("href"), {}, function(){
+    			 menu.addClass("active");
+    		 });
+    		 return false;
+    	 });
+    	 
+    	 $("#leftMenu a[href]").click(function(){
+    		 var menu =$(this);
+    		 $("#leftMenu a.active").removeClass("active");
     		 $("#main").load($(this).attr("href"));
     		 return false;
     	 });
@@ -48,8 +59,12 @@
 			Main
 			<!-- Column 1 end -->
 		</div>
-		<div class="col2" src="menu.html">
+		<div id="leftMenu" class="col2" src="menu.html">
 			<!-- Column 2 start -->
+			<ul>
+				<li><a href="d/Type/">d/Type/</a></li>
+				<li><a href="d/Type/Company">d/Type/Company</a></li>
+			</ul>
 			<!-- Column 2 end -->
 		</div>
 	</div>

@@ -22,7 +22,7 @@ public class ClassPathLoader implements NestLoader {
         URL url = classLoader.getResource(appHome + name);
         if (url != null) {
             if(log.isTraceEnabled()){
-            	log.trace("findSrouce " + appHome + name + " --  SUCCEED");            	
+            	log.trace("findSource " + appHome + name + " --  SUCCEED");            	
             }
             return new Source(name, url, this);
         }

@@ -1,5 +1,7 @@
 package http.server;
 
+import http.startup.Configurable;
+
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.regex.Pattern;
@@ -21,7 +23,7 @@ public class BasicResourceContainer extends ResourceContainer {
 	private List<Pattern> patterns;
 	
 	@Inject
-	public BasicResourceContainer(ResourceEngine engine,Configure<BasicResourceContainer> conf) {
+	public BasicResourceContainer(ResourceEngine engine,Configurable<BasicResourceContainer> conf) {
 		super(engine);
 		patterns = new CopyOnWriteArrayList<>();
 		engines = new CopyOnWriteArrayList<>();
@@ -29,6 +31,8 @@ public class BasicResourceContainer extends ResourceContainer {
 	}
 	
 	public void register(String match,ResourceEngine engine){
+		match = match.replace(".", "[\\.]").replace("*",".*");
+		
 		patterns.add(Pattern.compile(match));
 		engines.add(engine);
 	}
@@ -55,7 +59,7 @@ public class BasicResourceContainer extends ResourceContainer {
 		
 		for (int i = 0; i < patterns.size(); i++) {
 			if(patterns.get(i).matcher(path).matches()){
-				engine = engines.get(0);	
+				engine = engines.get(i);	
 			    engine.resolve(req.getAddress()).handle(req,resp);
 			    return;
 			}			
