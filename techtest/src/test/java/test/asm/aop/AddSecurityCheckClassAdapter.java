@@ -1,7 +1,5 @@
 package test.asm.aop;
 
-import javassist.bytecode.Opcode;
-
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -12,7 +10,7 @@ public class AddSecurityCheckClassAdapter extends ClassVisitor {
 	public AddSecurityCheckClassAdapter(ClassVisitor cv) {
 		// Responsechain 的下一个 ClassVisitor，这里我们将传入 ClassWriter，
 		// 负责改写后代码的输出
-		super(Opcodes.ASM4);
+		super(Opcodes.ASM4,cv);
 	}
 
 	public void visit(final int version, final int access, final String name, final String signature,

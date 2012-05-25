@@ -9,11 +9,9 @@ import static org.objectweb.asm.Opcodes.NEW;
 
 import java.io.IOException;
 
-import org.objectweb.asm.ClassAdapter;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.MethodAdapter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
@@ -55,8 +53,8 @@ public class MethodTracClassLoader extends ClassLoader {
 	}
 
 	class MethodAnalysis extends ClassVisitor {
-		public MethodAnalysis() {
-			super(Opcodes.ASM4);
+		public MethodAnalysis(ClassVisitor cv) {
+			super(Opcodes.ASM4, cv);
 		}
 
 		String className;
@@ -83,11 +81,11 @@ public class MethodTracClassLoader extends ClassLoader {
 			}
 		}
 
-		class AddSecurityCheckMethodAdapter extends MethodAdapter {
+		class AddSecurityCheckMethodAdapter extends MethodVisitor {
 			String name;
 
 			public AddSecurityCheckMethodAdapter(MethodVisitor mv, String name) {
-				super(mv);
+				super(Opcodes.ASM4, mv);
 				this.name = name;
 			}
 

@@ -6,8 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import org.objectweb.asm.ClassAdapter;
 import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.util.TraceClassVisitor;
 
@@ -17,7 +17,7 @@ public class AOPSubClass {
 		try {
 			ClassReader cr = new ClassReader("test.asm.aop.Account");
 			ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
-			ClassAdapter classAdapter = new AddSecurityCheckClassAdapter(cw);
+			ClassVisitor classAdapter = new AddSecurityCheckClassAdapter(cw);
 			cr.accept(classAdapter, ClassReader.SKIP_DEBUG);
 			byte[] data = cw.toByteArray();
 			File file = new File("Account.class");

@@ -7,7 +7,7 @@ public class ChangeToChildConstructorMethodAdapter extends MethodVisitor {
 	private String superClassName;
 
 	public ChangeToChildConstructorMethodAdapter(MethodVisitor mv, String superClassName) {
-		super(mv);
+		super(Opcodes.ASM4, mv);
 		this.superClassName = superClassName;
 	}
 
