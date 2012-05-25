@@ -15,13 +15,10 @@ public class SystemTypeLoader extends TypeLoader {
 	private Log log = LogFactory.getLog(this.getClass());
 
 	public SystemTypeLoader() {
-		this(new BootstrapTypeLoader());
-	}
-	public SystemTypeLoader(TypeLoader parent) {
-		super(parent);
+		super(BootstrapTypeLoader.getInstance());
 		this.load("nebula.properties");
-	}
-
+	}	
+	
 	public void load(String name) {
 		try {
 			Enumeration<URL> resources = this.getClass().getClassLoader().getResources(name);

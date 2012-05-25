@@ -13,6 +13,7 @@ public class Type {
 	public static final String Scala = "Scala";
 	public static final String Eembedded = "Eembedded";
 
+	
 	String name;
 	Alias nameAlias;
 	String displayName;
@@ -30,31 +31,33 @@ public class Type {
 	Properties attrs;
 	// Type declaringType;
 
+	public static String ENTITY = "Entity";
+	public static String BUILDIN = "BuildInType";
+
+	final TypeLoader typeLoader;
 	final Type residedType;
 	final Type superType;
 	final String rawType;
 
-	static Type BUILDERINTYPE = new Type("BuildInType");
-	static Type ENTITY = new Type("Entity");
-
-	private Type(String name) {
-		this(name, null, null);
+	Type(TypeLoader typeLoader,String name) {
+		this(typeLoader,name, null, null);
 	}
 
-	Type(String name, Type superType) {
-		this(name, superType, superType.rawType);
+	Type(TypeLoader typeLoader,String name, Type superType) {
+		this(typeLoader,name, superType, superType.rawType);
 	}
 
-	Type(String name, Type superType, String rawType) {
-		this(null, name, superType, rawType);
+	Type(TypeLoader typeLoader,String name, Type superType, String rawType) {
+		this(typeLoader,null, name, superType, rawType);
 	}
 
-	Type(Type residedType, String name, Type superType) {
-		this(residedType, name, superType, superType.rawType);
+	Type(TypeLoader typeLoader,Type residedType, String name, Type superType) {
+		this(typeLoader,residedType, name, superType, superType.rawType);
 	}
 
-	Type(Type residedType, String name, Type superType, String rawType) {
+	Type(TypeLoader typeLoader,Type residedType, String name, Type superType, String rawType) {
 		super();
+		this.typeLoader = typeLoader;
 		this.residedType = residedType;
 		this.superType = superType;
 		this.rawType = rawType;

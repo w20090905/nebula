@@ -5,3 +5,4 @@ target
 */*/*/*.tokens
 */*/*.tokens
 */*.tokens
+/logs

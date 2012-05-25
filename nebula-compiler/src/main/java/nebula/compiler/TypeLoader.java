@@ -27,7 +27,7 @@ public abstract class TypeLoader {
 	public Type load(Reader is) {
 		List<Type> typeList = defineNebula(is);
 		for (Type type : typeList) {
-			types.put(type.name, type);			
+			types.put(type.name, type);
 		}
 		return typeList.get(0);
 	}
@@ -35,7 +35,7 @@ public abstract class TypeLoader {
 	public Type load(InputStream is) {
 		List<Type> typeList = defineNebula(is);
 		for (Type type : typeList) {
-			types.put(type.name, type);			
+			types.put(type.name, type);
 		}
 		return typeList.get(0);
 	}
@@ -84,12 +84,12 @@ public abstract class TypeLoader {
 	}
 
 	public Type findType(String name) {
-		Type type = types.get(name);
+		Type type = parent.findType(name);
 		if (type != null) {
 			return type;
 		}
 
-		type = parent.findType(name);
+		type = types.get(name);
 		if (type != null) {
 			return type;
 		}
@@ -107,7 +107,7 @@ public abstract class TypeLoader {
 		if (inputStream != null) {
 			List<Type> typeList = defineNebula(inputStream);
 			for (Type t : typeList) {
-				types.put(t.name, t);			
+				types.put(t.name, t);
 			}
 			return typeList.get(0);
 		}
@@ -119,7 +119,7 @@ public abstract class TypeLoader {
 			types.put(type.name, type);
 			return type;
 		} else {
-			throw new NebulaRuntimeException("Can't find " + name);
+			throw null;
 		}
 	}
 

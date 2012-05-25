@@ -65,9 +65,9 @@ typeDefinition returns[Type type]
     :   'type' typeID=ID ('|' alias=aliasLiteral[$typeID.text])?
         (':' superTypeID=ID)? { 
             if($superTypeID==null){
-                type = new Type($typeID.text,Type.ENTITY);
+                type = new Type(loader,$typeID.text,resolveType(Type.ENTITY));
             }else{
-                type = new Type($typeID.text,resolveType($superTypeID.text)); 
+                type = new Type(loader,$typeID.text,resolveType($superTypeID.text)); 
            } 
            
            addType(type);
@@ -85,7 +85,7 @@ nestedTypeDefinition[Type resideType,String name,Alias nameAlias] returns[Type t
     :   '{' 
             {
               String typeName = resideType.name + "$" + name;
-              type = new Type(resideType,typeName,Type.ENTITY);
+              type = new Type(loader,resideType,typeName,resolveType(Type.ENTITY));
               if(nameAlias!=null)type.nameAlias=nameAlias;
               addType(type);
             }

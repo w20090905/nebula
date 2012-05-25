@@ -2,28 +2,33 @@ package nebula.compiler;
 
 import java.io.InputStream;
 
-public class BootstrapTypeLoader extends TypeLoader {
+class BootstrapTypeLoader extends TypeLoader {
 
-	public BootstrapTypeLoader() {
+	private BootstrapTypeLoader() {
 		super(null);
 
 		init();
 	}
-
+	
+	private static final TypeLoader loader = new BootstrapTypeLoader();
+	public static TypeLoader getInstance(){
+		return loader;
+	}
+	
 	private void init() {
-		Type entity = Type.ENTITY;
-		
-		Type buildInType = Type.BUILDERINTYPE;
-		Type string = new Type("String", buildInType,"String");
-		Type number = new Type("String", buildInType);
-		Type typeInt = new Type("String", number,"BigDecimal");
-		Type decimal = new Type("String", number,"Integer");
+		Type buildInType = new Type(this,Type.BUILDIN);
+		Type entity = new Type(this,Type.ENTITY);
+		Type string = new Type(this,"String", buildInType,"String");
+		Type number = new Type(this,"String", buildInType);
+		Type typeInt = new Type(this,"String", number,"BigDecimal");
+		Type decimal = new Type(this,"String", number,"Integer");
 
 		this.types.put("BuildInType", buildInType);
 		this.types.put("String", string);
 		this.types.put("Number", number);
 		this.types.put("Int", typeInt);
 		this.types.put("Decimal", decimal);
+		
 		this.types.put("Entity", entity);
 	}
 
