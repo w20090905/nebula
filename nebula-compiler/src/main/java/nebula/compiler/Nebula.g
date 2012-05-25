@@ -5,28 +5,44 @@ options {
 }
 
 @header {
-    package nebula.compiler;
-    import java.math.BigDecimal;
+	package nebula.compiler;
+	import java.math.BigDecimal;
+	import java.util.ArrayList;
+	import java.util.HashMap;
+	import java.util.List;
+	import java.util.Map;
 }
 @lexer::header{
     package nebula.compiler;
 }
 
 @members {
+    Map<String,Type> typesMap = new HashMap<>();
+    List<Type> types = new ArrayList<>();
+    
     TypeLoader loader;
     public NebulaParser(TokenStream input,TypeLoader loader) {
         this(input);
         this.loader = loader;
     }
+    
     protected Type resolveType(String name){
-        Type type = loader.findType(name);
+        Type type = typesMap.get(name);
+        if(type!=null)
+            return type;
+        type = loader.findType(name);
         if(type!=null){
             return type;
         } else {
             throw new RuntimeException("Can't find type :" + name);
         }
     }
-
+    
+    protected void addType(Type type){
+        typesMap.put(type.name,type);   
+        types.add(type);     
+    }
+    
     protected void info(String str) {
     if (str.charAt(str.length() - 1) == '\n') {
 //      String txtTemps = "";
@@ -40,6 +56,11 @@ options {
   }
 }
 
+programDefinition returns[List<Type> retTypes]
+    : typeDefinition
+      {retTypes = this.types;}
+    ;
+
 typeDefinition returns[Type type]
     :   'type' typeID=ID ('|' alias=aliasLiteral[$typeID.text])?
         (':' superTypeID=ID)? { 
@@ -48,6 +69,9 @@ typeDefinition returns[Type type]
             }else{
                 type = new Type($typeID.text,resolveType($superTypeID.text)); 
            } 
+           
+           addType(type);
+           
            if(alias!=null){
                 type.nameAlias = alias;
            }
@@ -59,7 +83,12 @@ typeDefinition returns[Type type]
 
 nestedTypeDefinition[Type resideType,String name,Alias nameAlias] returns[Type type]
     :   '{' 
-            {type = new Type(resideType,name,Type.ENTITY);if(nameAlias!=null)type.nameAlias=nameAlias;}
+            {
+              String typeName = resideType.name + "$" + name;
+              type = new Type(resideType,typeName,Type.ENTITY);
+              if(nameAlias!=null)type.nameAlias=nameAlias;
+              addType(type);
+            }
             fieldDefinition[type]* 
         '}';
 

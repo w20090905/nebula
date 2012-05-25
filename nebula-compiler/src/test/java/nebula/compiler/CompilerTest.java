@@ -7,7 +7,7 @@ public class CompilerTest extends TestCase {
 	Compiler compiler;
 	protected void setUp() throws Exception {
 		super.setUp();
-		compiler = new Compiler();
+		compiler = new Compiler(new SystemTypeLoader());
 	}
 
 	protected void tearDown() throws Exception {

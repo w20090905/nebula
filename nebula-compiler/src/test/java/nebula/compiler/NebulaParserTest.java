@@ -1,14 +1,22 @@
 package nebula.compiler;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import junit.framework.TestCase;
 
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 
-import junit.framework.TestCase;
-
 public class NebulaParserTest extends TestCase {
+	Compiler compiler;
+
+	@Override
+	protected void setUp() throws Exception {
+		compiler = new Compiler(new SystemTypeLoader());
+	}
+
 
 	public void testTypeDefinition() {
 		try {
@@ -20,7 +28,7 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 
 			Type type = parser.typeDefinition();
 			
@@ -42,7 +50,7 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 
 			Type type = new Type("Test", null,null);
 			Field v = parser.fieldDefinition(type);
@@ -62,14 +70,14 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 
 			Type type = new Type("Test", null,null);
 			Field v = parser.fieldDefinition(type);
 
 			assertEquals(0, parser.getNumberOfSyntaxErrors());
 			assertEquals("Detail", v.name);
-			assertEquals("Detail", v.type.name);
+			assertEquals("Test$Detail", v.type.name);
 			assertEquals("Name", v.type.fields.get(0).name);
 			assertEquals("Name", v.type.fields.get(0).type.name);
 			assertEquals("Age", v.type.fields.get(1).name);
@@ -93,7 +101,7 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 			
 			String v = parser.fieldImportance();
 
@@ -110,7 +118,7 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 			
 			String v = parser.fieldImportance();
 
@@ -127,7 +135,7 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 			
 			String v = parser.fieldImportance();
 
@@ -144,7 +152,7 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 			
 			String v = parser.fieldImportance();
 
@@ -162,7 +170,7 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 			
 			String v = parser.inlineDefinition();
 
@@ -180,7 +188,7 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 			
 			String v = parser.inlineDefinition();
 
@@ -198,7 +206,7 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 			
 			NebulaParser.arrayDefinition_return v = parser.arrayDefinition();
 
@@ -216,7 +224,7 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 			
 			NebulaParser.arrayDefinition_return v = parser.arrayDefinition();
 
@@ -234,7 +242,7 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 			
 			NebulaParser.arrayDefinition_return v = parser.arrayDefinition();
 
@@ -252,7 +260,7 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 			
 			NebulaParser.arrayDefinition_return v = parser.arrayDefinition();
 
@@ -271,7 +279,7 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 			
 			NebulaParser.arrayDefinition_return v = parser.arrayDefinition();
 
@@ -290,7 +298,7 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 			Type type = new Type("Test", null,null);
 			
 			parser.attrDefinition(type);
@@ -309,7 +317,7 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 			Type type = new Type("Test", null,null);
 			
 			parser.attrDefinition(type);
@@ -332,7 +340,7 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 
 			Type type = parser.typeDefinition();
 			
@@ -364,7 +372,7 @@ public class NebulaParserTest extends TestCase {
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, new ClassPathTypeLoader());
+			NebulaParser parser = new NebulaParser(tokens, compiler);
 
 			Type type = parser.typeDefinition();
 			
@@ -381,6 +389,49 @@ public class NebulaParserTest extends TestCase {
 			assertEquals("Detail", type.fields.get(i).name);
 			assertEquals("明细", type.fields.get(i).nameAlias.get("zh"));	
 			assertEquals("明细", type.fields.get(i).type.nameAlias.get("zh"));			
+		} catch (RecognitionException e) {
+			fail(e.toString());
+		}
+	}
+	public void testProgramDefinition() {
+		try {
+			//@formatter:off
+			String text = "" +
+					"type Person|zh:员工  { " +
+					"	Name|zh:姓名;" +
+					"	Detail |zh:明细{" +
+					"		Name;" +
+					"		Age;" +
+					"	};" +
+					"};";
+			//@formatter:on		
+			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			NebulaParser parser = new NebulaParser(tokens, compiler);
+
+			List<Type> types = parser.programDefinition();
+			
+			Type type = types.get(0);
+			
+			assertEquals("Person", type.name);
+			assertEquals("员工", type.nameAlias.get("zh"));	
+
+			assertEquals(2, type.fields.size());
+			int i=0;
+			assertEquals("Name", type.fields.get(i).name);	
+			assertEquals(Field.REQUIRE, type.fields.get(i).importance);	
+			assertEquals("姓名", type.fields.get(i).nameAlias.get("zh"));			
+
+			i++;	
+			assertEquals("Detail", type.fields.get(i).name);
+			assertEquals("明细", type.fields.get(i).nameAlias.get("zh"));	
+			assertEquals("明细", type.fields.get(i).type.nameAlias.get("zh"));	
+			
+
+			type = types.get(1);
+			assertEquals("Person$Detail", type.name);
+			assertEquals("明细", type.nameAlias.get("zh"));	
+			
 		} catch (RecognitionException e) {
 			fail(e.toString());
 		}

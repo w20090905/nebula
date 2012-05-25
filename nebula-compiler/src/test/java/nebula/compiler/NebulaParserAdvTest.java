@@ -17,7 +17,7 @@ public class NebulaParserAdvTest extends TestCase {
 
 	@Override
 	protected void setUp() throws Exception {
-		compiler = new Compiler();
+		compiler = new Compiler(new SystemTypeLoader());
 	}
 
 	final StringBuilder sb = new StringBuilder();
@@ -38,7 +38,7 @@ public class NebulaParserAdvTest extends TestCase {
 	}
 	
 	public void test_type_Person() throws Exception {
-		Type type = new ClassPathTypeLoader().findType("Person");
+		Type type = compiler.findType("Person");
 
 		assertEquals("Person", type.name);
 
@@ -48,7 +48,7 @@ public class NebulaParserAdvTest extends TestCase {
 		
 		i=7;
 		assertEquals("Education", type.fields.get(i).name);
-		assertEquals("Education", type.fields.get(i).type.name);
+		assertEquals("Person$Education", type.fields.get(i).type.name);
 		assertEquals(true, type.fields.get(i).array);
 		assertEquals(0, type.fields.get(i).rangeFrom);
 		assertEquals(5, type.fields.get(i).rangeTo);
