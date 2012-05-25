@@ -10,7 +10,7 @@ public class ClassPathTypeLoader extends TypeLoader {
 	}
 
 	public ClassPathTypeLoader() {
-		super(new SystemTypeLoader());
+		super(new BootstrapTypeLoader());
 	}
 
 	@Override

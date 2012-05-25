@@ -2,9 +2,9 @@ package nebula.compiler;
 
 import java.io.InputStream;
 
-public class SystemTypeLoader extends TypeLoader {
+public class BootstrapTypeLoader extends TypeLoader {
 
-	public SystemTypeLoader() {
+	public BootstrapTypeLoader() {
 		super(null);
 
 		init();
