@@ -1,2 +1,2 @@
-type Date : Number {
+type Date : Long {
 };

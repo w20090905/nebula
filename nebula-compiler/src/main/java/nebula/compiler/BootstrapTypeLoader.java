@@ -1,6 +1,8 @@
 package nebula.compiler;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 class BootstrapTypeLoader extends TypeLoader {
 
@@ -9,27 +11,31 @@ class BootstrapTypeLoader extends TypeLoader {
 
 		init();
 	}
-	
+
 	private static final TypeLoader loader = new BootstrapTypeLoader();
-	public static TypeLoader getInstance(){
+
+	public static TypeLoader getInstance() {
 		return loader;
 	}
-	
-	private void init() {
-		Type buildInType = new Type(this,Type.BUILDIN);
-		Type entity = new Type(this,Type.ENTITY);
-		Type string = new Type(this,"String", buildInType,"String");
-		Type number = new Type(this,"String", buildInType);
-		Type typeInt = new Type(this,"String", number,"BigDecimal");
-		Type decimal = new Type(this,"String", number,"Integer");
 
-		this.types.put("BuildInType", buildInType);
-		this.types.put("String", string);
-		this.types.put("Number", number);
-		this.types.put("Int", typeInt);
-		this.types.put("Decimal", decimal);
-		
-		this.types.put("Entity", entity);
+	private void init() {
+		Type buildInType = new Type(this, Type.BUILDIN);
+		Type entity = new Type(this, Type.ENTITY);
+		Type string = new Type(this, "String", buildInType, "String");
+		Type number = new Type(this, "Number", buildInType);
+		Type typeInt = new Type(this, "Long", number, "Long");
+		Type decimal = new Type(this, "Decimal", number, "BigDecimal");
+
+		List<Type> typeList = new ArrayList<>();
+
+		typeList.add(buildInType);
+		typeList.add(string);
+		typeList.add(number);
+		typeList.add(typeInt);
+		typeList.add(decimal);
+		typeList.add(entity);
+
+		this.types.addAll(typeList);
 	}
 
 	@Override

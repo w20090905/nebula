@@ -17,8 +17,8 @@ public class SystemTypeLoader extends TypeLoader {
 	public SystemTypeLoader() {
 		super(BootstrapTypeLoader.getInstance());
 		this.load("nebula.properties");
-	}	
-	
+	}
+
 	public void load(String name) {
 		try {
 			Enumeration<URL> resources = this.getClass().getClassLoader().getResources(name);

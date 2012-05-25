@@ -3,9 +3,11 @@ package nebula.compiler;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import nebula.SmartList;
+import nebula.frame.SmartListImp;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.ANTLRReaderStream;
@@ -20,27 +22,39 @@ public abstract class TypeLoader {
 
 	TypeLoader parent;
 
+	SmartList<Type> types = new SmartListImp<Type>("Type",new SmartListImp.AutoIdentifiable<Type>() {
+		@Override
+		public String getId(Type data) {
+			return data.name;
+		}
+
+		@Override
+		public void set(Map<String, Type> map, Type data) {
+			map.put(data.name, data);
+			if (data.nameAlias != null) {
+				for (String v : data.nameAlias.alias.values()) {
+					map.put(v, data);
+				}
+			}
+		}
+
+	});
+
 	public TypeLoader(TypeLoader parent) {
 		this.parent = parent;
 	}
 
 	public Type load(Reader is) {
 		List<Type> typeList = defineNebula(is);
-		for (Type type : typeList) {
-			types.put(type.name, type);
-		}
+		types.addAll(typeList);
 		return typeList.get(0);
 	}
 
 	public Type load(InputStream is) {
 		List<Type> typeList = defineNebula(is);
-		for (Type type : typeList) {
-			types.put(type.name, type);
-		}
+		types.addAll(typeList);
 		return typeList.get(0);
 	}
-
-	Map<String, Type> types = new HashMap<String, Type>();
 
 	protected final List<Type> defineNebula(Reader is) {
 		try {
@@ -98,7 +112,7 @@ public abstract class TypeLoader {
 		InputStream inputStream = loadClassData(fullname);
 		if (inputStream != null) {
 			type = defineNType(inputStream);
-			types.put(type.name, type);
+			types.add(type);
 			return type;
 		}
 
@@ -106,9 +120,7 @@ public abstract class TypeLoader {
 		inputStream = loadClassData(fullname);
 		if (inputStream != null) {
 			List<Type> typeList = defineNebula(inputStream);
-			for (Type t : typeList) {
-				types.put(t.name, t);
-			}
+			types.addAll(typeList);
 			return typeList.get(0);
 		}
 
@@ -116,10 +128,10 @@ public abstract class TypeLoader {
 		inputStream = loadClassData(fullname);
 		if (inputStream != null) {
 			type = defineNAsm(inputStream);
-			types.put(type.name, type);
+			types.add(type);
 			return type;
 		} else {
-			throw null;
+			return null;
 		}
 	}
 
@@ -133,5 +145,9 @@ public abstract class TypeLoader {
 				log.trace("search class data : " + name + " fail!");
 		}
 		return is;
+	}
+
+	public SmartList<Type> getList() {
+		return this.types;
 	}
 }

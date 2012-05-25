@@ -1,2 +1,2 @@
-type Birthday : Number {
+type Birthday : Long {
 };
