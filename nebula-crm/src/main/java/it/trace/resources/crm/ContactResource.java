@@ -21,7 +21,7 @@ public class ContactResource {
 	public Contact getContact() {
 		return contact;
 	}
-
+	
 	public void setCustomer(Contact contact) {
 		this.contact = contact;
 	}
@@ -104,6 +104,8 @@ public class ContactResource {
 						contact.setCompany(company);
 					}
 					contact.setName((String) context.getParameter("name"));
+					contact.setGender((String) context.getParameter("gender"));
+					contact.setTitle((String) context.getParameter("title"));
 					contact.setCellphone((String) context
 							.getParameter("cellphone"));
 					contact.setEmail((String) context.getParameter("email"));

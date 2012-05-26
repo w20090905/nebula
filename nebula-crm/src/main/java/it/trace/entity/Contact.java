@@ -34,6 +34,9 @@ public class Contact implements java.io.Serializable {
 	@Column(name = "gender")
 	private String gender;
 
+	@Column(name = "title")
+	private String title;
+
 	@Column(name = "tel")
 	private String tel;
 
@@ -76,6 +79,14 @@ public class Contact implements java.io.Serializable {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+	
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	@JsonIgnore
 	public Company getCompany() {
