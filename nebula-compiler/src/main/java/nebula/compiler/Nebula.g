@@ -98,6 +98,8 @@ fieldDefinition[Type resideType] returns[Field field]
         name=ID  { field = new Field(resideType,$name.text); }
         ('|' alias=aliasLiteral[$name.text] {field.nameAlias =alias; })?
         range=arrayDefinition
+        (INIT 
+        |)
         (
             type=ID { field.type = resolveType($type.text); }
             | nestedType = nestedTypeDefinition[resideType,$name.text,alias] {field.type = nestedType;}
@@ -156,11 +158,13 @@ arrayDefinition returns[String from,String to]
     ;
     
 attrDefinition[Type resideType]
-    :   ID '=' (
-        INT         {resideType.attrs.put($ID.text,new Integer($INT.text));} 
-        | StringLiteral    {resideType.attrs.put($ID.text,$StringLiteral.text.substring(1,$StringLiteral.text.length()-1));} 
-        | decimal   {resideType.attrs.put($ID.text,new BigDecimal($decimal.text));}
-        )
+    :   ID '=' v=constValueDefinition {resideType.attrs.put($ID.text,v);}
+    ;
+
+constValueDefinition returns [Object v]
+    : StringLiteral {v=$StringLiteral.text.substring(1,$StringLiteral.text.length()-1);}
+      | decimal {v=new BigDecimal($decimal.text);}
+      | INT {v=new Integer($INT.text);}  
     ;
     
 decimal
@@ -178,8 +182,11 @@ flexID returns[String text]
     :   StringLiteral {text = $StringLiteral.text.substring(1,$StringLiteral.text.length()-1);}
       | ID  {text = $ID.text;}
     ;
-    
-// *************   END  :  BASIC   *************
+
+
+
+
+// *************   START  :  BASIC   *************
 
 StringLiteral :
   '"' (~('"'|'\n'|'\r'))* '"';
@@ -188,6 +195,8 @@ StringLiteral :
 INT :  Digit Digit*;
 fragment Digit :  '0'..'9';
 fragment Letter : 'a'..'z' | 'A'..'Z';
+
+INIT  : ':=';
 
 NEWLINE:'\r'? '\n'  {$channel=HIDDEN;};    
 Whitespace :  (' ' | '\t' | '\f')+ {$channel=HIDDEN;};    

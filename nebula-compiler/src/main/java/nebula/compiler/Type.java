@@ -6,25 +6,18 @@ import java.util.Properties;
 
 public class Type {
 
-	public static final String Master = "Master";
-	public static final String Attribute = "Attribute";
-	public static final String Underlying = "Underlying";
-	public static final String Sequence = "Sequence";
-	public static final String Scala = "Scala";
-	public static final String Eembedded = "Eembedded";
+	public enum TypeStandalone {
+		Master, Sequence, BuilderIn, Eembedded
+	}
 
-	
+	final TypeLoader typeLoader;
+	final Type residedType;
+	final Type superType;
+	final String rawType;
 	String name;
 	Alias nameAlias;
-	String displayName;
 
-	boolean standalone = true;
-
-	String master;
-	
-	boolean entity;
-
-	Type declaringType = null;
+	TypeStandalone standalone = TypeStandalone.Master;
 
 	List<Field> fields;
 
@@ -34,28 +27,23 @@ public class Type {
 	public static String ENTITY = "Entity";
 	public static String BUILDIN = "BuildInType";
 
-	final TypeLoader typeLoader;
-	final Type residedType;
-	final Type superType;
-	final String rawType;
-
-	Type(TypeLoader typeLoader,String name) {
-		this(typeLoader,name, null, null);
+	Type(TypeLoader typeLoader, String name) {
+		this(typeLoader, name, null, null);
 	}
 
-	Type(TypeLoader typeLoader,String name, Type superType) {
-		this(typeLoader,name, superType, superType.rawType);
+	Type(TypeLoader typeLoader, String name, Type superType) {
+		this(typeLoader, name, superType, superType.rawType);
 	}
 
-	Type(TypeLoader typeLoader,String name, Type superType, String rawType) {
-		this(typeLoader,null, name, superType, rawType);
+	Type(TypeLoader typeLoader, String name, Type superType, String rawType) {
+		this(typeLoader, null, name, superType, rawType);
 	}
 
-	Type(TypeLoader typeLoader,Type residedType, String name, Type superType) {
-		this(typeLoader,residedType, name, superType, superType.rawType);
+	Type(TypeLoader typeLoader, Type residedType, String name, Type superType) {
+		this(typeLoader, residedType, name, superType, superType.rawType);
 	}
 
-	Type(TypeLoader typeLoader,Type residedType, String name, Type superType, String rawType) {
+	Type(TypeLoader typeLoader, Type residedType, String name, Type superType, String rawType) {
 		super();
 		this.typeLoader = typeLoader;
 		this.residedType = residedType;
@@ -63,22 +51,18 @@ public class Type {
 		this.rawType = rawType;
 
 		if (residedType != null) {
-			standalone = false;
+			standalone = TypeStandalone.Eembedded;
 		}
 
 		if (this.superType != null) {
 			attrs = new Properties(this.superType.attrs);
-			if(superType.entity){
-				this.entity=true;
-			}else{
-				this.entity=false;
-			}
+			this.standalone = superType.standalone;
 		} else {
 			attrs = new Properties();
-			if("Entity".equals(name)){
-				this.entity=true;				
-			}else{
-				this.entity=false;
+			if ("Entity".equals(name)) {
+				this.standalone = TypeStandalone.Master;
+			} else {
+				this.standalone = TypeStandalone.BuilderIn;
 			}
 		}
 		this.name = name;
@@ -93,42 +77,35 @@ public class Type {
 		this.name = name;
 	}
 
-	public String getMaster() {
-		return master;
-	}
-
-	public void setMaster(String master) {
-		this.master = master;
-	}
-
 	public List<Field> getFields() {
 		return fields;
 	}
 
-	public String getDisplayName() {
-		return this.displayName;
+	public Alias getNameAlias() {
+		return nameAlias;
 	}
 
-	public boolean isStandalone() {
+	public Properties getAttrs() {
+		return attrs;
+	}
+
+	public TypeLoader getTypeLoader() {
+		return typeLoader;
+	}
+
+	public Type getResidedType() {
+		return residedType;
+	}
+
+	public Type getSuperType() {
+		return superType;
+	}
+
+	public String getRawType() {
+		return rawType;
+	}
+
+	public TypeStandalone getStandalone() {
 		return standalone;
 	}
-
-	public void setStandalone(boolean standalone) {
-		this.standalone = standalone;
-	}
-
-	public Type getDeclaringType() {
-		return declaringType;
-	}
-
-	public void setDeclaringType(Type declaringType) {
-		this.declaringType = declaringType;
-	}
-
-	@Override
-	public String toString() {
-		return "Type [name=" + name + ", displayName=" + displayName + ", standalone=" + standalone + ", master="
-				+ master + ", declaringType=" + declaringType + ", fields=" + fields + "]";
-	}
-
 }
