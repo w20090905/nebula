@@ -1,6 +1,4 @@
-<h1>noc.lang.reflect.Type</h1>
-		
-<a style="float:right;" href="/noc/noc/lang/reflect/Type/noc.lang.reflect.Type">Type</a>
+<h1>Type</h1>
 
 <table class="list"> 
 	<thead>	
@@ -14,17 +12,13 @@
 	
 	
 	<tbody>
-		<#list data?sort_by("name") as item><#t>
+		<#list data  as item><#t>
 		<tr>
-			<td align="left"> <a href="${item.name}">${item.name}</a></td>
+			<td align="left"> <a href="/d/Type/${item.name}">${item.name}</a></td>
 			<td> </td>
-			<td> </a></td>
-			<td> <#if item.standalone>True<#else>false</#if></td>
+			<td> </td>
+			<td> ${item.standalone}</td>
 		</tr>
 		</#list>	
 	</tbody>
 </table>
-
-<br/>
-
-</body></html>

@@ -22,6 +22,7 @@
     		 $("#header a.active").removeClass("active");
     		 $("#main").load($(this).attr("href"), {}, function(){
     			 menu.addClass("active");
+    			 loadMain();
     		 });
     		 return false;
     	 });
@@ -29,9 +30,20 @@
     	 $("#leftMenu a[href]").click(function(){
     		 var menu =$(this);
     		 $("#leftMenu a.active").removeClass("active");
-    		 $("#main").load($(this).attr("href"));
+    		 $("#main").load($(this).attr("href"), {}, function(){
+    			 loadMain();
+    		 });
     		 return false;
     	 });
+    	 
+    	 function loadMain(){
+        	 $("#main a[href]").click(function(){
+        		 $("#main").load($(this).attr("href"), {}, function(){
+        			 loadMain();
+        		 });
+        		 return false;
+        	 });
+    	 }
      });
    </script>
 </head>
@@ -62,8 +74,9 @@
 		<div id="leftMenu" class="col2" src="menu.html">
 			<!-- Column 2 start -->
 			<ul>
-				<li><a href="d/Type/">d/Type/</a></li>
-				<li><a href="d/Type/Company">d/Type/Company</a></li>
+				<li><a href="d/Type/">Type/</a></li>
+				<li><a href="d/Type/Company">Company</a></li>
+				<li><a href="d/Type/Person">Person</a></li>
 			</ul>
 			<!-- Column 2 end -->
 		</div>

@@ -16,11 +16,10 @@ import org.simpleframework.http.resource.Resource;
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
-import freemarker.template.TemplateHashModel;
 import freemarker.template.TemplateModelException;
 
-public class DataResouce implements Resource {
-	private static Log log = LogFactory.getLog(DataResouce.class);
+public class TypeEditResouce implements Resource {
+	private static Log log = LogFactory.getLog(TypeEditResouce.class);
 
 	private final Configuration cfg;
 	private final String templateName;
@@ -30,9 +29,9 @@ public class DataResouce implements Resource {
 	private final String key;
 	private final SmartList<?> datas;
 
-	public DataResouce(Configuration cfg, String templateName, SmartList<?> datas, String key) {
+	public TypeEditResouce(Configuration cfg, String path, SmartList<?> datas, String key) {
 		this.cfg = cfg;
-		this.templateName = templateName + "_edit.ftl";
+		this.templateName = path + "_edit_type.ftl";
 		this.datas = datas;
 		this.key = key;
 

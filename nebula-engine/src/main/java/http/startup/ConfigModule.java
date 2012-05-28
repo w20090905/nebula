@@ -4,26 +4,32 @@ import http.engine.DataResouceEngine;
 import http.engine.StaticResourceEngine;
 import http.server.BasicResourceContainer;
 import httpd.io.ClassPathLoader;
+import httpd.io.FileSystemLoader;
 import httpd.io.Loader;
+import httpd.io.MultiLoader;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import nebula.compiler.SystemTypeLoader;
 import nebula.frame.DataWareHouse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.simpleframework.http.core.Container;
 import org.simpleframework.http.resource.ResourceEngine;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 
 import freemarker.template.Configuration;
 
 public class ConfigModule extends AbstractModule {
+	private Log log = LogFactory.getLog(this.getClass());
 
 	static final String APP_DEFINE_PATH = "app_define_path";
 	static final String DB_DRIVERCLASS = "db_driverclass";
@@ -35,9 +41,26 @@ public class ConfigModule extends AbstractModule {
 	protected void configure() {		
 		
 		try {
-			File tempalteFolder = new File(this.getClass().getResource("/htdocs/template/Type_list.ftl").getPath());
-
+			File root = null;
+			URL url =  this.getClass().getResource("/htdocs/WEB-INF/web.xml");
+			if(url!=null){
+				root = new File(url.getPath()).getParentFile().getParentFile();
+			}
+			
+			if(root==null){				
+				root = new File("htdocs");
+			}
+			
+			if(log.isTraceEnabled()){
+				log.trace("Root path : " + root.getAbsolutePath() );
+			}
+			if(!root.exists()){
+				throw new RuntimeException("cannot find htdocs");
+			}
+			
 			SystemTypeLoader typeLoader = new SystemTypeLoader();
+			typeLoader.load("nebula.properties");
+			
 			this.bind(SystemTypeLoader.class).toInstance(typeLoader);
 			
 			DataWareHouse dataWareHouse = new DataWareHouse();
@@ -46,7 +69,7 @@ public class ConfigModule extends AbstractModule {
 			
 			Configuration freemarkerConfiguration = new Configuration();
 			freemarkerConfiguration.setTemplateUpdateDelay(1);
-			freemarkerConfiguration.setDirectoryForTemplateLoading(tempalteFolder.getParentFile());
+			freemarkerConfiguration.setDirectoryForTemplateLoading(new File(root,"template"));
 			this.bind(Configuration.class).toInstance(freemarkerConfiguration);
 			
 			this.bind(StaticResourceEngine.class).in(Singleton.class);
@@ -77,7 +100,7 @@ public class ConfigModule extends AbstractModule {
 					site.register("*", staticEngine);							
 				}
 			});
-			ClassPathLoader loader = new ClassPathLoader(this.getClass().getClassLoader(), "htdocs");
+			Loader loader =new MultiLoader(new ClassPathLoader(this.getClass().getClassLoader(), "htdocs"),new FileSystemLoader(root));
 			this.bind(Loader.class).toInstance(loader);
 		} catch (IOException e) {
 			e.printStackTrace();

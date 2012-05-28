@@ -19,11 +19,6 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>com.google.inject</groupId>
-			<artifactId>guice</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
 			<groupId>org.simpleframework</groupId>
 			<artifactId>simple</artifactId>
 			<version>4.1.21</version>
@@ -48,6 +43,12 @@
 			<groupId>nebula</groupId>
 			<artifactId>nebula-compiler</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>3.0</version>
+			<classifier>no_aop</classifier>
 		</dependency>
 	</dependencies>
 </project>
