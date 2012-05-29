@@ -90,7 +90,7 @@ public abstract class TypeLoader {
 
 	public Type findType(String name) {
 		if (log.isTraceEnabled()) {
-			log.trace("Find type " + name);
+			log.trace(" --- " + name);
 		}
 		Type type = parent.findType(name);
 		if (type != null) {
@@ -106,7 +106,7 @@ public abstract class TypeLoader {
 		if (inputStream != null) {
 			List<Type> typeList = defineNebula(inputStream);
 			if (log.isTraceEnabled()) {
-				log.trace("** Load type " + name + " Succeed !");
+				log.trace("Load type " + name + " Succeed !");
 			}
 			return typeList.get(0);
 		} else {

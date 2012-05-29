@@ -2,6 +2,7 @@ package nebula.compiler;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -19,12 +20,28 @@ public class SystemTypeLoader extends TypeLoader {
 	public SystemTypeLoader() {
 		super(BootstrapTypeLoader.getInstance());
 		this.source = new ResourcePoolTail();
-		this.load("nebula.properties");
+		this.loadAll("nebula.properties");
 	}
 
-	public void load(String name) {
+	public ResourcePath insertResourcePath(ResourcePath cp) {
+		return source.insertResourcePath(cp);
+	}
+
+	public ResourcePath appendResourcePath(ResourcePath cp) {
+		return source.appendResourcePath(cp);
+	}
+
+	public ResourcePath insertResourcePath(String pathname) {
+		return source.insertResourcePath(pathname);
+	}
+
+	public ResourcePath appendResourcePath(String pathname) {
+		return source.appendResourcePath(pathname);
+	}
+
+	private void loadAll(String name) {
 		try {
-			
+
 			Enumeration<URL> resources = this.getClass().getClassLoader().getResources(name);
 
 			while (resources.hasMoreElements()) {
@@ -35,7 +52,7 @@ public class SystemTypeLoader extends TypeLoader {
 					source.appendResourcePath(new DirResourcePath(new File(url.getPath()).getParentFile().getPath()));
 				}
 			}
-			
+
 			resources = this.getClass().getClassLoader().getResources(name);
 			while (resources.hasMoreElements()) {
 				URL url = resources.nextElement();
@@ -59,7 +76,7 @@ public class SystemTypeLoader extends TypeLoader {
 			JarFile jf = new JarFile(f);
 			Enumeration<JarEntry> entries = jf.entries();
 			while (entries.hasMoreElements()) {
-				JarEntry entry =   entries.nextElement();
+				JarEntry entry = entries.nextElement();
 				if (entry.getName().endsWith(".nebula")) {
 					if (log.isTraceEnabled()) {
 						log.trace("** Load type from " + entry.getName());
@@ -77,7 +94,22 @@ public class SystemTypeLoader extends TypeLoader {
 			log.trace(root.getPath());
 		}
 		loadFolder(root, root);
+	}
 
+	public void reload(File file) {
+		try {
+			super.defineNebula(new FileInputStream(file));
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void reload(URL url) {
+		try {
+			super.defineNebula(url.openStream());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private void loadFolder(File root, File d) {
@@ -88,7 +120,7 @@ public class SystemTypeLoader extends TypeLoader {
 			for (File f : d.listFiles()) {
 				if (f.isFile() && f.getName().endsWith(".nebula")) {
 					if (log.isTraceEnabled()) {
-						log.trace("** Load type from " + f.getName());
+						log.trace("Load type from " + f.getName());
 					}
 					super.defineNebula(new FileInputStream(f));
 				} else if (f.isDirectory()) {
@@ -106,9 +138,9 @@ public class SystemTypeLoader extends TypeLoader {
 
 		if (log.isTraceEnabled()) {
 			if (inputStream != null)
-				log.trace("search class data : " + name + " succeed!");
+				log.trace("Load type from " + name + " succeed!");
 			else
-				log.trace("search class data : " + name + " fail!");
+				log.trace("Load type from " + name + " fail!");
 		}
 		return inputStream;
 	}
