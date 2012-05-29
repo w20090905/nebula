@@ -1,4 +1,4 @@
-﻿type 公司 {
+type 公司 {
 	!名称				Name;
-	?创立年月  			Date;
+	?创立年月      			Date;
 };
