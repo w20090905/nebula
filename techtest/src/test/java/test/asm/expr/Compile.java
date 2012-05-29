@@ -75,7 +75,7 @@ abstract class Exp implements Opcodes {
      */
     byte[] compile(final String name) {
         // class header
-        String[] itfs = { Expression.class.getName() };
+        String[] itfs = { Expression.class.getName().replace(".", "/") };
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
         cw.visit(V1_1, ACC_PUBLIC, name, null, "java/lang/Object", itfs);
 
