@@ -3,3 +3,5 @@
 /.settings
 *.class
 /bin
+/Assembler.tokens
+/Nebula.tokens
