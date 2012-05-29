@@ -61,6 +61,9 @@ public class SystemTypeLoader extends TypeLoader {
 			while (entries.hasMoreElements()) {
 				JarEntry entry =   entries.nextElement();
 				if (entry.getName().endsWith(".nebula")) {
+					if (log.isTraceEnabled()) {
+						log.trace("** Load type from " + entry.getName());
+					}
 					super.defineNebula(jf.getInputStream(entry));
 				}
 			}
@@ -84,6 +87,9 @@ public class SystemTypeLoader extends TypeLoader {
 
 			for (File f : d.listFiles()) {
 				if (f.isFile() && f.getName().endsWith(".nebula")) {
+					if (log.isTraceEnabled()) {
+						log.trace("** Load type from " + f.getName());
+					}
 					super.defineNebula(new FileInputStream(f));
 				} else if (f.isDirectory()) {
 					loadFolder(root, f);

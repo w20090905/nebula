@@ -64,7 +64,7 @@ public abstract class TypeLoader {
 
 	protected final List<Type> defineNebula(InputStream is) {
 		try {
-			List<Type> typeList = parse(new ANTLRInputStream(is));
+			List<Type> typeList = parse(new ANTLRInputStream(is,"utf-8"));
 			types.addAll(typeList);
 			return typeList;
 		} catch (IOException e) {
@@ -90,7 +90,7 @@ public abstract class TypeLoader {
 
 	public Type findType(String name) {
 		if (log.isTraceEnabled()) {
-			log.trace("Load type " + name);
+			log.trace("Find type " + name);
 		}
 		Type type = parent.findType(name);
 		if (type != null) {
@@ -106,7 +106,7 @@ public abstract class TypeLoader {
 		if (inputStream != null) {
 			List<Type> typeList = defineNebula(inputStream);
 			if (log.isTraceEnabled()) {
-				log.trace("Load type " + name + " Succeed !");
+				log.trace("** Load type " + name + " Succeed !");
 			}
 			return typeList.get(0);
 		} else {
