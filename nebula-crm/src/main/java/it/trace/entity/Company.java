@@ -45,7 +45,7 @@ public class Company implements java.io.Serializable{
 	@Column(name = "description")
 	private String description;
 	
-	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
 //	@Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
 	private List<Contact> contactList = new ArrayList<Contact>();
 

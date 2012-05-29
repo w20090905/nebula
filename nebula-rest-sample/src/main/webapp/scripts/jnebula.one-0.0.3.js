@@ -210,7 +210,7 @@
 								a.attr("rev", "modal");
 								a.html("<img src='img/page_save.png'/>");
 								a.click(function() {
-									$$.navigate(updateUrl, { url : ownUrl });
+									$$.popUp(updateUrl, { url : ownUrl });
 									return false;
 								});
 								td.append(a);
@@ -227,7 +227,7 @@
 								a.attr("rev", "modal");
 								a.html("<img src='img/delete.png'/>");
 								a.click(function() {
-									$$.navigate(removeUrl, { url : ownUrl });
+									$$.popUp(removeUrl, { url : ownUrl });
 									return false;
 								});
 								td.append(a);
@@ -248,7 +248,7 @@
 							a.attr("href", ownUrl);
 							a.html(td.html());
 							a.click(function() {
-								$$.navigate(referUrl, { url : ownUrl });
+								$$.popUp(referUrl, { url : ownUrl });
 								return false;
 							});
 							td.empty();
@@ -275,7 +275,7 @@
 							a.attr("href", ownUrl);
 							a.html("+");
 							a.click(function() {
-								$$.navigate(referUrl, { url : ownUrl });
+								$$.popUp(referUrl, { url : ownUrl });
 								return false;
 							});
 							td.empty();

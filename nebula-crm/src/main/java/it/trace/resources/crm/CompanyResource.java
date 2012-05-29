@@ -91,7 +91,7 @@ public class CompanyResource {
 				if ("update".equals(method.getName())
 						|| "create".equals(method.getName())) {
 					Company company = new Company();
-					if (context.getId() != null)
+					if (!"create".equals(method.getName())&& context.getId() != null)
 						company.setId(Integer.parseInt(context.getId()));
 					company.setName((String) context.getParameter("name"));
 					company.setTel((String) context.getParameter("tel"));
