@@ -1,6 +1,7 @@
 package nebula.compiler;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -13,27 +14,35 @@ import org.apache.commons.logging.LogFactory;
 
 public class SystemTypeLoader extends TypeLoader {
 	private Log log = LogFactory.getLog(this.getClass());
+	final ResourcePoolTail source;
 
 	public SystemTypeLoader() {
 		super(BootstrapTypeLoader.getInstance());
+		this.source = new ResourcePoolTail();
 		this.load("nebula.properties");
 	}
 
 	public void load(String name) {
 		try {
+			
 			Enumeration<URL> resources = this.getClass().getClassLoader().getResources(name);
 
 			while (resources.hasMoreElements()) {
 				URL url = resources.nextElement();
-				// PrintObejct.print(URL.class, url);
-				// System.out.println("Protocol " + url.getProtocol() );
-
 				if ("jar".equals(url.getProtocol())) {
-					String jarPath = url.getPath().substring(5).split("!")[0];
-					loadJar(new File(jarPath));
+					source.appendClassPath(new JarClassPath(url.getPath().substring(5).split("!")[0]));
 				} else {
-					File file = new File(url.getPath());
-					loadFolder(file.getParentFile(), file.getParentFile());
+					source.appendClassPath(new DirResourcePath(new File(url.getPath()).getParentFile().getPath()));
+				}
+			}
+			
+			resources = this.getClass().getClassLoader().getResources(name);
+			while (resources.hasMoreElements()) {
+				URL url = resources.nextElement();
+				if ("jar".equals(url.getProtocol())) {
+					loadJar(new File(url.getPath().substring(5).split("!")[0]));
+				} else {
+					loadFolder(new File(url.getPath()).getParentFile());
 				}
 			}
 
@@ -42,18 +51,17 @@ public class SystemTypeLoader extends TypeLoader {
 		}
 	}
 
-	public void loadJar(File f) {
+	private void loadJar(File f) {
 		if (log.isTraceEnabled()) {
 			log.trace(f.getPath());
 		}
 		try {
 			JarFile jf = new JarFile(f);
-			Enumeration<JarEntry> en = jf.entries();
-			while (en.hasMoreElements()) {
-				String name = en.nextElement().getName();
-				if (name.endsWith(".nebula")) {
-					name = name.substring(0, name.length() - ".nebula".length()).replace('\\', '.').replace('/', '.');
-					this.findType(name);
+			Enumeration<JarEntry> entries = jf.entries();
+			while (entries.hasMoreElements()) {
+				JarEntry entry =   entries.nextElement();
+				if (entry.getName().endsWith(".nebula")) {
+					super.defineNebula(jf.getInputStream(entry));
 				}
 			}
 		} catch (Exception e) {
@@ -61,23 +69,22 @@ public class SystemTypeLoader extends TypeLoader {
 		}
 	}
 
-	public void loadFolder(File root, File d) {
+	public void loadFolder(File root) {
 		if (log.isTraceEnabled()) {
 			log.trace(root.getPath());
 		}
+		loadFolder(root, root);
+
+	}
+
+	private void loadFolder(File root, File d) {
 		try {
 			if (!d.exists() || !d.isDirectory())
 				return;
 
-			int iStart = root.getPath().length() + 1;
-
 			for (File f : d.listFiles()) {
 				if (f.isFile() && f.getName().endsWith(".nebula")) {
-					String name = f.getPath();
-
-					name = name.substring(iStart, name.length() - ".nebula".length()).replace('\\', '.')
-							.replace('/', '.');
-					this.findType(name);
+					super.defineNebula(new FileInputStream(f));
 				} else if (f.isDirectory()) {
 					loadFolder(root, f);
 				}
@@ -89,14 +96,14 @@ public class SystemTypeLoader extends TypeLoader {
 
 	@Override
 	protected InputStream loadClassData(String name) {
-		ClassLoader clzLoader = this.getClass().getClassLoader();
-		InputStream is = clzLoader.getResourceAsStream(name);
+		InputStream inputStream = source.openResouce(name, ".nebula");
+
 		if (log.isTraceEnabled()) {
-			if (is != null)
+			if (inputStream != null)
 				log.trace("search class data : " + name + " succeed!");
 			else
 				log.trace("search class data : " + name + " fail!");
 		}
-		return is;
+		return inputStream;
 	}
 }

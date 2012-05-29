@@ -4,7 +4,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 class BootstrapTypeLoader extends TypeLoader {
+	private Log log = LogFactory.getLog(this.getClass());
 
 	private BootstrapTypeLoader() {
 		super(null);
@@ -45,8 +49,15 @@ class BootstrapTypeLoader extends TypeLoader {
 
 	@Override
 	protected InputStream loadClassData(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		ClassLoader clzLoader = this.getClass().getClassLoader();
+		InputStream is = clzLoader.getResourceAsStream(name);
+		if (log.isTraceEnabled()) {
+			if (is != null)
+				log.trace("search class data : " + name + " succeed!");
+			else
+				log.trace("search class data : " + name + " fail!");
+		}
+		return is;
 	}
 
 }

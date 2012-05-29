@@ -2,6 +2,7 @@ package nebula.compiler;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.io.StringReader;
 
 public class Compiler extends TypeLoader {
@@ -21,5 +22,11 @@ public class Compiler extends TypeLoader {
 		} catch (FileNotFoundException e) {
 			throw new NebulaRuntimeException(name,e);
 		}		
+	}
+
+	@Override
+	protected InputStream loadClassData(String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

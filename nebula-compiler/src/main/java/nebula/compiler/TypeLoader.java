@@ -22,7 +22,7 @@ public abstract class TypeLoader {
 
 	TypeLoader parent;
 
-	SmartList<Type> types = new SmartListImp<Type>("Type",new SmartListImp.AutoIdentifiable<Type>() {
+	SmartList<Type> types = new SmartListImp<Type>("Type", new SmartListImp.AutoIdentifiable<Type>() {
 		@Override
 		public String getId(Type data) {
 			return data.name;
@@ -46,13 +46,11 @@ public abstract class TypeLoader {
 
 	public Type load(Reader is) {
 		List<Type> typeList = defineNebula(is);
-		types.addAll(typeList);
 		return typeList.get(0);
 	}
 
 	public Type load(InputStream is) {
 		List<Type> typeList = defineNebula(is);
-		types.addAll(typeList);
 		return typeList.get(0);
 	}
 
@@ -66,7 +64,9 @@ public abstract class TypeLoader {
 
 	protected final List<Type> defineNebula(InputStream is) {
 		try {
-			return parse(new ANTLRInputStream(is));
+			List<Type> typeList = parse(new ANTLRInputStream(is));
+			types.addAll(typeList);
+			return typeList;
 		} catch (IOException e) {
 			throw new NebulaRuntimeException(e);
 		}
@@ -87,17 +87,10 @@ public abstract class TypeLoader {
 		}
 	}
 
-	protected final Type defineNAsm(InputStream is) {
-
-		return null;
-	}
-
-	protected final Type defineNType(InputStream is) {
-
-		return null;
-	}
-
 	public Type findType(String name) {
+		if (log.isTraceEnabled()) {
+			log.trace("Load type " + name);
+		}
 		Type type = parent.findType(name);
 		if (type != null) {
 			return type;
@@ -108,44 +101,31 @@ public abstract class TypeLoader {
 			return type;
 		}
 
-		String fullname = name.replace('.', '/') + ".ntype";
-		InputStream inputStream = loadClassData(fullname);
-		if (inputStream != null) {
-			type = defineNType(inputStream);
-			types.add(type);
-			return type;
-		}
-
-		fullname = name.replace('.', '/') + ".nebula";
-		inputStream = loadClassData(fullname);
+		InputStream inputStream = loadClassData(name);
 		if (inputStream != null) {
 			List<Type> typeList = defineNebula(inputStream);
-			types.addAll(typeList);
+			if (log.isTraceEnabled()) {
+				log.trace("Load type " + name + " Succeed !");
+			}
 			return typeList.get(0);
-		}
-
-		fullname = name.replace('.', '/') + ".nasm";
-		inputStream = loadClassData(fullname);
-		if (inputStream != null) {
-			type = defineNAsm(inputStream);
-			types.add(type);
-			return type;
 		} else {
 			return null;
 		}
 	}
 
-	protected InputStream loadClassData(String name) {
-		ClassLoader clzLoader = this.getClass().getClassLoader();
-		InputStream is = clzLoader.getResourceAsStream(name);
-		if (log.isTraceEnabled()) {
-			if (is != null)
-				log.trace("search class data : " + name + " succeed!");
-			else
-				log.trace("search class data : " + name + " fail!");
-		}
-		return is;
-	}
+	protected abstract InputStream loadClassData(String name);
+
+	// {
+	// ClassLoader clzLoader = this.getClass().getClassLoader();
+	// InputStream is = clzLoader.getResourceAsStream(name);
+	// if (log.isTraceEnabled()) {
+	// if (is != null)
+	// log.trace("search class data : " + name + " succeed!");
+	// else
+	// log.trace("search class data : " + name + " fail!");
+	// }
+	// return is;
+	// }
 
 	public SmartList<Type> getList() {
 		return this.types;
