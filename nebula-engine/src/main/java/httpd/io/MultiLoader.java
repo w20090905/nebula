@@ -1,5 +1,6 @@
 package httpd.io;
 
+@Deprecated
 public class MultiLoader implements Loader {
     final protected Loader[] loaders;
 

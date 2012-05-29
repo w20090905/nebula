@@ -3,6 +3,7 @@ package httpd.io;
 import java.io.IOException;
 import java.io.InputStream;
 
+@Deprecated
 public class Source {
     private final Object source;
     private final NestLoader loader;

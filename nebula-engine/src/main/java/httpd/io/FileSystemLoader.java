@@ -8,6 +8,7 @@ import java.io.InputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+@Deprecated
 public class FileSystemLoader implements NestLoader {
     private static final Log log = LogFactory.getLog(FileSystemLoader.class);
 
