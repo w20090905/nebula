@@ -26,9 +26,9 @@ import java.net.URL;
  * <p>The users can define a class implementing this interface so that
  * a class file is obtained from a non-standard source.
  *
- * @see ClassPool#insertClassPath(ClassPath)
- * @see ClassPool#appendClassPath(ClassPath)
- * @see ClassPool#removeClassPath(ClassPath)
+ * @see ClassPool#insertResourcePath(ClassPath)
+ * @see ClassPool#appendResourcePath(ClassPath)
+ * @see ClassPool#removeResourcePath(ClassPath)
  */
 public interface ResourcePath {
 	public final static String EXT = ".nebula";

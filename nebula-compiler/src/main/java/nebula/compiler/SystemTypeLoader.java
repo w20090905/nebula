@@ -30,9 +30,9 @@ public class SystemTypeLoader extends TypeLoader {
 			while (resources.hasMoreElements()) {
 				URL url = resources.nextElement();
 				if ("jar".equals(url.getProtocol())) {
-					source.appendClassPath(new JarClassPath(url.getPath().substring(5).split("!")[0]));
+					source.appendResourcePath(new JarClassPath(url.getPath().substring(5).split("!")[0]));
 				} else {
-					source.appendClassPath(new DirResourcePath(new File(url.getPath()).getParentFile().getPath()));
+					source.appendResourcePath(new DirResourcePath(new File(url.getPath()).getParentFile().getPath()));
 				}
 			}
 			

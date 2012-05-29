@@ -214,12 +214,12 @@ public class ResourcePoolTail implements ResourcePath {
 		return buf.toString();
 	}
 
-	public synchronized ResourcePath insertClassPath(ResourcePath cp) {
+	public synchronized ResourcePath insertResourcePath(ResourcePath cp) {
 		pathList = new ResourcePathList(cp, pathList);
 		return cp;
 	}
 
-	public synchronized ResourcePath appendClassPath(ResourcePath cp) {
+	public synchronized ResourcePath appendResourcePath(ResourcePath cp) {
 		ResourcePathList tail = new ResourcePathList(cp, null);
 		ResourcePathList list = pathList;
 		if (list == null)
@@ -234,7 +234,7 @@ public class ResourcePoolTail implements ResourcePath {
 		return cp;
 	}
 
-	public synchronized void removeClassPath(ResourcePath cp) {
+	public synchronized void removeResourcePath(ResourcePath cp) {
 		ResourcePathList list = pathList;
 		if (list != null)
 			if (list.path == cp)
@@ -251,15 +251,15 @@ public class ResourcePoolTail implements ResourcePath {
 	}
 
 	public ResourcePath appendSystemPath() {
-		return appendClassPath(new ClassResourcePath());
+		return appendResourcePath(new ClassResourcePath());
 	}
 
-	public ResourcePath insertClassPath(String pathname) {
-		return insertClassPath(makePathObject(pathname));
+	public ResourcePath insertResourcePath(String pathname) {
+		return insertResourcePath(makePathObject(pathname));
 	}
 
-	public ResourcePath appendClassPath(String pathname) {
-		return appendClassPath(makePathObject(pathname));
+	public ResourcePath appendResourcePath(String pathname) {
+		return appendResourcePath(makePathObject(pathname));
 	}
 
 	private static ResourcePath makePathObject(String pathname) {

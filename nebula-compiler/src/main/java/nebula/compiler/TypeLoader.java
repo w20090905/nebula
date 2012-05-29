@@ -79,6 +79,7 @@ public abstract class TypeLoader {
 			NebulaParser parser = new NebulaParser(tokens, this);
 			List<Type> types = parser.programDefinition();
 			if (parser.getNumberOfSyntaxErrors() > 0) {
+				log.error("Parser ERROR!");
 				throw new NebulaRuntimeException("Parser ERROR!");
 			}
 			return types;
