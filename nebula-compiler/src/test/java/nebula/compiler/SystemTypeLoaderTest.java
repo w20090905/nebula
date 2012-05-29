@@ -24,42 +24,43 @@ public class SystemTypeLoaderTest extends TestCase {
 		loader = new SystemTypeLoader();
 		
 
-		String sample1 = "type Sample{Name;};";
-		String sample2= "type Sample{Name;Age;};";
 
 		File tmp = new File("tmp");
+		root1 = new File(tmp,"test-nebula");
+		root2 = new File(tmp,"test-nebula2");
+		
 		if(tmp.exists()){
+			if(root1.exists()){
+				for(File f : root1.listFiles()){
+					f.delete();
+				}
+				root1.delete();
+			}
+
+			if(root2.exists()){
+				for(File f : root2.listFiles()){
+					f.delete();
+				}
+				root2.delete();
+			}
+			
 			for(File f : tmp.listFiles()){
 				f.delete();
 			}
 			tmp.delete();
 		}
-		tmp.mkdir();
 		
-		root1 = new File(tmp,"test-nebula");
-		if(root1.exists()){
-			for(File f : root1.listFiles()){
-				f.delete();
-			}
-			root1.delete();
-		}
+		tmp.mkdir();
 		root1.mkdir();
+		root2.mkdir();
 
+		String sample1 = "type Sample{Name;};";
 		File file1 = new File(root1,"Sample.nebula");
 		Writer w1 = new FileWriter(file1);
 		w1.write(sample1);
 		w1.close();
-		
-		root2 = new File(tmp,"test-nebula2");
-		if(root2.exists()){
-			for(File f : root2.listFiles()){
-				f.delete();
-			}
-			root2.delete();
-		}
 
-		root2.mkdir();
-		
+		String sample2= "type Sample{Name;Age;};";
 		File file2 = new File(root2,"Sample.nebula");
 		Writer w2 = new FileWriter(file2);
 		w2.write(sample2);
@@ -68,14 +69,39 @@ public class SystemTypeLoaderTest extends TestCase {
 	}
 
 	protected void tearDown() throws Exception {
-		super.tearDown();
+
+		File tmp = new File("tmp");
+		root1 = new File(tmp,"test-nebula");
+		root2 = new File(tmp,"test-nebula2");
+		
+		if(tmp.exists()){
+
+			if(root1.exists()){
+				for(File f : root1.listFiles()){
+					f.delete();
+				}
+				root1.delete();
+			}
+
+			if(root2.exists()){
+				for(File f : root2.listFiles()){
+					f.delete();
+				}
+				root2.delete();
+			}
+			
+			for(File f : tmp.listFiles()){
+				f.delete();
+			}
+			tmp.delete();
+		}
 	}
 
 	public void testInsertResourcePathResourcePath() {
 
 		loader.appendResourcePath(root1.getName());
 
-		final String name = root2.getName();
+		final String name = root2.getAbsolutePath();
 		loader.insertResourcePath(new ResourcePath() {
 			String directory = name;
 
@@ -120,9 +146,9 @@ public class SystemTypeLoaderTest extends TestCase {
 
 	public void testAppendResourcePathResourcePath() {
 
-		loader.appendResourcePath(root1.getName());
+		loader.appendResourcePath(root1.getAbsolutePath());
 
-		final String name = root2.getName();
+		final String name = root2.getAbsolutePath();
 		loader.appendResourcePath(new ResourcePath() {
 			String directory = name;
 
@@ -166,8 +192,8 @@ public class SystemTypeLoaderTest extends TestCase {
 	}
 
 	public void testInsertResourcePathString() {
-		loader.appendResourcePath(root1.getName());
-		loader.insertResourcePath(root2.getName());
+		loader.appendResourcePath(root1.getAbsolutePath());
+		loader.insertResourcePath(root2.getAbsolutePath());
 
 		Type type = loader.findType("Sample");
 		assertEquals("Sample", type.getName());
@@ -175,8 +201,8 @@ public class SystemTypeLoaderTest extends TestCase {
 	}
 
 	public void testAppendResourcePathString() {
-		loader.appendResourcePath(root1.getName());
-		loader.appendResourcePath(root2.getName());
+		loader.appendResourcePath(root1.getAbsolutePath());
+		loader.appendResourcePath(root2.getAbsolutePath());
 
 		Type type = loader.findType("Sample");
 		assertEquals("Sample", type.getName());
