@@ -1,9 +1,13 @@
-package nebula.compiler;
+package nebula.lang;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.StringReader;
+
+import nebula.lang.NebulaRuntimeException;
+import nebula.lang.Type;
+import nebula.lang.TypeLoader;
 
 public class Compiler extends TypeLoader {
 	public Compiler(TypeLoader parent) {

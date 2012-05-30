@@ -13,7 +13,7 @@
  * License.
  */
 
-package nebula.compiler;
+package nebula.lang;
 
 import java.io.InputStream;
 import java.net.URL;

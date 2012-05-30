@@ -1,4 +1,4 @@
-package nebula.compiler;
+package nebula.lang;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,6 +66,9 @@ public abstract class TypeLoader {
 		try {
 			List<Type> typeList = parse(new ANTLRInputStream(is,"utf-8"));
 			types.addAll(typeList);
+			if (log.isTraceEnabled()) {
+				log.trace(types.get(0).getName() + " load succeed");
+			}
 			return typeList;
 		} catch (IOException e) {
 			throw new NebulaRuntimeException(e);
@@ -105,9 +108,6 @@ public abstract class TypeLoader {
 		InputStream inputStream = loadClassData(name);
 		if (inputStream != null) {
 			List<Type> typeList = defineNebula(inputStream);
-			if (log.isTraceEnabled()) {
-				log.trace("Load type " + name + " Succeed !");
-			}
 			return typeList.get(0);
 		} else {
 			return null;

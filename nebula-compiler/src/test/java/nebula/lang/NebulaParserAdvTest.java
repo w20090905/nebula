@@ -1,4 +1,4 @@
-package nebula.compiler;
+package nebula.lang;
 
 /***
  * Excerpted from "The Definitive ANTLR Reference",
@@ -9,6 +9,10 @@ package nebula.compiler;
  * Visit http://www.pragmaticprogrammer.com/titles/tpantlr for more book information.
  ***/
 import java.math.BigDecimal;
+
+import nebula.lang.Field;
+import nebula.lang.SystemTypeLoader;
+import nebula.lang.Type;
 
 import junit.framework.TestCase;
 

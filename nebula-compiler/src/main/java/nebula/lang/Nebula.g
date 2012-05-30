@@ -5,7 +5,7 @@ options {
 }
 
 @header {
-	package nebula.compiler;
+	package nebula.lang;
 	import java.math.BigDecimal;
 	import java.util.ArrayList;
 	import java.util.HashMap;
@@ -13,7 +13,7 @@ options {
 	import java.util.Map;
 }
 @lexer::header{
-    package nebula.compiler;
+    package nebula.lang;
 }
 
 @members {

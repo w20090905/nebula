@@ -1,9 +1,15 @@
-package nebula.compiler;
+package nebula.lang;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 import junit.framework.TestCase;
+
+import nebula.lang.Field;
+import nebula.lang.NebulaLexer;
+import nebula.lang.NebulaParser;
+import nebula.lang.SystemTypeLoader;
+import nebula.lang.Type;
 
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;

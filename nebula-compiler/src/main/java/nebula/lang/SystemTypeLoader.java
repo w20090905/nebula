@@ -1,4 +1,4 @@
-package nebula.compiler;
+package nebula.lang;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -119,9 +119,6 @@ public class SystemTypeLoader extends TypeLoader {
 
 			for (File f : d.listFiles()) {
 				if (f.isFile() && f.getName().endsWith(".nebula")) {
-					if (log.isTraceEnabled()) {
-						log.trace("Load type from " + f.getName());
-					}
 					super.defineNebula(new FileInputStream(f));
 				} else if (f.isDirectory()) {
 					loadFolder(root, f);
@@ -135,13 +132,6 @@ public class SystemTypeLoader extends TypeLoader {
 	@Override
 	protected InputStream loadClassData(String name) {
 		InputStream inputStream = source.openResouce(name, ".nebula");
-
-		if (log.isTraceEnabled()) {
-			if (inputStream != null)
-				log.trace("Load type from " + name + " succeed!");
-			else
-				log.trace("Load type from " + name + " fail!");
-		}
 		return inputStream;
 	}
 }

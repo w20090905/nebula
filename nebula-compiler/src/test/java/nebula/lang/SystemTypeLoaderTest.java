@@ -1,4 +1,4 @@
-package nebula.compiler;
+package nebula.lang;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,6 +11,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import nebula.lang.ResourcePath;
+import nebula.lang.SystemTypeLoader;
+import nebula.lang.Type;
 
 import junit.framework.TestCase;
 

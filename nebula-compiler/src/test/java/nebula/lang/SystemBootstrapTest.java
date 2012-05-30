@@ -1,5 +1,6 @@
-package nebula.compiler;
+package nebula.lang;
 
+import nebula.lang.SystemTypeLoader;
 import junit.framework.TestCase;
 
 public class SystemBootstrapTest extends TestCase {

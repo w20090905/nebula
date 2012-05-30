@@ -1,5 +1,7 @@
-package nebula.compiler;
+package nebula.lang;
 
+import nebula.lang.SystemTypeLoader;
+import nebula.lang.Type;
 import junit.framework.TestCase;
 
 public class CompilerTest extends TestCase {

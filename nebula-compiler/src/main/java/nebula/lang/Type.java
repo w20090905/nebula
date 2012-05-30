@@ -1,4 +1,4 @@
-package nebula.compiler;
+package nebula.lang;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,8 @@ public class Type {
 	List<Field> fields;
 
 	Properties attrs;
+	
+	Object underlyingSource;
 	// Type declaringType;
 
 	public static String ENTITY = "Entity";

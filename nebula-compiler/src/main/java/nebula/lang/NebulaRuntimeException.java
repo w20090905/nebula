@@ -1,4 +1,4 @@
-package nebula.compiler;
+package nebula.lang;
 
 public class NebulaRuntimeException  extends RuntimeException {
 
