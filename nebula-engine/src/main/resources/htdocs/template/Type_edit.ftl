@@ -35,5 +35,7 @@
 			</#list>	
 		</tbody>
 	</table>
+	
+		<span class="value">${(data.underlyingSource)!0 }</span>
 </ul>
 

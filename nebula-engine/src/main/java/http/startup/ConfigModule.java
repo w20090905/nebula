@@ -15,8 +15,8 @@ import java.net.URL;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import nebula.compiler.SystemTypeLoader;
 import nebula.frame.DataWareHouse;
+import nebula.lang.SystemTypeLoader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -54,12 +54,13 @@ public class ConfigModule extends AbstractModule {
 			if(log.isTraceEnabled()){
 				log.trace("Root path : " + root.getAbsolutePath() );
 			}
+			
 			if(!root.exists()){
 				throw new RuntimeException("cannot find htdocs");
 			}
 			
-			SystemTypeLoader typeLoader = new SystemTypeLoader();
-			typeLoader.load("nebula.properties");
+			SystemTypeLoader typeLoader = new SystemTypeLoader(new SystemTypeLoader());
+			typeLoader.loadFolder(new File(root,"WEB-INF/nebula"));
 			
 			this.bind(SystemTypeLoader.class).toInstance(typeLoader);
 			

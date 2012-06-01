@@ -34,13 +34,6 @@ public class TypeEditResouce implements Resource {
 		this.templateName = path + "_edit_type.ftl";
 		this.datas = datas;
 		this.key = key;
-
-		try {
-			root.put("TypeStandalone",
-					BeansWrapper.getDefaultInstance().getEnumModels().get("nebula.compiler.Type.TypeStandalone"));
-		} catch (TemplateModelException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override

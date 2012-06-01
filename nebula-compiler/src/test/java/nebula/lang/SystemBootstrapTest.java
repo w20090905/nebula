@@ -15,11 +15,10 @@ public class SystemBootstrapTest extends TestCase {
 
 	public void testLoad() {
 		SystemTypeLoader bot = new SystemTypeLoader();
-		assertEquals("Age", bot.types.get("Age").getName());
-		assertEquals("Length", bot.types.get("Length").getName());
-		assertEquals("Person", bot.types.get("Person").getName());
-		assertEquals("Company", bot.types.get("Company").getName());
-		assertEquals(null, bot.types.get("String"));
+		assertEquals("Age",  bot.findType("Age").getName());
+		assertEquals("Length", bot.findType("Length").getName());
+		assertEquals("Person", bot.findType("Person").getName());
+		assertEquals("Company", bot.findType("Company").getName());
 		assertEquals("String", bot.findType("String").getName());
 	}
 

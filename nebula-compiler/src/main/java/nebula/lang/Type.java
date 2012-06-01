@@ -110,4 +110,8 @@ public class Type {
 	public TypeStandalone getStandalone() {
 		return standalone;
 	}
+
+	public Object getUnderlyingSource() {
+		return underlyingSource;
+	}
 }

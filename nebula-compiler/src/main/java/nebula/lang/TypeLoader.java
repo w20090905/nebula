@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import nebula.SmartList;
+import nebula.frame.AutoIdentifiable;
 import nebula.frame.SmartListImp;
 
 import org.antlr.runtime.ANTLRInputStream;
@@ -22,7 +23,7 @@ public abstract class TypeLoader {
 
 	TypeLoader parent;
 
-	SmartList<Type> types = new SmartListImp<Type>("Type", new SmartListImp.AutoIdentifiable<Type>() {
+	SmartList<Type> types = new SmartListImp<Type>("Type", new AutoIdentifiable<Type>() {
 		@Override
 		public String getId(Type data) {
 			return data.name;
@@ -54,20 +55,25 @@ public abstract class TypeLoader {
 		return typeList.get(0);
 	}
 
-	protected final List<Type> defineNebula(Reader is) {
+	protected List<Type> defineNebula(Reader is) {
 		try {
-			return parse(new ANTLRReaderStream(is));
+			List<Type> typeList = parse(new ANTLRReaderStream(is));
+			types.addAll(typeList);
+			if (log.isTraceEnabled()) {
+				log.trace(typeList.get(0).getName() + " load succeed");
+			}
+			return typeList;
 		} catch (IOException e) {
 			throw new NebulaRuntimeException(e);
 		}
 	}
 
-	protected final List<Type> defineNebula(InputStream is) {
+	protected List<Type> defineNebula(InputStream is) {
 		try {
 			List<Type> typeList = parse(new ANTLRInputStream(is,"utf-8"));
 			types.addAll(typeList);
 			if (log.isTraceEnabled()) {
-				log.trace(types.get(0).getName() + " load succeed");
+				log.trace(typeList.get(0).getName() + " load succeed");
 			}
 			return typeList;
 		} catch (IOException e) {
