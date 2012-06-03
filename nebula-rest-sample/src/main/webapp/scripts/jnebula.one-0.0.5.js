@@ -61,19 +61,30 @@
         },
 
         popUp : function(templateUrl, dataUrl) {
-            $.nmManual(templateUrl, {
-//                sizes : {
-//                    minW : 500
-//                },
-                callbacks : {
-                    beforeShowCont : function(e) {
-                        var el = e.elts.cont[0];
+			$.nmManual(url, {
+				sizes : {
+					initW : 1200,
+					initH : 1200,
+					w : 1200,
+					h : 1200,
+					minW : 500,
+					minH : 700
+				},
+				callbacks: {
+					beforeShowCont: function(e) {
+						
+						var el = e.elts.cont[0];
 
-                    }
-                }
-            });
+						$$.renderTable(el);
+						$$.renderTemplate(el, args);
+						$$.renderValidator(el);
+						$$.renderSubmit(el);
+						
+					}
+				}
+			});
 
-        },
+		},
 
         renderLink : function(el) {
             $$.renderNavigate(el);
@@ -233,7 +244,7 @@
                                 a.attr("href", ownUrl);
                                 a.html("<img src='img/page_save.png'/>");
                                 a.click(function() {
-                                    $$.navigate(updateUrl, ownUrl);
+                                    $$.popUp(updateUrl, ownUrl);
                                     return false;
                                 });
                                 td.append(a);
@@ -248,7 +259,7 @@
                                 a.attr("href", ownUrl);
                                 a.html("<img src='img/delete.png'/>");
                                 a.click(function() {
-                                    $$.navigate(removeUrl, ownUrl);
+                                    $$.popUp(removeUrl, ownUrl);
                                     return false;
                                 });
                                 td.append(a);

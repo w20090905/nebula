@@ -1,4 +1,4 @@
-if (!Admin) var Admin = {}
+if (!Admin) var Admin = {};
 
 //scrollToTop() - scroll window to the top
 Admin.scrollToTop = function(e) {
@@ -18,8 +18,8 @@ Admin.scrollToTop = function(e) {
 		$("html, body").animate({
 			scrollTop : 0
 		}, "slow");
-	})
-}
+	});
+};
 
 //setup() - Admin init and setup
 Admin.setup = function() {
@@ -96,7 +96,7 @@ Admin.progress = function(el, val, max) {
 		$(el).attr("value", val);
 		$(b).text(w + '%').fadeIn('fast');
 	});
-}
+};
 
 //expandableRows() - expandable table rows
 Admin.expandableRows = function() {
@@ -126,7 +126,7 @@ Admin.expandableRows = function() {
 			return false;
 		});
 	}
-}
+};
 
 Admin.include = function(el, url) {
 	$.get(Admin.rebase(url), function(data) {

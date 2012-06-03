@@ -238,7 +238,7 @@
                         });
                         return nRow;
                     }
-                });k
+                });
                 
                 $(this).data("oTable", oTable);
                 

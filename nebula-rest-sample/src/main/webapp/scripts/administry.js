@@ -21,7 +21,7 @@ imgs = ["/nebula-rest-sample/img/toggle.gif", "/nebula-rest-sample/img/nyro/ajax
 for (i = 0; i < imgs.length; i++) imageObj.src = imgs[i];
 
 // Administry object setup
-if (!Administry) var Administry = {}
+if (!Administry) var Administry = {};
 
 // scrollToTop() - scroll window to the top
 Administry.scrollToTop = function (e) {
@@ -41,8 +41,8 @@ Administry.scrollToTop = function (e) {
         $("html, body").animate({
             scrollTop: 0
         }, "slow");
-    })
-}
+    });
+};
 
 // setup() - Administry init and setup
 Administry.setup = function () {
@@ -120,7 +120,7 @@ Administry.progress = function (el, val, max) {
         $(el).attr("value", val);
         $(b).text(w + '%').fadeIn('fast');
     });
-}
+};
 
 //expandableRows() - expandable table rows
 Administry.expandableRows = function() {
@@ -150,7 +150,7 @@ Administry.expandableRows = function() {
 			return false;
 		});
 	}
-}
+};
 
 Administry.include = function(el, url) {
 	$.get(Administry.rebase(url), function(data) {
