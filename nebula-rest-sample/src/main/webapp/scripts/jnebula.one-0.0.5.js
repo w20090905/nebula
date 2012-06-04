@@ -57,11 +57,10 @@
                 $$.renderValidator(el);
                 $$.renderSubmit(el);
             });
-
         },
 
         popUp : function(templateUrl, dataUrl) {
-			$.nmManual(url, {
+			$.nmManual(templateUrl, {
 				sizes : {
 					initW : 1200,
 					initH : 1200,
@@ -75,8 +74,8 @@
 						
 						var el = e.elts.cont[0];
 
-						$$.renderTable(el);
-						$$.renderTemplate(el, args);
+						$$.processTemplate(el, dataUrl);
+		                $$.renderLink(el);
 						$$.renderValidator(el);
 						$$.renderSubmit(el);
 						
@@ -126,6 +125,15 @@
                         dataType : "json",
                         async : false,
                         success : function(data) {
+                        	// 弹出框 ++++++++++++++++++++++++++++++++++++++
+							if ($.nmTop() != undefined) {
+								$.nmTop().close();
+							}
+                        	// ----------------------
+							// tables刷新 ++++++++++++++++++++++++++++++++++
+							// TODO 要改
+				            $('nav.menu li.current > a[href]').click();
+							//---------------------------------------------
                             return false;
                         },
                         error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -146,16 +154,13 @@
                     error.insertAfter(element.parent().find('label:first'));
                 }
             });
-            
+
             if (validator == undefined) {
                 return;
             }
             
             validator.onsubmit = false;
-            
-            
-            
-            
+
         },
 
         processTemplate : function(el, dataUrl) {
@@ -331,6 +336,8 @@
                         return nRow;
                     }
                 });
+				
+				$(this).data("oTable", oTable);
 
             });
         },
