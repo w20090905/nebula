@@ -7,8 +7,8 @@ import it.trace.nebula.rest.resource.Hierarchy;
 import it.trace.nebula.rest.resource.Operation;
 import it.trace.nebula.rest.resource.Resource;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,7 +22,7 @@ public class SimpleRESTfulExecutorFinder implements ExecutorFinder {
 
     protected static Pattern URI_PATTERN = Pattern.compile("/([^/]+)/([^/]+)/(?:([^/!]*)(?:!([^/]*)|)(?:/|)|)$");
 
-    protected Map<String, ActionExecutor> cache = new HashMap<String, ActionExecutor>();
+    protected Map<String, ActionExecutor> cache = new ConcurrentHashMap<String, ActionExecutor>();
 
     /**
      * <ul>
@@ -43,13 +43,13 @@ public class SimpleRESTfulExecutorFinder implements ExecutorFinder {
     @Override
     public ActionExecutor lookup(String httpMethod, String accept, String path) {
         assert path != null : "参数”path“不能为空。";
-        assert path.startsWith("/") : "参数”path“必须以”/“开头。";
+        assert !path.startsWith("/") : "参数”path“必须以”/“开头。";
 
         String cacheKey = httpMethod + accept + path;
 
         ActionExecutor ex = cache.get(cacheKey);
         if (ex != null) {
-            return cache.get(cacheKey);
+            return ex;
         }
 
         Matcher m = URI_PATTERN.matcher(path);
