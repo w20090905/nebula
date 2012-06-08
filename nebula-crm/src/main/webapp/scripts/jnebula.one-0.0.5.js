@@ -57,23 +57,33 @@
                 $$.renderValidator(el);
                 $$.renderSubmit(el);
             });
-
         },
 
         popUp : function(templateUrl, dataUrl) {
-            $.nmManual(templateUrl, {
-//                sizes : {
-//                    minW : 500
-//                },
-                callbacks : {
-                    beforeShowCont : function(e) {
-                        var el = e.elts.cont[0];
+			$.nmManual(templateUrl, {
+				sizes : {
+					initW : 1200,
+					initH : 1200,
+					w : 1200,
+					h : 1200,
+					minW : 500,
+					minH : 700
+				},
+				callbacks: {
+					beforeShowCont: function(e) {
+						
+						var el = e.elts.cont[0];
 
-                    }
-                }
-            });
+						$$.processTemplate(el, dataUrl);
+		                $$.renderLink(el);
+						$$.renderValidator(el);
+						$$.renderSubmit(el);
+						
+					}
+				}
+			});
 
-        },
+		},
 
         renderLink : function(el) {
             $$.renderNavigate(el);
@@ -115,6 +125,15 @@
                         dataType : "json",
                         async : false,
                         success : function(data) {
+                        	// 弹出框 ++++++++++++++++++++++++++++++++++++++
+							if ($.nmTop() != undefined) {
+								$.nmTop().close();
+							}
+                        	// ----------------------
+							// tables刷新 ++++++++++++++++++++++++++++++++++
+							// TODO 要改
+				            $('nav.menu li.current > a[href]').click();
+							//---------------------------------------------
                             return false;
                         },
                         error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -135,16 +154,13 @@
                     error.insertAfter(element.parent().find('label:first'));
                 }
             });
-            
+
             if (validator == undefined) {
                 return;
             }
             
             validator.onsubmit = false;
-            
-            
-            
-            
+
         },
 
         processTemplate : function(el, dataUrl) {
@@ -233,7 +249,7 @@
                                 a.attr("href", ownUrl);
                                 a.html("<img src='img/page_save.png'/>");
                                 a.click(function() {
-                                    $$.navigate(updateUrl, ownUrl);
+                                    $$.popUp(updateUrl, ownUrl);
                                     return false;
                                 });
                                 td.append(a);
@@ -248,7 +264,7 @@
                                 a.attr("href", ownUrl);
                                 a.html("<img src='img/delete.png'/>");
                                 a.click(function() {
-                                    $$.navigate(removeUrl, ownUrl);
+                                    $$.popUp(removeUrl, ownUrl);
                                     return false;
                                 });
                                 td.append(a);
@@ -320,6 +336,8 @@
                         return nRow;
                     }
                 });
+				
+				$(this).data("oTable", oTable);
 
             });
         },
