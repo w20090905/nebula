@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "Contact")
@@ -54,7 +55,7 @@ public class Contact implements java.io.Serializable {
 	private Company company;
 
 	@OneToMany(mappedBy = "contact", fetch = FetchType.LAZY)
-//	@Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
+	@Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
 	private List<Touch> touchList = new ArrayList<Touch>();
 
 	public int getId() {
