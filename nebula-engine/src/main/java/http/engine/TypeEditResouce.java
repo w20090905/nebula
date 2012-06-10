@@ -1,11 +1,15 @@
+
+
+
+
 package http.engine;
 
+import http.json.JSON;
+
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 import nebula.SmartList;
+import nebula.lang.Type;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,50 +17,37 @@ import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 import org.simpleframework.http.resource.Resource;
 
-import freemarker.ext.beans.BeansWrapper;
-import freemarker.template.Configuration;
-import freemarker.template.TemplateException;
-import freemarker.template.TemplateModelException;
-
 public class TypeEditResouce implements Resource {
 	private static Log log = LogFactory.getLog(TypeEditResouce.class);
-
-	private final Configuration cfg;
-	private final String templateName;
-
-	private Map<String, Object> root = new HashMap<String, Object>();
-
 	private final String key;
-	private final SmartList<?> datas;
+	private final SmartList<Type> types;
 
-	public TypeEditResouce(Configuration cfg, String path, SmartList<?> datas, String key) {
-		this.cfg = cfg;
-		this.templateName = path + "_edit_type.ftl";
-		this.datas = datas;
+	@SuppressWarnings("unchecked")
+	public TypeEditResouce(String path, SmartList<?> datas, String key) {
+		this.types = (SmartList<Type>)datas;
 		this.key = key;
 	}
 
 	@Override
 	public void handle(Request req, Response resp) {
 		try {
-			if (log.isTraceEnabled()) {
-				log.trace("Request : " + req.getPath());
-				log.trace("\ttemplateName : " + templateName);
-				log.trace("\tkey : " + key);
+			if ("GET".equals(req.getMethod())) {
+				if (log.isTraceEnabled()) {
+					log.trace("Request : " + req.getPath());
+					log.trace("\tkey : " + key);
+				}
+				// normal parse
+				resp.setCode(200);
+				resp.set("Cache-Control", "max-age=0");
+				resp.set("Content-Language", "en-US");
+				resp.set("Content-Type", "text/html");
+				resp.setDate("Date", System.currentTimeMillis());
+				Type type = types.get(key);
+				JSON.getSerialize(Type.class).stringifyTo(type, resp.getOutputStream());
+
+				resp.getOutputStream().flush();
+				resp.close();
 			}
-			// normal parse
-			resp.setCode(200);
-			resp.set("Cache-Control", "max-age=0");
-			resp.set("Content-Language", "en-US");
-			resp.set("Content-Type", "text/html");
-			resp.setDate("Date", System.currentTimeMillis());
-			root.put("data", datas.get(key));
-			cfg.getTemplate(templateName).process(root, new OutputStreamWriter(resp.getOutputStream()));
-			resp.getOutputStream().flush();
-			resp.close();
-		} catch (TemplateException e) {
-			log.error(e);
-			throw new RuntimeException(e);
 		} catch (IOException e) {
 			log.error(e);
 			throw new RuntimeException(e);

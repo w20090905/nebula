@@ -24,6 +24,7 @@ public class Type {
 	Properties attrs;
 	
 	Object underlyingSource;
+	String text;
 	// Type declaringType;
 
 	public static String ENTITY = "Entity";
@@ -113,5 +114,9 @@ public class Type {
 
 	public Object getUnderlyingSource() {
 		return underlyingSource;
+	}
+
+	public String getText() {
+		return text;
 	}
 }

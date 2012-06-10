@@ -1,0 +1,13 @@
+[{
+        "href": "#/Type/",
+        "label": "Type"
+},{
+        "href": "#/Type/Person",
+        "label": "Person"
+},{
+        "href": "#/Type/Company",
+        "label": "Company"
+},{
+        "href": "#/Type/Product",
+        "label": "Product"
+}]

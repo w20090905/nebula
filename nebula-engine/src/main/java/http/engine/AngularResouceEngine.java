@@ -13,14 +13,14 @@ import org.simpleframework.http.resource.ResourceEngine;
 
 import freemarker.template.Configuration;
 
-public class TypeEditResouceEngine implements ResourceEngine {
+public class AngularResouceEngine implements ResourceEngine {
 	private Log log = LogFactory.getLog(this.getClass());
 	
 	private final Configuration cfg;
 	DataWareHouse dataWareHouse;
 
 	@Inject
-	public TypeEditResouceEngine(Configuration cfg, DataWareHouse dataWareHouse) {
+	public AngularResouceEngine(Configuration cfg, DataWareHouse dataWareHouse) {
 		this.cfg = cfg;
 		this.dataWareHouse = dataWareHouse;
 	}

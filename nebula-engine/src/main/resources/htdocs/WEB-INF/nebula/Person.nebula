@@ -1,6 +1,6 @@
-type 员工 {
+type Person {
 	!姓名				Name;
-	*公司;
+	*Company;
 	Birthday;
 	/*Age = Today.year - BirthdayDay.year;*/
 	Height;

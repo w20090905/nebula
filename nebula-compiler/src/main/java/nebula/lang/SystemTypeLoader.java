@@ -1,10 +1,14 @@
 package nebula.lang;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.List;
@@ -21,6 +25,7 @@ public class SystemTypeLoader extends TypeLoader {
 		this.source = new ResourcePoolTail();
 		this.init("nebula.properties");
 	}
+
 	public SystemTypeLoader(TypeLoader parent) {
 		super(parent);
 		this.source = new ResourcePoolTail();
@@ -56,44 +61,44 @@ public class SystemTypeLoader extends TypeLoader {
 				}
 			}
 
-//			resources = this.getClass().getClassLoader().getResources(name);
-//			while (resources.hasMoreElements()) {
-//				URL url = resources.nextElement();
-//				if ("jar".equals(url.getProtocol())) {
-//					loadJar(new File(url.getPath().substring(5).split("!")[0]));
-//				} else {
-//					loadFolder(new File(url.getPath()).getParentFile());
-//				}
-//			}
+			// resources = this.getClass().getClassLoader().getResources(name);
+			// while (resources.hasMoreElements()) {
+			// URL url = resources.nextElement();
+			// if ("jar".equals(url.getProtocol())) {
+			// loadJar(new File(url.getPath().substring(5).split("!")[0]));
+			// } else {
+			// loadFolder(new File(url.getPath()).getParentFile());
+			// }
+			// }
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-//	private void loadJar(File f) {
-//		if (log.isTraceEnabled()) {
-//			log.trace(f.getPath());
-//		}
-//		try {
-//			JarFile jf = new JarFile(f);
-//			Enumeration<JarEntry> entries = jf.entries();
-//			while (entries.hasMoreElements()) {
-//				JarEntry entry = entries.nextElement();
-//				if (entry.getName().endsWith(".nebula")) {
-//					if (log.isTraceEnabled()) {
-//						log.trace("** Load type from " + entry.getName());
-//					}
-//					List<Type> typeList = super.defineNebula(jf.getInputStream(entry));
-//					for (Type type : typeList) {
-//						type.underlyingSource = entry;
-//					}
-//				}
-//			}
-//		} catch (Exception e) {
-//			throw new RuntimeException(e);
-//		}
-//	}
+	// private void loadJar(File f) {
+	// if (log.isTraceEnabled()) {
+	// log.trace(f.getPath());
+	// }
+	// try {
+	// JarFile jf = new JarFile(f);
+	// Enumeration<JarEntry> entries = jf.entries();
+	// while (entries.hasMoreElements()) {
+	// JarEntry entry = entries.nextElement();
+	// if (entry.getName().endsWith(".nebula")) {
+	// if (log.isTraceEnabled()) {
+	// log.trace("** Load type from " + entry.getName());
+	// }
+	// List<Type> typeList = super.defineNebula(jf.getInputStream(entry));
+	// for (Type type : typeList) {
+	// type.underlyingSource = entry;
+	// }
+	// }
+	// }
+	// } catch (Exception e) {
+	// throw new RuntimeException(e);
+	// }
+	// }
 
 	public void loadFolder(File root) {
 		source.appendResourcePath(new DirResourcePath(root.getAbsolutePath()));
@@ -108,6 +113,7 @@ public class SystemTypeLoader extends TypeLoader {
 			List<Type> typeList = super.defineNebula(new FileInputStream(file));
 			for (Type type : typeList) {
 				type.underlyingSource = file;
+				type.text = readAllTextFrom(file);
 			}
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
@@ -119,6 +125,7 @@ public class SystemTypeLoader extends TypeLoader {
 			List<Type> typeList = super.defineNebula(url.openStream());
 			for (Type type : typeList) {
 				type.underlyingSource = url;
+				type.text = readAllTextFrom(url);
 			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -132,10 +139,11 @@ public class SystemTypeLoader extends TypeLoader {
 
 			for (File f : d.listFiles()) {
 				if (f.isFile() && f.getName().endsWith(".nebula")) {
-					List<Type> typeList = 	super.defineNebula(new FileInputStream(f));
+					List<Type> typeList = super.defineNebula(new FileInputStream(f));
 					for (Type type : typeList) {
 						type.underlyingSource = f;
-					}					
+						type.text = readAllTextFrom(f);
+					}
 				} else if (f.isDirectory()) {
 					loadFolder(root, f);
 				}
@@ -143,6 +151,49 @@ public class SystemTypeLoader extends TypeLoader {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	// TODO move to other place
+	private String readAllTextFrom(File file) {
+		try {
+			return readAllTextFrom(new FileReader(file));
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	// TODO move to other place
+	private String readAllTextFrom(URL url) {
+		try {
+			return readAllTextFrom(new InputStreamReader(url.openStream()));
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private String readAllTextFrom(Reader reader) {
+		StringBuilder sb = new StringBuilder();
+		BufferedReader in = null;
+		try {
+			in = new BufferedReader(reader);
+			String textLine = null;
+			while ((textLine = in.readLine()) != null) {
+				sb.append(textLine);
+				sb.append('\n');
+			}
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (in != null) {
+				try {
+					in.close();
+				} catch (IOException e) {
+				}
+			}
+		}
+		return sb.toString();
 	}
 
 	@Override

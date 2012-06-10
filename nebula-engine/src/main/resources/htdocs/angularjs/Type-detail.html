@@ -1,0 +1,44 @@
+<h1>{{data.name}}&nbsp;</h1>
+<tabs>
+<pane title="view">
+<ul class="data">
+	<li>
+		<span class="label">Name</span>
+		<span class="value">&nbsp;{{data.name}}</span>
+	</li>
+	<li>
+		<span class="label">Parent Type</span>
+		<span class="value">&nbsp;{{data.superType.name}}</span>
+	</li>
+	<li>
+		<span class="label">standalone</span>
+		<span class="value">&nbsp;{{data.standalone}}</span>
+	</li>
+	
+	<table class="list"> 
+		<thead>	
+			<tr>
+				<th style="width:10em;"> Name </th>
+				<th> Type </th>
+				<th> Master </th>
+				<th> Standalone </th>
+			</tr>
+		</thead>
+			
+		<tbody>
+			<tr ng-repeat="item in data.fields">
+				<td align="left">{{item.name}}</td>
+				<td>{{item.typename}} </td>
+				<td> </a></td>
+				<td> </td>
+			</tr>
+		</tbody>
+	</table>
+	
+</ul>
+</pane>
+<pane title="edit">
+<textarea ng-model="data.text" cols="90" rows="20"></textarea> 
+
+</pane>
+

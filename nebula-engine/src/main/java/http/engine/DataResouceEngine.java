@@ -2,7 +2,9 @@ package http.engine;
 
 import javax.inject.Inject;
 
+import nebula.SmartList;
 import nebula.frame.DataWareHouse;
+import nebula.lang.Type;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,6 +42,9 @@ public class DataResouceEngine implements ResourceEngine {
 		}
 
 		if (name != null) {
+			if("Type".equals(path)){
+				return new TypeEditResouce(path, dataWareHouse.get(path), name);
+			}
 			return new DataResouce(cfg, path, dataWareHouse.get(path), name);
 		} else {
 			return new DataListResouce(cfg, path, dataWareHouse.get(path));

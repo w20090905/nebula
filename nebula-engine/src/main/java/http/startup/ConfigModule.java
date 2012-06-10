@@ -28,6 +28,7 @@ import com.google.inject.TypeLiteral;
 
 import freemarker.template.Configuration;
 
+@SuppressWarnings("deprecation")
 public class ConfigModule extends AbstractModule {
 	private Log log = LogFactory.getLog(this.getClass());
 
@@ -98,9 +99,11 @@ public class ConfigModule extends AbstractModule {
 				@Override
 				public void configure(BasicResourceContainer site) {
 					site.register("/d/*", dataResouceEngine);	
+					site.register("/e/*", staticEngine);	
 					site.register("*", staticEngine);							
 				}
 			});
+			
 			Loader loader =new MultiLoader(new ClassPathLoader(this.getClass().getClassLoader(), "htdocs"),new FileSystemLoader(root));
 			this.bind(Loader.class).toInstance(loader);
 		} catch (IOException e) {
