@@ -5,7 +5,7 @@
 
 var neTabsDirective = [function() {
     return {
-      restrict: 'E',
+      restrict: 'EC',
       transclude: true,
       scope: {},
       controller: function($scope, $element) {
@@ -39,7 +39,7 @@ var neTabsDirective = [function() {
 var nePaneDirective = [ function() {
     return {
       require: '^tabs',
-      restrict: 'E',
+      restrict: 'EC',
       transclude: true,
       scope: { title: 'bind' },
       link: function(scope, element, attrs, tabsCtrl) {

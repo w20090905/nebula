@@ -198,6 +198,7 @@ img {
 	padding: 5px;
 	margin: 1px;
 }
+/*
 #main ul.data li span.label{
 	background-color: silver;
 	text-align: right;
@@ -205,7 +206,7 @@ img {
 #main ul.data li span.value{
 	background-color: #dddddd;
 	text-align: left;
-}
+}*/
 
 #main table.list{
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;

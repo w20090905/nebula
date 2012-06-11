@@ -5,6 +5,7 @@
 package http.engine;
 
 import http.json.JSON;
+import http.server.PrintObejct;
 
 import java.io.IOException;
 
@@ -45,6 +46,23 @@ public class TypeEditResouce implements Resource {
 				Type type = types.get(key);
 				JSON.getSerialize(Type.class).stringifyTo(type, resp.getOutputStream());
 
+				resp.getOutputStream().flush();
+				resp.close();
+			}else if("PUT".equals(req.getMethod())) {
+				if (log.isTraceEnabled()) {
+					log.trace("Request : " + req.getPath());
+					log.trace("\tkey : " + key);
+				}
+				// normal parse
+				resp.setCode(200);
+				resp.set("Cache-Control", "max-age=0");
+				resp.set("Content-Language", "en-US");
+				resp.set("Content-Type", "text/html");
+				resp.setDate("Date", System.currentTimeMillis());
+//				Type type = types.get(key);
+				
+				PrintObejct.print(Request.class, req);
+				
 				resp.getOutputStream().flush();
 				resp.close();
 			}
