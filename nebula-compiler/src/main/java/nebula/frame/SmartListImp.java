@@ -181,4 +181,9 @@ public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartLis
 	public boolean addAll(int index, Collection<? extends E> c) {
 		throw new UnsupportedOperationException("addAll");
 	}
+
+	@Override
+	public void save(E data) {
+		this.add(data);		
+	}
 }

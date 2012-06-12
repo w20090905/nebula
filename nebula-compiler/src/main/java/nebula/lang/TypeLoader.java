@@ -45,20 +45,23 @@ public abstract class TypeLoader {
 		this.parent = parent;
 	}
 
-	public Type load(Reader is) {
-		List<Type> typeList = defineNebula(is);
-		return typeList.get(0);
-	}
-
-	public Type load(InputStream is) {
-		List<Type> typeList = defineNebula(is);
-		return typeList.get(0);
-	}
 
 	protected List<Type> defineNebula(Reader is) {
 		try {
 			List<Type> typeList = parse(new ANTLRReaderStream(is));
 			types.addAll(typeList);
+			if (log.isTraceEnabled()) {
+				log.trace(typeList.get(0).getName() + " load succeed");
+			}
+			return typeList;
+		} catch (IOException e) {
+			throw new NebulaRuntimeException(e);
+		}
+	}
+	
+	protected List<Type> tryDefineNebula(Reader is) {
+		try {
+			List<Type> typeList = parse(new ANTLRReaderStream(is));
 			if (log.isTraceEnabled()) {
 				log.trace(typeList.get(0).getName() + " load succeed");
 			}

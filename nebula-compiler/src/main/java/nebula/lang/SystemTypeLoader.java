@@ -5,11 +5,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.StringReader;
+import java.io.Writer;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -108,7 +113,7 @@ public class SystemTypeLoader extends TypeLoader {
 		loadFolder(root, root);
 	}
 
-	public void reload(File file) {
+	protected void reload(File file) {
 		try {
 			List<Type> typeList = super.defineNebula(new FileInputStream(file));
 			for (Type type : typeList) {
@@ -119,6 +124,38 @@ public class SystemTypeLoader extends TypeLoader {
 			throw new RuntimeException(e);
 		}
 	}
+
+	public Type reload(Type oldType) {
+		try {
+			List<Type> typeList = tryDefineNebula(new StringReader(oldType.text));
+			File file = (File)oldType.underlyingSource;
+
+			SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+
+			String abpath = file.getAbsolutePath();
+			File newFile = new File(abpath + "." +  format.format(new Date(file.lastModified())));
+			
+			file.renameTo(newFile);
+
+			file = new File(abpath);
+			Writer w = new FileWriter(file);
+			w.write(oldType.text);
+			w.close();
+
+			this.reload(file);
+			
+			return typeList.get(0);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+//	public Type reload(Reader is) {
+//		List<Type> typeList = defineNebula(is);
+//		for (Type type : typeList) {
+//			type.text = readAllTextFrom(is);
+//		}
+//		return typeList.get(0);
+//	}
 
 	public void reload(URL url) {
 		try {
