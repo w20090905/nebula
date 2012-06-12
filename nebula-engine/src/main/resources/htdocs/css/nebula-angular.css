@@ -44,7 +44,29 @@ div.opened{
 	visibility:visible;
 }
 
-textarea.text{
+textarea.sourceeditor{
 	width: 50em;
 	height: 30em;
+}
+
+#main h1{
+	margin:.4em 0 .2em 0;
+}
+
+#main ul.data{
+	padding:0px;
+	list-style:none;
+	margin: 1px;
+}
+
+#main ul.data li span{
+	display: inline-block;
+	width: 10em;
+	padding: 5px;
+	margin: 1px;
+	vertical-align: bottom;
+}
+
+#main ul.data li span.value{
+	vertical-align: bottom;
 }

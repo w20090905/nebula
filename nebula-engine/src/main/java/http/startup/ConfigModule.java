@@ -2,6 +2,7 @@ package http.startup;
 
 import http.engine.DataResouceEngine;
 import http.engine.StaticResourceEngine;
+import http.engine.TypeResouceEngine;
 import http.server.BasicResourceContainer;
 import httpd.io.ClassPathLoader;
 import httpd.io.FileSystemLoader;
@@ -83,11 +84,18 @@ public class ConfigModule extends AbstractModule {
 			this.bind(new TypeLiteral<Configurable<BasicResourceContainer>>(){}).toInstance(new Configurable<BasicResourceContainer>() {
 				StaticResourceEngine staticEngine;
 				DataResouceEngine dataResouceEngine;
+				TypeResouceEngine typeResouceEngine;
 
 				@SuppressWarnings("unused")
 				@Inject
 				public void setEngine(DataResouceEngine engine){
 					this.dataResouceEngine=engine;
+				}
+
+				@SuppressWarnings("unused")
+				@Inject
+				public void setEngine(TypeResouceEngine engine){
+					this.typeResouceEngine=engine;
 				}
 				
 				@SuppressWarnings("unused")
@@ -98,6 +106,7 @@ public class ConfigModule extends AbstractModule {
 				
 				@Override
 				public void configure(BasicResourceContainer site) {
+					site.register("/d/Type/*", typeResouceEngine);	
 					site.register("/d/*", dataResouceEngine);	
 					site.register("/e/*", staticEngine);	
 					site.register("*", staticEngine);							

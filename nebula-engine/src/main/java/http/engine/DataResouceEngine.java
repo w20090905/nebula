@@ -42,9 +42,6 @@ public class DataResouceEngine implements ResourceEngine {
 		}
 
 		if (name != null) {
-			if("Type".equals(path)){
-				return new TypeEditResouce(path, dataWareHouse.get(path), name);
-			}
 			return new DataResouce(cfg, path, dataWareHouse.get(path), name);
 		} else {
 			return new DataListResouce(cfg, path, dataWareHouse.get(path));

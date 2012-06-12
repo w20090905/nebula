@@ -1,4 +1,6 @@
-package http.json;
+package nebula.lang;
+
+import http.json.JsonSerialize;
 
 import java.io.IOException;
 
@@ -7,6 +9,9 @@ import nebula.lang.Type;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonGenerator;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.JsonParser;
+import org.codehaus.jackson.JsonToken;
 
 public class TypeSerialize implements JsonSerialize<Type> {
 	@Override
@@ -32,8 +37,25 @@ public class TypeSerialize implements JsonSerialize<Type> {
 	}
 
 	@Override
-	public void read(JsonGenerator generator, Type obj) {
-		// TODO Auto-generated method stub
+	public void read(JsonParser p, Type d) {
+        JsonToken t;
+        try {
+        	p.nextToken();
+			while ((t = p.nextToken()) != null) {
+			    if (t != JsonToken.FIELD_NAME) {
+			    	continue;
+			    }
+			    String fieldName = p.getCurrentName();
+			    p.nextToken();
+			    if ("text".equals(fieldName)) {
+			    	d.text = p.getText();
+			    }
+			}
+		} catch (JsonParseException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 
 	}
 
@@ -56,7 +78,8 @@ class FieldSerialize implements JsonSerialize<Field> {
 	}
 
 	@Override
-	public void read(JsonGenerator i, Field d) {
+	public void read(JsonParser p, Field d) {
+		
 	}
 
 }

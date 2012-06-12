@@ -39,31 +39,37 @@ public class BasicResourceContainer extends ResourceContainer {
 	
 	@Override
 	public void handle(Request req, Response resp) {
-		if(log.isTraceEnabled()){
-			log.trace(req.getAddress() 
-					+ " From : " + req.getClientAddress() 
-					+ " Method : " + req.getMethod());
-			log.trace("\tAccept : " + req.getValue("Accept") 
-					+ " Accept-Charset : " + req.getValue("Accept-Charset") 
-					+ " Accept-Encoding : " + req.getValue("Accept-Encoding") 
-					+ " User-Agent : " + req.getValue("User-Agent") 
-					+ " Locales : " + req.getLocales());
-			log.trace("\tCookies: ");
-			for(Cookie cookie: req.getCookies()){
-				log.trace("\t\t " + cookie.toString());
+		try {
+			if(log.isTraceEnabled()){
+				log.trace(req.getAddress() 
+						+ " From : " + req.getClientAddress() 
+						+ " Method : " + req.getMethod());
+				log.trace("\tAccept : " + req.getValue("Accept") 
+						+ " Accept-Charset : " + req.getValue("Accept-Charset") 
+						+ " Accept-Encoding : " + req.getValue("Accept-Encoding") 
+						+ " User-Agent : " + req.getValue("User-Agent") 
+						+ " Locales : " + req.getLocales());
+				log.trace("\tCookies: ");
+				for(Cookie cookie: req.getCookies()){
+					log.trace("\t\t " + cookie.toString());
+				}
 			}
+			String path = req.getAddress().getPath().getPath();
+			
+			ResourceEngine engine=null;
+			
+			for (int i = 0; i < patterns.size(); i++) {
+				if(patterns.get(i).matcher(path).matches()){
+					engine = engines.get(i);	
+				    engine.resolve(req.getAddress()).handle(req,resp);
+				    return;
+				}			
+			}
+			super.handle(req, resp);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			log.error(e);
+			throw e;
 		}
-		String path = req.getAddress().getPath().getPath();
-		
-		ResourceEngine engine=null;
-		
-		for (int i = 0; i < patterns.size(); i++) {
-			if(patterns.get(i).matcher(path).matches()){
-				engine = engines.get(i);	
-			    engine.resolve(req.getAddress()).handle(req,resp);
-			    return;
-			}			
-		}
-		super.handle(req, resp);
 	}
 }

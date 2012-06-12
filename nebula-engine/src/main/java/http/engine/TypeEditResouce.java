@@ -1,15 +1,11 @@
-
-
-
-
 package http.engine;
 
 import http.json.JSON;
-import http.server.PrintObejct;
 
 import java.io.IOException;
 
 import nebula.SmartList;
+import nebula.lang.SystemTypeLoader;
 import nebula.lang.Type;
 
 import org.apache.commons.logging.Log;
@@ -22,11 +18,13 @@ public class TypeEditResouce implements Resource {
 	private static Log log = LogFactory.getLog(TypeEditResouce.class);
 	private final String key;
 	private final SmartList<Type> types;
+	final SystemTypeLoader typeLoader;
 
 	@SuppressWarnings("unchecked")
-	public TypeEditResouce(String path, SmartList<?> datas, String key) {
-		this.types = (SmartList<Type>)datas;
+	public TypeEditResouce(SystemTypeLoader typeLoader, String path, SmartList<?> datas, String key) {
+		this.types = (SmartList<Type>) datas;
 		this.key = key;
+		this.typeLoader = typeLoader;
 	}
 
 	@Override
@@ -48,22 +46,26 @@ public class TypeEditResouce implements Resource {
 
 				resp.getOutputStream().flush();
 				resp.close();
-			}else if("PUT".equals(req.getMethod())) {
+			} else if ("POST".equals(req.getMethod())) {
 				if (log.isTraceEnabled()) {
 					log.trace("Request : " + req.getPath());
 					log.trace("\tkey : " + key);
 				}
+
+				Type type = types.get(key);
+				JSON.getSerialize(Type.class).readFrom(type, req.getInputStream());
+				typeLoader.reload(type);
+				
+				type = types.get(key);
+
 				// normal parse
 				resp.setCode(200);
 				resp.set("Cache-Control", "max-age=0");
 				resp.set("Content-Language", "en-US");
 				resp.set("Content-Type", "text/html");
 				resp.setDate("Date", System.currentTimeMillis());
-//				Type type = types.get(key);
-				
-				PrintObejct.print(Request.class, req);
-				
-				resp.getOutputStream().flush();
+				JSON.getSerialize(Type.class).stringifyTo(type, resp.getOutputStream());
+
 				resp.close();
 			}
 		} catch (IOException e) {
