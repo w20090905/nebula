@@ -45,6 +45,8 @@ public class StaticResource implements Resource {
             while ((length = in.read(buffer)) > 0) {
                 out.write(buffer, 0, length);
             }       
+            in.close();
+            out.close();
 		} catch (IOException e) {
 			log.error(e);
 			throw new RuntimeException(e);

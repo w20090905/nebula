@@ -36,7 +36,8 @@ public class JSON {
 				JsonFactory f = new JsonFactory();
 				JsonGenerator g = f.createJsonGenerator(o);
 				json.write(g, d);
-				g.close();
+				g.flush();
+//				g.close();
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
@@ -48,7 +49,7 @@ public class JSON {
 				JsonFactory f = new JsonFactory();
 				JsonParser p = f.createJsonParser(in);
 				json.read(p, d);
-				p.close();
+//				p.close();
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}

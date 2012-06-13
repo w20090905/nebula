@@ -1,6 +1,6 @@
 <h1>person-list.html</h1>
 <div class="container-fluid">
-  <div class="row-fluid">
+  <div class="col-fluid">
     <div class="span2">
       <!--Sidebar content-->
 
@@ -17,8 +17,7 @@
 
       <ul class="datalist">
         <li ng-repeat="data in datalist | filter:query | orderBy:orderProp" class="thumbnail">
-          <a href="#/{{typename}}/{{data.id}}">{{data.name}}</a>
-          <p>{{phone.snippet}}</p>
+          <a href="#/d/{{typename}}/{{data.name}}">{{data.name}}</a>
         </li>
       </ul>
 

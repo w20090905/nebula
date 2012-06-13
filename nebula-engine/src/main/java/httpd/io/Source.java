@@ -31,6 +31,10 @@ public class Source {
         return loader.getInputStream(source);
     }
 
+    public Object getRealObject(){
+    	return this.source;
+    }
+    
     public void close() throws IOException {
         loader.close(source);
     }

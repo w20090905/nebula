@@ -18,7 +18,7 @@
 					<tbody>
 						<tr ng-repeat="item in data.fields">
 							<td align="left">{{item.name}}</td>
-							<td>{{item.typename}}</td>
+							<td><a href="#/d/Type/{{item.typename}}">{{item.typename}}</a></td>
 							<td></a></td>
 							<td></td>
 						</tr>
@@ -27,10 +27,12 @@
 			</ul>
 		</div>
 		<div class="pane" title="edit">
+			<input type="text" ng-model="data.name"/>{{data.name}}
 			<textarea class="codeeditor" ng-model="data.text" placeholder="add Type info here"></textarea>
 			<div>
 				<input class="btn-primary" type="submit" value="save">
 			</div>
+			{{data.text}}
 		</div>
 	</div>
 </form>

@@ -1,6 +1,7 @@
 package http.startup;
 
 import http.engine.DataResouceEngine;
+import http.engine.EditableStaticResourceEngine;
 import http.engine.StaticResourceEngine;
 import http.engine.TypeResouceEngine;
 import http.server.BasicResourceContainer;
@@ -85,6 +86,7 @@ public class ConfigModule extends AbstractModule {
 				StaticResourceEngine staticEngine;
 				DataResouceEngine dataResouceEngine;
 				TypeResouceEngine typeResouceEngine;
+				private EditableStaticResourceEngine editableStaticEngine;
 
 				@SuppressWarnings("unused")
 				@Inject
@@ -104,12 +106,22 @@ public class ConfigModule extends AbstractModule {
 					this.staticEngine=engine;
 				}
 				
+				@SuppressWarnings("unused")
+				@Inject
+				public void setEngine(EditableStaticResourceEngine engine){
+					this.editableStaticEngine=engine;
+				}
+				
+				
 				@Override
 				public void configure(BasicResourceContainer site) {
-					site.register("/d/Type/*", typeResouceEngine);	
-					site.register("/d/*", dataResouceEngine);	
-					site.register("/e/*", staticEngine);	
-					site.register("*", staticEngine);							
+					site.register("*", staticEngine);	
+					site.register("/angularjs/*", editableStaticEngine);
+					site.register("/d/Type/*", typeResouceEngine);
+					site.register("/e/*", staticEngine);		
+					site.register("/d/*", dataResouceEngine);		
+					site.register("/d/Type", typeResouceEngine);
+					site.register("/d/Type/*", typeResouceEngine);				
 				}
 			});
 			

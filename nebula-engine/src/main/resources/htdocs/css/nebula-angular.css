@@ -44,7 +44,7 @@ div.opened{
 	visibility:visible;
 }
 
-textarea.sourceeditor{
+textarea.codeeditor{
 	width: 50em;
 	height: 30em;
 }

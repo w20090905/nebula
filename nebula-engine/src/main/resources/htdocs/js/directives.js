@@ -94,6 +94,7 @@ var neViewDirective = ['$http', '$templateCache', '$route', '$anchorScroll', '$c
           var t = elementCur;
           elementCur = elementLast;
           elementLast = t;
+          elementLast.html("");
           t = null;
       }
       //update();

@@ -1,13 +1,19 @@
 [{
-        "href": "#/Type/",
+        "href": "#/d/Type/",
         "label": "Type"
 },{
-        "href": "#/Type/Person",
+        "href": "#/d/Type/Person",
         "label": "Person"
 },{
-        "href": "#/Type/Company",
+        "href": "#/d/Type/Company",
         "label": "Company"
 },{
-        "href": "#/Type/Product",
+        "href": "#/d/Type/Product",
         "label": "Product"
+},{
+        "href": "#/t/angularjs/Type-list.html",
+        "label": "Type-list.html"
+},{
+        "href": "#/t/angularjs/Type-detail.html",
+        "label": "Type-detail.html"
 }]

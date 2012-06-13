@@ -14,18 +14,13 @@
 	<script src="js/controllers.js"></script>
 	<script src="js/filters.js"></script>
 	<script src="js/directives.js"></script>
-	<!-- start -->
-    <link rel="stylesheet" href="lib/codemirror/lib/codemirror.css">
-    <script src="lib/codemirror/lib/codemirror.js"></script>
-    <script src="lib/codemirror/mode/javascript/javascript.js"></script>
-    <style type="text/css">.CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}</style>
-<!-- end -->
 	
 </head>
-<body>
+<body  ng-controller="MainCtrl">
 
 	<div id="header">
 		<div id="options">
+		:::[ {{$route}} ]:::
 			<a href="blog/perfect-multi-column-liquid-layouts"
 				title="Perfect multi-column liquid layouts - iPhone compatible">&laquo;
 				Back to the CSS article</a> by <a href="http://matthewjamestaylor.com">Matthew

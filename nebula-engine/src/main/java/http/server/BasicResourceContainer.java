@@ -33,8 +33,8 @@ public class BasicResourceContainer extends ResourceContainer {
 	public void register(String match,ResourceEngine engine){
 		match = match.replace(".", "[\\.]").replace("*",".*");
 		
-		patterns.add(Pattern.compile(match));
-		engines.add(engine);
+		patterns.add(0,Pattern.compile(match));
+		engines.add(0,engine);
 	}
 	
 	@Override
