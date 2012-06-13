@@ -4,22 +4,19 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
-import java.io.Writer;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import util.FileUtil;
 
 public class SystemTypeLoader extends TypeLoader {
 	private Log log = LogFactory.getLog(this.getClass());
@@ -113,57 +110,50 @@ public class SystemTypeLoader extends TypeLoader {
 		loadFolder(root, root);
 	}
 
+	@Override
+	protected List<Type> defineNebula(Reader is) {
+//		try {
+			BufferedReader bin = new BufferedReader(is);
+			String text = FileUtil.readAllTextFrom(bin);
+//			bin.reset();
+			List<Type> typeList = super.defineNebula(bin);
+			for (Type type : typeList) {
+				type.text = text;
+			}
+			return typeList;
+//		} catch (IOException e) {
+//			throw new RuntimeException(e);
+//		}
+	}
+
+	@Override
+	protected List<Type> defineNebula(InputStream is) {
+		return this.defineNebula(new InputStreamReader(is));
+	}
+
+	public Type reload(Type oldType) {
+		List<Type> typeList = tryDefineNebula(new StringReader(oldType.text));
+		File file = (File) oldType.underlyingSource;
+
+		file = FileUtil.replace(file, oldType.text);
+
+		this.reload(file);
+
+		return typeList.get(0);
+	}
+
+
 	protected void reload(File file) {
 		try {
-			List<Type> typeList = super.defineNebula(new FileInputStream(file));
-			for (Type type : typeList) {
-				type.underlyingSource = file;
-				type.text = readAllTextFrom(file);
-			}
+			this.defineNebula(new FileInputStream(file));
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
 		}
 	}
-
-	public Type reload(Type oldType) {
-		try {
-			List<Type> typeList = tryDefineNebula(new StringReader(oldType.text));
-			File file = (File)oldType.underlyingSource;
-
-			SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-
-			String abpath = file.getAbsolutePath();
-			File newFile = new File(abpath + "." +  format.format(new Date(file.lastModified())));
-			
-			file.renameTo(newFile);
-
-			file = new File(abpath);
-			Writer w = new FileWriter(file);
-			w.write(oldType.text);
-			w.close();
-
-			this.reload(file);
-			
-			return typeList.get(0);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-//	public Type reload(Reader is) {
-//		List<Type> typeList = defineNebula(is);
-//		for (Type type : typeList) {
-//			type.text = readAllTextFrom(is);
-//		}
-//		return typeList.get(0);
-//	}
-
+	
 	public void reload(URL url) {
 		try {
-			List<Type> typeList = super.defineNebula(url.openStream());
-			for (Type type : typeList) {
-				type.underlyingSource = url;
-				type.text = readAllTextFrom(url);
-			}
+			this.defineNebula(url.openStream());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -176,11 +166,7 @@ public class SystemTypeLoader extends TypeLoader {
 
 			for (File f : d.listFiles()) {
 				if (f.isFile() && f.getName().endsWith(".nebula")) {
-					List<Type> typeList = super.defineNebula(new FileInputStream(f));
-					for (Type type : typeList) {
-						type.underlyingSource = f;
-						type.text = readAllTextFrom(f);
-					}
+					this.defineNebula(new FileInputStream(f));
 				} else if (f.isDirectory()) {
 					loadFolder(root, f);
 				}
@@ -188,49 +174,6 @@ public class SystemTypeLoader extends TypeLoader {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	// TODO move to other place
-	private String readAllTextFrom(File file) {
-		try {
-			return readAllTextFrom(new FileReader(file));
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	// TODO move to other place
-	private String readAllTextFrom(URL url) {
-		try {
-			return readAllTextFrom(new InputStreamReader(url.openStream()));
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	private String readAllTextFrom(Reader reader) {
-		StringBuilder sb = new StringBuilder();
-		BufferedReader in = null;
-		try {
-			in = new BufferedReader(reader);
-			String textLine = null;
-			while ((textLine = in.readLine()) != null) {
-				sb.append(textLine);
-				sb.append('\n');
-			}
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		} finally {
-			if (in != null) {
-				try {
-					in.close();
-				} catch (IOException e) {
-				}
-			}
-		}
-		return sb.toString();
 	}
 
 	@Override

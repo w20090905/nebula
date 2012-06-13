@@ -119,4 +119,10 @@ public class Type {
 	public String getText() {
 		return text;
 	}
+
+	@Override
+	public String toString() {
+		return "Type [name=" + name + ", nameAlias=" + nameAlias + ", standalone=" + standalone + ", text=" + text
+				+ "]";
+	}
 }
