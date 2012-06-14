@@ -13,7 +13,8 @@ var neTabsDirective = [function() {
  
         $scope.select = function(pane) {
           angular.forEach(panes, function(pane) {
-            pane.selected = false;
+            //TODO pane.selected = false;
+        	  pane.selected = true;
           });
           pane.selected = true;
         }
@@ -43,7 +44,11 @@ var nePaneDirective = [ function() {
       transclude: true,
       scope: { title: 'bind' },
       link: function(scope, element, attrs, tabsCtrl) {
-        tabsCtrl.addPane(scope);
+    	  if(tabsCtrl){
+    	        tabsCtrl.addPane(scope);    		  
+    	  }else{
+    		  scope.selected = true;
+    	  }
       },
       template:
         '<div class="tab-pane" ng-class="{active: selected}" ng-transclude>' +

@@ -30,7 +30,14 @@
 	<link rel="stylesheet" type="text/css" href="css/screen.css" media="screen" />
 	<link rel="stylesheet" href="css/nebula-angular.css" />
 	<!-- custom end -->
-    
+    <style type="text/css">
+    .hidden{
+   display:none;
+   }
+    .show{
+   display:none;
+   }
+    </style>
   </head>
   <body>
 
@@ -57,7 +64,7 @@ type Person {
 
 <input type="button" value="Push me">
 
-<div><textarea class="codeeditor2">
+<div class="hidden"><textarea class="codeeditor2">
 // Demo code (the actual new parser character stream implementation)
 
 function StringStream(string) {
@@ -127,6 +134,7 @@ StringStream.prototype = {
     	
     	$("input").click(function(){
     		b.setValue(a.getValue());
+    		$("div.hidden").removeClass("hidden");
     	});
     });
     </script>
