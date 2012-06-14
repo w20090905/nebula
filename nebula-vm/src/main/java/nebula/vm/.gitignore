@@ -1,4 +1,2 @@
-/AssemblerLexer.java
-/AssemblerParser.java
-/NebulaLexer.java
-/NebulaParser.java
+*Lexer.java
+*Parser.java
