@@ -3,12 +3,10 @@ package nebula.lang;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.StringReader;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.List;
@@ -112,51 +110,18 @@ public class SystemTypeLoader extends TypeLoader {
 
 	@Override
 	protected List<Type> defineNebula(Reader is) {
-//		try {
-			BufferedReader bin = new BufferedReader(is);
-			String text = FileUtil.readAllTextFrom(bin);
-//			bin.reset();
-			List<Type> typeList = super.defineNebula(bin);
-			for (Type type : typeList) {
-				type.text = text;
-			}
-			return typeList;
-//		} catch (IOException e) {
-//			throw new RuntimeException(e);
-//		}
+		BufferedReader bin = new BufferedReader(is);
+		String text = FileUtil.readAllTextFrom(bin);
+		List<Type> typeList = super.defineNebula(bin);
+		for (Type type : typeList) {
+			type.code = text;
+		}
+		return typeList;
 	}
 
 	@Override
 	protected List<Type> defineNebula(InputStream is) {
 		return this.defineNebula(new InputStreamReader(is));
-	}
-
-	public Type reload(Type oldType) {
-		List<Type> typeList = tryDefineNebula(new StringReader(oldType.text));
-		File file = (File) oldType.underlyingSource;
-
-		file = FileUtil.replace(file, oldType.text);
-
-		this.reload(file);
-
-		return typeList.get(0);
-	}
-
-
-	protected void reload(File file) {
-		try {
-			this.defineNebula(new FileInputStream(file));
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
-	public void reload(URL url) {
-		try {
-			this.defineNebula(url.openStream());
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	private void loadFolder(File root, File d) {
@@ -177,8 +142,9 @@ public class SystemTypeLoader extends TypeLoader {
 	}
 
 	@Override
-	protected InputStream loadClassData(String name) {
-		InputStream inputStream = source.openResouce(name, ".nebula");
-		return inputStream;
+	protected URL loadClassData(String name) {
+		URL url = source.find(name, ".nebula");
+		return url;
 	}
+
 }

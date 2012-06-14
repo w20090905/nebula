@@ -34,7 +34,7 @@
   </head>
   <body>
 
-<div><textarea class="codeeditor">
+<div><textarea class="codeeditor1">
 type Person {
 	!Name				Text;
 	*Company				;
@@ -54,7 +54,10 @@ type Person {
 
 
 </textarea></div>
-<div><textarea class="codeeditor">
+
+<input type="button" value="Push me">
+
+<div><textarea class="codeeditor2">
 // Demo code (the actual new parser character stream implementation)
 
 function StringStream(string) {
@@ -106,12 +109,24 @@ StringStream.prototype = {
 
     <script>
     jQuery(function($) {
-    	$(".codeeditor").each(function(){
-    		CodeMirror.fromTextArea(this, {
+    	var a,b;
+    	$(".codeeditor1").each(function(){
+    		a=CodeMirror.fromTextArea(this, {
                 tabMode: "indent",
                 matchBrackets: true,
                 theme: "neat"
               });
+    	});
+    	$(".codeeditor2").each(function(){
+    		b=CodeMirror.fromTextArea(this, {
+                tabMode: "indent",
+                matchBrackets: true,
+                theme: "neat"
+              });
+    	});
+    	
+    	$("input").click(function(){
+    		b.setValue(a.getValue());
     	});
     });
     </script>

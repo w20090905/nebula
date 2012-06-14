@@ -61,80 +61,77 @@ var neCodeEditorDirective = [ function() {
     return {
       require: 'ngModel',
       restrict: 'C',
+      terminal: true,
       link: function(scope, element, attrs, ngModelCtrl) {
-        var $editor = CodeMirror.fromTextArea(element[0], {
-            lineNumbers: true,
-            matchBrackets: true,
-            mode: "text/x-lua",
-		    onChange: function(el,param){
-				if(isEmpty($editor.getValue())){
-					
-				}else if(ngModelCtrl.$viewValue != $editor.getValue()){
-				      scope.$apply(function() {
-							ngModelCtrl.$setViewValue($editor.getValue());
-							element.val($editor.getValue());
-				      });
-				      
-				}        	
-			}
-          });
-
+    	  var $mode = isEmpty(attrs.mode)?"text/nebula":attrs.mode;
+    	  
+          var $editor = CodeMirror.fromTextArea(element[0], {
+              lineNumbers: true,
+              matchBrackets: true,
+              mode: $mode,
+  		    onChange: function(el,param){
+  				if(isEmpty($editor.getValue())){
+  					
+  				}else if(ngModelCtrl.$viewValue != $editor.getValue()){
+  				      scope.$apply(function() {
+  							ngModelCtrl.$setViewValue($editor.getValue());
+  				      });  				      
+  				}        	
+  			}
+            });
     	ngModelCtrl.$oldrender = ngModelCtrl.$render;
-    	
-    	ngModelCtrl.$render = function(){
-    		ngModelCtrl.$oldrender();
-    		
+    	ngModelCtrl.$render = function(){    		
 			if(isEmpty(ngModelCtrl.$viewValue)){
-				$editor.setValue('');
-				$editor.refresh();
-				
-			}else if(ngModelCtrl.$viewValue != $editor.getValue()){
+				$editor.setValue('');				
+			}else{
+				$editor.setValue("");
 				$editor.setValue(ngModelCtrl.$viewValue);
-				$editor.refresh();				
 			}
     	};
-    	
-//        ngModelCtrl.$viewChangeListeners.push(function() {
-//        	//ngModelCtrl.$editor.setValue(angular.isEmpty(ngModelCtrl.$viewValue) ? '' : ngModelCtrl.$viewValue);
-//
-//        	var t = ngModelCtrl.$viewValue;
-//        	var d = t;
-//        	
-////			if(isEmpty(ctrl.$viewValue)){
-////				ctrl.$editor.setValue('');
-////			}else if(ctrl.$viewValue == ctrl.value){
-////				
-////			}else{
-////				ctrl.$editor.setValue(ctrl.$viewValue);				
-////			}
-//		});
       }
     };
   }];
 
-
 /*
+ * 
 var neCodeEditorDirective = [ function() {
     return {
-      restrict: 'EC',
       require: 'ngModel',
-      link: function(scope, element, attr, ctrl) {
-  		scope.data.hidetext = "ddafsdfsa";
-		ctrl.$editor = CodeMirror.fromTextArea(element[0], {
-			lineNumbers: true,
-		    matchBrackets: true,
-		    onChange: function(el,param){
-				ctrl.$setViewValue(ctrl.$editor.getValue());
+      restrict: 'C',
+      terminal: true,
+      template:
+          '<div>' +
+          '</div>',
+        replace: true,
+      link: function(scope, element, attrs, ngModelCtrl) {
+
+          var $editor = CodeMirror(element[0], {
+              lineNumbers: true,
+              matchBrackets: true,
+              mode:attrs['x-mode'],
+  		    onChange: function(el,param){
+  				if(isEmpty($editor.getValue())){
+  					
+  				}else if(ngModelCtrl.$viewValue != $editor.getValue()){
+  				      scope.$apply(function() {
+  							ngModelCtrl.$setViewValue($editor.getValue());
+  				      });  				      
+  				}        	
+  			}
+            });
+    	ngModelCtrl.$oldrender = ngModelCtrl.$render;
+    	ngModelCtrl.$render = function(){    		
+			if(isEmpty(ngModelCtrl.$viewValue)){
+				$editor.setValue('');				
+			}else{
+				$editor.setValue("");
+				$editor.setValue(ngModelCtrl.$viewValue);
 			}
-		});
-		
-		//ctrl.$viewChangeListeners.push(function() {
-		//	ctrl.$editor.setValue(isEmpty(ctrl.$viewValue) ? '' : ctrl.$viewValue);
-		//});
-      },
-      replace: true
+    	};
+      }
     };
-  }];*/
+  }];
+*/
 
 var neDragableDirective = ['$document',function($document) { 
 	var startX=0, startY=0, x = 0, y = 0; 

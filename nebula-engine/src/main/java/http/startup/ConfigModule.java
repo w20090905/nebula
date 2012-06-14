@@ -18,7 +18,9 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import nebula.frame.DataWareHouse;
+import nebula.lang.EditableTypeLoader;
 import nebula.lang.SystemTypeLoader;
+import nebula.lang.TypeLoader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -62,10 +64,9 @@ public class ConfigModule extends AbstractModule {
 				throw new RuntimeException("cannot find htdocs");
 			}
 			
-			SystemTypeLoader typeLoader = new SystemTypeLoader(new SystemTypeLoader());
-			typeLoader.loadFolder(new File(root,"WEB-INF/nebula"));
+			TypeLoader typeLoader = new EditableTypeLoader(new SystemTypeLoader(),new File(root,"WEB-INF/nebula"));
 			
-			this.bind(SystemTypeLoader.class).toInstance(typeLoader);
+			this.bind(TypeLoader.class).toInstance(typeLoader);
 			
 			DataWareHouse dataWareHouse = new DataWareHouse();
 			dataWareHouse.add(typeLoader.getList());

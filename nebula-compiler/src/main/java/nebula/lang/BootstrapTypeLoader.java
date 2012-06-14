@@ -1,6 +1,6 @@
 package nebula.lang;
 
-import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,16 +48,9 @@ class BootstrapTypeLoader extends TypeLoader {
 	}
 
 	@Override
-	protected InputStream loadClassData(String name) {
-		ClassLoader clzLoader = this.getClass().getClassLoader();
-		InputStream is = clzLoader.getResourceAsStream(name);
-		if (log.isTraceEnabled()) {
-			if (is != null)
-				log.trace("search class data : " + name + " succeed!");
-			else
-				log.trace("search class data : " + name + " fail!");
-		}
-		return is;
+	protected URL loadClassData(String name) {
+		log.error("UnsupportedOperationException : URL loadClassData(" + name + ")");
+		throw new UnsupportedOperationException("URL loadClassData(" + name + ")");
 	}
 
 }

@@ -63,7 +63,7 @@ public class TypeEditResouce implements Resource {
 				Type type = types.get(key);
 				JSON.getSerialize(Type.class).readFrom(type, req.getInputStream());
 //				System.out.println(type.toString());
-				typeLoader.reload(type);
+				typeLoader.update(type);
 
 				type = types.get(key);
 

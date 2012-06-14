@@ -137,4 +137,4 @@ CodeMirror.defineMode("nebula", function(config, parserConfig) {
   };
 });
 
-CodeMirror.defineMIME("text/x-lua", "lua");
+CodeMirror.defineMIME("text/nebula", "nebula");

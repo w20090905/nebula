@@ -2,12 +2,8 @@ package nebula.lang;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.io.StringReader;
-
-import nebula.lang.NebulaRuntimeException;
-import nebula.lang.Type;
-import nebula.lang.TypeLoader;
+import java.net.URL;
 
 public class Compiler extends TypeLoader {
 	public Compiler(TypeLoader parent) {
@@ -29,7 +25,7 @@ public class Compiler extends TypeLoader {
 	}
 
 	@Override
-	protected InputStream loadClassData(String name) {
+	protected URL loadClassData(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,5 +1,6 @@
 package nebula.lang;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -10,7 +11,6 @@ public class Type {
 		Master, Sequence, BuilderIn, Eembedded
 	}
 
-	final TypeLoader typeLoader;
 	final Type residedType;
 	final Type superType;
 	final String rawType;
@@ -22,9 +22,11 @@ public class Type {
 	List<Field> fields;
 
 	Properties attrs;
-	
-	Object underlyingSource;
-	String text;
+
+	final TypeLoader loader;
+	URL url;
+	boolean mutable=false; 
+	String code;
 	// Type declaringType;
 
 	public static String ENTITY = "Entity";
@@ -48,7 +50,7 @@ public class Type {
 
 	Type(TypeLoader typeLoader, Type residedType, String name, Type superType, String rawType) {
 		super();
-		this.typeLoader = typeLoader;
+		this.loader = typeLoader;
 		this.residedType = residedType;
 		this.superType = superType;
 		this.rawType = rawType;
@@ -93,7 +95,7 @@ public class Type {
 	}
 
 	public TypeLoader getTypeLoader() {
-		return typeLoader;
+		return loader;
 	}
 
 	public Type getResidedType() {
@@ -112,17 +114,21 @@ public class Type {
 		return standalone;
 	}
 
-	public Object getUnderlyingSource() {
-		return underlyingSource;
+	public URL getUrl() {
+		return url;
 	}
 
-	public String getText() {
-		return text;
+	public boolean isMutable() {
+		return mutable;
+	}
+
+	public String getCode() {
+		return code;
 	}
 
 	@Override
 	public String toString() {
-		return "Type [name=" + name + ", nameAlias=" + nameAlias + ", standalone=" + standalone + ", text=" + text
+		return "Type [name=" + name + ", nameAlias=" + nameAlias + ", standalone=" + standalone + ", text=" + code
 				+ "]";
 	}
 }

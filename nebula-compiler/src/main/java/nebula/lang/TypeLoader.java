@@ -3,6 +3,7 @@ package nebula.lang;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,8 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import util.FileUtil;
 
 public abstract class TypeLoader {
 	private Log log = LogFactory.getLog(this.getClass());
@@ -101,41 +104,43 @@ public abstract class TypeLoader {
 	}
 
 	public Type findType(String name) {
-		if (log.isTraceEnabled()) {
-			log.trace(" --- " + name);
-		}
-		Type type = parent.findType(name);
-		if (type != null) {
-			return type;
-		}
+		try {
+			if (log.isTraceEnabled()) {
+				log.trace(" --- " + name);
+			}
+			Type type = parent.findType(name);
+			if (type != null) {
+				return type;
+			}
 
-		type = types.get(name);
-		if (type != null) {
-			return type;
-		}
-
-		InputStream inputStream = loadClassData(name);
-		if (inputStream != null) {
-			List<Type> typeList = defineNebula(inputStream);
-			return typeList.get(0);
-		} else {
-			return null;
+			type = types.get(name);
+			if (type != null) {
+				return type;
+			}
+			
+			URL url =  loadClassData(name);
+			String code = FileUtil.readAllTextFrom(url);
+			InputStream inputStream = loadClassData(name).openStream();
+			if (inputStream != null) {
+				List<Type> typeList = defineNebula(inputStream);
+				for(Type t:typeList){
+					t.code = code;
+					t.url = url;
+				}
+				return typeList.get(0);
+			} else {
+				return null;
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
-	protected abstract InputStream loadClassData(String name);
+	protected abstract URL loadClassData(String name);
 
-	// {
-	// ClassLoader clzLoader = this.getClass().getClassLoader();
-	// InputStream is = clzLoader.getResourceAsStream(name);
-	// if (log.isTraceEnabled()) {
-	// if (is != null)
-	// log.trace("search class data : " + name + " succeed!");
-	// else
-	// log.trace("search class data : " + name + " fail!");
-	// }
-	// return is;
-	// }
+	public Type update(Type oldType) {
+		throw new UnsupportedOperationException("change type");
+	}
 
 	public SmartList<Type> getList() {
 		return this.types;

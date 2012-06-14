@@ -18,15 +18,15 @@ public class TypeSerialize implements JsonSerialize<Type> {
 	public void write(JsonGenerator o, Type d) {
 		try {
 			o.writeStartObject();
-			o.writeStringField("name", d.getName());
-			o.writeStringField("standalone", d.getStandalone().name());
+			o.writeStringField("name", d.name);
+			o.writeStringField("standalone", d.standalone.name());
 			o.writeArrayFieldStart("fields");
 			FieldSerialize fs = new FieldSerialize();
 			for (Field f : d.getFields()) {
 				fs.write(o, f);
 			}
 			o.writeEndArray();
-			o.writeStringField("text", d.getText());
+			o.writeStringField("code", d.code);
 
 			o.writeEndObject();
 		} catch (JsonGenerationException e) {
@@ -47,8 +47,8 @@ public class TypeSerialize implements JsonSerialize<Type> {
 			    }
 			    String fieldName = p.getCurrentName();
 			    p.nextToken();
-			    if ("text".equals(fieldName)) {
-			    	d.text = p.getText();
+			    if ("code".equals(fieldName)) {
+			    	d.code = p.getText();
 			    }
 			}
 		} catch (JsonParseException e) {
@@ -67,8 +67,8 @@ class FieldSerialize implements JsonSerialize<Field> {
 	public void write(JsonGenerator o, Field d) {
 		try {
 			o.writeStartObject();
-			o.writeStringField("name", d.getName());
-			o.writeStringField("typename", d.getType().getName());
+			o.writeStringField("name", d.name);
+			o.writeStringField("typename", d.type.name);
 			o.writeEndObject();
 		} catch (JsonGenerationException e) {
 			throw new RuntimeException(e);

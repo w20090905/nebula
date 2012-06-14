@@ -25,15 +25,16 @@
 					</tbody>
 				</table>
 			</ul>
-		</div>
-		<div class="pane" title="edit">
-			<input type="text" ng-model="data.name"/>{{data.name}}
-			<textarea ng-model="data.text" class="codeeditor" placeholder="add Type info here"></textarea>
+			<textarea ng-model="data.code" class="codeeditor" x-mode="text/nebula" placeholder="add Type info here"></textarea>
 			<div>
 				<input class="btn-primary" type="submit" value="save">
 			</div>
-			
-		<pre>{{data.text}}</pre>
+		</div>
+		<div class="pane" title="edit">
+			<textarea ng-model="data.code" class="codeeditor" placeholder="add Type info here"></textarea>
+			<div>
+				<input class="btn-primary" type="submit" value="save">
+			</div>
 		</div>
 	</div>
 </form>
