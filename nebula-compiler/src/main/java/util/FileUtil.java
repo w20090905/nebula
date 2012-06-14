@@ -2,17 +2,16 @@ package util;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
-import java.io.Writer;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -131,18 +130,7 @@ public class FileUtil {
 
 	public static File replace(File file, String text) {
 		try {
-			SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-
-			String abpath = file.getAbsolutePath();
-			File newFile = new File(abpath + "." + format.format(new Date(file.lastModified())));
-
-			file.renameTo(newFile);
-
-			file = new File(abpath);
-			Writer w = new FileWriter(file);
-			w.write(text);
-			w.close();
-			return file;
+			return replace(file, new ByteArrayInputStream(text.getBytes("utf-8")));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

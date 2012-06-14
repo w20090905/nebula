@@ -2,6 +2,7 @@ package http.engine;
 
 import http.json.JSON;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 
 import nebula.SmartList;
@@ -13,6 +14,8 @@ import org.apache.commons.logging.LogFactory;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 import org.simpleframework.http.resource.Resource;
+
+import util.FileUtil;
 
 public class TypeEditResouce implements Resource {
 	private static Log log = LogFactory.getLog(TypeEditResouce.class);
@@ -46,14 +49,20 @@ public class TypeEditResouce implements Resource {
 
 				resp.getOutputStream().flush();
 				resp.close();
-			} else if ("POST".equals(req.getMethod())) {
+			} else if ("POST".equals(req.getMethod()) || "PUT".equals(req.getMethod())) {
 				if (log.isTraceEnabled()) {
 					log.trace("Request : " + req.getPath());
 					log.trace("\tkey : " + key);
+				}				
+				BufferedInputStream bio = new BufferedInputStream(req.getInputStream());
+				if (log.isTraceEnabled()) {
+					log.trace("Input stream : ");
+					log.trace(FileUtil.readAllTextFrom(bio));
 				}
 
 				Type type = types.get(key);
 				JSON.getSerialize(Type.class).readFrom(type, req.getInputStream());
+//				System.out.println(type.toString());
 				typeLoader.reload(type);
 
 				type = types.get(key);

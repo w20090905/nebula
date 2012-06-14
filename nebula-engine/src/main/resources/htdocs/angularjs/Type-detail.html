@@ -28,11 +28,12 @@
 		</div>
 		<div class="pane" title="edit">
 			<input type="text" ng-model="data.name"/>{{data.name}}
-			<textarea class="codeeditor" ng-model="data.text" placeholder="add Type info here"></textarea>
+			<textarea ng-model="data.text" class="codeeditor" placeholder="add Type info here"></textarea>
 			<div>
 				<input class="btn-primary" type="submit" value="save">
 			</div>
-			{{data.text}}
+			
+		<pre>{{data.text}}</pre>
 		</div>
 	</div>
 </form>

@@ -52,6 +52,120 @@ var nePaneDirective = [ function() {
     };
   }];
 
+function isUndefined(value){return typeof value == 'undefined';}
+function isEmpty(value) {
+	  return isUndefined(value) || value === '' || value === null || value !== value;
+}
+
+var neCodeEditorDirective = [ function() {
+    return {
+      require: 'ngModel',
+      restrict: 'C',
+      link: function(scope, element, attrs, ngModelCtrl) {
+        var $editor = CodeMirror.fromTextArea(element[0], {
+            lineNumbers: true,
+            matchBrackets: true,
+            mode: "text/x-lua",
+		    onChange: function(el,param){
+				if(isEmpty($editor.getValue())){
+					
+				}else if(ngModelCtrl.$viewValue != $editor.getValue()){
+				      scope.$apply(function() {
+							ngModelCtrl.$setViewValue($editor.getValue());
+							element.val($editor.getValue());
+				      });
+				      
+				}        	
+			}
+          });
+
+    	ngModelCtrl.$oldrender = ngModelCtrl.$render;
+    	
+    	ngModelCtrl.$render = function(){
+    		ngModelCtrl.$oldrender();
+    		
+			if(isEmpty(ngModelCtrl.$viewValue)){
+				$editor.setValue('');
+				$editor.refresh();
+				
+			}else if(ngModelCtrl.$viewValue != $editor.getValue()){
+				$editor.setValue(ngModelCtrl.$viewValue);
+				$editor.refresh();				
+			}
+    	};
+    	
+//        ngModelCtrl.$viewChangeListeners.push(function() {
+//        	//ngModelCtrl.$editor.setValue(angular.isEmpty(ngModelCtrl.$viewValue) ? '' : ngModelCtrl.$viewValue);
+//
+//        	var t = ngModelCtrl.$viewValue;
+//        	var d = t;
+//        	
+////			if(isEmpty(ctrl.$viewValue)){
+////				ctrl.$editor.setValue('');
+////			}else if(ctrl.$viewValue == ctrl.value){
+////				
+////			}else{
+////				ctrl.$editor.setValue(ctrl.$viewValue);				
+////			}
+//		});
+      }
+    };
+  }];
+
+
+/*
+var neCodeEditorDirective = [ function() {
+    return {
+      restrict: 'EC',
+      require: 'ngModel',
+      link: function(scope, element, attr, ctrl) {
+  		scope.data.hidetext = "ddafsdfsa";
+		ctrl.$editor = CodeMirror.fromTextArea(element[0], {
+			lineNumbers: true,
+		    matchBrackets: true,
+		    onChange: function(el,param){
+				ctrl.$setViewValue(ctrl.$editor.getValue());
+			}
+		});
+		
+		//ctrl.$viewChangeListeners.push(function() {
+		//	ctrl.$editor.setValue(isEmpty(ctrl.$viewValue) ? '' : ctrl.$viewValue);
+		//});
+      },
+      replace: true
+    };
+  }];*/
+
+var neDragableDirective = ['$document',function($document) { 
+	var startX=0, startY=0, x = 0, y = 0; 
+	return {
+	      restrict: 'EC',
+	      link: function(scope, element, attr) { 
+//	    	  element.html("dddddd");
+				element.css({ position: 'relative', border: '1px solid red', backgroundColor: 'lightgrey', cursor: 'pointer' }); 
+				element.bind('mousedown', function(event) { 
+					startX = event.screenX - x; startY = event.screenY - y; 
+					$document.bind('mousemove', mousemove); 
+					$document.bind('mouseup', mouseup);
+				});
+
+				function mousemove(event) {
+				  y = event.screenY - startY;
+				  x = event.screenX - startX;
+				  element.css({
+				    top: y + 'px',
+				    left:  x + 'px'
+				  });
+				}
+				
+				function mouseup() {
+				  $document.unbind('mousemove', mousemove);
+				  $document.unbind('mouseup', mouseup);
+				}
+	      }
+	}
+}];
+
 /**
  * @ngdoc event
  * @name angular.module.ng.$compileProvider.directive.ngView#$viewContentLoaded
@@ -164,6 +278,10 @@ angular.module('nebula.directives', []).
       elm.text(version);
     };
   }]).
+  directive('codeeditor', neCodeEditorDirective).
+//  directive('dragable', neDragableDirective).
   directive('neView', neViewDirective).
   directive('tabs', neTabsDirective).
   directive('pane', nePaneDirective);
+
+
