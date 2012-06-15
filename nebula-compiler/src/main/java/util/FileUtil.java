@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -101,20 +102,31 @@ public class FileUtil {
 			String abpath = file.getAbsolutePath();
 			File newFile = new File(abpath + "." + format.format(new Date(file.lastModified())));
 
-			file.renameTo(newFile);
-
-			if (newFile.exists()) {
-				log.trace("copy to " + newFile);
-				log.trace(FileUtil.readAllTextFrom(newFile));
-			} else {
-				log.trace("copy fail " + newFile);
+			//backup old file
+			if(newFile.exists()){
+				newFile.delete();
 			}
+			boolean result = newFile.createNewFile();
+			if (result) {
+				log.trace("createNewFile " + newFile);
+			} else {
+				log.trace("createNewFile fail " + newFile);
+			}
+			byte[] buffer = new byte[1024];
+			int length = -1;
+			InputStream inOld = new FileInputStream(file);
+			OutputStream outNew = new FileOutputStream(newFile);
+			while ((length = inOld.read(buffer)) > 0) {
+				outNew.write(buffer, 0, length);
+			}
+			inOld.close();
+			outNew.close();
+			
 
 			file = new File(abpath);
 			OutputStream out = new FileOutputStream(file);
-
-			byte[] buffer = new byte[1024];
-			int length = -1;
+			buffer = new byte[1024];
+			length = -1;
 			while ((length = in.read(buffer)) > 0) {
 				out.write(buffer, 0, length);
 			}
