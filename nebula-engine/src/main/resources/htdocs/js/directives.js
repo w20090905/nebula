@@ -69,15 +69,13 @@ var neCodeEditorDirective = [ function() {
       terminal: true,
       link: function(scope, element, attrs, ngModelCtrl) {
     	  var $mode = isEmpty(attrs.mode)?"text/nebula":attrs.mode;
-    	  
+  
           var $editor = CodeMirror.fromTextArea(element[0], {
               lineNumbers: true,
               matchBrackets: true,
               mode: $mode,
-  		    onChange: function(el,param){
-  				if(isEmpty($editor.getValue())){
-  					
-  				}else if(ngModelCtrl.$viewValue != $editor.getValue()){
+  		      onChange: function(el,param){
+  				if(ngModelCtrl.$viewValue != $editor.getValue()){
   				      scope.$apply(function() {
   							ngModelCtrl.$setViewValue($editor.getValue());
   				      });  				      

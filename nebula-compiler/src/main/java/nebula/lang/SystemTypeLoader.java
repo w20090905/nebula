@@ -1,20 +1,12 @@
 package nebula.lang;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.URL;
 import java.util.Enumeration;
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import util.FileUtil;
 
 public class SystemTypeLoader extends TypeLoader {
 	private Log log = LogFactory.getLog(this.getClass());
@@ -108,22 +100,6 @@ public class SystemTypeLoader extends TypeLoader {
 		loadFolder(root, root);
 	}
 
-	@Override
-	protected List<Type> defineNebula(Reader is) {
-		BufferedReader bin = new BufferedReader(is);
-		String text = FileUtil.readAllTextFrom(bin);
-		List<Type> typeList = super.defineNebula(bin);
-		for (Type type : typeList) {
-			type.code = text;
-		}
-		return typeList;
-	}
-
-	@Override
-	protected List<Type> defineNebula(InputStream is) {
-		return this.defineNebula(new InputStreamReader(is));
-	}
-
 	private void loadFolder(File root, File d) {
 		try {
 			if (!d.exists() || !d.isDirectory())
@@ -131,7 +107,7 @@ public class SystemTypeLoader extends TypeLoader {
 
 			for (File f : d.listFiles()) {
 				if (f.isFile() && f.getName().endsWith(".nebula")) {
-					this.defineNebula(new FileInputStream(f));
+					this.defineNebula(f.toURI().toURL());
 				} else if (f.isDirectory()) {
 					loadFolder(root, f);
 				}

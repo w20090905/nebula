@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+enum TypeStandalone {
+	Master, Sequence, BuilderIn, Eembedded
+}
+
 public class Type {
 
-	public enum TypeStandalone {
-		Master, Sequence, BuilderIn, Eembedded
-	}
 
 	final Type residedType;
 	final Type superType;

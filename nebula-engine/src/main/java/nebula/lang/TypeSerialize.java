@@ -26,6 +26,7 @@ public class TypeSerialize implements JsonSerialize<Type> {
 				fs.write(o, f);
 			}
 			o.writeEndArray();
+			o.writeBooleanField("mutable", d.mutable);
 			o.writeStringField("code", d.code);
 
 			o.writeEndObject();

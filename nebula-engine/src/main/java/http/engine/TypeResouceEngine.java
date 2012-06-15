@@ -3,7 +3,7 @@ package http.engine;
 import javax.inject.Inject;
 
 import nebula.frame.DataWareHouse;
-import nebula.lang.SystemTypeLoader;
+import nebula.lang.TypeLoader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,10 +14,10 @@ import org.simpleframework.http.resource.ResourceEngine;
 public class TypeResouceEngine implements ResourceEngine {
 	private Log log = LogFactory.getLog(this.getClass());
 	final DataWareHouse dataWareHouse;
-	final SystemTypeLoader typeLoader;
+	final TypeLoader typeLoader;
 
 	@Inject
-	public TypeResouceEngine(DataWareHouse dataWareHouse, SystemTypeLoader typeLoader) {
+	public TypeResouceEngine(DataWareHouse dataWareHouse, TypeLoader typeLoader) {
 		this.dataWareHouse = dataWareHouse;
 		this.typeLoader = typeLoader;
 	}

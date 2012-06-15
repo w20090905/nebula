@@ -68,7 +68,7 @@ public class FileUtil {
 		}
 	}
 
-	public static String readAllTextFrom(Reader reader) {
+	private static String readAllTextFrom(Reader reader) {
 		StringBuilder sb = new StringBuilder();
 		BufferedReader in = null;
 		try {

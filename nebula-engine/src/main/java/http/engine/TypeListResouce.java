@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 import nebula.SmartList;
-import nebula.lang.SystemTypeLoader;
 import nebula.lang.Type;
+import nebula.lang.TypeLoader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,10 +18,10 @@ import org.simpleframework.http.resource.Resource;
 public class TypeListResouce implements Resource {
 	private static Log log = LogFactory.getLog(TypeListResouce.class);
 	private final SmartList<Type> types;
-	final SystemTypeLoader typeLoader;
+	final TypeLoader typeLoader;
 
 	@SuppressWarnings("unchecked")
-	public TypeListResouce(SystemTypeLoader typeLoader, SmartList<?> datas) {
+	public TypeListResouce(TypeLoader typeLoader, SmartList<?> datas) {
 		this.types = (SmartList<Type>) datas;
 		this.typeLoader = typeLoader;
 	}

@@ -1,7 +1,7 @@
 package nebula.lang;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
 import java.util.List;
@@ -48,10 +48,55 @@ public abstract class TypeLoader {
 		this.parent = parent;
 	}
 
-
-	protected List<Type> defineNebula(Reader is) {
+	protected List<Type> defineNebula(Reader in) {
 		try {
-			List<Type> typeList = parse(new ANTLRReaderStream(is));
+			BufferedReader bin = new BufferedReader(in);
+			String code = FileUtil.readAllTextFrom(bin);
+			in = bin;
+			List<Type> typeList = parse(new ANTLRReaderStream(in));			
+			for (Type t : typeList) {
+				t.code = code;
+				t.url = null;
+			}
+			
+			types.addAll(typeList);
+			
+			if (log.isTraceEnabled()) {
+				log.trace(typeList.get(0).getName() + " load succeed");
+			}
+			return typeList;
+		} catch (IOException e) {
+			throw new NebulaRuntimeException(e);
+		}
+	}
+
+	protected List<Type> tryDefineNebula(Reader in) {
+		try {
+			BufferedReader bin = new BufferedReader(in);
+			String code = FileUtil.readAllTextFrom(bin);
+			in = bin;
+			List<Type> typeList = parse(new ANTLRReaderStream(in));			
+			for (Type t : typeList) {
+				t.code = code;
+				t.url = null;
+			}
+			if (log.isTraceEnabled()) {
+				log.trace(typeList.get(0).getName() + " load succeed");
+			}
+			return typeList;
+		} catch (IOException e) {
+			throw new NebulaRuntimeException(e);
+		}
+	}
+
+	protected List<Type> defineNebula(URL in) {
+		try {
+			String code = FileUtil.readAllTextFrom(in);
+			List<Type> typeList = parse(new ANTLRInputStream(in.openStream(), "utf-8"));
+			for (Type t : typeList) {
+				t.code = code;
+				t.url = in;
+			}
 			types.addAll(typeList);
 			if (log.isTraceEnabled()) {
 				log.trace(typeList.get(0).getName() + " load succeed");
@@ -61,35 +106,10 @@ public abstract class TypeLoader {
 			throw new NebulaRuntimeException(e);
 		}
 	}
-	
-	protected List<Type> tryDefineNebula(Reader is) {
-		try {
-			List<Type> typeList = parse(new ANTLRReaderStream(is));
-			if (log.isTraceEnabled()) {
-				log.trace(typeList.get(0).getName() + " load succeed");
-			}
-			return typeList;
-		} catch (IOException e) {
-			throw new NebulaRuntimeException(e);
-		}
-	}
 
-	protected List<Type> defineNebula(InputStream is) {
+	protected List<Type> parse(CharStream in) {
 		try {
-			List<Type> typeList = parse(new ANTLRInputStream(is,"utf-8"));
-			types.addAll(typeList);
-			if (log.isTraceEnabled()) {
-				log.trace(typeList.get(0).getName() + " load succeed");
-			}
-			return typeList;
-		} catch (IOException e) {
-			throw new NebulaRuntimeException(e);
-		}
-	}
-
-	protected List<Type> parse(CharStream is) {
-		try {
-			NebulaLexer assemblerLexer = new NebulaLexer(is);
+			NebulaLexer assemblerLexer = new NebulaLexer(in);
 			CommonTokenStream tokens = new CommonTokenStream(assemblerLexer);
 			NebulaParser parser = new NebulaParser(tokens, this);
 			List<Type> types = parser.programDefinition();
@@ -104,35 +124,25 @@ public abstract class TypeLoader {
 	}
 
 	public Type findType(String name) {
-		try {
-			if (log.isTraceEnabled()) {
-				log.trace(" --- " + name);
-			}
-			Type type = parent.findType(name);
-			if (type != null) {
-				return type;
-			}
+		if (log.isTraceEnabled()) {
+			log.trace(" --- " + name);
+		}
+		Type type = parent.findType(name);
+		if (type != null) {
+			return type;
+		}
 
-			type = types.get(name);
-			if (type != null) {
-				return type;
-			}
-			
-			URL url =  loadClassData(name);
-			String code = FileUtil.readAllTextFrom(url);
-			InputStream inputStream = loadClassData(name).openStream();
-			if (inputStream != null) {
-				List<Type> typeList = defineNebula(inputStream);
-				for(Type t:typeList){
-					t.code = code;
-					t.url = url;
-				}
-				return typeList.get(0);
-			} else {
-				return null;
-			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+		type = types.get(name);
+		if (type != null) {
+			return type;
+		}
+
+		URL url = loadClassData(name);
+		if (url != null) {
+			List<Type> typeList = defineNebula(url);
+			return typeList.get(0);
+		} else {
+			return null;
 		}
 	}
 

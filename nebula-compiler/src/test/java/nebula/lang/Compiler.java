@@ -1,8 +1,8 @@
 package nebula.lang;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.StringReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Compiler extends TypeLoader {
@@ -10,18 +10,18 @@ public class Compiler extends TypeLoader {
 		super(parent);
 	}
 
-	public Type load(String text){
+	public Type load(String text) {
 		Type type = super.defineNebula(new StringReader(text)).get(0);
-		return type;		
+		return type;
 	}
-	
-	public Type loadFromFile(String name){
+
+	public Type loadFromFile(String name) {
 		try {
-			Type type = super.defineNebula(new FileInputStream(name)).get(0);
-			return type;	
-		} catch (FileNotFoundException e) {
-			throw new NebulaRuntimeException(name,e);
-		}		
+			Type type = super.defineNebula(new File(name).toURI().toURL()).get(0);
+			return type;
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override

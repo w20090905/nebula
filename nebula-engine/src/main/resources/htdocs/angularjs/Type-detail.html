@@ -2,6 +2,8 @@
 <form ng-submit="data.$save()">
 	<div class="tabs">
 		<div class="pane" title="view">
+		
+		[[[[{{selected}}]]]]
 			<ul class="data">
 				<li><span class="label">Name</span> <span class="value">{{data.name}}&nbsp;</span></li>
 				<li><span class="label">Parent Type</span> <span class="value">{{data.superType.name}}&nbsp;</span></li>
@@ -25,15 +27,9 @@
 					</tbody>
 				</table>
 			</ul>
-			<textarea ng-model="data.code" class="codeeditor" x-mode="text/nebula" placeholder="add Type info here"></textarea>
+			<textarea ng-model="data.code" class="codeeditor" x-mode="text/nebula" readonly="{{data.mutable==false}}" placeholder="add Type info here"></textarea>
 			<div>
-				<input class="btn-primary" type="submit" value="save">
-			</div>
-		</div>
-		<div class="pane" title="edit">
-			<textarea ng-model="data.code" class="codeeditor" placeholder="add Type info here"></textarea>
-			<div>
-				<input class="btn-primary" type="submit" value="save">
+				<input class="btn-primary" type="submit" value="save" x-ng-show="data.mutable">
 			</div>
 		</div>
 	</div>

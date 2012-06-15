@@ -3,11 +3,12 @@ package http.engine;
 import http.json.JSON;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import nebula.SmartList;
-import nebula.lang.SystemTypeLoader;
 import nebula.lang.Type;
+import nebula.lang.TypeLoader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,10 +22,12 @@ public class TypeEditResouce implements Resource {
 	private static Log log = LogFactory.getLog(TypeEditResouce.class);
 	private final String key;
 	private final SmartList<Type> types;
-	final SystemTypeLoader typeLoader;
+	final TypeLoader typeLoader;
+
+	byte[] jsonType = null;
 
 	@SuppressWarnings("unchecked")
-	public TypeEditResouce(SystemTypeLoader typeLoader, SmartList<?> datas, String key) {
+	public TypeEditResouce(TypeLoader typeLoader, SmartList<?> datas, String key) {
 		this.types = (SmartList<Type>) datas;
 		this.key = key;
 		this.typeLoader = typeLoader;
@@ -38,43 +41,73 @@ public class TypeEditResouce implements Resource {
 					log.trace("Request : " + req.getPath());
 					log.trace("\tkey : " + key);
 				}
+
+				if (jsonType == null) {
+					ByteArrayOutputStream out = new ByteArrayOutputStream();
+					Type type = typeLoader.findType(key);
+					JSON.getSerialize(Type.class).stringifyTo(type, out);
+					out.flush();
+					this.jsonType = out.toByteArray();
+				}
+
 				// normal parse
 				resp.setCode(200);
 				resp.set("Cache-Control", "max-age=0");
 				resp.set("Content-Language", "en-US");
-				resp.set("Content-Type", "text/html");
+				resp.set("Content-Type", "text/json");
+				resp.set("Content-Length", jsonType.length);
 				resp.setDate("Date", System.currentTimeMillis());
-				Type type = typeLoader.findType(key);
-				JSON.getSerialize(Type.class).stringifyTo(type, resp.getOutputStream());
-
+				resp.getOutputStream().write(jsonType);
 				resp.getOutputStream().flush();
 				resp.close();
 			} else if ("POST".equals(req.getMethod()) || "PUT".equals(req.getMethod())) {
 				if (log.isTraceEnabled()) {
 					log.trace("Request : " + req.getPath());
 					log.trace("\tkey : " + key);
-				}				
+				}
 				BufferedInputStream bio = new BufferedInputStream(req.getInputStream());
 				if (log.isTraceEnabled()) {
 					log.trace("Input stream : ");
 					log.trace(FileUtil.readAllTextFrom(bio));
 				}
 
-				Type type = types.get(key);
-				JSON.getSerialize(Type.class).readFrom(type, req.getInputStream());
-//				System.out.println(type.toString());
-				typeLoader.update(type);
+				Type type = typeLoader.findType(key);
+				String oldCode = type.getCode();
 
-				type = types.get(key);
+				JSON.getSerialize(Type.class).readFrom(type, req.getInputStream());
+				// System.out.println(type.toString());
+				if (!oldCode.equals(type.getCode())) {
+					if (log.isTraceEnabled()) {
+						log.trace("Replace:");
+						log.trace(oldCode);
+						log.trace("  with: ");
+						log.trace(type.getCode());
+					}
+
+					typeLoader.update(type);
+				} else {
+
+					if (log.isTraceEnabled()) {
+						log.trace("No Change:");
+						log.trace(type.getCode());
+					}
+				}
+
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				type = typeLoader.findType(key);
+				JSON.getSerialize(Type.class).stringifyTo(type, out);
+				out.flush();
+				this.jsonType = out.toByteArray();
 
 				// normal parse
 				resp.setCode(200);
 				resp.set("Cache-Control", "max-age=0");
 				resp.set("Content-Language", "en-US");
-				resp.set("Content-Type", "text/html");
+				resp.set("Content-Type", "text/json");
+				resp.set("Content-Length", jsonType.length);
 				resp.setDate("Date", System.currentTimeMillis());
-				JSON.getSerialize(Type.class).stringifyTo(type, resp.getOutputStream());
-
+				resp.getOutputStream().write(jsonType);
+				resp.getOutputStream().flush();
 				resp.close();
 			}
 		} catch (IOException e) {

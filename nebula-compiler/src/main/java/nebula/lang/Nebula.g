@@ -86,6 +86,7 @@ nestedTypeDefinition[Type resideType,String name,Alias nameAlias] returns[Type t
             {
               String typeName = resideType.name + "$" + name;
               type = new Type(loader,resideType,typeName,resolveType(Type.ENTITY));
+              type.standalone = TypeStandalone.Eembedded;
               if(nameAlias!=null)type.nameAlias=nameAlias;
               addType(type);
             }
