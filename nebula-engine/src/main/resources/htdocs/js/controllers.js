@@ -45,18 +45,17 @@ function EntityCtrl($scope,$route,$resource,$routeParams){
 function AngularJSCtrl($scope,$route,$location,$http,$routeParams){
 	$scope.resourcename = extractParams("angularjs/:typename-:cat.html",$routeParams);
 	$http.get($scope.resourcename ).success(function(data, status, headers, config){
-		$scope.code=data;
+		$scope.data = {code:data};
 		$scope.showme();
 	});
 	$scope.newcode = "";
-	$scope.cur=$scope;
-	$scope.save = function(){
-		$scope.$eval(function(scope){
-			scope.newcode = scope.code;
-//			$http.put($scope.resourcename,$scope.code).success(function(data, status, headers, config){
-//				$scope.code=data;
-//			});
-		});
+	$scope.$save = function(){
+//		$scope.$apply(function() {
+//			$scope.newcode = $scope.dcode;
+			$http.put($scope.resourcename,$scope.data.code).success(function(data, status, headers, config){
+				$scope.data = {code:data};
+			});
+//		});
 	};
 }
 

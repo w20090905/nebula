@@ -75,19 +75,20 @@ var neCodeEditorDirective = [ function() {
               matchBrackets: true,
               mode: $mode,
   		      onChange: function(el,param){
-  				if(ngModelCtrl.$viewValue != $editor.getValue()){
+  		    	  if(isUndefined(ngModelCtrl.$viewValue)){
+  		    		  
+  		    	  }else if(ngModelCtrl.$viewValue != $editor.getValue()){
   				      scope.$apply(function() {
   							ngModelCtrl.$setViewValue($editor.getValue());
   				      });  				      
-  				}        	
+  				  }        	
   			}
-            });
+        });
     	ngModelCtrl.$oldrender = ngModelCtrl.$render;
     	ngModelCtrl.$render = function(){    		
 			if(isEmpty(ngModelCtrl.$viewValue)){
-				$editor.setValue('');				
-			}else{
-				$editor.setValue("");
+				$editor.setValue("");				
+			}else if(ngModelCtrl.$viewValue != $editor.getValue()){
 				$editor.setValue(ngModelCtrl.$viewValue);
 			}
     	};

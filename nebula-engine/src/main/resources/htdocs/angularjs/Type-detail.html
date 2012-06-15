@@ -27,10 +27,11 @@
 					</tbody>
 				</table>
 			</ul>
-			<textarea ng-model="data.code" class="codeeditor" x-mode="text/nebula" readonly="{{data.mutable==false}}" placeholder="add Type info here"></textarea>
+			<textarea ng-model="data.code" class="codeeditor" x-mode="text/nebula" placeholder="add Type info here"></textarea>
 			<div>
 				<input class="btn-primary" type="submit" value="save" x-ng-show="data.mutable">
 			</div>
+			<pre>{{data.code}}</pre>
 		</div>
 	</div>
 </form>
