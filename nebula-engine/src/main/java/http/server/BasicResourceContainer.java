@@ -26,7 +26,7 @@ public class BasicResourceContainer extends ResourceContainer {
 
 	private List<ResourceEngine> engines;
 	private List<Pattern> patterns;
-
+ 
 	ReentrantLock lock = new ReentrantLock();
 	private Map<String, Resource> cachedLinks = new HashMap<String, Resource>();
 
