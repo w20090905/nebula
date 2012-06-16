@@ -42,7 +42,7 @@ function EntityCtrl($scope,$route,$resource,$routeParams){
 	$scope.data = DataResource.get($routeParams,$scope.showme,$scope.showme);
 }
 
-function AngularJSCtrl($scope,$route,$location,$http,$routeParams){
+function AngularJSCtrl($scope,$route,$location,$http,$routeParams,$templateCache){
 	$scope.resourcename = extractParams("angularjs/:typename-:cat.html",$routeParams);
 	$http.get($scope.resourcename ).success(function(data, status, headers, config){
 		$scope.data = {code:data};
@@ -54,6 +54,7 @@ function AngularJSCtrl($scope,$route,$location,$http,$routeParams){
 //			$scope.newcode = $scope.dcode;
 			$http.put($scope.resourcename,$scope.data.code).success(function(data, status, headers, config){
 				$scope.data = {code:data};
+				$templateCache.removeAll();
 			});
 //		});
 	};

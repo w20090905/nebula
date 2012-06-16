@@ -40,7 +40,7 @@ public class AngularResouceEngine implements ResourceEngine {
 		}
 
 		if (name != null) {
-			return new DataResouce(cfg, path, dataWareHouse.get(path), name);
+			return new AngularEditResouce(cfg, path, dataWareHouse.get(path), name);
 		} else{
 			return null;
 		}
