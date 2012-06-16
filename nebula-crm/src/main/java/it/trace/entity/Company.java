@@ -3,7 +3,6 @@ package it.trace.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "Company")
@@ -46,7 +46,7 @@ public class Company implements java.io.Serializable{
 	private String description;
 	
 	@OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
-//	@Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
+	@Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
 	private List<Contact> contactList = new ArrayList<Contact>();
 
 	public int getId() {
