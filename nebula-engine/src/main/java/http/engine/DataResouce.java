@@ -13,11 +13,8 @@ import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 import org.simpleframework.http.resource.Resource;
 
-import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
-import freemarker.template.TemplateHashModel;
-import freemarker.template.TemplateModelException;
 
 public class DataResouce implements Resource {
 	private static Log log = LogFactory.getLog(DataResouce.class);
@@ -35,18 +32,18 @@ public class DataResouce implements Resource {
 		this.templateName = templateName + "_edit.ftl";
 		this.datas = datas;
 		this.key = key;
-
-		try {
-			root.put("TypeStandalone",
-					BeansWrapper.getDefaultInstance().getEnumModels().get("nebula.compiler.Type.TypeStandalone"));
-		} catch (TemplateModelException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override
 	public void handle(Request req, Response resp) {
 		try {
+
+			Object data = datas.get(key);
+			if(data==null){
+				log.error("Can't find data " + key);
+				throw new RuntimeException("Can't find data " + key);
+			}
+			
 			if (log.isTraceEnabled()) {
 				log.trace("Request : " + req.getPath());
 				log.trace("\ttemplateName : " + templateName);
@@ -58,7 +55,7 @@ public class DataResouce implements Resource {
 			resp.set("Content-Language", "en-US");
 			resp.set("Content-Type", "text/html");
 			resp.setDate("Date", System.currentTimeMillis());
-			root.put("data", datas.get(key));
+			root.put("data", data);
 			cfg.getTemplate(templateName).process(root, new OutputStreamWriter(resp.getOutputStream()));
 			resp.getOutputStream().flush();
 			resp.close();

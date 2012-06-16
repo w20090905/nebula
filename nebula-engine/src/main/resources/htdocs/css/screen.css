@@ -184,29 +184,6 @@ img {
 	left:6%;			/* (right column left and right padding) plus (left column left padding) */
 }
 
-#main h1{
-	margin:.4em 0 .2em 0;
-}
-#main ul.data{
-	padding:0px;
-	list-style:none;
-	margin: 1px;
-}
-#main ul.data li span{
-	display: inline-block;
-	width: 10em;
-	padding: 5px;
-	margin: 1px;
-}
-#main ul.data li span.label{
-	background-color: silver;
-	text-align: right;
-}
-#main ul.data li span.value{
-	background-color: #dddddd;
-	text-align: left;
-}
-
 #main table.list{
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 	font-size: 12px;

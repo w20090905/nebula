@@ -1,0 +1,23 @@
+<h1>person-list.html</h1>
+<div class="container-fluid">
+    <div>
+      <!--Sidebar content-->
+
+      Search: <input ng-model="query">
+      Sort by:
+      <select ng-model="orderProp">
+        <option value="name">Alphabetical</option>
+        <option value="age">Newest</option>
+      </select>
+
+    </div>
+    <div >
+      <!--Body content-- filter:query | orderBy:orderProp-->
+
+      <ul class="datalist">
+        <li ng-repeat="data in datalist |filter:{standalone:'Master'} " class="thumbnail">
+          <a href="#/d/{{typename}}/{{data.name}}">{{data.name}}</a>
+        </li>
+      </ul>
+  </div>
+</div>

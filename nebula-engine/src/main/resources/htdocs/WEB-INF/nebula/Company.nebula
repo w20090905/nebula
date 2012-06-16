@@ -1,0 +1,4 @@
+type Company {
+	!名称				Name;
+	?创立年月      			Date;
+};

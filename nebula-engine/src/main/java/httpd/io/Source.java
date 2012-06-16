@@ -3,6 +3,7 @@ package httpd.io;
 import java.io.IOException;
 import java.io.InputStream;
 
+@Deprecated
 public class Source {
     private final Object source;
     private final NestLoader loader;
@@ -30,6 +31,10 @@ public class Source {
         return loader.getInputStream(source);
     }
 
+    public Object getRealObject(){
+    	return this.source;
+    }
+    
     public void close() throws IOException {
         loader.close(source);
     }

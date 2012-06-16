@@ -1,0 +1,34 @@
+<h1>{{data.name}}&nbsp;</h1>
+<form ng-submit="data.$save()">
+	<div class="tabs">
+		<div class="pane" title="view">
+			<ul class="data">
+				<li><span class="label">Name</span> <span class="value">{{data.name}}&nbsp;</span></li>
+				<li><span class="label">Parent Type</span> <span class="value">{{data.superType.name}}&nbsp;</span></li>
+				<li><span class="label">standalone</span> <span class="value">{{data.standalone}}&nbsp;</span></li>
+				<table class="table">
+					<thead>
+						<tr>
+							<th style="width: 10em;">Name</th>
+							<th>Type</th>
+							<th>Master</th>
+							<th>Standalone</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in data.fields">
+							<td align="left">{{item.name}}</td>
+							<td><a href="#/d/Type/{{item.typename}}">{{item.typename}}</a></td>
+							<td></a></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</ul>
+			<textarea ng-model="data.code" class="codeeditor" x-mode="text/nebula" placeholder="add Type info here"></textarea>
+			<div>
+				<input class="btn-primary" type="submit" value="save" x-ng-show="data.mutable">
+			</div>
+		</div>
+	</div>
+</form>

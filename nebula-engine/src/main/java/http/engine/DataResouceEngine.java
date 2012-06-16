@@ -7,7 +7,6 @@ import nebula.frame.DataWareHouse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.simpleframework.http.Address;
-import org.simpleframework.http.Path;
 import org.simpleframework.http.resource.Resource;
 import org.simpleframework.http.resource.ResourceEngine;
 
@@ -15,7 +14,7 @@ import freemarker.template.Configuration;
 
 public class DataResouceEngine implements ResourceEngine {
 	private Log log = LogFactory.getLog(this.getClass());
-	
+
 	private final Configuration cfg;
 	DataWareHouse dataWareHouse;
 
@@ -27,22 +26,23 @@ public class DataResouceEngine implements ResourceEngine {
 
 	@Override
 	public Resource resolve(Address target) {
-		Path pathPath = target.getPath();
-		String name = pathPath.getName();
-		String path = pathPath.getDirectory();
-		path = path.substring(3,path.length()-1);
-		path = path.replace('/', '.');
-		
-		if(log.isTraceEnabled()){
-			log.trace("target.getPath : " + pathPath);
-			log.trace("\tpath : " + path);
-			log.trace("\tname : " + name);
+		String[] path = target.getPath().getSegments();
+		String typeName = path[1];
+		String id = null;
+		if (path.length > 2) {
+			id = path[2];
 		}
 
-		if (name != null) {
-			return new DataResouce(cfg, path, dataWareHouse.get(path), name);
+		if (log.isTraceEnabled()) {
+			log.trace("target.getPath : " + path);
+			log.trace("\ttypeName : " + typeName);
+			log.trace("\tid : " + id);
+		}
+
+		if (id != null) {
+			return new DataResouce(cfg, typeName, dataWareHouse.get(typeName), id);
 		} else {
-			return new DataListResouce(cfg, path, dataWareHouse.get(path));
+			return new DataListResouce(cfg, typeName, dataWareHouse.get(typeName));
 		}
 	}
 

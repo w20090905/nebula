@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
+@Deprecated
 interface NestLoader extends Loader {
 
     long getLastModified(Object source);

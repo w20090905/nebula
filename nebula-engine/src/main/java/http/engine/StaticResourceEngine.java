@@ -13,9 +13,9 @@ import org.simpleframework.http.resource.Resource;
 import org.simpleframework.http.resource.ResourceEngine;
 
 public class StaticResourceEngine implements ResourceEngine {
-	private final Loader loader;
+	protected final Loader loader;
 
-	private Resource p404;
+	protected Resource p404;
 	@Inject
 	public StaticResourceEngine(Loader loader) {
 		this.loader = loader;
@@ -35,7 +35,7 @@ public class StaticResourceEngine implements ResourceEngine {
 	/**
      * Hashtable mapping (String)FILENAME_EXTENSION -> (String)MIME_TYPE
      */
-    private static Hashtable<String, String> TheMimeTypes = new Hashtable<String, String>();
+    protected static Hashtable<String, String> TheMimeTypes = new Hashtable<String, String>();
 	static {
 		//@formatter:off
 		StringTokenizer st = new StringTokenizer(

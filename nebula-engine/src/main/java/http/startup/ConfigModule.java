@@ -1,7 +1,9 @@
 package http.startup;
 
 import http.engine.DataResouceEngine;
+import http.engine.EditableStaticResourceEngine;
 import http.engine.StaticResourceEngine;
+import http.engine.TypeResouceEngine;
 import http.server.BasicResourceContainer;
 import httpd.io.ClassPathLoader;
 import httpd.io.FileSystemLoader;
@@ -15,8 +17,10 @@ import java.net.URL;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import nebula.compiler.SystemTypeLoader;
 import nebula.frame.DataWareHouse;
+import nebula.lang.EditableTypeLoader;
+import nebula.lang.SystemTypeLoader;
+import nebula.lang.TypeLoader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,6 +32,7 @@ import com.google.inject.TypeLiteral;
 
 import freemarker.template.Configuration;
 
+@SuppressWarnings("deprecation")
 public class ConfigModule extends AbstractModule {
 	private Log log = LogFactory.getLog(this.getClass());
 
@@ -54,14 +59,14 @@ public class ConfigModule extends AbstractModule {
 			if(log.isTraceEnabled()){
 				log.trace("Root path : " + root.getAbsolutePath() );
 			}
+			
 			if(!root.exists()){
 				throw new RuntimeException("cannot find htdocs");
 			}
 			
-			SystemTypeLoader typeLoader = new SystemTypeLoader();
-			typeLoader.load("nebula.properties");
+			TypeLoader typeLoader = new EditableTypeLoader(new SystemTypeLoader(),new File(root,"WEB-INF/nebula"));
 			
-			this.bind(SystemTypeLoader.class).toInstance(typeLoader);
+			this.bind(TypeLoader.class).toInstance(typeLoader);
 			
 			DataWareHouse dataWareHouse = new DataWareHouse();
 			dataWareHouse.add(typeLoader.getList());
@@ -81,11 +86,19 @@ public class ConfigModule extends AbstractModule {
 			this.bind(new TypeLiteral<Configurable<BasicResourceContainer>>(){}).toInstance(new Configurable<BasicResourceContainer>() {
 				StaticResourceEngine staticEngine;
 				DataResouceEngine dataResouceEngine;
+				TypeResouceEngine typeResouceEngine;
+				private EditableStaticResourceEngine editableStaticEngine;
 
 				@SuppressWarnings("unused")
 				@Inject
 				public void setEngine(DataResouceEngine engine){
 					this.dataResouceEngine=engine;
+				}
+
+				@SuppressWarnings("unused")
+				@Inject
+				public void setEngine(TypeResouceEngine engine){
+					this.typeResouceEngine=engine;
 				}
 				
 				@SuppressWarnings("unused")
@@ -94,12 +107,25 @@ public class ConfigModule extends AbstractModule {
 					this.staticEngine=engine;
 				}
 				
+				@SuppressWarnings("unused")
+				@Inject
+				public void setEngine(EditableStaticResourceEngine engine){
+					this.editableStaticEngine=engine;
+				}
+				
+				
 				@Override
 				public void configure(BasicResourceContainer site) {
-					site.register("/d/*", dataResouceEngine);	
-					site.register("*", staticEngine);							
+					site.register("*", staticEngine);	
+					site.register("/angularjs/*", editableStaticEngine);
+					site.register("/d/Type/*", typeResouceEngine);
+					site.register("/e/*", staticEngine);		
+					site.register("/d/*", dataResouceEngine);		
+					site.register("/d/Type", typeResouceEngine);
+					site.register("/d/Type/*", typeResouceEngine);				
 				}
 			});
+			
 			Loader loader =new MultiLoader(new ClassPathLoader(this.getClass().getClassLoader(), "htdocs"),new FileSystemLoader(root));
 			this.bind(Loader.class).toInstance(loader);
 		} catch (IOException e) {

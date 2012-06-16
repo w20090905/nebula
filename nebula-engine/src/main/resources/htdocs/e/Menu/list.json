@@ -1,0 +1,19 @@
+[{
+        "href": "#/d/Type/",
+        "label": "Type"
+},{
+        "href": "#/d/Type/Person",
+        "label": "Person"
+},{
+        "href": "#/d/Type/Company",
+        "label": "Company"
+},{
+        "href": "#/d/Type/Product",
+        "label": "Product"
+},{
+        "href": "#/t/angularjs/Type-list.html",
+        "label": "Type-list.html"
+},{
+        "href": "#/t/angularjs/Type-detail.html",
+        "label": "Type-detail.html"
+}]

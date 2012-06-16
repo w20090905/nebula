@@ -7,6 +7,7 @@ import java.net.URL;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+@Deprecated
 public class ClassPathLoader implements NestLoader {
     private static final Log log = LogFactory.getLog(ClassPathLoader.class);
 

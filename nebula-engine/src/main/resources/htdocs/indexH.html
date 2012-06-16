@@ -1,0 +1,144 @@
+<!doctype html>
+<html ng-app="nebula">
+  <head>
+    <title>CodeMirror: JavaScript mode</title>
+
+	<!-- jquery start -->
+	<script src="lib/jquery/jquery-1.7.2.min.js"></script>
+	<!-- jquery end -->
+	
+	<!-- angular start -->
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<script src="lib/angular/angular.js"></script>
+	<script src="lib/angular/angular-resource.js"></script>
+	<script src="js/nebula.js"></script>
+	<script src="js/services.js"></script>
+	<script src="js/controllers.js"></script>
+	<script src="js/filters.js"></script>
+	<script src="js/directives.js"></script>
+	<!-- angular end -->
+
+	<!-- codemirror start -->
+    <link rel="stylesheet" href="lib/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="lib/codemirror/theme/neat.css">
+    <script src="lib/codemirror/lib/codemirror.js"></script>
+    <script src="lib/codemirror/mode/nebula/nebula.js"></script>
+    <style type="text/css">.CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}</style>
+	<!-- codemirror end -->
+	
+	<!-- custom start -->
+	<link rel="stylesheet" type="text/css" href="css/screen.css" media="screen" />
+	<link rel="stylesheet" href="css/nebula-angular.css" />
+	<!-- custom end -->
+    <style type="text/css">
+    .hidden{
+   display:none;
+   }
+    .show{
+   display:none;
+   }
+    </style>
+  </head>
+  <body>
+
+<div><textarea class="codeeditor1">
+type Person {
+	!Name				Text;
+	*Company				;
+	Birthday				;
+	/*Age = Today.year - BirthdayDay.year;*/
+	?Roles1[]				Text;	
+	Roles2[1..]				Text;
+	Roles3[..5]				Text;	
+	Roles4[1..5]			Text;	
+	
+	Education[..5]{
+		DateFrom Date;
+		DateTo Date;
+		School Text;
+	};
+};
+
+
+</textarea></div>
+
+<input type="button" value="Push me">
+
+<div class="hidden"><textarea class="codeeditor2">
+// Demo code (the actual new parser character stream implementation)
+
+function StringStream(string) {
+  this.pos = 0;
+  this.string = string;
+}
+
+StringStream.prototype = {
+  done: function() {return this.pos >= this.string.length;},
+  peek: function() {return this.string.charAt(this.pos);},
+  next: function() {
+    if (this.pos &lt; this.string.length)
+      return this.string.charAt(this.pos++);
+  },
+  eat: function(match) {
+    var ch = this.string.charAt(this.pos);
+    if (typeof match == "string") var ok = ch == match;
+    else var ok = ch &amp;&amp; match.test ? match.test(ch) : match(ch);
+    if (ok) {this.pos++; return ch;}
+  },
+  eatWhile: function(match) {
+    var start = this.pos;
+    while (this.eat(match));
+    if (this.pos > start) return this.string.slice(start, this.pos);
+  },
+  backUp: function(n) {this.pos -= n;},
+  column: function() {return this.pos;},
+  eatSpace: function() {
+    var start = this.pos;
+    while (/\s/.test(this.string.charAt(this.pos))) this.pos++;
+    return this.pos - start;
+  },
+  match: function(pattern, consume, caseInsensitive) {
+    if (typeof pattern == "string") {
+      function cased(str) {return caseInsensitive ? str.toLowerCase() : str;}
+      if (cased(this.string).indexOf(cased(pattern), this.pos) == this.pos) {
+        if (consume !== false) this.pos += str.length;
+        return true;
+      }
+    }
+    else {
+      var match = this.string.slice(this.pos).match(pattern);
+      if (match &amp;&amp; consume !== false) this.pos += match[0].length;
+      return match;
+    }
+  }
+};
+</textarea></div>
+
+    <script>
+    jQuery(function($) {
+    	var a,b;
+    	$(".codeeditor1").each(function(){
+    		a=CodeMirror.fromTextArea(this, {
+                tabMode: "indent",
+                matchBrackets: true,
+                theme: "neat"
+              });
+    	});
+    	$(".codeeditor2").each(function(){
+    		b=CodeMirror.fromTextArea(this, {
+                tabMode: "indent",
+                matchBrackets: true,
+                theme: "neat"
+              });
+    	});
+    	
+    	$("input").click(function(){
+    		b.setValue(a.getValue());
+    		$("div.hidden").removeClass("hidden");
+    	});
+    });
+    </script>
+  </body>
+</html>
+
+
