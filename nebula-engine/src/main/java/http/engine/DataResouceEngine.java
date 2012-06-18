@@ -1,7 +1,14 @@
 package http.engine;
 
+import http.json.JSON;
+import http.json.JSON.JsonSerializer;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
+import nebula.SmartList;
 import nebula.frame.DataWareHouse;
 
 import org.apache.commons.logging.Log;
@@ -10,17 +17,14 @@ import org.simpleframework.http.Address;
 import org.simpleframework.http.resource.Resource;
 import org.simpleframework.http.resource.ResourceEngine;
 
-import freemarker.template.Configuration;
-
 public class DataResouceEngine implements ResourceEngine {
 	private Log log = LogFactory.getLog(this.getClass());
-
-	private final Configuration cfg;
 	DataWareHouse dataWareHouse;
 
+	Map<String, String> tmap = new HashMap<String, String>();
+
 	@Inject
-	public DataResouceEngine(Configuration cfg, DataWareHouse dataWareHouse) {
-		this.cfg = cfg;
+	public DataResouceEngine(DataWareHouse dataWareHouse) {
 		this.dataWareHouse = dataWareHouse;
 	}
 
@@ -39,10 +43,15 @@ public class DataResouceEngine implements ResourceEngine {
 			log.trace("\tid : " + id);
 		}
 
+		@SuppressWarnings("rawtypes")
+		JsonSerializer<Map> json = JSON.getSerialize(Map.class);
+		@SuppressWarnings("unchecked")
+		SmartList<Map<String, String>> datas = (SmartList<Map<String, String>>) dataWareHouse.get(typeName);
+
 		if (id != null) {
-			return new DataResouce(cfg, typeName, dataWareHouse.get(typeName), id);
+			return new DataResouce(json, datas, id);
 		} else {
-			return new DataListResouce(cfg, typeName, dataWareHouse.get(typeName));
+			return new DataListResouce(json, datas);
 		}
 	}
 

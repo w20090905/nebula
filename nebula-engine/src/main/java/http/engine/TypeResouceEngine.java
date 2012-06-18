@@ -38,7 +38,7 @@ public class TypeResouceEngine implements ResourceEngine {
 		}
 
 		if (id != null) {
-			return new TypeEditResouce(typeLoader, dataWareHouse.get(typeName), id);
+			return new TypeEditResouce(typeLoader, id);
 		} else {
 			return new TypeListResouce(typeLoader, dataWareHouse.get(typeName));
 		}

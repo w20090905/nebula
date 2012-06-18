@@ -1,67 +1,40 @@
 package http.engine;
 
+import http.json.JSON.JsonSerializer;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.HashMap;
+import java.io.Writer;
 import java.util.Map;
 
 import nebula.SmartList;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.simpleframework.http.Request;
-import org.simpleframework.http.Response;
-import org.simpleframework.http.resource.Resource;
-
-import freemarker.template.Configuration;
-import freemarker.template.TemplateException;
-
-public class DataResouce implements Resource {
-	private static Log log = LogFactory.getLog(DataResouce.class);
-
-	private final Configuration cfg;
-	private final String templateName;
-
-	private Map<String, Object> root = new HashMap<String, Object>();
+public class DataResouce extends BasicResouce {
+	@SuppressWarnings("rawtypes") 
+	private final JsonSerializer<Map> json;
 
 	private final String key;
-	private final SmartList<?> datas;
+	private final SmartList<Map<String, String>> datas;
 
-	public DataResouce(Configuration cfg, String templateName, SmartList<?> datas, String key) {
-		this.cfg = cfg;
-		this.templateName = templateName + "_edit.ftl";
+	@SuppressWarnings("rawtypes") 
+	public DataResouce(JsonSerializer<Map> json, SmartList<Map<String, String>> datas, String key) {
+		this.json = json;
 		this.datas = datas;
 		this.key = key;
 	}
 
-	@Override
-	public void handle(Request req, Response resp) {
+	protected void make() {
 		try {
+			ByteArrayOutputStream bout = new ByteArrayOutputStream();
+			Writer w = new OutputStreamWriter(bout);
 
-			Object data = datas.get(key);
-			if(data==null){
-				log.error("Can't find data " + key);
-				throw new RuntimeException("Can't find data " + key);
-			}
-			
-			if (log.isTraceEnabled()) {
-				log.trace("Request : " + req.getPath());
-				log.trace("\ttemplateName : " + templateName);
-				log.trace("\tkey : " + key);
-			}
-			// normal parse
-			resp.setCode(200);
-			resp.set("Cache-Control", "max-age=0");
-			resp.set("Content-Language", "en-US");
-			resp.set("Content-Type", "text/html");
-			resp.setDate("Date", System.currentTimeMillis());
-			root.put("data", data);
-			cfg.getTemplate(templateName).process(root, new OutputStreamWriter(resp.getOutputStream()));
-			resp.getOutputStream().flush();
-			resp.close();
-		} catch (TemplateException e) {
-			log.error(e);
-			throw new RuntimeException(e);
+			Map<String, String> data = datas.get(key);
+			json.stringifyTo(data, bout);
+			w.flush();
+			w.close();
+			this.lastModified = System.currentTimeMillis();
+			this.buffer = bout.toByteArray();
 		} catch (IOException e) {
 			log.error(e);
 			throw new RuntimeException(e);

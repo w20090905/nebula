@@ -1,8 +1,9 @@
 package http.startup;
 
+import freemarker.template.Configuration;
 import http.engine.DataResouceEngine;
-import http.engine.EditableStaticResourceEngine;
 import http.engine.StaticResourceEngine;
+import http.engine.TemplateResouceEngine;
 import http.engine.TypeResouceEngine;
 import http.server.BasicResourceContainer;
 import httpd.io.ClassPathLoader;
@@ -30,8 +31,6 @@ import org.simpleframework.http.resource.ResourceEngine;
 import com.google.inject.AbstractModule;
 import com.google.inject.TypeLiteral;
 
-import freemarker.template.Configuration;
-
 @SuppressWarnings("deprecation")
 public class ConfigModule extends AbstractModule {
 	private Log log = LogFactory.getLog(this.getClass());
@@ -43,96 +42,104 @@ public class ConfigModule extends AbstractModule {
 	static final String DB_PASSWORD = "db_password";
 
 	@Override
-	protected void configure() {		
-		
+	protected void configure() {
+
 		try {
 			File root = null;
-			URL url =  this.getClass().getResource("/htdocs/WEB-INF/web.xml");
-			if(url!=null){
+			URL url = this.getClass().getResource("/htdocs/WEB-INF/web.xml");
+			if (url != null) {
 				root = new File(url.getPath()).getParentFile().getParentFile();
 			}
-			
-			if(root==null){				
+
+			if (root == null) {
 				root = new File("htdocs");
 			}
-			
-			if(log.isTraceEnabled()){
-				log.trace("Root path : " + root.getAbsolutePath() );
+
+			if (log.isTraceEnabled()) {
+				log.trace("Root path : " + root.getAbsolutePath());
 			}
-			
-			if(!root.exists()){
+
+			if (!root.exists()) {
 				throw new RuntimeException("cannot find htdocs");
 			}
-			
-			TypeLoader typeLoader = new EditableTypeLoader(new SystemTypeLoader(),new File(root,"WEB-INF/nebula"));
-			
+
+			TypeLoader typeLoader = new EditableTypeLoader(new SystemTypeLoader(), new File(root, "WEB-INF/nebula"));
+
 			this.bind(TypeLoader.class).toInstance(typeLoader);
-			
-			DataWareHouse dataWareHouse = new DataWareHouse();
-			dataWareHouse.add(typeLoader.getList());
-			this.bind(DataWareHouse.class).toInstance(dataWareHouse);
-			
+
+			Loader loader = new MultiLoader(new ClassPathLoader(this.getClass().getClassLoader(), "htdocs"),
+					new FileSystemLoader(root));
+			this.bind(Loader.class).toInstance(loader);
+
+			this.bind(DataWareHouse.class);
+
 			Configuration freemarkerConfiguration = new Configuration();
 			freemarkerConfiguration.setTemplateUpdateDelay(1);
-			freemarkerConfiguration.setDirectoryForTemplateLoading(new File(root,"template"));
+			freemarkerConfiguration.setDirectoryForTemplateLoading(new File(root, "template"));
 			this.bind(Configuration.class).toInstance(freemarkerConfiguration);
-			
+
 			this.bind(StaticResourceEngine.class).in(Singleton.class);
-			this.bind(ResourceEngine.class).to(StaticResourceEngine.class).in(Singleton.class);			
+			this.bind(ResourceEngine.class).to(StaticResourceEngine.class).in(Singleton.class);
 			this.bind(DataResouceEngine.class);
-			
+
 			this.bind(Container.class).to(BasicResourceContainer.class).in(Singleton.class);
-			
-			this.bind(new TypeLiteral<Configurable<BasicResourceContainer>>(){}).toInstance(new Configurable<BasicResourceContainer>() {
+
+			this.bind(new TypeLiteral<Configurable<BasicResourceContainer>>() {
+			}).toInstance(new Configurable<BasicResourceContainer>() {
 				StaticResourceEngine staticEngine;
 				DataResouceEngine dataResouceEngine;
 				TypeResouceEngine typeResouceEngine;
-				private EditableStaticResourceEngine editableStaticEngine;
+				// EditableStaticResourceEngine editableStaticEngine;
+				TemplateResouceEngine templateResouceEngine;
 
 				@SuppressWarnings("unused")
 				@Inject
-				public void setEngine(DataResouceEngine engine){
-					this.dataResouceEngine=engine;
+				public void setEngine(DataResouceEngine engine) {
+					this.dataResouceEngine = engine;
 				}
 
 				@SuppressWarnings("unused")
 				@Inject
-				public void setEngine(TypeResouceEngine engine){
-					this.typeResouceEngine=engine;
+				public void setEngine(TypeResouceEngine engine) {
+					this.typeResouceEngine = engine;
 				}
-				
+
 				@SuppressWarnings("unused")
 				@Inject
-				public void setEngine(StaticResourceEngine engine){
-					this.staticEngine=engine;
+				public void setEngine(StaticResourceEngine engine) {
+					this.staticEngine = engine;
 				}
-				
+
+				//
+				// @SuppressWarnings("unused")
+				// @Inject
+				// public void setEngine(EditableStaticResourceEngine engine){
+				// this.editableStaticEngine=engine;
+				// }
+
 				@SuppressWarnings("unused")
 				@Inject
-				public void setEngine(EditableStaticResourceEngine engine){
-					this.editableStaticEngine=engine;
+				public void setEngine(TemplateResouceEngine engine) {
+					this.templateResouceEngine = engine;
 				}
-				
-				
+
 				@Override
 				public void configure(BasicResourceContainer site) {
-					site.register("*", staticEngine);	
-					site.register("/angularjs/*", editableStaticEngine);
+					site.register("*", staticEngine);
+					site.register("/angularjs/*", templateResouceEngine);
 					site.register("/d/Type/*", typeResouceEngine);
-					site.register("/e/*", staticEngine);		
-					site.register("/d/*", dataResouceEngine);		
+					site.register("/e/*", staticEngine);
+					site.register("/d/*", dataResouceEngine);
 					site.register("/d/Type", typeResouceEngine);
-					site.register("/d/Type/*", typeResouceEngine);				
+					site.register("/d/Type/*", typeResouceEngine);
 				}
 			});
-			
-			Loader loader =new MultiLoader(new ClassPathLoader(this.getClass().getClassLoader(), "htdocs"),new FileSystemLoader(root));
-			this.bind(Loader.class).toInstance(loader);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-		
+
 	}
 
 }

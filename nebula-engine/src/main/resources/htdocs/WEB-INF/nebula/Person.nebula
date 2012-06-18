@@ -1,5 +1,5 @@
 type Person {
-	!姓名				Name;
+	!Name;
 	*Company;
 	Birthday;
 	/*Age = Today.year - BirthdayDay.year;*/

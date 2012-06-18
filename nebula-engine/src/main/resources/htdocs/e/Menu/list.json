@@ -2,10 +2,13 @@
         "href": "#/d/Type/",
         "label": "Type"
 },{
-        "href": "#/d/Type/Person",
+        "href": "#/d/Person/",
         "label": "Person"
 },{
-        "href": "#/d/Type/Company",
+        "href": "#/d/Person/test",
+        "label": "Person/test"
+},{
+        "href": "#/d/Company/",
         "label": "Company"
 },{
         "href": "#/d/Type/Product",
@@ -16,4 +19,10 @@
 },{
         "href": "#/t/angularjs/Type-detail.html",
         "label": "Type-detail.html"
+},{
+        "href": "#/t/angularjs/Person-list.html",
+        "label": "Person-list.html"
+},{
+        "href": "#/t/angularjs/Person-detail.html",
+        "label": "Person-detail.html"
 }]

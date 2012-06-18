@@ -1,58 +1,43 @@
 package http.engine;
 
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.HashMap;
+import http.json.JSON.JsonSerializer;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Map;
 
 import nebula.SmartList;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.simpleframework.http.Request;
-import org.simpleframework.http.Response;
-import org.simpleframework.http.resource.Resource;
+public class DataListResouce extends BasicResouce {
+	@SuppressWarnings("rawtypes")
+	private final JsonSerializer<Map> json;
+	private final SmartList<Map<String, String>> datas;
 
-import freemarker.template.Configuration;
-import freemarker.template.TemplateException;
-
-public class DataListResouce implements Resource {
-	private static Log log = LogFactory.getLog(DataListResouce.class);
-	
-	private final Configuration cfg;
-	private final String templateName;
-	private final SmartList<?> datalist;
-	private Map<String,Object> root = new HashMap<String, Object>();
-	public DataListResouce(Configuration cfg,String templateName,SmartList<?> datas){
-		this.cfg = cfg;
-		this.templateName = templateName + "_list.ftl";;
-		this.datalist = datas;
+	@SuppressWarnings("rawtypes")
+	public DataListResouce(JsonSerializer<Map> json, SmartList<Map<String, String>> datas) {
+		this.json = json;
+		this.datas = datas;
 	}
-	
-	@Override
-	public void handle(Request req, Response resp) {
-		try {if(log.isTraceEnabled()){
-			log.trace("Request : " + req.getPath());
-			log.trace("\ttemplateName : " + templateName);
-		}
-        // normal parse
-		resp.setCode(200);
-        resp.set("Cache-Control", "max-age=0");
-        resp.set("Content-Language", "en-US");
-        resp.set("Content-Type", "text/html");
-        resp.setDate("Date", System.currentTimeMillis());
-        root.put("data", datalist);
-		cfg.getTemplate(templateName).process(root,new OutputStreamWriter(resp.getOutputStream()));
-		resp.getOutputStream().flush();
-		resp.close();
-		} catch (TemplateException e) {
-			log.error(e);
-			throw new RuntimeException(e);
-		} catch (IOException e) {
-			log.error(e);
-			throw new RuntimeException(e);
-		}
-	}
-	
 
+	protected void make() {
+		ByteArrayOutputStream bout = new ByteArrayOutputStream();
+		PrintStream out = new PrintStream(bout);
+
+		boolean start = true;
+		out.append('[');
+		for (Map<String, String> data : datas) {
+			if (!start) {
+				out.append(',');
+			} else {
+				start = false;
+			}
+			json.stringifyTo(data, out);
+		}
+		out.append(']');
+
+		out.flush();
+		out.close();
+		this.lastModified = System.currentTimeMillis();
+		this.buffer = bout.toByteArray();
+	}
 }
