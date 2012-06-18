@@ -6,3 +6,4 @@ target
 */*/*.tokens
 */*.tokens
 /logs
+/tmp
