@@ -85,11 +85,11 @@
 				Main
 				<!-- Column 1 end -->
 			</div>
-			<div id="leftMenu" class="col2" ng-controller="MenuCtrl">
+			<div id="leftMenu" class="col2" x-ng-controller="MenuCtrl">
 				<!-- Column 2 start -->
 				<ul>
-					<li ng-repeat="data in datalist" class="thumbnail">
-						<a ng-href="{{data.href}}">{{data.label}}</a>
+					<li x-ng-repeat="data in datalist" class="thumbnail">
+						<a x-ng-href="{{data.href}}">{{data.label}}</a>
 					</li>
 				</ul>
 				<!-- Column 2 end -->
