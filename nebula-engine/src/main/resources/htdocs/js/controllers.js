@@ -60,6 +60,25 @@ function AngularJSCtrl($scope,$route,$location,$http,$routeParams,$templateCache
 	};
 }
 
+
+function FreeMarkerCtrl($scope,$route,$location,$http,$routeParams,$templateCache){
+	$scope.resourcename = extractParams("template/:typename-:cat.html.ftl",$routeParams);
+	$http.get($scope.resourcename ).success(function(data, status, headers, config){
+		$scope.data = {code:data};
+		$scope.showme();
+	});
+	$scope.newcode = "";
+	$scope.$save = function(){
+//		$scope.$apply(function() {
+//			$scope.newcode = $scope.dcode;
+			$http.put($scope.resourcename,$scope.data.code).success(function(data, status, headers, config){
+				$scope.data = {code:data};
+				$templateCache.removeAll();
+			});
+//		});
+	};
+}
+
 function extractParams(url,params){
     var newurl = url;
     angular.forEach(params || {}, function(value, key){

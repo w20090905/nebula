@@ -11,13 +11,14 @@ import java.util.Map;
 import nebula.SmartList;
 
 public class DataResouce extends BasicResouce {
-	@SuppressWarnings("rawtypes") 
+	@SuppressWarnings("rawtypes")
 	private final JsonSerializer<Map> json;
 
 	private final String key;
 	private final SmartList<Map<String, String>> datas;
+	
 
-	@SuppressWarnings("rawtypes") 
+	@SuppressWarnings("rawtypes")
 	public DataResouce(JsonSerializer<Map> json, SmartList<Map<String, String>> datas, String key) {
 		this.json = json;
 		this.datas = datas;
@@ -30,11 +31,16 @@ public class DataResouce extends BasicResouce {
 			Writer w = new OutputStreamWriter(bout);
 
 			Map<String, String> data = datas.get(key);
-			json.stringifyTo(data, bout);
-			w.flush();
-			w.close();
-			this.lastModified = System.currentTimeMillis();
-			this.buffer = bout.toByteArray();
+			if (data != null) {
+				json.stringifyTo(data, bout);
+				w.flush();
+				w.close();
+				this.lastModified = System.currentTimeMillis();
+				this.buffer = bout.toByteArray();
+			} else {
+				this.lastModified = System.currentTimeMillis();
+				this.buffer = new byte[0];
+			}
 		} catch (IOException e) {
 			log.error(e);
 			throw new RuntimeException(e);

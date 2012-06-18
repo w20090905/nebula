@@ -38,7 +38,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 
 		Source source = loader.findSource(path.getPath());
 		if (source != null) {
-			return new StaticResource(source, TheMimeTypes.get(source));
+			return new EditableStaticResource(source, TheMimeTypes.get(source));
 		}
 
 		String[] segments = target.getPath().getSegments();

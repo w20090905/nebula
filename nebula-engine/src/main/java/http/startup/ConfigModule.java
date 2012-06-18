@@ -126,6 +126,7 @@ public class ConfigModule extends AbstractModule {
 				@Override
 				public void configure(BasicResourceContainer site) {
 					site.register("*", staticEngine);
+					site.register("/template/*", templateResouceEngine);
 					site.register("/angularjs/*", templateResouceEngine);
 					site.register("/d/Type/*", typeResouceEngine);
 					site.register("/e/*", staticEngine);

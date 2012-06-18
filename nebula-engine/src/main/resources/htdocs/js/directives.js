@@ -61,6 +61,11 @@ function isUndefined(value){return typeof value == 'undefined';}
 function isEmpty(value) {
 	  return isUndefined(value) || value === '' || value === null || value !== value;
 }
+function compare(left,right){
+	var cleft = left.replace(/\r/g,"");
+	var cright = right;
+	return cleft == cright;
+}
 
 var neCodeEditorDirective = [ function() {
     return {
@@ -77,7 +82,7 @@ var neCodeEditorDirective = [ function() {
   		      onChange: function(el,param){
   		    	  if(isUndefined(ngModelCtrl.$viewValue)){
   		    		  
-  		    	  }else if(ngModelCtrl.$viewValue != $editor.getValue()){
+  		    	  }else if(!compare(ngModelCtrl.$viewValue,$editor.getValue())){
   				      scope.$apply(function() {
   							ngModelCtrl.$setViewValue($editor.getValue());
   				      });  				      

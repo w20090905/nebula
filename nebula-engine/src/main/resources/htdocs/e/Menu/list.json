@@ -25,4 +25,10 @@
 },{
         "href": "#/t/angularjs/Person-detail.html",
         "label": "Person-detail.html"
+},{
+        "href": "#/t/template/angularjs-detail.html.ftl",
+        "label": "angularjs-detail.html.ftl"
+},{
+        "href": "#/t/template/angularjs-list.html.ftl",
+        "label": "angularjs-list.html.ftl"
 }]
