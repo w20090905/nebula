@@ -28,7 +28,7 @@ class BootstrapTypeLoader extends TypeLoader {
 		Type string = new Type(this, "String", buildInType, "String");
 		Type number = new Type(this, "Number", buildInType);
 		Type typeInt = new Type(this, "Long", number, "Long");
-		Type decimal = new Type(this, "Decimal", number, "BigDecimal");
+		Type decimal = new Type(this, "Real", number, "Real");
 
 		List<Type> typeList = new ArrayList<>();
 
