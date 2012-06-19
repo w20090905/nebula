@@ -1,11 +1,16 @@
 package http.engine;
 
-import http.json.JSON;
+import http.json.JsonProvider;
+import http.json.JsonProvider.JsonSerializer;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 
 import nebula.SmartList;
+import nebula.data.Entity;
+import nebula.lang.EditableTypeLoader;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 
@@ -15,49 +20,50 @@ import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 import org.simpleframework.http.resource.Resource;
 
-public class TypeListResouce implements Resource {
+import util.FileUtil;
+
+public class TypeListResouce extends BasicResouce {
 	private static Log log = LogFactory.getLog(TypeListResouce.class);
+	private final JsonSerializer<Type> json;
 	private final SmartList<Type> types;
 	final TypeLoader typeLoader;
 
 	@SuppressWarnings("unchecked")
-	public TypeListResouce(TypeLoader typeLoader, SmartList<?> datas) {
+	public TypeListResouce(TypeLoader typeLoader, SmartList<?> datas,JsonSerializer<Type> json) {
 		this.types = (SmartList<Type>) datas;
 		this.typeLoader = typeLoader;
+		this.json = json;
 	}
 
 	@Override
-	public void handle(Request req, Response resp) {
-		try {
-			if ("GET".equals(req.getMethod())) {
-				if (log.isTraceEnabled()) {
-					log.trace("Request : " + req.getPath());
-				}
-				// normal parse
-				resp.setCode(200);
-				resp.set("Cache-Control", "max-age=0");
-				resp.set("Content-Language", "en-US");
-				resp.set("Content-Type", "text/html");
-				resp.setDate("Date", System.currentTimeMillis());
-				PrintStream out = resp.getPrintStream();
-				boolean start=true;
-				out.append('[');
-				for(Type type: types){
-					if(!start){
-						out.append(',');
-					}else{
-						start=false;
-					}
-					JSON.getSerialize(Type.class).stringifyTo(type, out);	
-				}
-				out.append(']');
+	protected void makeResponse() {
+		ByteArrayOutputStream bout = new ByteArrayOutputStream();
+		PrintStream out = new PrintStream(bout);
 
-				out.flush();
-				out.close();
-				resp.close();
-			} else if ("POST".equals(req.getMethod())) {
-				resp.setCode(404);
+		boolean start = true;
+		out.append('[');
+		for (Type data : types) {
+			if (!start) {
+				out.append(',');
+			} else {
+				start = false;
 			}
+			json.stringifyTo(data, out);
+		}
+		out.append(']');
+
+		out.flush();
+		out.close();
+		this.lastModified = System.currentTimeMillis();
+		this.buffer = bout.toByteArray();
+	}
+
+	@Override
+	protected void post(Request req) {
+		System.out.println("in post");
+		try {
+			Type type = json.readFrom(null, req.getInputStream());			
+			type = typeLoader.update(type);
 		} catch (IOException e) {
 			log.error(e);
 			throw new RuntimeException(e);

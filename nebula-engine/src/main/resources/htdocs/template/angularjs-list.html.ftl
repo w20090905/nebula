@@ -1,15 +1,9 @@
 <h1>${type.name} List</h1>
+
 <div class="container-fluid">    
 	<div>
-      <!--Sidebar content-->
-
-      Search: <input type="text" ng-model="query" class="search-query" placeholder="Search">
-      Sort by:
-      <select ng-model="orderProp">
-        <option value="name">Alphabetical</option>
-        <option value="standalone" selected="selected">standalone</option>
-      </select>
-
+      <input type="text" ng-model="query" class="search-query" placeholder="Search">
+	  <a href="#/d/${type.name}/!new">Add New</a>
     </div>
 
     <div >
@@ -18,16 +12,23 @@
       <table class="table">
       	<thead>
       		<tr>
+			  <th>No.</th>
 			<#list type.fields as field><#t>
 			  <th>${field.name}</th>
 			</#list>
       		</tr>
       	</thead>
       	<tbody>
-	        <tr ng-repeat="data in datalist | filter:query | orderBy:orderProp" class="thumbnail">
+	        <tr ng-repeat="data in datalist | filter:query | orderBy:orderProp">
+			  <td>{{$index+1}}</td>
 	          
 			<#list type.fields as field><#t>
-			  <td>{{data.${field.name}}}</td>
+				<#if field.importance == "Key">
+					<td><a href="#/d/${type.name}/{{data.${field.name}}}">{{data.${field.name}}}</a></td>
+				<#else>
+			  		<td>{{data.${field.name}}}</td>
+  				</#if>
+  
 			</#list>
 				
 	        </tr>

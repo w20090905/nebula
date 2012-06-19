@@ -1,15 +1,16 @@
 package http.engine;
 
-import http.json.JSON;
-import http.json.JSON.JsonSerializer;
+import http.json.JsonProvider;
+import http.json.JsonProvider.JsonSerializer;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
 
-import nebula.SmartList;
-import nebula.frame.DataWareHouse;
+import nebula.data.Entity;
+import nebula.data.Persistence;
+import nebula.data.Store;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,13 +20,13 @@ import org.simpleframework.http.resource.ResourceEngine;
 
 public class DataResouceEngine implements ResourceEngine {
 	private Log log = LogFactory.getLog(this.getClass());
-	DataWareHouse dataWareHouse;
+	Persistence<Entity> persistence;
 
 	Map<String, String> tmap = new HashMap<String, String>();
 
 	@Inject
-	public DataResouceEngine(DataWareHouse dataWareHouse) {
-		this.dataWareHouse = dataWareHouse;
+	public DataResouceEngine(Persistence<Entity> dataWareHouse) {
+		this.persistence = dataWareHouse;
 	}
 
 	@Override
@@ -43,10 +44,8 @@ public class DataResouceEngine implements ResourceEngine {
 			log.trace("\tid : " + id);
 		}
 
-		@SuppressWarnings("rawtypes")
-		JsonSerializer<Map> json = JSON.getSerialize(Map.class);
-		@SuppressWarnings("unchecked")
-		SmartList<Map<String, String>> datas = (SmartList<Map<String, String>>) dataWareHouse.get(typeName);
+		JsonSerializer<Entity> json = JsonProvider.getSerialize(Entity.class);
+		Store<Entity> datas = persistence.define(Entity.class, typeName);
 
 		if (id != null) {
 			return new DataResouce(json, datas, id);

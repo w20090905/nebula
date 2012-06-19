@@ -38,7 +38,10 @@ public class TypeSerialize implements JsonSerialize<Type> {
 	}
 
 	@Override
-	public void read(JsonParser p, Type d) {
+	public Type read(JsonParser p, Type d) {
+		if(d==null){
+			d = new Type(null, null);
+		}
         JsonToken t;
         try {
         	p.nextToken();
@@ -52,6 +55,7 @@ public class TypeSerialize implements JsonSerialize<Type> {
 			    	d.code = p.getText();
 			    }
 			}
+			return d;
 		} catch (JsonParseException e) {
 			throw new RuntimeException(e);
 		} catch (IOException e) {
@@ -79,8 +83,8 @@ class FieldSerialize implements JsonSerialize<Field> {
 	}
 
 	@Override
-	public void read(JsonParser p, Field d) {
-		
+	public Field read(JsonParser p, Field d) {
+		return null;
 	}
 
 }

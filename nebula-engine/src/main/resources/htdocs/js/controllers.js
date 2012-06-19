@@ -11,6 +11,24 @@ function MyCtrl2() {
 }
 MyCtrl2.$inject = [];
 
+/**
+ * @returns interpolation of the redirect path with the parametrs
+ */
+function interpolate(string, params) {
+  var result = [];
+  angular.forEach((string||'').split(':'), function(segment, i) {
+    if (i == 0) {
+      result.push(segment);
+    } else {
+      var segmentMatch = segment.match(/(\w+)(.*)/);
+      var key = segmentMatch[1];
+      result.push(params[key]);
+      result.push(segmentMatch[2] || '');
+      delete params[key];
+    }
+  });
+  return result.join('');
+}
 
 
 function MainCtrl($scope,$route){
@@ -34,12 +52,37 @@ function EntityListCtrl($scope,$route,$resource,$routeParams){
 	$scope.datalist = DataResource.query({},$scope.showme,$scope.showme);
 }
 
-function EntityCtrl($scope,$route,$resource,$routeParams){
+function NewEntityCtrl($scope,$route,$resource,$routeParams,$location){
+	$scope.typename = $routeParams.typename;	
+	var DataResource = $resource('d/:typename/', $routeParams);
+	$scope.data = {};
+	$scope.data.$save = DataResource.prototype.$save;
+
+	$scope.$save = function(){
+		$scope.data.$save(function(u, getResponseHeaders){
+			var url = interpolate('d/:typename/', $routeParams);
+			$location.url(url);
+		});
+	};	
+	$scope.showme();
+	
+	
+}
+
+function EntityCtrl($scope,$route,$resource,$routeParams,$location){
 	$scope.$route = $route;
 	$scope.typename = $routeParams.typename;	
 	$scope.id = $routeParams.id;
-	var DataResource = $scope.resource = $resource('d/:typename/:id',$routeParams);	
+	var DataResource = $scope.resource = $resource('d/:typename/:id',$routeParams,{'save':   {method:'PUT'}});	
 	$scope.data = DataResource.get($routeParams,$scope.showme,$scope.showme);
+	$scope.update = true;
+	$scope.$save = function(){
+		$scope.data.$save(function(u, getResponseHeaders){
+			var url = interpolate('d/:typename/', $routeParams);
+			$location.url(url);
+		});
+	};
+	
 }
 
 function AngularJSCtrl($scope,$route,$location,$http,$routeParams,$templateCache){
@@ -50,13 +93,10 @@ function AngularJSCtrl($scope,$route,$location,$http,$routeParams,$templateCache
 	});
 	$scope.newcode = "";
 	$scope.$save = function(){
-//		$scope.$apply(function() {
-//			$scope.newcode = $scope.dcode;
-			$http.put($scope.resourcename,$scope.data.code).success(function(data, status, headers, config){
-				$scope.data = {code:data};
-				$templateCache.removeAll();
-			});
-//		});
+		$http.put($scope.resourcename,$scope.data.code).success(function(data, status, headers, config){
+			$scope.data = {code:data};
+			$templateCache.removeAll();
+		});
 	};
 }
 

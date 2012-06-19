@@ -18,6 +18,9 @@ import java.net.URL;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import nebula.data.Entity;
+import nebula.data.Persistence;
+import nebula.data.mem.PersistenceMem;
 import nebula.frame.DataWareHouse;
 import nebula.lang.EditableTypeLoader;
 import nebula.lang.SystemTypeLoader;
@@ -63,8 +66,9 @@ public class ConfigModule extends AbstractModule {
 				throw new RuntimeException("cannot find htdocs");
 			}
 
-			TypeLoader typeLoader = new EditableTypeLoader(new SystemTypeLoader(), new File(root, "WEB-INF/nebula"));
+			EditableTypeLoader typeLoader = new EditableTypeLoader(new SystemTypeLoader(), new File(root, "WEB-INF/nebula"));
 
+			this.bind(EditableTypeLoader.class).toInstance(typeLoader);
 			this.bind(TypeLoader.class).toInstance(typeLoader);
 
 			Loader loader = new MultiLoader(new ClassPathLoader(this.getClass().getClassLoader(), "htdocs"),
@@ -72,7 +76,9 @@ public class ConfigModule extends AbstractModule {
 			this.bind(Loader.class).toInstance(loader);
 
 			this.bind(DataWareHouse.class);
-
+						
+			this.bind(new TypeLiteral<Persistence<Entity>>(){}).toInstance(new PersistenceMem(typeLoader));
+			
 			Configuration freemarkerConfiguration = new Configuration();
 			freemarkerConfiguration.setTemplateUpdateDelay(1);
 			freemarkerConfiguration.setDirectoryForTemplateLoading(new File(root, "template"));

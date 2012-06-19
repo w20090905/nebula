@@ -1,27 +1,35 @@
 package nebula.data.mem;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.locks.ReentrantLock;
 
-import nebula.data.HasID;
+import nebula.data.Entity;
 import nebula.data.Store;
+import nebula.lang.Field;
+import nebula.lang.Type;
 
 public class EntityStore implements Store<Entity> {
-	PersistenceMem persistence;
-	Map<String,Entity> quickIndex = new HashMap<String, Entity>();
-	
-	EntityStore(PersistenceMem persistence){
+	final PersistenceMem persistence;
+	final Type type;
+
+	final List<Entity> datas;
+	final Map<String, Entity> quickIndex;
+
+	ReentrantLock lock = new ReentrantLock();
+
+	EntityStore(PersistenceMem persistence, Type type) {
 		this.persistence = persistence;
+		this.type = type;
+		datas = new CopyOnWriteArrayList<>();
+		quickIndex = new HashMap<String, Entity>();
 	}
-	
-	List<Entity> datas = new ArrayList<>();
-	
+
 	@Override
 	public Entity createNew() {
-		Entity newEntity = new Entity(this);
-		EditableEntity agent = new EditableEntity(this, newEntity);
+		EditableEntity agent = new EditableEntity(this);
 		return agent;
 	}
 
@@ -37,8 +45,7 @@ public class EntityStore implements Store<Entity> {
 
 	@Override
 	public void add(Entity v) {
-		this.datas.add(v);
-		this.quickIndex.put(v.getID(), v);
+		persistence.add(v);
 	}
 
 	@Override
@@ -50,18 +57,52 @@ public class EntityStore implements Store<Entity> {
 		persistence.flush();
 	}
 
-	void markChanged(EditableEntity v){
+	void markChanged(EditableEntity v) {
 		persistence.markChanged(v);
 	}
-	
-	void apply(EditableEntity entity){
-		
+
+	void apply(EditableEntity newEntity) {
+		if (newEntity.source != null) {
+			Map<String, Object> newData = new HashMap<>(newEntity.data);
+			newData.putAll(newEntity.newData);
+
+			lock.lock();
+			EntityImp source = newEntity.source;
+			if (newEntity.data == source.data) {
+				source.data = newData;
+				newEntity.reset(source);
+			} else {
+				throw new RuntimeException("entity update by some others");
+			}
+			lock.unlock();
+		} else {
+			Map<String, Object> newData = new HashMap<>(newEntity.newData);
+			
+			String id = "";
+			for (Field f : type.getFields()) {
+				if(Field.KEY ==  f.getImportance()){
+					id += newData.get(f.getName());
+				}
+			}
+			newData.put("ID", id);
+			
+			lock.lock();
+			EntityImp source = new EntityImp(this, newData);
+			newEntity.reset(source);
+			this.datas.add(source);
+			this.quickIndex.put(source.getID(), source);
+			lock.unlock();
+		}
 	}
-	
+
 	@Override
 	public List<Entity> all() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.datas;
+	}
+
+	@Override
+	public String getID() {
+		return type.getName();
 	}
 
 }

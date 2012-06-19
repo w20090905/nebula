@@ -1,36 +1,35 @@
 package http.engine;
 
-import http.json.JSON.JsonSerializer;
+import http.json.JsonProvider.JsonSerializer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.Map;
 
-import nebula.SmartList;
+import org.simpleframework.http.Request;
+
+import nebula.data.Entity;
+import nebula.data.Store;
 
 public class DataResouce extends BasicResouce {
-	@SuppressWarnings("rawtypes")
-	private final JsonSerializer<Map> json;
+	private final JsonSerializer<Entity> json;
 
 	private final String key;
-	private final SmartList<Map<String, String>> datas;
-	
+	private final Store<Entity> datas;
 
-	@SuppressWarnings("rawtypes")
-	public DataResouce(JsonSerializer<Map> json, SmartList<Map<String, String>> datas, String key) {
+	public DataResouce(JsonSerializer<Entity> json, Store<Entity> datas, String key) {
 		this.json = json;
 		this.datas = datas;
 		this.key = key;
 	}
 
-	protected void make() {
+	protected void makeResponse() {
 		try {
 			ByteArrayOutputStream bout = new ByteArrayOutputStream();
 			Writer w = new OutputStreamWriter(bout);
 
-			Map<String, String> data = datas.get(key);
+			Entity data = datas.load(key);
 			if (data != null) {
 				json.stringifyTo(data, bout);
 				w.flush();
@@ -40,6 +39,22 @@ public class DataResouce extends BasicResouce {
 			} else {
 				this.lastModified = System.currentTimeMillis();
 				this.buffer = new byte[0];
+			}
+		} catch (IOException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	protected void put(Request req) {
+		try {
+			Entity data = datas.load(key).editable();
+			if (data != null) {
+				json.readFrom(data, req.getInputStream());
+				datas.flush();
+			} else {
+				throw new RuntimeException("Cann't find object " + key);
 			}
 		} catch (IOException e) {
 			log.error(e);

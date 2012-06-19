@@ -33,7 +33,7 @@ public class EditableStaticResource extends BasicResouce {
 		try {
 
 			if ("GET".equals(req.getMethod())) {
-				this.make();
+				this.makeResponse();
 				// normal parse
 				resp.set("Cache-Control", "max-age=0");
 				resp.set("Content-Language", "en-US");
@@ -64,9 +64,9 @@ public class EditableStaticResource extends BasicResouce {
 					file = new File(url.getFile());
 				}
 
-				file = FileUtil.replace(file, bio);
+				file = FileUtil.saveTo(bio,file);
 
-				this.make();
+				this.makeResponse();
 				// normal parse
 				resp.set("Cache-Control", "max-age=0");
 				resp.set("Content-Language", "en-US");
@@ -89,7 +89,7 @@ public class EditableStaticResource extends BasicResouce {
 	}
 
 	@Override
-	protected void make() {
+	protected void makeResponse() {
 		try {
 			ByteArrayOutputStream bout = new ByteArrayOutputStream();
 			InputStream in = this.underlySource.getInputStream();

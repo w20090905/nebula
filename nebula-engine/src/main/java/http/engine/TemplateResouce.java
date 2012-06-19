@@ -35,7 +35,7 @@ public class TemplateResouce extends BasicResouce {
 		this.templateName = "angularjs-" + actionName + ".ftl";
 	}
 
-	protected void make() {
+	protected void makeResponse() {
 		try {
 			ByteArrayOutputStream bout = new ByteArrayOutputStream();
 			Writer w = new OutputStreamWriter(bout);

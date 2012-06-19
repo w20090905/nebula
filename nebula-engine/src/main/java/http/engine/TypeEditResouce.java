@@ -1,6 +1,6 @@
 package http.engine;
 
-import http.json.JSON;
+import http.json.JsonProvider;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -36,7 +36,7 @@ public class TypeEditResouce extends BasicResouce{
 				}
 
 				if (buffer == null) {
-					this.make();
+					this.makeResponse();
 				}
 
 				// normal parse
@@ -63,7 +63,7 @@ public class TypeEditResouce extends BasicResouce{
 				Type type = typeLoader.findType(key);
 				String oldCode = type.getCode();
 
-				JSON.getSerialize(Type.class).readFrom(type, req.getInputStream());
+				JsonProvider.getSerialize(Type.class).readFrom(type, req.getInputStream());
 				// System.out.println(type.toString());
 				if (!oldCode.equals(type.getCode())) {
 					if (log.isTraceEnabled()) {
@@ -81,7 +81,7 @@ public class TypeEditResouce extends BasicResouce{
 					}
 				}
 				
-				this.make();
+				this.makeResponse();
 
 				// normal parse
 				resp.setCode(200);
@@ -101,11 +101,11 @@ public class TypeEditResouce extends BasicResouce{
 	}
 
 	@Override
-	protected void make() {
+	protected void makeResponse() {
 		try {
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			Type type = typeLoader.findType(key);
-			JSON.getSerialize(Type.class).stringifyTo(type, out);
+			JsonProvider.getSerialize(Type.class).stringifyTo(type, out);
 			out.flush();
 			this.lastModified = System.currentTimeMillis();
 			this.buffer = out.toByteArray();

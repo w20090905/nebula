@@ -1,8 +1,12 @@
 package http.engine;
 
+import http.json.JsonProvider;
+import http.json.JsonProvider.JsonSerializer;
+
 import javax.inject.Inject;
 
 import nebula.frame.DataWareHouse;
+import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 
 import org.apache.commons.logging.Log;
@@ -36,11 +40,12 @@ public class TypeResouceEngine implements ResourceEngine {
 			log.trace("\ttypeName : " + typeName);
 			log.trace("\tid : " + id);
 		}
+		JsonSerializer<Type> json = JsonProvider.getSerialize(Type.class);
 
 		if (id != null) {
 			return new TypeEditResouce(typeLoader, id);
 		} else {
-			return new TypeListResouce(typeLoader, dataWareHouse.get(typeName));
+			return new TypeListResouce(typeLoader, dataWareHouse.get(typeName), json);
 		}
 	}
 

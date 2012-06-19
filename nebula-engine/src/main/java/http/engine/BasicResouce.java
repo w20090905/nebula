@@ -14,27 +14,68 @@ public abstract class BasicResouce implements Resource {
 	protected byte[] buffer;
 	protected Long lastModified;
 
-	protected abstract void make();
+	protected abstract void makeResponse();
+
+	protected void put(Request req) {
+		throw new UnsupportedOperationException("cann't support " + req.getMethod());
+	}
+
+	protected void post(Request req) {
+		throw new UnsupportedOperationException("cann't support " + req.getMethod());
+	}
 
 	@Override
 	public void handle(Request req, Response resp) {
-		try {
-			if (log.isTraceEnabled()) {
-				log.trace("Request : " + req.getPath());
-			}
+		if (log.isTraceEnabled()) {
+			log.trace("Request : " + req.getPath());
+			log.trace("\tMethod" + req.getMethod());
+		}
 
-			make();
-			
-			// normal parse
-			resp.setCode(200);
-			resp.set("Cache-Control", "max-age=0");
-			resp.set("Content-Language", "en-US");
-			resp.set("Content-Type", "text/html");
-			resp.set("Content-Length", buffer.length);
-			resp.setDate("Date", this.lastModified);			
-			resp.getOutputStream().write(buffer);
-			resp.getOutputStream().flush();
-			resp.close();
+		String method = req.getMethod();
+
+		try {
+			if ("GET".equals(method)) {
+
+				makeResponse();
+
+				// normal parse
+				resp.setCode(200);
+				resp.set("Cache-Control", "max-age=0");
+				resp.set("Content-Language", "en-US");
+				resp.set("Content-Type", "text/html");
+				resp.set("Content-Length", buffer.length);
+				resp.setDate("Date", this.lastModified);
+				resp.getOutputStream().write(buffer);
+				resp.getOutputStream().flush();
+				resp.close();
+			} else if ("PUT".equals(method)) {
+				this.put(req);
+
+				makeResponse();
+
+				// normal parse
+				resp.setCode(200);
+				resp.set("Cache-Control", "max-age=0");
+				resp.set("Content-Language", "en-US");
+				resp.set("Content-Type", "text/html");
+				resp.set("Content-Length", buffer.length);
+				resp.setDate("Date", this.lastModified);
+				resp.getOutputStream().write(buffer);
+				resp.getOutputStream().flush();
+				resp.close();
+			} else if ("POST".equals(method)) {
+				this.post(req);
+
+				// normal parse
+				resp.setCode(200);
+				resp.set("Cache-Control", "max-age=0");
+				resp.set("Content-Language", "en-US");
+				resp.set("Content-Type", "text/html");
+				resp.set("Content-Length", 0);
+				resp.close();
+			} else {
+				throw new RuntimeException("Unsupport method " + method);
+			}
 		} catch (IOException e) {
 			log.error(e);
 			throw new RuntimeException(e);

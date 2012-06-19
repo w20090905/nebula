@@ -2,7 +2,7 @@ package nebula.data;
 
 import java.util.List;
 
-public interface Store<V extends HasID> {
+public interface Store<V extends HasID> extends HasID {	
 	V createNew();
 	V load(String key);
 	List<V> findBy(String key);

@@ -30,17 +30,18 @@
 }
 
 div.body{
-	position:absolute;
 	top:0px;
 	left:0px;
 	height: 100%;
 	width: 100%;
 }
 div.closed{
+	position:absolute;
 	visibility: hidden;
 }
 
 div.opened{
+	position:absolute;
 	visibility:visible;
 }
 

@@ -23,6 +23,19 @@ import org.apache.commons.logging.LogFactory;
 public class FileUtil {
 	private static Log log = LogFactory.getLog(FileUtil.class);
 
+	public static InputStream print(InputStream in) {
+		try {
+			BufferedInputStream bin = new BufferedInputStream(in);
+			bin.mark(4 * 1024 * 1024);
+			System.out.println(readAllTextFrom(bin));
+			bin.reset();
+			return bin;
+		} catch (IOException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		}
+	}
+
 	// TODO move to other place
 	public static String readAllTextFrom(File file) {
 		try {
@@ -57,11 +70,12 @@ public class FileUtil {
 			throw new RuntimeException(e);
 		}
 	}
+
 	// TODO move to other place
 	public static String readAllTextFrom(BufferedReader br) {
 		try {
 			br.mark(4 * 1024 * 1024);
-			String text = readAllTextFrom((Reader)br);
+			String text = readAllTextFrom((Reader) br);
 			br.reset();
 			return text;
 		} catch (IOException e) {
@@ -87,62 +101,52 @@ public class FileUtil {
 		return sb.toString();
 	}
 
-	public static File replace(File file, InputStream in) {
+	public static File saveTo(InputStream in, File file) {
 		try {
-
-			if (file.exists()) {
-				log.trace("replace file " + file);
-				log.trace(FileUtil.readAllTextFrom(file));
-			} else {
-				log.trace("file not exist " + file);
-			}
-
 			SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
 
-			String abpath = file.getAbsolutePath();
-			File newFile = new File(abpath + "." + format.format(new Date(file.lastModified())));
+			if (file.exists()) {
+				String abpath = file.getAbsolutePath();
+				File newFile = new File(abpath + "." + format.format(new Date(file.lastModified())));
 
-			//backup old file
-			if(newFile.exists()){
-				newFile.delete();
+				// backup old file
+				if (newFile.exists()) {
+					newFile.delete();
+				}
+				boolean result = newFile.createNewFile();
+				if (result) {
+					log.trace("createNewFile " + newFile);
+				} else {
+					log.trace("createNewFile fail " + newFile);
+				}
+				byte[] buffer = new byte[1024];
+				int length = -1;
+				InputStream inOld = new FileInputStream(file);
+				OutputStream outNew = new FileOutputStream(newFile);
+				while ((length = inOld.read(buffer)) > 0) {
+					outNew.write(buffer, 0, length);
+				}
+				inOld.close();
+				outNew.close();
 			}
-			boolean result = newFile.createNewFile();
-			if (result) {
-				log.trace("createNewFile " + newFile);
-			} else {
-				log.trace("createNewFile fail " + newFile);
-			}
+
+			OutputStream out = new FileOutputStream(file);
 			byte[] buffer = new byte[1024];
 			int length = -1;
-			InputStream inOld = new FileInputStream(file);
-			OutputStream outNew = new FileOutputStream(newFile);
-			while ((length = inOld.read(buffer)) > 0) {
-				outNew.write(buffer, 0, length);
-			}
-			inOld.close();
-			outNew.close();
-			
-
-			file = new File(abpath);
-			OutputStream out = new FileOutputStream(file);
-			buffer = new byte[1024];
-			length = -1;
 			while ((length = in.read(buffer)) > 0) {
 				out.write(buffer, 0, length);
 			}
 			in.close();
 			out.close();
-			log.trace(file.getName());
-			log.trace(FileUtil.readAllTextFrom(file));
 			return file;
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public static File replace(File file, String text) {
+	public static File saveTo(String text, File file) {
 		try {
-			return replace(file, new ByteArrayInputStream(text.getBytes("utf-8")));
+			return saveTo(new ByteArrayInputStream(text.getBytes("utf-8")), file);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

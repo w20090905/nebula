@@ -1,8 +1,6 @@
 'use strict';
 
 /* Directives */
-
-
 var neTabsDirective = [function() {
     return {
       restrict: 'EC',
@@ -10,7 +8,7 @@ var neTabsDirective = [function() {
       scope: {},
       controller: function($scope, $element) {
         var panes = $scope.panes = [];
- 
+
         $scope.select = function(pane) {
           angular.forEach(panes, function(pane) {
             //TODO pane.selected = false;
@@ -80,11 +78,17 @@ var neCodeEditorDirective = [ function() {
               matchBrackets: true,
               mode: $mode,
   		      onChange: function(el,param){
-  		    	  if(isUndefined(ngModelCtrl.$viewValue)){
-  		    		  
-  		    	  }else if(!compare(ngModelCtrl.$viewValue,$editor.getValue())){
+  		    	  if(isEmpty(ngModelCtrl.$viewValue)){
+  		    		  if(isEmpty($editor.getValue())){
+  		    			  
+  		    		  }else{
+	  				      scope.$apply(function() {
+	  				    	  ngModelCtrl.$setViewValue($editor.getValue());
+	  				      });
+  		    		  }
+  		    	  } else if(!compare(ngModelCtrl.$viewValue,$editor.getValue())){
   				      scope.$apply(function() {
-  							ngModelCtrl.$setViewValue($editor.getValue());
+  				    	  ngModelCtrl.$setViewValue($editor.getValue());
   				      });  				      
   				  }        	
   			}
@@ -100,54 +104,11 @@ var neCodeEditorDirective = [ function() {
       }
     };
   }];
-
-/*
- * 
-var neCodeEditorDirective = [ function() {
-    return {
-      require: 'ngModel',
-      restrict: 'C',
-      terminal: true,
-      template:
-          '<div>' +
-          '</div>',
-        replace: true,
-      link: function(scope, element, attrs, ngModelCtrl) {
-
-          var $editor = CodeMirror(element[0], {
-              lineNumbers: true,
-              matchBrackets: true,
-              mode:attrs['x-mode'],
-  		    onChange: function(el,param){
-  				if(isEmpty($editor.getValue())){
-  					
-  				}else if(ngModelCtrl.$viewValue != $editor.getValue()){
-  				      scope.$apply(function() {
-  							ngModelCtrl.$setViewValue($editor.getValue());
-  				      });  				      
-  				}        	
-  			}
-            });
-    	ngModelCtrl.$oldrender = ngModelCtrl.$render;
-    	ngModelCtrl.$render = function(){    		
-			if(isEmpty(ngModelCtrl.$viewValue)){
-				$editor.setValue('');				
-			}else{
-				$editor.setValue("");
-				$editor.setValue(ngModelCtrl.$viewValue);
-			}
-    	};
-      }
-    };
-  }];
-*/
-
 var neDragableDirective = ['$document',function($document) { 
 	var startX=0, startY=0, x = 0, y = 0; 
 	return {
 	      restrict: 'EC',
 	      link: function(scope, element, attr) { 
-//	    	  element.html("dddddd");
 				element.css({ position: 'relative', border: '1px solid red', backgroundColor: 'lightgrey', cursor: 'pointer' }); 
 				element.bind('mousedown', function(event) { 
 					startX = event.screenX - x; startY = event.screenY - y; 
@@ -289,5 +250,3 @@ angular.module('nebula.directives', []).
   directive('neView', neViewDirective).
   directive('tabs', neTabsDirective).
   directive('pane', nePaneDirective);
-
-
