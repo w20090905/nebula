@@ -1,5 +1,5 @@
 <h1>{{data.name}}&nbsp;</h1>
-<form ng-submit="data.$save()">
+<form ng-submit="$save()">
 	<div class="tabs">
 		<div class="pane" title="view">
 			<ul class="data">
@@ -26,8 +26,9 @@
 				</table>
 			</ul>
 			<textarea ng-model="data.code" class="codeeditor" x-mode="text/nebula" placeholder="add Type info here"></textarea>
+			{{data.code}}
 			<div>
-				<input class="btn-primary" type="submit" value="save" x-ng-show="data.mutable">
+				<input class="btn-primary" type="submit" value="save" ngdshow="data.mutable">
 			</div>
 		</div>
 	</div>
