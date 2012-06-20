@@ -1,4 +1,4 @@
-type Product11 {
+type Product {
 	!Name;
 	Unit Text;
 };

@@ -1,5 +1,6 @@
 <h1>{{data.name}}&nbsp;</h1>
 <form ng-submit="$save()">
+    <a href="#/d/{{data.name}}/" ng-show="data.standalone != 'BuilderIn'">Edit Data</a>
 	<div class="tabs">
 		<div class="pane" title="view">
 			<ul class="data">
