@@ -53,13 +53,13 @@ public class PersistenceMem implements Persistence<Entity> {
 	public void flush() {
 		lock.lock();
 		Iterator<EditableEntity> i = changes.listIterator();
-		changes.clear();
+//		changes.clear();
 		while(i.hasNext()){
 			EditableEntity e = i.next();
 			e.store.apply(e);			
 		}
-		lock.unlock();
 		changes.clear();
+		lock.unlock();
 	}
 
 	@Override

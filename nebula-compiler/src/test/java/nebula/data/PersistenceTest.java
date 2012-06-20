@@ -26,16 +26,16 @@ public class PersistenceTest extends TestCase {
 		Entity v =  store.createNew();
 		assertNotNull(v);
 
-		v.put("ID", "wangshilian");
+		v.put("Name", "wangshilian");
 
 		assertEquals(true, v.isDirty());
-		assertEquals("wangshilian", v.get("ID"));
+		assertEquals("wangshilian", v.get("Name"));
 //		assertEquals(null, ((EditableEntity)v).source);
 
 		p.flush();
 
 		assertEquals(true, v.isDirty());
-		assertEquals("wangshilian", v.get("ID"));
+		assertEquals("wangshilian", v.get("Name"));
 //		assertEquals(null, ((EditableEntity)v).source);
 
 		p.add(v);

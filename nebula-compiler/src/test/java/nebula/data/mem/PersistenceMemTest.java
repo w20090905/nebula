@@ -28,23 +28,24 @@ public class PersistenceMemTest extends TestCase {
 		Entity v =  store.createNew();
 		assertNotNull(v);
 
-		v.put("ID", "wangshilian");
+		v.put("Name", "wangshilian");
 
 		assertEquals(true, v.isDirty());
-		assertEquals("wangshilian", v.get("ID"));
+		assertEquals("wangshilian", v.get("Name"));
 		assertEquals(null, ((EditableEntity)v).source);
 
 		p.flush();
 
 		assertEquals(true, v.isDirty());
-		assertEquals("wangshilian", v.get("ID"));
+//		assertEquals("wangshilian", v.get("ID"));
+		assertEquals("wangshilian", v.get("Name"));
 		assertEquals(null, ((EditableEntity)v).source);
 
 		p.add(v);
 		p.flush();
 
 		assertEquals(false, v.isDirty());
-		assertEquals("wangshilian", v.get("ID"));
+		assertEquals("wangshilian", v.get("Name"));
 		assertEquals("wangshilian", store.load("wangshilian").get("ID"));
 
 		v.put("length", "120");

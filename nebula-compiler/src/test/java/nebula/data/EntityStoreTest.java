@@ -35,7 +35,7 @@ public class EntityStoreTest extends TestCase {
 
 	public final void testLoad() {
 		Entity v = store.createNew();
-		v.put("ID", "wangshilian");
+		v.put("Name", "wangshilian");
 		store.add(v);
 
 		Entity v1 = store.load("wangshilian");
@@ -65,7 +65,7 @@ public class EntityStoreTest extends TestCase {
 		assertEquals("wangshilian", e1.getID());
 
 		v = store.createNew();
-		v.put("ID", "test");
+		v.put("Name", "test");
 		store.add(v);
 		store.flush();
 
