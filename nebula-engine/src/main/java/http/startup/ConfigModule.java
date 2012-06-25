@@ -20,7 +20,8 @@ import javax.inject.Singleton;
 
 import nebula.data.Entity;
 import nebula.data.Persistence;
-import nebula.data.impl.PersistenceMem;
+import nebula.data.impl.PersistenceDB;
+import nebula.db.DbConfiguration;
 import nebula.frame.DataWareHouse;
 import nebula.lang.EditableTypeLoader;
 import nebula.lang.SystemTypeLoader;
@@ -46,7 +47,12 @@ public class ConfigModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-
+		String driverclass = "org.apache.derby.jdbc.EmbeddedDriver";
+		String dburl = "jdbc:derby:db/nebula;create=true";
+		String username = "user";
+		String password = "password";
+		
+		
 		try {
 			File root = null;
 			URL url = this.getClass().getResource("/htdocs/WEB-INF/web.xml");
@@ -76,8 +82,10 @@ public class ConfigModule extends AbstractModule {
 			this.bind(Loader.class).toInstance(loader);
 
 			this.bind(DataWareHouse.class);
+			
+			this.bind(DbConfiguration.class).toInstance(DbConfiguration.getEngine(driverclass, dburl, username, password));
 						
-			this.bind(new TypeLiteral<Persistence<Entity>>(){}).toInstance(new PersistenceMem(typeLoader));
+			this.bind(new TypeLiteral<Persistence<Entity>>(){}).to(PersistenceDB.class);
 			
 			Configuration freemarkerConfiguration = new Configuration();
 			freemarkerConfiguration.setTemplateUpdateDelay(1);

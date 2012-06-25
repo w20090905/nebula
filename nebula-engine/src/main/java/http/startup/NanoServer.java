@@ -28,6 +28,6 @@ public class NanoServer {
         Connection connection = new SocketConnection(container);
         SocketAddress address1 = new InetSocketAddress(port);
         connection.connect(address1);
-        log.info("== listen at " + port);
+        log.error("== listen at " + port);
     }
 }

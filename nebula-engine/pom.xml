@@ -56,9 +56,9 @@
 			<version>1.9.7</version>
 		</dependency>
 		<dependency>
-			<groupId>de.ch-werner</groupId>
-			<artifactId>javasqlite</artifactId>
-			<version>1.0</version>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>10.6.2.1</version>
 		</dependency>
 	</dependencies>
 </project>
