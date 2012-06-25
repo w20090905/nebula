@@ -1,9 +1,7 @@
 package nebula.data.mem;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantLock;
@@ -76,9 +74,10 @@ public class PersistenceMem implements Persistence<Entity> {
 
 	CopyOnWriteArrayList<EditableEntity> changes = new CopyOnWriteArrayList<>();
 
-	public void markChanged(EditableEntity v) {
+	@Override
+	public void markChanged(Entity v) {
 		lock.lock();
-		changes.add(v);
+		changes.add((EditableEntity)v);
 		lock.unlock();
 	}
 

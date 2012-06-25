@@ -41,8 +41,12 @@ public class NebulaParserTest extends TestCase {
 			assertEquals("Person", type.name);
 
 			assertEquals(1, type.fields.size());
-			assertEquals("姓名", type.fields.get(0).name);	
-			assertEquals(Field.REQUIRE, type.fields.get(0).importance);			
+			
+			Field f = type.fields.get(0);
+
+			assertEquals("姓名", f.name);	
+			assertEquals(Field.SCALA, f.refer);	
+			assertEquals(Field.REQUIRE, f.importance);			
 			
 		} catch (RecognitionException e) {
 			fail(e.toString());
@@ -84,6 +88,7 @@ public class NebulaParserTest extends TestCase {
 			assertEquals(0, parser.getNumberOfSyntaxErrors());
 			assertEquals("Detail", v.name);
 			assertEquals("Test$Detail", v.type.name);
+			assertEquals(Field.INLINE, v.refer);
 			assertEquals("Name", v.type.fields.get(0).name);
 			assertEquals("Name", v.type.fields.get(0).type.name);
 			assertEquals("Age", v.type.fields.get(1).name);

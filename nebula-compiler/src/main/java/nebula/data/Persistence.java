@@ -7,4 +7,5 @@ public interface Persistence<V extends HasID>{
 	void flush();
 	void clearChanges();
 	void transaction(Callback<V> callback);
+	void markChanged(V v);
 }

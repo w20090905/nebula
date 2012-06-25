@@ -109,6 +109,13 @@ fieldDefinition[Type resideType] returns[Field field]
         
         ';'{
             field.importance = imp;
+            if(field.type.standalone == TypeStandalone.BuilderIn){
+              field.refer = Field.SCALA;
+            }else if(field.type.standalone == TypeStandalone.Eembedded){
+              field.refer = Field.INLINE;
+            }else{
+              field.refer = Field.REFERENCE;              
+            }
             if(inline!=""){
                 field.refer = inline;
             }
