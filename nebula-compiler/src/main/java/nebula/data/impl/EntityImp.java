@@ -1,16 +1,17 @@
-package nebula.data.mem;
+package nebula.data.impl;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import nebula.data.Entity;
 import nebula.data.HasID;
+import nebula.data.Store;
 
 public class EntityImp implements HasID, Entity {
 	Map<String, Object> data;
-	EntityStore store;
+	Store<Entity> store;
 
-	EntityImp(EntityStore store, Map<String, Object> data) {
+	EntityImp(Store<Entity> store, Map<String, Object> data) {
 		this.store = store;
 		this.data = data;
 	}

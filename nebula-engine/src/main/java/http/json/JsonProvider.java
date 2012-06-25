@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import nebula.data.Entity;
-import nebula.data.mem.EntitySerialize;
+import nebula.data.impl.EntitySerialize;
 import nebula.lang.Type;
 import nebula.lang.TypeSerialize;
 

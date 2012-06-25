@@ -20,7 +20,7 @@ import javax.inject.Singleton;
 
 import nebula.data.Entity;
 import nebula.data.Persistence;
-import nebula.data.mem.PersistenceMem;
+import nebula.data.impl.PersistenceMem;
 import nebula.frame.DataWareHouse;
 import nebula.lang.EditableTypeLoader;
 import nebula.lang.SystemTypeLoader;

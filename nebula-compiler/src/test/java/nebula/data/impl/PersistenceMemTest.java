@@ -1,9 +1,11 @@
-package nebula.data.mem;
+package nebula.data.impl;
 
 import junit.framework.TestCase;
 import nebula.data.Entity;
 import nebula.data.Persistence;
 import nebula.data.Store;
+import nebula.data.impl.EditableEntity;
+import nebula.data.impl.PersistenceMem;
 import nebula.lang.SystemTypeLoader;
 
 public class PersistenceMemTest extends TestCase {

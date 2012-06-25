@@ -1,7 +1,7 @@
 package nebula.data;
 
 import junit.framework.TestCase;
-import nebula.data.mem.PersistenceMem;
+import nebula.data.impl.PersistenceMem;
 import nebula.lang.SystemTypeLoader;
 
 public class PersistenceTest extends TestCase {

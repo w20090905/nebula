@@ -1,4 +1,4 @@
-package nebula.data.mem;
+package nebula.data.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -57,11 +57,14 @@ public class EntityStore implements Store<Entity> {
 		persistence.flush();
 	}
 
-	void markChanged(EditableEntity v) {
+	@Override
+	public void markChanged(Entity v) {
 		persistence.markChanged(v);
 	}
 
-	void apply(EditableEntity newEntity) {
+	@Override
+	public void apply(Entity newV) {
+		EditableEntity newEntity = (EditableEntity)newV;
 		if (newEntity.source != null) {
 			Map<String, Object> newData = new HashMap<>(newEntity.data);
 			newData.putAll(newEntity.newData);
@@ -70,7 +73,7 @@ public class EntityStore implements Store<Entity> {
 			EntityImp source = newEntity.source;
 			if (newEntity.data == source.data) {
 				source.data = newData;
-				newEntity.reset(source);
+				newEntity.resetWith(source);
 			} else {
 				throw new RuntimeException("entity update by some others");
 			}
@@ -88,7 +91,7 @@ public class EntityStore implements Store<Entity> {
 			
 			lock.lock();
 			EntityImp source = new EntityImp(this, newData);
-			newEntity.reset(source);
+			newEntity.resetWith(source);
 			this.datas.add(source);
 			this.quickIndex.put(source.getID(), source);
 			lock.unlock();

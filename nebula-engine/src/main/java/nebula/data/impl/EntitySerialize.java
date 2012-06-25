@@ -1,4 +1,4 @@
-package nebula.data.mem;
+package nebula.data.impl;
 
 import http.json.JsonSerialize;
 
@@ -20,14 +20,14 @@ public class EntitySerialize implements JsonSerialize<Entity> {
 		try {
 			o.writeStartObject();
 			EntityImp v = (EntityImp) d;
-			Type type = v.store.type;
+			Type type = ((EntityStore) v.store).type;
 			for (Field f : type.getFields()) {
 				String name = f.getName();
 				Object ov = (String) v.get(name);
-				if(ov!=null){
-					o.writeStringField(f.getName(), (String) v.get(f.getName()));					
-				}else{
-					
+				if (ov != null) {
+					o.writeStringField(f.getName(), (String) v.get(f.getName()));
+				} else {
+
 				}
 			}
 			o.writeEndObject();

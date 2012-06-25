@@ -53,6 +53,7 @@ public class NebulaParserAdvTest extends TestCase {
 		i=7;
 		assertEquals("Education", type.fields.get(i).name);
 		assertEquals("Person$Education", type.fields.get(i).type.name);
+		assertEquals(Field.INLINE, type.fields.get(i).refer);
 		assertEquals(true, type.fields.get(i).array);
 		assertEquals(0, type.fields.get(i).rangeFrom);
 		assertEquals(5, type.fields.get(i).rangeTo);
@@ -118,12 +119,13 @@ public class NebulaParserAdvTest extends TestCase {
 		assertEquals("Name", type.fields.get(i).name);
 		assertEquals(Field.KEY, type.fields.get(i).importance);
 		assertEquals("Text", type.fields.get(i).type.name);
+		assertEquals(Field.SCALA, type.fields.get(i).refer);
 
 		++i;
 		assertEquals("Sex", type.fields.get(i).name);
 		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
 		assertEquals("Sex", type.fields.get(i).type.name);
-		assertEquals(null, type.fields.get(i).refer);
+		assertEquals(Field.SCALA, type.fields.get(i).refer);
 
 		++i;
 		assertEquals("Length", type.fields.get(i).name);

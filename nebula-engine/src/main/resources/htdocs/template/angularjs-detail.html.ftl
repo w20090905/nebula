@@ -6,8 +6,7 @@
 		<label>${field.name}</label><input type="text" ng-model="data.${field.name}" ng-readonly="update"/>
 		<#else>
 		<label>${field.name}</label><input type="text" ng-model="data.${field.name}"/>
-  		</#if>
-    
+  		</#if>    
 	</div>
 	</#list>	
 	<div class="action">

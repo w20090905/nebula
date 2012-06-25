@@ -398,6 +398,7 @@ public class NebulaParserTest extends TestCase {
 
 			i++;	
 			assertEquals("Detail", type.fields.get(i).name);
+			assertEquals(Field.INLINE, type.fields.get(i).refer);
 			assertEquals("明细", type.fields.get(i).nameAlias.get("zh"));	
 			assertEquals("明细", type.fields.get(i).type.nameAlias.get("zh"));			
 		} catch (RecognitionException e) {

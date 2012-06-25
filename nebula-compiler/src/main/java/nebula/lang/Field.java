@@ -1,6 +1,5 @@
 package nebula.lang;
 
-
 public class Field {
 
     public static final String SCALA = "Scala";

@@ -1,7 +1,10 @@
-package nebula.data.mem;
+package nebula.data.impl;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import nebula.data.Entity;
+import nebula.data.Store;
 
 class EditableEntity extends EntityImp {
 	final Map<String, Object> newData;
@@ -10,19 +13,19 @@ class EditableEntity extends EntityImp {
 	boolean dirty = false;// <->pristine
 	boolean valid = true;// <->invalid
 
-	EditableEntity(EntityStore store) {
+	EditableEntity(Store<Entity> store) {
 		super(store, null);
 		this.source = null;
 		this.newData = new HashMap<String, Object>();
 	}
 
-	EditableEntity(EntityStore store, EntityImp source) {
+	EditableEntity(Store<Entity> store, EntityImp source) {
 		super(store, source.data);
 		this.source = source;
 		this.newData = new HashMap<String, Object>();
 	}
 
-	void reset(EntityImp source){
+	void resetWith(EntityImp source){
 		this.newData.clear();
 		this.dirty=false;
 		this.source = source;
