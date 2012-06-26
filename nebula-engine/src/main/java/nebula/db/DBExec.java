@@ -23,62 +23,53 @@ public class DBExec {
 	final private Connection conn;
 
 	final private Type type;
-	final private String tableName;
 	// final private String SQL_DROP;
-	final private String SQL_CREATE;
-
-	final private String SQL_GET;
-	final private String SQL_GETMETA;
-	final private String SQL_INSERT;
-	final private String SQL_UPDATE;
-	final private String SQL_DELETE;
-	final private String SQL_DELETEALL;
-	final private String SQL_LIST;
+	final private PreparedStatement SQL_GET;
+	final private PreparedStatement SQL_INSERT;
+	final private PreparedStatement SQL_UPDATE;
+	final private PreparedStatement SQL_DELETE;
+	final private PreparedStatement SQL_DELETEALL;
+	final private PreparedStatement SQL_LIST;
 	// final private String SQL_COUNT;
 
 	final private DbColumn[] columns;
 	final private String[] realFields;
-//	final private DbColumn[] keyColumns;
+	// final private DbColumn[] keyColumns;
 	final private SqlHelper builder;
 
 	// final private Map<String, Integer> map;
 
-//	final private String[] systemFields = new String[] { "TIMESTAMP_" };
+	// final private String[] systemFields = new String[] { "TIMESTAMP_" };
 
 	public DBExec(Connection conn, Type type, SqlHelper helper) {
 		this.type = type;
 		this.conn = conn;
 
 		builder = helper;
-		this.tableName = builder.getTableName();
 
 		// SQL_DROP = builder.builderDrop();
-		SQL_CREATE = builder.builderCreate();
-
-		SQL_GET = builder.builderGet();
-		SQL_GETMETA = builder.builderGetMeta();
-		SQL_INSERT = builder.builderInsert();
-		SQL_UPDATE = builder.builderUpdate();
-		SQL_DELETE = builder.builderDelete();
-		SQL_DELETEALL = builder.builderDeleteAll();
 
 		columns = builder.builderColumns();
+
+		this.init();
+		
+		try {
+			SQL_GET = conn.prepareStatement(builder.builderGet());
+			SQL_INSERT = conn.prepareStatement(builder.builderInsert());
+			SQL_UPDATE = conn.prepareStatement(builder.builderUpdate());
+			SQL_DELETE = conn.prepareStatement(builder.builderDelete());
+			SQL_DELETEALL = conn.prepareStatement(builder.builderDeleteAll());
+			SQL_LIST = conn.prepareStatement(builder.builderList());
+		} catch (SQLException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		}
+
 
 		realFields = new String[columns.length];
 		for (int i = 0; i < columns.length; i++) {
 			realFields[i] = columns[i].name;
 		}
-
-		// SQL_COUNT = builder.builderCount();
-		SQL_LIST = builder.builderList();
-
-//		keyColumns = builder.getKeyColumns();
-
-		// Map<String, Integer> tmpMap = new HashMap<String, Integer>();
-		// for (int i = 0; i < realFields.length; i++) {
-		// tmpMap.put(realFields[i], i);
-		// }
-		// map = tmpMap;
 	}
 
 	public void init() {
@@ -88,8 +79,9 @@ public class DBExec {
 			ResultSet rs = null;
 
 			try {
+				
 				statement = conn.createStatement();
-				rs = statement.executeQuery(SQL_GETMETA);
+				rs = statement.executeQuery(builder.builderGetMeta());
 				exist = true;
 				ResultSetMetaData metaData = rs.getMetaData();
 				int columnsSize = metaData.getColumnCount();
@@ -107,21 +99,20 @@ public class DBExec {
 					}
 				}
 
-				ArrayList<String> notExistColumns = new ArrayList<String>();
+				ArrayList<DbColumn> notExistColumns = new ArrayList<DbColumn>();
 				for (DbColumn f : columns) {
 					if (!cols.containsKey(f.name.toUpperCase())) {
-						notExistColumns.add(f.name);
+						notExistColumns.add(f);
 					}
 				}
 
 				if (notExistColumns.size() > 0) {
-					for (String fieldName : notExistColumns) {
-						statement.addBatch("ALTER TABLE " + this.tableName + " ADD COLUMN " + fieldName
-								+ " VARCHAR(40)");
+					for (DbColumn c : notExistColumns) {
+						statement.addBatch(builder.builderAddColumn(c));
 					}
 					statement.executeBatch();
 
-					rs = statement.executeQuery(SQL_GETMETA);
+					rs = statement.executeQuery(builder.builderGetMeta());
 					metaData = rs.getMetaData();
 					columnsSize = metaData.getColumnCount();
 					log.debug("== After update column ");
@@ -136,9 +127,9 @@ public class DBExec {
 			}
 
 			if (!exist) {
-				statement.execute(SQL_CREATE);
-				conn.commit();
+				statement.executeUpdate(builder.builderCreate());
 			}
+			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -146,175 +137,118 @@ public class DBExec {
 
 	public void update(Map<String, Object> value, Object... keys) {
 		log.debug(SQL_UPDATE + " : " + value);
-		execute(conn, SQL_UPDATE, value, keys);
+		executeUpdate(SQL_UPDATE, value, keys);
 	}
 
 	public void insert(Map<String, Object> value) {
 		log.debug(SQL_INSERT + " : " + value);
-		execute(conn, SQL_INSERT, value);
+		executeUpdate(SQL_INSERT, value);
 	}
 
 	public void deleteAll() {
-		execute(conn, SQL_DELETEALL);
+		ResultSet res = null;
+		try {
+			SQL_DELETEALL.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				if (res != null) res.close();
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
 	}
 
 	public List<Map<String, Object>> getAll() {
-		return query(conn, SQL_LIST);
+		return executeQuery(SQL_LIST);
 	}
 
 	public void delete(Map<String, Object> value) {
 		log.debug(SQL_DELETE + " : " + value);
-		execute(conn, SQL_DELETE, value);
+		executeUpdate(SQL_DELETE, value);
 	}
 
 	public Map<String, Object> get(Object... keys) {
 		log.debug(SQL_GET + " : " + keys);
-		return get(conn, SQL_GET, keys);
+
+		List<Map<String, Object>> list = executeQuery(SQL_GET, keys);
+		if (list == null) {
+			throw new RuntimeException("Can not find record key:");
+		}
+
+		if (list.size() != 1) {
+
+		}
+		return list.get(0);
 	}
 
-	Map<String, Object> get(Connection conn, String sql, Object... keys) {
-		PreparedStatement statement = null;
+	private void executeUpdate(PreparedStatement pstmt, Map<String, Object> v, Object... keys) {
 		ResultSet res = null;
 		try {
-			statement = conn.prepareStatement(sql);
 
-			for (int i = 1; i <= keys.length; i++) {
-				statement.setObject(i, keys[i - 1]);
+			int pos = fromEntity(pstmt, v);
+
+			for (int i = 0; i < keys.length; i++) {
+				pstmt.setObject(pos + i + 1, keys[i]);
 			}
 
-			res = statement.executeQuery();
+			pstmt.executeUpdate();
+			pstmt.clearParameters();
 
-			if (!res.next()) {
-				return null;
-			}
-
-			Map<String, Object> v = fillObject(res);
-
-			if (res.next()) {
-				throw new RuntimeException("Can not find record key:");
-			}
-
-			return v;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
 			try {
 				if (res != null) res.close();
-				if (statement != null) statement.close();
 			} catch (SQLException e) {
 				throw new RuntimeException(e);
 			}
 		}
 	}
 
-	List<Map<String, Object>> query(Connection conn, String sql, Object... keys) {
-		PreparedStatement statement = null;
+	private List<Map<String, Object>> executeQuery(PreparedStatement pstmt, Object... keys) {
 		ResultSet res = null;
 		try {
-
-			statement = conn.prepareStatement(sql);
-
-			for (int i = 1; i <= keys.length; i++) {
-				statement.setObject(i, keys[i]);
+			int pos = 0;
+			for (int i = 0; i < keys.length; i++) {
+				pstmt.setObject(pos + i + 1, keys[i]);
 			}
 
-			res = statement.executeQuery();
+			res = pstmt.executeQuery();
 			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
 			while (res.next()) {
-				Map<String, Object> v = fillObject(res);
+				Map<String, Object> v = toEntity(res);
 				list.add(v);
 			}
 
 			return list;
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
-			log.debug("== SUCCEED When exec [[ " + sql + " ]]");
-
 			try {
 				if (res != null) res.close();
-				if (statement != null) statement.close();
 			} catch (SQLException e) {
 				throw new RuntimeException(e);
 			}
 		}
 	}
 
-	protected void execute(Connection conn, String sql, Object... keys) {
-		PreparedStatement statement = null;
-		ResultSet res = null;
-		try {
-
-			statement = conn.prepareStatement(sql);
-
-			int pos = 0;
-
-			for (int i = 0; i < keys.length; i++) {
-				statement.setObject(pos + i + 1, keys[i]);
-			}
-
-			statement.execute();
-
-			conn.commit();
-
-			log.debug("== SUCCEED When exec " + sql);
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			try {
-				if (res != null) res.close();
-				if (statement != null) statement.close();
-			} catch (SQLException e) {
-				throw new RuntimeException(e);
-			}
-		}
-	}
-
-	protected void execute(Connection conn, String sql, Map<String, Object> v, Object... keys) {
-		PreparedStatement statement = null;
-		ResultSet res = null;
-		try {
-
-			statement = conn.prepareStatement(sql);
-
-			int pos = fillParameter(statement, v);
-
-			for (int i = 0; i < keys.length; i++) {
-				statement.setObject(pos + i + 1, keys[i]);
-			}
-
-			statement.execute();
-
-			conn.commit();
-
-			log.debug("== SUCCEED When exec " + sql);
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			try {
-				if (res != null) res.close();
-				if (statement != null) statement.close();
-			} catch (SQLException e) {
-				throw new RuntimeException(e);
-			}
-		}
-	}
-
-	int fillParameter(PreparedStatement prepareStatement, Map<String, Object> v) throws SQLException {
+	int fromEntity(PreparedStatement prepareStatement, Map<String, Object> v) throws SQLException {
 		int pos = 0;
 		for (Field f : type.getFields()) {
 			if (!f.isArray() && f.getRefer() == Field.SCALA) {
 				prepareStatement.setString(1 + pos, (String) v.get(f.getName()));
-				if(log.isTraceEnabled())
-				log.trace((1 + pos) + " " + f.getName());
+				if (log.isTraceEnabled()) log.trace((1 + pos) + " " + f.getName());
 				pos++;
 			}
 		}
 		return pos;
 	}
 
-	Map<String, Object> fillObject(ResultSet result) throws SQLException {
+	Map<String, Object> toEntity(ResultSet result) throws SQLException {
 		Map<String, Object> v = new HashMap<>();
 		int pos = 0;
 		for (Field f : type.getFields()) {

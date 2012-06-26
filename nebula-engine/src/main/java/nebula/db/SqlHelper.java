@@ -142,6 +142,11 @@ public class SqlHelper {
 		return "DELETE FROM " + this.tableName + " WHERE " + wherekeys + "";
 	}
 	
+	public String builderAddColumn(DbColumn c) {
+		return "ALTER TABLE " + this.tableName + " ADD COLUMN " + c.name
+				+ " VARCHAR(40)";
+	}
+	
 	public String builderDeleteAll() {
 		return "DELETE FROM " + this.tableName + " ";
 	}

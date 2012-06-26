@@ -35,7 +35,7 @@ public abstract class DbConfiguration {
 			log.debug("== Load " + driverClass);
 			conn = DriverManager.getConnection(this.url, this.userName, this.userPassword);
 			log.debug("== create and connect to " + this.url);
-			conn.setAutoCommit(false);
+			conn.setAutoCommit(true);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
