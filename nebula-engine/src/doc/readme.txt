@@ -1,8 +1,11 @@
-ab -c 1 -n 10 -T 'application/x-www-form-urlencoded' -p post.txt http://localhost/d/Person
+locate, load, and link 
 
-ab -c 30 -n 1000 -T http://192.168.20.88/d/Person/wangshi11
+homogenous 
+heterogeneous
+multiple geographic locations, multi-lingual data, and maintenance and modification of product information within a centralized catalog to provide consistently accurate information to multiple channels in a cost-effective manner.
 
-
-//don't use code
-//copy sqlite_jni.dll D:\EnvBase\jdk1.7.0\jre\bin\
-//mvn install:install-file -DgroupId=de.ch-werner -DartifactId=javasqlite -Dversion=1.0 -Dfile=sqlite.jar -Dpackaging=jar -DgeneratePom=true
+Creation and Receipt
+Distribution
+Use
+Maintenance
+Disposition

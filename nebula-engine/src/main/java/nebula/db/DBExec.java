@@ -93,9 +93,7 @@ public class DBExec {
 				for (int i = 0; i < columnsSize; i++) {
 					cols.put(metaData.getColumnName(i + 1).toUpperCase(), metaData.getColumnTypeName(i + 1));
 					if (log.isDebugEnabled()) {
-						log.debug(metaData.getColumnName(i + 1) + "  \t");
-						log.debug(metaData.getColumnDisplaySize(i + 1) + "\t");
-						log.debug(metaData.getColumnTypeName(i + 1));
+						log.debug("\t" + metaData.getColumnName(i + 1) + "  \t" + metaData.getColumnDisplaySize(i + 1) + "\t" + metaData.getColumnTypeName(i + 1));
 					}
 				}
 
