@@ -3,9 +3,6 @@ package http.engine;
 import httpd.io.Loader;
 import httpd.io.Source;
 
-import java.util.Hashtable;
-import java.util.StringTokenizer;
-
 import javax.inject.Inject;
 
 import org.simpleframework.http.Address;

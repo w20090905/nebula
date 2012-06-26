@@ -9,12 +9,6 @@ import java.io.InputStream;
 import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import nebula.lang.ResourcePath;
-import nebula.lang.SystemTypeLoader;
-import nebula.lang.Type;
 
 import junit.framework.TestCase;
 
