@@ -1,13 +1,11 @@
 <h1>${type.name} List</h1>
+   
+<div>
+<input type="text" ng-model="query" class="search-query" placeholder="Search">
+<a href="#/d/${type.name}/!new">Add New</a>
+</div>
 
-<div class="container-fluid">    
-	<div>
-      <input type="text" ng-model="query" class="search-query" placeholder="Search">
-	  <a href="#/d/${type.name}/!new">Add New</a>
-    </div>
-
-    <div >
-      <!--Body content-->
+<!--Body content-->
 
       <table class="table">
       	<thead>
@@ -34,5 +32,3 @@
 	        </tr>
       	</tbody>
       </table>
-  </div>
-</div>

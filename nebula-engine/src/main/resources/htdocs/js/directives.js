@@ -329,7 +329,6 @@ var neTreeViewDirective = [ function() {
 					},w);
 					w = null;
 					
-					
 					// load json data
 					st.loadJSON(json);
 					// compute node positions and layout
@@ -337,6 +336,7 @@ var neTreeViewDirective = [ function() {
 					// optional: make a translation of the tree
 					st.geom.translate(new $jit.Complex(-200, 0), "current");
 					// emulate a click on the root node.
+					st.onClick(st.root);
 					st.onClick(st.root);
 					// end
 				}
