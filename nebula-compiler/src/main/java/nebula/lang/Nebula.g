@@ -60,12 +60,13 @@ programDefinition returns[List<Type> retTypes]
     : typeDefinition
       {retTypes = this.types;}
     ;
-
+    
 typeDefinition returns[Type type]
     :   'type' typeID=ID ('|' alias=aliasLiteral[$typeID.text])?
         (':' superTypeID=ID)? { 
             if($superTypeID==null){
                 type = new Type(loader,$typeID.text,resolveType(Type.ENTITY));
+              type.standalone = TypeStandalone.Master;
             }else{
                 type = new Type(loader,$typeID.text,resolveType($superTypeID.text)); 
            } 

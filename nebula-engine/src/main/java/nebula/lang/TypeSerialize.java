@@ -19,6 +19,9 @@ public class TypeSerialize implements JsonSerialize<Type> {
 		try {
 			o.writeStartObject();
 			o.writeStringField("name", d.name);
+			if (d.superType != null) {
+				o.writeStringField("parent", d.superType.name);
+			}
 			o.writeStringField("standalone", d.standalone.name());
 			o.writeArrayFieldStart("fields");
 			FieldSerialize fs = new FieldSerialize();
@@ -39,21 +42,21 @@ public class TypeSerialize implements JsonSerialize<Type> {
 
 	@Override
 	public Type read(JsonParser p, Type d) {
-		if(d==null){
+		if (d == null) {
 			d = new Type(null, null);
 		}
-        JsonToken t;
-        try {
-        	p.nextToken();
+		JsonToken t;
+		try {
+			p.nextToken();
 			while ((t = p.nextToken()) != null) {
-			    if (t != JsonToken.FIELD_NAME) {
-			    	continue;
-			    }
-			    String fieldName = p.getCurrentName();
-			    p.nextToken();
-			    if ("code".equals(fieldName)) {
-			    	d.code = p.getText();
-			    }
+				if (t != JsonToken.FIELD_NAME) {
+					continue;
+				}
+				String fieldName = p.getCurrentName();
+				p.nextToken();
+				if ("code".equals(fieldName)) {
+					d.code = p.getText();
+				}
 			}
 			return d;
 		} catch (JsonParseException e) {

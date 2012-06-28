@@ -21,28 +21,29 @@ import org.apache.commons.logging.LogFactory;
 
 import util.FileUtil;
 
+class AutoIdentifiableType implements AutoIdentifiable<Type> {
+	@Override
+	public String getId(Type data) {
+		return data.name;
+	}
+
+	@Override
+	public void set(Map<String, Type> map, Type data) {
+		map.put(data.name, data);
+		if (data.nameAlias != null) {
+			for (String v : data.nameAlias.alias.values()) {
+				map.put(v, data);
+			}
+		}
+	}
+};
+
 public abstract class TypeLoader {
 	private Log log = LogFactory.getLog(this.getClass());
 
 	TypeLoader parent;
 
-	SmartList<Type> types = new SmartListImp<Type>("Type", new AutoIdentifiable<Type>() {
-		@Override
-		public String getId(Type data) {
-			return data.name;
-		}
-
-		@Override
-		public void set(Map<String, Type> map, Type data) {
-			map.put(data.name, data);
-			if (data.nameAlias != null) {
-				for (String v : data.nameAlias.alias.values()) {
-					map.put(v, data);
-				}
-			}
-		}
-
-	});
+	SmartList<Type> types = new SmartListImp<Type>("Type",new AutoIdentifiableType());
 
 	public TypeLoader(TypeLoader parent) {
 		this.parent = parent;
@@ -53,14 +54,14 @@ public abstract class TypeLoader {
 			BufferedReader bin = new BufferedReader(in);
 			String code = FileUtil.readAllTextFrom(bin);
 			in = bin;
-			List<Type> typeList = parse(new ANTLRReaderStream(in));			
+			List<Type> typeList = parse(new ANTLRReaderStream(in));
 			for (Type t : typeList) {
 				t.code = code;
 				t.url = null;
 			}
-			
+
 			types.addAll(typeList);
-			
+
 			if (log.isTraceEnabled()) {
 				log.trace(typeList.get(0).getName() + " load succeed");
 			}
@@ -75,7 +76,7 @@ public abstract class TypeLoader {
 			BufferedReader bin = new BufferedReader(in);
 			String code = FileUtil.readAllTextFrom(bin);
 			in = bin;
-			List<Type> typeList = parse(new ANTLRReaderStream(in));			
+			List<Type> typeList = parse(new ANTLRReaderStream(in));
 			for (Type t : typeList) {
 				t.code = code;
 				t.url = null;
@@ -154,5 +155,17 @@ public abstract class TypeLoader {
 
 	public SmartList<Type> getList() {
 		return this.types;
+	}
+
+	// performance not good
+	public SmartList<Type> all() {
+		if(parent==null){
+			return this.types;
+		}else{
+			SmartList<Type> list = new SmartListImp<Type>("Type",new AutoIdentifiableType());
+			list.addAll(types);
+			list.addAll(parent.all());
+			return list;
+		}
 	}
 }

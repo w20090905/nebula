@@ -23,8 +23,9 @@ class BootstrapTypeLoader extends TypeLoader {
 	}
 
 	private void init() {
-		Type buildInType = new Type(this, Type.BUILDIN);
-		Type entity = new Type(this, Type.ENTITY);
+		Type typeRoot = new Type(this, Type.TYPE);
+		Type buildInType = new Type(this, Type.BUILDIN, typeRoot);
+		Type entity = new Type(this, Type.ENTITY, typeRoot);
 		Type string = new Type(this, "String", buildInType, "String");
 		Type number = new Type(this, "Number", buildInType);
 		Type typeInt = new Type(this, "Long", number, "Long");
@@ -32,6 +33,7 @@ class BootstrapTypeLoader extends TypeLoader {
 
 		List<Type> typeList = new ArrayList<>();
 
+		typeList.add(typeRoot);
 		typeList.add(buildInType);
 		typeList.add(string);
 		typeList.add(number);

@@ -20,9 +20,8 @@ public class TypeListResouce extends BasicResouce {
 	private final SmartList<Type> types;
 	final TypeLoader typeLoader;
 
-	@SuppressWarnings("unchecked")
-	public TypeListResouce(TypeLoader typeLoader, SmartList<?> datas,JsonSerializer<Type> json) {
-		this.types = (SmartList<Type>) datas;
+	public TypeListResouce(TypeLoader typeLoader,JsonSerializer<Type> json) {
+		this.types = typeLoader.all();
 		this.typeLoader = typeLoader;
 		this.json = json;
 	}

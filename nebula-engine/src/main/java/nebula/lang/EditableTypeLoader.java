@@ -7,6 +7,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+import nebula.SmartList;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

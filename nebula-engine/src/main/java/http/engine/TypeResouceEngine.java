@@ -6,6 +6,7 @@ import http.json.JsonProvider.JsonSerializer;
 import javax.inject.Inject;
 
 import nebula.frame.DataWareHouse;
+import nebula.lang.EditableTypeLoader;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 
@@ -21,7 +22,7 @@ public class TypeResouceEngine implements ResourceEngine {
 	final TypeLoader typeLoader;
 
 	@Inject
-	public TypeResouceEngine(DataWareHouse dataWareHouse, TypeLoader typeLoader) {
+	public TypeResouceEngine(DataWareHouse dataWareHouse, EditableTypeLoader typeLoader) {
 		this.dataWareHouse = dataWareHouse;
 		this.typeLoader = typeLoader;
 	}
@@ -45,7 +46,7 @@ public class TypeResouceEngine implements ResourceEngine {
 		if (id != null) {
 			return new TypeEditResouce(typeLoader, id);
 		} else {
-			return new TypeListResouce(typeLoader, dataWareHouse.get(typeName), json);
+			return new TypeListResouce(typeLoader, json);
 		}
 	}
 

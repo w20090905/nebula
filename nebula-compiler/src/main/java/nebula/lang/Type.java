@@ -30,6 +30,7 @@ public class Type {
 	String code;
 	// Type declaringType;
 
+	public static String TYPE = "Type";
 	public static String ENTITY = "Entity";
 	public static String BUILDIN = "BuildInType";
 
