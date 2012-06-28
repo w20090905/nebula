@@ -9,7 +9,7 @@ body {
 	font-size:90%;
 }
 a {
-	color:#369;
+	color: #white;
 }
 a:hover {
 	color:#fff;
@@ -36,16 +36,17 @@ img {
 #header {
 	clear:both;
 	float:left;
-	width:100%;
+	width: 100%;
+	color: ghostwhite;
 }
 #header {
-	border-bottom:1px solid #000;
+	box-shadow: 0px 1px 3px 0px #ddd;
+	background-color: #777;
+	height: 70px;
 }
-#header p,
-#header h1,
-#header h2 {
+#header h1, #header h2 {
 	padding:.4em 15px 0 15px;
-	margin:0;
+	margin: 0px 0px 0px 0px;
 }
 #header h2{
 	display: none;
@@ -54,29 +55,36 @@ img {
 #header ul {
 	clear:left;
 	float:left;
-	width:100%;
+	width: 60%;
 	list-style:none;
-	margin:10px 0 0 0;
-	padding:0;
+	margin: -30px 100px 0 140px;
+	-webkit-border-radius: 6px;  -moz-border-radius: 4px;  
+	border-radius: 6px;
+	background-color: ghostwhite;
+	padding: 0px 1em;
+	vertical-align: middle;
+	-webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);  
+	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
 }
 #header ul li {
-	display:inline;
 	list-style:none;
-	margin:0;
-	padding:0;
+	margin: 0px;
+	padding: 0;
+	background-color: #ddd;
 }
+
+#header ul li:first-child a{
+	border-left: solid 1px #ddd;
+}	
 #header ul li a {
-	display:block;
 	float:left;
-	margin:0 0 0 1px;
-	padding:3px 10px;
+	margin: 0px;
+	padding: 11px 10px;
 	text-align:center;
-	background:#eee;
-	color:#000;
-	text-decoration:none;
-	position:relative;
-	left:15px;
-	line-height:1.3em;
+	color: black;
+	background-color: ghostWhite;
+	border-right: solid 1px #DDD;
+	text-decoration: none;
 }
 #header ul li a:hover {
 	background:#369;
@@ -95,12 +103,12 @@ img {
 #options {
 	display: block;
 	position: absolute;
-	right: 0;
+	right: 0px;
 }
 
 .col2 ul {
-	width:100%;
-	margin:10px 0 0 0;
+	width: 100%;
+	margin: 10px 0 0 0;
 	padding:0;
 }
 .col2 ul li {
@@ -110,15 +118,14 @@ img {
 }
 .col2 ul li a {
 	display:block;
-	margin:0 0 0 1px;
-	padding:3px 10px;
+	margin: 2px;
+	padding: 6px 8px;
 	text-align: left;
-	background:#eee;
+	background: #DDD;
 	color:#000;
 	text-decoration:none;
-	position:relative;
-	left:15px;
-	line-height:1.3em;
+	width: 88%;
+	overflow-x: hidden;  -webkit-border-radius: 4px;  -moz-border-radius: 4px;  border-radius: 4px;  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 .col2 ul li a:hover {
 	background:#369;
@@ -136,11 +143,9 @@ img {
 /* 'widths' sub menu */
 #layoutdims {
 	clear:both;
-	background:#eee;
-	border-top:4px solid #000;
-	margin:0;
-	padding:6px 15px !important;
-	text-align:right;
+	position: absolute;
+	right: 0;
+	margin-top: 2px;
 }
 /* column container */
 .colmask {
@@ -148,7 +153,8 @@ img {
 	clear:both;
 	float:left;
 	width:100%;			/* width of whole page */
-	overflow:hidden;		/* This chops off any overhanging divs */
+	overflow: hidden;		/* This chops off any overhanging divs */
+;
 }
 /* common column settings */
 .colright,
@@ -168,20 +174,23 @@ img {
 	min-height: 900px;
 }
 /* 2 Column (left menu) settings */
-.leftmenu {
-	background:#fff;		/* right column background colour */
+.leftmenu {		/* right column background colour */
+;
+	
 }
 .leftmenu .colleft {
-	right:75%;			/* right column width */
-	background:#f4f4f4;	/* left column background colour */
+	right: 80%;			/* right column width */
+	background: #EEE;	/* left column background colour */
+	box-shadow: 1px 0px 3px 0px #ddd;
 }
 .leftmenu .col1 {
-	width:71%;			/* right column content width */
-	left:102%;			/* 100% plus left column left padding */
+	width: 78%;			/* right column content width */
+	left: 102%;			/* 100% plus left column left padding */
+;
 }
 .leftmenu .col2 {
-	width:21%;			/* left column content width (column width minus left and right padding) */
-	left:6%;			/* (right column left and right padding) plus (left column left padding) */
+	width: 18%;			/* left column content width (column width minus left and right padding) */
+	left: 3%;			/* (right column left and right padding) plus (left column left padding) */
 }
 
 #main table.table{
@@ -212,7 +221,6 @@ img {
 	color: #009;
 	background-color: #eeeeee;
 }
-
 
 /* Footer styles */
 #footer {

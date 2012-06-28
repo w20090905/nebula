@@ -12,7 +12,7 @@ public abstract class BasicResouce implements Resource {
 	protected Log log = LogFactory.getLog(this.getClass());
 
 	protected byte[] buffer;
-	protected Long lastModified;
+	protected long lastModified;
 
 	protected abstract void makeResponse();
 
@@ -36,7 +36,10 @@ public abstract class BasicResouce implements Resource {
 		try {
 			if ("GET".equals(method)) {
 
-				makeResponse();
+				if (System.currentTimeMillis() - this.lastModified > 1000) {
+					
+					makeResponse();
+				}
 
 				// normal parse
 				resp.setCode(200);

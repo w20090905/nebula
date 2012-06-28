@@ -50,6 +50,17 @@ textarea.codeeditor {
 	height: 30em;
 }
 
+input[type="button"],input[type="reset"],input[type="submit"] {
+	margin: 2px 4px;
+}
+
+.CodeMirror {
+	line-height: 1em;
+	font-family: monospace;
+	border: 1px solid #DDD;
+	margin: 1px;
+}
+
 #main h1 {
 	margin: .4em 0 .2em 0;
 }
@@ -83,23 +94,13 @@ textarea.codeeditor {
 	fill-opacity: 1;
 	color: black;
 	padding: 1px 15px;
+	margin-top: 5px;
 	margin-left: -140px;
 	cursor: pointer;
 	height: 17px;
 	width: 120px;
 	text-align: right;
 }
-
-#main .treeLabelLeaf {
-	font-family: "Helvetica Neue", Helvetica;
-	font-size: .8em;
-	fill-opacity: 1;
-	color: black;
-	padding: 1px 15px;
-	text-align: left;
-	cursor: pointer;
-	height: 17px;
-	width: 60px;
 }
 
 #main label {

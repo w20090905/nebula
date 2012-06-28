@@ -35,7 +35,7 @@
 	<!-- JIT start -->
 	<!-- CSS Files -->
 	<!-- link type="text/css" href="lib/jit/css/base.css" rel="stylesheet" /-->
-	<link type="text/css" href="lib/jit/css/Spacetree.css" rel="stylesheet" />
+	<link rel="stylesheet"  href="lib/jit/css/Spacetree.css"/>
 	<!--[if IE]><script language="javascript" type="text/javascript" src="../../Extras/excanvas.js"></script><![endif]-->
 	<!-- JIT Library File -->
 	<script language="javascript" type="text/javascript" src="lib/jit/jit-yc.js"></script>
@@ -52,11 +52,9 @@
 
 	<div id="header">
 		<div id="options">
-		:::[ {{$route}} ]:::
 			<a href="blog/perfect-multi-column-liquid-layouts"
 				title="Perfect multi-column liquid layouts - iPhone compatible">&laquo;
-				Back to the CSS article</a> by <a href="http://matthewjamestaylor.com">Matthew
-				James Taylor</a>
+				</a> by <a href="http://matthewjamestaylor.com">MatthewTaylor</a>
 		</div>
 		<h1>Nebula</h1>
 		<h2>Demo System</h2>
@@ -73,14 +71,12 @@
 			<li><a href="blog/perfect-full-page.htm">1 Column </a></li>
 			<li><a href="blog/perfect-stacked-columns.htm">Stacked</a></li>
 		</ul>
-		<p id="layoutdims">
-			Measure columns in: <a
-				href="blog/ultimate-2-column-left-menu-pixels.htm">Pixel widths</a>
-			| <a href="blog/ultimate-2-column-left-menu-ems.htm">Em widths</a> |
-			<strong>Percentage widths</strong>
-		</p>
+		<div id="layoutdims"><a
+				href="blog/ultimate-2-column-left-menu-pixels.htm">widths</a>
+			| <a href="blog/ultimate-2-column-left-menu-ems.htm">Em widths</a>
+		</div>
 	</div>
-	<div class="colmask leftmenu">
+	<div class="colmask leftmenu">	
 		<div class="colleft">
 			<div id="main" class="col1" ne-view>
 				<!-- Column 1 start -->
@@ -90,7 +86,7 @@
 			<div id="leftMenu" class="col2" x-ng-controller="MenuCtrl">
 				<!-- Column 2 start -->
 				<ul>
-					<li x-ng-repeat="data in datalist" class="thumbnail">
+					<li x-ng-repeat="data in datalist">						
 						<a x-ng-href="{{data.href}}">{{data.label}}</a>
 					</li>
 				</ul>

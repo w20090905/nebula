@@ -196,7 +196,7 @@ var neTreeViewDirective = [ function() {
 				// set overridable=true for styling individual
 				// nodes or edges
 				Node : {
-					height : 20,
+					height : 30,
 					width : 10,
 					type : 'circle',
 					lineWidth: '5',
@@ -286,7 +286,7 @@ var neTreeViewDirective = [ function() {
 				// override the Edge global style properties.
 				onBeforePlotLine : function(adj) {
 					if (adj.nodeFrom.selected && adj.nodeTo.selected) {
-						adj.data.$color = "#eed";
+						adj.data.$color = "#BBBBEE";
 						adj.data.$lineWidth = 3;
 					} else {
 						delete adj.data.$color;
