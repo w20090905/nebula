@@ -183,10 +183,10 @@ var neTreeViewDirective = [ function() {
 				// set distance between node and its children
 				levelDistance : 80,
 				
-				levelsToShow : 2,
+				levelsToShow : 3,
 				constrained : true,
-				offsetX : 100,
-				offsetY : 100,
+				offsetX : 120,
+				offsetY : 80,
 				// enable panning
 				Navigation : {
 					enable : true,
