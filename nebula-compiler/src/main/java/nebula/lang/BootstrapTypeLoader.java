@@ -30,6 +30,7 @@ class BootstrapTypeLoader extends TypeLoader {
 		Type number = new Type(this, "Number", buildInType);
 		Type typeInt = new Type(this, "Long", number, "Long");
 		Type decimal = new Type(this, "Real", number, "Real");
+		Type attr = new Type(this, "Attr", buildInType);
 
 		List<Type> typeList = new ArrayList<>();
 
@@ -40,6 +41,7 @@ class BootstrapTypeLoader extends TypeLoader {
 		typeList.add(typeInt);
 		typeList.add(decimal);
 		typeList.add(entity);
+		typeList.add(attr);
 
 		this.types.addAll(typeList);
 	}

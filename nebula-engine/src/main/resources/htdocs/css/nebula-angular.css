@@ -43,6 +43,7 @@ div.closed {
 div.opened {
 	position: absolute;
 	visibility: visible;
+	padding-left: 1em;
 }
 
 textarea.codeeditor {
@@ -100,7 +101,6 @@ input[type="button"],input[type="reset"],input[type="submit"] {
 	height: 17px;
 	width: 120px;
 	text-align: right;
-}
 }
 
 #main label {

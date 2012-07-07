@@ -107,8 +107,8 @@ img {
 }
 
 .col2 ul {
-	width: 100%;
-	margin: 10px 0 0 0;
+	width: 95%;
+	margin: 20px  0 0 8%;
 	padding:0;
 }
 .col2 ul li {
@@ -130,6 +130,9 @@ img {
 .col2 ul li a:hover {
 	background:#369;
 	color:#fff;
+}
+.col2 ul li.selected{
+	background: url("./menu-arrow.png") no-repeat 0px -6px;
 }
 .col2 ul li a.active,
 .col2 ul li a.active:hover {
@@ -185,12 +188,12 @@ img {
 }
 .leftmenu .col1 {
 	width: 78%;			/* right column content width */
-	left: 102%;			/* 100% plus left column left padding */
+	left: 100%;			/* 100% plus left column left padding */
 ;
 }
 .leftmenu .col2 {
-	width: 18%;			/* left column content width (column width minus left and right padding) */
-	left: 3%;			/* (right column left and right padding) plus (left column left padding) */
+	width: 20%;			/* left column content width (column width minus left and right padding) */
+	left: 1%;			/* (right column left and right padding) plus (left column left padding) */
 }
 
 #main table.table{
