@@ -1,0 +1,4 @@
+type DD{
+  Name;
+  Age;
+};

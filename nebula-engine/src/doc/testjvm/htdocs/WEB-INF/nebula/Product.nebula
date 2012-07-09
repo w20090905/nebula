@@ -1,0 +1,4 @@
+type Product {
+	!Name;
+	Unit Text;
+};
