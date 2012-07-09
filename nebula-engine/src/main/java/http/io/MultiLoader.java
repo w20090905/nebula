@@ -1,4 +1,4 @@
-package httpd.io;
+package http.io;
 
 @Deprecated
 public class MultiLoader implements Loader {

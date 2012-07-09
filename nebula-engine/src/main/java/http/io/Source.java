@@ -1,4 +1,4 @@
-package httpd.io;
+package http.io;
 
 import java.io.IOException;
 import java.io.InputStream;

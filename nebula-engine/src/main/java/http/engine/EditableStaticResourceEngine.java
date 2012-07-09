@@ -1,7 +1,7 @@
 package http.engine;
 
-import httpd.io.Loader;
-import httpd.io.Source;
+import http.io.Loader;
+import http.io.Source;
 
 import javax.inject.Inject;
 

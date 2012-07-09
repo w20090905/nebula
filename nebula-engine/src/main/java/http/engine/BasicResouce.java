@@ -36,7 +36,7 @@ public abstract class BasicResouce implements Resource {
 		try {
 			if ("GET".equals(method)) {
 
-				if (System.currentTimeMillis() - this.lastModified > 1000) {
+				if (System.currentTimeMillis() - this.lastModified > 100) {
 					
 					makeResponse();
 				}

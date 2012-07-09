@@ -5,11 +5,11 @@ import http.engine.DataResouceEngine;
 import http.engine.StaticResourceEngine;
 import http.engine.TemplateResouceEngine;
 import http.engine.TypeResouceEngine;
+import http.io.ClassPathLoader;
+import http.io.FileSystemLoader;
+import http.io.Loader;
+import http.io.MultiLoader;
 import http.server.BasicResourceContainer;
-import httpd.io.ClassPathLoader;
-import httpd.io.FileSystemLoader;
-import httpd.io.Loader;
-import httpd.io.MultiLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -142,7 +142,6 @@ public class ConfigModule extends AbstractModule {
 					site.register("*", staticEngine);
 					site.register("/template/*", templateResouceEngine);
 					site.register("/angularjs/*", templateResouceEngine);
-					site.register("/d/Type/*", typeResouceEngine);
 					site.register("/e/*", staticEngine);
 					site.register("/d/*", dataResouceEngine);
 					site.register("/d/Type", typeResouceEngine);
