@@ -5,6 +5,11 @@ type Person {
 	Height;
 	Age;
 	Sex;
+	Detail{
+		!Name;
+		!Age;
+	};
+	
 	?Roles1[]				Text;	
 	Roles2[1..]				Text;
 	Roles3[..5]				Text;	

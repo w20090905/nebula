@@ -27,6 +27,7 @@ public class SqlHelper {
 	public String getTableName() {
 		return this.tableName;
 	}
+	
 
 	public SqlHelper(Type type) {
 
@@ -45,14 +46,17 @@ public class SqlHelper {
 					fs.add(new DbColumn(this, decodeFieldName(type.getName(), f.getName()),
 							f.getImportance() == Field.KEY));
 				} else if (f.getRefer() == Field.INLINE) {
-					// TODO fs.add(f.getName() + "_" +
-					// f.getType().getKeyField().getName());
+////					 fs.add(f.getName() + "_" + f.getType().getKeyField().getName());
+//					Type fType = f.getType();
+//					for (Field referField : f.getType().getFields()) {
+//						String cName = decodeFieldName(type.getName(), f.getName()) + "_" + decodeFieldName(f.getType().getName(), referField.getName());
+//						fs.add(new DbColumn(this, cName,f.getImportance() == Field.KEY));
+//					}
 				} else if (f.getRefer() == Field.REFERENCE) {
 //					for (Field referField : f.getType().getFields()) {
 //						if (referField.getImportance() == Field.KEY || referField.getImportance() == Field.CORE) {
-//							fs.add(new DbColumn(this, decodeFieldName(type.getName(), f.getName()) + "_"
-//									+ decodeFieldName(f.getType().getName(), referField.getName()),
-//									f.getImportance() == Field.KEY));
+//							String cName = decodeFieldName(type.getName(), f.getName()) + "_" + decodeFieldName(f.getType().getName(), referField.getName());
+//							fs.add(new DbColumn(this, cName,f.getImportance() == Field.KEY));
 //						}
 //					}
 				}
