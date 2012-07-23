@@ -15,6 +15,7 @@ public class Type {
 	final Type residedType;
 	final Type superType;
 	final String rawType;//For Basic Type
+	
 	String name;
 	Alias nameAlias;
 
@@ -27,11 +28,10 @@ public class Type {
 	URL url;
 	boolean mutable=false; 
 	String code;
-	// Type declaringType;
 
 	public static String TYPE = "Type";
 	public static String ENTITY = "Entity";
-	public static String BASIC = "BasicType";
+	public static String BASIC = "Basic";
 
 	Type(TypeLoader typeLoader, String name) {
 		this(typeLoader, name, null, null);
