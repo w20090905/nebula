@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nebula.lang.Field;
+import nebula.lang.Reference;
 import nebula.lang.Type;
 
 public class SqlHelper {
@@ -42,17 +43,17 @@ public class SqlHelper {
 			for (Field f : fl) {
 				if (f.isArray()) {
 					// TODO
-				} else if (f.getRefer() == Field.BASIC) {
+				} else if (f.getRefer() == Reference.ByVal) {
 					fs.add(new DbColumn(this, decodeFieldName(type.getName(), f.getName()),
-							f.getImportance() == Field.KEY));
-				} else if (f.getRefer() == Field.INLINE) {
+							f.isKey()));
+//				} else if (f.getRefer() == Field.INLINE) {
 //					 fs.add(f.getName() + "_" + f.getType().getKeyField().getName());
 //					Type refType = f.getType();
 //					for (Field refField : refType.getFields()) {
 //						String cName = decodeFieldName(type.getName(), f.getName()) + "_" + decodeFieldName(refType.getName(), refField.getName());
 //						fs.add(new DbColumn(this, cName,f.getImportance() == Field.KEY));
 //					}
-				} else if (f.getRefer() == Field.REFERENCE) {
+//				} else if (f.getRefer() == Field.REFERENCE) {
 //					for (Field referField : f.getType().getFields()) {
 //						if (referField.getImportance() == Field.KEY || referField.getImportance() == Field.CORE) {
 //							String cName = decodeFieldName(type.getName(), f.getName()) + "_" + decodeFieldName(f.getType().getName(), referField.getName());

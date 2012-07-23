@@ -21,7 +21,7 @@ public class EntityStoreDB extends EntityStore {
 		for (Map<String, Object> data : list) {
 			String id = "";
 			for (Field f : type.getFields()) {
-				if (Field.KEY == f.getImportance()) {
+				if (f.isKey()) {
 					id += data.get(f.getName());
 				}
 			}
@@ -57,7 +57,7 @@ public class EntityStoreDB extends EntityStore {
 
 			String id = "";
 			for (Field f : type.getFields()) {
-				if (Field.KEY == f.getImportance()) {
+				if (f.isKey()) {
 					id += newData.get(f.getName());
 				}
 			}

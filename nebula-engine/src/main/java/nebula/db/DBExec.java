@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import nebula.lang.Field;
+import nebula.lang.Reference;
 import nebula.lang.Type;
 
 import org.apache.commons.logging.Log;
@@ -237,7 +238,7 @@ public class DBExec {
 	int fromEntity(PreparedStatement prepareStatement, Map<String, Object> v) throws SQLException {
 		int pos = 0;
 		for (Field f : type.getFields()) {
-			if (!f.isArray() && f.getRefer() == Field.BASIC) {
+			if (!f.isArray() && f.getRefer() == Reference.ByVal) {
 				prepareStatement.setString(1 + pos, (String) v.get(f.getName()));
 				if (log.isTraceEnabled()) log.trace((1 + pos) + " " + f.getName());
 				pos++;
@@ -250,7 +251,7 @@ public class DBExec {
 		Map<String, Object> v = new HashMap<>();
 		int pos = 0;
 		for (Field f : type.getFields()) {
-			if (!f.isArray() && f.getRefer() == Field.BASIC) {
+			if (!f.isArray() && f.getRefer() == Reference.ByVal) {
 				v.put(f.getName(), result.getString(pos + 1));
 				pos++;
 			}

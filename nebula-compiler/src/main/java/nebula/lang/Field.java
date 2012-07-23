@@ -1,22 +1,20 @@
 package nebula.lang;
-
 public class Field {
 
-    public static final String BASIC = "ByValue";
-    public static final String INLINE = "Inline";
-    public static final String REFERENCE = "Reference";
-    public static final String CASCADE = "Cascade";
-
-    public static final String KEY = "Key";
-    public static final String CORE = "Core";
-    public static final String IMPORTANT = "Core";    
-    public static final String REQUIRE = "Require";
-    public static final String UNIMPORTANT = "Unimportant";
+//    public static final Reference BASIC = Reference.ByVal;
+//    public static final Reference INLINE = Reference.Inline;
+//    public static final Reference REFERENCE =Reference.ByRef;
+//    public static final Reference CASCADE = Reference.Cascade;
+//
+//    public static final Importance KEY = Importance.Key;
+//    public static final Importance CORE = Importance.Core; 
+//    public static final Importance REQUIRE =Importance.Require;
+//    public static final Importance UNIMPORTANT = Importance.Unimportant;
 
     final String name;
     Alias nameAlias;
     String displayName;
-    String importance = UNIMPORTANT;
+    Importance importance = Importance.Unimportant;
 
     final Type resideType;
     boolean array = false;
@@ -25,6 +23,7 @@ public class Field {
     
     Type type;
     String _typeName;
+    Reference refer;
 
     public String getType_name() {
 		return _typeName;
@@ -34,7 +33,6 @@ public class Field {
 		this._typeName = type_name;
 	}
 
-	String refer;
 
     public Field(Type resideType,String name) {
         super();
@@ -51,11 +49,15 @@ public class Field {
 		this.displayName = displayName;
 	}
 
-	public String getImportance() {
+	public Importance getImportance() {
 		return importance;
 	}
+	
+	public boolean isKey(){
+		return this.importance == Importance.Key;
+	}
 
-	public void setImportance(String importance) {
+	public void setImportance(Importance importance) {
 		this.importance = importance;
 	}
 
@@ -75,11 +77,11 @@ public class Field {
 		this.type = type;
 	}
 
-	public String getRefer() {
+	public Reference getRefer() {
 		return refer;
 	}
 
-	public void setRefer(String refer) {
+	public void setRefer(Reference refer) {
 		this.refer = refer;
 	}
 

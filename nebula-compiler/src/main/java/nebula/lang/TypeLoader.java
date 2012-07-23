@@ -58,6 +58,7 @@ public abstract class TypeLoader {
 			for (Type t : typeList) {
 				t.code = code;
 				t.url = null;
+				t.link(this);
 			}
 
 			types.addAll(typeList);
@@ -97,6 +98,7 @@ public abstract class TypeLoader {
 			for (Type t : typeList) {
 				t.code = code;
 				t.url = in;
+				t.link(this);
 			}
 			types.addAll(typeList);
 			if (log.isTraceEnabled()) {
