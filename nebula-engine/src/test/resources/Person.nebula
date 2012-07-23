@@ -10,6 +10,8 @@ type Person {
 		!Age;
 	};
 	
+	Company;
+	
 	?Roles1[]				Text;	
 	Roles2[1..]				Text;
 	Roles3[..5]				Text;	

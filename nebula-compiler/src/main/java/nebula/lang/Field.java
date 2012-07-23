@@ -2,7 +2,7 @@ package nebula.lang;
 
 public class Field {
 
-    public static final String SCALA = "Scala";
+    public static final String BASIC = "ByValue";
     public static final String INLINE = "Inline";
     public static final String REFERENCE = "Reference";
     public static final String CASCADE = "Cascade";

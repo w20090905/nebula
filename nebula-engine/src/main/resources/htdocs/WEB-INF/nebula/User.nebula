@@ -1,0 +1,12 @@
+type User{
+  !Name;
+  Description;
+  Password;
+  EMail;
+  Greeting Name;
+  Title Name;
+  Comments;
+  Phone;
+  Fax;
+  Birthday;
+};

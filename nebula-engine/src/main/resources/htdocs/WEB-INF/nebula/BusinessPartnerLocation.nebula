@@ -1,0 +1,7 @@
+type BusinessPartnerLocation{
+  !BusinessPartner;
+  !Location;
+  Phone;
+  Fax;
+  ISDN Code;
+};

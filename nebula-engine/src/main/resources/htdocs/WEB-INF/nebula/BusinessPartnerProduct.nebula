@@ -1,0 +1,6 @@
+type BusinessPartnerProduct{
+  !BusinessPartner;
+  !Product;
+  Description;
+  ?Manufacturer  BusinessPartner;//TODO
+};

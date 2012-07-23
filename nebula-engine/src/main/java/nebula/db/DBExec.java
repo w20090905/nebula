@@ -237,7 +237,7 @@ public class DBExec {
 	int fromEntity(PreparedStatement prepareStatement, Map<String, Object> v) throws SQLException {
 		int pos = 0;
 		for (Field f : type.getFields()) {
-			if (!f.isArray() && f.getRefer() == Field.SCALA) {
+			if (!f.isArray() && f.getRefer() == Field.BASIC) {
 				prepareStatement.setString(1 + pos, (String) v.get(f.getName()));
 				if (log.isTraceEnabled()) log.trace((1 + pos) + " " + f.getName());
 				pos++;
@@ -250,7 +250,7 @@ public class DBExec {
 		Map<String, Object> v = new HashMap<>();
 		int pos = 0;
 		for (Field f : type.getFields()) {
-			if (!f.isArray() && f.getRefer() == Field.SCALA) {
+			if (!f.isArray() && f.getRefer() == Field.BASIC) {
 				v.put(f.getName(), result.getString(pos + 1));
 				pos++;
 			}

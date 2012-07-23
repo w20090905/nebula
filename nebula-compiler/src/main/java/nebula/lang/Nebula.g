@@ -117,8 +117,8 @@ fieldDefinition[Type resideType] returns[Field field]
         
         ';'{
             field.importance = imp;
-            if(field.type.standalone == TypeStandalone.BuilderIn){
-              field.refer = Field.SCALA;
+            if(field.type.standalone == TypeStandalone.Basic){
+              field.refer = Field.BASIC;
             }else if(field.type.standalone == TypeStandalone.Eembedded){
               field.refer = Field.INLINE;
             }else{

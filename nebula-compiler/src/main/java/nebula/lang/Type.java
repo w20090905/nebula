@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.Properties;
 
 enum TypeStandalone {
-	Master, Sequence, BuilderIn, Eembedded
+	Master, Sequence, Basic, Eembedded
 }
 
 public class Type {
-
+	final TypeLoader loader;
 
 	final Type residedType;
 	final Type superType;
-	final String rawType;
+	final String rawType;//For Basic Type
 	String name;
 	Alias nameAlias;
 
@@ -24,7 +24,6 @@ public class Type {
 
 	Properties attrs;
 
-	final TypeLoader loader;
 	URL url;
 	boolean mutable=false; 
 	String code;
@@ -32,7 +31,7 @@ public class Type {
 
 	public static String TYPE = "Type";
 	public static String ENTITY = "Entity";
-	public static String BUILDIN = "BuildInType";
+	public static String BASIC = "BasicType";
 
 	Type(TypeLoader typeLoader, String name) {
 		this(typeLoader, name, null, null);
@@ -69,7 +68,7 @@ public class Type {
 			if ("Entity".equals(name)) {
 				this.standalone = TypeStandalone.Master;
 			} else {
-				this.standalone = TypeStandalone.BuilderIn;
+				this.standalone = TypeStandalone.Basic;
 			}
 		}
 		this.name = name;
@@ -127,7 +126,7 @@ public class Type {
 	public String getCode() {
 		return code;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Type [name=" + name + ", nameAlias=" + nameAlias + ", standalone=" + standalone + ", text=" + code

@@ -1,0 +1,9 @@
+type UOM{
+  !Name;
+  ISO-Code;
+  Symbol;
+  Description;
+  Standard-Precision;
+  Costing-Precision;
+  RpundoffFactor Long;
+};

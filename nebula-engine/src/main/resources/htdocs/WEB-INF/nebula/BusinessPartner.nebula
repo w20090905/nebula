@@ -1,0 +1,8 @@
+type BusinessPartner{
+  !Name;
+  Description;
+  DUNS Code;
+  URL;
+  Tax-ID;
+  Rating Attr;
+};

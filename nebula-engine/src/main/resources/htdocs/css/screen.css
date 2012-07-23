@@ -201,7 +201,7 @@ img {
 	font-size: 12px;
 	background: #fff;
 	margin: 10px;
-	width: 480px;
+	/*width: 480px;*/
 	border-collapse: collapse;
 	text-align: left;
 }

@@ -24,18 +24,18 @@ class BootstrapTypeLoader extends TypeLoader {
 
 	private void init() {
 		Type typeRoot = new Type(this, Type.TYPE);
-		Type buildInType = new Type(this, Type.BUILDIN, typeRoot);
+		Type badicType = new Type(this, Type.BASIC, typeRoot);
 		Type entity = new Type(this, Type.ENTITY, typeRoot);
-		Type string = new Type(this, "String", buildInType, "String");
-		Type number = new Type(this, "Number", buildInType);
+		Type string = new Type(this, "String", badicType, "String");
+		Type number = new Type(this, "Number", badicType);
 		Type typeInt = new Type(this, "Long", number, "Long");
 		Type decimal = new Type(this, "Real", number, "Real");
-		Type attr = new Type(this, "Attr", buildInType);
+		Type attr = new Type(this, "Attr", badicType);
 
 		List<Type> typeList = new ArrayList<>();
 
 		typeList.add(typeRoot);
-		typeList.add(buildInType);
+		typeList.add(badicType);
 		typeList.add(string);
 		typeList.add(number);
 		typeList.add(typeInt);

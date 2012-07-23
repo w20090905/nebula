@@ -45,7 +45,7 @@ public class NebulaParserTest extends TestCase {
 			Field f = type.fields.get(0);
 
 			assertEquals("姓名", f.name);	
-			assertEquals(Field.SCALA, f.refer);	
+			assertEquals(Field.BASIC, f.refer);	
 			assertEquals(Field.REQUIRE, f.importance);			
 			
 		} catch (RecognitionException e) {

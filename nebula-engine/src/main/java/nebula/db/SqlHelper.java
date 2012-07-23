@@ -42,14 +42,14 @@ public class SqlHelper {
 			for (Field f : fl) {
 				if (f.isArray()) {
 					// TODO
-				} else if (f.getRefer() == Field.SCALA) {
+				} else if (f.getRefer() == Field.BASIC) {
 					fs.add(new DbColumn(this, decodeFieldName(type.getName(), f.getName()),
 							f.getImportance() == Field.KEY));
 				} else if (f.getRefer() == Field.INLINE) {
-////					 fs.add(f.getName() + "_" + f.getType().getKeyField().getName());
-//					Type fType = f.getType();
-//					for (Field referField : f.getType().getFields()) {
-//						String cName = decodeFieldName(type.getName(), f.getName()) + "_" + decodeFieldName(f.getType().getName(), referField.getName());
+//					 fs.add(f.getName() + "_" + f.getType().getKeyField().getName());
+//					Type refType = f.getType();
+//					for (Field refField : refType.getFields()) {
+//						String cName = decodeFieldName(type.getName(), f.getName()) + "_" + decodeFieldName(refType.getName(), refField.getName());
 //						fs.add(new DbColumn(this, cName,f.getImportance() == Field.KEY));
 //					}
 				} else if (f.getRefer() == Field.REFERENCE) {

@@ -119,13 +119,13 @@ public class NebulaParserAdvTest extends TestCase {
 		assertEquals("Name", type.fields.get(i).name);
 		assertEquals(Field.KEY, type.fields.get(i).importance);
 		assertEquals("Text", type.fields.get(i).type.name);
-		assertEquals(Field.SCALA, type.fields.get(i).refer);
+		assertEquals(Field.BASIC, type.fields.get(i).refer);
 
 		++i;
 		assertEquals("Sex", type.fields.get(i).name);
 		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
 		assertEquals("Sex", type.fields.get(i).type.name);
-		assertEquals(Field.SCALA, type.fields.get(i).refer);
+		assertEquals(Field.BASIC, type.fields.get(i).refer);
 
 		++i;
 		assertEquals("Length", type.fields.get(i).name);

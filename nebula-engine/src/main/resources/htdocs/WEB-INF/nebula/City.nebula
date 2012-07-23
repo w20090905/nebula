@@ -1,0 +1,10 @@
+type City{
+  !Name;
+  Lo-Code;
+  Area-Code;
+  Coordinates{
+	  H Long;
+	  V Long;
+  };
+  PhoneLeadNumber Long;
+};

@@ -1,0 +1,9 @@
+type BankAccount{
+  !Bank;
+  !Currency;
+  Type Attr;
+  No Code;
+  IBAN Code;
+  Creditlimit Amount;
+  Description;
+};

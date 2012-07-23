@@ -1,0 +1,8 @@
+type Org{
+  !Name;
+  *Symbol;
+  Description;
+  Type Attr;
+  Stdandard-Precision;
+  Costing-Precision;
+};
