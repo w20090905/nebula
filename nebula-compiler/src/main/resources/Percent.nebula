@@ -1,0 +1,3 @@
+type Percent : Long {
+	@MaxLength = 120;
+};

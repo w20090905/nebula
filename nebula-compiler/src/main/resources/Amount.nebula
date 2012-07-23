@@ -1,0 +1,4 @@
+/*AMT*/
+type Amount : Real {
+	@MaxLength = 120;
+};

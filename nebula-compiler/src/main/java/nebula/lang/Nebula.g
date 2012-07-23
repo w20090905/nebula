@@ -97,7 +97,14 @@ nestedTypeDefinition[Type resideType,String name,Alias nameAlias] returns[Type t
 fieldDefinition[Type resideType] returns[Field field]
     :   imp=fieldImportance
         inline=inlineDefinition
-        name=ID  { field = new Field(resideType,$name.text); }
+        name=ID ('-' qtype=ID)?  { 
+            if($qtype!=null){
+              field = new Field(resideType,$name.text + $qtype.text); 
+              field.type = resolveType($qtype.text);
+            } else {
+              field = new Field(resideType,$name.text); 
+           }
+          }
         ('|' alias=aliasLiteral[$name.text] {field.nameAlias =alias; })?
         range=arrayDefinition
         (INIT 
@@ -105,7 +112,7 @@ fieldDefinition[Type resideType] returns[Field field]
         (
             type=ID { field.type = resolveType($type.text); }
             | nestedType = nestedTypeDefinition[resideType,$name.text,alias] {field.type = nestedType;}
-           | {field.type = resolveType(field.name);} 
+           | {if(field.type==null)field.type = resolveType(field.name);} 
         )
         
         ';'{

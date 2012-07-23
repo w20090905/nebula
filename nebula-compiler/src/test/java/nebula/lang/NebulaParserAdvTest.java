@@ -266,6 +266,24 @@ public class NebulaParserAdvTest extends TestCase {
 		assertEquals("dd", type.attrs.get("match"));
 		assertEquals(new BigDecimal("3.8"), type.attrs.get("max"));
 	}
+	
+	public void test_quicktype_attr() throws Exception {
+		//@formatter:off
+		String text = "" +
+				"type Name { \n" +
+				"	Max-Age;" +
+				"};";
+		//@formatter:on
+
+		Type type = compiler.load(text);
+
+		assertEquals("Name", type.name);
+
+		assertEquals(1, type.fields.size());
+		int i = 0;
+		assertEquals("MaxAge", type.fields.get(i).name);
+		assertEquals("Age", type.fields.get(i).type.name);
+	}
 
 	public void test_buildin_extends() throws Exception {
 		//@formatter:off
