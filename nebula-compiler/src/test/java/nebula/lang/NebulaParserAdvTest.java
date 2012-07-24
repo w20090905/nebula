@@ -284,7 +284,7 @@ public class NebulaParserAdvTest extends TestCase {
 	public void test_buildin_extends() throws Exception {
 		//@formatter:off
 		String text = "" +
-				"type Name : String { \n" +
+				"type Name extends String { \n" +
 				"	@MaxLength=120;\n" +
 				"};";
 		//@formatter:on

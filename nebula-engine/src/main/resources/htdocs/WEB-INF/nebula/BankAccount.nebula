@@ -1,8 +1,8 @@
 type BankAccount{
-  !Bank;
-  !Currency;
+  !ID;
+  *Bank;
+  *Currency;
   Type Attr;
-  No Code;
   IBAN Code;
   Creditlimit Amount;
   Description;

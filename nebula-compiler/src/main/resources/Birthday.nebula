@@ -1,2 +1,2 @@
-type Birthday : Long {
+type Birthday extends Long {
 };

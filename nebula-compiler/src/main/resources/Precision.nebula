@@ -1,3 +1,3 @@
-type Precision : Long {
+type Precision extends Long {
 	@MaxLength = 120;
 };

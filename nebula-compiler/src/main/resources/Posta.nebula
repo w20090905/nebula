@@ -1,2 +1,2 @@
-type Posta : Long {
+type Posta extends Long {
 };

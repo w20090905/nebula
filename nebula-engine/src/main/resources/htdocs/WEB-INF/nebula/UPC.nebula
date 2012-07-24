@@ -1,3 +1,3 @@
-type UPC : Name {
+type UPC extends Name {
 	@MaxLength = 120;
 };

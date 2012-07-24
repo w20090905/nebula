@@ -1,2 +1,2 @@
-type Day : Long {
+type Day extends Long {
 };

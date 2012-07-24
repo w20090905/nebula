@@ -4,7 +4,6 @@ type Order{
   Sales User;
   Promised-Date;
   BusinessPartner;
-  BusinessPartnerLocation;
   Price{
 	  Currency;	  
   };
