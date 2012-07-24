@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.CopyOnWriteArrayList;
-import static nebula.lang.Importance.*;
 
 enum TypeStandalone {
 	Master, Sequence, Basic, Eembedded
@@ -32,7 +31,6 @@ public class Type {
 	String code;
 
 	List<Field> references;
-	List<Field> actualFields;
 
 	public static String TYPE = "Type";
 	public static String ENTITY = "Entity";
@@ -136,72 +134,6 @@ public class Type {
 	public void link(TypeLoader loader) {
 		for (Field f : fields) {
 			f.type.references.add(f);
-		}
-
-		actualFields = new ArrayList();
-
-		for (Field f : fields) {
-
-			if (f.isArray()) {
-				// TODO
-			} else {
-
-				switch (f.getRefer()) {
-				case ByVal:
-					actualFields.add(f);
-					break;
-				case Inline:
-					for (Field rF : f.type.fields) {
-						String cName = f.name + "_" + rF.name;
-						Field nF = new Field(this, cName);
-						nF.type = rF.type;
-						if(f.importance.ordinal() < rF.importance.ordinal()){
-							nF.importance = f.importance;
-						}else{
-							nF.importance = rF.importance;
-						}
-
-					/*	switch (f.importance) {
-						case Key:
-							nF.importance = rF.importance;
-						case Core:
-							switch (rF.importance) {
-							case Key:
-								nF.importance = Importance.Core;
-								break;
-							default:
-								nF.importance = rF.importance;
-							}
-						case Require:
-							switch (rF.importance) {
-							case Key:
-							case Core:
-							case Require:
-								nF.importance = Importance.Require;
-								break;
-							default:
-								nF.importance = rF.importance;
-							}
-						case Unimportant:
-							nF.importance = f.importance;
-						}*/
-						actualFields.add(nF);
-					}
-					break;
-				case ByRef:
-//					for (Field rF : f.type.fields) {
-//						if (rF.importance == Field.KEY || rF.importance == Field.CORE) {
-//							String cName = f.getName() + "_" + rF.getName();
-//							Field newField = new Field(this, cName);
-//							newField.type = rF.type;
-//							if (f.importance == Field.KEY && rF.importance == Field.KEY) {
-//								newField.importance = Field.KEY;
-//							}
-//							actualFields.add(newField);
-//						}
-//					}
-				}
-			}
 		}
 	}
 
