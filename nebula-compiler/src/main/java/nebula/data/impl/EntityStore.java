@@ -10,7 +10,6 @@ import nebula.data.Entity;
 import nebula.data.Persistence;
 import nebula.data.Store;
 import nebula.lang.Field;
-import nebula.lang.Importance;
 import nebula.lang.Type;
 
 public class EntityStore implements Store<Entity> {
@@ -85,7 +84,7 @@ public class EntityStore implements Store<Entity> {
 			
 			String id = "";
 			for (Field f : type.getFields()) {
-				if(Importance.Key ==  f.getImportance()){
+				if(f.isKey()){
 					id += newData.get(f.getName());
 				}
 			}
