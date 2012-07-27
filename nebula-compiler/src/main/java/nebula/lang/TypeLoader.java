@@ -49,7 +49,7 @@ public abstract class TypeLoader {
 		this.parent = parent;
 	}
 
-	protected List<Type> defineNebula(Reader in) {
+	public List<Type> defineNebula(Reader in) {
 		try {
 			BufferedReader bin = new BufferedReader(in);
 			String code = FileUtil.readAllTextFrom(bin);
