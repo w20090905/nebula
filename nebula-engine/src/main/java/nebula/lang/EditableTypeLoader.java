@@ -50,7 +50,7 @@ public class EditableTypeLoader extends TypeLoader {
 	}
 
 	@Override
-	protected List<Type> defineNebula(Reader in) {
+	public List<Type> defineNebula(Reader in) {
 		List<Type> typeList = super.defineNebula(in);
 		for (Type t : typeList) {
 			t.mutable = true;

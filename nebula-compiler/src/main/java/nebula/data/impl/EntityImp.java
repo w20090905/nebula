@@ -60,4 +60,10 @@ public class EntityImp implements HasID, Entity {
 	public boolean isDirty() {
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return "EntityImp [" + data.toString() + "]";
+	}
+	
 }

@@ -52,9 +52,12 @@ public class Field {
 	public Importance getImportance() {
 		return importance;
 	}
-	
+
 	public boolean isKey(){
 		return this.importance == Importance.Key;
+	}
+	public boolean isCore(){
+		return this.importance == Importance.Core;
 	}
 
 	public void setImportance(Importance importance) {
