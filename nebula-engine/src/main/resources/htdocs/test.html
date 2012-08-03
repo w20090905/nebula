@@ -31,6 +31,58 @@
 <b class="bottom"><b class="b4"></b><b class="b2"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b></b>
 </div>
 
+<script>
+
+var MatchBuild = function(when) {
+        // TODO(i): this code is convoluted and inefficient, we should construct the route matching
+        //   regex only once and then reuse it
+        var regex = '^' + when.replace(/([\.\\\(\)\^\$])/g, "\\$1") + '$',
+            params = [],
+            paramMatchs = [],
+            dst = {};
+        forEach(when.split(/\W/), function(param) {
+          if (param) {
+            var paramRegExp = new RegExp(":" + param + "([\\W])");
+            if (regex.match(paramRegExp)) {
+              regex = regex.replace(paramRegExp, "([^\\/]*)$1");
+              params.push(param);
+              paramMatchs.push(paramRegExp);
+            }
+          }
+        });
+        
+        var regexp = new RegExp(regex);
+        
+        return {
+        	check:function(on){
+	            var match = on.match(regexp);
+		        if (match) {
+		          forEach(params, function(name, index) {
+		            dst[name] = match[index + 1];
+		          });
+		        }
+		        return match ? dst : null;
+        	},
+        	replace:function(on,url){
+	            var match = on.match(regexp);
+		        if (match) {
+		          forEach(params, function(name, index) {
+		            url = url.replace(paramMatchs[index],match[index + 1]);
+		          });
+		        }
+		        return url;        		
+        	}
+      }
+} 
+
+var m = MatchBuild("/:name/:id");
+
+alert(m.check("/type/wang"));
+alert(m.replace("/angula-:name/ttt:id"));
+
+
+</script>
+
 </div>
 </body>
 </html>
