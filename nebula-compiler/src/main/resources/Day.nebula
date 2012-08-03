@@ -1,0 +1,2 @@
+type Day extends Long {
+};

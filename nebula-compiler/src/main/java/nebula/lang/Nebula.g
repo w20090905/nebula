@@ -11,6 +11,10 @@ options {
 	import java.util.HashMap;
 	import java.util.List;
 	import java.util.Map;
+	
+  import static nebula.lang.Importance.*;
+  import static nebula.lang.Reference.*;	
+	
 }
 @lexer::header{
     package nebula.lang;
@@ -63,7 +67,7 @@ programDefinition returns[List<Type> retTypes]
     
 typeDefinition returns[Type type]
     :   'type' typeID=ID ('|' alias=aliasLiteral[$typeID.text])?
-        (':' superTypeID=ID)? { 
+        ('extends' superTypeID=ID)? { 
             if($superTypeID==null){
                 type = new Type(loader,$typeID.text,resolveType(Type.ENTITY));
               type.standalone = TypeStandalone.Master;
@@ -97,7 +101,14 @@ nestedTypeDefinition[Type resideType,String name,Alias nameAlias] returns[Type t
 fieldDefinition[Type resideType] returns[Field field]
     :   imp=fieldImportance
         inline=inlineDefinition
-        name=ID  { field = new Field(resideType,$name.text); }
+        name=ID ('-' qtype=ID)?  { 
+            if($qtype!=null){
+              field = new Field(resideType,$name.text + $qtype.text); 
+              field.type = resolveType($qtype.text);
+            } else {
+              field = new Field(resideType,$name.text); 
+           }
+          }
         ('|' alias=aliasLiteral[$name.text] {field.nameAlias =alias; })?
         range=arrayDefinition
         (INIT 
@@ -105,19 +116,19 @@ fieldDefinition[Type resideType] returns[Field field]
         (
             type=ID { field.type = resolveType($type.text); }
             | nestedType = nestedTypeDefinition[resideType,$name.text,alias] {field.type = nestedType;}
-           | {field.type = resolveType(field.name);} 
+           | {if(field.type==null)field.type = resolveType(field.name);} 
         )
         
         ';'{
             field.importance = imp;
-            if(field.type.standalone == TypeStandalone.BuilderIn){
-              field.refer = Field.SCALA;
+            if(field.type.standalone == TypeStandalone.Basic){
+              field.refer = ByVal;
             }else if(field.type.standalone == TypeStandalone.Eembedded){
-              field.refer = Field.INLINE;
+              field.refer = Inline;
             }else{
-              field.refer = Field.REFERENCE;              
+              field.refer = ByRef;             
             }
-            if(inline!=""){
+            if(inline==Inline || inline == Cascade){
                 field.refer = inline;
             }
             if(range.from=="f"){
@@ -142,18 +153,18 @@ fieldDefinition[Type resideType] returns[Field field]
 
 
 
-fieldImportance returns[String v] 
-    :   '!' {v=Field.KEY;} 
-      | '*' {v=Field.CORE;} 
-      | '#' {v=Field.REQUIRE;} 
-      | '?' {v=Field.UNIMPORTANT;}
-      |     {v=Field.REQUIRE;}
+fieldImportance returns[Importance v] 
+    :   '!' {v=Key;} 
+      | '*' {v=Core;} 
+      | '#' {v=Require;} 
+      | '?' {v=Unimportant;}
+      |     {v=Require;}
     ;
 
-inlineDefinition returns[String v] 
-    :   '&' {v=Field.INLINE;} 
-      | '%' {v=Field.CASCADE;} 
-      |     {v="";}
+inlineDefinition returns[Reference v] 
+    :   '&' {v=Inline;} 
+      | '%' {v=Cascade;} 
+      | 
     ;
     
 arrayDefinition returns[String from,String to]

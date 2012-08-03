@@ -1,18 +1,14 @@
 package nebula.lang;
 
-/***
- * Excerpted from "The Definitive ANTLR Reference",
- * published by The Pragmatic Bookshelf.
- * Copyrights apply to this code. It may not be used to create training material, 
- * courses, books, articles, and the like. Contact us if you are in doubt.
- * We make no guarantees that this code is fit for any purpose. 
- * Visit http://www.pragmaticprogrammer.com/titles/tpantlr for more book information.
- ***/
-import java.math.BigDecimal;
+import static nebula.lang.Importance.Core;
+import static nebula.lang.Importance.Key;
+import static nebula.lang.Importance.Require;
+import static nebula.lang.Importance.Unimportant;
+import static nebula.lang.Reference.ByVal;
+import static nebula.lang.Reference.Cascade;
+import static nebula.lang.Reference.Inline;
 
-import nebula.lang.Field;
-import nebula.lang.SystemTypeLoader;
-import nebula.lang.Type;
+import java.math.BigDecimal;
 
 import junit.framework.TestCase;
 
@@ -53,7 +49,7 @@ public class NebulaParserAdvTest extends TestCase {
 		i=7;
 		assertEquals("Education", type.fields.get(i).name);
 		assertEquals("Person$Education", type.fields.get(i).type.name);
-		assertEquals(Field.INLINE, type.fields.get(i).refer);
+		assertEquals(Inline, type.fields.get(i).refer);
 		assertEquals(true, type.fields.get(i).array);
 		assertEquals(0, type.fields.get(i).rangeFrom);
 		assertEquals(5, type.fields.get(i).rangeTo);
@@ -78,23 +74,23 @@ public class NebulaParserAdvTest extends TestCase {
 		assertEquals(5, type.fields.size());
 		int i = 0;
 		assertEquals("Name", type.fields.get(i).name);
-		assertEquals(Field.KEY, type.fields.get(i).importance);
+		assertEquals(Key, type.fields.get(i).importance);
 
 		++i;
 		assertEquals("Sex", type.fields.get(i).name);
-		assertEquals(Field.CORE, type.fields.get(i).importance);
+		assertEquals(Core, type.fields.get(i).importance);
 
 		++i;
 		assertEquals("Length", type.fields.get(i).name);
-		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
+		assertEquals(Require, type.fields.get(i).importance);
 
 		++i;
 		assertEquals("Height", type.fields.get(i).name);
-		assertEquals(Field.UNIMPORTANT, type.fields.get(i).importance);
+		assertEquals(Unimportant, type.fields.get(i).importance);
 
 		++i;
 		assertEquals("Age", type.fields.get(i).name);
-		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
+		assertEquals(Require, type.fields.get(i).importance);
 
 	}
 
@@ -117,29 +113,29 @@ public class NebulaParserAdvTest extends TestCase {
 		int i = 0;
 
 		assertEquals("Name", type.fields.get(i).name);
-		assertEquals(Field.KEY, type.fields.get(i).importance);
+		assertEquals(Key, type.fields.get(i).importance);
 		assertEquals("Text", type.fields.get(i).type.name);
-		assertEquals(Field.SCALA, type.fields.get(i).refer);
+		assertEquals(ByVal, type.fields.get(i).refer);
 
 		++i;
 		assertEquals("Sex", type.fields.get(i).name);
-		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
+		assertEquals(Require, type.fields.get(i).importance);
 		assertEquals("Sex", type.fields.get(i).type.name);
-		assertEquals(Field.SCALA, type.fields.get(i).refer);
+		assertEquals(ByVal, type.fields.get(i).refer);
 
 		++i;
 		assertEquals("Length", type.fields.get(i).name);
-		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
-		assertEquals(Field.INLINE, type.fields.get(i).refer);
+		assertEquals(Require, type.fields.get(i).importance);
+		assertEquals(Inline, type.fields.get(i).refer);
 
 		++i;
 		assertEquals("Height", type.fields.get(i).name);
-		assertEquals(Field.KEY, type.fields.get(i).importance);
-		assertEquals(Field.CASCADE, type.fields.get(i).refer);
+		assertEquals(Key, type.fields.get(i).importance);
+		assertEquals(Cascade, type.fields.get(i).refer);
 
 		++i;
 		assertEquals("Age", type.fields.get(i).name);
-		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
+		assertEquals(Require, type.fields.get(i).importance);
 		assertEquals("Age", type.fields.get(i).type.name);
 	}
 
@@ -162,27 +158,27 @@ public class NebulaParserAdvTest extends TestCase {
 		int i = 0;
 
 		assertEquals("Name", type.fields.get(i).name);
-		assertEquals(Field.KEY, type.fields.get(i).importance);
+		assertEquals(Key, type.fields.get(i).importance);
 		assertEquals("Text", type.fields.get(i).type.name);
 
 		++i;
 		assertEquals("Sex", type.fields.get(i).name);
-		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
+		assertEquals(Require, type.fields.get(i).importance);
 		assertEquals("Sex", type.fields.get(i).type.name);
 
 		++i;
 		assertEquals("Length", type.fields.get(i).name);
-		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
+		assertEquals(Require, type.fields.get(i).importance);
 		assertEquals("Length", type.fields.get(i).type.name);
 
 		++i;
 		assertEquals("Height", type.fields.get(i).name);
-		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
+		assertEquals(Require, type.fields.get(i).importance);
 		assertEquals("Height", type.fields.get(i).type.name);
 
 		++i;
 		assertEquals("Age", type.fields.get(i).name);
-		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
+		assertEquals(Require, type.fields.get(i).importance);
 		assertEquals("Age", type.fields.get(i).type.name);
 	}
 
@@ -206,36 +202,36 @@ public class NebulaParserAdvTest extends TestCase {
 		int i = 0;
 
 		assertEquals("Name", type.fields.get(i).name);
-		assertEquals(Field.KEY, type.fields.get(i).importance);
+		assertEquals(Key, type.fields.get(i).importance);
 		assertEquals("Text", type.fields.get(i).type.name);
 		assertEquals(false, type.fields.get(i).array);
 
 		++i;
 		assertEquals("Sex", type.fields.get(i).name);
-		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
+		assertEquals(Require, type.fields.get(i).importance);
 		assertEquals(1, type.fields.get(i).rangeFrom);
 		assertEquals(Integer.MAX_VALUE, type.fields.get(i).rangeTo);
 		assertEquals(true, type.fields.get(i).array);
 
 		++i;
 		assertEquals("Length", type.fields.get(i).name);
-		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
-		assertEquals(Field.INLINE, type.fields.get(i).refer);
+		assertEquals(Require, type.fields.get(i).importance);
+		assertEquals(Inline, type.fields.get(i).refer);
 		assertEquals(0, type.fields.get(i).rangeFrom);
 		assertEquals(Integer.MAX_VALUE, type.fields.get(i).rangeTo);
 		assertEquals(true, type.fields.get(i).array);
 
 		++i;
 		assertEquals("Height", type.fields.get(i).name);
-		assertEquals(Field.KEY, type.fields.get(i).importance);
-		assertEquals(Field.CASCADE, type.fields.get(i).refer);
+		assertEquals(Key, type.fields.get(i).importance);
+		assertEquals(Cascade, type.fields.get(i).refer);
 		assertEquals(1, type.fields.get(i).rangeFrom);
 		assertEquals(5, type.fields.get(i).rangeTo);
 		assertEquals(true, type.fields.get(i).array);
 
 		++i;
 		assertEquals("Age", type.fields.get(i).name);
-		assertEquals(Field.REQUIRE, type.fields.get(i).importance);
+		assertEquals(Require, type.fields.get(i).importance);
 		assertEquals("Age", type.fields.get(i).type.name);
 		assertEquals(0, type.fields.get(i).rangeFrom);
 		assertEquals(5, type.fields.get(i).rangeTo);
@@ -266,11 +262,29 @@ public class NebulaParserAdvTest extends TestCase {
 		assertEquals("dd", type.attrs.get("match"));
 		assertEquals(new BigDecimal("3.8"), type.attrs.get("max"));
 	}
+	
+	public void test_quicktype_attr() throws Exception {
+		//@formatter:off
+		String text = "" +
+				"type Name { \n" +
+				"	Max-Age;" +
+				"};";
+		//@formatter:on
+
+		Type type = compiler.load(text);
+
+		assertEquals("Name", type.name);
+
+		assertEquals(1, type.fields.size());
+		int i = 0;
+		assertEquals("MaxAge", type.fields.get(i).name);
+		assertEquals("Age", type.fields.get(i).type.name);
+	}
 
 	public void test_buildin_extends() throws Exception {
 		//@formatter:off
 		String text = "" +
-				"type Name : String { \n" +
+				"type Name extends String { \n" +
 				"	@MaxLength=120;\n" +
 				"};";
 		//@formatter:on

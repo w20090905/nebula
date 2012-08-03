@@ -8,26 +8,38 @@ import nebula.lang.Type;
 
 public class SqlHelper {
 
-	protected Type clz;
-	protected final DbColumn[] columns;
-	protected final DbColumn[] keyColumns;
-	protected final String tableName;
-	protected final String fieldlist_comma;
-	protected final String fieldlist_questions;
-	protected final String wherekeys;
+	Type clz;
+	final DbColumn[] columns;
+	final DbColumn[] keyColumns;
+	final String tableName;
+	final String fieldlist_comma;
+	final String fieldlist_questions;
+	final String wherekeys;
+	ArrayList<DbColumn> fs;
 
-	protected String decodeFieldName(String typeName, String fieldName) {
-		return fieldName;
+	private void addColumn(String name, Type type, boolean key) {
+		DbColumn c = new DbColumn(name, decodeFieldName(name), type.getName(), type.getName(), key);
+		fs.add(c);
 	}
 
-	protected String decodeTypeName(String typeName) {
+	private void addColumn(String resideName, String name, Type type, boolean key) {
+		DbColumn c = new DbColumn(resideName + name, 
+				decodeFieldName(resideName + "_" + name), 
+				type.getName(),	type.getName(), key);
+		fs.add(c);
+	}
+
+	private String decodeFieldName(String fieldName) {
+		return fieldName.toUpperCase();
+	}
+
+	private String decodeTypeName(String typeName) {
 		return 'N' + typeName.replace('.', '_');
 	}
 
 	public String getTableName() {
 		return this.tableName;
 	}
-	
 
 	public SqlHelper(Type type) {
 
@@ -38,52 +50,70 @@ public class SqlHelper {
 
 			List<Field> fl = type.getFields();
 
-			ArrayList<DbColumn> fs = new ArrayList<DbColumn>();
+			fs = new ArrayList<DbColumn>();
 			for (Field f : fl) {
 				if (f.isArray()) {
-					// TODO
-				} else if (f.getRefer() == Field.SCALA) {
-					fs.add(new DbColumn(this, decodeFieldName(type.getName(), f.getName()),
-							f.getImportance() == Field.KEY));
-				} else if (f.getRefer() == Field.INLINE) {
-////					 fs.add(f.getName() + "_" + f.getType().getKeyField().getName());
-//					Type fType = f.getType();
-//					for (Field referField : f.getType().getFields()) {
-//						String cName = decodeFieldName(type.getName(), f.getName()) + "_" + decodeFieldName(f.getType().getName(), referField.getName());
-//						fs.add(new DbColumn(this, cName,f.getImportance() == Field.KEY));
-//					}
-				} else if (f.getRefer() == Field.REFERENCE) {
-//					for (Field referField : f.getType().getFields()) {
-//						if (referField.getImportance() == Field.KEY || referField.getImportance() == Field.CORE) {
-//							String cName = decodeFieldName(type.getName(), f.getName()) + "_" + decodeFieldName(f.getType().getName(), referField.getName());
-//							fs.add(new DbColumn(this, cName,f.getImportance() == Field.KEY));
-//						}
-//					}
+					// TODO Add Array Support
+					continue;
+				}
+				Type rT;
+				switch (f.getRefer()) {
+				case ByVal:
+					addColumn(f.getName(), f.getType(), f.isKey());
+					break;
+				case Inline:
+					rT = f.getType();
+					for (Field rf : rT.getFields()) {
+						addColumn(f.getName(), rf.getName(), rf.getType(), f.isKey() && rf.isKey());
+					}
+					break;
+				case ByRef:
+					rT = f.getType();
+					for (Field rf : rT.getFields()) {
+						switch (rf.getImportance()) {
+						case Key:
+						case Core:
+							addColumn(rT.getName(), rf.getName(), rf.getType(), f.isKey() && rf.isKey());
+							break;
+						}
+					}
+					break;
+				case Cascade:
+					rT = f.getType();
+					for (Field rf : rT.getFields()) {
+						switch (rf.getImportance()) {
+						case Key:
+						case Core:
+							addColumn(rT.getName(), rf.getName(), rf.getType(), f.isKey() || rf.isKey());
+							break;
+						}
+					}
+					break;
 				}
 			}
 
-			StringBuilder sb = new StringBuilder();
-			StringBuilder sbq = new StringBuilder();
-			ArrayList<DbColumn> kfs = new ArrayList<DbColumn>();
+			StringBuilder sbForSelect = new StringBuilder();
+			StringBuilder sbForWhere = new StringBuilder();
+			ArrayList<DbColumn> buildKeyColumns = new ArrayList<DbColumn>();
 			String sql = "";
 
 			for (DbColumn column : fs) {
-				sb.append(column.name);
-				sb.append(',');
-				sbq.append("?,");
+				sbForSelect.append(column.columnName);
+				sbForSelect.append(',');
+				sbForWhere.append("?,");
 
 				if (column.key) {
-					kfs.add(column);
-					sql += column.name + " = ? and ";
+					buildKeyColumns.add(column);
+					sql += column.columnName + " = ? and ";
 				}
 			}
 
-			this.keyColumns = kfs.toArray(new DbColumn[0]);
+			this.keyColumns = buildKeyColumns.toArray(new DbColumn[0]);
 			this.wherekeys = sql.substring(0, sql.length() - 4);
 
 			this.columns = fs.toArray(new DbColumn[0]);
-			this.fieldlist_comma = sb.substring(0, sb.length() - 1);
-			this.fieldlist_questions = sbq.substring(0, sbq.length() - 1);
+			this.fieldlist_comma = sbForSelect.substring(0, sbForSelect.length() - 1);
+			this.fieldlist_questions = sbForWhere.substring(0, sbForWhere.length() - 1);
 
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -91,7 +121,7 @@ public class SqlHelper {
 	}
 
 	public String builderCount() {
-		return "SELECT count(*) FROM " + this.tableName + " ";
+		return "SELECT count(1) FROM " + this.tableName + " ";
 	}
 
 	public String builderList() {
@@ -113,9 +143,9 @@ public class SqlHelper {
 
 		for (DbColumn column : this.columns) {
 			if (column.key) {
-				sb.append(column.name).append(" varchar(40) PRIMARY KEY").append(",");
+				sb.append(column.columnName).append(" varchar(40) PRIMARY KEY").append(",");
 			} else {
-				sb.append(column.name).append(" varchar(40)").append(",");
+				sb.append(column.columnName).append(" varchar(40)").append(",");
 			}
 		}
 		sb.append("TIMESTAMP_").append(" TIMESTAMP");
@@ -135,7 +165,7 @@ public class SqlHelper {
 		String sb = "UPDATE " + this.tableName + " SET ";
 
 		for (DbColumn column : this.columns) {
-			sb += column.name + " = ? ,";
+			sb += column.columnName + " = ? ,";
 		}
 		sb += " TIMESTAMP_= CURRENT_TIMESTAMP ";
 		sb += "WHERE " + wherekeys + "";
@@ -145,12 +175,11 @@ public class SqlHelper {
 	public String builderDelete() {
 		return "DELETE FROM " + this.tableName + " WHERE " + wherekeys + "";
 	}
-	
+
 	public String builderAddColumn(DbColumn c) {
-		return "ALTER TABLE " + this.tableName + " ADD COLUMN " + c.name
-				+ " VARCHAR(40)";
+		return "ALTER TABLE " + this.tableName + " ADD COLUMN " + c.columnName + " VARCHAR(40)";
 	}
-	
+
 	public String builderDeleteAll() {
 		return "DELETE FROM " + this.tableName + " ";
 	}

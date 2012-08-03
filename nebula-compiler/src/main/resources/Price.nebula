@@ -1,0 +1,4 @@
+/*AMT*/
+type Price extends Real {
+	@MaxLength = 120;
+};

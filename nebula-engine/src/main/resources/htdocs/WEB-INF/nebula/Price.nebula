@@ -1,2 +1,2 @@
-type Price : Real {
+type Price extends Real {
   };

@@ -1,0 +1,3 @@
+type Street extends Name {
+	@MaxLength = 120;
+};

@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import nebula.lang.Field;
 import nebula.lang.Type;
 
 import org.apache.commons.logging.Log;
@@ -22,6 +21,7 @@ public class DBExec {
 
 	final private Connection conn;
 
+	@SuppressWarnings("unused")
 	final private Type type;
 	// final private String SQL_DROP;
 	final private PreparedStatement SQL_GET;
@@ -33,7 +33,7 @@ public class DBExec {
 	// final private String SQL_COUNT;
 
 	final private DbColumn[] columns;
-	final private String[] realFields;
+	// final private String[] realFields;
 	// final private DbColumn[] keyColumns;
 	final private SqlHelper builder;
 
@@ -52,7 +52,7 @@ public class DBExec {
 		columns = builder.builderColumns();
 
 		this.init();
-		
+
 		try {
 			SQL_GET = conn.prepareStatement(builder.builderGet());
 			SQL_INSERT = conn.prepareStatement(builder.builderInsert());
@@ -65,11 +65,10 @@ public class DBExec {
 			throw new RuntimeException(e);
 		}
 
-
-		realFields = new String[columns.length];
-		for (int i = 0; i < columns.length; i++) {
-			realFields[i] = columns[i].name;
-		}
+		// realFields = new String[columns.length];
+		// for (int i = 0; i < columns.length; i++) {
+		// realFields[i] = columns[i].columnName;
+		// }
 	}
 
 	public void init() {
@@ -79,7 +78,7 @@ public class DBExec {
 			ResultSet rs = null;
 
 			try {
-				
+
 				statement = conn.createStatement();
 				rs = statement.executeQuery(builder.builderGetMeta());
 				exist = true;
@@ -93,13 +92,14 @@ public class DBExec {
 				for (int i = 0; i < columnsSize; i++) {
 					cols.put(metaData.getColumnName(i + 1).toUpperCase(), metaData.getColumnTypeName(i + 1));
 					if (log.isDebugEnabled()) {
-						log.debug("\t" + metaData.getColumnName(i + 1) + "  \t" + metaData.getColumnDisplaySize(i + 1) + "\t" + metaData.getColumnTypeName(i + 1));
+						log.debug("\t" + metaData.getColumnName(i + 1) + "  \t" + metaData.getColumnDisplaySize(i + 1)
+								+ "\t" + metaData.getColumnTypeName(i + 1));
 					}
 				}
 
 				ArrayList<DbColumn> notExistColumns = new ArrayList<DbColumn>();
 				for (DbColumn f : columns) {
-					if (!cols.containsKey(f.name.toUpperCase())) {
+					if (!cols.containsKey(f.columnName)) {
 						notExistColumns.add(f);
 					}
 				}
@@ -127,7 +127,7 @@ public class DBExec {
 			if (!exist) {
 				statement.executeUpdate(builder.builderCreate());
 			}
-			
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -236,24 +236,20 @@ public class DBExec {
 
 	int fromEntity(PreparedStatement prepareStatement, Map<String, Object> v) throws SQLException {
 		int pos = 0;
-		for (Field f : type.getFields()) {
-			if (!f.isArray() && f.getRefer() == Field.SCALA) {
-				prepareStatement.setString(1 + pos, (String) v.get(f.getName()));
-				if (log.isTraceEnabled()) log.trace((1 + pos) + " " + f.getName());
-				pos++;
-			}
+		for (DbColumn c : columns) {
+			prepareStatement.setString(1 + pos, (String) v.get(c.fieldName));
+			pos++;
 		}
 		return pos;
 	}
 
 	Map<String, Object> toEntity(ResultSet result) throws SQLException {
 		Map<String, Object> v = new HashMap<>();
+
 		int pos = 0;
-		for (Field f : type.getFields()) {
-			if (!f.isArray() && f.getRefer() == Field.SCALA) {
-				v.put(f.getName(), result.getString(pos + 1));
-				pos++;
-			}
+		for (DbColumn c : columns) {
+			v.put(c.fieldName, result.getString(pos + 1));
+			pos++;
 		}
 		return v;
 	}

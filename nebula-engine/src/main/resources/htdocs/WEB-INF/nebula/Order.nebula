@@ -1,12 +1,64 @@
 type Order{
-  !OrderID Text;
-  Operator Person;
-  Seller Company;
-  Buyer Company;
-  
-  Detail{
-     Product;
-     Amout Long;
-     Price;
-    }; 
+  !OrderID Seq;
+  Description;
+  Sales User;
+  Promised-Date;
+  BusinessPartner;
+  Price{
+	  Currency;	  
   };
+  
+  Taxs{
+	  Tax;//	税额
+	  TaxBase-Amount;//	税基金额
+	  Amount;//	税金额
+	  IsTaxIncluded Attr;//	含税价
+  };
+  
+  Delivery{
+	Rule;
+	FreightCost-Rule;
+	Freight-Amount;
+	Via-Rule;
+	Shipper BusinessPartner;
+	
+  };
+  
+  Bill{
+	 BusinessPartner;
+  };  
+  
+  Details{
+	  Ordered-Date;		//	下单日期
+	  Currency;//币种
+	  Product;//产品
+	  Entered-Quantity;//数量
+	  Entered-Price;//	价格
+	  Limit-Price;//限制价格
+	  Discount Percent;//折扣率 %
+	  Actual-Price;//	单价
+	  
+	  Net-Amount;//行净额
+	  Promised-Date; 	//承诺日期
+	  	  
+	  /*
+	  //Delivered-Date;	//交付日期
+	  //Invoiced-Date;	//发票日期
+	  Description;		//说明
+	  //m_warehouse_id;//仓库
+	  Uom;//度量单位
+	  Ordered-Quantity;//下订单的数量
+	  Reserved-Quantity;//保留库存
+	  Delivered-Quantity;//已配送数量
+	  Invoiced-Quantity;//开票数量
+	  Shipper BusinessPartner;//承运人
+	  //Pricelist;//列表价格
+	  Freight-Amount;//运费金额
+	  //c_project_id	工程
+	  Cost-Price;//	成本价格
+	  Lostsales-Quantity;//销售损失数量
+	  */
+  };
+  
+
+};

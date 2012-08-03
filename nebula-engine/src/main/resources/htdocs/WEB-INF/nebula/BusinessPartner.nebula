@@ -1,0 +1,21 @@
+type BusinessPartner{
+  !Name;
+  Description;
+  DUNS Code;
+  URL;
+  Tax-ID;
+  Rating Attr;
+  
+  Locations[] {
+	  !Location;
+	  Phone;
+	  Fax;
+	  ISDN Code;
+  };
+  
+  Products[] {
+	  !Product;
+	  Description;
+	  ?Manufacturer  BusinessPartner;//TODO
+  };
+};

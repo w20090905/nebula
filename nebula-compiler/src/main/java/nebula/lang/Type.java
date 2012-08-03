@@ -4,17 +4,19 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 enum TypeStandalone {
-	Master, Sequence, BuilderIn, Eembedded
+	Master, Sequence, Basic, Eembedded
 }
 
 public class Type {
-
+	final TypeLoader loader;
 
 	final Type residedType;
 	final Type superType;
-	final String rawType;
+	final String rawType;// For Basic Type
+
 	String name;
 	Alias nameAlias;
 
@@ -24,15 +26,15 @@ public class Type {
 
 	Properties attrs;
 
-	final TypeLoader loader;
 	URL url;
-	boolean mutable=false; 
+	boolean mutable = false;
 	String code;
-	// Type declaringType;
+
+	List<Field> references;
 
 	public static String TYPE = "Type";
 	public static String ENTITY = "Entity";
-	public static String BUILDIN = "BuildInType";
+	public static String BASIC = "Basic";
 
 	Type(TypeLoader typeLoader, String name) {
 		this(typeLoader, name, null, null);
@@ -69,11 +71,12 @@ public class Type {
 			if ("Entity".equals(name)) {
 				this.standalone = TypeStandalone.Master;
 			} else {
-				this.standalone = TypeStandalone.BuilderIn;
+				this.standalone = TypeStandalone.Basic;
 			}
 		}
 		this.name = name;
 		this.fields = new ArrayList<Field>();
+		references = new CopyOnWriteArrayList<>();
 	}
 
 	public String getName() {
@@ -128,9 +131,20 @@ public class Type {
 		return code;
 	}
 
+	public void link(TypeLoader loader) {
+		for (Field f : fields) {
+			f.type.references.add(f);
+		}
+	}
+
+	public List<Field> getReferences() {
+		return references;
+	}
+
 	@Override
 	public String toString() {
 		return "Type [name=" + name + ", nameAlias=" + nameAlias + ", standalone=" + standalone + ", text=" + code
 				+ "]";
 	}
+
 }

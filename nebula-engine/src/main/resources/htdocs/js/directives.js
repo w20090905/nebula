@@ -124,6 +124,52 @@ var neShowContentDirective = [ function() {
 	};
 } ];
 
+
+
+
+var PathMatchProvider = function(when) {
+    // TODO(i): this code is convoluted and inefficient, we should construct the route matching
+    //   regex only once and then reuse it
+    var regex = '^' + when.replace(/([\.\\\(\)\^\$])/g, "\\$1") + '$',
+        params = [],
+        paramMatchs = [],
+        dst = {};
+    	jQuery.each(when.split(/\W/), function(index,param) {
+      if (param) {
+        var paramRegExp = new RegExp(":" + param + "([\\W])");
+        if (regex.match(paramRegExp)) {
+          regex = regex.replace(paramRegExp, "([^\\/]*)$1");
+          params.push(param);
+          paramMatchs.push(new RegExp(":" + param));
+        }
+      }
+    });
+    
+    var regexp = new RegExp(regex);
+    
+    return {
+    	check:function(on){
+    		
+            var match = on.match(regexp);
+	        if (match) {
+	        	jQuery.each(params, function(index,name) {
+	            dst[name] = match[index + 1];
+	          });
+	        }
+	        return match ? dst : null;
+    	},
+    	replace:function(on,url){
+            var match = on.match(regexp);
+	        if (match) {
+	        	jQuery.each(params, function(index,name) {
+	            url = url.replace(paramMatchs[index],match[index + 1]);
+	          });
+	        }
+	        return url;        		
+    	}
+  }
+} 
+
 var neTreeDataConverterDirective = [ function() {
 	return {
 		require : 'tree',
@@ -345,6 +391,152 @@ var neTreeViewDirective = [ function() {
 	};
 } ];
 
+
+function PopupListCtrl($scope,$resource,params){
+	$scope.typename = params.typename;	
+	var DataResource = $resource('d/:typename/', params, {
+    query: {method:'GET', params:{}, isArray:true}
+  });
+	$scope.datalist = DataResource.query({},$scope.showme,$scope.showme);
+	$scope.$ret = function(index){
+		$('#mask , #popup-window').fadeOut(300 , function() {
+			$('#mask').remove();  
+		});
+		return $scope.datalist[index];
+	};
+}
+
+var neFromListDirective = [ 
+   		'$http',
+		'$templateCache',
+		'$route',
+		'$anchorScroll',
+		'$compile',
+		'$controller',
+		'$interpolate',
+		function($http, $templateCache, $route, $anchorScroll, $compile,
+				$controller, $interpolate) {
+	return {
+		require : '?ngModel',
+		restrict : 'A',
+		terminal : true,
+		link : function(scope, element, attrs, ngModelCtrl) {
+			var fromList = attrs.fromList;
+			
+			
+			var changeCounter = 0, lastScope, lastTemplate;
+			
+			var popupwin = jQuery("#popup-window");
+			if(popupwin){
+				jQuery('body').append('<div id="popup-window"><a href="#" class="close"><img src="css\/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>' 
+								+ '<div id="popup-content"></div>'
+								+ '</div>');
+				popupwin = jQuery("#popup-window");
+			}
+			
+			element.after("<a href=\"#"+ fromList + "\">::</a>");
+			var aLink = element.next();
+			
+
+			var elementLast = angular.element(popupwin.children()[1]);
+			var p = PathMatchProvider("/d/:typename/");
+			var params = p.check(fromList);
+			var template = p.replace(fromList,"angularjs/:typename-popup.html");
+			
+			
+			aLink.click(function(){
+				update();				
+			});
+			
+
+			
+			function destroyLastScope() {
+				if (lastScope) {
+					lastScope.$destroy();
+					lastScope = null;
+				}
+			}
+
+			function update() {
+				// old var template = $route.current &&
+				// $route.current.template,
+				
+				var thisChangeId = ++changeCounter;
+
+				function clearContent() {
+					// ignore callback if another route change occured
+					// since
+					if (thisChangeId === changeCounter) {
+						element.html('');
+						destroyLastScope();
+					}
+				}
+
+				if (template) {
+					
+
+					$(popupwin).fadeIn(300);
+					
+					
+					//Set the center alignment padding + border
+					var popMargTop = ($(popupwin).height() + 24) / 2; 
+					var popMargLeft = ($(popupwin).width() + 24) / 2; 
+					
+					$(popupwin).css({ 
+						'margin-top' : -popMargTop,
+						'margin-left' : -popMargLeft
+					});
+										
+					$http.get(template, {cache : $templateCache}).success(function(response) {
+						// ignore callback if another
+						// route change occured since
+						if (thisChangeId === changeCounter) {
+							elementLast.html(response);
+							destroyLastScope();
+
+							var link = $compile(elementLast.contents()),controller;
+
+							lastScope = scope.$new();
+							lastScope.template = template;
+							lastScope.link = link;
+							if (PopupListCtrl) {
+								controller = $controller(
+										PopupListCtrl,
+										{
+											params : params,
+											$scope : lastScope
+										});
+								elementLast.contents().data(
+												'$ngControllerController',
+												controller);
+							}
+
+							link(lastScope);
+							lastScope.$emit('$popupContentLoaded');
+							//lastScope.$eval(onloadExp);
+						}
+					}).error(clearContent);
+				} else {
+					clearContent();
+				}
+
+				// Add the mask to body
+				$('body').append('<div id="mask"></div>');
+				$('#mask').fadeIn(300);
+				
+				// When clicking on the button close or the mask layer the popup closed
+				$('a.close, #mask').live('click', function() { 
+					$('#mask , #popup-window').fadeOut(300 , function() {
+						$('#mask').remove();  
+					});
+				});
+				
+			}
+		
+		}
+	};
+} ];
+
 var neDragableDirective = [ '$document', function($document) {
 	var startX = 0, startY = 0, x = 0, y = 0;
 	return {
@@ -518,4 +710,5 @@ angular.module('nebula.directives', []).directive('appVersion',
 		.directive('tree', neTreeViewDirective)
 		.directive('converter', neTreeDataConverterDirective)
 		.directive('showContent', neShowContentDirective)
+		.directive('fromList', neFromListDirective)
 		.directive('pane', nePaneDirective);

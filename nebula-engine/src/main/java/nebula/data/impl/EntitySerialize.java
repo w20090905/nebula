@@ -22,19 +22,55 @@ public class EntitySerialize implements JsonSerialize<Entity> {
 			EntityImp v = (EntityImp) d;
 			Type type = ((EntityStore) v.store).type;
 			for (Field f : type.getFields()) {
-				String name = f.getName();
-				Object ov = (String) v.get(name);
-				if (ov != null) {
-					o.writeStringField(f.getName(), (String) v.get(f.getName()));
-				} else {
-
-				}
+				Type rT;
+				switch (f.getRefer()) {
+				case ByVal:
+					write(o, d, f.getName());
+					break;
+				case Inline:
+					rT = f.getType();
+					for (Field rf : rT.getFields()) {
+						write(o, d, f.getName() + rf.getName());
+					}
+					break;
+				case ByRef:
+					rT = f.getType();
+					for (Field rf : rT.getFields()) {
+						switch (rf.getImportance()) {
+						case Key:
+						case Core:
+							write(o, d, f.getName() + rf.getName());
+							break;
+						}
+					}
+					break;
+				case Cascade:
+					rT = f.getType();
+					for (Field rf : rT.getFields()) {
+						switch (rf.getImportance()) {
+						case Key:
+						case Core:
+							write(o, d, f.getName() + rf.getName());
+							break;
+						}
+					}
+					break;
+				}				
 			}
 			o.writeEndObject();
 		} catch (JsonGenerationException e) {
 			throw new RuntimeException(e);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
+		}
+	}
+	
+	private void write(JsonGenerator o,Entity d,String name) throws JsonGenerationException, IOException{
+		Object ov = (String) d.get(name);
+		if (ov != null) {
+			o.writeStringField(name, (String)ov);
+		} else {
+
 		}
 	}
 

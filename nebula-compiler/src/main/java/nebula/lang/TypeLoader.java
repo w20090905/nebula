@@ -49,7 +49,7 @@ public abstract class TypeLoader {
 		this.parent = parent;
 	}
 
-	protected List<Type> defineNebula(Reader in) {
+	public List<Type> defineNebula(Reader in) {
 		try {
 			BufferedReader bin = new BufferedReader(in);
 			String code = FileUtil.readAllTextFrom(bin);
@@ -58,6 +58,7 @@ public abstract class TypeLoader {
 			for (Type t : typeList) {
 				t.code = code;
 				t.url = null;
+				t.link(this);
 			}
 
 			types.addAll(typeList);
@@ -97,6 +98,7 @@ public abstract class TypeLoader {
 			for (Type t : typeList) {
 				t.code = code;
 				t.url = in;
+				t.link(this);
 			}
 			types.addAll(typeList);
 			if (log.isTraceEnabled()) {

@@ -84,7 +84,7 @@ public class EntityStore implements Store<Entity> {
 			
 			String id = "";
 			for (Field f : type.getFields()) {
-				if(Field.KEY ==  f.getImportance()){
+				if(f.isKey()){
 					id += newData.get(f.getName());
 				}
 			}

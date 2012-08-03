@@ -4,9 +4,13 @@
 <meta charset="utf-8">
 <title>My AngularJS App</title>
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-<link rel="stylesheet" type="text/css" href="css/screen.css" media="screen" />
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<link rel="stylesheet" href="css/nebula-angular.css" />
+
+	<!-- jquery start -->
+	<script src="lib/jquery/jquery-1.7.2.min.js"></script>
+	<!-- jquery end -->
+	
+	<!-- angular start -->
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
 	<script src="lib/angular/angular.js"></script>
 	<script src="lib/angular/angular-resource.js"></script>
 	<script src="js/nebula.js"></script>
@@ -14,16 +18,23 @@
 	<script src="js/controllers.js"></script>
 	<script src="js/filters.js"></script>
 	<script src="js/directives.js"></script>
+	<!-- angular end -->
+
+	<!-- codemirror start -->
+    <link rel="stylesheet" href="lib/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="lib/codemirror/theme/neat.css">
+    <script src="lib/codemirror/lib/codemirror.js"></script>
+    <script src="lib/codemirror/mode/nebula/nebula.js"></script>
+    <style type="text/css">.CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}</style>
+	<!-- codemirror end -->
 	
+	<!-- custom start -->
+	<link rel="stylesheet" type="text/css" href="css/screen.css" media="screen" />
+	<link rel="stylesheet" href="css/nebula-angular.css" />
+	<!-- custom end -->
 </head>
 <body>
-<input type="text" ng-model="name"/>
+<input type="text" ng-model="data.buyer_name" from-list="/d/Person/"/>
 
-<div class="dragable">  test <div style="height:100px;width: 20em"> 
-<hr>
-{{name}}
-
-<hr>
-</div> me </div>
 </body>
 </html>
