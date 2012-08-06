@@ -17,7 +17,7 @@
 	</div>
 	  			<#break>
 			<#case "Inline">
-	<div title="${field.name}" class="inline"><span class="title">${field.name}</span></label>
+	<fieldset class="inline"><legend>${field.name}</legend>
 	  			<#list field.type.fields as rF>
 		<div class="field" ng-class="{error: myForm.name.$invalid}">		
 					<#if field.key && rF.key>
@@ -27,7 +27,7 @@
 	  				</#if> 
 		</div>
 	  			</#list>
-	</div>
+	</fieldset>
 	  			<#break>
 			<#case "ByRef">
 	<div class="field" ng-class="{error: myForm.name.$invalid}">	

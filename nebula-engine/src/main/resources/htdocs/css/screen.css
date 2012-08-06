@@ -225,35 +225,6 @@ img {
 	background-color: #eeeeee;
 }
 
-div.inline{
-	background-color: gray;
-	-webkit-border-radius: 6px;  -moz-border-radius: 4px;  
-	border-radius: 6px;
-	background-color: ghostwhite;
-	
-	-webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);  
-	-moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);  
-	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
-	margin-bottom: 1em;
-}
-div.inline .title{
-	position:relative;
-	top: -.5em;
-	width:10em;
-	background-color: yellow;
-	font-weight: bold;
-	padding:.2em 1em;
-	margin-left: 3em;
-	
-	-webkit-border-radius: 6px;  -moz-border-radius: 4px;  
-	border-radius: 6px;
-	
-	-webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);  
-	-moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);  
-	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
-	margin-bottom: 1em;
-}
-
 /* Footer styles */
 #footer {
 	clear:both;

@@ -445,7 +445,8 @@ var neFromListDirective = [
 			
 			
 			aLink.click(function(){
-				update();				
+				update();	
+				return false;
 			});
 			
 
