@@ -32,7 +32,7 @@ public class TemplateResouce extends BasicResouce {
 		this.typeName = typeName;
 		this.actionName = actionName;
 
-		this.templateName = "angularjs-" + actionName + ".ftl";
+		this.templateName = templateTypeName + "-" + actionName + ".ftl";
 	}
 
 	protected void makeResponse() {

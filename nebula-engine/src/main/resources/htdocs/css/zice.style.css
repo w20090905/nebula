@@ -1206,6 +1206,7 @@ a.ui-selectmenu {
 .formEl_b {
 	padding: 10px 0px 20px 0px;
 }
+
 /*fieldset {
 		position:relative;
 		padding:20px;
@@ -1224,13 +1225,14 @@ fieldset legend {
 		padding:0 10px;
 		*margin-bottom:20px
 }	*/
-		.formEl_b fieldset {
+
+form /*.formEl_b*/ fieldset {
 	border:1px solid #e6e6e6;
 	padding:20px 20px 20px 20px;
 	background:#ffffff;
-	margin: 0 0;
+	margin: 15px 0;
 }
-.formEl_b fieldset legend {
+form /*.formEl_b*/ fieldset legend {
 	font-weight:700;
 	border:1px solid #e6e6e6;
 	background:#f2f2f2;
@@ -1240,7 +1242,7 @@ fieldset legend {
 	margin-left:-10px;
 	margin-bottom: 20px;
 }
-.formEl_b fieldset legend span {
+form /*.formEl_b*/ fieldset legend span {
 	color:#F00;
 }
 .sepH_b {
@@ -4197,3 +4199,21 @@ border-radius:35px;
 
 	}
 	
+div.tree { /*background: url(texture-noise.png);*/
+	height: 460px;
+	width: 700px;
+}
+
+div.tree .node {
+	font-family: "Helvetica Neue", Helvetica;
+	font-size: .6em;
+	fill-opacity: 1;
+	color: black;
+	padding: 1px 15px;
+	margin-top: 5px;
+	margin-left: -140px;
+	cursor: pointer;
+	height: 17px;
+	width: 120px;
+	text-align: right;
+}

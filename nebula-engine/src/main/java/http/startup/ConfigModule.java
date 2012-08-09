@@ -142,6 +142,7 @@ public class ConfigModule extends AbstractModule {
 					site.register("*", staticEngine);
 					site.register("/template/*", templateResouceEngine);
 					site.register("/angularjs/*", templateResouceEngine);
+					site.register("/angularjszice/*", templateResouceEngine);
 					site.register("/e/*", staticEngine);
 					site.register("/d/*", dataResouceEngine);
 					site.register("/d/Type", typeResouceEngine);
