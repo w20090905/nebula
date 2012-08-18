@@ -417,7 +417,7 @@ var neFromListDirective = [
 		function($http, $templateCache, $route, $anchorScroll, $compile,
 				$controller, $interpolate) {
 	return {
-		require : '?ngModel',
+		require : 'ngModel',
 		restrict : 'A',
 		terminal : true,
 		link : function(scope, element, attrs, ngModelCtrl) {
@@ -442,7 +442,6 @@ var neFromListDirective = [
 			var p = PathMatchProvider("/d/:typename/");
 			var params = p.check(fromList);
 			var template = p.replace(fromList,"angularjs/:typename-popup.html");
-			
 			
 			aLink.click(function(){
 				update();	
@@ -511,6 +510,8 @@ var neFromListDirective = [
 												'$ngControllerController',
 												controller);
 							}
+							
+							lastScope.pop = ngModelCtrl.$viewValue;
 
 							link(lastScope);
 							lastScope.$emit('$popupContentLoaded');
