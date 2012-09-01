@@ -86,7 +86,7 @@ function EntityCtrl($scope,$route,$resource,$routeParams,$location){
 }
 
 function AngularJSCtrl($scope,$route,$location,$http,$routeParams,$templateCache){
-	$scope.resourcename = extractParams("angularjs/:typename-:cat.html",$routeParams);
+	$scope.resourcename = extractParams(":TemplateType/:typename-:cat.html",$routeParams);
 	$http.get($scope.resourcename ).success(function(data, status, headers, config){
 		$scope.data = {code:data};
 		$scope.showme();

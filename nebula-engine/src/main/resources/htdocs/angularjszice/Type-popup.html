@@ -1,0 +1,21 @@
+<h1>Type</h1>
+<div>
+	<input type="text" ng-model="query" class="search-query" placeholder="Search">
+</div>
+<table class="table">
+	<thead>
+		<tr>
+			<th>No.</th>
+			<th>Name</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="data in datalist | filter:'Master' | filter:query | orderBy:orderProp">
+			<td>{{$index+1}}</td>
+			<td><a href="#/d/{{typename}}/{{data.name}}">{{data.name}}</a></td>
+		</tr>
+	</tbody>
+</table>
+<div id="dd" class="tree" x-converter="$config({id:'name'});" x-data="datalist">
+	<div id="log"></div>
+</div>

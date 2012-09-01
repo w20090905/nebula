@@ -593,16 +593,16 @@ var neViewDirective = [
 				$controller, $interpolate) {
 			return {
 				restrict : 'A',
-				template : '<div>' + '<div class="body"></div>'
-						+ '<div class="body"></div>' + '</div>',
+				//template : '<div>' + '<div class="body"></div>'
+				//		+ '<div class="body"></div>' + '</div>',
 				replace : true,
 				transclude : true,
 				link : function(scope, element, attr) {
 					var changeCounter = 0, lastScope, lastTemplate, onloadExp = attr.onload
 							|| '';
 
-					var elementCur = angular.element(element.children()[0]);
-					var elementLast = angular.element(element.children()[1]);
+					//var elementCur = angular.element(element.children()[0]);
+					var elementLast = element;//angular.element(element.children()[1]);
 
 					scope.$on('$afterRouteChange', update);
 					scope.showme = function() {
@@ -610,20 +610,20 @@ var neViewDirective = [
 //						elementLast.toggle("normal");
 //						elementCur.toggle(false);
 						
-						var opened = true;
-						elementLast.removeClass(opened ? 'closed' : 'opened');
-						elementLast.addClass(opened ? 'opened' : 'closed');
+						//var opened = true;
+						//elementLast.removeClass(opened ? 'closed' : 'opened');
+						//elementLast.addClass(opened ? 'opened' : 'closed');
 
-						opened = false;
-						elementCur.removeClass(opened ? 'closed' : 'opened');
-						elementCur.addClass(opened ? 'opened' : 'closed');
+						//opened = false;
+						//elementCur.removeClass(opened ? 'closed' : 'opened');
+						//elementCur.addClass(opened ? 'opened' : 'closed');
 						
 						
-						var t = elementCur;
-						elementCur = elementLast;
-						elementLast = t;
-						elementLast.html("");
-						t = null;
+						//var t = elementCur;
+						//elementCur = elementLast;
+						//elementLast = t;
+						//elementLast.html("");
+						//t = null;
 					}
 					// update();
 
