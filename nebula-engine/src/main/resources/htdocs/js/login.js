@@ -29,12 +29,30 @@
 			  return false;
 		  }		
 		 hideTop();
-		 loading('Checking',1);		
+		 checking();
+		 		
 		 setTimeout( "unloading()", 2000 );
 		 setTimeout( "Login()", 2500 );
 	});	
-																 
-function Login(){
+	
+function checking(){
+	$.ajax({
+		   type: "POST",
+		   url: "f/login.do",
+		   data: { username: $("#username_id").val(), password: $("#password").val() },
+		   success: function(){
+				alert($("#username_id").val());
+				 setTimeout( "unloading()", 2000 );
+				 LoginSucceed();
+			},
+			error: function(){
+				 setTimeout( "unloading()", 2000 );				
+			}});
+	loading('Checking',1);	
+}
+															 
+function LoginSucceed(){
+	setTimeout( "window.location.href='indexZice.html'", 10 );
 	$("#login").animate({   opacity: 1,top: '49%' }, 200,function(){
 		 $('.userbox').show().animate({ opacity: 1 }, 500);
 			$("#login").animate({   opacity: 0,top: '60%' }, 500,function(){
@@ -44,7 +62,6 @@ function Login(){
 				});							  
 			 })	
      })	
-	setTimeout( "window.location.href='dashboard.html'", 3000 );
 }
 
 $('#alertMessage').click(function(){
