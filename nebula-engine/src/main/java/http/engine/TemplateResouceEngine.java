@@ -48,6 +48,9 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 		}
 
 		String[] names = path.getName().split("-");
+		if(names.length<2){
+			return null;
+		}
 		String typeName = names[0];
 		String actionName = names[1];
 
