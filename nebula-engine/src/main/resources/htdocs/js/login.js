@@ -2,17 +2,17 @@
 			onfocus();
 			$(".on_off_checkbox").iphoneStyle();
 			$('.tip a ').tipsy({gravity: 'sw'});
-			$('#login').show().animate({   opacity: 1 }, 2000);
-			$('.logo').show().animate({   opacity: 1,top: '32%'}, 800,function(){			
-				$('.logo').show().delay(1200).animate({   opacity: 1,top: '1%' }, 300,function(){
-					$('.formLogin').animate({   opacity: 1,left: '0' }, 300);
-					$('.userbox').animate({ opacity: 0 }, 200).hide();
+			$('#login').show().animate({   opacity: 1 }, 500);
+			$('.logo').show().animate({   opacity: 1,top: '32%'}, 200,function(){			
+				$('.logo').show().delay(300).animate({   opacity: 1,top: '1%' }, 300,function(){
+					$('.formLogin').animate({   opacity: 1,left: '0' }, 100);
+					$('.userbox').animate({ opacity: 0 }, 50).hide();
 				 });		
 			})	
 		});	
 
 	    $('.userload').click(function(e){
-			$('.formLogin').animate({   opacity: 1,left: '0' }, 300);			    
+			$('.formLogin').animate({   opacity: 1,left: '0' }, 100);			    
 			  $('.userbox').animate({ opacity: 0 }, 200,function(){
 				  $('.userbox').hide();				
 			   });
@@ -21,18 +21,18 @@
 	$('#but_login').click(function(e){				
 		  if(document.formLogin.username.value == "" || document.formLogin.password.value == "")
 		  {
-			  showError("Please Input Username / Password",500);
+			  showError("Please Input Username / Password",120);
 			  $('.inner').jrumble({ x: 4,y: 0,rotation: 0 });	
 			  $('.inner').trigger('startRumble');
-			  setTimeout('$(".inner").trigger("stopRumble")',500);
-			  setTimeout('hideTop()',5000);
+			  setTimeout('$(".inner").trigger("stopRumble")',120);
+			  setTimeout('hideTop()',1250);
 			  return false;
 		  }		
 		 hideTop();
 		 checking();
 		 		
-		 setTimeout( "unloading()", 2000 );
-		 setTimeout( "Login()", 2500 );
+		 setTimeout( "unloading()", 500 );
+		 setTimeout( "Login()", 800 );
 	});	
 	
 function checking(){
@@ -41,11 +41,11 @@ function checking(){
 		   url: "f/login.do",
 		   data: { username: $("#username_id").val(), password: $("#password").val() },
 		   success: function(){
-				 setTimeout( "unloading()", 2000 );
+				 setTimeout( "unloading()", 500 );
 				 LoginSucceed();
 			},
 			error: function(){
-				 setTimeout( "unloading()", 2000 );				
+				 setTimeout( "unloading()", 500 );				
 			}});
 	loading('Checking',1);	
 }
