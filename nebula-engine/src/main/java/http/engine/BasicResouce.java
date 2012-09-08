@@ -11,6 +11,8 @@ import org.simpleframework.http.resource.Resource;
 public abstract class BasicResouce implements Resource {
 	protected Log log = LogFactory.getLog(this.getClass());
 
+	protected int maxAge = 0;
+	
 	protected byte[] buffer;
 	protected long lastModified;
 
@@ -43,7 +45,7 @@ public abstract class BasicResouce implements Resource {
 
 				// normal parse
 				resp.setCode(200);
-				resp.set("Cache-Control", "max-age=0");
+				resp.set("Cache-Control", "max-age=" + maxAge);
 				resp.set("Content-Language", "en-US");
 				resp.set("Content-Type", "text/html");
 				resp.set("Content-Length", buffer.length);

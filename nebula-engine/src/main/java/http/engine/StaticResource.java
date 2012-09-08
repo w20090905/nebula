@@ -20,7 +20,6 @@ public class StaticResource implements Resource {
 	public StaticResource(Source source, String mime){
 		this.underlySource = source;        
 		this.mime = mime;
-
 	}
 
 	@Override
@@ -28,7 +27,7 @@ public class StaticResource implements Resource {
 		try {			
      
             // normal parse
-            resp.set("Cache-Control", "max-age=0");
+            resp.set("Cache-Control", "max-age=2000");
             resp.set("Content-Language", "en-US");
             resp.set("Content-Type", mime);
             // resp.setContentLength((int) underlySource.getLength());
