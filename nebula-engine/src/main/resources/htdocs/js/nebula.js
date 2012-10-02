@@ -33,15 +33,14 @@ nebulaModule.directive('name', function() {
 });
 
 nebulaModule.run(function($rootScope, $location,  $interpolate) {
-	$rootScope.$on('$routeChangeStart', function(event, next) {
-		var tu = next.$route.templateUrl;
+	$rootScope.$on('$routeChangeStart', function(event, route) {
+		var tu = route.$route.templateUrl;
 		if (tu) {
-			var otu = next.$route.originTemplateUrl;
+			var otu = route.$route.originTemplateUrl;
 			if (!otu) {
-				otu = tu;
-				next.$route.originTemplateUrl = tu;
+				otu = route.$route.originTemplateUrl = tu;
 			}
-			next.$route.templateUrl = $interpolate(otu)(next.params);
+			route.$route.templateUrl = $interpolate(otu)(route.params);
 		}
 	});
 });
