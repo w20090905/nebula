@@ -31,8 +31,7 @@ public class TypeEditResouce extends BasicResouce{
 		try {
 			if ("GET".equals(req.getMethod())) {
 				if (log.isTraceEnabled()) {
-					log.trace("Request : " + req.getPath());
-					log.trace("\tkey : " + key);
+					log.trace("Request : " + req.getPath()+ "\tkey : " + key);
 				}
 
 				if (buffer == null) {

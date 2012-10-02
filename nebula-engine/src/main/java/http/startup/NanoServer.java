@@ -9,6 +9,7 @@ import java.net.SocketAddress;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.simpleframework.http.core.Container;
+import org.simpleframework.http.core.ContainerServer;
 import org.simpleframework.transport.connect.Connection;
 import org.simpleframework.transport.connect.SocketConnection;
 
@@ -25,7 +26,8 @@ public class NanoServer {
         
         BasicResourceContainer container =(BasicResourceContainer)injector.getInstance(Container.class);
 
-        Connection connection = new SocketConnection(container);
+        ContainerServer server =  new ContainerServer(container, 6);
+        Connection connection = new SocketConnection(server);
         SocketAddress address1 = new InetSocketAddress(port);
         connection.connect(address1);
         log.error("== listen at " + port);

@@ -29,8 +29,7 @@ public abstract class BasicResouce implements Resource {
 	@Override
 	public void handle(Request req, Response resp) {
 		if (log.isTraceEnabled()) {
-			log.trace("Request : " + req.getPath());
-			log.trace("\tMethod" + req.getMethod());
+			log.trace("Request : " + req.getPath() + "\t METHOD: " + req.getMethod());
 		}
 
 		String method = req.getMethod();
@@ -38,11 +37,13 @@ public abstract class BasicResouce implements Resource {
 		try {
 			if ("GET".equals(method)) {
 
-				//if (System.currentTimeMillis() - this.lastModified > 100) {
-					
+				//System.out.print(System.currentTimeMillis());
+				if (System.currentTimeMillis() - this.lastModified > 100) {					
 					makeResponse();
-				//}
+					//System.out.println("====" + System.currentTimeMillis());
+				}
 
+				
 				// normal parse
 				resp.setCode(200);
 				resp.set("Cache-Control", "max-age=" + maxAge);

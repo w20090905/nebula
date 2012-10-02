@@ -45,16 +45,16 @@ public class SqlHelperTest extends TestCase {
 		assertEquals("Name", h.columns[i].fieldName);
 		assertEquals(true, h.columns[i].key);		
 		i++;
-		assertEquals("Test_Key", h.columns[i].fieldName);
+		assertEquals("TestKey", h.columns[i].fieldName);
 		assertEquals(true, h.columns[i].key);		
 		i++;
-		assertEquals("Test_Core", h.columns[i].fieldName);	
+		assertEquals("TestCore", h.columns[i].fieldName);	
 		assertEquals(false, h.columns[i].key);			
 		i++;
-		assertEquals("Test_Require", h.columns[i].fieldName);
+		assertEquals("TestRequire", h.columns[i].fieldName);
 		assertEquals(false, h.columns[i].key);				
 		i++;
-		assertEquals("Test_Ignore", h.columns[i].fieldName);
+		assertEquals("TestIgnore", h.columns[i].fieldName);
 		assertEquals(false, h.columns[i].key);				
 		
 		assertEquals("SELECT count(1) FROM NPerson ", h.builderCount());
@@ -85,24 +85,24 @@ public class SqlHelperTest extends TestCase {
 		assertEquals("Name", h.columns[i].fieldName);
 		assertEquals(true, h.columns[i].key);		
 		i++;
-		assertEquals("Test_Key", h.columns[i].fieldName);
+		assertEquals("TestKey", h.columns[i].fieldName);
 		assertEquals(false, h.columns[i].key);		
 		i++;
-		assertEquals("Test_Core", h.columns[i].fieldName);	
+		assertEquals("TestCore", h.columns[i].fieldName);	
 		assertEquals(false, h.columns[i].key);			
 		i++;
-		assertEquals("Test_Require", h.columns[i].fieldName);
+		assertEquals("TestRequire", h.columns[i].fieldName);
 		assertEquals(false, h.columns[i].key);				
 		i++;
-		assertEquals("Test_Ignore", h.columns[i].fieldName);
+		assertEquals("TestIgnore", h.columns[i].fieldName);
 		assertEquals(false, h.columns[i].key);	
 		
 		i++;
-		assertEquals("TestRef_Key", h.columns[i].fieldName);
+		assertEquals("TestRefKey", h.columns[i].fieldName);
 		assertEquals(false, h.columns[i].key);	
 		
 		i++;
-		assertEquals("TestRef_Core", h.columns[i].fieldName);
+		assertEquals("TestRefCore", h.columns[i].fieldName);
 		assertEquals(false, h.columns[i].key);				
 
 
