@@ -36,7 +36,9 @@
 <body>
 <br/>
 <br/>
-&nbsp;<input type="text" ng-model="data.buyer_name" from-list="/d/Person/"/>
+&nbsp;
+<input type="text" x-ng-model="data.buyer_name" x-popup="/d/Person/" x-params="{data.buyer_name:Name}" x-returns="{data.buyer_name:Name}"/>
+<input type="text" x-ng-model="data.id"/>
 
 </body>
 </html>

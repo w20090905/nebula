@@ -391,19 +391,63 @@ var neTreeViewDirective = [ function() {
 	};
 } ];
 
-
-function PopupListCtrl($scope,$resource,params){
-	$scope.typename = params.typename;	
-	var DataResource = $resource('d/:typename/', params, {
-    query: {method:'GET', params:{}, isArray:true}
-  });
-	$scope.datalist = DataResource.query({},$scope.showme,$scope.showme);
-	$scope.$ret = function(index){
-		$('#mask , #popup-window').fadeOut(300 , function() {
-			$('#mask').remove();  
-		});
+function PopupListCtrl($scope,$resource,urlParams,params){
+	$scope.params = params;
+	var DataResource = $resource('d/:typename/', urlParams, {
+		query: {method:'GET', params:{}, isArray:true}
+	});
+	$scope.datalist = DataResource.query({});
+	$scope.$returnData = function(index){
 		return $scope.datalist[index];
 	};
+}
+
+function simpleMap(data){
+	var params =  {};
+	
+	var setS = data.split(/[\{\}\,\ ]/);
+	for(var i=0;i<setS.length;i++){
+		var kvSet = setS[i];
+		if(kvSet.length>0){
+			var kv = kvSet.split(":");
+			var k = kv[0];
+			var v = kv[1];
+			params[k]=v;
+		}		
+	}
+	return params;
+}
+
+function getVal(map,key){
+	var keys = key.split(/\./);
+
+	var vl=map,lastVl=vl;
+	for(var i=0;i<keys.length-1;i++){
+		vl = lastVl[keys[i]];
+		if(isUndefined(vl)){
+			lastVl[keys[i]] = {};
+			vl = lastVl[keys[i]];
+		}
+		lastVl = vl;
+	}
+	
+	return vl[keys[keys.length-1]];
+}
+
+function putVal(map,key,v){
+	var keys = key.split(/\./);
+	
+	var vl=map,lastVl=vl;
+	for(var i=0;i<keys.length-1;i++){
+		vl = lastVl[keys[i]];
+		if(isUndefined(vl)){
+			lastVl[keys[i]] = {};
+			vl = lastVl[keys[i]];
+		}
+		lastVl = vl;
+	}
+	
+	vl[keys[keys.length-1]] = v;
 }
 
 var neFromListDirective = [ 
@@ -421,120 +465,127 @@ var neFromListDirective = [
 		restrict : 'A',
 		terminal : true,
 		link : function(scope, element, attrs, ngModelCtrl) {
-			var fromList = attrs.fromList;
+			var reqUrl = attrs.popup;
+			var params = simpleMap(attrs.params);
+			var returns = simpleMap(attrs.returns);
 			
-			
-			var changeCounter = 0, lastScope, lastTemplate;
-			
-			var popupwin = jQuery("#popup-window");
-			if(popupwin){
-				jQuery('body').append('<div id="popup-window"><a href="#" class="close"><img src="css\/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>' 
-								+ '<div id="popup-content"></div>'
-								+ '</div>');
-				popupwin = jQuery("#popup-window");
-			}
-			
-			element.after("<a href=\"#"+ fromList + "\">::</a>");
-			var aLink = element.next();
-			
-
-			var elementLast = angular.element(popupwin.children()[1]);
-			var p = PathMatchProvider("/d/:typename/");
-			var params = p.check(fromList);
-			var template = p.replace(fromList,"angularjs/:typename-popup.html");
-			
-			aLink.click(function(){
-				update();	
-				return false;
+			element.after('<span>::</span>').next().click(function(){
+				var inparams = {};
+				angular.forEach(params,function(that,me){
+					putVal(inparams,that,getVal(scope,me));
+				});				
+				
+				popup(reqUrl,inparams,function(retData){
+					angular.forEach(returns,function(that,me){
+						putVal(scope,me,getVal(retData,that));
+					});
+					//scope.$digest();
+				});
 			});
 			
+			function preparePopupWin(){
+				if(jQuery("#popup-window").length<1){
+					jQuery('body').append('<div id="popup-window"><img src="css\/close_pop.png" class="btn_close" title="Close Window" alt="Close" />' 
+									+ '<div id="popup-content"></div>'
+									+ '</div>');
+				}
+			}
+			
+			preparePopupWin();
 
 			
+			var changeCounter = 0, lastScope, lastTemplate;
 			function destroyLastScope() {
 				if (lastScope) {
 					lastScope.$destroy();
 					lastScope = null;
 				}
 			}
-
-			function update() {
-				// old var template = $route.current &&
-				// $route.current.template,
-				
+			
+			function popup(reqUrl,params,onReturn){
+				var popupwin = jQuery("#popup-window");
+				var popupwinBody = angular.element(popupwin.children()[1]);
 				var thisChangeId = ++changeCounter;
+				popupwinBody.html('');
 
 				function clearContent() {
 					// ignore callback if another route change occured
 					// since
 					if (thisChangeId === changeCounter) {
-						element.html('');
+						popupwinBody.html('');
 						destroyLastScope();
 					}
-				}
-
-				if (template) {
-					
-
-					$(popupwin).fadeIn(300);
-					
+				}				
+				
+				var matcher = PathMatchProvider("/d/:typename/");
+				var urlParams = matcher.check(reqUrl);
+				var template = matcher.replace(reqUrl,"angularjs/:typename-popup.html");
+				if(template){
+					popupwin.fadeIn(300);
 					
 					//Set the center alignment padding + border
-					var popMargTop = ($(popupwin).height() + 24) / 2; 
-					var popMargLeft = ($(popupwin).width() + 24) / 2; 
-					
-					$(popupwin).css({ 
-						'margin-top' : -popMargTop,
-						'margin-left' : -popMargLeft
-					});
-										
-					$http.get(template, {cache : $templateCache}).success(function(response) {
-						// ignore callback if another
-						// route change occured since
-						if (thisChangeId === changeCounter) {
-							elementLast.html(response);
-							destroyLastScope();
+					var marginTop = ($(popupwin).height() + 24) / 2; 
+					var marginLeft = ($(popupwin).width() + 24) / 2; 
 
-							var link = $compile(elementLast.contents()),controller;
+					popupwin.css({ 
+						'margin-top' : -marginTop,
+						'margin-left' : -marginLeft
+					});
+					
+					$http.get(template, {cache : $templateCache}).success(function(response) {
+						if (thisChangeId === changeCounter) {							
+							popupwinBody.html(response);
+							
+							destroyLastScope();
+							var link = $compile(popupwinBody.contents()),controller;
 
 							lastScope = scope.$new();
 							lastScope.template = template;
 							lastScope.link = link;
+							
 							if (PopupListCtrl) {
-								controller = $controller(
-										PopupListCtrl,
+								controller = $controller(PopupListCtrl,
 										{
+											urlParams : urlParams,
 											params : params,
 											$scope : lastScope
 										});
-								elementLast.contents().data(
+								
+								lastScope.$ret = function(index){
+									$('#mask , #popup-window').fadeOut(300 , function() {
+										$('#mask').remove();  
+									});
+									
+									var data =lastScope.$returnData(index);
+									onReturn(data);
+								}
+								
+								popupwinBody.contents().data(
 												'$ngControllerController',
 												controller);
 							}
-							
-							lastScope.pop = ngModelCtrl.$viewValue;
 
 							link(lastScope);
-							lastScope.$emit('$popupContentLoaded');
+							
+							//lastScope.$emit('$popupContentLoaded');
 							//lastScope.$eval(onloadExp);
-						}
+						}	
 					}).error(clearContent);
 				} else {
 					clearContent();
 				}
-
+				
 				// Add the mask to body
 				$('body').append('<div id="mask"></div>');
 				$('#mask').fadeIn(300);
 				
 				// When clicking on the button close or the mask layer the popup closed
-				$('a.close, #mask').live('click', function() { 
+				$('img.btn_close, #mask').live('click', function() { 
 					$('#mask , #popup-window').fadeOut(300 , function() {
 						$('#mask').remove();  
 					});
-				});
-				
+				});	
 			}
-		
 		}
 	};
 } ];
@@ -712,5 +763,5 @@ angular.module('nebula.directives', []).directive('appVersion',
 		.directive('tree', neTreeViewDirective)
 		.directive('converter', neTreeDataConverterDirective)
 		.directive('showContent', neShowContentDirective)
-		.directive('fromList', neFromListDirective)
+		.directive('popup', neFromListDirective)
 		.directive('pane', nePaneDirective);

@@ -36,7 +36,7 @@
 					<#if field.key && rF.key><#rt>
 		<input type="text" ng-model="data.${field.name}${rF.name}" ng-readonly="update"/>
 					<#elseif rF.key><#rt>
-		<input type="text" ng-model="data.${field.name}${rF.name}"/>
+		<input type="text" ng-model="data.${field.name}${rF.name}" x-popup="/d/${field.type.name}/" x-params="{data.${field.name}${rF.name}:${rF.name}}" x-returns="{data.${field.name}${rF.name}:${rF.name}}"/>
 					<#elseif rF.core>
 		<input type="hidden" ng-model="data.${field.name}${rF.name}"/>{{data.${field.name}${rF.name}}}
     				</#if>

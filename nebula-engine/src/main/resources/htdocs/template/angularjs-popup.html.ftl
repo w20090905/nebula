@@ -3,7 +3,7 @@
 <input type="text" ng-model="query" class="search-query" placeholder="Search">
 </div>
 
-[[pop:{{pop}}]]
+[[pop:{{params.Name}}]]
 <!--Body content-->
 
   <table class="table">
