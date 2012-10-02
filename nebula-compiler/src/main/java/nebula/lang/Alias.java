@@ -6,11 +6,11 @@ import java.util.Map;
 public class Alias {
 	final Map<String, String> alias;
 	public Alias(){
-		alias = new HashMap<>();
+		alias = new HashMap<String, String>();
 	}
 	
 	public Alias(String defaultValue){
-		alias = new HashMap<>();
+		alias = new HashMap<String, String>();
 		alias.put("<>", defaultValue);
 	}
 	

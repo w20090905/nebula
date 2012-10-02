@@ -76,7 +76,7 @@ public class Type {
 		}
 		this.name = name;
 		this.fields = new ArrayList<Field>();
-		references = new CopyOnWriteArrayList<>();
+		references = new CopyOnWriteArrayList<Field>();
 	}
 
 	public String getName() {

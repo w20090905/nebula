@@ -32,7 +32,7 @@ class BootstrapTypeLoader extends TypeLoader {
 		Type decimal = new Type(this, "Real", number, "Real");
 		Type attr = new Type(this, "Attr", badicType);
 
-		List<Type> typeList = new ArrayList<>();
+		List<Type> typeList = new ArrayList<Type>();
 
 		typeList.add(typeRoot);
 		typeList.add(badicType);

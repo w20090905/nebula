@@ -36,7 +36,7 @@ public class EntityStoreDB extends EntityStore {
 	public void apply(Entity newV) {
 		EditableEntity newEntity = (EditableEntity) newV;
 		if (newEntity.source != null) {
-			Map<String, Object> newData = new HashMap<>(newEntity.data);
+			Map<String, Object> newData = new HashMap<String, Object>(newEntity.data);
 			newData.putAll(newEntity.newData);
 
 			lock.lock();
@@ -53,7 +53,7 @@ public class EntityStoreDB extends EntityStore {
 			}
 			lock.unlock();
 		} else {
-			Map<String, Object> newData = new HashMap<>(newEntity.newData);
+			Map<String, Object> newData = new HashMap<String, Object>(newEntity.newData);
 
 			String id = "";
 			for (Field f : type.getFields()) {

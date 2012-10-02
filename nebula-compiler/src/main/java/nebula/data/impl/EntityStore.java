@@ -24,7 +24,7 @@ public class EntityStore implements Store<Entity> {
 	EntityStore(Persistence<Entity> persistence, Type type) {
 		this.persistence = persistence;
 		this.type = type;
-		datas = new CopyOnWriteArrayList<>();
+		datas = new CopyOnWriteArrayList<Entity>();
 		quickIndex = new HashMap<String, Entity>();
 	}
 
@@ -67,7 +67,7 @@ public class EntityStore implements Store<Entity> {
 	public void apply(Entity newV) {
 		EditableEntity newEntity = (EditableEntity)newV;
 		if (newEntity.source != null) {
-			Map<String, Object> newData = new HashMap<>(newEntity.data);
+			Map<String, Object> newData = new HashMap<String, Object>(newEntity.data);
 			newData.putAll(newEntity.newData);
 
 			lock.lock();
@@ -80,7 +80,7 @@ public class EntityStore implements Store<Entity> {
 			}
 			lock.unlock();
 		} else {
-			Map<String, Object> newData = new HashMap<>(newEntity.newData);
+			Map<String, Object> newData = new HashMap<String, Object>(newEntity.newData);
 			
 			String id = "";
 			for (Field f : type.getFields()) {

@@ -42,8 +42,8 @@ public class BasicResourceContainer extends ResourceContainer {
 	@Inject
 	public BasicResourceContainer(ResourceEngine engine, Configurable<BasicResourceContainer> conf) {
 		super(engine);
-		patterns = new CopyOnWriteArrayList<>();
-		engines = new CopyOnWriteArrayList<>();
+		patterns = new CopyOnWriteArrayList<Pattern>();
+		engines = new CopyOnWriteArrayList<ResourceEngine>();
 		conf.configure(this);
 		redirectToLoginResource = new RedirectResouce();
 	}

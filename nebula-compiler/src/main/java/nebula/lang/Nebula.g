@@ -21,8 +21,8 @@ options {
 }
 
 @members {
-    Map<String,Type> typesMap = new HashMap<>();
-    List<Type> types = new ArrayList<>();
+    Map<String,Type> typesMap = new HashMap<String,Type>();
+    List<Type> types = new ArrayList<Type>();
     
     TypeLoader loader;
     public NebulaParser(TokenStream input,TypeLoader loader) {

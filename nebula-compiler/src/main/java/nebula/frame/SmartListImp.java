@@ -14,8 +14,8 @@ public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartLis
 
 	private static final long serialVersionUID = 8013096094469473667L;
 
-	final Map<String, E> indexes = new HashMap<>();
-	final Map<String, Integer> indexI = new HashMap<>();
+	final Map<String, E> indexes = new HashMap<String, E>();
+	final Map<String, Integer> indexI = new HashMap<String, Integer>();
 	final Identifiable<E> identifier;
 
 	private final String name;
@@ -107,7 +107,7 @@ public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartLis
 
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
-		List<E> news = new ArrayList<>();
+		List<E> news = new ArrayList<E>();
 		for (E e : c) {
 			int i = indexOfByKey(e);
 			if (i >= 0) {

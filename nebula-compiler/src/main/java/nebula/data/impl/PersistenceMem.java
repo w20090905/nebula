@@ -72,7 +72,7 @@ public class PersistenceMem implements Persistence<Entity> {
 		// TODO Auto-generated method stub
 	}
 
-	CopyOnWriteArrayList<EditableEntity> changes = new CopyOnWriteArrayList<>();
+	CopyOnWriteArrayList<EditableEntity> changes = new CopyOnWriteArrayList<EditableEntity>();
 
 	@Override
 	public void markChanged(Entity v) {

@@ -244,7 +244,7 @@ public class DBExec {
 	}
 
 	Map<String, Object> toEntity(ResultSet result) throws SQLException {
-		Map<String, Object> v = new HashMap<>();
+		Map<String, Object> v = new HashMap<String, Object>();
 
 		int pos = 0;
 		for (DbColumn c : columns) {

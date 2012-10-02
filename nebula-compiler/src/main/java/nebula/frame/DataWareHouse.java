@@ -34,7 +34,7 @@ public class DataWareHouse extends SmartListImp<SmartList<?>> {
 
 		Type type = this.typeLoader.findType(key);
 		if (type != null) {
-			this.add(new SmartListImp<>(key, new Identifiable<Map>() {
+			this.add(new SmartListImp<Map>(key, new Identifiable<Map>() {
 
 				@Override
 				public String getId(Map data) {
