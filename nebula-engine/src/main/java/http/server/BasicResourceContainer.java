@@ -22,7 +22,6 @@ import org.simpleframework.http.Address;
 import org.simpleframework.http.Cookie;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
-import org.simpleframework.http.parse.AddressParser;
 import org.simpleframework.http.resource.Resource;
 import org.simpleframework.http.resource.ResourceContainer;
 import org.simpleframework.http.resource.ResourceEngine;
@@ -58,9 +57,7 @@ public class BasicResourceContainer extends ResourceContainer {
 	@Override
 	public void handle(Request req, Response resp) {
 		try {
-
-			Session session = req.getSession();
-			Entity currentUser = (Entity) session.get("#currentUser");
+			Entity currentUser = (Entity) req.getSession().get("#currentUser");
 			if (currentUser == null) {
 				if(req.getAddress().getPath().getPath().equals("/loginzice.html")){
 					
