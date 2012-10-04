@@ -47,7 +47,7 @@
 					<#if field.key && rF.key><#rt>
 		<div> <input  type="text" ng-model="data.${field.name}${rF.name}" ng-readonly="update"/></div>
 					<#elseif rF.key><#rt>
-		<div> <input  type="text" ng-model="data.${field.name}${rF.name}"/></div>
+		<div> <input  type="text" ng-model="data.${field.name}${rF.name}" x-popup="/d/${field.type.name}/" x-params="{data.${field.name}${rF.name}:${rF.name}}" x-returns="{data.${field.name}${rF.name}:${rF.name}}"/></div>
 					<#elseif rF.core>
 		<input  type="hidden" ng-model="data.${field.name}${rF.name}"/>{{data.${field.name}${rF.name}}}
     				</#if>

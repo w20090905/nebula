@@ -469,7 +469,7 @@ var neFromListDirective = [
 			var params = simpleMap(attrs.params);
 			var returns = simpleMap(attrs.returns);
 			
-			element.after('<span>::</span>').next().click(function(){
+			element.after('<a>::</a>').next().click(function(){
 				var inparams = {};
 				angular.forEach(params,function(that,me){
 					putVal(inparams,that,getVal(scope,me));
@@ -485,7 +485,7 @@ var neFromListDirective = [
 			
 			function preparePopupWin(){
 				if(jQuery("#popup-window").length<1){
-					jQuery('body').append('<div id="popup-window"><img src="css\/close_pop.png" class="btn_close" title="Close Window" alt="Close" />' 
+					jQuery('body').append('<div id="popup-window"><a class="close"><img src="css\/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>' 
 									+ '<div id="popup-content"></div>'
 									+ '</div>');
 				}
@@ -532,7 +532,7 @@ var neFromListDirective = [
 						'margin-left' : -marginLeft
 					});
 					
-					$http.get(template, {cache : $templateCache}).success(function(response) {
+					$http.get(template).success(function(response) {
 						if (thisChangeId === changeCounter) {							
 							popupwinBody.html(response);
 							
@@ -580,7 +580,7 @@ var neFromListDirective = [
 				$('#mask').fadeIn(300);
 				
 				// When clicking on the button close or the mask layer the popup closed
-				$('img.btn_close, #mask').live('click', function() { 
+				$('a.close, #mask').live('click', function() { 
 					$('#mask , #popup-window').fadeOut(300 , function() {
 						$('#mask').remove();  
 					});
