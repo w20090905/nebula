@@ -5,7 +5,7 @@
 var nebulaModule = angular.module('nebula', ['nebula.filters', 'nebula.services', 'nebula.directives','ngResource']);
 
 nebulaModule.config(['$routeProvider', function($routeProvider) {
-	$routeProvider.when('/c/:userid', {template: 'angularjs/crmmain.html', controller: CrmMainListCtrl});
+	$routeProvider.when('/c/:userid', {template: 'angularjs/crmmain.html', controller: ContactRecordsCtrl});
     $routeProvider.otherwise({redirectTo: '/main'});
 }]);
 

@@ -29,7 +29,6 @@ div.content pre{
 }
 
 div.info {
-	text-align:right;
 	font-size:-1;
 	width: 98%;
 }
@@ -43,25 +42,80 @@ textarea {
 	width: 600px;
 	height: 4em;
 }
+
+ul.select {
+	width: 60%;
+	list-style:none;
+}
+/*
+
+	clear:left;
+	float:left;
+ul.select li {
+	list-style:none;
+	margin: 0px;
+	padding: 0;
+	background-color: #ddd;
+}
+ul.select li:first-child a{
+	border-left: solid 1px #ddd;
+}	
+ul.select li a {
+	float:left;
+	margin: 0px;
+	padding: 11px 10px;
+	text-align:center;
+	color: black;
+	background-color: ghostWhite;
+	border-right: solid 1px #DDD;
+	text-decoration: none;
+}
+ul.select li a:hover {
+	background:#369;
+	color:#fff;
+}
+ul.select li a.active,
+ul.select li a.active:hover {
+	color:#fff;
+	background:#000;
+	font-weight:bold;
+}
+ul.select li a span {
+	display:block;
+}
+*/
+
+div.right{
+	float: right;
+}
 -->
 </style>
 
 <h2>ContactRecord</h2>
-<div class="body" x-ng-controller="ContactRecordsCtrl">
+
+
+<div class="body">
+	<div>
+		<select x-ng-model="Company" x-ng-options="c.Name for c in companyList"></select><br>
+	</div>
+	<div>
+		<select x-ng-model="User" x-ng-options="c.Name for c in userList"></select><br>
+	</div>
+	
 	<form x-ng-submit="addContactRecord()">
-		<textarea x-ng-model="contactRecordText" cols="120" rows="4" placeholder="add new contactRecord here"></textarea>
+		<textarea x-ng-model="Content" cols="120" rows="4" placeholder="add new contactRecord here"></textarea>
 		<input class="btn-primary" type="submit" value="add">
 	</form>
 	<span>{{remaining()}} of {{contactRecords.length}} remaining</span> [ <a href="" x-ng-click="archive()">archive</a> ]
 	<ul class="unstyled contacts ">
-		<li x-ng-repeat="contactRecord in contactRecords | orderBy:'-lastUpdated'">
+		<li x-ng-repeat="contactRecord in contactRecords | orderBy:'-LastUpdated'">
 		<div class="logo">
-			<input type="checkbox" x-ng-model="contactRecord.done">
+			{{contactRecord.UserName}}
 		</div>
 		<div class="content done-{{contactRecord.done}}">
-		<pre>{{contactRecord.text}}</pre>
+		<pre>{{contactRecord.Content}}</pre>
 		</div>
-		<div class="info">{{contactRecord.lastUpdated}}</div>
+		<div class="info">{{contactRecord.CompanyName}}<div class="right">{{contactRecord.LastUpdated}}</div></div>
 		</li>
 	</ul>
 </div>

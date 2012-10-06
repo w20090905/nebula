@@ -56,32 +56,57 @@ function CrmMainListCtrl($scope, $route, $resource, $routeParams) {
 	$scope.datalist = DataResource.query({}, $scope.showme, $scope.showme);
 
 }
-function ContactRecordsCtrl($scope) {
+
+
+function ContactRecordsCtrl($scope,$resource) {
+
+	$scope.companyList = $resource('d/Company/', {}, {
+		query : {
+			method : 'GET',
+			params : {},
+			isArray : true
+		}
+	}).query();
+
+	$scope.userList = $resource('d/User/', {}, {
+		query : {
+			method : 'GET',
+			params : {},
+			isArray : true
+		}
+	}).query();
+	
 	$scope.contactRecords = [ {
-		text : 'learn angular',
-		done : true,
-		lastUpdated : new Date()
+		CompanyName: "test",
+		UserName: "test",
+		Content : 'learn angular',
+		Done : true,
+		LastUpdated : new Date()
 	}, {
-		text : 'build an angular app',
-		done : false,
-		lastUpdated : new Date()
+		CompanyName: "test",
+		UserName: "test",
+		Content : 'build an angular app',
+		Done : false,
+		LastUpdated : new Date()
 	} ];
 
 	$scope.addContactRecord = function() {
-		if ($scope.contactRecordText != '') {
+		if ($scope.Content != '') {
 			$scope.contactRecords.push({
-				text : $scope.contactRecordText,
-				done : false,
-				lastUpdated : new Date()
+				CompanyName: $scope.Company.Name,
+				UserName: $scope.User.Name,
+				Content : $scope.Content,
+				Done : false,
+				LastUpdated : new Date()
 			});
-			$scope.contactRecordText = '';
+			$scope.Content = '';
 		}
 	};
 
 	$scope.remaining = function() {
 		var count = 0;
 		angular.forEach($scope.contactRecords, function(contactRecord) {
-			count += contactRecord.done ? 0 : 1;
+			count += contactRecord.Done ? 0 : 1;
 		});
 		return count;
 	};
@@ -90,7 +115,7 @@ function ContactRecordsCtrl($scope) {
 		var oldContactRecords = $scope.contactRecords;
 		$scope.contactRecords = [];
 		angular.forEach(oldContactRecords, function(contactRecord) {
-			if (!contactRecord.done)
+			if (!contactRecord.Done)
 				$scope.contactRecords.push(contactRecord);
 		});
 	};
