@@ -46,23 +46,24 @@ public class ConfigModule extends AbstractModule {
 	static final String DB_USERNAME = "db_username";
 	static final String DB_PASSWORD = "db_password";
 
+	static final String PATH_OF_ROOT = "htdocs";
+
 	@Override
 	protected void configure() {
 		String driverclass = "org.apache.derby.jdbc.EmbeddedDriver";
 		String dburl = "jdbc:derby:db/nebula;create=true";
 		String username = "user";
 		String password = "password";
-		
-		
+
 		try {
 			File root = null;
-			URL url = this.getClass().getResource("/htdocs/WEB-INF/web.xml");
+			URL url = this.getClass().getResource("/"+ PATH_OF_ROOT + "/WEB-INF/web.xml");
 			if (url != null) {
 				root = new File(url.getPath()).getParentFile().getParentFile();
 			}
 
 			if (root == null) {
-				root = new File("htdocs");
+				root = new File(PATH_OF_ROOT);
 			}
 
 			if (log.isTraceEnabled()) {
@@ -70,24 +71,27 @@ public class ConfigModule extends AbstractModule {
 			}
 
 			if (!root.exists()) {
-				throw new RuntimeException("cannot find htdocs");
+				throw new RuntimeException("cannot find " + PATH_OF_ROOT);
 			}
 
-			EditableTypeLoader typeLoader = new EditableTypeLoader(new SystemTypeLoader(), new File(root, "WEB-INF/nebula"));
+			EditableTypeLoader typeLoader = new EditableTypeLoader(new SystemTypeLoader(), new File(root,
+					"WEB-INF/nebula"));
 
 			this.bind(EditableTypeLoader.class).toInstance(typeLoader);
 			this.bind(TypeLoader.class).toInstance(typeLoader);
 
-			Loader loader = new MultiLoader(new ClassPathLoader(this.getClass().getClassLoader(), "htdocs"),
+			Loader loader = new MultiLoader(new ClassPathLoader(this.getClass().getClassLoader(), PATH_OF_ROOT),
 					new FileSystemLoader(root));
 			this.bind(Loader.class).toInstance(loader);
 
 			this.bind(DataWareHouse.class);
-			
-			this.bind(DbConfiguration.class).toInstance(DbConfiguration.getEngine(driverclass, dburl, username, password));
-						
-			this.bind(new TypeLiteral<Persistence<Entity>>(){}).to(PersistenceDB.class);
-			
+
+			this.bind(DbConfiguration.class).toInstance(
+					DbConfiguration.getEngine(driverclass, dburl, username, password));
+
+			this.bind(new TypeLiteral<Persistence<Entity>>() {
+			}).to(PersistenceDB.class);
+
 			Configuration freemarkerConfiguration = new Configuration();
 			freemarkerConfiguration.setTemplateUpdateDelay(1);
 			freemarkerConfiguration.setDirectoryForTemplateLoading(new File(root, "template"));
@@ -138,15 +142,13 @@ public class ConfigModule extends AbstractModule {
 				public void setEngine(TemplateResouceEngine engine) {
 					this.templateResouceEngine = engine;
 				}
-				
+
 				@SuppressWarnings("unused")
 				@Inject
 				public void setEngine(PrepareResouceEngine engine) {
 					this.prepareResouceEngine = engine;
 				}
-				
-				
-				
+
 				@Override
 				public void configure(BasicResourceContainer site) {
 					site.register("*", staticEngine);
