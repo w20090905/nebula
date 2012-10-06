@@ -1,0 +1,25 @@
+[{
+        "href": "#/d/Type/",
+        "label": "Type"
+},{
+        "href": "#/d/Person/",
+        "label": "Person"
+},{
+        "href": "#/d/Company/",
+        "label": "Company"
+},{
+        "href": "#/d/Type/Product",
+        "label": "Product"
+},{
+        "href": "#/t/angularjs/Type-list.html",
+        "label": "Type-list.html"
+},{
+        "href": "#/t/angularjs/Type-detail.html",
+        "label": "Type-detail.html"
+},{
+        "href": "#/t/template/angularjs-detail.html.ftl",
+        "label": "angularjs-detail.html.ftl"
+},{
+        "href": "#/t/template/angularjs-list.html.ftl",
+        "label": "angularjs-list.html.ftl"
+}]

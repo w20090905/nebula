@@ -46,7 +46,7 @@ public class ConfigModule extends AbstractModule {
 	static final String DB_USERNAME = "db_username";
 	static final String DB_PASSWORD = "db_password";
 
-	static final String PATH_OF_ROOT = "htdocs";
+	static final String PATH_OF_ROOT = "htdocs2";
 
 	@Override
 	protected void configure() {

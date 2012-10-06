@@ -1,0 +1,238 @@
+body {
+	margin:0;
+	padding:0;
+	border:0;			/* This removes the border around the viewport in old versions of IE */
+	width:100%;
+	background:#fff;
+	min-width:600px;    	/* Minimum width of layout - remove line if not required */
+					/* The min-width property does not work in old versions of Internet Explorer */
+	font-size:90%;
+}
+a {
+	color: #white;
+}
+a:hover {
+	color:#fff;
+	background:#369;
+	text-decoration:none;
+}
+h1, h2, h3 {
+	margin:.8em 0 .2em 0;
+	padding:0;
+}
+p {
+	margin:.4em 0 .8em 0;
+	padding:0;
+}
+img {
+	margin:10px 0 5px;
+}
+#ads img {
+	display:block;
+	padding-top:10px;
+}
+
+/* Header styles */
+#header {
+	clear:both;
+	float:left;
+	width: 100%;
+	color: ghostwhite;
+}
+#header {
+	box-shadow: 0px 1px 3px 0px #ddd;
+	background-color: #777;
+	height: 70px;
+}
+#header h1, #header h2 {
+	padding:.4em 15px 0 15px;
+	margin: 0px 0px 0px 0px;
+}
+#header h2{
+	display: none;
+}
+
+#header ul {
+	clear:left;
+	float:left;
+	width: 60%;
+	list-style:none;
+	margin: -30px 100px 0 140px;
+	-webkit-border-radius: 6px;  -moz-border-radius: 4px;  
+	border-radius: 6px;
+	background-color: ghostwhite;
+	padding: 0px 1em;
+	vertical-align: middle;
+	-webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);  
+	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+}
+#header ul li {
+	list-style:none;
+	margin: 0px;
+	padding: 0;
+	background-color: #ddd;
+}
+
+#header ul li:first-child a{
+	border-left: solid 1px #ddd;
+}	
+#header ul li a {
+	float:left;
+	margin: 0px;
+	padding: 11px 10px;
+	text-align:center;
+	color: black;
+	background-color: ghostWhite;
+	border-right: solid 1px #DDD;
+	text-decoration: none;
+}
+#header ul li a:hover {
+	background:#369;
+	color:#fff;
+}
+#header ul li a.active,
+#header ul li a.active:hover {
+	color:#fff;
+	background:#000;
+	font-weight:bold;
+}
+#header ul li a span {
+	display:block;
+}
+
+#options {
+	display: block;
+	position: absolute;
+	right: 0px;
+}
+
+.col2 ul {
+	width: 95%;
+	margin: 20px  0 0 8%;
+	padding:0;
+}
+.col2 ul li {
+	display:block;
+	margin:0;
+	padding:0;
+}
+.col2 ul li a {
+	display:block;
+	margin: 2px;
+	padding: 6px 8px;
+	text-align: left;
+	background: #DDD;
+	color:#000;
+	text-decoration:none;
+	width: 88%;
+	overflow-x: hidden;  -webkit-border-radius: 4px;  -moz-border-radius: 4px;  border-radius: 4px;  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.col2 ul li a:hover {
+	background:#369;
+	color:#fff;
+}
+.col2 ul li.selected{
+	background: url("./menu-arrow.png") no-repeat 0px -6px;
+}
+.col2 ul li a.active,
+.col2 ul li a.active:hover {
+	color:#fff;
+	background:#000;
+	font-weight:bold;
+}
+.col2 ul li a span {
+	display:block;
+}
+/* 'widths' sub menu */
+#layoutdims {
+	clear:both;
+	position: absolute;
+	right: 0;
+	margin-top: 2px;
+}
+/* column container */
+.colmask {
+	position:relative;	/* This fixes the IE7 overflow hidden bug */
+	clear:both;
+	float:left;
+	width:100%;			/* width of whole page */
+	overflow: hidden;		/* This chops off any overhanging divs */
+;
+}
+/* common column settings */
+.colright,
+.colmid,
+.colleft {
+	float:left;
+	width:100%;
+	position:relative;
+}
+.col1,
+.col2,
+.col3 {
+	float:left;
+	position:relative;
+	padding:0 0 1em 0;
+	overflow:hidden;
+	min-height: 900px;
+}
+/* 2 Column (left menu) settings */
+.leftmenu {		/* right column background colour */
+;
+	
+}
+.leftmenu .colleft {
+	right: 80%;			/* right column width */
+	background: #EEE;	/* left column background colour */
+	box-shadow: 1px 0px 3px 0px #ddd;
+}
+.leftmenu .col1 {
+	width: 78%;			/* right column content width */
+	left: 100%;			/* 100% plus left column left padding */
+;
+}
+.leftmenu .col2 {
+	width: 20%;			/* left column content width (column width minus left and right padding) */
+	left: 1%;			/* (right column left and right padding) plus (left column left padding) */
+}
+
+#main table.table{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	background: #fff;
+	margin: 10px;
+	/*width: 480px;*/
+	border-collapse: collapse;
+	text-align: left;
+}
+#main table.table th
+{
+	font-size: 14px;
+	font-weight: normal;
+	color: #039;
+	padding: 10px 8px;
+	border-bottom: 2px solid #6678b1;
+}
+#main table.table td
+{
+	border-bottom: 1px solid #ccc;
+	color: #669;
+	padding: 6px 8px;
+}
+#main table.table tbody tr:hover td
+{
+	color: #009;
+	background-color: #eeeeee;
+}
+
+/* Footer styles */
+#footer {
+	clear:both;
+	float:left;
+	width:100%;
+	border-top:1px solid #000;
+}
+#footer p {
+	padding:10px;
+	margin:0;
+}
