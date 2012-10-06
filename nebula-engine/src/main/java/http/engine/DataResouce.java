@@ -61,4 +61,20 @@ public class DataResouce extends BasicResouce {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	@Override
+	protected void delete(Request req) {
+		try {
+			Entity data = datas.load(key).editable();
+			if (data != null) {
+				json.readFrom(data, req.getInputStream());
+				datas.flush();
+			} else {
+				throw new RuntimeException("Cann't find object " + key);
+			}
+		} catch (IOException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		}
+	}
 }

@@ -68,7 +68,7 @@ function ContactRecordsCtrl($scope,$resource) {
 		}
 	}).query();
 
-	$scope.userList = $resource('d/User/', {}, {
+	$scope.PersonList = $resource('d/Person/', {}, {
 		query : {
 			method : 'GET',
 			params : {},
@@ -76,31 +76,65 @@ function ContactRecordsCtrl($scope,$resource) {
 		}
 	}).query();
 	
-	$scope.contactRecords = [ {
-		CompanyName: "test",
-		UserName: "test",
-		Content : 'learn angular',
-		Done : true,
-		LastUpdated : new Date()
-	}, {
-		CompanyName: "test",
-		UserName: "test",
-		Content : 'build an angular app',
-		Done : false,
-		LastUpdated : new Date()
-	} ];
+
+	var DataResource = $resource('d/ContactRecord/', {}, {
+		query : {
+			method : 'GET',
+			params : {},
+			isArray : true
+		}
+	});
+	
+
+	
+	Date.prototype.format = function(format)
+	{
+		var o = {
+			"M+" : this.getMonth() + 1, // month
+			"d+" : this.getDate(), // day
+			"h+" : this.getHours(), // hour
+			"m+" : this.getMinutes(), // minute
+			"s+" : this.getSeconds(), // second
+			"q+" : Math.floor((this.getMonth() + 3) / 3), // quarter
+			"S" : this.getMilliseconds()
+		// millisecond
+		}
+
+		if (/(y+)/.test(format))
+		{
+			format = format.replace(RegExp.$1, (this.getFullYear() + "")
+					.substr(4 - RegExp.$1.length));
+		}
+		for ( var k in o)
+		{
+			if (new RegExp("(" + k + ")").test(format))
+			{
+				format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k]
+						: ("00" + o[k]).substr(("" + o[k]).length));
+
+			}
+		}
+		return format;
+	}
+
+	
+	$scope.contactRecords= DataResource.query();
 
 	$scope.addContactRecord = function() {
-		if ($scope.Content != '') {
-			$scope.contactRecords.push({
-				CompanyName: $scope.Company.Name,
-				UserName: $scope.User.Name,
-				Content : $scope.Content,
-				Done : false,
-				LastUpdated : new Date()
-			});
-			$scope.Content = '';
-		}
+		$scope.newRecord = {
+			AutoID:new Date().format("yyyyMMddhhmmssS"),
+			CompanyName: $scope.Company.Name,
+			PersonName: $scope.Person.Name,
+			Content : $scope.Content,
+			Done : false,
+			LastUpdated : new Date().format("yyyy-MM-dd hh:mm:ss.S")
+		};
+		
+		$scope.newRecord.$save = DataResource.prototype.$save;
+		$scope.newRecord.$save();
+		
+		$scope.contactRecords.push($scope.newRecord);
+		$scope.Content = '';
 	};
 
 	$scope.remaining = function() {
@@ -119,6 +153,13 @@ function ContactRecordsCtrl($scope,$resource) {
 				$scope.contactRecords.push(contactRecord);
 		});
 	};
+	
+	$scope.remove = function(AutoID){
+		var Record = $resource('d/ContactRecord/:AutoID', {AutoID:'@AutoID'});
+	    var record = Record.get({AutoID:AutoID}, function() {
+	    	 record.$remove();
+	    });
+	}
 }
 
 function EntityListCtrl($scope,$route,$resource,$routeParams){

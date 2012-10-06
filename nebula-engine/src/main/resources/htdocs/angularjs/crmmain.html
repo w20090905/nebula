@@ -99,7 +99,7 @@ div.right{
 		<select x-ng-model="Company" x-ng-options="c.Name for c in companyList"></select><br>
 	</div>
 	<div>
-		<select x-ng-model="User" x-ng-options="c.Name for c in userList"></select><br>
+		<select x-ng-model="Person" x-ng-options="c.Name for c in PersonList"></select><br>
 	</div>
 	
 	<form x-ng-submit="addContactRecord()">
@@ -110,12 +110,12 @@ div.right{
 	<ul class="unstyled contacts ">
 		<li x-ng-repeat="contactRecord in contactRecords | orderBy:'-LastUpdated'">
 		<div class="logo">
-			{{contactRecord.UserName}}
+			{{contactRecord.PersonName}}
 		</div>
-		<div class="content done-{{contactRecord.done}}">
+		<div class="content done-{{contactRecord.Done}}">
 		<pre>{{contactRecord.Content}}</pre>
 		</div>
-		<div class="info">{{contactRecord.CompanyName}}<div class="right">{{contactRecord.LastUpdated}}</div></div>
+		<div class="info">{{contactRecord.CompanyName}}<div class="right">{{contactRecord.LastUpdated}} &nbsp;</div></div>
 		</li>
 	</ul>
 </div>

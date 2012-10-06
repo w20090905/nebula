@@ -25,6 +25,10 @@ public abstract class BasicResouce implements Resource {
 	protected void post(Request req) {
 		throw new UnsupportedOperationException("cann't support " + req.getMethod());
 	}
+	
+	protected void delete(Request req) {
+		throw new UnsupportedOperationException("cann't support " + req.getMethod());
+	}
 
 	@Override
 	public void handle(Request req, Response resp) {
@@ -71,6 +75,17 @@ public abstract class BasicResouce implements Resource {
 				resp.close();
 			} else if ("POST".equals(method)) {
 				this.post(req);
+
+				// normal parse
+				resp.setCode(200);
+				resp.set("Cache-Control", "max-age=0");
+				resp.set("Content-Language", "en-US");
+				resp.set("Content-Type", "text/html");
+				resp.set("Content-Length", 0);
+				resp.close();
+
+			} else if ("DELETE".equals(method)) {
+				this.delete(req);
 
 				// normal parse
 				resp.setCode(200);
