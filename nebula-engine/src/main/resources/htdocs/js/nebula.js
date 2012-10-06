@@ -15,6 +15,7 @@ nebulaModule.config(['$routeProvider', function($routeProvider) {
     $routeProvider.otherwise({redirectTo: '/view1'});
 }]);
 
+/*
 nebulaModule.directive('name', function() {
 	return {
 		require : 'ngModel',
@@ -44,3 +45,4 @@ nebulaModule.run(function($rootScope, $location,  $interpolate) {
 		}
 	});
 });
+*/

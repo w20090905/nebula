@@ -95,16 +95,11 @@ div.right{
 
 
 <div class="body">
-	<div>
-		<select x-ng-model="Company" x-ng-options="c.Name for c in companyList"></select><br>
-	</div>
-	<div>
-		<select x-ng-model="Person" x-ng-options="c.Name for c in PersonList"></select><br>
-	</div>
-	
 	<form x-ng-submit="addContactRecord()">
+		<select x-ng-model="Company" x-ng-options="c.Name for c in companyList"></select><br>
+		<select x-ng-model="Person" x-ng-options="c.Name for c in PersonList"></select><br>
 		<textarea x-ng-model="Content" cols="120" rows="4" placeholder="add new contactRecord here"></textarea>
-		<input class="btn-primary" type="submit" value="add">
+		<input class="btn-primary" type="submit" value="add" required="required">
 	</form>
 	<span>{{remaining()}} of {{contactRecords.length}} remaining</span> [ <a href="" x-ng-click="archive()">archive</a> ]
 	<ul class="unstyled contacts ">
