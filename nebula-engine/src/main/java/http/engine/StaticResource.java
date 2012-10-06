@@ -47,8 +47,13 @@ public class StaticResource implements Resource {
             in.close();
             out.close();
 		} catch (IOException e) {
+			log.error(req.getAddress());
 			log.error(e);
 			throw new RuntimeException(e);
+		} catch (NullPointerException e) {
+			log.error(req.getAddress());
+			log.error(e);
+			throw e;
 		}
 	}    
 
