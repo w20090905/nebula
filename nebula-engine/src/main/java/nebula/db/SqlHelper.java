@@ -140,14 +140,32 @@ public class SqlHelper {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("CREATE TABLE ").append(this.tableName).append("(");
-
+		
+		int cnt = 0;
+		
 		for (DbColumn column : this.columns) {
-			if (column.key) {
+			if(column.key)cnt++;
+		}
+		
+		
+		for (DbColumn column : this.columns) {
+			if (column.key && cnt==1) {
 				sb.append(column.columnName).append(" varchar(40) PRIMARY KEY").append(",");
 			} else {
 				sb.append(column.columnName).append(" varchar(40)").append(",");
 			}
 		}
+		if(cnt>1){
+			sb.append("PRIMARY KEY ( ");
+			for (DbColumn column : this.columns) {
+				if(column.key){
+					sb.append(column.columnName).append(",");					
+				}
+			}
+			sb.setCharAt(sb.length()-1,')');
+			sb.append(',');
+		}
+		
 		sb.append("TIMESTAMP_").append(" TIMESTAMP");
 		sb.append(")");
 

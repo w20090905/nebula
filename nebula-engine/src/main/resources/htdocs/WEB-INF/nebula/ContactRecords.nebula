@@ -1,0 +1,6 @@
+type ContactRecords {
+	!AutoID;
+	Company;
+	Person;
+	Content			Name;
+};

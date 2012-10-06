@@ -1,12 +1,5 @@
 type Product {
 	!Name;
 	Description;
-	UPC;
-	SKU;
-	UOM;
 	Type Attr;
-	Classification Attr;
-	Volume;
-	Weight;
-	
 };

@@ -1,4 +1,0 @@
-type Calendar{
-  !Name;
-  Description;
-};

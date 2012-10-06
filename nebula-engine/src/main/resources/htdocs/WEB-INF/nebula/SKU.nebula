@@ -1,3 +1,0 @@
-type SKU extends Name {
-	@MaxLength = 120;
-};

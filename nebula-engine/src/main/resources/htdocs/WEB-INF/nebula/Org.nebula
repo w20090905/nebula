@@ -1,7 +1,0 @@
-type Org{
-  !Name;
-  Description;
-  Type Attr;
-  Stdandard-Precision;
-  Costing-Precision;
-};

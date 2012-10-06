@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css" />
 	<script src="lib/angular/angular.js"></script>
 	<script src="lib/angular/angular-resource.js"></script>
-	<script src="js/simple.js"></script>
+	<script src="js/nebula.js"></script>
 	<script src="js/services.js"></script>
 	<script src="js/controllers.js"></script>
 	<script src="js/filters.js"></script>
@@ -56,17 +56,37 @@
 		</div>
 		<h1>Nebula</h1>
 		<h2>Demo System</h2>
+		<ul>
+			<li><a href="index.html">3 Column </a></li>
+			<li><a href="index.html">3 Column </a></li>
+			<li><a href="index.html" class="active">2 Column </a></li>
+			<li><a href="index.html">2 Column </a></li>
+			<li><a href="index.html">2 Column </a></li>
+			<li><a href="index.html">1 Column </a></li>
+			<li><a href="index.html">Stacked</a></li>
+		</ul>
 		<div id="layoutdims"><a
 				href="blog/ultimate-2-column-left-menu-pixels.htm">widths</a>
 			| <a href="blog/ultimate-2-column-left-menu-ems.htm">Em widths</a>
 		</div>
 	</div>
 	<div class="colmask leftmenu">	
-			<div id="main" ne-view>
+		<div class="colleft">
+			<div id="main" class="col1" ne-view>
 				<!-- Column 1 start -->
 				Main
 				<!-- Column 1 end -->
 			</div>
+			<div id="leftMenu" class="col2" x-ng-controller="MenuCtrl">
+				<!-- Column 2 start -->
+				<ul>
+					<li x-ng-repeat="data in datalist">						
+						<a x-ng-href="{{data.href}}">{{data.label}}</a>
+					</li>
+				</ul>
+				<!-- Column 2 end -->
+			</div>
+		</div>
 	</div>
 	<div id="footer">
 		<p>

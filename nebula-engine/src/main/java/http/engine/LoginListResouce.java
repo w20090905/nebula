@@ -46,11 +46,18 @@ public class LoginListResouce implements Resource {
 				resp.set("Content-Language", "en-US");
 				resp.set("Content-Type", "text/html");
 				resp.set("Content-Length", 0);
+				
+				
+				if(resp.getCode()==200){
+					resp.setCode(303);
+					resp.set("Location","/index.html#/c/" +  ((Entity)req.getSession().get("#currentUser")).getID());					
+				}
+				
 				resp.close();
 			} else {
 				throw new RuntimeException("Unsupport method " + method);
 			}
-		} catch (IOException e) {
+		} catch (IOException | LeaseException e) {
 			log.error(e);
 			throw new RuntimeException(e);
 		}
@@ -71,6 +78,7 @@ public class LoginListResouce implements Resource {
 
 			resp.setCode(200);
 			req.getSession().put("#currentUser", user);
+			
 			//
 			// Entity data = datas.createNew();
 			// InputStream in = req.getInputStream();
@@ -81,7 +89,7 @@ public class LoginListResouce implements Resource {
 			//
 			//
 			// datas.add(data);
-			datas.flush();
+			//datas.flush();
 
 		} catch (IOException e) {
 			log.error(e);

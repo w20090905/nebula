@@ -1,2 +1,0 @@
-type Price extends Real {
-  };

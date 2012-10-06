@@ -44,6 +44,58 @@ function MenuCtrl($scope,$resource){
 }
 
 
+function CrmMainListCtrl($scope, $route, $resource, $routeParams) {
+	$scope.typename = $routeParams.typename;
+	var DataResource = $resource('d/Contact/', $routeParams, {
+		query : {
+			method : 'GET',
+			params : {},
+			isArray : true
+		}
+	});
+	$scope.datalist = DataResource.query({}, $scope.showme, $scope.showme);
+
+}
+function ContactRecordsCtrl($scope) {
+	$scope.contactRecords = [ {
+		text : 'learn angular',
+		done : true,
+		lastUpdated : new Date()
+	}, {
+		text : 'build an angular app',
+		done : false,
+		lastUpdated : new Date()
+	} ];
+
+	$scope.addContactRecord = function() {
+		if ($scope.contactRecordText != '') {
+			$scope.contactRecords.push({
+				text : $scope.contactRecordText,
+				done : false,
+				lastUpdated : new Date()
+			});
+			$scope.contactRecordText = '';
+		}
+	};
+
+	$scope.remaining = function() {
+		var count = 0;
+		angular.forEach($scope.contactRecords, function(contactRecord) {
+			count += contactRecord.done ? 0 : 1;
+		});
+		return count;
+	};
+
+	$scope.archive = function() {
+		var oldContactRecords = $scope.contactRecords;
+		$scope.contactRecords = [];
+		angular.forEach(oldContactRecords, function(contactRecord) {
+			if (!contactRecord.done)
+				$scope.contactRecords.push(contactRecord);
+		});
+	};
+}
+
 function EntityListCtrl($scope,$route,$resource,$routeParams){
 	$scope.typename = $routeParams.typename;	
 	var DataResource = $resource('d/:typename/', $routeParams, {
