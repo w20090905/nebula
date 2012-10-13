@@ -1,10 +1,9 @@
-<h1>${type.name} List</h1>
-<div>
-<input type="text" ng-model="query" class="search-query" placeholder="Search">
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>${type.name} List</h3>
 </div>
 
-<!--Body content-->
-
+<div class="modal-body">
   <table class="table">
   	<thead>
   		<tr>
@@ -84,3 +83,7 @@
         </tr>
   	</tbody>
   </table>
+</div>
+<div class="modal-footer">
+	<a href="" class="close btn">Close</a>
+</div>

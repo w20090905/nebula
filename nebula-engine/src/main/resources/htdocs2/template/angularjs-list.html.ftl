@@ -2,13 +2,13 @@
 	<header>
 		<h3 class="tabs_involved">${type.name}</h3>
 		<input type="text" ng-model="query" class="filter" placeholder="Filter">
-		<a href="#/d/${type.name}/!new" class="btn"><img src="images/icn_new_article.png"/></a>
+		<a href="#/d/${type.name}/!new" class="btn"><i class="icon-plus"/></a>
 	</header>
 	
-	<table class="table tablesorter">
+	<table class="table table-striped table-hover">
 		<thead>
 			<tr>
-				<th>No.</th>
+				<th>#</th>
 				<#list type.fields as field><#t><#if !field.array>
 					<#switch field.refer>
 					<#case "ByVal">

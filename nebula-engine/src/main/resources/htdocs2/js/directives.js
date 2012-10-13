@@ -129,11 +129,11 @@ var neFromListDirective = [
 			var params = simpleMap(attrs.params);
 			var returns = simpleMap(attrs.returns);
 			
-			element.after('<a>::</a>').next().click(function(){
+			element.wrap('<div class="input-append"></div>').after('<a class="addon btn"><i class="icon-search"></i></a>').next().click(function(){
 				var inparams = {};
 				angular.forEach(params,function(that,me){
 					putVal(inparams,that,getVal(scope,me));
-				});				
+				});
 				
 				popup(reqUrl,inparams,function(retData){
 					angular.forEach(returns,function(that,me){
@@ -145,9 +145,8 @@ var neFromListDirective = [
 			
 			function preparePopupWin(){
 				if(jQuery("#popup-window").length<1){
-					jQuery('body').append('<div id="popup-window"><a class="close"><img src="css\/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>' 
-									+ '<div id="popup-content"></div>'
-									+ '</div>');
+					jQuery('body').append('<div id="popup-window" class="modal">')
+								  .append('</div>');
 				}
 			}
 			
@@ -164,7 +163,7 @@ var neFromListDirective = [
 			
 			function popup(reqUrl,params,onReturn){
 				var popupwin = jQuery("#popup-window");
-				var popupwinBody = angular.element(popupwin.children()[1]);
+				var popupwinBody = popupwin;
 				var thisChangeId = ++changeCounter;
 				popupwinBody.html('');
 
@@ -183,14 +182,7 @@ var neFromListDirective = [
 				if(template){
 					popupwin.fadeIn(300);
 					
-					//Set the center alignment padding + border
-					var marginTop = ($(popupwin).height() + 24) / 2; 
-					var marginLeft = ($(popupwin).width() + 24) / 2; 
 
-					popupwin.css({ 
-						'margin-top' : -marginTop,
-						'margin-left' : -marginLeft
-					});
 					
 					$http.get(template).success(function(response) {
 						if (thisChangeId === changeCounter) {							
@@ -240,7 +232,7 @@ var neFromListDirective = [
 				$('#mask').fadeIn(300);
 				
 				// When clicking on the button close or the mask layer the popup closed
-				$('a.close, #mask').live('click', function() { 
+				$('.close, #mask').live('click', function() { 
 					$('#mask , #popup-window').fadeOut(300 , function() {
 						$('#mask').remove();  
 					});

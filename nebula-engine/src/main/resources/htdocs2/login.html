@@ -1,96 +1,39 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<title>nCRM</title>
-		<!--[if lt IE 9]>
-		<script src="../html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		<link href="css/buttons.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-html {
-	background-image: none;
-}
-label.iPhoneCheckLabelOn span {
-	padding-left:0px
-}
-#versionBar {
-	background-color:#212121;
-	position:fixed;
-	width:100%;
-	height:35px;
-	bottom:0;
-	left:0;
-	text-align:center;
-	line-height:35px;
-	z-index:11;
-	-webkit-box-shadow: black 0px 10px 10px -10px inset;
-	-moz-box-shadow: black 0px 10px 10px -10px inset;
-	box-shadow: black 0px 10px 10px -10px inset;
-}
-.copyright{
-	text-align:center; font-size:10px; color:#CCC;
-}
-.copyright a{
-	color:#A31F1A; text-decoration:none
-}	
-ul.uibutton-group{
-	list-style: none;
-}
-
-div{
-	width:100%;
-	text-align: center;
-}
-div.formLogin{
-	height: 400px;
-	vertical-align: middle;
-	padding-top: 10em;
-}
-div.info{
-	height: 40px;
-}
-</style>
+<head>
+<meta charset="utf-8" />
+<title>nCRM</title>
+<!--[if lt IE 9]>
+	<script src="../html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body >
-		 
-<div id="alertMessage"></div>
-<div id="successLogin"></div>
-<div class="info"><img src="img/loader_green.gif" alt="ziceAdmin" /><span>Please wait</span></div>
-
-<div id="login" >
-	<div class="logo" >Logo</div>
-	<div class="formLogin">
-		<form name="formLogin" id="formLogin" action="f/login.do" method="post">			
-			<div class="tip">
-				<input name="username" type="text" title="Username" />
-			</div>
-			<div class="tip">
-				<input name="password" type="password" title="Password" placeholder="Please enter password!"/>
-			</div>			
-			<div class="loginButton">
-				<div style="float:left; margin-left:-9px;">
-					<input type="checkbox" id="on_off" name="remember" class="on_off_checkbox" value="1" />
-					<span class="f_help">Remember me</span>
-				</div>
-				<div> 
-						<input type="submit" name="Login" class="uibutton" value="Login"/>
-						<a class="uibutton normal" href="#" id="forgetpass">forget password</a>
-				</div>	
-			</div>
-		
+<body>
+	<div id="alertMessage row"></div>
+	<div id="successLogin row"></div>
+	<div class="row">&nbsp;</div>
+	<div class="row">&nbsp;</div>
+	<div class="row">&nbsp;</div>
+	<div class="row">&nbsp;</div>
+	<div class="row">&nbsp;</div>
+	<div class="row">&nbsp;</div>
+	<div class="hero-unit offset2 span7">
+		<h1>CRM</h1>
+		<p>Please login</p>	
+		<p>	
+		<form name="formLogin" id="formLogin" action="f/login.do" method="post" class="offset4 span3">
+			<input name="username" type=wangs"text" title="Username" />
+			<input name="password" type="password" title="Password" placeholder="Please enter password!" />
+			<label class="checkbox span2"> <input type="checkbox" name="remember" value="1" >Remember me</label>
+			<input type="submit" name="Login" class="btn btn-primary btn-large" value="Login" />
+			<a href="#">forget password</a>
 		</form>
+		</p>
 	</div>
-</div>
-
-<!--Login div-->
-<div class="clear"></div>
-<div id="versionBar" >
-<div class="copyright" > &copy; Copyright 2012 All Rights Reserved<span class="tip"><a href="#" title="Zice Admin" >Your company</a></span></div>
-<!-- // copyright-->
-</div>
-<!-- Link JScript-->
-<script type="text/javascript" src="lib/jquery/jquery-1.8.2.min.js"></script> 
-<script type="text/javascript" src="lib/tipsy/jquery.tipsy.js"></script>
+	<!--Login div-->
+	<div class="clear"></div>
+	<!-- Link JScript-->
+	<script type="text/javascript" src="lib/jquery/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="lib/tipsy/jquery.tipsy.js"></script>
 </body>
 </html>

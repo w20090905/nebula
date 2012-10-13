@@ -3,15 +3,17 @@
 		<h3>{{resourcename}}</h3>
 	</header>
 	
-	<form x-ng-submit="$save()">
+	<form x-ng-submit="$save()" class="form-horizontal">
+
+	<div class="control-group">
+		<textarea x-ng-model="data.code" rows="20" cols="120" class="span9" placeholder="add Type info here"></textarea>
+	</div>
 	
-	<textarea x-ng-model="data.code" class="codeeditor" x-mode="text/nebula" placeholder="add Type info here"></textarea>
-	
-	<footer>
-		<div class="submit_link">
-			<input class="btn-primary" type="submit" value="save"> 
+	<div class="control-group">
+		<div class="controls">
+			<input class="btn btn-primary " type="submit" value="save"> 
 		</div>
-	</footer>
-	
+	</div>
+		
 	</form>
 </article>
