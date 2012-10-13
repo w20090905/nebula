@@ -34,7 +34,7 @@ function getVal(map,key){
 	var vl=map,lastVl=vl;
 	for(var i=0;i<keys.length-1;i++){
 		vl = lastVl[keys[i]];
-		if(isUndefined(vl)){
+		if(typeof vl == 'undefined'){
 			lastVl[keys[i]] = {};
 			vl = lastVl[keys[i]];
 		}
