@@ -1,63 +1,233 @@
 <!doctype html>
 <html lang="en" x-ng-app="nebula">
 <head>
-<meta charset="utf-8">
-<title>Google Phone Gallery</title>
-<link rel="stylesheet" href="css/app.css">
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/screen.css" media="screen" />
-<link rel="stylesheet" href="css/nebula-angular.css" />
+	<meta charset="utf-8"/>
+	<title>Dashboard I Admin Panel</title>	
+	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
+	<!--[if lt IE 9]>
+	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+<style type="text/css">
+#main article header a{
+	margin: 8px 10px 0 0;
+	padding: 0;
+	float: right;
+	height: 24px; /*--Set height of tabs--*/
+	font-weight: bold;
+	text-shadow: 0 1px 0 #fff;
+	vertical-align: bottom;
+}
+
+#main article header input.filter {
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	border: 1px solid #BBB;	
+	height: 22px;
+	color: #CCC;
+	-webkit-box-shadow: inset 0 2px 2px #CCC, 0 1px 0 white;
+	-moz-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+	box-shadow: inset 0 2px 2px #CCC, 0 1px 0 white;
+	text-indent: 30px;
+	background: white url(../images/icn_search.png) no-repeat;
+	background-position: 10px 6px;
+	float: right;
+	position: absolute;
+	width: 14em;
+	margin-top: 3px;
+}
+
+#main{
+	min-height: 800px;
+}
+
+#main h4.alert_info{
+	display: none;
+}
+
+#main div.field {
+	vertical-align: top;
+}
+
+div.field label{
+	margin-top:0px;
+	text-align: right;
+	width: 10em;
+	height: 3em;
+	display: inline-block;
+}
+
+#main div.field input[type=text] {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #bbb;
+	height: 20px;
+	width: 15em;
+	color: #ccc;
+	-webkit-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+	-moz-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+	box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+	text-indent: 10px;
+	background-position: 10px 6px;
+	margin: 0 3.5%;
+}
+
+#main div.field input[type=text]:focus {
+	outline: none;
+	border: 1px solid #77BACE;
+	-webkit-box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
+	-moz-box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
+	box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
+	color: #666666;
+}
+
+#main div.field input[disable]{
+	background-color: gray;
+}
+
+#main textarea.codeeditor{
+	height: 34em;
+	width: 99%;
+}
+
+/*  POPUP Window  */
+
+#mask {
+	display: none;
+	background: #000; 
+	position: fixed; left: 0; top: 0; 
+	z-index: 10;
+	width: 100%; height: 100%;
+	opacity: 0.8;
+	z-index: 999;
+}
+
+#popup-window{
+	height:400px;
+	width:300px;
+	display:none;
+	background: #333;
+	padding: 10px; 	
+	border: 2px solid #ddd;
+	float: left;
+	font-size: 1.2em;
+	position: fixed;
+	top: 50%; left: 50%;
+	z-index: 99999;
+	box-shadow: 0px 0px 20px #999;
+	-moz-box-shadow: 0px 0px 20px #999; /* Firefox */
+    -webkit-box-shadow: 0px 0px 20px #999; /* Safari, Chrome */
+	border-radius:3px 3px 3px 3px;
+    -moz-border-radius: 3px; /* Firefox */
+    -webkit-border-radius: 3px; /* Safari, Chrome */
+}
+
+#popup-content{
+	background-color: white;
+	overflow: scroll;
+	height: 100%;
+}
+
+#popup-content {
+	font-size: 8px;
+	margin: .1em 0.1em .1em 0;;
+}
+
+#popup-content h1 {
+	font-size: 11px;
+	margin: .1em 0.1em .1em 0;;
+}
+
+#popup-window img.btn_close {
+	float: right; 
+	margin: -28px -28px 0 0;
+}
+
+
+div.holderScrollBar{
+	position:absolute;
+	float: left;
+	height: 800px;
+	background-color:red;
+	width: 0px;
+}
+
+</style>
 </head>
 <body>
-	<div id="header">
-		<div id="options">
-			<a href="index.html"	title="Setting">Setting</a>
-		</div>
-		<h1>Nebula</h1>
-		<h2>Demo System</h2>
-		<ul>
-			<li><a href="index.html">3 Column </a></li>
-			<li><a href="index.html">3 Column </a></li>
-			<li><a href="index.html" class="active">2 Column </a></li>
-			<li><a href="index.html">2 Column </a></li>
-			<li><a href="index.html">2 Column </a></li>
-			<li><a href="index.html">1 Column </a></li>
-			<li><a href="index.html">Stacked</a></li>
-		</ul>
-		<div id="layoutdims"><a
-				href="blog/ultimate-2-column-left-menu-pixels.htm">widths</a>
-			| <a href="blog/ultimate-2-column-left-menu-ems.htm">Em widths</a>
-		</div>
-	</div>
-	<div class="colmask leftmenu">	
-		<div class="colleft">
-			<div id="main" class="col1" x-ng-view>
-				<!-- Column 1 start -->
-				Main
-				<!-- Column 1 end -->
-			</div>
-			<div id="leftMenu" class="col2" x-ng-controller="MenuCtrl">
-				<!-- Column 2 start -->
-				<ul>
-					<li x-ng-repeat="data in datalist">						
-						<a x-ng-href="{{data.href}}">{{data.label}}</a>
-					</li>
-				</ul>
-				<!-- Column 2 end -->
-			</div>
-		</div>
-	</div>
-	<div id="footer">
-		<p>
-			This page uses the <a href="blog/perfect-2-column-left-menu.htm">Perfect
-				'Left Menu' 2 Column Liquid Layout</a> by <a
-				href="http://matthewjamestaylor.com">Matthew James Taylor</a>. View
-			more <a href="blog/-website-layouts">website layouts</a> and <a
-				href="blog/-web-design">web design articles</a>.
-		</p>
-	</div>
+	<div class="holderScrollBar">&nbsp;</div>
+	<header id="header">
+		<hgroup>
+			<h1 class="site_title"><a href="index.html">Website Admin</a></h1>
+			<h2 class="section_title"> Dashboard </h2>
+		</hgroup>
+		<div class="btn_view_site"><a href="http://www.medialoot.com">View Site</a></div>
+	</header> <!-- end of header bar -->
 	
+	<section id="secondary_bar">
+		<div class="user">
+			<p>John Doe (<a href="#">3 Messages</a>)</p>
+			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+		</div>
+		<div class="breadcrumbs_container">
+			<article class="breadcrumbs"><a href="index.html">Website Admin</a> <div class="breadcrumb_divider"></div> <a class="current">Dashboard</a></article>
+		</div>
+	</section><!-- end of secondary bar -->
 	
+	<aside id="sidebar" class="column" x-ng-controller="MenuCtrl">
+		<!-- <form class="quick_search">
+			<input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+		</form> -->
+		<div x-ng-repeat="menuGroup in datalist">
+			<h3>{{menuGroup.label}}</h3>
+			<ul class="toggle">
+				<li  x-ng-repeat="menu in menuGroup.items" class="icn_categories">				
+					<a x-ng-href="{{menu.href}}">{{menu.label}}</a>
+				</li>
+			</ul>
+		</div>
+
+		<footer>
+			<hr />
+			<p><strong>Copyright &copy; 2011 Website Admin</strong></p>
+			<p>Theme by <a href="http://www.medialoot.com">MediaLoot</a></p>
+		</footer>
+	</aside><!-- end of sidebar -->
+	
+	<section id="main" class="column"  x-ng-view>
+		<h4 class="alert_info">Welcome to the free MediaLoot admin panel template, this could be an informative message.</h4>
+		<article class="module width_full">
+			<header><h3>Stats</h3></header>
+			<div class="module_content">
+				<article class="stats_graph">
+					<img src="http://chart.apis.google.com/chart?chxr=0,0,3000&chxt=y&chs=520x140&cht=lc&chco=76A4FB,80C65A&chd=s:Tdjpsvyvttmiihgmnrst,OTbdcfhhggcTUTTUadfk&chls=2|2&chma=40,20,20,30" width="520" height="140" alt="" />
+				</article>
+				
+				<article class="stats_overview">
+					<div class="overview_today">
+						<p class="overview_day">Today</p>
+						<p class="overview_count">1,876</p>
+						<p class="overview_type">Hits</p>
+						<p class="overview_count">2,103</p>
+						<p class="overview_type">Views</p>
+					</div>
+					<div class="overview_previous">
+						<p class="overview_day">Yesterday</p>
+						<p class="overview_count">1,646</p>
+						<p class="overview_type">Hits</p>
+						<p class="overview_count">2,054</p>
+						<p class="overview_type">Views</p>
+					</div>
+				</article>
+				<div class="clear"></div>
+			</div>
+		</article><!-- end of stats article -->
+		
+		<div class="spacer"></div>
+	</section>
+
 <script src="lib/jquery/jquery-1.8.2.min.js"></script>
 <script src="lib/angular/angular.min.js"></script>
 <script src="js/app.js"></script>
@@ -66,6 +236,5 @@
 <script src="js/filters.js"></script>
 <script src="js/services.js"></script>
 <script src="lib/angular/angular-resource.js"></script>
-
 </body>
 </html>

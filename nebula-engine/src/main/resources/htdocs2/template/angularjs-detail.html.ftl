@@ -1,5 +1,10 @@
-<header><h3>${type.name}&nbsp;</h3></header>
-<form name="mainForm" ng-submit="$save()">
+<article class="module width_full">
+	<header>
+		<h3>${type.name}&nbsp;</h3>
+	</header>
+	
+	<form x-ng-submit="$save()">
+	
 	<#list type.fields as field><#t>
 		<#if field.array>
 	<div class="field" ng-class="{error: myForm.name.$invalid}">
@@ -59,7 +64,11 @@
 	  		</#switch>
   		</#if> 
 	</#list>	
-	<div class="action">
-		<input class="btn-primary" type="submit" value="save"> 
-	</div>
-</form>
+	<footer>
+		<div class="submit_link">
+			<input class="btn-primary" type="submit" value="save"> 
+		</div>
+	</footer>
+	
+	</form>
+</article>

@@ -1,49 +1,46 @@
-<header>
-	<h3 class="tabs_involved">${type.name}</h3>
-	<input type="text" ng-model="query" class="filter" placeholder="Filter">
-	<a href="#/d/${type.name}/!new" class="btn"><img src="images/icn_new_article.png"/></a>
-</header>
-
-<!--Body content-->
-
-      <table class="table tablesorter">
-      	<thead>
-      		<tr>
-			  <th>No.</th>
-			<#list type.fields as field><#t><#if !field.array>
-				<#switch field.refer>
-				<#case "ByVal">
-			  <th>${field.name}</th> 
-		  			<#break>
-				<#case "Inline">
-					<#if field.key || field.core><#list field.type.fields as rF><#if field.key && rF.key>	
-			  <th>${field.name}&nbsp;${rF.name}</th>					
-		  			</#if></#list></#if>
-		  			<#break>
-				<#case "ByRef">
-					<#list field.type.fields as rF><#rt>
-						<#if rF.key><#rt>				
-			  <th>${field.name}</th>							
-	    				</#if>
-		  			</#list>
-		  			<#break>		
-				<#case "Cascade">
-					<#list field.type.fields as rF><#rt>
-						<#if rF.key><#rt>				
-			  <th>${field.name}</th>
-	    				</#if>
-		  			</#list>
-		  			<#break>	
-		  		</#switch>
-			</#if></#list>
-			
-			
-      		</tr>
-      	</thead>
-      	<tbody>
-	        <tr ng-repeat="data in datalist | filter:query | orderBy:orderProp">
-			  <td>{{$index+1}}</td>
-	          
+<article class="module width_full">
+	<header>
+		<h3 class="tabs_involved">${type.name}</h3>
+		<input type="text" ng-model="query" class="filter" placeholder="Filter">
+		<a href="#/d/${type.name}/!new" class="btn"><img src="images/icn_new_article.png"/></a>
+	</header>
+	
+	<table class="table tablesorter">
+		<thead>
+			<tr>
+				<th>No.</th>
+				<#list type.fields as field><#t><#if !field.array>
+					<#switch field.refer>
+					<#case "ByVal">
+				<th>${field.name}</th> 
+						<#break>
+					<#case "Inline">
+						<#if field.key || field.core><#list field.type.fields as rF><#if field.key && rF.key>	
+				<th>${field.name}&nbsp;${rF.name}</th>					
+						</#if></#list></#if>
+						<#break>
+					<#case "ByRef">
+						<#list field.type.fields as rF><#rt>
+							<#if rF.key><#rt>				
+				<th>${field.name}</th>							
+							</#if>
+						</#list>
+						<#break>		
+					<#case "Cascade">
+						<#list field.type.fields as rF><#rt>
+							<#if rF.key><#rt>				
+				<th>${field.name}</th>
+							</#if>
+						</#list>
+						<#break>	
+					</#switch>
+				</#if></#list>	
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="data in datalist | filter:query | orderBy:orderProp">
+			<td>{{$index+1}}</td>
+			  
 			<#list type.fields as field><#t><#if !field.array>
 				<#switch field.refer>
 				<#case "ByVal">
@@ -51,38 +48,39 @@
 			<td><a href="#/d/${type.name}/{{data.${field.name}}}">{{data.${field.name}}}</a></td>
 					<#else>		
 			<td>{{data.${field.name}}}</td>
-		  			</#if>  
-		  			<#break>
+					</#if>  
+					<#break>
 				<#case "Inline">
 					<#if field.key || field.core><#list field.type.fields as rF><#if field.key && rF.key>				
-				  		<td>{{data.${field.name}${rF.name}}}</td>			
-		  			</#if></#list></#if>
-		  			<#break>
+						<td>{{data.${field.name}${rF.name}}}</td>			
+					</#if></#list></#if>
+					<#break>
 				<#case "ByRef">
 					<#list field.type.fields as rF><#rt>
 						<#if field.key && rF.key><#rt>			
-				  		<td>{{data.${field.name}${rF.name}}}</td>			
+						<td>{{data.${field.name}${rF.name}}}</td>			
 						<#elseif rF.key><#rt>			
-				  		<td>{{data.${field.name}${rF.name}}}</td>			
+						<td>{{data.${field.name}${rF.name}}}</td>			
 						<#elseif rF.core>			
-				  		<td>{{data.${field.name}${rF.name}}}</td>			
-	    				</#if>
-		  			</#list>
-		  			<#break>		
+						<td>{{data.${field.name}${rF.name}}}</td>			
+						</#if>
+					</#list>
+					<#break>		
 				<#case "Cascade">
 					<#list field.type.fields as rF><#rt>
 						<#if field.key && rF.key><#rt>			
-				  		<td>{{data.${field.name}${rF.name}}}</td>			
+						<td>{{data.${field.name}${rF.name}}}</td>			
 						<#elseif rF.key><#rt>			
-				  		<td>{{data.${field.name}${rF.name}}}</td>			
+						<td>{{data.${field.name}${rF.name}}}</td>			
 						<#elseif rF.core>			
-				  		<td>{{data.${field.name}${rF.name}}}</td>			
-	    				</#if>
-		  			</#list>
-		  			<#break>	
-		  		</#switch>
-			</#if></#list>
+						<td>{{data.${field.name}${rF.name}}}</td>			
+						</#if>
+					</#list>
+					<#break>	
+				</#switch>
+			</#if></#list>	
 				
-	        </tr>
-      	</tbody>
-      </table>
+			</tr>
+		</tbody>
+	</table>
+</article>

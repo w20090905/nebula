@@ -1,10 +1,17 @@
-<header>
-	<h3>{{resourcename}}</h3>
-</header>
-
-<form ng-submit="$save()">		
-	<textarea ng-model="data.code" class="codeeditor" x-mode="text/nebula" placeholder="add Type info here"></textarea>
-	<div>
-		<input class="btn-primary" type="submit" value="save">
-	</div>
-</form>
+<article class="module width_full" >
+	<header>
+		<h3>{{resourcename}}</h3>
+	</header>
+	
+	<form x-ng-submit="$save()">
+	
+	<textarea x-ng-model="data.code" class="codeeditor" x-mode="text/nebula" placeholder="add Type info here"></textarea>
+	
+	<footer>
+		<div class="submit_link">
+			<input class="btn-primary" type="submit" value="save"> 
+		</div>
+	</footer>
+	
+	</form>
+</article>

@@ -1,9 +1,11 @@
-<header>
-	<h3 class="tabs_involved">Type-{{data.name}}</h3>
-	<a href="#/d/{{data.name}}/" x-ng-show="data.standalone != 'BuilderIn'">Edit Data</a>
-</header>
-
-<form name="mainForm" x-ng-submit="$save()">
+<article class="module width_full">
+	<header>
+		<h3 class="tabs_involved">Type-{{data.name}}</h3>
+		<a href="#/d/{{data.name}}/" x-ng-show="data.standalone != 'BuilderIn'">Edit Data</a>
+	</header>
+	
+	<form x-ng-submit="$save()">
+	
 	<div class="field" x-ng-class="{error: myForm.name.$invalid}">
 		<label>Name</label><span class=value><input type="text" x-ng-model="data.name" x-ng-readonly="update"/></span>
 	</div>
@@ -37,7 +39,12 @@
 	<div class="field" x-ng-class="{error: myForm.name.$invalid}">
 		<label>Source</label><span class=value><textarea x-ng-model="data.code" class="codeeditor" x-mode="text/nebula" placeholder="add Type info here"></textarea></span>
 	</div>
-	<div class="action">
-		<input class="btn-primary" type="submit" value="save"> 
-	</div>
-</form>
+	
+	<footer>
+		<div class="submit_link">
+			<input class="btn-primary" type="submit" value="save"> 
+		</div>
+	</footer>
+	
+	</form>
+</article>

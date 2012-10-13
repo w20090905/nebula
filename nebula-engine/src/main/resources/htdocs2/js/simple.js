@@ -2,7 +2,7 @@
 
 
 // Declare app level module which depends on filters, and services
-var nebulaModule = angular.module('nebula', ['nebulaFilters', 'nebulaServices', 'nebulaDirectives','ngResource']);
+var nebulaModule = angular.module('simple', ['nebulaFilters', 'nebulaServices', 'nebulaDirectives','ngResource']);
 
 nebulaModule.config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/c/:userid', {templateUrl: 'angularjs/crmmain.html', controller: ContactRecordsCtrl});
