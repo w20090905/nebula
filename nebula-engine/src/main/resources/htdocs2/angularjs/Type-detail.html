@@ -1,7 +1,8 @@
-<h1>Type-{{data.name}}&nbsp;</h1>
-<div class="contentnav">
+<header>
+	<h3 class="tabs_involved">Type-{{data.name}}</h3>
 	<a href="#/d/{{data.name}}/" x-ng-show="data.standalone != 'BuilderIn'">Edit Data</a>
-</div>
+</header>
+
 <form name="mainForm" x-ng-submit="$save()">
 	<div class="field" x-ng-class="{error: myForm.name.$invalid}">
 		<label>Name</label><span class=value><input type="text" x-ng-model="data.name" x-ng-readonly="update"/></span>
@@ -14,7 +15,7 @@
 	</div>
 	<div class="field" x-ng-class="{error: myForm.name.$invalid}">
 		<label>Detail</label>
-		<table class="table">
+		<table class="table tablesorter">
 			<thead>
 				<tr>
 					<th style="width: 10em;">Name</th>

@@ -1,12 +1,12 @@
-<h1>${type.name} List</h1>
-<div class="contentnav">
-<input type="text" ng-model="query" class="search-query" placeholder="Filter">
-<a href="#/d/${type.name}/!new">Add New</a>
-</div>
+<header>
+	<h3 class="tabs_involved">${type.name}</h3>
+	<input type="text" ng-model="query" class="filter" placeholder="Filter">
+	<a href="#/d/${type.name}/!new" class="btn"><img src="images/icn_new_article.png"/></a>
+</header>
 
 <!--Body content-->
 
-      <table class="table">
+      <table class="table tablesorter">
       	<thead>
       		<tr>
 			  <th>No.</th>

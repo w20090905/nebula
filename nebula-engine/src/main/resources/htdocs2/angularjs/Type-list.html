@@ -1,13 +1,12 @@
-<h1>Type</h1>
-<div class="contentnav">
-	<input type="text" ng-model="query" class="search-query" placeholder="Filter">
-	<a href="#/d/Type/!new">Add	New</a>
-</div>
-<table class="table">
+<header><h3 class="tabs_involved">Type</h3>
+<input type="text" ng-model="query" class="filter" placeholder="Filter">
+<a href="#/d/Type/!new" class="btn"><img src="images/icn_new_article.png"/></a>
+</header>
+<table class="table tablesorter">
 	<thead>
 		<tr>
 			<th>No.</th>
-			<th>Name</th>
+			<th x-ngClick='orderProp="name"'>Name</th>
 			<th>Standalone</th>
 			<th>Super Type</th>
 			<th>Action</th>

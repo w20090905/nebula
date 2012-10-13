@@ -1,4 +1,4 @@
-<h1>${type.name}&nbsp;</h1>
+<header><h3>${type.name}&nbsp;</h3></header>
 <form name="mainForm" ng-submit="$save()">
 	<#list type.fields as field><#t>
 		<#if field.array>
