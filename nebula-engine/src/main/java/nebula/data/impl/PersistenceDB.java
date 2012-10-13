@@ -59,14 +59,17 @@ public class PersistenceDB implements Persistence<Entity> {
 	@Override
 	public void flush() {
 		lock.lock();
-		Iterator<EditableEntity> i = changes.listIterator();
-		// changes.clear();
-		while (i.hasNext()) {
-			EditableEntity e = i.next();
-			e.store.apply(e);
+		try {
+			Iterator<EditableEntity> i = changes.listIterator();
+			// changes.clear();
+			while (i.hasNext()) {
+				EditableEntity e = i.next();
+				e.store.apply(e);
+			}
+		} finally {
+			changes.clear();
+			lock.unlock();
 		}
-		changes.clear();
-		lock.unlock();
 	}
 
 	@Override

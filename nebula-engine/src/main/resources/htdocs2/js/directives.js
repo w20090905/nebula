@@ -1,6 +1,14 @@
 'use strict';
-/* Directives */
+/*utility */
+function isUndefined(value) {
+	return typeof value == 'undefined';
+}
+function isEmpty(value) {
+	return isUndefined(value) || value === '' || value === null
+			|| value !== value;
+}
 
+/* Directives */
 function PopupListCtrl($scope,$resource,urlParams,params){
 	$scope.params = params;
 	var DataResource = $resource('d/:typename/', urlParams, {
@@ -59,6 +67,48 @@ function putVal(map,key,v){
 	
 	vl[keys[keys.length-1]] = v;
 }
+var PathMatchProvider = function(when) {
+    // TODO(i): this code is convoluted and inefficient, we should construct the route matching
+    //   regex only once and then reuse it
+    var regex = '^' + when.replace(/([\.\\\(\)\^\$])/g, "\\$1") + '$',
+        params = [],
+        paramMatchs = [],
+        dst = {};
+    	jQuery.each(when.split(/\W/), function(index,param) {
+      if (param) {
+        var paramRegExp = new RegExp(":" + param + "([\\W])");
+        if (regex.match(paramRegExp)) {
+          regex = regex.replace(paramRegExp, "([^\\/]*)$1");
+          params.push(param);
+          paramMatchs.push(new RegExp(":" + param));
+        }
+      }
+    });
+    
+    var regexp = new RegExp(regex);
+    
+    return {
+    	check:function(on){
+    		
+            var match = on.match(regexp);
+	        if (match) {
+	        	jQuery.each(params, function(index,name) {
+	            dst[name] = match[index + 1];
+	          });
+	        }
+	        return match ? dst : null;
+    	},
+    	replace:function(on,url){
+            var match = on.match(regexp);
+	        if (match) {
+	        	jQuery.each(params, function(index,name) {
+	            url = url.replace(paramMatchs[index],match[index + 1]);
+	          });
+	        }
+	        return url;        		
+    	}
+  }
+} 
 
 var neFromListDirective = [ 
    		'$http',
