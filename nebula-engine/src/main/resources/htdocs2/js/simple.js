@@ -5,12 +5,7 @@
 var nebulaModule = angular.module('simple', ['nebulaFilters', 'nebulaServices', 'nebulaDirectives','ngResource','ngCookies']);
 
 nebulaModule.config(['$routeProvider',function($routeProvider) {
-	$routeProvider.when('/c/:userid', {templateUrl: 'angularjs/crmmain.html', controller: ContactRecordsCtrl});
-    $routeProvider.otherwise({redirectTo: '/main'});
-}]).run(function($rootScope, $location,  $interpolate) {
- 	$rootScope.$on('$routeChangeStart', function(event,next,last) {
- 		if(next.$route.templateUrlWP){
- 			next.$route.templateUrl = $interpolate(next.$route.templateUrlWP)(next.pathParams);
- 		}
-	});
-});
+	$routeProvider.when('/c/!signup', {templateUrl: 'angularjs/User-detail.html', controller: NewUserCtrl})
+			.when('/c/:userid', {templateUrl: 'angularjs/crmmain.html', controller: ContactRecordsCtrl})
+			.otherwise({redirectTo: '/main'});
+}]);

@@ -35,6 +35,19 @@ function NewEntityCtrl($scope,$resource,$routeParams,$location,$interpolate){
 	};	
 }
 
+
+function NewUserCtrl($scope,$resource,$routeParams,$location,$interpolate){
+	$scope.typename = $routeParams.typename;
+	var DataResource = $resource('d/User/', $routeParams);
+	$scope.data = {};
+	$scope.data.$save = DataResource.prototype.$save;
+	$scope.$save = function(){
+		$scope.data.$save(function(u, getResponseHeaders){
+			$location.url("/login.html");
+		});
+	};	
+}
+
 function EntityCtrl($scope,$resource,$routeParams,$location,$interpolate){
 	$scope.typename = $routeParams.typename;
 	var DataResource = $scope.resource = $resource('d/:typename/:id',$routeParams,{'save':   {method:'PUT'}});	
