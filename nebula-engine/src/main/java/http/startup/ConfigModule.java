@@ -2,6 +2,7 @@ package http.startup;
 
 import freemarker.template.Configuration;
 import http.engine.DataResouceEngine;
+import http.engine.LongTermStaticResourceEngine;
 import http.engine.PrepareResouceEngine;
 import http.engine.StaticResourceEngine;
 import http.engine.TemplateResouceEngine;
@@ -111,6 +112,7 @@ public class ConfigModule extends AbstractModule {
 				// EditableStaticResourceEngine editableStaticEngine;
 				TemplateResouceEngine templateResouceEngine;
 				PrepareResouceEngine prepareResouceEngine;
+				private LongTermStaticResourceEngine longTermStaticEngine;
 
 				@SuppressWarnings("unused")
 				@Inject
@@ -128,6 +130,12 @@ public class ConfigModule extends AbstractModule {
 				@Inject
 				public void setEngine(StaticResourceEngine engine) {
 					this.staticEngine = engine;
+				}
+				
+				@SuppressWarnings("unused")
+				@Inject
+				public void setEngine(LongTermStaticResourceEngine engine) {
+					this.longTermStaticEngine = engine;
 				}
 
 				//
@@ -156,6 +164,10 @@ public class ConfigModule extends AbstractModule {
 					site.register("/angularjs/*", templateResouceEngine);
 					site.register("/angularjszice/*", templateResouceEngine);
 					site.register("/e/*", staticEngine);
+					site.register("/lib/*", longTermStaticEngine);
+					site.register("/img/*", longTermStaticEngine);
+					site.register("/images/*", longTermStaticEngine);
+					site.register("/css/*", longTermStaticEngine);
 					site.register("/d/*", dataResouceEngine);
 					site.register("/f/*", prepareResouceEngine);
 					site.register("/d/Type", typeResouceEngine);

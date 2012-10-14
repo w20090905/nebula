@@ -17,9 +17,14 @@ public class StaticResource implements Resource {
 	
 	private final Source underlySource;
     private final String mime;
+    private final long age;
 	public StaticResource(Source source, String mime){
+		this(source, mime, 1L * 10L * 60L);
+	}
+	public StaticResource(Source source, String mime,long age){
 		this.underlySource = source;        
 		this.mime = mime;
+		this.age =age;
 	}
 
 	@Override
@@ -27,7 +32,7 @@ public class StaticResource implements Resource {
 		try {			
      
             // normal parse
-            resp.set("Cache-Control", "max-age=2000");
+            resp.set("Cache-Control", "max-age=" + age);
             resp.set("Content-Language", "en-US");
             resp.set("Content-Type", mime);
             // resp.setContentLength((int) underlySource.getLength());
