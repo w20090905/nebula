@@ -54,11 +54,11 @@ div.holderScrollBar{
 </style>
 </head>
 <body>
-<body>
+<body x-ng-controller="AppControl">
 	<header id="header">
 		<hgroup>
 			<h1 class="site_title"><a href="index.html">Website Admin</a></h1>
-			<h2 class="section_title"> Dashboard </h2>
+			<h2 class="section_title"> {{LoginUserID}} </h2>
 		</hgroup>
 		<div class="btn_view_site"><a href="indexSetting.html"	title="Setting">Setting</a></div>
 	</header> <!-- end of header bar -->
@@ -73,12 +73,13 @@ div.holderScrollBar{
 	
 <script src="lib/jquery/jquery-1.8.2.js"></script>
 <script src="lib/angular/angular.min.js"></script>
+<script src="lib/angular/angular-cookies.js"></script>
+<script src="lib/angular/angular-resource.js"></script>
 <script src="js/directives.js"></script>
 <script src="js/controllers.js"></script>
 <script src="js/filters.js"></script>
 <script src="js/services.js"></script>
 <script src="js/simple.js"></script>
-<script src="lib/angular/angular-resource.js"></script>
 
 </body>
 </html>

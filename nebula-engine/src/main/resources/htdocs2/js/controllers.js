@@ -4,6 +4,10 @@
 function DoNothingCtrl($scope, $routeParams) {
 	$scope.$routeParams = $routeParams;
 }
+function AppControl($scope,$cookies){
+	$scope.LoginUserID = $cookies.LoginUserID;
+}
+
 function MenuCtrl($scope,$resource){
 	var DataResource = $resource('e/menu/list.json', {}, {
     query: {method:'GET', params:{}, isArray:true}

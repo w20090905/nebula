@@ -44,7 +44,7 @@ public class BasicResourceContainer extends ResourceContainer {
 		patterns = new CopyOnWriteArrayList<Pattern>();
 		engines = new CopyOnWriteArrayList<ResourceEngine>();
 		conf.configure(this);
-		redirectToLoginResource = new RedirectResouce();
+		redirectToLoginResource = new RedirectResouce("login.html");
 	}
 
 	public void register(String match, ResourceEngine engine) {

@@ -1,8 +1,8 @@
 'use strict';
 
 /* App Module */
-angular.module('nebula', ['nebulaFilters', 'nebulaServices','nebulaDirectives','ngResource']).
-	config(['$routeProvider', function($routeProvider,$rootScope) {
+angular.module('nebula', ['nebulaFilters', 'nebulaServices','nebulaDirectives','ngResource','ngCookies']).
+	config(['$routeProvider', function($routeProvider) {
 		$routeProvider.
 			when('/t/template/:typename-:cat.html.ftl', {templateUrl: 'angularjs/angularjs-edit.html', controller: FreeMarkerCtrl}).
 			when('/t/:TemplateType/:typename-:cat.html', {templateUrl: 'angularjs/angularjs-edit.html', controller: AngularJSCtrl}).

@@ -21,11 +21,13 @@ public class LoginListResouce implements Resource {
 	private final JsonSerializer<Entity> json;
 	private final Store<Entity> datas;
 	private final Store<Entity> users;
+	final RedirectResouce redirectTo;
 
 	public LoginListResouce(JsonSerializer<Entity> json, Store<Entity> users, Store<Entity> datas) {
 		this.json = json;
 		this.datas = datas;
 		this.users = users;
+		redirectTo = new RedirectResouce("/index.html");
 	}
 
 	@Override
@@ -49,8 +51,7 @@ public class LoginListResouce implements Resource {
 				
 				
 				if(resp.getCode()==200){
-					resp.setCode(303);
-					resp.set("Location","/index.html#/c/" +  ((Entity)req.getSession().get("#currentUser")).getID());					
+					redirectTo.redirectTo(req, resp,"/index.html#/c/" +  ((Entity)req.getSession().get("#currentUser")).getID());					
 				}
 				
 				resp.close();
@@ -78,6 +79,7 @@ public class LoginListResouce implements Resource {
 
 			resp.setCode(200);
 			req.getSession().put("#currentUser", user);
+			resp.setCookie("LoginUserID", username);
 			
 			//
 			// Entity data = datas.createNew();
