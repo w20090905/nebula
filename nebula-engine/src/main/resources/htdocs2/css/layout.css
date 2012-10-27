@@ -30,7 +30,7 @@ float: left;
 margin: 0;
 font-size: 22px;
 display: block;
-width: 23%;
+width: 19%;
 height: 55px;
 font-weight: normal;
 text-align: left;
@@ -83,7 +83,7 @@ background: #F1F1F4 url(../images/secondary_bar.png) repeat-x;
 
 section#secondary_bar .user {
 float: left;
-width: 23%;
+width: 19%;
 height: 38px;
 }
 
@@ -124,7 +124,7 @@ background: url(../images/icn_logout.png) center no-repeat;
 
 section#secondary_bar .breadcrumbs_container {
 float: left;
-width: 77%;
+width: 81%;
 background: url(../images/secondary_bar_shadow.png) no-repeat left top;
 height: 38px;
 }
@@ -179,7 +179,7 @@ margin: 0 5px;
 /* Sidebar */
 
 aside#sidebar {
-width: 23%;
+width: 19%;
 background: #E0E0E3 url(../images/sidebar.png) repeat;
 float: left;
 min-height: 500px;
@@ -348,7 +348,7 @@ margin-top: 20%;
 
 
 section#main {
-width: 77%;
+width: 81%;
 min-height: 500px;
 background: url(../images/sidebar_shadow.png) repeat-y left top;
 float: left;
