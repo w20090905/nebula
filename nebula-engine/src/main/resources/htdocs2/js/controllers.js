@@ -107,7 +107,7 @@ function ContactRecordsCtrl($scope,$resource) {
 		}
 	}).query();
 
-	$scope.PersonList = $resource('d/Person/', {}, {
+	$scope.personList = $resource('d/Person/', {}, {
 		query : {
 			method : 'GET',
 			params : {},
@@ -155,25 +155,28 @@ function ContactRecordsCtrl($scope,$resource) {
 		}
 		return format;
 	}
-
 	
+	$scope.data ={};
 	$scope.contactRecords= DataResource.query();
 
+	$scope.call = function(o){
+		alert(o);
+	}
+
+	$scope.data.$save = DataResource.prototype.$save;
+	
 	$scope.addContactRecord = function() {
-		$scope.newRecord = {
+		$.extend($scope.data,{
 			AutoID:new Date().format("yyyyMMddhhmmssS"),
-			CompanyName: $scope.Company.Name,
-			PersonName: $scope.Person.Name,
-			Content : $scope.Content,
+			CompanyName: $scope.data.Company.Name,
+			PersonName: $scope.data.Person.Name,
 			Done : false,
 			LastUpdated : new Date().format("yyyy-MM-dd hh:mm:ss.S")
-		};
+		});
 		
-		$scope.newRecord.$save = DataResource.prototype.$save;
-		$scope.newRecord.$save();
-		
-		$scope.contactRecords.push($scope.newRecord);
-		$scope.Content = '';
+		$scope.data.$save();		
+		$scope.contactRecords.push($scope.data);
+		$scope.data.Content = '';
 	};
 
 	$scope.remaining = function() {
