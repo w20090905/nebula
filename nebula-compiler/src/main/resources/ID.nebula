@@ -1,3 +1,4 @@
 type ID extends String {
-	@MaxLength = 120;
+	@maxLength = 120;
+	@readonly = readonly;
 };

@@ -3,6 +3,7 @@ package nebula.lang;
 import http.json.JsonSerialize;
 
 import java.io.IOException;
+import java.util.Map.Entry;
 
 import nebula.lang.Field;
 import nebula.lang.Type;
@@ -64,9 +65,7 @@ public class TypeSerialize implements JsonSerialize<Type> {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-
 	}
-
 }
 
 class FieldSerialize implements JsonSerialize<Field> {
@@ -77,6 +76,12 @@ class FieldSerialize implements JsonSerialize<Field> {
 			o.writeStartObject();
 			o.writeStringField("name", d.name);
 			o.writeStringField("typename", d.type.name);
+			
+			o.writeObjectFieldStart("typeattrs");
+			for(Entry<Object, Object> e:d.type.attrs.entrySet()){
+				o.writeStringField(e.getKey().toString(), e.getValue().toString());
+			}
+			o.writeEndObject();
 			o.writeEndObject();
 		} catch (JsonGenerationException e) {
 			throw new RuntimeException(e);
