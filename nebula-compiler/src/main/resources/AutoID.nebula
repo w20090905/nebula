@@ -1,5 +1,5 @@
 type AutoID extends String {
-	@MaxLength = 10;
-	@Editable = "false";
-	@AutoCreate = "true";
+	@maxLength = 12;
+	@editable = "false";
+	@autoCreate = "true";
 };

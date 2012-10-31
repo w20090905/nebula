@@ -3,8 +3,9 @@ package nebula.lang;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import util.InheritHashMap;
 
 enum TypeStandalone {
 	Master, Sequence, Basic, Eembedded
@@ -24,7 +25,7 @@ public class Type {
 
 	List<Field> fields;
 
-	Properties attrs;
+	InheritHashMap attrs;
 
 	URL url;
 	boolean mutable = false;
@@ -64,10 +65,10 @@ public class Type {
 		}
 
 		if (this.superType != null) {
-			attrs = new Properties(this.superType.attrs);
+			attrs = new InheritHashMap(this.superType.attrs);
 			this.standalone = superType.standalone;
 		} else {
-			attrs = new Properties();
+			attrs =  new InheritHashMap();
 			if ("Entity".equals(name)) {
 				this.standalone = TypeStandalone.Master;
 			} else {
@@ -95,7 +96,7 @@ public class Type {
 		return nameAlias;
 	}
 
-	public Properties getAttrs() {
+	public InheritHashMap getAttrs() {
 		return attrs;
 	}
 

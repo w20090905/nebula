@@ -1,3 +1,5 @@
-type Fax extends Name {
-	@MaxLength = 120;
+type Fax extends String {
+	@formatType = "numeric";
+	@maxLength = 20;
+	@minLength = 6;
 };

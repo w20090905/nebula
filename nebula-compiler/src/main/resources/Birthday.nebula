@@ -1,2 +1,4 @@
-type Birthday extends Long {
+type Birthday extends Date {
+	@formatType = "birthday";
+	@format = "mm-dd";
 };

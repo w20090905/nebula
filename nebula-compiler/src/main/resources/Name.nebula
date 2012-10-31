@@ -1,3 +1,4 @@
 type Name extends String {
-	@MaxLength = 120;
+	@formatType = "name";
+	@maxLength = 120;
 };

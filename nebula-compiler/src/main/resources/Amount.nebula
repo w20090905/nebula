@@ -1,4 +1,4 @@
 /*AMT*/
-type Amount extends Real {
-	@MaxLength = 120;
+type Amount extends Decimal {
+	@maxLength = 15;
 };

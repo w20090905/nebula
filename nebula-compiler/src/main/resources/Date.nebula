@@ -1,2 +1,4 @@
 type Date extends Long {
+	@formatType = "date";
+	@format = "YYYY-MM-DD";
 };

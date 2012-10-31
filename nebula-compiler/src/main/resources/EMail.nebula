@@ -1,3 +1,4 @@
-type Street extends Name {
-	@MaxLength = 120;
+type EMail extends Name {
+	@inputSize = "large";
+	@maxLength = 120;
 };
