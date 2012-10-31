@@ -3,16 +3,14 @@ package nebula.lang;
 import http.json.JsonSerialize;
 
 import java.io.IOException;
-import java.util.Map.Entry;
-
-import nebula.lang.Field;
-import nebula.lang.Type;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonToken;
+
+import util.InheritHashMap;
 
 public class TypeSerialize implements JsonSerialize<Type> {
 	@Override
@@ -30,6 +28,14 @@ public class TypeSerialize implements JsonSerialize<Type> {
 				fs.write(o, f);
 			}
 			o.writeEndArray();
+			
+			o.writeObjectFieldStart("attrs");			
+			InheritHashMap p = d.attrs;	
+			for(String k:p.getNames()){
+				o.writeStringField(k,p.get(k).toString());				
+			}
+			o.writeEndObject();
+			
 			o.writeBooleanField("mutable", d.mutable);
 			o.writeStringField("code", d.code);
 
@@ -78,9 +84,12 @@ class FieldSerialize implements JsonSerialize<Field> {
 			o.writeStringField("typename", d.type.name);
 			
 			o.writeObjectFieldStart("typeattrs");
-			for(Entry<Object, Object> e:d.type.attrs.entrySet()){
-				o.writeStringField(e.getKey().toString(), e.getValue().toString());
+			
+			InheritHashMap p = d.type.attrs;	
+			for(String k:p.getNames()){
+				o.writeStringField(k,p.get(k).toString());				
 			}
+			
 			o.writeEndObject();
 			o.writeEndObject();
 		} catch (JsonGenerationException e) {

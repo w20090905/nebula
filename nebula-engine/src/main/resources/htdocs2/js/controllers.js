@@ -156,27 +156,29 @@ function ContactRecordsCtrl($scope,$resource) {
 		return format;
 	}
 	
-	$scope.data ={};
+	$scope.remotedata = {};
 	$scope.contactRecords= DataResource.query();
 
 	$scope.call = function(o){
 		alert(o);
 	}
 
-	$scope.data.$save = DataResource.prototype.$save;
+	$scope.remotedata.$save = DataResource.prototype.$save;
+	$scope.data={};
 	
 	$scope.addContactRecord = function() {
 		$.extend($scope.data,{
 			AutoID:new Date().format("yyyyMMddhhmmssS"),
-			CompanyName: $scope.data.Company.Name,
-			PersonName: $scope.data.Person.Name,
 			Done : false,
 			LastUpdated : new Date().format("yyyy-MM-dd hh:mm:ss.S")
 		});
+
+		$.extend($scope.remotedata,$scope.data);		
+		$scope.remotedata.$save();
 		
-		$scope.data.$save();		
 		$scope.contactRecords.push($scope.data);
-		$scope.data.Content = '';
+		
+		$scope.data=$.extend({},$scope.data,{Content:""});
 	};
 
 	$scope.remaining = function() {

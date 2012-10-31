@@ -21,6 +21,16 @@
 		<div class="controls"><span class="input-large uneditable-input">{{data.standalone}}</span></div>
 	</div>
 	<div class="control-group">
+		<label class="control-label">Attrs</label>
+		<div class="controls">     
+		<ol>
+	        <li x-ng-repeat="(key, value) in data.attrs">
+	         {{key}} : {{value}}
+	        </li>
+      	</ol>
+      	</div>
+	</div>
+	<div class="control-group">
 		<label class="control-label">Detail</label>
 		<table class="table tablesorter">
 			<thead>
@@ -30,6 +40,7 @@
 					<th>Type</th>
 					<th>Master</th>
 					<th>Standalone</th>
+					<th>Detail</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -39,6 +50,7 @@
 					<td><a href="#/d/Type/{{item.typename}}">{{item.typename}}</a></td>
 					<td></td>
 					<td></td>
+					<td>{{item.typeattrs}}</td>
 				</tr>
 			</tbody>
 		</table>
