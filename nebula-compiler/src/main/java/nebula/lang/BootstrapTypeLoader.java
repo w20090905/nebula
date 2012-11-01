@@ -33,10 +33,10 @@ class BootstrapTypeLoader extends TypeLoader {
 		number.attrs.put("formatType", "numeric");
 		
 		Type typeLong = new Type(this, "Long", number, "long");
-		typeLong.attrs.put("formatType", "long");
+		typeLong.attrs.put("formatType", "numeric");
 		
 		Type decimal = new Type(this, "Decimal", number, "BigDecimal");
-		decimal.attrs.put("formatType", "decimal");
+		decimal.attrs.put("formatType", "numeric");
 		
 		Type attr = new Type(this, "Attr", badicType);
 		attr.attrs.put("formatType", "any");
