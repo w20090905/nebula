@@ -1,4 +1,7 @@
 package nebula.lang;
+
+import util.InheritHashMap;
+
 public class Field {
 
 //    public static final Reference BASIC = Reference.ByVal;
@@ -25,6 +28,8 @@ public class Field {
     String _typeName;
     Reference refer;
 
+	InheritHashMap attrs;
+	
     public String getType_name() {
 		return _typeName;
 	}
@@ -33,12 +38,12 @@ public class Field {
 		this._typeName = type_name;
 	}
 
-
     public Field(Type resideType,String name) {
         super();
         this.name = name;
         this.displayName = name;
         this.resideType = resideType;
+        this.attrs =  new InheritHashMap();
     }
 
 	public String getDisplayName() {
@@ -78,6 +83,7 @@ public class Field {
 
 	public void setType(Type type) {
 		this.type = type;
+		this.attrs.setDefaults(type.attrs);
 	}
 
 	public Reference getRefer() {
@@ -103,5 +109,9 @@ public class Field {
 				.append(", importance=").append(importance).append(", array=").append(array).append(", from=")
 				.append(refer).append("]");
 		return builder.toString();
+	}
+
+	public InheritHashMap getAttrs() {
+		return attrs;
 	}
 }

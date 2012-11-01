@@ -16,6 +16,8 @@ import junit.framework.TestCase;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
+
+import util.InheritHashMap;
 public class NebulaParserTest extends TestCase {
 	Compiler compiler;
 
@@ -311,12 +313,12 @@ public class NebulaParserTest extends TestCase {
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, compiler);
-			Type type = new Type(compiler,"Test", null,null);
 			
-			parser.attrDefinition(type);
+			InheritHashMap attrs = new InheritHashMap();
+			parser.attrItemDefinition(attrs);
 
 			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			assertEquals("X", type.attrs.get("MaxLength"));
+			assertEquals("X", attrs.get("MaxLength"));
 		} catch (RecognitionException e) {
 			fail(e.toString());
 		}
@@ -330,12 +332,12 @@ public class NebulaParserTest extends TestCase {
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, compiler);
-			Type type = new Type(compiler,"Test", null,null);
-			
-			parser.attrDefinition(type);
+
+			InheritHashMap attrs = new InheritHashMap();
+			parser.attrItemDefinition(attrs);
 
 			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			assertEquals(new BigDecimal("1.1"), type.attrs.get("MaxLength"));
+			assertEquals(new BigDecimal("1.1"), attrs.get("MaxLength"));
 		} catch (RecognitionException e) {
 			fail(e.toString());
 		}

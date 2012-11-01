@@ -33,7 +33,7 @@ public class InheritHashMapTest extends TestCase {
 	public final void testIsEmpty() {
 		InheritHashMap parent = new InheritHashMap();
 		maps = new InheritHashMap(parent);
-		assertTrue(maps.isEmpty());
+		assertTrue(maps.isEmpty());		
 	}
 
 	public final void testGetObject() {

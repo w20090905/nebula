@@ -1,6 +1,6 @@
+@inputSize = "small";
+@maxLength = 3;
+@min = 0;
+@max = 160;
 type Age extends Long {
-	@inputSize = "small";
-	@maxLength = 3;
-	@min = 0;
-	@max = 160;
 };

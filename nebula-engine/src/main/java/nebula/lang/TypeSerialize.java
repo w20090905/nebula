@@ -83,9 +83,9 @@ class FieldSerialize implements JsonSerialize<Field> {
 			o.writeStringField("name", d.name);
 			o.writeStringField("typename", d.type.name);
 			
-			o.writeObjectFieldStart("typeattrs");
+			o.writeObjectFieldStart("attrs");
 			
-			InheritHashMap p = d.type.attrs;	
+			InheritHashMap p = d.attrs;	
 			for(String k:p.getNames()){
 				o.writeStringField(k,p.get(k).toString());				
 			}

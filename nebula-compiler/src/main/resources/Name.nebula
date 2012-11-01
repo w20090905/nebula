@@ -1,4 +1,0 @@
-type Name extends String {
-	@formatType = "name";
-	@maxLength = 120;
-};

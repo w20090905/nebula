@@ -238,24 +238,30 @@ public class NebulaParserAdvTest extends TestCase {
 		assertEquals(true, type.fields.get(i).array);
 	}
 
-	public void test_type_attr() throws Exception {
+	public void test_type_attr_with_inheritFieldTypeAttrs() throws Exception {
 		//@formatter:off
 		String text = "" +
-				"type Name { \n" +
-				"	@length=1;" +
-				"	@match=\"dd\";" +
-				"	@max=3.8;" +
-				"	Age;" +
+				"@length=1;" +
+				"@match=\"dd\";" +
+				"@max=3.8;" +
+				"type Person { \n" +
+				"	Name;" +
+				"	@maxLength=120;WithCustomAttr Name;" +
 				"};";
 		//@formatter:on
 
 		Type type = compiler.load(text);
 
-		assertEquals("Name", type.name);
+		assertEquals("Person", type.name);
 
-		assertEquals(1, type.fields.size());
+		assertEquals(2, type.fields.size());
 		int i = 0;
-		assertEquals("Age", type.fields.get(i).name);
+		assertEquals("Name", type.fields.get(i).name);
+		assertEquals(60, type.fields.get(i).attrs.get("maxLength"));
+		
+		i++;
+		assertEquals("WithCustomAttr", type.fields.get(i).name);
+		assertEquals(120, type.fields.get(i).attrs.get("maxLength"));
 
 		assertEquals(3, type.attrs.size());
 		assertEquals(1, type.attrs.get("length"));
@@ -284,8 +290,8 @@ public class NebulaParserAdvTest extends TestCase {
 	public void test_buildin_extends() throws Exception {
 		//@formatter:off
 		String text = "" +
-				"type Name extends String { \n" +
 				"	@MaxLength=120;\n" +
+				"type Name extends String { \n" +
 				"};";
 		//@formatter:on
 

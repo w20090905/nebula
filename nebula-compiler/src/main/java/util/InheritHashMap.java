@@ -18,7 +18,10 @@ public class InheritHashMap extends HashMap<String, Object> {
 		this.defaults = defaults;
 	}
 
-
+	public void setDefaults(InheritHashMap defaults){
+		this.defaults=defaults;
+	}
+	
 	@Override
 	public Object get(Object key) {
         Object oval = super.get(key);

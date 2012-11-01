@@ -1,3 +1,3 @@
-type Note extends Text {
 	@maxLength = 4000;
+type Note extends Text {
 };

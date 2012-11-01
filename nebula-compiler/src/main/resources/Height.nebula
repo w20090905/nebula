@@ -1,5 +1,5 @@
+@inputSize = "small";
+@uom = "cm";
+@maxLength = 3;
 type Height extends Long {
-	@inputSize = "small";
-	@uom = "cm";
-	@maxLength = 3;
 };

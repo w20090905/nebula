@@ -11,6 +11,7 @@ options {
 	import java.util.HashMap;
 	import java.util.List;
 	import java.util.Map;
+	import util.InheritHashMap;
 	
   import static nebula.lang.Importance.*;
   import static nebula.lang.Reference.*;	
@@ -23,6 +24,8 @@ options {
 @members {
     Map<String,Type> typesMap = new HashMap<String,Type>();
     List<Type> types = new ArrayList<Type>();
+
+    InheritHashMap attrsBuffer = new InheritHashMap();
     
     TypeLoader loader;
     public NebulaParser(TokenStream input,TypeLoader loader) {
@@ -66,23 +69,27 @@ programDefinition returns[List<Type> retTypes]
     ;
     
 typeDefinition returns[Type type]
-    :   'type' typeID=ID ('|' alias=aliasLiteral[$typeID.text])?
+    :   (attrs = attrListDefinition)?
+        'type' typeID=ID ('|' alias=aliasLiteral[$typeID.text])?
         ('extends' superTypeID=ID)? { 
             if($superTypeID==null){
                 type = new Type(loader,$typeID.text,resolveType(Type.ENTITY));
-              type.standalone = TypeStandalone.Master;
+                type.standalone = TypeStandalone.Master;
             }else{
                 type = new Type(loader,$typeID.text,resolveType($superTypeID.text)); 
-           } 
+            } 
            
-           addType(type);
+            if(attrs != null){
+                type.attrs.putAll(attrs);
+            }
+            
+            addType(type);
            
-           if(alias!=null){
+            if(alias!=null){
                 type.nameAlias = alias;
-           }
+            }
         }
         '{' 
-            ('@' attrDefinition[type] ';')* 
             fieldDefinition[type]* 
         '}' ';';
 
@@ -99,7 +106,8 @@ nestedTypeDefinition[Type resideType,String name,Alias nameAlias] returns[Type t
         '}';
 
 fieldDefinition[Type resideType] returns[Field field]
-    :   imp=fieldImportance
+    :   (attrs = attrListDefinition)?  
+        imp=fieldImportance
         inline=inlineDefinition
         name=ID ('-' qtype=ID)?  { 
             if($qtype!=null){
@@ -120,6 +128,7 @@ fieldDefinition[Type resideType] returns[Field field]
         )
         
         ';'{
+            field.attrs.setDefaults(field.type.attrs);
             field.importance = imp;
             if(field.type.standalone == TypeStandalone.Basic){
               field.refer = ByVal;
@@ -146,7 +155,11 @@ fieldDefinition[Type resideType] returns[Field field]
             }else{
                 field.array = true;
             }
-                   
+            
+            if(attrs != null){
+                field.attrs.putAll(attrs);
+            }
+            
             resideType.fields.add(field);
           }
         ;
@@ -176,9 +189,15 @@ arrayDefinition returns[String from,String to]
         ) ']')
         | {$from = "f";$to = "f";}
     ;
-    
-attrDefinition[Type resideType]
-    :   ID '=' v=constValueDefinition {resideType.attrs.put($ID.text,v);}
+
+
+attrListDefinition returns[InheritHashMap attrs]
+    @init{if(attrs==null)attrs = new InheritHashMap();else attrs.clear();}
+    :('@' attrItemDefinition[attrs] ';')+
+;
+
+attrItemDefinition[InheritHashMap attrs]
+    :   ID '=' v=constValueDefinition {attrs.put($ID.text,v);}
     ;
 
 constValueDefinition returns [Object v]

@@ -1,4 +1,4 @@
 /*AMT*/
+@maxLength = 15;
 type Amount extends Decimal {
-	@maxLength = 15;
 };

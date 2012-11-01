@@ -1,3 +1,3 @@
-type Year extends Long {
 	@maxLength = 120;
+type Year extends Long {
 };

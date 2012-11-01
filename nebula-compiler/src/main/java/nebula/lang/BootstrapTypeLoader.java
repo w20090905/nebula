@@ -27,7 +27,7 @@ class BootstrapTypeLoader extends TypeLoader {
 		Type badicType = new Type(this, Type.BASIC, typeRoot);
 		Type entity = new Type(this, Type.ENTITY, typeRoot);
 		Type string = new Type(this, "String", badicType, "String");
-		string.attrs.put("formatType", "string");
+		string.attrs.put("formatType", "text");
 		
 		Type number = new Type(this, "Number", badicType);
 		number.attrs.put("formatType", "numeric");
@@ -51,6 +51,10 @@ class BootstrapTypeLoader extends TypeLoader {
 		typeList.add(decimal);
 		typeList.add(entity);
 		typeList.add(attr);
+		
+		Type type = new Type(this, "Name", string);
+		type.attrs.put("maxLength", 60);
+		typeList.add(type);
 		
 		this.types.addAll(typeList);
 	}
