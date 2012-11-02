@@ -22,9 +22,9 @@
 			[#assign options][@compress single_line=true]
 				id="${field.name}"
 				x-ng-model="data.${field.name}"
-				[#switch field.formatType!"text"]
+				[#switch field.attrs.formatType!"text"]
 					[#case "text"]		type="text"		[#break]
-					[#case "numeric"]	type="numeric"	[#break]
+					[#case "numeric"]	type="number"	[#break]
 					[#default]			type="text"		[#break]				
 				[/#switch]
 				
@@ -121,7 +121,7 @@
 	
 	<div class="control-group">
 		<div class="controls">
-			<input class="btn-primary" type="submit" value="save"> 
+			<input class="btn-primary" type="submit" value="save" x-ng-disabled="form.$invalid"> 
 		</div>
 	</div>
 	
