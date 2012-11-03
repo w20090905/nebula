@@ -1,6 +1,7 @@
 package nebula.frame;
 
 import nebula.Filter;
+import nebula.Identifiable;
 import nebula.SmartList;
 import junit.framework.TestCase;
 

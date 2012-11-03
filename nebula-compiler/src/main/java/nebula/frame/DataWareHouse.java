@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import nebula.Identifiable;
 import nebula.SmartList;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
