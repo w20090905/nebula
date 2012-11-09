@@ -97,7 +97,39 @@ function FreeMarkerCtrl($scope,$route,$location,$http,$routeParams,$templateCach
 	};
 }
 
+
+Date.prototype.format = function(format)
+{
+	var o = {
+		"M+" : this.getMonth() + 1, // month
+		"d+" : this.getDate(), // day
+		"h+" : this.getHours(), // hour
+		"m+" : this.getMinutes(), // minute
+		"s+" : this.getSeconds(), // second
+		"q+" : Math.floor((this.getMonth() + 3) / 3), // quarter
+		"S" : this.getMilliseconds()
+	// millisecond
+	}
+
+	if (/(y+)/.test(format))
+	{
+		format = format.replace(RegExp.$1, (this.getFullYear() + "")
+				.substr(4 - RegExp.$1.length));
+	}
+	for ( var k in o)
+	{
+		if (new RegExp("(" + k + ")").test(format))
+		{
+			format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k]
+					: ("00" + o[k]).substr(("" + o[k]).length));
+
+		}
+	}
+	return format;
+}
+
 function ContactRecordsCtrl($scope,$resource) {
+	$scope.data={};
 
 	$scope.companyList = $resource('d/Company/', {}, {
 		query : {
@@ -115,7 +147,7 @@ function ContactRecordsCtrl($scope,$resource) {
 		}
 	}).query();
 	
-
+	
 	var DataResource = $resource('d/ContactRecord/', {}, {
 		query : {
 			method : 'GET',
@@ -123,48 +155,29 @@ function ContactRecordsCtrl($scope,$resource) {
 			isArray : true
 		}
 	});
-	
 
-	
-	Date.prototype.format = function(format)
-	{
-		var o = {
-			"M+" : this.getMonth() + 1, // month
-			"d+" : this.getDate(), // day
-			"h+" : this.getHours(), // hour
-			"m+" : this.getMinutes(), // minute
-			"s+" : this.getSeconds(), // second
-			"q+" : Math.floor((this.getMonth() + 3) / 3), // quarter
-			"S" : this.getMilliseconds()
-		// millisecond
-		}
-
-		if (/(y+)/.test(format))
-		{
-			format = format.replace(RegExp.$1, (this.getFullYear() + "")
-					.substr(4 - RegExp.$1.length));
-		}
-		for ( var k in o)
-		{
-			if (new RegExp("(" + k + ")").test(format))
-			{
-				format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k]
-						: ("00" + o[k]).substr(("" + o[k]).length));
-
+	$scope.refresh = function(){
+		$scope.contactRecords=$resource('d/ContactRecord/', {}, {
+			query : {
+				method : 'GET',
+				params : {"CompanyName" : $scope.data.CompanyName},
+				isArray : true
 			}
-		}
-		return format;
-	}
+		}).query();	
+	};
+
+	
 	
 	$scope.remotedata = {};
-	$scope.contactRecords= DataResource.query();
+	
+	$scope.refresh();
 
 	$scope.call = function(o){
 		alert(o);
 	}
+	
 
 	$scope.remotedata.$save = DataResource.prototype.$save;
-	$scope.data={};
 	
 	$scope.addContactRecord = function() {
 		$.extend($scope.data,{

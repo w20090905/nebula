@@ -7,6 +7,8 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.simpleframework.http.Request;
+
 import nebula.lang.TypeLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -35,7 +37,7 @@ public class TemplateResouce extends BasicResouce {
 		this.templateName = templateTypeName + "-" + actionName + ".ftl";
 	}
 
-	protected void makeResponse() {
+	protected void get(Request req) {
 		try {
 			ByteArrayOutputStream bout = new ByteArrayOutputStream();
 			Writer w = new OutputStreamWriter(bout);

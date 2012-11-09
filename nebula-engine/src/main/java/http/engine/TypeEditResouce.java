@@ -35,7 +35,7 @@ public class TypeEditResouce extends BasicResouce{
 				}
 
 				if (buffer == null) {
-					this.makeResponse();
+					this.get(req);
 				}
 
 				// normal parse
@@ -80,7 +80,7 @@ public class TypeEditResouce extends BasicResouce{
 					}
 				}
 				
-				this.makeResponse();
+				this.get(req);
 
 				// normal parse
 				resp.setCode(200);
@@ -100,7 +100,7 @@ public class TypeEditResouce extends BasicResouce{
 	}
 
 	@Override
-	protected void makeResponse() {
+	protected void get(Request req) {
 		try {
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			Type type = typeLoader.findType(key);

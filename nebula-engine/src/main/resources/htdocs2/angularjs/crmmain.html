@@ -40,7 +40,7 @@ div.right{
 	<div class="control-group" style="clear: both;">
 		<label class="control-label">Company</label>
 		<div class="controls">
-			<select x-ng-model="data.CompanyName" x-ng-options="c.Name as c.Name for c in companyList" required></select>
+			<select x-ng-model="data.CompanyName" x-ng-options="c.Name as c.Name for c in companyList" required x-ng-change="refresh()"></select>
 		</div>
 	</div>
 	<div class="control-group" style="clear: both;">

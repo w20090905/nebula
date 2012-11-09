@@ -24,7 +24,7 @@ public class DataResouce extends BasicResouce {
 		this.key = key;
 	}
 
-	protected void makeResponse() {
+	protected void get(Request req) {
 		try {
 			ByteArrayOutputStream bout = new ByteArrayOutputStream();
 			Writer w = new OutputStreamWriter(bout);

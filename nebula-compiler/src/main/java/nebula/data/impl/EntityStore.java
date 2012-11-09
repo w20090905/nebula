@@ -1,11 +1,13 @@
 package nebula.data.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
+import nebula.Filter;
 import nebula.data.Entity;
 import nebula.data.Persistence;
 import nebula.data.Store;
@@ -40,8 +42,12 @@ public class EntityStore implements Store<Entity> {
 	}
 
 	@Override
-	public List<Entity> findBy(String key) {
-		return null;
+	public List<Entity> query(Filter<Entity> filter) {
+		List<Entity> newList = new ArrayList<Entity>();
+		for (Entity item : datas) {
+			if (filter.match(item)) newList.add(item);
+		}
+		return newList;
 	}
 
 	@Override
@@ -65,7 +71,7 @@ public class EntityStore implements Store<Entity> {
 
 	@Override
 	public void apply(Entity newV) {
-		EditableEntity newEntity = (EditableEntity)newV;
+		EditableEntity newEntity = (EditableEntity) newV;
 		if (newEntity.source != null) {
 			Map<String, Object> newData = new HashMap<String, Object>(newEntity.data);
 			newData.putAll(newEntity.newData);
@@ -81,15 +87,15 @@ public class EntityStore implements Store<Entity> {
 			lock.unlock();
 		} else {
 			Map<String, Object> newData = new HashMap<String, Object>(newEntity.newData);
-			
+
 			String id = "";
 			for (Field f : type.getFields()) {
-				if(f.isKey()){
+				if (f.isKey()) {
 					id += newData.get(f.getName());
 				}
 			}
 			newData.put("ID", id);
-			
+
 			lock.lock();
 			EntityImp source = new EntityImp(this, newData);
 			newEntity.resetWith(source);
@@ -107,6 +113,11 @@ public class EntityStore implements Store<Entity> {
 	@Override
 	public String getID() {
 		return type.getName();
+	}
+
+	@Override
+	public Type getType() {
+		return this.type;
 	}
 
 }

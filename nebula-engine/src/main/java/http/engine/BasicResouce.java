@@ -16,7 +16,7 @@ public abstract class BasicResouce implements Resource {
 	protected byte[] buffer;
 	protected long lastModified;
 
-	protected abstract void makeResponse();
+	protected abstract void get(Request req);
 
 	protected void put(Request req) {
 		throw new UnsupportedOperationException("cann't support " + req.getMethod());
@@ -43,7 +43,7 @@ public abstract class BasicResouce implements Resource {
 
 				//System.out.print(System.currentTimeMillis());
 				if (System.currentTimeMillis() - this.lastModified > 100) {					
-					makeResponse();
+					get(req);
 					//System.out.println("====" + System.currentTimeMillis());
 				}
 
@@ -61,7 +61,7 @@ public abstract class BasicResouce implements Resource {
 			} else if ("PUT".equals(method)) {
 				this.put(req);
 
-				makeResponse();
+				get(req);
 
 				// normal parse
 				resp.setCode(200);

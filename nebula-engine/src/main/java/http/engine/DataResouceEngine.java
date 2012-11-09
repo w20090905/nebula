@@ -20,13 +20,15 @@ import org.simpleframework.http.resource.ResourceEngine;
 
 public class DataResouceEngine implements ResourceEngine {
 	private Log log = LogFactory.getLog(this.getClass());
-	Persistence<Entity> persistence;
+	final Persistence<Entity> persistence;
+	final EntityFilterBuilder filterBuilder;
 
 	Map<String, String> tmap = new HashMap<String, String>();
 
 	@Inject
-	public DataResouceEngine(Persistence<Entity> dataWareHouse) {
+	public DataResouceEngine(final Persistence<Entity> dataWareHouse, final EntityFilterBuilder filterBuilder) {
 		this.persistence = dataWareHouse;
+		this.filterBuilder = filterBuilder;
 	}
 
 	@Override
@@ -50,7 +52,7 @@ public class DataResouceEngine implements ResourceEngine {
 		if (id != null) {
 			return new DataResouce(json, datas, id);
 		} else {
-			return new DataListResouce(json, datas);
+			return new DataListResouce(json, datas, filterBuilder);
 		}
 	}
 

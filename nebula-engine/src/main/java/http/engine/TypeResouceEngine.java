@@ -20,11 +20,13 @@ public class TypeResouceEngine implements ResourceEngine {
 	private Log log = LogFactory.getLog(this.getClass());
 	final DataWareHouse dataWareHouse;
 	final TypeLoader typeLoader;
+	final TypeFilterBuilder filterBuilder;
 
 	@Inject
-	public TypeResouceEngine(DataWareHouse dataWareHouse, EditableTypeLoader typeLoader) {
+	public TypeResouceEngine(DataWareHouse dataWareHouse, EditableTypeLoader typeLoader, TypeFilterBuilder filterBuilder) {
 		this.dataWareHouse = dataWareHouse;
 		this.typeLoader = typeLoader;
+		this.filterBuilder = filterBuilder;
 	}
 
 	@Override
@@ -46,7 +48,7 @@ public class TypeResouceEngine implements ResourceEngine {
 		if (id != null) {
 			return new TypeEditResouce(typeLoader, id);
 		} else {
-			return new TypeListResouce(typeLoader, json);
+			return new TypeListResouce(typeLoader, json, filterBuilder);
 		}
 	}
 

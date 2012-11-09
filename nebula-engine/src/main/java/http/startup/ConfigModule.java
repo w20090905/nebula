@@ -2,10 +2,12 @@ package http.startup;
 
 import freemarker.template.Configuration;
 import http.engine.DataResouceEngine;
+import http.engine.EntityFilterBuilder;
 import http.engine.LongTermStaticResourceEngine;
 import http.engine.PrepareResouceEngine;
 import http.engine.StaticResourceEngine;
 import http.engine.TemplateResouceEngine;
+import http.engine.TypeFilterBuilder;
 import http.engine.TypeResouceEngine;
 import http.io.ClassPathLoader;
 import http.io.FileSystemLoader;
@@ -85,6 +87,10 @@ public class ConfigModule extends AbstractModule {
 					new FileSystemLoader(root));
 			this.bind(Loader.class).toInstance(loader);
 
+
+			this.bind(EntityFilterBuilder.class);
+			this.bind(TypeFilterBuilder.class);
+			
 			this.bind(DataWareHouse.class);
 
 			this.bind(DbConfiguration.class).toInstance(

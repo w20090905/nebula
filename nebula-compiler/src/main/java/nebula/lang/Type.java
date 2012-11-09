@@ -7,10 +7,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import util.InheritHashMap;
 
-enum TypeStandalone {
-	Master, Sequence, Basic, Eembedded
-}
-
 public class Type {
 	final TypeLoader loader;
 
