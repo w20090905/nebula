@@ -38,9 +38,17 @@ div.right{
 
 <form x-ng-submit="addContactRecord()" class="form-horizontal">
 	<ul class="nav nav-tabs">
-		<li x-ng-repeat="c in companyList" x-ng-Class="getActive(c.Name)">
+		<li x-ng-repeat="c in companyList | limitTo:10" x-ng-Class="getActive(c.Name)">
 			<a href="" x-ng-click="data.CompanyName=c.Name;refresh();">{{c.Name}}</a>
 	  	</li>	
+	  	<li class="dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown"  href="#">All<b class="caret"></b></a>
+		    <ul class="dropdown-menu">
+				<li x-ng-repeat="c in companyList" x-ng-Class="getActive(c.Name)">
+					<a href="" x-ng-click="data.CompanyName=c.Name;refresh();">{{c.Name}}</a>
+			  	</li>	
+		    </ul>
+  		</li>
 	</ul>
 	
 <article class="module width_full">

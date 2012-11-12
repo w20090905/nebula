@@ -143,19 +143,12 @@ function ContactRecordsCtrl($scope,$resource) {
 	});
 	
 
-	$scope.personList = $resource('d/Person/', {}, {
-		query : {
-			method : 'GET',
-			params : {},
-			isArray : true
-		}
-	}).query();
 	
 	
 	var DataResource = $resource('d/ContactRecord/', {}, {
 		query : {
 			method : 'GET',
-			params : {},
+			params : {"CompanyName" : $scope.data.CompanyName},
 			isArray : true
 		}
 	});
@@ -173,6 +166,14 @@ function ContactRecordsCtrl($scope,$resource) {
 				isArray : true
 			}
 		}).query();	
+
+		$scope.personList = $resource('d/Person/', {}, {
+			query : {
+				method : 'GET',
+				params : {"CompanyName" : $scope.data.CompanyName},
+				isArray : true
+			}
+		}).query();
 	};
 
 	$scope.remotedata = {};
