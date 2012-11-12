@@ -4,7 +4,7 @@
 // Declare app level module which depends on filters, and services
 var nebulaModule = angular.module('simple', ['nebulaFilters', 'nebulaServices', 'nebulaDirectives','ngResource','ngCookies']);
 
-nebulaModule.config(['$routeProvider',function($routeProvider) {
+nebulaModule.config(['$routeProvider', function($routeProvider,$cookies) {
 	$routeProvider.when('/c/!signup', {templateUrl: 'angularjs/User-detail.html', controller: NewUserCtrl})
 			.when('/c/:userid', {templateUrl: 'angularjs/crmmain.html', controller: ContactRecordsCtrl})
 			.otherwise({redirectTo: '/main'});

@@ -1,7 +1,7 @@
 <article class="module width_full">
 	<header>
-		<h3 class="tabs_involved">Type-{{data.name}}</h3>
-		<a href="#/d/{{data.name}}/" x-ng-show="data.standalone != 'BuilderIn'" class="btn">Edit Data</a>
+		<h1 class="tabs_involved">Type-{{data.name}}</h1>
+		<a href="#/d/{{data.name}}/" x-ng-show="data.standalone != 'BuilderIn'" class="btn ctrl">Edit Data</a>
 	</header>
 	
 	<form x-ng-submit="$save()" class="form-horizontal">
@@ -59,7 +59,7 @@
 	<div class="control-group">
 		<label class="control-label">Source</label>
 		<div class="controls">
-			<textarea x-ng-model="data.code" rows="20" cols="120" class="span7" placeholder="add Type info here"></textarea>
+			<textarea x-ng-model="data.code" rows="20" cols="120" class="span9" placeholder="add Type info here"></textarea>
 		</div>
 	</div>
 	

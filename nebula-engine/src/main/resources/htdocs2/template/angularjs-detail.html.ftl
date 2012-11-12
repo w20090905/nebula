@@ -1,7 +1,7 @@
 [#ftl/]
 <article class="module width_full">
 	<header>
-		<h3>${type.name}&nbsp;</h3>
+		<h1>${type.name}&nbsp;</h1>
 	</header>
 	
 	<form x-ng-submit="$save()"  class="form-horizontal" novalidate>

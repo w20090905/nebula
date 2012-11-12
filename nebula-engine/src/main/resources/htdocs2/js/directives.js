@@ -145,7 +145,7 @@ var neFromListDirective = [
 			
 			function preparePopupWin(){
 				if(jQuery("#popup-window").length<1){
-					jQuery('body').append('<div id="popup-window" class="modal">')
+					jQuery('body').append('<div id="popup-window" class="modal" style="display:none;">')
 								  .append('</div>');
 				}
 			}

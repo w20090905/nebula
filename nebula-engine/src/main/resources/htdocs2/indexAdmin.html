@@ -56,8 +56,8 @@
             </p>
             <ul class="nav nav-pills">
               <li><a href="index.html#/c/{{LoginUserID}}">Home</a></li>
-              <li class="active"><a href="indexSetting.html">Setting</a></li>
-              <li><a href="indexAdmin.html">Admin</a></li>
+              <li><a href="indexSetting.html">Setting</a></li>
+              <li class="active"><a href="indexAdmin.html">Admin</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -66,9 +66,9 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
-      	<div class="span2">
+      	<div class="span3">
           <div class="well sidebar-nav">
-            <ul class="nav nav-list" x-ng-controller="MenuSettingCtrl">
+            <ul class="nav nav-list" x-ng-controller="MenuAdminCtrl">
 				<li x-ng-repeat="menuGroup in datalist">
 					<h3>{{menuGroup.label}}</h3>
 					<ul class="nav nav-list">
@@ -80,7 +80,7 @@
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
-        <div class="span10" x-ng-view>
+        <div class="span9" x-ng-view>
         </div><!--/span-->
       </div><!--/row-->
 

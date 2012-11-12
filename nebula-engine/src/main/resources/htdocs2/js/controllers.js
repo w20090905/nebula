@@ -8,9 +8,20 @@ function AppControl($scope,$cookies){
 	$scope.LoginUserID = $cookies.LoginUserID;
 }
 
-function MenuCtrl($scope,$resource){
-	var DataResource = $resource('e/menu/list.json', {}, {
-    query: {method:'GET', params:{}, isArray:true}
+function MenuAdminCtrl($scope,$resource,$cookies){
+	var DataResource = $resource('e/menu/menuAdmin.json', {}, {
+    query: {method:'GET', params:{
+    	"loginUserID" : $cookies.LoginUserID
+    	}, isArray:true}
+  });	
+	$scope.datalist = DataResource.query();
+}
+
+function MenuSettingCtrl($scope,$resource,$cookies){
+	var DataResource = $resource('e/menu/menuSetting.json', {}, {
+    query: {method:'GET', params:{
+    	"loginUserID" : $cookies.LoginUserID
+    	}, isArray:true}
   });	
 	$scope.datalist = DataResource.query();
 }

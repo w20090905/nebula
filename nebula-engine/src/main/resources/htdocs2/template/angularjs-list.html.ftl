@@ -1,9 +1,9 @@
 [#ftl/]
 <article class="module width_full">
 	<header>
-		<h3 class="tabs_involved">${type.name}</h3>
-		<input type="text" x-ng-model="query" class="filter" placeholder="Filter">
-		<a href="#/d/${type.name}/!new" class="btn"><i class="icon-plus"></i></a>
+		<h1 class="tabs_involved">${type.name}</h1>
+		<a href="#/d/${type.name}/!new" class="btn ctrl"><i class="icon-plus"></i></a>
+		<input type="text" x-ng-model="query" class="input-medium search-query ctrl" placeholder="Filter">
 	</header>
 	<table class="table table-striped table-hover">
 		<thead>
