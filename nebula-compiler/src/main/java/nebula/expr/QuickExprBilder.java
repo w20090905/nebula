@@ -11,11 +11,11 @@ public abstract class QuickExprBilder {
 		return new Field_String(name);
 	}
 
-	public V<Integer> Fint(String name) {
+	public V_Integer Fint(String name) {
 		return new Field_Integer(name);
 	}
 
-	public V<String> C(String value) {
+	public V_String C(String value) {
 		return new Cst_String(value);
 	}
 
@@ -48,7 +48,7 @@ public abstract class QuickExprBilder {
 		}
 	}
 
-	class Cst_String extends V_String {
+	class Cst_String extends V_StringImp {
 
 		String value;
 
@@ -74,15 +74,25 @@ public abstract class QuickExprBilder {
 		}
 	}
 
-	abstract class V_String extends ExpImp implements V<String> {
+	abstract class V_StringImp extends ExpImp implements V<String>, V_String {
 		@Override
 		public LogicExp gt(V<String> v) {
 			return new Gt_String(this, v);
 		}
 
 		@Override
-		public LogicExp ls(V<String> v) {
-			return new Ls_String(this, v);
+		public LogicExp ge(V<String> v) {
+			return new Ge_String(this, v);
+		}
+
+		@Override
+		public LogicExp lt(V<String> v) {
+			return new Lt_String(this, v);
+		}
+
+		@Override
+		public LogicExp le(V<String> v) {
+			return new Le_String(this, v);
 		}
 
 		@Override
@@ -91,13 +101,28 @@ public abstract class QuickExprBilder {
 		}
 
 		@Override
+		public LogicExp ne(V<String> v) {
+			return new Ne_String(this, v);
+		}
+
+		@Override
 		public LogicExp gtF(String name) {
 			return new Gt_String(this, new Field_String(name));
 		}
 
 		@Override
-		public LogicExp lsF(String name) {
-			return new Ls_String(this, new Field_String(name));
+		public LogicExp geF(String name) {
+			return new Ge_String(this, new Field_String(name));
+		}
+
+		@Override
+		public LogicExp ltF(String name) {
+			return new Lt_String(this, new Field_String(name));
+		}
+
+		@Override
+		public LogicExp leF(String name) {
+			return new Le_String(this, new Field_String(name));
 		}
 
 		@Override
@@ -106,18 +131,53 @@ public abstract class QuickExprBilder {
 		}
 
 		@Override
+		public LogicExp neF(String name) {
+			return new Ne_String(this, new Field_String(name));
+		}
+
+		@Override
 		public LogicExp gt(String v) {
 			return new Gt_String(this, new Cst_String(v));
 		}
 
 		@Override
-		public LogicExp ls(String v) {
-			return new Ls_String(this, new Cst_String(v));
+		public LogicExp ge(String v) {
+			return new Ge_String(this, new Cst_String(v));
+		}
+
+		@Override
+		public LogicExp lt(String v) {
+			return new Lt_String(this, new Cst_String(v));
+		}
+
+		@Override
+		public LogicExp le(String v) {
+			return new Le_String(this, new Cst_String(v));
 		}
 
 		@Override
 		public LogicExp eq(String v) {
 			return new Eq_String(this, new Cst_String(v));
+		}
+
+		@Override
+		public LogicExp ne(String v) {
+			return new Ne_String(this, new Cst_String(v));
+		}
+
+		@Override
+		public LogicExp inF(String name) {
+			return new In_String(this, new Field_String(name));
+		}
+
+		@Override
+		public LogicExp in(V<String> v) {
+			return new In_String(this, v);
+		}
+
+		@Override
+		public LogicExp in(String v) {
+			return new In_String(this, new Cst_String(v));
 		}
 	}
 
@@ -128,8 +188,18 @@ public abstract class QuickExprBilder {
 		}
 
 		@Override
-		public LogicExp ls(V<Integer> v) {
-			return new Ls_Integer(this, v);
+		public LogicExp ge(V<Integer> v) {
+			return new Ge_Integer(this, v);
+		}
+
+		@Override
+		public LogicExp lt(V<Integer> v) {
+			return new Lt_Integer(this, v);
+		}
+
+		@Override
+		public LogicExp le(V<Integer> v) {
+			return new Le_Integer(this, v);
 		}
 
 		@Override
@@ -138,13 +208,28 @@ public abstract class QuickExprBilder {
 		}
 
 		@Override
+		public LogicExp ne(V<Integer> v) {
+			return new Ne_Integer(this, v);
+		}
+
+		@Override
 		public LogicExp gtF(String name) {
 			return new Gt_Integer(this, new Field_Integer(name));
 		}
 
 		@Override
-		public LogicExp lsF(String name) {
-			return new Ls_Integer(this, new Field_Integer(name));
+		public LogicExp geF(String name) {
+			return new Ge_Integer(this, new Field_Integer(name));
+		}
+
+		@Override
+		public LogicExp ltF(String name) {
+			return new Lt_Integer(this, new Field_Integer(name));
+		}
+
+		@Override
+		public LogicExp leF(String name) {
+			return new Le_Integer(this, new Field_Integer(name));
 		}
 
 		@Override
@@ -153,13 +238,28 @@ public abstract class QuickExprBilder {
 		}
 
 		@Override
+		public LogicExp neF(String name) {
+			return new Ne_Integer(this, new Field_Integer(name));
+		}
+
+		@Override
 		public LogicExp gt(Integer v) {
 			return new Gt_Integer(this, new Cst_Integer(v));
 		}
 
 		@Override
-		public LogicExp ls(Integer v) {
-			return new Ls_Integer(this, new Cst_Integer(v));
+		public LogicExp ge(Integer v) {
+			return new Ge_Integer(this, new Cst_Integer(v));
+		}
+
+		@Override
+		public LogicExp lt(Integer v) {
+			return new Lt_Integer(this, new Cst_Integer(v));
+		}
+
+		@Override
+		public LogicExp le(Integer v) {
+			return new Le_Integer(this, new Cst_Integer(v));
 		}
 
 		@Override
@@ -167,9 +267,13 @@ public abstract class QuickExprBilder {
 			return new Eq_Integer(this, new Cst_Integer(v));
 		}
 
+		@Override
+		public LogicExp ne(Integer v) {
+			return new Ne_Integer(this, new Cst_Integer(v));
+		}
 	}
 
-	private class Field_String extends V_String implements Field<String> {
+	private class Field_String extends V_StringImp implements Field<String> {
 
 		String name;
 
@@ -219,9 +323,6 @@ public abstract class QuickExprBilder {
 		}
 	}
 
-	/**
-	 * A "greater than" expression.
-	 */
 	class Gt_String extends BinaryLogicCompareExp<String> {
 
 		Gt_String(final V<String> e1, final V<String> e2) {
@@ -236,9 +337,23 @@ public abstract class QuickExprBilder {
 		}
 	}
 
-	class Ls_String extends BinaryLogicCompareExp<String> {
+	class Ge_String extends BinaryLogicCompareExp<String> {
 
-		Ls_String(final V<String> e1, final V<String> e2) {
+		Ge_String(final V<String> e1, final V<String> e2) {
+			super(e1, e2);
+		}
+
+		@Override
+		public boolean exec() {
+			String s1 = e1.exec();
+			String s2 = e2.exec();
+			return s1 == s2 || (s1 != null && s2 != null && s1.compareTo(s2) >= 0);
+		}
+	}
+
+	class Lt_String extends BinaryLogicCompareExp<String> {
+
+		Lt_String(final V<String> e1, final V<String> e2) {
 			super(e1, e2);
 		}
 
@@ -247,6 +362,20 @@ public abstract class QuickExprBilder {
 			String s1 = e1.exec();
 			String s2 = e2.exec();
 			return s1 == s2 || (s1 != null && s2 != null && s1.compareTo(s2) < 0);
+		}
+	}
+
+	class Le_String extends BinaryLogicCompareExp<String> {
+
+		Le_String(final V<String> e1, final V<String> e2) {
+			super(e1, e2);
+		}
+
+		@Override
+		public boolean exec() {
+			String s1 = e1.exec();
+			String s2 = e2.exec();
+			return s1 == s2 || (s1 != null && s2 != null && s1.compareTo(s2) <= 0);
 		}
 	}
 
@@ -260,7 +389,34 @@ public abstract class QuickExprBilder {
 		public boolean exec() {
 			String s1 = e1.exec();
 			String s2 = e2.exec();
-			return s1 == s2 || (s1 != null && s2 != null && s1.compareTo(s2) == 0);
+			return s1 != null && s2 != null && s1.compareTo(s2) == 0;
+		}
+	}
+
+	class Ne_String extends BinaryLogicCompareExp<String> {
+
+		Ne_String(final V<String> e1, final V<String> e2) {
+			super(e1, e2);
+		}
+
+		@Override
+		public boolean exec() {
+			String s1 = e1.exec();
+			String s2 = e2.exec();
+			return s1 != null && s2 != null && s1.compareTo(s2) != 0;
+		}
+	}
+
+	class In_String extends BinaryLogicCompareExp<String> {
+		In_String(final V<String> e1, final V<String> e2) {
+			super(e1, e2);
+		}
+
+		@Override
+		public boolean exec() {
+			String s1 = e1.exec();
+			String s2 = e2.exec();
+			return s1 != null && s2 != null && s2.indexOf(s1) >= 0;
 		}
 	}
 
@@ -276,15 +432,39 @@ public abstract class QuickExprBilder {
 		}
 	}
 
-	class Ls_Integer extends BinaryLogicCompareExp<Integer> {
+	class Ge_Integer extends BinaryLogicCompareExp<Integer> {
 
-		Ls_Integer(final V<Integer> e1, final V<Integer> e2) {
+		Ge_Integer(final V<Integer> e1, final V<Integer> e2) {
+			super(e1, e2);
+		}
+
+		@Override
+		public boolean exec() {
+			return e1.exec() >= e2.exec();
+		}
+	}
+
+	class Lt_Integer extends BinaryLogicCompareExp<Integer> {
+
+		Lt_Integer(final V<Integer> e1, final V<Integer> e2) {
 			super(e1, e2);
 		}
 
 		@Override
 		public boolean exec() {
 			return e1.exec() < e2.exec();
+		}
+	}
+
+	class Le_Integer extends BinaryLogicCompareExp<Integer> {
+
+		Le_Integer(final V<Integer> e1, final V<Integer> e2) {
+			super(e1, e2);
+		}
+
+		@Override
+		public boolean exec() {
+			return e1.exec() <= e2.exec();
 		}
 	}
 
@@ -297,6 +477,18 @@ public abstract class QuickExprBilder {
 		@Override
 		public boolean exec() {
 			return e1.exec() == e2.exec();
+		}
+	}
+
+	class Ne_Integer extends BinaryLogicCompareExp<Integer> {
+
+		Ne_Integer(final V<Integer> e1, final V<Integer> e2) {
+			super(e1, e2);
+		}
+
+		@Override
+		public boolean exec() {
+			return e1.exec() != e2.exec();
 		}
 	}
 

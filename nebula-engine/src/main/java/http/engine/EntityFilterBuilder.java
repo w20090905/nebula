@@ -17,7 +17,35 @@ public class EntityFilterBuilder {
 		LogicExp exp = builder.Nop();
 
 		for (Map.Entry<String, String> entry : query.entrySet()) {
-			exp = exp.and(builder.C(entry.getValue()).eqF(entry.getKey()));
+			String[] ks = entry.getKey().split(":");
+			String key = ks[0];
+			if(ks.length==1){
+				exp = exp.and(builder.C(entry.getValue()).eqF(key));
+			}else{
+				String op = ks[1];
+				if("from".equals(op)){
+					exp = exp.and(builder.C(entry.getValue()).leF(key));					
+				}else if("to".equals(op)){
+					exp = exp.and(builder.C(entry.getValue()).geF(key));				
+				}else if("gt".equals(op)){
+					exp = exp.and(builder.C(entry.getValue()).ltF(key));				
+				}else if("ge".equals(op)){
+					exp = exp.and(builder.C(entry.getValue()).leF(key));				
+				}else if("lt".equals(op)){
+					exp = exp.and(builder.C(entry.getValue()).gtF(key));				
+				}else if("le".equals(op)){
+					exp = exp.and(builder.C(entry.getValue()).geF(key));			
+				}else if("ne".equals(op)){
+					exp = exp.and(builder.C(entry.getValue()).neF(key));			
+				}else if("eq".equals(op)){
+					exp = exp.and(builder.C(entry.getValue()).eqF(key));		
+				}else if("has".equals(op)){
+					exp = exp.and(builder.C(entry.getValue()).inF(key));				
+				}else{
+					throw new UnsupportedOperationException(op);
+				}
+			}
+			
 		}
 		exp.finish();
 
