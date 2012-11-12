@@ -137,7 +137,11 @@ function ContactRecordsCtrl($scope,$resource) {
 			params : {},
 			isArray : true
 		}
-	}).query();
+	}).query(function(){
+		$scope.data.CompanyName = $scope.companyList[0].Name;
+		$scope.refresh();
+	});
+	
 
 	$scope.personList = $resource('d/Person/', {}, {
 		query : {
@@ -155,6 +159,11 @@ function ContactRecordsCtrl($scope,$resource) {
 			isArray : true
 		}
 	});
+	
+	$scope.getActive = function(v){
+		if(v == $scope.data.CompanyName) return "active";
+		else return "";
+	}
 
 	$scope.refresh = function(){
 		$scope.contactRecords=$resource('d/ContactRecord/', {}, {
@@ -166,8 +175,6 @@ function ContactRecordsCtrl($scope,$resource) {
 		}).query();	
 	};
 
-	
-	
 	$scope.remotedata = {};
 	
 	$scope.refresh();

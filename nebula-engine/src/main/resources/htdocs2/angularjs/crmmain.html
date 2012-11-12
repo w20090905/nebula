@@ -2,7 +2,7 @@
 <!--
 
 ul.contacts {
-	width: 100%
+	width: 100%;
 }
 
 ul.contacts li {
@@ -29,20 +29,24 @@ ul.contacts .content pre{
 div.right{
 	float: right;
 }
+.nav.nav-tabs{
+	padding-top: 1em;
+}
+
 -->
 </style>
-<article class="module width_full">
-<header>
-	<h3>ContactRecord</h3>
-</header>
 
 <form x-ng-submit="addContactRecord()" class="form-horizontal">
-	<div class="control-group" style="clear: both;">
-		<label class="control-label">Company</label>
-		<div class="controls">
-			<select x-ng-model="data.CompanyName" x-ng-options="c.Name as c.Name for c in companyList" required x-ng-change="refresh()"></select>
-		</div>
-	</div>
+	<ul class="nav nav-tabs">
+		<li x-ng-repeat="c in companyList" x-ng-Class="getActive(c.Name)">
+			<a href="" x-ng-click="data.CompanyName=c.Name;refresh();">{{c.Name}}</a>
+	  	</li>	
+	</ul>
+	
+<article class="module width_full">
+	<header>
+		<h3>ContactRecord</h3>
+	</header>
 	<div class="control-group" style="clear: both;">
 		<label class="control-label">Person</label>
 		<div class="controls">
@@ -60,15 +64,15 @@ div.right{
 			<input class="btn btn-primary" type="submit" value="add">
 		</div>
 	</div>
-</form>
 </article>
+</form>
 
 <article class="module width_full">
 <header>
 	<h3>History</h3>
 </header>
 <div class="clear:both;"></div>
-<span>{{remaining()}} of {{contactRecords.length}} remaining</span> [ <a href="" x-ng-click="archive()">archive</a> ]
+<!-- <span>{{remaining()}} of {{contactRecords.length}} remaining</span> [ <a href="" x-ng-click="archive()">archive</a> ] -->
 <ul class="unstyled contacts ">
 	<li x-ng-repeat="contactRecord in contactRecords | orderBy:'-LastUpdated'">
 	<div class="logo">
