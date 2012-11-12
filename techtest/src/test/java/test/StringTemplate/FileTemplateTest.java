@@ -11,9 +11,15 @@ import org.antlr.tool.ErrorManager;
 
 
 public class FileTemplateTest  extends TestCase{
-    String templates = "group simple;" + "" + "vardef(type,name) ::= \"<type> <name>;\"" + ""
-            + "method(type,name,args) ::= <<" + "<type> <name>(<args; separator=\",\">) {"
-            + "  <statements; separator=\"\n\">" + "}" + ">>";
+    String templates = "group simple;" 
+    		+ "" 
+    		+ "vardef(type,name) ::= \"<type> <name>;\"" 
+    		+ ""
+            + "method(type,name,args) ::= <<" 
+    		+ "<type> <name>(<args; separator=\",\">) {"
+            + "  <statements; separator=\"\n\">"
+    		+ "}" 
+            + ">>";
 
     public void testGroup() {
         // Use the constructor that accepts a Reader
