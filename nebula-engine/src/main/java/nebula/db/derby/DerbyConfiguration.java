@@ -11,32 +11,32 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public class DerbyConfiguration extends DbConfiguration {
-    private static final Log log = LogFactory.getLog(DerbyConfiguration.class);
+	private static final Log log = LogFactory.getLog(DerbyConfiguration.class);
 
-    public DerbyConfiguration(String driverClass, String url, String userName, String password) {
-        super(driverClass, url, userName, password);
-    }
+	public DerbyConfiguration(String driverClass, String url, String userName, String password) {
+		super(driverClass, url, userName, password);
+	}
 
-    @Override
-    public DBExec getPersister(Type type) {
-        log.debug("== getPersister : " + type.getName());
-        return new DBExec(conn, type, new DerbySQLHelper(type));
-    }
+	@Override
+	public DBExec getPersister(Type type) {
+		log.debug("== getPersister : " + type.getName());
+		return new DBExec(this, conn, type, new DerbySQLHelper(this,type));
+	}
 
-    @Override
-    public void shutdown() {
-        super.shutdown();
+	@Override
+	public void shutdown() {
+		super.shutdown();
 
-        try { // perform a clean shutdown
-            DriverManager.getConnection("jdbc:derby:;shutdown=true");
-            log.debug("== Database shut down normally");
-        } catch (SQLException se) {
-        }
-    }
+		try { // perform a clean shutdown
+			DriverManager.getConnection("jdbc:derby:;shutdown=true");
+			log.debug("== Database shut down normally");
+		} catch (SQLException se) {
+		}
+	}
 
-    @Override
-    protected void finalize() throws Throwable {
-        this.shutdown();
-    }
+	@Override
+	protected void finalize() throws Throwable {
+		this.shutdown();
+	}
 
 }

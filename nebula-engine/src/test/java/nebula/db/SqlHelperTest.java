@@ -3,6 +3,7 @@ package nebula.db;
 import java.io.StringReader;
 
 import junit.framework.TestCase;
+import nebula.db.derby.DerbyConfiguration;
 import nebula.lang.SystemTypeLoader;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -11,9 +12,11 @@ public class SqlHelperTest extends TestCase {
 	TypeLoader loader;
 	Type t;
 	SqlHelper h;
+	DbConfiguration config;
 
 	protected void setUp() throws Exception {
 		loader = new SystemTypeLoader();
+		config = new DerbyConfiguration("","","","");
 
 		super.setUp();
 	}
@@ -37,7 +40,7 @@ public class SqlHelperTest extends TestCase {
 		//@formatter:on		
 
 		t = loader.defineNebula(new StringReader(text)).get(0);
-		h = new  SqlHelper(t);
+		h = new  SqlHelper(config,t);
 		assertEquals("NPerson", h.getTableName());	
 
 		assertEquals(5, h.columns.length);
@@ -59,6 +62,14 @@ public class SqlHelperTest extends TestCase {
 		
 		assertEquals("SELECT count(1) FROM NPerson ", h.builderCount());
 		
+		assertEquals("CREATE TABLE NPerson(NAME varchar(60)," +
+				"TEST_KEY varchar(60)," +
+				"TEST_CORE bigint," +
+				"TEST_REQUIRE bigint," +
+				"TEST_IGNORE bigint," +
+				"PRIMARY KEY ( NAME,TEST_KEY)," +
+				"TIMESTAMP_ TIMESTAMP)", h.builderCreate());
+		
 	}
 	
 
@@ -78,7 +89,7 @@ public class SqlHelperTest extends TestCase {
 		//@formatter:on		
 
 		t = loader.defineNebula(new StringReader(text)).get(0);
-		h = new  SqlHelper(t);
+		h = new  SqlHelper(config,t);
 		assertEquals("NTestPerson", h.getTableName());	
 
 		int i = 0;
@@ -109,6 +120,76 @@ public class SqlHelperTest extends TestCase {
 		assertEquals(i+1, h.columns.length);
 		
 		assertEquals("SELECT count(1) FROM NTestPerson ", h.builderCount());
+
+		assertEquals("CREATE TABLE NTestPerson(" +
+				"NAME varchar(60) PRIMARY KEY," +
+				"TEST_KEY varchar(60)," +
+				"TEST_CORE bigint," +
+				"TEST_REQUIRE bigint," +
+				"TEST_IGNORE bigint," +
+				"TESTREF_KEY varchar(60)," +
+				"TESTREF_CORE varchar(60)," +
+				"TIMESTAMP_ TIMESTAMP)", 
+				h.builderCreate());
+	}
+	
+
+
+	public final void testTypse() {
+		//@formatter:off
+		String text = "" +
+				"type TestPerson { " +
+				"	!Name;" +
+				"	Date;" +
+				"	Time;" +
+				"	Datetime;" +
+				"	Timestamp;" +
+				"	Quantity;" +
+				"	Amount;" +
+				"};";
+		//@formatter:on		
+
+		t = loader.defineNebula(new StringReader(text)).get(0);
+		h = new  SqlHelper(config,t);
+		assertEquals("NTestPerson", h.getTableName());	
+
+		int i = 0;
+		assertEquals("Name", h.columns[i].fieldName);
+		assertEquals(true, h.columns[i].key);		
+		i++;
+		assertEquals("Date", h.columns[i].fieldName);
+		assertEquals(false, h.columns[i].key);		
+		i++;
+		assertEquals("Time", h.columns[i].fieldName);	
+		assertEquals(false, h.columns[i].key);			
+		i++;
+		assertEquals("Datetime", h.columns[i].fieldName);
+		assertEquals(false, h.columns[i].key);				
+		i++;
+		assertEquals("Timestamp", h.columns[i].fieldName);
+		assertEquals(false, h.columns[i].key);				
+		i++;
+		assertEquals("Quantity", h.columns[i].fieldName);
+		assertEquals(false, h.columns[i].key);				
+		i++;
+		assertEquals("Amount", h.columns[i].fieldName);
+		assertEquals(false, h.columns[i].key);	
+				
+
+
+		assertEquals(i+1, h.columns.length);
 		
+		assertEquals("SELECT count(1) FROM NTestPerson ", h.builderCount());
+
+		assertEquals("CREATE TABLE NTestPerson(" +
+				"NAME varchar(60) PRIMARY KEY," +
+				"DATE date," +
+				"TIME time," +
+				"DATETIME date," +
+				"TIMESTAMP timestamp," +
+				"QUANTITY bigint," +
+				"AMOUNT number(10,2)," +
+				"TIMESTAMP_ TIMESTAMP)", 
+				h.builderCreate());
 	}
 }

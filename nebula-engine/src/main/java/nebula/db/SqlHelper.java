@@ -5,6 +5,7 @@ import java.util.List;
 
 import nebula.lang.Field;
 import nebula.lang.Type;
+import util.InheritHashMap;
 
 public class SqlHelper {
 
@@ -16,16 +17,42 @@ public class SqlHelper {
 	final String fieldlist_questions;
 	final String wherekeys;
 	ArrayList<DbColumn> fs;
+	final DbConfiguration config;
 
-	private void addColumn(String name, Type type, boolean key) {
-		DbColumn c = new DbColumn(name, decodeFieldName(name), type.getName(), type.getName(), key);
+	private void addColumn(String name, Field field, boolean key) {
+		InheritHashMap attrs = field.getAttrs();
+		Object v = attrs.get("jdbcType");
+		int jdbcType = v != null ? (Integer) v : 0;
+
+		v = attrs.get("length");
+		long size = v != null ? (Integer) v : 0;
+
+		v = attrs.get("precision");
+		int precision = v != null ? (Integer) v : 0;
+
+		v = attrs.get("scale");
+		int scale = v != null ? (Integer) v : 0;
+
+		DbColumn c = new DbColumn(name, decodeFieldName(name), key, jdbcType, size, precision, scale);
 		fs.add(c);
 	}
 
-	private void addColumn(String resideName, String name, Type type, boolean key) {
-		DbColumn c = new DbColumn(resideName + name, 
-				decodeFieldName(resideName + "_" + name), 
-				type.getName(),	type.getName(), key);
+	private void addColumn(String resideName, String name, Field field, boolean key) {
+		InheritHashMap attrs = field.getAttrs();
+		Object v = attrs.get("jdbcType");
+		int jdbcType = v != null ? (Integer) v : 0;
+
+		v = attrs.get("length");
+		long size = v != null ? (Integer) v : 0;
+
+		v = attrs.get("precision");
+		int precision = v != null ? (Integer) v : 0;
+
+		v = attrs.get("scale");
+		int scale = v != null ? (Integer) v : 0;
+
+		DbColumn c = new DbColumn(resideName + name, decodeFieldName(resideName + "_" + name), key, jdbcType, size,
+				precision, scale);
 		fs.add(c);
 	}
 
@@ -41,9 +68,11 @@ public class SqlHelper {
 		return this.tableName;
 	}
 
-	public SqlHelper(Type type) {
+	public SqlHelper(final DbConfiguration config, Type type) {
 
 		try {
+			this.config = config;
+
 			this.clz = type;
 
 			tableName = decodeTypeName(type.getName());
@@ -59,12 +88,12 @@ public class SqlHelper {
 				Type rT;
 				switch (f.getRefer()) {
 				case ByVal:
-					addColumn(f.getName(), f.getType(), f.isKey());
+					addColumn(f.getName(), f, f.isKey());
 					break;
 				case Inline:
 					rT = f.getType();
 					for (Field rf : rT.getFields()) {
-						addColumn(f.getName(), rf.getName(), rf.getType(), f.isKey() && rf.isKey());
+						addColumn(f.getName(), rf.getName(), rf, f.isKey() && rf.isKey());
 					}
 					break;
 				case ByRef:
@@ -73,7 +102,7 @@ public class SqlHelper {
 						switch (rf.getImportance()) {
 						case Key:
 						case Core:
-							addColumn(rT.getName(), rf.getName(), rf.getType(), f.isKey() && rf.isKey());
+							addColumn(rT.getName(), rf.getName(), rf, f.isKey() && rf.isKey());
 							break;
 						}
 					}
@@ -84,7 +113,7 @@ public class SqlHelper {
 						switch (rf.getImportance()) {
 						case Key:
 						case Core:
-							addColumn(rT.getName(), rf.getName(), rf.getType(), f.isKey() || rf.isKey());
+							addColumn(rT.getName(), rf.getName(), rf, f.isKey() || rf.isKey());
 							break;
 						}
 					}
@@ -140,32 +169,31 @@ public class SqlHelper {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("CREATE TABLE ").append(this.tableName).append("(");
-		
-		int cnt = 0;
-		
+
+		int cntKeys = 0;
+
 		for (DbColumn column : this.columns) {
-			if(column.key)cnt++;
+			if (column.key) cntKeys++;
 		}
-		
-		
+
 		for (DbColumn column : this.columns) {
-			if (column.key && cnt==1) {
-				sb.append(column.columnName).append(" varchar(40) PRIMARY KEY").append(",");
+			if (column.key && cntKeys == 1) {
+				sb.append(column.columnName).append(' ').append(config.toColumnDefine(column)).append(" PRIMARY KEY").append(",");
 			} else {
-				sb.append(column.columnName).append(" varchar(40)").append(",");
+				sb.append(column.columnName).append(' ').append(config.toColumnDefine(column)).append(",");
 			}
 		}
-		if(cnt>1){
+		if (cntKeys > 1) {
 			sb.append("PRIMARY KEY ( ");
 			for (DbColumn column : this.columns) {
-				if(column.key){
-					sb.append(column.columnName).append(",");					
+				if (column.key) {
+					sb.append(column.columnName).append(",");
 				}
 			}
-			sb.setCharAt(sb.length()-1,')');
+			sb.setCharAt(sb.length() - 1, ')');
 			sb.append(',');
 		}
-		
+
 		sb.append("TIMESTAMP_").append(" TIMESTAMP");
 		sb.append(")");
 
@@ -194,8 +222,9 @@ public class SqlHelper {
 		return "DELETE FROM " + this.tableName + " WHERE " + wherekeys + "";
 	}
 
-	public String builderAddColumn(DbColumn c) {
-		return "ALTER TABLE " + this.tableName + " ADD COLUMN " + c.columnName + " VARCHAR(40)";
+	public String builderAddColumn(DbColumn column) {
+		return "ALTER TABLE " + this.tableName + " ADD COLUMN " + column.columnName + " "
+				+ config.toColumnDefine(column);
 	}
 
 	public String builderDeleteAll() {

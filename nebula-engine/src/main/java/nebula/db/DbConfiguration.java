@@ -3,6 +3,7 @@ package nebula.db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import nebula.db.derby.DerbyConfiguration;
 import nebula.db.oracle.OracleConfiguration;
@@ -20,11 +21,22 @@ public abstract class DbConfiguration {
 	protected final String userPassword;
 	protected Connection conn = null;
 
+	TypeNames typeNames = new TypeNames();
+
 	public DbConfiguration(String driverClass, String url, String userName, String password) {
 		this.driverClass = driverClass;
 		this.url = url;
 		this.userName = userName;
 		this.userPassword = password;
+		
+
+		registerColumnType(Types.BIGINT, "bigint");
+		registerColumnType(Types.DECIMAL, "number($p,$s)");
+		registerColumnType(Types.VARCHAR, "varchar($l)");
+		registerColumnType(Types.DATE, "date");
+		registerColumnType(Types.TIME, "time");
+		registerColumnType(Types.DATE, "date");
+		registerColumnType(Types.TIMESTAMP, "timestamp");
 	}
 
 	public void init() {
@@ -53,7 +65,29 @@ public abstract class DbConfiguration {
 		return dbEngine;
 	}
 
-//	public abstract <T extends HasID> Persistence<T> getPersister(Class<T> t, Type type);
+	protected void registerColumnType(int jdbcType, String columnTypeName) {
+		typeNames.put(jdbcType, columnTypeName);
+	}
+	
+
+	protected String toColumnDefine(DbColumn column) {
+		String typeName = typeNames.get(column.jdbcType);
+		switch (column.jdbcType) {
+		case Types.DECIMAL:
+			typeName = typeName.replaceFirst("\\$p", String.valueOf(column.precision));
+			typeName = typeName.replaceFirst("\\$s", String.valueOf(column.scale));
+			break;
+		case Types.VARCHAR:
+			typeName = typeName.replaceFirst("\\$l", String.valueOf(column.size));			
+			break;
+		default:
+			break;
+		}
+		return typeName;		
+	}
+
+	// public abstract <T extends HasID> Persistence<T> getPersister(Class<T> t,
+	// Type type);
 
 	public abstract DBExec getPersister(Type type);
 

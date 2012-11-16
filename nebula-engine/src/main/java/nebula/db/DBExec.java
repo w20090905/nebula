@@ -28,7 +28,6 @@ public class DBExec {
 	final private PreparedStatement SQL_INSERT;
 	final private PreparedStatement SQL_UPDATE;
 	final private PreparedStatement SQL_DELETE;
-	final private PreparedStatement SQL_DELETEALL;
 	final private PreparedStatement SQL_LIST;
 	// final private String SQL_COUNT;
 
@@ -41,7 +40,7 @@ public class DBExec {
 
 	// final private String[] systemFields = new String[] { "TIMESTAMP_" };
 
-	public DBExec(Connection conn, Type type, SqlHelper helper) {
+	public DBExec(DbConfiguration config, Connection conn, Type type, SqlHelper helper) {
 		this.type = type;
 		this.conn = conn;
 
@@ -58,17 +57,11 @@ public class DBExec {
 			SQL_INSERT = conn.prepareStatement(builder.builderInsert());
 			SQL_UPDATE = conn.prepareStatement(builder.builderUpdate());
 			SQL_DELETE = conn.prepareStatement(builder.builderDelete());
-			SQL_DELETEALL = conn.prepareStatement(builder.builderDeleteAll());
 			SQL_LIST = conn.prepareStatement(builder.builderList());
 		} catch (SQLException e) {
 			log.error(e);
 			throw new RuntimeException(e);
 		}
-
-		// realFields = new String[columns.length];
-		// for (int i = 0; i < columns.length; i++) {
-		// realFields[i] = columns[i].columnName;
-		// }
 	}
 
 	public void init() {
@@ -133,6 +126,15 @@ public class DBExec {
 		}
 	}
 
+
+	public void drop() {
+		try {
+			conn.createStatement().execute(builder.builderDrop());
+		} catch (SQLException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		}			
+	}
 	public void update(Map<String, Object> value, Object... keys) {
 		log.debug(SQL_UPDATE + " : " + value);
 		executeUpdate(SQL_UPDATE, value, keys);
@@ -144,18 +146,12 @@ public class DBExec {
 	}
 
 	public void deleteAll() {
-		ResultSet res = null;
 		try {
-			SQL_DELETEALL.executeUpdate();
+			conn.createStatement().execute(builder.builderDeleteAll());
 		} catch (SQLException e) {
+			log.error(e);
 			throw new RuntimeException(e);
-		} finally {
-			try {
-				if (res != null) res.close();
-			} catch (SQLException e) {
-				throw new RuntimeException(e);
-			}
-		}
+		}			
 	}
 
 	public List<Map<String, Object>> getAll() {
@@ -172,11 +168,11 @@ public class DBExec {
 
 		List<Map<String, Object>> list = executeQuery(SQL_GET, keys);
 		if (list == null) {
-			throw new RuntimeException("Can not find record key:");
+			throw new RuntimeException("Can not find record key:" + keys);
 		}
 
 		if (list.size() != 1) {
-
+			throw new RuntimeException("Can not find record key:" + keys);
 		}
 		return list.get(0);
 	}
@@ -236,8 +232,8 @@ public class DBExec {
 
 	int fromEntity(PreparedStatement prepareStatement, Map<String, Object> v) throws SQLException {
 		int pos = 0;
-		for (DbColumn c : columns) {
-			prepareStatement.setString(1 + pos, (String) v.get(c.fieldName));
+		for (DbColumn c : columns) {			
+			c.datadealer.writeTo(1 + pos,  v.get(c.fieldName), prepareStatement);
 			pos++;
 		}
 		return pos;
@@ -248,7 +244,7 @@ public class DBExec {
 
 		int pos = 0;
 		for (DbColumn c : columns) {
-			v.put(c.fieldName, result.getString(pos + 1));
+			v.put(c.fieldName, c.datadealer.readFrom(result, pos + 1));
 			pos++;
 		}
 		return v;

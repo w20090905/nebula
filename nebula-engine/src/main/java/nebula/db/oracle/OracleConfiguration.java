@@ -17,6 +17,6 @@ public class OracleConfiguration extends DbConfiguration {
     @Override
     public DBExec getPersister(Type type) {
         log.debug("== getPersister : " + type.getName());
-        return new DBExec(conn, type, new OracleSQLHelper(type));
+        return new DBExec(this,conn, type, new OracleSQLHelper(this,type));
     }
 }
