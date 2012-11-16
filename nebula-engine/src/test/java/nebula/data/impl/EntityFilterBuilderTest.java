@@ -176,4 +176,50 @@ public class EntityFilterBuilderTest extends TestCase {
 		assertTrue(filter.match(person2_22));
 		assertFalse(filter.match(person3_23));
 	}
+	
+	public void testOp_and_Query() {
+		Query query = new QueryParser("name:has=lian2&age=22");
+		for (Map.Entry<String, String> entry : query.entrySet()) {
+			System.out.println(entry.getKey() + " = " + entry.getValue());
+		}
+
+		Filter<Entity>  filter =  builder.buildFrom(query,null);
+
+		assertFalse(filter.match(person1_21));
+		assertTrue(filter.match(person2_22));
+		assertFalse(filter.match(person3_23));
+
+		query = new QueryParser("name:has=lian2&age=23");
+		for (Map.Entry<String, String> entry : query.entrySet()) {
+			System.out.println(entry.getKey() + " = " + entry.getValue());
+		}
+
+		filter =  builder.buildFrom(query,null);
+
+		assertFalse(filter.match(person1_21));
+		assertFalse(filter.match(person2_22));
+		assertFalse(filter.match(person3_23));
+		
+		query = new QueryParser("name:has=lian1&age=23");
+		for (Map.Entry<String, String> entry : query.entrySet()) {
+			System.out.println(entry.getKey() + " = " + entry.getValue());
+		}
+
+		filter =  builder.buildFrom(query,null);
+
+		assertFalse(filter.match(person1_21));
+		assertFalse(filter.match(person2_22));
+		assertFalse(filter.match(person3_23));
+		
+		query = new QueryParser("name:has=lian3&age=23");
+		for (Map.Entry<String, String> entry : query.entrySet()) {
+			System.out.println(entry.getKey() + " = " + entry.getValue());
+		}
+
+		filter =  builder.buildFrom(query,null);
+
+		assertFalse(filter.match(person1_21));
+		assertFalse(filter.match(person2_22));
+		assertTrue(filter.match(person3_23));
+	}
 }
