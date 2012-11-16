@@ -1,3 +1,3 @@
-	@maxLength = 120;
-type Zip extends Name {
+@maxLength = 6;
+type Zip extends Code {
 };

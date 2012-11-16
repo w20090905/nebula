@@ -1,4 +1,0 @@
-	@formatType = "date";
-	@format = "YYYY-MM-DD";
-type Date extends Long {
-};

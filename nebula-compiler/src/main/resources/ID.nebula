@@ -1,3 +1,2 @@
-	@maxLength = 20;
-type ID extends String {
+type ID extends Long {
 };

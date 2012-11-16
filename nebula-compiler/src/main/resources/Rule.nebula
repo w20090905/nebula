@@ -1,3 +1,3 @@
-	@maxLength = 120;
+@maxLength = 1024;
 type Rule extends String {
 };

@@ -1,3 +1,2 @@
-	@maxLength = 120;
-type Percent extends Long {
+type Percent extends Decimal {
 };

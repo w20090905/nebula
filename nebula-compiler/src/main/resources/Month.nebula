@@ -1,3 +1,4 @@
-	@maxLength = 20;
+@max = 12;
+@min = 1;
 type Month extends Long {
 };

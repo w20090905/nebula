@@ -12,7 +12,7 @@ public class Type {
 
 	final Type residedType;
 	final Type superType;
-	final String rawType;// For Basic Type
+	final RawTypes rawType;// For Basic Type
 
 	String name;
 	Alias nameAlias;
@@ -41,7 +41,7 @@ public class Type {
 		this(typeLoader, name, superType, superType.rawType);
 	}
 
-	Type(TypeLoader typeLoader, String name, Type superType, String rawType) {
+	Type(TypeLoader typeLoader, String name, Type superType, RawTypes rawType) {
 		this(typeLoader, null, name, superType, rawType);
 	}
 
@@ -49,7 +49,7 @@ public class Type {
 		this(typeLoader, residedType, name, superType, superType.rawType);
 	}
 
-	Type(TypeLoader typeLoader, Type residedType, String name, Type superType, String rawType) {
+	Type(TypeLoader typeLoader, Type residedType, String name, Type superType, RawTypes rawType) {
 		super();
 		this.loader = typeLoader;
 		this.residedType = residedType;
@@ -108,7 +108,7 @@ public class Type {
 		return superType;
 	}
 
-	public String getRawType() {
+	public RawTypes getRawType() {
 		return rawType;
 	}
 

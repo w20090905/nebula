@@ -1,2 +1,2 @@
-type Price extends Real {
+type Price extends Decimal {
 };

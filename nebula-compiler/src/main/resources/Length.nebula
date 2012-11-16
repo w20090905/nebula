@@ -1,3 +1,2 @@
-@maxLength = 16;
 type Length extends Long {
 };

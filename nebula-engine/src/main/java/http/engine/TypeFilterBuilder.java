@@ -54,7 +54,7 @@ public class TypeFilterBuilder {
 			strings.put("rawType", new GetStringValue<Type>() {			
 				@Override
 				public String getByName(Type obj) {
-					return obj.getRawType();
+					return obj.getRawType().toString();
 				}
 			});
 			

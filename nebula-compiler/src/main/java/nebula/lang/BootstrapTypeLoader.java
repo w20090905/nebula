@@ -1,6 +1,7 @@
 package nebula.lang;
 
 import java.net.URL;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,36 +25,80 @@ class BootstrapTypeLoader extends TypeLoader {
 
 	private void init() {
 		Type typeRoot = new Type(this, Type.TYPE);
-		Type badicType = new Type(this, Type.BASIC, typeRoot);
+		Type basicType = new Type(this, Type.BASIC, typeRoot);
+		
 		Type entity = new Type(this, Type.ENTITY, typeRoot);
-		Type string = new Type(this, "String", badicType, "String");
+		
+		
+		Type string = new Type(this, "String", basicType, RawTypes.String);
+		string.attrs.put("jdbcType",Types.VARCHAR);
+		string.attrs.put("length", 60);
 		string.attrs.put("formatType", "text");
 		
-		Type number = new Type(this, "Number", badicType);
+		
+		Type number = new Type(this, "Number", basicType, RawTypes.Long);
+		number.attrs.put("jdbcType",Types.BIGINT);
+		
 		number.attrs.put("formatType", "numeric");
+		number.attrs.put("precision", 10);
+		number.attrs.put("scale", 2);
 		
-		Type typeLong = new Type(this, "Long", number, "long");
-		typeLong.attrs.put("formatType", "numeric");
 		
-		Type decimal = new Type(this, "Decimal", number, "BigDecimal");
-		decimal.attrs.put("formatType", "numeric");
+		Type typeLong = new Type(this, "Long", number, RawTypes.Long);
+		typeLong.attrs.put("jdbcType",Types.BIGINT);
 		
-		Type attr = new Type(this, "Attr", badicType);
-		attr.attrs.put("formatType", "any");
+		
+		Type decimal = new Type(this, "Decimal", number, RawTypes.Decimal);
+		decimal.attrs.put("jdbcType",Types.DECIMAL);
+		decimal.attrs.put("precision", 10);
+		decimal.attrs.put("scale", 2);
+
+		Type date = new Type(this, "Date", basicType, RawTypes.Date);
+		date.attrs.put("jdbcType",Types.DATE);
+		
+		date.attrs.put("formatType", "date");
+		date.attrs.put("formatString", "YYYY-MM-DD");
+		
+		Type time = new Type(this, "Time", basicType, RawTypes.Time);
+		time.attrs.put("jdbcType",Types.TIME);
+		
+		time.attrs.put("formatType", "time");
+		time.attrs.put("formatString", "HH:mm:ss");
+		
+		Type datetime = new Type(this, "Datetime", basicType, RawTypes.Datetime);
+		datetime.attrs.put("jdbcType",Types.DATE);
+		
+		datetime.attrs.put("formatType", "datetime");
+		datetime.attrs.put("formatString", "YYYY-MM-DD HH:mm:ss");
+		
+		Type timestamp = new Type(this, "Timestamp", basicType, RawTypes.Timestamp);
+		timestamp.attrs.put("jdbcType",Types.TIMESTAMP);
+		
+		timestamp.attrs.put("formatType", "timestamp");
+		timestamp.attrs.put("formatString", "YYYY-MM-DD HH:mm:ss.S");
+
+		Type type = new Type(this, "Name", string);
+		type.attrs.put("maxLength", 60);
+		
+		Type attr = new Type(this, "Attr", string);
+		attr.attrs.put("formatType", "text");
 
 		List<Type> typeList = new ArrayList<Type>();
-
+		
 		typeList.add(typeRoot);
-		typeList.add(badicType);
+		typeList.add(basicType);
 		typeList.add(string);
 		typeList.add(number);
 		typeList.add(typeLong);
 		typeList.add(decimal);
 		typeList.add(entity);
 		typeList.add(attr);
+
+		typeList.add(date);
+		typeList.add(time);
+		typeList.add(datetime);
+		typeList.add(timestamp);
 		
-		Type type = new Type(this, "Name", string);
-		type.attrs.put("maxLength", 60);
 		typeList.add(type);
 		
 		this.types.addAll(typeList);

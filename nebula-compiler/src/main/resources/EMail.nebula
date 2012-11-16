@@ -1,4 +1,5 @@
-	@inputSize = "large";
-	@maxLength = 120;
-type EMail extends Name {
+@formatType = "numeric";
+@inputSize = "large";
+@maxLength = 120;
+type EMail extends String {
 };

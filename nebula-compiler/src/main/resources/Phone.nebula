@@ -1,3 +1,2 @@
-	@maxLength = 120;
-type PhoneNumber extends Name {
+type PhoneNumber extends Code {
 };
