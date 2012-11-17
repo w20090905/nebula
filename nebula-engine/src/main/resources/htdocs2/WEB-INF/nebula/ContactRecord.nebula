@@ -1,5 +1,5 @@
 type ContactRecord {
-	Name;/*
+	!Name;/*
 	!AutoID;
 	Company;
 	Person;
