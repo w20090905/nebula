@@ -9,6 +9,7 @@
 
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
     <style type="text/css">
      	body {
         	padding-top: 60px;
@@ -52,10 +53,10 @@
           <a class="brand" href="#">Nebula</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
-              Logged in as <a href="login.html" class="navbar-link">{{LoginUserID}}</a>
+              Logged in as <a href="login.html" class="navbar-link"><i class="icon-user"></i> {{LoginUserID}}</a>
             </p>
             <ul class="nav nav-pills">
-              <li><a href="index.html#/c/{{LoginUserID}}">Home</a></li>
+              <li><a href="index.html#/c/{{LoginUserID}}"><i class="icon-home"></i> Home</a></li>
               <li><a href="indexSetting.html">Setting</a></li>
               <li class="active"><a href="indexAdmin.html">Admin</a></li>
             </ul>
@@ -73,7 +74,7 @@
 					<h3>{{menuGroup.label}}</h3>
 					<ul class="nav nav-list">
 						<li  x-ng-repeat="menu in menuGroup.items" class="icn_categories">				
-							<a x-ng-href="{{menu.href}}">{{menu.label}}</a>
+							<a x-ng-href="{{menu.href}}"><i class="icon-edit"></i>{{menu.label}}</a>
 						</li>
 					</ul>		
 				</li>
