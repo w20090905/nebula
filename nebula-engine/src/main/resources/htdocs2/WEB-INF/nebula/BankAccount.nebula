@@ -1,9 +1,10 @@
 type BankAccount{
+	Name;/*
   !AutoID;
   *Bank;
   *Currency;
   Type Attr;
   IBAN Code;
   Creditlimit Amount;
-  Description;
+  Description;*/
 };
