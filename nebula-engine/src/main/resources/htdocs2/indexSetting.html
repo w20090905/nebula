@@ -2,7 +2,7 @@
 <html lang="en" x-ng-app="appAdmin">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>Nebula Setting</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -34,7 +34,36 @@
       		float: right;
       		margin-left: .3em;
       	}
-      
+      	
+		.well{
+			background-color: #e3e3e3;
+		}
+		
+		.table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
+			background-color: #ededed;
+		}
+      	
+      	.nav-collapse .nav li a i.icon-white{
+      		display: none;
+      	}
+      	
+      	.nav-collapse .nav li a:HOVER i{
+      		display: none;
+      	}   
+      	.nav-collapse .nav li a:HOVER i.icon-white{
+      		display: inline-block;
+      	}
+      	
+      	.nav-collapse a.navbar-link i.icon-white{
+      		display: none;
+      	}
+      	
+      	.nav-collapse a.navbar-link:HOVER i{
+      		display: none;
+      	}
+      	.nav-collapse a.navbar-link:HOVER i.icon-white{
+      		display: inline-block;
+      	}      
     </style>
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
   </head>
@@ -52,12 +81,12 @@
           <a class="brand" href="#">Nebula</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
-              Logged in as <a href="login.html" class="navbar-link">{{LoginUserID}}</a>
+              Logged in as <a href="login.html" class="navbar-link"><i class="icon-user"></i><i class="icon-user icon-white"></i>{{LoginUserID}}</a>
             </p>
             <ul class="nav nav-pills">
-              <li><a href="index.html#/c/{{LoginUserID}}">Home</a></li>
-              <li class="active"><a href="indexSetting.html">Setting</a></li>
-              <li><a href="indexAdmin.html">Admin</a></li>
+              <li><a href="index.html#/c/{{LoginUserID}}"><i class="icon-home"></i><i class="icon-home icon-white"></i>Home</a></li>
+              <li class="active"><a href="indexSetting.html"><i class="icon-asterisk"></i><i class="icon-asterisk icon-white"></i>Setting</a></li>
+              <li><a href="indexAdmin.html"><i class="icon-asterisk"></i><i class="icon-asterisk icon-white"></i>Admin</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
