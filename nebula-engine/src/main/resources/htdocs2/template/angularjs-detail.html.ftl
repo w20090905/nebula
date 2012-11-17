@@ -28,12 +28,11 @@
 					[#default]			type="text"		[#break]				
 				[/#switch]
 				
-				[#if field.key				] x-ng-readonly="update" 				[/#if]
-				[#if field.attrs.min??		] min		="${field.attrs.min}" 		[/#if]
+				[#if field.key			] x-ng-readonly ="update"		[/#if]
 				[#if field.attrs.min??		] min		="${field.attrs.min}" 		[/#if]
 				[#if field.attrs.max??		] max		="${field.attrs.max}" 		[/#if]
-				[#if field.attrs.minLength??] minLength	="${field.attrs.minLength}" [/#if]
-				[#if field.attrs.maxLength??] maxLength	="${field.attrs.maxLength}" [/#if]
+				[#if field.attrs.minLength??] ngMinLength	="${field.attrs.minLength}" [/#if]
+				[#if field.attrs.maxLength??] ngMaxLength	="${field.attrs.maxLength}" [/#if]
 			[/@compress][/#assign]
 						
 			<input ${options}/>
@@ -121,7 +120,7 @@
 	
 	<div class="control-group">
 		<div class="controls">
-			<input class="btn-primary" type="submit" value="save" x-ng-disabled="form.$invalid"> 
+			<input class="btn-primary" type="submit" value="save" x-ng-disabled="!form.$valid"> 
 		</div>
 	</div>
 	
