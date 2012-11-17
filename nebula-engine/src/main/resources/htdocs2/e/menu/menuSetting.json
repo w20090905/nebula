@@ -7,8 +7,7 @@
 	{	"label"	:	"Types",
 		"items"	:	[
 			{        "href": "#/d/Person/",        "label": "Person"},
-			{        "href": "#/d/Company/",        "label": "Company"},
-			{        "href": "#/d/Product/",        "label": "Product"}
+			{        "href": "#/d/Company/",        "label": "Company"}
 		]
 	}
 ]
