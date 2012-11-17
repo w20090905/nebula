@@ -1,5 +1,8 @@
 <style>
 <!--
+body{
+font: 12px/22px "宋体","Arial Narrow";
+}
 
 ul.contacts {
 	width: 100%;
@@ -40,7 +43,7 @@ div.right{
 	
 <article class="module width_full">
 	<header>
-		<h1>ContactRecord</h1>
+		<h1>交流记录</h1>
 	</header>
 	
 	<ul class="nav nav-tabs">
@@ -59,20 +62,20 @@ div.right{
 	
 	
 	<div class="control-group" style="clear: both;">
-		<label class="control-label">Person</label>
+		<label class="control-label">客户名称</label>
 		<div class="controls">
 			<select x-ng-model="data.PersonName" x-ng-options="c.Name as c.Name for c in personList" required></select>
 		</div>
 	</div>
 	<div class="control-group" style="clear: both;">
-		<label class="control-label">Company</label>
+		<label class="control-label">交流内容</label>
 		<div class="controls">
-			<textarea x-ng-model="data.Content" cols="120" rows="4" class="span6" placeholder="add new contactRecord here" required></textarea>
+			<textarea x-ng-model="data.Content" cols="120" rows="4" class="span6" placeholder="请在此添加交流记录" required></textarea>
 		</div>
 	</div>
 	<div class="control-group" style="clear: both;">
 		<div class="controls">
-			<input class="btn btn-primary" type="submit" value="add">
+			<input class="btn btn-primary" type="submit" value="添加">
 		</div>
 	</div>
 </article>
@@ -80,7 +83,7 @@ div.right{
 
 <article class="module width_full">
 <header>
-	<h3>History</h3>
+	<h3>历史记录</h3>
 </header>
 <div class="clear:both;"></div>
 <!-- <span>{{remaining()}} of {{contactRecords.length}} remaining</span> [ <a href="" x-ng-click="archive()">archive</a> ] -->
