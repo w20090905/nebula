@@ -200,7 +200,7 @@ function ContactRecordsCtrl($scope,$resource) {
 	
 	$scope.addContactRecord = function() {
 		$.extend($scope.data,{
-			AutoID:new Date().format("yyyyMMddhhmmssS"),
+			AutoID:new Date().getTime(),
 			Done : false,
 			LastUpdated : new Date().format("yyyy-MM-dd hh:mm:ss.S")
 		});

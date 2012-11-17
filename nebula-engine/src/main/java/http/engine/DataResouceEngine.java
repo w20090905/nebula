@@ -1,7 +1,7 @@
 package http.engine;
 
 import http.json.JsonProvider;
-import http.json.JsonProvider.JsonSerializer;
+import http.json.JsonProvider.JsonDealer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,8 +46,8 @@ public class DataResouceEngine implements ResourceEngine {
 			log.trace("\tid : " + id);
 		}
 
-		JsonSerializer<Entity> json = JsonProvider.getSerialize(Entity.class);
 		Store<Entity> datas = persistence.define(Entity.class, typeName);
+		JsonDealer<Entity> json = JsonProvider.getSerialize(datas.getType());
 
 		if (id != null) {
 			return new DataResouce(json, datas, id);

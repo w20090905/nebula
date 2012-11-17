@@ -13,7 +13,7 @@ public abstract class BasicResouce implements Resource {
 
 	protected int maxAge = 0;
 	
-	protected byte[] buffer;
+	protected byte[] cache;
 	protected long lastModified;
 
 	protected abstract void get(Request req);
@@ -53,9 +53,9 @@ public abstract class BasicResouce implements Resource {
 				resp.set("Cache-Control", "max-age=" + maxAge);
 				resp.set("Content-Language", "en-US");
 				resp.set("Content-Type", "text/html");
-				resp.set("Content-Length", buffer.length);
+				resp.set("Content-Length", cache.length);
 				resp.setDate("Date", this.lastModified);
-				resp.getOutputStream().write(buffer);
+				resp.getOutputStream().write(cache);
 				resp.getOutputStream().flush();
 				resp.close();
 			} else if ("PUT".equals(method)) {
@@ -68,9 +68,9 @@ public abstract class BasicResouce implements Resource {
 				resp.set("Cache-Control", "max-age=0");
 				resp.set("Content-Language", "en-US");
 				resp.set("Content-Type", "text/html");
-				resp.set("Content-Length", buffer.length);
+				resp.set("Content-Length", cache.length);
 				resp.setDate("Date", this.lastModified);
-				resp.getOutputStream().write(buffer);
+				resp.getOutputStream().write(cache);
 				resp.getOutputStream().flush();
 				resp.close();
 			} else if ("POST".equals(method)) {

@@ -38,11 +38,11 @@ public class EditableStaticResource extends BasicResouce {
 				resp.set("Cache-Control", "max-age=0");
 				resp.set("Content-Language", "en-US");
 				resp.set("Content-Type", mime);
-				resp.setContentLength(this.buffer.length);
+				resp.setContentLength(this.cache.length);
 				resp.setDate("Date", System.currentTimeMillis());
 				resp.setDate("Last-Modified", this.lastModified);
 
-				resp.getOutputStream().write(buffer);
+				resp.getOutputStream().write(cache);
 				resp.getOutputStream().flush();
 				resp.close();
 				// max-age
@@ -71,11 +71,11 @@ public class EditableStaticResource extends BasicResouce {
 				resp.set("Cache-Control", "max-age=0");
 				resp.set("Content-Language", "en-US");
 				resp.set("Content-Type", mime);
-				resp.setContentLength(this.buffer.length);
+				resp.setContentLength(this.cache.length);
 				resp.setDate("Date", System.currentTimeMillis());
 				resp.setDate("Last-Modified", this.lastModified);
 
-				resp.getOutputStream().write(buffer);
+				resp.getOutputStream().write(cache);
 				resp.getOutputStream().flush();
 				resp.close();
 				// max-age
@@ -100,7 +100,7 @@ public class EditableStaticResource extends BasicResouce {
 			}
 			in.close();
 			this.lastModified = this.underlySource.getLastModified();
-			this.buffer = bout.toByteArray();
+			this.cache = bout.toByteArray();
 		} catch (IOException e) {
 			log.error(e);
 			throw new RuntimeException(e);

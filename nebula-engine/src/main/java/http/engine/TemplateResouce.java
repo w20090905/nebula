@@ -49,7 +49,7 @@ public class TemplateResouce extends BasicResouce {
 			w.close();
 			
 			super.lastModified = System.currentTimeMillis();
-			super.buffer = bout.toByteArray();
+			super.cache = bout.toByteArray();
 		} catch (TemplateException e) {
 			log.error(e);
 			throw new RuntimeException(e);

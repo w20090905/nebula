@@ -1,9 +1,10 @@
 package http.engine;
 
-import http.json.JsonProvider.JsonSerializer;
+import http.json.JsonProvider.JsonDealer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
@@ -13,12 +14,12 @@ import nebula.data.Entity;
 import nebula.data.Store;
 
 public class DataResouce extends BasicResouce {
-	private final JsonSerializer<Entity> json;
+	private final JsonDealer<Entity> json;
 
 	private final String key;
 	private final Store<Entity> datas;
 
-	public DataResouce(JsonSerializer<Entity> json, Store<Entity> datas, String key) {
+	public DataResouce(JsonDealer<Entity> json, Store<Entity> datas, String key) {
 		this.json = json;
 		this.datas = datas;
 		this.key = key;
@@ -31,14 +32,14 @@ public class DataResouce extends BasicResouce {
 
 			Entity data = datas.load(key);
 			if (data != null) {
-				json.stringifyTo(data, bout);
+				json.stringifyTo(data,new OutputStreamWriter(bout));
 				w.flush();
 				w.close();
 				this.lastModified = System.currentTimeMillis();
-				this.buffer = bout.toByteArray();
+				this.cache = bout.toByteArray();
 			} else {
 				this.lastModified = System.currentTimeMillis();
-				this.buffer = new byte[0];
+				this.cache = new byte[0];
 			}
 		} catch (IOException e) {
 			log.error(e);
@@ -51,7 +52,7 @@ public class DataResouce extends BasicResouce {
 		try {
 			Entity data = datas.load(key).editable();
 			if (data != null) {
-				json.readFrom(data, req.getInputStream());
+				json.readFrom(data, new InputStreamReader(req.getInputStream()));
 				datas.flush();
 			} else {
 				throw new RuntimeException("Cann't find object " + key);
@@ -67,7 +68,7 @@ public class DataResouce extends BasicResouce {
 		try {
 			Entity data = datas.load(key).editable();
 			if (data != null) {
-				json.readFrom(data, req.getInputStream());
+				json.readFrom(data,new InputStreamReader(req.getInputStream()));
 				datas.flush();
 			} else {
 				throw new RuntimeException("Cann't find object " + key);

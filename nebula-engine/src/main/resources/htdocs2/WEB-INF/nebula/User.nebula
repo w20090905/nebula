@@ -6,7 +6,7 @@ type User{
   Greeting Name;
   Title Name;
   Comments;
-  Phone;
+  /*Phone;
   Fax;
-  Birthday;
+  Birthday;*/
 };

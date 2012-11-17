@@ -89,16 +89,21 @@ public class DBExec {
 								+ "\t" + metaData.getColumnTypeName(i + 1));
 					}
 				}
+				rs.close();
 
 				ArrayList<DbColumn> notExistColumns = new ArrayList<DbColumn>();
 				for (DbColumn f : columns) {
 					if (!cols.containsKey(f.columnName)) {
 						notExistColumns.add(f);
+					}else{
+						cols.remove(f.columnName);
 					}
 				}
 
 				if (notExistColumns.size() > 0) {
+					statement = conn.createStatement();					
 					for (DbColumn c : notExistColumns) {
+						log.trace(builder.builderAddColumn(c));
 						statement.addBatch(builder.builderAddColumn(c));
 					}
 					statement.executeBatch();
@@ -113,8 +118,38 @@ public class DBExec {
 						log.debug(metaData.getColumnTypeName(i + 1));
 					}
 				}
+				
+				boolean needRemove=false;
+				for(String key: cols.keySet()){
+					if(key.endsWith("_")){
+					}else{
+						if(!needRemove){
+							statement = conn.createStatement();
+						}
+						String sql = builder.builderRemoveColumn(key);
+						log.trace(sql);
+						statement.addBatch(sql);
+						needRemove=true;
+					}
+				}
+				if(needRemove){
+					statement.executeBatch();
+					
+					rs = statement.executeQuery(builder.builderGetMeta());
+					metaData = rs.getMetaData();
+					columnsSize = metaData.getColumnCount();
+					log.debug("== After update column ");
+					for (int i = 0; i < columnsSize; i++) {
+						log.debug(metaData.getColumnName(i + 1) + "  \t");
+						log.debug(metaData.getColumnDisplaySize(i + 1) + "\t");
+						log.debug(metaData.getColumnTypeName(i + 1));
+					}
+				}
+				
+				
 				conn.commit();
 			} catch (SQLException e) {
+				log.error(e);
 			}
 
 			if (!exist) {

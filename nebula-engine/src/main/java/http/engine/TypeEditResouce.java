@@ -5,6 +5,8 @@ import http.json.JsonProvider;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -34,7 +36,7 @@ public class TypeEditResouce extends BasicResouce{
 					log.trace("Request : " + req.getPath()+ "\tkey : " + key);
 				}
 
-				if (buffer == null) {
+				if (cache == null) {
 					this.get(req);
 				}
 
@@ -43,9 +45,9 @@ public class TypeEditResouce extends BasicResouce{
 				resp.set("Cache-Control", "max-age=0");
 				resp.set("Content-Language", "en-US");
 				resp.set("Content-Type", "text/json");
-				resp.set("Content-Length", buffer.length);
+				resp.set("Content-Length", cache.length);
 				resp.setDate("Date", System.currentTimeMillis());
-				resp.getOutputStream().write(buffer);
+				resp.getOutputStream().write(cache);
 				resp.getOutputStream().flush();
 				resp.close();
 			} else if ("POST".equals(req.getMethod()) || "PUT".equals(req.getMethod())) {
@@ -62,7 +64,7 @@ public class TypeEditResouce extends BasicResouce{
 				Type type = typeLoader.findType(key);
 				String oldCode = type.getCode();
 
-				JsonProvider.getSerialize(Type.class).readFrom(type, req.getInputStream());
+				JsonProvider.getSerialize(Type.class).readFrom(type, new InputStreamReader(req.getInputStream()));
 				// System.out.println(type.toString());
 				if (!oldCode.equals(type.getCode())) {
 					if (log.isTraceEnabled()) {
@@ -87,9 +89,9 @@ public class TypeEditResouce extends BasicResouce{
 				resp.set("Cache-Control", "max-age=0");
 				resp.set("Content-Language", "en-US");
 				resp.set("Content-Type", "text/json");
-				resp.set("Content-Length", buffer.length);
+				resp.set("Content-Length", cache.length);
 				resp.setDate("Date", System.currentTimeMillis());
-				resp.getOutputStream().write(buffer);
+				resp.getOutputStream().write(cache);
 				resp.getOutputStream().flush();
 				resp.close();
 			}
@@ -104,10 +106,10 @@ public class TypeEditResouce extends BasicResouce{
 		try {
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			Type type = typeLoader.findType(key);
-			JsonProvider.getSerialize(Type.class).stringifyTo(type, out);
+			JsonProvider.getSerialize(Type.class).stringifyTo(type, new OutputStreamWriter(out));
 			out.flush();
 			this.lastModified = System.currentTimeMillis();
-			this.buffer = out.toByteArray();
+			this.cache = out.toByteArray();
 		} catch (IOException e) {
 			log.error(e);
 			throw new RuntimeException(e);

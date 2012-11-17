@@ -4,9 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import nebula.db.DataDealer;
+import nebula.db.DBDataDealer;
 
-public class BigIntDataDealer implements DataDealer {
+public class BigIntDataDealer implements DBDataDealer {
 
 	@Override
 	public Object readFrom(ResultSet res, int index) {
@@ -20,7 +20,7 @@ public class BigIntDataDealer implements DataDealer {
 	@Override
 	public void writeTo(int index, Object v, PreparedStatement res) {
 		try {
-			res.setLong(index, (Long) v);
+			res.setLong(index, v!=null?(Long) v:0);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

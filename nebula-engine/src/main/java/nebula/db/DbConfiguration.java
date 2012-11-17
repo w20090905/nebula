@@ -29,9 +29,8 @@ public abstract class DbConfiguration {
 		this.userName = userName;
 		this.userPassword = password;
 		
-
 		registerColumnType(Types.BIGINT, "bigint");
-		registerColumnType(Types.DECIMAL, "number($p,$s)");
+		registerColumnType(Types.DECIMAL, "numeric($p,$s)");
 		registerColumnType(Types.VARCHAR, "varchar($l)");
 		registerColumnType(Types.DATE, "date");
 		registerColumnType(Types.TIME, "time");

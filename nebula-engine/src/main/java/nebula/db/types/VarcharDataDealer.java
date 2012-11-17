@@ -4,9 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import nebula.db.DataDealer;
+import nebula.db.DBDataDealer;
 
-public class VarcharDataDealer implements DataDealer {
+public class VarcharDataDealer implements DBDataDealer {
 
 	@Override
 	public Object readFrom(ResultSet res, int i) {

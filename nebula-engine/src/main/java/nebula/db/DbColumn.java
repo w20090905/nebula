@@ -46,7 +46,7 @@ public class DbColumn {
 		}
 	}
 
-	public final DataDealer datadealer;
+	public final DBDataDealer datadealer;
 	public final String fieldName;
 	public final String columnName;
 	public final int jdbcType;

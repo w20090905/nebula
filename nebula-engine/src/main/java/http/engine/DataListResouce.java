@@ -1,10 +1,12 @@
 package http.engine;
 
-import http.json.JsonProvider.JsonSerializer;
+import http.json.JsonProvider.JsonDealer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.util.List;
 
@@ -18,11 +20,11 @@ import org.simpleframework.http.Request;
 import util.FileUtil;
 
 public class DataListResouce extends BasicResouce {
-	private final JsonSerializer<Entity> json;
+	private final JsonDealer<Entity> json;
 	private final Store<Entity> datas;
 	final EntityFilterBuilder filterBuilder;
 
-	public DataListResouce(JsonSerializer<Entity> json, Store<Entity> datas, final EntityFilterBuilder filterBuilder) {
+	public DataListResouce(JsonDealer<Entity> json, Store<Entity> datas, final EntityFilterBuilder filterBuilder) {
 		this.json = json;
 		this.datas = datas;
 		this.filterBuilder = filterBuilder;
@@ -50,14 +52,14 @@ public class DataListResouce extends BasicResouce {
 			} else {
 				start = false;
 			}
-			json.stringifyTo(data, out);
+			json.stringifyTo(data, new OutputStreamWriter(out));
 		}
 		out.append(']');
 
 		out.flush();
 		out.close();
 		this.lastModified = System.currentTimeMillis();
-		this.buffer = bout.toByteArray();
+		this.cache = bout.toByteArray();
 	}
 
 	@Override
@@ -68,7 +70,7 @@ public class DataListResouce extends BasicResouce {
 			if (log.isTraceEnabled()) {
 				in = FileUtil.print(in);
 			}
-			json.readFrom(data, in);
+			json.readFrom(data, new InputStreamReader(in));
 			datas.add(data);
 			datas.flush();
 		} catch (IOException e) {

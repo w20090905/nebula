@@ -115,45 +115,52 @@ public class DBExecTest extends TestCase {
 		// "TIMESTAMP_ TIMESTAMP)", dbExec.builderCreate());
 
 	}
+	
 
-	public final void testDBExec() {
-		fail("Not yet implemented"); // TODO
+	public final void testRemoveColumn() {
+		//@formatter:off
+		String text = "" +
+				"type Person { " +
+				"	!Name;" +
+				"	Age;" +
+				"};";
+		//@formatter:on		
+
+		t = loader.defineNebula(new StringReader(text)).get(0);
+		Map<String, Object> data ;
+		dbExec = config.getPersister(t);
+		dbExec.init();
+
+		try {
+			data = dbExec.get("wangshilian");
+			fail("should error");
+		} catch (RuntimeException e) {
+		}
+				
+		data = new HashMap<String, Object>();
+		data.put("Name", "wangshilian");
+		data.put("Age", 10L);
+
+		dbExec.insert(data);
+
+		data = dbExec.get("wangshilian");
+		
+		assertNotNull(data);
+		
+		 text = "" +
+					"type Person { " +
+					"	!Name;" +
+					"};";
+			//@formatter:on		
+
+		t = loader.defineNebula(new StringReader(text)).get(0);
+
+		dbExec = config.getPersister(t);
+		dbExec.init();
+		data = dbExec.get("wangshilian");
+		assertNotNull(data);
+		
+		System.out.println(data);
+
 	}
-
-	public final void testInit() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	public final void testUpdate() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	public final void testInsert() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	public final void testDeleteAll() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	public final void testGetAll() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	public final void testDelete() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	public final void testGet() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	public final void testFromEntity() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	public final void testToEntity() {
-		fail("Not yet implemented"); // TODO
-	}
-
 }

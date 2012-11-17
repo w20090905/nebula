@@ -5,9 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-import nebula.db.DataDealer;
+import nebula.db.DBDataDealer;
 
-public class TimestampDataDealer implements DataDealer {
+public class TimestampDataDealer implements DBDataDealer {
 	@Override
 	public Object readFrom(ResultSet res,int i) {
 		try {

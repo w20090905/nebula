@@ -15,7 +15,7 @@ public class PersistenceDBTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		String driverclass = "org.apache.derby.jdbc.EmbeddedDriver";
-		String url = "jdbc:derby:db/test-entityStore9;create = true";
+		String url = "jdbc:derby:db/PersistenceDBTest;create = true";
 		String username = "user";
 		String password = "password";
 
@@ -57,37 +57,37 @@ public class PersistenceDBTest extends TestCase {
 		assertEquals("wangshilian", v.get("Name"));
 		assertEquals("wangshilian", store.load("wangshilian").get("ID"));
 
-		v.put("length", "120");
+		v.put("length", 120);
 
 		assertEquals(true, v.isDirty());
-		assertEquals("120", v.get("length"));
+		assertEquals(120, v.get("length"));
 		assertEquals(null, store.load("wangshilian").get("length"));
 
 		store.flush();
 
 		assertEquals(false, v.isDirty());
-		assertEquals("120", v.get("length"));
-		assertEquals("120", store.load("wangshilian").get("length"));
+		assertEquals(120, v.get("length"));
+		assertEquals(120, store.load("wangshilian").get("length"));
 
-		v.put("length", "180");
+		v.put("length", 180);
 
 		assertEquals(true, v.isDirty());
-		assertEquals("180", v.get("length"));
-		assertEquals("120", store.load("wangshilian").get("length"));
+		assertEquals(180, v.get("length"));
+		assertEquals(120, store.load("wangshilian").get("length"));
 
 		p.clearChanges();
 		p.flush();
 
 		assertEquals(true, v.isDirty());
-		assertEquals("180", v.get("length"));
-		assertEquals("120", store.load("wangshilian").get("length"));
+		assertEquals(180, v.get("length"));
+		assertEquals(120, store.load("wangshilian").get("length"));
 
 		p.add(v);
 		p.flush();
 
 		assertEquals(false, v.isDirty());
-		assertEquals("180", v.get("length"));
-		assertEquals("180", store.load("wangshilian").get("length"));
+		assertEquals(180, v.get("length"));
+		assertEquals(180, store.load("wangshilian").get("length"));
 	}
 
 	// public final void testRemove() {

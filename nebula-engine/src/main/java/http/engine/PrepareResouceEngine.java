@@ -1,7 +1,7 @@
 package http.engine;
 
 import http.json.JsonProvider;
-import http.json.JsonProvider.JsonSerializer;
+import http.json.JsonProvider.JsonDealer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,7 +42,7 @@ public class PrepareResouceEngine implements ResourceEngine {
 			log.trace("\tid : " + id);
 		}
 
-		JsonSerializer<Entity> json = JsonProvider.getSerialize(Entity.class);
+		JsonDealer<Entity> json = JsonProvider.getSerialize(Entity.class);
 		Store<Entity> users = persistence.define(Entity.class, "User");	
 		Store<Entity> datas = persistence.define(Entity.class, "UserAccessLog");		
 		return new LoginListResouce(json, users,datas);

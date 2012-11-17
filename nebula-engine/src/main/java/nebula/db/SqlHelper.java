@@ -227,6 +227,10 @@ public class SqlHelper {
 				+ config.toColumnDefine(column);
 	}
 
+	public String builderRemoveColumn(String columnName) {
+		return "ALTER TABLE " + this.tableName + " DROP COLUMN " +columnName+ " ";
+	}
+
 	public String builderDeleteAll() {
 		return "DELETE FROM " + this.tableName + " ";
 	}

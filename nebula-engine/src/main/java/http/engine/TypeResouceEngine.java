@@ -1,7 +1,7 @@
 package http.engine;
 
 import http.json.JsonProvider;
-import http.json.JsonProvider.JsonSerializer;
+import http.json.JsonProvider.JsonDealer;
 
 import javax.inject.Inject;
 
@@ -43,7 +43,7 @@ public class TypeResouceEngine implements ResourceEngine {
 			log.trace("\ttypeName : " + typeName);
 			log.trace("\tid : " + id);
 		}
-		JsonSerializer<Type> json = JsonProvider.getSerialize(Type.class);
+		JsonDealer<Type> json = JsonProvider.getSerialize(Type.class);
 
 		if (id != null) {
 			return new TypeEditResouce(typeLoader, id);

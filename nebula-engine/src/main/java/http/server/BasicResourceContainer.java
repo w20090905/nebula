@@ -122,6 +122,10 @@ public class BasicResourceContainer extends ResourceContainer {
 	long lockcount = 0;
 
 	private Resource resolve(Address address) {
+		if(address.getPath().getPath().equals("/")){
+			cachedLinks.put("/",redirectToLoginResource);
+			return redirectToLoginResource;
+		}
 
 		lock.lock();
 

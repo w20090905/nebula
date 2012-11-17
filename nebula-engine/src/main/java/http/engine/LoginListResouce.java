@@ -1,6 +1,6 @@
 package http.engine;
 
-import http.json.JsonProvider.JsonSerializer;
+import http.json.JsonProvider.JsonDealer;
 
 import java.io.IOException;
 
@@ -18,12 +18,12 @@ import org.simpleframework.util.lease.LeaseException;
 public class LoginListResouce implements Resource {
 	protected Log log = LogFactory.getLog(this.getClass());
 
-	private final JsonSerializer<Entity> json;
+	private final JsonDealer<Entity> json;
 	private final Store<Entity> datas;
 	private final Store<Entity> users;
 	final RedirectResouce redirectTo;
 
-	public LoginListResouce(JsonSerializer<Entity> json, Store<Entity> users, Store<Entity> datas) {
+	public LoginListResouce(JsonDealer<Entity> json, Store<Entity> users, Store<Entity> datas) {
 		this.json = json;
 		this.datas = datas;
 		this.users = users;

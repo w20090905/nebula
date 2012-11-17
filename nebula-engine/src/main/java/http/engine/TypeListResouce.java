@@ -1,9 +1,11 @@
 package http.engine;
 
-import http.json.JsonProvider.JsonSerializer;
+import http.json.JsonProvider.JsonDealer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.util.List;
 
@@ -19,12 +21,12 @@ import org.simpleframework.http.Request;
 
 public class TypeListResouce extends BasicResouce {
 	private static Log log = LogFactory.getLog(TypeListResouce.class);
-	private final JsonSerializer<Type> json;
+	private final JsonDealer<Type> json;
 	private final SmartList<Type> types;
 	final TypeLoader typeLoader;
 	final TypeFilterBuilder filterBuilder;
 
-	public TypeListResouce(TypeLoader typeLoader, JsonSerializer<Type> json, TypeFilterBuilder filterBuilder) {
+	public TypeListResouce(TypeLoader typeLoader, JsonDealer<Type> json, TypeFilterBuilder filterBuilder) {
 		this.types = typeLoader.all();
 		this.typeLoader = typeLoader;
 		this.json = json;
@@ -54,21 +56,21 @@ public class TypeListResouce extends BasicResouce {
 			} else {
 				start = false;
 			}
-			json.stringifyTo(data, out);
+			json.stringifyTo(data, new OutputStreamWriter(out));
 		}
 		out.append(']');
 
 		out.flush();
 		out.close();
 		this.lastModified = System.currentTimeMillis();
-		this.buffer = bout.toByteArray();
+		this.cache = bout.toByteArray();
 	}
 
 	@Override
 	protected void post(Request req) {
 		System.out.println("in post");
 		try {
-			Type type = json.readFrom(null, req.getInputStream());
+			Type type = json.readFrom(null, new InputStreamReader(req.getInputStream()));
 			type = typeLoader.update(type);
 		} catch (IOException e) {
 			log.error(e);
