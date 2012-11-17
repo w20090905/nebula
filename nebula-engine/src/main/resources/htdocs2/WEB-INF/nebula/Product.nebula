@@ -1,6 +1,5 @@
 type Product {
-	Name;/*
 	!Name;
 	Description;
-	Type Attr;*/
+	Type Attr;
 };

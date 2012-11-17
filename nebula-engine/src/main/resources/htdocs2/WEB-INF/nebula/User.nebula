@@ -1,8 +1,7 @@
 type User{
-	Name;/*
   !Name;
   Description;
-  Password;
+  /*Password;
   EMail;
   Greeting Name;
   Title Name;
