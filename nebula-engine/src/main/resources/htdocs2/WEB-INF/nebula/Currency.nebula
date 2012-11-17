@@ -3,7 +3,7 @@ type Currency{
   ISO-Code;
   Currency-Symbol;
   Description;
-  /*Standard-Precision;
+  Standard-Precision;
   Costing-Precision;
-  RpundoffFactor Long;*/
+  RpundoffFactor Long;
 };

@@ -1,8 +1,7 @@
 type ContactRecord {
-	!Name;/*
 	!AutoID;
 	Company;
 	Person;
 	Content Text;
-	LastUpdated Timestamp;*/
+	LastUpdated Timestamp;
 };
