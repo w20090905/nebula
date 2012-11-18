@@ -4,7 +4,7 @@
 		<h1>${type.name}&nbsp;</h1>
 	</header>
 	
-	<form x-ng-submit="$save()"  class="form-horizontal" novalidate>
+	<form name="form" x-ng-submit="$save()"  class="form-horizontal" novalidate>
 	
 	[#list type.fields as field][#t]
 		[#if field.array]
@@ -25,12 +25,14 @@
 				[#switch field.attrs.formatType!"text"]
 					[#case "text"]		type="text"		[#break]
 					[#case "numeric"]	type="number"	[#break]
+					[#case "email"]		type="email"	[#break]
 					[#default]			type="text"		[#break]				
 				[/#switch]
 				
-				[#if field.key			] x-ng-readonly ="update"		[/#if]
-				[#if field.attrs.min??		] min		="${field.attrs.min}" 		[/#if]
-				[#if field.attrs.max??		] max		="${field.attrs.max}" 		[/#if]
+				[#if field.importance != "Unimportant"] required						[/#if]
+				[#if field.key				] x-ng-readonly ="update"					[/#if]
+				[#if field.attrs.min??		] min		="${field.attrs.min}" 			[/#if]
+				[#if field.attrs.max??		] max		="${field.attrs.max}" 			[/#if]
 				[#if field.attrs.minLength??] ngMinLength	="${field.attrs.minLength}" [/#if]
 				[#if field.attrs.maxLength??] ngMaxLength	="${field.attrs.maxLength}" [/#if]
 			[/@compress][/#assign]
@@ -118,10 +120,9 @@
   		[/#if] 
 	[/#list]	
 	
-	<div class="control-group">
-		<div class="controls">
-			<input class="btn-primary" type="submit" value="save" x-ng-disabled="!form.$valid"> 
-		</div>
+	<div class="form-actions">
+  		<input type="submit" class="btn btn-primary" x-ng-disabled="form.$invalid" value="Save changes">
+		<button type="button" class="btn">Cancel</button> 
 	</div>
 	
 	</form>

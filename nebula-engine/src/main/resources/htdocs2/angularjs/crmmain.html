@@ -39,7 +39,7 @@ div.right{
 -->
 </style>
 
-<form x-ng-submit="addContactRecord()" class="form-horizontal">
+<form name="form" x-ng-submit="addContactRecord()" class="form-horizontal" novalidate>
 	
 <article class="module width_full">
 	<header>
@@ -72,11 +72,9 @@ div.right{
 		<div class="controls">
 			<textarea x-ng-model="data.Content" cols="120" rows="4" class="span6" placeholder="请在此添加交流记录" required></textarea>
 		</div>
-	</div>
-	<div class="control-group" style="clear: both;">
-		<div class="controls">
-			<input class="btn btn-primary" type="submit" value="添加">
-		</div>
+	</div>	
+	<div class="form-actions">
+  		<input type="submit" class="btn btn-primary" x-ng-disabled="form.$invalid" value="添加">
 	</div>
 </article>
 </form>

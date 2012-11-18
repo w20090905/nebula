@@ -3,6 +3,7 @@ type Person {
 	Company;
 	Height;
 	Age;
+	EMail;
 	?Roles1[]				Text;	
 	Roles2[1..]				Text;
 	Roles3[..5]				Text;	

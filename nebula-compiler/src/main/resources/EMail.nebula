@@ -1,4 +1,4 @@
-@formatType = "numeric";
+@formatType = "email";
 @inputSize = "large";
 @maxLength = 120;
 type EMail extends String {

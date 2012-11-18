@@ -4,8 +4,14 @@
 		<a href="#/d/{{data.name}}/" x-ng-show="data.standalone != 'BuilderIn'" class="btn ctrl">Edit Data</a>
 	</header>
 	
-	<form x-ng-submit="$save()" class="form-horizontal">
+	<form name="form" x-ng-submit="$save()" class="form-horizontal">
 	
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#home" data-toggle="tab">基本信息</a></li>
+  <li><a href="#source" data-toggle="tab">源代码</a></li>
+</ul>
+<div class="tab-content">
+<div class="tab-pane active" id="home">
 	<div class="control-group" style="clear: both;">
 		<label class="control-label">Name</label>
 		<div class="controls">
@@ -55,19 +61,15 @@
 			</tbody>
 		</table>
 	</div>
-	
-	<div class="control-group">
-		<label class="control-label">Source</label>
-		<div class="controls">
-			<textarea x-ng-model="data.code" rows="20" cols="120" class="span9" placeholder="add Type info here"></textarea>
+</div>
+ <div class="tab-pane" id="source">
+	<textarea x-ng-model="data.code" required rows="20" cols="120" class="span9" placeholder="add Type info here"></textarea>
+</div>
+</div>
+
+		<div class="form-actions">
+	  		<input type="submit" class="btn btn-primary" x-ng-disabled="form.$invalid" value="save">
 		</div>
-	</div>
-	
-	<div class="control-group">
-		<div class="controls">
-			<input class="btn btn-primary" type="submit" value="save"> 
-		</div>
-	</div>
 	
 	</form>
 </article>
