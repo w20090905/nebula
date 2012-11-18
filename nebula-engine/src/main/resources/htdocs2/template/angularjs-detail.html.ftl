@@ -13,13 +13,14 @@
 	</div>
 		[#else]
 			[#switch field.refer]
-			
-		
+					
 			[#case "ByVal"]
-	<div class="control-group">
-		<label class="control-label" for="${field.name}">${field.name}</label>
-		<div class="controls">
-			[#assign options][@compress single_line=true]
+			
+			[#assign controlGroupClass][@compress single_line=true]
+				[#if field.importance != "Unimportant"] required						[/#if]
+			[/@compress][/#assign]
+			
+			[#assign inputOptions][@compress single_line=true]
 				id="${field.name}"
 				x-ng-model="data.${field.name}"
 				[#switch field.attrs.formatType!"text"]
@@ -37,7 +38,12 @@
 				[#if field.attrs.maxLength??] ngMaxLength	="${field.attrs.maxLength}" [/#if]
 			[/@compress][/#assign]
 						
-			<input ${options}/>
+						
+			
+	<div class="control-group ${controlGroupClass}">
+		<label class="control-label" for="${field.name}">${field.name}</label>
+		<div class="controls">
+			<input ${inputOptions}/>
 		</div>
 	</div>
 	  			[#break]
@@ -122,7 +128,7 @@
 	
 	<div class="form-actions">
   		<input type="submit" class="btn btn-primary" x-ng-disabled="form.$invalid" value="Save changes">
-		<button type="button" class="btn">Cancel</button> 
+		<!-- button type="button" class="btn">Cancel</button--> 
 	</div>
 	
 	</form>

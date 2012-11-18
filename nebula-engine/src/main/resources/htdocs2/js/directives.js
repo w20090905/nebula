@@ -232,7 +232,7 @@ var neFromListDirective = [
 				$('#mask').fadeIn(300);
 				
 				// When clicking on the button close or the mask layer the popup closed
-				$('.close, #mask').live('click', function() { 
+				$('.close, #mask,.popup-close').live('click', function() { 
 					$('#mask , #popup-window').fadeOut(300 , function() {
 						$('#mask').remove();  
 					});

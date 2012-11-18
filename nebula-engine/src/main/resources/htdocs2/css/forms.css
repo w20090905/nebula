@@ -4,3 +4,7 @@ form input.ng-invalid.ng-dirty {
 form input.ng-valid.ng-dirty {
 	background-color: #78FA89;
 }
+/*
+form .control-group.required label{
+	color: red;
+}*/

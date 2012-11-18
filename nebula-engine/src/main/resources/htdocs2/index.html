@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" x-ng-app="simple">
+<html lang="en" x-ng-app="app">
   <head>
     <meta charset="utf-8">
     <title>Nebula Home</title>
@@ -12,30 +12,43 @@
     <link href="css/forms.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
     <style type="text/css">
-		body {
-		  padding-top: 60px;
-		  padding-bottom: 40px;
+     	body {
+        	padding-top: 60px;
+        	padding-bottom: 40px;
+      	}
+      	
+      	.sidebar-nav {
+        	padding: 1px 0;
+      	}
+      
+      	article header{
+			display: block;
+			padding-bottom:.3em;
+			margin-bottom:.3em;
+			border-bottom: 1px solid #eaeaea;
 		}
-		.sidebar-nav {
-		  padding: 0px 0;
-		}
-		    
+		
+      	article header h1{
+      		display: inline;
+      	}
+      	
+      	article header .ctrl{
+      		float: right;
+      		margin-left: .3em;
+      	}
+      	
 		.well{
 			background-color: #e3e3e3;
 		}
 		
-		.table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
-			background-color: #ededed;
-		}
-      	
-      	.nav-collapse .nav li a i.icon-white{
+      	.nav-collapse .nav a i.icon-white{
       		display: none;
       	}
       	
-      	.nav-collapse .nav li a:HOVER i{
+      	.nav-collapse .nav a:HOVER i{
       		display: none;
       	}   
-      	.nav-collapse .nav li a:HOVER i.icon-white{
+      	.nav-collapse .nav a:HOVER i.icon-white{
       		display: inline-block;
       	}
       	
@@ -43,10 +56,10 @@
       		display: none;
       	}
       	
-      	.nav-collapse a.navbar-link:HOVER i{
+      	.nav-collapse a.navbar-link:HOVER i,.nav-collapse li.active a i{
       		display: none;
       	}
-      	.nav-collapse a.navbar-link:HOVER i.icon-white{
+      	.nav-collapse a.navbar-link:HOVER i.icon-white,.nav-collapse li.active a i.icon-white{
       		display: inline-block;
       	}
     </style>
@@ -69,13 +82,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Nebula</a>
+          <a class="brand" x-ng-href="index.html#/c/{{LoginUserID}}">Nebula</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
               Logged in as <a href="login.html" class="navbar-link"><i class="icon-user"></i><i class="icon-user icon-white"></i>{{LoginUserID}}</a>
             </p>
             <ul class="nav nav-pills">
-              <li class="active"><a href="index.html#/c/{{LoginUserID}}"><i class="icon-home"></i><i class="icon-home icon-white"></i>Home</a></li>
+              <li class="active"><a x-ng-href="index.html#/c/{{LoginUserID}}"><i class="icon-home"></i><i class="icon-home icon-white"></i>Home</a></li>
               <li><a href="indexSetting.html"><i class="icon-asterisk"></i><i class="icon-asterisk icon-white"></i>Setting</a></li>
               <li><a href="indexAdmin.html"><i class="icon-asterisk"></i><i class="icon-asterisk icon-white"></i>Admin</a></li>
             </ul>
@@ -99,21 +112,8 @@
               <li><a href="#">Link</a></li>
               <li><a href="#">Link</a></li>
             </ul>
-          </div><--/.well->
-        </div><--/span-> 
-        -->
-<ul class="nav nav-tabs">
-  <li><a href="#home" data-toggle="tab">Home</a></li>
-  <li><a href="#profile" data-toggle="tab">Profile</a></li>
-  <li><a href="#messages" data-toggle="tab">Messages</a></li>
-  <li><a href="#settings" data-toggle="tab">Settings</a></li>
-</ul>
-<div class="tab-content">
-  <div class="tab-pane active" id="home">...</div>
-  <div class="tab-pane" id="profile">...</div>
-  <div class="tab-pane" id="messages">...</div>
-  <div class="tab-pane" id="settings">...</div>
-</div>
+          </div><!--/.well-->
+        </div><!--/.span--> 
         <div class="span9" x-ng-view>
         </div><!--/span-->
       </div><!--/row-->
@@ -130,10 +130,10 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 	<script src="lib/jquery/jquery-1.8.2.min.js"></script>
-	<script src="lib/bootstrap/bootstrap.min.js"></script>
-	<script src="lib/angular/angular.min.js"></script>
+	<script src="lib/angular/angular.js"></script>
 	<script src="lib/angular/angular-cookies.js"></script>
 	<script src="lib/angular/angular-resource.js"></script>
+	<script src="lib/bootstrap/bootstrap.js"></script>
 	<script src="js/directives.js"></script>
 	<script src="js/controllers.js"></script>
 	<script src="js/filters.js"></script>

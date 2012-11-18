@@ -6,14 +6,12 @@
 	<form x-ng-submit="$save()" class="form-horizontal">
 
 	<div class="control-group">
-		<textarea x-ng-model="data.code" rows="20" cols="120" class="span9 input-block-level" placeholder="add Type info here"></textarea>
+		<textarea x-ng-model="data.code" rows="20" cols="120" class="input-block-level" placeholder="add Type info here"></textarea>
+	</div>
+
+	<div class="form-actions">
+  		<input type="submit" class="btn btn-primary" x-ng-disabled="form.$invalid" value="save">
 	</div>
 	
-	<div class="control-group">
-		<div class="controls">
-			<input class="btn btn-primary " type="submit" value="save"> 
-		</div>
-	</div>
-		
 	</form>
 </article>

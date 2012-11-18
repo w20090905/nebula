@@ -1,6 +1,6 @@
 [#ftl/]
 <div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal">&times;</button>
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3>${type.name} List</h3>
 </div>
 
@@ -86,5 +86,5 @@
   </table>
 </div>
 <div class="modal-footer">
-	<a href="" class="close btn">Close</a>
+    <button class="btn popup-close" data-dismiss="modal" aria-hidden="true">Close</button>
 </div>
