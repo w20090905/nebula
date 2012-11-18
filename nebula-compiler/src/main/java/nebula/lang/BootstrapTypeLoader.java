@@ -24,83 +24,85 @@ class BootstrapTypeLoader extends TypeLoader {
 	}
 
 	private void init() {
-		Type typeRoot = new Type(this, Type.TYPE);
-		Type basicType = new Type(this, Type.BASIC, typeRoot);
-		
-		Type entity = new Type(this, Type.ENTITY, typeRoot);
-		
-		
+		Type typeRoot = new Type(this, Type.ROOT_TYPE);
+		Type basicType = new Type(this, TypeStandalone.Basic.toString(), typeRoot);
+
+		Type master = new Type(this, TypeStandalone.Master.toString(), typeRoot,TypeStandalone.Master);		
+		Type transaction = new Type(this, TypeStandalone.Transaction.toString(), typeRoot,TypeStandalone.Transaction);
+		Type mixin = new Type(this, TypeStandalone.Mixin.toString(), typeRoot,TypeStandalone.Mixin);
+
 		Type string = new Type(this, "String", basicType, RawTypes.String);
-		string.attrs.put("jdbcType",Types.VARCHAR);
+		string.attrs.put("jdbcType", Types.VARCHAR);
 		string.attrs.put("length", 60);
 		string.attrs.put("formatType", "text");
-		
-		
+
 		Type number = new Type(this, "Number", basicType, RawTypes.Long);
-		number.attrs.put("jdbcType",Types.BIGINT);
-		
+		number.attrs.put("jdbcType", Types.BIGINT);
+
 		number.attrs.put("formatType", "numeric");
 		number.attrs.put("precision", 10);
 		number.attrs.put("scale", 2);
-		
-		
+
 		Type typeLong = new Type(this, "Long", number, RawTypes.Long);
-		typeLong.attrs.put("jdbcType",Types.BIGINT);
-		
-		
+		typeLong.attrs.put("jdbcType", Types.BIGINT);
+
 		Type decimal = new Type(this, "Decimal", number, RawTypes.Decimal);
-		decimal.attrs.put("jdbcType",Types.DECIMAL);
+		decimal.attrs.put("jdbcType", Types.DECIMAL);
 		decimal.attrs.put("precision", 10);
 		decimal.attrs.put("scale", 2);
 
 		Type date = new Type(this, "Date", basicType, RawTypes.Date);
-		date.attrs.put("jdbcType",Types.DATE);
-		
+		date.attrs.put("jdbcType", Types.DATE);
+
 		date.attrs.put("formatType", "date");
 		date.attrs.put("formatString", "YYYY-MM-DD");
-		
+
 		Type time = new Type(this, "Time", basicType, RawTypes.Time);
-		time.attrs.put("jdbcType",Types.TIME);
-		
+		time.attrs.put("jdbcType", Types.TIME);
+
 		time.attrs.put("formatType", "time");
 		time.attrs.put("formatString", "HH:mm:ss");
-		
+
 		Type datetime = new Type(this, "Datetime", basicType, RawTypes.Datetime);
-		datetime.attrs.put("jdbcType",Types.DATE);
-		
+		datetime.attrs.put("jdbcType", Types.DATE);
+
 		datetime.attrs.put("formatType", "datetime");
 		datetime.attrs.put("formatString", "YYYY-MM-DD HH:mm:ss");
-		
+
 		Type timestamp = new Type(this, "Timestamp", basicType, RawTypes.Timestamp);
-		timestamp.attrs.put("jdbcType",Types.TIMESTAMP);
-		
+		timestamp.attrs.put("jdbcType", Types.TIMESTAMP);
+
 		timestamp.attrs.put("formatType", "timestamp");
 		timestamp.attrs.put("formatString", "YYYY-MM-DD HH:mm:ss.S");
 
-		Type type = new Type(this, "Name", string);
-		type.attrs.put("maxLength", 60);
-		
+		Type name = new Type(this, "Name", string);
+		name.attrs.put("maxLength", 60);
+
 		Type attr = new Type(this, "Attr", string);
 		attr.attrs.put("formatType", "text");
 
 		List<Type> typeList = new ArrayList<Type>();
-		
+
 		typeList.add(typeRoot);
+
 		typeList.add(basicType);
+		typeList.add(master);
+		typeList.add(transaction);
+		typeList.add(mixin);
+
 		typeList.add(string);
 		typeList.add(number);
 		typeList.add(typeLong);
 		typeList.add(decimal);
-		typeList.add(entity);
 		typeList.add(attr);
 
 		typeList.add(date);
 		typeList.add(time);
 		typeList.add(datetime);
 		typeList.add(timestamp);
-		
-		typeList.add(type);
-		
+
+		typeList.add(name);
+
 		this.types.addAll(typeList);
 	}
 

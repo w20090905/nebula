@@ -1,2 +1,2 @@
-type Price extends Decimal {
+define Price extends Decimal {
 };

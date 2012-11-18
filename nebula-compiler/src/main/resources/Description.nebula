@@ -1,3 +1,3 @@
-	@maxLength = 240;
-type Description extends Text {
+@maxLength = 240;
+define Description extends Text {
 };

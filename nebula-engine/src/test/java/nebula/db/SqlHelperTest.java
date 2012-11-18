@@ -188,7 +188,7 @@ public class SqlHelperTest extends TestCase {
 				"DATETIME date," +
 				"TIMESTAMP timestamp," +
 				"QUANTITY bigint," +
-				"AMOUNT number(10,2)," +
+				"AMOUNT numeric(10,2)," +
 				"TIMESTAMP_ TIMESTAMP)", 
 				h.builderCreate());
 	}

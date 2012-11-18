@@ -1,4 +1,4 @@
-type ContactRecord {
+tx ContactRecord {
 	!AutoID;
 	Company;
 	Person;

@@ -1,2 +1,2 @@
-type PhoneNumber extends Code {
+define PhoneNumber extends Code {
 };

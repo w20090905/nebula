@@ -1,2 +1,2 @@
-type Weight extends Long {
+define Weight extends Long {
 };

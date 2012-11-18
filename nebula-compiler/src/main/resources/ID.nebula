@@ -1,2 +1,2 @@
-type ID extends Long {
+define ID extends Long {
 };

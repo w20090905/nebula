@@ -1,2 +1,2 @@
-type Precision extends Long {
+define Precision extends Long {
 };

@@ -1,4 +1,4 @@
 @max = 12;
 @min = 1;
-type Month extends Long {
+define Month extends Long {
 };

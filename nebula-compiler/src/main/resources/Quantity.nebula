@@ -1,2 +1,2 @@
-type Quantity extends Long {
+define Quantity extends Long {
 };

@@ -12,9 +12,9 @@ options {
 	import java.util.List;
 	import java.util.Map;
 	import util.InheritHashMap;
-	
+		
   import static nebula.lang.Importance.*;
-  import static nebula.lang.Reference.*;	
+  import static nebula.lang.Reference.*;  
 	
 }
 @lexer::header{
@@ -46,8 +46,8 @@ options {
     }
     
     protected void addType(Type type){
-        typesMap.put(type.name,type);   
-        types.add(type);     
+        typesMap.put(type.name,type);  
+        types.add(type);    
     }
     
     protected void info(String str) {
@@ -70,13 +70,24 @@ programDefinition returns[List<Type> retTypes]
     
 typeDefinition returns[Type type]
     :   (attrs = attrListDefinition)?
-        'type' typeID=ID ('|' alias=aliasLiteral[$typeID.text])?
+        typeType=typeDefineKeyword typeID=ID ('|' alias=aliasLiteral[$typeID.text])?
         ('extends' superTypeID=ID)? { 
             if($superTypeID==null){
-                type = new Type(loader,$typeID.text,resolveType(Type.ENTITY));
-                type.standalone = TypeStandalone.Master;
+                switch(typeType){
+                  case Transaction:
+                    type = new Type(loader,$typeID.text,resolveType(TypeStandalone.Transaction.toString()));
+                    break;
+                  case Master:
+                  default:
+                    type = new Type(loader,$typeID.text,resolveType(TypeStandalone.Master.toString()));
+                    break;
+                }
             }else{
-                type = new Type(loader,$typeID.text,resolveType($superTypeID.text)); 
+                Type superType = resolveType($superTypeID.text);
+                if(typeType != superType.standalone){
+                  throw new RuntimeException("Type's standalone [" + typeType + "] not match super type's standalone [" + superType.standalone + "]");
+                }
+                type = new Type(loader,$typeID.text,superType);
             } 
            
             if(attrs != null){
@@ -93,12 +104,16 @@ typeDefinition returns[Type type]
             fieldDefinition[type]* 
         '}' ';';
 
+typeDefineKeyword returns[TypeStandalone typeType]
+    :   'define'                  {typeType = TypeStandalone.Basic;} 
+      | ('type' | 'master' ) {typeType = TypeStandalone.Master;} 
+      | ('tx'|'transaction')    {typeType = TypeStandalone.Transaction;};
+
 nestedTypeDefinition[Type resideType,String name,Alias nameAlias] returns[Type type]
     :   '{' 
             {
               String typeName = resideType.name + "$" + name;
-              type = new Type(loader,resideType,typeName,resolveType(Type.ENTITY));
-              type.standalone = TypeStandalone.Eembedded;
+              type = new Type(loader,resideType,typeName,resolveType(TypeStandalone.Mixin.toString()));
               if(nameAlias!=null)type.nameAlias=nameAlias;
               addType(type);
             }
@@ -111,18 +126,18 @@ fieldDefinition[Type resideType] returns[Field field]
         inline=inlineDefinition
         name=ID ('-' qtype=ID)?  { 
             if($qtype!=null){
-              field = new Field(resideType,$name.text + $qtype.text); 
+              field = new Field(resideType,$name.text + $qtype.text);
               field.type = resolveType($qtype.text);
             } else {
-              field = new Field(resideType,$name.text); 
+              field = new Field(resideType,$name.text);
            }
           }
-        ('|' alias=aliasLiteral[$name.text] {field.nameAlias =alias; })?
+        ('|' alias=aliasLiteral[$name.text] {field.nameAlias =alias;})?
         range=arrayDefinition
         (INIT 
         |)
         (
-            type=ID { field.type = resolveType($type.text); }
+            type=ID { field.type = resolveType($type.text);}
             | nestedType = nestedTypeDefinition[resideType,$name.text,alias] {field.type = nestedType;}
            | {if(field.type==null)field.type = resolveType(field.name);} 
         )
@@ -132,10 +147,10 @@ fieldDefinition[Type resideType] returns[Field field]
             field.importance = imp;
             if(field.type.standalone == TypeStandalone.Basic){
               field.refer = ByVal;
-            }else if(field.type.standalone == TypeStandalone.Eembedded){
+            }else if(field.type.standalone == TypeStandalone.Mixin){
               field.refer = Inline;
             }else{
-              field.refer = ByRef;             
+              field.refer = ByRef;            
             }
             if(inline==Inline || inline == Cascade){
                 field.refer = inline;
@@ -143,7 +158,7 @@ fieldDefinition[Type resideType] returns[Field field]
             if(range.from=="f"){
             }else if(range.from!=null){
                 field.rangeFrom = Integer.parseInt(range.from);
-                field.array = true;                
+                field.array = true;               
             }else{
                 field.array = true;
             }
@@ -151,7 +166,7 @@ fieldDefinition[Type resideType] returns[Field field]
             if(range.to=="f"){
             }else if(range.to!=null){
                 field.rangeTo = Integer.parseInt(range.to);
-                field.array = true;                
+                field.array = true;               
             }else{
                 field.array = true;
             }
@@ -237,8 +252,8 @@ fragment Letter : 'a'..'z' | 'A'..'Z';
 
 INIT  : ':=';
 
-NEWLINE:'\r'? '\n'  {$channel=HIDDEN;};    
-Whitespace :  (' ' | '\t' | '\f')+ {$channel=HIDDEN;};    
+NEWLINE:'\r'? '\n'  {$channel=HIDDEN;};   
+Whitespace :  (' ' | '\t' | '\f')+ {$channel=HIDDEN;};   
 SingleLineComment :
   '//' (~('\n'|'\r'))* ('\n'|'\r'('\n')?)? {$channel=HIDDEN;};
 MultiLineComment :

@@ -1,2 +1,2 @@
-type Seq extends Long {
+define Seq extends Long {
 };

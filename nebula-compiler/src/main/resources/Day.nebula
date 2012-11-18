@@ -1,2 +1,2 @@
-type Day extends Long {
+define Day extends Long {
 };

@@ -1,2 +1,2 @@
-type Sex extends Attr {
+define Sex extends Attr {
 };

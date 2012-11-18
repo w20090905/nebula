@@ -1,7 +1,6 @@
 package nebula.lang;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -17,7 +16,7 @@ public class Type {
 	String name;
 	Alias nameAlias;
 
-	TypeStandalone standalone = TypeStandalone.Master;
+	final TypeStandalone standalone;
 
 	List<Field> fields;
 
@@ -29,51 +28,76 @@ public class Type {
 
 	List<Field> references;
 
-	public static String TYPE = "Type";
-	public static String ENTITY = "Entity";
-	public static String BASIC = "Basic";
+	public static String ROOT_TYPE = "Type";
+
+	/*
+	 * 
+	 * public static String BASIC = "Basic"; public static String MASTER =
+	 * "Master"; public static String TRANSACTION = "Transaction"; public static
+	 * String MIXIN = "Mixin";
+	 */
 
 	Type(TypeLoader typeLoader, String name) {
-		this(typeLoader, name, null, null);
+		this.superType = null;
+		this.residedType = null;
+		this.rawType = null;
+		this.loader = typeLoader;
+		this.standalone = TypeStandalone.Basic;
+		this.name = name;
+		this.fields = new CopyOnWriteArrayList<Field>();
+		this.attrs = new InheritHashMap();
+		this.references = new CopyOnWriteArrayList<Field>();
 	}
 
+	/**
+	 * Used by Basic type, Master,Tx
+	 */
 	Type(TypeLoader typeLoader, String name, Type superType) {
-		this(typeLoader, name, superType, superType.rawType);
+		this(typeLoader, null, name, superType, superType.rawType, superType.standalone);
 	}
 
+	/**
+	 * Used by Master,Tx  With standalone
+	 */
+	Type(TypeLoader typeLoader, String name, Type superType, TypeStandalone standalone) {
+		this(typeLoader, null, name, superType, null, standalone);
+	}
+
+	/**
+	 * Used by basic type init
+	 */
 	Type(TypeLoader typeLoader, String name, Type superType, RawTypes rawType) {
-		this(typeLoader, null, name, superType, rawType);
+		this(typeLoader, null, name, superType, rawType, TypeStandalone.Basic);
 	}
 
+	/**
+	 * Used by mixin
+	 * 
+	 */
 	Type(TypeLoader typeLoader, Type residedType, String name, Type superType) {
-		this(typeLoader, residedType, name, superType, superType.rawType);
+		this(typeLoader, residedType, name, superType, null, TypeStandalone.Mixin);
 	}
 
-	Type(TypeLoader typeLoader, Type residedType, String name, Type superType, RawTypes rawType) {
+	Type(TypeLoader typeLoader, Type residedType, String name, Type superType, RawTypes rawType,
+			TypeStandalone standalone) {
 		super();
 		this.loader = typeLoader;
-		this.residedType = residedType;
+		this.name = name;
+
 		this.superType = superType;
+
+		this.standalone = standalone;
 		this.rawType = rawType;
 
-		if (residedType != null) {
-			standalone = TypeStandalone.Eembedded;
-		}
+		this.residedType = residedType; // Mixin
 
-		if (this.superType != null) {
-			attrs = new InheritHashMap(this.superType.attrs);
-			this.standalone = superType.standalone;
-		} else {
-			attrs =  new InheritHashMap();
-			if ("Entity".equals(name)) {
-				this.standalone = TypeStandalone.Master;
-			} else {
-				this.standalone = TypeStandalone.Basic;
-			}
-		}
-		this.name = name;
-		this.fields = new ArrayList<Field>();
-		references = new CopyOnWriteArrayList<Field>();
+
+		this.fields = new CopyOnWriteArrayList<Field>();
+
+		this.attrs = new InheritHashMap(this.superType.attrs);
+		
+		this.references = new CopyOnWriteArrayList<Field>();
+		
 	}
 
 	public String getName() {

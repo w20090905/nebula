@@ -1,2 +1,2 @@
-type Length extends Long {
+define Length extends Long {
 };

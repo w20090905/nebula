@@ -1,4 +1,4 @@
 @formatType = "birthday";
 @format = "mm-dd";
-type Birthday extends Date {
+define Birthday extends Date {
 };
