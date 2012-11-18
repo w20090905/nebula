@@ -3,14 +3,14 @@
 		<h1>{{resourcename}}</h1>
 	</header>
 	
-	<form x-ng-submit="$save()" class="form-horizontal">
+	<form name="form" x-ng-submit="$save()" class="form-horizontal" novalidate>
 
 	<div class="control-group">
-		<textarea x-ng-model="data.code" rows="20" cols="120" class="input-block-level" placeholder="add Type info here"></textarea>
+		<textarea x-ng-model="data.code" rows="20" cols="120" x-required class="input-block-level" placeholder="add Type info here"></textarea>
 	</div>
 
 	<div class="form-actions">
-  		<input type="submit" class="btn btn-primary" x-ng-disabled="form.$invalid" value="save">
+  		<input type="submit" class="btn btn-primary" x-ng-disabled="form.$invalid" value="Save changes">
 	</div>
 	
 	</form>
