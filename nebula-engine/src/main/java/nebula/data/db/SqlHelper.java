@@ -1,9 +1,10 @@
-package nebula.db;
+package nebula.data.db;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import nebula.lang.Field;
+import nebula.lang.RawTypes;
 import nebula.lang.Type;
 import util.InheritHashMap;
 
@@ -21,10 +22,11 @@ public class SqlHelper {
 
 	private void addColumn(String name, Field field, boolean key) {
 		InheritHashMap attrs = field.getAttrs();
-		Object v = attrs.get("jdbcType");
-		int jdbcType = v != null ? (Integer) v : 0;
+		Object v;
 
-		v = attrs.get("length");
+		RawTypes rawType = field.getType().getRawType();
+
+		v = attrs.get("maxLength");
 		long size = v != null ? (Integer) v : 0;
 
 		v = attrs.get("precision");
@@ -33,16 +35,17 @@ public class SqlHelper {
 		v = attrs.get("scale");
 		int scale = v != null ? (Integer) v : 0;
 
-		DbColumn c = new DbColumn(name, decodeFieldName(name), key, jdbcType, size, precision, scale);
+		DbColumn c = new DbColumn(name, decodeFieldName(name), key, rawType, size, precision, scale);
 		fs.add(c);
 	}
 
 	private void addColumn(String resideName, String name, Field field, boolean key) {
 		InheritHashMap attrs = field.getAttrs();
-		Object v = attrs.get("jdbcType");
-		int jdbcType = v != null ? (Integer) v : 0;
+		Object v ;
 
-		v = attrs.get("length");
+		RawTypes rawType = field.getType().getRawType();
+
+		v = attrs.get("maxLength");
 		long size = v != null ? (Integer) v : 0;
 
 		v = attrs.get("precision");
@@ -51,7 +54,7 @@ public class SqlHelper {
 		v = attrs.get("scale");
 		int scale = v != null ? (Integer) v : 0;
 
-		DbColumn c = new DbColumn(resideName + name, decodeFieldName(resideName + "_" + name), key, jdbcType, size,
+		DbColumn c = new DbColumn(resideName + name, decodeFieldName(resideName + "_" + name), key, rawType, size,
 				precision, scale);
 		fs.add(c);
 	}
@@ -178,7 +181,8 @@ public class SqlHelper {
 
 		for (DbColumn column : this.columns) {
 			if (column.key && cntKeys == 1) {
-				sb.append(column.columnName).append(' ').append(config.toColumnDefine(column)).append(" PRIMARY KEY").append(",");
+				sb.append(column.columnName).append(' ').append(config.toColumnDefine(column)).append(" PRIMARY KEY")
+						.append(",");
 			} else {
 				sb.append(column.columnName).append(' ').append(config.toColumnDefine(column)).append(",");
 			}
@@ -228,7 +232,7 @@ public class SqlHelper {
 	}
 
 	public String builderRemoveColumn(String columnName) {
-		return "ALTER TABLE " + this.tableName + " DROP COLUMN " +columnName+ " ";
+		return "ALTER TABLE " + this.tableName + " DROP COLUMN " + columnName + " ";
 	}
 
 	public String builderDeleteAll() {

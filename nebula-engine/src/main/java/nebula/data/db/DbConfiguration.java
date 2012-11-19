@@ -1,12 +1,12 @@
-package nebula.db;
+package nebula.data.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Types;
 
-import nebula.db.derby.DerbyConfiguration;
-import nebula.db.oracle.OracleConfiguration;
+import nebula.data.db.derby.DerbyConfiguration;
+import nebula.data.db.oracle.OracleConfiguration;
+import nebula.lang.RawTypes;
 import nebula.lang.Type;
 
 import org.apache.commons.logging.Log;
@@ -28,14 +28,16 @@ public abstract class DbConfiguration {
 		this.url = url;
 		this.userName = userName;
 		this.userPassword = password;
-		
-		registerColumnType(Types.BIGINT, "bigint");
-		registerColumnType(Types.DECIMAL, "numeric($p,$s)");
-		registerColumnType(Types.VARCHAR, "varchar($l)");
-		registerColumnType(Types.DATE, "date");
-		registerColumnType(Types.TIME, "time");
-		registerColumnType(Types.DATE, "date");
-		registerColumnType(Types.TIMESTAMP, "timestamp");
+
+		registerColumnType(RawTypes.Boolean, "smallint");// .BIGINT
+		registerColumnType(RawTypes.Long, "bigint");// .BIGINT
+		registerColumnType(RawTypes.Decimal, "numeric($p,$s)");
+		registerColumnType(RawTypes.String, "varchar($l)");
+		registerColumnType(RawTypes.Text, "varchar($l)");
+		registerColumnType(RawTypes.Date, "date");
+		registerColumnType(RawTypes.Time, "time");
+		registerColumnType(RawTypes.Datetime, "timestamp");
+		registerColumnType(RawTypes.Timestamp, "timestamp");
 	}
 
 	public void init() {
@@ -64,19 +66,22 @@ public abstract class DbConfiguration {
 		return dbEngine;
 	}
 
-	protected void registerColumnType(int jdbcType, String columnTypeName) {
+	protected void registerColumnType(RawTypes jdbcType, String columnTypeName) {
 		typeNames.put(jdbcType, columnTypeName);
 	}
 	
 
 	protected String toColumnDefine(DbColumn column) {
-		String typeName = typeNames.get(column.jdbcType);
-		switch (column.jdbcType) {
-		case Types.DECIMAL:
+		String typeName = typeNames.get(column.rawType);
+		switch (column.rawType) {
+		case Decimal:
 			typeName = typeName.replaceFirst("\\$p", String.valueOf(column.precision));
 			typeName = typeName.replaceFirst("\\$s", String.valueOf(column.scale));
 			break;
-		case Types.VARCHAR:
+		case String:
+			typeName = typeName.replaceFirst("\\$l", String.valueOf(column.size));			
+			break;
+		case Text:
 			typeName = typeName.replaceFirst("\\$l", String.valueOf(column.size));			
 			break;
 		default:

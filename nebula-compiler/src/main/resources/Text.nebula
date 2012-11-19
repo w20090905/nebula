@@ -1,3 +1,0 @@
-@maxLength = 4000;
-define Text extends String {
-};

@@ -1,7 +1,5 @@
 package http.engine;
 
-import http.json.JsonProvider;
-import http.json.JsonProvider.JsonDealer;
 import http.resource.EntityListResouce;
 import http.resource.EntityResouce;
 import http.resource.EntityFilterBuilder;
@@ -14,6 +12,8 @@ import javax.inject.Inject;
 import nebula.data.Entity;
 import nebula.data.Persistence;
 import nebula.data.Store;
+import nebula.data.json.JsonHelper;
+import nebula.data.json.JsonEntityHelperProvider;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,7 +50,7 @@ public class EntityResouceEngine implements ResourceEngine {
 		}
 
 		Store<Entity> datas = persistence.define(Entity.class, typeName);
-		JsonDealer<Entity> json = JsonProvider.getSerialize(datas.getType());
+		JsonHelper<Entity> json = JsonEntityHelperProvider.getSerialize(datas.getType());
 
 		if (id != null) {
 			return new EntityResouce(json, datas, id);

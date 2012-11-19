@@ -1,10 +1,10 @@
-package nebula.db.derby;
+package nebula.data.db.derby;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import nebula.db.DBExec;
-import nebula.db.DbConfiguration;
+import nebula.data.db.DBExec;
+import nebula.data.db.DbConfiguration;
 import nebula.lang.Type;
 
 import org.apache.commons.logging.Log;

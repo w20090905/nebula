@@ -2,10 +2,10 @@ package nebula.data.impl;
 
 import junit.framework.TestCase;
 import nebula.data.Entity;
+import nebula.data.db.DbConfiguration;
 import nebula.data.impl.EditableEntity;
 import nebula.data.impl.EntityStoreDB;
 import nebula.data.impl.PersistenceDB;
-import nebula.db.DbConfiguration;
 import nebula.lang.SystemTypeLoader;
 
 public class PersistenceDBTest extends TestCase {

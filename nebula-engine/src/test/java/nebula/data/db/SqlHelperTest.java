@@ -1,9 +1,11 @@
-package nebula.db;
+package nebula.data.db;
 
 import java.io.StringReader;
 
 import junit.framework.TestCase;
-import nebula.db.derby.DerbyConfiguration;
+import nebula.data.db.DbConfiguration;
+import nebula.data.db.SqlHelper;
+import nebula.data.db.derby.DerbyConfiguration;
 import nebula.lang.SystemTypeLoader;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -70,8 +72,7 @@ public class SqlHelperTest extends TestCase {
 				"PRIMARY KEY ( NAME,TEST_KEY)," +
 				"TIMESTAMP_ TIMESTAMP)", h.builderCreate());
 		
-	}
-	
+	}	
 
 	public final void testRefType() {
 		//@formatter:off
@@ -185,7 +186,7 @@ public class SqlHelperTest extends TestCase {
 				"NAME varchar(60) PRIMARY KEY," +
 				"DATE date," +
 				"TIME time," +
-				"DATETIME date," +
+				"DATETIME timestamp," +
 				"TIMESTAMP timestamp," +
 				"QUANTITY bigint," +
 				"AMOUNT numeric(10,2)," +

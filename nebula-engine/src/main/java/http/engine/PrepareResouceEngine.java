@@ -1,7 +1,5 @@
 package http.engine;
 
-import http.json.JsonProvider;
-import http.json.JsonProvider.JsonDealer;
 import http.resource.LoginListResouce;
 
 import java.util.HashMap;
@@ -12,6 +10,8 @@ import javax.inject.Inject;
 import nebula.data.Entity;
 import nebula.data.Persistence;
 import nebula.data.Store;
+import nebula.data.json.JsonHelper;
+import nebula.data.json.JsonEntityHelperProvider;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,7 +43,7 @@ public class PrepareResouceEngine implements ResourceEngine {
 			log.trace("\tid : " + id);
 		}
 
-		JsonDealer<Entity> json = JsonProvider.getSerialize(Entity.class);
+		JsonHelper<Entity> json = JsonEntityHelperProvider.getSerialize(Entity.class);
 		Store<Entity> users = persistence.define(Entity.class, "User");	
 		Store<Entity> datas = persistence.define(Entity.class, "UserAccessLog");		
 		return new LoginListResouce(json, users,datas);

@@ -1,4 +1,4 @@
-package nebula.db;
+package nebula.data.db;
 
 import java.io.StringReader;
 import java.util.HashMap;
@@ -8,6 +8,8 @@ import junit.framework.TestCase;
 import nebula.data.Entity;
 import nebula.data.Persistence;
 import nebula.data.Store;
+import nebula.data.db.DBExec;
+import nebula.data.db.DbConfiguration;
 import nebula.lang.SystemTypeLoader;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;

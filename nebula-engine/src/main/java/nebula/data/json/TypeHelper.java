@@ -1,9 +1,12 @@
-package nebula.lang;
+package nebula.data.json;
 
-import http.json.JsonSerialize;
 
 import java.io.IOException;
 
+import nebula.lang.Field;
+import nebula.lang.Type;
+
+import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonParseException;
@@ -12,32 +15,36 @@ import org.codehaus.jackson.JsonToken;
 
 import util.InheritHashMap;
 
-public class TypeSerialize implements JsonSerialize<Type> {
+public class TypeHelper extends DefaultJsonHelper<Type> {
+	public TypeHelper(JsonFactory factory) {
+		super(factory);
+	}
+
 	@Override
 	public void write(JsonGenerator o, Type d) {
 		try {
 			o.writeStartObject();
-			o.writeStringField("name", d.name);
-			if (d.superType != null) {
-				o.writeStringField("parent", d.superType.name);
+			o.writeStringField("name", d.getName());
+			if (d.getSuperType() != null) {
+				o.writeStringField("parent", d.getSuperType().getName());
 			}
-			o.writeStringField("standalone", d.standalone.name());
+			o.writeStringField("standalone", d.getStandalone().name());
 			o.writeArrayFieldStart("fields");
-			FieldSerialize fs = new FieldSerialize();
+			FieldSerialize fs = new FieldSerialize(super.factory);
 			for (Field f : d.getFields()) {
 				fs.write(o, f);
 			}
 			o.writeEndArray();
 			
 			o.writeObjectFieldStart("attrs");			
-			InheritHashMap p = d.attrs;	
+			InheritHashMap p = d.getAttrs();	
 			for(String k:p.getNames()){
 				o.writeStringField(k,p.get(k).toString());				
 			}
 			o.writeEndObject();
 			
-			o.writeBooleanField("mutable", d.mutable);
-			o.writeStringField("code", d.code);
+			o.writeBooleanField("mutable", d.isMutable());
+			o.writeStringField("code", d.getCode());
 
 			o.writeEndObject();
 		} catch (JsonGenerationException e) {
@@ -49,9 +56,6 @@ public class TypeSerialize implements JsonSerialize<Type> {
 
 	@Override
 	public Type read(JsonParser p, Type d) {
-		if (d == null) {
-			d = new Type(null, null);
-		}
 		JsonToken t;
 		try {
 			p.nextToken();
@@ -62,7 +66,8 @@ public class TypeSerialize implements JsonSerialize<Type> {
 				String fieldName = p.getCurrentName();
 				p.nextToken();
 				if ("code".equals(fieldName)) {
-					d.code = p.getText();
+					String code = p.getText();
+					//d.getCode() = p.getText();
 				}
 			}
 			return d;
@@ -74,18 +79,21 @@ public class TypeSerialize implements JsonSerialize<Type> {
 	}
 }
 
-class FieldSerialize implements JsonSerialize<Field> {
+class FieldSerialize extends DefaultJsonHelper<Field> {
+	public FieldSerialize(JsonFactory factory) {
+		super(factory);
+	}
 
 	@Override
 	public void write(JsonGenerator o, Field d) {
 		try {
 			o.writeStartObject();
-			o.writeStringField("name", d.name);
-			o.writeStringField("typename", d.type.name);
+			o.writeStringField("name", d.getName());
+			o.writeStringField("typename", d.getType().getName());
 			
 			o.writeObjectFieldStart("attrs");
 			
-			InheritHashMap p = d.attrs;	
+			InheritHashMap p = d.getAttrs();	
 			for(String k:p.getNames()){
 				o.writeStringField(k,p.get(k).toString());				
 			}

@@ -1,6 +1,5 @@
 package http.resource;
 
-import http.json.JsonProvider.JsonDealer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -12,14 +11,15 @@ import org.simpleframework.http.Request;
 
 import nebula.data.Entity;
 import nebula.data.Store;
+import nebula.data.json.JsonHelper;
 
 public class EntityResouce extends AbstractResouce {
-	private final JsonDealer<Entity> json;
+	private final JsonHelper<Entity> json;
 
 	private final String key;
 	private final Store<Entity> datas;
 
-	public EntityResouce(JsonDealer<Entity> json, Store<Entity> datas, String key) {
+	public EntityResouce(JsonHelper<Entity> json, Store<Entity> datas, String key) {
 		this.json = json;
 		this.datas = datas;
 		this.key = key;

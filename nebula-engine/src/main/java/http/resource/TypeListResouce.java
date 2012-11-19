@@ -1,6 +1,5 @@
 package http.resource;
 
-import http.json.JsonProvider.JsonDealer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -11,6 +10,7 @@ import java.util.List;
 
 import nebula.Filter;
 import nebula.SmartList;
+import nebula.data.json.JsonHelper;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 
@@ -21,12 +21,12 @@ import org.simpleframework.http.Request;
 
 public class TypeListResouce extends AbstractResouce {
 	private static Log log = LogFactory.getLog(TypeListResouce.class);
-	private final JsonDealer<Type> json;
+	private final JsonHelper<Type> json;
 	private final SmartList<Type> types;
 	final TypeLoader typeLoader;
 	final TypeFilterBuilder filterBuilder;
 
-	public TypeListResouce(TypeLoader typeLoader, JsonDealer<Type> json, TypeFilterBuilder filterBuilder) {
+	public TypeListResouce(TypeLoader typeLoader, JsonHelper<Type> json, TypeFilterBuilder filterBuilder) {
 		this.types = typeLoader.all();
 		this.typeLoader = typeLoader;
 		this.json = json;

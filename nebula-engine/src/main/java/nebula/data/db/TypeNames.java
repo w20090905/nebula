@@ -1,20 +1,22 @@
-package nebula.db;
+package nebula.data.db;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import nebula.lang.RawTypes;
+
 public class TypeNames {
 
-	private Map<Integer, Map<Long, String>> weighted = new HashMap<Integer, Map<Long, String>>();
-	private Map<Integer, String> defaults = new HashMap<Integer, String>();
+	private Map<RawTypes, Map<Long, String>> weighted = new HashMap<RawTypes, Map<Long, String>>();
+	private Map<RawTypes, String> defaults = new HashMap<RawTypes, String>();
 
-	public String get(int typecode) {
+	public String get(RawTypes typecode) {
 		String result = defaults.get( typecode );
 		if (result==null) throw new RuntimeException("No Dialect mapping for JDBC type: " + typecode);
 		return result;
 	}
 
-	public String get(int typeCode, long size, int precision, int scale)  {
+	public String get(RawTypes typeCode, long size, int precision, int scale)  {
 		Map<Long, String> map = weighted.get( typeCode );
 		if ( map!=null && map.size()>0 ) {
 			// iterate entries ordered by capacity to find first fit
@@ -33,7 +35,7 @@ public class TypeNames {
 		return type.replaceFirst("$p", Integer.toString(precision) );
 	}
 
-	public void put(int typecode, long capacity, String value) {
+	public void put(RawTypes typecode, long capacity, String value) {
 		Map<Long, String> map = weighted.get( typecode );
 		if (map == null) {// add new ordered map
 			map = new TreeMap<Long, String>();
@@ -42,7 +44,7 @@ public class TypeNames {
 		map.put(capacity, value);
 	}
 
-	public void put(int typecode, String value) {
+	public void put(RawTypes typecode, String value) {
 		defaults.put( typecode, value );
 	}
 }

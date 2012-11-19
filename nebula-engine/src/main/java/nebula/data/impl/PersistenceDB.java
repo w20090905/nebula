@@ -12,8 +12,8 @@ import nebula.data.Callback;
 import nebula.data.Entity;
 import nebula.data.Persistence;
 import nebula.data.Store;
+import nebula.data.db.DbConfiguration;
 import nebula.data.impl.EditableEntity;
-import nebula.db.DbConfiguration;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 

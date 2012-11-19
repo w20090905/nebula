@@ -1,6 +1,6 @@
 type TestRef {
-	!Key				Text;
-	*Core				Text;
-	Require				Text;
-	Ignore				Text;
+	!Key				Name;
+	*Core				Name;
+	Require				Name;
+	Ignore				Name;
 };

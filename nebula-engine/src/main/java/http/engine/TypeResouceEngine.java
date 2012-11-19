@@ -1,13 +1,13 @@
 package http.engine;
 
-import http.json.JsonProvider;
-import http.json.JsonProvider.JsonDealer;
 import http.resource.TypeEditableResouce;
 import http.resource.TypeFilterBuilder;
 import http.resource.TypeListResouce;
 
 import javax.inject.Inject;
 
+import nebula.data.json.JsonHelper;
+import nebula.data.json.JsonEntityHelperProvider;
 import nebula.frame.DataWareHouse;
 import nebula.lang.EditableTypeLoader;
 import nebula.lang.Type;
@@ -46,7 +46,7 @@ public class TypeResouceEngine implements ResourceEngine {
 			log.trace("\ttypeName : " + typeName);
 			log.trace("\tid : " + id);
 		}
-		JsonDealer<Type> json = JsonProvider.getSerialize(Type.class);
+		JsonHelper<Type> json = JsonEntityHelperProvider.getSerialize(Type.class);
 
 		if (id != null) {
 			return new TypeEditableResouce(typeLoader, id);

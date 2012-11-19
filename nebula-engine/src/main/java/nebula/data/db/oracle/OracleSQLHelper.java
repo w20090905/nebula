@@ -1,7 +1,7 @@
-package nebula.db.oracle;
+package nebula.data.db.oracle;
 
-import nebula.db.DbConfiguration;
-import nebula.db.SqlHelper;
+import nebula.data.db.DbConfiguration;
+import nebula.data.db.SqlHelper;
 import nebula.lang.Type;
 
 public class OracleSQLHelper extends SqlHelper {

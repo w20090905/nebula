@@ -1,6 +1,5 @@
 package http.resource;
 
-import http.json.JsonProvider.JsonDealer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -13,6 +12,7 @@ import java.util.List;
 import nebula.Filter;
 import nebula.data.Entity;
 import nebula.data.Store;
+import nebula.data.json.JsonHelper;
 
 import org.simpleframework.http.Query;
 import org.simpleframework.http.Request;
@@ -20,11 +20,11 @@ import org.simpleframework.http.Request;
 import util.FileUtil;
 
 public class EntityListResouce extends AbstractResouce {
-	private final JsonDealer<Entity> json;
+	private final JsonHelper<Entity> json;
 	private final Store<Entity> datas;
 	final EntityFilterBuilder filterBuilder;
 
-	public EntityListResouce(JsonDealer<Entity> json, Store<Entity> datas, final EntityFilterBuilder filterBuilder) {
+	public EntityListResouce(JsonHelper<Entity> json, Store<Entity> datas, final EntityFilterBuilder filterBuilder) {
 		this.json = json;
 		this.datas = datas;
 		this.filterBuilder = filterBuilder;

@@ -4,9 +4,9 @@ import junit.framework.TestCase;
 import nebula.data.Entity;
 import nebula.data.Persistence;
 import nebula.data.Store;
+import nebula.data.db.DbConfiguration;
 import nebula.data.impl.EditableEntity;
 import nebula.data.impl.PersistenceDB;
-import nebula.db.DbConfiguration;
 import nebula.lang.SystemTypeLoader;
 
 public class EntityStoreTest extends TestCase {

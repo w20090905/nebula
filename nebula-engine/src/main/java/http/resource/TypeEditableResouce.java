@@ -1,6 +1,5 @@
 package http.resource;
 
-import http.json.JsonProvider;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -8,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
+import nebula.data.json.JsonEntityHelperProvider;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 
@@ -64,7 +64,7 @@ public class TypeEditableResouce extends AbstractResouce{
 				Type type = typeLoader.findType(key);
 				String oldCode = type.getCode();
 
-				JsonProvider.getSerialize(Type.class).readFrom(type, new InputStreamReader(req.getInputStream()));
+				JsonEntityHelperProvider.getSerialize(Type.class).readFrom(type, new InputStreamReader(req.getInputStream()));
 				// System.out.println(type.toString());
 				if (!oldCode.equals(type.getCode())) {
 					if (log.isTraceEnabled()) {
@@ -106,7 +106,7 @@ public class TypeEditableResouce extends AbstractResouce{
 		try {
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			Type type = typeLoader.findType(key);
-			JsonProvider.getSerialize(Type.class).stringifyTo(type, new OutputStreamWriter(out));
+			JsonEntityHelperProvider.getSerialize(Type.class).stringifyTo(type, new OutputStreamWriter(out));
 			out.flush();
 			this.lastModified = System.currentTimeMillis();
 			this.cache = out.toByteArray();

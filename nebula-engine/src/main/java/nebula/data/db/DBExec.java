@@ -1,10 +1,9 @@
-package nebula.db;
+package nebula.data.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,7 +57,7 @@ public class DBExec {
 			SQL_UPDATE = conn.prepareStatement(builder.builderUpdate());
 			SQL_DELETE = conn.prepareStatement(builder.builderDelete());
 			SQL_LIST = conn.prepareStatement(builder.builderList());
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			log.error(e);
 			throw new RuntimeException(e);
 		}
@@ -148,7 +147,7 @@ public class DBExec {
 				
 				
 				conn.commit();
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				log.error(e);
 			}
 
@@ -156,7 +155,7 @@ public class DBExec {
 				statement.executeUpdate(builder.builderCreate());
 			}
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -165,7 +164,7 @@ public class DBExec {
 	public void drop() {
 		try {
 			conn.createStatement().execute(builder.builderDrop());
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			log.error(e);
 			throw new RuntimeException(e);
 		}			
@@ -183,7 +182,7 @@ public class DBExec {
 	public void deleteAll() {
 		try {
 			conn.createStatement().execute(builder.builderDeleteAll());
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			log.error(e);
 			throw new RuntimeException(e);
 		}			
@@ -225,12 +224,12 @@ public class DBExec {
 			pstmt.executeUpdate();
 			pstmt.clearParameters();
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		} finally {
 			try {
 				if (res != null) res.close();
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
 		}
@@ -254,27 +253,27 @@ public class DBExec {
 
 			return list;
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		} finally {
 			try {
 				if (res != null) res.close();
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
 		}
 	}
 
-	int fromEntity(PreparedStatement prepareStatement, Map<String, Object> v) throws SQLException {
+	int fromEntity(PreparedStatement prepareStatement, Map<String, Object> v) throws Exception {
 		int pos = 0;
-		for (DbColumn c : columns) {			
+		for (DbColumn c : columns) {
 			c.datadealer.writeTo(1 + pos,  v.get(c.fieldName), prepareStatement);
 			pos++;
 		}
 		return pos;
 	}
 
-	Map<String, Object> toEntity(ResultSet result) throws SQLException {
+	Map<String, Object> toEntity(ResultSet result) throws Exception {
 		Map<String, Object> v = new HashMap<String, Object>();
 
 		int pos = 0;

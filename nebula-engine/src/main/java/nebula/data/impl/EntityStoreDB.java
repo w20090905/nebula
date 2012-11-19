@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import nebula.data.Entity;
-import nebula.db.DBExec;
+import nebula.data.db.DBExec;
 import nebula.lang.Field;
 import nebula.lang.Type;
 
