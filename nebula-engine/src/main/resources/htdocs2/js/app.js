@@ -9,3 +9,4 @@ nebulaModule.config(['$routeProvider', function($routeProvider,$cookies) {
 			.when('/c/:userid', {templateUrl: 'angularjs/crmmain.html', controller: ContactRecordsCtrl})
 			.otherwise({redirectTo: '/main'});
 }]);
+

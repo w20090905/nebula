@@ -16,3 +16,4 @@ angular.module('appSetting', ['nebulaFilters', 'nebulaServices','nebulaDirective
 	 		}
 	});
 });
+
