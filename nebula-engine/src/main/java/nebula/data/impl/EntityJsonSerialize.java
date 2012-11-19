@@ -47,7 +47,8 @@ public class EntityJsonSerialize implements JsonDealer<Entity> {
 
 			gen.writeEndObject();
 			gen.flush();
-		} catch (IOException e) {
+		} catch (Exception e) {
+			log.error(e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -77,7 +78,7 @@ public class EntityJsonSerialize implements JsonDealer<Entity> {
 			} catch (JsonParseException e) {
 				log.error(e);
 				throw new RuntimeException(e);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				log.error(e);
 				throw new RuntimeException(e);
 			}
