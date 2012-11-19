@@ -1,4 +1,4 @@
-package http.engine;
+package http.resource;
 
 import http.json.JsonProvider;
 
@@ -18,12 +18,12 @@ import org.simpleframework.http.Response;
 
 import util.FileUtil;
 
-public class TypeEditResouce extends BasicResouce{
-	private static Log log = LogFactory.getLog(TypeEditResouce.class);
+public class TypeEditableResouce extends AbstractResouce{
+	private static Log log = LogFactory.getLog(TypeEditableResouce.class);
 	private final String key;
 	final TypeLoader typeLoader;
 
-	public TypeEditResouce(TypeLoader typeLoader, String key) {
+	public TypeEditableResouce(TypeLoader typeLoader, String key) {
 		this.key = key;
 		this.typeLoader = typeLoader;
 	}

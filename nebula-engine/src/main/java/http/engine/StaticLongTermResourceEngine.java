@@ -2,6 +2,7 @@ package http.engine;
 
 import http.io.Loader;
 import http.io.Source;
+import http.resource.StaticResource;
 
 import java.util.Hashtable;
 import java.util.StringTokenizer;
@@ -11,14 +12,14 @@ import javax.inject.Inject;
 import org.simpleframework.http.Address;
 import org.simpleframework.http.resource.Resource;
 
-public class LongTermStaticResourceEngine extends StaticResourceEngine {
+public class StaticLongTermResourceEngine extends StaticResourceEngine {
 	private final long age;
 	@Inject
-	public LongTermStaticResourceEngine(Loader loader) {
+	public StaticLongTermResourceEngine(Loader loader) {
 		this(loader, 30L * 24L * 60L * 60L);
 	}
 	
-	public LongTermStaticResourceEngine(Loader loader,long age) {
+	public StaticLongTermResourceEngine(Loader loader,long age) {
 		super(loader);
 		this.age = age;
 	}

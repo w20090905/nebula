@@ -1,6 +1,6 @@
 package nebula.data.impl;
 
-import http.engine.EntityFilterBuilder;
+import http.resource.EntityFilterBuilder;
 
 import java.util.Map;
 

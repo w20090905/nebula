@@ -1,8 +1,8 @@
 package http.server;
 
-import http.engine.LoginListResouce;
-import http.engine.RedirectResouce;
-import http.engine.StaticResource;
+import http.resource.LoginListResouce;
+import http.resource.RedirectResouce;
+import http.resource.StaticResource;
 import http.startup.Configurable;
 
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package http.engine;
+package http.resource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
-public class TemplateResouce extends BasicResouce {
+public class TemplateResouce extends AbstractResouce {
 	private final Configuration cfg;
 	private final String templateName;
 

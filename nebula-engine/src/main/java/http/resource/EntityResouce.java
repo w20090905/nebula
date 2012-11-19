@@ -1,4 +1,4 @@
-package http.engine;
+package http.resource;
 
 import http.json.JsonProvider.JsonDealer;
 
@@ -13,13 +13,13 @@ import org.simpleframework.http.Request;
 import nebula.data.Entity;
 import nebula.data.Store;
 
-public class DataResouce extends BasicResouce {
+public class EntityResouce extends AbstractResouce {
 	private final JsonDealer<Entity> json;
 
 	private final String key;
 	private final Store<Entity> datas;
 
-	public DataResouce(JsonDealer<Entity> json, Store<Entity> datas, String key) {
+	public EntityResouce(JsonDealer<Entity> json, Store<Entity> datas, String key) {
 		this.json = json;
 		this.datas = datas;
 		this.key = key;

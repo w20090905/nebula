@@ -1,4 +1,4 @@
-package http.engine;
+package http.resource;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 import org.simpleframework.http.resource.Resource;
 
-public abstract class BasicResouce implements Resource {
+public abstract class AbstractResouce implements Resource {
 	protected Log log = LogFactory.getLog(this.getClass());
 
 	protected int maxAge = 0;

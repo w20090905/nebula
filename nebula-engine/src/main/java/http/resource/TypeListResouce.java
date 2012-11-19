@@ -1,52 +1,56 @@
-package http.engine;
+package http.resource;
 
 import http.json.JsonProvider.JsonDealer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.util.List;
 
 import nebula.Filter;
-import nebula.data.Entity;
-import nebula.data.Store;
+import nebula.SmartList;
+import nebula.lang.Type;
+import nebula.lang.TypeLoader;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.simpleframework.http.Query;
 import org.simpleframework.http.Request;
 
-import util.FileUtil;
+public class TypeListResouce extends AbstractResouce {
+	private static Log log = LogFactory.getLog(TypeListResouce.class);
+	private final JsonDealer<Type> json;
+	private final SmartList<Type> types;
+	final TypeLoader typeLoader;
+	final TypeFilterBuilder filterBuilder;
 
-public class DataListResouce extends BasicResouce {
-	private final JsonDealer<Entity> json;
-	private final Store<Entity> datas;
-	final EntityFilterBuilder filterBuilder;
-
-	public DataListResouce(JsonDealer<Entity> json, Store<Entity> datas, final EntityFilterBuilder filterBuilder) {
+	public TypeListResouce(TypeLoader typeLoader, JsonDealer<Type> json, TypeFilterBuilder filterBuilder) {
+		this.types = typeLoader.all();
+		this.typeLoader = typeLoader;
 		this.json = json;
-		this.datas = datas;
 		this.filterBuilder = filterBuilder;
 	}
 
+	@Override
 	protected void get(Request req) {
 		Query query = req.getAddress().getQuery();
-		List<Entity> dataList;
+		List<Type> dataList;
 
 		if (query.isEmpty()) {
-			dataList = datas.all();
+			dataList = types;
 		} else {
-			Filter<Entity> filter = filterBuilder.buildFrom(query, null);
-			dataList = datas.query(filter);
+			Filter<Type> filter = filterBuilder.buildFrom(query, null);
+			dataList = types.query(filter);
 		}
-
+		
 		ByteArrayOutputStream bout = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(bout);
 
 		boolean start = true;
 		out.append('[');
-		for (Entity data : dataList) {
+		for (Type data : dataList) {
 			if (!start) {
 				out.append(',');
 			} else {
@@ -64,15 +68,10 @@ public class DataListResouce extends BasicResouce {
 
 	@Override
 	protected void post(Request req) {
+		System.out.println("in post");
 		try {
-			Entity data = datas.createNew();
-			InputStream in = req.getInputStream();
-			if (log.isTraceEnabled()) {
-				in = FileUtil.print(in);
-			}
-			json.readFrom(data, new InputStreamReader(in));
-			datas.add(data);
-			datas.flush();
+			Type type = json.readFrom(null, new InputStreamReader(req.getInputStream()));
+			type = typeLoader.update(type);
 		} catch (IOException e) {
 			log.error(e);
 			throw new RuntimeException(e);

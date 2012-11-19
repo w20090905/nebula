@@ -1,4 +1,4 @@
-package http.engine;
+package http.resource;
 
 import http.io.Source;
 
@@ -17,13 +17,13 @@ import org.simpleframework.http.Response;
 import util.FileUtil;
 
 @SuppressWarnings("deprecation")
-public class EditableStaticResource extends BasicResouce {
-	private static Log log = LogFactory.getLog(EditableStaticResource.class);
+public class StaticEditableResource extends AbstractResouce {
+	private static Log log = LogFactory.getLog(StaticEditableResource.class);
 
 	private final Source underlySource;
 	private final String mime;
 
-	public EditableStaticResource(Source source, String mime) {
+	public StaticEditableResource(Source source, String mime) {
 		this.underlySource = source;
 		this.mime = mime;
 	}

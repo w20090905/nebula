@@ -1,18 +1,18 @@
 package http.startup;
 
 import freemarker.template.Configuration;
-import http.engine.DataResouceEngine;
-import http.engine.EntityFilterBuilder;
-import http.engine.LongTermStaticResourceEngine;
+import http.engine.EntityResouceEngine;
+import http.engine.StaticLongTermResourceEngine;
 import http.engine.PrepareResouceEngine;
 import http.engine.StaticResourceEngine;
 import http.engine.TemplateResouceEngine;
-import http.engine.TypeFilterBuilder;
 import http.engine.TypeResouceEngine;
 import http.io.ClassPathLoader;
 import http.io.FileSystemLoader;
 import http.io.Loader;
 import http.io.MultiLoader;
+import http.resource.EntityFilterBuilder;
+import http.resource.TypeFilterBuilder;
 import http.server.BasicResourceContainer;
 
 import java.io.File;
@@ -106,23 +106,23 @@ public class ConfigModule extends AbstractModule {
 
 			this.bind(StaticResourceEngine.class).in(Singleton.class);
 			this.bind(ResourceEngine.class).to(StaticResourceEngine.class).in(Singleton.class);
-			this.bind(DataResouceEngine.class);
+			this.bind(EntityResouceEngine.class);
 
 			this.bind(Container.class).to(BasicResourceContainer.class).in(Singleton.class);
 
 			this.bind(new TypeLiteral<Configurable<BasicResourceContainer>>() {
 			}).toInstance(new Configurable<BasicResourceContainer>() {
 				StaticResourceEngine staticEngine;
-				DataResouceEngine dataResouceEngine;
+				EntityResouceEngine dataResouceEngine;
 				TypeResouceEngine typeResouceEngine;
 				// EditableStaticResourceEngine editableStaticEngine;
 				TemplateResouceEngine templateResouceEngine;
 				PrepareResouceEngine prepareResouceEngine;
-				private LongTermStaticResourceEngine longTermStaticEngine;
+				private StaticLongTermResourceEngine longTermStaticEngine;
 
 				@SuppressWarnings("unused")
 				@Inject
-				public void setEngine(DataResouceEngine engine) {
+				public void setEngine(EntityResouceEngine engine) {
 					this.dataResouceEngine = engine;
 				}
 
@@ -140,7 +140,7 @@ public class ConfigModule extends AbstractModule {
 				
 				@SuppressWarnings("unused")
 				@Inject
-				public void setEngine(LongTermStaticResourceEngine engine) {
+				public void setEngine(StaticLongTermResourceEngine engine) {
 					this.longTermStaticEngine = engine;
 				}
 

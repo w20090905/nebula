@@ -2,6 +2,8 @@ package http.engine;
 
 import http.io.Loader;
 import http.io.Source;
+import http.resource.StaticEditableResource;
+import http.resource.TemplateResouce;
 
 import javax.inject.Inject;
 
@@ -38,7 +40,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 
 		Source source = loader.findSource(path.getPath());
 		if (source != null) {
-			return new EditableStaticResource(source, TheMimeTypes.get(source));
+			return new StaticEditableResource(source, TheMimeTypes.get(source));
 		}
 
 		String[] segments = target.getPath().getSegments();

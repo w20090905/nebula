@@ -2,6 +2,9 @@ package http.engine;
 
 import http.json.JsonProvider;
 import http.json.JsonProvider.JsonDealer;
+import http.resource.TypeEditableResouce;
+import http.resource.TypeFilterBuilder;
+import http.resource.TypeListResouce;
 
 import javax.inject.Inject;
 
@@ -46,7 +49,7 @@ public class TypeResouceEngine implements ResourceEngine {
 		JsonDealer<Type> json = JsonProvider.getSerialize(Type.class);
 
 		if (id != null) {
-			return new TypeEditResouce(typeLoader, id);
+			return new TypeEditableResouce(typeLoader, id);
 		} else {
 			return new TypeListResouce(typeLoader, json, filterBuilder);
 		}

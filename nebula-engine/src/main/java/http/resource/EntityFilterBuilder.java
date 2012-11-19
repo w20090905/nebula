@@ -1,4 +1,4 @@
-package http.engine;
+package http.resource;
 
 import java.util.Map;
 

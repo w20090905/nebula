@@ -2,6 +2,9 @@ package http.engine;
 
 import http.json.JsonProvider;
 import http.json.JsonProvider.JsonDealer;
+import http.resource.EntityListResouce;
+import http.resource.EntityResouce;
+import http.resource.EntityFilterBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +21,7 @@ import org.simpleframework.http.Address;
 import org.simpleframework.http.resource.Resource;
 import org.simpleframework.http.resource.ResourceEngine;
 
-public class DataResouceEngine implements ResourceEngine {
+public class EntityResouceEngine implements ResourceEngine {
 	private Log log = LogFactory.getLog(this.getClass());
 	final Persistence<Entity> persistence;
 	final EntityFilterBuilder filterBuilder;
@@ -26,7 +29,7 @@ public class DataResouceEngine implements ResourceEngine {
 	Map<String, String> tmap = new HashMap<String, String>();
 
 	@Inject
-	public DataResouceEngine(final Persistence<Entity> dataWareHouse, final EntityFilterBuilder filterBuilder) {
+	public EntityResouceEngine(final Persistence<Entity> dataWareHouse, final EntityFilterBuilder filterBuilder) {
 		this.persistence = dataWareHouse;
 		this.filterBuilder = filterBuilder;
 	}
@@ -50,9 +53,9 @@ public class DataResouceEngine implements ResourceEngine {
 		JsonDealer<Entity> json = JsonProvider.getSerialize(datas.getType());
 
 		if (id != null) {
-			return new DataResouce(json, datas, id);
+			return new EntityResouce(json, datas, id);
 		} else {
-			return new DataListResouce(json, datas, filterBuilder);
+			return new EntityListResouce(json, datas, filterBuilder);
 		}
 	}
 
