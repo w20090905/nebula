@@ -42,7 +42,7 @@ public class Type {
 		this.residedType = null;
 		this.rawType = null;
 		this.loader = typeLoader;
-		this.standalone = TypeStandalone.Basic;
+		this.standalone = TypeStandalone.Abstract;
 		this.name = name;
 		this.fields = new CopyOnWriteArrayList<Field>();
 		this.attrs = new InheritHashMap();

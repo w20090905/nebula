@@ -25,11 +25,11 @@ class BootstrapTypeLoader extends TypeLoader {
 
 	private void init() {
 		Type typeRoot = new Type(this, Type.ROOT_TYPE);
-		Type basicType = new Type(this, TypeStandalone.Basic.toString(), typeRoot);
+		Type basicType = new Type(this, TypeStandalone.Basic.toString(), typeRoot,TypeStandalone.Abstract);
 
-		Type master = new Type(this, TypeStandalone.Master.toString(), typeRoot,TypeStandalone.Master);		
-		Type transaction = new Type(this, TypeStandalone.Transaction.toString(), typeRoot,TypeStandalone.Transaction);
-		Type mixin = new Type(this, TypeStandalone.Mixin.toString(), typeRoot,TypeStandalone.Mixin);
+		Type master = new Type(this, TypeStandalone.Master.toString(), typeRoot,TypeStandalone.Abstract);		
+		Type transaction = new Type(this, TypeStandalone.Transaction.toString(), typeRoot,TypeStandalone.Abstract);
+		Type mixin = new Type(this, TypeStandalone.Mixin.toString(), typeRoot,TypeStandalone.Abstract);
 
 		Type string = new Type(this, "String", basicType, RawTypes.String);
 		string.attrs.put("jdbcType", Types.VARCHAR);

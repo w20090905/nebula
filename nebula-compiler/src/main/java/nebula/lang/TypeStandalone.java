@@ -1,6 +1,7 @@
 package nebula.lang;
 
 public enum TypeStandalone {
+	Abstract,
 	Type, 
 	Basic, 
 	/**

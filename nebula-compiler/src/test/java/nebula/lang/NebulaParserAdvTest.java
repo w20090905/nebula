@@ -22,6 +22,36 @@ public class NebulaParserAdvTest extends TestCase {
 
 	final StringBuilder sb = new StringBuilder();
 
+	public void test_basic_1() throws Exception {
+		//@formatter:off
+		String text = "" +
+				"define FullName extends Name { " +
+				"};";
+		//@formatter:on		
+		Type type = compiler.load(text);
+
+		assertEquals("FullName", type.name);
+		assertEquals(TypeStandalone.Basic, type.standalone);
+
+		assertEquals(0, type.fields.size());
+	}
+	
+	public void test_tx_1() throws Exception {
+		//@formatter:off
+		String text = "" +
+				"tx Order { " +
+				"	!AutoID;" +
+				"};";
+		//@formatter:on		
+		Type type = compiler.load(text);
+
+		assertEquals("Order", type.name);
+		assertEquals(TypeStandalone.Transaction, type.standalone);
+
+		assertEquals(1, type.fields.size());
+		assertEquals("AutoID", type.fields.get(0).name);
+	}
+	
 	public void test_type_1() throws Exception {
 		//@formatter:off
 		String text = "" +
@@ -32,6 +62,7 @@ public class NebulaParserAdvTest extends TestCase {
 		Type type = compiler.load(text);
 
 		assertEquals("Person", type.name);
+		assertEquals(TypeStandalone.Master, type.standalone);
 
 		assertEquals(1, type.fields.size());
 		assertEquals("Name", type.fields.get(0).name);

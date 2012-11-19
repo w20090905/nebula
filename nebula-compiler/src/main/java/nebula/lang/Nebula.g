@@ -75,11 +75,11 @@ typeDefinition returns[Type type]
             if($superTypeID==null){
                 switch(typeType){
                   case Transaction:
-                    type = new Type(loader,$typeID.text,resolveType(TypeStandalone.Transaction.toString()));
+                    type = new Type(loader,$typeID.text,resolveType(TypeStandalone.Transaction.toString()),typeType);
                     break;
                   case Master:
                   default:
-                    type = new Type(loader,$typeID.text,resolveType(TypeStandalone.Master.toString()));
+                    type = new Type(loader,$typeID.text,resolveType(TypeStandalone.Master.toString()),typeType);
                     break;
                 }
             }else{
