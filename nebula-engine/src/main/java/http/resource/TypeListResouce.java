@@ -8,7 +8,6 @@ import java.io.PrintStream;
 import java.util.List;
 
 import nebula.Filter;
-import nebula.SmartList;
 import nebula.data.json.JsonHelper;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -24,12 +23,10 @@ import util.FileUtil;
 public class TypeListResouce extends AbstractResouce {
 	private static Log log = LogFactory.getLog(TypeListResouce.class);
 	private final JsonHelper<Type> json;
-	private final SmartList<Type> types;
 	final TypeLoader typeLoader;
 	final TypeFilterBuilder filterBuilder;
 
 	public TypeListResouce(TypeLoader typeLoader, JsonHelper<Type> json, TypeFilterBuilder filterBuilder) {
-		this.types = typeLoader.all();
 		this.typeLoader = typeLoader;
 		this.json = json;
 		this.filterBuilder = filterBuilder;
@@ -41,10 +38,10 @@ public class TypeListResouce extends AbstractResouce {
 		List<Type> dataList;
 
 		if (query.isEmpty()) {
-			dataList = types;
+			dataList = typeLoader.all();
 		} else {
 			Filter<Type> filter = filterBuilder.buildFrom(query, null);
-			dataList = types.query(filter);
+			dataList = typeLoader.all().query(filter);
 		}
 
 		ByteArrayOutputStream bout = new ByteArrayOutputStream();
