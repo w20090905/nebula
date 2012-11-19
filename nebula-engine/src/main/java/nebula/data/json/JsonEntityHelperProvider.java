@@ -16,7 +16,7 @@ public class JsonEntityHelperProvider {
 	public static <T> JsonHelper<T> getSerialize(Class<T> clz) {
 		JsonHelper<T> s;
 		if (clz == Type.class) {
-			s = (JsonHelper<T>) new TypeHelper(factory);
+			s = (JsonHelper<T>) new TypeJsonHelper(factory);
 		} else {
 			s = null;
 		}

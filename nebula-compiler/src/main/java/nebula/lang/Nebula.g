@@ -75,11 +75,11 @@ typeDefinition returns[Type type]
             if($superTypeID==null){
                 switch(typeType){
                   case Transaction:
-                    type = new Type(loader,$typeID.text,resolveType(TypeStandalone.Transaction.toString()),typeType);
+                    type = new Type(loader,$typeID.text,resolveType(TypeStandalone.Transaction.name()),typeType);
                     break;
                   case Master:
                   default:
-                    type = new Type(loader,$typeID.text,resolveType(TypeStandalone.Master.toString()),typeType);
+                    type = new Type(loader,$typeID.text,resolveType(TypeStandalone.Master.name()),typeType);
                     break;
                 }
             }else{
@@ -113,7 +113,7 @@ nestedTypeDefinition[Type resideType,String name,Alias nameAlias] returns[Type t
     :   '{' 
             {
               String typeName = resideType.name + "$" + name;
-              type = new Type(loader,resideType,typeName,resolveType(TypeStandalone.Mixin.toString()));
+              type = new Type(loader,resideType,typeName,resolveType(TypeStandalone.Mixin.name()));
               if(nameAlias!=null)type.nameAlias=nameAlias;
               addType(type);
             }

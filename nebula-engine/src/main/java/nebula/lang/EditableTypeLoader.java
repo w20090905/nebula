@@ -76,27 +76,27 @@ public class EditableTypeLoader extends TypeLoader {
 	// }
 
 	@Override
-	public Type update(Type oldType) {
+	public Type update(Type oldType,String newCode) {
 		try {
-			String code = oldType.code;
-
-			List<Type> typeList = tryDefineNebula(new StringReader(code));
+			List<Type> newTypes = tryDefineNebula(new StringReader(newCode));
 			
 			File file;
-			if (oldType.name == null) {
-				String name = typeList.get(0).getName();
+			if (oldType == null) {
+				String name = newTypes.get(0).getName();
 				file = new File(root, name + ".nebula");
 			} else {
-				Type oldInnerType = this.findType(typeList.get(0).name);
-				if (!oldInnerType.mutable) {
+				assert oldType.getName().equals(newTypes.get(0).getName());
+				
+				oldType = this.findType(oldType.getName());
+				if (!oldType.mutable) {
 					throw new RuntimeException("Cannot edit");
 				}
 
-				if (oldInnerType.getTypeLoader() != this) {
-					return oldInnerType.getTypeLoader().update(oldType);
+				if (oldType.getTypeLoader() != this) {
+					return oldType.getTypeLoader().update(oldType,newCode);
 				}
 
-				URL url = oldInnerType.url;
+				URL url = oldType.url;
 				file = new File(url.getFile());
 
 				if (!"file".equals(url.getProtocol())) {
@@ -104,14 +104,14 @@ public class EditableTypeLoader extends TypeLoader {
 				}
 			}
 
-			file = FileUtil.saveTo(code, file);
+			file = FileUtil.saveTo(newCode, file);
 
-			typeList = super.defineNebula(file.toURI().toURL());
-			for (Type t : typeList) {
+			newTypes = super.defineNebula(file.toURI().toURL());
+			for (Type t : newTypes) {
 				t.mutable = true;
 			}
 
-			return typeList.get(0);
+			return newTypes.get(0);
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}

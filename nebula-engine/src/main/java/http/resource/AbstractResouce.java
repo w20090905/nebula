@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.simpleframework.http.Address;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 import org.simpleframework.http.resource.Resource;
@@ -16,18 +17,18 @@ public abstract class AbstractResouce implements Resource {
 	protected byte[] cache;
 	protected long lastModified;
 
-	protected abstract void get(Request req);
+	protected abstract void get(Address address) throws IOException;
 
-	protected void put(Request req) {
-		throw new UnsupportedOperationException("cann't support " + req.getMethod());
+	protected void put(Request req) throws IOException {
+		throw new UnsupportedOperationException("cann't support put " + req.getAddress());
 	}
 
-	protected void post(Request req) {
-		throw new UnsupportedOperationException("cann't support " + req.getMethod());
+	protected String post(Request req) throws IOException {
+		throw new UnsupportedOperationException("cann't support post " + req.getAddress());
 	}
 	
-	protected void delete(Request req) {
-		throw new UnsupportedOperationException("cann't support " + req.getMethod());
+	protected void delete(Address address) throws IOException {
+		throw new UnsupportedOperationException("cann't support delete " + address);
 	}
 
 	@Override
@@ -43,7 +44,7 @@ public abstract class AbstractResouce implements Resource {
 
 				//System.out.print(System.currentTimeMillis());
 				if (System.currentTimeMillis() - this.lastModified > 100) {					
-					get(req);
+					get(req.getAddress());
 					//System.out.println("====" + System.currentTimeMillis());
 				}
 
@@ -61,7 +62,7 @@ public abstract class AbstractResouce implements Resource {
 			} else if ("PUT".equals(method)) {
 				this.put(req);
 
-				get(req);
+				get(req.getAddress());
 
 				// normal parse
 				resp.setCode(200);
@@ -74,18 +75,18 @@ public abstract class AbstractResouce implements Resource {
 				resp.getOutputStream().flush();
 				resp.close();
 			} else if ("POST".equals(method)) {
-				this.post(req);
+				String newUrl = this.post(req);
 
 				// normal parse
 				resp.setCode(200);
 				resp.set("Cache-Control", "max-age=0");
 				resp.set("Content-Language", "en-US");
 				resp.set("Content-Type", "text/html");
-				resp.set("Content-Length", 0);
+				resp.getPrintStream().print(newUrl);
 				resp.close();
 
 			} else if ("DELETE".equals(method)) {
-				this.delete(req);
+				this.delete(req.getAddress());
 
 				// normal parse
 				resp.setCode(200);

@@ -11,6 +11,7 @@ import java.net.URL;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.simpleframework.http.Address;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 
@@ -33,7 +34,7 @@ public class StaticEditableResource extends AbstractResouce {
 		try {
 
 			if ("GET".equals(req.getMethod())) {
-				this.get(req);
+				this.get(req.getAddress());
 				// normal parse
 				resp.set("Cache-Control", "max-age=0");
 				resp.set("Content-Language", "en-US");
@@ -66,7 +67,7 @@ public class StaticEditableResource extends AbstractResouce {
 
 				file = FileUtil.saveTo(bio,file);
 
-				this.get(req);
+				this.get(req.getAddress());
 				// normal parse
 				resp.set("Cache-Control", "max-age=0");
 				resp.set("Content-Language", "en-US");
@@ -89,7 +90,7 @@ public class StaticEditableResource extends AbstractResouce {
 	}
 
 	@Override
-	protected void get(Request req) {
+	protected void get(Address address) {
 		try {
 			ByteArrayOutputStream bout = new ByteArrayOutputStream();
 			InputStream in = this.underlySource.getInputStream();

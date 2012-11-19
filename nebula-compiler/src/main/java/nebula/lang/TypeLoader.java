@@ -151,7 +151,7 @@ public abstract class TypeLoader {
 
 	protected abstract URL loadClassData(String name);
 
-	public Type update(Type oldType) {
+	public Type update(Type oldType,String newCode) {
 		throw new UnsupportedOperationException("change type");
 	}
 

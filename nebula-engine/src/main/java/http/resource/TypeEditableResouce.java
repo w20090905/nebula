@@ -1,10 +1,8 @@
 package http.resource;
 
-
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 import nebula.data.json.JsonEntityHelperProvider;
@@ -13,12 +11,12 @@ import nebula.lang.TypeLoader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.simpleframework.http.Address;
 import org.simpleframework.http.Request;
-import org.simpleframework.http.Response;
 
 import util.FileUtil;
 
-public class TypeEditableResouce extends AbstractResouce{
+public class TypeEditableResouce extends AbstractResouce {
 	private static Log log = LogFactory.getLog(TypeEditableResouce.class);
 	private final String key;
 	final TypeLoader typeLoader;
@@ -29,90 +27,41 @@ public class TypeEditableResouce extends AbstractResouce{
 	}
 
 	@Override
-	public void handle(Request req, Response resp) {
-		try {
-			if ("GET".equals(req.getMethod())) {
-				if (log.isTraceEnabled()) {
-					log.trace("Request : " + req.getPath()+ "\tkey : " + key);
-				}
-
-				if (cache == null) {
-					this.get(req);
-				}
-
-				// normal parse
-				resp.setCode(200);
-				resp.set("Cache-Control", "max-age=0");
-				resp.set("Content-Language", "en-US");
-				resp.set("Content-Type", "text/json");
-				resp.set("Content-Length", cache.length);
-				resp.setDate("Date", System.currentTimeMillis());
-				resp.getOutputStream().write(cache);
-				resp.getOutputStream().flush();
-				resp.close();
-			} else if ("POST".equals(req.getMethod()) || "PUT".equals(req.getMethod())) {
-				if (log.isTraceEnabled()) {
-					log.trace("Request : " + req.getPath());
-					log.trace("\tkey : " + key);
-				}
-				BufferedInputStream bio = new BufferedInputStream(req.getInputStream());
-				if (log.isTraceEnabled()) {
-					log.trace("Input stream : ");
-					log.trace(FileUtil.readAllTextFrom(bio));
-				}
-
-				Type type = typeLoader.findType(key);
-				String oldCode = type.getCode();
-
-				JsonEntityHelperProvider.getSerialize(Type.class).readFrom(type, new InputStreamReader(req.getInputStream()));
-				// System.out.println(type.toString());
-				if (!oldCode.equals(type.getCode())) {
-					if (log.isTraceEnabled()) {
-						log.trace("Replace:");
-						log.trace(oldCode);
-						log.trace("  with: ");
-						log.trace(type.getCode());
-					}
-
-					typeLoader.update(type);
-				} else {
-					if (log.isTraceEnabled()) {
-						log.trace("No Change:");
-						log.trace(type.getCode());
-					}
-				}
-				
-				this.get(req);
-
-				// normal parse
-				resp.setCode(200);
-				resp.set("Cache-Control", "max-age=0");
-				resp.set("Content-Language", "en-US");
-				resp.set("Content-Type", "text/json");
-				resp.set("Content-Length", cache.length);
-				resp.setDate("Date", System.currentTimeMillis());
-				resp.getOutputStream().write(cache);
-				resp.getOutputStream().flush();
-				resp.close();
-			}
-		} catch (IOException e) {
-			log.error(e);
-			throw new RuntimeException(e);
-		}
+	protected void get(Address address) throws IOException {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		Type type = typeLoader.findType(key);
+		JsonEntityHelperProvider.getSerialize(Type.class).stringifyTo(type, new OutputStreamWriter(out));
+		out.flush();
+		this.lastModified = System.currentTimeMillis();
+		this.cache = out.toByteArray();
 	}
 
-	@Override
-	protected void get(Request req) {
-		try {
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			Type type = typeLoader.findType(key);
-			JsonEntityHelperProvider.getSerialize(Type.class).stringifyTo(type, new OutputStreamWriter(out));
-			out.flush();
-			this.lastModified = System.currentTimeMillis();
-			this.cache = out.toByteArray();
-		} catch (IOException e) {
-			log.error(e);
-			throw new RuntimeException(e);
-		}		
+	protected void put(Request req) throws IOException {
+		BufferedInputStream bio = new BufferedInputStream(req.getInputStream());
+		if (log.isTraceEnabled()) {
+			log.trace("Input stream : ");
+			log.trace(FileUtil.readAllTextFrom(bio));
+		}
+
+		Type type = typeLoader.findType(key);		
+		String oldCode = type.getCode();
+		String newCode = FileUtil.readAllTextFrom(bio);
+
+		if (!oldCode.equals(newCode)) {
+			if (log.isTraceEnabled()) {
+				log.trace("Replace:");
+				log.trace(oldCode);
+				log.trace("  with: ");
+				log.trace(type.getCode());
+			}
+			type = typeLoader.update(type, newCode);
+			
+		} else {
+			if (log.isTraceEnabled()) {
+				log.trace("No Change:");
+				log.trace(type.getCode());
+			}
+		}
+
 	}
 }

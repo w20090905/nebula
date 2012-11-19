@@ -9,14 +9,12 @@ import nebula.lang.Type;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonToken;
 
 import util.InheritHashMap;
 
-public class TypeHelper extends DefaultJsonHelper<Type> {
-	public TypeHelper(JsonFactory factory) {
+public class TypeJsonHelper extends DefaultJsonHelper<Type> {
+	public TypeJsonHelper(JsonFactory factory) {
 		super(factory);
 	}
 
@@ -56,26 +54,7 @@ public class TypeHelper extends DefaultJsonHelper<Type> {
 
 	@Override
 	public Type read(JsonParser p, Type d) {
-		JsonToken t;
-		try {
-			p.nextToken();
-			while ((t = p.nextToken()) != null) {
-				if (t != JsonToken.FIELD_NAME) {
-					continue;
-				}
-				String fieldName = p.getCurrentName();
-				p.nextToken();
-				if ("code".equals(fieldName)) {
-					String code = p.getText();
-					//d.getCode() = p.getText();
-				}
-			}
-			return d;
-		} catch (JsonParseException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		throw new UnsupportedOperationException("Type read(JsonParser p, Type d)");
 	}
 }
 

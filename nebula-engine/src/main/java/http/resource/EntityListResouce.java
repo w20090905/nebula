@@ -14,6 +14,7 @@ import nebula.data.Entity;
 import nebula.data.Store;
 import nebula.data.json.JsonHelper;
 
+import org.simpleframework.http.Address;
 import org.simpleframework.http.Query;
 import org.simpleframework.http.Request;
 
@@ -30,8 +31,8 @@ public class EntityListResouce extends AbstractResouce {
 		this.filterBuilder = filterBuilder;
 	}
 
-	protected void get(Request req) {
-		Query query = req.getAddress().getQuery();
+	protected void get(Address address) {
+		Query query =address.getQuery();
 		List<Entity> dataList;
 
 		if (query.isEmpty()) {
@@ -63,7 +64,7 @@ public class EntityListResouce extends AbstractResouce {
 	}
 
 	@Override
-	protected void post(Request req) {
+	protected String post(Request req) {
 		try {
 			Entity data = datas.createNew();
 			InputStream in = req.getInputStream();
@@ -73,6 +74,7 @@ public class EntityListResouce extends AbstractResouce {
 			json.readFrom(data, new InputStreamReader(in));
 			datas.add(data);
 			datas.flush();
+			return req.getAddress().getPath() + data.getID();
 		} catch (IOException e) {
 			log.error(e);
 			throw new RuntimeException(e);

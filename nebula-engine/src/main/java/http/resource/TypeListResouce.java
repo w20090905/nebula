@@ -1,9 +1,8 @@
 package http.resource;
 
-
+import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.util.List;
@@ -16,8 +15,11 @@ import nebula.lang.TypeLoader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.simpleframework.http.Address;
 import org.simpleframework.http.Query;
 import org.simpleframework.http.Request;
+
+import util.FileUtil;
 
 public class TypeListResouce extends AbstractResouce {
 	private static Log log = LogFactory.getLog(TypeListResouce.class);
@@ -34,8 +36,8 @@ public class TypeListResouce extends AbstractResouce {
 	}
 
 	@Override
-	protected void get(Request req) {
-		Query query = req.getAddress().getQuery();
+	protected void get(Address address) {
+		Query query = address.getQuery();
 		List<Type> dataList;
 
 		if (query.isEmpty()) {
@@ -44,7 +46,7 @@ public class TypeListResouce extends AbstractResouce {
 			Filter<Type> filter = filterBuilder.buildFrom(query, null);
 			dataList = types.query(filter);
 		}
-		
+
 		ByteArrayOutputStream bout = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(bout);
 
@@ -66,15 +68,15 @@ public class TypeListResouce extends AbstractResouce {
 		this.cache = bout.toByteArray();
 	}
 
-	@Override
-	protected void post(Request req) {
-		System.out.println("in post");
-		try {
-			Type type = json.readFrom(null, new InputStreamReader(req.getInputStream()));
-			type = typeLoader.update(type);
-		} catch (IOException e) {
-			log.error(e);
-			throw new RuntimeException(e);
+	protected String post(Request req) throws IOException {
+		BufferedInputStream bio = new BufferedInputStream(req.getInputStream());
+		if (log.isTraceEnabled()) {
+			log.trace("Input stream : ");
+			log.trace(FileUtil.readAllTextFrom(bio));
 		}
+		
+		String newCode = FileUtil.readAllTextFrom(bio);
+		Type newType = typeLoader.update(null, newCode);
+		return req.getAddress().getPath() + newType.getName();
 	}
 }

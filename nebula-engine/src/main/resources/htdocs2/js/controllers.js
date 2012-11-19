@@ -26,6 +26,19 @@ function MenuSettingCtrl($scope,$resource,$cookies){
 	$scope.datalist = DataResource.query();
 }
 
+function NewUserCtrl($scope,$resource,$routeParams,$location,$interpolate){
+	$scope.typename = $routeParams.typename;
+	var DataResource = $resource('d/User/', $routeParams);
+	$scope.data = {};
+	$scope.data.$save = DataResource.prototype.$save;
+	$scope.$save = function(){
+		$scope.data.$save(function(u, getResponseHeaders){
+			$location.url("/login.html");
+		});
+	};	
+}
+
+
 function EntityListCtrl($scope,$route,$resource,$routeParams){
 	$scope.typename = $routeParams.typename;
 	var DataResource = $resource('d/:typename/', $routeParams, {
@@ -46,19 +59,6 @@ function NewEntityCtrl($scope,$resource,$routeParams,$location,$interpolate){
 	};	
 }
 
-
-function NewUserCtrl($scope,$resource,$routeParams,$location,$interpolate){
-	$scope.typename = $routeParams.typename;
-	var DataResource = $resource('d/User/', $routeParams);
-	$scope.data = {};
-	$scope.data.$save = DataResource.prototype.$save;
-	$scope.$save = function(){
-		$scope.data.$save(function(u, getResponseHeaders){
-			$location.url("/login.html");
-		});
-	};	
-}
-
 function EntityCtrl($scope,$resource,$routeParams,$location,$interpolate){
 	$scope.typename = $routeParams.typename;
 	var DataResource = $scope.resource = $resource('d/:typename/:id',$routeParams,{'save':   {method:'PUT'}});	
@@ -68,9 +68,46 @@ function EntityCtrl($scope,$resource,$routeParams,$location,$interpolate){
 		$scope.data.$save(function(u, getResponseHeaders){
 			$location.url($interpolate('d/{{typename}}/')($routeParams));
 		});
-	};
-	
+	};	
 }
+
+
+function TypeListCtrl($scope,$route,$resource,$routeParams){
+	$scope.typename = "Type";
+	var DataResource = $resource('d/Type/', $routeParams, {
+		query: {method:'GET', params:{}, isArray:true}
+	});
+	$scope.datalist = DataResource.query();
+}
+
+function NewTypeCtrl($scope,$resource,$routeParams,$http,$location,$interpolate,$templateCache){
+	$scope.typename = "Type";
+	var DataResource = $resource('d/Type/', $routeParams);
+	$scope.data = {};
+	$scope.data.$save = DataResource.prototype.$save;
+	$scope.$save = function(){
+		$http.post('d/Type/',$scope.data.code).success(function(data, status, headers, config){
+			$templateCache.removeAll();
+			$location.url(data);
+		});
+	};	
+}
+
+function TypeCtrl($scope,$resource,$routeParams,$http,$location,$interpolate,$templateCache){
+	$scope.typename = "Type";
+	$scope.resourcename = $interpolate('d/Type/{{id}}')($routeParams);
+	var DataResource = $scope.resource = $resource('d/Type/:id',$routeParams,{'save':   {method:'PUT'}});	
+	$scope.data = DataResource.get($routeParams);
+	$scope.update = true;
+	$scope.$save =  function(){
+		$http.put($scope.resourcename,$scope.data.code).success(function(data, status, headers, config){
+			$templateCache.removeAll();
+			$scope.data = DataResource.get($routeParams);
+		});
+	};
+}
+
+
 
 function extractParams(url,params){
     var newurl = url;

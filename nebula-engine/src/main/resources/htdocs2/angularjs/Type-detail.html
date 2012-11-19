@@ -1,17 +1,19 @@
 <article class="module width_full">
 	<header>
-		<h1 class="tabs_involved">Type-{{data.name}}</h1>
+		<h1 class="tabs_involved" x-ng-show="data.name" >Type-{{data.name}}</h1>
+		<h1 class="tabs_involved" x-ng-show="!data.name">Type-New</h1>
 		<a href="#/d/{{data.name}}/" x-ng-show="data.standalone != 'BuilderIn'" class="btn ctrl">Edit Data</a>
 	</header>
 	
 	<form name="form" x-ng-submit="$save()" class="form-horizontal">
 	
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#home" data-toggle="tab">基本信息</a></li>
-  <li><a href="#source" data-toggle="tab">源代码</a></li>
+  <li class="active" x-ng-show="data.name" ><a href="#home" data-toggle="tab">基本信息</a></li>
+  <li x-ng-show="data.name"><a href="#source" data-toggle="tab">源代码</a></li>
+  <li class="active" x-ng-show="!data.name"><a href="#source" data-toggle="tab" >源代码</a></li>
 </ul>
 <div class="tab-content">
-<div class="tab-pane active" id="home">
+<div class="tab-pane active" id="home" x-ng-show="data.name">
 	<div class="control-group" style="clear: both;">
 		<label class="control-label">Name</label>
 		<div class="controls">
@@ -62,7 +64,10 @@
 		</table>
 	</div>
 </div>
- <div class="tab-pane" id="source">
+ <div class="tab-pane" id="source" x-ng-show="data.name">
+	<textarea x-ng-model="data.code" x-required rows="20" cols="120" class="input-block-level" placeholder="add Type info here"></textarea>
+</div>
+ <div class="tab-pane active" id="source" x-ng-show="!data.name">
 	<textarea x-ng-model="data.code" x-required rows="20" cols="120" class="input-block-level" placeholder="add Type info here"></textarea>
 </div>
 </div>
