@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.sql.Timestamp;
 
 import nebula.data.DataHolder;
 import nebula.data.DataStore;
@@ -14,13 +15,14 @@ import nebula.data.json.JsonHelper;
 import org.simpleframework.http.Address;
 import org.simpleframework.http.Request;
 
-public class EntityResouce extends AbstractResouce{
+public class EntityResouce extends AbstractResouce {
 	private final JsonHelper<Entity> json;
 
 	private final String key;
 	private final DataHolder<DataStore<Entity>> datas;
 
 	public EntityResouce(JsonHelper<Entity> json, DataHolder<DataStore<Entity>> datas, String key) {
+		super("text/json", 0, 0);
 		this.json = json;
 		this.datas = datas;
 		this.key = key;
@@ -28,22 +30,23 @@ public class EntityResouce extends AbstractResouce{
 
 	@Override
 	protected void get(Address address) {
-		try {
-			ByteArrayOutputStream bout = new ByteArrayOutputStream();
-			Writer w = new OutputStreamWriter(bout);
+		Entity data = datas.get().load(key);
+		long newModified = ((Timestamp) data.get("LastModified_")).getTime();
+		if (newModified == this.lastModified) return;
+		ByteArrayOutputStream bout = null;
 
-			Entity data = datas.get().load(key);
-			if (data != null) {
-				json.stringifyTo(data, new OutputStreamWriter(bout));
-				w.flush();
-				w.close();
-				this.lastModified = System.currentTimeMillis();
-				this.cache = bout.toByteArray();
-			} else {
-				this.lastModified = System.currentTimeMillis();
-				this.cache = new byte[0];
-			}
+		try {
+			bout = new ByteArrayOutputStream();
+			Writer w = new OutputStreamWriter(bout);
+			json.stringifyTo(data, new OutputStreamWriter(bout));
+			w.flush();
+			this.lastModified = newModified;
+			this.cache = bout.toByteArray();
 		} catch (IOException e) {
+			try {
+				if (bout != null) bout.close();
+			} catch (Exception e2) {
+			}
 			log.error(e);
 			throw new RuntimeException(e);
 		}

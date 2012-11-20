@@ -12,13 +12,25 @@ import org.simpleframework.http.resource.Resource;
 public abstract class AbstractResouce implements Resource {
 	protected Log log = LogFactory.getLog(this.getClass());
 
-	protected int maxAge = 0;
-	
+	public AbstractResouce(String mime, long maxAge, int delayTime) {
+		super();
+		this.mime = mime;
+		this.maxAge = maxAge;
+		this.delayTime = delayTime;
+	}
+
+	private final String mime;
+	private final long maxAge;
+	private final int delayTime;
 	protected byte[] cache;
 	protected long lastModified;
 
 	protected abstract void get(Address address) throws IOException;
 
+	protected void header(Address address) throws IOException {
+		throw new UnsupportedOperationException("cann't support put " + address);
+	}
+	
 	protected void put(Request req) throws IOException {
 		throw new UnsupportedOperationException("cann't support put " + req.getAddress());
 	}
@@ -26,7 +38,7 @@ public abstract class AbstractResouce implements Resource {
 	protected String post(Request req) throws IOException {
 		throw new UnsupportedOperationException("cann't support post " + req.getAddress());
 	}
-	
+
 	protected void delete(Address address) throws IOException {
 		throw new UnsupportedOperationException("cann't support delete " + address);
 	}
@@ -42,23 +54,24 @@ public abstract class AbstractResouce implements Resource {
 		try {
 			if ("GET".equals(method)) {
 
-				//System.out.print(System.currentTimeMillis());
-				//if (System.currentTimeMillis() - this.lastModified > 100) {					
+				// System.out.print(System.currentTimeMillis());
+				if (System.currentTimeMillis() - this.lastModified > delayTime) {
 					get(req.getAddress());
-					//System.out.println("====" + System.currentTimeMillis());
-				//}
+					// System.out.println("====" + System.currentTimeMillis());
+				}
 
-				
 				// normal parse
 				resp.setCode(200);
 				resp.set("Cache-Control", "max-age=" + maxAge);
 				resp.set("Content-Language", "en-US");
-				resp.set("Content-Type", "text/html");
+				resp.set("Content-Type", mime);
 				resp.set("Content-Length", cache.length);
 				resp.setDate("Date", this.lastModified);
 				resp.getOutputStream().write(cache);
 				resp.getOutputStream().flush();
 				resp.close();
+			} else if ("HEADER".equals(method)) {
+				
 			} else if ("PUT".equals(method)) {
 				this.put(req);
 
@@ -66,9 +79,9 @@ public abstract class AbstractResouce implements Resource {
 
 				// normal parse
 				resp.setCode(200);
-				resp.set("Cache-Control", "max-age=0");
+				resp.set("Cache-Control", "max-age=" + maxAge);
 				resp.set("Content-Language", "en-US");
-				resp.set("Content-Type", "text/html");
+				resp.set("Content-Type", mime);
 				resp.set("Content-Length", cache.length);
 				resp.setDate("Date", this.lastModified);
 				resp.getOutputStream().write(cache);

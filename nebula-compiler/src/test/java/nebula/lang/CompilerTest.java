@@ -6,10 +6,10 @@ import junit.framework.TestCase;
 
 public class CompilerTest extends TestCase {
 
-	Compiler compiler;
+	TypeLoaderForTest compiler;
 	protected void setUp() throws Exception {
 		super.setUp();
-		compiler = new Compiler(new SystemTypeLoader());
+		compiler = new TypeLoaderForTest(new SystemTypeLoader());
 	}
 
 	protected void tearDown() throws Exception {

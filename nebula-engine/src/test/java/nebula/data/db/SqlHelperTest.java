@@ -3,21 +3,18 @@ package nebula.data.db;
 import java.io.StringReader;
 
 import junit.framework.TestCase;
-import nebula.data.db.DbConfiguration;
-import nebula.data.db.SqlHelper;
 import nebula.data.db.derby.DerbyConfiguration;
-import nebula.lang.SystemTypeLoader;
 import nebula.lang.Type;
-import nebula.lang.TypeLoader;
+import nebula.lang.TypeLoaderForTest;
 
 public class SqlHelperTest extends TestCase {
-	TypeLoader loader;
+	TypeLoaderForTest loader;
 	Type t;
 	SqlHelper h;
 	DbConfiguration config;
 
 	protected void setUp() throws Exception {
-		loader = new SystemTypeLoader();
+		loader = new TypeLoaderForTest();
 		config = new DerbyConfiguration("","","","");
 
 		super.setUp();
@@ -41,26 +38,26 @@ public class SqlHelperTest extends TestCase {
 				"};";
 		//@formatter:on		
 
-		t = loader.defineNebula(new StringReader(text)).get(0);
+		t = loader.testDefineNebula(new StringReader(text)).get(0);
 		h = new  SqlHelper(config,t);
 		assertEquals("NPerson", h.getTableName());	
 
-		assertEquals(5, h.columns.length);
+		assertEquals(5, h.userColumns.length);
 		int i = 0;
-		assertEquals("Name", h.columns[i].fieldName);
-		assertEquals(true, h.columns[i].key);		
+		assertEquals("Name", h.userColumns[i].fieldName);
+		assertEquals(true, h.userColumns[i].key);		
 		i++;
-		assertEquals("TestKey", h.columns[i].fieldName);
-		assertEquals(true, h.columns[i].key);		
+		assertEquals("TestKey", h.userColumns[i].fieldName);
+		assertEquals(true, h.userColumns[i].key);		
 		i++;
-		assertEquals("TestCore", h.columns[i].fieldName);	
-		assertEquals(false, h.columns[i].key);			
+		assertEquals("TestCore", h.userColumns[i].fieldName);	
+		assertEquals(false, h.userColumns[i].key);			
 		i++;
-		assertEquals("TestRequire", h.columns[i].fieldName);
-		assertEquals(false, h.columns[i].key);				
+		assertEquals("TestRequire", h.userColumns[i].fieldName);
+		assertEquals(false, h.userColumns[i].key);				
 		i++;
-		assertEquals("TestIgnore", h.columns[i].fieldName);
-		assertEquals(false, h.columns[i].key);				
+		assertEquals("TestIgnore", h.userColumns[i].fieldName);
+		assertEquals(false, h.userColumns[i].key);				
 		
 		assertEquals("SELECT count(1) FROM NPerson ", h.builderCount());
 		
@@ -89,36 +86,36 @@ public class SqlHelperTest extends TestCase {
 				"};";
 		//@formatter:on		
 
-		t = loader.defineNebula(new StringReader(text)).get(0);
+		t = loader.testDefineNebula(new StringReader(text)).get(0);
 		h = new  SqlHelper(config,t);
 		assertEquals("NTestPerson", h.getTableName());	
 
 		int i = 0;
-		assertEquals("Name", h.columns[i].fieldName);
-		assertEquals(true, h.columns[i].key);		
+		assertEquals("Name", h.userColumns[i].fieldName);
+		assertEquals(true, h.userColumns[i].key);		
 		i++;
-		assertEquals("TestKey", h.columns[i].fieldName);
-		assertEquals(false, h.columns[i].key);		
+		assertEquals("TestKey", h.userColumns[i].fieldName);
+		assertEquals(false, h.userColumns[i].key);		
 		i++;
-		assertEquals("TestCore", h.columns[i].fieldName);	
-		assertEquals(false, h.columns[i].key);			
+		assertEquals("TestCore", h.userColumns[i].fieldName);	
+		assertEquals(false, h.userColumns[i].key);			
 		i++;
-		assertEquals("TestRequire", h.columns[i].fieldName);
-		assertEquals(false, h.columns[i].key);				
+		assertEquals("TestRequire", h.userColumns[i].fieldName);
+		assertEquals(false, h.userColumns[i].key);				
 		i++;
-		assertEquals("TestIgnore", h.columns[i].fieldName);
-		assertEquals(false, h.columns[i].key);	
+		assertEquals("TestIgnore", h.userColumns[i].fieldName);
+		assertEquals(false, h.userColumns[i].key);	
 		
 		i++;
-		assertEquals("TestRefKey", h.columns[i].fieldName);
-		assertEquals(false, h.columns[i].key);	
+		assertEquals("TestRefKey", h.userColumns[i].fieldName);
+		assertEquals(false, h.userColumns[i].key);	
 		
 		i++;
-		assertEquals("TestRefCore", h.columns[i].fieldName);
-		assertEquals(false, h.columns[i].key);				
+		assertEquals("TestRefCore", h.userColumns[i].fieldName);
+		assertEquals(false, h.userColumns[i].key);				
 
 
-		assertEquals(i+1, h.columns.length);
+		assertEquals(i+1, h.userColumns.length);
 		
 		assertEquals("SELECT count(1) FROM NTestPerson ", h.builderCount());
 
@@ -151,35 +148,35 @@ public class SqlHelperTest extends TestCase {
 				"};";
 		//@formatter:on		
 
-		t = loader.defineNebula(new StringReader(text)).get(0);
+		t = loader.testDefineNebula(new StringReader(text)).get(0);
 		h = new  SqlHelper(config,t);
 		assertEquals("NTestPerson", h.getTableName());	
 
 		int i = 0;
-		assertEquals("Name", h.columns[i].fieldName);
-		assertEquals(true, h.columns[i].key);		
+		assertEquals("Name", h.userColumns[i].fieldName);
+		assertEquals(true, h.userColumns[i].key);		
 		i++;
-		assertEquals("Date", h.columns[i].fieldName);
-		assertEquals(false, h.columns[i].key);		
+		assertEquals("Date", h.userColumns[i].fieldName);
+		assertEquals(false, h.userColumns[i].key);		
 		i++;
-		assertEquals("Time", h.columns[i].fieldName);	
-		assertEquals(false, h.columns[i].key);			
+		assertEquals("Time", h.userColumns[i].fieldName);	
+		assertEquals(false, h.userColumns[i].key);			
 		i++;
-		assertEquals("Datetime", h.columns[i].fieldName);
-		assertEquals(false, h.columns[i].key);				
+		assertEquals("Datetime", h.userColumns[i].fieldName);
+		assertEquals(false, h.userColumns[i].key);				
 		i++;
-		assertEquals("Timestamp", h.columns[i].fieldName);
-		assertEquals(false, h.columns[i].key);				
+		assertEquals("Timestamp", h.userColumns[i].fieldName);
+		assertEquals(false, h.userColumns[i].key);				
 		i++;
-		assertEquals("Quantity", h.columns[i].fieldName);
-		assertEquals(false, h.columns[i].key);				
+		assertEquals("Quantity", h.userColumns[i].fieldName);
+		assertEquals(false, h.userColumns[i].key);				
 		i++;
-		assertEquals("Amount", h.columns[i].fieldName);
-		assertEquals(false, h.columns[i].key);	
+		assertEquals("Amount", h.userColumns[i].fieldName);
+		assertEquals(false, h.userColumns[i].key);	
 				
 
 
-		assertEquals(i+1, h.columns.length);
+		assertEquals(i+1, h.userColumns.length);
 		
 		assertEquals("SELECT count(1) FROM NTestPerson ", h.builderCount());
 

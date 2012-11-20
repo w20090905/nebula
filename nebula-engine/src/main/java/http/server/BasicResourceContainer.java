@@ -56,30 +56,32 @@ public class BasicResourceContainer extends ResourceContainer {
 		try {
 			Entity currentUser = (Entity) req.getSession().get("#currentUser");
 			if (currentUser == null) {
-//				if(req.getAddress().getPath().getPath().equals("/loginzice.html")){
-//					
-//				}
-//				if(req.getAddress().getPath().getExtension().equals("html") && !req.getAddress().getPath().getPath().equals("/loginzice.html")){
-//					redirectToLoginResource.handle(req, resp);
-//					return;					
-//				}
-//				
-//				String path = req.getAddress().getPath().getPath();
-//				Resource res = cachedLinks.get(path);
-//				if (res == null) {
-//					res = resolve(req.getAddress());
-//				}
-//
-//				if (res instanceof StaticResource) {
-//					res.handle(req, resp);
-//					return;
-//				}else if (res instanceof LoginListResouce) {
-//					res.handle(req, resp);
-//					return;					
-//				} else {
-//					redirectToLoginResource.handle(req, resp);
-//					return;
-//				}
+				// if(req.getAddress().getPath().getPath().equals("/loginzice.html")){
+				//
+				// }
+				// if(req.getAddress().getPath().getExtension().equals("html")
+				// &&
+				// !req.getAddress().getPath().getPath().equals("/loginzice.html")){
+				// redirectToLoginResource.handle(req, resp);
+				// return;
+				// }
+				//
+				// String path = req.getAddress().getPath().getPath();
+				// Resource res = cachedLinks.get(path);
+				// if (res == null) {
+				// res = resolve(req.getAddress());
+				// }
+				//
+				// if (res instanceof StaticResource) {
+				// res.handle(req, resp);
+				// return;
+				// }else if (res instanceof LoginListResouce) {
+				// res.handle(req, resp);
+				// return;
+				// } else {
+				// redirectToLoginResource.handle(req, resp);
+				// return;
+				// }
 			}
 
 			String path = req.getAddress().getPath().getPath();
@@ -119,33 +121,36 @@ public class BasicResourceContainer extends ResourceContainer {
 	long lockcount = 0;
 
 	private Resource resolve(Address address) {
-		if(address.getPath().getPath().equals("/")){
-			cachedLinks.put("/",redirectToLoginResource);
+		if (address.getPath().getPath().equals("/")) {
+			cachedLinks.put("/", redirectToLoginResource);
 			return redirectToLoginResource;
 		}
 
 		lock.lock();
+		Resource res;
+		try {
+			System.out.println("lock: " + ++lockcount);
+			String path = address.getPath().getPath();
+			res = cachedLinks.get(path);
+			if (res != null) {
+				return res;
+			}
 
-		System.out.println("lock: " + ++lockcount);
-		String path = address.getPath().getPath();
-		Resource res = cachedLinks.get(path);
-		if (res != null) {
-			return res;
-		}
+			ResourceEngine engine = null;
 
-		ResourceEngine engine = null;
-
-		for (int i = 0; i < patterns.size(); i++) {
-			if (patterns.get(i).matcher(path).matches()) {
-				engine = engines.get(i);
-				res = engine.resolve(address);
-				if (res != null) {
-					break;
+			for (int i = 0; i < patterns.size(); i++) {
+				if (patterns.get(i).matcher(path).matches()) {
+					engine = engines.get(i);
+					res = engine.resolve(address);
+					if (res != null) {
+						break;
+					}
 				}
 			}
+			cachedLinks.put(path, res);
+		} finally {
+			lock.unlock();
 		}
-		cachedLinks.put(path, res);
-		lock.unlock();
 		return res;
 	}
 }

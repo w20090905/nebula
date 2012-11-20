@@ -27,6 +27,7 @@ public class EntityListResouce extends AbstractResouce {
 	final EntityFilterBuilder filterBuilder;
 
 	public EntityListResouce(JsonHelper<Entity> json, DataHolder<DataStore<Entity>> datas, final EntityFilterBuilder filterBuilder) {
+		super("text/json", 0, 1000);
 		this.json = json;
 		this.datas = datas;
 		this.filterBuilder = filterBuilder;

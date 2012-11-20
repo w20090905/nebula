@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.StringReader;
 import java.util.List;
 
+import org.antlr.runtime.RecognitionException;
+
 import junit.framework.TestCase;
 
 public class TypeLoaderTest extends TestCase {
@@ -13,11 +15,10 @@ public class TypeLoaderTest extends TestCase {
 	File root2;
 
 	protected void setUp() throws Exception {
-
 		loader = new SystemTypeLoader();
 	}
 
-	public void testActualFields_Key() {
+	public void testActualFields_Key() throws RecognitionException {
 		//@formatter:off
 		String text = "" +
 				"type Person { " +

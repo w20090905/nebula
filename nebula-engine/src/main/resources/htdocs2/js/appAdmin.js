@@ -16,7 +16,7 @@ angular.module('appAdmin', ['nebulaFilters', 'nebulaServices','nebulaDirectives'
 			when('/d/:typename/!new', {templateUrlWP: 'angularjs/{{typename}}-detail.html', controller: NewEntityCtrl}).
 			when('/d/:typename/:id', {templateUrlWP: 'angularjs/{{typename}}-detail.html', controller: EntityCtrl}).
 			when('/welcome', {templateUrl: 'angularjs/welcome.html', controller: DoNothingCtrl}).
-			otherwise({redirectTo: '/d/Type'});
+			otherwise({redirectTo: '/welcome'});
 	}])	.run(function($rootScope, $location,  $interpolate) {
 	 	$rootScope.$on('$routeChangeStart', function(event,next,last) {
 	 		if(next.$route.templateUrlWP){

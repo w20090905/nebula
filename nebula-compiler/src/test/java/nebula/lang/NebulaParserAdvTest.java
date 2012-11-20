@@ -13,11 +13,11 @@ import java.math.BigDecimal;
 import junit.framework.TestCase;
 
 public class NebulaParserAdvTest extends TestCase {
-	Compiler compiler;
+	TypeLoaderForTest compiler;
 
 	@Override
 	protected void setUp() throws Exception {
-		compiler = new Compiler(new SystemTypeLoader());
+		compiler = new TypeLoaderForTest(new SystemTypeLoader());
 	}
 
 	final StringBuilder sb = new StringBuilder();

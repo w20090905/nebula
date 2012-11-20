@@ -13,6 +13,7 @@ import org.simpleframework.http.Address;
 import org.simpleframework.http.resource.Resource;
 import org.simpleframework.http.resource.ResourceEngine;
 
+@SuppressWarnings("deprecation")
 public class StaticResourceEngine implements ResourceEngine {
 	protected final Loader loader;
 

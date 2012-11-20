@@ -4,40 +4,56 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 
-import nebula.data.Entity;
 import nebula.data.DataPersister;
+import nebula.data.Entity;
 import nebula.data.json.JsonEntityHelperProvider;
+import nebula.data.json.JsonHelper;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.simpleframework.http.Address;
 import org.simpleframework.http.Request;
 
 import util.FileUtil;
 
 public class TypeEditableResouce extends AbstractResouce {
-	private static Log log = LogFactory.getLog(TypeEditableResouce.class);
+	private final JsonHelper<Type> json;
 	private final String key;
 	final TypeLoader typeLoader;
 	final DataPersister<Entity> dataWareHouse;
-	
-	public TypeEditableResouce(final DataPersister<Entity> dataWareHouse,TypeLoader typeLoader, String key) {
+
+	public TypeEditableResouce(final DataPersister<Entity> dataWareHouse, TypeLoader typeLoader, String key) {
+		super("text/json", 60 * 60, 1000);
 		this.dataWareHouse = dataWareHouse;
 		this.key = key;
 		this.typeLoader = typeLoader;
+		this.json = JsonEntityHelperProvider.getSerialize(Type.class);
 	}
 
 	@Override
 	protected void get(Address address) throws IOException {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		Type type = typeLoader.findType(key);
-		JsonEntityHelperProvider.getSerialize(Type.class).stringifyTo(type, new OutputStreamWriter(out));
-		out.flush();
-		this.lastModified = System.currentTimeMillis();
-		this.cache = out.toByteArray();
+		Type data = typeLoader.findType(key);
+		long newModified = data.getLastModified();
+		if (newModified == this.lastModified) return;
+		
+		ByteArrayOutputStream bout = null;
+		try {
+			bout = new ByteArrayOutputStream();
+			Writer w = new OutputStreamWriter(bout);
+			json.stringifyTo(data, new OutputStreamWriter(bout));
+			w.flush();
+			this.lastModified = newModified;
+			this.cache = bout.toByteArray();
+		} catch (IOException e) {
+			try {
+				if (bout != null) bout.close();
+			} catch (Exception e2) {
+			}
+			log.error(e);
+			throw new RuntimeException(e);
+		}
 	}
 
 	protected void put(Request req) throws IOException {
@@ -47,7 +63,7 @@ public class TypeEditableResouce extends AbstractResouce {
 			log.trace(FileUtil.readAllTextFrom(bio));
 		}
 
-		Type type = typeLoader.findType(key);		
+		Type type = typeLoader.findType(key);
 		String oldCode = type.getCode();
 		String newCode = FileUtil.readAllTextFrom(bio);
 
@@ -59,14 +75,13 @@ public class TypeEditableResouce extends AbstractResouce {
 				log.trace(type.getCode());
 			}
 			type = typeLoader.update(type, newCode);
-			dataWareHouse.define(Entity.class, type.getName());			
+			dataWareHouse.define(Entity.class, type.getName());
 		} else {
 			if (log.isTraceEnabled()) {
 				log.trace("No Change:");
 				log.trace(type.getCode());
 			}
 		}
-		
 
 	}
 }

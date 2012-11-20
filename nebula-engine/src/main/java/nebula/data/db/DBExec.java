@@ -36,7 +36,8 @@ public class DBExec {
 	final private PreparedStatement SQL_LIST;
 	// final private String SQL_COUNT;
 
-	final DbColumn[] columns;
+	final DbColumn[] userColumns;
+	final DbColumn[] systemColumns;
 	// final private String[] realFields;
 	// final private DbColumn[] keyColumns;
 	final SqlHelper builder;
@@ -55,7 +56,8 @@ public class DBExec {
 
 		// SQL_DROP = builder.builderDrop();
 
-		columns = builder.builderColumns();
+		userColumns = builder.getUserColumns();
+		systemColumns = builder.getSystemColumns();
 
 		this.init();
 
@@ -84,8 +86,8 @@ public class DBExec {
 				}
 			});
 
-			for (int i = 0; i < columns.length; i++) {
-				mapColumns.add(columns[i]);
+			for (int i = 0; i < userColumns.length; i++) {
+				mapColumns.add(userColumns[i]);
 			}
 
 			statement = conn.createStatement();
@@ -431,7 +433,7 @@ public class DBExec {
 
 	int fromEntity(PreparedStatement prepareStatement, Map<String, Object> v) throws Exception {
 		int pos = 0;
-		for (DbColumn c : columns) {
+		for (DbColumn c : userColumns) {
 			c.datadealer.writeTo(1 + pos, v.get(c.fieldName), prepareStatement);
 			pos++;
 		}
@@ -442,7 +444,11 @@ public class DBExec {
 		Map<String, Object> v = new HashMap<String, Object>();
 
 		int pos = 0;
-		for (DbColumn c : columns) {
+		for (DbColumn c : userColumns) {
+			v.put(c.fieldName, c.datadealer.readFrom(result, pos + 1));
+			pos++;
+		}
+		for (DbColumn c : systemColumns) {
 			v.put(c.fieldName, c.datadealer.readFrom(result, pos + 1));
 			pos++;
 		}

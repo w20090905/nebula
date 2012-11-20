@@ -1,12 +1,14 @@
 package nebula.lang;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+import org.antlr.runtime.RecognitionException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -48,7 +50,7 @@ public class EditableTypeLoader extends TypeLoader {
 	}
 
 	@Override
-	public List<Type> defineNebula(Reader in) {
+	List<Type> defineNebula(Reader in) throws RecognitionException {
 		List<Type> typeList = super.defineNebula(in);
 		for (Type t : typeList) {
 			t.mutable = true;
@@ -57,24 +59,14 @@ public class EditableTypeLoader extends TypeLoader {
 	}
 
 	@Override
-	protected List<Type> defineNebula(URL in) {
+	List<Type> defineNebula(URL in) throws IOException, RecognitionException {
 		List<Type> typeList = super.defineNebula(in);
 		for (Type t : typeList) {
 			t.mutable = true;
 		}
 		return typeList;
 	}
-
-	//
-	// @Override
-	// protected List<Type> defineNebula(InputStream in) {
-	// List<Type> typeList = super.defineNebula(in);
-	// for (Type t : typeList) {
-	// t.mutable = true;
-	// }
-	// return typeList;
-	// }
-
+	
 	@Override
 	public Type update(Type oldType,String newCode) {
 		try {
@@ -113,6 +105,12 @@ public class EditableTypeLoader extends TypeLoader {
 
 			return newTypes.get(0);
 		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		} catch (RecognitionException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			log.error(e);
 			throw new RuntimeException(e);
 		}
 	}

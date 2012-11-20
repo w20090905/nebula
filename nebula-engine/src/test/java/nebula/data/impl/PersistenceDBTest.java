@@ -8,7 +8,7 @@ import nebula.lang.SystemTypeLoader;
 
 public class PersistenceDBTest extends TestCase {
 
-	DbDataPersister p;
+	EntityDbDataPersister p;
 	DataStore<Entity> store;
 
 	protected void setUp() throws Exception {
@@ -18,7 +18,7 @@ public class PersistenceDBTest extends TestCase {
 		String password = "password";
 
 		DbConfiguration dbconfig = DbConfiguration.getEngine(driverclass, url, username, password);
-		p = new DbDataPersister(new SystemTypeLoader(), dbconfig);
+		p = new EntityDbDataPersister(new SystemTypeLoader(), dbconfig);
 
 		store = p.define(Entity.class, "Person").get();
 		store.clear();

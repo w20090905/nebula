@@ -19,11 +19,11 @@ import org.antlr.runtime.RecognitionException;
 
 import util.InheritHashMap;
 public class NebulaParserTest extends TestCase {
-	Compiler compiler;
+	TypeLoaderForTest compiler;
 
 	@Override
 	protected void setUp() throws Exception {
-		compiler = new Compiler(new SystemTypeLoader());
+		compiler = new TypeLoaderForTest(new SystemTypeLoader());
 	}
 
 

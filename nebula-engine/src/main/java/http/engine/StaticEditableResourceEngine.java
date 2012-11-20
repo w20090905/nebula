@@ -10,6 +10,7 @@ import org.simpleframework.http.Address;
 import org.simpleframework.http.resource.Resource;
 import org.simpleframework.http.resource.ResourceEngine;
 
+@SuppressWarnings("deprecation")
 public class StaticEditableResourceEngine extends StaticResourceEngine  implements ResourceEngine {
 	@Inject
 	public StaticEditableResourceEngine(Loader loader) {

@@ -8,18 +8,17 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 
 import junit.framework.TestCase;
-import nebula.data.Entity;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
+import nebula.data.Entity;
 import nebula.data.impl.InMemoryDataPersister;
-import nebula.data.json.JsonHelper;
 import nebula.data.json.JsonEntityHelperProvider;
-import nebula.lang.SystemTypeLoader;
+import nebula.data.json.JsonHelper;
 import nebula.lang.Type;
-import nebula.lang.TypeLoader;
+import nebula.lang.TypeLoaderForTest;
 
 public class JsonProviderTest extends TestCase {
-	TypeLoader loader;
+	TypeLoaderForTest loader;
 	Type t;
 	DataStore<Entity> store;
 	
@@ -27,7 +26,7 @@ public class JsonProviderTest extends TestCase {
 	
 	
 	protected void setUp() throws Exception {
-		loader = new SystemTypeLoader();
+		loader = new TypeLoaderForTest();
 		persistence = new InMemoryDataPersister(loader);
 	}
 
@@ -49,7 +48,7 @@ public class JsonProviderTest extends TestCase {
 				"};";
 		//@formatter:on		
 
-		t = loader.defineNebula(new StringReader(text)).get(0);
+		t = loader.testDefineNebula(new StringReader(text)).get(0);
 		store = persistence.define(Entity.class, t.getName()).get();
 		
 		JsonHelper<Entity> json =   JsonEntityHelperProvider.getSerialize(t);

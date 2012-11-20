@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import nebula.data.HasID;
-
 import util.InheritHashMap;
 
 public class Type implements HasID {
@@ -27,6 +26,8 @@ public class Type implements HasID {
 	URL url;
 	boolean mutable = false;
 	String code;
+	
+	long lastModified;
 
 	List<Field> references;
 
@@ -173,6 +174,14 @@ public class Type implements HasID {
 	@Override
 	public String getID() {
 		return name;
+	}
+
+	public long getLastModified() {
+		return lastModified;
+	}
+
+	public void setLastModified(long lastModified) {
+		this.lastModified = lastModified;
 	}
 
 }

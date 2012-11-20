@@ -19,7 +19,7 @@ import nebula.data.impl.EditableEntity;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 
-public class DbDataPersister implements DataPersister<Entity> {
+public class EntityDbDataPersister implements DataPersister<Entity> {
 
 	final TypeLoader loader;
 	ReentrantLock lock = new ReentrantLock();
@@ -27,7 +27,7 @@ public class DbDataPersister implements DataPersister<Entity> {
 	final DbConfiguration dbConfig;
 
 	@Inject
-	public DbDataPersister(TypeLoader loader, DbConfiguration dbConfig) {
+	public EntityDbDataPersister(TypeLoader loader, DbConfiguration dbConfig) {
 		this.loader = loader;
 		this.stores = new HashMap<String, DataHolder<DataStore<Entity>>>();
 		this.dbConfig = dbConfig;

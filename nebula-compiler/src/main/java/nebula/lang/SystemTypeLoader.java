@@ -5,11 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 public class SystemTypeLoader extends TypeLoader {
-	private Log log = LogFactory.getLog(this.getClass());
 	final ResourcePoolTail source;
 
 	public SystemTypeLoader() {

@@ -8,15 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import junit.framework.TestCase;
-import nebula.data.Entity;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
-import nebula.lang.SystemTypeLoader;
+import nebula.data.Entity;
 import nebula.lang.Type;
-import nebula.lang.TypeLoader;
+import nebula.lang.TypeLoaderForTest;
 
 public class DBExecTest extends TestCase {
-	TypeLoader loader;
+	TypeLoaderForTest loader;
 	Type t;
 	DBExec dbExec;
 	DbConfiguration config;
@@ -25,7 +24,7 @@ public class DBExecTest extends TestCase {
 	DataStore<Entity> store;
 
 	protected void setUp() throws Exception {
-		loader = new SystemTypeLoader();
+		loader = new TypeLoaderForTest();
 
 		String driverclass = "org.apache.derby.jdbc.EmbeddedDriver";
 		String url = "jdbc:derby:db/test-DBExecTest;create = true";
@@ -55,7 +54,7 @@ public class DBExecTest extends TestCase {
 				"};";
 		//@formatter:on		
 
-		t = loader.defineNebula(new StringReader(text)).get(0);
+		t = loader.testDefineNebula(new StringReader(text)).get(0);
 		Map<String, Object> data;
 		dbExec = config.getPersister(t);
 		dbExec.drop();
@@ -123,7 +122,7 @@ public class DBExecTest extends TestCase {
 				"};";
 		// @formatter:on
 
-		t = loader.defineNebula(new StringReader(text)).get(0);
+		t = loader.testDefineNebula(new StringReader(text)).get(0);
 
 		dbExec = config.getPersister(t);
 
@@ -198,7 +197,7 @@ public class DBExecTest extends TestCase {
 				"};";
 		// @formatter:on
 
-		t = loader.defineNebula(new StringReader(text)).get(0);
+		t = loader.testDefineNebula(new StringReader(text)).get(0);
 
 		dbExec = config.getPersister(t);
 
@@ -248,7 +247,7 @@ public class DBExecTest extends TestCase {
 				"};";
 		// @formatter:on
 
-		t = loader.defineNebula(new StringReader(text)).get(0);
+		t = loader.testDefineNebula(new StringReader(text)).get(0);
 
 		dbExec = config.getPersister(t);
 		data = dbExec.get("wangshilian");
@@ -294,7 +293,7 @@ public class DBExecTest extends TestCase {
 
 		assertEquals(1, dbExec.getAll().size());
 		
-		t = loader.defineNebula(new StringReader(text)).get(0);
+		t = loader.testDefineNebula(new StringReader(text)).get(0);
 		dbExec = config.getPersister(t);
 
 		assertEquals(0, dbExec.getAll().size());
@@ -353,7 +352,7 @@ public class DBExecTest extends TestCase {
 				"};";
 		//@formatter:on		
 
-		t = loader.defineNebula(new StringReader(text)).get(0);
+		t = loader.testDefineNebula(new StringReader(text)).get(0);
 		Map<String, Object> data;
 		dbExec = config.getPersister(t);
 		dbExec.init();
@@ -377,7 +376,7 @@ public class DBExecTest extends TestCase {
 		text = "" + "type Person { " + "	!Name;" + "};";
 		// @formatter:on
 
-		t = loader.defineNebula(new StringReader(text)).get(0);
+		t = loader.testDefineNebula(new StringReader(text)).get(0);
 
 		dbExec = config.getPersister(t);
 		dbExec.init();

@@ -12,16 +12,16 @@ import util.InheritHashMap;
 public class SqlHelper {
 
 	Type clz;
-	final DbColumn[] columns;
+	final DbColumn[] userColumns;
+	final DbColumn[] systemColumns;
 	final DbColumn[] keyColumns;
 	final String tableName;
 	final String fieldlist_comma;
 	final String fieldlist_questions;
 	final String wherekeys;
-	ArrayList<DbColumn> fs;
 	final DbConfiguration config;
 
-	private void addColumn(String name, Field field, boolean key) {
+	private void addColumn(ArrayList<DbColumn> list, String name, Field field, boolean key) {
 		InheritHashMap attrs = field.getAttrs();
 		Object v;
 
@@ -39,10 +39,10 @@ public class SqlHelper {
 		boolean nullable = field.getImportance() == Importance.Unimportant;
 
 		DbColumn c = new DbColumn(name, decodeFieldName(name), key, nullable, rawType, size, precision, scale);
-		fs.add(c);
+		list.add(c);
 	}
 
-	private void addColumn(String resideName, String name, Field field, boolean key) {
+	private void addColumn(ArrayList<DbColumn> list, String resideName, String name, Field field, boolean key) {
 		InheritHashMap attrs = field.getAttrs();
 		Object v;
 
@@ -61,7 +61,7 @@ public class SqlHelper {
 
 		DbColumn c = new DbColumn(resideName + name, decodeFieldName(resideName + "_" + name), key, nullable, rawType,
 				size, precision, scale);
-		fs.add(c);
+		list.add(c);
 	}
 
 	private String decodeFieldName(String fieldName) {
@@ -86,8 +86,7 @@ public class SqlHelper {
 			tableName = decodeTypeName(type.getName());
 
 			List<Field> fl = type.getFields();
-
-			fs = new ArrayList<DbColumn>();
+			ArrayList<DbColumn> listUserColumns = new ArrayList<DbColumn>();
 			for (Field f : fl) {
 				if (f.isArray()) {
 					// TODO Add Array Support
@@ -96,12 +95,12 @@ public class SqlHelper {
 				Type rT;
 				switch (f.getRefer()) {
 				case ByVal:
-					addColumn(f.getName(), f, f.isKey());
+					addColumn(listUserColumns,f.getName(), f, f.isKey());
 					break;
 				case Inline:
 					rT = f.getType();
 					for (Field rf : rT.getFields()) {
-						addColumn(f.getName(), rf.getName(), rf, f.isKey() && rf.isKey());
+						addColumn(listUserColumns,f.getName(), rf.getName(), rf, f.isKey() && rf.isKey());
 					}
 					break;
 				case ByRef:
@@ -110,7 +109,7 @@ public class SqlHelper {
 						switch (rf.getImportance()) {
 						case Key:
 						case Core:
-							addColumn(rT.getName(), rf.getName(), rf, f.isKey() && rf.isKey());
+							addColumn(listUserColumns,rT.getName(), rf.getName(), rf, f.isKey() && rf.isKey());
 							break;
 						}
 					}
@@ -121,7 +120,7 @@ public class SqlHelper {
 						switch (rf.getImportance()) {
 						case Key:
 						case Core:
-							addColumn(rT.getName(), rf.getName(), rf, f.isKey() || rf.isKey());
+							addColumn(listUserColumns,rT.getName(), rf.getName(), rf, f.isKey() || rf.isKey());
 							break;
 						}
 					}
@@ -131,24 +130,29 @@ public class SqlHelper {
 
 			StringBuilder sbForSelect = new StringBuilder();
 			StringBuilder sbForWhere = new StringBuilder();
-			ArrayList<DbColumn> buildKeyColumns = new ArrayList<DbColumn>();
+			ArrayList<DbColumn> listKeyColumns = new ArrayList<DbColumn>();
 			String sql = "";
 
-			for (DbColumn column : fs) {
+			for (DbColumn column : listUserColumns) {
 				sbForSelect.append(column.columnName);
 				sbForSelect.append(',');
 				sbForWhere.append("?,");
 
 				if (column.key) {
-					buildKeyColumns.add(column);
+					listKeyColumns.add(column);
 					sql += column.columnName + " = ? and ";
 				}
 			}
 
-			this.keyColumns = buildKeyColumns.toArray(new DbColumn[0]);
+			ArrayList<DbColumn> listSystemColumns = new ArrayList<DbColumn>();
+			DbColumn col = new DbColumn("LastModified_", "TIMESTAMP_", false, false, RawTypes.Timestamp, 0, 0, 0);
+			listSystemColumns.add(col);
+
+			this.keyColumns = listKeyColumns.toArray(new DbColumn[0]);
 			this.wherekeys = sql.substring(0, sql.length() - 4);
 
-			this.columns = fs.toArray(new DbColumn[0]);
+			this.userColumns = listUserColumns.toArray(new DbColumn[0]);
+			this.systemColumns = listSystemColumns.toArray(new DbColumn[0]);
 			this.fieldlist_comma = sbForSelect.substring(0, sbForSelect.length() - 1);
 			this.fieldlist_questions = sbForWhere.substring(0, sbForWhere.length() - 1);
 
@@ -178,7 +182,7 @@ public class SqlHelper {
 
 		sb.append("CREATE TABLE ").append(this.tableName).append("(");
 
-		for (DbColumn column : this.columns) {
+		for (DbColumn column : this.userColumns) {
 			if (column.key) {
 				sb.append(column.columnName).append(' ').append(config.toColumnDefine(column)).append(" NOT NULL")
 						.append(",");
@@ -188,7 +192,7 @@ public class SqlHelper {
 		}
 
 		sb.append("PRIMARY KEY ( ");
-		for (DbColumn column : this.columns) {
+		for (DbColumn column : this.userColumns) {
 			if (column.key) {
 				sb.append(column.columnName).append(",");
 			}
@@ -212,7 +216,7 @@ public class SqlHelper {
 	public String builderUpdate() {
 		String sb = "UPDATE " + this.tableName + " SET ";
 
-		for (DbColumn column : this.columns) {
+		for (DbColumn column : this.userColumns) {
 			sb += column.columnName + " = ? ,";
 		}
 		sb += " TIMESTAMP_= CURRENT_TIMESTAMP ";
@@ -260,8 +264,12 @@ public class SqlHelper {
 		return "SELECT " + fieldlist_comma + ",TIMESTAMP_  FROM " + this.tableName + " WHERE " + wherekeys + "";
 	}
 
-	public DbColumn[] builderColumns() {
-		return this.columns;
+	public DbColumn[] getUserColumns() {
+		return this.userColumns;
+	}
+
+	public DbColumn[] getSystemColumns() {
+		return this.systemColumns;
 	}
 
 	public DbColumn[] getKeyColumns() {

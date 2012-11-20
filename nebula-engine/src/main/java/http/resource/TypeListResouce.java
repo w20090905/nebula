@@ -27,6 +27,7 @@ public class TypeListResouce extends AbstractResouce {
 	final TypeFilterBuilder filterBuilder;
 
 	public TypeListResouce(TypeLoader typeLoader, JsonHelper<Type> json, TypeFilterBuilder filterBuilder) {
+		super("text/json", 0, 0);
 		this.typeLoader = typeLoader;
 		this.json = json;
 		this.filterBuilder = filterBuilder;

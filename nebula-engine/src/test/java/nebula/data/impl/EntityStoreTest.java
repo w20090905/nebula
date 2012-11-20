@@ -6,7 +6,7 @@ import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.db.DbConfiguration;
 import nebula.data.impl.EditableEntity;
-import nebula.data.impl.DbDataPersister;
+import nebula.data.impl.EntityDbDataPersister;
 import nebula.lang.SystemTypeLoader;
 
 public class EntityStoreTest extends TestCase {
@@ -22,7 +22,7 @@ public class EntityStoreTest extends TestCase {
 		String password = "password";
 
 		DbConfiguration dbconfig = DbConfiguration.getEngine(driverclass, url, username, password);
-		p = new DbDataPersister(new SystemTypeLoader(), dbconfig);
+		p = new EntityDbDataPersister(new SystemTypeLoader(), dbconfig);
 		store = p.define(Entity.class, "Person").get();
 	}
 

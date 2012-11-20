@@ -13,10 +13,10 @@ public class EntityDbDataStore extends EntityDataStore {
 
 	final DBExec db;
 
-	EntityDbDataStore(final DbDataPersister persistence, Type type, final DBExec exec) {
+	EntityDbDataStore(final EntityDbDataPersister persistence, Type type, final DBExec exec) {
 		super(persistence, type);
 		this.db = exec;
-		exec.init();
+//		exec.init();
 		List<Map<String, Object>> list = exec.getAll();
 		for (Map<String, Object> data : list) {
 			String id = "";

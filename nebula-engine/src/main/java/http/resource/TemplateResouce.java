@@ -28,6 +28,8 @@ public class TemplateResouce extends AbstractResouce {
 	
 	public TemplateResouce(Configuration cfg,TypeLoader typeLoader, String templateTypeName, String typeName,
 			String actionName) {
+		super("text/template", 0, 0);//TODO 
+		
 		this.cfg = cfg;
 		this.typeLoader = typeLoader;
 

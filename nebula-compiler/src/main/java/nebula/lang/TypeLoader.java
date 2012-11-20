@@ -39,17 +39,17 @@ class AutoIdentifiableType implements AutoIdentifiable<Type> {
 };
 
 public abstract class TypeLoader {
-	private Log log = LogFactory.getLog(this.getClass());
+	protected Log log = LogFactory.getLog(this.getClass());
 
 	TypeLoader parent;
 
-	SmartList<Type> types = new SmartListImp<Type>("Type",new AutoIdentifiableType());
+	SmartList<Type> types = new SmartListImp<Type>("Type", new AutoIdentifiableType());
 
 	public TypeLoader(TypeLoader parent) {
 		this.parent = parent;
 	}
 
-	public List<Type> defineNebula(Reader in) {
+	List<Type> defineNebula(Reader in) throws RecognitionException {
 		try {
 			BufferedReader bin = new BufferedReader(in);
 			String code = FileUtil.readAllTextFrom(bin);
@@ -72,86 +72,83 @@ public abstract class TypeLoader {
 		}
 	}
 
-	protected List<Type> tryDefineNebula(Reader in) {
-		try {
-			BufferedReader bin = new BufferedReader(in);
-			String code = FileUtil.readAllTextFrom(bin);
-			in = bin;
-			List<Type> typeList = parse(new ANTLRReaderStream(in));
-			for (Type t : typeList) {
-				t.code = code;
-				t.url = null;
-			}
-			if (log.isTraceEnabled()) {
-				log.trace(typeList.get(0).getName() + " load succeed");
-			}
-			return typeList;
-		} catch (IOException e) {
-			throw new NebulaRuntimeException(e);
+	List<Type> tryDefineNebula(Reader in) throws RecognitionException, IOException {
+		BufferedReader bin = new BufferedReader(in);
+		String code = FileUtil.readAllTextFrom(bin);
+		in = bin;
+		List<Type> typeList = parse(new ANTLRReaderStream(in));
+		for (Type t : typeList) {
+			t.code = code;
+			t.url = null;
 		}
+		if (log.isTraceEnabled()) {
+			log.trace(typeList.get(0).getName() + " load succeed");
+		}
+		return typeList;
 	}
 
-	protected List<Type> defineNebula(URL in) {
-		try {
-			String code = FileUtil.readAllTextFrom(in);
-			List<Type> typeList = parse(new ANTLRInputStream(in.openStream(), "utf-8"));
-			for (Type t : typeList) {
-				t.code = code;
-				t.url = in;
-				t.link(this);
-			}
-			types.addAll(typeList);
-			if (log.isTraceEnabled()) {
-				log.trace(typeList.get(0).getName() + " load succeed");
-			}
-			return typeList;
-		} catch (IOException e) {
-			throw new NebulaRuntimeException(e);
+	List<Type> defineNebula(URL in) throws IOException, RecognitionException {
+		String code = FileUtil.readAllTextFrom(in);
+		List<Type> typeList = parse(new ANTLRInputStream(in.openStream(), "utf-8"));
+		for (Type t : typeList) {
+			t.code = code;
+			t.url = in;
+			t.lastModified = in.openConnection().getLastModified();
+			t.link(this);
 		}
+		types.addAll(typeList);
+		if (log.isTraceEnabled()) {
+			log.trace(typeList.get(0).getName() + " load succeed");
+		}
+		return typeList;
 	}
 
-	protected List<Type> parse(CharStream in) {
-		try {
-			NebulaLexer assemblerLexer = new NebulaLexer(in);
-			CommonTokenStream tokens = new CommonTokenStream(assemblerLexer);
-			NebulaParser parser = new NebulaParser(tokens, this);
-			List<Type> types = parser.programDefinition();
-			if (parser.getNumberOfSyntaxErrors() > 0) {
-				log.error("Parser ERROR!");
-				throw new NebulaRuntimeException("Parser ERROR!");
-			}
-			return types;
-		} catch (RecognitionException e) {
-			throw new NebulaRuntimeException(e);
+	List<Type> parse(CharStream in) throws RecognitionException {
+		NebulaLexer assemblerLexer = new NebulaLexer(in);
+		CommonTokenStream tokens = new CommonTokenStream(assemblerLexer);
+		NebulaParser parser = new NebulaParser(tokens, this);
+		List<Type> types = parser.programDefinition();
+		if (parser.getNumberOfSyntaxErrors() > 0) {
+			log.error("Parser ERROR!");
+			throw new NebulaRuntimeException("Parser ERROR!");
 		}
+		return types;
 	}
 
 	public Type findType(String name) {
-		if (log.isTraceEnabled()) {
-			log.trace(" --- " + name);
-		}
-		Type type = parent.findType(name);
-		if (type != null) {
-			return type;
-		}
+		try {
+			if (log.isTraceEnabled()) {
+				log.trace(" --- " + name);
+			}
+			Type type = parent.findType(name);
+			if (type != null) {
+				return type;
+			}
 
-		type = types.get(name);
-		if (type != null) {
-			return type;
-		}
+			type = types.get(name);
+			if (type != null) {
+				return type;
+			}
 
-		URL url = loadClassData(name);
-		if (url != null) {
-			List<Type> typeList = defineNebula(url);
-			return typeList.get(0);
-		} else {
-			return null;
+			URL url = loadClassData(name);
+			if (url != null) {
+				List<Type> typeList = defineNebula(url);
+				return typeList.get(0);
+			} else {
+				return null;
+			}
+		} catch (IOException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		} catch (RecognitionException e) {
+			log.error(e);
+			throw new RuntimeException(e);
 		}
 	}
 
-	protected abstract URL loadClassData(String name);
+	abstract URL loadClassData(String name);
 
-	public Type update(Type oldType,String newCode) {
+	public Type update(Type oldType, String newCode) {
 		throw new UnsupportedOperationException("change type");
 	}
 
@@ -161,10 +158,10 @@ public abstract class TypeLoader {
 
 	// performance not good
 	public SmartList<Type> all() {
-		if(parent==null){
+		if (parent == null) {
 			return this.types;
-		}else{
-			SmartList<Type> list = new SmartListImp<Type>("Type",new AutoIdentifiableType());
+		} else {
+			SmartList<Type> list = new SmartListImp<Type>("Type", new AutoIdentifiableType());
 			list.addAll(types);
 			list.addAll(parent.all());
 			return list;

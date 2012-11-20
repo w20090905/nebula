@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.simpleframework.http.Address;
 import org.simpleframework.http.resource.Resource;
 
+@SuppressWarnings("deprecation")
 public class StaticLongTermResourceEngine extends StaticResourceEngine {
 	private final long age;
 	@Inject
