@@ -12,7 +12,8 @@
 				<th x-ngClick='orderProp="name"'>Name</th>
 				<th>Standalone</th>
 				<th>Super Type</th>
-				<th>Action</th>
+				<th>Data</th>
+				<th>Template</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -22,9 +23,11 @@
 				<td>{{data.standalone}}</a></td>
 				<td><a href="#/d/{{typename}}/{{data.parent}}">{{data.parent}}</a></td>
 				<td>
-				    <a href="#/d/{{data.name}}/" ng-show="data.standalone=='Master'">Data</a>
-				    <a href="#/t/angularjs/{{data.name}}-list.html" ng-show="data.standalone=='Master'">List</a>
-				    <a href="#/t/angularjs/{{data.name}}-detail.html" ng-show="data.standalone=='Master'">Detail</a>
+				    <a href="#/d/{{data.name}}/" ng-show="data.standalone=='Master' || data.standalone=='Transaction'"><i class="icon-edit"></i> Data</a>
+				</td>
+				<td>
+				    <a href="#/t/angularjs/{{data.name}}-list.html" ng-show="data.standalone=='Master' || data.standalone=='Transaction">List</a>
+				    <a href="#/t/angularjs/{{data.name}}-detail.html" ng-show="data.standalone=='Master' || data.standalone=='Transaction">Detail</a>
 				</td>
 			</tr>
 		</tbody>
