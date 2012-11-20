@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import nebula.data.DataHolder;
 import nebula.data.Entity;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
@@ -44,8 +45,8 @@ public class PrepareResouceEngine implements ResourceEngine {
 		}
 
 		JsonHelper<Entity> json = JsonEntityHelperProvider.getSerialize(Entity.class);
-		DataStore<Entity> users = persistence.define(Entity.class, "User");	
-		DataStore<Entity> datas = persistence.define(Entity.class, "UserAccessLog");		
+		DataHolder<DataStore<Entity>> users = persistence.define(Entity.class, "User");	
+		DataHolder<DataStore<Entity>> datas = persistence.define(Entity.class, "UserAccessLog");		
 		return new LoginListResouce(json, users,datas);
 	}
 

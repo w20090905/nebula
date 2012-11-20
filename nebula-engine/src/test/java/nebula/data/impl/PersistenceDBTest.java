@@ -1,17 +1,15 @@
 package nebula.data.impl;
 
 import junit.framework.TestCase;
+import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.db.DbConfiguration;
-import nebula.data.impl.EditableEntity;
-import nebula.data.impl.EntityDbDataStore;
-import nebula.data.impl.DbDataPersister;
 import nebula.lang.SystemTypeLoader;
 
 public class PersistenceDBTest extends TestCase {
 
 	DbDataPersister p;
-	EntityDbDataStore store;
+	DataStore<Entity> store;
 
 	protected void setUp() throws Exception {
 		String driverclass = "org.apache.derby.jdbc.EmbeddedDriver";
@@ -22,7 +20,7 @@ public class PersistenceDBTest extends TestCase {
 		DbConfiguration dbconfig = DbConfiguration.getEngine(driverclass, url, username, password);
 		p = new DbDataPersister(new SystemTypeLoader(), dbconfig);
 
-		store = (EntityDbDataStore) p.define(Entity.class, "Person");
+		store = p.define(Entity.class, "Person").get();
 		store.clear();
 	}
 

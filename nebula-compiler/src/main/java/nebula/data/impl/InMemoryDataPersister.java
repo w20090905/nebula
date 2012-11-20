@@ -7,42 +7,56 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
 import nebula.data.Callback;
-import nebula.data.Entity;
+import nebula.data.DataHolder;
+import nebula.data.DataListener;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
+import nebula.data.Entity;
+import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 
 public class InMemoryDataPersister implements DataPersister<Entity> {
 
 	final TypeLoader loader;
 	ReentrantLock lock = new ReentrantLock();
-	final Map<String, EntityDataStore> stores;
+	final Map<String, DataHolder<DataStore<Entity>>> stores;
 
 	public InMemoryDataPersister(TypeLoader loader) {
 		this.loader = loader;
-		this.stores = new HashMap<String, EntityDataStore>();
+		this.stores = new HashMap<String, DataHolder<DataStore<Entity>>>();
 	}
 
 	@Override
-	public DataStore<Entity> define(Class<Entity> clz, String name) {
-		EntityDataStore store = this.stores.get(name);
+	public DataHolder<DataStore<Entity>> define(Class<Entity> clz, String name) {
+		DataHolder<DataStore<Entity>> store = this.stores.get(name);
 		if (store == null) {
-			store = new EntityDataStore(this, loader.findType(name));
+			Type type = loader.findType(name);
+			DataStore<Entity> newData = new EntityDataStore(this, type);
+			store = new AbstractDataHolder<DataStore<Entity>>(newData);
 			stores.put(name, store);
 		}
 		return store;
 	}
 
 	@Override
-	public DataStore<Entity> reload(Class<Entity> clz, String name) {
-		EntityDataStore store = this.stores.get(name);
+	public void define(Class<Entity> clz, String name, DataListener<DataStore<Entity>> listener) {
+		DataHolder<DataStore<Entity>> store = define(clz, name);
+		store.addListener(listener);
+	}
+
+	@Override
+	public void reload(Class<Entity> clz, String name) {
+		DataHolder<DataStore<Entity>> store = this.stores.get(name);
 		if (store != null) {
-			store.unload();
-			stores.put(name, null);
+			DataStore<Entity> oldData = store.get();
+			oldData.unload();
+
+			Type type = loader.findType(name);
+			DataStore<Entity> newData = new EntityDataStore(this, type);
+			store.set(newData, oldData);
+		} else {
+			throw new UnsupportedOperationException("DataStore<Entity> reload(Class<Entity> clz, String name) ");
 		}
-		store = new EntityDataStore(this, loader.findType(name));
-		stores.put(name, store);
-		return store;
 	}
 
 	@Override
@@ -62,14 +76,17 @@ public class InMemoryDataPersister implements DataPersister<Entity> {
 	@Override
 	public void flush() {
 		lock.lock();
-		Iterator<EditableEntity> i = changes.listIterator();
-		// changes.clear();
-		while (i.hasNext()) {
-			EditableEntity e = i.next();
-			e.store.apply(e);
+		try {
+			Iterator<EditableEntity> i = changes.listIterator();
+			// changes.clear();
+			while (i.hasNext()) {
+				EditableEntity e = i.next();
+				e.store.apply(e);
+			}
+		} finally {
+			changes.clear();
+			lock.unlock();
 		}
-		changes.clear();
-		lock.unlock();
 	}
 
 	@Override

@@ -79,7 +79,7 @@ public class EntityDbDataStore extends EntityDataStore {
 		}
 	}
 
-	void clear() {
+	public void clear() {
 		db.deleteAll();
 	}
 

@@ -13,7 +13,7 @@ public class EntityStoreTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		p = new InMemoryDataPersister(new SystemTypeLoader());
-		store = p.define(Entity.class, "test");
+		store = p.define(Entity.class, "test").get();
 	}
 
 	protected void tearDown() throws Exception {

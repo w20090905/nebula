@@ -11,7 +11,7 @@ public class InMemoryPersisterTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		p = new InMemoryDataPersister(new SystemTypeLoader());
-		store = p.define(Entity.class, "Person");
+		store = p.define(Entity.class, "Person").get();
 	}
 
 	protected void tearDown() throws Exception {
@@ -19,7 +19,7 @@ public class InMemoryPersisterTest extends TestCase {
 	}
 
 	public final void testDefine() {
-		store = p.define(Entity.class, "Person");
+		store = p.define(Entity.class, "Person").get();
 		assertNotNull(store);
 		assertEquals("Person", store.getID());
 

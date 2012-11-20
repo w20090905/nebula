@@ -50,7 +50,7 @@ public class JsonProviderTest extends TestCase {
 		//@formatter:on		
 
 		t = loader.defineNebula(new StringReader(text)).get(0);
-		store = persistence.define(Entity.class, t.getName());
+		store = persistence.define(Entity.class, t.getName()).get();
 		
 		JsonHelper<Entity> json =   JsonEntityHelperProvider.getSerialize(t);
 		Entity n = store.createNew();		

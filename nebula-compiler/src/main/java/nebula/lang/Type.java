@@ -4,9 +4,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import nebula.data.HasID;
+
 import util.InheritHashMap;
 
-public class Type {
+public class Type implements HasID {
 	final TypeLoader loader;
 
 	final Type residedType;
@@ -166,6 +168,11 @@ public class Type {
 	public String toString() {
 		return "Type [name=" + name + ", nameAlias=" + nameAlias + ", standalone=" + standalone + ", text=" + code
 				+ "]";
+	}
+
+	@Override
+	public String getID() {
+		return name;
 	}
 
 }

@@ -19,6 +19,8 @@ public interface DataStore<V extends HasID> extends HasID {
 	void add(V v);
 	void remove(V v);
 	void flush();
+	
+	void clear();
 
 	List<V> all();
 }

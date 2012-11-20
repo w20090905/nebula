@@ -10,6 +10,7 @@ import java.io.PrintStream;
 import java.util.List;
 
 import nebula.Filter;
+import nebula.data.DataHolder;
 import nebula.data.Entity;
 import nebula.data.DataStore;
 import nebula.data.json.JsonHelper;
@@ -22,10 +23,10 @@ import util.FileUtil;
 
 public class EntityListResouce extends AbstractResouce {
 	private final JsonHelper<Entity> json;
-	private final DataStore<Entity> datas;
+	private final DataHolder<DataStore<Entity>> datas;
 	final EntityFilterBuilder filterBuilder;
 
-	public EntityListResouce(JsonHelper<Entity> json, DataStore<Entity> datas, final EntityFilterBuilder filterBuilder) {
+	public EntityListResouce(JsonHelper<Entity> json, DataHolder<DataStore<Entity>> datas, final EntityFilterBuilder filterBuilder) {
 		this.json = json;
 		this.datas = datas;
 		this.filterBuilder = filterBuilder;
@@ -36,10 +37,10 @@ public class EntityListResouce extends AbstractResouce {
 		List<Entity> dataList;
 
 		if (query.isEmpty()) {
-			dataList = datas.all();
+			dataList = datas.get().all();
 		} else {
 			Filter<Entity> filter = filterBuilder.buildFrom(query, null);
-			dataList = datas.query(filter);
+			dataList = datas.get().query(filter);
 		}
 
 		ByteArrayOutputStream bout = new ByteArrayOutputStream();
@@ -66,14 +67,15 @@ public class EntityListResouce extends AbstractResouce {
 	@Override
 	protected String post(Request req) {
 		try {
-			Entity data = datas.createNew();
+			DataStore<Entity> store = datas.get();
+			Entity data = store.createNew();
 			InputStream in = req.getInputStream();
 			if (log.isTraceEnabled()) {
 				in = FileUtil.print(in);
 			}
 			json.readFrom(data, new InputStreamReader(in));
-			datas.add(data);
-			datas.flush();
+			store.add(data);
+			store.flush();
 			return req.getAddress().getPath() + data.getID();
 		} catch (IOException e) {
 			log.error(e);

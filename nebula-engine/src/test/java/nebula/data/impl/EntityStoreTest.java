@@ -23,7 +23,7 @@ public class EntityStoreTest extends TestCase {
 
 		DbConfiguration dbconfig = DbConfiguration.getEngine(driverclass, url, username, password);
 		p = new DbDataPersister(new SystemTypeLoader(), dbconfig);
-		store = p.define(Entity.class, "Person");
+		store = p.define(Entity.class, "Person").get();
 	}
 
 	protected void tearDown() throws Exception {

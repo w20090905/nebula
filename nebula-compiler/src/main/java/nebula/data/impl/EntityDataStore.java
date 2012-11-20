@@ -120,6 +120,10 @@ public class EntityDataStore implements DataStore<Entity> {
 		return this.type;
 	}
 
+	public void clear() {
+		datas.clear();
+	}
+	
 	@Override
 	public void load() {
 		// TODO Auto-generated method stub

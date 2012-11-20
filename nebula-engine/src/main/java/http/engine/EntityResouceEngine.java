@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import nebula.data.DataHolder;
 import nebula.data.Entity;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
@@ -49,13 +50,13 @@ public class EntityResouceEngine implements ResourceEngine {
 			log.trace("\tid : " + id);
 		}
 
-		DataStore<Entity> datas = persistence.define(Entity.class, typeName);
-		JsonHelper<Entity> json = JsonEntityHelperProvider.getSerialize(datas.getType());
+		DataHolder<DataStore<Entity>> storeHolder = persistence.define(Entity.class, typeName);
+		JsonHelper<Entity> json = JsonEntityHelperProvider.getSerialize(storeHolder.get().getType());
 
 		if (id != null) {
-			return new EntityResouce(json, datas, id);
+			return new EntityResouce(json, storeHolder, id);
 		} else {
-			return new EntityListResouce(json, datas, filterBuilder);
+			return new EntityListResouce(json, storeHolder, filterBuilder);
 		}
 	}
 

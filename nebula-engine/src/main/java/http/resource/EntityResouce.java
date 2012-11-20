@@ -6,20 +6,21 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
-import nebula.data.Entity;
+import nebula.data.DataHolder;
 import nebula.data.DataStore;
+import nebula.data.Entity;
 import nebula.data.json.JsonHelper;
 
 import org.simpleframework.http.Address;
 import org.simpleframework.http.Request;
 
-public class EntityResouce extends AbstractResouce {
+public class EntityResouce extends AbstractResouce{
 	private final JsonHelper<Entity> json;
 
 	private final String key;
-	private final DataStore<Entity> datas;
+	private final DataHolder<DataStore<Entity>> datas;
 
-	public EntityResouce(JsonHelper<Entity> json, DataStore<Entity> datas, String key) {
+	public EntityResouce(JsonHelper<Entity> json, DataHolder<DataStore<Entity>> datas, String key) {
 		this.json = json;
 		this.datas = datas;
 		this.key = key;
@@ -31,7 +32,7 @@ public class EntityResouce extends AbstractResouce {
 			ByteArrayOutputStream bout = new ByteArrayOutputStream();
 			Writer w = new OutputStreamWriter(bout);
 
-			Entity data = datas.load(key);
+			Entity data = datas.get().load(key);
 			if (data != null) {
 				json.stringifyTo(data, new OutputStreamWriter(bout));
 				w.flush();
@@ -51,10 +52,10 @@ public class EntityResouce extends AbstractResouce {
 	@Override
 	protected void put(Request req) {
 		try {
-			Entity data = datas.load(key).editable();
+			Entity data = datas.get().load(key).editable();
 			if (data != null) {
 				json.readFrom(data, new InputStreamReader(req.getInputStream()));
-				datas.flush();
+				datas.get().flush();
 			} else {
 				throw new RuntimeException("Cann't find object " + key);
 			}
