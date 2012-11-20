@@ -1,8 +1,6 @@
 package http.server;
 
-import http.resource.LoginListResouce;
 import http.resource.RedirectResouce;
-import http.resource.StaticResource;
 import http.startup.Configurable;
 
 import java.util.HashMap;
@@ -25,7 +23,6 @@ import org.simpleframework.http.Response;
 import org.simpleframework.http.resource.Resource;
 import org.simpleframework.http.resource.ResourceContainer;
 import org.simpleframework.http.resource.ResourceEngine;
-import org.simpleframework.http.session.Session;
 import org.simpleframework.util.lease.LeaseException;
 
 public class BasicResourceContainer extends ResourceContainer {

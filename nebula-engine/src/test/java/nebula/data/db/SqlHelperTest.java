@@ -64,8 +64,8 @@ public class SqlHelperTest extends TestCase {
 		
 		assertEquals("SELECT count(1) FROM NPerson ", h.builderCount());
 		
-		assertEquals("CREATE TABLE NPerson(NAME varchar(60)," +
-				"TEST_KEY varchar(60)," +
+		assertEquals("CREATE TABLE NPerson(NAME varchar(60) NOT NULL," +
+				"TEST_KEY varchar(60) NOT NULL," +
 				"TEST_CORE bigint," +
 				"TEST_REQUIRE bigint," +
 				"TEST_IGNORE bigint," +
@@ -123,13 +123,14 @@ public class SqlHelperTest extends TestCase {
 		assertEquals("SELECT count(1) FROM NTestPerson ", h.builderCount());
 
 		assertEquals("CREATE TABLE NTestPerson(" +
-				"NAME varchar(60) PRIMARY KEY," +
+				"NAME varchar(60) NOT NULL," +
 				"TEST_KEY varchar(60)," +
 				"TEST_CORE bigint," +
 				"TEST_REQUIRE bigint," +
 				"TEST_IGNORE bigint," +
 				"TESTREF_KEY varchar(60)," +
 				"TESTREF_CORE varchar(60)," +
+				"PRIMARY KEY ( NAME)," +
 				"TIMESTAMP_ TIMESTAMP)", 
 				h.builderCreate());
 	}
@@ -183,13 +184,14 @@ public class SqlHelperTest extends TestCase {
 		assertEquals("SELECT count(1) FROM NTestPerson ", h.builderCount());
 
 		assertEquals("CREATE TABLE NTestPerson(" +
-				"NAME varchar(60) PRIMARY KEY," +
+				"NAME varchar(60) NOT NULL," +
 				"DATE date," +
 				"TIME time," +
 				"DATETIME timestamp," +
 				"TIMESTAMP timestamp," +
 				"QUANTITY bigint," +
 				"AMOUNT numeric(10,2)," +
+				"PRIMARY KEY ( NAME)," +
 				"TIMESTAMP_ TIMESTAMP)", 
 				h.builderCreate());
 	}

@@ -1,15 +1,5 @@
 package nebula.lang;
 
-import static nebula.lang.Importance.Core;
-import static nebula.lang.Importance.Key;
-import static nebula.lang.Importance.Require;
-import static nebula.lang.Importance.Unimportant;
-import static nebula.lang.Reference.ByVal;
-import static nebula.lang.Reference.Cascade;
-import static nebula.lang.Reference.Inline;
-
-import java.math.BigDecimal;
-
 import junit.framework.TestCase;
 
 public class TypesTest extends TestCase {

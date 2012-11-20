@@ -4,9 +4,6 @@ import http.io.Loader;
 import http.io.Source;
 import http.resource.StaticResource;
 
-import java.util.Hashtable;
-import java.util.StringTokenizer;
-
 import javax.inject.Inject;
 
 import org.simpleframework.http.Address;

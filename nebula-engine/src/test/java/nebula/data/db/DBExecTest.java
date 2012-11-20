@@ -45,7 +45,7 @@ public class DBExecTest extends TestCase {
 		int i = 0;
 
 		/*********************************************************/
-		/*****          test init                            *****/
+		/***** test init *****/
 		/*********************************************************/
 		//@formatter:off
 		String text = "" +
@@ -60,31 +60,30 @@ public class DBExecTest extends TestCase {
 		dbExec = config.getPersister(t);
 		dbExec.drop();
 		dbExec = null;
-		
+
 		dbExec = config.getPersister(t);
 
-
-		// ************      Check Database table Layout     *************/
+		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
 		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(3, metaData.getColumnCount());
-		
+
 		i = 1;
 		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("Varchar".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
 		assertEquals("Age".toUpperCase(), metaData.getColumnName(i));
-		assertEquals("BigInt".toUpperCase(), metaData.getColumnTypeName(i));		
+		assertEquals("BigInt".toUpperCase(), metaData.getColumnTypeName(i));
 		i++;
 		assertEquals("Timestamp_".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("Timestamp".toUpperCase(), metaData.getColumnTypeName(i));
-		
+
 		rs.close();
-		// ************      Check Database table Layout     *************/
-		
+		// ************ Check Database table Layout *************/
+
 		try {
 			data = dbExec.get("wangshilian");
 			fail("should error");
@@ -105,7 +104,7 @@ public class DBExecTest extends TestCase {
 		dbExec = null;
 
 		/*********************************************************/
-		/*****          test add column                      *****/
+		/***** test add column *****/
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
@@ -123,16 +122,16 @@ public class DBExecTest extends TestCase {
 				"	Timestamp;" + 
 				"};";
 		// @formatter:on
-		
+
 		t = loader.defineNebula(new StringReader(text)).get(0);
 
 		dbExec = config.getPersister(t);
 
-		// ************      Check Database table Layout     *************/
+		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
 		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
 		metaData = rs.getMetaData();
-		
+
 		assertEquals(12, metaData.getColumnCount());
 
 		i = 1;
@@ -174,13 +173,10 @@ public class DBExecTest extends TestCase {
 		i++;
 		assertEquals("Timestamp".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("Timestamp".toUpperCase(), metaData.getColumnTypeName(i));
-		
-		
 
 		rs.close();
-		// ************      Check Database table Layout     *************/
-		
-		
+		// ************ Check Database table Layout *************/
+
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
@@ -190,7 +186,7 @@ public class DBExecTest extends TestCase {
 		dbExec = null;
 
 		/*********************************************************/
-		/*****          test modify column                   *****/
+		/***** test modify column *****/
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
@@ -205,15 +201,15 @@ public class DBExecTest extends TestCase {
 		t = loader.defineNebula(new StringReader(text)).get(0);
 
 		dbExec = config.getPersister(t);
-		
+
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
-		// ************      Check Database table Layout     *************/
+		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
 		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
 		metaData = rs.getMetaData();
-		
+
 		assertEquals(5, metaData.getColumnCount());
 
 		i = 1;
@@ -235,14 +231,13 @@ public class DBExecTest extends TestCase {
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 
 		rs.close();
-		// ************      Check Database table Layout     *************/
-		
+		// ************ Check Database table Layout *************/
 
 		dbExec.close();
 		dbExec = null;
 
 		/*********************************************************/
-		/*****          test remove column                   *****/
+		/***** test remove column *****/
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
@@ -259,11 +254,12 @@ public class DBExecTest extends TestCase {
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
-		// ************      Check Database table Layout     *************/
+		
+		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
 		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
 		metaData = rs.getMetaData();
-		
+
 		assertEquals(4, metaData.getColumnCount());
 
 		i = 1;
@@ -279,10 +275,71 @@ public class DBExecTest extends TestCase {
 		i++;
 		assertEquals("Date".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("Date".toUpperCase(), metaData.getColumnTypeName(i));
-		// ************      Check Database table Layout     *************/
+
+		rs.close();
+		// ************ Check Database table Layout *************/
+
+		/*********************************************************/
+		/***** test change key *****/
+		/*********************************************************/
+		//@formatter:off
+		text = "" + 
+				"type Person { " + 
+				"	!Name;" + 
+				"	PersonName Name;" + 
+				"	Height;" + 
+				"	Date;" + 
+				"};";
+		// @formatter:on
+
+		assertEquals(1, dbExec.getAll().size());
 		
+		t = loader.defineNebula(new StringReader(text)).get(0);
+		dbExec = config.getPersister(t);
+
+		assertEquals(0, dbExec.getAll().size());
+
+		data = new HashMap<String, Object>();
+		data.put("Name", "wangshilian");
+		data.put("Age", 10L);
+
+		dbExec.insert(data);
+		
+		assertEquals(1, dbExec.getAll().size());
+
+		data = dbExec.get("wangshilian");
+		assertNotNull(data);
+
+		// ************ Check Database table Layout *************/
+		statement = config.conn.createStatement();
+		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		metaData = rs.getMetaData();
+
+		assertEquals(5, metaData.getColumnCount());
+
+		i = 1;
+		assertEquals("Name".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
+		assertEquals(60, metaData.getColumnDisplaySize(i));
+		i++;
+		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
+		assertEquals(60, metaData.getColumnDisplaySize(i));
+		i++;
+		assertEquals("Height".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("BigInt".toUpperCase(), metaData.getColumnTypeName(i));
+		i++;
+		assertEquals("Date".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Date".toUpperCase(), metaData.getColumnTypeName(i));
+		i++;
+		assertEquals("Timestamp_".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Timestamp".toUpperCase(), metaData.getColumnTypeName(i));
+
+		rs.close();
+		// ************ Check Database table Layout *************/
+
 		dbExec.drop();
-		
+
 		dbExec.close();
 		dbExec = null;
 	}

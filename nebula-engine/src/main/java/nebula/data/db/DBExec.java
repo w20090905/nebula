@@ -98,6 +98,8 @@ public class DBExec {
 
 			if (exist) {
 
+				boolean isKeyChanged = false;
+
 				ResultSetMetaData metaData = rs.getMetaData();
 				int columnsSize = metaData.getColumnCount();
 
@@ -107,6 +109,9 @@ public class DBExec {
 				Map<String, String> allColumns = new HashMap<>();
 				ArrayList<DbColumn> typeNotMatchColumns = new ArrayList<DbColumn>();
 				ArrayList<DbColumn> typeSizeNotMatchColumns = new ArrayList<DbColumn>();
+
+				String curKeys = "";
+
 				for (int i = 1; i <= columnsSize; i++) {
 					String columnName = metaData.getColumnName(i);
 
@@ -117,10 +122,10 @@ public class DBExec {
 						}
 					} else {
 						int size = metaData.getColumnDisplaySize(i);
-						// int nullable = metaData.isNullable(i);
+						int nullable = metaData.isNullable(i);
 						int precision = metaData.getPrecision(i);
 						int scale = metaData.getScale(i);
-						
+
 						int jdbcType = metaData.getColumnType(i);
 
 						if (jdbcType != newColumn.jdbcType) {
@@ -137,12 +142,20 @@ public class DBExec {
 											: precision;
 									int newScale = newColumn.scale > scale ? newColumn.scale : scale;
 									typeSizeNotMatchColumns.add(new DbColumn(newColumn.fieldName, newColumn.columnName,
-											newColumn.key,newColumn.nullable, newColumn.rawType, newColumn.size, newPrecision, newScale));
+											newColumn.key, newColumn.nullable, newColumn.rawType, newColumn.size,
+											newPrecision, newScale));
 								}
 								break;
 							case Types.VARCHAR:
 								if (newColumn.size > size) typeSizeNotMatchColumns.add(newColumn);
 								break;
+							}
+						}
+
+						if (nullable == ResultSetMetaData.columnNoNulls) {
+							curKeys += columnName;
+							if (!newColumn.key) {
+								isKeyChanged = true;
 							}
 						}
 
@@ -157,53 +170,73 @@ public class DBExec {
 				rs.close();
 				conn.commit();
 
+				StringBuffer newKeys = new StringBuffer();
 				ArrayList<DbColumn> notExistColumns = new ArrayList<DbColumn>();
 				for (DbColumn f : mapColumns) {
 					if (!allColumns.containsKey(f.columnName)) {
 						notExistColumns.add(f);
 					}
+					if (f.key) {
+						if (curKeys.indexOf(f.columnName) < 0) {
+							isKeyChanged = true;
+						}
+						if (newKeys.length() > 0) {
+							newKeys.append(",");
+						}
+						newKeys.append(f.columnName);
+					}
 				}
 
-				// add not exist column to DB
-				if (notExistColumns.size() > 0) {
+				// key changed
+				if (isKeyChanged) {
 					statement = conn.createStatement();
-					for (DbColumn c : notExistColumns) {
-						log.trace("##\t" + builder.builderAddColumn(c));
-						statement.executeUpdate(builder.builderAddColumn(c));
+					log.trace("##\t" + builder.builderDeleteAll());
+					statement.addBatch(builder.builderDrop());
+					statement.addBatch(builder.builderCreate());
+					statement.executeBatch();
+				} else {
+					// add not exist column to DB
+					if (notExistColumns.size() > 0) {
+						statement = conn.createStatement();
+						for (DbColumn c : notExistColumns) {
+							log.trace("##\t" + builder.builderAddColumn(c));
+							statement.executeUpdate(builder.builderAddColumn(c));
+						}
+						// statement.executeBatch();
 					}
-					// statement.executeBatch();
+
+					// update don't match column to DB
+					if (typeNotMatchColumns.size() > 0) {
+						statement = conn.createStatement();
+						for (DbColumn c : typeNotMatchColumns) {
+							log.trace("##\t" + builder.builderModifyColumnDateType(c));
+							statement.addBatch(builder.builderRemoveColumn(c.columnName));
+							statement.addBatch(builder.builderAddColumn(c));
+						}
+						statement.executeBatch();
+					}
+
+					// update size don't match column to DB
+					if (typeSizeNotMatchColumns.size() > 0) {
+						statement = conn.createStatement();
+						for (DbColumn c : typeSizeNotMatchColumns) {
+							log.trace("##\t" + builder.builderModifyColumnDateType(c));
+							statement.addBatch(builder.builderModifyColumnDateType(c));
+						}
+						statement.executeBatch();
+					}
+
+					// remove unused column
+					if (needDeletedColumns.size() > 0) {
+						statement = conn.createStatement();
+						for (String key : needDeletedColumns) {
+							log.trace("##\t" + builder.builderRemoveColumn(key));
+							statement.addBatch(builder.builderRemoveColumn(key));
+						}
+						statement.executeBatch();
+					}
 				}
 
-				// update don't match column to DB
-				if (typeNotMatchColumns.size() > 0) {
-					statement = conn.createStatement();
-					for (DbColumn c : typeNotMatchColumns) {
-						log.trace("##\t" + builder.builderModifyColumnDateType(c));
-						statement.addBatch(builder.builderRemoveColumn(c.columnName));
-						statement.addBatch(builder.builderAddColumn(c));
-					}
-					 statement.executeBatch();
-				}
-
-				// update size don't match column to DB
-				if (typeSizeNotMatchColumns.size() > 0) {
-					statement = conn.createStatement();
-					for (DbColumn c : typeSizeNotMatchColumns) {
-						log.trace("##\t" + builder.builderModifyColumnDateType(c));
-						statement.addBatch(builder.builderModifyColumnDateType(c));
-					}
-					 statement.executeBatch();
-				}
-				
-				// remove unused column
-				if (needDeletedColumns.size() > 0) {
-					statement = conn.createStatement();
-					for (String key : needDeletedColumns) {
-						log.trace("##\t" + builder.builderRemoveColumn(key));
-						statement.addBatch(builder.builderRemoveColumn(key));
-					}
-					 statement.executeBatch();
-				}
 				conn.commit();
 
 				if (log.isDebugEnabled()) {

@@ -178,30 +178,23 @@ public class SqlHelper {
 
 		sb.append("CREATE TABLE ").append(this.tableName).append("(");
 
-		int cntKeys = 0;
-
 		for (DbColumn column : this.columns) {
-			if (column.key) cntKeys++;
-		}
-
-		for (DbColumn column : this.columns) {
-			if (column.key && cntKeys == 1) {
-				sb.append(column.columnName).append(' ').append(config.toColumnDefine(column)).append(" PRIMARY KEY")
+			if (column.key) {
+				sb.append(column.columnName).append(' ').append(config.toColumnDefine(column)).append(" NOT NULL")
 						.append(",");
 			} else {
 				sb.append(column.columnName).append(' ').append(config.toColumnDefine(column)).append(",");
 			}
 		}
-		if (cntKeys > 1) {
-			sb.append("PRIMARY KEY ( ");
-			for (DbColumn column : this.columns) {
-				if (column.key) {
-					sb.append(column.columnName).append(",");
-				}
+
+		sb.append("PRIMARY KEY ( ");
+		for (DbColumn column : this.columns) {
+			if (column.key) {
+				sb.append(column.columnName).append(",");
 			}
-			sb.setCharAt(sb.length() - 1, ')');
-			sb.append(',');
 		}
+		sb.setCharAt(sb.length() - 1, ')');
+		sb.append(',');
 
 		sb.append("TIMESTAMP_").append(" TIMESTAMP");
 		sb.append(")");
@@ -232,8 +225,22 @@ public class SqlHelper {
 	}
 
 	public String builderAddColumn(DbColumn column) {
-		return "ALTER TABLE " + this.tableName + " ADD COLUMN " + column.columnName + " "
-				+ config.toColumnDefine(column);
+		if (column.key) {
+			return "ALTER TABLE " + this.tableName + " ADD COLUMN " + column.columnName + " "
+					+ config.toColumnDefine(column) + " NOT NULL";
+		} else {
+			return "ALTER TABLE " + this.tableName + " ADD COLUMN " + column.columnName + " "
+					+ config.toColumnDefine(column);
+
+		}
+	}
+
+	public String builderDropPrimaryKey() {
+		return "ALTER TABLE " + this.tableName + " DROP PRIMARY KEY";
+	}
+
+	public String builderAddPrimaryKey(String keys) {
+		return "ALTER TABLE " + this.tableName + " ADD PRIMARY KEY ( " + keys + ") ";
 	}
 
 	public String builderModifyColumnDateType(DbColumn column) {
