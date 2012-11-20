@@ -1,6 +1,9 @@
 package nebula.data.db;
 
 import java.io.StringReader;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,8 +11,6 @@ import junit.framework.TestCase;
 import nebula.data.Entity;
 import nebula.data.Persistence;
 import nebula.data.Store;
-import nebula.data.db.DBExec;
-import nebula.data.db.DbConfiguration;
 import nebula.lang.SystemTypeLoader;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -32,92 +33,259 @@ public class DBExecTest extends TestCase {
 		String password = "password";
 
 		config = DbConfiguration.getEngine(driverclass, url, username, password);
-
 	}
 
 	protected void tearDown() throws Exception {
-		dbExec.drop();
 	}
 
-	public final void testInlineType() {
+	public final void testInlineType() throws Exception {
+		Statement statement;
+		ResultSet rs;
+		ResultSetMetaData metaData;
+		int i = 0;
+
+		/*********************************************************/
+		/*****          test init                            *****/
+		/*********************************************************/
 		//@formatter:off
 		String text = "" +
 				"type Person { " +
-				"	!Name;" +
-				"	Age;" +
+				"	!PersonName Name;" + 
+				"	Age;" + 
 				"};";
 		//@formatter:on		
 
 		t = loader.defineNebula(new StringReader(text)).get(0);
-		Map<String, Object> data ;
+		Map<String, Object> data;
 		dbExec = config.getPersister(t);
-		dbExec.init();
+		dbExec.drop();
+		dbExec = null;
+		
+		dbExec = config.getPersister(t);
 
+
+		// ************      Check Database table Layout     *************/
+		statement = config.conn.createStatement();
+		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		metaData = rs.getMetaData();
+
+		assertEquals(3, metaData.getColumnCount());
+		
+		i = 1;
+		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Varchar".toUpperCase(), metaData.getColumnTypeName(i));
+		assertEquals(60, metaData.getColumnDisplaySize(i));
+		i++;
+		assertEquals("Age".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("BigInt".toUpperCase(), metaData.getColumnTypeName(i));		
+		i++;
+		assertEquals("Timestamp_".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Timestamp".toUpperCase(), metaData.getColumnTypeName(i));
+		
+		rs.close();
+		// ************      Check Database table Layout     *************/
+		
 		try {
 			data = dbExec.get("wangshilian");
 			fail("should error");
 		} catch (RuntimeException e) {
 		}
-				
+
 		data = new HashMap<String, Object>();
-		data.put("Name", "wangshilian");
+		data.put("PersonName", "wangshilian");
 		data.put("Age", 10L);
 
 		dbExec.insert(data);
 
 		data = dbExec.get("wangshilian");
-		
+
 		assertNotNull(data);
+
+		dbExec.close();
+		dbExec = null;
+
+		/*********************************************************/
+		/*****          test add column                      *****/
+		/*********************************************************/
+		//@formatter:off
+		text = "" + 
+				"type Person { " + 
+				"	!PersonName Name;" + 
+				"	Age;" + 
+				"	Active;" +
+				"	Height;" +
+				"	Price;" + 
+				"	Name;" + 
+				"	Comment;" + 
+				"	Date;" + 
+				"	Time;" + 
+				"	Datetime;" + 
+				"	Timestamp;" + 
+				"};";
+		// @formatter:on
 		
-		 text = "" +
-					"type Person { " +
-					"	!Name;" +
-					"	Age;" +
-					"	Height;" +
-					"	Date;" +
-					"};";
-			//@formatter:on		
+		t = loader.defineNebula(new StringReader(text)).get(0);
+
+		dbExec = config.getPersister(t);
+
+		// ************      Check Database table Layout     *************/
+		statement = config.conn.createStatement();
+		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		metaData = rs.getMetaData();
+		
+		assertEquals(12, metaData.getColumnCount());
+
+		i = 1;
+		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Varchar".toUpperCase(), metaData.getColumnTypeName(i));
+		assertEquals(60, metaData.getColumnDisplaySize(i));
+		i++;
+		assertEquals("Age".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("BigInt".toUpperCase(), metaData.getColumnTypeName(i));
+		i++;
+		assertEquals("Timestamp_".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Timestamp".toUpperCase(), metaData.getColumnTypeName(i));
+		i++;
+		assertEquals("Active".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("SmallInt".toUpperCase(), metaData.getColumnTypeName(i));
+		i++;
+		assertEquals("Height".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("BigInt".toUpperCase(), metaData.getColumnTypeName(i));
+		i++;
+		assertEquals("Price".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Numeric".toUpperCase(), metaData.getColumnTypeName(i));
+		i++;
+		assertEquals("Name".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
+		assertEquals(60, metaData.getColumnDisplaySize(i));
+		i++;
+		assertEquals("Comment".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
+		assertEquals(1200, metaData.getColumnDisplaySize(i));
+		i++;
+		assertEquals("Date".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Date".toUpperCase(), metaData.getColumnTypeName(i));
+		i++;
+		assertEquals("Time".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Time".toUpperCase(), metaData.getColumnTypeName(i));
+		i++;
+		assertEquals("Datetime".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Timestamp".toUpperCase(), metaData.getColumnTypeName(i));
+		i++;
+		assertEquals("Timestamp".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Timestamp".toUpperCase(), metaData.getColumnTypeName(i));
+		
+		
+
+		rs.close();
+		// ************      Check Database table Layout     *************/
+		
+		
+		data = dbExec.get("wangshilian");
+		assertNotNull(data);
+
+		System.out.println(data);
+
+		dbExec.close();
+		dbExec = null;
+
+		/*********************************************************/
+		/*****          test modify column                   *****/
+		/*********************************************************/
+		//@formatter:off
+		text = "" + 
+				"type Person { " + 
+				"	@maxLength=250;!PersonName Name;" + 
+				"	Age Name;" + 
+				"	Height;" + 
+				"	Date;" + 
+				"};";
+		// @formatter:on
 
 		t = loader.defineNebula(new StringReader(text)).get(0);
 
 		dbExec = config.getPersister(t);
-		dbExec.init();
+		
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
-		
-		System.out.println(data);
-		//
-		// assertEquals("NPerson", dbExec.getTableName());
-		//
-		// assertEquals(5, dbExec.columns.length);
-		// int i = 0;
-		// assertEquals("Name", dbExec.columns[i].fieldName);
-		// assertEquals(true, dbExec.columns[i].key);
-		// i++;
-		// assertEquals("TestKey", dbExec.columns[i].fieldName);
-		// assertEquals(true, dbExec.columns[i].key);
-		// i++;
-		// assertEquals("TestCore", dbExec.columns[i].fieldName);
-		// assertEquals(false, dbExec.columns[i].key);
-		// i++;
-		// assertEquals("TestRequire", dbExec.columns[i].fieldName);
-		// assertEquals(false, dbExec.columns[i].key);
-		// i++;
-		// assertEquals("TestIgnore", dbExec.columns[i].fieldName);
-		// assertEquals(false, dbExec.columns[i].key);
-		//
-		// assertEquals("SELECT count(1) FROM NPerson ", dbExec.builderCount());
-		//
-		// assertEquals("CREATE TABLE NPerson(NAME varchar(60)," +
-		// "TEST_KEY varchar(60)," +
-		// "TEST_CORE bigint," +
-		// "TEST_REQUIRE bigint," +
-		// "TEST_IGNORE bigint," +
-		// "PRIMARY KEY ( NAME,TEST_KEY)," +
-		// "TIMESTAMP_ TIMESTAMP)", dbExec.builderCreate());
 
+		// ************      Check Database table Layout     *************/
+		statement = config.conn.createStatement();
+		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		metaData = rs.getMetaData();
+		
+		assertEquals(5, metaData.getColumnCount());
+
+		i = 1;
+		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
+		assertEquals(250, metaData.getColumnDisplaySize(i));
+		i++;
+		assertEquals("Timestamp_".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Timestamp".toUpperCase(), metaData.getColumnTypeName(i));
+		i++;
+		assertEquals("Height".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("BigInt".toUpperCase(), metaData.getColumnTypeName(i));
+		i++;
+		assertEquals("Date".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Date".toUpperCase(), metaData.getColumnTypeName(i));
+		i++;
+		assertEquals("Age".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
+		assertEquals(60, metaData.getColumnDisplaySize(i));
+
+		rs.close();
+		// ************      Check Database table Layout     *************/
+		
+
+		dbExec.close();
+		dbExec = null;
+
+		/*********************************************************/
+		/*****          test remove column                   *****/
+		/*********************************************************/
+		//@formatter:off
+		text = "" + 
+				"type Person { " + 
+				"	!PersonName Name;" + 
+				"	Height;" + 
+				"	Date;" + 
+				"};";
+		// @formatter:on
+
+		t = loader.defineNebula(new StringReader(text)).get(0);
+
+		dbExec = config.getPersister(t);
+		data = dbExec.get("wangshilian");
+		assertNotNull(data);
+
+		// ************      Check Database table Layout     *************/
+		statement = config.conn.createStatement();
+		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		metaData = rs.getMetaData();
+		
+		assertEquals(4, metaData.getColumnCount());
+
+		i = 1;
+		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
+		assertEquals(250, metaData.getColumnDisplaySize(i));
+		i++;
+		assertEquals("Timestamp_".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Timestamp".toUpperCase(), metaData.getColumnTypeName(i));
+		i++;
+		assertEquals("Height".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("BigInt".toUpperCase(), metaData.getColumnTypeName(i));
+		i++;
+		assertEquals("Date".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Date".toUpperCase(), metaData.getColumnTypeName(i));
+		// ************      Check Database table Layout     *************/
+		
+		dbExec.drop();
+		
+		dbExec.close();
+		dbExec = null;
 	}
-	
 
 	public final void testRemoveColumn() {
 		//@formatter:off
@@ -129,7 +297,7 @@ public class DBExecTest extends TestCase {
 		//@formatter:on		
 
 		t = loader.defineNebula(new StringReader(text)).get(0);
-		Map<String, Object> data ;
+		Map<String, Object> data;
 		dbExec = config.getPersister(t);
 		dbExec.init();
 
@@ -138,7 +306,7 @@ public class DBExecTest extends TestCase {
 			fail("should error");
 		} catch (RuntimeException e) {
 		}
-				
+
 		data = new HashMap<String, Object>();
 		data.put("Name", "wangshilian");
 		data.put("Age", 10L);
@@ -146,14 +314,11 @@ public class DBExecTest extends TestCase {
 		dbExec.insert(data);
 
 		data = dbExec.get("wangshilian");
-		
+
 		assertNotNull(data);
-		
-		 text = "" +
-					"type Person { " +
-					"	!Name;" +
-					"};";
-			//@formatter:on		
+
+		text = "" + "type Person { " + "	!Name;" + "};";
+		// @formatter:on
 
 		t = loader.defineNebula(new StringReader(text)).get(0);
 
@@ -161,7 +326,7 @@ public class DBExecTest extends TestCase {
 		dbExec.init();
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
-		
+
 		System.out.println(data);
 
 	}

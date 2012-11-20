@@ -1,5 +1,5 @@
 type BankAccount{
-  AutoID;
+  !AutoID;
   *Bank;
   *Currency;
   Type Attr;

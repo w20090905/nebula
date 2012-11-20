@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nebula.lang.Field;
+import nebula.lang.Importance;
 import nebula.lang.RawTypes;
 import nebula.lang.Type;
 import util.InheritHashMap;
@@ -35,13 +36,15 @@ public class SqlHelper {
 		v = attrs.get("scale");
 		int scale = v != null ? (Integer) v : 0;
 
-		DbColumn c = new DbColumn(name, decodeFieldName(name), key, rawType, size, precision, scale);
+		boolean nullable = field.getImportance() == Importance.Unimportant;
+
+		DbColumn c = new DbColumn(name, decodeFieldName(name), key, nullable, rawType, size, precision, scale);
 		fs.add(c);
 	}
 
 	private void addColumn(String resideName, String name, Field field, boolean key) {
 		InheritHashMap attrs = field.getAttrs();
-		Object v ;
+		Object v;
 
 		RawTypes rawType = field.getType().getRawType();
 
@@ -54,8 +57,10 @@ public class SqlHelper {
 		v = attrs.get("scale");
 		int scale = v != null ? (Integer) v : 0;
 
-		DbColumn c = new DbColumn(resideName + name, decodeFieldName(resideName + "_" + name), key, rawType, size,
-				precision, scale);
+		boolean nullable = field.getImportance() == Importance.Unimportant;
+
+		DbColumn c = new DbColumn(resideName + name, decodeFieldName(resideName + "_" + name), key, nullable, rawType,
+				size, precision, scale);
 		fs.add(c);
 	}
 
@@ -228,6 +233,11 @@ public class SqlHelper {
 
 	public String builderAddColumn(DbColumn column) {
 		return "ALTER TABLE " + this.tableName + " ADD COLUMN " + column.columnName + " "
+				+ config.toColumnDefine(column);
+	}
+
+	public String builderModifyColumnDateType(DbColumn column) {
+		return "ALTER TABLE " + this.tableName + " ALTER COLUMN " + column.columnName + " SET DATA TYPE "
 				+ config.toColumnDefine(column);
 	}
 

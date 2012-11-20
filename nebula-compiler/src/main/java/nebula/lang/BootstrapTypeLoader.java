@@ -35,7 +35,7 @@ class BootstrapTypeLoader extends TypeLoader {
 		number.attrs.put("precision", 10);
 		number.attrs.put("scale", 2);
 
-		Type typeBoolean = new Type(this, "Long", number, RawTypes.Boolean);
+		Type typeBoolean = new Type(this, "Boolean", number, RawTypes.Boolean);
 		typeBoolean.attrs.put("formatType", "checkbox");
 		
 		Type typeLong = new Type(this, "Long", number, RawTypes.Long);

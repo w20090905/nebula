@@ -4,12 +4,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import nebula.Identifiable;
+import nebula.SmartList;
+import nebula.frame.SmartListImp;
 import nebula.lang.Type;
 
 import org.apache.commons.logging.Log;
@@ -30,16 +36,18 @@ public class DBExec {
 	final private PreparedStatement SQL_LIST;
 	// final private String SQL_COUNT;
 
-	final private DbColumn[] columns;
+	final DbColumn[] columns;
 	// final private String[] realFields;
 	// final private DbColumn[] keyColumns;
-	final private SqlHelper builder;
+	final SqlHelper builder;
+	final DbConfiguration config;
 
 	// final private Map<String, Integer> map;
 
 	// final private String[] systemFields = new String[] { "TIMESTAMP_" };
 
-	public DBExec(DbConfiguration config, Connection conn, Type type, SqlHelper helper) {
+	public DBExec(final DbConfiguration config, final Connection conn, final Type type, final SqlHelper helper) {
+		this.config = config;
 		this.type = type;
 		this.conn = conn;
 
@@ -64,111 +72,180 @@ public class DBExec {
 	}
 
 	public void init() {
+		Statement statement = null;
+		boolean exist = false;
+		ResultSet rs = null;
 		try {
-			Statement statement = null;
-			boolean exist = false;
-			ResultSet rs = null;
 
+			final SmartList<DbColumn> mapColumns = new SmartListImp<DbColumn>("DbColumn", new Identifiable<DbColumn>() {
+				@Override
+				public String getId(DbColumn data) {
+					return data.columnName;
+				}
+			});
+
+			for (int i = 0; i < columns.length; i++) {
+				mapColumns.add(columns[i]);
+			}
+
+			statement = conn.createStatement();
 			try {
-
-				statement = conn.createStatement();
 				rs = statement.executeQuery(builder.builderGetMeta());
 				exist = true;
+			} catch (SQLSyntaxErrorException e) {
+				// don't exist
+			}
+
+			if (exist) {
+
 				ResultSetMetaData metaData = rs.getMetaData();
 				int columnsSize = metaData.getColumnCount();
 
-				Map<String, String> cols = new HashMap<String, String>();
-
 				if (log.isDebugEnabled()) log.debug("== Before update column ");
 
-				for (int i = 0; i < columnsSize; i++) {
-					cols.put(metaData.getColumnName(i + 1).toUpperCase(), metaData.getColumnTypeName(i + 1));
+				ArrayList<String> needDeletedColumns = new ArrayList<>();
+				Map<String, String> allColumns = new HashMap<>();
+				ArrayList<DbColumn> typeNotMatchColumns = new ArrayList<DbColumn>();
+				ArrayList<DbColumn> typeSizeNotMatchColumns = new ArrayList<DbColumn>();
+				for (int i = 1; i <= columnsSize; i++) {
+					String columnName = metaData.getColumnName(i);
+
+					DbColumn newColumn = mapColumns.get(columnName);
+					if (newColumn == null) {
+						if (!columnName.endsWith("_")) {
+							needDeletedColumns.add(columnName);
+						}
+					} else {
+						int size = metaData.getColumnDisplaySize(i);
+						// int nullable = metaData.isNullable(i);
+						int precision = metaData.getPrecision(i);
+						int scale = metaData.getScale(i);
+						
+						int jdbcType = metaData.getColumnType(i);
+
+						if (jdbcType != newColumn.jdbcType) {
+							typeNotMatchColumns.add(newColumn);
+						} else {
+							switch (jdbcType) {
+							case Types.DECIMAL:
+								if (newColumn.precision == precision && newColumn.scale == scale) {
+
+								} else if (newColumn.precision > precision && newColumn.scale > scale) {
+									typeSizeNotMatchColumns.add(newColumn);
+								} else if (newColumn.precision > precision || newColumn.scale > scale) {
+									int newPrecision = newColumn.precision > precision ? newColumn.precision
+											: precision;
+									int newScale = newColumn.scale > scale ? newColumn.scale : scale;
+									typeSizeNotMatchColumns.add(new DbColumn(newColumn.fieldName, newColumn.columnName,
+											newColumn.key,newColumn.nullable, newColumn.rawType, newColumn.size, newPrecision, newScale));
+								}
+								break;
+							case Types.VARCHAR:
+								if (newColumn.size > size) typeSizeNotMatchColumns.add(newColumn);
+								break;
+							}
+						}
+
+						allColumns.put(columnName, columnName);
+					}
+
 					if (log.isDebugEnabled()) {
-						log.debug("\t" + metaData.getColumnName(i + 1) + "  \t" + metaData.getColumnDisplaySize(i + 1)
-								+ "\t" + metaData.getColumnTypeName(i + 1));
+						log.debug("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
+								+ metaData.getColumnDisplaySize(i));
 					}
 				}
 				rs.close();
+				conn.commit();
 
 				ArrayList<DbColumn> notExistColumns = new ArrayList<DbColumn>();
-				for (DbColumn f : columns) {
-					if (!cols.containsKey(f.columnName)) {
+				for (DbColumn f : mapColumns) {
+					if (!allColumns.containsKey(f.columnName)) {
 						notExistColumns.add(f);
-					}else{
-						cols.remove(f.columnName);
 					}
 				}
 
+				// add not exist column to DB
 				if (notExistColumns.size() > 0) {
-					statement = conn.createStatement();					
+					statement = conn.createStatement();
 					for (DbColumn c : notExistColumns) {
-						log.trace(builder.builderAddColumn(c));
+						log.trace("##\t" + builder.builderAddColumn(c));
+						statement.executeUpdate(builder.builderAddColumn(c));
+					}
+					// statement.executeBatch();
+				}
+
+				// update don't match column to DB
+				if (typeNotMatchColumns.size() > 0) {
+					statement = conn.createStatement();
+					for (DbColumn c : typeNotMatchColumns) {
+						log.trace("##\t" + builder.builderModifyColumnDateType(c));
+						statement.addBatch(builder.builderRemoveColumn(c.columnName));
 						statement.addBatch(builder.builderAddColumn(c));
 					}
-					statement.executeBatch();
+					 statement.executeBatch();
+				}
 
-					rs = statement.executeQuery(builder.builderGetMeta());
-					metaData = rs.getMetaData();
-					columnsSize = metaData.getColumnCount();
-					log.debug("== After update column ");
-					for (int i = 0; i < columnsSize; i++) {
-						log.debug(metaData.getColumnName(i + 1) + "  \t");
-						log.debug(metaData.getColumnDisplaySize(i + 1) + "\t");
-						log.debug(metaData.getColumnTypeName(i + 1));
+				// update size don't match column to DB
+				if (typeSizeNotMatchColumns.size() > 0) {
+					statement = conn.createStatement();
+					for (DbColumn c : typeSizeNotMatchColumns) {
+						log.trace("##\t" + builder.builderModifyColumnDateType(c));
+						statement.addBatch(builder.builderModifyColumnDateType(c));
 					}
+					 statement.executeBatch();
 				}
 				
-				boolean needRemove=false;
-				for(String key: cols.keySet()){
-					if(key.endsWith("_")){
-					}else{
-						if(!needRemove){
-							statement = conn.createStatement();
-						}
-						String sql = builder.builderRemoveColumn(key);
-						log.trace(sql);
-						statement.addBatch(sql);
-						needRemove=true;
+				// remove unused column
+				if (needDeletedColumns.size() > 0) {
+					statement = conn.createStatement();
+					for (String key : needDeletedColumns) {
+						log.trace("##\t" + builder.builderRemoveColumn(key));
+						statement.addBatch(builder.builderRemoveColumn(key));
 					}
+					 statement.executeBatch();
 				}
-				if(needRemove){
-					statement.executeBatch();
-					
-					rs = statement.executeQuery(builder.builderGetMeta());
-					metaData = rs.getMetaData();
-					columnsSize = metaData.getColumnCount();
-					log.debug("== After update column ");
-					for (int i = 0; i < columnsSize; i++) {
-						log.debug(metaData.getColumnName(i + 1) + "  \t");
-						log.debug(metaData.getColumnDisplaySize(i + 1) + "\t");
-						log.debug(metaData.getColumnTypeName(i + 1));
-					}
-				}
-				
-				
 				conn.commit();
-			} catch (Exception e) {
-				log.error(e);
-			}
 
-			if (!exist) {
+				if (log.isDebugEnabled()) {
+					log.debug("== After add not exist column ");
+					rs = statement.executeQuery(builder.builderGetMeta());
+					metaData = rs.getMetaData();
+					columnsSize = metaData.getColumnCount();
+					for (int i = 1; i <= columnsSize; i++) {
+						log.debug("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
+								+ metaData.getColumnDisplaySize(i));
+					}
+					rs.close();
+				}
+
+			} else {
 				statement.executeUpdate(builder.builderCreate());
+				conn.commit();
 			}
 
-		} catch (Exception e) {
+		} catch (SQLException e) {
+			log.trace(e);
 			throw new RuntimeException(e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				log.error(e);
+				throw new RuntimeException(e);
+			}
 		}
 	}
-
 
 	public void drop() {
 		try {
 			conn.createStatement().execute(builder.builderDrop());
 		} catch (Exception e) {
 			log.error(e);
-			throw new RuntimeException(e);
-		}			
+		}
 	}
+
 	public void update(Map<String, Object> value, Object... keys) {
 		log.debug(SQL_UPDATE + " : " + value);
 		executeUpdate(SQL_UPDATE, value, keys);
@@ -185,7 +262,7 @@ public class DBExec {
 		} catch (Exception e) {
 			log.error(e);
 			throw new RuntimeException(e);
-		}			
+		}
 	}
 
 	public List<Map<String, Object>> getAll() {
@@ -222,6 +299,7 @@ public class DBExec {
 			}
 
 			pstmt.executeUpdate();
+			conn.commit();
 			pstmt.clearParameters();
 
 		} catch (Exception e) {
@@ -242,8 +320,10 @@ public class DBExec {
 			for (int i = 0; i < keys.length; i++) {
 				pstmt.setObject(pos + i + 1, keys[i]);
 			}
-
 			res = pstmt.executeQuery();
+			if (log.isDebugEnabled()) {
+				log.debug("==\texecuteQuery Open Recordset");
+			}
 			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
 			while (res.next()) {
@@ -257,7 +337,12 @@ public class DBExec {
 			throw new RuntimeException(e);
 		} finally {
 			try {
-				if (res != null) res.close();
+				if (res != null) {
+					res.close();
+					if (log.isDebugEnabled()) {
+						log.debug("==\texecuteQuery Close Recordset");
+					}
+				}
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -267,7 +352,7 @@ public class DBExec {
 	int fromEntity(PreparedStatement prepareStatement, Map<String, Object> v) throws Exception {
 		int pos = 0;
 		for (DbColumn c : columns) {
-			c.datadealer.writeTo(1 + pos,  v.get(c.fieldName), prepareStatement);
+			c.datadealer.writeTo(1 + pos, v.get(c.fieldName), prepareStatement);
 			pos++;
 		}
 		return pos;
@@ -282,5 +367,18 @@ public class DBExec {
 			pos++;
 		}
 		return v;
+	}
+
+	public void close() {
+		try {
+			SQL_GET.close();
+			SQL_INSERT.close();
+			SQL_UPDATE.close();
+			SQL_DELETE.close();
+			SQL_LIST.close();
+		} catch (SQLException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		}
 	}
 }

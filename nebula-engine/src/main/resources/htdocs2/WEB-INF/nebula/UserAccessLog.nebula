@@ -1,4 +1,5 @@
-type UserAccessLog{
-	  !User;
-	  /*Date;*/
+tx UserAccessLog{
+	!AutoID;
+	User;
+	Date;
 };
