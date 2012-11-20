@@ -7,7 +7,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 
 import nebula.data.Entity;
-import nebula.data.Store;
+import nebula.data.DataStore;
 import nebula.data.json.JsonHelper;
 
 import org.simpleframework.http.Address;
@@ -17,9 +17,9 @@ public class EntityResouce extends AbstractResouce {
 	private final JsonHelper<Entity> json;
 
 	private final String key;
-	private final Store<Entity> datas;
+	private final DataStore<Entity> datas;
 
-	public EntityResouce(JsonHelper<Entity> json, Store<Entity> datas, String key) {
+	public EntityResouce(JsonHelper<Entity> json, DataStore<Entity> datas, String key) {
 		this.json = json;
 		this.datas = datas;
 		this.key = key;

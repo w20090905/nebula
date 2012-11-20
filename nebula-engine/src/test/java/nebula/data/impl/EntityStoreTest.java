@@ -2,17 +2,17 @@ package nebula.data.impl;
 
 import junit.framework.TestCase;
 import nebula.data.Entity;
-import nebula.data.Persistence;
-import nebula.data.Store;
+import nebula.data.DataPersister;
+import nebula.data.DataStore;
 import nebula.data.db.DbConfiguration;
 import nebula.data.impl.EditableEntity;
-import nebula.data.impl.PersistenceDB;
+import nebula.data.impl.DbDataPersister;
 import nebula.lang.SystemTypeLoader;
 
 public class EntityStoreTest extends TestCase {
 
-	Persistence<Entity> p;
-	Store<Entity> store;
+	DataPersister<Entity> p;
+	DataStore<Entity> store;
 
 	protected void setUp() throws Exception {
 
@@ -22,7 +22,7 @@ public class EntityStoreTest extends TestCase {
 		String password = "password";
 
 		DbConfiguration dbconfig = DbConfiguration.getEngine(driverclass, url, username, password);
-		p = new PersistenceDB(new SystemTypeLoader(), dbconfig);
+		p = new DbDataPersister(new SystemTypeLoader(), dbconfig);
 		store = p.define(Entity.class, "Person");
 	}
 

@@ -5,23 +5,19 @@ import java.util.List;
 import nebula.Filter;
 import nebula.lang.Type;
 
-public interface Store<V extends HasID> extends HasID {
-	V createNew();
-
-	V load(String key);
-
-	List<V> query(Filter<V> filter);
+public interface DataStore<V extends HasID> extends HasID {
+	void load();
+	void unload();
 	
+	V createNew();	
+	V load(String key);
+	
+	List<V> query(Filter<V> filter);	
 	Type getType();
-
 	void markChanged(V v);
-
 	void apply(V newV);
-
 	void add(V v);
-
 	void remove(V v);
-
 	void flush();
 
 	List<V> all();

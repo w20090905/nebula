@@ -10,8 +10,8 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import nebula.data.Entity;
-import nebula.data.Persistence;
-import nebula.data.Store;
+import nebula.data.DataPersister;
+import nebula.data.DataStore;
 import nebula.data.json.JsonHelper;
 import nebula.data.json.JsonEntityHelperProvider;
 
@@ -23,13 +23,13 @@ import org.simpleframework.http.resource.ResourceEngine;
 
 public class EntityResouceEngine implements ResourceEngine {
 	private Log log = LogFactory.getLog(this.getClass());
-	final Persistence<Entity> persistence;
+	final DataPersister<Entity> persistence;
 	final EntityFilterBuilder filterBuilder;
 
 	Map<String, String> tmap = new HashMap<String, String>();
 
 	@Inject
-	public EntityResouceEngine(final Persistence<Entity> dataWareHouse, final EntityFilterBuilder filterBuilder) {
+	public EntityResouceEngine(final DataPersister<Entity> dataWareHouse, final EntityFilterBuilder filterBuilder) {
 		this.persistence = dataWareHouse;
 		this.filterBuilder = filterBuilder;
 	}
@@ -49,7 +49,7 @@ public class EntityResouceEngine implements ResourceEngine {
 			log.trace("\tid : " + id);
 		}
 
-		Store<Entity> datas = persistence.define(Entity.class, typeName);
+		DataStore<Entity> datas = persistence.define(Entity.class, typeName);
 		JsonHelper<Entity> json = JsonEntityHelperProvider.getSerialize(datas.getType());
 
 		if (id != null) {

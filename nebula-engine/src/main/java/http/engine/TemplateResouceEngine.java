@@ -7,7 +7,6 @@ import http.resource.TemplateResouce;
 
 import javax.inject.Inject;
 
-import nebula.frame.DataWareHouse;
 import nebula.lang.TypeLoader;
 
 import org.apache.commons.logging.Log;
@@ -23,14 +22,12 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 	private Log log = LogFactory.getLog(this.getClass());
 
 	private final Configuration cfg;
-	DataWareHouse dataWareHouse;
 	final TypeLoader typeLoader;
 
 	@Inject
-	public TemplateResouceEngine(Loader resourceLoader,TypeLoader typeLoader, Configuration cfg, DataWareHouse dataWareHouse) {
+	public TemplateResouceEngine(Loader resourceLoader,TypeLoader typeLoader, Configuration cfg) {
 		super(resourceLoader);
 		this.cfg = cfg;
-		this.dataWareHouse = dataWareHouse;
 		this.typeLoader = typeLoader;
 	}
 

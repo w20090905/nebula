@@ -43,10 +43,10 @@ public abstract class AbstractResouce implements Resource {
 			if ("GET".equals(method)) {
 
 				//System.out.print(System.currentTimeMillis());
-				if (System.currentTimeMillis() - this.lastModified > 100) {					
+				//if (System.currentTimeMillis() - this.lastModified > 100) {					
 					get(req.getAddress());
 					//System.out.println("====" + System.currentTimeMillis());
-				}
+				//}
 
 				
 				// normal parse

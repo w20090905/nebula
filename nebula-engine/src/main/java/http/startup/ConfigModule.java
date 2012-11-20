@@ -2,8 +2,8 @@ package http.startup;
 
 import freemarker.template.Configuration;
 import http.engine.EntityResouceEngine;
-import http.engine.StaticLongTermResourceEngine;
 import http.engine.PrepareResouceEngine;
+import http.engine.StaticLongTermResourceEngine;
 import http.engine.StaticResourceEngine;
 import http.engine.TemplateResouceEngine;
 import http.engine.TypeResouceEngine;
@@ -23,10 +23,9 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import nebula.data.Entity;
-import nebula.data.Persistence;
+import nebula.data.DataPersister;
 import nebula.data.db.DbConfiguration;
-import nebula.data.impl.PersistenceDB;
-import nebula.frame.DataWareHouse;
+import nebula.data.impl.DbDataPersister;
 import nebula.lang.EditableTypeLoader;
 import nebula.lang.SystemTypeLoader;
 import nebula.lang.TypeLoader;
@@ -90,14 +89,12 @@ public class ConfigModule extends AbstractModule {
 
 			this.bind(EntityFilterBuilder.class);
 			this.bind(TypeFilterBuilder.class);
-			
-			this.bind(DataWareHouse.class);
 
 			this.bind(DbConfiguration.class).toInstance(
 					DbConfiguration.getEngine(driverclass, dburl, username, password));
 
-			this.bind(new TypeLiteral<Persistence<Entity>>() {
-			}).to(PersistenceDB.class);
+			this.bind(new TypeLiteral<DataPersister<Entity>>() {
+			}).to(DbDataPersister.class);
 
 			Configuration freemarkerConfiguration = new Configuration();
 			freemarkerConfiguration.setTemplateUpdateDelay(1);

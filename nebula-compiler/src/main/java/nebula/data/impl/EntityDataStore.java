@@ -9,13 +9,13 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import nebula.Filter;
 import nebula.data.Entity;
-import nebula.data.Persistence;
-import nebula.data.Store;
+import nebula.data.DataPersister;
+import nebula.data.DataStore;
 import nebula.lang.Field;
 import nebula.lang.Type;
 
-public class EntityStore implements Store<Entity> {
-	final Persistence<Entity> persistence;
+public class EntityDataStore implements DataStore<Entity> {
+	final DataPersister<Entity> persistence;
 	final Type type;
 
 	final List<Entity> datas;
@@ -23,7 +23,7 @@ public class EntityStore implements Store<Entity> {
 
 	ReentrantLock lock = new ReentrantLock();
 
-	EntityStore(Persistence<Entity> persistence, Type type) {
+	EntityDataStore(DataPersister<Entity> persistence, Type type) {
 		this.persistence = persistence;
 		this.type = type;
 		datas = new CopyOnWriteArrayList<Entity>();
@@ -118,6 +118,18 @@ public class EntityStore implements Store<Entity> {
 	@Override
 	public Type getType() {
 		return this.type;
+	}
+
+	@Override
+	public void load() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void unload() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

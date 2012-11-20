@@ -5,18 +5,18 @@ import java.util.Map;
 
 import nebula.data.Entity;
 import nebula.data.HasID;
-import nebula.data.Store;
+import nebula.data.DataStore;
 
 public class EntityImp implements HasID, Entity {
 	Map<String, Object> data;
-	Store<Entity> store;
+	DataStore<Entity> store;
 
-	EntityImp(Store<Entity> store, Map<String, Object> data) {
+	EntityImp(DataStore<Entity> store, Map<String, Object> data) {
 		this.store = store;
 		this.data = data;
 	}
 
-	EntityImp(EntityStore store) {
+	EntityImp(EntityDataStore store) {
 		this.store = store;
 		this.data = new HashMap<String, Object>();
 	}

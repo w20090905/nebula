@@ -6,39 +6,42 @@ import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javax.inject.Inject;
-
 import nebula.data.Callback;
 import nebula.data.Entity;
-import nebula.data.Persistence;
-import nebula.data.Store;
-import nebula.data.db.DbConfiguration;
-import nebula.data.impl.EditableEntity;
-import nebula.lang.Type;
+import nebula.data.DataPersister;
+import nebula.data.DataStore;
 import nebula.lang.TypeLoader;
 
-public class PersistenceDB implements Persistence<Entity> {
+public class InMemoryDataPersister implements DataPersister<Entity> {
 
 	final TypeLoader loader;
 	ReentrantLock lock = new ReentrantLock();
-	final Map<String, EntityStoreDB> stores;
-	final DbConfiguration dbConfig;
+	final Map<String, EntityDataStore> stores;
 
-	@Inject
-	public PersistenceDB(TypeLoader loader, DbConfiguration dbConfig) {
+	public InMemoryDataPersister(TypeLoader loader) {
 		this.loader = loader;
-		this.stores = new HashMap<String, EntityStoreDB>();
-		this.dbConfig = dbConfig;
+		this.stores = new HashMap<String, EntityDataStore>();
 	}
 
 	@Override
-	public Store<Entity> define(Class<Entity> clz, String name) {
-		EntityStoreDB store = this.stores.get(name);
+	public DataStore<Entity> define(Class<Entity> clz, String name) {
+		EntityDataStore store = this.stores.get(name);
 		if (store == null) {
-			Type type = loader.findType(name);
-			store = new EntityStoreDB(this, type, dbConfig.getPersister(type));
+			store = new EntityDataStore(this, loader.findType(name));
 			stores.put(name, store);
 		}
+		return store;
+	}
+
+	@Override
+	public DataStore<Entity> reload(Class<Entity> clz, String name) {
+		EntityDataStore store = this.stores.get(name);
+		if (store != null) {
+			store.unload();
+			stores.put(name, null);
+		}
+		store = new EntityDataStore(this, loader.findType(name));
+		stores.put(name, store);
 		return store;
 	}
 
@@ -59,17 +62,14 @@ public class PersistenceDB implements Persistence<Entity> {
 	@Override
 	public void flush() {
 		lock.lock();
-		try {
-			Iterator<EditableEntity> i = changes.listIterator();
-			// changes.clear();
-			while (i.hasNext()) {
-				EditableEntity e = i.next();
-				e.store.apply(e);
-			}
-		} finally {
-			changes.clear();
-			lock.unlock();
+		Iterator<EditableEntity> i = changes.listIterator();
+		// changes.clear();
+		while (i.hasNext()) {
+			EditableEntity e = i.next();
+			e.store.apply(e);
 		}
+		changes.clear();
+		lock.unlock();
 	}
 
 	@Override
@@ -91,6 +91,17 @@ public class PersistenceDB implements Persistence<Entity> {
 		lock.lock();
 		changes.add((EditableEntity) v);
 		lock.unlock();
+	}
+
+	@Override
+	public void load() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void unload() {
+		this.clearChanges();
 	}
 
 }

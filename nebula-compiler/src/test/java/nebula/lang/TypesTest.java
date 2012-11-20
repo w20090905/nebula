@@ -22,7 +22,7 @@ public class TypesTest extends TestCase {
 				"	AutoID;\n" + 
 				"	Birthday;\n" + 
 				"	Code;\n" + 
-				"	Comments;\n" + 
+				"	Comment;\n" + 
 				"	Day;\n" + 
 				"	Description;\n" + 
 				"	EMail;\n" + 
@@ -69,7 +69,7 @@ public class TypesTest extends TestCase {
 		i++;
 		assertEquals("Code", type.fields.get(i).name);
 		i++;
-		assertEquals("Comments", type.fields.get(i).name);
+		assertEquals("Comment", type.fields.get(i).name);
 		i++;
 		assertEquals("Day", type.fields.get(i).name);
 		i++;

@@ -9,9 +9,9 @@ import java.text.SimpleDateFormat;
 
 import junit.framework.TestCase;
 import nebula.data.Entity;
-import nebula.data.Persistence;
-import nebula.data.Store;
-import nebula.data.impl.PersistenceMem;
+import nebula.data.DataPersister;
+import nebula.data.DataStore;
+import nebula.data.impl.InMemoryDataPersister;
 import nebula.data.json.JsonHelper;
 import nebula.data.json.JsonEntityHelperProvider;
 import nebula.lang.SystemTypeLoader;
@@ -21,14 +21,14 @@ import nebula.lang.TypeLoader;
 public class JsonProviderTest extends TestCase {
 	TypeLoader loader;
 	Type t;
-	Store<Entity> store;
+	DataStore<Entity> store;
 	
-	Persistence<Entity> persistence;
+	DataPersister<Entity> persistence;
 	
 	
 	protected void setUp() throws Exception {
 		loader = new SystemTypeLoader();
-		persistence = new PersistenceMem(loader);
+		persistence = new InMemoryDataPersister(loader);
 	}
 
 	protected void tearDown() throws Exception {

@@ -9,8 +9,8 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 import nebula.data.Entity;
-import nebula.data.Persistence;
-import nebula.data.Store;
+import nebula.data.DataPersister;
+import nebula.data.DataStore;
 import nebula.lang.SystemTypeLoader;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -21,8 +21,8 @@ public class DBExecTest extends TestCase {
 	DBExec dbExec;
 	DbConfiguration config;
 
-	Persistence<Entity> p;
-	Store<Entity> store;
+	DataPersister<Entity> p;
+	DataStore<Entity> store;
 
 	protected void setUp() throws Exception {
 		loader = new SystemTypeLoader();

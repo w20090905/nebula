@@ -4,7 +4,7 @@ package http.resource;
 import java.io.IOException;
 
 import nebula.data.Entity;
-import nebula.data.Store;
+import nebula.data.DataStore;
 import nebula.data.json.JsonHelper;
 
 import org.apache.commons.logging.Log;
@@ -18,10 +18,10 @@ import org.simpleframework.util.lease.LeaseException;
 public class LoginListResouce implements Resource {
 	protected Log log = LogFactory.getLog(this.getClass());
 
-	private final Store<Entity> users;
+	private final DataStore<Entity> users;
 	final RedirectResouce redirectTo;
 
-	public LoginListResouce(JsonHelper<Entity> json, Store<Entity> users, Store<Entity> datas) {
+	public LoginListResouce(JsonHelper<Entity> json, DataStore<Entity> users, DataStore<Entity> datas) {
 		this.users = users;
 		redirectTo = new RedirectResouce("/index.html");
 	}

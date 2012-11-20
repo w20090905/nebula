@@ -5,6 +5,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+import nebula.data.Entity;
+import nebula.data.DataPersister;
 import nebula.data.json.JsonEntityHelperProvider;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -20,8 +22,10 @@ public class TypeEditableResouce extends AbstractResouce {
 	private static Log log = LogFactory.getLog(TypeEditableResouce.class);
 	private final String key;
 	final TypeLoader typeLoader;
-
-	public TypeEditableResouce(TypeLoader typeLoader, String key) {
+	final DataPersister<Entity> dataWareHouse;
+	
+	public TypeEditableResouce(final DataPersister<Entity> dataWareHouse,TypeLoader typeLoader, String key) {
+		this.dataWareHouse = dataWareHouse;
 		this.key = key;
 		this.typeLoader = typeLoader;
 	}
@@ -55,13 +59,14 @@ public class TypeEditableResouce extends AbstractResouce {
 				log.trace(type.getCode());
 			}
 			type = typeLoader.update(type, newCode);
-			
+			dataWareHouse.define(Entity.class, type.getName());			
 		} else {
 			if (log.isTraceEnabled()) {
 				log.trace("No Change:");
 				log.trace(type.getCode());
 			}
 		}
+		
 
 	}
 }

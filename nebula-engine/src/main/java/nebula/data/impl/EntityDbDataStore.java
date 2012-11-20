@@ -9,11 +9,11 @@ import nebula.data.db.DBExec;
 import nebula.lang.Field;
 import nebula.lang.Type;
 
-public class EntityStoreDB extends EntityStore {
+public class EntityDbDataStore extends EntityDataStore {
 
 	final DBExec db;
 
-	EntityStoreDB(PersistenceDB persistence, Type type, DBExec exec) {
+	EntityDbDataStore(final DbDataPersister persistence, Type type, final DBExec exec) {
 		super(persistence, type);
 		this.db = exec;
 		exec.init();
@@ -81,5 +81,15 @@ public class EntityStoreDB extends EntityStore {
 
 	void clear() {
 		db.deleteAll();
+	}
+
+	@Override
+	public void load() {
+//		db.init();
+	}
+
+	@Override
+	public void unload() {
+		db.close();
 	}
 }

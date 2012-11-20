@@ -11,7 +11,7 @@ import java.util.List;
 
 import nebula.Filter;
 import nebula.data.Entity;
-import nebula.data.Store;
+import nebula.data.DataStore;
 import nebula.data.json.JsonHelper;
 
 import org.simpleframework.http.Address;
@@ -22,10 +22,10 @@ import util.FileUtil;
 
 public class EntityListResouce extends AbstractResouce {
 	private final JsonHelper<Entity> json;
-	private final Store<Entity> datas;
+	private final DataStore<Entity> datas;
 	final EntityFilterBuilder filterBuilder;
 
-	public EntityListResouce(JsonHelper<Entity> json, Store<Entity> datas, final EntityFilterBuilder filterBuilder) {
+	public EntityListResouce(JsonHelper<Entity> json, DataStore<Entity> datas, final EntityFilterBuilder filterBuilder) {
 		this.json = json;
 		this.datas = datas;
 		this.filterBuilder = filterBuilder;

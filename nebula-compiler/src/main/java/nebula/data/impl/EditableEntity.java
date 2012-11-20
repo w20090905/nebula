@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import nebula.data.Entity;
-import nebula.data.Store;
+import nebula.data.DataStore;
 
 class EditableEntity extends EntityImp {
 	final Map<String, Object> newData;
@@ -13,13 +13,13 @@ class EditableEntity extends EntityImp {
 	boolean dirty = false;// <->pristine
 	boolean valid = true;// <->invalid
 
-	EditableEntity(Store<Entity> store) {
+	EditableEntity(DataStore<Entity> store) {
 		super(store, null);
 		this.source = null;
 		this.newData = new HashMap<String, Object>();
 	}
 
-	EditableEntity(Store<Entity> store, EntityImp source) {
+	EditableEntity(DataStore<Entity> store, EntityImp source) {
 		super(store, source.data);
 		this.source = source;
 		this.newData = new HashMap<String, Object>();

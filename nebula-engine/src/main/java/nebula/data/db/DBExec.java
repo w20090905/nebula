@@ -194,15 +194,39 @@ public class DBExec {
 					statement.addBatch(builder.builderDrop());
 					statement.addBatch(builder.builderCreate());
 					statement.executeBatch();
+
+					if (log.isDebugEnabled()) {
+						log.debug("== After add not exist column ");
+						rs = statement.executeQuery(builder.builderGetMeta());
+						metaData = rs.getMetaData();
+						columnsSize = metaData.getColumnCount();
+						for (int i = 1; i <= columnsSize; i++) {
+							log.debug("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
+									+ metaData.getColumnDisplaySize(i));
+						}
+						rs.close();
+					}
 				} else {
 					// add not exist column to DB
 					if (notExistColumns.size() > 0) {
 						statement = conn.createStatement();
 						for (DbColumn c : notExistColumns) {
 							log.trace("##\t" + builder.builderAddColumn(c));
-							statement.executeUpdate(builder.builderAddColumn(c));
+							statement.addBatch(builder.builderAddColumn(c));
 						}
-						// statement.executeBatch();
+						 statement.executeBatch();
+						 
+						if (log.isDebugEnabled()) {
+							log.debug("== After add not exist column ");
+							rs = statement.executeQuery(builder.builderGetMeta());
+							metaData = rs.getMetaData();
+							columnsSize = metaData.getColumnCount();
+							for (int i = 1; i <= columnsSize; i++) {
+								log.debug("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
+										+ metaData.getColumnDisplaySize(i));
+							}
+							rs.close();
+						}
 					}
 
 					// update don't match column to DB
@@ -214,6 +238,17 @@ public class DBExec {
 							statement.addBatch(builder.builderAddColumn(c));
 						}
 						statement.executeBatch();
+						if (log.isDebugEnabled()) {
+							log.debug("== After update don't match column to DB");
+							rs = statement.executeQuery(builder.builderGetMeta());
+							metaData = rs.getMetaData();
+							columnsSize = metaData.getColumnCount();
+							for (int i = 1; i <= columnsSize; i++) {
+								log.debug("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
+										+ metaData.getColumnDisplaySize(i));
+							}
+							rs.close();
+						}
 					}
 
 					// update size don't match column to DB
@@ -224,6 +259,17 @@ public class DBExec {
 							statement.addBatch(builder.builderModifyColumnDateType(c));
 						}
 						statement.executeBatch();
+						if (log.isDebugEnabled()) {
+							log.debug("== update size don't match column to DB");
+							rs = statement.executeQuery(builder.builderGetMeta());
+							metaData = rs.getMetaData();
+							columnsSize = metaData.getColumnCount();
+							for (int i = 1; i <= columnsSize; i++) {
+								log.debug("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
+										+ metaData.getColumnDisplaySize(i));
+							}
+							rs.close();
+						}
 					}
 
 					// remove unused column
@@ -234,22 +280,23 @@ public class DBExec {
 							statement.addBatch(builder.builderRemoveColumn(key));
 						}
 						statement.executeBatch();
+						if (log.isDebugEnabled()) {
+							log.debug("== remove unused column");
+							rs = statement.executeQuery(builder.builderGetMeta());
+							metaData = rs.getMetaData();
+							columnsSize = metaData.getColumnCount();
+							for (int i = 1; i <= columnsSize; i++) {
+								log.debug("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
+										+ metaData.getColumnDisplaySize(i));
+							}
+							rs.close();
+						}
 					}
+					
 				}
 
 				conn.commit();
 
-				if (log.isDebugEnabled()) {
-					log.debug("== After add not exist column ");
-					rs = statement.executeQuery(builder.builderGetMeta());
-					metaData = rs.getMetaData();
-					columnsSize = metaData.getColumnCount();
-					for (int i = 1; i <= columnsSize; i++) {
-						log.debug("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
-								+ metaData.getColumnDisplaySize(i));
-					}
-					rs.close();
-				}
 
 			} else {
 				statement.executeUpdate(builder.builderCreate());

@@ -6,9 +6,10 @@ import http.resource.TypeListResouce;
 
 import javax.inject.Inject;
 
-import nebula.data.json.JsonHelper;
+import nebula.data.Entity;
+import nebula.data.DataPersister;
 import nebula.data.json.JsonEntityHelperProvider;
-import nebula.frame.DataWareHouse;
+import nebula.data.json.JsonHelper;
 import nebula.lang.EditableTypeLoader;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -21,12 +22,12 @@ import org.simpleframework.http.resource.ResourceEngine;
 
 public class TypeResouceEngine implements ResourceEngine {
 	private Log log = LogFactory.getLog(this.getClass());
-	final DataWareHouse dataWareHouse;
+	final DataPersister<Entity> dataWareHouse;
 	final TypeLoader typeLoader;
 	final TypeFilterBuilder filterBuilder;
 
 	@Inject
-	public TypeResouceEngine(DataWareHouse dataWareHouse, EditableTypeLoader typeLoader, TypeFilterBuilder filterBuilder) {
+	public TypeResouceEngine(final DataPersister<Entity> dataWareHouse, EditableTypeLoader typeLoader, TypeFilterBuilder filterBuilder) {
 		this.dataWareHouse = dataWareHouse;
 		this.typeLoader = typeLoader;
 		this.filterBuilder = filterBuilder;
@@ -49,7 +50,7 @@ public class TypeResouceEngine implements ResourceEngine {
 		JsonHelper<Type> json = JsonEntityHelperProvider.getSerialize(Type.class);
 
 		if (id != null) {
-			return new TypeEditableResouce(typeLoader, id);
+			return new TypeEditableResouce(dataWareHouse, typeLoader, id);
 		} else {
 			return new TypeListResouce(typeLoader, json, filterBuilder);
 		}
