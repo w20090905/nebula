@@ -44,7 +44,7 @@ public class TemplateResouce extends AbstractResouce {
 		try {
 			ByteArrayOutputStream bout = new ByteArrayOutputStream();
 			Writer w = new OutputStreamWriter(bout);
-
+			
 			root.put("type", typeLoader.findType(this.typeName));
 			Template template = cfg.getTemplate(templateName);
 			template.process(root, w);

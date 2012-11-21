@@ -31,10 +31,11 @@ public class EntityResouce extends AbstractResouce {
 	@Override
 	protected void get(Address address) {
 		Entity data = datas.get().load(key);
+		
 		long newModified = ((Timestamp) data.get("LastModified_")).getTime();
 		if (newModified == this.lastModified) return;
+		
 		ByteArrayOutputStream bout = null;
-
 		try {
 			bout = new ByteArrayOutputStream();
 			Writer w = new OutputStreamWriter(bout);

@@ -42,6 +42,8 @@ public abstract class TypeLoader {
 	protected Log log = LogFactory.getLog(this.getClass());
 
 	TypeLoader parent;
+	
+	protected long lastModified;
 
 	SmartList<Type> types = new SmartListImp<Type>("Type", new AutoIdentifiableType());
 
@@ -59,6 +61,7 @@ public abstract class TypeLoader {
 				t.code = code;
 				t.url = null;
 				t.link(this);
+				lastModified = System.currentTimeMillis();
 			}
 
 			types.addAll(typeList);
@@ -80,6 +83,7 @@ public abstract class TypeLoader {
 		for (Type t : typeList) {
 			t.code = code;
 			t.url = null;
+			lastModified = System.currentTimeMillis();
 		}
 		if (log.isTraceEnabled()) {
 			log.trace(typeList.get(0).getName() + " load succeed");
@@ -94,6 +98,7 @@ public abstract class TypeLoader {
 			t.code = code;
 			t.url = in;
 			t.lastModified = in.openConnection().getLastModified();
+			this.lastModified =t.lastModified>this.lastModified? t.lastModified:this.lastModified;
 			t.link(this);
 		}
 		types.addAll(typeList);
@@ -107,12 +112,19 @@ public abstract class TypeLoader {
 		NebulaLexer assemblerLexer = new NebulaLexer(in);
 		CommonTokenStream tokens = new CommonTokenStream(assemblerLexer);
 		NebulaParser parser = new NebulaParser(tokens, this);
-		List<Type> types = parser.programDefinition();
+		List<Type> typeList = parser.programDefinition();
+		for (Type t : typeList) {
+			t.code = null;
+			t.url = null;
+			t.link(this);
+			lastModified = System.currentTimeMillis();
+		}
+		
 		if (parser.getNumberOfSyntaxErrors() > 0) {
 			log.error("Parser ERROR!");
 			throw new NebulaRuntimeException("Parser ERROR!");
 		}
-		return types;
+		return typeList;
 	}
 
 	public Type findType(String name) {
@@ -166,5 +178,9 @@ public abstract class TypeLoader {
 			list.addAll(parent.all());
 			return list;
 		}
+	}
+
+	public long getLastModified() {
+		return lastModified;
 	}
 }

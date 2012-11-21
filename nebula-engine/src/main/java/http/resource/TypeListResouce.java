@@ -26,6 +26,8 @@ public class TypeListResouce extends AbstractResouce {
 	final TypeLoader typeLoader;
 	final TypeFilterBuilder filterBuilder;
 
+	protected byte[] cacheAll;
+
 	public TypeListResouce(TypeLoader typeLoader, JsonHelper<Type> json, TypeFilterBuilder filterBuilder) {
 		super("text/json", 0, 0);
 		this.typeLoader = typeLoader;
@@ -39,6 +41,12 @@ public class TypeListResouce extends AbstractResouce {
 		List<Type> dataList;
 
 		if (query.isEmpty()) {
+			long newModified = typeLoader.getLastModified();
+			if (newModified == this.lastModified) {
+				super.cache = this.cacheAll;
+				return;
+			}		
+			this.lastModified = newModified;
 			dataList = typeLoader.all();
 		} else {
 			Filter<Type> filter = filterBuilder.buildFrom(query, null);
@@ -62,8 +70,11 @@ public class TypeListResouce extends AbstractResouce {
 
 		out.flush();
 		out.close();
-		this.lastModified = System.currentTimeMillis();
 		this.cache = bout.toByteArray();
+
+		if (query.isEmpty()) {
+			this.cacheAll = bout.toByteArray();
+		}
 	}
 
 	protected String post(Request req) throws IOException {
@@ -72,7 +83,7 @@ public class TypeListResouce extends AbstractResouce {
 			log.trace("Input stream : ");
 			log.trace(FileUtil.readAllTextFrom(bio));
 		}
-		
+
 		String newCode = FileUtil.readAllTextFrom(bio);
 		Type newType = typeLoader.update(null, newCode);
 		return req.getAddress().getPath() + newType.getName();

@@ -24,13 +24,14 @@ public abstract class AbstractResouce implements Resource {
 	private final int delayTime;
 	protected byte[] cache;
 	protected long lastModified;
+	protected long lastChecked;
 
 	protected abstract void get(Address address) throws IOException;
 
 	protected void header(Address address) throws IOException {
 		throw new UnsupportedOperationException("cann't support put " + address);
 	}
-	
+
 	protected void put(Request req) throws IOException {
 		throw new UnsupportedOperationException("cann't support put " + req.getAddress());
 	}
@@ -53,9 +54,12 @@ public abstract class AbstractResouce implements Resource {
 
 		try {
 			if ("GET".equals(method)) {
-
+				System.out.println("Header Last-Modified : " + req.getValue("Last-Modified"));
+				System.out.println("Header Date : " + req.getValue("Date"));
+				
 				// System.out.print(System.currentTimeMillis());
-				if (System.currentTimeMillis() - this.lastModified > delayTime) {
+				if (System.currentTimeMillis() - this.lastChecked > delayTime) {
+					this.lastChecked = System.currentTimeMillis();
 					get(req.getAddress());
 					// System.out.println("====" + System.currentTimeMillis());
 				}
@@ -71,7 +75,7 @@ public abstract class AbstractResouce implements Resource {
 				resp.getOutputStream().flush();
 				resp.close();
 			} else if ("HEADER".equals(method)) {
-				
+				System.out.println("Header Last-Modified : " + req.getValue("Last-Modified"));
 			} else if ("PUT".equals(method)) {
 				this.put(req);
 
