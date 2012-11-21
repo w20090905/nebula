@@ -11,6 +11,7 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/forms.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
+    <link href="css/icons-de-essen.css" rel="stylesheet">
     <style type="text/css">
      	body {
         	padding-top: 60px;
@@ -64,6 +65,13 @@
       	}
     </style>
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
   </head>
 
   <body x-ng-controller="AppControl">
@@ -77,13 +85,19 @@
           </a>
           <a class="brand" x-ng-href="index.html#/c/{{LoginUserID}}">Nebula</a>
           <div class="nav-collapse collapse">
+            <div class="navbar-text dropdown pull-right" style="position: relative;float: right;">
+				<a href="indexSetting.html" class="dropdown-toggle" data-toggle="dropdown"><i class="icon2-preferences"></i> </a>
+				<ul class="dropdown-menu pull-right" x-role="menu" x-aria-labelledby="dLabel">
+					<li><a x-ng-href="index.html#/c/{{LoginUserID}}"><i class="icon-home icon-small"></i> Home</a></li>
+					<li><a href="indexSetting.html"><i class="icon-setting icon-small"></i> Setting</a></li>
+					<li><a href="indexAdmin.html"><i class="icon-config icon-small"></i> Admin</a></li>
+				</ul>
+            </div>
             <p class="navbar-text pull-right">
-              Logged in as <a href="login.html" class="navbar-link"><i class="icon-user"></i><i class="icon-user icon-white"></i>{{LoginUserID}}</a>
+              Logged in as <a href="login.html" class="navbar-link"><i class="icon-user"></i><i class="icon-user icon-white"></i>{{LoginUserID}}&nbsp;</a>
             </p>
             <ul class="nav nav-pills">
               <li><a x-ng-href="index.html#/c/{{LoginUserID}}"><i class="icon-home"></i><i class="icon-home icon-white"></i>Home</a></li>
-              <li><a href="indexSetting.html"><i class="icon-asterisk"></i><i class="icon-asterisk icon-white"></i>Setting</a></li>
-              <li class="active"><a href="indexAdmin.html"><i class="icon-asterisk"></i><i class="icon-asterisk icon-white"></i>Admin</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

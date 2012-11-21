@@ -1,0 +1,286 @@
+/* app css stylesheet */
+[class^="icon-"].icon-small,
+[class*=" icon-"].icon-small {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  *margin-right: .3em;
+  line-height: 16px;
+  vertical-align: text-top;
+  background-image: url("../img/pc.de-essen-16.png");
+  background-position: 16px 16px;
+  background-repeat: no-repeat;
+}
+
+.icon-small.icon-comment{background-position: -19px -13px;}
+.icon-small.icon-email{background-position: -19px -33px;}
+.icon-small.icon-delicious{background-position: -19px -52px;}
+.icon-small.icon-twitter{background-position: -19px -71px;}
+.icon-small.icon-pen{background-position: -19px -90px;}
+.icon-small.icon-star{background-position: -19px -109px;}
+.icon-small.icon-heart{background-position: -19px -127px;}
+.icon-small.icon-pencil{background-position: -19px -147px;}
+.icon-small.icon-calendar{background-position: -19px -166px;}
+.icon-small.icon-date{background-position: -19px -185px;}
+.icon-small.icon-sitemap{background-position: -19px -204px;}
+.icon-small.icon-search{background-position: -19px -223px;}
+.icon-small.icon-feed{background-position: -19px -242px;}
+.icon-small.icon-user{background-position: -19px -261px;}
+.icon-small.icon-folder{background-position: -19px -280px;}
+.icon-small.icon-busy{background-position: -19px -299px;}
+.icon-small.icon-free-for-job{background-position: -19px -318px;}
+.icon-small.icon-showreel{background-position: -19px -337px;}
+.icon-small.icon-hire-me{background-position: -19px -356px;}
+.icon-small.icon-future-projects{background-position: -19px -375px;}
+
+.icon-small.icon-invoice{background-position: -130px -13px;}
+.icon-small.icon-cv{background-position: -130px -33px;}
+.icon-small.icon-graphic-design{background-position: -130px -52px;}
+.icon-small.icon-product-design{background-position: -130px -71px;}
+.icon-small.icon-illustration{background-position: -130px -90px;}
+.icon-small.icon-drawings{background-position: -130px -109px;}
+.icon-small.icon-brainstorming{background-position: -130px -128px;}
+.icon-small.icon-denote{background-position: -130px -147px;}
+.icon-small.icon-photography{background-position: -130px -166px;}
+.icon-small.icon-freelance{background-position: -130px -185px;}
+.icon-small.icon-full-time{background-position: -130px -204px;}
+.icon-small.icon-finished-work{background-position: -130px -223px;}
+.icon-small.icon-current-work{background-position: -130px -242px;}
+.icon-small.icon-collaboration{background-position: -130px -261px;}
+.icon-small.icon-upcoming-work{background-position: -130px -279px;}
+.icon-small.icon-credit{background-position: -130px -299px;}
+.icon-small.icon-bank{background-position: -130px -318px;}
+.icon-small.icon-bestseller{background-position: -130px -337px;}
+.icon-small.icon-featured{background-position: -130px -356px;}
+.icon-small.icon-preminum{background-position: -130px -375px;}
+
+.icon-small.icon-special-offer{background-position: -250px -13px;}
+.icon-small.icon-limited-edition{background-position: -250px -33px;}
+.icon-small.icon-payment-card{background-position: -250px -52px;}
+.icon-small.icon-basket{background-position: -250px -71px;}
+.icon-small.icon-product{background-position: -250px -90px;}
+.icon-small.icon-category{background-position: -250px -109px;}
+.icon-small.icon-attributes{background-position: -250px -128px;}
+.icon-small.icon-zoom{background-position: -250px -147px;}
+.icon-small.icon-order{background-position: -250px -166px;}
+.icon-small.icon-shipping{background-position: -250px -185px;}
+.icon-small.icon-credit-card{background-position: -250px -204px;}
+.icon-small.icon-paypal{background-position: -250px -223px;}
+.icon-small.icon-login{background-position: -250px -241px;}
+.icon-small.icon-logout{background-position: -250px -260px;}
+.icon-small.icon-edit{background-position: -250px -279px;}
+.icon-small.icon-my-account{background-position: -250px -297px;}
+.icon-small.icon-setting{background-position: -250px -317px;}
+.icon-small.icon-sign-in{background-position: -250px -335px;}
+.icon-small.icon-sign-out{background-position: -250px -354px;}
+.icon-small.icon-sign-up{background-position: -250px -374px;}
+
+.icon-small.icon-contact{background-position: -372px -14px;}
+.icon-small.icon-suppliers{background-position: -372px -33px;}
+.icon-small.icon-process{background-position: -372px -52px;}
+.icon-small.icon-project{background-position: -372px -71px;}
+.icon-small.icon-publish{background-position: -372px -90px;}
+.icon-small.icon-library{background-position: -372px -109px;}
+.icon-small.icon-cost{background-position: -372px -128px;}
+.icon-small.icon-ticket{background-position: -372px -147px;}
+.icon-small.icon-milestone{background-position: -372px -166px;}
+.icon-small.icon-issue{background-position: -372px -185px;}
+.icon-small.icon-phone{background-position: -372px -204px;}
+.icon-small.icon-plus{background-position: -372px -223px;}
+.icon-small.icon-orders{background-position: -372px -242px;}
+.icon-small.icon-product{background-position: -372px -261px;}
+.icon-small.icon-check{background-position: -372px -281px;}
+.icon-small.icon-customers{background-position: -372px -299px;}
+.icon-small.icon-archives{background-position: -372px -318px;}
+.icon-small.icon-old-versions{background-position: -372px -337px;}
+.icon-small.icon-document-library{background-position: -372px -356px;}
+.icon-small.icon-consulting{background-position: -372px -375px;}
+
+
+.icon-small.icon-business-contact{background-position: -486px -13px;}
+.icon-small.icon-networking{background-position: -486px -33px;}
+.icon-small.icon-communication{background-position: -486px -52px;}
+.icon-small.icon-statistics{background-position: -486px -70px;}
+.icon-small.icon-advertising{background-position: -486px -90px;}
+.icon-small.icon-administratives-docs{background-position: -486px -109px;}
+.icon-small.icon-billing{background-position: -486px -128px;}
+.icon-small.icon-flag{background-position: -486px -147px;}
+.icon-small.icon-refresh{background-position: -486px -166px;}
+.icon-small.icon-world{background-position: -486px -185px;}
+.icon-small.icon-lock{background-position: -486px -204px;}
+.icon-small.icon-database{background-position: -486px -223px;}
+.icon-small.icon-link{background-position: -486px -242px;}
+.icon-small.icon-tag{background-position: -484px -261px;}
+.icon-small.icon-bookmark{background-position: -486px -280px;}
+.icon-small.icon-home{background-position: -486px -298px;}
+.icon-small.icon-config{background-position: -486px -318px;}
+.icon-small.icon-print{background-position: -486px -337px;}
+.icon-small.icon-address{background-position: -486px -356px;}
+.icon-small.icon-lightbulb{background-position: -486px -375px;}
+
+
+[class^="icon-"].icon-normal,
+[class*=" icon-"].icon-normal {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  *margin-right: .3em;
+  line-height: 32px;
+  vertical-align: text-top;
+  background-image: url("../img/pc.de-essen-32.png");
+  background-position: 32px 32px;
+  background-repeat: no-repeat;
+}
+
+/* 1 */
+.icon-normal.icon-comment{background-position: -30px -29px;}
+.icon-normal.icon-email{background-position: -30px -79px;}
+.icon-normal.icon-delicious{background-position: -30px -136px;}
+.icon-normal.icon-twitter{background-position: -30px -185px;}
+.icon-normal.icon-pen{background-position: -30px -240px;}
+.icon-normal.icon-star{background-position: -30px -289px;}
+.icon-normal.icon-heart{background-position: -30px -340px;}
+.icon-normal.icon-pencil{background-position: -30px -393px;}
+.icon-normal.icon-calendar{background-position: -30px -445px;}
+.icon-normal.icon-date{background-position: -30px -496px;}
+
+/* 2 */
+.icon-normal.icon-sitemap{background-position: -108px -28px;}
+.icon-normal.icon-search{background-position: -108px -78px;}
+.icon-normal.icon-feed{background-position: -108px -135px;}
+.icon-normal.icon-user{background-position: -108px -185px;}
+.icon-normal.icon-folder{background-position: -108px -240px;}
+.icon-normal.icon-busy{background-position: -108px -287px;}
+.icon-normal.icon-free-for-job{background-position: -108px -342px;}
+.icon-normal.icon-showreel{background-position: -108px -394px;}
+.icon-normal.icon-hire-me{background-position: -108px -446px;}
+.icon-normal.icon-future-projects{background-position: -108px -498px;}
+
+
+/* 3 */
+.icon-normal.icon-invoice{background-position: -186px -29px;}
+.icon-normal.icon-cv{background-position: -186px -81px;}
+.icon-normal.icon-graphic-design{background-position: -186px -137px;}
+.icon-normal.icon-product-design{background-position: -186px -185px;}
+.icon-normal.icon-illustration{background-position: -186px -239px;}
+.icon-normal.icon-drawings{background-position: -186px -291px;}
+.icon-normal.icon-brainstorming{background-position: -186px -344px;}
+.icon-normal.icon-denote{background-position: -186px -393px;}
+.icon-normal.icon-photography{background-position: -186px -445px;}
+.icon-normal.icon-freelance{background-position: -186px -497px;}
+
+/* 4 */
+.icon-normal.icon-full-time{background-position: -257px -26px;}
+.icon-normal.icon-finished-work{background-position: -259px -79px;}
+.icon-normal.icon-current-work{background-position: -259px -136px;}
+.icon-normal.icon-collaboration{background-position: -257px -184px;}
+.icon-normal.icon-upcoming-work{background-position: -259px -240px;}
+.icon-normal.icon-credit{background-position: -259px -290px;}
+.icon-normal.icon-bank{background-position: -259px -342px;}
+.icon-normal.icon-bestseller{background-position: -259px -394px;}
+.icon-normal.icon-featured{background-position: -259px -446px;}
+.icon-normal.icon-preminum{background-position: -258px -497px;}
+
+
+/* 5 */
+.icon-normal.icon-special-offer{background-position: -341px -28px;}
+.icon-normal.icon-limited-edition{background-position: -341px -82px;}
+.icon-normal.icon-payment-card{background-position: -341px -135px;}
+.icon-normal.icon-basket{background-position: -341px -185px;}
+.icon-normal.icon-product{background-position: -341px -240px;}
+.icon-normal.icon-category{background-position: -341px -289px;}
+.icon-normal.icon-attributes{background-position: -341px -341px;}
+.icon-normal.icon-zoom{background-position: -341px -393px;}
+.icon-normal.icon-order{background-position: -341px -445px;}
+.icon-normal.icon-shipping{background-position: -341px -497px;}
+
+/* 5 */
+.icon-normal.icon-credit-card{background-position: -418px -28px;}
+.icon-normal.icon-paypal{background-position: -419px -77px;}
+.icon-normal.icon-login{background-position: -419px -134px;}
+.icon-normal.icon-logout{background-position: -419px -186px;}
+.icon-normal.icon-edit{background-position: -419px -240px;}
+.icon-normal.icon-my-account{background-position: -419px -290px;}
+.icon-normal.icon-setting{background-position: -419px -342px;}
+.icon-normal.icon-sign-in{background-position: -419px -394px;}
+.icon-normal.icon-sign-out{background-position: -419px -446px;}
+.icon-normal.icon-sign-up{background-position: -419px -498px;}
+
+
+/* 7 */
+.icon-normal.icon-contact{background-position: -499px -28px;}
+.icon-normal.icon-suppliers{background-position: -499px -82px;}
+.icon-normal.icon-process{background-position: -499px -136px;}
+.icon-normal.icon-project{background-position: -499px -185px;}
+.icon-normal.icon-publish{background-position: -499px -240px;}
+.icon-normal.icon-library{background-position: -499px -289px;}
+.icon-normal.icon-cost{background-position: -498px -341px;}
+.icon-normal.icon-ticket{background-position: -499px -393px;}
+.icon-normal.icon-milestone{background-position: -499px -445px;}
+.icon-normal.icon-issue{background-position: -499px -497px;}
+
+/* 8 */
+.icon-normal.icon-phone{background-position: -580px -27px;}
+.icon-normal.icon-plus{background-position: -580px -79px;}
+.icon-normal.icon-orders{background-position: -580px -134px;}
+.icon-normal.icon-product{background-position: -580px -186px;}
+.icon-normal.icon-check{background-position: -580px -238px;}
+.icon-normal.icon-customers{background-position: -580px -290px;}
+.icon-normal.icon-archives{background-position: -580px -342px;}
+.icon-normal.icon-old-versions{background-position: -580px -394px;}
+.icon-normal.icon-document-library{background-position: -580px -446px;}
+.icon-normal.icon-consulting{background-position: -582px -497px;}
+
+/* 9 */
+.icon-normal.icon-business-contact{background-position: -661px -28px;}
+.icon-normal.icon-networking{background-position: -661px -81px;}
+.icon-normal.icon-communication{background-position: -661px -133px;}
+.icon-normal.icon-statistics{background-position: -661px -185px;}
+.icon-normal.icon-advertising{background-position: -661px -240px;}
+.icon-normal.icon-administratives-docs{background-position: -661px -289px;}
+.icon-normal.icon-billing{background-position: -661px -341px;}
+.icon-normal.icon-flag{background-position: -661px -391px;}
+.icon-normal.icon-refresh{background-position: -661px -445px;}
+.icon-normal.icon-world{background-position: -661px -497px;}
+
+/* 10 */
+.icon-normal.icon-lock{background-position: -735px -28px;}
+.icon-normal.icon-database{background-position: -735px -76px;}
+.icon-normal.icon-link{background-position: -735px -134px;}
+.icon-normal.icon-tag{background-position: -735px -186px;}
+.icon-normal.icon-bookmark{background-position: -735px -240px;}
+.icon-normal.icon-home{background-position: -735px -289px;}
+.icon-normal.icon-config{background-position: -735px -342px;}
+.icon-normal.icon-print{background-position: -735px -394px;}
+.icon-normal.icon-address{background-position: -735px -446px;}
+.icon-normal.icon-lightbulb{background-position: -735px -498px;}
+
+
+
+
+[class^="icon18-"],
+[class*=" icon18-"] {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  *margin-right: .3em;
+  line-height: 20px;
+  vertical-align: text-top;
+  background-image: url("../img/hpc3.png");
+  background-position: 18px 18px;
+  background-repeat: no-repeat;
+}
+
+[class^="icon18-"]:last-child,
+[class*=" icon18-"]:last-child {
+  *margin-left: 0;
+}
+.icon18-development{
+ 	background-image: url("../img/hammer.png");
+	background-position: 0px 0px;
+}
+
+.icon18-setting{
+ 	background-image: url("../img/gear.png");
+	background-position: 0px 0px;
+}

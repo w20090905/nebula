@@ -13,3 +13,65 @@ body {
 .table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
 	background-color: #ededed;
 }
+
+
+
+[class^="icon2-"],
+[class*=" icon2-"] {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  *margin-right: .3em;
+  line-height: 20px;
+  vertical-align: text-top;
+  background-image: url("../img/hpc3.png");
+  background-position: 20px 20px;
+  background-repeat: no-repeat;
+}
+
+[class^="icon2-"]:last-child,
+[class*=" icon2-"]:last-child {
+  *margin-left: 0;
+}
+
+.icon2-preferences {
+	background-position: -71px -108px;
+}
+
+.icon2-preferences:hover {
+	background-position: -49px -108px;
+}
+
+a:hover .icon2-preferences {
+	background-position: -49px -108px;
+}
+
+
+[class^="icon18-"],
+[class*=" icon18-"] {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  *margin-right: .3em;
+  line-height: 20px;
+  vertical-align: text-top;
+  background-image: url("../img/hpc3.png");
+  background-position: 18px 18px;
+  background-repeat: no-repeat;
+}
+
+[class^="icon18-"]:last-child,
+[class*=" icon18-"]:last-child {
+  *margin-left: 0;
+}
+.icon18-development{
+ 	background-image: url("../img/hammer.png");
+	background-position: 0px 0px;
+}
+
+.icon18-setting{
+ 	background-image: url("../img/gear.png");
+	background-position: 0px 0px;
+}
+
+
