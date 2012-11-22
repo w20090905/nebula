@@ -1,5 +1,14 @@
 [#ftl/]
 <article class="module width_full">
+	<div class="btn-group pull-right">
+		  <a href="#/d/Type/${type.name}" class="btn">Define</a>
+		  <button class="btn dropdown-toggle" data-toggle="dropdown">
+		    <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu">
+			  <li><a tabindex="-1" href="#/t/angularjs/${type.name}-detail.html">View Template</a></li>
+		  </ul>
+	</div>
 	<header>
 		<h1>${type.name}&nbsp;</h1>
 	</header>

@@ -1,8 +1,17 @@
 <article class="module width_full">
+	<div class="btn-group pull-right"  x-ng-show="data.standalone != 'BuilderIn'">		
+		  <a href="#/d/{{data.name}}/" class="btn">Edit Data</a>
+		  <button class="btn dropdown-toggle" data-toggle="dropdown">
+		    <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu">
+			  <li><a tabindex="-1" href="#/t/angularjs/{{data.name}}-list.html">View List Template</a></li>
+			  <li><a tabindex="-1" href="#/t/angularjs/{{data.name}}-detail.html">View Detail Template</a></li>
+		  </ul>
+	</div>
 	<header>
 		<h1 class="tabs_involved" x-ng-show="data.name" >Type-{{data.name}}</h1>
 		<h1 class="tabs_involved" x-ng-show="!data.name">Type-New</h1>
-		<a href="#/d/{{data.name}}/" x-ng-show="data.standalone != 'BuilderIn'" class="btn ctrl">Edit Data</a>
 	</header>
 	
 	<form name="form" x-ng-submit="$save()" class="form-horizontal">
