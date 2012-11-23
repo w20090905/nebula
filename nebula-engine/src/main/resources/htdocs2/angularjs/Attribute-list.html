@@ -1,0 +1,94 @@
+<article class="module width_full">
+	<header>
+		<h1 class="tabs_involved">Attribute</h1>
+		<a href="" class="btn ctrl" x-ng-click="$newChild();"><i class="icon-plus"></i> </a>
+	</header>
+	
+	
+	<script type="text/javascript">
+		function AttrValueCtrl($scope) {
+			$scope.entityData.attrValues = [];
+
+			$scope.addAttrValue = function(event) {
+				$scope.entityData.attrValues.push({
+					text : $scope.attrValueText,
+					done : false
+				});
+				$scope.attrValueText = '';
+				event.preventDefault();
+				return false;
+			};
+
+			$scope.removeAttrValue = function(attrValue) {
+				attrValue.done = true;
+				$scope.archive();
+			};
+
+			$scope.remaining = function() {
+				var count = 0;
+				angular.forEach($scope.attrValues, function(attrValue) {
+					count += attrValue.done ? 0 : 1;
+				});
+				return count;
+			};
+
+			$scope.archive = function() {
+				var oldAttrValues = $scope.entityData.attrValues;
+				$scope.entityData.attrValues = [];
+				angular.forEach(oldAttrValues, function(attrValue) {
+					if (!attrValue.done)
+						$scope.entityData.attrValues.push(attrValue);
+				});
+			};
+		}
+	</script>
+	
+	<div class="row">
+		<div class="span3" >
+			<ul class="nav nav-list">
+				<li> <input type="text" x-ng-model="query" class="input-medium search-query ctrl" placeholder="Filter"></li>
+				<li class="divider"></li>
+			  <li x-ng-repeat="item in datalist | filter:query | orderBy:orderProp"><a href="" x-ng-click="$loadChild(item.Name);">{{item.Name}}</a></li>
+			</ul>
+		</div>
+		<div class="span8" x-ng-controller="AttributeEditCtrl">
+			<!-- Detail Edit Page  -->
+			<form name="form" x-ng-submit="$save()" class="form-horizontal" novalidate>
+				<div class="control-group required">
+					<label class="control-label"> Name</label>
+					<div class="controls">
+						<input id="Name" x-ng-model="entityData.Name" type="text" required x-ng-readonly="update" x-ng-maxLength="60" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Values</label>
+					<div class="controls" x-ng-controller="AttrValueCtrl">
+						<span>{{remaining()}} of {{entityData.attrValues.length}} remaining</span>
+						<table>
+							<tbody>
+								<tr x-ng-repeat="attrValue in entityData.attrValues">
+									<td><span class="done-{{attrValue.done}}">{{attrValue.text}}</span></td>
+									<td><a href="" x-ng-click="removeAttrValue(attrValue)"><i class="icon-minus-sign"></i> </a></td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td><input type="text" x-ng-model="attrValueText" class="input-small" size="30"
+										placeholder="add new attrValue here"
+									></td>
+									<td>
+										<button class="btn-primary" type="submit" x-ng-click="addAttrValue($event)">add</button>
+									</td>
+								</tr>
+						</table>
+					</div>
+				</div>
+				<div class="form-actions">
+					<input type="submit" class="btn btn-primary" x-ng-disabled="form.$invalid" value="Save changes">
+					<!-- button type="button" class="btn">Cancel</button-->
+				</div>
+			</form>
+	
+		</div>	
+	</div>
+</article>

@@ -42,7 +42,7 @@ public abstract class TypeLoader {
 	protected Log log = LogFactory.getLog(this.getClass());
 
 	TypeLoader parent;
-	
+
 	protected long lastModified;
 
 	SmartList<Type> types = new SmartListImp<Type>("Type", new AutoIdentifiableType());
@@ -57,11 +57,12 @@ public abstract class TypeLoader {
 			String code = FileUtil.readAllTextFrom(bin);
 			in = bin;
 			List<Type> typeList = parse(new ANTLRReaderStream(in));
+			this.lastModified = System.currentTimeMillis();
 			for (Type t : typeList) {
 				t.code = code;
 				t.url = null;
 				t.link(this);
-				lastModified = System.currentTimeMillis();
+				t.lastModified = this.lastModified;
 			}
 
 			types.addAll(typeList);
@@ -80,10 +81,11 @@ public abstract class TypeLoader {
 		String code = FileUtil.readAllTextFrom(bin);
 		in = bin;
 		List<Type> typeList = parse(new ANTLRReaderStream(in));
+		this.lastModified = System.currentTimeMillis();
 		for (Type t : typeList) {
 			t.code = code;
 			t.url = null;
-			lastModified = System.currentTimeMillis();
+			t.lastModified = this.lastModified;
 		}
 		if (log.isTraceEnabled()) {
 			log.trace(typeList.get(0).getName() + " load succeed");
@@ -94,11 +96,12 @@ public abstract class TypeLoader {
 	List<Type> defineNebula(URL in) throws IOException, RecognitionException {
 		String code = FileUtil.readAllTextFrom(in);
 		List<Type> typeList = parse(new ANTLRInputStream(in.openStream(), "utf-8"));
+		long lastModified = in.openConnection().getLastModified();
+		this.lastModified = lastModified > this.lastModified ? lastModified : this.lastModified;
 		for (Type t : typeList) {
 			t.code = code;
 			t.url = in;
-			t.lastModified = in.openConnection().getLastModified();
-			this.lastModified =t.lastModified>this.lastModified? t.lastModified:this.lastModified;
+			t.lastModified = lastModified;
 			t.link(this);
 		}
 		types.addAll(typeList);
@@ -108,18 +111,11 @@ public abstract class TypeLoader {
 		return typeList;
 	}
 
-	List<Type> parse(CharStream in) throws RecognitionException {
+	private List<Type> parse(CharStream in) throws RecognitionException {
 		NebulaLexer assemblerLexer = new NebulaLexer(in);
 		CommonTokenStream tokens = new CommonTokenStream(assemblerLexer);
 		NebulaParser parser = new NebulaParser(tokens, this);
 		List<Type> typeList = parser.programDefinition();
-		for (Type t : typeList) {
-			t.code = null;
-			t.url = null;
-			t.link(this);
-			lastModified = System.currentTimeMillis();
-		}
-		
 		if (parser.getNumberOfSyntaxErrors() > 0) {
 			log.error("Parser ERROR!");
 			throw new NebulaRuntimeException("Parser ERROR!");

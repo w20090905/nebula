@@ -54,9 +54,7 @@ public abstract class AbstractResouce implements Resource {
 
 		try {
 			if ("GET".equals(method)) {
-				System.out.println("Header Last-Modified : " + req.getValue("Last-Modified"));
-				System.out.println("Header Date : " + req.getValue("Date"));
-				
+			
 				// System.out.print(System.currentTimeMillis());
 				if (System.currentTimeMillis() - this.lastChecked > delayTime) {
 					this.lastChecked = System.currentTimeMillis();

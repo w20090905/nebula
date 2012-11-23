@@ -18,7 +18,7 @@
 	
 <ul class="nav nav-tabs">
   <li class="active" x-ng-show="data.name" ><a href="#home" data-toggle="tab">基本信息</a></li>
-  <li x-ng-show="data.name"><a href="#source" data-toggle="tab">源代码</a></li>
+  <li x-ng-show="data.name && data.code"><a href="#source" data-toggle="tab">源代码</a></li>
   <li class="active" x-ng-show="!data.name"><a href="#source" data-toggle="tab" >源代码</a></li>
 </ul>
 <div class="tab-content">
@@ -82,7 +82,7 @@
 </div>
 
 		<div class="form-actions">
-	  		<input type="submit" class="btn btn-primary" x-ng-disabled="form.$invalid" value="Save changes">
+	  		<input type="submit" class="btn btn-primary" x-ng-disabled="!data.mutable && form.$invalid" value="Save changes">
 		</div>
 	
 	</form>

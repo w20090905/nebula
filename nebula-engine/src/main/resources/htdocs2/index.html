@@ -9,6 +9,7 @@
 
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/forms.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
     <link href="css/icons-de-essen.css" rel="stylesheet">
@@ -94,7 +95,7 @@
 				</ul>
             </div>
             <p class="navbar-text pull-right">
-              Logged in as <a href="login.html" class="navbar-link"><i class="icon-user"></i><i class="icon-user icon-white"></i>{{LoginUserID}}&nbsp;</a>
+              Logged in as <a href="login.html" class="navbar-link"><i class="icon-user"></i><i class="icon-user icon-white"></i><span x-ng-bind="LoginUserID">LoginUserID</span>&nbsp;</a>
             </p>
             <ul class="nav nav-pills">
               <li class="active"><a x-ng-href="index.html#/c/{{LoginUserID}}"><i class="icon-home"></i><i class="icon-home icon-white"></i>Home</a></li>

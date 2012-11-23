@@ -45,6 +45,10 @@ function EntityListCtrl($scope,$route,$resource,$routeParams){
 		query: {method:'GET', params:{}, isArray:true}
 	});
 	$scope.datalist = DataResource.query();
+	
+	$scope.$reload = function(){
+		$scope.datalist = DataResource.query();		
+	};
 }
 
 function NewEntityCtrl($scope,$resource,$routeParams,$location,$interpolate){
@@ -78,6 +82,7 @@ function TypeListCtrl($scope,$route,$resource,$routeParams){
 		query: {method:'GET', params:{}, isArray:true}
 	});
 	$scope.datalist = DataResource.query();
+	
 }
 
 function NewTypeCtrl($scope,$resource,$routeParams,$http,$location,$interpolate,$templateCache){
@@ -108,6 +113,39 @@ function TypeCtrl($scope,$resource,$routeParams,$http,$location,$interpolate,$te
 }
 
 
+function AttributeEditCtrl($scope,$resource) {
+	$scope.$parent.$loadChild = function(name){
+		var AttributeDataResource = $scope.resource = $resource(
+					'd/Attribute/' + name, {}, {
+						'save' : {
+							method : 'PUT'
+						}
+			});
+		$scope.entityData = AttributeDataResource.get({});	
+		$scope.update = true;
+		$scope.$save = function() {
+			$scope.entityData.$save(function(u, getResponseHeaders) {
+				$scope.$parent.$reload();
+				$scope.$parent.$loadChild(name);	
+			});
+			return false;
+		};		
+	}
+	$scope.$parent.$newChild = function(){
+		var AttributeDataResource = $resource('d/Attribute/', {});
+		$scope.entityData = {};
+		$scope.entityData.attrValues = [];
+		$scope.entityData.$save = AttributeDataResource.prototype.$save;
+		$scope.$save = function(){
+			$scope.entityData.$save(function(u, getResponseHeaders){
+				$scope.$parent.$reload();
+				$scope.$parent.$newChild();
+			});
+		};	
+	}
+	$scope.$parent.$newChild();
+	/**/			
+}
 
 function extractParams(url,params){
     var newurl = url;

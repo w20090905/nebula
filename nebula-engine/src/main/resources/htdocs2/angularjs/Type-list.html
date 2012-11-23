@@ -2,7 +2,7 @@
 	<header>
 		<h1 class="tabs_involved">Type</h1>
 		<a href="#/d/Type/!new" class="btn ctrl"><i class="icon-plus"></i></a>
-		<input type="text" ng-model="query" class="input-medium search-query ctrl" placeholder="Filter">
+		<input type="text" x-ng-model="query" class="input-medium search-query ctrl" placeholder="Filter">
 	</header>
 	
 	<table class="table table-striped table-hover">
@@ -17,17 +17,17 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="data in datalist | filter:'!Basic'| filter:'!Abstract' | filter:query | orderBy:orderProp">
+			<tr x-ng-repeat="data in datalist | filter:'!Basic'| filter:'!Abstract' | filter:query | orderBy:orderProp">
 				<td>{{$index+1}}</td>
 				<td><a href="#/d/{{typename}}/{{data.name}}">{{data.name}}</a></td>
-				<td>{{data.standalone}}</a></td>
+				<td>{{data.standalone}}</td>
 				<td><a href="#/d/{{typename}}/{{data.parent}}">{{data.parent}}</a></td>
 				<td>
-				    <a href="#/d/{{data.name}}/" ng-show="data.standalone=='Master' || data.standalone=='Transaction'"><i class="icon-edit"></i> Data</a>
+				    <a href="#/d/{{data.name}}/" x-ng-show="data.standalone=='Master' || data.standalone=='Transaction'"><i class="icon-edit"></i> Data</a>
 				</td>
 				<td>
-				    <a href="#/t/angularjs/{{data.name}}-list.html" ng-show="data.standalone=='Master' || data.standalone=='Transaction">List</a>
-				    <a href="#/t/angularjs/{{data.name}}-detail.html" ng-show="data.standalone=='Master' || data.standalone=='Transaction">Detail</a>
+				    <a href="#/t/angularjs/{{data.name}}-list.html" x-ng-show="data.standalone=='Master' || data.standalone=='Transaction'">List</a>
+				    <a href="#/t/angularjs/{{data.name}}-detail.html" x-ng-show="data.standalone=='Master' || data.standalone=='Transaction'">Detail</a>
 				</td>
 			</tr>
 		</tbody>
