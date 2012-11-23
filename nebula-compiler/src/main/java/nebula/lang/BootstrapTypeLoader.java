@@ -114,7 +114,10 @@ class BootstrapTypeLoader extends TypeLoader {
 		String strAttributes = "" +
 				"type Attribute{\n" +
 				"	!Name;\n" +
-				"	Values[1..1000] Name;\n" +
+				"	Values[1..1000]{" +
+				"		Name;\n" +
+				"		ReferName Name;\n" +
+				"	};\n" +
 				"};\n";
 		//@formatter:on
 

@@ -24,10 +24,40 @@ public class JsonEntityHelperProvider {
 		return s;
 	}
 
-	private static void addPageDataDealer(final List<PageField> pageFields, Field field, String name) {
+	private static void addBadicTypePageDataDealer(final List<PageField> pageFields, Field field, String name) {
 		String pageName = name;
 		PageField pageField = new PageField(pageName, pageName, field.getType().getRawType());
-
+		switch (pageField.innerType) {
+		case String:
+			pageField.dataDealer = new StringJsonDataDealer();
+			break;
+		case Boolean:
+			pageField.dataDealer = new BooleanJsonDataDealer();
+			break;
+		case Long:
+			pageField.dataDealer = new LongJsonDataDealer();
+			break;
+		case Decimal:
+			pageField.dataDealer = new DecimalJsonDataDealer();
+			break;
+		case Date:
+			pageField.dataDealer = new DateJsonDataDealer();
+			break;
+		case Time:
+			pageField.dataDealer = new TimeJsonDataDealer();
+			break;
+		case Datetime:
+			pageField.dataDealer = new DatetimeJsonDataDealer();
+			break;
+		case Timestamp:
+			pageField.dataDealer = new TimestampJsonDataDealer();
+			break;
+		case Text:
+			pageField.dataDealer = new TextBlockJsonDataDealer();
+			break;
+		default:
+			throw new UnsupportedOperationException("rawType out range");
+		}
 		pageFields.add(pageField);
 	}
 
@@ -38,12 +68,20 @@ public class JsonEntityHelperProvider {
 			Type rT;
 			switch (f.getRefer()) {
 			case ByVal:
-				addPageDataDealer(pageFields, f, f.getName());
+				if (f.isArray()) {
+
+				} else {
+					addBadicTypePageDataDealer(pageFields, f, f.getName());
+				}
 				break;
 			case Inline:
-				rT = f.getType();
-				for (Field rf : rT.getFields()) {
-					addPageDataDealer(pageFields, rf, f.getName() + rf.getName());
+				if (f.isArray()) {
+
+				} else {
+					rT = f.getType();
+					for (Field rf : rT.getFields()) {
+						addBadicTypePageDataDealer(pageFields, rf, f.getName() + rf.getName());
+					}
 				}
 				break;
 			case ByRef:
@@ -52,7 +90,7 @@ public class JsonEntityHelperProvider {
 					switch (rf.getImportance()) {
 					case Key:
 					case Core:
-						addPageDataDealer(pageFields, rf, f.getName() + rf.getName());
+						addBadicTypePageDataDealer(pageFields, rf, f.getName() + rf.getName());
 						break;
 					}
 				}
@@ -63,7 +101,7 @@ public class JsonEntityHelperProvider {
 					switch (rf.getImportance()) {
 					case Key:
 					case Core:
-						addPageDataDealer(pageFields, rf, f.getName() + rf.getName());
+						addBadicTypePageDataDealer(pageFields, rf, f.getName() + rf.getName());
 						break;
 					}
 				}

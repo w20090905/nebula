@@ -53,7 +53,7 @@ class EntityJsonHelper extends DefaultJsonHelper<Entity> {
 				break;
 			case Text:
 				pageField.dataDealer = new TextBlockJsonDataDealer();
-				break;				
+				break;
 			default:
 				throw new UnsupportedOperationException("rawType out range");
 			}
@@ -67,7 +67,7 @@ class EntityJsonHelper extends DefaultJsonHelper<Entity> {
 		try {
 			gen.writeStartObject();
 			for (PageField f : pageFields) {
-				f.dataDealer.writeTo(f.name, d.get(f.name),gen);
+				f.dataDealer.writeTo(f.name, d.get(f.name), gen);
 			}
 			gen.writeEndObject();
 		} catch (Exception e) {
@@ -82,19 +82,23 @@ class EntityJsonHelper extends DefaultJsonHelper<Entity> {
 
 		JsonToken t;
 		try {
-			parser.nextToken();
+			t = parser.nextToken();
+			assert t == JsonToken.END_OBJECT;
+
 			while ((t = parser.nextToken()) != null) {
 				if (t != JsonToken.FIELD_NAME) {
-					continue;
+					break;
 				}
 				String fieldName = parser.getCurrentName();
+
 				parser.nextToken();
 
 				f = fieldMap.get(fieldName);
 				if (f != null) {
-					d.put(f.name, f.dataDealer.readFrom(parser,fieldName));
+					d.put(f.name, f.dataDealer.readFrom(parser, fieldName));
 				}
 			}
+			assert t == JsonToken.END_OBJECT;
 		} catch (JsonParseException e) {
 			log.error(e);
 			throw new RuntimeException(e);
@@ -102,10 +106,8 @@ class EntityJsonHelper extends DefaultJsonHelper<Entity> {
 			log.error(e);
 			throw new RuntimeException(e);
 		}
-		
+
 		return d;
 	}
-
-	
 
 }

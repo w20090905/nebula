@@ -6,7 +6,7 @@ import java.util.Map;
 import nebula.data.Entity;
 import nebula.data.DataStore;
 
-class EditableEntity extends EntityImp {
+public class EditableEntity extends EntityImp {
 	final Map<String, Object> newData;
 	EntityImp source;
 
@@ -25,6 +25,12 @@ class EditableEntity extends EntityImp {
 		this.newData = new HashMap<String, Object>();
 	}
 
+	public EditableEntity() {
+		super(null, null);
+		this.source = null;
+		this.newData = new HashMap<String, Object>();
+	}
+	
 	void resetWith(EntityImp source){
 		this.newData.clear();
 		this.dirty=false;
