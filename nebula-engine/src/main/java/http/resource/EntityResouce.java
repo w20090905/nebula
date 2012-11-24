@@ -33,7 +33,7 @@ public class EntityResouce extends AbstractResouce {
 		Entity data = datas.get().load(key);
 		
 		long newModified = ((Timestamp) data.get("LastModified_")).getTime();
-		if (newModified == this.lastModified) return;
+		//if (newModified == this.lastModified) return;
 		
 		ByteArrayOutputStream bout = null;
 		try {
