@@ -1,4 +1,4 @@
-package http.json;
+package nebula.data.json;
 
 
 import java.io.StringReader;
@@ -12,7 +12,7 @@ import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.impl.InMemoryDataPersister;
-import nebula.data.json.JsonEntityHelperProvider;
+import nebula.data.json.JsonHelperProvider;
 import nebula.data.json.JsonHelper;
 import nebula.lang.Type;
 import nebula.lang.TypeLoaderForTest;
@@ -51,10 +51,10 @@ public class JsonProviderTest extends TestCase {
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
 		store = persistence.define(Entity.class, t.getName()).get();
 		
-		JsonHelper<Entity> json =   JsonEntityHelperProvider.getSerialize(t);
-		Entity n = store.createNew();		
+		JsonHelper<Entity> json =   JsonHelperProvider.getSerialize(t);
+		Entity n = store.createNew();
 		
-		json.readFrom(n,new StringReader("{" +
+		n=json.readFrom(n,new StringReader("{" +
 				"	\"Name\"		:\"wangshilian\",	" +
 				"	\"Age\"			:12,					" +
 				"	\"Decimal\"		:9876.5432,	" +

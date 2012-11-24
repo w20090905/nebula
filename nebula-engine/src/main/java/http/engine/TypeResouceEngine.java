@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 import nebula.data.Entity;
 import nebula.data.DataPersister;
-import nebula.data.json.JsonEntityHelperProvider;
+import nebula.data.json.JsonHelperProvider;
 import nebula.data.json.JsonHelper;
 import nebula.lang.EditableTypeLoader;
 import nebula.lang.Type;
@@ -47,7 +47,7 @@ public class TypeResouceEngine implements ResourceEngine {
 			log.trace("\ttypeName : " + typeName);
 			log.trace("\tid : " + id);
 		}
-		JsonHelper<Type> json = JsonEntityHelperProvider.getSerialize(Type.class);
+		JsonHelper<Type> json = JsonHelperProvider.getSerialize(Type.class);
 
 		if (id != null) {
 			return new TypeEditableResouce(dataWareHouse, typeLoader, id);

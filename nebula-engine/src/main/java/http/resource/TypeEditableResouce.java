@@ -8,7 +8,7 @@ import java.io.Writer;
 
 import nebula.data.DataPersister;
 import nebula.data.Entity;
-import nebula.data.json.JsonEntityHelperProvider;
+import nebula.data.json.JsonHelperProvider;
 import nebula.data.json.JsonHelper;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -29,7 +29,7 @@ public class TypeEditableResouce extends AbstractResouce {
 		this.dataWareHouse = dataWareHouse;
 		this.key = key;
 		this.typeLoader = typeLoader;
-		this.json = JsonEntityHelperProvider.getSerialize(Type.class);
+		this.json = JsonHelperProvider.getSerialize(Type.class);
 	}
 
 	@Override

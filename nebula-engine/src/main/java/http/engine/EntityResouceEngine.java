@@ -14,7 +14,7 @@ import nebula.data.Entity;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.json.JsonHelper;
-import nebula.data.json.JsonEntityHelperProvider;
+import nebula.data.json.JsonHelperProvider;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -51,7 +51,7 @@ public class EntityResouceEngine implements ResourceEngine {
 		}
 
 		DataHolder<DataStore<Entity>> storeHolder = persistence.define(Entity.class, typeName);
-		JsonHelper<Entity> json = JsonEntityHelperProvider.getSerialize(storeHolder.get().getType());
+		JsonHelper<Entity> json = JsonHelperProvider.getSerialize(storeHolder.get().getType());
 
 		if (id != null) {
 			return new EntityResouce(json, storeHolder, id);

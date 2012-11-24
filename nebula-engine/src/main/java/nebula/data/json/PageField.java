@@ -1,20 +1,14 @@
 package nebula.data.json;
 
-import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.JsonParser;
-
-import nebula.data.BasicFieldDealer;
-import nebula.lang.RawTypes;
 
 class PageField {
-	public PageField(String name, String pageName, RawTypes innerType) {
+	public PageField(String name, String pageName,JsonDataDealer<?> dataDealer) {
 		this.name = name;
 		this.pageName = pageName;
-		this.innerType = innerType;
+		this.dataDealer = dataDealer;
 	}
 
 	public String name;
 	public String pageName;
-	public RawTypes innerType;
-	public BasicFieldDealer<?,JsonParser,JsonGenerator> dataDealer;
+	public JsonDataDealer<?> dataDealer;
 }

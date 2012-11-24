@@ -12,7 +12,7 @@ import nebula.data.Entity;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.json.JsonHelper;
-import nebula.data.json.JsonEntityHelperProvider;
+import nebula.data.json.JsonHelperProvider;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -44,7 +44,7 @@ public class PrepareResouceEngine implements ResourceEngine {
 			log.trace("\tid : " + id);
 		}
 
-		JsonHelper<Entity> json = JsonEntityHelperProvider.getSerialize(Entity.class);
+		JsonHelper<Entity> json = JsonHelperProvider.getSerialize(Entity.class);
 		DataHolder<DataStore<Entity>> users = persistence.define(Entity.class, "User");	
 		DataHolder<DataStore<Entity>> datas = persistence.define(Entity.class, "UserAccessLog");		
 		return new LoginListResouce(json, users,datas);
