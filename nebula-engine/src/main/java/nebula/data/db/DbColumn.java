@@ -65,7 +65,7 @@ public class DbColumn {
 //	int precision, int scale
 	
 	
-	public final DefaultDBFieldDealer<?> datadealer;
+	public final DbDataDealer<?> datadealer;
 	public final String fieldName;
 	public final String columnName;
 	public final boolean key;

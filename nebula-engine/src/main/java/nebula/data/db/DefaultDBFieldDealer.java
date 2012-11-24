@@ -7,9 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Time;
 import java.sql.Timestamp;
 
-import nebula.data.DataDealer;
-
-abstract class DefaultDBFieldDealer<T> implements DataDealer<T, ResultSet, PreparedStatement> {
+abstract class DefaultDBFieldDealer<T> implements DbDataDealer<T> {
 	public T readFrom(ResultSet in, String name) throws Exception {
 		throw new UnsupportedOperationException("readFrom(ResultSet in, String name)");
 	}
