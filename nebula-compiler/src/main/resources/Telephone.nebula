@@ -1,0 +1,3 @@
+@maxLength = 20;
+define Telephone extends String {
+};

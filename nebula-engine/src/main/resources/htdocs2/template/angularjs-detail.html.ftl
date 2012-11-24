@@ -29,33 +29,52 @@
 				[#if field.importance != "Unimportant"] required						[/#if]
 			[/@compress][/#assign]
 			
-			[#assign inputOptions][@compress single_line=true]
-				id="${field.name}"
-				x-ng-model="data.${field.name}"
-				[#switch field.attrs.formatType!"text"]
-					[#case "text"]		type="text"		[#break]
-					[#case "numeric"]	type="number"	[#break]
-					[#case "email"]		type="email"	[#break]
-					[#default]			type="text"		[#break]				
-				[/#switch]
-				
-				[#if field.importance != "Unimportant"] required						[/#if]
-				[#if field.key				] x-ng-readonly ="update"					[/#if]
-				[#if field.attrs.min??		] min		="${field.attrs.min}" 			[/#if]
-				[#if field.attrs.max??		] max		="${field.attrs.max}" 			[/#if]
-				[#if field.attrs.minLength??] ngMinLength	="${field.attrs.minLength}" [/#if]
-				[#if field.attrs.maxLength??] ngMaxLength	="${field.attrs.maxLength}" [/#if]
-			[/@compress][/#assign]
-						
-						
+			[#if field.attrs.formatType == "textarea"]
 			
-	<div class="control-group ${controlGroupClass}">
-		<label class="control-label" for="${field.name}">${field.name}</label>
-		<div class="controls">
-			<input ${inputOptions}/>
-		</div>
-	</div>
-	  			[#break]
+				[#assign inputOptions][@compress single_line=flase]
+					id="${field.name}"
+					x-ng-model="data.${field.name}"
+					
+				[/@compress][/#assign]
+				
+				<div class="control-group ${controlGroupClass}">
+					<label class="control-label" for="${field.name}">${field.name}</label>
+					<div class="controls">
+						<textarea ${inputOptions}/>
+					</div>
+				</div>
+			
+			[#else]
+			
+				[#assign inputOptions][@compress single_line=true]
+					id="${field.name}"
+					x-ng-model="data.${field.name}"
+					[#switch field.attrs.formatType!"text"]
+						[#case "text"]		type="text"		[#break]
+						[#case "numeric"]	type="number"	[#break]
+						[#case "email"]		type="email"	[#break]
+						[#default]			type="text"		[#break]				
+					[/#switch]
+					
+					[#if field.importance != "Unimportant"] required						[/#if]
+					[#if field.key				] x-ng-readonly ="update"					[/#if]
+					[#if field.attrs.min??		] min		="${field.attrs.min}" 			[/#if]
+					[#if field.attrs.max??		] max		="${field.attrs.max}" 			[/#if]
+					[#if field.attrs.minLength??] ngMinLength	="${field.attrs.minLength}" [/#if]
+					[#if field.attrs.maxLength??] ngMaxLength	="${field.attrs.maxLength}" [/#if]
+				[/@compress][/#assign]
+				
+				<div class="control-group ${controlGroupClass}">
+					<label class="control-label" for="${field.name}">${field.name}</label>
+					<div class="controls">
+						<input ${inputOptions}/>
+					</div>
+				</div>
+			
+			[/#if]
+						
+						
+			[#break]
 	  			
 	<!-- 嵌入式子对象 -->
 			[#case "Inline"]

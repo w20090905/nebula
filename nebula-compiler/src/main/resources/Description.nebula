@@ -1,3 +1,4 @@
+@formatType = "textarea";
 @maxLength = 240;
 define Description extends String {
 };

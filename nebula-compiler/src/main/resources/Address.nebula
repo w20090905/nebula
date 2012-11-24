@@ -1,0 +1,4 @@
+@formatType = "textarea";
+@maxLength = 80;
+define Address extends String {
+};

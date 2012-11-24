@@ -1,0 +1,2 @@
+define Sex extends Attr {
+};
