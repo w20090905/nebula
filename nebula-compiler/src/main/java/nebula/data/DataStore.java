@@ -10,10 +10,11 @@ public interface DataStore<V extends HasID> extends HasID {
 	void unload();
 	
 	V createNew();	
-	V load(String key);
+	V get(String key);
 	
 	List<V> query(Filter<V> filter);	
 	Type getType();
+	
 	void markChanged(V v);
 	void apply(V newV);
 	void add(V v);

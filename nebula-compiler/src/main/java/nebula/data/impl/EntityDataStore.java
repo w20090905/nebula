@@ -37,7 +37,7 @@ public class EntityDataStore implements DataStore<Entity> {
 	}
 
 	@Override
-	public Entity load(String key) {
+	public Entity get(String key) {
 		return quickIndex.get(key);
 	}
 

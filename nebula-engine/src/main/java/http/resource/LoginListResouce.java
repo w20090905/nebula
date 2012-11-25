@@ -68,7 +68,7 @@ public class LoginListResouce implements Resource {
 			Form form = req.getForm();
 			String username = form.get("username");
 			// String password = form.get("password");
-			Entity user = users.get().load(username);
+			Entity user = users.get().get(username);
 			if (user == null) {
 				resp.setCode(403);
 				return;

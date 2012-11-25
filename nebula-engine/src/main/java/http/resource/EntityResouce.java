@@ -30,7 +30,7 @@ public class EntityResouce extends AbstractResouce {
 
 	@Override
 	protected void get(Address address) {
-		Entity data = datas.get().load(key);
+		Entity data = datas.get().get(key);
 		
 		long newModified = ((Timestamp) data.get("LastModified_")).getTime();
 		if (newModified == this.lastModified) return;
@@ -56,7 +56,7 @@ public class EntityResouce extends AbstractResouce {
 	@Override
 	protected void put(Request req) {
 		try {
-			Entity data = datas.get().load(key).editable();
+			Entity data = datas.get().get(key).editable();
 			if (data != null) {
 				json.readFrom(data, new InputStreamReader(req.getInputStream()));
 				datas.get().flush();

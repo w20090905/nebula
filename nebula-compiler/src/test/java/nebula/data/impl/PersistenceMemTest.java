@@ -48,39 +48,39 @@ public class PersistenceMemTest extends TestCase {
 
 		assertEquals(false, v.isDirty());
 		assertEquals("wangshilian", v.get("Name"));
-		assertEquals("wangshilian", store.load("wangshilian").get("ID"));
+		assertEquals("wangshilian", store.get("wangshilian").get("ID"));
 
 		v.put("length", "120");
 
 		assertEquals(true, v.isDirty());
 		assertEquals("120", v.get("length"));
-		assertEquals(null, store.load("wangshilian").get("length"));
+		assertEquals(null, store.get("wangshilian").get("length"));
 
 		store.flush();
 
 		assertEquals(false, v.isDirty());
 		assertEquals("120", v.get("length"));
-		assertEquals("120", store.load("wangshilian").get("length"));
+		assertEquals("120", store.get("wangshilian").get("length"));
 
 		v.put("length", "180");
 
 		assertEquals(true, v.isDirty());
 		assertEquals("180", v.get("length"));
-		assertEquals("120", store.load("wangshilian").get("length"));
+		assertEquals("120", store.get("wangshilian").get("length"));
 
 		p.clearChanges();
 		p.flush();
 
 		assertEquals(true, v.isDirty());
 		assertEquals("180", v.get("length"));
-		assertEquals("120", store.load("wangshilian").get("length"));
+		assertEquals("120", store.get("wangshilian").get("length"));
 		
 		p.add(v);
 		p.flush();
 
 		assertEquals(false, v.isDirty());
 		assertEquals("180", v.get("length"));
-		assertEquals("180", store.load("wangshilian").get("length"));		
+		assertEquals("180", store.get("wangshilian").get("length"));		
 	}
 
 //	public final void testRemove() {
