@@ -23,7 +23,7 @@ public class NanoServer {
     	
         int port = 80;
         Injector injector =  Guice.createInjector(new ConfigModule());
-        
+                
         BasicResourceContainer container =(BasicResourceContainer)injector.getInstance(Container.class);
 
         ContainerServer server =  new ContainerServer(container, 6);

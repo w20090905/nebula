@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 
 import junit.framework.TestCase;
+import nebula.data.DataHolder;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -20,7 +21,7 @@ import nebula.lang.TypeLoaderForTest;
 public class JsonProviderTest extends TestCase {
 	TypeLoaderForTest loader;
 	Type t;
-	DataStore<Entity> store;
+	DataHolder<DataStore<Entity>> store;
 	
 	DataPersister<Entity> persistence;
 	
@@ -49,12 +50,12 @@ public class JsonProviderTest extends TestCase {
 		//@formatter:on		
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		store = persistence.define(Entity.class, t.getName()).get();
+		store = persistence.define(Entity.class, t.getName());
 		
-		JsonHelper<Entity> json =   JsonHelperProvider.getSerialize(t);
-		Entity n = store.createNew();
+		DataHolder<JsonHelper<Entity>> json =   JsonHelperProvider.getHelper(store);
+		Entity n = store.get().createNew();
 		
-		n=json.readFrom(n,new StringReader("{" +
+		n=json.get().readFrom(n,new StringReader("{" +
 				"	\"Name\"		:\"wangshilian\",	" +
 				"	\"Age\"			:12,					" +
 				"	\"Decimal\"		:9876.5432,	" +
@@ -83,7 +84,7 @@ public class JsonProviderTest extends TestCase {
 		assertEquals(sdf.parseObject("2012-12-20 23:58:59.789"), n.get("Timestamp"));
 		
 		Writer out = new StringWriter();
-		json.stringifyTo(n, out);
+		json.get().stringifyTo(n, out);
 		assertEquals("{\"Name\":\"wangshilian\"," +
 				"\"Age\":12,\"Decimal\":9876.5432," +
 				"\"Date\":\"2012-12-20\"," +

@@ -2,15 +2,12 @@ package http.engine;
 
 import http.resource.LoginListResouce;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.inject.Inject;
 
 import nebula.data.DataHolder;
-import nebula.data.Entity;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
+import nebula.data.Entity;
 import nebula.data.json.JsonHelper;
 import nebula.data.json.JsonHelperProvider;
 
@@ -20,14 +17,12 @@ import org.simpleframework.http.Address;
 import org.simpleframework.http.resource.Resource;
 import org.simpleframework.http.resource.ResourceEngine;
 
-public class PrepareResouceEngine implements ResourceEngine {
+public class SystemFunctionResouceEngine implements ResourceEngine {
 	private Log log = LogFactory.getLog(this.getClass());
 	DataPersister<Entity> persistence;
 
-	Map<String, String> tmap = new HashMap<String, String>();
-
 	@Inject
-	public PrepareResouceEngine(DataPersister<Entity> dataWareHouse) {
+	public SystemFunctionResouceEngine(DataPersister<Entity> dataWareHouse) {
 		this.persistence = dataWareHouse;
 	}
 

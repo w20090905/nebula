@@ -10,14 +10,14 @@ import org.simpleframework.http.Address;
 import org.simpleframework.http.resource.Resource;
 
 @SuppressWarnings("deprecation")
-public class StaticLongTermResourceEngine extends StaticResourceEngine {
+public class LongTermStaticResourceEngine extends StaticResourceEngine {
 	private final long age;
 	@Inject
-	public StaticLongTermResourceEngine(Loader loader) {
+	public LongTermStaticResourceEngine(Loader loader) {
 		this(loader, 30L * 24L * 60L * 60L);
 	}
 	
-	public StaticLongTermResourceEngine(Loader loader,long age) {
+	public LongTermStaticResourceEngine(Loader loader,long age) {
 		super(loader);
 		this.age = age;
 	}
@@ -28,6 +28,6 @@ public class StaticLongTermResourceEngine extends StaticResourceEngine {
 		if (source != null) {
 			return new StaticResource(source,TheMimeTypes.get(target.getPath().getExtension()),age);
 		}
-		return p404;
+		return null;
 	}
 }

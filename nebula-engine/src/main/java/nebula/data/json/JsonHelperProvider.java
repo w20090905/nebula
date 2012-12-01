@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 
+import nebula.data.DataHolder;
+import nebula.data.DataListener;
+import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.lang.Type;
 
@@ -27,8 +30,37 @@ public class JsonHelperProvider {
 		return s;
 	}
 
-	public static JsonHelper<Entity> getSerialize(Type type) {
-		return new DefaultJsonHelper<>(factory, new EntityJsonDataDealer(type));
+//	public static JsonHelper<Entity> getHelper(Type type) {
+//		return new DefaultJsonHelper<>(factory, new EntityJsonDataDealer(type));
+//	}
+
+	public static DataHolder<JsonHelper<Entity>> getHelper(final DataHolder<DataStore<Entity>> storeHolder) {
+		DataHolder<JsonHelper<Entity>> he = new DataHolder<JsonHelper<Entity>>() {
+			DataStore<Entity> lastDataStore = storeHolder.get();
+			JsonHelper<Entity> lastJsonHelper = new DefaultJsonHelper<>(factory, new EntityJsonDataDealer(storeHolder
+					.get().getType()));
+
+			@Override
+			public void set(JsonHelper<Entity> newData, JsonHelper<Entity> oldData) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public JsonHelper<Entity> get() {
+				DataStore<Entity> currentDataStore = storeHolder.get();
+				if (lastDataStore != currentDataStore) {
+					lastJsonHelper = new DefaultJsonHelper<>(factory, new EntityJsonDataDealer(storeHolder.get()
+							.getType()));
+				}
+				return lastJsonHelper;
+			}
+
+			@Override
+			public void addListener(DataListener<JsonHelper<Entity>> listener) {
+				throw new UnsupportedOperationException();
+			}
+		};
+		return he;
 	}
 }
 
@@ -45,7 +77,7 @@ class DefaultJsonHelper<T> implements JsonHelper<T> {
 	public void stringifyTo(T d, Writer o) {
 		try {
 			JsonGenerator gen = this.factory.createJsonGenerator(o);
-			//gen.writeStartObject();
+			// gen.writeStartObject();
 			this.dataDealer.writeTo("root", d, gen);// Write end object in write
 													// method
 			gen.flush();
@@ -63,8 +95,9 @@ class DefaultJsonHelper<T> implements JsonHelper<T> {
 			JsonToken token = parser.nextToken();
 			assert token == JsonToken.START_OBJECT;
 
-			d = this.dataDealer.readFrom(parser, "root");// check end object in read
-														// method
+			d = this.dataDealer.readFrom(parser, "root");// check end object in
+															// read
+															// method
 			parser.close();
 			return d;
 		} catch (IOException e) {

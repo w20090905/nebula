@@ -21,13 +21,13 @@ import freemarker.template.Configuration;
 public class TemplateResouceEngine extends StaticResourceEngine {
 	private Log log = LogFactory.getLog(this.getClass());
 
-	private final Configuration cfg;
+	private final Configuration templateConfig;
 	final TypeLoader typeLoader;
 
 	@Inject
-	public TemplateResouceEngine(Loader resourceLoader,TypeLoader typeLoader, Configuration cfg) {
+	public TemplateResouceEngine(Loader resourceLoader, TypeLoader typeLoader, Configuration cfg) {
 		super(resourceLoader);
-		this.cfg = cfg;
+		this.templateConfig = cfg;
 		this.typeLoader = typeLoader;
 	}
 
@@ -47,7 +47,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 		}
 
 		String[] names = path.getName().split("-");
-		if(names.length<2){
+		if (names.length < 2) {
 			return null;
 		}
 		String typeName = names[0];
@@ -60,8 +60,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 			log.trace("\tactionName : " + actionName);
 		}
 
-		return new TemplateResouce(cfg,typeLoader , templateTypeName, typeName,
-				actionName);
+		return new TemplateResouce(templateConfig, typeLoader, templateTypeName, typeName, actionName);
 
 	}
 

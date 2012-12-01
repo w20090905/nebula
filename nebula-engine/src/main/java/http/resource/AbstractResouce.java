@@ -12,7 +12,7 @@ import org.simpleframework.http.resource.Resource;
 public abstract class AbstractResouce implements Resource {
 	protected Log log = LogFactory.getLog(this.getClass());
 
-	public AbstractResouce(String mime, long maxAge, int delayTime) {
+	public AbstractResouce(final String mime, long maxAge, int delayTime) {
 		super();
 		this.mime = mime;
 		this.maxAge = maxAge;
@@ -46,20 +46,17 @@ public abstract class AbstractResouce implements Resource {
 
 	@Override
 	public void handle(Request req, Response resp) {
-		if (log.isTraceEnabled()) {
-			log.trace("Request : " + req.getPath() + "\t METHOD: " + req.getMethod());
-		}
-
+		long currentTimeMillis = System.currentTimeMillis();
 		String method = req.getMethod();
 
 		try {
 			if ("GET".equals(method)) {
-			
-				// System.out.print(System.currentTimeMillis());
-				if (System.currentTimeMillis() - this.lastChecked > delayTime) {
-					this.lastChecked = System.currentTimeMillis();
+				if (currentTimeMillis- this.lastChecked > delayTime) {
+					if(log.isTraceEnabled()){
+						log.trace("check updated time at currentTimeMillis:\t"+ currentTimeMillis + " - lastChecked:\t" + this.lastChecked + "  = "+ (currentTimeMillis- this.lastChecked) + "  delayTime:\t"+ delayTime);
+					}
 					get(req.getAddress());
-					// System.out.println("====" + System.currentTimeMillis());
+					this.lastChecked = currentTimeMillis;
 				}
 
 				// normal parse

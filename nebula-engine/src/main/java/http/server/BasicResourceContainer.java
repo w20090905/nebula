@@ -1,5 +1,6 @@
 package http.server;
 
+import http.resource.ErrorHandleResouce;
 import http.resource.RedirectResouce;
 import http.startup.Configurable;
 
@@ -20,39 +21,53 @@ import org.simpleframework.http.Address;
 import org.simpleframework.http.Cookie;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
+import org.simpleframework.http.core.Container;
 import org.simpleframework.http.resource.Resource;
-import org.simpleframework.http.resource.ResourceContainer;
 import org.simpleframework.http.resource.ResourceEngine;
 import org.simpleframework.util.lease.LeaseException;
 
-public class BasicResourceContainer extends ResourceContainer {
+public class BasicResourceContainer implements Container {
 	private Log log = LogFactory.getLog(this.getClass());
 
-	private List<ResourceEngine> engines;
-	private List<Pattern> patterns;
-	Resource redirectToLoginResource;
+	final private Map<String, Resource> cachedLinks = new HashMap<String, Resource>();
+	final private List<Pair> pairsForEngine;
 
-	ReentrantLock lock = new ReentrantLock();
-	private Map<String, Resource> cachedLinks = new HashMap<String, Resource>();
+	final ResourceEngine defaultEngine;
+	final Resource redirectToLoginResource;
+	final ErrorHandleResouce errorHandleResource;
+
+	private class Pair {
+		public Pair(Pattern pattern, ResourceEngine engine) {
+			super();
+			this.pattern = pattern;
+			this.engine = engine;
+		}
+
+		Pattern pattern;
+		ResourceEngine engine;
+	}
 
 	@Inject
-	public BasicResourceContainer(ResourceEngine engine, Configurable<BasicResourceContainer> conf) {
-		super(engine);
-		patterns = new CopyOnWriteArrayList<Pattern>();
-		engines = new CopyOnWriteArrayList<ResourceEngine>();
+	public BasicResourceContainer(final Configurable<BasicResourceContainer> conf) {
+		pairsForEngine = new CopyOnWriteArrayList<Pair>();
 		conf.configure(this);
-		redirectToLoginResource = new RedirectResouce("login.html");
+
+		this.defaultEngine = pairsForEngine.get(pairsForEngine.size() - 1).engine;
+		this.errorHandleResource = new ErrorHandleResouce();
+		this.redirectToLoginResource = new RedirectResouce("login.html");
+		cachedLinks.put("/", redirectToLoginResource);
 	}
 
 	public void register(String match, ResourceEngine engine) {
-		match = match.replace(".", "[\\.]").replace("*", ".*");
-
-		patterns.add(0, Pattern.compile(match));
-		engines.add(0, engine);
+		String regexMatch = match.replace(".", "[\\.]").replace("*", ".*");
+		pairsForEngine.add(0, new Pair(Pattern.compile(regexMatch), engine));
 	}
 
 	@Override
 	public void handle(Request req, Response resp) {
+		if(log.isDebugEnabled()){
+			log.debug("# Request\t: " + req.getAddress().getPath() + " Method\t: " + req.getMethod());
+		}
 		try {
 			Entity currentUser = (Entity) req.getSession().get("#currentUser");
 			if (currentUser == null) {
@@ -89,29 +104,15 @@ public class BasicResourceContainer extends ResourceContainer {
 			if (res != null) {
 				res.handle(req, resp);
 				return;
-			}
-
-			if (res == null) {
-				if (log.isTraceEnabled()) {
-					log.trace(req.getAddress() + " From : " + req.getClientAddress() + " Method : " + req.getMethod());
-					log.trace("\tAccept : " + req.getValue("Accept") + " Accept-Charset : "
-							+ req.getValue("Accept-Charset") + " Accept-Encoding : " + req.getValue("Accept-Encoding")
-							+ " User-Agent : " + req.getValue("User-Agent") + " Locales : " + req.getLocales());
-					log.trace("\tCookies: ");
-					for (Cookie cookie : req.getCookies()) {
-						log.trace("\t\t " + cookie.toString());
-					}
-				}
-
+			} else {
 				res = resolve(req.getAddress());
 			}
 			res.handle(req, resp);
 			return;
 
 		} catch (RuntimeException e) {
-			e.printStackTrace();
+			this.errorHandleResource.redirectTo(req, resp, e);
 			log.error(e);
-			throw e;
 		} catch (LeaseException e) {
 			log.error(e);
 			throw new RuntimeException(e);
@@ -120,37 +121,35 @@ public class BasicResourceContainer extends ResourceContainer {
 
 	long lockcount = 0;
 
+	final ReentrantLock lock = new ReentrantLock();
+
 	private Resource resolve(Address address) {
-		if (address.getPath().getPath().equals("/")) {
-			cachedLinks.put("/", redirectToLoginResource);
-			return redirectToLoginResource;
-		}
-
+		Resource res = null;
+		String path = address.getPath().getPath();
 		lock.lock();
-		Resource res;
+		long lockIndex = lockcount++;
+		if (log.isDebugEnabled()) {
+			log.debug("<<< begin lock for resolve Resource  : " + lockIndex);
+		}
 		try {
-			System.out.println("lock: " + ++lockcount);
-			String path = address.getPath().getPath();
 			res = cachedLinks.get(path);
-			if (res != null) {
-				return res;
-			}
+			if (res != null) return res;
 
-			ResourceEngine engine = null;
-
-			for (int i = 0; i < patterns.size(); i++) {
-				if (patterns.get(i).matcher(path).matches()) {
-					engine = engines.get(i);
-					res = engine.resolve(address);
-					if (res != null) {
-						break;
-					}
+			for (Pair pair : this.pairsForEngine) {
+				if (pair.pattern.matcher(path).matches()) {
+					res = pair.engine.resolve(address);
+					if (res != null) break;
 				}
 			}
-			cachedLinks.put(path, res);
 		} finally {
 			lock.unlock();
+			if (log.isDebugEnabled()) {
+				log.debug(">>> unlock lock for resolve Resource  : " + lockIndex);
+			}
 		}
+
+		if (res != null) cachedLinks.put(path, res);
+		else throw new RuntimeException("");
 		return res;
 	}
 }

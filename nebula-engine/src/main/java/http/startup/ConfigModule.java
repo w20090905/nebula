@@ -2,8 +2,8 @@ package http.startup;
 
 import freemarker.template.Configuration;
 import http.engine.EntityResouceEngine;
-import http.engine.PrepareResouceEngine;
-import http.engine.StaticLongTermResourceEngine;
+import http.engine.SystemFunctionResouceEngine;
+import http.engine.LongTermStaticResourceEngine;
 import http.engine.StaticResourceEngine;
 import http.engine.TemplateResouceEngine;
 import http.engine.TypeResouceEngine;
@@ -114,8 +114,8 @@ public class ConfigModule extends AbstractModule {
 				TypeResouceEngine typeResouceEngine;
 				// EditableStaticResourceEngine editableStaticEngine;
 				TemplateResouceEngine templateResouceEngine;
-				PrepareResouceEngine prepareResouceEngine;
-				private StaticLongTermResourceEngine longTermStaticEngine;
+				SystemFunctionResouceEngine prepareResouceEngine;
+				private LongTermStaticResourceEngine longTermStaticEngine;
 
 				@SuppressWarnings("unused")
 				@Inject
@@ -137,7 +137,7 @@ public class ConfigModule extends AbstractModule {
 				
 				@SuppressWarnings("unused")
 				@Inject
-				public void setEngine(StaticLongTermResourceEngine engine) {
+				public void setEngine(LongTermStaticResourceEngine engine) {
 					this.longTermStaticEngine = engine;
 				}
 
@@ -156,7 +156,7 @@ public class ConfigModule extends AbstractModule {
 
 				@SuppressWarnings("unused")
 				@Inject
-				public void setEngine(PrepareResouceEngine engine) {
+				public void setEngine(SystemFunctionResouceEngine engine) {
 					this.prepareResouceEngine = engine;
 				}
 

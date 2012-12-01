@@ -11,18 +11,16 @@ import org.simpleframework.http.resource.Resource;
 import org.simpleframework.http.resource.ResourceEngine;
 
 @SuppressWarnings("deprecation")
-public class StaticEditableResourceEngine extends StaticResourceEngine  implements ResourceEngine {
+public class EditableStaticResourceEngine extends StaticResourceEngine implements ResourceEngine {
 	@Inject
-	public StaticEditableResourceEngine(Loader loader) {
+	public EditableStaticResourceEngine(Loader loader) {
 		super(loader);
 	}
 
 	@Override
 	public Resource resolve(Address target) {
 		Source source = loader.findSource(target.getPath().getPath());
-		if (source != null) {
-			return new StaticEditableResource(source,TheMimeTypes.get(target.getPath().getExtension()));
-		}
-		return p404;
+		return source != null ? new StaticEditableResource(source, TheMimeTypes.get(target.getPath().getExtension()))
+				: null;
 	}
 }

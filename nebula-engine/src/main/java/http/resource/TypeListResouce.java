@@ -29,7 +29,7 @@ public class TypeListResouce extends AbstractResouce {
 	protected byte[] cacheAll;
 
 	public TypeListResouce(TypeLoader typeLoader, JsonHelper<Type> json, TypeFilterBuilder filterBuilder) {
-		super("text/json", 0, 0);
+		super("text/json", 0, 10000);
 		this.typeLoader = typeLoader;
 		this.json = json;
 		this.filterBuilder = filterBuilder;
