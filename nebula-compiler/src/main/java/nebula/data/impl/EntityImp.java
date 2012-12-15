@@ -65,5 +65,10 @@ public class EntityImp implements HasID, Entity {
 	public String toString() {
 		return "EntityImp [" + data.toString() + "]";
 	}
+
+	@Override
+	public void extend(Entity sub) {
+		throw new UnsupportedOperationException("public void extend(Entity sub)");
+	}
 	
 }

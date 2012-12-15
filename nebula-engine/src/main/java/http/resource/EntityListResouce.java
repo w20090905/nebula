@@ -74,7 +74,8 @@ public class EntityListResouce extends AbstractResouce {
 			if (log.isTraceEnabled()) {
 				in = FileUtil.print(in);
 			}
-			jsonHolder.get().readFrom(data, new InputStreamReader(in));
+			Entity inData = jsonHolder.get().readFrom(data, new InputStreamReader(in));
+			
 			store.add(data);
 			store.flush();
 			return req.getAddress().getPath() + data.getID();

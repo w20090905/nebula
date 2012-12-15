@@ -6,6 +6,8 @@ public interface Entity extends HasID {
 	Object get(String name);
 
 	void put(String name, Object v);
+	
+	void extend(Entity sub);
 
 	Entity editable();
 
