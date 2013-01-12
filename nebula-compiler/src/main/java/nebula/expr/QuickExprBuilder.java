@@ -1,6 +1,6 @@
 package nebula.expr;
 
-public abstract class QuickExprBilder {
+public abstract class QuickExprBuilder {
 	protected Exp exp;
 
 	protected abstract String getStringByName(String name);
@@ -30,7 +30,7 @@ public abstract class QuickExprBilder {
 	class ExpImp implements Exp {
 		@Override
 		final public void finish() {
-			QuickExprBilder.this.exp = this;
+			QuickExprBuilder.this.exp = this;
 		}
 	}
 
@@ -283,7 +283,7 @@ public abstract class QuickExprBilder {
 
 		@Override
 		public String exec() {
-			return QuickExprBilder.this.getStringByName(name);
+			return QuickExprBuilder.this.getStringByName(name);
 		}
 	}
 
@@ -297,7 +297,7 @@ public abstract class QuickExprBilder {
 
 		@Override
 		public Integer exec() {
-			return QuickExprBilder.this.getIntegerByName(name);
+			return QuickExprBuilder.this.getIntegerByName(name);
 		}
 	}
 
