@@ -6,6 +6,8 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonParser;
@@ -130,5 +132,39 @@ class TimestampJsonDataDealer extends DefaultJsonDataDealer<Timestamp> {
 
 	public void writeTo(String name, Object value, JsonGenerator gen) throws Exception {
 		gen.writeString(value != null ? value.toString() : "");
+	}
+}
+
+class ListJsonDataDealer<T> extends DefaultJsonDataDealer<List<T>> {
+	final JsonDataDealer<T> jsonFieldDealer;
+
+	public ListJsonDataDealer(JsonDataDealer<T> jsonFieldDealer) {
+		this.jsonFieldDealer = jsonFieldDealer;
+	}
+
+	public List<T> readFrom(JsonParser parser, String name) throws Exception {
+		List<T> vList = new ArrayList<>();
+		JsonToken token;
+		token = parser.getCurrentToken();
+		assert token == JsonToken.START_ARRAY;
+		
+		while ((token=parser.nextToken()) != JsonToken.END_ARRAY) {
+			vList.add(jsonFieldDealer.readFrom(parser, name));
+		}
+		assert token == JsonToken.END_ARRAY;
+		return vList;
+	}
+
+	public void writeTo(String name, Object value, JsonGenerator gen) throws Exception {
+
+		gen.writeStartArray();
+
+		@SuppressWarnings("unchecked")
+		List<T> entityList = (List<T>) value;
+		for (T entity : entityList) {
+			jsonFieldDealer.writeTo(name, entity, gen);
+		}
+
+		gen.writeEndArray();
 	}
 }

@@ -4,12 +4,15 @@ import http.resource.TypeEditableResouce;
 import http.resource.TypeFilterBuilder;
 import http.resource.TypeListResouce;
 
+import java.io.Reader;
+import java.io.Writer;
+
 import javax.inject.Inject;
 
-import nebula.data.Entity;
 import nebula.data.DataPersister;
+import nebula.data.Entity;
+import nebula.data.json.DataHelper;
 import nebula.data.json.JsonHelperProvider;
-import nebula.data.json.JsonHelper;
 import nebula.lang.EditableTypeLoader;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -47,7 +50,7 @@ public class TypeResouceEngine implements ResourceEngine {
 			log.trace("\ttypeName : " + typeName);
 			log.trace("\tid : " + id);
 		}
-		JsonHelper<Type> json = JsonHelperProvider.getSerialize(Type.class);
+		DataHelper<Type,Reader,Writer> json = JsonHelperProvider.getSerialize(Type.class);
 
 		if (id != null) {
 			return new TypeEditableResouce(dataWareHouse, typeLoader, id);

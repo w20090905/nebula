@@ -13,16 +13,15 @@ import nebula.lang.Type;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonToken;
 
 public class JsonHelperProvider {
 	static JsonFactory factory = new JsonFactory();
 
 	@SuppressWarnings("unchecked")
-	public static <T> JsonHelper<T> getSerialize(Class<T> clz) {
-		JsonHelper<T> s;
+	public static <T> DataHelper<T,Reader,Writer> getSerialize(Class<T> clz) {
+		DataHelper<T,Reader,Writer> s;
 		if (clz == Type.class) {
-			s = (JsonHelper<T>) new DefaultJsonHelper<>(factory, new TypeJsonDataDealer());
+			s = (DataHelper<T,Reader,Writer>)new DefaultJsonHelper<>(factory, new TypeJsonDataDealer());
 		} else {
 			s = null;
 		}
@@ -34,29 +33,29 @@ public class JsonHelperProvider {
 //		return new DefaultJsonHelper<>(factory, new EntityJsonDataDealer(type));
 //	}
 
-	public static DataHolder<JsonHelper<Entity>> getHelper(final DataHolder<DataStore<Entity>> storeHolder) {
-		DataHolder<JsonHelper<Entity>> he = new DataHolder<JsonHelper<Entity>>() {
+	public static DataHolder<DataHelper<Entity,Reader,Writer>> getHelper(final DataHolder<DataStore<Entity>> storeHolder) {
+		DataHolder<DataHelper<Entity,Reader,Writer>> he = new DataHolder<DataHelper<Entity,Reader,Writer>>() {
 			DataStore<Entity> lastDataStore = storeHolder.get();
-			JsonHelper<Entity> lastJsonHelper = new DefaultJsonHelper<>(factory, new EntityJsonDataDealer(storeHolder
+			DataHelper<Entity,Reader,Writer> lastJsonHelper = new DefaultJsonHelper<>(factory, new JsonEntityFieldMerger(storeHolder
 					.get().getType()));
 
 			@Override
-			public void set(JsonHelper<Entity> newData, JsonHelper<Entity> oldData) {
+			public void set(DataHelper<Entity,Reader,Writer> newData,DataHelper<Entity,Reader,Writer> oldData) {
 				throw new UnsupportedOperationException();
 			}
 
 			@Override
-			public JsonHelper<Entity> get() {
+			public DataHelper<Entity,Reader,Writer> get() {
 				DataStore<Entity> currentDataStore = storeHolder.get();
 				if (lastDataStore != currentDataStore) {
-					lastJsonHelper = new DefaultJsonHelper<>(factory, new EntityJsonDataDealer(storeHolder.get()
+					lastJsonHelper = new DefaultJsonHelper<>(factory, new JsonEntityFieldMerger(storeHolder.get()
 							.getType()));
 				}
 				return lastJsonHelper;
 			}
 
 			@Override
-			public void addListener(DataListener<JsonHelper<Entity>> listener) {
+			public void addListener(DataListener<DataHelper<Entity,Reader,Writer>> listener) {
 				throw new UnsupportedOperationException();
 			}
 		};
@@ -64,13 +63,14 @@ public class JsonHelperProvider {
 	}
 }
 
-class DefaultJsonHelper<T> implements JsonHelper<T> {
+class DefaultJsonHelper<T> implements DataHelper<T,Reader,Writer> {
 	final protected JsonFactory factory;
-	final protected JsonDataDealer<T> dataDealer;
+	final protected JsonDataHelper<T> dataHelper;
+	
 
-	public DefaultJsonHelper(JsonFactory factory, JsonDataDealer<T> dealer) {
+	public DefaultJsonHelper(JsonFactory factory, JsonDataHelper<T> dataHelper) {
 		this.factory = factory;
-		this.dataDealer = dealer;
+		this.dataHelper = dataHelper;
 	}
 
 	@Override
@@ -78,8 +78,7 @@ class DefaultJsonHelper<T> implements JsonHelper<T> {
 		try {
 			JsonGenerator gen = this.factory.createJsonGenerator(o);
 			// gen.writeStartObject();
-			this.dataDealer.writeTo("root", d, gen);// Write end object in write
-													// method
+			this.dataHelper.stringifyTo(d, gen);
 			gen.flush();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -92,12 +91,10 @@ class DefaultJsonHelper<T> implements JsonHelper<T> {
 	public T readFrom(T d, Reader in) {
 		try {
 			JsonParser parser = this.factory.createJsonParser(in);
-			JsonToken token = parser.nextToken();
-			assert token == JsonToken.START_OBJECT;
 
-			d = this.dataDealer.readFrom(parser, "root");// check end object in
-															// read
-															// method
+
+			d = this.dataHelper.readFrom(d, parser);
+			
 			parser.close();
 			return d;
 		} catch (IOException e) {

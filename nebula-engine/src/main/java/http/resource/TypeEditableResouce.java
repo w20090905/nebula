@@ -4,12 +4,13 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
 import java.io.Writer;
 
 import nebula.data.DataPersister;
 import nebula.data.Entity;
+import nebula.data.json.DataHelper;
 import nebula.data.json.JsonHelperProvider;
-import nebula.data.json.JsonHelper;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 
@@ -19,7 +20,7 @@ import org.simpleframework.http.Request;
 import util.FileUtil;
 
 public class TypeEditableResouce extends AbstractResouce {
-	private final JsonHelper<Type> json;
+	private final DataHelper<Type,Reader,Writer> json;
 	private final String key;
 	final TypeLoader typeLoader;
 	final DataPersister<Entity> dataWareHouse;

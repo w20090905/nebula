@@ -7,13 +7,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
+import java.io.Reader;
+import java.io.Writer;
 import java.util.List;
 
 import nebula.Filter;
 import nebula.data.DataHolder;
-import nebula.data.Entity;
 import nebula.data.DataStore;
-import nebula.data.json.JsonHelper;
+import nebula.data.Entity;
+import nebula.data.json.DataHelper;
 
 import org.simpleframework.http.Address;
 import org.simpleframework.http.Query;
@@ -22,11 +24,11 @@ import org.simpleframework.http.Request;
 import util.FileUtil;
 
 public class EntityListResouce extends AbstractResouce {
-	private final DataHolder<JsonHelper<Entity>> jsonHolder;
+	private final DataHolder<DataHelper<Entity,Reader,Writer>> jsonHolder;
 	private final DataHolder<DataStore<Entity>> datastoreHolder;
 	final EntityFilterBuilder filterBuilder;
 
-	public EntityListResouce(DataHolder<JsonHelper<Entity>> json, DataHolder<DataStore<Entity>> datas, final EntityFilterBuilder filterBuilder) {
+	public EntityListResouce(DataHolder<DataHelper<Entity,Reader,Writer>> json, DataHolder<DataStore<Entity>> datas, final EntityFilterBuilder filterBuilder) {
 		super("text/json", 0, 1000);
 		this.jsonHolder = json;
 		this.datastoreHolder = datas;
@@ -76,7 +78,7 @@ public class EntityListResouce extends AbstractResouce {
 			}
 			Entity inData = jsonHolder.get().readFrom(data, new InputStreamReader(in));
 			
-			store.add(data);
+			store.add(inData);
 			store.flush();
 			return req.getAddress().getPath() + data.getID();
 		} catch (IOException e) {

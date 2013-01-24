@@ -4,24 +4,25 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
 import java.io.Writer;
 import java.sql.Timestamp;
 
 import nebula.data.DataHolder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.json.JsonHelper;
+import nebula.data.json.DataHelper;
 
 import org.simpleframework.http.Address;
 import org.simpleframework.http.Request;
 
 public class EntityResouce extends AbstractResouce {
-	private final DataHolder<JsonHelper<Entity>> jsonHolder;
+	private final DataHolder<DataHelper<Entity,Reader,Writer>> jsonHolder;
 
 	private final String key;
 	private final DataHolder<DataStore<Entity>> datastoreHolder;
 
-	public EntityResouce(DataHolder<JsonHelper<Entity>> json, DataHolder<DataStore<Entity>> datas, String key) {
+	public EntityResouce(DataHolder<DataHelper<Entity,Reader,Writer>> json, DataHolder<DataStore<Entity>> datas, String key) {
 		super("text/json", 0, 0);
 		this.jsonHolder = json;
 		this.datastoreHolder = datas;

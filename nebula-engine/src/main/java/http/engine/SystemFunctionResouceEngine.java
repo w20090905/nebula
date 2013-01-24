@@ -2,13 +2,16 @@ package http.engine;
 
 import http.resource.LoginListResouce;
 
+import java.io.Reader;
+import java.io.Writer;
+
 import javax.inject.Inject;
 
 import nebula.data.DataHolder;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.json.JsonHelper;
+import nebula.data.json.DataHelper;
 import nebula.data.json.JsonHelperProvider;
 
 import org.apache.commons.logging.Log;
@@ -39,7 +42,7 @@ public class SystemFunctionResouceEngine implements ResourceEngine {
 			log.trace("\tid : " + id);
 		}
 
-		JsonHelper<Entity> json = JsonHelperProvider.getSerialize(Entity.class);
+		DataHelper<Entity,Reader,Writer> json = JsonHelperProvider.getSerialize(Entity.class);
 		DataHolder<DataStore<Entity>> users = persistence.define(Entity.class, "User");	
 		DataHolder<DataStore<Entity>> datas = persistence.define(Entity.class, "UserAccessLog");		
 		return new LoginListResouce(json, users,datas);

@@ -2,6 +2,7 @@ package nebula.data.json;
 
 import java.util.List;
 
+import nebula.data.Entity;
 import nebula.lang.Field;
 import nebula.lang.Type;
 
@@ -10,21 +11,32 @@ import org.codehaus.jackson.JsonParser;
 
 import util.InheritHashMap;
 
-public class TypeJsonDataDealer extends DefaultJsonDataDealer<Type> {
+public class TypeJsonDataDealer extends JsonFieldMerger<Type> implements JsonDataHelper<Type> {
 
 	final JsonDataDealer<List<Field>> fieldListDataDealer;
 
 	public TypeJsonDataDealer() {
+		this(null, null);
+	}
+
+	public TypeJsonDataDealer(String fieldName, String frontName) {
+		super(fieldName, frontName);
 		fieldListDataDealer = new ListJsonDataDealer<>(new FieldJsonDataDealer());
 	}
 
+	
 	@Override
-	public Type readFrom(JsonParser in, String name) throws Exception {
+	public Type input(JsonParser in, Entity parent, Type now) throws Exception {
 		throw new UnsupportedOperationException(" Type readFrom(JsonParser in, String name) throws Exception");
 	}
 
 	@Override
-	public void writeTo(String name, Object value, JsonGenerator out) throws Exception {
+	public Type inputWithoutCheck(JsonParser in, Entity parent) throws Exception {
+		throw new UnsupportedOperationException(" Type readFrom(JsonParser in, String name) throws Exception");
+	}
+
+	@Override
+	public void output(JsonGenerator out, Type value) throws Exception {
 		Type type = (Type) value;
 
 		out.writeStartObject();
@@ -34,7 +46,8 @@ public class TypeJsonDataDealer extends DefaultJsonDataDealer<Type> {
 		}
 		out.writeStringField("standalone", type.getStandalone().name());
 		out.writeFieldName("fields");
-		fieldListDataDealer.writeTo(name, type.getFields(), out);
+		
+		fieldListDataDealer.writeTo(null, type.getFields(), out);
 		
 		out.writeFieldName("attrs");		
 		out.writeStartObject();
@@ -48,6 +61,21 @@ public class TypeJsonDataDealer extends DefaultJsonDataDealer<Type> {
 		out.writeStringField("code", type.getCode());
 
 		out.writeEndObject();
+		
+	}
+
+	@Override
+	public Type readFrom(Type d, JsonParser in) {
+		throw new UnsupportedOperationException(" Type readFrom(JsonParser in, String name) throws Exception");
+	}
+
+	@Override
+	public void stringifyTo(Type d, JsonGenerator o) {
+		try {
+			output(o, d);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}	
 	}
 }
 
@@ -56,7 +84,7 @@ class FieldJsonDataDealer extends DefaultJsonDataDealer<Field> {
 	}
 
 	@Override
-	public void writeTo(String name, Object value, JsonGenerator out) throws Exception {
+	public void writeTo(String xxx, Object value, JsonGenerator out) throws Exception {
 		Field field = (Field) value;
 
 		out.writeStartObject();

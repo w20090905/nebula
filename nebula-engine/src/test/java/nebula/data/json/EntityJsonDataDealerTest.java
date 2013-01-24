@@ -21,7 +21,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 	TypeLoaderForTest loader;
 	Type type;
 	JsonFactory factory;
-	EntityJsonDataDealer dataDealer;
+	JsonEntityFieldMerger entityMerger;
 
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -43,10 +43,10 @@ public class EntityJsonDataDealerTest extends TestCase {
 		//@formatter:on		
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
-		dataDealer = new EntityJsonDataDealer(type);
+		entityMerger = new JsonEntityFieldMerger(type);
 	}
 
-	public final void test_SimpleType_ReadFromJsonParserString() throws Exception {
+	public final void test_SimpleType_readJsonParserString() throws Exception {
 
 		// Type For Test
 		//@formatter:off
@@ -59,7 +59,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(txtType)).get(0);
 
-		dataDealer = new EntityJsonDataDealer(type);
+		entityMerger = new JsonEntityFieldMerger(type);
 
 		// Type For Test
 		//@formatter:off
@@ -72,11 +72,8 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		StringReader in = new StringReader(txtData);
 		JsonParser jsonParser = factory.createJsonParser(in);
-		
-		JsonToken token =  jsonParser.nextToken();
-		assertEquals(JsonToken.START_OBJECT, token);
-		
-		Entity entity = dataDealer.readFrom(jsonParser, "root");
+
+		Entity entity = entityMerger.readFrom(new EditableEntity(), jsonParser);
 		assertNotNull(entity);
 
 		assertEquals("wangshilian", entity.get("PersonName"));
@@ -84,7 +81,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 	}
 
-	public final void test_SimpleType_WriteToStringObjectJsonGenerator() throws Exception {
+	public final void test_SimpleType_stringifyToStringObjectJsonGenerator() throws Exception {
 
 		//@formatter:off
 		String text = "" +
@@ -96,7 +93,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dataDealer = new EntityJsonDataDealer(type);
+		entityMerger = new JsonEntityFieldMerger(type);
 		StringWriter out = new StringWriter();
 		JsonGenerator gen = factory.createJsonGenerator(out);
 
@@ -104,16 +101,15 @@ public class EntityJsonDataDealerTest extends TestCase {
 		entity.put("PersonName", "wangshilian");
 		entity.put("Age", 12L);
 
-		dataDealer.writeTo("root", entity, gen);
+		entityMerger.stringifyTo(entity, gen);
 
 		gen.flush();
 
 		assertEquals("{\"PersonName\":\"wangshilian\",\"Age\":12}", out.toString());
 		System.out.println(out.toString());
 	}
-	
 
-	public final void test_SimpleTypeWith_LongArray_ReadFromJsonParserString() throws Exception {
+	public final void test_SimpleTypeWith_LongArray_readJsonParserString() throws Exception {
 
 		// Type For Test
 		//@formatter:off
@@ -126,7 +122,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(txtType)).get(0);
 
-		dataDealer = new EntityJsonDataDealer(type);
+		entityMerger = new JsonEntityFieldMerger(type);
 
 		// Type For Test
 		//@formatter:off
@@ -135,24 +131,21 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		StringReader in = new StringReader(txtData);
 		JsonParser jsonParser = factory.createJsonParser(in);
-		
-		JsonToken token =  jsonParser.nextToken();
-		assertEquals(JsonToken.START_OBJECT, token);
-		
-		Entity entity = dataDealer.readFrom(jsonParser, "root");
+
+		Entity entity = entityMerger.readFrom(new EditableEntity(), jsonParser);
 		assertNotNull(entity);
 
 		assertEquals("wangshilian", entity.get("PersonName"));
-		
+
 		@SuppressWarnings("unchecked")
-		List<Long> ages = (List<Long>)entity.get("Age");
-		
+		List<Long> ages = (List<Long>) entity.get("Age");
+
 		assertEquals(2, ages.size());
-		assertEquals(10L, (long)ages.get(0));
-		assertEquals(20L, (long)ages.get(1));
+		assertEquals(10L, (long) ages.get(0));
+		assertEquals(20L, (long) ages.get(1));
 	}
 
-	public final void test_SimpleTypeWith_LongArray_WriteToStringObjectJsonGenerator() throws Exception {
+	public final void test_SimpleTypeWith_LongArray_stringifyToStringObjectJsonGenerator() throws Exception {
 
 		//@formatter:off
 		String text = "" +
@@ -164,7 +157,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dataDealer = new EntityJsonDataDealer(type);
+		entityMerger = new JsonEntityFieldMerger(type);
 		StringWriter out = new StringWriter();
 		JsonGenerator gen = factory.createJsonGenerator(out);
 
@@ -176,7 +169,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 		ages.add(20L);
 		entity.put("Age", ages);
 
-		dataDealer.writeTo("root", entity, gen);
+		entityMerger.stringifyTo(entity, gen);
 
 		gen.flush();
 
@@ -184,7 +177,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 		System.out.println(out.toString());
 	}
 
-	public final void test_SimpleTypeWith_StringArray_ReadFromJsonParserString() throws Exception {
+	public final void test_SimpleTypeWith_StringArray_readJsonParserString() throws Exception {
 
 		// Type For Test
 		//@formatter:off
@@ -197,7 +190,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(txtType)).get(0);
 
-		dataDealer = new EntityJsonDataDealer(type);
+		entityMerger = new JsonEntityFieldMerger(type);
 
 		// Type For Test
 		//@formatter:off
@@ -207,29 +200,26 @@ public class EntityJsonDataDealerTest extends TestCase {
 		StringReader in = new StringReader(txtData);
 		JsonParser jsonParser = factory.createJsonParser(in);
 
-		JsonToken token =  jsonParser.nextToken();
-		assertEquals(JsonToken.START_OBJECT, token);
-		
-		Entity entity = dataDealer.readFrom(jsonParser, "root");
+
+		Entity entity = entityMerger.readFrom(new EditableEntity(), jsonParser);
 		assertNotNull(entity);
 
 		@SuppressWarnings("unchecked")
-		List<String> personName = (List<String>)entity.get("PersonName");
-		
+		List<String> personName = (List<String>) entity.get("PersonName");
+
 		assertEquals(2, personName.size());
-		assertEquals("wangshilian", (String)personName.get(0));
-		assertEquals("houyihong", (String)personName.get(1));
-		
-		
+		assertEquals("wangshilian", (String) personName.get(0));
+		assertEquals("houyihong", (String) personName.get(1));
+
 		@SuppressWarnings("unchecked")
-		List<Long> ages = (List<Long>)entity.get("Age");
-		
+		List<Long> ages = (List<Long>) entity.get("Age");
+
 		assertEquals(2, ages.size());
-		assertEquals(10L, (long)ages.get(0));
-		assertEquals(20L, (long)ages.get(1));
+		assertEquals(10L, (long) ages.get(0));
+		assertEquals(20L, (long) ages.get(1));
 	}
-	
-	public final void test_SimpleTypeWith_StringArray_WriteToStringObjectJsonGenerator() throws Exception {
+
+	public final void test_SimpleTypeWith_StringArray_stringifyToStringObjectJsonGenerator() throws Exception {
 
 		//@formatter:off
 		String text = "" +
@@ -241,7 +231,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dataDealer = new EntityJsonDataDealer(type);
+		entityMerger = new JsonEntityFieldMerger(type);
 		StringWriter out = new StringWriter();
 		JsonGenerator gen = factory.createJsonGenerator(out);
 
@@ -258,7 +248,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 		ages.add(20L);
 		entity.put("Age", ages);
 
-		dataDealer.writeTo("root", entity, gen);
+		entityMerger.stringifyTo(entity, gen);
 
 		gen.flush();
 
@@ -266,7 +256,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 		System.out.println(out.toString());
 	}
 
-	public final void test_SimpleTypeWith_Entity_ReadFromJsonParserString() throws Exception {
+	public final void test_SimpleTypeWith_Entity_readJsonParserString() throws Exception {
 
 		//@formatter:off
 		String txtType = "" +
@@ -282,7 +272,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(txtType)).get(0);
 
-		dataDealer = new EntityJsonDataDealer(type);
+		entityMerger = new JsonEntityFieldMerger(type);
 
 		// Type For Test
 		//@formatter:off
@@ -292,20 +282,16 @@ public class EntityJsonDataDealerTest extends TestCase {
 		StringReader in = new StringReader(txtData);
 		JsonParser jsonParser = factory.createJsonParser(in);
 
-		JsonToken token =  jsonParser.nextToken();
-		assertEquals(JsonToken.START_OBJECT, token);
-		
-		Entity entity = dataDealer.readFrom(jsonParser, "root");
+		Entity entity = entityMerger.readFrom(new EditableEntity(), jsonParser);
 		assertNotNull(entity);
 
 		assertEquals("wangshilian", entity.get("PersonName"));
 		assertEquals(12L, entity.get("Age"));
-		assertEquals("Kunming",entity.get("EducationsSchool"));
-		assertEquals(2012L,entity.get("EducationsYear"));
+		assertEquals("Kunming", entity.get("EducationsSchool"));
+		assertEquals(2012L, entity.get("EducationsYear"));
 	}
-	
-	
-	public final void test_SimpleTypeWith_Entity_WriteToStringObjectJsonGenerator() throws Exception {
+
+	public final void test_SimpleTypeWith_Entity_stringifyToStringObjectJsonGenerator() throws Exception {
 
 		//@formatter:off
 		String text = "" +
@@ -321,7 +307,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dataDealer = new EntityJsonDataDealer(type);
+		entityMerger = new JsonEntityFieldMerger(type);
 		StringWriter out = new StringWriter();
 		JsonGenerator gen = factory.createJsonGenerator(out);
 
@@ -329,21 +315,21 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		entity.put("PersonName", "wangshilian");
 		entity.put("Age", 12L);
-		
-		
+
 		entity.put("EducationsSchool", "Kunming");
 		entity.put("EducationsYear", 2012L);
 
-		dataDealer.writeTo("root", entity, gen);
+		entityMerger.stringifyTo(entity, gen);
 
 		gen.flush();
 
-		assertEquals("{\"PersonName\":\"wangshilian\",\"Age\":12,\"EducationsSchool\":\"Kunming\",\"EducationsYear\":2012}", out.toString());
+		assertEquals(
+				"{\"PersonName\":\"wangshilian\",\"Age\":12,\"EducationsSchool\":\"Kunming\",\"EducationsYear\":2012}",
+				out.toString());
 		System.out.println(out.toString());
 	}
-	
 
-	public final void test_SimpleTypeWith_EntityArray_ReadFromJsonParserString() throws Exception {
+	public final void test_SimpleTypeWith_EntityArray_readJsonParserString() throws Exception {
 
 		//@formatter:off
 		String txtType = "" +
@@ -359,36 +345,31 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(txtType)).get(0);
 
-		dataDealer = new EntityJsonDataDealer(type);
+		entityMerger = new JsonEntityFieldMerger(type);
 
 		// Type For Test
 		//@formatter:off
-		String txtData = "{\"PersonName\":\"wangshilian\",\"Age\":12,\"Educations\":[{\"School\":\"Kunming\",\"Year\":1996},{\"School\":\"Hongqi\",\"Year\":1993}]}";
+		String txtData = "{\"PersonName\":\"wangshilian\",\"Age\":12,\"Educations\":[{\"_idx\":\"0\",\"School\":\"Kunming\",\"Year\":1996},{\"_idx\":\"1\",\"School\":\"Hongqi\",\"Year\":1993}]}";
 		//@formatter:on	
 
 		StringReader in = new StringReader(txtData);
 		JsonParser jsonParser = factory.createJsonParser(in);
 
-		JsonToken token =  jsonParser.nextToken();
-		assertEquals(JsonToken.START_OBJECT, token);
-		
-		Entity entity = dataDealer.readFrom(jsonParser, "root");
+		Entity entity = entityMerger.readFrom(new EditableEntity(), jsonParser);
 		assertNotNull(entity);
 
 		assertEquals("wangshilian", entity.get("PersonName"));
 		assertEquals(12L, entity.get("Age"));
-		
-		
-		@SuppressWarnings("unchecked")
-		List<Entity> educations = (List<Entity>)entity.get("Educations");
-		
-		assertEquals(2, educations.size());
-//		assertEquals(10L, (Entity)educations.get(0));
-//		assertEquals(20L, (Entity)educations.get(1));
-	}
-	
 
-	public final void test_SimpleTypeWith_EntityArray_WriteToStringObjectJsonGenerator() throws Exception {
+		@SuppressWarnings("unchecked")
+		List<Entity> educations = (List<Entity>) entity.get("Educations");
+
+		assertEquals(2, educations.size());
+		// assertEquals(10L, (Entity)educations.get(0));
+		// assertEquals(20L, (Entity)educations.get(1));
+	}
+
+	public final void test_SimpleTypeWith_EntityArray_stringifyToStringObjectJsonGenerator() throws Exception {
 
 		//@formatter:off
 		String text = "" +
@@ -404,7 +385,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dataDealer = new EntityJsonDataDealer(type);
+		entityMerger = new JsonEntityFieldMerger(type);
 		StringWriter out = new StringWriter();
 		JsonGenerator gen = factory.createJsonGenerator(out);
 
@@ -417,22 +398,24 @@ public class EntityJsonDataDealerTest extends TestCase {
 		Entity education = new EditableEntity();
 		education.put("School", "Kunming");
 		education.put("Year", 1996L);
-		
+
 		educations.add(education);
-		
+
 		education = new EditableEntity();
 		education.put("School", "Hongqi");
 		education.put("Year", 1993L);
-		
-		educations.add(education);
-		
-		entity.put("Educations",educations);
 
-		dataDealer.writeTo("root", entity, gen);
+		educations.add(education);
+
+		entity.put("Educations", educations);
+
+		entityMerger.stringifyTo(entity, gen);
 
 		gen.flush();
 
-		assertEquals("{\"PersonName\":\"wangshilian\",\"Age\":12,\"Educations\":[{\"School\":\"Kunming\",\"Year\":1996},{\"School\":\"Hongqi\",\"Year\":1993}]}", out.toString());
+		assertEquals(
+				"{\"PersonName\":\"wangshilian\",\"Age\":12,\"Educations\":[{\"School\":\"Kunming\",\"Year\":1996},{\"School\":\"Hongqi\",\"Year\":1993}]}",
+				out.toString());
 		System.out.println(out.toString());
 	}
 }

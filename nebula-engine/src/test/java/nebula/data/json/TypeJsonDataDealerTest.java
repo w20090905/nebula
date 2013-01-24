@@ -48,7 +48,7 @@ public class TypeJsonDataDealerTest extends TestCase {
 		StringReader in = new StringReader("");
 		JsonParser jsonParser = factory.createJsonParser(in);
 		try {
-			dataDealer.readFrom(jsonParser, "root");
+			dataDealer.readFrom(null, jsonParser);
 			fail("Should throw new exception"); // TODO
 		} catch (RuntimeException e) {
 			assertTrue(e instanceof UnsupportedOperationException);
@@ -72,7 +72,7 @@ public class TypeJsonDataDealerTest extends TestCase {
 		StringWriter out = new StringWriter();
 		JsonGenerator gen = factory.createJsonGenerator(out);
 
-		dataDealer.writeTo("root", type, gen);
+		dataDealer.stringifyTo(type, gen);
 		gen.flush();
 
 		assertEquals(
@@ -82,8 +82,8 @@ public class TypeJsonDataDealerTest extends TestCase {
 						+ "\"attrs\":{\"formatType\":\"text\",\"maxLength\":\"60\"}},"
 						+ "{\"name\":\"Age\",\"isKey\":false,\"isCore\":false,\"isArray\":false,\"typeName\":\"Age\","
 						+ "\"attrs\":{\"formatType\":\"numeric\",\"inputSize\":\"small\",\"max\":\"160\",\"maxLength\":\"3\",\"min\":\"0\",\"precision\":\"10\",\"scale\":\"2\"}}],"
-						+ "\"attrs\":{},\"mutable\":false," + "\"code\":\"type Person {\\t!PersonName Name;\\tAge;};\\n\"}",
-				out.toString());
+						+ "\"attrs\":{},\"mutable\":false,"
+						+ "\"code\":\"type Person {\\t!PersonName Name;\\tAge;};\\n\"}", out.toString());
 		System.out.println(out.toString());
 	}
 

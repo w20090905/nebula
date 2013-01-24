@@ -5,10 +5,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
+import java.io.Reader;
+import java.io.Writer;
 import java.util.List;
 
 import nebula.Filter;
-import nebula.data.json.JsonHelper;
+import nebula.data.json.DataHelper;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 
@@ -22,13 +24,13 @@ import util.FileUtil;
 
 public class TypeListResouce extends AbstractResouce {
 	private static Log log = LogFactory.getLog(TypeListResouce.class);
-	private final JsonHelper<Type> json;
+	private final DataHelper<Type,Reader,Writer> json;
 	final TypeLoader typeLoader;
 	final TypeFilterBuilder filterBuilder;
 
 	protected byte[] cacheAll;
 
-	public TypeListResouce(TypeLoader typeLoader, JsonHelper<Type> json, TypeFilterBuilder filterBuilder) {
+	public TypeListResouce(TypeLoader typeLoader, DataHelper<Type,Reader,Writer> json, TypeFilterBuilder filterBuilder) {
 		super("text/json", 0, 10000);
 		this.typeLoader = typeLoader;
 		this.json = json;
