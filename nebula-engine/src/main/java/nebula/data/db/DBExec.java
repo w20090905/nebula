@@ -73,7 +73,7 @@ public class DBExec {
 		}
 	}
 
-	public void init() {
+	private void init() {
 		Statement statement = null;
 		boolean exist = false;
 		ResultSet rs = null;

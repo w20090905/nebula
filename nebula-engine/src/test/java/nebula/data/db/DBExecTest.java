@@ -355,7 +355,7 @@ public class DBExecTest extends TestCase {
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
 		Map<String, Object> data;
 		dbExec = config.getPersister(t);
-		dbExec.init();
+		//dbExec.init();
 
 		try {
 			data = dbExec.get("wangshilian");
@@ -379,7 +379,7 @@ public class DBExecTest extends TestCase {
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
 
 		dbExec = config.getPersister(t);
-		dbExec.init();
+//		dbExec.init();
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
