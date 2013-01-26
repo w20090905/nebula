@@ -59,7 +59,7 @@ public class DBExec {
 		userColumns = builder.getUserColumns();
 		systemColumns = builder.getSystemColumns();
 
-		this.init();
+		this.ensureDBSchema();
 
 		try {
 			SQL_GET = conn.prepareStatement(builder.builderGet());
@@ -73,7 +73,7 @@ public class DBExec {
 		}
 	}
 
-	private void init() {
+	private void ensureDBSchema() {
 		Statement statement = null;
 		boolean exist = false;
 		ResultSet rs = null;
