@@ -5,13 +5,13 @@ import nebula.data.Entity;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonParser;
 
-class BasicTypeFieldMerger extends JsonFieldMerger<Object> {
-	public BasicTypeFieldMerger(String fieldName, String frontName, JsonDataDealer<?> dataDealer) {
+class BasicTypeFieldSerializer extends DefaultFieldSerializer<Object> {
+	public BasicTypeFieldSerializer(String fieldName, String frontName, DefaultTypeAdapter<?> dataDealer) {
 		super(fieldName, frontName);
 		this.dataDealer = dataDealer;
 	}
 
-	public JsonDataDealer<?> dataDealer;
+	public DefaultTypeAdapter<?> dataDealer;
 
 	@Override
 	public Object input(JsonParser in, Entity parent, Object now) throws Exception {

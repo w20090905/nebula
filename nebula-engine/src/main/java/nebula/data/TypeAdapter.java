@@ -1,6 +1,6 @@
 package nebula.data;
 
-public interface DataDealer<T, R, W> {
+public interface TypeAdapter<T, R, W> {
 	T readFrom(R in, int index) throws Exception;
 
 	T readFrom(R in, String name) throws Exception;

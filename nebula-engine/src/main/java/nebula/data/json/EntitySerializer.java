@@ -15,15 +15,15 @@ import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonToken;
 
-class JsonEntityFieldMerger extends JsonFieldMerger<Entity> implements JsonDataHelper<Entity> {
-	final List<JsonFieldMerger<?>> pageFields;
-	final Map<String, JsonFieldMerger<?>> pageFieldsMap;
+class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDataHelper<Entity> {
+	final List<DefaultFieldSerializer<?>> pageFields;
+	final Map<String, DefaultFieldSerializer<?>> pageFieldsMap;
 
-	public JsonEntityFieldMerger(Type type) {
+	public EntitySerializer(Type type) {
 		this(type, null, null);
 	}
 
-	public JsonEntityFieldMerger(Type type, String fieldName, String frontName) {
+	public EntitySerializer(Type type, String fieldName, String frontName) {
 		super(fieldName, frontName);
 
 		pageFields = new CopyOnWriteArrayList<>();
@@ -31,8 +31,8 @@ class JsonEntityFieldMerger extends JsonFieldMerger<Entity> implements JsonDataH
 		init(type);
 	}
 
-	private JsonDataDealer<?> getBasicDateDealer(RawTypes rawType) {
-		JsonDataDealer<?> dataDealer;
+	private DefaultTypeAdapter<?> getBasicDateDealer(RawTypes rawType) {
+		DefaultTypeAdapter<?> dataDealer;
 		switch (rawType) {
 		case String:
 			dataDealer = new StringJsonDataDealer();
@@ -67,8 +67,8 @@ class JsonEntityFieldMerger extends JsonFieldMerger<Entity> implements JsonDataH
 		return dataDealer;
 	}
 
-	private void addPageField(String name, String pageFieldName, JsonDataDealer<?> jsonDataDealer) {
-		BasicTypeFieldMerger pageField = new BasicTypeFieldMerger(pageFieldName, name, jsonDataDealer);
+	private void addPageField(String name, String pageFieldName, DefaultTypeAdapter<?> jsonDataDealer) {
+		BasicTypeFieldSerializer pageField = new BasicTypeFieldSerializer(pageFieldName, name, jsonDataDealer);
 		this.pageFields.add(pageField);
 		this.pageFieldsMap.put(pageFieldName, pageField);
 	}
@@ -79,8 +79,8 @@ class JsonEntityFieldMerger extends JsonFieldMerger<Entity> implements JsonDataH
 	// this.pageFieldsMap.put(pageFieldName, entityMerger);
 	// }
 
-	private void addEntityListPageField(String name, String pageFieldName, JsonEntityFieldMerger entityMerger) {
-		JsonFieldMerger<List<Entity>> pageField = new JsonEntityListFieldMerger(pageFieldName, name, entityMerger);
+	private void addEntityListPageField(String name, String pageFieldName, EntitySerializer entityMerger) {
+		DefaultFieldSerializer<List<Entity>> pageField = new EntityListSerializer(pageFieldName, name, entityMerger);
 		this.pageFields.add(pageField);
 		this.pageFieldsMap.put(pageFieldName, pageField);
 	}
@@ -91,7 +91,7 @@ class JsonEntityFieldMerger extends JsonFieldMerger<Entity> implements JsonDataH
 			switch (f.getRefer()) {
 			case ByVal:
 				if (f.isArray()) {
-					JsonDataDealer<?> dataDealer = new ListJsonDataDealer<>(
+					DefaultTypeAdapter<?> dataDealer = new ListJsonDataDealer<>(
 							getBasicDateDealer(f.getType().getRawType()));
 					addPageField(f.getName(), f.getName(), dataDealer);
 				} else {
@@ -100,7 +100,7 @@ class JsonEntityFieldMerger extends JsonFieldMerger<Entity> implements JsonDataH
 				break;
 			case Inline:
 				if (f.isArray()) {
-					addEntityListPageField(f.getName(), f.getName(), new JsonEntityFieldMerger(f.getType()));
+					addEntityListPageField(f.getName(), f.getName(), new EntitySerializer(f.getType()));
 				} else {
 					rT = f.getType();
 					for (Field rf : rT.getFields()) {
@@ -143,9 +143,9 @@ class JsonEntityFieldMerger extends JsonFieldMerger<Entity> implements JsonDataH
 		out.writeFieldName("_idx");
 		out.writeNumber((long) current.get("_idx"));
 
-		for (JsonFieldMerger<?> f : pageFields) {
+		for (DefaultFieldSerializer<?> f : pageFields) {
 			@SuppressWarnings("unchecked")
-			JsonFieldMerger<Object> m = (JsonFieldMerger<Object>) f;
+			DefaultFieldSerializer<Object> m = (DefaultFieldSerializer<Object>) f;
 			out.writeFieldName(f.fieldName);
 			m.output(out, entity.get(f.fieldName));
 		}
@@ -156,9 +156,9 @@ class JsonEntityFieldMerger extends JsonFieldMerger<Entity> implements JsonDataH
 	public void output(JsonGenerator out, Entity current) throws Exception {
 		Entity entity = current;
 		out.writeStartObject();
-		for (JsonFieldMerger<?> f : pageFields) {
+		for (DefaultFieldSerializer<?> f : pageFields) {
 			@SuppressWarnings("unchecked")
-			JsonFieldMerger<Object> m = (JsonFieldMerger<Object>) f;
+			DefaultFieldSerializer<Object> m = (DefaultFieldSerializer<Object>) f;
 			out.writeFieldName(f.fieldName);
 			m.output(out, entity.get(f.fieldName));
 		}
@@ -195,7 +195,7 @@ class JsonEntityFieldMerger extends JsonFieldMerger<Entity> implements JsonDataH
 	Entity doReadWithoutCheck(JsonParser in, Entity current) throws Exception {
 		Entity entity = current;
 
-		JsonMerger<Object> f = null;
+		DefaultFieldSerializer<Object> f = null;
 		JsonToken token;
 		token = in.getCurrentToken();
 		assert token == JsonToken.START_OBJECT;
@@ -208,7 +208,7 @@ class JsonEntityFieldMerger extends JsonFieldMerger<Entity> implements JsonDataH
 
 			in.nextToken();// To value
 
-			f = (JsonMerger<Object>) pageFieldsMap.get(frontName);
+			f = (DefaultFieldSerializer<Object>) pageFieldsMap.get(frontName);
 			if (f != null) {
 				f.inputWithoutCheck(in, entity);
 			}
@@ -223,7 +223,7 @@ class JsonEntityFieldMerger extends JsonFieldMerger<Entity> implements JsonDataH
 	Entity doReadInList(JsonParser in, List<Entity> now) throws Exception {
 		Entity entity = null;
 
-		JsonFieldMerger<Object> f = null;
+		DefaultFieldSerializer<Object> f = null;
 		JsonToken token;
 		token = in.getCurrentToken();
 		assert token == JsonToken.START_OBJECT;
@@ -241,7 +241,7 @@ class JsonEntityFieldMerger extends JsonFieldMerger<Entity> implements JsonDataH
 
 				in.nextToken();// To value
 
-				f = (JsonFieldMerger<Object>) pageFieldsMap.get(frontName);
+				f = (DefaultFieldSerializer<Object>) pageFieldsMap.get(frontName);
 				if (f != null) {
 					f.input(in, entity, entity.get(f.fieldName));
 				}
@@ -259,7 +259,7 @@ class JsonEntityFieldMerger extends JsonFieldMerger<Entity> implements JsonDataH
 
 				in.nextToken();// To value
 
-				f = (JsonFieldMerger<Object>) pageFieldsMap.get(frontName);
+				f = (DefaultFieldSerializer<Object>) pageFieldsMap.get(frontName);
 				if (f != null) {
 					f.inputWithoutCheck(in, entity);
 				}
@@ -275,7 +275,7 @@ class JsonEntityFieldMerger extends JsonFieldMerger<Entity> implements JsonDataH
 	private Entity doRead(JsonParser in, Entity current) throws Exception {
 		Entity entity = current;
 
-		JsonFieldMerger<Object> f = null;
+		DefaultFieldSerializer<Object> f = null;
 		JsonToken token;
 		token = in.getCurrentToken();
 		assert token == JsonToken.START_OBJECT;
@@ -288,7 +288,7 @@ class JsonEntityFieldMerger extends JsonFieldMerger<Entity> implements JsonDataH
 
 			in.nextToken();// To value
 
-			f = (JsonFieldMerger<Object>) pageFieldsMap.get(frontName);
+			f = (DefaultFieldSerializer<Object>) pageFieldsMap.get(frontName);
 			if (f != null) {
 				f.input(in, entity, entity.get(f.fieldName));
 			}

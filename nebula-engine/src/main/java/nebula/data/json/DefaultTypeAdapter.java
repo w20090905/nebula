@@ -9,11 +9,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import nebula.data.TypeAdapter;
+
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonToken;
 
-abstract class DefaultJsonDataDealer<T> implements JsonDataDealer<T> {
+abstract class DefaultTypeAdapter<T> implements TypeAdapter<T,JsonParser,JsonGenerator> {
 	public T readFrom(JsonParser in, int index) throws Exception {
 		throw new UnsupportedOperationException("readFrom(JsonParser in,int index)");
 	}
@@ -23,7 +25,7 @@ abstract class DefaultJsonDataDealer<T> implements JsonDataDealer<T> {
 	}
 }
 
-class BooleanJsonDataDealer extends DefaultJsonDataDealer<Boolean> {
+class BooleanJsonDataDealer extends DefaultTypeAdapter<Boolean> {
 	public Boolean readFrom(JsonParser parser, String name) throws Exception {
 		JsonToken token = parser.getCurrentToken();
 		assert token == JsonToken.VALUE_TRUE || token == JsonToken.VALUE_FALSE;
@@ -35,7 +37,7 @@ class BooleanJsonDataDealer extends DefaultJsonDataDealer<Boolean> {
 	}
 }
 
-class LongJsonDataDealer extends DefaultJsonDataDealer<Long> {
+class LongJsonDataDealer extends DefaultTypeAdapter<Long> {
 	public Long readFrom(JsonParser parser, String name) throws Exception {
 		JsonToken token = parser.getCurrentToken();
 		assert token == JsonToken.VALUE_NUMBER_INT;
@@ -47,7 +49,7 @@ class LongJsonDataDealer extends DefaultJsonDataDealer<Long> {
 	}
 }
 
-class DecimalJsonDataDealer extends DefaultJsonDataDealer<BigDecimal> {
+class DecimalJsonDataDealer extends DefaultTypeAdapter<BigDecimal> {
 	public BigDecimal readFrom(JsonParser parser, String name) throws Exception {
 		JsonToken token = parser.getCurrentToken();
 		assert token == JsonToken.VALUE_NUMBER_FLOAT;
@@ -59,7 +61,7 @@ class DecimalJsonDataDealer extends DefaultJsonDataDealer<BigDecimal> {
 	}
 }
 
-class StringJsonDataDealer extends DefaultJsonDataDealer<String> {
+class StringJsonDataDealer extends DefaultTypeAdapter<String> {
 	public String readFrom(JsonParser parser, String name) throws Exception {
 		JsonToken token = parser.getCurrentToken();
 		assert token == JsonToken.VALUE_STRING;
@@ -71,7 +73,7 @@ class StringJsonDataDealer extends DefaultJsonDataDealer<String> {
 	}
 }
 
-class TextBlockJsonDataDealer extends DefaultJsonDataDealer<String> {
+class TextBlockJsonDataDealer extends DefaultTypeAdapter<String> {
 	public String readFrom(JsonParser parser, String name) throws Exception {
 		JsonToken token = parser.getCurrentToken();
 		assert token == JsonToken.VALUE_STRING;
@@ -83,7 +85,7 @@ class TextBlockJsonDataDealer extends DefaultJsonDataDealer<String> {
 	}
 }
 
-class DateJsonDataDealer extends DefaultJsonDataDealer<Date> {
+class DateJsonDataDealer extends DefaultTypeAdapter<Date> {
 	public Date readFrom(JsonParser parser, String name) throws Exception {
 		JsonToken token = parser.getCurrentToken();
 		assert token == JsonToken.VALUE_STRING;
@@ -95,7 +97,7 @@ class DateJsonDataDealer extends DefaultJsonDataDealer<Date> {
 	}
 }
 
-class TimeJsonDataDealer extends DefaultJsonDataDealer<Time> {
+class TimeJsonDataDealer extends DefaultTypeAdapter<Time> {
 	public Time readFrom(JsonParser parser, String name) throws Exception {
 		JsonToken token = parser.getCurrentToken();
 		assert token == JsonToken.VALUE_STRING;
@@ -107,7 +109,7 @@ class TimeJsonDataDealer extends DefaultJsonDataDealer<Time> {
 	}
 }
 
-class DatetimeJsonDataDealer extends DefaultJsonDataDealer<Timestamp> {
+class DatetimeJsonDataDealer extends DefaultTypeAdapter<Timestamp> {
 	final DateFormat formater = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
 
 	public Timestamp readFrom(JsonParser parser, String name) throws Exception {
@@ -121,7 +123,7 @@ class DatetimeJsonDataDealer extends DefaultJsonDataDealer<Timestamp> {
 	}
 }
 
-class TimestampJsonDataDealer extends DefaultJsonDataDealer<Timestamp> {
+class TimestampJsonDataDealer extends DefaultTypeAdapter<Timestamp> {
 	final DateFormat formater = new SimpleDateFormat("YYYY-MM-DD HH:mm:DD.sss");
 
 	public Timestamp readFrom(JsonParser parser, String name) throws Exception {
@@ -135,10 +137,10 @@ class TimestampJsonDataDealer extends DefaultJsonDataDealer<Timestamp> {
 	}
 }
 
-class ListJsonDataDealer<T> extends DefaultJsonDataDealer<List<T>> {
-	final JsonDataDealer<T> jsonFieldDealer;
+class ListJsonDataDealer<T> extends DefaultTypeAdapter<List<T>> {
+	final DefaultTypeAdapter<T> jsonFieldDealer;
 
-	public ListJsonDataDealer(JsonDataDealer<T> jsonFieldDealer) {
+	public ListJsonDataDealer(DefaultTypeAdapter<T> jsonFieldDealer) {
 		this.jsonFieldDealer = jsonFieldDealer;
 	}
 

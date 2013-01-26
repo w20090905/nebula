@@ -10,13 +10,13 @@ import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonToken;
 
-public class JsonEntityListFieldMerger extends JsonFieldMerger<List<Entity>> {
-	public JsonEntityListFieldMerger(String fieldName, String frontName, JsonEntityFieldMerger entityMerger) {
+public class EntityListSerializer extends DefaultFieldSerializer<List<Entity>> {
+	public EntityListSerializer(String fieldName, String frontName, EntitySerializer entityMerger) {
 		super(fieldName, frontName);
 		this.entityMerger = entityMerger;
 	}
 
-	final JsonEntityFieldMerger entityMerger;
+	final EntitySerializer entityMerger;
 
 	@Override
 	public List<Entity> input(JsonParser in, Entity parent, List<Entity> current) throws Exception {

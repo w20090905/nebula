@@ -11,15 +11,15 @@ import org.codehaus.jackson.JsonParser;
 
 import util.InheritHashMap;
 
-public class TypeJsonDataDealer extends JsonFieldMerger<Type> implements JsonDataHelper<Type> {
+public class TypeSerializer extends DefaultFieldSerializer<Type> implements JsonDataHelper<Type> {
 
-	final JsonDataDealer<List<Field>> fieldListDataDealer;
+	final DefaultTypeAdapter<List<Field>> fieldListDataDealer;
 
-	public TypeJsonDataDealer() {
+	public TypeSerializer() {
 		this(null, null);
 	}
 
-	public TypeJsonDataDealer(String fieldName, String frontName) {
+	public TypeSerializer(String fieldName, String frontName) {
 		super(fieldName, frontName);
 		fieldListDataDealer = new ListJsonDataDealer<>(new FieldJsonDataDealer());
 	}
@@ -79,7 +79,7 @@ public class TypeJsonDataDealer extends JsonFieldMerger<Type> implements JsonDat
 	}
 }
 
-class FieldJsonDataDealer extends DefaultJsonDataDealer<Field> {
+class FieldJsonDataDealer extends DefaultTypeAdapter<Field> {
 	public FieldJsonDataDealer() {
 	}
 

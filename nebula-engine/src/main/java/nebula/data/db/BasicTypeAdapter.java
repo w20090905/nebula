@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.Time;
 import java.sql.Timestamp;
 
-abstract class DefaultDBFieldDealer<T> implements DbDataDealer<T> {
+import nebula.data.TypeAdapter;
+
+abstract class BasicTypeAdapter<T> implements TypeAdapter<T, ResultSet, PreparedStatement> {
 	public T readFrom(ResultSet in, String name) throws Exception {
 		throw new UnsupportedOperationException("readFrom(ResultSet in, String name)");
 	}
@@ -16,7 +18,7 @@ abstract class DefaultDBFieldDealer<T> implements DbDataDealer<T> {
 	}
 }
 
-class BooleanDataDealer extends DefaultDBFieldDealer<Boolean> {
+class DbBooleanTypeAdapter extends BasicTypeAdapter<Boolean> {
 	@Override
 	public Boolean readFrom(ResultSet res, int index) throws Exception {
 		return res.getBoolean(index);
@@ -28,7 +30,7 @@ class BooleanDataDealer extends DefaultDBFieldDealer<Boolean> {
 	}
 }
 
-class Long_BigInt_DataDealer extends DefaultDBFieldDealer<Long> {
+class DbLong_BigInt_TypeAdapter extends BasicTypeAdapter<Long> {
 	@Override
 	public Long readFrom(ResultSet res, int index) throws Exception {
 		return res.getLong(index);
@@ -39,7 +41,7 @@ class Long_BigInt_DataDealer extends DefaultDBFieldDealer<Long> {
 	}
 }
 
-class DecimalDealer extends DefaultDBFieldDealer<BigDecimal> {
+class DbDecimalDealer extends BasicTypeAdapter<BigDecimal> {
 	@Override
 	public BigDecimal readFrom(ResultSet res, int i) throws Exception {
 		return res.getBigDecimal(i);
@@ -51,7 +53,7 @@ class DecimalDealer extends DefaultDBFieldDealer<BigDecimal> {
 	}
 }
 
-class TextBlock_Varchar_DataDealer extends DefaultDBFieldDealer<String> {
+class DbTextBlock_Varchar_TypeAdapter extends BasicTypeAdapter<String> {
 	@Override
 	public String readFrom(ResultSet res, int i) throws Exception {
 		return res.getString(i);
@@ -63,7 +65,7 @@ class TextBlock_Varchar_DataDealer extends DefaultDBFieldDealer<String> {
 	}
 }
 
-class String_Varchar_DataDealer extends DefaultDBFieldDealer<String> {
+class DbString_Varchar_TypeAdapter extends BasicTypeAdapter<String> {
 	@Override
 	public String readFrom(ResultSet res, int i) throws Exception {
 		return res.getString(i);
@@ -75,7 +77,7 @@ class String_Varchar_DataDealer extends DefaultDBFieldDealer<String> {
 	}
 }
 
-class DateDataDealer extends DefaultDBFieldDealer<Date> {
+class DbDateTypeAdapter extends BasicTypeAdapter<Date> {
 	@Override
 	public Date readFrom(ResultSet res, int i) throws Exception {
 		return res.getDate(i);
@@ -87,7 +89,7 @@ class DateDataDealer extends DefaultDBFieldDealer<Date> {
 	}
 }
 
-class TimeDataDealer extends DefaultDBFieldDealer<Time> {
+class DbTimeTypeAdapter extends BasicTypeAdapter<Time> {
 	@Override
 	public Time readFrom(ResultSet res, int i) throws Exception {
 		return res.getTime(i);
@@ -99,7 +101,7 @@ class TimeDataDealer extends DefaultDBFieldDealer<Time> {
 	}
 }
 
-class DatetimeDataDealer extends DefaultDBFieldDealer<Timestamp> {
+class DbDatetimeTypeAdapter extends BasicTypeAdapter<Timestamp> {
 	@Override
 	public Timestamp readFrom(ResultSet res, int i) throws Exception {
 		return res.getTimestamp(i);
@@ -111,7 +113,7 @@ class DatetimeDataDealer extends DefaultDBFieldDealer<Timestamp> {
 	}
 }
 
-class TimestampDataDealer extends DefaultDBFieldDealer<Timestamp> {
+class DbTimestampTypeAdapter extends BasicTypeAdapter<Timestamp> {
 	@Override
 	public Timestamp readFrom(ResultSet res, int i) throws Exception {
 		return res.getTimestamp(i);

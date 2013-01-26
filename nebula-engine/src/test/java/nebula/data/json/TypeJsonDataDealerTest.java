@@ -15,7 +15,7 @@ public class TypeJsonDataDealerTest extends TestCase {
 	TypeLoaderForTest loader;
 	Type type;
 	JsonFactory factory;
-	TypeJsonDataDealer dataDealer;
+	TypeSerializer dataDealer;
 
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -28,7 +28,7 @@ public class TypeJsonDataDealerTest extends TestCase {
 	}
 
 	public final void testTypeJsonDataDealer() throws Exception {
-		dataDealer = new TypeJsonDataDealer();
+		dataDealer = new TypeSerializer();
 
 	}
 
@@ -44,7 +44,7 @@ public class TypeJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dataDealer = new TypeJsonDataDealer();
+		dataDealer = new TypeSerializer();
 		StringReader in = new StringReader("");
 		JsonParser jsonParser = factory.createJsonParser(in);
 		try {
@@ -68,7 +68,7 @@ public class TypeJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dataDealer = new TypeJsonDataDealer();
+		dataDealer = new TypeSerializer();
 		StringWriter out = new StringWriter();
 		JsonGenerator gen = factory.createJsonGenerator(out);
 

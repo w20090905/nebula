@@ -21,7 +21,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 	TypeLoaderForTest loader;
 	Type type;
 	JsonFactory factory;
-	JsonEntityFieldMerger entityMerger;
+	EntitySerializer entityMerger;
 
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -43,7 +43,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 		//@formatter:on		
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
-		entityMerger = new JsonEntityFieldMerger(type);
+		entityMerger = new EntitySerializer(type);
 	}
 
 	public final void test_SimpleType_readJsonParserString() throws Exception {
@@ -59,7 +59,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(txtType)).get(0);
 
-		entityMerger = new JsonEntityFieldMerger(type);
+		entityMerger = new EntitySerializer(type);
 
 		// Type For Test
 		//@formatter:off
@@ -93,7 +93,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		entityMerger = new JsonEntityFieldMerger(type);
+		entityMerger = new EntitySerializer(type);
 		StringWriter out = new StringWriter();
 		JsonGenerator gen = factory.createJsonGenerator(out);
 
@@ -122,7 +122,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(txtType)).get(0);
 
-		entityMerger = new JsonEntityFieldMerger(type);
+		entityMerger = new EntitySerializer(type);
 
 		// Type For Test
 		//@formatter:off
@@ -157,7 +157,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		entityMerger = new JsonEntityFieldMerger(type);
+		entityMerger = new EntitySerializer(type);
 		StringWriter out = new StringWriter();
 		JsonGenerator gen = factory.createJsonGenerator(out);
 
@@ -190,7 +190,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(txtType)).get(0);
 
-		entityMerger = new JsonEntityFieldMerger(type);
+		entityMerger = new EntitySerializer(type);
 
 		// Type For Test
 		//@formatter:off
@@ -231,7 +231,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		entityMerger = new JsonEntityFieldMerger(type);
+		entityMerger = new EntitySerializer(type);
 		StringWriter out = new StringWriter();
 		JsonGenerator gen = factory.createJsonGenerator(out);
 
@@ -272,7 +272,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(txtType)).get(0);
 
-		entityMerger = new JsonEntityFieldMerger(type);
+		entityMerger = new EntitySerializer(type);
 
 		// Type For Test
 		//@formatter:off
@@ -307,7 +307,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		entityMerger = new JsonEntityFieldMerger(type);
+		entityMerger = new EntitySerializer(type);
 		StringWriter out = new StringWriter();
 		JsonGenerator gen = factory.createJsonGenerator(out);
 
@@ -345,7 +345,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(txtType)).get(0);
 
-		entityMerger = new JsonEntityFieldMerger(type);
+		entityMerger = new EntitySerializer(type);
 
 		// Type For Test
 		//@formatter:off
@@ -385,7 +385,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		entityMerger = new JsonEntityFieldMerger(type);
+		entityMerger = new EntitySerializer(type);
 		StringWriter out = new StringWriter();
 		JsonGenerator gen = factory.createJsonGenerator(out);
 

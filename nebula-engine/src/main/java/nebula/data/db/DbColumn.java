@@ -21,39 +21,39 @@ public class DbColumn {
 
 		switch (rawType) {
 		case Boolean:
-			datadealer = new BooleanDataDealer();
+			datadealer = new DbBooleanTypeAdapter();
 			jdbcType = Types.BOOLEAN;
 			break;
 		case Long:
-			datadealer = new Long_BigInt_DataDealer();
+			datadealer = new DbLong_BigInt_TypeAdapter();
 			jdbcType = Types.BIGINT;
 			break;
 		case Decimal:
-			datadealer = new DecimalDealer();
+			datadealer = new DbDecimalDealer();
 			jdbcType = Types.DECIMAL;
 			break;
 		case String:
-			datadealer = new String_Varchar_DataDealer();
+			datadealer = new DbString_Varchar_TypeAdapter();
 			jdbcType = Types.VARCHAR;
 			break;
 		case Text:
-			datadealer = new TextBlock_Varchar_DataDealer();
+			datadealer = new DbTextBlock_Varchar_TypeAdapter();
 			jdbcType = Types.VARCHAR;			
 			break;
 		case Date:
-			datadealer = new DateDataDealer();
+			datadealer = new DbDateTypeAdapter();
 			jdbcType = Types.DATE;
 			break;
 		case Time:
-			datadealer = new TimeDataDealer();
+			datadealer = new DbTimeTypeAdapter();
 			jdbcType = Types.TIME;
 			break;
 		case Datetime:
-			datadealer = new TimestampDataDealer();
+			datadealer = new DbTimestampTypeAdapter();
 			jdbcType = Types.TIMESTAMP;
 			break;
 		case Timestamp:
-			datadealer = new TimestampDataDealer();
+			datadealer = new DbTimestampTypeAdapter();
 			jdbcType = Types.TIMESTAMP;
 			break;
 		default:
@@ -65,7 +65,7 @@ public class DbColumn {
 //	int precision, int scale
 	
 	
-	public final DbDataDealer<?> datadealer;
+	public final BasicTypeAdapter<?> datadealer;
 	public final String fieldName;
 	public final String columnName;
 	public final boolean key;

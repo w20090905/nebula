@@ -3,8 +3,8 @@ package nebula.data.json;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonParser;
 
-import nebula.data.DataDealer;
+import nebula.data.TypeAdapter;
 
-public interface JsonDataDealer<T> extends DataDealer<T,JsonParser,JsonGenerator> {
+public interface JsonTypeAdapter<T> extends TypeAdapter<T,JsonParser,JsonGenerator> {
 
 }
