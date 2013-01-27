@@ -32,6 +32,8 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 		@Override
 		public List<Boolean> readFrom(ResultSet res, int index) throws Exception {
 			String strValue = res.getString(index);
+			if (strValue == null || strValue.length() == 0) return new ArrayList<Boolean>();
+
 			String[] strValues = strValue.split(",");
 			List<Boolean> values = new ArrayList<>(strValues.length);
 
@@ -71,6 +73,7 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 		@Override
 		public List<Long> readFrom(ResultSet res, int index) throws Exception {
 			String strValue = res.getString(index);
+			if (strValue == null || strValue.length() == 0) return new ArrayList<Long>();
 			String[] strValues = strValue.split(",");
 			List<Long> values = new ArrayList<>(strValues.length);
 
@@ -110,6 +113,7 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 		@Override
 		public List<BigDecimal> readFrom(ResultSet res, int index) throws Exception {
 			String strValue = res.getString(index);
+			if (strValue == null || strValue.length() == 0) return new ArrayList<BigDecimal>();
 			String[] strValues = strValue.split(",");
 			List<BigDecimal> values = new ArrayList<>(strValues.length);
 
@@ -151,19 +155,15 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 		@Override
 		public List<String> readFrom(ResultSet res, int index) throws Exception {
 			String strValue = res.getString(index);
-			if (strValue != null && strValue.length() > 0) {
-				String[] strValues = sep.split(strValue, 0);
+			if (strValue == null || strValue.length() == 0) return new ArrayList<String>();
 
-				List<String> values = new ArrayList<>(strValues.length);
-				for (String v : strValues) {
-					values.add(v);
-				}
-				return values;
+			String[] strValues = sep.split(strValue, 0);
 
-			} else {
-				List<String> values = new ArrayList<>(0);
-				return values;
+			List<String> values = new ArrayList<>(strValues.length);
+			for (String v : strValues) {
+				values.add(v);
 			}
+			return values;
 		}
 
 		@Override
@@ -192,11 +192,12 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 	}
 
 	static class DbString_Varchar_TypeAdapter extends ListDataDealer<String> {
-		Pattern sep = Pattern.compile("\\]\\]\\^\\~\\[\\[");
+		Pattern sep = Pattern.compile("(\\]\\]\\^\\~\\[\\[)");
 
 		@Override
 		public List<String> readFrom(ResultSet res, int index) throws Exception {
 			String strValue = res.getString(index);
+			if (strValue == null || strValue.length() == 0) return new ArrayList<String>();
 			String[] strValues = sep.split(strValue, 0);
 			List<String> values = new ArrayList<>(strValues.length);
 
@@ -235,6 +236,7 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 		@Override
 		public List<Date> readFrom(ResultSet res, int index) throws Exception {
 			String strValue = res.getString(index);
+			if (strValue == null || strValue.length() == 0) return new ArrayList<Date>();
 			String[] strValues = strValue.split(",");
 			List<Date> values = new ArrayList<>(strValues.length);
 
@@ -274,6 +276,7 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 		@Override
 		public List<Time> readFrom(ResultSet res, int index) throws Exception {
 			String strValue = res.getString(index);
+			if (strValue == null || strValue.length() == 0) return new ArrayList<Time>();
 			String[] strValues = strValue.split(",");
 			List<Time> values = new ArrayList<>(strValues.length);
 
@@ -313,6 +316,8 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 		@Override
 		public List<Timestamp> readFrom(ResultSet res, int index) throws Exception {
 			String strValue = res.getString(index);
+			if (strValue == null || strValue.length() == 0) return new ArrayList<Timestamp>();
+
 			String[] strValues = strValue.split(",");
 			List<Timestamp> values = new ArrayList<>(strValues.length);
 
@@ -352,6 +357,7 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 		@Override
 		public List<Timestamp> readFrom(ResultSet res, int index) throws Exception {
 			String strValue = res.getString(index);
+			if (strValue == null || strValue.length() == 0) return new ArrayList<Timestamp>();
 			String[] strValues = strValue.split(",");
 			List<Timestamp> values = new ArrayList<>(strValues.length);
 
