@@ -9,7 +9,7 @@
 		<thead>
 			<tr>
 				<th>#</th>
-				[#list type.fields as field][#if !field.array]
+				[#list type.fields as field][#if !field.array && field.importance != "Unimportant"]
 					[#switch field.refer]
 					[#case "ByVal"]
 				<th>${field.name}</th>
