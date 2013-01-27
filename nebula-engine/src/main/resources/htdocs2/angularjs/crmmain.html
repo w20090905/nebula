@@ -10,7 +10,12 @@ ul.contacts {
 
 ul.contacts li {
 	padding: 5px 1em;
-	border-bottom: dotted 1px #E1E4E5;
+	border: solid 1px #E1E4E5;
+	border-top: none;
+}
+
+ul.contacts li:FIRST-CHILD {
+	border: solid 1px #E1E4E5;
 }
 
 ul.contacts .logo {
@@ -26,8 +31,13 @@ ul.contacts .content {
 
 ul.contacts .content pre{
 	margin-bottom: 3px;
+	min-height: 40px;
 }
 
+ul.contacts .info{
+	font: 6px/8px "宋体","Arial Narrow";
+	color: #dddddd;
+}
 
 div.right{
 	float: right;
