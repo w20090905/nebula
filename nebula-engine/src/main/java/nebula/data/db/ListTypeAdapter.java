@@ -13,9 +13,9 @@ import java.util.regex.Pattern;
 
 import nebula.lang.RawTypes;
 
-public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
+public abstract class ListTypeAdapter<T> extends BasicTypeAdapter<List<T>> {
 
-	static EnumMap<RawTypes, BasicTypeAdapter<?>> typeMaps = new EnumMap<RawTypes, BasicTypeAdapter<?>>(RawTypes.class);
+	private static EnumMap<RawTypes, ListTypeAdapter<?>> typeMaps = new EnumMap<RawTypes, ListTypeAdapter<?>>(RawTypes.class);
 	static {
 		typeMaps.put(RawTypes.Boolean, new DbBooleanTypeAdapter());
 		typeMaps.put(RawTypes.Long, new DbLong_BigInt_TypeAdapter());
@@ -27,8 +27,12 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 		typeMaps.put(RawTypes.Datetime, new DbTimestampTypeAdapter());
 		typeMaps.put(RawTypes.Timestamp, new DbTimestampTypeAdapter());
 	};
+	
+	public static ListTypeAdapter<?> getAdapter(RawTypes rawType){
+		 return typeMaps.get(rawType);
+	 }
 
-	static class DbBooleanTypeAdapter extends ListDataDealer<Boolean> {
+	static class DbBooleanTypeAdapter extends ListTypeAdapter<Boolean> {
 		@Override
 		public List<Boolean> readFrom(ResultSet res, int index) throws Exception {
 			String strValue = res.getString(index);
@@ -69,7 +73,7 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 		}
 	}
 
-	static class DbLong_BigInt_TypeAdapter extends ListDataDealer<Long> {
+	static class DbLong_BigInt_TypeAdapter extends ListTypeAdapter<Long> {
 		@Override
 		public List<Long> readFrom(ResultSet res, int index) throws Exception {
 			String strValue = res.getString(index);
@@ -109,7 +113,7 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 		}
 	}
 
-	static class DbDecimalDealer extends ListDataDealer<BigDecimal> {
+	static class DbDecimalDealer extends ListTypeAdapter<BigDecimal> {
 		@Override
 		public List<BigDecimal> readFrom(ResultSet res, int index) throws Exception {
 			String strValue = res.getString(index);
@@ -149,7 +153,7 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 		}
 	}
 
-	static class DbTextBlock_Varchar_TypeAdapter extends ListDataDealer<String> {
+	static class DbTextBlock_Varchar_TypeAdapter extends ListTypeAdapter<String> {
 		Pattern sep = Pattern.compile("\\]\\]\\^\\~\\[\\[");
 
 		@Override
@@ -191,7 +195,7 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 		}
 	}
 
-	static class DbString_Varchar_TypeAdapter extends ListDataDealer<String> {
+	static class DbString_Varchar_TypeAdapter extends ListTypeAdapter<String> {
 		Pattern sep = Pattern.compile("(\\]\\]\\^\\~\\[\\[)");
 
 		@Override
@@ -232,7 +236,7 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 		}
 	}
 
-	static class DbDateTypeAdapter extends ListDataDealer<Date> {
+	static class DbDateTypeAdapter extends ListTypeAdapter<Date> {
 		@Override
 		public List<Date> readFrom(ResultSet res, int index) throws Exception {
 			String strValue = res.getString(index);
@@ -241,8 +245,11 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 			List<Date> values = new ArrayList<>(strValues.length);
 
 			for (String v : strValues) {
-
-				values.add(Date.valueOf(v));
+				if(v.length()==0 || "null".equals(v)){
+					values.add(null);
+				}else{
+					values.add(Date.valueOf(v));					
+				}
 			}
 
 			return values;
@@ -260,7 +267,9 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 			StringBuilder sb = new StringBuilder();
 
 			for (Date v : values) {
-				sb.append(v);
+				if(v!=null){
+					sb.append(v);
+				}
 				sb.append(',');
 			}
 
@@ -272,7 +281,7 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 		}
 	}
 
-	static class DbTimeTypeAdapter extends ListDataDealer<Time> {
+	static class DbTimeTypeAdapter extends ListTypeAdapter<Time> {
 		@Override
 		public List<Time> readFrom(ResultSet res, int index) throws Exception {
 			String strValue = res.getString(index);
@@ -312,7 +321,7 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 		}
 	}
 
-	static class DbDatetimeTypeAdapter extends ListDataDealer<Timestamp> {
+	static class DbDatetimeTypeAdapter extends ListTypeAdapter<Timestamp> {
 		@Override
 		public List<Timestamp> readFrom(ResultSet res, int index) throws Exception {
 			String strValue = res.getString(index);
@@ -353,7 +362,7 @@ public abstract class ListDataDealer<T> extends BasicTypeAdapter<List<T>> {
 		}
 	}
 
-	static class DbTimestampTypeAdapter extends ListDataDealer<Timestamp> {
+	static class DbTimestampTypeAdapter extends ListTypeAdapter<Timestamp> {
 		@Override
 		public List<Timestamp> readFrom(ResultSet res, int index) throws Exception {
 			String strValue = res.getString(index);

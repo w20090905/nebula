@@ -38,12 +38,14 @@ public class DBExec {
 	final private PreparedStatement SQL_LIST;
 	// final private String SQL_COUNT;
 
-	final BasicTypeFieldSerializer[] userColumns;
-	final BasicTypeFieldSerializer[] systemColumns;
+	final DBColumn[] userColumns;
+	final DBColumn[] systemColumns;
 	// final private String[] realFields;
 	// final private DbColumn[] keyColumns;
 	final SqlHelper builder;
 	final DbConfiguration config;
+	
+	final EntityFieldSerializer serializer;
 
 	// final private Map<String, Integer> map;
 
@@ -60,6 +62,8 @@ public class DBExec {
 
 		userColumns = builder.getUserColumns();
 		systemColumns = builder.getSystemColumns();
+		
+		serializer = builder.getEntitySerializer();
 
 		this.ensureDBSchema();
 
@@ -81,9 +85,9 @@ public class DBExec {
 		ResultSet rs = null;
 		try {
 
-			final SmartList<BasicTypeFieldSerializer> mapColumns = new SmartListImp<BasicTypeFieldSerializer>("DbColumn", new IDAdapter<BasicTypeFieldSerializer>() {
+			final SmartList<DBColumn> mapColumns = new SmartListImp<DBColumn>("DbColumn", new IDAdapter<DBColumn>() {
 				@Override
-				public String getID(BasicTypeFieldSerializer data) {
+				public String getID(DBColumn data) {
 					return data.columnName;
 				}
 			});
@@ -111,15 +115,15 @@ public class DBExec {
 
 				ArrayList<String> needDeletedColumns = new ArrayList<>();
 				Map<String, String> allColumns = new HashMap<>();
-				ArrayList<BasicTypeFieldSerializer> typeNotMatchColumns = new ArrayList<BasicTypeFieldSerializer>();
-				ArrayList<BasicTypeFieldSerializer> typeSizeNotMatchColumns = new ArrayList<BasicTypeFieldSerializer>();
+				ArrayList<DBColumn> typeNotMatchColumns = new ArrayList<DBColumn>();
+				ArrayList<DBColumn> typeSizeNotMatchColumns = new ArrayList<DBColumn>();
 
 				String curKeys = "";
 
 				for (int i = 1; i <= columnsSize; i++) {
 					String columnName = metaData.getColumnName(i);
 
-					BasicTypeFieldSerializer newColumn = mapColumns.get(columnName);
+					DBColumn newColumn = mapColumns.get(columnName);
 					if (newColumn == null) {
 						if (!columnName.endsWith("_")) {
 							needDeletedColumns.add(columnName);
@@ -145,7 +149,7 @@ public class DBExec {
 									int newPrecision = newColumn.precision > precision ? newColumn.precision
 											: precision;
 									int newScale = newColumn.scale > scale ? newColumn.scale : scale;
-									typeSizeNotMatchColumns.add(new BasicTypeFieldSerializer(newColumn.fieldName, newColumn.columnName,
+									typeSizeNotMatchColumns.add(new DBColumn(newColumn.fieldName, newColumn.columnName,
 											newColumn.key, newColumn.nullable, false,newColumn.rawType, newColumn.size,
 											newPrecision, newScale));
 								}
@@ -175,8 +179,8 @@ public class DBExec {
 				conn.commit();
 
 				StringBuffer newKeys = new StringBuffer();
-				ArrayList<BasicTypeFieldSerializer> notExistColumns = new ArrayList<BasicTypeFieldSerializer>();
-				for (BasicTypeFieldSerializer f : mapColumns) {
+				ArrayList<DBColumn> notExistColumns = new ArrayList<DBColumn>();
+				for (DBColumn f : mapColumns) {
 					if (!allColumns.containsKey(f.columnName)) {
 						notExistColumns.add(f);
 					}
@@ -214,7 +218,7 @@ public class DBExec {
 					// add not exist column to DB
 					if (notExistColumns.size() > 0) {
 						statement = conn.createStatement();
-						for (BasicTypeFieldSerializer c : notExistColumns) {
+						for (DBColumn c : notExistColumns) {
 							log.trace("##\t" + builder.builderAddColumn(c));
 							statement.addBatch(builder.builderAddColumn(c));
 						}
@@ -236,7 +240,7 @@ public class DBExec {
 					// update don't match column to DB
 					if (typeNotMatchColumns.size() > 0) {
 						statement = conn.createStatement();
-						for (BasicTypeFieldSerializer c : typeNotMatchColumns) {
+						for (DBColumn c : typeNotMatchColumns) {
 							log.trace("##\t" + builder.builderModifyColumnDateType(c));
 							statement.addBatch(builder.builderRemoveColumn(c.columnName));
 							statement.addBatch(builder.builderAddColumn(c));
@@ -258,7 +262,7 @@ public class DBExec {
 					// update size don't match column to DB
 					if (typeSizeNotMatchColumns.size() > 0) {
 						statement = conn.createStatement();
-						for (BasicTypeFieldSerializer c : typeSizeNotMatchColumns) {
+						for (DBColumn c : typeSizeNotMatchColumns) {
 							log.trace("##\t" + builder.builderModifyColumnDateType(c));
 							statement.addBatch(builder.builderModifyColumnDateType(c));
 						}
@@ -376,7 +380,7 @@ public class DBExec {
 		ResultSet res = null;
 		try {
 
-			int pos = fromEntity(pstmt, v);
+			int pos = serializer.fromEntity(pstmt, v);
 
 			for (int i = 0; i < keys.length; i++) {
 				pstmt.setObject(pos + i, keys[i]);
@@ -411,7 +415,7 @@ public class DBExec {
 			List<EditableEntity> list = new ArrayList<EditableEntity>();
 
 			while (res.next()) {
-				EditableEntity v = toEntity(res);
+				EditableEntity v = serializer.toEntity(res);
 				list.add(v);
 			}
 
@@ -433,29 +437,6 @@ public class DBExec {
 		}
 	}
 
-	int fromEntity(PreparedStatement prepareStatement, Entity entity) throws Exception {
-		int pos = 1;
-		for (BasicTypeFieldSerializer c : userColumns) {
-			pos = c.output(prepareStatement, entity.get(c.fieldName), pos);
-		}
-		return pos;
-	}
-
-	EditableEntity toEntity(ResultSet result) throws Exception {
-		EditableEntity entity = new EditableEntity();
-
-		int pos = 1;
-		for (BasicTypeFieldSerializer c : userColumns) {
-			if(log.isDebugEnabled()){
-				log.debug("\t" +  result.getMetaData().getColumnName(pos) + " : " + result.getObject(pos));
-			}
-			pos = c.inputWithoutCheck(result, pos, entity);
-		}
-		for (BasicTypeFieldSerializer c : systemColumns) {
-			pos = c.inputWithoutCheck(result, pos, entity);
-		}
-		return entity;
-	}
 
 	public void close() {
 		try {

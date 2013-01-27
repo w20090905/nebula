@@ -8,13 +8,12 @@ import nebula.lang.RawTypes;
 
 public class BasicTypeFieldSerializer extends DefaultFieldSerializer<Object> {
 
-	private final BasicTypeAdapter<?> dataDealer;
+	protected final BasicTypeAdapter<?> dataDealer;
 
-	public BasicTypeFieldSerializer(String fieldName, String columnName, boolean key, boolean nullable, boolean array,
-			RawTypes rawType, long size, int precision, int scale) {
-		super(fieldName, columnName, key, nullable, array, rawType, size, precision, scale);
-		if (array) dataDealer = ListDataDealer.typeMaps.get(rawType);
-		else dataDealer = BasicTypeAdapter.typeMaps.get(rawType);
+	public BasicTypeFieldSerializer(String fieldName, String columnName, boolean array, RawTypes rawType) {
+		super(fieldName, columnName);
+		if (array) dataDealer = ListTypeAdapter.getAdapter(rawType);
+		else dataDealer = BasicTypeAdapter.getAdapter(rawType);
 
 	}
 

@@ -21,8 +21,9 @@ abstract class BasicTypeAdapter<T extends Object> implements TypeAdapter<T, Resu
 		throw new UnsupportedOperationException("writeTo(int index,T value)");
 	}
 
-	static EnumMap<RawTypes, BasicTypeAdapter<?>> typeMaps = new EnumMap<RawTypes, BasicTypeAdapter<?>>(RawTypes.class);
+	private final static EnumMap<RawTypes, BasicTypeAdapter<?>> typeMaps;
 	static {
+		typeMaps = new EnumMap<RawTypes, BasicTypeAdapter<?>>(RawTypes.class);
 		typeMaps.put(RawTypes.Boolean, new DbBooleanTypeAdapter());
 		typeMaps.put(RawTypes.Long, new DbLong_BigInt_TypeAdapter());
 		typeMaps.put(RawTypes.Decimal, new DbDecimalDealer());
@@ -33,6 +34,10 @@ abstract class BasicTypeAdapter<T extends Object> implements TypeAdapter<T, Resu
 		typeMaps.put(RawTypes.Datetime, new DbTimestampTypeAdapter());
 		typeMaps.put(RawTypes.Timestamp, new DbTimestampTypeAdapter());
 	}
+	
+	public static BasicTypeAdapter<?> getAdapter(RawTypes rawType){
+		 return typeMaps.get(rawType);
+	 }
 }
 
 class DbBooleanTypeAdapter extends BasicTypeAdapter<Boolean> {
