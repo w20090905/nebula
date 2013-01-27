@@ -1,7 +1,7 @@
 package nebula.frame;
 
 import nebula.Filter;
-import nebula.Identifiable;
+import nebula.IDAdapter;
 import nebula.SmartList;
 import junit.framework.TestCase;
 
@@ -17,9 +17,9 @@ public class SmartListImpTest extends TestCase {
 	Person p = null;
 
 	protected void setUp() throws Exception {
-		list = new SmartListImp<>(name, new Identifiable<Person>() {
+		list = new SmartListImp<>(name, new IDAdapter<Person>() {
 			@Override
-			public String getId(Person data) {
+			public String getID(Person data) {
 				return data.name;
 			}
 		});

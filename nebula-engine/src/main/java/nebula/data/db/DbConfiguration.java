@@ -71,7 +71,7 @@ public abstract class DbConfiguration {
 	}
 	
 
-	protected String toColumnDefine(DbColumn column) {
+	protected String toColumnDefine(BasicTypeFieldSerializer column) {
 		String typeName = typeNames.get(column.rawType);
 		switch (column.rawType) {
 		case Decimal:

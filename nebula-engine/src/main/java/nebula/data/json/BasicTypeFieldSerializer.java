@@ -14,19 +14,17 @@ class BasicTypeFieldSerializer extends DefaultFieldSerializer<Object> {
 	public DefaultTypeAdapter<?> dataDealer;
 
 	@Override
-	public Object input(JsonParser in, Entity parent, Object now) throws Exception {
+	public void input(JsonParser in, Entity parent, Object now) throws Exception {
 		Object newly = dataDealer.readFrom(in, frontName);
 		if (newly != null && !newly.equals(now)) {
 			parent.put(fieldName, newly);
 		}
-		return newly;
 	}
 
 	@Override
-	public Object inputWithoutCheck(JsonParser in, Entity parent) throws Exception {
+	public void inputWithoutCheck(JsonParser in, Entity parent) throws Exception {
 		Object newly = dataDealer.readFrom(in, frontName);
 		parent.put(fieldName, newly);
-		return newly;
 	}
 
 	@Override

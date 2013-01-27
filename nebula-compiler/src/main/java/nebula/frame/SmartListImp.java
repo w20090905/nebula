@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import nebula.Filter;
-import nebula.Identifiable;
+import nebula.IDAdapter;
 import nebula.SmartList;
 
 public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartList<E> {
@@ -18,7 +18,7 @@ public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartLis
 
 	final Map<String, E> indexes = new HashMap<String, E>();
 	final Map<String, Integer> indexI = new HashMap<String, Integer>();
-	final Identifiable<E> identifier;
+	final IDAdapter<E> identifier;
 
 	private final String name;
 
@@ -26,20 +26,20 @@ public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartLis
 		return name;
 	}
 
-	public SmartListImp(String name, Identifiable<E> identifier) {
+	public SmartListImp(String name, IDAdapter<E> identifier) {
 		super();
 		this.identifier = identifier;
 		this.name = name;
 	}
 
-	public SmartListImp(String name, Identifiable<E> identifier, Collection<? extends E> c) {
+	public SmartListImp(String name, IDAdapter<E> identifier, Collection<? extends E> c) {
 		super(c);
 		this.name = name;
 		this.identifier = identifier;
 		rebuildIndex();
 	}
 
-	public SmartListImp(String name, Identifiable<E> identifier, E[] toCopyIn) {
+	public SmartListImp(String name, IDAdapter<E> identifier, E[] toCopyIn) {
 		super(toCopyIn);
 		this.name = name;
 		this.identifier = identifier;
@@ -54,7 +54,7 @@ public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartLis
 			while (list.hasNext()) {
 				int i = list.nextIndex();
 				E e = list.next();
-				String key = identifier.getId(e);
+				String key = identifier.getID(e);
 				indexI.put(key, i);
 				indexes.put(key, e);
 			}
@@ -67,7 +67,7 @@ public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartLis
 			while (list.hasNext()) {
 				int i = list.nextIndex();
 				E e = list.next();
-				String key = identifier.getId(e);
+				String key = identifier.getID(e);
 				indexI.put(key, i);
 				indexes.put(key, e);
 			}
@@ -92,7 +92,7 @@ public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartLis
 	}
 
 	public int indexOfByKey(E element) {
-		Integer in = indexI.get(identifier.getId(element));
+		Integer in = indexI.get(identifier.getID(element));
 		if(in!=null){
 			return in;
 		}else{

@@ -300,23 +300,21 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 	}
 
 	@Override
-	public Entity input(JsonParser in, Entity parent, Entity current) throws Exception {
+	public void input(JsonParser in, Entity parent, Entity current) throws Exception {
 		if (current == null) {
 			current = new EditableEntity();
 			parent.put(fieldName, current);
 		}
-		Entity entity = doRead(in, current);
-		return entity;
+		doRead(in, current);
 	}
 
 	@Override
-	public Entity inputWithoutCheck(JsonParser in, Entity parent) throws Exception {
+	public void inputWithoutCheck(JsonParser in, Entity parent) throws Exception {
 
 		Entity current = new EditableEntity();
 		parent.put(fieldName, current);
 
-		Entity entity = doReadWithoutCheck(in, current);
-		return entity;
+		doReadWithoutCheck(in, current);
 	}
 
 }

@@ -2,8 +2,8 @@ package nebula.frame;
 
 import java.util.Map;
 
-import nebula.Identifiable;
+import nebula.IDAdapter;
 
-public interface AutoIdentifiable<E> extends Identifiable<E> {
+public interface AutoIdentifiable<E> extends IDAdapter<E> {
 	public void set(Map<String, E> map, E data);
 }

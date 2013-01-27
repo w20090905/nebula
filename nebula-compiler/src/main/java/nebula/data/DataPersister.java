@@ -1,7 +1,8 @@
 package nebula.data;
 
 
-public interface DataPersister<V extends HasID>{
+
+public interface DataPersister<V extends Identifiable>{
 	void load();
 	void unload();
 	

@@ -15,6 +15,8 @@ import nebula.lang.Field;
 import nebula.lang.Type;
 
 public class EntityDataStore implements DataStore<Entity> {
+	public static final String KEY_NAME = "ID"; 
+	
 	final DataPersister<Entity> persistence;
 	final Type type;
 

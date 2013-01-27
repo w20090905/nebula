@@ -55,37 +55,37 @@ public class PersistenceDBTest extends TestCase {
 		assertEquals("wangshilian", v.get("Name"));
 		assertEquals("wangshilian", store.get("wangshilian").get("ID"));
 
-		v.put("length", 120);
+		v.put("Height", 120L);
 
 		assertEquals(true, v.isDirty());
-		assertEquals(120, v.get("length"));
-		assertEquals(null, store.get("wangshilian").get("length"));
+		assertEquals(120L, v.get("Height"));
+		assertEquals(null, store.get("wangshilian").get("Height"));
 
 		store.flush();
 
 		assertEquals(false, v.isDirty());
-		assertEquals(120, v.get("length"));
-		assertEquals(120, store.get("wangshilian").get("length"));
+		assertEquals(120L, v.get("Height"));
+		assertEquals(120L, store.get("wangshilian").get("Height"));
 
-		v.put("length", 180);
+		v.put("Height", 180L);
 
 		assertEquals(true, v.isDirty());
-		assertEquals(180, v.get("length"));
-		assertEquals(120, store.get("wangshilian").get("length"));
+		assertEquals(180L, v.get("Height"));
+		assertEquals(120L, store.get("wangshilian").get("Height"));
 
 		p.clearChanges();
 		p.flush();
 
 		assertEquals(true, v.isDirty());
-		assertEquals(180, v.get("length"));
-		assertEquals(120, store.get("wangshilian").get("length"));
+		assertEquals(180L, v.get("Height"));
+		assertEquals(120L, store.get("wangshilian").get("Height"));
 
 		p.add(v);
 		p.flush();
 
 		assertEquals(false, v.isDirty());
-		assertEquals(180, v.get("length"));
-		assertEquals(180, store.get("wangshilian").get("length"));
+		assertEquals(180L, v.get("Height"));
+		assertEquals(180L, store.get("wangshilian").get("Height"));
 	}
 
 	// public final void testRemove() {

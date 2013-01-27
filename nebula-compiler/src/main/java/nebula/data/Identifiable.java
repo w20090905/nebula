@@ -1,5 +1,5 @@
 package nebula.data;
 
-public interface HasID {
+public interface Identifiable {
 	String getID();
 }
