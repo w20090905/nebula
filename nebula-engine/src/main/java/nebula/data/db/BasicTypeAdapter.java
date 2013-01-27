@@ -6,15 +6,31 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.EnumMap;
 
 import nebula.data.TypeAdapter;
+import nebula.lang.RawTypes;
 
-abstract class BasicTypeAdapter<T> implements TypeAdapter<T, ResultSet, PreparedStatement> {
+abstract class BasicTypeAdapter<T extends Object> implements TypeAdapter<T, ResultSet, PreparedStatement> {
 	public T readFrom(ResultSet in, String name) throws Exception {
 		throw new UnsupportedOperationException("readFrom(ResultSet in, String name)");
 	}
+
 	public void writeTo(String name, Object value, PreparedStatement gen) throws Exception {
 		throw new UnsupportedOperationException("writeTo(int index,T value)");
+	}
+
+	static EnumMap<RawTypes, BasicTypeAdapter<?>> typeMaps = new EnumMap<RawTypes, BasicTypeAdapter<?>>(RawTypes.class);
+	static {
+		typeMaps.put(RawTypes.Boolean, new DbBooleanTypeAdapter());
+		typeMaps.put(RawTypes.Long, new DbLong_BigInt_TypeAdapter());
+		typeMaps.put(RawTypes.Decimal, new DbDecimalDealer());
+		typeMaps.put(RawTypes.String, new DbString_Varchar_TypeAdapter());
+		typeMaps.put(RawTypes.Text, new DbTextBlock_Varchar_TypeAdapter());
+		typeMaps.put(RawTypes.Date, new DbDateTypeAdapter());
+		typeMaps.put(RawTypes.Time, new DbTimeTypeAdapter());
+		typeMaps.put(RawTypes.Datetime, new DbTimestampTypeAdapter());
+		typeMaps.put(RawTypes.Timestamp, new DbTimestampTypeAdapter());
 	}
 }
 
@@ -35,6 +51,7 @@ class DbLong_BigInt_TypeAdapter extends BasicTypeAdapter<Long> {
 	public Long readFrom(ResultSet res, int index) throws Exception {
 		return res.getLong(index);
 	}
+
 	@Override
 	public void writeTo(int index, Object v, PreparedStatement res) throws Exception {
 		res.setLong(index, v != null ? (Long) v : 0);

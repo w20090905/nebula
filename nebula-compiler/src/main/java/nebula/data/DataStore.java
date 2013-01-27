@@ -5,7 +5,7 @@ import java.util.List;
 import nebula.Filter;
 import nebula.lang.Type;
 
-public interface DataStore<V extends HasID> extends HasID {
+public interface DataStore<V extends Identifiable> extends Identifiable {
 	void load();
 	void unload();
 	

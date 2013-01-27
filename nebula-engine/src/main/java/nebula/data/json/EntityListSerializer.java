@@ -19,7 +19,7 @@ public class EntityListSerializer extends DefaultFieldSerializer<List<Entity>> {
 	final EntitySerializer entityMerger;
 
 	@Override
-	public List<Entity> input(JsonParser in, Entity parent, List<Entity> current) throws Exception {
+	public void input(JsonParser in, Entity parent, List<Entity> current) throws Exception {
 		if(current==null){
 			inputWithoutCheck(in, parent);
 		}
@@ -46,15 +46,12 @@ public class EntityListSerializer extends DefaultFieldSerializer<List<Entity>> {
 		
 		if(dirty){
 			parent.put(fieldName, newlyList);	
-			return newlyList;		
-		}else{
-			return current;
 		}
 		
 	}
 
 	@Override
-	public List<Entity> inputWithoutCheck(JsonParser in, Entity parent) throws Exception {
+	public void inputWithoutCheck(JsonParser in, Entity parent) throws Exception {
 		List<Entity> vList = new ArrayList<>();
 		JsonToken token;
 		token = in.getCurrentToken();
@@ -67,8 +64,6 @@ public class EntityListSerializer extends DefaultFieldSerializer<List<Entity>> {
 		assert token == JsonToken.END_ARRAY;
 		
 		parent.put(fieldName, vList);
-		
-		return vList;
 	}
 
 	@Override

@@ -4,13 +4,12 @@ import java.io.StringReader;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Map;
 
 import junit.framework.TestCase;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
+import nebula.data.impl.EditableEntity;
 import nebula.lang.Type;
 import nebula.lang.TypeLoaderForTest;
 
@@ -55,7 +54,7 @@ public class DBExecTest extends TestCase {
 		//@formatter:on		
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		Map<String, Object> data;
+		EditableEntity data;
 		dbExec = config.getPersister(t);
 		dbExec.drop();
 		dbExec = null;
@@ -89,7 +88,7 @@ public class DBExecTest extends TestCase {
 		} catch (RuntimeException e) {
 		}
 
-		data = new HashMap<String, Object>();
+		data = new EditableEntity();
 		data.put("PersonName", "wangshilian");
 		data.put("Age", 10L);
 
@@ -298,7 +297,7 @@ public class DBExecTest extends TestCase {
 
 		assertEquals(0, dbExec.getAll().size());
 
-		data = new HashMap<String, Object>();
+		data = new EditableEntity();
 		data.put("Name", "wangshilian");
 		data.put("Age", 10L);
 
@@ -353,7 +352,7 @@ public class DBExecTest extends TestCase {
 		//@formatter:on		
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		Map<String, Object> data;
+		EditableEntity data;
 		dbExec = config.getPersister(t);
 		//dbExec.init();
 
@@ -363,7 +362,7 @@ public class DBExecTest extends TestCase {
 		} catch (RuntimeException e) {
 		}
 
-		data = new HashMap<String, Object>();
+		data = new EditableEntity();
 		data.put("Name", "wangshilian");
 		data.put("Age", 10L);
 

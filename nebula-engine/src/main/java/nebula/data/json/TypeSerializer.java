@@ -26,12 +26,12 @@ public class TypeSerializer extends DefaultFieldSerializer<Type> implements Json
 
 	
 	@Override
-	public Type input(JsonParser in, Entity parent, Type now) throws Exception {
+	public void input(JsonParser in, Entity parent, Type now) throws Exception {
 		throw new UnsupportedOperationException(" Type readFrom(JsonParser in, String name) throws Exception");
 	}
 
 	@Override
-	public Type inputWithoutCheck(JsonParser in, Entity parent) throws Exception {
+	public void inputWithoutCheck(JsonParser in, Entity parent) throws Exception {
 		throw new UnsupportedOperationException(" Type readFrom(JsonParser in, String name) throws Exception");
 	}
 

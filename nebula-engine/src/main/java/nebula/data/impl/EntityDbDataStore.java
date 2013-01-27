@@ -1,9 +1,9 @@
 package nebula.data.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.db.DBExec;
 import nebula.lang.Field;
@@ -16,9 +16,9 @@ public class EntityDbDataStore extends EntityDataStore {
 	EntityDbDataStore(final EntityDbDataPersister persistence, Type type, final DBExec exec) {
 		super(persistence, type);
 		this.db = exec;
-//		exec.init();
-		List<Map<String, Object>> list = exec.getAll();
-		for (Map<String, Object> data : list) {
+		
+		List<EditableEntity> list = exec.getAll();
+		for (EditableEntity data : list) {
 			String id = "";
 			for (Field f : type.getFields()) {
 				if (f.isKey()) {
@@ -26,59 +26,72 @@ public class EntityDbDataStore extends EntityDataStore {
 				}
 			}
 			data.put("ID", id);
-			EntityImp entity = new EntityImp(this, data);
-			datas.add(entity);
-			quickIndex.put(entity.getID(), entity);
+			
+			loadin(data, id);
 		}
 	}
 
 	@Override
 	public void apply(Entity newV) {
 		EditableEntity newEntity = (EditableEntity) newV;
-		if (newEntity.source != null) {
-			Map<String, Object> newData = new HashMap<String, Object>(newEntity.data);
-			newData.putAll(newEntity.newData);
-
+		if (newEntity.source != null) {// update	
+			assert newEntity.source instanceof DbEntity;
+			DbEntity sourceEntity = (DbEntity)newEntity.source;
+			
+			assert sourceEntity == datas.get(sourceEntity.index);
 			lock.lock();
-			EntityImp source = newEntity.source;
-			if (newEntity.data == source.data) {
-				source.data = newData;
-
+			try{
 				// DB
-				db.update(source.data, source.getID());
-
-				newEntity.resetWith(source);
-			} else {
-				throw new RuntimeException("entity update by some others");
+				String id = sourceEntity.getID();
+				db.update(newEntity, newEntity.getID());
+				
+				loadin(sourceEntity,db.get(id));
+			}finally{
+				lock.unlock();
 			}
-			lock.unlock();
-		} else {
-			Map<String, Object> newData = new HashMap<String, Object>(newEntity.newData);
-
+		} else { // insert
 			String id = "";
 			for (Field f : type.getFields()) {
 				if (f.isKey()) {
-					id += newData.get(f.getName());
+					id += newEntity.get(f.getName());
 				}
 			}
-			newData.put("ID", id);
+			newEntity.put("ID", id);
 
 			lock.lock();
-			EntityImp source = new EntityImp(this, newData);
 
 			// DB
-			db.insert(source.data);
-			source.data = db.get(id);
-			source.data.put("ID", id);
-
-			newEntity.resetWith(source);
-
-			this.datas.add(source);
-			this.quickIndex.put(source.getID(), source);
+			db.insert(newEntity);			
+			loadin(db.get(id),id);
+			
 			lock.unlock();
 		}
 	}
+	
+	class DbEntity extends EntityImp{
+		final int index;
+		
+		DbEntity(DataStore<Entity> store, Map<String, Object> data,int index) {
+			super(store, data);
+			this.index = index;
+		}		
+	}
 
+	private Entity loadin(EditableEntity entity,String id){
+		entity.put(KEY_NAME, id);
+		Entity inner = new DbEntity(this, entity.newData,datas.size());
+		this.datas.add(inner);
+		this.quickIndex.put(id, inner);
+		return inner;
+	}
+	
+	private Entity loadin(DbEntity sourceEntity,EditableEntity newEntity){
+		DbEntity inner = new DbEntity(this, newEntity.newData,sourceEntity.index);
+		this.datas.set(sourceEntity.index, inner);
+		this.quickIndex.put(sourceEntity.getID(), inner);
+		return inner;
+	}
+	
 	public void clear() {
 		db.deleteAll();
 	}

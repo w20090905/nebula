@@ -1,6 +1,7 @@
 package nebula.data;
 
-public interface Entity extends HasID {
+
+public interface Entity extends Identifiable {
 	String getID();
 
 	Object get(String name);

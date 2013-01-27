@@ -23,7 +23,7 @@ import util.FileUtil;
 
 class AutoIdentifiableType implements AutoIdentifiable<Type> {
 	@Override
-	public String getId(Type data) {
+	public String getID(Type data) {
 		return data.name;
 	}
 
