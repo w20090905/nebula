@@ -28,7 +28,7 @@ public class TemplateResouce extends AbstractResouce {
 	final String templateTypeName;
 	final String typeName;
 	final String actionName;
-	DataHolder<DataStore<Entity>>  attributes;
+	final DataHolder<DataStore<Entity>>  attributes;
 	
 	public TemplateResouce(Configuration cfg,TypeLoader typeLoader,DataHolder<DataStore<Entity>>  attributes, String templateTypeName, String typeName,
 			String actionName) {
@@ -51,7 +51,10 @@ public class TemplateResouce extends AbstractResouce {
 			Writer w = new OutputStreamWriter(bout);
 			
 			root.put("type", typeLoader.findType(this.typeName));
-			root.put("attributes", attributes.get());
+	
+			DataStore<Entity> attrs = attributes.get();
+			
+			root.put("attrs", attrs);
 			Template template = cfg.getTemplate(templateName);
 			template.process(root, w);
 			w.flush();

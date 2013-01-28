@@ -18,6 +18,7 @@ import http.server.BasicResourceContainer;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -36,6 +37,7 @@ import org.simpleframework.http.core.Container;
 import org.simpleframework.http.resource.ResourceEngine;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Scopes;
 import com.google.inject.TypeLiteral;
 
 @SuppressWarnings("deprecation")
@@ -92,11 +94,13 @@ public class ConfigModule extends AbstractModule {
 
 			this.bind(DbConfiguration.class).toInstance(
 					DbConfiguration.getEngine(driverclass, dburl, username, password));
-
+			
 			this.bind(new TypeLiteral<DataPersister<Entity>>() {
-			}).to(EntityDbDataPersister.class);
+			}).to(EntityDbDataPersister.class).in(Scopes.SINGLETON);
 
 			Configuration freemarkerConfiguration = new Configuration();
+			freemarkerConfiguration.setDefaultEncoding("utf-8");
+			freemarkerConfiguration.setEncoding(Locale.getDefault(),"utf-8");
 			freemarkerConfiguration.setTemplateUpdateDelay(1);
 			freemarkerConfiguration.setDirectoryForTemplateLoading(new File(root, "template"));
 			this.bind(Configuration.class).toInstance(freemarkerConfiguration);

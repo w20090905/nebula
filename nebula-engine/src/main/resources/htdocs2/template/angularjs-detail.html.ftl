@@ -136,6 +136,24 @@
 			
 			[#if field.type.name == "Attr"]
 				
+				
+	<div class="control-group ${controlGroupClass}">
+		<label class="control-label" for="${field.name}">${field.name}</label>
+		<div class="controls">
+			
+			[#assign attrValues][@compress single_line=true]			
+				[#list (attrs[field.name].Values)![] as attr],{name:'${attr.Name}'}[/#list]
+			[/@compress] [/#assign]
+		
+		
+			<select ng-init="${field.name}Values=[${attrValues?substring(1)}];" 
+			ng-model="data.${field.name}" ng-options="c.name as c.name for c in ${field.name}Values" >
+				<option value="">-- 选择 ${field.name} --</option>
+			</select>
+			<a href="#/d/Attribute/${field.name}"><i class="icon-edit"> </i> </a>
+		</div>
+	</div>
+				
 			[#else]
 			
 			
@@ -169,7 +187,7 @@
 			<input ${inputOptions}/>
 		</div>
 	</div>
-				[#if]
+				[/#if]
 	  			[#break]
 	  			
 	<!-- 嵌入式子对象 -->
