@@ -7,11 +7,11 @@
 	
 	<script type="text/javascript">
 		function AttrValueCtrl($scope) {
-			$scope.entityData.attrValues = [];
+			$scope.entityData.Values = [];
 
 			$scope.addAttrValue = function(event) {
-				$scope.entityData.attrValues.push({
-					text : $scope.attrValueText,
+				$scope.entityData.Values.push({
+					Name : $scope.attrValueText,
 					done : false
 				});
 				$scope.attrValueText = '';
@@ -26,18 +26,18 @@
 
 			$scope.remaining = function() {
 				var count = 0;
-				angular.forEach($scope.attrValues, function(attrValue) {
+				angular.forEach($scope.entityData.Values, function(attrValue) {
 					count += attrValue.done ? 0 : 1;
 				});
 				return count;
 			};
 
 			$scope.archive = function() {
-				var oldAttrValues = $scope.entityData.attrValues;
-				$scope.entityData.attrValues = [];
+				var oldAttrValues = $scope.entityData.Values;
+				$scope.entityData.Values = [];
 				angular.forEach(oldAttrValues, function(attrValue) {
 					if (!attrValue.done)
-						$scope.entityData.attrValues.push(attrValue);
+						$scope.entityData.Values.push(attrValue);
 				});
 			};
 		}
@@ -63,11 +63,11 @@
 				<div class="control-group">
 					<label class="control-label">Values</label>
 					<div class="controls" x-ng-controller="AttrValueCtrl">
-						<span>{{remaining()}} of {{entityData.attrValues.length}} remaining</span>
+						<span>{{remaining()}} of {{entityData.Values.length}} remaining</span>
 						<table>
 							<tbody>
-								<tr x-ng-repeat="attrValue in entityData.attrValues">
-									<td><span class="done-{{attrValue.done}}">{{attrValue.text}}</span></td>
+								<tr x-ng-repeat="attrValue in entityData.Values">
+									<td><span class="done-{{attrValue.done}}">{{attrValue.Name}}</span></td>
 									<td><a href="" x-ng-click="removeAttrValue(attrValue)"><i class="icon-minus-sign"></i> </a></td>
 								</tr>
 							</tbody>

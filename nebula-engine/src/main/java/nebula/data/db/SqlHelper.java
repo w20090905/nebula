@@ -164,7 +164,6 @@ public class SqlHelper {
 				}
 			}
 			
-			this.entitySerializer = new EntityFieldSerializer(fieldSerializer);
 
 			StringBuilder sbForSelect = new StringBuilder();
 			StringBuilder sbForWhere = new StringBuilder();
@@ -185,6 +184,10 @@ public class SqlHelper {
 			ArrayList<DBColumn> listSystemColumns = new ArrayList<DBColumn>();
 			DBColumn col = new DBColumn("LastModified_", "TIMESTAMP_", false, false, false, RawTypes.Timestamp, 0, 0, 0);
 			listSystemColumns.add(col);
+			
+			fieldSerializer.add(new SystemTypeFieldSerializer("LastModified_", "LastModified_",false, RawTypes.Timestamp));
+			
+			this.entitySerializer = new EntityFieldSerializer(fieldSerializer);
 
 			this.keyColumns = listKeyColumns.toArray(new DBColumn[0]);
 			this.wherekeys = sql.substring(0, sql.length() - 4);
