@@ -178,17 +178,13 @@
 				[#if field.attrs.minLength??] ngMinLength	="${field.attrs.minLength}" [/#if]
 				[#if field.attrs.maxLength??] ngMaxLength	="${field.attrs.maxLength}" [/#if]
 			[/@compress][/#assign]
-						
-						
-			
 	<div class="control-group ${controlGroupClass}">
 		<label class="control-label" for="${field.name}">${field.name}</label>
 		<div class="controls">
 			<input ${inputOptions}/>
 		</div>
 	</div>
-				[/#if]
-	  			[#break]
+			[/#if][#break]
 	  			
 	<!-- 嵌入式子对象 -->
 			[#case "Inline"]

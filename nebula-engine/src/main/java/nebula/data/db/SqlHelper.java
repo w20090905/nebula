@@ -12,9 +12,9 @@ import util.InheritHashMap;
 public class SqlHelper {
 
 	Type clz;
-	final DBColumn[] userColumns;
-	final DBColumn[] systemColumns;
-	final DBColumn[] keyColumns;
+	final DatabaseColumn[] userColumns;
+	final DatabaseColumn[] systemColumns;
+	final DatabaseColumn[] keyColumns;
 	final String tableName;
 	final String fieldlist_comma;
 	final String fieldlist_questions;
@@ -23,7 +23,7 @@ public class SqlHelper {
 
 	final EntityFieldSerializer entitySerializer;
 
-	private void addColumn(ArrayList<DBColumn> list, String name, Field field, boolean key) {
+	private void addColumn(ArrayList<DatabaseColumn> list, String name, Field field, boolean key) {
 		InheritHashMap attrs = field.getAttrs();
 		Object v;
 
@@ -40,12 +40,12 @@ public class SqlHelper {
 
 		boolean nullable = field.getImportance() == Importance.Unimportant;
 
-		DBColumn c = new DBColumn(toFieldName(name), toColumnName(name), key, nullable, field.isArray(), rawType, size, precision,
+		DatabaseColumn c = new DatabaseColumn(toFieldName(name), toColumnName(name), key, nullable, field.isArray(), rawType, size, precision,
 				scale);
 		list.add(c);
 	}
 
-	private void addColumn(ArrayList<DBColumn> list, String resideName, String name,boolean array, Field field, boolean key) {
+	private void addColumn(ArrayList<DatabaseColumn> list, String resideName, String name,boolean array, Field field, boolean key) {
 		InheritHashMap attrs = field.getAttrs();
 		Object v;
 
@@ -62,7 +62,7 @@ public class SqlHelper {
 
 		boolean nullable = field.getImportance() == Importance.Unimportant;
 
-		DBColumn c = new DBColumn(toFieldName(resideName, name), toColumnName(resideName, name), key, nullable,
+		DatabaseColumn c = new DatabaseColumn(toFieldName(resideName, name), toColumnName(resideName, name), key, nullable,
 				array, rawType, size, precision, scale);
 		list.add(c);
 	}
@@ -102,7 +102,7 @@ public class SqlHelper {
 			List<DefaultFieldSerializer<?>> fieldSerializer = new ArrayList<>();
 
 			List<Field> fl = type.getFields();
-			ArrayList<DBColumn> listUserColumns = new ArrayList<DBColumn>();
+			ArrayList<DatabaseColumn> listUserColumns = new ArrayList<DatabaseColumn>();
 			for (Field f : fl) {
 				Type rT;
 				switch (f.getRefer()) {
@@ -167,10 +167,10 @@ public class SqlHelper {
 
 			StringBuilder sbForSelect = new StringBuilder();
 			StringBuilder sbForWhere = new StringBuilder();
-			ArrayList<DBColumn> listKeyColumns = new ArrayList<DBColumn>();
+			ArrayList<DatabaseColumn> listKeyColumns = new ArrayList<DatabaseColumn>();
 			String sql = "";
 
-			for (DBColumn column : listUserColumns) {
+			for (DatabaseColumn column : listUserColumns) {
 				sbForSelect.append(column.columnName);
 				sbForSelect.append(',');
 				sbForWhere.append("?,");
@@ -181,19 +181,19 @@ public class SqlHelper {
 				}
 			}
 
-			ArrayList<DBColumn> listSystemColumns = new ArrayList<DBColumn>();
-			DBColumn col = new DBColumn("LastModified_", "TIMESTAMP_", false, false, false, RawTypes.Timestamp, 0, 0, 0);
+			ArrayList<DatabaseColumn> listSystemColumns = new ArrayList<DatabaseColumn>();
+			DatabaseColumn col = new DatabaseColumn("LastModified_", "TIMESTAMP_", false, false, false, RawTypes.Timestamp, 0, 0, 0);
 			listSystemColumns.add(col);
 			
 			fieldSerializer.add(new SystemTypeFieldSerializer("LastModified_", "LastModified_",false, RawTypes.Timestamp));
 			
 			this.entitySerializer = new EntityFieldSerializer(fieldSerializer);
 
-			this.keyColumns = listKeyColumns.toArray(new DBColumn[0]);
+			this.keyColumns = listKeyColumns.toArray(new DatabaseColumn[0]);
 			this.wherekeys = sql.substring(0, sql.length() - 4);
 
-			this.userColumns = listUserColumns.toArray(new DBColumn[0]);
-			this.systemColumns = listSystemColumns.toArray(new DBColumn[0]);
+			this.userColumns = listUserColumns.toArray(new DatabaseColumn[0]);
+			this.systemColumns = listSystemColumns.toArray(new DatabaseColumn[0]);
 			this.fieldlist_comma = sbForSelect.substring(0, sbForSelect.length() - 1);
 			this.fieldlist_questions = sbForWhere.substring(0, sbForWhere.length() - 1);
 
@@ -223,7 +223,7 @@ public class SqlHelper {
 
 		sb.append("CREATE TABLE ").append(this.tableName).append("(");
 
-		for (DBColumn column : this.userColumns) {
+		for (DatabaseColumn column : this.userColumns) {
 			if (column.key) {
 				sb.append(column.columnName).append(' ').append(config.toColumnDefine(column)).append(" NOT NULL")
 						.append(",");
@@ -233,7 +233,7 @@ public class SqlHelper {
 		}
 
 		sb.append("PRIMARY KEY ( ");
-		for (DBColumn column : this.userColumns) {
+		for (DatabaseColumn column : this.userColumns) {
 			if (column.key) {
 				sb.append(column.columnName).append(",");
 			}
@@ -257,7 +257,7 @@ public class SqlHelper {
 	public String builderUpdate() {
 		String sb = "UPDATE " + this.tableName + " SET ";
 
-		for (DBColumn column : this.userColumns) {
+		for (DatabaseColumn column : this.userColumns) {
 			sb += column.columnName + " = ? ,";
 		}
 		sb += " TIMESTAMP_= CURRENT_TIMESTAMP ";
@@ -269,7 +269,7 @@ public class SqlHelper {
 		return "DELETE FROM " + this.tableName + " WHERE " + wherekeys + "";
 	}
 
-	public String builderAddColumn(DBColumn column) {
+	public String builderAddColumn(DatabaseColumn column) {
 		if (column.key) {
 			return "ALTER TABLE " + this.tableName + " ADD COLUMN " + column.columnName + " "
 					+ config.toColumnDefine(column) + " NOT NULL";
@@ -288,7 +288,7 @@ public class SqlHelper {
 		return "ALTER TABLE " + this.tableName + " ADD PRIMARY KEY ( " + keys + ") ";
 	}
 
-	public String builderModifyColumnDateType(DBColumn column) {
+	public String builderModifyColumnDateType(DatabaseColumn column) {
 		return "ALTER TABLE " + this.tableName + " ALTER COLUMN " + column.columnName + " SET DATA TYPE "
 				+ config.toColumnDefine(column);
 	}
@@ -305,15 +305,15 @@ public class SqlHelper {
 		return "SELECT " + fieldlist_comma + ",TIMESTAMP_  FROM " + this.tableName + " WHERE " + wherekeys + "";
 	}
 
-	public DBColumn[] getUserColumns() {
+	public DatabaseColumn[] getUserColumns() {
 		return this.userColumns;
 	}
 
-	public DBColumn[] getSystemColumns() {
+	public DatabaseColumn[] getSystemColumns() {
 		return this.systemColumns;
 	}
 
-	public DBColumn[] getKeyColumns() {
+	public DatabaseColumn[] getKeyColumns() {
 		return this.keyColumns;
 	}
 

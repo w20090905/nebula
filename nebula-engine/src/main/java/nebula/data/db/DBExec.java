@@ -38,8 +38,8 @@ public class DBExec {
 	final private PreparedStatement SQL_LIST;
 	// final private String SQL_COUNT;
 
-	final DBColumn[] userColumns;
-	final DBColumn[] systemColumns;
+	final DatabaseColumn[] userColumns;
+	final DatabaseColumn[] systemColumns;
 	// final private String[] realFields;
 	// final private DbColumn[] keyColumns;
 	final SqlHelper builder;
@@ -85,9 +85,9 @@ public class DBExec {
 		ResultSet rs = null;
 		try {
 
-			final SmartList<DBColumn> mapColumns = new SmartListImp<DBColumn>("DbColumn", new IDAdapter<DBColumn>() {
+			final SmartList<DatabaseColumn> mapColumns = new SmartListImp<DatabaseColumn>("DbColumn", new IDAdapter<DatabaseColumn>() {
 				@Override
-				public String getID(DBColumn data) {
+				public String getID(DatabaseColumn data) {
 					return data.columnName;
 				}
 			});
@@ -115,15 +115,15 @@ public class DBExec {
 
 				ArrayList<String> needDeletedColumns = new ArrayList<>();
 				Map<String, String> allColumns = new HashMap<>();
-				ArrayList<DBColumn> typeNotMatchColumns = new ArrayList<DBColumn>();
-				ArrayList<DBColumn> typeSizeNotMatchColumns = new ArrayList<DBColumn>();
+				ArrayList<DatabaseColumn> typeNotMatchColumns = new ArrayList<DatabaseColumn>();
+				ArrayList<DatabaseColumn> typeSizeNotMatchColumns = new ArrayList<DatabaseColumn>();
 
 				String curKeys = "";
 
 				for (int i = 1; i <= columnsSize; i++) {
 					String columnName = metaData.getColumnName(i);
 
-					DBColumn newColumn = mapColumns.get(columnName);
+					DatabaseColumn newColumn = mapColumns.get(columnName);
 					if (newColumn == null) {
 						if (!columnName.endsWith("_")) {
 							needDeletedColumns.add(columnName);
@@ -149,7 +149,7 @@ public class DBExec {
 									int newPrecision = newColumn.precision > precision ? newColumn.precision
 											: precision;
 									int newScale = newColumn.scale > scale ? newColumn.scale : scale;
-									typeSizeNotMatchColumns.add(new DBColumn(newColumn.fieldName, newColumn.columnName,
+									typeSizeNotMatchColumns.add(new DatabaseColumn(newColumn.fieldName, newColumn.columnName,
 											newColumn.key, newColumn.nullable, false,newColumn.rawType, newColumn.size,
 											newPrecision, newScale));
 								}
@@ -179,8 +179,8 @@ public class DBExec {
 				conn.commit();
 
 				StringBuffer newKeys = new StringBuffer();
-				ArrayList<DBColumn> notExistColumns = new ArrayList<DBColumn>();
-				for (DBColumn f : mapColumns) {
+				ArrayList<DatabaseColumn> notExistColumns = new ArrayList<DatabaseColumn>();
+				for (DatabaseColumn f : mapColumns) {
 					if (!allColumns.containsKey(f.columnName)) {
 						notExistColumns.add(f);
 					}
@@ -218,7 +218,7 @@ public class DBExec {
 					// add not exist column to DB
 					if (notExistColumns.size() > 0) {
 						statement = conn.createStatement();
-						for (DBColumn c : notExistColumns) {
+						for (DatabaseColumn c : notExistColumns) {
 							log.trace("##\t" + builder.builderAddColumn(c));
 							statement.addBatch(builder.builderAddColumn(c));
 						}
@@ -240,7 +240,7 @@ public class DBExec {
 					// update don't match column to DB
 					if (typeNotMatchColumns.size() > 0) {
 						statement = conn.createStatement();
-						for (DBColumn c : typeNotMatchColumns) {
+						for (DatabaseColumn c : typeNotMatchColumns) {
 							log.trace("##\t" + builder.builderModifyColumnDateType(c));
 							statement.addBatch(builder.builderRemoveColumn(c.columnName));
 							statement.addBatch(builder.builderAddColumn(c));
@@ -262,7 +262,7 @@ public class DBExec {
 					// update size don't match column to DB
 					if (typeSizeNotMatchColumns.size() > 0) {
 						statement = conn.createStatement();
-						for (DBColumn c : typeSizeNotMatchColumns) {
+						for (DatabaseColumn c : typeSizeNotMatchColumns) {
 							log.trace("##\t" + builder.builderModifyColumnDateType(c));
 							statement.addBatch(builder.builderModifyColumnDateType(c));
 						}

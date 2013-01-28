@@ -70,7 +70,7 @@ public abstract class DbConfiguration {
 		typeNames.put(jdbcType, columnTypeName);
 	}
 
-	protected String toColumnDefine(DBColumn column) {
+	protected String toColumnDefine(DatabaseColumn column) {
 		if (column.array) {
 			return typeNames.get(RawTypes.Text).replaceFirst("\\$l", String.valueOf(column.size));
 		} else {

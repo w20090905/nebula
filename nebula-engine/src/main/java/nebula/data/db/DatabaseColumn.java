@@ -5,7 +5,7 @@ import java.util.EnumMap;
 
 import nebula.lang.RawTypes;
 
-public class DBColumn{
+public class DatabaseColumn{
 	public final int jdbcType;
 
 	static EnumMap<RawTypes, Integer> dbTypeMap = new EnumMap<RawTypes, Integer>(RawTypes.class);
@@ -21,7 +21,7 @@ public class DBColumn{
 		dbTypeMap.put(RawTypes.Timestamp, Types.TIMESTAMP);
 	}
 
-	public DBColumn(String fieldName, String columnName, boolean key, boolean nullable, boolean array,
+	public DatabaseColumn(String fieldName, String columnName, boolean key, boolean nullable, boolean array,
 			RawTypes rawType, long size, int precision, int scale) {
 
 		this.fieldName = fieldName;
