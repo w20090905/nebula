@@ -7,6 +7,10 @@ import http.resource.TemplateResouce;
 
 import javax.inject.Inject;
 
+import nebula.data.DataHolder;
+import nebula.data.DataPersister;
+import nebula.data.DataStore;
+import nebula.data.Entity;
 import nebula.lang.TypeLoader;
 
 import org.apache.commons.logging.Log;
@@ -22,13 +26,16 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 	private Log log = LogFactory.getLog(this.getClass());
 
 	private final Configuration templateConfig;
+	final DataHolder<DataStore<Entity>> attributes;
 	final TypeLoader typeLoader;
 
 	@Inject
-	public TemplateResouceEngine(Loader resourceLoader, TypeLoader typeLoader, Configuration cfg) {
+	public TemplateResouceEngine(Loader resourceLoader, TypeLoader typeLoader,
+			final DataPersister<Entity> dataWareHouse, Configuration cfg) {
 		super(resourceLoader);
 		this.templateConfig = cfg;
 		this.typeLoader = typeLoader;
+		this.attributes = dataWareHouse.define(Entity.class, "Attribute");
 	}
 
 	@Override
@@ -60,7 +67,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 			log.trace("\tactionName : " + actionName);
 		}
 
-		return new TemplateResouce(templateConfig, typeLoader, templateTypeName, typeName, actionName);
+		return new TemplateResouce(templateConfig, typeLoader, attributes, templateTypeName, typeName, actionName);
 
 	}
 

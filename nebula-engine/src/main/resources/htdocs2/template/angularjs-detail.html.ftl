@@ -134,6 +134,11 @@
 					
 			[#case "ByVal"]
 			
+			[#if field.type.name == "Attr"]
+				
+			[#else]
+			
+			
 			[#assign controlGroupClass][@compress single_line=true]
 				[#if field.importance != "Unimportant"] required						[/#if]
 			[/@compress][/#assign]
@@ -164,6 +169,7 @@
 			<input ${inputOptions}/>
 		</div>
 	</div>
+				[#if]
 	  			[#break]
 	  			
 	<!-- 嵌入式子对象 -->
