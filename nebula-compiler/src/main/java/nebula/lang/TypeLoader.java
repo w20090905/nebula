@@ -23,7 +23,7 @@ import util.FileUtil;
 
 class AutoIdentifiableType implements AutoIdentifiable<Type> {
 	@Override
-	public String getId(Type data) {
+	public String getID(Type data) {
 		return data.name;
 	}
 
@@ -125,9 +125,6 @@ public abstract class TypeLoader {
 
 	public Type findType(String name) {
 		try {
-			if (log.isTraceEnabled()) {
-				log.trace(" --- " + name);
-			}
 			Type type = parent.findType(name);
 			if (type != null) {
 				return type;
@@ -135,12 +132,18 @@ public abstract class TypeLoader {
 
 			type = types.get(name);
 			if (type != null) {
+				if (log.isTraceEnabled()) {
+					log.trace(" -- find " + name);
+				}
 				return type;
 			}
 
 			URL url = loadClassData(name);
 			if (url != null) {
 				List<Type> typeList = defineNebula(url);
+				if (log.isTraceEnabled()) {
+					log.trace(" -- load " + name);
+				}
 				return typeList.get(0);
 			} else {
 				return null;

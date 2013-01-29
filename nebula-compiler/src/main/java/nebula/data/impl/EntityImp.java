@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import nebula.data.Entity;
-import nebula.data.HasID;
 import nebula.data.DataStore;
+import nebula.data.Identifiable;
 
-public class EntityImp implements HasID, Entity {
+public class EntityImp implements Identifiable, Entity {
 	Map<String, Object> data;
 	DataStore<Entity> store;
 
@@ -64,6 +64,11 @@ public class EntityImp implements HasID, Entity {
 	@Override
 	public String toString() {
 		return "EntityImp [" + data.toString() + "]";
+	}
+
+	@Override
+	public void extend(Entity sub) {
+		throw new UnsupportedOperationException("public void extend(Entity sub)");
 	}
 	
 }

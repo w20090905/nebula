@@ -13,8 +13,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import nebula.Identifiable;
+import nebula.IDAdapter;
 import nebula.SmartList;
+import nebula.data.Entity;
+import nebula.data.impl.EditableEntity;
 import nebula.frame.SmartListImp;
 import nebula.lang.Type;
 
@@ -36,12 +38,14 @@ public class DBExec {
 	final private PreparedStatement SQL_LIST;
 	// final private String SQL_COUNT;
 
-	final DbColumn[] userColumns;
-	final DbColumn[] systemColumns;
+	final DatabaseColumn[] userColumns;
+	final DatabaseColumn[] systemColumns;
 	// final private String[] realFields;
 	// final private DbColumn[] keyColumns;
 	final SqlHelper builder;
 	final DbConfiguration config;
+	
+	final EntityFieldSerializer serializer;
 
 	// final private Map<String, Integer> map;
 
@@ -58,8 +62,10 @@ public class DBExec {
 
 		userColumns = builder.getUserColumns();
 		systemColumns = builder.getSystemColumns();
+		
+		serializer = builder.getEntitySerializer();
 
-		this.init();
+		this.ensureDBSchema();
 
 		try {
 			SQL_GET = conn.prepareStatement(builder.builderGet());
@@ -73,15 +79,15 @@ public class DBExec {
 		}
 	}
 
-	public void init() {
+	private void ensureDBSchema() {
 		Statement statement = null;
 		boolean exist = false;
 		ResultSet rs = null;
 		try {
 
-			final SmartList<DbColumn> mapColumns = new SmartListImp<DbColumn>("DbColumn", new Identifiable<DbColumn>() {
+			final SmartList<DatabaseColumn> mapColumns = new SmartListImp<DatabaseColumn>("DbColumn", new IDAdapter<DatabaseColumn>() {
 				@Override
-				public String getId(DbColumn data) {
+				public String getID(DatabaseColumn data) {
 					return data.columnName;
 				}
 			});
@@ -109,15 +115,15 @@ public class DBExec {
 
 				ArrayList<String> needDeletedColumns = new ArrayList<>();
 				Map<String, String> allColumns = new HashMap<>();
-				ArrayList<DbColumn> typeNotMatchColumns = new ArrayList<DbColumn>();
-				ArrayList<DbColumn> typeSizeNotMatchColumns = new ArrayList<DbColumn>();
+				ArrayList<DatabaseColumn> typeNotMatchColumns = new ArrayList<DatabaseColumn>();
+				ArrayList<DatabaseColumn> typeSizeNotMatchColumns = new ArrayList<DatabaseColumn>();
 
 				String curKeys = "";
 
 				for (int i = 1; i <= columnsSize; i++) {
 					String columnName = metaData.getColumnName(i);
 
-					DbColumn newColumn = mapColumns.get(columnName);
+					DatabaseColumn newColumn = mapColumns.get(columnName);
 					if (newColumn == null) {
 						if (!columnName.endsWith("_")) {
 							needDeletedColumns.add(columnName);
@@ -143,8 +149,8 @@ public class DBExec {
 									int newPrecision = newColumn.precision > precision ? newColumn.precision
 											: precision;
 									int newScale = newColumn.scale > scale ? newColumn.scale : scale;
-									typeSizeNotMatchColumns.add(new DbColumn(newColumn.fieldName, newColumn.columnName,
-											newColumn.key, newColumn.nullable, newColumn.rawType, newColumn.size,
+									typeSizeNotMatchColumns.add(new DatabaseColumn(newColumn.fieldName, newColumn.columnName,
+											newColumn.key, newColumn.nullable, false,newColumn.rawType, newColumn.size,
 											newPrecision, newScale));
 								}
 								break;
@@ -173,8 +179,8 @@ public class DBExec {
 				conn.commit();
 
 				StringBuffer newKeys = new StringBuffer();
-				ArrayList<DbColumn> notExistColumns = new ArrayList<DbColumn>();
-				for (DbColumn f : mapColumns) {
+				ArrayList<DatabaseColumn> notExistColumns = new ArrayList<DatabaseColumn>();
+				for (DatabaseColumn f : mapColumns) {
 					if (!allColumns.containsKey(f.columnName)) {
 						notExistColumns.add(f);
 					}
@@ -212,7 +218,7 @@ public class DBExec {
 					// add not exist column to DB
 					if (notExistColumns.size() > 0) {
 						statement = conn.createStatement();
-						for (DbColumn c : notExistColumns) {
+						for (DatabaseColumn c : notExistColumns) {
 							log.trace("##\t" + builder.builderAddColumn(c));
 							statement.addBatch(builder.builderAddColumn(c));
 						}
@@ -234,7 +240,7 @@ public class DBExec {
 					// update don't match column to DB
 					if (typeNotMatchColumns.size() > 0) {
 						statement = conn.createStatement();
-						for (DbColumn c : typeNotMatchColumns) {
+						for (DatabaseColumn c : typeNotMatchColumns) {
 							log.trace("##\t" + builder.builderModifyColumnDateType(c));
 							statement.addBatch(builder.builderRemoveColumn(c.columnName));
 							statement.addBatch(builder.builderAddColumn(c));
@@ -256,7 +262,7 @@ public class DBExec {
 					// update size don't match column to DB
 					if (typeSizeNotMatchColumns.size() > 0) {
 						statement = conn.createStatement();
-						for (DbColumn c : typeSizeNotMatchColumns) {
+						for (DatabaseColumn c : typeSizeNotMatchColumns) {
 							log.trace("##\t" + builder.builderModifyColumnDateType(c));
 							statement.addBatch(builder.builderModifyColumnDateType(c));
 						}
@@ -328,12 +334,12 @@ public class DBExec {
 		}
 	}
 
-	public void update(Map<String, Object> value, Object... keys) {
+	public void update(Entity value, Object... keys) {
 		log.debug(SQL_UPDATE + " : " + value);
 		executeUpdate(SQL_UPDATE, value, keys);
 	}
 
-	public void insert(Map<String, Object> value) {
+	public void insert(Entity value) {
 		log.debug(SQL_INSERT + " : " + value);
 		executeUpdate(SQL_INSERT, value);
 	}
@@ -347,19 +353,19 @@ public class DBExec {
 		}
 	}
 
-	public List<Map<String, Object>> getAll() {
+	public List<EditableEntity> getAll() {
 		return executeQuery(SQL_LIST);
 	}
 
-	public void delete(Map<String, Object> value) {
+	public void delete(Entity value) {
 		log.debug(SQL_DELETE + " : " + value);
 		executeUpdate(SQL_DELETE, value);
 	}
 
-	public Map<String, Object> get(Object... keys) {
+	public EditableEntity get(Object... keys) {
 		log.debug(SQL_GET + " : " + keys);
 
-		List<Map<String, Object>> list = executeQuery(SQL_GET, keys);
+		List<EditableEntity> list = executeQuery(SQL_GET, keys);
 		if (list == null) {
 			throw new RuntimeException("Can not find record key:" + keys);
 		}
@@ -370,14 +376,14 @@ public class DBExec {
 		return list.get(0);
 	}
 
-	private void executeUpdate(PreparedStatement pstmt, Map<String, Object> v, Object... keys) {
+	private void executeUpdate(PreparedStatement pstmt, Entity v, Object... keys) {
 		ResultSet res = null;
 		try {
 
-			int pos = fromEntity(pstmt, v);
+			int pos = serializer.fromEntity(pstmt, v);
 
 			for (int i = 0; i < keys.length; i++) {
-				pstmt.setObject(pos + i + 1, keys[i]);
+				pstmt.setObject(pos + i, keys[i]);
 			}
 
 			pstmt.executeUpdate();
@@ -395,7 +401,7 @@ public class DBExec {
 		}
 	}
 
-	private List<Map<String, Object>> executeQuery(PreparedStatement pstmt, Object... keys) {
+	private List<EditableEntity> executeQuery(PreparedStatement pstmt, Object... keys) {
 		ResultSet res = null;
 		try {
 			int pos = 0;
@@ -406,10 +412,10 @@ public class DBExec {
 			if (log.isDebugEnabled()) {
 				log.debug("==\texecuteQuery Open Recordset");
 			}
-			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+			List<EditableEntity> list = new ArrayList<EditableEntity>();
 
 			while (res.next()) {
-				Map<String, Object> v = toEntity(res);
+				EditableEntity v = serializer.toEntity(res);
 				list.add(v);
 			}
 
@@ -431,29 +437,6 @@ public class DBExec {
 		}
 	}
 
-	int fromEntity(PreparedStatement prepareStatement, Map<String, Object> v) throws Exception {
-		int pos = 0;
-		for (DbColumn c : userColumns) {
-			c.datadealer.writeTo(1 + pos, v.get(c.fieldName), prepareStatement);
-			pos++;
-		}
-		return pos;
-	}
-
-	Map<String, Object> toEntity(ResultSet result) throws Exception {
-		Map<String, Object> v = new HashMap<String, Object>();
-
-		int pos = 0;
-		for (DbColumn c : userColumns) {
-			v.put(c.fieldName, c.datadealer.readFrom(result, pos + 1));
-			pos++;
-		}
-		for (DbColumn c : systemColumns) {
-			v.put(c.fieldName, c.datadealer.readFrom(result, pos + 1));
-			pos++;
-		}
-		return v;
-	}
 
 	public void close() {
 		try {

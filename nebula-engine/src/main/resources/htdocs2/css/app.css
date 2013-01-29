@@ -1,5 +1,8 @@
 /* app css stylesheet */
 
+html{
+	overflow-y: scroll;
+}
 /*
 body {
 	background: url('../img/page-bg.png') repeat center top;
@@ -7,7 +10,7 @@ body {
 */
 
 .well{
-	background-color: #e3e3e3;
+	/*background-color: #e3e3e3;*/
 }
 
 .table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {

@@ -17,12 +17,12 @@ import org.simpleframework.http.resource.ResourceEngine;
 public class StaticResourceEngine implements ResourceEngine {
 	protected final Loader loader;
 
-	protected Resource p404;
+//	protected Resource p404;
 	@Inject
 	public StaticResourceEngine(Loader loader) {
 		this.loader = loader;
-		Source source = loader.findSource("/404.html");		
-		p404 =  new StaticResource(source,TheMimeTypes.get("html"));
+//		Source source = loader.findSource("/404.html");		
+//		p404 =  new StaticResource(source,TheMimeTypes.get("html"));
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class StaticResourceEngine implements ResourceEngine {
 		if (source != null) {
 			return new StaticResource(source,TheMimeTypes.get(target.getPath().getExtension()));
 		}
-		return p404;
+		return null;
 	}
 	
 	/**

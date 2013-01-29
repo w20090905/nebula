@@ -5,7 +5,7 @@ import java.util.Map;
 
 import nebula.Filter;
 import nebula.expr.LogicExp;
-import nebula.expr.QuickExprBilder;
+import nebula.expr.QuickExprBuilder;
 import nebula.lang.Type;
 
 import org.simpleframework.http.Query;
@@ -30,7 +30,7 @@ public class TypeFilterBuilder {
 	}
 	
 	
-	class TypeFilter extends QuickExprBilder  implements Filter<Type>{
+	class TypeFilter extends QuickExprBuilder  implements Filter<Type>{
 		final Map<String, GetStringValue<Type>> strings;
 		private Type v;
 		

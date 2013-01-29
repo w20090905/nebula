@@ -17,13 +17,139 @@
 	
 	[#list type.fields as field][#t]
 		[#if field.array]
-	<div class="control-group" style="clear: both;">
-			TODO Add Array Edit
+		<!-- 			START ARRAY  				-->
+			[#switch field.refer]
+			[#case "ByVal"]
+			
+			[#assign required][@compress single_line=true]
+				[#if field.importance != "Unimportant"] required[/#if]
+			[/@compress][/#assign]			
+	<div class="control-group ${controlGroupClass}">
+		<label class="control-label" for="${field.name}">${field.name}</label>
+		<div class="controls">
+			<input id="${field.name}" x-ng-model="data.${field.name}" x-ng-list ${required}/>
+		</div>
 	</div>
+	  			[#break]
+	  			
+	<!-- 嵌入式子对象 数组-->
+			[#case "Inline"]
+
+		<table class="table table-hover table-condensed">
+		<caption>${field.name} [{{data.${field.name}.length}}]</caption>
+		<thead>
+			<tr>
+				<th>#</th>
+				[#list field.type.fields as inField]
+					[#switch inField.refer]
+					[#case "ByVal"]
+				<th>${inField.name}</th>
+						[#break]
+						
+					[#case "Inline"]
+						[#if inField.key || inField.core][#list inField.type.fields as inInF][#if inField.key && inInF.key]
+				<th>${inField.name}&nbsp;${inInF.name}</th>
+						[/#if][/#list][/#if]
+						[#break]
+					[/#switch]
+				[/#list]
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr x-ng-repeat="inlineData in data.${field.name} | filter:query | orderBy:orderProp">
+			<td>{{$index+1}}</td>
+			[#list field.type.fields as inField]
+				[#switch inField.refer]
+				[#case "ByVal"]
+					[#if inField.key]
+			<td>{{inlineData.${inField.name}}}</a></td>
+					[#else]	
+			<td>{{inlineData.${inField.name}}}</td>
+					[/#if]
+					[#break]
+				[#case "Inline"]
+					[#list inField.type.fields as inInF]
+						<td>{{inlineData.${inField.name}${inInF.name}}}</td>
+					[/#list]
+					[#break]
+				[/#switch]
+			[/#list]
+			<td><a x-ng-click="data.${field.name}.splice($index,1);$event.preventDefault();"> <i class="icon-minus-sign"> </i> </a></td>
+			</tr>
+			<tr class="new">
+			<td>{{data.${field.name}.length+1}}</td>
+			[#list field.type.fields as inField]
+				[#assign required][@compress single_line=true]
+					[#if inField.importance != "Unimportant"] required[/#if]
+				[/@compress][/#assign]
+			
+				[#switch inField.refer]
+				[#case "ByVal"]
+					[#if inField.key]
+			<td><input id="${field.name}" x-ng-model="data.${field.name}_new.${inField.name}" /></a></td>
+					[#else]	
+			<td><input id="${field.name}" x-ng-model="data.${field.name}_new.${inField.name}" /></td>
+					[/#if]
+					[#break]
+				[#case "Inline"]
+					[#list inField.type.fields as inInF]
+						<td> <input id="${field.name}" x-ng-model="data.${field.name}_new.length.${inField.name}${inInF.name}" /> {{data.${field.name}[data.${field.name}.length].${inField.name}.${inInF.name}}}</td>
+					[/#list]
+					[#break]
+				[/#switch]
+			[/#list]
+			<td><button class="btn" x-ng-click="data.${field.name}.push(data.${field.name}_new);data.${field.name}_new={};$event.preventDefault() "> <i class="icon-plus"> </i> </button> </td>
+			</tr>
+		</tbody>
+	</table>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	  			[#break]
+	  		[/#switch]
+	  		
 		[#else]
 			[#switch field.refer]
 					
 			[#case "ByVal"]
+			
+			[#if field.type.name == "Attr"]
+			
+	<div class="control-group ${controlGroupClass}">
+		<label class="control-label" for="${field.name}">${field.name}</label>
+		<div class="controls">
+			
+			[#assign attrValues][@compress single_line=true]			
+				[#list (attrs[field.name].Values)![] as attr],{name:'${attr.Name}'}[/#list]
+			[/@compress] [/#assign]
+		
+		
+			<select ng-init="${field.name}Values=[${attrValues?substring(1)}];" 
+			ng-model="data.${field.name}" ng-options="c.name as c.name for c in ${field.name}Values" >
+				<option value="">-- 选择 ${field.name} --</option>
+			</select>
+			<a href="#/d/Attribute/${field.name}"><i class="icon-edit"> </i> </a>
+		</div>
+	</div>				
+			[#else]			
 			
 			[#assign controlGroupClass][@compress single_line=true]
 				[#if field.importance != "Unimportant"] required						[/#if]
@@ -55,6 +181,7 @@
 			<input ${inputOptions}/>
 		</div>
 	</div>
+			[/#if]
 	  			[#break]
 	  			
 	<!-- 嵌入式子对象 -->
@@ -137,6 +264,7 @@
 	
 	<div class="form-actions">
   		<input type="submit" class="btn btn-primary" x-ng-disabled="form.$invalid" value="Save changes">
+  		<a href="" class="btn" x-ng-click="$back()">返回</a>
 		<!-- button type="button" class="btn">Cancel</button--> 
 	</div>
 	

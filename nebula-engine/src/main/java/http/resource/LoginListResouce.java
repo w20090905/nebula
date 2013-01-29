@@ -2,11 +2,13 @@ package http.resource;
 
 
 import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 
 import nebula.data.DataHolder;
-import nebula.data.Entity;
 import nebula.data.DataStore;
-import nebula.data.json.JsonHelper;
+import nebula.data.Entity;
+import nebula.data.json.DataHelper;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -22,7 +24,7 @@ public class LoginListResouce implements Resource {
 	private final DataHolder<DataStore<Entity>> users;
 	final RedirectResouce redirectTo;
 
-	public LoginListResouce(JsonHelper<Entity> json, DataHolder<DataStore<Entity>> users, DataHolder<DataStore<Entity>> datas) {
+	public LoginListResouce(DataHelper<Entity,Reader,Writer> json, DataHolder<DataStore<Entity>> users, DataHolder<DataStore<Entity>> datas) {
 		this.users = users;
 		redirectTo = new RedirectResouce("/index.html");
 	}
@@ -68,7 +70,7 @@ public class LoginListResouce implements Resource {
 			Form form = req.getForm();
 			String username = form.get("username");
 			// String password = form.get("password");
-			Entity user = users.get().load(username);
+			Entity user = users.get().get(username);
 			if (user == null) {
 				resp.setCode(403);
 				return;

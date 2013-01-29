@@ -12,16 +12,18 @@ import util.InheritHashMap;
 public class SqlHelper {
 
 	Type clz;
-	final DbColumn[] userColumns;
-	final DbColumn[] systemColumns;
-	final DbColumn[] keyColumns;
+	final DatabaseColumn[] userColumns;
+	final DatabaseColumn[] systemColumns;
+	final DatabaseColumn[] keyColumns;
 	final String tableName;
 	final String fieldlist_comma;
 	final String fieldlist_questions;
 	final String wherekeys;
 	final DbConfiguration config;
 
-	private void addColumn(ArrayList<DbColumn> list, String name, Field field, boolean key) {
+	final EntityFieldSerializer entitySerializer;
+
+	private void addColumn(ArrayList<DatabaseColumn> list, String name, Field field, boolean key) {
 		InheritHashMap attrs = field.getAttrs();
 		Object v;
 
@@ -38,11 +40,12 @@ public class SqlHelper {
 
 		boolean nullable = field.getImportance() == Importance.Unimportant;
 
-		DbColumn c = new DbColumn(name, decodeFieldName(name), key, nullable, rawType, size, precision, scale);
+		DatabaseColumn c = new DatabaseColumn(toFieldName(name), toColumnName(name), key, nullable, field.isArray(), rawType, size, precision,
+				scale);
 		list.add(c);
 	}
 
-	private void addColumn(ArrayList<DbColumn> list, String resideName, String name, Field field, boolean key) {
+	private void addColumn(ArrayList<DatabaseColumn> list, String resideName, String name,boolean array, Field field, boolean key) {
 		InheritHashMap attrs = field.getAttrs();
 		Object v;
 
@@ -59,13 +62,24 @@ public class SqlHelper {
 
 		boolean nullable = field.getImportance() == Importance.Unimportant;
 
-		DbColumn c = new DbColumn(resideName + name, decodeFieldName(resideName + "_" + name), key, nullable, rawType,
-				size, precision, scale);
+		DatabaseColumn c = new DatabaseColumn(toFieldName(resideName, name), toColumnName(resideName, name), key, nullable,
+				array, rawType, size, precision, scale);
 		list.add(c);
 	}
 
-	private String decodeFieldName(String fieldName) {
+	private String toFieldName(String resideName) {
+		return resideName;
+	}
+	private String toFieldName(String resideName, String fieldName) {
+		return resideName + fieldName;
+	}
+
+	private String toColumnName(String fieldName) {
 		return fieldName.toUpperCase();
+	}
+
+	private String toColumnName(String resideName, String fieldName) {
+		return resideName.toUpperCase() + "_" + fieldName.toUpperCase();
 	}
 
 	private String decodeTypeName(String typeName) {
@@ -85,22 +99,40 @@ public class SqlHelper {
 
 			tableName = decodeTypeName(type.getName());
 
+			List<DefaultFieldSerializer<?>> fieldSerializer = new ArrayList<>();
+
 			List<Field> fl = type.getFields();
-			ArrayList<DbColumn> listUserColumns = new ArrayList<DbColumn>();
+			ArrayList<DatabaseColumn> listUserColumns = new ArrayList<DatabaseColumn>();
 			for (Field f : fl) {
-				if (f.isArray()) {
-					// TODO Add Array Support
-					continue;
-				}
 				Type rT;
 				switch (f.getRefer()) {
-				case ByVal:
-					addColumn(listUserColumns,f.getName(), f, f.isKey());
+				case ByVal: // Basic Type Field
+					addColumn(listUserColumns, f.getName(), f, f.isKey());
+
+					fieldSerializer.add(new BasicTypeFieldSerializer(f.getName(), toColumnName(f.getName()), f
+							.isArray(), f.getType().getRawType()));
 					break;
-				case Inline:
+				case Inline: // inline object
 					rT = f.getType();
-					for (Field rf : rT.getFields()) {
-						addColumn(listUserColumns,f.getName(), rf.getName(), rf, f.isKey() && rf.isKey());
+					if (f.isArray()) {
+						List<ListTypeAdapter<?>> adapteres = new ArrayList<>();
+						List<String> subFieldNames = new ArrayList<>();
+
+						for (Field rf : rT.getFields()) {
+							addColumn(listUserColumns, f.getName(), rf.getName(), f.isArray(),rf, f.isKey() && rf.isKey());
+							
+							adapteres.add(ListTypeAdapter.getAdapter(rf.getType().getRawType()));
+							subFieldNames.add(rf.getName());
+						}
+
+						fieldSerializer.add(new EntityListFieldSerializer(f.getName(), adapteres, subFieldNames));
+					} else {
+						for (Field rf : rT.getFields()) {
+							addColumn(listUserColumns, f.getName(), rf.getName(),  f.isArray(),rf, f.isKey() && rf.isKey());
+
+							fieldSerializer.add(new BasicTypeFieldSerializer(toColumnName(f.getName(), rf.getName()),
+									toColumnName(f.getName(),rf.getName()), f.isArray(), rf.getType().getRawType()));
+						}
 					}
 					break;
 				case ByRef:
@@ -109,7 +141,9 @@ public class SqlHelper {
 						switch (rf.getImportance()) {
 						case Key:
 						case Core:
-							addColumn(listUserColumns,rT.getName(), rf.getName(), rf, f.isKey() && rf.isKey());
+							addColumn(listUserColumns, rT.getName(), rf.getName(), f.isArray(), rf, f.isKey() && rf.isKey());
+							fieldSerializer.add(new BasicTypeFieldSerializer(toColumnName(f.getName(), rf.getName()),
+									toColumnName(f.getName(),rf.getName()), f.isArray(), rf.getType().getRawType()));
 							break;
 						}
 					}
@@ -120,20 +154,23 @@ public class SqlHelper {
 						switch (rf.getImportance()) {
 						case Key:
 						case Core:
-							addColumn(listUserColumns,rT.getName(), rf.getName(), rf, f.isKey() || rf.isKey());
+							addColumn(listUserColumns, rT.getName(), rf.getName(), f.isArray(), rf, f.isKey() || rf.isKey());
+							fieldSerializer.add(new BasicTypeFieldSerializer(toColumnName(f.getName(), rf.getName()),
+									toColumnName(f.getName(),rf.getName()), f.isArray(), rf.getType().getRawType()));
 							break;
 						}
 					}
 					break;
 				}
 			}
+			
 
 			StringBuilder sbForSelect = new StringBuilder();
 			StringBuilder sbForWhere = new StringBuilder();
-			ArrayList<DbColumn> listKeyColumns = new ArrayList<DbColumn>();
+			ArrayList<DatabaseColumn> listKeyColumns = new ArrayList<DatabaseColumn>();
 			String sql = "";
 
-			for (DbColumn column : listUserColumns) {
+			for (DatabaseColumn column : listUserColumns) {
 				sbForSelect.append(column.columnName);
 				sbForSelect.append(',');
 				sbForWhere.append("?,");
@@ -144,15 +181,19 @@ public class SqlHelper {
 				}
 			}
 
-			ArrayList<DbColumn> listSystemColumns = new ArrayList<DbColumn>();
-			DbColumn col = new DbColumn("LastModified_", "TIMESTAMP_", false, false, RawTypes.Timestamp, 0, 0, 0);
+			ArrayList<DatabaseColumn> listSystemColumns = new ArrayList<DatabaseColumn>();
+			DatabaseColumn col = new DatabaseColumn("LastModified_", "TIMESTAMP_", false, false, false, RawTypes.Timestamp, 0, 0, 0);
 			listSystemColumns.add(col);
+			
+			fieldSerializer.add(new SystemTypeFieldSerializer("LastModified_", "LastModified_",false, RawTypes.Timestamp));
+			
+			this.entitySerializer = new EntityFieldSerializer(fieldSerializer);
 
-			this.keyColumns = listKeyColumns.toArray(new DbColumn[0]);
+			this.keyColumns = listKeyColumns.toArray(new DatabaseColumn[0]);
 			this.wherekeys = sql.substring(0, sql.length() - 4);
 
-			this.userColumns = listUserColumns.toArray(new DbColumn[0]);
-			this.systemColumns = listSystemColumns.toArray(new DbColumn[0]);
+			this.userColumns = listUserColumns.toArray(new DatabaseColumn[0]);
+			this.systemColumns = listSystemColumns.toArray(new DatabaseColumn[0]);
 			this.fieldlist_comma = sbForSelect.substring(0, sbForSelect.length() - 1);
 			this.fieldlist_questions = sbForWhere.substring(0, sbForWhere.length() - 1);
 
@@ -182,7 +223,7 @@ public class SqlHelper {
 
 		sb.append("CREATE TABLE ").append(this.tableName).append("(");
 
-		for (DbColumn column : this.userColumns) {
+		for (DatabaseColumn column : this.userColumns) {
 			if (column.key) {
 				sb.append(column.columnName).append(' ').append(config.toColumnDefine(column)).append(" NOT NULL")
 						.append(",");
@@ -192,7 +233,7 @@ public class SqlHelper {
 		}
 
 		sb.append("PRIMARY KEY ( ");
-		for (DbColumn column : this.userColumns) {
+		for (DatabaseColumn column : this.userColumns) {
 			if (column.key) {
 				sb.append(column.columnName).append(",");
 			}
@@ -216,7 +257,7 @@ public class SqlHelper {
 	public String builderUpdate() {
 		String sb = "UPDATE " + this.tableName + " SET ";
 
-		for (DbColumn column : this.userColumns) {
+		for (DatabaseColumn column : this.userColumns) {
 			sb += column.columnName + " = ? ,";
 		}
 		sb += " TIMESTAMP_= CURRENT_TIMESTAMP ";
@@ -228,7 +269,7 @@ public class SqlHelper {
 		return "DELETE FROM " + this.tableName + " WHERE " + wherekeys + "";
 	}
 
-	public String builderAddColumn(DbColumn column) {
+	public String builderAddColumn(DatabaseColumn column) {
 		if (column.key) {
 			return "ALTER TABLE " + this.tableName + " ADD COLUMN " + column.columnName + " "
 					+ config.toColumnDefine(column) + " NOT NULL";
@@ -247,7 +288,7 @@ public class SqlHelper {
 		return "ALTER TABLE " + this.tableName + " ADD PRIMARY KEY ( " + keys + ") ";
 	}
 
-	public String builderModifyColumnDateType(DbColumn column) {
+	public String builderModifyColumnDateType(DatabaseColumn column) {
 		return "ALTER TABLE " + this.tableName + " ALTER COLUMN " + column.columnName + " SET DATA TYPE "
 				+ config.toColumnDefine(column);
 	}
@@ -264,16 +305,20 @@ public class SqlHelper {
 		return "SELECT " + fieldlist_comma + ",TIMESTAMP_  FROM " + this.tableName + " WHERE " + wherekeys + "";
 	}
 
-	public DbColumn[] getUserColumns() {
+	public DatabaseColumn[] getUserColumns() {
 		return this.userColumns;
 	}
 
-	public DbColumn[] getSystemColumns() {
+	public DatabaseColumn[] getSystemColumns() {
 		return this.systemColumns;
 	}
 
-	public DbColumn[] getKeyColumns() {
+	public DatabaseColumn[] getKeyColumns() {
 		return this.keyColumns;
+	}
+
+	public EntityFieldSerializer getEntitySerializer() {
+		return entitySerializer;
 	}
 
 }

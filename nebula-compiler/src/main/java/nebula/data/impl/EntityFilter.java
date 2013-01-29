@@ -3,9 +3,9 @@ package nebula.data.impl;
 import nebula.Filter;
 import nebula.data.Entity;
 import nebula.expr.LogicExp;
-import nebula.expr.QuickExprBilder;
+import nebula.expr.QuickExprBuilder;
 
-public class EntityFilter extends QuickExprBilder implements Filter<Entity> {
+public class EntityFilter extends QuickExprBuilder implements Filter<Entity> {
 
 	private Entity v;
 

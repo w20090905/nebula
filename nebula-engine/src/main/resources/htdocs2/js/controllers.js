@@ -60,7 +60,10 @@ function NewEntityCtrl($scope,$resource,$routeParams,$location,$interpolate){
 		$scope.data.$save(function(u, getResponseHeaders){
 			$location.url($interpolate('d/{{typename}}/')($routeParams));
 		});
-	};	
+	};
+	$scope.$back = function(){
+		$location.url($interpolate('d/{{typename}}/')($routeParams));
+	};
 }
 
 function EntityCtrl($scope,$resource,$routeParams,$location,$interpolate){
@@ -72,7 +75,10 @@ function EntityCtrl($scope,$resource,$routeParams,$location,$interpolate){
 		$scope.data.$save(function(u, getResponseHeaders){
 			$location.url($interpolate('d/{{typename}}/')($routeParams));
 		});
-	};	
+	};
+	$scope.$back = function(){
+		$location.url($interpolate('d/{{typename}}/')($routeParams));
+	};
 }
 
 
@@ -96,6 +102,9 @@ function NewTypeCtrl($scope,$resource,$routeParams,$http,$location,$interpolate,
 			$location.url(data);
 		});
 	};	
+	$scope.$back = function(){
+		$location.url($interpolate('d/Type/')($routeParams));
+	};
 }
 
 function TypeCtrl($scope,$resource,$routeParams,$http,$location,$interpolate,$templateCache){
@@ -110,6 +119,9 @@ function TypeCtrl($scope,$resource,$routeParams,$http,$location,$interpolate,$te
 			$scope.data = DataResource.get($routeParams);
 		});
 	};
+	$scope.$back = function(){
+		$location.url($interpolate('d/Type/')($routeParams));
+	};
 }
 
 
@@ -121,6 +133,7 @@ function AttributeEditCtrl($scope,$resource) {
 							method : 'PUT'
 						}
 			});
+		$scope.entityData = {};
 		$scope.entityData = AttributeDataResource.get({});	
 		$scope.update = true;
 		$scope.$save = function() {
@@ -134,7 +147,8 @@ function AttributeEditCtrl($scope,$resource) {
 	$scope.$parent.$newChild = function(){
 		var AttributeDataResource = $resource('d/Attribute/', {});
 		$scope.entityData = {};
-		$scope.entityData.attrValues = [];
+		$scope.update = false;
+		$scope.entityData.Values = [];
 		$scope.entityData.$save = AttributeDataResource.prototype.$save;
 		$scope.$save = function(){
 			$scope.entityData.$save(function(u, getResponseHeaders){

@@ -38,12 +38,12 @@ public class EntityStoreTest extends TestCase {
 		v.put("Name", "wangshilian");
 		store.add(v);
 
-		Entity v1 = store.load("wangshilian");
+		Entity v1 = store.get("wangshilian");
 		assertNull(v1);
 
 		store.flush();
 
-		v = store.load("wangshilian");
+		v = store.get("wangshilian");
 		assertNotNull(v);
 		assertEquals(1, store.all().size());
 		assertEquals("wangshilian", v.getID());

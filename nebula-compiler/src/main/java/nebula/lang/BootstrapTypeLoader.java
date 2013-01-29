@@ -6,12 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.antlr.runtime.RecognitionException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 class BootstrapTypeLoader extends TypeLoader {
-	private Log log = LogFactory.getLog(this.getClass());
-
 	private BootstrapTypeLoader() {
 		super(null);
 
@@ -114,7 +110,10 @@ class BootstrapTypeLoader extends TypeLoader {
 		String strAttributes = "" +
 				"type Attribute{\n" +
 				"	!Name;\n" +
-				"	Values[1..1000] Name;\n" +
+				"	Values[1..1000]{\n" +
+				"		Name;\n" +
+				"		?ReferName Name;\n" +
+				"	};\n" +
 				"};\n";
 		//@formatter:on
 

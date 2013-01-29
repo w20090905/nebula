@@ -7,6 +7,10 @@ import http.resource.TemplateResouce;
 
 import javax.inject.Inject;
 
+import nebula.data.DataHolder;
+import nebula.data.DataPersister;
+import nebula.data.DataStore;
+import nebula.data.Entity;
 import nebula.lang.TypeLoader;
 
 import org.apache.commons.logging.Log;
@@ -21,14 +25,17 @@ import freemarker.template.Configuration;
 public class TemplateResouceEngine extends StaticResourceEngine {
 	private Log log = LogFactory.getLog(this.getClass());
 
-	private final Configuration cfg;
+	private final Configuration templateConfig;
+	final DataHolder<DataStore<Entity>> attributes;
 	final TypeLoader typeLoader;
 
 	@Inject
-	public TemplateResouceEngine(Loader resourceLoader,TypeLoader typeLoader, Configuration cfg) {
+	public TemplateResouceEngine(Loader resourceLoader, TypeLoader typeLoader,
+			final DataPersister<Entity> dataWareHouse, Configuration cfg) {
 		super(resourceLoader);
-		this.cfg = cfg;
+		this.templateConfig = cfg;
 		this.typeLoader = typeLoader;
+		this.attributes = dataWareHouse.define(Entity.class, "Attribute");
 	}
 
 	@Override
@@ -47,7 +54,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 		}
 
 		String[] names = path.getName().split("-");
-		if(names.length<2){
+		if (names.length < 2) {
 			return null;
 		}
 		String typeName = names[0];
@@ -60,8 +67,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 			log.trace("\tactionName : " + actionName);
 		}
 
-		return new TemplateResouce(cfg,typeLoader , templateTypeName, typeName,
-				actionName);
+		return new TemplateResouce(templateConfig, typeLoader, attributes, templateTypeName, typeName, actionName);
 
 	}
 

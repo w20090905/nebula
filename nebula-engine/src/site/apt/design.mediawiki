@@ -1,0 +1,22 @@
+== Design ==
+=== Type ===
+==== UI ====
+# text
+# number
+# email
+
+=== DB ===
+# text
+# numeric
+# datetime
+# timestamp
+
+==== Java ====
+# String
+# long
+# BigDecimal
+# Date
+
+
+
+

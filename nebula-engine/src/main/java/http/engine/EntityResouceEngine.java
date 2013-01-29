@@ -1,20 +1,22 @@
 package http.engine;
 
+import http.resource.EntityFilterBuilder;
 import http.resource.EntityListResouce;
 import http.resource.EntityResouce;
-import http.resource.EntityFilterBuilder;
 
+import java.io.Reader;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
 
 import nebula.data.DataHolder;
-import nebula.data.Entity;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
-import nebula.data.json.JsonHelper;
-import nebula.data.json.JsonEntityHelperProvider;
+import nebula.data.Entity;
+import nebula.data.json.DataHelper;
+import nebula.data.json.JsonHelperProvider;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -51,12 +53,12 @@ public class EntityResouceEngine implements ResourceEngine {
 		}
 
 		DataHolder<DataStore<Entity>> storeHolder = persistence.define(Entity.class, typeName);
-		JsonHelper<Entity> json = JsonEntityHelperProvider.getSerialize(storeHolder.get().getType());
+		DataHolder<DataHelper<Entity,Reader,Writer>> jsonHolder = JsonHelperProvider.getHelper(storeHolder);
 
 		if (id != null) {
-			return new EntityResouce(json, storeHolder, id);
+			return new EntityResouce(jsonHolder, storeHolder, id);
 		} else {
-			return new EntityListResouce(json, storeHolder, filterBuilder);
+			return new EntityListResouce(jsonHolder, storeHolder, filterBuilder);
 		}
 	}
 

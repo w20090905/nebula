@@ -2,8 +2,8 @@ package http.startup;
 
 import freemarker.template.Configuration;
 import http.engine.EntityResouceEngine;
-import http.engine.PrepareResouceEngine;
-import http.engine.StaticLongTermResourceEngine;
+import http.engine.SystemFunctionResouceEngine;
+import http.engine.LongTermStaticResourceEngine;
 import http.engine.StaticResourceEngine;
 import http.engine.TemplateResouceEngine;
 import http.engine.TypeResouceEngine;
@@ -18,6 +18,7 @@ import http.server.BasicResourceContainer;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -36,6 +37,7 @@ import org.simpleframework.http.core.Container;
 import org.simpleframework.http.resource.ResourceEngine;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Scopes;
 import com.google.inject.TypeLiteral;
 
 @SuppressWarnings("deprecation")
@@ -92,11 +94,13 @@ public class ConfigModule extends AbstractModule {
 
 			this.bind(DbConfiguration.class).toInstance(
 					DbConfiguration.getEngine(driverclass, dburl, username, password));
-
+			
 			this.bind(new TypeLiteral<DataPersister<Entity>>() {
-			}).to(EntityDbDataPersister.class);
+			}).to(EntityDbDataPersister.class).in(Scopes.SINGLETON);
 
 			Configuration freemarkerConfiguration = new Configuration();
+			freemarkerConfiguration.setDefaultEncoding("utf-8");
+			freemarkerConfiguration.setEncoding(Locale.getDefault(),"utf-8");
 			freemarkerConfiguration.setTemplateUpdateDelay(1);
 			freemarkerConfiguration.setDirectoryForTemplateLoading(new File(root, "template"));
 			this.bind(Configuration.class).toInstance(freemarkerConfiguration);
@@ -114,8 +118,8 @@ public class ConfigModule extends AbstractModule {
 				TypeResouceEngine typeResouceEngine;
 				// EditableStaticResourceEngine editableStaticEngine;
 				TemplateResouceEngine templateResouceEngine;
-				PrepareResouceEngine prepareResouceEngine;
-				private StaticLongTermResourceEngine longTermStaticEngine;
+				SystemFunctionResouceEngine prepareResouceEngine;
+				private LongTermStaticResourceEngine longTermStaticEngine;
 
 				@SuppressWarnings("unused")
 				@Inject
@@ -137,7 +141,7 @@ public class ConfigModule extends AbstractModule {
 				
 				@SuppressWarnings("unused")
 				@Inject
-				public void setEngine(StaticLongTermResourceEngine engine) {
+				public void setEngine(LongTermStaticResourceEngine engine) {
 					this.longTermStaticEngine = engine;
 				}
 
@@ -156,7 +160,7 @@ public class ConfigModule extends AbstractModule {
 
 				@SuppressWarnings("unused")
 				@Inject
-				public void setEngine(PrepareResouceEngine engine) {
+				public void setEngine(SystemFunctionResouceEngine engine) {
 					this.prepareResouceEngine = engine;
 				}
 

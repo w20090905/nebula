@@ -69,25 +69,28 @@ public abstract class DbConfiguration {
 	protected void registerColumnType(RawTypes jdbcType, String columnTypeName) {
 		typeNames.put(jdbcType, columnTypeName);
 	}
-	
 
-	protected String toColumnDefine(DbColumn column) {
-		String typeName = typeNames.get(column.rawType);
-		switch (column.rawType) {
-		case Decimal:
-			typeName = typeName.replaceFirst("\\$p", String.valueOf(column.precision));
-			typeName = typeName.replaceFirst("\\$s", String.valueOf(column.scale));
-			break;
-		case String:
-			typeName = typeName.replaceFirst("\\$l", String.valueOf(column.size));			
-			break;
-		case Text:
-			typeName = typeName.replaceFirst("\\$l", String.valueOf(column.size));			
-			break;
-		default:
-			break;
+	protected String toColumnDefine(DatabaseColumn column) {
+		if (column.array) {
+			return typeNames.get(RawTypes.Text).replaceFirst("\\$l", String.valueOf(column.size));
+		} else {
+			String typeName = typeNames.get(column.rawType);
+			switch (column.rawType) {
+			case Decimal:
+				typeName = typeName.replaceFirst("\\$p", String.valueOf(column.precision));
+				typeName = typeName.replaceFirst("\\$s", String.valueOf(column.scale));
+				break;
+			case String:
+				typeName = typeName.replaceFirst("\\$l", String.valueOf(column.size));
+				break;
+			case Text:
+				typeName = typeName.replaceFirst("\\$l", String.valueOf(column.size));
+				break;
+			default:
+				break;
+			}
+			return typeName;
 		}
-		return typeName;		
 	}
 
 	// public abstract <T extends HasID> Persistence<T> getPersister(Class<T> t,

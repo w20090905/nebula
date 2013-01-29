@@ -4,10 +4,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import nebula.data.HasID;
+import nebula.data.Identifiable;
 import util.InheritHashMap;
 
-public class Type implements HasID {
+public class Type implements Identifiable {
 	final TypeLoader loader;
 
 	final Type residedType;

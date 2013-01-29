@@ -7,13 +7,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
+import java.io.Reader;
+import java.io.Writer;
 import java.util.List;
 
 import nebula.Filter;
 import nebula.data.DataHolder;
-import nebula.data.Entity;
 import nebula.data.DataStore;
-import nebula.data.json.JsonHelper;
+import nebula.data.Entity;
+import nebula.data.json.DataHelper;
 
 import org.simpleframework.http.Address;
 import org.simpleframework.http.Query;
@@ -22,14 +24,14 @@ import org.simpleframework.http.Request;
 import util.FileUtil;
 
 public class EntityListResouce extends AbstractResouce {
-	private final JsonHelper<Entity> json;
-	private final DataHolder<DataStore<Entity>> datas;
+	private final DataHolder<DataHelper<Entity,Reader,Writer>> jsonHolder;
+	private final DataHolder<DataStore<Entity>> datastoreHolder;
 	final EntityFilterBuilder filterBuilder;
 
-	public EntityListResouce(JsonHelper<Entity> json, DataHolder<DataStore<Entity>> datas, final EntityFilterBuilder filterBuilder) {
+	public EntityListResouce(DataHolder<DataHelper<Entity,Reader,Writer>> json, DataHolder<DataStore<Entity>> datas, final EntityFilterBuilder filterBuilder) {
 		super("text/json", 0, 1000);
-		this.json = json;
-		this.datas = datas;
+		this.jsonHolder = json;
+		this.datastoreHolder = datas;
 		this.filterBuilder = filterBuilder;
 	}
 
@@ -38,10 +40,10 @@ public class EntityListResouce extends AbstractResouce {
 		List<Entity> dataList;
 
 		if (query.isEmpty()) {
-			dataList = datas.get().all();
+			dataList = datastoreHolder.get().all();
 		} else {
 			Filter<Entity> filter = filterBuilder.buildFrom(query, null);
-			dataList = datas.get().query(filter);
+			dataList = datastoreHolder.get().query(filter);
 		}
 
 		ByteArrayOutputStream bout = new ByteArrayOutputStream();
@@ -55,7 +57,7 @@ public class EntityListResouce extends AbstractResouce {
 			} else {
 				start = false;
 			}
-			json.stringifyTo(data, new OutputStreamWriter(out));
+			jsonHolder.get().stringifyTo(data, new OutputStreamWriter(out));
 		}
 		out.append(']');
 
@@ -68,14 +70,15 @@ public class EntityListResouce extends AbstractResouce {
 	@Override
 	protected String post(Request req) {
 		try {
-			DataStore<Entity> store = datas.get();
+			DataStore<Entity> store = datastoreHolder.get();
 			Entity data = store.createNew();
 			InputStream in = req.getInputStream();
 			if (log.isTraceEnabled()) {
 				in = FileUtil.print(in);
 			}
-			json.readFrom(data, new InputStreamReader(in));
-			store.add(data);
+			Entity inData = jsonHolder.get().readFrom(data, new InputStreamReader(in));
+			
+			store.add(inData);
 			store.flush();
 			return req.getAddress().getPath() + data.getID();
 		} catch (IOException e) {

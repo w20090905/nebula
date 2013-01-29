@@ -15,6 +15,8 @@ import nebula.lang.Field;
 import nebula.lang.Type;
 
 public class EntityDataStore implements DataStore<Entity> {
+	public static final String KEY_NAME = "ID"; 
+	
 	final DataPersister<Entity> persistence;
 	final Type type;
 
@@ -37,7 +39,7 @@ public class EntityDataStore implements DataStore<Entity> {
 	}
 
 	@Override
-	public Entity load(String key) {
+	public Entity get(String key) {
 		return quickIndex.get(key);
 	}
 
@@ -77,14 +79,18 @@ public class EntityDataStore implements DataStore<Entity> {
 			newData.putAll(newEntity.newData);
 
 			lock.lock();
-			EntityImp source = newEntity.source;
-			if (newEntity.data == source.data) {
-				source.data = newData;
-				newEntity.resetWith(source);
-			} else {
-				throw new RuntimeException("entity update by some others");
+			lock.lock();
+			try {
+				EntityImp source = newEntity.source;
+				if (newEntity.data == source.data) {
+					source.data = newData;
+					newEntity.resetWith(source);
+				} else {
+					throw new RuntimeException("entity update by some others");
+				}
+			} finally {
+				lock.unlock();
 			}
-			lock.unlock();
 		} else {
 			Map<String, Object> newData = new HashMap<String, Object>(newEntity.newData);
 
@@ -97,11 +103,14 @@ public class EntityDataStore implements DataStore<Entity> {
 			newData.put("ID", id);
 
 			lock.lock();
-			EntityImp source = new EntityImp(this, newData);
-			newEntity.resetWith(source);
-			this.datas.add(source);
-			this.quickIndex.put(source.getID(), source);
-			lock.unlock();
+			try {
+				EntityImp source = new EntityImp(this, newData);
+				newEntity.resetWith(source);
+				this.datas.add(source);
+				this.quickIndex.put(source.getID(), source);
+			} finally {
+				lock.unlock();
+			}
 		}
 	}
 
@@ -123,17 +132,17 @@ public class EntityDataStore implements DataStore<Entity> {
 	public void clear() {
 		datas.clear();
 	}
-	
+
 	@Override
 	public void load() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void unload() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
