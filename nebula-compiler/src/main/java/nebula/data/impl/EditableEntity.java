@@ -46,7 +46,7 @@ public class EditableEntity extends EntityImp implements Editable {
 
 	public void put(String name, Object v) {
 		newData.put(name, v);
-		if (data != null) {
+		if (!this.dirty && data != null) {
 			store.markChanged(this);
 		}
 		this.dirty = true;

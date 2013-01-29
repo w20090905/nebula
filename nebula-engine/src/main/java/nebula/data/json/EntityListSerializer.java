@@ -31,14 +31,14 @@ public class EntityListSerializer extends DefaultFieldSerializer<List<Entity>> {
 		assert token == JsonToken.START_ARRAY;
 
 		boolean dirty = false;
-		int i = 0;
+//		int i = 0;
 		while ((token = in.nextToken()) != JsonToken.END_ARRAY) {
 			Entity newly = entityMerger.doReadInList(in, current);
-			long idx = (long) newly.get("_idx");
-			if (idx != i) {
-				newly.put("_idx", idx);
+//			long idx = (long) newly.get("_idx"); // TODO remove when no data changed
+//			if (idx != i) {
+//				newly.put("_idx", idx);
 				dirty = true;
-			}
+//			}
 			dirty = newly.isDirty() || dirty;
 			newlyList.add(newly);
 		}

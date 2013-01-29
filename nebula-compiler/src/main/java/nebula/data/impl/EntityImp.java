@@ -70,5 +70,10 @@ public class EntityImp implements Identifiable, Entity {
 	public void extend(Entity sub) {
 		throw new UnsupportedOperationException("public void extend(Entity sub)");
 	}
+
+	@Override
+	public boolean isTransient() {
+		return this.store==null;
+	}
 	
 }

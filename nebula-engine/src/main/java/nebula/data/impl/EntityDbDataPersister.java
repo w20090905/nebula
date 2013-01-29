@@ -53,15 +53,15 @@ public class EntityDbDataPersister implements DataPersister<Entity> {
 
 	@Override
 	public void reload(Class<Entity> clz, String name) {
-		DataHolder<DataStore<Entity>> store = this.stores.get(name);
+		DataHolder<DataStore<Entity>> holder = this.stores.get(name);
 
-		if (store != null) {
-			DataStore<Entity> oldData = store.get();
+		if (holder != null) {
+			DataStore<Entity> oldData = holder.get();
 			oldData.unload();
 
 			Type type = loader.findType(name);
 			DataStore<Entity> newData = new EntityDbDataStore(this, type, dbConfig.getPersister(type));
-			store.set(newData, oldData);
+			holder.set(newData, oldData);
 		} else {
 			throw new UnsupportedOperationException("DataStore<Entity> reload(Class<Entity> clz, String name) ");
 		}
@@ -69,10 +69,10 @@ public class EntityDbDataPersister implements DataPersister<Entity> {
 
 	@Override
 	public void add(Entity v) {
-		if (v instanceof EditableEntity) {
-			EditableEntity vv = (EditableEntity) v;
-			this.markChanged(vv);
-		}
+		assert v instanceof EditableEntity;
+		
+		EditableEntity vv = (EditableEntity) v;
+		this.markChanged(vv);
 	}
 
 	@Override

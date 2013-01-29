@@ -54,6 +54,10 @@ public class EntityDataStore implements DataStore<Entity> {
 
 	@Override
 	public void add(Entity v) {
+		if(v.isTransient()){
+			EditableEntity entity = (EditableEntity)v;
+			entity.store = this;
+		}
 		persistence.add(v);
 	}
 

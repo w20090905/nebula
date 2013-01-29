@@ -71,16 +71,15 @@ public class EntityListResouce extends AbstractResouce {
 	protected String post(Request req) {
 		try {
 			DataStore<Entity> store = datastoreHolder.get();
-			Entity data = store.createNew();
 			InputStream in = req.getInputStream();
 			if (log.isTraceEnabled()) {
 				in = FileUtil.print(in);
 			}
-			Entity inData = jsonHolder.get().readFrom(data, new InputStreamReader(in));
+			Entity inData = jsonHolder.get().readFrom(null, new InputStreamReader(in));
 			
 			store.add(inData);
 			store.flush();
-			return req.getAddress().getPath() + data.getID();
+			return req.getAddress().getPath() + inData.getID();
 		} catch (IOException e) {
 			log.error(e);
 			throw new RuntimeException(e);

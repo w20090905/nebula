@@ -355,7 +355,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 		StringReader in = new StringReader(txtData);
 		JsonParser jsonParser = factory.createJsonParser(in);
 
-		Entity entity = entityMerger.readFrom(new EditableEntity(), jsonParser);
+		Entity entity = entityMerger.readFrom(null, jsonParser);
 		assertNotNull(entity);
 
 		assertEquals("wangshilian", entity.get("PersonName"));

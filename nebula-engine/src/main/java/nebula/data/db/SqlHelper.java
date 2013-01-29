@@ -109,7 +109,7 @@ public class SqlHelper {
 				case ByVal: // Basic Type Field
 					addColumn(listUserColumns, f.getName(), f, f.isKey());
 
-					fieldSerializer.add(new BasicTypeFieldSerializer(f.getName(), toColumnName(f.getName()), f
+					fieldSerializer.add(new BasicTypeFieldSerializer(toFieldName(f.getName()), toColumnName(f.getName()), f
 							.isArray(), f.getType().getRawType()));
 					break;
 				case Inline: // inline object
@@ -125,12 +125,12 @@ public class SqlHelper {
 							subFieldNames.add(rf.getName());
 						}
 
-						fieldSerializer.add(new EntityListFieldSerializer(f.getName(), adapteres, subFieldNames));
+						fieldSerializer.add(new EntityListFieldSerializer(toFieldName(f.getName()), adapteres, subFieldNames));
 					} else {
 						for (Field rf : rT.getFields()) {
 							addColumn(listUserColumns, f.getName(), rf.getName(),  f.isArray(),rf, f.isKey() && rf.isKey());
 
-							fieldSerializer.add(new BasicTypeFieldSerializer(toColumnName(f.getName(), rf.getName()),
+							fieldSerializer.add(new BasicTypeFieldSerializer(toFieldName(f.getName(), rf.getName()),
 									toColumnName(f.getName(),rf.getName()), f.isArray(), rf.getType().getRawType()));
 						}
 					}
@@ -142,7 +142,7 @@ public class SqlHelper {
 						case Key:
 						case Core:
 							addColumn(listUserColumns, rT.getName(), rf.getName(), f.isArray(), rf, f.isKey() && rf.isKey());
-							fieldSerializer.add(new BasicTypeFieldSerializer(toColumnName(f.getName(), rf.getName()),
+							fieldSerializer.add(new BasicTypeFieldSerializer(toFieldName(f.getName(), rf.getName()),
 									toColumnName(f.getName(),rf.getName()), f.isArray(), rf.getType().getRawType()));
 							break;
 						}
@@ -155,7 +155,7 @@ public class SqlHelper {
 						case Key:
 						case Core:
 							addColumn(listUserColumns, rT.getName(), rf.getName(), f.isArray(), rf, f.isKey() || rf.isKey());
-							fieldSerializer.add(new BasicTypeFieldSerializer(toColumnName(f.getName(), rf.getName()),
+							fieldSerializer.add(new BasicTypeFieldSerializer(toFieldName(f.getName(), rf.getName()),
 									toColumnName(f.getName(),rf.getName()), f.isArray(), rf.getType().getRawType()));
 							break;
 						}

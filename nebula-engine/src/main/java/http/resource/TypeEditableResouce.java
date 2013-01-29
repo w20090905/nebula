@@ -76,7 +76,7 @@ public class TypeEditableResouce extends AbstractResouce {
 				log.trace(type.getCode());
 			}
 			type = typeLoader.update(type, newCode);
-			dataWareHouse.define(Entity.class, type.getName());
+			dataWareHouse.reload(Entity.class,type.getName());
 		} else {
 			if (log.isTraceEnabled()) {
 				log.trace("No Change:");

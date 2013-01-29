@@ -13,4 +13,6 @@ public interface Entity extends Identifiable {
 	Entity editable();
 
 	boolean isDirty();
+	
+	boolean isTransient();
 }

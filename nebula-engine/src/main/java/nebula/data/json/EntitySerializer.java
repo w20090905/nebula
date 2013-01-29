@@ -175,7 +175,7 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 			if (d == null) {
 				return doReadWithoutCheck(in, new EditableEntity());
 			} else {
-				return doReadWithoutCheck(in, d);
+				return doRead(in, d);
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -248,10 +248,10 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 			}
 
 		} else {
-			in.getIntValue();
+			//in.getIntValue();
 			entity = new EditableEntity();
 
-			while ((token = in.nextToken()) != null) {
+			do  {
 				if (token != JsonToken.FIELD_NAME) {
 					break;
 				}
@@ -263,7 +263,7 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 				if (f != null) {
 					f.inputWithoutCheck(in, entity);
 				}
-			}
+			}while((token = in.nextToken()) != null);
 		}
 
 		assert token == JsonToken.END_OBJECT;
