@@ -17,16 +17,13 @@
 	
 	[#list type.fields as field][#t]
 		[#if field.array]
-		
 		<!-- 			START ARRAY  				-->
 			[#switch field.refer]
 			[#case "ByVal"]
 			
 			[#assign required][@compress single_line=true]
 				[#if field.importance != "Unimportant"] required[/#if]
-			[/@compress][/#assign]
-
-			
+			[/@compress][/#assign]			
 	<div class="control-group ${controlGroupClass}">
 		<label class="control-label" for="${field.name}">${field.name}</label>
 		<div class="controls">
@@ -135,8 +132,7 @@
 			[#case "ByVal"]
 			
 			[#if field.type.name == "Attr"]
-				
-				
+			
 	<div class="control-group ${controlGroupClass}">
 		<label class="control-label" for="${field.name}">${field.name}</label>
 		<div class="controls">
@@ -152,10 +148,8 @@
 			</select>
 			<a href="#/d/Attribute/${field.name}"><i class="icon-edit"> </i> </a>
 		</div>
-	</div>
-				
-			[#else]
-			
+	</div>				
+			[#else]			
 			
 			[#assign controlGroupClass][@compress single_line=true]
 				[#if field.importance != "Unimportant"] required						[/#if]
@@ -178,13 +172,17 @@
 				[#if field.attrs.minLength??] ngMinLength	="${field.attrs.minLength}" [/#if]
 				[#if field.attrs.maxLength??] ngMaxLength	="${field.attrs.maxLength}" [/#if]
 			[/@compress][/#assign]
+						
+						
+			
 	<div class="control-group ${controlGroupClass}">
 		<label class="control-label" for="${field.name}">${field.name}</label>
 		<div class="controls">
 			<input ${inputOptions}/>
 		</div>
 	</div>
-			[/#if][#break]
+			[/#if]
+	  			[#break]
 	  			
 	<!-- 嵌入式子对象 -->
 			[#case "Inline"]
