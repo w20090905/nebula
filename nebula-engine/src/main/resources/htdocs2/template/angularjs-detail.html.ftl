@@ -131,6 +131,10 @@
 					
 			[#case "ByVal"]
 			
+			[#assign controlGroupClass][@compress single_line=true]
+				[#if field.importance != "Unimportant"] required						[/#if]
+			[/@compress][/#assign]
+			
 			[#if field.type.name == "Attr"]
 			
 	<div class="control-group ${controlGroupClass}">
@@ -149,11 +153,19 @@
 			<a href="#/d/Attribute/${field.name}"><i class="icon-edit"> </i> </a>
 		</div>
 	</div>				
-			[#else]			
-			
-			[#assign controlGroupClass][@compress single_line=true]
-				[#if field.importance != "Unimportant"] required						[/#if]
-			[/@compress][/#assign]
+			[#elseif field.attrs.formatType == "textarea"]
+				[#assign inputOptions][@compress single_line=flase]
+					id="${field.name}"
+					x-ng-model="data.${field.name}"
+					
+				[/@compress][/#assign]				
+	<div class="control-group ${controlGroupClass}">
+		<label class="control-label" for="${field.name}">${field.name}</label>
+		<div class="controls">
+			<textarea ${inputOptions}/>
+		</div>
+	</div>			
+			[#else]
 			
 			[#assign inputOptions][@compress single_line=true]
 				id="${field.name}"
