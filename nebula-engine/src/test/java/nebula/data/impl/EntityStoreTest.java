@@ -13,6 +13,7 @@ public class EntityStoreTest extends TestCase {
 
 	DataPersister<Entity> p;
 	DataStore<Entity> store;
+	DbConfiguration dbconfig;
 
 	protected void setUp() throws Exception {
 
@@ -21,12 +22,14 @@ public class EntityStoreTest extends TestCase {
 		String username = "user";
 		String password = "password";
 
-		DbConfiguration dbconfig = DbConfiguration.getEngine(driverclass, url, username, password);
+		dbconfig = DbConfiguration.getEngine(driverclass, url, username, password);
 		p = new EntityDbDataPersister(new SystemTypeLoader(), dbconfig);
 		store = p.define(Entity.class, "Person").get();
 	}
 
 	protected void tearDown() throws Exception {
+		p.unload();
+		dbconfig.shutdown();
 		super.tearDown();
 	}
 

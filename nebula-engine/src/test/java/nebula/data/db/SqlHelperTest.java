@@ -21,6 +21,7 @@ public class SqlHelperTest extends TestCase {
 	}
 
 	protected void tearDown() throws Exception {
+		config.shutdown();
 		super.tearDown();
 	}
 

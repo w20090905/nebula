@@ -36,6 +36,7 @@ public class DBExecTest extends TestCase {
 	}
 
 	protected void tearDown() throws Exception {
+		config.shutdown();
 	}
 
 	public final void testInlineType() throws Exception {

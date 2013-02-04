@@ -14,6 +14,7 @@ public class PersistenceDBTest extends TestCase {
 
 	EntityDbDataPersister p;
 	DataStore<Entity> store;
+	DbConfiguration dbconfig;
 
 	protected void setUp() throws Exception {
 		String driverclass = "org.apache.derby.jdbc.EmbeddedDriver";
@@ -21,7 +22,7 @@ public class PersistenceDBTest extends TestCase {
 		String username = "user";
 		String password = "password";
 
-		DbConfiguration dbconfig = DbConfiguration.getEngine(driverclass, url, username, password);
+		dbconfig = DbConfiguration.getEngine(driverclass, url, username, password);
 		p = new EntityDbDataPersister(new SystemTypeLoader(), dbconfig);
 
 		store = p.define(Entity.class, "Person").get();
@@ -29,6 +30,8 @@ public class PersistenceDBTest extends TestCase {
 	}
 
 	protected void tearDown() throws Exception {
+		p.unload();
+		dbconfig.shutdown();
 		super.tearDown();
 	}
 

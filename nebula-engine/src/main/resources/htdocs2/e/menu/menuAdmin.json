@@ -1,10 +1,8 @@
 [
 	{	"label"	:	"Types",
 		"items"	:	[
-			{        "href": "#/d/Type/",        "label": "Type"},
-			{        "href": "#/d/Person/",        "label": "Person"},
-			{        "href": "#/d/Company/",        "label": "Company"},
-			{        "href": "#/d/Type/Product",        "label": "Product"}
+			{        "href": "#/d/Type/",        "label": "类型"},
+			{        "href": "#/d/Attribute/",        "label": "属性"}
 		]
 	},
 	{	"label"	:	"Templates",
@@ -14,5 +12,5 @@
 			{        "href": "#/t/template/angularjs-detail.html.ftl",        "label": "angularjs-detail.html.ftl"},
 			{        "href": "#/t/template/angularjs-list.html.ftl",        "label": "angularjs-list.html.ftl"}
 		]
-	}	
+	}
 ]
