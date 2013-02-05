@@ -39,7 +39,7 @@ public abstract class ListTypeAdapter<T> extends BasicTypeAdapter<List<T>> {
 			if (strValue == null || strValue.length() == 0) return new ArrayList<Boolean>();
 
 			String[] strValues = strValue.split(",");
-			List<Boolean> values = new ArrayList<>(strValues.length);
+			List<Boolean> values = new ArrayList<Boolean>(strValues.length);
 
 			for (String v : strValues) {
 
@@ -79,7 +79,7 @@ public abstract class ListTypeAdapter<T> extends BasicTypeAdapter<List<T>> {
 			String strValue = res.getString(index);
 			if (strValue == null || strValue.length() == 0) return new ArrayList<Long>();
 			String[] strValues = strValue.split(",");
-			List<Long> values = new ArrayList<>(strValues.length);
+			List<Long> values = new ArrayList<Long>(strValues.length);
 
 			for (String v : strValues) {
 
@@ -119,7 +119,7 @@ public abstract class ListTypeAdapter<T> extends BasicTypeAdapter<List<T>> {
 			String strValue = res.getString(index);
 			if (strValue == null || strValue.length() == 0) return new ArrayList<BigDecimal>();
 			String[] strValues = strValue.split(",");
-			List<BigDecimal> values = new ArrayList<>(strValues.length);
+			List<BigDecimal> values = new ArrayList<BigDecimal>(strValues.length);
 
 			for (String v : strValues) {
 
@@ -163,7 +163,7 @@ public abstract class ListTypeAdapter<T> extends BasicTypeAdapter<List<T>> {
 
 			String[] strValues = sep.split(strValue, 0);
 
-			List<String> values = new ArrayList<>(strValues.length);
+			List<String> values = new ArrayList<String>(strValues.length);
 			for (String v : strValues) {
 				values.add(v);
 			}
@@ -203,7 +203,7 @@ public abstract class ListTypeAdapter<T> extends BasicTypeAdapter<List<T>> {
 			String strValue = res.getString(index);
 			if (strValue == null || strValue.length() == 0) return new ArrayList<String>();
 			String[] strValues = sep.split(strValue, 0);
-			List<String> values = new ArrayList<>(strValues.length);
+			List<String> values = new ArrayList<String>(strValues.length);
 
 			for (String v : strValues) {
 				values.add(v);
@@ -242,7 +242,7 @@ public abstract class ListTypeAdapter<T> extends BasicTypeAdapter<List<T>> {
 			String strValue = res.getString(index);
 			if (strValue == null || strValue.length() == 0) return new ArrayList<Date>();
 			String[] strValues = strValue.split(",");
-			List<Date> values = new ArrayList<>(strValues.length);
+			List<Date> values = new ArrayList<Date>(strValues.length);
 
 			for (String v : strValues) {
 				if(v.length()==0 || "null".equals(v)){
@@ -287,7 +287,7 @@ public abstract class ListTypeAdapter<T> extends BasicTypeAdapter<List<T>> {
 			String strValue = res.getString(index);
 			if (strValue == null || strValue.length() == 0) return new ArrayList<Time>();
 			String[] strValues = strValue.split(",");
-			List<Time> values = new ArrayList<>(strValues.length);
+			List<Time> values = new ArrayList<Time>(strValues.length);
 
 			for (String v : strValues) {
 
@@ -328,7 +328,7 @@ public abstract class ListTypeAdapter<T> extends BasicTypeAdapter<List<T>> {
 			if (strValue == null || strValue.length() == 0) return new ArrayList<Timestamp>();
 
 			String[] strValues = strValue.split(",");
-			List<Timestamp> values = new ArrayList<>(strValues.length);
+			List<Timestamp> values = new ArrayList<Timestamp>(strValues.length);
 
 			for (String v : strValues) {
 
@@ -368,7 +368,7 @@ public abstract class ListTypeAdapter<T> extends BasicTypeAdapter<List<T>> {
 			String strValue = res.getString(index);
 			if (strValue == null || strValue.length() == 0) return new ArrayList<Timestamp>();
 			String[] strValues = strValue.split(",");
-			List<Timestamp> values = new ArrayList<>(strValues.length);
+			List<Timestamp> values = new ArrayList<Timestamp>(strValues.length);
 
 			for (String v : strValues) {
 				values.add(Timestamp.valueOf(v));

@@ -112,7 +112,7 @@ public class PersistenceDBTest extends TestCase {
 				School Text;
 			};
 		 */
-		List<EditableEntity> entities = new ArrayList<>();
+		List<EditableEntity> entities = new ArrayList<EditableEntity>();
 		EditableEntity education = new EditableEntity();
 		education.put("School", "kunming");
 		education.put("DateFrom",Date.valueOf("1996-9-1"));

@@ -18,7 +18,7 @@ public class SmartListImpAdvTest extends TestCase {
 	Person p = null;
 
 	protected void setUp() throws Exception {
-		list = new SmartListImp<>(name, new IDAdapter<Person>() {
+		list = new SmartListImp<Person>(name, new IDAdapter<Person>() {
 			@Override
 			public String getID(Person data) {
 				return data.name;

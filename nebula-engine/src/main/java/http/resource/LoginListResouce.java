@@ -1,6 +1,5 @@
 package http.resource;
 
-
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
@@ -24,7 +23,9 @@ public class LoginListResouce implements Resource {
 	private final DataHolder<DataStore<Entity>> users;
 	final RedirectResouce redirectTo;
 
-	public LoginListResouce(DataHelper<Entity,Reader,Writer> json, DataHolder<DataStore<Entity>> users, DataHolder<DataStore<Entity>> datas) {
+	public LoginListResouce(DataHelper<Entity, Reader, Writer> json,
+			DataHolder<DataStore<Entity>> users,
+			DataHolder<DataStore<Entity>> datas) {
 		this.users = users;
 		redirectTo = new RedirectResouce("/index.html");
 	}
@@ -47,17 +48,24 @@ public class LoginListResouce implements Resource {
 				resp.set("Content-Language", "en-US");
 				resp.set("Content-Type", "text/html");
 				resp.set("Content-Length", 0);
-				
-				
-				if(resp.getCode()==200){
-					redirectTo.redirectTo(req, resp,"/index.html#/c/" +  ((Entity)req.getSession().get("#currentUser")).getID());					
+
+				if (resp.getCode() == 200) {
+					redirectTo.redirectTo(
+							req,
+							resp,
+							"/index.html#/c/"
+									+ ((Entity) req.getSession().get(
+											"#currentUser")).getID());
 				}
-				
+
 				resp.close();
 			} else {
 				throw new RuntimeException("Unsupport method " + method);
 			}
-		} catch (IOException | LeaseException e) {
+		} catch (IOException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		} catch (LeaseException e) {
 			log.error(e);
 			throw new RuntimeException(e);
 		}
@@ -79,7 +87,7 @@ public class LoginListResouce implements Resource {
 			resp.setCode(200);
 			req.getSession().put("#currentUser", user);
 			resp.setCookie("LoginUserID", username);
-			
+
 			//
 			// Entity data = datas.createNew();
 			// InputStream in = req.getInputStream();
@@ -90,7 +98,7 @@ public class LoginListResouce implements Resource {
 			//
 			//
 			// datas.add(data);
-			//datas.flush();
+			// datas.flush();
 
 		} catch (IOException e) {
 			log.error(e);

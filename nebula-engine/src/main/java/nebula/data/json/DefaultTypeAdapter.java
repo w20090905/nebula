@@ -145,7 +145,7 @@ class ListJsonDataDealer<T> extends DefaultTypeAdapter<List<T>> {
 	}
 
 	public List<T> readFrom(JsonParser parser, String name) throws Exception {
-		List<T> vList = new ArrayList<>();
+		List<T> vList = new ArrayList<T>();
 		JsonToken token;
 		token = parser.getCurrentToken();
 		assert token == JsonToken.START_ARRAY;

@@ -21,7 +21,7 @@ public class TypeSerializer extends DefaultFieldSerializer<Type> implements Json
 
 	public TypeSerializer(String fieldName, String frontName) {
 		super(fieldName, frontName);
-		fieldListDataDealer = new ListJsonDataDealer<>(new FieldJsonDataDealer());
+		fieldListDataDealer = new ListJsonDataDealer<Field>(new FieldJsonDataDealer());
 	}
 
 	

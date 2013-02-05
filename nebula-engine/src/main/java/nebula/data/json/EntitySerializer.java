@@ -26,8 +26,8 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 	public EntitySerializer(Type type, String fieldName, String frontName) {
 		super(fieldName, frontName);
 
-		pageFields = new CopyOnWriteArrayList<>();
-		pageFieldsMap = new HashMap<>();
+		pageFields = new CopyOnWriteArrayList<DefaultFieldSerializer<?>>();
+		pageFieldsMap = new HashMap<String, DefaultFieldSerializer<?>>();
 		init(type);
 	}
 
@@ -91,7 +91,8 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 			switch (f.getRefer()) {
 			case ByVal:
 				if (f.isArray()) {
-					DefaultTypeAdapter<?> dataDealer = new ListJsonDataDealer<>(
+					@SuppressWarnings({ "unchecked", "rawtypes" })
+					DefaultTypeAdapter<?> dataDealer = new ListJsonDataDealer(
 							getBasicDateDealer(f.getType().getRawType()));
 					addPageField(f.getName(), f.getName(), dataDealer);
 				} else {
@@ -141,7 +142,7 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 		Entity entity = current;
 		out.writeStartObject();
 		out.writeFieldName("_idx");
-		out.writeNumber((long) current.get("_idx"));
+		out.writeNumber((Long) current.get("_idx"));
 
 		for (DefaultFieldSerializer<?> f : pageFields) {
 			@SuppressWarnings("unchecked")

@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import junit.framework.TestCase;
 import nebula.data.Entity;
 import nebula.data.impl.EditableEntity;
 import nebula.lang.Type;
@@ -13,9 +14,6 @@ import nebula.lang.TypeLoaderForTest;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonToken;
-
-import junit.framework.TestCase;
 
 public class EntityJsonDataDealerTest extends TestCase {
 	TypeLoaderForTest loader;
@@ -164,7 +162,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 		Entity entity = new EditableEntity();
 		entity.put("PersonName", "wangshilian");
 
-		List<Long> ages = new ArrayList<>();
+		List<Long> ages = new ArrayList<Long>();
 		ages.add(10L);
 		ages.add(20L);
 		entity.put("Age", ages);
@@ -237,13 +235,13 @@ public class EntityJsonDataDealerTest extends TestCase {
 
 		Entity entity = new EditableEntity();
 
-		List<String> names = new ArrayList<>();
+		List<String> names = new ArrayList<String>();
 		names.add("wangshilian");
 		names.add("houyihong");
 
 		entity.put("PersonName", names);
 
-		List<Long> ages = new ArrayList<>();
+		List<Long> ages = new ArrayList<Long>();
 		ages.add(10L);
 		ages.add(20L);
 		entity.put("Age", ages);
@@ -394,7 +392,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 		entity.put("PersonName", "wangshilian");
 		entity.put("Age", 12L);
 
-		List<Entity> educations = new ArrayList<>();
+		List<Entity> educations = new ArrayList<Entity>();
 		Entity education = new EditableEntity();
 		education.put("School", "Kunming");
 		education.put("Year", 1996L);

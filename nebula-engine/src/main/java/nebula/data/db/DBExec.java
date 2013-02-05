@@ -113,8 +113,8 @@ public class DBExec {
 
 				if (log.isDebugEnabled()) log.debug("== Before update column ");
 
-				ArrayList<String> needDeletedColumns = new ArrayList<>();
-				Map<String, String> allColumns = new HashMap<>();
+				ArrayList<String> needDeletedColumns = new ArrayList<String>();
+				Map<String, String> allColumns = new HashMap<String, String>();
 				ArrayList<DatabaseColumn> typeNotMatchColumns = new ArrayList<DatabaseColumn>();
 				ArrayList<DatabaseColumn> typeSizeNotMatchColumns = new ArrayList<DatabaseColumn>();
 

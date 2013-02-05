@@ -13,7 +13,7 @@ public class AbstractDataHolder<T> implements DataHolder<T> {
 	T curData;
 
 	public AbstractDataHolder(T newData) {
-		listeners = new CopyOnWriteArrayList<>();
+		listeners = new CopyOnWriteArrayList<WeakReference<DataListener<T>>>();
 		this.curData = newData;
 	}
 

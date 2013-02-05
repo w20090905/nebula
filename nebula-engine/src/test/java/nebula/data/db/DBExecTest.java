@@ -408,20 +408,20 @@ public class DBExecTest extends TestCase {
 
 		data = new EditableEntity();
 		data.put("PersonName", "wangshilian");
-		List<Long> ages = new ArrayList<>();
+		List<Long> ages = new ArrayList<Long>();
 		ages.add(10L);
 		ages.add(200L);
 		ages.add(30000L);
 		data.put("Age", ages);
 
-		List<String> alies = new ArrayList<>();
+		List<String> alies = new ArrayList<String>();
 		alies.add("10L");
 		alies.add("200L");
 		alies.add("30[]~^000L");
 		data.put("Alies", alies);
 
 
-		List<String> comments = new ArrayList<>();
+		List<String> comments = new ArrayList<String>();
 		comments.add("C10L");
 		comments.add("C200L");
 		comments.add("C30[]~^000L");
@@ -512,7 +512,7 @@ public class DBExecTest extends TestCase {
 
 		data = new EditableEntity();
 		data.put("PersonName", "wangshilian");
-		List<Long> ages = new ArrayList<>();
+		List<Long> ages = new ArrayList<Long>();
 		ages.add(10L);
 		ages.add(200L);
 		ages.add(30000L);

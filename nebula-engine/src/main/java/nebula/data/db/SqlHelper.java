@@ -99,7 +99,7 @@ public class SqlHelper {
 
 			tableName = decodeTypeName(type.getName());
 
-			List<DefaultFieldSerializer<?>> fieldSerializer = new ArrayList<>();
+			List<DefaultFieldSerializer<?>> fieldSerializer = new ArrayList<DefaultFieldSerializer<?>>();
 
 			List<Field> fl = type.getFields();
 			ArrayList<DatabaseColumn> listUserColumns = new ArrayList<DatabaseColumn>();
@@ -115,8 +115,8 @@ public class SqlHelper {
 				case Inline: // inline object
 					rT = f.getType();
 					if (f.isArray()) {
-						List<ListTypeAdapter<?>> adapteres = new ArrayList<>();
-						List<String> subFieldNames = new ArrayList<>();
+						List<ListTypeAdapter<?>> adapteres = new ArrayList<ListTypeAdapter<?>>();
+						List<String> subFieldNames = new ArrayList<String>();
 
 						for (Field rf : rT.getFields()) {
 							addColumn(listUserColumns, f.getName(), rf.getName(), f.isArray(),rf, f.isKey() && rf.isKey());

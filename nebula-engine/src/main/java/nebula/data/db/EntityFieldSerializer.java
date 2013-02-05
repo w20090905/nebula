@@ -18,12 +18,12 @@ public class EntityFieldSerializer extends DefaultFieldSerializer<Entity> {
 
 	public EntityFieldSerializer(List<DefaultFieldSerializer<?>> fieldSerializer) {
 		super(null, null);
-		this.fieldSerializer = new CopyOnWriteArrayList<>(fieldSerializer);
+		this.fieldSerializer = new CopyOnWriteArrayList<DefaultFieldSerializer<?>>(fieldSerializer);
 	}
 	
 	public EntityFieldSerializer(String fieldName, String columnName,List<DefaultFieldSerializer<?>> fieldSerializer) {
 		super(fieldName, columnName);
-		this.fieldSerializer = new CopyOnWriteArrayList<>(fieldSerializer);
+		this.fieldSerializer = new CopyOnWriteArrayList<DefaultFieldSerializer<?>>(fieldSerializer);
 	}
 	
 	int fromEntity(PreparedStatement prepareStatement, Entity entity) throws Exception {

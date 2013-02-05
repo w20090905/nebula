@@ -24,7 +24,7 @@ public class EntityListSerializer extends DefaultFieldSerializer<List<Entity>> {
 			inputWithoutCheck(in, parent);
 		}
 
-		List<Entity> newlyList = new ArrayList<>();
+		List<Entity> newlyList = new ArrayList<Entity>();
 
 		JsonToken token;
 		token = in.getCurrentToken();
@@ -52,7 +52,7 @@ public class EntityListSerializer extends DefaultFieldSerializer<List<Entity>> {
 
 	@Override
 	public void inputWithoutCheck(JsonParser in, Entity parent) throws Exception {
-		List<Entity> vList = new ArrayList<>();
+		List<Entity> vList = new ArrayList<Entity>();
 		JsonToken token;
 		token = in.getCurrentToken();
 		assert token == JsonToken.START_ARRAY;

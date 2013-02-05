@@ -25,7 +25,7 @@ public class EntityListFieldSerializer extends DefaultFieldSerializer<List<Entit
 
 	@Override
 	public int inputWithoutCheck(ResultSet in, int pos, Entity parent) throws Exception {
-		List<EditableEntity> enities = new ArrayList<>();
+		List<EditableEntity> enities = new ArrayList<EditableEntity>();
 		for (int i = 0; i < adapteres.size(); i++) {
 			List<?> dataList = (List<?>) adapteres.get(i).readFrom(in, pos);
 			if (enities.size() < dataList.size()) {
@@ -49,7 +49,7 @@ public class EntityListFieldSerializer extends DefaultFieldSerializer<List<Entit
 	@Override
 	public int output(PreparedStatement out, List<Entity> enities, int pos) throws Exception {
 		for (int i = 0; i < adapteres.size(); i++) {
-			List<Object> dataList = new ArrayList<>();
+			List<Object> dataList = new ArrayList<Object>();
 			if (enities == null) {
 				adapteres.get(i).writeTo(pos, dataList, out);
 			} else {
