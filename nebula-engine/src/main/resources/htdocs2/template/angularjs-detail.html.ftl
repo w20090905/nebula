@@ -146,8 +146,8 @@
 			[/@compress] [/#assign]
 		
 		
-			<select ng-init="${field.name}Values=[${attrValues?substring(1)}];" 
-			ng-model="data.${field.name}" ng-options="c.name as c.name for c in ${field.name}Values" >
+			<select ng-init="values = [${attrValues?substring(1)}];" 
+			ng-model='data["${field.name}"]' ng-options="c.name as c.name for c in values" >
 				<option value="">-- 选择 ${field.name} --</option>
 			</select>
 			<a href="#/d/Attribute/${field.name}"><i class="icon-edit"> </i> </a>

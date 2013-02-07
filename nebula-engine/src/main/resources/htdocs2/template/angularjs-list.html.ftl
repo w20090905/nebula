@@ -47,35 +47,35 @@
 				[#switch field.refer]
 				[#case "ByVal"]
 					[#if field.key]
-			<td><a href="#/d/${type.name}/{{data.${field.name}}}">{{data.${field.name}}}</a></td>
+			<td><a href="#/d/${type.name}/{{data.${field.name}}}">{{data["${field.name}"]}}</a></td>
 					[#else]	
-			<td>{{data.${field.name}}}</td>
+			<td>{{data["${field.name}"]}}</td>
 					[/#if]
 					[#break]
 				[#case "Inline"]
 					[#if field.key || field.core][#list field.type.fields as rF][#if field.key && rF.key]	
-						<td>{{data.${field.name}${rF.name}}}</td>
+						<td>{{ data["${field.name}${rF.name}"] }}</td>
 					[/#if][/#list][/#if]
 					[#break]
 				[#case "ByRef"]
 					[#list field.type.fields as rF]
 						[#if field.key && rF.key]
-						<td>{{data.${field.name}${rF.name}}}</td>
+						<td>{{ data["${field.name}${rF.name}"] }}</td>
 						[#elseif rF.key]
-						<td>{{data.${field.name}${rF.name}}}</td>
+						<td>{{ data["${field.name}${rF.name}"] }}</td>
 						[#elseif rF.core]
-						<td>{{data.${field.name}${rF.name}}}</td>
+						<td>{{ data["${field.name}${rF.name}"] }}</td>
 						[/#if]
 					[/#list]
 					[#break]	
 				[#case "Cascade"]
 					[#list field.type.fields as rF]
 						[#if field.key && rF.key]
-						<td>{{data.${field.name}${rF.name}}}</td>
+						<td>{{ data["${field.name}${rF.name}"] }}</td>
 						[#elseif rF.key]
-						<td>{{data.${field.name}${rF.name}}}</td>
+						<td>{{ data["${field.name}${rF.name}"] }}</td>
 						[#elseif rF.core]
-						<td>{{data.${field.name}${rF.name}}}</td>
+						<td>{{ data["${field.name}${rF.name}"] }}</td>
 						[/#if]
 					[/#list]
 					[#break]

@@ -8,6 +8,7 @@ import nebula.lang.Importance;
 import nebula.lang.RawTypes;
 import nebula.lang.Type;
 import util.InheritHashMap;
+import util.NamesEncoding;
 
 public class SqlHelper {
 
@@ -40,12 +41,13 @@ public class SqlHelper {
 
 		boolean nullable = field.getImportance() == Importance.Unimportant;
 
-		DatabaseColumn c = new DatabaseColumn(toFieldName(name), toColumnName(name), key, nullable, field.isArray(), rawType, size, precision,
-				scale);
+		DatabaseColumn c = new DatabaseColumn(toFieldName(name), toColumnName(name), key, nullable, field.isArray(),
+				rawType, size, precision, scale);
 		list.add(c);
 	}
 
-	private void addColumn(ArrayList<DatabaseColumn> list, String resideName, String name,boolean array, Field field, boolean key) {
+	private void addColumn(ArrayList<DatabaseColumn> list, String resideName, String name, boolean array, Field field,
+			boolean key) {
 		InheritHashMap attrs = field.getAttrs();
 		Object v;
 
@@ -62,24 +64,25 @@ public class SqlHelper {
 
 		boolean nullable = field.getImportance() == Importance.Unimportant;
 
-		DatabaseColumn c = new DatabaseColumn(toFieldName(resideName, name), toColumnName(resideName, name), key, nullable,
-				array, rawType, size, precision, scale);
+		DatabaseColumn c = new DatabaseColumn(toFieldName(resideName, name), toColumnName(resideName, name), key,
+				nullable, array, rawType, size, precision, scale);
 		list.add(c);
 	}
 
 	private String toFieldName(String resideName) {
 		return resideName;
 	}
+
 	private String toFieldName(String resideName, String fieldName) {
 		return resideName + fieldName;
 	}
 
 	private String toColumnName(String fieldName) {
-		return fieldName.toUpperCase();
+		return NamesEncoding.encode(fieldName);
 	}
 
 	private String toColumnName(String resideName, String fieldName) {
-		return resideName.toUpperCase() + "_" + fieldName.toUpperCase();
+		return NamesEncoding.encode(resideName + "_" + fieldName);
 	}
 
 	private String decodeTypeName(String typeName) {
@@ -109,8 +112,8 @@ public class SqlHelper {
 				case ByVal: // Basic Type Field
 					addColumn(listUserColumns, f.getName(), f, f.isKey());
 
-					fieldSerializer.add(new BasicTypeFieldSerializer(toFieldName(f.getName()), toColumnName(f.getName()), f
-							.isArray(), f.getType().getRawType()));
+					fieldSerializer.add(new BasicTypeFieldSerializer(toFieldName(f.getName()),
+							toColumnName(f.getName()), f.isArray(), f.getType().getRawType()));
 					break;
 				case Inline: // inline object
 					rT = f.getType();
@@ -119,19 +122,22 @@ public class SqlHelper {
 						List<String> subFieldNames = new ArrayList<String>();
 
 						for (Field rf : rT.getFields()) {
-							addColumn(listUserColumns, f.getName(), rf.getName(), f.isArray(),rf, f.isKey() && rf.isKey());
-							
+							addColumn(listUserColumns, f.getName(), rf.getName(), f.isArray(), rf,
+									f.isKey() && rf.isKey());
+
 							adapteres.add(ListTypeAdapter.getAdapter(rf.getType().getRawType()));
 							subFieldNames.add(rf.getName());
 						}
 
-						fieldSerializer.add(new EntityListFieldSerializer(toFieldName(f.getName()), adapteres, subFieldNames));
+						fieldSerializer.add(new EntityListFieldSerializer(toFieldName(f.getName()), adapteres,
+								subFieldNames));
 					} else {
 						for (Field rf : rT.getFields()) {
-							addColumn(listUserColumns, f.getName(), rf.getName(),  f.isArray(),rf, f.isKey() && rf.isKey());
+							addColumn(listUserColumns, f.getName(), rf.getName(), f.isArray(), rf,
+									f.isKey() && rf.isKey());
 
 							fieldSerializer.add(new BasicTypeFieldSerializer(toFieldName(f.getName(), rf.getName()),
-									toColumnName(f.getName(),rf.getName()), f.isArray(), rf.getType().getRawType()));
+									toColumnName(f.getName(), rf.getName()), f.isArray(), rf.getType().getRawType()));
 						}
 					}
 					break;
@@ -141,9 +147,10 @@ public class SqlHelper {
 						switch (rf.getImportance()) {
 						case Key:
 						case Core:
-							addColumn(listUserColumns, rT.getName(), rf.getName(), f.isArray(), rf, f.isKey() && rf.isKey());
+							addColumn(listUserColumns, rT.getName(), rf.getName(), f.isArray(), rf,
+									f.isKey() && rf.isKey());
 							fieldSerializer.add(new BasicTypeFieldSerializer(toFieldName(f.getName(), rf.getName()),
-									toColumnName(f.getName(),rf.getName()), f.isArray(), rf.getType().getRawType()));
+									toColumnName(f.getName(), rf.getName()), f.isArray(), rf.getType().getRawType()));
 							break;
 						}
 					}
@@ -154,16 +161,16 @@ public class SqlHelper {
 						switch (rf.getImportance()) {
 						case Key:
 						case Core:
-							addColumn(listUserColumns, rT.getName(), rf.getName(), f.isArray(), rf, f.isKey() || rf.isKey());
+							addColumn(listUserColumns, rT.getName(), rf.getName(), f.isArray(), rf,
+									f.isKey() || rf.isKey());
 							fieldSerializer.add(new BasicTypeFieldSerializer(toFieldName(f.getName(), rf.getName()),
-									toColumnName(f.getName(),rf.getName()), f.isArray(), rf.getType().getRawType()));
+									toColumnName(f.getName(), rf.getName()), f.isArray(), rf.getType().getRawType()));
 							break;
 						}
 					}
 					break;
 				}
 			}
-			
 
 			StringBuilder sbForSelect = new StringBuilder();
 			StringBuilder sbForWhere = new StringBuilder();
@@ -182,11 +189,13 @@ public class SqlHelper {
 			}
 
 			ArrayList<DatabaseColumn> listSystemColumns = new ArrayList<DatabaseColumn>();
-			DatabaseColumn col = new DatabaseColumn("LastModified_", "TIMESTAMP_", false, false, false, RawTypes.Timestamp, 0, 0, 0);
+			DatabaseColumn col = new DatabaseColumn("LastModified_", "TIMESTAMP_", false, false, false,
+					RawTypes.Timestamp, 0, 0, 0);
 			listSystemColumns.add(col);
-			
-			fieldSerializer.add(new SystemTypeFieldSerializer("LastModified_", "LastModified_",false, RawTypes.Timestamp));
-			
+
+			fieldSerializer.add(new SystemTypeFieldSerializer("LastModified_", "LastModified_", false,
+					RawTypes.Timestamp));
+
 			this.entitySerializer = new EntityFieldSerializer(fieldSerializer);
 
 			this.keyColumns = listKeyColumns.toArray(new DatabaseColumn[0]);

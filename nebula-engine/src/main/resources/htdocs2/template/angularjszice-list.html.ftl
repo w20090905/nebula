@@ -66,28 +66,28 @@
 		  			<#break>
 				<#case "Inline">
 					<#if field.key || field.core><#list field.type.fields as rF><#if field.key && rF.key>				
-				  		<td>{{data.${field.name}${rF.name}}}</td>			
+				  		<td>{{data."${field.name}${rF.name}"}}</td>			
 		  			</#if></#list></#if>
 		  			<#break>
 				<#case "ByRef">
 					<#list field.type.fields as rF><#rt>
 						<#if field.key && rF.key><#rt>			
-				  		<td>{{data.${field.name}${rF.name}}}</td>			
+				  		<td>{{data."${field.name}${rF.name}"}}</td>			
 						<#elseif rF.key><#rt>			
-				  		<td>{{data.${field.name}${rF.name}}}</td>			
+				  		<td>{{data."${field.name}${rF.name}"}}</td>			
 						<#elseif rF.core>			
-				  		<td>{{data.${field.name}${rF.name}}}</td>			
+				  		<td>{{data."${field.name}${rF.name}"}}</td>			
 	    				</#if>
 		  			</#list>
 		  			<#break>		
 				<#case "Cascade">
 					<#list field.type.fields as rF><#rt>
 						<#if field.key && rF.key><#rt>			
-				  		<td>{{data.${field.name}${rF.name}}}</td>			
+				  		<td>{{data."${field.name}${rF.name}"}}</td>			
 						<#elseif rF.key><#rt>			
-				  		<td>{{data.${field.name}${rF.name}}}</td>			
+				  		<td>{{data."${field.name}${rF.name}"}}</td>			
 						<#elseif rF.core>			
-				  		<td>{{data.${field.name}${rF.name}}}</td>			
+				  		<td>{{data."${field.name}${rF.name}"}}</td>			
 	    				</#if>
 		  			</#list>
 		  			<#break>	
