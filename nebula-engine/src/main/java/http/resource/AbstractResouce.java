@@ -14,7 +14,7 @@ public abstract class AbstractResouce implements Resource {
 
 	public AbstractResouce(final String mime, long maxAge, int delayTime) {
 		super();
-		this.mime = mime;
+		this.mime = mime!=null?mime:"text/html";
 		this.maxAge = maxAge;
 		this.delayTime = delayTime;
 	}

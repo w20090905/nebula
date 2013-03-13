@@ -13,8 +13,6 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
-import nebula.data.Entity;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.simpleframework.http.Address;
@@ -23,7 +21,6 @@ import org.simpleframework.http.Response;
 import org.simpleframework.http.core.Container;
 import org.simpleframework.http.resource.Resource;
 import org.simpleframework.http.resource.ResourceEngine;
-import org.simpleframework.util.lease.LeaseException;
 
 public class BasicResourceContainer implements Container {
 	private Log log = LogFactory.getLog(this.getClass());
@@ -68,35 +65,35 @@ public class BasicResourceContainer implements Container {
 			log.debug("# Request\t: " + req.getAddress().getPath() + " Method\t: " + req.getMethod());
 		}
 		try {
-			Entity currentUser = (Entity) req.getSession().get("#currentUser");
-			if (currentUser == null) {
-				// if(req.getAddress().getPath().getPath().equals("/loginzice.html")){
-				//
-				// }
-				// if(req.getAddress().getPath().getExtension().equals("html")
-				// &&
-				// !req.getAddress().getPath().getPath().equals("/loginzice.html")){
-				// redirectToLoginResource.handle(req, resp);
-				// return;
-				// }
-				//
-				// String path = req.getAddress().getPath().getPath();
-				// Resource res = cachedLinks.get(path);
-				// if (res == null) {
-				// res = resolve(req.getAddress());
-				// }
-				//
-				// if (res instanceof StaticResource) {
-				// res.handle(req, resp);
-				// return;
-				// }else if (res instanceof LoginListResouce) {
-				// res.handle(req, resp);
-				// return;
-				// } else {
-				// redirectToLoginResource.handle(req, resp);
-				// return;
-				// }
-			}
+//			Entity currentUser = (Entity) req.getSession().getAttribute("#currentUser");
+//			if (currentUser == null) {
+//				// if(req.getAddress().getPath().getPath().equals("/loginzice.html")){
+//				//
+//				// }
+//				// if(req.getAddress().getPath().getExtension().equals("html")
+//				// &&
+//				// !req.getAddress().getPath().getPath().equals("/loginzice.html")){
+//				// redirectToLoginResource.handle(req, resp);
+//				// return;
+//				// }
+//				//
+//				// String path = req.getAddress().getPath().getPath();
+//				// Resource res = cachedLinks.get(path);
+//				// if (res == null) {
+//				// res = resolve(req.getAddress());
+//				// }
+//				//
+//				// if (res instanceof StaticResource) {
+//				// res.handle(req, resp);
+//				// return;
+//				// }else if (res instanceof LoginListResouce) {
+//				// res.handle(req, resp);
+//				// return;
+//				// } else {
+//				// redirectToLoginResource.handle(req, resp);
+//				// return;
+//				// }
+//			}
 
 			String path = req.getAddress().getPath().getPath();
 			Resource res = cachedLinks.get(path);
@@ -113,10 +110,6 @@ public class BasicResourceContainer implements Container {
 			e.printStackTrace();
 			log.error(e);
 			this.errorHandleResource.redirectTo(req, resp, e);
-		} catch (LeaseException e) {
-			e.printStackTrace();
-			log.error(e);
-			throw new RuntimeException(e);
 		}
 	}
 

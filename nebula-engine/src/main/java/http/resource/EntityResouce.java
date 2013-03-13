@@ -34,7 +34,7 @@ public class EntityResouce extends AbstractResouce {
 		Entity data = datastoreHolder.get().get(key);
 		
 		long newModified = ((Timestamp) data.get("LastModified_")).getTime();
-		if (newModified == this.lastModified) return;
+//		if (newModified == this.lastModified) return;
 		
 		ByteArrayOutputStream bout = null;
 		try {
