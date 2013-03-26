@@ -149,10 +149,10 @@ public abstract class TypeLoader {
 				return null;
 			}
 		} catch (IOException e) {
-			log.error(e);
+			log.error("IOException ",e);
 			throw new RuntimeException(e);
 		} catch (RecognitionException e) {
-			log.error(e);
+			log.error("RecognitionException ",e);
 			throw new RuntimeException(e);
 		}
 	}

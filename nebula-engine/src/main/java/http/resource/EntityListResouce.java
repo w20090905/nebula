@@ -81,7 +81,7 @@ public class EntityListResouce extends AbstractResouce {
 			store.flush();
 			return req.getAddress().getPath() + inData.getID();
 		} catch (IOException e) {
-			log.error(e);
+			log.error("IOException" + req.getAddress().getPath());
 			throw new RuntimeException(e);
 		}
 	}

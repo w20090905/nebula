@@ -31,7 +31,7 @@ public class ErrorHandleResouce implements Resource {
 			resp.close();
 
 		} catch (IOException e) {
-			log.error(e);
+			log.error("IOException" + req.getAddress().getPath());
 			throw new RuntimeException(e);
 		}
 	}
@@ -45,10 +45,10 @@ public class ErrorHandleResouce implements Resource {
 
 			// normal parse
 			resp.setCode(302);
-			resp.close();
+			resp.getOutputStream().flush();
 
 		} catch (IOException e) {
-			log.error(e);
+			log.error("IOException" + req.getAddress().getPath());
 			throw new RuntimeException(e);
 		}
 	}
@@ -65,7 +65,7 @@ public class ErrorHandleResouce implements Resource {
 			resp.close();
 
 		} catch (IOException e) {
-			log.error(e);
+			log.error("IOException" + req.getAddress().getPath());
 			throw new RuntimeException(e);
 		}
 	}

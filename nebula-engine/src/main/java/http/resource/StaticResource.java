@@ -49,7 +49,7 @@ public class StaticResource extends AbstractResouce {
 				if (in != null) in.close();
 			} catch (Exception e2) {
 			}
-			log.error(e);
+			log.error(e.getClass().getName(),e);
 			throw new RuntimeException(e);
 		}
 	}

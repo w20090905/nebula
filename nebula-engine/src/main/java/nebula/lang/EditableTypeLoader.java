@@ -103,10 +103,10 @@ public class EditableTypeLoader extends TypeLoader {
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		} catch (RecognitionException e) {
-			log.error(e);
+			log.error(e.getClass().getName(),e);
 			throw new RuntimeException(e);
 		} catch (IOException e) {
-			log.error(e);
+			log.error(e.getClass().getName(),e);
 			throw new RuntimeException(e);
 		}
 	}

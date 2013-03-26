@@ -18,7 +18,7 @@ public class TypeLoaderForTest extends TypeLoader {
 		try {
 			type = super.defineNebula(new StringReader(text)).get(0);
 		} catch (RecognitionException e) {
-			log.error(e);
+			log.error(e.getClass().getName(),e);
 			throw new RuntimeException(e);
 		}
 		return type;
@@ -31,10 +31,10 @@ public class TypeLoaderForTest extends TypeLoader {
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		} catch (IOException e) {
-			log.error(e);
+			log.error(e.getClass().getName(),e);
 			throw new RuntimeException(e);
 		} catch (RecognitionException e) {
-			log.error(e);
+			log.error(e.getClass().getName(),e);
 			throw new RuntimeException(e);
 		}
 	}

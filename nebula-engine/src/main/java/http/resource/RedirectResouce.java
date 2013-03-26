@@ -31,7 +31,7 @@ public class RedirectResouce implements Resource {
 			resp.close();
 
 		} catch (IOException e) {
-			log.error(e);
+			log.error("IOException" + req.getAddress().getPath());
 			throw new RuntimeException(e);
 		}
 	}
@@ -49,7 +49,7 @@ public class RedirectResouce implements Resource {
 			resp.close();
 
 		} catch (IOException e) {
-			log.error(e);
+			log.error("IOException" + req.getAddress().getPath());
 			throw new RuntimeException(e);
 		}
 	}

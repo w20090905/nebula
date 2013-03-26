@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.mortbay.jetty.EofException;
 import org.simpleframework.http.Address;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
@@ -14,7 +15,7 @@ public abstract class AbstractResouce implements Resource {
 
 	public AbstractResouce(final String mime, long maxAge, int delayTime) {
 		super();
-		this.mime = mime!=null?mime:"text/html";
+		this.mime = mime != null ? mime : "text/html";
 		this.maxAge = maxAge;
 		this.delayTime = delayTime;
 	}
@@ -44,16 +45,22 @@ public abstract class AbstractResouce implements Resource {
 		throw new UnsupportedOperationException("cann't support delete " + address);
 	}
 
+	static long cntEofException = 0;
+	static long cntIOException = 0;
+
 	@Override
 	public void handle(Request req, Response resp) {
+
 		long currentTimeMillis = System.currentTimeMillis();
 		String method = req.getMethod();
 
 		try {
 			if ("GET".equals(method)) {
-				if (currentTimeMillis- this.lastChecked > delayTime) {
-					if(log.isTraceEnabled()){
-						log.trace("check updated time at currentTimeMillis:\t"+ currentTimeMillis + " - lastChecked:\t" + this.lastChecked + "  = "+ (currentTimeMillis- this.lastChecked) + "  delayTime:\t"+ delayTime);
+				if (currentTimeMillis - this.lastChecked > delayTime) {
+					if (log.isTraceEnabled()) {
+						log.trace("check updated time at currentTimeMillis:\t" + currentTimeMillis
+								+ " - lastChecked:\t" + this.lastChecked + "  = "
+								+ (currentTimeMillis - this.lastChecked) + "  delayTime:\t" + delayTime);
 					}
 					get(req.getAddress());
 					this.lastChecked = currentTimeMillis;
@@ -68,7 +75,6 @@ public abstract class AbstractResouce implements Resource {
 				resp.setDate("Date", this.lastModified);
 				resp.getOutputStream().write(cache);
 				resp.getOutputStream().flush();
-				resp.close();
 			} else if ("HEADER".equals(method)) {
 				System.out.println("Header Last-Modified : " + req.getValue("Last-Modified"));
 			} else if ("PUT".equals(method)) {
@@ -85,7 +91,6 @@ public abstract class AbstractResouce implements Resource {
 				resp.setDate("Date", this.lastModified);
 				resp.getOutputStream().write(cache);
 				resp.getOutputStream().flush();
-				resp.close();
 			} else if ("POST".equals(method)) {
 				String newUrl = this.post(req);
 
@@ -95,8 +100,7 @@ public abstract class AbstractResouce implements Resource {
 				resp.set("Content-Language", "en-US");
 				resp.set("Content-Type", "text/html");
 				resp.getPrintStream().print(newUrl);
-				resp.close();
-
+				resp.getOutputStream().flush();
 			} else if ("DELETE".equals(method)) {
 				this.delete(req.getAddress());
 
@@ -106,13 +110,15 @@ public abstract class AbstractResouce implements Resource {
 				resp.set("Content-Language", "en-US");
 				resp.set("Content-Type", "text/html");
 				resp.set("Content-Length", 0);
-				resp.close();
+				resp.getOutputStream().flush();
+				
 			} else {
 				throw new RuntimeException("Unsupport method " + method);
 			}
+		} catch (EofException e) {
+			log.error("EofException[ " + ++cntEofException + " ] " + req.getAddress().getPath());
 		} catch (IOException e) {
-			log.error(e);
-			throw new RuntimeException(e);
+			log.error("IOException[ " + ++cntIOException + " ] " + req.getAddress().getPath());
 		}
 	}
 }

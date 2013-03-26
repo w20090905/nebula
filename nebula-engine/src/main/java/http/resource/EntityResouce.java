@@ -49,7 +49,7 @@ public class EntityResouce extends AbstractResouce {
 				if (bout != null) bout.close();
 			} catch (Exception e2) {
 			}
-			log.error(e);
+			log.error(e.getClass().getName(),e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -65,7 +65,7 @@ public class EntityResouce extends AbstractResouce {
 				throw new RuntimeException("Cann't find object " + key);
 			}
 		} catch (IOException e) {
-			log.error(e);
+			log.error("IOException" + req.getAddress().getPath());
 			throw new RuntimeException(e);
 		}
 	}

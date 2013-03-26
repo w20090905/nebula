@@ -120,7 +120,7 @@ class BootstrapTypeLoader extends TypeLoader {
 		try {
 			this.defineNebula(new StringReader(strAttributes));
 		} catch (RecognitionException e) {
-			log.error(e);
+			log.error("RecognitionException",e);
 			throw new RuntimeException(e);
 		}
 

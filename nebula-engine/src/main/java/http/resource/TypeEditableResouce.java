@@ -52,7 +52,7 @@ public class TypeEditableResouce extends AbstractResouce {
 				if (bout != null) bout.close();
 			} catch (Exception e2) {
 			}
-			log.error(e);
+			log.error("IOException",e);
 			throw new RuntimeException(e);
 		}
 	}

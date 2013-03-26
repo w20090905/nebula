@@ -107,9 +107,8 @@ public class BasicResourceContainer implements Container {
 			return;
 
 		} catch (RuntimeException e) {
-			e.printStackTrace();
-			log.error(e);
-			this.errorHandleResource.redirectTo(req, resp, e);
+			log.error(e.getClass().getName(),e);
+//			this.errorHandleResource.redirectTo(req, resp, e);
 		}
 	}
 

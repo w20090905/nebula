@@ -54,7 +54,7 @@ public class LoginListResouce implements Resource {
 				throw new RuntimeException("Unsupport method " + method);
 			}
 		} catch (IOException e) {
-			log.error(e);
+			log.error("IOException" + req.getAddress().getPath());
 			throw new RuntimeException(e);
 		}
 	}

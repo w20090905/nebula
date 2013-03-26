@@ -13,7 +13,7 @@ public class TypeLoaderForTest extends SystemTypeLoader {
 		try {
 			return super.defineNebula(in);
 		} catch (RecognitionException e) {
-			log.error(e);
+			log.error(e.getClass().getName(),e);
 			throw new RuntimeException(e);
 		}
 	}

@@ -63,10 +63,10 @@ public class TemplateResouce extends AbstractResouce {
 			super.lastModified = System.currentTimeMillis();
 			super.cache = bout.toByteArray();
 		} catch (TemplateException e) {
-			log.error(e);
+			log.error("TemplateException",e);
 			throw new RuntimeException(e);
 		} catch (IOException e) {
-			log.error(e);
+			log.error("IOException",e);
 			throw new RuntimeException(e);
 		}
 	}

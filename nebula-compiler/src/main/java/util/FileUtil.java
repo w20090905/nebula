@@ -31,7 +31,7 @@ public class FileUtil {
 			bin.reset();
 			return bin;
 		} catch (IOException e) {
-			log.error(e);
+			log.error("IOException",e);
 			throw new RuntimeException(e);
 		}
 	}

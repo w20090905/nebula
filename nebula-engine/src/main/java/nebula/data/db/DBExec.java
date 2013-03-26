@@ -74,7 +74,7 @@ public class DBExec {
 			SQL_DELETE = conn.prepareStatement(builder.builderDelete());
 			SQL_LIST = conn.prepareStatement(builder.builderList());
 		} catch (Exception e) {
-			log.error(e);
+			log.error(e.getClass().getName(),e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -320,7 +320,7 @@ public class DBExec {
 					rs.close();
 				}
 			} catch (SQLException e) {
-				log.error(e);
+				log.error(e.getClass().getName(),e);
 				throw new RuntimeException(e);
 			}
 		}
@@ -330,7 +330,7 @@ public class DBExec {
 		try {
 			conn.createStatement().execute(builder.builderDrop());
 		} catch (Exception e) {
-			log.error(e);
+			log.error(e.getClass().getName(),e);
 		}
 	}
 
@@ -348,7 +348,7 @@ public class DBExec {
 		try {
 			conn.createStatement().execute(builder.builderDeleteAll());
 		} catch (Exception e) {
-			log.error(e);
+			log.error(e.getClass().getName(),e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -446,7 +446,7 @@ public class DBExec {
 			SQL_DELETE.close();
 			SQL_LIST.close();
 		} catch (SQLException e) {
-			log.error(e);
+			log.error(e.getClass().getName(),e);
 			throw new RuntimeException(e);
 		}
 	}
