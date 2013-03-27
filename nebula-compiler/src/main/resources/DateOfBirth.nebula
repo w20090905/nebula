@@ -1,0 +1,2 @@
+define DateOfBirth|zh:出生年月  extends Date {
+};

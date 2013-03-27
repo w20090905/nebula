@@ -1,4 +1,4 @@
 @formatType = "textarea";
 @maxLength = 80;
-define Address extends String {
+define Address|zh:地址 extends String {
 };

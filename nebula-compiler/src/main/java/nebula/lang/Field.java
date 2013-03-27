@@ -15,7 +15,7 @@ public class Field {
 //    public static final Importance UNIMPORTANT = Importance.Unimportant;
 
     final String name;
-    Alias nameAlias;
+    final Alias nameAlias;
     String displayName;
     Importance importance = Importance.Unimportant;
 
@@ -44,6 +44,7 @@ public class Field {
         this.displayName = name;
         this.resideType = resideType;
         this.attrs =  new InheritHashMap();
+        this.nameAlias = new Alias(name);
     }
 
 	public String getDisplayName() {
@@ -113,5 +114,9 @@ public class Field {
 
 	public InheritHashMap getAttrs() {
 		return attrs;
+	}
+
+	public Alias getNameAlias() {
+		return nameAlias;
 	}
 }

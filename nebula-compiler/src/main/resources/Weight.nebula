@@ -1,2 +1,2 @@
-define Weight extends Long {
+define Weight|zh:重量 extends Long {
 };

@@ -1,5 +1,5 @@
 @formatType = "numeric";
 @maxLength = 20;
 @minLength = 6;
-define Fax extends String {
+define Fax|zh:传真号码 extends String {
 };

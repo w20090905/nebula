@@ -1,4 +1,4 @@
 @formatType = "birthday";
 @format = "mm-dd";
-define Birthday extends Date {
+define Birthday|zh:生日  extends Date {
 };

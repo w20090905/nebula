@@ -2,5 +2,5 @@
 @maxLength = 3;
 @min = 0;
 @max = 160;
-define Age extends Long {
+define Age|zh:年龄  extends Long {
 };

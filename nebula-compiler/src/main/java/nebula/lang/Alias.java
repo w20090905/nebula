@@ -4,18 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Alias {
-	final Map<String, String> alias;
-	public Alias(){
-		alias = new HashMap<String, String>();
-	}
-	
+	final String defaultValue;
+	public final Map<String, String> alias;
 	public Alias(String defaultValue){
-		alias = new HashMap<String, String>();
-		alias.put("<>", defaultValue);
-	}
-	
-	public void setDefault(String value){
-		alias.put("<>", value);
+		this.alias = new HashMap<String, String>();
+		this.defaultValue = defaultValue;
 	}
 	
 	public void add(String language,String value){
@@ -23,13 +16,17 @@ public class Alias {
 	}
 	
 	public String getDefault(){
-		return alias.get("<>");		
+		return defaultValue;		
 	}
 	
 	public String get(String language){
 		if(language==null){
-			language = "<>";
+			return defaultValue;
 		}
-		return alias.get(language);
+		String str = alias.get(language);
+		if(str==null){
+			str = alias.get(language.substring(0, 2));
+		}
+		return str;
 	}
 }

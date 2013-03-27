@@ -1,2 +1,2 @@
-define Quantity extends Long {
+define Quantity|zh:数量  extends Long {
 };

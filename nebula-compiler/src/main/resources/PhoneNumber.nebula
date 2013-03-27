@@ -1,0 +1,2 @@
+define PhoneNumber|zh:电话号码 extends Code {
+};

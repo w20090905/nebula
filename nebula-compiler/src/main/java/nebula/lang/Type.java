@@ -14,14 +14,14 @@ public class Type implements Identifiable {
 	final Type superType;
 	final RawTypes rawType;// For Basic Type
 
-	String name;
-	Alias nameAlias;
+	final String name;
+	final Alias nameAlias;
 
 	final TypeStandalone standalone;
 
-	List<Field> fields;
+	final List<Field> fields;
 
-	InheritHashMap attrs;
+	final InheritHashMap attrs;
 
 	URL url;
 	boolean mutable = false;
@@ -29,7 +29,7 @@ public class Type implements Identifiable {
 	
 	long lastModified;
 
-	List<Field> references;
+	final List<Field> references;
 
 	public static String ROOT_TYPE = "Type";
 
@@ -50,6 +50,7 @@ public class Type implements Identifiable {
 		this.fields = new CopyOnWriteArrayList<Field>();
 		this.attrs = new InheritHashMap();
 		this.references = new CopyOnWriteArrayList<Field>();
+		this.nameAlias = new Alias(name);
 	}
 
 	/**
@@ -100,15 +101,12 @@ public class Type implements Identifiable {
 		this.attrs = new InheritHashMap(this.superType.attrs);
 		
 		this.references = new CopyOnWriteArrayList<Field>();
+		this.nameAlias = new Alias(name);
 		
 	}
 
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public List<Field> getFields() {
@@ -118,7 +116,11 @@ public class Type implements Identifiable {
 	public Alias getNameAlias() {
 		return nameAlias;
 	}
-
+	
+	public void setNameAlias(Alias alias) {
+		nameAlias.alias.putAll(alias.alias);
+	}
+	
 	public InheritHashMap getAttrs() {
 		return attrs;
 	}

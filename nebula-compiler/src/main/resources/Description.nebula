@@ -1,4 +1,7 @@
 @formatType = "textarea";
-@maxLength = 240;
-define Description extends String {
+@maxLength = 256;
+/*
+ * 单行的描述
+ * */
+define Description|zh:描述 extends String {
 };

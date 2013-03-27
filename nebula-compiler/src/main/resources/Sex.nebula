@@ -1,2 +1,2 @@
-define Sex extends Attr {
+define Sex|zh:性别 extends Attr {
 };

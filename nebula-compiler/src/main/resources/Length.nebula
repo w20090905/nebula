@@ -1,2 +1,2 @@
-define Length extends Long {
+define Length|zh:长度  extends Long {
 };

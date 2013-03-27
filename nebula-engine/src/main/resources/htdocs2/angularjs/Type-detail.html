@@ -10,7 +10,7 @@
 		  </ul>
 	</div>
 	<header>
-		<h1 class="tabs_involved" x-ng-show="data.name" >Type-{{data.name}}</h1>
+		<h1 class="tabs_involved" x-ng-show="data.name" >Type-{{data.name}} <span x-ng-repeat="(key, value) in data.nameAlias">&nbsp; {{key}}: {{value}}</span>	</h1>
 		<h1 class="tabs_involved" x-ng-show="!data.name">Type-New</h1>
 	</header>
 	
@@ -63,8 +63,8 @@
 			<tbody>
 				<tr x-ng-repeat="item in data.fields">
 					<td>{{$index+1}}</td>
-					<td align="left">{{item.name}}</td>
-					<td><a href="#/d/Type/{{item.typename}}">{{item.typename}}</a></td>
+					<td align="left">{{item.name}}<span x-ng-repeat="(key, value) in item.nameAlias">&nbsp; {{key}}: {{value}}</span></td>
+					<td><a href="#/d/Type/{{item.typeName}}">{{item.typeName}}</a></td>
 					<td></td>
 					<td></td>
 					<td>{{item.attrs}}</td>

@@ -1,7 +1,9 @@
 [
 	{	"label"	:	"Types",
 		"items"	:	[
-			{        "href": "#/d/Type/",        "label": "类型"},
+			{        "href": "#/d/Type/?standalone=Master",        "label": "实体"},
+			{        "href": "#/d/Type/?standalone=Basic",        "label": "基础类型"},
+			{        "href": "#/d/Type/?standalone=Transaction",        "label": "事务"},
 			{        "href": "#/d/Attribute/",        "label": "属性"}
 		]
 	},

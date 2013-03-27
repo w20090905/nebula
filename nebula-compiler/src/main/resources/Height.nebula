@@ -1,5 +1,5 @@
 @inputSize = "small";
 @uom = "cm";
 @maxLength = 3;
-define Height extends Long {
+define Height|zh:高  extends Long {
 };

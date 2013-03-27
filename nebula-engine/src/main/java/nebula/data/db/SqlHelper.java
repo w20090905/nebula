@@ -147,7 +147,7 @@ public class SqlHelper {
 						switch (rf.getImportance()) {
 						case Key:
 						case Core:
-							addColumn(listUserColumns, rT.getName(), rf.getName(), f.isArray(), rf,
+							addColumn(listUserColumns, f.getName(), rf.getName(), f.isArray(), rf,
 									f.isKey() && rf.isKey());
 							fieldSerializer.add(new BasicTypeFieldSerializer(toFieldName(f.getName(), rf.getName()),
 									toColumnName(f.getName(), rf.getName()), f.isArray(), rf.getType().getRawType()));
@@ -161,7 +161,7 @@ public class SqlHelper {
 						switch (rf.getImportance()) {
 						case Key:
 						case Core:
-							addColumn(listUserColumns, rT.getName(), rf.getName(), f.isArray(), rf,
+							addColumn(listUserColumns, f.getName(), rf.getName(), f.isArray(), rf,
 									f.isKey() || rf.isKey());
 							fieldSerializer.add(new BasicTypeFieldSerializer(toFieldName(f.getName(), rf.getName()),
 									toColumnName(f.getName(), rf.getName()), f.isArray(), rf.getType().getRawType()));

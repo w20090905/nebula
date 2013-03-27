@@ -56,15 +56,15 @@ public abstract class AbstractResouce implements Resource {
 
 		try {
 			if ("GET".equals(method)) {
-				if (currentTimeMillis - this.lastChecked > delayTime) {
-					if (log.isTraceEnabled()) {
-						log.trace("check updated time at currentTimeMillis:\t" + currentTimeMillis
-								+ " - lastChecked:\t" + this.lastChecked + "  = "
-								+ (currentTimeMillis - this.lastChecked) + "  delayTime:\t" + delayTime);
-					}
+//				if (currentTimeMillis - this.lastChecked > delayTime) {
+//					if (log.isTraceEnabled()) {
+//						log.trace("check updated time at currentTimeMillis:\t" + currentTimeMillis
+//								+ " - lastChecked:\t" + this.lastChecked + "  = "
+//								+ (currentTimeMillis - this.lastChecked) + "  delayTime:\t" + delayTime);
+//					}
 					get(req.getAddress());
 					this.lastChecked = currentTimeMillis;
-				}
+//				}
 
 				// normal parse
 				resp.setCode(200);

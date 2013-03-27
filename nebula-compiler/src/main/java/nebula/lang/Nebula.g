@@ -70,7 +70,9 @@ programDefinition returns[List<Type> retTypes]
     
 typeDefinition returns[Type type]
     :   (attrs = attrListDefinition)?
-        typeType=typeDefineKeyword typeID=ID ('|' alias=aliasLiteral[$typeID.text])?
+        typeType=typeDefineKeyword 
+        typeID=ID {Alias alias = new Alias($typeID.text);} 
+        ('|' aliasLiteral[alias])?
         ('extends' superTypeID=ID)? { 
             if($superTypeID==null){
                 switch(typeType){
@@ -97,7 +99,7 @@ typeDefinition returns[Type type]
             addType(type);
            
             if(alias!=null){
-                type.nameAlias = alias;
+                type.setNameAlias(alias);
             }
         }
         '{' 
@@ -114,7 +116,7 @@ nestedTypeDefinition[Type resideType,String name,Alias nameAlias] returns[Type t
             {
               String typeName = resideType.name + "$" + name;
               type = new Type(loader,resideType,typeName,resolveType(TypeStandalone.Mixin.name()));
-              if(nameAlias!=null)type.nameAlias=nameAlias;
+              if(nameAlias!=null)type.setNameAlias(nameAlias);
               addType(type);
             }
             fieldDefinition[type]* 
@@ -132,13 +134,13 @@ fieldDefinition[Type resideType] returns[Field field]
               field = new Field(resideType,$name.text);
            }
           }
-        ('|' alias=aliasLiteral[$name.text] {field.nameAlias =alias;})?
+        ('|' aliasLiteral[field.nameAlias])?
         range=arrayDefinition
         (INIT 
         |)
         (
             type=ID { field.type = resolveType($type.text);}
-            | nestedType = nestedTypeDefinition[resideType,$name.text,alias] {field.type = nestedType;}
+            | nestedType = nestedTypeDefinition[resideType,$name.text,field.nameAlias] {field.type = nestedType;}
            | {if(field.type==null)field.type = resolveType(field.name);} 
         )
         
@@ -226,8 +228,7 @@ decimal
         | '.' INT+
     ;
     
-aliasLiteral[String defaultName] returns[Alias alias]
-    @init{alias = new Alias(defaultName);}
+aliasLiteral[Alias alias]
     :   language=flexID ':' value=flexID {alias.add(language,value);}
         ('|' language=flexID ':' value=flexID {alias.add(language,value);} )*
     ;

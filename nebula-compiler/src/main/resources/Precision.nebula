@@ -1,2 +1,2 @@
-define Precision extends Long {
+define Precision|zh:精度 extends Long {
 };

@@ -8,7 +8,7 @@ angular.module('appAdmin', ['nebulaFilters', 'nebulaServices','nebulaDirectives'
 			when('/t/template/:typename-:cat.html.ftl', {templateUrl: 'angularjs/angularjs-edit.html', controller: FreeMarkerCtrl}).
 			when('/t/:TemplateType/:typename-:cat.html', {templateUrl: 'angularjs/angularjs-edit.html', controller: AngularJSCtrl}).
 			/* Type edit */
-			when('/d/Type', {templateUrlWP: 'angularjs/Type-list.html',   controller: TypeListCtrl}).
+			when('/d/Type/', {templateUrlWP: 'angularjs/Type-list.html',   controller: TypeListCtrl}).
 			when('/d/Type/!new', {templateUrlWP: 'angularjs/Type-detail.html', controller: NewTypeCtrl}).
 			when('/d/Type/:id', {templateUrlWP: 'angularjs/Type-detail.html', controller: TypeCtrl}).
 			/* Entity edit */

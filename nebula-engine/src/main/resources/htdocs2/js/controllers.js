@@ -91,7 +91,7 @@ function TypeListCtrl($scope, $route, $resource, $routeParams) {
     'use strict';
     $scope.typename = "Type";
     var DataResource = $resource('d/Type/', $routeParams, {
-        query: {method: 'GET', params: {}, isArray: true}
+        query: {method: 'GET', params: $routeParams, isArray: true}
     });
     $scope.datalist = DataResource.query();
 }

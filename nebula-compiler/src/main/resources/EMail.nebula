@@ -1,5 +1,5 @@
 @formatType = "email";
 @inputSize = "large";
 @maxLength = 120;
-define EMail extends String {
+define EMail|zh:邮件地址 extends String {
 };
