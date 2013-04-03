@@ -253,8 +253,8 @@
 						[#if field.key && rF.key]
 						[#elseif rF.key]
 							x-popup="/d/${field.type.name}/" 
-							x-params="{data['${field.name}${rF.name}']:${rF.name}}" 
-							x-returns="{data['${field.name}${rF.name}']:${rF.name}}"
+							x-beforePopup="${rF.name}=data['${field.name}${rF.name}'];" 
+							x-afterPopup="data['${field.name}${rF.name}']=ret.${rF.name}"
 						[#elseif rF.core]						
 						[/#if]
 					[/@compress][/#assign]

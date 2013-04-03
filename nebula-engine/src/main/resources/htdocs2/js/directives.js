@@ -9,8 +9,7 @@ function isEmpty(value) {
 }
 
 /* Directives */
-function PopupListCtrl($scope,$resource,urlParams,params){
-	$scope.params = params;
+function PopupListCtrl($scope,$resource,urlParams){
 	var DataResource = $resource('d/:typename/', urlParams, {
 		query: {method:'GET', params:{}, isArray:true}
 	});
@@ -126,20 +125,16 @@ var neFromListDirective = [
 		terminal : true,
 		link : function(scope, element, attrs, ngModelCtrl) {
 			var reqUrl = attrs.popup;
-			var params = simpleMap(attrs.params);
-			var returns = simpleMap(attrs.returns);
+			var beforePopupExp = attrs.beforepopup || '';
+			var afterPopupExp = attrs.afterpopup || '';
+			
 			
 			element.wrap('<div class="input-append"></div>').after('<a class="addon btn"><i class="icon-search"></i></a>').next().click(function(){
 				var inparams = {};
-				angular.forEach(params,function(that,me){
-					putVal(inparams,that,getVal(scope,me));
-				});
 				
 				popup(reqUrl,inparams,function(retData){
-					angular.forEach(returns,function(that,me){
-						putVal(scope,me,getVal(retData,that));
-					});
-					//scope.$digest();
+					scope.ret = retData;
+					scope.$eval(afterPopupExp);
 				});
 			});
 			
@@ -199,7 +194,6 @@ var neFromListDirective = [
 								controller = $controller(PopupListCtrl,
 										{
 											urlParams : urlParams,
-											params : params,
 											$scope : lastScope
 										});
 								
