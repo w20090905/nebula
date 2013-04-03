@@ -1,5 +1,14 @@
-type Product {
-	!Name;
-	Description;
-	Type Attr;
+type Product|zh:产品 {
+!Name;
+Code;
+Code区分 Attr;
+产品线 Attr;
+销售-Code;
+类别 Attr;
+当前 Code;
+工厂类别 Attr;
+描述;
+规格 Attr;
+扁平百分比 Percent;
+轮辋直径 Width;
 };

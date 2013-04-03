@@ -1,0 +1,2 @@
+define Width|zh:宽度  extends Long {
+};

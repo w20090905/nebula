@@ -1,90 +1,132 @@
 <article class="module width_full">
-	<div class="btn-group pull-right"  x-ng-show="data.standalone != 'BuilderIn'">		
-		  <a href="#/d/{{data.name}}/" class="btn">Edit Data</a>
-		  <button class="btn dropdown-toggle" data-toggle="dropdown">
-		    <span class="caret"></span>
-		  </button>
-		  <ul class="dropdown-menu">
-			  <li><a tabindex="-1" href="#/t/angularjs/{{data.name}}-list.html">View List Template</a></li>
-			  <li><a tabindex="-1" href="#/t/angularjs/{{data.name}}-detail.html">View Detail Template</a></li>
-		  </ul>
-	</div>
 	<header>
-		<h1 class="tabs_involved" x-ng-show="data.name" >Type-{{data.name}} <span x-ng-repeat="(key, value) in data.nameAlias">&nbsp; {{key}}: {{value}}</span>	</h1>
+		<h1 class="tabs_involved" x-ng-show="data.name">
+			Type-{{data.name}} <span x-ng-repeat="(key, value) in data.nameAlias">&nbsp; {{key}}: {{value}}</span>
+		</h1>
 		<h1 class="tabs_involved" x-ng-show="!data.name">Type-New</h1>
+		<div class="buttons btn-toolbar" x-ng-show="data.standealone='Master'">
+			<div class="btn-group">
+				<a href="#/d/{{data.name}}/" class="btn"><i class="icon-edit"></i> Edit Data</a>
+				<button class="btn dropdown-toggle" data-toggle="dropdown">
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a tabindex="-1" href="#/t/angularjs/{{data.name}}-list.html">View List Template</a></li>
+					<li><a tabindex="-1" href="#/t/angularjs/{{data.name}}-detail.html">View Detail Template</a></li>
+				</ul>
+			</div>
+		</div>
 	</header>
 	
-	<form name="form" x-ng-submit="$save()" class="form-horizontal">
-	
-<ul class="nav nav-tabs">
-  <li class="active" x-ng-show="data.name" ><a href="#home" data-toggle="tab">基本信息</a></li>
-  <li x-ng-show="data.name && data.code"><a href="#source" data-toggle="tab">源代码</a></li>
-  <li class="active" x-ng-show="!data.name"><a href="#source" data-toggle="tab" >源代码</a></li>
-</ul>
-<div class="tab-content">
-<div class="tab-pane active" id="home" x-ng-show="data.name">
-	<div class="control-group" style="clear: both;">
-		<label class="control-label">Name</label>
-		<div class="controls">
-			<input type="text" x-ng-model="data.name" x-ng-readonly="update"/>
+	<div id="breadcrumb">
+		<a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+		<a href="#" class="tip-bottom">Form elements</a>
+		<a href="#" class="current">Common elements</a>
+	</div>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="widget-box">
+					<div class="widget-title">
+						<span class="icon"> <i class="icon-align-justify"></i>
+						</span>
+						<ul class="nav nav-tabs">
+							<li class="active" x-ng-show="data.name"><a href="#home" data-toggle="tab">基本信息</a></li>
+							<li x-ng-show="data.name && data.code"><a href="#source" data-toggle="tab">源代码</a></li>
+							<li class="active" x-ng-show="!data.name"><a href="#source" data-toggle="tab">源代码</a></li>
+						</ul>
+					</div>
+					<div class="widget-content tab-content nopadding">
+						<div class="tab-pane active" id="home" x-ng-show="data.name">
+							<form name="form" x-ng-submit="$save()" class="form-horizontal">
+							<div class="control-group" style="clear: both;">
+								<label class="control-label">Name</label>
+								<div class="controls">
+									<input type="text" x-ng-model="data.name" x-ng-readonly="update" />
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">Parent Type</label>
+								<div class="controls">
+									<a href="#/d/{{typename}}/{{data.parent}}">{{data.parent}}</a>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">Standalone</label>
+								<div class="controls">
+									<span class="uneditable-input">{{data.standalone}}</span>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">Attrs</label>
+								<div class="controls">
+									<ol>
+										<li x-ng-repeat="(key, value) in data.attrs">{{key}} : {{value}}</li>
+									</ol>
+								</div>
+							</div>
+							<div class="control-group" x-ng-show="data.fields.length>0">
+								<label class="control-label">Detail</label>
+								<table class="table tablesorter table-bordered">
+									<thead>
+										<tr>
+											<th width="3em">#</th>
+											<th width="15%">Name</th>
+											<th width="15%">Type</th>
+											<th width="15%">Master</th>
+											<th width="15%">Standalone</th>
+											<th>Detail</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr x-ng-repeat="item in data.fields">
+											<td>{{$index+1}}</td>
+											<td align="left">{{item.name}}<span x-ng-repeat="(key, value) in item.nameAlias">&nbsp; {{key}}:
+													{{value}}</span></td>
+											<td><a href="#/d/Type/{{item.typeName}}">{{item.typeName}}</a></td>
+											<td></td>
+											<td></td>
+											<td>{{item.attrs}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="form-actions">
+								<button type="submit" class="btn btn-primary" x-ng-disabled="!data.mutable && form.$invalid">保存</button>
+								<a href="" class="btn" x-ng-click="$back()">返回</a>
+							</div>
+							</form>
+						</div>
+						<div class="tab-pane" id="source" x-ng-show="data.name">
+							<form name="form" x-ng-submit="$save()" class="form-horizontal">
+							<div class="control-group">
+								<textarea x-ng-model="data.code" x-required rows="20" cols="120" class="input-block-level"
+									placeholder="add Type info here"
+								></textarea>
+								</div>
+								<div class="form-actions">
+									<button type="submit" class="btn btn-primary" x-ng-disabled="!data.mutable && form.$invalid">保存</button>
+									<a href="" class="btn" x-ng-click="$back()">返回</a>
+								</div>
+							</form>
+						</div>
+						<div class="tab-pane active" id="source" x-ng-show="!data.name">
+							<form name="form" x-ng-submit="$save()" class="form-horizontal">
+							<div class="control-group">
+								<textarea x-ng-model="data.code" x-required rows="20" cols="120" class="input-block-level"
+									placeholder="add Type info here"
+								></textarea>
+								</div>
+								<div class="form-actions">
+									<button type="submit" class="btn btn-primary" x-ng-disabled="!data.mutable && form.$invalid">保存</button>
+									<a href="" class="btn" x-ng-click="$back()">返回</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="control-group">
-		<label class="control-label">Parent Type</label>
-		<div class="controls"><a href="#/d/{{typename}}/{{data.parent}}">{{data.parent}}</a></div>
 	</div>
-	<div class="control-group">
-		<label class="control-label">Standalone</label>
-		<div class="controls"><span class="input-large uneditable-input">{{data.standalone}}</span></div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">Attrs</label>
-		<div class="controls">     
-		<ol>
-	        <li x-ng-repeat="(key, value) in data.attrs">
-	         {{key}} : {{value}}
-	        </li>
-      	</ol>
-      	</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">Detail</label>
-		<table class="table tablesorter">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th style="width: 10em;">Name</th>
-					<th>Type</th>
-					<th>Master</th>
-					<th>Standalone</th>
-					<th>Detail</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr x-ng-repeat="item in data.fields">
-					<td>{{$index+1}}</td>
-					<td align="left">{{item.name}}<span x-ng-repeat="(key, value) in item.nameAlias">&nbsp; {{key}}: {{value}}</span></td>
-					<td><a href="#/d/Type/{{item.typeName}}">{{item.typeName}}</a></td>
-					<td></td>
-					<td></td>
-					<td>{{item.attrs}}</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</div>
- <div class="tab-pane" id="source" x-ng-show="data.name">
-	<textarea x-ng-model="data.code" x-required rows="20" cols="120" class="input-block-level" placeholder="add Type info here"></textarea>
-</div>
- <div class="tab-pane active" id="source" x-ng-show="!data.name">
-	<textarea x-ng-model="data.code" x-required rows="20" cols="120" class="input-block-level" placeholder="add Type info here"></textarea>
-</div>
-</div>
-
-		<div class="form-actions">
-	  		<input type="submit" class="btn btn-primary" x-ng-disabled="!data.mutable && form.$invalid" value="Save changes">
-  		<a href="" class="btn" x-ng-click="$back()">返回</a>
-		</div>
-	
-	</form>
 </article>

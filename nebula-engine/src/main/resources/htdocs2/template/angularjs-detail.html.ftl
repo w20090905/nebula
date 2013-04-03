@@ -1,17 +1,37 @@
 [#ftl/]
 <article class="module width_full">
-	<div class="btn-group pull-right">
-		  <a href="#/d/Type/${type.name}" class="btn">Define</a>
-		  <button class="btn dropdown-toggle" data-toggle="dropdown">
-		    <span class="caret"></span>
-		  </button>
-		  <ul class="dropdown-menu">
-			  <li><a tabindex="-1" href="#/t/angularjs/${type.name}-detail.html">View Template</a></li>
-		  </ul>
-	</div>
 	<header>
-		<h1>${type.name}&nbsp;</h1>
+		<h1 class="tabs_involved">${type.name}</h1>	
+		<div class="btn-toolbar">
+			<div class="btn-group">
+		  		<a href="#/d/Type/${type.name}" class="btn">Define</a>
+				  <button class="btn dropdown-toggle" data-toggle="dropdown">
+				    <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu">
+			  	<li><a tabindex="-1" href="#/t/angularjs/${type.name}-list.html">View Template</a></li>
+				  </ul>
+			</div>
+		</div>
 	</header>
+	
+	<div id="breadcrumb">
+		<a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+		<a href="#" class="tip-bottom">Form elements</a>
+		<a href="#" class="current">Common elements</a>
+	</div>
+	
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="widget-box">
+					<div class="widget-title">
+						<span class="icon"> <i class="icon-align-justify"></i>
+						</span>
+						<h5>${type.name}</h5>
+					</div>
+					<div class="widget-content nopadding">
+					
 	
 	<form name="form" x-ng-submit="$save()"  class="form-horizontal" novalidate>
 	
@@ -27,7 +47,7 @@
 	<div class="control-group ${controlGroupClass}">
 		<label class="control-label" for="${field.name}">${field.name}</label>
 		<div class="controls">
-			<input id="${field.name}" x-ng-model='data["${field.name}"]' x-ng-list ${required}/>
+			<input id="${field.name}" x-ng-model="data['${field.name}']" x-ng-list ${required}/>
 		</div>
 	</div>
 	  			[#break]
@@ -36,7 +56,7 @@
 			[#case "Inline"]
 
 		<table class="table table-hover table-condensed">
-		<caption>${field.name} [{{data["${field.name}"].length}}]</caption>
+		<caption>${field.name} [{{data['${field.name}'].length}}]</caption>
 		<thead>
 			<tr>
 				<th>#</th>
@@ -146,8 +166,8 @@
 			[/@compress] [/#assign]
 		
 		
-			<select ng-init="values = [${attrValues?substring(1)}];" 
-			ng-model='data["${field.name}"]' ng-options="c.name as c.name for c in values" >
+			<select x-ng-init="values = [${attrValues?substring(1)}];" 
+			x-ng-model="data['${field.name}']" x-ng-options="c.name as c.name for c in values" >
 				<option value="">-- 选择 ${field.name} --</option>
 			</select>
 			<a href="#/d/Attribute/${field.name}"><i class="icon-edit"> </i> </a>
@@ -228,7 +248,7 @@
 
 					[#assign options][@compress single_line=true]
 						readonly
-						x-ng-model='data["${field.name}${rF.name}"]'
+						x-ng-model="data['${field.name}${rF.name}']"
 						
 						[#if field.key && rF.key]
 						[#elseif rF.key]
@@ -244,7 +264,7 @@
 					[#elseif rF.key]
 			<input type="${inputType}" ${options}/>
 					[#elseif rF.core]
-			<input type="hidden" x-ng-model='data["${field.name}${rF.name}"]'/>{{data['${field.name}${rF.name}']}}
+			<input type="hidden" x-ng-model="data['${field.name}${rF.name}']"/>{{data['${field.name}${rF.name}']}}
     				[/#if]
 	  			[/#list]
 		</div>
@@ -281,4 +301,10 @@
 	</div>
 	
 	</form>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	
 </article>

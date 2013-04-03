@@ -8,6 +8,16 @@ function AppControl($scope, $cookies) {
     $scope.LoginUserID = $cookies.LoginUserID;
 }
 
+function MenuUserCtrl($scope, $resource, $cookies) {
+    'use strict';
+    var DataResource = $resource('e/menu/menuUser.json', {}, {
+        query: {method: 'GET', params: {
+            "loginUserID": $cookies.LoginUserID
+        }, isArray: true}
+    });
+    $scope.datalist = DataResource.query();
+}
+
 function MenuAdminCtrl($scope, $resource, $cookies) {
     'use strict';
     var DataResource = $resource('e/menu/menuAdmin.json', {}, {
@@ -18,9 +28,9 @@ function MenuAdminCtrl($scope, $resource, $cookies) {
     $scope.datalist = DataResource.query();
 }
 
-function MenuSettingCtrl($scope, $resource, $cookies) {
+function MenuProfileCtrl($scope, $resource, $cookies) {
     'use strict';
-    var DataResource = $resource('e/menu/menuSetting.json', {}, {
+    var DataResource = $resource('e/menu/menuProfile.json', {}, {
         query: {method: 'GET', params: {
             "loginUserID": $cookies.LoginUserID
         }, isArray: true}

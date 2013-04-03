@@ -1,2 +1,2 @@
-define Percent|zh:比例 extends Decimal {
+define Percent|zh:百分比 extends Decimal {
 };

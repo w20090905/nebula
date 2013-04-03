@@ -1,9 +1,6 @@
 [
-	{	"label"	:	"Quick",
-		"items"	:	[
-			{        "href": "#/d/Person/wangshilian",        "label": "Person"}
-		]
-	},
+	{  "href": "#/d/Type/?standalone=Master",        "label": "实体","icon":"glass"},
+	{  "href": "#/d/Person/wangshilian",        "label": "Person","icon":"user"},
 	{	"label"	:	"Types",
 		"items"	:	[
 			{        "href": "#/d/Person/",        "label": "Person"},
