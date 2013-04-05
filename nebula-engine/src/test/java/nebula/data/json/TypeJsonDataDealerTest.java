@@ -79,10 +79,10 @@ public class TypeJsonDataDealerTest extends TestCase {
 				"{\"name\":\"Person\",\"parent\":\"Master\",\"standalone\":\"Master\","
 						+ "\"fields\":["
 						+ "{\"name\":\"PersonName\",\"isKey\":true,\"isCore\":false,\"isArray\":false,\"typeName\":\"Name\","
-						+ "\"attrs\":{\"formatType\":\"text\",\"maxLength\":\"60\"}},"
+						+ "\"nameAlias\":{},\"attrs\":{\"formatType\":\"text\",\"maxLength\":\"60\"}},"
 						+ "{\"name\":\"Age\",\"isKey\":false,\"isCore\":false,\"isArray\":false,\"typeName\":\"Age\","
-						+ "\"attrs\":{\"formatType\":\"numeric\",\"inputSize\":\"small\",\"max\":\"160\",\"maxLength\":\"3\",\"min\":\"0\",\"precision\":\"10\",\"scale\":\"2\"}}],"
-						+ "\"attrs\":{},\"alias\":{},\"mutable\":false,"
+						+ "\"nameAlias\":{},\"attrs\":{\"formatType\":\"numeric\",\"inputSize\":\"small\",\"max\":\"160\",\"maxLength\":\"3\",\"min\":\"0\",\"precision\":\"10\",\"scale\":\"2\"}}],"
+						+ "\"nameAlias\":{},\"attrs\":{},\"mutable\":false,"
 						+ "\"code\":\"type Person {\\t!PersonName Name;\\tAge;};\\n\"}", out.toString());
 		System.out.println(out.toString());
 	}
