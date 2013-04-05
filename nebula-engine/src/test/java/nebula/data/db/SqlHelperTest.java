@@ -133,6 +133,132 @@ public class SqlHelperTest extends TestCase {
 				h.builderCreate());
 	}
 	
+	
+
+	public final void testNestArrayType() {
+		//@formatter:off
+		String textRef = "" +
+				"type Company { " +
+				"	!Rb1 Name;" +
+				"};";
+		String text = "" +
+				"type TestPerson { " +
+				"	!A1 Name;" +
+				"   A2{" +
+				"		!B1 Name;" +
+				"		*B2{" +
+				"				C1 Name;" +
+				"		};" +
+				"		#B3 Company;" +
+				"		%B4 Company;" +
+				"		B5[] Name;" +
+				"		B6[]{" +
+				"			D1 Name;" +
+				"		};" +
+				"	 };" +
+				"	A3 Company;" +
+				"	%A4 Company;" +
+				"	A5[] Name;" +
+				"	A6[]{" +
+				"		E1 Name;" +
+				"		E2{" +
+				"			F1 Name;" +
+				"		};" +
+				"		E3 Company;" +
+				"		%E4 Company;" +
+				"	};" +
+				"};";
+		//@formatter:on		
+
+		t = loader.testDefineNebula(new StringReader(textRef)).get(0);
+		t = loader.testDefineNebula(new StringReader(text)).get(0);
+		h = new  SqlHelper(config,t);
+		assertEquals("NTestPerson", h.getTableName());	
+
+		int i = 0;
+		assertEquals("A1", h.userColumns[i].fieldName);
+		assertEquals(true, h.userColumns[i].key);		
+		i++;
+		assertEquals("A2B1", h.userColumns[i].fieldName);
+		assertEquals("A2_B1", h.userColumns[i].columnName);
+		assertEquals(false, h.userColumns[i].key);		
+		i++;
+		assertEquals("A2B2C1", h.userColumns[i].fieldName);	
+		assertEquals("A2_B2C1", h.userColumns[i].columnName);
+		assertEquals(false, h.userColumns[i].key);			
+		i++;
+		assertEquals("A2B3Rb1", h.userColumns[i].fieldName);
+		assertEquals("A2_B3RB1", h.userColumns[i].columnName);
+		assertEquals(false, h.userColumns[i].key);				
+		i++;
+		assertEquals("A2B4Rb1", h.userColumns[i].fieldName);
+		assertEquals("A2_B4RB1", h.userColumns[i].columnName);
+		assertEquals(false, h.userColumns[i].key);		
+		i++;
+		assertEquals("A2B5", h.userColumns[i].fieldName);
+		assertEquals("A2_B5", h.userColumns[i].columnName);
+		assertEquals(false, h.userColumns[i].key);		
+		i++;
+		assertEquals("A2B6D1", h.userColumns[i].fieldName);
+		assertEquals("A2B6_D1", h.userColumns[i].columnName);
+		assertEquals(false, h.userColumns[i].key);		
+		i++;
+		assertEquals("A3Rb1", h.userColumns[i].fieldName);
+		assertEquals("A3_RB1", h.userColumns[i].columnName);
+		assertEquals(false, h.userColumns[i].key);	
+		i++;
+		assertEquals("A4Rb1", h.userColumns[i].fieldName);
+		assertEquals("A4_RB1", h.userColumns[i].columnName);
+		assertEquals(false, h.userColumns[i].key);	
+		
+		i++;
+		assertEquals("A5", h.userColumns[i].fieldName);
+		assertEquals("A5", h.userColumns[i].columnName);
+		assertEquals(false, h.userColumns[i].key);	
+		i++;
+		assertEquals("A6E1", h.userColumns[i].fieldName);
+		assertEquals("A6_E1", h.userColumns[i].columnName);
+		assertEquals(false, h.userColumns[i].key);	
+		i++;
+		assertEquals("A6E2F1", h.userColumns[i].fieldName);
+		assertEquals("A6_E2F1", h.userColumns[i].columnName);
+		assertEquals(false, h.userColumns[i].key);	
+		i++;
+		assertEquals("A6E3Rb1", h.userColumns[i].fieldName);
+		assertEquals("A6_E3RB1", h.userColumns[i].columnName);
+		assertEquals(false, h.userColumns[i].key);	
+		i++;
+		assertEquals("A6E4Rb1", h.userColumns[i].fieldName);
+		assertEquals("A6_E4RB1", h.userColumns[i].columnName);
+		assertEquals(false, h.userColumns[i].key);	
+			
+
+
+		assertEquals(i+1, h.userColumns.length);
+		
+		assertEquals("SELECT count(1) FROM NTestPerson ", h.builderCount());
+
+		//@formatter:off
+		assertEquals("CREATE TABLE NTestPerson(" +
+				"A1 varchar(60) NOT NULL," +
+				"A2_B1 varchar(60)," +
+				"A2_B2C1 varchar(60)," +
+				"A2_B3RB1 varchar(60)," +
+				"A2_B4RB1 varchar(60)," +
+				"A2_B5 varchar(4000)," +
+				"A2B6_D1 varchar(4000)," +
+				"A3_RB1 varchar(60)," +
+				"A4_RB1 varchar(60)," +
+				"A5 varchar(4000)," +
+				"A6_E1 varchar(4000)," +
+				"A6_E2F1 varchar(4000)," +
+				"A6_E3RB1 varchar(4000)," +
+				"A6_E4RB1 varchar(4000)," +
+				"PRIMARY KEY ( A1)," +
+				"TIMESTAMP_ TIMESTAMP)", 
+				h.builderCreate());
+		//@formatter:on
+	}
 
 
 	public final void testTypse() {

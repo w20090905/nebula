@@ -772,6 +772,155 @@ public class DBExecTest extends TestCase {
 		dbExec.close();
 		dbExec = null;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public final void testNestedListType() throws Exception {
+		Statement statement;
+		ResultSet rs;
+		ResultSetMetaData metaData;
+		int i = 0;
+
+		/*********************************************************/
+		/***** test init *****/
+		/*********************************************************/
+
+		//@formatter:off
+		String textRef = "" +
+				"type Company { " +
+				"	!Rb1 Name;" +
+				"};";
+		String text = "" +
+				"type TestPerson { " +
+				"	!A1 Name;" +
+				"   A2{" +
+				"		!B1 Name;" +
+				"		*B2{" +
+				"				C1 Name;" +
+				"		};" +
+				"		#B3 Company;" +
+				"		%B4 Company;" +
+				"		B5[] Name;" +
+				"		B6[]{" +
+				"			D1 Name;" +
+				"		};" +
+				"	 };" +
+				"	A3 Company;" +
+				"	%A4 Company;" +
+				"	A5[] Name;" +
+				"	A6[]{" +
+				"		E1 Name;" +
+				"		E2{" +
+				"			F1 Name;" +
+				"		};" +
+				"		E3 Company;" +
+				"		%E4 Company;" +
+				"	};" +
+				"};";
+		//@formatter:on		
+
+		t = loader.testDefineNebula(new StringReader(textRef)).get(0);
+		t = loader.testDefineNebula(new StringReader(text)).get(0);
+		EditableEntity data;
+		dbExec = config.getPersister(t);
+		dbExec.drop();
+		dbExec = null;
+
+		dbExec = config.getPersister(t);
+
+		// ************ Check Database table Layout *************/
+		statement = config.conn.createStatement();
+		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		metaData = rs.getMetaData();
+
+		assertEquals(15, metaData.getColumnCount());
+
+		i = 1;
+		assertEquals("A1".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Varchar".toUpperCase(), metaData.getColumnTypeName(i));
+		assertEquals(60, metaData.getColumnDisplaySize(i));
+		i++;
+		assertEquals("A2_B1".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Varchar".toUpperCase(), metaData.getColumnTypeName(i));
+		i+=13;
+		assertEquals("Timestamp_".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("Timestamp".toUpperCase(), metaData.getColumnTypeName(i));
+
+		rs.close();
+		// ************ Check Database table Layout *************/
+
+		try {
+			data = dbExec.get("A1");
+			fail("should error");
+		} catch (RuntimeException e) {
+		}
+
+		data = new EditableEntity();
+		data.put("A1", "A1");
+		
+		EditableEntity A2 = new EditableEntity();
+		A2.put("B1", "B1Data");
+
+		EditableEntity B2 = new EditableEntity();
+		B2.put("C1", "C1Data");
+		A2.put("B2", B2);
+		
+		data.put("A2", A2);
+		
+		
+		List<String> A5 = new ArrayList<String>();
+		A5.add("A5001");
+		A5.add("A5002");
+		A5.add("A5003");
+		data.put("A5", A5);
+		
+
+		List<EditableEntity> A6 = new ArrayList<EditableEntity>();
+		EditableEntity A61 = new EditableEntity();
+		A61.put("E1","E1001");
+		A6.add(A61);
+		
+		A61 = new EditableEntity();
+		A61.put("E1","E1002");
+		A6.add(A61);
+
+		A61 = new EditableEntity();
+		A61.put("E1","E1003");
+		A6.add(A61);
+		
+		A61 = new EditableEntity();
+		A61.put("E1","E1004");
+		A6.add(A61);
+
+		data.put("A6", A6);
+
+		dbExec.insert(data);
+
+		data = dbExec.get("A1");
+		
+		assertEquals("A1", data.get("A1"));
+		
+		A5 = (List<String>) data.get("A5");
+		assertEquals(3, A5.size());
+		assertEquals("A5001", A5.get(0));
+		assertEquals("A5002", A5.get(1));
+		assertEquals("A5003", A5.get(2));
+		
+		A6 = (List<EditableEntity>) data.get("A6");
+		assertEquals(4, A6.size());
+		assertEquals("E1001", A6.get(0).get("E1"));
+		assertEquals("E1002", A6.get(1).get("E1"));
+		assertEquals("E1003", A6.get(2).get("E1"));
+		assertEquals("E1004", A6.get(3).get("E1"));
+		
+		assertNotNull(data);
+
+		dbExec.close();
+		
+		dbExec.drop();
+		dbExec.close();
+		dbExec = null;
+	}
+	
 
 	public final void testRemoveColumn() {
 		//@formatter:off

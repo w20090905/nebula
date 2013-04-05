@@ -1,0 +1,8 @@
+type MenuBar{
+  !Name;
+  Menu[]{
+	  !Name; 
+	  Icon;
+	  URL;
+  };
+};

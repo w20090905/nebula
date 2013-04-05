@@ -41,9 +41,6 @@ public class EntityFieldSerializer extends DefaultFieldSerializer<Entity> {
 
 		int pos = 1;
 		for (DefaultFieldSerializer<?> c : fieldSerializer) {
-			if(log.isDebugEnabled()){
-				log.debug("\t" +  result.getMetaData().getColumnName(pos) + " : " + result.getObject(pos));
-			}
 			pos = c.inputWithoutCheck(result, pos, entity);
 		}
 		return entity;
