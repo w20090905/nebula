@@ -99,12 +99,14 @@ a:hover {
 #user-nav > ul > li > a:hover, #user-nav > ul > li.open > a {
 	color: #ffffff;
 }
+/*
 #user-nav > ul > li > a > i, #sidebar li a i {
 	vertical-align: top;
+	color: white;
 	background-image: url('../img/glyphicons-halflings-white.png');
 	opacity: .5;
 	margin-top: 2px;
-}
+}*/
 #user-nav > ul > li > a:hover > i, #user-nav > ul > li.open > a > i {
 	opacity: 1;
 }
@@ -309,7 +311,8 @@ a:hover {
 }
 #style-switcher i {
 	display: inline-block;
-	margin: -5px 10px 0 10px;
+	vertical-align: top;
+	margin: 8px;
 }
 #style-switcher i:hover {
 	cursor: pointer;
