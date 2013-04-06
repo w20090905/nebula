@@ -1,16 +1,42 @@
 [#ftl/]
 
-[#macro inputBox field id ngModel placeholder]
+[#macro inputBox field id ngModel placeholder key=false required=true readonly=false]
+	[#assign optType][@compress single_line=true]
+		[#switch field.attrs.formatType!"text"]
+			[#case "text"]		type="text"		[#break]
+			[#case "numeric"]	type="number"	[#break]
+			[#case "email"]		type="email"	[#break]
+			[#default]			type="text"		[#break]				
+		[/#switch]			
+	[/@compress][/#assign]
+	
+	[#assign optReadonly][#if key] x-ng-readonly ="update" [#elseif readonly]readonly[/#if][/#assign]
+	[#assign optValidateRule][@compress single_line=true]
+			[#if field.attrs.min??		] min		="${field.attrs.min}" 			[/#if]
+			[#if field.attrs.max??		] max		="${field.attrs.max}" 			[/#if]
+			[#if field.attrs.minLength??] minLength	="${field.attrs.minLength}" [/#if]
+			[#if field.attrs.maxLength??] maxLength	="${field.attrs.maxLength}" [/#if]
+	[/@compress][/#assign]
+	[#assign optRequired][#if required] required[/#if][/#assign]
+
 	[#if field.type.name = "Attr"]
 		[#assign attrValues][@compress single_line=true]			
 			[#list (attrs[field.name].Values)![] as attr],{name:'${attr.Name}'}[/#list]
 		[/@compress] [/#assign]
-	<select id="${id}" x-ng-init="values = [${attrValues?substring(1)}];" 
-			x-ng-model="${ngModel}"" x-ng-options="c.name as c.name for c in values" placeholder="${placeholder}">	
-		<option value="">-- 选择 ${field.name} --</option>
-	</select>
+		
+		<select id="${id}" x-ng-init="values = [${attrValues?substring(1)}];"  
+				${optReadonly} ${optRequired}  ${optValidateRule} 
+				x-ng-model="${ngModel}" x-ng-options="c.name as c.name for c in values" placeholder="${placeholder}">	
+			<option value="">-- 选择 ${field.name} --</option>
+		</select>
+	[#elseif field.attrs.formatType == "textarea"]
+		<textarea id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"
+			${optReadonly} ${optRequired}  ${optValidateRule} 
+			></textarea>		
 	[#else]
-	<input type="text" id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"/>
+		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"
+				${optReadonly} ${optRequired}  ${optValidateRule} 			
+			/>
 	[/#if]
 [/#macro]
 
@@ -57,7 +83,8 @@
 		<div class="control-group">
 			<label class="control-label" for="${of.name}">${of.name}</label>
 			<div class="controls">
-					[@inputBox field=of id="${of.name}"  ngModel="data.${of.name}" placeholder="${of.name}"/]
+					[@inputBox field=of id="${of.name}"  ngModel="data.${of.name}" placeholder="${of.name}" 
+						key=of.key required=!of.ignorable/]
 			</div>
 		</div>
 						[#break]
@@ -71,7 +98,8 @@
 			<div class="control-group">
 				<label class="control-label" for="${in1f.name}">${in1f.name}</label>
 				<div class="controls">
-					[@inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name} ${in1f.name}"/]
+					[@inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name} ${in1f.name}"
+						required=!(of.ignorable || in1f.ignorable)/]
 				</div>
 			</div>
 									[#break]
@@ -83,7 +111,8 @@
 			<div class="control-group">
 				<label class="control-label" for="${of.name}${in1f.name}${in2f.name}">${in1f.name}${in2f.name}</label>
 				<div class="controls">
-					[@inputBox field=in2f id="${of.name}${in1f.name}${in2f.name}" ngModel="data.${of.name}.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"/]
+					[@inputBox field=in2f id="${of.name}${in1f.name}${in2f.name}" ngModel="data.${of.name}.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"
+						required=!(of.ignorable || in1f.ignorable || in2f.ignorable)/]
 				</div>
 			</div>
 										[/#if] 
@@ -98,7 +127,8 @@
 			<div class="control-group">
 				<label class="control-label" for="${of.name}${in1f.name}${in2f.name}">${in1f.name}</label>
 				<div class="controls">
-					[@inputBox field=in2f id="${of.name}${in1f.name}${in2f.name}" ngModel="data.${of.name}.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"/]
+					[@inputBox field=in2f id="${of.name}${in1f.name}${in2f.name}" ngModel="data.${of.name}.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"
+						readonly=true required=!(of.ignorable || in1f.ignorable || in2f.ignorable)/]
 				</div>
 			</div>
 										[/#if] 
@@ -112,7 +142,8 @@
 		<div class="control-group">
 			<label class="control-label" for="${of.name}${in1f.name}"">${of.name} ${in1f.name}</label>
 			<div class="controls">
-					[@inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name}${in1f.name}" /] <!-- ngList -->
+					[@inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name}${in1f.name}"
+						required=!(of.ignorable || in1f.ignorable) /] <!-- ngList -->
 			</div>
 		</div>
 									[#break]
@@ -123,7 +154,6 @@
 			<thead>
 				<tr>
 					<th width="2em">#</th>
-
 									[#list in1f.type.fields as in2f][#t]
 										[#if !in2f.array && in2f.refer == "ByVal"] <!--  Type   -->
 									
@@ -165,7 +195,8 @@
 			<div class="control-group">
 				<label class="control-label" for="${of.name}${in1f.name}">${of.name} ${in1f.name}</label>
 				<div class="controls">
-					[@inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}${in1f.name}" placeholder="${of.name} ${in1f.name}"/]
+					[@inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}${in1f.name}" placeholder="${of.name} ${in1f.name}"
+						key=(of.key && in1f.key) readonly=true required=!(of.ignorable || in1f.ignorable)/]
 				</div>
 			</div>
 							[/#if] 
@@ -178,7 +209,8 @@
 		<div class="control-group">
 			<label class="control-label" for="${of.name}">${of.name}</label>
 			<div class="controls">
-					[@inputBox field=of id="${of.name}" ngModel="data.${of.name}" placeholder="${of.name}"/] <!-- ngList -->
+					[@inputBox field=of id="${of.name}" ngModel="data.${of.name}" placeholder="${of.name}"
+						required=!(of.ignorable)/] <!-- ngList -->
 			</div>
 		</div>
 						[#break]

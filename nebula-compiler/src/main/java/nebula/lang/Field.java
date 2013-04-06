@@ -65,6 +65,9 @@ public class Field {
 	public boolean isCore(){
 		return this.importance == Importance.Core;
 	}
+	public boolean isIgnorable(){
+		return this.importance == Importance.Unimportant;
+	}
 
 	public void setImportance(Importance importance) {
 		this.importance = importance;

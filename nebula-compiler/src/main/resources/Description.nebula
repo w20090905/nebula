@@ -1,5 +1,4 @@
-@formatType = "textarea";
-@maxLength = 256;
+@maxLength = 512;
 /*
  * 单行的描述
  * */

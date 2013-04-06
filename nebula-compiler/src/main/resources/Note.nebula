@@ -1,4 +1,5 @@
 @maxLength = 4000;
+@formatType = "textarea";
 /*
  * 多行的文本内容，可以使用Wiki标记
  * */
