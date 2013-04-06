@@ -1,4 +1,19 @@
 [#ftl/]
+
+[#macro inputBox field id ngModel placeholder]
+	[#if field.type.name = "Attr"]
+		[#assign attrValues][@compress single_line=true]			
+			[#list (attrs[field.name].Values)![] as attr],{name:'${attr.Name}'}[/#list]
+		[/@compress] [/#assign]
+	<select id="${id}" x-ng-init="values = [${attrValues?substring(1)}];" 
+			x-ng-model="${ngModel}"" x-ng-options="c.name as c.name for c in values" placeholder="${placeholder}">	
+		<option value="">-- 选择 ${field.name} --</option>
+	</select>
+	[#else]
+	<input type="text" id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"/>
+	[/#if]
+[/#macro]
+
 <article class="module width_full">
 	<header>
 		<h1 class="tabs_involved">${type.name}</h1>	
@@ -42,7 +57,7 @@
 		<div class="control-group">
 			<label class="control-label" for="${of.name}">${of.name}</label>
 			<div class="controls">
-					<input type="text" id="${of.name}"  x-ng-model="data.${of.name}" placeholder="${of.name}"/>
+					[@inputBox field=of id="${of.name}"  ngModel="data.${of.name}" placeholder="${of.name}"/]
 			</div>
 		</div>
 						[#break]
@@ -56,7 +71,7 @@
 			<div class="control-group">
 				<label class="control-label" for="${in1f.name}">${in1f.name}</label>
 				<div class="controls">
-					<input type="text" id="${of.name}${in1f.name}" x-ng-model="data.${of.name}.${in1f.name}" placeholder="${of.name} ${in1f.name}"/>
+					[@inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name} ${in1f.name}"/]
 				</div>
 			</div>
 									[#break]
@@ -68,7 +83,7 @@
 			<div class="control-group">
 				<label class="control-label" for="${of.name}${in1f.name}${in2f.name}">${in1f.name}${in2f.name}</label>
 				<div class="controls">
-					<input type="text" id="${of.name}${in1f.name}${in2f.name}" x-ng-model="data.${of.name}.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"/>
+					[@inputBox field=in2f id="${of.name}${in1f.name}${in2f.name}" ngModel="data.${of.name}.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"/]
 				</div>
 			</div>
 										[/#if] 
@@ -83,7 +98,7 @@
 			<div class="control-group">
 				<label class="control-label" for="${of.name}${in1f.name}${in2f.name}">${in1f.name}</label>
 				<div class="controls">
-					<input type="text" id="${of.name}${in1f.name}${in2f.name}" x-ng-model="data.${of.name}.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"/>
+					[@inputBox field=in2f id="${of.name}${in1f.name}${in2f.name}" ngModel="data.${of.name}.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"/]
 				</div>
 			</div>
 										[/#if] 
@@ -97,7 +112,7 @@
 		<div class="control-group">
 			<label class="control-label" for="${of.name}${in1f.name}"">${of.name} ${in1f.name}</label>
 			<div class="controls">
-					<input type="text" id="${of.name}${in1f.name}" x-ng-model="data.${of.name}.${in1f.name}" placeholder="${of.name}${in1f.name}"  x-ng-list/>
+					[@inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name}${in1f.name}" /] <!-- ngList -->
 			</div>
 		</div>
 									[#break]
@@ -150,7 +165,7 @@
 			<div class="control-group">
 				<label class="control-label" for="${of.name}${in1f.name}">${of.name} ${in1f.name}</label>
 				<div class="controls">
-					<input type="text" id="${of.name}${in1f.name}" x-ng-model="data.${of.name}${in1f.name}" placeholder="${of.name} ${in1f.name}"/>
+					[@inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}${in1f.name}" placeholder="${of.name} ${in1f.name}"/]
 				</div>
 			</div>
 							[/#if] 
@@ -163,7 +178,7 @@
 		<div class="control-group">
 			<label class="control-label" for="${of.name}">${of.name}</label>
 			<div class="controls">
-					<input type="text" id="${of.name}" x-ng-model="data.${of.name}" placeholder="${of.name}"  x-ng-list/>
+					[@inputBox field=of id="${of.name}" ngModel="data.${of.name}" placeholder="${of.name}"/] <!-- ngList -->
 			</div>
 		</div>
 						[#break]
