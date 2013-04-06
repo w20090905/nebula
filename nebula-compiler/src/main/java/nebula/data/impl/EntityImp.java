@@ -75,5 +75,10 @@ public class EntityImp implements Identifiable, Entity {
 	public boolean isTransient() {
 		return this.store==null;
 	}
+
+	@Override
+	public Entity getEntity(String name) {
+		return (Entity)this.get(name);
+	}
 	
 }

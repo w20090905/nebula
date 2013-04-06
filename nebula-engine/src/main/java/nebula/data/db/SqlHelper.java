@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nebula.lang.Field;
-import nebula.lang.Importance;
+import static nebula.lang.Importance.*;
 import nebula.lang.RawTypes;
 import nebula.lang.Reference;
 import nebula.lang.Type;
@@ -41,7 +41,7 @@ public class SqlHelper {
 		v = attrs.get("scale");
 		int scale = v != null ? (Integer) v : 0;
 
-		boolean nullable = field.getImportance() == Importance.Unimportant;
+		boolean nullable = field.getImportance() == Unimportant;
 
 		DatabaseColumn c = new DatabaseColumn(fieldName, columnName, key, nullable, array, rawType, size, precision,
 				scale);
@@ -103,9 +103,8 @@ public class SqlHelper {
 								case ByVal: // Type B1
 									addColumn(listUserColumns, toF(of.getName(), in1f.getName()),
 											toC(of.getName(), in1f.getName()), false, in1f, of.isKey() && in1f.isKey());
-									subFieldSerializer.add(new BasicTypeFieldSerializer(toF(of.getName(),
-											in1f.getName()), toC(of.getName(), in1f.getName()), false, in1f.getType()
-											.getRawType()));
+									subFieldSerializer.add(new BasicTypeFieldSerializer(in1f.getName(), toC(
+											of.getName(), in1f.getName()), false, in1f.getType().getRawType()));
 									break;
 								case Inline: // Type B2
 									for (Field in2f : in1f.getType().getFields()) {
@@ -115,9 +114,10 @@ public class SqlHelper {
 													toF(of.getName(), in1f.getName() + in2f.getName()),
 													toC(of.getName(), in1f.getName() + in2f.getName()), false, in2f,
 													of.isKey() && in1f.isKey() && in2f.isKey());
-											fieldSerializer.add(new BasicTypeFieldSerializer(toF(of.getName(),
-													in1f.getName() + in2f.getName()), toC(of.getName(), in1f.getName()
-													+ in2f.getName()), false, in2f.getType().getRawType()));
+											subFieldSerializer.add(new BasicTypeFieldSerializer(in1f.getName()
+													+ in2f.getName(),
+													toC(of.getName(), in1f.getName() + in2f.getName()), false, in2f
+															.getType().getRawType()));
 										}
 									}
 									break;
@@ -130,9 +130,10 @@ public class SqlHelper {
 													toF(of.getName(), in1f.getName() + in2f.getName()),
 													toC(of.getName(), in1f.getName() + in2f.getName()), false, in2f,
 													of.isKey() && in1f.isKey() && in2f.isKey());
-											subFieldSerializer.add(new BasicTypeFieldSerializer(toF(of.getName(),
-													in1f.getName() + in2f.getName()), toC(of.getName(), in1f.getName()
-													+ in2f.getName()), false, in2f.getType().getRawType()));
+											subFieldSerializer.add(new BasicTypeFieldSerializer(in1f.getName()
+													+ in2f.getName(),
+													toC(of.getName(), in1f.getName() + in2f.getName()), false, in2f
+															.getType().getRawType()));
 										}
 									}
 									break;
@@ -142,30 +143,26 @@ public class SqlHelper {
 								case ByVal: // Type B5
 									addColumn(listUserColumns, toF(of.getName(), in1f.getName()),
 											toC(of.getName(), in1f.getName()), true, in1f, of.isKey() && in1f.isKey());
-									fieldSerializer.add(new BasicTypeFieldSerializer(toF(of.getName(), in1f.getName()),
-											toC(of.getName(), in1f.getName()), true, in1f.getType().getRawType()));
+									subFieldSerializer.add(new BasicTypeFieldSerializer(in1f.getName(), toC(
+											of.getName(), in1f.getName()), true, in1f.getType().getRawType()));
 									break;
 								case Inline: // Type B6
 									ArrayList<ListTypeAdapter<?>> adapteres = new ArrayList<ListTypeAdapter<?>>();
 									ArrayList<String> subFieldNames = new ArrayList<String>();
 
 									for (Field in2f : in1f.getType().getFields()) {
-										if (!in2f.isArray()) {
-											switch (in2f.getRefer()) {
-											case ByVal: // Type D1
-												addColumn(listUserColumns,
-														toF(of.getName() + in1f.getName(), in2f.getName()),
-														toC(of.getName() + in1f.getName(), in2f.getName()), true, in2f,
-														false);
-												adapteres.add(ListTypeAdapter.getAdapter(in2f.getType().getRawType()));
-												subFieldNames.add(in2f.getName());
-												break;
-											}
+										if (!in2f.isArray() && in2f.getRefer() == Reference.ByVal) { // Type
+																										// D1
+											addColumn(listUserColumns,
+													toF(of.getName() + in1f.getName(), in2f.getName()),
+													toC(of.getName() + in1f.getName(), in2f.getName()), true, in2f,
+													false);
+											adapteres.add(ListTypeAdapter.getAdapter(in2f.getType().getRawType()));
+											subFieldNames.add(in2f.getName());
 										}
 									}
 
-									fieldSerializer.add(new EntityListFieldSerializer(
-											toF(of.getName() + in1f.getName()), adapteres, subFieldNames));
+									subFieldSerializer.add(new EntityListFieldSerializer(in1f.getName(), adapteres, subFieldNames));
 									break;
 								case ByRef: // Type B7
 								case Cascade: // Type B8
@@ -174,7 +171,8 @@ public class SqlHelper {
 								}
 							}
 						}
-						fieldSerializer.add(new EntityFieldSerializer(toF(of.getName()),toC(of.getName()), subFieldSerializer));
+						fieldSerializer.add(new EntityFieldSerializer(toF(of.getName()), toC(of.getName()),
+								subFieldSerializer));
 						break;
 					case ByRef: // Type A3
 					case Cascade: // Type A4

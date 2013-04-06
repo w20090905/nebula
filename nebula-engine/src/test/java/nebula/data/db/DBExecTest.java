@@ -344,7 +344,6 @@ public class DBExecTest extends TestCase {
 		dbExec = null;
 	}
 
-
 	@SuppressWarnings("unchecked")
 	public final void testListTypeData() throws Exception {
 		Statement statement;
@@ -420,43 +419,43 @@ public class DBExecTest extends TestCase {
 		alies.add("30[]~^000L");
 		data.put("Alies", alies);
 
-
 		List<String> comments = new ArrayList<String>();
 		comments.add("C10L");
 		comments.add("C200L");
 		comments.add("C30[]~^000L");
 		data.put("Comment", comments);
-		
+
 		dbExec.insert(data);
 
 		data = null;
-		
+
 		data = dbExec.get("wangshilian");
 
 		ages = (List<Long>) data.get("Age");
 		assertEquals(3, ages.size());
-		assertEquals((Long)10L, ages.get(0));
-		assertEquals((Long)200L, ages.get(1));
-		assertEquals((Long)30000L, ages.get(2));
+		assertEquals((Long) 10L, ages.get(0));
+		assertEquals((Long) 200L, ages.get(1));
+		assertEquals((Long) 30000L, ages.get(2));
 
 		alies = (List<String>) data.get("Alies");
 		assertEquals(3, alies.size());
 		assertEquals("10L", alies.get(0));
 		assertEquals("200L", alies.get(1));
 		assertEquals("30[]~^000L", alies.get(2));
-		
+
 		alies = (List<String>) data.get("Comment");
 		assertEquals(3, alies.size());
 		assertEquals("C10L", alies.get(0));
 		assertEquals("C200L", alies.get(1));
 		assertEquals("C30[]~^000L", alies.get(2));
-		
+
 		assertNotNull(data);
 
 		dbExec.close();
 		dbExec = null;
-		
+
 	}
+
 	@SuppressWarnings("unchecked")
 	public final void testListType() throws Exception {
 		Statement statement;
@@ -525,10 +524,10 @@ public class DBExecTest extends TestCase {
 		ages = (List<Long>) data.get("Age");
 
 		assertEquals(3, ages.size());
-		assertEquals((Long)10L, ages.get(0));
-		assertEquals((Long)200L, ages.get(1));
-		assertEquals((Long)30000L, ages.get(2));
-		
+		assertEquals((Long) 10L, ages.get(0));
+		assertEquals((Long) 200L, ages.get(1));
+		assertEquals((Long) 30000L, ages.get(2));
+
 		assertNotNull(data);
 
 		dbExec.close();
@@ -772,7 +771,7 @@ public class DBExecTest extends TestCase {
 		dbExec.close();
 		dbExec = null;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public final void testNestedListType() throws Exception {
 		Statement statement;
@@ -832,7 +831,7 @@ public class DBExecTest extends TestCase {
 		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
 		metaData = rs.getMetaData();
 
-		assertEquals(15, metaData.getColumnCount());
+		// assertEquals(15, metaData.getColumnCount());
 
 		i = 1;
 		assertEquals("A1".toUpperCase(), metaData.getColumnName(i));
@@ -841,9 +840,10 @@ public class DBExecTest extends TestCase {
 		i++;
 		assertEquals("A2_B1".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("Varchar".toUpperCase(), metaData.getColumnTypeName(i));
-		i+=13;
-		assertEquals("Timestamp_".toUpperCase(), metaData.getColumnName(i));
-		assertEquals("Timestamp".toUpperCase(), metaData.getColumnTypeName(i));
+		// i=metaData.getColumnCount()-1;
+		// assertEquals("Timestamp_".toUpperCase(), metaData.getColumnName(i));
+		// assertEquals("Timestamp".toUpperCase(),
+		// metaData.getColumnTypeName(i));
 
 		rs.close();
 		// ************ Check Database table Layout *************/
@@ -856,39 +856,59 @@ public class DBExecTest extends TestCase {
 
 		data = new EditableEntity();
 		data.put("A1", "A1");
-		
+
 		EditableEntity A2 = new EditableEntity();
 		A2.put("B1", "B1Data");
+		A2.put("B3Rb1", "B3Rb1Data");
+		A2.put("B4Rb1", "B4Rb1Data");
 
-		EditableEntity B2 = new EditableEntity();
-		B2.put("C1", "C1Data");
-		A2.put("B2", B2);
-		
+		A2.put("B2C1", "B2C1Data");
+
+		List<String> B5 = new ArrayList<String>();
+		B5.add("B5001");
+		B5.add("B5002");
+		B5.add("B5003");
+		A2.put("B5", B5);
+
+		List<EditableEntity> B6 = new ArrayList<EditableEntity>();
+		EditableEntity B61 = new EditableEntity();
+		B61.put("D1", "B6D1001");
+		B6.add(B61);
+		B61 = new EditableEntity();
+		B61.put("D1", "B6D1002");
+		B6.add(B61);
+
+		A2.put("B6", B6);
 		data.put("A2", A2);
-		
-		
+
+		data.put("A3Rb1", "A3Rb1Data");
+		data.put("A4Rb1", "A4Rb1Data");
+
 		List<String> A5 = new ArrayList<String>();
 		A5.add("A5001");
 		A5.add("A5002");
 		A5.add("A5003");
 		data.put("A5", A5);
-		
 
 		List<EditableEntity> A6 = new ArrayList<EditableEntity>();
 		EditableEntity A61 = new EditableEntity();
-		A61.put("E1","E1001");
-		A6.add(A61);
-		
-		A61 = new EditableEntity();
-		A61.put("E1","E1002");
+		A61.put("E1", "E1001");
+		A61.put("E2F1", "E2F1001");
+		A61.put("E3Rb1", "E3Rb1001");
+		A61.put("E4Rb1", "E4Rb1001");
 		A6.add(A61);
 
 		A61 = new EditableEntity();
-		A61.put("E1","E1003");
+		A61.put("E1", "E1002");
+		A61.put("E2F1", "E2F1002");
 		A6.add(A61);
-		
+
 		A61 = new EditableEntity();
-		A61.put("E1","E1004");
+		A61.put("E1", "E1003");
+		A6.add(A61);
+
+		A61 = new EditableEntity();
+		A61.put("E1", "E1004");
 		A6.add(A61);
 
 		data.put("A6", A6);
@@ -896,31 +916,54 @@ public class DBExecTest extends TestCase {
 		dbExec.insert(data);
 
 		data = dbExec.get("A1");
-		
+
+		assertNotNull(data);
+
 		assertEquals("A1", data.get("A1"));
-		
+
+		assertEquals("B1Data", data.getEntity("A2").get("B1"));
+		assertEquals("B2C1Data", data.getEntity("A2").get("B2C1"));
+		assertEquals("B3Rb1Data", data.getEntity("A2").get("B3Rb1"));
+		assertEquals("B4Rb1Data", data.getEntity("A2").get("B4Rb1"));
+
+		B5 = (List<String>) data.getEntity("A2").get("B5");
+		assertEquals(3, B5.size());
+		assertEquals("B5001", B5.get(0));
+		assertEquals("B5002", B5.get(1));
+		assertEquals("B5003", B5.get(2));
+
+		B6 = (List<EditableEntity>) data.getEntity("A2").get("B6");
+		assertEquals(2, B6.size());
+		assertEquals("B6D1001", B6.get(0).get("D1"));
+		assertEquals("B6D1002", B6.get(1).get("D1"));
+
+		assertEquals("A3Rb1Data", data.get("A3Rb1"));
+		assertEquals("A4Rb1Data", data.get("A4Rb1"));
+
 		A5 = (List<String>) data.get("A5");
 		assertEquals(3, A5.size());
 		assertEquals("A5001", A5.get(0));
 		assertEquals("A5002", A5.get(1));
 		assertEquals("A5003", A5.get(2));
-		
+
 		A6 = (List<EditableEntity>) data.get("A6");
 		assertEquals(4, A6.size());
 		assertEquals("E1001", A6.get(0).get("E1"));
+		assertEquals("E2F1001", A6.get(0).get("E2F1"));
+		assertEquals("E3Rb1001", A6.get(0).get("E3Rb1"));
+		assertEquals("E4Rb1001", A6.get(0).get("E4Rb1"));
+
 		assertEquals("E1002", A6.get(1).get("E1"));
+		assertEquals("E2F1002", A6.get(1).get("E2F1"));
 		assertEquals("E1003", A6.get(2).get("E1"));
 		assertEquals("E1004", A6.get(3).get("E1"));
-		
-		assertNotNull(data);
 
 		dbExec.close();
-		
+
 		dbExec.drop();
 		dbExec.close();
 		dbExec = null;
 	}
-	
 
 	public final void testRemoveColumn() {
 		//@formatter:off
