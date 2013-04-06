@@ -18,6 +18,7 @@ import org.codehaus.jackson.JsonToken;
 class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDataHelper<Entity> {
 	final List<DefaultFieldSerializer<?>> pageFields;
 	final Map<String, DefaultFieldSerializer<?>> pageFieldsMap;
+	final boolean topLevel;
 
 	public EntitySerializer(Type type) {
 		this(type, null, null);
@@ -25,6 +26,11 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 
 	public EntitySerializer(Type type, String fieldName, String frontName) {
 		super(fieldName, frontName);
+		if (fieldName == null) {
+			topLevel = true;
+		} else {
+			topLevel = false;
+		}
 
 		pageFields = new CopyOnWriteArrayList<DefaultFieldSerializer<?>>();
 		pageFieldsMap = new HashMap<String, DefaultFieldSerializer<?>>();
@@ -78,6 +84,10 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 	// this.pageFields.add(entityMerger);
 	// this.pageFieldsMap.put(pageFieldName, entityMerger);
 	// }
+	private void addEntityPageField(String name, String pageFieldName, EntitySerializer entityMerger) {
+		this.pageFields.add(entityMerger);
+		this.pageFieldsMap.put(pageFieldName, entityMerger);
+	}
 
 	private void addEntityListPageField(String name, String pageFieldName, EntitySerializer entityMerger) {
 		DefaultFieldSerializer<List<Entity>> pageField = new EntityListSerializer(pageFieldName, name, entityMerger);
@@ -86,54 +96,51 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 	}
 
 	private void init(Type type) {
-		for (Field f : type.getFields()) {
-			Type rT;
-			switch (f.getRefer()) {
-			case ByVal:
-				if (f.isArray()) {
+		for (Field of : type.getFields()) {
+			if (!of.isArray()) {
+				switch (of.getRefer()) {
+				case ByVal: // Type A1
+					addPageField(of.getName(), of.getName(), getBasicDateDealer(of.getType().getRawType()));
+					break;
+				case Inline: // Type A2 // TODO
+					if (topLevel) {
+						EntitySerializer es = new EntitySerializer(of.getType(), of.getName(), of.getName());
+						addEntityPageField(of.getName(), of.getName(), es);
+					} else {
+						for (Field inf : of.getType().getFields()) {
+							if (!inf.isArray()) {
+								addPageField(inf.getName(), of.getName() + inf.getName(), getBasicDateDealer(inf
+										.getType().getRawType()));
+							}
+						}
+					}
+					break;
+				case ByRef: // Type A3 Type A4
+				case Cascade:
+					for (Field inf : of.getType().getFields()) {
+						if (!inf.isArray() && (inf.isKey() || inf.isCore())) {
+							addPageField(of.getName(), of.getName() + inf.getName(), getBasicDateDealer(inf.getType()
+									.getRawType()));
+						}
+					}
+					break;
+				}
+			} else {
+				switch (of.getRefer()) {
+				case ByVal: // Type A5
 					@SuppressWarnings({ "unchecked", "rawtypes" })
-					DefaultTypeAdapter<?> dataDealer = new ListJsonDataDealer(
-							getBasicDateDealer(f.getType().getRawType()));
-					addPageField(f.getName(), f.getName(), dataDealer);
-				} else {
-					addPageField(f.getName(), f.getName(), getBasicDateDealer(f.getType().getRawType()));
+					DefaultTypeAdapter<?> dataDealer = new ListJsonDataDealer(getBasicDateDealer(of.getType()
+							.getRawType()));
+					addPageField(of.getName(), of.getName(), dataDealer);
+					break;
+				case Inline:
+					addEntityListPageField(of.getName(), of.getName(), new EntitySerializer(of.getType(), of.getName(),
+							of.getName()));
+					break;
+				case ByRef:
+				case Cascade:
+					throw new UnsupportedOperationException();
 				}
-				break;
-			case Inline:
-				if (f.isArray()) {
-					addEntityListPageField(f.getName(), f.getName(), new EntitySerializer(f.getType()));
-				} else {
-					rT = f.getType();
-					for (Field rf : rT.getFields()) {
-						addPageField(f.getName() + rf.getName(), f.getName() + rf.getName(), getBasicDateDealer(rf
-								.getType().getRawType()));
-					}
-				}
-				break;
-			case ByRef:
-				rT = f.getType();
-				for (Field rf : rT.getFields()) {
-					switch (rf.getImportance()) {
-					case Key:
-					case Core:
-						addPageField(f.getName(), f.getName() + rf.getName(), getBasicDateDealer(rf.getType()
-								.getRawType()));
-						break;
-					}
-				}
-				break;
-			case Cascade:
-				rT = f.getType();
-				for (Field rf : rT.getFields()) {
-					switch (rf.getImportance()) {
-					case Key:
-					case Core:
-						addPageField(f.getName(), f.getName() + rf.getName(), getBasicDateDealer(rf.getType()
-								.getRawType()));
-						break;
-					}
-				}
-				break;
 			}
 		}
 	}
@@ -160,8 +167,11 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 		for (DefaultFieldSerializer<?> f : pageFields) {
 			@SuppressWarnings("unchecked")
 			DefaultFieldSerializer<Object> m = (DefaultFieldSerializer<Object>) f;
-			out.writeFieldName(f.fieldName);
-			m.output(out, entity.get(f.fieldName));
+			Object data = entity.get(f.fieldName);
+			if (data != null) {
+				out.writeFieldName(f.fieldName);
+				m.output(out, data);
+			}
 		}
 		out.writeEndObject();
 	}
@@ -169,10 +179,10 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 	@Override
 	public Entity readFrom(Entity d, JsonParser in) {
 		try {
-			
+
 			JsonToken token = in.nextToken();
 			assert token == JsonToken.START_OBJECT;
-			
+
 			if (d == null) {
 				return doReadWithoutCheck(in, new EditableEntity());
 			} else {
@@ -249,10 +259,10 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 			}
 
 		} else {
-			//in.getIntValue();
+			// in.getIntValue();
 			entity = new EditableEntity();
 
-			do  {
+			do {
 				if (token != JsonToken.FIELD_NAME) {
 					break;
 				}
@@ -264,7 +274,7 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 				if (f != null) {
 					f.inputWithoutCheck(in, entity);
 				}
-			}while((token = in.nextToken()) != null);
+			} while ((token = in.nextToken()) != null);
 		}
 
 		assert token == JsonToken.END_OBJECT;

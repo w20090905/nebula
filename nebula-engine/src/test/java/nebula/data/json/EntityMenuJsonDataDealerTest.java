@@ -94,7 +94,7 @@ public class EntityMenuJsonDataDealerTest extends TestCase {
 
 		// Type For Test
 		//@formatter:off
-		String txtData = "{\"PersonName\":\"wangshilian\",\"Age\":12,\"EducationsSchool\":\"Kunming\",\"EducationsYear\":2012}";
+		String txtData = "{\"PersonName\":\"wangshilian\",\"Age\":12,\"Educations\":{\"School\":\"Kunming\",\"Year\":2012}}";
 		//@formatter:on	
 
 		StringReader in = new StringReader(txtData);
@@ -105,8 +105,8 @@ public class EntityMenuJsonDataDealerTest extends TestCase {
 
 		assertEquals("wangshilian", entity.get("PersonName"));
 		assertEquals(12L, entity.get("Age"));
-		assertEquals("Kunming", entity.get("EducationsSchool"));
-		assertEquals(2012L, entity.get("EducationsYear"));
+		assertEquals("Kunming", entity.getEntity("Educations").get("School"));
+		assertEquals(2012L,  entity.getEntity("Educations").get("Year"));
 	}
 
 	public final void test_SimpleTypeWith_Entity_stringifyToStringObjectJsonGenerator() throws Exception {
@@ -133,16 +133,18 @@ public class EntityMenuJsonDataDealerTest extends TestCase {
 
 		entity.put("PersonName", "wangshilian");
 		entity.put("Age", 12L);
-
-		entity.put("EducationsSchool", "Kunming");
-		entity.put("EducationsYear", 2012L);
+		
+		Entity educations = new EditableEntity();		
+		educations.put("School", "Kunming");
+		educations.put("Year", 2012L);		
+		entity.put("Educations", educations);
 
 		entityMerger.stringifyTo(entity, gen);
 
 		gen.flush();
 
 		assertEquals(
-				"{\"PersonName\":\"wangshilian\",\"Age\":12,\"EducationsSchool\":\"Kunming\",\"EducationsYear\":2012}",
+				"{\"PersonName\":\"wangshilian\",\"Age\":12,\"Educations\":{\"School\":\"Kunming\",\"Year\":2012}}",
 				out.toString());
 		System.out.println(out.toString());
 	}
