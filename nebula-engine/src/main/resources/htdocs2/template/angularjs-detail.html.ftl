@@ -29,7 +29,7 @@
 				x-ng-model="${ngModel}" x-ng-options="c.name as c.name for c in values" placeholder="${placeholder}">	
 			<option value="">-- 选择 ${field.name} --</option>
 		</select>
-	[#elseif field.attrs.formatType == "textarea"]
+	[#elseif field.attrs.formatType! = "textarea"]
 		<textarea id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"
 			${optReadonly} ${optRequired}  ${optValidateRule} 
 			></textarea>		
@@ -38,6 +38,17 @@
 				${optReadonly} ${optRequired}  ${optValidateRule} 			
 			/>
 	[/#if]
+[/#macro]
+
+
+[#macro popupBox field pField id ngModel placeholder key=false required=true readonly=false] [#-- // TODO Need Refact --]
+	[#assign optRequired][#if required] required[/#if][/#assign]
+		<input type="text" id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"
+				readonly ${optRequired}  ${optValidateRule} 
+				x-popup="/d/${pField.type.name}/" 
+				x-beforePopup="${field.name}=${ngModel}" 
+				x-afterPopup="${ngModel}=ret.${field.name}"
+			/>
 [/#macro]
 
 <article class="module width_full">
@@ -120,19 +131,23 @@
 									[#break]
 								[#case "ByRef"] <!--  Type B3   -->
 								[#case "Cascade"] <!--  Type B4   -->
+
+			<div class="control-group">
+				<label class="control-label" for="${of.name}${in1f.name}">${in1f.name}</label>
+				<div class="controls">
 									[#list in1f.type.fields as in2f][#t]
 										[#if !in2f.array && in2f.refer == "ByVal"
 												&& (in2f.key || in2f.core)]
-
-			<div class="control-group">
-				<label class="control-label" for="${of.name}${in1f.name}${in2f.name}">${in1f.name}</label>
-				<div class="controls">
-					[@inputBox field=in2f id="${of.name}${in1f.name}${in2f.name}" ngModel="data.${of.name}.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"
-						readonly=true required=!(of.ignorable || in1f.ignorable || in2f.ignorable)/]
-				</div>
-			</div>
+					[@popupBox field=in2f pField=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"
+						readonly=true required=!(of.ignorable || in1f.ignorable || in2f.ignorable)/]		
+						
+						
+			[#--input type="hidden" x-ng-model="data'field.name}{rF.name}'"/>{{data'{field.name}{rF.name}'}}--]			
+									
 										[/#if] 
 									[/#list]
+				</div>
+			</div>
 									[#break]
 								[/#switch]
 							[#else]
@@ -195,7 +210,7 @@
 			<div class="control-group">
 				<label class="control-label" for="${of.name}${in1f.name}">${of.name} ${in1f.name}</label>
 				<div class="controls">
-					[@inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}${in1f.name}" placeholder="${of.name} ${in1f.name}"
+					[@popupBox field=in1f pField=of id="${of.name}${in1f.name}" ngModel="data.${of.name}${in1f.name}" placeholder="${of.name} ${in1f.name}"
 						key=(of.key && in1f.key) readonly=true required=!(of.ignorable || in1f.ignorable)/]
 				</div>
 			</div>
@@ -251,12 +266,12 @@
 								[/#switch]
 							[/#if] 
 						[/#list]
+					<th>Actions</th>
 				</tr>
 			</thead>
-			
 			<tbody>
-				<tr x-ng-repeat="inlineData in data.${of.name}] | filter:query | orderBy:orderProp">
-					<td>#</td>
+				<tr x-ng-repeat="inlineData in data.${of.name} | filter:query | orderBy:orderProp">
+					<td>{{$index+1}}</td>
 
 						[#list of.type.fields as in1f][#t]
 							[#if !in1f.array]
@@ -288,6 +303,45 @@
 								[/#switch]
 							[/#if] 
 						[/#list]
+					<td><a x-ng-click="data['${of.name}'].splice($index,1);$event.preventDefault();"> <i class="icon-minus-sign"> </i> </a></td>
+				</tr>
+				<tr class="newLine">
+					<td>{{data.${of.name}.length+1}}</td>
+
+						[#list of.type.fields as in1f][#t]
+							[#if !in1f.array]
+								[#switch in1f.refer]
+								[#case "ByVal"] <!--  Type E1   -->
+									
+					<td>	[@inputBox field=in1f id="${of.name}${in1f.name}_new"  ngModel="data.${of.name}_new.${in1f.name}" placeholder="${of.name} ${in1f.name}" 
+						required=!in1f.ignorable/]</td>[#--TODO  key=in1f.key  --]
+					
+									[#break]
+								[#case "Inline"]<!--  Type E2   -->
+									[#list in1f.type.fields as in2f][#t]
+										[#if !in2f.array && in2f.refer == "ByVal"]
+										
+					<td>	[@inputBox field=in1f id="${of.name}_new_${in1f.name}${in2f.name}"  ngModel="data.${of.name}_new.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}" 
+						key=in1f.key required=!in1f.ignorable/]</td>
+					
+										[/#if]
+									[/#list]
+									[#break]
+								[#case "ByRef"]<!--  Type E3-->
+								[#case "Cascade"]<!--  Type E4-->
+									[#list in1f.type.fields as in2f][#t]
+										[#if !in2f.array && in2f.refer == "ByVal" && (in2f.key || in2f.core)]
+										
+					<td>[@popupBox field=in2f pField=in1f id="${of.name}_new_${in1f.name}${in2f.name}" ngModel="data.${of.name}_new.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"
+						key=(of.key && in1f.key) readonly=true required=!(of.ignorable)/]</td>
+												
+										[/#if] 
+									[/#list]
+									[#break]
+								[/#switch]
+							[/#if] 
+						[/#list]
+					<td><a class="btn" x-ng-click="data.${of.name}.push(data.${of.name}_new);data.${of.name}_new={};$event.preventDefault() "> <i class="icon-plus"> </i> </a> </td>
 				</tr>
 			</tbody>
 		</table>
