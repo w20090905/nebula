@@ -36,30 +36,14 @@ public class LoginListResouce implements Resource {
 
 		String method = req.getMethod();
 
-		try {
-			if ("POST".equals(method)) {
-				this.post(req, resp);
-				// normal parse
-				resp.set("Cache-Control", "max-age=0");
-				resp.set("Content-Language", "en-US");
-				resp.set("Content-Type", "text/html");
-				resp.set("Content-Length", 0);
-
-					redirectTo.redirectTo(req, resp,
-							"/index.html#/c/" + req.getParameter("username"));
-			
-
-				resp.close();
-			} else {
-				throw new RuntimeException("Unsupport method " + method);
-			}
-		} catch (IOException e) {
-			log.error("IOException" + req.getAddress().getPath());
-			throw new RuntimeException(e);
+		if ("POST".equals(method)) {
+			this.post(req, resp);
+		} else {
+			throw new RuntimeException("Unsupport method " + method);
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	// @SuppressWarnings("unchecked")
 	protected void post(Request req, Response resp) {
 		try {
 			String username = req.getParameter("username");
@@ -67,12 +51,22 @@ public class LoginListResouce implements Resource {
 			Entity user = users.get().get(username);
 			if (user == null) {
 				resp.setCode(403);
+				redirectTo.redirectTo(req, resp, "/login.html");
 				return;
 			}
 
 			resp.setCode(200);
-			//req.getSession().setAttribute("#currentUser", user);
+			// req.getSession().setAttribute("#currentUser", user);
 			resp.setCookie("LoginUserID", username);
+			// normal parse
+			resp.set("Cache-Control", "max-age=0");
+			resp.set("Content-Language", "en-US");
+			resp.set("Content-Type", "text/html");
+			resp.set("Content-Length", 0);
+
+			redirectTo.redirectTo(req, resp, "/index.html#/c/" + req.getParameter("username"));
+
+			resp.close();
 
 			//
 			// Entity data = datas.createNew();
@@ -86,8 +80,11 @@ public class LoginListResouce implements Resource {
 			// datas.add(data);
 			// datas.flush();
 
-		}finally{
-			
+		} catch (IOException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		} finally {
+
 		}
 	}
 }

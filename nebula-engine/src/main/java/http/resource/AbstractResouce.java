@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.mortbay.jetty.EofException;
+import org.eclipse.jetty.io.EofException;
 import org.simpleframework.http.Address;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;

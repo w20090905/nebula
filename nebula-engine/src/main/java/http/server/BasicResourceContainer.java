@@ -13,6 +13,8 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
+import nebula.data.Entity;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.simpleframework.http.Address;
@@ -67,32 +69,32 @@ public class BasicResourceContainer implements Container {
 		try {
 //			Entity currentUser = (Entity) req.getSession().getAttribute("#currentUser");
 //			if (currentUser == null) {
-//				// if(req.getAddress().getPath().getPath().equals("/loginzice.html")){
-//				//
-//				// }
-//				// if(req.getAddress().getPath().getExtension().equals("html")
-//				// &&
-//				// !req.getAddress().getPath().getPath().equals("/loginzice.html")){
-//				// redirectToLoginResource.handle(req, resp);
-//				// return;
-//				// }
-//				//
-//				// String path = req.getAddress().getPath().getPath();
-//				// Resource res = cachedLinks.get(path);
-//				// if (res == null) {
-//				// res = resolve(req.getAddress());
-//				// }
-//				//
-//				// if (res instanceof StaticResource) {
-//				// res.handle(req, resp);
-//				// return;
-//				// }else if (res instanceof LoginListResouce) {
-//				// res.handle(req, resp);
-//				// return;
-//				// } else {
-//				// redirectToLoginResource.handle(req, resp);
-//				// return;
-//				// }
+				// if(req.getAddress().getPath().getPath().equals("/loginzice.html")){
+				//
+				// }
+				// if(req.getAddress().getPath().getExtension().equals("html")
+				// &&
+				// !req.getAddress().getPath().getPath().equals("/loginzice.html")){
+				// redirectToLoginResource.handle(req, resp);
+				// return;
+				// }
+				//
+				// String path = req.getAddress().getPath().getPath();
+				// Resource res = cachedLinks.get(path);
+				// if (res == null) {
+				// res = resolve(req.getAddress());
+				// }
+				//
+				// if (res instanceof StaticResource) {
+				// res.handle(req, resp);
+				// return;
+				// }else if (res instanceof LoginListResouce) {
+				// res.handle(req, resp);
+				// return;
+				// } else {
+				// redirectToLoginResource.handle(req, resp);
+				// return;
+				// }
 //			}
 
 			String path = req.getAddress().getPath().getPath();
