@@ -9,6 +9,8 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import nebula.Filter;
 import nebula.data.json.DataHelper;
 import nebula.lang.Type;
@@ -18,7 +20,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.simpleframework.http.Address;
 import org.simpleframework.http.Query;
-import org.simpleframework.http.Request;
 
 import util.FileUtil;
 
@@ -79,7 +80,7 @@ public class TypeListResouce extends AbstractResouce {
 		}
 	}
 
-	protected String post(Request req) throws IOException {
+	protected String post(Address target, HttpServletRequest req) throws IOException {
 		BufferedInputStream bio = new BufferedInputStream(req.getInputStream());
 		if (log.isTraceEnabled()) {
 			log.trace("Input stream : ");
@@ -88,6 +89,6 @@ public class TypeListResouce extends AbstractResouce {
 
 		String newCode = FileUtil.readAllTextFrom(bio);
 		Type newType = typeLoader.update(null, newCode);
-		return req.getAddress().getPath() + newType.getName();
+		return target.getPath() + newType.getName();
 	}
 }

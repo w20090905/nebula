@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import nebula.data.DataHolder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -11,8 +16,7 @@ import nebula.data.json.DataHelper;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.simpleframework.http.Request;
-import org.simpleframework.http.Response;
+import org.simpleframework.http.Address;
 import org.simpleframework.http.resource.Resource;
 
 public class LoginListResouce implements Resource {
@@ -28,9 +32,8 @@ public class LoginListResouce implements Resource {
 	}
 
 	@Override
-	public void handle(Request req, Response resp) {
+	public void handle(Address target, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		if (log.isTraceEnabled()) {
-			log.trace("Request : " + req.getPath());
 			log.trace("\tMethod" + req.getMethod());
 		}
 
@@ -44,29 +47,29 @@ public class LoginListResouce implements Resource {
 	}
 
 	// @SuppressWarnings("unchecked")
-	protected void post(Request req, Response resp) {
+	protected void post(HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			String username = req.getParameter("username");
 			// String password = form.get("password");
 			Entity user = users.get().get(username);
 			if (user == null) {
-				resp.setCode(403);
+				resp.setStatus(403);
 				redirectTo.redirectTo(req, resp, "/login.html");
 				return;
 			}
 
-			resp.setCode(200);
+			resp.setStatus(200);
 			// req.getSession().setAttribute("#currentUser", user);
-			resp.setCookie("LoginUserID", username);
+			resp.addCookie(new Cookie("LoginUserID", username));
 			// normal parse
-			resp.set("Cache-Control", "max-age=0");
-			resp.set("Content-Language", "en-US");
-			resp.set("Content-Type", "text/html");
-			resp.set("Content-Length", 0);
+			resp.addHeader("Cache-Control", "max-age=0");
+			resp.addHeader("Content-Language", "en-US");
+			resp.addHeader("Content-Type", "text/html");
+			resp.addIntHeader("Content-Length", 0);
 
 			redirectTo.redirectTo(req, resp, "/index.html#/c/" + req.getParameter("username"));
 
-			resp.close();
+			resp.flushBuffer();
 
 			//
 			// Entity data = datas.createNew();

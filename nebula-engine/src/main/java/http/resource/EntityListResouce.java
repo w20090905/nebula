@@ -11,6 +11,8 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import nebula.Filter;
 import nebula.data.DataHolder;
 import nebula.data.DataStore;
@@ -19,7 +21,6 @@ import nebula.data.json.DataHelper;
 
 import org.simpleframework.http.Address;
 import org.simpleframework.http.Query;
-import org.simpleframework.http.Request;
 
 import util.FileUtil;
 
@@ -68,7 +69,7 @@ public class EntityListResouce extends AbstractResouce {
 	}
 
 	@Override
-	protected String post(Request req) {
+	protected String post(Address target, HttpServletRequest req) {
 		try {
 			DataStore<Entity> store = datastoreHolder.get();
 			InputStream in = req.getInputStream();
@@ -79,9 +80,9 @@ public class EntityListResouce extends AbstractResouce {
 			
 			store.add(inData);
 			store.flush();
-			return req.getAddress().getPath() + inData.getID();
+			return target.getPath() + inData.getID();
 		} catch (IOException e) {
-			log.error("IOException" + req.getAddress().getPath());
+			log.error("IOException" + req.getPathInfo());
 			throw new RuntimeException(e);
 		}
 	}

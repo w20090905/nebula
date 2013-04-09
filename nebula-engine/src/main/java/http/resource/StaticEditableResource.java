@@ -9,8 +9,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.simpleframework.http.Address;
-import org.simpleframework.http.Request;
 
 import util.FileUtil;
 
@@ -24,7 +25,7 @@ public class StaticEditableResource extends AbstractResouce {
 		this.underlySource = source;
 	}
 
-	protected void put(Request req) throws IOException {
+	protected void put(Address target, HttpServletRequest req) throws IOException {
 		try {
 			BufferedInputStream bio = new BufferedInputStream(req.getInputStream());
 
@@ -46,7 +47,6 @@ public class StaticEditableResource extends AbstractResouce {
 
 			file = FileUtil.saveTo(bio, file);
 		} catch (IOException e) {
-			log.error("IOException" + req.getAddress().getPath());
 			throw new RuntimeException(e);
 		}
 

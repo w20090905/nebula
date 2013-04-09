@@ -2,12 +2,14 @@ package http.resource;
 
 import java.io.IOException;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.io.EofException;
 import org.simpleframework.http.Address;
-import org.simpleframework.http.Request;
-import org.simpleframework.http.Response;
 import org.simpleframework.http.resource.Resource;
 
 public abstract class AbstractResouce implements Resource {
@@ -33,12 +35,12 @@ public abstract class AbstractResouce implements Resource {
 		throw new UnsupportedOperationException("cann't support put " + address);
 	}
 
-	protected void put(Request req) throws IOException {
-		throw new UnsupportedOperationException("cann't support put " + req.getAddress());
+	protected void put(Address target, HttpServletRequest req) throws IOException {
+		throw new UnsupportedOperationException("cann't support put " + req.getPathInfo());
 	}
 
-	protected String post(Request req) throws IOException {
-		throw new UnsupportedOperationException("cann't support post " + req.getAddress());
+	protected String post(Address target, HttpServletRequest req) throws IOException {
+		throw new UnsupportedOperationException("cann't support post " +  req.getPathInfo());
 	}
 
 	protected void delete(Address address) throws IOException {
@@ -49,7 +51,7 @@ public abstract class AbstractResouce implements Resource {
 	static long cntIOException = 0;
 
 	@Override
-	public void handle(Request req, Response resp) {
+	public void handle(Address target, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
 		long currentTimeMillis = System.currentTimeMillis();
 		String method = req.getMethod();
@@ -62,63 +64,63 @@ public abstract class AbstractResouce implements Resource {
 //								+ " - lastChecked:\t" + this.lastChecked + "  = "
 //								+ (currentTimeMillis - this.lastChecked) + "  delayTime:\t" + delayTime);
 //					}
-					get(req.getAddress());
+					get(target);
 					this.lastChecked = currentTimeMillis;
 //				}
 
 				// normal parse
-				resp.setCode(200);
-				resp.set("Cache-Control", "max-age=" + maxAge);
-				resp.set("Content-Language", "en-US");
-				resp.set("Content-Type", mime);
-				resp.set("Content-Length", cache.length);
-				resp.setDate("Date", this.lastModified);
+				resp.setStatus(200);
+				resp.addHeader("Cache-Control", "max-age=" + maxAge);
+				resp.addHeader("Content-Language", "en-US");
+				resp.addHeader("Content-Type", mime);
+				resp.addIntHeader("Content-Length", cache.length);
+				resp.setDateHeader("Date", this.lastModified);
 				resp.getOutputStream().write(cache);
 				resp.getOutputStream().flush();
 			} else if ("HEADER".equals(method)) {
-				System.out.println("Header Last-Modified : " + req.getValue("Last-Modified"));
+				System.out.println("Header Last-Modified : " + req.getParameter("Last-Modified"));
 			} else if ("PUT".equals(method)) {
-				this.put(req);
+				this.put(new Address(req), req);
 
-				get(req.getAddress());
+				get(target);
 
 				// normal parse
-				resp.setCode(200);
-				resp.set("Cache-Control", "max-age=" + maxAge);
-				resp.set("Content-Language", "en-US");
-				resp.set("Content-Type", mime);
-				resp.set("Content-Length", cache.length);
-				resp.setDate("Date", this.lastModified);
+				resp.setStatus(200);
+				resp.addHeader("Cache-Control", "max-age=" + maxAge);
+				resp.addHeader("Content-Language", "en-US");
+				resp.addHeader("Content-Type", mime);
+				resp.addIntHeader("Content-Length", cache.length);
+				resp.setDateHeader("Date", this.lastModified);
 				resp.getOutputStream().write(cache);
 				resp.getOutputStream().flush();
 			} else if ("POST".equals(method)) {
-				String newUrl = this.post(req);
+				String newUrl = this.post(new Address(req), req);
 
 				// normal parse
-				resp.setCode(200);
-				resp.set("Cache-Control", "max-age=0");
-				resp.set("Content-Language", "en-US");
-				resp.set("Content-Type", "text/html");
-				resp.getPrintStream().print(newUrl);
+				resp.setStatus(200);
+				resp.addHeader("Cache-Control", "max-age=0");
+				resp.addHeader("Content-Language", "en-US");
+				resp.addHeader("Content-Type", "text/html");
+				resp.getOutputStream().print(newUrl);
 				resp.getOutputStream().flush();
 			} else if ("DELETE".equals(method)) {
-				this.delete(req.getAddress());
+				this.delete(target);
 
 				// normal parse
-				resp.setCode(200);
-				resp.set("Cache-Control", "max-age=0");
-				resp.set("Content-Language", "en-US");
-				resp.set("Content-Type", "text/html");
-				resp.set("Content-Length", 0);
+				resp.setStatus(200);
+				resp.addHeader("Cache-Control", "max-age=0");
+				resp.addHeader("Content-Language", "en-US");
+				resp.addHeader("Content-Type", "text/html");
+				resp.addIntHeader("Content-Length", 0);
 				resp.getOutputStream().flush();
 				
 			} else {
 				throw new RuntimeException("Unsupport method " + method);
 			}
 		} catch (EofException e) {
-			log.error("EofException[ " + ++cntEofException + " ] " + req.getAddress().getPath());
+			log.error("EofException[ " + ++cntEofException + " ] " + req.getPathInfo());
 		} catch (IOException e) {
-			log.error("IOException[ " + ++cntIOException + " ] " + req.getAddress().getPath());
+			log.error("IOException[ " + ++cntIOException + " ] " +  req.getPathInfo());
 		}
 	}
 }

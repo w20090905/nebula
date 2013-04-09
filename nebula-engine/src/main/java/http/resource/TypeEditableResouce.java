@@ -7,6 +7,8 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 
+import javax.servlet.http.HttpServletRequest;
+
 import nebula.data.DataPersister;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
@@ -15,7 +17,6 @@ import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 
 import org.simpleframework.http.Address;
-import org.simpleframework.http.Request;
 
 import util.FileUtil;
 
@@ -57,7 +58,7 @@ public class TypeEditableResouce extends AbstractResouce {
 		}
 	}
 
-	protected void put(Request req) throws IOException {
+	protected void put(Address target, HttpServletRequest req) throws IOException {
 		BufferedInputStream bio = new BufferedInputStream(req.getInputStream());
 		if (log.isTraceEnabled()) {
 			log.trace("Input stream : ");

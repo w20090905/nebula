@@ -2,10 +2,13 @@ package http.resource;
 
 import java.io.IOException;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.simpleframework.http.Request;
-import org.simpleframework.http.Response;
+import org.simpleframework.http.Address;
 import org.simpleframework.http.resource.Resource;
 
 public class RedirectResouce implements Resource {
@@ -18,38 +21,34 @@ public class RedirectResouce implements Resource {
 	}
 
 	@Override
-	public void handle(Request req, Response resp) {
+	public void handle(Address target, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		if (log.isTraceEnabled()) {
-			log.trace("Request : " + req.getPath());
 			log.trace("\tMethod" + req.getMethod());
 		}
 		try {
 
 			// normal parse
-			resp.setCode(302);
-			resp.set("location", this.redirectTo);
-			resp.close();
+			resp.setStatus(302);
+			resp.addHeader("location", this.redirectTo);
+			resp.flushBuffer();
 
 		} catch (IOException e) {
-			log.error("IOException" + req.getAddress().getPath());
 			throw new RuntimeException(e);
 		}
 	}
 	
-	public void redirectTo(Request req, Response resp,String redirectTo){
+	public void redirectTo(HttpServletRequest req, HttpServletResponse resp,String redirectTo){
 		if (log.isTraceEnabled()) {
-			log.trace("Request : " + req.getPath());
 			log.trace("\tMethod" + req.getMethod());
 		}
 		try {
 
 			// normal parse
-			resp.setCode(302);
-			resp.set("location", redirectTo);
-			resp.close();
+			resp.setStatus(302);
+			resp.addHeader("location", redirectTo);
+			resp.flushBuffer();
 
 		} catch (IOException e) {
-			log.error("IOException" + req.getAddress().getPath());
 			throw new RuntimeException(e);
 		}
 	}

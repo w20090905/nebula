@@ -1,10 +1,11 @@
 package org.simpleframework.http.core;
 
-import org.simpleframework.http.Request;
-import org.simpleframework.http.Response;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 public interface Container {
 
-	void handle(Request req, Response resp);
+	void handle(HttpServletRequest req, HttpServletResponse resp);
 
 }

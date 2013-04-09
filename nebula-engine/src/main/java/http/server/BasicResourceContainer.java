@@ -4,6 +4,7 @@ import http.resource.ErrorHandleResouce;
 import http.resource.RedirectResouce;
 import http.startup.Configurable;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,14 +13,15 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Pattern;
 
 import javax.inject.Inject;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import nebula.data.Entity;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.simpleframework.http.Address;
-import org.simpleframework.http.Request;
-import org.simpleframework.http.Response;
 import org.simpleframework.http.core.Container;
 import org.simpleframework.http.resource.Resource;
 import org.simpleframework.http.resource.ResourceEngine;
@@ -62,9 +64,8 @@ public class BasicResourceContainer implements Container {
 	}
 
 	@Override
-	public void handle(Request req, Response resp) {
+	public void handle(HttpServletRequest req, HttpServletResponse resp) {
 		if(log.isDebugEnabled()){
-			log.debug("# Request\t: " + req.getAddress().getPath() + " Method\t: " + req.getMethod());
 		}
 		try {
 //			Entity currentUser = (Entity) req.getSession().getAttribute("#currentUser");
@@ -97,20 +98,26 @@ public class BasicResourceContainer implements Container {
 				// }
 //			}
 
-			String path = req.getAddress().getPath().getPath();
+			String path = new Address(req).getPath().getPath();
 			Resource res = cachedLinks.get(path);
 			if (res != null) {
-				res.handle(req, resp);
+				res.handle(new Address(req), req, resp);
 				return;
 			} else {
-				res = resolve(req.getAddress());
+				res = resolve(new Address(req));
 			}
-			res.handle(req, resp);
+			res.handle(new Address(req), req, resp);
 			return;
 
 		} catch (RuntimeException e) {
 			log.error(e.getClass().getName(),e);
 //			this.errorHandleResource.redirectTo(req, resp, e);
+		} catch (IOException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		} catch (ServletException e) {
+			log.error(e);
+			throw new RuntimeException(e);
 		}
 	}
 

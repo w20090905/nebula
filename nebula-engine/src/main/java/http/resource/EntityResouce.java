@@ -8,13 +8,14 @@ import java.io.Reader;
 import java.io.Writer;
 import java.sql.Timestamp;
 
+import javax.servlet.http.HttpServletRequest;
+
 import nebula.data.DataHolder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
 
 import org.simpleframework.http.Address;
-import org.simpleframework.http.Request;
 
 public class EntityResouce extends AbstractResouce {
 	private final DataHolder<DataHelper<Entity,Reader,Writer>> jsonHolder;
@@ -55,7 +56,7 @@ public class EntityResouce extends AbstractResouce {
 	}
 
 	@Override
-	protected void put(Request req) {
+	protected void put(Address target, HttpServletRequest req) {
 		try {
 			Entity data = datastoreHolder.get().get(key).editable();
 			if (data != null) {
@@ -65,7 +66,6 @@ public class EntityResouce extends AbstractResouce {
 				throw new RuntimeException("Cann't find object " + key);
 			}
 		} catch (IOException e) {
-			log.error("IOException" + req.getAddress().getPath());
 			throw new RuntimeException(e);
 		}
 	}

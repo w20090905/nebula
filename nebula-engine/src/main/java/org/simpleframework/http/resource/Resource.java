@@ -18,8 +18,14 @@
  
 package org.simpleframework.http.resource;
 
-import org.simpleframework.http.Response;
-import org.simpleframework.http.Request;
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.simpleframework.http.Address;
+
 
 /**
  * A <code>Resource</code> provides an abstraction of any given 
@@ -45,9 +51,12 @@ public interface Resource {
     * response for that request. This method is also responsible
     * for closing and comitting the <code>Response</code> unless
     * handed (chained) to another <code>Resource</code>.
+ * @param target TODO
+ * @param req the <code>Request</code> to be processed
+ * @param resp the <code>Response</code> to be processed    
     *
-    * @param req the <code>Request</code> to be processed
-    * @param resp the <code>Response</code> to be processed    
+    * @throws IOException TODO
+ * @throws ServletException TODO
     */
-   public void handle(Request req, Response resp);
+   public void handle(Address target, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException;
 }

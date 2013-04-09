@@ -23,18 +23,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.simpleframework.http.Address;
 import org.simpleframework.http.Path;
 import org.simpleframework.http.Query;
-import org.simpleframework.util.KeyMap;
 
-public class AddressParser implements Address {
+public class AddressParser extends Address {
 	final HttpServletRequest r;
 	public AddressParser(HttpServletRequest request){
+		super(request);
 		this.r = request;
 	}
 	
-	@Override
-	public String getScheme() {
-		return r.getScheme();
-	}
 
 	@Override
 	public String getDomain() {
@@ -44,23 +40,22 @@ public class AddressParser implements Address {
 
 	@Override
 	public int getPort() {
-		return r.getServerPort();
+//		return r.getServerPort();
+
+		return 0;
 	}
 
 	@Override
 	public Path getPath() {
-		return new PathParser(r.getPathInfo());
+//		return new PathParser(r.getPathInfo());
+
+		return null;
 	}
 
 	@Override
 	public Query getQuery() {
 		// TODO Auto-generated method stub
-		return new QueryParser(r.getQueryString());
-	}
-
-	@Override
-	public KeyMap<String> getParameters() {
-		// TODO Auto-generated method stub
+//		return new QueryParser(r.getQueryString());
 		return null;
 	}
 
