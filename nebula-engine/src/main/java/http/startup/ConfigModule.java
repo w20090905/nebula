@@ -30,11 +30,12 @@ import nebula.data.impl.EntityDbDataPersister;
 import nebula.lang.EditableTypeLoader;
 import nebula.lang.SystemTypeLoader;
 import nebula.lang.TypeLoader;
+import nebula.server.Container;
+import nebula.server.ResourceEngine;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.simpleframework.http.core.Container;
-import org.simpleframework.http.resource.ResourceEngine;
+import org.eclipse.jetty.server.Handler;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;
@@ -109,7 +110,7 @@ public class ConfigModule extends AbstractModule {
 			this.bind(ResourceEngine.class).to(StaticResourceEngine.class).in(Singleton.class);
 			this.bind(EntityResouceEngine.class);
 
-			this.bind(Container.class).to(BasicResourceContainer.class).in(Singleton.class);
+			this.bind(Handler.class).to(BasicResourceContainer.class).in(Singleton.class);
 
 			this.bind(new TypeLiteral<Configurable<BasicResourceContainer>>() {
 			}).toInstance(new Configurable<BasicResourceContainer>() {

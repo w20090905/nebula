@@ -6,9 +6,10 @@ import http.resource.StaticEditableResource;
 
 import javax.inject.Inject;
 
-import org.simpleframework.http.Address;
-import org.simpleframework.http.resource.Resource;
-import org.simpleframework.http.resource.ResourceEngine;
+import nebula.server.Address;
+import nebula.server.Resource;
+import nebula.server.ResourceEngine;
+
 
 @SuppressWarnings("deprecation")
 public class EditableStaticResourceEngine extends StaticResourceEngine implements ResourceEngine {
@@ -19,7 +20,7 @@ public class EditableStaticResourceEngine extends StaticResourceEngine implement
 
 	@Override
 	public Resource resolve(Address target) {
-		Source source = loader.findSource(target.getPath().getPath());
+		Source source = loader.findSource(target.getPathInfo());
 		return source != null ? new StaticEditableResource(source, TheMimeTypes.get(target.getPath().getExtension()))
 				: null;
 	}

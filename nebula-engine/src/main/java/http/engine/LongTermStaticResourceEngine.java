@@ -6,8 +6,9 @@ import http.resource.StaticResource;
 
 import javax.inject.Inject;
 
-import org.simpleframework.http.Address;
-import org.simpleframework.http.resource.Resource;
+import nebula.server.Address;
+import nebula.server.Resource;
+
 
 @SuppressWarnings("deprecation")
 public class LongTermStaticResourceEngine extends StaticResourceEngine {
@@ -24,7 +25,7 @@ public class LongTermStaticResourceEngine extends StaticResourceEngine {
 	
 	@Override
 	public Resource resolve(Address target) {
-		Source source = loader.findSource(target.getPath().getPath());
+		Source source = loader.findSource(target.getPathInfo());
 		if (source != null) {
 			return new StaticResource(source,TheMimeTypes.get(target.getPath().getExtension()),age);
 		}

@@ -18,9 +18,8 @@ import nebula.data.DataHolder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
+import nebula.server.Address;
 
-import org.simpleframework.http.Address;
-import org.simpleframework.http.Query;
 
 import util.FileUtil;
 
@@ -37,13 +36,12 @@ public class EntityListResouce extends AbstractResouce {
 	}
 
 	protected void get(Address address) {
-		Query query =address.getQuery();
 		List<Entity> dataList;
 
-		if (query.isEmpty()) {
+		if (address.isQueryEmpty()) {
 			dataList = datastoreHolder.get().all();
 		} else {
-			Filter<Entity> filter = filterBuilder.buildFrom(query, null);
+			Filter<Entity> filter = filterBuilder.buildFrom(address.getParameterMap(), null);
 			dataList = datastoreHolder.get().query(filter);
 		}
 
@@ -69,8 +67,7 @@ public class EntityListResouce extends AbstractResouce {
 	}
 
 	@Override
-	protected String post(Address target, HttpServletRequest req) {
-		try {
+	protected String post(Address target, HttpServletRequest req) throws IOException {
 			DataStore<Entity> store = datastoreHolder.get();
 			InputStream in = req.getInputStream();
 			if (log.isTraceEnabled()) {
@@ -81,9 +78,5 @@ public class EntityListResouce extends AbstractResouce {
 			store.add(inData);
 			store.flush();
 			return target.getPath() + inData.getID();
-		} catch (IOException e) {
-			log.error("IOException" + req.getPathInfo());
-			throw new RuntimeException(e);
-		}
 	}
 }

@@ -14,16 +14,17 @@ import nebula.data.DataHolder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
+import nebula.server.Address;
 
-import org.simpleframework.http.Address;
 
 public class EntityResouce extends AbstractResouce {
-	private final DataHolder<DataHelper<Entity,Reader,Writer>> jsonHolder;
+	private final DataHolder<DataHelper<Entity, Reader, Writer>> jsonHolder;
 
 	private final String key;
 	private final DataHolder<DataStore<Entity>> datastoreHolder;
 
-	public EntityResouce(DataHolder<DataHelper<Entity,Reader,Writer>> json, DataHolder<DataStore<Entity>> datas, String key) {
+	public EntityResouce(DataHolder<DataHelper<Entity, Reader, Writer>> json, DataHolder<DataStore<Entity>> datas,
+			String key) {
 		super("text/json", 0, 0);
 		this.jsonHolder = json;
 		this.datastoreHolder = datas;
@@ -31,42 +32,36 @@ public class EntityResouce extends AbstractResouce {
 	}
 
 	@Override
-	protected void get(Address address) {
+	protected void get(Address address) throws IOException {
 		Entity data = datastoreHolder.get().get(key);
-		
+
 		long newModified = ((Timestamp) data.get("LastModified_")).getTime();
-//		if (newModified == this.lastModified) return;
-		
+		// if (newModified == this.lastModified) return;
+
 		ByteArrayOutputStream bout = null;
 		try {
 			bout = new ByteArrayOutputStream();
-			Writer w = new OutputStreamWriter(bout);
+			Writer write = new OutputStreamWriter(bout);
 			jsonHolder.get().stringifyTo(data, new OutputStreamWriter(bout));
-			w.flush();
+			write.flush();
 			this.lastModified = newModified;
 			this.cache = bout.toByteArray();
-		} catch (IOException e) {
+		} finally {
 			try {
 				if (bout != null) bout.close();
-			} catch (Exception e2) {
+			} catch (Exception e) {
 			}
-			log.error(e.getClass().getName(),e);
-			throw new RuntimeException(e);
 		}
 	}
 
 	@Override
-	protected void put(Address target, HttpServletRequest req) {
-		try {
-			Entity data = datastoreHolder.get().get(key).editable();
-			if (data != null) {
-				jsonHolder.get().readFrom(data, new InputStreamReader(req.getInputStream()));
-				datastoreHolder.get().flush();
-			} else {
-				throw new RuntimeException("Cann't find object " + key);
-			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+	protected void put(Address target, HttpServletRequest req) throws IOException {
+		Entity data = datastoreHolder.get().get(key).editable();
+		if (data != null) {
+			jsonHolder.get().readFrom(data, new InputStreamReader(req.getInputStream()));
+			datastoreHolder.get().flush();
+		} else {
+			throw new RuntimeException("Cann't find object " + key);
 		}
 	}
 

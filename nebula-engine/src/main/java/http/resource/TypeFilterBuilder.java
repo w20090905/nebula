@@ -8,8 +8,6 @@ import nebula.expr.LogicExp;
 import nebula.expr.QuickExprBuilder;
 import nebula.lang.Type;
 
-import org.simpleframework.http.Query;
-
 public class TypeFilterBuilder {
 	
 	
@@ -17,12 +15,12 @@ public class TypeFilterBuilder {
 		
 	}
 
-	public Filter<Type> buildFrom(Query query, Type type) {
+	public Filter<Type> buildFrom(Map<String, String[]> params, Type type) {
 		TypeFilter builder = new TypeFilter();
 		LogicExp exp = builder.Nop();
 
-		for (Map.Entry<String, String> entry : query.entrySet()) {
-			exp = exp.and(builder.C(entry.getValue()).eqF(entry.getKey()));
+		for (Map.Entry<String, String[]> entry : params.entrySet()) {
+			exp = exp.and(builder.C(entry.getValue()[0]).eqF(entry.getKey()));
 		}
 		exp.finish();
 

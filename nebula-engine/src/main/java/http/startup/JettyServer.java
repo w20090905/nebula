@@ -1,11 +1,8 @@
 package http.startup;
 
-
-import jetty.server.BasicResourceHandler;
-
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
-import org.simpleframework.http.core.Container;
+import org.eclipse.jetty.server.session.SessionHandler;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -17,14 +14,15 @@ public class JettyServer {
 		try {
 			Server server = new Server(80);
 			Injector injector = Guice.createInjector(new ConfigModule());
-			Container container = injector.getInstance(Container.class);
+			Handler handler = injector.getInstance(Handler.class);
+			SessionHandler sessionHandler = new SessionHandler();
+			sessionHandler.setHandler(handler);
 
-			Handler handler = new BasicResourceHandler(container);
-
-			server.setHandler(handler);
+			server.setHandler(sessionHandler);
 
 			server.start();
 			server.join();
+
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		} catch (Exception e) {

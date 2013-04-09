@@ -6,9 +6,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import nebula.server.Address;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.simpleframework.http.Address;
 
 @SuppressWarnings("deprecation")
 public class StaticResource extends AbstractResouce {
@@ -26,7 +27,7 @@ public class StaticResource extends AbstractResouce {
 	}
 
 	@Override
-	protected void get(Address address) {
+	protected void get(Address address) throws IOException {
 		if (this.lastModified == this.underlySource.getLastModified()) {
 			return;
 		}
@@ -43,14 +44,12 @@ public class StaticResource extends AbstractResouce {
 			in.close();
 			this.lastModified = this.underlySource.getLastModified();
 			this.cache = bout.toByteArray();
-		} catch (IOException e) {
+		} finally{
 			try {
 				if (bout != null) bout.close();
 				if (in != null) in.close();
 			} catch (Exception e2) {
 			}
-			log.error(e.getClass().getName(),e);
-			throw new RuntimeException(e);
 		}
 	}
 }

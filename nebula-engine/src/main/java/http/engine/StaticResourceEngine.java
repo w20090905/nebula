@@ -9,9 +9,10 @@ import java.util.StringTokenizer;
 
 import javax.inject.Inject;
 
-import org.simpleframework.http.Address;
-import org.simpleframework.http.resource.Resource;
-import org.simpleframework.http.resource.ResourceEngine;
+import nebula.server.Address;
+import nebula.server.Resource;
+import nebula.server.ResourceEngine;
+
 
 @SuppressWarnings("deprecation")
 public class StaticResourceEngine implements ResourceEngine {
@@ -27,7 +28,7 @@ public class StaticResourceEngine implements ResourceEngine {
 
 	@Override
 	public Resource resolve(Address target) {
-		Source source = loader.findSource(target.getPath().getPath());
+		Source source = loader.findSource(target.getPathInfo());
 		if (source != null) {
 			return new StaticResource(source,TheMimeTypes.get(target.getPath().getExtension()));
 		}

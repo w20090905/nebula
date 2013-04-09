@@ -17,16 +17,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import nebula.data.Entity;
+import nebula.server.Address;
+import nebula.server.Resource;
+import nebula.server.ResourceEngine;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.simpleframework.http.Address;
-import org.simpleframework.http.core.Container;
-import org.simpleframework.http.resource.Resource;
-import org.simpleframework.http.resource.ResourceEngine;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.handler.AbstractHandler;
 
-public class BasicResourceContainer implements Container {
+public class BasicResourceContainer extends AbstractHandler {
 	private Log log = LogFactory.getLog(this.getClass());
 
 	final private Map<String, Resource> cachedLinks = new HashMap<String, Resource>();
@@ -64,41 +64,43 @@ public class BasicResourceContainer implements Container {
 	}
 
 	@Override
-	public void handle(HttpServletRequest req, HttpServletResponse resp) {
-		if(log.isDebugEnabled()){
+	public void handle(String target, Request baseRequest, HttpServletRequest req, HttpServletResponse resp)
+			throws IOException, ServletException {
+		if (log.isDebugEnabled()) {
 		}
 		try {
-//			Entity currentUser = (Entity) req.getSession().getAttribute("#currentUser");
-//			if (currentUser == null) {
-				// if(req.getAddress().getPath().getPath().equals("/loginzice.html")){
-				//
-				// }
-				// if(req.getAddress().getPath().getExtension().equals("html")
-				// &&
-				// !req.getAddress().getPath().getPath().equals("/loginzice.html")){
-				// redirectToLoginResource.handle(req, resp);
-				// return;
-				// }
-				//
-				// String path = req.getAddress().getPath().getPath();
-				// Resource res = cachedLinks.get(path);
-				// if (res == null) {
-				// res = resolve(req.getAddress());
-				// }
-				//
-				// if (res instanceof StaticResource) {
-				// res.handle(req, resp);
-				// return;
-				// }else if (res instanceof LoginListResouce) {
-				// res.handle(req, resp);
-				// return;
-				// } else {
-				// redirectToLoginResource.handle(req, resp);
-				// return;
-				// }
-//			}
+			// Entity currentUser = (Entity)
+			// req.getSession().getAttribute("#currentUser");
+			// if (currentUser == null) {
+			// if(req.getAddress().getPath().getPath().equals("/loginzice.html")){
+			//
+			// }
+			// if(req.getAddress().getPath().getExtension().equals("html")
+			// &&
+			// !req.getAddress().getPath().getPath().equals("/loginzice.html")){
+			// redirectToLoginResource.handle(req, resp);
+			// return;
+			// }
+			//
+			// String path = req.getAddress().getPath().getPath();
+			// Resource res = cachedLinks.get(path);
+			// if (res == null) {
+			// res = resolve(req.getAddress());
+			// }
+			//
+			// if (res instanceof StaticResource) {
+			// res.handle(req, resp);
+			// return;
+			// }else if (res instanceof LoginListResouce) {
+			// res.handle(req, resp);
+			// return;
+			// } else {
+			// redirectToLoginResource.handle(req, resp);
+			// return;
+			// }
+			// }
 
-			String path = new Address(req).getPath().getPath();
+			String path = req.getPathInfo();
 			Resource res = cachedLinks.get(path);
 			if (res != null) {
 				res.handle(new Address(req), req, resp);
@@ -110,8 +112,8 @@ public class BasicResourceContainer implements Container {
 			return;
 
 		} catch (RuntimeException e) {
-			log.error(e.getClass().getName(),e);
-//			this.errorHandleResource.redirectTo(req, resp, e);
+			log.error(e.getClass().getName(), e);
+			// this.errorHandleResource.redirectTo(req, resp, e);
 		} catch (IOException e) {
 			log.error(e);
 			throw new RuntimeException(e);
@@ -127,7 +129,7 @@ public class BasicResourceContainer implements Container {
 
 	private Resource resolve(Address address) {
 		Resource res = null;
-		String path = address.getPath().getPath();
+		String path = address.getPathInfo();
 		lock.lock();
 		long lockIndex = lockcount++;
 		if (log.isDebugEnabled()) {

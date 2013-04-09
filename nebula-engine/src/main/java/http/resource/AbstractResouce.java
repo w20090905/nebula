@@ -6,11 +6,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import nebula.server.Address;
+import nebula.server.Resource;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.io.EofException;
-import org.simpleframework.http.Address;
-import org.simpleframework.http.resource.Resource;
 
 public abstract class AbstractResouce implements Resource {
 	protected Log log = LogFactory.getLog(this.getClass());

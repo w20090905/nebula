@@ -13,11 +13,11 @@ import nebula.data.DataHolder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
+import nebula.server.Address;
+import nebula.server.Resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.simpleframework.http.Address;
-import org.simpleframework.http.resource.Resource;
 
 public class LoginListResouce implements Resource {
 	protected Log log = LogFactory.getLog(this.getClass());
@@ -32,7 +32,8 @@ public class LoginListResouce implements Resource {
 	}
 
 	@Override
-	public void handle(Address target, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+	public void handle(Address target, HttpServletRequest req, HttpServletResponse resp) throws IOException,
+			ServletException {
 		if (log.isTraceEnabled()) {
 			log.trace("\tMethod" + req.getMethod());
 		}
@@ -47,7 +48,7 @@ public class LoginListResouce implements Resource {
 	}
 
 	// @SuppressWarnings("unchecked")
-	protected void post(HttpServletRequest req, HttpServletResponse resp) {
+	protected void post(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		try {
 			String username = req.getParameter("username");
 			// String password = form.get("password");
@@ -83,9 +84,6 @@ public class LoginListResouce implements Resource {
 			// datas.add(data);
 			// datas.flush();
 
-		} catch (IOException e) {
-			log.error(e);
-			throw new RuntimeException(e);
 		} finally {
 
 		}

@@ -11,8 +11,8 @@ import nebula.data.DataHolder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.lang.TypeLoader;
+import nebula.server.Address;
 
-import org.simpleframework.http.Address;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -28,12 +28,12 @@ public class TemplateResouce extends AbstractResouce {
 	final String templateTypeName;
 	final String typeName;
 	final String actionName;
-	final DataHolder<DataStore<Entity>>  attributes;
-	
-	public TemplateResouce(Configuration cfg,TypeLoader typeLoader,DataHolder<DataStore<Entity>>  attributes, String templateTypeName, String typeName,
-			String actionName) {
-		super("text/template", 0, 0);//TODO 
-		
+	final DataHolder<DataStore<Entity>> attributes;
+
+	public TemplateResouce(Configuration cfg, TypeLoader typeLoader, DataHolder<DataStore<Entity>> attributes,
+			String templateTypeName, String typeName, String actionName) {
+		super("text/template", 0, 0);// TODO
+
 		this.cfg = cfg;
 		this.typeLoader = typeLoader;
 
@@ -45,29 +45,25 @@ public class TemplateResouce extends AbstractResouce {
 		this.attributes = attributes;
 	}
 
-	protected void get(Address address) {
+	protected void get(Address address) throws IOException {
 		try {
 			ByteArrayOutputStream bout = new ByteArrayOutputStream();
 			Writer w = new OutputStreamWriter(bout);
-			
+
 			root.put("type", typeLoader.findType(this.typeName));
-	
+
 			DataStore<Entity> attrs = attributes.get();
-			
+
 			root.put("attrs", attrs);
 			Template template = cfg.getTemplate(templateName);
 			template.process(root, w);
 			w.flush();
 			w.close();
-			
+
 			super.lastModified = System.currentTimeMillis();
 			super.cache = bout.toByteArray();
 		} catch (TemplateException e) {
-			log.error("TemplateException",e);
-			throw new RuntimeException(e);
-		} catch (IOException e) {
-			log.error("IOException",e);
-			throw new RuntimeException(e);
+			throw new IOException(e);
 		}
 	}
 }

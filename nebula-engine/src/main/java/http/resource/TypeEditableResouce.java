@@ -15,13 +15,13 @@ import nebula.data.json.DataHelper;
 import nebula.data.json.JsonHelperProvider;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
+import nebula.server.Address;
 
-import org.simpleframework.http.Address;
 
 import util.FileUtil;
 
 public class TypeEditableResouce extends AbstractResouce {
-	private final DataHelper<Type,Reader,Writer> json;
+	private final DataHelper<Type, Reader, Writer> json;
 	private final String key;
 	final TypeLoader typeLoader;
 	final DataPersister<Entity> dataWareHouse;
@@ -39,7 +39,7 @@ public class TypeEditableResouce extends AbstractResouce {
 		Type data = typeLoader.findType(key);
 		long newModified = data.getLastModified();
 		if (newModified == this.lastModified) return;
-		
+
 		ByteArrayOutputStream bout = null;
 		try {
 			bout = new ByteArrayOutputStream();
@@ -48,13 +48,11 @@ public class TypeEditableResouce extends AbstractResouce {
 			w.flush();
 			this.lastModified = newModified;
 			this.cache = bout.toByteArray();
-		} catch (IOException e) {
+		} finally {
 			try {
 				if (bout != null) bout.close();
 			} catch (Exception e2) {
 			}
-			log.error("IOException",e);
-			throw new RuntimeException(e);
 		}
 	}
 
@@ -77,7 +75,7 @@ public class TypeEditableResouce extends AbstractResouce {
 				log.trace(type.getCode());
 			}
 			type = typeLoader.update(type, newCode);
-			dataWareHouse.reload(Entity.class,type.getName());
+			dataWareHouse.reload(Entity.class, type.getName());
 		} else {
 			if (log.isTraceEnabled()) {
 				log.trace("No Change:");

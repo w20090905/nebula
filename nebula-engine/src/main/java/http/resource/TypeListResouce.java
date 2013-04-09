@@ -15,23 +15,22 @@ import nebula.Filter;
 import nebula.data.json.DataHelper;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
+import nebula.server.Address;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.simpleframework.http.Address;
-import org.simpleframework.http.Query;
 
 import util.FileUtil;
 
 public class TypeListResouce extends AbstractResouce {
 	private static Log log = LogFactory.getLog(TypeListResouce.class);
-	private final DataHelper<Type,Reader,Writer> json;
+	private final DataHelper<Type, Reader, Writer> json;
 	final TypeLoader typeLoader;
 	final TypeFilterBuilder filterBuilder;
 
 	protected byte[] cacheAll;
 
-	public TypeListResouce(TypeLoader typeLoader, DataHelper<Type,Reader,Writer> json, TypeFilterBuilder filterBuilder) {
+	public TypeListResouce(TypeLoader typeLoader, DataHelper<Type, Reader, Writer> json, TypeFilterBuilder filterBuilder) {
 		super("text/json", 0, 1000);
 		this.typeLoader = typeLoader;
 		this.json = json;
@@ -40,19 +39,18 @@ public class TypeListResouce extends AbstractResouce {
 
 	@Override
 	protected void get(Address address) {
-		Query query = address.getQuery();
 		List<Type> dataList;
 
-		if (query.isEmpty()) {
+		if (address.isQueryEmpty()) {
 			long newModified = typeLoader.getLastModified();
 			if (newModified == this.lastModified) {
 				super.cache = this.cacheAll;
 				return;
-			}		
+			}
 			this.lastModified = newModified;
 			dataList = typeLoader.all();
 		} else {
-			Filter<Type> filter = filterBuilder.buildFrom(query, null);
+			Filter<Type> filter = filterBuilder.buildFrom(address.getParameterMap(), null);
 			dataList = typeLoader.all().query(filter);
 		}
 
@@ -75,7 +73,7 @@ public class TypeListResouce extends AbstractResouce {
 		out.close();
 		this.cache = bout.toByteArray();
 
-		if (query.isEmpty()) {
+		if (address.isQueryEmpty()) {
 			this.cacheAll = bout.toByteArray();
 		}
 	}

@@ -16,12 +16,12 @@ import nebula.data.json.JsonHelperProvider;
 import nebula.lang.EditableTypeLoader;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
+import nebula.server.Address;
+import nebula.server.Resource;
+import nebula.server.ResourceEngine;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.simpleframework.http.Address;
-import org.simpleframework.http.resource.Resource;
-import org.simpleframework.http.resource.ResourceEngine;
 
 public class TypeResouceEngine implements ResourceEngine {
 	private Log log = LogFactory.getLog(this.getClass());

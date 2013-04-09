@@ -12,12 +12,12 @@ import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.lang.TypeLoader;
+import nebula.server.Address;
+import nebula.server.Path;
+import nebula.server.Resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.simpleframework.http.Address;
-import org.simpleframework.http.Path;
-import org.simpleframework.http.resource.Resource;
 
 import freemarker.template.Configuration;
 
@@ -40,9 +40,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 
 	@Override
 	public Resource resolve(Address target) {
-		Path path = target.getPath();
-
-		Source source = loader.findSource(path.getPath());
+		Source source = loader.findSource(target.getPathInfo());
 		if (source != null) {
 			return new StaticEditableResource(source, TheMimeTypes.get(source));
 		}
@@ -53,19 +51,12 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 			throw new RuntimeException(segments.toString());
 		}
 
-		String[] names = path.getName().split("-");
+		String[] names = target.getPath().getName().split("-");
 		if (names.length < 2) {
 			return null;
 		}
 		String typeName = names[0];
 		String actionName = names[1];
-
-		if (log.isTraceEnabled()) {
-			log.trace("target.getPath : " + path);
-			log.trace("\ttemplateTypeName : " + templateTypeName);
-			log.trace("\ttypeName : " + typeName);
-			log.trace("\tactionName : " + actionName);
-		}
 
 		return new TemplateResouce(templateConfig, typeLoader, attributes, templateTypeName, typeName, actionName);
 

@@ -16,9 +16,9 @@
  * permissions and limitations under the License.
  */
  
-package org.simpleframework.http.resource;
+package nebula.server;
 
-import org.simpleframework.http.Address;
+
 
 /**
  * The <code>ResourceEngine</code> is used to create implementations

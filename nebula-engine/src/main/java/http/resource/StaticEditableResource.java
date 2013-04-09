@@ -11,7 +11,7 @@ import java.net.URL;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.simpleframework.http.Address;
+import nebula.server.Address;
 
 import util.FileUtil;
 
@@ -26,29 +26,26 @@ public class StaticEditableResource extends AbstractResouce {
 	}
 
 	protected void put(Address target, HttpServletRequest req) throws IOException {
-		try {
-			BufferedInputStream bio = new BufferedInputStream(req.getInputStream());
 
-			if (log.isTraceEnabled()) {
-				log.trace("Input stream : ");
-				log.trace(FileUtil.readAllTextFrom(bio));
-			}
+		BufferedInputStream bio = new BufferedInputStream(req.getInputStream());
 
-			Object realObject = underlySource.getRealObject();
-			File file = null;
-			if (realObject instanceof File) {
-				file = (File) realObject;
-			} else if (realObject instanceof URL) {
-				URL url = (URL) realObject;
-				file = new File(url.getFile());
-			} else {
-				throw new UnsupportedOperationException("File Type");
-			}
-
-			file = FileUtil.saveTo(bio, file);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+		if (log.isTraceEnabled()) {
+			log.trace("Input stream : ");
+			log.trace(FileUtil.readAllTextFrom(bio));
 		}
+
+		Object realObject = underlySource.getRealObject();
+		File file = null;
+		if (realObject instanceof File) {
+			file = (File) realObject;
+		} else if (realObject instanceof URL) {
+			URL url = (URL) realObject;
+			file = new File(url.getFile());
+		} else {
+			throw new UnsupportedOperationException("File Type");
+		}
+
+		file = FileUtil.saveTo(bio, file);
 
 	}
 
@@ -76,7 +73,7 @@ public class StaticEditableResource extends AbstractResouce {
 				if (in != null) in.close();
 			} catch (Exception e2) {
 			}
-			log.error(e.getClass().getName(),e);
+			log.error(e.getClass().getName(), e);
 			throw new RuntimeException(e);
 		}
 	}
