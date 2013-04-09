@@ -64,10 +64,34 @@ form.form-horizontal input.ng-valid.ng-dirty {
 .form-horizontal table tr.newLine input[type=text], .form-horizontal  table tr.newLine input[type=password], .form-horizontal  table tr.newLine textarea {
 	width: 90% !important;
 }
+.form-horizontal table tr.newLine .input-append {
+	width: 90% !important;
+}
+.form-horizontal table tr.newLine .input-append input{
+	width: 70% !important;
+}
+
+/*
+input.inlinePopup{
+	cursor: pointer;
+}
+a.inlinePopup{
+	position: absolute;
+	right: 0px;
+}*/
+
+/*
 .form-horizontal table tr.newLine input[type=text][x-popup] {
 	width: 40% !important;
-}
+}*/
 
 /*input[required]{
 	background-color: red;
 }*/
+
+
+.modal-header .ctrls {
+position: absolute;
+right: 40px;
+top: 6px;
+}

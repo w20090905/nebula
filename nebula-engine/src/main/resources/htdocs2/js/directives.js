@@ -128,15 +128,26 @@ var neFromListDirective = [
 			var beforePopupExp = attrs.beforepopup || '';
 			var afterPopupExp = attrs.afterpopup || '';
 			
-			
-			element.wrap('<div class="input-append"></div>').after('<a class="addon btn"><i class="icon-search"></i></a>').next().click(function(){
-				var inparams = {};
-				
-				popup(reqUrl,inparams,function(retData){
-					scope.ret = retData;
-					scope.$eval(afterPopupExp);
+			if(element.parents("form table").length<1){
+				element.wrap('<div class="input-append"></div>').after('<a class="addon btn"><i class="icon-search"></i></a>').next().click(function(){
+					var inparams = {};
+					
+					popup(reqUrl,inparams,function(retData){
+						scope.ret = retData;
+						scope.$eval(afterPopupExp);
+					});
 				});
-			});
+			}else{
+				element.wrap('<div class="input-append"></div>').after('<a class="addon btn"><i class="icon-search"></i></a>').next().click(function(){
+				//element.addClass("inlinePopup").after('<a class="inlinePopup"><i class="icon-search"></i></a>').click(function(){
+					var inparams = {};
+					
+					popup(reqUrl,inparams,function(retData){
+						scope.ret = retData;
+						scope.$eval(afterPopupExp);
+					});
+				});
+			}
 			
 			function preparePopupWin(){
 				if(jQuery("#popup-window").length<1){
@@ -304,6 +315,30 @@ var nbViewDirective = ['$http', '$templateCache', '$route', '$anchorScroll', '$c
   };
 }];
 
+
+/**
+ * @ngdoc event
+ * @name ng.directive:ngView#$viewContentLoaded
+ * @eventOf ng.directive:ngView
+ * @eventType emit on the current ngView scope
+ * @description
+ * Emitted every time the ngView content is reloaded.
+ */
+var nbJsonDataDirective = ['$http', '$controller','$resource',
+               function($http, $controller,$resource) {
+  return {
+	scope:true, 
+    restrict: 'A',
+    link: function(scope, element, attr,controller) {
+     var at = attr; 
+     scope.jsonData = $resource(attr.jsondataurl).get({},function(){
+      	var d = 	 scope.jsonData;
+     });
+    }
+  };
+}];
+
 angular.module('nebulaDirectives', [])
 .directive('nbView', nbViewDirective)
-.directive('popup', neFromListDirective);
+.directive('popup', neFromListDirective)
+.directive('jsondataurl', nbJsonDataDirective);

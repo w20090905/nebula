@@ -1,5 +1,6 @@
 package nebula.data.json;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import nebula.lang.RawTypes;
 import nebula.lang.Type;
 
 import org.codehaus.jackson.JsonGenerator;
+import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonToken;
 
@@ -222,12 +224,58 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 			f = (DefaultFieldSerializer<Object>) pageFieldsMap.get(frontName);
 			if (f != null) {
 				f.inputWithoutCheck(in, entity);
+			} else {
+				skip(in);
 			}
 		}
 
 		assert token == JsonToken.END_OBJECT;
 
 		return entity;
+	}
+
+	private void skip(JsonParser in) throws JsonParseException, IOException {
+		JsonToken token = in.getCurrentToken();
+		switch (token) {
+		case START_ARRAY:
+			skipArray(in);
+			break;
+		case START_OBJECT:
+			skipObject(in);
+		default:
+			break;
+		}
+	}
+
+	private void skipArray(JsonParser in) throws JsonParseException, IOException {
+		JsonToken token;
+		OutWhile: while ((token = in.nextToken()) != null) {
+			switch (token) {
+			case END_ARRAY:
+				break OutWhile;
+			case START_OBJECT:
+				skipObject(in);
+			default:
+				skip(in);
+				break;
+			}
+		}
+	}
+
+	private void skipObject(JsonParser in) throws JsonParseException, IOException {
+		JsonToken token;
+		OutWhile: while ((token = in.nextToken()) != null) {
+			switch (token) {
+			case END_OBJECT:
+				break OutWhile;
+			case FIELD_NAME:
+				token = in.nextToken();
+				skip(in);
+				break;
+			default:
+				throw new JsonParseException(fieldName, null);
+			}
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -255,6 +303,8 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 				f = (DefaultFieldSerializer<Object>) pageFieldsMap.get(frontName);
 				if (f != null) {
 					f.input(in, entity, entity.get(f.fieldName));
+				} else {
+					skip(in);
 				}
 			}
 
@@ -273,6 +323,8 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 				f = (DefaultFieldSerializer<Object>) pageFieldsMap.get(frontName);
 				if (f != null) {
 					f.inputWithoutCheck(in, entity);
+				} else {
+					skip(in);
 				}
 			} while ((token = in.nextToken()) != null);
 		}
@@ -302,6 +354,8 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 			f = (DefaultFieldSerializer<Object>) pageFieldsMap.get(frontName);
 			if (f != null) {
 				f.input(in, entity, entity.get(f.fieldName));
+			} else {
+				skip(in);
 			}
 		}
 
