@@ -46,8 +46,8 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 		}
 
 		String[] segments = target.getPath().getSegments();
-		String templateTypeName = segments[0];
-		if (segments.length != 2) {
+		String templateTypeName = segments[1];
+		if (segments.length != 3) {
 			throw new RuntimeException(segments.toString());
 		}
 

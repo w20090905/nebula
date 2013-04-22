@@ -40,10 +40,10 @@ public class EntityResouceEngine implements ResourceEngine {
 	@Override
 	public Resource resolve(Address target) {
 		String[] path = target.getPath().getSegments();
-		String typeName = path[1];
+		String typeName = path[2];
 		String id = null;
-		if (path.length > 2) {
-			id = path[2];
+		if (path.length > 3) {
+			id = path[3];
 		}
 
 		if (log.isTraceEnabled()) {

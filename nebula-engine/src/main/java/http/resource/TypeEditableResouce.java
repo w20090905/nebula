@@ -38,7 +38,7 @@ public class TypeEditableResouce extends AbstractResouce {
 	protected void get(Address address) throws IOException {
 		Type data = typeLoader.findType(key);
 		long newModified = data.getLastModified();
-		if (newModified == this.lastModified) return;
+//		if (newModified == this.lastModified) return;
 
 		ByteArrayOutputStream bout = null;
 		try {

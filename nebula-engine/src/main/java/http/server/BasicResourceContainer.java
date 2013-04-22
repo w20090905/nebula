@@ -67,6 +67,7 @@ public class BasicResourceContainer extends AbstractHandler {
 	public void handle(String target, Request baseRequest, HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 		if (log.isDebugEnabled()) {
+			log.debug(req.getPathInfo());
 		}
 		try {
 			// Entity currentUser = (Entity)
@@ -132,8 +133,8 @@ public class BasicResourceContainer extends AbstractHandler {
 		String path = address.getPathInfo();
 		lock.lock();
 		long lockIndex = lockcount++;
-		if (log.isDebugEnabled()) {
-			log.debug("<<< begin lock for resolve Resource  : " + lockIndex);
+		if (log.isTraceEnabled()) {
+			log.trace("<<< begin lock for resolve Resource  : " + lockIndex);
 		}
 		try {
 			res = cachedLinks.get(path);
@@ -147,8 +148,8 @@ public class BasicResourceContainer extends AbstractHandler {
 			}
 		} finally {
 			lock.unlock();
-			if (log.isDebugEnabled()) {
-				log.debug(">>> unlock lock for resolve Resource  : " + lockIndex);
+			if (log.isTraceEnabled()) {
+				log.trace(">>> unlock lock for resolve Resource  : " + lockIndex);
 			}
 		}
 

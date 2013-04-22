@@ -52,7 +52,7 @@ public class Address implements Path {
 
 	@Override
 	public String getExtension() {
-		return name.substring(name.indexOf('.') + 1);
+		return name.substring(name.lastIndexOf('.') + 1);
 	}
 
 	@Override

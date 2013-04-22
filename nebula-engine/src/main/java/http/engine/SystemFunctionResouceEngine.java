@@ -33,8 +33,8 @@ public class SystemFunctionResouceEngine implements ResourceEngine {
 	public Resource resolve(Address target) {
 		String[] path = target.getPath().getSegments();
 		String id = null;
-		if (path.length > 2) {
-			id = path[2];
+		if (path.length > 3) {
+			id = path[3];
 		}
 
 		if (log.isTraceEnabled()) {
