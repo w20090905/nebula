@@ -133,7 +133,7 @@ a:hover {
     display: block;
     float: left;
     position: relative;
-    width: 220px;
+    width: 160px;
     z-index: 16;
 }
 
@@ -142,7 +142,7 @@ a:hover {
 	margin: 10px 0 0;
 	padding: 0;
 	position: absolute;
-	width: 220px;
+	width: 160px;
 }
 #sidebar > ul > li {
 	display: block;	
@@ -201,7 +201,7 @@ a:hover {
 /* Content */
 #content {
     background: none repeat scroll 0 0 #eeeeee;
-    margin-left: 220px;
+    margin-left: 160px;
     margin-right: 0;
     padding-bottom: 25px;
     position: relative;
