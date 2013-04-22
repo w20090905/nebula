@@ -1,6 +1,6 @@
 [#ftl/]
 
-[#macro inputBox field id ngModel placeholder key=false required=true readonly=false]
+[#macro inputBox field id ngModel placeholder key=false required=true readonly=false ex=""]
 	[#assign optType][@compress single_line=true]
 		[#switch field.attrs.formatType!"text"]
 			[#case "text"]		type="text"		[#break]
@@ -24,17 +24,17 @@
 			[#list (attrs[field.name].Values)![] as attr],{name:'${attr.Name}'}[/#list]
 		[/@compress] [/#assign]
 		
-		<select id="${id}" x-ng-init="values = [${attrValues?substring(1)}];"  
+		<select id="${id}" x-ng-init="values = [${attrValues?substring(1)}];"  ${ex}
 				${optReadonly} ${optRequired}  ${optValidateRule} 
 				x-ng-model="${ngModel}" x-ng-options="c.name as c.name for c in values" placeholder="${placeholder}">	
 			<option value="">-- 选择 ${field.name} --</option>
 		</select>
 	[#elseif field.attrs.formatType! = "textarea"]
-		<textarea id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"
+		<textarea id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
 			${optReadonly} ${optRequired}  ${optValidateRule} 
 			></textarea>		
 	[#else]
-		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"
+		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
 				${optReadonly} ${optRequired}  ${optValidateRule} 			
 			/>
 	[/#if]
@@ -225,7 +225,7 @@
 			<label class="control-label" for="${of.name}">${of.name}</label>
 			<div class="controls">
 					[@inputBox field=of id="${of.name}" ngModel="data.${of.name}" placeholder="${of.name}"
-						required=!(of.ignorable)/] <!-- ngList -->
+						required=!(of.ignorable) ex="x-ng-list"/] <!-- ngList -->
 			</div>
 		</div>
 						[#break]

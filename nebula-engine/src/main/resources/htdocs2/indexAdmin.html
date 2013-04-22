@@ -51,6 +51,11 @@
 	<div id="sidebar">
 		<a href="#" class="visible-phone"><i class="icon icon-th-list"></i> 菜单</a>
 		<ul x-jsonDataUrl="d/MenuBar/AdminMainMenu" class="ng-cloak">
+			<li class="submenu"><a href="#/d/Type/?standalone=Master"><i class="icon icon-glass"></i> <span>实体</span></a>
+			<li class="submenu"><a href="#/d/Type/?standalone=Transaction"><i class="icon icon-glass"></i> <span>事务</span></a>
+			<li class="submenu"><a href="#/d/Type/?standalone=Basic"><i class="icon icon-glass"></i> <span>基础类型</span></a>
+			<li class="submenu"><a href="#/d/Attribute/"><i class="icon icon-glass"></i> <span>属性</span></a>
+				
 			<li x-ng-repeat="menu in jsonData.Menu" class="submenu"><a x-ng-href="{{menu.URL}}"><i class="icon {{menu.IconName}}"></i> <span>{{menu.Name}}</span><span class="label"
 					x-ng-show="menu.items.length > 0"
 				>{{menuGroup.items.length}}</span></a>

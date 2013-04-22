@@ -246,7 +246,7 @@ function ContactRecordsCtrl($scope, $resource) {
     'use strict';
     $scope.data={};
 
-    $scope.companyList = $resource('d/Company/', {}, {
+    $scope.companyList = $resource('d/Company/?SCMRole=客户', {}, {
         query: {
             method: 'GET',
             params: {},

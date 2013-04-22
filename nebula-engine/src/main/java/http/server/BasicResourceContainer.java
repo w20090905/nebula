@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import nebula.data.Entity;
 import nebula.server.Address;
 import nebula.server.Resource;
 import nebula.server.ResourceEngine;
@@ -70,36 +71,35 @@ public class BasicResourceContainer extends AbstractHandler {
 			log.debug(req.getPathInfo());
 		}
 		try {
-			// Entity currentUser = (Entity)
-			// req.getSession().getAttribute("#currentUser");
-			// if (currentUser == null) {
-			// if(req.getAddress().getPath().getPath().equals("/loginzice.html")){
-			//
-			// }
-			// if(req.getAddress().getPath().getExtension().equals("html")
-			// &&
-			// !req.getAddress().getPath().getPath().equals("/loginzice.html")){
-			// redirectToLoginResource.handle(req, resp);
-			// return;
-			// }
-			//
-			// String path = req.getAddress().getPath().getPath();
-			// Resource res = cachedLinks.get(path);
-			// if (res == null) {
-			// res = resolve(req.getAddress());
-			// }
-			//
-			// if (res instanceof StaticResource) {
-			// res.handle(req, resp);
-			// return;
-			// }else if (res instanceof LoginListResouce) {
-			// res.handle(req, resp);
-			// return;
-			// } else {
-			// redirectToLoginResource.handle(req, resp);
-			// return;
-			// }
-			// }
+			Entity currentUser = (Entity) req.getSession().getAttribute("#currentUser");
+			if (currentUser == null) {
+				// if(req.getAddress().getPath().getPath().equals("/loginzice.html")){
+				//
+				// }
+				// if(req.getAddress().getPath().getExtension().equals("html")
+				// &&
+				// !req.getAddress().getPath().getPath().equals("/loginzice.html")){
+				// redirectToLoginResource.handle(req, resp);
+				// return;
+				// }
+				//
+				// String path = req.getAddress().getPath().getPath();
+				// Resource res = cachedLinks.get(path);
+				// if (res == null) {
+				// res = resolve(req.getAddress());
+				// }
+				//
+				// if (res instanceof StaticResource) {
+				// res.handle(req, resp);
+				// return;
+				// }else if (res instanceof LoginListResouce) {
+				// res.handle(req, resp);
+				// return;
+				// } else {
+				// redirectToLoginResource.handle(req, resp);
+				// return;
+				// }
+			}
 
 			String path = req.getPathInfo();
 			Resource res = cachedLinks.get(path);

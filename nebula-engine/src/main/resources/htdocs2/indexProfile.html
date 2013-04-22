@@ -25,7 +25,7 @@
 <body x-ng-controller="AppControl">
 	<div id="header">
 		<h1>
-			<a href="indexProfile.html#/c/{{LoginUserID}}">Unicorn Admin</a>
+			<a href="indexProfile.html#/c/{{LoginUserID}}">Unicorn Admin </a>
 		</h1>
 	</div>
 	<div id="search">
@@ -49,10 +49,9 @@
 		</ul>
 	</div>
 	<div id="sidebar">
-	[[[[{{LoginUserID}}]]]]
 		<a href="#" class="visible-phone"><i class="icon icon-th-list"></i> 菜单</a>
 		<ul x-jsonDataUrl="d/MenuBar/ProfileMenu" class="ng-cloak">
-			<li x-ng-repeat="menu in jsonData.Menu" class="submenu"><a x-ng-href="{{menu.URL | replace : 'LoginUserID': $scope.LoginUserID}}"><i class="icon {{menu.IconName}}"></i> <span>{{menu.Name}} [[{{$parent.LoginUserID}}]]</span><span class="label"
+			<li x-ng-repeat="menu in jsonData.Menu" class="submenu"><a x-ng-href="{{menu.URL | replace : '$LoginUserID$': LoginUserID}}"><i class="icon {{menu.IconName}}"></i> <span>{{menu.Name}}</span><span class="label"
 					x-ng-show="menu.items.length > 0"
 				>{{menuGroup.items.length}}</span></a>
 				<ul x-ng-show="menuGroup.items.length > 0">

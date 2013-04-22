@@ -61,8 +61,14 @@ public class StaticResourceEngine implements ResourceEngine {
 				+ "ogg        application/x-ogg "
 				+ "zip        application/octet-stream " 
 				+ "exe        application/octet-stream "
-				+ "class      application/octet-stream ");
+				+ "class      application/octet-stream " 
+				+ "otf          font/opentype "
+				+ "eot         application/vnd.ms-fontobject "
+				+ "svg         image/svg+xml "
+				+ "ttf          font/ttf "
+				+ "woff       font/x-woff ");
 		//@formatter:on
+
 		while (st.hasMoreTokens())
 			TheMimeTypes.put(st.nextToken(), st.nextToken());
 	}
