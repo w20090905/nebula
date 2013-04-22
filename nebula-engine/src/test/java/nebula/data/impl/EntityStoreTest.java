@@ -18,7 +18,7 @@ public class EntityStoreTest extends TestCase {
 	protected void setUp() throws Exception {
 
 		String driverclass = "org.apache.derby.jdbc.EmbeddedDriver";
-		String url = "jdbc:derby:db/test-entityStore2;create = true";
+		String url = "jdbc:derby:db-test/test-EntityStoreTest;create = true";
 		String username = "user";
 		String password = "password";
 

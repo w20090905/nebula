@@ -18,7 +18,7 @@ public class PersistenceDBTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		String driverclass = "org.apache.derby.jdbc.EmbeddedDriver";
-		String url = "jdbc:derby:db/PersistenceDBTest;create = true";
+		String url = "jdbc:derby:db-test/test-PersistenceDBTest;create = true";
 		String username = "user";
 		String password = "password";
 

@@ -28,7 +28,7 @@ public class DBExecTest extends TestCase {
 		loader = new TypeLoaderForTest();
 
 		String driverclass = "org.apache.derby.jdbc.EmbeddedDriver";
-		String url = "jdbc:derby:db/test-DBExecTest;create = true";
+		String url = "jdbc:derby:db-test/test-DBExecTest;create = true";
 		String username = "user";
 		String password = "password";
 
