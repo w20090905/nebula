@@ -2,6 +2,9 @@ package nebula.data.impl;
 
 import http.resource.EntityFilterBuilder;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import junit.framework.TestCase;
@@ -17,7 +20,23 @@ public class EntityFilterBuilderTest extends TestCase {
 	Entity person3_23;
 
 	public Map<String, String[]> parserQuery(String params) {
-		return null; //TODO  
+		String[] pairs = params.split("&");
+		Map<String, List<String>> pams = new HashMap<String, List<String>>();
+		for (String pair : pairs) {
+			String[] kv = pair.split("=");
+			if(!pams.containsKey(kv[0])){
+				pams.put(kv[0], new ArrayList<String>());
+				pams.get(kv[0]).add(kv[1]);	
+			}else{
+				pams.get(kv[0]).add(kv[1]);				
+			}
+		}
+		Map<String, String[]> pam2s = new HashMap<String, String[]>();
+		for (Map.Entry<String, List<String>> e : pams.entrySet()) {
+			pam2s.put(e.getKey(), e.getValue().toArray(new String[0]));
+		}
+		
+		return pam2s; //TODO  
 	}
 
 	protected void setUp() throws Exception {
