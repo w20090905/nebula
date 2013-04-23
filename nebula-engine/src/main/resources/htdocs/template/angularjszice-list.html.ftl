@@ -101,7 +101,7 @@
                                           </a>
                                       </span> 
                                       <span class="tip" >
-                                          <a id="1" class="Delete"  name="Band ring" title="Delete"  >
+                                          <a id="1" class="Delete"  title="Delete"  >
                                               <img src="images/icon/icon_delete.png" >
                                           </a>
                                       </span> 

@@ -44,7 +44,7 @@
 [#macro popupBox field pField id ngModel placeholder key=false required=true readonly=false] [#-- // TODO Need Refact --]
 	[#assign optRequired][#if required] required[/#if][/#assign]
 		<input type="text" id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"
-				readonly ${optRequired}  ${optValidateRule} 
+				readonly ${optRequired}
 				x-popup="/d/${pField.type.name}/" 
 				x-beforePopup="${field.name}=${ngModel}" 
 				x-afterPopup="${ngModel}=ret.${field.name}"

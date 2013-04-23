@@ -1,3 +1,4 @@
 type Company {
 	!Name;
+	SCMRole Attr;
 };

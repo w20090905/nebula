@@ -37,18 +37,18 @@
 							<tbody>
 								<tr x-ng-repeat="data in datalist | filter:'!Abstract' | filter:query | orderBy:orderProp:orderReverse">
 									<td>{{$index+1}}</td>
-									<td><a href="#/d/{{typename}}/{{data.name}}">{{data.name}}</a> <span
-											x-ng-repeat="(key, value) in data.nameAlias"
+									<td><a href="#/d/{{typename}}/{{data.Name}}">{{data.Name}}</a> <span
+											x-ng-repeat="(key, value) in data.NameAlias"
 										>&nbsp; {{key}}: {{value}}</span></td>
-									<td>{{data.standalone}}</td>
-									<td><a href="#/d/{{typename}}/{{data.parent}}">{{data.parent}}</a></td>
-									<td><a href="#/d/{{data.name}}/" x-ng-show="data.standalone=='Master' || data.standalone=='Transaction'"><i
+									<td>{{data.Standalone}}</td>
+									<td><a href="#/d/{{typename}}/{{data.SuperType}}">{{data.SuperType}}</a></td>
+									<td><a href="#/d/{{data.Name}}/" x-ng-show="data.Standalone=='Master' || data.Standalone=='Transaction'"><i
 											class="icon-edit"
 										></i> Data</a></td>
 									<td><a href="#/t/angularjs/{{data.name}}-list.html"
-										x-ng-show="data.standalone=='Master' || data.standalone=='Transaction'"
+										x-ng-show="data.Standalone=='Master' || data.Standalone=='Transaction'"
 									>List</a> <a href="#/t/angularjs/{{data.name}}-detail.html"
-										x-ng-show="data.standalone=='Master' || data.standalone=='Transaction'"
+										x-ng-show="data.Standalone=='Master' || data.Standalone=='Transaction'"
 									>Detail</a></td>
 								</tr>
 							</tbody>

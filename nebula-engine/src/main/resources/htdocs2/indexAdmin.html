@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="css/unicorn.grey.css" class="skin-color" />
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <!-- Custom CSS Style -->
-<link href="css/app.css" rel="stylesheet">
+<link rel="stylesheet" href="css/app.css">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -51,11 +51,12 @@
 	<div id="sidebar">
 		<a href="#" class="visible-phone"><i class="icon icon-th-list"></i> 菜单</a>
 		<ul x-jsonDataUrl="d/MenuBar/AdminMainMenu" class="ng-cloak">
+			<li class="section"><span>基础</span></li>
 			<li class="submenu"><a href="#/d/Type/?standalone=Master"><i class="icon icon-glass"></i> <span>实体</span></a>
 			<li class="submenu"><a href="#/d/Type/?standalone=Transaction"><i class="icon icon-glass"></i> <span>事务</span></a>
 			<li class="submenu"><a href="#/d/Type/?standalone=Basic"><i class="icon icon-glass"></i> <span>基础类型</span></a>
 			<li class="submenu"><a href="#/d/Attribute/"><i class="icon icon-glass"></i> <span>属性</span></a>
-				
+			<li class="section"><span>{{jsonData.Title}}</span></li>
 			<li x-ng-repeat="menu in jsonData.Menu" class="submenu"><a x-ng-href="{{menu.URL}}"><i class="icon {{menu.IconName}}"></i> <span>{{menu.Name}}</span><span class="label"
 					x-ng-show="menu.items.length > 0"
 				>{{menuGroup.items.length}}</span></a>

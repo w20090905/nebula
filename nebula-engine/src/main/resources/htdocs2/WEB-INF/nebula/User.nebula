@@ -1,10 +1,7 @@
 type User{
   !Name;
-  Description;
+  ?Description;
   Password;
-  Sex Attr;
-  Note;
+  ?Note;
   EMail;
-  Greeting Name;
-  Title Name;
 };

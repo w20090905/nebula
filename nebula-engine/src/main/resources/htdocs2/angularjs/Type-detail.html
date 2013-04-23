@@ -1,7 +1,7 @@
 <article class="module width_full">
 	<header>
 		<h1 class="tabs_involved" x-ng-show="data.name">
-			Type-{{data.name}} <span x-ng-repeat="(key, value) in data.nameAlias">&nbsp; {{key}}: {{value}}</span>
+			Type-{{data.name}} <span x-ng-repeat="(key, value) in data.NameAlias">&nbsp; {{key}}: {{value}}</span>
 		</h1>
 		<h1 class="tabs_involved" x-ng-show="!data.name">Type-New</h1>
 		<div class="buttons btn-toolbar" x-ng-show="data.standealone='Master'">
@@ -32,37 +32,37 @@
 						<span class="icon"> <i class="icon-align-justify"></i>
 						</span>
 						<ul class="nav nav-tabs">
-							<li class="active" x-ng-show="data.name"><a href="#home" data-toggle="tab">基本信息</a></li>
+							<li class="active" x-ng-show="data.Name"><a href="#home" data-toggle="tab">基本信息</a></li>
 							<li x-ng-show="data.name && data.code"><a href="#source" data-toggle="tab">源代码</a></li>
-							<li class="active" x-ng-show="!data.name"><a href="#source" data-toggle="tab">源代码</a></li>
+							<li class="active" x-ng-show="!data.Name"><a href="#source" data-toggle="tab">源代码</a></li>
 						</ul>
 					</div>
 					<div class="widget-content tab-content nopadding">
-						<div class="tab-pane active" id="home" x-ng-show="data.name">
+						<div class="tab-pane active" id="home" x-ng-show="data.Name">
 							<form name="form" x-ng-submit="$save()" class="form-horizontal">
 							<div class="control-group" style="clear: both;">
 								<label class="control-label">Name</label>
 								<div class="controls">
-									<input type="text" x-ng-model="data.name" x-ng-readonly="update" />
+									<input type="text" x-ng-model="data.Name" x-ng-readonly="update" />
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">Parent Type</label>
 								<div class="controls">
-									<a href="#/d/{{typename}}/{{data.parent}}">{{data.parent}}</a>
+									<a href="#/d/{{typename}}/{{data.SuperType}}">{{data.SuperType}}</a>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">Standalone</label>
 								<div class="controls">
-									<span class="uneditable-input">{{data.standalone}}</span>
+									<span class="uneditable-input">{{data.Standalone}}</span>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">Attrs</label>
 								<div class="controls">
 									<ol>
-										<li x-ng-repeat="(key, value) in data.attrs">{{key}} : {{value}}</li>
+										<li x-ng-repeat="(key, value) in data.Attrs">{{key}} : {{value}}</li>
 									</ol>
 								</div>
 							</div>
@@ -82,12 +82,12 @@
 									<tbody>
 										<tr x-ng-repeat="item in data.fields">
 											<td>{{$index+1}}</td>
-											<td align="left">{{item.name}}<span x-ng-repeat="(key, value) in item.nameAlias">&nbsp; {{key}}:
+											<td align="left">{{item.Name}}<span x-ng-repeat="(key, value) in item.NameAlias">&nbsp; {{key}}:
 													{{value}}</span></td>
-											<td><a href="#/d/Type/{{item.typeName}}">{{item.typeName}}</a></td>
+											<td><a href="#/d/Type/{{item.TypeName}}">{{item.typeName}}</a></td>
 											<td></td>
 											<td></td>
-											<td>{{item.attrs}}</td>
+											<td>{{item.Attrs}}</td>
 										</tr>
 									</tbody>
 								</table>
@@ -98,7 +98,7 @@
 							</div>
 							</form>
 						</div>
-						<div class="tab-pane" id="source" x-ng-show="data.name">
+						<div class="tab-pane" id="source" x-ng-show="data.Name">
 							<form name="form" x-ng-submit="$save()" class="form-horizontal">
 							<div class="control-group">
 								<textarea x-ng-model="data.code" x-required rows="20" cols="120" class="input-block-level"
@@ -111,7 +111,7 @@
 								</div>
 							</form>
 						</div>
-						<div class="tab-pane active" id="source" x-ng-show="!data.name">
+						<div class="tab-pane active" id="source" x-ng-show="!data.Name">
 							<form name="form" x-ng-submit="$save()" class="form-horizontal">
 							<div class="control-group">
 								<textarea x-ng-model="data.code" x-required rows="20" cols="120" class="input-block-level"

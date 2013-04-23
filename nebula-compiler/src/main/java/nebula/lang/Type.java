@@ -31,7 +31,7 @@ public class Type implements Identifiable {
 
 	final List<Field> references;
 
-	public static String ROOT_TYPE = "Type";
+	public static String ROOT_TYPE = "T";
 
 	/*
 	 * 

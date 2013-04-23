@@ -40,24 +40,24 @@ public class TypeSerializer extends DefaultFieldSerializer<Type> implements Json
 		Type type = (Type) value;
 
 		out.writeStartObject();
-		out.writeStringField("name", type.getName());
+		out.writeStringField("Name", type.getName());
 		if (type.getSuperType() != null) {
-			out.writeStringField("parent", type.getSuperType().getName());
+			out.writeStringField("SuperType", type.getSuperType().getName());
 		}
-		out.writeStringField("standalone", type.getStandalone().name());
-		out.writeFieldName("fields");
+		out.writeStringField("Standalone", type.getStandalone().name());
+		out.writeFieldName("Fields");
 
 		fieldListDataDealer.writeTo(null, type.getFields(), out);
 
 		Alias n = type.getNameAlias();
-		out.writeFieldName("nameAlias");
+		out.writeFieldName("NameAlias");
 		out.writeStartObject();
 		for (String k : n.alias.keySet()) {
 			out.writeStringField(k, n.alias.get(k).toString());
 		}
 		out.writeEndObject();
 		
-		out.writeFieldName("attrs");
+		out.writeFieldName("Attrs");
 		out.writeStartObject();
 		InheritHashMap p = type.getAttrs();
 		for (String k : p.getNames()) {
@@ -66,8 +66,8 @@ public class TypeSerializer extends DefaultFieldSerializer<Type> implements Json
 		out.writeEndObject();
 
 
-		out.writeBooleanField("mutable", type.isMutable());
-		out.writeStringField("code", type.getCode());
+		out.writeBooleanField("Mutable", type.isMutable());
+		out.writeStringField("Code", type.getCode());
 
 		out.writeEndObject();
 
@@ -98,21 +98,21 @@ class FieldJsonDataDealer extends DefaultTypeAdapter<Field> {
 
 		out.writeStartObject();
 
-		out.writeStringField("name", field.getName());
+		out.writeStringField("Name", field.getName());
 		out.writeBooleanField("isKey", field.isKey());
 		out.writeBooleanField("isCore", field.isCore());
 		out.writeBooleanField("isArray", field.isArray());
-		out.writeStringField("typeName", field.getType().getName());
+		out.writeStringField("TypeName", field.getType().getName());
 
 		Alias n = field.getNameAlias();
-		out.writeFieldName("nameAlias");
+		out.writeFieldName("NameAlias");
 		out.writeStartObject();
 		for (String k : n.alias.keySet()) {
 			out.writeStringField(k, n.alias.get(k).toString());
 		}
 		out.writeEndObject();
 		
-		out.writeObjectFieldStart("attrs");
+		out.writeObjectFieldStart("Attrs");
 		InheritHashMap p = field.getAttrs();
 		for (String k : p.getNames()) {
 			out.writeStringField(k, p.get(k).toString());
