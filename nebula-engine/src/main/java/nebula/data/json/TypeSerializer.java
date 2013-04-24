@@ -103,6 +103,7 @@ class FieldJsonDataDealer extends DefaultTypeAdapter<Field> {
 		out.writeBooleanField("isCore", field.isCore());
 		out.writeBooleanField("isArray", field.isArray());
 		out.writeStringField("TypeName", field.getType().getName());
+		out.writeStringField("Refer", field.getRefer().name());
 
 		Alias n = field.getNameAlias();
 		out.writeFieldName("NameAlias");

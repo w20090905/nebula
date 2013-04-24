@@ -34,7 +34,7 @@
 						</span>
 						<h5>明细 - {{entityData.Name}}</h5>
 					</div>
-					<div class="widget-content nopadding">
+					<div class="widget-content nopadding" >
 						<!-- Detail Edit Page  -->
 						<form name="form" x-ng-submit="$save()" class="form-horizontal" novalidate>
 							<div class="control-group required">
@@ -45,7 +45,7 @@
 							</div>
 							<div class="control-group">
 								<label class="control-label">Values</label>
-								<div class="controls" x-ng-controller="AttrValueCtrl">
+								<div class="controls" x-ng-controller="AttrValueCtrl" style="min-height: 200px;">
 									<span>{{remaining()}} of {{entityData.Values.length}} remaining</span>
 									<table>
 										<tbody>

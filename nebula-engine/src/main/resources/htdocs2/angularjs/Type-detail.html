@@ -1,19 +1,19 @@
 <article class="module width_full">
 	<header>
-		<h1 class="tabs_involved" x-ng-show="data.name">
-			Type-{{data.name}} <span x-ng-repeat="(key, value) in data.NameAlias">&nbsp; {{key}}: {{value}}</span>
+		<h1 class="tabs_involved" x-ng-show="data.Name">
+			Type-{{data.Name}} <span x-ng-repeat="(key, value) in data.NameAlias">&nbsp; {{key}}: {{value}}</span>
 		</h1>
-		<h1 class="tabs_involved" x-ng-show="!data.name">Type-New</h1>
+		<h1 class="tabs_involved" x-ng-show="!data.Name">Type-New</h1>
 		<div class="buttons btn-toolbar" x-ng-show="data.standealone='Master'">
 			<div class="btn-group">
-				<a href="#/d/{{data.name}}/" class="btn"><i class="icon-edit"></i> Edit Data</a>
+				<a href="#/d/{{data.Name}}/" class="btn"><i class="icon-edit"></i> Edit Data</a>
 				<button class="btn dropdown-toggle" data-toggle="dropdown">
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li><a tabindex="-1" href="#/t/angularjs/{{data.name}}-list.html">View List Template</a></li>
-					<li><a tabindex="-1" href="#/t/angularjs/{{data.name}}-detail.html">View Detail Template</a></li>
-					<li><a tabindex="-1" href="#/t/angularjs/{{data.name}}-popup.html">View Popup Template</a></li>
+					<li><a tabindex="-1" href="#/t/angularjs/{{data.Name}}-list.html">View List Template</a></li>
+					<li><a tabindex="-1" href="#/t/angularjs/{{data.Name}}-detail.html">View Detail Template</a></li>
+					<li><a tabindex="-1" href="#/t/angularjs/{{data.Name}}-popup.html">View Popup Template</a></li>
 				</ul>
 			</div>
 		</div>
@@ -33,7 +33,7 @@
 						</span>
 						<ul class="nav nav-tabs">
 							<li class="active" x-ng-show="data.Name"><a href="#home" data-toggle="tab">基本信息</a></li>
-							<li x-ng-show="data.name && data.code"><a href="#source" data-toggle="tab">源代码</a></li>
+							<li x-ng-show="data.Name && data.Code"><a href="#source" data-toggle="tab">源代码</a></li>
 							<li class="active" x-ng-show="!data.Name"><a href="#source" data-toggle="tab">源代码</a></li>
 						</ul>
 					</div>
@@ -66,7 +66,7 @@
 									</ol>
 								</div>
 							</div>
-							<div class="control-group" x-ng-show="data.fields.length>0">
+							<div class="control-group" x-ng-show="data.Fields.length>0">
 								<label class="control-label">Detail</label>
 								<table class="table tablesorter table-bordered">
 									<thead>
@@ -74,19 +74,17 @@
 											<th width="3em">#</th>
 											<th width="15%">Name</th>
 											<th width="15%">Type</th>
-											<th width="15%">Master</th>
-											<th width="15%">Standalone</th>
-											<th>Detail</th>
+											<th width="15%">Refer</th>
+											<th>Attrs</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr x-ng-repeat="item in data.fields">
+										<tr x-ng-repeat="item in data.Fields">
 											<td>{{$index+1}}</td>
 											<td align="left">{{item.Name}}<span x-ng-repeat="(key, value) in item.NameAlias">&nbsp; {{key}}:
 													{{value}}</span></td>
-											<td><a href="#/d/Type/{{item.TypeName}}">{{item.typeName}}</a></td>
-											<td></td>
-											<td></td>
+											<td><a href="#/d/Type/{{item.TypeName}}">{{item.TypeName}}</a></td>
+											<td>{{item.Refer}}</td>
 											<td>{{item.Attrs}}</td>
 										</tr>
 									</tbody>
@@ -101,7 +99,7 @@
 						<div class="tab-pane" id="source" x-ng-show="data.Name">
 							<form name="form" x-ng-submit="$save()" class="form-horizontal">
 							<div class="control-group">
-								<textarea x-ng-model="data.code" x-required rows="20" cols="120" class="input-block-level"
+								<textarea x-ng-model="data.Code" x-required rows="20" cols="120" class="input-block-level"
 									placeholder="add Type info here"
 								></textarea>
 								</div>
@@ -114,7 +112,7 @@
 						<div class="tab-pane active" id="source" x-ng-show="!data.Name">
 							<form name="form" x-ng-submit="$save()" class="form-horizontal">
 							<div class="control-group">
-								<textarea x-ng-model="data.code" x-required rows="20" cols="120" class="input-block-level"
+								<textarea x-ng-model="data.Code" x-required rows="20" cols="120" class="input-block-level"
 									placeholder="add Type info here"
 								></textarea>
 								</div>
