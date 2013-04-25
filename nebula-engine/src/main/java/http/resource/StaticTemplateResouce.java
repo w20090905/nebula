@@ -7,55 +7,57 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import nebula.data.DataHolder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.lang.TypeLoader;
-import nebula.server.Address;
-
-
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
-public class TemplateResouce extends AbstractResouce {
+public class StaticTemplateResouce extends AbstractResouce {
 	private final Configuration cfg;
-	private final String templateName;
 
 	private Map<String, Object> root = new HashMap<String, Object>();
 
 	final TypeLoader typeLoader;
-	final String templateTypeName;
-	final String typeName;
-	final String actionName;
+	final String theme;
+	final String skin;
+	final String name;
 	final DataHolder<DataStore<Entity>> attributes;
 
-	public TemplateResouce(Configuration cfg, TypeLoader typeLoader, DataHolder<DataStore<Entity>> attributes,
-			String templateTypeName, String typeName, String actionName) {
-		super("text/template", 0, 0);// TODO
+	public StaticTemplateResouce(Configuration cfg, TypeLoader typeLoader, DataHolder<DataStore<Entity>> attributes,
+			String theme, String skin, String name) {
+		super("text/template", 1000, 1000);
 
 		this.cfg = cfg;
 		this.typeLoader = typeLoader;
 
-		this.templateTypeName = templateTypeName;
-		this.typeName = typeName;
-		this.actionName = actionName;
+		this.theme = theme;
+		this.skin = skin;
+		this.name = name;
 
-		this.templateName = templateTypeName + "-" + actionName + ".ftl";
 		this.attributes = attributes;
 	}
 
-	protected void get(Address address) throws IOException {
+	protected void get(HttpServletRequest req) throws IOException {
 		try {
+			Template template = null;
+			if ((template = cfg.getTemplate("theme/" + theme + "/" + skin + "/" + name)) != null) {
+			} else if ((template = cfg.getTemplate("theme/" + theme + "/" + name)) != null) {
+			} else if ((template = cfg.getTemplate("theme/" + name)) != null) {
+			} else if ((template = cfg.getTemplate(name)) != null) {
+			}else{
+				throw new IOException(name + " can not find!");				
+			}
+			
+			
 			ByteArrayOutputStream bout = new ByteArrayOutputStream();
 			Writer w = new OutputStreamWriter(bout);
-
-			root.put("type", typeLoader.findType(this.typeName));
-
 			DataStore<Entity> attrs = attributes.get();
-
 			root.put("attrs", attrs);
-			Template template = cfg.getTemplate(templateName);
 			template.process(root, w);
 			w.flush();
 			w.close();

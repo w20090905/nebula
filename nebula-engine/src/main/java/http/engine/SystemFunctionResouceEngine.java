@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import nebula.data.DataHolder;
 import nebula.data.DataPersister;
@@ -16,7 +17,6 @@ import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
 import nebula.data.json.JsonHelperProvider;
-import nebula.server.Address;
 import nebula.server.Resource;
 import nebula.server.ResourceEngine;
 
@@ -36,11 +36,12 @@ public class SystemFunctionResouceEngine implements ResourceEngine {
 	}
 
 	@Override
-	public Resource resolve(Address target) {
-		String[] path = target.getPath().getSegments();
+	public Resource resolve(HttpServletRequest req) {
+		String path = req.getPathInfo();
+		String[] paths = path.split("/");
 		String id = null;
-		if (path.length > 2) {
-			id = path[2];
+		if (paths.length > 2) {
+			id = paths[2];
 		}
 		return cachedLinks.get(id);
 	}

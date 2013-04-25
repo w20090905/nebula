@@ -9,13 +9,13 @@
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
 <link rel="stylesheet" href="css/colorpicker.css" />
 <link rel="stylesheet" href="css/datepicker.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" href="css/uniform.css" />
 <link rel="stylesheet" href="css/select2.css" />
-<link rel="stylesheet" href="css/unicorn.main.css" />
-<link rel="stylesheet" href="css/unicorn.grey.css" class="skin-color" />
-<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="theme/${theme.name}/css/unicorn.main.css" />
+<link rel="stylesheet" href="theme/${theme.name}/css/unicorn.grey.css" class="skin-color" />
 <!-- Custom CSS Style -->
-<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="theme/${theme.name}/css/app.css">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -25,7 +25,7 @@
 <body x-ng-controller="AppControl">
 	<div id="header">
 		<h1>
-			<a href="indexProfile.html#/c/{{LoginUserID}}">Unicorn Admin</a>
+			<a href="indexProfile.html#/c/{{LoginUserID}}">Admin</a>
 		</h1>
 	</div>
 	<div id="search">
@@ -101,6 +101,7 @@
 	<!-- Le javascript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
+	<!-- Reference Lib -->
 	<script src="lib/jquery/jquery-1.8.2.min.js"></script>
 	<script src="js/jquery.ui.custom.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -108,16 +109,17 @@
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/jquery.uniform.js"></script>
 	<script src="js/select2.min.js"></script>
-	<script src="js/unicorn.form_common.js"></script>
-	<!-- Angular App -->
+	<script src="theme/${theme.name}/js/unicorn.form_common.js"></script>
+	<script src="theme/${theme.name}/js/unicorn.js"></script>
+	<!-- Angular Lib -->
 	<script src="lib/angular/angular.js"></script>
 	<script src="lib/angular/angular-cookies.js"></script>
 	<script src="lib/angular/angular-resource.js"></script>
-	<script src="js/directives.js"></script>
-	<script src="js/controllers.js"></script>
-	<script src="js/filters.js"></script>
-	<script src="js/services.js"></script>
-	<script src="js/appAdmin.js"></script>
-	<script src="js/unicorn.js"></script>
+	<!-- App -->
+	<script src="theme/${theme.name}/js/directives.js"></script>
+	<script src="theme/${theme.name}/js/controllers.js"></script>
+	<script src="theme/${theme.name}/js/filters.js"></script>
+	<script src="theme/${theme.name}/js/services.js"></script>
+	<script src="theme/${theme.name}/js/appAdmin.js"></script>
 </body>
 </html>

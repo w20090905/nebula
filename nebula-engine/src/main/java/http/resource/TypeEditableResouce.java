@@ -15,9 +15,6 @@ import nebula.data.json.DataHelper;
 import nebula.data.json.JsonHelperProvider;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
-import nebula.server.Address;
-
-
 import util.FileUtil;
 
 public class TypeEditableResouce extends AbstractResouce {
@@ -35,7 +32,7 @@ public class TypeEditableResouce extends AbstractResouce {
 	}
 
 	@Override
-	protected void get(Address address) throws IOException {
+	protected void get(HttpServletRequest req) throws IOException {
 		Type data = typeLoader.findType(key);
 		long newModified = data.getLastModified();
 //		if (newModified == this.lastModified) return;
@@ -56,7 +53,8 @@ public class TypeEditableResouce extends AbstractResouce {
 		}
 	}
 
-	protected void put(Address target, HttpServletRequest req) throws IOException {
+	@Override
+	protected void put(HttpServletRequest req) throws IOException {
 		BufferedInputStream bio = new BufferedInputStream(req.getInputStream());
 		if (log.isTraceEnabled()) {
 			log.trace("Input stream : ");

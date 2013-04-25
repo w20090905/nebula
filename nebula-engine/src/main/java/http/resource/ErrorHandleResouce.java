@@ -6,7 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import nebula.server.Address;
 import nebula.server.Resource;
 
 import org.apache.commons.logging.Log;
@@ -19,7 +18,7 @@ public class ErrorHandleResouce implements Resource {
 	}
 
 	@Override
-	public void handle(Address target, HttpServletRequest req, HttpServletResponse resp) throws IOException,
+	public void handle(HttpServletRequest req, HttpServletResponse resp) throws IOException,
 			ServletException {
 		throw new RuntimeException("not support");
 	}

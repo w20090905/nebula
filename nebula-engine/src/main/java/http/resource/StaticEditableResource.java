@@ -11,8 +11,6 @@ import java.net.URL;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nebula.server.Address;
-
 import util.FileUtil;
 
 @SuppressWarnings("deprecation")
@@ -25,7 +23,8 @@ public class StaticEditableResource extends AbstractResouce {
 		this.underlySource = source;
 	}
 
-	protected void put(Address target, HttpServletRequest req) throws IOException {
+	@Override
+	protected void put(HttpServletRequest req) throws IOException {
 
 		BufferedInputStream bio = new BufferedInputStream(req.getInputStream());
 
@@ -50,7 +49,7 @@ public class StaticEditableResource extends AbstractResouce {
 	}
 
 	@Override
-	protected void get(Address address) {
+	protected void get(HttpServletRequest req) {
 		if (this.lastModified == this.underlySource.getLastModified()) {
 			return;
 		}

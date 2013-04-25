@@ -8,8 +8,8 @@ import java.util.Hashtable;
 import java.util.StringTokenizer;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
-import nebula.server.Address;
 import nebula.server.Resource;
 import nebula.server.ResourceEngine;
 
@@ -27,10 +27,12 @@ public class StaticResourceEngine implements ResourceEngine {
 	}
 
 	@Override
-	public Resource resolve(Address target) {
-		Source source = loader.findSource(target.getPathInfo());
+	public Resource resolve(HttpServletRequest req) {
+		String path = req.getPathInfo();
+		String extension = path.substring(path.lastIndexOf('.') + 1);
+		Source source = loader.findSource(path);
 		if (source != null) {
-			return new StaticResource(source,TheMimeTypes.get(target.getPath().getExtension()));
+			return new StaticResource(source,TheMimeTypes.get(extension));
 		}
 		return null;
 	}

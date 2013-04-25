@@ -15,7 +15,6 @@ import nebula.Filter;
 import nebula.data.json.DataHelper;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
-import nebula.server.Address;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -38,10 +37,10 @@ public class TypeListResouce extends AbstractResouce {
 	}
 
 	@Override
-	protected void get(Address address) {
+	protected void get(HttpServletRequest req) {
 		List<Type> dataList;
 
-		if (address.isQueryEmpty()) {
+		if (req.getQueryString() == null || req.getQueryString().length() > 0) {
 			long newModified = typeLoader.getLastModified();
 			if (newModified == this.lastModified) {
 				super.cache = this.cacheAll;
@@ -50,7 +49,7 @@ public class TypeListResouce extends AbstractResouce {
 			this.lastModified = newModified;
 			dataList = typeLoader.all();
 		} else {
-			Filter<Type> filter = filterBuilder.buildFrom(address.getParameterMap(), null);
+			Filter<Type> filter = filterBuilder.buildFrom(req.getParameterMap(), null);
 			dataList = typeLoader.all().query(filter);
 		}
 
@@ -73,12 +72,13 @@ public class TypeListResouce extends AbstractResouce {
 		out.close();
 		this.cache = bout.toByteArray();
 
-		if (address.isQueryEmpty()) {
+		if (req.getQueryString() == null || req.getQueryString().length() > 0) {
 			this.cacheAll = bout.toByteArray();
 		}
 	}
 
-	protected String post(Address target, HttpServletRequest req) throws IOException {
+	@Override
+	protected String post(HttpServletRequest req) throws IOException {
 		BufferedInputStream bio = new BufferedInputStream(req.getInputStream());
 		if (log.isTraceEnabled()) {
 			log.trace("Input stream : ");
@@ -87,6 +87,6 @@ public class TypeListResouce extends AbstractResouce {
 
 		String newCode = FileUtil.readAllTextFrom(bio);
 		Type newType = typeLoader.update(null, newCode);
-		return target.getPath() + newType.getName();
+		return req.getPathInfo() + newType.getName();
 	}
 }

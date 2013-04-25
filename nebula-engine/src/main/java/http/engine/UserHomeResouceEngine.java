@@ -4,10 +4,10 @@ import http.io.Loader;
 import http.io.Source;
 import http.resource.StaticEditableResource;
 import http.resource.StaticTemplateResouce;
-import http.resource.TypeTemplateResouce;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import nebula.data.DataHolder;
 import nebula.data.DataPersister;
@@ -18,14 +18,13 @@ import nebula.server.Resource;
 import freemarker.template.Configuration;
 
 @SuppressWarnings("deprecation")
-public class TemplateResouceEngine extends StaticResourceEngine {
-
+public class UserHomeResouceEngine extends StaticResourceEngine {
 	private final Configuration templateConfig;
 	final DataHolder<DataStore<Entity>> attributes;
 	final TypeLoader typeLoader;
 
 	@Inject
-	public TemplateResouceEngine(Loader resourceLoader, TypeLoader typeLoader,
+	public UserHomeResouceEngine(Loader resourceLoader, TypeLoader typeLoader,
 			final DataPersister<Entity> dataWareHouse, Configuration cfg) {
 		super(resourceLoader);
 		this.templateConfig = cfg;
@@ -35,40 +34,13 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 
 	@Override
 	public Resource resolve(HttpServletRequest req) {
-		String path = req.getPathInfo();
-		String extension = path.substring(path.lastIndexOf('.') + 1);
-
-		Source source = loader.findSource(path);
-		if (source != null) {
-			return new StaticEditableResource(source, TheMimeTypes.get(extension));
-		}
-
-		String theme = "$";
-		String skin = "$";
-
-		int last = path.lastIndexOf('/');
+		HttpSession session = req.getSession();
+		String extension = "text/html";
+		String theme = (String) session.getAttribute("Theme");
+		String skin = (String) session.getAttribute("Skin");
+		String name = "index.html";
 		
-		int prev = path.indexOf('/') +1;
-
-		int next = path.indexOf("/", prev);
-		if (0< next && next <= last) {
-			prev = next+1;
-		}
-		
-		next = path.indexOf("/", prev);
-		if (0 < next  && next <= last) {
-			theme = path.substring(prev, next);
-			prev = next+1;
-		}
-
-		next = path.indexOf("/", prev);
-		if (0 < next  && next <= last) {
-			skin = path.substring(prev, next);
-			prev = next+1;
-		}
-
-		String name = path.substring(prev);
-
+		Source source = null;
 		if ((source = loader.findSource("/" + "theme/" + theme + "/" + skin + "/" + name)) != null) {
 			return new StaticEditableResource(source, TheMimeTypes.get(extension));
 		} else if ((source = loader.findSource("/" + "theme/" + theme + "/" + name)) != null) {
@@ -81,17 +53,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 			return new StaticEditableResource(source, TheMimeTypes.get(extension));
 		}
 
-		int idxType = 0;
-		if (name.indexOf('/', prev) > 0) {
-			return new StaticTemplateResouce(templateConfig, typeLoader, attributes, theme, skin, name);
-		} else if ((idxType = name.indexOf("-")) > 0) {
-			String typeName = name.substring(0, idxType);
-			String actionName = name.substring(idxType+1);
-			return new TypeTemplateResouce(templateConfig, typeLoader, attributes, theme, skin, typeName, actionName);
-		} else {
-			return new StaticTemplateResouce(templateConfig, typeLoader, attributes, theme, skin, name);
-		}
-
+		return new StaticTemplateResouce(templateConfig, typeLoader, attributes, theme, skin, name);
 	}
 
 }

@@ -8,12 +8,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import nebula.data.DataHolder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
-import nebula.server.Address;
 import nebula.server.Resource;
 
 import org.apache.commons.logging.Log;
@@ -32,7 +32,7 @@ public class LoginListResouce implements Resource {
 	}
 
 	@Override
-	public void handle(Address target, HttpServletRequest req, HttpServletResponse resp) throws IOException,
+	public void handle(HttpServletRequest req, HttpServletResponse resp) throws IOException,
 			ServletException {
 		if (log.isTraceEnabled()) {
 			log.trace("\tMethod" + req.getMethod());
@@ -60,7 +60,11 @@ public class LoginListResouce implements Resource {
 			}
 
 			resp.setStatus(200);
-			 req.getSession().setAttribute("#currentUser", user);
+			HttpSession session = req.getSession();
+			
+			session.setAttribute("#currentUser", user);
+			session.setAttribute("Theme", "angularjs");
+			session.setAttribute("Skin", "unicorn");
 			 Cookie loginUserID = new Cookie("LoginUserID", username);
 			 loginUserID.setPath("/");
 			resp.addCookie(loginUserID);
@@ -70,7 +74,7 @@ public class LoginListResouce implements Resource {
 			resp.addHeader("Content-Type", "text/html");
 			resp.addIntHeader("Content-Length", 0);
 
-			redirectTo.redirectTo(req, resp, "/index.html#/c/" + req.getParameter("username"));
+			redirectTo.redirectTo(req, resp, "/u/" + req.getParameter("username"));
 
 			resp.flushBuffer();
 

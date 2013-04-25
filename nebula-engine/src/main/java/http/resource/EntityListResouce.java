@@ -1,6 +1,5 @@
 package http.resource;
 
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,30 +17,28 @@ import nebula.data.DataHolder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
-import nebula.server.Address;
-
-
 import util.FileUtil;
 
 public class EntityListResouce extends AbstractResouce {
-	private final DataHolder<DataHelper<Entity,Reader,Writer>> jsonHolder;
+	private final DataHolder<DataHelper<Entity, Reader, Writer>> jsonHolder;
 	private final DataHolder<DataStore<Entity>> datastoreHolder;
 	final EntityFilterBuilder filterBuilder;
 
-	public EntityListResouce(DataHolder<DataHelper<Entity,Reader,Writer>> json, DataHolder<DataStore<Entity>> datas, final EntityFilterBuilder filterBuilder) {
+	public EntityListResouce(DataHolder<DataHelper<Entity, Reader, Writer>> json, DataHolder<DataStore<Entity>> datas,
+			final EntityFilterBuilder filterBuilder) {
 		super("text/json", 0, 1000);
 		this.jsonHolder = json;
 		this.datastoreHolder = datas;
 		this.filterBuilder = filterBuilder;
 	}
 
-	protected void get(Address address) {
+	protected void get(HttpServletRequest req) {
 		List<Entity> dataList;
 
-		if (address.isQueryEmpty()) {
+		if (req.getQueryString() == null || req.getQueryString().length() > 0) {
 			dataList = datastoreHolder.get().all();
 		} else {
-			Filter<Entity> filter = filterBuilder.buildFrom(address.getParameterMap(), null);
+			Filter<Entity> filter = filterBuilder.buildFrom(req.getParameterMap(), null);
 			dataList = datastoreHolder.get().query(filter);
 		}
 
@@ -67,16 +64,16 @@ public class EntityListResouce extends AbstractResouce {
 	}
 
 	@Override
-	protected String post(Address target, HttpServletRequest req) throws IOException {
-			DataStore<Entity> store = datastoreHolder.get();
-			InputStream in = req.getInputStream();
-			if (log.isTraceEnabled()) {
-				in = FileUtil.print(in);
-			}
-			Entity inData = jsonHolder.get().readFrom(null, new InputStreamReader(in));
-			
-			store.add(inData);
-			store.flush();
-			return target.getPath() + inData.getID();
+	protected String post(HttpServletRequest req) throws IOException {
+		DataStore<Entity> store = datastoreHolder.get();
+		InputStream in = req.getInputStream();
+		if (log.isTraceEnabled()) {
+			in = FileUtil.print(in);
+		}
+		Entity inData = jsonHolder.get().readFrom(null, new InputStreamReader(in));
+
+		store.add(inData);
+		store.flush();
+		return req.getPathInfo() + inData.getID();
 	}
 }

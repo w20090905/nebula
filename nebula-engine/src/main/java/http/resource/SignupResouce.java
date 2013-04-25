@@ -13,7 +13,6 @@ import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.impl.EditableEntity;
 import nebula.data.json.DataHelper;
-import nebula.server.Address;
 import nebula.server.Resource;
 
 import org.apache.commons.logging.Log;
@@ -31,7 +30,7 @@ public class SignupResouce implements Resource {
 	}
 
 	@Override
-	public void handle(Address target, HttpServletRequest req, HttpServletResponse resp) throws IOException,
+	public void handle(HttpServletRequest req, HttpServletResponse resp) throws IOException,
 			ServletException {
 		if (log.isTraceEnabled()) {
 			log.trace("\tMethod" + req.getMethod());

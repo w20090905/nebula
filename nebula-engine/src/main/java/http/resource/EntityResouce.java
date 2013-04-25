@@ -14,7 +14,6 @@ import nebula.data.DataHolder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
-import nebula.server.Address;
 
 
 public class EntityResouce extends AbstractResouce {
@@ -32,7 +31,7 @@ public class EntityResouce extends AbstractResouce {
 	}
 
 	@Override
-	protected void get(Address address) throws IOException {
+	protected void get(HttpServletRequest req) throws IOException {
 		Entity data = datastoreHolder.get().get(key);
 
 		long newModified = ((Timestamp) data.get("LastModified_")).getTime();
@@ -55,7 +54,7 @@ public class EntityResouce extends AbstractResouce {
 	}
 
 	@Override
-	protected void put(Address target, HttpServletRequest req) throws IOException {
+	protected void put(HttpServletRequest req) throws IOException {
 		Entity data = datastoreHolder.get().get(key).editable();
 		if (data != null) {
 			jsonHolder.get().readFrom(data, new InputStreamReader(req.getInputStream()));
@@ -66,7 +65,7 @@ public class EntityResouce extends AbstractResouce {
 	}
 
 	@Override
-	protected void delete(Address address) {
+	protected void delete(HttpServletRequest req) {
 		throw new RuntimeException("Cann't find object " + key);
 	}
 }

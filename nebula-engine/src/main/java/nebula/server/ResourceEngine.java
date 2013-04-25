@@ -18,6 +18,8 @@
  
 package nebula.server;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 
 /**
@@ -65,11 +67,10 @@ public interface ResourceEngine {
     * target given must be in the form of a request URI. This will
     * locate the resource and return the <code>Resource</code>
     * implementation that will handle the target.
-    *
-    * @param target the address used to identify the resource 
+ * @param req TODO
     *
     * @return this returns the resource used to handle the request
     */
-   public Resource resolve(Address target);
+   public Resource resolve(HttpServletRequest req);
 }
 

@@ -6,7 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import nebula.server.Address;
 import nebula.server.Resource;
 
 import org.apache.commons.logging.Log;
@@ -22,7 +21,7 @@ public class RedirectResouce implements Resource {
 	}
 
 	@Override
-	public void handle(Address target, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+	public void handle(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 			// normal parse
 			resp.setStatus(302);
 			resp.addHeader("location", this.redirectTo);

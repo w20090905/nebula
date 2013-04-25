@@ -6,7 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import nebula.server.Address;
 import nebula.server.Resource;
 
 import org.apache.commons.logging.Log;
@@ -30,44 +29,47 @@ public abstract class AbstractResouce implements Resource {
 	protected long lastModified;
 	protected long lastChecked;
 
-	protected abstract void get(Address address) throws IOException;
+	protected abstract void get(HttpServletRequest req) throws IOException;
 
-	protected void header(Address address) throws IOException {
-		throw new UnsupportedOperationException("cann't support put " + address);
-	}
-
-	protected void put(Address target, HttpServletRequest req) throws IOException {
+	protected void header(HttpServletRequest req) throws IOException {
 		throw new UnsupportedOperationException("cann't support put " + req.getPathInfo());
 	}
 
-	protected String post(Address target, HttpServletRequest req) throws IOException {
-		throw new UnsupportedOperationException("cann't support post " +  req.getPathInfo());
+	protected void put(HttpServletRequest req) throws IOException {
+		throw new UnsupportedOperationException("cann't support put " + req.getPathInfo());
 	}
 
-	protected void delete(Address address) throws IOException {
-		throw new UnsupportedOperationException("cann't support delete " + address);
+	protected String post(HttpServletRequest req) throws IOException {
+		throw new UnsupportedOperationException("cann't support post " + req.getPathInfo());
+	}
+
+	protected void delete(HttpServletRequest req) throws IOException {
+		throw new UnsupportedOperationException("cann't support delete " + req.getPathInfo());
 	}
 
 	static long cntEofException = 0;
 	static long cntIOException = 0;
 
 	@Override
-	public void handle(Address target, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+	public void handle(HttpServletRequest req, HttpServletResponse resp) throws IOException,
+			ServletException {
 
 		long currentTimeMillis = System.currentTimeMillis();
 		String method = req.getMethod();
 
 		try {
 			if ("GET".equals(method)) {
-//				if (currentTimeMillis - this.lastChecked > delayTime) {
-//					if (log.isTraceEnabled()) {
-//						log.trace("check updated time at currentTimeMillis:\t" + currentTimeMillis
-//								+ " - lastChecked:\t" + this.lastChecked + "  = "
-//								+ (currentTimeMillis - this.lastChecked) + "  delayTime:\t" + delayTime);
-//					}
-					get(target);
-					this.lastChecked = currentTimeMillis;
-//				}
+				// if (currentTimeMillis - this.lastChecked > delayTime) {
+				// if (log.isTraceEnabled()) {
+				// log.trace("check updated time at currentTimeMillis:\t" +
+				// currentTimeMillis
+				// + " - lastChecked:\t" + this.lastChecked + "  = "
+				// + (currentTimeMillis - this.lastChecked) + "  delayTime:\t" +
+				// delayTime);
+				// }
+				get(req);
+				this.lastChecked = currentTimeMillis;
+				// }
 
 				// normal parse
 				resp.setStatus(200);
@@ -81,9 +83,9 @@ public abstract class AbstractResouce implements Resource {
 			} else if ("HEADER".equals(method)) {
 				System.out.println("Header Last-Modified : " + req.getParameter("Last-Modified"));
 			} else if ("PUT".equals(method)) {
-				this.put(new Address(req), req);
+				this.put(req);
 
-				get(target);
+				get(req);
 
 				// normal parse
 				resp.setStatus(200);
@@ -95,7 +97,7 @@ public abstract class AbstractResouce implements Resource {
 				resp.getOutputStream().write(cache);
 				resp.getOutputStream().flush();
 			} else if ("POST".equals(method)) {
-				String newUrl = this.post(new Address(req), req);
+				String newUrl = this.post(req);
 
 				// normal parse
 				resp.setStatus(200);
@@ -105,7 +107,7 @@ public abstract class AbstractResouce implements Resource {
 				resp.getOutputStream().print(newUrl);
 				resp.getOutputStream().flush();
 			} else if ("DELETE".equals(method)) {
-				this.delete(target);
+				this.delete(req);
 
 				// normal parse
 				resp.setStatus(200);
@@ -114,14 +116,14 @@ public abstract class AbstractResouce implements Resource {
 				resp.addHeader("Content-Type", "text/html");
 				resp.addIntHeader("Content-Length", 0);
 				resp.getOutputStream().flush();
-				
+
 			} else {
 				throw new RuntimeException("Unsupport method " + method);
 			}
 		} catch (EofException e) {
 			log.error("EofException[ " + ++cntEofException + " ] " + req.getPathInfo());
 		} catch (IOException e) {
-			log.error("IOException[ " + ++cntIOException + " ] " +  req.getPathInfo());
+			log.error("IOException[ " + ++cntIOException + " ] " + req.getPathInfo());
 		}
 	}
 }

@@ -6,15 +6,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import nebula.server.Address;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import javax.servlet.http.HttpServletRequest;
 
 @SuppressWarnings("deprecation")
 public class StaticResource extends AbstractResouce {
-	private static Log log = LogFactory.getLog(StaticResource.class);
-
 	private final Source underlySource;
 
 	public StaticResource(Source source, String mime) {
@@ -27,7 +22,7 @@ public class StaticResource extends AbstractResouce {
 	}
 
 	@Override
-	protected void get(Address address) throws IOException {
+	protected void get(HttpServletRequest req) throws IOException {
 		if (this.lastModified == this.underlySource.getLastModified()) {
 			return;
 		}

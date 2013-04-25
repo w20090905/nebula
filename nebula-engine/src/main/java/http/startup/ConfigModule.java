@@ -6,7 +6,7 @@ import http.engine.LongTermStaticResourceEngine;
 import http.engine.StaticResourceEngine;
 import http.engine.SystemFunctionResouceEngine;
 import http.engine.TemplateResouceEngine;
-import http.engine.TypeResouceEngine;
+import http.engine.UserHomeResouceEngine;
 import http.io.ClassPathLoader;
 import http.io.FileSystemLoader;
 import http.io.Loader;
@@ -115,22 +115,16 @@ public class ConfigModule extends AbstractModule {
 			}).toInstance(new Configurable<BasicResourceContainer>() {
 				StaticResourceEngine staticEngine;
 				EntityResouceEngine dataResouceEngine;
-				TypeResouceEngine typeResouceEngine;
 				// EditableStaticResourceEngine editableStaticEngine;
 				TemplateResouceEngine templateResouceEngine;
 				SystemFunctionResouceEngine prepareResouceEngine;
 				private LongTermStaticResourceEngine longTermStaticEngine;
+				private UserHomeResouceEngine userHomeResouceEngine;
 
 				@SuppressWarnings("unused")
 				@Inject
 				public void setEngine(EntityResouceEngine engine) {
 					this.dataResouceEngine = engine;
-				}
-
-				@SuppressWarnings("unused")
-				@Inject
-				public void setEngine(TypeResouceEngine engine) {
-					this.typeResouceEngine = engine;
 				}
 
 				@SuppressWarnings("unused")
@@ -143,6 +137,12 @@ public class ConfigModule extends AbstractModule {
 				@Inject
 				public void setEngine(LongTermStaticResourceEngine engine) {
 					this.longTermStaticEngine = engine;
+				}
+				
+				@SuppressWarnings("unused")
+				@Inject
+				public void setEngine(UserHomeResouceEngine engine) {
+					this.userHomeResouceEngine = engine;
 				}
 
 				//
@@ -167,18 +167,18 @@ public class ConfigModule extends AbstractModule {
 				@Override
 				public void configure(BasicResourceContainer site) {
 					site.register("*", staticEngine);
-					site.register("/template/*", templateResouceEngine);
-					site.register("/angularjs/*", templateResouceEngine);
-					site.register("/angularjszice/*", templateResouceEngine);
-					site.register("/e/*", staticEngine);
-					site.register("/lib/*", longTermStaticEngine);
-					site.register("/img/*", longTermStaticEngine);
-					site.register("/images/*", longTermStaticEngine);
-					site.register("/css/*", longTermStaticEngine);
-					site.register("/d/*", dataResouceEngine);
-					site.register("/f/*", prepareResouceEngine);
-					site.register("/d/Type", typeResouceEngine);
-					site.register("/d/Type/*", typeResouceEngine);
+					site.register("theme", templateResouceEngine);
+					site.register("angularjs", templateResouceEngine);
+					site.register("angularjs", templateResouceEngine);
+					site.register("angularjszice", templateResouceEngine);
+					site.register("e", staticEngine);
+					
+					site.register("lib img images css", longTermStaticEngine);
+					
+					site.register("d", dataResouceEngine);
+					
+					site.register("f", prepareResouceEngine);
+					site.register("u", userHomeResouceEngine);
 				}
 			});
 

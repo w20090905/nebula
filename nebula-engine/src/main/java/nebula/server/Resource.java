@@ -9,6 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface Resource {
 
-	public void handle(Address target, HttpServletRequest req, HttpServletResponse resp) throws IOException,
+	public void handle(HttpServletRequest req, HttpServletResponse resp) throws IOException,
 			ServletException;
 }
