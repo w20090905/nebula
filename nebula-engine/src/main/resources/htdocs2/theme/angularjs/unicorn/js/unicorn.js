@@ -135,7 +135,7 @@ jQuery(document).ready(function($) {
 	$('#style-switcher a').click(function()
 	{
 		var style = $(this).attr('href').replace('#','');
-		$('.skin-color').attr('href','css/unicorn.'+style+'.css');
+		$('.skin-color').attr('href','/theme/angularjs/unicorn/css/unicorn.'+style+'.css');
 		$(this).siblings('a').css({'border-color':'transparent'});
 		$(this).css({'border-color':'#aaaaaa'});
 	});

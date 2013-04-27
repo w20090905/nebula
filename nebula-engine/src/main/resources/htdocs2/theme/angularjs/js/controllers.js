@@ -3,14 +3,15 @@ function DoNothingCtrl($scope, $routeParams) {
     'use strict';
     $scope.$routeParams = $routeParams;
 }
-function AppControl($scope, $cookies) {
+function AppControl($scope, $cookies,$location) {
     'use strict';
+    $scope.base = $location;
     $scope.LoginUserID = $cookies.LoginUserID;
 }
 
 function MenuUserCtrl($scope, $resource, $cookies) {
     'use strict';
-    var DataResource = $resource('e/menu/menuUser.json', {}, {
+    var DataResource = $resource('/e/menu/menuUser.json', {}, {
         query: {method: 'GET', params: {
             "loginUserID": $cookies.LoginUserID
         }, isArray: true}
@@ -20,7 +21,7 @@ function MenuUserCtrl($scope, $resource, $cookies) {
 
 function MenuAdminCtrl($scope, $resource, $cookies) {
     'use strict';
-    var DataResource = $resource('e/menu/menuAdmin.json', {}, {
+    var DataResource = $resource('/e/menu/menuAdmin.json', {}, {
         query: {method: 'GET', params: {
             "loginUserID": $cookies.LoginUserID
         }, isArray: true}
@@ -30,7 +31,7 @@ function MenuAdminCtrl($scope, $resource, $cookies) {
 
 function MenuProfileCtrl($scope, $resource, $cookies) {
     'use strict';
-    var DataResource = $resource('e/menu/menuProfile.json', {}, {
+    var DataResource = $resource('/e/menu/menuProfile.json', {}, {
         query: {method: 'GET', params: {
             "loginUserID": $cookies.LoginUserID
         }, isArray: true}
@@ -41,7 +42,7 @@ function MenuProfileCtrl($scope, $resource, $cookies) {
 function NewUserCtrl($scope, $resource, $routeParams, $location) {
     'use strict';
     $scope.typename = $routeParams.typename;
-    var DataResource = $resource('d/User/', $routeParams);
+    var DataResource = $resource('/d/User/', $routeParams);
     $scope.data = {};
     $scope.data.$save = DataResource.prototype.$save;
     $scope.$save = function () {
@@ -55,7 +56,7 @@ function NewUserCtrl($scope, $resource, $routeParams, $location) {
 function EntityListCtrl($scope, $route, $resource, $routeParams) {
     'use strict';
     $scope.typename = $routeParams.typename;
-    var DataResource = $resource('d/:typename/', $routeParams, {
+    var DataResource = $resource('/d/:typename/', $routeParams, {
         query: {method: 'GET', params: {}, isArray: true}
     });
     $scope.datalist = DataResource.query();
@@ -67,7 +68,7 @@ function EntityListCtrl($scope, $route, $resource, $routeParams) {
 function NewEntityCtrl($scope, $resource, $routeParams, $location, $interpolate) {
     'use strict';
     $scope.typename = $routeParams.typename;
-    var DataResource = $resource('d/:typename/', $routeParams);
+    var DataResource = $resource('/d/:typename/', $routeParams);
     $scope.data = {};
     $scope.data.$save = DataResource.prototype.$save;
     $scope.$save = function () {
@@ -83,7 +84,7 @@ function NewEntityCtrl($scope, $resource, $routeParams, $location, $interpolate)
 function EntityCtrl($scope, $resource, $routeParams, $location, $interpolate) {
     'use strict';
     $scope.typename = $routeParams.typename;
-    var DataResource = $scope.resource = $resource('d/:typename/:id', $routeParams, {'save': {method: 'PUT'}});
+    var DataResource = $scope.resource = $resource('/d/:typename/:id', $routeParams, {'save': {method: 'PUT'}});
     $scope.data = DataResource.get($routeParams);
     $scope.update = true;
     $scope.$save = function () {
@@ -100,7 +101,7 @@ function EntityCtrl($scope, $resource, $routeParams, $location, $interpolate) {
 function TypeListCtrl($scope, $route, $resource, $routeParams) {
     'use strict';
     $scope.typename = "Type";
-    var DataResource = $resource('d/Type/', $routeParams, {
+    var DataResource = $resource('/d/Type/', $routeParams, {
         query: {method: 'GET', params: $routeParams, isArray: true}
     });
     $scope.datalist = DataResource.query();
@@ -109,7 +110,7 @@ function TypeListCtrl($scope, $route, $resource, $routeParams) {
 function NewTypeCtrl($scope, $resource, $routeParams, $http, $location, $interpolate, $templateCache) {
     'use strict';
     $scope.typename = "Type";
-    var DataResource = $resource('d/Type/', $routeParams);
+    var DataResource = $resource('/d/Type/', $routeParams);
     $scope.data = {};
     $scope.data.$save = DataResource.prototype.$save;
     $scope.$save = function () {
@@ -127,7 +128,7 @@ function TypeCtrl($scope, $resource, $routeParams, $http, $location, $interpolat
     'use strict';
     $scope.typename = "Type";
     $scope.resourcename = $interpolate('d/Type/{{id}}')($routeParams);
-    var DataResource = $scope.resource = $resource('d/Type/:id', $routeParams, {'save': {method: 'PUT'}});
+    var DataResource = $scope.resource = $resource('/d/Type/:id', $routeParams, {'save': {method: 'PUT'}});
     $scope.data = DataResource.get($routeParams);
     $scope.update = true;
     $scope.$save =  function () {
@@ -146,7 +147,7 @@ function AttributeEditCtrl($scope, $resource) {
     'use strict';
     $scope.$parent.$loadChild = function (name) {
         var AttributeDataResource = $scope.resource = $resource(
-            'd/Attribute/' + name,
+            '/d/Attribute/' + name,
             {},
             {'save': {method: 'PUT'}}
         );
@@ -163,7 +164,7 @@ function AttributeEditCtrl($scope, $resource) {
     };
 
     $scope.$parent.$newChild = function () {
-        var AttributeDataResource = $resource('d/Attribute/', {});
+        var AttributeDataResource = $resource('/d/Attribute/', {});
         $scope.entityData = {};
         $scope.update = false;
         $scope.entityData.Values = [];
@@ -188,7 +189,7 @@ function extractParams(url, params) {
 }
 function AngularJSCtrl($scope, $route, $location, $http, $routeParams, $templateCache) {
     'use strict';
-    $scope.resourcename = extractParams(":TemplateType/:typename-:cat.html", $routeParams);
+    $scope.resourcename = extractParams("/theme/:theme/:skin/:typename-:cat.html", $routeParams);
     $http.get($scope.resourcename).success(function (data, status, headers, config) {
         $scope.data = {code: data};
     });
@@ -204,7 +205,7 @@ function AngularJSCtrl($scope, $route, $location, $http, $routeParams, $template
 
 function FreeMarkerCtrl($scope, $route, $location, $http, $routeParams, $templateCache) {
     'use strict';
-    $scope.resourcename = extractParams("template/:typename-:cat.html.ftl", $routeParams);
+    $scope.resourcename = extractParams("/template/:typename-:cat.html.ftl", $routeParams);
     $http.get($scope.resourcename).success(function (data, status, headers, config) {
         $scope.data = {code: data};
     });
@@ -246,7 +247,7 @@ function ContactRecordsCtrl($scope, $resource) {
     'use strict';
     $scope.data={};
 
-    $scope.companyList = $resource('d/Company/?SCMRole=客户', {}, {
+    $scope.companyList = $resource('/d/Company/?SCMRole=客户', {}, {
         query: {
             method: 'GET',
             params: {},
@@ -260,7 +261,7 @@ function ContactRecordsCtrl($scope, $resource) {
 
     
     
-    var DataResource = $resource('d/ContactRecord/', {}, {
+    var DataResource = $resource('/d/ContactRecord/', {}, {
         query: {
             method: 'GET',
             params: {"CompanyName": $scope.data.CompanyName},
@@ -274,7 +275,7 @@ function ContactRecordsCtrl($scope, $resource) {
     }
 
     $scope.refresh = function () {
-        $scope.contactRecords=$resource('d/ContactRecord/', {}, {
+        $scope.contactRecords=$resource('/d/ContactRecord/', {}, {
             query: {
                 method: 'GET',
                 params: {"CompanyName": $scope.data.CompanyName},
@@ -282,7 +283,7 @@ function ContactRecordsCtrl($scope, $resource) {
             }
         }).query();
 
-        $scope.personList = $resource('d/Person/', {}, {
+        $scope.personList = $resource('/d/Person/', {}, {
             query: {
                 method: 'GET',
                 params: {"CompanyName": $scope.data.CompanyName},
@@ -335,7 +336,7 @@ function ContactRecordsCtrl($scope, $resource) {
     };
     
     $scope.remove = function (AutoID) {
-        var Record = $resource('d/ContactRecord/:AutoID', {AutoID: '@AutoID'});
+        var Record = $resource('/d/ContactRecord/:AutoID', {AutoID: '@AutoID'});
         var record = Record.get({AutoID: AutoID}, function () {
             record.$remove();
         });

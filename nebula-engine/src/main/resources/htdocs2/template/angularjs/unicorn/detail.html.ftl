@@ -61,14 +61,14 @@
 				    <span class="caret"></span>
 				  </button>
 				  <ul class="dropdown-menu">
-			  	<li><a tabindex="-1" href="#/t/angularjs/${type.name}-list.html">View Template</a></li>
+			  	<li><a tabindex="-1" href="#/t/angularjs/unicorn/${type.name}-list.html">View Template</a></li>
 				  </ul>
 			</div>
 		</div>
 	</header>
 	
 	<div id="breadcrumb">
-		<a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+		<a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
 		<a href="#" class="tip-bottom">Form elements</a>
 		<a href="#" class="current">Common elements</a>
 	</div>

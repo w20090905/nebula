@@ -4,18 +4,19 @@
 <meta charset="UTF-8" />
 <title>Nebula Admin</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="css/jquery-ui.css" />
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
-<link rel="stylesheet" href="css/colorpicker.css" />
-<link rel="stylesheet" href="css/datepicker.css" />
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/uniform.css" />
-<link rel="stylesheet" href="css/select2.css" />
-<link rel="stylesheet" href="theme/${theme.name}/css/unicorn.main.css" />
-<link rel="stylesheet" href="theme/${theme.name}/css/unicorn.grey.css" class="skin-color" />
+
+<link rel="stylesheet" href="/css/jquery-ui.css" />
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="/css/colorpicker.css" />
+<link rel="stylesheet" href="/css/datepicker.css" />
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/uniform.css" />
+<link rel="stylesheet" href="/css/select2.css" />
+<link rel="stylesheet" href="/theme/angularjs/unicorn/css/unicorn.main.css" />
+<link rel="stylesheet" href="/theme/angularjs/unicorn/css/unicorn.grey.css" class="skin-color" />
 <!-- Custom CSS Style -->
-<link rel="stylesheet" href="theme/${theme.name}/css/app.css">
+<link rel="stylesheet" href="/theme/angularjs/unicorn/css/app.css">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -25,7 +26,7 @@
 <body x-ng-controller="AppControl">
 	<div id="header">
 		<h1>
-			<a href="indexProfile.html#/c/{{LoginUserID}}">Admin</a>
+			<a href="/u/{{LoginUserID}}/Admin"> Admin </a>
 		</h1>
 	</div>
 	<div id="search">
@@ -33,8 +34,8 @@
 	</div>
 	<div id="user-nav" class="navbar navbar-inverse">
 		<ul class="nav btn-group">
-			<li class="btn btn-inverse"><a title="" href="index.html#/c/{{LoginUserID}}"><i class="icon icon-home"></i> <span class="text">Home</span></a></li>
-			<li class="btn btn-inverse"><a title="" href="indexProfile.html#/c/{{LoginUserID}}"><i class="icon icon-user"></i> <span class="text">Profile</span></a></li>
+			<li class="btn btn-inverse"><a title="" href="/u/{{LoginUserID}}"><i class="icon icon-home"></i> <span class="text">Home</span></a></li>
+			<li class="btn btn-inverse"><a title="" href="/u/{{LoginUserID}}/Profile"><i class="icon icon-user"></i> <span class="text">Profile</span></a></li>
 			<li class="btn btn-inverse dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i
 					class="icon icon-envelope"
 				></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
@@ -44,13 +45,13 @@
 					<li><a class="sOutbox" title="" href="#">outbox</a></li>
 					<li><a class="sTrash" title="" href="#">trash</a></li>
 				</ul></li>
-			<li class="btn btn-inverse"><a href="indexAdmin.html#/c/{{LoginUserID}}" class="tip-bottom" title="系统配置"><i class="icon icon-cog"></i> </a></li>
-			<li class="btn btn-inverse"><a href="login.html" class="tip-bottom" title="登出"><i class="icon icon-share-alt"></i> </a></li>
+			<li class="btn btn-inverse"><a href="/u/{{LoginUserID}}/Admin" class="tip-bottom" title="系统配置"><i class="icon icon-cog"></i> </a></li>
+			<li class="btn btn-inverse"><a href="/login.html" class="tip-bottom" title="登出"><i class="icon icon-share-alt"></i> </a></li>
 		</ul>
 	</div>
 	<div id="sidebar">
 		<a href="#" class="visible-phone"><i class="icon icon-th-list"></i> 菜单</a>
-		<ul x-jsonDataUrl="d/MenuBar/AdminMainMenu" class="ng-cloak">
+		<ul x-jsonDataUrl="/d/MenuBar/AdminMainMenu" class="ng-cloak">
 			<li class="section"><span>基础</span></li>
 			<li class="submenu"><a href="#/d/Type/?standalone=Master"><i class="icon icon-glass"></i> <span>实体</span></a>
 			<li class="submenu"><a href="#/d/Type/?standalone=Transaction"><i class="icon icon-glass"></i> <span>事务</span></a>
@@ -69,7 +70,7 @@
 		<i class="icon-arrow-left icon-white"></i> <span>Style:</span> <a href="#grey" style="background-color: #555555; border-color: #aaaaaa;"></a> <a
 			href="#light-blue" style="background-color: #8399b0;"
 		></a> <a href="#blue" style="background-color: #2D2F57;"></a> <a href="#red" style="background-color: #673232;"></a> <a href="#red-green"
-			style="background-image: url('img/red-green.png'); background-repeat: no-repeat;"
+			style="background-image: url('/img/red-green.png'); background-repeat: no-repeat;"
 		></a>
 	</div>
 	<div id="content" x-nb-view>
@@ -78,7 +79,7 @@
 				<h1 class="tabs_involved">Welcome</h1>
 			</header>
 			<div id="breadcrumb">
-				<a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#"
+				<a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#"
 					class="current"
 				>Common elements</a>
 			</div>
@@ -102,24 +103,24 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<!-- Reference Lib -->
-	<script src="lib/jquery/jquery-1.8.2.min.js"></script>
-	<script src="js/jquery.ui.custom.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/bootstrap-colorpicker.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/jquery.uniform.js"></script>
-	<script src="js/select2.min.js"></script>
-	<script src="theme/${theme.name}/js/unicorn.form_common.js"></script>
-	<script src="theme/${theme.name}/js/unicorn.js"></script>
+	<script src="/lib/jquery/jquery-1.8.2.min.js"></script>
+	<script src="/js/jquery.ui.custom.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/bootstrap-colorpicker.js"></script>
+	<script src="/js/bootstrap-datepicker.js"></script>
+	<script src="/js/jquery.uniform.js"></script>
+	<script src="/js/select2.min.js"></script>
+	<script src="/theme/angularjs/unicorn/js/unicorn.form_common.js"></script>
+	<script src="/theme/angularjs/unicorn/js/unicorn.js"></script>
 	<!-- Angular Lib -->
-	<script src="lib/angular/angular.js"></script>
-	<script src="lib/angular/angular-cookies.js"></script>
-	<script src="lib/angular/angular-resource.js"></script>
+	<script src="/lib/angular/angular.js"></script>
+	<script src="/lib/angular/angular-cookies.js"></script>
+	<script src="/lib/angular/angular-resource.js"></script>
 	<!-- App -->
-	<script src="theme/${theme.name}/js/directives.js"></script>
-	<script src="theme/${theme.name}/js/controllers.js"></script>
-	<script src="theme/${theme.name}/js/filters.js"></script>
-	<script src="theme/${theme.name}/js/services.js"></script>
-	<script src="theme/${theme.name}/js/appAdmin.js"></script>
+	<script src="/theme/angularjs/js/directives.js"></script>
+	<script src="/theme/angularjs/js/controllers.js"></script>
+	<script src="/theme/angularjs/js/filters.js"></script>
+	<script src="/theme/angularjs/js/services.js"></script>
+	<script src="/theme/angularjs/unicorn/js/appAdmin.js"></script>
 </body>
 </html>

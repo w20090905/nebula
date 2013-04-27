@@ -38,8 +38,13 @@ public class UserHomeResouceEngine extends StaticResourceEngine {
 		String extension = "text/html";
 		String theme = (String) session.getAttribute("Theme");
 		String skin = (String) session.getAttribute("Skin");
+		String[] segs = req.getPathInfo().split("/");
 		String name = "index.html";
 		
+		if(segs.length > 3){
+			name = "index" + segs[3] + ".html";
+		}
+				
 		Source source = null;
 		if ((source = loader.findSource("/" + "theme/" + theme + "/" + skin + "/" + name)) != null) {
 			return new StaticEditableResource(source, TheMimeTypes.get(extension));
