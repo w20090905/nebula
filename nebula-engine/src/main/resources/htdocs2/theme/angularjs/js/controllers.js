@@ -307,7 +307,7 @@ function ContactRecordsCtrl($scope, $resource) {
         $.extend($scope.data, {
             AutoID: new Date().getTime(),
             Done: false,
-            LastUpdated: new Date().format("yyyy-MM-dd hh: mm: ss.S")
+            LastUpdated: new Date().format("yyyy-MM-dd hh:mm:ss.S")
         });
 
         $.extend($scope.remotedata, $scope.data);

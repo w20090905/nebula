@@ -162,6 +162,7 @@ border-radius: 0px;
 
 #content{
 	background: url("../img/content_bg.jpg");
+	min-height: 600px;
 }
 
 #content article>header{
