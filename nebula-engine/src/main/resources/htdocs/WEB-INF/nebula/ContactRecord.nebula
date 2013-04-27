@@ -1,7 +1,0 @@
-type ContactRecord {
-	!AutoID;
-	Company;
-	Person;
-	Content			Name;
-	LastUpdated  	Name;
-};

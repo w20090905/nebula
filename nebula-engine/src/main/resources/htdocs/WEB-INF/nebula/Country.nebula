@@ -1,7 +1,0 @@
-type Country{
-  !Name;
-  Country-Code;
-  Area-Code;
-  PhoneLeadNumber Long;
-  Currency;
-};
