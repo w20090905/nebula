@@ -4,7 +4,6 @@
 <meta charset="UTF-8" />
 <title>Nebula Admin</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
 <link rel="stylesheet" href="/css/jquery-ui.css" />
 <link rel="stylesheet" href="/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/css/bootstrap-responsive.min.css" />
@@ -52,11 +51,12 @@
 	<div id="sidebar">
 		<a href="#" class="visible-phone"><i class="icon icon-th-list"></i> 菜单</a>
 		<ul x-jsonDataUrl="/d/MenuBar/ProfileMenu" class="ng-cloak">
-			<li x-ng-repeat="menu in jsonData.Menu" class="submenu"><a x-ng-href="{{menu.URL | replace : '$LoginUserID$': LoginUserID}}"><i class="icon {{menu.IconName}}"></i> <span>{{menu.Name}}</span><span class="label"
+			<li class="section"><a href=""><span>{{jsonData.Title}}</span></a></li>
+			<li x-ng-repeat="menu in jsonData.Menu" class="submenu"><a x-ng-href="#{{menu.URL}}"><i class="icon {{menu.IconName}}"></i> <span>{{menu.Name}}</span><span class="label"
 					x-ng-show="menu.items.length > 0"
 				>{{menuGroup.items.length}}</span></a>
 				<ul x-ng-show="menuGroup.items.length > 0">
-					<li x-ng-repeat="menu in menuGroup.items"><a x-ng-href="{{menu.href}}"><i class="icon-edit"></i>{{menu.label}}</a></li>
+					<li x-ng-repeat="menu in menuGroup.items"><a x-ng-href="#{{menu.href}}"><i class="icon-edit"></i>{{menu.label}}</a></li>
 				</ul></li>
 		</ul>
 	</div>

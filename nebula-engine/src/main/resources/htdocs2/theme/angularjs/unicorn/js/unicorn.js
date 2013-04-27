@@ -5,8 +5,13 @@
 jQuery(document).ready(function($) {
 	
 	// === Sidebar navigation === //
+
+	$('#sidebar .submenu > a').live("click",function(e){
+		$('#sidebar  li.active').removeClass("active");
+		$(this).parent("li").addClass("active");
+	});
 	
-	$('.submenu:has(ul>li) > a').live("click",function(e)
+	$('#sidebar .submenu:has(ul>li) > a').live("click",function(e)
 	{
 		e.preventDefault();
 		var submenu = $(this).siblings('ul');

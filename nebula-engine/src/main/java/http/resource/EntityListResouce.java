@@ -35,7 +35,7 @@ public class EntityListResouce extends AbstractResouce {
 	protected void get(HttpServletRequest req) {
 		List<Entity> dataList;
 
-		if (req.getQueryString() == null || req.getQueryString().length() > 0) {
+		if (req.getQueryString() == null || req.getQueryString().length() == 0) {
 			dataList = datastoreHolder.get().all();
 		} else {
 			Filter<Entity> filter = filterBuilder.buildFrom(req.getParameterMap(), null);

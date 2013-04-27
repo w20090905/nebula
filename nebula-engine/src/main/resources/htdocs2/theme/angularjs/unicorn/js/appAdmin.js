@@ -19,7 +19,7 @@ angular.module('appAdmin', ['nebulaFilters', 'nebulaServices','nebulaDirectives'
 			otherwise({redirectTo: '/welcome'});
 	}])	.run(function($rootScope, $location,  $interpolate) {
 	 	$rootScope.$on('$routeChangeStart', function(event,next,last) {
-	 		if(next.$route.templateUrlWP){
+			if(next.$route && next.$route.templateUrlWP){
 	 			next.$route.templateUrl = $interpolate(next.$route.templateUrlWP)(next.pathParams);
 	 		}
 	});

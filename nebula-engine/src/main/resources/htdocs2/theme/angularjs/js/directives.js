@@ -10,7 +10,7 @@ function isEmpty(value) {
 
 /* Directives */
 function PopupListCtrl($scope,$resource,urlParams){
-	var DataResource = $resource('d/:typename/', urlParams, {
+	var DataResource = $resource('/d/:typename/', urlParams, {
 		query: {method:'GET', params:{}, isArray:true}
 	});
 	$scope.datalist = DataResource.query({});
@@ -184,7 +184,7 @@ var neFromListDirective = [
 				
 				var matcher = PathMatchProvider("/d/:typename/");
 				var urlParams = matcher.check(reqUrl);
-				var template = matcher.replace(reqUrl,"angularjs/:typename-popup.html");
+				var template = matcher.replace(reqUrl,"/theme/angularjs/unicorn/:typename-popup.html");
 				if(template){
 					popupwin.fadeIn(300);
 					
