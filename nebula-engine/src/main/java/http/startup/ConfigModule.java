@@ -117,7 +117,7 @@ public class ConfigModule extends AbstractModule {
 				EntityResouceEngine dataResouceEngine;
 				// EditableStaticResourceEngine editableStaticEngine;
 				TemplateResouceEngine templateResouceEngine;
-				SystemFunctionResouceEngine prepareResouceEngine;
+				SystemFunctionResouceEngine frameworkResouceEngine;
 				private LongTermStaticResourceEngine longTermStaticEngine;
 				private UserHomeResouceEngine userHomeResouceEngine;
 
@@ -161,23 +161,16 @@ public class ConfigModule extends AbstractModule {
 				@SuppressWarnings("unused")
 				@Inject
 				public void setEngine(SystemFunctionResouceEngine engine) {
-					this.prepareResouceEngine = engine;
+					this.frameworkResouceEngine = engine;
 				}
 
 				@Override
 				public void configure(BasicResourceContainer site) {
 					site.register("*", staticEngine);
 					site.register("theme", templateResouceEngine);
-					site.register("angularjs", templateResouceEngine);
-					site.register("angularjs", templateResouceEngine);
-					site.register("angularjszice", templateResouceEngine);
-					site.register("e", staticEngine);
-					
-					site.register("lib img images css", longTermStaticEngine);
-					
-					site.register("d", dataResouceEngine);
-					
-					site.register("f", prepareResouceEngine);
+					site.register("lib img images css font", longTermStaticEngine);					
+					site.register("d", dataResouceEngine);					
+					site.register("f", frameworkResouceEngine);
 					site.register("u", userHomeResouceEngine);
 				}
 			});

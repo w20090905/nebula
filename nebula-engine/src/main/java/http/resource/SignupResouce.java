@@ -51,6 +51,7 @@ public class SignupResouce implements Resource {
 			DataStore<Entity> store = users.get();
 			String username = req.getParameter("username");
 			String password = req.getParameter("password");
+			String email = req.getParameter("email");
 			String passwordConfirm = req.getParameter("passwordConfirm");
 
 			if (!password.equals(passwordConfirm)) {
@@ -63,6 +64,7 @@ public class SignupResouce implements Resource {
 			EditableEntity newuser = new EditableEntity();
 			newuser.put("Name", username);
 			newuser.put("Password", password);
+			newuser.put("EMail", email);
 			store.add(newuser);
 			store.flush();
 
