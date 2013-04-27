@@ -127,21 +127,30 @@ jQuery(document).ready(function($) {
 		if($(this).hasClass('open'))
 		{
 			$(this).parent().animate({marginRight:'-=220'});
-			$(this).removeClass('open');
+			$(this).parent().removeClass('open');
 		} else 
 		{
 			$(this).parent().animate({marginRight:'+=220'});
-			$(this).addClass('open');
+			$(this).parent().addClass('open');
 		}
 		$(this).toggleClass('icon-arrow-left');
 		$(this).toggleClass('icon-arrow-right');
 	});
 	
-	$('#style-switcher a').click(function()
+	$('#style-switcher a').click(function(event)
 	{
 		var style = $(this).attr('href').replace('#','');
 		$('.skin-color').attr('href','/theme/angularjs/unicorn/css/unicorn.'+style+'.css');
 		$(this).siblings('a').css({'border-color':'transparent'});
 		$(this).css({'border-color':'#aaaaaa'});
+
+		$(this).parent().animate({marginRight:'-=220'});
+		
+		var i = $('#style-switcher i');
+		i.parent().removeClass('open');
+		i.toggleClass('icon-arrow-left');
+		i.toggleClass('icon-arrow-right');
+		
+		event.preventDefault();
 	});
 });
