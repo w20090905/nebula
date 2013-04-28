@@ -9,34 +9,33 @@ function AppControl($scope, $cookies,$location) {
     $scope.LoginUserID = $cookies.LoginUserID;
 }
 
-function MenuUserCtrl($scope, $resource, $cookies) {
+function TypeQuickEditCtrl($scope, $resource, $routeParams, $location){
+	
     'use strict';
-    var DataResource = $resource('/e/menu/menuUser.json', {}, {
-        query: {method: 'GET', params: {
-            "loginUserID": $cookies.LoginUserID
-        }, isArray: true}
-    });
-    $scope.datalist = DataResource.query();
-}
-
-function MenuAdminCtrl($scope, $resource, $cookies) {
-    'use strict';
-    var DataResource = $resource('/e/menu/menuAdmin.json', {}, {
-        query: {method: 'GET', params: {
-            "loginUserID": $cookies.LoginUserID
-        }, isArray: true}
-    });
-    $scope.datalist = DataResource.query();
-}
-
-function MenuProfileCtrl($scope, $resource, $cookies) {
-    'use strict';
-    var DataResource = $resource('/e/menu/menuProfile.json', {}, {
-        query: {method: 'GET', params: {
-            "loginUserID": $cookies.LoginUserID
-        }, isArray: true}
-    });
-    $scope.datalist = DataResource.query();
+    /*$scope.typename = $routeParams.typename;
+    var DataResource = $scope.resource = $resource('/d/:typename/:id', $routeParams, {'save': {method: 'PUT'}});
+    $scope.data = DataResource.get($routeParams);
+    $scope.update = true;
+    $scope.$save = function () {
+        $scope.data.$save(function (u, getResponseHeaders) {
+            $location.url($interpolate('d/{{typename}}/')($routeParams));
+        });
+    };
+    $scope.$back = function () {
+        $location.url($interpolate('d/{{typename}}/')($routeParams));
+    };*/
+    
+    
+	$scope.$addMenu = function(menuBar,menuName,menuIcon,menuUrl){		
+		 var MenuResource = $resource('/d/MenuBar/' + menuBar + '', $routeParams, {'save': {method: 'PUT'}});
+		 var MenuData = MenuResource.get($routeParams);
+		$.extend(MenuData, {
+				Menu: [{
+					"Name":menuName,"IconName":"icon-adjust","URL":menuUrl
+				}]
+	        });
+		 MenuData.$save();
+	}	
 }
 
 function NewUserCtrl($scope, $resource, $routeParams, $location) {

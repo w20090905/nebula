@@ -10,10 +10,11 @@
 				<button class="btn dropdown-toggle" data-toggle="dropdown">
 					<span class="caret"></span>
 				</button>
-				<ul class="dropdown-menu">
+				<ul class="dropdown-menu"  x-ng-controller="TypeQuickEditCtrl">
 					<li><a tabindex="-1" href="#/t/angularjs/unicorn/{{data.Name}}-list.html">View List Template</a></li>
 					<li><a tabindex="-1" href="#/t/angularjs/unicorn/{{data.Name}}-detail.html">View Detail Template</a></li>
 					<li><a tabindex="-1" href="#/t/angularjs/unicorn/{{data.Name}}-popup.html">View Popup Template</a></li>
+					<li><a tabindex="-1" href="" 	x-ng-click="$addMenu('CommonUserMenu',data.Name,'icon-adjust','d/' + data.Name + '/');">Add To CommonUserMenus</a></li>
 				</ul>
 			</div>
 		</div>
