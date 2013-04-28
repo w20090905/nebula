@@ -37,10 +37,18 @@ public class EntityListSerializer extends DefaultFieldSerializer<List<Entity>> {
 //			long idx = (long) newly.get("_idx"); // TODO remove when no data changed
 //			if (idx != i) {
 //				newly.put("_idx", idx);
-				dirty = true;
+//				dirty = true;
 //			}
 			dirty = newly.isDirty() || dirty;
-			newlyList.add(newly);
+		}
+		
+		for(Entity entity : current){
+			entity.put("_idx", newlyList.size());
+			String action =(String) entity.get("_action");
+			if("D".equals(action)){
+				continue;
+			}
+			newlyList.add(entity);
 		}
 		assert token == JsonToken.END_ARRAY;
 
@@ -72,7 +80,9 @@ public class EntityListSerializer extends DefaultFieldSerializer<List<Entity>> {
 
 		if (current != null) {
 			for (int i = 0; i < current.size(); i++) {
-				entityMerger.output(gen, current.get(i));
+				Entity entity = current.get(i);
+				entity.put("_idx", i);
+				entityMerger.outputInList(gen, entity);
 			}
 		}
 

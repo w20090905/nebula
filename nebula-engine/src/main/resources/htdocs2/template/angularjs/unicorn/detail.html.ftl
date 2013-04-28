@@ -303,7 +303,7 @@
 								[/#switch]
 							[/#if] 
 						[/#list]
-					<td><a x-ng-click="data['${of.name}'].splice($index,1);$event.preventDefault();"> <i class="icon-minus-sign"> </i> </a></td>
+					<td><a x-ng-click="data['${of.name}'][$index]['_action']='D';$event.preventDefault();"> <i class="icon-minus-sign"> </i> </a></td>
 				</tr>
 				<tr class="newLine">
 					<td>{{data.${of.name}.length+1}}</td>

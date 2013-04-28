@@ -151,7 +151,7 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 		Entity entity = current;
 		out.writeStartObject();
 		out.writeFieldName("_idx");
-		out.writeNumber((Long) current.get("_idx"));
+		out.writeNumber((int) current.get("_idx"));
 
 		for (DefaultFieldSerializer<?> f : pageFields) {
 			@SuppressWarnings("unchecked")
@@ -289,6 +289,7 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 
 		token = in.nextToken(); // Index
 		if ("_idx".equals(in.getCurrentName())) {
+			token = in.nextToken();
 			int idx = in.getIntValue();
 			entity = now.get(idx);
 
@@ -299,6 +300,13 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 				String frontName = in.getCurrentName();
 
 				in.nextToken();// To value
+
+				if ("_action".equals(in.getCurrentName())) {
+					if ("D".equals(in.getText())) {
+						entity.put("_action", "D");
+						continue;
+					}
+				}
 
 				f = (DefaultFieldSerializer<Object>) pageFieldsMap.get(frontName);
 				if (f != null) {
@@ -327,6 +335,8 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 					skip(in);
 				}
 			} while ((token = in.nextToken()) != null);
+
+			now.add(entity);
 		}
 
 		assert token == JsonToken.END_OBJECT;
