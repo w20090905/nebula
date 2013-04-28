@@ -165,6 +165,10 @@ border-radius: 0px;
 	min-height: 600px;
 }
 
+#search {
+	left: 160px;
+}
+
 #content article>header{
 	background: none;
 }

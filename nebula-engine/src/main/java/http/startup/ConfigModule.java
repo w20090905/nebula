@@ -168,7 +168,7 @@ public class ConfigModule extends AbstractModule {
 				public void configure(BasicResourceContainer site) {
 					site.register("*", staticEngine);
 					site.register("theme", templateResouceEngine);
-					site.register("lib img images css font", longTermStaticEngine);					
+					site.register("js lib img images css font", longTermStaticEngine);					
 					site.register("d", dataResouceEngine);					
 					site.register("f", frameworkResouceEngine);
 					site.register("u", userHomeResouceEngine);

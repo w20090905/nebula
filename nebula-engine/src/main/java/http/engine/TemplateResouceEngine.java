@@ -3,6 +3,7 @@ package http.engine;
 import http.io.Loader;
 import http.io.Source;
 import http.resource.StaticEditableResource;
+import http.resource.StaticResource;
 import http.resource.StaticTemplateResouce;
 import http.resource.TypeTemplateResouce;
 
@@ -19,6 +20,7 @@ import freemarker.template.Configuration;
 
 @SuppressWarnings("deprecation")
 public class TemplateResouceEngine extends StaticResourceEngine {
+	private final long age;
 
 	private final Configuration templateConfig;
 	final DataHolder<DataStore<Entity>> attributes;
@@ -31,6 +33,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 		this.templateConfig = cfg;
 		this.typeLoader = typeLoader;
 		this.attributes = dataWareHouse.define(Entity.class, "Attribute");
+		this.age = 30L * 24L * 60L * 60L;
 	}
 
 	@Override
@@ -40,7 +43,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 
 		Source source = loader.findSource(path);
 		if (source != null) {
-			return new StaticEditableResource(source, TheMimeTypes.get(extension));
+			return new StaticResource(source, TheMimeTypes.get(extension),this.age);
 		}
 
 		String theme = "$";
@@ -70,15 +73,15 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 		String name = path.substring(prev);
 
 		if ((source = loader.findSource("/" + "theme/" + theme + "/" + skin + "/" + name)) != null) {
-			return new StaticEditableResource(source, TheMimeTypes.get(extension));
+			return new StaticResource(source, TheMimeTypes.get(extension),this.age);
 		} else if ((source = loader.findSource("/" + "theme/" + theme + "/" + name)) != null) {
-			return new StaticEditableResource(source, TheMimeTypes.get(extension));
+			return new StaticResource(source, TheMimeTypes.get(extension),this.age);
 		} else if ((source = loader.findSource("/" + "theme/" + name)) != null) {
-			return new StaticEditableResource(source, TheMimeTypes.get(extension));
+			return new StaticResource(source, TheMimeTypes.get(extension),this.age);
 		} else if ((source = loader.findSource("/" + "default/" + name)) != null) {
-			return new StaticEditableResource(source, TheMimeTypes.get(extension));
+			return new StaticResource(source, TheMimeTypes.get(extension),this.age);
 		} else if ((source = loader.findSource("/" + name)) != null) {
-			return new StaticEditableResource(source, TheMimeTypes.get(extension));
+			return new StaticResource(source, TheMimeTypes.get(extension),this.age);
 		}
 
 		int idxType = 0;

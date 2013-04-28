@@ -14,6 +14,8 @@
 					<li><a tabindex="-1" href="#/t/angularjs/unicorn/{{data.Name}}-list.html">View List Template</a></li>
 					<li><a tabindex="-1" href="#/t/angularjs/unicorn/{{data.Name}}-detail.html">View Detail Template</a></li>
 					<li><a tabindex="-1" href="#/t/angularjs/unicorn/{{data.Name}}-popup.html">View Popup Template</a></li>
+					<li><a tabindex="-1" href="" 	x-ng-click="$addMenu('AdminMainMenu',data.Name,'icon-adjust','d/' + data.Name + '/');">Add To AdminMainMenu</a></li>
+					<li><a tabindex="-1" href="" 	x-ng-click="$addMenu('ProfileMenu',data.Name,'icon-adjust','d/' + data.Name + '/');">Add To ProfileMenu</a></li>
 					<li><a tabindex="-1" href="" 	x-ng-click="$addMenu('CommonUserMenu',data.Name,'icon-adjust','d/' + data.Name + '/');">Add To CommonUserMenus</a></li>
 				</ul>
 			</div>
