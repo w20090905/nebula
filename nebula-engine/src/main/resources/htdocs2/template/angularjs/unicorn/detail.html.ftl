@@ -270,7 +270,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr x-ng-repeat="inlineData in data.${of.name} | filter:query | orderBy:orderProp">
+				<tr x-ng-repeat="inlineData in data.${of.name} | filter:query | orderBy:orderProp" class="dataline-{{inlineData['_STS']}}">
 					<td>{{$index+1}}</td>
 
 						[#list of.type.fields as in1f][#t]
@@ -303,7 +303,7 @@
 								[/#switch]
 							[/#if] 
 						[/#list]
-					<td><a x-ng-click="data['${of.name}'][$index]['_action']='D';$event.preventDefault();"> <i class="icon-minus-sign"> </i> </a></td>
+					<td><a x-ng-click="inlineData['_STS']='D';$event.preventDefault();"> <i class="icon-minus-sign"> </i> </a></td>
 				</tr>
 				<tr class="newLine">
 					<td>{{data.${of.name}.length+1}}</td>
@@ -314,7 +314,7 @@
 								[#case "ByVal"] <!--  Type E1   -->
 									
 					<td>	[@inputBox field=in1f id="${of.name}${in1f.name}_new"  ngModel="data.${of.name}_new.${in1f.name}" placeholder="${of.name} ${in1f.name}" 
-						required=!in1f.ignorable/]</td>[#--TODO  key=in1f.key  --]
+						required=false/]</td>[#--TODO  key=in1f.key  required=!in1f.ignorable--]
 					
 									[#break]
 								[#case "Inline"]<!--  Type E2   -->
@@ -322,7 +322,7 @@
 										[#if !in2f.array && in2f.refer == "ByVal"]
 										
 					<td>	[@inputBox field=in1f id="${of.name}_new_${in1f.name}${in2f.name}"  ngModel="data.${of.name}_new.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}" 
-						key=in1f.key required=!in1f.ignorable/]</td>
+						key=in1f.key required=false/]</td>[#--TODO required=!in1f.ignorable --] 
 					
 										[/#if]
 									[/#list]
@@ -333,7 +333,7 @@
 										[#if !in2f.array && in2f.refer == "ByVal" && (in2f.key || in2f.core)]
 										
 					<td>[@popupBox field=in2f pField=in1f id="${of.name}_new_${in1f.name}${in2f.name}" ngModel="data.${of.name}_new.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"
-						key=(of.key && in1f.key) readonly=true required=!(of.ignorable)/]</td>
+						key=(of.key && in1f.key) readonly=true required=false/]</td>[#--  required=!(of.ignorable) --]
 												
 										[/#if] 
 									[/#list]

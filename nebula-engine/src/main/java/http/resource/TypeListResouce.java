@@ -40,7 +40,7 @@ public class TypeListResouce extends AbstractResouce {
 	protected void get(HttpServletRequest req) {
 		List<Type> dataList;
 
-		if (req.getQueryString() == null || req.getQueryString().length() > 0) {
+		if (req.getQueryString() == null || req.getQueryString().length() <= 0) {
 			long newModified = typeLoader.getLastModified();
 			if (newModified == this.lastModified) {
 				super.cache = this.cacheAll;

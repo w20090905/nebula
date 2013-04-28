@@ -181,3 +181,8 @@ border-radius: 0px;
 #style-switcher.open {
 	background-color: #000000;
 }
+
+tr.dataline-D{
+	text-decoration: line-through;
+	color: grey;
+}

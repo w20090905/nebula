@@ -150,8 +150,12 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 	void outputInList(JsonGenerator out, Entity current) throws Exception {
 		Entity entity = current;
 		out.writeStartObject();
-		out.writeFieldName("_idx");
-		out.writeNumber((int) current.get("_idx"));
+		
+		out.writeFieldName("_IDX");
+		out.writeNumber((int) current.get("_IDX"));
+		
+		out.writeFieldName("_STS");
+		out.writeString("R");
 
 		for (DefaultFieldSerializer<?> f : pageFields) {
 			@SuppressWarnings("unchecked")
@@ -288,10 +292,21 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 		assert token == JsonToken.START_OBJECT;
 
 		token = in.nextToken(); // Index
-		if ("_idx".equals(in.getCurrentName())) {
+		if ("_IDX".equals(in.getCurrentName())) {
 			token = in.nextToken();
 			int idx = in.getIntValue();
 			entity = now.get(idx);
+
+			token = in.nextToken();
+			assert "_STS".equals(in.getCurrentName());
+			if ("_STS".equals(in.getCurrentName())) {
+				token = in.nextToken();
+				if ("D".equals(in.getText())) {
+					entity.put("_STS", "D");
+				}
+			}else{
+				throw new RuntimeException("Parse json error!");
+			}
 
 			while ((token = in.nextToken()) != null) {
 				if (token != JsonToken.FIELD_NAME) {
@@ -300,13 +315,6 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 				String frontName = in.getCurrentName();
 
 				in.nextToken();// To value
-
-				if ("_action".equals(in.getCurrentName())) {
-					if ("D".equals(in.getText())) {
-						entity.put("_action", "D");
-						continue;
-					}
-				}
 
 				f = (DefaultFieldSerializer<Object>) pageFieldsMap.get(frontName);
 				if (f != null) {

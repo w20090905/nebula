@@ -43,8 +43,8 @@ public class EntityListSerializer extends DefaultFieldSerializer<List<Entity>> {
 		}
 		
 		for(Entity entity : current){
-			entity.put("_idx", newlyList.size());
-			String action =(String) entity.get("_action");
+			entity.put("_IDX", newlyList.size());
+			String action =(String) entity.get("_STS");
 			if("D".equals(action)){
 				continue;
 			}
@@ -81,7 +81,7 @@ public class EntityListSerializer extends DefaultFieldSerializer<List<Entity>> {
 		if (current != null) {
 			for (int i = 0; i < current.size(); i++) {
 				Entity entity = current.get(i);
-				entity.put("_idx", i);
+				entity.put("_IDX", i);
 				entityMerger.outputInList(gen, entity);
 			}
 		}
