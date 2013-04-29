@@ -9,14 +9,14 @@ type Person {
 	?DateOfBirth Date;
 	?Age;
 	?Home{
-		Street Text;
-		Neighborhood Text;
-		City Text;
-		State Text;
-		PostalCcode Text;
-		Country Text;
-		PhotoUrl Text;
-		ProfileUrls[] Text;
+		Street Name;
+		Neighborhood String;
+		City Name;
+		State Name;
+		PostalCode Name;
+		Country Name;
+		PhotoUrl String;
+		ProfileUrls[] String;
 	};
 	Company;
 	EMail;
