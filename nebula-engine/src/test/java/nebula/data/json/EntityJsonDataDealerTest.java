@@ -416,7 +416,7 @@ public class EntityJsonDataDealerTest extends TestCase {
 		gen.flush();
 
 		assertEquals(
-				"{\"PersonName\":\"wangshilian\",\"Age\":12,\"Educations\":[{\"School\":\"Kunming\",\"Year\":1996},{\"School\":\"Hongqi\",\"Year\":1993}]}",
+				"{\"PersonName\":\"wangshilian\",\"Age\":12,\"Educations\":[{\"_IDX\":0,\"_STS\":\"R\",\"School\":\"Kunming\",\"Year\":1996},{\"_IDX\":1,\"_STS\":\"R\",\"School\":\"Hongqi\",\"Year\":1993}]}",
 				out.toString());
 		System.out.println(out.toString());
 	}
@@ -736,7 +736,12 @@ public class EntityJsonDataDealerTest extends TestCase {
 		gen.flush();
 
 		assertEquals(
-				"{\"A1\":\"A1\",\"A2\":{\"B1\":\"B1Data\",\"B2C1\":\"B2C1Data\",\"B3Rb1\":\"B3Rb1Data\",\"B4Rb1\":\"B4Rb1Data\",\"B5\":[\"B5001\",\"B5002\",\"B5003\"],\"B6\":[{\"D1\":\"B6D1001\"},{\"D1\":\"B6D1002\"}]},\"A3Rb1\":\"A3Rb1Data\",\"A4Rb1\":\"A4Rb1Data\",\"A5\":[\"A5001\",\"A5002\",\"A5003\"],\"A6\":[{\"E1\":\"E1001\",\"E2F1\":\"E2F1001\",\"E3Rb1\":\"E3Rb1001\",\"E4Rb1\":\"E4Rb1001\"},{\"E1\":\"E1002\",\"E2F1\":\"E2F1002\"},{\"E1\":\"E1003\"},{\"E1\":\"E1004\"}]}",
+				"{\"A1\":\"A1\",\"A2\":{\"B1\":\"B1Data\",\"B2C1\":\"B2C1Data\",\"B3Rb1\":\"B3Rb1Data\",\"B4Rb1\":\"B4Rb1Data\",\"B5\":[\"B5001\",\"B5002\",\"B5003\"],\"B6\":[{\"_IDX\":0,\"_STS\":\"R\",\"D1\":\"B6D1001\"},{\"_IDX\":1,\"_STS\":\"R\",\"D1\":\"B6D1002\"}]},\"A3Rb1\":\"A3Rb1Data\",\"A4Rb1\":\"A4Rb1Data\",\"A5\":[\"A5001\",\"A5002\",\"A5003\"],\"A6\":[" +
+				"{\"_IDX\":0,\"_STS\":\"R\",\"E1\":\"E1001\",\"E2F1\":\"E2F1001\",\"E3Rb1\":\"E3Rb1001\",\"E4Rb1\":\"E4Rb1001\"}," +
+				"{\"_IDX\":1,\"_STS\":\"R\",\"E1\":\"E1002\",\"E2F1\":\"E2F1002\"}," +
+				"{\"_IDX\":2,\"_STS\":\"R\",\"E1\":\"E1003\"}," +
+				"{\"_IDX\":3,\"_STS\":\"R\",\"E1\":\"E1004\"}" +
+				"]}",
 				out.toString());
 		System.out.println(out.toString());
 	}

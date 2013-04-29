@@ -160,8 +160,11 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 		for (DefaultFieldSerializer<?> f : pageFields) {
 			@SuppressWarnings("unchecked")
 			DefaultFieldSerializer<Object> m = (DefaultFieldSerializer<Object>) f;
-			out.writeFieldName(f.fieldName);
-			m.output(out, entity.get(f.fieldName));
+			Object data = entity.get(f.fieldName);
+			if (data != null) {
+				out.writeFieldName(f.fieldName);
+				m.output(out, data);
+			}
 		}
 		out.writeEndObject();
 	}

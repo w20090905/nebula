@@ -76,14 +76,14 @@ public class TypeJsonDataDealerTest extends TestCase {
 		gen.flush();
 
 		assertEquals(
-				"{\"name\":\"Person\",\"parent\":\"Master\",\"standalone\":\"Master\","
-						+ "\"fields\":["
-						+ "{\"name\":\"PersonName\",\"isKey\":true,\"isCore\":false,\"isArray\":false,\"typeName\":\"Name\","
-						+ "\"nameAlias\":{},\"attrs\":{\"formatType\":\"text\",\"maxLength\":\"60\"}},"
-						+ "{\"name\":\"Age\",\"isKey\":false,\"isCore\":false,\"isArray\":false,\"typeName\":\"Age\","
-						+ "\"nameAlias\":{},\"attrs\":{\"formatType\":\"numeric\",\"inputSize\":\"small\",\"max\":\"160\",\"maxLength\":\"3\",\"min\":\"0\",\"precision\":\"10\",\"scale\":\"2\"}}],"
-						+ "\"nameAlias\":{},\"attrs\":{},\"mutable\":false,"
-						+ "\"code\":\"type Person {\\t!PersonName Name;\\tAge;};\\n\"}", out.toString());
+				"{\"Name\":\"Person\",\"SuperType\":\"Master\",\"Standalone\":\"Master\","
+						+ "\"Fields\":["
+						+ "{\"Name\":\"PersonName\",\"isKey\":true,\"isCore\":false,\"isArray\":false,\"TypeName\":\"Name\","
+						+ "\"Refer\":\"ByVal\",\"NameAlias\":{},\"Attrs\":{\"formatType\":\"text\",\"maxLength\":\"60\"}},"
+						+ "{\"Name\":\"Age\",\"isKey\":false,\"isCore\":false,\"isArray\":false,\"TypeName\":\"Age\","
+						+ "\"Refer\":\"ByVal\",\"NameAlias\":{},\"Attrs\":{\"formatType\":\"numeric\",\"inputSize\":\"small\",\"max\":\"160\",\"maxLength\":\"3\",\"min\":\"0\",\"precision\":\"10\",\"scale\":\"2\"}}],"
+						+ "\"NameAlias\":{},\"Attrs\":{},\"Mutable\":false,"
+						+ "\"Code\":\"type Person {\\t!PersonName Name;\\tAge;};\\n\"}", out.toString());
 		System.out.println(out.toString());
 	}
 
