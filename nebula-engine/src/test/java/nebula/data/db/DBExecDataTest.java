@@ -36,7 +36,11 @@ public class DBExecDataTest extends TestCase {
 	}
 
 	protected void tearDown() throws Exception {
-		config.shutdown();
+		try {
+			config.shutdown();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
