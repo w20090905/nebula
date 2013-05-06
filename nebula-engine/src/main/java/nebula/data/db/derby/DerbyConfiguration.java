@@ -19,7 +19,7 @@ public class DerbyConfiguration extends DbConfiguration {
 
 	@Override
 	public DBExec getPersister(Type type) {
-		log.debug("== getPersister : " + type.getName());
+		log.debug("== getPersister : " + type.getName() +  " conn : " + conn);
 		return new DBExec(this, conn, type, new DerbySQLHelper(this,type));
 	}
 
@@ -27,8 +27,8 @@ public class DerbyConfiguration extends DbConfiguration {
 	public void shutdown() {
 		super.shutdown();
 
-		try { // perform a clean shutdown
-			DriverManager.getConnection("jdbc:derby:;shutdown=true");
+		try { // perform a clean shutdown			
+			DriverManager.getConnection(this.url.replaceAll(";create=true",";shutdown=true"));
 			log.debug("== Database shut down normally");
 		} catch (SQLException se) {
 		}
