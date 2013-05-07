@@ -2,7 +2,6 @@ package http.engine;
 
 import http.io.Loader;
 import http.io.Source;
-import http.resource.StaticEditableResource;
 import http.resource.StaticResource;
 import http.resource.StaticTemplateResouce;
 import http.resource.TypeTemplateResouce;

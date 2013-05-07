@@ -43,7 +43,6 @@ public class DBExecDataTest extends TestCase {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public final void testListType() throws Exception {
 		Statement statement;
 		ResultSet rs;
@@ -154,7 +153,6 @@ public class DBExecDataTest extends TestCase {
 	}
 	
 
-	@SuppressWarnings("unchecked")
 	public final void testNestedListType() throws Exception {
 		Statement statement;
 		ResultSet rs;

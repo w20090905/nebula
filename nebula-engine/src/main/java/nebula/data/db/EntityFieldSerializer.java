@@ -8,11 +8,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import nebula.data.Entity;
 import nebula.data.impl.EditableEntity;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 public class EntityFieldSerializer extends DefaultFieldSerializer<Entity> {
-	private static final Log log = LogFactory.getLog(EntityFieldSerializer.class);
 
 	final List<DefaultFieldSerializer<?>> fieldSerializer;
 
