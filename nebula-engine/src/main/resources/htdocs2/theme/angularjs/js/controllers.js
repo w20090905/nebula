@@ -72,11 +72,11 @@ function NewEntityCtrl($scope, $resource, $routeParams, $location, $interpolate)
     $scope.data.$save = DataResource.prototype.$save;
     $scope.$save = function () {
         $scope.data.$save(function (u, getResponseHeaders) {
-            $location.url($interpolate('d/{{typename}}/')($routeParams));
+            $location.url($interpolate('/d/{{typename}}/')($routeParams));
         });
     };
     $scope.$back = function () {
-        $location.url($interpolate('d/{{typename}}/')($routeParams));
+        $location.url($interpolate('/d/{{typename}}/')($routeParams));
     };
 }
 
@@ -88,11 +88,11 @@ function EntityCtrl($scope, $resource, $routeParams, $location, $interpolate) {
     $scope.update = true;
     $scope.$save = function () {
         $scope.data.$save(function (u, getResponseHeaders) {
-            $location.url($interpolate('d/{{typename}}/')($routeParams));
+            $location.url($interpolate('/d/{{typename}}/')($routeParams));
         });
     };
     $scope.$back = function () {
-        $location.url($interpolate('d/{{typename}}/')($routeParams));
+        $location.url($interpolate('/d/{{typename}}/')($routeParams));
     };
 }
 
@@ -113,7 +113,7 @@ function NewTypeCtrl($scope, $resource, $routeParams, $http, $location, $interpo
     $scope.data = {};
     $scope.data.$save = DataResource.prototype.$save;
     $scope.$save = function () {
-        $http.post('d/Type/', $scope.data.code).success(function (data, status, headers, config) {
+        $http.post('/d/Type/', $scope.data.Code).success(function (data, status, headers, config) {
             $templateCache.removeAll();
             $location.url(data);
         });
@@ -126,12 +126,12 @@ function NewTypeCtrl($scope, $resource, $routeParams, $http, $location, $interpo
 function TypeCtrl($scope, $resource, $routeParams, $http, $location, $interpolate, $templateCache) {
     'use strict';
     $scope.typename = "Type";
-    $scope.resourcename = $interpolate('d/Type/{{id}}')($routeParams);
+    $scope.resourcename = $interpolate('/d/Type/{{id}}')($routeParams);
     var DataResource = $scope.resource = $resource('/d/Type/:id', $routeParams, {'save': {method: 'PUT'}});
     $scope.data = DataResource.get($routeParams);
     $scope.update = true;
     $scope.$save =  function () {
-        $http.put($scope.resourcename, $scope.data.code).success(function (data, status, headers, config) {
+        $http.put($scope.resourcename, $scope.data.Code).success(function (data, status, headers, config) {
             $templateCache.removeAll();
             $scope.data = DataResource.get($routeParams);
         });
