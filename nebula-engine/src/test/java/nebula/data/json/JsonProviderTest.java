@@ -13,6 +13,7 @@ import nebula.data.DataHolder;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
+import nebula.data.impl.EditableEntity;
 import nebula.data.impl.InMemoryDataPersister;
 import nebula.lang.Type;
 import nebula.lang.TypeLoaderForTest;
@@ -52,7 +53,7 @@ public class JsonProviderTest extends TestCase {
 		store = persistence.define(Entity.class, t.getName());
 		
 		DataHolder<DataHelper<Entity,Reader,Writer>> json =   JsonHelperProvider.getHelper(store);
-		Entity n = store.get().createNew();
+		Entity n =  new EditableEntity();
 		
 		n=json.get().readFrom(n,new StringReader("{" +
 				"	\"Name\"		:\"wangshilian\",	" +

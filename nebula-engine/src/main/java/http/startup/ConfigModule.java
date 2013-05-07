@@ -26,7 +26,7 @@ import javax.inject.Singleton;
 import nebula.data.DataPersister;
 import nebula.data.Entity;
 import nebula.data.db.DbConfiguration;
-import nebula.data.impl.EntityDbDataPersister;
+import nebula.data.impl.DbEntityDataPersister;
 import nebula.lang.EditableTypeLoader;
 import nebula.lang.SystemTypeLoader;
 import nebula.lang.TypeLoader;
@@ -96,7 +96,7 @@ public class ConfigModule extends AbstractModule {
 					DbConfiguration.getEngine(driverclass, dburl, username, password));
 			
 			this.bind(new TypeLiteral<DataPersister<Entity>>() {
-			}).to(EntityDbDataPersister.class).in(Scopes.SINGLETON);
+			}).to(DbEntityDataPersister.class).in(Scopes.SINGLETON);
 
 			Configuration freemarkerConfiguration = new Configuration();
 			freemarkerConfiguration.setDefaultEncoding("utf-8");

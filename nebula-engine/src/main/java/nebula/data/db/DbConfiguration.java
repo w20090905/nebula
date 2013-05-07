@@ -96,7 +96,7 @@ public abstract class DbConfiguration {
 	// public abstract <T extends HasID> Persistence<T> getPersister(Class<T> t,
 	// Type type);
 
-	public abstract DBExec getPersister(Type type);
+	public abstract DbDataExecutor getPersister(Type type);
 
 	public void shutdown() {
 		try {

@@ -11,7 +11,7 @@ import nebula.lang.Type;
 import util.InheritHashMap;
 import util.NamesEncoding;
 
-public class SqlHelper {
+public class DbTransactionDataSqlHelper {
 
 	Type clz;
 	final DatabaseColumn[] userColumns;
@@ -72,7 +72,7 @@ public class SqlHelper {
 		return this.tableName;
 	}
 
-	public SqlHelper(final DbConfiguration config, Type type) {
+	public DbTransactionDataSqlHelper(final DbConfiguration config, Type type) {
 
 		try {
 			this.config = config;

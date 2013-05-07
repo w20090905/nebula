@@ -20,6 +20,24 @@ public class SystemBootstrapTest extends TestCase {
 		assertEquals("Person", bot.findType("Person").getName());
 		assertEquals("Company", bot.findType("Company").getName());
 		assertEquals("String", bot.findType("String").getName());
+
+		Type type = bot.findType("Type");
+		assertNotNull(type);
+		
+		type = bot.findType("Master");
+		assertNotNull(type);
+//		assertEquals("master", type.getStandalone().name().toLowerCase());
+		assertEquals("basic", type.attrs.get("style"));
+		
+		type = bot.findType("Transaction");
+		assertNotNull(type);
+//		assertEquals("transaction",  type.getStandalone().name().toLowerCase());
+		assertEquals("basic", type.attrs.get("style"));
+		
+		type = bot.findType("Attribute");
+		assertNotNull(type);
+//		assertEquals("master",  type.getStandalone().name().toLowerCase());
+		assertEquals("compact", type.attrs.get("style"));				
 	}
 
 }

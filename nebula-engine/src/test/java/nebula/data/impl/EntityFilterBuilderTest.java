@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import junit.framework.TestCase;
-import nebula.Filter;
 import nebula.data.Entity;
+import nebula.data.DataFilter;
 
 public class EntityFilterBuilderTest extends TestCase {
 
@@ -66,7 +66,7 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		Filter<Entity> filter = builder.buildFrom(query, null);
+		DataFilter<Entity> filter = builder.buildFrom(query, null);
 
 		boolean result = filter.match(person1_21);
 		assertTrue(result);
@@ -81,7 +81,7 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		Filter<Entity> filter = builder.buildFrom(query, null);
+		DataFilter<Entity> filter = builder.buildFrom(query, null);
 
 		assertFalse(filter.match(person1_21));
 		assertTrue(filter.match(person2_22));
@@ -94,7 +94,7 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		Filter<Entity> filter = builder.buildFrom(query, null);
+		DataFilter<Entity> filter = builder.buildFrom(query, null);
 
 		assertTrue(filter.match(person1_21));
 		assertTrue(filter.match(person2_22));
@@ -107,7 +107,7 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		Filter<Entity> filter = builder.buildFrom(query, null);
+		DataFilter<Entity> filter = builder.buildFrom(query, null);
 
 		assertFalse(filter.match(person1_21));
 		assertFalse(filter.match(person2_22));
@@ -120,7 +120,7 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		Filter<Entity> filter = builder.buildFrom(query, null);
+		DataFilter<Entity> filter = builder.buildFrom(query, null);
 
 		assertFalse(filter.match(person1_21));
 		assertTrue(filter.match(person2_22));
@@ -133,7 +133,7 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		Filter<Entity> filter = builder.buildFrom(query, null);
+		DataFilter<Entity> filter = builder.buildFrom(query, null);
 
 		assertTrue(filter.match(person1_21));
 		assertFalse(filter.match(person2_22));
@@ -146,7 +146,7 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		Filter<Entity> filter = builder.buildFrom(query, null);
+		DataFilter<Entity> filter = builder.buildFrom(query, null);
 
 		assertTrue(filter.match(person1_21));
 		assertTrue(filter.match(person2_22));
@@ -159,7 +159,7 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		Filter<Entity> filter = builder.buildFrom(query, null);
+		DataFilter<Entity> filter = builder.buildFrom(query, null);
 
 		assertFalse(filter.match(person1_21));
 		assertTrue(filter.match(person2_22));
@@ -172,7 +172,7 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		Filter<Entity> filter = builder.buildFrom(query, null);
+		DataFilter<Entity> filter = builder.buildFrom(query, null);
 
 		assertTrue(filter.match(person1_21));
 		assertFalse(filter.match(person2_22));
@@ -185,7 +185,7 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		Filter<Entity> filter = builder.buildFrom(query, null);
+		DataFilter<Entity> filter = builder.buildFrom(query, null);
 
 		assertFalse(filter.match(person1_21));
 		assertTrue(filter.match(person2_22));
@@ -198,7 +198,7 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		Filter<Entity> filter = builder.buildFrom(query, null);
+		DataFilter<Entity> filter = builder.buildFrom(query, null);
 
 		assertFalse(filter.match(person1_21));
 		assertTrue(filter.match(person2_22));

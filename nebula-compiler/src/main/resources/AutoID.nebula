@@ -1,5 +1,5 @@
 @maxLength = 12;
 @editable = "false";
 @autoCreate = "true";
-define AutoID extends Long {
+define AutoID extends ID {
 };

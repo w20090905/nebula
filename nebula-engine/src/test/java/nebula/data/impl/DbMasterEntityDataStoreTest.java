@@ -6,10 +6,10 @@ import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.db.DbConfiguration;
 import nebula.data.impl.EditableEntity;
-import nebula.data.impl.EntityDbDataPersister;
+import nebula.data.impl.DbEntityDataPersister;
 import nebula.lang.SystemTypeLoader;
 
-public class EntityStoreTest extends TestCase {
+public class DbMasterEntityDataStoreTest extends TestCase {
 
 	DataPersister<Entity> p;
 	DataStore<Entity> store;
@@ -23,7 +23,7 @@ public class EntityStoreTest extends TestCase {
 		String password = "password";
 
 		dbconfig = DbConfiguration.getEngine(driverclass, url, username, password);
-		p = new EntityDbDataPersister(new SystemTypeLoader(), dbconfig);
+		p = new DbEntityDataPersister(new SystemTypeLoader(), dbconfig);
 		store = p.define(Entity.class, "Person").get();
 	}
 
@@ -34,7 +34,7 @@ public class EntityStoreTest extends TestCase {
 	}
 
 	public final void testCreateNew() {
-		EditableEntity entity = (EditableEntity) store.createNew();
+		EditableEntity entity = new EditableEntity();
 		assertNull(entity.source);
 		assertNull(entity.data);
 		assertNotNull(entity.newData);

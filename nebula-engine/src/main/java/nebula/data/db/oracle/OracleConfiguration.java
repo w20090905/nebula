@@ -1,6 +1,6 @@
 package nebula.data.db.oracle;
 
-import nebula.data.db.DBExec;
+import nebula.data.db.DbMasterDataExecutor;
 import nebula.data.db.DbConfiguration;
 import nebula.lang.Type;
 
@@ -15,8 +15,8 @@ public class OracleConfiguration extends DbConfiguration {
     }
 
     @Override
-    public DBExec getPersister(Type type) {
+    public DbMasterDataExecutor getPersister(Type type) {
         log.debug("== getPersister : " + type.getName());
-        return new DBExec(this,conn, type, new OracleSQLHelper(this,type));
+        return new DbMasterDataExecutor(this,conn, type, new OracleSQLHelper(this,type));
     }
 }

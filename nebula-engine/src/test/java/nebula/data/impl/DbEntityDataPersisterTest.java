@@ -10,9 +10,9 @@ import nebula.data.Entity;
 import nebula.data.db.DbConfiguration;
 import nebula.lang.SystemTypeLoader;
 
-public class PersistenceDBTest extends TestCase {
+public class DbEntityDataPersisterTest extends TestCase {
 
-	EntityDbDataPersister p;
+	DbEntityDataPersister p;
 	DataStore<Entity> store;
 	DbConfiguration dbconfig;
 
@@ -23,7 +23,7 @@ public class PersistenceDBTest extends TestCase {
 		String password = "password";
 
 		dbconfig = DbConfiguration.getEngine(driverclass, url, username, password);
-		p = new EntityDbDataPersister(new SystemTypeLoader(), dbconfig);
+		p = new DbEntityDataPersister(new SystemTypeLoader(), dbconfig);
 
 		store = p.define(Entity.class, "Person").get();
 		store.clear();
@@ -39,7 +39,7 @@ public class PersistenceDBTest extends TestCase {
 		assertNotNull(store);
 		assertEquals("Person", store.getID());
 
-		Entity v = store.createNew();
+		Entity v = new EditableEntity();
 		assertNotNull(v);
 
 		v.put("Name", "wangshilian");
@@ -55,7 +55,7 @@ public class PersistenceDBTest extends TestCase {
 		assertEquals("wangshilian", v.get("Name"));
 		assertEquals(null, ((EditableEntity) v).source);
 
-		p.add(v);
+		store.add(v);
 		p.flush();
 
 		assertEquals(false, v.isDirty());
@@ -101,7 +101,7 @@ public class PersistenceDBTest extends TestCase {
 		assertNotNull(store);
 		assertEquals("Person", store.getID());
 
-		Entity v = store.createNew();
+		Entity v = new EditableEntity();
 		assertNotNull(v);
 
 		v.put("Name", "wangshilian");
@@ -140,7 +140,7 @@ public class PersistenceDBTest extends TestCase {
 		assertEquals("wangshilian", v.get("Name"));
 		assertEquals(null, ((EditableEntity) v).source);
 
-		p.add(v);
+		store.add(v);
 		p.flush();
 
 		assertEquals(false, v.isDirty());

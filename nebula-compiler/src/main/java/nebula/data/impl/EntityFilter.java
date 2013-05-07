@@ -1,11 +1,11 @@
 package nebula.data.impl;
 
-import nebula.Filter;
 import nebula.data.Entity;
+import nebula.data.DataFilter;
 import nebula.expr.LogicExp;
 import nebula.expr.QuickExprBuilder;
 
-public class EntityFilter extends QuickExprBuilder implements Filter<Entity> {
+public class EntityFilter extends QuickExprBuilder implements DataFilter<Entity> {
 
 	private Entity v;
 

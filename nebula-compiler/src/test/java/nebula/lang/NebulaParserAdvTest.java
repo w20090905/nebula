@@ -294,7 +294,7 @@ public class NebulaParserAdvTest extends TestCase {
 		assertEquals("WithCustomAttr", type.fields.get(i).name);
 		assertEquals(120, type.fields.get(i).attrs.get("maxLength"));
 
-		assertEquals(3, type.attrs.size());
+		assertEquals(4, type.attrs.size());
 		assertEquals(1, type.attrs.get("length"));
 		assertEquals("dd", type.attrs.get("match"));
 		assertEquals(new BigDecimal("3.8"), type.attrs.get("max"));

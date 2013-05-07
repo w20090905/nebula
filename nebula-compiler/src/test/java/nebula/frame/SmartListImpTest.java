@@ -1,8 +1,8 @@
 package nebula.frame;
 
-import nebula.Filter;
 import nebula.IDAdapter;
 import nebula.SmartList;
+import nebula.data.DataFilter;
 import junit.framework.TestCase;
 
 public class SmartListImpTest extends TestCase {
@@ -98,7 +98,7 @@ public class SmartListImpTest extends TestCase {
 		list.add(p);
 		
 		assertEquals(5, list.size());
-		SmartList<Person> result =  list.query(new Filter<SmartListImpTest.Person>() {			
+		SmartList<Person> result =  list.query(new DataFilter<SmartListImpTest.Person>() {			
 			@Override
 			public boolean match(Person v) {
 				return v.age == 12;

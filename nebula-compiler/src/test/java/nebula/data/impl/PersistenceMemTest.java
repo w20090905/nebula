@@ -27,7 +27,7 @@ public class PersistenceMemTest extends TestCase {
 		assertNotNull(store);
 		assertEquals("Person", store.getID());
 
-		Entity v =  store.createNew();
+		Entity v =  new EditableEntity();
 		assertNotNull(v);
 
 		v.put("Name", "wangshilian");
@@ -43,7 +43,7 @@ public class PersistenceMemTest extends TestCase {
 		assertEquals("wangshilian", v.get("Name"));
 		assertEquals(null, ((EditableEntity)v).source);
 
-		p.add(v);
+		store.add(v);
 		p.flush();
 
 		assertEquals(false, v.isDirty());

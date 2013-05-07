@@ -5,26 +5,22 @@ import java.util.Map;
 
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.db.DBExec;
-import nebula.lang.Field;
+import nebula.data.db.DbDataExecutor;
 import nebula.lang.Type;
 
-public class EntityDbDataStore extends EntityDataStore {
+public class DbMasterEntityDataStore extends EntityDataStore {
 
-	final DBExec db;
+	final DbDataExecutor db;
+	final IDSetter idSetter;
 
-	EntityDbDataStore(final EntityDbDataPersister persistence, Type type, final DBExec exec) {
+	DbMasterEntityDataStore(final DbEntityDataPersister persistence, Type type, final DbDataExecutor exec) {
 		super(persistence, type);
 		this.db = exec;
+		idSetter = IDSetterBuilder.getIDSetter(type);
 
 		List<EditableEntity> list = exec.getAll();
 		for (EditableEntity data : list) {
-			String id = "";
-			for (Field f : type.getFields()) {
-				if (f.isKey()) {
-					id += data.get(f.getName());
-				}
-			}
+			String id = idSetter.getID(data);
 			data.put("ID", id);
 
 			loadin(data, id);
@@ -53,12 +49,8 @@ public class EntityDbDataStore extends EntityDataStore {
 				lock.unlock();
 			}
 		} else { // insert
-			String id = "";
-			for (Field f : type.getFields()) {
-				if (f.isKey()) {
-					id += newEntity.get(f.getName());
-				}
-			}
+			String id = idSetter.getID(newEntity);
+			 
 			newEntity.put("ID", id);
 
 			lock.lock();

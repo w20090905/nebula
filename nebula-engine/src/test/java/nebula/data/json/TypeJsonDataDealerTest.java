@@ -82,7 +82,7 @@ public class TypeJsonDataDealerTest extends TestCase {
 						+ "\"Refer\":\"ByVal\",\"NameAlias\":{},\"Attrs\":{\"formatType\":\"text\",\"maxLength\":\"60\"}},"
 						+ "{\"Name\":\"Age\",\"isKey\":false,\"isCore\":false,\"isArray\":false,\"TypeName\":\"Age\","
 						+ "\"Refer\":\"ByVal\",\"NameAlias\":{},\"Attrs\":{\"formatType\":\"numeric\",\"inputSize\":\"small\",\"max\":\"160\",\"maxLength\":\"3\",\"min\":\"0\",\"precision\":\"10\",\"scale\":\"2\"}}],"
-						+ "\"NameAlias\":{},\"Attrs\":{},\"Mutable\":false,"
+						+ "\"NameAlias\":{},\"Attrs\":{\"style\":\"basic\"},\"Mutable\":false,"
 						+ "\"Code\":\"type Person {\\t!PersonName Name;\\tAge;};\\n\"}", out.toString());
 		System.out.println(out.toString());
 	}

@@ -7,10 +7,10 @@ import nebula.data.db.derby.DerbyConfiguration;
 import nebula.lang.Type;
 import nebula.lang.TypeLoaderForTest;
 
-public class SqlHelperTest extends TestCase {
+public class DbTransactionDataSqlHelperTest extends TestCase {
 	TypeLoaderForTest loader;
 	Type t;
-	SqlHelper h;
+	DbMasterDataSqlHelper h;
 	DbConfiguration config;
 
 	protected void setUp() throws Exception {
@@ -44,7 +44,7 @@ public class SqlHelperTest extends TestCase {
 		//@formatter:on		
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		h = new SqlHelper(config, t);
+		h = new DbMasterDataSqlHelper(config, t);
 		assertEquals("NPerson", h.getTableName());
 
 		assertEquals(5, h.userColumns.length);
@@ -88,7 +88,7 @@ public class SqlHelperTest extends TestCase {
 		//@formatter:on		
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		h = new SqlHelper(config, t);
+		h = new DbMasterDataSqlHelper(config, t);
 		assertEquals("NTestPerson", h.getTableName());
 
 		int i = 0;
@@ -161,7 +161,7 @@ public class SqlHelperTest extends TestCase {
 
 		t = loader.testDefineNebula(new StringReader(textRef)).get(0);
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		h = new SqlHelper(config, t);
+		h = new DbMasterDataSqlHelper(config, t);
 		assertEquals("NTestPerson", h.getTableName());
 
 		int i = 0;
@@ -262,7 +262,7 @@ public class SqlHelperTest extends TestCase {
 		//@formatter:on		
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		h = new SqlHelper(config, t);
+		h = new DbMasterDataSqlHelper(config, t);
 		assertEquals("NTestPerson", h.getTableName());
 
 		int i = 0;

@@ -3,6 +3,7 @@ package nebula.data;
 import java.util.List;
 
 import junit.framework.TestCase;
+import nebula.data.impl.EditableEntity;
 import nebula.data.impl.InMemoryDataPersister;
 import nebula.lang.SystemTypeLoader;
 
@@ -20,13 +21,13 @@ public class EntityStoreTest extends TestCase {
 		super.tearDown();
 	}
 
-	public final void testCreateNew() {
-		Entity entity = store.createNew();
-		assertNotNull(entity);
-	}
+//	public final void testCreateNew() {
+//		Entity entity = store.createNew();
+//		assertNotNull(entity);
+//	}
 
 	public final void testAdd() {
-		Entity v = store.createNew();
+		Entity v = new EditableEntity();
 		v.put("ID", "wangshilian");
 		store.add(v);
 		store.flush();
@@ -34,7 +35,7 @@ public class EntityStoreTest extends TestCase {
 	}
 
 	public final void testLoad() {
-		Entity v = store.createNew();
+		Entity v = new EditableEntity();
 		v.put("Name", "wangshilian");
 		store.add(v);
 
@@ -64,7 +65,7 @@ public class EntityStoreTest extends TestCase {
 		Entity e1 = list.get(0);
 		assertEquals("wangshilian", e1.getID());
 
-		v = store.createNew();
+		v = new EditableEntity();
 		v.put("Name", "test");
 		store.add(v);
 		store.flush();

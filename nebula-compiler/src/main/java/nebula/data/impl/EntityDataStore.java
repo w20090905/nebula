@@ -7,10 +7,10 @@ import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
-import nebula.Filter;
 import nebula.data.Entity;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
+import nebula.data.DataFilter;
 import nebula.lang.Field;
 import nebula.lang.Type;
 
@@ -32,7 +32,7 @@ public class EntityDataStore implements DataStore<Entity> {
 		quickIndex = new HashMap<String, Entity>();
 	}
 
-	@Override
+//	@Override
 	public Entity createNew() {
 		EditableEntity agent = new EditableEntity(this);
 		return agent;
@@ -44,7 +44,7 @@ public class EntityDataStore implements DataStore<Entity> {
 	}
 
 	@Override
-	public List<Entity> query(Filter<Entity> filter) {
+	public List<Entity> query(DataFilter<Entity> filter) {
 		List<Entity> newList = new ArrayList<Entity>();
 		for (Entity item : datas) {
 			if (filter.match(item)) newList.add(item);

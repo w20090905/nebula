@@ -45,15 +45,16 @@ public class InMemoryDataPersister implements DataPersister<Entity> {
 	}
 
 	@Override
-	public void reload(Class<Entity> clz, String name) {
-		DataHolder<DataStore<Entity>> store = this.stores.get(name);
-		if (store != null) {
-			DataStore<Entity> oldData = store.get();
+	public DataHolder<DataStore<Entity>> reload(Class<Entity> clz, String name) {
+		DataHolder<DataStore<Entity>> datastoreHolder = this.stores.get(name);
+		if (datastoreHolder != null) {
+			DataStore<Entity> oldData = datastoreHolder.get();
 			oldData.unload();
 
 			Type type = loader.findType(name);
 			DataStore<Entity> newData = new EntityDataStore(this, type);
-			store.set(newData, oldData);
+			datastoreHolder.set(newData, oldData);
+			return datastoreHolder;
 		} else {
 			throw new UnsupportedOperationException("DataStore<Entity> reload(Class<Entity> clz, String name) ");
 		}

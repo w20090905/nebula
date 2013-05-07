@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import nebula.data.DataHolder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
+import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
@@ -43,7 +44,13 @@ public class TypeTemplateResouce extends AbstractResouce {
 		this.skin = skin;
 		this.typeName = typeName;
 		this.actionName = actionName;
-		this.name = actionName + ".ftl";
+		
+		Type type = this.typeLoader.findType(typeName);
+		
+		String dataType = (String)type.getStandalone().name().toLowerCase();
+		String style = (String)type.getAttrs().get("style");
+		
+		this.name = dataType + "_" + style + "_" + actionName + ".ftl";
 		// this.templateName = templateTypeName + "-" + actionName + ".ftl";
 		this.attributes = attributes;
 	}

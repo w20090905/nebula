@@ -12,10 +12,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nebula.Filter;
 import nebula.data.DataHolder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
+import nebula.data.DataFilter;
 import nebula.data.json.DataHelper;
 import util.FileUtil;
 
@@ -38,7 +38,7 @@ public class EntityListResouce extends AbstractResouce {
 		if (req.getQueryString() == null || req.getQueryString().length() == 0) {
 			dataList = datastoreHolder.get().all();
 		} else {
-			Filter<Entity> filter = filterBuilder.buildFrom(req.getParameterMap(), null);
+			DataFilter<Entity> filter = filterBuilder.buildFrom(req.getParameterMap(), null);
 			dataList = datastoreHolder.get().query(filter);
 		}
 

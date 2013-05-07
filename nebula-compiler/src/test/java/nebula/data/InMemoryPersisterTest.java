@@ -1,6 +1,7 @@
 package nebula.data;
 
 import junit.framework.TestCase;
+import nebula.data.impl.EditableEntity;
 import nebula.data.impl.InMemoryDataPersister;
 import nebula.lang.SystemTypeLoader;
 
@@ -23,7 +24,7 @@ public class InMemoryPersisterTest extends TestCase {
 		assertNotNull(store);
 		assertEquals("Person", store.getID());
 
-		Entity v =  store.createNew();
+		Entity v =   new EditableEntity();
 		assertNotNull(v);
 
 		v.put("Name", "wangshilian");
@@ -38,7 +39,7 @@ public class InMemoryPersisterTest extends TestCase {
 		assertEquals("wangshilian", v.get("Name"));
 //		assertEquals(null, ((EditableEntity)v).source);
 
-		p.add(v);
+		store.add(v);
 		p.flush();
 
 		assertEquals(false, v.isDirty());

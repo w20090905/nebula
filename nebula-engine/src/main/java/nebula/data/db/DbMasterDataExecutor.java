@@ -23,8 +23,8 @@ import nebula.lang.Type;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class DBExec {
-	private static final Log log = LogFactory.getLog(DBExec.class);
+public class DbMasterDataExecutor implements DbDataExecutor {
+	private static final Log log = LogFactory.getLog(DbMasterDataExecutor.class);
 
 	final private Connection conn;
 
@@ -42,16 +42,17 @@ public class DBExec {
 	final DatabaseColumn[] systemColumns;
 	// final private String[] realFields;
 	// final private DbColumn[] keyColumns;
-	final SqlHelper builder;
+	final DbMasterDataSqlHelper builder;
 	final DbConfiguration config;
-	
+
 	final EntityFieldSerializer serializer;
 
 	// final private Map<String, Integer> map;
 
 	// final private String[] systemFields = new String[] { "TIMESTAMP_" };
 
-	public DBExec(final DbConfiguration config, final Connection conn, final Type type, final SqlHelper helper) {
+	public DbMasterDataExecutor(final DbConfiguration config, final Connection conn, final Type type,
+			final DbMasterDataSqlHelper helper) {
 		this.config = config;
 		this.type = type;
 		this.conn = conn;
@@ -62,7 +63,7 @@ public class DBExec {
 
 		userColumns = builder.getUserColumns();
 		systemColumns = builder.getSystemColumns();
-		
+
 		serializer = builder.getEntitySerializer();
 
 		this.ensureDBSchema();
@@ -74,7 +75,7 @@ public class DBExec {
 			SQL_DELETE = conn.prepareStatement(builder.builderDelete());
 			SQL_LIST = conn.prepareStatement(builder.builderList());
 		} catch (Exception e) {
-			log.error(e.getClass().getName(),e);
+			log.error(e.getClass().getName(), e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -85,12 +86,13 @@ public class DBExec {
 		ResultSet rs = null;
 		try {
 
-			final SmartList<DatabaseColumn> mapColumns = new SmartListImp<DatabaseColumn>("DbColumn", new IDAdapter<DatabaseColumn>() {
-				@Override
-				public String getID(DatabaseColumn data) {
-					return data.columnName;
-				}
-			});
+			final SmartList<DatabaseColumn> mapColumns = new SmartListImp<DatabaseColumn>("DbColumn",
+					new IDAdapter<DatabaseColumn>() {
+						@Override
+						public String getID(DatabaseColumn data) {
+							return data.columnName;
+						}
+					});
 
 			for (int i = 0; i < userColumns.length; i++) {
 				mapColumns.add(userColumns[i]);
@@ -149,9 +151,9 @@ public class DBExec {
 									int newPrecision = newColumn.precision > precision ? newColumn.precision
 											: precision;
 									int newScale = newColumn.scale > scale ? newColumn.scale : scale;
-									typeSizeNotMatchColumns.add(new DatabaseColumn(newColumn.fieldName, newColumn.columnName,
-											newColumn.key, newColumn.nullable, false,newColumn.rawType, newColumn.size,
-											newPrecision, newScale));
+									typeSizeNotMatchColumns.add(new DatabaseColumn(newColumn.fieldName,
+											newColumn.columnName, newColumn.key, newColumn.nullable, false,
+											newColumn.rawType, newColumn.size, newPrecision, newScale));
 								}
 								break;
 							case Types.VARCHAR:
@@ -170,8 +172,8 @@ public class DBExec {
 						allColumns.put(columnName, columnName);
 					}
 
-					if (log.isDebugEnabled()) {
-						log.debug("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
+					if (log.isTraceEnabled()) {
+						log.trace("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
 								+ metaData.getColumnDisplaySize(i));
 					}
 				}
@@ -203,13 +205,13 @@ public class DBExec {
 					statement.addBatch(builder.builderCreate());
 					statement.executeBatch();
 
-					if (log.isDebugEnabled()) {
-						log.debug("== After add not exist column ");
+					if (log.isTraceEnabled()) {
+						log.trace("== After add not exist column ");
 						rs = statement.executeQuery(builder.builderGetMeta());
 						metaData = rs.getMetaData();
 						columnsSize = metaData.getColumnCount();
 						for (int i = 1; i <= columnsSize; i++) {
-							log.debug("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
+							log.trace("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
 									+ metaData.getColumnDisplaySize(i));
 						}
 						rs.close();
@@ -222,16 +224,16 @@ public class DBExec {
 							log.trace("##\t" + builder.builderAddColumn(c));
 							statement.addBatch(builder.builderAddColumn(c));
 						}
-						 statement.executeBatch();
-						 
-						if (log.isDebugEnabled()) {
-							log.debug("== After add not exist column ");
+						statement.executeBatch();
+
+						if (log.isTraceEnabled()) {
+							log.trace("== After add not exist column ");
 							rs = statement.executeQuery(builder.builderGetMeta());
 							metaData = rs.getMetaData();
 							columnsSize = metaData.getColumnCount();
 							for (int i = 1; i <= columnsSize; i++) {
-								log.debug("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
-										+ metaData.getColumnDisplaySize(i));
+								log.trace("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i)
+										+ "\t" + metaData.getColumnDisplaySize(i));
 							}
 							rs.close();
 						}
@@ -246,14 +248,14 @@ public class DBExec {
 							statement.addBatch(builder.builderAddColumn(c));
 						}
 						statement.executeBatch();
-						if (log.isDebugEnabled()) {
-							log.debug("== After update don't match column to DB");
+						if (log.isTraceEnabled()) {
+							log.trace("== After update don't match column to DB");
 							rs = statement.executeQuery(builder.builderGetMeta());
 							metaData = rs.getMetaData();
 							columnsSize = metaData.getColumnCount();
 							for (int i = 1; i <= columnsSize; i++) {
-								log.debug("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
-										+ metaData.getColumnDisplaySize(i));
+								log.trace("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i)
+										+ "\t" + metaData.getColumnDisplaySize(i));
 							}
 							rs.close();
 						}
@@ -267,14 +269,14 @@ public class DBExec {
 							statement.addBatch(builder.builderModifyColumnDateType(c));
 						}
 						statement.executeBatch();
-						if (log.isDebugEnabled()) {
-							log.debug("== update size don't match column to DB");
+						if (log.isTraceEnabled()) {
+							log.trace("== update size don't match column to DB");
 							rs = statement.executeQuery(builder.builderGetMeta());
 							metaData = rs.getMetaData();
 							columnsSize = metaData.getColumnCount();
 							for (int i = 1; i <= columnsSize; i++) {
-								log.debug("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
-										+ metaData.getColumnDisplaySize(i));
+								log.debug("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i)
+										+ "\t" + metaData.getColumnDisplaySize(i));
 							}
 							rs.close();
 						}
@@ -288,23 +290,22 @@ public class DBExec {
 							statement.addBatch(builder.builderRemoveColumn(key));
 						}
 						statement.executeBatch();
-						if (log.isDebugEnabled()) {
-							log.debug("== remove unused column");
+						if (log.isTraceEnabled()) {
+							log.trace("== remove unused column");
 							rs = statement.executeQuery(builder.builderGetMeta());
 							metaData = rs.getMetaData();
 							columnsSize = metaData.getColumnCount();
 							for (int i = 1; i <= columnsSize; i++) {
-								log.debug("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
-										+ metaData.getColumnDisplaySize(i));
+								log.trace("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i)
+										+ "\t" + metaData.getColumnDisplaySize(i));
 							}
 							rs.close();
 						}
 					}
-					
+
 				}
 
 				conn.commit();
-
 
 			} else {
 				statement.executeUpdate(builder.builderCreate());
@@ -320,50 +321,63 @@ public class DBExec {
 					rs.close();
 				}
 			} catch (SQLException e) {
-				log.error(e.getClass().getName(),e);
+				log.error(e.getClass().getName(), e);
 				throw new RuntimeException(e);
 			}
 		}
 	}
 
+	@Override
 	public void drop() {
 		try {
 			conn.createStatement().execute(builder.builderDrop());
 		} catch (Exception e) {
-			log.error(e.getClass().getName(),e);
+			log.error(e.getClass().getName(), e);
 		}
 	}
 
+	@Override
 	public void update(Entity value, Object... keys) {
-		log.debug(SQL_UPDATE + " : " + value);
+		if (log.isTraceEnabled()) {
+			log.trace(SQL_UPDATE + " : " + value);
+		}
 		executeUpdate(SQL_UPDATE, value, keys);
 	}
 
+	@Override
 	public void insert(Entity value) {
-		log.debug(SQL_INSERT + " : " + value);
+		if (log.isTraceEnabled()) {
+			log.trace(SQL_INSERT + " : " + value);
+		}
 		executeUpdate(SQL_INSERT, value);
 	}
 
+	@Override
 	public void deleteAll() {
 		try {
 			conn.createStatement().execute(builder.builderDeleteAll());
 		} catch (Exception e) {
-			log.error(e.getClass().getName(),e);
+			log.error(e.getClass().getName(), e);
 			throw new RuntimeException(e);
 		}
 	}
 
+	@Override
 	public List<EditableEntity> getAll() {
 		return executeQuery(SQL_LIST);
 	}
 
+	@Override
 	public void delete(Entity value) {
 		log.debug(SQL_DELETE + " : " + value);
 		executeUpdate(SQL_DELETE, value);
 	}
 
+	@Override
 	public EditableEntity get(Object... keys) {
-		log.debug(SQL_GET + " : " + keys);
+		if (log.isTraceEnabled()) {
+			log.trace(SQL_GET + " : " + keys);
+		}
 
 		List<EditableEntity> list = executeQuery(SQL_GET, keys);
 		if (list == null) {
@@ -437,7 +451,7 @@ public class DBExec {
 		}
 	}
 
-
+	@Override
 	public void close() {
 		try {
 			SQL_GET.close();
@@ -446,7 +460,7 @@ public class DBExec {
 			SQL_DELETE.close();
 			SQL_LIST.close();
 		} catch (SQLException e) {
-			log.error(e.getClass().getName(),e);
+			log.error(e.getClass().getName(), e);
 			throw new RuntimeException(e);
 		}
 	}

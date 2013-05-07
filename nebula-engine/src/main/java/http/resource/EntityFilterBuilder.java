@@ -2,15 +2,15 @@ package http.resource;
 
 import java.util.Map;
 
-import nebula.Filter;
 import nebula.data.Entity;
+import nebula.data.DataFilter;
 import nebula.data.impl.EntityFilter;
 import nebula.expr.LogicExp;
 import nebula.lang.Type;
 
 public class EntityFilterBuilder {
 
-	public Filter<Entity> buildFrom(Map<String, String[]> query, Type type) {
+	public DataFilter<Entity> buildFrom(Map<String, String[]> query, Type type) {
 		EntityFilter builder = new EntityFilter();
 		LogicExp exp = builder.Nop();
 

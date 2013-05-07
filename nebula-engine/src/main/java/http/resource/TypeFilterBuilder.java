@@ -3,7 +3,7 @@ package http.resource;
 import java.util.HashMap;
 import java.util.Map;
 
-import nebula.Filter;
+import nebula.data.DataFilter;
 import nebula.expr.LogicExp;
 import nebula.expr.QuickExprBuilder;
 import nebula.lang.Type;
@@ -15,7 +15,7 @@ public class TypeFilterBuilder {
 		
 	}
 
-	public Filter<Type> buildFrom(Map<String, String[]> params, Type type) {
+	public DataFilter<Type> buildFrom(Map<String, String[]> params, Type type) {
 		TypeFilter builder = new TypeFilter();
 		LogicExp exp = builder.Nop();
 
@@ -28,7 +28,7 @@ public class TypeFilterBuilder {
 	}
 	
 	
-	class TypeFilter extends QuickExprBuilder  implements Filter<Type>{
+	class TypeFilter extends QuickExprBuilder  implements DataFilter<Type>{
 		final Map<String, GetStringValue<Type>> strings;
 		private Type v;
 		

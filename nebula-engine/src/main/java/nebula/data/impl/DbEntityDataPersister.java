@@ -18,31 +18,37 @@ import nebula.data.db.DbConfiguration;
 import nebula.data.impl.EditableEntity;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
+import nebula.lang.TypeStandalone;
 
-public class EntityDbDataPersister implements DataPersister<Entity> {
+public class DbEntityDataPersister implements DataPersister<Entity> {
 
-	final TypeLoader loader;
+	final TypeLoader typeLoader;
 	ReentrantLock lock = new ReentrantLock();
-	final Map<String, DataHolder<DataStore<Entity>>> stores;
+	final Map<String, DataHolder<DataStore<Entity>>> storeHolders;
 	final DbConfiguration dbConfig;
 
 	@Inject
-	public EntityDbDataPersister(TypeLoader loader, DbConfiguration dbConfig) {
-		this.loader = loader;
-		this.stores = new HashMap<String, DataHolder<DataStore<Entity>>>();
+	public DbEntityDataPersister(TypeLoader loader, DbConfiguration dbConfig) {
+		this.typeLoader = loader;
+		this.storeHolders = new HashMap<String, DataHolder<DataStore<Entity>>>();
 		this.dbConfig = dbConfig;
 	}
 
 	@Override
 	public DataHolder<DataStore<Entity>> define(Class<Entity> clz, String name) {
-		DataHolder<DataStore<Entity>> store = this.stores.get(name);
-		if (store == null) {
-			Type type = loader.findType(name);
-			DataStore<Entity> newData = new EntityDbDataStore(this, type, dbConfig.getPersister(type));
-			store = new AbstractDataHolder<DataStore<Entity>>(newData);
-			stores.put(name, store);
+		DataHolder<DataStore<Entity>> datastoreHolder = this.storeHolders.get(name);
+		if (datastoreHolder == null) {
+			Type type = typeLoader.findType(name);
+			DataStore<Entity> datastore=null;
+			if(type.getStandalone() == TypeStandalone.Transaction){
+				datastore = new DbTransactionEntityDataStore(this, type, dbConfig.getPersister(type));
+			}else{
+				datastore = new DbMasterEntityDataStore(this, type, dbConfig.getPersister(type));
+			}
+			datastoreHolder = new AbstractDataHolder<DataStore<Entity>>(datastore);
+			storeHolders.put(name, datastoreHolder);
 		}
-		return store;
+		return datastoreHolder;
 	}
 
 	@Override
@@ -52,16 +58,17 @@ public class EntityDbDataPersister implements DataPersister<Entity> {
 	}
 
 	@Override
-	public void reload(Class<Entity> clz, String name) {
-		DataHolder<DataStore<Entity>> holder = this.stores.get(name);
+	public DataHolder<DataStore<Entity>> reload(Class<Entity> clz, String name) {
+		DataHolder<DataStore<Entity>> datastoreHolder = this.storeHolders.get(name);
 
-		if (holder != null) {
-			DataStore<Entity> oldData = holder.get();
+		if (datastoreHolder != null) {
+			DataStore<Entity> oldData = datastoreHolder.get();
 			oldData.unload();
 
-			Type type = loader.findType(name);
-			DataStore<Entity> newData = new EntityDbDataStore(this, type, dbConfig.getPersister(type));
-			holder.set(newData, oldData);
+			Type type = typeLoader.findType(name);
+			DataStore<Entity> newData = new DbMasterEntityDataStore(this, type, dbConfig.getPersister(type));
+			datastoreHolder.set(newData, oldData);
+			return datastoreHolder;
 		} else {
 			throw new UnsupportedOperationException("DataStore<Entity> reload(Class<Entity> clz, String name) ");
 		}

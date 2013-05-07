@@ -3,8 +3,10 @@ package nebula.data.db.derby;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import nebula.data.db.DBExec;
 import nebula.data.db.DbConfiguration;
+import nebula.data.db.DbDataExecutor;
+import nebula.data.db.DbMasterDataExecutor;
+import nebula.data.db.DbTransactionDataExecutor;
 import nebula.lang.Type;
 
 import org.apache.commons.logging.Log;
@@ -18,17 +20,29 @@ public class DerbyConfiguration extends DbConfiguration {
 	}
 
 	@Override
-	public DBExec getPersister(Type type) {
-		log.debug("== getPersister : " + type.getName() +  " conn : " + conn);
-		return new DBExec(this, conn, type, new DerbySQLHelper(this,type));
+	public DbDataExecutor getPersister(Type type) {
+		log.debug("== getPersister : " + type.getName() + " conn : " + conn);
+		DbDataExecutor executor = null;
+
+		switch (type.getStandalone()) {
+		case Transaction:
+			executor = new DbTransactionDataExecutor(this, conn, type, new DerbySQLHelper(this, type));
+			break;
+
+		default:
+			executor = new DbMasterDataExecutor(this, conn, type, new DerbySQLHelper(this, type));
+			break;
+		}
+
+		return executor;
 	}
 
 	@Override
 	public void shutdown() {
 		super.shutdown();
 
-		try { // perform a clean shutdown			
-			DriverManager.getConnection(this.url.replaceAll(";create=true",";shutdown=true"));
+		try { // perform a clean shutdown
+			DriverManager.getConnection(this.url.replaceAll(";create=true", ";shutdown=true"));
 			log.debug("== Database shut down normally");
 		} catch (SQLException se) {
 		}

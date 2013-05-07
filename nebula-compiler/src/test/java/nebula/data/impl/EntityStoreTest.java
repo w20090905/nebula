@@ -21,7 +21,7 @@ public class EntityStoreTest extends TestCase {
 	}
 
 	public final void testCreateNew() {
-		EditableEntity entity = (EditableEntity) store.createNew();
+		EditableEntity entity = new EditableEntity();
 		assertNull(entity.source);
 		assertNull(entity.data);
 		assertNotNull(entity.newData);

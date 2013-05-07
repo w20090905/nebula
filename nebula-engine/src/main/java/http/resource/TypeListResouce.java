@@ -11,7 +11,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nebula.Filter;
+import nebula.data.DataFilter;
 import nebula.data.json.DataHelper;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -49,7 +49,7 @@ public class TypeListResouce extends AbstractResouce {
 			this.lastModified = newModified;
 			dataList = typeLoader.all();
 		} else {
-			Filter<Type> filter = filterBuilder.buildFrom(req.getParameterMap(), null);
+			DataFilter<Type> filter = filterBuilder.buildFrom(req.getParameterMap(), null);
 			dataList = typeLoader.all().query(filter);
 		}
 

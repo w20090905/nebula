@@ -8,9 +8,9 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import nebula.Filter;
 import nebula.IDAdapter;
 import nebula.SmartList;
+import nebula.data.DataFilter;
 
 public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartList<E> {
 
@@ -124,7 +124,7 @@ public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartLis
 	}
 
 	@Override
-	public SmartList<E> query(Filter<E> match) {
+	public SmartList<E> query(DataFilter<E> match) {
 		SmartListImp<E> newList = new SmartListImp<E>(name, identifier);
 		for (E item : this) {
 			if(match.match(item))newList.add(item);

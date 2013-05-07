@@ -15,10 +15,10 @@ import nebula.data.impl.EditableEntity;
 import nebula.lang.Type;
 import nebula.lang.TypeLoaderForTest;
 
-public class DBExecTest extends TestCase {
+public class DbTransactionDataExecutorTest extends TestCase {
 	TypeLoaderForTest loader;
 	Type t;
-	DBExec dbExec;
+	DbTransactionDataExecutor dbExec;
 	DbConfiguration config;
 
 	DataPersister<Entity> p;
@@ -54,19 +54,19 @@ public class DBExecTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		String text = "" +
-				"type Person { " +
-				"	!PersonName Name;" + 
+				"tx Order { " +
+				"	!OrderName Name;" + 
 				"	Age;" + 
 				"};";
 		//@formatter:on		
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
 		EditableEntity data;
-		dbExec = config.getPersister(t);
+		dbExec = (DbTransactionDataExecutor) config.getPersister(t);
 		dbExec.drop();
 		dbExec = null;
 
-		dbExec = config.getPersister(t);
+		dbExec =  (DbTransactionDataExecutor) config.getPersister(t);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -76,7 +76,7 @@ public class DBExecTest extends TestCase {
 		assertEquals(3, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("Varchar".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
@@ -96,7 +96,7 @@ public class DBExecTest extends TestCase {
 		}
 
 		data = new EditableEntity();
-		data.put("PersonName", "wangshilian");
+		data.put("OrderName", "wangshilian");
 		data.put("Age", 10L);
 
 		dbExec.insert(data);
@@ -113,8 +113,8 @@ public class DBExecTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
-				"type Person { " + 
-				"	!PersonName Name;" + 
+				"tx Order { " + 
+				"	!OrderName Name;" + 
 				"	Age;" + 
 				"	Active;" +
 				"	Height;" +
@@ -130,7 +130,7 @@ public class DBExecTest extends TestCase {
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec = config.getPersister(t);
+		dbExec =  (DbTransactionDataExecutor) config.getPersister(t);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -140,7 +140,7 @@ public class DBExecTest extends TestCase {
 		assertEquals(12, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("Varchar".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
@@ -195,8 +195,8 @@ public class DBExecTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
-				"type Person { " + 
-				"	@maxLength=250;!PersonName Name;" + 
+				"tx Order { " + 
+				"	@maxLength=250;!OrderName Name;" + 
 				"	Age Name;" + 
 				"	Height;" + 
 				"	Date;" + 
@@ -205,7 +205,7 @@ public class DBExecTest extends TestCase {
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec = config.getPersister(t);
+		dbExec =  (DbTransactionDataExecutor) config.getPersister(t);
 
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
@@ -218,7 +218,7 @@ public class DBExecTest extends TestCase {
 		assertEquals(5, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(250, metaData.getColumnDisplaySize(i));
 		i++;
@@ -246,8 +246,8 @@ public class DBExecTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
-				"type Person { " + 
-				"	!PersonName Name;" + 
+				"tx Order { " + 
+				"	!OrderName Name;" + 
 				"	Height;" + 
 				"	Date;" + 
 				"};";
@@ -255,7 +255,7 @@ public class DBExecTest extends TestCase {
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec = config.getPersister(t);
+		dbExec =  (DbTransactionDataExecutor) config.getPersister(t);
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
@@ -267,7 +267,7 @@ public class DBExecTest extends TestCase {
 		assertEquals(4, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(250, metaData.getColumnDisplaySize(i));
 		i++;
@@ -288,9 +288,9 @@ public class DBExecTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
-				"type Person { " + 
+				"tx Order { " + 
 				"	!Name;" + 
-				"	PersonName Name;" + 
+				"	OrderName Name;" + 
 				"	Height;" + 
 				"	Date;" + 
 				"};";
@@ -299,7 +299,7 @@ public class DBExecTest extends TestCase {
 		assertEquals(1, dbExec.getAll().size());
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		dbExec = config.getPersister(t);
+		dbExec =  (DbTransactionDataExecutor) config.getPersister(t);
 
 		assertEquals(0, dbExec.getAll().size());
 
@@ -326,7 +326,7 @@ public class DBExecTest extends TestCase {
 		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
-		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
@@ -360,8 +360,8 @@ public class DBExecTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		String text = "" +
-				"type Person { " +
-				"	!PersonName Name;" + 
+				"tx Order { " +
+				"	!OrderName Name;" + 
 				"	Age[1..10];" +
 				"	Alies[1..1000] Name;" + 
 				"	Comment[1..1000];" + 
@@ -370,11 +370,11 @@ public class DBExecTest extends TestCase {
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
 		EditableEntity data;
-		dbExec = config.getPersister(t);
+		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
 		dbExec.drop();
 		dbExec = null;
 
-		dbExec = config.getPersister(t);
+		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -384,7 +384,7 @@ public class DBExecTest extends TestCase {
 		assertEquals(5, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("Varchar".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
@@ -410,7 +410,7 @@ public class DBExecTest extends TestCase {
 		}
 
 		data = new EditableEntity();
-		data.put("PersonName", "wangshilian");
+		data.put("OrderName", "wangshilian");
 		List<Long> ages = new ArrayList<Long>();
 		ages.add(10L);
 		ages.add(200L);
@@ -472,19 +472,19 @@ public class DBExecTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		String text = "" +
-				"type Person { " +
-				"	!PersonName Name;" + 
+				"tx Order { " +
+				"	!OrderName Name;" + 
 				"	Age[1..10];" + 
 				"};";
 		//@formatter:on		
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
 		EditableEntity data;
-		dbExec = config.getPersister(t);
+		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
 		dbExec.drop();
 		dbExec = null;
 
-		dbExec = config.getPersister(t);
+		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -494,7 +494,7 @@ public class DBExecTest extends TestCase {
 		assertEquals(3, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("Varchar".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
@@ -514,7 +514,7 @@ public class DBExecTest extends TestCase {
 		}
 
 		data = new EditableEntity();
-		data.put("PersonName", "wangshilian");
+		data.put("OrderName", "wangshilian");
 		List<Long> ages = new ArrayList<Long>();
 		ages.add(10L);
 		ages.add(200L);
@@ -542,8 +542,8 @@ public class DBExecTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
-				"type Person { " + 
-				"	!PersonName Name;" + 
+				"tx Order { " + 
+				"	!OrderName Name;" + 
 				"	Age[1..10];" + 
 				"	Active[1..10];" +
 				"	Height[1..10];" +
@@ -559,7 +559,7 @@ public class DBExecTest extends TestCase {
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec = config.getPersister(t);
+		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -569,7 +569,7 @@ public class DBExecTest extends TestCase {
 		assertEquals(12, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("Varchar".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
@@ -624,8 +624,8 @@ public class DBExecTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
-				"type Person { " + 
-				"	@maxLength=250;!PersonName Name;" + 
+				"tx Order { " + 
+				"	@maxLength=250;!OrderName Name;" + 
 				"	Age;" + 
 				"	Height[1..10];" + 
 				"	Date[1..10];" + 
@@ -634,7 +634,7 @@ public class DBExecTest extends TestCase {
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec = config.getPersister(t);
+		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
 
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
@@ -647,7 +647,7 @@ public class DBExecTest extends TestCase {
 		assertEquals(5, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(250, metaData.getColumnDisplaySize(i));
 		i++;
@@ -674,8 +674,8 @@ public class DBExecTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
-				"type Person { " + 
-				"	!PersonName Name;" + 
+				"tx Order { " + 
+				"	!OrderName Name;" + 
 				"	Height;" + 
 				"	Date;" + 
 				"};";
@@ -683,7 +683,7 @@ public class DBExecTest extends TestCase {
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec = config.getPersister(t);
+		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
@@ -695,7 +695,7 @@ public class DBExecTest extends TestCase {
 		assertEquals(4, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(250, metaData.getColumnDisplaySize(i));
 		i++;
@@ -716,9 +716,9 @@ public class DBExecTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
-				"type Person { " + 
+				"tx Order { " + 
 				"	!Name;" + 
-				"	PersonName Name;" + 
+				"	OrderName Name;" + 
 				"	Height;" + 
 				"	Date;" + 
 				"};";
@@ -727,7 +727,7 @@ public class DBExecTest extends TestCase {
 		assertEquals(1, dbExec.getAll().size());
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		dbExec = config.getPersister(t);
+		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
 
 		assertEquals(0, dbExec.getAll().size());
 
@@ -754,7 +754,7 @@ public class DBExecTest extends TestCase {
 		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
-		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
@@ -789,11 +789,11 @@ public class DBExecTest extends TestCase {
 
 		//@formatter:off
 		String textRef = "" +
-				"type Company { " +
+				"tx Company { " +
 				"	!Rb1 Name;" +
 				"};";
 		String text = "" +
-				"type TestPerson { " +
+				"tx TestOrder { " +
 				"	!A1 Name;" +
 				"   A2{" +
 				"		!B1 Name;" +
@@ -824,11 +824,11 @@ public class DBExecTest extends TestCase {
 		t = loader.testDefineNebula(new StringReader(textRef)).get(0);
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
 		EditableEntity data;
-		dbExec = config.getPersister(t);
+		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
 		dbExec.drop();
 		dbExec = null;
 
-		dbExec = config.getPersister(t);
+		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -972,7 +972,7 @@ public class DBExecTest extends TestCase {
 	public final void testRemoveColumn() {
 		//@formatter:off
 		String text = "" +
-				"type Person { " +
+				"tx Order { " +
 				"	!Name;" +
 				"	Age;" +
 				"};";
@@ -980,7 +980,7 @@ public class DBExecTest extends TestCase {
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
 		EditableEntity data;
-		dbExec = config.getPersister(t);
+		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
 		// dbExec.init();
 
 		try {
@@ -999,12 +999,12 @@ public class DBExecTest extends TestCase {
 
 		assertNotNull(data);
 
-		text = "" + "type Person { " + "	!Name;" + "};";
+		text = "" + "tx Order { " + "	!Name;" + "};";
 		// @formatter:on
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec = config.getPersister(t);
+		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
 		// dbExec.init();
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);

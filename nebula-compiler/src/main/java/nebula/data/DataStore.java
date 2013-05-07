@@ -2,17 +2,15 @@ package nebula.data;
 
 import java.util.List;
 
-import nebula.Filter;
 import nebula.lang.Type;
 
 public interface DataStore<V extends Identifiable> extends Identifiable {
 	void load();
 	void unload();
 	
-	V createNew();	
 	V get(String key);
 	
-	List<V> query(Filter<V> filter);	
+	List<V> query(DataFilter<V> filter);	
 	Type getType();
 	
 	void markChanged(V v);
