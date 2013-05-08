@@ -11,7 +11,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nebula.data.DataFilter;
 import nebula.data.json.DataHelper;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -20,6 +19,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import util.FileUtil;
+
+import com.google.common.base.Predicate;
 
 public class TypeListResouce extends AbstractResouce {
 	private static Log log = LogFactory.getLog(TypeListResouce.class);
@@ -49,7 +50,7 @@ public class TypeListResouce extends AbstractResouce {
 			this.lastModified = newModified;
 			dataList = typeLoader.all();
 		} else {
-			DataFilter<Type> filter = filterBuilder.buildFrom(req.getParameterMap(), null);
+			Predicate<Type> filter = filterBuilder.buildFrom(req.getParameterMap(), null);
 			dataList = typeLoader.all().query(filter);
 		}
 

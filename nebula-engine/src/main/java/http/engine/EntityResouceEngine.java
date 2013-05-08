@@ -73,7 +73,7 @@ public class EntityResouceEngine implements ResourceEngine {
 		} else {
 
 			DataHolder<DataStore<Entity>> storeHolder = persistence.define(Entity.class, typeName);
-			DataHolder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(storeHolder);
+			DataHolder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(storeHolder,typeLoader.findType(typeName));
 
 			if (id != null) {
 				return new EntityResouce(jsonHolder, storeHolder, id);

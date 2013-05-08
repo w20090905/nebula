@@ -8,9 +8,10 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import nebula.IDAdapter;
 import nebula.SmartList;
-import nebula.data.DataFilter;
+import nebula.data.KeyMaker;
+
+import com.google.common.base.Predicate;
 
 public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartList<E> {
 
@@ -18,7 +19,7 @@ public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartLis
 
 	final Map<String, E> indexes = new HashMap<String, E>();
 	final Map<String, Integer> indexI = new HashMap<String, Integer>();
-	final IDAdapter<E> identifier;
+	final KeyMaker<E> identifier;
 
 	private final String name;
 
@@ -26,20 +27,20 @@ public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartLis
 		return name;
 	}
 
-	public SmartListImp(String name, IDAdapter<E> identifier) {
+	public SmartListImp(String name, KeyMaker<E> identifier) {
 		super();
 		this.identifier = identifier;
 		this.name = name;
 	}
 
-	public SmartListImp(String name, IDAdapter<E> identifier, Collection<? extends E> c) {
+	public SmartListImp(String name, KeyMaker<E> identifier, Collection<? extends E> c) {
 		super(c);
 		this.name = name;
 		this.identifier = identifier;
 		rebuildIndex();
 	}
 
-	public SmartListImp(String name, IDAdapter<E> identifier, E[] toCopyIn) {
+	public SmartListImp(String name, KeyMaker<E> identifier, E[] toCopyIn) {
 		super(toCopyIn);
 		this.name = name;
 		this.identifier = identifier;
@@ -49,29 +50,29 @@ public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartLis
 	protected void rebuildIndex() {
 		indexI.clear();
 		indexes.clear();
-		if (this.identifier instanceof AutoIdentifiable) {
-			ListIterator<E> list = super.listIterator();
-			while (list.hasNext()) {
-				int i = list.nextIndex();
-				E e = list.next();
-				String key = identifier.getID(e);
-				indexI.put(key, i);
-				indexes.put(key, e);
-			}
-			AutoIdentifiable<E> auto = (AutoIdentifiable<E>) this.identifier;
-			for (E e : this) {
-				auto.set(indexes, (E) e);
-			}
-		} else {
-			ListIterator<E> list = super.listIterator();
-			while (list.hasNext()) {
-				int i = list.nextIndex();
-				E e = list.next();
-				String key = identifier.getID(e);
-				indexI.put(key, i);
-				indexes.put(key, e);
-			}
+		// if (this.identifier instanceof AutoIdentifiable) {
+		// ListIterator<E> list = super.listIterator();
+		// while (list.hasNext()) {
+		// int i = list.nextIndex();
+		// E e = list.next();
+		// String key = identifier.apply(e);
+		// indexI.put(key, i);
+		// indexes.put(key, e);
+		// }
+		// AutoIdentifiable<E> auto = (AutoIdentifiable<E>) this.identifier;
+		// for (E e : this) {
+		// auto.set(indexes, (E) e);
+		// }
+		// } else {
+		ListIterator<E> list = super.listIterator();
+		while (list.hasNext()) {
+			int i = list.nextIndex();
+			E e = list.next();
+			String key = identifier.apply(e);
+			indexI.put(key, i);
+			indexes.put(key, e);
 		}
+		// }
 	}
 
 	@Override
@@ -92,10 +93,10 @@ public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartLis
 	}
 
 	public int indexOfByKey(E element) {
-		Integer in = indexI.get(identifier.getID(element));
-		if(in!=null){
+		Integer in = indexI.get(identifier.apply(element));
+		if (in != null) {
 			return in;
-		}else{
+		} else {
 			return -1;
 		}
 	}
@@ -124,10 +125,10 @@ public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartLis
 	}
 
 	@Override
-	public SmartList<E> query(DataFilter<E> match) {
+	public SmartList<E> query(Predicate<E> match) {
 		SmartListImp<E> newList = new SmartListImp<E>(name, identifier);
 		for (E item : this) {
-			if(match.match(item))newList.add(item);
+			if (match.apply(item)) newList.add(item);
 		}
 		return newList;
 	}
@@ -189,6 +190,6 @@ public class SmartListImp<E> extends CopyOnWriteArrayList<E> implements SmartLis
 
 	@Override
 	public void save(E data) {
-		this.add(data);		
+		this.add(data);
 	}
 }

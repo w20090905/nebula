@@ -9,7 +9,8 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 import nebula.data.Entity;
-import nebula.data.DataFilter;
+
+import com.google.common.base.Predicate;
 
 public class EntityFilterBuilderTest extends TestCase {
 
@@ -66,12 +67,12 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		DataFilter<Entity> filter = builder.buildFrom(query, null);
+		Predicate<Entity> filter = builder.buildFrom(query, null);
 
-		boolean result = filter.match(person1_21);
+		boolean result = filter.apply(person1_21);
 		assertTrue(result);
 
-		result = filter.match(person2_22);
+		result = filter.apply(person2_22);
 		assertFalse(result);
 	}
 
@@ -81,11 +82,11 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		DataFilter<Entity> filter = builder.buildFrom(query, null);
+		Predicate<Entity> filter = builder.buildFrom(query, null);
 
-		assertFalse(filter.match(person1_21));
-		assertTrue(filter.match(person2_22));
-		assertTrue(filter.match(person3_23));
+		assertFalse(filter.apply(person1_21));
+		assertTrue(filter.apply(person2_22));
+		assertTrue(filter.apply(person3_23));
 	}
 
 	public void testOp_to_Query() {
@@ -94,11 +95,11 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		DataFilter<Entity> filter = builder.buildFrom(query, null);
+		Predicate<Entity> filter = builder.buildFrom(query, null);
 
-		assertTrue(filter.match(person1_21));
-		assertTrue(filter.match(person2_22));
-		assertFalse(filter.match(person3_23));
+		assertTrue(filter.apply(person1_21));
+		assertTrue(filter.apply(person2_22));
+		assertFalse(filter.apply(person3_23));
 	}
 
 	public void testOp_gt_Query() {
@@ -107,11 +108,11 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		DataFilter<Entity> filter = builder.buildFrom(query, null);
+		Predicate<Entity> filter = builder.buildFrom(query, null);
 
-		assertFalse(filter.match(person1_21));
-		assertFalse(filter.match(person2_22));
-		assertTrue(filter.match(person3_23));
+		assertFalse(filter.apply(person1_21));
+		assertFalse(filter.apply(person2_22));
+		assertTrue(filter.apply(person3_23));
 	}
 
 	public void testOp_ge_Query() {
@@ -120,11 +121,11 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		DataFilter<Entity> filter = builder.buildFrom(query, null);
+		Predicate<Entity> filter = builder.buildFrom(query, null);
 
-		assertFalse(filter.match(person1_21));
-		assertTrue(filter.match(person2_22));
-		assertTrue(filter.match(person3_23));
+		assertFalse(filter.apply(person1_21));
+		assertTrue(filter.apply(person2_22));
+		assertTrue(filter.apply(person3_23));
 	}
 
 	public void testOp_lt_Query() {
@@ -133,11 +134,11 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		DataFilter<Entity> filter = builder.buildFrom(query, null);
+		Predicate<Entity> filter = builder.buildFrom(query, null);
 
-		assertTrue(filter.match(person1_21));
-		assertFalse(filter.match(person2_22));
-		assertFalse(filter.match(person3_23));
+		assertTrue(filter.apply(person1_21));
+		assertFalse(filter.apply(person2_22));
+		assertFalse(filter.apply(person3_23));
 	}
 
 	public void testOp_le_Query() {
@@ -146,11 +147,11 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		DataFilter<Entity> filter = builder.buildFrom(query, null);
+		Predicate<Entity> filter = builder.buildFrom(query, null);
 
-		assertTrue(filter.match(person1_21));
-		assertTrue(filter.match(person2_22));
-		assertFalse(filter.match(person3_23));
+		assertTrue(filter.apply(person1_21));
+		assertTrue(filter.apply(person2_22));
+		assertFalse(filter.apply(person3_23));
 	}
 
 	public void testOp_eq_Query() {
@@ -159,11 +160,11 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		DataFilter<Entity> filter = builder.buildFrom(query, null);
+		Predicate<Entity> filter = builder.buildFrom(query, null);
 
-		assertFalse(filter.match(person1_21));
-		assertTrue(filter.match(person2_22));
-		assertFalse(filter.match(person3_23));
+		assertFalse(filter.apply(person1_21));
+		assertTrue(filter.apply(person2_22));
+		assertFalse(filter.apply(person3_23));
 	}
 
 	public void testOp_ne_Query() {
@@ -172,11 +173,11 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		DataFilter<Entity> filter = builder.buildFrom(query, null);
+		Predicate<Entity> filter = builder.buildFrom(query, null);
 
-		assertTrue(filter.match(person1_21));
-		assertFalse(filter.match(person2_22));
-		assertTrue(filter.match(person3_23));
+		assertTrue(filter.apply(person1_21));
+		assertFalse(filter.apply(person2_22));
+		assertTrue(filter.apply(person3_23));
 	}
 
 	public void testOp_in_Query() {
@@ -185,11 +186,11 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		DataFilter<Entity> filter = builder.buildFrom(query, null);
+		Predicate<Entity> filter = builder.buildFrom(query, null);
 
-		assertFalse(filter.match(person1_21));
-		assertTrue(filter.match(person2_22));
-		assertFalse(filter.match(person3_23));
+		assertFalse(filter.apply(person1_21));
+		assertTrue(filter.apply(person2_22));
+		assertFalse(filter.apply(person3_23));
 	}
 
 	public void testOp_and_Query() {
@@ -198,11 +199,11 @@ public class EntityFilterBuilderTest extends TestCase {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		}
 
-		DataFilter<Entity> filter = builder.buildFrom(query, null);
+		Predicate<Entity> filter = builder.buildFrom(query, null);
 
-		assertFalse(filter.match(person1_21));
-		assertTrue(filter.match(person2_22));
-		assertFalse(filter.match(person3_23));
+		assertFalse(filter.apply(person1_21));
+		assertTrue(filter.apply(person2_22));
+		assertFalse(filter.apply(person3_23));
 
 		query = parserQuery("name:has=lian2&age=23");
 		for (Map.Entry<String, String[]> entry : query.entrySet()) {
@@ -211,9 +212,9 @@ public class EntityFilterBuilderTest extends TestCase {
 
 		filter = builder.buildFrom(query, null);
 
-		assertFalse(filter.match(person1_21));
-		assertFalse(filter.match(person2_22));
-		assertFalse(filter.match(person3_23));
+		assertFalse(filter.apply(person1_21));
+		assertFalse(filter.apply(person2_22));
+		assertFalse(filter.apply(person3_23));
 
 		query = parserQuery("name:has=lian1&age=23");
 		for (Map.Entry<String, String[]> entry : query.entrySet()) {
@@ -222,9 +223,9 @@ public class EntityFilterBuilderTest extends TestCase {
 
 		filter = builder.buildFrom(query, null);
 
-		assertFalse(filter.match(person1_21));
-		assertFalse(filter.match(person2_22));
-		assertFalse(filter.match(person3_23));
+		assertFalse(filter.apply(person1_21));
+		assertFalse(filter.apply(person2_22));
+		assertFalse(filter.apply(person3_23));
 
 		query = parserQuery("name:has=lian3&age=23");
 		for (Map.Entry<String, String[]> entry : query.entrySet()) {
@@ -233,8 +234,8 @@ public class EntityFilterBuilderTest extends TestCase {
 
 		filter = builder.buildFrom(query, null);
 
-		assertFalse(filter.match(person1_21));
-		assertFalse(filter.match(person2_22));
-		assertTrue(filter.match(person3_23));
+		assertFalse(filter.apply(person1_21));
+		assertFalse(filter.apply(person2_22));
+		assertTrue(filter.apply(person3_23));
 	}
 }

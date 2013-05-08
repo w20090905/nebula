@@ -7,16 +7,20 @@ import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
-import nebula.data.Entity;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
-import nebula.data.DataFilter;
+import nebula.data.Entity;
+import nebula.data.Index;
 import nebula.lang.Field;
 import nebula.lang.Type;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
+
 public class EntityDataStore implements DataStore<Entity> {
-	public static final String KEY_NAME = "ID"; 
-	
+	public static final String KEY_NAME = "ID";
+
 	final DataPersister<Entity> persistence;
 	final Type type;
 
@@ -32,30 +36,24 @@ public class EntityDataStore implements DataStore<Entity> {
 		quickIndex = new HashMap<String, Entity>();
 	}
 
-//	@Override
-	public Entity createNew() {
-		EditableEntity agent = new EditableEntity(this);
-		return agent;
-	}
-
 	@Override
 	public Entity get(String key) {
 		return quickIndex.get(key);
 	}
 
 	@Override
-	public List<Entity> query(DataFilter<Entity> filter) {
+	public List<Entity> query(Predicate<Entity> filter) {
 		List<Entity> newList = new ArrayList<Entity>();
 		for (Entity item : datas) {
-			if (filter.match(item)) newList.add(item);
+			if (filter.apply(item)) newList.add(item);
 		}
 		return newList;
 	}
 
 	@Override
 	public void add(Entity v) {
-		if(v.isTransient()){
-			EditableEntity entity = (EditableEntity)v;
+		if (v.isTransient()) {
+			EditableEntity entity = (EditableEntity) v;
 			entity.store = this;
 		}
 		persistence.add(v);
@@ -123,12 +121,10 @@ public class EntityDataStore implements DataStore<Entity> {
 		return this.datas;
 	}
 
-	@Override
 	public String getID() {
 		return type.getName();
 	}
 
-	@Override
 	public Type getType() {
 		return this.type;
 	}
@@ -147,6 +143,24 @@ public class EntityDataStore implements DataStore<Entity> {
 	public void unload() {
 		// TODO Auto-generated method stub
 
+	}
+
+	Map<Index<Entity, String>, ListMultimap<String, Entity>> quickClassificator;
+
+	@Override
+	public void addIndex(Index<Entity, String> key) {
+		ListMultimap<String, Entity> data = ArrayListMultimap.create();
+		quickClassificator.put(key, data);
+	}
+
+	@Override
+	public ListMultimap<String, Entity> getByIndex(Index<Entity, String> key) {
+		return quickClassificator.get(key);
+	}
+
+	@Override
+	public void removeIndex(Index<Entity, String> key) {
+		quickClassificator.remove(key);
 	}
 
 }

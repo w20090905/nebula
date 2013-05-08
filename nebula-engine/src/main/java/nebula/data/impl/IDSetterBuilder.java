@@ -3,6 +3,7 @@ package nebula.data.impl;
 import java.util.List;
 
 import nebula.data.Entity;
+import nebula.data.KeyMaker;
 import nebula.lang.Field;
 import nebula.lang.Reference;
 import nebula.lang.Type;
@@ -16,7 +17,7 @@ import com.google.common.collect.Lists;
 public class IDSetterBuilder {
 	static Log log = LogFactory.getLog(IDSetterBuilder.class); 
 
-	public static IDSetter getIDSetter(Type type) {
+	public static KeyMaker<Entity> getIDSetter(Type type) {
 		List<String> keys = Lists.newArrayList();
 		for (Field f : type.getFields()) {
 			if (f.getType().getStandalone() == TypeStandalone.Basic && f.isKey()) {
@@ -47,7 +48,7 @@ public class IDSetterBuilder {
 		}
 	}
 
-	static private  class IDSetter1 implements IDSetter {
+	static private  class IDSetter1 implements KeyMaker<Entity> {
 		final String key1;
 
 		IDSetter1(String key1) {
@@ -55,12 +56,12 @@ public class IDSetterBuilder {
 		}
 
 		@Override
-		public String getID(Entity entity) {
+		public String apply(Entity entity) {
 			return entity.get(key1).toString();
 		}
 	}
 
-	static private  class IDSetter2 implements IDSetter {
+	static private  class IDSetter2 implements KeyMaker<Entity> {
 		final String key1;
 		final String key2;
 
@@ -70,12 +71,12 @@ public class IDSetterBuilder {
 		}
 
 		@Override
-		public String getID(Entity entity) {
+		public String apply(Entity entity) {
 			return (String) entity.get(key1) + (String) entity.get(key2);
 		}
 	}
 
-	static private  class IDSetter3 implements IDSetter {
+	static private  class IDSetter3 implements KeyMaker<Entity> {
 		final String key1;
 		final String key2;
 		final String key3;
@@ -87,12 +88,12 @@ public class IDSetterBuilder {
 		}
 
 		@Override
-		public String getID(Entity entity) {
+		public String apply(Entity entity) {
 			return (String) entity.get(key1) + (String) entity.get(key2) + (String) entity.get(key3);
 		}
 	}
 
-	static private class IDSetter4 implements IDSetter {
+	static private class IDSetter4 implements KeyMaker<Entity> {
 		final String key1;
 		final String key2;
 		final String key3;
@@ -106,7 +107,7 @@ public class IDSetterBuilder {
 		}
 
 		@Override
-		public String getID(Entity entity) {
+		public String apply(Entity entity) {
 			return (String) entity.get(key1) + (String) entity.get(key2) + (String) entity.get(key3)
 					+ (String) entity.get(key4);
 		}

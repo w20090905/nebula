@@ -21,14 +21,14 @@ public class EntityFilterTest extends TestCase {
 		person.put("name", "wangshilian");
 		person.put("age", 19);
 		
-		boolean result = filter.match(person);
+		boolean result = filter.apply(person);
 		assertTrue(result);
 		
 		person = new EditableEntity(null);
 		person.put("name", "wangshilian");
 		person.put("age", 13);
 		
-		result = filter.match(person);
+		result = filter.apply(person);
 		assertFalse(result);
 	}
 

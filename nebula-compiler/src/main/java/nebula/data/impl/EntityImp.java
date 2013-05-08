@@ -3,11 +3,10 @@ package nebula.data.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import nebula.data.Entity;
 import nebula.data.DataStore;
-import nebula.data.Identifiable;
+import nebula.data.Entity;
 
-public class EntityImp implements Identifiable, Entity {
+public class EntityImp implements Entity {
 	Map<String, Object> data;
 	DataStore<Entity> store;
 

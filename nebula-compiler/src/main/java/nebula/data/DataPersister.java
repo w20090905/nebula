@@ -2,7 +2,7 @@ package nebula.data;
 
 
 
-public interface DataPersister<V extends Identifiable>{
+public interface DataPersister<V>{
 	void load();
 	void unload();
 	

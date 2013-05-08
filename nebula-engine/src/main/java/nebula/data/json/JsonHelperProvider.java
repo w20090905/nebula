@@ -33,11 +33,10 @@ public class JsonHelperProvider {
 //		return new DefaultJsonHelper<>(factory, new EntityJsonDataDealer(type));
 //	}
 
-	public static DataHolder<DataHelper<Entity,Reader,Writer>> getHelper(final DataHolder<DataStore<Entity>> storeHolder) {
+	public static DataHolder<DataHelper<Entity,Reader,Writer>> getHelper(final DataHolder<DataStore<Entity>> storeHolder,final Type type) {
 		DataHolder<DataHelper<Entity,Reader,Writer>> he = new DataHolder<DataHelper<Entity,Reader,Writer>>() {
 			DataStore<Entity> lastDataStore = storeHolder.get();
-			DataHelper<Entity,Reader,Writer> lastJsonHelper = new DefaultJsonHelper<Entity>(factory, new EntitySerializer(storeHolder
-					.get().getType()));
+			DataHelper<Entity,Reader,Writer> lastJsonHelper = new DefaultJsonHelper<Entity>(factory, new EntitySerializer(type));
 
 			@Override
 			public void set(DataHelper<Entity,Reader,Writer> newData,DataHelper<Entity,Reader,Writer> oldData) {
@@ -48,8 +47,7 @@ public class JsonHelperProvider {
 			public DataHelper<Entity,Reader,Writer> get() {
 				DataStore<Entity> currentDataStore = storeHolder.get();
 				if (lastDataStore != currentDataStore) {
-					lastJsonHelper = new DefaultJsonHelper<Entity>(factory, new EntitySerializer(storeHolder.get()
-							.getType()));
+					lastJsonHelper = new DefaultJsonHelper<Entity>(factory, new EntitySerializer(type));
 				}
 				return lastJsonHelper;
 			}

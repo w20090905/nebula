@@ -1,11 +1,12 @@
 package nebula.data.impl;
 
 import nebula.data.Entity;
-import nebula.data.DataFilter;
 import nebula.expr.LogicExp;
 import nebula.expr.QuickExprBuilder;
 
-public class EntityFilter extends QuickExprBuilder implements DataFilter<Entity> {
+import com.google.common.base.Predicate;
+
+public class EntityFilter extends QuickExprBuilder implements Predicate<Entity> {
 
 	private Entity v;
 
@@ -24,7 +25,7 @@ public class EntityFilter extends QuickExprBuilder implements DataFilter<Entity>
 	}
 	
 	@Override
-	public boolean match(Entity v) {
+	public boolean apply(Entity v) {
 		this.v = v;
 		boolean result = ((LogicExp)exp).exec();
 		v = null;

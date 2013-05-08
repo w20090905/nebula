@@ -20,7 +20,7 @@ import nebula.lang.TypeLoaderForTest;
 
 public class JsonProviderTest extends TestCase {
 	TypeLoaderForTest loader;
-	Type t;
+	Type type;
 	DataHolder<DataStore<Entity>> store;
 	
 	DataPersister<Entity> persistence;
@@ -49,10 +49,10 @@ public class JsonProviderTest extends TestCase {
 				"};";
 		//@formatter:on		
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		store = persistence.define(Entity.class, t.getName());
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
+		store = persistence.define(Entity.class, type.getName());
 		
-		DataHolder<DataHelper<Entity,Reader,Writer>> json =   JsonHelperProvider.getHelper(store);
+		DataHolder<DataHelper<Entity,Reader,Writer>> json =   JsonHelperProvider.getHelper(store,type);
 		Entity n =  new EditableEntity();
 		
 		n=json.get().readFrom(n,new StringReader("{" +

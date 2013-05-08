@@ -13,9 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import nebula.IDAdapter;
 import nebula.SmartList;
 import nebula.data.Entity;
+import nebula.data.KeyMaker;
 import nebula.data.impl.EditableEntity;
 import nebula.frame.SmartListImp;
 import nebula.lang.Type;
@@ -87,9 +87,9 @@ public class DbMasterDataExecutor implements DbDataExecutor {
 		try {
 
 			final SmartList<DatabaseColumn> mapColumns = new SmartListImp<DatabaseColumn>("DbColumn",
-					new IDAdapter<DatabaseColumn>() {
+					new KeyMaker<DatabaseColumn>() {
 						@Override
-						public String getID(DatabaseColumn data) {
+						public String apply(DatabaseColumn data) {
 							return data.columnName;
 						}
 					});

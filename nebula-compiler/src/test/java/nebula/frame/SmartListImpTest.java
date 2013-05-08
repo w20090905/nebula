@@ -1,9 +1,10 @@
 package nebula.frame;
 
-import nebula.IDAdapter;
-import nebula.SmartList;
-import nebula.data.DataFilter;
 import junit.framework.TestCase;
+import nebula.SmartList;
+import nebula.data.KeyMaker;
+
+import com.google.common.base.Predicate;
 
 public class SmartListImpTest extends TestCase {
 	SmartListImp<Person> list = null;
@@ -17,9 +18,9 @@ public class SmartListImpTest extends TestCase {
 	Person p = null;
 
 	protected void setUp() throws Exception {
-		list = new SmartListImp<Person>(name, new IDAdapter<Person>() {
+		list = new SmartListImp<Person>(name, new KeyMaker<Person>() {
 			@Override
-			public String getID(Person data) {
+			public String apply(Person data) {
 				return data.name;
 			}
 		});
@@ -98,9 +99,9 @@ public class SmartListImpTest extends TestCase {
 		list.add(p);
 		
 		assertEquals(5, list.size());
-		SmartList<Person> result =  list.query(new DataFilter<SmartListImpTest.Person>() {			
+		SmartList<Person> result =  list.query(new Predicate<SmartListImpTest.Person>() {			
 			@Override
-			public boolean match(Person v) {
+			public boolean apply(Person v) {
 				return v.age == 12;
 			}
 		});

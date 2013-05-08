@@ -15,9 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import nebula.data.DataHolder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.DataFilter;
 import nebula.data.json.DataHelper;
 import util.FileUtil;
+
+import com.google.common.base.Predicate;
 
 public class EntityListResouce extends AbstractResouce {
 	private final DataHolder<DataHelper<Entity, Reader, Writer>> jsonHolder;
@@ -38,7 +39,7 @@ public class EntityListResouce extends AbstractResouce {
 		if (req.getQueryString() == null || req.getQueryString().length() == 0) {
 			dataList = datastoreHolder.get().all();
 		} else {
-			DataFilter<Entity> filter = filterBuilder.buildFrom(req.getParameterMap(), null);
+			Predicate<Entity> filter = filterBuilder.buildFrom(req.getParameterMap(), null);
 			dataList = datastoreHolder.get().query(filter);
 		}
 

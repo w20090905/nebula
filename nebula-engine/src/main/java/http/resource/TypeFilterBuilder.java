@@ -3,10 +3,11 @@ package http.resource;
 import java.util.HashMap;
 import java.util.Map;
 
-import nebula.data.DataFilter;
 import nebula.expr.LogicExp;
 import nebula.expr.QuickExprBuilder;
 import nebula.lang.Type;
+
+import com.google.common.base.Predicate;
 
 public class TypeFilterBuilder {
 	
@@ -15,7 +16,7 @@ public class TypeFilterBuilder {
 		
 	}
 
-	public DataFilter<Type> buildFrom(Map<String, String[]> params, Type type) {
+	public Predicate<Type> buildFrom(Map<String, String[]> params, Type type) {
 		TypeFilter builder = new TypeFilter();
 		LogicExp exp = builder.Nop();
 
@@ -28,7 +29,7 @@ public class TypeFilterBuilder {
 	}
 	
 	
-	class TypeFilter extends QuickExprBuilder  implements DataFilter<Type>{
+	class TypeFilter extends QuickExprBuilder  implements Predicate<Type>{
 		final Map<String, GetStringValue<Type>> strings;
 		private Type v;
 		
@@ -77,7 +78,7 @@ public class TypeFilterBuilder {
 		
 	
 		@Override
-		public boolean match(Type v) {
+		public boolean apply(Type v) {
 			this.v = v;
 			boolean result = ((LogicExp)exp).exec();
 			v = null;

@@ -4,10 +4,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import nebula.data.Identifiable;
 import util.InheritHashMap;
 
-public class Type implements Identifiable {
+public class Type{
 	final TypeLoader loader;
 
 	final Type residedType;
@@ -171,11 +170,6 @@ public class Type implements Identifiable {
 	public String toString() {
 		return "Type [name=" + name + ", nameAlias=" + nameAlias + ", standalone=" + standalone + ", text=" + code
 				+ "]";
-	}
-
-	@Override
-	public String getID() {
-		return name;
 	}
 
 	public long getLastModified() {

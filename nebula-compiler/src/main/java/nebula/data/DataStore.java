@@ -2,16 +2,20 @@ package nebula.data;
 
 import java.util.List;
 
-import nebula.lang.Type;
+import com.google.common.base.Predicate;
+import com.google.common.collect.ListMultimap;
 
-public interface DataStore<V extends Identifiable> extends Identifiable {
+public interface DataStore<V> {
 	void load();
 	void unload();
 	
 	V get(String key);
 	
-	List<V> query(DataFilter<V> filter);	
-	Type getType();
+	List<V> query(Predicate<V> filter);	
+
+	void addIndex(Index<V, String> key);
+	void removeIndex(Index<V, String> key);
+	ListMultimap<String, V> getByIndex(Index<V, String> key);
 	
 	void markChanged(V v);
 	void apply(V newV);

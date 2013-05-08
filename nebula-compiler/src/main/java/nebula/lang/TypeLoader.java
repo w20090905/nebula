@@ -5,10 +5,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
 import java.util.List;
-import java.util.Map;
 
 import nebula.SmartList;
-import nebula.frame.AutoIdentifiable;
+import nebula.data.KeyMaker;
 import nebula.frame.SmartListImp;
 
 import org.antlr.runtime.ANTLRInputStream;
@@ -21,22 +20,22 @@ import org.apache.commons.logging.LogFactory;
 
 import util.FileUtil;
 
-class AutoIdentifiableType implements AutoIdentifiable<Type> {
-	@Override
-	public String getID(Type data) {
-		return data.name;
-	}
-
-	@Override
-	public void set(Map<String, Type> map, Type data) {
-		map.put(data.name, data);
-		if (data.nameAlias != null) {
-			for (String v : data.nameAlias.alias.values()) {
-				map.put(v, data);
-			}
-		}
-	}
-};
+//class AutoIdentifiableType implements AutoIdentifiable<Type> {
+//	@Override
+//	public String getID(Type data) {
+//		return data.name;
+//	}
+//
+//	@Override
+//	public void set(Map<String, Type> map, Type data) {
+//		map.put(data.name, data);
+//		if (data.nameAlias != null) {
+//			for (String v : data.nameAlias.alias.values()) {
+//				map.put(v, data);
+//			}
+//		}
+//	}
+//};
 
 public abstract class TypeLoader {
 	protected Log log = LogFactory.getLog(this.getClass());
@@ -45,7 +44,14 @@ public abstract class TypeLoader {
 
 	protected long lastModified;
 
-	SmartList<Type> types = new SmartListImp<Type>("Type", new AutoIdentifiableType());
+	KeyMaker<Type> typeIDSetter =new KeyMaker<Type>() {
+		@Override
+		public String apply(Type v) {
+			return v.name;
+		}		
+	};
+	
+	SmartList<Type> types = new SmartListImp<Type>("Type", typeIDSetter);
 
 	public TypeLoader(TypeLoader parent) {
 		this.parent = parent;
@@ -172,7 +178,7 @@ public abstract class TypeLoader {
 		if (parent == null) {
 			return this.types;
 		} else {
-			SmartList<Type> list = new SmartListImp<Type>("Type", new AutoIdentifiableType());
+			SmartList<Type> list = new SmartListImp<Type>("Type", typeIDSetter);
 			list.addAll(types);
 			list.addAll(parent.all());
 			return list;
