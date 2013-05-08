@@ -24,6 +24,8 @@ import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
+import com.google.common.collect.Maps;
+
 public class BasicResourceContainer extends AbstractHandler {
 	private Log log = LogFactory.getLog(this.getClass());
 
@@ -37,7 +39,7 @@ public class BasicResourceContainer extends AbstractHandler {
 
 	@Inject
 	public BasicResourceContainer(final Configurable<BasicResourceContainer> conf) {
-		engines = new HashMap<>();
+		engines = Maps.newHashMap();
 		conf.configure(this);
 
 		this.defaultEngine = engines.get("*");

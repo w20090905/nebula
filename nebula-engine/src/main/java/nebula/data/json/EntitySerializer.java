@@ -150,10 +150,10 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 	void outputInList(JsonGenerator out, Entity current) throws Exception {
 		Entity entity = current;
 		out.writeStartObject();
-		
+
 		out.writeFieldName("_IDX");
-		out.writeNumber((int) current.get("_IDX"));
-		
+		out.writeNumber((Integer) current.get("_IDX"));
+
 		out.writeFieldName("_STS");
 		out.writeString("R");
 
@@ -307,7 +307,7 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 				if ("D".equals(in.getText())) {
 					entity.put("_STS", "D");
 				}
-			}else{
+			} else {
 				throw new RuntimeException("Parse json error!");
 			}
 

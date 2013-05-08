@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import nebula.data.DataClassificator;
 import nebula.data.Entity;
 
 import org.joda.time.DateTime;
+
+import com.google.common.base.Objects;
 
 public class RecentDateDataClassificator implements DataClassificator<Entity> {
 
@@ -65,7 +66,7 @@ public class RecentDateDataClassificator implements DataClassificator<Entity> {
 
 	@Override
 	public void update(Entity oldData, Entity newData) {
-		if (Objects.equals(oldData.get(key), newData.get(key))) {
+		if (Objects.equal(oldData.get(key), newData.get(key))) {
 			return;
 		}
 		String oldClassification = classify(oldData);

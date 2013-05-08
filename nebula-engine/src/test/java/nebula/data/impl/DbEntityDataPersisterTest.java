@@ -115,14 +115,14 @@ public class DbEntityDataPersisterTest extends TestCase {
 		List<EditableEntity> entities = new ArrayList<EditableEntity>();
 		EditableEntity education = new EditableEntity();
 		education.put("School", "kunming");
-		education.put("DateFrom",Date.valueOf("1996-9-1"));
-		education.put("DateTo", Date.valueOf("2000-7-1"));
+		education.put("DateFrom",Date.valueOf("1996-09-01"));
+		education.put("DateTo", Date.valueOf("2000-07-01"));
 		entities.add(education);
 		
 		education = new EditableEntity();
 		education.put("School", "fuyang");
-		education.put("DateFrom",Date.valueOf("1993-9-1"));
-		education.put("DateTo", Date.valueOf("1996-7-1"));
+		education.put("DateFrom",Date.valueOf("1993-09-01"));
+		education.put("DateTo", Date.valueOf("1996-07-01"));
 		entities.add(education);
 		
 		v.put("Education", entities);
@@ -153,19 +153,19 @@ public class DbEntityDataPersisterTest extends TestCase {
 		int i = 0;
 		Entity edu =educationList.get(i);
 		assertEquals("kunming" ,edu.get("School"));
-		assertEquals(Date.valueOf("1996-9-1"), edu.get("DateFrom"));
-		assertEquals(Date.valueOf("2000-7-1"), edu.get("DateTo") );
+		assertEquals(Date.valueOf("1996-09-01"), edu.get("DateFrom"));
+		assertEquals(Date.valueOf("2000-07-01"), edu.get("DateTo") );
 		
 		i++;
 		edu =educationList.get(i);
 		assertEquals("fuyang" ,edu.get("School"));
-		assertEquals(Date.valueOf("1993-9-1"), edu.get("DateFrom"));
-		assertEquals(Date.valueOf("1996-7-1"), edu.get("DateTo") );
+		assertEquals(Date.valueOf("1993-09-01"), edu.get("DateFrom"));
+		assertEquals(Date.valueOf("1996-07-01"), edu.get("DateTo") );
 		
 		education = new EditableEntity();
 		education.put("School", "fuyang");
-		education.put("DateFrom",Date.valueOf("1993-9-1"));
-		education.put("DateFrom", Date.valueOf("1996-7-1"));
+		education.put("DateFrom",Date.valueOf("1993-09-01"));
+		education.put("DateFrom", Date.valueOf("1996-07-01"));
 	}
 	
 	// public final void testRemove() {

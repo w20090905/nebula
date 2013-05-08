@@ -1,10 +1,6 @@
 package nebula.data.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import nebula.data.Entity;
 import nebula.lang.Field;
@@ -12,11 +8,16 @@ import nebula.lang.Reference;
 import nebula.lang.Type;
 import nebula.lang.TypeStandalone;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.google.common.collect.Lists;
+
 public class IDSetterBuilder {
 	static Log log = LogFactory.getLog(IDSetterBuilder.class); 
 
 	public static IDSetter getIDSetter(Type type) {
-		List<String> keys = new ArrayList<>();
+		List<String> keys = Lists.newArrayList();
 		for (Field f : type.getFields()) {
 			if (f.getType().getStandalone() == TypeStandalone.Basic && f.isKey()) {
 				keys.add(f.getName());

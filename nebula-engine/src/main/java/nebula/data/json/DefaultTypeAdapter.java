@@ -124,7 +124,7 @@ class DatetimeJsonDataDealer extends DefaultTypeAdapter<Timestamp> {
 }
 
 class TimestampJsonDataDealer extends DefaultTypeAdapter<Timestamp> {
-	final DateFormat formater = new SimpleDateFormat("YYYY-MM-DD HH:mm:DD.sss");
+	final DateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
 	public Timestamp readFrom(JsonParser parser, String name) throws Exception {
 		JsonToken token = parser.getCurrentToken();
