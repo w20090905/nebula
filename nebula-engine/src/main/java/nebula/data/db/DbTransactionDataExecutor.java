@@ -111,7 +111,7 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 				ResultSetMetaData metaData = rs.getMetaData();
 				int columnsSize = metaData.getColumnCount();
 
-				if (log.isDebugEnabled()) log.debug("== Before update column ");
+				if (log.isTraceEnabled()) log.trace("Before update column ");
 
 				ArrayList<String> needDeletedColumns = new ArrayList<String>();
 				Map<String, String> allColumns = new HashMap<String, String>();
@@ -416,8 +416,8 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 				pstmt.setObject(pos + i + 1, keys[i]);
 			}
 			res = pstmt.executeQuery();
-			if (log.isDebugEnabled()) {
-				log.debug("==\texecuteQuery Open Recordset");
+			if (log.isTraceEnabled()) {
+				log.trace("\texecuteQuery Open Recordset");
 			}
 			List<EditableEntity> list = new ArrayList<EditableEntity>();
 
@@ -434,8 +434,8 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 			try {
 				if (res != null) {
 					res.close();
-					if (log.isDebugEnabled()) {
-						log.debug("==\texecuteQuery Close Recordset");
+					if (log.isTraceEnabled()) {
+						log.trace("\texecuteQuery Close Recordset");
 					}
 				}
 			} catch (Exception e) {

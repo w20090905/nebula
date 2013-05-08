@@ -7,7 +7,7 @@ Code区分 Attr;
 类别 Attr;
 当前 Code;
 工厂类别 Attr;
-描述;
+描述 Description;
 规格 Attr;
 扁平百分比 Percent;
 轮辋直径 Width;

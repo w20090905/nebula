@@ -44,13 +44,13 @@ public abstract class TypeLoader {
 
 	protected long lastModified;
 
-	KeyMaker<Type> typeIDSetter =new KeyMaker<Type>() {
+	KeyMaker<Type> typeIDSetter = new KeyMaker<Type>() {
 		@Override
 		public String apply(Type v) {
 			return v.name;
-		}		
+		}
 	};
-	
+
 	SmartList<Type> types = new SmartListImp<Type>("Type", typeIDSetter);
 
 	public TypeLoader(TypeLoader parent) {
@@ -130,6 +130,9 @@ public abstract class TypeLoader {
 	}
 
 	public Type findType(String name) {
+		if (log.isTraceEnabled()) {
+			log.trace("search type define - " + name);
+		}
 		try {
 			Type type = parent.findType(name);
 			if (type != null) {
@@ -139,7 +142,7 @@ public abstract class TypeLoader {
 			type = types.get(name);
 			if (type != null) {
 				if (log.isTraceEnabled()) {
-					log.trace(" -- find " + name);
+					log.trace("find type define - " + name);
 				}
 				return type;
 			}
@@ -147,18 +150,18 @@ public abstract class TypeLoader {
 			URL url = loadClassData(name);
 			if (url != null) {
 				List<Type> typeList = defineNebula(url);
-				if (log.isTraceEnabled()) {
-					log.trace(" -- load " + name);
+				if (log.isDebugEnabled()) {
+					log.debug("\tload type define - " + name);
 				}
 				return typeList.get(0);
 			} else {
 				return null;
 			}
 		} catch (IOException e) {
-			log.error("IOException ",e);
+			log.error("IOException ", e);
 			throw new RuntimeException(e);
 		} catch (RecognitionException e) {
-			log.error("RecognitionException ",e);
+			log.error("RecognitionException ", e);
 			throw new RuntimeException(e);
 		}
 	}

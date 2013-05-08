@@ -21,7 +21,9 @@ public class DerbyConfiguration extends DbConfiguration {
 
 	@Override
 	public DbDataExecutor getPersister(Type type) {
-		log.debug("== getPersister : " + type.getName() + " conn : " + conn);
+		if(log.isTraceEnabled()){
+			log.trace("getPersister : " + type.getName() + " conn : " + conn);			
+		}
 		DbDataExecutor executor = null;
 
 		switch (type.getStandalone()) {
@@ -42,8 +44,9 @@ public class DerbyConfiguration extends DbConfiguration {
 		super.shutdown();
 
 		try { // perform a clean shutdown
-			DriverManager.getConnection(this.url.replaceAll(";create=true", ";shutdown=true"));
-			log.debug("== Database shut down normally");
+			String  shutdownUrl = this.url.replaceAll(";create=true", ";shutdown=true");
+			DriverManager.getConnection(shutdownUrl);
+			log.info("== shut down database s- " + shutdownUrl);
 		} catch (SQLException se) {
 		}
 	}

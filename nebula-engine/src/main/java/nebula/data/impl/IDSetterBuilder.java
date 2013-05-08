@@ -31,8 +31,8 @@ public class IDSetterBuilder {
 			}
 		}
 		
-		if(log.isDebugEnabled()){
-			log.debug("builder " + type.getName() + " IDSetter with " + keys.size() + " keys " + keys);
+		if(log.isTraceEnabled()){
+			log.trace("builder " + type.getName() + " IDSetter with " + keys.size() + " keys " + keys);
 		}
 		switch (keys.size()) {
 		case 1:

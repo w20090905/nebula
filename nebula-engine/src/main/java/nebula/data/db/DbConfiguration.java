@@ -43,9 +43,11 @@ public abstract class DbConfiguration {
 	public void init() {
 		try {
 			Class.forName(driverClass).newInstance();
-			log.debug("== Load " + driverClass);
+			if(log.isDebugEnabled()){
+				log.debug("\tload driverClass - " + driverClass);				
+			}
 			conn = DriverManager.getConnection(this.url, this.userName, this.userPassword);
-			log.debug("== create and connect to " + this.url);
+			log.info("== open database - " + this.url);
 			conn.setAutoCommit(true);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
