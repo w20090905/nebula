@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import nebula.data.DataHolder;
+import nebula.data.Holder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.impl.EditableEntity;
@@ -21,10 +21,10 @@ import org.apache.commons.logging.LogFactory;
 public class SignupResouce implements Resource {
 	protected Log log = LogFactory.getLog(this.getClass());
 
-	private final DataHolder<DataStore<Entity>> users;
+	private final Holder<DataStore<Entity>> users;
 	final RedirectResouce redirectTo;
 
-	public SignupResouce(DataHelper<Entity, Reader, Writer> json, DataHolder<DataStore<Entity>> users) {
+	public SignupResouce(DataHelper<Entity, Reader, Writer> json, Holder<DataStore<Entity>> users) {
 		this.users = users;
 		redirectTo = new RedirectResouce("/index.html");
 	}

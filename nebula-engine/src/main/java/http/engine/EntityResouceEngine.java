@@ -14,7 +14,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import nebula.data.DataHolder;
+import nebula.data.Holder;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -72,8 +72,8 @@ public class EntityResouceEngine implements ResourceEngine {
 			}
 		} else {
 
-			DataHolder<DataStore<Entity>> storeHolder = persistence.define(Entity.class, typeName);
-			DataHolder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(storeHolder,typeLoader.findType(typeName));
+			Holder<DataStore<Entity>> storeHolder = persistence.define(Entity.class, typeName);
+			Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(storeHolder,typeLoader.findType(typeName));
 
 			if (id != null) {
 				return new EntityResouce(jsonHolder, storeHolder, id);

@@ -7,8 +7,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
 import nebula.data.Callback;
-import nebula.data.DataHolder;
-import nebula.data.DataListener;
+import nebula.data.Holder;
+import nebula.data.HolderListener;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -19,41 +19,41 @@ public class InMemoryDataPersister implements DataPersister<Entity> {
 
 	final TypeLoader loader;
 	ReentrantLock lock = new ReentrantLock();
-	final Map<String, DataHolder<DataStore<Entity>>> stores;
+	final Map<String, Holder<DataStore<Entity>>> stores;
 
 	public InMemoryDataPersister(TypeLoader loader) {
 		this.loader = loader;
-		this.stores = new HashMap<String, DataHolder<DataStore<Entity>>>();
+		this.stores = new HashMap<String, Holder<DataStore<Entity>>>();
 	}
 
 	@Override
-	public DataHolder<DataStore<Entity>> define(Class<Entity> clz, String name) {
-		DataHolder<DataStore<Entity>> store = this.stores.get(name);
+	public Holder<DataStore<Entity>> define(Class<Entity> clz, String name) {
+		Holder<DataStore<Entity>> store = this.stores.get(name);
 		if (store == null) {
 			Type type = loader.findType(name);
 			DataStore<Entity> newData = new EntityDataStore(this, type);
-			store = new AbstractDataHolder<DataStore<Entity>>(newData);
+			store =  HolderBuilder.of(newData);
 			stores.put(name, store);
 		}
 		return store;
 	}
 
 	@Override
-	public void define(Class<Entity> clz, String name, DataListener<DataStore<Entity>> listener) {
-		DataHolder<DataStore<Entity>> store = define(clz, name);
+	public void define(Class<Entity> clz, String name, HolderListener<DataStore<Entity>> listener) {
+		Holder<DataStore<Entity>> store = define(clz, name);
 		store.addListener(listener);
 	}
 
 	@Override
-	public DataHolder<DataStore<Entity>> reload(Class<Entity> clz, String name) {
-		DataHolder<DataStore<Entity>> datastoreHolder = this.stores.get(name);
+	public Holder<DataStore<Entity>> reload(Class<Entity> clz, String name) {
+		Holder<DataStore<Entity>> datastoreHolder = this.stores.get(name);
 		if (datastoreHolder != null) {
 			DataStore<Entity> oldData = datastoreHolder.get();
 			oldData.unload();
 
 			Type type = loader.findType(name);
 			DataStore<Entity> newData = new EntityDataStore(this, type);
-			datastoreHolder.set(newData, oldData);
+			datastoreHolder.update(oldData, newData);
 			return datastoreHolder;
 		} else {
 			throw new UnsupportedOperationException("DataStore<Entity> reload(Class<Entity> clz, String name) ");

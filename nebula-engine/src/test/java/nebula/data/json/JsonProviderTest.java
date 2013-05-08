@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 
 import junit.framework.TestCase;
-import nebula.data.DataHolder;
+import nebula.data.Holder;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -21,7 +21,7 @@ import nebula.lang.TypeLoaderForTest;
 public class JsonProviderTest extends TestCase {
 	TypeLoaderForTest loader;
 	Type type;
-	DataHolder<DataStore<Entity>> store;
+	Holder<DataStore<Entity>> store;
 	
 	DataPersister<Entity> persistence;
 	
@@ -52,7 +52,7 @@ public class JsonProviderTest extends TestCase {
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 		store = persistence.define(Entity.class, type.getName());
 		
-		DataHolder<DataHelper<Entity,Reader,Writer>> json =   JsonHelperProvider.getHelper(store,type);
+		Holder<DataHelper<Entity,Reader,Writer>> json =   JsonHelperProvider.getHelper(store,type);
 		Entity n =  new EditableEntity();
 		
 		n=json.get().readFrom(n,new StringReader("{" +

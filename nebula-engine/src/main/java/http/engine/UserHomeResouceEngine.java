@@ -7,7 +7,7 @@ import http.resource.StaticTemplateResouce;
 
 import javax.inject.Inject;
 
-import nebula.data.DataHolder;
+import nebula.data.Holder;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -18,7 +18,7 @@ import freemarker.template.Configuration;
 @SuppressWarnings("deprecation")
 public class UserHomeResouceEngine extends StaticResourceEngine {
 	private final Configuration templateConfig;
-	final DataHolder<DataStore<Entity>> attributes;
+	final Holder<DataStore<Entity>> attributes;
 	final TypeLoader typeLoader;
 
 	@Inject

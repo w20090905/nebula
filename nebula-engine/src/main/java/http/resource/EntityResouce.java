@@ -10,19 +10,19 @@ import java.sql.Timestamp;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nebula.data.DataHolder;
+import nebula.data.Holder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
 
 
 public class EntityResouce extends AbstractResouce {
-	private final DataHolder<DataHelper<Entity, Reader, Writer>> jsonHolder;
+	private final Holder<DataHelper<Entity, Reader, Writer>> jsonHolder;
 
 	private final String key;
-	private final DataHolder<DataStore<Entity>> datastoreHolder;
+	private final Holder<DataStore<Entity>> datastoreHolder;
 
-	public EntityResouce(DataHolder<DataHelper<Entity, Reader, Writer>> json, DataHolder<DataStore<Entity>> datas,
+	public EntityResouce(Holder<DataHelper<Entity, Reader, Writer>> json, Holder<DataStore<Entity>> datas,
 			String key) {
 		super("text/json", 0, 0);
 		this.jsonHolder = json;

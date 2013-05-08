@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 
-import nebula.data.DataHolder;
-import nebula.data.DataListener;
+import nebula.data.Holder;
+import nebula.data.HolderListener;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.lang.Type;
@@ -33,13 +33,13 @@ public class JsonHelperProvider {
 //		return new DefaultJsonHelper<>(factory, new EntityJsonDataDealer(type));
 //	}
 
-	public static DataHolder<DataHelper<Entity,Reader,Writer>> getHelper(final DataHolder<DataStore<Entity>> storeHolder,final Type type) {
-		DataHolder<DataHelper<Entity,Reader,Writer>> he = new DataHolder<DataHelper<Entity,Reader,Writer>>() {
+	public static Holder<DataHelper<Entity,Reader,Writer>> getHelper(final Holder<DataStore<Entity>> storeHolder,final Type type) {
+		Holder<DataHelper<Entity,Reader,Writer>> he = new Holder<DataHelper<Entity,Reader,Writer>>() {
 			DataStore<Entity> lastDataStore = storeHolder.get();
 			DataHelper<Entity,Reader,Writer> lastJsonHelper = new DefaultJsonHelper<Entity>(factory, new EntitySerializer(type));
 
 			@Override
-			public void set(DataHelper<Entity,Reader,Writer> newData,DataHelper<Entity,Reader,Writer> oldData) {
+			public void update(DataHelper<Entity,Reader,Writer> oldData,DataHelper<Entity,Reader,Writer> newData) {
 				throw new UnsupportedOperationException();
 			}
 
@@ -53,7 +53,7 @@ public class JsonHelperProvider {
 			}
 
 			@Override
-			public void addListener(DataListener<DataHelper<Entity,Reader,Writer>> listener) {
+			public void addListener(HolderListener<DataHelper<Entity,Reader,Writer>> listener) {
 				throw new UnsupportedOperationException();
 			}
 		};

@@ -12,7 +12,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nebula.data.DataHolder;
+import nebula.data.Holder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
@@ -21,11 +21,11 @@ import util.FileUtil;
 import com.google.common.base.Predicate;
 
 public class EntityListResouce extends AbstractResouce {
-	private final DataHolder<DataHelper<Entity, Reader, Writer>> jsonHolder;
-	private final DataHolder<DataStore<Entity>> datastoreHolder;
+	private final Holder<DataHelper<Entity, Reader, Writer>> jsonHolder;
+	private final Holder<DataStore<Entity>> datastoreHolder;
 	final EntityFilterBuilder filterBuilder;
 
-	public EntityListResouce(DataHolder<DataHelper<Entity, Reader, Writer>> json, DataHolder<DataStore<Entity>> datas,
+	public EntityListResouce(Holder<DataHelper<Entity, Reader, Writer>> json, Holder<DataStore<Entity>> datas,
 			final EntityFilterBuilder filterBuilder) {
 		super("text/json", 0, 1000);
 		this.jsonHolder = json;
