@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import nebula.data.DataHolder;
 import nebula.data.DataPersister;
@@ -36,8 +35,7 @@ public class SystemFunctionResouceEngine implements ResourceEngine {
 	}
 
 	@Override
-	public Resource resolve(HttpServletRequest req) {
-		String path = req.getPathInfo();
+	public Resource resolve(String path) {
 		String[] paths = path.split("/");
 		String id = null;
 		if (paths.length > 2) {

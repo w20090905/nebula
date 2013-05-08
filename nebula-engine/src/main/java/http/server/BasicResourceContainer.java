@@ -6,9 +6,9 @@ import http.resource.RedirectResouce;
 import http.startup.Configurable;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -24,18 +24,45 @@ import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import com.google.common.cache.RemovalListener;
+import com.google.common.cache.RemovalNotification;
 import com.google.common.collect.Maps;
 
 public class BasicResourceContainer extends AbstractHandler {
 	private Log log = LogFactory.getLog(this.getClass());
 
-	final private Map<String, Resource> cachedLinks = new HashMap<String, Resource>();
+	final private LoadingCache<String, Resource> cachedLinks;
 	final private Map<String, ResourceEngine> engines;
 
 	final ResourceEngine defaultEngine;
 	final RedirectCurrentUserResouce redirectCurrentUserResouce;
 	final RedirectResouce redirectToLoginResouce;
 	final ErrorHandleResouce errorHandleResource;
+	CacheLoader<String, Resource> loader = new CacheLoader<String, Resource>() {
+		public Resource load(String path) throws Exception {
+			log.info("load resource :" + path);
+			Resource res = null;
+			int idx = path.indexOf('/', 1);
+			if (idx > 0) {
+				String key = path.substring(1, idx);
+				ResourceEngine engine = engines.get(key);
+				if (engine != null) res = engine.resolve(path);
+				if (res != null) return res;
+				res = defaultEngine.resolve(path);
+			} else {
+				res = defaultEngine.resolve(path);
+			}
+			return res;
+		}
+	};
+	RemovalListener<String, Resource> removalListener = new RemovalListener<String, Resource>() {
+		public void onRemoval(RemovalNotification<String, Resource> removal) {
+			log.info("remove " + removal.getKey());
+		}
+	};
 
 	@Inject
 	public BasicResourceContainer(final Configurable<BasicResourceContainer> conf) {
@@ -46,7 +73,8 @@ public class BasicResourceContainer extends AbstractHandler {
 		this.errorHandleResource = new ErrorHandleResouce();
 		this.redirectCurrentUserResouce = new RedirectCurrentUserResouce();
 		this.redirectToLoginResouce = new RedirectResouce("/login.html");
-
+		cachedLinks = CacheBuilder.newBuilder().maximumSize(1000).expireAfterWrite(10, TimeUnit.MINUTES)
+				.removalListener(removalListener).build(loader);
 		cachedLinks.put("/", redirectCurrentUserResouce);
 	}
 
@@ -64,17 +92,15 @@ public class BasicResourceContainer extends AbstractHandler {
 	public void handle(String target, Request baseRequest, HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 		if (log.isDebugEnabled()) {
-			log.debug(req.getPathInfo());
+			log.debug("handle " + req.getPathInfo());
 		}
 		try {
-
 			String path = req.getPathInfo();
 
-			// this.redirectToLoginResource.redirectTo(req, resp, "/u/" +
-			// currentUser.getID());
-			// return;
 			Entity currentUser = (Entity) req.getSession().getAttribute("#currentUser");
 			if (currentUser != null) {
+				Resource res = cachedLinks.get(path);
+				res.handle(req, resp);
 			} else {
 				if ("/".equals(path)) {
 					redirectToLoginResouce.handle(req, resp);
@@ -93,67 +119,22 @@ public class BasicResourceContainer extends AbstractHandler {
 						return;
 					}
 				}
+				Resource res = cachedLinks.get(path);
+				res.handle(req, resp);
 			}
 
-			Resource res = cachedLinks.get(path);
-			if (res != null) {
-				res.handle(req, resp);
-				return;
-			} else {
-				int idx = path.indexOf('/', 1);
-				if (idx < 0) {
-					res = defaultEngine.resolve(req);
-				} else {
-					res = resolve(path.substring(1, idx), req);
-				}
-				res.handle(req, resp);
-			}
 			return;
 
-		} catch (RuntimeException e) {
-			log.error(e.getClass().getName(), e);
-			// this.errorHandleResource.redirectTo(req, resp, e);
+		} catch (ExecutionException e) {
+			log.error(e);
 		} catch (IOException e) {
 			log.error(e);
-			throw new RuntimeException(e);
 		} catch (ServletException e) {
 			log.error(e);
-			throw new RuntimeException(e);
+		} catch (RuntimeException e) {
+			log.error(e.getClass().getName(), e);
 		}
-	}
-
-	long lockcount = 0;
-
-	final ReentrantLock lock = new ReentrantLock();
-
-	private Resource resolve(String key, HttpServletRequest req) {
-		Resource res = null;
-		String path = req.getPathInfo();
-		lock.lock();
-		long lockIndex = lockcount++;
-		try {
-			if (log.isTraceEnabled()) {
-				log.trace("<<< begin lock for resolve Resource  : " + lockIndex);
-			}
-
-			res = cachedLinks.get(path);
-			if (res != null) return res;
-
-			ResourceEngine engine = this.engines.get(key);
-			if (engine != null) res = engine.resolve(req);
-			else defaultEngine.resolve(req);
-			if (res != null) return res;
-			res = defaultEngine.resolve(req);
-			if (res != null) cachedLinks.put(path, res);
-		} finally {
-			lock.unlock();
-			if (log.isTraceEnabled()) {
-				log.trace(">>> unlock lock for resolve Resource  : " + lockIndex);
-			}
-		}
-
-		if (res != null) {
-		} else throw new RuntimeException("");
-		return res;
+		resp.setStatus(400);
+		resp.flushBuffer();
 	}
 }

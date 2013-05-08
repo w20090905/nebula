@@ -8,7 +8,6 @@ import java.util.Hashtable;
 import java.util.StringTokenizer;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import nebula.server.Resource;
 import nebula.server.ResourceEngine;
@@ -27,8 +26,7 @@ public class StaticResourceEngine implements ResourceEngine {
 	}
 
 	@Override
-	public Resource resolve(HttpServletRequest req) {
-		String path = req.getPathInfo();
+	public Resource resolve(String path) {
 		String extension = path.substring(path.lastIndexOf('.') + 1);
 		Source source = loader.findSource(path);
 		if (source != null) {

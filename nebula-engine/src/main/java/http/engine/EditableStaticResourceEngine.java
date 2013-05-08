@@ -5,7 +5,6 @@ import http.io.Source;
 import http.resource.StaticEditableResource;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import nebula.server.Resource;
 import nebula.server.ResourceEngine;
@@ -19,8 +18,7 @@ public class EditableStaticResourceEngine extends StaticResourceEngine implement
 	}
 
 	@Override
-	public Resource resolve(HttpServletRequest req) {
-		String path = req.getPathInfo();
+	public Resource resolve(String path) {
 		String extension = path.substring(path.lastIndexOf('.') + 1);
 		Source source = loader.findSource(path);
 		return source != null ? new StaticEditableResource(source, TheMimeTypes.get(extension))

@@ -56,7 +56,7 @@ public class IDSetterBuilder {
 
 		@Override
 		public String getID(Entity entity) {
-			return (String) entity.get(key1);
+			return entity.get(key1).toString();
 		}
 	}
 

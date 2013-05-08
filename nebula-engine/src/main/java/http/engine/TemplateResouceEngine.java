@@ -7,7 +7,6 @@ import http.resource.StaticTemplateResouce;
 import http.resource.TypeTemplateResouce;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import nebula.data.DataHolder;
 import nebula.data.DataPersister;
@@ -36,8 +35,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 	}
 
 	@Override
-	public Resource resolve(HttpServletRequest req) {
-		String path = req.getPathInfo();
+	public Resource resolve(String path) {
 		String extension = path.substring(path.lastIndexOf('.') + 1);
 
 		Source source = loader.findSource(path);

@@ -50,34 +50,14 @@
 				</configuration>
 			</plugin>
 
-			<!-- plugin>
-				<groupId>com.pyx4me</groupId>
-				<artifactId>proguard-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>proguard</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<obfuscate>true</obfuscate>
-					<proguardInclude>${basedir}/proguard.conf</proguardInclude>
-					<libs>
-						<lib>${java.home}/lib/rt.jar</lib>
-					</libs>
-					<addMavenDescriptor>false</addMavenDescriptor>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>net.sf.proguard</groupId>
-						<artifactId>proguard</artifactId>
-						<version>4.4</version>
-						<scope>runtime</scope>
-					</dependency>
-				</dependencies>
-			</plugin-->
+			<!-- plugin> <groupId>com.pyx4me</groupId> <artifactId>proguard-maven-plugin</artifactId> 
+				<executions> <execution> <phase>package</phase> <goals> <goal>proguard</goal> 
+				</goals> </execution> </executions> <configuration> <obfuscate>true</obfuscate> 
+				<proguardInclude>${basedir}/proguard.conf</proguardInclude> <libs> <lib>${java.home}/lib/rt.jar</lib> 
+				</libs> <addMavenDescriptor>false</addMavenDescriptor> </configuration> <dependencies> 
+				<dependency> <groupId>net.sf.proguard</groupId> <artifactId>proguard</artifactId> 
+				<version>4.4</version> <scope>runtime</scope> </dependency> </dependencies> 
+				</plugin -->
 		</plugins>
 	</build>
 	<dependencies>
@@ -101,6 +81,24 @@
 			<groupId>nebula</groupId>
 			<artifactId>nebula-compiler</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>guava-base</artifactId>
+					<groupId>com.google.guava</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>guava-collections</artifactId>
+					<groupId>com.google.guava</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>guava-primitives</artifactId>
+					<groupId>com.google.guava</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>guava-annotations</artifactId>
+					<groupId>com.google.guava</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.google.inject</groupId>
@@ -125,19 +123,15 @@
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
-			<artifactId>guava-base</artifactId>
-			<version>r03</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava-collections</artifactId>
-			<version>r03</version>
+			<artifactId>guava</artifactId>
+			<version>14.0.1 </version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
 			<scope>test</scope>
+		
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>

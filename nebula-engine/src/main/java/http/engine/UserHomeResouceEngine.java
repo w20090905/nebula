@@ -6,8 +6,6 @@ import http.resource.StaticEditableResource;
 import http.resource.StaticTemplateResouce;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import nebula.data.DataHolder;
 import nebula.data.DataPersister;
@@ -33,18 +31,18 @@ public class UserHomeResouceEngine extends StaticResourceEngine {
 	}
 
 	@Override
-	public Resource resolve(HttpServletRequest req) {
-		HttpSession session = req.getSession();
+	public Resource resolve(String path) {
+		// HttpSession session = path.getSession();
+		String theme = "angularjs";// (String) session.getAttribute("Theme");
+		String skin = "unicorn";// (String) session.getAttribute("Skin"); TODO
 		String extension = "text/html";
-		String theme = (String) session.getAttribute("Theme");
-		String skin = (String) session.getAttribute("Skin");
-		String[] segs = req.getPathInfo().split("/");
+		String[] segs = path.split("/");
 		String name = "index.html";
-		
-		if(segs.length > 3){
+
+		if (segs.length > 3) {
 			name = "index" + segs[3] + ".html";
 		}
-				
+
 		Source source = null;
 		if ((source = loader.findSource("/" + "theme/" + theme + "/" + skin + "/" + name)) != null) {
 			return new StaticEditableResource(source, TheMimeTypes.get(extension));

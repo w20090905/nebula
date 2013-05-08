@@ -5,7 +5,6 @@ import http.io.Source;
 import http.resource.StaticResource;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import nebula.server.Resource;
 
@@ -24,8 +23,7 @@ public class LongTermStaticResourceEngine extends StaticResourceEngine {
 	}
 	
 	@Override
-	public Resource resolve(HttpServletRequest req) {
-		String path = req.getPathInfo();
+	public Resource resolve(String path) {
 		String extension = path.substring(path.lastIndexOf('.') + 1);
 		
 		Source source = loader.findSource(path);
