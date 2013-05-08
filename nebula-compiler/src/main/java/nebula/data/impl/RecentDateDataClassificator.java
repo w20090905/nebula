@@ -1,8 +1,6 @@
 package nebula.data.impl;
 
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,62 +9,48 @@ import java.util.Objects;
 import nebula.data.DataClassificator;
 import nebula.data.Entity;
 
+import org.joda.time.DateTime;
+
 public class RecentDateDataClassificator implements DataClassificator<Entity> {
 
 	String[] classifications = { "Today", "This Week", "This Month", "Three Month", "Six Month" };
 	final String key;
-	Date today;
-	Date thisWeek;
-	Date thisMonth;
-	Date treeMonth;
-	Date sixMonth;
+	DateTime today;
+	DateTime thisWeek;
+	DateTime thisMonth;
+	DateTime threeMonth;
+	DateTime sixMonth;
 
 	final Map<String, List<Entity>> datas = new HashMap<String, List<Entity>>();
 
 	RecentDateDataClassificator(String key) {
 		this.key = key;
-		Calendar c = Calendar.getInstance();
 
-		c.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-		c.set(Calendar.MILLISECOND, 0);
-		today = new Date(c.getTime().getTime());
+		today = new DateTime().withMillisOfDay(0);
+		thisWeek = today.withDayOfWeek(1);
+		thisMonth = today.withDayOfMonth(1);
+		threeMonth = today.minusMonths(2).withDayOfMonth(1);
+		sixMonth = today.minusMonths(5).withDayOfMonth(1);
+
 		datas.put(classifications[0], new ArrayList<Entity>());
-
-		c.setTime(today);
-		c.set(Calendar.DAY_OF_WEEK, 1);
-		thisWeek = new Date(c.getTime().getTime());
 		datas.put(classifications[1], new ArrayList<Entity>());
-
-		c.setTime(today);
-		c.set(Calendar.DAY_OF_MONTH, 1);
-		thisMonth = new Date(c.getTime().getTime());
 		datas.put(classifications[2], new ArrayList<Entity>());
-
-		c.setTime(today);
-		c.set(Calendar.DAY_OF_MONTH, 1);
-		c.set(Calendar.MONTH, c.get(Calendar.MONTH) - 3 + 1);
-		treeMonth = new Date(c.getTime().getTime());
 		datas.put(classifications[3], new ArrayList<Entity>());
-
-		c.setTime(today);
-		c.set(Calendar.DAY_OF_MONTH, 1);
-		c.set(Calendar.MONTH, c.get(Calendar.MONTH) - 6 + 1);
-		sixMonth = new Date(c.getTime().getTime());
 		datas.put(classifications[4], new ArrayList<Entity>());
 	}
 
 	public String classify(Entity v) {
-		Date date = (Date) v.get(key);
+		DateTime date = (DateTime) v.get(key);
 
-		if (!date.before(today)) {
+		if (!date.isBefore(today)) {
 			return classifications[0];
-		} else if (!date.before(thisWeek)) {
+		} else if (!date.isBefore(thisWeek)) {
 			return classifications[1];
-		} else if (!date.before(thisMonth)) {
+		} else if (!date.isBefore(thisMonth)) {
 			return classifications[2];
-		} else if (!date.before(treeMonth)) {
+		} else if (!date.isBefore(threeMonth)) {
 			return classifications[3];
-		} else if (!date.before(sixMonth)) {
+		} else if (!date.isBefore(sixMonth)) {
 			return classifications[4];
 		} else {
 			return null;
