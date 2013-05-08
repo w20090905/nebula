@@ -1,4 +1,4 @@
-package nebula.data.impl;
+package nebula.data.util;
 
 import java.lang.ref.WeakReference;
 import java.util.List;

@@ -16,6 +16,7 @@ import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.db.DbConfiguration;
 import nebula.data.impl.EditableEntity;
+import nebula.data.util.HolderBuilder;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 import nebula.lang.TypeStandalone;

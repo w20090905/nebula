@@ -1,4 +1,4 @@
-package nebula.data.impl;
+package nebula.data.util;
 
 import com.google.common.base.Function;
 

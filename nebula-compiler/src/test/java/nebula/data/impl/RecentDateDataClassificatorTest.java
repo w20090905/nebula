@@ -4,6 +4,7 @@ import java.util.Set;
 
 import junit.framework.TestCase;
 import nebula.data.Entity;
+import nebula.data.util.RecentDateClassificatorFunction;
 
 import org.joda.time.DateTime;
 

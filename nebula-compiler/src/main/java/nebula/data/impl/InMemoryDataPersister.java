@@ -12,6 +12,7 @@ import nebula.data.HolderListener;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
+import nebula.data.util.HolderBuilder;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 
