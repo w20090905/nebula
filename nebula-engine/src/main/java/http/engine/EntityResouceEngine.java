@@ -3,6 +3,8 @@ package http.engine;
 import http.resource.EntityFilterBuilder;
 import http.resource.EntityListResouce;
 import http.resource.EntityResouce;
+import http.resource.TransactionEntityListResouce;
+import http.resource.TransactionEntityResouce;
 import http.resource.TypeEditableResouce;
 import http.resource.TypeFilterBuilder;
 import http.resource.TypeListResouce;
@@ -14,15 +16,16 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import nebula.data.Holder;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
+import nebula.data.Holder;
 import nebula.data.json.DataHelper;
 import nebula.data.json.JsonHelperProvider;
 import nebula.lang.EditableTypeLoader;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
+import nebula.lang.TypeStandalone;
 import nebula.server.Resource;
 import nebula.server.ResourceEngine;
 
@@ -73,12 +76,23 @@ public class EntityResouceEngine implements ResourceEngine {
 		} else {
 
 			Holder<DataStore<Entity>> storeHolder = persistence.define(Entity.class, typeName);
-			Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(storeHolder,typeLoader.findType(typeName));
+			Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(storeHolder,
+					typeLoader.findType(typeName));
 
-			if (id != null) {
-				return new EntityResouce(jsonHolder, storeHolder, id);
+			Type type = typeLoader.findType(typeName);
+			if (type.getStandalone() == TypeStandalone.Transaction) {
+				if (id != null) {
+					return new TransactionEntityResouce(jsonHolder, storeHolder, id);
+				} else {
+					return new TransactionEntityListResouce(jsonHolder, storeHolder, entityFilterBuilder);
+				}
 			} else {
-				return new EntityListResouce(jsonHolder, storeHolder, entityFilterBuilder);
+				if (id != null) {
+					return new EntityResouce(jsonHolder, storeHolder, id);
+				} else {
+					return new EntityListResouce(jsonHolder, storeHolder, entityFilterBuilder);
+				}
+
 			}
 		}
 	}

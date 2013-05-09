@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.List;
 
 import nebula.data.Classificator;
+import nebula.data.Filter;
 import nebula.data.SmartList;
 
 import org.antlr.runtime.ANTLRInputStream;
@@ -57,6 +58,9 @@ public abstract class TypeLoader {
 		this.parent = parent;
 	}
 
+	public Filter<Type> liveFilter(Predicate<Type> filterFunction) {
+		return types.liveFilter(filterFunction);
+	}
 	public List<Type> filter(Predicate<Type> filterFunction) {
 		return types.filter(filterFunction);
 	}

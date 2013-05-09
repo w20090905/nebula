@@ -1,11 +1,6 @@
 package nebula.data.json;
 
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +9,12 @@ import nebula.data.TypeAdapter;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonToken;
+import org.joda.time.DateTime;
+import org.joda.time.ReadableInstant;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
-abstract class DefaultTypeAdapter<T> implements TypeAdapter<T,JsonParser,JsonGenerator> {
+abstract class DefaultTypeAdapter<T> implements TypeAdapter<T, JsonParser, JsonGenerator> {
 	public T readFrom(JsonParser in, int index) throws Exception {
 		throw new UnsupportedOperationException("readFrom(JsonParser in,int index)");
 	}
@@ -85,55 +84,57 @@ class TextBlockJsonDataDealer extends DefaultTypeAdapter<String> {
 	}
 }
 
-class DateJsonDataDealer extends DefaultTypeAdapter<Date> {
-	public Date readFrom(JsonParser parser, String name) throws Exception {
+class DateJsonDataDealer extends DefaultTypeAdapter<DateTime> {
+	final DateTimeFormatter formater = DateTimeFormat.forPattern("yyyy-MM-dd");
+	public DateTime readFrom(JsonParser parser, String name) throws Exception {
 		JsonToken token = parser.getCurrentToken();
 		assert token == JsonToken.VALUE_STRING;
-		return parser.getText().length() >= 10 ? Date.valueOf(parser.getText()) : null;
+		return parser.getText().length() >= 10 ? formater.parseDateTime(parser.getText()) : null;
 	}
 
 	public void writeTo(String name, Object value, JsonGenerator gen) throws Exception {
-		gen.writeString(value != null ? value.toString() : "");
+		gen.writeString(value != null ? formater.print((ReadableInstant)value) : "");
 	}
 }
 
-class TimeJsonDataDealer extends DefaultTypeAdapter<Time> {
-	public Time readFrom(JsonParser parser, String name) throws Exception {
+class TimeJsonDataDealer extends DefaultTypeAdapter<DateTime> {
+	final DateTimeFormatter formater = DateTimeFormat.forPattern("kk:mm:ss");
+	public DateTime readFrom(JsonParser parser, String name) throws Exception {
 		JsonToken token = parser.getCurrentToken();
 		assert token == JsonToken.VALUE_STRING;
-		return parser.getText().length() >= 8 ? Time.valueOf(parser.getText()) : null;
+		return parser.getText().length() >= 8 ? formater.parseDateTime(parser.getText()) : null;
 	}
 
 	public void writeTo(String name, Object value, JsonGenerator gen) throws Exception {
-		gen.writeString(value != null ? value.toString() : "");
+		gen.writeString(value != null ? formater.print((ReadableInstant)value) : "");
 	}
 }
 
-class DatetimeJsonDataDealer extends DefaultTypeAdapter<Timestamp> {
-	final DateFormat formater = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+class DatetimeJsonDataDealer extends DefaultTypeAdapter<DateTime> {
+	final DateTimeFormatter formater = DateTimeFormat.forPattern("yyyy-MM-dd kk:mm:ss");
 
-	public Timestamp readFrom(JsonParser parser, String name) throws Exception {
+	public DateTime readFrom(JsonParser parser, String name) throws Exception {
 		JsonToken token = parser.getCurrentToken();
 		assert token == JsonToken.VALUE_STRING;
-		return parser.getText().length() >= 19 ? new Timestamp(formater.parse(parser.getText()).getTime()) : null;
+		return parser.getText().length() >= 19 ? formater.parseDateTime(parser.getText()) : null;
 	}
 
 	public void writeTo(String name, Object value, JsonGenerator gen) throws Exception {
-		gen.writeString(value != null ? formater.format((Timestamp) value) : "");
+		gen.writeString(value != null ? formater.print((ReadableInstant)value) : "");
 	}
 }
 
-class TimestampJsonDataDealer extends DefaultTypeAdapter<Timestamp> {
-	final DateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+class TimestampJsonDataDealer extends DefaultTypeAdapter<DateTime> {
+	final DateTimeFormatter formater = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS");
 
-	public Timestamp readFrom(JsonParser parser, String name) throws Exception {
+	public DateTime readFrom(JsonParser parser, String name) throws Exception {
 		JsonToken token = parser.getCurrentToken();
 		assert token == JsonToken.VALUE_STRING;
-		return parser.getText().length() >= 22 ? Timestamp.valueOf(parser.getText()) : null;
+		return parser.getText().length() >= 22 ? formater.parseDateTime(parser.getText()) : null;
 	}
 
 	public void writeTo(String name, Object value, JsonGenerator gen) throws Exception {
-		gen.writeString(value != null ? value.toString() : "");
+		gen.writeString(value != null ? formater.print((ReadableInstant)value) : "");
 	}
 }
 
@@ -149,8 +150,8 @@ class ListJsonDataDealer<T> extends DefaultTypeAdapter<List<T>> {
 		JsonToken token;
 		token = parser.getCurrentToken();
 		assert token == JsonToken.START_ARRAY;
-		
-		while ((token=parser.nextToken()) != JsonToken.END_ARRAY) {
+
+		while ((token = parser.nextToken()) != JsonToken.END_ARRAY) {
 			vList.add(jsonFieldDealer.readFrom(parser, name));
 		}
 		assert token == JsonToken.END_ARRAY;

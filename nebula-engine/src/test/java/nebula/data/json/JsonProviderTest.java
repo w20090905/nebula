@@ -6,7 +6,9 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
+
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import junit.framework.TestCase;
 import nebula.data.Holder;
@@ -70,18 +72,18 @@ public class JsonProviderTest extends TestCase {
 
 		assertEquals(new BigDecimal("9876.5432"), n.get("Decimal"));
 		
-		SimpleDateFormat sdf ;
-		sdf = new SimpleDateFormat("yyyy-MM-dd");
-		assertEquals(sdf.parseObject("2012-12-20"), n.get("Date"));
+		DateTimeFormatter sdf ;
+		sdf = DateTimeFormat.forPattern("yyyy-MM-dd");
+		assertEquals(sdf.parseDateTime("2012-12-20"), n.get("Date"));
 		
-		sdf = new SimpleDateFormat("kk:mm:ss");
-		assertEquals(sdf.parseObject("12:00:12"), n.get("Time"));
+		sdf = DateTimeFormat.forPattern("kk:mm:ss");
+		assertEquals(sdf.parseDateTime("12:00:12"), n.get("Time"));
 		
-		sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
-		assertEquals(sdf.parseObject("2012-12-20 23:58:59"), n.get("Datetime"));
+		sdf = DateTimeFormat.forPattern("yyyy-MM-dd kk:mm:ss");
+		assertEquals(sdf.parseDateTime("2012-12-20 23:58:59"), n.get("Datetime"));
 		
-		sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss.SSS");
-		assertEquals(sdf.parseObject("2012-12-20 23:58:59.789"), n.get("Timestamp"));
+		sdf = DateTimeFormat.forPattern("yyyy-MM-dd kk:mm:ss.SSS");
+		assertEquals(sdf.parseDateTime("2012-12-20 23:58:59.789"), n.get("Timestamp"));
 		
 		Writer out = new StringWriter();
 		json.get().stringifyTo(n, out);

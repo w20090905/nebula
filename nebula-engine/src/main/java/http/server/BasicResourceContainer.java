@@ -92,7 +92,7 @@ public class BasicResourceContainer extends AbstractHandler {
 	public void handle(String target, Request baseRequest, HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 		if (log.isDebugEnabled()) {
-			log.debug("client request "+req.getMethod() +" - " + req.getPathInfo());
+			log.debug("client request "+req.getMethod() +" - " + req.getPathInfo() + " - " + req.getQueryString());
 		}
 		try {
 			String path = req.getPathInfo();

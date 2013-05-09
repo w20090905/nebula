@@ -10,6 +10,8 @@ import java.sql.Timestamp;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.joda.time.DateTime;
+
 import nebula.data.Holder;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -34,7 +36,7 @@ public class EntityResouce extends AbstractResouce {
 	protected void get(HttpServletRequest req) throws IOException {
 		Entity data = datastoreHolder.get().get(key);
 
-		long newModified = ((Timestamp) data.get("LastModified_")).getTime();
+		long newModified = ((DateTime) data.get("LastModified_")).getMillis();
 		// if (newModified == this.lastModified) return;
 
 		ByteArrayOutputStream bout = null;

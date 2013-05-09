@@ -15,15 +15,11 @@ import nebula.data.Entity;
 import nebula.data.Holder;
 import nebula.data.json.DataHelper;
 
-
 public class TransactionEntityResouce extends AbstractResouce {
 	private final Holder<DataHelper<Entity, Reader, Writer>> jsonHolder;
 
 	private final String key;
 	private final Holder<DataStore<Entity>> datastoreHolder;
-	
-//	private final Map<String, Classificator<String, Entity>> classificator;
-//	private final Map<String, Classificator<String, Entity>> datasbufferes;
 
 	public TransactionEntityResouce(Holder<DataHelper<Entity, Reader, Writer>> json, Holder<DataStore<Entity>> datas,
 			String key) {
@@ -31,8 +27,6 @@ public class TransactionEntityResouce extends AbstractResouce {
 		this.jsonHolder = json;
 		this.datastoreHolder = datas;
 		this.key = key;
-		
-//		this.classificator = this.datastoreHolder.get().
 	}
 
 	@Override

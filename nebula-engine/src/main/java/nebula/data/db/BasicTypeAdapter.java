@@ -9,6 +9,8 @@ import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.EnumMap;
 
+import org.joda.time.DateTime;
+
 import nebula.data.TypeAdapter;
 import nebula.lang.RawTypes;
 
@@ -34,10 +36,10 @@ abstract class BasicTypeAdapter<T extends Object> implements TypeAdapter<T, Resu
 		typeMaps.put(RawTypes.Datetime, new DbTimestampTypeAdapter());
 		typeMaps.put(RawTypes.Timestamp, new DbTimestampTypeAdapter());
 	}
-	
-	public static BasicTypeAdapter<?> getAdapter(RawTypes rawType){
-		 return typeMaps.get(rawType);
-	 }
+
+	public static BasicTypeAdapter<?> getAdapter(RawTypes rawType) {
+		return typeMaps.get(rawType);
+	}
 }
 
 class DbBooleanTypeAdapter extends BasicTypeAdapter<Boolean> {
@@ -106,54 +108,54 @@ class DbString_Varchar_TypeAdapter extends BasicTypeAdapter<String> {
 	}
 }
 
-class DbDateTypeAdapter extends BasicTypeAdapter<Date> {
+class DbDateTypeAdapter extends BasicTypeAdapter<DateTime> {
 	@Override
-	public Date readFrom(ResultSet res, int i) throws Exception {
-		Date value = res.getDate(i);
+	public DateTime readFrom(ResultSet res, int i) throws Exception {
+		DateTime value = new DateTime(res.getDate(i));
 		return res.wasNull() ? null : value;
 	}
 
 	@Override
 	public void writeTo(int index, Object v, PreparedStatement res) throws Exception {
-		res.setDate(index, (Date) v);
+		res.setDate(index, new Date(((DateTime) v).getMillis()));
 	}
 }
 
-class DbTimeTypeAdapter extends BasicTypeAdapter<Time> {
+class DbTimeTypeAdapter extends BasicTypeAdapter<DateTime> {
 	@Override
-	public Time readFrom(ResultSet res, int i) throws Exception {
-		Time value = res.getTime(i);
+	public DateTime readFrom(ResultSet res, int i) throws Exception {
+		DateTime value = new DateTime(res.getTime(i));
 		return res.wasNull() ? null : value;
 	}
 
 	@Override
 	public void writeTo(int index, Object v, PreparedStatement res) throws Exception {
-		res.setTime(index, (Time) v);
+		res.setTime(index, new Time(((DateTime) v).getMillis()));
 	}
 }
 
-class DbDatetimeTypeAdapter extends BasicTypeAdapter<Timestamp> {
+class DbDatetimeTypeAdapter extends BasicTypeAdapter<DateTime> {
 	@Override
-	public Timestamp readFrom(ResultSet res, int i) throws Exception {
-		Timestamp value = res.getTimestamp(i);
+	public DateTime readFrom(ResultSet res, int i) throws Exception {
+		DateTime value = new DateTime(res.getTimestamp(i));
 		return res.wasNull() ? null : value;
 	}
 
 	@Override
 	public void writeTo(int index, Object v, PreparedStatement res) throws Exception {
-		res.setTimestamp(index, (Timestamp) v);
+		res.setTimestamp(index, new Timestamp(((DateTime) v).getMillis()));
 	}
 }
 
-class DbTimestampTypeAdapter extends BasicTypeAdapter<Timestamp> {
+class DbTimestampTypeAdapter extends BasicTypeAdapter<DateTime> {
 	@Override
-	public Timestamp readFrom(ResultSet res, int i) throws Exception {
-		Timestamp value = res.getTimestamp(i);
+	public DateTime readFrom(ResultSet res, int i) throws Exception {
+		DateTime value = new DateTime(res.getTimestamp(i));
 		return res.wasNull() ? null : value;
 	}
 
 	@Override
 	public void writeTo(int index, Object v, PreparedStatement res) throws Exception {
-		res.setTimestamp(index, (Timestamp) v);
+		res.setTimestamp(index, new Timestamp(((DateTime) v).getMillis()));
 	}
 }

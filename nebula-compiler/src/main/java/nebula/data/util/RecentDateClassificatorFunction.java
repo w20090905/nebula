@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 import com.google.common.base.Function;
 
 public class RecentDateClassificatorFunction implements Function<DateTime, String> {
-	String[] classifications = { "Today", "This Week", "This Month", "Three Month", "Six Month" };
+	String[] classifications = { "Today", "ThisWeek", "ThisMonth", "ThreeMonth", "SixMonth" };
 	final DateTime today;
 	final DateTime thisWeek;
 	final DateTime thisMonth;
