@@ -6,9 +6,8 @@ import java.io.Reader;
 import java.net.URL;
 import java.util.List;
 
-import nebula.SmartList;
-import nebula.data.KeyMaker;
-import nebula.frame.SmartListImp;
+import nebula.data.Classificator;
+import nebula.data.SmartList;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.ANTLRReaderStream;
@@ -19,6 +18,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import util.FileUtil;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 
 //class AutoIdentifiableType implements AutoIdentifiable<Type> {
 //	@Override
@@ -44,17 +46,27 @@ public abstract class TypeLoader {
 
 	protected long lastModified;
 
-	KeyMaker<Type> typeIDSetter = new KeyMaker<Type>() {
+	SmartList<Type> types = new SmartList<Type>(new Function<Type, String>() {
 		@Override
-		public String apply(Type v) {
-			return v.name;
+		public String apply(Type from) {
+			return from.name;
 		}
-	};
-
-	SmartList<Type> types = new SmartListImp<Type>("Type", typeIDSetter);
+	});// <Type>("Type", typeIDSetter);
 
 	public TypeLoader(TypeLoader parent) {
 		this.parent = parent;
+	}
+
+	public List<Type> filter(Predicate<Type> filterFunction) {
+		return types.filter(filterFunction);
+	}
+
+	public <K> Classificator<K, Type> classify(Function<Type, K> indexerFunction) {
+		return types.classify(indexerFunction);
+	}
+	
+	public <K> Classificator<K, Type> liveClassify(Function<Type, K> indexerFunction) {
+		return types.liveClassify(indexerFunction);
 	}
 
 	List<Type> defineNebula(Reader in) throws RecognitionException {
@@ -182,8 +194,7 @@ public abstract class TypeLoader {
 		if (parent == null) {
 			return this.types;
 		} else {
-			SmartList<Type> list = new SmartListImp<Type>("Type", typeIDSetter);
-			list.addAll(types);
+			SmartList<Type> list = types.clone();
 			list.addAll(parent.all());
 			return list;
 		}

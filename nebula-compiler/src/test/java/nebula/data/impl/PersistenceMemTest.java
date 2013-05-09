@@ -1,11 +1,9 @@
 package nebula.data.impl;
 
 import junit.framework.TestCase;
-import nebula.data.Entity;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
-import nebula.data.impl.EditableEntity;
-import nebula.data.impl.InMemoryDataPersister;
+import nebula.data.Entity;
 import nebula.lang.SystemTypeLoader;
 
 public class PersistenceMemTest extends TestCase {
@@ -25,23 +23,23 @@ public class PersistenceMemTest extends TestCase {
 	public final void testDefine() {
 		store = p.define(Entity.class, "Person").get();
 		assertNotNull(store);
-//		assertEquals("Person", store.getID());
+		// assertEquals("Person", store.getID());
 
-		Entity v =  new EditableEntity();
+		Entity v = new EditableEntity();
 		assertNotNull(v);
 
 		v.put("Name", "wangshilian");
 
 		assertEquals(true, v.isDirty());
 		assertEquals("wangshilian", v.get("Name"));
-		assertEquals(null, ((EditableEntity)v).source);
+		assertEquals(null, ((EditableEntity) v).source);
 
 		p.flush();
 
 		assertEquals(true, v.isDirty());
-//		assertEquals("wangshilian", v.get("ID"));
+		// assertEquals("wangshilian", v.get("ID"));
 		assertEquals("wangshilian", v.get("Name"));
-		assertEquals(null, ((EditableEntity)v).source);
+		assertEquals(null, ((EditableEntity) v).source);
 
 		store.add(v);
 		p.flush();
@@ -74,20 +72,20 @@ public class PersistenceMemTest extends TestCase {
 		assertEquals(true, v.isDirty());
 		assertEquals("180", v.get("length"));
 		assertEquals("120", store.get("wangshilian").get("length"));
-		
+
 		p.add(v);
 		p.flush();
 
 		assertEquals(false, v.isDirty());
 		assertEquals("180", v.get("length"));
-		assertEquals("180", store.get("wangshilian").get("length"));		
+		assertEquals("180", store.get("wangshilian").get("length"));
 	}
 
-//	public final void testRemove() {
-//		fail("Not yet implemented"); // TODO
-//	}
-//
-//	public final void testTransaction() {
-//		fail("Not yet implemented"); // TODO
-//	}
+	// public final void testRemove() {
+	// fail("Not yet implemented"); // TODO
+	// }
+	//
+	// public final void testTransaction() {
+	// fail("Not yet implemented"); // TODO
+	// }
 }

@@ -13,16 +13,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import nebula.SmartList;
 import nebula.data.Entity;
-import nebula.data.KeyMaker;
+import nebula.data.SmartList;
 import nebula.data.impl.EditableEntity;
-import nebula.frame.SmartListImp;
 import nebula.lang.Type;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 
 public class DbMasterDataExecutor implements DbDataExecutor {
@@ -88,8 +87,8 @@ public class DbMasterDataExecutor implements DbDataExecutor {
 		ResultSet rs = null;
 		try {
 
-			final SmartList<DatabaseColumn> mapColumns = new SmartListImp<DatabaseColumn>("DbColumn",
-					new KeyMaker<DatabaseColumn>() {
+			final SmartList<DatabaseColumn> mapColumns = new SmartList<DatabaseColumn>(
+					new Function<DatabaseColumn, String>() {
 						@Override
 						public String apply(DatabaseColumn data) {
 							return data.columnName;

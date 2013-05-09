@@ -40,7 +40,7 @@ public class EntityListResouce extends AbstractResouce {
 			dataList = datastoreHolder.get().all();
 		} else {
 			Predicate<Entity> filter = filterBuilder.buildFrom(req.getParameterMap(), null);
-			dataList = datastoreHolder.get().query(filter);
+			dataList = datastoreHolder.get().filter(filter);
 		}
 
 		ByteArrayOutputStream bout = new ByteArrayOutputStream();

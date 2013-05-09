@@ -1,24 +1,26 @@
-package nebula.frame;
+package nebula.data;
 
 import junit.framework.TestCase;
-import nebula.SmartList;
-import nebula.data.KeyMaker;
+import nebula.data.Filter;
+import nebula.data.SmartList;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 public class SmartListImpTest extends TestCase {
-	SmartListImp<Person> list = null;
+	SmartList<Person> list = null;
 	String name = "test";
 
 	class Person {
 		String name;
 		int age;
+		int height;
 	}
 
 	Person p = null;
 
 	protected void setUp() throws Exception {
-		list = new SmartListImp<Person>(name, new KeyMaker<Person>() {
+		list = new SmartList<Person>(new Function<Person, String>() {
 			@Override
 			public String apply(Person data) {
 				return data.name;
@@ -41,10 +43,6 @@ public class SmartListImpTest extends TestCase {
 
 	}
 
-	public final void testGetName() {
-		assertEquals(name, list.getName());
-	}
-
 	public final void testGetString() {
 		assertEquals(0, list.size());
 		list.add(p);
@@ -57,14 +55,6 @@ public class SmartListImpTest extends TestCase {
 		assertEquals(0, list.size());
 		list.add(p);
 		assertEquals(1, list.size());
-	}
-
-	public final void testIndexOfByKey() {
-		assertEquals(0, list.size());
-		list.add(p);
-		assertEquals(1, list.size());
-		int i= list.indexOfByKey(p);
-		assertEquals(0, i);
 	}
 
 	public final void testRemoveInt() {
@@ -82,53 +72,53 @@ public class SmartListImpTest extends TestCase {
 		p.name = "wang12";
 		p.age = 10;
 		list.add(p);
-		
+
 		p = new Person();
 		p.name = "wang13";
 		p.age = 12;
 		list.add(p);
-		
+
 		p = new Person();
 		p.name = "wang14";
 		p.age = 12;
 		list.add(p);
-		
+
 		p = new Person();
 		p.name = "wang15";
 		p.age = 13;
 		list.add(p);
-		
+
 		assertEquals(5, list.size());
-		SmartList<Person> result =  list.query(new Predicate<SmartListImpTest.Person>() {			
+		Filter<Person> result = list.liveFilter(new Predicate<Person>() {
 			@Override
 			public boolean apply(Person v) {
 				return v.age == 12;
 			}
 		});
-		assertEquals(2, result.size());
-		result.remove(1);
-		result.remove(0);
-		
-		assertEquals(0, result.size());
-		
-		assertEquals(5, list.size());
-		
-		
+		assertEquals(2, result.get().size());
+		list.remove(1);
+		list.remove(0);
+
+		assertEquals(2, result.get().size());
+
+		assertEquals(3, list.size());
+
 	}
 
 	public final void testSave() {
-		p.age = 1000;		
+		p.age = 1000;
 		assertEquals(0, list.size());
-		
+
 		list.add(p);
 		assertEquals(1, list.size());
 		Person w = list.get("wangshilian");
 		assertEquals(1000, w.age);
-		
+
 		p.age = 4321;
-		list.save(p);
+
+		list.add(p);
 		w = list.get("wangshilian");
-		assertEquals(4321, w.age);		
+		assertEquals(4321, w.age);
 	}
 
 }

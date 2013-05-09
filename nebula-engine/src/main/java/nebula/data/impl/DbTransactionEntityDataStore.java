@@ -5,25 +5,20 @@ import java.util.Map;
 
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.KeyMaker;
 import nebula.data.db.DbDataExecutor;
 import nebula.lang.Type;
 
 public class DbTransactionEntityDataStore extends EntityDataStore {
 
 	final DbDataExecutor db;
-	final KeyMaker idSetter;
 
 	DbTransactionEntityDataStore(final DbEntityDataPersister persistence, Type type, final DbDataExecutor exec) {
-		super(persistence, type);
+		super(IdMakerBuilder.getIDSetter(type), persistence, type);
 		this.db = exec;
-		idSetter = IDSetterBuilder.getIDSetter(type);
 
 		List<EditableEntity> list = exec.getAll();
 		for (EditableEntity data : list) {
-			String id = idSetter.apply(data);
-			data.put("ID", id);
-			loadin(data, id);
+			loadin(data);
 		}
 	}
 
@@ -34,7 +29,7 @@ public class DbTransactionEntityDataStore extends EntityDataStore {
 			assert newEntity.source instanceof DbEntity;
 			DbEntity sourceEntity = (DbEntity) newEntity.source;
 
-			assert sourceEntity == datas.get(sourceEntity.index);
+			assert sourceEntity == this.values.get(sourceEntity.index);
 			lock.lock();
 			try {
 				// DB
@@ -49,14 +44,15 @@ public class DbTransactionEntityDataStore extends EntityDataStore {
 				lock.unlock();
 			}
 		} else { // insert
-			String id =idSetter.apply(newEntity);
+			String id = this.idMaker.apply(newEntity);
+
 			newEntity.put("ID", id);
 
 			lock.lock();
 
 			// DB
 			db.insert(newEntity);
-			EntityImp newSource = loadin(db.get(id), id);
+			EntityImp newSource = loadin(db.get(id));
 
 			newEntity.resetWith(newSource);
 
@@ -73,19 +69,16 @@ public class DbTransactionEntityDataStore extends EntityDataStore {
 		}
 	}
 
-	private EntityImp loadin(EditableEntity entity, String id) {
-		entity.put(KEY_NAME, id);
-		DbEntity inner = new DbEntity(this, entity.newData, datas.size());
-		this.datas.add(inner);
-		this.quickIndex.put(id, inner);
+	private EntityImp loadin(EditableEntity entity) {
+		DbEntity inner = new DbEntity(this, entity.newData, this.values.size());
+		this.values.add(inner);
 		return inner;
 	}
 
 	private EntityImp loadin(DbEntity sourceEntity, EditableEntity newEntity) {
 		newEntity.put(KEY_NAME, sourceEntity.getID());
 		DbEntity inner = new DbEntity(this, newEntity.newData, sourceEntity.index);
-		this.datas.set(sourceEntity.index, inner);
-		this.quickIndex.put(sourceEntity.getID(), inner);
+		this.values.add(inner);
 		return inner;
 	}
 

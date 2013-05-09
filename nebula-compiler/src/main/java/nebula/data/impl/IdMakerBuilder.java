@@ -3,7 +3,6 @@ package nebula.data.impl;
 import java.util.List;
 
 import nebula.data.Entity;
-import nebula.data.KeyMaker;
 import nebula.lang.Field;
 import nebula.lang.Reference;
 import nebula.lang.Type;
@@ -12,12 +11,13 @@ import nebula.lang.TypeStandalone;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
-public class IDSetterBuilder {
-	static Log log = LogFactory.getLog(IDSetterBuilder.class); 
+public class IdMakerBuilder {
+	static Log log = LogFactory.getLog(IdMakerBuilder.class); 
 
-	public static KeyMaker<Entity> getIDSetter(Type type) {
+	public static Function<Entity,String> getIDSetter(Type type) {
 		List<String> keys = Lists.newArrayList();
 		for (Field f : type.getFields()) {
 			if (f.getType().getStandalone() == TypeStandalone.Basic && f.isKey()) {
@@ -48,7 +48,7 @@ public class IDSetterBuilder {
 		}
 	}
 
-	static private  class IDSetter1 implements KeyMaker<Entity> {
+	static private  class IDSetter1 implements Function<Entity,String> {
 		final String key1;
 
 		IDSetter1(String key1) {
@@ -61,7 +61,7 @@ public class IDSetterBuilder {
 		}
 	}
 
-	static private  class IDSetter2 implements KeyMaker<Entity> {
+	static private  class IDSetter2 implements Function<Entity,String> {
 		final String key1;
 		final String key2;
 
@@ -76,7 +76,7 @@ public class IDSetterBuilder {
 		}
 	}
 
-	static private  class IDSetter3 implements KeyMaker<Entity> {
+	static private  class IDSetter3 implements Function<Entity,String> {
 		final String key1;
 		final String key2;
 		final String key3;
@@ -93,7 +93,7 @@ public class IDSetterBuilder {
 		}
 	}
 
-	static private class IDSetter4 implements KeyMaker<Entity> {
+	static private class IDSetter4 implements Function<Entity,String> {
 		final String key1;
 		final String key2;
 		final String key3;

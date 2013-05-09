@@ -3,6 +3,8 @@ package nebula.data.db;
 import java.io.StringReader;
 
 import junit.framework.TestCase;
+import nebula.data.db.DbConfiguration;
+import nebula.data.db.DbMasterDataSqlHelper;
 import nebula.data.db.derby.DerbyConfiguration;
 import nebula.lang.Type;
 import nebula.lang.TypeLoaderForTest;

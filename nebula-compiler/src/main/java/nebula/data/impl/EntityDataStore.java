@@ -1,53 +1,38 @@
 package nebula.data.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
+import nebula.data.ClassifiableFilter;
+import nebula.data.Classificator;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.Index;
-import nebula.lang.Field;
+import nebula.data.SmartList;
 import nebula.lang.Type;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ListMultimap;
 
 public class EntityDataStore implements DataStore<Entity> {
 	public static final String KEY_NAME = "ID";
 
 	final DataPersister<Entity> persistence;
-	final Type type;
+	final SmartList<Entity> values;
+	final ReentrantLock lock = new ReentrantLock();
+	final Function<Entity, String> idMaker;
 
-	final List<Entity> datas;
-	final Map<String, Entity> quickIndex;
-
-	ReentrantLock lock = new ReentrantLock();
-
-	EntityDataStore(DataPersister<Entity> persistence, Type type) {
+	EntityDataStore(Function<Entity, String> keyMaker, DataPersister<Entity> persistence, Type type) {
 		this.persistence = persistence;
-		this.type = type;
-		datas = new CopyOnWriteArrayList<Entity>();
-		quickIndex = new HashMap<String, Entity>();
+		this.values = new SmartList<Entity>(keyMaker);
+		this.idMaker = keyMaker;
 	}
 
 	@Override
 	public Entity get(String key) {
-		return quickIndex.get(key);
-	}
-
-	@Override
-	public List<Entity> query(Predicate<Entity> filter) {
-		List<Entity> newList = new ArrayList<Entity>();
-		for (Entity item : datas) {
-			if (filter.apply(item)) newList.add(item);
-		}
-		return newList;
+		return this.values.get(key);
 	}
 
 	@Override
@@ -81,7 +66,6 @@ public class EntityDataStore implements DataStore<Entity> {
 			newData.putAll(newEntity.newData);
 
 			lock.lock();
-			lock.lock();
 			try {
 				EntityImp source = newEntity.source;
 				if (newEntity.data == source.data) {
@@ -94,22 +78,14 @@ public class EntityDataStore implements DataStore<Entity> {
 				lock.unlock();
 			}
 		} else {
+			String id = idMaker.apply(newEntity);
+			newEntity.put(KEY_NAME, id);
 			Map<String, Object> newData = new HashMap<String, Object>(newEntity.newData);
-
-			String id = "";
-			for (Field f : type.getFields()) {
-				if (f.isKey()) {
-					id += newData.get(f.getName());
-				}
-			}
-			newData.put("ID", id);
-
 			lock.lock();
 			try {
 				EntityImp source = new EntityImp(this, newData);
 				newEntity.resetWith(source);
-				this.datas.add(source);
-				this.quickIndex.put(source.getID(), source);
+				this.values.add(source);
 			} finally {
 				lock.unlock();
 			}
@@ -118,19 +94,11 @@ public class EntityDataStore implements DataStore<Entity> {
 
 	@Override
 	public List<Entity> all() {
-		return this.datas;
-	}
-
-	public String getID() {
-		return type.getName();
-	}
-
-	public Type getType() {
-		return this.type;
+		return this.values;
 	}
 
 	public void clear() {
-		datas.clear();
+		values.clear();
 	}
 
 	@Override
@@ -145,22 +113,28 @@ public class EntityDataStore implements DataStore<Entity> {
 
 	}
 
-	Map<Index<Entity, String>, ListMultimap<String, Entity>> quickClassificator;
-
 	@Override
-	public void addIndex(Index<Entity, String> key) {
-		ListMultimap<String, Entity> data = ArrayListMultimap.create();
-		quickClassificator.put(key, data);
+	public <K> Classificator<K, Entity> classify(Function<Entity, K> indexerFunction) {
+		return this.values.classify(indexerFunction);
 	}
 
 	@Override
-	public ListMultimap<String, Entity> getByIndex(Index<Entity, String> key) {
-		return quickClassificator.get(key);
+	public <K> Classificator<K, Entity> liveClassify(Function<Entity, K> indexerFunction) {
+		return this.values.liveClassify(indexerFunction);
 	}
 
 	@Override
-	public void removeIndex(Index<Entity, String> key) {
-		quickClassificator.remove(key);
+	public List<Entity> filter(Predicate<Entity> filterFunction) {
+		return this.values.filter(filterFunction);
 	}
 
+	@Override
+	public ClassifiableFilter<Entity> liveFilter(Predicate<Entity> filterFunction) {
+		return this.values.liveFilter(filterFunction);
+	}
+
+	@Override
+	public Function<Entity, String> getIdMaker() {
+		return this.idMaker;
+	}
 }

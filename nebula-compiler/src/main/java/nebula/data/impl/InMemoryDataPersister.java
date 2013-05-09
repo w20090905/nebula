@@ -7,11 +7,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
 import nebula.data.Callback;
-import nebula.data.Holder;
-import nebula.data.HolderListener;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
+import nebula.data.Holder;
+import nebula.data.HolderListener;
 import nebula.data.util.HolderBuilder;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -32,15 +32,16 @@ public class InMemoryDataPersister implements DataPersister<Entity> {
 		Holder<DataStore<Entity>> store = this.stores.get(name);
 		if (store == null) {
 			Type type = loader.findType(name);
-			DataStore<Entity> newData = new EntityDataStore(this, type);
-			store =  HolderBuilder.of(newData);
+			DataStore<Entity> newData = new EntityDataStore(IdMakerBuilder.getIDSetter(type), this, type);
+			store = HolderBuilder.of(newData);
 			stores.put(name, store);
 		}
 		return store;
 	}
 
 	@Override
-	public void define(Class<Entity> clz, String name, HolderListener<DataStore<Entity>> listener) {
+	public void define(Class<Entity> clz, String name,
+			HolderListener<DataStore<Entity>> listener) {
 		Holder<DataStore<Entity>> store = define(clz, name);
 		store.addListener(listener);
 	}
@@ -53,7 +54,7 @@ public class InMemoryDataPersister implements DataPersister<Entity> {
 			oldData.unload();
 
 			Type type = loader.findType(name);
-			DataStore<Entity> newData = new EntityDataStore(this, type);
+			DataStore<Entity> newData = new EntityDataStore(oldData.getIdMaker(), this, type);
 			datastoreHolder.update(oldData, newData);
 			return datastoreHolder;
 		} else {

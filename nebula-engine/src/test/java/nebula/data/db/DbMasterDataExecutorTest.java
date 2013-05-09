@@ -11,6 +11,8 @@ import junit.framework.TestCase;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
+import nebula.data.db.DbConfiguration;
+import nebula.data.db.DbMasterDataExecutor;
 import nebula.data.impl.EditableEntity;
 import nebula.lang.Type;
 import nebula.lang.TypeLoaderForTest;

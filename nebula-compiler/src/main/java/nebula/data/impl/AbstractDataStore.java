@@ -1,60 +1,52 @@
 package nebula.data.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
+import nebula.data.ClassifiableFilter;
+import nebula.data.Classificator;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
-import nebula.data.Index;
+import nebula.data.SmartList;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ListMultimap;
 
-public class AbstractDataStore<K> implements DataStore<K> {
+public class AbstractDataStore<V> implements DataStore<V> {
 	public static final String KEY_NAME = "ID";
 
-	final DataPersister<K> persistence;
-	final List<K> datas;
-	final Map<String, K> quickIndex;
+	final DataPersister<V> persistence;
+	final SmartList<V> values;
+	final Map<String, V> quickIndex;
 
 	ReentrantLock lock = new ReentrantLock();
+	final Function<V, String> keyMaker;
 
-	AbstractDataStore(DataPersister<K> persistence) {
+	AbstractDataStore(Function<V, String> keyMaker,DataPersister<V> persistence) {
 		this.persistence = persistence;
-		datas = new CopyOnWriteArrayList<K>();
-		quickIndex = new HashMap<String, K>();
+		values = new SmartList<V>(keyMaker);
+		quickIndex = new HashMap<String, V>();
+		this.keyMaker = keyMaker;
 	}
 
 	@Override
-	public K get(String key) {
+	public V get(String key) {
 		return quickIndex.get(key);
 	}
 
 	@Override
-	public List<K> query(Predicate<K> filter) {
-		List<K> newList = new ArrayList<K>();
-		for (K item : datas) {
-			if (filter.apply(item)) newList.add(item);
-		}
-		return newList;
-	}
-
-	@Override
-	public void add(K v) {
+	public void add(V v) {
 //		if (v.isTransient()) {
-//			EditableK K = (EditableK) v;
-//			K.store = this;
+//			EditableK V = (EditableK) v;
+//			V.store = this;
 //		}
 		persistence.add(v);
 	}
 
 	@Override
-	public void remove(K v) {
+	public void remove(V v) {
 	}
 
 	@Override
@@ -63,12 +55,12 @@ public class AbstractDataStore<K> implements DataStore<K> {
 	}
 
 	@Override
-	public void markChanged(K v) {
+	public void markChanged(V v) {
 		persistence.markChanged(v);
 	}
 
 	@Override
-	public void apply(K newV) {
+	public void apply(V newV) {
 //		EditableK newK = (EditableK) newV;
 //		if (newK.source != null) {
 //			Map<String, Object> newData = new HashMap<String, Object>(newK.data);
@@ -82,7 +74,7 @@ public class AbstractDataStore<K> implements DataStore<K> {
 //					source.data = newData;
 //					newK.resetWith(source);
 //				} else {
-//					throw new RuntimeException("K update by some others");
+//					throw new RuntimeException("V update by some others");
 //				}
 //			} finally {
 //				lock.unlock();
@@ -111,12 +103,12 @@ public class AbstractDataStore<K> implements DataStore<K> {
 	}
 
 	@Override
-	public List<K> all() {
-		return this.datas;
+	public List<V> all() {
+		return this.values;
 	}
 
 	public void clear() {
-		datas.clear();
+		values.clear();
 	}
 
 	@Override
@@ -131,23 +123,29 @@ public class AbstractDataStore<K> implements DataStore<K> {
 
 	}
 
-	Map<Index<K, String>, ListMultimap<String, K>> quickClassificator;
-
 	@Override
-	public void addIndex(Index<K, String> key) {
-		ListMultimap<String, K> data = ArrayListMultimap.create();
-		quickClassificator.put(key, data);
+	public <K> Classificator<K, V> classify(Function<V, K> indexerFunction) {
+		return values.classify(indexerFunction);
 	}
 
 	@Override
-	public ListMultimap<String, K> getByIndex(Index<K, String> key) {
-		return quickClassificator.get(key);
+	public <K> Classificator<K, V> liveClassify(Function<V, K> indexerFunction) {
+		return values.liveClassify(indexerFunction);
 	}
 
 	@Override
-	public void removeIndex(Index<K, String> key) {
-		quickClassificator.remove(key);
+	public List<V> filter(Predicate<V> filterFunction) {
+		return values.filter(filterFunction);
 	}
 
+	@Override
+	public ClassifiableFilter<V> liveFilter(Predicate<V> filterFunction) {
+		return values.liveFilter(filterFunction);
+	}
+
+	@Override
+	public Function<V, String> getIdMaker() {
+		return this.keyMaker;
+	}
 
 }

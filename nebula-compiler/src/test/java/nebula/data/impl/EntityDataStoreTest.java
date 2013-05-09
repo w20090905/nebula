@@ -1,13 +1,16 @@
-package nebula.data;
+package nebula.data.impl;
 
 import java.util.List;
 
 import junit.framework.TestCase;
+import nebula.data.DataPersister;
+import nebula.data.DataStore;
+import nebula.data.Entity;
 import nebula.data.impl.EditableEntity;
 import nebula.data.impl.InMemoryDataPersister;
 import nebula.lang.SystemTypeLoader;
 
-public class EntityStoreTest extends TestCase {
+public class EntityDataStoreTest extends TestCase {
 
 	DataPersister<Entity> p;
 	DataStore<Entity> store;
@@ -21,14 +24,14 @@ public class EntityStoreTest extends TestCase {
 		super.tearDown();
 	}
 
-//	public final void testCreateNew() {
-//		Entity entity = store.createNew();
-//		assertNotNull(entity);
-//	}
+	// public final void testCreateNew() {
+	// Entity entity = store.createNew();
+	// assertNotNull(entity);
+	// }
 
 	public final void testAdd() {
 		Entity v = new EditableEntity();
-		v.put("ID", "wangshilian");
+		v.put("Name", "wangshilian");
 		store.add(v);
 		store.flush();
 		assertEquals(1, store.all().size());
@@ -49,17 +52,16 @@ public class EntityStoreTest extends TestCase {
 		assertEquals(1, store.all().size());
 		assertEquals("wangshilian", v.getID());
 
-
-		try{
+		try {
 			v.put("length", "180");
-		}catch (RuntimeException e) {
+		} catch (RuntimeException e) {
 			assertTrue(e instanceof UnsupportedOperationException);
 		}
 
 		v = v.editable();
-		
-		v.put("length", "180");		
-		
+
+		v.put("length", "180");
+
 		List<Entity> list = store.all();
 		assertEquals(1, list.size());
 		Entity e1 = list.get(0);

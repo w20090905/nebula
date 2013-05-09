@@ -1,7 +1,7 @@
 package nebula.data.db.oracle;
 
-import nebula.data.db.DbMasterDataExecutor;
 import nebula.data.db.DbConfiguration;
+import nebula.data.db.DbMasterDataExecutor;
 import nebula.lang.Type;
 
 import org.apache.commons.logging.Log;

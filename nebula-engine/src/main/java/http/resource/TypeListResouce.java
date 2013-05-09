@@ -50,8 +50,8 @@ public class TypeListResouce extends AbstractResouce {
 			this.lastModified = newModified;
 			dataList = typeLoader.all();
 		} else {
-			Predicate<Type> filter = filterBuilder.buildFrom(req.getParameterMap(), null);
-			dataList = typeLoader.all().query(filter);
+			Predicate<Type> filterCondition = filterBuilder.buildFrom(req.getParameterMap(), null);
+			dataList = typeLoader.filter(filterCondition);
 		}
 
 		ByteArrayOutputStream bout = new ByteArrayOutputStream();
