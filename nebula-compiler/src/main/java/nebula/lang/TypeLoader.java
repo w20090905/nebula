@@ -74,7 +74,7 @@ public abstract class TypeLoader {
 			types.addAll(typeList);
 
 			if (log.isTraceEnabled()) {
-				log.trace(typeList.get(0).getName() + " load succeed");
+				log.trace("\tload type define succeed - " + typeList.get(0).getName());
 			}
 			return typeList;
 		} catch (IOException e) {
@@ -94,7 +94,7 @@ public abstract class TypeLoader {
 			t.lastModified = this.lastModified;
 		}
 		if (log.isTraceEnabled()) {
-			log.trace(typeList.get(0).getName() + " load succeed");
+			log.trace("\tload type [" + typeList.get(0).getName() + "] succeed from reader ");
 		}
 		return typeList;
 	}
@@ -112,7 +112,7 @@ public abstract class TypeLoader {
 		}
 		types.addAll(typeList);
 		if (log.isTraceEnabled()) {
-			log.trace(typeList.get(0).getName() + " load succeed");
+			log.trace("\tload type [" + typeList.get(0).getName() + "]  succeed  from url - " + typeList.get(0).url);
 		}
 		return typeList;
 	}
@@ -130,19 +130,20 @@ public abstract class TypeLoader {
 	}
 
 	public Type findType(String name) {
-		if (log.isTraceEnabled()) {
-			log.trace("search type define - " + name);
-		}
+
 		try {
 			Type type = parent.findType(name);
 			if (type != null) {
+				if (log.isTraceEnabled()) {
+					log.trace("\tfind type [" + name + "]  from " + this.getClass().getName());
+				}
 				return type;
 			}
 
 			type = types.get(name);
 			if (type != null) {
 				if (log.isTraceEnabled()) {
-					log.trace("find type define - " + name);
+					log.trace("\tfind type [" + name + "]  from " + this.getClass().getName());
 				}
 				return type;
 			}
@@ -151,7 +152,7 @@ public abstract class TypeLoader {
 			if (url != null) {
 				List<Type> typeList = defineNebula(url);
 				if (log.isDebugEnabled()) {
-					log.debug("\tload type define - " + name);
+					log.debug("loaded type [" + name + "]  \tfrom " + this.getClass().getName());
 				}
 				return typeList.get(0);
 			} else {

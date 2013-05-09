@@ -22,8 +22,8 @@ public class EditableTypeLoader extends TypeLoader {
 	}
 
 	public void loadFolder(File root) {
-		if (log.isTraceEnabled()) {
-			log.trace(root.getPath());
+		if (log.isDebugEnabled()) {
+			log.debug("load type define from folder - " + root.getPath());
 		}
 		loadFolder(root, root);
 	}

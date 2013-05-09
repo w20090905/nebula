@@ -57,9 +57,9 @@ public class EntityResouceEngine implements ResourceEngine {
 		}
 
 		if (log.isTraceEnabled()) {
-			log.trace("target.getPath : " + path);
-			log.trace("\ttypeName : " + typeName);
-			log.trace("\tid : " + id);
+			log.trace("\tresolve path - " + path);
+			log.trace("\t\ttypeName : " + typeName);
+			log.trace("\t\tid : " + id);
 		}
 
 		if ("Type".equals(typeName)) {

@@ -43,8 +43,8 @@ public abstract class DbConfiguration {
 	public void init() {
 		try {
 			Class.forName(driverClass).newInstance();
-			if(log.isDebugEnabled()){
-				log.debug("\tload driverClass - " + driverClass);				
+			if(log.isTraceEnabled()){
+				log.trace("\tload driverClass - " + driverClass);				
 			}
 			conn = DriverManager.getConnection(this.url, this.userName, this.userPassword);
 			log.info("== open database - " + this.url);
@@ -106,7 +106,7 @@ public abstract class DbConfiguration {
 				conn.commit();
 				conn.close();
 			}
-			log.debug("== Database disconnect");
+			log.debug("== database disconnect");
 		} catch (SQLException e) {
 			log.debug("Exception When destroy db");
 			log.debug(e);

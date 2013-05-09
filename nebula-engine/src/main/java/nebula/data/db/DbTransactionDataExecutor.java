@@ -23,6 +23,8 @@ import nebula.lang.Type;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.google.common.base.Joiner;
+
 public class DbTransactionDataExecutor implements DbDataExecutor {
 	private static final Log log = LogFactory.getLog(DbTransactionDataExecutor.class);
 
@@ -44,14 +46,15 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 	// final private DbColumn[] keyColumns;
 	final DbMasterDataSqlHelper builder;
 	final DbConfiguration config;
-	
+
 	final EntityFieldSerializer serializer;
 
 	// final private Map<String, Integer> map;
 
 	// final private String[] systemFields = new String[] { "TIMESTAMP_" };
 
-	public DbTransactionDataExecutor(final DbConfiguration config, final Connection conn, final Type type, final DbMasterDataSqlHelper helper) {
+	public DbTransactionDataExecutor(final DbConfiguration config, final Connection conn, final Type type,
+			final DbMasterDataSqlHelper helper) {
 		this.config = config;
 		this.type = type;
 		this.conn = conn;
@@ -62,7 +65,7 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 
 		userColumns = builder.getUserColumns();
 		systemColumns = builder.getSystemColumns();
-		
+
 		serializer = builder.getEntitySerializer();
 
 		this.ensureDBSchema();
@@ -74,7 +77,7 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 			SQL_DELETE = conn.prepareStatement(builder.builderDelete());
 			SQL_LIST = conn.prepareStatement(builder.builderList());
 		} catch (Exception e) {
-			log.error(e.getClass().getName(),e);
+			log.error(e.getClass().getName(), e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -85,12 +88,13 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 		ResultSet rs = null;
 		try {
 
-			final SmartList<DatabaseColumn> mapColumns = new SmartListImp<DatabaseColumn>("DbColumn", new KeyMaker<DatabaseColumn>() {
-				@Override
-				public String apply(DatabaseColumn data) {
-					return data.columnName;
-				}
-			});
+			final SmartList<DatabaseColumn> mapColumns = new SmartListImp<DatabaseColumn>("DbColumn",
+					new KeyMaker<DatabaseColumn>() {
+						@Override
+						public String apply(DatabaseColumn data) {
+							return data.columnName;
+						}
+					});
 
 			for (int i = 0; i < userColumns.length; i++) {
 				mapColumns.add(userColumns[i]);
@@ -111,7 +115,7 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 				ResultSetMetaData metaData = rs.getMetaData();
 				int columnsSize = metaData.getColumnCount();
 
-				if (log.isTraceEnabled()) log.trace("Before update column ");
+				if (log.isTraceEnabled()) log.trace("\tcheck columns define");
 
 				ArrayList<String> needDeletedColumns = new ArrayList<String>();
 				Map<String, String> allColumns = new HashMap<String, String>();
@@ -125,6 +129,10 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 
 					DatabaseColumn newColumn = mapColumns.get(columnName);
 					if (newColumn == null) {
+						if (log.isTraceEnabled())
+							log.trace("\t\t" + metaData.getColumnName(i)
+									+ "\t column type not exist in type or is system column \t- "
+									+ metaData.getColumnTypeName(i) + "\t" + metaData.getColumnDisplaySize(i));
 						if (!columnName.endsWith("_")) {
 							needDeletedColumns.add(columnName);
 						}
@@ -137,21 +145,38 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 						int jdbcType = metaData.getColumnType(i);
 
 						if (jdbcType != newColumn.jdbcType) {
+							if (log.isTraceEnabled())
+								log.trace("\t\t" + metaData.getColumnName(i)
+										+ "\t column type not match,need update \t- " + metaData.getColumnTypeName(i)
+										+ "\t" + metaData.getColumnDisplaySize(i));
 							typeNotMatchColumns.add(newColumn);
+
 						} else {
 							switch (jdbcType) {
 							case Types.DECIMAL:
 								if (newColumn.precision == precision && newColumn.scale == scale) {
 
 								} else if (newColumn.precision > precision && newColumn.scale > scale) {
+
+									if (log.isTraceEnabled())
+										log.trace("\t" + metaData.getColumnName(i)
+												+ "\t\t column size not match,need update \t- "
+												+ metaData.getColumnTypeName(i) + "\t"
+												+ metaData.getColumnDisplaySize(i));
 									typeSizeNotMatchColumns.add(newColumn);
 								} else if (newColumn.precision > precision || newColumn.scale > scale) {
 									int newPrecision = newColumn.precision > precision ? newColumn.precision
 											: precision;
 									int newScale = newColumn.scale > scale ? newColumn.scale : scale;
-									typeSizeNotMatchColumns.add(new DatabaseColumn(newColumn.fieldName, newColumn.columnName,
-											newColumn.key, newColumn.nullable, false,newColumn.rawType, newColumn.size,
-											newPrecision, newScale));
+									typeSizeNotMatchColumns.add(new DatabaseColumn(newColumn.fieldName,
+											newColumn.columnName, newColumn.key, newColumn.nullable, false,
+											newColumn.rawType, newColumn.size, newPrecision, newScale));
+
+									if (log.isTraceEnabled())
+										log.trace("\t" + metaData.getColumnName(i)
+												+ "\t\tcolumn precision not match,need update \t- "
+												+ metaData.getColumnTypeName(i) + "\t"
+												+ metaData.getColumnDisplaySize(i));
 								}
 								break;
 							case Types.VARCHAR:
@@ -170,14 +195,13 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 						allColumns.put(columnName, columnName);
 					}
 
-					if (log.isTraceEnabled()) {
-						log.trace("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
-								+ metaData.getColumnDisplaySize(i));
-					}
 				}
 				rs.close();
 				conn.commit();
 
+				if (log.isTraceEnabled()) log.trace("\tcheck columns define finished");
+
+				if (log.isTraceEnabled()) log.trace("\tcheck key define");
 				StringBuffer newKeys = new StringBuffer();
 				ArrayList<DatabaseColumn> notExistColumns = new ArrayList<DatabaseColumn>();
 				for (DatabaseColumn f : mapColumns) {
@@ -194,22 +218,25 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 						newKeys.append(f.columnName);
 					}
 				}
+				if (log.isTraceEnabled()) log.trace("\tcheck key define finished");
 
 				// key changed
 				if (isKeyChanged) {
 					statement = conn.createStatement();
-					log.trace("##\t" + builder.builderDeleteAll());
+					if (log.isTraceEnabled()) log.trace("\t[" + builder.tableName + "] key changed,reconstruct ");
 					statement.addBatch(builder.builderDrop());
 					statement.addBatch(builder.builderCreate());
 					statement.executeBatch();
+					log.trace("\t[" + builder.tableName + "] reconstruct finished table  finished");
 
 					if (log.isTraceEnabled()) {
-						log.trace("== After add not exist column ");
+						if (log.isTraceEnabled())
+							log.trace("\t[" + builder.tableName + "] table layout after add not exist column");
 						rs = statement.executeQuery(builder.builderGetMeta());
 						metaData = rs.getMetaData();
 						columnsSize = metaData.getColumnCount();
 						for (int i = 1; i <= columnsSize; i++) {
-							log.trace("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
+							log.trace("\t\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
 									+ metaData.getColumnDisplaySize(i));
 						}
 						rs.close();
@@ -217,21 +244,24 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 				} else {
 					// add not exist column to DB
 					if (notExistColumns.size() > 0) {
+						if (log.isTraceEnabled()) log.trace("\tadd not exist column");
 						statement = conn.createStatement();
 						for (DatabaseColumn c : notExistColumns) {
-							log.trace("##\t" + builder.builderAddColumn(c));
+							log.trace("\t\t add column - " + builder.builderAddColumn(c));
 							statement.addBatch(builder.builderAddColumn(c));
 						}
-						 statement.executeBatch();
-						 
+						statement.executeBatch();
+
+						if (log.isTraceEnabled()) log.trace("\tadd not exist column finished");
 						if (log.isTraceEnabled()) {
-							log.trace("== After add not exist column ");
+							if (log.isTraceEnabled())
+								log.trace("\t[" + builder.tableName + "] table layout after add not exist column");
 							rs = statement.executeQuery(builder.builderGetMeta());
 							metaData = rs.getMetaData();
 							columnsSize = metaData.getColumnCount();
 							for (int i = 1; i <= columnsSize; i++) {
-								log.trace("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
-										+ metaData.getColumnDisplaySize(i));
+								log.trace("\t\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i)
+										+ "\t" + metaData.getColumnDisplaySize(i));
 							}
 							rs.close();
 						}
@@ -239,21 +269,24 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 
 					// update don't match column to DB
 					if (typeNotMatchColumns.size() > 0) {
+						if (log.isTraceEnabled()) log.trace("\tupdate don't match column");
 						statement = conn.createStatement();
 						for (DatabaseColumn c : typeNotMatchColumns) {
-							log.trace("##\t" + builder.builderModifyColumnDateType(c));
+							log.trace("\t\tupdate column - " + builder.builderModifyColumnDateType(c));
 							statement.addBatch(builder.builderRemoveColumn(c.columnName));
 							statement.addBatch(builder.builderAddColumn(c));
 						}
 						statement.executeBatch();
+						if (log.isTraceEnabled()) log.trace("\tupdate don't match column finished");
 						if (log.isTraceEnabled()) {
-							log.trace("== After update don't match column to DB");
+							if (log.isTraceEnabled())
+								log.trace("\t[" + builder.tableName + "] table layout after update don't match column");
 							rs = statement.executeQuery(builder.builderGetMeta());
 							metaData = rs.getMetaData();
 							columnsSize = metaData.getColumnCount();
 							for (int i = 1; i <= columnsSize; i++) {
-								log.trace("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
-										+ metaData.getColumnDisplaySize(i));
+								log.trace("\t\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i)
+										+ "\t" + metaData.getColumnDisplaySize(i));
 							}
 							rs.close();
 						}
@@ -261,20 +294,25 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 
 					// update size don't match column to DB
 					if (typeSizeNotMatchColumns.size() > 0) {
+						if (log.isTraceEnabled()) log.trace("\tupdate size don't match column");
 						statement = conn.createStatement();
 						for (DatabaseColumn c : typeSizeNotMatchColumns) {
-							log.trace("##\t" + builder.builderModifyColumnDateType(c));
+							log.trace("\t\tmodify column - " + builder.builderModifyColumnDateType(c));
 							statement.addBatch(builder.builderModifyColumnDateType(c));
 						}
 						statement.executeBatch();
+						if (log.isTraceEnabled()) log.trace("\tupdate size don't match column finished");
+
 						if (log.isTraceEnabled()) {
-							log.trace("== update size don't match column to DB");
+							if (log.isTraceEnabled())
+								log.trace("\t[" + builder.tableName
+										+ "] table layout after update size don't match column");
 							rs = statement.executeQuery(builder.builderGetMeta());
 							metaData = rs.getMetaData();
 							columnsSize = metaData.getColumnCount();
 							for (int i = 1; i <= columnsSize; i++) {
-								log.debug("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
-										+ metaData.getColumnDisplaySize(i));
+								log.debug("\t\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i)
+										+ "\t" + metaData.getColumnDisplaySize(i));
 							}
 							rs.close();
 						}
@@ -282,29 +320,32 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 
 					// remove unused column
 					if (needDeletedColumns.size() > 0) {
+						if (log.isTraceEnabled()) log.trace("\tremove unused column");
 						statement = conn.createStatement();
 						for (String key : needDeletedColumns) {
-							log.trace("##\t" + builder.builderRemoveColumn(key));
+							log.trace("\t\tremove column - " + builder.builderRemoveColumn(key));
 							statement.addBatch(builder.builderRemoveColumn(key));
 						}
 						statement.executeBatch();
+						if (log.isTraceEnabled()) log.trace("\tremove unused column finished");
+
 						if (log.isTraceEnabled()) {
-							log.trace("== remove unused column");
+							if (log.isTraceEnabled())
+								log.trace("\t[" + builder.tableName + "] table layout after  remove unused column");
 							rs = statement.executeQuery(builder.builderGetMeta());
 							metaData = rs.getMetaData();
 							columnsSize = metaData.getColumnCount();
 							for (int i = 1; i <= columnsSize; i++) {
-								log.trace("\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
-										+ metaData.getColumnDisplaySize(i));
+								log.trace("\t\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i)
+										+ "\t" + metaData.getColumnDisplaySize(i));
 							}
 							rs.close();
 						}
 					}
-					
+
 				}
 
 				conn.commit();
-
 
 			} else {
 				statement.executeUpdate(builder.builderCreate());
@@ -320,7 +361,7 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 					rs.close();
 				}
 			} catch (SQLException e) {
-				log.error(e.getClass().getName(),e);
+				log.error(e.getClass().getName(), e);
 				throw new RuntimeException(e);
 			}
 		}
@@ -331,7 +372,7 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 		try {
 			conn.createStatement().execute(builder.builderDrop());
 		} catch (Exception e) {
-			log.error(e.getClass().getName(),e);
+			log.error(e.getClass().getName(), e);
 		}
 	}
 
@@ -343,7 +384,7 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 
 	@Override
 	public void insert(Entity value) {
-		log.debug(SQL_INSERT + " : " + value);
+		log.debug("\tSQL_INSERT : " + value);
 		executeUpdate(SQL_INSERT, value);
 	}
 
@@ -352,7 +393,7 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 		try {
 			conn.createStatement().execute(builder.builderDeleteAll());
 		} catch (Exception e) {
-			log.error(e.getClass().getName(),e);
+			log.error(e.getClass().getName(), e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -370,7 +411,7 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 
 	@Override
 	public EditableEntity get(Object... keys) {
-		log.debug(SQL_GET + " : " + keys);
+		if (log.isTraceEnabled()) log.trace("\tSQL_GET : " + Joiner.on(',').join(keys));
 
 		List<EditableEntity> list = executeQuery(SQL_GET, keys);
 		if (list == null) {
@@ -444,7 +485,6 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 		}
 	}
 
-
 	@Override
 	public void close() {
 		try {
@@ -454,7 +494,7 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 			SQL_DELETE.close();
 			SQL_LIST.close();
 		} catch (SQLException e) {
-			log.error(e.getClass().getName(),e);
+			log.error(e.getClass().getName(), e);
 			throw new RuntimeException(e);
 		}
 	}

@@ -43,7 +43,7 @@ public class BasicResourceContainer extends AbstractHandler {
 	final ErrorHandleResouce errorHandleResource;
 	CacheLoader<String, Resource> loader = new CacheLoader<String, Resource>() {
 		public Resource load(String path) throws Exception {
-			log.info("load resource :" + path);
+			log.info("load resource - " + path);
 			Resource res = null;
 			int idx = path.indexOf('/', 1);
 			if (idx > 0) {
@@ -92,7 +92,7 @@ public class BasicResourceContainer extends AbstractHandler {
 	public void handle(String target, Request baseRequest, HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 		if (log.isDebugEnabled()) {
-			log.debug("client request " + req.getPathInfo());
+			log.debug("client request "+req.getMethod() +" - " + req.getPathInfo());
 		}
 		try {
 			String path = req.getPathInfo();

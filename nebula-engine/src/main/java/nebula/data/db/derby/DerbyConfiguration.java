@@ -22,7 +22,7 @@ public class DerbyConfiguration extends DbConfiguration {
 	@Override
 	public DbDataExecutor getPersister(Type type) {
 		if(log.isTraceEnabled()){
-			log.trace("getPersister : " + type.getName() + " conn : " + conn);			
+			log.trace("\tload persister [" + type.getName() + "] from connection - " + conn);			
 		}
 		DbDataExecutor executor = null;
 

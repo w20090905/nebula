@@ -71,7 +71,7 @@ public class ConfigModule extends AbstractModule {
 			}
 
 			if (log.isTraceEnabled()) {
-				log.trace("Root path : " + root.getAbsolutePath());
+				log.trace("Config root path - " + root.getAbsolutePath());
 			}
 
 			if (!root.exists()) {
