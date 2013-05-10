@@ -111,51 +111,47 @@ class DbString_Varchar_TypeAdapter extends BasicTypeAdapter<String> {
 class DbDateTypeAdapter extends BasicTypeAdapter<DateTime> {
 	@Override
 	public DateTime readFrom(ResultSet res, int i) throws Exception {
-		DateTime value = new DateTime(res.getDate(i));
-		return res.wasNull() ? null : value;
+		return res.wasNull() ? null : new DateTime(res.getDate(i));
 	}
 
 	@Override
 	public void writeTo(int index, Object v, PreparedStatement res) throws Exception {
-		res.setDate(index, new Date(((DateTime) v).getMillis()));
+		res.setDate(index, v != null ? new Date(((DateTime) v).getMillis()) : null);
 	}
 }
 
 class DbTimeTypeAdapter extends BasicTypeAdapter<DateTime> {
 	@Override
 	public DateTime readFrom(ResultSet res, int i) throws Exception {
-		DateTime value = new DateTime(res.getTime(i));
-		return res.wasNull() ? null : value;
+		return res.wasNull() ? null : new DateTime(res.getTime(i));
 	}
 
 	@Override
 	public void writeTo(int index, Object v, PreparedStatement res) throws Exception {
-		res.setTime(index, new Time(((DateTime) v).getMillis()));
+		res.setTime(index, v != null ? new Time(((DateTime) v).getMillis()) : null);
 	}
 }
 
 class DbDatetimeTypeAdapter extends BasicTypeAdapter<DateTime> {
 	@Override
 	public DateTime readFrom(ResultSet res, int i) throws Exception {
-		DateTime value = new DateTime(res.getTimestamp(i));
-		return res.wasNull() ? null : value;
+		return res.wasNull() ? null : new DateTime(res.getTimestamp(i));
 	}
 
 	@Override
 	public void writeTo(int index, Object v, PreparedStatement res) throws Exception {
-		res.setTimestamp(index, new Timestamp(((DateTime) v).getMillis()));
+		res.setTimestamp(index, v != null ? new Timestamp(((DateTime) v).getMillis()) : null);
 	}
 }
 
-class DbTimestampTypeAdapter extends BasicTypeAdapter<DateTime> {
+class DbTimestampTypeAdapter extends BasicTypeAdapter<Long> {
 	@Override
-	public DateTime readFrom(ResultSet res, int i) throws Exception {
-		DateTime value = new DateTime(res.getTimestamp(i));
-		return res.wasNull() ? null : value;
+	public Long readFrom(ResultSet res, int i) throws Exception {
+		return res.wasNull() ? null : res.getTimestamp(i).getTime();
 	}
 
 	@Override
 	public void writeTo(int index, Object v, PreparedStatement res) throws Exception {
-		res.setTimestamp(index, new Timestamp(((DateTime) v).getMillis()));
+		res.setTimestamp(index, new Timestamp((Long)v));
 	}
 }

@@ -81,34 +81,34 @@ public class RecentDateDataClassificatorTest extends TestCase {
 		list.add(v);
 
 		assertEquals(1, classificator.getData("Today").size());
-		assertEquals(1, classificator.getData("This Week").size());
-		assertEquals(1, classificator.getData("This Month").size());
-		assertEquals(2, classificator.getData("Three Month").size());
-		assertEquals(3, classificator.getData("Six Month").size());
+		assertEquals(1, classificator.getData("ThisWeek").size());
+		assertEquals(1, classificator.getData("ThisMonth").size());
+		assertEquals(2, classificator.getData("ThreeMonth").size());
+		assertEquals(3, classificator.getData("SixMonth").size());
 
-		// Three Month to today
+		// ThreeMonth to today
 		EditableEntity v1 = new EditableEntity();
 		v1.put("Date", now.withDayOfMonth(2));
 		list.remove(v);
 		list.add(v1);
 
 		assertEquals(1, classificator.getData("Today").size());
-		assertEquals(1, classificator.getData("This Week").size());
-		assertEquals(1 + 1, classificator.getData("This Month").size());
-		assertEquals(2, classificator.getData("Three Month").size());
-		assertEquals(3 - 1, classificator.getData("Six Month").size());
+		assertEquals(1, classificator.getData("ThisWeek").size());
+		assertEquals(1 + 1, classificator.getData("ThisMonth").size());
+		assertEquals(2, classificator.getData("ThreeMonth").size());
+		assertEquals(3 - 1, classificator.getData("SixMonth").size());
 
 		list.remove(v1);
 
 		assertEquals(1, classificator.getData("Today").size());
-		assertEquals(1, classificator.getData("This Week").size());
-		assertEquals(1 + 1 - 1, classificator.getData("This Month").size());
-		assertEquals(2, classificator.getData("Three Month").size());
-		assertEquals(3 - 1, classificator.getData("Six Month").size());
+		assertEquals(1, classificator.getData("ThisWeek").size());
+		assertEquals(1 + 1 - 1, classificator.getData("ThisMonth").size());
+		assertEquals(2, classificator.getData("ThreeMonth").size());
+		assertEquals(3 - 1, classificator.getData("SixMonth").size());
 
 		Set<String> classifications = classificator.getClassifications();
 		assertEquals(5, classifications.size());
-		assertEquals("This Month,Three Month,Six Month,This Week,Today",Joiner.on(",").join(classifications));
+		assertEquals("ThreeMonth,ThisWeek,Today,SixMonth,ThisMonth",Joiner.on(",").join(classifications));
 
 	}
 

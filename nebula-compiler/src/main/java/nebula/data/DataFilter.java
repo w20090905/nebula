@@ -7,7 +7,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
-class DataFilter<V> implements ClassifiableFilter<V>, Filter<V>, DataListener<V> {
+class DataFilter<V extends Timable> implements ClassifiableFilter<V>, Filter<V>, DataListener<V> {
 	final List<V> values = Lists.newArrayList();
 	final List<DataListener<V>> listeneres;
 	final Predicate<V> filterFunction;

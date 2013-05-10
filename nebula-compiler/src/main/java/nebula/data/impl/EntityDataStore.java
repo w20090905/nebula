@@ -23,6 +23,7 @@ public class EntityDataStore implements DataStore<Entity> {
 	final SmartList<Entity> values;
 	final ReentrantLock lock = new ReentrantLock();
 	final Function<Entity, String> idMaker;
+	long lastModified;
 
 	EntityDataStore(Function<Entity, String> keyMaker, DataPersister<Entity> persistence, Type type) {
 		this.persistence = persistence;
@@ -136,5 +137,10 @@ public class EntityDataStore implements DataStore<Entity> {
 	@Override
 	public Function<Entity, String> getIdMaker() {
 		return this.idMaker;
+	}
+
+	@Override
+	public long getLastModified() {
+		return lastModified;
 	}
 }

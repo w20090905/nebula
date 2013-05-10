@@ -9,6 +9,7 @@ import nebula.data.Entity;
 public class EntityImp implements Entity {
 	Map<String, Object> data;
 	DataStore<Entity> store;
+	long lastModified;
 
 	EntityImp(DataStore<Entity> store, Map<String, Object> data) {
 		this.store = store;
@@ -20,11 +21,6 @@ public class EntityImp implements Entity {
 		this.data = new HashMap<String, Object>();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see nebula.data.mem.Entity#getID()
-	 */
 	@Override
 	public String getID() {
 		return (String) this.get("ID");
@@ -72,12 +68,21 @@ public class EntityImp implements Entity {
 
 	@Override
 	public boolean isTransient() {
-		return this.store==null;
+		return this.store == null;
 	}
 
 	@Override
 	public Entity getEntity(String name) {
-		return (Entity)this.get(name);
+		return (Entity) this.get(name);
 	}
-	
+
+	public void setLastModified(long value) {
+		this.lastModified = value;
+	}
+
+	@Override
+	public long getLastModified() {
+		return lastModified;
+	}
+
 }

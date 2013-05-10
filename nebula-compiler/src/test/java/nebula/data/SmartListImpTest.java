@@ -11,10 +11,15 @@ public class SmartListImpTest extends TestCase {
 	SmartList<Person> list = null;
 	String name = "test";
 
-	class Person {
+	class Person implements Timable {
 		String name;
 		int age;
 		int height;
+		@Override
+		public long getLastModified() {
+			return 0;
+		}
+		
 	}
 
 	Person p = null;

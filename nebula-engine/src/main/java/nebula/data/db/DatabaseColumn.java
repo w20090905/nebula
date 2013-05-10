@@ -3,9 +3,10 @@ package nebula.data.db;
 import java.sql.Types;
 import java.util.EnumMap;
 
+import nebula.data.Timable;
 import nebula.lang.RawTypes;
 
-public class DatabaseColumn{
+public class DatabaseColumn implements Timable{
 	public final int jdbcType;
 
 	static EnumMap<RawTypes, Integer> dbTypeMap = new EnumMap<RawTypes, Integer>(RawTypes.class);
@@ -63,6 +64,12 @@ public class DatabaseColumn{
 	public String toString() {
 		return "DbColumn [fieldName=" + fieldName + ", columnName=" + columnName + ", rawType=" + rawType + ", size="
 				+ size + ", precision=" + precision + ", scale=" + scale + ", key=" + key + "]";
+	}
+
+	@Override
+	public long getLastModified() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

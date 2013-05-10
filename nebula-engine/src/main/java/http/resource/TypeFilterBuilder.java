@@ -38,7 +38,6 @@ public class TypeFilterBuilder {
 			strings.put("name", new GetStringValue<Type>() {			
 				@Override
 				public String getByName(Type obj) {
-					// TODO Auto-generated method stub
 					return obj.getName();
 				}
 			});
@@ -60,7 +59,7 @@ public class TypeFilterBuilder {
 			strings.put("standalone", new GetStringValue<Type>() {			
 				@Override
 				public String getByName(Type obj) {
-					return obj.getStandalone().toString();
+					return obj.getStandalone().name();
 				}
 			});
 		}

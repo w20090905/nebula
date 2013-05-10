@@ -1,7 +1,7 @@
 package nebula.data;
 
 
-public interface DataPersister<V> {
+public interface DataPersister<V extends Timable> {
 	void load();
 
 	void unload();

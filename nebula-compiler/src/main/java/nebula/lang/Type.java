@@ -4,9 +4,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import nebula.data.Timable;
+
 import util.InheritHashMap;
 
-public class Type{
+public class Type  implements Timable{
 	final TypeLoader loader;
 
 	final Type residedType;

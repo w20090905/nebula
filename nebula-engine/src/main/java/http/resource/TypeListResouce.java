@@ -96,7 +96,6 @@ public class TypeListResouce extends AbstractResouce {
 			log.trace("Input stream : ");
 			log.trace(FileUtil.readAllTextFrom(bio));
 		}
-
 		String newCode = FileUtil.readAllTextFrom(bio);
 		Type newType = typeLoader.update(null, newCode);
 		return req.getPathInfo() + newType.getName();
