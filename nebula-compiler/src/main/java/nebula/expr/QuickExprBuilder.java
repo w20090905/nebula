@@ -333,7 +333,7 @@ public abstract class QuickExprBuilder {
 		public boolean exec() {
 			String s1 = e1.exec();
 			String s2 = e2.exec();
-			return s1 == s2 || (s1 != null && s2 != null && s1.compareTo(s2) > 0);
+			return s1 != null && s2 != null && s1.compareTo(s2) > 0;
 		}
 	}
 
@@ -347,7 +347,7 @@ public abstract class QuickExprBuilder {
 		public boolean exec() {
 			String s1 = e1.exec();
 			String s2 = e2.exec();
-			return s1 == s2 || (s1 != null && s2 != null && s1.compareTo(s2) >= 0);
+			return (s1 != null && s2 != null && s1.compareTo(s2) >= 0);
 		}
 	}
 
@@ -361,7 +361,7 @@ public abstract class QuickExprBuilder {
 		public boolean exec() {
 			String s1 = e1.exec();
 			String s2 = e2.exec();
-			return s1 == s2 || (s1 != null && s2 != null && s1.compareTo(s2) < 0);
+			return s1 != null && s2 != null && s1.compareTo(s2) < 0;
 		}
 	}
 
@@ -375,7 +375,7 @@ public abstract class QuickExprBuilder {
 		public boolean exec() {
 			String s1 = e1.exec();
 			String s2 = e2.exec();
-			return s1 == s2 || (s1 != null && s2 != null && s1.compareTo(s2) <= 0);
+			return s1 != null && s2 != null && s1.compareTo(s2) <= 0;
 		}
 	}
 

@@ -11,7 +11,7 @@ import com.google.common.collect.ForwardingList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-public class SmartList<V extends Timable> extends ForwardingList<V> {
+public class SmartList<V extends Timable> extends ForwardingList<V> implements Cloneable {
 	final List<V> values;
 	final Map<String, V> indexedValues;
 	final Map<String, Integer> indexedIndex;

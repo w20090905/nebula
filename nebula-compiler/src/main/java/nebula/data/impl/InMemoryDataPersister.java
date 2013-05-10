@@ -40,8 +40,7 @@ public class InMemoryDataPersister implements DataPersister<Entity> {
 	}
 
 	@Override
-	public void define(Class<Entity> clz, String name,
-			HolderListener<DataStore<Entity>> listener) {
+	public void define(Class<Entity> clz, String name, HolderListener<DataStore<Entity>> listener) {
 		Holder<DataStore<Entity>> store = define(clz, name);
 		store.addListener(listener);
 	}
@@ -86,8 +85,8 @@ public class InMemoryDataPersister implements DataPersister<Entity> {
 				EditableEntity e = i.next();
 				e.store.apply(e);
 			}
-		} finally {
 			changes.clear();
+		} finally {
 			lock.unlock();
 		}
 	}
@@ -95,8 +94,11 @@ public class InMemoryDataPersister implements DataPersister<Entity> {
 	@Override
 	public void clearChanges() {
 		lock.lock();
-		changes.clear();
-		lock.unlock();
+		try {
+			changes.clear();
+		} finally {
+			lock.unlock();
+		}
 	}
 
 	@Override
@@ -109,8 +111,12 @@ public class InMemoryDataPersister implements DataPersister<Entity> {
 	@Override
 	public void markChanged(Entity v) {
 		lock.lock();
-		changes.add((EditableEntity) v);
-		lock.unlock();
+		try {
+			changes.add((EditableEntity) v);
+		} finally {
+			lock.unlock();
+		}
+
 	}
 
 	@Override

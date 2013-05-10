@@ -109,6 +109,21 @@ public class RecentDateDataClassificatorTest extends TestCase {
 		Set<String> classifications = classificator.getClassifications();
 		assertEquals(5, classifications.size());
 		assertEquals("ThreeMonth,ThisWeek,Today,SixMonth,ThisMonth",Joiner.on(",").join(classifications));
+		
+
+		// ThreeMonth to today
+		EditableEntity vOld = new EditableEntity();
+		vOld.put("Date", now.minusMonths(9));
+		list.add(vOld);
+		
+
+		assertEquals(1, classificator.getData("Today").size());
+		assertEquals(1, classificator.getData("ThisWeek").size());
+		assertEquals(1 + 1 - 1, classificator.getData("ThisMonth").size());
+		assertEquals(2, classificator.getData("ThreeMonth").size());
+		assertEquals(3 - 1, classificator.getData("SixMonth").size());
+		
+		assertEquals(0, classificator.getData("OLD").size());
 
 	}
 

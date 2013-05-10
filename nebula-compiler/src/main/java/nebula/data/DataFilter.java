@@ -81,7 +81,7 @@ class DataFilter<V extends Timable> implements ClassifiableFilter<V>, Filter<V>,
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object obj) {
-		return filterFunction.equals(((DataFilter<V>) obj).filterFunction);
+		return obj != null ? filterFunction.equals(((DataFilter<V>) obj).filterFunction) : false;
 	}
 
 	@Override
