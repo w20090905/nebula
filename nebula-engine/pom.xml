@@ -22,11 +22,6 @@
 					<descriptors>
 						<descriptor>src/main/assembly/assembly.xml</descriptor>
 					</descriptors>
-					<archive>
-						<manifest>
-							<mainClass>http.startup.JettyServer</mainClass>
-						</manifest>
-					</archive>
 				</configuration>
 				<executions>
 					<execution>
