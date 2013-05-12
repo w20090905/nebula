@@ -50,7 +50,7 @@ public class TransactionEntityListResouce extends AbstractResouce {
 
 			@Override
 			public String apply(Entity from) {
-				return convertFunction.apply((DateTime) from.get("LastModified_"));
+				return convertFunction.apply( new DateTime((Long)from.get("LastModified_")));
 			}
 		});
 		datasbufferes = Maps.newHashMap();

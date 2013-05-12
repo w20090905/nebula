@@ -124,17 +124,17 @@ class DatetimeJsonDataDealer extends DefaultTypeAdapter<DateTime> {
 	}
 }
 
-class TimestampJsonDataDealer extends DefaultTypeAdapter<DateTime> {
+class TimestampJsonDataDealer extends DefaultTypeAdapter<Long> {
 	final DateTimeFormatter formater = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS");
 
-	public DateTime readFrom(JsonParser parser, String name) throws Exception {
+	public Long readFrom(JsonParser parser, String name) throws Exception {
 		JsonToken token = parser.getCurrentToken();
 		assert token == JsonToken.VALUE_STRING;
-		return parser.getText().length() >= 22 ? formater.parseDateTime(parser.getText()) : null;
+		return parser.getText().length() >= 22 ? formater.parseDateTime(parser.getText()).getMillis(): null;
 	}
 
 	public void writeTo(String name, Object value, JsonGenerator gen) throws Exception {
-		gen.writeString(value != null ? formater.print((ReadableInstant)value) : "");
+		gen.writeString(value != null ? formater.print(new DateTime((Long)value)) : "");
 	}
 }
 

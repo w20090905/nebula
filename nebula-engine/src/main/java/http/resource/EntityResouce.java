@@ -36,7 +36,7 @@ public class EntityResouce extends AbstractResouce {
 	protected void get(HttpServletRequest req) throws IOException {
 		Entity data = datastoreHolder.get().get(key);
 
-		long newModified = ((DateTime) data.get("LastModified_")).getMillis();
+		long newModified = (Long)data.get("LastModified_");
 		// if (newModified == this.lastModified) return;
 
 		ByteArrayOutputStream bout = null;
