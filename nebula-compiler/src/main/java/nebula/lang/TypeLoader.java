@@ -8,6 +8,7 @@ import java.util.List;
 
 import nebula.data.Classificator;
 import nebula.data.Filter;
+import nebula.data.InheritSmartList;
 import nebula.data.SmartList;
 
 import org.antlr.runtime.ANTLRInputStream;
@@ -43,24 +44,35 @@ import com.google.common.base.Predicate;
 public abstract class TypeLoader {
 	protected Log log = LogFactory.getLog(this.getClass());
 
-	TypeLoader parent;
+	final TypeLoader parent;
+	final SmartList<Type> types;
 
 	protected long lastModified;
 
-	SmartList<Type> types = new SmartList<Type>(new Function<Type, String>() {
-		@Override
-		public String apply(Type from) {
-			return from.name;
-		}
-	});// <Type>("Type", typeIDSetter);
-
 	public TypeLoader(TypeLoader parent) {
 		this.parent = parent;
+		if (parent != null) {
+			types = new InheritSmartList<Type>(parent.types, new Function<Type, String>() {
+				@Override
+				public String apply(Type from) {
+					return from.name;
+				}
+			});
+		} else {
+			types = new SmartList<Type>(new Function<Type, String>() {
+				@Override
+				public String apply(Type from) {
+					return from.name;
+				}
+			});
+		}
+
 	}
 
 	public Filter<Type> liveFilter(Predicate<Type> filterFunction) {
 		return types.liveFilter(filterFunction);
 	}
+
 	public List<Type> filter(Predicate<Type> filterFunction) {
 		return types.filter(filterFunction);
 	}
@@ -68,7 +80,7 @@ public abstract class TypeLoader {
 	public <K> Classificator<K, Type> classify(Function<Type, K> indexerFunction) {
 		return types.classify(indexerFunction);
 	}
-	
+
 	public <K> Classificator<K, Type> liveClassify(Function<Type, K> indexerFunction) {
 		return types.liveClassify(indexerFunction);
 	}
