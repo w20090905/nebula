@@ -6,13 +6,13 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 public interface DataStore<V extends Timable> extends Timable {
-	Function<V, String> getIdMaker();
-	
+//	Function<V, Object> getIdMaker();
+
 	void load();
 
 	void unload();
 
-	V get(String key);
+	V get(Object key);
 
 	public <K> Classificator<K, V> classify(Function<V, K> indexerFunction);
 

@@ -27,7 +27,7 @@ public class UserHomeResouceEngine extends StaticResourceEngine {
 		super(resourceLoader);
 		this.templateConfig = cfg;
 		this.typeLoader = typeLoader;
-		this.attributes = dataWareHouse.define(Entity.class, "Attribute");
+		this.attributes = dataWareHouse.define(String.class, Entity.class, "Attribute");
 	}
 
 	@Override

@@ -9,13 +9,11 @@ import java.util.concurrent.locks.ReentrantLock;
 import javax.inject.Inject;
 
 import nebula.data.Callback;
-import nebula.data.Holder;
-import nebula.data.HolderListener;
-import nebula.data.Entity;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
+import nebula.data.Entity;
+import nebula.data.Holder;
 import nebula.data.db.DbConfiguration;
-import nebula.data.impl.EditableEntity;
 import nebula.data.util.HolderBuilder;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -36,7 +34,7 @@ public class DbEntityDataPersister implements DataPersister<Entity> {
 	}
 
 	@Override
-	public Holder<DataStore<Entity>> define(Class<Entity> clz, String name) {
+	public<I> Holder<DataStore<Entity>> define(Class<I> clzIndex, Class<Entity> clz, String name) {
 		Holder<DataStore<Entity>> datastoreHolder = this.storeHolders.get(name);
 		if (datastoreHolder == null) {
 			Type type = typeLoader.findType(name);
@@ -52,14 +50,14 @@ public class DbEntityDataPersister implements DataPersister<Entity> {
 		return datastoreHolder;
 	}
 
-	@Override
-	public void define(Class<Entity> clz, String name, HolderListener<DataStore<Entity>> listener) {
-		Holder<DataStore<Entity>> store = define(clz, name);
-		store.addListener(listener);
-	}
+//	@Override
+//	public void define(Class<Entity> clz, String name, HolderListener<DataStore<Entity>> listener) {
+//		Holder<DataStore<Entity>> store = define(clz, name);
+//		store.addListener(listener);
+//	}
 
 	@Override
-	public Holder<DataStore<Entity>> reload(Class<Entity> clz, String name) {
+	public<I> Holder<DataStore<Entity>> reload(Class<I> clzIndex,Class<Entity> clz, String name) {
 		Holder<DataStore<Entity>> datastoreHolder = this.storeHolders.get(name);
 
 		if (datastoreHolder != null) {

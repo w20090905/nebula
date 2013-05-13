@@ -11,9 +11,11 @@ import nebula.lang.Type;
 public class DbTransactionEntityDataStore extends EntityDataStore {
 
 	final DbDataExecutor db;
+	
+	final long max = 0;
 
 	DbTransactionEntityDataStore(final DbEntityDataPersister persistence, Type type, final DbDataExecutor exec) {
-		super(IdMakerBuilder.getIDSetter(type), persistence, type);
+		super(null, persistence, type);
 		this.db = exec;
 
 		List<EditableEntity> list = exec.getAll();
@@ -44,7 +46,7 @@ public class DbTransactionEntityDataStore extends EntityDataStore {
 				lock.unlock();
 			}
 		} else { // insert
-			String id = this.idMaker.apply(newEntity);
+			Long id = (Long) this.idMaker.apply(newEntity);
 
 			newEntity.put("ID", id);
 

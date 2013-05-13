@@ -44,7 +44,7 @@ public class DbMasterEntityDataStore extends EntityDataStore {
 				lock.unlock();
 			}
 		} else { // insert
-			String id = this.idMaker.apply(newEntity);
+			String id = (String)this.idMaker.apply(newEntity);
 
 			newEntity.put("ID", id);
 

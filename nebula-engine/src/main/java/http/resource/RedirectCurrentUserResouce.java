@@ -20,7 +20,7 @@ public class RedirectCurrentUserResouce implements Resource {
 		HttpSession session = req.getSession();
 		Entity user = (Entity) session.getAttribute("#currentUser");
 
-		Cookie loginUserID = new Cookie("LoginUserID", user.getID());
+		Cookie loginUserID = new Cookie("LoginUserID", (String)user.getID());
 		loginUserID.setPath("/");
 		resp.addCookie(loginUserID);
 

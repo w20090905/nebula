@@ -17,7 +17,7 @@ public class EntityDataStoreTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		p = new InMemoryDataPersister(new SystemTypeLoader());
-		store = p.define(Entity.class, "Person").get();
+		store = p.define(String.class,Entity.class, "Person").get();
 	}
 
 	protected void tearDown() throws Exception {

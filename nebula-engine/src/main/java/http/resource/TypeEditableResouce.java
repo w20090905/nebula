@@ -35,7 +35,7 @@ public class TypeEditableResouce extends AbstractResouce {
 	protected void get(HttpServletRequest req) throws IOException {
 		Type data = typeLoader.findType(key);
 		long newModified = data.getLastModified();
-//		if (newModified == this.lastModified) return;
+		// if (newModified == this.lastModified) return;
 
 		ByteArrayOutputStream bout = null;
 		try {
@@ -73,7 +73,7 @@ public class TypeEditableResouce extends AbstractResouce {
 				log.trace(type.getCode());
 			}
 			type = typeLoader.update(type, newCode);
-			dataWareHouse.reload(Entity.class, type.getName());
+			dataWareHouse.reload(String.class, Entity.class, type.getName());
 		} else {
 			if (log.isTraceEnabled()) {
 				log.trace("No Change:");

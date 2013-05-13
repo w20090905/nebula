@@ -1,6 +1,6 @@
 @maxLength = 12;
 @editable = "false";
 @autoCreate = "true";
-@generationStrategy = "default"
+@generationStrategy = "default";
 define AutoID extends ID {
 };

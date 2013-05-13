@@ -16,9 +16,8 @@ public class EntityImp implements Entity {
 		this.data = data;
 	}
 
-	EntityImp(EntityDataStore store) {
-		this.store = store;
-		this.data = new HashMap<String, Object>();
+	EntityImp(DataStore<Entity> store) {
+		this(store, new HashMap<String, Object>());
 	}
 
 	@Override
@@ -26,21 +25,11 @@ public class EntityImp implements Entity {
 		return (String) this.get("ID");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see nebula.data.mem.Entity#get(java.lang.String)
-	 */
 	@Override
 	public Object get(String name) {
 		return data.get(name);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see nebula.data.mem.Entity#put(java.lang.String, java.lang.Object)
-	 */
 	@Override
 	public void put(String name, Object v) {
 		throw new UnsupportedOperationException("public void put(String name, Object v)");

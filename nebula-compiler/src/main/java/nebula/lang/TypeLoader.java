@@ -45,21 +45,21 @@ public abstract class TypeLoader {
 	protected Log log = LogFactory.getLog(this.getClass());
 
 	final TypeLoader parent;
-	final SmartList<Type> types;
+	final SmartList<String,Type> types;
 
 	protected long lastModified;
 
 	public TypeLoader(TypeLoader parent) {
 		this.parent = parent;
 		if (parent != null) {
-			types = new InheritSmartList<Type>(parent.types, new Function<Type, String>() {
+			types = new InheritSmartList<String,Type>(parent.types, new Function<Type, String>() {
 				@Override
 				public String apply(Type from) {
 					return from.name;
 				}
 			});
 		} else {
-			types = new SmartList<Type>(new Function<Type, String>() {
+			types = new SmartList<String,Type>(new Function<Type, String>() {
 				@Override
 				public String apply(Type from) {
 					return from.name;
@@ -158,6 +158,9 @@ public abstract class TypeLoader {
 	}
 
 	public Type findType(String name) {
+		if (log.isTraceEnabled()) {
+			log.trace("\tsearch type [" + name + "]  from " + this.getClass().getName());
+		}
 
 		try {
 			Type type = parent.findType(name);
@@ -201,16 +204,16 @@ public abstract class TypeLoader {
 		throw new UnsupportedOperationException("change type");
 	}
 
-	public SmartList<Type> getList() {
+	public SmartList<String,Type> getList() {
 		return this.types;
 	}
 
 	// performance not good
-	public SmartList<Type> all() {
+	public SmartList<String,Type> all() {
 		if (parent == null) {
 			return this.types;
 		} else {
-			SmartList<Type> list = types.clone();
+			SmartList<String,Type> list = types.clone();
 			list.addAll(parent.all());
 			return list;
 		}

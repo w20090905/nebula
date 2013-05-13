@@ -74,19 +74,23 @@ public class EntityResouceEngine implements ResourceEngine {
 				return new TypeListResouce(typeLoader, json, typeFilterBuilder);
 			}
 		} else {
-
-			Holder<DataStore<Entity>> storeHolder = persistence.define(Entity.class, typeName);
-			Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(storeHolder,
-					typeLoader.findType(typeName));
-
 			Type type = typeLoader.findType(typeName);
 			if (type.getStandalone() == TypeStandalone.Transaction) {
+
+				Holder<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);
+				Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(storeHolder,
+						typeLoader.findType(typeName));
+
 				if (id != null) {
 					return new TransactionEntityResouce(jsonHolder, storeHolder, id);
 				} else {
 					return new TransactionEntityListResouce(jsonHolder, storeHolder, entityFilterBuilder);
 				}
 			} else {
+				Holder<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);
+				Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(storeHolder,
+						typeLoader.findType(typeName));
+
 				if (id != null) {
 					return new EntityResouce(jsonHolder, storeHolder, id);
 				} else {

@@ -27,8 +27,8 @@ public class SystemFunctionResouceEngine implements ResourceEngine {
 	public SystemFunctionResouceEngine(DataPersister<Entity> dataWareHouse) {
 		this.persistence = dataWareHouse;
 		DataHelper<Entity, Reader, Writer> json = JsonHelperProvider.getSerialize(Entity.class);
-		Holder<DataStore<Entity>> users = persistence.define(Entity.class, "User");
-		Holder<DataStore<Entity>> datas = persistence.define(Entity.class, "UserAccessLog");
+		Holder<DataStore<Entity>> users = persistence.define(String.class, Entity.class, "User");
+		Holder<DataStore<Entity>> datas = persistence.define(Long.class, Entity.class, "UserAccessLog");
 
 		cachedLinks.put("login", new LoginListResouce(json, users, datas));
 		cachedLinks.put("signup", new SignupResouce(json, users));

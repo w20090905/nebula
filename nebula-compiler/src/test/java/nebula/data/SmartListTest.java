@@ -12,11 +12,11 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 
 public class SmartListTest extends TestCase {
-	SmartList<Entity> list;
+	SmartList<String,Entity> list;
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		list = new SmartList<Entity>(new Function<Entity, String>() {
+		list = new SmartList<String,Entity>(new Function<Entity, String>() {
 			@Override
 			public String apply(Entity from) {
 				return (String)from.get("name");
@@ -39,7 +39,7 @@ public class SmartListTest extends TestCase {
 	}
 
 	public final void testSmartList() {
-		list = new SmartList<Entity>(new Function<Entity, String>() {
+		list = new SmartList<String,Entity>(new Function<Entity, String>() {
 			@Override
 			public String apply(Entity from) {
 				return (String) from.get("name");
@@ -48,7 +48,7 @@ public class SmartListTest extends TestCase {
 	}
 
 	public void testGetString() throws Exception {
-		list = new SmartList<Entity>(new Function<Entity, String>() {
+		list = new SmartList<String,Entity>(new Function<Entity, String>() {
 			@Override
 			public String apply(Entity from) {
 				return (String) from.get("name");
@@ -65,7 +65,7 @@ public class SmartListTest extends TestCase {
 
 	}
 	public final void testIndexBy() {
-		list = new SmartList<Entity>(new Function<Entity, String>() {
+		list = new SmartList<String,Entity>(new Function<Entity, String>() {
 			@Override
 			public String apply(Entity from) {
 				return (String)from.get("name");
@@ -102,7 +102,7 @@ public class SmartListTest extends TestCase {
 	}
 
 	public final void testFilterBy() {
-		list = new SmartList<Entity>(new Function<Entity, String>() {
+		list = new SmartList<String,Entity>(new Function<Entity, String>() {
 			@Override
 			public String apply(Entity from) {
 				return (String) from.get("name");
@@ -144,7 +144,7 @@ public class SmartListTest extends TestCase {
 	}
 
 	public final void testAddIntV() {
-		list = new SmartList<Entity>(new Function<Entity, String>() {
+		list = new SmartList<String,Entity>(new Function<Entity, String>() {
 			@Override
 			public String apply(Entity from) {
 				return (String) from.get("name");
@@ -181,7 +181,7 @@ public class SmartListTest extends TestCase {
 	}
 
 	public final void testAddV() {
-		list = new SmartList<Entity>(new Function<Entity, String>() {
+		list = new SmartList<String,Entity>(new Function<Entity, String>() {
 			@Override
 			public String apply(Entity from) {
 				return (String) from.get("name");
@@ -218,7 +218,7 @@ public class SmartListTest extends TestCase {
 	}
 
 	public final void testRemoveInt() {
-		list = new SmartList<Entity>(new Function<Entity, String>() {
+		list = new SmartList<String,Entity>(new Function<Entity, String>() {
 			@Override
 			public String apply(Entity from) {
 				return (String) from.get("name");
@@ -261,7 +261,7 @@ public class SmartListTest extends TestCase {
 
 	public final void testRemoveAllCollectionOfQ() {
 		try {
-			list = new SmartList<Entity>(new Function<Entity, String>() {
+			list = new SmartList<String,Entity>(new Function<Entity, String>() {
 				@Override
 				public String apply(Entity from) {
 					return (String) from.get("name");
@@ -275,7 +275,7 @@ public class SmartListTest extends TestCase {
 	}
 
 	public final void testRemoveObject() {
-		list = new SmartList<Entity>(new Function<Entity, String>() {
+		list = new SmartList<String,Entity>(new Function<Entity, String>() {
 			@Override
 			public String apply(Entity from) {
 				return (String) from.get("name");

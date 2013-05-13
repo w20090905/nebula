@@ -11,19 +11,19 @@ import com.google.common.collect.ForwardingList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-public class SmartList<V extends Timable> extends ForwardingList<V> implements Cloneable {
+public class SmartList<I, V extends Timable> extends ForwardingList<V> implements Cloneable {
 	final List<V> values;
-	final Map<String, V> indexedValues;
-	final Map<String, Integer> indexedIndex;
+	final Map<I, V> indexedValues;
+	final Map<I, Integer> indexedIndex;
 	final List<DataListener<V>> listeneres;
-	final Function<V, String> indexFunction;
+	final Function<V, I> indexFunction;
 
 	@Override
 	protected List<V> delegate() {
 		return values;
 	}
 
-	public SmartList(Function<V, String> indexFunction) {
+	public SmartList(Function<V, I> indexFunction) {
 		this.indexFunction = indexFunction;
 		this.values = new CopyOnWriteArrayList<V>();
 		this.indexedValues = Maps.newHashMap();
@@ -51,7 +51,7 @@ public class SmartList<V extends Timable> extends ForwardingList<V> implements C
 		return filter;
 	}
 
-	public V get(String key) {
+	public V get(I key) {
 		return this.indexedValues.get(key);
 	}
 
@@ -60,7 +60,7 @@ public class SmartList<V extends Timable> extends ForwardingList<V> implements C
 		for (DataListener<V> listener : this.listeneres) {
 			listener.add(v);
 		}
-		String key = indexFunction.apply(v);
+		I key = indexFunction.apply(v);
 		this.indexedValues.put(key, v);
 		this.indexedIndex.put(key, index);
 		super.add(index, v);
@@ -68,7 +68,7 @@ public class SmartList<V extends Timable> extends ForwardingList<V> implements C
 
 	@Override
 	public boolean add(V v) {
-		String key = indexFunction.apply(v);
+		I key = indexFunction.apply(v);
 		if (!this.indexedValues.containsKey(key)) {
 			for (DataListener<V> listener : this.listeneres) {
 				listener.add(v);
@@ -82,7 +82,7 @@ public class SmartList<V extends Timable> extends ForwardingList<V> implements C
 			int index = this.indexedIndex.get(key);
 			this.values.set(index, v);
 			this.indexedValues.put(key, v);
-			
+
 			for (DataListener<V> listener : this.listeneres) {
 				listener.update(oldData, v);
 			}
@@ -109,7 +109,7 @@ public class SmartList<V extends Timable> extends ForwardingList<V> implements C
 		for (DataListener<V> listener : this.listeneres) {
 			listener.remove(this.get(index));
 		}
-		String key = indexFunction.apply(this.get(index));
+		I key = indexFunction.apply(this.get(index));
 		this.indexedValues.remove(key);
 		this.indexedIndex.remove(key);
 		return super.remove(index);
@@ -126,15 +126,15 @@ public class SmartList<V extends Timable> extends ForwardingList<V> implements C
 		for (DataListener<V> listener : this.listeneres) {
 			listener.remove((V) v);
 		}
-		String key = indexFunction.apply((V)v);
+		I key = indexFunction.apply((V) v);
 		this.indexedValues.remove(key);
 		this.indexedIndex.remove(key);
 		return super.remove(v);
 	}
 
 	@Override
-	public SmartList<V> clone() {
-		SmartList<V> list = new SmartList<V>(indexFunction);
+	public SmartList<I, V> clone() {
+		SmartList<I, V> list = new SmartList<I, V>(indexFunction);
 		list.addAll(values);
 		return list;
 	}

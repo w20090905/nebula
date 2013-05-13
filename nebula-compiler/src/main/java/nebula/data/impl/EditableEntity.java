@@ -55,10 +55,10 @@ public class EditableEntity extends EntityImp implements Editable {
 	public boolean isDirty() {
 		return dirty;
 	}
-	
+
 	@Override
 	public String toString() {
-		return  "EditableEntity {" + newData.toString() + "}";
+		return "EditableEntity {" + newData.toString() + "}";
 	}
 
 	@Override

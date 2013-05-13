@@ -30,7 +30,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 		super(resourceLoader);
 		this.templateConfig = cfg;
 		this.typeLoader = typeLoader;
-		this.attributes = dataWareHouse.define(Entity.class, "Attribute");
+		this.attributes = dataWareHouse.define(String.class, Entity.class, "Attribute");
 		this.age = 30L * 24L * 60L * 60L;
 	}
 
@@ -40,45 +40,45 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 
 		Source source = loader.findSource(path);
 		if (source != null) {
-			return new StaticResource(source, TheMimeTypes.get(extension),this.age);
+			return new StaticResource(source, TheMimeTypes.get(extension), this.age);
 		}
 
 		String theme = "$";
 		String skin = "$";
 
 		int last = path.lastIndexOf('/');
-		
-		int prev = path.indexOf('/') +1;
+
+		int prev = path.indexOf('/') + 1;
 
 		int next = path.indexOf("/", prev);
-		if (0< next && next <= last) {
-			prev = next+1;
-		}
-		
-		next = path.indexOf("/", prev);
-		if (0 < next  && next <= last) {
-			theme = path.substring(prev, next);
-			prev = next+1;
+		if (0 < next && next <= last) {
+			prev = next + 1;
 		}
 
 		next = path.indexOf("/", prev);
-		if (0 < next  && next <= last) {
+		if (0 < next && next <= last) {
+			theme = path.substring(prev, next);
+			prev = next + 1;
+		}
+
+		next = path.indexOf("/", prev);
+		if (0 < next && next <= last) {
 			skin = path.substring(prev, next);
-			prev = next+1;
+			prev = next + 1;
 		}
 
 		String name = path.substring(prev);
 
 		if ((source = loader.findSource("/" + "theme/" + theme + "/" + skin + "/" + name)) != null) {
-			return new StaticResource(source, TheMimeTypes.get(extension),this.age);
+			return new StaticResource(source, TheMimeTypes.get(extension), this.age);
 		} else if ((source = loader.findSource("/" + "theme/" + theme + "/" + name)) != null) {
-			return new StaticResource(source, TheMimeTypes.get(extension),this.age);
+			return new StaticResource(source, TheMimeTypes.get(extension), this.age);
 		} else if ((source = loader.findSource("/" + "theme/" + name)) != null) {
-			return new StaticResource(source, TheMimeTypes.get(extension),this.age);
+			return new StaticResource(source, TheMimeTypes.get(extension), this.age);
 		} else if ((source = loader.findSource("/" + "default/" + name)) != null) {
-			return new StaticResource(source, TheMimeTypes.get(extension),this.age);
+			return new StaticResource(source, TheMimeTypes.get(extension), this.age);
 		} else if ((source = loader.findSource("/" + name)) != null) {
-			return new StaticResource(source, TheMimeTypes.get(extension),this.age);
+			return new StaticResource(source, TheMimeTypes.get(extension), this.age);
 		}
 
 		int idxType = 0;
@@ -86,7 +86,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 			return new StaticTemplateResouce(templateConfig, typeLoader, attributes, theme, skin, name);
 		} else if ((idxType = name.indexOf("-")) > 0) {
 			String typeName = name.substring(0, idxType);
-			String actionName = name.substring(idxType+1);
+			String actionName = name.substring(idxType + 1);
 			return new TypeTemplateResouce(templateConfig, typeLoader, attributes, theme, skin, typeName, actionName);
 		} else {
 			return new StaticTemplateResouce(templateConfig, typeLoader, attributes, theme, skin, name);

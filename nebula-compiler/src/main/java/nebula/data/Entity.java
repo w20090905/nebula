@@ -1,7 +1,7 @@
 package nebula.data;
 
 public interface Entity extends Timable {
-	String getID();
+	Object getID();
 
 	Object get(String name);
 

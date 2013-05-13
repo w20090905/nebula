@@ -20,19 +20,19 @@ public class EntityDataStore implements DataStore<Entity> {
 	public static final String KEY_NAME = "ID";
 
 	final DataPersister<Entity> persistence;
-	final SmartList<Entity> values;
+	final SmartList<Object,Entity> values;
 	final ReentrantLock lock = new ReentrantLock();
-	final Function<Entity, String> idMaker;
+	final Function<Entity, Object> idMaker;
 	long lastModified;
 
-	EntityDataStore(Function<Entity, String> keyMaker, DataPersister<Entity> persistence, Type type) {
+	EntityDataStore(Function<Entity, Object> keyMaker, DataPersister<Entity> persistence, Type type) {
 		this.persistence = persistence;
-		this.values = new SmartList<Entity>(keyMaker);
+		this.values = new SmartList<Object,Entity>(keyMaker);
 		this.idMaker = keyMaker;
 	}
 
 	@Override
-	public Entity get(String key) {
+	public Entity get(Object key) {
 		return this.values.get(key);
 	}
 
@@ -79,7 +79,7 @@ public class EntityDataStore implements DataStore<Entity> {
 				lock.unlock();
 			}
 		} else {
-			String id = idMaker.apply(newEntity);
+			Object id = idMaker.apply(newEntity);
 			newEntity.put(KEY_NAME, id);
 			Map<String, Object> newData = new HashMap<String, Object>(newEntity.newData);
 			lock.lock();
@@ -134,10 +134,10 @@ public class EntityDataStore implements DataStore<Entity> {
 		return this.values.liveFilter(filterFunction);
 	}
 
-	@Override
-	public Function<Entity, String> getIdMaker() {
-		return this.idMaker;
-	}
+//	@Override
+//	public Function<Entity, Object> getIdMaker() {
+//		return this.idMaker;
+//	}
 
 	@Override
 	public long getLastModified() {

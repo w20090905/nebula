@@ -14,12 +14,12 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 
 public class RecentDateDataClassificatorTest extends TestCase {
-	SmartList<Entity> list;
+	SmartList<String, Entity> list;
 	Classificator<String, Entity> classificator;
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		list = new SmartList<Entity>(new Function<Entity, String>() {
+		list = new SmartList<String, Entity>(new Function<Entity, String>() {
 
 			@Override
 			public String apply(Entity from) {
@@ -28,7 +28,8 @@ public class RecentDateDataClassificatorTest extends TestCase {
 		});
 
 		classificator = list.liveClassify(new Function<Entity, String>() {
-			Function<DateTime, String> convertFunction = new RecentDateClassificatorFunction(new DateTime().withDayOfMonth(10).withDayOfWeek(3));
+			Function<DateTime, String> convertFunction = new RecentDateClassificatorFunction(new DateTime()
+					.withDayOfMonth(10).withDayOfWeek(3));
 
 			@Override
 			public String apply(Entity from) {
@@ -108,21 +109,19 @@ public class RecentDateDataClassificatorTest extends TestCase {
 
 		Set<String> classifications = classificator.getClassifications();
 		assertEquals(5, classifications.size());
-		assertEquals("ThreeMonth,ThisWeek,Today,SixMonth,ThisMonth",Joiner.on(",").join(classifications));
-		
+		assertEquals("ThreeMonth,ThisWeek,Today,SixMonth,ThisMonth", Joiner.on(",").join(classifications));
 
 		// ThreeMonth to today
 		EditableEntity vOld = new EditableEntity();
 		vOld.put("Date", now.minusMonths(9));
 		list.add(vOld);
-		
 
 		assertEquals(1, classificator.getData("Today").size());
 		assertEquals(1, classificator.getData("ThisWeek").size());
 		assertEquals(1 + 1 - 1, classificator.getData("ThisMonth").size());
 		assertEquals(2, classificator.getData("ThreeMonth").size());
 		assertEquals(3 - 1, classificator.getData("SixMonth").size());
-		
+
 		assertEquals(0, classificator.getData("OLD").size());
 
 	}

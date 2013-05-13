@@ -17,7 +17,7 @@ import com.google.common.collect.Lists;
 public class IdMakerBuilder {
 	static Log log = LogFactory.getLog(IdMakerBuilder.class); 
 
-	public static Function<Entity,String> getIDSetter(Type type) {
+	public static Function<Entity,Object> getIDSetter(Type type) {
 		List<String> keys = Lists.newArrayList();
 		for (Field f : type.getFields()) {
 			if (f.getType().getStandalone() == TypeStandalone.Basic && f.isKey()) {
@@ -48,7 +48,7 @@ public class IdMakerBuilder {
 		}
 	}
 
-	static private  class IDSetter1 implements Function<Entity,String> {
+	static private  class IDSetter1 implements Function<Entity,Object> {
 		final String key1;
 
 		IDSetter1(String key1) {
@@ -61,7 +61,7 @@ public class IdMakerBuilder {
 		}
 	}
 
-	static private  class IDSetter2 implements Function<Entity,String> {
+	static private  class IDSetter2 implements Function<Entity,Object> {
 		final String key1;
 		final String key2;
 
@@ -76,7 +76,7 @@ public class IdMakerBuilder {
 		}
 	}
 
-	static private  class IDSetter3 implements Function<Entity,String> {
+	static private  class IDSetter3 implements Function<Entity,Object> {
 		final String key1;
 		final String key2;
 		final String key3;
@@ -93,7 +93,7 @@ public class IdMakerBuilder {
 		}
 	}
 
-	static private class IDSetter4 implements Function<Entity,String> {
+	static private class IDSetter4 implements Function<Entity,Object> {
 		final String key1;
 		final String key2;
 		final String key3;

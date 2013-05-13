@@ -87,7 +87,7 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 		ResultSet rs = null;
 		try {
 
-			final SmartList<DatabaseColumn> mapColumns = new SmartList<DatabaseColumn>(
+			final SmartList<String,DatabaseColumn> mapColumns = new SmartList<String,DatabaseColumn>(
 					new Function<DatabaseColumn, String>() {
 						@Override
 						public String apply(DatabaseColumn data) {

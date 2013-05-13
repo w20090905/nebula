@@ -24,7 +24,7 @@ public class DbMasterEntityDataStoreTest extends TestCase {
 
 		dbconfig = DbConfiguration.getEngine(driverclass, url, username, password);
 		p = new DbEntityDataPersister(new SystemTypeLoader(), dbconfig);
-		store = p.define(Entity.class, "Person").get();
+		store = p.define(String.class,Entity.class, "Person").get();
 	}
 
 	protected void tearDown() throws Exception {

@@ -24,6 +24,7 @@ public abstract class AbstractResouce implements Resource {
 
 	private final String mime;
 	private final long maxAge;
+	@SuppressWarnings("unused")
 	private final int delayTime;
 	protected byte[] cache;
 	protected long lastModified;

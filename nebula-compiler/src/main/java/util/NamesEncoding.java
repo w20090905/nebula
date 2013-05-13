@@ -64,7 +64,7 @@ public class NamesEncoding {
 		}
 
 		if (log.isTraceEnabled()) {
-			log.trace("[" + value + "] > [" + new String(nvs, 0, posNv) + "]");
+			log.trace("\t[" + value + "] > [" + new String(nvs, 0, posNv) + "]");
 		}
 		return new String(nvs, 0, posNv);
 	}
