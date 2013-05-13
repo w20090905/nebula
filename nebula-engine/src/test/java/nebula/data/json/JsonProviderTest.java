@@ -83,7 +83,7 @@ public class JsonProviderTest extends TestCase {
 		assertEquals(sdf.parseDateTime("2012-12-20 23:58:59"), n.get("Datetime"));
 		
 		sdf = DateTimeFormat.forPattern("yyyy-MM-dd kk:mm:ss.SSS");
-		assertEquals(sdf.parseDateTime("2012-12-20 23:58:59.789"), n.get("Timestamp"));
+		assertEquals(sdf.parseDateTime("2012-12-20 23:58:59.789").getMillis(), n.get("Timestamp"));
 		
 		Writer out = new StringWriter();
 		json.get().stringifyTo(n, out);

@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.StringReader;
 import java.util.List;
 
-import org.antlr.runtime.RecognitionException;
-
 import junit.framework.TestCase;
+
+import org.antlr.runtime.RecognitionException;
 
 public class TypeLoaderTest extends TestCase {
 
@@ -34,27 +34,17 @@ public class TypeLoaderTest extends TestCase {
 
 		List<Type> fs = loader.defineNebula(new StringReader(text));
 		Type type = fs.get(0);
-//
-//		List<Field> fields = type.actualFields;
-//		int i = 0;
-//		assertEquals("Name", fields.get(i).name);
-//		assertEquals(Importance.Key, fields.get(i).importance);
-//		i++;
-//		assertEquals("Test_Key", fields.get(i).name);
-//		assertEquals(Importance.Key, fields.get(i).importance);
-//		i++;
-//		assertEquals("Test_Core", fields.get(i).name);
-//		assertEquals(Importance.Core, fields.get(i).importance);
-//
-//		i++;
-//		assertEquals("Test_Require", fields.get(i).name);
-//		assertEquals(Importance.Require, fields.get(i).importance);
-//
-//		i++;
-//		assertEquals("Test_Ignore", fields.get(i).name);
-//		assertEquals(Importance.Unimportant, fields.get(i).importance);
-//
-//		assertEquals(i + 1, fields.size());
+
+		List<Field> fields = type.fields;
+		int i = 0;
+		assertEquals("Name", fields.get(i).name);
+		assertEquals(Importance.Key, fields.get(i).importance);
+		i++;
+		assertEquals("Test", fields.get(i).name);
+		assertEquals(Importance.Key, fields.get(i).importance);
+	
+
+		assertEquals(i + 1, fields.size());
 	}
 //	public void testActualFields_Core() {
 //		//@formatter:off

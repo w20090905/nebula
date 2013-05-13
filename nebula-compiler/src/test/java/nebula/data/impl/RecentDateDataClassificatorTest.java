@@ -28,7 +28,7 @@ public class RecentDateDataClassificatorTest extends TestCase {
 		});
 
 		classificator = list.liveClassify(new Function<Entity, String>() {
-			Function<DateTime, String> convertFunction = new RecentDateClassificatorFunction();
+			Function<DateTime, String> convertFunction = new RecentDateClassificatorFunction(new DateTime().withDayOfMonth(10).withDayOfWeek(3));
 
 			@Override
 			public String apply(Entity from) {
@@ -46,7 +46,7 @@ public class RecentDateDataClassificatorTest extends TestCase {
 	}
 
 	public final void testAdd_Update_Remove() {
-		DateTime now = new DateTime();
+		DateTime now = new DateTime().withDayOfMonth(10).withDayOfWeek(3);
 
 		EditableEntity v = new EditableEntity();
 		v.put("Date", now);

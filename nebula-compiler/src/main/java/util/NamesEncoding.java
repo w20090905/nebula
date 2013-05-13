@@ -3,6 +3,7 @@ package util;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+
 public class NamesEncoding {
 	private static final Log log = LogFactory.getLog(NamesEncoding.class);
 	static char[] e = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
@@ -62,9 +63,9 @@ public class NamesEncoding {
 			nvs[posNv++] = '_';
 		}
 
-//		if (log.isTraceEnabled()) {
-//			log.trace("[" + value + "] > [" + new String(nvs, 0, posNv) + "]");
-//		}
+		if (log.isTraceEnabled()) {
+			log.trace("[" + value + "] > [" + new String(nvs, 0, posNv) + "]");
+		}
 		return new String(nvs, 0, posNv);
 	}
 }

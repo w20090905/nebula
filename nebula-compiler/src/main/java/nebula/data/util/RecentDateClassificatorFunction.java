@@ -13,7 +13,11 @@ public class RecentDateClassificatorFunction implements Function<DateTime, Strin
 	final DateTime sixMonth;
 
 	public RecentDateClassificatorFunction() {
-		today = new DateTime().withMillisOfDay(0);
+		this(new DateTime().withMillisOfDay(0));
+	}
+
+	public RecentDateClassificatorFunction(DateTime today) {
+		this.today = today;
 		thisWeek = today.withDayOfWeek(1);
 		thisMonth = today.withDayOfMonth(1);
 		threeMonth = today.minusMonths(2).withDayOfMonth(1);
