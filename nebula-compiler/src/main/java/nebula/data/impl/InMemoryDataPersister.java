@@ -31,7 +31,7 @@ public class InMemoryDataPersister implements DataPersister<Entity> {
 		Holder<DataStore<Entity>> store = this.stores.get(name);
 		if (store == null) {
 			Type type = loader.findType(name);
-			DataStore<Entity> newData = new EntityDataStore(IdMakerBuilder.getIDSetter(type), this, type);
+			DataStore<Entity> newData = new EntityDataStore(IdMakerBuilder.getIDReader(type), this, type);
 			store = HolderBuilder.of(newData);
 			stores.put(name, store);
 		}
@@ -54,7 +54,7 @@ public class InMemoryDataPersister implements DataPersister<Entity> {
 			oldData.unload();
 
 			Type type = loader.findType(name);
-			DataStore<Entity> newData = new EntityDataStore(IdMakerBuilder.getIDSetter(type), this, type);
+			DataStore<Entity> newData = new EntityDataStore(IdMakerBuilder.getIDReader(type), this, type);
 			datastoreHolder.update(oldData, newData);
 			return datastoreHolder;
 		} else {

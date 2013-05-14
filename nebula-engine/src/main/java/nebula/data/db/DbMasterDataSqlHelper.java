@@ -162,7 +162,8 @@ public class DbMasterDataSqlHelper {
 										}
 									}
 
-									subFieldSerializer.add(new EntityListFieldSerializer(in1f.getName(), adapteres, subFieldNames));
+									subFieldSerializer.add(new EntityListFieldSerializer(in1f.getName(), adapteres,
+											subFieldNames));
 									break;
 								case ByRef: // Type B7
 								case Cascade: // Type B8
@@ -287,6 +288,11 @@ public class DbMasterDataSqlHelper {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public String builderMaxId() {
+		// 需要ID表肯定只有一个Key，所以可以直接使用keyColumn[0]
+		return "SELECT max(" + this.keyColumns[0].columnName + ") FROM " + this.tableName + " ";
 	}
 
 	public String builderCount() {

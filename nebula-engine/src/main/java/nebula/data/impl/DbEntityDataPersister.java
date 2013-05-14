@@ -14,6 +14,7 @@ import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.Holder;
 import nebula.data.db.DbConfiguration;
+import nebula.data.db.DbTxDataExecutor;
 import nebula.data.util.HolderBuilder;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -34,14 +35,14 @@ public class DbEntityDataPersister implements DataPersister<Entity> {
 	}
 
 	@Override
-	public<I> Holder<DataStore<Entity>> define(Class<I> clzIndex, Class<Entity> clz, String name) {
+	public <I> Holder<DataStore<Entity>> define(Class<I> clzIndex, Class<Entity> clz, String name) {
 		Holder<DataStore<Entity>> datastoreHolder = this.storeHolders.get(name);
 		if (datastoreHolder == null) {
 			Type type = typeLoader.findType(name);
-			DataStore<Entity> datastore=null;
-			if(type.getStandalone() == TypeStandalone.Transaction){
-				datastore = new DbTransactionEntityDataStore(this, type, dbConfig.getPersister(type));
-			}else{
+			DataStore<Entity> datastore = null;
+			if (type.getStandalone() == TypeStandalone.Transaction) {
+				datastore = new DbTransactionEntityDataStore(this, type, (DbTxDataExecutor) dbConfig.getPersister(type));
+			} else {
 				datastore = new DbMasterEntityDataStore(this, type, dbConfig.getPersister(type));
 			}
 			datastoreHolder = HolderBuilder.of(datastore);
@@ -50,14 +51,15 @@ public class DbEntityDataPersister implements DataPersister<Entity> {
 		return datastoreHolder;
 	}
 
-//	@Override
-//	public void define(Class<Entity> clz, String name, HolderListener<DataStore<Entity>> listener) {
-//		Holder<DataStore<Entity>> store = define(clz, name);
-//		store.addListener(listener);
-//	}
+	// @Override
+	// public void define(Class<Entity> clz, String name,
+	// HolderListener<DataStore<Entity>> listener) {
+	// Holder<DataStore<Entity>> store = define(clz, name);
+	// store.addListener(listener);
+	// }
 
 	@Override
-	public<I> Holder<DataStore<Entity>> reload(Class<I> clzIndex,Class<Entity> clz, String name) {
+	public <I> Holder<DataStore<Entity>> reload(Class<I> clzIndex, Class<Entity> clz, String name) {
 		Holder<DataStore<Entity>> datastoreHolder = this.storeHolders.get(name);
 
 		if (datastoreHolder != null) {
@@ -76,7 +78,7 @@ public class DbEntityDataPersister implements DataPersister<Entity> {
 	@Override
 	public void add(Entity v) {
 		assert v instanceof EditableEntity;
-		
+
 		EditableEntity vv = (EditableEntity) v;
 		this.markChanged(vv);
 	}

@@ -24,7 +24,7 @@ import org.apache.commons.logging.LogFactory;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 
-public class DbTransactionDataExecutor implements DbDataExecutor {
+public class DbTransactionDataExecutor implements DbTxDataExecutor {
 	private static final Log log = LogFactory.getLog(DbTransactionDataExecutor.class);
 
 	final private Connection conn;
@@ -37,6 +37,8 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 	final private PreparedStatement SQL_UPDATE;
 	final private PreparedStatement SQL_DELETE;
 	final private PreparedStatement SQL_LIST;
+	final private PreparedStatement SQL_MAX_ID;
+
 	// final private String SQL_COUNT;
 
 	final DatabaseColumn[] userColumns;
@@ -75,6 +77,7 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 			SQL_UPDATE = conn.prepareStatement(builder.builderUpdate());
 			SQL_DELETE = conn.prepareStatement(builder.builderDelete());
 			SQL_LIST = conn.prepareStatement(builder.builderList());
+			SQL_MAX_ID = conn.prepareStatement(builder.builderMaxId());
 		} catch (Exception e) {
 			log.error(e.getClass().getName(), e);
 			throw new RuntimeException(e);
@@ -87,7 +90,7 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 		ResultSet rs = null;
 		try {
 
-			final SmartList<String,DatabaseColumn> mapColumns = new SmartList<String,DatabaseColumn>(
+			final SmartList<String, DatabaseColumn> mapColumns = new SmartList<String, DatabaseColumn>(
 					new Function<DatabaseColumn, String>() {
 						@Override
 						public String apply(DatabaseColumn data) {
@@ -399,7 +402,7 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 
 	@Override
 	public List<EditableEntity> getAll() {
-		return executeQuery(SQL_LIST); // Only hot data
+		return executeQuerEntity(SQL_LIST); // Only hot data
 	}
 
 	@Override
@@ -412,7 +415,7 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 	public EditableEntity get(Object... keys) {
 		if (log.isTraceEnabled()) log.trace("\tSQL_GET : " + Joiner.on(',').join(keys));
 
-		List<EditableEntity> list = executeQuery(SQL_GET, keys);
+		List<EditableEntity> list = executeQuerEntity(SQL_GET, keys);
 		if (list == null) {
 			throw new RuntimeException("Can not find record key:" + keys);
 		}
@@ -448,7 +451,7 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 		}
 	}
 
-	private List<EditableEntity> executeQuery(PreparedStatement pstmt, Object... keys) {
+	private List<EditableEntity> executeQuerEntity(PreparedStatement pstmt, Object... keys) {
 		ResultSet res = null;
 		try {
 			int pos = 0;
@@ -495,6 +498,35 @@ public class DbTransactionDataExecutor implements DbDataExecutor {
 		} catch (SQLException e) {
 			log.error(e.getClass().getName(), e);
 			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public long getCurrentMaxID() {
+		ResultSet res = null;
+		try {
+			res = SQL_MAX_ID.executeQuery();
+			if (log.isTraceEnabled()) {
+				log.trace("\texecuteQuery Open Recordset");
+			}
+			while (res.next()) {
+				return res.getLong(1);
+			}
+			return 0;
+
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				if (res != null) {
+					res.close();
+					if (log.isTraceEnabled()) {
+						log.trace("\texecuteQuery Close Recordset");
+					}
+				}
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
 		}
 	}
 }

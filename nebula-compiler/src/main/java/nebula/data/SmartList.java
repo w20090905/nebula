@@ -3,6 +3,7 @@ package nebula.data;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.google.common.base.Function;
@@ -90,6 +91,9 @@ public class SmartList<I, V extends Timable> extends ForwardingList<V> implement
 		return true;
 	}
 
+	public Set<I> keySet(){
+		return this.indexedValues.keySet();
+	}
 	@Override
 	public V set(int index, V element) {
 		return super.set(index, element);

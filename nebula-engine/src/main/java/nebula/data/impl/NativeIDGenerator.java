@@ -1,0 +1,35 @@
+package nebula.data.impl;
+
+import nebula.data.IDGenerator;
+
+public class NativeIDGenerator implements IDGenerator {
+	private long currentMaxValue;
+
+	public NativeIDGenerator() {
+		this(0L);
+	}
+
+	public NativeIDGenerator(Long value) {
+		currentMaxValue = value;
+	}
+
+	@Override
+	public Long nextValue() {
+		return ++this.currentMaxValue;
+	}
+
+	@Override
+	public void init(Long initValue) {
+		this.currentMaxValue = initValue;
+	}
+
+	@Override
+	public void setSeed(Long seed) {
+	}
+
+	@Override
+	public Long nextValue(Long seed) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

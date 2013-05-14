@@ -1,27 +1,48 @@
 package nebula.data.impl;
 
 import java.util.List;
+import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Map;
 
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.db.DbDataExecutor;
+import nebula.data.IDGenerator;
+import nebula.data.db.DbTxDataExecutor;
+import nebula.lang.Field;
 import nebula.lang.Type;
+import nebula.lang.TypeStandalone;
 
 public class DbTransactionEntityDataStore extends EntityDataStore {
 
-	final DbDataExecutor db;
-	
-	final long max = 0;
+	final DbTxDataExecutor db;
 
-	DbTransactionEntityDataStore(final DbEntityDataPersister persistence, Type type, final DbDataExecutor exec) {
-		super(null, persistence, type);
+	final IDGenerator idGenerator;
+	final String key;
+
+	DbTransactionEntityDataStore(final DbEntityDataPersister persistence, Type type, final DbTxDataExecutor exec) {
+		super(IdMakerBuilder.getIDReader(type), persistence, type);
 		this.db = exec;
+
+		String localKey = null;
+
+		for (Field f : type.getFields()) {
+			if (f.isKey()) {
+				if (f.getType().getStandalone() == TypeStandalone.Basic) {
+					localKey = f.getName();
+					break;
+				}
+			}
+		}
+		key = checkNotNull(localKey);
+
+		idGenerator = IDGenerators.getIDReader(type);
 
 		List<EditableEntity> list = exec.getAll();
 		for (EditableEntity data : list) {
 			loadin(data);
 		}
+		idGenerator.init(exec.getCurrentMaxID());
+		idGenerator.setSeed((long) type.getName().hashCode() %( 1<<8));
 	}
 
 	@Override
@@ -45,9 +66,9 @@ public class DbTransactionEntityDataStore extends EntityDataStore {
 			} finally {
 				lock.unlock();
 			}
-		} else { // insert
-			Long id = (Long) this.idMaker.apply(newEntity);
-
+		} else { // insert			
+			Long id = idGenerator.nextValue();
+			newEntity.put(key, id);
 			newEntity.put("ID", id);
 
 			lock.lock();

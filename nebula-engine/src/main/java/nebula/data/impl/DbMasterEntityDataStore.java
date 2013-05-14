@@ -13,7 +13,7 @@ public class DbMasterEntityDataStore extends EntityDataStore {
 	final DbDataExecutor db;
 
 	DbMasterEntityDataStore(final DbEntityDataPersister persistence, Type type, final DbDataExecutor exec) {
-		super(IdMakerBuilder.getIDSetter(type), persistence, type);
+		super(IdMakerBuilder.getIDReader(type), persistence, type);
 		this.db = exec;
 
 		List<EditableEntity> list = exec.getAll();
