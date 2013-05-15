@@ -1,7 +1,5 @@
-@maxLength = 4000;
-@formatType = "textarea";
-/*
- * 多行的文本内容，可以使用Wiki标记
- * */
+@MaxLength ( 4000)
+@FormatType ( "textarea")
+@Desc("多行的文本内容，可以使用Wiki标记")
 define Note|zh:笔记  extends Text {
 };

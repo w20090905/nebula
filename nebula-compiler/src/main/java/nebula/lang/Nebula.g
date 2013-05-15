@@ -109,7 +109,9 @@ typeDefinition returns[Type type]
 typeDefineKeyword returns[TypeStandalone typeType]
     :   'define'                  {typeType = TypeStandalone.Basic;} 
       | ('type' | 'master' ) {typeType = TypeStandalone.Master;} 
-      | ('tx'|'transaction')    {typeType = TypeStandalone.Transaction;};
+      | ('tx'|'transaction')    {typeType = TypeStandalone.Transaction;}
+      | ('flow')    {typeType = TypeStandalone.Flow;}
+      | ('action')    {typeType = TypeStandalone.Action;};
 
 nestedTypeDefinition[Type resideType,String name,Alias nameAlias] returns[Type type]
     :   '{' 
@@ -210,11 +212,14 @@ arrayDefinition returns[String from,String to]
 
 attrListDefinition returns[InheritHashMap attrs]
     @init{if(attrs==null)attrs = new InheritHashMap();else attrs.clear();}
-    :('@' attrItemDefinition[attrs] ';')+
+    :('@' attrItemDefinition[attrs])+
 ;
 
 attrItemDefinition[InheritHashMap attrs]
-    :   ID '=' v=constValueDefinition {attrs.put($ID.text,v);}
+    :   ID ('(' v=constValueDefinition ')')? {      
+        if(v!=null)attrs.put($ID.text,v);
+        else attrs.put($ID.text,$ID.text);
+      }
     ;
 
 constValueDefinition returns [Object v]

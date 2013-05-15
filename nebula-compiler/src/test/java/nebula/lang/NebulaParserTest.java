@@ -308,7 +308,7 @@ public class NebulaParserTest extends TestCase {
 	public void testAttrDefinition_String_X() {
 		try {
 			//@formatter:off
-			String text = "MaxLength=\"X\" ";
+			String text = "MaxLength(\"X\")";
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -327,7 +327,7 @@ public class NebulaParserTest extends TestCase {
 	public void testAttrDefinition_BigDecimal_10() {
 		try {
 			//@formatter:off
-			String text = "MaxLength = 1.1 ";
+			String text = "MaxLength(1.1) ";
 			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);

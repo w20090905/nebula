@@ -48,7 +48,7 @@ public class TypeTemplateResouce extends AbstractResouce {
 		Type type = this.typeLoader.findType(typeName);
 		
 		String dataType = (String)type.getStandalone().name().toLowerCase();
-		String style = (String)type.getAttrs().get("style");
+		String style = (String)type.getAttrs().get("Style");
 		
 		this.name = dataType + "_" + style + "_" + actionName + ".ftl";
 		// this.templateName = templateTypeName + "-" + actionName + ".ftl";

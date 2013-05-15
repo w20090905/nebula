@@ -1,4 +1,4 @@
-@formatType = "birthday";
-@format = "mm-dd";
+@FormatType("birthday")
+@Format("mm-dd")
 define Birthday|zh:生日  extends Date {
 };

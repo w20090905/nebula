@@ -1,4 +1,4 @@
-@max = 12;
-@min = 1;
+@Max(12)
+@Min(1)
 define Month extends Long {
 };

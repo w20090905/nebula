@@ -8,7 +8,7 @@ import java.util.TreeSet;
 public class InheritHashMap extends HashMap<String, Object> {
 	private static final long serialVersionUID = 2504234689413219141L;
 	private InheritHashMap defaults = null;
-		
+
 	public InheritHashMap() {
 		super();
 	}
@@ -18,34 +18,36 @@ public class InheritHashMap extends HashMap<String, Object> {
 		this.defaults = defaults;
 	}
 
-	public void setDefaults(InheritHashMap defaults){
-		this.defaults=defaults;
+	public void setDefaults(InheritHashMap defaults) {
+		this.defaults = defaults;
 	}
-	
+
 	@Override
 	public Object get(Object key) {
-        Object oval = super.get(key);
-        return ((oval == null) && (defaults != null)) ? defaults.get(key) : oval;
+		if (Character.isLowerCase(key.toString().charAt(0))) {
+			System.out.println("%%%%%5 from attr : " + key);
+		}
+		Object oval = super.get(key);
+		return ((oval == null) && (defaults != null)) ? defaults.get(key) : oval;
 	}
 
-	
-    public Object get(Object key, Object defaultValue) {
-        Object val = get(key);
-        return (val == null) ? defaultValue : val;
-    }
+	public Object get(Object key, Object defaultValue) {
+		Object val = get(key);
+		return (val == null) ? defaultValue : val;
+	}
 
-    public Set<String>  getNames() {
-    	Set<String> names = null;
-    	if(defaults==null){
-    		names = new TreeSet<String>();
-    	}else{
-    		names = defaults.getNames();    		
-    	}
-    	
+	public Set<String> getNames() {
+		Set<String> names = null;
+		if (defaults == null) {
+			names = new TreeSet<String>();
+		} else {
+			names = defaults.getNames();
+		}
+
 		names.addAll(super.keySet());
-    	
-        return names;
-    }
+
+		return names;
+	}
 
 	@Override
 	public int size() {
@@ -54,19 +56,18 @@ public class InheritHashMap extends HashMap<String, Object> {
 
 	@Override
 	public boolean isEmpty() {
-		return super.isEmpty() && (defaults!=null ? defaults.isEmpty():true);
+		return super.isEmpty() && (defaults != null ? defaults.isEmpty() : true);
 	}
 
 	@Override
 	public boolean containsKey(Object key) {
-		return super.containsKey(key) || (defaults!=null ? defaults.containsKey(key):false);
-	}
-	
-	@Override
-	public boolean containsValue(Object value) {
-		return super.containsValue(value) || (defaults!=null ? defaults.containsValue(value):false);
+		return super.containsKey(key) || (defaults != null ? defaults.containsKey(key) : false);
 	}
 
+	@Override
+	public boolean containsValue(Object value) {
+		return super.containsValue(value) || (defaults != null ? defaults.containsValue(value) : false);
+	}
 
 	@Override
 	public Set<String> keySet() {

@@ -21,7 +21,7 @@ public class IDGenerators {
 			}
 			checkNotNull(keyField);
 
-			String idGenerationStrategy = (String) keyField.getAttrs().get("idGenerationStrategy");
+			String idGenerationStrategy = (String) keyField.getAttrs().get("IDGenerationStrategy");
 
 			if ("default".equals(idGenerationStrategy)) {
 				return new CurrentTimeIDGenerator();

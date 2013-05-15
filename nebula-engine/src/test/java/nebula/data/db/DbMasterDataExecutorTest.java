@@ -198,7 +198,7 @@ public class DbMasterDataExecutorTest extends TestCase {
 		//@formatter:off
 		text = "" + 
 				"type Person { " + 
-				"	@maxLength=250;!PersonName Name;" + 
+				"	@MaxLength(250)!PersonName Name;" + 
 				"	Age Name;" + 
 				"	Height;" + 
 				"	Date;" + 
@@ -627,7 +627,7 @@ public class DbMasterDataExecutorTest extends TestCase {
 		//@formatter:off
 		text = "" + 
 				"type Person { " + 
-				"	@maxLength=250;!PersonName Name;" + 
+				"	@MaxLength(250)!PersonName Name;" + 
 				"	Age;" + 
 				"	Height[1..10];" + 
 				"	Date[1..10];" + 

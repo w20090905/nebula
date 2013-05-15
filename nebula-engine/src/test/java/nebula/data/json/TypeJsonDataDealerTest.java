@@ -79,10 +79,10 @@ public class TypeJsonDataDealerTest extends TestCase {
 				"{\"Name\":\"Person\",\"SuperType\":\"Master\",\"Standalone\":\"Master\","
 						+ "\"Fields\":["
 						+ "{\"Name\":\"PersonName\",\"isKey\":true,\"isCore\":false,\"isArray\":false,\"TypeName\":\"Name\","
-						+ "\"Refer\":\"ByVal\",\"NameAlias\":{},\"Attrs\":{\"formatType\":\"text\",\"maxLength\":\"60\"}},"
+						+ "\"Refer\":\"ByVal\",\"NameAlias\":{},\"Attrs\":{\"FormatType\":\"text\",\"MaxLength\":\"60\"}},"
 						+ "{\"Name\":\"Age\",\"isKey\":false,\"isCore\":false,\"isArray\":false,\"TypeName\":\"Age\","
-						+ "\"Refer\":\"ByVal\",\"NameAlias\":{},\"Attrs\":{\"formatType\":\"numeric\",\"inputSize\":\"small\",\"max\":\"160\",\"maxLength\":\"3\",\"min\":\"0\",\"precision\":\"10\",\"scale\":\"2\"}}],"
-						+ "\"NameAlias\":{},\"Attrs\":{\"style\":\"basic\"},\"Mutable\":false,"
+						+ "\"Refer\":\"ByVal\",\"NameAlias\":{},\"Attrs\":{\"FormatType\":\"numeric\",\"InputSize\":\"small\",\"Max\":\"160\",\"MaxLength\":\"3\",\"Min\":\"0\",\"Precision\":\"10\",\"Scale\":\"2\"}}],"
+						+ "\"NameAlias\":{},\"Attrs\":{\"Style\":\"basic\"},\"Mutable\":false,"
 						+ "\"Code\":\"type Person {\\t!PersonName Name;\\tAge;};\\n\"}", out.toString());
 		System.out.println(out.toString());
 	}

@@ -1,6 +1,6 @@
-@inputSize = "small";
-@maxLength = 3;
-@min = 0;
-@max = 160;
+@InputSize("small")
+@MaxLength(3)
+@Min(0)
+@Max(160)
 define Age|zh:年龄  extends Long {
 };

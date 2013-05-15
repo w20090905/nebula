@@ -1,3 +1,3 @@
-@maxLength = 20;
+@MaxLength(20)
 define JobTitle|zh:职位 extends String {
 };

@@ -272,12 +272,12 @@ public class NebulaParserAdvTest extends TestCase {
 	public void test_type_attr_with_inheritFieldTypeAttrs() throws Exception {
 		//@formatter:off
 		String text = "" +
-				"@length=1;" +
-				"@match=\"dd\";" +
-				"@max=3.8;" +
+				"@Length(1)" +
+				"@Match(\"dd\")" +
+				"@Max(3.8)" +
 				"type Person { \n" +
 				"	Name;" +
-				"	@maxLength=120;WithCustomAttr Name;" +
+				"	@MaxLength(120)WithCustomAttr Name;" +
 				"};";
 		//@formatter:on
 
@@ -288,16 +288,16 @@ public class NebulaParserAdvTest extends TestCase {
 		assertEquals(2, type.fields.size());
 		int i = 0;
 		assertEquals("Name", type.fields.get(i).name);
-		assertEquals(60, type.fields.get(i).attrs.get("maxLength"));
+		assertEquals(60, type.fields.get(i).attrs.get("MaxLength"));
 		
 		i++;
 		assertEquals("WithCustomAttr", type.fields.get(i).name);
-		assertEquals(120, type.fields.get(i).attrs.get("maxLength"));
+		assertEquals(120, type.fields.get(i).attrs.get("MaxLength"));
 
 		assertEquals(4, type.attrs.size());
-		assertEquals(1, type.attrs.get("length"));
-		assertEquals("dd", type.attrs.get("match"));
-		assertEquals(new BigDecimal("3.8"), type.attrs.get("max"));
+		assertEquals(1, type.attrs.get("Length"));
+		assertEquals("dd", type.attrs.get("Match"));
+		assertEquals(new BigDecimal("3.8"), type.attrs.get("Max"));
 	}
 	
 	public void test_quicktype_attr() throws Exception {
@@ -321,7 +321,7 @@ public class NebulaParserAdvTest extends TestCase {
 	public void test_buildin_extends() throws Exception {
 		//@formatter:off
 		String text = "" +
-				"	@MaxLength=120;\n" +
+				"	@MaxLength(120)\n" +
 				"define Name extends String { \n" +
 				"};";
 		//@formatter:on

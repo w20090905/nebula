@@ -25,54 +25,54 @@ class BootstrapTypeLoader extends TypeLoader {
 		Type basicType = new Type(this, TypeStandalone.Basic.name(), typeRoot, TypeStandalone.Abstract);
 
 		Type master = new Type(this, TypeStandalone.Master.name(), typeRoot, TypeStandalone.Abstract);
-		master.attrs.put("style", "basic");
+		master.attrs.put("Style", "basic");
 		Type transaction = new Type(this, TypeStandalone.Transaction.name(), typeRoot, TypeStandalone.Abstract);
-		transaction.attrs.put("style", "basic");
+		transaction.attrs.put("Style", "basic");
 		Type mixin = new Type(this, TypeStandalone.Mixin.name(), typeRoot, TypeStandalone.Abstract);
 
 		Type number = new Type(this, "Number", basicType, RawTypes.Long);
-		number.attrs.put("formatType", "numeric");
-		number.attrs.put("precision", 10);
-		number.attrs.put("scale", 2);
+		number.attrs.put("FormatType", "numeric");
+		number.attrs.put("Precision", 10);
+		number.attrs.put("Scale", 2);
 
 		Type typeBoolean = new Type(this, "Boolean", number, RawTypes.Boolean);
-		typeBoolean.attrs.put("formatType", "checkbox");
+		typeBoolean.attrs.put("FormatType", "checkbox");
 
 		Type typeLong = new Type(this, "Long", number, RawTypes.Long);
 
 		Type decimal = new Type(this, "Decimal", number, RawTypes.Decimal);
-		decimal.attrs.put("precision", 10);
-		decimal.attrs.put("scale", 2);
+		decimal.attrs.put("Precision", 10);
+		decimal.attrs.put("Scale", 2);
 
 		Type string = new Type(this, "String", basicType, RawTypes.String);
-		string.attrs.put("formatType", "text");
-		string.attrs.put("maxLength", 60);
+		string.attrs.put("FormatType", "text");
+		string.attrs.put("MaxLength", 60);
 
 		Type text = new Type(this, "Text", basicType, RawTypes.Text);
-		text.attrs.put("formatType", "textarea");
-		text.attrs.put("maxLength", 1024);
+		text.attrs.put("FormatType", "textarea");
+		text.attrs.put("MaxLength", 1024);
 
 		Type date = new Type(this, "Date", basicType, RawTypes.Date);
-		date.attrs.put("formatType", "date");
-		date.attrs.put("formatString", "YYYY-MM-DD");
+		date.attrs.put("FormatType", "date");
+		date.attrs.put("FormatString", "YYYY-MM-DD");
 
 		Type time = new Type(this, "Time", basicType, RawTypes.Time);
-		time.attrs.put("formatType", "time");
-		time.attrs.put("formatString", "HH:mm:ss");
+		time.attrs.put("FormatType", "time");
+		time.attrs.put("FormatString", "HH:mm:ss");
 
 		Type datetime = new Type(this, "Datetime", basicType, RawTypes.Datetime);
-		datetime.attrs.put("formatType", "datetime");
-		datetime.attrs.put("formatString", "YYYY-MM-DD HH:mm:ss");
+		datetime.attrs.put("FormatType", "datetime");
+		datetime.attrs.put("FormatString", "YYYY-MM-DD HH:mm:ss");
 
 		Type timestamp = new Type(this, "Timestamp", basicType, RawTypes.Timestamp);
-		timestamp.attrs.put("formatType", "timestamp");
-		timestamp.attrs.put("formatString", "YYYY-MM-DD HH:mm:ss.S");
+		timestamp.attrs.put("FormatType", "timestamp");
+		timestamp.attrs.put("FormatString", "YYYY-MM-DD HH:mm:ss.S");
 
 		Type name = new Type(this, "Name", string);
-		name.attrs.put("maxLength", 60);
+		name.attrs.put("MaxLength", 60);
 
 		Type attr = new Type(this, "Attr", string);
-		attr.attrs.put("maxLength", 60);
+		attr.attrs.put("MaxLength", 60);
 		
 
 
@@ -129,7 +129,7 @@ class BootstrapTypeLoader extends TypeLoader {
 		}
 		
 		Type typeAttribute = this.findType("Attribute");
-		typeAttribute.attrs.put("style", "compact");
+		typeAttribute.attrs.put("Style", "compact");
 
 		//@formatter:off
 		String typeDefine = "" +

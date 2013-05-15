@@ -3,9 +3,9 @@ package nebula.data.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import nebula.data.DataStore;
 import nebula.data.Editable;
 import nebula.data.Entity;
-import nebula.data.DataStore;
 
 public class EditableEntity extends EntityImp implements Editable {
 	final Map<String, Object> newData;

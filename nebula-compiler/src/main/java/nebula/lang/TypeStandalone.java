@@ -29,5 +29,7 @@ public enum TypeStandalone {
 	 * 	Logistics: Deliveries, storage records, travel records, etc.
 	 * */
 	Transaction,	
+	Flow,
+	Action,
 	Mixin
 }

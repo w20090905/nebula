@@ -1,5 +1,5 @@
-@formatType = "email";
-@inputSize = "large";
-@maxLength = 120;
+@FormatType ( "email")
+@InputSize ( "large")
+@MaxLength ( 120)
 define EMail|zh:邮件地址 extends String {
 };

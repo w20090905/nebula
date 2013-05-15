@@ -32,13 +32,13 @@ public class DbMasterDataSqlHelper {
 
 		RawTypes rawType = field.getType().getRawType();
 
-		v = attrs.get("maxLength");
+		v = attrs.get("MaxLength");
 		long size = v != null ? (Integer) v : 0;
 
-		v = attrs.get("precision");
+		v = attrs.get("Precision");
 		int precision = v != null ? (Integer) v : 0;
 
-		v = attrs.get("scale");
+		v = attrs.get("Scale");
 		int scale = v != null ? (Integer) v : 0;
 
 		boolean nullable = field.getImportance() == Unimportant;

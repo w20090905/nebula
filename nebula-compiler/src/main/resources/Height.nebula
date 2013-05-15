@@ -1,5 +1,5 @@
-@inputSize = "small";
-@uom = "cm";
-@maxLength = 3;
+@InputSize ("small")
+@Uom ("cm")
+@MaxLength (3)
 define Height|zh:高  extends Long {
 };

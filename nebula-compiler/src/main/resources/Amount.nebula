@@ -1,3 +1,3 @@
-@maxLength = 15;
+@MaxLength(15)
 define Amount |zh:金额  extends Decimal {
 };

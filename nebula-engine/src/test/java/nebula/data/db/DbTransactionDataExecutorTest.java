@@ -198,7 +198,7 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		//@formatter:off
 		text = "" + 
 				"tx Order { " + 
-				"	@maxLength=250;!OrderName Name;" + 
+				"	@MaxLength(250)!OrderName Name;" + 
 				"	Age Name;" + 
 				"	Height;" + 
 				"	Date;" + 
@@ -627,7 +627,7 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		//@formatter:off
 		text = "" + 
 				"tx Order { " + 
-				"	@maxLength=250;!OrderName Name;" + 
+				"	@MaxLength(250)!OrderName Name;" + 
 				"	Age;" + 
 				"	Height[1..10];" + 
 				"	Date[1..10];" + 
