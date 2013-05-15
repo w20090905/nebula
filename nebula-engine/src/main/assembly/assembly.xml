@@ -22,6 +22,15 @@
 			<fileMode>0744</fileMode>
 			<includes>
 				<include>*.sh</include>
+				<include>*.bat</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>src/main/resources</directory>
+			<outputDirectory>conf</outputDirectory>
+			<fileMode>0744</fileMode>
+			<includes>
+				<include>*.properties</include>
 			</includes>
 		</fileSet>
 		<fileSet>

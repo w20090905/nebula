@@ -1,0 +1,1 @@
+java -server -cp .;lib\*;conf\* http.startup.JettyServer
