@@ -77,12 +77,4 @@ public class EntityDataStoreTest extends TestCase {
 		Entity e2 = list.get(1);
 		assertEquals("test", e2.getID());
 	}
-
-	// public final void testFindBy() {
-	// fail("Not yet implemented"); // TODO
-	// }
-	//
-	// public final void testRemove() {
-	// fail("Not yet implemented"); // TODO
-	// }
 }

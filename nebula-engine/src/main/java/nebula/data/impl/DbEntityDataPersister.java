@@ -15,7 +15,6 @@ import nebula.data.Entity;
 import nebula.data.Holder;
 import nebula.data.db.DbConfiguration;
 import nebula.data.db.DbTxDataExecutor;
-import nebula.data.util.HolderBuilder;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 import nebula.lang.TypeStandalone;
@@ -45,7 +44,7 @@ public class DbEntityDataPersister implements DataPersister<Entity> {
 			} else {
 				datastore = new DbMasterEntityDataStore(this, type, dbConfig.getPersister(type));
 			}
-			datastoreHolder = HolderBuilder.of(datastore);
+			datastoreHolder = Holder.of(datastore);
 			storeHolders.put(name, datastoreHolder);
 		}
 		return datastoreHolder;
@@ -68,7 +67,7 @@ public class DbEntityDataPersister implements DataPersister<Entity> {
 
 			Type type = typeLoader.findType(name);
 			DataStore<Entity> newData = new DbMasterEntityDataStore(this, type, dbConfig.getPersister(type));
-			datastoreHolder.update(oldData, newData);
+			datastoreHolder.update(newData);
 			return datastoreHolder;
 		} else {
 			throw new UnsupportedOperationException("DataStore<Entity> reload(Class<Entity> clz, String name) ");

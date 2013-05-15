@@ -533,6 +533,9 @@ public class DbMasterDataExecutorTest extends TestCase {
 		assertEquals((Long) 10L, ages.get(0));
 		assertEquals((Long) 200L, ages.get(1));
 		assertEquals((Long) 30000L, ages.get(2));
+		
+		assertNotNull(data.get("LastModified_"));
+		
 
 		assertNotNull(data);
 

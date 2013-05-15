@@ -11,7 +11,6 @@ import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.Holder;
-import nebula.data.util.HolderBuilder;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 
@@ -32,7 +31,7 @@ public class InMemoryDataPersister implements DataPersister<Entity> {
 		if (store == null) {
 			Type type = loader.findType(name);
 			DataStore<Entity> newData = new EntityDataStore(IdMakerBuilder.getIDReader(type), this, type);
-			store = HolderBuilder.of(newData);
+			store = Holder.of(newData);
 			stores.put(name, store);
 		}
 		return store;
@@ -55,7 +54,7 @@ public class InMemoryDataPersister implements DataPersister<Entity> {
 
 			Type type = loader.findType(name);
 			DataStore<Entity> newData = new EntityDataStore(IdMakerBuilder.getIDReader(type), this, type);
-			datastoreHolder.update(oldData, newData);
+			datastoreHolder.update(newData);
 			return datastoreHolder;
 		} else {
 			throw new UnsupportedOperationException("DataStore<Entity> reload(Class<Entity> clz, String name) ");

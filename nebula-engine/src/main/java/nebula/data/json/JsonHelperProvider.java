@@ -18,10 +18,10 @@ public class JsonHelperProvider {
 	static JsonFactory factory = new JsonFactory();
 
 	@SuppressWarnings("unchecked")
-	public static <T> DataHelper<T,Reader,Writer> getSerialize(Class<T> clz) {
-		DataHelper<T,Reader,Writer> s;
+	public static <T> DataHelper<T, Reader, Writer> getSerialize(Class<T> clz) {
+		DataHelper<T, Reader, Writer> s;
 		if (clz == Type.class) {
-			s = (DataHelper<T,Reader,Writer>)new DefaultJsonHelper<Type>(factory, new TypeSerializer());
+			s = (DataHelper<T, Reader, Writer>) new DefaultJsonHelper<Type>(factory, new TypeSerializer());
 		} else {
 			s = null;
 		}
@@ -29,42 +29,34 @@ public class JsonHelperProvider {
 		return s;
 	}
 
-//	public static JsonHelper<Entity> getHelper(Type type) {
-//		return new DefaultJsonHelper<>(factory, new EntityJsonDataDealer(type));
-//	}
+	// public static JsonHelper<Entity> getHelper(Type type) {
+	// return new DefaultJsonHelper<>(factory, new EntityJsonDataDealer(type));
+	// }
 
-	public static Holder<DataHelper<Entity,Reader,Writer>> getHelper(final Holder<DataStore<Entity>> storeHolder,final Type type) {
-		Holder<DataHelper<Entity,Reader,Writer>> he = new Holder<DataHelper<Entity,Reader,Writer>>() {
-			DataStore<Entity> lastDataStore = storeHolder.get();
-			DataHelper<Entity,Reader,Writer> lastJsonHelper = new DefaultJsonHelper<Entity>(factory, new EntitySerializer(type));
+	public static Holder<DataHelper<Entity, Reader, Writer>> getHelper(final Holder<DataStore<Entity>> storeHolder,
+			final Type type) {
 
+		DataHelper<Entity, Reader, Writer> lastJsonHelper = (DataHelper<Entity, Reader, Writer>) new DefaultJsonHelper<Entity>(
+				factory, new EntitySerializer(type));
+
+		final Holder<DataHelper<Entity, Reader, Writer>> holder = Holder.of(lastJsonHelper);
+
+		storeHolder.addListener(new HolderListener<DataStore<Entity>>() {
 			@Override
-			public void update(DataHelper<Entity,Reader,Writer> oldData,DataHelper<Entity,Reader,Writer> newData) {
-				throw new UnsupportedOperationException();
+			public boolean arrive(DataStore<Entity> newData, DataStore<Entity> oldData) {
+				DataHelper<Entity, Reader, Writer> newJsonHelper = new DefaultJsonHelper<Entity>(factory,
+						new EntitySerializer(type));
+				holder.update(newJsonHelper);
+				return false;
 			}
-
-			@Override
-			public DataHelper<Entity,Reader,Writer> get() {
-				DataStore<Entity> currentDataStore = storeHolder.get();
-				if (lastDataStore != currentDataStore) {
-					lastJsonHelper = new DefaultJsonHelper<Entity>(factory, new EntitySerializer(type));
-				}
-				return lastJsonHelper;
-			}
-
-			@Override
-			public void addListener(HolderListener<DataHelper<Entity,Reader,Writer>> listener) {
-				throw new UnsupportedOperationException();
-			}
-		};
-		return he;
+		});
+		return holder;
 	}
 }
 
-class DefaultJsonHelper<T> implements DataHelper<T,Reader,Writer> {
+class DefaultJsonHelper<T> implements DataHelper<T, Reader, Writer> {
 	final protected JsonFactory factory;
 	final protected JsonDataHelper<T> dataHelper;
-	
 
 	public DefaultJsonHelper(JsonFactory factory, JsonDataHelper<T> dataHelper) {
 		this.factory = factory;
@@ -90,9 +82,8 @@ class DefaultJsonHelper<T> implements DataHelper<T,Reader,Writer> {
 		try {
 			JsonParser parser = this.factory.createJsonParser(in);
 
-
 			d = this.dataHelper.readFrom(d, parser);
-			
+
 			parser.close();
 			return d;
 		} catch (IOException e) {

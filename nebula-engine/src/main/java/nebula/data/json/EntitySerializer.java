@@ -104,7 +104,7 @@ class EntitySerializer extends DefaultFieldSerializer<Entity> implements JsonDat
 				case ByVal: // Type A1
 					addPageField(of.getName(), of.getName(), getBasicDateDealer(of.getType().getRawType()));
 					break;
-				case Inline: // Type A2 // TODO
+				case Inline: // Type A2
 					if (topLevel) {
 						EntitySerializer es = new EntitySerializer(of.getType(), of.getName(), of.getName());
 						addEntityPageField(of.getName(), of.getName(), es);

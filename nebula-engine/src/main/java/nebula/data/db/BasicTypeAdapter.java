@@ -111,7 +111,8 @@ class DbString_Varchar_TypeAdapter extends BasicTypeAdapter<String> {
 class DbDateTypeAdapter extends BasicTypeAdapter<DateTime> {
 	@Override
 	public DateTime readFrom(ResultSet res, int i) throws Exception {
-		return res.wasNull() ? null : new DateTime(res.getDate(i));
+		Date t = res.getDate(i);
+		return t != null ? new DateTime(t): null;
 	}
 
 	@Override
@@ -123,7 +124,8 @@ class DbDateTypeAdapter extends BasicTypeAdapter<DateTime> {
 class DbTimeTypeAdapter extends BasicTypeAdapter<DateTime> {
 	@Override
 	public DateTime readFrom(ResultSet res, int i) throws Exception {
-		return res.wasNull() ? null : new DateTime(res.getTime(i));
+		Time t = res.getTime(i);
+		return t != null ? new DateTime(t): null;
 	}
 
 	@Override
@@ -135,7 +137,8 @@ class DbTimeTypeAdapter extends BasicTypeAdapter<DateTime> {
 class DbDatetimeTypeAdapter extends BasicTypeAdapter<DateTime> {
 	@Override
 	public DateTime readFrom(ResultSet res, int i) throws Exception {
-		return res.wasNull() ? null : new DateTime(res.getTimestamp(i));
+		Timestamp t = res.getTimestamp(i);
+		return t != null ? new DateTime(t): null;
 	}
 
 	@Override
@@ -147,11 +150,12 @@ class DbDatetimeTypeAdapter extends BasicTypeAdapter<DateTime> {
 class DbTimestampTypeAdapter extends BasicTypeAdapter<Long> {
 	@Override
 	public Long readFrom(ResultSet res, int i) throws Exception {
-		return res.wasNull() ? null : res.getTimestamp(i).getTime();
+		Timestamp t = res.getTimestamp(i);
+		return t != null ? t.getTime() : null;
 	}
 
 	@Override
 	public void writeTo(int index, Object v, PreparedStatement res) throws Exception {
-		res.setTimestamp(index, new Timestamp((Long)v));
+		res.setTimestamp(index, new Timestamp((Long) v));
 	}
 }

@@ -167,12 +167,4 @@ public class DbEntityDataPersisterTest extends TestCase {
 		education.put("DateFrom",Date.valueOf("1993-09-01"));
 		education.put("DateFrom", Date.valueOf("1996-07-01"));
 	}
-	
-	// public final void testRemove() {
-	// fail("Not yet implemented"); // TODO
-	// }
-	//
-	// public final void testTransaction() {
-	// fail("Not yet implemented"); // TODO
-	// }
 }

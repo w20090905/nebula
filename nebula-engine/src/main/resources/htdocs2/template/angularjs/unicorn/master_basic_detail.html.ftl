@@ -24,9 +24,9 @@
 			[#list (attrs[field.name].Values)![] as attr],{name:'${attr.Name}'}[/#list]
 		[/@compress] [/#assign]
 		
-		<select id="${id}" x-ng-init="values = [${attrValues?substring(1)}];"  ${ex}
+		<select id="${id}" x-ng-init="${id}values = [${attrValues?substring(1)}];"  ${ex}
 				${optReadonly} ${optRequired}  ${optValidateRule} 
-				x-ng-model="${ngModel}" x-ng-options="c.name as c.name for c in values" placeholder="${placeholder}">	
+				x-ng-model="${ngModel}" x-ng-options="c.name as c.name for c in ${id}values" placeholder="${placeholder}">	
 			<option value="">-- 选择 ${field.name} --</option>
 		</select>
 	[#elseif field.attrs.FormatType! = "textarea"]
