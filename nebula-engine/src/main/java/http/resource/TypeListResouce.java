@@ -47,22 +47,16 @@ public class TypeListResouce extends AbstractResouce {
 		List<Type> dataList;
 
 		String query = req.getQueryString();
-		if (query== null || query.length() <= 0) {
-			long newModified = typeLoader.getLastModified();
-			if (newModified == this.lastModified) {
-				super.cache = this.cacheAll;
-				return;
-			}
-			this.lastModified = newModified;
-			dataList = typeLoader.all();
-		} else {
-			Filter< Type> filter = datasbufferes.get(query);
-			if(filter==null){
-				Predicate<Type>  filterCondition = filterBuilder.buildFrom(req.getParameterMap(), null);	
+		if (query != null && query.length() > 0) {
+			Filter<Type> filter = datasbufferes.get(query);
+			if (filter == null) {
+				Predicate<Type> filterCondition = filterBuilder.buildFrom(req.getParameterMap(), null);
 				filter = typeLoader.liveFilter(filterCondition);
 				datasbufferes.put(query, filter);
 			}
 			dataList = filter.get();
+		} else {
+			throw new RuntimeException("query== null || query.length() <= 0");
 		}
 
 		ByteArrayOutputStream bout = new ByteArrayOutputStream();

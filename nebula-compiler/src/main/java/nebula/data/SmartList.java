@@ -12,7 +12,7 @@ import com.google.common.collect.ForwardingList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-public class SmartList<I, V extends Timable> extends ForwardingList<V> implements Cloneable {
+public class SmartList<I, V extends Timable> extends ForwardingList<V> {
 	final List<V> values;
 	final Map<I, V> indexedValues;
 	final Map<I, Integer> indexedIndex;
@@ -91,9 +91,10 @@ public class SmartList<I, V extends Timable> extends ForwardingList<V> implement
 		return true;
 	}
 
-	public Set<I> keySet(){
+	public Set<I> keySet() {
 		return this.indexedValues.keySet();
 	}
+
 	@Override
 	public V set(int index, V element) {
 		return super.set(index, element);
@@ -135,12 +136,4 @@ public class SmartList<I, V extends Timable> extends ForwardingList<V> implement
 		this.indexedIndex.remove(key);
 		return super.remove(v);
 	}
-
-	@Override
-	public SmartList<I, V> clone() {
-		SmartList<I, V> list = new SmartList<I, V>(indexFunction);
-		list.addAll(values);
-		return list;
-	}
-
 }
