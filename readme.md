@@ -1,3 +1,3 @@
 readme
-[ ]test
-[X]finish
+-[ ]test
+-[X]finish
