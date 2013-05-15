@@ -1,4 +1,0 @@
-type Company {
-	!Name				Name;
-	?CreateDate			Date;
-};
