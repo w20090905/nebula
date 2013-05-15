@@ -1,0 +1,22 @@
+<FindBugsFilter>
+	<!-- 该类使用所有的bug检测器 -->
+	<Match class="nebula.lang.NebulaParser">
+	</Match>
+	<Match class="nebula.lang.NebulaLexer">
+	</Match>
+	<Match class="nebula.lang.NebulaScanParser">
+	</Match>
+	<Match class="nebula.lang.NebulaScanLexer">
+	</Match>
+	<!-- 
+	<Match class="com.foobar.BClass">
+		<BugCode name="HE" />
+	</Match>
+	<Match class="com.foobar.CClass">
+		<Or>
+			<Method name="AMethod" />
+			<Method name="BMethod" />
+		</Or>
+		<BugCode name="HE" />
+	</Match> -->
+</FindBugsFilter>
