@@ -2,13 +2,13 @@ package nebula.data;
 
 import junit.framework.TestCase;
 import nebula.data.Filter;
-import nebula.data.SmartList;
+import nebula.data.LiveList;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 public class SmartListImpTest extends TestCase {
-	SmartList<String,Person> list = null;
+	LiveList<String,Person> list = null;
 	String name = "test";
 
 	class Person implements Timable {
@@ -25,7 +25,7 @@ public class SmartListImpTest extends TestCase {
 	Person p = null;
 
 	protected void setUp() throws Exception {
-		list = new SmartList<String,Person>(new Function<Person, String>() {
+		list = new LiveList<String,Person>(new Function<Person, String>() {
 			@Override
 			public String apply(Person data) {
 				return data.name;
@@ -94,19 +94,19 @@ public class SmartListImpTest extends TestCase {
 		list.add(p);
 
 		assertEquals(5, list.size());
-		Filter<Person> result = list.liveFilter(new Predicate<Person>() {
-			@Override
-			public boolean apply(Person v) {
-				return v.age == 12;
-			}
-		});
-		assertEquals(2, result.get().size());
-		list.remove(1);
-		list.remove(0);
-
-		assertEquals(2, result.get().size());
-
-		assertEquals(3, list.size());
+//		Filter<Person> result = list.liveFilter(new Predicate<Person>() {
+//			@Override
+//			public boolean apply(Person v) {
+//				return v.age == 12;
+//			}
+//		});
+//		assertEquals(2, result.get().size());
+//		list.remove(1);
+//		list.remove(0);
+//
+//		assertEquals(2, result.get().size());
+//
+//		assertEquals(3, list.size());
 
 	}
 

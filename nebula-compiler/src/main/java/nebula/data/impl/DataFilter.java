@@ -1,18 +1,24 @@
-package nebula.data;
+package nebula.data.impl;
 
 import java.util.List;
+
+import nebula.data.ClassifiableFilter;
+import nebula.data.Classificator;
+import nebula.data.DataListener;
+import nebula.data.Filter;
+import nebula.data.Timable;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
-class DataFilter<V extends Timable> implements ClassifiableFilter<V>, Filter<V>, DataListener<V> {
+class DataFilter<V extends Timable> implements ClassifiableFilter<V>, Filter<V> {
 	final List<V> values = Lists.newArrayList();
 	final List<DataListener<V>> listeneres;
 	final Predicate<V> filterFunction;
 
-	DataFilter(Predicate<V> filterFunction) {
+	public DataFilter(Predicate<V> filterFunction) {
 		this.filterFunction = filterFunction;
 		this.listeneres = Lists.newArrayList();
 	}

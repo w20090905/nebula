@@ -5,7 +5,7 @@ import java.util.Set;
 import junit.framework.TestCase;
 import nebula.data.Classificator;
 import nebula.data.Entity;
-import nebula.data.SmartList;
+import nebula.data.LiveList;
 import nebula.data.util.RecentDateClassificatorFunction;
 
 import org.joda.time.DateTime;
@@ -14,12 +14,12 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 
 public class RecentDateDataClassificatorTest extends TestCase {
-	SmartList<String, Entity> list;
+	LiveList<String, Entity> list;
 	Classificator<String, Entity> classificator;
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		list = new SmartList<String, Entity>(new Function<Entity, String>() {
+		list = new LiveList<String, Entity>(new Function<Entity, String>() {
 
 			@Override
 			public String apply(Entity from) {
@@ -27,15 +27,14 @@ public class RecentDateDataClassificatorTest extends TestCase {
 			}
 		});
 
-		classificator = list.liveClassify(new Function<Entity, String>() {
+		classificator = list.addListener(Entities.classify(new Function<Entity, String>() {
 			Function<DateTime, String> convertFunction = new RecentDateClassificatorFunction(new DateTime()
 					.withDayOfMonth(10).withDayOfWeek(3));
-
 			@Override
 			public String apply(Entity from) {
 				return convertFunction.apply((DateTime) from.get("Date"));
 			}
-		});
+		}));
 	}
 
 	protected void tearDown() throws Exception {

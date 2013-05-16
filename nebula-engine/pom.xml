@@ -87,24 +87,6 @@
 			<groupId>nebula</groupId>
 			<artifactId>nebula-compiler</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>guava-base</artifactId>
-					<groupId>com.google.guava</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>guava-collections</artifactId>
-					<groupId>com.google.guava</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>guava-primitives</artifactId>
-					<groupId>com.google.guava</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>guava-annotations</artifactId>
-					<groupId>com.google.guava</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.google.inject</groupId>

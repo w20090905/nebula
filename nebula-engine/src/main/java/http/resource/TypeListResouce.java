@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import nebula.data.Classificator;
 import nebula.data.Filter;
 import nebula.data.json.DataHelper;
 import nebula.lang.Type;
@@ -22,7 +23,6 @@ import org.apache.commons.logging.LogFactory;
 
 import util.FileUtil;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
 
 public class TypeListResouce extends AbstractResouce {
@@ -47,16 +47,13 @@ public class TypeListResouce extends AbstractResouce {
 		List<Type> dataList;
 
 		String query = req.getQueryString();
-		if (query != null && query.length() > 0) {
-			Filter<Type> filter = datasbufferes.get(query);
-			if (filter == null) {
-				Predicate<Type> filterCondition = filterBuilder.buildFrom(req.getParameterMap(), null);
-				filter = typeLoader.liveFilter(filterCondition);
-				datasbufferes.put(query, filter);
-			}
-			dataList = filter.get();
+		String classification;
+		if (query != null && query.length() > 0 && (classification = req.getParameter("Standalone")) != null) {
+			Classificator<String, Type> classificator = typeLoader.groupByStandalone();
+			dataList = classificator.getData(classification);
 		} else {
-			throw new RuntimeException("query== null || query.length() <= 0");
+			throw new RuntimeException(
+					"query != null && query.length() > 0 && (classification = req.getParameter(\"Standalone\"))!=null");
 		}
 
 		ByteArrayOutputStream bout = new ByteArrayOutputStream();

@@ -7,9 +7,10 @@ import java.net.URL;
 import java.util.List;
 
 import nebula.data.Classificator;
-import nebula.data.Filter;
+import nebula.data.DataListener;
 import nebula.data.InheritSmartList;
-import nebula.data.SmartList;
+import nebula.data.LiveList;
+import nebula.data.impl.DataClassificator;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.ANTLRReaderStream;
@@ -22,7 +23,6 @@ import org.apache.commons.logging.LogFactory;
 import util.FileUtil;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 
 //class AutoIdentifiableType implements AutoIdentifiable<Type> {
 //	@Override
@@ -45,10 +45,12 @@ public abstract class TypeLoader {
 	protected Log log = LogFactory.getLog(this.getClass());
 
 	final TypeLoader parent;
-	final SmartList<String, Type> types;
+	final LiveList<String, Type> types;
 
 	protected long lastModified;
+	final Classificator<String, Type> classifyBy;
 
+	@SuppressWarnings("unchecked")
 	public TypeLoader(TypeLoader parent) {
 		this.parent = parent;
 		if (parent != null) {
@@ -59,30 +61,41 @@ public abstract class TypeLoader {
 				}
 			});
 		} else {
-			types = new SmartList<String, Type>(new Function<Type, String>() {
+			types = new LiveList<String, Type>(new Function<Type, String>() {
 				@Override
 				public String apply(Type from) {
 					return from.name;
 				}
 			});
 		}
-
+		classifyBy= new DataClassificator<String, Type>(new Function<Type, String>() {
+			@Override
+			public String apply(Type from) {
+				return from.getStandalone().toString();
+			}
+		});
+		types.addListener((DataListener<Type>) classifyBy);		
 	}
-
-	public Filter<Type> liveFilter(Predicate<Type> filterFunction) {
-		return types.liveFilter(filterFunction);
-	}
-
-	public List<Type> filter(Predicate<Type> filterFunction) {
-		return types.filter(filterFunction);
-	}
-
-	public <K> Classificator<K, Type> classify(Function<Type, K> indexerFunction) {
-		return types.classify(indexerFunction);
-	}
-
-	public <K> Classificator<K, Type> liveClassify(Function<Type, K> indexerFunction) {
-		return types.liveClassify(indexerFunction);
+	
+//
+//	public Filter<Type> liveFilter(Predicate<Type> filterFunction) {
+//		return types.liveFilter(filterFunction);
+//	}
+//
+//	public List<Type> filter(Predicate<Type> filterFunction) {
+//		return types.filter(filterFunction);
+//	}
+//
+//	public <K> Classificator<K, Type> classify(Function<Type, K> indexerFunction) {
+//		return types.classify(indexerFunction);
+//	}
+//
+//	public <K> Classificator<K, Type> liveClassify(Function<Type, K> indexerFunction) {
+//		return types.liveClassify(indexerFunction);
+//	}
+	
+	public Classificator<String, Type> groupByStandalone(){
+		return this.classifyBy;
 	}
 
 	List<Type> defineNebula(Reader in) throws RecognitionException {
@@ -204,7 +217,7 @@ public abstract class TypeLoader {
 		throw new UnsupportedOperationException("change type");
 	}
 
-	public SmartList<String, Type> getList() {
+	public LiveList<String, Type> getList() {
 		return this.types;
 	}
 

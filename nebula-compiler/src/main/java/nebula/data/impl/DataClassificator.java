@@ -1,7 +1,11 @@
-package nebula.data;
+package nebula.data.impl;
 
 import java.util.List;
 import java.util.Set;
+
+import nebula.data.Classificator;
+import nebula.data.DataListener;
+import nebula.data.Timable;
 
 import com.google.common.base.Function;
 import com.google.common.base.Objects;
@@ -9,16 +13,16 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 
-class DataClassificator<K, V> implements DataListener<V>, Classificator<K, V> {
+public class DataClassificator<K, V extends Timable> implements DataListener<V>, Classificator<K, V> {
 
 	final ListMultimap<K, V> values = ArrayListMultimap.create();
 	final Function<V, K> indexFunction;
 
-	DataClassificator(Function<V, K> indexFunction) {
+	public DataClassificator(Function<V, K> indexFunction) {
 		this.indexFunction = indexFunction;
 	}
 
-	DataClassificator(Iterable<V> values, Function<V, K> indexFunction) {
+	public  DataClassificator(Iterable<V> values, Function<V, K> indexFunction) {
 		this.indexFunction = indexFunction;
 		for (V value : values) {
 			Preconditions.checkNotNull(value, values);

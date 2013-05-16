@@ -7,16 +7,15 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.collect.ForwardingList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-public class SmartList<I, V extends Timable> extends ForwardingList<V> {
+public class LiveList<I, V extends Timable> extends ForwardingList<V> {
 	final List<V> values;
 	final Map<I, V> indexedValues;
 	final Map<I, Integer> indexedIndex;
-	final List<DataListener<V>> listeneres;
+	private List<DataListener<V>> listeneres;
 	final Function<V, I> indexFunction;
 
 	@Override
@@ -24,7 +23,7 @@ public class SmartList<I, V extends Timable> extends ForwardingList<V> {
 		return values;
 	}
 
-	public SmartList(Function<V, I> indexFunction) {
+	public LiveList(Function<V, I> indexFunction) {
 		this.indexFunction = indexFunction;
 		this.values = new CopyOnWriteArrayList<V>();
 		this.indexedValues = Maps.newHashMap();
@@ -32,25 +31,30 @@ public class SmartList<I, V extends Timable> extends ForwardingList<V> {
 		this.listeneres = Lists.newArrayList();
 	}
 
-	public <K> Classificator<K, V> classify(Function<V, K> indexerFunction) {
-		return new DataClassificator<K, V>(values, indexerFunction);
+	public <T extends DataListener<V>> T addListener(T listener) {
+		for (V v : values) {
+			listener.add(v);
+		}
+		listeneres.add(listener);
+		return listener;
 	}
 
-	public <K> Classificator<K, V> liveClassify(Function<V, K> indexerFunction) {
-		DataClassificator<K, V> classificator = new DataClassificator<K, V>(values, indexerFunction);
-		listeneres.add(classificator);
-		return classificator;
-	}
-
-	public List<V> filter(Predicate<V> filterFunction) {
-		return new DataFilter<V>(values, filterFunction).get();
-	}
-
-	public ClassifiableFilter<V> liveFilter(Predicate<V> filterFunction) {
-		DataFilter<V> filter = new DataFilter<V>(values, filterFunction);
-		listeneres.add(filter);
-		return filter;
-	}
+	/*
+	 * public <K> Classificator<K, V> classify(Function<V, K> indexerFunction) {
+	 * return new DataClassificator<K, V>(values, indexerFunction); }
+	 * 
+	 * public <K> Classificator<K, V> liveClassify(Function<V, K>
+	 * indexerFunction) { DataClassificator<K, V> classificator = new
+	 * DataClassificator<K, V>(values, indexerFunction);
+	 * listeneres.add(classificator); return classificator; }
+	 * 
+	 * public List<V> filter(Predicate<V> filterFunction) { return new
+	 * DataFilter<V>(values, filterFunction).get(); }
+	 * 
+	 * public ClassifiableFilter<V> liveFilter(Predicate<V> filterFunction) {
+	 * DataFilter<V> filter = new DataFilter<V>(values, filterFunction);
+	 * listeneres.add(filter); return filter; }
+	 */
 
 	public V get(I key) {
 		return this.indexedValues.get(key);

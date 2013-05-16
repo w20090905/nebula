@@ -7,10 +7,12 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import nebula.data.ClassifiableFilter;
 import nebula.data.Classificator;
+import nebula.data.DataListener;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.SmartList;
+import nebula.data.Filter;
+import nebula.data.LiveList;
 import nebula.lang.Type;
 
 import com.google.common.base.Function;
@@ -20,14 +22,14 @@ public class EntityDataStore implements DataStore<Entity> {
 	public static final String KEY_NAME = "ID";
 
 	final DataPersister<Entity> persistence;
-	final SmartList<Object,Entity> values;
+	final LiveList<Object, Entity> values;
 	final ReentrantLock lock = new ReentrantLock();
 	final Function<Entity, Object> idMaker;
 	long lastModified;
 
 	EntityDataStore(Function<Entity, Object> keyMaker, DataPersister<Entity> persistence, Type type) {
 		this.persistence = persistence;
-		this.values = new SmartList<Object,Entity>(keyMaker);
+		this.values = new LiveList<Object, Entity>(keyMaker);
 		this.idMaker = keyMaker;
 	}
 
@@ -116,28 +118,57 @@ public class EntityDataStore implements DataStore<Entity> {
 
 	@Override
 	public <K> Classificator<K, Entity> classify(Function<Entity, K> indexerFunction) {
-		return this.values.classify(indexerFunction);
+		DataClassificator<K, Entity> classificator = new DataClassificator<K, Entity>(this.values, indexerFunction);
+		return classificator;
 	}
 
 	@Override
 	public <K> Classificator<K, Entity> liveClassify(Function<Entity, K> indexerFunction) {
-		return this.values.liveClassify(indexerFunction);
+		DataClassificator<K, Entity> classificator = new DataClassificator<K, Entity>(indexerFunction);
+		values.addListener(classificator);
+		return classificator;
 	}
 
 	@Override
 	public List<Entity> filter(Predicate<Entity> filterFunction) {
-		return this.values.filter(filterFunction);
+		Filter<Entity> filter = Entities.filter(filterFunction);
+		this.values.addListener((DataListener<Entity>) filter);
+		return filter.get();
 	}
 
 	@Override
 	public ClassifiableFilter<Entity> liveFilter(Predicate<Entity> filterFunction) {
-		return this.values.liveFilter(filterFunction);
+		ClassifiableFilter<Entity> filter = Entities.filter(filterFunction);
+		this.values.addListener((DataListener<Entity>) filter);
+		return filter;
 	}
 
-//	@Override
-//	public Function<Entity, Object> getIdMaker() {
-//		return this.idMaker;
-//	}
+	// public <K> Classificator<K, V> classify(Function<V, K> indexerFunction) {
+	// return new DataClassificator<K, V>(values, indexerFunction);
+	// }
+	//
+	// public <K> Classificator<K, V> liveClassify(Function<V, K>
+	// indexerFunction) {
+	// DataClassificator<K, V> classificator = new DataClassificator<K,
+	// V>(values, indexerFunction);
+	// listeneres.add(classificator);
+	// return classificator;
+	// }
+	//
+	// public List<V> filter(Predicate<V> filterFunction) {
+	// return new DataFilter<V>(values, filterFunction).get();
+	// }
+	//
+	// public ClassifiableFilter<V> liveFilter(Predicate<V> filterFunction) {
+	// DataFilter<V> filter = new DataFilter<V>(values, filterFunction);
+	// listeneres.add(filter);
+	// return filter;
+	// }
+
+	// @Override
+	// public Function<Entity, Object> getIdMaker() {
+	// return this.idMaker;
+	// }
 
 	@Override
 	public long getLastModified() {

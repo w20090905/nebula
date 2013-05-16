@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import nebula.data.Entity;
-import nebula.data.SmartList;
+import nebula.data.LiveList;
 import nebula.data.impl.EditableEntity;
 import nebula.lang.Type;
 
@@ -87,7 +87,7 @@ public class DbMasterDataExecutor implements DbDataExecutor {
 		ResultSet rs = null;
 		try {
 
-			final SmartList<String,DatabaseColumn> mapColumns = new SmartList<String,DatabaseColumn>(
+			final LiveList<String,DatabaseColumn> mapColumns = new LiveList<String,DatabaseColumn>(
 					new Function<DatabaseColumn, String>() {
 						@Override
 						public String apply(DatabaseColumn data) {
