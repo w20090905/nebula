@@ -1,4 +1,4 @@
 type Company {
 	!Name;
-	SCMRole Attr;
+	@GroupBy SCMRole Attr;
 };

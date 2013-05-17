@@ -7,4 +7,5 @@ public interface Classificator<K, V> extends DataListener<V>{
 	Set<K> getClassifications();
 
 	List<V> getData(K classification);
+	List<V> getData(K classification,K classification2);
 }

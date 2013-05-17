@@ -1,12 +1,10 @@
 package nebula.data;
 
 import java.util.List;
-
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
+import java.util.Map;
 
 public interface DataStore<V extends Timable> extends Timable {
-//	Function<V, Object> getIdMaker();
+	// Function<V, Object> getIdMaker();
 
 	void load();
 
@@ -14,13 +12,18 @@ public interface DataStore<V extends Timable> extends Timable {
 
 	V get(Object key);
 
-	public <K> Classificator<K, V> classify(Function<V, K> indexerFunction);
+	Classificator<String, V> getClassificator(String name);
 
-	public <K> Classificator<K, V> liveClassify(Function<V, K> indexerFunction);
+	Map<String, Classificator<String, Entity>> getClassificatores();
 
-	public List<V> filter(Predicate<V> filterFunction);
-
-	public ClassifiableFilter<V> liveFilter(Predicate<V> filterFunction);
+	// public <K> Classificator<K, V> classify(Function<V, K> indexerFunction);
+	//
+	// public <K> Classificator<K, V> liveClassify(Function<V, K>
+	// indexerFunction);
+	//
+	// public List<V> filter(Predicate<V> filterFunction);
+	//
+	// public ClassifiableFilter<V> liveFilter(Predicate<V> filterFunction);
 
 	void markChanged(V v);
 

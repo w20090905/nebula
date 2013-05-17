@@ -8,12 +8,10 @@ import java.io.PrintStream;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import nebula.data.Classificator;
-import nebula.data.Filter;
 import nebula.data.json.DataHelper;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -23,14 +21,11 @@ import org.apache.commons.logging.LogFactory;
 
 import util.FileUtil;
 
-import com.google.common.collect.Maps;
-
 public class TypeListResouce extends AbstractResouce {
 	private static Log log = LogFactory.getLog(TypeListResouce.class);
 	private final DataHelper<Type, Reader, Writer> json;
 	final TypeLoader typeLoader;
 	final TypeFilterBuilder filterBuilder;
-	private final Map<String, Filter<Type>> datasbufferes;
 
 	protected byte[] cacheAll;
 
@@ -39,7 +34,6 @@ public class TypeListResouce extends AbstractResouce {
 		this.typeLoader = typeLoader;
 		this.json = json;
 		this.filterBuilder = filterBuilder;
-		datasbufferes = Maps.newHashMap();
 	}
 
 	@Override

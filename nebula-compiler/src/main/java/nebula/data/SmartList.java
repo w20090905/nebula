@@ -11,7 +11,7 @@ import com.google.common.collect.ForwardingList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-public class LiveList<I, V extends Timable> extends ForwardingList<V> {
+public class SmartList<I, V extends Timable> extends ForwardingList<V> {
 	final List<V> values;
 	final Map<I, V> indexedValues;
 	final Map<I, Integer> indexedIndex;
@@ -23,7 +23,7 @@ public class LiveList<I, V extends Timable> extends ForwardingList<V> {
 		return values;
 	}
 
-	public LiveList(Function<V, I> indexFunction) {
+	public SmartList(Function<V, I> indexFunction) {
 		this.indexFunction = indexFunction;
 		this.values = new CopyOnWriteArrayList<V>();
 		this.indexedValues = Maps.newHashMap();

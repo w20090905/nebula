@@ -1,22 +1,16 @@
 package nebula.data;
 
 import junit.framework.TestCase;
-import nebula.data.Classificator;
-import nebula.data.Entity;
-import nebula.data.Filter;
-import nebula.data.LiveList;
 import nebula.data.impl.EditableEntity;
 
 import com.google.common.base.Function;
-import com.google.common.base.Joiner;
-import com.google.common.base.Predicate;
 
 public class SmartListTest extends TestCase {
-	LiveList<String,Entity> list;
+	SmartList<String,Entity> list;
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		list = new LiveList<String,Entity>(new Function<Entity, String>() {
+		list = new SmartList<String,Entity>(new Function<Entity, String>() {
 			@Override
 			public String apply(Entity from) {
 				return (String)from.get("name");
@@ -39,7 +33,7 @@ public class SmartListTest extends TestCase {
 	}
 
 	public final void testSmartList() {
-		list = new LiveList<String,Entity>(new Function<Entity, String>() {
+		list = new SmartList<String,Entity>(new Function<Entity, String>() {
 			@Override
 			public String apply(Entity from) {
 				return (String) from.get("name");
@@ -48,7 +42,7 @@ public class SmartListTest extends TestCase {
 	}
 
 	public void testGetString() throws Exception {
-		list = new LiveList<String,Entity>(new Function<Entity, String>() {
+		list = new SmartList<String,Entity>(new Function<Entity, String>() {
 			@Override
 			public String apply(Entity from) {
 				return (String) from.get("name");

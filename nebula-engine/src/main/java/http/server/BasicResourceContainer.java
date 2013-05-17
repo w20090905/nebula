@@ -23,6 +23,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.eclipse.jetty.util.URIUtil;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -92,7 +93,7 @@ public class BasicResourceContainer extends AbstractHandler {
 	public void handle(String target, Request baseRequest, HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 		if (log.isDebugEnabled()) {
-			log.debug("client request "+req.getMethod() +" - " + req.getPathInfo() + " - " + req.getQueryString());
+			log.debug("client request "+req.getMethod() +" - " + req.getPathInfo() + " - " + URIUtil.decodePath(req.getQueryString()));
 		}
 		try {
 			String path = req.getPathInfo();

@@ -3,8 +3,6 @@ package http.engine;
 import http.resource.EntityFilterBuilder;
 import http.resource.EntityListResouce;
 import http.resource.EntityResouce;
-import http.resource.TransactionEntityListResouce;
-import http.resource.TransactionEntityResouce;
 import http.resource.TypeEditableResouce;
 import http.resource.TypeFilterBuilder;
 import http.resource.TypeListResouce;
@@ -82,9 +80,9 @@ public class EntityResouceEngine implements ResourceEngine {
 						typeLoader.findType(typeName));
 
 				if (id != null) {
-					return new TransactionEntityResouce(jsonHolder, storeHolder, id);
+					return new EntityResouce(jsonHolder, storeHolder, id);
 				} else {
-					return new TransactionEntityListResouce(jsonHolder, storeHolder, entityFilterBuilder);
+					return new EntityListResouce(jsonHolder, storeHolder, entityFilterBuilder);
 				}
 			} else {
 				Holder<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);

@@ -9,7 +9,7 @@ import java.util.List;
 import nebula.data.Classificator;
 import nebula.data.DataListener;
 import nebula.data.InheritSmartList;
-import nebula.data.LiveList;
+import nebula.data.SmartList;
 import nebula.data.impl.DataClassificator;
 
 import org.antlr.runtime.ANTLRInputStream;
@@ -45,12 +45,11 @@ public abstract class TypeLoader {
 	protected Log log = LogFactory.getLog(this.getClass());
 
 	final TypeLoader parent;
-	final LiveList<String, Type> types;
+	final SmartList<String, Type> types;
 
 	protected long lastModified;
 	final Classificator<String, Type> classifyBy;
 
-	@SuppressWarnings("unchecked")
 	public TypeLoader(TypeLoader parent) {
 		this.parent = parent;
 		if (parent != null) {
@@ -61,7 +60,7 @@ public abstract class TypeLoader {
 				}
 			});
 		} else {
-			types = new LiveList<String, Type>(new Function<Type, String>() {
+			types = new SmartList<String, Type>(new Function<Type, String>() {
 				@Override
 				public String apply(Type from) {
 					return from.name;
@@ -217,7 +216,7 @@ public abstract class TypeLoader {
 		throw new UnsupportedOperationException("change type");
 	}
 
-	public LiveList<String, Type> getList() {
+	public SmartList<String, Type> getList() {
 		return this.types;
 	}
 

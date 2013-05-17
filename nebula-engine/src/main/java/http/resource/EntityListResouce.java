@@ -1,5 +1,7 @@
 package http.resource;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,40 +11,50 @@ import java.io.PrintStream;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nebula.data.Holder;
+import nebula.data.Classificator;
 import nebula.data.DataStore;
 import nebula.data.Entity;
+import nebula.data.Holder;
 import nebula.data.json.DataHelper;
+
+import org.eclipse.jetty.util.URIUtil;
+
 import util.FileUtil;
 
-import com.google.common.base.Predicate;
+import com.google.common.base.Splitter;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 
 public class EntityListResouce extends AbstractResouce {
 	private final Holder<DataHelper<Entity, Reader, Writer>> jsonHolder;
 	private final Holder<DataStore<Entity>> datastoreHolder;
 	final EntityFilterBuilder filterBuilder;
+	final LoadingCache<String, DataHolder> dataCache;
 
-	public EntityListResouce(Holder<DataHelper<Entity, Reader, Writer>> json, Holder<DataStore<Entity>> datas,
-			final EntityFilterBuilder filterBuilder) {
-		super("text/json", 0, 1000);
-		this.jsonHolder = json;
-		this.datastoreHolder = datas;
-		this.filterBuilder = filterBuilder;
-	}
+	class DataHolder {
+		Classificator<String, Entity> classificator;
+		String value;
+		byte[] buffer;
 
-	protected void get(HttpServletRequest req) {
-		List<Entity> dataList;
-
-		if (req.getQueryString() == null || req.getQueryString().length() == 0) {
-			dataList = datastoreHolder.get().all();
-		} else {
-			Predicate<Entity> filter = filterBuilder.buildFrom(req.getParameterMap(), null);
-			dataList = datastoreHolder.get().filter(filter);
+		public DataHolder(Classificator<String, Entity> classificator, String value) {
+			this.classificator = checkNotNull(classificator);
+			this.value = checkNotNull(value);
 		}
 
+		byte[] get() {
+			List<Entity> dataList = classificator.getData(value);
+			return buildFrom(dataList);
+		}
+	}
+
+	private byte[] buildFrom(List<Entity> dataList) {
 		ByteArrayOutputStream bout = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(bout);
 
@@ -60,8 +72,49 @@ public class EntityListResouce extends AbstractResouce {
 
 		out.flush();
 		out.close();
-		this.lastModified = System.currentTimeMillis();
-		this.cache = bout.toByteArray();
+		return bout.toByteArray();
+	}
+
+	public EntityListResouce(Holder<DataHelper<Entity, Reader, Writer>> json, Holder<DataStore<Entity>> datas,
+			final EntityFilterBuilder filterBuilder) {
+		super("text/json", 0, 1000);
+		this.jsonHolder = json;
+		this.datastoreHolder = datas;
+		this.filterBuilder = filterBuilder;
+		this.dataCache = CacheBuilder.newBuilder().maximumSize(1000).expireAfterWrite(10, TimeUnit.MINUTES)
+				.build(new CacheLoader<String, DataHolder>() {
+					public DataHolder load(String query) {
+						Map<String, String> params = Splitter.on('&').omitEmptyStrings().trimResults()
+								.withKeyValueSeparator('=').split(query);
+						DataStore<Entity> dataStore = datastoreHolder.get();
+						Map<String, Classificator<String, Entity>> classificatores = dataStore.getClassificatores();
+						String cKey = null;
+						for (String key : params.keySet()) {
+							if (classificatores.containsKey(key)) {
+								cKey = key;
+							}
+						}
+
+						return new DataHolder(classificatores.get(checkNotNull(cKey)), params.get(cKey));
+					}
+				});
+	}
+
+	protected void get(HttpServletRequest req) {
+		try {
+			String query = URIUtil.decodePath(req.getQueryString());
+			List<Entity> dataList;
+			if (query == null || query.length() == 0) {
+				dataList = datastoreHolder.get().all();
+				this.cache = buildFrom(dataList);
+			} else {
+				this.cache = dataCache.get(query).get();
+			}
+
+			this.lastModified = System.currentTimeMillis();
+		} catch (ExecutionException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override

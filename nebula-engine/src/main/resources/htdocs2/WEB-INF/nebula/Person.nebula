@@ -18,6 +18,6 @@ type Person {
 		PhotoUrl String;
 		ProfileUrls[] String;
 	};
-	Company;
+	@GroupBy Company;
 	EMail;
 };
