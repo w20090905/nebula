@@ -128,10 +128,12 @@ jQuery(document).ready(function($) {
 		{
 			$(this).parent().animate({marginRight:'-=220'});
 			$(this).parent().removeClass('open');
+			$(this).removeClass('open');
 		} else 
 		{
 			$(this).parent().animate({marginRight:'+=220'});
 			$(this).parent().addClass('open');
+			$(this).addClass('open');
 		}
 		$(this).toggleClass('icon-arrow-left');
 		$(this).toggleClass('icon-arrow-right');
@@ -148,6 +150,7 @@ jQuery(document).ready(function($) {
 		
 		var i = $('#style-switcher i');
 		i.parent().removeClass('open');
+		i.removeClass('open');
 		i.toggleClass('icon-arrow-left');
 		i.toggleClass('icon-arrow-right');
 		
