@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 
-import nebula.data.Holder;
-import nebula.data.HolderListener;
-import nebula.data.DataStore;
 import nebula.data.Entity;
+import nebula.data.Holder;
 import nebula.lang.Type;
 
 import org.codehaus.jackson.JsonFactory;
@@ -33,23 +31,26 @@ public class JsonHelperProvider {
 	// return new DefaultJsonHelper<>(factory, new EntityJsonDataDealer(type));
 	// }
 
-	public static Holder<DataHelper<Entity, Reader, Writer>> getHelper(final Holder<DataStore<Entity>> storeHolder,
-			final Type type) {
-
+	public static Holder<DataHelper<Entity, Reader, Writer>> getHelper(	final Holder<Type> typeHolder) {
+		final Type initType = typeHolder.get();
 		DataHelper<Entity, Reader, Writer> lastJsonHelper = (DataHelper<Entity, Reader, Writer>) new DefaultJsonHelper<Entity>(
-				factory, new EntitySerializer(type));
+				factory, new EntitySerializer(typeHolder.get()));
 
-		final Holder<DataHelper<Entity, Reader, Writer>> holder = Holder.of(lastJsonHelper);
-
-		storeHolder.addListener(new HolderListener<DataStore<Entity>>() {
+		final Holder<DataHelper<Entity, Reader, Writer>> holder = new Holder<DataHelper<Entity, Reader, Writer>>(lastJsonHelper){
+			Type lastType = initType;
 			@Override
-			public boolean arrive(DataStore<Entity> newData, DataStore<Entity> oldData) {
-				DataHelper<Entity, Reader, Writer> newJsonHelper = new DefaultJsonHelper<Entity>(factory,
-						new EntitySerializer(type));
-				holder.update(newJsonHelper);
-				return false;
-			}
-		});
+			public DataHelper<Entity, Reader, Writer> get() {
+				Type newType = typeHolder.get();
+				if(this.lastType == newType){
+					return this.curData;
+				}else{
+					this.lastType = newType;
+					this.curData = new DefaultJsonHelper<Entity>(factory,
+							new EntitySerializer(newType));
+					return this.curData;
+				}
+			}			
+		};
 		return holder;
 	}
 }

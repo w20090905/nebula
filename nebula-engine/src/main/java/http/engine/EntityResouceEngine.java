@@ -3,6 +3,7 @@ package http.engine;
 import http.resource.EntityFilterBuilder;
 import http.resource.EntityListResouce;
 import http.resource.EntityResouce;
+import http.resource.TxEntityResource;
 import http.resource.TypeEditableResouce;
 import http.resource.TypeFilterBuilder;
 import http.resource.TypeListResouce;
@@ -76,18 +77,16 @@ public class EntityResouceEngine implements ResourceEngine {
 			if (type.getStandalone() == TypeStandalone.Transaction) {
 
 				Holder<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);
-				Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(storeHolder,
-						typeLoader.findType(typeName));
+				Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper( new TypeHolder(typeLoader, typeName));
 
 				if (id != null) {
-					return new EntityResouce(jsonHolder, storeHolder, id);
+					return new TxEntityResource(jsonHolder, storeHolder, id);
 				} else {
 					return new EntityListResouce(jsonHolder, storeHolder, entityFilterBuilder);
 				}
 			} else {
 				Holder<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);
-				Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(storeHolder,
-						typeLoader.findType(typeName));
+				Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(new TypeHolder(typeLoader, typeName));
 
 				if (id != null) {
 					return new EntityResouce(jsonHolder, storeHolder, id);

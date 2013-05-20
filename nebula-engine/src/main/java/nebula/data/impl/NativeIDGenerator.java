@@ -25,11 +25,11 @@ public class NativeIDGenerator implements IDGenerator {
 
 	@Override
 	public void setSeed(Long seed) {
+
 	}
 
 	@Override
 	public Long nextValue(Long seed) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.currentMaxValue+=seed;
 	}
 }

@@ -1,7 +1,8 @@
 package nebula.data.impl;
 
-import java.util.List;
 import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.util.List;
 import java.util.Map;
 
 import nebula.data.DataStore;
@@ -35,14 +36,14 @@ public class DbTransactionEntityDataStore extends EntityDataStore {
 		}
 		key = checkNotNull(localKey);
 
-		idGenerator = IDGenerators.getIDReader(type);
+		idGenerator = IDGenerators.build(type);
 
 		List<EditableEntity> list = exec.getAll();
 		for (EditableEntity data : list) {
 			loadin(data);
 		}
 		idGenerator.init(exec.getCurrentMaxID());
-		idGenerator.setSeed((long) type.getName().hashCode() %( 1<<8));
+		idGenerator.setSeed((long) type.getName().hashCode() % (1 << 8));
 	}
 
 	@Override
@@ -56,7 +57,7 @@ public class DbTransactionEntityDataStore extends EntityDataStore {
 			lock.lock();
 			try {
 				// DB
-				String id = sourceEntity.getID();
+				Long id = (Long)sourceEntity.get(key);
 				db.update(newEntity, id);
 
 				EntityImp newSource = loadin(sourceEntity, db.get(id));
@@ -66,10 +67,10 @@ public class DbTransactionEntityDataStore extends EntityDataStore {
 			} finally {
 				lock.unlock();
 			}
-		} else { // insert			
+		} else { // insert
 			Long id = idGenerator.nextValue();
 			newEntity.put(key, id);
-			newEntity.put("ID", id);
+			newEntity.put("ID", String.valueOf(id));
 
 			lock.lock();
 
@@ -93,13 +94,14 @@ public class DbTransactionEntityDataStore extends EntityDataStore {
 	}
 
 	private EntityImp loadin(EditableEntity entity) {
+		entity.put(KEY_NAME,  String.valueOf((Long)entity.get(key)));
 		DbEntity inner = new DbEntity(this, entity.newData, this.values.size());
 		this.values.add(inner);
 		return inner;
 	}
 
 	private EntityImp loadin(DbEntity sourceEntity, EditableEntity newEntity) {
-		newEntity.put(KEY_NAME, sourceEntity.getID());
+		newEntity.put(KEY_NAME, String.valueOf((Long)newEntity.get(key)));
 		DbEntity inner = new DbEntity(this, newEntity.newData, sourceEntity.index);
 		this.values.add(inner);
 		return inner;

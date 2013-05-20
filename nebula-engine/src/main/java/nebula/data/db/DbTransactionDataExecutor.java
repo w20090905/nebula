@@ -380,7 +380,7 @@ public class DbTransactionDataExecutor implements DbTxDataExecutor {
 
 	@Override
 	public void update(Entity value, Object... keys) {
-		log.debug(SQL_UPDATE + " : " + value);
+		log.debug("SQL_UPDATE - " + value);
 		executeUpdate(SQL_UPDATE, value, keys);
 	}
 
@@ -402,7 +402,7 @@ public class DbTransactionDataExecutor implements DbTxDataExecutor {
 
 	@Override
 	public List<EditableEntity> getAll() {
-		return executeQuerEntity(SQL_LIST); // Only hot data
+		return executeQuery(SQL_LIST); // Only hot data
 	}
 
 	@Override
@@ -415,7 +415,7 @@ public class DbTransactionDataExecutor implements DbTxDataExecutor {
 	public EditableEntity get(Object... keys) {
 		if (log.isTraceEnabled()) log.trace("\tSQL_GET : " + Joiner.on(',').join(keys));
 
-		List<EditableEntity> list = executeQuerEntity(SQL_GET, keys);
+		List<EditableEntity> list = executeQuery(SQL_GET, keys);
 		if (list == null) {
 			throw new RuntimeException("Can not find record key:" + keys);
 		}
@@ -451,7 +451,7 @@ public class DbTransactionDataExecutor implements DbTxDataExecutor {
 		}
 	}
 
-	private List<EditableEntity> executeQuerEntity(PreparedStatement pstmt, Object... keys) {
+	private List<EditableEntity> executeQuery(PreparedStatement pstmt, Object... keys) {
 		ResultSet res = null;
 		try {
 			int pos = 0;

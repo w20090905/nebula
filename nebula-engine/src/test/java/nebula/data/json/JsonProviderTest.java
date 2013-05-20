@@ -7,22 +7,21 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.math.BigDecimal;
 
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
 import junit.framework.TestCase;
-import nebula.data.Holder;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
+import nebula.data.Holder;
 import nebula.data.impl.EditableEntity;
 import nebula.data.impl.InMemoryDataPersister;
 import nebula.lang.Type;
 import nebula.lang.TypeLoaderForTest;
 
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 public class JsonProviderTest extends TestCase {
 	TypeLoaderForTest loader;
-	Type type;
 	Holder<DataStore<Entity>> store;
 	
 	DataPersister<Entity> persistence;
@@ -51,10 +50,17 @@ public class JsonProviderTest extends TestCase {
 				"};";
 		//@formatter:on		
 
+		final Type type;
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
-		store = persistence.define(String.class,Entity.class, type.getName());
+//		store = persistence.define(String.class,Entity.class, type.getName());
 		
-		Holder<DataHelper<Entity,Reader,Writer>> json =   JsonHelperProvider.getHelper(store,type);
+		Holder<DataHelper<Entity,Reader,Writer>> json =   JsonHelperProvider.getHelper(new Holder<Type>(type){
+			@Override
+			public Type get() {
+				return type;
+			}
+			
+		});
 		Entity n =  new EditableEntity();
 		
 		n=json.get().readFrom(n,new StringReader("{" +

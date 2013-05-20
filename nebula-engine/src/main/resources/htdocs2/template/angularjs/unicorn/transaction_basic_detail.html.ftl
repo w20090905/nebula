@@ -10,14 +10,14 @@
 		[/#switch]			
 	[/@compress][/#assign]
 	
-	[#assign optReadonly][#if key] x-ng-readonly ="update" [#elseif readonly]readonly[/#if][/#assign]
+	[#assign optReadonly][#if key] readonly [#elseif readonly]readonly[/#if][/#assign]
 	[#assign optValidateRule][@compress single_line=true]
 			[#if field.attrs.min??		] min		="${field.attrs.min}" 			[/#if]
 			[#if field.attrs.max??		] max		="${field.attrs.max}" 			[/#if]
 			[#if field.attrs.minLength??] minLength	="${field.attrs.minLength}" [/#if]
 			[#if field.attrs.maxLength??] maxLength	="${field.attrs.maxLength}" [/#if]
 	[/@compress][/#assign]
-	[#assign optRequired][#if required] required[/#if][/#assign]
+	[#assign optRequired][#if !key && required] required[/#if][/#assign]
 
 	[#if field.type.name = "Attr"]
 		[#assign attrValues][@compress single_line=true]			
@@ -29,7 +29,7 @@
 				x-ng-model="${ngModel}" x-ng-options="c.name as c.name for c in values" placeholder="${placeholder}">	
 			<option value="">-- 选择 ${field.name} --</option>
 		</select>
-	[#elseif field.attrs.formatType! = "textarea"]
+	[#elseif field.attrs.FormatType! = "textarea"]
 		<textarea id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
 			${optReadonly} ${optRequired}  ${optValidateRule} 
 			></textarea>		

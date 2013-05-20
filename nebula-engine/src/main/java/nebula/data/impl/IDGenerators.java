@@ -8,7 +8,7 @@ import nebula.lang.TypeStandalone;
 
 public class IDGenerators {
 
-	public static IDGenerator getIDReader(Type type) {
+	public static IDGenerator build(Type type) {
 		switch (type.getStandalone()) {
 		case Transaction:
 			Field keyField = null;

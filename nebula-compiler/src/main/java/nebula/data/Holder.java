@@ -11,9 +11,9 @@ public class Holder<T> {
 	}
 
 	List<WeakReference<HolderListener<T>>> listeners;
-	T curData;
+	protected T curData;
 
-	Holder(T newData) {
+	public Holder(T newData) {
 		listeners = new CopyOnWriteArrayList<WeakReference<HolderListener<T>>>();
 		this.curData = newData;
 	}
