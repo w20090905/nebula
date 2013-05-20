@@ -10,8 +10,7 @@ import com.google.inject.Injector;
 public class JettyServer {
 
 	public static void main(String[] args) {
-		System.out.println("Nebula 0.1 (C) 2013-2013\n"
-				+ "(Command line options: [-p port] [--licence])\n");
+		System.out.println("Nebula 0.1 (C) 2013-2013\n" + "(Command line options: [-p port] [--licence])\n");
 
 		// Defaults
 		int port = 80;
