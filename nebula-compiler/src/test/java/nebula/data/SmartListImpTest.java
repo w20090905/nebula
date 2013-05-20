@@ -1,11 +1,8 @@
 package nebula.data;
 
 import junit.framework.TestCase;
-import nebula.data.Filter;
-import nebula.data.SmartList;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 
 public class SmartListImpTest extends TestCase {
 	SmartList<String,Person> list = null;
