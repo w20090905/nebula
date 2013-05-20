@@ -8,7 +8,6 @@ import http.startup.Configurable;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -74,8 +73,7 @@ public class BasicResourceContainer extends AbstractHandler {
 		this.errorHandleResource = new ErrorHandleResouce();
 		this.redirectCurrentUserResouce = new RedirectCurrentUserResouce();
 		this.redirectToLoginResouce = new RedirectResouce("/login.html");
-		cachedLinks = CacheBuilder.newBuilder().maximumSize(1000).expireAfterWrite(10, TimeUnit.MINUTES)
-				.removalListener(removalListener).build(loader);
+		cachedLinks = CacheBuilder.newBuilder().build(loader);
 		cachedLinks.put("/", redirectCurrentUserResouce);
 	}
 

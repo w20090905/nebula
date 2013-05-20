@@ -13,7 +13,6 @@ import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,7 +26,6 @@ import org.eclipse.jetty.util.URIUtil;
 
 import util.FileUtil;
 
-import com.google.common.base.Splitter;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -81,21 +79,26 @@ public class EntityListResouce extends AbstractResouce {
 		this.jsonHolder = json;
 		this.datastoreHolder = datas;
 		this.filterBuilder = filterBuilder;
-		this.dataCache = CacheBuilder.newBuilder().maximumSize(1000).expireAfterWrite(10, TimeUnit.MINUTES)
+		this.dataCache = CacheBuilder.newBuilder().maximumSize(1000)
 				.build(new CacheLoader<String, DataHolder>() {
 					public DataHolder load(String query) {
-						Map<String, String> params = Splitter.on('&').omitEmptyStrings().trimResults()
-								.withKeyValueSeparator('=').split(query);
+						String[] params = query.split("&");
 						DataStore<Entity> dataStore = datastoreHolder.get();
 						Map<String, Classificator<String, Entity>> classificatores = dataStore.getClassificatores();
 						String cKey = null;
-						for (String key : params.keySet()) {
+						String cValue  = null;
+						for (String keyvalue : params) {
+							String[] kv = keyvalue.split("=");
+							String key = kv[0];
+							String value = kv[1];
 							if (classificatores.containsKey(key)) {
 								cKey = key;
+								cValue = value;
+								break;
 							}
 						}
 
-						return new DataHolder(classificatores.get(checkNotNull(cKey)), params.get(cKey));
+						return new DataHolder(classificatores.get(checkNotNull(cKey)), cValue);
 					}
 				});
 	}
