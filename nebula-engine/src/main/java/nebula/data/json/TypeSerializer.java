@@ -56,7 +56,7 @@ public class TypeSerializer extends DefaultFieldSerializer<Type> implements Json
 			out.writeStringField(k, n.alias.get(k).toString());
 		}
 		out.writeEndObject();
-		
+
 		out.writeFieldName("Attrs");
 		out.writeStartObject();
 		InheritHashMap p = type.getAttrs();
@@ -64,7 +64,6 @@ public class TypeSerializer extends DefaultFieldSerializer<Type> implements Json
 			out.writeStringField(k, p.get(k).toString());
 		}
 		out.writeEndObject();
-
 
 		out.writeBooleanField("Mutable", type.isMutable());
 		out.writeStringField("Code", type.getCode());
@@ -99,6 +98,7 @@ class FieldJsonDataDealer extends DefaultTypeAdapter<Field> {
 		out.writeStartObject();
 
 		out.writeStringField("Name", field.getName());
+		out.writeStringField("Importance", field.getImportance().name());
 		out.writeBooleanField("isKey", field.isKey());
 		out.writeBooleanField("isCore", field.isCore());
 		out.writeBooleanField("isArray", field.isArray());
@@ -112,7 +112,7 @@ class FieldJsonDataDealer extends DefaultTypeAdapter<Field> {
 			out.writeStringField(k, n.alias.get(k).toString());
 		}
 		out.writeEndObject();
-		
+
 		out.writeObjectFieldStart("Attrs");
 		InheritHashMap p = field.getAttrs();
 		for (String k : p.getNames()) {

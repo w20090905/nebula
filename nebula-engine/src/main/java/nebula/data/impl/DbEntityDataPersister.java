@@ -66,7 +66,12 @@ public class DbEntityDataPersister implements DataPersister<Entity> {
 			oldData.unload();
 
 			Type type = typeLoader.findType(name);
-			DataStore<Entity> newData = new DbMasterEntityDataStore(this, type, dbConfig.getPersister(type));
+			DataStore<Entity> newData;
+			if (type.getStandalone() == TypeStandalone.Transaction) {
+				newData = new DbTransactionEntityDataStore(this, type, (DbTxDataExecutor) dbConfig.getPersister(type));
+			} else {
+				newData = new DbMasterEntityDataStore(this, type, dbConfig.getPersister(type));
+			}
 			datastoreHolder.update(newData);
 			return datastoreHolder;
 		} else {
