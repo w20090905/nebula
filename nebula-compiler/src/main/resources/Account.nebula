@@ -1,3 +1,2 @@
-@MaxLength(20)
 define Account extends String {
 };

@@ -1,0 +1,2 @@
+define Probability extends Long {
+};

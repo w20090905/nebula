@@ -1,0 +1,2 @@
+define BBAN extends String {
+};

@@ -1,0 +1,2 @@
+define IBAN extends String {
+};

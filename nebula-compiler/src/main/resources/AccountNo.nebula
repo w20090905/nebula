@@ -1,0 +1,3 @@
+@MaxLength(20)
+define AccountNo extends String {
+};

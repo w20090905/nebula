@@ -1,0 +1,2 @@
+define Unit extends Long {
+};

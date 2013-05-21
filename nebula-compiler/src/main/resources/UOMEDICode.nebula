@@ -1,0 +1,2 @@
+define UOMEDICode extends String {
+};
