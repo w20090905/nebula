@@ -19,7 +19,7 @@
 	[/@compress][/#assign]
 	[#assign optRequired][#if required] required[/#if][/#assign]
 
-	[#if field.type.name = "Attr"]
+	[#if field.type.attrs.SP?? &&  field.type.attrs.SP = "Attr"]
 		[#assign attrValues][@compress single_line=true]			
 			[#list (attrs[field.name].Values)![] as attr],{name:'${attr.Name}'}[/#list]
 		[/@compress] [/#assign]

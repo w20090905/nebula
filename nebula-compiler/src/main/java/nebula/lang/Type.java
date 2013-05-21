@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import nebula.data.Timable;
-
 import util.InheritHashMap;
 
-public class Type  implements Timable{
+public class Type implements Timable {
 	final TypeLoader loader;
 
 	final Type residedType;
@@ -27,7 +26,7 @@ public class Type  implements Timable{
 	URL url;
 	boolean mutable = false;
 	String code;
-	
+
 	long lastModified;
 
 	final List<Field> references;
@@ -62,7 +61,7 @@ public class Type  implements Timable{
 	}
 
 	/**
-	 * Used by Master,Tx  With standalone
+	 * Used by Master,Tx With standalone
 	 */
 	Type(TypeLoader typeLoader, String name, Type superType, TypeStandalone standalone) {
 		this(typeLoader, null, name, superType, null, standalone);
@@ -96,14 +95,13 @@ public class Type  implements Timable{
 
 		this.residedType = residedType; // Mixin
 
-
 		this.fields = new CopyOnWriteArrayList<Field>();
 
 		this.attrs = new InheritHashMap(this.superType.attrs);
-		
+
 		this.references = new CopyOnWriteArrayList<Field>();
 		this.nameAlias = new Alias(name);
-		
+
 	}
 
 	public String getName() {
@@ -117,11 +115,11 @@ public class Type  implements Timable{
 	public Alias getNameAlias() {
 		return nameAlias;
 	}
-	
+
 	public void setNameAlias(Alias alias) {
 		nameAlias.alias.putAll(alias.alias);
 	}
-	
+
 	public InheritHashMap getAttrs() {
 		return attrs;
 	}

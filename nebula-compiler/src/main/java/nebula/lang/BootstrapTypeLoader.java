@@ -72,6 +72,7 @@ class BootstrapTypeLoader extends TypeLoader {
 		name.attrs.put("MaxLength", 60);
 
 		Type attr = new Type(this, "Attr", string);
+		attr.attrs.put("SP", "Attr");
 		attr.attrs.put("MaxLength", 60);
 
 		List<Type> typeList = new ArrayList<Type>();
