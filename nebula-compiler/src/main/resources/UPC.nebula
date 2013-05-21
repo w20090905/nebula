@@ -1,0 +1,4 @@
+@MaxLength(20)
+@Desc("条形码")
+define UPC extends String {
+};

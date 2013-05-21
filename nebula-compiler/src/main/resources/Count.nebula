@@ -1,0 +1,3 @@
+@MaxLength(15)
+define Count |zh:数量  extends Long {
+};

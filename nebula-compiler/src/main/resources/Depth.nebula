@@ -1,0 +1,3 @@
+@Desc("深度")
+define Depth|zh:深度  extends Long {
+};

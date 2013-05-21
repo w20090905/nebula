@@ -1,2 +1,5 @@
+@MaxLength ( 12)
+@Editable ("false")
+@IDGenerationStrategy ( "native")
 define ID extends Long {
 };

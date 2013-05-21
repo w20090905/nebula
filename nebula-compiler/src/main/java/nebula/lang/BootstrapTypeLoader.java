@@ -73,8 +73,6 @@ class BootstrapTypeLoader extends TypeLoader {
 
 		Type attr = new Type(this, "Attr", string);
 		attr.attrs.put("MaxLength", 60);
-		
-
 
 		List<Type> typeList = new ArrayList<Type>();
 
@@ -124,10 +122,10 @@ class BootstrapTypeLoader extends TypeLoader {
 		try {
 			this.defineNebula(new StringReader(strAttributes));
 		} catch (RecognitionException e) {
-			log.error("RecognitionException",e);
+			log.error("RecognitionException", e);
 			throw new RuntimeException(e);
 		}
-		
+
 		Type typeAttribute = this.findType("Attribute");
 		typeAttribute.attrs.put("Style", "compact");
 
@@ -149,16 +147,16 @@ class BootstrapTypeLoader extends TypeLoader {
 				"	};\n" +
 				"};\n";
 		//@formatter:on
-		
+
 		try {
-			this.defineNebula(new StringReader(typeDefine));	
+			this.defineNebula(new StringReader(typeDefine));
 		} catch (RecognitionException e) {
-			log.error("RecognitionException",e);
+			log.error("RecognitionException", e);
 			throw new RuntimeException(e);
 		}
 
 	}
-	
+
 	@Override
 	public Type findType(String name) {
 		return this.types.get(name);

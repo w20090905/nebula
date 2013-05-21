@@ -1,0 +1,5 @@
+@MaxLength (2000)
+@FormatType ( "textarea")
+@Desc("多行的文本内容，可以使用Wiki标记")
+define Help|zh:帮助  extends Text {
+};

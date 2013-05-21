@@ -1,0 +1,2 @@
+define Language|zh:邮件地址 extends Attr {
+};

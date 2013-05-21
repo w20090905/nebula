@@ -1,2 +1,2 @@
-define Price|zh:精度 extends Decimal {
+define Price|zh:价格 extends Decimal {
 };

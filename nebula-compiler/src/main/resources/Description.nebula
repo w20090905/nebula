@@ -1,4 +1,4 @@
-@MaxLength(512)
+@MaxLength(255)
 @Desc("单行的描述")
 define Description|zh:描述 extends String {
 };

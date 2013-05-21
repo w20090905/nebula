@@ -1,6 +1,5 @@
 @MaxLength ( 12)
 @Editable ("false")
 @AutoCreate("true")
-@IDGenerationStrategy ( "default")
 define AutoID extends ID {
 };

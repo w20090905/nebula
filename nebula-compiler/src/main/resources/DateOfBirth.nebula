@@ -1,2 +1,2 @@
-define DateOfBirth|zh:出生年月  extends Date {
+define ValidTo extends Date {
 };

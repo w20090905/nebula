@@ -1,0 +1,3 @@
+@MaxLength(6)
+define IPAddr extends Code {
+};

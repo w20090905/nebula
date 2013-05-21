@@ -78,9 +78,9 @@ public class TypeJsonDataDealerTest extends TestCase {
 		assertEquals(
 				"{\"Name\":\"Person\",\"SuperType\":\"Master\",\"Standalone\":\"Master\","
 						+ "\"Fields\":["
-						+ "{\"Name\":\"PersonName\",\"isKey\":true,\"isCore\":false,\"isArray\":false,\"TypeName\":\"Name\","
+						+ "{\"Name\":\"PersonName\",\"Importance\":\"Key\",\"isKey\":true,\"isCore\":false,\"isArray\":false,\"TypeName\":\"Name\","
 						+ "\"Refer\":\"ByVal\",\"NameAlias\":{},\"Attrs\":{\"FormatType\":\"text\",\"MaxLength\":\"60\"}},"
-						+ "{\"Name\":\"Age\",\"isKey\":false,\"isCore\":false,\"isArray\":false,\"TypeName\":\"Age\","
+						+ "{\"Name\":\"Age\",\"Importance\":\"Require\",\"isKey\":false,\"isCore\":false,\"isArray\":false,\"TypeName\":\"Age\","
 						+ "\"Refer\":\"ByVal\",\"NameAlias\":{},\"Attrs\":{\"FormatType\":\"numeric\",\"InputSize\":\"small\",\"Max\":\"160\",\"MaxLength\":\"3\",\"Min\":\"0\",\"Precision\":\"10\",\"Scale\":\"2\"}}],"
 						+ "\"NameAlias\":{},\"Attrs\":{\"Style\":\"basic\"},\"Mutable\":false,"
 						+ "\"Code\":\"type Person {\\t!PersonName Name;\\tAge;};\\n\"}", out.toString());
