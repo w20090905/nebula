@@ -10,7 +10,7 @@ Isavailabletopromise YesNo;
 Isdefault YesNo;
 Locatorcombination String;
 !ID;
-Warehouse;
+/*TODO Warehouse;*/
 Maxquantity Quantity;
 Minquantity Quantity;
 Pickingseqno SeqNo;
