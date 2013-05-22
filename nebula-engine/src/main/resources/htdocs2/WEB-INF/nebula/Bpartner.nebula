@@ -59,7 +59,6 @@ Socreditstatus YesNo;
 So_Creditlimit Number;
 So_Creditused Number;
 So_Description Description;
-Salesrep User;
 Salesvolume Number;
 Sendemail YesNo;
 Shareofcustomer Number;

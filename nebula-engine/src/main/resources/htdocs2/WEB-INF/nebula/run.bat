@@ -200,7 +200,7 @@ ECHO Created Timestamp;>> Accesslog.nebula
 ECHO Createdby ID;>> Accesslog.nebula
 ECHO Description;>> Accesslog.nebula
 ECHO Isactive YesNo;>> Accesslog.nebula
-#N/A
+
 ECHO Remote_Addr URL;>> Accesslog.nebula
 ECHO Remote_Host Host;>> Accesslog.nebula
 ECHO Reply Note;>> Accesslog.nebula
@@ -319,7 +319,7 @@ ECHO Help;>> Archive.nebula
 ECHO Isactive YesNo;>> Archive.nebula
 ECHO Isreport YesNo;>> Archive.nebula
 ECHO !Name;>> Archive.nebula
-#N/A
+
 ECHO Updated Timestamp;>> Archive.nebula
 ECHO Updatedby Date;>> Archive.nebula
 ECHO };>> Archive.nebula 
@@ -336,7 +336,7 @@ ECHO Createdby ID;>> Assigncriteria.nebula
 ECHO Description;>> Assigncriteria.nebula
 ECHO Isactive YesNo;>> Assigncriteria.nebula
 ECHO Operation Attr;>> Assigncriteria.nebula
-#N/A
+
 ECHO SeqNo;>> Assigncriteria.nebula
 ECHO Updated Timestamp;>> Assigncriteria.nebula
 ECHO Updatedby Date;>> Assigncriteria.nebula
@@ -352,7 +352,7 @@ ECHO Created Timestamp;>> Assignlog.nebula
 ECHO Createdby ID;>> Assignlog.nebula
 ECHO Help;>> Assignlog.nebula
 ECHO Isactive YesNo;>> Assignlog.nebula
-#N/A
+
 ECHO Updated Timestamp;>> Assignlog.nebula
 ECHO Updatedby Date;>> Assignlog.nebula
 ECHO };>> Assignlog.nebula 
@@ -384,7 +384,7 @@ ECHO Created Timestamp;>> Assigntarget.nebula
 ECHO Createdby ID;>> Assigntarget.nebula
 ECHO Description;>> Assigntarget.nebula
 ECHO Isactive YesNo;>> Assigntarget.nebula
-#N/A
+
 ECHO SeqNo;>> Assigntarget.nebula
 ECHO Updated Timestamp;>> Assigntarget.nebula
 ECHO Updatedby Date;>> Assigntarget.nebula
@@ -401,7 +401,7 @@ ECHO Binarydata Note;>> Attachment.nebula
 ECHO Created Timestamp;>> Attachment.nebula
 ECHO Createdby ID;>> Attachment.nebula
 ECHO Isactive YesNo;>> Attachment.nebula
-#N/A
+
 ECHO Textmsg MSG;>> Attachment.nebula
 ECHO Title String;>> Attachment.nebula
 ECHO Updated Timestamp;>> Attachment.nebula
@@ -459,7 +459,7 @@ ECHO };>> Attribute.nebula
  DEL /F Attribute_Value.nebula 
  ECHO @Package("Application Dictionary") type  Attribute_Value{ >> Attribute_Value.nebula 
  ECHO !Attribute;>> Attribute_Value.nebula
-#N/A
+
 ECHO V_Date Date;>> Attribute_Value.nebula
 ECHO V_Number Number;>> Attribute_Value.nebula
 ECHO V_String Note;>> Attribute_Value.nebula
@@ -604,8 +604,8 @@ ECHO Isactive YesNo;>> Changelog.nebula
 ECHO Iscustomization YesNo;>> Changelog.nebula
 ECHO Newvalue Note;>> Changelog.nebula
 ECHO Oldvalue Note;>> Changelog.nebula
-#N/A
-#N/A
+
+
 ECHO Redo YesNo;>> Changelog.nebula
 ECHO Trxname Name;>> Changelog.nebula
 ECHO Undo YesNo;>> Changelog.nebula
@@ -950,7 +950,7 @@ ECHO Createdby ID;>> Datamigrationentry.nebula
 ECHO Datamigrationentrytype YesNo;>> Datamigrationentry.nebula
 ECHO Description;>> Datamigrationentry.nebula
 ECHO Isactive YesNo;>> Datamigrationentry.nebula
-#N/A
+
 ECHO Updated Timestamp;>> Datamigrationentry.nebula
 ECHO Updatedby Date;>> Datamigrationentry.nebula
 ECHO Whereclause Note;>> Datamigrationentry.nebula
@@ -968,7 +968,7 @@ ECHO Description;>> Datamigrationpreview.nebula
 ECHO Info Description;>> Datamigrationpreview.nebula
 ECHO Isactive YesNo;>> Datamigrationpreview.nebula
 ECHO Levelno SeqNo;>> Datamigrationpreview.nebula
-#N/A
+
 ECHO Tableuid ID;>> Datamigrationpreview.nebula
 ECHO Updated Timestamp;>> Datamigrationpreview.nebula
 ECHO Updatedby Date;>> Datamigrationpreview.nebula
@@ -1122,7 +1122,7 @@ ECHO Modelpackage String;>> Entitytype.nebula
 ECHO Modelvalidationclasses String;>> Entitytype.nebula
 ECHO !Name;>> Entitytype.nebula
 ECHO Processing YesNo;>> Entitytype.nebula
-#N/A
+
 ECHO Relativeloadno SeqNo;>> Entitytype.nebula
 ECHO Requirecompiereversion String;>> Entitytype.nebula
 ECHO Requirecomponentversion String;>> Entitytype.nebula
@@ -1523,7 +1523,7 @@ ECHO Issueproject;>> Issue.nebula
 ECHO Issuesystem;>> Issue.nebula
 ECHO Issueuser;>> Issue.nebula
 ECHO Request;>> Issue.nebula
-#N/A
+
 ECHO Releaseno Code;>> Issue.nebula
 ECHO Releasetag String;>> Issue.nebula
 ECHO Remote_Addr URL;>> Issue.nebula
@@ -1809,7 +1809,7 @@ ECHO Description;>> Note.nebula
 ECHO Isactive YesNo;>> Note.nebula
 ECHO Processed YesNo;>> Note.nebula
 ECHO Processing YesNo;>> Note.nebula
-#N/A
+
 ECHO Reference String;>> Note.nebula
 ECHO Textmsg MSG;>> Note.nebula
 ECHO Updated Timestamp;>> Note.nebula
@@ -1878,7 +1878,7 @@ ECHO Createdby ID;>> Pinstance.nebula
 ECHO ErrorMsg MSG;>> Pinstance.nebula
 ECHO Isactive YesNo;>> Pinstance.nebula
 ECHO Isprocessing YesNo;>> Pinstance.nebula
-#N/A
+
 ECHO Result Number;>> Pinstance.nebula
 ECHO Updated Timestamp;>> Pinstance.nebula
 ECHO Updatedby Date;>> Pinstance.nebula
@@ -1886,9 +1886,9 @@ ECHO };>> Pinstance.nebula
  DEL /F Pinstance_Log.nebula 
  ECHO @Package("Application Dictionary") type  Pinstance_Log{ >> Pinstance_Log.nebula 
  ECHO !Pinstance;>> Pinstance_Log.nebula
-#N/A
+
 ECHO P_Date Date;>> Pinstance_Log.nebula
-#N/A
+
 ECHO P_Msg MSG;>> Pinstance_Log.nebula
 ECHO P_Number Number;>> Pinstance_Log.nebula
 ECHO };>> Pinstance_Log.nebula 
@@ -2244,7 +2244,7 @@ ECHO !User;>> Private_Access.nebula
 ECHO Created Timestamp;>> Private_Access.nebula
 ECHO Createdby ID;>> Private_Access.nebula
 ECHO Isactive YesNo;>> Private_Access.nebula
-#N/A
+
 ECHO Updated Timestamp;>> Private_Access.nebula
 ECHO Updatedby Date;>> Private_Access.nebula
 ECHO };>> Private_Access.nebula 
@@ -2376,21 +2376,25 @@ ECHO Recordcount Count;>> Querylog.nebula
 ECHO Updated Timestamp;>> Querylog.nebula
 ECHO Updatedby Date;>> Querylog.nebula
 ECHO Whereclause Note;>> Querylog.nebula
-#N/A
-#N/A
-#N/A
-#N/A
-#N/A
-#N/A
-#N/A
+ECHO };>> Querylog.nebula 
+ DEL /F Recentitem.nebula 
+ ECHO @Package("Application Dictionary") type  Recentitem{ >> Recentitem.nebula 
+ 
 
 
 
 
-#N/A
 
 
-DEL /F Record_Access.nebula 
+ECHO Created Timestamp;>> Recentitem.nebula
+ECHO Createdby ID;>> Recentitem.nebula
+ECHO Isactive YesNo;>> Recentitem.nebula
+ECHO !Name;>> Recentitem.nebula
+
+ECHO Updated Timestamp;>> Recentitem.nebula
+ECHO Updatedby Date;>> Recentitem.nebula
+ECHO };>> Recentitem.nebula 
+ DEL /F Record_Access.nebula 
  ECHO @Package("Application Dictionary") type  Record_Access{ >> Record_Access.nebula 
  ECHO Client;>> Record_Access.nebula
 ECHO Org;>> Record_Access.nebula
@@ -2402,7 +2406,7 @@ ECHO Isactive YesNo;>> Record_Access.nebula
 ECHO Isdependententities YesNo;>> Record_Access.nebula
 ECHO Isexclude YesNo;>> Record_Access.nebula
 ECHO Isreadonly YesNo;>> Record_Access.nebula
-#N/A
+
 ECHO Updated Timestamp;>> Record_Access.nebula
 ECHO Updatedby Date;>> Record_Access.nebula
 ECHO };>> Record_Access.nebula 
@@ -2519,7 +2523,7 @@ ECHO Optin YesNo;>> Registration.nebula
 ECHO Phone PhoneNumber;>> Registration.nebula
 ECHO Platforminfo Description;>> Registration.nebula
 ECHO Processing YesNo;>> Registration.nebula
-#N/A
+
 ECHO Remote_Addr URL;>> Registration.nebula
 ECHO Remote_Host Host;>> Registration.nebula
 ECHO Salesvolume Number;>> Registration.nebula
@@ -2864,7 +2868,7 @@ ECHO Created Timestamp;>> Sequence_Audit.nebula
 ECHO Createdby ID;>> Sequence_Audit.nebula
 ECHO Documentno SeqNo;>> Sequence_Audit.nebula
 ECHO Isactive YesNo;>> Sequence_Audit.nebula
-#N/A
+
 ECHO Updated Timestamp;>> Sequence_Audit.nebula
 ECHO Updatedby Date;>> Sequence_Audit.nebula
 ECHO };>> Sequence_Audit.nebula 
@@ -2929,7 +2933,7 @@ ECHO Oldname Name;>> System.nebula
 ECHO Password String;>> System.nebula
 ECHO Processing YesNo;>> System.nebula
 ECHO Profileinfo Description;>> System.nebula
-#N/A
+
 ECHO Releaseno Code;>> System.nebula
 ECHO Replicationtype YesNo;>> System.nebula
 ECHO Statisticsinfo String;>> System.nebula
@@ -3176,7 +3180,7 @@ ECHO !User;>> Treebar.nebula
 ECHO Created Timestamp;>> Treebar.nebula
 ECHO Createdby ID;>> Treebar.nebula
 ECHO Isactive YesNo;>> Treebar.nebula
-#N/A
+
 ECHO Updated Timestamp;>> Treebar.nebula
 ECHO Updatedby Date;>> Treebar.nebula
 ECHO };>> Treebar.nebula 
@@ -3188,8 +3192,8 @@ ECHO !Tree;>> Treenode.nebula
 ECHO Created Timestamp;>> Treenode.nebula
 ECHO Createdby ID;>> Treenode.nebula
 ECHO Isactive YesNo;>> Treenode.nebula
-#N/A
-#N/A
+
+
 ECHO SeqNo;>> Treenode.nebula
 ECHO Updated Timestamp;>> Treenode.nebula
 ECHO Updatedby Date;>> Treenode.nebula
@@ -3202,8 +3206,8 @@ ECHO !Tree;>> Treenodebp.nebula
 ECHO Created Timestamp;>> Treenodebp.nebula
 ECHO Createdby ID;>> Treenodebp.nebula
 ECHO Isactive YesNo;>> Treenodebp.nebula
-#N/A
-#N/A
+
+
 ECHO SeqNo;>> Treenodebp.nebula
 ECHO Updated Timestamp;>> Treenodebp.nebula
 ECHO Updatedby Date;>> Treenodebp.nebula
@@ -3216,8 +3220,8 @@ ECHO !Tree;>> Treenodecmc.nebula
 ECHO Created Timestamp;>> Treenodecmc.nebula
 ECHO Createdby ID;>> Treenodecmc.nebula
 ECHO Isactive YesNo;>> Treenodecmc.nebula
-#N/A
-#N/A
+
+
 ECHO SeqNo;>> Treenodecmc.nebula
 ECHO Updated Timestamp;>> Treenodecmc.nebula
 ECHO Updatedby Date;>> Treenodecmc.nebula
@@ -3230,8 +3234,8 @@ ECHO !Tree;>> Treenodecmm.nebula
 ECHO Created Timestamp;>> Treenodecmm.nebula
 ECHO Createdby ID;>> Treenodecmm.nebula
 ECHO Isactive YesNo;>> Treenodecmm.nebula
-#N/A
-#N/A
+
+
 ECHO SeqNo;>> Treenodecmm.nebula
 ECHO Updated Timestamp;>> Treenodecmm.nebula
 ECHO Updatedby Date;>> Treenodecmm.nebula
@@ -3244,8 +3248,8 @@ ECHO !Tree;>> Treenodecms.nebula
 ECHO Created Timestamp;>> Treenodecms.nebula
 ECHO Createdby ID;>> Treenodecms.nebula
 ECHO Isactive YesNo;>> Treenodecms.nebula
-#N/A
-#N/A
+
+
 ECHO SeqNo;>> Treenodecms.nebula
 ECHO Updated Timestamp;>> Treenodecms.nebula
 ECHO Updatedby Date;>> Treenodecms.nebula
@@ -3258,8 +3262,8 @@ ECHO !Tree;>> Treenodecmt.nebula
 ECHO Created Timestamp;>> Treenodecmt.nebula
 ECHO Createdby ID;>> Treenodecmt.nebula
 ECHO Isactive YesNo;>> Treenodecmt.nebula
-#N/A
-#N/A
+
+
 ECHO SeqNo;>> Treenodecmt.nebula
 ECHO Updated Timestamp;>> Treenodecmt.nebula
 ECHO Updatedby Date;>> Treenodecmt.nebula
@@ -3272,8 +3276,8 @@ ECHO !Tree;>> Treenodemm.nebula
 ECHO Created Timestamp;>> Treenodemm.nebula
 ECHO Createdby ID;>> Treenodemm.nebula
 ECHO Isactive YesNo;>> Treenodemm.nebula
-#N/A
-#N/A
+
+
 ECHO SeqNo;>> Treenodemm.nebula
 ECHO Updated Timestamp;>> Treenodemm.nebula
 ECHO Updatedby Date;>> Treenodemm.nebula
@@ -3286,8 +3290,8 @@ ECHO !Tree;>> Treenodepr.nebula
 ECHO Created Timestamp;>> Treenodepr.nebula
 ECHO Createdby ID;>> Treenodepr.nebula
 ECHO Isactive YesNo;>> Treenodepr.nebula
-#N/A
-#N/A
+
+
 ECHO SeqNo;>> Treenodepr.nebula
 ECHO Updated Timestamp;>> Treenodepr.nebula
 ECHO Updatedby Date;>> Treenodepr.nebula
@@ -3300,8 +3304,8 @@ ECHO !Tree;>> Treenodeu1.nebula
 ECHO Created Timestamp;>> Treenodeu1.nebula
 ECHO Createdby ID;>> Treenodeu1.nebula
 ECHO Isactive YesNo;>> Treenodeu1.nebula
-#N/A
-#N/A
+
+
 ECHO SeqNo;>> Treenodeu1.nebula
 ECHO Updated Timestamp;>> Treenodeu1.nebula
 ECHO Updatedby Date;>> Treenodeu1.nebula
@@ -3314,8 +3318,8 @@ ECHO !Tree;>> Treenodeu2.nebula
 ECHO Created Timestamp;>> Treenodeu2.nebula
 ECHO Createdby ID;>> Treenodeu2.nebula
 ECHO Isactive YesNo;>> Treenodeu2.nebula
-#N/A
-#N/A
+
+
 ECHO SeqNo;>> Treenodeu2.nebula
 ECHO Updated Timestamp;>> Treenodeu2.nebula
 ECHO Updatedby Date;>> Treenodeu2.nebula
@@ -3328,8 +3332,8 @@ ECHO !Tree;>> Treenodeu3.nebula
 ECHO Created Timestamp;>> Treenodeu3.nebula
 ECHO Createdby ID;>> Treenodeu3.nebula
 ECHO Isactive YesNo;>> Treenodeu3.nebula
-#N/A
-#N/A
+
+
 ECHO SeqNo;>> Treenodeu3.nebula
 ECHO Updated Timestamp;>> Treenodeu3.nebula
 ECHO Updatedby Date;>> Treenodeu3.nebula
@@ -3342,8 +3346,8 @@ ECHO !Tree;>> Treenodeu4.nebula
 ECHO Created Timestamp;>> Treenodeu4.nebula
 ECHO Createdby ID;>> Treenodeu4.nebula
 ECHO Isactive YesNo;>> Treenodeu4.nebula
-#N/A
-#N/A
+
+
 ECHO SeqNo;>> Treenodeu4.nebula
 ECHO Updated Timestamp;>> Treenodeu4.nebula
 ECHO Updatedby Date;>> Treenodeu4.nebula
@@ -3554,8 +3558,8 @@ ECHO };>> Usermail.nebula
  ECHO @Package("Application Dictionary") type  Userpreference{ >> Userpreference.nebula 
  ECHO Client;>> Userpreference.nebula
 ECHO Org;>> Userpreference.nebula
-#N/A
-#N/A
+
+
 ECHO !ID;>> Userpreference.nebula
 ECHO User;>> Userpreference.nebula
 ECHO Created Timestamp;>> Userpreference.nebula
@@ -3565,7 +3569,7 @@ ECHO Isautocommit YesNo;>> Userpreference.nebula
 ECHO Isshowacct YesNo;>> Userpreference.nebula
 ECHO Isshowadvanced YesNo;>> Userpreference.nebula
 ECHO Isshowtrl YesNo;>> Userpreference.nebula
-#N/A
+
 ECHO Printername Name;>> Userpreference.nebula
 ECHO Tablerows Number;>> Userpreference.nebula
 ECHO Uitheme String;>> Userpreference.nebula
@@ -3702,7 +3706,7 @@ ECHO Isactive YesNo;>> Wf_Activity.nebula
 ECHO Priority;>> Wf_Activity.nebula
 ECHO Processed YesNo;>> Wf_Activity.nebula
 ECHO Processing YesNo;>> Wf_Activity.nebula
-#N/A
+
 ECHO Textmsg MSG;>> Wf_Activity.nebula
 ECHO Updated Timestamp;>> Wf_Activity.nebula
 ECHO Updatedby Date;>> Wf_Activity.nebula
@@ -3757,7 +3761,7 @@ ECHO Eventtype Attr;>> Wf_Eventaudit.nebula
 ECHO Isactive YesNo;>> Wf_Eventaudit.nebula
 ECHO Newvalue Note;>> Wf_Eventaudit.nebula
 ECHO Oldvalue Note;>> Wf_Eventaudit.nebula
-#N/A
+
 ECHO Textmsg MSG;>> Wf_Eventaudit.nebula
 ECHO Updated Timestamp;>> Wf_Eventaudit.nebula
 ECHO Updatedby Date;>> Wf_Eventaudit.nebula
@@ -3899,7 +3903,7 @@ ECHO Isactive YesNo;>> Wf_Process.nebula
 ECHO Priority;>> Wf_Process.nebula
 ECHO Processed YesNo;>> Wf_Process.nebula
 ECHO Processing YesNo;>> Wf_Process.nebula
-#N/A
+
 ECHO Textmsg MSG;>> Wf_Process.nebula
 ECHO Updated Timestamp;>> Wf_Process.nebula
 ECHO Updatedby Date;>> Wf_Process.nebula
@@ -5017,7 +5021,7 @@ ECHO Orgbp Org;>> Bpartner.nebula
 ECHO Org;>> Bpartner.nebula
 ECHO Acqusitioncost Number;>> Bpartner.nebula
 ECHO Actuallifetimevalue Number;>> Bpartner.nebula
-#N/A
+
 ECHO Bp_Group;>> Bpartner.nebula
 ECHO Bp_Size;>> Bpartner.nebula
 ECHO Bp_Status;>> Bpartner.nebula
@@ -5449,7 +5453,7 @@ ECHO Org;>> Conversion_Rate.nebula
 ECHO Conversiontype;>> Conversion_Rate.nebula
 ECHO !ID;>> Conversion_Rate.nebula
 ECHO Currency;>> Conversion_Rate.nebula
-#N/A
+
 ECHO Currency_To Currency;>> Conversion_Rate.nebula
 ECHO Created Timestamp;>> Conversion_Rate.nebula
 ECHO Createdby ID;>> Conversion_Rate.nebula
@@ -6032,7 +6036,7 @@ ECHO Paymentrule YesNo;>> Invoice.nebula
 ECHO Posted YesNo;>> Invoice.nebula
 ECHO Processed YesNo;>> Invoice.nebula
 ECHO Processing YesNo;>> Invoice.nebula
-#N/A
+
 ECHO Salesrep User;>> Invoice.nebula
 ECHO Sendemail YesNo;>> Invoice.nebula
 ECHO Totallines Number;>> Invoice.nebula
@@ -6140,7 +6144,7 @@ ECHO Qtyentered Quantity;>> Invoiceline.nebula
 ECHO Qtyinvoiced Quantity;>> Invoiceline.nebula
 ECHO Rramt Amount;>> Invoiceline.nebula
 ECHO Rrstartdate Date;>> Invoiceline.nebula
-#N/A
+
 ECHO Resourceassignment;>> Invoiceline.nebula
 ECHO Taxamt Amount;>> Invoiceline.nebula
 ECHO Updated Timestamp;>> Invoiceline.nebula
@@ -6484,8 +6488,8 @@ ECHO Warehouse;>> Order.nebula
 
 
 ECHO Poreference String;>> Order.nebula
-#N/A
-#N/A
+
+
 ECHO Paymentrule YesNo;>> Order.nebula
 ECHO Posted YesNo;>> Order.nebula
 ECHO Priorityrule YesNo;>> Order.nebula
@@ -7844,8 +7848,8 @@ ECHO Updated Timestamp;>> Validcombination.nebula
 ECHO Updatedby Date;>> Validcombination.nebula
 ECHO User1 Elementvalue;>> Validcombination.nebula
 ECHO User2 Elementvalue;>> Validcombination.nebula
-#N/A
-#N/A
+
+
 ECHO };>> Validcombination.nebula 
  DEL /F Wave.nebula 
  ECHO @Package("Common or Core Functionality") type  Wave{ >> Wave.nebula 
@@ -8128,7 +8132,7 @@ ECHO Createdby ID;>> Chat.nebula
 ECHO Description;>> Chat.nebula
 ECHO Isactive YesNo;>> Chat.nebula
 ECHO Moderationtype YesNo;>> Chat.nebula
-#N/A
+
 ECHO Updated Timestamp;>> Chat.nebula
 ECHO Updatedby Date;>> Chat.nebula
 ECHO };>> Chat.nebula 
@@ -8309,7 +8313,7 @@ ECHO Description;>> Containerttable.nebula
 ECHO Isactive YesNo;>> Containerttable.nebula
 ECHO !Name;>> Containerttable.nebula
 ECHO Otherclause Note;>> Containerttable.nebula
-#N/A
+
 ECHO Updated Timestamp;>> Containerttable.nebula
 ECHO Updatedby Date;>> Containerttable.nebula
 ECHO Whereclause Note;>> Containerttable.nebula
@@ -8417,7 +8421,7 @@ ECHO Description;>> Cstagettable.nebula
 ECHO Isactive YesNo;>> Cstagettable.nebula
 ECHO !Name;>> Cstagettable.nebula
 ECHO Otherclause Note;>> Cstagettable.nebula
-#N/A
+
 ECHO Updated Timestamp;>> Cstagettable.nebula
 ECHO Updatedby Date;>> Cstagettable.nebula
 ECHO Whereclause Note;>> Cstagettable.nebula
@@ -8693,18 +8697,18 @@ ECHO !ID;>> Acct.nebula
 ECHO Budget;>> Acct.nebula
 ECHO Category;>> Acct.nebula
 ECHO Isactive YesNo;>> Acct.nebula
-#N/A
+
 ECHO Locator;>> Acct.nebula
 ECHO Product;>> Acct.nebula
 ECHO Postingtype YesNo;>> Acct.nebula
 ECHO Qty Quantity;>> Acct.nebula
-#N/A
+
 ECHO Updated Timestamp;>> Acct.nebula
 ECHO Updatedby Date;>> Acct.nebula
 ECHO User1 Elementvalue;>> Acct.nebula
 ECHO *User2 Elementvalue;>> Acct.nebula
-#N/A
-#N/A
+
+
 ECHO };>> Acct.nebula 
  DEL /F Acct_Balance.nebula 
  ECHO @Package("Multi-Dimensional Cube") type  Acct_Balance{ >> Acct_Balance.nebula 
@@ -8737,8 +8741,8 @@ ECHO Updated Timestamp;>> Acct_Balance.nebula
 ECHO Updatedby Date;>> Acct_Balance.nebula
 ECHO User1 Elementvalue;>> Acct_Balance.nebula
 ECHO User2 Elementvalue;>> Acct_Balance.nebula
-#N/A
-#N/A
+
+
 ECHO };>> Acct_Balance.nebula 
  DEL /F Accumulation.nebula 
  ECHO @Package("Multi-Dimensional Cube") type  Accumulation{ >> Accumulation.nebula 
@@ -9762,7 +9766,7 @@ ECHO };>> Journalline.nebula
 
 
 
-#N/A
+
 
 
 
@@ -9877,7 +9881,7 @@ ECHO Isactive YesNo;>> Index.nebula
 ECHO !ID;>> Index.nebula
 ECHO Keyword String;>> Index.nebula
 ECHO Requesttype;>> Index.nebula
-#N/A
+
 ECHO Sourceupdated Date;>> Index.nebula
 ECHO Updated Timestamp;>> Index.nebula
 ECHO Updatedby Date;>> Index.nebula
@@ -10677,7 +10681,7 @@ ECHO Posted YesNo;>> Inout.nebula
 ECHO Priorityrule YesNo;>> Inout.nebula
 ECHO Processed YesNo;>> Inout.nebula
 ECHO Processing YesNo;>> Inout.nebula
-#N/A
+
 ECHO Salesrep User;>> Inout.nebula
 ECHO Sendemail YesNo;>> Inout.nebula
 ECHO Shipdate Date;>> Inout.nebula
@@ -10748,7 +10752,7 @@ ECHO Pickedqty Quantity;>> Inoutline.nebula
 ECHO Processed YesNo;>> Inoutline.nebula
 ECHO Qtyallocated Quantity;>> Inoutline.nebula
 ECHO Qtyentered Quantity;>> Inoutline.nebula
-#N/A
+
 ECHO Scrappedqty Quantity;>> Inoutline.nebula
 ECHO Targetqty Quantity;>> Inoutline.nebula
 ECHO Updated Timestamp;>> Inoutline.nebula
@@ -11863,7 +11867,7 @@ ECHO Isactive YesNo;>> Routingoperation.nebula
 ECHO Ishazmat YesNo;>> Routingoperation.nebula
 ECHO Isoptional YesNo;>> Routingoperation.nebula
 ECHO Ispermitrequired YesNo;>> Routingoperation.nebula
-#N/A
+
 ECHO !ID;>> Routingoperation.nebula
 ECHO Routing;>> Routingoperation.nebula
 ECHO !Name;>> Routingoperation.nebula
@@ -12092,7 +12096,7 @@ ECHO Docstatus Attr;>> Warehousetask.nebula
 ECHO Documentno SeqNo;>> Warehousetask.nebula
 ECHO Isactive YesNo;>> Warehousetask.nebula
 ECHO Isapproved YesNo;>> Warehousetask.nebula
-#N/A
+
 ECHO Actuallocatorto Locator;>> Warehousetask.nebula
 ECHO Actuallocator Locator;>> Warehousetask.nebula
 ECHO Attributesetinstance;>> Warehousetask.nebula
@@ -12164,7 +12168,7 @@ ECHO Attributesetinstance;>> Workorder.nebula
 ECHO Bom;>> Workorder.nebula
 ECHO Locator;>> Workorder.nebula
 ECHO Product;>> Workorder.nebula
-#N/A
+
 ECHO Warehouse;>> Workorder.nebula
 ECHO Workorderclass;>> Workorder.nebula
 ECHO !ID;>> Workorder.nebula
@@ -12266,7 +12270,7 @@ ECHO Dateprocessed Date;>> Workorderoperation.nebula
 ECHO Description;>> Workorderoperation.nebula
 ECHO Isactive YesNo;>> Workorderoperation.nebula
 ECHO Isexecuted YesNo;>> Workorderoperation.nebula
-#N/A
+
 ECHO Routingoperation;>> Workorderoperation.nebula
 ECHO Routing;>> Workorderoperation.nebula
 ECHO !ID;>> Workorderoperation.nebula
@@ -12827,7 +12831,7 @@ ECHO Sla_Goal;>> Sla_Measure.nebula
 ECHO !ID;>> Sla_Measure.nebula
 ECHO Processed YesNo;>> Sla_Measure.nebula
 ECHO Processing YesNo;>> Sla_Measure.nebula
-#N/A
+
 ECHO Updated Timestamp;>> Sla_Measure.nebula
 ECHO Updatedby Date;>> Sla_Measure.nebula
 ECHO };>> Sla_Measure.nebula 
@@ -13112,7 +13116,7 @@ ECHO Resolution;>> Request.nebula
 ECHO Source;>> Request.nebula
 ECHO Standardresponse;>> Request.nebula
 ECHO Status;>> Request.nebula
-#N/A
+
 ECHO Requestamt Amount;>> Request.nebula
 ECHO Result Number;>> Request.nebula
 ECHO Salesrep User;>> Request.nebula
@@ -13605,8 +13609,6 @@ ECHO };>> Training_Class.nebula
 
 
 
-#N/A
-#N/A
 
 
 
@@ -13684,7 +13686,6 @@ ECHO };>> Training_Class.nebula
 
 
 
-#N/A
 
 
 
@@ -13795,11 +13796,9 @@ ECHO };>> Training_Class.nebula
 
 
 
-#N/A
 
 
 
-#N/A
 
 
 
@@ -13807,13 +13806,10 @@ ECHO };>> Training_Class.nebula
 
 
 
-#N/A
 
 
 
 
-#N/A
-#N/A
 
 
 
@@ -13892,16 +13888,12 @@ ECHO };>> Training_Class.nebula
 
 
 
-#N/A
 
 
-#N/A
 
 
-#N/A
 
 
-#N/A
 
 
 
@@ -13927,23 +13919,14 @@ ECHO };>> Training_Class.nebula
 
 
 
-#VALUE!
-#VALUE!
 
 
-#VALUE!
-#VALUE!
-#VALUE!
-#VALUE!
-#VALUE!
 
 
 
 
 
 
-#VALUE!
-#VALUE!
 
 
 
@@ -13953,7 +13936,6 @@ ECHO };>> Training_Class.nebula
 
 
 
-#VALUE!
 
 
 
@@ -13974,7 +13956,29 @@ ECHO };>> Training_Class.nebula
 
 
 
-#N/A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -14025,7 +14029,7 @@ ECHO Createdby ID;>> Basket.nebula
 ECHO Email;>> Basket.nebula
 ECHO Isactive YesNo;>> Basket.nebula
 ECHO Pricelist;>> Basket.nebula
-#N/A
+
 ECHO Updated Timestamp;>> Basket.nebula
 ECHO Updatedby Date;>> Basket.nebula
 ECHO ID;>> Basket.nebula
