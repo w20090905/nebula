@@ -9,7 +9,6 @@ Isactive YesNo;
 LOT String;
 !ID;
 Attributeset;
-Lot;
 SerNo Code;
 Updated Timestamp;
 Updatedby Date;
