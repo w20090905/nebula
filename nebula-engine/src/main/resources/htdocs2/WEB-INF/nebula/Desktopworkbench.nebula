@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Desktopworkbench{ 
+@Package("Application Dictionary") type  Desktopworkbench{  
+Client;
 !ID;
 Desktop;
 Org;

@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Acctschema{ 
+@Package("Common or Core Functionality") type  Acctschema{  
+Client;
 Orgonly Org;
 Org;
 Autoperiodcontrol YesNo;

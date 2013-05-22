@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Windowlog{ 
+@Package("Application Dictionary") type  Windowlog{  
+Client;
 Form;
 Org;
 Role;

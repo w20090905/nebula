@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Rfqline{ 
+@Package("Common or Core Functionality") type  Rfqline{  
+Client;
 Org;
 !ID;
 Rfq;

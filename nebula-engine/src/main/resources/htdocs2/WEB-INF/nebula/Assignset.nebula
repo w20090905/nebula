@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Assignset{ 
+@Package("Application Dictionary") type  Assignset{  
+!ID;
 Client;
 Org;
 Table;

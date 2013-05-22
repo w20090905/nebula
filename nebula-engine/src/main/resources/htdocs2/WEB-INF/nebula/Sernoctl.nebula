@@ -1,4 +1,5 @@
-@Package("Material Management") type  Sernoctl{ 
+@Package("Material Management") type  Sernoctl{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Bankstatementloader{ 
+@Package("Common or Core Functionality") type  Bankstatementloader{  
+Client;
 Org;
 AccountNo;
 Branchid String;

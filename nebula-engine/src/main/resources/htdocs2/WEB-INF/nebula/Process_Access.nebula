@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Process_Access{ 
+@Package("Application Dictionary") type  Process_Access{  
+Client;
 Org;
 !Process;
 !Role;

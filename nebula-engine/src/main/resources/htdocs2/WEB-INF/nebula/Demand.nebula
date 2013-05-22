@@ -1,4 +1,5 @@
-@Package("Material Management") type  Demand{ 
+@Package("Material Management") type  Demand{  
+Client;
 Org;
 Calendar;
 Year;

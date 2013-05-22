@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Charge_Acct{ 
+@Package("Common or Core Functionality") type  Charge_Acct{  
+Client;
 Org;
 !Acctschema;
 !Charge;

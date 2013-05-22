@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Doctypegroupline{ 
+@Package("Common or Core Functionality") type  Doctypegroupline{  
+Client;
 Org;
 !ID;
 Doctypegroup;

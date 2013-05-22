@@ -1,4 +1,5 @@
-@Package("Material Management") type  Bomproduct{ 
+@Package("Material Management") type  Bomproduct{  
+Client;
 Org;
 Bomproducttype YesNo;
 Bomqty Quantity;

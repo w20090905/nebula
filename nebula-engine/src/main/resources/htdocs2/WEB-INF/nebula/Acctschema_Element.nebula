@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Acctschema_Element{ 
+@Package("Common or Core Functionality") type  Acctschema_Element{  
+Client;
 Column;
 Org;
 !ID;

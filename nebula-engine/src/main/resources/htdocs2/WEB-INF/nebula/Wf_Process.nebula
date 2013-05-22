@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Wf_Process{ 
+@Package("Application Dictionary") type  Wf_Process{  
+Client;
 Message;
 Org;
 Table;

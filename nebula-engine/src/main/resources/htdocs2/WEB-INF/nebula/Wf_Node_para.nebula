@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Wf_Node_para{ 
+@Package("Application Dictionary") type  Wf_Node_para{  
+Client;
 Org;
 Process_Para;
 Wf_Node;

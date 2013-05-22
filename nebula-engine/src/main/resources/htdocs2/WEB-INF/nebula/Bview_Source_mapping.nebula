@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Bview_Source_mapping{ 
+@Package("Application Dictionary") type  Bview_Source_mapping{  
+Bview_Field;
 Bview_Source_field Column;
 Bview_Source;
 !ID;

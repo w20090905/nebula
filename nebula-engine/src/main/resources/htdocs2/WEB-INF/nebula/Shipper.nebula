@@ -1,4 +1,5 @@
-@Package("Material Management") type  Shipper{ 
+@Package("Material Management") type  Shipper{  
+Client;
 Org;
 Bpartner;
 Created Timestamp;

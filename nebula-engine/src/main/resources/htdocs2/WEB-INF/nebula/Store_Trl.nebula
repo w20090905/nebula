@@ -1,4 +1,5 @@
-@Package("Web") type  Store_Trl{ 
+@Package("Web") type  Store_Trl{  
+Client;
 Ad_Language Language;
 Org;
 Created Timestamp;

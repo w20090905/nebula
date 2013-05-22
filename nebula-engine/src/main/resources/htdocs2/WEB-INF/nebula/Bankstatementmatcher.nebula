@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Bankstatementmatcher{ 
+@Package("Common or Core Functionality") type  Bankstatementmatcher{  
+Client;
 Org;
 !ID;
 Classname Name;

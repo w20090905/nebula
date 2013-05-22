@@ -1,4 +1,5 @@
-@Package("Requests") type  Requestupdates{ 
+@Package("Requests") type  Requestupdates{  
+Client;
 Org;
 !User;
 Created Timestamp;

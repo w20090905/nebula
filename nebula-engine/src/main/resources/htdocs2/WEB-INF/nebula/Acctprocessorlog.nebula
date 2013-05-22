@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Acctprocessorlog{ 
+@Package("Common or Core Functionality") type  Acctprocessorlog{  
+Client;
 Org;
 Binarydata Note;
 !ID;

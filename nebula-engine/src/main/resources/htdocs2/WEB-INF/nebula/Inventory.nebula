@@ -1,33 +1,31 @@
-@Package("Import") type  Inventory{ 
+@Package("Material Management") type  Inventory{  
+Client;
+Orgtrx Org;
 Org;
-Bin String;
+Approvalamt Amount;
+Activity;
+Campaign;
+Doctype;
+Project;
 Created Timestamp;
 Createdby Date;
 Description;
-I_Errormsg MSG;
-!ID;
-I_Isimported YesNo;
+Docaction Attr;
+Docstatus Attr;
+Documentno SeqNo;
+Generatelist YesNo;
 Isactive YesNo;
-Locatorvalue String;
-LOT String;
-/*TODO Inventoryline;*/
-/*TODO ID;*/
-Locator;
-Product;
+Isapproved YesNo;
+!ID;
+Perpetualinv;
 Warehouse;
 Movementdate Date;
-Position String;
+Posted YesNo;
 Processed YesNo;
 Processing YesNo;
-Qtybook Quantity;
-Qtycount Quantity;
-SerNo Code;
-UPC;
+Updateqty YesNo;
 Updated Timestamp;
 Updatedby Date;
-Value String;
-Warehousevalue String;
-X String;
-Y String;
-Z String;
+User1 Elementvalue;
+User2 Elementvalue;
 }; 

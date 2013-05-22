@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Remuneration{ 
+@Package("Common or Core Functionality") type  Remuneration{  
+Client;
 Org;
 !ID;
 Created Timestamp;

@@ -1,4 +1,5 @@
-@Package("Material Management") type  Tasklist{ 
+@Package("Material Management") type  Tasklist{  
+Client;
 Org;
 User;
 Doctype;

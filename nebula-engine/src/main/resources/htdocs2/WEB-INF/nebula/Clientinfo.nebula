@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Clientinfo{ 
+@Package("Application Dictionary") type  Clientinfo{  
+!Client;
 Org;
 Tree_Activity Tree;
 Tree_Bpartner Tree;

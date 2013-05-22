@@ -1,4 +1,5 @@
-@Package("Material Management") type  Inoutline{ 
+@Package("Material Management") type  Inoutline{  
+Client;
 Orgtrx Org;
 Org;
 Activity;

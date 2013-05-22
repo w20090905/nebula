@@ -1,4 +1,5 @@
-@Package("Requests") type  Groupupdates{ 
+@Package("Requests") type  Groupupdates{  
+Client;
 Org;
 !User;
 Created Timestamp;

@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Commissionline{ 
+@Package("Common or Core Functionality") type  Commissionline{  
+Client;
 Org;
 Amtmultiplier Amount;
 Amtsubtract Amount;

@@ -1,4 +1,5 @@
-@Package("Requests") type  Issueuser{ 
+@Package("Requests") type  Issueuser{  
+Client;
 Org;
 User;
 Created Timestamp;

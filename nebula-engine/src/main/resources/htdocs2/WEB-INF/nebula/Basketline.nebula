@@ -1,9 +1,10 @@
-@Package("Web") type  Basketline{ 
+@Package("Web") type  Basketline{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;
 Description;
-!Isactive YesNo;
+*Isactive YesNo;
 Line Number;
 Product;
 Price;

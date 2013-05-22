@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Session{ 
+@Package("Application Dictionary") type  Session{  
+Client;
 Org;
 Role;
 !ID;

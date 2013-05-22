@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Newschannel{ 
+@Package("Collaboration Management") type  Newschannel{  
+Client;
 Ad_Language Language;
 Org;
 !ID;

@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Wf_Nextcondition{ 
+@Package("Application Dictionary") type  Wf_Nextcondition{  
+Client;
 Column;
 Org;
 !ID;

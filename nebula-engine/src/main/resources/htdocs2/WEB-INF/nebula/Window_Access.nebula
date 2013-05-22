@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Window_Access{ 
+@Package("Application Dictionary") type  Window_Access{  
+Client;
 Org;
 !Role;
 !Window;

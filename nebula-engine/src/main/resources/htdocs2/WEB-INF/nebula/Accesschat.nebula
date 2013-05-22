@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Accesschat{ 
+@Package("Collaboration Management") type  Accesschat{  
+Client;
 Org;
 !Accessprofile;
 !Chat;

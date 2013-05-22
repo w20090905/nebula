@@ -1,4 +1,5 @@
-@Package("Requests") type  Requestprocessorlog{ 
+@Package("Requests") type  Requestprocessorlog{  
+Client;
 Org;
 Binarydata Note;
 Created Timestamp;

@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Bp_Size{ 
+@Package("Common or Core Functionality") type  Bp_Size{  
+Client;
 Org;
 !ID;
 Created Timestamp;

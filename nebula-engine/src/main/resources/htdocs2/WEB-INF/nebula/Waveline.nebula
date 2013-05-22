@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Waveline{ 
+@Package("Common or Core Functionality") type  Waveline{  
+Client;
 Org;
 Orderline;
 !ID;

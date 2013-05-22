@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Doctypegroup{ 
+@Package("Common or Core Functionality") type  Doctypegroup{  
+Client;
 Org;
 !ID;
 Created Timestamp;

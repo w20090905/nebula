@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Ldapprocessorlog{ 
+@Package("Application Dictionary") type  Ldapprocessorlog{  
+Client;
 !ID;
 Ldapprocessor;
 Org;

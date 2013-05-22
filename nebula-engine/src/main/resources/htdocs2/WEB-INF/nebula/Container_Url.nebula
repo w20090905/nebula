@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Container_Url{ 
+@Package("Collaboration Management") type  Container_Url{  
+Client;
 Org;
 Container;
 !ID;

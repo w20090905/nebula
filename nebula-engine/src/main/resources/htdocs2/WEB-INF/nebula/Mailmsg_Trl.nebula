@@ -1,5 +1,6 @@
-@Package("Web") type  Mailmsg_Trl{ 
-!Ad_Language Language;
+@Package("Web") type  Mailmsg_Trl{  
+Client;
+*Ad_Language Language;
 Org;
 Created Timestamp;
 Createdby Date;
@@ -9,7 +10,7 @@ Message MSG;
 Message2 MSG;
 Message3 MSG;
 Subject;
-!Updated Timestamp;
+*Updated Timestamp;
 Updatedby Date;
 Mailmsg;
 }; 

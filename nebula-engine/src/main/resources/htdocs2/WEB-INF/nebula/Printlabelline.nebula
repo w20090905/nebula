@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Printlabelline{ 
+@Package("Application Dictionary") type  Printlabelline{  
+Client;
 Column;
 Labelprinterfunction;
 Org;

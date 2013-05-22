@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Eul_User{ 
+@Package("Application Dictionary") type  Eul_User{  
+Client;
 !ID;
 Org;
 Role;

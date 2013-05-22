@@ -1,4 +1,5 @@
-@Package("Service") type  Expensetype{ 
+@Package("Service") type  Expensetype{  
+Client;
 Org;
 Taxcategory;
 Uom;

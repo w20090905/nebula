@@ -1,6 +1,7 @@
-@Package("Material Management") type  Transactionallocation{ 
+@Package("Material Management") type  Transactionallocation{  
+Client;
 Org;
-!Allocationstrategytype YesNo;
+*Allocationstrategytype YesNo;
 Created Timestamp;
 Createdby Date;
 Isactive YesNo;

@@ -1,4 +1,5 @@
-@Package("Material Management") type  Discountschemaline{ 
+@Package("Material Management") type  Discountschemaline{  
+Client;
 Org;
 Bpartner;
 Conversiontype;

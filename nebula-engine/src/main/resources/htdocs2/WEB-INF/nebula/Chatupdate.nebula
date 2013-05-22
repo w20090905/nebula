@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Chatupdate{ 
+@Package("Collaboration Management") type  Chatupdate{  
+Client;
 Org;
 !User;
 !Chat;

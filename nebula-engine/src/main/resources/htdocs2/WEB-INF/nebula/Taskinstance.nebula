@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Taskinstance{ 
+@Package("Application Dictionary") type  Taskinstance{  
+Client;
 Org;
 !ID;
 Task;

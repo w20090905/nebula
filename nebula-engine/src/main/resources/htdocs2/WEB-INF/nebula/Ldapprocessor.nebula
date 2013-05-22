@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Ldapprocessor{ 
+@Package("Application Dictionary") type  Ldapprocessor{  
+Client;
 !ID;
 Org;
 Created Timestamp;

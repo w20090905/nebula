@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Task_Access{ 
+@Package("Application Dictionary") type  Task_Access{  
+Client;
 Org;
 !Role;
 !Task;

@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Invoicetax{ 
+@Package("Common or Core Functionality") type  Invoicetax{  
+Client;
 Org;
 !Invoice;
 !Tax;

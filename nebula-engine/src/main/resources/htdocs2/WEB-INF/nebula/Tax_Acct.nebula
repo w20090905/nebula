@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Tax_Acct{ 
+@Package("Common or Core Functionality") type  Tax_Acct{  
+Client;
 Org;
 !Acctschema;
 !Tax;

@@ -1,4 +1,5 @@
-@Package("Requests") type  Categoryupdates{ 
+@Package("Requests") type  Categoryupdates{  
+Client;
 Org;
 !User;
 Created Timestamp;

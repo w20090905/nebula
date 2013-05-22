@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Commission{ 
+@Package("Common or Core Functionality") type  Commission{  
+Client;
 Org;
 Bpartner;
 Charge;

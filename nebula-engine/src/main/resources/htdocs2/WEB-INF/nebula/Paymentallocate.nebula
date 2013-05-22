@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Paymentallocate{ 
+@Package("Common or Core Functionality") type  Paymentallocate{  
+Client;
 Org;
 Amount;
 Allocationline;

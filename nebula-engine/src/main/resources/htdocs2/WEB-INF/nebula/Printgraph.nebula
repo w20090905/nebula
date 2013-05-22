@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Printgraph{ 
+@Package("Application Dictionary") type  Printgraph{  
+Client;
 Org;
 Printformat;
 !ID;

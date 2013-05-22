@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Menu{ 
+@Package("Application Dictionary") type  Menu{  
+Client;
 Form;
 !ID;
 Org;

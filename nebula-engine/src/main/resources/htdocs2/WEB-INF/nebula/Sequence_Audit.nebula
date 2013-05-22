@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Sequence_Audit{ 
+@Package("Application Dictionary") type  Sequence_Audit{  
+Client;
 Org;
 !Sequence;
 !Table;

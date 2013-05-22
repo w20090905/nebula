@@ -1,4 +1,5 @@
-@Package("Service") type  Timeexpense{ 
+@Package("Service") type  Timeexpense{  
+Client;
 Org;
 Approvalamt Amount;
 Bpartner;

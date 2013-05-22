@@ -1,5 +1,6 @@
-@Package("Application Dictionary") type  Printformatitem_Trl{ 
-!Ad_Language Language;
+@Package("Application Dictionary") type  Printformatitem_Trl{  
+Client;
+*Ad_Language Language;
 Org;
 !Printformatitem;
 Created Timestamp;

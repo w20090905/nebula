@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Replication{ 
+@Package("Application Dictionary") type  Replication{  
+Client;
 Org;
 Replicationstrategy;
 !ID;

@@ -1,4 +1,5 @@
-@Package("Material Management") type  Lotctlexclude{ 
+@Package("Material Management") type  Lotctlexclude{  
+Client;
 Org;
 Table;
 Created Timestamp;

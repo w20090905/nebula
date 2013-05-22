@@ -1,4 +1,5 @@
-@Package("Performance Analysis") type  Measurecalc{ 
+@Package("Performance Analysis") type  Measurecalc{  
+Client;
 Org;
 Table;
 Bpartnercolumn Name;

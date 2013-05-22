@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Accesslistrole{ 
+@Package("Collaboration Management") type  Accesslistrole{  
+Client;
 Org;
 !Role;
 !Accessprofile;

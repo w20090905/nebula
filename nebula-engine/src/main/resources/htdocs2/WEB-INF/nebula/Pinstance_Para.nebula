@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Pinstance_Para{ 
+@Package("Application Dictionary") type  Pinstance_Para{  
+Client;
 Org;
 !Pinstance;
 Created Timestamp;

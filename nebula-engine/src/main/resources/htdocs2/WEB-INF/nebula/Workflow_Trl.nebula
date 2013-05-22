@@ -1,5 +1,6 @@
-@Package("Application Dictionary") type  Workflow_Trl{ 
-!Ad_Language Language;
+@Package("Application Dictionary") type  Workflow_Trl{  
+Client;
+*Ad_Language Language;
 Org;
 !Workflow;
 Created Timestamp;

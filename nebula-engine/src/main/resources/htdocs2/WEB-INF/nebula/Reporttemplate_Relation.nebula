@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Reporttemplate_Relation{ 
+@Package("Application Dictionary") type  Reporttemplate_Relation{  
+Client;
 Org;
 Reporttemplate;
 Reporttemplate_Related Reporttemplate;

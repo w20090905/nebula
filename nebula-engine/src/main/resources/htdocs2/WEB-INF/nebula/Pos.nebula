@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Pos{ 
+@Package("Common or Core Functionality") type  Pos{  
+Client;
 Org;
 Bpartnercashtrx Bpartner;
 Cashbook;

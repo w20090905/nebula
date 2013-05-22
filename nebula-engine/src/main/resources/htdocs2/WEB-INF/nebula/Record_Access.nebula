@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Record_Access{ 
+@Package("Application Dictionary") type  Record_Access{  
+Client;
 Org;
 !Role;
 !Table;

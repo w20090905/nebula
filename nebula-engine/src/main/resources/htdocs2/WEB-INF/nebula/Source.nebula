@@ -1,4 +1,5 @@
-@Package("Knowledge Management") type  Source{ 
+@Package("Knowledge Management") type  Source{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;
@@ -9,7 +10,8 @@ Isactive YesNo;
 Updated Timestamp;
 Updatedby Date;
 }; 
-@Package("Requests") type  Source{ 
+@Package("Requests") type  Source{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

@@ -1,4 +1,5 @@
-@Package("Material Management") type  Lotctl{ 
+@Package("Material Management") type  Lotctl{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

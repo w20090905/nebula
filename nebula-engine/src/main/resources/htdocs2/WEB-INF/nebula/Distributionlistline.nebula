@@ -1,4 +1,5 @@
-@Package("Material Management") type  Distributionlistline{ 
+@Package("Material Management") type  Distributionlistline{  
+Client;
 Org;
 Bpartner;
 Bpartner_Location;

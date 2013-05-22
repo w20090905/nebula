@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Subacct{ 
+@Package("Common or Core Functionality") type  Subacct{  
+Client;
 Org;
 Elementvalue;
 !ID;

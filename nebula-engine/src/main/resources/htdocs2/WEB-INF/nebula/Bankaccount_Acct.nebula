@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Bankaccount_Acct{ 
+@Package("Common or Core Functionality") type  Bankaccount_Acct{  
+Client;
 Org;
 B_Asset_acct Account;
 B_Expense_acct Account;

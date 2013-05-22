@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Phase{ 
+@Package("Common or Core Functionality") type  Phase{  
+Client;
 Org;
 !ID;
 Projecttype;

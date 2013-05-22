@@ -1,32 +1,5 @@
-@Package("Import") type  Reportline{ 
-Org;
-Amounttype Attr;
-Elementvalue;
-Calculationtype YesNo;
-Created Timestamp;
-Createdby Date;
-Description;
-Elementvalue String;
-I_Errormsg MSG;
-I_Isimported YesNo;
-!ID;
-Isactive YesNo;
-Isprinted YesNo;
-Issummary YesNo;
-Linetype YesNo;
-!Name;
-Reportlineset;
-ID;
-/*TODO Reportsource;*/
-Postingtype YesNo;
-Processed YesNo;
-Processing YesNo;
-Reportlinesetname Name;
-SeqNo;
-Updated Timestamp;
-Updatedby Date;
-}; 
-@Package("Performance Analysis") type  Reportline{ 
+@Package("Performance Analysis") type  Reportline{  
+Client;
 Org;
 Amounttype Attr;
 Calculationtype YesNo;

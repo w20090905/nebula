@@ -1,4 +1,5 @@
-@Package("Material Management") type  Costqueue{ 
+@Package("Material Management") type  Costqueue{  
+Client;
 Org;
 Acctschema;
 Created Timestamp;

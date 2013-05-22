@@ -1,8 +1,9 @@
-@Package("Application Dictionary") type  Table_Access{ 
+@Package("Application Dictionary") type  Table_Access{  
+Client;
 Org;
 !Role;
 !Table;
-!Accesstyperule YesNo;
+*Accesstyperule YesNo;
 Created Timestamp;
 Createdby Date;
 Isactive YesNo;

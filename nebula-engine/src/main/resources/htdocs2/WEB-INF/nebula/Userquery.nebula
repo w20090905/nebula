@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Userquery{ 
+@Package("Application Dictionary") type  Userquery{  
+Client;
 Org;
 Tab;
 Table;

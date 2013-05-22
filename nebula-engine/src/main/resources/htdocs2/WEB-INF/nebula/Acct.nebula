@@ -1,4 +1,5 @@
-@Package("Multi-Dimensional Cube") type  Acct{ 
+@Package("Multi-Dimensional Cube") type  Acct{  
+Client;
 Orgtrx Org;
 Org;
 Table;
@@ -39,5 +40,5 @@ Qty Quantity;
 Updated Timestamp;
 Updatedby Date;
 User1 Elementvalue;
-!User2 Elementvalue;
+*User2 Elementvalue;
 }; 

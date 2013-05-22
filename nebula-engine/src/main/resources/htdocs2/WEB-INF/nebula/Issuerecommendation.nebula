@@ -1,4 +1,5 @@
-@Package("Requests") type  Issuerecommendation{ 
+@Package("Requests") type  Issuerecommendation{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

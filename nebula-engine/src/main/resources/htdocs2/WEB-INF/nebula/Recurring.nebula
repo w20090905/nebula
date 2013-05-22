@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Recurring{ 
+@Package("Common or Core Functionality") type  Recurring{  
+Client;
 Org;
 Invoice;
 Order;

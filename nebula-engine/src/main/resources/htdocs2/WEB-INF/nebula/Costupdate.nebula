@@ -1,4 +1,5 @@
-@Package("Material Management") type  Costupdate{ 
+@Package("Material Management") type  Costupdate{  
+Client;
 Orgtrx Org;
 Org;
 User;

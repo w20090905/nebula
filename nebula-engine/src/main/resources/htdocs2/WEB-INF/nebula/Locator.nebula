@@ -1,49 +1,5 @@
-@Package("Import") type  Locator{ 
-Org;
-Bin String;
-Clientname Name;
-Clientvalue String;
-Created Timestamp;
-Createdby Date;
-I_Errormsg MSG;
-I_Isimported YesNo;
-!ID;
-Isactive YesNo;
-Isavailableforallocation YesNo;
-Isavailabletopromise YesNo;
-Isdefault YesNo;
-Product;
-/*TODO Warehouse;*/
-Maxquantity Quantity;
-Minquantity Quantity;
-Orgname Name;
-Orgvalue String;
-Pickingseqno SeqNo;
-Pickinguomname Name;
-Pickinguomsymbol Symbol;
-Picking_Uom Uom;
-Position String;
-Priorityno SeqNo;
-Processed YesNo;
-Processing YesNo;
-Productmaxquantity Quantity;
-Productminquantity Quantity;
-Productname Name;
-Productvalue String;
-Putawayseqno SeqNo;
-Stockinguomname Name;
-Stockinguomsymbol Symbol;
-Stocking_Uom Uom;
-Updated Timestamp;
-Updatedby Date;
-Value String;
-Warehousename Name;
-Warehousevalue String;
-X String;
-Y String;
-Z String;
-}; 
-@Package("Material Management") type  Locator{ 
+@Package("Material Management") type  Locator{  
+Client;
 Org;
 Bin String;
 Created Timestamp;

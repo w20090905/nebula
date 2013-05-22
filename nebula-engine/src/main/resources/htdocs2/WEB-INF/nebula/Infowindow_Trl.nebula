@@ -1,6 +1,7 @@
-@Package("Application Dictionary") type  Infowindow_Trl{ 
+@Package("Application Dictionary") type  Infowindow_Trl{  
+Client;
 !Infowindow;
-!Ad_Language Language;
+*Ad_Language Language;
 Org;
 Created Timestamp;
 Createdby Date;

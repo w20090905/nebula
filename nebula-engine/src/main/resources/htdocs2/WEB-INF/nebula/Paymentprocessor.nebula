@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Paymentprocessor{ 
+@Package("Common or Core Functionality") type  Paymentprocessor{  
+Client;
 Org;
 Sequence;
 Acceptamex YesNo;

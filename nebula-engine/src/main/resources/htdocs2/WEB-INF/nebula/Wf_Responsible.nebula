@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Wf_Responsible{ 
+@Package("Application Dictionary") type  Wf_Responsible{  
+Client;
 Org;
 Role;
 User;

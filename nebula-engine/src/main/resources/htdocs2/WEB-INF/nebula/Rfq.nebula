@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Rfq{ 
+@Package("Common or Core Functionality") type  Rfq{  
+Client;
 Org;
 User;
 Bpartner;

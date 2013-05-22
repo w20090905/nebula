@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Attachmentnote{ 
+@Package("Application Dictionary") type  Attachmentnote{  
+!ID;
 Attachment;
 Client;
 Org;

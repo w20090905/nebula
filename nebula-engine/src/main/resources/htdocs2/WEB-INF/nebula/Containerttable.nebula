@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Containerttable{ 
+@Package("Collaboration Management") type  Containerttable{  
+Client;
 Org;
 !ID;
 Container;

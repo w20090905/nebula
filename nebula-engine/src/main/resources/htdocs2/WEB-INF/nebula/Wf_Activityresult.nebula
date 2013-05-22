@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Wf_Activityresult{ 
+@Package("Application Dictionary") type  Wf_Activityresult{  
+Client;
 Org;
 !ID;
 Wf_Activity;

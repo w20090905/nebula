@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Cashbook_Acct{ 
+@Package("Common or Core Functionality") type  Cashbook_Acct{  
+Client;
 Org;
 Cb_Asset_acct Account;
 Cb_Cashtransfer_acct Account;

@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Acctschema_Default{ 
+@Package("Common or Core Functionality") type  Acctschema_Default{  
+Client;
 Org;
 B_Asset_acct Account;
 B_Expense_acct Account;

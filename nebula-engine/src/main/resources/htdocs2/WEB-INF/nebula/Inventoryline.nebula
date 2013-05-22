@@ -1,4 +1,5 @@
-@Package("Material Management") type  Inventoryline{ 
+@Package("Material Management") type  Inventoryline{  
+Client;
 Orgtrx Org;
 Org;
 Activity;

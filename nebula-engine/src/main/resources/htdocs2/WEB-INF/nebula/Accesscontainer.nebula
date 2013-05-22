@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Accesscontainer{ 
+@Package("Collaboration Management") type  Accesscontainer{  
+Client;
 Org;
 !Accessprofile;
 !Container;

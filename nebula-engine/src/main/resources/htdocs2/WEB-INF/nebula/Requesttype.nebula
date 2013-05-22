@@ -1,4 +1,5 @@
-@Package("Requests") type  Requesttype{ 
+@Package("Requests") type  Requesttype{  
+Client;
 Org;
 Autoduedatedays Count;
 Confidentialtype YesNo;

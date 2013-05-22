@@ -1,4 +1,5 @@
-@Package("Knowledge Management") type  Type{ 
+@Package("Knowledge Management") type  Type{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

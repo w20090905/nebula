@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Bp_Group_acct{ 
+@Package("Common or Core Functionality") type  Bp_Group_acct{  
+Client;
 Org;
 !Acctschema;
 !Bp_Group;

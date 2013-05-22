@@ -1,4 +1,5 @@
-@Package("Assets Management") type  Registrationattribute{ 
+@Package("Assets Management") type  Registrationattribute{  
+Client;
 Org;
 Reference;
 Reference_Value Reference;

@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Preference{ 
+@Package("Application Dictionary") type  Preference{  
+Client;
 Org;
 !ID;
 User;

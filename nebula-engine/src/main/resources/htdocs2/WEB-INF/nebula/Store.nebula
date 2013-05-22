@@ -1,4 +1,5 @@
-@Package("Web") type  Store{ 
+@Package("Web") type  Store{  
+Client;
 Org;
 Role;
 Paymentterm;

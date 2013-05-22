@@ -1,4 +1,5 @@
-@Package("Requests") type  Issuesystem{ 
+@Package("Requests") type  Issuesystem{  
+Client;
 Org;
 Asset;
 Created Timestamp;

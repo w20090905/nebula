@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Charge{ 
+@Package("Common or Core Functionality") type  Charge{  
+Client;
 Org;
 Bpartner;
 !ID;

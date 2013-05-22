@@ -1,4 +1,5 @@
-@Package("General Ledger") type  Journalbatch{ 
+@Package("General Ledger") type  Journalbatch{  
+Client;
 Org;
 Currency;
 Doctype;

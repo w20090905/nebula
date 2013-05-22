@@ -1,6 +1,7 @@
-@Package("Application Dictionary") type  Column_Trl{ 
+@Package("Application Dictionary") type  Column_Trl{  
+Client;
 !Column;
-!Ad_Language Language;
+*Ad_Language Language;
 Org;
 Created Timestamp;
 Createdby Date;

@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Bview_Reportlayer_map{ 
+@Package("Application Dictionary") type  Bview_Reportlayer_map{  
+Bview_Field;
 Bview_Reportlayer;
 !ID;
 Client;

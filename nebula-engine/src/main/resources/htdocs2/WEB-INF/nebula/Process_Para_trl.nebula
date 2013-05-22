@@ -1,5 +1,6 @@
-@Package("Application Dictionary") type  Process_Para_trl{ 
-!Ad_Language Language;
+@Package("Application Dictionary") type  Process_Para_trl{  
+Client;
+*Ad_Language Language;
 Org;
 !Process_Para;
 Created Timestamp;

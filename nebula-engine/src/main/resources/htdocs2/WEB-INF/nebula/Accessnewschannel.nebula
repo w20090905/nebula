@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Accessnewschannel{ 
+@Package("Collaboration Management") type  Accessnewschannel{  
+Client;
 Org;
 !Accessprofile;
 !Newschannel;

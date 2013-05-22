@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Job{ 
+@Package("Common or Core Functionality") type  Job{  
+Client;
 Org;
 Jobcategory;
 !ID;

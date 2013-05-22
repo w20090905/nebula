@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Wf_Eventaudit{ 
+@Package("Application Dictionary") type  Wf_Eventaudit{  
+Client;
 Org;
 Table;
 User;

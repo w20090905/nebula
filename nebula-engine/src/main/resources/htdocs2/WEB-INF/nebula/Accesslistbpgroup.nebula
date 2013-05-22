@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Accesslistbpgroup{ 
+@Package("Collaboration Management") type  Accesslistbpgroup{  
+Client;
 Org;
 !Accessprofile;
 !Bp_Group;

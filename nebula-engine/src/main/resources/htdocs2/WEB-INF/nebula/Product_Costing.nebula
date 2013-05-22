@@ -1,4 +1,5 @@
-@Package("Material Management") type  Product_Costing{ 
+@Package("Material Management") type  Product_Costing{  
+Client;
 Org;
 !Acctschema;
 Costaverage Number;

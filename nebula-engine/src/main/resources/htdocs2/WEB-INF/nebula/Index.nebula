@@ -1,4 +1,5 @@
-@Package("Knowledge Management") type  Index{ 
+@Package("Knowledge Management") type  Index{  
+Client;
 Org;
 Table;
 Webproject;

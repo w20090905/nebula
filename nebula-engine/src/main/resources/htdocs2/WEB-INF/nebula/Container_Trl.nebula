@@ -1,5 +1,6 @@
-@Package("Collaboration Management") type  Container_Trl{ 
-!Ad_Language Language;
+@Package("Collaboration Management") type  Container_Trl{  
+Client;
+*Ad_Language Language;
 Org;
 !Container;
 Containerxml Note;

@@ -1,4 +1,5 @@
-@Package("Knowledge Management") type  Entrycategory{ 
+@Package("Knowledge Management") type  Entrycategory{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

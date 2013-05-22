@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Scheduler{ 
+@Package("Application Dictionary") type  Scheduler{  
+Client;
 Org;
 Process;
 Schedule;

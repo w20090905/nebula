@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Invoicebatchline{ 
+@Package("Common or Core Functionality") type  Invoicebatchline{  
+Client;
 Orgtrx Org;
 Org;
 User;

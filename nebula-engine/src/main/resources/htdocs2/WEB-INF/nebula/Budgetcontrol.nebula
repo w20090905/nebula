@@ -1,4 +1,5 @@
-@Package("General Ledger") type  Budgetcontrol{ 
+@Package("General Ledger") type  Budgetcontrol{  
+Client;
 Org;
 Budgetcontrolscope YesNo;
 Acctschema;

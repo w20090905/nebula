@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Industrycode{ 
+@Package("Common or Core Functionality") type  Industrycode{  
+Client;
 Org;
 !ID;
 Created Timestamp;

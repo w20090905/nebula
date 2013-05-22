@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Wave{ 
+@Package("Common or Core Functionality") type  Wave{  
+Client;
 Org;
 !ID;
 Created Timestamp;
@@ -8,9 +9,4 @@ Isactive YesNo;
 Warehouse;
 Updated Timestamp;
 Updatedby Date;
-}; 
-@Package("Temporary Tables") type  Wave{ 
-Waveline;
-SeqNo;
-ID;
 }; 

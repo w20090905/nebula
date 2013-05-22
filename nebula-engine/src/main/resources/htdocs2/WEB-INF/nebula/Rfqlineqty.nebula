@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Rfqlineqty{ 
+@Package("Common or Core Functionality") type  Rfqlineqty{  
+Client;
 Org;
 Benchmarkprice Price;
 Bestresponseamt Amount;

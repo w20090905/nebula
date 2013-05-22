@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Userqueryline{ 
+@Package("Application Dictionary") type  Userqueryline{  
+Client;
 Org;
 !ID;
 Userquery;

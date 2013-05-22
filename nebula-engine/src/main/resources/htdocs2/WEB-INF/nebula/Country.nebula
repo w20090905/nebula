@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Country{ 
+@Package("Common or Core Functionality") type  Country{  
+Client;
 Ad_Language Language;
 Org;
 !ID;

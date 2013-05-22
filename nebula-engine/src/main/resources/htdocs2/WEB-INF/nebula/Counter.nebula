@@ -1,4 +1,5 @@
-@Package("Web") type  Counter{ 
+@Package("Web") type  Counter{  
+Client;
 Org;
 !User;
 Acceptlanguage Language;

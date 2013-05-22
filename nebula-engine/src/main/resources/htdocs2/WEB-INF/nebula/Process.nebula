@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Process{ 
+@Package("Application Dictionary") type  Process{  
+Bview;
 Client;
 Ctxarea;
 Org;

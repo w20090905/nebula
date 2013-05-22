@@ -1,5 +1,6 @@
-@Package("Application Dictionary") type  Window_Trl{ 
-!Ad_Language Language;
+@Package("Application Dictionary") type  Window_Trl{  
+Client;
+*Ad_Language Language;
 Org;
 !Window;
 Created Timestamp;

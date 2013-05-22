@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Datamigration{ 
+@Package("Application Dictionary") type  Datamigration{  
+Clientinclude Client;
 Client;
 !ID;
 Org;

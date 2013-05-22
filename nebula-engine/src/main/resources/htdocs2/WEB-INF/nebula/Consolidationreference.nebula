@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Consolidationreference{ 
+@Package("Common or Core Functionality") type  Consolidationreference{  
+Client;
 Org;
 !ID;
 Created Timestamp;

@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Invoicepayschedule{ 
+@Package("Common or Core Functionality") type  Invoicepayschedule{  
+Client;
 Org;
 !ID;
 Invoice;

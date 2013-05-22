@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Cash{ 
+@Package("Common or Core Functionality") type  Cash{  
+Client;
 Orgtrx Org;
 Org;
 Beginningbalance Number;

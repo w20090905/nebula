@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Reportview_Col{ 
+@Package("Application Dictionary") type  Reportview_Col{  
+Client;
 Column;
 Org;
 !ID;

@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Subscription_Delivery{ 
+@Package("Common or Core Functionality") type  Subscription_Delivery{  
+Client;
 Org;
 !ID;
 Subscription;

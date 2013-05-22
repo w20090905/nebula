@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Sequence{ 
+@Package("Application Dictionary") type  Sequence{  
+Client;
 Org;
 !ID;
 Created Timestamp;

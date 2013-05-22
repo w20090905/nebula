@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Printform{ 
+@Package("Application Dictionary") type  Printform{  
+Client;
 Org;
 !ID;
 Created Timestamp;

@@ -1,4 +1,5 @@
-@Package("Requests") type  Interestarea{ 
+@Package("Requests") type  Interestarea{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

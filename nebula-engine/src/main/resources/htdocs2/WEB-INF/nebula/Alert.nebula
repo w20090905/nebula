@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Alert{ 
+@Package("Application Dictionary") type  Alert{  
+Alertprocessor;
 !ID;
 Client;
 Org;

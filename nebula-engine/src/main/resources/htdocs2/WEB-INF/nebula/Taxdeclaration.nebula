@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Taxdeclaration{ 
+@Package("Common or Core Functionality") type  Taxdeclaration{  
+Client;
 Org;
 !ID;
 Created Timestamp;

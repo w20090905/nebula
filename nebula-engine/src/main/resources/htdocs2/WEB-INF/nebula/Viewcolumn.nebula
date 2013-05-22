@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Viewcolumn{ 
+@Package("Application Dictionary") type  Viewcolumn{  
+Client;
 Org;
 !ID;
 Viewcomponent;

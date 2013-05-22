@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Schedule{ 
+@Package("Application Dictionary") type  Schedule{  
+Client;
 Org;
 !ID;
 Created Timestamp;

@@ -1,5 +1,6 @@
-@Package("Application Dictionary") type  Wf_Node_trl{ 
-!Ad_Language Language;
+@Package("Application Dictionary") type  Wf_Node_trl{  
+Client;
+*Ad_Language Language;
 Org;
 !Wf_Node;
 Created Timestamp;

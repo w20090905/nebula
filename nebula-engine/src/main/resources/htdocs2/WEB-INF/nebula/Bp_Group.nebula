@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Bp_Group{ 
+@Package("Common or Core Functionality") type  Bp_Group{  
+Client;
 Org;
 Printcolor;
 !ID;

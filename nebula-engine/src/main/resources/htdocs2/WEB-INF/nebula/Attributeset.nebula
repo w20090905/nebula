@@ -1,4 +1,5 @@
-@Package("Material Management") type  Attributeset{ 
+@Package("Material Management") type  Attributeset{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

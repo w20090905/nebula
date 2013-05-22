@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Changelog{ 
+@Package("Application Dictionary") type  Changelog{  
+!ID;
 Client;
 Column;
 Org;

@@ -1,4 +1,5 @@
-@Package("Material Management") type  Movementlinema{ 
+@Package("Material Management") type  Movementlinema{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

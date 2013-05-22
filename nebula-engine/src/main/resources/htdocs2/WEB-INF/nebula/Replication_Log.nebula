@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Replication_Log{ 
+@Package("Application Dictionary") type  Replication_Log{  
+Client;
 Org;
 Replicationtable;
 !ID;

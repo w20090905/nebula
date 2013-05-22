@@ -1,4 +1,5 @@
-@Package("Performance Analysis") type  Colorschema{ 
+@Package("Performance Analysis") type  Colorschema{  
+Client;
 Org;
 Printcolor1 Printcolor;
 Printcolor2 Printcolor;

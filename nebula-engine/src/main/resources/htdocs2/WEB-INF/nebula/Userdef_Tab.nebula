@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Userdef_Tab{ 
+@Package("Application Dictionary") type  Userdef_Tab{  
+Client;
 Org;
 Tab;
 !ID;

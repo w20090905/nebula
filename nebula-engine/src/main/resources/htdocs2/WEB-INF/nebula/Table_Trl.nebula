@@ -1,5 +1,6 @@
-@Package("Application Dictionary") type  Table_Trl{ 
-!Ad_Language Language;
+@Package("Application Dictionary") type  Table_Trl{  
+Client;
+*Ad_Language Language;
 Org;
 !Table;
 Created Timestamp;

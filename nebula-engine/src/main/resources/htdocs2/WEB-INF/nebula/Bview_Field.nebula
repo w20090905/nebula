@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Bview_Field{ 
+@Package("Application Dictionary") type  Bview_Field{  
+!ID;
 Bview;
 Client;
 Org;

@@ -1,4 +1,5 @@
-@Package("Service") type  Resource{ 
+@Package("Service") type  Resource{  
+Client;
 Org;
 User;
 Chargeableqty Quantity;

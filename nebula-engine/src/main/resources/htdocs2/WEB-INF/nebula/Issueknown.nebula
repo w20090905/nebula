@@ -1,4 +1,5 @@
-@Package("Requests") type  Issueknown{ 
+@Package("Requests") type  Issueknown{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

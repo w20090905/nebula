@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Impformat_Row{ 
+@Package("Application Dictionary") type  Impformat_Row{  
+Client;
 Column;
 Impformat;
 !ID;

@@ -1,4 +1,5 @@
-@Package("Multi-Dimensional Cube") type  Accumulation{ 
+@Package("Multi-Dimensional Cube") type  Accumulation{  
+Client;
 Org;
 Balanceaccumulation YesNo;
 Acctschema;

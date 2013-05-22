@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Bp_Relation{ 
+@Package("Common or Core Functionality") type  Bp_Relation{  
+Client;
 Org;
 !ID;
 Bpartnerrelation Bpartner;

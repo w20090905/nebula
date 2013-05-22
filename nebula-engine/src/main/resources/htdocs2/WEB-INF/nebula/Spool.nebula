@@ -1,4 +1,0 @@
-@Package("Temporary Tables") type  Spool{ 
-Msgtext Note;
-SeqNo;
-}; 

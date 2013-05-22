@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Printformatitem{ 
+@Package("Application Dictionary") type  Printformatitem{  
+Bview_Field;
 Client;
 Column;
 Fieldgroup;
@@ -8,7 +9,6 @@ Printfont;
 Printformatchild Printformat;
 !ID;
 Printformat;
-/*TODO Printgraph;*/
 Arcdiameter Number;
 Barcodetype Attr;
 Belowcolumn Number;

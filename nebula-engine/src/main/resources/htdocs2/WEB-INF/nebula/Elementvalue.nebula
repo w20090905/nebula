@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Elementvalue{ 
+@Package("Common or Core Functionality") type  Elementvalue{  
+Client;
 Org;
 Accountsign YesNo;
 Accounttype YesNo;
@@ -23,36 +24,5 @@ Updated Timestamp;
 Updatedby Date;
 Validfrom Date;
 Validto Date;
-Value String;
-}; 
-@Package("Import") type  Elementvalue{ 
-Column;
-Org;
-Accountsign YesNo;
-Accounttype YesNo;
-ID;
-Element;
-Created Timestamp;
-Createdby Date;
-Default_Account Count;
-Description;
-Elementname Count;
-!ID Count;
-I_Errormsg MSG;
-I_Isimported YesNo;
-Isactive YesNo;
-Isdoccontrolled YesNo;
-Issummary YesNo;
-!Name;
-Parentelementvalue Elementvalue;
-Parentvalue String;
-Postactual YesNo;
-Postbudget YesNo;
-Postencumbrance YesNo;
-Poststatistical YesNo;
-Processed YesNo;
-Processing YesNo;
-Updated Timestamp;
-Updatedby Date;
 Value String;
 }; 

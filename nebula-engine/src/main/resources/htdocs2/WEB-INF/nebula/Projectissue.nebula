@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Projectissue{ 
+@Package("Common or Core Functionality") type  Projectissue{  
+Client;
 Org;
 !ID;
 Project;

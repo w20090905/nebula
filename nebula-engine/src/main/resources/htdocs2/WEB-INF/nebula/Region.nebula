@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Region{ 
+@Package("Common or Core Functionality") type  Region{  
+Client;
 Org;
 Country;
 !ID;

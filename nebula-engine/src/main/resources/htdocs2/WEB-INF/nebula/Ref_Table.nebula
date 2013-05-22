@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Ref_Table{ 
+@Package("Application Dictionary") type  Ref_Table{  
+Client;
 Org;
 !Reference;
 Table;

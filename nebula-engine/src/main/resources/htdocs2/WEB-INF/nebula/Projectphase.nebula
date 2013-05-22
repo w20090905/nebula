@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Projectphase{ 
+@Package("Common or Core Functionality") type  Projectphase{  
+Client;
 Org;
 Order;
 Phase;

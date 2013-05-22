@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Bankaccountdoc{ 
+@Package("Common or Core Functionality") type  Bankaccountdoc{  
+Client;
 Org;
 !ID;
 Bankaccount;

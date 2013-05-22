@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Bpartner_Product{ 
+@Package("Common or Core Functionality") type  Bpartner_Product{  
+Client;
 Org;
 !Bpartner;
 Created Timestamp;

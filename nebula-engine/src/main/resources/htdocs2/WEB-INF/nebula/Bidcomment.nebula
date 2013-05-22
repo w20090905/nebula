@@ -1,4 +1,5 @@
-@Package("Marketplace") type  Bidcomment{ 
+@Package("Marketplace") type  Bidcomment{  
+Client;
 Org;
 User;
 !ID;

@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Invoice{ 
+@Package("Common or Core Functionality") type  Invoice{  
+Client;
 Orgtrx Org;
 Org;
 User;
@@ -8,7 +9,6 @@ Bpartnersr Bpartner;
 Bpartner;
 Bpartner_Location;
 Campaign;
-/*TODO Cashline;*/
 Charge;
 Conversiontype;
 Currency;
@@ -16,8 +16,6 @@ Doctypetarget Doctype;
 Doctype;
 !ID;
 Order;
-/*TODO Paymentterm;*/
-/*TODO Payment;*/
 Project;
 Chargeamt Amount;
 Copyfrom YesNo;

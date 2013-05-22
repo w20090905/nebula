@@ -1,5 +1,6 @@
-@Package("Application Dictionary") type  Ref_List_trl{ 
-!Ad_Language Language;
+@Package("Application Dictionary") type  Ref_List_trl{  
+Client;
+*Ad_Language Language;
 Org;
 !Ref_List;
 Created Timestamp;

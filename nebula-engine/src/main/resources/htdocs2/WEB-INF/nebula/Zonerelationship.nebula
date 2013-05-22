@@ -1,4 +1,5 @@
-@Package("Material Management") type  Zonerelationship{ 
+@Package("Material Management") type  Zonerelationship{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

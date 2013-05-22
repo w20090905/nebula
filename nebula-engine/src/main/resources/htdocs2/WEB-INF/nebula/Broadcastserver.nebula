@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Broadcastserver{ 
+@Package("Collaboration Management") type  Broadcastserver{  
+Client;
 Org;
 !ID;
 Webproject;

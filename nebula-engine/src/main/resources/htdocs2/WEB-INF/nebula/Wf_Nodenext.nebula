@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Wf_Nodenext{ 
+@Package("Application Dictionary") type  Wf_Nodenext{  
+Client;
 Org;
 Wf_Next Wf_Node;
 !ID;

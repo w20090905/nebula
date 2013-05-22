@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Periodcontrol{ 
+@Package("Common or Core Functionality") type  Periodcontrol{  
+Client;
 Org;
 !ID;
 Period;

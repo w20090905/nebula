@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  User_Substitute{ 
+@Package("Application Dictionary") type  User_Substitute{  
+Client;
 Org;
 User;
 !ID;

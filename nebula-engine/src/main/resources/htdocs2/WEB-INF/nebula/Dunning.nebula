@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Dunning{ 
+@Package("Common or Core Functionality") type  Dunning{  
+Client;
 Org;
 !ID;
 Createlevelssequentially YesNo;

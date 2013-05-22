@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Accessstage{ 
+@Package("Collaboration Management") type  Accessstage{  
+Client;
 Org;
 !Accessprofile;
 !Cstage;

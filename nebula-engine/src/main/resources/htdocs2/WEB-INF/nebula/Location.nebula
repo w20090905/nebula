@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Location{ 
+@Package("Common or Core Functionality") type  Location{  
+Client;
 Org;
 Address1 String;
 Address2 String;

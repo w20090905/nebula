@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Loginmsg{ 
+@Package("Application Dictionary") type  Loginmsg{  
+Client;
 !ID;
 Org;
 Classname Name;

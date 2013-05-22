@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Dunninglevel{ 
+@Package("Common or Core Functionality") type  Dunninglevel{  
+Client;
 Org;
 !ID;
 Dunning;

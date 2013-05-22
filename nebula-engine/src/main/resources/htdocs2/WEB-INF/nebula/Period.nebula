@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Period{ 
+@Package("Common or Core Functionality") type  Period{  
+Client;
 Org;
 !ID;
 Year;

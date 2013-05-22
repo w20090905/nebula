@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Viewcomponent{ 
+@Package("Application Dictionary") type  Viewcomponent{  
+Client;
 Org;
 Table;
 !ID;

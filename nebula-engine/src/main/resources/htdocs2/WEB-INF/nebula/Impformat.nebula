@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Impformat{ 
+@Package("Application Dictionary") type  Impformat{  
+Client;
 !ID;
 Org;
 Table;
@@ -11,16 +12,4 @@ Isactive YesNo;
 Processing YesNo;
 Updated Timestamp;
 Updatedby Date;
-}; 
-@Package("Temporary Tables") type  Impformat{ 
-Org;
-Binarydata Note;
-Created Timestamp;
-Createdby Date;
-Isactive YesNo;
-!Name;
-!ID;
-Updated Timestamp;
-Updatedby Date;
-Websession String;
 }; 

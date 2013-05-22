@@ -1,4 +1,5 @@
-@Package("Material Management") type  Warehouse{ 
+@Package("Material Management") type  Warehouse{  
+Client;
 Org;
 Location;
 Created Timestamp;

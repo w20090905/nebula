@@ -1,4 +1,5 @@
-@Package("Material Management") type  Workordertransactionlinema{ 
+@Package("Material Management") type  Workordertransactionlinema{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

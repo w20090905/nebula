@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Mediadeploy{ 
+@Package("Collaboration Management") type  Mediadeploy{  
+Client;
 Org;
 !ID;
 Media;

@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Window{ 
+@Package("Application Dictionary") type  Window{  
+Client;
 Color;
 Ctxarea;
 Image;

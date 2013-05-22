@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Tax{ 
+@Package("Common or Core Functionality") type  Tax{  
+Client;
 Org;
 Country;
 Region;

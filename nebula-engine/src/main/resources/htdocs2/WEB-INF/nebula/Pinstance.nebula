@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Pinstance{ 
+@Package("Application Dictionary") type  Pinstance{  
+Client;
 Org;
 !ID;
 Process;

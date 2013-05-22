@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Taxpostal{ 
+@Package("Common or Core Functionality") type  Taxpostal{  
+Client;
 Org;
 !ID;
 Tax;

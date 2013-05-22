@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Webproject_Domain{ 
+@Package("Collaboration Management") type  Webproject_Domain{  
+Client;
 Org;
 Container;
 !ID;

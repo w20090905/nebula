@@ -1,8 +1,8 @@
-@Package("Application Dictionary") type  Column{ 
+@Package("Application Dictionary") type  Column{  
+Client;
 !ID;
 Element;
 Org;
-/*TODO Process;*/
 Reference;
 Reference_Value Reference;
 Table;

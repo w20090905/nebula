@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Bview_Access{ 
+@Package("Application Dictionary") type  Bview_Access{  
+!ID;
 Bview;
 Client;
 Org;

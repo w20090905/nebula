@@ -1,4 +1,5 @@
-@Package("Assets Management") type  Asset{ 
+@Package("Assets Management") type  Asset{  
+Client;
 Org;
 User;
 Asset_Group;

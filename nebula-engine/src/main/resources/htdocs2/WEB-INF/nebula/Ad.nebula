@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Ad{ 
+@Package("Collaboration Management") type  Ad{  
+Client;
 Org;
 Actualclick Number;
 Actualimpression Number;

@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Doctype{ 
+@Package("Common or Core Functionality") type  Doctype{  
+Client;
 Org;
 Printformat;
 Doctypedifference Doctype;

@@ -1,4 +1,5 @@
-@Package("Material Management") type  Demanddetail{ 
+@Package("Material Management") type  Demanddetail{  
+Client;
 Org;
 Orderline;
 Created Timestamp;

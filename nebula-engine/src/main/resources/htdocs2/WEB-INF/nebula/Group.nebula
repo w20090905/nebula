@@ -1,4 +1,5 @@
-@Package("Requests") type  Group{ 
+@Package("Requests") type  Group{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

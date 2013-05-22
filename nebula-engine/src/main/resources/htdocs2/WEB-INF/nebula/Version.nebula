@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Version{ 
+@Package("Application Dictionary") type  Version{  
+Client;
 Org;
 !ID;
 Created Timestamp;

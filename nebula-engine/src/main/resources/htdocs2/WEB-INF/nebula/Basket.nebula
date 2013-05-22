@@ -1,4 +1,5 @@
-@Package("Web") type  Basket{ 
+@Package("Web") type  Basket{  
+!Client;
 Org;
 User;
 Bpartner;

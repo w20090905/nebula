@@ -1,4 +1,5 @@
-@Package("Material Management") type  Package{ 
+@Package("Material Management") type  Package{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

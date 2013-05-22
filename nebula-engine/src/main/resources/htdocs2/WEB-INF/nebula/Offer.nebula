@@ -1,4 +1,5 @@
-@Package("Marketplace") type  Offer{ 
+@Package("Marketplace") type  Offer{  
+Client;
 Org;
 User;
 !ID;

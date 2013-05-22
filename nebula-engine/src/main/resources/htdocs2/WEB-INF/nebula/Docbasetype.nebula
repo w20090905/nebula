@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Docbasetype{ 
+@Package("Common or Core Functionality") type  Docbasetype{  
+Client;
 Org;
 Table;
 Accountingclassname Name;

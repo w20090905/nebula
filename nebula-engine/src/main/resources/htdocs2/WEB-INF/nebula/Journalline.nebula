@@ -1,4 +1,5 @@
-@Package("General Ledger") type  Journalline{ 
+@Package("General Ledger") type  Journalline{  
+Client;
 Org;
 Amtacctcr Amount;
 Amtacctdr Amount;

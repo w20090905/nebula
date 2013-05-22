@@ -1,4 +1,5 @@
-@Package("Web") type  Click{ 
+@Package("Web") type  Click{  
+Client;
 Org;
 !User;
 Acceptlanguage Language;
@@ -11,7 +12,7 @@ Referrer String;
 Remote_Addr URL;
 Remote_Host Host;
 Targeturl URL;
-!Updated Timestamp;
+*Updated Timestamp;
 Updatedby Date;
 Useragent String;
 Clickcount;

@@ -1,4 +1,5 @@
-@Package("Knowledge Management") type  Comment{ 
+@Package("Knowledge Management") type  Comment{  
+Client;
 Org;
 Session;
 Created Timestamp;

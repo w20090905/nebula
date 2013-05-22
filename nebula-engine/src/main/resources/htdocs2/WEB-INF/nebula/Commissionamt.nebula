@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Commissionamt{ 
+@Package("Common or Core Functionality") type  Commissionamt{  
+Client;
 Org;
 Actualqty Quantity;
 !ID;

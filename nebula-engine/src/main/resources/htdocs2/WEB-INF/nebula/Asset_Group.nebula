@@ -1,4 +1,5 @@
-@Package("Assets Management") type  Asset_Group{ 
+@Package("Assets Management") type  Asset_Group{  
+Client;
 Org;
 !ID;
 Created Timestamp;

@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Tab{ 
+@Package("Application Dictionary") type  Tab{  
+Client;
 Columnsortorder Column;
 Columnsortyesno Column;
 Column;

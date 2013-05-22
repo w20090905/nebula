@@ -1,4 +1,5 @@
-@Package("Service") type  Training_Class{ 
+@Package("Service") type  Training_Class{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

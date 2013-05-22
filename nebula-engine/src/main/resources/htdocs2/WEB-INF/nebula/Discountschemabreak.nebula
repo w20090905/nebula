@@ -1,4 +1,5 @@
-@Package("Material Management") type  Discountschemabreak{ 
+@Package("Material Management") type  Discountschemabreak{  
+Client;
 Org;
 Breakdiscount Count;
 Breakvalue Number;

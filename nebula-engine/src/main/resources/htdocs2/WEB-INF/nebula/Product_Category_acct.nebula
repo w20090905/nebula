@@ -1,4 +1,5 @@
-@Package("Material Management") type  Product_Category_acct{ 
+@Package("Material Management") type  Product_Category_acct{  
+Client;
 Org;
 !Acctschema;
 Costinglevel YesNo;

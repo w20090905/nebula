@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Campaign{ 
+@Package("Common or Core Functionality") type  Campaign{  
+Client;
 Org;
 !ID;
 Channel;

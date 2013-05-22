@@ -1,4 +1,5 @@
-@Package("Service") type  Resourceassignment{ 
+@Package("Service") type  Resourceassignment{  
+Client;
 Org;
 Assigndatefrom Date;
 Assigndateto Date;

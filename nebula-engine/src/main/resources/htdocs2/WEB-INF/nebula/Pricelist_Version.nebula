@@ -1,4 +1,5 @@
-@Package("Material Management") type  Pricelist_Version{ 
+@Package("Material Management") type  Pricelist_Version{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

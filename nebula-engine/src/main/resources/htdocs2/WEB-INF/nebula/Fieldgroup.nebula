@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Fieldgroup{ 
+@Package("Application Dictionary") type  Fieldgroup{  
+Client;
 !ID;
 Org;
 Created Timestamp;

@@ -1,5 +1,6 @@
-@Package("Common or Core Functionality") type  Uom_Trl{ 
-!Ad_Language Language;
+@Package("Common or Core Functionality") type  Uom_Trl{  
+Client;
+*Ad_Language Language;
 Org;
 !Uom;
 Created Timestamp;

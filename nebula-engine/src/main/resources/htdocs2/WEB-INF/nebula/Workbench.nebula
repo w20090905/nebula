@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Workbench{ 
+@Package("Application Dictionary") type  Workbench{  
+Client;
 Color;
 Column;
 Image;

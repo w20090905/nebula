@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Orgtype{ 
+@Package("Application Dictionary") type  Orgtype{  
+Client;
 !ID;
 Org;
 Printcolor;

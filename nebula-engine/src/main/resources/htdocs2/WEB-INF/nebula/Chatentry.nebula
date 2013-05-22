@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Chatentry{ 
+@Package("Collaboration Management") type  Chatentry{  
+Client;
 Org;
 User;
 Chatentrygrandparent Chatentry;

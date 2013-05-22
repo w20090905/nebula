@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Taxdeclarationline{ 
+@Package("Common or Core Functionality") type  Taxdeclarationline{  
+Client;
 Org;
 Allocationline;
 Bpartner;

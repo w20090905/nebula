@@ -1,4 +1,5 @@
-@Package("Material Management") type  Attributesetexclude{ 
+@Package("Material Management") type  Attributesetexclude{  
+Client;
 Org;
 Table;
 Created Timestamp;

@@ -1,4 +1,5 @@
-@Package("Material Management") type  Inoutstage{ 
+@Package("Material Management") type  Inoutstage{  
+Client;
 Org;
 User;
 Doctype;

@@ -1,4 +1,5 @@
-@Package("Material Management") type  Movementconfirm{ 
+@Package("Material Management") type  Movementconfirm{  
+Client;
 Org;
 Approvalamt Amount;
 Created Timestamp;

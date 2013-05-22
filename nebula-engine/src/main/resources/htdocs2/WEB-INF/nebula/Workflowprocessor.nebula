@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Workflowprocessor{ 
+@Package("Application Dictionary") type  Workflowprocessor{  
+Client;
 Org;
 Schedule;
 !ID;

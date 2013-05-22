@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Attribute{ 
+@Package("Application Dictionary") type  Attribute{  
+!ID;
 Client;
 Org;
 Reference;
@@ -30,7 +31,8 @@ Vformat String;
 Valuemax String;
 Valuemin String;
 }; 
-@Package("Material Management") type  Attribute{ 
+@Package("Material Management") type  Attribute{  
+Client;
 Org;
 Attributevaluetype YesNo;
 Created Timestamp;

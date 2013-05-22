@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Invoiceschedule{ 
+@Package("Common or Core Functionality") type  Invoiceschedule{  
+Client;
 Org;
 Amt Amount;
 !ID;

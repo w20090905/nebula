@@ -1,4 +1,5 @@
-@Package("Assets Management") type  Asset_Retirement{ 
+@Package("Assets Management") type  Asset_Retirement{  
+Client;
 Org;
 Asset;
 !ID;

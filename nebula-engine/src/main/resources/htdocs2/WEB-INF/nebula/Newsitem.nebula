@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Newsitem{ 
+@Package("Collaboration Management") type  Newsitem{  
+Client;
 Org;
 Author String;
 Newschannel;

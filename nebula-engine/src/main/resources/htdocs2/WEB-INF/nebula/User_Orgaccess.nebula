@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  User_Orgaccess{ 
+@Package("Application Dictionary") type  User_Orgaccess{  
+Client;
 !Org;
 !User;
 Created Timestamp;

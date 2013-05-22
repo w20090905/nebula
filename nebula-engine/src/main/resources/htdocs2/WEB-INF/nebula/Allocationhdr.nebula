@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Allocationhdr{ 
+@Package("Common or Core Functionality") type  Allocationhdr{  
+Client;
 Orgtrx Org;
 Org;
 Approvalamt Amount;

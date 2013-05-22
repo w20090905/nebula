@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Nonbusinessday{ 
+@Package("Common or Core Functionality") type  Nonbusinessday{  
+Client;
 Org;
 Calendar;
 !ID;

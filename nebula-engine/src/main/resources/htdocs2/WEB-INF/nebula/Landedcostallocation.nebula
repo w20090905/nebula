@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Landedcostallocation{ 
+@Package("Common or Core Functionality") type  Landedcostallocation{  
+Client;
 Org;
 Amt Amount;
 Base Number;

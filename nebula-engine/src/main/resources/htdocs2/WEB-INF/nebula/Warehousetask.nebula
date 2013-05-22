@@ -1,4 +1,5 @@
-@Package("Material Management") type  Warehousetask{ 
+@Package("Material Management") type  Warehousetask{  
+Client;
 Org;
 User;
 Approvalamt Amount;

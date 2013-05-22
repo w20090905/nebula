@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Alertrule{ 
+@Package("Application Dictionary") type  Alertrule{  
+!ID;
 Alert;
 Client;
 Org;

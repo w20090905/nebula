@@ -1,5 +1,6 @@
-@Package("Common or Core Functionality") type  Greeting_Trl{ 
-!Ad_Language Language;
+@Package("Common or Core Functionality") type  Greeting_Trl{  
+Client;
+*Ad_Language Language;
 Org;
 !Greeting;
 Created Timestamp;

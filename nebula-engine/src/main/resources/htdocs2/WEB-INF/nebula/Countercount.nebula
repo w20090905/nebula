@@ -1,4 +1,5 @@
-@Package("Web") type  Countercount{ 
+@Package("Web") type  Countercount{  
+Client;
 Org;
 Bpartner;
 Created Timestamp;
@@ -7,7 +8,7 @@ Description;
 Isactive YesNo;
 Name;
 Pageurl URL;
-!Updated Timestamp;
+*Updated Timestamp;
 Updatedby Date;
 ID;
 }; 

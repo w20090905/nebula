@@ -1,4 +1,5 @@
-@Package("Marketplace") type  Topic{ 
+@Package("Marketplace") type  Topic{  
+Client;
 Org;
 Topiccategory;
 Topictype;
@@ -20,7 +21,8 @@ Topicstatus Attr;
 Updated Timestamp;
 Updatedby Date;
 }; 
-@Package("Knowledge Management") type  Topic{ 
+@Package("Knowledge Management") type  Topic{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

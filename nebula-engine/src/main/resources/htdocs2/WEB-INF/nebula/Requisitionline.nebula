@@ -1,4 +1,5 @@
-@Package("Material Management") type  Requisitionline{ 
+@Package("Material Management") type  Requisitionline{  
+Client;
 Org;
 Charge;
 Orderline;

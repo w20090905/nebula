@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Scheduler_Para{ 
+@Package("Application Dictionary") type  Scheduler_Para{  
+Client;
 Org;
 !Process_Para;
 !Scheduler;

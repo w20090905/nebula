@@ -1,10 +1,11 @@
-@Package("Web") type  Mailmsg{ 
+@Package("Web") type  Mailmsg{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;
 Description;
 Isactive YesNo;
-!Mailmsgtype Attr;
+*Mailmsgtype Attr;
 Message MSG;
 Message2 MSG;
 Message3 MSG;

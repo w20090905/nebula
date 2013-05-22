@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Column_Access{ 
+@Package("Application Dictionary") type  Column_Access{  
+Client;
 !Column;
 Org;
 !Role;

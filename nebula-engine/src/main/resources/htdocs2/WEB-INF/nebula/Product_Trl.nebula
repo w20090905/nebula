@@ -1,5 +1,6 @@
-@Package("Material Management") type  Product_Trl{ 
-!Ad_Language Language;
+@Package("Material Management") type  Product_Trl{  
+Client;
+*Ad_Language Language;
 Org;
 Created Timestamp;
 Createdby Date;

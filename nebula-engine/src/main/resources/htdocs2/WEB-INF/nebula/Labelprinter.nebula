@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Labelprinter{ 
+@Package("Application Dictionary") type  Labelprinter{  
+Client;
 !ID;
 Org;
 Created Timestamp;

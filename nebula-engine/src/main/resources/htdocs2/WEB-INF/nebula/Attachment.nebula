@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Attachment{ 
+@Package("Application Dictionary") type  Attachment{  
+!ID;
 Client;
 Org;
 Table;

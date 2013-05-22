@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Webproject{ 
+@Package("Collaboration Management") type  Webproject{  
+Client;
 Org;
 Treecmc Tree;
 Treecmm Tree;

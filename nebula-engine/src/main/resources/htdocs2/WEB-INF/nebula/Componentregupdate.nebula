@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Componentregupdate{ 
+@Package("Application Dictionary") type  Componentregupdate{  
+Client;
 !ID;
 Componentreg;
 Org;

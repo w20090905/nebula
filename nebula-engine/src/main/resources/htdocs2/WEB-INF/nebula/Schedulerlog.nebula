@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Schedulerlog{ 
+@Package("Application Dictionary") type  Schedulerlog{  
+Client;
 Org;
 !ID;
 Scheduler;

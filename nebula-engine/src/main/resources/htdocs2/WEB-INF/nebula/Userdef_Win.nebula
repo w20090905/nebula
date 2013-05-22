@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Userdef_Win{ 
+@Package("Application Dictionary") type  Userdef_Win{  
+Client;
 Ad_Language Language;
 Org;
 Role;

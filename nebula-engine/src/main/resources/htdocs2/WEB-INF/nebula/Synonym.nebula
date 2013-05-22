@@ -1,4 +1,5 @@
-@Package("Knowledge Management") type  Synonym{ 
+@Package("Knowledge Management") type  Synonym{  
+Client;
 Ad_Language Language;
 Org;
 Created Timestamp;

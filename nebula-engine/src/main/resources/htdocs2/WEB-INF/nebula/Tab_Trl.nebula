@@ -1,5 +1,6 @@
-@Package("Application Dictionary") type  Tab_Trl{ 
-!Ad_Language Language;
+@Package("Application Dictionary") type  Tab_Trl{  
+Client;
+*Ad_Language Language;
 Org;
 !Tab;
 Commitwarning Note;

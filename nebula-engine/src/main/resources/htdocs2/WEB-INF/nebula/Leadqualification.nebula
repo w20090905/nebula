@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Leadqualification{ 
+@Package("Common or Core Functionality") type  Leadqualification{  
+Client;
 Org;
 !ID;
 Created Timestamp;

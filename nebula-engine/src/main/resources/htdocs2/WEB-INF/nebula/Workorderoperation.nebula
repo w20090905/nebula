@@ -1,4 +1,5 @@
-@Package("Material Management") type  Workorderoperation{ 
+@Package("Material Management") type  Workorderoperation{  
+Client;
 Orgtrx Org;
 Org;
 Activity;

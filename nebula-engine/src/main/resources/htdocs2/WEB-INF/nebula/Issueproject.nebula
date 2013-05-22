@@ -1,4 +1,5 @@
-@Package("Requests") type  Issueproject{ 
+@Package("Requests") type  Issueproject{  
+Client;
 Org;
 Asset;
 Project;

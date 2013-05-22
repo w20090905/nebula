@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Schedulerrecipient{ 
+@Package("Application Dictionary") type  Schedulerrecipient{  
+Client;
 Org;
 Role;
 !ID;

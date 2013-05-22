@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Doctypecounter{ 
+@Package("Common or Core Functionality") type  Doctypecounter{  
+Client;
 Org;
 !ID;
 Doctype;

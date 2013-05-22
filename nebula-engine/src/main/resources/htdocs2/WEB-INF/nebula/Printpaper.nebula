@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Printpaper{ 
+@Package("Application Dictionary") type  Printpaper{  
+Client;
 Org;
 !ID;
 Code Note;

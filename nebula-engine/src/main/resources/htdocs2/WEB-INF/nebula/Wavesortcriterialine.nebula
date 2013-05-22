@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Wavesortcriterialine{ 
+@Package("Common or Core Functionality") type  Wavesortcriterialine{  
+Client;
 Infocolumn;
 Org;
 !ID;

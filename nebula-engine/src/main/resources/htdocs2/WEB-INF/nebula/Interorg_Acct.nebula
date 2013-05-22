@@ -1,5 +1,6 @@
-@Package("Common or Core Functionality") type  Interorg_Acct{ 
-!Orgto Org;
+@Package("Common or Core Functionality") type  Interorg_Acct{  
+Client;
+*Orgto Org;
 !Org;
 !Acctschema;
 Created Timestamp;

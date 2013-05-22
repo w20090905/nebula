@@ -1,4 +1,5 @@
-@Package("Material Management") type  Movement{ 
+@Package("Material Management") type  Movement{  
+Client;
 Orgtrx Org;
 Org;
 Approvalamt Amount;

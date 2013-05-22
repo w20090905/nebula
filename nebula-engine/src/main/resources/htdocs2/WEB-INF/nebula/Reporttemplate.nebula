@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Reporttemplate{ 
+@Package("Application Dictionary") type  Reporttemplate{  
+Bview;
 Client;
 Org;
 !ID;

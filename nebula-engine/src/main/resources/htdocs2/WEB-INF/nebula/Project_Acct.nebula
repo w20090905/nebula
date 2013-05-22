@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Project_Acct{ 
+@Package("Common or Core Functionality") type  Project_Acct{  
+Client;
 Org;
 !Acctschema;
 !Project;

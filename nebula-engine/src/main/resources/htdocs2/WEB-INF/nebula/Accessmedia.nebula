@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Accessmedia{ 
+@Package("Collaboration Management") type  Accessmedia{  
+Client;
 Org;
 !Accessprofile;
 !Media;

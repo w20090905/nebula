@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Acctschema_Gl{ 
+@Package("Common or Core Functionality") type  Acctschema_Gl{  
+Client;
 Org;
 !Acctschema;
 Commitmentoffset_Acct Account;

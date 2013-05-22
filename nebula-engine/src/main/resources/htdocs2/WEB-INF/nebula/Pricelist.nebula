@@ -1,4 +1,5 @@
-@Package("Material Management") type  Pricelist{ 
+@Package("Material Management") type  Pricelist{  
+Client;
 Org;
 Basepricelist Pricelist;
 Currency;

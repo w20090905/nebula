@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Landedcost{ 
+@Package("Common or Core Functionality") type  Landedcost{  
+Client;
 Org;
 Invoiceline;
 !ID;

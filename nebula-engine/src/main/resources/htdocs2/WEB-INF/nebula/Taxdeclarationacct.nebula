@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Taxdeclarationacct{ 
+@Package("Common or Core Functionality") type  Taxdeclarationacct{  
+Client;
 Org;
 Acctschema;
 !ID;

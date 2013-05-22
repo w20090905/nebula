@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Migrationstep{ 
+@Package("Application Dictionary") type  Migrationstep{  
+Client;
 !ID;
 Org;
 Version;

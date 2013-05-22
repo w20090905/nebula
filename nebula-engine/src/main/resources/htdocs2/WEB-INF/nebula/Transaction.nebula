@@ -1,4 +1,5 @@
-@Package("Material Management") type  Transaction{ 
+@Package("Material Management") type  Transaction{  
+Client;
 Org;
 Projectissue;
 Created Timestamp;
@@ -17,35 +18,6 @@ Workordertransactionline;
 Movementdate Date;
 Movementqty Quantity;
 Movementtype Attr;
-Updated Timestamp;
-Updatedby Date;
-}; 
-@Package("Temporary Tables") type  Transaction{ 
-Org;
-!Pinstance;
-Projectissue;
-Project;
-Created Timestamp;
-Createdby Date;
-Isactive YesNo;
-Attributesetinstance;
-Inoutline;
-Inout;
-Inventoryline;
-Inventory;
-Locator;
-Movementline;
-Movement;
-!Product;
-Productionline;
-Production;
-!ID;
-Movementdate Date;
-Movementqty Quantity;
-Movementtype Attr;
-Search_Inout Inout;
-Search_Invoice Invoice;
-Search_Order Order;
 Updated Timestamp;
 Updatedby Date;
 }; 

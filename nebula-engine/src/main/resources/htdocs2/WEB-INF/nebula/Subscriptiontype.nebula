@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Subscriptiontype{ 
+@Package("Common or Core Functionality") type  Subscriptiontype{  
+Client;
 Org;
 !ID;
 Created Timestamp;

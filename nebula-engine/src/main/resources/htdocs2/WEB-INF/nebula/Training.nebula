@@ -1,4 +1,5 @@
-@Package("Service") type  Training{ 
+@Package("Service") type  Training{  
+Client;
 Org;
 Taxcategory;
 Uom;

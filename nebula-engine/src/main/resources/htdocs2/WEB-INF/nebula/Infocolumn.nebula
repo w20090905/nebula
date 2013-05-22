@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Infocolumn{ 
+@Package("Application Dictionary") type  Infocolumn{  
+Client;
 Element;
 !ID;
 Infowindow;

@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Uom{ 
+@Package("Common or Core Functionality") type  Uom{  
+Client;
 Org;
 !ID;
 Costingprecision Precision;

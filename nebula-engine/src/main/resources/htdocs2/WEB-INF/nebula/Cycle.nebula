@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Cycle{ 
+@Package("Common or Core Functionality") type  Cycle{  
+Client;
 Org;
 Currency;
 !ID;

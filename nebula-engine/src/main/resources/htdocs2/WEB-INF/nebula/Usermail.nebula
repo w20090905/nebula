@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Usermail{ 
+@Package("Application Dictionary") type  Usermail{  
+Client;
 Org;
 !ID;
 User;

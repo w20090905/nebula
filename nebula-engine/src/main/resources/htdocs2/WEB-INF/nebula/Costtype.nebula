@@ -1,4 +1,5 @@
-@Package("Material Management") type  Costtype{ 
+@Package("Material Management") type  Costtype{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

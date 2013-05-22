@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Dunningrunentry{ 
+@Package("Common or Core Functionality") type  Dunningrunentry{  
+Client;
 Org;
 User;
 Amt Amount;

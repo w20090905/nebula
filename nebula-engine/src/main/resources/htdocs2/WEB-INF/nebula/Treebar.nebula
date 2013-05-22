@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Treebar{ 
+@Package("Application Dictionary") type  Treebar{  
+Client;
 Org;
 !Tree;
 !User;

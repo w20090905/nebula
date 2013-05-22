@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Ref_List{ 
+@Package("Application Dictionary") type  Ref_List{  
+Client;
 Org;
 !ID;
 Reference;

@@ -1,4 +1,5 @@
-@Package("Service") type  Resourcetype{ 
+@Package("Service") type  Resourcetype{  
+Client;
 Org;
 Allowuomfractions YesNo;
 Taxcategory;

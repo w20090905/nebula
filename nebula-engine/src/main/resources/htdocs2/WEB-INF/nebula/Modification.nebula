@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Modification{ 
+@Package("Application Dictionary") type  Modification{  
+Client;
 !ID;
 Org;
 Version;

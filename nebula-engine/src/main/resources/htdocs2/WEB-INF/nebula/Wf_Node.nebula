@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Wf_Node{ 
+@Package("Application Dictionary") type  Wf_Node{  
+Client;
 Column;
 Form;
 Image;

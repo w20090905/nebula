@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Wavesortcriteria{ 
+@Package("Common or Core Functionality") type  Wavesortcriteria{  
+Client;
 Org;
 !ID;
 Created Timestamp;

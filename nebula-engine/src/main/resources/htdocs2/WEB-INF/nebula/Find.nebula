@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Find{ 
+@Package("Application Dictionary") type  Find{  
+Client;
 Column;
 !ID;
 Org;

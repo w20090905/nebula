@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Rfq_Topic{ 
+@Package("Common or Core Functionality") type  Rfq_Topic{  
+Client;
 Org;
 Printformat;
 !ID;

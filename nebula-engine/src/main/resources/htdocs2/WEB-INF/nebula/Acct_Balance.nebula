@@ -1,4 +1,5 @@
-@Package("Multi-Dimensional Cube") type  Acct_Balance{ 
+@Package("Multi-Dimensional Cube") type  Acct_Balance{  
+Client;
 Orgtrx Org;
 Org;
 Account Elementvalue;

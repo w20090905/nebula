@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Querylog{ 
+@Package("Application Dictionary") type  Querylog{  
+Client;
 Org;
 !ID;
 Role;
@@ -12,4 +13,3 @@ Recordcount Count;
 Updated Timestamp;
 Updatedby Date;
 Whereclause Note;
-}; 

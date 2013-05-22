@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Printformat{ 
+@Package("Application Dictionary") type  Printformat{  
+Bview;
 Client;
 Org;
 Printcolor;

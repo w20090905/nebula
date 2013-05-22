@@ -1,4 +1,5 @@
-@Package("Material Management") type  Mmstrategysetline{ 
+@Package("Material Management") type  Mmstrategysetline{  
+Client;
 Org;
 Bp_Group;
 Bpartner;

@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Client{ 
+@Package("Application Dictionary") type  Client{  
+!ID;
 Ad_Language Language;
 Org;
 Autoarchive YesNo;

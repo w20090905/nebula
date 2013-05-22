@@ -1,4 +1,5 @@
-@Package("Material Management") type  Costelement{ 
+@Package("Material Management") type  Costelement{  
+Client;
 Org;
 Costelementtype YesNo;
 Costingmethod YesNo;

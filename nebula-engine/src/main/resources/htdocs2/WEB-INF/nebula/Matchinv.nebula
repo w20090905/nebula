@@ -1,4 +1,5 @@
-@Package("Material Management") type  Matchinv{ 
+@Package("Material Management") type  Matchinv{  
+Client;
 Orgtrx Org;
 Org;
 Activity;

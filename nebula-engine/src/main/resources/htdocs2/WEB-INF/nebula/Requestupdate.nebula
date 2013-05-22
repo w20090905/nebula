@@ -1,4 +1,5 @@
-@Package("Requests") type  Requestupdate{ 
+@Package("Requests") type  Requestupdate{  
+Client;
 Org;
 Confidentialtypeentry YesNo;
 Created Timestamp;

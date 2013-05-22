@@ -1,4 +1,5 @@
-@Package("Marketplace") type  Topictype{ 
+@Package("Marketplace") type  Topictype{  
+Client;
 Org;
 Auctiontype YesNo;
 !ID;

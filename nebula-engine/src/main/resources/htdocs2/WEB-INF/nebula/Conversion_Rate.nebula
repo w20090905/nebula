@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Conversion_Rate{ 
+@Package("Common or Core Functionality") type  Conversion_Rate{  
+Client;
 Org;
 Conversiontype;
 !ID;
@@ -9,31 +10,6 @@ Createdby Date;
 Dividerate Rate;
 Isactive YesNo;
 Multiplyrate Rate;
-Updated Timestamp;
-Updatedby Date;
-Validfrom Date;
-Validto Date;
-}; 
-@Package("Import") type  Conversion_Rate{ 
-Org;
-Conversiontype;
-ID;
-Currency;
-Currency_To Currency;
-Conversiontypevalue String;
-Createreciprocalrate YesNo;
-Created Timestamp;
-Createdby Date;
-Dividerate Rate;
-Iso_Code Code;
-Iso_Code_to YesNo;
-!ID Count;
-I_Errormsg MSG;
-I_Isimported YesNo;
-Isactive YesNo;
-Multiplyrate Rate;
-Processed YesNo;
-Processing YesNo;
 Updated Timestamp;
 Updatedby Date;
 Validfrom Date;

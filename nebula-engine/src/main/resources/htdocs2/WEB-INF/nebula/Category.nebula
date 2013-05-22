@@ -1,4 +1,5 @@
-@Package("General Ledger") type  Category{ 
+@Package("General Ledger") type  Category{  
+Client;
 Org;
 Categorytype YesNo;
 Created Timestamp;
@@ -12,7 +13,8 @@ Isdefault YesNo;
 Updated Timestamp;
 Updatedby Date;
 }; 
-@Package("Knowledge Management") type  Category{ 
+@Package("Knowledge Management") type  Category{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;
@@ -24,7 +26,8 @@ Isactive YesNo;
 Updated Timestamp;
 Updatedby Date;
 }; 
-@Package("Requests") type  Category{ 
+@Package("Requests") type  Category{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

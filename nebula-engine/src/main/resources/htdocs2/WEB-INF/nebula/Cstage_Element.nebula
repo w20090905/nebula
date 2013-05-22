@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Cstage_Element{ 
+@Package("Collaboration Management") type  Cstage_Element{  
+Client;
 Org;
 !ID;
 Cstage;

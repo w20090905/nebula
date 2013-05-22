@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Salesregion{ 
+@Package("Common or Core Functionality") type  Salesregion{  
+Client;
 Org;
 !ID;
 Created Timestamp;

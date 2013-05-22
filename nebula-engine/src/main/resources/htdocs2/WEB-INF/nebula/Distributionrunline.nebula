@@ -1,4 +1,5 @@
-@Package("Material Management") type  Distributionrunline{ 
+@Package("Material Management") type  Distributionrunline{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Tree{ 
+@Package("Application Dictionary") type  Tree{  
+Client;
 Org;
 Table;
 !ID;

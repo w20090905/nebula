@@ -1,4 +1,5 @@
-@Package("Material Management") type  Changerequest{ 
+@Package("Material Management") type  Changerequest{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

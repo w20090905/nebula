@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Template{ 
+@Package("Collaboration Management") type  Template{  
+Client;
 Org;
 !ID;
 Webproject;

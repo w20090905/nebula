@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Val_Rule{ 
+@Package("Application Dictionary") type  Val_Rule{  
+Client;
 Org;
 !ID;
 Code Note;

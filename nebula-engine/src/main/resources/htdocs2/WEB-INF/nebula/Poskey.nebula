@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Poskey{ 
+@Package("Common or Core Functionality") type  Poskey{  
+Client;
 Org;
 Printcolor;
 Poskeylayout;

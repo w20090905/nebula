@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Payselection{ 
+@Package("Common or Core Functionality") type  Payselection{  
+Client;
 Org;
 Bankaccount;
 !ID;

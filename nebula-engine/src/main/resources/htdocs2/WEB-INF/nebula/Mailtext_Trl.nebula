@@ -1,5 +1,6 @@
-@Package("Requests") type  Mailtext_Trl{ 
-!Ad_Language Language;
+@Package("Requests") type  Mailtext_Trl{  
+Client;
+*Ad_Language Language;
 Org;
 Created Timestamp;
 Createdby Date;

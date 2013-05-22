@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Media{ 
+@Package("Collaboration Management") type  Media{  
+Client;
 Image;
 Org;
 !ID;

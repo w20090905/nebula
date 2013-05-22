@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Bpartner_Location{ 
+@Package("Common or Core Functionality") type  Bpartner_Location{  
+Client;
 Org;
 Bpartner;
 !ID;

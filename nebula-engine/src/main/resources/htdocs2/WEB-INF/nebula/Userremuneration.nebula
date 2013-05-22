@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Userremuneration{ 
+@Package("Common or Core Functionality") type  Userremuneration{  
+Client;
 Org;
 User;
 Remuneration;

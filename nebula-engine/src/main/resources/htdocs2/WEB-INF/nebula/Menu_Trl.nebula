@@ -1,5 +1,6 @@
-@Package("Application Dictionary") type  Menu_Trl{ 
-!Ad_Language Language;
+@Package("Application Dictionary") type  Menu_Trl{  
+Client;
+*Ad_Language Language;
 !Menu;
 Org;
 Created Timestamp;

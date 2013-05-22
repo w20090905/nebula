@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Paymentterm{ 
+@Package("Common or Core Functionality") type  Paymentterm{  
+Client;
 Org;
 Afterdelivery YesNo;
 !ID;

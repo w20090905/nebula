@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  User_Roles{ 
+@Package("Application Dictionary") type  User_Roles{  
+Client;
 Org;
 !Role;
 !User;

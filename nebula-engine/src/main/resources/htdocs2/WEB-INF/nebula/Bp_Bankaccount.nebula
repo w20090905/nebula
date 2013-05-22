@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Bp_Bankaccount{ 
+@Package("Common or Core Functionality") type  Bp_Bankaccount{  
+Client;
 Org;
 User;
 A_City Name;
@@ -6,7 +7,7 @@ A_Country Name;
 A_Email Email;
 Ident_Dl String;
 Ident_Ssn SSN;
-!A_Name Name;
+*A_Name Name;
 A_State Name;
 A_Street Name;
 A_Zip Zip;

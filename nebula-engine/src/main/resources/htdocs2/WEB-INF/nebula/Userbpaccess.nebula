@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Userbpaccess{ 
+@Package("Application Dictionary") type  Userbpaccess{  
+Client;
 Org;
 !ID;
 User;

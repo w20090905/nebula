@@ -1,4 +1,5 @@
-@Package("Material Management") type  Forecastline{ 
+@Package("Material Management") type  Forecastline{  
+Client;
 Org;
 Period;
 Created Timestamp;

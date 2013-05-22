@@ -1,4 +1,5 @@
-@Package("Material Management") type  Productprice{ 
+@Package("Material Management") type  Productprice{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

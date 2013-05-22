@@ -1,4 +1,5 @@
-@Package("Knowledge Management") type  Entry{ 
+@Package("Knowledge Management") type  Entry{  
+Client;
 Org;
 Session;
 Created Timestamp;

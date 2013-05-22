@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Wf_Block{ 
+@Package("Application Dictionary") type  Wf_Block{  
+Client;
 Org;
 !ID;
 Workflow;

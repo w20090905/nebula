@@ -1,4 +1,5 @@
-@Package("Material Management") type  Product_Po{ 
+@Package("Material Management") type  Product_Po{  
+Client;
 Org;
 !Bpartner;
 Currency;

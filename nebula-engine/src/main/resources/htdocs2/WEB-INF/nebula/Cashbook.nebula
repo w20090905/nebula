@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Cashbook{ 
+@Package("Common or Core Functionality") type  Cashbook{  
+Client;
 Org;
 !ID;
 Currency;

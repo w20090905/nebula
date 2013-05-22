@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Greeting{ 
+@Package("Common or Core Functionality") type  Greeting{  
+Client;
 Org;
 !ID;
 Created Timestamp;

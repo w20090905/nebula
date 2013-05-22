@@ -1,4 +1,5 @@
-@Package("Material Management") type  Inout{ 
+@Package("Material Management") type  Inout{  
+Client;
 Orgtrx Org;
 Org;
 User;

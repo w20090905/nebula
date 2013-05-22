@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Lead{ 
+@Package("Common or Core Functionality") type  Lead{  
+Client;
 Org;
 User;
 Address1 String;
@@ -45,7 +46,6 @@ Postal PostalCode;
 Postal_Add PostalCode;
 Processed YesNo;
 Interestarea;
-/*TODO Request;*/
 Source;
 Status;
 Regionname Name;

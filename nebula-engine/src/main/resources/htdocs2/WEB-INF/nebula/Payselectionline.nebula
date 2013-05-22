@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Payselectionline{ 
+@Package("Common or Core Functionality") type  Payselectionline{  
+Client;
 Org;
 Invoice;
 Payselectioncheck;

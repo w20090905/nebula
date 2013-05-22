@@ -1,5 +1,6 @@
-@Package("Application Dictionary") type  Message_Trl{ 
-!Ad_Language Language;
+@Package("Application Dictionary") type  Message_Trl{  
+Client;
+*Ad_Language Language;
 !Message;
 Org;
 Created Timestamp;

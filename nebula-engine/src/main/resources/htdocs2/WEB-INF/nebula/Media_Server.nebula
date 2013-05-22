@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Media_Server{ 
+@Package("Collaboration Management") type  Media_Server{  
+Client;
 Org;
 !ID;
 Webproject;

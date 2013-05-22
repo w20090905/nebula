@@ -1,4 +1,5 @@
-@Package("Assets Management") type  Registrationproduct{ 
+@Package("Assets Management") type  Registrationproduct{  
+Client;
 Org;
 !Registrationattribute;
 Created Timestamp;

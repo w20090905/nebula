@@ -1,4 +1,5 @@
-@Package("Web") type  Clickcount{ 
+@Package("Web") type  Clickcount{  
+Client;
 Org;
 !Bpartner;
 Created Timestamp;

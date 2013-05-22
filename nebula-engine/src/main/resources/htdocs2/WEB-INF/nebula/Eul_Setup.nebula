@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Eul_Setup{ 
+@Package("Application Dictionary") type  Eul_Setup{  
+Client;
 !ID;
 Org;
 Createeuluser YesNo;

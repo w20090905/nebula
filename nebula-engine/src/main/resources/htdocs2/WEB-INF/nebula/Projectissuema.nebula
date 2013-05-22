@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Projectissuema{ 
+@Package("Common or Core Functionality") type  Projectissuema{  
+Client;
 Org;
 !Projectissue;
 Created Timestamp;

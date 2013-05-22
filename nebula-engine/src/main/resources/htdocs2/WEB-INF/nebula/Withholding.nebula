@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Withholding{ 
+@Package("Common or Core Functionality") type  Withholding{  
+Client;
 Org;
 Beneficiary Bpartner;
 Paymentterm;

@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Invoiceline{ 
+@Package("Common or Core Functionality") type  Invoiceline{  
+Client;
 Orgtrx Org;
 Org;
 Asset;
@@ -40,6 +41,6 @@ Resourceassignment;
 Taxamt Amount;
 Updated Timestamp;
 Updatedby Date;
-!User1 Elementvalue;
+*User1 Elementvalue;
 User2 Elementvalue;
 }; 

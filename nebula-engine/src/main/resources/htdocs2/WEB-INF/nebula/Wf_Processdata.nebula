@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Wf_Processdata{ 
+@Package("Application Dictionary") type  Wf_Processdata{  
+Client;
 Org;
 !ID;
 Wf_Process;

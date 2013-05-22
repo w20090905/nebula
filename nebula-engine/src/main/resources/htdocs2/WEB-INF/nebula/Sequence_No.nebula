@@ -1,7 +1,8 @@
-@Package("Application Dictionary") type  Sequence_No{ 
+@Package("Application Dictionary") type  Sequence_No{  
+Client;
 Org;
 !Sequence;
-!Calendaryear String;
+*Calendaryear String;
 Created Timestamp;
 Createdby Date;
 Currentnext Number;

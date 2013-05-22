@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Workflow_Access{ 
+@Package("Application Dictionary") type  Workflow_Access{  
+Client;
 Org;
 !Role;
 !Workflow;

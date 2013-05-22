@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Issue{ 
+@Package("Application Dictionary") type  Issue{  
+Client;
 Form;
 !ID;
 Org;

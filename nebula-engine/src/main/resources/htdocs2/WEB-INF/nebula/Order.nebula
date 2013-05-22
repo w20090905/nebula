@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Order{ 
+@Package("Common or Core Functionality") type  Order{  
+Client;
 Orgtrx Org;
 Org;
 User;
@@ -11,15 +12,12 @@ Bpartnersr Bpartner;
 Bpartner;
 Bpartner_Location;
 Campaign;
-/*TODO Cashline;*/
 Charge;
 Conversiontype;
 Currency;
 Doctypetarget Doctype;
 Doctype;
 !ID;
-/*TODO Paymentterm;*/
-/*TODO Payment;*/
 Project;
 Chargeamt Amount;
 Copyfrom YesNo;
@@ -58,8 +56,6 @@ Rmacategory;
 Returnpolicy;
 Shipper;
 Warehouse;
-/*TODO Orig_Inout Inout;*/
-/*TODO Orig_Order Order;*/
 Poreference String;
 Paymentrule YesNo;
 Posted YesNo;

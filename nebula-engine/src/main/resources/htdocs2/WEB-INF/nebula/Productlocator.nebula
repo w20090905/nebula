@@ -1,4 +1,5 @@
-@Package("Material Management") type  Productlocator{ 
+@Package("Material Management") type  Productlocator{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

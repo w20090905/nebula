@@ -1,7 +1,7 @@
-@Package("Application Dictionary") type  Workflow{ 
+@Package("Application Dictionary") type  Workflow{  
+Client;
 Org;
 Table;
-/*TODO Wf_Node;*/
 Wf_Responsible;
 Workflowprocessor;
 !ID;

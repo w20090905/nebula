@@ -1,5 +1,6 @@
-@Package("Application Dictionary") type  Language{ 
-!Ad_Language Language;
+@Package("Application Dictionary") type  Language{  
+Client;
+*Ad_Language Language;
 ID;
 Org;
 Countrycode Attr;

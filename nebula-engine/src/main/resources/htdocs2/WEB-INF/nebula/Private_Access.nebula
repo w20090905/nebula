@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Private_Access{ 
+@Package("Application Dictionary") type  Private_Access{  
+Client;
 Org;
 !Table;
 !User;

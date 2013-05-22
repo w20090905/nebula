@@ -1,4 +1,5 @@
-@Package("Assets Management") type  Registrationvalue{ 
+@Package("Assets Management") type  Registrationvalue{  
+Client;
 Org;
 !Registrationattribute;
 !Registration;

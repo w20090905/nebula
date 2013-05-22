@@ -1,4 +1,5 @@
-@Package("Material Management") type  Operationresource{ 
+@Package("Material Management") type  Operationresource{  
+Client;
 Org;
 Asset;
 Job;

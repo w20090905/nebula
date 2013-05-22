@@ -1,4 +1,5 @@
-@Package("Material Management") type  Requisition{ 
+@Package("Material Management") type  Requisition{  
+Client;
 Org;
 User;
 Doctype;

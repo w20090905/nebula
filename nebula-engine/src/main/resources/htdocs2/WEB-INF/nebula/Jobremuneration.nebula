@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Jobremuneration{ 
+@Package("Common or Core Functionality") type  Jobremuneration{  
+Client;
 Org;
 !ID;
 Job;

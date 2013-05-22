@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Cashline{ 
+@Package("Common or Core Functionality") type  Cashline{  
+Client;
 Orgtrx Org;
 Org;
 Amount;

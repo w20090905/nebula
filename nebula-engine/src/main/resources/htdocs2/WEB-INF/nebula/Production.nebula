@@ -1,4 +1,5 @@
-@Package("Material Management") type  Production{ 
+@Package("Material Management") type  Production{  
+Client;
 Orgtrx Org;
 Org;
 Activity;

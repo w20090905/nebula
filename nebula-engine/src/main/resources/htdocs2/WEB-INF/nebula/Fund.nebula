@@ -1,4 +1,5 @@
-@Package("General Ledger") type  Fund{ 
+@Package("General Ledger") type  Fund{  
+Client;
 Org;
 Amt Amount;
 Acctschema;

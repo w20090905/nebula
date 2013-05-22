@@ -1,5 +1,6 @@
-@Package("Application Dictionary") type  Printlabelline_Trl{ 
-!Ad_Language Language;
+@Package("Application Dictionary") type  Printlabelline_Trl{  
+Client;
+*Ad_Language Language;
 Org;
 !Printlabelline;
 Created Timestamp;

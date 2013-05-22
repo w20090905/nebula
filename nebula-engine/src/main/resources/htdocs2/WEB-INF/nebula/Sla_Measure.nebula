@@ -1,4 +1,5 @@
-@Package("Performance Analysis") type  Sla_Measure{ 
+@Package("Performance Analysis") type  Sla_Measure{  
+Client;
 Org;
 Table;
 Created Timestamp;

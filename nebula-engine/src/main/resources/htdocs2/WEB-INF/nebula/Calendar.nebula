@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Calendar{ 
+@Package("Common or Core Functionality") type  Calendar{  
+Client;
 Org;
 !ID;
 Created Timestamp;

@@ -1,4 +1,5 @@
-@Package("Material Management") type  Costdetail{ 
+@Package("Material Management") type  Costdetail{  
+Client;
 Org;
 Amt Amount;
 Acctschema;

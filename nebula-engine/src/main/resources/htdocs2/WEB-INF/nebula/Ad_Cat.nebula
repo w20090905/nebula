@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Ad_Cat{ 
+@Package("Collaboration Management") type  Ad_Cat{  
+Client;
 Org;
 !ID;
 Webproject;

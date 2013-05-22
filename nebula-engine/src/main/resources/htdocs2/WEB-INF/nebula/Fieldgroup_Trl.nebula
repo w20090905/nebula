@@ -1,6 +1,7 @@
-@Package("Application Dictionary") type  Fieldgroup_Trl{ 
+@Package("Application Dictionary") type  Fieldgroup_Trl{  
+Client;
 !Fieldgroup;
-!Ad_Language Language;
+*Ad_Language Language;
 Org;
 Created Timestamp;
 Createdby Date;

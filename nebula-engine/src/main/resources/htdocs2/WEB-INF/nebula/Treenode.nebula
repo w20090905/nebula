@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Treenode{ 
+@Package("Application Dictionary") type  Treenode{  
+Client;
 Org;
 !Tree;
 Created Timestamp;

@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Orderline{ 
+@Package("Common or Core Functionality") type  Orderline{  
+Client;
 Orgtrx Org;
 Org;
 Activity;
@@ -31,8 +32,6 @@ Attributesetinstance;
 Product;
 Shipper;
 Warehouse;
-/*TODO Orig_Inoutline Inoutline;*/
-/*TODO Orig_Orderline Orderline;*/
 Priceactual Price;
 Pricecost Number;
 Priceentered Price;

@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Process_Para{ 
+@Package("Application Dictionary") type  Process_Para{  
+Bview_Field;
 Client;
 Element;
 Org;

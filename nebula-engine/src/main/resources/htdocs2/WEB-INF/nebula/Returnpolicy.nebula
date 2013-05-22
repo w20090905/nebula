@@ -1,4 +1,5 @@
-@Package("Material Management") type  Returnpolicy{ 
+@Package("Material Management") type  Returnpolicy{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

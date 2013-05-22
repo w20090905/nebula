@@ -1,4 +1,5 @@
-@Package("Material Management") type  Mmrule{ 
+@Package("Material Management") type  Mmrule{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

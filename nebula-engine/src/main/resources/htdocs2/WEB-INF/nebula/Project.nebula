@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Project{ 
+@Package("Common or Core Functionality") type  Project{  
+Client;
 Org;
 User;
 Bpartnersr Bpartner;

@@ -1,4 +1,5 @@
-@Package("Knowledge Management") type  Indexstop{ 
+@Package("Knowledge Management") type  Indexstop{  
+Client;
 Org;
 Webproject;
 Doctype;

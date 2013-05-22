@@ -1,4 +1,5 @@
-@Package("Assets Management") type  Asset_Delivery{ 
+@Package("Assets Management") type  Asset_Delivery{  
+Client;
 Org;
 User;
 !ID;

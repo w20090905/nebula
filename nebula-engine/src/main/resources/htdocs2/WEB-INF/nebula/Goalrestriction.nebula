@@ -1,4 +1,5 @@
-@Package("Performance Analysis") type  Goalrestriction{ 
+@Package("Performance Analysis") type  Goalrestriction{  
+Client;
 Org;
 Bp_Group;
 Bpartner;

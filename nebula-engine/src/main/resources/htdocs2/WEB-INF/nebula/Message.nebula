@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Message{ 
+@Package("Application Dictionary") type  Message{  
+Client;
 !ID;
 Org;
 Created Timestamp;

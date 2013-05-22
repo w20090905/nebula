@@ -1,4 +1,5 @@
-@Package("Marketplace") type  Seller{ 
+@Package("Marketplace") type  Seller{  
+Client;
 Org;
 !User;
 Created Timestamp;

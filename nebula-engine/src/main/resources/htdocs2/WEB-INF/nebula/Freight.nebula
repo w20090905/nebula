@@ -1,4 +1,5 @@
-@Package("Material Management") type  Freight{ 
+@Package("Material Management") type  Freight{  
+Client;
 Org;
 Country;
 Currency;

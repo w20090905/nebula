@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Template_Ad_cat{ 
+@Package("Collaboration Management") type  Template_Ad_cat{  
+Client;
 Org;
 !Ad_Cat;
 !Template;

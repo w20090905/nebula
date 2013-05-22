@@ -1,4 +1,5 @@
-@Package("Material Management") type  Sernoctlexclude{ 
+@Package("Material Management") type  Sernoctlexclude{  
+Client;
 Org;
 Table;
 Created Timestamp;

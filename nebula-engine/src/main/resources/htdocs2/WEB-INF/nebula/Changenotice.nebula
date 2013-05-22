@@ -1,4 +1,5 @@
-@Package("Material Management") type  Changenotice{ 
+@Package("Material Management") type  Changenotice{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Ldapaccess{ 
+@Package("Application Dictionary") type  Ldapaccess{  
+Client;
 !ID;
 Ldapprocessor;
 Org;

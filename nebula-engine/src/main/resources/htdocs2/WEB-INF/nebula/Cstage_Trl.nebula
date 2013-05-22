@@ -1,5 +1,6 @@
-@Package("Collaboration Management") type  Cstage_Trl{ 
-!Ad_Language Language;
+@Package("Collaboration Management") type  Cstage_Trl{  
+Client;
+*Ad_Language Language;
 Org;
 !Cstage;
 Containerxml Note;

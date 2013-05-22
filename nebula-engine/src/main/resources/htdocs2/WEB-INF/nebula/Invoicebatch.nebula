@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Invoicebatch{ 
+@Package("Common or Core Functionality") type  Invoicebatch{  
+Client;
 Org;
 Conversiontype;
 Currency;

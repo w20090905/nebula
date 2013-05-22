@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Commissiondetail{ 
+@Package("Common or Core Functionality") type  Commissiondetail{  
+Client;
 Org;
 Actualamt Amount;
 Actualqty Quantity;

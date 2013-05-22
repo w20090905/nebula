@@ -1,4 +1,5 @@
-@Package("Material Management") type  Perpetualinv{ 
+@Package("Material Management") type  Perpetualinv{  
+Client;
 Org;
 Counthighmovement YesNo;
 Created Timestamp;

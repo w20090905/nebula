@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Error{ 
+@Package("Application Dictionary") type  Error{  
+Client;
 !ID;
 Ad_Language Language;
 Org;

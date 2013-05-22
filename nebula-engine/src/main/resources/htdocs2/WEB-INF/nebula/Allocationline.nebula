@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Allocationline{ 
+@Package("Common or Core Functionality") type  Allocationline{  
+Client;
 Orgtrx Org;
 Org;
 Amount;

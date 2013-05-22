@@ -1,4 +1,5 @@
-@Package("Material Management") type  Movementline{ 
+@Package("Material Management") type  Movementline{  
+Client;
 Orgtrx Org;
 Org;
 Activity;

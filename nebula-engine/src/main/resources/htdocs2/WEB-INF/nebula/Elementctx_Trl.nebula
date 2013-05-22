@@ -1,6 +1,7 @@
-@Package("Application Dictionary") type  Elementctx_Trl{ 
+@Package("Application Dictionary") type  Elementctx_Trl{  
+Client;
 !Elementctx;
-!Ad_Language Language;
+*Ad_Language Language;
 Org;
 Created Timestamp;
 Createdby Date;

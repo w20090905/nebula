@@ -1,4 +1,5 @@
-@Package("Material Management") type  Forecast{ 
+@Package("Material Management") type  Forecast{  
+Client;
 Org;
 Calendar;
 Year;

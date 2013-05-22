@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Cstage{ 
+@Package("Collaboration Management") type  Cstage{  
+Client;
 Org;
 Cstagelink Cstage;
 !ID;

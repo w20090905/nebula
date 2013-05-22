@@ -1,4 +1,5 @@
-@Package("Material Management") type  Distributionrun{ 
+@Package("Material Management") type  Distributionrun{  
+Client;
 Org;
 Bpartner;
 Bpartner_Location;

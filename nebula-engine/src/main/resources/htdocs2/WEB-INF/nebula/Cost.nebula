@@ -1,4 +1,5 @@
-@Package("Material Management") type  Cost{ 
+@Package("Material Management") type  Cost{  
+!Client;
 !Org;
 !Acctschema;
 Created Timestamp;

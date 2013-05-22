@@ -1,5 +1,6 @@
-@Package("Common or Core Functionality") type  Country_Trl{ 
-!Ad_Language Language;
+@Package("Common or Core Functionality") type  Country_Trl{  
+Client;
+*Ad_Language Language;
 Org;
 !Country;
 Created Timestamp;

@@ -1,4 +1,5 @@
-@Package("Material Management") type  Product_Acct{ 
+@Package("Material Management") type  Product_Acct{  
+Client;
 Org;
 !Acctschema;
 Created Timestamp;

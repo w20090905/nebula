@@ -1,4 +1,5 @@
-@Package("Material Management") type  Inoutconfirm{ 
+@Package("Material Management") type  Inoutconfirm{  
+Client;
 Org;
 Approvalamt Amount;
 Invoice;

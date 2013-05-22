@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Paymentbatch{ 
+@Package("Common or Core Functionality") type  Paymentbatch{  
+Client;
 Org;
 !ID;
 Paymentprocessor;

@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Rfq_Topicsubscriberonly{ 
+@Package("Common or Core Functionality") type  Rfq_Topicsubscriberonly{  
+Client;
 Org;
 !ID;
 Rfq_Topicsubscriber;

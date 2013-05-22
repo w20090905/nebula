@@ -1,4 +1,5 @@
-@Package("Requests") type  Contactinterest{ 
+@Package("Requests") type  Contactinterest{  
+Client;
 Org;
 !User;
 Created Timestamp;

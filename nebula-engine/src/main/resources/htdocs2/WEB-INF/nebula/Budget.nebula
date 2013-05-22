@@ -1,4 +1,5 @@
-@Package("General Ledger") type  Budget{ 
+@Package("General Ledger") type  Budget{  
+Client;
 Org;
 Budgetstatus YesNo;
 Created Timestamp;

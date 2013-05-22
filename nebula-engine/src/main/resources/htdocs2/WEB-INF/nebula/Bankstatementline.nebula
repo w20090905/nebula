@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Bankstatementline{ 
+@Package("Common or Core Functionality") type  Bankstatementline{  
+Client;
 Org;
 Bpartner;
 !ID;

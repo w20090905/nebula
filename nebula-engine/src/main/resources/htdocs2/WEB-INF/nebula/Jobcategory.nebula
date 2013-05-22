@@ -1,4 +1,5 @@
-@Package("Common or Core Functionality") type  Jobcategory{ 
+@Package("Common or Core Functionality") type  Jobcategory{  
+Client;
 Org;
 !ID;
 Created Timestamp;

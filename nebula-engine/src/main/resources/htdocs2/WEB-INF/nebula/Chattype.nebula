@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Chattype{ 
+@Package("Collaboration Management") type  Chattype{  
+Client;
 Org;
 Table;
 !ID;

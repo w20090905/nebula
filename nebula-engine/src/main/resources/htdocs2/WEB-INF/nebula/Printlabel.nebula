@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Printlabel{ 
+@Package("Application Dictionary") type  Printlabel{  
+Client;
 Labelprinter;
 Org;
 !ID;

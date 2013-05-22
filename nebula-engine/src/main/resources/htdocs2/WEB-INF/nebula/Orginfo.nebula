@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Orginfo{ 
+@Package("Application Dictionary") type  Orginfo{  
+Client;
 Orgtype;
 !Org;
 Calendar;

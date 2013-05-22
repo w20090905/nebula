@@ -1,4 +1,5 @@
-@Package("Collaboration Management") type  Webaccesslog{ 
+@Package("Collaboration Management") type  Webaccesslog{  
+Client;
 Org;
 User;
 Acceptlanguage Language;

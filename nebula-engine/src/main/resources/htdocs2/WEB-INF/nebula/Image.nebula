@@ -1,4 +1,5 @@
-@Package("Application Dictionary") type  Image{ 
+@Package("Application Dictionary") type  Image{  
+Client;
 !ID;
 Org;
 Binarydata Note;

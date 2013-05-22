@@ -1,4 +1,5 @@
-@Package("Requests") type  Statuscategory{ 
+@Package("Requests") type  Statuscategory{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

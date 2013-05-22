@@ -1,4 +1,5 @@
-@Package("Material Management") type  Zonelocator{ 
+@Package("Material Management") type  Zonelocator{  
+Client;
 Org;
 Created Timestamp;
 Createdby Date;

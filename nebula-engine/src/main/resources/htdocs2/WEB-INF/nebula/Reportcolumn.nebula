@@ -1,4 +1,5 @@
-@Package("Performance Analysis") type  Reportcolumn{ 
+@Package("Performance Analysis") type  Reportcolumn{  
+Client;
 Org;
 Amounttype Attr;
 Activity;
