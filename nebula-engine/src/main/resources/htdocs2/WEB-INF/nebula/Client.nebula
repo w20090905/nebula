@@ -1,7 +1,6 @@
 @Package("Application Dictionary") type  Client{  
 !ID;
 Ad_Language Language;
-/*TODO Org; */
 Autoarchive YesNo;
 Created Timestamp;
 Createdby Date;
