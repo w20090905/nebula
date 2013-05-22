@@ -1,14 +1,9 @@
 @Package("Common or Core Functionality") type  Greeting{  
-Client;
-Org;
-!ID;
-Created Timestamp;
-Createdby ID;
+@GroupBy Client;
+@GroupBy Org;
+!Name;
 Greeting Description;
-Isactive YesNo;
 Isdefault YesNo;
 Isfirstnameonly YesNo;
-!Name;
-Updated Timestamp;
-Updatedby Date;
-}; 
+?Isactive YesNo;
+};

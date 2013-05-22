@@ -1,20 +1,13 @@
-@Package("Application Dictionary") type  Language{  
-Client;
-*Ad_Language Language;
-ID;
-Org;
-Countrycode Attr;
-Created Timestamp;
-Createdby ID;
-Datepattern String;
-Isactive YesNo;
-Isbaselanguage YesNo;
-Isdecimalpoint YesNo;
-Issystemlanguage YesNo;
-Languageiso String;
+@Package("Application Dictionary") type  Language{ 
+*Language Name;
 !Name;
-Processing YesNo;
-Timepattern String;
-Updated Timestamp;
-Updatedby Date;
-}; 
+?Countrycode Attr;
+Languageiso String;
+?Timepattern String;
+?Datepattern String;
+?Isactive YesNo;
+?Isbaselanguage YesNo;
+?Isdecimalpoint YesNo;
+?Issystemlanguage YesNo;
+?Processing YesNo;
+};
