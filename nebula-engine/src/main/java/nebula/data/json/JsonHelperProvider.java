@@ -26,30 +26,66 @@ public class JsonHelperProvider {
 
 		return s;
 	}
+	@SuppressWarnings("unchecked")
+	public static <T> DataHelper<T, Reader, Writer> getSimpleSerialize(Class<T> clz) {
+		DataHelper<T, Reader, Writer> s;
+		if (clz == Type.class) {
+			s = (DataHelper<T, Reader, Writer>) new DefaultJsonHelper<Type>(factory, new SimpleTypeSerializer());
+		} else {
+			s = null;
+		}
+
+		return s;
+	}
 
 	// public static JsonHelper<Entity> getHelper(Type type) {
 	// return new DefaultJsonHelper<>(factory, new EntityJsonDataDealer(type));
 	// }
 
-	public static Holder<DataHelper<Entity, Reader, Writer>> getHelper(	final Holder<Type> typeHolder) {
+	public static Holder<DataHelper<Entity, Reader, Writer>> getHelper(final Holder<Type> typeHolder) {
 		final Type initType = typeHolder.get();
 		DataHelper<Entity, Reader, Writer> lastJsonHelper = (DataHelper<Entity, Reader, Writer>) new DefaultJsonHelper<Entity>(
 				factory, new EntitySerializer(typeHolder.get()));
 
-		final Holder<DataHelper<Entity, Reader, Writer>> holder = new Holder<DataHelper<Entity, Reader, Writer>>(lastJsonHelper){
+		final Holder<DataHelper<Entity, Reader, Writer>> holder = new Holder<DataHelper<Entity, Reader, Writer>>(
+				lastJsonHelper) {
 			Type lastType = initType;
+
 			@Override
 			public DataHelper<Entity, Reader, Writer> get() {
 				Type newType = typeHolder.get();
-				if(this.lastType == newType){
+				if (this.lastType == newType) {
 					return this.curData;
-				}else{
+				} else {
 					this.lastType = newType;
-					this.curData = new DefaultJsonHelper<Entity>(factory,
-							new EntitySerializer(newType));
+					this.curData = new DefaultJsonHelper<Entity>(factory, new EntitySerializer(newType));
 					return this.curData;
 				}
-			}			
+			}
+		};
+		return holder;
+	}
+
+	public static Holder<DataHelper<Entity, Reader, Writer>> getSimpleHelper(final Holder<Type> typeHolder) {
+		final Type initType = typeHolder.get();
+		DataHelper<Entity, Reader, Writer> lastJsonHelper = (DataHelper<Entity, Reader, Writer>) new DefaultJsonHelper<Entity>(
+				factory, new SimpleEntitySerializer(typeHolder.get()));
+
+		final Holder<DataHelper<Entity, Reader, Writer>> holder = new Holder<DataHelper<Entity, Reader, Writer>>(
+				lastJsonHelper) {
+			Type lastType = initType;
+
+			@Override
+			public DataHelper<Entity, Reader, Writer> get() {
+				Type newType = typeHolder.get();
+				if (this.lastType == newType) {
+					return this.curData;
+				} else {
+					this.lastType = newType;
+					this.curData = new DefaultJsonHelper<Entity>(factory, new SimpleEntitySerializer(newType));
+					return this.curData;
+				}
+			}
 		};
 		return holder;
 	}

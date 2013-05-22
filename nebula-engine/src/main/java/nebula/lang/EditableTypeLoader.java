@@ -35,6 +35,9 @@ public class EditableTypeLoader extends TypeLoader {
 
 			for (File f : d.listFiles()) {
 				if (f.isFile() && f.getName().endsWith(".nebula")) {
+					if (log.isDebugEnabled()) {
+						log.debug("load type define from  - " + f.toURI().toURL());
+					}
 					this.defineNebula(f.toURI().toURL());
 				} else if (f.isDirectory()) {
 					loadFolder(root, f);

@@ -65,11 +65,11 @@ public class EntityResouceEngine implements ResourceEngine {
 		}
 
 		if ("Type".equals(typeName)) {
-			DataHelper<Type, Reader, Writer> json = JsonHelperProvider.getSerialize(Type.class);
 
 			if (id != null) {
 				return new TypeEditableResouce(persistence, typeLoader, id);
 			} else {
+				DataHelper<Type, Reader, Writer> json = JsonHelperProvider.getSimpleSerialize(Type.class);
 				return new TypeListResouce(typeLoader, json, typeFilterBuilder);
 			}
 		} else {
@@ -77,20 +77,26 @@ public class EntityResouceEngine implements ResourceEngine {
 			if (type.getStandalone() == TypeStandalone.Transaction) {
 
 				Holder<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);
-				Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper( new TypeHolder(typeLoader, typeName));
 
 				if (id != null) {
+					Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
+							.getHelper(new TypeHolder(typeLoader, typeName));
 					return new TxEntityResource(jsonHolder, storeHolder, id);
 				} else {
+					Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
+							.getSimpleHelper(new TypeHolder(typeLoader, typeName));
 					return new EntityListResouce(jsonHolder, storeHolder, entityFilterBuilder);
 				}
 			} else {
 				Holder<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);
-				Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(new TypeHolder(typeLoader, typeName));
 
 				if (id != null) {
+					Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
+							.getHelper(new TypeHolder(typeLoader, typeName));
 					return new EntityResouce(jsonHolder, storeHolder, id);
 				} else {
+					Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
+							.getSimpleHelper(new TypeHolder(typeLoader, typeName));
 					return new EntityListResouce(jsonHolder, storeHolder, entityFilterBuilder);
 				}
 
