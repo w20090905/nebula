@@ -1,0 +1,12 @@
+@Package("Application Dictionary") type  Alertrecipient{ 
+Alert;
+Client;
+Org;
+Role;
+User;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

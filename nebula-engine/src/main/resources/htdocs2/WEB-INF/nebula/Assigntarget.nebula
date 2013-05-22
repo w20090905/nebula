@@ -1,0 +1,16 @@
+@Package("Application Dictionary") type  Assigntarget{ 
+!ID;
+Client;
+Org;
+Targetcolumn Column;
+Assignrule YesNo;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+Valuesql String;
+Valuestring String;
+}; 

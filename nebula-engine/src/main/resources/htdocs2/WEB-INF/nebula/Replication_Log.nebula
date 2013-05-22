@@ -1,0 +1,13 @@
+@Package("Application Dictionary") type  Replication_Log{ 
+Org;
+Replicationtable;
+!ID;
+Replication_Run;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Isreplicated YesNo;
+P_Msg MSG;
+Updated Timestamp;
+Updatedby Date;
+}; 

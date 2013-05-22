@@ -1,0 +1,14 @@
+@Package("Common or Core Functionality") type  Ordertax{ 
+Org;
+!Order;
+!Tax;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Istaxincluded YesNo;
+Processed YesNo;
+Taxamt Amount;
+Taxbaseamt Amount;
+Updated Timestamp;
+Updatedby Date;
+}; 

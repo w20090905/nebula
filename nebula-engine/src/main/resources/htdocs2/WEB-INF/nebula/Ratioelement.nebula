@@ -1,0 +1,20 @@
+@Package("Performance Analysis") type  Ratioelement{ 
+Org;
+Account Elementvalue;
+Constantvalue String;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Name;
+Measurecalc;
+!ID;
+Ratioused Ratio;
+Ratio;
+Postingtype YesNo;
+Ratioelementtype YesNo;
+Ratiooperand YesNo;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

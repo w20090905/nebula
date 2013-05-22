@@ -1,0 +1,11 @@
+@Package("Material Management") type  Productionlinema{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!Attributesetinstance;
+!Productionline;
+Movementqty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

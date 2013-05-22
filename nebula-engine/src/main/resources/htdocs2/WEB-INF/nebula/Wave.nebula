@@ -1,0 +1,16 @@
+@Package("Common or Core Functionality") type  Wave{ 
+Org;
+!ID;
+Created Timestamp;
+Createdby Date;
+Documentno SeqNo;
+Isactive YesNo;
+Warehouse;
+Updated Timestamp;
+Updatedby Date;
+}; 
+@Package("Temporary Tables") type  Wave{ 
+Waveline;
+SeqNo;
+ID;
+}; 

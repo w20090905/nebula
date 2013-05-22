@@ -1,0 +1,12 @@
+@Package("Marketplace") type  Bidcomment{ 
+Org;
+User;
+!ID;
+Topic;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Textmsg MSG;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,14 @@
+@Package("Application Dictionary") type  Loginmsglog{ 
+!ID;
+Loginmsg;
+Org;
+Session;
+User;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isuseraccepted YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

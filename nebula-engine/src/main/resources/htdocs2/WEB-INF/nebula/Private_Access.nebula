@@ -1,0 +1,10 @@
+@Package("Application Dictionary") type  Private_Access{ 
+Org;
+!Table;
+!User;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

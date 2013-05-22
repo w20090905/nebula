@@ -1,0 +1,10 @@
+@Package("Collaboration Management") type  Accesslistrole{ 
+Org;
+!Role;
+!Accessprofile;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,28 @@
+@Package("Material Management") type  Inoutstage{ 
+Org;
+User;
+Doctype;
+Orderline;
+Order;
+Uom;
+Createinoutdocaction Attr;
+Created Timestamp;
+Createdby Date;
+ErrorMsg MSG;
+Isactive YesNo;
+Iscreateonsave YesNo;
+Isinoutcreated YesNo;
+Isreturntrx YesNo;
+Issotrx YesNo;
+!ID;
+Inout;
+Locator;
+Product;
+Warehouse;
+Movementdate Date;
+Processed YesNo;
+Processing YesNo;
+Qtyentered Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

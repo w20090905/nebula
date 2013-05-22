@@ -1,0 +1,24 @@
+@Package("Material Management") type  Product_Costing{ 
+Org;
+!Acctschema;
+Costaverage Number;
+Costaveragecumamt Amount;
+Costaveragecumqty Quantity;
+Coststandard Number;
+Coststandardcumamt Amount;
+Coststandardcumqty Quantity;
+Coststandardpoamt Amount;
+Coststandardpoqty Quantity;
+Created Timestamp;
+Createdby Date;
+Currentcostprice Price;
+Futurecostprice Price;
+Isactive YesNo;
+!Product;
+Pricelastinv Price;
+Pricelastpo Price;
+Totalinvamt Amount;
+Totalinvqty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

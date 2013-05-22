@@ -1,0 +1,19 @@
+@Package("Application Dictionary") type  Language{ 
+!Ad_Language Language;
+ID;
+Org;
+Countrycode Attr;
+Created Timestamp;
+Createdby Date;
+Datepattern String;
+Isactive YesNo;
+Isbaselanguage YesNo;
+Isdecimalpoint YesNo;
+Issystemlanguage YesNo;
+Languageiso String;
+!Name;
+Processing YesNo;
+Timepattern String;
+Updated Timestamp;
+Updatedby Date;
+}; 

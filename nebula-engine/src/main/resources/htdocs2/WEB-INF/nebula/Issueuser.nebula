@@ -1,0 +1,12 @@
+@Package("Requests") type  Issueuser{ 
+Org;
+User;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!ID;
+Updated Timestamp;
+Updatedby Date;
+Username Name;
+}; 

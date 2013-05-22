@@ -1,0 +1,20 @@
+@Package("Web") type  Store_Trl{ 
+Ad_Language Language;
+Org;
+Created Timestamp;
+Createdby Date;
+Emailfooter Note;
+Emailheader Note;
+Isactive YesNo;
+Istranslated YesNo;
+Updated Timestamp;
+Updatedby Date;
+Store;
+Webinfo Note;
+Webparam1 Note;
+Webparam2 Note;
+Webparam3 Note;
+Webparam4 Note;
+Webparam5 Note;
+Webparam6 Note;
+}; 

@@ -1,0 +1,12 @@
+@Package("Application Dictionary") type  Desktopworkbench{ 
+!ID;
+Desktop;
+Org;
+Workbench;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

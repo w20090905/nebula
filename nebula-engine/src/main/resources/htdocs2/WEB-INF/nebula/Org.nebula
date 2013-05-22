@@ -1,0 +1,13 @@
+@Package("Application Dictionary") type  Org{ 
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Issummary YesNo;
+Isvalid YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+}; 

@@ -1,0 +1,28 @@
+@Package("Material Management") type  Costdetail{ 
+Org;
+Amt Amount;
+Acctschema;
+Invoiceline;
+Orderline;
+Projectissue;
+Created Timestamp;
+Createdby Date;
+Deltaamt Amount;
+Deltaqty Quantity;
+Description;
+Isactive YesNo;
+Issotrx YesNo;
+Attributesetinstance;
+!ID;
+Costelement;
+Inoutline;
+Inventoryline;
+Movementline;
+Product;
+Productionline;
+Workordertransactionline;
+Processed YesNo;
+Qty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

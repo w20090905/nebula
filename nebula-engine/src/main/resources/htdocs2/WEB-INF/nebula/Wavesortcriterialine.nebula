@@ -1,0 +1,13 @@
+@Package("Common or Core Functionality") type  Wavesortcriterialine{ 
+Infocolumn;
+Org;
+!ID;
+Wavesortcriteria;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Orderbytype YesNo;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

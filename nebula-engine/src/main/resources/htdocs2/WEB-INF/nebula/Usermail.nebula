@@ -1,0 +1,17 @@
+@Package("Application Dictionary") type  Usermail{ 
+Org;
+!ID;
+User;
+Created Timestamp;
+Createdby Date;
+Deliveryconfirmation Description;
+Isactive YesNo;
+Isdelivered YesNo;
+Mailtext Note;
+Messageid ID;
+Mailtext;
+Subject;
+Updated Timestamp;
+Updatedby Date;
+Mailmsg;
+}; 

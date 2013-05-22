@@ -1,0 +1,13 @@
+@Package("Application Dictionary") type  Bview_Access{ 
+Bview;
+Client;
+Org;
+Role;
+Created Timestamp;
+Createdby Date;
+Entitytype Attr;
+Isactive YesNo;
+Isreadwrite YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

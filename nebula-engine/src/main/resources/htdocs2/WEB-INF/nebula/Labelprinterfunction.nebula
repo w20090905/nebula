@@ -1,0 +1,16 @@
+@Package("Application Dictionary") type  Labelprinterfunction{ 
+!ID;
+Labelprinter;
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Functionprefix String;
+Functionsuffix String;
+Isactive YesNo;
+Isxyposition YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+Xyseparator String;
+}; 

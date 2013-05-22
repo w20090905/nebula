@@ -1,0 +1,15 @@
+@Package("Material Management") type  Tasklist{ 
+Org;
+User;
+Doctype;
+Created Timestamp;
+Createdby Date;
+Description;
+Documentno SeqNo;
+Isactive YesNo;
+!ID;
+Warehouse;
+Pickmethod YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

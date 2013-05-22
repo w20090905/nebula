@@ -1,0 +1,17 @@
+@Package("Collaboration Management") type  Container_Trl{ 
+!Ad_Language Language;
+Org;
+!Container;
+Containerxml Note;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Istranslated YesNo;
+Meta_Description Description;
+Meta_Keywords Note;
+!Name;
+Structurexml Note;
+Title String;
+Updated Timestamp;
+Updatedby Date;
+}; 

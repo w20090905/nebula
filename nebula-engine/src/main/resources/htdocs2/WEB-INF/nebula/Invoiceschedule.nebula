@@ -1,0 +1,20 @@
+@Package("Common or Core Functionality") type  Invoiceschedule{ 
+Org;
+Amt Amount;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Eveninvoiceweek YesNo;
+Invoiceday Count;
+Invoicedaycutoff Number;
+Invoicefrequency YesNo;
+Invoiceweekday YesNo;
+Invoiceweekdaycutoff YesNo;
+Isactive YesNo;
+Isamount YesNo;
+Isdefault YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

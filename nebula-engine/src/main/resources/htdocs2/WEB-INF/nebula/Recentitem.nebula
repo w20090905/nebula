@@ -1,0 +1,11 @@
+Role;
+Table;
+User;
+Window;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

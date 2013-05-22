@@ -1,0 +1,14 @@
+@Package("Common or Core Functionality") type  Rfqresponselineqty{ 
+Org;
+Rfqlineqty;
+!ID;
+Rfqresponseline;
+Created Timestamp;
+Createdby Date;
+Discount Number;
+Isactive YesNo;
+Price;
+Ranking;
+Updated Timestamp;
+Updatedby Date;
+}; 

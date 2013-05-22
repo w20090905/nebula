@@ -1,0 +1,16 @@
+@Package("Performance Analysis") type  Sla_Measure{ 
+Org;
+Table;
+Created Timestamp;
+Createdby Date;
+Datetrx Date;
+Description;
+Isactive YesNo;
+Measureactual Number;
+Sla_Goal;
+!ID;
+Processed YesNo;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

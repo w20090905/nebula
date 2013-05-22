@@ -1,0 +1,15 @@
+@Package("Application Dictionary") type  Querylog{ 
+Org;
+!ID;
+Role;
+Session;
+Table;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Parameter String;
+Recordcount Count;
+Updated Timestamp;
+Updatedby Date;
+Whereclause Note;
+}; 

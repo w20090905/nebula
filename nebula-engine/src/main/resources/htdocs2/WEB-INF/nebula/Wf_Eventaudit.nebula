@@ -1,0 +1,22 @@
+@Package("Application Dictionary") type  Wf_Eventaudit{ 
+Org;
+Table;
+User;
+!ID;
+Wf_Node;
+Wf_Process;
+Wf_Responsible;
+Attributename Name;
+Created Timestamp;
+Createdby Date;
+Description;
+Elapsedtimems Number;
+Eventtype Attr;
+Isactive YesNo;
+Newvalue Note;
+Oldvalue Note;
+Textmsg MSG;
+Updated Timestamp;
+Updatedby Date;
+Wfstate Attr;
+}; 

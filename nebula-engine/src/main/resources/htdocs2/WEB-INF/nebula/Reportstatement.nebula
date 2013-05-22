@@ -1,0 +1,10 @@
+@Package("Temporary Tables") type  Reportstatement{ 
+Amtacctcr Amount;
+Amtacctdr Amount;
+Balance Number;
+Dateacct Date;
+Description;
+Levelno SeqNo;
+!Name;
+Qty Quantity;
+}; 

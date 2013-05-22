@@ -1,0 +1,18 @@
+@Package("Material Management") type  Freight{ 
+Org;
+Country;
+Currency;
+Region;
+Created Timestamp;
+Createdby Date;
+Freightamt Amount;
+Isactive YesNo;
+Freightcategory;
+!ID;
+Shipper;
+To_Country Country;
+To_Region Region;
+Updated Timestamp;
+Updatedby Date;
+Validfrom Date;
+}; 

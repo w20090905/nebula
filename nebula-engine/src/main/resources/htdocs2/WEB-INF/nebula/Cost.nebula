@@ -1,0 +1,21 @@
+@Package("Material Management") type  Cost{ 
+!Org;
+!Acctschema;
+Created Timestamp;
+Createdby Date;
+Cumulatedamt Amount;
+Cumulatedqty Quantity;
+Currentcostprice Price;
+Currentqty Quantity;
+Description;
+Futurecostprice Price;
+Isactive YesNo;
+Lastcostprice Price;
+!Attributesetinstance;
+!Costelement;
+!Costtype;
+!Product;
+Percentcost Number;
+Updated Timestamp;
+Updatedby Date;
+}; 

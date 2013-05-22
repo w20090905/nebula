@@ -1,0 +1,15 @@
+@Package("Collaboration Management") type  Container_Element_trl{ 
+!Ad_Language Language;
+Org;
+!Container_Element;
+Contenthtml Note;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Istranslated YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

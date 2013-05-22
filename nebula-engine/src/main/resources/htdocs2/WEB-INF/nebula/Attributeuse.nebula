@@ -1,0 +1,11 @@
+@Package("Material Management") type  Attributeuse{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!Attributeset;
+!Attribute;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

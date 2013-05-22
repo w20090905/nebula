@@ -1,0 +1,13 @@
+@Package("Common or Core Functionality") type  Currency_Trl{ 
+!Ad_Language Language;
+Org;
+!Currency;
+Created Timestamp;
+Createdby Date;
+Cursymbol Symbol;
+Description;
+Isactive YesNo;
+Istranslated YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

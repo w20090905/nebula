@@ -1,0 +1,15 @@
+@Package("Application Dictionary") type  Bview_Reportlayer{ 
+!ID;
+Client;
+Org;
+Createprocess YesNo;
+Created Timestamp;
+Createdby Date;
+Db_View_name Name;
+Entitytype Attr;
+Isactive YesNo;
+!Name;
+Publish YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

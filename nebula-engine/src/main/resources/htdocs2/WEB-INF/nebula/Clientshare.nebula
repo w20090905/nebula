@@ -1,0 +1,13 @@
+@Package("Application Dictionary") type  Clientshare{ 
+Client;
+Org;
+Table;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Name;
+Sharetype YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

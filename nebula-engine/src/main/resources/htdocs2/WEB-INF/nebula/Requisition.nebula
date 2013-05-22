@@ -1,0 +1,26 @@
+@Package("Material Management") type  Requisition{ 
+Org;
+User;
+Doctype;
+Created Timestamp;
+Createdby Date;
+Datedoc Date;
+Daterequired Date;
+Description;
+Docaction Attr;
+Docstatus Attr;
+Documentno SeqNo;
+Help;
+Isactive YesNo;
+Isapproved YesNo;
+Pricelist;
+!ID;
+Warehouse;
+Posted YesNo;
+Priorityrule YesNo;
+Processed YesNo;
+Processing YesNo;
+Totallines Number;
+Updated Timestamp;
+Updatedby Date;
+}; 

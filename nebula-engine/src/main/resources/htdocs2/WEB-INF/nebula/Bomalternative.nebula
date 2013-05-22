@@ -1,0 +1,12 @@
+@Package("Material Management") type  Bomalternative{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!ID;
+Product;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

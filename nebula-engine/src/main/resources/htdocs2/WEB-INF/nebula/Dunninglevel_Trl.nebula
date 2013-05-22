@@ -1,0 +1,13 @@
+@Package("Common or Core Functionality") type  Dunninglevel_Trl{ 
+!Ad_Language Language;
+Org;
+!Dunninglevel;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Istranslated YesNo;
+Note;
+Printname Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

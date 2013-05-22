@@ -1,0 +1,15 @@
+@Package("Collaboration Management") type  Cstage_Element{ 
+Org;
+!ID;
+Cstage;
+Contenthtml Note;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Isvalid YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

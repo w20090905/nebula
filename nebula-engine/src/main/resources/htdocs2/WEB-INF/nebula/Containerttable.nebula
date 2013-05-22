@@ -1,0 +1,15 @@
+@Package("Collaboration Management") type  Containerttable{ 
+Org;
+!ID;
+Container;
+Templatetable;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Name;
+Otherclause Note;
+Updated Timestamp;
+Updatedby Date;
+Whereclause Note;
+}; 

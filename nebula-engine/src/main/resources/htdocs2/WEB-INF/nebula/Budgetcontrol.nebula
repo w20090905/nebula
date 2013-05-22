@@ -1,0 +1,17 @@
+@Package("General Ledger") type  Budgetcontrol{ 
+Org;
+Budgetcontrolscope YesNo;
+Acctschema;
+Commitmenttype YesNo;
+Created Timestamp;
+Createdby Date;
+Description;
+!ID;
+Budget;
+Help;
+Isactive YesNo;
+Isbeforeapproval YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

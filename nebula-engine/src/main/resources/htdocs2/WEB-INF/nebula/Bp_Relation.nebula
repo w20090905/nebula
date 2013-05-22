@@ -1,0 +1,19 @@
+@Package("Common or Core Functionality") type  Bp_Relation{ 
+Org;
+!ID;
+Bpartnerrelation Bpartner;
+Bpartnerrelation_Location Bpartner_Location;
+Bpartner;
+Bpartner_Location;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isbillto YesNo;
+Ispayfrom YesNo;
+Isremitto YesNo;
+Isshipto YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

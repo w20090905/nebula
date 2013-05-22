@@ -1,0 +1,20 @@
+@Package("Performance Analysis") type  Colorschema{ 
+Org;
+Printcolor1 Printcolor;
+Printcolor2 Printcolor;
+Printcolor3 Printcolor;
+Printcolor4 Printcolor;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Isactive YesNo;
+Mark1percent Percent;
+Mark2percent Percent;
+Mark3percent Percent;
+Mark4percent Percent;
+!Name;
+!ID;
+Updated Timestamp;
+Updatedby Date;
+}; 

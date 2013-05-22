@@ -1,0 +1,13 @@
+@Package("Assets Management") type  Asset_Retirement{ 
+Org;
+Asset;
+!ID;
+Assetmarketvalueamt Amount;
+Assetvalueamt Amount;
+Invoiceline;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

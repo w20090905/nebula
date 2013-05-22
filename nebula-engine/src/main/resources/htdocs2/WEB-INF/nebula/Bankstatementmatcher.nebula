@@ -1,0 +1,13 @@
+@Package("Common or Core Functionality") type  Bankstatementmatcher{ 
+Org;
+!ID;
+Classname Name;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Name;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

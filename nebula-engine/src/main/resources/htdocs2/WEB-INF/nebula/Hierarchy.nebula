@@ -1,0 +1,20 @@
+@Package("Performance Analysis") type  Hierarchy{ 
+Org;
+Tree_Account Tree;
+Tree_Activity Tree;
+Tree_Bpartner Tree;
+Tree_Campaign Tree;
+Tree_Org Tree;
+Tree_Product Tree;
+Tree_Project Tree;
+Tree_Salesregion Tree;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+!Name;
+!ID;
+Updated Timestamp;
+Updatedby Date;
+}; 

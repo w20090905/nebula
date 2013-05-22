@@ -1,0 +1,13 @@
+@Package("Application Dictionary") type  Attachmentnote{ 
+Attachment;
+Client;
+Org;
+User;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Textmsg MSG;
+Title String;
+Updated Timestamp;
+Updatedby Date;
+}; 

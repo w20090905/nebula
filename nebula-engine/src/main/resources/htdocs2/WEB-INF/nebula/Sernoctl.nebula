@@ -1,0 +1,16 @@
+@Package("Material Management") type  Sernoctl{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Currentnext Number;
+Description;
+Incrementno SeqNo;
+Isactive YesNo;
+!ID;
+!Name;
+Prefix String;
+Startno SeqNo;
+Suffix String;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,22 @@
+@Package("Common or Core Functionality") type  Dunningrunline{ 
+Org;
+Amt Amount;
+Dunningrunentry;
+!ID;
+Invoice;
+Payment;
+Convertedamt Amount;
+Created Timestamp;
+Createdby Date;
+Daysdue Count;
+Feeamt Amount;
+Interestamt Amount;
+Isactive YesNo;
+Isindispute YesNo;
+Openamt Amount;
+Processed YesNo;
+Timesdunned Number;
+Totalamt Amount;
+Updated Timestamp;
+Updatedby Date;
+}; 

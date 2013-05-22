@@ -1,0 +1,11 @@
+@Package("Requests") type  Standardresponse{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!Name;
+!ID;
+Responsetext Description;
+Updated Timestamp;
+Updatedby Date;
+}; 

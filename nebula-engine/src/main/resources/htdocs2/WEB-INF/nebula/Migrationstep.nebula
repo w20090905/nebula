@@ -1,0 +1,20 @@
+@Package("Application Dictionary") type  Migrationstep{ 
+!ID;
+Org;
+Version;
+Classname Name;
+Code Note;
+Created Timestamp;
+Createdby Date;
+Dbtype YesNo;
+Description;
+Help;
+Isactive YesNo;
+Isoktofail YesNo;
+!Name;
+SeqNo;
+Timingtype YesNo;
+Type YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

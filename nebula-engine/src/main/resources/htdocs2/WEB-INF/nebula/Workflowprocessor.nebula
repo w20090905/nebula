@@ -1,0 +1,22 @@
+@Package("Application Dictionary") type  Workflowprocessor{ 
+Org;
+Schedule;
+!ID;
+Alertoverpriority Priority;
+Created Timestamp;
+Createdby Date;
+Datelastrun Date;
+Datenextrun Date;
+Description;
+Frequency;
+Frequencytype YesNo;
+Inactivityalertdays Count;
+Isactive YesNo;
+Keeplogdays Count;
+!Name;
+Processing YesNo;
+Reminddays Count;
+Supervisor User;
+Updated Timestamp;
+Updatedby Date;
+}; 

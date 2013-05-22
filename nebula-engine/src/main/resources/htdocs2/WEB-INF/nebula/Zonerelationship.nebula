@@ -1,0 +1,12 @@
+@Package("Material Management") type  Zonerelationship{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Sourcezone Zone;
+!ID;
+Zone;
+Replenishmentseqno SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

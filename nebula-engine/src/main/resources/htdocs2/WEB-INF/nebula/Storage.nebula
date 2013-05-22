@@ -1,0 +1,18 @@
+@Package("Material Management") type  Storage{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Datelastinventory Date;
+Isactive YesNo;
+!Attributesetinstance;
+!Locator;
+!Product;
+Qtyallocated Quantity;
+Qtydedicated Quantity;
+Qtyexpected Quantity;
+Qtyonhand Quantity;
+Qtyordered Quantity;
+Qtyreserved Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

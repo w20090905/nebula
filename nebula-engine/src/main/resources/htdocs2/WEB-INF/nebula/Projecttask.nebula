@@ -1,0 +1,23 @@
+@Package("Common or Core Functionality") type  Projecttask{ 
+Org;
+Projectphase;
+Projecttaskprerequisite Projecttask;
+!ID;
+Task;
+Committedamt Amount;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Product;
+!Name;
+Plannedamt Amount;
+Plannedqty Quantity;
+Projinvoicerule YesNo;
+Qty Quantity;
+SeqNo;
+Tasktype YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

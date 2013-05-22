@@ -1,0 +1,14 @@
+@Package("Application Dictionary") type  Image{ 
+!ID;
+Org;
+Binarydata Note;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Imageurl URL;
+Isactive YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

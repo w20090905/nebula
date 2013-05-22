@@ -1,0 +1,12 @@
+@Package("Common or Core Functionality") type  Channel{ 
+Org;
+Printcolor;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

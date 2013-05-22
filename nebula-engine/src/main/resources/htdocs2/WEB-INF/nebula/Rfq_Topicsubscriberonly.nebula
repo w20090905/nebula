@@ -1,0 +1,13 @@
+@Package("Common or Core Functionality") type  Rfq_Topicsubscriberonly{ 
+Org;
+!ID;
+Rfq_Topicsubscriber;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Product_Category;
+Product;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,12 @@
+@Package("Common or Core Functionality") type  Bp_Employee_acct{ 
+Org;
+!Acctschema;
+!Bpartner;
+Created Timestamp;
+Createdby Date;
+E_Expense_acct Account;
+E_Prepayment_acct Account;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

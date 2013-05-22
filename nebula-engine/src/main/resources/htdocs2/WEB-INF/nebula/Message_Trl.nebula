@@ -1,0 +1,13 @@
+@Package("Application Dictionary") type  Message_Trl{ 
+!Ad_Language Language;
+!Message;
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Istranslated YesNo;
+Msgtext Note;
+Msgtip Note;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,15 @@
+@Package("Common or Core Functionality") type  Rfq_Topicsubscriber{ 
+Org;
+User;
+Bpartner;
+Bpartner_Location;
+!ID;
+Rfq_Topic;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Optoutdate Date;
+Subscribedate Date;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,28 @@
+@Package("Common or Core Functionality") type  Projectphase{ 
+Org;
+Order;
+Phase;
+!ID;
+Project;
+Committedamt Amount;
+Created Timestamp;
+Createdby Date;
+Description;
+Enddate Date;
+Generateorder YesNo;
+Help;
+Isactive YesNo;
+Iscommitceiling YesNo;
+Iscomplete YesNo;
+Product;
+!Name;
+Plannedamt Amount;
+Plannedqty Quantity;
+Priceactual Price;
+Projinvoicerule YesNo;
+Qty Quantity;
+SeqNo;
+Startdate Date;
+Updated Timestamp;
+Updatedby Date;
+}; 

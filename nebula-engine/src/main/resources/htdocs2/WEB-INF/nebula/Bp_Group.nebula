@@ -1,0 +1,26 @@
+@Package("Common or Core Functionality") type  Bp_Group{ 
+Org;
+Printcolor;
+!ID;
+Consolidationreference;
+Dunning;
+Created Timestamp;
+Createdby Date;
+Creditwatchpercent Number;
+Description;
+Isactive YesNo;
+Isconfidentialinfo YesNo;
+Isdefault YesNo;
+Discountschema;
+Pricelist;
+Returnpolicy;
+!Name;
+Po_Discountschema Discountschema;
+Po_Pricelist Pricelist;
+Po_Returnpolicy Returnpolicy;
+Pricematchtolerance Price;
+Prioritybase YesNo;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+}; 

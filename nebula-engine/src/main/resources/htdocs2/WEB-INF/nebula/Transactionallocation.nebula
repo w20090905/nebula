@@ -1,0 +1,22 @@
+@Package("Material Management") type  Transactionallocation{ 
+Org;
+!Allocationstrategytype YesNo;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Isallocated YesNo;
+Ismanual YesNo;
+Attributesetinstance;
+Inoutline;
+Inventoryline;
+Product;
+Productionline;
+!Transaction;
+Out_M_inoutline Inoutline;
+Out_M_inventoryline Inventoryline;
+Out_M_productionline Productionline;
+Out_M_transaction Transaction;
+Qty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,12 @@
+@Package("Application Dictionary") type  Scheduler_Para{ 
+Org;
+!Process_Para;
+!Scheduler;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Parameterdefault String;
+Updated Timestamp;
+Updatedby Date;
+}; 

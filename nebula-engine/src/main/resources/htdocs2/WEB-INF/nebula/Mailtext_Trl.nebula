@@ -1,0 +1,16 @@
+@Package("Requests") type  Mailtext_Trl{ 
+!Ad_Language Language;
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Istranslated YesNo;
+Mailheader Note;
+Mailtext Note;
+Mailtext2 Note;
+Mailtext3 Note;
+!Name;
+!Mailtext;
+Updated Timestamp;
+Updatedby Date;
+}; 

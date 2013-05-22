@@ -1,0 +1,22 @@
+@Package("Common or Core Functionality") type  Bankaccount_Acct{ 
+Org;
+B_Asset_acct Account;
+B_Expense_acct Account;
+B_Intransit_acct Account;
+B_Interestexp_acct Account;
+B_Interestrev_acct Account;
+B_Paymentselect_acct Account;
+B_Revaluationgain_acct Account;
+B_Revaluationloss_acct Account;
+B_Settlementgain_acct Account;
+B_Settlementloss_acct Account;
+B_Unallocatedcash_acct Account;
+B_Unidentified_acct Account;
+!Acctschema;
+!Bankaccount;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,13 @@
+@Package("Common or Core Functionality") type  Bp_Customer_acct{ 
+Org;
+!Acctschema;
+!Bpartner;
+C_Prepayment_acct Account;
+C_Receivable_acct Account;
+C_Receivable_services_acct Account;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

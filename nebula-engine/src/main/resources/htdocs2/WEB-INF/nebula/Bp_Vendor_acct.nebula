@@ -1,0 +1,13 @@
+@Package("Common or Core Functionality") type  Bp_Vendor_acct{ 
+Org;
+!Acctschema;
+!Bpartner;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+V_Liability_acct Account;
+V_Liability_services_acct Account;
+V_Prepayment_acct Account;
+}; 

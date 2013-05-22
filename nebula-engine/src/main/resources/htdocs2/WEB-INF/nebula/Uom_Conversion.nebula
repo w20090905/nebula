@@ -1,0 +1,14 @@
+@Package("Common or Core Functionality") type  Uom_Conversion{ 
+Org;
+!ID;
+Uom;
+Uom_To Uom;
+Created Timestamp;
+Createdby Date;
+Dividerate Rate;
+Isactive YesNo;
+Product;
+Multiplyrate Rate;
+Updated Timestamp;
+Updatedby Date;
+}; 

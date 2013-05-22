@@ -1,0 +1,13 @@
+@Package("Service") type  Training_Class{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Enddate Date;
+Isactive YesNo;
+Product;
+!ID;
+Training;
+Startdate Date;
+Updated Timestamp;
+Updatedby Date;
+}; 

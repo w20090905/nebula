@@ -1,0 +1,13 @@
+@Package("Application Dictionary") type  Reportview_Col{ 
+Column;
+Org;
+!ID;
+Reportview;
+Created Timestamp;
+Createdby Date;
+Functioncolumn Name;
+Isactive YesNo;
+Isgroupfunction YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

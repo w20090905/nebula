@@ -1,0 +1,25 @@
+@Package("Knowledge Management") type  Source{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Descriptionurl URL;
+Isactive YesNo;
+!ID;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 
+@Package("Requests") type  Source{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+!Name;
+!ID;
+Sourcecreatetype YesNo;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+}; 

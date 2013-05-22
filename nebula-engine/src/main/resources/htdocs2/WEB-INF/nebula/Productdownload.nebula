@@ -1,0 +1,13 @@
+@Package("Material Management") type  Productdownload{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Downloadurl URL;
+Isactive YesNo;
+Isleaddownload YesNo;
+!ID;
+Product;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

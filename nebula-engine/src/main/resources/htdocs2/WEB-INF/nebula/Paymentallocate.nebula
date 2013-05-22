@@ -1,0 +1,17 @@
+@Package("Common or Core Functionality") type  Paymentallocate{ 
+Org;
+Amount;
+Allocationline;
+Invoice;
+!ID;
+Payment;
+Created Timestamp;
+Createdby Date;
+Discountamt Amount;
+Invoiceamt Amount;
+Isactive YesNo;
+Overunderamt Amount;
+Updated Timestamp;
+Updatedby Date;
+Writeoffamt Amount;
+}; 

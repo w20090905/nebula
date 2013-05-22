@@ -1,0 +1,15 @@
+@Package("Material Management") type  Product_Bom{ 
+Org;
+Bomqty Quantity;
+Bomtype YesNo;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Line Number;
+Productbom Product;
+!ID;
+Product;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,10 @@
+@Package("Collaboration Management") type  Accessnewschannel{ 
+Org;
+!Accessprofile;
+!Newschannel;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

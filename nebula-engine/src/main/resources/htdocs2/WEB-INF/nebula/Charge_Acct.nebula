@@ -1,0 +1,12 @@
+@Package("Common or Core Functionality") type  Charge_Acct{ 
+Org;
+!Acctschema;
+!Charge;
+Ch_Expense_acct Account;
+Ch_Revenue_acct Account;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

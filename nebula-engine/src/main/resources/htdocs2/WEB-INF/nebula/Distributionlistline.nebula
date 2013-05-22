@@ -1,0 +1,15 @@
+@Package("Material Management") type  Distributionlistline{ 
+Org;
+Bpartner;
+Bpartner_Location;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!ID;
+Distributionlist;
+Minqty Quantity;
+Ratio;
+Updated Timestamp;
+Updatedby Date;
+}; 

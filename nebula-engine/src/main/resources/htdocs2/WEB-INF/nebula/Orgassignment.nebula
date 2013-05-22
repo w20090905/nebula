@@ -1,0 +1,14 @@
+@Package("Common or Core Functionality") type  Orgassignment{ 
+Org;
+User;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Orgassignmenttype YesNo;
+Updated Timestamp;
+Updatedby Date;
+Validfrom Date;
+Validto Date;
+}; 

@@ -1,0 +1,15 @@
+@Package("Material Management") type  Attributesetinstance{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Guaranteedate Date;
+Isactive YesNo;
+LOT String;
+!ID;
+Attributeset;
+Lot;
+SerNo Code;
+Updated Timestamp;
+Updatedby Date;
+}; 

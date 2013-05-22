@@ -1,0 +1,19 @@
+@Package("Material Management") type  Requisitionline{ 
+Org;
+Charge;
+Orderline;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Line Number;
+Linenetamt Amount;
+Attributesetinstance;
+Product;
+!ID;
+Requisition;
+Priceactual Price;
+Qty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,18 @@
+@Package("Common or Core Functionality") type  Userremuneration{ 
+Org;
+User;
+Remuneration;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Grossramt Amount;
+Grossrcost Number;
+Isactive YesNo;
+Overtimeamt Amount;
+Overtimecost Number;
+Updated Timestamp;
+Updatedby Date;
+Validfrom Date;
+Validto Date;
+}; 

@@ -1,0 +1,26 @@
+@Package("Application Dictionary") type  Color{ 
+!ID;
+Image;
+Org;
+Alpha Number;
+Alpha_1 Number;
+Blue Number;
+Blue_1 Number;
+Colortype YesNo;
+Created Timestamp;
+Createdby Date;
+Green Number;
+Green_1 Number;
+Imagealpha Number;
+Isactive YesNo;
+Isdefault YesNo;
+Linedistance Number;
+Linewidth Width;
+!Name;
+Red Number;
+Red_1 Number;
+Repeatdistance Number;
+Startpoint YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,16 @@
+@Package("Assets Management") type  Registrationattribute{ 
+Org;
+Reference;
+Reference_Value Reference;
+!ID;
+Columnname Name;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isselfservice YesNo;
+!Name;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

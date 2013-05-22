@@ -1,0 +1,16 @@
+@Package("Material Management") type  Changenotice{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Detailinfo Description;
+Help;
+Isactive YesNo;
+Isapproved YesNo;
+!ID;
+!Name;
+Processed YesNo;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

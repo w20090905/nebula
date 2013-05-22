@@ -1,0 +1,21 @@
+@Package("Common or Core Functionality") type  Payselectioncheck{ 
+Org;
+Bp_Bankaccount;
+Bpartner;
+!ID;
+Payselection;
+Payment;
+Created Timestamp;
+Createdby Date;
+Discountamt Amount;
+Documentno SeqNo;
+Isactive YesNo;
+Isprinted YesNo;
+Isreceipt YesNo;
+Payamt Amount;
+Paymentrule YesNo;
+Processed YesNo;
+Qty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

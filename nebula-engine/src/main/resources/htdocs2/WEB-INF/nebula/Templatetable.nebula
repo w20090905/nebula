@@ -1,0 +1,15 @@
+@Package("Collaboration Management") type  Templatetable{ 
+Org;
+Table;
+!ID;
+Template;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Name;
+Otherclause Note;
+Updated Timestamp;
+Updatedby Date;
+Whereclause Note;
+}; 

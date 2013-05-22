@@ -1,0 +1,17 @@
+@Package("Application Dictionary") type  Wf_Nextcondition{ 
+Column;
+Org;
+!ID;
+Wf_Nodenext;
+Andor YesNo;
+Created Timestamp;
+Createdby Date;
+Entitytype Attr;
+Isactive YesNo;
+Operation Attr;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+Value2 String;
+}; 

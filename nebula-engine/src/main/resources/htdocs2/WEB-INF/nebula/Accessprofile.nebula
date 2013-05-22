@@ -1,0 +1,13 @@
+@Package("Collaboration Management") type  Accessprofile{ 
+Org;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Isexclude YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

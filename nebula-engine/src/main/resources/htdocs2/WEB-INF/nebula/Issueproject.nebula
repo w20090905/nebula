@@ -1,0 +1,16 @@
+@Package("Requests") type  Issueproject{ 
+Org;
+Asset;
+Project;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Name;
+Profileinfo Description;
+!ID;
+Statisticsinfo String;
+Systemstatus YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

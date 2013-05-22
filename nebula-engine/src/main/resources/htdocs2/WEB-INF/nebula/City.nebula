@@ -1,0 +1,16 @@
+@Package("Common or Core Functionality") type  City{ 
+Org;
+Areacode Code;
+!ID;
+Country;
+Region;
+Coordinates;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Locode Attr;
+!Name;
+Postal PostalCode;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,21 @@
+@Package("Application Dictionary") type  Menu{ 
+Form;
+!ID;
+Org;
+Process;
+Task;
+Window;
+Workbench;
+Workflow;
+Action YesNo;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Isactive YesNo;
+Isreadonly YesNo;
+Issummary YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

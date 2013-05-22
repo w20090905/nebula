@@ -1,0 +1,14 @@
+@Package("Marketplace") type  Buyerfunds{ 
+Org;
+User;
+!ID;
+Order;
+Payment;
+Committedamt Amount;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Noncommittedamt Amount;
+Updated Timestamp;
+Updatedby Date;
+}; 

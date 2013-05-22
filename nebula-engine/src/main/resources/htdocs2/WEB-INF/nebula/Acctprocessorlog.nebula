@@ -1,0 +1,16 @@
+@Package("Common or Core Functionality") type  Acctprocessorlog{ 
+Org;
+Binarydata Note;
+!ID;
+Acctprocessor;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Iserror YesNo;
+Reference String;
+Summary Note;
+Textmsg MSG;
+Updated Timestamp;
+Updatedby Date;
+}; 

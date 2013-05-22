@@ -1,0 +1,11 @@
+@Package("Material Management") type  Workordertransactionlinema{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!Attributesetinstance;
+!Workordertransactionline;
+Movementqty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,16 @@
+@Package("Application Dictionary") type  Elementctx{ 
+Ctxarea;
+!ID;
+Element;
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Help;
+Isactive YesNo;
+!Name;
+Printname Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

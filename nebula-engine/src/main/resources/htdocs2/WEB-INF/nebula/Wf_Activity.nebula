@@ -1,0 +1,24 @@
+@Package("Application Dictionary") type  Wf_Activity{ 
+Message;
+Org;
+Table;
+User;
+!ID;
+Wf_Node;
+Wf_Process;
+Wf_Responsible;
+Workflow;
+Created Timestamp;
+Createdby Date;
+Datelastalert Date;
+Dynprioritystart Number;
+Endwaittime Date;
+Isactive YesNo;
+Priority;
+Processed YesNo;
+Processing YesNo;
+Textmsg MSG;
+Updated Timestamp;
+Updatedby Date;
+Wfstate Attr;
+}; 

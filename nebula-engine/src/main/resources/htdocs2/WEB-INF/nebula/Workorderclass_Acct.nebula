@@ -1,0 +1,12 @@
+@Package("Material Management") type  Workorderclass_Acct{ 
+Org;
+!Acctschema;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!Workorderclass;
+Updated Timestamp;
+Updatedby Date;
+Wo_Closeexpense_acct Account;
+Wo_Material_acct Account;
+}; 

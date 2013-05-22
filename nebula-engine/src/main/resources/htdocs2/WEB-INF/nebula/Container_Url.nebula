@@ -1,0 +1,13 @@
+@Package("Collaboration Management") type  Container_Url{ 
+Org;
+Container;
+!ID;
+Checked Date;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Last_Result Note;
+Status Attr;
+Updated Timestamp;
+Updatedby Date;
+}; 

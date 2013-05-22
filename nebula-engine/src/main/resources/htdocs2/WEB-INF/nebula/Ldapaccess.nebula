@@ -1,0 +1,18 @@
+@Package("Application Dictionary") type  Ldapaccess{ 
+!ID;
+Ldapprocessor;
+Org;
+User;
+Asset;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Iserror YesNo;
+Interestarea;
+Remote_Addr URL;
+Remote_Host Host;
+Summary Note;
+Updated Timestamp;
+Updatedby Date;
+}; 

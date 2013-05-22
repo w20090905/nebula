@@ -1,0 +1,14 @@
+@Package("Common or Core Functionality") type  Job{ 
+Org;
+Jobcategory;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Isemployee YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

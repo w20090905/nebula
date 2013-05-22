@@ -1,0 +1,19 @@
+@Package("Application Dictionary") type  Viewcomponent{ 
+Org;
+Table;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Fromclause Note;
+Help;
+Isactive YesNo;
+!Name;
+Otherclause Note;
+Referenced_Table Table;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+Whereclause Note;
+}; 

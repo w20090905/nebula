@@ -1,0 +1,33 @@
+@Package("Material Management") type  Replenish{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Level_Max Long;
+Level_Min Long;
+!Product;
+Warehousesource Warehouse;
+!Warehouse;
+Replenishtype YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 
+@Package("Temporary Tables") type  Replenish{ 
+Org;
+!Pinstance;
+Bpartner;
+Doctype;
+Level_Max Long;
+Level_Min Long;
+!Product;
+Warehousesource Warehouse;
+!Warehouse;
+Order_Min Number;
+Order_Pack Number;
+Qtyonhand Quantity;
+Qtyordered Quantity;
+Qtyreserved Quantity;
+Qtytoorder Quantity;
+Replenishtype YesNo;
+Replenishmentcreate Attr;
+}; 

@@ -1,0 +1,16 @@
+@Package("Material Management") type  Forecast{ 
+Org;
+Calendar;
+Year;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Isdefault YesNo;
+!ID;
+!Name;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

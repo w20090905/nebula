@@ -1,0 +1,17 @@
+@Package("Common or Core Functionality") type  Bpartner_Product{ 
+Org;
+!Bpartner;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Product;
+Manufacturer String;
+Qualityrating Number;
+Shelflifemindays Count;
+Shelflifeminpct Number;
+Updated Timestamp;
+Updatedby Date;
+Vendorcategory String;
+Vendorproductno Code;
+}; 

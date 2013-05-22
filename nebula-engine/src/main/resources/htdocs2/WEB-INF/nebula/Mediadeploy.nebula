@@ -1,0 +1,14 @@
+@Package("Collaboration Management") type  Mediadeploy{ 
+Org;
+!ID;
+Media;
+Media_Server;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isdeployed YesNo;
+Lastsynchronized Date;
+Updated Timestamp;
+Updatedby Date;
+}; 

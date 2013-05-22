@@ -1,0 +1,14 @@
+@Package("Application Dictionary") type  Version{ 
+Org;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Help;
+Isactive YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+}; 

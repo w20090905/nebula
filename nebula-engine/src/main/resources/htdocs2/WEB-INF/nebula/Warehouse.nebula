@@ -1,0 +1,20 @@
+@Package("Material Management") type  Warehouse{ 
+Org;
+Location;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isdisallownegativeinv YesNo;
+Iswmsenabled YesNo;
+Rcvlocator Locator;
+Stglocator Locator;
+Warehousesource Warehouse;
+!ID;
+!Name;
+Replenishmentclass Name;
+Separator String;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+}; 

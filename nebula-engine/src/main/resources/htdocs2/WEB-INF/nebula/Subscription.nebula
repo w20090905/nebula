@@ -1,0 +1,17 @@
+@Package("Common or Core Functionality") type  Subscription{ 
+Org;
+Bpartner;
+Subscriptiontype;
+!ID;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Isdue YesNo;
+Product;
+!Name;
+Paiduntildate Date;
+Renewaldate Date;
+Startdate Date;
+Updated Timestamp;
+Updatedby Date;
+}; 

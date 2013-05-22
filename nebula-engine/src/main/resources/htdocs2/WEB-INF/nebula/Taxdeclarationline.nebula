@@ -1,0 +1,22 @@
+@Package("Common or Core Functionality") type  Taxdeclarationline{ 
+Org;
+Allocationline;
+Bpartner;
+Currency;
+Invoiceline;
+Invoice;
+!ID;
+Taxdeclaration;
+Tax;
+Created Timestamp;
+Createdby Date;
+Dateacct Date;
+Description;
+Isactive YesNo;
+Ismanual YesNo;
+Line Number;
+Taxamt Amount;
+Taxbaseamt Amount;
+Updated Timestamp;
+Updatedby Date;
+}; 

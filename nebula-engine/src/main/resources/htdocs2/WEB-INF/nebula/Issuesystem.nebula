@@ -1,0 +1,14 @@
+@Package("Requests") type  Issuesystem{ 
+Org;
+Asset;
+Created Timestamp;
+Createdby Date;
+Dbaddress String;
+Isactive YesNo;
+Profileinfo Description;
+!ID;
+Statisticsinfo String;
+Systemstatus YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

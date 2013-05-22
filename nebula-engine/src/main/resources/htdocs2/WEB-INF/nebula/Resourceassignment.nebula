@@ -1,0 +1,16 @@
+@Package("Service") type  Resourceassignment{ 
+Org;
+Assigndatefrom Date;
+Assigndateto Date;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isconfirmed YesNo;
+!Name;
+Qty Quantity;
+!ID;
+Resource;
+Updated Timestamp;
+Updatedby Date;
+}; 

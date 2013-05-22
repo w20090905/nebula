@@ -1,0 +1,26 @@
+@Package("Material Management") type  Attributeset{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Guaranteedays Count;
+Isactive YesNo;
+Isguaranteedate YesNo;
+Isguaranteedatemandatory YesNo;
+Isinstanceattribute YesNo;
+Islot YesNo;
+Islotmandatory YesNo;
+Isserno YesNo;
+Issernomandatory YesNo;
+Lotchareoverwrite YesNo;
+Lotcharsoverwrite YesNo;
+!ID;
+Lotctl;
+Sernoctl;
+Mandatorytype YesNo;
+!Name;
+Sernochareoverwrite YesNo;
+Sernocharsoverwrite YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

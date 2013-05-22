@@ -1,0 +1,18 @@
+@Package("Common or Core Functionality") type  Commissiondetail{ 
+Org;
+Actualamt Amount;
+Actualqty Quantity;
+Commissionamt;
+!ID;
+Currency;
+Invoiceline;
+Orderline;
+Convertedamt Amount;
+Created Timestamp;
+Createdby Date;
+Info Description;
+Isactive YesNo;
+Reference String;
+Updated Timestamp;
+Updatedby Date;
+}; 

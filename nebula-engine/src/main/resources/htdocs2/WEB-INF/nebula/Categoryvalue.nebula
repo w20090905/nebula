@@ -1,0 +1,12 @@
+@Package("Knowledge Management") type  Categoryvalue{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!ID;
+Category;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,11 @@
+@Package("Knowledge Management") type  Entrycategory{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Categoryvalue;
+!Category;
+!Entry;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,13 @@
+@Package("Web") type  Clickcount{ 
+Org;
+!Bpartner;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Name;
+Targeturl URL;
+Updated Timestamp;
+Updatedby Date;
+ID;
+}; 

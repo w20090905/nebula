@@ -1,0 +1,12 @@
+@Package("Common or Core Functionality") type  Interorg_Acct{ 
+!Orgto Org;
+!Org;
+!Acctschema;
+Created Timestamp;
+Createdby Date;
+Intercompanyduefrom_Acct Account;
+Intercompanydueto_Acct Account;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

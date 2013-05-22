@@ -1,0 +1,19 @@
+@Package("Service") type  Training{ 
+Org;
+Taxcategory;
+Uom;
+Created Timestamp;
+Createdby Date;
+Description;
+Descriptionurl URL;
+Documentnote Note;
+Help;
+Imageurl URL;
+Isactive YesNo;
+Product_Category;
+!Name;
+Processing YesNo;
+!ID;
+Updated Timestamp;
+Updatedby Date;
+}; 

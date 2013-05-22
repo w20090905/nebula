@@ -1,0 +1,19 @@
+@Package("Common or Core Functionality") type  Rfqlineqty{ 
+Org;
+Benchmarkprice Price;
+Bestresponseamt Amount;
+!ID;
+Rfqline;
+Uom;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Isofferqty YesNo;
+Ispurchaseqty YesNo;
+Isrfqqty YesNo;
+Margin Long;
+Offeramt Amount;
+Qty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,17 @@
+@Package("Material Management") type  Mmrule{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Ismaintainuomintegrity YesNo;
+Mmtype Attr;
+!ID;
+Warehouse;
+Zone;
+!Name;
+Rule String;
+Ruleclass Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

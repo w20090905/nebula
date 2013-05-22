@@ -1,0 +1,18 @@
+@Package("Application Dictionary") type  Loginmsg{ 
+!ID;
+Org;
+Classname Name;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Loginmsgfrequency YesNo;
+Loginmsgtype YesNo;
+!Name;
+Textmsg MSG;
+Updated Timestamp;
+Updatedby Date;
+Validfrom Date;
+Validto Date;
+Whereclause Note;
+}; 

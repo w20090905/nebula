@@ -1,0 +1,15 @@
+@Package("Application Dictionary") type  Datamigrationpreview{ 
+!ID;
+Datamigration;
+Org;
+Table;
+Created Timestamp;
+Createdby Date;
+Description;
+Info Description;
+Isactive YesNo;
+Levelno SeqNo;
+Tableuid ID;
+Updated Timestamp;
+Updatedby Date;
+}; 

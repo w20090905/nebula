@@ -1,0 +1,20 @@
+@Package("Application Dictionary") type  Alertrule{ 
+Alert;
+Client;
+Org;
+Table;
+Created Timestamp;
+Createdby Date;
+ErrorMsg MSG;
+Fromclause Note;
+Isactive YesNo;
+Isvalid YesNo;
+!Name;
+Otherclause Note;
+Postprocessing YesNo;
+Preprocessing YesNo;
+Selectclause Note;
+Updated Timestamp;
+Updatedby Date;
+Whereclause Note;
+}; 

@@ -1,0 +1,16 @@
+@Package("Common or Core Functionality") type  Landedcost{ 
+Org;
+Invoiceline;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Landedcostdistribution YesNo;
+Costelement;
+Inoutline;
+Inout;
+Product;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

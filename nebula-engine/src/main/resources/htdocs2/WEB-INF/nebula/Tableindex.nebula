@@ -1,0 +1,17 @@
+@Package("Application Dictionary") type  Tableindex{ 
+Org;
+!ID;
+Table;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Help;
+Isactive YesNo;
+Iscreateconstraint YesNo;
+Isunique YesNo;
+!Name;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

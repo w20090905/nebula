@@ -1,0 +1,10 @@
+@Package("Collaboration Management") type  Accessstage{ 
+Org;
+!Accessprofile;
+!Cstage;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

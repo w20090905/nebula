@@ -1,0 +1,23 @@
+@Package("Application Dictionary") type  Window{ 
+Color;
+Ctxarea;
+Image;
+Org;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Help;
+Isactive YesNo;
+Isbetafunctionality YesNo;
+Iscustomdefault YesNo;
+Isdefault YesNo;
+!Name;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+Winheight Height;
+Winwidth Width;
+Windowtype YesNo;
+}; 

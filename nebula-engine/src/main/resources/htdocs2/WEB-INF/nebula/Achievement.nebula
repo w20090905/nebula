@@ -1,0 +1,17 @@
+@Package("Performance Analysis") type  Achievement{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Datedoc Date;
+Description;
+Isachieved YesNo;
+Isactive YesNo;
+Manualactual Number;
+!Name;
+Note;
+!ID;
+Measure;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,14 @@
+@Package("Common or Core Functionality") type  Jobremuneration{ 
+Org;
+!ID;
+Job;
+Remuneration;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+Validfrom Date;
+Validto Date;
+}; 

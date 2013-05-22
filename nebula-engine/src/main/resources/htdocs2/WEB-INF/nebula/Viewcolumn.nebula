@@ -1,0 +1,16 @@
+@Package("Application Dictionary") type  Viewcolumn{ 
+Org;
+!ID;
+Viewcomponent;
+Columnname Name;
+Columnsql Note;
+Created Timestamp;
+Createdby Date;
+Dbdatatype YesNo;
+Description;
+Entitytype Attr;
+Help;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

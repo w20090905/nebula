@@ -1,0 +1,17 @@
+@Package("Requests") type  Requestupdate{ 
+Org;
+Confidentialtypeentry YesNo;
+Created Timestamp;
+Createdby Date;
+Endtime Timestamp;
+Isactive YesNo;
+Productspent Product;
+Qtyinvoiced Quantity;
+Qtyspent Quantity;
+!ID;
+Request;
+Result Number;
+Starttime Timestamp;
+Updated Timestamp;
+Updatedby Date;
+}; 

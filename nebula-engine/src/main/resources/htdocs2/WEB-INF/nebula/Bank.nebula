@@ -1,6 +1,16 @@
-type Bank{
-  !Name;
-  Bank-Code;
-  Location;
-  Description;
-};
+@Package("Common or Core Functionality") type  Bank{ 
+Org;
+Bankverificationclass Name;
+!ID;
+Location;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isownbank YesNo;
+!Name;
+Routingno Code;
+SWIFTCode;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,17 @@
+@Package("Collaboration Management") type  Cstage_Trl{ 
+!Ad_Language Language;
+Org;
+!Cstage;
+Containerxml Note;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Istranslated YesNo;
+Meta_Description Description;
+Meta_Keywords Note;
+!Name;
+Structurexml Note;
+Title String;
+Updated Timestamp;
+Updatedby Date;
+}; 

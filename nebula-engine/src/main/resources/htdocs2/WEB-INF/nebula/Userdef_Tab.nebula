@@ -1,0 +1,22 @@
+@Package("Application Dictionary") type  Userdef_Tab{ 
+Org;
+Tab;
+!ID;
+Userdef_Win;
+Created Timestamp;
+Createdby Date;
+Description;
+Displaylogic Note;
+Help;
+Isactive YesNo;
+Isdisplayed YesNo;
+Isinsertrecord YesNo;
+Ismultirowonly YesNo;
+Isreadonly YesNo;
+Issinglerow YesNo;
+!Name;
+Readonlylogic Note;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

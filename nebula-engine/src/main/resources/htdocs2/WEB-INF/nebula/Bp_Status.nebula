@@ -1,0 +1,13 @@
+@Package("Common or Core Functionality") type  Bp_Status{ 
+Org;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+}; 

@@ -1,0 +1,13 @@
+@Package("Application Dictionary") type  Printformatitem_Trl{ 
+!Ad_Language Language;
+Org;
+!Printformatitem;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Istranslated YesNo;
+Printname Name;
+Printnamesuffix String;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,14 @@
+@Package("Common or Core Functionality") type  Taxdeclarationacct{ 
+Org;
+Acctschema;
+!ID;
+Taxdeclaration;
+Created Timestamp;
+Createdby Date;
+Description;
+Acct;
+Isactive YesNo;
+Line Number;
+Updated Timestamp;
+Updatedby Date;
+}; 

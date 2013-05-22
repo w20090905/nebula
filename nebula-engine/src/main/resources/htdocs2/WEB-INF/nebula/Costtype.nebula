@@ -1,0 +1,12 @@
+@Package("Material Management") type  Costtype{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+!ID;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

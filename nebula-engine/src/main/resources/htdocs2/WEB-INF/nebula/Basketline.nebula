@@ -1,0 +1,16 @@
+@Package("Web") type  Basketline{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+!Isactive YesNo;
+Line Number;
+Product;
+Price;
+Product String;
+Qty Quantity;
+Updated Timestamp;
+Updatedby Date;
+!ID;
+Basket;
+}; 

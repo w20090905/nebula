@@ -1,0 +1,11 @@
+@Package("Material Management") type  Zonelocator{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Locator;
+!ID;
+Zone;
+Updated Timestamp;
+Updatedby Date;
+}; 

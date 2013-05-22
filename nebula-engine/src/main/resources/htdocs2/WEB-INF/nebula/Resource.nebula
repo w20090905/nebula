@@ -1,0 +1,17 @@
+@Package("Service") type  Resource{ 
+Org;
+User;
+Chargeableqty Quantity;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isavailable YesNo;
+Warehouse;
+!Name;
+Resourcetype;
+!ID;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+}; 

@@ -1,0 +1,13 @@
+@Package("Common or Core Functionality") type  Greeting_Trl{ 
+!Ad_Language Language;
+Org;
+!Greeting;
+Created Timestamp;
+Createdby Date;
+Greeting Description;
+Isactive YesNo;
+Istranslated YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

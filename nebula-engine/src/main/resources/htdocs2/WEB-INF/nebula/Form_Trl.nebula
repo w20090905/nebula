@@ -1,0 +1,14 @@
+@Package("Application Dictionary") type  Form_Trl{ 
+!Form;
+!Ad_Language Language;
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Istranslated YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

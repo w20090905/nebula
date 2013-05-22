@@ -1,9 +1,18 @@
-type Currency{
-  !Name;
-  ISO-Code;
-  Currency-Symbol;
-  Description;
-  Standard-Precision;
-  Costing-Precision;
-  RpundoffFactor Long;
-};
+@Package("Common or Core Functionality") type  Currency{ 
+Org;
+!ID;
+Costingprecision Precision;
+Created Timestamp;
+Createdby Date;
+Cursymbol Symbol;
+Description;
+Emuentrydate Date;
+Emurate Rate;
+Iso_Code Code;
+Isactive YesNo;
+Isemumember YesNo;
+Iseuro YesNo;
+Stdprecision Precision;
+Updated Timestamp;
+Updatedby Date;
+}; 

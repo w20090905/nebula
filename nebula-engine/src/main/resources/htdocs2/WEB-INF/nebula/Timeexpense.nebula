@@ -1,0 +1,21 @@
+@Package("Service") type  Timeexpense{ 
+Org;
+Approvalamt Amount;
+Bpartner;
+Created Timestamp;
+Createdby Date;
+Datereport Date;
+Description;
+Docaction Attr;
+Docstatus Attr;
+Documentno SeqNo;
+Isactive YesNo;
+Isapproved YesNo;
+Pricelist;
+Warehouse;
+Processed YesNo;
+Processing YesNo;
+!ID;
+Updated Timestamp;
+Updatedby Date;
+}; 

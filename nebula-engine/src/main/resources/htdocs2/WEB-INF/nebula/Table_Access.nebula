@@ -1,0 +1,15 @@
+@Package("Application Dictionary") type  Table_Access{ 
+Org;
+!Role;
+!Table;
+!Accesstyperule YesNo;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Iscanexport YesNo;
+Iscanreport YesNo;
+Isexclude YesNo;
+Isreadonly YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

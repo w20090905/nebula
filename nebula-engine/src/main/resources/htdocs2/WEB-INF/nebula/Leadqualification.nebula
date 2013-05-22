@@ -1,0 +1,13 @@
+@Package("Common or Core Functionality") type  Leadqualification{ 
+Org;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isqualified YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+}; 

@@ -1,0 +1,14 @@
+@Package("Application Dictionary") type  Message{ 
+!ID;
+Org;
+Created Timestamp;
+Createdby Date;
+Entitytype Attr;
+Isactive YesNo;
+Msgtext Note;
+Msgtip Note;
+Msgtype YesNo;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+}; 

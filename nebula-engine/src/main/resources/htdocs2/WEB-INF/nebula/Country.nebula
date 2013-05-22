@@ -1,6 +1,28 @@
-type Country{
-  !Name;
-  Country-Code;
-  Area-Code;
-  Currency;
-};
+@Package("Common or Core Functionality") type  Country{ 
+Ad_Language Language;
+Org;
+!ID;
+Currency;
+Countrycode Attr;
+Created Timestamp;
+Createdby Date;
+Description;
+Displaysequence String;
+Displaysequencelocal String;
+Expressionbankaccountno AccountNo;
+Expressionbankroutingno Code;
+Expressionphone PhoneNumber;
+Expressionpostal PostalCode;
+Expressionpostal_Add PostalCode;
+Haspostal_Add YesNo;
+Hasregion YesNo;
+Isactive YesNo;
+Isaddresslineslocalreverse YesNo;
+Isaddresslinesreverse YesNo;
+Issummary YesNo;
+Mediasize Long;
+!Name;
+Regionname Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

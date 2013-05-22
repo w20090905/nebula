@@ -1,0 +1,15 @@
+@Package("Application Dictionary") type  Tab_Trl{ 
+!Ad_Language Language;
+Org;
+!Tab;
+Commitwarning Note;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Istranslated YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

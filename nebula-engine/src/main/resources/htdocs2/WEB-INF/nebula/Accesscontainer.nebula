@@ -1,0 +1,10 @@
+@Package("Collaboration Management") type  Accesscontainer{ 
+Org;
+!Accessprofile;
+!Container;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

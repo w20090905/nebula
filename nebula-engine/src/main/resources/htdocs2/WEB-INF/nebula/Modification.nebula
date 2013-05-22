@@ -1,0 +1,15 @@
+@Package("Application Dictionary") type  Modification{ 
+!ID;
+Org;
+Version;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Modificationtype YesNo;
+!Name;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

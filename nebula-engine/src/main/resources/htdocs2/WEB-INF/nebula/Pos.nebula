@@ -1,0 +1,21 @@
+@Package("Common or Core Functionality") type  Pos{ 
+Org;
+Bpartnercashtrx Bpartner;
+Cashbook;
+Doctype;
+Poskeylayout;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Ismodifyprice YesNo;
+Pricelist;
+Warehouse;
+!Name;
+Printername Name;
+Salesrep User;
+Updated Timestamp;
+Updatedby Date;
+}; 

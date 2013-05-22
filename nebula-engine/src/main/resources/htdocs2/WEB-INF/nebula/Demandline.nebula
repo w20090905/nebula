@@ -1,0 +1,14 @@
+@Package("Material Management") type  Demandline{ 
+Org;
+Period;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!ID;
+Demand;
+Product;
+Qty Quantity;
+Qtycalculated Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,18 @@
+@Package("Material Management") type  Pricelist{ 
+Org;
+Basepricelist Pricelist;
+Currency;
+Created Timestamp;
+Createdby Date;
+Description;
+Enforcepricelimit YesNo;
+Isactive YesNo;
+Isdefault YesNo;
+Issopricelist YesNo;
+Istaxincluded YesNo;
+!ID;
+!Name;
+Priceprecision Precision;
+Updated Timestamp;
+Updatedby Date;
+}; 

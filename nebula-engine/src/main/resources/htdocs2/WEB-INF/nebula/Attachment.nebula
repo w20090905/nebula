@@ -1,0 +1,13 @@
+@Package("Application Dictionary") type  Attachment{ 
+Client;
+Org;
+Table;
+Binarydata Note;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Textmsg MSG;
+Title String;
+Updated Timestamp;
+Updatedby Date;
+}; 

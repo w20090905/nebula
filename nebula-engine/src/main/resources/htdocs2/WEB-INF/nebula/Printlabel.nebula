@@ -1,0 +1,17 @@
+@Package("Application Dictionary") type  Printlabel{ 
+Labelprinter;
+Org;
+!ID;
+Table;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Islandscape YesNo;
+Labelheight Height;
+Labelwidth Width;
+!Name;
+Printername Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

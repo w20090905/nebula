@@ -1,0 +1,14 @@
+@Package("Application Dictionary") type  Wf_Activityresult{ 
+Org;
+!ID;
+Wf_Activity;
+Attributename Name;
+Attributevalue Note;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

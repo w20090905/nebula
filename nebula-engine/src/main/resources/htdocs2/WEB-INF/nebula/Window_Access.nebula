@@ -1,0 +1,11 @@
+@Package("Application Dictionary") type  Window_Access{ 
+Org;
+!Role;
+!Window;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Isreadwrite YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

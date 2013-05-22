@@ -1,0 +1,16 @@
+@Package("Material Management") type  Discountschemabreak{ 
+Org;
+Breakdiscount Count;
+Breakvalue Number;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Isbpartnerflatdiscount YesNo;
+!ID;
+Discountschema;
+Product_Category;
+Product;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

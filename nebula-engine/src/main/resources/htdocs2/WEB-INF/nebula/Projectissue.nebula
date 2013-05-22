@@ -1,0 +1,22 @@
+@Package("Common or Core Functionality") type  Projectissue{ 
+Org;
+!ID;
+Project;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Line Number;
+Attributesetinstance;
+Inoutline;
+Locator;
+Product;
+Movementdate Date;
+Movementqty Quantity;
+Posted YesNo;
+Processed YesNo;
+Processing YesNo;
+Timeexpenseline;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,25 @@
+@Package("Temporary Tables") type  Invoicegl{ 
+Org;
+!Pinstance;
+Apar YesNo;
+Amtacctbalance Amount;
+Amtrevalcr Amount;
+Amtrevalcrdiff Amount;
+Amtrevaldr Amount;
+Amtrevaldrdiff Amount;
+Amtsourcebalance Amount;
+Conversiontypereval Conversiontype;
+Doctypereval Doctype;
+!Invoice;
+Created Timestamp;
+Createdby Date;
+Datereval Date;
+!Acct;
+Grandtotal Number;
+Isactive YesNo;
+Isallcurrencies YesNo;
+Openamt Amount;
+Percentgl Number;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,12 @@
+@Package("Knowledge Management") type  Synonym{ 
+Ad_Language Language;
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!ID;
+!Name;
+Synonymname Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

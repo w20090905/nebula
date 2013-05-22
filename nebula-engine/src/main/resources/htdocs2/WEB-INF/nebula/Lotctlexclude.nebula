@@ -1,0 +1,12 @@
+@Package("Material Management") type  Lotctlexclude{ 
+Org;
+Table;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Issotrx YesNo;
+!ID;
+Lotctl;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,11 @@
+@Package("Requests") type  Categoryupdates{ 
+Org;
+!User;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Isselfservice YesNo;
+!Category;
+Updated Timestamp;
+Updatedby Date;
+}; 

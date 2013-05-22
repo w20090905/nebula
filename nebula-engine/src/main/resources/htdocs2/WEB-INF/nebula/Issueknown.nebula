@@ -1,0 +1,21 @@
+@Package("Requests") type  Issueknown{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Issuestatus Note;
+Issuesummary Note;
+Lineno SeqNo;
+Loggername Name;
+Processing YesNo;
+!ID;
+Issuerecommendation;
+Issuestatus;
+Request;
+Releaseno Code;
+Sourceclassname Name;
+Sourcemethodname Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

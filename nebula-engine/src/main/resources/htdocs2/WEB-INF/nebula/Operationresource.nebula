@@ -1,0 +1,18 @@
+@Package("Material Management") type  Operationresource{ 
+Org;
+Asset;
+Job;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+!ID;
+Productoperation;
+!Name;
+Setuptime Long;
+Teardowntime Long;
+Unitruntime Long;
+Updated Timestamp;
+Updatedby Date;
+}; 

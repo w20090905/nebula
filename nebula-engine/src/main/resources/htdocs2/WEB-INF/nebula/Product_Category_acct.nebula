@@ -1,0 +1,23 @@
+@Package("Material Management") type  Product_Category_acct{ 
+Org;
+!Acctschema;
+Costinglevel YesNo;
+Costingmethod YesNo;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!Product_Category;
+P_Asset_acct Account;
+P_Cogs_acct Account;
+P_Costadjustment_acct Account;
+P_Expense_acct Account;
+P_Inventoryclearing_acct Account;
+P_Invoicepricevariance_acct Account;
+P_Purchasepricevariance_acct Account;
+P_Revenue_acct Account;
+P_Tradediscountgrant_acct Account;
+P_Tradediscountrec_acct Account;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

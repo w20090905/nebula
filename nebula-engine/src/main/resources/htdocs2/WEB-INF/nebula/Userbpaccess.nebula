@@ -1,0 +1,13 @@
+@Package("Application Dictionary") type  Userbpaccess{ 
+Org;
+!ID;
+User;
+Bpaccesstype YesNo;
+Created Timestamp;
+Createdby Date;
+Docbasetype Attr;
+Isactive YesNo;
+Requesttype;
+Updated Timestamp;
+Updatedby Date;
+}; 

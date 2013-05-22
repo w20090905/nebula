@@ -1,0 +1,14 @@
+@Package("Application Dictionary") type  Ctxarea{ 
+!ID;
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Help;
+Isactive YesNo;
+Issotrx YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

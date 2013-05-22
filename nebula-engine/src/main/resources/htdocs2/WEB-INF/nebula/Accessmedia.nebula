@@ -1,0 +1,10 @@
+@Package("Collaboration Management") type  Accessmedia{ 
+Org;
+!Accessprofile;
+!Media;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

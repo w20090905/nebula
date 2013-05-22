@@ -1,0 +1,15 @@
+@Package("Application Dictionary") type  User_Substitute{ 
+Org;
+User;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Name;
+Substitute User;
+Updated Timestamp;
+Updatedby Date;
+Validfrom Date;
+Validto Date;
+}; 

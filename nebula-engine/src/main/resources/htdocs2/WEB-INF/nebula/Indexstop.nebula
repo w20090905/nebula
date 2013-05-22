@@ -1,0 +1,14 @@
+@Package("Knowledge Management") type  Indexstop{ 
+Org;
+Webproject;
+Doctype;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Ismanual YesNo;
+!ID;
+Keyword String;
+Requesttype;
+Updated Timestamp;
+Updatedby Date;
+}; 

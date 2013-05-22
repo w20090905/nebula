@@ -1,0 +1,19 @@
+@Package("Collaboration Management") type  Media_Server{ 
+Org;
+!ID;
+Webproject;
+Created Timestamp;
+Createdby Date;
+Description;
+Folder Name;
+Help;
+Ip_Address IPAddr;
+Isactive YesNo;
+Ispassive YesNo;
+!Name;
+Password String;
+URL;
+Updated Timestamp;
+Updatedby Date;
+Username Name;
+}; 

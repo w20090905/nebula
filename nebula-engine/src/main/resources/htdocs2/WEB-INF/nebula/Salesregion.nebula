@@ -1,0 +1,15 @@
+@Package("Common or Core Functionality") type  Salesregion{ 
+Org;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isdefault YesNo;
+Issummary YesNo;
+!Name;
+Salesrep User;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+}; 

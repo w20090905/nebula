@@ -1,0 +1,15 @@
+@Package("Collaboration Management") type  Newschannel{ 
+Ad_Language Language;
+Org;
+!ID;
+Webproject;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Link String;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

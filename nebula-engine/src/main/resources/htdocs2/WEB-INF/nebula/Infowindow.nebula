@@ -1,0 +1,19 @@
+@Package("Application Dictionary") type  Infowindow{ 
+!ID;
+Org;
+Table;
+Autocompfromclause Note;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Fromclause Note;
+Help;
+Isactive YesNo;
+Iscustomdefault YesNo;
+!Name;
+Otherclause Note;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

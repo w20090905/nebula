@@ -1,0 +1,26 @@
+@Package("Application Dictionary") type  Impformat{ 
+!ID;
+Org;
+Table;
+Created Timestamp;
+Createdby Date;
+Description;
+Formattype YesNo;
+Isactive YesNo;
+!Name;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 
+@Package("Temporary Tables") type  Impformat{ 
+Org;
+Binarydata Note;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!Name;
+!ID;
+Updated Timestamp;
+Updatedby Date;
+Websession String;
+}; 

@@ -1,0 +1,16 @@
+@Package("Common or Core Functionality") type  Recurring_Run{ 
+Org;
+Invoice;
+Order;
+Payment;
+Project;
+Recurring;
+!ID Name;
+Created Timestamp;
+Createdby Date;
+Datedoc Date;
+Journalbatch;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

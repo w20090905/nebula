@@ -1,0 +1,5 @@
+@Package("Application Dictionary") type  Pinstance_Log{ 
+P_Date Date;
+P_Msg MSG;
+P_Number Number;
+}; 

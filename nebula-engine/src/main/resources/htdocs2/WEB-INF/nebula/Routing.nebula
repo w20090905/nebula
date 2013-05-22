@@ -1,0 +1,17 @@
+@Package("Material Management") type  Routing{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Product;
+!ID;
+!Name;
+Processed YesNo;
+Processing YesNo;
+Routingtype Attr;
+Routinguse YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

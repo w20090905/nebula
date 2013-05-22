@@ -1,0 +1,15 @@
+@Package("Collaboration Management") type  Cstagettable{ 
+Org;
+!ID;
+Cstage;
+Templatetable;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Name;
+Otherclause Note;
+Updated Timestamp;
+Updatedby Date;
+Whereclause Note;
+}; 

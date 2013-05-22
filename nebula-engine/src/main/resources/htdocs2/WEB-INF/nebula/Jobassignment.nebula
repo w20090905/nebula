@@ -1,0 +1,15 @@
+@Package("Common or Core Functionality") type  Jobassignment{ 
+Org;
+User;
+!ID;
+Job;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Jobassignmenttype YesNo;
+Updated Timestamp;
+Updatedby Date;
+Validfrom Date;
+Validto Date;
+}; 

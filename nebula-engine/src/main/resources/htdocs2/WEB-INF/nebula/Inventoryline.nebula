@@ -1,0 +1,24 @@
+@Package("Material Management") type  Inventoryline{ 
+Orgtrx Org;
+Org;
+Activity;
+Charge;
+Created Timestamp;
+Createdby Date;
+Description;
+Inventorytype YesNo;
+Isactive YesNo;
+Isinternaluse YesNo;
+Line Number;
+Attributesetinstance;
+!ID;
+Inventory;
+Locator;
+Product;
+Processed YesNo;
+Qtybook Quantity;
+Qtycount Quantity;
+Qtyinternaluse Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

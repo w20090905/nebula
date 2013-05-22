@@ -1,0 +1,15 @@
+@Package("Requests") type  Mailtext{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Ishtml YesNo;
+Mailheader Note;
+Mailtext Note;
+Mailtext2 Note;
+Mailtext3 Note;
+!Name;
+!ID;
+Updated Timestamp;
+Updatedby Date;
+}; 

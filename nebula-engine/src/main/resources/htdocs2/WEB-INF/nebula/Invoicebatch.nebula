@@ -1,0 +1,20 @@
+@Package("Common or Core Functionality") type  Invoicebatch{ 
+Org;
+Conversiontype;
+Currency;
+!ID;
+Controlamt Amount;
+Created Timestamp;
+Createdby Date;
+Datedoc Date;
+Description;
+Documentamt Amount;
+Documentno SeqNo;
+Isactive YesNo;
+Issotrx YesNo;
+Processed YesNo;
+Processing YesNo;
+Salesrep User;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,10 @@
+@Package("Application Dictionary") type  Taskinstance{ 
+Org;
+!ID;
+Task;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

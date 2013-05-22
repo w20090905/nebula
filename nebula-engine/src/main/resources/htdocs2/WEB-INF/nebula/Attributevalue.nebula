@@ -1,0 +1,13 @@
+@Package("Material Management") type  Attributevalue{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!ID;
+Attribute;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+}; 

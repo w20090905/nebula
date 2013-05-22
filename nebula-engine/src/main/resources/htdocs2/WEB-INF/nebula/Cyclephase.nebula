@@ -1,0 +1,10 @@
+@Package("Common or Core Functionality") type  Cyclephase{ 
+Org;
+!Cyclestep;
+!Phase;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

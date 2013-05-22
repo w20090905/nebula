@@ -1,0 +1,15 @@
+@Package("Material Management") type  Distributionrun{ 
+Org;
+Bpartner;
+Bpartner_Location;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Iscreatesingleorder YesNo;
+!ID;
+!Name;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

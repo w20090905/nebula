@@ -1,0 +1,17 @@
+@Package("Application Dictionary") type  Bview_Field{ 
+Bview;
+Client;
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Isactive YesNo;
+Isidentifier YesNo;
+Isprinted YesNo;
+!Name;
+SeqNo;
+Sortno SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

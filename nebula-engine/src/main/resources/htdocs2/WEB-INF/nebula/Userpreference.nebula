@@ -1,0 +1,17 @@
+@Package("Application Dictionary") type  Userpreference{ 
+Org;
+!ID;
+User;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Isautocommit YesNo;
+Isshowacct YesNo;
+Isshowadvanced YesNo;
+Isshowtrl YesNo;
+Printername Name;
+Tablerows Number;
+Uitheme String;
+Updated Timestamp;
+Updatedby Date;
+}; 

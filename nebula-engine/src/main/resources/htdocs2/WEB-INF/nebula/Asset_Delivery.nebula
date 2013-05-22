@@ -1,0 +1,26 @@
+@Package("Assets Management") type  Asset_Delivery{ 
+Org;
+User;
+!ID;
+Asset;
+Created Timestamp;
+Createdby Date;
+Deliveryconfirmation Description;
+Description;
+Email;
+Help;
+Isactive YesNo;
+LOT String;
+Inoutline;
+Productdownload;
+Messageid ID;
+Movementdate Date;
+Referrer String;
+Remote_Addr URL;
+Remote_Host Host;
+SerNo Code;
+URL;
+Updated Timestamp;
+Updatedby Date;
+Versionno Code;
+}; 

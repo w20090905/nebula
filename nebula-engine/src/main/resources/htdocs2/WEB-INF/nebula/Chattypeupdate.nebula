@@ -1,0 +1,11 @@
+@Package("Collaboration Management") type  Chattypeupdate{ 
+Org;
+!User;
+!Chattype;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Isselfservice YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

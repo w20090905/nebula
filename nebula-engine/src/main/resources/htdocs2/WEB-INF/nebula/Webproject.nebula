@@ -1,0 +1,21 @@
+@Package("Collaboration Management") type  Webproject{ 
+Org;
+Treecmc Tree;
+Treecmm Tree;
+Treecms Tree;
+Treecmt Tree;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Meta_Author Note;
+Meta_Content Note;
+Meta_Copyright Note;
+Meta_Publisher Note;
+Meta_Robotstag Note;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

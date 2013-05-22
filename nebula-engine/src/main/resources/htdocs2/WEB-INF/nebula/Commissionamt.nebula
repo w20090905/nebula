@@ -1,0 +1,14 @@
+@Package("Common or Core Functionality") type  Commissionamt{ 
+Org;
+Actualqty Quantity;
+!ID;
+Commissionline;
+Commissionrun;
+Commissionamt Amount;
+Convertedamt Amount;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

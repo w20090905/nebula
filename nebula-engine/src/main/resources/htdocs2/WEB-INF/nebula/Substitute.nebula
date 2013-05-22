@@ -1,0 +1,12 @@
+@Package("Material Management") type  Substitute{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Product;
+!Name;
+ID;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,15 @@
+@Package("Application Dictionary") type  Reporttemplate_Relation{ 
+Org;
+Reporttemplate;
+Reporttemplate_Related Reporttemplate;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Isactive YesNo;
+!Name;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

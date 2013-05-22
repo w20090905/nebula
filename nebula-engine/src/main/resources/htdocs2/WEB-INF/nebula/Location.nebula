@@ -1,0 +1,20 @@
+@Package("Common or Core Functionality") type  Location{ 
+Org;
+Address1 String;
+Address2 String;
+Address3 String;
+Address4 String;
+City;
+Country;
+!ID;
+Region;
+City Name;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Postal PostalCode;
+Postal_Add PostalCode;
+Regionname Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

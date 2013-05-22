@@ -1,0 +1,12 @@
+@Package("Common or Core Functionality") type  Taxpostal{ 
+Org;
+!ID;
+Tax;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Postal PostalCode;
+Postal_To PostalCode;
+Updated Timestamp;
+Updatedby Date;
+}; 

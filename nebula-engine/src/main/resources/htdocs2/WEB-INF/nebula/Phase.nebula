@@ -1,0 +1,16 @@
+@Package("Common or Core Functionality") type  Phase{ 
+Org;
+!ID;
+Projecttype;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Product;
+!Name;
+SeqNo;
+Standardqty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

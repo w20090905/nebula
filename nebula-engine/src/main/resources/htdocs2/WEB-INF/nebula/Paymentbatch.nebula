@@ -1,0 +1,15 @@
+@Package("Common or Core Functionality") type  Paymentbatch{ 
+Org;
+!ID;
+Paymentprocessor;
+Created Timestamp;
+Createdby Date;
+Documentno SeqNo;
+Isactive YesNo;
+!Name;
+Processed YesNo;
+Processing YesNo;
+Processingdate Date;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,21 @@
+@Package("Application Dictionary") type  Bview_Source{ 
+!ID;
+Client;
+Org;
+Process;
+Reportview;
+Table;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Importfields YesNo;
+Isactive YesNo;
+Isdefault YesNo;
+!Name;
+SeqNo;
+Sourcetype YesNo;
+Tablename Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

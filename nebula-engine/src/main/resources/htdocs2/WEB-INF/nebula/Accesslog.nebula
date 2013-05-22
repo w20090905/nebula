@@ -1,0 +1,18 @@
+@Package("Application Dictionary") type  Accesslog{ 
+Client;
+Column;
+Org;
+Table;
+User;
+Lead;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Remote_Addr URL;
+Remote_Host Host;
+Reply Note;
+Textmsg MSG;
+Updated Timestamp;
+Updatedby Date;
+}; 

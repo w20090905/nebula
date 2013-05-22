@@ -1,0 +1,13 @@
+@Package("Material Management") type  Attributeinstance{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!Attributesetinstance;
+Attributevalue;
+!Attribute;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+Valuenumber Number;
+}; 

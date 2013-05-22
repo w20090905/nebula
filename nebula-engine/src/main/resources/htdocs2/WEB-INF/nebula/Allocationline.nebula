@@ -1,0 +1,23 @@
+@Package("Common or Core Functionality") type  Allocationline{ 
+Orgtrx Org;
+Org;
+Amount;
+Activity;
+Allocationhdr;
+!ID;
+Bpartner;
+Cashline;
+Invoice;
+Order;
+Payment;
+Created Timestamp;
+Createdby Date;
+Datetrx Date;
+Discountamt Amount;
+Isactive YesNo;
+Ismanual YesNo;
+Overunderamt Amount;
+Updated Timestamp;
+Updatedby Date;
+Writeoffamt Amount;
+}; 

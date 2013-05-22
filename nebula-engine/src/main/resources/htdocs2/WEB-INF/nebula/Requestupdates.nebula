@@ -1,0 +1,11 @@
+@Package("Requests") type  Requestupdates{ 
+Org;
+!User;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Isselfservice YesNo;
+!Request;
+Updated Timestamp;
+Updatedby Date;
+}; 

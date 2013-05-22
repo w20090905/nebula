@@ -1,0 +1,18 @@
+@Package("Material Management") type  Mmstrategysetline{ 
+Org;
+Bp_Group;
+Bpartner;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Locator;
+!ID;
+Mmstrategyset;
+Mmstrategy;
+Product_Category;
+Product;
+Zone;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

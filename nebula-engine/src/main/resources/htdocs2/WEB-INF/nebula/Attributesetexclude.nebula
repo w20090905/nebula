@@ -1,0 +1,12 @@
+@Package("Material Management") type  Attributesetexclude{ 
+Org;
+Table;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Issotrx YesNo;
+!ID;
+Attributeset;
+Updated Timestamp;
+Updatedby Date;
+}; 

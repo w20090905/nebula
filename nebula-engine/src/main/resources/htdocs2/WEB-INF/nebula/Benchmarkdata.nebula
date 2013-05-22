@@ -1,0 +1,14 @@
+@Package("Performance Analysis") type  Benchmarkdata{ 
+Org;
+Benchmarkdate Date;
+Benchmarkvalue Number;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Name;
+!ID;
+Benchmark;
+Updated Timestamp;
+Updatedby Date;
+}; 

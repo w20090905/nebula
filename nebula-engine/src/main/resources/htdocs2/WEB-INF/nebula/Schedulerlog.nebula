@@ -1,0 +1,16 @@
+@Package("Application Dictionary") type  Schedulerlog{ 
+Org;
+!ID;
+Scheduler;
+Binarydata Note;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Iserror YesNo;
+Reference String;
+Summary Note;
+Textmsg MSG;
+Updated Timestamp;
+Updatedby Date;
+}; 

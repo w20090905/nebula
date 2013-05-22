@@ -1,0 +1,23 @@
+@Package("Common or Core Functionality") type  Payselectionline{ 
+Org;
+Invoice;
+Payselectioncheck;
+!ID;
+Payselection;
+Created Timestamp;
+Createdby Date;
+Description;
+Differenceamt Amount;
+Discountamt Amount;
+Isactive YesNo;
+Iscancelled YesNo;
+Ismanual YesNo;
+Issotrx YesNo;
+Line Number;
+Openamt Amount;
+Payamt Amount;
+Paymentrule YesNo;
+Processed YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

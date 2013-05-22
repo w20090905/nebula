@@ -1,0 +1,17 @@
+@Package("Collaboration Management") type  Wikitoken{ 
+Org;
+Table;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Macro Note;
+!Name;
+Selectclause Note;
+SeqNo;
+Tokentype YesNo;
+Updated Timestamp;
+Updatedby Date;
+Whereclause Note;
+}; 

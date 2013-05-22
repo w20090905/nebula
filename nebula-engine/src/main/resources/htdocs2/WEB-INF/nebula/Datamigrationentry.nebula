@@ -1,0 +1,14 @@
+@Package("Application Dictionary") type  Datamigrationentry{ 
+!ID;
+Datamigration;
+Org;
+Table;
+Created Timestamp;
+Createdby Date;
+Datamigrationentrytype YesNo;
+Description;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+Whereclause Note;
+}; 

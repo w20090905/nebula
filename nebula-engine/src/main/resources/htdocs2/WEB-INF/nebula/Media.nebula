@@ -1,0 +1,18 @@
+@Package("Collaboration Management") type  Media{ 
+Image;
+Org;
+!ID;
+Webproject;
+Contenttext Note;
+Created Timestamp;
+Createdby Date;
+Description;
+Directdeploy YesNo;
+Help;
+Isactive YesNo;
+Issummary YesNo;
+Mediatype Attr;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

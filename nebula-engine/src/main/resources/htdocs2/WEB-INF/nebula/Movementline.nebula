@@ -1,0 +1,24 @@
+@Package("Material Management") type  Movementline{ 
+Orgtrx Org;
+Org;
+Activity;
+Confirmedqty Quantity;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Line Number;
+Attributesetinstanceto Attributesetinstance;
+Attributesetinstance;
+Locatorto Locator;
+Locator;
+!ID;
+Movement;
+Product;
+Movementqty Quantity;
+Processed YesNo;
+Scrappedqty Quantity;
+Targetqty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

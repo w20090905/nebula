@@ -1,0 +1,18 @@
+@Package("Common or Core Functionality") type  Invoicepayschedule{ 
+Org;
+!ID;
+Invoice;
+Payschedule;
+Created Timestamp;
+Createdby Date;
+Discountamt Amount;
+Discountdate Date;
+Dueamt Amount;
+Duedate Date;
+Isactive YesNo;
+Isvalid YesNo;
+Processed YesNo;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

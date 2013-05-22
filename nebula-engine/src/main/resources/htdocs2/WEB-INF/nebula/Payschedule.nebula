@@ -1,0 +1,17 @@
+@Package("Common or Core Functionality") type  Payschedule{ 
+Org;
+!ID;
+Paymentterm;
+Created Timestamp;
+Createdby Date;
+Discount Number;
+Discountdays Count;
+Gracedays Count;
+Isactive YesNo;
+Isvalid YesNo;
+Netday YesNo;
+Netdays Count;
+Percentage Number;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,12 @@
+@Package("Application Dictionary") type  Fieldgroup_Trl{ 
+!Fieldgroup;
+!Ad_Language Language;
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Istranslated YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

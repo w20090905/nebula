@@ -1,0 +1,12 @@
+@Package("Application Dictionary") type  Wf_Processdata{ 
+Org;
+!ID;
+Wf_Process;
+Attributename Name;
+Attributevalue Note;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

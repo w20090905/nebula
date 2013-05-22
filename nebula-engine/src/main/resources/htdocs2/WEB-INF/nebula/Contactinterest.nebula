@@ -1,0 +1,14 @@
+@Package("Requests") type  Contactinterest{ 
+Org;
+!User;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Optoutdate Date;
+!Interestarea;
+Remote_Addr URL;
+Remote_Host Host;
+Subscribedate Date;
+Updated Timestamp;
+Updatedby Date;
+}; 

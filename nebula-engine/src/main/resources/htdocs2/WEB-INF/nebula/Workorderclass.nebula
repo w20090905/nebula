@@ -1,0 +1,15 @@
+@Package("Material Management") type  Workorderclass{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isdefault YesNo;
+!ID;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+Wot_Doctype Doctype;
+Wotype YesNo;
+Wo_Doctype Doctype;
+}; 

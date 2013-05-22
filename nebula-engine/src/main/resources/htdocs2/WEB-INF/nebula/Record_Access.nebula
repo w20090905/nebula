@@ -1,0 +1,13 @@
+@Package("Application Dictionary") type  Record_Access{ 
+Org;
+!Role;
+!Table;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Isdependententities YesNo;
+Isexclude YesNo;
+Isreadonly YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

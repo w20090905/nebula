@@ -1,0 +1,16 @@
+@Package("Material Management") type  Costqueue{ 
+Org;
+Acctschema;
+Created Timestamp;
+Createdby Date;
+Currentcostprice Price;
+Currentqty Quantity;
+Isactive YesNo;
+Attributesetinstance;
+Costelement;
+!ID;
+Costtype;
+Product;
+Updated Timestamp;
+Updatedby Date;
+}; 

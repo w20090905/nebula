@@ -1,0 +1,11 @@
+@Package("Application Dictionary") type  Workflow_Access{ 
+Org;
+!Role;
+!Workflow;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Isreadwrite YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,15 @@
+@Package("Application Dictionary") type  Reference{ 
+Org;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Help;
+Isactive YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+Vformat String;
+Validationtype YesNo;
+}; 

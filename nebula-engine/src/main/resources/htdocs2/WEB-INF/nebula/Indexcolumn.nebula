@@ -1,0 +1,14 @@
+@Package("Application Dictionary") type  Indexcolumn{ 
+Column;
+!ID;
+Org;
+Tableindex;
+Columnsql Note;
+Created Timestamp;
+Createdby Date;
+Entitytype Attr;
+Isactive YesNo;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

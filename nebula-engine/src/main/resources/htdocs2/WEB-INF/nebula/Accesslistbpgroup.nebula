@@ -1,0 +1,10 @@
+@Package("Collaboration Management") type  Accesslistbpgroup{ 
+Org;
+!Accessprofile;
+!Bp_Group;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,11 @@
+@Package("Common or Core Functionality") type  Calendar{ 
+Org;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

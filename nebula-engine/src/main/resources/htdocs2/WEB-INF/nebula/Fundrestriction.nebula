@@ -1,0 +1,13 @@
+@Package("General Ledger") type  Fundrestriction{ 
+Org;
+Elementvalue;
+Created Timestamp;
+Createdby Date;
+Description;
+!ID Count;
+Fund;
+Isactive YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

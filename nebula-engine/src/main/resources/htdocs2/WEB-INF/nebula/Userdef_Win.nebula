@@ -1,0 +1,24 @@
+@Package("Application Dictionary") type  Userdef_Win{ 
+Ad_Language Language;
+Org;
+Role;
+!ID;
+User;
+Window;
+Created Timestamp;
+Createdby Date;
+Customizationname Name;
+Description;
+Entitytype Attr;
+Help;
+Isactive YesNo;
+Isdefault YesNo;
+Isreadonly YesNo;
+Issystemdefault YesNo;
+Isuserupdateable YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+Winheight Height;
+Winwidth Width;
+}; 

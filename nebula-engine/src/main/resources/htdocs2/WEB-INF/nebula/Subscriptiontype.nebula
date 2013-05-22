@@ -1,0 +1,13 @@
+@Package("Common or Core Functionality") type  Subscriptiontype{ 
+Org;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Frequency;
+Frequencytype YesNo;
+Isactive YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

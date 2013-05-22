@@ -1,0 +1,21 @@
+@Package("Common or Core Functionality") type  Acctprocessor{ 
+Org;
+Schedule;
+Table;
+!ID;
+Acctschema;
+Created Timestamp;
+Createdby Date;
+Datelastrun Date;
+Datenextrun Date;
+Description;
+Frequency;
+Frequencytype YesNo;
+Isactive YesNo;
+Keeplogdays Count;
+!Name;
+Processing YesNo;
+Supervisor User;
+Updated Timestamp;
+Updatedby Date;
+}; 

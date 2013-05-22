@@ -1,0 +1,14 @@
+@Package("Application Dictionary") type  Reference_Trl{ 
+!Ad_Language Language;
+Org;
+!Reference;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Istranslated YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

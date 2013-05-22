@@ -1,0 +1,14 @@
+@Package("Application Dictionary") type  Orgtype{ 
+!ID;
+Org;
+Printcolor;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isbalancing YesNo;
+Islegalentity YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

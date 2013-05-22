@@ -1,0 +1,16 @@
+@Package("Material Management") type  Lot{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Datefrom Date;
+Dateto Date;
+Description;
+Help;
+Isactive YesNo;
+Lotctl;
+!ID;
+Product;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

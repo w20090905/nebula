@@ -1,0 +1,21 @@
+@Package("Common or Core Functionality") type  Bpartner_Location{ 
+Org;
+Bpartner;
+!ID;
+Location;
+Salesregion;
+Created Timestamp;
+Createdby Date;
+Fax;
+Isdn Code;
+Isactive YesNo;
+Isbillto YesNo;
+Ispayfrom YesNo;
+Isremitto YesNo;
+Isshipto YesNo;
+!Name;
+Phone PhoneNumber;
+Phone2 PhoneNumber;
+Updated Timestamp;
+Updatedby Date;
+}; 

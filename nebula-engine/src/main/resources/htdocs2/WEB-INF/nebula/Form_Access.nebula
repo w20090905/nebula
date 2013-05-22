@@ -1,0 +1,11 @@
+@Package("Application Dictionary") type  Form_Access{ 
+!Form;
+Org;
+!Role;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Isreadwrite YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

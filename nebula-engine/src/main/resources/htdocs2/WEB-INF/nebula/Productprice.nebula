@@ -1,0 +1,13 @@
+@Package("Material Management") type  Productprice{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!Pricelist_Version;
+!Product;
+Pricelimit Price;
+Pricelist Price;
+Pricestd Price;
+Updated Timestamp;
+Updatedby Date;
+}; 

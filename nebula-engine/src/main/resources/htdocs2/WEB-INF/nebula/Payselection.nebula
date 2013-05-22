@@ -1,0 +1,18 @@
+@Package("Common or Core Functionality") type  Payselection{ 
+Org;
+Bankaccount;
+!ID;
+Createfrom YesNo;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isapproved YesNo;
+!Name;
+Paydate Date;
+Processed YesNo;
+Processing YesNo;
+Totalamt Amount;
+Updated Timestamp;
+Updatedby Date;
+}; 

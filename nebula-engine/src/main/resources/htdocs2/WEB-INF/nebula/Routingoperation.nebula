@@ -1,0 +1,26 @@
+@Package("Material Management") type  Routingoperation{ 
+Orgtrx Org;
+Org;
+Activity;
+Bpartner;
+Bpartner_Location;
+Campaign;
+Projectphase;
+Projecttask;
+Project;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Ishazmat YesNo;
+Isoptional YesNo;
+Ispermitrequired YesNo;
+!ID;
+Routing;
+!Name;
+Processingtime Long;
+SeqNo;
+Setuptime Long;
+Updated Timestamp;
+Updatedby Date;
+}; 

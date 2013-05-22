@@ -1,0 +1,12 @@
+@Package("Application Dictionary") type  Table_Trl{ 
+!Ad_Language Language;
+Org;
+!Table;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Istranslated YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

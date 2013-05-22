@@ -1,0 +1,18 @@
+@Package("Material Management") type  Package{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Datereceived Date;
+Description;
+Documentno SeqNo;
+Isactive YesNo;
+Inout;
+!ID;
+Shipper;
+Processed YesNo;
+Receivedinfo String;
+Shipdate Date;
+Trackinginfo String;
+Updated Timestamp;
+Updatedby Date;
+}; 

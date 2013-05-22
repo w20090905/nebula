@@ -1,0 +1,16 @@
+@Package("Marketplace") type  Offer{ 
+Org;
+User;
+!ID;
+Sellerfunds;
+Topic;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Iswillingtocommit YesNo;
+!Name;
+Privatenote Note;
+Textmsg MSG;
+Updated Timestamp;
+Updatedby Date;
+}; 

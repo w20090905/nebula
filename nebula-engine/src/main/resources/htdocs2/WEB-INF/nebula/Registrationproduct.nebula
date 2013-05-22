@@ -1,0 +1,11 @@
+@Package("Assets Management") type  Registrationproduct{ 
+Org;
+!Registrationattribute;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Product;
+Updated Timestamp;
+Updatedby Date;
+}; 

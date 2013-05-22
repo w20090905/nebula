@@ -1,0 +1,10 @@
+@Package("Common or Core Functionality") type  Subscription_Delivery{ 
+Org;
+!ID;
+Subscription;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

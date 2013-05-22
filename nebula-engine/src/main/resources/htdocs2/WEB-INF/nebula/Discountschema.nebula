@@ -1,0 +1,19 @@
+@Package("Material Management") type  Discountschema{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Cumulativelevel YesNo;
+Description;
+Discounttype YesNo;
+Flatdiscount Number;
+Isactive YesNo;
+Isbpartnerflatdiscount YesNo;
+Isquantitybased YesNo;
+!ID;
+!Name;
+Processing YesNo;
+Script Note;
+Updated Timestamp;
+Updatedby Date;
+Validfrom Date;
+}; 

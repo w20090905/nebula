@@ -1,0 +1,18 @@
+@Package("Application Dictionary") type  Note{ 
+Message;
+!ID;
+Org;
+Table;
+User;
+Wf_Activity;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Processed YesNo;
+Processing YesNo;
+Reference String;
+Textmsg MSG;
+Updated Timestamp;
+Updatedby Date;
+}; 

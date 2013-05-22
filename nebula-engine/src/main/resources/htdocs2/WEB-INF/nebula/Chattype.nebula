@@ -1,0 +1,13 @@
+@Package("Collaboration Management") type  Chattype{ 
+Org;
+Table;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Moderationtype YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

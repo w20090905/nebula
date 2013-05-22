@@ -1,0 +1,14 @@
+@Package("Material Management") type  Distributionlist{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+!ID;
+!Name;
+Processing YesNo;
+Ratiototal Ratio;
+Updated Timestamp;
+Updatedby Date;
+}; 

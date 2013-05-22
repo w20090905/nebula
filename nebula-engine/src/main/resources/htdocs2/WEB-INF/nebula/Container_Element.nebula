@@ -1,0 +1,15 @@
+@Package("Collaboration Management") type  Container_Element{ 
+Org;
+!ID;
+Container;
+Contenthtml Note;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Isvalid YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

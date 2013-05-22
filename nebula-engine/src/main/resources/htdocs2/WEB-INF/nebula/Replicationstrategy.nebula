@@ -1,0 +1,13 @@
+@Package("Application Dictionary") type  Replicationstrategy{ 
+Org;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Help;
+Isactive YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

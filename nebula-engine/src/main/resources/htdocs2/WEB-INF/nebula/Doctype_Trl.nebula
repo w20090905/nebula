@@ -1,0 +1,14 @@
+@Package("Common or Core Functionality") type  Doctype_Trl{ 
+!Ad_Language Language;
+Org;
+!Doctype;
+Created Timestamp;
+Createdby Date;
+Documentnote Note;
+Isactive YesNo;
+Istranslated YesNo;
+!Name;
+Printname Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

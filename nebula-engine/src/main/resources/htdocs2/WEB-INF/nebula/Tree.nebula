@@ -1,0 +1,16 @@
+@Package("Application Dictionary") type  Tree{ 
+Org;
+Table;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isallnodes YesNo;
+Isdefault YesNo;
+!Name;
+Processing YesNo;
+Treetype Attr;
+Updated Timestamp;
+Updatedby Date;
+}; 

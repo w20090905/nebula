@@ -1,0 +1,26 @@
+@Package("General Ledger") type  Journalline{ 
+Org;
+Amtacctcr Amount;
+Amtacctdr Amount;
+Amtsourcecr Amount;
+Amtsourcedr Amount;
+Accountalias Validcombination;
+Conversiontype;
+Currency;
+Uom;
+Validcombination;
+Created Timestamp;
+Createdby Date;
+Currencyrate Rate;
+Dateacct Date;
+Description;
+!ID;
+Journal;
+Isactive YesNo;
+Isgenerated YesNo;
+Line Number;
+Processed YesNo;
+Qty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

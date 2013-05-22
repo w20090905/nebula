@@ -1,0 +1,15 @@
+@Package("Application Dictionary") type  Wf_Responsible{ 
+Org;
+Role;
+User;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Isactive YesNo;
+!Name;
+Responsibletype YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,18 @@
+@Package("Common or Core Functionality") type  Rfqresponseline{ 
+Org;
+Rfqline;
+!ID;
+Rfqresponse;
+Created Timestamp;
+Createdby Date;
+Dateworkcomplete Date;
+Dateworkstart Date;
+Deliverydays Count;
+Description;
+Help;
+Isactive YesNo;
+Isselectedwinner YesNo;
+Isselfservice YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

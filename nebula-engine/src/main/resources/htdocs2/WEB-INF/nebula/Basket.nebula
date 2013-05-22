@@ -1,0 +1,13 @@
+@Package("Web") type  Basket{ 
+Org;
+User;
+Bpartner;
+Created Timestamp;
+Createdby Date;
+Email;
+Isactive YesNo;
+Pricelist;
+Updated Timestamp;
+Updatedby Date;
+ID;
+}; 

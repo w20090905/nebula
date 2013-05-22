@@ -1,0 +1,13 @@
+@Package("Application Dictionary") type  Eul_User{ 
+!ID;
+Org;
+Role;
+User;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!Name;
+Password String;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,21 @@
+@Package("Performance Analysis") type  Reportsource{ 
+Org;
+Activity;
+Bpartner;
+Campaign;
+Elementvalue;
+Location;
+Project;
+Salesregion;
+Created Timestamp;
+Createdby Date;
+Description;
+Elementtype Attr;
+Isactive YesNo;
+Product;
+Org;
+Reportline;
+!ID;
+Updated Timestamp;
+Updatedby Date;
+}; 

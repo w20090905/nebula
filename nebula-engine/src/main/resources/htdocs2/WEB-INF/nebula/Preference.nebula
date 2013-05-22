@@ -1,0 +1,13 @@
+@Package("Application Dictionary") type  Preference{ 
+Org;
+!ID;
+User;
+Window;
+Attribute String;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+}; 

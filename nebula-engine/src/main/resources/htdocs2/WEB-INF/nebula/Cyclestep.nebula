@@ -1,0 +1,13 @@
+@Package("Common or Core Functionality") type  Cyclestep{ 
+Org;
+!ID;
+Cycle;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!Name;
+Relativeweight Number;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

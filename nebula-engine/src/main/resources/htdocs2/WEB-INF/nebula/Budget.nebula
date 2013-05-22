@@ -1,0 +1,13 @@
+@Package("General Ledger") type  Budget{ 
+Org;
+Budgetstatus YesNo;
+Created Timestamp;
+Createdby Date;
+Description;
+!ID;
+Isactive YesNo;
+Isprimary YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

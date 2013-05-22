@@ -1,0 +1,15 @@
+@Package("Web") type  Mailmsg_Trl{ 
+!Ad_Language Language;
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Istranslated YesNo;
+Message MSG;
+Message2 MSG;
+Message3 MSG;
+Subject;
+!Updated Timestamp;
+Updatedby Date;
+Mailmsg;
+}; 

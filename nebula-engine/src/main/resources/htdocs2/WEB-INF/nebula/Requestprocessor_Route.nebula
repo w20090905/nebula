@@ -1,0 +1,14 @@
+@Package("Requests") type  Requestprocessor_Route{ 
+Org;
+User;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Keyword String;
+Requestprocessor;
+!ID;
+Requesttype;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

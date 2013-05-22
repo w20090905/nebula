@@ -1,0 +1,15 @@
+@Package("Common or Core Functionality") type  Landedcostallocation{ 
+Org;
+Amt Amount;
+Base Number;
+Invoiceline;
+!ID;
+Created Timestamp;
+Createdby Date;
+Attributesetinstance;
+Costelement;
+Product;
+Qty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

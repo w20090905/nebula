@@ -1,0 +1,14 @@
+@Package("Common or Core Functionality") type  Dunning{ 
+Org;
+!ID;
+Createlevelssequentially YesNo;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isdefault YesNo;
+!Name;
+Senddunningletter YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

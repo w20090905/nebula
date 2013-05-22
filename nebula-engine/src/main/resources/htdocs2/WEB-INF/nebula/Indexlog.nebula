@@ -1,0 +1,12 @@
+@Package("Knowledge Management") type  Indexlog{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Indexquery String;
+Indexqueryresult Number;
+Isactive YesNo;
+!ID;
+Querysource YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

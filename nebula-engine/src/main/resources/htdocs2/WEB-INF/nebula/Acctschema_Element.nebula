@@ -1,0 +1,26 @@
+@Package("Common or Core Functionality") type  Acctschema_Element{ 
+Column;
+Org;
+!ID;
+Acctschema;
+Activity;
+Bpartner;
+Campaign;
+Elementvalue;
+Element;
+Location;
+Project;
+Salesregion;
+Created Timestamp;
+Createdby Date;
+Elementtype Attr;
+Isactive YesNo;
+Isbalanced YesNo;
+Ismandatory YesNo;
+Product;
+!Name;
+Org;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

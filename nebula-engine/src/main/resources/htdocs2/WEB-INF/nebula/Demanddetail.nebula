@@ -1,0 +1,13 @@
+@Package("Material Management") type  Demanddetail{ 
+Org;
+Orderline;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!ID;
+Demandline;
+Forecastline;
+Requisitionline;
+Updated Timestamp;
+Updatedby Date;
+}; 

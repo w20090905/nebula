@@ -1,0 +1,13 @@
+@Package("Common or Core Functionality") type  Bp_Withholding{ 
+Org;
+!Bpartner;
+!Withholding;
+Created Timestamp;
+Createdby Date;
+Exemptreason Attr;
+Isactive YesNo;
+Ismandatorywithholding YesNo;
+Istemporaryexempt YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,12 @@
+@Package("Material Management") type  Warehousetaskma{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!Attributesetinstance;
+!Warehousetask;
+Movementqty Quantity;
+Qtydedicated Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

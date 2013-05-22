@@ -1,0 +1,20 @@
+@Package("Material Management") type  Perpetualinv{ 
+Org;
+Counthighmovement YesNo;
+Created Timestamp;
+Createdby Date;
+Datelastrun Date;
+Datenextrun Date;
+Description;
+Isactive YesNo;
+!ID;
+Product_Category;
+Warehouse;
+!Name;
+Noinventorycount Count;
+Noproductcount Count;
+Numberofruns Number;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

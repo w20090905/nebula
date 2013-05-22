@@ -1,0 +1,15 @@
+@Package("Application Dictionary") type  Bview_Reportlayer_map{ 
+Bview_Reportlayer;
+!ID;
+Client;
+Org;
+Columnname Name;
+Created Timestamp;
+Createdby Date;
+Entitytype Attr;
+Isactive YesNo;
+Isidentifier YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

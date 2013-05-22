@@ -1,0 +1,14 @@
+@Package("Common or Core Functionality") type  Currency_Acct{ 
+Org;
+!Acctschema;
+!Currency;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Realizedgain_Acct Account;
+Realizedloss_Acct Account;
+Unrealizedgain_Acct Account;
+Unrealizedloss_Acct Account;
+Updated Timestamp;
+Updatedby Date;
+}; 

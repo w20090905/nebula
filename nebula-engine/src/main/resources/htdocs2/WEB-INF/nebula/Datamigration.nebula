@@ -1,0 +1,16 @@
+@Package("Application Dictionary") type  Datamigration{ 
+Client;
+!ID;
+Org;
+Created Timestamp;
+Createdby Date;
+Datamigrationtype YesNo;
+Description;
+Entitytype Attr;
+Help;
+Isactive YesNo;
+!Name;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,27 @@
+@Package("Common or Core Functionality") type  Validcombination{ 
+Orgtrx Org;
+Org;
+Account Elementvalue;
+Alias Name;
+Acctschema;
+Activity;
+Bpartner;
+Campaign;
+Locfrom Location;
+Locto Location;
+Project;
+Salesregion;
+Subacct;
+!ID;
+Combination String;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isfullyqualified YesNo;
+Product;
+Updated Timestamp;
+Updatedby Date;
+User1 Elementvalue;
+User2 Elementvalue;
+}; 

@@ -1,0 +1,16 @@
+@Package("Common or Core Functionality") type  Uom{ 
+Org;
+!ID;
+Costingprecision Precision;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isdefault YesNo;
+!Name;
+Stdprecision Precision;
+Uomsymbol Symbol;
+Updated Timestamp;
+Updatedby Date;
+X12de355 UOMEDICode;
+}; 

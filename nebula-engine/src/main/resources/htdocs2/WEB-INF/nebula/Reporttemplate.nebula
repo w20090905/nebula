@@ -1,0 +1,15 @@
+@Package("Application Dictionary") type  Reporttemplate{ 
+Client;
+Org;
+!ID;
+Ad_Reporttemplate_type YesNo;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Isactive YesNo;
+!Name;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

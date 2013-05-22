@@ -1,9 +1,19 @@
-type BankAccount{
-  !AutoID;
-  *Bank;
-  *Currency;
-  Type Attr;
-  IBAN Code;
-  Creditlimit Amount;
-  Description;
-};
+@Package("Common or Core Functionality") type  Bankaccount{ 
+Org;
+AccountNo;
+BBAN;
+Bankaccounttype YesNo;
+!ID;
+Bank;
+Currency;
+Created Timestamp;
+Createdby Date;
+Creditlimit Number;
+Currentbalance Amount;
+Description;
+IBAN;
+Isactive YesNo;
+Isdefault YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,14 @@
+@Package("Multi-Dimensional Cube") type  Accumulation{ 
+Org;
+Balanceaccumulation YesNo;
+Acctschema;
+Calendar;
+Created Timestamp;
+Createdby Date;
+Dateto Date;
+Description;
+!ID;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

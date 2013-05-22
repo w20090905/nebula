@@ -1,0 +1,13 @@
+@Package("Service") type  Resourceunavailable{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Datefrom Date;
+Dateto Date;
+Description;
+Isactive YesNo;
+!ID;
+Resource;
+Updated Timestamp;
+Updatedby Date;
+}; 

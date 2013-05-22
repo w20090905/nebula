@@ -1,0 +1,15 @@
+@Package("Common or Core Functionality") type  Cashbook_Acct{ 
+Org;
+Cb_Asset_acct Account;
+Cb_Cashtransfer_acct Account;
+Cb_Differences_acct Account;
+Cb_Expense_acct Account;
+Cb_Receipt_acct Account;
+!Acctschema;
+!Cashbook;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

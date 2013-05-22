@@ -1,0 +1,17 @@
+@Package("Common or Core Functionality") type  Doctypecounter{ 
+Org;
+!ID;
+Doctype;
+Counter_C_doctype Doctype;
+Created Timestamp;
+Createdby Date;
+Description;
+Docaction Attr;
+Isactive YesNo;
+Iscreatecounter YesNo;
+Isvalid YesNo;
+!Name;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

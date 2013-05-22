@@ -1,0 +1,14 @@
+@Package("Material Management") type  Returnpolicyline{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Product_Category;
+Product;
+!ID;
+Returnpolicy;
+Timeframe Long;
+Updated Timestamp;
+Updatedby Date;
+}; 

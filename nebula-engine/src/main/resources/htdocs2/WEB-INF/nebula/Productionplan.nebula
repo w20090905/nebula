@@ -1,0 +1,16 @@
+@Package("Material Management") type  Productionplan{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Line Number;
+Locator;
+Product;
+!ID;
+Production;
+Processed YesNo;
+Productionqty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

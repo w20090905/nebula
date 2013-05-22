@@ -1,0 +1,17 @@
+@Package("Common or Core Functionality") type  Campaign{ 
+Org;
+!ID;
+Channel;
+Costs Number;
+Created Timestamp;
+Createdby Date;
+Description;
+Enddate Date;
+Isactive YesNo;
+Issummary YesNo;
+!Name;
+Startdate Date;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+}; 

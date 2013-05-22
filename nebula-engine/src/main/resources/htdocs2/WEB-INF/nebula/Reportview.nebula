@@ -1,0 +1,15 @@
+@Package("Application Dictionary") type  Reportview{ 
+Org;
+!ID;
+Table;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Isactive YesNo;
+!Name;
+Orderbyclause Note;
+Updated Timestamp;
+Updatedby Date;
+Whereclause Note;
+}; 

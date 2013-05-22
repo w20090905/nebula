@@ -1,0 +1,17 @@
+@Package("Web") type  Mailmsg{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Mailmsgtype Attr;
+Message MSG;
+Message2 MSG;
+Message3 MSG;
+Name;
+Subject;
+Updated Timestamp;
+Updatedby Date;
+ID;
+Store;
+}; 

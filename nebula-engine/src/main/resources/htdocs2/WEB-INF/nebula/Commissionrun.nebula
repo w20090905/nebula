@@ -1,0 +1,17 @@
+@Package("Common or Core Functionality") type  Commissionrun{ 
+Org;
+!ID;
+Commission;
+Invoice;
+Created Timestamp;
+Createdby Date;
+Description;
+Documentno SeqNo;
+Grandtotal Number;
+Isactive YesNo;
+Processed YesNo;
+Processing YesNo;
+Startdate Date;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,17 @@
+@Package("Material Management") type  Bom{ 
+Org;
+Bomtype YesNo;
+Bomuse YesNo;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+!ID;
+Changenotice;
+Product;
+!Name;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

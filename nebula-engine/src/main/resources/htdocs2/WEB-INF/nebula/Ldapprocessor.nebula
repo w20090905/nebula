@@ -1,0 +1,17 @@
+@Package("Application Dictionary") type  Ldapprocessor{ 
+!ID;
+Org;
+Created Timestamp;
+Createdby Date;
+Datelastrun Date;
+Datenextrun Date;
+Description;
+Isactive YesNo;
+Keeplogdays Count;
+Ldapport Number;
+!Name;
+Processing YesNo;
+Supervisor User;
+Updated Timestamp;
+Updatedby Date;
+}; 

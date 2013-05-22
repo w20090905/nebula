@@ -1,0 +1,12 @@
+@Package("Application Dictionary") type  Schedulerrecipient{ 
+Org;
+Role;
+!ID;
+Scheduler;
+User;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

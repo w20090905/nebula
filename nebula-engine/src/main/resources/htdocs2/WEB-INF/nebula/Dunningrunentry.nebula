@@ -1,0 +1,19 @@
+@Package("Common or Core Functionality") type  Dunningrunentry{ 
+Org;
+User;
+Amt Amount;
+Bpartner;
+Bpartner_Location;
+Currency;
+!ID;
+Dunningrun;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Note;
+Processed YesNo;
+Qty Quantity;
+Salesrep User;
+Updated Timestamp;
+Updatedby Date;
+}; 

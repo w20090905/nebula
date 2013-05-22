@@ -1,0 +1,12 @@
+@Package("Common or Core Functionality") type  Project_Acct{ 
+Org;
+!Acctschema;
+!Project;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Pj_Asset_acct Account;
+Pj_Wip_acct Account;
+Updated Timestamp;
+Updatedby Date;
+}; 

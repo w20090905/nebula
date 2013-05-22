@@ -1,0 +1,27 @@
+@Package("Common or Core Functionality") type  Tax{ 
+Org;
+Country;
+Region;
+Taxcategory;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isdefault YesNo;
+Isdocumentlevel YesNo;
+Issalestax YesNo;
+Issummary YesNo;
+Istaxexempt YesNo;
+!Name;
+Parent_Tax Tax;
+Rate;
+Requirestaxcertificate YesNo;
+Sopotype YesNo;
+Taxindicator Number;
+To_Country Country;
+To_Region Region;
+Updated Timestamp;
+Updatedby Date;
+Validfrom Date;
+}; 

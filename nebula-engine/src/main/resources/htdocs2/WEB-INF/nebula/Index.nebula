@@ -1,0 +1,16 @@
+@Package("Knowledge Management") type  Index{ 
+Org;
+Table;
+Webproject;
+Doctype;
+Created Timestamp;
+Createdby Date;
+Excerpt Note;
+Isactive YesNo;
+!ID;
+Keyword String;
+Requesttype;
+Sourceupdated Date;
+Updated Timestamp;
+Updatedby Date;
+}; 

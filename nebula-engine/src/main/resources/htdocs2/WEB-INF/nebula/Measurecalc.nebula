@@ -1,0 +1,20 @@
+@Package("Performance Analysis") type  Measurecalc{ 
+Org;
+Table;
+Bpartnercolumn Name;
+Created Timestamp;
+Createdby Date;
+Datecolumn Name;
+Description;
+Entitytype Attr;
+Isactive YesNo;
+Keycolumn Name;
+!Name;
+Orgcolumn Name;
+!ID;
+Productcolumn Name;
+Selectclause Note;
+Updated Timestamp;
+Updatedby Date;
+Whereclause Note;
+}; 

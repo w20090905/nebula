@@ -1,0 +1,26 @@
+@Package("Collaboration Management") type  Ad{ 
+Org;
+Actualclick Number;
+Actualimpression Number;
+Ad_Cat;
+!ID;
+Media;
+Contenthtml Note;
+Created Timestamp;
+Createdby Date;
+Description;
+Enddate Date;
+Help;
+Isactive YesNo;
+Isadflag YesNo;
+Islogged YesNo;
+Maxclick Number;
+Maximpression Number;
+!Name;
+Startdate Date;
+Startimpression Number;
+Targeturl URL;
+Target_Frame String;
+Updated Timestamp;
+Updatedby Date;
+}; 

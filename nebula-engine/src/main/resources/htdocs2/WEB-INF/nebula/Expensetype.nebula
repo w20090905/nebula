@@ -1,0 +1,16 @@
+@Package("Service") type  Expensetype{ 
+Org;
+Taxcategory;
+Uom;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isinvoiced YesNo;
+Product_Category;
+!Name;
+!ID;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+}; 

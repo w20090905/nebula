@@ -1,0 +1,16 @@
+@Package("Material Management") type  Pricelist_Version{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Discountschema;
+Pricelist;
+!ID;
+Pricelist_Version_base Pricelist_Version;
+!Name;
+Proccreate YesNo;
+Updated Timestamp;
+Updatedby Date;
+Validfrom Date;
+}; 

@@ -1,0 +1,14 @@
+@Package("Material Management") type  Mmstrategy{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isallowsplit YesNo;
+Mmtype Attr;
+!ID;
+Warehouse;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,23 @@
+@Package("Material Management") type  Workordertransactionline{ 
+Org;
+User;
+Uom;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Line Number;
+Attributesetinstance;
+Locator;
+Product;
+!ID;
+Workordertransaction;
+Processed YesNo;
+Qtyentered Quantity;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+User1 Elementvalue;
+User2 Elementvalue;
+}; 

@@ -1,0 +1,12 @@
+@Package("Application Dictionary") type  Wf_Block{ 
+Org;
+!ID;
+Workflow;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

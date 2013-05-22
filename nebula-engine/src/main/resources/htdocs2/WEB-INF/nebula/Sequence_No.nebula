@@ -1,0 +1,11 @@
+@Package("Application Dictionary") type  Sequence_No{ 
+Org;
+!Sequence;
+!Calendaryear String;
+Created Timestamp;
+Createdby Date;
+Currentnext Number;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

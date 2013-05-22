@@ -1,0 +1,20 @@
+@Package("Common or Core Functionality") type  Commission{ 
+Org;
+Bpartner;
+Charge;
+!ID;
+Currency;
+Createfrom YesNo;
+Created Timestamp;
+Createdby Date;
+Datelastrun Date;
+Description;
+Docbasistype YesNo;
+Frequencytype YesNo;
+Isactive YesNo;
+Listdetails YesNo;
+!Name;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,18 @@
+@Package("Application Dictionary") type  Printlabelline{ 
+Column;
+Labelprinterfunction;
+Org;
+!ID;
+Printlabel;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Labelformattype YesNo;
+!Name;
+Printname Name;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+Xposition Long;
+Yposition Long;
+}; 

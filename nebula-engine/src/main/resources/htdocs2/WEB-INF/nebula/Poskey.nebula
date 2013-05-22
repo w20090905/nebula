@@ -1,0 +1,16 @@
+@Package("Common or Core Functionality") type  Poskey{ 
+Org;
+Printcolor;
+Poskeylayout;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Product;
+!Name;
+Qty Quantity;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

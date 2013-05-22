@@ -1,0 +1,19 @@
+@Package("Web") type  Click{ 
+Org;
+!User;
+Acceptlanguage Language;
+Created Timestamp;
+Createdby Date;
+Email;
+Isactive YesNo;
+Processed YesNo;
+Referrer String;
+Remote_Addr URL;
+Remote_Host Host;
+Targeturl URL;
+!Updated Timestamp;
+Updatedby Date;
+Useragent String;
+Clickcount;
+!ID;
+}; 

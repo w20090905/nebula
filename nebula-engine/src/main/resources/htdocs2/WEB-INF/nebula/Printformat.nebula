@@ -1,0 +1,28 @@
+@Package("Application Dictionary") type  Printformat{ 
+Client;
+Org;
+Printcolor;
+Printfont;
+!ID;
+Printpaper;
+Printtableformat;
+Reportview;
+Table;
+Createcopy YesNo;
+Created Timestamp;
+Createdby Date;
+Description;
+Footermargin Long;
+Headermargin Long;
+Isactive YesNo;
+Isdefault YesNo;
+Isform YesNo;
+Isstandardheaderfooter YesNo;
+Issuppressdupgroupby YesNo;
+Istablebased YesNo;
+Istotalsonly YesNo;
+!Name;
+Printername Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

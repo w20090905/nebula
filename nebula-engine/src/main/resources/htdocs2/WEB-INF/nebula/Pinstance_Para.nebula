@@ -1,0 +1,19 @@
+@Package("Application Dictionary") type  Pinstance_Para{ 
+Org;
+!Pinstance;
+Created Timestamp;
+Createdby Date;
+Info Description;
+Info_To String;
+Isactive YesNo;
+P_Date Date;
+P_Date_to Date;
+P_Number Number;
+P_Number_to Number;
+P_String String;
+P_String_to String;
+Parametername Name;
+!SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

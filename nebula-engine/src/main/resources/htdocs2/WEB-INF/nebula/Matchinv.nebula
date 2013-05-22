@@ -1,0 +1,23 @@
+@Package("Material Management") type  Matchinv{ 
+Orgtrx Org;
+Org;
+Activity;
+Invoiceline;
+Created Timestamp;
+Createdby Date;
+Dateacct Date;
+Datetrx Date;
+Description;
+Documentno SeqNo;
+Isactive YesNo;
+Attributesetinstance;
+Inoutline;
+!ID;
+Product;
+Posted YesNo;
+Processed YesNo;
+Processing YesNo;
+Qty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

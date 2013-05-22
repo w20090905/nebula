@@ -1,0 +1,13 @@
+@Package("Common or Core Functionality") type  Rfq_Topic{ 
+Org;
+Printformat;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isselfservice YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

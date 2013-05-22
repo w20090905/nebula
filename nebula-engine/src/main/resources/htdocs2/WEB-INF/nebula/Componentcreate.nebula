@@ -1,0 +1,17 @@
+@Package("Application Dictionary") type  Componentcreate{ 
+!ID;
+Componentreg;
+Org;
+User;
+Created Timestamp;
+Createdby Date;
+Description;
+Email;
+Isactive YesNo;
+Referrer String;
+Remote_Addr URL;
+Remote_Host Host;
+Responsetext Description;
+Updated Timestamp;
+Updatedby Date;
+}; 

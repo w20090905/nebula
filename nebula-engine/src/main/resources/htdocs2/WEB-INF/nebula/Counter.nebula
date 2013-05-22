@@ -1,0 +1,19 @@
+@Package("Web") type  Counter{ 
+Org;
+!User;
+Acceptlanguage Language;
+Created Timestamp;
+Createdby Date;
+Email;
+Isactive YesNo;
+Pageurl URL;
+Processed YesNo;
+Referrer String;
+Remote_Addr URL;
+Remote_Host Host;
+Updated Timestamp;
+Updatedby Date;
+Useragent String;
+Countercount;
+ID;
+}; 

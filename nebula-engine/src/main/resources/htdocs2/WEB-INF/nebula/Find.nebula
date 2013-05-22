@@ -1,0 +1,15 @@
+@Package("Application Dictionary") type  Find{ 
+Column;
+!ID;
+Org;
+Andor YesNo;
+Created Timestamp;
+Createdby Date;
+ID;
+Isactive YesNo;
+Operation Attr;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+Value2 String;
+}; 

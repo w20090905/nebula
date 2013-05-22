@@ -1,0 +1,14 @@
+@Package("Material Management") type  Costelement{ 
+Org;
+Costelementtype YesNo;
+Costingmethod YesNo;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Iscalculated YesNo;
+!ID;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,19 @@
+@Package("Application Dictionary") type  Printgraph{ 
+Org;
+Printformat;
+!ID;
+Created Timestamp;
+Createdby Date;
+Data1_Printformatitem Printformatitem;
+Data2_Printformatitem Printformatitem;
+Data3_Printformatitem Printformatitem;
+Data4_Printformatitem Printformatitem;
+Data_Printformatitem Printformatitem;
+Description;
+Description_Printformatitem Printformatitem;
+Graphtype YesNo;
+Isactive YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

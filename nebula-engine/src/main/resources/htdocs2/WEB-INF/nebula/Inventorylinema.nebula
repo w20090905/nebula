@@ -1,0 +1,11 @@
+@Package("Material Management") type  Inventorylinema{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!Attributesetinstance;
+!Inventoryline;
+Movementqty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,13 @@
+@Package("Application Dictionary") type  Column_Access{ 
+!Column;
+Org;
+!Role;
+Table;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Isexclude YesNo;
+Isreadonly YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,15 @@
+@Package("Common or Core Functionality") type  Bankaccountdoc{ 
+Org;
+!ID;
+Bankaccount;
+Check_Printformat Printformat;
+Created Timestamp;
+Createdby Date;
+Currentnext Number;
+Description;
+Isactive YesNo;
+!Name;
+Paymentrule YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

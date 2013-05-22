@@ -1,0 +1,14 @@
+@Package("Material Management") type  Forecastline{ 
+Org;
+Period;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!ID;
+Forecast;
+Product;
+Qty Quantity;
+Qtycalculated Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,14 @@
+@Package("Application Dictionary") type  Val_Rule{ 
+Org;
+!ID;
+Code Note;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Isactive YesNo;
+!Name;
+Type YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

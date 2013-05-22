@@ -1,0 +1,11 @@
+@Package("Application Dictionary") type  Assignlog{ 
+Assigntarget;
+Client;
+Org;
+Created Timestamp;
+Createdby Date;
+Help;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

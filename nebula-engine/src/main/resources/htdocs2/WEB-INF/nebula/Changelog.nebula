@@ -1,0 +1,21 @@
+@Package("Application Dictionary") type  Changelog{ 
+Client;
+Column;
+Org;
+Role;
+Session;
+Table;
+Changelogtype YesNo;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Iscustomization YesNo;
+Newvalue Note;
+Oldvalue Note;
+Redo YesNo;
+Trxname Name;
+Undo YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,12 @@
+@Package("Marketplace") type  Topiccategory{ 
+Org;
+!ID;
+Topictype;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

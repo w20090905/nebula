@@ -1,0 +1,16 @@
+@Package("Application Dictionary") type  Pinstance{ 
+Org;
+!ID;
+Process;
+Role;
+Session;
+User;
+Created Timestamp;
+Createdby Date;
+ErrorMsg MSG;
+Isactive YesNo;
+Isprocessing YesNo;
+Result Number;
+Updated Timestamp;
+Updatedby Date;
+}; 

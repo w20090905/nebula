@@ -1,0 +1,12 @@
+@Package("Common or Core Functionality") type  Nonbusinessday{ 
+Org;
+Calendar;
+!ID;
+Created Timestamp;
+Createdby Date;
+Date1 Date;
+Isactive YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

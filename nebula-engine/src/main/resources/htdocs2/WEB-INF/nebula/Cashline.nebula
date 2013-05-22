@@ -1,0 +1,24 @@
+@Package("Common or Core Functionality") type  Cashline{ 
+Orgtrx Org;
+Org;
+Amount;
+Activity;
+Bankaccount;
+!ID;
+Cash;
+Charge;
+Currency;
+Invoice;
+Cashtype YesNo;
+Created Timestamp;
+Createdby Date;
+Description;
+Discountamt Amount;
+Isactive YesNo;
+Isgenerated YesNo;
+Line Number;
+Processed YesNo;
+Updated Timestamp;
+Updatedby Date;
+Writeoffamt Amount;
+}; 

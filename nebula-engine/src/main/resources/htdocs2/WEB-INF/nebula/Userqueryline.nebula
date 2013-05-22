@@ -1,0 +1,19 @@
+@Package("Application Dictionary") type  Userqueryline{ 
+Org;
+!ID;
+Userquery;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Isand YesNo;
+Keyname Name;
+Keyvalue String;
+Operator String;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+Value1name Name;
+Value1value String;
+Value2name Name;
+Value2value String;
+}; 

@@ -1,0 +1,13 @@
+@Package("Application Dictionary") type  Windowlog{ 
+Form;
+Org;
+Role;
+Session;
+!ID;
+Window;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

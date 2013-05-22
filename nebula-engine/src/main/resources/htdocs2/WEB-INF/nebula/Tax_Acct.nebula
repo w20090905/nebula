@@ -1,0 +1,15 @@
+@Package("Common or Core Functionality") type  Tax_Acct{ 
+Org;
+!Acctschema;
+!Tax;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+T_Credit_acct Account;
+T_Due_acct Account;
+T_Expense_acct Account;
+T_Liability_acct Account;
+T_Receivables_acct Account;
+Updated Timestamp;
+Updatedby Date;
+}; 

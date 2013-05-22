@@ -1,0 +1,15 @@
+@Package("Material Management") type  Tasklistline{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Line Number;
+!ID;
+Tasklist;
+Warehousetask;
+Slotno SeqNo;
+Stopno SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,16 @@
+@Package("Application Dictionary") type  Orginfo{ 
+Orgtype;
+!Org;
+Calendar;
+Location;
+Created Timestamp;
+Createdby Date;
+DUNS;
+Isactive YesNo;
+Warehouse;
+Parent_Org Org;
+Supervisor User;
+Taxid ID;
+Updated Timestamp;
+Updatedby Date;
+}; 

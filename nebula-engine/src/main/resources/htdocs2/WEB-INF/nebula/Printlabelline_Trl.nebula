@@ -1,0 +1,12 @@
+@Package("Application Dictionary") type  Printlabelline_Trl{ 
+!Ad_Language Language;
+Org;
+!Printlabelline;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Istranslated YesNo;
+Printname Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

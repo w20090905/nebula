@@ -1,0 +1,24 @@
+@Package("Application Dictionary") type  Infocolumn{ 
+Element;
+!ID;
+Infowindow;
+Org;
+Reference;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Help;
+Isactive YesNo;
+Iscentrallymaintained YesNo;
+Isdisplayed YesNo;
+Isidentifier YesNo;
+Iskey YesNo;
+Isquerycriteria YesNo;
+Isrange YesNo;
+!Name;
+Selectclause Note;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

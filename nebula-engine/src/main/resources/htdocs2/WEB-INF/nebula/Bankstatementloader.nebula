@@ -1,0 +1,28 @@
+@Package("Common or Core Functionality") type  Bankstatementloader{ 
+Org;
+AccountNo;
+Branchid String;
+Bankaccount;
+!ID;
+Created Timestamp;
+Createdby Date;
+Dateformat String;
+Datelastrun Date;
+Description;
+Filename Name;
+Financialinstitutionid String;
+Hostaddress String;
+Hostport Long;
+Isactive YesNo;
+!Name;
+PIN;
+Password String;
+Proxyaddress String;
+Proxylogon String;
+Proxypassword String;
+Proxyport String;
+Stmtloaderclass String;
+Updated Timestamp;
+Updatedby Date;
+Userid Name;
+}; 

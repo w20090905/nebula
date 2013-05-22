@@ -1,0 +1,14 @@
+@Package("Knowledge Management") type  Comment{ 
+Org;
+Session;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Ispublic YesNo;
+!ID;
+Entry;
+Rating YesNo;
+Textmsg MSG;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,33 @@
+@Package("Application Dictionary") type  Task{ 
+Org;
+!ID;
+Accesslevel YesNo;
+Created Timestamp;
+Createdby Date;
+Description;
+Entitytype Attr;
+Help;
+Isactive YesNo;
+Isserverprocess YesNo;
+!Name;
+Os_Command Note;
+Updated Timestamp;
+Updatedby Date;
+}; 
+@Package("Common or Core Functionality") type  Task{ 
+Org;
+Phase;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Product;
+!Name;
+SeqNo;
+Standardqty Quantity;
+Tasktype YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

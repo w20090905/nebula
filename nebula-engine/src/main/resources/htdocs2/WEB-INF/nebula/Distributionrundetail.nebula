@@ -1,0 +1,18 @@
+@Package("Temporary Tables") type  Distributionrundetail{ 
+Org;
+Bpartner;
+Bpartner_Location;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!Distributionlistline;
+!Distributionlist;
+!Distributionrunline;
+!Distributionrun;
+Product;
+Minqty Quantity;
+Qty Quantity;
+Ratio;
+Updated Timestamp;
+Updatedby Date;
+}; 

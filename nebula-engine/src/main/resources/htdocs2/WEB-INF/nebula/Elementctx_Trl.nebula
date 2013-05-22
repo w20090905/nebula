@@ -1,0 +1,15 @@
+@Package("Application Dictionary") type  Elementctx_Trl{ 
+!Elementctx;
+!Ad_Language Language;
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Istranslated YesNo;
+!Name;
+Printname Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

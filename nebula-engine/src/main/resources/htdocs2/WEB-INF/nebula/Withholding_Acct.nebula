@@ -1,0 +1,11 @@
+@Package("Common or Core Functionality") type  Withholding_Acct{ 
+Org;
+!Acctschema;
+!Withholding;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+Withholding_Acct Account;
+}; 

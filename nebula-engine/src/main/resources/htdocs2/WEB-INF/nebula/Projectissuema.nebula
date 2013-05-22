@@ -1,0 +1,11 @@
+@Package("Common or Core Functionality") type  Projectissuema{ 
+Org;
+!Projectissue;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!Attributesetinstance;
+Movementqty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

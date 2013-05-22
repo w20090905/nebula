@@ -1,0 +1,28 @@
+@Package("Performance Analysis") type  Goal{ 
+Org;
+Role;
+User;
+Created Timestamp;
+Createdby Date;
+Datefrom Date;
+Datelastrun Date;
+Dateto Date;
+Description;
+Goalperformance Number;
+Isactive YesNo;
+Issummary YesNo;
+Measureactual Number;
+Measuredisplay YesNo;
+Measurescope YesNo;
+Measuretarget Number;
+!Name;
+Note;
+Colorschema;
+Goalparent Goal;
+!ID;
+Measure;
+Relativeweight Number;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

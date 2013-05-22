@@ -1,0 +1,11 @@
+@Package("Requests") type  Issuestatus{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Name;
+!ID;
+Updated Timestamp;
+Updatedby Date;
+}; 

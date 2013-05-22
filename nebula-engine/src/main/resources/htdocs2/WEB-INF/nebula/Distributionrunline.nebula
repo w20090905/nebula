@@ -1,0 +1,16 @@
+@Package("Material Management") type  Distributionrunline{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Line Number;
+Distributionlist;
+!ID;
+Distributionrun;
+Product;
+Minqty Quantity;
+Totalqty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

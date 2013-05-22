@@ -1,0 +1,14 @@
+@Package("Common or Core Functionality") type  Invoicetax{ 
+Org;
+!Invoice;
+!Tax;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Istaxincluded YesNo;
+Processed YesNo;
+Taxamt Amount;
+Taxbaseamt Amount;
+Updated Timestamp;
+Updatedby Date;
+}; 

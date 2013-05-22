@@ -1,0 +1,15 @@
+@Package("Collaboration Management") type  Webproject_Domain{ 
+Org;
+Container;
+!ID;
+Webproject;
+Created Timestamp;
+Createdby Date;
+Description;
+Fqdn String;
+Help;
+Isactive YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,16 @@
+@Package("Application Dictionary") type  Assigncriteria{ 
+Assigntarget;
+Client;
+Org;
+Sourcecolumn Column;
+Andor YesNo;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Operation Attr;
+SeqNo;
+Updated Timestamp;
+Updatedby Date;
+Valuestring String;
+}; 

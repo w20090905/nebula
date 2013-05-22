@@ -1,0 +1,19 @@
+@Package("Knowledge Management") type  Entry{ 
+Org;
+Session;
+Created Timestamp;
+Createdby Date;
+Descriptionurl URL;
+Isactive YesNo;
+Ispublic YesNo;
+!ID;
+Source;
+Topic;
+Keywords String;
+!Name;
+Rating YesNo;
+Textmsg MSG;
+Updated Timestamp;
+Updatedby Date;
+Validto Date;
+}; 

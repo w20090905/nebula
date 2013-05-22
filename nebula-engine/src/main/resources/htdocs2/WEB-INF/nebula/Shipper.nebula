@@ -1,0 +1,13 @@
+@Package("Material Management") type  Shipper{ 
+Org;
+Bpartner;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!ID;
+!Name;
+Trackingurl URL;
+Updated Timestamp;
+Updatedby Date;
+}; 

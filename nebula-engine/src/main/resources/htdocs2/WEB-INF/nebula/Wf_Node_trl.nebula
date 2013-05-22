@@ -1,0 +1,14 @@
+@Package("Application Dictionary") type  Wf_Node_trl{ 
+!Ad_Language Language;
+Org;
+!Wf_Node;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Istranslated YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

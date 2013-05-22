@@ -1,0 +1,14 @@
+@Package("Application Dictionary") type  Workbench_Trl{ 
+!Ad_Language Language;
+Org;
+!Workbench;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Istranslated YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

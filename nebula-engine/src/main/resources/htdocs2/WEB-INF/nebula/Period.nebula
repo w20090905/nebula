@@ -1,0 +1,16 @@
+@Package("Common or Core Functionality") type  Period{ 
+Org;
+!ID;
+Year;
+Created Timestamp;
+Createdby Date;
+Enddate Date;
+Isactive YesNo;
+!Name;
+Periodno SeqNo;
+Periodtype YesNo;
+Processing YesNo;
+Startdate Date;
+Updated Timestamp;
+Updatedby Date;
+}; 

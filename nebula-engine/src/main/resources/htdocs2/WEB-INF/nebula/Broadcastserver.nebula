@@ -1,0 +1,16 @@
+@Package("Collaboration Management") type  Broadcastserver{ 
+Org;
+!ID;
+Webproject;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Ip_Address IPAddr;
+Isactive YesNo;
+Lastsynchronized Date;
+!Name;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

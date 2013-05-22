@@ -1,0 +1,14 @@
+@Package("Requests") type  Group{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Bom;
+Changenotice;
+!Name;
+!ID;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,19 @@
+@Package("Application Dictionary") type  Session{ 
+Org;
+Role;
+!ID;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Lastactivitytime Date;
+Lastactivitytype Attr;
+Processed YesNo;
+Processing YesNo;
+Remote_Addr URL;
+Remote_Host Host;
+Sessiontype YesNo;
+Updated Timestamp;
+Updatedby Date;
+Websession String;
+}; 

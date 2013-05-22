@@ -1,0 +1,18 @@
+@Package("Material Management") type  Movementlineconfirm{ 
+Org;
+Confirmedqty Quantity;
+Created Timestamp;
+Createdby Date;
+Description;
+Differenceqty Quantity;
+Isactive YesNo;
+Inventoryline;
+Movementconfirm;
+!ID;
+Movementline;
+Processed YesNo;
+Scrappedqty Quantity;
+Targetqty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

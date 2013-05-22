@@ -1,0 +1,11 @@
+@Package("Application Dictionary") type  Sequence_Audit{ 
+Org;
+!Sequence;
+!Table;
+Created Timestamp;
+Createdby Date;
+Documentno SeqNo;
+Isactive YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

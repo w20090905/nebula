@@ -1,0 +1,11 @@
+@Package("Requests") type  Groupupdates{ 
+Org;
+!User;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Isselfservice YesNo;
+!Group;
+Updated Timestamp;
+Updatedby Date;
+}; 

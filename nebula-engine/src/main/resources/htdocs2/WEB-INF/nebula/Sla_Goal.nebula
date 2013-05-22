@@ -1,0 +1,21 @@
+@Package("Performance Analysis") type  Sla_Goal{ 
+Org;
+Bpartner;
+Created Timestamp;
+Createdby Date;
+Datelastrun Date;
+Description;
+Help;
+Isactive YesNo;
+Measureactual Number;
+Measuretarget Number;
+!Name;
+Sla_Criteria;
+!ID;
+Processed YesNo;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+Validfrom Date;
+Validto Date;
+}; 

@@ -1,0 +1,14 @@
+@Package("Common or Core Functionality") type  Tax_Trl{ 
+!Ad_Language Language;
+Org;
+!Tax;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Istranslated YesNo;
+!Name;
+Taxindicator Number;
+Updated Timestamp;
+Updatedby Date;
+}; 

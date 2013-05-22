@@ -1,0 +1,11 @@
+@Package("Application Dictionary") type  Labelprinter{ 
+!ID;
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

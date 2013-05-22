@@ -1,0 +1,27 @@
+@Package("Common or Core Functionality") type  Dunninglevel{ 
+Org;
+!ID;
+Dunning;
+Paymentterm;
+Chargefee YesNo;
+Chargeinterest YesNo;
+Created Timestamp;
+Createdby Date;
+Daysafterdue Count;
+Daysbetweendunning Count;
+Description;
+Dunning_Printformat Printformat;
+Feeamt Amount;
+Interestpercent Percent;
+Invoicecollectiontype YesNo;
+Isactive YesNo;
+Issetcreditstop YesNo;
+Issetpaymentterm YesNo;
+Isshowalldue YesNo;
+Isshownotdue YesNo;
+!Name;
+Note;
+Printname Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

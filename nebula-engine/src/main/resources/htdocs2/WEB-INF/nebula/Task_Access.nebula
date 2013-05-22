@@ -1,0 +1,11 @@
+@Package("Application Dictionary") type  Task_Access{ 
+Org;
+!Role;
+!Task;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+Isreadwrite YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,16 @@
+@Package("Material Management") type  Productlocator{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Locator;
+!ID;
+Product;
+Maxquantity Quantity;
+Minquantity Quantity;
+Updated Timestamp;
+Updatedby Date;
+Volumelimit Number;
+Weightlimit Weight;
+}; 

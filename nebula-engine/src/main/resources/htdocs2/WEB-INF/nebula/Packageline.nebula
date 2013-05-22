@@ -1,0 +1,13 @@
+@Package("Material Management") type  Packageline{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Inoutline;
+!ID;
+Package;
+Qty Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

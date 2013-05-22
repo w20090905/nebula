@@ -1,0 +1,24 @@
+@Package("Application Dictionary") type  Replication{ 
+Org;
+Replicationstrategy;
+!ID;
+Created Timestamp;
+Createdby Date;
+Datelastrun Date;
+Description;
+Help;
+Hostaddress String;
+Hostport Long;
+Idrangeend Number;
+Idrangestart Number;
+Isactive YesNo;
+Isrmioverhttp YesNo;
+!Name;
+Prefix String;
+Processing YesNo;
+Remote_Client Client;
+Remote_Org Org;
+Suffix String;
+Updated Timestamp;
+Updatedby Date;
+}; 

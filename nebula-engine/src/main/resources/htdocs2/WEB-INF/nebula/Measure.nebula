@@ -1,0 +1,22 @@
+@Package("Performance Analysis") type  Measure{ 
+Org;
+Projecttype;
+Calculationclass Name;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Manualactual Number;
+Manualnote Note;
+Measuredatatype YesNo;
+Measuretype YesNo;
+!Name;
+Benchmark;
+Hierarchy;
+Measurecalc;
+!ID;
+Ratio;
+Requesttype;
+Updated Timestamp;
+Updatedby Date;
+}; 

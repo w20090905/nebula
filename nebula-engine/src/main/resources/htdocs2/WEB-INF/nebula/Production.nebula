@@ -1,0 +1,22 @@
+@Package("Material Management") type  Production{ 
+Orgtrx Org;
+Org;
+Activity;
+Campaign;
+Project;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Iscreated YesNo;
+!ID;
+Movementdate Date;
+!Name;
+Posted YesNo;
+Processed YesNo;
+Processing YesNo;
+Updated Timestamp;
+Updatedby Date;
+User1 Elementvalue;
+User2 Elementvalue;
+}; 

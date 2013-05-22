@@ -1,0 +1,14 @@
+@Package("Knowledge Management") type  Type{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Help;
+Isactive YesNo;
+Ispublic YesNo;
+Ispublicwrite YesNo;
+!ID;
+!Name;
+Updated Timestamp;
+Updatedby Date;
+}; 

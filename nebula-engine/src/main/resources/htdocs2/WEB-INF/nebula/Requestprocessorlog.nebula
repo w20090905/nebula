@@ -1,0 +1,16 @@
+@Package("Requests") type  Requestprocessorlog{ 
+Org;
+Binarydata Note;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Iserror YesNo;
+!ID;
+Requestprocessor;
+Reference String;
+Summary Note;
+Textmsg MSG;
+Updated Timestamp;
+Updatedby Date;
+}; 

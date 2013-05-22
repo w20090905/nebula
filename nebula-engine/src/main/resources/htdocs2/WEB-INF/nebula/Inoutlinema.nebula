@@ -1,0 +1,12 @@
+@Package("Material Management") type  Inoutlinema{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Isactive YesNo;
+!Attributesetinstance;
+!Inoutline;
+Movementqty Quantity;
+Qtyallocated Quantity;
+Updated Timestamp;
+Updatedby Date;
+}; 

@@ -1,0 +1,19 @@
+@Package("Material Management") type  Changerequest{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Detailinfo Description;
+Documentno SeqNo;
+Help;
+Isactive YesNo;
+Isapproved YesNo;
+Bom;
+Changenotice;
+!ID;
+Fixchangenotice Changenotice;
+!Name;
+Processed YesNo;
+Updated Timestamp;
+Updatedby Date;
+}; 

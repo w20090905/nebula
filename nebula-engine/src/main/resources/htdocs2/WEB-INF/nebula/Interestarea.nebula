@@ -1,0 +1,14 @@
+@Package("Requests") type  Interestarea{ 
+Org;
+Created Timestamp;
+Createdby Date;
+Description;
+Isactive YesNo;
+Isselfservice YesNo;
+!Name;
+!ID;
+Source;
+Updated Timestamp;
+Updatedby Date;
+Value String;
+}; 
