@@ -45,7 +45,7 @@ Postal PostalCode;
 Postal_Add PostalCode;
 Processed YesNo;
 Interestarea;
-Request;
+/*TODO Request;*/
 Source;
 Status;
 Regionname Name;

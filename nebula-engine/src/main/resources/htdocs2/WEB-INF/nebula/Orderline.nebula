@@ -31,8 +31,8 @@ Attributesetinstance;
 Product;
 Shipper;
 Warehouse;
-Orig_Inoutline Inoutline;
-Orig_Orderline Orderline;
+/*TODO Orig_Inoutline Inoutline;*/
+/*TODO Orig_Orderline Orderline;*/
 Priceactual Price;
 Pricecost Number;
 Priceentered Price;

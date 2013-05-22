@@ -8,7 +8,7 @@ Printfont;
 Printformatchild Printformat;
 !ID;
 Printformat;
-Printgraph;
+/*TODO Printgraph;*/
 Arcdiameter Number;
 Barcodetype Attr;
 Belowcolumn Number;

@@ -7,7 +7,7 @@ Accesslevel YesNo;
 Base_Table Table;
 Created Timestamp;
 Createdby Date;
-Datecolumn Column;
+/*TODO Datecolumn Column;*/
 Description;
 Entitytype Attr;
 Exportview YesNo;

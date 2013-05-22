@@ -12,9 +12,8 @@ Isactive YesNo;
 Isavailableforallocation YesNo;
 Isavailabletopromise YesNo;
 Isdefault YesNo;
-ID;
 Product;
-Warehouse;
+/*TODO Warehouse;*/
 Maxquantity Quantity;
 Minquantity Quantity;
 Orgname Name;

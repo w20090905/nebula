@@ -17,7 +17,7 @@ Linetype YesNo;
 !Name;
 Reportlineset;
 ID;
-Reportsource;
+/*TODO Reportsource;*/
 Postingtype YesNo;
 Processed YesNo;
 Processing YesNo;

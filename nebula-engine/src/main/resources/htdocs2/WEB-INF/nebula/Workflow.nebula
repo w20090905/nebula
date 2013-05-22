@@ -1,7 +1,7 @@
 @Package("Application Dictionary") type  Workflow{ 
 Org;
 Table;
-Wf_Node;
+/*TODO Wf_Node;*/
 Wf_Responsible;
 Workflowprocessor;
 !ID;
