@@ -75,7 +75,7 @@
 		<tbody>
 			<tr x-ng-repeat="data in datalist | filter:query | orderBy:orderProp">
 			<td>{{$index+1}}</td>
-			[#list type.fields as field][#if !field.array]
+			[#list type.fields as field][#if !field.array && field.importance != "Unimportant"]
 				[#switch field.refer]
 				[#case "ByVal"]
 					[#if field.key]

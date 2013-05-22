@@ -27,7 +27,10 @@
 							<thead>
 								<tr>
 									<th style="width: 2em">#</th>
-									<th style="width: 13em" x-ng-click='orderProp="name";orderReverse=nameReverse;nameReverse=!nameReverse '>Name</th>
+									<th style="width: 13em"><a href=""  x-ng-click='reverse=(predicate=="Name") && !reverse; predicate="Name";'>Name
+											<i class="icon-sort" x-ng-show='predicate!="Name"'> </i>
+											<i class="icon-sort-down" x-ng-show='predicate=="Name" && reverse'> </i>
+											<i class="icon-sort-up" x-ng-show='predicate=="Name" && !reverse'> </i></a></th>
 									<th>Standalone</th>
 									<th>Super Type</th>
 									<th>Data</th>
@@ -35,7 +38,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr x-ng-repeat="data in datalist | filter:'!Abstract' | filter:query | orderBy:orderProp:orderReverse | limitTo: 50">
+								<tr x-ng-repeat="data in datalist | filter:'!Abstract' | filter:query | orderBy:predicate:reverse | limitTo: 50">
 									<td>{{$index+1}}</td>
 									<td><a href="#/d/{{typename}}/{{data.Name}}">{{data.Name}}</a> <span
 											x-ng-repeat="(key, value) in data.NameAlias"
