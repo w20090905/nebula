@@ -35,7 +35,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr x-ng-repeat="data in datalist | filter:'!Abstract' | filter:query | orderBy:orderProp:orderReverse">
+								<tr x-ng-repeat="data in datalist | filter:'!Abstract' | filter:query | orderBy:orderProp:orderReverse | limitTo: 50">
 									<td>{{$index+1}}</td>
 									<td><a href="#/d/{{typename}}/{{data.Name}}">{{data.Name}}</a> <span
 											x-ng-repeat="(key, value) in data.NameAlias"

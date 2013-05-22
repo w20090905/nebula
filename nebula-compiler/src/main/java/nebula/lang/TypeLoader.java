@@ -67,33 +67,35 @@ public abstract class TypeLoader {
 				}
 			});
 		}
-		classifyBy= new DataClassificator<String, Type>(new Function<Type, String>() {
+		classifyBy = new DataClassificator<String, Type>(new Function<Type, String>() {
 			@Override
 			public String apply(Type from) {
 				return from.getStandalone().toString();
 			}
 		});
-		types.addListener((DataListener<Type>) classifyBy);		
+		types.addListener((DataListener<Type>) classifyBy);
 	}
-	
-//
-//	public Filter<Type> liveFilter(Predicate<Type> filterFunction) {
-//		return types.liveFilter(filterFunction);
-//	}
-//
-//	public List<Type> filter(Predicate<Type> filterFunction) {
-//		return types.filter(filterFunction);
-//	}
-//
-//	public <K> Classificator<K, Type> classify(Function<Type, K> indexerFunction) {
-//		return types.classify(indexerFunction);
-//	}
-//
-//	public <K> Classificator<K, Type> liveClassify(Function<Type, K> indexerFunction) {
-//		return types.liveClassify(indexerFunction);
-//	}
-	
-	public Classificator<String, Type> groupByStandalone(){
+
+	//
+	// public Filter<Type> liveFilter(Predicate<Type> filterFunction) {
+	// return types.liveFilter(filterFunction);
+	// }
+	//
+	// public List<Type> filter(Predicate<Type> filterFunction) {
+	// return types.filter(filterFunction);
+	// }
+	//
+	// public <K> Classificator<K, Type> classify(Function<Type, K>
+	// indexerFunction) {
+	// return types.classify(indexerFunction);
+	// }
+	//
+	// public <K> Classificator<K, Type> liveClassify(Function<Type, K>
+	// indexerFunction) {
+	// return types.liveClassify(indexerFunction);
+	// }
+
+	public Classificator<String, Type> groupByStandalone() {
 		return this.classifyBy;
 	}
 
@@ -169,13 +171,14 @@ public abstract class TypeLoader {
 		return typeList;
 	}
 
+	static long cntLevel = 0;
 	public Type findType(String name) {
 		if (log.isTraceEnabled()) {
 			log.trace("\tsearch type [" + name + "]  from " + this.getClass().getName());
 		}
 
 		try {
-			Type type = parent.findType(name);
+			Type type = types.get(name);
 			if (type != null) {
 				if (log.isTraceEnabled()) {
 					log.trace("\tfind type [" + name + "]  from " + this.getClass().getName());
@@ -183,22 +186,30 @@ public abstract class TypeLoader {
 				return type;
 			}
 
-			type = types.get(name);
+			type = parent.findType(name);
 			if (type != null) {
 				if (log.isTraceEnabled()) {
 					log.trace("\tfind type [" + name + "]  from " + this.getClass().getName());
 				}
 				return type;
 			}
-
+			if (log.isDebugEnabled()) {
+				log.debug( "[ "+ ++cntLevel +  " ] " + name + " - before loadClassData from " + this.getClass().getName());
+			}
 			URL url = loadClassData(name);
 			if (url != null) {
 				List<Type> typeList = defineNebula(url);
 				if (log.isDebugEnabled()) {
 					log.debug("loaded type [" + name + "]  \tfrom " + this.getClass().getName());
 				}
+				if (log.isDebugEnabled()) {
+					log.debug( "[ "+ cntLevel-- +  " ] " + name + " - succeed loadClassData from " + this.getClass().getName());
+				}
 				return typeList.get(0);
 			} else {
+				if (log.isDebugEnabled()) {
+					log.debug( "[ "+ cntLevel -- +  " ] " + name + " - fail loadClassData from " + this.getClass().getName());
+				}
 				return null;
 			}
 		} catch (IOException e) {
