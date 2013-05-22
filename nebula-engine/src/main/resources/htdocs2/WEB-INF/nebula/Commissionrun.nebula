@@ -5,7 +5,7 @@ Org;
 Commission;
 Invoice;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Documentno SeqNo;
 Grandtotal Number;

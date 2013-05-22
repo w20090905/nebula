@@ -6,7 +6,7 @@ Chattype;
 !ID;
 Confidentialtype YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Moderationtype YesNo;

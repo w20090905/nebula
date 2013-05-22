@@ -9,7 +9,7 @@ Accesslevel YesNo;
 Author String;
 Cost Number;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Docvaluelogic Note;
 Duration Long;

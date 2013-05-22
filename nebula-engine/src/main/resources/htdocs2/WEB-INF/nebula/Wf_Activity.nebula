@@ -10,7 +10,7 @@ Wf_Process;
 Wf_Responsible;
 Workflow;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Datelastalert Date;
 Dynprioritystart Number;
 Endwaittime Date;

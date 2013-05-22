@@ -8,7 +8,7 @@ Window;
 Asset;
 Comments Note;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dbaddress String;
 Databaseinfo Description;
 Errortrace Note;

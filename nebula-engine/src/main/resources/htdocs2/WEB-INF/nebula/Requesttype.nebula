@@ -4,7 +4,7 @@ Org;
 Autoduedatedays Count;
 Confidentialtype YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Duedatetolerance Number;
 Isactive YesNo;

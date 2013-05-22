@@ -8,7 +8,7 @@ Bankaccounttype YesNo;
 Bank;
 Currency;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Creditlimit Number;
 Currentbalance Amount;
 Description;

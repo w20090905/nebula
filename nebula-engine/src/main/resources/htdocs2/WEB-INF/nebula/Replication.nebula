@@ -4,7 +4,7 @@ Org;
 Replicationstrategy;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Datelastrun Date;
 Description;
 Help;

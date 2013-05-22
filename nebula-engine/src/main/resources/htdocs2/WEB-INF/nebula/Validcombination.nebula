@@ -16,7 +16,7 @@ Subacct;
 !ID;
 Combination String;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Isfullyqualified YesNo;

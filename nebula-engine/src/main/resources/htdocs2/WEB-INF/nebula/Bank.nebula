@@ -5,7 +5,7 @@ Bankverificationclass Name;
 !ID;
 Location;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Isownbank YesNo;

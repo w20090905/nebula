@@ -29,7 +29,7 @@ Project;
 Chargeamt Amount;
 Checkno Code;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Creditcardexpmm Number;
 Creditcardexpyy Number;
 Creditcardnumber Code;

@@ -4,7 +4,7 @@ Org;
 Breakdiscount Count;
 Breakvalue Number;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Isbpartnerflatdiscount YesNo;
 !ID;

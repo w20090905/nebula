@@ -5,7 +5,7 @@ Wf_Next Wf_Node;
 !ID;
 Wf_Node;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Entitytype Attr;
 Isactive YesNo;

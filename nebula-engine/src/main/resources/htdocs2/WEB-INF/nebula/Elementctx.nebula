@@ -5,7 +5,7 @@ Ctxarea;
 Element;
 Org;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Entitytype Attr;
 Help;

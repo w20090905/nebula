@@ -8,7 +8,7 @@ Order;
 Uom;
 Createinoutdocaction Attr;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 ErrorMsg MSG;
 Isactive YesNo;
 Iscreateonsave YesNo;

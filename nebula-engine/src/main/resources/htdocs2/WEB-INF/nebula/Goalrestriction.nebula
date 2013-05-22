@@ -4,7 +4,7 @@ Org;
 Bp_Group;
 Bpartner;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Goalrestrictiontype YesNo;
 Isactive YesNo;
 Product_Category;

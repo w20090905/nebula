@@ -11,7 +11,7 @@ Locto Location;
 Project;
 Salesregion;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 !ID;
 Distribution;

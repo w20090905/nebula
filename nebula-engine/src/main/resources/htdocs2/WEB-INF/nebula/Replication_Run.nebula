@@ -4,7 +4,7 @@ Org;
 Replication;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Isreplicated YesNo;

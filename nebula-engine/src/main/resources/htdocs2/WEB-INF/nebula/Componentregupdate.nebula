@@ -7,7 +7,7 @@ User;
 Approvalcomment Comment;
 Binarydata Note;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Documentationtext Note;
 Email;

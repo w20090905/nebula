@@ -5,7 +5,7 @@ Componentreg;
 Org;
 User;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Email;
 Isactive YesNo;

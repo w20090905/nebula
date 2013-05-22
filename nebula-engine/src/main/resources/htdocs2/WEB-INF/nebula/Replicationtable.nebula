@@ -5,7 +5,7 @@ Replicationstrategy;
 !ID;
 Table;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Entitytype Attr;
 Isactive YesNo;
 Replicationtype YesNo;

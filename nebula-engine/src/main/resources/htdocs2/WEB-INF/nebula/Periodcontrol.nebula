@@ -4,7 +4,7 @@ Org;
 !ID;
 Period;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Docbasetype Attr;
 Isactive YesNo;
 Periodaction YesNo;

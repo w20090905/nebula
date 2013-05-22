@@ -15,7 +15,7 @@ Invoice;
 Project;
 Tax;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dateacct Date;
 Dateinvoiced Date;
 Description;

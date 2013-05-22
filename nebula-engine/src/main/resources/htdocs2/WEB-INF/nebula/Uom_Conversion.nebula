@@ -5,7 +5,7 @@ Org;
 Uom;
 Uom_To Uom;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dividerate Rate;
 Isactive YesNo;
 Product;

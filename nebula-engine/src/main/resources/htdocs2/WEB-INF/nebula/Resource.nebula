@@ -4,7 +4,7 @@ Org;
 User;
 Chargeableqty Quantity;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Isavailable YesNo;

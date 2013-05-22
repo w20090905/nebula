@@ -4,7 +4,7 @@ Org;
 !ID;
 Userquery;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Isand YesNo;
 Keyname Name;

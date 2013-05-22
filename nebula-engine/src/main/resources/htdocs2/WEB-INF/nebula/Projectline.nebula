@@ -11,7 +11,7 @@ Project;
 Committedamt Amount;
 Committedqty Quantity;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Discount Number;
 Dopricing YesNo;

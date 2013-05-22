@@ -6,7 +6,7 @@ Org;
 Currency;
 Countrycode Attr;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Displaysequence String;
 Displaysequencelocal String;

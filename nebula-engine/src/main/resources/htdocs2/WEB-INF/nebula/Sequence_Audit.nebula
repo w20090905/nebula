@@ -4,7 +4,7 @@ Org;
 !Sequence;
 !Table;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Documentno SeqNo;
 Isactive YesNo;
 Updated Timestamp;

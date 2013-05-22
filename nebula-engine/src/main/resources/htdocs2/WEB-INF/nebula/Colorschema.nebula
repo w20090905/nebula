@@ -6,7 +6,7 @@ Printcolor2 Printcolor;
 Printcolor3 Printcolor;
 Printcolor4 Printcolor;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Entitytype Attr;
 Isactive YesNo;

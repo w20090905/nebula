@@ -4,7 +4,7 @@ Org;
 Printformat;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Data1_Printformatitem Printformatitem;
 Data2_Printformatitem Printformatitem;
 Data3_Printformatitem Printformatitem;

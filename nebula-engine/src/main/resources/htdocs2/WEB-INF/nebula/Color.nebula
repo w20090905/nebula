@@ -9,7 +9,7 @@ Blue Number;
 Blue_1 Number;
 Colortype YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Green Number;
 Green_1 Number;
 Imagealpha Number;

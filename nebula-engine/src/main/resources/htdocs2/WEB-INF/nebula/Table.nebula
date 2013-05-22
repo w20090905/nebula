@@ -7,7 +7,7 @@ Window;
 Accesslevel YesNo;
 Base_Table Table;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Entitytype Attr;
 Exportview YesNo;

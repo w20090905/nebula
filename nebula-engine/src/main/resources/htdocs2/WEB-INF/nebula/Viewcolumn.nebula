@@ -6,7 +6,7 @@ Viewcomponent;
 Columnname Name;
 Columnsql Note;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dbdatatype YesNo;
 Description;
 Entitytype Attr;

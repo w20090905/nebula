@@ -6,7 +6,7 @@ Org;
 Session;
 User;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Isuseraccepted YesNo;

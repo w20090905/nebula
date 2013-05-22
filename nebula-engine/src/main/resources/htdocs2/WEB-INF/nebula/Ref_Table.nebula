@@ -6,7 +6,7 @@ Table;
 Column_Display Column;
 Column_Key Column;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Entitytype Attr;
 Isactive YesNo;
 Isdisplayidentifiers YesNo;

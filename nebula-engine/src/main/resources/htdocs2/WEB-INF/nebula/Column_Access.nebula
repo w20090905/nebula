@@ -5,7 +5,7 @@ Org;
 !Role;
 Table;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Isexclude YesNo;
 Isreadonly YesNo;

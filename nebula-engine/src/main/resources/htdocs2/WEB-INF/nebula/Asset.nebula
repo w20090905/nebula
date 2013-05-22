@@ -13,7 +13,7 @@ Bpartner_Location;
 Location;
 Project;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Guaranteedate Date;
 Help;

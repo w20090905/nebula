@@ -4,7 +4,7 @@ Org;
 !Role;
 !Window;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Isreadwrite YesNo;
 Updated Timestamp;

@@ -12,7 +12,7 @@ Columnname Name;
 Columnsql Note;
 Constrainttype YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Defaultvalue Note;
 Description;
 Entitytype Attr;

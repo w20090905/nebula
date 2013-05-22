@@ -6,7 +6,7 @@ Org;
 Accesslevel YesNo;
 Classname Name;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Entitytype Attr;
 Help;

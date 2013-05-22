@@ -25,7 +25,7 @@ C_Receivable_services_acct Account;
 Ch_Expense_acct Account;
 Ch_Revenue_acct Account;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 E_Expense_acct Account;
 E_Prepayment_acct Account;
 Isactive YesNo;

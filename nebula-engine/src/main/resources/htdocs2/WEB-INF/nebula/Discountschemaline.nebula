@@ -5,7 +5,7 @@ Bpartner;
 Conversiontype;
 Conversiondate Date;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Limit_Addamt Amount;

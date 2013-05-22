@@ -6,7 +6,7 @@ Binarydata Note;
 Classpath String;
 Createcomponent YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Documentationtext Note;
 *Entitytype Attr;

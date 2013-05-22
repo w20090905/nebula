@@ -6,7 +6,7 @@ Org;
 Wf_Nodenext;
 Andor YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Entitytype Attr;
 Isactive YesNo;
 Operation Attr;

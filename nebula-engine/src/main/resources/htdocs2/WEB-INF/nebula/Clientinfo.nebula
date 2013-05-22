@@ -18,7 +18,7 @@ Uom_Time Uom;
 Uom_Volume Uom;
 Uom_Weight Uom;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Isdiscountlineamt YesNo;
 Keeplogdays Count;

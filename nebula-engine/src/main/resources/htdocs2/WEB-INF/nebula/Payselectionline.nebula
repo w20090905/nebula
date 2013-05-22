@@ -6,7 +6,7 @@ Payselectioncheck;
 !ID;
 Payselection;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Differenceamt Amount;
 Discountamt Amount;

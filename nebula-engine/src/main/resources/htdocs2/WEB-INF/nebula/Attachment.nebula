@@ -5,7 +5,7 @@ Org;
 Table;
 Binarydata Note;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Textmsg MSG;
 Title String;

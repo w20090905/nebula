@@ -11,7 +11,7 @@ Payment;
 Chargeamt Amount;
 Createpayment YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dateacct Date;
 Description;
 Eftamt Amount;

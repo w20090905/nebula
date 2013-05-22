@@ -5,7 +5,7 @@ Table;
 Accountingclassname Name;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Docbasetype Attr;
 Entitytype Attr;

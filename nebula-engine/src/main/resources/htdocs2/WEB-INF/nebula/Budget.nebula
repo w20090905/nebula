@@ -3,7 +3,7 @@ Client;
 Org;
 Budgetstatus YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 !ID;
 Isactive YesNo;

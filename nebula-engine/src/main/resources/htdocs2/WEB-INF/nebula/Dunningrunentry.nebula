@@ -9,7 +9,7 @@ Currency;
 !ID;
 Dunningrun;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Note;
 Processed YesNo;

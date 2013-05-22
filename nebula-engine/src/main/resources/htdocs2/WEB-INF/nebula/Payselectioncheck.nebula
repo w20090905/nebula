@@ -7,7 +7,7 @@ Bpartner;
 Payselection;
 Payment;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Discountamt Amount;
 Documentno SeqNo;
 Isactive YesNo;

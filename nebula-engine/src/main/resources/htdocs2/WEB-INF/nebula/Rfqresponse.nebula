@@ -10,7 +10,7 @@ Order;
 Rfq;
 Checkcomplete YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dateinvited Date;
 Dateresponse Date;
 Dateworkcomplete Date;

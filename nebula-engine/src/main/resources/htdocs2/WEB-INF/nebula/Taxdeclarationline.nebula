@@ -10,7 +10,7 @@ Invoice;
 Taxdeclaration;
 Tax;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dateacct Date;
 Description;
 Isactive YesNo;

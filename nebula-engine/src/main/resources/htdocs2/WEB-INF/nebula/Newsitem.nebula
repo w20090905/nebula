@@ -6,7 +6,7 @@ Newschannel;
 !ID;
 Contenthtml Note;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Linkurl URL;

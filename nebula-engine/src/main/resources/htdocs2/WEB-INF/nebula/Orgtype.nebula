@@ -4,7 +4,7 @@ Client;
 Org;
 Printcolor;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Isbalancing YesNo;

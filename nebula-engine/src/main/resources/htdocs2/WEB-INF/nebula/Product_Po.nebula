@@ -6,7 +6,7 @@ Currency;
 Uom;
 Costperorder Number;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Deliverytime_Actual Number;
 Deliverytime_Promised Long;
 Discontinued YesNo;

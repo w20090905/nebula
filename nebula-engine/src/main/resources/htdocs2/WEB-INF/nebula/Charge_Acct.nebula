@@ -6,7 +6,7 @@ Org;
 Ch_Expense_acct Account;
 Ch_Revenue_acct Account;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Updated Timestamp;
 Updatedby Date;

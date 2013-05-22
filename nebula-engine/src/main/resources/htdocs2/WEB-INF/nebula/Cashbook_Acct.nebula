@@ -9,7 +9,7 @@ Cb_Receipt_acct Account;
 !Acctschema;
 !Cashbook;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Updated Timestamp;
 Updatedby Date;

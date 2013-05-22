@@ -7,7 +7,7 @@ Bpartner_Location;
 !ID;
 Rfq_Topic;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Optoutdate Date;
 Subscribedate Date;

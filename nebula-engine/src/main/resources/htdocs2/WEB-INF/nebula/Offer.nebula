@@ -6,7 +6,7 @@ User;
 Sellerfunds;
 Topic;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Iswillingtocommit YesNo;
 !Name;

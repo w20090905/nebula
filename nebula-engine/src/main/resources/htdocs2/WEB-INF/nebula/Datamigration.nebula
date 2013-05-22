@@ -4,7 +4,7 @@ Client;
 !ID;
 Org;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Datamigrationtype YesNo;
 Description;
 Entitytype Attr;

@@ -4,7 +4,7 @@ Org;
 !Acctschema;
 !Tax;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 T_Credit_acct Account;
 T_Due_acct Account;

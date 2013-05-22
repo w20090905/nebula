@@ -11,7 +11,7 @@ Currency;
 Uom;
 Validcombination;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Currencyrate Rate;
 Dateacct Date;
 Description;

@@ -5,7 +5,7 @@ Bpartner;
 Subscriptiontype;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Isdue YesNo;
 Product;

@@ -4,7 +4,7 @@ Org;
 Costelementtype YesNo;
 Costingmethod YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Iscalculated YesNo;

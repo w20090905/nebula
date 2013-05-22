@@ -3,7 +3,7 @@ Client;
 Org;
 Binarydata Note;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Iserror YesNo;

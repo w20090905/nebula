@@ -4,7 +4,7 @@ Client;
 Org;
 !Printlabelline;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Istranslated YesNo;
 Printname Name;

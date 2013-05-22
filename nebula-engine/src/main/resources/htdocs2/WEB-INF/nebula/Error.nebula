@@ -5,7 +5,7 @@ Ad_Language Language;
 Org;
 Code Note;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 !Name;
 Updated Timestamp;

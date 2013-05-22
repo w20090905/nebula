@@ -5,7 +5,7 @@ Org;
 Activity;
 Charge;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Inventorytype YesNo;
 Isactive YesNo;

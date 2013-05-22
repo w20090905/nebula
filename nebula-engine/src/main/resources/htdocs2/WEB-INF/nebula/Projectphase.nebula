@@ -7,7 +7,7 @@ Phase;
 Project;
 Committedamt Amount;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Enddate Date;
 Generateorder YesNo;

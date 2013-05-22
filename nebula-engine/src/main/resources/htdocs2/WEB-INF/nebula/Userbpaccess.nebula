@@ -5,7 +5,7 @@ Org;
 User;
 Bpaccesstype YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Docbasetype Attr;
 Isactive YesNo;
 Requesttype;

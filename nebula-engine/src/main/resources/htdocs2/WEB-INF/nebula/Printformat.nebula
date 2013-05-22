@@ -11,7 +11,7 @@ Reportview;
 Table;
 Createcopy YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Footermargin Long;
 Headermargin Long;

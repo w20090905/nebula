@@ -4,7 +4,7 @@ Org;
 !ID;
 Paymentterm;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Discount Number;
 Discountdays Count;
 Gracedays Count;

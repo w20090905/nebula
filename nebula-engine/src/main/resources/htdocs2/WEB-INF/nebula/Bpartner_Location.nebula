@@ -6,7 +6,7 @@ Bpartner;
 Location;
 Salesregion;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Fax;
 Isdn Code;
 Isactive YesNo;

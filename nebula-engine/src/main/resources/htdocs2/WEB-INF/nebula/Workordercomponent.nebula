@@ -9,7 +9,7 @@ Campaign;
 Project;
 Uom;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Line Number;

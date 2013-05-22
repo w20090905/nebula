@@ -3,7 +3,7 @@ Client;
 Org;
 Confirmedqty Quantity;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Differenceqty Quantity;
 Isactive YesNo;

@@ -5,7 +5,7 @@ Client;
 Org;
 Createprocess YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Db_View_name Name;
 Entitytype Attr;
 Isactive YesNo;

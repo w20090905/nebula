@@ -10,7 +10,7 @@ Characterdata Note;
 Chatentrytype YesNo;
 Confidentialtype YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Moderatorstatus YesNo;
 Subject;

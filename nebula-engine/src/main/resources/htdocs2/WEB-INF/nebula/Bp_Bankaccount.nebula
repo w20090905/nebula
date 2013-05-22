@@ -19,7 +19,7 @@ Bankaccounttype YesNo;
 Bpartner;
 Bank;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Creditcardexpmm Number;
 Creditcardexpyy Number;
 Creditcardnumber Code;

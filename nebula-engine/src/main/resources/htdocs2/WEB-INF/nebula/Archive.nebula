@@ -7,7 +7,7 @@ Table;
 Binarydata Note;
 Bpartner;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Help;
 Isactive YesNo;

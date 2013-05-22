@@ -4,7 +4,7 @@ Org;
 Amounttype Attr;
 Calculationtype YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Budget;
 Isactive YesNo;

@@ -13,7 +13,7 @@ Project;
 Uom;
 Convertedamt Amount;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dateexpense Date;
 Description;
 Expenseamt Amount;

@@ -7,7 +7,7 @@ Invoice;
 !ID;
 Payment;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Discountamt Amount;
 Invoiceamt Amount;
 Isactive YesNo;

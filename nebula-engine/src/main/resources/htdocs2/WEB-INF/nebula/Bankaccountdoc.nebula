@@ -5,7 +5,7 @@ Org;
 Bankaccount;
 Check_Printformat Printformat;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Currentnext Number;
 Description;
 Isactive YesNo;

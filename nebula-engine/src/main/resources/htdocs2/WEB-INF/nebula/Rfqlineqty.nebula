@@ -7,7 +7,7 @@ Bestresponseamt Amount;
 Rfqline;
 Uom;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Isofferqty YesNo;
 Ispurchaseqty YesNo;

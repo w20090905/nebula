@@ -3,7 +3,7 @@ Client;
 Org;
 !Acctschema;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 !Workorderclass;
 Updated Timestamp;

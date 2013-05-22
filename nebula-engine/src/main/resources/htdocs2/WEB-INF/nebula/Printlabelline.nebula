@@ -6,7 +6,7 @@ Org;
 !ID;
 Printlabel;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Labelformattype YesNo;
 !Name;

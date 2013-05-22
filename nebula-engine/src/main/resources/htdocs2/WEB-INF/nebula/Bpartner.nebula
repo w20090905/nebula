@@ -16,7 +16,7 @@ Industrycode;
 Invoiceschedule;
 Paymentterm;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 DUNS;
 Deliveryrule YesNo;
 Deliveryviarule YesNo;

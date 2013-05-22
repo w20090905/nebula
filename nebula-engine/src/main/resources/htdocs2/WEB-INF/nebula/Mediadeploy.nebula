@@ -5,7 +5,7 @@ Org;
 Media;
 Media_Server;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Isdeployed YesNo;

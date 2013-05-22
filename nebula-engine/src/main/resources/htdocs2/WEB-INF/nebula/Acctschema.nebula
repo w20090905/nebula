@@ -10,7 +10,7 @@ Commitmenttype YesNo;
 Costinglevel YesNo;
 Costingmethod YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 GAAP;
 Hasalias YesNo;

@@ -3,7 +3,7 @@ Client;
 Org;
 Bin String;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Isavailableforallocation YesNo;
 Isavailabletopromise YesNo;

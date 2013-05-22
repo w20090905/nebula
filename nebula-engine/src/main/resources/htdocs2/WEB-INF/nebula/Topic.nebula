@@ -1,31 +1,8 @@
-@Package("Marketplace") type  Topic{  
-Client;
-Org;
-Topiccategory;
-Topictype;
-!ID;
-Created Timestamp;
-Createdby Date;
-Decisiondate Date;
-Description;
-Documentno SeqNo;
-Isactive YesNo;
-Ispublished YesNo;
-!Name;
-Processed YesNo;
-Processing YesNo;
-Textdetails Note;
-Textmsg MSG;
-Topicaction Attr;
-Topicstatus Attr;
-Updated Timestamp;
-Updatedby Date;
-}; 
 @Package("Knowledge Management") type  Topic{  
 Client;
 Org;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Help;
 Isactive YesNo;

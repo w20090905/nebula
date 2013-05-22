@@ -13,7 +13,7 @@ Location;
 Project;
 Salesregion;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Elementtype Attr;
 Isactive YesNo;
 Isbalanced YesNo;

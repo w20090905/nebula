@@ -17,7 +17,7 @@ Createconfirm YesNo;
 Createfrom YesNo;
 Createpackage YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dateacct Date;
 Dateordered Date;
 Dateprinted Date;

@@ -4,7 +4,7 @@ Org;
 Dunninglevel;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Dunningdate Date;
 Isactive YesNo;

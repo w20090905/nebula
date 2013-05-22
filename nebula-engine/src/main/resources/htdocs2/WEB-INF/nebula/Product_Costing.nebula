@@ -11,7 +11,7 @@ Coststandardcumqty Quantity;
 Coststandardpoamt Amount;
 Coststandardpoqty Quantity;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Currentcostprice Price;
 Futurecostprice Price;
 Isactive YesNo;

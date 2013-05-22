@@ -5,7 +5,7 @@ User;
 !ID;
 Asset;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Deliveryconfirmation Description;
 Description;
 Email;

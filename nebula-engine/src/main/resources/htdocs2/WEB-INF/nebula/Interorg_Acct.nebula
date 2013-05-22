@@ -4,7 +4,7 @@ Client;
 !Org;
 !Acctschema;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Intercompanyduefrom_Acct Account;
 Intercompanydueto_Acct Account;
 Isactive YesNo;

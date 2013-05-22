@@ -8,7 +8,7 @@ Currency;
 !ID;
 Element;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Isbankaccount YesNo;

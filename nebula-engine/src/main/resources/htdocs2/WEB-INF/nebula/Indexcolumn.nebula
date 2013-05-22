@@ -6,7 +6,7 @@ Org;
 Tableindex;
 Columnsql Note;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Entitytype Attr;
 Isactive YesNo;
 SeqNo;

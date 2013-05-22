@@ -3,7 +3,7 @@ Client;
 Org;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Greeting Description;
 Isactive YesNo;
 Isdefault YesNo;

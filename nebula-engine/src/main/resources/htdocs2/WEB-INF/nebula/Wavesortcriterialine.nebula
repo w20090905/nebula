@@ -5,7 +5,7 @@ Org;
 !ID;
 Wavesortcriteria;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Orderbytype YesNo;
 SeqNo;

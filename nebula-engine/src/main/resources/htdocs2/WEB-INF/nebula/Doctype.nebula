@@ -8,7 +8,7 @@ Doctypeproforma Doctype;
 Doctypeshipment Doctype;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Docbasetype Attr;
 Docnosequence Sequence;

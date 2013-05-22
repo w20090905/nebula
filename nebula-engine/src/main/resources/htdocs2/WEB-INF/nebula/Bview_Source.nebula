@@ -7,7 +7,7 @@ Process;
 Reportview;
 Table;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Entitytype Attr;
 Importfields YesNo;

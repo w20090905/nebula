@@ -8,7 +8,7 @@ Commissionrun;
 Commissionamt Amount;
 Convertedamt Amount;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Updated Timestamp;
 Updatedby Date;

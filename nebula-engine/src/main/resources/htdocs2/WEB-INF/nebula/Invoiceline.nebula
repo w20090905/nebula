@@ -15,7 +15,7 @@ Project;
 Tax;
 Uom;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Isassetaddition YesNo;

@@ -12,7 +12,7 @@ Payment;
 Project;
 Confidentialtype YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Datecompleteplan Date;
 Datenextaction Date;
 Datestartplan Date;

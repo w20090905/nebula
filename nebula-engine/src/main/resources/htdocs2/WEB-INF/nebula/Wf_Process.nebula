@@ -8,7 +8,7 @@ User;
 Wf_Responsible;
 Workflow;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Priority;
 Processed YesNo;

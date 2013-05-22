@@ -8,7 +8,7 @@ Invoice;
 Payment;
 Convertedamt Amount;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Daysdue Count;
 Feeamt Amount;
 Interestamt Amount;

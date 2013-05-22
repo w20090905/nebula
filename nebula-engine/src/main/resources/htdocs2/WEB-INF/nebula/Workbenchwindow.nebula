@@ -8,7 +8,7 @@ Window;
 !ID;
 Workbench;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Entitytype Attr;
 Isactive YesNo;
 Isprimary YesNo;

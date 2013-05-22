@@ -16,7 +16,7 @@ Attributename Name;
 Attributevalue Note;
 Cost Number;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Docaction Attr;
 Duration Long;

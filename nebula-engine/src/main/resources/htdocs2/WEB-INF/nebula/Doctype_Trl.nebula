@@ -4,7 +4,7 @@ Client;
 Org;
 !Doctype;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Documentnote Note;
 Isactive YesNo;
 Istranslated YesNo;

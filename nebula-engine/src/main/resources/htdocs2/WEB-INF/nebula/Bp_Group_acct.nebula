@@ -7,7 +7,7 @@ C_Prepayment_acct Account;
 C_Receivable_acct Account;
 C_Receivable_services_acct Account;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Notinvoicedreceipts_Acct Account;
 Notinvoicedreceivables_Acct Account;

@@ -12,7 +12,7 @@ Invoice;
 Order;
 Payment;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Datetrx Date;
 Discountamt Amount;
 Isactive YesNo;

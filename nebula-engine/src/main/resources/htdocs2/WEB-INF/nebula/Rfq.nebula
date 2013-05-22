@@ -12,7 +12,7 @@ Copylines YesNo;
 Createpo YesNo;
 Createso YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dateresponse Date;
 Dateworkcomplete Date;
 Dateworkstart Date;

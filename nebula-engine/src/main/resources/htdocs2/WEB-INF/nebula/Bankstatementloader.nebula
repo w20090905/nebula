@@ -6,7 +6,7 @@ Branchid String;
 Bankaccount;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dateformat String;
 Datelastrun Date;
 Description;

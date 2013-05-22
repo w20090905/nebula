@@ -10,7 +10,7 @@ Invoiceline;
 Orderline;
 Convertedamt Amount;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Info Description;
 Isactive YesNo;
 Reference String;

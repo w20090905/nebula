@@ -5,7 +5,7 @@ Org;
 !ID;
 Userdef_Tab;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Defaultvalue Note;
 Description;
 Displaylength Length;

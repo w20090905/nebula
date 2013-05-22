@@ -16,7 +16,7 @@ B_Unidentified_acct Account;
 !Acctschema;
 !Bankaccount;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Updated Timestamp;
 Updatedby Date;

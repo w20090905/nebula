@@ -1,20 +1,8 @@
-@Package("Knowledge Management") type  Source{  
-Client;
-Org;
-Created Timestamp;
-Createdby Date;
-Descriptionurl URL;
-Isactive YesNo;
-!ID;
-!Name;
-Updated Timestamp;
-Updatedby Date;
-}; 
 @Package("Requests") type  Source{  
 Client;
 Org;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Help;
 Isactive YesNo;

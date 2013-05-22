@@ -1,28 +1,3 @@
-@Package("Assets Management") type  Registration{  
-Client;
-Org;
-User;
-Asset;
-!ID;
-Assetservicedate Date;
-Bpartner;
-Created Timestamp;
-Createdby Date;
-Description;
-Help;
-Isactive YesNo;
-Isallowpublish YesNo;
-Isinproduction YesNo;
-Isregistered YesNo;
-Product;
-!Name;
-Note;
-Processing YesNo;
-Remote_Addr URL;
-Remote_Host Host;
-Updated Timestamp;
-Updatedby Date;
-}; 
 @Package("Application Dictionary") type  Registration{  
 Client;
 Org;
@@ -32,7 +7,7 @@ Currency;
 Location;
 Company Name;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Email;
 Employeerange Attr;

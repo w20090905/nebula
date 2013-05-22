@@ -20,7 +20,7 @@ Closedate Date;
 Confidentialtype YesNo;
 Confidentialtypeentry YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Datecompleteplan Date;
 Datelastaction Date;
 Datelastalert Date;

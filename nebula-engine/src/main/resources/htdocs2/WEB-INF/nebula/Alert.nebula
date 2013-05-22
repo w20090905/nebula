@@ -6,7 +6,7 @@ Org;
 Alertmessage MSG;
 Alertsubject Subject;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Enforceclientsecurity YesNo;
 Enforcerolesecurity YesNo;

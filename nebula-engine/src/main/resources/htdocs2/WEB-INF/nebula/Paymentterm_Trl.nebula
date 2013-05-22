@@ -4,7 +4,7 @@ Client;
 Org;
 !Paymentterm;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Documentnote Note;
 Isactive YesNo;

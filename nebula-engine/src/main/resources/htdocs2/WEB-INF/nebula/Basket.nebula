@@ -4,7 +4,7 @@ Org;
 User;
 Bpartner;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Email;
 Isactive YesNo;
 Pricelist;

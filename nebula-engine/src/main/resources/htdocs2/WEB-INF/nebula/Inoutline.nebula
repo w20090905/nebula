@@ -12,7 +12,7 @@ Project;
 Uom;
 Confirmedqty Quantity;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Isdescription YesNo;

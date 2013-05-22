@@ -4,7 +4,7 @@ Org;
 !User;
 !Chattype;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Isselfservice YesNo;
 Updated Timestamp;

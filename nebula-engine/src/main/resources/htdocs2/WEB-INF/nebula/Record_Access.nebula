@@ -4,7 +4,7 @@ Org;
 !Role;
 !Table;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Isdependententities YesNo;
 Isexclude YesNo;

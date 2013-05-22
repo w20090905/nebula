@@ -10,7 +10,7 @@ Reference_Value Reference;
 Val_Rule;
 Columnname Name;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Defaultvalue Note;
 Defaultvalue2 String;
 Description;

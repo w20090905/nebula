@@ -3,7 +3,7 @@ Client;
 Org;
 Confidentialtypeentry YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Endtime Timestamp;
 Isactive YesNo;
 Productspent Product;

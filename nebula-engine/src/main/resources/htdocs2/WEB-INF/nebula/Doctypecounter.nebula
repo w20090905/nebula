@@ -5,7 +5,7 @@ Org;
 Doctype;
 Counter_C_doctype Doctype;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Docaction Attr;
 Isactive YesNo;

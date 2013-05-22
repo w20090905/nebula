@@ -6,7 +6,7 @@ Version;
 Classname Name;
 Code Note;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dbtype YesNo;
 Description;
 Help;

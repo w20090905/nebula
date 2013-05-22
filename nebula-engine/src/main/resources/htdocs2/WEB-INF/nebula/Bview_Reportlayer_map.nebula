@@ -6,7 +6,7 @@ Client;
 Org;
 Columnname Name;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Entitytype Attr;
 Isactive YesNo;
 Isidentifier YesNo;

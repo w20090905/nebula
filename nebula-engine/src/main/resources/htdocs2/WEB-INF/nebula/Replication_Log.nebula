@@ -5,7 +5,7 @@ Replicationtable;
 !ID;
 Replication_Run;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Isreplicated YesNo;
 P_Msg MSG;

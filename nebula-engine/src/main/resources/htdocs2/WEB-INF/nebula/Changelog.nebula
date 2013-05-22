@@ -8,7 +8,7 @@ Session;
 Table;
 Changelogtype YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Iscustomization YesNo;

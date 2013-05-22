@@ -4,7 +4,7 @@ Org;
 Bpartner;
 Bpartner_Location;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 !ID;

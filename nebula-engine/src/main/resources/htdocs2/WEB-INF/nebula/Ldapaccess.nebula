@@ -6,7 +6,7 @@ Org;
 User;
 Asset;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Iserror YesNo;

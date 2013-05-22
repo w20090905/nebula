@@ -5,7 +5,7 @@ User;
 !ID;
 Topic;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Textmsg MSG;
 Updated Timestamp;

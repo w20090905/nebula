@@ -7,7 +7,7 @@ Paymentterm;
 Chargefee YesNo;
 Chargeinterest YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Daysafterdue Count;
 Daysbetweendunning Count;
 Description;

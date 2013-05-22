@@ -5,7 +5,7 @@ Reporttemplate;
 Reporttemplate_Related Reporttemplate;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Entitytype Attr;
 Isactive YesNo;

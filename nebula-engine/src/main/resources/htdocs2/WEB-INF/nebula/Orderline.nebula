@@ -16,7 +16,7 @@ Project;
 Tax;
 Uom;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Datedelivered Date;
 Dateinvoiced Date;
 Dateordered Date;

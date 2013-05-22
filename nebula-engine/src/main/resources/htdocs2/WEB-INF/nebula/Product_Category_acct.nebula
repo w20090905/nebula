@@ -5,7 +5,7 @@ Org;
 Costinglevel YesNo;
 Costingmethod YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 !Product_Category;
 P_Asset_acct Account;

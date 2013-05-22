@@ -3,7 +3,7 @@
 !Org;
 !Acctschema;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Cumulatedamt Amount;
 Cumulatedqty Quantity;
 Currentcostprice Price;

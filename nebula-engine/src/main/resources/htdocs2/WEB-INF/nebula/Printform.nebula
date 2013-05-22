@@ -3,7 +3,7 @@ Client;
 Org;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Inventory_Mailtext Mailtext;
 Inventory_Printformat Printformat;

@@ -5,7 +5,7 @@ Datamigration;
 Org;
 Table;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Info Description;
 Isactive YesNo;

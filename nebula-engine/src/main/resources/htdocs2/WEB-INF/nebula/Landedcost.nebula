@@ -4,7 +4,7 @@ Org;
 Invoiceline;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Landedcostdistribution YesNo;
 Costelement;

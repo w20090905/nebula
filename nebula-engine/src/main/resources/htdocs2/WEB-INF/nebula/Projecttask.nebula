@@ -7,7 +7,7 @@ Projecttaskprerequisite Projecttask;
 Task;
 Committedamt Amount;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Help;
 Isactive YesNo;

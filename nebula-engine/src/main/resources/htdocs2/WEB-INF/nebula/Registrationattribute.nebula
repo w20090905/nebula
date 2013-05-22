@@ -6,7 +6,7 @@ Reference_Value Reference;
 !ID;
 Columnname Name;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Isselfservice YesNo;

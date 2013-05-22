@@ -5,7 +5,7 @@ Beneficiary Bpartner;
 Paymentterm;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Fixamt Amount;
 Isactive YesNo;

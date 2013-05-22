@@ -21,7 +21,7 @@ Chargeamt Amount;
 Copyfrom YesNo;
 Createfrom YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dateacct Date;
 Dateinvoiced Date;
 Dateordered Date;

@@ -12,7 +12,7 @@ Table;
 Window;
 Commitwarning Note;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Displaylogic Note;
 Entitytype Attr;

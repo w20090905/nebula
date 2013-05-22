@@ -5,7 +5,7 @@ Org;
 Channel;
 Costs Number;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Enddate Date;
 Isactive YesNo;

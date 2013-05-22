@@ -1,35 +1,10 @@
-@Package("Application Dictionary") type  Element{  
-Client;
-!ID;
-Org;
-Reference;
-Reference_Value Reference;
-Val_Rule;
-Columnname Name;
-Created Timestamp;
-Createdby Date;
-Dbdatatype YesNo;
-Description;
-Entitytype Attr;
-Fieldlength Length;
-Help;
-Isactive YesNo;
-!Name;
-Po_Description Description;
-Po_Help Note;
-*Po_Name Name;
-Po_Printname Name;
-Printname Name;
-Updated Timestamp;
-Updatedby Date;
-}; 
 @Package("Common or Core Functionality") type  Element{  
 Client;
 Org;
 Tree;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Elementtype Attr;
 Isactive YesNo;

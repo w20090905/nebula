@@ -3,7 +3,7 @@ Client;
 Org;
 *Allocationstrategytype YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Isallocated YesNo;
 Ismanual YesNo;

@@ -5,7 +5,7 @@ Printcolor;
 Poskeylayout;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Product;

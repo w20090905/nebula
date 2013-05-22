@@ -5,7 +5,7 @@ Budgetcontrolscope YesNo;
 Acctschema;
 Commitmenttype YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 !ID;
 Budget;

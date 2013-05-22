@@ -7,7 +7,7 @@ Charge;
 Currency;
 Createfrom YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Datelastrun Date;
 Description;
 Docbasistype YesNo;

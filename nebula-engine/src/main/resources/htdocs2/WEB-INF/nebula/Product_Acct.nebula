@@ -3,7 +3,7 @@ Client;
 Org;
 !Acctschema;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 !Product;
 P_Asset_acct Account;

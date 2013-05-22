@@ -2,7 +2,7 @@
 Client;
 Org;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Level_Max Long;
 Level_Min Long;

@@ -4,7 +4,7 @@ Org;
 !ID;
 Topictype;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 !Name;

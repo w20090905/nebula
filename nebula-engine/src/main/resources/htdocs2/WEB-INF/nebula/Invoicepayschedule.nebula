@@ -5,7 +5,7 @@ Org;
 Invoice;
 Payschedule;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Discountamt Amount;
 Discountdate Date;
 Dueamt Amount;

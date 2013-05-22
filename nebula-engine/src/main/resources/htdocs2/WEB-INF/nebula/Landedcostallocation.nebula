@@ -6,7 +6,7 @@ Base Number;
 Invoiceline;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Attributesetinstance;
 Costelement;
 Product;

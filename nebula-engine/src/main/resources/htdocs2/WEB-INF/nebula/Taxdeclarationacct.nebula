@@ -5,7 +5,7 @@ Acctschema;
 !ID;
 Taxdeclaration;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Acct;
 Isactive YesNo;

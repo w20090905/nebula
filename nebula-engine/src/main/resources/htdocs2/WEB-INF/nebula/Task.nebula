@@ -1,27 +1,10 @@
-@Package("Application Dictionary") type  Task{  
-Client;
-Org;
-!ID;
-Accesslevel YesNo;
-Created Timestamp;
-Createdby Date;
-Description;
-Entitytype Attr;
-Help;
-Isactive YesNo;
-Isserverprocess YesNo;
-!Name;
-Os_Command Note;
-Updated Timestamp;
-Updatedby Date;
-}; 
 @Package("Common or Core Functionality") type  Task{  
 Client;
 Org;
 Phase;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Help;
 Isactive YesNo;

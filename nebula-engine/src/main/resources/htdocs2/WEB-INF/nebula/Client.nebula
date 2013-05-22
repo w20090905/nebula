@@ -3,7 +3,7 @@
 Ad_Language Language;
 Autoarchive YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Documentdir String;
 Emailtest YesNo;

@@ -8,7 +8,7 @@ Orderline;
 Uom;
 Waveline;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Docaction Attr;
 Docstatus Attr;

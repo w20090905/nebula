@@ -5,7 +5,7 @@ Rfqline;
 !ID;
 Rfqresponse;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dateworkcomplete Date;
 Dateworkstart Date;
 Deliverydays Count;

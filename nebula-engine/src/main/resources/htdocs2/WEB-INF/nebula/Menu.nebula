@@ -10,7 +10,7 @@ Workbench;
 Workflow;
 Action YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Entitytype Attr;
 Isactive YesNo;

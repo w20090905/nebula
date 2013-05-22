@@ -7,7 +7,7 @@ Period;
 Controlamt Amount;
 Copyfrom YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dateacct Date;
 Datedoc Date;
 Description;

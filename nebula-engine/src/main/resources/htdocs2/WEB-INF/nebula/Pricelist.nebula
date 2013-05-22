@@ -4,7 +4,7 @@ Org;
 Basepricelist Pricelist;
 Currency;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Enforcepricelimit YesNo;
 Isactive YesNo;

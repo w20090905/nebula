@@ -5,7 +5,7 @@ Orgtype;
 Calendar;
 Location;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 DUNS;
 Isactive YesNo;
 Warehouse;

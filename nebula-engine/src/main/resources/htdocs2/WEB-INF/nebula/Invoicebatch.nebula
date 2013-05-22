@@ -6,7 +6,7 @@ Currency;
 !ID;
 Controlamt Amount;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Datedoc Date;
 Description;
 Documentamt Amount;

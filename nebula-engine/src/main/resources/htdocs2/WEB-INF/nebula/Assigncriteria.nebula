@@ -6,7 +6,7 @@ Org;
 Sourcecolumn Column;
 Andor YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Operation Attr;

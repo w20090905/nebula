@@ -9,7 +9,7 @@ Currency;
 Confirmqueryrecords Count;
 Connectionprofile YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Displayclientorg YesNo;
 Isaccessallorgs YesNo;

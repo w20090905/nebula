@@ -17,7 +17,7 @@ Project;
 Salesregion;
 Subacct;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dateacct Date;
 Budget;
 Isactive YesNo;

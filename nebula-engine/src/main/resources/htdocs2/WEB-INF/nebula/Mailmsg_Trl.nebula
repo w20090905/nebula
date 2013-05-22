@@ -3,7 +3,7 @@ Client;
 *Ad_Language Language;
 Org;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Istranslated YesNo;
 Message MSG;

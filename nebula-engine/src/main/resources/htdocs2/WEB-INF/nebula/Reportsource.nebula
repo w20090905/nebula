@@ -9,7 +9,7 @@ Location;
 Project;
 Salesregion;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Elementtype Attr;
 Isactive YesNo;

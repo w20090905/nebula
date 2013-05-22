@@ -5,7 +5,7 @@ Org;
 !Tab;
 Commitwarning Note;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Help;
 Isactive YesNo;

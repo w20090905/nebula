@@ -4,7 +4,7 @@ Org;
 User;
 Doctype;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Datedoc Date;
 Daterequired Date;
 Description;

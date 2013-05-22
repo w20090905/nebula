@@ -5,7 +5,7 @@ Balanceaccumulation YesNo;
 Acctschema;
 Calendar;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dateto Date;
 Description;
 !ID;

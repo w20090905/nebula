@@ -4,7 +4,7 @@ Org;
 !ID;
 Costingprecision Precision;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Isdefault YesNo;

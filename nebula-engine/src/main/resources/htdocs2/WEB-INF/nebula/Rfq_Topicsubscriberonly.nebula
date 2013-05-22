@@ -4,7 +4,7 @@ Org;
 !ID;
 Rfq_Topicsubscriber;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Product_Category;

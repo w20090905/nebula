@@ -12,7 +12,7 @@ Currency;
 Invoice;
 Cashtype YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Discountamt Amount;
 Isactive YesNo;

@@ -4,7 +4,7 @@ Org;
 !Invoice;
 !Tax;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Istaxincluded YesNo;
 Processed YesNo;

@@ -4,7 +4,7 @@ Org;
 !Acctschema;
 Commitmentoffset_Acct Account;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Currencybalancing_Acct Account;
 Incomesummary_Acct Account;
 Intercompanyduefrom_Acct Account;

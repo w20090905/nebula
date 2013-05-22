@@ -6,7 +6,7 @@ Conversiontype;
 Currency;
 Currency_To Currency;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dividerate Rate;
 Isactive YesNo;
 Multiplyrate Rate;

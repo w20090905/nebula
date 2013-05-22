@@ -4,7 +4,7 @@ Ad_Bview_type YesNo;
 Client;
 Org;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Entitytype Attr;
 Isactive YesNo;

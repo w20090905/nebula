@@ -13,7 +13,7 @@ Arcdiameter Number;
 Barcodetype Attr;
 Belowcolumn Number;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Fieldalignmenttype YesNo;
 Imageisattached YesNo;
 Imageurl URL;

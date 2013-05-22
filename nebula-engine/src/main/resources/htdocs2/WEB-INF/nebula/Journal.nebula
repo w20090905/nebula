@@ -8,7 +8,7 @@ Doctype;
 Period;
 Controlamt Amount;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Currencyrate Rate;
 Dateacct Date;
 Datedoc Date;

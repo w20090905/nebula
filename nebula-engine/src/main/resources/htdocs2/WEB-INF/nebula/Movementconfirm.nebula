@@ -3,7 +3,7 @@ Client;
 Org;
 Approvalamt Amount;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Docaction Attr;
 Docstatus Attr;

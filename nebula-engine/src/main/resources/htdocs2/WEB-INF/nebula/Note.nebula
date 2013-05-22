@@ -7,7 +7,7 @@ Table;
 User;
 Wf_Activity;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Processed YesNo;

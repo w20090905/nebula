@@ -7,7 +7,7 @@ Bpartnerrelation_Location Bpartner_Location;
 Bpartner;
 Bpartner_Location;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Isbillto YesNo;

@@ -4,7 +4,7 @@ Org;
 !ID;
 Paymentprocessor;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Documentno SeqNo;
 Isactive YesNo;
 !Name;

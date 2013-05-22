@@ -13,7 +13,7 @@ Salesregion;
 Calculationtype YesNo;
 Columntype YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Currencytype YesNo;
 Description;
 Elementtype Attr;

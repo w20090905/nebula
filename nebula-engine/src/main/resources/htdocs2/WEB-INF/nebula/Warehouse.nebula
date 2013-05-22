@@ -3,7 +3,7 @@ Client;
 Org;
 Location;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Isdisallownegativeinv YesNo;

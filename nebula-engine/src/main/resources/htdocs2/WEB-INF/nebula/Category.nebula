@@ -1,36 +1,8 @@
-@Package("General Ledger") type  Category{  
-Client;
-Org;
-Categorytype YesNo;
-Created Timestamp;
-Createdby Date;
-Description;
-Docbasetype Attr;
-!ID;
-Isactive YesNo;
-Isdefault YesNo;
-!Name;
-Updated Timestamp;
-Updatedby Date;
-}; 
-@Package("Knowledge Management") type  Category{  
-Client;
-Org;
-Created Timestamp;
-Createdby Date;
-Description;
-Help;
-Isactive YesNo;
-!ID;
-!Name;
-Updated Timestamp;
-Updatedby Date;
-}; 
 @Package("Requests") type  Category{  
 Client;
 Org;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Help;
 Isactive YesNo;

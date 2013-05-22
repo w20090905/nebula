@@ -8,7 +8,7 @@ Campaign;
 Charge;
 Project;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Dateacct Date;
 Description;
 Docaction Attr;

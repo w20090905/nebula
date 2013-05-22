@@ -10,7 +10,7 @@ Commission;
 Salesregion;
 Commissionorders YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 Ispositiveonly YesNo;

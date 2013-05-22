@@ -4,7 +4,7 @@ Org;
 Afterdelivery YesNo;
 !ID;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Discount Number;
 Discount2 Number;

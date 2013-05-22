@@ -7,7 +7,7 @@ Country;
 Region;
 Coordinates;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Isactive YesNo;
 Locode Attr;
 !Name;

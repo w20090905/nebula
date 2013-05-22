@@ -5,7 +5,7 @@ Rfqlineqty;
 !ID;
 Rfqresponseline;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Discount Number;
 Isactive YesNo;
 Price;

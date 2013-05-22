@@ -7,7 +7,7 @@ Table;
 User;
 Code Note;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Isactive YesNo;
 !Name;

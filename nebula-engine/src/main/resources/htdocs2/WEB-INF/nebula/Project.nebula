@@ -16,7 +16,7 @@ Committedamt Amount;
 Committedqty Quantity;
 Copyfrom YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Datecontract Date;
 Datefinish Date;
 Description;

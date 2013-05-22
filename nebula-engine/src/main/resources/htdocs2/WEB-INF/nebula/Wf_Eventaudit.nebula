@@ -9,7 +9,7 @@ Wf_Process;
 Wf_Responsible;
 Attributename Name;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Elapsedtimems Number;
 Eventtype Attr;

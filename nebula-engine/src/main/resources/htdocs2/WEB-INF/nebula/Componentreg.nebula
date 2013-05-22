@@ -9,7 +9,7 @@ Bpartner;
 Componentname Name;
 Componenttype YesNo;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Description;
 Distributiontype YesNo;
 Documentationtext Note;

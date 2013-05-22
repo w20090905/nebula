@@ -2,7 +2,7 @@
 Client;
 Org;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Currentnext Number;
 Description;
 Incrementno SeqNo;

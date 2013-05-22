@@ -3,7 +3,7 @@ Client;
 Ad_Language Language;
 Org;
 Created Timestamp;
-Createdby Date;
+Createdby ID;
 Emailfooter Note;
 Emailheader Note;
 Isactive YesNo;
