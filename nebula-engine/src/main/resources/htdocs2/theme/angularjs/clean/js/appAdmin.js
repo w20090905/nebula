@@ -26,3 +26,7 @@ angular.module('appAdmin', ['nebulaFilters', 'nebulaServices','nebulaDirectives'
 });
 
 
+(function($) { 
+	$("input[required]").parents(".control-group").find(".control-label").addClass("required");
+})(jQuery);
+
