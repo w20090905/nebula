@@ -1355,6 +1355,7 @@ div.dataTables_wrapper .ui-widget-header {
 }
 
 /* Forms */
+/*
 form {
 	margin-bottom: 0;
 }
@@ -1383,6 +1384,30 @@ form {
 }
 .help-block, .help-inline {
     color: #999999;
+}
+
+*/
+
+.form-horizontal{
+	padding-top: 10px;
+}
+.form-horizontal .control-group {
+	margin-bottom: 6px;
+}
+.form-horizontal .control-label {
+	width: 135px;
+}
+.form-horizontal .controls {
+margin-left: 150px;
+}
+
+.table th, .table td {	
+	padding: 5px;
+}
+fieldset > legend {
+width: 98%;
+margin-bottom: 4px;
+padding-left: 2%;
 }
 
 /**/
