@@ -1,0 +1,192 @@
+/* app css stylesheet */
+html {
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+table {
+	table-layout: fixed;
+	overflow: hidden;
+}
+
+.widget-title .buttons {
+	float: right;
+	margin: 6px 10px 0 0;
+}
+
+.widget-title input.search-query {
+	padding-right: 12px;
+	padding-right: 12px 9;
+	padding-left: 12px;
+	padding-left: 12px 9;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	margin-bottom: 0;
+	-webkit-border-radius: 16px;
+	-moz-border-radius: 16px;
+	border-radius: 16px;
+	height: 20px;
+	margin-right: 1em;
+}
+
+#sidebar>ul>li>ul>li>a>i {
+	margin-right: 10px;
+}
+
+.container-fluid .row-fluid:first-child {
+	margin-top: 5px;
+}
+
+[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak
+	{
+	display: none;
+}
+
+#content article>header {
+	min-height: 50px;
+	padding-top: 1px;
+}
+
+#content article>header h1,#content article>header .btn-toolbar {
+	margin-top: 10px;
+}
+
+#content article>header .btn-toolbar {
+	margin-top: -40px;
+}
+
+#breadcrumb a {
+	padding: 6px 20px 6px 10px;
+}
+
+form.form-horizontal input.ng-valid.ng-dirty {
+	background-color: #78FA89;
+}
+
+.form-horizontal table tr.newLine input[type=text],.form-horizontal  table tr.newLine input[type=password],.form-horizontal  table tr.newLine textarea
+	{
+	width: 90% !important;
+}
+
+.form-horizontal table tr.newLine .input-append {
+	width: 90% !important;
+}
+
+.form-horizontal table tr.newLine .input-append input {
+	width: 70% !important;
+}
+
+/*
+input.inlinePopup{
+	cursor: pointer;
+}
+a.inlinePopup{
+	position: absolute;
+	right: 0px;
+}*/
+
+/*
+.form-horizontal table tr.newLine input[type=text][x-popup] {
+	width: 40% !important;
+}*/
+
+/*input[required]{
+	background-color: red;
+}*/
+.modal-header .ctrls {
+	position: absolute;
+	right: 40px;
+	top: 6px;
+}
+
+#sidebar>ul>li.section a {
+	text-transform: uppercase;
+	padding: 4px 0 4px 8px;
+	font-size: 11px;
+	font-weight: 800;
+	text-shadow: 0 1px 0 #000;
+}
+#sidebar>ul>li.section {
+	cursor: default;
+}
+#sidebar>ul>li.section a {
+	cursor: default;
+}
+
+#sidebar>ul>li>a {
+	padding: 4px 0 4px 8px;
+}
+
+#sidebar>ul>li>a>i {
+	margin-right: 4px;
+}
+
+
+
+.widget-content > .table-bordered thead:first-child tr:first-child>th:first-child, 
+.widget-content >.table-bordered tbody:first-child tr:first-child>td:first-child, 
+.widget-content >.table-bordered tbody:first-child tr:first-child>th:first-child {
+-webkit-border-top-left-radius: 0px;
+border-top-left-radius: 0px;
+-moz-border-radius-topleft: 0px;
+}
+
+.widget-content > .table-bordered thead tr>th:first-child, 
+.widget-content >.table-bordered tbody tr>td:first-child, 
+.widget-content >.table-bordered tbody tr>th:first-child {
+border-left: 0px;
+}
+
+.widget-content > .table-bordered {
+border: 1px solid #ddd;
+border-collapse: separate;
+border: 0;
+-webkit-border-radius: 0px;
+-moz-border-radius: 0px;
+border-radius: 0px;
+}
+
+.widget-box{
+	-webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#content article>header{
+	margin-bottom: -10px;
+}
+
+#breadcrumb{
+	display: none;
+}
+
+#content{
+	background: url("../img/content_bg.jpg");
+	min-height: 600px;
+}
+
+#search {
+	left: 160px;
+}
+
+#content article>header{
+	background: none;
+}
+
+#style-switcher {
+	top: 39px;
+	background: transparent;
+}
+
+#style-switcher:hover {
+	background-color: #000000;
+}
+
+#style-switcher.open {
+	background-color: #000000;
+}
+
+tr.dataline-D{
+	text-decoration: line-through;
+	color: grey;
+}
