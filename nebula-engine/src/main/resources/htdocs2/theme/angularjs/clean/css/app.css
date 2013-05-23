@@ -190,3 +190,7 @@ tr.dataline-D{
 	text-decoration: line-through;
 	color: grey;
 }
+
+div.required > .control-label{
+	color: red;
+}
