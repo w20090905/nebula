@@ -289,6 +289,7 @@ var nbViewDirective = ['$http', '$templateCache', '$route', '$anchorScroll', '$c
         if (template) {
           element.html(template);
           element.find("input[required]").parents(".control-group").addClass("required");
+          element.find("input.datepicker").datepicker();
           destroyLastScope();
 
           var link = $compile(element.contents()),

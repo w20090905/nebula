@@ -194,3 +194,7 @@ tr.dataline-D{
 div.required > .control-label{
 	color: red;
 }
+.datepicker table {
+	width: inherit;
+	margin: 0;
+}
