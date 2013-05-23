@@ -6,16 +6,23 @@
 			[#case "text"]		type="text"		[#break]
 			[#case "numeric"]	type="number"	[#break]
 			[#case "email"]		type="email"	[#break]
+			[#case "checkbox"]		type="checkbox"	[#break]
+			[#case "date"]		type="text"	data-date-format="yyyy-mm-dd" [#break]
 			[#default]			type="text"		[#break]				
+		[/#switch]			
+	[/@compress][/#assign]
+	[#assign optClass][@compress single_line=true]
+		[#switch field.attrs.FormatType!"text"]
+			[#case "date"]datepicker [#break]
 		[/#switch]			
 	[/@compress][/#assign]
 	
 	[#assign optReadonly][#if key] readonly [#elseif readonly]readonly[/#if][/#assign]
 	[#assign optValidateRule][@compress single_line=true]
-			[#if field.attrs.min??		] min		="${field.attrs.min}" 			[/#if]
-			[#if field.attrs.max??		] max		="${field.attrs.max}" 			[/#if]
-			[#if field.attrs.minLength??] minLength	="${field.attrs.minLength}" [/#if]
-			[#if field.attrs.maxLength??] maxLength	="${field.attrs.maxLength}" [/#if]
+			[#if field.attrs.Min??		] min		="${field.attrs.Min}" 			[/#if]
+			[#if field.attrs.Max??		] max		="${field.attrs.Max}" 			[/#if]
+			[#if field.attrs.MinLength??] minLength	="${field.attrs.MinLength}" [/#if]
+			[#if field.attrs.MaxLength??] maxLength	="${field.attrs.MaxLength}" [/#if]
 	[/@compress][/#assign]
 	[#assign optRequired][#if !key && required] required[/#if][/#assign]
 
@@ -25,17 +32,17 @@
 		[/@compress] [/#assign]
 		
 		<select id="${id}" x-ng-init="${id}values = [${attrValues?substring(1)}];"  ${ex}
-				${optReadonly} ${optRequired}  ${optValidateRule} 
+				${optReadonly} ${optRequired}  ${optValidateRule} 	class="${optClass}"
 				x-ng-model="${ngModel}" x-ng-options="c.name as c.name for c in ${id}values" placeholder="${placeholder}">	
 			<option value="">-- 选择 ${field.name} --</option>
 		</select>
 	[#elseif field.attrs.FormatType! = "textarea"]
 		<textarea id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
-			${optReadonly} ${optRequired}  ${optValidateRule} 
+			${optReadonly} ${optRequired}  ${optValidateRule} 	class="${optClass}"
 			></textarea>		
 	[#else]
 		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
-				${optReadonly} ${optRequired}  ${optValidateRule} 			
+				${optReadonly} ${optRequired}  ${optValidateRule} 	class="${optClass}"	
 			/>
 	[/#if]
 [/#macro]
