@@ -86,6 +86,7 @@ public class TypeTemplateResouce extends AbstractResouce {
 			super.lastModified = System.currentTimeMillis();
 			super.cache = bout.toByteArray();
 		} catch (TemplateException e) {
+			log.error("Template prase error", e);
 			throw new IOException(e);
 		}
 	}
