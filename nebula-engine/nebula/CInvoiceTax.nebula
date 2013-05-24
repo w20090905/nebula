@@ -3,8 +3,8 @@
 type CInvoiceTax {
 	!CTax;
 	!CInvoice;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	TaxBaseamt Amount;/* 0  */
 	TaxAmt Amount;/* 0  */
 	Processed YesNo;/* 'N'  */

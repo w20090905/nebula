@@ -1,9 +1,9 @@
 @Remarks("")
 @Refby("2")
 type ADepreciation {
-	!ADepreciation ID;
-	AdClient ID;
-	AdOrg ID;
+	!ADepreciationId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	Depreciationtype Attr;

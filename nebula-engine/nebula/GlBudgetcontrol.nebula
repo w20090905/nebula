@@ -1,9 +1,9 @@
 @Remarks("Budget Control")
 @Refby("0")
 type GlBudgetcontrol {
-	!GlBudgetcontrol ID;
-	AdClient ID;
-	AdOrg ID;
+	!GlBudgetcontrolId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

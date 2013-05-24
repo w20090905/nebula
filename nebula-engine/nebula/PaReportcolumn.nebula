@@ -1,9 +1,9 @@
 @Remarks("Column in Report")
 @Refby("2")
 type PaReportcolumn {
-	!PaReportcolumn ID;
-	AdClient ID;
-	AdOrg ID;
+	!PaReportcolumnId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	PaReportcolumnset;
 	Name;
 	Seqno SeqNo;

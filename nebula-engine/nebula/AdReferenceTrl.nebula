@@ -3,8 +3,8 @@
 type AdReferenceTrl {
 	!AdReference;
 	!AdLanguage;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

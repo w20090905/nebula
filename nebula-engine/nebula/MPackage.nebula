@@ -1,9 +1,9 @@
 @Remarks("Shipment Package")
 @Refby("1")
 type MPackage {
-	!MPackage ID;
-	AdClient ID;
-	AdOrg ID;
+	!MPackageId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo Long;
 	MInout;
 	?Description;

@@ -1,9 +1,9 @@
 @Remarks("Performance Color Schema")
 @Refby("1")
 type PaColorschema {
-	!PaColorschema ID;
-	AdClient ID;
-	AdOrg ID;
+	!PaColorschemaId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	Mark1percent Number;/* 0  */

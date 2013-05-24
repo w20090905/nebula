@@ -1,9 +1,9 @@
 @Remarks("Bank")
 @Refby("2")
 type CBank {
-	!CBank ID;
-	AdClient ID;
-	AdOrg ID;
+	!CBankId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	Routingno String;
 	?CLocation;

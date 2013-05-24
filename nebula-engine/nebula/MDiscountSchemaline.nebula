@@ -1,9 +1,9 @@
 @Remarks("Line of the pricelist trade discount schema")
 @Refby("0")
 type MDiscountSchemaline {
-	!MDiscountSchemaline ID;
-	AdClient ID;
-	AdOrg ID;
+	!MDiscountSchemalineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MDiscountSchema;
 	Seqno SeqNo;
 	?MProductCategory;

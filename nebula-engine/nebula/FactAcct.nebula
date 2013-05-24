@@ -1,7 +1,7 @@
 @Remarks("Accounting Fact")
 @Refby("2")
 type FactAcct {
-	!FactAcct ID;
+	!FactAcctId ID;
 	AdClient;
 	AdOrg;
 	CAcctschema;
@@ -10,8 +10,8 @@ type FactAcct {
 	DateAcct Date;
 	?CPeriod;
 	AdTable;
-	Record ID;
-	?Line ID;
+	RecordId ID;
+	?LineId ID;
 	?GlCategory;
 	?GlBudget;
 	?CTax;
@@ -38,8 +38,8 @@ type FactAcct {
 	?Description;
 	?AAsset;
 	?CSubacct;
-	?Userelement1 ID;
-	?Userelement2 ID;
+	?Userelement1Id ID;
+	?Userelement2Id ID;
 	?CProjectPhase;
 	?CProjectTask;
 };

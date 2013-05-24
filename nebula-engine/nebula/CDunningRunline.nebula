@@ -1,9 +1,9 @@
 @Remarks("Dunning Run Line")
 @Refby("0")
 type CDunningRunline {
-	!CDunningRunline ID;
-	AdClient ID;
-	AdOrg ID;
+	!CDunningRunlineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CDunningRunentry;
 	?CInvoice;
 	?CPayment;

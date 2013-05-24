@@ -1,9 +1,9 @@
 @Remarks("Plan for recognizing or recording revenue")
 @Refby("2")
 type CRevenueRecognitionPlan {
-	!CRevenueRecognitionPlan ID;
-	AdClient ID;
-	AdOrg ID;
+	!CRevenueRecognitionPlanId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CAcctschema;
 	CRevenueRecognition;
 	CInvoiceLine;

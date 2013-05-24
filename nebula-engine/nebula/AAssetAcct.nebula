@@ -3,8 +3,8 @@
 type AAssetAcct {
 	!AAsset;
 	!CAcctschema;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	ADepreciation;
 	ADepreciationAcct Number;
 	AAccumdepreciationAcct Number;

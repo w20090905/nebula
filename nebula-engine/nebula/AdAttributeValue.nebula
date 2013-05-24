@@ -2,7 +2,7 @@
 @Refby("0")
 type AdAttributeValue {
 	!AdAttribute;
-	!Record ID;
+	!RecordId ID;
 	?VNumber Number;
 	?VDate Date;
 	?VString Note;

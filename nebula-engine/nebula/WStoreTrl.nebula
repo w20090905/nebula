@@ -3,8 +3,8 @@
 type WStoreTrl {
 	!WStore;
 	!AdLanguage;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IsTranslated YesNo;/* 'N'  */
 	?Webinfo Note;
 	?Webparam1 Note;

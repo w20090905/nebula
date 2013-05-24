@@ -5,8 +5,8 @@ type TDistributionrundetail {
 	!MDistributionrunline;
 	!MDistributionlist;
 	!MDistributionlistline;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Ratio;
 	Minqty Quantity;/* 0  */
 	Qty Quantity;/* 0  */

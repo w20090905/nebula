@@ -3,8 +3,8 @@
 type CmCstageElementTrl {
 	!CmCstageElement;
 	!AdLanguage;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IsTranslated YesNo;/* 'N'  */
 	Name;
 	?Description;

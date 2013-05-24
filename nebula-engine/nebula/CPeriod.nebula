@@ -1,7 +1,7 @@
 @Remarks("Period of the Calendar")
 @Refby("8")
 type CPeriod {
-	!CPeriod ID;
+	!CPeriodId ID;
 	AdClient;
 	AdOrg;
 	Name;

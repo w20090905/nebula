@@ -1,9 +1,9 @@
 @Remarks("Workflow Activity")
 @Refby("2")
 type AdWfActivity {
-	!AdWfActivity ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdWfActivityId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdWfProcess;
 	AdWfNode;
 	?AdWfResponsible;
@@ -15,7 +15,7 @@ type AdWfActivity {
 	?TextMsg Note;
 	AdWorkflow;
 	AdTable;
-	Record ID;
+	RecordId ID;
 	?Priority;
 	?Endwaittime Time;
 	?DateLastalert Date;

@@ -1,9 +1,9 @@
 @Remarks("Product Serial Number Control")
 @Refby("2")
 type MSernoctl {
-	!MSernoctl ID;
-	AdClient ID;
-	AdOrg ID;
+	!MSernoctlId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	Startno SeqNo;

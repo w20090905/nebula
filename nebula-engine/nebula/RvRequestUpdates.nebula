@@ -1,13 +1,13 @@
 @Remarks("")
 @Refby("0")
 type RvRequestUpdates {
-	?AdClient ID;
-	?AdOrg ID;
-	?RRequest ID;
-	?AdUser ID;
+	?AdClientId ID;
+	?AdOrgId ID;
+	?RRequestId ID;
+	?AdUserId ID;
 	?IsSelfservice YesNo;
-	?RGroup ID;
-	?RRequestType ID;
-	?RCategory ID;
+	?RGroupId ID;
+	?RRequestTypeId ID;
+	?RCategoryId ID;
 };
 

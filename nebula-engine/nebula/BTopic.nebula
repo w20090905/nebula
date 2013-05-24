@@ -1,9 +1,9 @@
 @Remarks("Auction Topic")
 @Refby("3")
 type BTopic {
-	!BTopic ID;
-	AdClient ID;
-	AdOrg ID;
+	!BTopicId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo Long;
 	Name;
 	?Description;

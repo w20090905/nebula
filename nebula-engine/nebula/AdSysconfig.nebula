@@ -1,9 +1,9 @@
 @Remarks("System Configurator")
 @Refby("0")
 type AdSysconfig {
-	!AdSysconfig ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdSysconfigId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	Value String;
 	?Description;

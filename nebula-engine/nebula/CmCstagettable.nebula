@@ -1,14 +1,14 @@
 @Remarks("Containet Stage Template Table")
 @Refby("0")
 type CmCstagettable {
-	!CmCstagettable ID;
-	AdClient ID;
-	AdOrg ID;
+	!CmCstagettableId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	CmCstage;
 	CmTemplatetable;
-	?Record ID;
+	?RecordId ID;
 	?WhereClause Note;
 	?OtherClause Note;
 };

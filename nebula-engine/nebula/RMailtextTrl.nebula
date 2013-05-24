@@ -3,8 +3,8 @@
 type RMailtextTrl {
 	!RMailtext;
 	!AdLanguage;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IsTranslated YesNo;/* 'N'  */
 	Name;
 	?Mailheader Note;/* NULL */

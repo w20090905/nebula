@@ -1,9 +1,9 @@
 @Remarks("Data Replication Target")
 @Refby("1")
 type AdReplication {
-	!AdReplication ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdReplicationId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

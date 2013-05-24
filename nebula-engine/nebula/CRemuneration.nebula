@@ -1,9 +1,9 @@
 @Remarks("Remuneration")
 @Refby("2")
 type CRemuneration {
-	!CRemuneration ID;
-	AdClient ID;
-	AdOrg ID;
+	!CRemunerationId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

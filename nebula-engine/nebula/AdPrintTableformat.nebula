@@ -1,9 +1,9 @@
 @Remarks("Table Format in Reports")
 @Refby("1")
 type AdPrintTableformat {
-	!AdPrintTableformat ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdPrintTableformatId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?HdrPrintFont AdPrintFont;
 	?HdrTextfgPrintColor AdPrintColor;
 	?HdrTextbgPrintColor AdPrintColor;

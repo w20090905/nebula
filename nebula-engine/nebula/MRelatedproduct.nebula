@@ -4,8 +4,8 @@ type MRelatedproduct {
 	!MProduct;
 	!Relatedproduct MProduct;
 	!Relatedproducttype Attr;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 };

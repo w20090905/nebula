@@ -1,7 +1,7 @@
 @Remarks("Field on a database table")
 @Refby("4")
 type AdField {
-	!AdField ID;
+	!AdFieldId ID;
 	AdClient;
 	AdOrg;
 	Name;
@@ -26,7 +26,7 @@ type AdField {
 	?Obscuretype Attr;
 	?AdReference;
 	?IsMandatory YesNo;
-	?IncludedTab ID;
+	?IncludedTabId ID;
 	?Defaultvalue Note;
 	?AdReferenceValue AdReference;/* NULL */
 	?AdValRule;/* NULL */

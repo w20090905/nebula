@@ -2,9 +2,9 @@
 @Refby("0")
 type AdTabVt {
 	AdLanguage String;
-	AdTab ID;
-	AdWindow ID;
-	AdTable ID;
+	AdTabId ID;
+	AdWindowId ID;
+	AdTableId ID;
 	Name;
 	?Description;
 	?Help;
@@ -22,20 +22,20 @@ type AdTabVt {
 	?Hasassociation YesNo;
 	IsTranslationtab YesNo;
 	IsReadonly YesNo;
-	?AdImage ID;
+	?AdImageId ID;
 	Tablevel Long;
 	?WhereClause Note;
 	?OrderbyClause Note;
 	?Commitwarning Note;
 	?ReadonlyLogic Note;
 	?DisplayLogic Note;
-	?AdColumn ID;
-	?AdProcess ID;
+	?AdColumnId ID;
+	?AdProcessId ID;
 	IsSorttab YesNo;
 	IsInsertrecord YesNo;
 	IsAdvancedtab YesNo;
-	?AdColumnsortorder ID;
-	?AdColumnsortyesno ID;
-	?IncludedTab ID;
+	?AdColumnsortorderId ID;
+	?AdColumnsortyesnoId ID;
+	?IncludedTabId ID;
 };
 

@@ -1,9 +1,9 @@
 @Remarks("Test ID")
 @Refby("0")
 type Test {
-	!Test ID;
-	AdClient ID;
-	AdOrg ID;
+	!TestId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;
@@ -11,16 +11,16 @@ type Test {
 	?TNumber Number;/* 0 */
 	?TDate Date;
 	?TDateTime Time;
-	?CUom ID;
+	?CUomId ID;
 	?TQty Quantity;/* 0 */
-	?CCurrency ID;
+	?CCurrencyId ID;
 	?TAmount Amount;/* 0 */
-	?CLocation ID;
+	?CLocationId ID;
 	?AccountAcct CValidcombination;
-	?CPayment ID;
-	?MProduct ID;
-	?CBpartner ID;
-	?MLocator ID;
+	?CPaymentId ID;
+	?MProductId ID;
+	?CBpartnerId ID;
+	?MLocatorId ID;
 	?Processing YesNo;
 	?Binarydata Note;
 	?Processed YesNo;/* 'N' 

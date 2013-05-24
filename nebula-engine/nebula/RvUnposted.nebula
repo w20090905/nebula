@@ -1,13 +1,13 @@
 @Remarks("")
 @Refby("0")
 type RvUnposted {
-	?AdClient ID;
-	?AdOrg ID;
+	?AdClientId ID;
+	?AdOrgId ID;
 	?DocumentNo Long;
 	?DateDoc Date;
 	?DateAcct Date;
-	?AdTable ID;
-	?Record ID;
+	?AdTableId ID;
+	?RecordId ID;
 	?IsSotrx YesNo;
 };
 

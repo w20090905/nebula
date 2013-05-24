@@ -1,9 +1,9 @@
 @Remarks("Subscription of a Business Partner of a Product to renew")
 @Refby("1")
 type CSubscription {
-	!CSubscription ID;
-	AdClient ID;
-	AdOrg ID;
+	!CSubscriptionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	CBpartner;
 	MProduct;

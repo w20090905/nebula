@@ -1,9 +1,9 @@
 @Remarks("Reporting Hierarchy")
 @Refby("1")
 type PaHierarchy {
-	!PaHierarchy ID;
-	AdClient ID;
-	AdOrg ID;
+	!PaHierarchyId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

@@ -1,9 +1,9 @@
 @Remarks("Workflow Node Execution Parameter")
 @Refby("0")
 type AdWfNodePara {
-	!AdWfNodePara ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdWfNodeParaId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdWfNode;
 	?Attributename Name;
 	?AdProcessPara;

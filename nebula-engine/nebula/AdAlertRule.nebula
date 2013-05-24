@@ -1,9 +1,9 @@
 @Remarks("Definition of the alert element")
 @Refby("0")
 type AdAlertRule {
-	!AdAlertRule ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdAlertRuleId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	AdAlert;
 	SelectClause Note;

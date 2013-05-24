@@ -78,8 +78,7 @@ public class ConfigModule extends AbstractModule {
 				throw new RuntimeException("cannot find " + PATH_OF_ROOT);
 			}
 
-			EditableTypeLoader typeLoader = new EditableTypeLoader(new SystemTypeLoader(), new File(root,
-					"WEB-INF/nebula"));
+			EditableTypeLoader typeLoader = new EditableTypeLoader(new SystemTypeLoader(), new File("nebula"));
 
 			this.bind(EditableTypeLoader.class).toInstance(typeLoader);
 			this.bind(TypeLoader.class).toInstance(typeLoader);

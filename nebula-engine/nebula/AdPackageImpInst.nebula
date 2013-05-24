@@ -1,9 +1,9 @@
 @Remarks("Packages Installed")
 @Refby("0")
 type AdPackageImpInst {
-	!AdPackageImpInst ID;
-	?AdClient ID;
-	?AdOrg ID;
+	!AdPackageImpInstId ID;
+	?AdClientId ID;
+	?AdOrgId ID;
 	?Name;
 	?PkStatus String;
 	?ReleaseNo String;

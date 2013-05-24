@@ -1,9 +1,9 @@
 @Remarks("Web Click Management")
 @Refby("2")
 type WClickcount {
-	!WClickcount ID;
-	AdClient ID;
-	AdOrg ID;
+	!WClickcountId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	Targeturl URL;

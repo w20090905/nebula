@@ -1,9 +1,9 @@
 @Remarks("Desktop Workbench")
 @Refby("0")
 type AdDesktopworkbench {
-	!AdDesktopworkbench ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdDesktopworkbenchId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdWorkbench;
 	AdDesktop;
 	Seqno SeqNo;

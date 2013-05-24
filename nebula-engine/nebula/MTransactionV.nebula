@@ -1,24 +1,24 @@
 @Remarks("")
 @Refby("0")
 type MTransactionV {
-	MTransaction ID;
-	AdClient ID;
-	AdOrg ID;
+	MTransactionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Movementtype Attr;
-	MLocator ID;
-	MProduct ID;
+	MLocatorId ID;
+	MProductId ID;
 	Movementdate Date;
 	Movementqty Quantity;
-	?MInventoryline ID;
-	?MInventory ID;
-	?MMovementline ID;
-	?MMovement ID;
-	?MInoutline ID;
-	?MInout ID;
-	?MProductIonline ID;
-	?MProductIon ID;
-	?CProjectIssue ID;
-	?CProject ID;
-	MAttributesetinstance ID;
+	?MInventorylineId ID;
+	?MInventoryId ID;
+	?MMovementlineId ID;
+	?MMovementId ID;
+	?MInoutlineId ID;
+	?MInoutId ID;
+	?MProductIonlineId ID;
+	?MProductIonId ID;
+	?CProjectIssueId ID;
+	?CProjectId ID;
+	MAttributesetinstanceId ID;
 };
 

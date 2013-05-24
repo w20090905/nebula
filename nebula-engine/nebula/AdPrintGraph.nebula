@@ -1,9 +1,9 @@
 @Remarks("Graph included in Reports")
 @Refby("1")
 type AdPrintGraph {
-	!AdPrintGraph ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdPrintGraphId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	Graphtype Attr;

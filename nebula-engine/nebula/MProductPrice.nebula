@@ -3,8 +3,8 @@
 type MProductPrice {
 	!MPriceListVersion;
 	!MProduct;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	PriceList Price;/* 0  */
 	PriceStd Price;/* 0  */
 	PriceLimit Price;/* 0  */

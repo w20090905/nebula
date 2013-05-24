@@ -1,9 +1,9 @@
 @Remarks("Schedule for generating Invoices")
 @Refby("1")
 type CInvoiceSchedule {
-	!CInvoiceSchedule ID;
-	AdClient ID;
-	AdOrg ID;
+	!CInvoiceScheduleId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	IsAmount YesNo;/* 'N'  */

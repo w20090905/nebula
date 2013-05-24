@@ -1,9 +1,9 @@
 @Remarks("Time and Expense Report")
 @Refby("1")
 type STimeexpense {
-	!STimeexpense ID;
-	AdClient ID;
-	AdOrg ID;
+	!STimeexpenseId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo Long;
 	CBpartner;
 	DateReport Date;

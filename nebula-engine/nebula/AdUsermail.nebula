@@ -1,9 +1,9 @@
 @Remarks("Mail sent to the user")
 @Refby("0")
 type AdUsermail {
-	!AdUsermail ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdUsermailId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdUser;
 	?RMailtext;
 	?WMailmsg;

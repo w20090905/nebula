@@ -1,7 +1,7 @@
 @Remarks("Location or Address")
 @Refby("22")
 type CLocation {
-	!CLocation ID;
+	!CLocationId ID;
 	AdClient;
 	AdOrg;
 	?Address1 Name;

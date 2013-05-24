@@ -1,9 +1,9 @@
 @Remarks("Type of request (e.g. Inquiry, Complaint, ..)")
 @Refby("9")
 type RRequestType {
-	!RRequestType ID;
-	AdClient ID;
-	AdOrg ID;
+	!RRequestTypeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	IsDefault YesNo;/* 'N'  */

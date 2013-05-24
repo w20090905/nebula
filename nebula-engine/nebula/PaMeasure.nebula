@@ -1,9 +1,9 @@
 @Remarks("Concrete Performance Measurement")
 @Refby("2")
 type PaMeasure {
-	!PaMeasure ID;
-	AdClient ID;
-	AdOrg ID;
+	!PaMeasureId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	Measuretype Attr;

@@ -1,9 +1,9 @@
 @Remarks("Web Container contains content like images, text etc.")
 @Refby("7")
 type CmContainer {
-	!CmContainer ID;
-	AdClient ID;
-	AdOrg ID;
+	!CmContainerId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

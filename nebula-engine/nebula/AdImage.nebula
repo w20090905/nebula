@@ -1,9 +1,9 @@
 @Remarks("System Image or Icon")
 @Refby("6")
 type AdImage {
-	!AdImage ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdImageId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?ImageUrl URL;
 	?Binarydata Note;

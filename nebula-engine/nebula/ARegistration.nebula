@@ -1,9 +1,9 @@
 @Remarks("User Asset Registration")
 @Refby("1")
 type ARegistration {
-	!ARegistration ID;
-	AdClient ID;
-	AdOrg ID;
+	!ARegistrationId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

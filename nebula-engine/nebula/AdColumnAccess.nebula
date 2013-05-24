@@ -3,8 +3,8 @@
 type AdColumnAccess {
 	!AdRole;
 	!AdColumn;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IsReadonly YesNo;/* 'N'  	  */
 	IsExclude YesNo;/* 'Y'  	  */
 	?AdTable;

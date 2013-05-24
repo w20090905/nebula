@@ -6,6 +6,6 @@ type AdSequenceAudit {
 	AdClient;
 	AdOrg;
 	AdTable;
-	Record ID;
+	RecordId ID;
 };
 

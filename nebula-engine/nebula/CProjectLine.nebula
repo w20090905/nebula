@@ -1,9 +1,9 @@
 @Remarks("Task or step in a project")
 @Refby("0")
 type CProjectLine {
-	!CProjectLine ID;
-	AdClient ID;
-	AdOrg ID;
+	!CProjectLineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CProject;
 	Line Long;
 	?Description;

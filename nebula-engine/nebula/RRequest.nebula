@@ -1,9 +1,9 @@
 @Remarks("Request from a Business Partner or Prospect")
 @Refby("6")
 type RRequest {
-	!RRequest ID;
-	AdClient ID;
-	AdOrg ID;
+	!RRequestId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo Long;
 	RRequestType;
 	?RGroup;
@@ -37,7 +37,7 @@ type RRequest {
 	?MInout;
 	?MRma;
 	?AdTable;
-	?Record ID;
+	?RecordId ID;
 	RequestAmt Amount;/* 0  */
 	?RMailtext;
 	?Result Note;

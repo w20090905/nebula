@@ -1,9 +1,9 @@
 @Remarks("")
 @Refby("0")
 type AAssetUse {
-	!AAssetUse ID;
-	AdClient ID;
-	AdOrg ID;
+	!AAssetUseId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AAsset;
 	Usedate Date;
 	Useunits Number;

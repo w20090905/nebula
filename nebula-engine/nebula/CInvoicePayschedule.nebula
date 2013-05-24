@@ -1,9 +1,9 @@
 @Remarks("Invoice Payment Schedule")
 @Refby("1")
 type CInvoicePayschedule {
-	!CInvoicePayschedule ID;
-	AdClient ID;
-	AdOrg ID;
+	!CInvoicePayscheduleId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CInvoice;
 	?CPayschedule;
 	Duedate Date;

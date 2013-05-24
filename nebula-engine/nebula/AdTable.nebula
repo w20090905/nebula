@@ -1,7 +1,7 @@
 @Remarks("Table for the Fields")
 @Refby("44")
 type AdTable {
-	!AdTable ID;
+	!AdTableId ID;
 	AdClient;
 	AdOrg;
 	Name;

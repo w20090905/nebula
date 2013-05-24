@@ -3,8 +3,8 @@
 type RGroupupdates {
 	!AdUser;
 	!RGroup;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IsSelfservice YesNo;/* 'N'  */
 };
 

@@ -1,9 +1,9 @@
 @Remarks("Electronic Data Interchange")
 @Refby("1")
 type CBpEdi {
-	!CBpEdi ID;
-	AdClient ID;
-	AdOrg ID;
+	!CBpEdiId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	CBpartner;

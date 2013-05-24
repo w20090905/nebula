@@ -3,8 +3,8 @@
 type CWithholdingAcct {
 	!CWithholding;
 	!CAcctschema;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	WithholdingAcct CValidcombination;
 };
 

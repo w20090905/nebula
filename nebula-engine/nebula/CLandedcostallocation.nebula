@@ -1,9 +1,9 @@
 @Remarks("Landed Cost Allocation")
 @Refby("0")
 type CLandedcostallocation {
-	!CLandedcostallocation ID;
-	AdClient ID;
-	AdOrg ID;
+	!CLandedcostallocationId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CInvoiceLine;
 	MProduct;
 	?MAttributesetinstance;

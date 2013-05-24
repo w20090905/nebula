@@ -1,9 +1,9 @@
 @Remarks("Product BOM Alternative Group")
 @Refby("1")
 type MBomalternative {
-	!MBomalternative ID;
-	AdClient ID;
-	AdOrg ID;
+	!MBomalternativeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	MProduct;

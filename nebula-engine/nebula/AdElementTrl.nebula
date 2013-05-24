@@ -3,8 +3,8 @@
 type AdElementTrl {
 	!AdElement;
 	!AdLanguage;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	PrintName Name;
 	?Description;

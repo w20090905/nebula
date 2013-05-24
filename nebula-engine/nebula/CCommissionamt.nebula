@@ -1,9 +1,9 @@
 @Remarks("Generated Commission Amount")
 @Refby("1")
 type CCommissionamt {
-	!CCommissionamt ID;
-	AdClient ID;
-	AdOrg ID;
+	!CCommissionamtId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CCommissionrun;
 	CCommissionline;
 	Convertedamt Amount;/* 0  */

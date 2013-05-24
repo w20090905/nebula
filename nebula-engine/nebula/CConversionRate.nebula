@@ -1,7 +1,7 @@
 @Remarks("Rate used for converting currencies")
 @Refby("1")
 type CConversionRate {
-	!CConversionRate ID;
+	!CConversionRateId ID;
 	AdClient;
 	AdOrg;
 	CCurrency;

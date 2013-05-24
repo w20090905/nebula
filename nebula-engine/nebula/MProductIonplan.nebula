@@ -1,9 +1,9 @@
 @Remarks("Plan for how a product is produced")
 @Refby("1")
 type MProductIonplan {
-	!MProductIonplan ID;
-	AdClient ID;
-	AdOrg ID;
+	!MProductIonplanId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MProductIon;
 	Line Long;
 	MProduct;

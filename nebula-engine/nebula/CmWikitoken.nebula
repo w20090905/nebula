@@ -1,9 +1,9 @@
 @Remarks("Wiki Token")
 @Refby("0")
 type CmWikitoken {
-	!CmWikitoken ID;
-	AdClient ID;
-	AdOrg ID;
+	!CmWikitokenId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	Tokentype Attr;

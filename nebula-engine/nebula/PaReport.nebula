@@ -1,8 +1,8 @@
 @Remarks("Financial Report")
 @Refby("0")
 type PaReport {
-	!PaReport ID;
-	AdClient ID;
+	!PaReportId ID;
+	AdClientId ID;
 	?AdOrg;
 	Name;
 	?Description;

@@ -1,15 +1,15 @@
 @Remarks("")
 @Refby("0")
 type CPayselectionCheckVt {
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?AdLanguage String;
-	CPayselection ID;
-	CPayselectioncheck ID;
-	?OrgLocation ID;
+	CPayselectionId ID;
+	CPayselectioncheckId ID;
+	?OrgLocationId ID;
 	?TaxId Code;
-	?CDoctype ID;
-	?CBpartner ID;
+	?CDoctypeId ID;
+	?CBpartnerId ID;
 	?Bpvalue Description;
 	?Bptaxid Code;
 	?Naics NAICS;
@@ -17,7 +17,7 @@ type CPayselectionCheckVt {
 	?Bpgreeting Description;
 	?Name;
 	?Name2 Name;
-	?CLocation ID;
+	?CLocationId ID;
 	?ReferenceNo Description;
 	?Poreference Name;
 	?Paydate Date;

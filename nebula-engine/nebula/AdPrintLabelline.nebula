@@ -1,9 +1,9 @@
 @Remarks("Print Label Line Format")
 @Refby("1")
 type AdPrintLabelline {
-	!AdPrintLabelline ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdPrintLabellineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdPrintLabel;
 	Name;
 	Seqno SeqNo;

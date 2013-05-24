@@ -1,7 +1,7 @@
 @Remarks("Cost Detail Information")
 @Refby("0")
 type MCostdetail {
-	!MCostdetail ID;
+	!MCostdetailId ID;
 	AdClient;
 	AdOrg;
 	CAcctschema;

@@ -1,9 +1,9 @@
 @Remarks("Chat Entry")
 @Refby("2")
 type CmChatentry {
-	!CmChatentry ID;
-	AdClient ID;
-	AdOrg ID;
+	!CmChatentryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CmChat;
 	Confidentialtype Attr;
 	?Characterdata Note;

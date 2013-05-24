@@ -1,8 +1,8 @@
 @Remarks("Invoice Identifier")
 @Refby("24")
 type CInvoice {
-	!CInvoice ID;
-	AdClient ID;
+	!CInvoiceId ID;
+	AdClientId ID;
 	AdOrg;
 	IsSotrx YesNo;/* 'Y'  */
 	DocumentNo Long;
@@ -53,7 +53,6 @@ type CInvoice {
 	?RefInvoice CInvoice;
 	IsIndispute YesNo;/* 'N'  */
 	?InvoiceCollectiontype Attr;/* NULL   */
-	?MRma;/* NULL */
 	?DunningGrace Date;
 	?CDunningLevel;
 };

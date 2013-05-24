@@ -1,9 +1,9 @@
 @Remarks("AD_Package_Exp_Common_ID")
 @Refby("0")
 type AdPackageExpCommon {
-	!AdPackageExpCommon ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdPackageExpCommonId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?AdForm;
 	?AdImpformat;
 	?AdReportview;

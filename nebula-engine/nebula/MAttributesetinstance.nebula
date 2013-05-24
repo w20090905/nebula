@@ -1,9 +1,9 @@
 @Remarks("Product Attribute Set Instance")
 @Refby("26")
 type MAttributesetinstance {
-	!MAttributesetinstance ID;
-	AdClient ID;
-	AdOrg ID;
+	!MAttributesetinstanceId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?MAttributeset;
 	?Serno Description;
 	?Lot Description;

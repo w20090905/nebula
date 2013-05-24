@@ -1,9 +1,9 @@
 @Remarks("Import of the Bank Statement")
 @Refby("0")
 type IBankstatement {
-	!IBankstatement ID;
-	?AdClient ID;
-	?AdOrg ID;
+	!IBankstatementId ID;
+	?AdClientId ID;
+	?AdOrgId ID;
 	IIsImported YesNo;/* 'N'  */
 	?IErrorMsg Note;
 	?Processed YesNo;/* 'N' */

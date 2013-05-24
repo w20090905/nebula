@@ -1,9 +1,9 @@
 @Remarks("")
 @Refby("0")
 type RIsSuesource {
-	!RIsSuesource ID;
-	AdClient ID;
-	AdOrg ID;
+	!RIsSuesourceId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	RIsSuesystem;
 	RIsSueproject;
 	RIsSueuser;

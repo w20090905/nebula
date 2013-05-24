@@ -1,9 +1,9 @@
 @Remarks("Currency Conversion Rate Type")
 @Refby("11")
 type CConversionType {
-	!CConversionType ID;
-	AdClient ID;
-	AdOrg ID;
+	!CConversionTypeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	Name;
 	?Description;

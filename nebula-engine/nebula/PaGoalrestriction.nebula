@@ -1,8 +1,8 @@
 @Remarks("Performance Goal Restriction")
 @Refby("0")
 type PaGoalrestriction {
-	!PaGoalrestriction ID;
-	AdClient ID;
+	!PaGoalrestrictionId ID;
+	AdClientId ID;
 	AdOrg;
 	Name;
 	Goalrestrictiontype Attr;

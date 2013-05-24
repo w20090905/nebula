@@ -1,9 +1,9 @@
 @Remarks("Schedule Processes")
 @Refby("3")
 type AdScheduler {
-	!AdScheduler ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdSchedulerId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	AdProcess;

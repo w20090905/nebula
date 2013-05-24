@@ -1,9 +1,9 @@
 @Remarks("Product Attribute Set")
 @Refby("4")
 type MAttributeset {
-	!MAttributeset ID;
-	AdClient ID;
-	AdOrg ID;
+	!MAttributesetId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	IsSerno YesNo;/* 'Y'  */

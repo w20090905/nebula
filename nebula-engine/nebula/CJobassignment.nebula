@@ -1,9 +1,9 @@
 @Remarks("Position Assignment")
 @Refby("0")
 type CJobassignment {
-	!CJobassignment ID;
-	AdClient ID;
-	AdOrg ID;
+	!CJobassignmentId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdUser;
 	CJob;
 	Validfrom Date;

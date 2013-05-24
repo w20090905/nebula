@@ -1,7 +1,7 @@
 @Remarks("Column in the table")
 @Refby("21")
 type AdColumn {
-	!AdColumn ID;
+	!AdColumnId ID;
 	AdClient;
 	AdOrg;
 	Name;

@@ -3,8 +3,8 @@
 type MProductCategoryAcct {
 	!MProductCategory;
 	!CAcctschema;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	PRevenueAcct CValidcombination;
 	PExpenseAcct CValidcombination;
 	PAssetAcct CValidcombination;

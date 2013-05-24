@@ -1,7 +1,7 @@
 @Remarks("Unit of Measure")
 @Refby("22")
 type CUom {
-	!CUom ID;
+	!CUomId ID;
 	AdClient;
 	AdOrg;
 	X12de355 String;

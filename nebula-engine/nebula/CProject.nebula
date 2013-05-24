@@ -1,7 +1,7 @@
 @Remarks("Financial Project")
 @Refby("35")
 type CProject {
-	!CProject ID;
+	!CProjectId ID;
 	AdClient;
 	AdOrg;
 	Value String;

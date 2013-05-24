@@ -1,9 +1,9 @@
 @Remarks("Import Business Partner")
 @Refby("0")
 type IBpartner {
-	!IBpartner ID;
-	?AdClient ID;
-	?AdOrg ID;
+	!IBpartnerId ID;
+	?AdClientId ID;
+	?AdOrgId ID;
 	IIsImported YesNo;/* 'N'  */
 	?IErrorMsg Note;
 	?CBpartner;

@@ -1,9 +1,9 @@
 @Remarks("General Ledger Funds Control")
 @Refby("1")
 type GlFund {
-	!GlFund ID;
-	AdClient ID;
-	AdOrg ID;
+	!GlFundId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

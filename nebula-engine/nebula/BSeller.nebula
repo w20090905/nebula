@@ -2,8 +2,8 @@
 @Refby("2")
 type BSeller {
 	!AdUser;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	Validto Date;

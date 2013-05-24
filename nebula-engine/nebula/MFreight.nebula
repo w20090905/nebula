@@ -1,9 +1,9 @@
 @Remarks("Freight Rate")
 @Refby("0")
 type MFreight {
-	!MFreight ID;
-	AdClient ID;
-	AdOrg ID;
+	!MFreightId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MShipper;
 	MFreightCategory;
 	Validfrom Date;

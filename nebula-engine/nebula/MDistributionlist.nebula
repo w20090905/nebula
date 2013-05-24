@@ -1,9 +1,9 @@
 @Remarks("Distribution Lists allow to distribute products to a selected list of partners")
 @Refby("3")
 type MDistributionlist {
-	!MDistributionlist ID;
-	AdClient ID;
-	AdOrg ID;
+	!MDistributionlistId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

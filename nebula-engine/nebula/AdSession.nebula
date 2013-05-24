@@ -1,9 +1,9 @@
 @Remarks("User Session Online or Web")
 @Refby("3")
 type AdSession {
-	!AdSession ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdSessionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?Websession String;
 	?RemoteAddr Name;
 	?RemoteHost Host;

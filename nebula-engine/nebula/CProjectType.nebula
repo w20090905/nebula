@@ -1,9 +1,9 @@
 @Remarks("Type of the project")
 @Refby("3")
 type CProjectType {
-	!CProjectType ID;
-	AdClient ID;
-	AdOrg ID;
+	!CProjectTypeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

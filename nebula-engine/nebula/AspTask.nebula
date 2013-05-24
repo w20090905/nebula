@@ -1,8 +1,8 @@
 @Remarks("ASP Task")
 @Refby("0")
 type AspTask {
-	AdClient ID;/* NULL   */
-	AdOrg ID;/* NULL   */
+	AdClientId ID;/* NULL   */
+	AdOrgId ID;/* NULL   */
 	!AdTask;
 	!AspLevel;
 	AspStatus Attr;/* 'U'  */

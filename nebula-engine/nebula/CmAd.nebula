@@ -1,9 +1,9 @@
 @Remarks("An Advertisement is something like a banner")
 @Refby("0")
 type CmAd {
-	!CmAd ID;
-	AdClient ID;
-	AdOrg ID;
+	!CmAdId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

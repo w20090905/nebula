@@ -1,9 +1,9 @@
 @Remarks("Commission")
 @Refby("2")
 type CCommission {
-	!CCommission ID;
-	AdClient ID;
-	AdOrg ID;
+	!CCommissionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	CBpartner;

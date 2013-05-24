@@ -1,9 +1,9 @@
 @Remarks("Recurring Document")
 @Refby("1")
 type CRecurring {
-	!CRecurring ID;
-	AdClient ID;
-	AdOrg ID;
+	!CRecurringId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

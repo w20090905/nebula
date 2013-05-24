@@ -1,9 +1,9 @@
 @Remarks("ASP Module")
 @Refby("2")
 type AspModule {
-	AdClient ID;/* NULL   */
-	AdOrg ID;/* NULL   */
-	!AspModule ID;
+	AdClientId ID;/* NULL   */
+	AdOrgId ID;/* NULL   */
+	!AspModuleId ID;
 	?Description;
 	?Help;
 	Name;

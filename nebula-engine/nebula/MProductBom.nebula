@@ -1,9 +1,9 @@
 @Remarks("BOM Line")
 @Refby("0")
 type MProductBom {
-	!MProductBom ID;
-	AdClient ID;
-	AdOrg ID;
+	!MProductBomId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Line Long;
 	MProduct;
 	MProductBom MProduct;

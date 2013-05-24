@@ -1,9 +1,9 @@
 @Remarks("Request Update")
 @Refby("0")
 type RRequestUpdate {
-	!RRequestUpdate ID;
-	AdClient ID;
-	AdOrg ID;
+	!RRequestUpdateId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	RRequest;
 	Confidentialtypeentry YesNo;
 	?Starttime Time;

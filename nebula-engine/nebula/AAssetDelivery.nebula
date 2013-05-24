@@ -1,9 +1,9 @@
 @Remarks("Delivery of Asset")
 @Refby("0")
 type AAssetDelivery {
-	!AAssetDelivery ID;
-	AdClient ID;
-	AdOrg ID;
+	!AAssetDeliveryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AAsset;
 	Movementdate Date;
 	?Serno Description;

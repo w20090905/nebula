@@ -3,8 +3,8 @@
 type AdPrivateAccess {
 	!AdUser;
 	!AdTable;
-	!Record ID;
-	AdClient ID;
-	AdOrg ID;
+	!RecordId ID;
+	AdClientId ID;
+	AdOrgId ID;
 };
 

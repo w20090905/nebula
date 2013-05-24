@@ -1,9 +1,9 @@
 @Remarks("Report Line")
 @Refby("6")
 type PaReportline {
-	!PaReportline ID;
-	AdClient ID;
-	AdOrg ID;
+	!PaReportlineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	PaReportlineset;
 	Name;
 	Seqno SeqNo;

@@ -1,9 +1,9 @@
 @Remarks("Info Window")
 @Refby("2")
 type AdInfowindow {
-	!AdInfowindow ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdInfowindowId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

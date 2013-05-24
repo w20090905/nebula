@@ -1,9 +1,9 @@
 @Remarks("Withholding type defined")
 @Refby("2")
 type CWithholding {
-	!CWithholding ID;
-	AdClient ID;
-	AdOrg ID;
+	!CWithholdingId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	CPaymentTerm;

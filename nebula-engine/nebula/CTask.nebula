@@ -1,9 +1,9 @@
 @Remarks("Standard Project Type Task")
 @Refby("1")
 type CTask {
-	!CTask ID;
-	AdClient ID;
-	AdOrg ID;
+	!CTaskId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Seqno SeqNo;
 	Name;
 	?Description;

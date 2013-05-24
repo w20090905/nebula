@@ -1,7 +1,7 @@
 @Remarks("Valid Account Combination")
 @Refby("142")
 type CValidcombination {
-	!CValidcombination ID;
+	!CValidcombinationId ID;
 	AdClient;
 	AdOrg;
 	?Alias Description;
@@ -22,7 +22,7 @@ type CValidcombination {
 	?User1 CElementvalue;
 	?User2 CElementvalue;
 	?CSubacct;
-	?Userelement1 ID;
-	?Userelement2 ID;
+	?Userelement1Id ID;
+	?Userelement2Id ID;
 };
 

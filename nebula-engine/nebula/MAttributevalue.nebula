@@ -1,9 +1,9 @@
 @Remarks("Product Attribute Value")
 @Refby("1")
 type MAttributevalue {
-	!MAttributevalue ID;
-	AdClient ID;
-	AdOrg ID;
+	!MAttributevalueId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MAttribute;
 	Value String;
 	Name;

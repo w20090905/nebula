@@ -1,10 +1,10 @@
 @Remarks("Client Exception")
 @Refby("0")
 type AspClientException {
-	AdClient ID;/* NULL   */
+	AdClientId ID;/* NULL   */
 	?AdField;
 	?AdForm;
-	AdOrg ID;/* 0  */
+	AdOrgId ID;/* 0  */
 	?AdProcess;
 	?AdProcessPara;
 	?AdTab;
@@ -12,7 +12,7 @@ type AspClientException {
 	?AdWfNode;
 	?AdWindow;
 	?AdWorkflow;
-	!AspClientException ID;
+	!AspClientExceptionId ID;
 	AspStatus Attr;/* 'U'  */
 };
 

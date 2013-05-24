@@ -13,7 +13,7 @@ type AdWfProcess {
 	Processed YesNo;/* 'N'  */
 	?TextMsg Note;
 	AdTable;
-	Record ID;
+	RecordId ID;
 	?Priority;
 };
 

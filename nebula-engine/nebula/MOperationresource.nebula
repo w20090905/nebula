@@ -1,9 +1,9 @@
 @Remarks("Product Operation Resource")
 @Refby("0")
 type MOperationresource {
-	!MOperationresource ID;
-	AdClient ID;
-	AdOrg ID;
+	!MOperationresourceId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MProductOperation;
 	Name;
 	?Description;

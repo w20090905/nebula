@@ -1,7 +1,7 @@
 @Remarks("Rules for accounting")
 @Refby("39")
 type CAcctschema {
-	!CAcctschema ID;
+	!CAcctschemaId ID;
 	AdClient;
 	AdOrg;
 	Name;

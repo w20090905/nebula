@@ -1,9 +1,9 @@
 @Remarks("Process Parameter")
 @Refby("5")
 type AdProcessPara {
-	!AdProcessPara ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdProcessParaId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

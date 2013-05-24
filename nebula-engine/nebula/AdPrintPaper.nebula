@@ -1,9 +1,9 @@
 @Remarks("Printer paper definition")
 @Refby("1")
 type AdPrintPaper {
-	!AdPrintPaper ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdPrintPaperId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	IsDefault YesNo;/* 'N'  */

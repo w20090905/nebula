@@ -2,9 +2,9 @@
 @Refby("0")
 type BBidcomment {
 	!BTopic;
-	!BBidcomment ID;
-	AdClient ID;
-	AdOrg ID;
+	!BBidcommentId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdUser;
 	TextMsg Note;
 };

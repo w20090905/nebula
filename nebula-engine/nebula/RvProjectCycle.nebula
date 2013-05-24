@@ -1,29 +1,29 @@
 @Remarks("")
 @Refby("0")
 type RvProjectCycle {
-	AdClient ID;
-	AdOrg ID;
-	CCycle ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CCycleId ID;
 	Cyclename Name;
-	CCurrency ID;
-	CCyclestep ID;
+	CCurrencyId ID;
+	CCyclestepId ID;
 	Cyclestepname Name;
 	Seqno SeqNo;
 	Relativeweight Weight;
-	CPhase ID;
+	CPhaseId ID;
 	ProjectPhasename Name;
-	CProjectType ID;
+	CProjectTypeId ID;
 	ProjectTypename Name;
 	ProjectValue Description;
 	ProjectName Name;
 	?Description;
 	?Note;
-	?CBpartner ID;
-	?CBpartnerLocation ID;
-	?AdUser ID;
+	?CBpartnerId ID;
+	?CBpartnerLocationId ID;
+	?AdUserId ID;
 	?Poreference Name;
-	?SalesRep ID;
-	?MWarehouse ID;
+	?SalesRepId ID;
+	?MWarehouseId ID;
 	?ProjectCategory YesNo;
 	?DateContract Date;
 	?DateFinish Date;

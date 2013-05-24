@@ -1,9 +1,9 @@
 @Remarks("General Ledger Journal")
 @Refby("3")
 type GlJournal {
-	!GlJournal ID;
-	AdClient ID;
-	AdOrg ID;
+	!GlJournalId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CAcctschema;
 	CDoctype;
 	DocumentNo Long;

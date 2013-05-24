@@ -1,9 +1,9 @@
 @Remarks("Color for backgrounds or indicators")
 @Refby("3")
 type AdColor {
-	!AdColor ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdColorId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	IsDefault YesNo;/* 'N'  */
 	Colortype Attr;

@@ -1,9 +1,9 @@
 @Remarks("News channel for rss feed")
 @Refby("2")
 type CmNewSchannel {
-	!CmNewSchannel ID;
-	AdClient ID;
-	AdOrg ID;
+	!CmNewSchannelId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	Description;
 	?Help;

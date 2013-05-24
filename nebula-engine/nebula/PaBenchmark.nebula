@@ -1,9 +1,9 @@
 @Remarks("Performance Benchmark")
 @Refby("2")
 type PaBenchmark {
-	!PaBenchmark ID;
-	AdClient ID;
-	AdOrg ID;
+	!PaBenchmarkId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

@@ -1,9 +1,9 @@
 @Remarks("Result of the Workflow Process Activity")
 @Refby("0")
 type AdWfActivityresult {
-	!AdWfActivityresult ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdWfActivityresultId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdWfActivity;
 	Attributename Name;
 	?Attributevalue Note;

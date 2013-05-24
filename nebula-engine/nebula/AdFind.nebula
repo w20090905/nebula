@@ -1,10 +1,10 @@
 @Remarks("Find")
 @Refby("0")
 type AdFind {
-	!AdFind ID;
-	Find ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdFindId ID;
+	FindId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Andor YesNo;
 	AdColumn;
 	Operation String;

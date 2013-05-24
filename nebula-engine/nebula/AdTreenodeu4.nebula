@@ -2,10 +2,10 @@
 @Refby("0")
 type AdTreenodeu4 {
 	!AdTree;
-	!Node ID;
-	AdClient ID;
-	AdOrg ID;
-	Parent ID;
+	!NodeId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	ParentId ID;
 	Seqno SeqNo;/* 0  */
 };
 

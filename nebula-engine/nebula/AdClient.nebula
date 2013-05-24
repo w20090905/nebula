@@ -1,7 +1,7 @@
 @Remarks("Client/Tenant for this installation.")
 @Refby("67")
 type AdClient {
-	!AdClient ID;
+	!AdClientId ID;
 	Value String;
 	Name;
 	?Description;

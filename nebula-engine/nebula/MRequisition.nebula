@@ -1,9 +1,9 @@
 @Remarks("Material Requisition")
 @Refby("1")
 type MRequisition {
-	!MRequisition ID;
-	AdClient ID;
-	AdOrg ID;
+	!MRequisitionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo Long;
 	?Description;
 	?Help;

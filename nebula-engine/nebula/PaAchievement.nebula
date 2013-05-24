@@ -1,9 +1,9 @@
 @Remarks("Performance Achievement")
 @Refby("0")
 type PaAchievement {
-	!PaAchievement ID;
-	AdClient ID;
-	AdOrg ID;
+	!PaAchievementId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Note;

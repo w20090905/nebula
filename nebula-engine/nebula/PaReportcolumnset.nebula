@@ -1,9 +1,9 @@
 @Remarks("Collection of Columns for Report")
 @Refby("2")
 type PaReportcolumnset {
-	!PaReportcolumnset ID;
-	AdClient ID;
-	AdOrg ID;
+	!PaReportcolumnsetId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	Processing YesNo;

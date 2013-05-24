@@ -1,9 +1,9 @@
 @Remarks("Project Issues (Material, Labor)")
 @Refby("5")
 type CProjectIssue {
-	!CProjectIssue ID;
-	AdClient ID;
-	AdOrg ID;
+	!CProjectIssueId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CProject;
 	Line Long;
 	MProduct;

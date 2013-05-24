@@ -1,13 +1,13 @@
 @Remarks("Log of data changes")
 @Refby("0")
 type AdChangeLog {
-	!AdChangeLog ID;
+	!AdChangeLogId ID;
 	!AdSession;
 	!AdTable;
 	!AdColumn;
-	AdClient ID;
-	AdOrg ID;
-	Record ID;
+	AdClientId ID;
+	AdOrgId ID;
+	RecordId ID;
 	?OldValue Note;
 	?NewValue Note;
 	?Undo YesNo;

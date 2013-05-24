@@ -1,14 +1,14 @@
 @Remarks("System Notice")
 @Refby("0")
 type AdNote {
-	!AdNote ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdNoteId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?AdUser;
 	AdMessage;
 	?Reference Description;
 	?AdTable;
-	?Record ID;
+	?RecordId ID;
 	?Processed YesNo;/* 'N'
                       */
 	?Processing YesNo;

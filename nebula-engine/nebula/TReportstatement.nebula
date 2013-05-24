@@ -2,7 +2,7 @@
 @Refby("0")
 type TReportstatement {
 	!AdPinstance;
-	!FactAcct ID;
+	!FactAcctId ID;
 	Levelno SeqNo;
 	DateAcct Date;
 	?Name;

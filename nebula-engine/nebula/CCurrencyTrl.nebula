@@ -3,8 +3,8 @@
 type CCurrencyTrl {
 	!CCurrency;
 	!AdLanguage;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IsTranslated YesNo;/* 'N'  */
 	?Cursymbol String;
 	Description;

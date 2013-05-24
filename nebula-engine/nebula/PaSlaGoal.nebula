@@ -1,9 +1,9 @@
 @Remarks("Service Level Agreement Goal")
 @Refby("1")
 type PaSlaGoal {
-	!PaSlaGoal ID;
-	AdClient ID;
-	AdOrg ID;
+	!PaSlaGoalId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

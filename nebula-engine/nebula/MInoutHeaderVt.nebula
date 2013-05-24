@@ -1,26 +1,26 @@
 @Remarks("")
 @Refby("0")
 type MInoutHeaderVt {
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?AdLanguage String;
-	MInout ID;
+	MInoutId ID;
 	IsSotrx YesNo;
 	DocumentNo Long;
 	Docstatus Attr;
-	CDoctype ID;
-	?CBpartner ID;
+	CDoctypeId ID;
+	?CBpartnerId ID;
 	?Bpvalue Description;
 	?Bptaxid Code;
 	?Naics NAICS;
 	?Duns String;
-	?OrgLocation ID;
+	?OrgLocationId ID;
 	TaxId Code;
-	MWarehouse ID;
-	WarehouseLocation ID;
+	MWarehouseId ID;
+	WarehouseLocationId ID;
 	?DocumentType Description;
 	?DocumentTypenote Note;
-	?COrder ID;
+	?COrderId ID;
 	?Phone PhoneNumber;
 	?Movementdate Date;
 	Movementtype Attr;
@@ -30,7 +30,7 @@ type MInoutHeaderVt {
 	?BpcontactGreeting Description;
 	?Title String;
 	?Contactname Name;
-	?CLocation ID;
+	?CLocationId ID;
 	?PostAl Code;
 	?ReferenceNo Description;
 	?Description;
@@ -38,7 +38,7 @@ type MInoutHeaderVt {
 	?DateOrdered Date;
 	?Volume Number;
 	?Weight;
-	?MShipper ID;
+	?MShipperId ID;
 	DeliveryRule Attr;
 	DeliveryViarule Attr;
 	PriorityRule Attr;

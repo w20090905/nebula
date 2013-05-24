@@ -1,9 +1,9 @@
 @Remarks("LDAP Server")
 @Refby("2")
 type AdLdapProcessor {
-	!AdLdapProcessor ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdLdapProcessorId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	LdapPort Long;/* 0  */

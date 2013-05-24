@@ -1,9 +1,9 @@
 @Remarks("Web Advertisement")
 @Refby("0")
 type WAdvertisement {
-	!WAdvertisement ID;
-	AdClient ID;
-	AdOrg ID;
+	!WAdvertisementId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

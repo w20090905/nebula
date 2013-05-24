@@ -1,7 +1,7 @@
 @Remarks("Unit of Measure Conversion")
 @Refby("0")
 type CUomConversion {
-	!CUomConversion ID;
+	!CUomConversionId ID;
 	AdClient;
 	AdOrg;
 	CUom;

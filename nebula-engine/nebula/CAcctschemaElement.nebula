@@ -1,7 +1,7 @@
 @Remarks("Acct.Schema Element")
 @Refby("0")
 type CAcctschemaElement {
-	!CAcctschemaElement ID;
+	!CAcctschemaElementId ID;
 	AdOrg;
 	CAcctschema;
 	Elementtype Attr;

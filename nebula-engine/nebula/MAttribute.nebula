@@ -1,9 +1,9 @@
 @Remarks("Product Attribute")
 @Refby("3")
 type MAttribute {
-	!MAttribute ID;
-	AdClient ID;
-	AdOrg ID;
+	!MAttributeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	IsMandatory YesNo;/* 'N'  */

@@ -1,7 +1,7 @@
 @Remarks("Personal Preference")
 @Refby("0")
 type AdPreference {
-	!AdPreference ID;
+	!AdPreferenceId ID;
 	AdClient;
 	AdOrg;
 	?AdWindow;

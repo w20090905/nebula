@@ -1,9 +1,9 @@
 @Remarks("General Ledger Journal Batch")
 @Refby("4")
 type GlJournalbatch {
-	!GlJournalbatch ID;
-	AdClient ID;
-	AdOrg ID;
+	!GlJournalbatchId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo Long;
 	Description;
 	PostIngtype Attr;

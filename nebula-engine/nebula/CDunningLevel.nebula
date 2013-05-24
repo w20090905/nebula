@@ -1,9 +1,9 @@
 @Remarks("Dunning Level")
 @Refby("3")
 type CDunningLevel {
-	!CDunningLevel ID;
-	AdClient ID;
-	AdOrg ID;
+	!CDunningLevelId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CDunning;
 	PrintName Name;
 	DaysAfterDue Number;

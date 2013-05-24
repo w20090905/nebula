@@ -3,8 +3,8 @@
 type CmContainerElementTrl {
 	!CmContainerElement;
 	!AdLanguage;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IsTranslated YesNo;/* 'N'  */
 	?Contenthtml Note;
 	Name;

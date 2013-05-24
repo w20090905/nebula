@@ -1,9 +1,9 @@
 @Remarks("Request Resolution")
 @Refby("2")
 type RResolution {
-	!RResolution ID;
-	AdClient ID;
-	AdOrg ID;
+	!RResolutionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

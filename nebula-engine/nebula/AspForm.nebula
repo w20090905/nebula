@@ -1,9 +1,9 @@
 @Remarks("ASP Form")
 @Refby("0")
 type AspForm {
-	AdClient ID;/* NULL   */
+	AdClientId ID;/* NULL   */
 	!AdForm;
-	AdOrg ID;/* NULL   */
+	AdOrgId ID;/* NULL   */
 	!AspLevel;
 	AspStatus Attr;/* 'U'  */
 };

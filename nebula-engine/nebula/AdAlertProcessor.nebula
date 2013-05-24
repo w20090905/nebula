@@ -1,9 +1,9 @@
 @Remarks("Alert Processor/Server Parameter")
 @Refby("2")
 type AdAlertProcessor {
-	!AdAlertProcessor ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdAlertProcessorId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	FrequencyType Attr;

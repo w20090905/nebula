@@ -1,9 +1,9 @@
 @Remarks("Knowledge Category")
 @Refby("2")
 type KCategory {
-	!KCategory ID;
-	AdClient ID;
-	AdOrg ID;
+	!KCategoryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

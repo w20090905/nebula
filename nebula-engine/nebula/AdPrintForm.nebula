@@ -1,9 +1,9 @@
 @Remarks("Form")
 @Refby("0")
 type AdPrintForm {
-	!AdPrintForm ID;
+	!AdPrintFormId ID;
 	?AdClient;
-	AdOrg ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?InvoicePrintFormat AdPrintFormat;

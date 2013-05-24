@@ -1,25 +1,25 @@
 @Remarks("")
 @Refby("0")
 type RvAllocation {
-	CAllocationhdr ID;
-	AdClient ID;
-	AdOrg ID;
+	CAllocationhdrId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo Long;
 	?Description;
 	DateTrx Date;
 	DateAcct Date;
-	CCurrency ID;
+	CCurrencyId ID;
 	Approvalamt Amount;
 	IsManual YesNo;
 	Docstatus Attr;
 	Docaction Attr;
 	Processed YesNo;
-	CAllocationline ID;
-	?CInvoice ID;
-	?CBpartner ID;
-	?COrder ID;
-	?CPayment ID;
-	?CCashLine ID;
+	CAllocationlineId ID;
+	?CInvoiceId ID;
+	?CBpartnerId ID;
+	?COrderId ID;
+	?CPaymentId ID;
+	?CCashLineId ID;
 	Amount;
 	DiscountAmt Amount;
 	WriteoffAmt Amount;

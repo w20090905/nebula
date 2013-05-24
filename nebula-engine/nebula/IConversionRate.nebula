@@ -1,9 +1,9 @@
 @Remarks("Import Currency Conversion Rate")
 @Refby("0")
 type IConversionRate {
-	!IConversionRate ID;
-	?AdClient ID;
-	?AdOrg ID;
+	!IConversionRateId ID;
+	?AdClientId ID;
+	?AdOrgId ID;
 	?CConversionRate;
 	?IsOCode String;
 	?CCurrency;

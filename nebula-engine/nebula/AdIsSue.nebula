@@ -1,9 +1,9 @@
 @Remarks("System Issue")
 @Refby("0")
 type AdIsSue {
-	!AdIsSue ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdIsSueId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	ReleaseNo String;
 	Version Description;
 	Name;
@@ -25,7 +25,7 @@ type AdIsSue {
 	?LineNo Long;/* 0 */
 	?Stacktrace Note;
 	?ErrorTrace Note;
-	?Record ID;
+	?RecordId ID;
 	?RequestDocumentNo String;
 	?AAsset;
 	?RRequest;

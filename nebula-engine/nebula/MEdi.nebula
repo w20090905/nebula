@@ -1,9 +1,9 @@
 @Remarks("EDI Transaction")
 @Refby("1")
 type MEdi {
-	!MEdi ID;
-	AdClient ID;
-	AdOrg ID;
+	!MEdiId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CBpEdi;
 	DocumentNo Long;
 	Line Long;

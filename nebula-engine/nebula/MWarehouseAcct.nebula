@@ -3,8 +3,8 @@
 type MWarehouseAcct {
 	!MWarehouse;
 	!CAcctschema;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	WInventoryAcct CValidcombination;
 	WInvactualadjustAcct CValidcombination;
 	WDifferencesAcct CValidcombination;

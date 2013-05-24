@@ -1,9 +1,9 @@
 @Remarks("Source of a Knowledge Entry")
 @Refby("1")
 type KSource {
-	!KSource ID;
-	AdClient ID;
-	AdOrg ID;
+	!KSourceId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Descriptionurl URL;
 };

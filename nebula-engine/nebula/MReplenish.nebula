@@ -3,8 +3,8 @@
 type MReplenish {
 	!MProduct;
 	!MWarehouse;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Replenishtype Attr;
 	LevelMin Long;/* 0  */
 	LevelMax Long;/* 0  */

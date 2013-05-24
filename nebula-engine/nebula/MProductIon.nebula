@@ -1,8 +1,8 @@
 @Remarks("Plan for producing a product")
 @Refby("1")
 type MProductIon {
-	!MProductIon ID;
-	AdClient ID;
+	!MProductIonId ID;
+	AdClientId ID;
 	AdOrg;
 	Name;
 	?Description;

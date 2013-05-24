@@ -1,9 +1,9 @@
 @Remarks("Payment allocation")
 @Refby("1")
 type CAllocationhdr {
-	!CAllocationhdr ID;
-	AdClient ID;
-	AdOrg ID;
+	!CAllocationhdrId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo Long;
 	?Description;
 	DateTrx Date;

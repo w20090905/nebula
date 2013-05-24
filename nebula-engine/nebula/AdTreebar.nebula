@@ -3,8 +3,8 @@
 type AdTreebar {
 	!AdTree;
 	!AdUser;
-	!Node ID;
-	AdClient ID;
-	AdOrg ID;
+	!NodeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 };
 

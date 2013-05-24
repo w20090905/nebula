@@ -23,8 +23,8 @@ type FactAcctBalance {
 	AmtAcctcr Amount;/* 0  */
 	Qty Quantity;/* 0  */
 	?CSubacct;
-	?Userelement1 ID;
-	?Userelement2 ID;
+	?Userelement1Id ID;
+	?Userelement2Id ID;
 	?CProjectPhase;
 	?CProjectTask;
 };

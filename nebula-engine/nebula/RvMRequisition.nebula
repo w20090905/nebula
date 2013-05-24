@@ -1,15 +1,15 @@
 @Remarks("")
 @Refby("0")
 type RvMRequisition {
-	MRequisition ID;
-	AdClient ID;
-	AdOrg ID;
+	MRequisitionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo Long;
 	?Description;
 	?Help;
-	AdUser ID;
-	MPriceList ID;
-	MWarehouse ID;
+	AdUserId ID;
+	MPriceListId ID;
+	MWarehouseId ID;
 	IsApproved YesNo;
 	PriorityRule Attr;
 	DateRequired Date;
@@ -17,10 +17,10 @@ type RvMRequisition {
 	Docaction Attr;
 	Docstatus Attr;
 	Processed YesNo;
-	MRequisitionline ID;
+	MRequisitionlineId ID;
 	Line Long;
 	Qty Quantity;
-	?MProduct ID;
+	?MProductId ID;
 	?LineDescription Description;
 	PriceActual Price;
 	LineNetamt Long;

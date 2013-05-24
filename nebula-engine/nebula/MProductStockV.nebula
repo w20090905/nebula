@@ -8,9 +8,9 @@ type MProductStockV {
 	QtyReserved Quantity;
 	?Description;
 	Warehouse Description;
-	MWarehouse ID;
-	AdClient ID;
-	AdOrg ID;
+	MWarehouseId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?DocumentNote Note;
 };
 

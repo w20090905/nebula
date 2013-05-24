@@ -3,8 +3,8 @@
 type MTransactionallocation {
 	!MTransaction;
 	!Allocationstrategytype Attr;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MProduct;
 	MAttributesetinstance;/* 0 */
 	IsAllocated YesNo;/* 'N'  */

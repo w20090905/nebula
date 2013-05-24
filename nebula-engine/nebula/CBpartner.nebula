@@ -1,7 +1,7 @@
 @Remarks("Identifies a Business Partner")
 @Refby("75")
 type CBpartner {
-	!CBpartner ID;
+	!CBpartnerId ID;
 	AdClient;
 	AdOrg;
 	Value String;
@@ -54,7 +54,6 @@ type CBpartner {
 	?DeliveryRule Attr;
 	?FreightCostrule Name;
 	?DeliveryViarule Attr;
-	?SalesRep AdUser;
 	Sendemail YesNo;/* 'N'  */
 	?BpartnerParent CBpartner;
 	?InvoicePrintFormat AdPrintFormat;

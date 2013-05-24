@@ -1,16 +1,16 @@
 @Remarks("Contains media content like images, flash movies etc.")
 @Refby("4")
 type CmMedia {
-	!CmMedia ID;
-	AdClient ID;
-	AdOrg ID;
+	!CmMediaId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?Mediatype Attr;
 	Name;
 	?Description;
 	?Help;
 	IsSummary YesNo;/* 'N'  */
 	CmWebproject;
-	?AdImage ID;
+	?AdImageId ID;
 	?Contenttext Note;
 	?Directdeploy YesNo;
 };

@@ -1,9 +1,9 @@
 @Remarks("Request History")
 @Refby("0")
 type RRequestAction {
-	!RRequestAction ID;
-	AdClient ID;
-	AdOrg ID;
+	!RRequestActionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	RRequest;
 	?RGroup;
 	?RCategory;

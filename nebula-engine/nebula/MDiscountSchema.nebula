@@ -1,9 +1,9 @@
 @Remarks("Schema to calculate the trade discount percentage")
 @Refby("7")
 type MDiscountSchema {
-	!MDiscountSchema ID;
-	AdClient ID;
-	AdOrg ID;
+	!MDiscountSchemaId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	Validfrom Date;

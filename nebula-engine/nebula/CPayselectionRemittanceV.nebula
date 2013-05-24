@@ -1,19 +1,19 @@
 @Remarks("")
 @Refby("0")
 type CPayselectionRemittanceV {
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?AdLanguage String;
-	CPayselection ID;
-	CPayselectionline ID;
-	?CPayselectioncheck ID;
+	CPayselectionId ID;
+	CPayselectionlineId ID;
+	?CPayselectioncheckId ID;
 	PaymentRule Name;
 	Line Long;
 	Openamt Amount;
 	Payamt Amount;
 	DiscountAmt Amount;
 	Differenceamt Amount;
-	CBpartner ID;
+	CBpartnerId ID;
 	DocumentNo Long;
 	DateInvoiceD Date;
 	GrandTotal Number;

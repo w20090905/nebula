@@ -1,9 +1,9 @@
 @Remarks("Knowledge Entry Comment")
 @Refby("0")
 type KComment {
-	!KComment ID;
-	AdClient ID;
-	AdOrg ID;
+	!KCommentId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	KEntry;
 	Rating YesNo;
 	IsPublic YesNo;/* 'Y'  */

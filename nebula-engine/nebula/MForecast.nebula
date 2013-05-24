@@ -1,9 +1,9 @@
 @Remarks("Material Forecast")
 @Refby("1")
 type MForecast {
-	!MForecast ID;
-	AdClient ID;
-	AdOrg ID;
+	!MForecastId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

@@ -1,9 +1,9 @@
 @Remarks("FiFo/LiFo Cost Queue")
 @Refby("0")
 type MCostqueue {
-	!MCostqueue ID;
-	AdClient ID;
-	AdOrg ID;
+	!MCostqueueId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MCosttype;
 	CAcctschema;
 	MProduct;

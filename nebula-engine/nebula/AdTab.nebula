@@ -1,7 +1,7 @@
 @Remarks("Tab within a Window")
 @Refby("8")
 type AdTab {
-	!AdTab ID;
+	!AdTabId ID;
 	AdClient;
 	AdOrg;
 	Name;

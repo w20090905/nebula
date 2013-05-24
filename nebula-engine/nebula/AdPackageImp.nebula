@@ -1,9 +1,9 @@
 @Remarks("AD_Package_Imp_ID")
 @Refby("0")
 type AdPackageImp {
-	!AdPackageImp ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdPackageImpId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?PkStatus String;
 	?ReleaseNo String;

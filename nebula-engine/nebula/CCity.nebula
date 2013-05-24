@@ -1,7 +1,7 @@
 @Remarks("City")
 @Refby("1")
 type CCity {
-	!CCity ID;
+	!CCityId ID;
 	AdClient;
 	AdOrg;
 	Name;

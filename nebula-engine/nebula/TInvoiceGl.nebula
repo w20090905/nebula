@@ -4,8 +4,8 @@ type TInvoiceGl {
 	!AdPinstance;
 	!CInvoice;
 	!FactAcct;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	GrandTotal Number;/* 0  */
 	Openamt Amount;/* 0  */
 	?Percent;

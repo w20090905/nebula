@@ -1,9 +1,9 @@
 @Remarks("Product Lot Definition")
 @Refby("1")
 type MLot {
-	!MLot ID;
-	AdClient ID;
-	AdOrg ID;
+	!MLotId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	MProduct;

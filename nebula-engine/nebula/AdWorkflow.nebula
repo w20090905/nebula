@@ -1,7 +1,7 @@
 @Remarks("Workflow or combination of tasks")
 @Refby("13")
 type AdWorkflow {
-	!AdWorkflow ID;
+	!AdWorkflowId ID;
 	AdClient;
 	AdOrg;
 	Name;

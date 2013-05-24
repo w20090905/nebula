@@ -1,9 +1,9 @@
 @Remarks("Bank Statement of account")
 @Refby("2")
 type CBankstatement {
-	!CBankstatement ID;
-	AdClient ID;
-	AdOrg ID;
+	!CBankstatementId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CBankaccount;
 	Name;
 	?Description;

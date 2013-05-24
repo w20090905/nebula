@@ -1,9 +1,9 @@
 @Remarks("Individual Count hit")
 @Refby("0")
 type WCounter {
-	!WCounter ID;
-	AdClient ID;
-	AdOrg ID;
+	!WCounterId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Pageurl URL;
 	?Referrer Description;
 	?RemoteHost Host;

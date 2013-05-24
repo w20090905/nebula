@@ -1,8 +1,8 @@
 @Remarks("Movement of Inventory")
 @Refby("2")
 type MMovement {
-	!MMovement ID;
-	AdClient ID;
+	!MMovementId ID;
+	AdClientId ID;
 	AdOrg;
 	DocumentNo Long;
 	?Description;

@@ -1,7 +1,7 @@
 @Remarks("Account Element")
 @Refby("52")
 type CElementvalue {
-	!CElementvalue ID;
+	!CElementvalueId ID;
 	AdClient;
 	AdOrg;
 	Value String;

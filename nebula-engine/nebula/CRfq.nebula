@@ -1,9 +1,9 @@
 @Remarks("Request for Quotation")
 @Refby("2")
 type CRfq {
-	!CRfq ID;
-	AdClient ID;
-	AdOrg ID;
+	!CRfqId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

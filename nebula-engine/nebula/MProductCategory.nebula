@@ -1,9 +1,9 @@
 @Remarks("Category of a Product")
 @Refby("14")
 type MProductCategory {
-	!MProductCategory ID;
-	AdClient ID;
-	AdOrg ID;
+	!MProductCategoryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	Name;
 	?Description;

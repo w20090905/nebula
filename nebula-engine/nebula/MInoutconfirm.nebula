@@ -1,9 +1,9 @@
 @Remarks("Material Shipment or Receipt Confirmation")
 @Refby("1")
 type MInoutconfirm {
-	!MInoutconfirm ID;
-	AdClient ID;
-	AdOrg ID;
+	!MInoutconfirmId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo Long;
 	MInout;
 	Confirmtype Attr;

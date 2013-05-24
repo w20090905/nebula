@@ -1,9 +1,9 @@
 @Remarks("Performance Ratio Element")
 @Refby("0")
 type PaRatioelement {
-	!PaRatioelement ID;
-	AdClient ID;
-	AdOrg ID;
+	!PaRatioelementId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	PaRatio;

@@ -1,9 +1,9 @@
 @Remarks("PA_DashboardContent_ID")
 @Refby("0")
 type PaDashboardcontent {
-	!PaDashboardcontent ID;
-	AdClient ID;
-	AdOrg ID;
+	!PaDashboardcontentId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?AdWindow;
 	?Description;

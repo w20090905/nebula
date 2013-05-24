@@ -1,9 +1,9 @@
 @Remarks("Web Access Log")
 @Refby("0")
 type CmWebaccesslog {
-	!CmWebaccesslog ID;
-	AdClient ID;
-	AdOrg ID;
+	!CmWebaccesslogId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Logtype Attr;
 	?CmWebproject;
 	IpAddress String;

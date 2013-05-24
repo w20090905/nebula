@@ -1,9 +1,9 @@
 @Remarks("Global Model Validator")
 @Refby("0")
 type AdModelvalidator {
-	AdClient ID;/* 0  */
-	!AdModelvalidator ID;
-	AdOrg ID;/* 0  */
+	AdClientId ID;/* 0  */
+	!AdModelvalidatorId ID;
+	AdOrgId ID;/* 0  */
 	Name;
 	?Description;
 	?Help;

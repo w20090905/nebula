@@ -1,9 +1,9 @@
 @Remarks("Service Level Agreement Criteria")
 @Refby("1")
 type PaSlaCriteria {
-	!PaSlaCriteria ID;
-	AdClient ID;
-	AdOrg ID;
+	!PaSlaCriteriaId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

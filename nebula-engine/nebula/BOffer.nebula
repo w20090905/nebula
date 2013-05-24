@@ -1,9 +1,9 @@
 @Remarks("Offer for a Topic")
 @Refby("0")
 type BOffer {
-	!BOffer ID;
-	AdClient ID;
-	AdOrg ID;
+	!BOfferId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	BTopic;
 	AdUser BSeller;

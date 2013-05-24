@@ -3,8 +3,8 @@
 type CPaymentTermTrl {
 	!CPaymentTerm;
 	!AdLanguage;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?DocumentNote Note;

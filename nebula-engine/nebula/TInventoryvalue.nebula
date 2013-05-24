@@ -5,8 +5,8 @@ type TInventoryvalue {
 	!MWarehouse;
 	!MProduct;
 	!MAttributesetinstance;
-	?AdClient ID;
-	?AdOrg ID;
+	?AdClientId ID;
+	?AdOrgId ID;
 	?MPriceListVersion;
 	?DateValue Date;
 	?CCurrency;

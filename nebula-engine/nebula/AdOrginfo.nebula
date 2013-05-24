@@ -2,11 +2,11 @@
 @Refby("0")
 type AdOrginfo {
 	!AdOrg;
-	AdClient ID;
+	AdClientId ID;
 	?CLocation;
 	Duns String;
 	TaxId Code;
-	?PaGoal ID;
+	?PaGoalId ID;
 	?Supervisor AdUser;
 	?ParentOrg AdOrg;
 	?AdOrgtype;

@@ -1,9 +1,9 @@
 @Remarks("")
 @Refby("0")
 type RvClickUnprocessed {
-	WClick ID;
-	AdClient ID;
-	AdOrg ID;
+	WClickId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?Targeturl URL;
 	?Referrer Description;
 	?RemoteHost Host;
@@ -11,8 +11,8 @@ type RvClickUnprocessed {
 	?Useragent Note;
 	?AcceptLanguage Description;
 	Processed YesNo;
-	?WClickcount ID;
-	?AdUser ID;
+	?WClickcountId ID;
+	?AdUserId ID;
 	?Email;
 };
 

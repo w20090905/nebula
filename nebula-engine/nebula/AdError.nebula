@@ -1,9 +1,9 @@
 @Remarks("Error")
 @Refby("0")
 type AdError {
-	!AdError ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdErrorId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Code Note;
 	?AdLanguage;

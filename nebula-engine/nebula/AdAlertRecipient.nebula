@@ -1,9 +1,9 @@
 @Remarks("Recipient of the Alert Notification")
 @Refby("0")
 type AdAlertRecipient {
-	!AdAlertRecipient ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdAlertRecipientId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdAlert;
 	?AdUser;
 	?AdRole;

@@ -1,9 +1,9 @@
 @Remarks("Report view Column")
 @Refby("0")
 type AdReportviewCol {
-	!AdReportviewCol ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdReportviewColId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdReportview;
 	?AdColumn;
 	FunctionColumn Description;

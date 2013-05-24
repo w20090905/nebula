@@ -1,11 +1,11 @@
 @Remarks("Attachment for the document")
 @Refby("1")
 type AdAttachment {
-	!AdAttachment ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdAttachmentId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdTable;
-	Record ID;
+	RecordId ID;
 	Title String;
 	?Binarydata Note;
 	?TextMsg Note;

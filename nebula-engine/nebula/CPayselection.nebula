@@ -1,9 +1,9 @@
 @Remarks("Payment Selection")
 @Refby("2")
 type CPayselection {
-	!CPayselection ID;
-	AdClient ID;
-	AdOrg ID;
+	!CPayselectionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	CBankaccount;

@@ -3,8 +3,8 @@
 type CBpWithholding {
 	!CBpartner;
 	!CWithholding;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IsMandatorywithholding YesNo;/* 'N'  */
 	IsTemporaryexempt YesNo;/* 'N'  */
 	?Exemptreason String;

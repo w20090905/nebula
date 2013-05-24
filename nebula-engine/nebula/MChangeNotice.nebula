@@ -1,9 +1,9 @@
 @Remarks("Change Notice")
 @Refby("6")
 type MChangeNotice {
-	!MChangeNotice ID;
-	AdClient ID;
-	AdOrg ID;
+	!MChangeNoticeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

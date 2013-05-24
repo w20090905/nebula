@@ -1,9 +1,9 @@
 @Remarks("Allocate Payment to Invoices")
 @Refby("0")
 type CPaymentAllocate {
-	!CPaymentAllocate ID;
-	AdClient ID;
-	AdOrg ID;
+	!CPaymentAllocateId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CPayment;
 	CInvoice;
 	Amount;/* 0  */

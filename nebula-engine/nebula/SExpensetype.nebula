@@ -1,9 +1,9 @@
 @Remarks("Expense report type")
 @Refby("1")
 type SExpensetype {
-	!SExpensetype ID;
-	AdClient ID;
-	AdOrg ID;
+	!SExpensetypeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	Name;
 	?Description;

@@ -1,9 +1,9 @@
 @Remarks("Document Line representing a production")
 @Refby("6")
 type MProductIonline {
-	!MProductIonline ID;
-	AdClient ID;
-	AdOrg ID;
+	!MProductIonlineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MProductIonplan;
 	Line Long;
 	MProduct;

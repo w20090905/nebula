@@ -1,16 +1,16 @@
 @Remarks("")
 @Refby("0")
 type RvWarehouseprice {
-	AdClient ID;
-	AdOrg ID;
-	MProduct ID;
-	MPriceListVersion ID;
-	MWarehouse ID;
+	AdClientId ID;
+	AdOrgId ID;
+	MProductId ID;
+	MPriceListVersionId ID;
+	MWarehouseId ID;
 	Value String;
 	Name;
 	?Upc UPC;
 	?Sku String;
-	CUom ID;
+	CUomId ID;
 	?Uomsymbol String;
 	?PriceList Price;
 	?PriceStd Price;

@@ -1,12 +1,12 @@
 @Remarks("Chat")
 @Refby("2")
 type CmChat {
-	!CmChat ID;
-	AdClient ID;
-	AdOrg ID;
+	!CmChatId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Description;
 	AdTable;
-	Record ID;
+	RecordId ID;
 	Confidentialtype Attr;
 	?CmChattype;
 	?Moderationtype Attr;/* NULL   */

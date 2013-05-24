@@ -1,9 +1,9 @@
 @Remarks("Media Deployment Log")
 @Refby("0")
 type CmMediadeploy {
-	!CmMediadeploy ID;
-	AdClient ID;
-	AdOrg ID;
+	!CmMediadeployId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CmMediaServer;
 	CmMedia;
 	IsDeployed YesNo;/* 'N'  */

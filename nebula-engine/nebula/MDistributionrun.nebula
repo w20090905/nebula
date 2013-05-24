@@ -1,9 +1,9 @@
 @Remarks("Distribution Run create Orders to distribute products to a selected list of partners")
 @Refby("2")
 type MDistributionrun {
-	!MDistributionrun ID;
-	AdClient ID;
-	AdOrg ID;
+	!MDistributionrunId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	IsCreateSingleorder YesNo;/* 'N'  */

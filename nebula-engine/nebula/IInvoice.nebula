@@ -1,8 +1,8 @@
 @Remarks("Import Invoice")
 @Refby("0")
 type IInvoice {
-	!IInvoice ID;
-	?AdClient ID;
+	!IInvoiceId ID;
+	?AdClientId ID;
 	?AdOrg;
 	?AdOrgtrx AdOrg;
 	IIsImported YesNo;/* 'N'  */

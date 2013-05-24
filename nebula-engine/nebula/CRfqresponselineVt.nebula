@@ -1,17 +1,17 @@
 @Remarks("")
 @Refby("0")
 type CRfqresponselineVt {
-	CRfqresponse ID;
-	CRfqresponseline ID;
-	CRfqline ID;
-	CRfqresponselineqty ID;
-	CRfqlineqty ID;
-	AdClient ID;
-	AdOrg ID;
+	CRfqresponseId ID;
+	CRfqresponselineId ID;
+	CRfqlineId ID;
+	CRfqresponselineqtyId ID;
+	CRfqlineqtyId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdLanguage String;
 	Line Long;
-	?MProduct ID;
-	?MAttributesetinstance ID;
+	?MProductId ID;
+	?MAttributesetinstanceId ID;
 	?Name;
 	?Description;
 	?DocumentNote Note;
@@ -21,7 +21,7 @@ type CRfqresponselineVt {
 	?Help;
 	?DateWorkstart Date;
 	?DeliveryDays Count;
-	CUom ID;
+	CUomId ID;
 	?Uomsymbol String;
 	Qty Quantity;
 	Price;

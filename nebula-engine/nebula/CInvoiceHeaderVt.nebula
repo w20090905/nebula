@@ -1,25 +1,25 @@
 @Remarks("")
 @Refby("0")
 type CInvoiceHeaderVt {
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?AdLanguage String;
-	CInvoice ID;
+	CInvoiceId ID;
 	IsSotrx YesNo;
 	DocumentNo Long;
 	Docstatus Attr;
-	CDoctype ID;
-	CBpartner ID;
+	CDoctypeId ID;
+	CBpartnerId ID;
 	?Bpvalue Description;
 	?Bptaxid Code;
 	?Naics NAICS;
 	?Duns String;
-	?OrgLocation ID;
+	?OrgLocationId ID;
 	TaxId Code;
 	DocumentType Description;
 	?DocumentTypenote Note;
-	?COrder ID;
-	?SalesRep ID;
+	?COrderId ID;
+	?SalesRepId ID;
 	?SalesRepName Name;
 	DateInvoiceD Date;
 	?Bpgreeting Description;
@@ -29,25 +29,25 @@ type CInvoiceHeaderVt {
 	?Title String;
 	?Phone PhoneNumber;
 	?Contactname Name;
-	?CLocation ID;
+	?CLocationId ID;
 	?ReferenceNo Description;
 	?PostAl Code;
 	?Description;
 	?Poreference Name;
 	?DateOrdered Date;
-	CCurrency ID;
+	CCurrencyId ID;
 	?PaymentTerm Description;
 	?PaymentTermnote Note;
-	?CCharge ID;
+	?CChargeId ID;
 	?ChargeAmt Amount;
 	?TotalLines Count;
 	GrandTotal Number;
 	AmtInwords Amount;
-	MPriceList ID;
+	MPriceListId ID;
 	IsTaxIncluded YesNo;
-	?CCampaign ID;
-	?CProject ID;
-	?CActivity ID;
+	?CCampaignId ID;
+	?CProjectId ID;
+	?CActivityId ID;
 	IsPaid YesNo;
 };
 

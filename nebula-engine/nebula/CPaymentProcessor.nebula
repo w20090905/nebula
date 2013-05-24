@@ -1,9 +1,9 @@
 @Remarks("Payment processor for electronic payments")
 @Refby("1")
 type CPaymentProcessor {
-	!CPaymentProcessor ID;
-	AdClient ID;
-	AdOrg ID;
+	!CPaymentProcessorId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	CBankaccount;

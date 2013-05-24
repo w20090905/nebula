@@ -1,9 +1,9 @@
 @Remarks("Migration Scripts for the System")
 @Refby("0")
 type AdMigrationscriptIsApplyChk {
-	AdClient ID;
-	!AdMigrationscript ID;
-	AdOrg ID;
+	AdClientId ID;
+	!AdMigrationscriptId ID;
+	AdOrgId ID;
 	?Description;
 	?Developername Name;/* NULL */
 	Name;

@@ -3,8 +3,8 @@
 type AdMenuTrl {
 	!AdMenu;
 	!AdLanguage;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	IsTranslated YesNo;/* 'N'  */

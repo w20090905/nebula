@@ -1,9 +1,9 @@
 @Remarks("Cash Book for recording petty cash transactions")
 @Refby("3")
 type CCashBook {
-	!CCashBook ID;
-	AdClient ID;
-	AdOrg ID;
+	!CCashBookId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	IsDefault YesNo;/* 'N'  */

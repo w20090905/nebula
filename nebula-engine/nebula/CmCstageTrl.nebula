@@ -3,8 +3,8 @@
 type CmCstageTrl {
 	!CmCstage;
 	!AdLanguage;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IsTranslated YesNo;/* 'N'  */
 	Name;
 	?Title String;

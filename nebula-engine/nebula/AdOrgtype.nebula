@@ -1,9 +1,9 @@
 @Remarks("Organization Type allows you to categorize your organizations")
 @Refby("1")
 type AdOrgtype {
-	!AdOrgtype ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdOrgtypeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?AdPrintColor;

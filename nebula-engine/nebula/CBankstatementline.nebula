@@ -1,9 +1,9 @@
 @Remarks("Line on a statement from this Bank")
 @Refby("1")
 type CBankstatementline {
-	!CBankstatementline ID;
-	AdClient ID;
-	AdOrg ID;
+	!CBankstatementlineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CBankstatement;
 	Line Long;
 	?Description;

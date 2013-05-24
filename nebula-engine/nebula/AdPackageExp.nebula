@@ -1,9 +1,9 @@
 @Remarks("AD_Package_Exp_ID")
 @Refby("0")
 type AdPackageExp {
-	!AdPackageExp ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdPackageExpId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?AdPackageType String;
 	Email;
 	Instructions Note;

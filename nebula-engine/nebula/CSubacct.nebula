@@ -1,9 +1,9 @@
 @Remarks("Sub account for Element Value")
 @Refby("3")
 type CSubacct {
-	!CSubacct ID;
-	AdClient ID;
-	AdOrg ID;
+	!CSubacctId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	Name;
 	?Description;

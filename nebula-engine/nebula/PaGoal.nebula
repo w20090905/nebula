@@ -1,9 +1,9 @@
 @Remarks("Performance Goal")
 @Refby("3")
 type PaGoal {
-	!PaGoal ID;
-	AdClient ID;
-	AdOrg ID;
+	!PaGoalId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Seqno SeqNo;/* 0  */
 	Name;
 	?Description;

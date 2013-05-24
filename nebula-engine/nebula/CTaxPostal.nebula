@@ -1,9 +1,9 @@
 @Remarks("Tax Postal/ZIP")
 @Refby("0")
 type CTaxPostal {
-	!CTaxPostal ID;
-	AdClient ID;
-	AdOrg ID;
+	!CTaxPostalId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CTax;
 	PostAl Code;
 	?PostAlTo String;

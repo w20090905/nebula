@@ -1,9 +1,9 @@
 @Remarks("Import Item or Service")
 @Refby("0")
 type IProduct {
-	!IProduct ID;
-	?AdClient ID;
-	?AdOrg ID;
+	!IProductId ID;
+	?AdClientId ID;
+	?AdOrgId ID;
 	IIsImported YesNo;/* 'N'  */
 	?IErrorMsg Note;
 	?MProduct;

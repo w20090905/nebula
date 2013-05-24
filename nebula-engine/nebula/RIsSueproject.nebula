@@ -1,9 +1,9 @@
 @Remarks("Issue Project")
 @Refby("2")
 type RIsSueproject {
-	!RIsSueproject ID;
-	AdClient ID;
-	AdOrg ID;
+	!RIsSueprojectId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?AAsset;

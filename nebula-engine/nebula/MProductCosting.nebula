@@ -3,8 +3,8 @@
 type MProductCosting {
 	!MProduct;
 	!CAcctschema;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Currentcostprice Price;/* 0  */
 	Futurecostprice Price;/* 0  */
 	Coststandard Number;/* 0  */

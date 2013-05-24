@@ -1,7 +1,7 @@
 @Remarks("Calendar Year")
 @Refby("3")
 type CYear {
-	!CYear ID;
+	!CYearId ID;
 	AdClient;
 	AdOrg;
 	Fiscalyear String;

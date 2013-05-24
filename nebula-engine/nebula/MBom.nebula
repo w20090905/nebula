@@ -1,9 +1,9 @@
 @Remarks("Bill of Material")
 @Refby("3")
 type MBom {
-	!MBom ID;
-	AdClient ID;
-	AdOrg ID;
+	!MBomId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MProduct;
 	?MChangeNotice;
 	Bomtype Attr;

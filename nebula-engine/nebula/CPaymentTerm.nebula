@@ -1,9 +1,9 @@
 @Remarks("The terms for Payment of this transaction")
 @Refby("12")
 type CPaymentTerm {
-	!CPaymentTerm ID;
-	AdClient ID;
-	AdOrg ID;
+	!CPaymentTermId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?DocumentNote Note;

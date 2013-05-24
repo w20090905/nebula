@@ -1,8 +1,8 @@
 @Remarks("Line on Shipment or Receipt document")
 @Refby("17")
 type MInoutline {
-	!MInoutline ID;
-	AdClient ID;
+	!MInoutlineId ID;
+	AdClientId ID;
 	AdOrg;
 	Line Long;
 	?Description;
@@ -31,6 +31,5 @@ type MInoutline {
 	?User1 CElementvalue;
 	?User2 CElementvalue;
 	?AdOrgtrx AdOrg;
-	?MRmaline;/* NULL */
 };
 

@@ -3,8 +3,8 @@
 type CBpEmployeeAcct {
 	!CBpartner;
 	!CAcctschema;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?EExpenseAcct CValidcombination;
 	?EPrepaymentAcct CValidcombination;
 };

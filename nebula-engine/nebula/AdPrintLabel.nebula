@@ -1,9 +1,9 @@
 @Remarks("Label Format to print")
 @Refby("1")
 type AdPrintLabel {
-	!AdPrintLabel ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdPrintLabelId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	AdTable;

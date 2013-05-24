@@ -1,9 +1,9 @@
 @Remarks("Return Material Authorization Line")
 @Refby("2")
 type MRmaline {
-	!MRmaline ID;
-	AdClient ID;
-	AdOrg ID;
+	!MRmalineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MRma;
 	?MInoutline;
 	Qty Quantity;/* 0  	  */

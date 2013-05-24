@@ -1,9 +1,9 @@
 @Remarks("Buyer Funds for Bids on Topics")
 @Refby("1")
 type BBuyerfunds {
-	!BBuyerfunds ID;
-	AdClient ID;
-	AdOrg ID;
+	!BBuyerfundsId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdUser BBuyer;
 	?COrder;
 	?CPayment;

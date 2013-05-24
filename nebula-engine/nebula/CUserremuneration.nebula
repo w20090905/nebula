@@ -1,9 +1,9 @@
 @Remarks("Employee Wage or Salary Overwrite")
 @Refby("0")
 type CUserremuneration {
-	!CUserremuneration ID;
-	AdClient ID;
-	AdOrg ID;
+	!CUserremunerationId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdUser;
 	CRemuneration;
 	Validfrom Date;

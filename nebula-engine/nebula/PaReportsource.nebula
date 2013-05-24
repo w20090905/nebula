@@ -1,9 +1,9 @@
 @Remarks("Restriction of what will be shown in Report Line")
 @Refby("1")
 type PaReportsource {
-	!PaReportsource ID;
-	AdClient ID;
-	AdOrg ID;
+	!PaReportsourceId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?Description;
 	PaReportline;
 	Elementtype Attr;

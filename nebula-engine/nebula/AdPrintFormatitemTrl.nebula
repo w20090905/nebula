@@ -3,8 +3,8 @@
 type AdPrintFormatitemTrl {
 	!AdPrintFormatitem;
 	!AdLanguage;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?PrintName Name;
 	IsTranslated YesNo;/* 'N'  */
 	?PrintNamesuffix Description;

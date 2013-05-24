@@ -1,9 +1,9 @@
 @Remarks("Landed Cost")
 @Refby("0")
 type CLandedcost {
-	!CLandedcost ID;
-	AdClient ID;
-	AdOrg ID;
+	!CLandedcostId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?Description;
 	CInvoiceLine;
 	MCostelement;

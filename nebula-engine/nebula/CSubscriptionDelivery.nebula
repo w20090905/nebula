@@ -1,9 +1,9 @@
 @Remarks("Optional Delivery Record for a Subscription")
 @Refby("0")
 type CSubscriptionDelivery {
-	!CSubscriptionDelivery ID;
-	AdClient ID;
-	AdOrg ID;
+	!CSubscriptionDeliveryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CSubscription;
 };
 

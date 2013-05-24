@@ -1,14 +1,14 @@
 @Remarks("System Registration")
 @Refby("0")
 type AdRegistration {
-	!AdRegistration ID;
+	!AdRegistrationId ID;
 	!AdClient AdSystem;
 	!AdSystem;
-	AdOrg ID;
+	AdOrgId ID;
 	IsRegistered YesNo;/* 'N'  */
-	?Record ID;
+	?RecordId ID;
 	?Description;
-	?CLocation ID;
+	?CLocationId ID;
 	IsInproduction YesNo;/* 'N'  */
 	?Startproductiondate Date;
 	IsAllowpublish YesNo;/* 'Y'  */

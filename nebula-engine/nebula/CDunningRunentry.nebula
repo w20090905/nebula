@@ -1,9 +1,9 @@
 @Remarks("Dunning Run Entry")
 @Refby("1")
 type CDunningRunentry {
-	!CDunningRunentry ID;
-	AdClient ID;
-	AdOrg ID;
+	!CDunningRunentryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CBpartner;
 	CBpartnerLocation;
 	?AdUser;

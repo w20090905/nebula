@@ -1,25 +1,25 @@
 @Remarks("")
 @Refby("0")
 type CProjectDetailsV {
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?AdLanguage String;
-	CProject ID;
-	CProjectLine ID;
+	CProjectId ID;
+	CProjectLineId ID;
 	Line Long;
 	PlannedQty Quantity;
 	PlannedPrice Price;
 	PlannedAmt Amount;
 	PlannedMarginamt Amount;
 	?CommittedAmt Amount;
-	?MProduct ID;
+	?MProductId ID;
 	?Name;
 	?Description;
 	?DocumentNote Note;
 	?Upc UPC;
 	?Sku String;
 	?ProductValue Note;
-	?MProductCategory ID;
+	?MProductCategoryId ID;
 	InvoiceDamt Amount;
 	InvoiceDqty Quantity;
 	?CommittedQty Quantity;

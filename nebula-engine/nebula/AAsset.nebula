@@ -1,9 +1,9 @@
 @Remarks("Asset used internally or by customers")
 @Refby("15")
 type AAsset {
-	!AAsset ID;
-	AdClient ID;
-	AdOrg ID;
+	!AAssetId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	Name;
 	?Description;

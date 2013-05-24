@@ -1,9 +1,9 @@
 @Remarks("Request Processor")
 @Refby("2")
 type RRequestProcessor {
-	!RRequestProcessor ID;
-	AdClient ID;
-	AdOrg ID;
+	!RRequestProcessorId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	Frequency Number;

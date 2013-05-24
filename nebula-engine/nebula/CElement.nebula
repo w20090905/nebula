@@ -1,7 +1,7 @@
 @Remarks("Accounting Element")
 @Refby("3")
 type CElement {
-	!CElement ID;
+	!CElementId ID;
 	AdClient;
 	AdOrg;
 	Name;

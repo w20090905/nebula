@@ -1,7 +1,7 @@
 @Remarks("Operation System Task")
 @Refby("8")
 type AdTask {
-	!AdTask ID;
+	!AdTaskId ID;
 	AdClient;
 	AdOrg;
 	Name;

@@ -1,8 +1,8 @@
 @Remarks("ASP Window")
 @Refby("0")
 type AspWindow {
-	AdClient ID;/* NULL   */
-	AdOrg ID;/* NULL   */
+	AdClientId ID;/* NULL   */
+	AdOrgId ID;/* NULL   */
 	!AdWindow;
 	!AspLevel;
 	AspStatus Attr;/* 'U'  */

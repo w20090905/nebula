@@ -1,8 +1,8 @@
 @Remarks("Cash Journal")
 @Refby("1")
 type CCash {
-	!CCash ID;
-	AdClient ID;
+	!CCashId ID;
+	AdClientId ID;
 	AdOrg;
 	CCashBook;
 	Name;

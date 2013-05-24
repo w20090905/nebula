@@ -1,7 +1,7 @@
 @Remarks("System Reference (Pick List)")
 @Refby("15")
 type AdReference {
-	!AdReference ID;
+	!AdReferenceId ID;
 	AdClient;
 	AdOrg;
 	Name;

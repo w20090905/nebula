@@ -1,8 +1,8 @@
 @Remarks("General Ledger Distribution")
 @Refby("1")
 type GlDistribution {
-	!GlDistribution ID;
-	AdClient ID;
+	!GlDistributionId ID;
+	AdClientId ID;
 	AdOrg;
 	Name;
 	?Description;

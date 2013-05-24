@@ -1,9 +1,9 @@
 @Remarks("Knowledge Entry")
 @Refby("4")
 type KEntry {
-	!KEntry ID;
-	AdClient ID;
-	AdOrg ID;
+	!KEntryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	KTopic;
 	Rating YesNo;

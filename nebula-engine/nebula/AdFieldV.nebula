@@ -1,11 +1,11 @@
 @Remarks("")
 @Refby("0")
 type AdFieldV {
-	?AdWindow ID;
-	AdTab ID;
-	AdField ID;
-	?AdTable ID;
-	?AdColumn ID;
+	?AdWindowId ID;
+	AdTabId ID;
+	AdFieldId ID;
+	?AdTableId ID;
+	?AdColumnId ID;
 	Name;
 	?Description;
 	?Help;
@@ -30,11 +30,11 @@ type AdFieldV {
 	?IsMandatory YesNo;
 	?IsIdentifier YesNo;
 	?IsTranslated YesNo;
-	?AdReferenceValue ID;
+	?AdReferenceValueId ID;
 	?Callout Note;
-	?AdReference ID;
-	?AdValRule ID;
-	?AdProcess ID;
+	?AdReferenceId ID;
+	?AdValRuleId ID;
+	?AdProcessId ID;
 	?IsAlwaysupdateable YesNo;
 	?ReadonlyLogic Note;
 	?Mandatorylogic Note;
@@ -46,7 +46,7 @@ type AdFieldV {
 	?ValueMax String;
 	?FieldGroup Description;
 	?ValidationCode Note;
-	?IncludedTab ID;
+	?IncludedTabId ID;
 	?FieldGrouptype Attr;
 	?IsCollapsedbydefault YesNo;
 	?Infofactoryclass Note;

@@ -1,9 +1,9 @@
 @Remarks("Request Group")
 @Refby("3")
 type RGroup {
-	!RGroup ID;
-	AdClient ID;
-	AdOrg ID;
+	!RGroupId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

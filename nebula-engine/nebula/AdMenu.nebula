@@ -1,7 +1,7 @@
 @Remarks("Identifies a Menu")
 @Refby("3")
 type AdMenu {
-	!AdMenu ID;
+	!AdMenuId ID;
 	AdClient;
 	AdOrg;
 	Name;

@@ -4,10 +4,10 @@ type TAging {
 	!AdPinstance;
 	!CBpartner;
 	!CCurrency;
-	!CInvoice ID;
-	!CInvoicePayschedule ID;
-	AdClient ID;
-	AdOrg ID;
+	!CInvoiceId ID;
+	!CInvoicePayscheduleId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Statementdate Date;
 	Duedate Date;
 	?DaysDue Number;/* 0 */

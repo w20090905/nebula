@@ -3,7 +3,7 @@
 type CmAccessNewSchannel {
 	!CmAccessProfile;
 	!CmNewSchannel;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 };
 

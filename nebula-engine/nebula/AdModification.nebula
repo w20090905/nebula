@@ -1,9 +1,9 @@
 @Remarks("Modification")
 @Refby("0")
 type AdModification {
-	!AdModification ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdModificationId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Seqno SeqNo;/* 0  */
 	Name;
 	?Description;

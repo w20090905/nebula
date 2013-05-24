@@ -3,8 +3,8 @@
 type CBpVendorAcct {
 	!CAcctschema;
 	!CBpartner;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?VLiabilityAcct CValidcombination;
 	?VLiabilityServicesAcct CValidcombination;
 	?VPrepaymentAcct CValidcombination;

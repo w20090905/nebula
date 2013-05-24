@@ -1,8 +1,8 @@
 @Remarks("ASP Process")
 @Refby("0")
 type AspProcess {
-	AdClient ID;/* NULL   */
-	AdOrg ID;/* NULL   */
+	AdClientId ID;/* NULL   */
+	AdOrgId ID;/* NULL   */
 	!AdProcess;
 	!AspLevel;
 	AspStatus Attr;/* 'U'  */

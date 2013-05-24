@@ -1,9 +1,9 @@
 @Remarks("Interest Area or Topic")
 @Refby("3")
 type RInterestArea {
-	!RInterestArea ID;
-	AdClient ID;
-	AdOrg ID;
+	!RInterestAreaId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	IsSelfservice YesNo;/* 'N' */

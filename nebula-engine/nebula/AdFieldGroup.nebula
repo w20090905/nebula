@@ -1,9 +1,9 @@
 @Remarks("Logical grouping of fields")
 @Refby("2")
 type AdFieldGroup {
-	!AdFieldGroup ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdFieldGroupId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	EntityType AdEntityType;/* 'D'  */
 	?FieldGrouptype Attr;

@@ -1,9 +1,9 @@
 @Remarks("AD_Package_Exp_Detail_ID")
 @Refby("0")
 type AdPackageExpDetail {
-	!AdPackageExpDetail ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdPackageExpDetailId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?AdForm;
 	?AdImpformat;
 	?AdMenu;
@@ -28,10 +28,10 @@ type AdPackageExpDetail {
 	?AdWorkbench;
 	?AdTable;
 	?AdReportview;
-	AdPackageExp ID;
+	AdPackageExpId ID;
 	?AdPackageCodeNew Note;
 	?AdPackageCodeOld Note;
-	?AdValRule ID;
+	?AdValRuleId ID;
 	?AdMessage;
 	?AdPrintFormat;
 };

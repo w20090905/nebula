@@ -3,8 +3,8 @@
 type CDoctypeTrl {
 	!CDoctype;
 	!AdLanguage;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	PrintName Name;
 	?DocumentNote Note;

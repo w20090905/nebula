@@ -1,9 +1,9 @@
 @Remarks("User defined Tab")
 @Refby("1")
 type AdUserdefTab {
-	!AdUserdefTab ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdUserdefTabId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdUserdefWin;
 	AdTab;
 	IsMultirowonly YesNo;/* 'N'  */

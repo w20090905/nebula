@@ -1,13 +1,13 @@
 @Remarks("")
 @Refby("0")
 type RvProductCosting {
-	MProduct ID;
-	CAcctschema ID;
+	MProductId ID;
+	CAcctschemaId ID;
 	Value String;
 	Name;
-	MProductCategory ID;
-	AdClient ID;
-	AdOrg ID;
+	MProductCategoryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Currentcostprice Price;
 	Futurecostprice Price;
 	Coststandard Number;

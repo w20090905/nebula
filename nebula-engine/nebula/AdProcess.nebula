@@ -1,9 +1,9 @@
 @Remarks("Process or Report")
 @Refby("19")
 type AdProcess {
-	!AdProcess ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdProcessId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	Name;
 	?Description;

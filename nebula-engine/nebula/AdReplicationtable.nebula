@@ -1,9 +1,9 @@
 @Remarks("Data Replication Strategy Table Info")
 @Refby("1")
 type AdReplicationtable {
-	!AdReplicationtable ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdReplicationtableId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdReplicationstrategy;
 	AdTable;
 	Replicationtype Attr;/* 'L'  */

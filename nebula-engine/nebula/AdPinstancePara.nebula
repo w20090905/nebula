@@ -12,7 +12,7 @@ type AdPinstancePara {
 	?PDateTo Date;
 	?Info Description;
 	?InfoTo Description;
-	?AdClient ID;
-	?AdOrg ID;
+	?AdClientId ID;
+	?AdOrgId ID;
 };
 

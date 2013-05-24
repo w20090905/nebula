@@ -3,8 +3,8 @@
 type CCurrencyAcct {
 	!CAcctschema;
 	!CCurrency;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	UnrealizedGainAcct CValidcombination;
 	UnrealizedLossAcct CValidcombination;
 	RealizedgainAcct CValidcombination;

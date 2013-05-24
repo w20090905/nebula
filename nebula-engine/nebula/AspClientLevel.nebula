@@ -1,9 +1,9 @@
 @Remarks("Client Level")
 @Refby("0")
 type AspClientLevel {
-	AdClient ID;/* NULL   */
-	AdOrg ID;/* 0  */
-	!AspClientLevel ID;
+	AdClientId ID;/* NULL   */
+	AdOrgId ID;/* 0  */
+	!AspClientLevelId ID;
 	AspLevel;
 	AspModule;
 	?Help;

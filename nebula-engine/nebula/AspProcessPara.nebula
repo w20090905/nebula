@@ -1,8 +1,8 @@
 @Remarks("ASP Process Parameter")
 @Refby("0")
 type AspProcessPara {
-	AdClient ID;/* NULL   */
-	AdOrg ID;/* NULL   */
+	AdClientId ID;/* NULL   */
+	AdOrgId ID;/* NULL   */
 	!AdProcess;
 	!AdProcessPara;
 	!AspLevel;

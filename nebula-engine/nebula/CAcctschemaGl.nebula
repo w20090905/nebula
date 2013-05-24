@@ -2,8 +2,8 @@
 @Refby("0")
 type CAcctschemaGl {
 	!CAcctschema;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Usesuspensebalancing YesNo;/* 'Y'  */
 	?SuspensebalancingAcct CValidcombination;
 	Usesuspenseerror YesNo;/* 'Y'  */

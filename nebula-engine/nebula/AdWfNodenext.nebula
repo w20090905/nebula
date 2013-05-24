@@ -1,7 +1,7 @@
 @Remarks("Workflow Node Transition")
 @Refby("1")
 type AdWfNodenext {
-	!AdWfNodenext ID;
+	!AdWfNodenextId ID;
 	AdClient;
 	AdOrg;
 	AdWfNode;

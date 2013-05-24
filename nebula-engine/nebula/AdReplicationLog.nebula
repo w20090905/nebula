@@ -1,9 +1,9 @@
 @Remarks("Data Replication Log Details")
 @Refby("0")
 type AdReplicationLog {
-	!AdReplicationLog ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdReplicationLogId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdReplicationRun;
 	?AdReplicationtable;
 	?PMsg Note;

@@ -3,8 +3,8 @@
 type CGreetingTrl {
 	!AdLanguage;
 	!CGreeting;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Greeting Description;
 	IsTranslated YesNo;/* 'N'  */

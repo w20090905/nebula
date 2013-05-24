@@ -1,9 +1,9 @@
 @Remarks("Workflow Transaction Execution Block")
 @Refby("1")
 type AdWfBlock {
-	!AdWfBlock ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdWfBlockId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	AdWorkflow;

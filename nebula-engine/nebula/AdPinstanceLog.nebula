@@ -2,9 +2,9 @@
 @Refby("0")
 type AdPinstanceLog {
 	!AdPinstance;
-	!Log ID;
+	!LogId ID;
 	?PDate Date;/* SYSDATE      */
-	?P ID;
+	?PId ID;
 	?PNumber Number;
 	?PMsg Note;
 };

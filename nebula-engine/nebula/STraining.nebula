@@ -1,9 +1,9 @@
 @Remarks("Repeated Training")
 @Refby("1")
 type STraining {
-	!STraining ID;
-	AdClient ID;
-	AdOrg ID;
+	!STrainingId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

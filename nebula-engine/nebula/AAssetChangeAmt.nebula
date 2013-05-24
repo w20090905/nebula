@@ -3,8 +3,8 @@
 type AAssetChangeAmt {
 	!AAssetChange;
 	!CAcctschema;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Assetvalueamt Amount;/* 0  */
 	Assetmarketvalueamt Amount;/* 0  */
 	Assetbookvalueamt Amount;/* 0  */

@@ -1,9 +1,9 @@
 @Remarks("Item/Column in the Print format")
 @Refby("7")
 type AdPrintFormatitem {
-	!AdPrintFormatitem ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdPrintFormatitemId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdPrintFormat;
 	Name;
 	?PrintName Name;

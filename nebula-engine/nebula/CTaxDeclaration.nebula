@@ -1,9 +1,9 @@
 @Remarks("Define the declaration to the tax authorities")
 @Refby("2")
 type CTaxDeclaration {
-	!CTaxDeclaration ID;
-	AdClient ID;
-	AdOrg ID;
+	!CTaxDeclarationId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	DateTrx Date;

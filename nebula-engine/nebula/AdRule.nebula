@@ -1,9 +1,9 @@
 @Remarks("Rule")
 @Refby("1")
 type AdRule {
-	AdClient ID;/* NULL   */
-	AdOrg ID;/* NULL   */
-	!AdRule ID;
+	AdClientId ID;/* NULL   */
+	AdOrgId ID;/* NULL   */
+	!AdRuleId ID;
 	?AccessLevel Attr;
 	?Description;
 	?EntityType AdEntityType;/* 'U' */

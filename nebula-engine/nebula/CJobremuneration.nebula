@@ -1,9 +1,9 @@
 @Remarks("Position Remuneration")
 @Refby("0")
 type CJobremuneration {
-	!CJobremuneration ID;
-	AdClient ID;
-	AdOrg ID;
+	!CJobremunerationId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CJob;
 	CRemuneration;
 	Validfrom Date;

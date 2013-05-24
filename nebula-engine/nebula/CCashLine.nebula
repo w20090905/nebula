@@ -1,9 +1,9 @@
 @Remarks("Cash Journal Line")
 @Refby("3")
 type CCashLine {
-	!CCashLine ID;
-	AdClient ID;
-	AdOrg ID;
+	!CCashLineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CCash;
 	Line Long;
 	?Description;

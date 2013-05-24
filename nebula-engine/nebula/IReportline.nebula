@@ -1,9 +1,9 @@
 @Remarks("Import Report Line Set values")
 @Refby("0")
 type IReportline {
-	!IReportline ID;
-	?AdClient ID;
-	?AdOrg ID;
+	!IReportlineId ID;
+	?AdClientId ID;
+	?AdOrgId ID;
 	IIsImported YesNo;/* 'N'  */
 	?IErrorMsg Note;
 	?Reportlinesetname Name;

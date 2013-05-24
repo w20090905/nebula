@@ -1,9 +1,9 @@
 @Remarks("Adempiere Alert")
 @Refby("2")
 type AdAlert {
-	!AdAlert ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdAlertId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

@@ -1,7 +1,7 @@
 @Remarks("Product, Service, Item")
 @Refby("89")
 type MProduct {
-	!MProduct ID;
+	!MProductId ID;
 	AdClient;
 	AdOrg;
 	Value String;

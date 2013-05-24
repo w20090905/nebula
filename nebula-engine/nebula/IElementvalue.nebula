@@ -1,9 +1,9 @@
 @Remarks("Import Account Value")
 @Refby("0")
 type IElementvalue {
-	!IElementvalue ID;
-	?AdClient ID;
-	?AdOrg ID;
+	!IElementvalueId ID;
+	?AdClientId ID;
+	?AdOrgId ID;
 	IIsImported YesNo;/* 'N'  */
 	?IErrorMsg Note;
 	?CElement;

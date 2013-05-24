@@ -1,19 +1,19 @@
 @Remarks("")
 @Refby("0")
 type RvPayment {
-	CPayment ID;
-	AdClient ID;
-	AdOrg ID;
+	CPaymentId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo Long;
 	DateTrx Date;
 	IsReceipt YesNo;
-	CDoctype ID;
+	CDoctypeId ID;
 	Trxtype Attr;
-	CBankaccount ID;
-	?CBpartner ID;
-	?CInvoice ID;
-	?CBpBankaccount ID;
-	?CPaymentBatch ID;
+	CBankaccountId ID;
+	?CBpartnerId ID;
+	?CInvoiceId ID;
+	?CBpBankaccountId ID;
+	?CPaymentBatchId ID;
 	TenderType Attr;
 	?CreditcardType Attr;
 	?CreditcardNumber String;
@@ -35,8 +35,8 @@ type RvPayment {
 	?VoiceAuthcode String;
 	?OrigTrxid String;
 	?Ponum Description;
-	CCurrency ID;
-	?CConversionType ID;
+	CCurrencyId ID;
+	?CConversionTypeId ID;
 	?Payamt Amount;
 	?DiscountAmt Amount;
 	?WriteoffAmt Amount;
@@ -59,14 +59,14 @@ type RvPayment {
 	Docstatus Attr;
 	Docaction Attr;
 	IsPrepayment YesNo;
-	?CCharge ID;
+	?CChargeId ID;
 	IsReconciled YesNo;
 	IsAllocated YesNo;
 	IsOnline YesNo;
 	Processed YesNo;
 	PostEd YesNo;
-	?CCampaign ID;
-	?CProject ID;
-	?CActivity ID;
+	?CCampaignId ID;
+	?CProjectId ID;
+	?CActivityId ID;
 };
 

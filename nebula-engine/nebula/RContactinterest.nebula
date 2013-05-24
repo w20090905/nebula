@@ -2,8 +2,8 @@
 @Refby("0")
 type RContactinterest {
 	RInterestArea;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?Subscribedate Date;
 	?Optoutdate Date;
 	AdUser;

@@ -98,9 +98,9 @@ public class ImportDataDefine {
 		if (!outputFolder.exists()) {
 			outputFolder.mkdir();
 		} else {
-			for (File file : outputFolder.listFiles()) {
-				file.delete();
-			}
+//			for (File file : outputFolder.listFiles()) {
+//				file.delete();
+//			}
 		}
 		
 		OutputStreamWriter out = null;
@@ -176,18 +176,24 @@ public class ImportDataDefine {
 					  			" "
 					  	                + "AD_CLIENT $AD_ORG_ID  "
 					  	                + "AD_COLUMN $AD_PROCESS_ID  "
+					  	                + "AD_PRINTFORMAT $JASPERPROCESS_ID  "
 					  	                + "AD_PRINTFORMATITEM $AD_PRINTGRAPH_ID  "
 					  	                + "AD_TABLE $DATECOLUMN_ID  "
 					  	                + "AD_WORKFLOW $AD_WF_NODE_ID  "
-					  	                + "C_INVOICE $C_CASHLINE_ID-$C_PAYMENTTERM_ID-$C_PAYMENT_ID  "
+					  	                + "AD_LANGUAGE $AD_CLIENT_ID-$AD_ORG_ID  "
+					  	                + "C_INVOICE $C_CASHLINE_ID-$C_PAYMENT_ID-$C_PAYMENTTERM_ID-$M_RMA_ID  "
 					  	                + "C_LEAD $R_REQUEST_ID  "
-					  	                + "C_ORDER $C_CASHLINE_ID-$C_PAYMENTTERM_ID-$C_PAYMENT_ID-$ORIG_INOUT_ID-$ORIG_ORDER_ID  "
+					  	                + "C_ORDER $C_CASHLINE_ID-$C_PAYMENT_ID-$C_PAYMENTTERM_ID-$ORIG_INOUT_ID-$ORIG_ORDER_ID  "
 					  	                + "C_ORDERLINE $ORIG_INOUTLINE_ID-$ORIG_ORDERLINE_ID  "
-					  	                + "I_INVENTORY $M_INVENTORYLINE_ID-$M_INVENTORY_ID  "
+					  	                + "C_SALESREGION $SALESREP_ID  "
+					  	                + "I_INVENTORY $M_INVENTORY_ID-$M_INVENTORYLINE_ID  "
 					  	                + "M_ATTRIBUTESETINSTANCE $M_LOT_ID  "
+					  	                + "M_INOUT $M_RMA_ID  "
+					  	                + "M_INOUTLINE $M_RMALINE_ID  "
 					  	                + "M_LOCATOR $M_WAREHOUSE_ID  "
-					  	                + "AD_LANGUAGE	$AD_CLIENT_ID-$AD_ORG_ID  "
-					  	                + "C_BPARTNER	$SALESREP_ID  "
+					  	                + "C_BPARTNER $SUPERVISOR_ID-$SALESREP_ID  "
+
+
 
 
 
@@ -601,12 +607,12 @@ public class ImportDataDefine {
 
 		if (!isEntity) {
 			if (rawColName.endsWith("_ID")) {
-				String fieldTableName = rawColName.substring(0, rawColName.length() - 3);
+//				String fieldTableName = rawColName.substring(0, rawColName.length() - 3);
 				// if (type.rawName.equalsIgnoreCase(fieldTableName)) {
 				// tColName = "ID";
 				// tTypeName = "ID";
 				// } else {
-				tColName = fieldTableName;
+				tColName = rawColName;
 				tTypeName = "ID";
 				// }
 			}

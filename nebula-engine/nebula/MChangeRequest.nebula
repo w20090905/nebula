@@ -1,9 +1,9 @@
 @Remarks("Change Request")
 @Refby("1")
 type MChangeRequest {
-	!MChangeRequest ID;
-	AdClient ID;
-	AdOrg ID;
+	!MChangeRequestId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MBom;
 	?MChangeNotice;
 	DocumentNo Long;

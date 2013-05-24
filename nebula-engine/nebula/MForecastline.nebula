@@ -1,9 +1,9 @@
 @Remarks("Forecast Line")
 @Refby("1")
 type MForecastline {
-	!MForecastline ID;
-	AdClient ID;
-	AdOrg ID;
+	!MForecastlineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MForecast;
 	CPeriod;
 	Qty Quantity;/* 0  */

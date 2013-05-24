@@ -1,9 +1,9 @@
 @Remarks("Business Partner Group")
 @Refby("7")
 type CBpGroup {
-	!CBpGroup ID;
-	AdClient ID;
-	AdOrg ID;
+	!CBpGroupId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	Name;
 	?Description;

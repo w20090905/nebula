@@ -1,13 +1,13 @@
 @Remarks("Index")
 @Refby("0")
 type KIndex {
-	!KIndex ID;
-	AdClient ID;
-	AdOrg ID;
+	!KIndexId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Keyword String;
 	?Excerpt Note;
 	AdTable;
-	Record ID;
+	RecordId ID;
 	SourceUpdated Date;/* SYSDATE  */
 	?CmWebproject;
 	?RRequestType;

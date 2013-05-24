@@ -1,11 +1,11 @@
 @Remarks("")
 @Refby("0")
 type RvCashDetail {
-	CCash ID;
-	CCashLine ID;
-	AdClient ID;
-	AdOrg ID;
-	CCashBook ID;
+	CCashId ID;
+	CCashLineId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CCashBookId ID;
 	Name;
 	Statementdate Date;
 	DateAcct Date;
@@ -14,11 +14,11 @@ type RvCashDetail {
 	Line Long;
 	?Description;
 	CashType Attr;
-	?CCurrency ID;
+	?CCurrencyId ID;
 	Amount;
 	?Convertedamt Amount;
-	?CBankaccount ID;
-	?CInvoice ID;
-	?CCharge ID;
+	?CBankaccountId ID;
+	?CInvoiceId ID;
+	?CChargeId ID;
 };
 

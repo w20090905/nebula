@@ -1,9 +1,9 @@
 @Remarks("Media Server list to which content should get transfered")
 @Refby("1")
 type CmMediaServer {
-	!CmMediaServer ID;
-	AdClient ID;
-	AdOrg ID;
+	!CmMediaServerId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

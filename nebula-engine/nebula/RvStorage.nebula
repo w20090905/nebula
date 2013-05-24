@@ -1,24 +1,24 @@
 @Remarks("")
 @Refby("0")
 type RvStorage {
-	AdClient ID;
-	AdOrg ID;
-	MProduct ID;
+	AdClientId ID;
+	AdOrgId ID;
+	MProductId ID;
 	Value String;
 	Name;
 	?Description;
 	?Upc UPC;
 	?Sku String;
-	CUom ID;
-	MProductCategory ID;
+	CUomId ID;
+	MProductCategoryId ID;
 	?ClassIfication YesNo;
 	?Weight;
 	?Volume Number;
 	?Versionno String;
 	?Guaranteedays Count;
 	?Guaranteedaysmin Number;
-	MLocator ID;
-	MWarehouse ID;
+	MLocatorId ID;
+	MWarehouseId ID;
 	?X Description;
 	?Y Description;
 	?Z Description;
@@ -27,11 +27,11 @@ type RvStorage {
 	?QtyAvailable Quantity;
 	QtyOrdered Quantity;
 	?DateLastinventory Date;
-	MAttributesetinstance ID;
-	?MAttributeset ID;
+	MAttributesetinstanceId ID;
+	?MAttributesetId ID;
 	?Serno Description;
 	?Lot Description;
-	?MLot ID;
+	?MLotId ID;
 	?Guaranteedate Date;
 	?Shelflifedays Count;
 	?Goodfordays Count;

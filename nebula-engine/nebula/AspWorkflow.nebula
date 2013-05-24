@@ -1,8 +1,8 @@
 @Remarks("ASP Workflow")
 @Refby("0")
 type AspWorkflow {
-	AdClient ID;/* NULL   */
-	AdOrg ID;/* NULL   */
+	AdClientId ID;/* NULL   */
+	AdOrgId ID;/* NULL   */
 	!AdWorkflow;
 	!AspLevel;
 	AspStatus Attr;/* 'U'  */

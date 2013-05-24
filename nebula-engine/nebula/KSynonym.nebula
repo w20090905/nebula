@@ -1,11 +1,11 @@
 @Remarks("Knowlege Keyword Synonym")
 @Refby("0")
 type KSynonym {
-	!KSynonym ID;
-	AdClient ID;
+	!KSynonymId ID;
+	AdClientId ID;
 	Name;
 	Synonymname Name;
 	AdLanguage;
-	AdOrg ID;
+	AdOrgId ID;
 };
 

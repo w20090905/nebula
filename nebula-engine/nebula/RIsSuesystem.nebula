@@ -1,9 +1,9 @@
 @Remarks("Issue System")
 @Refby("2")
 type RIsSuesystem {
-	!RIsSuesystem ID;
-	AdClient ID;
-	AdOrg ID;
+	!RIsSuesystemId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Dbaddress Name;
 	?Statisticsinfo Description;
 	?Profileinfo Description;

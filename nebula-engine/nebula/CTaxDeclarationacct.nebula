@@ -1,9 +1,9 @@
 @Remarks("Tax Accounting Reconciliation")
 @Refby("0")
 type CTaxDeclarationacct {
-	!CTaxDeclarationacct ID;
-	AdClient ID;
-	AdOrg ID;
+	!CTaxDeclarationacctId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?Description;
 	CTaxDeclaration;
 	FactAcct;

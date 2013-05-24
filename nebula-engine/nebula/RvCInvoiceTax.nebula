@@ -1,12 +1,12 @@
 @Remarks("")
 @Refby("0")
 type RvCInvoiceTax {
-	AdClient ID;
-	AdOrg ID;
-	CTax ID;
-	CInvoice ID;
-	CDoctype ID;
-	CBpartner ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CTaxId ID;
+	CInvoiceId ID;
+	CDoctypeId ID;
+	CBpartnerId ID;
 	?TaxId Code;
 	?IsTaxExempt YesNo;
 	DateAcct Date;
@@ -14,7 +14,7 @@ type RvCInvoiceTax {
 	IsSotrx YesNo;
 	DocumentNo Long;
 	IsPaid YesNo;
-	CCurrency ID;
+	CCurrencyId ID;
 	?TaxBaseamt Amount;
 	?TaxAmt Amount;
 	?TaxLinetotal Number;

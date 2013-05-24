@@ -1,9 +1,9 @@
 @Remarks("Tax Category")
 @Refby("7")
 type CTaxCategory {
-	!CTaxCategory ID;
-	AdClient ID;
-	AdOrg ID;
+	!CTaxCategoryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Commoditycode String;

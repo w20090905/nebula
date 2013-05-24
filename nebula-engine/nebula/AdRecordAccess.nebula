@@ -3,9 +3,9 @@
 type AdRecordAccess {
 	!AdRole;
 	!AdTable;
-	!Record ID;
-	AdClient ID;
-	AdOrg ID;
+	!RecordId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IsReadonly YesNo;/* 'N'  	  */
 	IsExclude YesNo;/* 'Y'  	  */
 	IsDependentEntities YesNo;/* 'N'  */

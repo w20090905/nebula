@@ -1,9 +1,9 @@
 @Remarks("Request for Quotation Response from a potential Vendor")
 @Refby("1")
 type CRfqresponse {
-	!CRfqresponse ID;
-	AdClient ID;
-	AdOrg ID;
+	!CRfqresponseId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CRfq;
 	Name;
 	?Description;

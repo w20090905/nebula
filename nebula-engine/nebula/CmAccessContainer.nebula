@@ -3,7 +3,7 @@
 type CmAccessContainer {
 	!CmAccessProfile;
 	!CmContainer;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 };
 

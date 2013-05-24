@@ -3,8 +3,8 @@
 type CmTemplateAdCat {
 	!CmAdCat;
 	!CmTemplate;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 };

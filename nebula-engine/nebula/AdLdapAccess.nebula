@@ -1,9 +1,9 @@
 @Remarks("Ldap Access Log")
 @Refby("0")
 type AdLdapAccess {
-	!AdLdapAccess ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdLdapAccessId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdLdapProcessor;
 	?AdUser;
 	?RInterestArea;

@@ -1,9 +1,9 @@
 @Remarks("Web Project Domain handling")
 @Refby("0")
 type CmWebprojectDomain {
-	!CmWebprojectDomain ID;
-	AdClient ID;
-	AdOrg ID;
+	!CmWebprojectDomainId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

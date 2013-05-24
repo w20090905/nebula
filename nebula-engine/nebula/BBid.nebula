@@ -1,9 +1,9 @@
 @Remarks("Bid for a Topic")
 @Refby("0")
 type BBid {
-	!BBid ID;
-	AdClient ID;
-	AdOrg ID;
+	!BBidId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	BTopic;
 	AdUser BBuyer;

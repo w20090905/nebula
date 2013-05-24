@@ -1,14 +1,14 @@
 @Remarks("Document Archive")
 @Refby("0")
 type AdArchive {
-	!AdArchive ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdArchiveId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;
 	?AdTable;
-	?Record ID;
+	?RecordId ID;
 	?AdProcess;
 	?Binarydata Note;
 	?CBpartner;

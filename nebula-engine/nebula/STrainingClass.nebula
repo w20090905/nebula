@@ -1,9 +1,9 @@
 @Remarks("The actual training class instance")
 @Refby("0")
 type STrainingClass {
-	!STrainingClass ID;
-	AdClient ID;
-	AdOrg ID;
+	!STrainingClassId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	STraining;
 	MProduct;
 	Startdate Date;

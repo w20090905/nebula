@@ -1,9 +1,9 @@
 @Remarks("Asset Registration Attribute")
 @Refby("2")
 type ARegistrationattribute {
-	!ARegistrationattribute ID;
-	AdClient ID;
-	AdOrg ID;
+	!ARegistrationattributeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	Seqno SeqNo;/* 0  */

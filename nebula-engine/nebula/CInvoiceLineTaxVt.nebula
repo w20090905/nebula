@@ -1,17 +1,17 @@
 @Remarks("")
 @Refby("0")
 type CInvoiceLineTaxVt {
-	?AdClient ID;
-	?AdOrg ID;
+	?AdClientId ID;
+	?AdOrgId ID;
 	?AdLanguage String;
-	?CInvoice ID;
-	?CInvoiceLine ID;
-	?CTax ID;
+	?CInvoiceId ID;
+	?CInvoiceLineId ID;
+	?CTaxId ID;
 	?TaxAmt Amount;
 	?LineTotalAmt Long;
 	?TaxIndicator String;
 	?Line Long;
-	?MProduct ID;
+	?MProductId ID;
 	?QtyInvoiced Quantity;
 	?QtyEntered Quantity;
 	?Uomsymbol String;
@@ -28,18 +28,18 @@ type CInvoiceLineTaxVt {
 	?PriceActual Price;
 	?PriceEntered Price;
 	?LineNetamt Long;
-	?MAttributesetinstance ID;
-	?MAttributeset ID;
+	?MAttributesetinstanceId ID;
+	?MAttributesetId ID;
 	?Serno Description;
 	?Lot Description;
-	?MLot ID;
+	?MLotId ID;
 	?Guaranteedate Date;
 	?ProductDescription Description;
 	?ImageUrl URL;
-	?CCampaign ID;
-	?CProject ID;
-	?CActivity ID;
-	?CProjectPhase ID;
-	?CProjectTask ID;
+	?CCampaignId ID;
+	?CProjectId ID;
+	?CActivityId ID;
+	?CProjectPhaseId ID;
+	?CProjectTaskId ID;
 };
 

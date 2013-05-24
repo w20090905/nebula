@@ -1,9 +1,9 @@
 @Remarks("ASP Field")
 @Refby("0")
 type AspField {
-	AdClient ID;/* NULL   */
+	AdClientId ID;/* NULL   */
 	!AdField;
-	AdOrg ID;/* NULL   */
+	AdOrgId ID;/* NULL   */
 	!AdTab;
 	!AspLevel;
 	AspStatus Attr;/* 'U'  */

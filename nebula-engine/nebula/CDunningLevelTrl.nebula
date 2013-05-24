@@ -3,8 +3,8 @@
 type CDunningLevelTrl {
 	!AdLanguage;
 	!CDunningLevel;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	PrintName Name;
 	?Note;
 	IsTranslated YesNo;/* 'N'  */

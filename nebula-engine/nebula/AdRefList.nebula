@@ -1,7 +1,7 @@
 @Remarks("Reference List based on Table")
 @Refby("2")
 type AdRefList {
-	!AdRefList ID;
+	!AdRefListId ID;
 	AdClient;
 	AdOrg;
 	Value String;

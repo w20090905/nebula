@@ -8,7 +8,7 @@ type AdLanguage {
 	IsBaselanguage YesNo;/* 'N'  */
 	IsSystemLanguage YesNo;/* 'N'  */
 	?Processing YesNo;
-	AdLanguage ID;
+	AdLanguageId ID;
 	IsDecimalpoint YesNo;/* 'Y'  */
 	?DatePattern String;
 	?Timepattern String;

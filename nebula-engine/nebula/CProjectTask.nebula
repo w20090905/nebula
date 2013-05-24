@@ -1,10 +1,10 @@
 @Remarks("Actual Project Task in a Phase")
 @Refby("7")
 type CProjectTask {
-	!CProjectTask ID;
+	!CProjectTaskId ID;
 	?CTask;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Seqno SeqNo;
 	Name;
 	?Description;

@@ -1,9 +1,9 @@
 @Remarks("Knowledge Type")
 @Refby("1")
 type KType {
-	!KType ID;
-	AdClient ID;
-	AdOrg ID;
+	!KTypeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

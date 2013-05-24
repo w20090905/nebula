@@ -3,7 +3,7 @@
 type AdUserOrgaccess {
 	!AdUser;
 	!AdOrg;
-	AdClient ID;
+	AdClientId ID;
 	IsReadonly YesNo;/* 'N'  */
 };
 

@@ -1,9 +1,9 @@
 @Remarks("Point of Sales Terminal")
 @Refby("1")
 type CPos {
-	!CPos ID;
-	AdClient ID;
-	AdOrg ID;
+	!CPosId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

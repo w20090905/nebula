@@ -1,9 +1,9 @@
 @Remarks("Inventory Move Confirmation")
 @Refby("1")
 type MMovementconfirm {
-	!MMovementconfirm ID;
-	AdClient ID;
-	AdOrg ID;
+	!MMovementconfirmId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MMovement;
 	?Description;
 	IsApproved YesNo;/* 'N'  */

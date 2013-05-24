@@ -1,9 +1,9 @@
 @Remarks("Data Replication Run")
 @Refby("1")
 type AdReplicationRun {
-	!AdReplicationRun ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdReplicationRunId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	AdReplication;
 	IsReplicated YesNo;/* 'N'  */

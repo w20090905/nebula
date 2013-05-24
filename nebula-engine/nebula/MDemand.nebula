@@ -1,9 +1,9 @@
 @Remarks("Material Demand")
 @Refby("1")
 type MDemand {
-	!MDemand ID;
-	AdClient ID;
-	AdOrg ID;
+	!MDemandId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

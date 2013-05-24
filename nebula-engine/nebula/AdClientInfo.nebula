@@ -2,7 +2,7 @@
 @Refby("0")
 type AdClientInfo {
 	!AdClient;
-	AdOrg ID;
+	AdOrgId ID;
 	IsDiscountLineAmt YesNo;/* 'Y'  */
 	?CCalendar;
 	?CAcctschema1 CAcctschema;

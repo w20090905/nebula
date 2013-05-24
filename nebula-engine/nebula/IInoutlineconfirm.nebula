@@ -1,9 +1,9 @@
 @Remarks("Material Shipment or Receipt Confirmation Import Line")
 @Refby("0")
 type IInoutlineconfirm {
-	!IInoutlineconfirm ID;
-	AdClient ID;
-	AdOrg ID;
+	!IInoutlineconfirmId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IIsImported YesNo;/* 'N'  */
 	?IErrorMsg Note;
 	?MInoutlineconfirm;

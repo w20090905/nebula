@@ -1,10 +1,10 @@
 @Remarks("Issue Recommendation")
 @Refby("0")
 type RIsSuerecommendation {
-	!RIsSuerecommendation ID;/* NULL
+	!RIsSuerecommendationId ID;/* NULL
  */
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

@@ -3,8 +3,8 @@
 type WMailmsgTrl {
 	!WMailmsg;
 	!AdLanguage;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IsTranslated YesNo;/* 'N'  */
 	Subject;
 	Message Description;

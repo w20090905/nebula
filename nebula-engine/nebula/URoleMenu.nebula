@@ -1,9 +1,9 @@
 @Remarks("Role Menu")
 @Refby("0")
 type URoleMenu {
-	!URoleMenu ID;
-	AdClient ID;
-	AdOrg ID;
+	!URoleMenuId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdRole;
 	UWebmenu;
 };

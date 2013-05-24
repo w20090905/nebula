@@ -1,9 +1,9 @@
 @Remarks("General Ledger Budget")
 @Refby("7")
 type GlBudget {
-	!GlBudget ID;
-	AdClient ID;
-	AdOrg ID;
+	!GlBudgetId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	IsPrimary YesNo;/* 'Y'  */

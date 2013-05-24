@@ -1,9 +1,9 @@
 @Remarks("Web Menu")
 @Refby("2")
 type UWebmenu {
-	!UWebmenu ID;
-	AdClient ID;
-	AdOrg ID;
+	!UWebmenuId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	Menulink Note;
 	Module Description;

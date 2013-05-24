@@ -1,9 +1,9 @@
 @Remarks("Restriction of Funds")
 @Refby("0")
 type GlFundrestriction {
-	!GlFundrestriction ID;
-	AdClient ID;
-	AdOrg ID;
+	!GlFundrestrictionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	GlFund;

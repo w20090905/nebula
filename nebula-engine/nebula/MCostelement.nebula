@@ -1,9 +1,9 @@
 @Remarks("Cost Element")
 @Refby("6")
 type MCostelement {
-	!MCostelement ID;
-	AdClient ID;
-	AdOrg ID;
+	!MCostelementId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	Costelementtype Attr;

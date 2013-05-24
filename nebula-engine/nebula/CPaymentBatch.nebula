@@ -1,9 +1,9 @@
 @Remarks("Payment batch for EFT")
 @Refby("1")
 type CPaymentBatch {
-	!CPaymentBatch ID;
-	AdClient ID;
-	AdOrg ID;
+	!CPaymentBatchId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?CPaymentProcessor;
 	?DocumentNo Long;

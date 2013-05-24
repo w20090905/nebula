@@ -1,9 +1,9 @@
 @Remarks("Workbench Window")
 @Refby("0")
 type AdWorkbenchwindow {
-	!AdWorkbenchwindow ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdWorkbenchwindowId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdWorkbench;
 	Seqno SeqNo;
 	IsPrimary YesNo;/* 'N'  */

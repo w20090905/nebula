@@ -1,8 +1,8 @@
 @Remarks("Import Orders")
 @Refby("0")
 type IOrder {
-	!IOrder ID;
-	?AdClient ID;
+	!IOrderId ID;
+	?AdClientId ID;
 	?AdOrg;
 	?AdOrgtrx AdOrg;
 	IIsImported YesNo;/* 'N'  */

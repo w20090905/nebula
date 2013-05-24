@@ -1,9 +1,9 @@
 @Remarks("Format Field")
 @Refby("0")
 type AdImpformatRow {
-	!AdImpformatRow ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdImpformatRowId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdImpformat;
 	Seqno SeqNo;
 	Name;

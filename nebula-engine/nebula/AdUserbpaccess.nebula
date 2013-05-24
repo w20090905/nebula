@@ -1,9 +1,9 @@
 @Remarks("User/concat access to Business Partner information and resources")
 @Refby("0")
 type AdUserbpaccess {
-	!AdUserbpaccess ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdUserbpaccessId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdUser;
 	Bpaccesstype Attr;
 	?RRequestType;

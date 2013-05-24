@@ -1,9 +1,9 @@
 @Remarks("Payment Schedule Template")
 @Refby("1")
 type CPayschedule {
-	!CPayschedule ID;
-	AdClient ID;
-	AdOrg ID;
+	!CPayscheduleId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CPaymentTerm;
 	Percentage Number;
 	Netdays Count;

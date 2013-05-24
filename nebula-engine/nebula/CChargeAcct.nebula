@@ -3,8 +3,8 @@
 type CChargeAcct {
 	!CCharge;
 	!CAcctschema;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	ChExpenseAcct CValidcombination;
 	ChRevenueAcct CValidcombination;
 };

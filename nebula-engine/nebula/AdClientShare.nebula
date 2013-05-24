@@ -1,7 +1,7 @@
 @Remarks("Client Share")
 @Refby("0")
 type AdClientShare {
-	!AdClientShare ID;
+	!AdClientShareId ID;
 	AdClient;
 	AdOrg;
 	Name;

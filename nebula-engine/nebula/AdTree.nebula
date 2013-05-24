@@ -1,9 +1,9 @@
 @Remarks("Identifies a Tree")
 @Refby("36")
 type AdTree {
-	!AdTree ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdTreeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	Treetype Attr;

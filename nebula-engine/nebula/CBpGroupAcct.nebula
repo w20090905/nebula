@@ -3,8 +3,8 @@
 type CBpGroupAcct {
 	!CAcctschema;
 	!CBpGroup;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CReceivableAcct CValidcombination;
 	CPrepaymentAcct CValidcombination;
 	VLiabilityAcct CValidcombination;

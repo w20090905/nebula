@@ -1,9 +1,9 @@
 @Remarks("Definition of Bank Statement Loader (SWIFT, OFX)")
 @Refby("0")
 type CBankstatementloader {
-	!CBankstatementloader ID;
-	AdClient ID;
-	AdOrg ID;
+	!CBankstatementloaderId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	CBankaccount;

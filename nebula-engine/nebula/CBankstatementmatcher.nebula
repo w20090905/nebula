@@ -1,9 +1,9 @@
 @Remarks("Algorithm to match Bank Statement Info to Business Partners, Invoices and Payments")
 @Refby("0")
 type CBankstatementmatcher {
-	!CBankstatementmatcher ID;
-	AdClient ID;
-	AdOrg ID;
+	!CBankstatementmatcherId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	ClassName Name;

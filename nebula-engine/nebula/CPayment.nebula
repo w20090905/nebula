@@ -1,8 +1,8 @@
 @Remarks("Payment identifier")
 @Refby("16")
 type CPayment {
-	!CPayment ID;
-	AdClient ID;
+	!CPaymentId ID;
+	AdClientId ID;
 	AdOrg;
 	DocumentNo Long;
 	DateTrx Date;

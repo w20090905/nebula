@@ -3,7 +3,7 @@
 type CmAccessListbpgroup {
 	!CmAccessProfile;
 	!CBpGroup;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 };
 

@@ -1,9 +1,9 @@
 @Remarks("Collection of windows, reports")
 @Refby("6")
 type AdWorkbench {
-	!AdWorkbench ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdWorkbenchId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

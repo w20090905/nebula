@@ -1,9 +1,9 @@
 @Remarks("The detail content of the Package")
 @Refby("0")
 type MPackageline {
-	!MPackageline ID;
-	AdClient ID;
-	AdOrg ID;
+	!MPackagelineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MPackage;
 	MInoutline;
 	Qty Quantity;/* 0  	  */

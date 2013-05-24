@@ -1,9 +1,9 @@
 @Remarks("Rules for generating physical inventory")
 @Refby("1")
 type MPerpetualinv {
-	!MPerpetualinv ID;
-	AdClient ID;
-	AdOrg ID;
+	!MPerpetualinvId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	Noinventorycount Count;

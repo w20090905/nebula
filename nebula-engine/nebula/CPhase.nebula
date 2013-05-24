@@ -1,15 +1,15 @@
 @Remarks("Standard Phase of the Project Type")
 @Refby("4")
 type CPhase {
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Seqno SeqNo;
 	Name;
 	?Description;
 	?Help;
 	CProjectType;
 	StandardQty Quantity;/* 0  	  */
-	!CPhase ID;
+	!CPhaseId ID;
 	?MProduct;
 };
 

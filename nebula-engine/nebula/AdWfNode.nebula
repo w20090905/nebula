@@ -1,7 +1,7 @@
 @Remarks("Workflow Node (activity), step or process")
 @Refby("8")
 type AdWfNode {
-	!AdWfNode ID;
+	!AdWfNodeId ID;
 	AdClient;
 	AdOrg;
 	Name;

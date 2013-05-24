@@ -1,9 +1,9 @@
 @Remarks("Business Partner Relation")
 @Refby("0")
 type CBpRelation {
-	!CBpRelation ID;
-	AdClient ID;
-	AdOrg ID;
+	!CBpRelationId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	CBpartner;

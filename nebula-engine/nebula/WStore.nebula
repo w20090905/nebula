@@ -1,9 +1,9 @@
 @Remarks("A Web Store of the Client")
 @Refby("2")
 type WStore {
-	!WStore ID;
+	!WStoreId ID;
 	AdClient;
-	AdOrg ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

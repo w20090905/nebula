@@ -1,9 +1,9 @@
 @Remarks("Commission Run or Process")
 @Refby("1")
 type CCommissionrun {
-	!CCommissionrun ID;
-	AdClient ID;
-	AdOrg ID;
+	!CCommissionrunId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo Long;
 	?Description;
 	CCommission;

@@ -3,8 +3,8 @@
 type CCashBookAcct {
 	!CCashBook;
 	!CAcctschema;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CbAssetAcct CValidcombination;
 	CbCashTransferAcct CValidcombination;
 	CbDifferencesAcct CValidcombination;

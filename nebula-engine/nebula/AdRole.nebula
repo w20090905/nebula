@@ -1,7 +1,7 @@
 @Remarks("Responsibility Role")
 @Refby("23")
 type AdRole {
-	!AdRole ID;
+	!AdRoleId ID;
 	AdClient;
 	AdOrg;
 	Name;

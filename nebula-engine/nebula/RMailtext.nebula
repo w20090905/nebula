@@ -1,9 +1,9 @@
 @Remarks("Text templates for mailings")
 @Refby("10")
 type RMailtext {
-	!RMailtext ID;
-	AdClient ID;
-	AdOrg ID;
+	!RMailtextId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	IsHtml YesNo;/* 'N'  */
 	?Mailheader Note;

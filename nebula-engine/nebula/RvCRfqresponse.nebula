@@ -1,15 +1,15 @@
 @Remarks("")
 @Refby("0")
 type RvCRfqresponse {
-	AdClient ID;
-	AdOrg ID;
-	CRfq ID;
-	CRfqTopic ID;
-	CBpartner ID;
-	CBpartnerLocation ID;
-	?AdUser ID;
-	CRfqresponse ID;
-	CCurrency ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CRfqId ID;
+	CRfqTopicId ID;
+	CBpartnerId ID;
+	CBpartnerLocationId ID;
+	?AdUserId ID;
+	CRfqresponseId ID;
+	CCurrencyId ID;
 	?DateResponse Date;
 	?DateWorkstart Date;
 	?DeliveryDays Count;
@@ -19,15 +19,15 @@ type RvCRfqresponse {
 	IsSelfservice YesNo;
 	?Description;
 	?Help;
-	?MProduct ID;
-	?MAttributesetinstance ID;
+	?MProductId ID;
+	?MAttributesetinstanceId ID;
 	Line Long;
 	?LineDateworkstart Date;
 	?LineDeliveryDays Long;
 	?LineDateworkcomplete Date;
 	?LineDescription Description;
 	?LineHelp Note;
-	CUom ID;
+	CUomId ID;
 	Qty Quantity;
 	Benchmarkprice Price;
 	?Benchmarkdifference Number;

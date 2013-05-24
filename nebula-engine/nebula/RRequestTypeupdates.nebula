@@ -3,8 +3,8 @@
 type RRequestTypeupdates {
 	!AdUser;
 	!RRequestType;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IsSelfservice YesNo;/* 'N'  */
 };
 

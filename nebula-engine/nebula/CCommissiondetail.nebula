@@ -1,9 +1,9 @@
 @Remarks("Supporting information for Commission Amounts")
 @Refby("0")
 type CCommissiondetail {
-	!CCommissiondetail ID;
-	AdClient ID;
-	AdOrg ID;
+	!CCommissiondetailId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CCommissionamt;
 	?Reference Description;
 	?COrderline;

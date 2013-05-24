@@ -1,9 +1,9 @@
 @Remarks("Request Status")
 @Refby("4")
 type RStatus {
-	!RStatus ID;
-	AdClient ID;
-	AdOrg ID;
+	!RStatusId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

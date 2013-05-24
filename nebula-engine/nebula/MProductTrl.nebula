@@ -3,8 +3,8 @@
 type MProductTrl {
 	!MProduct;
 	!AdLanguage;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;/* NULL */
 	?DocumentNote Note;
 	IsTranslated YesNo;/* 'N'  */

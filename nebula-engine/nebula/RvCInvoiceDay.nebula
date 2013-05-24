@@ -1,9 +1,9 @@
 @Remarks("")
 @Refby("0")
 type RvCInvoiceDay {
-	AdClient ID;
-	AdOrg ID;
-	?SalesRep ID;
+	AdClientId ID;
+	AdOrgId ID;
+	?SalesRepId ID;
 	?DateInvoiceD Date;
 	?LineNetamt Long;
 	?LineListamt Long;

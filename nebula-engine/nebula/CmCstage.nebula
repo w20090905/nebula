@@ -1,9 +1,9 @@
 @Remarks("Container Stage contains the staging content like images, text etc.")
 @Refby("5")
 type CmCstage {
-	!CmCstage ID;
-	AdClient ID;
-	AdOrg ID;
+	!CmCstageId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

@@ -1,9 +1,9 @@
 @Remarks("Function of Label Printer")
 @Refby("1")
 type AdLabelPrintErFunction {
-	!AdLabelPrintErFunction ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdLabelPrintErFunctionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	AdLabelPrintEr;

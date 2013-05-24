@@ -1,9 +1,9 @@
 @Remarks("System Attribute")
 @Refby("1")
 type AdAttribute {
-	!AdAttribute ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdAttributeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

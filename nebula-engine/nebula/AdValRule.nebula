@@ -1,7 +1,7 @@
 @Remarks("Dynamic Validation Rule")
 @Refby("5")
 type AdValRule {
-	!AdValRule ID;
+	!AdValRuleId ID;
 	AdClient;
 	AdOrg;
 	Name;

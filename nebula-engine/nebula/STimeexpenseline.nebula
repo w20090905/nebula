@@ -1,9 +1,9 @@
 @Remarks("Time and Expense Report Line")
 @Refby("1")
 type STimeexpenseline {
-	!STimeexpenseline ID;
-	AdClient ID;
-	AdOrg ID;
+	!STimeexpenselineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	STimeexpense;
 	Line Long;
 	IsTimereport YesNo;/* 'N'  */

@@ -3,8 +3,8 @@
 type CmChattypeupdate {
 	!CmChattype;
 	!AdUser;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IsSelfservice YesNo;/* 'N'  */
 };
 

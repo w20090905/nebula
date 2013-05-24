@@ -3,8 +3,8 @@
 type ARegistrationvalue {
 	!ARegistration;
 	!ARegistrationattribute;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 };

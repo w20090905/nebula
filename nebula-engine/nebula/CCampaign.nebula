@@ -1,9 +1,9 @@
 @Remarks("Marketing Campaign")
 @Refby("26")
 type CCampaign {
-	!CCampaign ID;
-	AdClient ID;
-	AdOrg ID;
+	!CCampaignId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	Name;
 	?Description;

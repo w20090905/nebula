@@ -1,9 +1,9 @@
 @Remarks("User defined Field")
 @Refby("0")
 type AdUserdefField {
-	!AdUserdefField ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdUserdefFieldId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdUserdefTab;
 	AdField;
 	Name;

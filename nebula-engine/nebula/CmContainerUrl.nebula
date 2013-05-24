@@ -1,10 +1,10 @@
 @Remarks("Contains info on used URLs")
 @Refby("0")
 type CmContainerUrl {
-	!CmContainerUrl ID;/* NULL
+	!CmContainerUrlId ID;/* NULL
  */
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CmContainer;
 	Checked Date;
 	Status Attr;

@@ -1,9 +1,9 @@
 @Remarks("The step for this Cycle")
 @Refby("1")
 type CCyclestep {
-	!CCyclestep ID;
-	AdClient ID;
-	AdOrg ID;
+	!CCyclestepId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CCycle;
 	Seqno SeqNo;
 	Relativeweight Weight;

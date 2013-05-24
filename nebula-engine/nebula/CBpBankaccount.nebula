@@ -1,9 +1,9 @@
 @Remarks("Bank Account of the Business Partner")
 @Refby("2")
 type CBpBankaccount {
-	!CBpBankaccount ID;
-	AdClient ID;
-	AdOrg ID;
+	!CBpBankaccountId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CBpartner;
 	?CBank;
 	IsAch YesNo;/* 'N'  */

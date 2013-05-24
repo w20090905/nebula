@@ -1,7 +1,7 @@
 @Remarks("Task Instance")
 @Refby("0")
 type AdTaskinstance {
-	!AdTaskinstance ID;
+	!AdTaskinstanceId ID;
 	AdClient;
 	AdOrg;
 	AdTask;

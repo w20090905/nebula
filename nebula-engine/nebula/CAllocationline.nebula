@@ -1,9 +1,9 @@
 @Remarks("Allocation Line")
 @Refby("2")
 type CAllocationline {
-	!CAllocationline ID;
-	AdClient ID;
-	AdOrg ID;
+	!CAllocationlineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?Allocationno SeqNo;
 	?DateTrx Date;
 	?IsManual YesNo;/* 'N'  */

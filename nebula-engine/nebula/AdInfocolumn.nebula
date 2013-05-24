@@ -1,9 +1,9 @@
 @Remarks("Info Column")
 @Refby("1")
 type AdInfocolumn {
-	!AdInfocolumn ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdInfocolumnId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

@@ -1,9 +1,9 @@
 @Remarks("Substitute of the user")
 @Refby("0")
 type AdUserSubstitute {
-	!AdUserSubstitute ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdUserSubstituteId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AdUser;
 	Name;
 	?Description;

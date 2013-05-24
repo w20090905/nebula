@@ -1,9 +1,9 @@
 @Remarks("Import Payment")
 @Refby("0")
 type IPayment {
-	!IPayment ID;
-	?AdClient ID;
-	?AdOrg ID;
+	!IPaymentId ID;
+	?AdClientId ID;
+	?AdOrgId ID;
 	IIsImported YesNo;/* 'N'  */
 	?IErrorMsg Note;
 	?Processed YesNo;/* 'N' */

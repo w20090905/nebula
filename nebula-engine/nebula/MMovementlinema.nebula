@@ -3,8 +3,8 @@
 type MMovementlinema {
 	!MMovementline;
 	!MAttributesetinstance;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?Movementqty Quantity;
 };
 

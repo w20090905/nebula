@@ -1,9 +1,9 @@
 @Remarks("Web Basket Line")
 @Refby("0")
 type WBasketline {
-	!WBasketline ID;
-	AdClient ID;
-	AdOrg ID;
+	!WBasketlineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	WBasket;
 	Line Long;
 	Qty Quantity;/* 0  */

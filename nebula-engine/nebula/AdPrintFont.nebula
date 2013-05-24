@@ -1,9 +1,9 @@
 @Remarks("Maintain Print Font")
 @Refby("4")
 type AdPrintFont {
-	!AdPrintFont ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdPrintFontId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	IsDefault YesNo;/* 'N'  */
 	Code Note;

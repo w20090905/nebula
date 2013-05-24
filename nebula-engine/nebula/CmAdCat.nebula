@@ -1,10 +1,10 @@
 @Remarks("Advertisement Categories define rotations and ad blocks")
 @Refby("2")
 type CmAdCat {
-	!CmAdCat ID;
+	!CmAdCatId ID;
 	CmWebproject;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

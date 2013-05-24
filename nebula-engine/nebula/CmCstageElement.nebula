@@ -1,9 +1,9 @@
 @Remarks("Container element i.e. Headline, Content, Footer etc.")
 @Refby("1")
 type CmCstageElement {
-	!CmCstageElement ID;
-	AdClient ID;
-	AdOrg ID;
+	!CmCstageElementId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

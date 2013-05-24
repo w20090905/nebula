@@ -1,9 +1,9 @@
 @Remarks("General Ledger Category")
 @Refby("5")
 type GlCategory {
-	!GlCategory ID;
-	AdClient ID;
-	AdOrg ID;
+	!GlCategoryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	Categorytype Attr;

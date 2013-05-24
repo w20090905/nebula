@@ -1,9 +1,9 @@
 @Remarks("Checks, Transfers, etc.")
 @Refby("0")
 type CBankaccountdoc {
-	!CBankaccountdoc ID;
-	AdClient ID;
-	AdOrg ID;
+	!CBankaccountdocId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CBankaccount;
 	Name;
 	?Description;

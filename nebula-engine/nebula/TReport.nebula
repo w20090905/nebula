@@ -3,8 +3,8 @@
 type TReport {
 	!AdPinstance;
 	!PaReportline;
-	!Record ID;
-	!FactAcct ID;
+	!RecordId ID;
+	!FactAcctId ID;
 	?Seqno SeqNo;
 	?Levelno SeqNo;/* 0 */
 	?Name;

@@ -1,9 +1,9 @@
 @Remarks("Tax identifier")
 @Refby("13")
 type CTax {
-	!CTax ID;
-	AdClient ID;
-	AdOrg ID;
+	!CTaxId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?TaxIndicator String;

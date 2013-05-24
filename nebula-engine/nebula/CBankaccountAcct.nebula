@@ -3,8 +3,8 @@
 type CBankaccountAcct {
 	!CBankaccount;
 	!CAcctschema;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	BIntransitAcct CValidcombination;
 	BAssetAcct CValidcombination;
 	BExpenseAcct CValidcombination;

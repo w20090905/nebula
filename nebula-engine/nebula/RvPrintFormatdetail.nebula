@@ -1,25 +1,25 @@
 @Remarks("")
 @Refby("0")
 type RvPrintFormatdetail {
-	AdClient ID;
-	AdOrg ID;
-	AdPrintFormat ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AdPrintFormatId ID;
 	Name;
 	?Description;
 	IsTablebased YesNo;
 	IsForm YesNo;
-	AdTable ID;
-	?AdReportview ID;
-	AdPrintPaper ID;
-	DefaultAdPrintColor ID;
-	DefaultAdPrintFont ID;
+	AdTableId ID;
+	?AdReportviewId ID;
+	AdPrintPaperId ID;
+	DefaultAdPrintColorId ID;
+	DefaultAdPrintFontId ID;
 	IsStandardHeaderfooter YesNo;
-	?AdPrintTableformat ID;
+	?AdPrintTableformatId ID;
 	HeaderMargin Number;
 	FooterMargin Number;
 	?PrintErName Name;
 	IsDefault YesNo;
-	AdPrintFormatitem ID;
+	AdPrintFormatitemId ID;
 	Itemname Name;
 	?PrintName Name;
 	?PrintNamesuffix Description;
@@ -27,8 +27,8 @@ type RvPrintFormatdetail {
 	PrintAreatype Attr;
 	Seqno SeqNo;
 	PrintFormattype Attr;
-	?AdColumn ID;
-	?AdPrintFormatchild ID;
+	?AdColumnId ID;
+	?AdPrintFormatchildId ID;
 	ImageIsattached YesNo;
 	?ImageUrl URL;
 	IsRelativeposition YesNo;
@@ -46,8 +46,8 @@ type RvPrintFormatdetail {
 	?Belowcolumn Number;
 	FieldAlignmenttype Attr;
 	LineAlignmenttype Attr;
-	?AdPrintColor ID;
-	?AdPrintFont ID;
+	?AdPrintColorId ID;
+	?AdPrintFontId ID;
 	IsOrderby YesNo;
 	Sortno SeqNo;
 	IsGroupby YesNo;
@@ -62,6 +62,6 @@ type RvPrintFormatdetail {
 	IsDeviationcalc YesNo;
 	IsRunningtotal YesNo;
 	?Runningtotallines Number;
-	?AdPrintGraph ID;
+	?AdPrintGraphId ID;
 };
 

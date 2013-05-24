@@ -2,8 +2,8 @@
 @Refby("8")
 type CProjectPhase {
 	CProject;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?Description;
 	?Startdate Date;
 	?Enddate Date;
@@ -13,7 +13,7 @@ type CProjectPhase {
 	?Generateorder YesNo;
 	?COrder;
 	?CPhase;
-	!CProjectPhase ID;
+	!CProjectPhaseId ID;
 	?Help;
 	Name;
 	?Qty Quantity;/* 0  */

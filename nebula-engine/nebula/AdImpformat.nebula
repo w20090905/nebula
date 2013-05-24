@@ -1,9 +1,9 @@
 @Remarks("Import Format")
 @Refby("3")
 type AdImpformat {
-	!AdImpformat ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdImpformatId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	AdTable;

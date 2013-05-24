@@ -1,8 +1,8 @@
 @Remarks("Sales Order Line")
 @Refby("10")
 type COrderline {
-	!COrderline ID;
-	AdClient ID;
+	!COrderlineId ID;
+	AdClientId ID;
 	AdOrg;
 	COrder;
 	Line Long;

@@ -1,9 +1,9 @@
 @Remarks("Template defines how content is displayed")
 @Refby("4")
 type CmTemplate {
-	!CmTemplate ID;
-	AdClient ID;
-	AdOrg ID;
+	!CmTemplateId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

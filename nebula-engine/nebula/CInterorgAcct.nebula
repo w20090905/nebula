@@ -4,7 +4,7 @@ type CInterorgAcct {
 	!CAcctschema;
 	!AdOrg;
 	!AdOrgto AdOrg;
-	AdClient ID;
+	AdClientId ID;
 	IntercompanyduetoAcct CValidcombination;
 	IntercompanyduefromAcct CValidcombination;
 };

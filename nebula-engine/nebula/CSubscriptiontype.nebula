@@ -1,12 +1,12 @@
 @Remarks("Type of subscription")
 @Refby("2")
 type CSubscriptiontype {
-	!CSubscriptiontype ID;
-	AdClient ID;
+	!CSubscriptiontypeId ID;
+	AdClientId ID;
 	Name;
 	?Description;
 	FrequencyType Attr;
 	Frequency Number;
-	?AdOrg ID;
+	?AdOrgId ID;
 };
 

@@ -3,8 +3,8 @@
 type MAttributeinstance {
 	!MAttributesetinstance;/* 0 */
 	!MAttribute;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?MAttributevalue;
 	?Value String;
 	?ValueNumber Number;

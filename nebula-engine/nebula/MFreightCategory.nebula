@@ -1,9 +1,9 @@
 @Remarks("Category of the Freight")
 @Refby("2")
 type MFreightCategory {
-	!MFreightCategory ID;
-	AdClient ID;
-	AdOrg ID;
+	!MFreightCategoryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	Name;
 	?Description;

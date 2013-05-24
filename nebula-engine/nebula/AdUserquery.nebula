@@ -1,9 +1,9 @@
 @Remarks("Saved User Query")
 @Refby("0")
 type AdUserquery {
-	!AdUserquery ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdUserqueryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?AdUser;

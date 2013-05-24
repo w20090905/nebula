@@ -1,7 +1,7 @@
 @Remarks("The Currency for this record")
 @Refby("49")
 type CCurrency {
-	!CCurrency ID;
+	!CCurrencyId ID;
 	AdClient;
 	AdOrg;
 	IsOCode String;

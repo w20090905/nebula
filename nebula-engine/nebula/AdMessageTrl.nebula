@@ -3,8 +3,8 @@
 type AdMessageTrl {
 	!AdMessage;
 	!AdLanguage;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Msgtext Note;
 	?Msgtip Note;
 	IsTranslated YesNo;/* 'N'  */

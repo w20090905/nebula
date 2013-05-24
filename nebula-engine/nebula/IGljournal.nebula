@@ -1,8 +1,8 @@
 @Remarks("Import General Ledger Journal")
 @Refby("0")
 type IGljournal {
-	!IGljournal ID;
-	?AdClient ID;
+	!IGljournalId ID;
+	?AdClientId ID;
 	?ClientValue Description;
 	?AdOrgdoc AdOrg;
 	IIsImported YesNo;/* 'N'  */

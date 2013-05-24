@@ -1,7 +1,7 @@
 @Remarks("Data entry or display window")
 @Refby("17")
 type AdWindow {
-	!AdWindow ID;
+	!AdWindowId ID;
 	AdClient;
 	AdOrg;
 	Name;

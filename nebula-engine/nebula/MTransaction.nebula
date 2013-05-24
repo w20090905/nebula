@@ -1,9 +1,9 @@
 @Remarks("Inventory Transaction")
 @Refby("3")
 type MTransaction {
-	!MTransaction ID;
-	AdClient ID;
-	AdOrg ID;
+	!MTransactionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Movementtype Attr;
 	MLocator;
 	MProduct;

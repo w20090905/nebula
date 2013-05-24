@@ -1,9 +1,9 @@
 @Remarks("Commission Line")
 @Refby("1")
 type CCommissionline {
-	!CCommissionline ID;
-	AdClient ID;
-	AdOrg ID;
+	!CCommissionlineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CCommission;
 	Line Long;
 	?Description;

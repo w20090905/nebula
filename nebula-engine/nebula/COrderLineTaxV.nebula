@@ -1,19 +1,19 @@
 @Remarks("")
 @Refby("0")
 type COrderLineTaxV {
-	?AdClient ID;
-	?AdOrg ID;
+	?AdClientId ID;
+	?AdOrgId ID;
 	?AdLanguage String;
-	?COrder ID;
-	?COrderline ID;
-	?CTax ID;
+	?COrderId ID;
+	?COrderlineId ID;
+	?CTaxId ID;
 	?TaxIndicator String;
-	?CBpartner ID;
-	?CBpartnerLocation ID;
+	?CBpartnerId ID;
+	?CBpartnerLocationId ID;
 	?Bpname Name;
-	?CLocation ID;
+	?CLocationId ID;
 	?Line Long;
-	?MProduct ID;
+	?MProductId ID;
 	?QtyOrdered Quantity;
 	?QtyEntered Quantity;
 	?Uomsymbol String;
@@ -32,10 +32,10 @@ type COrderLineTaxV {
 	?LineNetamt Long;
 	?ProductDescription Description;
 	?ImageUrl URL;
-	?CCampaign ID;
-	?CProject ID;
-	?CActivity ID;
-	?CProjectPhase ID;
-	?CProjectTask ID;
+	?CCampaignId ID;
+	?CProjectId ID;
+	?CActivityId ID;
+	?CProjectPhaseId ID;
+	?CProjectTaskId ID;
 };
 

@@ -1,9 +1,9 @@
 @Remarks("Product Revenue Recognition Service Level")
 @Refby("1")
 type CServicelevel {
-	!CServicelevel ID;
-	AdClient ID;
-	AdOrg ID;
+	!CServicelevelId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MProduct;
 	?Description;
 	Servicelevelprovided Number;

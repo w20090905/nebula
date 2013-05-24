@@ -1,9 +1,9 @@
 @Remarks("Trade Discount Break")
 @Refby("0")
 type MDiscountSchemabreak {
-	!MDiscountSchemabreak ID;
-	AdClient ID;
-	AdOrg ID;
+	!MDiscountSchemabreakId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MDiscountSchema;
 	Seqno SeqNo;
 	Breakvalue Number;

@@ -1,9 +1,9 @@
 @Remarks("Counter Document Relationship")
 @Refby("0")
 type CDoctypeCounter {
-	!CDoctypeCounter ID;
-	AdClient ID;
-	AdOrg ID;
+	!CDoctypeCounterId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	CDoctype;

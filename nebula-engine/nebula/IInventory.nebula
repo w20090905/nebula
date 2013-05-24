@@ -1,9 +1,9 @@
 @Remarks("Import Inventory Transactions")
 @Refby("0")
 type IInventory {
-	!IInventory ID;
-	?AdClient ID;
-	?AdOrg ID;
+	!IInventoryId ID;
+	?AdClientId ID;
+	?AdOrgId ID;
 	IIsImported YesNo;/* 'N'  */
 	?IErrorMsg Note;
 	?MProduct;

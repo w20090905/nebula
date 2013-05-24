@@ -1,7 +1,7 @@
 @Remarks("User within the system - Internal or Business Partner Contact")
 @Refby("94")
 type AdUser {
-	!AdUser ID;
+	!AdUserId ID;
 	AdClient;
 	AdOrg;
 	Name;

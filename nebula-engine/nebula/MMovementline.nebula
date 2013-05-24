@@ -1,9 +1,9 @@
 @Remarks("Inventory Move document Line")
 @Refby("5")
 type MMovementline {
-	!MMovementline ID;
-	AdClient ID;
-	AdOrg ID;
+	!MMovementlineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MMovement;
 	MLocator;
 	MLocatorto MLocator;
@@ -16,6 +16,6 @@ type MMovementline {
 	?Scrappedqty Quantity;/* 0 */
 	?Targetqty Quantity;/* 0 */
 	Processed YesNo;/* 'N'  */
-	?MAttributesetinstanceto ID;
+	?MAttributesetinstancetoId ID;
 };
 

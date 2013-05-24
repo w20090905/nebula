@@ -1,8 +1,8 @@
 @Remarks("Assigment to (transaction) Organization")
 @Refby("0")
 type COrgassignment {
-	!COrgassignment ID;
-	AdClient ID;
+	!COrgassignmentId ID;
+	AdClientId ID;
 	AdOrg;
 	AdUser;
 	Validfrom Date;

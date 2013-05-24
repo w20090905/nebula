@@ -1,9 +1,9 @@
 @Remarks("Knowledge Topic")
 @Refby("1")
 type KTopic {
-	!KTopic ID;
-	AdClient ID;
-	AdOrg ID;
+	!KTopicId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

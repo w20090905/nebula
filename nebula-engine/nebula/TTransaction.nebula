@@ -3,8 +3,8 @@
 type TTransaction {
 	!AdPinstance;
 	!MTransaction;
-	AdClient ID;
-	AdOrg ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Movementtype Attr;
 	MLocator;
 	MProduct;
@@ -12,17 +12,17 @@ type TTransaction {
 	Movementdate Date;
 	Movementqty Quantity;/* 0  */
 	?MInoutline;
-	?MInout ID;
+	?MInoutId ID;
 	?MMovementline;
-	?MMovement ID;
+	?MMovementId ID;
 	?MInventoryline;
-	?MInventory ID;
+	?MInventoryId ID;
 	?MProductIonline;
-	?MProductIon ID;
+	?MProductIonId ID;
 	?CProjectIssue;
-	?CProject ID;
-	?SearchOrder ID;
-	?SearchInvoice ID;
-	?SearchInout ID;
+	?CProjectId ID;
+	?SearchOrderId ID;
+	?SearchInvoiceId ID;
+	?SearchInoutId ID;
 };
 

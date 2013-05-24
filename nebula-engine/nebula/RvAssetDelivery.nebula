@@ -1,21 +1,21 @@
 @Remarks("")
 @Refby("0")
 type RvAssetDelivery {
-	AAssetDelivery ID;
-	AdClient ID;
-	AdOrg ID;
-	AAsset ID;
-	AAssetGroup ID;
-	?MProduct ID;
+	AAssetDeliveryId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AAssetId ID;
+	AAssetGroupId ID;
+	?MProductId ID;
 	?Guaranteedate Date;
 	?Assetservicedate Date;
-	?CBpartner ID;
-	?AdUser ID;
+	?CBpartnerId ID;
+	?AdUserId ID;
 	Movementdate Date;
 	?Serno Description;
 	?Lot Description;
 	?Versionno String;
-	?MInoutline ID;
+	?MInoutlineId ID;
 	?Email;
 	?Messageid String;
 	?DeliveryConfirmation String;

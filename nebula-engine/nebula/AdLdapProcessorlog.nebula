@@ -2,9 +2,9 @@
 @Refby("0")
 type AdLdapProcessorlog {
 	!AdLdapProcessor;
-	!AdLdapProcessorlog ID;
-	AdClient ID;
-	AdOrg ID;
+	!AdLdapProcessorlogId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?Summary Note;
 	IsError YesNo;/* 'N'  */
 	?Reference Description;

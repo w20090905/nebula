@@ -1,9 +1,9 @@
 @Remarks("Calculation method for measuring performance")
 @Refby("2")
 type PaMeasurecalc {
-	!PaMeasurecalc ID;
-	AdClient ID;
-	AdOrg ID;
+	!PaMeasurecalcId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	SelectClause Note;

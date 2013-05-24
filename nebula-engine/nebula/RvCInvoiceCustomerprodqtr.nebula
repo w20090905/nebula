@@ -1,10 +1,10 @@
 @Remarks("")
 @Refby("0")
 type RvCInvoiceCustomerprodqtr {
-	AdClient ID;
-	AdOrg ID;
-	CBpartner ID;
-	?MProductCategory ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CBpartnerId ID;
+	?MProductCategoryId ID;
 	?DateInvoiceD Date;
 	?LineNetamt Long;
 	?LineListamt Long;

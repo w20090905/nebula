@@ -1,7 +1,7 @@
 @Remarks("System Message")
 @Refby("5")
 type AdMessage {
-	!AdMessage ID;
+	!AdMessageId ID;
 	AdClient;
 	AdOrg;
 	Value String;

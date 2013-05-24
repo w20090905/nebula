@@ -1,9 +1,9 @@
 @Remarks("Request for Quotation Line")
 @Refby("2")
 type CRfqline {
-	!CRfqline ID;
-	AdClient ID;
-	AdOrg ID;
+	!CRfqlineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CRfq;
 	Line Long;/* 0  */
 	?MProduct;

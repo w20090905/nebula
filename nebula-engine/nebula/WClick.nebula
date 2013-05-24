@@ -1,9 +1,9 @@
 @Remarks("Individual Web Click")
 @Refby("0")
 type WClick {
-	!WClick ID;
-	AdClient ID;
-	AdOrg ID;
+	!WClickId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?Targeturl URL;
 	?Referrer Description;
 	?RemoteHost Host;

@@ -1,9 +1,9 @@
 @Remarks("Auction Topic Type")
 @Refby("2")
 type BTopictype {
-	!BTopictype ID;
-	AdClient ID;
-	AdOrg ID;
+	!BTopictypeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

@@ -1,9 +1,9 @@
 @Remarks("Group of Assets")
 @Refby("3")
 type AAssetGroup {
-	!AAssetGroup ID;
-	AdClient ID;
-	AdOrg ID;
+	!AAssetGroupId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

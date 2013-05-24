@@ -1,9 +1,9 @@
 @Remarks("Request for Quotation Response Line")
 @Refby("1")
 type CRfqresponseline {
-	!CRfqresponseline ID;
-	AdClient ID;
-	AdOrg ID;
+	!CRfqresponselineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CRfqline;
 	CRfqresponse;
 	IsSelfservice YesNo;/* 'N'  */

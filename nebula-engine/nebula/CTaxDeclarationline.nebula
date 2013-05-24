@@ -1,9 +1,9 @@
 @Remarks("Tax Declaration Document Information")
 @Refby("0")
 type CTaxDeclarationline {
-	!CTaxDeclarationline ID;
-	AdClient ID;
-	AdOrg ID;
+	!CTaxDeclarationlineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Line Long;/* 0  */
 	?Description;
 	IsManual YesNo;/* 'N'  */

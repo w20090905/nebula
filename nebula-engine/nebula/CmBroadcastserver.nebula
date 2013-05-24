@@ -1,9 +1,9 @@
 @Remarks("Web Broadcast Server")
 @Refby("1")
 type CmBroadcastserver {
-	!CmBroadcastserver ID;
-	AdClient ID;
-	AdOrg ID;
+	!CmBroadcastserverId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Name;
 	?Description;
 	?Help;

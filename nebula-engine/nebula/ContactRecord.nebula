@@ -1,0 +1,7 @@
+tx ContactRecord {
+	!AutoID;
+	@GroupBy Company;
+	Person;
+	Content Text;
+	LastUpdated Timestamp;
+};

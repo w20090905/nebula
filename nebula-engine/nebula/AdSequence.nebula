@@ -1,7 +1,7 @@
 @Remarks("Document Sequence")
 @Refby("6")
 type AdSequence {
-	!AdSequence ID;
+	!AdSequenceId ID;
 	AdClient;
 	AdOrg;
 	Name;

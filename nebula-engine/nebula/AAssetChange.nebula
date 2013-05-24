@@ -1,9 +1,9 @@
 @Remarks("")
 @Refby("1")
 type AAssetChange {
-	!AAssetChange ID;
-	AdClient ID;
-	AdOrg ID;
+	!AAssetChangeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	AAsset;
 	ChangeType Attr;
 	ChangeDate Date;
