@@ -1,0 +1,21 @@
+@Remarks("Template defines how content is displayed")
+@Refby("4")
+type CmTemplate {
+	!CmTemplate ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	?CmWebproject;
+	Value String;
+	IsInclude YesNo;/* 'Y'  */
+	IsUsead YesNo;/* 'Y'  */
+	IsNewS YesNo;/* 'Y'  */
+	?Elements Note;
+	?Templatexst Note;
+	IsSummary YesNo;/* 'N'  */
+	IsValid YesNo;/* 'N'  */
+	?Processing YesNo;
+};
+

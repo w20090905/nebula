@@ -1,0 +1,19 @@
+@Remarks("Calculation method for measuring performance")
+@Refby("2")
+type PaMeasurecalc {
+	!PaMeasurecalc ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	SelectClause Note;
+	WhereClause Note;
+	DateColumn Description;
+	?Orgcolumn Description;
+	?BpartnerColumn Description;
+	?ProductColumn Description;
+	AdTable;
+	Keycolumn Description;
+	EntityType AdEntityType;
+};
+

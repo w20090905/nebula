@@ -1,0 +1,25 @@
+@Remarks("System Registration")
+@Refby("0")
+type AdRegistration {
+	!AdRegistration ID;
+	!AdClient AdSystem;
+	!AdSystem;
+	AdOrg ID;
+	IsRegistered YesNo;/* 'N'  */
+	?Record ID;
+	?Description;
+	?CLocation ID;
+	IsInproduction YesNo;/* 'N'  */
+	?Startproductiondate Date;
+	IsAllowpublish YesNo;/* 'Y'  */
+	IsAllowstatistics YesNo;/* 'Y'  */
+	?Platforminfo Note;
+	?Industryinfo Note;
+	?SalesVolume Number;/* 0 */
+	?CCurrency;
+	?Numberemployees Number;/* 0 */
+	?Processing YesNo;
+	?RemoteHost Host;
+	?RemoteAddr Name;
+};
+

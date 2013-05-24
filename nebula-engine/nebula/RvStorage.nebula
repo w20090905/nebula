@@ -1,0 +1,40 @@
+@Remarks("")
+@Refby("0")
+type RvStorage {
+	AdClient ID;
+	AdOrg ID;
+	MProduct ID;
+	Value String;
+	Name;
+	?Description;
+	?Upc UPC;
+	?Sku String;
+	CUom ID;
+	MProductCategory ID;
+	?ClassIfication YesNo;
+	?Weight;
+	?Volume Number;
+	?Versionno String;
+	?Guaranteedays Count;
+	?Guaranteedaysmin Number;
+	MLocator ID;
+	MWarehouse ID;
+	?X Description;
+	?Y Description;
+	?Z Description;
+	QtyOnhand Quantity;
+	QtyReserved Quantity;
+	?QtyAvailable Quantity;
+	QtyOrdered Quantity;
+	?DateLastinventory Date;
+	MAttributesetinstance ID;
+	?MAttributeset ID;
+	?Serno Description;
+	?Lot Description;
+	?MLot ID;
+	?Guaranteedate Date;
+	?Shelflifedays Count;
+	?Goodfordays Count;
+	?Shelfliferemainingpct Number;
+};
+

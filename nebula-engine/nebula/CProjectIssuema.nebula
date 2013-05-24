@@ -1,0 +1,10 @@
+@Remarks("C_ProjectIssueMA")
+@Refby("0")
+type CProjectIssuema {
+	!CProjectIssue;
+	!MAttributesetinstance;
+	AdClient ID;
+	AdOrg ID;
+	Movementqty Quantity;/* 0  */
+};
+

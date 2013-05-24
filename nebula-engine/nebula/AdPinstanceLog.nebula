@@ -1,0 +1,11 @@
+@Remarks("(Non Standard Table)")
+@Refby("0")
+type AdPinstanceLog {
+	!AdPinstance;
+	!Log ID;
+	?PDate Date;/* SYSDATE      */
+	?P ID;
+	?PNumber Number;
+	?PMsg Note;
+};
+

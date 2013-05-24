@@ -1,0 +1,12 @@
+@Remarks("Issue Recommendation")
+@Refby("0")
+type RIsSuerecommendation {
+	!RIsSuerecommendation ID;/* NULL
+ */
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+};
+

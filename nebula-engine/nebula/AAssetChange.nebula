@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("1")
+type AAssetChange {
+	!AAssetChange ID;
+	AdClient ID;
+	AdOrg ID;
+	AAsset;
+	ChangeType Attr;
+	ChangeDate Date;
+	?ChangeAmt Amount;/* 0 */
+	?Uselifeyears Number;
+	?Uselifemonths Number;
+	?Lifeuseunits Number;
+	?Assetdepreciationdate Date;
+	?AAssetRetirement;
+	?AAssetAddition;
+	?Serno String;
+	?Lot String;
+	?Versionno String;
+};
+

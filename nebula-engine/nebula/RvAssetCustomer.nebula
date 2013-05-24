@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("0")
+type RvAssetCustomer {
+	AAsset ID;
+	AdClient ID;
+	AdOrg ID;
+	Value String;
+	Name;
+	?Description;
+	?Help;
+	AAssetGroup ID;
+	?MProduct ID;
+	?Serno Note;
+	?Lot Note;
+	?Versionno String;
+	?Guaranteedate Date;
+	?Assetservicedate Date;
+	?CBpartner ID;
+	?CBpartnerLocation ID;
+	?AdUser ID;
+	?DeliveryCount Count;
+};
+

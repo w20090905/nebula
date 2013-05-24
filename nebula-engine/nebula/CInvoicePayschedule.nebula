@@ -1,0 +1,17 @@
+@Remarks("Invoice Payment Schedule")
+@Refby("1")
+type CInvoicePayschedule {
+	!CInvoicePayschedule ID;
+	AdClient ID;
+	AdOrg ID;
+	CInvoice;
+	?CPayschedule;
+	Duedate Date;
+	Dueamt Number;/* 0  */
+	DiscountDate Date;
+	DiscountAmt Amount;/* 0  */
+	IsValid YesNo;/* 'N'  */
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+};
+

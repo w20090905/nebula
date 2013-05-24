@@ -1,0 +1,40 @@
+@Remarks("")
+@Refby("0")
+type MInoutLineConfirmVt {
+	AdClient ID;
+	AdOrg ID;
+	?AdLanguage String;
+	MInoutlineconfirm ID;
+	MInoutconfirm ID;
+	Targetqty Quantity;
+	Confirmedqty Quantity;
+	?Differenceqty Quantity;
+	?Scrappedqty Quantity;
+	?Description;
+	Processed YesNo;
+	?MInout ID;
+	?MInoutline ID;
+	?Line Long;
+	?MProduct ID;
+	?Movementqty Quantity;
+	?Uomsymbol String;
+	?QtyBackordered Quantity;
+	?Name;
+	?Shipdescription Note;
+	?DocumentNote Note;
+	?Upc UPC;
+	?Sku String;
+	?ProductValue Note;
+	?MLocator ID;
+	?MWarehouse ID;
+	?X Description;
+	?Y Description;
+	?Z Description;
+	?MAttributesetinstance ID;
+	?MAttributeset ID;
+	?Serno Description;
+	?Lot Description;
+	?MLot ID;
+	?Guaranteedate Date;
+};
+

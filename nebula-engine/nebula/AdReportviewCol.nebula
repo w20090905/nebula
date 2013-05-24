@@ -1,0 +1,12 @@
+@Remarks("Report view Column")
+@Refby("0")
+type AdReportviewCol {
+	!AdReportviewCol ID;
+	AdClient ID;
+	AdOrg ID;
+	AdReportview;
+	?AdColumn;
+	FunctionColumn Description;
+	IsGroupfunction YesNo;/* 'N'  */
+};
+

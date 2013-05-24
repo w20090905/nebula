@@ -1,0 +1,11 @@
+@Remarks("The value of the category")
+@Refby("1")
+type KCategoryvalue {
+	!KCategoryvalue ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	KCategory;
+};
+

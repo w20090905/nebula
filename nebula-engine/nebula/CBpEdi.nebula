@@ -1,0 +1,27 @@
+@Remarks("Electronic Data Interchange")
+@Refby("1")
+type CBpEdi {
+	!CBpEdi ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	CBpartner;
+	MWarehouse;
+	Editype Attr;
+	IsAudited YesNo;/* 'N'  */
+	Customerno String;
+	AdSequence;
+	?EmailTo Description;
+	?EmailFrom Description;
+	?EmailFromUid String;
+	?EmailFromPwd String;
+	EmailErrorTo Description;
+	IsInfosent YesNo;/* 'N'  */
+	EmailInfoTo Description;
+	Sendinquiry YesNo;/* 'Y'  */
+	Receiveinquiryreply YesNo;/* 'Y'  */
+	Sendorder YesNo;/* 'Y'  */
+	Receiveorderreply YesNo;/* 'Y'  */
+};
+

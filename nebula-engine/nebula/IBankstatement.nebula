@@ -1,0 +1,58 @@
+@Remarks("Import of the Bank Statement")
+@Refby("0")
+type IBankstatement {
+	!IBankstatement ID;
+	?AdClient ID;
+	?AdOrg ID;
+	IIsImported YesNo;/* 'N'  */
+	?IErrorMsg Note;
+	?Processed YesNo;/* 'N' */
+	?CBankstatement;
+	?Statementdate Date;
+	?Description;
+	?CBankaccount;
+	?Routingno String;
+	?Bankaccountno String;
+	?CPayment;
+	?PaymentDocumentNo String;
+	?CCurrency;
+	?IsOCode String;
+	?CBpartner;
+	?Name;
+	?BpartnerValue Description;
+	?CInvoice;
+	?InvoiceDocumentNo String;
+	?CCharge;
+	?ChargeName Name;
+	?ChargeAmt Amount;/* 0 */
+	?CBankstatementline;
+	?Line Long;
+	?DateAcct Date;
+	?Valutadate Date;
+	?Statementlinedate Date;
+	?Trxtype String;
+	?ReferenceNo Description;
+	?Memo Note;
+	?IsReversal YesNo;/* 'N' */
+	?InterestAmt Amount;/* 0 */
+	?Trxamt Amount;/* 0 */
+	?LineDescription Description;
+	?Stmtamt Amount;/* 0 */
+	?Eftstatementdate Date;
+	?Eftstatementreference Description;
+	?Eftstatementlinedate Date;
+	?Eftvalutadate Date;
+	?Eftreference Description;
+	?Eftcheckno String;
+	?Efttrxid Description;
+	?Efttrxtype String;
+	?Eftmemo Note;
+	?Eftpayee Note;
+	?Eftpayeeaccount Description;
+	?Eftamt Amount;/* 0 */
+	?Eftcurrency String;
+	?CreatePayment YesNo;
+	?Processing YesNo;
+	?Matchstatement YesNo;
+};
+

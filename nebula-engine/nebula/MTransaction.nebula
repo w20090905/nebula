@@ -1,0 +1,19 @@
+@Remarks("Inventory Transaction")
+@Refby("3")
+type MTransaction {
+	!MTransaction ID;
+	AdClient ID;
+	AdOrg ID;
+	Movementtype Attr;
+	MLocator;
+	MProduct;
+	Movementdate Date;
+	Movementqty Quantity;/* 0  */
+	?MInventoryline;
+	?MMovementline;
+	?MInoutline;
+	?MProductIonline;
+	?CProjectIssue;
+	MAttributesetinstance;/* 0 */
+};
+

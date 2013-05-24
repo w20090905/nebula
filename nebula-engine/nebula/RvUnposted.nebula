@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+type RvUnposted {
+	?AdClient ID;
+	?AdOrg ID;
+	?DocumentNo Long;
+	?DateDoc Date;
+	?DateAcct Date;
+	?AdTable ID;
+	?Record ID;
+	?IsSotrx YesNo;
+};
+

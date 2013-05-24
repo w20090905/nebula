@@ -1,0 +1,10 @@
+@Remarks("K_EntryCategory")
+@Refby("0")
+type KEntrycategory {
+	!KCategory;
+	!KEntry;
+	AdClient ID;
+	AdOrg ID;
+	KCategoryvalue;
+};
+

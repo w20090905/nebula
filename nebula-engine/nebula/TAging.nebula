@@ -1,0 +1,43 @@
+@Remarks("T_Aging")
+@Refby("0")
+type TAging {
+	!AdPinstance;
+	!CBpartner;
+	!CCurrency;
+	!CInvoice ID;
+	!CInvoicePayschedule ID;
+	AdClient ID;
+	AdOrg ID;
+	Statementdate Date;
+	Duedate Date;
+	?DaysDue Number;/* 0 */
+	IsListinvoices YesNo;/* 'N'  */
+	IsSotrx YesNo;/* 'Y'  */
+	CBpGroup;
+	InvoiceDamt Amount;/* 0  */
+	Openamt Amount;/* 0  */
+	Pastdue91Plus Number;/* 0  */
+	Pastdue6190 Number;/* 0  */
+	Pastdue61Plus Number;/* 0  */
+	Pastdue3160 Number;/* 0  */
+	Pastdue31Plus Number;/* 0  */
+	Pastdue130 Number;/* 0  */
+	Pastdue830 Number;/* 0  */
+	Pastdue17 Number;/* 0  */
+	Pastdueamt Number;/* 0  */
+	Dueamt Number;/* 0  */
+	Due0 Number;/* 0  */
+	Due07 Number;/* 0  */
+	Due17 Number;/* 0  */
+	Due830 Number;/* 0  */
+	Due030 Number;/* 0  */
+	Due31Plus Number;/* 0  */
+	Due3160 Number;/* 0  */
+	Due61Plus Number;/* 0  */
+	Due6190 Number;/* 0  */
+	Due91Plus Number;/* 0  */
+	?CProject;
+	?CCampaign;
+	?CActivity;
+};
+

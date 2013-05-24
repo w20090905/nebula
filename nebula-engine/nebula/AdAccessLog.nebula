@@ -1,0 +1,16 @@
+@Remarks("Log of Access to the System")
+@Refby("0")
+type AdAccessLog {
+	!AdAccessLog ID;
+	AdClient ID;
+	AdOrg ID;
+	?AdTable;
+	?AdColumn;
+	?Record ID;
+	?RemoteAddr Name;
+	?RemoteHost Host;
+	?Description;
+	?TextMsg Note;
+	?Reply Note;
+};
+

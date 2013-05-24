@@ -1,0 +1,11 @@
+@Remarks("Get together the Template and the Advertising Category")
+@Refby("0")
+type CmTemplateAdCat {
+	!CmAdCat;
+	!CmTemplate;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+};
+

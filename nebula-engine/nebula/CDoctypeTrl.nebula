@@ -1,0 +1,13 @@
+@Remarks("Document type or rules")
+@Refby("0")
+type CDoctypeTrl {
+	!CDoctype;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	PrintName Name;
+	?DocumentNote Note;
+	IsTranslated YesNo;/* 'N'  */
+};
+

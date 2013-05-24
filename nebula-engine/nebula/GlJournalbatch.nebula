@@ -1,0 +1,26 @@
+@Remarks("General Ledger Journal Batch")
+@Refby("4")
+type GlJournalbatch {
+	!GlJournalbatch ID;
+	AdClient ID;
+	AdOrg ID;
+	DocumentNo Long;
+	Description;
+	PostIngtype Attr;
+	?GlCategory;
+	?DateDoc Date;
+	?DateAcct Date;
+	?CPeriod;
+	?CCurrency;
+	TotalDr Number;/* 0  */
+	TotalCr Number;/* 0  */
+	?Controlamt Amount;/* 0 */
+	Processing YesNo;/* 'N'  */
+	Processed YesNo;/* 'N'  */
+	?Copyfrom YesNo;
+	CDoctype;
+	Docstatus Attr;
+	Docaction Attr;
+	?IsApproved YesNo;
+};
+

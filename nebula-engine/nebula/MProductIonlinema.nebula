@@ -1,0 +1,10 @@
+@Remarks("Production Line MA")
+@Refby("0")
+type MProductIonlinema {
+	!MProductIonline;
+	!MAttributesetinstance;
+	AdClient ID;
+	AdOrg ID;
+	Movementqty Quantity;/* 0  */
+};
+

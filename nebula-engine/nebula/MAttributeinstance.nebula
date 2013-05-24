@@ -1,0 +1,12 @@
+@Remarks("M_AttributeInstance")
+@Refby("0")
+type MAttributeinstance {
+	!MAttributesetinstance;/* 0 */
+	!MAttribute;
+	AdClient ID;
+	AdOrg ID;
+	?MAttributevalue;
+	?Value String;
+	?ValueNumber Number;
+};
+

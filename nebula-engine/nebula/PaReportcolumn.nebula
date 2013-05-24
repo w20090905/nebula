@@ -1,0 +1,34 @@
+@Remarks("Column in Report")
+@Refby("2")
+type PaReportcolumn {
+	!PaReportcolumn ID;
+	AdClient ID;
+	AdOrg ID;
+	PaReportcolumnset;
+	Name;
+	Seqno SeqNo;
+	?Description;
+	IsPrintEd YesNo;/* 'Y'  */
+	PostIngtype Attr;
+	?GlBudget;
+	Columntype Attr;
+	?Relativeperiod Number;
+	?Currencytype Attr;
+	?Calculationtype Attr;
+	?Amounttype Attr;
+	?CCurrency;
+	?IsAdhocconversion YesNo;/* 'N' */
+	?Oper1 PaReportcolumn;
+	?Oper2 PaReportcolumn;
+	?Elementtype Attr;
+	?Org AdOrg;
+	?CElementvalue;
+	?CProject;
+	?CBpartner;
+	?MProduct;
+	?CCampaign;
+	?CLocation;
+	?CSalesRegion;
+	?CActivity;
+};
+

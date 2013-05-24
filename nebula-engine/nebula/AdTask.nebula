@@ -1,0 +1,15 @@
+@Remarks("Operation System Task")
+@Refby("8")
+type AdTask {
+	!AdTask ID;
+	AdClient;
+	AdOrg;
+	Name;
+	?Description;
+	?Help;
+	AccessLevel Attr;
+	OsCommand Note;
+	EntityType AdEntityType;/* 'D'  */
+	IsServerProcess YesNo;/* 'N'  */
+};
+

@@ -1,0 +1,14 @@
+@Remarks("Web Project Domain handling")
+@Refby("0")
+type CmWebprojectDomain {
+	!CmWebprojectDomain ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	CmWebproject;
+	?CmContainer;
+	Fqdn Description;
+};
+

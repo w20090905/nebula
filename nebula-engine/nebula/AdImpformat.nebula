@@ -1,0 +1,13 @@
+@Remarks("Import Format")
+@Refby("3")
+type AdImpformat {
+	!AdImpformat ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	AdTable;
+	FormAttype Attr;
+	Processing YesNo;
+};
+

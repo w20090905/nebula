@@ -1,0 +1,13 @@
+@Remarks("Knowledge Entry Comment")
+@Refby("0")
+type KComment {
+	!KComment ID;
+	AdClient ID;
+	AdOrg ID;
+	KEntry;
+	Rating YesNo;
+	IsPublic YesNo;/* 'Y'  */
+	?AdSession;
+	TextMsg Note;
+};
+

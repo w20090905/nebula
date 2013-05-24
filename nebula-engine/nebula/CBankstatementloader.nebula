@@ -1,0 +1,27 @@
+@Remarks("Definition of Bank Statement Loader (SWIFT, OFX)")
+@Refby("0")
+type CBankstatementloader {
+	!CBankstatementloader ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	CBankaccount;
+	?Stmtloaderclass Description;
+	?Financialinstitutionid String;
+	?Branchid String;
+	?Userid Description;
+	?Password String;
+	?Pin PIN;
+	?Accountno AccountNo;
+	?Hostaddress Name;
+	?Hostport Long;
+	?ProxyAddress Name;
+	?ProxyPort Number;
+	?ProxyLogon Description;
+	?ProxyPassword Description;
+	?Filename Name;
+	?DateLastrun Date;
+	?DateFormAt String;
+};
+

@@ -1,0 +1,23 @@
+@Remarks("User Asset Registration")
+@Refby("1")
+type ARegistration {
+	!ARegistration ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	?AAsset;
+	?MProduct;
+	?CBpartner;
+	?AdUser;
+	IsRegistered YesNo;/* 'N'  */
+	IsInproduction YesNo;/* 'N'  */
+	IsAllowpublish YesNo;/* 'Y'  */
+	?RemoteHost Host;
+	?RemoteAddr Name;
+	?Processing YesNo;
+	?Assetservicedate Date;
+	?Note;
+};
+

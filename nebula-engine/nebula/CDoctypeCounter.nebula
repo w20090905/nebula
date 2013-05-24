@@ -1,0 +1,16 @@
+@Remarks("Counter Document Relationship")
+@Refby("0")
+type CDoctypeCounter {
+	!CDoctypeCounter ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	CDoctype;
+	?CounterCDoctype CDoctype;
+	IsValid YesNo;/* 'N'  */
+	?Processing YesNo;
+	?Docaction Attr;
+	IsCreateCounter YesNo;/* 'Y'  */
+};
+

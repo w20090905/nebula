@@ -1,0 +1,10 @@
+@Remarks("Web Properties")
+@Refby("0")
+type UWebProperties {
+	!UWebProperties ID;
+	AdClient ID;
+	AdOrg ID;
+	UKey Note;
+	UValue Note;
+};
+

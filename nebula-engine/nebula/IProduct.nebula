@@ -1,0 +1,53 @@
+@Remarks("Import Item or Service")
+@Refby("0")
+type IProduct {
+	!IProduct ID;
+	?AdClient ID;
+	?AdOrg ID;
+	IIsImported YesNo;/* 'N'  */
+	?IErrorMsg Note;
+	?MProduct;
+	?Value String;
+	?Name;
+	?Description;
+	?DocumentNote Note;
+	?Help;
+	?Upc UPC;
+	?Sku String;
+	?X12de355 String;
+	?CUom;
+	?ProductCategoryValue Description;
+	?MProductCategory;
+	?ProductType Attr;/* 'I' */
+	?ClassIfication YesNo;
+	?Volume Number;/* 0 */
+	?Weight;/* 0 */
+	?Shelfwidth Width;
+	?Shelfheight Height;
+	?Shelfdepth Depth;
+	?Unitsperpallet Number;
+	?Discontinued YesNo;/* 'N' */
+	?Discontinuedby Date;
+	?ImageUrl URL;
+	?Descriptionurl URL;
+	?BpartnerValue Description;
+	?CBpartner;
+	?IsOCode String;
+	?CCurrency;
+	?PriceList Price;/* 0 */
+	?PricePo Price;/* 0 */
+	?Royaltyamt Amount;/* 0 */
+	?PriceEffective Price;
+	?Vendorproductno String;
+	?Vendorcategory String;
+	?Manufacturer String;
+	?OrderMin Number;/* 0 */
+	?OrderPack Number;/* 0 */
+	?Costperorder Number;/* 0 */
+	?DeliveryTimePromised Number;
+	?Processing YesNo;
+	?Processed YesNo;/* 'N' */
+	?PriceStd Price;
+	?PriceLimit Price;
+};
+

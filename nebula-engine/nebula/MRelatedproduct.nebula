@@ -1,0 +1,12 @@
+@Remarks("Product Related")
+@Refby("0")
+type MRelatedproduct {
+	!MProduct;
+	!Relatedproduct MProduct;
+	!Relatedproducttype Attr;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+};
+

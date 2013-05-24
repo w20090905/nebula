@@ -1,0 +1,12 @@
+@Remarks("Account Element")
+@Refby("0")
+type CElementvalueTrl {
+	!CElementvalue;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	IsTranslated YesNo;/* 'N'  */
+};
+

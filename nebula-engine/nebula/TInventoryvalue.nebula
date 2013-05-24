@@ -1,0 +1,28 @@
+@Remarks("T_InventoryValue")
+@Refby("0")
+type TInventoryvalue {
+	!AdPinstance;
+	!MWarehouse;
+	!MProduct;
+	!MAttributesetinstance;
+	?AdClient ID;
+	?AdOrg ID;
+	?MPriceListVersion;
+	?DateValue Date;
+	?CCurrency;
+	?QtyOnhand Quantity;/* 0 */
+	?PricePo Price;/* 0 */
+	?PriceList Price;/* 0 */
+	?PriceStd Price;/* 0 */
+	?PriceLimit Price;/* 0 */
+	?Coststandard Number;/* 0 */
+	?Cost Number;/* 0 */
+	?PricePoamt Amount;/* 0 */
+	?PriceListamt Amount;/* 0 */
+	?PriceStdamt Amount;/* 0 */
+	?PriceLimitamt Amount;/* 0 */
+	?Coststandardamt Number;/* 0 */
+	?Costamt Number;/* 0 */
+	?MCostelement;
+};
+

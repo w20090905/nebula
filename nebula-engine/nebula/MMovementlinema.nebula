@@ -1,0 +1,10 @@
+@Remarks("M_MovementLineMA")
+@Refby("0")
+type MMovementlinema {
+	!MMovementline;
+	!MAttributesetinstance;
+	AdClient ID;
+	AdOrg ID;
+	?Movementqty Quantity;
+};
+

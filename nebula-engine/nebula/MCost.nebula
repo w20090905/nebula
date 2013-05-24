@@ -1,0 +1,19 @@
+@Remarks("Product Cost")
+@Refby("0")
+type MCost {
+	!AdClient;
+	!AdOrg;
+	!MProduct;
+	!MCosttype;
+	!CAcctschema;
+	!MCostelement;
+	!MAttributesetinstance;
+	Currentcostprice Price;
+	Currentqty Quantity;/* 0  */
+	?Cumulatedamt Amount;/* 0 */
+	?Cumulatedqty Quantity;/* 0 */
+	?Futurecostprice Price;
+	?Description;
+	?Percent;/* 0 */
+};
+

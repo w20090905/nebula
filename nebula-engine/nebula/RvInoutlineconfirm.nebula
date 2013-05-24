@@ -1,0 +1,29 @@
+@Remarks("")
+@Refby("0")
+type RvInoutlineconfirm {
+	MInoutconfirm ID;
+	MInoutlineconfirm ID;
+	AdClient ID;
+	AdOrg ID;
+	Targetqty Quantity;
+	Confirmedqty Quantity;
+	?Differenceqty Quantity;
+	?Scrappedqty Quantity;
+	?Description;
+	Processed YesNo;
+	MInout ID;
+	DocumentNo Long;
+	Confirmtype Attr;
+	IsApproved YesNo;
+	IsCancelled YesNo;
+	CBpartner ID;
+	CBpartnerLocation ID;
+	MWarehouse ID;
+	?COrder ID;
+	IsSotrx YesNo;
+	MInoutline ID;
+	?MProduct ID;
+	?MAttributesetinstance ID;
+	?MLocator ID;
+};
+

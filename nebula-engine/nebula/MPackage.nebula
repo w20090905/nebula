@@ -1,0 +1,16 @@
+@Remarks("Shipment Package")
+@Refby("1")
+type MPackage {
+	!MPackage ID;
+	AdClient ID;
+	AdOrg ID;
+	DocumentNo Long;
+	MInout;
+	?Description;
+	MShipper;
+	?Trackinginfo Note;
+	?DateReceived Date;
+	?Receivedinfo Note;
+	?Shipdate Date;
+};
+

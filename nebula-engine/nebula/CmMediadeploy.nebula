@@ -1,0 +1,13 @@
+@Remarks("Media Deployment Log")
+@Refby("0")
+type CmMediadeploy {
+	!CmMediadeploy ID;
+	AdClient ID;
+	AdOrg ID;
+	CmMediaServer;
+	CmMedia;
+	IsDeployed YesNo;/* 'N'  */
+	?Lastsynchronized Date;
+	?Description;
+};
+

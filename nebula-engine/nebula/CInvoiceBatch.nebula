@@ -1,0 +1,19 @@
+@Remarks("Expense Invoice Batch Header")
+@Refby("1")
+type CInvoiceBatch {
+	!CInvoiceBatch ID;
+	AdClient ID;
+	AdOrg ID;
+	DocumentNo Long;
+	?Description;
+	DateDoc Date;
+	IsSotrx YesNo;/* 'N'  */
+	SalesRep AdUser;
+	CCurrency;
+	?CConversionType;
+	Controlamt Amount;/* 0  */
+	DocumentAmt Amount;/* 0  */
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+};
+

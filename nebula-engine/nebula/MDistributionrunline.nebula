@@ -1,0 +1,15 @@
+@Remarks("Distribution Run Lines define Distribution List, the Product and Quantiries")
+@Refby("1")
+type MDistributionrunline {
+	!MDistributionrunline ID;
+	AdClient ID;
+	AdOrg ID;
+	MDistributionrun;
+	Line Long;
+	?Description;
+	MDistributionlist;
+	MProduct;
+	TotalQty Quantity;/* 0  */
+	Minqty Quantity;/* 0  */
+};
+

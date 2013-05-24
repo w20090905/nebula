@@ -1,0 +1,17 @@
+@Remarks("Document Archive")
+@Refby("0")
+type AdArchive {
+	!AdArchive ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	?AdTable;
+	?Record ID;
+	?AdProcess;
+	?Binarydata Note;
+	?CBpartner;
+	IsReport YesNo;/* 'Y'  */
+};
+

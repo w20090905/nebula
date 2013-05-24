@@ -1,0 +1,15 @@
+@Remarks("Change Notice")
+@Refby("6")
+type MChangeNotice {
+	!MChangeNotice ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	?Detailinfo Note;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	IsApproved YesNo;/* 'N'  */
+};
+

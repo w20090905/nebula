@@ -1,0 +1,17 @@
+@Remarks("T_DistributionRunDetail")
+@Refby("0")
+type TDistributionrundetail {
+	!MDistributionrun;
+	!MDistributionrunline;
+	!MDistributionlist;
+	!MDistributionlistline;
+	AdClient ID;
+	AdOrg ID;
+	Ratio;
+	Minqty Quantity;/* 0  */
+	Qty Quantity;/* 0  */
+	MProduct;
+	CBpartner;
+	CBpartnerLocation;
+};
+

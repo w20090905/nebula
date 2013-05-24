@@ -1,0 +1,15 @@
+@Remarks("Issue Project")
+@Refby("2")
+type RIsSueproject {
+	!RIsSueproject ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?AAsset;
+	?CProject;
+	?Statisticsinfo Description;
+	?Profileinfo Description;
+	SystemStatus Attr;
+};
+

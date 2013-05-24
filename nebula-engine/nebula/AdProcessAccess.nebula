@@ -1,0 +1,10 @@
+@Remarks("Process Access")
+@Refby("0")
+type AdProcessAccess {
+	!AdProcess;
+	!AdRole;
+	AdClient;
+	AdOrg;
+	IsReadwrite YesNo;/* 'Y'  */
+};
+

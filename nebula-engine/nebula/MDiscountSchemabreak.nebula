@@ -1,0 +1,15 @@
+@Remarks("Trade Discount Break")
+@Refby("0")
+type MDiscountSchemabreak {
+	!MDiscountSchemabreak ID;
+	AdClient ID;
+	AdOrg ID;
+	MDiscountSchema;
+	Seqno SeqNo;
+	Breakvalue Number;
+	Breakdiscount Count;
+	?MProductCategory;
+	?MProduct;
+	IsBpartnerFlatdiscount YesNo;/* 'N'  */
+};
+

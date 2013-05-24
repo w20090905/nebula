@@ -1,0 +1,17 @@
+@Remarks("Adempiere Alert")
+@Refby("2")
+type AdAlert {
+	!AdAlert ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	AlertSubject Description;
+	AlertMessage Note;
+	EnforceClientSecurity YesNo;/* 'Y'  */
+	EnforceRoleSecurity YesNo;/* 'Y'  */
+	?AdAlertProcessor;
+	IsValid YesNo;/* 'Y'  */
+};
+

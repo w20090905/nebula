@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+type RvCInvoiceCustomervendqtr {
+	AdClient ID;
+	AdOrg ID;
+	CBpartner ID;
+	Vendor ID;
+	?DateInvoiceD Date;
+	?LineNetamt Long;
+	?LineListamt Long;
+	?LineLimitamt Long;
+	?LineDiscountamt Long;
+	?LineDiscount Long;
+	?LineOverlimitamt Long;
+	?LineOverlimit Long;
+	?QtyInvoiced Quantity;
+};
+

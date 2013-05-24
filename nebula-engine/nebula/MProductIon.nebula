@@ -1,0 +1,21 @@
+@Remarks("Plan for producing a product")
+@Refby("1")
+type MProductIon {
+	!MProductIon ID;
+	AdClient ID;
+	AdOrg;
+	Name;
+	?Description;
+	Movementdate Date;
+	IsCreateD YesNo;/* 'N'  */
+	PostEd YesNo;/* 'N'  */
+	Processed YesNo;/* 'N'  */
+	?Processing YesNo;
+	?AdOrgtrx AdOrg;
+	?CProject;
+	?CCampaign;
+	?CActivity;
+	?User1 CElementvalue;
+	?User2 CElementvalue;
+};
+

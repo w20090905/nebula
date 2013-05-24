@@ -1,0 +1,11 @@
+@Remarks("Maintain Print Font")
+@Refby("4")
+type AdPrintFont {
+	!AdPrintFont ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	IsDefault YesNo;/* 'N'  */
+	Code Note;
+};
+

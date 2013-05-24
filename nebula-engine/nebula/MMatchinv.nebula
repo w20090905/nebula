@@ -1,0 +1,20 @@
+@Remarks("Match Shipment/Receipt to Invoice")
+@Refby("0")
+type MMatchinv {
+	!MMatchinv ID;
+	AdClient ID;
+	AdOrg ID;
+	MInoutline;
+	CInvoiceLine;
+	?MProduct;
+	DateTrx Date;
+	Qty Quantity;/* 0  */
+	Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	PostEd YesNo;/* 'N'  */
+	?DocumentNo Long;
+	?DateAcct Date;
+	?MAttributesetinstance ID;
+	?Description;
+};
+

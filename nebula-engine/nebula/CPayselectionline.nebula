@@ -1,0 +1,21 @@
+@Remarks("Payment Selection Line")
+@Refby("0")
+type CPayselectionline {
+	!CPayselectionline ID;
+	AdClient ID;
+	AdOrg ID;
+	CPayselection;
+	Line Long;
+	?Description;
+	PaymentRule Name;
+	IsManual YesNo;/* 'Y'  */
+	CInvoice;
+	Payamt Amount;/* 0  */
+	Differenceamt Amount;/* 0  */
+	?CPayselectioncheck;
+	Processed YesNo;/* 'N'  */
+	DiscountAmt Amount;/* 0  */
+	Openamt Amount;/* 0  */
+	IsSotrx YesNo;/* 'N'  */
+};
+

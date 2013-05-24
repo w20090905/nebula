@@ -1,0 +1,20 @@
+@Remarks("Schedule for generating Invoices")
+@Refby("1")
+type CInvoiceSchedule {
+	!CInvoiceSchedule ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	IsAmount YesNo;/* 'N'  */
+	?Amt Amount;/* 0 */
+	InvoiceFrequency YesNo;
+	?InvoiceWeekday YesNo;
+	?InvoiceWeekdaycutoff YesNo;
+	?Eveninvoiceweek YesNo;/* 'Y'
+                             */
+	?InvoiceDay Number;
+	?InvoiceDaycutoff Number;
+	IsDefault YesNo;/* 'N'  */
+};
+

@@ -1,0 +1,20 @@
+@Remarks("Restriction of what will be shown in Report Line")
+@Refby("1")
+type PaReportsource {
+	!PaReportsource ID;
+	AdClient ID;
+	AdOrg ID;
+	?Description;
+	PaReportline;
+	Elementtype Attr;
+	?Org AdOrg;
+	?CElementvalue;
+	?CProject;
+	?CBpartner;
+	?MProduct;
+	?CCampaign;
+	?CLocation;
+	?CSalesRegion;
+	?CActivity;
+};
+

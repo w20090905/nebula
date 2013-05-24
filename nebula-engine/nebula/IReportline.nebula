@@ -1,0 +1,27 @@
+@Remarks("Import Report Line Set values")
+@Refby("0")
+type IReportline {
+	!IReportline ID;
+	?AdClient ID;
+	?AdOrg ID;
+	IIsImported YesNo;/* 'N'  */
+	?IErrorMsg Note;
+	?Reportlinesetname Name;
+	?PaReportlineset;
+	?Name;
+	?PaReportline;
+	?Description;
+	?Seqno SeqNo;
+	?IsSummary YesNo;/* 'N' */
+	?IsPrintEd YesNo;/* 'Y' */
+	?LineType Attr;
+	?Calculationtype Attr;
+	?Amounttype Attr;
+	?PostIngtype Attr;
+	?PaReportsource;
+	?CElementvalue;
+	?Elementvalue Description;
+	?Processing YesNo;
+	?Processed YesNo;/* 'N' */
+};
+

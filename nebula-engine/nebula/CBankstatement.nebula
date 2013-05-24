@@ -1,0 +1,27 @@
+@Remarks("Bank Statement of account")
+@Refby("2")
+type CBankstatement {
+	!CBankstatement ID;
+	AdClient ID;
+	AdOrg ID;
+	CBankaccount;
+	Name;
+	?Description;
+	IsManual YesNo;/* 'Y'  */
+	Statementdate Date;
+	?Beginningbalance Number;/* 0 */
+	Endingbalance Number;/* 0  */
+	?Statementdifference Number;/* 0 */
+	?CreateFrom YesNo;/* 'N'
+                            */
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	PostEd YesNo;/* 'N'  */
+	?Eftstatementreference Description;
+	?Eftstatementdate Date;
+	?Matchstatement YesNo;
+	IsApproved YesNo;/* 'N'  */
+	Docstatus Attr;
+	Docaction Attr;
+};
+

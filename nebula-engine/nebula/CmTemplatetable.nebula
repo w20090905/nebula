@@ -1,0 +1,14 @@
+@Remarks("CM Template Table Link")
+@Refby("2")
+type CmTemplatetable {
+	!CmTemplatetable ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	CmTemplate;
+	AdTable;
+	?WhereClause Note;
+	?OtherClause Note;
+};
+

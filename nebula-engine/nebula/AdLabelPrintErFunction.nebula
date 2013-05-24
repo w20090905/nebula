@@ -1,0 +1,15 @@
+@Remarks("Function of Label Printer")
+@Refby("1")
+type AdLabelPrintErFunction {
+	!AdLabelPrintErFunction ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	AdLabelPrintEr;
+	?FunctionPrefix Description;
+	?FunctionSuffix Description;
+	IsXyposition YesNo;/* 'N'  */
+	?Xyseparator String;
+};
+

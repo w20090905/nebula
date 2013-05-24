@@ -1,0 +1,15 @@
+@Remarks("Standard Project Type Task")
+@Refby("1")
+type CTask {
+	!CTask ID;
+	AdClient ID;
+	AdOrg ID;
+	Seqno SeqNo;
+	Name;
+	?Description;
+	?Help;
+	CPhase;
+	?MProduct;
+	StandardQty Quantity;/* 0  	  */
+};
+

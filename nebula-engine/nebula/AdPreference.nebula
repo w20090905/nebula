@@ -1,0 +1,12 @@
+@Remarks("Personal Preference")
+@Refby("0")
+type AdPreference {
+	!AdPreference ID;
+	AdClient;
+	AdOrg;
+	?AdWindow;
+	?AdUser;
+	Attribute Description;
+	Value String;
+};
+

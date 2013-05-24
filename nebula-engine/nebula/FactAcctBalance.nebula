@@ -1,0 +1,31 @@
+@Remarks("Fact_Acct_Balance")
+@Refby("0")
+type FactAcctBalance {
+	AdClient;
+	AdOrg;
+	CAcctschema;
+	DateAcct Date;
+	Account CElementvalue;
+	PostIngtype Attr;
+	?MProduct;
+	?CBpartner;
+	?CProject;
+	?AdOrgtrx AdOrg;
+	?CSalesRegion;
+	?CActivity;
+	?CCampaign;
+	?CLocto CLocation;
+	?CLocfrom CLocation;
+	?User1 CElementvalue;
+	?User2 CElementvalue;
+	?GlBudget;
+	AmtAcctdr Amount;/* 0  */
+	AmtAcctcr Amount;/* 0  */
+	Qty Quantity;/* 0  */
+	?CSubacct;
+	?Userelement1 ID;
+	?Userelement2 ID;
+	?CProjectPhase;
+	?CProjectTask;
+};
+

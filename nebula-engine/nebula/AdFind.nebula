@@ -1,0 +1,14 @@
+@Remarks("Find")
+@Refby("0")
+type AdFind {
+	!AdFind ID;
+	Find ID;
+	AdClient ID;
+	AdOrg ID;
+	Andor YesNo;
+	AdColumn;
+	Operation String;
+	Value String;
+	?Value2 Description;
+};
+

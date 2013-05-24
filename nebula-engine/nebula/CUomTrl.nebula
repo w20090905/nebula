@@ -1,0 +1,13 @@
+@Remarks("Unit of Measure")
+@Refby("0")
+type CUomTrl {
+	!CUom;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	?Uomsymbol String;
+	Name;
+	?Description;
+	IsTranslated YesNo;/* 'N'  */
+};
+

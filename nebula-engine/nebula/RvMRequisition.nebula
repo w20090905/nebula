@@ -1,0 +1,28 @@
+@Remarks("")
+@Refby("0")
+type RvMRequisition {
+	MRequisition ID;
+	AdClient ID;
+	AdOrg ID;
+	DocumentNo Long;
+	?Description;
+	?Help;
+	AdUser ID;
+	MPriceList ID;
+	MWarehouse ID;
+	IsApproved YesNo;
+	PriorityRule Attr;
+	DateRequired Date;
+	TotalLines Count;
+	Docaction Attr;
+	Docstatus Attr;
+	Processed YesNo;
+	MRequisitionline ID;
+	Line Long;
+	Qty Quantity;
+	?MProduct ID;
+	?LineDescription Description;
+	PriceActual Price;
+	LineNetamt Long;
+};
+

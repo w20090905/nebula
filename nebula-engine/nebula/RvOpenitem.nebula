@@ -1,0 +1,31 @@
+@Remarks("")
+@Refby("0")
+type RvOpenitem {
+	?AdOrg ID;
+	?AdClient ID;
+	?DocumentNo Long;
+	?CInvoice ID;
+	?COrder ID;
+	?CBpartner ID;
+	?IsSotrx YesNo;
+	?DateInvoiceD Date;
+	?DateAcct Date;
+	?Netdays Count;
+	?Duedate Date;
+	?DaysDue Number;
+	?DiscountDate Date;
+	?DiscountAmt Amount;
+	?GrandTotal Number;
+	?Paidamt Amount;
+	?Openamt Amount;
+	?CCurrency ID;
+	?CConversionType ID;
+	?CPaymentTerm ID;
+	?IsPayschedulevalid YesNo;
+	?CInvoicePayschedule ID;
+	?InvoiceCollectiontype Attr;
+	?CCampaign ID;
+	?CProject ID;
+	?CActivity ID;
+};
+

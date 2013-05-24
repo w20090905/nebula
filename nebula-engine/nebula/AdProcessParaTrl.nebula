@@ -1,0 +1,13 @@
+@Remarks("Process Parameter Trl")
+@Refby("0")
+type AdProcessParaTrl {
+	!AdProcessPara;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	IsTranslated YesNo;/* 'N'  */
+};
+

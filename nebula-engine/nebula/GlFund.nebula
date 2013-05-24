@@ -1,0 +1,15 @@
+@Remarks("General Ledger Funds Control")
+@Refby("1")
+type GlFund {
+	!GlFund ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	CAcctschema;
+	Amt Amount;/* 0  */
+	?DateFrom Date;
+	?DateTo Date;
+};
+

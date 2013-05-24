@@ -1,0 +1,13 @@
+@Remarks("Dunning Rules for overdue invoices")
+@Refby("3")
+type CDunning {
+	!CDunning ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Senddunningletter YesNo;/* 'Y'  */
+	IsDefault YesNo;/* 'N'  */
+	CreateLevelssequentially YesNo;/* 'N'  */
+};
+

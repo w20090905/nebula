@@ -1,0 +1,13 @@
+@Remarks("Collection of windows, reports")
+@Refby("0")
+type AdWorkbenchTrl {
+	!AdWorkbench;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	IsTranslated YesNo;/* 'N'  */
+};
+

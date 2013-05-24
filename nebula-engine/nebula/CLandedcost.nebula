@@ -1,0 +1,16 @@
+@Remarks("Landed Cost")
+@Refby("0")
+type CLandedcost {
+	!CLandedcost ID;
+	AdClient ID;
+	AdOrg ID;
+	?Description;
+	CInvoiceLine;
+	MCostelement;
+	?MInoutline;
+	?MInout;
+	?MProduct;
+	Landedcostdistribution YesNo;
+	?Processing YesNo;
+};
+

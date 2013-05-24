@@ -1,0 +1,16 @@
+@Remarks("Web Store Mail Message Template")
+@Refby("2")
+type WMailmsg {
+	!WMailmsg ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	WStore;
+	Mailmsgtype Attr;
+	Subject;
+	Message Description;
+	?Message2 Description;
+	?Message3 Description;
+};
+

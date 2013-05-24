@@ -1,0 +1,11 @@
+@Remarks("A_RegistrationValue")
+@Refby("0")
+type ARegistrationvalue {
+	!ARegistration;
+	!ARegistrationattribute;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+};
+

@@ -1,0 +1,21 @@
+@Remarks("Data entry or display window")
+@Refby("17")
+type AdWindow {
+	!AdWindow ID;
+	AdClient;
+	AdOrg;
+	Name;
+	?Description;
+	?Help;
+	?Windowtype Attr;
+	IsSotrx YesNo;/* 'Y'  */
+	EntityType AdEntityType;/* 'D'  */
+	?Processing YesNo;
+	?AdImage;
+	?AdColor;
+	IsDefault YesNo;/* 'N' */
+	?Winheight Height;
+	?Winwidth Width;
+	IsBetaFunctionality YesNo;/* 'N'  */
+};
+

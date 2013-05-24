@@ -1,0 +1,13 @@
+@Remarks("Issue System")
+@Refby("2")
+type RIsSuesystem {
+	!RIsSuesystem ID;
+	AdClient ID;
+	AdOrg ID;
+	Dbaddress Name;
+	?Statisticsinfo Description;
+	?Profileinfo Description;
+	SystemStatus Attr;
+	?AAsset;
+};
+

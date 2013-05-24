@@ -1,0 +1,13 @@
+@Remarks("ASP Tab")
+@Refby("0")
+type AspTab {
+	AdClient ID;/* NULL   */
+	AdOrg ID;/* NULL   */
+	!AdTab;
+	!AdWindow;
+	!AspLevel;
+	AspStatus Attr;/* 'U'  */
+	?Allfields YesNo;/* 'Y'  */
+	?Processing YesNo;
+};
+

@@ -1,0 +1,84 @@
+@Remarks("Payment identifier")
+@Refby("16")
+type CPayment {
+	!CPayment ID;
+	AdClient ID;
+	AdOrg;
+	DocumentNo Long;
+	DateTrx Date;
+	IsReceipt YesNo;/* 'Y'  */
+	CDoctype;
+	Trxtype Attr;
+	CBankaccount;
+	?CBpartner;
+	?CInvoice;
+	?CBpBankaccount;
+	?CPaymentBatch;
+	TenderType Attr;
+	?CreditcardType Attr;
+	?CreditcardNumber String;
+	?CreditcardVv String;
+	?CreditcardExpmm Number;
+	?CreditcardExpyy Number;
+	?Micr String;
+	?Routingno String;
+	?Accountno AccountNo;
+	?Checkno String;
+	?AName Name;
+	?AStreet Name;
+	?ACity Name;
+	?AState Name;
+	?AZip Name;
+	?AIdentDl String;
+	?AIdentSsn String;
+	?AEmail Email;
+	?VoiceAuthcode String;
+	?OrigTrxid String;
+	?Ponum Description;
+	CCurrency;
+	Payamt Amount;/* 0  */
+	?DiscountAmt Amount;/* 0 */
+	?WriteoffAmt Amount;/* 0 */
+	?TaxAmt Amount;/* 0 */
+	IsApproved YesNo;/* 'N'  */
+	?RPnref String;
+	?RResult String;
+	?RRespmsg Description;
+	?RAuthcode String;
+	?RAvsaddr YesNo;
+	?RAvszip YesNo;
+	?RInfo Note;
+	?Processing YesNo;
+	?Oprocessing YesNo;
+	Docstatus Attr;
+	Docaction Attr;
+	IsReconciled YesNo;/* 'N'  */
+	IsAllocated YesNo;/* 'N'  */
+	IsOnline YesNo;/* 'N'  */
+	Processed YesNo;/* 'N'  */
+	PostEd YesNo;/* 'N'  */
+	IsOverunderpayment YesNo;/* 'N'  */
+	?Overunderamt Amount;/* 0 */
+	?ACountry Description;
+	?CProject;
+	IsSelfservice YesNo;/* 'N' */
+	?ChargeAmt Amount;/* 0 */
+	?CCharge;
+	IsDelayedcapture YesNo;/* 'N'  */
+	?RAuthcodeDc String;
+	?RCvv2match YesNo;
+	?RPnrefDc String;
+	?Swipe String;
+	?AdOrgtrx AdOrg;
+	?CCampaign;
+	?CActivity;
+	?User1 CElementvalue;
+	?User2 CElementvalue;
+	?CConversionType;
+	?Description;
+	DateAcct Date;
+	?COrder;
+	IsPrepayment YesNo;/* 'N'  */
+	?RefPayment CPayment;
+};
+

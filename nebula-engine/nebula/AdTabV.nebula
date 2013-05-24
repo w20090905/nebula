@@ -1,0 +1,40 @@
+@Remarks("")
+@Refby("0")
+type AdTabV {
+	AdTab ID;
+	AdWindow ID;
+	AdTable ID;
+	Name;
+	?Description;
+	?Help;
+	Seqno SeqNo;
+	IsSinglerow YesNo;
+	Hastree YesNo;
+	?IsInfotab YesNo;
+	Replicationtype Attr;
+	Tablename Name;
+	AccessLevel Attr;
+	IsSecurityenabled YesNo;
+	IsDeleteable YesNo;
+	IsHighvolume YesNo;
+	IsView YesNo;
+	?Hasassociation YesNo;
+	IsTranslationtab YesNo;
+	IsReadonly YesNo;
+	?AdImage ID;
+	Tablevel Long;
+	?WhereClause Note;
+	?OrderbyClause Note;
+	?Commitwarning Note;
+	?ReadonlyLogic Note;
+	?DisplayLogic Note;
+	?AdColumn ID;
+	?AdProcess ID;
+	IsSorttab YesNo;
+	IsInsertrecord YesNo;
+	IsAdvancedtab YesNo;
+	?AdColumnsortorder ID;
+	?AdColumnsortyesno ID;
+	?IncludedTab ID;
+};
+

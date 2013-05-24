@@ -1,0 +1,21 @@
+@Remarks("C_BankAccount_Acct")
+@Refby("0")
+type CBankaccountAcct {
+	!CBankaccount;
+	!CAcctschema;
+	AdClient ID;
+	AdOrg ID;
+	BIntransitAcct CValidcombination;
+	BAssetAcct CValidcombination;
+	BExpenseAcct CValidcombination;
+	BInterestRevAcct CValidcombination;
+	BInterestExpAcct CValidcombination;
+	BUnidentifiedAcct CValidcombination;
+	BUnallocatedcashAcct CValidcombination;
+	BPaymentSelectAcct CValidcombination;
+	BSettlementgainAcct CValidcombination;
+	BSettlementlossAcct CValidcombination;
+	BRevaluationgainAcct CValidcombination;
+	BRevaluationlossAcct CValidcombination;
+};
+

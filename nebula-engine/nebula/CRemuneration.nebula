@@ -1,0 +1,17 @@
+@Remarks("Remuneration")
+@Refby("2")
+type CRemuneration {
+	!CRemuneration ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	RemunerationType Attr;
+	StandardHours Number;/* 0  */
+	GrossRamt Amount;/* 0  */
+	GrossRcost Number;/* 0  */
+	Overtimeamt Amount;/* 0  */
+	Overtimecost Number;/* 0  */
+};
+

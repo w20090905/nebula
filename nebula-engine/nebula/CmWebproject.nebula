@@ -1,0 +1,20 @@
+@Remarks("A web project is the main data container for Containers, URLs, Ads, Media etc.")
+@Refby("12")
+type CmWebproject {
+	!CmWebproject ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	MetaCopyright Note;
+	MetaPublisher Note;
+	MetaRobotstag Note;
+	MetaAuthor Note;
+	MetaContent Note;
+	AdTreecmc AdTree;
+	AdTreecms AdTree;
+	AdTreecmm AdTree;
+	AdTreecmt AdTree;
+};
+

@@ -1,0 +1,13 @@
+@Remarks("Sub account for Element Value")
+@Refby("3")
+type CSubacct {
+	!CSubacct ID;
+	AdClient ID;
+	AdOrg ID;
+	Value String;
+	Name;
+	?Description;
+	?Help;
+	CElementvalue;
+};
+

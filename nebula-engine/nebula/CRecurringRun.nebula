@@ -1,0 +1,15 @@
+@Remarks("Recurring Document Run")
+@Refby("0")
+type CRecurringRun {
+	!CRecurringRun ID;
+	AdClient ID;
+	AdOrg ID;
+	?CPayment;
+	?COrder;
+	?CInvoice;
+	?CProject;
+	?GlJournalbatch;
+	CRecurring;
+	?DateDoc Date;
+};
+

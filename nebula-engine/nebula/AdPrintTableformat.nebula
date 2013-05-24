@@ -1,0 +1,36 @@
+@Remarks("Table Format in Reports")
+@Refby("1")
+type AdPrintTableformat {
+	!AdPrintTableformat ID;
+	AdClient ID;
+	AdOrg ID;
+	?HdrPrintFont AdPrintFont;
+	?HdrTextfgPrintColor AdPrintColor;
+	?HdrTextbgPrintColor AdPrintColor;
+	?HdrLinePrintColor AdPrintColor;
+	?FunctPrintFont AdPrintFont;
+	?FunctbgPrintColor AdPrintColor;
+	?FunctfgPrintColor AdPrintColor;
+	?LinePrintColor AdPrintColor;
+	?Description;
+	IsPaintBoundarylines YesNo;/* 'N'  */
+	IsPaintHlines YesNo;/* 'N'  */
+	IsPaintVlines YesNo;/* 'N'  */
+	IsPrintFunctionsymbols YesNo;/* 'Y'  */
+	Name;
+	IsDefault YesNo;/* 'N'  */
+	?ImageUrl URL;
+	?HeaderLeft Note;
+	?HeaderCenter Note;
+	?HeaderRight Note;
+	?FooterLeft Note;
+	?FooterCenter Note;
+	?FooterRight Note;
+	?ImageIsattached YesNo;/* 'N' */
+	?HdrStroke Number;
+	?LineStroke Long;
+	?HdrStroketype Attr;
+	?LineStroketype Attr;
+	IsPaintHeaderlines YesNo;/* 'Y'  */
+};
+

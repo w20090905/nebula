@@ -1,0 +1,15 @@
+@Remarks("Asset Registration Attribute")
+@Refby("2")
+type ARegistrationattribute {
+	!ARegistrationattribute ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Seqno SeqNo;/* 0  */
+	AdReference;
+	?Columnname Name;
+	?AdReferenceValue AdReference;
+	IsSelfservice YesNo;/* 'Y'  */
+};
+

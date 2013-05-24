@@ -1,0 +1,11 @@
+@Remarks("Position Category")
+@Refby("1")
+type CJobcategory {
+	!CJobcategory ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+};
+

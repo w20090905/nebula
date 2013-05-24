@@ -1,0 +1,25 @@
+@Remarks("Acct.Schema Element")
+@Refby("0")
+type CAcctschemaElement {
+	!CAcctschemaElement ID;
+	AdOrg;
+	CAcctschema;
+	Elementtype Attr;
+	Name;
+	Seqno SeqNo;
+	?CElement;
+	AdClient;
+	IsMandatory YesNo;/* 'N'  */
+	IsBalanceD YesNo;/* 'N'  */
+	?Org AdOrg;
+	?CElementvalue;
+	?MProduct;
+	?CBpartner;
+	?CLocation;
+	?CSalesRegion;
+	?CProject;
+	?CCampaign;
+	?CActivity;
+	?AdColumn;
+};
+

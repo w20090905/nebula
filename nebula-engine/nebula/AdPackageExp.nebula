@@ -1,0 +1,20 @@
+@Remarks("AD_Package_Exp_ID")
+@Refby("0")
+type AdPackageExp {
+	!AdPackageExp ID;
+	AdClient ID;
+	AdOrg ID;
+	?AdPackageType String;
+	Email;
+	Instructions Note;
+	Name;
+	?Processed YesNo;
+	ReleaseNo String;
+	Version String;
+	Username Name;
+	Processing YesNo;
+	PkVersion String;
+	FileDirectory Note;
+	Description;
+};
+

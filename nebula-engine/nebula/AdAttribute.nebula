@@ -1,0 +1,31 @@
+@Remarks("System Attribute")
+@Refby("1")
+type AdAttribute {
+	!AdAttribute ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	AdTable;
+	AdReference;
+	?AdReferenceValue AdReference;
+	?AdValRule;
+	?Callout Description;
+	?ValueMin String;
+	?ValueMax String;
+	?Defaultvalue Note;
+	IsReadonly YesNo;/* 'N'  */
+	IsUpdateable YesNo;/* 'Y'  */
+	IsMandatory YesNo;/* 'N'  */
+	IsEncrypted YesNo;/* 'N'  */
+	?FieldLength Length;
+	?DisplayLength Length;
+	?DisplayLogic Note;
+	?Vformat Description;
+	IsSameline YesNo;/* 'N'  */
+	IsHeading YesNo;/* 'N'  */
+	IsFieldOnly YesNo;/* 'N'  */
+	?Seqno SeqNo;
+};
+

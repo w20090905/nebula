@@ -1,0 +1,14 @@
+@Remarks("Checks, Transfers, etc.")
+@Refby("0")
+type CBankaccountdoc {
+	!CBankaccountdoc ID;
+	AdClient ID;
+	AdOrg ID;
+	CBankaccount;
+	Name;
+	?Description;
+	PaymentRule Name;
+	Currentnext Number;
+	?CheckPrintFormat AdPrintFormat;
+};
+

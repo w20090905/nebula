@@ -1,0 +1,37 @@
+@Remarks("")
+@Refby("0")
+type GlJournallineAcctV {
+	GlJournalline ID;
+	AdClient ID;
+	AdOrg ID;
+	GlJournal ID;
+	Line Long;
+	IsGenerated YesNo;
+	?Description;
+	AmtSourcedr Amount;
+	AmtSourcecr Amount;
+	CCurrency ID;
+	CConversionType ID;
+	Currencyrate Number;
+	DateAcct Date;
+	AmtAcctdr Amount;
+	AmtAcctcr Amount;
+	?CUom ID;
+	?Qty Quantity;
+	CValidcombination ID;
+	CAcctschema ID;
+	Account ID;
+	?MProduct ID;
+	?CBpartner ID;
+	?AdOrgtrx ID;
+	?CLocfrom ID;
+	?CLocto ID;
+	?CSalesRegion ID;
+	?CProject ID;
+	?CCampaign ID;
+	?User1 ID;
+	?User2 ID;
+	IsFullyqualified YesNo;
+	?CActivity ID;
+};
+

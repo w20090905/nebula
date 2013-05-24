@@ -1,0 +1,34 @@
+@Remarks("Workflow or combination of tasks")
+@Refby("13")
+type AdWorkflow {
+	!AdWorkflow ID;
+	AdClient;
+	AdOrg;
+	Name;
+	?Description;
+	?Help;
+	AccessLevel Attr;
+	EntityType AdEntityType;/* 'D'  */
+	?Durationunit YesNo;
+	Author String;/* 'ComPiere' */
+	Version Number;/* 0 */
+	?Validfrom Date;
+	?Validto Date;
+	?Priority;
+	?Limit Number;
+	Duration Number;/* 0 */
+	Cost Number;/* 0 */
+	Workingtime Long;/* 0 */
+	Waitingtime Long;/* 0 */
+	?AdWfResponsible;
+	Publishstatus Attr;/* NULL */
+	?AdWorkflowprocessor;
+	Value String;
+	IsDefault YesNo;/* 'N'  */
+	?AdTable;
+	?Validateworkflow YesNo;
+	Workflowtype Attr;/* 'G'  */
+	?Docvaluelogic Note;
+	IsValid YesNo;/* 'N'  */
+};
+

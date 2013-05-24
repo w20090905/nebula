@@ -1,0 +1,13 @@
+@Remarks("Period Control")
+@Refby("0")
+type CPeriodcontrol {
+	!CPeriodcontrol ID;
+	AdClient ID;
+	AdOrg ID;
+	CPeriod;
+	Docbasetype Attr;
+	?Periodstatus Attr;
+	Periodaction YesNo;
+	?Processing YesNo;
+};
+

@@ -1,0 +1,35 @@
+@Remarks("Field on a database table")
+@Refby("4")
+type AdField {
+	!AdField ID;
+	AdClient;
+	AdOrg;
+	Name;
+	?Description;
+	?Help;
+	IsCentrallyMaintained YesNo;/* 'Y'
+                              */
+	AdTab;
+	?AdColumn;
+	?AdFieldGroup;
+	IsDisplayEd YesNo;/* 'Y'  */
+	?DisplayLogic Note;
+	?DisplayLength Length;
+	IsReadonly YesNo;/* 'N'  */
+	?Seqno SeqNo;
+	?Sortno SeqNo;
+	IsSameline YesNo;/* 'N'  */
+	IsHeading YesNo;/* 'N'  */
+	IsFieldOnly YesNo;/* 'N'  */
+	IsEncrypted YesNo;/* 'N'  */
+	EntityType AdEntityType;/* 'D'  */
+	?Obscuretype Attr;
+	?AdReference;
+	?IsMandatory YesNo;
+	?IncludedTab ID;
+	?Defaultvalue Note;
+	?AdReferenceValue AdReference;/* NULL */
+	?AdValRule;/* NULL */
+	?Infofactoryclass Note;
+};
+

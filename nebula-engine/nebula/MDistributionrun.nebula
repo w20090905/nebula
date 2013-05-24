@@ -1,0 +1,14 @@
+@Remarks("Distribution Run create Orders to distribute products to a selected list of partners")
+@Refby("2")
+type MDistributionrun {
+	!MDistributionrun ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	IsCreateSingleorder YesNo;/* 'N'  */
+	?CBpartner;
+	?CBpartnerLocation;
+	?Processing YesNo;
+};
+

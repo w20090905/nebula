@@ -1,0 +1,16 @@
+@Remarks("System Entity Type")
+@Refby("37")
+type AdEntityType {
+	!EntityType String;/* 'D'  */
+	AdClient ID;
+	AdOrg ID;
+	AdEntityType ID;
+	Name;
+	?Description;
+	?Help;
+	?Version String;
+	?Modelpackage Note;
+	?ClassPath Note;
+	?Processing YesNo;
+};
+

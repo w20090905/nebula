@@ -1,0 +1,37 @@
+@Remarks("Request for Quotation")
+@Refby("2")
+type CRfq {
+	!CRfq ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	CRfqTopic;
+	CCurrency;
+	DateResponse Date;
+	IsRfqresponseaccepted YesNo;/* 'Y'  */
+	?DateWorkstart Date;
+	?DeliveryDays Count;/* 0 */
+	?DateWorkcomplete Date;
+	Quotetype Attr;
+	IsQuotetotalamt YesNo;/* 'N'  */
+	IsQuoteallqty YesNo;/* 'Y'  */
+	IsSelfservice YesNo;/* 'N'  */
+	IsInvitedvendorsonly YesNo;/* 'N'  */
+	?CBpartner;
+	?CBpartnerLocation;
+	?AdUser;
+	SalesRep AdUser;
+	?Margin Number;
+	?CreateSo YesNo;
+	?CreatePo YesNo;
+	?Publishrfq YesNo;
+	?COrder;
+	?Copylines YesNo;
+	?Rankrfq YesNo;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	DocumentNo Long;/* '.'  */
+};
+

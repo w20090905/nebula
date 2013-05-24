@@ -1,0 +1,12 @@
+@Remarks("The actual training class instance")
+@Refby("0")
+type STrainingClass {
+	!STrainingClass ID;
+	AdClient ID;
+	AdOrg ID;
+	STraining;
+	MProduct;
+	Startdate Date;
+	Enddate Date;
+};
+

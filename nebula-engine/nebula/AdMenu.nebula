@@ -1,0 +1,21 @@
+@Remarks("Identifies a Menu")
+@Refby("3")
+type AdMenu {
+	!AdMenu ID;
+	AdClient;
+	AdOrg;
+	Name;
+	?Description;
+	IsSummary YesNo;/* 'N'  */
+	IsSotrx YesNo;/* 'Y'  */
+	IsReadonly YesNo;/* 'N'  */
+	?Action YesNo;
+	?AdWindow;
+	?AdWorkflow;
+	?AdTask;
+	?AdProcess;
+	?AdForm;
+	?AdWorkbench;
+	EntityType AdEntityType;/* 'D'  */
+};
+

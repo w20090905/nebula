@@ -1,0 +1,14 @@
+@Remarks("ASP Level")
+@Refby("9")
+type AspLevel {
+	AdClient ID;/* NULL   */
+	AdOrg ID;/* NULL   */
+	!AspLevel ID;
+	AspModule;
+	?Description;
+	?Help;
+	Name;
+	?Processing YesNo;
+	Value String;
+};
+

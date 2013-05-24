@@ -1,0 +1,15 @@
+@Remarks("Product Lot Control")
+@Refby("3")
+type MLotctl {
+	!MLotctl ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Startno SeqNo;
+	Incrementno SeqNo;
+	Currentnext Number;
+	?Prefix String;
+	?Suffix String;
+};
+

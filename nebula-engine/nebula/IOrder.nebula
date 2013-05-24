@@ -1,0 +1,62 @@
+@Remarks("Import Orders")
+@Refby("0")
+type IOrder {
+	!IOrder ID;
+	?AdClient ID;
+	?AdOrg;
+	?AdOrgtrx AdOrg;
+	IIsImported YesNo;/* 'N'  */
+	?IErrorMsg Note;
+	?Processing YesNo;
+	?Processed YesNo;/* 'N' */
+	?SalesRep AdUser;
+	?MWarehouse;
+	?MPriceList;
+	?CCurrency;
+	?MShipper;
+	?IsSotrx YesNo;/* 'Y' */
+	?CBpartner;
+	?BpartnerValue Description;
+	?Name;
+	?CBpartnerLocation;
+	?Billto CBpartnerLocation;
+	?CLocation;
+	?Address1 Name;
+	?Address2 Name;
+	?PostAl Code;
+	?City Name;
+	?CRegion;
+	?Regionname Name;
+	?CCountry;
+	?CountryCode Code;
+	?AdUser;
+	?Contactname Name;
+	?Email;
+	?Phone PhoneNumber;
+	?CProject;
+	?CActivity;
+	?CDoctype;
+	?DoctypeName Name;
+	?CPaymentTerm;
+	?PaymentTermvalue Description;
+	?COrder;
+	?DocumentNo Long;
+	?DateOrdered Date;
+	?DateAcct Date;
+	?Description;
+	?MProduct;
+	?ProductValue Description;
+	?Upc UPC;
+	?Sku String;
+	?CTax;
+	?TaxIndicator String;
+	?TaxAmt Amount;/* 0 */
+	?COrderline;
+	?LineDescription Description;
+	?CUom;
+	?QtyOrdered Quantity;/* 0 */
+	?PriceActual Price;/* 0 */
+	?FreightAmt Amount;/* 0 */
+	?CCampaign;
+};
+

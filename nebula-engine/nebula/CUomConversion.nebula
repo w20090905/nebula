@@ -1,0 +1,13 @@
+@Remarks("Unit of Measure Conversion")
+@Refby("0")
+type CUomConversion {
+	!CUomConversion ID;
+	AdClient;
+	AdOrg;
+	CUom;
+	CUomTo CUom;
+	Multiplyrate Number;/* 0  */
+	Dividerate Number;/* 0  */
+	?MProduct;
+};
+

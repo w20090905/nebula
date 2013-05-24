@@ -1,0 +1,14 @@
+@Remarks("Dunning Run")
+@Refby("1")
+type CDunningRun {
+	!CDunningRun ID;
+	AdClient ID;
+	AdOrg ID;
+	DunningDate Date;
+	CDunningLevel;
+	Processed YesNo;/* 'N'  */
+	?Processing YesNo;
+	?Sendit YesNo;
+	?Description;
+};
+

@@ -1,0 +1,30 @@
+@Remarks("Test ID")
+@Refby("0")
+type Test {
+	!Test ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	?TInteger Number;
+	?TNumber Number;/* 0 */
+	?TDate Date;
+	?TDateTime Time;
+	?CUom ID;
+	?TQty Quantity;/* 0 */
+	?CCurrency ID;
+	?TAmount Amount;/* 0 */
+	?CLocation ID;
+	?AccountAcct CValidcombination;
+	?CPayment ID;
+	?MProduct ID;
+	?CBpartner ID;
+	?MLocator ID;
+	?Processing YesNo;
+	?Binarydata Note;
+	?Processed YesNo;/* 'N' 
+                      */
+	?Characterdata Note;
+};
+

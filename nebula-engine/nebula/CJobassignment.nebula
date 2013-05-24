@@ -1,0 +1,13 @@
+@Remarks("Position Assignment")
+@Refby("0")
+type CJobassignment {
+	!CJobassignment ID;
+	AdClient ID;
+	AdOrg ID;
+	AdUser;
+	CJob;
+	Validfrom Date;
+	?Validto Date;
+	?Description;
+};
+

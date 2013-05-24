@@ -1,0 +1,11 @@
+@Remarks("B_Buyer")
+@Refby("2")
+type BBuyer {
+	!AdUser;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Validto Date;
+};
+

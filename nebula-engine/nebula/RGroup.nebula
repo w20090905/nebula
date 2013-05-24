@@ -1,0 +1,13 @@
+@Remarks("Request Group")
+@Refby("3")
+type RGroup {
+	!RGroup ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	?MBom;
+	?MChangeNotice;
+};
+

@@ -1,0 +1,13 @@
+@Remarks("Cost Element")
+@Refby("6")
+type MCostelement {
+	!MCostelement ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Costelementtype Attr;
+	?Costingmethod YesNo;
+	IsCalculated YesNo;/* 'N'  */
+};
+

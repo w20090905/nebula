@@ -1,0 +1,12 @@
+@Remarks("Request Status Category")
+@Refby("2")
+type RStatuscategory {
+	!RStatuscategory ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	IsDefault YesNo;/* 'N'  */
+};
+

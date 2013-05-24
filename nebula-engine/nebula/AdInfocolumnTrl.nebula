@@ -1,0 +1,13 @@
+@Remarks("Info Window Column")
+@Refby("0")
+type AdInfocolumnTrl {
+	!AdInfocolumn;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	IsTranslated YesNo;/* 'N'  */
+	Name;
+	?Description;
+	?Help;
+};
+

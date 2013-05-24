@@ -1,0 +1,42 @@
+@Remarks("Tab within a Window")
+@Refby("8")
+type AdTab {
+	!AdTab ID;
+	AdClient;
+	AdOrg;
+	Name;
+	?Description;
+	?Help;
+	AdTable;
+	AdWindow;
+	Seqno SeqNo;
+	Tablevel Long;
+	IsSinglerow YesNo;/* 'Y'
+                         */
+	?IsInfotab YesNo;/* 'N'
+                         */
+	IsTranslationtab YesNo;/* 'N'
+                         */
+	IsReadonly YesNo;/* 'N'
+                         */
+	?AdColumn;
+	Hastree YesNo;/* 'N'
+                         */
+	?WhereClause Note;
+	?OrderbyClause Note;
+	?Commitwarning Note;
+	?AdProcess;
+	?Processing YesNo;
+	?AdImage;
+	?Importfields YesNo;
+	?AdColumnsortorder AdColumn;
+	?AdColumnsortyesno AdColumn;
+	IsSorttab YesNo;/* 'N'  */
+	EntityType AdEntityType;/* 'D'  */
+	?IncludedTab AdTab;
+	?ReadonlyLogic Note;
+	?DisplayLogic Note;
+	IsInsertrecord YesNo;/* 'Y'  */
+	IsAdvancedtab YesNo;/* 'N'  */
+};
+

@@ -1,0 +1,10 @@
+@Remarks("AD_Form_Access")
+@Refby("0")
+type AdFormAccess {
+	!AdForm;
+	!AdRole;
+	AdClient ID;
+	AdOrg ID;
+	IsReadwrite YesNo;/* 'Y'  */
+};
+

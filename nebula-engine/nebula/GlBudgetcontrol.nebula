@@ -1,0 +1,16 @@
+@Remarks("Budget Control")
+@Refby("0")
+type GlBudgetcontrol {
+	!GlBudgetcontrol ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	CAcctschema;
+	GlBudget;
+	Commitmenttype Attr;
+	IsBeforeapproval YesNo;/* 'N'  */
+	Budgetcontrolscope YesNo;
+};
+

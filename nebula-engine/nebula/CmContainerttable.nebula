@@ -1,0 +1,15 @@
+@Remarks("Container Template Table")
+@Refby("0")
+type CmContainerttable {
+	!CmContainerttable ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	CmContainer;
+	CmTemplatetable;
+	?Record ID;
+	?WhereClause Note;
+	?OtherClause Note;
+};
+

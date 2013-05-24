@@ -1,0 +1,26 @@
+@Remarks("Cost Detail Information")
+@Refby("0")
+type MCostdetail {
+	!MCostdetail ID;
+	AdClient;
+	AdOrg;
+	CAcctschema;
+	MProduct;
+	MAttributesetinstance;
+	?MCostelement;
+	?COrderline;
+	?MInoutline;
+	?CInvoiceLine;
+	?MMovementline;
+	?MInventoryline;
+	?MProductIonline;
+	?CProjectIssue;
+	IsSotrx YesNo;/* 'Y'  */
+	Amt Amount;/* 0  */
+	Qty Quantity;/* 0  */
+	?Deltaamt Amount;/* 0 */
+	?Deltaqty Quantity;/* 0 */
+	?Description;
+	Processed YesNo;/* 'N'  */
+};
+

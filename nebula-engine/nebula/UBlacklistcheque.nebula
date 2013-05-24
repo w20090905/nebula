@@ -1,0 +1,10 @@
+@Remarks("Black List Cheque")
+@Refby("0")
+type UBlacklistcheque {
+	!UBlacklistcheque ID;
+	AdClient ID;
+	AdOrg ID;
+	Bankname Name;
+	Chequeno Description;
+};
+

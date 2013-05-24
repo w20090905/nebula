@@ -1,0 +1,16 @@
+@Remarks("Marketing Campaign")
+@Refby("26")
+type CCampaign {
+	!CCampaign ID;
+	AdClient ID;
+	AdOrg ID;
+	Value String;
+	Name;
+	?Description;
+	?CChannel;
+	?Startdate Date;
+	?Enddate Date;
+	Costs Number;/* 0  */
+	IsSummary YesNo;/* 'N'  */
+};
+

@@ -1,0 +1,14 @@
+@Remarks("Web Broadcast Server")
+@Refby("1")
+type CmBroadcastserver {
+	!CmBroadcastserver ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	IpAddress String;
+	?Lastsynchronized Date;
+	?CmWebproject;
+};
+

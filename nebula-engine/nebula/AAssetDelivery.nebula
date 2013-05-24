@@ -1,0 +1,24 @@
+@Remarks("Delivery of Asset")
+@Refby("0")
+type AAssetDelivery {
+	!AAssetDelivery ID;
+	AdClient ID;
+	AdOrg ID;
+	AAsset;
+	Movementdate Date;
+	?Serno Description;
+	?Lot Description;
+	?Versionno String;
+	?MInoutline;
+	?Email;
+	?Messageid String;
+	?DeliveryConfirmation String;
+	?Url URL;
+	?RemoteAddr Name;
+	?RemoteHost Host;
+	?Referrer Note;
+	?AdUser;
+	?Description;
+	?MProductDownload;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("Label Printer Definition")
+@Refby("2")
+type AdLabelPrintEr {
+	!AdLabelPrintEr ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+};
+

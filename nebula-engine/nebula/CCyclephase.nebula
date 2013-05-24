@@ -1,0 +1,9 @@
+@Remarks("C_CyclePhase")
+@Refby("0")
+type CCyclephase {
+	!CCyclestep;
+	!CPhase;
+	AdClient ID;
+	AdOrg ID;
+};
+

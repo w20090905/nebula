@@ -1,0 +1,18 @@
+@Remarks("System Element enables the central maintenance of column description and help.")
+@Refby("0")
+type AdElementTrl {
+	!AdElement;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	PrintName Name;
+	?Description;
+	?Help;
+	?PoName Name;
+	?PoPrintName Name;
+	?PoDescription Description;
+	?PoHelp Note;
+	IsTranslated YesNo;/* 'N'  */
+};
+

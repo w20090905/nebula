@@ -1,0 +1,18 @@
+@Remarks("Repeated Training")
+@Refby("1")
+type STraining {
+	!STraining ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	?DocumentNote Note;
+	?ImageUrl URL;
+	?Descriptionurl URL;
+	MProductCategory;
+	CTaxCategory;
+	CUom;
+	?Processing YesNo;
+};
+

@@ -1,0 +1,22 @@
+@Remarks("Workflow Process Activity Event Audit Information")
+@Refby("0")
+type AdWfEventAudit {
+	!AdWfEventAudit ID;
+	AdClient ID;
+	AdOrg ID;
+	EventType Attr;
+	Wfstate Attr;
+	AdWfProcess;
+	AdWfNode;
+	AdTable;
+	Record ID;
+	AdWfResponsible;
+	?AdUser;
+	Elapsedtimems Number;
+	?Attributename Name;
+	?OldValue Note;
+	?NewValue Note;
+	?Description;
+	?TextMsg Note;
+};
+

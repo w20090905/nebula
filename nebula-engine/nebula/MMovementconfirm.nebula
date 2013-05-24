@@ -1,0 +1,18 @@
+@Remarks("Inventory Move Confirmation")
+@Refby("1")
+type MMovementconfirm {
+	!MMovementconfirm ID;
+	AdClient ID;
+	AdOrg ID;
+	MMovement;
+	?Description;
+	IsApproved YesNo;/* 'N'  */
+	?Approvalamt Amount;/* 0 */
+	Docaction Attr;
+	Docstatus Attr;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	?MInventory;
+	DocumentNo Long;
+};
+

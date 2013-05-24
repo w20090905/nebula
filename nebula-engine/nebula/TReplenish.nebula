@@ -1,0 +1,23 @@
+@Remarks("T_Replenish")
+@Refby("0")
+type TReplenish {
+	!AdPinstance;
+	!MWarehouse;
+	!MProduct;
+	AdClient ID;
+	AdOrg ID;
+	QtyOnhand Quantity;/* 0  */
+	QtyReserved Quantity;/* 0  */
+	QtyOrdered Quantity;/* 0  */
+	Replenishtype Attr;
+	LevelMin Long;/* 0  */
+	LevelMax Long;/* 0  */
+	CBpartner ID;
+	OrderMin Number;/* 0  */
+	OrderPack Number;/* 0  */
+	QtyToorder Quantity;/* 0  */
+	?Replenishmentcreate String;
+	?MWarehousesource MWarehouse;
+	?CDoctype;
+};
+

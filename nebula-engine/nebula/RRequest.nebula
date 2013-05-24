@@ -1,0 +1,64 @@
+@Remarks("Request from a Business Partner or Prospect")
+@Refby("6")
+type RRequest {
+	!RRequest ID;
+	AdClient ID;
+	AdOrg ID;
+	DocumentNo Long;
+	RRequestType;
+	?RGroup;
+	?RCategory;
+	?RStatus;
+	?RResolution;
+	?RRequestRelated RRequest;
+	Priority;
+	?PriorityUser YesNo;
+	Duetype Attr;
+	Summary Note;
+	Confidentialtype Attr;/* 'C' */
+	IsEscalated YesNo;/* 'N'  */
+	IsSelfservice YesNo;/* 'N'  */
+	?SalesRep AdUser;
+	?AdRole;
+	?DateLastaction Date;
+	?DateLastalert Date;
+	?Lastresult Note;
+	Processed YesNo;/* 'N'  */
+	IsInvoiceD YesNo;/* 'N'  */
+	?CBpartner;
+	?AdUser;
+	?CCampaign;
+	?COrder;
+	?CInvoice;
+	?CPayment;
+	?MProduct;
+	?CProject;
+	?AAsset;
+	?MInout;
+	?MRma;
+	?AdTable;
+	?Record ID;
+	RequestAmt Amount;/* 0  */
+	?RMailtext;
+	?Result Note;
+	Confidentialtypeentry YesNo;
+	?RStandardResponse;
+	?Nextaction YesNo;
+	?DateNextaction Date;
+	?Starttime Time;
+	?Endtime Time;
+	?QtySpent Quantity;/* 0 */
+	?QtyInvoiced Quantity;/* 0 */
+	?MProductSpent MProduct;
+	?CActivity;
+	?Startdate Date;
+	?Closedate Date;
+	?CInvoiceRequest CInvoice;
+	?MChangeRequest;
+	?Taskstatus Attr;
+	?QtyPlan Quantity;
+	?DateCompleteplan Date;
+	?DateStartplan Date;
+	?MFixchangenotice MChangeNotice;
+};
+

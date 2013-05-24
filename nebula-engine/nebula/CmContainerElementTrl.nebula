@@ -1,0 +1,14 @@
+@Remarks("Container element i.e. Headline, Content, Footer etc.")
+@Refby("0")
+type CmContainerElementTrl {
+	!CmContainerElement;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	IsTranslated YesNo;/* 'N'  */
+	?Contenthtml Note;
+	Name;
+	?Description;
+	?Help;
+};
+

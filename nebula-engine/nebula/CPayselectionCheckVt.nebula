@@ -1,0 +1,30 @@
+@Remarks("")
+@Refby("0")
+type CPayselectionCheckVt {
+	AdClient ID;
+	AdOrg ID;
+	?AdLanguage String;
+	CPayselection ID;
+	CPayselectioncheck ID;
+	?OrgLocation ID;
+	?TaxId Code;
+	?CDoctype ID;
+	?CBpartner ID;
+	?Bpvalue Description;
+	?Bptaxid Code;
+	?Naics NAICS;
+	?Duns String;
+	?Bpgreeting Description;
+	?Name;
+	?Name2 Name;
+	?CLocation ID;
+	?ReferenceNo Description;
+	?Poreference Name;
+	?Paydate Date;
+	Payamt Amount;
+	AmtInwords Amount;
+	Qty Quantity;
+	PaymentRule Name;
+	?DocumentNo Long;
+};
+

@@ -1,0 +1,11 @@
+@Remarks("C_Charge_Acct")
+@Refby("0")
+type CChargeAcct {
+	!CCharge;
+	!CAcctschema;
+	AdClient ID;
+	AdOrg ID;
+	ChExpenseAcct CValidcombination;
+	ChRevenueAcct CValidcombination;
+};
+

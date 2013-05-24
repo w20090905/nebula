@@ -1,0 +1,56 @@
+@Remarks("")
+@Refby("0")
+type CProjectHeaderVt {
+	AdClient ID;
+	AdOrg ID;
+	?AdLanguage String;
+	CProject ID;
+	Value String;
+	ProjectName Name;
+	?Description;
+	?Note;
+	IsSummary YesNo;
+	?ProjectCategory YesNo;
+	?OrgLocation ID;
+	TaxId Code;
+	?CProjectType ID;
+	?ProjectTypename Name;
+	?CPhase ID;
+	?ProjectPhasename Name;
+	?SalesRep ID;
+	?SalesRepName Name;
+	?CBpartner ID;
+	?Bpvalue Description;
+	?Bptaxid Code;
+	?Naics NAICS;
+	?Duns String;
+	?Bpgreeting Description;
+	?Name;
+	?Name2 Name;
+	?BpcontactGreeting Description;
+	?Title String;
+	?Phone PhoneNumber;
+	?Contactname Name;
+	?CLocation ID;
+	?ReferenceNo Description;
+	?PaymentTerm Description;
+	?PaymentTermnote Note;
+	?Poreference Name;
+	CCurrency ID;
+	?MPriceListVersion ID;
+	?CCampaign ID;
+	PlannedAmt Amount;
+	PlannedQty Quantity;
+	PlannedMarginamt Amount;
+	InvoiceDamt Amount;
+	InvoiceDqty Quantity;
+	ProjectBalanceAmt Amount;
+	IsCommitment YesNo;
+	CommittedAmt Amount;
+	CommittedQty Quantity;
+	?DateContract Date;
+	?DateFinish Date;
+	IsCommitceiling YesNo;
+	?MWarehouse ID;
+};
+

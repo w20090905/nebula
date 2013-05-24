@@ -1,0 +1,20 @@
+@Remarks("Time and Expense Report")
+@Refby("1")
+type STimeexpense {
+	!STimeexpense ID;
+	AdClient ID;
+	AdOrg ID;
+	DocumentNo Long;
+	CBpartner;
+	DateReport Date;
+	?Description;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	MPriceList;
+	MWarehouse;
+	IsApproved YesNo;/* 'N'  */
+	Docstatus Attr;
+	Docaction Attr;
+	?Approvalamt Amount;
+};
+

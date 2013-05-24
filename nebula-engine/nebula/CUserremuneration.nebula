@@ -1,0 +1,17 @@
+@Remarks("Employee Wage or Salary Overwrite")
+@Refby("0")
+type CUserremuneration {
+	!CUserremuneration ID;
+	AdClient ID;
+	AdOrg ID;
+	AdUser;
+	CRemuneration;
+	Validfrom Date;
+	?Validto Date;
+	GrossRamt Amount;/* 0  */
+	GrossRcost Number;/* 0  */
+	Overtimeamt Amount;/* 0  */
+	Overtimecost Number;/* 0  */
+	?Description;
+};
+

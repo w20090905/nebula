@@ -1,0 +1,17 @@
+@Remarks("AD_Package_Imp_Backup_ID")
+@Refby("0")
+type AdPackageImpBackup {
+	!AdPackageImpBackup ID;
+	AdClient ID;
+	AdOrg ID;
+	AdPackageImp ID;
+	AdPackageImpDetail ID;
+	?AdTable ID;
+	?AdColumn;
+	?AdReference;
+	?AdPackageImpBckDir Note;
+	?AdPackageImpOrgDir Note;
+	?Colvalue Note;
+	?Uninstall YesNo;
+};
+

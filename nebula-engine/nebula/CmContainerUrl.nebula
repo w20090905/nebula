@@ -1,0 +1,13 @@
+@Remarks("Contains info on used URLs")
+@Refby("0")
+type CmContainerUrl {
+	!CmContainerUrl ID;/* NULL
+ */
+	AdClient ID;
+	AdOrg ID;
+	CmContainer;
+	Checked Date;
+	Status Attr;
+	LastResult Note;
+};
+

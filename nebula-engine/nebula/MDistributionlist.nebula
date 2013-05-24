@@ -1,0 +1,13 @@
+@Remarks("Distribution Lists allow to distribute products to a selected list of partners")
+@Refby("3")
+type MDistributionlist {
+	!MDistributionlist ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	?Ratiototal Number;
+	?Processing YesNo;
+};
+

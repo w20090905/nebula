@@ -1,0 +1,16 @@
+@Remarks("Web Container Stage contains the staging content like images, text etc.")
+@Refby("0")
+type CmCstageTrl {
+	!CmCstage;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	IsTranslated YesNo;/* 'N'  */
+	Name;
+	?Title String;
+	?MetaDescription Note;
+	?MetaKeywords Note;
+	?Structurexml Note;
+	?Containerxml Note;
+};
+

@@ -1,0 +1,18 @@
+@Remarks("Request for Quotation Line Quantity")
+@Refby("1")
+type CRfqlineqty {
+	!CRfqlineqty ID;
+	AdClient ID;
+	AdOrg ID;
+	CRfqline;
+	CUom;
+	Qty Quantity;/* 0  */
+	?Margin Number;
+	IsPurchaseqty YesNo;/* 'N'  */
+	?Bestresponseamt Amount;/* 0 */
+	IsOfferqty YesNo;/* 'N'  */
+	?Offeramt Amount;/* 0 */
+	Benchmarkprice Price;/* 0  */
+	IsRfqqty YesNo;/* 'Y'  */
+};
+

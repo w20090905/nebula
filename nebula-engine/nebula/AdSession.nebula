@@ -1,0 +1,15 @@
+@Remarks("User Session Online or Web")
+@Refby("3")
+type AdSession {
+	!AdSession ID;
+	AdClient ID;
+	AdOrg ID;
+	?Websession String;
+	?RemoteAddr Name;
+	?RemoteHost Host;
+	Processed YesNo;/* 'N' */
+	?Description;
+	?AdRole;
+	?Logindate Date;
+};
+

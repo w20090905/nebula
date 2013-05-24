@@ -1,0 +1,22 @@
+@Remarks("Cash Journal Line")
+@Refby("3")
+type CCashLine {
+	!CCashLine ID;
+	AdClient ID;
+	AdOrg ID;
+	CCash;
+	Line Long;
+	?Description;
+	CashType Attr;
+	?CBankaccount;
+	?CCharge;
+	?CInvoice;
+	?CCurrency;
+	Amount;/* 0  */
+	?DiscountAmt Amount;/* 0 */
+	?WriteoffAmt Amount;/* 0 */
+	?IsGenerated YesNo;/* 'N'
+                         */
+	Processed YesNo;/* 'N'  */
+};
+

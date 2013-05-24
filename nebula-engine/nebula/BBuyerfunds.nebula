@@ -1,0 +1,13 @@
+@Remarks("Buyer Funds for Bids on Topics")
+@Refby("1")
+type BBuyerfunds {
+	!BBuyerfunds ID;
+	AdClient ID;
+	AdOrg ID;
+	AdUser BBuyer;
+	?COrder;
+	?CPayment;
+	CommittedAmt Amount;/* 0  */
+	Noncommittedamt Amount;/* 0  */
+};
+

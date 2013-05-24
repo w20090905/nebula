@@ -1,0 +1,18 @@
+@Remarks("Knowledge Entry")
+@Refby("4")
+type KEntry {
+	!KEntry ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	KTopic;
+	Rating YesNo;
+	IsPublic YesNo;/* 'Y'  */
+	?Keywords Note;
+	?KSource;
+	?Descriptionurl URL;
+	?Validto Date;
+	?AdSession;
+	TextMsg Note;
+};
+

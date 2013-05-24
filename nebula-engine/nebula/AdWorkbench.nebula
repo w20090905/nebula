@@ -1,0 +1,15 @@
+@Remarks("Collection of windows, reports")
+@Refby("6")
+type AdWorkbench {
+	!AdWorkbench ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	AdColumn;
+	?AdImage;
+	?AdColor;
+	EntityType AdEntityType;/* 'D'  */
+};
+

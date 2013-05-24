@@ -1,0 +1,12 @@
+@Remarks("Request Category")
+@Refby("3")
+type RCategory {
+	!RCategory ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	?MProduct;
+};
+

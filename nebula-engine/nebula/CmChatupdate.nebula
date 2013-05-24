@@ -1,0 +1,10 @@
+@Remarks("Chat Update")
+@Refby("0")
+type CmChatupdate {
+	!CmChat;
+	!AdUser;
+	AdClient ID;
+	AdOrg ID;
+	IsSelfservice YesNo;/* 'N'  */
+};
+

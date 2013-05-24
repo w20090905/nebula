@@ -1,0 +1,12 @@
+@Remarks("AD_Column_Access")
+@Refby("0")
+type AdColumnAccess {
+	!AdRole;
+	!AdColumn;
+	AdClient ID;
+	AdOrg ID;
+	IsReadonly YesNo;/* 'N'  	  */
+	IsExclude YesNo;/* 'Y'  	  */
+	?AdTable;
+};
+

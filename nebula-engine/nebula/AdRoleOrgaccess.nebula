@@ -1,0 +1,9 @@
+@Remarks("AD_Role_OrgAccess")
+@Refby("0")
+type AdRoleOrgaccess {
+	!AdRole;
+	!AdOrg;
+	AdClient ID;
+	IsReadonly YesNo;/* 'N'  */
+};
+

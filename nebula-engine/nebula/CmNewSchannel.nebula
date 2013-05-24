@@ -1,0 +1,14 @@
+@Remarks("News channel for rss feed")
+@Refby("2")
+type CmNewSchannel {
+	!CmNewSchannel ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	Description;
+	?Help;
+	?AdLanguage;
+	CmWebproject;
+	?Link Note;
+};
+

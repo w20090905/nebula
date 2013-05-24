@@ -1,0 +1,11 @@
+@Remarks("R_ContactInterest")
+@Refby("0")
+type RContactinterest {
+	RInterestArea;
+	AdClient ID;
+	AdOrg ID;
+	?Subscribedate Date;
+	?Optoutdate Date;
+	AdUser;
+};
+

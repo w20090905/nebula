@@ -1,0 +1,16 @@
+@Remarks("Request Update")
+@Refby("0")
+type RRequestUpdate {
+	!RRequestUpdate ID;
+	AdClient ID;
+	AdOrg ID;
+	RRequest;
+	Confidentialtypeentry YesNo;
+	?Starttime Time;
+	?Endtime Time;
+	?QtySpent Quantity;/* 0 */
+	?QtyInvoiced Quantity;/* 0 */
+	?MProductSpent MProduct;
+	?Result Note;
+};
+

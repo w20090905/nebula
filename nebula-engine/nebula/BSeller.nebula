@@ -1,0 +1,12 @@
+@Remarks("B_Seller")
+@Refby("2")
+type BSeller {
+	!AdUser;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Validto Date;
+	IsInternal YesNo;/* 'N'  */
+};
+

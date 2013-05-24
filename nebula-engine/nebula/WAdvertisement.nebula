@@ -1,0 +1,27 @@
+@Remarks("Web Advertisement")
+@Refby("0")
+type WAdvertisement {
+	!WAdvertisement ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	IsSelfservice YesNo;/* 'N'  	  */
+	CBpartner;
+	?AdUser;
+	?WClickcount;
+	?WCountercount;
+	?Validfrom Date;
+	?Validto Date;
+	?ImageUrl URL;
+	?Adtext Note;
+	?Webparam1 Note;
+	?Webparam2 Note;
+	?Webparam3 Note;
+	?Webparam4 Note;
+	Publishstatus Attr;/* NULL */
+	?Version Number;
+	?Processing YesNo;
+};
+

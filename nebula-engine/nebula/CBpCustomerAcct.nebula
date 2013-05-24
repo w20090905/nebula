@@ -1,0 +1,12 @@
+@Remarks("C_BP_Customer_Acct")
+@Refby("0")
+type CBpCustomerAcct {
+	!CBpartner;
+	!CAcctschema;
+	AdClient ID;
+	AdOrg ID;
+	?CReceivableAcct CValidcombination;
+	?CPrepaymentAcct CValidcombination;
+	?CReceivableServicesAcct Number;
+};
+

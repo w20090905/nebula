@@ -1,0 +1,32 @@
+@Remarks("")
+@Refby("0")
+type RvProjectLineissue {
+	?AdClient ID;
+	?AdOrg ID;
+	?CProject ID;
+	?MProduct ID;
+	?CProjectLine ID;
+	?Line Long;
+	?Description;
+	?PlannedQty Quantity;
+	?PlannedPrice Price;
+	?PlannedAmt Amount;
+	?PlannedMarginamt Amount;
+	?CommittedQty Quantity;
+	?CProjectIssue ID;
+	?MLocator ID;
+	?Movementqty Quantity;
+	?Movementdate Date;
+	?IsSueline Long;
+	?IsSuedescription Note;
+	?MInoutline ID;
+	?STimeexpenseline ID;
+	?CAcctschema ID;
+	?Account ID;
+	?AmtSourcedr Amount;
+	?AmtSourcecr Amount;
+	?AmtAcctdr Amount;
+	?AmtAcctcr Amount;
+	?LineMargin Long;
+};
+

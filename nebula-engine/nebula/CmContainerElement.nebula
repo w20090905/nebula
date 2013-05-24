@@ -1,0 +1,14 @@
+@Remarks("Container element i.e. Headline, Content, Footer etc.")
+@Refby("1")
+type CmContainerElement {
+	!CmContainerElement ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	CmContainer;
+	?Contenthtml Note;
+	IsValid YesNo;/* 'Y'  */
+};
+

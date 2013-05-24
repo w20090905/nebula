@@ -1,0 +1,18 @@
+@Remarks("AD_PInstance_Para")
+@Refby("0")
+type AdPinstancePara {
+	!AdPinstance;
+	!Seqno SeqNo;
+	?Parametername Name;
+	?PString Note;/* NULL */
+	?PStringTo Note;/* NULL */
+	?PNumber Number;/* NULL */
+	?PNumberTo Number;/* NULL */
+	?PDate Date;
+	?PDateTo Date;
+	?Info Description;
+	?InfoTo Description;
+	?AdClient ID;
+	?AdOrg ID;
+};
+

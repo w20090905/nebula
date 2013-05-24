@@ -1,0 +1,18 @@
+@Remarks("Business Partner Relation")
+@Refby("0")
+type CBpRelation {
+	!CBpRelation ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	CBpartner;
+	?CBpartnerLocation;
+	IsShipto YesNo;/* 'N'  	  */
+	IsBillto YesNo;/* 'N'  	  */
+	IsPayfrom YesNo;/* 'N'  	  */
+	IsRemitto YesNo;/* 'N'  	  */
+	CBpartnerRelation CBpartner;
+	CBpartnerRelationLocation CBpartnerLocation;
+};
+

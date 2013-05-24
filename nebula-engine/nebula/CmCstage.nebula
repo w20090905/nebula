@@ -1,0 +1,36 @@
+@Remarks("Container Stage contains the staging content like images, text etc.")
+@Refby("5")
+type CmCstage {
+	!CmCstage ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	CmWebproject;
+	?CmTemplate;
+	?Title String;
+	?Notice Note;
+	?Containertype Attr;
+	?Containerlinkurl URL;
+	?Relativeurl URL;
+	?Priority;/* 0  */
+	IsIndexed YesNo;/* 'Y'  */
+	IsSecure YesNo;/* 'Y'  */
+	?MetaRobotstag Note;
+	?MetaAuthor Note;
+	?MetaCopyright Note;
+	?MetaContent Note;
+	?MetaDescription Note;
+	?MetaKeywords Note;
+	?MetaPublisher Note;
+	?Structurexml Note;
+	?Containerxml Note;
+	?CmCstagelink CmCstage;
+	IsModified YesNo;
+	?Processing YesNo;
+	IsSummary YesNo;/* 'N'  */
+	?MetaLanguage Attr;
+	?IsValid YesNo;/* 'N'  */
+};
+

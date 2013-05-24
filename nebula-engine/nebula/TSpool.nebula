@@ -1,0 +1,8 @@
+@Remarks("Temporary Spool Table")
+@Refby("0")
+type TSpool {
+	!AdPinstance;
+	!Seqno SeqNo;
+	Msgtext Note;
+};
+

@@ -1,0 +1,25 @@
+@Remarks("Material Requisition")
+@Refby("1")
+type MRequisition {
+	!MRequisition ID;
+	AdClient ID;
+	AdOrg ID;
+	DocumentNo Long;
+	?Description;
+	?Help;
+	AdUser;
+	MPriceList;
+	MWarehouse;
+	IsApproved YesNo;/* 'Y'  */
+	PriorityRule Attr;
+	DateRequired Date;
+	TotalLines Count;/* 0  */
+	Docaction Attr;
+	Docstatus Attr;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	PostEd YesNo;/* 'N'  */
+	DateDoc Date;/* sysDate  */
+	CDoctype;
+};
+

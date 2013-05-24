@@ -1,0 +1,9 @@
+@Remarks("AD_User_Roles")
+@Refby("0")
+type AdUserRoleS {
+	!AdUser;
+	!AdRole;
+	AdClient;
+	AdOrg;
+};
+

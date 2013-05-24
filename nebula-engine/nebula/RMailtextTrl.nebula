@@ -1,0 +1,15 @@
+@Remarks("Text templates for mailings")
+@Refby("0")
+type RMailtextTrl {
+	!RMailtext;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	IsTranslated YesNo;/* 'N'  */
+	Name;
+	?Mailheader Note;/* NULL */
+	Mailtext Note;
+	?Mailtext2 Note;
+	?Mailtext3 Note;
+};
+

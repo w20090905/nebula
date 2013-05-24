@@ -1,0 +1,34 @@
+@Remarks("Temporary Reporting Table")
+@Refby("0")
+type TReport {
+	!AdPinstance;
+	!PaReportline;
+	!Record ID;
+	!FactAcct ID;
+	?Seqno SeqNo;
+	?Levelno SeqNo;/* 0 */
+	?Name;
+	?Description;
+	?Col0 Long;
+	?Col2 Long;
+	?Col1 Long;
+	?Col3 Long;
+	?Col4 Long;
+	?Col5 Long;
+	?Col6 Long;
+	?Col7 Long;
+	?Col8 Long;
+	?Col9 Long;
+	?Col10 Long;
+	?Col11 Long;
+	?Col12 Long;
+	?Col13 Long;
+	?Col14 Long;
+	?Col15 Long;
+	?Col16 Long;
+	?Col17 Long;
+	?Col18 Long;
+	?Col19 Long;
+	?Col20 Long;
+};
+

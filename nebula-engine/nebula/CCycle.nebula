@@ -1,0 +1,11 @@
+@Remarks("Identifier for this Project Reporting Cycle")
+@Refby("1")
+type CCycle {
+	!CCycle ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	CCurrency;
+};
+

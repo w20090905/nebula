@@ -1,0 +1,11 @@
+@Remarks("Print Label Line Format")
+@Refby("0")
+type AdPrintLabellineTrl {
+	!AdPrintLabelline;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	?PrintName Name;
+	IsTranslated YesNo;/* 'N'  */
+};
+

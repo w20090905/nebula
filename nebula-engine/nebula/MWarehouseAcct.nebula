@@ -1,0 +1,13 @@
+@Remarks("M_Warehouse_Acct")
+@Refby("0")
+type MWarehouseAcct {
+	!MWarehouse;
+	!CAcctschema;
+	AdClient ID;
+	AdOrg ID;
+	WInventoryAcct CValidcombination;
+	WInvactualadjustAcct CValidcombination;
+	WDifferencesAcct CValidcombination;
+	WRevaluationAcct CValidcombination;
+};
+

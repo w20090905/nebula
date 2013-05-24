@@ -1,0 +1,25 @@
+@Remarks("AD_ClientInfo")
+@Refby("0")
+type AdClientInfo {
+	!AdClient;
+	AdOrg ID;
+	IsDiscountLineAmt YesNo;/* 'Y'  */
+	?CCalendar;
+	?CAcctschema1 CAcctschema;
+	?CUomVolume CUom;
+	?CUomWeight CUom;
+	?CUomLength CUom;
+	?CUomTime CUom;
+	?AdTreeMenu AdTree;
+	?AdTreeOrg AdTree;
+	?AdTreeBpartner AdTree;
+	?AdTreeProject AdTree;
+	?AdTreeSalesRegion AdTree;
+	?AdTreeProduct AdTree;
+	?MProductFreight MProduct;
+	?CBpartnerCashTrx CBpartner;
+	?KeepLogdays Count;
+	?AdTreeActivity AdTree;
+	?AdTreeCampaign AdTree;
+};
+

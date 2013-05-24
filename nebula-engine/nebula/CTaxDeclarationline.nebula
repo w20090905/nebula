@@ -1,0 +1,21 @@
+@Remarks("Tax Declaration Document Information")
+@Refby("0")
+type CTaxDeclarationline {
+	!CTaxDeclarationline ID;
+	AdClient ID;
+	AdOrg ID;
+	Line Long;/* 0  */
+	?Description;
+	IsManual YesNo;/* 'N'  */
+	CTaxDeclaration;
+	CBpartner;
+	CTax;
+	?CInvoice;
+	?CInvoiceLine;
+	?CAllocationline;
+	CCurrency;
+	TaxBaseamt Amount;/* 0  */
+	TaxAmt Amount;/* 0  */
+	DateAcct Date;
+};
+

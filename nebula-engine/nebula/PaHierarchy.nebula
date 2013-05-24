@@ -1,0 +1,19 @@
+@Remarks("Reporting Hierarchy")
+@Refby("1")
+type PaHierarchy {
+	!PaHierarchy ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	AdTreeOrg AdTree;
+	AdTreeBpartner AdTree;
+	AdTreeProject AdTree;
+	AdTreeSalesRegion AdTree;
+	AdTreeProduct AdTree;
+	AdTreeCampaign AdTree;
+	AdTreeActivity AdTree;
+	AdTreeAccount AdTree;
+};
+

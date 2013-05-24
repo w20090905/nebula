@@ -1,0 +1,12 @@
+@Remarks("System Message")
+@Refby("0")
+type AdMessageTrl {
+	!AdMessage;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Msgtext Note;
+	?Msgtip Note;
+	IsTranslated YesNo;/* 'N'  */
+};
+

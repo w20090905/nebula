@@ -1,0 +1,11 @@
+@Remarks("Product downloads")
+@Refby("1")
+type MProductDownload {
+	!MProductDownload ID;
+	AdClient ID;
+	AdOrg ID;
+	MProduct;
+	Name;
+	Downloadurl URL;
+};
+

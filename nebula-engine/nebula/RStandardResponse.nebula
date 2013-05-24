@@ -1,0 +1,10 @@
+@Remarks("Request Standard Response")
+@Refby("1")
+type RStandardResponse {
+	!RStandardResponse ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	Responsetext Note;
+};
+

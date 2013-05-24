@@ -1,0 +1,11 @@
+@Remarks("Exclude the ability to enter Attribute Sets")
+@Refby("0")
+type MAttributesetexclude {
+	!MAttributesetexclude ID;
+	AdClient ID;
+	AdOrg ID;
+	MAttributeset;
+	AdTable;
+	IsSotrx YesNo;/* 'Y'  */
+};
+

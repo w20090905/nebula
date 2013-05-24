@@ -1,0 +1,11 @@
+@Remarks("C_InterOrg_Acct")
+@Refby("0")
+type CInterorgAcct {
+	!CAcctschema;
+	!AdOrg;
+	!AdOrgto AdOrg;
+	AdClient ID;
+	IntercompanyduetoAcct CValidcombination;
+	IntercompanyduefromAcct CValidcombination;
+};
+

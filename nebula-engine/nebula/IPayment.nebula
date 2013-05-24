@@ -1,0 +1,68 @@
+@Remarks("Import Payment")
+@Refby("0")
+type IPayment {
+	!IPayment ID;
+	?AdClient ID;
+	?AdOrg ID;
+	IIsImported YesNo;/* 'N'  */
+	?IErrorMsg Note;
+	?Processed YesNo;/* 'N' */
+	?CPayment;
+	?DocumentNo Long;
+	?DateTrx Date;
+	?IsReceipt YesNo;/* 'Y' */
+	?CDoctype;
+	?DoctypeName Name;
+	?Trxtype Attr;
+	?CBankaccount;
+	?Bankaccountno String;
+	?CBpartner;
+	?BpartnerValue Description;
+	?CInvoice;
+	?InvoiceDocumentNo String;
+	?TenderType Attr;
+	?CreditcardType Attr;
+	?CreditcardNumber String;
+	?CreditcardVv String;
+	?CreditcardExpmm Number;
+	?CreditcardExpyy Number;
+	?Micr String;
+	?Routingno String;
+	?Accountno AccountNo;
+	?Checkno String;
+	?AName Name;
+	?AStreet Name;
+	?ACity Name;
+	?AState Name;
+	?AZip Name;
+	?ACountry Description;
+	?AIdentDl String;
+	?AIdentSsn String;
+	?AEmail Email;
+	?VoiceAuthcode String;
+	?Swipe String;
+	?OrigTrxid String;
+	?Ponum Description;
+	?CCurrency;
+	?Payamt Amount;/* 0 */
+	?DiscountAmt Amount;/* 0 */
+	?WriteoffAmt Amount;/* 0 */
+	?IsOverunderpayment YesNo;/* 'N' */
+	?Overunderamt Amount;/* 0 */
+	?CCharge;
+	?ChargeName Name;
+	?ChargeAmt Amount;/* 0 */
+	?TaxAmt Amount;/* 0 */
+	?IsApproved YesNo;/* 'N' */
+	?IsSelfservice YesNo;/* 'N' */
+	?IsDelayedcapture YesNo;/* 'N' */
+	?RPnref String;
+	?RResult String;
+	?RRespmsg Description;
+	?RAuthcode String;
+	?RInfo Note;
+	?Processing YesNo;
+	?IsOCode String;
+	?DateAcct Date;
+};
+

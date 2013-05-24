@@ -1,0 +1,11 @@
+@Remarks("Logical grouping of fields")
+@Refby("0")
+type AdFieldGroupTrl {
+	!AdFieldGroup;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	IsTranslated YesNo;/* 'N'  */
+};
+

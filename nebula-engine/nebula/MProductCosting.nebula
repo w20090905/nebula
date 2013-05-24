@@ -1,0 +1,23 @@
+@Remarks("Product Costing")
+@Refby("0")
+type MProductCosting {
+	!MProduct;
+	!CAcctschema;
+	AdClient ID;
+	AdOrg ID;
+	Currentcostprice Price;/* 0  */
+	Futurecostprice Price;/* 0  */
+	Coststandard Number;/* 0  */
+	Coststandardpoqty Quantity;/* 0  */
+	Coststandardpoamt Number;/* 0  */
+	Coststandardcumqty Quantity;/* 0  */
+	Coststandardcumamt Number;/* 0  */
+	Costaverage Number;/* 0  */
+	Costaveragecumqty Quantity;/* 0  */
+	Costaveragecumamt Number;/* 0  */
+	PriceLastpo Price;/* 0  */
+	PriceLastinv Price;/* 0  */
+	TotalInvqty Quantity;/* 0  */
+	TotalInvamt Amount;/* 0  */
+};
+

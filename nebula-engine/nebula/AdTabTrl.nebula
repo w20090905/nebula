@@ -1,0 +1,14 @@
+@Remarks("Tab within a Window")
+@Refby("0")
+type AdTabTrl {
+	!AdTab;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	?Commitwarning Note;
+	IsTranslated YesNo;/* 'N'  */
+};
+

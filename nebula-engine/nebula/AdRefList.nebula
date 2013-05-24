@@ -1,0 +1,15 @@
+@Remarks("Reference List based on Table")
+@Refby("2")
+type AdRefList {
+	!AdRefList ID;
+	AdClient;
+	AdOrg;
+	Value String;
+	Name;
+	?Description;
+	AdReference;
+	?Validfrom Date;
+	?Validto Date;
+	EntityType AdEntityType;/* 'D'  */
+};
+

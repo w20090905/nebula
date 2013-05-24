@@ -1,0 +1,14 @@
+@Remarks("Request for Quotation Topic Subscriber")
+@Refby("1")
+type CRfqTopicsubscriber {
+	!CRfqTopicsubscriber ID;
+	AdClient ID;
+	AdOrg ID;
+	CRfqTopic;
+	CBpartner;
+	CBpartnerLocation;
+	?AdUser;
+	?Subscribedate Date;
+	?Optoutdate Date;
+};
+

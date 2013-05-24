@@ -1,0 +1,17 @@
+@Remarks("Request for Quotation Line")
+@Refby("2")
+type CRfqline {
+	!CRfqline ID;
+	AdClient ID;
+	AdOrg ID;
+	CRfq;
+	Line Long;/* 0  */
+	?MProduct;
+	?MAttributesetinstance;/* 0 */
+	?Description;
+	?Help;
+	?DeliveryDays Count;/* 0 */
+	?DateWorkcomplete Date;
+	?DateWorkstart Date;
+};
+

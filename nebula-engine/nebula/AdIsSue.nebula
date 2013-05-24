@@ -1,0 +1,51 @@
+@Remarks("System Issue")
+@Refby("0")
+type AdIsSue {
+	!AdIsSue ID;
+	AdClient ID;
+	AdOrg ID;
+	ReleaseNo String;
+	Version Description;
+	Name;
+	Username Name;
+	?SupportEmail Description;
+	?Dbaddress Name;
+	?LocalHost Host;
+	?Operatingsysteminfo Note;/* NULL  */
+	?ReleaseTag Description;
+	?DatabaseInfo Note;/* NULL  */
+	?Javainfo Note;/* NULL  */
+	?RemoteAddr Name;
+	?RemoteHost Host;
+	IsSuesummary Note;/* NULL  */
+	?Comments Comment;
+	?SourceClassName Name;
+	?SourceMethodName Name;
+	?LoggerName Name;
+	?LineNo Long;/* 0 */
+	?Stacktrace Note;
+	?ErrorTrace Note;
+	?Record ID;
+	?RequestDocumentNo String;
+	?AAsset;
+	?RRequest;
+	?Responsetext Note;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	?IsVanillasystem YesNo;/* 'N' 
+                            */
+	?IsReproducible YesNo;/* 'N' 
+                            */
+	?RIsSueknown;
+	?Statisticsinfo Note;/* NULL  */
+	?Profileinfo Note;/* NULL  */
+	SystemStatus Attr;
+	?RIsSueproject;
+	?RIsSueuser;
+	?RIsSuesystem;
+	?IsSuesource YesNo;
+	?AdWindow;
+	?AdProcess;
+	?AdForm;
+};
+

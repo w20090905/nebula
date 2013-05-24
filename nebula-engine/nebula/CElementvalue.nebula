@@ -1,0 +1,29 @@
+@Remarks("Account Element")
+@Refby("52")
+type CElementvalue {
+	!CElementvalue ID;
+	AdClient;
+	AdOrg;
+	Value String;
+	Name;
+	?Description;
+	Accounttype Attr;
+	Accountsign YesNo;
+	?IsDoccontrolled YesNo;/* 'N'
+                          */
+	CElement;
+	IsSummary YesNo;/* 'N'  */
+	?Validfrom Date;
+	?Validto Date;
+	PostActual YesNo;/* 'Y'  */
+	PostBudget YesNo;/* 'Y'  */
+	PostEncumbrance YesNo;/* 'Y'  */
+	PostStatistical YesNo;/* 'Y'  */
+	?IsBankaccount YesNo;/* 'N'
+                          */
+	?CBankaccount;
+	?IsForeignCurrency YesNo;/* 'N'
+                          */
+	?CCurrency;
+};
+

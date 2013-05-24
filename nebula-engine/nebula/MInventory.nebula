@@ -1,0 +1,31 @@
+@Remarks("Parameters for a Physical Inventory")
+@Refby("4")
+type MInventory {
+	!MInventory ID;
+	AdClient ID;
+	AdOrg;
+	DocumentNo Long;
+	?Description;
+	MWarehouse;
+	Movementdate Date;
+	PostEd YesNo;/* 'N'  */
+	Processed YesNo;/* 'N'  */
+	?Processing YesNo;
+	?Updateqty YesNo;/* 'N'
+                          */
+	?Generatelist YesNo;/* 'Y'
+                          */
+	?MPerpetualinv;
+	?AdOrgtrx AdOrg;
+	?CProject;
+	?CCampaign;
+	?CActivity;
+	?User1 CElementvalue;
+	?User2 CElementvalue;
+	IsApproved YesNo;/* 'N'  */
+	Docstatus Attr;
+	Docaction Attr;
+	?Approvalamt Amount;
+	CDoctype;
+};
+

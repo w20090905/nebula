@@ -1,0 +1,12 @@
+@Remarks("Identifies a Menu")
+@Refby("0")
+type AdMenuTrl {
+	!AdMenu;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	IsTranslated YesNo;/* 'N'  */
+};
+

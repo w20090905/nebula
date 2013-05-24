@@ -1,0 +1,13 @@
+@Remarks("System Message")
+@Refby("5")
+type AdMessage {
+	!AdMessage ID;
+	AdClient;
+	AdOrg;
+	Value String;
+	Msgtext Note;
+	?Msgtip Note;
+	Msgtype Attr;
+	EntityType AdEntityType;/* 'D'  */
+};
+

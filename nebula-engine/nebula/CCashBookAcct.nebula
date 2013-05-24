@@ -1,0 +1,14 @@
+@Remarks("C_CashBook_Acct")
+@Refby("0")
+type CCashBookAcct {
+	!CCashBook;
+	!CAcctschema;
+	AdClient ID;
+	AdOrg ID;
+	CbAssetAcct CValidcombination;
+	CbCashTransferAcct CValidcombination;
+	CbDifferencesAcct CValidcombination;
+	CbExpenseAcct CValidcombination;
+	CbReceiptAcct CValidcombination;
+};
+

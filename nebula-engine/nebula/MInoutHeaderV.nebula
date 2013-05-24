@@ -1,0 +1,46 @@
+@Remarks("")
+@Refby("0")
+type MInoutHeaderV {
+	AdClient ID;
+	AdOrg ID;
+	?AdLanguage String;
+	MInout ID;
+	IsSotrx YesNo;
+	DocumentNo Long;
+	Docstatus Attr;
+	CDoctype ID;
+	CBpartner ID;
+	Bpvalue Description;
+	?Bptaxid Code;
+	?Naics NAICS;
+	?Duns String;
+	?OrgLocation ID;
+	TaxId Code;
+	MWarehouse ID;
+	WarehouseLocation ID;
+	DocumentType Description;
+	?DocumentTypenote Note;
+	?COrder ID;
+	Movementdate Date;
+	Movementtype Attr;
+	?Bpgreeting Description;
+	Name;
+	?Name2 Name;
+	?BpcontactGreeting Description;
+	?Title String;
+	?Phone PhoneNumber;
+	?Contactname Name;
+	?CLocation ID;
+	?PostAl Code;
+	?ReferenceNo Description;
+	?Description;
+	?Poreference Name;
+	?DateOrdered Date;
+	?Volume Number;
+	?Weight;
+	?MShipper ID;
+	DeliveryRule Attr;
+	DeliveryViarule Attr;
+	PriorityRule Attr;
+};
+

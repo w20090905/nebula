@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+type MInoutlinemaV {
+	?AdClient ID;
+	?AdOrg ID;
+	?MInout ID;
+	?MInoutline ID;
+	?Line Long;
+	?MProduct ID;
+	?MAttributesetinstance ID;
+	?Movementqty Quantity;
+	?MLocator ID;
+};
+

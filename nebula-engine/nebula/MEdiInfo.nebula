@@ -1,0 +1,10 @@
+@Remarks("EDI Log")
+@Refby("0")
+type MEdiInfo {
+	!MEdiInfo ID;
+	AdClient ID;
+	AdOrg ID;
+	MEdi;
+	Info Description;
+};
+

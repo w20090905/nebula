@@ -1,0 +1,19 @@
+@Remarks("Product Acct")
+@Refby("0")
+type MProductAcct {
+	!MProduct;
+	!CAcctschema;
+	AdClient ID;
+	AdOrg ID;
+	PRevenueAcct CValidcombination;
+	PExpenseAcct CValidcombination;
+	PAssetAcct CValidcombination;
+	PPurchasepricevarianceAcct CValidcombination;
+	PInvoicePriceVarianceAcct CValidcombination;
+	PCogsAcct CValidcombination;
+	PTradediscountrecAcct CValidcombination;
+	PTradediscountgrantAcct CValidcombination;
+	?PInventoryclearingAcct Number;
+	?PCostadjustmentAcct Number;
+};
+

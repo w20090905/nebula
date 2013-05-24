@@ -1,0 +1,31 @@
+@Remarks("Country")
+@Refby("12")
+type CCountry {
+	!CCountry;
+	AdClient;
+	AdOrg;
+	Name;
+	?Description;
+	CountryCode Code;
+	Hasregion YesNo;/* 'N'  */
+	?Regionname Name;
+	?Expressionphone String;
+	DisplaySequence String;
+	?Expressionpostal String;
+	HaspostalAdd YesNo;/* 'N'  */
+	?ExpressionpostalAdd String;
+	?AdLanguage;
+	?CCurrency;
+	?DisplaySequencelocal String;
+	IsAddresslinesreverse YesNo;/* 'N'  */
+	IsAddresslineslocalreverse YesNo;/* 'N'  */
+	?Expressionbankroutingno String;
+	?Expressionbankaccountno String;
+	?Mediasize Description;
+	IsPostCodelookup YesNo;/* 'N'  */
+	?Lookupclassname Name;/* NULL   */
+	?Lookupclientid String;/* NULL   */
+	?Lookuppassword String;/* NULL   */
+	?Lookupurl String;/* NULL   */
+};
+

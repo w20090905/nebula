@@ -1,0 +1,19 @@
+@Remarks("Performance Color Schema")
+@Refby("1")
+type PaColorschema {
+	!PaColorschema ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Mark1percent Number;/* 0  */
+	AdPrintColor1 AdPrintColor;
+	Mark2percent Number;/* 0  */
+	AdPrintColor2 AdPrintColor;
+	?Mark3percent Number;/* 0 */
+	?AdPrintColor3 AdPrintColor;
+	?Mark4percent Number;/* 0 */
+	?AdPrintColor4 AdPrintColor;
+	EntityType AdEntityType;
+};
+

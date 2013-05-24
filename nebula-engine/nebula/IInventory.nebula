@@ -1,0 +1,28 @@
+@Remarks("Import Inventory Transactions")
+@Refby("0")
+type IInventory {
+	!IInventory ID;
+	?AdClient ID;
+	?AdOrg ID;
+	IIsImported YesNo;/* 'N'  */
+	?IErrorMsg Note;
+	?MProduct;
+	?Upc UPC;
+	?Value String;
+	?Lot String;
+	?Serno String;
+	?MLocator;
+	?MWarehouse;
+	?Warehousevalue Description;
+	?Locatorvalue Description;
+	?X Description;
+	?Y Description;
+	?Z Description;
+	?QtyBook Quantity;/* 0 */
+	?QtyCount Quantity;/* 0 */
+	?Movementdate Date;
+	?Description;
+	?Processing YesNo;
+	?Processed YesNo;/* 'N' */
+};
+

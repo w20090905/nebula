@@ -1,0 +1,66 @@
+@Remarks("Import General Ledger Journal")
+@Refby("0")
+type IGljournal {
+	!IGljournal ID;
+	?AdClient ID;
+	?ClientValue Description;
+	?AdOrgdoc AdOrg;
+	IIsImported YesNo;/* 'N'  */
+	?IErrorMsg Note;
+	?Processing YesNo;
+	?Processed YesNo;/* 'N' */
+	?GlJournalbatch;
+	?Batchdocumentno String;
+	?Batchdescription Note;
+	?GlJournal;
+	?Journaldocumentno String;
+	?PostIngtype Attr;
+	?CAcctschema;
+	?Acctschemaname Name;
+	?CDoctype;
+	?DoctypeName Name;
+	?GlCategory;
+	?Categoryname Name;
+	?CPeriod;
+	?GlBudget;
+	?GlJournalline;
+	?Line Long;
+	?DateAcct Date;
+	?Description;
+	?AmtSourcedr Amount;/* 0 */
+	?AmtAcctdr Amount;/* 0 */
+	?AmtSourcecr Amount;/* 0 */
+	?AmtAcctcr Amount;/* 0 */
+	?CCurrency;
+	?IsOCode String;
+	?ConversionTypevalue Description;
+	?CConversionType;
+	?Currencyrate Number;/* 0 */
+	?CUom;
+	?Qty Quantity;/* 0 */
+	?CValidcombination;
+	?Orgvalue Description;
+	?AdOrg;
+	?Account CElementvalue;
+	?Accountvalue Description;
+	?AdOrgtrx AdOrg;
+	?Orgtrxvalue Description;
+	?MProduct;
+	?ProductValue Description;
+	?Upc UPC;
+	?Sku String;
+	?CBpartner;
+	?BpartnerValue Description;
+	?CProject;
+	?ProjectValue Description;
+	?CLocto CLocation;
+	?CLocfrom CLocation;
+	?CSalesRegion;
+	?CActivity;
+	?CCampaign;
+	?User1 CElementvalue;
+	?User2 CElementvalue;
+	?IsCreateNewbatch YesNo;
+	?IsCreateNewjournal YesNo;
+};
+

@@ -1,0 +1,13 @@
+@Remarks("Product, Service, Item")
+@Refby("0")
+type MProductTrl {
+	!MProduct;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;/* NULL */
+	?DocumentNote Note;
+	IsTranslated YesNo;/* 'N'  */
+	?Description;
+};
+

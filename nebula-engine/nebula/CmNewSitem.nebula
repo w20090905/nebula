@@ -1,0 +1,15 @@
+@Remarks("News item or article defines base content")
+@Refby("0")
+type CmNewSitem {
+	!CmNewSitem ID;
+	AdClient ID;
+	AdOrg ID;
+	CmNewSchannel;
+	?Title String;
+	?Description;
+	?Author Note;
+	?Linkurl URL;
+	?Pubdate Date;
+	?Contenthtml Note;
+};
+

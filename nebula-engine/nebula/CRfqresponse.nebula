@@ -1,0 +1,30 @@
+@Remarks("Request for Quotation Response from a potential Vendor")
+@Refby("1")
+type CRfqresponse {
+	!CRfqresponse ID;
+	AdClient ID;
+	AdOrg ID;
+	CRfq;
+	Name;
+	?Description;
+	?Help;
+	CBpartner;
+	CBpartnerLocation;
+	?AdUser;
+	CCurrency;
+	?DateInvited Date;
+	?DateResponse Date;
+	?DateWorkstart Date;
+	?DeliveryDays Count;/* 0 */
+	?DateWorkcomplete Date;
+	Price;/* 0  */
+	IsSelfservice YesNo;/* 'N'  */
+	IsComplete YesNo;/* 'N'  */
+	IsSelectEdwinner YesNo;/* 'N'  */
+	?Ranking;/* 0 */
+	?Processing YesNo;
+	?COrder;
+	Processed YesNo;/* 'N'  */
+	?Checkcomplete YesNo;
+};
+

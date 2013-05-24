@@ -1,0 +1,13 @@
+@Remarks("Country")
+@Refby("0")
+type CCountryTrl {
+	!CCountry;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	IsTranslated YesNo;/* 'N'  */
+	Name;
+	?Description;
+	?Regionname Name;
+};
+

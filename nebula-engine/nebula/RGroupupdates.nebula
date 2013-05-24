@@ -1,0 +1,10 @@
+@Remarks("R_GroupUpdates")
+@Refby("0")
+type RGroupupdates {
+	!AdUser;
+	!RGroup;
+	AdClient ID;
+	AdOrg ID;
+	IsSelfservice YesNo;/* 'N'  */
+};
+

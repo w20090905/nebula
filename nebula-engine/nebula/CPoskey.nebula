@@ -1,0 +1,15 @@
+@Remarks("POS Function Key")
+@Refby("0")
+type CPoskey {
+	!CPoskey ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	CPoskeylayout;
+	Seqno SeqNo;/* 0  */
+	MProduct;
+	Qty Quantity;
+	?AdPrintColor;
+};
+

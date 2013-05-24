@@ -1,0 +1,20 @@
+@Remarks("Known Issue")
+@Refby("1")
+type RIsSueknown {
+	!RIsSueknown ID;
+	AdClient ID;
+	AdOrg ID;
+	IsSuesummary Note;
+	ReleaseNo String;
+	?SourceClassName Name;
+	?SourceMethodName Name;
+	?LoggerName Name;
+	?LineNo Long;/* 0 */
+	?Description;
+	?IsSuestatus Note;
+	?RIsSuestatus;
+	?RRequest;
+	?Processing YesNo;
+	?RIsSuerecommendation ID;
+};
+

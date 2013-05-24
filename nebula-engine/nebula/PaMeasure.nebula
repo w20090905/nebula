@@ -1,0 +1,21 @@
+@Remarks("Concrete Performance Measurement")
+@Refby("2")
+type PaMeasure {
+	!PaMeasure ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Measuretype Attr;
+	?Manualactual Number;
+	?Manualnote Note;
+	?Calculationclass Description;
+	?PaMeasurecalc;
+	?PaBenchmark;
+	?PaRatio;
+	?PaHierarchy;
+	Measuredatatype Attr;
+	?RRequestType;
+	?CProjectType;
+};
+

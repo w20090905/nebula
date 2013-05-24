@@ -1,0 +1,18 @@
+@Remarks("Material Shipment or Receipt Confirmation Import Line")
+@Refby("0")
+type IInoutlineconfirm {
+	!IInoutlineconfirm ID;
+	AdClient ID;
+	AdOrg ID;
+	IIsImported YesNo;/* 'N'  */
+	?IErrorMsg Note;
+	?MInoutlineconfirm;
+	?Confirmationno String;
+	?Description;
+	?Confirmedqty Quantity;/* 0 */
+	?Scrappedqty Quantity;/* 0 */
+	?Differenceqty Quantity;/* 0 */
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+};
+

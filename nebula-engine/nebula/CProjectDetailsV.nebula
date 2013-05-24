@@ -1,0 +1,27 @@
+@Remarks("")
+@Refby("0")
+type CProjectDetailsV {
+	AdClient ID;
+	AdOrg ID;
+	?AdLanguage String;
+	CProject ID;
+	CProjectLine ID;
+	Line Long;
+	PlannedQty Quantity;
+	PlannedPrice Price;
+	PlannedAmt Amount;
+	PlannedMarginamt Amount;
+	?CommittedAmt Amount;
+	?MProduct ID;
+	?Name;
+	?Description;
+	?DocumentNote Note;
+	?Upc UPC;
+	?Sku String;
+	?ProductValue Note;
+	?MProductCategory ID;
+	InvoiceDamt Amount;
+	InvoiceDqty Quantity;
+	?CommittedQty Quantity;
+};
+

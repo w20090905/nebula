@@ -1,0 +1,19 @@
+@Remarks("Material Shipment or Receipt Confirmation Line")
+@Refby("1")
+type MInoutlineconfirm {
+	!MInoutlineconfirm ID;
+	AdClient ID;
+	AdOrg ID;
+	MInoutconfirm;
+	MInoutline;
+	Targetqty Quantity;/* 0  */
+	Confirmedqty Quantity;/* 0  */
+	?Description;
+	Processed YesNo;/* 'N'  */
+	?Differenceqty Quantity;
+	?Scrappedqty Quantity;
+	?MInventoryline;
+	?CInvoiceLine;
+	?Confirmationno String;
+};
+

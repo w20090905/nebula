@@ -1,0 +1,68 @@
+@Remarks("Identifies a Business Partner")
+@Refby("75")
+type CBpartner {
+	!CBpartner ID;
+	AdClient;
+	AdOrg;
+	Value String;
+	Name;
+	?Name2 Name;
+	?Description;
+	IsSummary YesNo;/* 'N' */
+	CBpGroup;
+	IsOnetime YesNo;/* 'N'  */
+	IsProspect YesNo;/* 'Y'  */
+	IsVendor YesNo;/* 'N'  */
+	IsCustomer YesNo;/* 'Y'  */
+	IsEmployee YesNo;/* 'N'  */
+	IsSalesRep YesNo;/* 'N'  */
+	?ReferenceNo Description;
+	?Duns String;
+	?Url URL;
+	?AdLanguage;
+	?TaxId Code;
+	?IsTaxExempt YesNo;/* 'N'
+                               */
+	?CInvoiceSchedule;
+	?Rating YesNo;
+	?SalesVolume Number;
+	?Numberemployees Number;
+	?Naics NAICS;
+	?Firstsale Date;
+	?Acqusitioncost Number;/* 0 */
+	?Potentiallifetimevalue Number;/* 0 */
+	?Actuallifetimevalue Number;/* 0 */
+	?Shareofcustomer Number;
+	?PaymentRule Name;
+	?SoCreditlimit Number;/* 0 */
+	?SoCreditused Number;/* 0 */
+	?CPaymentTerm;
+	?MPriceList;
+	?MDiscountSchema;
+	?CDunning;
+	?IsDiscountPrintEd YesNo;/* 'Y'
+                               */
+	?SoDescription Note;
+	?Poreference Name;
+	?PaymentRulepo YesNo;
+	?PoPriceList MPriceList;
+	?PoDiscountSchema MDiscountSchema;
+	?PoPaymentTerm CPaymentTerm;
+	?DocumentCopies Number;
+	?CGreeting;
+	?InvoiceRule YesNo;
+	?DeliveryRule Attr;
+	?FreightCostrule Name;
+	?DeliveryViarule Attr;
+	?SalesRep AdUser;
+	Sendemail YesNo;/* 'N'  */
+	?BpartnerParent CBpartner;
+	?InvoicePrintFormat AdPrintFormat;
+	?Socreditstatus Attr;/* 'O' */
+	?Shelflifeminpct Number;
+	?AdOrgbp AdOrg;
+	?Flatdiscount Count;
+	?TotalOpenbalance Number;
+	?DunningGrace Date;
+};
+

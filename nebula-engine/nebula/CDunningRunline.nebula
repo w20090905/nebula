@@ -1,0 +1,22 @@
+@Remarks("Dunning Run Line")
+@Refby("0")
+type CDunningRunline {
+	!CDunningRunline ID;
+	AdClient ID;
+	AdOrg ID;
+	CDunningRunentry;
+	?CInvoice;
+	?CPayment;
+	Amt Amount;/* 0  */
+	Convertedamt Amount;/* 0  */
+	DaysDue Number;/* 0  */
+	TimesDunned Long;/* 0  */
+	InterestAmt Amount;/* 0  */
+	FeeAmt Amount;/* 0  */
+	TotalAmt Amount;/* 0  */
+	Processed YesNo;/* 'N'  */
+	IsIndispute YesNo;/* 'N'  */
+	Openamt Amount;
+	?CInvoicePayschedule;
+};
+

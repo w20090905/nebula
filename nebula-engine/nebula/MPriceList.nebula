@@ -1,0 +1,17 @@
+@Remarks("Unique identifier of a Price List")
+@Refby("16")
+type MPriceList {
+	!MPriceList ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Basepricelist MPriceList;
+	IsTaxIncluded YesNo;/* 'N'  */
+	IsSopricelist YesNo;/* 'Y'  */
+	IsDefault YesNo;/* 'N'  */
+	CCurrency;
+	EnforcePriceLimit YesNo;/* 'N'  */
+	PricePrecision Price;/* 2  */
+};
+

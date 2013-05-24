@@ -1,0 +1,10 @@
+@Remarks("User Selected tree nodes")
+@Refby("0")
+type AdTreebar {
+	!AdTree;
+	!AdUser;
+	!Node ID;
+	AdClient ID;
+	AdOrg ID;
+};
+

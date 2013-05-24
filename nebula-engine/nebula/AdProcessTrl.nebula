@@ -1,0 +1,13 @@
+@Remarks("Process or Report")
+@Refby("0")
+type AdProcessTrl {
+	!AdProcess;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	IsTranslated YesNo;/* 'N'  */
+};
+

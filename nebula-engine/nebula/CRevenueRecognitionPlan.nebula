@@ -1,0 +1,16 @@
+@Remarks("Plan for recognizing or recording revenue")
+@Refby("2")
+type CRevenueRecognitionPlan {
+	!CRevenueRecognitionPlan ID;
+	AdClient ID;
+	AdOrg ID;
+	CAcctschema;
+	CRevenueRecognition;
+	CInvoiceLine;
+	UnearnedRevenueAcct CValidcombination;
+	PRevenueAcct CValidcombination;
+	CCurrency;
+	TotalAmt Amount;/* 0  */
+	Recognizedamt Amount;/* 0  */
+};
+

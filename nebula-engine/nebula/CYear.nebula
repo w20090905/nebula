@@ -1,0 +1,12 @@
+@Remarks("Calendar Year")
+@Refby("3")
+type CYear {
+	!CYear ID;
+	AdClient;
+	AdOrg;
+	Fiscalyear String;
+	?Description;
+	CCalendar;
+	?Processing YesNo;
+};
+

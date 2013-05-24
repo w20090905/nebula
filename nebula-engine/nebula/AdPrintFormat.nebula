@@ -1,0 +1,27 @@
+@Remarks("Data Print Format")
+@Refby("16")
+type AdPrintFormat {
+	!AdPrintFormat ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	IsTablebased YesNo;/* 'Y'  */
+	IsForm YesNo;/* 'N'  */
+	AdTable;
+	AdPrintPaper;
+	AdPrintColor;
+	AdPrintFont;
+	IsStandardHeaderfooter YesNo;/* 'Y'  */
+	HeaderMargin Number;
+	FooterMargin Number;
+	?CreateCopy YesNo;
+	?AdReportview;
+	?AdPrintTableformat;
+	?PrintErName Name;
+	IsDefault YesNo;/* 'N'  */
+	?Jasperprocess AdProcess;
+	?ClassName Name;
+	?Args String;
+};
+

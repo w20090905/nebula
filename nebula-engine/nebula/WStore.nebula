@@ -1,0 +1,42 @@
+@Remarks("A Web Store of the Client")
+@Refby("2")
+type WStore {
+	!WStore ID;
+	AdClient;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	?Wstoreemail Description;
+	?Wstoreuser Description;
+	?Wstoreuserpw String;
+	?Webinfo Note;
+	?Webparam1 Note;
+	?Webparam2 Note;
+	?Webparam3 Note;
+	?Webparam4 Note;
+	?Webparam5 Note;
+	?Webparam6 Note;
+	IsMenuassets YesNo;/* 'Y'  */
+	IsMenuorders YesNo;/* 'Y'  */
+	IsMenuinvoices YesNo;/* 'Y'  */
+	IsMenushipments YesNo;/* 'Y'  */
+	IsMenupayments YesNo;/* 'Y'  */
+	IsMenurfqs YesNo;/* 'Y'  */
+	IsMenurequests YesNo;/* 'Y'  */
+	IsMenuinterests YesNo;/* 'Y'  */
+	IsMenuregistrations YesNo;/* 'Y'  */
+	IsMenucontact YesNo;/* 'Y'  */
+	?Emailheader Note;
+	?Emailfooter Note;
+	SalesRep AdUser;
+	MWarehouse;
+	MPriceList;
+	Webcontext String;
+	?Weborderemail Description;
+	?CPaymentTerm;
+	IsDefault YesNo;/* 'N'  */
+	Url URL;/* 'http://localhost'  */
+	?Stylesheet Description;
+};
+

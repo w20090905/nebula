@@ -1,0 +1,11 @@
+@Remarks("Column in the table")
+@Refby("0")
+type AdColumnTrl {
+	!AdColumn;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	IsTranslated YesNo;/* 'N'  */
+};
+

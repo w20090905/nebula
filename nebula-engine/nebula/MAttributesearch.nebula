@@ -1,0 +1,10 @@
+@Remarks("Common Search Attribute")
+@Refby("1")
+type MAttributesearch {
+	!MAttributesearch ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+};
+

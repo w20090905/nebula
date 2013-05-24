@@ -1,0 +1,15 @@
+@Remarks("LDAP Server Log")
+@Refby("0")
+type AdLdapProcessorlog {
+	!AdLdapProcessor;
+	!AdLdapProcessorlog ID;
+	AdClient ID;
+	AdOrg ID;
+	?Summary Note;
+	IsError YesNo;/* 'N'  */
+	?Reference Description;
+	?Description;
+	?TextMsg Note;
+	?Binarydata Note;
+};
+

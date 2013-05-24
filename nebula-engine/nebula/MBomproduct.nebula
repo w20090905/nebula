@@ -1,0 +1,22 @@
+@Remarks("Bill of Material Component (Product)")
+@Refby("0")
+type MBomproduct {
+	!MBomproduct ID;
+	AdClient ID;
+	AdOrg ID;
+	Line Long;/* 0  */
+	MBom;
+	Bomproducttype Attr;
+	IsPhantom YesNo;/* 'N'  */
+	?MProductBom MProduct;
+	?MChangeNotice;
+	?MAttributesetinstance;
+	?MBomalternative;
+	Bomqty Quantity;/* 0  */
+	?Description;
+	?Help;
+	?MProductOperation;
+	?Seqno SeqNo;/* 0 */
+	Leadtimeoffset Number;/* 0  */
+};
+

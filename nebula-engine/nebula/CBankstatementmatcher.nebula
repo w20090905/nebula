@@ -1,0 +1,12 @@
+@Remarks("Algorithm to match Bank Statement Info to Business Partners, Invoices and Payments")
+@Refby("0")
+type CBankstatementmatcher {
+	!CBankstatementmatcher ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	ClassName Name;
+	Seqno SeqNo;
+};
+

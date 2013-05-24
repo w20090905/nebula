@@ -1,0 +1,10 @@
+@Remarks("AD_Task_Access")
+@Refby("0")
+type AdTaskAccess {
+	!AdTask;
+	!AdRole;
+	AdClient;
+	AdOrg;
+	IsReadwrite YesNo;/* 'Y'  */
+};
+

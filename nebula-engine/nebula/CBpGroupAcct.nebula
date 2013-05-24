@@ -1,0 +1,23 @@
+@Remarks("Business Partner Group Acct")
+@Refby("0")
+type CBpGroupAcct {
+	!CAcctschema;
+	!CBpGroup;
+	AdClient ID;
+	AdOrg ID;
+	CReceivableAcct CValidcombination;
+	CPrepaymentAcct CValidcombination;
+	VLiabilityAcct CValidcombination;
+	VLiabilityServicesAcct CValidcombination;
+	VPrepaymentAcct CValidcombination;
+	PaydiscountExpAcct CValidcombination;
+	PaydiscountRevAcct CValidcombination;
+	WriteoffAcct CValidcombination;
+	NotinvoicedreceiptsAcct CValidcombination;
+	UnearnedRevenueAcct CValidcombination;
+	NotinvoicedrevenueAcct CValidcombination;
+	NotinvoicedreceivablesAcct CValidcombination;
+	?Processing YesNo;
+	?CReceivableServicesAcct Number;
+};
+

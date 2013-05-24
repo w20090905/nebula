@@ -1,0 +1,19 @@
+@Remarks("Accounting Processor/Server Parameters")
+@Refby("1")
+type CAcctprocessor {
+	!CAcctprocessor ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	FrequencyType Attr;
+	Frequency Number;
+	?DateLastrun Date;
+	?DateNextrun Date;
+	Supervisor AdUser;
+	KeepLogdays Count;
+	?Processing YesNo;
+	?CAcctschema;
+	?AdTable;
+};
+

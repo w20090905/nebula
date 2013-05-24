@@ -1,0 +1,13 @@
+@Remarks("Index Stop")
+@Refby("0")
+type KIndexstop {
+	!KIndexstop ID;
+	AdClient ID;
+	AdOrg ID;
+	Keyword String;
+	IsManual YesNo;/* 'Y'  */
+	?CmWebproject;
+	?RRequestType;
+	?CDoctype;
+};
+

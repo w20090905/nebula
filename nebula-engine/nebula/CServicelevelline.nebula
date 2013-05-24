@@ -1,0 +1,14 @@
+@Remarks("Product Revenue Recognition Service Level Line")
+@Refby("0")
+type CServicelevelline {
+	!CServicelevelline ID;
+	AdClient ID;
+	AdOrg ID;
+	CServicelevel;
+	?Description;
+	Servicelevelprovided Number;
+	Servicedate Date;
+	?Processed YesNo;/* 'N'
+                              */
+};
+

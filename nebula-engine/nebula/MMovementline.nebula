@@ -1,0 +1,21 @@
+@Remarks("Inventory Move document Line")
+@Refby("5")
+type MMovementline {
+	!MMovementline ID;
+	AdClient ID;
+	AdOrg ID;
+	MMovement;
+	MLocator;
+	MLocatorto MLocator;
+	MProduct;
+	?Line Long;
+	Movementqty Quantity;/* 0  */
+	?Description;
+	?MAttributesetinstance;/* 0 */
+	?Confirmedqty Quantity;/* 0 */
+	?Scrappedqty Quantity;/* 0 */
+	?Targetqty Quantity;/* 0 */
+	Processed YesNo;/* 'N'  */
+	?MAttributesetinstanceto ID;
+};
+

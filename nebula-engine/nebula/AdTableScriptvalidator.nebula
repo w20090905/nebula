@@ -1,0 +1,12 @@
+@Remarks("Script model validator for tables")
+@Refby("0")
+type AdTableScriptvalidator {
+	AdClient ID;/* NULL   */
+	AdOrg ID;/* NULL   */
+	AdRule;
+	AdTable;
+	!AdTableScriptvalidator ID;
+	EventModelvalidator String;
+	Seqno SeqNo;/* 0  */
+};
+

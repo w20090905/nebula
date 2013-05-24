@@ -1,0 +1,49 @@
+@Remarks("")
+@Refby("0")
+type CDunningLineVt {
+	AdClient ID;
+	AdOrg ID;
+	?AdLanguage String;
+	CDunningRunline ID;
+	CDunningRunentry ID;
+	Amt Amount;
+	Convertedamt Amount;
+	DaysDue Number;
+	TimesDunned Long;
+	InterestAmt Amount;
+	FeeAmt Amount;
+	TotalAmt Amount;
+	?CInvoice ID;
+	?IsSotrx YesNo;
+	?DocumentNo Long;
+	?Docstatus Attr;
+	?DateTrx Date;
+	?CDoctype ID;
+	?DocumentType Description;
+	?Description;
+	?CCurrency ID;
+	?CCampaign ID;
+	?CProject ID;
+	?CActivity ID;
+	?User1 ID;
+	?User2 ID;
+	?DateAcct Date;
+	?CConversionType ID;
+	?AdOrgtrx ID;
+	?Poreference Name;
+	?DateOrdered Date;
+	?DateInvoiceD Date;
+	?IsIndispute YesNo;
+	?PaymentTerm Description;
+	?CCharge ID;
+	?ChargeAmt Amount;
+	?TotalLines Count;
+	?GrandTotal Number;
+	?AmtInwords Amount;
+	?MPriceList ID;
+	?IsPaid YesNo;
+	?IsAllocated YesNo;
+	?TenderType Attr;
+	?DiscountAmt Amount;
+};
+

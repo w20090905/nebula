@@ -1,0 +1,21 @@
+@Remarks("Format Field")
+@Refby("0")
+type AdImpformatRow {
+	!AdImpformatRow ID;
+	AdClient ID;
+	AdOrg ID;
+	AdImpformat;
+	Seqno SeqNo;
+	Name;
+	AdColumn;
+	?Startno SeqNo;
+	?Endno SeqNo;
+	Datatype Attr;
+	?Dataformat String;
+	Decimalpoint YesNo;
+	Divideby100 YesNo;/* 'N'  */
+	?Constantvalue Description;
+	?Callout Description;
+	?Script Note;
+};
+

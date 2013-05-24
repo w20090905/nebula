@@ -1,0 +1,20 @@
+@Remarks("Unique line in an Inventory document")
+@Refby("9")
+type MInventoryline {
+	!MInventoryline ID;
+	AdClient ID;
+	AdOrg ID;
+	MInventory;
+	MLocator;
+	MProduct;
+	?Line Long;
+	QtyBook Quantity;/* 0  */
+	QtyCount Quantity;/* 0  */
+	?Description;
+	?MAttributesetinstance;/* 0 */
+	?CCharge;
+	Inventorytype Attr;/* 'D'  */
+	Processed YesNo;/* 'N'  */
+	?QtyInternaluse Quantity;
+};
+

@@ -1,0 +1,15 @@
+@Remarks("Bid for a Topic")
+@Refby("0")
+type BBid {
+	!BBid ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	BTopic;
+	AdUser BBuyer;
+	IsWillingtocommit YesNo;/* 'Y'  */
+	BBuyerfunds;
+	?TextMsg Note;
+	?Privatenote Note;
+};
+

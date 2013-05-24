@@ -1,0 +1,18 @@
+@Remarks("Dunning Run Entry")
+@Refby("1")
+type CDunningRunentry {
+	!CDunningRunentry ID;
+	AdClient ID;
+	AdOrg ID;
+	CBpartner;
+	CBpartnerLocation;
+	?AdUser;
+	CDunningRun;
+	CCurrency;
+	SalesRep AdUser;
+	Amt Amount;/* 0  */
+	Qty Quantity;/* 0  */
+	?Note;
+	Processed YesNo;/* 'N'  */
+};
+

@@ -1,0 +1,11 @@
+@Remarks("Collection of Columns for Report")
+@Refby("2")
+type PaReportcolumnset {
+	!PaReportcolumnset ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Processing YesNo;
+};
+

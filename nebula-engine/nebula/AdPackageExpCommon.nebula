@@ -1,0 +1,31 @@
+@Remarks("AD_Package_Exp_Common_ID")
+@Refby("0")
+type AdPackageExpCommon {
+	!AdPackageExpCommon ID;
+	AdClient ID;
+	AdOrg ID;
+	?AdForm;
+	?AdImpformat;
+	?AdReportview;
+	?AdTable;
+	?AdWorkbench;
+	?Dbtype String;
+	?Processed YesNo;
+	?Name;
+	?Name2 Name;
+	?Line Long;
+	?FileDirectory Note;
+	?Filename Name;
+	?DestinationDirectory Note;
+	?Description;
+	?Type String;
+	?TargetDirectory Note;
+	?Sqlstatement Note;
+	?Processing YesNo;
+	?AdWorkflow;
+	?AdWindow;
+	?AdRole;
+	?AdProcess;
+	?AdMenu;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("AD_Private_Access")
+@Refby("0")
+type AdPrivateAccess {
+	!AdUser;
+	!AdTable;
+	!Record ID;
+	AdClient ID;
+	AdOrg ID;
+};
+

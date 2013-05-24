@@ -1,0 +1,16 @@
+@Remarks("Document Line representing a production")
+@Refby("6")
+type MProductIonline {
+	!MProductIonline ID;
+	AdClient ID;
+	AdOrg ID;
+	MProductIonplan;
+	Line Long;
+	MProduct;
+	Movementqty Quantity;/* 0  */
+	MLocator;
+	?Description;
+	?MAttributesetinstance;/* 0 */
+	Processed YesNo;/* 'N'  */
+};
+

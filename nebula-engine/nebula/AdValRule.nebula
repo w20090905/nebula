@@ -1,0 +1,13 @@
+@Remarks("Dynamic Validation Rule")
+@Refby("5")
+type AdValRule {
+	!AdValRule ID;
+	AdClient;
+	AdOrg;
+	Name;
+	?Description;
+	?Type Attr;/* NULL */
+	?Code Note;
+	EntityType AdEntityType;/* 'D'  */
+};
+

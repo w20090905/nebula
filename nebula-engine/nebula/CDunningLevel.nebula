@@ -1,0 +1,25 @@
+@Remarks("Dunning Level")
+@Refby("3")
+type CDunningLevel {
+	!CDunningLevel ID;
+	AdClient ID;
+	AdOrg ID;
+	CDunning;
+	PrintName Name;
+	DaysAfterDue Number;
+	DaysBetweenDunning Count;
+	?Note;
+	ChargeInterest YesNo;/* 'Y'  */
+	?InterestPercent Number;/* 0 */
+	ChargeFee YesNo;/* 'Y'  */
+	?FeeAmt Amount;/* 0 */
+	?DunningPrintFormat AdPrintFormat;
+	Name;/* 'x'  */
+	?Description;
+	IsShowAlldue YesNo;/* 'N'  */
+	IsShowNotdue YesNo;/* 'N'  */
+	IsSetcreditstop YesNo;/* 'N'  */
+	IsSetpaymentterm YesNo;/* 'N'  */
+	?CPaymentTerm;/* NULL   */
+};
+

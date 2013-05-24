@@ -1,0 +1,38 @@
+@Remarks("Document type or rules")
+@Refby("31")
+type CDoctype {
+	!CDoctype ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	PrintName Name;
+	?Description;
+	Docbasetype Attr;
+	IsSotrx YesNo;/* 'Y'  */
+	?Docsubtypeso String;
+	?Hasproforma YesNo;/* 'N'
+                               */
+	?CDoctypeProforma CDoctype;
+	?CDoctypeShipment CDoctype;
+	?CDoctypeInvoice CDoctype;
+	IsDocnoControlled YesNo;/* 'N'  */
+	?DocnoSequence AdSequence;
+	GlCategory;
+	Hascharges YesNo;/* 'N'  */
+	?DocumentNote Note;
+	IsDefault YesNo;/* 'N'  */
+	DocumentCopies Number;
+	?AdPrintFormat;
+	IsDefaultcounterdoc YesNo;/* 'N'  */
+	IsShipconfirm YesNo;/* 'N'  */
+	IsPickqaconfirm YesNo;/* 'N'  */
+	IsIntransit YesNo;/* 'N'  */
+	IsSplitwhendifference YesNo;/* 'N'  */
+	?CDoctypeDifference CDoctype;
+	IsCreateCounter YesNo;/* 'Y'  */
+	IsIndexed YesNo;/* 'Y'  */
+	?IsOverwriteSeqoncomplete YesNo;/* 'N'  */
+	?Definitesequence AdSequence;
+	?IsOverwriteDateoncomplete YesNo;/* 'N'  */
+};
+

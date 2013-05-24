@@ -1,0 +1,12 @@
+@Remarks("Restriction of Funds")
+@Refby("0")
+type GlFundrestriction {
+	!GlFundrestriction ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	GlFund;
+	CElementvalue;
+};
+

@@ -1,0 +1,34 @@
+@Remarks("")
+@Refby("0")
+type MInoutconfirmV {
+	AdClient ID;
+	AdOrg ID;
+	?AdLanguage String;
+	MInoutconfirm ID;
+	DocumentNo Long;
+	Confirmtype Attr;
+	IsApproved YesNo;
+	IsCancelled YesNo;
+	?Description;
+	MInout ID;
+	?Shipdescription Note;
+	CBpartner ID;
+	CBpartnerLocation ID;
+	?AdUser ID;
+	?SalesRep ID;
+	CDoctype ID;
+	DocumentType Description;
+	?COrder ID;
+	?DateOrdered Date;
+	Movementdate Date;
+	Movementtype Attr;
+	MWarehouse ID;
+	?Poreference Name;
+	DeliveryRule Attr;
+	FreightCostrule Name;
+	DeliveryViarule Attr;
+	?MShipper ID;
+	PriorityRule Attr;
+	Processed YesNo;
+};
+

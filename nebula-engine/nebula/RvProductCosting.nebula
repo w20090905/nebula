@@ -1,0 +1,29 @@
+@Remarks("")
+@Refby("0")
+type RvProductCosting {
+	MProduct ID;
+	CAcctschema ID;
+	Value String;
+	Name;
+	MProductCategory ID;
+	AdClient ID;
+	AdOrg ID;
+	Currentcostprice Price;
+	Futurecostprice Price;
+	Coststandard Number;
+	Coststandardpoqty Quantity;
+	Coststandardpoamt Number;
+	?Coststandardpodiff Number;
+	Coststandardcumqty Quantity;
+	Coststandardcumamt Number;
+	?Coststandardinvdiff Number;
+	Costaverage Number;
+	Costaveragecumqty Quantity;
+	Costaveragecumamt Number;
+	TotalInvqty Quantity;
+	TotalInvamt Amount;
+	?TotalInvcost Number;
+	PriceLastpo Price;
+	PriceLastinv Price;
+};
+

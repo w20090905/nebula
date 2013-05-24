@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+type CRfqresponselineqtyVt {
+	CRfqresponseline ID;
+	CRfqresponselineqty ID;
+	CRfqlineqty ID;
+	AdClient ID;
+	AdOrg ID;
+	AdLanguage String;
+	CUom ID;
+	?Uomsymbol String;
+	Qty Quantity;
+	Price;
+	?Discount Number;
+};
+

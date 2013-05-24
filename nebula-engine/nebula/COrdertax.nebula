@@ -1,0 +1,13 @@
+@Remarks("Order Tax")
+@Refby("0")
+type COrdertax {
+	!COrder;
+	!CTax;
+	AdClient ID;
+	AdOrg ID;
+	TaxBaseamt Amount;/* 0  */
+	TaxAmt Amount;/* 0  */
+	Processed YesNo;/* 'N'  */
+	IsTaxIncluded YesNo;/* 'N'  */
+};
+

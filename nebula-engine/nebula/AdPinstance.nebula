@@ -1,0 +1,14 @@
+@Remarks("Instance of the process")
+@Refby("11")
+type AdPinstance {
+	!AdPinstance ID;
+	AdProcess;
+	Record ID;
+	IsProcessing YesNo;/* 'N'  */
+	?AdUser;
+	?Result Number;
+	?ErrorMsg Note;
+	?AdClient ID;
+	?AdOrg ID;
+};
+

@@ -1,0 +1,16 @@
+@Remarks("Label Format to print")
+@Refby("1")
+type AdPrintLabel {
+	!AdPrintLabel ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	AdTable;
+	?PrintErName Name;
+	IsLandscape YesNo;/* 'Y'  */
+	LabelHeight Height;
+	LabelWidth Width;
+	AdLabelPrintEr;
+};
+

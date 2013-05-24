@@ -1,0 +1,15 @@
+@Remarks("System Reference (Pick List)")
+@Refby("15")
+type AdReference {
+	!AdReference ID;
+	AdClient;
+	AdOrg;
+	Name;
+	?Description;
+	?Help;
+	ValidationType Attr;
+	?Vformat Description;
+	EntityType AdEntityType;/* 'D'  */
+	?IsOrderbyValue YesNo;/* 'N' */
+};
+

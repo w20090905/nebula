@@ -1,0 +1,19 @@
+@Remarks("Definition of the alert element")
+@Refby("0")
+type AdAlertRule {
+	!AdAlertRule ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	AdAlert;
+	SelectClause Note;
+	Fromclause Note;
+	?WhereClause Note;
+	?AdTable;
+	?Preprocessing Note;
+	?PostProcessing Note;
+	IsValid YesNo;/* 'Y'  */
+	?ErrorMsg Note;
+	?OtherClause Note;
+};
+

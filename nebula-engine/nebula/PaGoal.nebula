@@ -1,0 +1,27 @@
+@Remarks("Performance Goal")
+@Refby("3")
+type PaGoal {
+	!PaGoal ID;
+	AdClient ID;
+	AdOrg ID;
+	Seqno SeqNo;/* 0  */
+	Name;
+	?Description;
+	?Note;
+	?AdUser;
+	PaColorschema;
+	IsSummary YesNo;/* 'N'  */
+	?PaGoalparent PaGoal;
+	?PaMeasure;
+	?Relativeweight Weight;
+	Measuretarget Number;/* 0  */
+	Measurescope YesNo;
+	?Measuredisplay YesNo;
+	?DateFrom Date;
+	?DateTo Date;
+	?Measureactual Number;/* 0 */
+	?Goalperformance Number;
+	?DateLastrun Date;
+	?AdRole;
+};
+

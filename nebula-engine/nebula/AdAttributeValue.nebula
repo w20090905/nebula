@@ -1,0 +1,10 @@
+@Remarks("AD_Attribute_Value")
+@Refby("0")
+type AdAttributeValue {
+	!AdAttribute;
+	!Record ID;
+	?VNumber Number;
+	?VDate Date;
+	?VString Note;
+};
+

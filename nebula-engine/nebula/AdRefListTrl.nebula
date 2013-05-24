@@ -1,0 +1,12 @@
+@Remarks("Reference List based on Table")
+@Refby("0")
+type AdRefListTrl {
+	!AdRefList;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	IsTranslated YesNo;/* 'N'  */
+};
+

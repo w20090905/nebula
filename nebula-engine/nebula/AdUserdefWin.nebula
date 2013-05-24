@@ -1,0 +1,18 @@
+@Remarks("User defined Window")
+@Refby("1")
+type AdUserdefWin {
+	!AdUserdefWin ID;
+	AdClient ID;
+	AdOrg ID;
+	?AdRole;
+	?AdUser;
+	AdWindow;
+	Name;
+	?Description;
+	?Help;
+	?AdLanguage;
+	IsDefault YesNo;/* 'N'  */
+	IsReadonly YesNo;/* 'N'  */
+	IsUserupdateable YesNo;/* 'Y'  */
+};
+

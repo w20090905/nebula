@@ -1,0 +1,13 @@
+@Remarks("AD_Package_Imp_Proc_ID")
+@Refby("0")
+type AdPackageImpProc {
+	!AdPackageImpProc ID;
+	AdClient ID;
+	AdOrg ID;
+	?AdOverrideDict YesNo;
+	?AdPackageDir Note;
+	?AdPackageSource Note;
+	AdPackageSourceType String;
+	?Processing YesNo;
+};
+

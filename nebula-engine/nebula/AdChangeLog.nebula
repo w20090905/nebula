@@ -1,0 +1,20 @@
+@Remarks("Log of data changes")
+@Refby("0")
+type AdChangeLog {
+	!AdChangeLog ID;
+	!AdSession;
+	!AdTable;
+	!AdColumn;
+	AdClient ID;
+	AdOrg ID;
+	Record ID;
+	?OldValue Note;
+	?NewValue Note;
+	?Undo YesNo;
+	?Redo YesNo;
+	IsCustomization YesNo;/* 'N'  */
+	?Trxname Name;
+	?Description;
+	?EventChangeLog YesNo;
+};
+

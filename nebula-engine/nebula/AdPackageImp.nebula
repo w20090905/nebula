@@ -1,0 +1,22 @@
+@Remarks("AD_Package_Imp_ID")
+@Refby("0")
+type AdPackageImp {
+	!AdPackageImp ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?PkStatus String;
+	?ReleaseNo String;
+	?PkVersion String;
+	?Version String;
+	Description;
+	?Email;
+	?Processed YesNo;/* 'N' */
+	Processing YesNo;/* 'N'                    */
+	?Creator Description;
+	?Creatorcontact Note;
+	?CreateDdate String;
+	?Updateddate String;
+	?Uninstall YesNo;
+};
+

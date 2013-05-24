@@ -1,0 +1,11 @@
+@Remarks("Tree Node PR")
+@Refby("0")
+type AdTreenodepr {
+	!AdTree;
+	!Node ID;
+	AdClient ID;
+	AdOrg ID;
+	?Parent ID;
+	?Seqno SeqNo;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("Greeting to print on correspondence")
+@Refby("4")
+type CGreeting {
+	!CGreeting ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Greeting Description;
+	IsFirstnameonly YesNo;/* 'N'  */
+	IsDefault YesNo;/* 'N'  */
+};
+

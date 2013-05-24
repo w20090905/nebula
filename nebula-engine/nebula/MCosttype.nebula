@@ -1,0 +1,11 @@
+@Remarks("Type of Cost")
+@Refby("3")
+type MCosttype {
+	!MCosttype ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+};
+

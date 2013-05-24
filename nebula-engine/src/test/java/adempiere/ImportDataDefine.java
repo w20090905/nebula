@@ -1,11 +1,11 @@
 package adempiere;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -20,22 +20,41 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.google.common.base.CaseFormat;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 public class ImportDataDefine {
-	DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
-	OutputStreamWriter out;
 
-	public ImportDataDefine() {
-		try {
-			out = new OutputStreamWriter(new FileOutputStream("columns.txt"));
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		}
+	public static void main(String[] args) throws IOException {
+		String inputFileName = "orclqss.ADEMPIERE340.xml";
+		String outputFolder = "nebula";
+
+		ImportDataDefine parser = new ImportDataDefine();
+		Document document = parser.parse(inputFileName);
+		// get root element
+		Element rootElement = document.getDocumentElement();
+		parser.read(outputFolder, rootElement);
 	}
 
-	public void close() throws IOException {
-		out.close();
+	List<Type> types = Lists.newArrayList();
+	Map<String, Type> typeMapByName = Maps.newHashMap();
+	Map<String, Type> typeMapByRawName = Maps.newHashMap();
+
+	public Type addType(String rawName, String name, Type type) {
+		types.add(type);
+		typeMapByName.put(name, type);
+		typeMapByRawName.put(rawName, type);
+		return type;
+	}
+
+	public Type addType(String rawName, String name, String remarks) {
+		return addType(rawName, name, new Type(rawName, name, remarks));
+	}
+
+	DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+
+	public ImportDataDefine() {
+
 	}
 
 	// Load and parse XML file into DOM
@@ -58,58 +77,126 @@ public class ImportDataDefine {
 
 	Map<String, String> tables = Maps.newHashMap();
 
-	public static void main(String[] args) throws IOException {
-		ImportDataDefine parser = new ImportDataDefine();
-		Document document = parser.parse("orclqss.ADEMPIERE340.xml");
-		// get root element
-		Element rootElement = document.getDocumentElement();
+	public void read(String outputFolderName, Element rootElement) throws IOException {
 
-		// traverse child elements
 
 		NodeList nodeList = rootElement.getElementsByTagName("table");
 		if (nodeList != null) {
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				Element element = (Element) nodeList.item(i);
 				String tableName = element.getAttribute("name");
-				parser.tables.put(tableName, tableName);
+				this.tables.put(tableName, tableName);
 			}
 
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				Element element = (Element) nodeList.item(i);
-				parser.readTable(element);
+				this.readTable(element);
 			}
 		}
-		parser.close();
+		
+		File outputFolder = new File(outputFolderName);
+		if (!outputFolder.exists()) {
+			outputFolder.mkdir();
+		} else {
+			for (File file : outputFolder.listFiles()) {
+				file.delete();
+			}
+		}
+		
+		OutputStreamWriter out = null;
+		StringBuilder sb = new StringBuilder(5000);
+		for (Type type : types) {
+			out = new OutputStreamWriter(new FileOutputStream(new File(outputFolder, type.name + ".nebula")));
+			String skip = TheSkipTypes.get(type.rawName);
+
+			sb.setLength(0);
+			sb.append("@Remarks(\"" + type.remarks + "\")\n");
+			sb.append("@Refby(\"" + type.cntReference + "\")\n");
+			sb.append("type " + type.name + " {\n");
+
+			for (Field field : type.fields) {
+				if (skip != null && skip.indexOf("$" + field.rawName) >= 0) {
+					System.out.println("==Skip== \t" + type.rawName + "\t" + field.rawName);
+					continue;
+				}
+				sb.append("\t");
+				if (!field.isRequired) {
+					sb.append("?");
+				}
+				if (field.isKey) {
+					sb.append("!");
+				}
+				sb.append(field.name);
+				if (!field.name.equals(field.type)) {
+					sb.append(" " + field.type);
+				}
+				sb.append(";");
+
+				if (field.defaultValue.length() > 0) {
+					sb.append("/* " + field.defaultValue + " */");
+				}
+				sb.append("\n");
+			}
+			sb.append("};\n\n");
+			out.write(sb.toString());
+			out.close();
+		}
+
 	}
 
-	public void readTable(Element table) throws IOException {
-		/*
-		 * <table name="AD_ACCESSLOG" numRows="0"
-		 * remarks="Log of Access to the System" schema="ADEMPIERE340"
-		 * type="TABLE">
-		 */
-		String buf = "";
-		String tableName =table.getAttribute("name");
+	public Type readTable(Element table) throws IOException {
+		String tableName = table.getAttribute("name");
+		String remarks = table.getAttribute("remarks");
 
-		buf += "@NumRows(" + table.getAttribute("numRows") + ")\n";
-		buf += "@Remarks(\"" + table.getAttribute("remarks") + "\")\n";
-		buf += "type " + refineName(tableName) + " {\n";
+		// buf += "@NumRows(" + table.getAttribute("numRows") + ")\n";
 
-		out.write(buf);
+		Type type = this.addType(tableName, refineName(tableName), remarks);
 
 		NodeList nodes = table.getChildNodes();
 		for (int i = 0; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
-			if (node.getNodeType() == Node.ELEMENT_NODE && "column".equals(node.getNodeName())) {
-				readColumn(tableName, (Element) node);
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
+				if ("column".equals(node.getNodeName())) {
+					readColumn(type, (Element) node);
+				} else if ("primaryKey".equals(node.getNodeName())) {
+					String primaryKey = ((Element) node).getAttribute("column");
+					type.addKeyField(primaryKey);
+				}
 			}
 		}
-
-		out.write("}\n");
-
+		System.out.println("loaded " + type.rawName);
+		return type;
 	}
 
 	static final String[] systems = "IsActive Created Createdby Updated Updatedby".toUpperCase().split(" ");
+	protected static Hashtable<String, String> TheSkipTypes = new Hashtable<String, String>();
+	static {
+		//@formatter:off
+			StringTokenizer st = new StringTokenizer(
+					  			" "
+					  	                + "AD_CLIENT $AD_ORG_ID  "
+					  	                + "AD_COLUMN $AD_PROCESS_ID  "
+					  	                + "AD_PRINTFORMATITEM $AD_PRINTGRAPH_ID  "
+					  	                + "AD_TABLE $DATECOLUMN_ID  "
+					  	                + "AD_WORKFLOW $AD_WF_NODE_ID  "
+					  	                + "C_INVOICE $C_CASHLINE_ID-$C_PAYMENTTERM_ID-$C_PAYMENT_ID  "
+					  	                + "C_LEAD $R_REQUEST_ID  "
+					  	                + "C_ORDER $C_CASHLINE_ID-$C_PAYMENTTERM_ID-$C_PAYMENT_ID-$ORIG_INOUT_ID-$ORIG_ORDER_ID  "
+					  	                + "C_ORDERLINE $ORIG_INOUTLINE_ID-$ORIG_ORDERLINE_ID  "
+					  	                + "I_INVENTORY $M_INVENTORYLINE_ID-$M_INVENTORY_ID  "
+					  	                + "M_ATTRIBUTESETINSTANCE $M_LOT_ID  "
+					  	                + "M_LOCATOR $M_WAREHOUSE_ID  "
+					  	                + "AD_LANGUAGE	$AD_CLIENT_ID-$AD_ORG_ID  "
+					  	                + "C_BPARTNER	$SALESREP_ID  "
+
+
+
+					);
+		//@formatter:on
+
+		while (st.hasMoreTokens())
+			TheSkipTypes.put(st.nextToken(), st.nextToken());
+	}
 
 	protected static Hashtable<String, String> TheNameTypes = new Hashtable<String, String>();
 	static {
@@ -465,7 +552,7 @@ public class ImportDataDefine {
 			TheNameTypes.put(st.nextToken(), st.nextToken());
 	}
 
-	public void readColumn(String tableName, Element column) throws IOException {
+	public void readColumn(Type type, Element column) throws IOException {
 		for (String rev : systems) {
 			if (rev.equals(column.getAttribute("name"))) {
 				return;
@@ -476,47 +563,52 @@ public class ImportDataDefine {
 		 * remarks="Log of Access to the System" schema="ADEMPIERE340"
 		 * type="TABLE">
 		 */
-		String buf = "";
 		String rawColName = column.getAttribute("name");
 		String rawTypeName = column.getAttribute("type");
 		String rawTypeSize = column.getAttribute("size");
 		String tColName = null;
 		String tTypeName = null;
+		boolean required = false;
+
 		/*
 		 * buf += "\t@autoUpdated(" + column.getAttribute("autoUpdated") +
 		 * ")\n";
 		 */
 		/* buf += "\t@remarks(\"" + column.getAttribute("remarks") + "\")\n"; */
-		buf += "\t";
-		buf += "true".equals(column.getAttribute("nullable")) ? "?" : "";
+
+		required = "false".equals(column.getAttribute("nullable"));
 
 		boolean isEntity = false;
 
 		NodeList nodes = column.getChildNodes();
 		for (int i = 0; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
-			if (node.getNodeType() == Node.ELEMENT_NODE && "parent".equals(node.getNodeName())) {
-				if (rawColName.endsWith("_ID")) {
-					tColName = rawColName.substring(0, rawColName.length() - 3);
-				} else {
-					tColName = rawColName;
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
+				if ("parent".equals(node.getNodeName())) {
+					if (rawColName.endsWith("_ID")) {
+						tColName = rawColName.substring(0, rawColName.length() - 3);
+					} else {
+						tColName = rawColName;
+					}
+					Element parent = (Element) node;
+					tTypeName = refineName(parent.getAttribute("table"));
+					isEntity = true;
+				} else if ("child".equals(node.getNodeName())) {
+					type.cntReference++;
 				}
-				Element parent = (Element) node;
-				tTypeName = refineName(parent.getAttribute("table"));
-				isEntity = true;
 			}
 		}
 
 		if (!isEntity) {
 			if (rawColName.endsWith("_ID")) {
 				String fieldTableName = rawColName.substring(0, rawColName.length() - 3);
-				if (tableName.equalsIgnoreCase(fieldTableName)) {
-					tColName = "ID";
-					tTypeName = "ID";
-				} else {
-					tColName = fieldTableName;
-					tTypeName = "ID";
-				}
+				// if (type.rawName.equalsIgnoreCase(fieldTableName)) {
+				// tColName = "ID";
+				// tTypeName = "ID";
+				// } else {
+				tColName = fieldTableName;
+				tTypeName = "ID";
+				// }
 			}
 		}
 
@@ -826,7 +918,7 @@ public class ImportDataDefine {
 		if (tTypeName == null) {
 			if ("NVARCHAR2".equals(rawTypeName) && (rawColName.startsWith("HOST") || rawColName.endsWith("HOST"))) {
 				tColName = rawColName;
-				tTypeName = "Hose";
+				tTypeName = "Host";
 			}
 		}
 		if (tTypeName == null) {
@@ -955,31 +1047,14 @@ public class ImportDataDefine {
 		}
 
 		if (tColName == null) {
-			out.write(rawColName + "\t" + rawTypeName + "\t" + column.getAttribute("size").trim() + "\t" + tableName
-					+ "\n");
+			System.out.println(rawColName + "\t" + rawTypeName + "\t" + column.getAttribute("size").trim() + "\t"
+					+ type.rawName + "\n");
 		}
 
 		tColName = refineName(tColName);
-
-		if (tColName.equalsIgnoreCase(tTypeName)) {
-			buf += tColName;
-			buf += ";";
-		} else {
-			buf += tColName;
-			buf += " " + tTypeName + ";";
-		}
-
 		String defaultValue = column.getAttribute("defaultValue");
-		if (defaultValue.length() > 0) {
-			buf += "\t/*";
-			buf += " " + defaultValue.trim() + " ";
-			buf += "*" + "/";
-		}
 
-		buf += "\n";
-
-		out.write(buf);
-
+		type.addField(rawColName, tColName, tTypeName, defaultValue, required);
 	}
 
 	static final String[] revs = ("is display field where Enforce Support release database"
@@ -989,7 +1064,10 @@ public class ImportDataDefine {
 			+ "Label Validation Old New Text Dimension format paper Margin Hdr Image Footer header "
 			+ "value  Paint Printer Print orderby Line Procedure Beta Server show Unrealized Docno Overwrite "
 			+ "Create Days between after Charge Interest Dunning Doctype Invoice  payment Times Tender "
-			+ " Archive Conversion Amt Foreign Document Fee Total ").toUpperCase().split(" ");
+			+ " Archive Conversion Amt Foreign Document Fee Total Qty Price Freight Resource Tax"
+			+ " Accept Bpcontact Delivery Priority Grand Product Creditcard Voice Writeoff Proxy Attribute"
+			+ "Require Planned Project  Reference balance Committed Sales Standard Country System Remuneration  Revenue Unearned Gross")
+			.toUpperCase().split(" ");
 
 	public String refineName(String name) {
 		for (String rev : revs) {
@@ -999,5 +1077,69 @@ public class ImportDataDefine {
 		name = name.replaceFirst("__", "_");
 
 		return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name);
+	}
+
+	class Type {
+		String rawName;
+		String name;
+		String remarks;
+		long cntReference;
+
+		public Type(String rawName, String name, String remarks) {
+			this.rawName = rawName;
+			this.name = name;
+			this.remarks = remarks;
+		}
+
+		List<Field> fields = Lists.newArrayList();
+		Map<String, Field> fieldMapByName = Maps.newHashMap();
+		Map<String, Field> fieldMapByRawName = Maps.newHashMap();
+
+		public Field addField(String rawName, String name, Field field) {
+			fields.add(field);
+			fieldMapByName.put(name, field);
+			fieldMapByRawName.put(rawName, field);
+			return field;
+		}
+
+		public Field addField(String rawName, String name, String fieldType, String defaultValue, boolean required) {
+			return addField(rawName, name, new Field(rawName, name, fieldType, defaultValue, required, false));
+		}
+
+		public void addKeyField(String primaryKey) {
+			Field key = fieldMapByRawName.get(primaryKey);
+			key.isKey = true;
+		}
+	}
+
+	class Field {
+		String rawName;
+		String name;
+		String type;
+		String defaultValue;
+		boolean isRequired = false;
+		boolean isKey = false;
+
+		public Field(String rawName, String name) {
+			this(rawName, name, name, null, false, false);
+		}
+
+		public Field(String rawName, String name, String type) {
+			this(rawName, name, type, null, false, false);
+		}
+
+		public Field(String rawName, String name, String type, String defaultValue) {
+			this(rawName, name, type, defaultValue, false, false);
+		}
+
+		public Field(String rawName, String name, String type, String defaultValue, boolean isRequired, boolean isKey) {
+			this.rawName = rawName;
+			this.name = name;
+			this.type = type;
+			this.defaultValue = defaultValue;
+			this.isRequired = isRequired;
+			this.isKey = isKey;
+		}
+
 	}
 }

@@ -1,0 +1,19 @@
+@Remarks("Info Column")
+@Refby("1")
+type AdInfocolumn {
+	!AdInfocolumn ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	AdInfowindow;
+	EntityType AdEntityType;/* 'D'  */
+	SelectClause Note;
+	Seqno SeqNo;/* 0  */
+	IsDisplayEd YesNo;/* 'Y'  */
+	IsQuerycriteria YesNo;/* 'N'  */
+	?AdElement;
+	AdReference;
+};
+

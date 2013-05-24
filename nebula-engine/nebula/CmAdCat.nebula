@@ -1,0 +1,12 @@
+@Remarks("Advertisement Categories define rotations and ad blocks")
+@Refby("2")
+type CmAdCat {
+	!CmAdCat ID;
+	CmWebproject;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+};
+

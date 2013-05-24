@@ -1,0 +1,11 @@
+@Remarks("Request Resolution")
+@Refby("2")
+type RResolution {
+	!RResolution ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+};
+

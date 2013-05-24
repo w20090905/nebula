@@ -1,0 +1,12 @@
+@Remarks("Data Replication Strategy")
+@Refby("2")
+type AdReplicationstrategy {
+	!AdReplicationstrategy ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	EntityType AdEntityType;/* 'D'  */
+};
+

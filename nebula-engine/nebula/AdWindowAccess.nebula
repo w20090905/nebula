@@ -1,0 +1,10 @@
+@Remarks("AD_Window_Access")
+@Refby("0")
+type AdWindowAccess {
+	!AdWindow;
+	!AdRole;
+	AdClient;
+	AdOrg;
+	IsReadwrite YesNo;/* 'Y'  */
+};
+

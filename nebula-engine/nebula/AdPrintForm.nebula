@@ -1,0 +1,20 @@
+@Remarks("Form")
+@Refby("0")
+type AdPrintForm {
+	!AdPrintForm ID;
+	?AdClient;
+	AdOrg ID;
+	Name;
+	?Description;
+	?InvoicePrintFormat AdPrintFormat;
+	?OrderPrintFormat AdPrintFormat;
+	?RemittancePrintFormat AdPrintFormat;
+	?ShipmentPrintFormat AdPrintFormat;
+	?InvoiceMailtext RMailtext;
+	?OrderMailtext RMailtext;
+	?RemittanceMailtext RMailtext;
+	?ShipmentMailtext RMailtext;
+	?ProjectMailtext RMailtext;
+	?ProjectPrintFormat AdPrintFormat;
+};
+

@@ -1,0 +1,18 @@
+@Remarks("Material Requisition Line")
+@Refby("1")
+type MRequisitionline {
+	!MRequisitionline ID;
+	AdClient ID;
+	AdOrg ID;
+	Line Long;
+	MRequisition;
+	Qty Quantity;/* 0  */
+	?MProduct;
+	?Description;
+	PriceActual Price;/* 0  */
+	LineNetamt Long;/* 0  */
+	?COrderline;
+	?MAttributesetinstance ID;
+	?CCharge;
+};
+

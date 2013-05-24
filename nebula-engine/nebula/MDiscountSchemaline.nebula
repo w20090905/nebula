@@ -1,0 +1,36 @@
+@Remarks("Line of the pricelist trade discount schema")
+@Refby("0")
+type MDiscountSchemaline {
+	!MDiscountSchemaline ID;
+	AdClient ID;
+	AdOrg ID;
+	MDiscountSchema;
+	Seqno SeqNo;
+	?MProductCategory;
+	?CBpartner;
+	?MProduct;
+	ConversionDate Date;
+	ListBase YesNo;
+	ListAddamt Amount;/* 0  */
+	ListDiscount Count;
+	ListRounding YesNo;
+	ListMinamt Amount;/* 0  */
+	ListMaxamt Amount;/* 0  */
+	?ListFixed Number;/* 0 */
+	StdBase YesNo;
+	StdAddamt Amount;/* 0  */
+	StdDiscount Count;
+	StdRounding YesNo;
+	StdMinamt Amount;/* 0  */
+	StdMaxamt Amount;/* 0  */
+	?StdFixed Number;/* 0 */
+	LimitBase YesNo;
+	LimitAddamt Amount;/* 0  */
+	LimitDiscount Count;
+	LimitRounding YesNo;
+	LimitMinamt Amount;/* 0  */
+	LimitMaxamt Amount;/* 0  */
+	?LimitFixed Number;/* 0 */
+	CConversionType;
+};
+

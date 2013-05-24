@@ -1,0 +1,10 @@
+@Remarks("AD_Workflow_Access")
+@Refby("0")
+type AdWorkflowAccess {
+	!AdWorkflow;
+	!AdRole;
+	AdClient;
+	AdOrg;
+	IsReadwrite YesNo;/* 'Y'  */
+};
+

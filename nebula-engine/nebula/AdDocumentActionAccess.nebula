@@ -1,0 +1,10 @@
+@Remarks("Define access to document type / document action / role combinations.")
+@Refby("0")
+type AdDocumentActionAccess {
+	AdClient ID;
+	AdOrg ID;
+	CDoctype;
+	AdRole;
+	AdRefList;
+};
+

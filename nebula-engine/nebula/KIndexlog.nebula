@@ -1,0 +1,11 @@
+@Remarks("Index Log")
+@Refby("0")
+type KIndexlog {
+	!KIndexlog ID;
+	AdClient ID;
+	AdOrg ID;
+	Indexquery Note;
+	Indexqueryresult Number;/* 0  */
+	Querysource YesNo;
+};
+

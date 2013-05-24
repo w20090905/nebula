@@ -1,0 +1,17 @@
+@Remarks("Rule")
+@Refby("1")
+type AdRule {
+	AdClient ID;/* NULL   */
+	AdOrg ID;/* NULL   */
+	!AdRule ID;
+	?AccessLevel Attr;
+	?Description;
+	?EntityType AdEntityType;/* 'U' */
+	?EventType Attr;
+	?Help;
+	Name;
+	?Ruletype Attr;
+	?Script Note;
+	Value String;
+};
+

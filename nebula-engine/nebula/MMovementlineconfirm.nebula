@@ -1,0 +1,17 @@
+@Remarks("Inventory Move Line Confirmation")
+@Refby("0")
+type MMovementlineconfirm {
+	!MMovementlineconfirm ID;
+	AdClient ID;
+	AdOrg ID;
+	MMovementconfirm;
+	MMovementline;
+	?Description;
+	Targetqty Quantity;/* 0  */
+	Confirmedqty Quantity;/* 0  */
+	Differenceqty Quantity;/* 0  */
+	Scrappedqty Quantity;/* 0  */
+	Processed YesNo;/* 'N'  */
+	?MInventoryline;
+};
+

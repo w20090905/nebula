@@ -1,0 +1,15 @@
+@Remarks("City")
+@Refby("1")
+type CCity {
+	!CCity ID;
+	AdClient;
+	AdOrg;
+	Name;
+	?Locode Code;
+	?Coordinates Code;
+	?PostAl Code;
+	?Areacode Code;
+	?CCountry;
+	?CRegion;
+};
+

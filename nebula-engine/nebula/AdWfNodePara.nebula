@@ -1,0 +1,14 @@
+@Remarks("Workflow Node Execution Parameter")
+@Refby("0")
+type AdWfNodePara {
+	!AdWfNodePara ID;
+	AdClient ID;
+	AdOrg ID;
+	AdWfNode;
+	?Attributename Name;
+	?AdProcessPara;
+	?Description;
+	?Attributevalue Description;
+	EntityType AdEntityType;/* 'D'  */
+};
+

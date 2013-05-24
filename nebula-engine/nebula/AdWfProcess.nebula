@@ -1,0 +1,19 @@
+@Remarks("Actual Workflow Process Instance")
+@Refby("4")
+type AdWfProcess {
+	!AdWfProcess;
+	AdClient;
+	AdOrg;
+	AdWorkflow;
+	AdWfResponsible;
+	?AdUser;
+	Wfstate Attr;
+	?AdMessage;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	?TextMsg Note;
+	AdTable;
+	Record ID;
+	?Priority;
+};
+

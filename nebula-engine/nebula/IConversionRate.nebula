@@ -1,0 +1,26 @@
+@Remarks("Import Currency Conversion Rate")
+@Refby("0")
+type IConversionRate {
+	!IConversionRate ID;
+	?AdClient ID;
+	?AdOrg ID;
+	?CConversionRate;
+	?IsOCode String;
+	?CCurrency;
+	?IsOCodeTo String;
+	?CCurrencyIdTo CCurrency;
+	?ConversionTypevalue Description;
+	?CConversionType;
+	?Validfrom Date;
+	?Validto Date;
+	?Multiplyrate Number;
+	?Dividerate Number;
+	?CreateReciprocalrate YesNo;/* 'N' 
+                             */
+	?IIsImported YesNo;/* 'N'
+ */
+	?IErrorMsg Note;
+	?Processing YesNo;
+	?Processed YesNo;/* 'N' */
+};
+

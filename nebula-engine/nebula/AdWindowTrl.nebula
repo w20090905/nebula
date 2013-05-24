@@ -1,0 +1,13 @@
+@Remarks("Data entry or display window")
+@Refby("0")
+type AdWindowTrl {
+	!AdWindow;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	IsTranslated YesNo;/* 'N'  */
+};
+

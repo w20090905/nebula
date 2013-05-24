@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+type MMovementlinemaV {
+	?AdClient ID;
+	?AdOrg ID;
+	?MMovement ID;
+	?MMovementline ID;
+	?Line Long;
+	?MProduct ID;
+	?MAttributesetinstance ID;
+	?Movementqty Quantity;
+	?MLocator ID;
+	?MLocatorto ID;
+};
+

@@ -1,0 +1,25 @@
+@Remarks("Product Attribute Set")
+@Refby("4")
+type MAttributeset {
+	!MAttributeset ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	IsSerno YesNo;/* 'Y'  */
+	?MSernoctl;
+	IsLot YesNo;/* 'Y'  */
+	?MLotctl;
+	IsGuaranteedate YesNo;/* 'N'  */
+	?Guaranteedays Count;
+	IsInstanceattribute YesNo;/* 'N'  */
+	Mandatorytype Attr;/* 'N'  */
+	IsGuaranteedatemandatory YesNo;/* 'N'  */
+	IsLotmandatory YesNo;/* 'N'  */
+	IsSernomandatory YesNo;/* 'N'  */
+	?Sernocharsoverwrite String;
+	?Lotcharsoverwrite String;
+	?Lotchareoverwrite String;
+	?Sernochareoverwrite String;
+};
+

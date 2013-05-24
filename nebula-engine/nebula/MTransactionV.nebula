@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("0")
+type MTransactionV {
+	MTransaction ID;
+	AdClient ID;
+	AdOrg ID;
+	Movementtype Attr;
+	MLocator ID;
+	MProduct ID;
+	Movementdate Date;
+	Movementqty Quantity;
+	?MInventoryline ID;
+	?MInventory ID;
+	?MMovementline ID;
+	?MMovement ID;
+	?MInoutline ID;
+	?MInout ID;
+	?MProductIonline ID;
+	?MProductIon ID;
+	?CProjectIssue ID;
+	?CProject ID;
+	MAttributesetinstance ID;
+};
+

@@ -1,0 +1,25 @@
+@Remarks("An Advertisement is something like a banner")
+@Refby("0")
+type CmAd {
+	!CmAd ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	CmAdCat;
+	CmMedia;
+	?Targeturl URL;
+	TargetFrame String;
+	Actualclick Count;/* 0  */
+	Maxclick Count;/* 0  */
+	Actualimpression Number;/* 0  */
+	Maximpression Number;/* 0  */
+	Startimpression Number;/* 0  */
+	Startdate Date;
+	?Enddate Date;
+	?Contenthtml Note;
+	IsAdflag YesNo;/* 'Y'  */
+	IsLogged YesNo;/* 'Y'  */
+};
+

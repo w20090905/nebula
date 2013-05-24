@@ -1,0 +1,11 @@
+@Remarks("Tax Postal/ZIP")
+@Refby("0")
+type CTaxPostal {
+	!CTaxPostal ID;
+	AdClient ID;
+	AdOrg ID;
+	CTax;
+	PostAl Code;
+	?PostAlTo String;
+};
+

@@ -1,0 +1,14 @@
+@Remarks("Chat")
+@Refby("2")
+type CmChat {
+	!CmChat ID;
+	AdClient ID;
+	AdOrg ID;
+	Description;
+	AdTable;
+	Record ID;
+	Confidentialtype Attr;
+	?CmChattype;
+	?Moderationtype Attr;/* NULL   */
+};
+

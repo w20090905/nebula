@@ -1,0 +1,13 @@
+@Remarks("Info and search/select Window")
+@Refby("0")
+type AdInfowindowTrl {
+	!AdInfowindow;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	IsTranslated YesNo;/* 'N'  */
+	Name;
+	?Description;
+	?Help;
+};
+

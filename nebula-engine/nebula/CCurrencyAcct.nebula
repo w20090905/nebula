@@ -1,0 +1,13 @@
+@Remarks("C_Currency_Acct")
+@Refby("0")
+type CCurrencyAcct {
+	!CAcctschema;
+	!CCurrency;
+	AdClient ID;
+	AdOrg ID;
+	UnrealizedGainAcct CValidcombination;
+	UnrealizedLossAcct CValidcombination;
+	RealizedgainAcct CValidcombination;
+	RealizedlossAcct CValidcombination;
+};
+

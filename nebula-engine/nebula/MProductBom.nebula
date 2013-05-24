@@ -1,0 +1,14 @@
+@Remarks("BOM Line")
+@Refby("0")
+type MProductBom {
+	!MProductBom ID;
+	AdClient ID;
+	AdOrg ID;
+	Line Long;
+	MProduct;
+	MProductBom MProduct;
+	Bomqty Quantity;/* 0  */
+	?Description;
+	?Bomtype Attr;
+};
+

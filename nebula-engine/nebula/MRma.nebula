@@ -1,0 +1,27 @@
+@Remarks("Return Material Authorization")
+@Refby("5")
+type MRma {
+	!MRma ID;
+	AdClient ID;
+	AdOrg ID;
+	DocumentNo Long;
+	Name;
+	?Description;
+	Inout MInout;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  	  */
+	?COrder;
+	CDoctype;
+	SalesRep AdUser;
+	Docaction Attr;
+	Docstatus Attr;
+	IsApproved YesNo;/* 'N'  */
+	?Amt Amount;
+	?MRmatype;
+	?Help;
+	?CCurrency;
+	?CBpartner;
+	IsSotrx YesNo;/* 'Y'  */
+	?Generateto YesNo;/* NULL */
+};
+

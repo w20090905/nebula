@@ -1,0 +1,10 @@
+@Remarks("Accounting Calendar Name")
+@Refby("6")
+type CCalendar {
+	!CCalendar ID;
+	AdClient;
+	AdOrg;
+	Name;
+	?Description;
+};
+

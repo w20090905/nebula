@@ -1,0 +1,11 @@
+@Remarks("Tree Node CM Template")
+@Refby("0")
+type AdTreenodecmt {
+	!AdTree;
+	!Node ID;
+	AdClient ID;
+	AdOrg ID;
+	Parent ID;
+	Seqno SeqNo;/* 0  */
+};
+

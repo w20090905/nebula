@@ -1,0 +1,11 @@
+@Remarks("AD_Scheduler_Para")
+@Refby("0")
+type AdSchedulerPara {
+	!AdScheduler;
+	!AdProcessPara;
+	AdClient ID;
+	AdOrg ID;
+	?Parameterdefault Description;
+	?Description;
+};
+

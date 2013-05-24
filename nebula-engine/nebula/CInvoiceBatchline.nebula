@@ -1,0 +1,34 @@
+@Remarks("Expense Invoice Batch Line")
+@Refby("0")
+type CInvoiceBatchline {
+	!CInvoiceBatchline ID;
+	AdClient ID;
+	AdOrg;
+	CInvoiceBatch;
+	Line Long;/* 0  */
+	CDoctype;
+	DocumentNo Long;
+	DateInvoiceD Date;
+	DateAcct Date;
+	CBpartner;
+	CBpartnerLocation;
+	?AdUser;
+	CCharge;
+	QtyEntered Quantity;/* 0  */
+	PriceEntered Price;/* 0  */
+	IsTaxIncluded YesNo;/* 'N'  */
+	LineNetamt Long;/* 0  */
+	CTax;
+	TaxAmt Amount;/* 0  */
+	LineTotalAmt Long;/* 0  */
+	?CProject;
+	?CActivity;
+	?AdOrgtrx AdOrg;
+	?User1 CElementvalue;
+	?User2 CElementvalue;
+	Processed YesNo;/* 'N'  */
+	?CInvoice;
+	?CInvoiceLine;
+	?Description;
+};
+

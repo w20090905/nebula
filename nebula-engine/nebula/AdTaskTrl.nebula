@@ -1,0 +1,13 @@
+@Remarks("Operation System Task")
+@Refby("0")
+type AdTaskTrl {
+	!AdTask;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	IsTranslated YesNo;/* 'N'  */
+};
+

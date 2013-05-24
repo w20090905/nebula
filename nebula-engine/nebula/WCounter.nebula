@@ -1,0 +1,18 @@
+@Remarks("Individual Count hit")
+@Refby("0")
+type WCounter {
+	!WCounter ID;
+	AdClient ID;
+	AdOrg ID;
+	Pageurl URL;
+	?Referrer Description;
+	?RemoteHost Host;
+	?RemoteAddr Name;
+	?Useragent Note;
+	?AcceptLanguage Description;
+	Processed YesNo;/* 'N'  */
+	?WCountercount;
+	?AdUser;
+	?Email;
+};
+

@@ -1,0 +1,13 @@
+@Remarks("Collection of Workbenches")
+@Refby("2")
+type AdDesktop {
+	!AdDesktop ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	?AdImage;
+	?AdColor;
+};
+

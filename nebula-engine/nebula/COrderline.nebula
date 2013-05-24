@@ -1,0 +1,53 @@
+@Remarks("Sales Order Line")
+@Refby("10")
+type COrderline {
+	!COrderline ID;
+	AdClient ID;
+	AdOrg;
+	COrder;
+	Line Long;
+	?CBpartner;
+	?CBpartnerLocation;
+	DateOrdered Date;
+	?DatePromised Date;
+	?DateDelivered Date;
+	?DateInvoiceD Date;
+	?Description;
+	?MProduct;
+	MWarehouse;
+	CUom;
+	QtyOrdered Quantity;/* 0  */
+	QtyReserved Quantity;/* 0  */
+	QtyDelivered Quantity;/* 0  */
+	QtyInvoiced Quantity;/* 0  */
+	?MShipper;
+	CCurrency;
+	PriceList Price;/* 0  */
+	PriceActual Price;/* 0  */
+	PriceLimit Price;/* 0  */
+	LineNetamt Long;/* 0  */
+	?Discount Number;
+	FreightAmt Amount;/* 0  */
+	?CCharge;
+	CTax;
+	?SResourceAssignment;
+	?RefOrderline COrderline;
+	?MAttributesetinstance;/* 0 */
+	IsDescription YesNo;/* 'N'  */
+	Processed YesNo;/* 'N'  */
+	QtyEntered Quantity;
+	PriceEntered Price;
+	?CProject;
+	?PriceCost Number;
+	QtyLostsales Quantity;/* 0  */
+	?CProjectPhase;
+	?CProjectTask;
+	?Rrstartdate Date;
+	?Rramt Amount;
+	?CCampaign;
+	?CActivity;
+	?User1 CElementvalue;
+	?User2 CElementvalue;
+	?AdOrgtrx AdOrg;
+};
+

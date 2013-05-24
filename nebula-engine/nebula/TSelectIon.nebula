@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("0")
+type TSelectIon {
+	!AdPinstance ID;
+	!TSelectIon ID;
+};
+

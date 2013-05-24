@@ -1,0 +1,38 @@
+@Remarks("General Ledger Distribution Line")
+@Refby("0")
+type GlDistributionline {
+	!GlDistributionline ID;
+	AdClient ID;
+	AdOrg;
+	GlDistribution;
+	Line Long;/* 0  */
+	Percent;
+	?Description;
+	OverwriteOrg YesNo;/* 'N'  */
+	?Org AdOrg;
+	OverwriteAcct YesNo;/* 'N'  */
+	?Account CElementvalue;
+	OverwriteProduct YesNo;/* 'N'  */
+	?MProduct;
+	OverwriteBpartner YesNo;/* 'N'  */
+	?CBpartner;
+	OverwriteProject YesNo;/* 'N'  */
+	?CProject;
+	OverwriteCampaign YesNo;/* 'N'  */
+	?CCampaign;
+	OverwriteActivity YesNo;/* 'N'  */
+	?CActivity;
+	OverwriteSalesRegion YesNo;/* 'N'  */
+	?CSalesRegion;
+	OverwriteOrgtrx YesNo;/* 'N'  */
+	?AdOrgtrx AdOrg;
+	OverwriteLocto YesNo;/* 'N'  */
+	?CLocto CLocation;
+	OverwriteLocfrom YesNo;/* 'N'  */
+	?CLocfrom CLocation;
+	OverwriteUser1 YesNo;/* 'N'  */
+	?User1 CElementvalue;
+	OverwriteUser2 YesNo;/* 'N'  */
+	?User2 CElementvalue;
+};
+

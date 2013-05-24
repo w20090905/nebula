@@ -1,0 +1,26 @@
+@Remarks("Web Access Log")
+@Refby("0")
+type CmWebaccesslog {
+	!CmWebaccesslog ID;
+	AdClient ID;
+	AdOrg ID;
+	Logtype Attr;
+	?CmWebproject;
+	IpAddress String;
+	?CmBroadcastserver;
+	RequestType String;
+	?Pageurl URL;
+	?Referrer Description;
+	?RemoteHost Host;
+	?RemoteAddr Name;
+	?Useragent Note;
+	?AcceptLanguage Description;
+	?Websession Description;
+	?Hyphen String;
+	Protocol String;
+	?Statuscode Number;/* 0 */
+	?Filesize Number;
+	?AdUser;
+	?CmMedia;
+};
+

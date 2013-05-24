@@ -1,0 +1,26 @@
+@Remarks("")
+@Refby("0")
+type RvWarehouseprice {
+	AdClient ID;
+	AdOrg ID;
+	MProduct ID;
+	MPriceListVersion ID;
+	MWarehouse ID;
+	Value String;
+	Name;
+	?Upc UPC;
+	?Sku String;
+	CUom ID;
+	?Uomsymbol String;
+	?PriceList Price;
+	?PriceStd Price;
+	?Margin Number;
+	?PriceLimit Price;
+	Warehousename Name;
+	?QtyAvailable Quantity;
+	?QtyOnhand Quantity;
+	?QtyReserved Quantity;
+	?QtyOrdered Quantity;
+	?IsInstanceattribute YesNo;
+};
+

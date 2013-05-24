@@ -1,0 +1,42 @@
+@Remarks("")
+@Refby("0")
+type MInoutLineV {
+	?AdClient ID;
+	?AdOrg ID;
+	?AdLanguage String;
+	?MInout ID;
+	?MInoutline ID;
+	?Line Long;
+	?MProduct ID;
+	?Movementqty Quantity;
+	?QtyEntered Quantity;
+	?Uomsymbol String;
+	?QtyOrdered Quantity;
+	?QtyDelivered Quantity;
+	?QtyBackordered Quantity;
+	?Name;
+	?Description;
+	?DocumentNote Note;
+	?Upc UPC;
+	?Sku String;
+	?ProductValue Note;
+	?MLocator ID;
+	?MWarehouse ID;
+	?X Description;
+	?Y Description;
+	?Z Description;
+	?MAttributesetinstance ID;
+	?MAttributeset ID;
+	?Serno Description;
+	?Lot Description;
+	?MLot ID;
+	?Guaranteedate Date;
+	?ProductDescription Description;
+	?ImageUrl URL;
+	?CCampaign ID;
+	?CProject ID;
+	?CActivity ID;
+	?CProjectPhase ID;
+	?CProjectTask ID;
+};
+

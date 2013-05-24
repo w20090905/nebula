@@ -1,0 +1,10 @@
+@Remarks("M_InOutLineMA")
+@Refby("0")
+type MInoutlinema {
+	!MInoutline;
+	!MAttributesetinstance;
+	AdClient ID;
+	AdOrg ID;
+	Movementqty Quantity;/* 0  */
+};
+

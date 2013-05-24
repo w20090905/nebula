@@ -1,0 +1,12 @@
+@Remarks("Tax Category")
+@Refby("0")
+type CTaxCategoryTrl {
+	!CTaxCategory;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	IsTranslated YesNo;/* 'N'  */
+};
+

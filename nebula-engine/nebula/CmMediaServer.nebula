@@ -1,0 +1,18 @@
+@Remarks("Media Server list to which content should get transfered")
+@Refby("1")
+type CmMediaServer {
+	!CmMediaServer ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	CmWebproject;
+	IsPassive YesNo;/* 'Y'  */
+	?Url URL;
+	?IpAddress String;
+	?Username Name;
+	?Password String;
+	?Folder String;
+};
+

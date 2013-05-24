@@ -1,0 +1,22 @@
+@Remarks("Type of request (e.g. Inquiry, Complaint, ..)")
+@Refby("9")
+type RRequestType {
+	!RRequestType ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	IsDefault YesNo;/* 'N'  */
+	IsSelfservice YesNo;/* 'Y' */
+	Duedatetolerance Number;/* 7  */
+	IsEmailwhenoverdue YesNo;/* 'N'  */
+	IsEmailwhendue YesNo;/* 'N'  */
+	?IsInvoiceD YesNo;
+	?AutoDuedatedays Count;
+	Confidentialtype Attr;/* 'C'  */
+	IsAutoChangerequest YesNo;/* 'N'  */
+	IsConfidentialinfo YesNo;/* 'N'  */
+	RStatuscategory;
+	IsIndexed YesNo;/* 'Y'  */
+};
+

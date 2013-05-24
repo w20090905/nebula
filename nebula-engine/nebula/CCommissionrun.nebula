@@ -1,0 +1,15 @@
+@Remarks("Commission Run or Process")
+@Refby("1")
+type CCommissionrun {
+	!CCommissionrun ID;
+	AdClient ID;
+	AdOrg ID;
+	DocumentNo Long;
+	?Description;
+	CCommission;
+	Startdate Date;
+	GrandTotal Number;/* 0  */
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+};
+

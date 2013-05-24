@@ -1,0 +1,19 @@
+@Remarks("Actual Project Task in a Phase")
+@Refby("7")
+type CProjectTask {
+	!CProjectTask ID;
+	?CTask;
+	AdClient ID;
+	AdOrg ID;
+	Seqno SeqNo;
+	Name;
+	?Description;
+	?Help;
+	?MProduct;
+	CProjectPhase;
+	?Qty Quantity;/* 0  	  */
+	?Projinvoicerule YesNo;
+	PlannedAmt Amount;/* 0  */
+	CommittedAmt Amount;/* 0  */
+};
+

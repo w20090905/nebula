@@ -1,0 +1,15 @@
+@Remarks("Organization Info")
+@Refby("0")
+type AdOrginfo {
+	!AdOrg;
+	AdClient ID;
+	?CLocation;
+	Duns String;
+	TaxId Code;
+	?PaGoal ID;
+	?Supervisor AdUser;
+	?ParentOrg AdOrg;
+	?AdOrgtype;
+	?MWarehouse;
+};
+

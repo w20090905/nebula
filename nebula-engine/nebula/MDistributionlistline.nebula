@@ -1,0 +1,14 @@
+@Remarks("Distribution List Line with Business Partner and Quantity/Percentage")
+@Refby("1")
+type MDistributionlistline {
+	!MDistributionlistline ID;
+	AdClient ID;
+	AdOrg ID;
+	MDistributionlist;
+	CBpartner;
+	CBpartnerLocation;
+	Minqty Quantity;/* 0  */
+	?Ratio;
+	?Description;
+};
+

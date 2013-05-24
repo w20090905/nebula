@@ -1,0 +1,16 @@
+@Remarks("Subscription of a Business Partner of a Product to renew")
+@Refby("1")
+type CSubscription {
+	!CSubscription ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	CBpartner;
+	MProduct;
+	CSubscriptiontype;
+	Startdate Date;
+	Paiduntildate Date;
+	IsDue YesNo;/* 'N'  	  */
+	Renewaldate Date;
+};
+

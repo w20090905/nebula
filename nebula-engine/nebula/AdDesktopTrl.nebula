@@ -1,0 +1,13 @@
+@Remarks("Collection of Workbenches")
+@Refby("0")
+type AdDesktopTrl {
+	!AdDesktop;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	IsTranslated YesNo;/* 'N'  */
+};
+

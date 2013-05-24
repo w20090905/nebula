@@ -1,0 +1,14 @@
+@Remarks("M_Storage")
+@Refby("0")
+type MStorage {
+	!MProduct;
+	!MLocator;
+	AdClient;
+	AdOrg;
+	QtyOnhand Quantity;/* 0  */
+	QtyReserved Quantity;/* 0  */
+	QtyOrdered Quantity;/* 0  */
+	?DateLastinventory Date;
+	!MAttributesetinstance;/* 0 */
+};
+

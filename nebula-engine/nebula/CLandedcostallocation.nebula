@@ -1,0 +1,15 @@
+@Remarks("Landed Cost Allocation")
+@Refby("0")
+type CLandedcostallocation {
+	!CLandedcostallocation ID;
+	AdClient ID;
+	AdOrg ID;
+	CInvoiceLine;
+	MProduct;
+	?MAttributesetinstance;
+	MCostelement;
+	Amt Amount;/* 0  */
+	Qty Quantity;/* 0  */
+	Base Number;/* 0  */
+};
+

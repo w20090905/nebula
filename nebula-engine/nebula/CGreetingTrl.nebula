@@ -1,0 +1,12 @@
+@Remarks("Greeting to print on correspondence")
+@Refby("0")
+type CGreetingTrl {
+	!AdLanguage;
+	!CGreeting;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Greeting Description;
+	IsTranslated YesNo;/* 'N'  */
+};
+

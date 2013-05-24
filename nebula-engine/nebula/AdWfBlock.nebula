@@ -1,0 +1,11 @@
+@Remarks("Workflow Transaction Execution Block")
+@Refby("1")
+type AdWfBlock {
+	!AdWfBlock ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	AdWorkflow;
+};
+

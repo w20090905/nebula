@@ -1,0 +1,10 @@
+@Remarks("Request Update Recipiants")
+@Refby("0")
+type RRequestUpdates {
+	!AdUser;
+	!RRequest;
+	AdClient ID;
+	AdOrg ID;
+	IsSelfservice YesNo;/* 'N'  */
+};
+

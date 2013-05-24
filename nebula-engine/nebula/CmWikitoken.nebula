@@ -1,0 +1,15 @@
+@Remarks("Wiki Token")
+@Refby("0")
+type CmWikitoken {
+	!CmWikitoken ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Tokentype Attr;
+	?SelectClause Note;
+	?AdTable;
+	?WhereClause Note;
+	?Macro Note;
+};
+

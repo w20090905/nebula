@@ -1,0 +1,43 @@
+@Remarks("General Ledger Distribution")
+@Refby("1")
+type GlDistribution {
+	!GlDistribution ID;
+	AdClient ID;
+	AdOrg;
+	Name;
+	?Description;
+	?Help;
+	?PostIngtype Attr;
+	?CDoctype;
+	CAcctschema;
+	Anyorg YesNo;/* 'Y'  */
+	?Org AdOrg;
+	Anyacct YesNo;/* 'Y'  */
+	?Account CElementvalue;
+	Anyproduct YesNo;/* 'Y'  */
+	?MProduct;
+	Anybpartner YesNo;/* 'Y'  */
+	?CBpartner;
+	Anyproject YesNo;/* 'Y'  */
+	?CProject;
+	Anycampaign YesNo;/* 'Y'  */
+	?CCampaign;
+	Anyactivity YesNo;/* 'Y'  */
+	?CActivity;
+	Anysalesregion YesNo;/* 'Y'  */
+	?CSalesRegion;
+	Anyorgtrx YesNo;/* 'Y'  */
+	?AdOrgtrx AdOrg;
+	Anylocto YesNo;/* 'Y'  */
+	?CLocto CLocation;
+	Anylocfrom YesNo;/* 'Y'  */
+	?CLocfrom CLocation;
+	Anyuser1 YesNo;/* 'Y'  */
+	?User1 CElementvalue;
+	Anyuser2 YesNo;/* 'Y'  */
+	?User2 CElementvalue;
+	Percenttotal Number;
+	IsValid YesNo;/* 'N'  */
+	?Processing YesNo;
+};
+

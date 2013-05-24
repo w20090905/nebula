@@ -1,0 +1,18 @@
+@Remarks("Chat Entry")
+@Refby("2")
+type CmChatentry {
+	!CmChatentry ID;
+	AdClient ID;
+	AdOrg ID;
+	CmChat;
+	Confidentialtype Attr;
+	?Characterdata Note;
+	?CmChatentryparent CmChatentry;/* NULL   */
+	?CmChatentrygrandparent CmChatentry;/* NULL   */
+	Chatentrytype Attr;/* NULL
+ */
+	?Moderatorstatus Attr;/* NULL   */
+	?Subject;/* NULL   */
+	?AdUser;/* NULL   */
+};
+

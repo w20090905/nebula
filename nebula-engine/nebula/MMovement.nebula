@@ -1,0 +1,27 @@
+@Remarks("Movement of Inventory")
+@Refby("2")
+type MMovement {
+	!MMovement ID;
+	AdClient ID;
+	AdOrg;
+	DocumentNo Long;
+	?Description;
+	Movementdate Date;
+	PostEd YesNo;/* 'N'  */
+	Processed YesNo;/* 'N'  */
+	?Processing YesNo;
+	?AdOrgtrx AdOrg;
+	?CProject;
+	?CCampaign;
+	?CActivity;
+	?User1 CElementvalue;
+	?User2 CElementvalue;
+	?DateReceived Date;
+	Docaction Attr;
+	Docstatus Attr;
+	IsIntransit YesNo;/* 'N'  */
+	CDoctype;
+	IsApproved YesNo;/* 'N'  */
+	?Approvalamt Amount;
+};
+

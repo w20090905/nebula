@@ -1,0 +1,12 @@
+@Remarks("C_BP_Vendor_Acct")
+@Refby("0")
+type CBpVendorAcct {
+	!CAcctschema;
+	!CBpartner;
+	AdClient ID;
+	AdOrg ID;
+	?VLiabilityAcct CValidcombination;
+	?VLiabilityServicesAcct CValidcombination;
+	?VPrepaymentAcct CValidcombination;
+};
+

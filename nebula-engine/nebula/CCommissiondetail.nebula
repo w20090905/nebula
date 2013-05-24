@@ -1,0 +1,17 @@
+@Remarks("Supporting information for Commission Amounts")
+@Refby("0")
+type CCommissiondetail {
+	!CCommissiondetail ID;
+	AdClient ID;
+	AdOrg ID;
+	CCommissionamt;
+	?Reference Description;
+	?COrderline;
+	?CInvoiceLine;
+	?Info Description;
+	CCurrency;
+	Actualamt Amount;/* 0  */
+	Convertedamt Amount;/* 0  */
+	Actualqty Quantity;/* 0  */
+};
+

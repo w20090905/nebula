@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("2")
+type ADepreciation {
+	!ADepreciation ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Depreciationtype Attr;
+	?Script Note;
+};
+

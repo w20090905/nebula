@@ -1,0 +1,15 @@
+@Remarks("T_ReportStatement")
+@Refby("0")
+type TReportstatement {
+	!AdPinstance;
+	!FactAcct ID;
+	Levelno SeqNo;
+	DateAcct Date;
+	?Name;
+	?Description;
+	?AmtAcctdr Amount;/* 0 */
+	?AmtAcctcr Amount;/* 0 */
+	?Balance Number;/* 0 */
+	?Qty Quantity;/* 0 */
+};
+

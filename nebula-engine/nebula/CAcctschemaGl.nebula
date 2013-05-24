@@ -1,0 +1,21 @@
+@Remarks("C_AcctSchema_GL")
+@Refby("0")
+type CAcctschemaGl {
+	!CAcctschema;
+	AdClient ID;
+	AdOrg ID;
+	Usesuspensebalancing YesNo;/* 'Y'  */
+	?SuspensebalancingAcct CValidcombination;
+	Usesuspenseerror YesNo;/* 'Y'  */
+	?SuspenseerrorAcct CValidcombination;
+	Usecurrencybalancing YesNo;/* 'Y'  */
+	?CurrencybalancingAcct CValidcombination;
+	RetainedearningAcct CValidcombination;
+	IncomesummaryAcct CValidcombination;
+	IntercompanyduetoAcct CValidcombination;
+	IntercompanyduefromAcct CValidcombination;
+	PpvoffsetAcct CValidcombination;
+	CommitmentoffsetAcct Number;
+	CommitmentoffsetsalesAcct Number;
+};
+

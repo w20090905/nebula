@@ -1,0 +1,21 @@
+@Remarks("Project Issues (Material, Labor)")
+@Refby("5")
+type CProjectIssue {
+	!CProjectIssue ID;
+	AdClient ID;
+	AdOrg ID;
+	CProject;
+	Line Long;
+	MProduct;
+	?MAttributesetinstance;/* 0 */
+	MLocator;
+	Movementqty Quantity;/* 0  */
+	?Description;
+	Processed YesNo;/* 'N'  */
+	PostEd YesNo;/* 'N'  */
+	Movementdate Date;
+	?STimeexpenseline;
+	?MInoutline;
+	?Processing YesNo;
+};
+

@@ -1,0 +1,13 @@
+@Remarks("Automatic routing of requests")
+@Refby("0")
+type RRequestProcessorRoute {
+	!RRequestProcessorRoute ID;
+	AdClient ID;
+	AdOrg ID;
+	RRequestProcessor;
+	Seqno SeqNo;
+	?Keyword String;
+	AdUser;
+	?RRequestType;
+};
+

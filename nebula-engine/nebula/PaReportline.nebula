@@ -1,0 +1,22 @@
+@Remarks("Report Line")
+@Refby("6")
+type PaReportline {
+	!PaReportline ID;
+	AdClient ID;
+	AdOrg ID;
+	PaReportlineset;
+	Name;
+	Seqno SeqNo;
+	?Description;
+	IsPrintEd YesNo;/* 'Y'  */
+	?Parent PaReportline;
+	IsSummary YesNo;/* 'N'  */
+	LineType Attr;
+	?Calculationtype Attr;
+	?Oper1 PaReportline;
+	?Oper2 PaReportline;
+	?PostIngtype Attr;
+	?GlBudget;
+	?Amounttype Attr;
+};
+

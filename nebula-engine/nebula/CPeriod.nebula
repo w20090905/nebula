@@ -1,0 +1,15 @@
+@Remarks("Period of the Calendar")
+@Refby("8")
+type CPeriod {
+	!CPeriod ID;
+	AdClient;
+	AdOrg;
+	Name;
+	Periodno SeqNo;
+	CYear;
+	Startdate Date;
+	?Enddate Date;
+	Periodtype Attr;
+	?Processing YesNo;
+};
+

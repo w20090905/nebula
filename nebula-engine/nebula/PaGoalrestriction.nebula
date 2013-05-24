@@ -1,0 +1,16 @@
+@Remarks("Performance Goal Restriction")
+@Refby("0")
+type PaGoalrestriction {
+	!PaGoalrestriction ID;
+	AdClient ID;
+	AdOrg;
+	Name;
+	Goalrestrictiontype Attr;
+	PaGoal;
+	?CBpartner;
+	?MProduct;
+	?Org AdOrg;
+	?CBpGroup;
+	?MProductCategory;
+};
+

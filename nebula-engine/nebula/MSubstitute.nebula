@@ -1,0 +1,11 @@
+@Remarks("M_Substitute")
+@Refby("0")
+type MSubstitute {
+	!MProduct;
+	!Substitute MProduct;
+	AdClient;
+	AdOrg;
+	?Name;
+	?Description;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("R_CategoryUpdates")
+@Refby("0")
+type RCategoryupdates {
+	!AdUser;
+	!RCategory;
+	AdClient ID;
+	AdOrg ID;
+	IsSelfservice YesNo;/* 'N'  */
+};
+

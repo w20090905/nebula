@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("0")
+type RvCashDetail {
+	CCash ID;
+	CCashLine ID;
+	AdClient ID;
+	AdOrg ID;
+	CCashBook ID;
+	Name;
+	Statementdate Date;
+	DateAcct Date;
+	Processed YesNo;
+	PostEd YesNo;
+	Line Long;
+	?Description;
+	CashType Attr;
+	?CCurrency ID;
+	Amount;
+	?Convertedamt Amount;
+	?CBankaccount ID;
+	?CInvoice ID;
+	?CCharge ID;
+};
+

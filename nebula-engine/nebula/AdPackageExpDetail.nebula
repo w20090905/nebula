@@ -1,0 +1,38 @@
+@Remarks("AD_Package_Exp_Detail_ID")
+@Refby("0")
+type AdPackageExpDetail {
+	!AdPackageExpDetail ID;
+	AdClient ID;
+	AdOrg ID;
+	?AdForm;
+	?AdImpformat;
+	?AdMenu;
+	?AdProcess;
+	?AdRole;
+	?AdWindow;
+	?AdWorkflow;
+	?FileDirectory Note;
+	?Filename Name;
+	?DestinationFilename Name;
+	?DestinationDirectory Note;
+	Description;
+	?Dbtype String;
+	Type String;
+	?TargetDirectory Note;
+	?Sqlstatement Note;
+	?ReleaseNo String;
+	Processing YesNo;
+	?Processed YesNo;
+	?Name2 Name;
+	?Line Long;
+	?AdWorkbench;
+	?AdTable;
+	?AdReportview;
+	AdPackageExp ID;
+	?AdPackageCodeNew Note;
+	?AdPackageCodeOld Note;
+	?AdValRule ID;
+	?AdMessage;
+	?AdPrintFormat;
+};
+

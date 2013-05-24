@@ -1,0 +1,13 @@
+@Remarks("Product Attribute Set Instance")
+@Refby("26")
+type MAttributesetinstance {
+	!MAttributesetinstance ID;
+	AdClient ID;
+	AdOrg ID;
+	?MAttributeset;
+	?Serno Description;
+	?Lot Description;
+	?Guaranteedate Date;
+	?Description;
+};
+

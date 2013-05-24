@@ -1,0 +1,13 @@
+@Remarks("Position Remuneration")
+@Refby("0")
+type CJobremuneration {
+	!CJobremuneration ID;
+	AdClient ID;
+	AdOrg ID;
+	CJob;
+	CRemuneration;
+	Validfrom Date;
+	?Validto Date;
+	?Description;
+};
+

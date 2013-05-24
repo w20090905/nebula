@@ -1,0 +1,24 @@
+@Remarks("Recurring Document")
+@Refby("1")
+type CRecurring {
+	!CRecurring ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	Recurringtype Attr;
+	?COrder;
+	?CInvoice;
+	?CPayment;
+	?CProject;
+	?GlJournalbatch;
+	FrequencyType Attr;
+	Runsmax Number;
+	Runsremaining Number;
+	?DateLastrun Date;
+	?DateNextrun Date;
+	?Processing YesNo;
+	?Frequency Number;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("C_Withholding_Acct")
+@Refby("0")
+type CWithholdingAcct {
+	!CWithholding;
+	!CAcctschema;
+	AdClient ID;
+	AdOrg ID;
+	WithholdingAcct CValidcombination;
+};
+

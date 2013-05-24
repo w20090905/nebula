@@ -1,0 +1,14 @@
+@Remarks("PA_DashboardContent_ID")
+@Refby("0")
+type PaDashboardcontent {
+	!PaDashboardcontent ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?AdWindow;
+	?Description;
+	?Html Note;
+	?Line Long;
+	?PaGoal;
+};
+

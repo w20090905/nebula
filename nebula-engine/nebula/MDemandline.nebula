@@ -1,0 +1,13 @@
+@Remarks("Material Demand Line")
+@Refby("1")
+type MDemandline {
+	!MDemandline ID;
+	AdClient ID;
+	AdOrg ID;
+	MDemand;
+	CPeriod;
+	Qty Quantity;/* 0  */
+	MProduct;
+	QtyCalculated Quantity;/* 0  */
+};
+

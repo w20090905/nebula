@@ -1,0 +1,9 @@
+@Remarks("Web Access BP Group")
+@Refby("0")
+type CmAccessListbpgroup {
+	!CmAccessProfile;
+	!CBpGroup;
+	AdClient ID;
+	AdOrg ID;
+};
+

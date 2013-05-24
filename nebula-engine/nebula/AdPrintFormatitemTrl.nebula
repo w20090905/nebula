@@ -1,0 +1,12 @@
+@Remarks("Item/Column in the Print format")
+@Refby("0")
+type AdPrintFormatitemTrl {
+	!AdPrintFormatitem;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	?PrintName Name;
+	IsTranslated YesNo;/* 'N'  */
+	?PrintNamesuffix Description;
+};
+

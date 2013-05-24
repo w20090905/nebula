@@ -1,0 +1,11 @@
+@Remarks("Day on which business is not transacted")
+@Refby("0")
+type CNonbusinessday {
+	!CNonbusinessday ID;
+	AdClient;
+	AdOrg;
+	?Name;
+	Date1 Date;
+	CCalendar;
+};
+

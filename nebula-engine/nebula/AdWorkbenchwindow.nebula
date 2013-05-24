@@ -1,0 +1,16 @@
+@Remarks("Workbench Window")
+@Refby("0")
+type AdWorkbenchwindow {
+	!AdWorkbenchwindow ID;
+	AdClient ID;
+	AdOrg ID;
+	AdWorkbench;
+	Seqno SeqNo;
+	IsPrimary YesNo;/* 'N'  */
+	?AdWindow;
+	?AdForm;
+	?AdProcess;
+	?AdTask;
+	EntityType AdEntityType;/* 'D'  */
+};
+

@@ -1,0 +1,14 @@
+@Remarks("Ldap Access Log")
+@Refby("0")
+type AdLdapAccess {
+	!AdLdapAccess ID;
+	AdClient ID;
+	AdOrg ID;
+	AdLdapProcessor;
+	?AdUser;
+	?RInterestArea;
+	IsError YesNo;/* 'N'  */
+	?Summary Note;
+	?Description;
+};
+

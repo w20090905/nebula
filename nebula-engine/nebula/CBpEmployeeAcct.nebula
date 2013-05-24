@@ -1,0 +1,11 @@
+@Remarks("C_BP_Employee_Acct")
+@Refby("0")
+type CBpEmployeeAcct {
+	!CBpartner;
+	!CAcctschema;
+	AdClient ID;
+	AdOrg ID;
+	?EExpenseAcct CValidcombination;
+	?EPrepaymentAcct CValidcombination;
+};
+

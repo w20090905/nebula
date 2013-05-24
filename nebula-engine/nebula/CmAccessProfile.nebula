@@ -1,0 +1,12 @@
+@Remarks("Web Access Profile")
+@Refby("6")
+type CmAccessProfile {
+	!CmAccessProfile ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	IsExclude YesNo;/* 'Y'  */
+};
+

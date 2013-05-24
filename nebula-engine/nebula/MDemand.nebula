@@ -1,0 +1,15 @@
+@Remarks("Material Demand")
+@Refby("1")
+type MDemand {
+	!MDemand ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	IsDefault YesNo;/* 'N'  */
+	CCalendar;
+	CYear;
+	?Processing YesNo;
+};
+

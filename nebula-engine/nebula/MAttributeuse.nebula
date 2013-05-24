@@ -1,0 +1,10 @@
+@Remarks("M_AttributeUse")
+@Refby("0")
+type MAttributeuse {
+	!MAttribute;
+	!MAttributeset;
+	AdClient ID;
+	AdOrg ID;
+	Seqno SeqNo;
+};
+

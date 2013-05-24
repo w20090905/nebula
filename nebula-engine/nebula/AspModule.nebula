@@ -1,0 +1,12 @@
+@Remarks("ASP Module")
+@Refby("2")
+type AspModule {
+	AdClient ID;/* NULL   */
+	AdOrg ID;/* NULL   */
+	!AspModule ID;
+	?Description;
+	?Help;
+	Name;
+	Value String;
+};
+

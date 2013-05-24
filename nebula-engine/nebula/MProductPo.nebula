@@ -1,0 +1,31 @@
+@Remarks("Product Purchasing")
+@Refby("0")
+type MProductPo {
+	!MProduct;
+	!CBpartner;
+	AdClient;
+	AdOrg;
+	IsCurrentvendor YesNo;/* 'Y'  */
+	?CUom;
+	?CCurrency;
+	?PriceList Price;/* 0 */
+	?PricePo Price;/* 0 */
+	?PriceEffective Price;
+	?PriceLastpo Price;/* 0 */
+	?PriceLastinv Price;/* 0 */
+	Vendorproductno String;
+	?Upc UPC;
+	?Vendorcategory String;
+	?Discontinued YesNo;/* 'N'
+                              */
+	?Discontinuedby Date;
+	?OrderMin Number;/* 0 */
+	?OrderPack Number;/* 0 */
+	?Costperorder Number;/* 0 */
+	?DeliveryTimePromised Number;
+	?DeliveryTimeActual Number;
+	?Qualityrating Number;
+	?Royaltyamt Amount;/* 0 */
+	?Manufacturer String;
+};
+

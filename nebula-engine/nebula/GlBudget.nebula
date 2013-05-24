@@ -1,0 +1,12 @@
+@Remarks("General Ledger Budget")
+@Refby("7")
+type GlBudget {
+	!GlBudget ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	IsPrimary YesNo;/* 'Y'  */
+	?Budgetstatus Attr;
+};
+

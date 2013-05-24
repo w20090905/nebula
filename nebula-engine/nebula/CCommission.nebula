@@ -1,0 +1,19 @@
+@Remarks("Commission")
+@Refby("2")
+type CCommission {
+	!CCommission ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	CBpartner;
+	CCurrency;
+	FrequencyType Attr;
+	Docbasistype Attr;
+	Listdetails YesNo;/* 'N'  */
+	?DateLastrun Date;
+	?CreateFrom YesNo;
+	?Processing YesNo;
+	CCharge;
+};
+

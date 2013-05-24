@@ -1,0 +1,19 @@
+@Remarks("A Web Store of the Client")
+@Refby("0")
+type WStoreTrl {
+	!WStore;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	IsTranslated YesNo;/* 'N'  */
+	?Webinfo Note;
+	?Webparam1 Note;
+	?Webparam2 Note;
+	?Webparam3 Note;
+	?Webparam4 Note;
+	?Webparam5 Note;
+	?Webparam6 Note;
+	?Emailheader Note;
+	?Emailfooter Note;
+};
+

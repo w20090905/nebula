@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+type RvMTransactionSum {
+	AdClient ID;
+	AdOrg ID;
+	Movementtype Attr;
+	MWarehouse ID;
+	MLocator ID;
+	MProduct ID;
+	Movementdate Date;
+	?Movementqty Quantity;
+};
+

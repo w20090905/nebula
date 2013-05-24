@@ -1,0 +1,18 @@
+@Remarks("Individual Web Click")
+@Refby("0")
+type WClick {
+	!WClick ID;
+	AdClient ID;
+	AdOrg ID;
+	?Targeturl URL;
+	?Referrer Description;
+	?RemoteHost Host;
+	?RemoteAddr Name;
+	?Useragent Note;
+	?AcceptLanguage Description;
+	Processed YesNo;/* 'N'  */
+	?WClickcount;
+	?AdUser;
+	?Email;
+};
+

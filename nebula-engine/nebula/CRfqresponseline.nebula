@@ -1,0 +1,17 @@
+@Remarks("Request for Quotation Response Line")
+@Refby("1")
+type CRfqresponseline {
+	!CRfqresponseline ID;
+	AdClient ID;
+	AdOrg ID;
+	CRfqline;
+	CRfqresponse;
+	IsSelfservice YesNo;/* 'N'  */
+	IsSelectEdwinner YesNo;/* 'N'  */
+	?Description;
+	?Help;
+	?DateWorkstart Date;
+	?DeliveryDays Count;/* 0 */
+	?DateWorkcomplete Date;
+};
+

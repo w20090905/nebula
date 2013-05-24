@@ -1,0 +1,10 @@
+@Remarks("Related Entry for this Enntry")
+@Refby("0")
+type KEntryrelated {
+	!KEntry;
+	!KEntryrelated KEntry;
+	AdClient ID;
+	AdOrg ID;
+	?Name;
+};
+

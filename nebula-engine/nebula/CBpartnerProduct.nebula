@@ -1,0 +1,16 @@
+@Remarks("Product Business Partner")
+@Refby("0")
+type CBpartnerProduct {
+	!CBpartner;
+	!MProduct;
+	AdClient ID;
+	AdOrg ID;
+	?Description;
+	Shelflifeminpct Number;
+	Shelflifemindays Count;
+	?Qualityrating Number;
+	?Vendorproductno String;
+	?Vendorcategory String;
+	?Manufacturer String;
+};
+

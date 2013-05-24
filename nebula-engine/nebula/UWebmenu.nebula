@@ -1,0 +1,19 @@
+@Remarks("Web Menu")
+@Refby("2")
+type UWebmenu {
+	!UWebmenu ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	Menulink Note;
+	Module Description;
+	?Parentmenu UWebmenu;
+	Hassubmenu YesNo;/* 'N'  */
+	?Description;
+	?ImageLink Note;
+	?Position String;
+	?Help;
+	?Category Description;
+	?Sequence SeqNo;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("Product Price")
+@Refby("0")
+type MProductPrice {
+	!MPriceListVersion;
+	!MProduct;
+	AdClient ID;
+	AdOrg ID;
+	PriceList Price;/* 0  */
+	PriceStd Price;/* 0  */
+	PriceLimit Price;/* 0  */
+};
+

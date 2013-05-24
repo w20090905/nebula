@@ -1,0 +1,13 @@
+@Remarks("M_Replenish")
+@Refby("0")
+type MReplenish {
+	!MProduct;
+	!MWarehouse;
+	AdClient ID;
+	AdOrg ID;
+	Replenishtype Attr;
+	LevelMin Long;/* 0  */
+	LevelMax Long;/* 0  */
+	?MWarehousesource MWarehouse;
+};
+

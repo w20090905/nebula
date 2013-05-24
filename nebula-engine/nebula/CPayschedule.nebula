@@ -1,0 +1,16 @@
+@Remarks("Payment Schedule Template")
+@Refby("1")
+type CPayschedule {
+	!CPayschedule ID;
+	AdClient ID;
+	AdOrg ID;
+	CPaymentTerm;
+	Percentage Number;
+	Netdays Count;
+	?Netday YesNo;
+	DiscountDays Count;
+	Discount Number;
+	IsValid YesNo;/* 'N'  */
+	Gracedays Count;
+};
+

@@ -1,0 +1,24 @@
+@Remarks("General Ledger Journal Line")
+@Refby("1")
+type GlJournalline {
+	!GlJournalline ID;
+	AdClient;
+	AdOrg;
+	GlJournal;
+	Line Long;
+	IsGenerated YesNo;/* 'N'  */
+	?Description;
+	AmtSourcedr Amount;/* 0  */
+	AmtSourcecr Amount;/* 0  */
+	CCurrency;
+	Currencyrate Number;/* 0  */
+	DateAcct Date;
+	AmtAcctdr Amount;/* 0  */
+	AmtAcctcr Amount;/* 0  */
+	?CUom;
+	?Qty Quantity;/* 0 */
+	CValidcombination;
+	CConversionType;
+	Processed YesNo;/* 'N'  */
+};
+

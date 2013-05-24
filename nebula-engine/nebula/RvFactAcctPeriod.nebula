@@ -1,0 +1,35 @@
+@Remarks("")
+@Refby("0")
+type RvFactAcctPeriod {
+	AdClient ID;
+	AdOrg ID;
+	CAcctschema ID;
+	Account ID;
+	?CPeriod ID;
+	?GlCategory ID;
+	?GlBudget ID;
+	?CTax ID;
+	?MLocator ID;
+	PostIngtype Attr;
+	CCurrency ID;
+	?AmtSourcedr Amount;
+	?AmtSourcecr Amount;
+	?AmtSource Amount;
+	?AmtAcctdr Amount;
+	?AmtAcctcr Amount;
+	?AmtAcct Amount;
+	?Rate;
+	?MProduct ID;
+	?CBpartner ID;
+	?AdOrgtrx ID;
+	?CLocfrom ID;
+	?CLocto ID;
+	?CSalesRegion ID;
+	?CProject ID;
+	?CCampaign ID;
+	?CActivity ID;
+	?User1 ID;
+	?User2 ID;
+	?AAsset ID;
+};
+

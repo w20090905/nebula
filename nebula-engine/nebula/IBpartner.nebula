@@ -1,0 +1,47 @@
+@Remarks("Import Business Partner")
+@Refby("0")
+type IBpartner {
+	!IBpartner ID;
+	?AdClient ID;
+	?AdOrg ID;
+	IIsImported YesNo;/* 'N'  */
+	?IErrorMsg Note;
+	?CBpartner;
+	?Value String;
+	?Name;
+	?Name2 Name;
+	?Description;
+	?Duns String;
+	?TaxId Code;
+	?Naics NAICS;
+	?Groupvalue Description;
+	?CBpGroup;
+	?CBpartnerLocation;
+	?Address1 Name;
+	?Address2 Name;
+	?PostAl Code;
+	?PostAlAdd String;
+	?City Name;
+	?CRegion;
+	?Regionname Name;
+	?CCountry;
+	?CountryCode Code;
+	?Title String;
+	?Contactname Name;
+	?Contactdescription Note;
+	?Comments Comment;
+	?Phone PhoneNumber;
+	?Phone2 PhoneNumber;
+	?Fax;
+	?Email;
+	?Password String;
+	?Birthday;
+	?CGreeting;
+	?BpcontactGreeting Description;
+	?Processing YesNo;
+	?Processed YesNo;/* 'N' */
+	?AdUser;
+	?RInterestArea;
+	?InterestAreaname Name;
+};
+

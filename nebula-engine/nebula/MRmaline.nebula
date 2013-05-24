@@ -1,0 +1,18 @@
+@Remarks("Return Material Authorization Line")
+@Refby("2")
+type MRmaline {
+	!MRmaline ID;
+	AdClient ID;
+	AdOrg ID;
+	MRma;
+	?MInoutline;
+	Qty Quantity;/* 0  	  */
+	?Description;
+	Processed YesNo;/* 'N'  */
+	?Amt Amount;
+	?CCharge;
+	Line Long;/* 0  */
+	?LineNetamt Long;
+	?QtyDelivered Quantity;
+};
+

@@ -1,0 +1,15 @@
+@Remarks("Result of the execution of the Scheduler")
+@Refby("0")
+type AdSchedulerlog {
+	!AdScheduler;
+	!AdSchedulerlog ID;
+	AdClient ID;
+	AdOrg ID;
+	IsError YesNo;/* 'N'  	  */
+	?Summary Note;
+	?Reference Description;
+	?Description;
+	?TextMsg Note;
+	?Binarydata Note;
+};
+

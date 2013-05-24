@@ -1,0 +1,14 @@
+@Remarks("Substitute of the user")
+@Refby("0")
+type AdUserSubstitute {
+	!AdUserSubstitute ID;
+	AdClient ID;
+	AdOrg ID;
+	AdUser;
+	Name;
+	?Description;
+	Substitute AdUser;
+	?Validfrom Date;
+	?Validto Date;
+};
+

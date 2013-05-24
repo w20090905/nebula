@@ -1,0 +1,13 @@
+@Remarks("Request for Quotation Response Line Quantity")
+@Refby("0")
+type CRfqresponselineqty {
+	!CRfqresponselineqty ID;
+	AdClient ID;
+	AdOrg ID;
+	CRfqresponseline;
+	CRfqlineqty;
+	Price;/* 0  */
+	?Discount Number;
+	?Ranking;/* 0 */
+};
+

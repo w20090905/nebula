@@ -1,0 +1,33 @@
+@Remarks("General Ledger Journal")
+@Refby("3")
+type GlJournal {
+	!GlJournal ID;
+	AdClient ID;
+	AdOrg ID;
+	CAcctschema;
+	CDoctype;
+	DocumentNo Long;
+	Docstatus Attr;
+	Docaction Attr;
+	IsApproved YesNo;/* 'N'  */
+	IsPrintEd YesNo;/* 'N'  */
+	Description;
+	PostIngtype Attr;
+	?GlBudget;
+	GlCategory;
+	DateDoc Date;
+	DateAcct Date;
+	CPeriod;
+	?CCurrency;
+	Currencyrate Number;/* 0  */
+	?GlJournalbatch;
+	TotalDr Number;/* 0  */
+	TotalCr Number;/* 0  */
+	?Controlamt Amount;/* 0 */
+	?Processing YesNo;
+	?Processed YesNo;/* 'N'
+                           */
+	PostEd YesNo;/* 'N'  */
+	CConversionType;
+};
+

@@ -1,0 +1,20 @@
+@Remarks("Migration Scripts for the System")
+@Refby("0")
+type AdMigrationscriptIsApplyChk {
+	AdClient ID;
+	!AdMigrationscript ID;
+	AdOrg ID;
+	?Description;
+	?Developername Name;/* NULL */
+	Name;
+	ProjectName Name;
+	?Reference Note;
+	ReleaseNo String;/* NULL */
+	?Scriptroll YesNo;/* NULL */
+	Status Attr;/* NULL */
+	?Url URL;
+	IsApply YesNo;/* NULL */
+	Filename Name;
+	?Script Note;
+};
+

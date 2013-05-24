@@ -1,0 +1,13 @@
+@Remarks("Forecast Line")
+@Refby("1")
+type MForecastline {
+	!MForecastline ID;
+	AdClient ID;
+	AdOrg ID;
+	MForecast;
+	CPeriod;
+	Qty Quantity;/* 0  */
+	MProduct;
+	QtyCalculated Quantity;/* 0  */
+};
+

@@ -1,0 +1,22 @@
+@Remarks("User defined Field")
+@Refby("0")
+type AdUserdefField {
+	!AdUserdefField ID;
+	AdClient ID;
+	AdOrg ID;
+	AdUserdefTab;
+	AdField;
+	Name;
+	?Description;
+	?Help;
+	IsDisplayEd YesNo;/* 'Y'  */
+	IsReadonly YesNo;/* 'N'  */
+	IsSameline YesNo;/* 'N'  */
+	IsUpdateable YesNo;/* 'Y'  */
+	DisplayLength Length;/* 0  */
+	DisplayLogic Note;
+	Defaultvalue Note;
+	Sortno SeqNo;/* 0  */
+	Seqno SeqNo;/* 0  */
+};
+

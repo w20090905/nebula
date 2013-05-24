@@ -1,0 +1,17 @@
+@Remarks("Product Operation Resource")
+@Refby("0")
+type MOperationresource {
+	!MOperationresource ID;
+	AdClient ID;
+	AdOrg ID;
+	MProductOperation;
+	Name;
+	?Description;
+	?Help;
+	?AAsset;
+	?CJob;
+	Setuptime Long;/* 0  */
+	Unitruntime Number;/* 0  */
+	Teardowntime Long;/* 0  */
+};
+

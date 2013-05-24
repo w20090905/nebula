@@ -1,0 +1,13 @@
+@Remarks("Web Basket")
+@Refby("1")
+type WBasket {
+	!WBasket ID;
+	AdClient ID;
+	AdOrg ID;
+	Session ID;
+	?Email;
+	?CBpartner;
+	?MPriceList;
+	AdUser;
+};
+

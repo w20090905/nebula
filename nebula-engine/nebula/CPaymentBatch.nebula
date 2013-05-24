@@ -1,0 +1,14 @@
+@Remarks("Payment batch for EFT")
+@Refby("1")
+type CPaymentBatch {
+	!CPaymentBatch ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?CPaymentProcessor;
+	?DocumentNo Long;
+	?Processingdate Date;
+	Processing YesNo;
+	Processed YesNo;/* 'N'  */
+};
+

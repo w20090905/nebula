@@ -1,0 +1,14 @@
+@Remarks("C_Tax_Acct")
+@Refby("0")
+type CTaxAcct {
+	!CTax;
+	!CAcctschema;
+	AdClient ID;
+	AdOrg ID;
+	TDueAcct CValidcombination;
+	TLiabilityAcct CValidcombination;
+	TCreditAcct CValidcombination;
+	TReceivablesAcct CValidcombination;
+	TExpenseAcct CValidcombination;
+};
+

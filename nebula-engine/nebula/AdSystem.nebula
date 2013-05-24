@@ -1,0 +1,42 @@
+@Remarks("System Definition")
+@Refby("2")
+type AdSystem {
+	!AdSystem ID;
+	!AdClient ID;
+	AdOrg ID;
+	Name;
+	Username Name;
+	?Info Description;
+	?Version String;
+	ReleaseNo String;
+	?SupportUnits Number;
+	?Password String;
+	Replicationtype Attr;/* 'L' */
+	?Idrangestart Long;
+	?Idrangeend Long;
+	?LdapHost Host;
+	?Customprefix Description;
+	?IsJustmigrated YesNo;/* 'N'
+ */
+	?Dbinstance Description;
+	?Dbaddress Name;
+	?Noprocessors Number;
+	?Summary Note;
+	?Encryptionkey Note;
+	?LdapDomain Note;
+	IsAutoErrorReport YesNo;/* 'Y'  */
+	?Record ID;
+	?SupportExpdate Date;
+	?Processing YesNo;
+	?SupportEmail Description;
+	IsAllowstatistics YesNo;/* 'Y'  */
+	?Statisticsinfo Description;
+	?Profileinfo Description;
+	?OldName Name;
+	?Description;
+	SystemStatus Attr;/* 'E'  */
+	IsFailonmissingmodelvalidator YesNo;/* 'Y'  */
+	?Lastbuildinfo Note;
+	IsFailonbuilddiffer YesNo;/* 'N'  */
+};
+

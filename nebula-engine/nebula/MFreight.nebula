@@ -1,0 +1,17 @@
+@Remarks("Freight Rate")
+@Refby("0")
+type MFreight {
+	!MFreight ID;
+	AdClient ID;
+	AdOrg ID;
+	MShipper;
+	MFreightCategory;
+	Validfrom Date;
+	?CCountry;
+	?ToCountry CCountry;
+	?CRegion;
+	?ToRegion CRegion;
+	CCurrency;
+	FreightAmt Amount;/* 0  	  */
+};
+

@@ -1,0 +1,12 @@
+@Remarks("Category of the Freight")
+@Refby("2")
+type MFreightCategory {
+	!MFreightCategory ID;
+	AdClient ID;
+	AdOrg ID;
+	Value String;
+	Name;
+	?Description;
+	?Help;
+};
+

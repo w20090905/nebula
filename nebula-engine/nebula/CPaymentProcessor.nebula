@@ -1,0 +1,38 @@
+@Remarks("Payment processor for electronic payments")
+@Refby("1")
+type CPaymentProcessor {
+	!CPaymentProcessor ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	CBankaccount;
+	?AdSequence;
+	?Payprocessorclass Description;
+	?Userid Description;
+	?Password String;
+	?Hostaddress Name;
+	?Hostport Long;
+	?ProxyAddress Name;
+	?ProxyPort Number;
+	?ProxyLogon Description;
+	?ProxyPassword Description;
+	AcceptVisa YesNo;/* 'Y'  */
+	AcceptMc YesNo;/* 'Y'  */
+	AcceptAmex YesNo;/* 'Y'  */
+	AcceptDiners YesNo;/* 'Y'  */
+	AcceptDiscover YesNo;/* 'Y'  */
+	AcceptCorporate YesNo;/* 'Y'  */
+	AcceptCheck YesNo;/* 'Y'  */
+	AcceptAtm YesNo;/* 'Y'  */
+	Requirevv YesNo;/* 'N'  */
+	?CCurrency;
+	Costpertrx Number;/* 0  */
+	Commission Number;
+	?Partnerid Description;
+	?Vendorid Description;
+	?Minimumamt Amount;/* 0 */
+	AcceptDirectdebit YesNo;/* 'N'  */
+	AcceptDirectdeposit YesNo;/* 'N'  */
+};
+

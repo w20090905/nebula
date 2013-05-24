@@ -1,0 +1,11 @@
+@Remarks("Type of time recorded")
+@Refby("1")
+type STimetype {
+	!STimetype ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+};
+

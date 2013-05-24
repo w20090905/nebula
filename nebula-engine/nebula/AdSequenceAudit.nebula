@@ -1,0 +1,11 @@
+@Remarks("AD_Sequence_Audit")
+@Refby("0")
+type AdSequenceAudit {
+	!AdSequence;
+	!DocumentNo Long;
+	AdClient;
+	AdOrg;
+	AdTable;
+	Record ID;
+};
+

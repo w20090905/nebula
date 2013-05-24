@@ -1,0 +1,13 @@
+@Remarks("Special Form")
+@Refby("0")
+type AdFormTrl {
+	!AdForm;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	IsTranslated YesNo;/* 'N'  */
+};
+

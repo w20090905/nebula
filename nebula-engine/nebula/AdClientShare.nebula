@@ -1,0 +1,12 @@
+@Remarks("Client Share")
+@Refby("0")
+type AdClientShare {
+	!AdClientShare ID;
+	AdClient;
+	AdOrg;
+	Name;
+	?Description;
+	AdTable;
+	Sharetype Attr;
+};
+

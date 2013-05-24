@@ -1,0 +1,10 @@
+@Remarks("M_InventoryLineMA")
+@Refby("0")
+type MInventorylinema {
+	!MInventoryline;
+	!MAttributesetinstance;
+	AdClient ID;
+	AdOrg ID;
+	Movementqty Quantity;/* 0  */
+};
+

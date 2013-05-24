@@ -1,0 +1,15 @@
+@Remarks("Auction Topic Type")
+@Refby("2")
+type BTopictype {
+	!BTopictype ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	MPriceList;
+	MProduct;
+	Auctiontype Attr;
+	MProductMember MProduct;
+};
+

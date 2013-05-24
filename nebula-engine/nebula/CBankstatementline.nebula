@@ -1,0 +1,41 @@
+@Remarks("Line on a statement from this Bank")
+@Refby("1")
+type CBankstatementline {
+	!CBankstatementline ID;
+	AdClient ID;
+	AdOrg ID;
+	CBankstatement;
+	Line Long;
+	?Description;
+	IsReversal YesNo;/* 'N'  */
+	?CPayment;
+	Valutadate Date;
+	DateAcct Date;
+	CCurrency;
+	Trxamt Amount;/* 0  */
+	Stmtamt Amount;/* 0  */
+	?CCharge;
+	ChargeAmt Amount;/* 0  */
+	InterestAmt Amount;/* 0  */
+	?Memo Note;
+	?ReferenceNo Description;
+	IsManual YesNo;/* 'N' */
+	?Efttrxid Description;
+	?Efttrxtype String;
+	?Eftmemo Note;
+	?Eftpayee Note;
+	?Eftpayeeaccount Description;
+	?CreatePayment YesNo;
+	Statementlinedate Date;
+	?Eftstatementlinedate Date;
+	?Eftvalutadate Date;
+	?Eftreference Description;
+	?Eftcurrency String;
+	?Eftamt Amount;/* 0 */
+	?Eftcheckno String;
+	?Matchstatement YesNo;
+	?CBpartner;
+	?CInvoice;
+	Processed YesNo;/* 'N'  */
+};
+

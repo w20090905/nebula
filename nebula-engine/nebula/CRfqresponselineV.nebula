@@ -1,0 +1,31 @@
+@Remarks("")
+@Refby("0")
+type CRfqresponselineV {
+	CRfqresponse ID;
+	CRfqresponseline ID;
+	CRfqline ID;
+	CRfqresponselineqty ID;
+	CRfqlineqty ID;
+	AdClient ID;
+	AdOrg ID;
+	?AdLanguage String;
+	Line Long;
+	?MProduct ID;
+	?MAttributesetinstance ID;
+	?Name;
+	?Description;
+	?DocumentNote Note;
+	?Upc UPC;
+	?Sku String;
+	?ProductValue Note;
+	?Help;
+	?DateWorkstart Date;
+	?DeliveryDays Count;
+	CUom ID;
+	?Uomsymbol String;
+	Benchmarkprice Price;
+	Qty Quantity;
+	Price;
+	?Discount Number;
+};
+

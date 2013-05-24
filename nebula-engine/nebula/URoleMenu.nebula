@@ -1,0 +1,10 @@
+@Remarks("Role Menu")
+@Refby("0")
+type URoleMenu {
+	!URoleMenu ID;
+	AdClient ID;
+	AdOrg ID;
+	AdRole;
+	UWebmenu;
+};
+

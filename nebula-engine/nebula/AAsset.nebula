@@ -1,0 +1,52 @@
+@Remarks("Asset used internally or by customers")
+@Refby("15")
+type AAsset {
+	!AAsset ID;
+	AdClient ID;
+	AdOrg ID;
+	Value String;
+	Name;
+	?Description;
+	?Help;
+	AAssetGroup;
+	?MProduct;
+	?Serno Note;
+	?Lot Note;
+	?Versionno String;
+	?Guaranteedate Date;
+	?Assetservicedate Date;
+	IsOwned YesNo;/* 'Y'  */
+	?Assetdepreciationdate Date;
+	?Uselifeyears Number;
+	?Uselifemonths Number;
+	?Lifeuseunits Number;
+	?Useunits Number;
+	IsDisposed YesNo;/* 'N'  */
+	?Assetdisposaldate Date;
+	IsInposession YesNo;/* 'Y'  */
+	?Locationcomment Note;
+	?MLocator;
+	?CBpartner;
+	?CBpartnerLocation;
+	?CLocation;
+	?Processing YesNo;
+	IsDepreciated YesNo;/* 'Y'  */
+	IsFullydepreciated YesNo;/* 'N'  */
+	?AdUser;
+	?MAttributesetinstance;/* 0 */
+	?Qty Quantity;
+	?CProject;
+	?CBpartnerSr CBpartner;
+	?MInoutline;
+	?Lastmaintenencedate Date;
+	?Nextmaintenencedate Date;/* NULL  */
+	?Lastmaintenanceuseunit Number;
+	?Nextmaintenanceuseunit Number;
+	?Leaseterminationdate Date;/* NULL  */
+	?LeaseBpartner CBpartner;/* NULL  */
+	?Lastmaintenancenote Description;/* NULL  */
+	?Lastmaintenancedate Date;/* NULL  */
+	?Lastmaintenanceunit Number;/* NULL  */
+	?Nextmaintenenceunit Number;/* NULL  */
+};
+

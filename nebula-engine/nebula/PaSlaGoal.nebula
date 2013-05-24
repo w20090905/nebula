@@ -1,0 +1,20 @@
+@Remarks("Service Level Agreement Goal")
+@Refby("1")
+type PaSlaGoal {
+	!PaSlaGoal ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	PaSlaCriteria;
+	CBpartner;
+	?Validfrom Date;
+	?Validto Date;
+	Measuretarget Number;/* 0  */
+	Measureactual Number;/* 0  */
+	?DateLastrun Date;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+};
+

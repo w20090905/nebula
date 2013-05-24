@@ -1,0 +1,10 @@
+@Remarks("Registration Product")
+@Refby("0")
+type ARegistrationproduct {
+	!ARegistrationattribute;
+	!MProduct;
+	AdClient ID;
+	AdOrg ID;
+	?Description;
+};
+

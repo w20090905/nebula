@@ -1,0 +1,11 @@
+@Remarks("User defined tree 2")
+@Refby("0")
+type AdTreenodeu2 {
+	!AdTree;
+	!Node ID;
+	AdClient ID;
+	AdOrg ID;
+	Parent ID;
+	Seqno SeqNo;/* 0  */
+};
+

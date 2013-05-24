@@ -1,0 +1,13 @@
+@Remarks("System Configurator")
+@Refby("0")
+type AdSysconfig {
+	!AdSysconfig ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	Value String;
+	?Description;
+	EntityType AdEntityType;/* 'U'  */
+	?Configurationlevel YesNo;/* 'S' */
+};
+

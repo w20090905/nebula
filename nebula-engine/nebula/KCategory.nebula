@@ -1,0 +1,11 @@
+@Remarks("Knowledge Category")
+@Refby("2")
+type KCategory {
+	!KCategory ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+};
+

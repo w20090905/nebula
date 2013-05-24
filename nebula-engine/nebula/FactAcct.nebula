@@ -1,0 +1,46 @@
+@Remarks("Accounting Fact")
+@Refby("2")
+type FactAcct {
+	!FactAcct ID;
+	AdClient;
+	AdOrg;
+	CAcctschema;
+	Account CElementvalue;
+	DateTrx Date;
+	DateAcct Date;
+	?CPeriod;
+	AdTable;
+	Record ID;
+	?Line ID;
+	?GlCategory;
+	?GlBudget;
+	?CTax;
+	?MLocator;
+	PostIngtype Attr;
+	CCurrency;
+	AmtSourcedr Amount;/* 0  */
+	AmtSourcecr Amount;/* 0  */
+	AmtAcctdr Amount;/* 0  */
+	AmtAcctcr Amount;/* 0  */
+	?CUom;
+	?Qty Quantity;/* 0 */
+	?MProduct;
+	?CBpartner;
+	?AdOrgtrx AdOrg;
+	?CLocfrom CLocation;
+	?CLocto CLocation;
+	?CSalesRegion;
+	?CProject;
+	?CCampaign;
+	?CActivity;
+	?User1 CElementvalue;
+	?User2 CElementvalue;
+	?Description;
+	?AAsset;
+	?CSubacct;
+	?Userelement1 ID;
+	?Userelement2 ID;
+	?CProjectPhase;
+	?CProjectTask;
+};
+

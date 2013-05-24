@@ -1,0 +1,16 @@
+@Remarks("Bill of Material")
+@Refby("3")
+type MBom {
+	!MBom ID;
+	AdClient ID;
+	AdOrg ID;
+	MProduct;
+	?MChangeNotice;
+	Bomtype Attr;
+	Bomuse YesNo;
+	Name;
+	?Description;
+	?Help;
+	?Processing YesNo;
+};
+

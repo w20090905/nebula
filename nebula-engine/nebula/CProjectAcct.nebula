@@ -1,0 +1,11 @@
+@Remarks("C_Project_Acct")
+@Refby("0")
+type CProjectAcct {
+	!CProject;
+	!CAcctschema;
+	AdClient ID;
+	AdOrg ID;
+	PjAssetAcct CValidcombination;
+	PjWipAcct CValidcombination;
+};
+

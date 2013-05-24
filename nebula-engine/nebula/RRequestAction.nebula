@@ -1,0 +1,45 @@
+@Remarks("Request History")
+@Refby("0")
+type RRequestAction {
+	!RRequestAction ID;
+	AdClient ID;
+	AdOrg ID;
+	RRequest;
+	?RGroup;
+	?RCategory;
+	?RStatus;
+	?RResolution;
+	?SalesRep AdUser;
+	?AdRole;
+	?IsEscalated YesNo;
+	?IsInvoiceD YesNo;
+	?Confidentialtype Attr;
+	?IsSelfservice YesNo;
+	?Priority;
+	?PriorityUser YesNo;
+	?CBpartner;
+	?AdUser;
+	?COrder;
+	?CInvoice;
+	?CPayment;
+	?MProduct;
+	?CProject;
+	?Summary Note;
+	?DateNextaction Date;
+	?CActivity;
+	?RRequestType;
+	?AAsset;
+	?MInout;
+	?MRma;
+	?Nullcolumns Note;
+	?Taskstatus Attr;
+	?DateCompleteplan Date;
+	?QtyPlan Quantity;
+	?QtySpent Quantity;
+	?Startdate Date;
+	?Enddate Date;
+	?DateStartplan Date;
+	?QtyInvoiced Quantity;
+	?MProductSpent MProduct;
+};
+

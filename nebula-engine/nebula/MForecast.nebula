@@ -1,0 +1,15 @@
+@Remarks("Material Forecast")
+@Refby("1")
+type MForecast {
+	!MForecast ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	IsDefault YesNo;/* 'N'  */
+	CCalendar;
+	CYear;
+	?Processing YesNo;
+};
+

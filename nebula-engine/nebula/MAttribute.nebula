@@ -1,0 +1,14 @@
+@Remarks("Product Attribute")
+@Refby("3")
+type MAttribute {
+	!MAttribute ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	IsMandatory YesNo;/* 'N'  */
+	IsInstanceattribute YesNo;/* 'N'  */
+	?MAttributesearch;
+	Attributevaluetype Attr;/* 'S'  */
+};
+

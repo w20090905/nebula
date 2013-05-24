@@ -1,0 +1,34 @@
+@Remarks("Web Container contains content like images, text etc.")
+@Refby("7")
+type CmContainer {
+	!CmContainer ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	CmWebproject;
+	?CmTemplate;
+	?Title String;
+	?Notice Note;
+	?Containertype Attr;
+	?Containerlinkurl URL;
+	?Relativeurl URL;
+	?Priority;/* 0  */
+	IsIndexed YesNo;/* 'Y'  */
+	IsSecure YesNo;/* 'Y'  */
+	?MetaRobotstag Note;
+	?MetaAuthor Note;
+	?MetaCopyright Note;
+	?MetaContent Note;
+	?MetaDescription Note;
+	?MetaKeywords Note;
+	?MetaPublisher Note;
+	?Structurexml Note;
+	?Containerxml Note;
+	?CmContainerlink CmContainer;
+	IsSummary YesNo;/* 'N'  */
+	?MetaLanguage Attr;
+	IsValid YesNo;/* 'Y'  */
+};
+

@@ -1,0 +1,13 @@
+@Remarks("Workflow or combination of tasks")
+@Refby("0")
+type AdWorkflowTrl {
+	!AdWorkflow;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	IsTranslated YesNo;/* 'N'  */
+};
+

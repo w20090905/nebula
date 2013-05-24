@@ -1,0 +1,23 @@
+@Remarks("Match Purchase Order to Shipment/Receipt and Invoice")
+@Refby("0")
+type MMatchpo {
+	!MMatchpo ID;
+	AdClient ID;
+	AdOrg ID;
+	COrderline;
+	?MProduct;
+	?MInoutline;
+	?CInvoiceLine;
+	DateTrx Date;
+	Qty Quantity;/* 0  */
+	Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	PostEd YesNo;/* 'N'  */
+	?DocumentNo Long;
+	?DateAcct Date;
+	?MAttributesetinstance ID;
+	?PriceMatchdifference Price;
+	?IsApproved YesNo;/* 'Y' */
+	?Description;
+};
+

@@ -1,0 +1,22 @@
+@Remarks("Allocation Line")
+@Refby("2")
+type CAllocationline {
+	!CAllocationline ID;
+	AdClient ID;
+	AdOrg ID;
+	?Allocationno SeqNo;
+	?DateTrx Date;
+	?IsManual YesNo;/* 'N'  */
+	?CInvoice;
+	?CBpartner;
+	?COrder;
+	?CPayment;
+	?CCashLine;
+	Amount;/* 0  */
+	DiscountAmt Amount;/* 0  */
+	WriteoffAmt Amount;/* 0  */
+	?PostEd YesNo;/* 'N'  */
+	?Overunderamt Amount;/* 0 */
+	CAllocationhdr;
+};
+

@@ -1,0 +1,16 @@
+@Remarks("Performance Achievement")
+@Refby("0")
+type PaAchievement {
+	!PaAchievement ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Note;
+	Seqno SeqNo;/* 0  */
+	PaMeasure;
+	Manualactual Number;/* 0  */
+	IsAchieved YesNo;
+	?DateDoc Date;
+};
+

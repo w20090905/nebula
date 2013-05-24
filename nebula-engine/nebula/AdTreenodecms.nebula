@@ -1,0 +1,11 @@
+@Remarks("Tree Node CM Stage")
+@Refby("0")
+type AdTreenodecms {
+	!AdTree;
+	!Node ID;
+	AdClient ID;
+	AdOrg ID;
+	Parent ID;
+	Seqno SeqNo;/* 0  */
+};
+

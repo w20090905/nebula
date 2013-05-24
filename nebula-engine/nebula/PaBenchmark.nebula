@@ -1,0 +1,12 @@
+@Remarks("Performance Benchmark")
+@Refby("2")
+type PaBenchmark {
+	!PaBenchmark ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	Accumulationtype Attr;
+};
+

@@ -1,0 +1,13 @@
+@Remarks("The terms of Payment (timing, discount)")
+@Refby("0")
+type CPaymentTermTrl {
+	!CPaymentTerm;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?DocumentNote Note;
+	IsTranslated YesNo;/* 'N'  */
+};
+

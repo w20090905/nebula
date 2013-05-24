@@ -1,0 +1,11 @@
+@Remarks("Make a comment to a Bid Topic")
+@Refby("0")
+type BBidcomment {
+	!BTopic;
+	!BBidcomment ID;
+	AdClient ID;
+	AdOrg ID;
+	AdUser;
+	TextMsg Note;
+};
+

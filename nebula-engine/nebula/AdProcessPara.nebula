@@ -1,0 +1,28 @@
+@Remarks("Process Parameter")
+@Refby("5")
+type AdProcessPara {
+	!AdProcessPara ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	AdProcess;
+	Seqno SeqNo;
+	AdReference;
+	?AdReferenceValue AdReference;
+	?AdValRule;
+	Columnname Name;
+	IsCentrallyMaintained YesNo;/* 'Y'  */
+	FieldLength Length;
+	IsMandatory YesNo;/* 'N'  */
+	IsRange YesNo;/* 'N'  */
+	?Defaultvalue Note;
+	?Defaultvalue2 Note;
+	?Vformat String;
+	?ValueMin String;
+	?ValueMax String;
+	?AdElement;
+	EntityType AdEntityType;/* 'D'  */
+};
+

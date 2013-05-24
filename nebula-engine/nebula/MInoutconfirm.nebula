@@ -1,0 +1,24 @@
+@Remarks("Material Shipment or Receipt Confirmation")
+@Refby("1")
+type MInoutconfirm {
+	!MInoutconfirm ID;
+	AdClient ID;
+	AdOrg ID;
+	DocumentNo Long;
+	MInout;
+	Confirmtype Attr;
+	IsApproved YesNo;/* 'N'  */
+	?Description;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	?CreatePackage YesNo;
+	IsCancelled YesNo;/* 'N'  */
+	Docstatus Attr;
+	Docaction Attr;
+	IsIndispute YesNo;/* 'N'  */
+	?MInventory;
+	?CInvoice;
+	?Approvalamt Amount;
+	?Confirmationno String;
+};
+

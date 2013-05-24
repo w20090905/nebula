@@ -1,0 +1,37 @@
+@Remarks("Time and Expense Report Line")
+@Refby("1")
+type STimeexpenseline {
+	!STimeexpenseline ID;
+	AdClient ID;
+	AdOrg ID;
+	STimeexpense;
+	Line Long;
+	IsTimereport YesNo;/* 'N'  */
+	?DateExpense Date;
+	?MProduct;
+	?Qty Quantity;/* 0 */
+	?Expenseamt Amount;/* 0 */
+	?CCurrency;
+	?Convertedamt Amount;/* 0 */
+	?SResourceAssignment;
+	?Description;
+	?Note;
+	IsInvoiceD YesNo;/* 'N'  */
+	?CBpartner;
+	?CProject;
+	?CActivity;
+	?CCampaign;
+	?CInvoiceLine;
+	?InvoicePrice Price;/* 0 */
+	?CUom;
+	?COrderline;
+	?CProjectPhase;
+	?CProjectTask;
+	?STimetype;
+	Processed YesNo;/* 'N'  */
+	?QtyInvoiced Quantity;
+	?QtyReimbursed Quantity;
+	?PriceInvoiced Price;
+	?PriceReimbursed Price;
+};
+

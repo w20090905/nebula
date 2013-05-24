@@ -1,0 +1,12 @@
+@Remarks("C_BP_Withholding")
+@Refby("0")
+type CBpWithholding {
+	!CBpartner;
+	!CWithholding;
+	AdClient ID;
+	AdOrg ID;
+	IsMandatorywithholding YesNo;/* 'N'  */
+	IsTemporaryexempt YesNo;/* 'N'  */
+	?Exemptreason String;
+};
+

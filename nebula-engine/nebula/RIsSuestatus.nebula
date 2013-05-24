@@ -1,0 +1,10 @@
+@Remarks("Issue Status")
+@Refby("1")
+type RIsSuestatus {
+	!RIsSuestatus ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+};
+

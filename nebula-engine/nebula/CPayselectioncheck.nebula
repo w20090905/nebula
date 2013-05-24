@@ -1,0 +1,21 @@
+@Remarks("Payment Selection Check")
+@Refby("1")
+type CPayselectioncheck {
+	!CPayselectioncheck ID;
+	AdClient ID;
+	AdOrg ID;
+	CPayselection;
+	CBpartner;
+	Payamt Amount;/* 0  */
+	Qty Quantity;/* 0  */
+	?CPayment;
+	?DocumentNo Long;
+	IsPrintEd YesNo;/* 'N'  */
+	PaymentRule Name;
+	Processed YesNo;/* 'N'  */
+	DiscountAmt Amount;/* 0  */
+	IsReceipt YesNo;/* 'N'  */
+	?CBpBankaccount;/* NULL   */
+	IsGenerateddraft YesNo;/* 'N'  */
+};
+

@@ -1,0 +1,14 @@
+@Remarks("System Reference and Validation")
+@Refby("0")
+type AdReferenceTrl {
+	!AdReference;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	?IsTranslated YesNo;/* 'N'
+                        */
+};
+

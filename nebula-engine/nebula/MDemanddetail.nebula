@@ -1,0 +1,12 @@
+@Remarks("Material Demand Line Source Detail")
+@Refby("0")
+type MDemanddetail {
+	!MDemanddetail ID;
+	AdClient ID;
+	AdOrg ID;
+	MDemandline;
+	?MForecastline;
+	?MRequisitionline;
+	?COrderline;
+};
+

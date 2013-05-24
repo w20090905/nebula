@@ -1,0 +1,21 @@
+@Remarks("Payment allocation")
+@Refby("1")
+type CAllocationhdr {
+	!CAllocationhdr ID;
+	AdClient ID;
+	AdOrg ID;
+	DocumentNo Long;
+	?Description;
+	DateTrx Date;
+	DateAcct Date;
+	CCurrency;
+	Approvalamt Amount;/* 0  */
+	IsManual YesNo;/* 'N'  */
+	Docstatus Attr;
+	Docaction Attr;
+	IsApproved YesNo;/* 'N'  */
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	PostEd YesNo;/* 'N'  */
+};
+

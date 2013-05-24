@@ -1,0 +1,11 @@
+@Remarks("User who reported issues")
+@Refby("2")
+type RIsSueuser {
+	!RIsSueuser ID;
+	AdClient ID;
+	AdOrg ID;
+	Username Name;
+	?Description;
+	?AdUser;
+};
+

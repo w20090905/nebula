@@ -1,0 +1,60 @@
+@Remarks("Product, Service, Item")
+@Refby("89")
+type MProduct {
+	!MProduct ID;
+	AdClient;
+	AdOrg;
+	Value String;
+	Name;
+	?Description;
+	?DocumentNote Note;
+	?Help;
+	?Upc UPC;
+	?Sku String;
+	CUom;
+	?SalesRep AdUser;
+	IsSummary YesNo;/* 'N'  */
+	IsStocked YesNo;/* 'Y'  */
+	IsPurchased YesNo;/* 'Y'  */
+	IsSold YesNo;/* 'Y'  */
+	IsBom YesNo;/* 'N'  */
+	IsInvoicePrintdetails YesNo;/* 'N'  */
+	IsPicklistprintdetails YesNo;/* 'N'  */
+	IsVerified YesNo;/* 'N'  */
+	?CRevenueRecognition;
+	MProductCategory;
+	?ClassIfication YesNo;
+	?Volume Number;/* 0 */
+	?Weight;/* 0 */
+	?Shelfwidth Width;
+	?Shelfheight Height;
+	?Shelfdepth Depth;
+	?Unitsperpallet Number;
+	CTaxCategory;
+	?SResource;
+	?Discontinued YesNo;/* 'N'
+                                */
+	?Discontinuedby Date;
+	?Processing YesNo;
+	?SExpensetype;
+	ProductType Attr;/* 'I'  */
+	?ImageUrl URL;
+	?Descriptionurl URL;
+	?Guaranteedays Count;
+	?RMailtext;
+	?Versionno String;
+	?MAttributeset;
+	?MAttributesetinstance;/* 0 */
+	?Downloadurl URL;
+	?MFreightCategory;
+	?MLocator;
+	?Guaranteedaysmin Number;
+	IsWebstorefeatured YesNo;/* 'N'  */
+	IsSelfservice YesNo;/* 'Y'  */
+	?CSubscriptiontype;
+	IsDropship YesNo;/* 'N'  */
+	IsExcludeautodelivery YesNo;/* 'N'  */
+	?Group1 Note;
+	?Group2 Note;
+};
+

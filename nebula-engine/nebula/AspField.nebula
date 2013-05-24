@@ -1,0 +1,11 @@
+@Remarks("ASP Field")
+@Refby("0")
+type AspField {
+	AdClient ID;/* NULL   */
+	!AdField;
+	AdOrg ID;/* NULL   */
+	!AdTab;
+	!AspLevel;
+	AspStatus Attr;/* 'U'  */
+};
+

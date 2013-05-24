@@ -1,0 +1,58 @@
+@Remarks("Item/Column in the Print format")
+@Refby("7")
+type AdPrintFormatitem {
+	!AdPrintFormatitem ID;
+	AdClient ID;
+	AdOrg ID;
+	AdPrintFormat;
+	Name;
+	?PrintName Name;
+	IsPrintEd YesNo;/* 'Y'  */
+	PrintAreatype Attr;
+	Seqno SeqNo;
+	PrintFormattype Attr;
+	?AdColumn;
+	?AdPrintFormatchild AdPrintFormat;
+	IsRelativeposition YesNo;/* 'Y'  */
+	IsNextline YesNo;/* 'Y'  */
+	Xspace Number;
+	Yspace Number;
+	Xposition Number;
+	Yposition Number;
+	Maxwidth Width;
+	IsHeightoneline YesNo;/* 'Y'  */
+	Maxheight Height;
+	FieldAlignmenttype Attr;
+	LineAlignmenttype Attr;
+	?AdPrintColor;
+	?AdPrintFont;
+	IsOrderby YesNo;/* 'N'  */
+	Sortno SeqNo;
+	IsGroupby YesNo;/* 'N'  */
+	IsPagebreak YesNo;/* 'N'  */
+	IsSummarized YesNo;/* 'N'  */
+	ImageIsattached YesNo;/* 'N'  */
+	?ImageUrl URL;
+	IsAveraged YesNo;/* 'N'  */
+	IsCounted YesNo;/* 'N'  */
+	IsSetnlposition YesNo;/* 'N' */
+	IsSuppressnull YesNo;/* 'N' */
+	?Belowcolumn Number;
+	IsFixedwidth YesNo;/* 'N' */
+	IsNextpage YesNo;/* 'N' */
+	?PrintNamesuffix Description;
+	IsMincalc YesNo;/* 'N'  */
+	IsMaxcalc YesNo;/* 'N'  */
+	IsRunningtotal YesNo;/* 'N'  */
+	?Runningtotallines Number;
+	IsVariancecalc YesNo;/* 'N'  */
+	IsDeviationcalc YesNo;/* 'N'  */
+	IsFilledrectangle YesNo;/* 'N'  */
+	?LineWidth Long;
+	?Arcdiameter Number;
+	?Shapetype Attr;
+	IsCentrallyMaintained YesNo;/* 'Y'  */
+	IsImageField YesNo;/* 'N'  */
+	?Barcodetype Attr;
+};
+

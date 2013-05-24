@@ -1,0 +1,18 @@
+@Remarks("Change Request")
+@Refby("1")
+type MChangeRequest {
+	!MChangeRequest ID;
+	AdClient ID;
+	AdOrg ID;
+	MBom;
+	?MChangeNotice;
+	DocumentNo Long;
+	Name;
+	?Description;
+	?Help;
+	?Detailinfo Note;
+	?MFixchangenotice MChangeNotice;
+	Processed YesNo;/* 'N'  */
+	IsApproved YesNo;/* 'N'  */
+};
+

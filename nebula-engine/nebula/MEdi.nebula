@@ -1,0 +1,27 @@
+@Remarks("EDI Transaction")
+@Refby("1")
+type MEdi {
+	!MEdi ID;
+	AdClient ID;
+	AdOrg ID;
+	CBpEdi;
+	DocumentNo Long;
+	Line Long;
+	Trxtype Attr;
+	Edistatus Attr;
+	MWarehouse;
+	MProduct;
+	RequestQty Quantity;/* 0  */
+	RequestShipdate Date;
+	?RequestPrice Price;/* 0 */
+	Trxsent Date;
+	?Trxreceived Date;
+	?ReplyReceived Date;
+	?ReplyQtyConfirmed Number;/* 0 */
+	?ReplyQtyAvailable Number;/* 0 */
+	?ReplyShipdate Date;
+	?ReplyPrice Price;/* 0 */
+	?ReplyRemarks Note;
+	Processed YesNo;/* 'N'  */
+};
+

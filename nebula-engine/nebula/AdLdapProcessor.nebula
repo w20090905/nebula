@@ -1,0 +1,16 @@
+@Remarks("LDAP Server")
+@Refby("2")
+type AdLdapProcessor {
+	!AdLdapProcessor ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	LdapPort Long;/* 0  */
+	?DateLastrun Date;
+	?DateNextrun Date;
+	Supervisor AdUser;
+	KeepLogdays Count;/* 0  */
+	?Processing YesNo;
+};
+

@@ -1,0 +1,19 @@
+@Remarks("Rules for generating physical inventory")
+@Refby("1")
+type MPerpetualinv {
+	!MPerpetualinv ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Noinventorycount Count;
+	Noproductcount Count;
+	Counthighmovement YesNo;/* 'N'  */
+	?Processing YesNo;
+	?DateLastrun Date;
+	DateNextrun Date;
+	Numberofruns Number;
+	?MProductCategory;
+	?MWarehouse;
+};
+

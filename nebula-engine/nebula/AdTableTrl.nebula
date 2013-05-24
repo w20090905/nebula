@@ -1,0 +1,11 @@
+@Remarks("Database Table information")
+@Refby("0")
+type AdTableTrl {
+	!AdTable;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	IsTranslated YesNo;/* 'N'  */
+};
+

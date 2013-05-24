@@ -1,0 +1,13 @@
+@Remarks("Field on a database table")
+@Refby("0")
+type AdFieldTrl {
+	!AdField;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	IsTranslated YesNo;/* 'N'  */
+};
+

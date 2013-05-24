@@ -1,0 +1,11 @@
+@Remarks("Workflow Process Context")
+@Refby("0")
+type AdWfProcessdata {
+	!AdWfProcessdata ID;
+	AdClient ID;
+	AdOrg ID;
+	AdWfProcess;
+	Attributename Name;
+	?Attributevalue Description;
+};
+

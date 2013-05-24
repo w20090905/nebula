@@ -1,0 +1,13 @@
+@Remarks("AD_Record_Access")
+@Refby("0")
+type AdRecordAccess {
+	!AdRole;
+	!AdTable;
+	!Record ID;
+	AdClient ID;
+	AdOrg ID;
+	IsReadonly YesNo;/* 'N'  	  */
+	IsExclude YesNo;/* 'Y'  	  */
+	IsDependentEntities YesNo;/* 'N'  */
+};
+

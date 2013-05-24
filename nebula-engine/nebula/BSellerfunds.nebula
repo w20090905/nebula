@@ -1,0 +1,13 @@
+@Remarks("Seller Funds from Offers on Topics")
+@Refby("1")
+type BSellerfunds {
+	!BSellerfunds ID;
+	AdClient ID;
+	AdOrg ID;
+	AdUser BSeller;
+	?COrder;
+	?CPayment;
+	CommittedAmt Amount;/* 0  */
+	Noncommittedamt Amount;/* 0  */
+};
+

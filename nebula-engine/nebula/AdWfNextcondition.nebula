@@ -1,0 +1,16 @@
+@Remarks("Workflow Node Transition Condition")
+@Refby("0")
+type AdWfNextcondition {
+	!AdWfNextcondition ID;
+	AdClient ID;
+	AdOrg ID;
+	AdWfNodenext;
+	Seqno SeqNo;
+	EntityType AdEntityType;/* 'D'  */
+	Andor YesNo;
+	AdColumn;
+	Operation String;
+	Value String;
+	?Value2 Description;
+};
+

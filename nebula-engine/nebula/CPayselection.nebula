@@ -1,0 +1,17 @@
+@Remarks("Payment Selection")
+@Refby("2")
+type CPayselection {
+	!CPayselection ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	CBankaccount;
+	Paydate Date;
+	IsApproved YesNo;/* 'Y'  */
+	TotalAmt Amount;/* 0  */
+	?CreateFrom YesNo;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+};
+

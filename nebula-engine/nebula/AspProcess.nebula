@@ -1,0 +1,10 @@
+@Remarks("ASP Process")
+@Refby("0")
+type AspProcess {
+	AdClient ID;/* NULL   */
+	AdOrg ID;/* NULL   */
+	!AdProcess;
+	!AspLevel;
+	AspStatus Attr;/* 'U'  */
+};
+

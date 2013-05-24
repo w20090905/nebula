@@ -1,0 +1,9 @@
+@Remarks("Web Access Media")
+@Refby("0")
+type CmAccessMedia {
+	!CmMedia;
+	!CmAccessProfile;
+	AdClient ID;
+	AdOrg ID;
+};
+

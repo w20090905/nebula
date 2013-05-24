@@ -1,0 +1,16 @@
+@Remarks("Additional document charges")
+@Refby("18")
+type CCharge {
+	!CCharge ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	ChargeAmt Amount;/* 0  */
+	IsSametax YesNo;/* 'N'  */
+	IsSamecurrency YesNo;/* 'N'  */
+	?CTaxCategory;
+	IsTaxIncluded YesNo;/* 'N' */
+	?CBpartner;
+};
+

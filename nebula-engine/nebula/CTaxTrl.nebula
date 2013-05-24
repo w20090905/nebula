@@ -1,0 +1,13 @@
+@Remarks("Tax identifier")
+@Refby("0")
+type CTaxTrl {
+	!CTax;
+	!AdLanguage;
+	AdClient ID;
+	AdOrg ID;
+	IsTranslated YesNo;/* 'N'  */
+	Name;
+	?Description;
+	?TaxIndicator String;
+};
+

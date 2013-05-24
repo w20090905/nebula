@@ -1,0 +1,15 @@
+@Remarks("Plan for how a product is produced")
+@Refby("1")
+type MProductIonplan {
+	!MProductIonplan ID;
+	AdClient ID;
+	AdOrg ID;
+	MProductIon;
+	Line Long;
+	MProduct;
+	ProductIonqty Quantity;/* 0  */
+	MLocator;
+	?Description;
+	Processed YesNo;/* 'N'  */
+};
+

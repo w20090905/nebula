@@ -1,0 +1,28 @@
+@Remarks("")
+@Refby("0")
+type RvAllocation {
+	CAllocationhdr ID;
+	AdClient ID;
+	AdOrg ID;
+	DocumentNo Long;
+	?Description;
+	DateTrx Date;
+	DateAcct Date;
+	CCurrency ID;
+	Approvalamt Amount;
+	IsManual YesNo;
+	Docstatus Attr;
+	Docaction Attr;
+	Processed YesNo;
+	CAllocationline ID;
+	?CInvoice ID;
+	?CBpartner ID;
+	?COrder ID;
+	?CPayment ID;
+	?CCashLine ID;
+	Amount;
+	DiscountAmt Amount;
+	WriteoffAmt Amount;
+	?Overunderamt Amount;
+};
+

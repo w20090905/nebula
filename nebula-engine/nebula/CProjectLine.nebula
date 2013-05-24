@@ -1,0 +1,29 @@
+@Remarks("Task or step in a project")
+@Refby("0")
+type CProjectLine {
+	!CProjectLine ID;
+	AdClient ID;
+	AdOrg ID;
+	CProject;
+	Line Long;
+	?Description;
+	PlannedQty Quantity;/* 0  */
+	PlannedPrice Price;/* 0  */
+	PlannedAmt Amount;/* 0  */
+	PlannedMarginamt Amount;/* 0  */
+	?CommittedAmt Amount;/* 0  */
+	?MProduct;
+	?MProductCategory;
+	InvoiceDamt Amount;/* 0  */
+	InvoiceDqty Quantity;/* 0  */
+	?CommittedQty Quantity;/* 0  */
+	?CProjectIssue;
+	?COrder;
+	?COrderpo COrder;
+	IsPrintEd YesNo;/* 'Y'  */
+	Processed YesNo;/* 'N'  */
+	?Dopricing YesNo;/* 'Y' */
+	?CProjectPhase;
+	?CProjectTask;
+};
+

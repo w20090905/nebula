@@ -1,0 +1,15 @@
+@Remarks("FiFo/LiFo Cost Queue")
+@Refby("0")
+type MCostqueue {
+	!MCostqueue ID;
+	AdClient ID;
+	AdOrg ID;
+	MCosttype;
+	CAcctschema;
+	MProduct;
+	MAttributesetinstance;
+	MCostelement;
+	Currentcostprice Price;/* 0  */
+	Currentqty Quantity;/* 0  */
+};
+

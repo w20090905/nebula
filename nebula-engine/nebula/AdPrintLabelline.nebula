@@ -1,0 +1,17 @@
+@Remarks("Print Label Line Format")
+@Refby("1")
+type AdPrintLabelline {
+	!AdPrintLabelline ID;
+	AdClient ID;
+	AdOrg ID;
+	AdPrintLabel;
+	Name;
+	Seqno SeqNo;
+	LabelFormatType Attr;
+	?PrintName Name;
+	?AdColumn;
+	AdLabelPrintErFunction;
+	Xposition Number;
+	Yposition Number;
+};
+

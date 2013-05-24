@@ -1,0 +1,13 @@
+@Remarks("Generated Commission Amount")
+@Refby("1")
+type CCommissionamt {
+	!CCommissionamt ID;
+	AdClient ID;
+	AdOrg ID;
+	CCommissionrun;
+	CCommissionline;
+	Convertedamt Amount;/* 0  */
+	Actualqty Quantity;/* 0  */
+	Commissionamt Amount;/* 0  */
+};
+

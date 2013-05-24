@@ -1,0 +1,21 @@
+@Remarks("M_TransactionAllocation")
+@Refby("0")
+type MTransactionallocation {
+	!MTransaction;
+	!Allocationstrategytype Attr;
+	AdClient ID;
+	AdOrg ID;
+	MProduct;
+	MAttributesetinstance;/* 0 */
+	IsAllocated YesNo;/* 'N'  */
+	Qty Quantity;/* 0  */
+	IsManual YesNo;/* 'N'  */
+	?MInoutline;
+	?MProductIonline;
+	?MInventoryline;
+	?OutMTransaction MTransaction;
+	?OutMInoutline MInoutline;
+	?OutMProductIonline MProductIonline;
+	?OutMInventoryline MInventoryline;
+};
+

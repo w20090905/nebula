@@ -1,0 +1,15 @@
+@Remarks("Workflow Node Transition")
+@Refby("1")
+type AdWfNodenext {
+	!AdWfNodenext ID;
+	AdClient;
+	AdOrg;
+	AdWfNode;
+	AdWfNext AdWfNode;
+	?Description;
+	Seqno SeqNo;
+	EntityType AdEntityType;/* 'D'  */
+	?Transitioncode Note;
+	IsStduserworkflow YesNo;/* 'N'  */
+};
+

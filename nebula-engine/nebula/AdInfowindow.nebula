@@ -1,0 +1,16 @@
+@Remarks("Info Window")
+@Refby("2")
+type AdInfowindow {
+	!AdInfowindow ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	AdTable;
+	EntityType AdEntityType;/* 'D'  */
+	Fromclause Note;
+	?OtherClause Note;
+	?Processing YesNo;
+};
+

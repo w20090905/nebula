@@ -1,0 +1,18 @@
+@Remarks("Graph included in Reports")
+@Refby("1")
+type AdPrintGraph {
+	!AdPrintGraph ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Graphtype Attr;
+	DescriptionPrintFormatitem AdPrintFormatitem;
+	DataPrintFormatitem AdPrintFormatitem;
+	?Data1PrintFormatitem AdPrintFormatitem;
+	?Data2PrintFormatitem AdPrintFormatitem;
+	?Data3PrintFormatitem AdPrintFormatitem;
+	?Data4PrintFormatitem AdPrintFormatitem;
+	AdPrintFormat;
+};
+

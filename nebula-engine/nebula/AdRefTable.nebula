@@ -1,0 +1,15 @@
+@Remarks("Reference Table Definitions")
+@Refby("0")
+type AdRefTable {
+	!AdReference;
+	AdClient;
+	AdOrg;
+	AdTable;
+	AdKey AdColumn;
+	AdDisplay AdColumn;
+	IsValueDisplayed YesNo;/* 'N'  */
+	?WhereClause Note;
+	?OrderbyClause Note;
+	EntityType AdEntityType;/* 'D'  */
+};
+

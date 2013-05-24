@@ -1,0 +1,61 @@
+@Remarks("Import Invoice")
+@Refby("0")
+type IInvoice {
+	!IInvoice ID;
+	?AdClient ID;
+	?AdOrg;
+	?AdOrgtrx AdOrg;
+	IIsImported YesNo;/* 'N'  */
+	?IErrorMsg Note;
+	?Processing YesNo;
+	?Processed YesNo;/* 'N' */
+	?MPriceList;
+	?CCurrency;
+	?SalesRep AdUser;
+	?IsSotrx YesNo;/* 'Y' */
+	?CBpartner;
+	?CBpartnerLocation;
+	?BpartnerValue Description;
+	?Name;
+	?CLocation;
+	?Address1 Name;
+	?Address2 Name;
+	?PostAl Code;
+	?City Name;
+	?CRegion;
+	?Regionname Name;
+	?AdUser;
+	?Email;
+	?Contactname Name;
+	?Phone PhoneNumber;
+	?CCountry;
+	?CountryCode Code;
+	?CDoctype;
+	?DoctypeName Name;
+	?CPaymentTerm;
+	?PaymentTermvalue Description;
+	?CProject;
+	?CCampaign;
+	?CActivity;
+	?CInvoice;
+	?DocumentNo Long;
+	?DateInvoiceD Date;
+	?DateAcct Date;
+	?Description;
+	?MProduct;
+	?ProductValue Description;
+	?Upc UPC;
+	?Sku String;
+	?CTax;
+	?TaxIndicator String;
+	?TaxAmt Amount;/* 0 */
+	?CInvoiceLine;
+	?LineDescription Description;
+	?QtyOrdered Quantity;/* 0 */
+	?PriceActual Price;/* 0 */
+	?ProjectValue Description;
+	?Activityvalue Description;
+	?ChargeName Name;
+	?CCharge;
+};
+

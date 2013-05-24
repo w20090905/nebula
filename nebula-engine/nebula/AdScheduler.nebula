@@ -1,0 +1,21 @@
+@Remarks("Schedule Processes")
+@Refby("3")
+type AdScheduler {
+	!AdScheduler ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	AdProcess;
+	FrequencyType Attr;
+	Frequency Number;
+	?DateLastrun Date;
+	?DateNextrun Date;
+	Supervisor AdUser;
+	KeepLogdays Count;
+	?Processing YesNo;
+	?Weekday YesNo;
+	Scheduletype Attr;/* 'F'  */
+	?Monthday Number;
+};
+

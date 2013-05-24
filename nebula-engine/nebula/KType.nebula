@@ -1,0 +1,13 @@
+@Remarks("Knowledge Type")
+@Refby("1")
+type KType {
+	!KType ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	IsPublic YesNo;/* 'N'  */
+	IsPublicwrite YesNo;/* 'Y' */
+};
+

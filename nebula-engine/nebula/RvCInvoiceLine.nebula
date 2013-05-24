@@ -1,0 +1,46 @@
+@Remarks("")
+@Refby("0")
+type RvCInvoiceLine {
+	AdClient ID;
+	AdOrg ID;
+	CInvoiceLine ID;
+	CInvoice ID;
+	?SalesRep ID;
+	CBpartner ID;
+	CBpGroup ID;
+	?MProduct ID;
+	?MProductCategory ID;
+	DateInvoiceD Date;
+	DateAcct Date;
+	IsSotrx YesNo;
+	CDoctype ID;
+	Docstatus Attr;
+	IsPaid YesNo;
+	?CCampaign ID;
+	?CProject ID;
+	?CActivity ID;
+	?CProjectPhase ID;
+	?CProjectTask ID;
+	?QtyInvoiced Quantity;
+	?QtyEntered Quantity;
+	?MAttributesetinstance ID;
+	?ProductAttribute Note;
+	?MAttributeset ID;
+	?MLot ID;
+	?Guaranteedate Date;
+	?Lot Description;
+	?Serno Description;
+	PriceList Price;
+	PriceActual Price;
+	PriceLimit Price;
+	PriceEntered Price;
+	?Discount Number;
+	?Margin Number;
+	?MarginAmt Number;
+	?LineNetamt Long;
+	?LineListamt Long;
+	?LineLimitamt Long;
+	?LineDiscountamt Long;
+	?LineOverlimitamt Long;
+};
+

@@ -1,0 +1,22 @@
+@Remarks("Request Processor")
+@Refby("2")
+type RRequestProcessor {
+	!RRequestProcessor ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Frequency Number;
+	FrequencyType Attr;
+	?DateLastrun Date;
+	?DateNextrun Date;
+	?Processing YesNo;
+	Overduealertdays Count;
+	Overdueassigndays Count;
+	Supervisor AdUser;
+	KeepLogdays Count;
+	Reminddays Count;/* 7  */
+	Inactivityalertdays Count;/* 0  */
+	?RRequestType;
+};
+

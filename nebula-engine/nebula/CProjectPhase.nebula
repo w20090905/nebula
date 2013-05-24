@@ -1,0 +1,26 @@
+@Remarks("Phase of a Project")
+@Refby("8")
+type CProjectPhase {
+	CProject;
+	AdClient ID;
+	AdOrg ID;
+	?Description;
+	?Startdate Date;
+	?Enddate Date;
+	IsComplete YesNo;/* 'N'  	  */
+	?MProduct;
+	?PriceActual Price;/* 0  	  */
+	?Generateorder YesNo;
+	?COrder;
+	?CPhase;
+	!CProjectPhase ID;
+	?Help;
+	Name;
+	?Qty Quantity;/* 0  */
+	Seqno SeqNo;
+	CommittedAmt Amount;/* 0  */
+	IsCommitceiling YesNo;/* 'N'  */
+	?Projinvoicerule YesNo;
+	PlannedAmt Amount;/* 0  */
+};
+

@@ -1,0 +1,44 @@
+@Remarks("Invoice Detail Line")
+@Refby("15")
+type CInvoiceLine {
+	!CInvoiceLine ID;
+	AdClient ID;
+	AdOrg;
+	CInvoice;
+	?COrderline;
+	?MInoutline;
+	Line Long;
+	?Description;
+	?MProduct;
+	QtyInvoiced Quantity;/* 0  */
+	PriceList Price;/* 0  */
+	PriceActual Price;/* 0  */
+	PriceLimit Price;/* 0  */
+	LineNetamt Long;/* 0  */
+	?CCharge;
+	?CUom;
+	?CTax;
+	?SResourceAssignment;
+	?AAsset;
+	?TaxAmt Amount;/* 0 */
+	?MAttributesetinstance;/* 0 */
+	IsDescription YesNo;/* 'N'  */
+	IsPrintEd YesNo;/* 'Y' */
+	?LineTotalAmt Long;/* 0 */
+	?RefInvoiceLine CInvoiceLine;
+	Processed YesNo;/* 'N'  */
+	QtyEntered Quantity;
+	PriceEntered Price;
+	?CProject;
+	?CProjectPhase;
+	?CProjectTask;
+	?Rrstartdate Date;
+	?Rramt Amount;
+	?CCampaign;
+	?CActivity;
+	?User1 CElementvalue;
+	?User2 CElementvalue;
+	?AdOrgtrx AdOrg;
+	?MRmaline;/* NULL */
+};
+

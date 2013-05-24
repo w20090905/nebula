@@ -1,0 +1,16 @@
+@Remarks("Service Level Agreement Measure")
+@Refby("0")
+type PaSlaMeasure {
+	!PaSlaMeasure ID;
+	AdClient ID;
+	AdOrg ID;
+	PaSlaGoal;
+	DateTrx Date;
+	Measureactual Number;/* 0  */
+	?Description;
+	?AdTable;
+	?Record ID;
+	Processed YesNo;/* 'N'  */
+	?Processing YesNo;
+};
+

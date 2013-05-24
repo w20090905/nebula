@@ -1,0 +1,12 @@
+@Remarks("Product Attribute Value")
+@Refby("1")
+type MAttributevalue {
+	!MAttributevalue ID;
+	AdClient ID;
+	AdOrg ID;
+	MAttribute;
+	Value String;
+	Name;
+	?Description;
+};
+

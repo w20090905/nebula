@@ -1,0 +1,14 @@
+@Remarks("Identifies a Tree")
+@Refby("36")
+type AdTree {
+	!AdTree ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Treetype Attr;
+	IsAllnodes YesNo;/* 'Y'  */
+	?Processing YesNo;
+	IsDefault YesNo;/* 'N'  */
+};
+

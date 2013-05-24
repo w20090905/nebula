@@ -1,0 +1,14 @@
+@Remarks("Modification")
+@Refby("0")
+type AdModification {
+	!AdModification ID;
+	AdClient ID;
+	AdOrg ID;
+	Seqno SeqNo;/* 0  */
+	Name;
+	?Description;
+	?Help;
+	EntityType AdEntityType;/* 'D'  */
+	?Version String;
+};
+

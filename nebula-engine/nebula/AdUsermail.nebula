@@ -1,0 +1,16 @@
+@Remarks("Mail sent to the user")
+@Refby("0")
+type AdUsermail {
+	!AdUsermail ID;
+	AdClient ID;
+	AdOrg ID;
+	AdUser;
+	?RMailtext;
+	?WMailmsg;
+	?Messageid String;
+	?DeliveryConfirmation String;
+	?IsDelivered YesNo;
+	?Subject;
+	?Mailtext Note;
+};
+

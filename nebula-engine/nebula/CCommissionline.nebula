@@ -1,0 +1,23 @@
+@Remarks("Commission Line")
+@Refby("1")
+type CCommissionline {
+	!CCommissionline ID;
+	AdClient ID;
+	AdOrg ID;
+	CCommission;
+	Line Long;
+	?Description;
+	AmtSubtract Amount;
+	AmtMultiplier Amount;
+	QtySubtract Quantity;
+	QtyMultiplier Quantity;
+	IsPositiveonly YesNo;/* 'Y'  */
+	Commissionorders YesNo;/* 'N'  */
+	?Org AdOrg;
+	?MProductCategory;
+	?MProduct;
+	?CBpGroup;
+	?CBpartner;
+	?CSalesRegion;
+};
+

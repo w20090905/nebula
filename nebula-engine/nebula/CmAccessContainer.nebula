@@ -1,0 +1,9 @@
+@Remarks("Web Access Container")
+@Refby("0")
+type CmAccessContainer {
+	!CmAccessProfile;
+	!CmContainer;
+	AdClient ID;
+	AdOrg ID;
+};
+

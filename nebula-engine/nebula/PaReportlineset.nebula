@@ -1,0 +1,11 @@
+@Remarks("Report Line Set")
+@Refby("3")
+type PaReportlineset {
+	!PaReportlineset ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Processing YesNo;
+};
+

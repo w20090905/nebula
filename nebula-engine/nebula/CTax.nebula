@@ -1,0 +1,26 @@
+@Remarks("Tax identifier")
+@Refby("13")
+type CTax {
+	!CTax ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?TaxIndicator String;
+	IsDocumentLevel YesNo;/* 'Y'  */
+	Validfrom Date;
+	IsSummary YesNo;/* 'N'  */
+	Requirestaxcertificate YesNo;/* 'N'  */
+	Rate;
+	?ParentTax CTax;
+	?CCountry;
+	?CRegion;
+	?ToCountry CCountry;
+	?ToRegion CRegion;
+	CTaxCategory;
+	IsDefault YesNo;/* 'N'  */
+	IsTaxExempt YesNo;/* 'N'  */
+	Sopotype Attr;/* 'B'  */
+	IsSalesTax YesNo;/* 'N'  */
+};
+

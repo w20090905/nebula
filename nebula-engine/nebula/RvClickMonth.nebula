@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type RvClickMonth {
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Targeturl URL;
+	?CBpartner ID;
+	?Counter Count;
+};
+

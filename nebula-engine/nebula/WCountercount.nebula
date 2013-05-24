@@ -1,0 +1,12 @@
+@Remarks("Web Counter Count Management")
+@Refby("2")
+type WCountercount {
+	!WCountercount ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	Pageurl URL;
+	?CBpartner;
+};
+

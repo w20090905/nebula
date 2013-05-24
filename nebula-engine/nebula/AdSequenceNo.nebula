@@ -1,0 +1,10 @@
+@Remarks("AD_Sequence_No")
+@Refby("0")
+type AdSequenceNo {
+	!AdSequence;
+	!Calendaryear String;/* '0000'  */
+	AdClient;
+	AdOrg;
+	Currentnext Number;
+};
+

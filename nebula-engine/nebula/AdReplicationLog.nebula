@@ -1,0 +1,12 @@
+@Remarks("Data Replication Log Details")
+@Refby("0")
+type AdReplicationLog {
+	!AdReplicationLog ID;
+	AdClient ID;
+	AdOrg ID;
+	AdReplicationRun;
+	?AdReplicationtable;
+	?PMsg Note;
+	IsReplicated YesNo;/* 'N'  */
+};
+

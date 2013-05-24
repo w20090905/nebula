@@ -1,0 +1,13 @@
+@Remarks("Performance Benchmark Data Point")
+@Refby("0")
+type PaBenchmarkdata {
+	!PaBenchmarkdata ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	PaBenchmark;
+	Benchmarkdate Date;
+	Benchmarkvalue Number;
+};
+

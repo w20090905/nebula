@@ -1,0 +1,20 @@
+@Remarks("Financial Report")
+@Refby("0")
+type PaReport {
+	!PaReport ID;
+	AdClient ID;
+	?AdOrg;
+	Name;
+	?Description;
+	PaReportlineset;
+	PaReportcolumnset;
+	CAcctschema;
+	CCalendar;
+	Processing YesNo;
+	?AdPrintFormat;
+	Listsources YesNo;/* 'N'  */
+	Listtrx YesNo;/* 'N'  */
+	?Jasperprocess AdProcess;
+	?Jasperprocessing YesNo;
+};
+

@@ -1,0 +1,13 @@
+@Remarks("Tax Accounting Reconciliation")
+@Refby("0")
+type CTaxDeclarationacct {
+	!CTaxDeclarationacct ID;
+	AdClient ID;
+	AdOrg ID;
+	?Description;
+	CTaxDeclaration;
+	FactAcct;
+	CAcctschema;
+	?Line Long;
+};
+

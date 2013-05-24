@@ -1,0 +1,22 @@
+@Remarks("Request Status")
+@Refby("4")
+type RStatus {
+	!RStatus ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	IsDefault YesNo;/* 'N'  */
+	IsOpen YesNo;/* 'N'  */
+	IsClosed YesNo;/* 'N'  */
+	Value String;
+	?NextStatus RStatus;
+	?UpdateStatus RStatus;
+	?Timeoutdays Long;
+	IsWebcanupdate YesNo;/* 'Y'  */
+	IsFinalclose YesNo;/* 'N'  */
+	Seqno SeqNo;/* 0  */
+	RStatuscategory;
+};
+

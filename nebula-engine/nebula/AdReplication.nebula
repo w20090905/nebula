@@ -1,0 +1,23 @@
+@Remarks("Data Replication Target")
+@Refby("1")
+type AdReplication {
+	!AdReplication ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	Hostaddress Name;
+	Hostport Long;
+	AdReplicationstrategy;
+	IsRmioverhttp YesNo;/* 'Y' */
+	?Processing YesNo;
+	?Idrangestart Long;
+	?Idrangeend Long;
+	?RemoteClient AdClient;
+	?RemoteOrg AdOrg;
+	?Prefix String;
+	?Suffix String;
+	?DateLastrun Date;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("Performace Ratio")
+@Refby("3")
+type PaRatio {
+	!PaRatio ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	CAcctschema;
+};
+

@@ -1,0 +1,14 @@
+@Remarks("Knowledge Topic")
+@Refby("1")
+type KTopic {
+	!KTopic ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	?Help;
+	KType;
+	IsPublic YesNo;/* 'Y'  */
+	IsPublicwrite YesNo;/* 'Y' */
+};
+

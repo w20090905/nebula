@@ -1,0 +1,24 @@
+@Remarks("Gain/Loss - actual data shown id T_InvoiceGL_v")
+@Refby("0")
+type TInvoiceGl {
+	!AdPinstance;
+	!CInvoice;
+	!FactAcct;
+	AdClient ID;
+	AdOrg ID;
+	GrandTotal Number;/* 0  */
+	Openamt Amount;/* 0  */
+	?Percent;
+	?Apar YesNo;
+	AmtSourcebalance Amount;/* 0  */
+	AmtAcctbalance Amount;/* 0  */
+	CConversionTypereval CConversionType;
+	AmtRevaldr Amount;/* 0  */
+	AmtRevalcr Amount;/* 0  */
+	DateReval Date;
+	AmtRevaldrdiff Amount;/* 0  */
+	AmtRevalcrdiff Amount;/* 0  */
+	?CDoctypeReval CDoctype;
+	IsAllcurrencies YesNo;/* 'N'  */
+};
+

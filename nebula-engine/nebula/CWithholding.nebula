@@ -1,0 +1,22 @@
+@Remarks("Withholding type defined")
+@Refby("2")
+type CWithholding {
+	!CWithholding ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	CPaymentTerm;
+	IsTaxWithholding YesNo;/* 'Y'  */
+	IsTaxProrated YesNo;/* 'N'  */
+	IsPaidto3party YesNo;/* 'Y'  */
+	?Beneficiary CBpartner;
+	IsPercentwithholding YesNo;/* 'Y'  */
+	?Percent;/* 0 */
+	?Fixamt Amount;/* 0 */
+	?Thresholdmin Number;/* 0 */
+	?Thresholdmax Number;/* 0 */
+	?Minamt Amount;/* 0 */
+	?Maxamt Amount;/* 0 */
+};
+

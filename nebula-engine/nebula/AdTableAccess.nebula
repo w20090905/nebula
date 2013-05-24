@@ -1,0 +1,14 @@
+@Remarks("AD_Table_Access")
+@Refby("0")
+type AdTableAccess {
+	!AdRole;
+	!AdTable;
+	!AccessTyperule YesNo;/* 'G'  */
+	AdClient;
+	AdOrg;
+	IsReadonly YesNo;/* 'N'  */
+	IsCanreport YesNo;/* 'Y'  */
+	IsCanexport YesNo;/* 'Y'  */
+	IsExclude YesNo;/* 'Y'  */
+};
+

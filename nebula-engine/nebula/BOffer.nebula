@@ -1,0 +1,15 @@
+@Remarks("Offer for a Topic")
+@Refby("0")
+type BOffer {
+	!BOffer ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	BTopic;
+	AdUser BSeller;
+	IsWillingtocommit YesNo;/* 'Y'  */
+	BSellerfunds;
+	?TextMsg Note;
+	?Privatenote Note;
+};
+

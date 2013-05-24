@@ -1,0 +1,30 @@
+@Remarks("Import Account Value")
+@Refby("0")
+type IElementvalue {
+	!IElementvalue ID;
+	?AdClient ID;
+	?AdOrg ID;
+	IIsImported YesNo;/* 'N'  */
+	?IErrorMsg Note;
+	?CElement;
+	?Elementname Name;
+	?CElementvalue;
+	?Value String;
+	?Name;
+	?Description;
+	?Accounttype Attr;
+	?Accountsign YesNo;
+	?IsDoccontrolled YesNo;/* 'N' */
+	?IsSummary YesNo;/* 'N' */
+	?Parentvalue Description;
+	?Parentelementvalue CElementvalue;
+	?PostActual YesNo;/* 'Y' */
+	?PostBudget YesNo;/* 'Y' */
+	?PostStatistical YesNo;/* 'Y' */
+	?PostEncumbrance YesNo;/* 'Y' */
+	?DefaultAccount String;
+	?AdColumn;
+	?Processing YesNo;
+	?Processed YesNo;/* 'N' */
+};
+

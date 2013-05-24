@@ -1,0 +1,12 @@
+@Remarks("Resource Unavailability")
+@Refby("0")
+type SResourceUnavailable {
+	!SResourceUnavailable ID;
+	AdClient ID;
+	AdOrg ID;
+	SResource;
+	DateFrom Date;
+	?DateTo Date;
+	?Description;
+};
+

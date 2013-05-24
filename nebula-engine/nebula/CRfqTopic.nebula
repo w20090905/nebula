@@ -1,0 +1,12 @@
+@Remarks("Topic for Request for Quotations")
+@Refby("2")
+type CRfqTopic {
+	!CRfqTopic ID;
+	AdClient ID;
+	AdOrg ID;
+	Name;
+	?Description;
+	IsSelfservice YesNo;/* 'N'  */
+	?AdPrintFormat;
+};
+

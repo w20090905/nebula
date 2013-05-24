@@ -1,0 +1,28 @@
+@Remarks("T_Transaction")
+@Refby("0")
+type TTransaction {
+	!AdPinstance;
+	!MTransaction;
+	AdClient ID;
+	AdOrg ID;
+	Movementtype Attr;
+	MLocator;
+	MProduct;
+	MAttributesetinstance;
+	Movementdate Date;
+	Movementqty Quantity;/* 0  */
+	?MInoutline;
+	?MInout ID;
+	?MMovementline;
+	?MMovement ID;
+	?MInventoryline;
+	?MInventory ID;
+	?MProductIonline;
+	?MProductIon ID;
+	?CProjectIssue;
+	?CProject ID;
+	?SearchOrder ID;
+	?SearchInvoice ID;
+	?SearchInout ID;
+};
+

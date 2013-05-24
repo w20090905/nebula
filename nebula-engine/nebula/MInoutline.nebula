@@ -1,0 +1,36 @@
+@Remarks("Line on Shipment or Receipt document")
+@Refby("17")
+type MInoutline {
+	!MInoutline ID;
+	AdClient ID;
+	AdOrg;
+	Line Long;
+	?Description;
+	MInout;
+	?COrderline;
+	?MLocator;
+	?MProduct;
+	CUom;
+	Movementqty Quantity;/* 0  */
+	IsInvoiceD YesNo;/* 'N'  */
+	?MAttributesetinstance;/* 0 */
+	IsDescription YesNo;/* 'N'  */
+	?Confirmedqty Quantity;/* 0 */
+	?Pickedqty Quantity;/* 0 */
+	?Scrappedqty Quantity;/* 0 */
+	?Targetqty Quantity;/* 0 */
+	?RefInoutline MInoutline;
+	Processed YesNo;/* 'N'  */
+	QtyEntered Quantity;
+	?CCharge;
+	?CProject;
+	?CProjectPhase;
+	?CProjectTask;
+	?CCampaign;
+	?CActivity;
+	?User1 CElementvalue;
+	?User2 CElementvalue;
+	?AdOrgtrx AdOrg;
+	?MRmaline;/* NULL */
+};
+

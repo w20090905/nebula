@@ -1,0 +1,34 @@
+@Remarks("Rules for accounting")
+@Refby("39")
+type CAcctschema {
+	!CAcctschema ID;
+	AdClient;
+	AdOrg;
+	Name;
+	?Description;
+	Gaap GAAP;
+	IsAccrual YesNo;/* 'Y'  */
+	Costingmethod YesNo;
+	CCurrency;
+	AutoPeriodcontrol YesNo;/* 'N'  */
+	?CPeriod;
+	?PeriodOpenhistory Number;
+	?PeriodOpenfuture Number;
+	Separator YesNo;
+	Hasalias YesNo;/* 'Y'  */
+	Hascombination YesNo;/* 'Y'  */
+	IsTradediscountposted YesNo;/* 'N'  */
+	IsDiscountCorrectstax YesNo;/* 'N'  */
+	?MCosttype;
+	Costinglevel YesNo;/* 'C'  */
+	IsAdjustcogs YesNo;/* 'N'  */
+	?AdOrgonly AdOrg;
+	IsPostServices YesNo;/* ('N')  */
+	IsExplicitcostadjustment YesNo;/* ('N')  */
+	Commitmenttype Attr;/* 'N'  */
+	?Processing YesNo;
+	?TaxCorrectiontype Attr;
+	?IsAllownegativeposting YesNo;/* 'Y'  */
+	?IsPostIfclearingequal YesNo;/* 'Y'  */
+};
+

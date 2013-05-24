@@ -1,0 +1,15 @@
+@Remarks("Expense report type")
+@Refby("1")
+type SExpensetype {
+	!SExpensetype ID;
+	AdClient ID;
+	AdOrg ID;
+	Value String;
+	Name;
+	?Description;
+	IsInvoiceD YesNo;/* 'Y'  */
+	CUom;
+	MProductCategory;
+	CTaxCategory;
+};
+
