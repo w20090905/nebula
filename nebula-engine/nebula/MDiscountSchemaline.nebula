@@ -1,36 +1,67 @@
 @Remarks("Line of the pricelist trade discount schema")
 @Refby("0")
 tx MDiscountSchemaline {
+	@Remarks("Line of the pricelist trade discount schema")
 	!MDiscountSchemalineId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Schema to calculate the trade discount percentage")
 	MDiscountSchema;
+	@Remarks("Method of ordering records; lowest number comes first")
 	Seqno SeqNo;
+	@Remarks("Category of a Product")
 	?MProductCategory;
+	@Remarks("Identifies a Business Partner")
 	?CBpartner;
+	@Remarks("Product, Service, Item")
 	?MProduct;
+	@Remarks("Date for selecting conversion rate")
 	ConversionDate Date;
+	@Remarks("Price used as the basis for price list calculations")
 	ListBase YesNo;
+	@Remarks("List Price Surcharge Amount")
 	ListAddamt Amount;/* 0  */
+	@Remarks("Discount from list price as a percentage")
 	ListDiscount Count;
+	@Remarks("Rounding rule for final list price")
 	ListRounding YesNo;
+	@Remarks("Minimum margin for a product")
 	ListMinamt Amount;/* 0  */
+	@Remarks("Maximum margin for a product")
 	ListMaxamt Amount;/* 0  */
+	@Remarks("Fixes List Price (not calculated)")
 	?ListFixed Number;/* 0 */
+	@Remarks("Base price for calculating new standard price")
 	StdBase YesNo;
+	@Remarks("Amount added to a price as a surcharge")
 	StdAddamt Amount;/* 0  */
+	@Remarks("Discount percentage to subtract from base price")
 	StdDiscount Count;
+	@Remarks("Rounding rule for calculated price")
 	StdRounding YesNo;
+	@Remarks("Minimum margin allowed for a product")
 	StdMinamt Amount;/* 0  */
+	@Remarks("Maximum margin allowed for a product")
 	StdMaxamt Amount;/* 0  */
+	@Remarks("Fixed Standard Price (not calculated)")
 	?StdFixed Number;/* 0 */
+	@Remarks("Base price for calculation of the new price")
 	LimitBase YesNo;
+	@Remarks("Amount added to the converted/copied price before multiplying")
 	LimitAddamt Amount;/* 0  */
+	@Remarks("Discount in percent to be subtracted from base, if negative it will be added to base price")
 	LimitDiscount Count;
+	@Remarks("Rounding of the final result")
 	LimitRounding YesNo;
+	@Remarks("Minimum difference to original limit price; ignored if zero")
 	LimitMinamt Amount;/* 0  */
+	@Remarks("Maximum difference to original limit price; ignored if zero")
 	LimitMaxamt Amount;/* 0  */
+	@Remarks("Fixed Limit Price (not calculated)")
 	?LimitFixed Number;/* 0 */
+	@Remarks("Currency Conversion Rate Type")
 	CConversionType;
 };
 

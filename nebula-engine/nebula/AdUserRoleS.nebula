@@ -1,9 +1,13 @@
 @Remarks("AD_User_Roles")
 @Refby("0")
 type AdUserRoleS {
+	@Remarks("User within the system - Internal or Business Partner Contact")
 	!AdUser;
+	@Remarks("Responsibility Role")
 	!AdRole;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
 };
 

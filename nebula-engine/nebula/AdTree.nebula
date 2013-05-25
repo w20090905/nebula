@@ -1,14 +1,23 @@
 @Remarks("Identifies a Tree")
 @Refby("36")
 type AdTree {
+	@Remarks("Identifies a Tree")
 	!AdTreeId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Element this tree is built on (i.e Product, Business Partner)")
 	Treetype Attr;
+	@Remarks("All Nodes are included (Complete Tree)")
 	IsAllnodes YesNo;/* 'Y'  */
+	@Remarks("Process Now")
 	?Processing YesNo;
+	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 };
 

@@ -1,16 +1,27 @@
 @Remarks("Web Store Mail Message Template")
 @Refby("2")
 type WMailmsg {
+	@Remarks("Web Store Mail Message Template")
 	!WMailmsgId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("A Web Store of the Client")
 	WStore;
+	@Remarks("Mail Message Type")
 	Mailmsgtype Attr;
+	@Remarks("Email Message Subject")
 	Subject;
+	@Remarks("EMail Message")
 	Message Description;
+	@Remarks("Optional second part of the EMail Message")
 	?Message2 Description;
+	@Remarks("Optional third part of the EMail Message")
 	?Message3 Description;
 };
 

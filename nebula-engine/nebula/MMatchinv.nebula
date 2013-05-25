@@ -1,20 +1,35 @@
 @Remarks("Match Shipment/Receipt to Invoice")
 @Refby("0")
 tx MMatchinv {
+	@Remarks("Match Shipment/Receipt to Invoice")
 	!MMatchinvId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Line on Shipment or Receipt document")
 	MInoutline;
+	@Remarks("Invoice Detail Line")
 	CInvoiceLine;
+	@Remarks("Product, Service, Item")
 	?MProduct;
+	@Remarks("Transaction Date")
 	DateTrx Date;
+	@Remarks("Quantity")
 	Qty Quantity;/* 0  */
+	@Remarks("Process Now")
 	Processing YesNo;
+	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
+	@Remarks("Posting status")
 	PostEd YesNo;/* 'N'  */
+	@Remarks("Document sequence number of the document")
 	?DocumentNo Long;
+	@Remarks("Accounting Date")
 	?DateAcct Date;
+	@Remarks("Product Attribute Set Instance")
 	?MAttributesetinstanceId ID;
+	@Remarks("Optional short description of the record")
 	?Description;
 };
 

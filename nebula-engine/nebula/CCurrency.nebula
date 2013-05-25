@@ -1,17 +1,29 @@
 @Remarks("The Currency for this record")
 @Refby("49")
 tx CCurrency {
+	@Remarks("The Currency for this record")
 	!CCurrencyId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Three letter ISO 4217 Code of the Currency")
 	IsOCode String;
+	@Remarks("Symbol of the currency (opt used for printing only)")
 	?Cursymbol String;
+	@Remarks("Optional short description of the record")
 	Description;
+	@Remarks("Rule for rounding  calculated amounts")
 	Stdprecision Number;
+	@Remarks("Rounding used costing calculations")
 	Costingprecision Number;
+	@Remarks("This currency is the Euro")
 	IsEuro YesNo;/* 'N'  */
+	@Remarks("This currency is member if the European Monetary Union")
 	IsEmumember YesNo;/* 'N'  */
+	@Remarks("Date when the currency joined / will join the EMU")
 	?Emuentrydate Date;
+	@Remarks("Official rate to the Euro")
 	?Emurate Number;/* 0 */
 };
 

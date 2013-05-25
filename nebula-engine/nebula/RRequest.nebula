@@ -1,64 +1,123 @@
 @Remarks("Request from a Business Partner or Prospect")
 @Refby("6")
 tx RRequest {
+	@Remarks("Request from a Business Partner or Prospect")
 	!RRequestId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Document sequence number of the document")
 	DocumentNo Long;
+	@Remarks("Type of request (e.g. Inquiry, Complaint, ..)")
 	RRequestType;
+	@Remarks("Request Group")
 	?RGroup;
+	@Remarks("Request Category")
 	?RCategory;
+	@Remarks("Request Status")
 	?RStatus;
+	@Remarks("Request Resolution")
 	?RResolution;
+	@Remarks("Related Request (Master Issue, ..)")
 	?RRequestRelated RRequest;
+	@Remarks("Indicates if this request is of a high, medium or low priority.")
 	Priority;
+	@Remarks("Priority of the issue for the User")
 	?PriorityUser YesNo;
+	@Remarks("Status of the next action for this Request")
 	Duetype Attr;
+	@Remarks("Textual summary of this request")
 	Summary Note;
+	@Remarks("Type of Confidentiality")
 	Confidentialtype Attr;/* 'C' */
+	@Remarks("This request has been escalated")
 	IsEscalated YesNo;/* 'N'  */
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
 	IsSelfservice YesNo;/* 'N'  */
+	@Remarks("Sales Representative or Company Agent")
 	?SalesRep AdUser;
+	@Remarks("Responsibility Role")
 	?AdRole;
+	@Remarks("Date this request was last acted on")
 	?DateLastaction Date;
+	@Remarks("Date when last alert were sent")
 	?DateLastalert Date;
+	@Remarks("Result of last contact")
 	?Lastresult Note;
+	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
+	@Remarks("Is this invoiced?")
 	IsInvoiceD YesNo;/* 'N'  */
+	@Remarks("Identifies a Business Partner")
 	?CBpartner;
+	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
+	@Remarks("Marketing Campaign")
 	?CCampaign;
+	@Remarks("Order")
 	?COrder;
+	@Remarks("Invoice Identifier")
 	?CInvoice;
+	@Remarks("Payment identifier")
 	?CPayment;
+	@Remarks("Product, Service, Item")
 	?MProduct;
+	@Remarks("Financial Project")
 	?CProject;
+	@Remarks("Asset used internally or by customers")
 	?AAsset;
+	@Remarks("Material Shipment Document")
 	?MInout;
+	@Remarks("Return Material Authorization")
 	?MRma;
+	@Remarks("Database Table information")
 	?AdTable;
+	@Remarks("Direct internal record ID")
 	?RecordId ID;
+	@Remarks("Amount associated with this request")
 	RequestAmt Amount;/* 0  */
+	@Remarks("Text templates for mailings")
 	?RMailtext;
+	@Remarks("Result of the action taken")
 	?Result Note;
+	@Remarks("Confidentiality of the individual entry")
 	Confidentialtypeentry YesNo;
+	@Remarks("Request Standard Response")
 	?RStandardResponse;
+	@Remarks("Next Action to be taken")
 	?Nextaction YesNo;
+	@Remarks("Date that this request should be acted on")
 	?DateNextaction Date;
+	@Remarks("Time started")
 	?Starttime Time;
+	@Remarks("End of the time span")
 	?Endtime Time;
+	@Remarks("Quantity used for this event")
 	?QtySpent Quantity;/* 0 */
+	@Remarks("Invoiced Quantity")
 	?QtyInvoiced Quantity;/* 0 */
+	@Remarks("Product/Resource/Service used in Request")
 	?MProductSpent MProduct;
+	@Remarks("Business Activity")
 	?CActivity;
+	@Remarks("First effective day (inclusive)")
 	?Startdate Date;
+	@Remarks("Close Date")
 	?Closedate Date;
+	@Remarks("The generated invoice for this request")
 	?CInvoiceRequest CInvoice;
+	@Remarks("BOM (Engineering) Change Request")
 	?MChangeRequest;
+	@Remarks("Status of the Task")
 	?Taskstatus Attr;
+	@Remarks("Planned Quantity")
 	?QtyPlan Quantity;
+	@Remarks("Planned Completion Date")
 	?DateCompleteplan Date;
+	@Remarks("Planned Start Date")
 	?DateStartplan Date;
+	@Remarks("Fixed in Change Notice")
 	?MFixchangenotice MChangeNotice;
 };
 

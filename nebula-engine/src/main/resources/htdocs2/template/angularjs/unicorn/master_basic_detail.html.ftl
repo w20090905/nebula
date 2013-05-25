@@ -17,6 +17,16 @@
 		[/#switch]			
 	[/@compress][/#assign]
 	
+	[#assign optTitle][@compress single_line=true]
+		[#if field.attrs.Remarks??]
+			title="${field.attrs.Remarks}"
+		[#elseif field.attrs.Desc??]]
+			title="${field.attrs.Desc}"
+		[#else]]
+			title="${field.name}"
+		[/#if]			
+	[/@compress][/#assign]
+	
 	[#assign optReadonly][#if key] x-ng-readonly ="update" [#elseif readonly]readonly[/#if][/#assign]
 	[#assign optValidateRule][@compress single_line=true]
 			[#if field.attrs.Min??		] min		="${field.attrs.Min}" 			[/#if]
@@ -32,21 +42,21 @@
 		[/@compress] [/#assign]
 		
 		<select id="${id}" x-ng-init="${id}values = [${attrValues?substring(1)}];"  ${ex}
-				${optReadonly} ${optRequired}  ${optValidateRule} 	class="${optClass}"
+				${optReadonly} ${optRequired}  ${optValidateRule} 	${optTitle}	 class="${optClass}"
 				x-ng-model="${ngModel}" x-ng-options="c.name as c.name for c in ${id}values" placeholder="${placeholder}">	
 			<option value="">-- 选择 ${field.name} --</option>
 		</select>
 	[#elseif field.attrs.FormatType! = "textarea"]
 		<textarea id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
-			${optReadonly} ${optRequired}  ${optValidateRule} 	class="${optClass}"
+			${optReadonly} ${optRequired}  ${optValidateRule} 	${optTitle}	 class="${optClass}"
 			></textarea>		
 	[#elseif field.attrs.FormatType! = "checkbox"]
 		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
-				${optReadonly} ${optValidateRule} 	class="${optClass}"	
+				${optReadonly} ${optValidateRule} 	${optTitle}	 class="${optClass}"	
 			/>
 	[#else]
 		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
-				${optReadonly} ${optRequired}  ${optValidateRule} 	class="${optClass}"	
+				${optReadonly} ${optRequired}  ${optValidateRule} ${optTitle}	class="${optClass}"	
 			/>
 	[/#if]
 [/#macro]

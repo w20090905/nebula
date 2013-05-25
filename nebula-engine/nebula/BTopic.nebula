@@ -1,21 +1,37 @@
 @Remarks("Auction Topic")
 @Refby("3")
 type BTopic {
+	@Remarks("Auction Topic")
 	!BTopicId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Document sequence number of the document")
 	DocumentNo Long;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Text Message")
 	?TextMsg Note;
+	@Remarks("Topic Status")
 	Topicstatus Attr;
+	@Remarks("Topic Action")
 	Topicaction String;
+	@Remarks("The Topic is published and can be viewed")
 	IsPublished YesNo;/* 'Y'  */
+	@Remarks("Details")
 	?TextDetails Note;
+	@Remarks("Process Now")
 	?Processing YesNo;
+	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
+	@Remarks("Auction Topic Type")
 	BTopictype;
+	@Remarks("Auction Topic Category")
 	BTopiccategory;
+	@Remarks("Decision date")
 	Decisiondate Date;
 };
 

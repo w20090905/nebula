@@ -1,27 +1,49 @@
 @Remarks("EDI Transaction")
 @Refby("1")
 tx MEdi {
+	@Remarks("EDI Transaction")
 	!MEdiId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Electronic Data Interchange")
 	CBpEdi;
+	@Remarks("Document sequence number of the document")
 	DocumentNo Long;
+	@Remarks("Unique line for this document")
 	Line Long;
+	@Remarks("Type of credit card transaction")
 	Trxtype Attr;
+	@Remarks("EDI Status")
 	Edistatus Attr;
+	@Remarks("Storage Warehouse and Service Point")
 	MWarehouse;
+	@Remarks("Product, Service, Item")
 	MProduct;
+	@Remarks("Request Qty")
 	RequestQty Quantity;/* 0  */
+	@Remarks("Request Ship date")
 	RequestShipdate Date;
+	@Remarks("Request Price")
 	?RequestPrice Price;/* 0 */
+	@Remarks("Transaction sent")
 	Trxsent Date;
+	@Remarks("Transaction received")
 	?Trxreceived Date;
+	@Remarks("Reply Received")
 	?ReplyReceived Date;
+	@Remarks("Reply Qty Confirmed")
 	?ReplyQtyConfirmed Number;/* 0 */
+	@Remarks("Reply Qty Available")
 	?ReplyQtyAvailable Number;/* 0 */
+	@Remarks("Reply Ship date")
 	?ReplyShipdate Date;
+	@Remarks("Confirmed Price from EDI Partner")
 	?ReplyPrice Price;/* 0 */
+	@Remarks("Reply Remarks")
 	?ReplyRemarks Note;
+	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 };
 

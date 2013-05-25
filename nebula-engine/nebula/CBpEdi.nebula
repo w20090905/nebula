@@ -1,27 +1,49 @@
 @Remarks("Electronic Data Interchange")
 @Refby("1")
 type CBpEdi {
+	@Remarks("Electronic Data Interchange")
 	!CBpEdiId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Identifies a Business Partner")
 	CBpartner;
+	@Remarks("Storage Warehouse and Service Point")
 	MWarehouse;
+	@Remarks("EDI Type")
 	Editype Attr;
+	@Remarks("Activate Audit Trail of what numbers are generated")
 	IsAudited YesNo;/* 'N'  */
+	@Remarks("EDI Identification Number")
 	Customerno String;
+	@Remarks("Document Sequence")
 	AdSequence;
+	@Remarks("EMail address to send requests to - e.g. edi@manufacturer.com")
 	?EmailTo Description;
+	@Remarks("Full EMail address used to send requests - e.g. edi@organization.com")
 	?EmailFrom Description;
+	@Remarks("User ID of the sending EMail address (on default SMTP Host) - e.g. edi")
 	?EmailFromUid String;
+	@Remarks("Password of the sending EMail address")
 	?EmailFromPwd String;
+	@Remarks("Email address to send error messages to")
 	EmailErrorTo Description;
+	@Remarks("Send informational messages and copies")
 	IsInfosent YesNo;/* 'N'  */
+	@Remarks("EMail address to send informational messages and copies")
 	EmailInfoTo Description;
+	@Remarks("Quantity Availability Inquiry")
 	Sendinquiry YesNo;/* 'Y'  */
+	@Remarks("Received Inquiry Reply")
 	Receiveinquiryreply YesNo;/* 'Y'  */
+	@Remarks("Send Order")
 	Sendorder YesNo;/* 'Y'  */
+	@Remarks("Receive Order Reply")
 	Receiveorderreply YesNo;/* 'Y'  */
 };
 

@@ -1,26 +1,43 @@
 @Remarks("Import Currency Conversion Rate")
 @Refby("0")
 tx IConversionRate {
+	@Remarks("Import Currency Conversion Rate")
 	!IConversionRateId ID;
+	@Remarks("Client/Tenant for this installation.")
 	?AdClientId ID;
+	@Remarks("Organizational entity within client")
 	?AdOrgId ID;
+	@Remarks("Rate used for converting currencies")
 	?CConversionRate;
+	@Remarks("Three letter ISO 4217 Code of the Currency")
 	?IsOCode String;
+	@Remarks("The Currency for this record")
 	?CCurrency;
+	@Remarks("Three letter ISO 4217 Code of the To Currency")
 	?IsOCodeTo String;
+	@Remarks("Target currency")
 	?CCurrencyIdTo CCurrency;
+	@Remarks("Key value for the Currency Conversion Rate Type")
 	?ConversionTypevalue Description;
+	@Remarks("Currency Conversion Rate Type")
 	?CConversionType;
+	@Remarks("Valid from including this date (first day)")
 	?Validfrom Date;
+	@Remarks("Valid to including this date (last day)")
 	?Validto Date;
+	@Remarks("Rate to multiple the source by to calculate the target.")
 	?Multiplyrate Number;
+	@Remarks("To convert Source number to Target number, the Source is divided")
 	?Dividerate Number;
-	?CreateReciprocalrate YesNo;/* 'N' 
-                             */
-	?IIsImported YesNo;/* 'N'
- */
+	@Remarks("Create Reciprocal Rate from current information")
+	?CreateReciprocalrate YesNo;/* 'N'                               */
+	@Remarks("Has this import been processed")
+	?IIsImported YesNo;/* 'N'  */
+	@Remarks("Messages generated from import process")
 	?IErrorMsg Note;
+	@Remarks("Process Now")
 	?Processing YesNo;
+	@Remarks("The document has been processed")
 	?Processed YesNo;/* 'N' */
 };
 

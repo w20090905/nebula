@@ -1,21 +1,37 @@
 @Remarks("Plan for producing a product")
 @Refby("1")
 type MProductIon {
+	@Remarks("Plan for producing a product")
 	!MProductIonId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Date a product was moved in or out of inventory")
 	Movementdate Date;
+	@Remarks("Records created")
 	IsCreateD YesNo;/* 'N'  */
+	@Remarks("Posting status")
 	PostEd YesNo;/* 'N'  */
+	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
+	@Remarks("Process Now")
 	?Processing YesNo;
+	@Remarks("Performing or initiating organization")
 	?AdOrgtrx AdOrg;
+	@Remarks("Financial Project")
 	?CProject;
+	@Remarks("Marketing Campaign")
 	?CCampaign;
+	@Remarks("Business Activity")
 	?CActivity;
+	@Remarks("User defined list element #1")
 	?User1 CElementvalue;
+	@Remarks("User defined list element #2")
 	?User2 CElementvalue;
 };
 

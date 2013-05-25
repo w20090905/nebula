@@ -1,12 +1,19 @@
 @Remarks("The actual training class instance")
 @Refby("0")
 tx STrainingClass {
+	@Remarks("The actual training class instance")
 	!STrainingClassId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Repeated Training")
 	STraining;
+	@Remarks("Product, Service, Item")
 	MProduct;
+	@Remarks("First effective day (inclusive)")
 	Startdate Date;
+	@Remarks("Last effective date (inclusive)")
 	Enddate Date;
 };
 

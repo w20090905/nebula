@@ -1,11 +1,17 @@
 @Remarks("Workflow Process Context")
 @Refby("0")
 tx AdWfProcessdata {
+	@Remarks("Workflow Process Context")
 	!AdWfProcessdataId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Actual Workflow Process Instance")
 	AdWfProcess;
+	@Remarks("Name of the Attribute")
 	Attributename Name;
+	@Remarks("Value of the Attribute")
 	?Attributevalue Description;
 };
 

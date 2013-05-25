@@ -1,23 +1,41 @@
 @Remarks("Business Partner Group Acct")
 @Refby("0")
 type CBpGroupAcct {
+	@Remarks("Rules for accounting")
 	!CAcctschema;
+	@Remarks("Business Partner Group")
 	!CBpGroup;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Account for Customer Receivables")
 	CReceivableAcct CValidcombination;
+	@Remarks("Account for customer prepayments")
 	CPrepaymentAcct CValidcombination;
+	@Remarks("Account for Vendor Liability")
 	VLiabilityAcct CValidcombination;
+	@Remarks("Account for Vender Service Liability")
 	VLiabilityServicesAcct CValidcombination;
+	@Remarks("Account for Vendor Prepayments")
 	VPrepaymentAcct CValidcombination;
+	@Remarks("Payment Discount Expense Account")
 	PaydiscountExpAcct CValidcombination;
+	@Remarks("Payment Discount Revenue Account")
 	PaydiscountRevAcct CValidcombination;
+	@Remarks("Account for Receivables write-off")
 	WriteoffAcct CValidcombination;
+	@Remarks("Account for not-invoiced Material Receipts")
 	NotinvoicedreceiptsAcct CValidcombination;
+	@Remarks("Account for unearned revenue")
 	UnearnedRevenueAcct CValidcombination;
+	@Remarks("Account for not invoiced Revenue")
 	NotinvoicedrevenueAcct CValidcombination;
+	@Remarks("Account for not invoiced Receivables")
 	NotinvoicedreceivablesAcct CValidcombination;
+	@Remarks("Process Now")
 	?Processing YesNo;
+	@Remarks("Customer Accounts Receivables Services Account")
 	?CReceivableServicesAcct Number;
 };
 

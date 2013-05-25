@@ -1,15 +1,25 @@
 @Remarks("Storage Warehouse and Service Point")
 @Refby("24")
 type MWarehouse {
+	@Remarks("Storage Warehouse and Service Point")
 	!MWarehouseId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Location or Address")
 	CLocation;
+	@Remarks("Element Separator")
 	Separator YesNo;
+	@Remarks("Optional Warehouse to replenish from")
 	?MWarehousesource MWarehouse;
+	@Remarks("Custom class to calculate Quantity to Order")
 	?Replenishmentclass Description;
 };
 

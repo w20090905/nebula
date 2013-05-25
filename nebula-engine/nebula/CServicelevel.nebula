@@ -1,16 +1,25 @@
 @Remarks("Product Revenue Recognition Service Level")
 @Refby("1")
 tx CServicelevel {
+	@Remarks("Product Revenue Recognition Service Level")
 	!CServicelevelId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Product, Service, Item")
 	MProduct;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Quantity of service or product provided")
 	Servicelevelprovided Number;
+	@Remarks("Quantity of product or service invoiced")
 	Servicelevelinvoiced Number;
+	@Remarks("Process Now")
 	?Processing YesNo;
-	?Processed YesNo;/* 'N'
-                                     */
+	@Remarks("The document has been processed")
+	?Processed YesNo;/* 'N'                                      */
+	@Remarks("Plan for recognizing or recording revenue")
 	CRevenueRecognitionPlan;
 };
 

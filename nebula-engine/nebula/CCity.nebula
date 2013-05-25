@@ -1,15 +1,25 @@
 @Remarks("City")
 @Refby("1")
 type CCity {
+	@Remarks("City")
 	!CCityId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Location code - UN/LOCODE")
 	?Locode Code;
+	@Remarks("Location coordinate")
 	?Coordinates Code;
+	@Remarks("Postal code")
 	?PostAl Code;
+	@Remarks("Phone Area Code")
 	?Areacode Code;
+	@Remarks("Country")
 	?CCountry;
+	@Remarks("Identifies a geographical Region")
 	?CRegion;
 };
 

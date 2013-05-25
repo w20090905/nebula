@@ -1,15 +1,25 @@
 @Remarks("Distribution Run Lines define Distribution List, the Product and Quantiries")
 @Refby("1")
 tx MDistributionrunline {
+	@Remarks("Distribution Run Lines define Distribution List, the Product and Quantiries")
 	!MDistributionrunlineId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Distribution Run create Orders to distribute products to a selected list of partners")
 	MDistributionrun;
+	@Remarks("Unique line for this document")
 	Line Long;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Distribution Lists allow to distribute products to a selected list of partners")
 	MDistributionlist;
+	@Remarks("Product, Service, Item")
 	MProduct;
+	@Remarks("Total Quantity")
 	TotalQty Quantity;/* 0  */
+	@Remarks("Minimum quantity for the business partner")
 	Minqty Quantity;/* 0  */
 };
 

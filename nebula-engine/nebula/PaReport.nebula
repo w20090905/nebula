@@ -1,20 +1,35 @@
 @Remarks("Financial Report")
 @Refby("0")
 type PaReport {
+	@Remarks("Financial Report")
 	!PaReportId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	?AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Report Line Set")
 	PaReportlineset;
+	@Remarks("Collection of Columns for Report")
 	PaReportcolumnset;
+	@Remarks("Rules for accounting")
 	CAcctschema;
+	@Remarks("Accounting Calendar Name")
 	CCalendar;
+	@Remarks("Process Now")
 	Processing YesNo;
+	@Remarks("Data Print Format")
 	?AdPrintFormat;
+	@Remarks("List Report Line Sources")
 	Listsources YesNo;/* 'N'  */
+	@Remarks("List the report transactions")
 	Listtrx YesNo;/* 'N'  */
+	@Remarks("The Jasper Process used by the printengine if any process defined")
 	?Jasperprocess AdProcess;
+	@Remarks("Jasper Process Now")
 	?Jasperprocessing YesNo;
 };
 

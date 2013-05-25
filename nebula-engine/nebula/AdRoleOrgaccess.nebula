@@ -1,9 +1,13 @@
 @Remarks("AD_Role_OrgAccess")
 @Refby("0")
 type AdRoleOrgaccess {
+	@Remarks("Responsibility Role")
 	!AdRole;
+	@Remarks("Organizational entity within client")
 	!AdOrg;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Field is read only")
 	IsReadonly YesNo;/* 'N'  */
 };
 

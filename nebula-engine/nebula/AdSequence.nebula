@@ -1,26 +1,41 @@
 @Remarks("Document Sequence")
 @Refby("6")
 type AdSequence {
+	@Remarks("Document Sequence")
 	!AdSequenceId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Format of the value; Can contain fixed format elements, Variables: '_lLoOaAcCa09'")
 	?Vformat Description;
+	@Remarks("Automatically assign the next number")
 	IsAutoSequence YesNo;/* 'Y'  */
+	@Remarks("The number to increment the last document number by")
 	Incrementno SeqNo;
+	@Remarks("Starting number/position")
 	Startno SeqNo;
+	@Remarks("The next number to be used")
 	Currentnext Number;
+	@Remarks("Next sequence for system use")
 	Currentnextsys Number;
-	?IsAudited YesNo;/* 'N'
-                       */
-	?IsTableid YesNo;/* 'N'
-                       */
+	@Remarks("Activate Audit Trail of what numbers are generated")
+	?IsAudited YesNo;/* 'N'                        */
+	@Remarks("The document number  will be used as the record key")
+	?IsTableid YesNo;/* 'N'                        */
+	@Remarks("Prefix before the sequence number")
 	?Prefix String;/* NULL */
+	@Remarks("Suffix after the number")
 	?Suffix String;/* NULL */
-	?Startnewyear YesNo;/* 'N'
-                       */
+	@Remarks("Restart the sequence with Start on every 1/1")
+	?Startnewyear YesNo;/* 'N'                        */
+	@Remarks("Fully qualified date column")
 	?DateColumn Description;
+	@Remarks("Java Decimal Pattern")
 	?Decimalpattern Description;
 };
 

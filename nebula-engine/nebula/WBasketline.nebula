@@ -1,15 +1,25 @@
 @Remarks("Web Basket Line")
 @Refby("0")
 tx WBasketline {
+	@Remarks("Web Basket Line")
 	!WBasketlineId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Web Basket")
 	WBasket;
+	@Remarks("Unique line for this document")
 	Line Long;
+	@Remarks("Quantity")
 	Qty Quantity;/* 0  */
+	@Remarks("Price")
 	Price;/* 0  */
+	@Remarks("Product")
 	Product Description;
+	@Remarks("Optional short description of the record")
 	Description;
+	@Remarks("Product, Service, Item")
 	?MProduct;
 };
 

@@ -1,9 +1,13 @@
 @Remarks("Task Instance")
 @Refby("0")
 tx AdTaskinstance {
+	@Remarks("Task Instance")
 	!AdTaskinstanceId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Operation System Task")
 	AdTask;
 };
 

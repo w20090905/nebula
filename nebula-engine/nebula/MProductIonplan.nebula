@@ -1,15 +1,25 @@
 @Remarks("Plan for how a product is produced")
 @Refby("1")
 tx MProductIonplan {
+	@Remarks("Plan for how a product is produced")
 	!MProductIonplanId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Plan for producing a product")
 	MProductIon;
+	@Remarks("Unique line for this document")
 	Line Long;
+	@Remarks("Product, Service, Item")
 	MProduct;
+	@Remarks("Quantity of products to produce")
 	ProductIonqty Quantity;/* 0  */
+	@Remarks("Warehouse Locator")
 	MLocator;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 };
 

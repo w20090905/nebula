@@ -1,12 +1,19 @@
 @Remarks("The Currency for this record")
 @Refby("0")
 tx CCurrencyTrl {
+	@Remarks("The Currency for this record")
 	!CCurrency;
+	@Remarks("Language for this entity")
 	!AdLanguage;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("This column is translated")
 	IsTranslated YesNo;/* 'N'  */
+	@Remarks("Symbol of the currency (opt used for printing only)")
 	?Cursymbol String;
+	@Remarks("Optional short description of the record")
 	Description;
 };
 

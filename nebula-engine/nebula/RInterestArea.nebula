@@ -1,13 +1,19 @@
 @Remarks("Interest Area or Topic")
 @Refby("3")
 type RInterestArea {
+	@Remarks("Interest Area or Topic")
 	!RInterestAreaId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
 	IsSelfservice YesNo;/* 'N' */
-	Value String;/* NULL
- */
+	@Remarks("Search key for the record in the format required - must be unique")
+	Value String;/* NULL  */
 };
 

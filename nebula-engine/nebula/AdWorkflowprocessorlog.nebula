@@ -1,15 +1,25 @@
 @Remarks("Result of the execution of the Workflow Processor")
 @Refby("0")
 type AdWorkflowprocessorlog {
+	@Remarks("Workflow Processor Server")
 	!AdWorkflowprocessor;
+	@Remarks("Result of the execution of the Workflow Processor")
 	!AdWorkflowprocessorlogId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("An Error occured in the execution")
 	IsError YesNo;/* 'N'  	  */
+	@Remarks("Textual summary of this request")
 	?Summary Note;
+	@Remarks("Reference for this record")
 	?Reference Description;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Text Message")
 	?TextMsg Note;
+	@Remarks("Binary Data")
 	?Binarydata Note;
 };
 

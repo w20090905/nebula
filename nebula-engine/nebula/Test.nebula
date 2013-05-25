@@ -1,30 +1,53 @@
 @Remarks("Test ID")
 @Refby("0")
 type Test {
+	@Remarks("Test ID")
 	!TestId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Comment or Hint")
 	?Help;
+	@Remarks("Integer")
 	?TInteger Number;
+	@Remarks("Number")
 	?TNumber Number;/* 0 */
+	@Remarks("Date")
 	?TDate Date;
+	@Remarks("DateTime")
 	?TDateTime Time;
+	@Remarks("Unit of Measure")
 	?CUomId ID;
+	@Remarks("Qty")
 	?TQty Quantity;/* 0 */
+	@Remarks("The Currency for this record")
 	?CCurrencyId ID;
+	@Remarks("Amount")
 	?TAmount Amount;/* 0 */
+	@Remarks("Location or Address")
 	?CLocationId ID;
+	@Remarks("Account_Acct")
 	?AccountAcct CValidcombination;
+	@Remarks("Payment identifier")
 	?CPaymentId ID;
+	@Remarks("Product, Service, Item")
 	?MProductId ID;
+	@Remarks("Identifies a Business Partner")
 	?CBpartnerId ID;
+	@Remarks("Warehouse Locator")
 	?MLocatorId ID;
+	@Remarks("Process Now")
 	?Processing YesNo;
+	@Remarks("Binary Data")
 	?Binarydata Note;
-	?Processed YesNo;/* 'N' 
-                      */
+	@Remarks("The document has been processed")
+	?Processed YesNo;/* 'N'                        */
+	@Remarks("Long Character Field")
 	?Characterdata Note;
 };
 

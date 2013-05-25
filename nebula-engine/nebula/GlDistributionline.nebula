@@ -1,38 +1,71 @@
 @Remarks("General Ledger Distribution Line")
 @Refby("0")
 tx GlDistributionline {
+	@Remarks("General Ledger Distribution Line")
 	!GlDistributionlineId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("General Ledger Distribution")
 	GlDistribution;
+	@Remarks("Unique line for this document")
 	Line Long;/* 0  */
+	@Remarks("Percentage")
 	Percent;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Overwrite the account segment Organization with the value specified")
 	OverwriteOrg YesNo;/* 'N'  */
+	@Remarks("Organizational entity within client")
 	?Org AdOrg;
+	@Remarks("Overwrite the account segment Account with the value specified")
 	OverwriteAcct YesNo;/* 'N'  */
+	@Remarks("Account used")
 	?Account CElementvalue;
+	@Remarks("Overwrite the account segment Product with the value specified")
 	OverwriteProduct YesNo;/* 'N'  */
+	@Remarks("Product, Service, Item")
 	?MProduct;
+	@Remarks("Overwrite the account segment Business Partner with the value specified")
 	OverwriteBpartner YesNo;/* 'N'  */
+	@Remarks("Identifies a Business Partner")
 	?CBpartner;
+	@Remarks("Overwrite the account segment Project with the value specified")
 	OverwriteProject YesNo;/* 'N'  */
+	@Remarks("Financial Project")
 	?CProject;
+	@Remarks("Overwrite the account segment Campaign with the value specified")
 	OverwriteCampaign YesNo;/* 'N'  */
+	@Remarks("Marketing Campaign")
 	?CCampaign;
+	@Remarks("Overwrite the account segment Activity with the value specified")
 	OverwriteActivity YesNo;/* 'N'  */
+	@Remarks("Business Activity")
 	?CActivity;
+	@Remarks("Overwrite the account segment Sales Region with the value specified")
 	OverwriteSalesRegion YesNo;/* 'N'  */
+	@Remarks("Sales coverage region")
 	?CSalesRegion;
+	@Remarks("Overwrite the account segment Transaction Organization with the value specified")
 	OverwriteOrgtrx YesNo;/* 'N'  */
+	@Remarks("Performing or initiating organization")
 	?AdOrgtrx AdOrg;
+	@Remarks("Overwrite the account segment Location From with the value specified")
 	OverwriteLocto YesNo;/* 'N'  */
+	@Remarks("Location that inventory was moved to")
 	?CLocto CLocation;
+	@Remarks("Overwrite the account segment Location From with the value specified")
 	OverwriteLocfrom YesNo;/* 'N'  */
+	@Remarks("Location that inventory was moved from")
 	?CLocfrom CLocation;
+	@Remarks("Overwrite the account segment User 1 with the value specified")
 	OverwriteUser1 YesNo;/* 'N'  */
+	@Remarks("User defined list element #1")
 	?User1 CElementvalue;
+	@Remarks("Overwrite the account segment User 2 with the value specified")
 	OverwriteUser2 YesNo;/* 'N'  */
+	@Remarks("User defined list element #2")
 	?User2 CElementvalue;
 };
 

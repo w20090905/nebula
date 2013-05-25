@@ -1,15 +1,25 @@
 @Remarks("Reference Table Definitions")
 @Refby("0")
 type AdRefTable {
+	@Remarks("System Reference and Validation")
 	!AdReference;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Database Table information")
 	AdTable;
+	@Remarks("Unique identifier of a record")
 	AdKey AdColumn;
+	@Remarks("Column that will display")
 	AdDisplay AdColumn;
+	@Remarks("Displays Value column with the Display column")
 	IsValueDisplayed YesNo;/* 'N'  */
+	@Remarks("Fully qualified SQL WHERE clause")
 	?WhereClause Note;
+	@Remarks("Fully qualified ORDER BY clause")
 	?OrderbyClause Note;
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
 };
 

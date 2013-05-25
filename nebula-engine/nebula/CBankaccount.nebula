@@ -1,18 +1,31 @@
 @Remarks("Account at the Bank")
 @Refby("11")
 tx CBankaccount {
+	@Remarks("Account at the Bank")
 	!CBankaccountId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Bank")
 	CBank;
+	@Remarks("The Currency for this record")
 	CCurrency;
+	@Remarks("Bank Account Type")
 	Bankaccounttype Attr;
+	@Remarks("Account Number")
 	Accountno AccountNo;
+	@Remarks("Current Balance")
 	Currentbalance Number;/* 0  */
+	@Remarks("Amount of Credit allowed")
 	Creditlimit Number;/* 0  */
+	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
+	@Remarks("International Bank Account Number")
 	?Iban IBAN;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Basic Bank Account Number")
 	?Bban Description;
 };
 

@@ -1,19 +1,33 @@
 @Remarks("Product Acct")
 @Refby("0")
 type MProductAcct {
+	@Remarks("Product, Service, Item")
 	!MProduct;
+	@Remarks("Rules for accounting")
 	!CAcctschema;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Account for Product Revenue (Sales Account)")
 	PRevenueAcct CValidcombination;
+	@Remarks("Account for Product Expense")
 	PExpenseAcct CValidcombination;
+	@Remarks("Account for Product Asset (Inventory)")
 	PAssetAcct CValidcombination;
+	@Remarks("Difference between Standard Cost and Purchase Price (PPV)")
 	PPurchasepricevarianceAcct CValidcombination;
+	@Remarks("Difference between Costs and Invoice Price (IPV)")
 	PInvoicePriceVarianceAcct CValidcombination;
+	@Remarks("Account for Cost of Goods Sold")
 	PCogsAcct CValidcombination;
+	@Remarks("Trade Discount Receivable Account")
 	PTradediscountrecAcct CValidcombination;
+	@Remarks("Trade Discount Granted Account")
 	PTradediscountgrantAcct CValidcombination;
+	@Remarks("Product Inventory Clearing Account")
 	?PInventoryclearingAcct Number;
+	@Remarks("Product Cost Adjustment Account")
 	?PCostadjustmentAcct Number;
 };
 

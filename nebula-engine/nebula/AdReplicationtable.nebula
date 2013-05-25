@@ -1,12 +1,19 @@
 @Remarks("Data Replication Strategy Table Info")
 @Refby("1")
 tx AdReplicationtable {
+	@Remarks("Data Replication Strategy Table Info")
 	!AdReplicationtableId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Data Replication Strategy")
 	AdReplicationstrategy;
+	@Remarks("Database Table information")
 	AdTable;
+	@Remarks("Type of Data Replication")
 	Replicationtype Attr;/* 'L'  */
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
 };
 

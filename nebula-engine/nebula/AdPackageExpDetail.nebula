@@ -1,38 +1,71 @@
 @Remarks("AD_Package_Exp_Detail_ID")
 @Refby("0")
 tx AdPackageExpDetail {
+	@Remarks("AD_Package_Exp_Detail_ID")
 	!AdPackageExpDetailId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Special Form")
 	?AdForm;
+	@Remarks("Import Format")
 	?AdImpformat;
+	@Remarks("Identifies a Menu")
 	?AdMenu;
+	@Remarks("Process or Report")
 	?AdProcess;
+	@Remarks("Responsibility Role")
 	?AdRole;
+	@Remarks("Data entry or display window")
 	?AdWindow;
+	@Remarks("Workflow or combination of tasks")
 	?AdWorkflow;
+	@Remarks("File_Directory")
 	?FileDirectory Note;
+	@Remarks("Name of the local file or URL")
 	?Filename Name;
+	@Remarks("Destination_FileName")
 	?DestinationFilename Name;
+	@Remarks("Destination_Directory")
 	?DestinationDirectory Note;
+	@Remarks("Optional short description of the record")
 	Description;
+	@Remarks("DBType")
 	?Dbtype String;
+	@Remarks("Type of Validation (SQL, Java Script, Java Language)")
 	Type String;
+	@Remarks("Target_Directory")
 	?TargetDirectory Note;
+	@Remarks("SQLStatement")
 	?Sqlstatement Note;
+	@Remarks("Internal Release Number")
 	?ReleaseNo String;
+	@Remarks("Process Now")
 	Processing YesNo;
+	@Remarks("The document has been processed")
 	?Processed YesNo;
+	@Remarks("Additional Name")
 	?Name2 Name;
+	@Remarks("Unique line for this document")
 	?Line Long;
+	@Remarks("Collection of windows, reports")
 	?AdWorkbench;
+	@Remarks("Database Table information")
 	?AdTable;
+	@Remarks("View used to generate this report")
 	?AdReportview;
+	@Remarks("AD_Package_Exp_ID")
 	AdPackageExpId ID;
+	@Remarks("AD_Package_Code_New")
 	?AdPackageCodeNew Note;
+	@Remarks("AD_Package_Code_Old")
 	?AdPackageCodeOld Note;
+	@Remarks("Dynamic Validation Rule")
 	?AdValRuleId ID;
+	@Remarks("System Message")
 	?AdMessage;
+	@Remarks("Data Print Format")
 	?AdPrintFormat;
 };
 

@@ -1,35 +1,62 @@
 @Remarks("Field on a database table")
 @Refby("4")
 type AdField {
+	@Remarks("Field on a database table")
 	!AdFieldId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Comment or Hint")
 	?Help;
-	IsCentrallyMaintained YesNo;/* 'Y'
-                              */
+	@Remarks("Information maintained in System Element table")
+	IsCentrallyMaintained YesNo;/* 'Y'                               */
+	@Remarks("Tab within a Window")
 	AdTab;
+	@Remarks("Column in the table")
 	?AdColumn;
+	@Remarks("Logical grouping of fields")
 	?AdFieldGroup;
+	@Remarks("Determines, if this field is displayed")
 	IsDisplayEd YesNo;/* 'Y'  */
+	@Remarks("If the Field is displayed, the result determines if the field is actually displayed")
 	?DisplayLogic Note;
+	@Remarks("Length of the display in characters")
 	?DisplayLength Length;
+	@Remarks("Field is read only")
 	IsReadonly YesNo;/* 'N'  */
+	@Remarks("Method of ordering records; lowest number comes first")
 	?Seqno SeqNo;
+	@Remarks("Determines in what order the records are displayed")
 	?Sortno SeqNo;
+	@Remarks("Displayed on same line as previous field")
 	IsSameline YesNo;/* 'N'  */
+	@Remarks("Field without Column - Only label is displayed")
 	IsHeading YesNo;/* 'N'  */
+	@Remarks("Label is not displayed")
 	IsFieldOnly YesNo;/* 'N'  */
+	@Remarks("Display or Storage is encrypted")
 	IsEncrypted YesNo;/* 'N'  */
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
+	@Remarks("Type of obscuring the data (limiting the display)")
 	?Obscuretype Attr;
+	@Remarks("System Reference and Validation")
 	?AdReference;
+	@Remarks("Data entry is required in this column")
 	?IsMandatory YesNo;
 	?IncludedTabId ID;
+	@Remarks("Default value hierarchy, separated by ;")
 	?Defaultvalue Note;
+	@Remarks("Required to specify, if data type is Table or List")
 	?AdReferenceValue AdReference;/* NULL */
+	@Remarks("Dynamic Validation Rule")
 	?AdValRule;/* NULL */
+	@Remarks("Fully qualified class name that implements the InfoFactory interface")
 	?Infofactoryclass Note;
 };
 

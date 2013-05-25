@@ -1,12 +1,19 @@
 @Remarks("Script model validator for tables")
 @Refby("0")
 tx AdTableScriptvalidator {
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;/* NULL   */
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;/* NULL   */
+	@Remarks("Rule")
 	AdRule;
+	@Remarks("Database Table information")
 	AdTable;
+	@Remarks("Table Script Validator")
 	!AdTableScriptvalidatorId ID;
+	@Remarks("Event Model Validator")
 	EventModelvalidator String;
+	@Remarks("Method of ordering records; lowest number comes first")
 	Seqno SeqNo;/* 0  */
 };
 

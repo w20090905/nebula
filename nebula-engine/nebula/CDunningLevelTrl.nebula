@@ -1,12 +1,19 @@
 @Remarks("Dunning Level Trl")
 @Refby("0")
 type CDunningLevelTrl {
+	@Remarks("Language for this entity")
 	!AdLanguage;
+	@Remarks("Dunning Level")
 	!CDunningLevel;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("The label text to be printed on a document or correspondence.")
 	PrintName Name;
+	@Remarks("Optional additional user defined information")
 	?Note;
+	@Remarks("This column is translated")
 	IsTranslated YesNo;/* 'N'  */
 };
 

@@ -1,16 +1,27 @@
 @Remarks("Document Line representing a production")
 @Refby("6")
 tx MProductIonline {
+	@Remarks("Document Line representing a production")
 	!MProductIonlineId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Plan for how a product is produced")
 	MProductIonplan;
+	@Remarks("Unique line for this document")
 	Line Long;
+	@Remarks("Product, Service, Item")
 	MProduct;
+	@Remarks("Quantity of a product moved.")
 	Movementqty Quantity;/* 0  */
+	@Remarks("Warehouse Locator")
 	MLocator;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Product Attribute Set Instance")
 	?MAttributesetinstance;/* 0 */
+	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 };
 

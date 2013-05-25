@@ -1,29 +1,47 @@
 @Remarks("Account Element")
 @Refby("52")
 type CElementvalue {
+	@Remarks("Account Element")
 	!CElementvalueId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Indicates the type of account")
 	Accounttype Attr;
+	@Remarks("Indicates the Natural Sign of the Account as a Debit or Credit")
 	Accountsign YesNo;
-	?IsDoccontrolled YesNo;/* 'N'
-                          */
+	@Remarks("Control account - If an account is controlled by a document, you cannot post manually to it")
+	?IsDoccontrolled YesNo;/* 'N'                           */
+	@Remarks("Accounting Element")
 	CElement;
+	@Remarks("This is a summary entity")
 	IsSummary YesNo;/* 'N'  */
+	@Remarks("Valid from including this date (first day)")
 	?Validfrom Date;
+	@Remarks("Valid to including this date (last day)")
 	?Validto Date;
+	@Remarks("Actual Values can be posted")
 	PostActual YesNo;/* 'Y'  */
+	@Remarks("Budget values can be posted")
 	PostBudget YesNo;/* 'Y'  */
+	@Remarks("Post commitments to this account")
 	PostEncumbrance YesNo;/* 'Y'  */
+	@Remarks("Post statistical quantities to this account?")
 	PostStatistical YesNo;/* 'Y'  */
-	?IsBankaccount YesNo;/* 'N'
-                          */
+	@Remarks("Indicates if this is the Bank Account")
+	?IsBankaccount YesNo;/* 'N'                           */
+	@Remarks("Account at the Bank")
 	?CBankaccount;
-	?IsForeignCurrency YesNo;/* 'N'
-                          */
+	@Remarks("Balances in foreign currency accounts are held in the nominated currency")
+	?IsForeignCurrency YesNo;/* 'N'                           */
+	@Remarks("The Currency for this record")
 	?CCurrency;
 };
 

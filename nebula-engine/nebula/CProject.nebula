@@ -1,46 +1,85 @@
 @Remarks("Financial Project")
 @Refby("35")
 type CProject {
+	@Remarks("Financial Project")
 	!CProjectId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Optional additional user defined information")
 	?Note;
+	@Remarks("This is a summary entity")
 	IsSummary YesNo;/* 'N'  */
+	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
+	@Remarks("Identifies a Business Partner")
 	?CBpartner;
+	@Remarks("Identifies the (ship to) address for this Business Partner")
 	?CBpartnerLocation;
+	@Remarks("Transaction Reference Number (Sales Order, Purchase Order) of your Business Partner")
 	?Poreference Name;
+	@Remarks("The terms of Payment (timing, discount)")
 	?CPaymentTerm;
+	@Remarks("The Currency for this record")
 	CCurrency;
+	@Remarks("Identifies a unique instance of a Price List")
 	?MPriceListVersion;
+	@Remarks("Marketing Campaign")
 	?CCampaign;
+	@Remarks("Is this document a (legal) commitment?")
 	IsCommitment YesNo;/* 'Y'  */
+	@Remarks("Planned amount for this project")
 	PlannedAmt Amount;/* 0  */
+	@Remarks("Planned quantity for this project")
 	PlannedQty Quantity;/* 0  */
+	@Remarks("Project_s planned margin amount")
 	PlannedMarginamt Amount;/* 0  */
+	@Remarks("The (legal) commitment amount")
 	CommittedAmt Amount;/* 0  */
+	@Remarks("The (planned) effective date of this document.")
 	?DateContract Date;
+	@Remarks("Finish or (planned) completion date")
 	?DateFinish Date;
+	@Remarks("Generate To")
 	?Generateto YesNo;
+	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
+	@Remarks("Sales Representative or Company Agent")
 	?SalesRep AdUser;
+	@Remarks("Copy From Record")
 	?Copyfrom YesNo;
+	@Remarks("Type of the project")
 	?CProjectType;
+	@Remarks("The (legal) commitment Quantity")
 	CommittedQty Quantity;/* 0  */
+	@Remarks("The amount invoiced")
 	InvoiceDamt Amount;/* 0  */
+	@Remarks("The quantity invoiced")
 	InvoiceDqty Quantity;/* 0  */
+	@Remarks("Total Project Balance")
 	ProjectBalanceAmt Amount;/* 0  */
+	@Remarks("Standard Phase of the Project Type")
 	?CPhase;
+	@Remarks("The commitment amount/quantity is the chargeable ceiling")
 	IsCommitceiling YesNo;/* 'N'  */
+	@Remarks("Storage Warehouse and Service Point")
 	?MWarehouse;
-	?ProjectCategory YesNo;/* 'N'
- */
+	@Remarks("Project Category")
+	?ProjectCategory YesNo;/* 'N'  */
+	@Remarks("Process Now")
 	?Processing YesNo;
+	@Remarks("Business Partner (Agent or Sales Rep)")
 	?CBpartnerSr CBpartner;
+	@Remarks("Invoice Rule for the project")
 	Projinvoicerule YesNo;/* '-'  */
+	@Remarks("Project Line Level")
 	ProjectLinelevel YesNo;/* 'P'  */
 };
 

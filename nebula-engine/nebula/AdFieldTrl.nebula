@@ -1,13 +1,21 @@
 @Remarks("Field on a database table")
 @Refby("0")
 type AdFieldTrl {
+	@Remarks("Field on a database table")
 	!AdField;
+	@Remarks("Language for this entity")
 	!AdLanguage;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Comment or Hint")
 	?Help;
+	@Remarks("This column is translated")
 	IsTranslated YesNo;/* 'N'  */
 };
 

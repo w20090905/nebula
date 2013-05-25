@@ -1,62 +1,119 @@
 @Remarks("Import Orders")
 @Refby("0")
 type IOrder {
+	@Remarks("Import Orders")
 	!IOrderId ID;
+	@Remarks("Client/Tenant for this installation.")
 	?AdClientId ID;
+	@Remarks("Organizational entity within client")
 	?AdOrg;
+	@Remarks("Performing or initiating organization")
 	?AdOrgtrx AdOrg;
+	@Remarks("Has this import been processed")
 	IIsImported YesNo;/* 'N'  */
+	@Remarks("Messages generated from import process")
 	?IErrorMsg Note;
+	@Remarks("Process Now")
 	?Processing YesNo;
+	@Remarks("The document has been processed")
 	?Processed YesNo;/* 'N' */
+	@Remarks("Sales Representative or Company Agent")
 	?SalesRep AdUser;
+	@Remarks("Storage Warehouse and Service Point")
 	?MWarehouse;
+	@Remarks("Unique identifier of a Price List")
 	?MPriceList;
+	@Remarks("The Currency for this record")
 	?CCurrency;
+	@Remarks("Method or manner of product delivery")
 	?MShipper;
+	@Remarks("This is a Sales Transaction")
 	?IsSotrx YesNo;/* 'Y' */
+	@Remarks("Identifies a Business Partner")
 	?CBpartner;
+	@Remarks("Key of the Business Partner")
 	?BpartnerValue Description;
+	@Remarks("Alphanumeric identifier of the entity")
 	?Name;
+	@Remarks("Identifies the (ship to) address for this Business Partner")
 	?CBpartnerLocation;
+	@Remarks("Bill to Address")
 	?Billto CBpartnerLocation;
+	@Remarks("Location or Address")
 	?CLocation;
+	@Remarks("Address line 1 for this location")
 	?Address1 Name;
+	@Remarks("Address line 2 for this location")
 	?Address2 Name;
+	@Remarks("Postal code")
 	?PostAl Code;
+	@Remarks("Identifies a City")
 	?City Name;
+	@Remarks("Identifies a geographical Region")
 	?CRegion;
+	@Remarks("Name of the Region")
 	?Regionname Name;
+	@Remarks("Country")
 	?CCountry;
+	@Remarks("Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1 - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html")
 	?CountryCode Code;
+	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
+	@Remarks("Business Partner Contact Name")
 	?Contactname Name;
+	@Remarks("Electronic Mail Address")
 	?Email;
+	@Remarks("Identifies a telephone number")
 	?Phone PhoneNumber;
+	@Remarks("Financial Project")
 	?CProject;
+	@Remarks("Business Activity")
 	?CActivity;
+	@Remarks("Document type or rules")
 	?CDoctype;
+	@Remarks("Name of the Document Type")
 	?DoctypeName Name;
+	@Remarks("The terms of Payment (timing, discount)")
 	?CPaymentTerm;
+	@Remarks("Key of the Payment Term")
 	?PaymentTermvalue Description;
+	@Remarks("Order")
 	?COrder;
+	@Remarks("Document sequence number of the document")
 	?DocumentNo Long;
+	@Remarks("Date of Order")
 	?DateOrdered Date;
+	@Remarks("Accounting Date")
 	?DateAcct Date;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Product, Service, Item")
 	?MProduct;
+	@Remarks("Key of the Product")
 	?ProductValue Description;
+	@Remarks("Bar Code (Universal Product Code or its superset European Article Number)")
 	?Upc UPC;
+	@Remarks("Stock Keeping Unit")
 	?Sku String;
+	@Remarks("Tax identifier")
 	?CTax;
+	@Remarks("Short form for Tax to be printed on documents")
 	?TaxIndicator String;
+	@Remarks("Tax Amount for a document")
 	?TaxAmt Amount;/* 0 */
+	@Remarks("Sales Order Line")
 	?COrderline;
+	@Remarks("Description of the Line")
 	?LineDescription Description;
+	@Remarks("Unit of Measure")
 	?CUom;
+	@Remarks("Ordered Quantity")
 	?QtyOrdered Quantity;/* 0 */
+	@Remarks("Actual Price")
 	?PriceActual Price;/* 0 */
+	@Remarks("Freight Amount")
 	?FreightAmt Amount;/* 0 */
+	@Remarks("Marketing Campaign")
 	?CCampaign;
 };
 

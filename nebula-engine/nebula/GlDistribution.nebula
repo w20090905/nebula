@@ -1,43 +1,81 @@
 @Remarks("General Ledger Distribution")
 @Refby("1")
 type GlDistribution {
+	@Remarks("General Ledger Distribution")
 	!GlDistributionId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Comment or Hint")
 	?Help;
+	@Remarks("The type of posted amount for the transaction")
 	?PostIngtype Attr;
+	@Remarks("Document type or rules")
 	?CDoctype;
+	@Remarks("Rules for accounting")
 	CAcctschema;
+	@Remarks("Match any value of the Organization segment")
 	Anyorg YesNo;/* 'Y'  */
+	@Remarks("Organizational entity within client")
 	?Org AdOrg;
+	@Remarks("Match any value of the Account segment")
 	Anyacct YesNo;/* 'Y'  */
+	@Remarks("Account used")
 	?Account CElementvalue;
+	@Remarks("Match any value of the Product segment")
 	Anyproduct YesNo;/* 'Y'  */
+	@Remarks("Product, Service, Item")
 	?MProduct;
+	@Remarks("Match any value of the Business Partner segment")
 	Anybpartner YesNo;/* 'Y'  */
+	@Remarks("Identifies a Business Partner")
 	?CBpartner;
+	@Remarks("Match any value of the Project segment")
 	Anyproject YesNo;/* 'Y'  */
+	@Remarks("Financial Project")
 	?CProject;
+	@Remarks("Match any value of the Campaign segment")
 	Anycampaign YesNo;/* 'Y'  */
+	@Remarks("Marketing Campaign")
 	?CCampaign;
+	@Remarks("Match any value of the Activity segment")
 	Anyactivity YesNo;/* 'Y'  */
+	@Remarks("Business Activity")
 	?CActivity;
+	@Remarks("Match any value of the Sales Region segment")
 	Anysalesregion YesNo;/* 'Y'  */
+	@Remarks("Sales coverage region")
 	?CSalesRegion;
+	@Remarks("Match any value of the Transaction Organization segment")
 	Anyorgtrx YesNo;/* 'Y'  */
+	@Remarks("Performing or initiating organization")
 	?AdOrgtrx AdOrg;
+	@Remarks("Match any value of the Location To segment")
 	Anylocto YesNo;/* 'Y'  */
+	@Remarks("Location that inventory was moved to")
 	?CLocto CLocation;
+	@Remarks("Match any value of the Location From segment")
 	Anylocfrom YesNo;/* 'Y'  */
+	@Remarks("Location that inventory was moved from")
 	?CLocfrom CLocation;
+	@Remarks("Match any value of the User 1 segment")
 	Anyuser1 YesNo;/* 'Y'  */
+	@Remarks("User defined list element #1")
 	?User1 CElementvalue;
+	@Remarks("Match any value of the User 2 segment")
 	Anyuser2 YesNo;/* 'Y'  */
+	@Remarks("User defined list element #2")
 	?User2 CElementvalue;
+	@Remarks("Sum of the Percent details")
 	Percenttotal Number;
+	@Remarks("Element is valid")
 	IsValid YesNo;/* 'N'  */
+	@Remarks("Process Now")
 	?Processing YesNo;
 };
 

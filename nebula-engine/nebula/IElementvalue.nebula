@@ -1,30 +1,55 @@
 @Remarks("Import Account Value")
 @Refby("0")
 type IElementvalue {
+	@Remarks("Import Account Value")
 	!IElementvalueId ID;
+	@Remarks("Client/Tenant for this installation.")
 	?AdClientId ID;
+	@Remarks("Organizational entity within client")
 	?AdOrgId ID;
+	@Remarks("Has this import been processed")
 	IIsImported YesNo;/* 'N'  */
+	@Remarks("Messages generated from import process")
 	?IErrorMsg Note;
+	@Remarks("Accounting Element")
 	?CElement;
+	@Remarks("Name of the Element")
 	?Elementname Name;
+	@Remarks("Account Element")
 	?CElementvalue;
+	@Remarks("Search key for the record in the format required - must be unique")
 	?Value String;
+	@Remarks("Alphanumeric identifier of the entity")
 	?Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Indicates the type of account")
 	?Accounttype Attr;
+	@Remarks("Indicates the Natural Sign of the Account as a Debit or Credit")
 	?Accountsign YesNo;
+	@Remarks("Control account - If an account is controlled by a document, you cannot post manually to it")
 	?IsDoccontrolled YesNo;/* 'N' */
+	@Remarks("This is a summary entity")
 	?IsSummary YesNo;/* 'N' */
+	@Remarks("Key if the Parent")
 	?Parentvalue Description;
+	@Remarks("The parent (summary) account")
 	?Parentelementvalue CElementvalue;
+	@Remarks("Actual Values can be posted")
 	?PostActual YesNo;/* 'Y' */
+	@Remarks("Budget values can be posted")
 	?PostBudget YesNo;/* 'Y' */
+	@Remarks("Post statistical quantities to this account?")
 	?PostStatistical YesNo;/* 'Y' */
+	@Remarks("Post commitments to this account")
 	?PostEncumbrance YesNo;/* 'Y' */
+	@Remarks("Name of the Default Account Column")
 	?DefaultAccount String;
+	@Remarks("Column in the table")
 	?AdColumn;
+	@Remarks("Process Now")
 	?Processing YesNo;
+	@Remarks("The document has been processed")
 	?Processed YesNo;/* 'N' */
 };
 

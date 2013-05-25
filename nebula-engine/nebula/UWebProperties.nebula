@@ -1,10 +1,15 @@
 @Remarks("Web Properties")
 @Refby("0")
 tx UWebProperties {
+	@Remarks("Web Properties")
 	!UWebPropertiesId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Key")
 	UKey Note;
+	@Remarks("Value")
 	UValue Note;
 };
 

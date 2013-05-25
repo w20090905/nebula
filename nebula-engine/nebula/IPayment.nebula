@@ -1,68 +1,131 @@
 @Remarks("Import Payment")
 @Refby("0")
 tx IPayment {
+	@Remarks("Import Payment")
 	!IPaymentId ID;
+	@Remarks("Client/Tenant for this installation.")
 	?AdClientId ID;
+	@Remarks("Organizational entity within client")
 	?AdOrgId ID;
+	@Remarks("Has this import been processed")
 	IIsImported YesNo;/* 'N'  */
+	@Remarks("Messages generated from import process")
 	?IErrorMsg Note;
+	@Remarks("The document has been processed")
 	?Processed YesNo;/* 'N' */
+	@Remarks("Payment identifier")
 	?CPayment;
+	@Remarks("Document sequence number of the document")
 	?DocumentNo Long;
+	@Remarks("Transaction Date")
 	?DateTrx Date;
+	@Remarks("This is a sales transaction (receipt)")
 	?IsReceipt YesNo;/* 'Y' */
+	@Remarks("Document type or rules")
 	?CDoctype;
+	@Remarks("Name of the Document Type")
 	?DoctypeName Name;
+	@Remarks("Type of credit card transaction")
 	?Trxtype Attr;
+	@Remarks("Account at the Bank")
 	?CBankaccount;
+	@Remarks("Bank Account Number")
 	?Bankaccountno String;
+	@Remarks("Identifies a Business Partner")
 	?CBpartner;
+	@Remarks("Key of the Business Partner")
 	?BpartnerValue Description;
+	@Remarks("Invoice Identifier")
 	?CInvoice;
+	@Remarks("Document Number of the Invoice")
 	?InvoiceDocumentNo String;
+	@Remarks("Method of Payment")
 	?TenderType Attr;
+	@Remarks("Credit Card (Visa, MC, AmEx)")
 	?CreditcardType Attr;
+	@Remarks("Credit Card Number")
 	?CreditcardNumber String;
+	@Remarks("Credit Card Verification code on credit card")
 	?CreditcardVv String;
+	@Remarks("Expiry Month")
 	?CreditcardExpmm Number;
+	@Remarks("Expiry Year")
 	?CreditcardExpyy Number;
+	@Remarks("Combination of routing no, account and check no")
 	?Micr String;
+	@Remarks("Bank Routing Number")
 	?Routingno String;
+	@Remarks("Account Number")
 	?Accountno AccountNo;
+	@Remarks("Check Number")
 	?Checkno String;
+	@Remarks("Name on Credit Card or Account holder")
 	?AName Name;
+	@Remarks("Street address of the Credit Card or Account holder")
 	?AStreet Name;
+	@Remarks("City or the Credit Card or Account Holder")
 	?ACity Name;
+	@Remarks("State of the Credit Card or Account holder")
 	?AState Name;
+	@Remarks("Zip Code of the Credit Card or Account Holder")
 	?AZip Name;
+	@Remarks("Country")
 	?ACountry Description;
+	@Remarks("Payment Identification - Driver License")
 	?AIdentDl String;
+	@Remarks("Payment Identification - Social Security No")
 	?AIdentSsn String;
+	@Remarks("Email Address")
 	?AEmail Email;
+	@Remarks("Voice Authorization Code from credit card company")
 	?VoiceAuthcode String;
+	@Remarks("Track 1 and 2 of the Credit Card")
 	?Swipe String;
+	@Remarks("Original Transaction ID")
 	?OrigTrxid String;
+	@Remarks("Purchase Order Number")
 	?Ponum Description;
+	@Remarks("The Currency for this record")
 	?CCurrency;
+	@Remarks("Amount being paid")
 	?Payamt Amount;/* 0 */
+	@Remarks("Calculated amount of discount")
 	?DiscountAmt Amount;/* 0 */
+	@Remarks("Amount to write-off")
 	?WriteoffAmt Amount;/* 0 */
+	@Remarks("Over-Payment (unallocated) or Under-Payment (partial payment)")
 	?IsOverunderpayment YesNo;/* 'N' */
+	@Remarks("Over-Payment (unallocated) or Under-Payment (partial payment) Amount")
 	?Overunderamt Amount;/* 0 */
+	@Remarks("Additional document charges")
 	?CCharge;
+	@Remarks("Name of the Charge")
 	?ChargeName Name;
+	@Remarks("Charge Amount")
 	?ChargeAmt Amount;/* 0 */
+	@Remarks("Tax Amount for a document")
 	?TaxAmt Amount;/* 0 */
+	@Remarks("Indicates if this document requires approval")
 	?IsApproved YesNo;/* 'N' */
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
 	?IsSelfservice YesNo;/* 'N' */
+	@Remarks("Charge after Shipment")
 	?IsDelayedcapture YesNo;/* 'N' */
+	@Remarks("Payment reference")
 	?RPnref String;
+	@Remarks("Result of transmission")
 	?RResult String;
+	@Remarks("Response message")
 	?RRespmsg Description;
+	@Remarks("Authorization Code returned")
 	?RAuthcode String;
+	@Remarks("Response info")
 	?RInfo Note;
+	@Remarks("Process Now")
 	?Processing YesNo;
+	@Remarks("Three letter ISO 4217 Code of the Currency")
 	?IsOCode String;
+	@Remarks("Accounting Date")
 	?DateAcct Date;
 };
 

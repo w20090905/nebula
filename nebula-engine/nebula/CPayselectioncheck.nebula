@@ -1,21 +1,37 @@
 @Remarks("Payment Selection Check")
 @Refby("1")
 tx CPayselectioncheck {
+	@Remarks("Payment Selection Check")
 	!CPayselectioncheckId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Payment Selection")
 	CPayselection;
+	@Remarks("Identifies a Business Partner")
 	CBpartner;
+	@Remarks("Amount being paid")
 	Payamt Amount;/* 0  */
+	@Remarks("Quantity")
 	Qty Quantity;/* 0  */
+	@Remarks("Payment identifier")
 	?CPayment;
+	@Remarks("Document sequence number of the document")
 	?DocumentNo Long;
+	@Remarks("Indicates if this document / line is printed")
 	IsPrintEd YesNo;/* 'N'  */
+	@Remarks("How you pay the invoice")
 	PaymentRule Name;
+	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
+	@Remarks("Calculated amount of discount")
 	DiscountAmt Amount;/* 0  */
+	@Remarks("This is a sales transaction (receipt)")
 	IsReceipt YesNo;/* 'N'  */
+	@Remarks("Bank Account of the Business Partner")
 	?CBpBankaccount;/* NULL   */
+	@Remarks("Generated Draft")
 	IsGenerateddraft YesNo;/* 'N'  */
 };
 

@@ -1,12 +1,19 @@
 @Remarks("Product Related")
 @Refby("0")
 type MRelatedproduct {
+	@Remarks("Product, Service, Item")
 	!MProduct;
+	@Remarks("Related Product")
 	!Relatedproduct MProduct;
+	@Remarks("Related Product Type")
 	!Relatedproducttype Attr;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
 };
 

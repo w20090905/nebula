@@ -1,18 +1,31 @@
 @Remarks("AD_Package_Imp_Detail_ID")
 @Refby("0")
 type AdPackageImpDetail {
+	@Remarks("AD_Package_Imp_Detail_ID")
 	!AdPackageImpDetailId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
 	?Name;
+	@Remarks("AD_Package_Imp_ID")
 	AdPackageImpId ID;
+	@Remarks("AD_Original_ID")
 	AdOriginalId ID;
+	@Remarks("Ad_Backup_ID")
 	?AdBackupId ID;
+	@Remarks("Indicates the Action to be performed")
 	?Action YesNo;
+	@Remarks("Success")
 	?Success String;
+	@Remarks("Type of Validation (SQL, Java Script, Java Language)")
 	?Type Description;
+	@Remarks("Name of the table in the database")
 	?Tablename Name;
+	@Remarks("Database Table information")
 	?AdTableId ID;
+	@Remarks("Uninstall")
 	?Uninstall YesNo;
 };
 

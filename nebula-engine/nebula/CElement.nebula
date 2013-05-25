@@ -1,15 +1,25 @@
 @Remarks("Accounting Element")
 @Refby("3")
 type CElement {
+	@Remarks("Accounting Element")
 	!CElementId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Format of the value; Can contain fixed format elements, Variables: '_lLoOaAcCa09'")
 	?Vformat Description;
+	@Remarks("Element Type (account or user defined)")
 	Elementtype Attr;
+	@Remarks("All transactions within an element value must balance (e.g. cost centers)")
 	IsBalancing YesNo;/* 'N'  */
+	@Remarks("The primary natural account")
 	IsNaturalaccount YesNo;/* 'Y'  */
+	@Remarks("Identifies a Tree")
 	?AdTree;
 };
 

@@ -1,66 +1,127 @@
 @Remarks("Import General Ledger Journal")
 @Refby("0")
 tx IGljournal {
+	@Remarks("Import General Ledger Journal")
 	!IGljournalId ID;
+	@Remarks("Client/Tenant for this installation.")
 	?AdClientId ID;
+	@Remarks("Key of the Client")
 	?ClientValue Description;
+	@Remarks("Document Organization (independent from account organization)")
 	?AdOrgdoc AdOrg;
+	@Remarks("Has this import been processed")
 	IIsImported YesNo;/* 'N'  */
+	@Remarks("Messages generated from import process")
 	?IErrorMsg Note;
+	@Remarks("Process Now")
 	?Processing YesNo;
+	@Remarks("The document has been processed")
 	?Processed YesNo;/* 'N' */
+	@Remarks("General Ledger Journal Batch")
 	?GlJournalbatch;
+	@Remarks("Document Number of the Batch")
 	?Batchdocumentno String;
+	@Remarks("Description of the Batch")
 	?Batchdescription Note;
+	@Remarks("General Ledger Journal")
 	?GlJournal;
+	@Remarks("Document number of the Journal")
 	?Journaldocumentno String;
+	@Remarks("The type of posted amount for the transaction")
 	?PostIngtype Attr;
+	@Remarks("Rules for accounting")
 	?CAcctschema;
+	@Remarks("Name of the Accounting Schema")
 	?Acctschemaname Name;
+	@Remarks("Document type or rules")
 	?CDoctype;
+	@Remarks("Name of the Document Type")
 	?DoctypeName Name;
+	@Remarks("General Ledger Category")
 	?GlCategory;
+	@Remarks("Name of the Category")
 	?Categoryname Name;
+	@Remarks("Period of the Calendar")
 	?CPeriod;
+	@Remarks("General Ledger Budget")
 	?GlBudget;
+	@Remarks("General Ledger Journal Line")
 	?GlJournalline;
+	@Remarks("Unique line for this document")
 	?Line Long;
+	@Remarks("Accounting Date")
 	?DateAcct Date;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Source Debit Amount")
 	?AmtSourcedr Amount;/* 0 */
+	@Remarks("Accounted Debit Amount")
 	?AmtAcctdr Amount;/* 0 */
+	@Remarks("Source Credit Amount")
 	?AmtSourcecr Amount;/* 0 */
+	@Remarks("Accounted Credit Amount")
 	?AmtAcctcr Amount;/* 0 */
+	@Remarks("The Currency for this record")
 	?CCurrency;
+	@Remarks("Three letter ISO 4217 Code of the Currency")
 	?IsOCode String;
+	@Remarks("Key value for the Currency Conversion Rate Type")
 	?ConversionTypevalue Description;
+	@Remarks("Currency Conversion Rate Type")
 	?CConversionType;
+	@Remarks("Currency Conversion Rate")
 	?Currencyrate Number;/* 0 */
+	@Remarks("Unit of Measure")
 	?CUom;
+	@Remarks("Quantity")
 	?Qty Quantity;/* 0 */
+	@Remarks("Valid Account Combination")
 	?CValidcombination;
+	@Remarks("Key of the Organization")
 	?Orgvalue Description;
+	@Remarks("Organizational entity within client")
 	?AdOrg;
+	@Remarks("Account used")
 	?Account CElementvalue;
+	@Remarks("Key of Account Element")
 	?Accountvalue Description;
+	@Remarks("Performing or initiating organization")
 	?AdOrgtrx AdOrg;
+	@Remarks("Key of the Transaction Organization")
 	?Orgtrxvalue Description;
+	@Remarks("Product, Service, Item")
 	?MProduct;
+	@Remarks("Key of the Product")
 	?ProductValue Description;
+	@Remarks("Bar Code (Universal Product Code or its superset European Article Number)")
 	?Upc UPC;
+	@Remarks("Stock Keeping Unit")
 	?Sku String;
+	@Remarks("Identifies a Business Partner")
 	?CBpartner;
+	@Remarks("Key of the Business Partner")
 	?BpartnerValue Description;
+	@Remarks("Financial Project")
 	?CProject;
+	@Remarks("Key of the Project")
 	?ProjectValue Description;
+	@Remarks("Location that inventory was moved to")
 	?CLocto CLocation;
+	@Remarks("Location that inventory was moved from")
 	?CLocfrom CLocation;
+	@Remarks("Sales coverage region")
 	?CSalesRegion;
+	@Remarks("Business Activity")
 	?CActivity;
+	@Remarks("Marketing Campaign")
 	?CCampaign;
+	@Remarks("User defined list element #1")
 	?User1 CElementvalue;
+	@Remarks("User defined list element #2")
 	?User2 CElementvalue;
+	@Remarks("If selected a new batch is created")
 	?IsCreateNewbatch YesNo;
+	@Remarks("If selected a new journal within the batch is created")
 	?IsCreateNewjournal YesNo;
 };
 

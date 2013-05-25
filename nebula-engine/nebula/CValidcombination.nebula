@@ -1,28 +1,51 @@
 @Remarks("Valid Account Combination")
 @Refby("142")
 tx CValidcombination {
+	@Remarks("Valid Account Combination")
 	!CValidcombinationId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Defines an alternate method of indicating an account combination.")
 	?Alias Description;
+	@Remarks("Unique combination of account elements")
 	?Combination Description;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("This account is fully qualified")
 	IsFullyqualified YesNo;/* 'Y'  */
+	@Remarks("Rules for accounting")
 	CAcctschema;
+	@Remarks("Account used")
 	Account CElementvalue;
+	@Remarks("Product, Service, Item")
 	?MProduct;
+	@Remarks("Identifies a Business Partner")
 	?CBpartner;
+	@Remarks("Performing or initiating organization")
 	?AdOrgtrx AdOrg;
+	@Remarks("Location that inventory was moved from")
 	?CLocfrom CLocation;
+	@Remarks("Location that inventory was moved to")
 	?CLocto CLocation;
+	@Remarks("Sales coverage region")
 	?CSalesRegion;
+	@Remarks("Financial Project")
 	?CProject;
+	@Remarks("Marketing Campaign")
 	?CCampaign;
+	@Remarks("Business Activity")
 	?CActivity;
+	@Remarks("User defined list element #1")
 	?User1 CElementvalue;
+	@Remarks("User defined list element #2")
 	?User2 CElementvalue;
+	@Remarks("Sub account for Element Value")
 	?CSubacct;
+	@Remarks("User defined accounting Element")
 	?Userelement1Id ID;
+	@Remarks("User defined accounting Element")
 	?Userelement2Id ID;
 };
 

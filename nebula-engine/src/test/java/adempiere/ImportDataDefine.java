@@ -177,7 +177,7 @@ public class ImportDataDefine {
 		}
 
 		for (Type type : types) {
-			if(type.standalone == TypeStandalone.Abstract){
+			if (type.standalone == TypeStandalone.Abstract) {
 				type.standalone = TypeStandalone.Master;
 			}
 		}
@@ -193,7 +193,7 @@ public class ImportDataDefine {
 			}
 
 			sb.setLength(0);
-			sb.append("@Remarks(\"" + type.remarks + "\")\n");
+			sb.append("@Remarks(\"" + escape(type.remarks) + "\")\n");
 			sb.append("@Refby(\"" + type.cntReference + "\")\n");
 			if (type.standalone == TypeStandalone.Transaction) {
 				sb.append("tx " + type.name + " {\n");
@@ -206,6 +206,9 @@ public class ImportDataDefine {
 					System.out.println("==Skip== \t" + type.rawName + "\t" + field.rawName);
 					continue;
 				}
+				if (field.remarks.length() > 0) {
+					sb.append("\t@Remarks(\"" + escape(field.remarks) + "\")\n");
+				}
 				sb.append("\t");
 				if (!field.isRequired) {
 					sb.append("?");
@@ -213,8 +216,8 @@ public class ImportDataDefine {
 				if (field.isKey) {
 					sb.append("!");
 				}
-				if(field.isRequired && "Name".equals(field.name)){
-					sb.append("*");					
+				if (field.isRequired && "Name".equals(field.name)) {
+					sb.append("*");
 				}
 
 				sb.append(field.name);
@@ -224,7 +227,7 @@ public class ImportDataDefine {
 				sb.append(";");
 
 				if (field.defaultValue.length() > 0) {
-					sb.append("/* " + field.defaultValue + " */");
+					sb.append("/* " + escape(field.defaultValue) + " */");
 				}
 				sb.append("\n");
 			}
@@ -1153,7 +1156,9 @@ public class ImportDataDefine {
 		tColName = refineName(tColName);
 		String defaultValue = column.getAttribute("defaultValue");
 
-		type.addField(rawColName, tColName, tTypeName, defaultValue, required);
+		Field field = type.addField(rawColName, tColName, tTypeName, defaultValue, required);
+		field.remarks = column.getAttribute("remarks");
+
 	}
 
 	static final String[] revs = ("is display field where Enforce Support release database"
@@ -1165,9 +1170,9 @@ public class ImportDataDefine {
 			+ "Create Days between after Charge Interest Dunning Doctype Invoice  payment Times Tender "
 			+ " Archive Conversion Amt Foreign Document Fee Total Qty Price Freight Resource Tax"
 			+ " Accept Bpcontact Delivery Priority Grand Product Creditcard Voice Writeoff Proxy Attribute"
-			+ "Require Planned Project  Reference balance Committed Sales Standard Notification" +
-			" Country System Remuneration  Revenue Unearned Gross")
-			.toUpperCase().split(" ");
+			+ "Require Planned Project  Reference balance Committed Sales Standard Notification"
+			+ " Country System Remuneration  Revenue Unearned Gross " +
+			" UnixAttachmentpath Language Decimal").toUpperCase().split(" ");
 
 	public String refineName(String name) {
 		for (String rev : revs) {
@@ -1218,6 +1223,7 @@ public class ImportDataDefine {
 		String name;
 		String type;
 		String defaultValue;
+		String remarks;
 		boolean isRequired = false;
 		boolean isKey = false;
 
@@ -1242,5 +1248,9 @@ public class ImportDataDefine {
 			this.isKey = isKey;
 		}
 
+	}
+
+	public String escape(String text) {
+		return text.replace('\"', '\'').replace('\n', ' ').replace('\r', ' ');
 	}
 }

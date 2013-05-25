@@ -1,16 +1,27 @@
 @Remarks("Performance Goal Restriction")
 @Refby("0")
 type PaGoalrestriction {
+	@Remarks("Performance Goal Restriction")
 	!PaGoalrestrictionId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Goal Restriction Type")
 	Goalrestrictiontype Attr;
+	@Remarks("Performance Goal")
 	PaGoal;
+	@Remarks("Identifies a Business Partner")
 	?CBpartner;
+	@Remarks("Product, Service, Item")
 	?MProduct;
+	@Remarks("Organizational entity within client")
 	?Org AdOrg;
+	@Remarks("Business Partner Group")
 	?CBpGroup;
+	@Remarks("Category of a Product")
 	?MProductCategory;
 };
 

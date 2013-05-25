@@ -1,13 +1,21 @@
 @Remarks("Unit of Measure Conversion")
 @Refby("0")
 tx CUomConversion {
+	@Remarks("Unit of Measure Conversion")
 	!CUomConversionId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Unit of Measure")
 	CUom;
+	@Remarks("Target or destination Unit of Measure")
 	CUomTo CUom;
+	@Remarks("Rate to multiple the source by to calculate the target.")
 	Multiplyrate Number;/* 0  */
+	@Remarks("To convert Source number to Target number, the Source is divided")
 	Dividerate Number;/* 0  */
+	@Remarks("Product, Service, Item")
 	?MProduct;
 };
 

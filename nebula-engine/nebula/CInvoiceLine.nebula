@@ -1,44 +1,83 @@
 @Remarks("Invoice Detail Line")
 @Refby("15")
 tx CInvoiceLine {
+	@Remarks("Invoice Detail Line")
 	!CInvoiceLineId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Invoice Identifier")
 	CInvoice;
+	@Remarks("Sales Order Line")
 	?COrderline;
+	@Remarks("Line on Shipment or Receipt document")
 	?MInoutline;
+	@Remarks("Unique line for this document")
 	Line Long;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Product, Service, Item")
 	?MProduct;
+	@Remarks("Invoiced Quantity")
 	QtyInvoiced Quantity;/* 0  */
+	@Remarks("List Price")
 	PriceList Price;/* 0  */
+	@Remarks("Actual Price")
 	PriceActual Price;/* 0  */
+	@Remarks("Lowest price for a product")
 	PriceLimit Price;/* 0  */
+	@Remarks("Line Extended Amount (Quantity * Actual Price) without Freight and Charges")
 	LineNetamt Long;/* 0  */
+	@Remarks("Additional document charges")
 	?CCharge;
+	@Remarks("Unit of Measure")
 	?CUom;
+	@Remarks("Tax identifier")
 	?CTax;
+	@Remarks("Resource Assignment")
 	?SResourceAssignment;
+	@Remarks("Asset used internally or by customers")
 	?AAsset;
+	@Remarks("Tax Amount for a document")
 	?TaxAmt Amount;/* 0 */
+	@Remarks("Product Attribute Set Instance")
 	?MAttributesetinstance;/* 0 */
+	@Remarks("if true, the line is just description and no transaction")
 	IsDescription YesNo;/* 'N'  */
+	@Remarks("Indicates if this document / line is printed")
 	IsPrintEd YesNo;/* 'Y' */
+	@Remarks("Total line amount incl. Tax")
 	?LineTotalAmt Long;/* 0 */
+	@Remarks("Referenced Invoice Line")
 	?RefInvoiceLine CInvoiceLine;
+	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
+	@Remarks("The Quantity Entered is based on the selected UoM")
 	QtyEntered Quantity;
+	@Remarks("Price Entered - the price based on the selected/base UoM")
 	PriceEntered Price;
+	@Remarks("Financial Project")
 	?CProject;
+	@Remarks("Phase of a Project")
 	?CProjectPhase;
+	@Remarks("Actual Project Task in a Phase")
 	?CProjectTask;
+	@Remarks("Revenue Recognition Start Date")
 	?Rrstartdate Date;
+	@Remarks("Revenue Recognition Amount")
 	?Rramt Amount;
+	@Remarks("Marketing Campaign")
 	?CCampaign;
+	@Remarks("Business Activity")
 	?CActivity;
+	@Remarks("User defined list element #1")
 	?User1 CElementvalue;
+	@Remarks("User defined list element #2")
 	?User2 CElementvalue;
+	@Remarks("Performing or initiating organization")
 	?AdOrgtrx AdOrg;
+	@Remarks("Return Material Authorization Line")
 	?MRmaline;/* NULL */
 };
 

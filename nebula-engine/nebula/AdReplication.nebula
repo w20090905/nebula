@@ -1,23 +1,41 @@
 @Remarks("Data Replication Target")
 @Refby("1")
 type AdReplication {
+	@Remarks("Data Replication Target")
 	!AdReplicationId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Comment or Hint")
 	?Help;
+	@Remarks("Host Address URL or DNS")
 	Hostaddress Name;
+	@Remarks("Host Communication Port")
 	Hostport Long;
+	@Remarks("Data Replication Strategy")
 	AdReplicationstrategy;
+	@Remarks("Connect to Server via HTTP Tunnel")
 	IsRmioverhttp YesNo;/* 'Y' */
+	@Remarks("Process Now")
 	?Processing YesNo;
+	@Remarks("Start of the ID Range used")
 	?Idrangestart Long;
+	@Remarks("End if the ID Range used")
 	?Idrangeend Long;
+	@Remarks("Remote Client to be used to replicate / synchronize data with.")
 	?RemoteClient AdClient;
+	@Remarks("Remote Organization to be used to replicate / synchronize data with.")
 	?RemoteOrg AdOrg;
+	@Remarks("Prefix before the sequence number")
 	?Prefix String;
+	@Remarks("Suffix after the number")
 	?Suffix String;
+	@Remarks("Date the process was last run.")
 	?DateLastrun Date;
 };
 

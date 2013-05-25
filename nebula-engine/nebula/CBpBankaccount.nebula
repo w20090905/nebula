@@ -1,32 +1,59 @@
 @Remarks("Bank Account of the Business Partner")
 @Refby("2")
 tx CBpBankaccount {
+	@Remarks("Bank Account of the Business Partner")
 	!CBpBankaccountId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Identifies a Business Partner")
 	CBpartner;
+	@Remarks("Bank")
 	?CBank;
+	@Remarks("Automatic Clearing House")
 	IsAch YesNo;/* 'N'  */
+	@Remarks("Bank Account Type")
 	?Bankaccounttype Attr;
+	@Remarks("Bank Routing Number")
 	?Routingno String;
+	@Remarks("Account Number")
 	?Accountno AccountNo;
+	@Remarks("Credit Card (Visa, MC, AmEx)")
 	?CreditcardType Attr;
+	@Remarks("Credit Card Number")
 	?CreditcardNumber String;
+	@Remarks("Credit Card Verification code on credit card")
 	?CreditcardVv String;
+	@Remarks("Expiry Month")
 	?CreditcardExpmm Number;
+	@Remarks("Expiry Year")
 	?CreditcardExpyy Number;
+	@Remarks("Name on Credit Card or Account holder")
 	?AName Name;
+	@Remarks("Street address of the Credit Card or Account holder")
 	?AStreet Name;
+	@Remarks("City or the Credit Card or Account Holder")
 	?ACity Name;
+	@Remarks("State of the Credit Card or Account holder")
 	?AState Name;
+	@Remarks("Zip Code of the Credit Card or Account Holder")
 	?AZip Name;
+	@Remarks("Payment Identification - Driver License")
 	?AIdentDl String;
+	@Remarks("Email Address")
 	?AEmail Email;
+	@Remarks("Payment Identification - Social Security No")
 	?AIdentSsn String;
+	@Remarks("This address has been verified")
 	?RAvsaddr YesNo;
+	@Remarks("The Zip Code has been verified")
 	?RAvszip YesNo;
+	@Remarks("Country")
 	?ACountry Description;
+	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
+	@Remarks("Business Partner Bank Account usage")
 	?Bpbankacctuse YesNo;/* NULL   */
 };
 

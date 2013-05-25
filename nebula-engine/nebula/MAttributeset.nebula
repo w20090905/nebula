@@ -1,25 +1,45 @@
 @Remarks("Product Attribute Set")
 @Refby("4")
 type MAttributeset {
+	@Remarks("Product Attribute Set")
 	!MAttributesetId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("The product instances have Serial Numbers")
 	IsSerno YesNo;/* 'Y'  */
+	@Remarks("Product Serial Number Control")
 	?MSernoctl;
+	@Remarks("The product instances have a Lot Number")
 	IsLot YesNo;/* 'Y'  */
+	@Remarks("Product Lot Control")
 	?MLotctl;
+	@Remarks("Product has Guarantee or Expiry Date")
 	IsGuaranteedate YesNo;/* 'N'  */
+	@Remarks("Number of days the product is guaranteed or available")
 	?Guaranteedays Count;
+	@Remarks("The product attribute is specific to the instance (like Serial No, Lot or Guarantee Date)")
 	IsInstanceattribute YesNo;/* 'N'  */
+	@Remarks("The specification of a Product Attribute Instance is mandatory")
 	Mandatorytype Attr;/* 'N'  */
+	@Remarks("The entry of a Guarantee Date is mandatory when creating a Product Instance")
 	IsGuaranteedatemandatory YesNo;/* 'N'  */
+	@Remarks("The entry of Lot info is mandatory when creating a Product Instance")
 	IsLotmandatory YesNo;/* 'N'  */
+	@Remarks("The entry of a Serial No is mandatory when creating a Product Instance")
 	IsSernomandatory YesNo;/* 'N'  */
+	@Remarks("Serial Number Start Indicator overwrite - default #")
 	?Sernocharsoverwrite String;
+	@Remarks("Lot/Batch Start Indicator overwrite - default «")
 	?Lotcharsoverwrite String;
+	@Remarks("Lot/Batch End Indicator overwrite - default »")
 	?Lotchareoverwrite String;
+	@Remarks("Serial Number End Indicator overwrite - default empty")
 	?Sernochareoverwrite String;
 };
 

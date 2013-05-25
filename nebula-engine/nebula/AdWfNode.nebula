@@ -1,47 +1,89 @@
 @Remarks("Workflow Node (activity), step or process")
 @Refby("8")
 type AdWfNode {
+	@Remarks("Workflow Node (activity), step or process")
 	!AdWfNodeId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Comment or Hint")
 	?Help;
+	@Remarks("Workflow or combination of tasks")
 	AdWorkflow;
+	@Remarks("Information maintained in System Element table")
 	IsCentrallyMaintained YesNo;/* 'Y'  */
+	@Remarks("Indicates the Action to be performed")
 	Action YesNo;
+	@Remarks("Data entry or display window")
 	?AdWindow;
+	@Remarks("Workflow or tasks")
 	?Workflow AdWorkflow;
+	@Remarks("Operation System Task")
 	?AdTask;
+	@Remarks("Process or Report")
 	?AdProcess;
+	@Remarks("Special Form")
 	?AdForm;
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
+	@Remarks("Absolute X (horizontal) position in 1/72 of an inch")
 	Xposition Number;/* 0 */
+	@Remarks("Absolute Y (vertical) position in 1/72 of an inch")
 	Yposition Number;/* 0 */
+	@Remarks("Workflow Transaction Execution Block")
 	?AdWfBlock;
+	@Remarks("Mode how the sub-workflow is executed")
 	?Subflowexecution YesNo;
+	@Remarks("Workflow Activity Start Mode")
 	?Startmode YesNo;
+	@Remarks("Workflow Activity Finish Mode")
 	?Finishmode YesNo;
+	@Remarks("Maximum Duration in Duration Unit")
 	Limit Number;/* 0 */
+	@Remarks("Indicates if this request is of a high, medium or low priority.")
 	?Priority;
+	@Remarks("Normal Duration in Duration Unit")
 	Duration Number;/* 0 */
+	@Remarks("Cost information")
 	Cost Number;/* 0 */
+	@Remarks("Workflow Simulation Execution Time")
 	?Workingtime Long;
+	@Remarks("Workflow Simulation Waiting time")
 	Waitingtime Long;/* 0 */
+	@Remarks("Responsible for Workflow Execution")
 	?AdWfResponsible;
+	@Remarks("Image or Icon")
 	?AdImage;
+	@Remarks("Semantics for multiple incoming Transitions")
 	Joinelement YesNo;/* NULL */
+	@Remarks("Semantics for multiple outgoing Transitions")
 	Splitelement YesNo;/* NULL */
+	@Remarks("Time in minutes to wait (sleep)")
 	?Waittime Long;
+	@Remarks("Column in the table")
 	?AdColumn;
+	@Remarks("Name of the Attribute")
 	?Attributename Name;
+	@Remarks("Value of the Attribute")
 	?Attributevalue Description;
+	@Remarks("The targeted status of the document")
 	?Docaction Attr;
+	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
+	@Remarks("Change of priority when Activity is suspended waiting for user")
 	?Dynpriorityunit YesNo;
+	@Remarks("Change of priority when Activity is suspended waiting for user")
 	?Dynprioritychange Number;
+	@Remarks("Recipient of the EMail")
 	?Emailrecipient YesNo;
+	@Remarks("Electronic Mail Address")
 	?Email;
+	@Remarks("Text templates for mailings")
 	?RMailtext;
 };
 

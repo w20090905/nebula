@@ -1,34 +1,63 @@
 @Remarks("Expense Invoice Batch Line")
 @Refby("0")
 tx CInvoiceBatchline {
+	@Remarks("Expense Invoice Batch Line")
 	!CInvoiceBatchlineId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Expense Invoice Batch Header")
 	CInvoiceBatch;
+	@Remarks("Unique line for this document")
 	Line Long;/* 0  */
+	@Remarks("Document type or rules")
 	CDoctype;
+	@Remarks("Document sequence number of the document")
 	DocumentNo Long;
+	@Remarks("Date printed on Invoice")
 	DateInvoiceD Date;
+	@Remarks("Accounting Date")
 	DateAcct Date;
+	@Remarks("Identifies a Business Partner")
 	CBpartner;
+	@Remarks("Identifies the (ship to) address for this Business Partner")
 	CBpartnerLocation;
+	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
+	@Remarks("Additional document charges")
 	CCharge;
+	@Remarks("The Quantity Entered is based on the selected UoM")
 	QtyEntered Quantity;/* 0  */
+	@Remarks("Price Entered - the price based on the selected/base UoM")
 	PriceEntered Price;/* 0  */
+	@Remarks("Tax is included in the price")
 	IsTaxIncluded YesNo;/* 'N'  */
+	@Remarks("Line Extended Amount (Quantity * Actual Price) without Freight and Charges")
 	LineNetamt Long;/* 0  */
+	@Remarks("Tax identifier")
 	CTax;
+	@Remarks("Tax Amount for a document")
 	TaxAmt Amount;/* 0  */
+	@Remarks("Total line amount incl. Tax")
 	LineTotalAmt Long;/* 0  */
+	@Remarks("Financial Project")
 	?CProject;
+	@Remarks("Business Activity")
 	?CActivity;
+	@Remarks("Performing or initiating organization")
 	?AdOrgtrx AdOrg;
+	@Remarks("User defined list element #1")
 	?User1 CElementvalue;
+	@Remarks("User defined list element #2")
 	?User2 CElementvalue;
+	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
+	@Remarks("Invoice Identifier")
 	?CInvoice;
+	@Remarks("Invoice Detail Line")
 	?CInvoiceLine;
+	@Remarks("Optional short description of the record")
 	?Description;
 };
 

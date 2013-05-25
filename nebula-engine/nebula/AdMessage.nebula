@@ -1,13 +1,21 @@
 @Remarks("System Message")
 @Refby("5")
 tx AdMessage {
+	@Remarks("System Message")
 	!AdMessageId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
+	@Remarks("Textual Informational, Menu or Error Message")
 	Msgtext Note;
+	@Remarks("Additional tip or help for this message")
 	?Msgtip Note;
+	@Remarks("Type of message (Informational, Menu or Error)")
 	Msgtype Attr;
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
 };
 

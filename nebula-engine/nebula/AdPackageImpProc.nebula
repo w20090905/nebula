@@ -1,13 +1,21 @@
 @Remarks("AD_Package_Imp_Proc_ID")
 @Refby("0")
 tx AdPackageImpProc {
+	@Remarks("AD_Package_Imp_Proc_ID")
 	!AdPackageImpProcId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Update System Maintained Application Dictionary")
 	?AdOverrideDict YesNo;
+	@Remarks("Package directory, default to AdempiereHome/packages")
 	?AdPackageDir Note;
+	@Remarks("Fully qualified package source file name")
 	?AdPackageSource Note;
+	@Remarks("Type of package source - file, ftp, webservice etc")
 	AdPackageSourceType String;
+	@Remarks("Process Now")
 	?Processing YesNo;
 };
 

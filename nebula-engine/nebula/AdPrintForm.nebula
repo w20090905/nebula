@@ -1,20 +1,35 @@
 @Remarks("Form")
 @Refby("0")
 type AdPrintForm {
+	@Remarks("Form")
 	!AdPrintFormId ID;
+	@Remarks("Client/Tenant for this installation.")
 	?AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Print Format for printing Invoices")
 	?InvoicePrintFormat AdPrintFormat;
+	@Remarks("Print Format for Orders, Quotes, Offers")
 	?OrderPrintFormat AdPrintFormat;
+	@Remarks("Print Format for separate Remittances")
 	?RemittancePrintFormat AdPrintFormat;
+	@Remarks("Print Format for Shipments, Receipts, Pick Lists")
 	?ShipmentPrintFormat AdPrintFormat;
+	@Remarks("Email text used for sending invoices")
 	?InvoiceMailtext RMailtext;
+	@Remarks("Email text used for sending order acknowledgements or quotations")
 	?OrderMailtext RMailtext;
+	@Remarks("Email text used for sending payment remittances")
 	?RemittanceMailtext RMailtext;
+	@Remarks("Email text used for sending delivery notes")
 	?ShipmentMailtext RMailtext;
+	@Remarks("Standard text for Project EMails")
 	?ProjectMailtext RMailtext;
+	@Remarks("Standard Project Print Format")
 	?ProjectPrintFormat AdPrintFormat;
 };
 

@@ -1,27 +1,49 @@
 @Remarks("Movement of Inventory")
 @Refby("2")
 tx MMovement {
+	@Remarks("Movement of Inventory")
 	!MMovementId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Document sequence number of the document")
 	DocumentNo Long;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Date a product was moved in or out of inventory")
 	Movementdate Date;
+	@Remarks("Posting status")
 	PostEd YesNo;/* 'N'  */
+	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
+	@Remarks("Process Now")
 	?Processing YesNo;
+	@Remarks("Performing or initiating organization")
 	?AdOrgtrx AdOrg;
+	@Remarks("Financial Project")
 	?CProject;
+	@Remarks("Marketing Campaign")
 	?CCampaign;
+	@Remarks("Business Activity")
 	?CActivity;
+	@Remarks("User defined list element #1")
 	?User1 CElementvalue;
+	@Remarks("User defined list element #2")
 	?User2 CElementvalue;
+	@Remarks("Date a product was received")
 	?DateReceived Date;
+	@Remarks("The targeted status of the document")
 	Docaction Attr;
+	@Remarks("The current status of the document")
 	Docstatus Attr;
+	@Remarks("Movement is in transit")
 	IsIntransit YesNo;/* 'N'  */
+	@Remarks("Document type or rules")
 	CDoctype;
+	@Remarks("Indicates if this document requires approval")
 	IsApproved YesNo;/* 'N'  */
+	@Remarks("Document Approval Amount")
 	?Approvalamt Amount;
 };
 

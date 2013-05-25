@@ -1,42 +1,69 @@
 @Remarks("Tab within a Window")
 @Refby("8")
 type AdTab {
+	@Remarks("Tab within a Window")
 	!AdTabId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Comment or Hint")
 	?Help;
+	@Remarks("Database Table information")
 	AdTable;
+	@Remarks("Data entry or display window")
 	AdWindow;
+	@Remarks("Method of ordering records; lowest number comes first")
 	Seqno SeqNo;
+	@Remarks("Hierarchical Tab Level (0 = top)")
 	Tablevel Long;
-	IsSinglerow YesNo;/* 'Y'
-                         */
-	?IsInfotab YesNo;/* 'N'
-                         */
-	IsTranslationtab YesNo;/* 'N'
-                         */
-	IsReadonly YesNo;/* 'N'
-                         */
+	@Remarks("Default for toggle between Single- and Multi-Row (Grid) Layout")
+	IsSinglerow YesNo;/* 'Y'                          */
+	@Remarks("This Tab contains accounting information")
+	?IsInfotab YesNo;/* 'N'                          */
+	@Remarks("This Tab contains translation information")
+	IsTranslationtab YesNo;/* 'N'                          */
+	@Remarks("Field is read only")
+	IsReadonly YesNo;/* 'N'                          */
+	@Remarks("Column in the table")
 	?AdColumn;
-	Hastree YesNo;/* 'N'
-                         */
+	@Remarks("Window has Tree Graph")
+	Hastree YesNo;/* 'N'                          */
+	@Remarks("Fully qualified SQL WHERE clause")
 	?WhereClause Note;
+	@Remarks("Fully qualified ORDER BY clause")
 	?OrderbyClause Note;
+	@Remarks("Warning displayed when saving")
 	?Commitwarning Note;
+	@Remarks("Process or Report")
 	?AdProcess;
+	@Remarks("Process Now")
 	?Processing YesNo;
+	@Remarks("Image or Icon")
 	?AdImage;
+	@Remarks("Create Fields from Table Columns")
 	?Importfields YesNo;
+	@Remarks("Column determining the order")
 	?AdColumnsortorder AdColumn;
+	@Remarks("Column determining if a Table Column is included in Ordering")
 	?AdColumnsortyesno AdColumn;
+	@Remarks("The Tab determines the Order")
 	IsSorttab YesNo;/* 'N'  */
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
+	@Remarks("Included Tab in this Tab (Master Dateail)")
 	?IncludedTab AdTab;
+	@Remarks("Logic to determine if field is read only (applies only when field is read-write)")
 	?ReadonlyLogic Note;
+	@Remarks("If the Field is displayed, the result determines if the field is actually displayed")
 	?DisplayLogic Note;
+	@Remarks("The user can insert a new Record")
 	IsInsertrecord YesNo;/* 'Y'  */
+	@Remarks("This Tab contains advanced Functionality")
 	IsAdvancedtab YesNo;/* 'N'  */
 };
 

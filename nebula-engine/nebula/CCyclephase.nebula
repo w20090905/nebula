@@ -1,9 +1,13 @@
 @Remarks("C_CyclePhase")
 @Refby("0")
 type CCyclephase {
+	@Remarks("The step for this Cycle")
 	!CCyclestep;
+	@Remarks("Standard Phase of the Project Type")
 	!CPhase;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 };
 

@@ -1,34 +1,63 @@
 @Remarks("Workflow or combination of tasks")
 @Refby("13")
 type AdWorkflow {
+	@Remarks("Workflow or combination of tasks")
 	!AdWorkflowId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Comment or Hint")
 	?Help;
+	@Remarks("Access Level required")
 	AccessLevel Attr;
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
+	@Remarks("Unit of Duration")
 	?Durationunit YesNo;
+	@Remarks("Author/Creator of the Entity")
 	Author String;/* 'ComPiere' */
+	@Remarks("Version of the table definition")
 	Version Number;/* 0 */
+	@Remarks("Valid from including this date (first day)")
 	?Validfrom Date;
+	@Remarks("Valid to including this date (last day)")
 	?Validto Date;
+	@Remarks("Indicates if this request is of a high, medium or low priority.")
 	?Priority;
+	@Remarks("Maximum Duration in Duration Unit")
 	?Limit Number;
+	@Remarks("Normal Duration in Duration Unit")
 	Duration Number;/* 0 */
+	@Remarks("Cost information")
 	Cost Number;/* 0 */
+	@Remarks("Workflow Simulation Execution Time")
 	Workingtime Long;/* 0 */
+	@Remarks("Workflow Simulation Waiting time")
 	Waitingtime Long;/* 0 */
+	@Remarks("Responsible for Workflow Execution")
 	?AdWfResponsible;
+	@Remarks("Status of Publication")
 	Publishstatus Attr;/* NULL */
+	@Remarks("Workflow Processor Server")
 	?AdWorkflowprocessor;
+	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
+	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
+	@Remarks("Database Table information")
 	?AdTable;
+	@Remarks("Validate Workflow")
 	?Validateworkflow YesNo;
+	@Remarks("Type of Worflow")
 	Workflowtype Attr;/* 'G'  */
+	@Remarks("Logic to determine Workflow Start - If true, a workflow process is started for the document")
 	?Docvaluelogic Note;
+	@Remarks("Element is valid")
 	IsValid YesNo;/* 'N'  */
 };
 

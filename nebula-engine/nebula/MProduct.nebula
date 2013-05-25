@@ -1,60 +1,113 @@
 @Remarks("Product, Service, Item")
 @Refby("89")
 type MProduct {
+	@Remarks("Product, Service, Item")
 	!MProductId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Additional information for a Document")
 	?DocumentNote Note;
+	@Remarks("Comment or Hint")
 	?Help;
+	@Remarks("Bar Code (Universal Product Code or its superset European Article Number)")
 	?Upc UPC;
+	@Remarks("Stock Keeping Unit")
 	?Sku String;
+	@Remarks("Unit of Measure")
 	CUom;
+	@Remarks("Sales Representative or Company Agent")
 	?SalesRep AdUser;
+	@Remarks("This is a summary entity")
 	IsSummary YesNo;/* 'N'  */
+	@Remarks("Organization stocks this product")
 	IsStocked YesNo;/* 'Y'  */
+	@Remarks("Organization purchases this product")
 	IsPurchased YesNo;/* 'Y'  */
+	@Remarks("Organization sells this product")
 	IsSold YesNo;/* 'Y'  */
+	@Remarks("Bill of Materials")
 	IsBom YesNo;/* 'N'  */
+	@Remarks("Print detail BOM elements on the invoice")
 	IsInvoicePrintdetails YesNo;/* 'N'  */
+	@Remarks("Print detail BOM elements on the pick list")
 	IsPicklistprintdetails YesNo;/* 'N'  */
+	@Remarks("The BOM configuration has been verified")
 	IsVerified YesNo;/* 'N'  */
+	@Remarks("Method for recording revenue")
 	?CRevenueRecognition;
+	@Remarks("Category of a Product")
 	MProductCategory;
+	@Remarks("Classification for grouping")
 	?ClassIfication YesNo;
+	@Remarks("Volume of a product")
 	?Volume Number;/* 0 */
+	@Remarks("Weight of a product")
 	?Weight;/* 0 */
+	@Remarks("Shelf width required")
 	?Shelfwidth Width;
+	@Remarks("Shelf height required")
 	?Shelfheight Height;
+	@Remarks("Shelf depth required")
 	?Shelfdepth Depth;
+	@Remarks("Units Per Pallet")
 	?Unitsperpallet Number;
+	@Remarks("Tax Category")
 	CTaxCategory;
+	@Remarks("Resource")
 	?SResource;
-	?Discontinued YesNo;/* 'N'
-                                */
+	@Remarks("This product is no longer available")
+	?Discontinued YesNo;/* 'N'                                 */
+	@Remarks("Discontinued By")
 	?Discontinuedby Date;
+	@Remarks("Process Now")
 	?Processing YesNo;
+	@Remarks("Expense report type")
 	?SExpensetype;
+	@Remarks("Type of product")
 	ProductType Attr;/* 'I'  */
+	@Remarks("URL of  image")
 	?ImageUrl URL;
+	@Remarks("URL for the description")
 	?Descriptionurl URL;
+	@Remarks("Number of days the product is guaranteed or available")
 	?Guaranteedays Count;
+	@Remarks("Text templates for mailings")
 	?RMailtext;
+	@Remarks("Version Number")
 	?Versionno String;
+	@Remarks("Product Attribute Set")
 	?MAttributeset;
+	@Remarks("Product Attribute Set Instance")
 	?MAttributesetinstance;/* 0 */
+	@Remarks("URL of the Download files")
 	?Downloadurl URL;
+	@Remarks("Category of the Freight")
 	?MFreightCategory;
+	@Remarks("Warehouse Locator")
 	?MLocator;
+	@Remarks("Minumum number of guarantee days")
 	?Guaranteedaysmin Number;
+	@Remarks("If selected, the product is displayed in the inital or any empy search")
 	IsWebstorefeatured YesNo;/* 'N'  */
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
 	IsSelfservice YesNo;/* 'Y'  */
+	@Remarks("Type of subscription")
 	?CSubscriptiontype;
+	@Remarks("Drop Shipments are sent from the Vendor directly to the Customer")
 	IsDropship YesNo;/* 'N'  */
+	@Remarks("Exclude from automatic Delivery")
 	IsExcludeautodelivery YesNo;/* 'N'  */
+	@Remarks("Group1")
 	?Group1 Note;
+	@Remarks("Group2")
 	?Group2 Note;
 };
 

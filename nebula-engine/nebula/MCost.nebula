@@ -1,19 +1,33 @@
 @Remarks("Product Cost")
 @Refby("0")
 tx MCost {
+	@Remarks("Client/Tenant for this installation.")
 	!AdClient;
+	@Remarks("Organizational entity within client")
 	!AdOrg;
+	@Remarks("Product, Service, Item")
 	!MProduct;
+	@Remarks("Type of Cost (e.g. Current, Plan, Future)")
 	!MCosttype;
+	@Remarks("Rules for accounting")
 	!CAcctschema;
+	@Remarks("Product Cost Element")
 	!MCostelement;
+	@Remarks("Product Attribute Set Instance")
 	!MAttributesetinstance;
+	@Remarks("The currently used cost price")
 	Currentcostprice Price;
+	@Remarks("Current Quantity")
 	Currentqty Quantity;/* 0  */
+	@Remarks("Total Amount")
 	?Cumulatedamt Amount;/* 0 */
+	@Remarks("Total Quantity")
 	?Cumulatedqty Quantity;/* 0 */
+	@Remarks("Future Cost Price")
 	?Futurecostprice Price;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Percentage")
 	?Percent;/* 0 */
 };
 

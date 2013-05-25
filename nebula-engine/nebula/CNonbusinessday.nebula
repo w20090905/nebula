@@ -1,11 +1,17 @@
 @Remarks("Day on which business is not transacted")
 @Refby("0")
 type CNonbusinessday {
+	@Remarks("Day on which business is not transacted")
 	!CNonbusinessdayId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
 	?Name;
+	@Remarks("Date when business is not conducted")
 	Date1 Date;
+	@Remarks("Accounting Calendar Name")
 	CCalendar;
 };
 

@@ -1,16 +1,27 @@
 @Remarks("Performance Achievement")
 @Refby("0")
 type PaAchievement {
+	@Remarks("Performance Achievement")
 	!PaAchievementId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Optional additional user defined information")
 	?Note;
+	@Remarks("Method of ordering records; lowest number comes first")
 	Seqno SeqNo;/* 0  */
+	@Remarks("Concrete Performance Measurement")
 	PaMeasure;
+	@Remarks("Manually entered actual value")
 	Manualactual Number;/* 0  */
+	@Remarks("The goal is achieved")
 	IsAchieved YesNo;
+	@Remarks("Date of the Document")
 	?DateDoc Date;
 };
 

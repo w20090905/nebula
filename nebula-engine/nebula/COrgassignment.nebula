@@ -1,12 +1,19 @@
 @Remarks("Assigment to (transaction) Organization")
 @Refby("0")
 tx COrgassignment {
+	@Remarks("Assigment to (transaction) Organization")
 	!COrgassignmentId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("User within the system - Internal or Business Partner Contact")
 	AdUser;
+	@Remarks("Valid from including this date (first day)")
 	Validfrom Date;
+	@Remarks("Valid to including this date (last day)")
 	Validto Date;
+	@Remarks("Optional short description of the record")
 	?Description;
 };
 

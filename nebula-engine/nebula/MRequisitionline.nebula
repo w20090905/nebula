@@ -1,18 +1,31 @@
 @Remarks("Material Requisition Line")
 @Refby("1")
 tx MRequisitionline {
+	@Remarks("Material Requisition Line")
 	!MRequisitionlineId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Unique line for this document")
 	Line Long;
+	@Remarks("Material Requisition")
 	MRequisition;
+	@Remarks("Quantity")
 	Qty Quantity;/* 0  */
+	@Remarks("Product, Service, Item")
 	?MProduct;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Actual Price")
 	PriceActual Price;/* 0  */
+	@Remarks("Line Extended Amount (Quantity * Actual Price) without Freight and Charges")
 	LineNetamt Long;/* 0  */
+	@Remarks("Sales Order Line")
 	?COrderline;
+	@Remarks("Product Attribute Set Instance")
 	?MAttributesetinstanceId ID;
+	@Remarks("Additional document charges")
 	?CCharge;
 };
 

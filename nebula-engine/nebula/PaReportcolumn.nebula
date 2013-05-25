@@ -1,34 +1,63 @@
 @Remarks("Column in Report")
 @Refby("2")
 type PaReportcolumn {
+	@Remarks("Column in Report")
 	!PaReportcolumnId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Collection of Columns for Report")
 	PaReportcolumnset;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Method of ordering records; lowest number comes first")
 	Seqno SeqNo;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Indicates if this document / line is printed")
 	IsPrintEd YesNo;/* 'Y'  */
+	@Remarks("The type of posted amount for the transaction")
 	PostIngtype Attr;
+	@Remarks("General Ledger Budget")
 	?GlBudget;
+	@Remarks("Column Type")
 	Columntype Attr;
+	@Remarks("Period offset (0 is current)")
 	?Relativeperiod Number;
+	@Remarks("Currency Type")
 	?Currencytype Attr;
+	@Remarks("Calculation")
 	?Calculationtype Attr;
+	@Remarks("Type of amount to report")
 	?Amounttype Attr;
+	@Remarks("The Currency for this record")
 	?CCurrency;
+	@Remarks("Perform conversion for all amounts to currency")
 	?IsAdhocconversion YesNo;/* 'N' */
+	@Remarks("First operand for calculation")
 	?Oper1 PaReportcolumn;
+	@Remarks("Second operand for calculation")
 	?Oper2 PaReportcolumn;
+	@Remarks("Element Type (account or user defined)")
 	?Elementtype Attr;
+	@Remarks("Organizational entity within client")
 	?Org AdOrg;
+	@Remarks("Account Element")
 	?CElementvalue;
+	@Remarks("Financial Project")
 	?CProject;
+	@Remarks("Identifies a Business Partner")
 	?CBpartner;
+	@Remarks("Product, Service, Item")
 	?MProduct;
+	@Remarks("Marketing Campaign")
 	?CCampaign;
+	@Remarks("Location or Address")
 	?CLocation;
+	@Remarks("Sales coverage region")
 	?CSalesRegion;
+	@Remarks("Business Activity")
 	?CActivity;
 };
 

@@ -1,13 +1,19 @@
 @Remarks("Identifies a geographical Region")
 @Refby("9")
 type CRegion {
+	@Remarks("Identifies a geographical Region")
 	!CRegionId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Country")
 	CCountry;
-	?IsDefault YesNo;/* 'N'
-                     */
+	@Remarks("Default value")
+	?IsDefault YesNo;/* 'N'                      */
 };
 

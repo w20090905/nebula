@@ -1,25 +1,45 @@
 @Remarks("Acct.Schema Element")
 @Refby("0")
 type CAcctschemaElement {
+	@Remarks("Acct.Schema Element")
 	!CAcctschemaElementId ID;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Rules for accounting")
 	CAcctschema;
+	@Remarks("Element Type (account or user defined)")
 	Elementtype Attr;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Method of ordering records; lowest number comes first")
 	Seqno SeqNo;
+	@Remarks("Accounting Element")
 	?CElement;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Data entry is required in this column")
 	IsMandatory YesNo;/* 'N'  */
+	@Remarks("Balanced")
 	IsBalanceD YesNo;/* 'N'  */
+	@Remarks("Organizational entity within client")
 	?Org AdOrg;
+	@Remarks("Account Element")
 	?CElementvalue;
+	@Remarks("Product, Service, Item")
 	?MProduct;
+	@Remarks("Identifies a Business Partner")
 	?CBpartner;
+	@Remarks("Location or Address")
 	?CLocation;
+	@Remarks("Sales coverage region")
 	?CSalesRegion;
+	@Remarks("Financial Project")
 	?CProject;
+	@Remarks("Marketing Campaign")
 	?CCampaign;
+	@Remarks("Business Activity")
 	?CActivity;
+	@Remarks("Column in the table")
 	?AdColumn;
 };
 

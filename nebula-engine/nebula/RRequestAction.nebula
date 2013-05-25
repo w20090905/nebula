@@ -1,45 +1,85 @@
 @Remarks("Request History")
 @Refby("0")
 tx RRequestAction {
+	@Remarks("Request has been changed")
 	!RRequestActionId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Request from a Business Partner or Prospect")
 	RRequest;
+	@Remarks("Request Group")
 	?RGroup;
+	@Remarks("Request Category")
 	?RCategory;
+	@Remarks("Request Status")
 	?RStatus;
+	@Remarks("Request Resolution")
 	?RResolution;
+	@Remarks("Sales Representative or Company Agent")
 	?SalesRep AdUser;
+	@Remarks("Responsibility Role")
 	?AdRole;
+	@Remarks("This request has been escalated")
 	?IsEscalated YesNo;
+	@Remarks("Is this invoiced?")
 	?IsInvoiceD YesNo;
+	@Remarks("Type of Confidentiality")
 	?Confidentialtype Attr;
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
 	?IsSelfservice YesNo;
+	@Remarks("Indicates if this request is of a high, medium or low priority.")
 	?Priority;
+	@Remarks("Priority of the issue for the User")
 	?PriorityUser YesNo;
+	@Remarks("Identifies a Business Partner")
 	?CBpartner;
+	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
+	@Remarks("Order")
 	?COrder;
+	@Remarks("Invoice Identifier")
 	?CInvoice;
+	@Remarks("Payment identifier")
 	?CPayment;
+	@Remarks("Product, Service, Item")
 	?MProduct;
+	@Remarks("Financial Project")
 	?CProject;
+	@Remarks("Textual summary of this request")
 	?Summary Note;
+	@Remarks("Date that this request should be acted on")
 	?DateNextaction Date;
+	@Remarks("Business Activity")
 	?CActivity;
+	@Remarks("Type of request (e.g. Inquiry, Complaint, ..)")
 	?RRequestType;
+	@Remarks("Asset used internally or by customers")
 	?AAsset;
+	@Remarks("Material Shipment Document")
 	?MInout;
+	@Remarks("Return Material Authorization")
 	?MRma;
+	@Remarks("Columns with NULL value")
 	?Nullcolumns Note;
+	@Remarks("Status of the Task")
 	?Taskstatus Attr;
+	@Remarks("Planned Completion Date")
 	?DateCompleteplan Date;
+	@Remarks("Planned Quantity")
 	?QtyPlan Quantity;
+	@Remarks("Quantity used for this event")
 	?QtySpent Quantity;
+	@Remarks("First effective day (inclusive)")
 	?Startdate Date;
+	@Remarks("Last effective date (inclusive)")
 	?Enddate Date;
+	@Remarks("Planned Start Date")
 	?DateStartplan Date;
+	@Remarks("Invoiced Quantity")
 	?QtyInvoiced Quantity;
+	@Remarks("Product/Resource/Service used in Request")
 	?MProductSpent MProduct;
 };
 

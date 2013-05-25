@@ -1,53 +1,101 @@
 @Remarks("Import Item or Service")
 @Refby("0")
 type IProduct {
+	@Remarks("Import Item or Service")
 	!IProductId ID;
+	@Remarks("Client/Tenant for this installation.")
 	?AdClientId ID;
+	@Remarks("Organizational entity within client")
 	?AdOrgId ID;
+	@Remarks("Has this import been processed")
 	IIsImported YesNo;/* 'N'  */
+	@Remarks("Messages generated from import process")
 	?IErrorMsg Note;
+	@Remarks("Product, Service, Item")
 	?MProduct;
+	@Remarks("Search key for the record in the format required - must be unique")
 	?Value String;
+	@Remarks("Alphanumeric identifier of the entity")
 	?Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Additional information for a Document")
 	?DocumentNote Note;
+	@Remarks("Comment or Hint")
 	?Help;
+	@Remarks("Bar Code (Universal Product Code or its superset European Article Number)")
 	?Upc UPC;
+	@Remarks("Stock Keeping Unit")
 	?Sku String;
+	@Remarks("UOM EDI X12 Code")
 	?X12de355 String;
+	@Remarks("Unit of Measure")
 	?CUom;
+	@Remarks("Product Category Key")
 	?ProductCategoryValue Description;
+	@Remarks("Category of a Product")
 	?MProductCategory;
+	@Remarks("Type of product")
 	?ProductType Attr;/* 'I' */
+	@Remarks("Classification for grouping")
 	?ClassIfication YesNo;
+	@Remarks("Volume of a product")
 	?Volume Number;/* 0 */
+	@Remarks("Weight of a product")
 	?Weight;/* 0 */
+	@Remarks("Shelf width required")
 	?Shelfwidth Width;
+	@Remarks("Shelf height required")
 	?Shelfheight Height;
+	@Remarks("Shelf depth required")
 	?Shelfdepth Depth;
+	@Remarks("Units Per Pallet")
 	?Unitsperpallet Number;
+	@Remarks("This product is no longer available")
 	?Discontinued YesNo;/* 'N' */
+	@Remarks("Discontinued By")
 	?Discontinuedby Date;
+	@Remarks("URL of  image")
 	?ImageUrl URL;
+	@Remarks("URL for the description")
 	?Descriptionurl URL;
+	@Remarks("The Key of the Business Partner")
 	?BpartnerValue Description;
+	@Remarks("Identifies a Business Partner")
 	?CBpartner;
+	@Remarks("Three letter ISO 4217 Code of the Currency")
 	?IsOCode String;
+	@Remarks("The Currency for this record")
 	?CCurrency;
+	@Remarks("List Price")
 	?PriceList Price;/* 0 */
+	@Remarks("Price based on a purchase order")
 	?PricePo Price;/* 0 */
+	@Remarks("(Included) Amount for copyright, etc.")
 	?Royaltyamt Amount;/* 0 */
+	@Remarks("Effective Date of Price")
 	?PriceEffective Price;
+	@Remarks("Product Key of the Business Partner")
 	?Vendorproductno String;
+	@Remarks("Product Category of the Business Partner")
 	?Vendorcategory String;
+	@Remarks("Manufacturer of the Product")
 	?Manufacturer String;
+	@Remarks("Minimum order quantity in UOM")
 	?OrderMin Number;/* 0 */
+	@Remarks("Package order size in UOM (e.g. order set of 5 units)")
 	?OrderPack Number;/* 0 */
+	@Remarks("Fixed Cost Per Order")
 	?Costperorder Number;/* 0 */
+	@Remarks("Promised days between order and delivery")
 	?DeliveryTimePromised Number;
+	@Remarks("Process Now")
 	?Processing YesNo;
+	@Remarks("The document has been processed")
 	?Processed YesNo;/* 'N' */
+	@Remarks("Standard Price")
 	?PriceStd Price;
+	@Remarks("Lowest price for a product")
 	?PriceLimit Price;
 };
 

@@ -1,18 +1,31 @@
 @Remarks("Graph included in Reports")
 @Refby("1")
 type AdPrintGraph {
+	@Remarks("Graph included in Reports")
 	!AdPrintGraphId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Type of graph to be painted")
 	Graphtype Attr;
+	@Remarks("Description Column for Pie/Line/Bar Charts")
 	DescriptionPrintFormatitem AdPrintFormatitem;
+	@Remarks("Data Column for Pie and Line Charts")
 	DataPrintFormatitem AdPrintFormatitem;
+	@Remarks("Data Column for Line Charts")
 	?Data1PrintFormatitem AdPrintFormatitem;
+	@Remarks("Data Column for Line Charts")
 	?Data2PrintFormatitem AdPrintFormatitem;
+	@Remarks("Data Column for Line Charts")
 	?Data3PrintFormatitem AdPrintFormatitem;
+	@Remarks("Data Column for Line Charts")
 	?Data4PrintFormatitem AdPrintFormatitem;
+	@Remarks("Data Print Format")
 	AdPrintFormat;
 };
 

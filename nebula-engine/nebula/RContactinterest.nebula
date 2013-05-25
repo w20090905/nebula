@@ -1,11 +1,17 @@
 @Remarks("R_ContactInterest")
 @Refby("0")
 type RContactinterest {
+	@Remarks("Interest Area or Topic")
 	RInterestArea;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Date the contact actively subscribed")
 	?Subscribedate Date;
+	@Remarks("Date the contact opted out")
 	?Optoutdate Date;
+	@Remarks("User within the system - Internal or Business Partner Contact")
 	AdUser;
 };
 

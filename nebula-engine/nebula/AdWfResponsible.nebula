@@ -1,14 +1,23 @@
 @Remarks("Responsible for Workflow Execution")
 @Refby("5")
 type AdWfResponsible {
+	@Remarks("Responsible for Workflow Execution")
 	!AdWfResponsibleId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Type of the Responsibility for a workflow")
 	Responsibletype Attr;
+	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
+	@Remarks("Responsibility Role")
 	?AdRole;
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D' */
 };
 

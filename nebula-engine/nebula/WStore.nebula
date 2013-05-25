@@ -1,42 +1,79 @@
 @Remarks("A Web Store of the Client")
 @Refby("2")
 type WStore {
+	@Remarks("A Web Store of the Client")
 	!WStoreId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Comment or Hint")
 	?Help;
+	@Remarks("EMail address used as the sender (From)")
 	?Wstoreemail Description;
+	@Remarks("User ID of the Web Store EMail address")
 	?Wstoreuser Description;
+	@Remarks("Password of the Web Store EMail address")
 	?Wstoreuserpw String;
+	@Remarks("Web Store Header Information")
 	?Webinfo Note;
+	@Remarks("Web Site Parameter 1 (default: header image)")
 	?Webparam1 Note;
+	@Remarks("Web Site Parameter 2 (default index page)")
 	?Webparam2 Note;
+	@Remarks("Web Site Parameter 3 (default left - menu)")
 	?Webparam3 Note;
+	@Remarks("Web Site Parameter 4 (default footer left)")
 	?Webparam4 Note;
+	@Remarks("Web Site Parameter 5 (default footer center)")
 	?Webparam5 Note;
+	@Remarks("Web Site Parameter 6 (default footer right)")
 	?Webparam6 Note;
+	@Remarks("Show Menu Assets")
 	IsMenuassets YesNo;/* 'Y'  */
+	@Remarks("Show Menu Orders")
 	IsMenuorders YesNo;/* 'Y'  */
+	@Remarks("Show Menu Invoices")
 	IsMenuinvoices YesNo;/* 'Y'  */
+	@Remarks("Show Menu Shipments")
 	IsMenushipments YesNo;/* 'Y'  */
+	@Remarks("Show Menu Payments")
 	IsMenupayments YesNo;/* 'Y'  */
+	@Remarks("Show Menu RfQs")
 	IsMenurfqs YesNo;/* 'Y'  */
+	@Remarks("Show Menu Requests")
 	IsMenurequests YesNo;/* 'Y'  */
+	@Remarks("Show Menu Interests")
 	IsMenuinterests YesNo;/* 'Y'  */
+	@Remarks("Show Menu Registrations")
 	IsMenuregistrations YesNo;/* 'Y'  */
+	@Remarks("Show Menu Contact")
 	IsMenucontact YesNo;/* 'Y'  */
+	@Remarks("Header added to EMails")
 	?Emailheader Note;
+	@Remarks("Footer added to EMails")
 	?Emailfooter Note;
+	@Remarks("Sales Representative or Company Agent")
 	SalesRep AdUser;
+	@Remarks("Storage Warehouse and Service Point")
 	MWarehouse;
+	@Remarks("Unique identifier of a Price List")
 	MPriceList;
+	@Remarks("Web Server Context - e.g. /wstore")
 	Webcontext String;
+	@Remarks("EMail address to receive notifications when web orders were processed")
 	?Weborderemail Description;
+	@Remarks("The terms of Payment (timing, discount)")
 	?CPaymentTerm;
+	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
+	@Remarks("Full URL address - e.g. http://www.adempiere.org")
 	Url URL;/* 'http://localhost'  */
+	@Remarks("CSS (Stylesheet) used")
 	?Stylesheet Description;
 };
 

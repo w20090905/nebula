@@ -1,13 +1,21 @@
 @Remarks("Business Activity")
 @Refby("27")
 type CActivity {
+	@Remarks("Business Activity")
 	!CActivityId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("This is a summary entity")
 	IsSummary YesNo;/* 'N'  */
+	@Remarks("Comment or Hint")
 	?Help;
 };
 

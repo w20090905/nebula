@@ -1,67 +1,125 @@
 @Remarks("Identifies a Business Partner")
 @Refby("75")
 type CBpartner {
+	@Remarks("Identifies a Business Partner")
 	!CBpartnerId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClient;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
+	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
+	@Remarks("Additional Name")
 	?Name2 Name;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("This is a summary entity")
 	IsSummary YesNo;/* 'N' */
+	@Remarks("Business Partner Group")
 	CBpGroup;
+	@Remarks("One time transaction")
 	IsOnetime YesNo;/* 'N'  */
+	@Remarks("Indicates this is a Prospect")
 	IsProspect YesNo;/* 'Y'  */
+	@Remarks("Indicates if this Business Partner is a Vendor")
 	IsVendor YesNo;/* 'N'  */
+	@Remarks("Indicates if this Business Partner is a Customer")
 	IsCustomer YesNo;/* 'Y'  */
+	@Remarks("Indicates if  this Business Partner is an employee")
 	IsEmployee YesNo;/* 'N'  */
+	@Remarks("Indicates if  the business partner is a sales representative or company agent")
 	IsSalesRep YesNo;/* 'N'  */
+	@Remarks("Your customer or vendor number at the Business Partner_s site")
 	?ReferenceNo Description;
+	@Remarks("Dun & Bradstreet Number")
 	?Duns String;
+	@Remarks("Full URL address - e.g. http://www.adempiere.org")
 	?Url URL;
+	@Remarks("Language for this entity")
 	?AdLanguage;
+	@Remarks("Tax Identification")
 	?TaxId Code;
-	?IsTaxExempt YesNo;/* 'N'
-                               */
+	@Remarks("Business partner is exempt from tax")
+	?IsTaxExempt YesNo;/* 'N'                                */
+	@Remarks("Schedule for generating Invoices")
 	?CInvoiceSchedule;
+	@Remarks("Classification or Importance")
 	?Rating YesNo;
+	@Remarks("Total Volume of Sales in Thousands of Currency")
 	?SalesVolume Number;
+	@Remarks("Number of employees")
 	?Numberemployees Number;
+	@Remarks("Standard Industry Code or its successor NAIC - http://www.osha.gov/oshstats/sicser.html")
 	?Naics NAICS;
+	@Remarks("Date of First Sale")
 	?Firstsale Date;
+	@Remarks("The cost of gaining the prospect as a customer")
 	?Acqusitioncost Number;/* 0 */
+	@Remarks("Total Revenue expected")
 	?Potentiallifetimevalue Number;/* 0 */
+	@Remarks("Actual Life Time Revenue")
 	?Actuallifetimevalue Number;/* 0 */
+	@Remarks("Share of Customer_s business as a percentage")
 	?Shareofcustomer Number;
+	@Remarks("How you pay the invoice")
 	?PaymentRule Name;
+	@Remarks("Total outstanding invoice amounts allowed")
 	?SoCreditlimit Number;/* 0 */
+	@Remarks("Current open balance")
 	?SoCreditused Number;/* 0 */
+	@Remarks("The terms of Payment (timing, discount)")
 	?CPaymentTerm;
+	@Remarks("Unique identifier of a Price List")
 	?MPriceList;
+	@Remarks("Schema to calculate the trade discount percentage")
 	?MDiscountSchema;
+	@Remarks("Dunning Rules for overdue invoices")
 	?CDunning;
-	?IsDiscountPrintEd YesNo;/* 'Y'
-                               */
+	@Remarks("Print Discount on Invoice and Order")
+	?IsDiscountPrintEd YesNo;/* 'Y'                                */
+	@Remarks("Description to be used on orders")
 	?SoDescription Note;
+	@Remarks("Transaction Reference Number (Sales Order, Purchase Order) of your Business Partner")
 	?Poreference Name;
+	@Remarks("Purchase payment option")
 	?PaymentRulepo YesNo;
+	@Remarks("Price List used by this Business Partner")
 	?PoPriceList MPriceList;
+	@Remarks("Schema to calculate the purchase trade discount percentage")
 	?PoDiscountSchema MDiscountSchema;
+	@Remarks("Payment rules for a purchase order")
 	?PoPaymentTerm CPaymentTerm;
+	@Remarks("Number of copies to be printed")
 	?DocumentCopies Number;
+	@Remarks("Greeting to print on correspondence")
 	?CGreeting;
+	@Remarks("Frequency and method of invoicing")
 	?InvoiceRule YesNo;
+	@Remarks("Defines the timing of Delivery")
 	?DeliveryRule Attr;
+	@Remarks("Method for charging Freight")
 	?FreightCostrule Name;
+	@Remarks("How the order will be delivered")
 	?DeliveryViarule Attr;
+	@Remarks("Enable sending Document EMail")
 	Sendemail YesNo;/* 'N'  */
+	@Remarks("Business Partner Parent")
 	?BpartnerParent CBpartner;
+	@Remarks("Print Format for printing Invoices")
 	?InvoicePrintFormat AdPrintFormat;
+	@Remarks("Business Partner Credit Status")
 	?Socreditstatus Attr;/* 'O' */
+	@Remarks("Minimum Shelf Life in percent based on Product Instance Guarantee Date")
 	?Shelflifeminpct Number;
+	@Remarks("The Business Partner is another Organization for explicit Inter-Org transactions")
 	?AdOrgbp AdOrg;
+	@Remarks("Flat discount percentage")
 	?Flatdiscount Count;
+	@Remarks("Total Open Balance Amount in primary Accounting Currency")
 	?TotalOpenbalance Number;
+	@Remarks("Dunning Grace")
 	?DunningGrace Date;
 };
 

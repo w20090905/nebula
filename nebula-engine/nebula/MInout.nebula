@@ -1,61 +1,117 @@
 @Remarks("Material Shipment Document")
 @Refby("8")
 tx MInout {
+	@Remarks("Material Shipment Document")
 	!MInoutId ID;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrg;
+	@Remarks("This is a Sales Transaction")
 	IsSotrx YesNo;/* 'Y'  */
+	@Remarks("Document sequence number of the document")
 	DocumentNo Long;
+	@Remarks("The targeted status of the document")
 	Docaction Attr;
+	@Remarks("The current status of the document")
 	Docstatus Attr;
+	@Remarks("Posting status")
 	PostEd YesNo;/* 'N'  */
+	@Remarks("Process Now")
 	?Processing YesNo;
+	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
+	@Remarks("Document type or rules")
 	CDoctype;
+	@Remarks("Optional short description of the record")
 	?Description;
+	@Remarks("Order")
 	?COrder;
+	@Remarks("Date of Order")
 	?DateOrdered Date;
+	@Remarks("Indicates if this document / line is printed")
 	IsPrintEd YesNo;/* 'N'  */
+	@Remarks("Method of moving the inventory")
 	Movementtype Attr;
+	@Remarks("Date a product was moved in or out of inventory")
 	Movementdate Date;
+	@Remarks("Accounting Date")
 	DateAcct Date;
+	@Remarks("Identifies a Business Partner")
 	CBpartner;
+	@Remarks("Identifies the (ship to) address for this Business Partner")
 	CBpartnerLocation;
+	@Remarks("Storage Warehouse and Service Point")
 	MWarehouse;
+	@Remarks("Transaction Reference Number (Sales Order, Purchase Order) of your Business Partner")
 	?Poreference Name;
+	@Remarks("Defines the timing of Delivery")
 	DeliveryRule Attr;
+	@Remarks("Method for charging Freight")
 	FreightCostrule Name;
+	@Remarks("Freight Amount")
 	?FreightAmt Amount;/* 0 */
+	@Remarks("How the order will be delivered")
 	DeliveryViarule Attr;
+	@Remarks("Method or manner of product delivery")
 	?MShipper;
+	@Remarks("Additional document charges")
 	?CCharge;
+	@Remarks("Charge Amount")
 	?ChargeAmt Amount;/* 0 */
+	@Remarks("Priority of a document")
 	PriorityRule Attr;
+	@Remarks("Date the document was printed.")
 	?DatePrintEd Date;
+	@Remarks("Invoice Identifier")
 	?CInvoice;
+	@Remarks("Process which will generate a new document lines based on an existing document")
 	?CreateFrom YesNo;
+	@Remarks("Generate To")
 	?Generateto YesNo;
+	@Remarks("Enable sending Document EMail")
 	Sendemail YesNo;/* 'N'  */
+	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
+	@Remarks("Sales Representative or Company Agent")
 	?SalesRep AdUser;
+	@Remarks("Number of packages shipped")
 	?Nopackages Number;
+	@Remarks("Date/Time when picked for Shipment")
 	?Pickdate Date;
+	@Remarks("Shipment Date/Time")
 	?Shipdate Date;
+	@Remarks("Number to track the shipment")
 	?Trackingno Description;
+	@Remarks("Performing or initiating organization")
 	?AdOrgtrx AdOrg;
+	@Remarks("Financial Project")
 	?CProject;
+	@Remarks("Marketing Campaign")
 	?CCampaign;
+	@Remarks("Business Activity")
 	?CActivity;
+	@Remarks("User defined list element #1")
 	?User1 CElementvalue;
+	@Remarks("User defined list element #2")
 	?User2 CElementvalue;
+	@Remarks("Date a product was received")
 	?DateReceived Date;
+	@Remarks("Movement is in transit")
 	IsIntransit YesNo;/* 'N'  */
+	@Remarks("Referenced Shipment")
 	?RefInout MInout;
+	@Remarks("Create Confirm")
 	?CreateConfirm YesNo;
+	@Remarks("Create Package")
 	?CreatePackage YesNo;
+	@Remarks("Indicates if this document requires approval")
 	IsApproved YesNo;/* 'N'  */
+	@Remarks("Document is in dispute")
 	IsIndispute YesNo;/* 'N'  */
+	@Remarks("Volume of a product")
 	?Volume Number;
+	@Remarks("Weight of a product")
 	?Weight;
 };
 

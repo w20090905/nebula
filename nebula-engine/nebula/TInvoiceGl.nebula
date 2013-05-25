@@ -1,24 +1,43 @@
 @Remarks("Gain/Loss - actual data shown id T_InvoiceGL_v")
 @Refby("0")
 tx TInvoiceGl {
+	@Remarks("Instance of the process")
 	!AdPinstance;
+	@Remarks("Invoice Identifier")
 	!CInvoice;
+	@Remarks("Accounting Fact")
 	!FactAcct;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Total amount of document")
 	GrandTotal Number;/* 0  */
+	@Remarks("Open item amount")
 	Openamt Amount;/* 0  */
+	@Remarks("Percentage")
 	?Percent;
+	@Remarks("Include Receivables and/or Payables transactions")
 	?Apar YesNo;
+	@Remarks("Source Balance Amount")
 	AmtSourcebalance Amount;/* 0  */
+	@Remarks("Accounted Balance Amount")
 	AmtAcctbalance Amount;/* 0  */
+	@Remarks("Revaluation Currency Conversion Type")
 	CConversionTypereval CConversionType;
+	@Remarks("Revaluated Dr Amount")
 	AmtRevaldr Amount;/* 0  */
+	@Remarks("Revaluated Cr Amount")
 	AmtRevalcr Amount;/* 0  */
+	@Remarks("Date of Revaluation")
 	DateReval Date;
+	@Remarks("Revaluated Dr Amount Difference")
 	AmtRevaldrdiff Amount;/* 0  */
+	@Remarks("Revaluated Cr Amount Difference")
 	AmtRevalcrdiff Amount;/* 0  */
+	@Remarks("Document Type for Revaluation Journal")
 	?CDoctypeReval CDoctype;
+	@Remarks("Report not just foreign currency Invoices")
 	IsAllcurrencies YesNo;/* 'N'  */
 };
 

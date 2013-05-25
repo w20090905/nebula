@@ -1,13 +1,21 @@
 @Remarks("Order Tax")
 @Refby("0")
 type COrdertax {
+	@Remarks("Order")
 	!COrder;
+	@Remarks("Tax identifier")
 	!CTax;
+	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
+	@Remarks("Organizational entity within client")
 	AdOrgId ID;
+	@Remarks("Base for calculating the tax amount")
 	TaxBaseamt Amount;/* 0  */
+	@Remarks("Tax Amount for a document")
 	TaxAmt Amount;/* 0  */
+	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
+	@Remarks("Tax is included in the price")
 	IsTaxIncluded YesNo;/* 'N'  */
 };
 
