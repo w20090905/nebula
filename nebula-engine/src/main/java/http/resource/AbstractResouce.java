@@ -52,8 +52,7 @@ public abstract class AbstractResouce implements Resource {
 	static long cntIOException = 0;
 
 	@Override
-	public void handle(HttpServletRequest req, HttpServletResponse resp) throws IOException,
-			ServletException {
+	public void handle(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
 		long currentTimeMillis = System.currentTimeMillis();
 		String method = req.getMethod();
@@ -122,9 +121,9 @@ public abstract class AbstractResouce implements Resource {
 				throw new RuntimeException("Unsupport method " + method);
 			}
 		} catch (EofException e) {
-			log.error("EofException[ " + ++cntEofException + " ] " + req.getPathInfo());
+			log.error("EofException[ " + ++cntEofException + " ] " + req.getPathInfo(), e);
 		} catch (IOException e) {
-			log.error("IOException[ " + ++cntIOException + " ] " + req.getPathInfo());
+			log.error("IOException[ " + ++cntIOException + " ] " + req.getPathInfo(), e);
 		}
 	}
 }
