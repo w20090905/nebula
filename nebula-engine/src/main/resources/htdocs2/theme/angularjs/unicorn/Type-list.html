@@ -23,7 +23,8 @@
 						</div>
 					</div>
 					<div class="widget-content nopadding">
-						<table class="table table-bordered table-striped table-hover">
+					
+<table class="table table-bordered table-striped table-hover">
 							<thead>
 								<tr>
 									<th style="width: 2em">#</th>
@@ -38,7 +39,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr x-ng-repeat="data in datalist | filter:'!Abstract' | filter:query | orderBy:predicate:reverse | limitTo: 50">
+								<tr x-ng-init="curPage=1;limitCnt=50;limitEnd=(curPage*50)"  x-ng-repeat="data in datalist | filter:'!Abstract' | filter:query | orderBy:predicate:reverse | limitTo: 50">
 									<td>{{$index+1}}</td>
 									<td><a href="#/d/{{typename}}/{{data.Name}}">{{data.Name}}</a> <span
 											x-ng-repeat="(key, value) in data.NameAlias"
@@ -56,6 +57,14 @@
 								</tr>
 							</tbody>
 						</table>
+<!-- 
+<div class="pagination">
+  <ul x-ng-init="curPage=1;limitCnt=50;limitEnd=(curPage*50);tablePages= [1,2,3,4,5,6,7,8,9,10] ; tablePages=tablePages | limitTo: datalist.length/50" >
+    <li><a href="#" >Prev{{limitCnt}} - {{curPage}} -{{limitEnd}}</a></li>
+    <li x-ng-repeat="page in tablePages"><a href=""  x-ng-click="curPage=page;limitCnt=50;limitEnd=curPage*50">{{page}}</a></li>
+    <li><a href="#">Next</a></li>
+  </ul>
+</div> -->
 					</div>
 				</div>
 			</div>

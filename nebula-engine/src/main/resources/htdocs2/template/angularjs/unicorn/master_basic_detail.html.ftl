@@ -40,6 +40,10 @@
 		<textarea id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
 			${optReadonly} ${optRequired}  ${optValidateRule} 	class="${optClass}"
 			></textarea>		
+	[#elseif field.attrs.FormatType! = "checkbox"]
+		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
+				${optReadonly} ${optValidateRule} 	class="${optClass}"	
+			/>
 	[#else]
 		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
 				${optReadonly} ${optRequired}  ${optValidateRule} 	class="${optClass}"	
