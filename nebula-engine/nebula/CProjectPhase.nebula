@@ -15,7 +15,7 @@ type CProjectPhase {
 	?CPhase;
 	!CProjectPhaseId ID;
 	?Help;
-	Name;
+	*Name;
 	?Qty Quantity;/* 0  */
 	Seqno SeqNo;
 	CommittedAmt Amount;/* 0  */

@@ -4,7 +4,7 @@ type AdPrintLabel {
 	!AdPrintLabelId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	AdTable;
 	?PrintErName Name;

@@ -4,7 +4,7 @@ type Test {
 	!TestId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	?TInteger Number;

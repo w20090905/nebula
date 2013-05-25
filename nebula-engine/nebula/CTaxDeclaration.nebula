@@ -4,7 +4,7 @@ type CTaxDeclaration {
 	!CTaxDeclarationId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	DateTrx Date;
 	DateFrom Date;

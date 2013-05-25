@@ -13,6 +13,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import nebula.lang.TypeStandalone;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -77,8 +79,11 @@ public class ImportDataDefine {
 
 	Map<String, String> tables = Maps.newHashMap();
 
-	public void read(String outputFolderName, Element rootElement) throws IOException {
+	enum NameKey {
+		HasNameKey, HasIDKeyWithNameRequired, HasIDKeyWithNameNotKey, HasNotName
+	}
 
+	public void read(String outputFolderName, Element rootElement) throws IOException {
 
 		NodeList nodeList = rootElement.getElementsByTagName("table");
 		if (nodeList != null) {
@@ -93,26 +98,108 @@ public class ImportDataDefine {
 				this.readTable(element);
 			}
 		}
-		
+
 		File outputFolder = new File(outputFolderName);
 		if (!outputFolder.exists()) {
 			outputFolder.mkdir();
 		} else {
-//			for (File file : outputFolder.listFiles()) {
-//				file.delete();
-//			}
+			// for (File file : outputFolder.listFiles()) {
+			// file.delete();
+			// }
 		}
-		
+
+		for (Type type : types) {
+			boolean hasIDKey = false;
+			boolean hasNameKey = false;
+			boolean hasNameRequired = false;
+			boolean hasName = false;
+			for (Field field : type.fields) {
+				if ("Name".equalsIgnoreCase(field.name)) {
+					hasName = true;
+					if (field.isRequired) {
+						hasNameRequired = true;
+					}
+					if (field.isKey) {
+						hasNameKey = true;
+					}
+				} else if (field.isKey) {
+					if (field.rawName.endsWith("_ID") && "ID".equals(field.type)) {
+						hasIDKey = true;
+					}
+				}
+			}
+			if (hasIDKey && !hasName) {
+				type.standalone = TypeStandalone.Transaction;
+			} else if (hasIDKey && hasNameRequired) {
+				type.standalone = TypeStandalone.Master;
+			}
+
+			System.out.println(type.name + "\t" + hasIDKey + "\t" + hasNameKey + "\t" + hasNameRequired + "\t"
+					+ hasName);
+		}
+
+		for (Type type : types) {
+			for (Field field : type.fields) {
+				if (field.isKey) {
+					if (field.rawName.endsWith("_ID") && !"ID".equals(field.type)
+							&& typeMapByName.containsKey(field.type)) {
+						Type refType = typeMapByName.get(field.type);
+						switch (refType.standalone) {
+						case Master:
+							type.standalone = TypeStandalone.Master;
+							break;
+						case Transaction:
+							type.standalone = TypeStandalone.Transaction;
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		for (Type type : types) {
+			for (Field field : type.fields) {
+				if (field.isKey) {
+					if (field.rawName.endsWith("_ID") && !"ID".equals(field.type)
+							&& typeMapByName.containsKey(field.type)) {
+						Type refType = typeMapByName.get(field.type);
+						switch (refType.standalone) {
+						case Master:
+							type.standalone = TypeStandalone.Master;
+							break;
+						case Transaction:
+							type.standalone = TypeStandalone.Transaction;
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		for (Type type : types) {
+			if(type.standalone == TypeStandalone.Abstract){
+				type.standalone = TypeStandalone.Master;
+			}
+		}
+
 		OutputStreamWriter out = null;
 		StringBuilder sb = new StringBuilder(5000);
 		for (Type type : types) {
 			out = new OutputStreamWriter(new FileOutputStream(new File(outputFolder, type.name + ".nebula")));
 			String skip = TheSkipTypes.get(type.rawName);
 
+			if ("AdClientInfo".equals(type.name)) {
+				System.out.println("ddd");
+			}
+
 			sb.setLength(0);
 			sb.append("@Remarks(\"" + type.remarks + "\")\n");
 			sb.append("@Refby(\"" + type.cntReference + "\")\n");
-			sb.append("type " + type.name + " {\n");
+			if (type.standalone == TypeStandalone.Transaction) {
+				sb.append("tx " + type.name + " {\n");
+			} else {
+				sb.append("type " + type.name + " {\n");
+			}
 
 			for (Field field : type.fields) {
 				if (skip != null && skip.indexOf("$" + field.rawName) >= 0) {
@@ -126,6 +213,10 @@ public class ImportDataDefine {
 				if (field.isKey) {
 					sb.append("!");
 				}
+				if(field.isRequired && "Name".equals(field.name)){
+					sb.append("*");					
+				}
+
 				sb.append(field.name);
 				if (!field.name.equals(field.type)) {
 					sb.append(" " + field.type);
@@ -140,6 +231,7 @@ public class ImportDataDefine {
 			sb.append("};\n\n");
 			out.write(sb.toString());
 			out.close();
+
 		}
 
 	}
@@ -607,7 +699,8 @@ public class ImportDataDefine {
 
 		if (!isEntity) {
 			if (rawColName.endsWith("_ID")) {
-//				String fieldTableName = rawColName.substring(0, rawColName.length() - 3);
+				// String fieldTableName = rawColName.substring(0,
+				// rawColName.length() - 3);
 				// if (type.rawName.equalsIgnoreCase(fieldTableName)) {
 				// tColName = "ID";
 				// tTypeName = "ID";
@@ -1072,7 +1165,8 @@ public class ImportDataDefine {
 			+ "Create Days between after Charge Interest Dunning Doctype Invoice  payment Times Tender "
 			+ " Archive Conversion Amt Foreign Document Fee Total Qty Price Freight Resource Tax"
 			+ " Accept Bpcontact Delivery Priority Grand Product Creditcard Voice Writeoff Proxy Attribute"
-			+ "Require Planned Project  Reference balance Committed Sales Standard Country System Remuneration  Revenue Unearned Gross")
+			+ "Require Planned Project  Reference balance Committed Sales Standard Notification" +
+			" Country System Remuneration  Revenue Unearned Gross")
 			.toUpperCase().split(" ");
 
 	public String refineName(String name) {
@@ -1090,6 +1184,7 @@ public class ImportDataDefine {
 		String name;
 		String remarks;
 		long cntReference;
+		TypeStandalone standalone = TypeStandalone.Abstract;
 
 		public Type(String rawName, String name, String remarks) {
 			this.rawName = rawName;

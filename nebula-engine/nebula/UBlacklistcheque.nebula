@@ -1,6 +1,6 @@
 @Remarks("Black List Cheque")
 @Refby("0")
-type UBlacklistcheque {
+tx UBlacklistcheque {
 	!UBlacklistchequeId ID;
 	AdClientId ID;
 	AdOrgId ID;

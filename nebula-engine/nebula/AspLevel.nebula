@@ -7,7 +7,7 @@ type AspLevel {
 	AspModule;
 	?Description;
 	?Help;
-	Name;
+	*Name;
 	?Processing YesNo;
 	Value String;
 };

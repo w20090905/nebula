@@ -1,6 +1,6 @@
 @Remarks("Log of Access to the System")
 @Refby("0")
-type AdAccessLog {
+tx AdAccessLog {
 	!AdAccessLogId ID;
 	AdClientId ID;
 	AdOrgId ID;

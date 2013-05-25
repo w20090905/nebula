@@ -4,7 +4,7 @@ type CElement {
 	!CElementId ID;
 	AdClient;
 	AdOrg;
-	Name;
+	*Name;
 	?Description;
 	?Vformat Description;
 	Elementtype Attr;

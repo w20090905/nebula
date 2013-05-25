@@ -1,6 +1,6 @@
 @Remarks("Service Level Agreement Measure")
 @Refby("0")
-type PaSlaMeasure {
+tx PaSlaMeasure {
 	!PaSlaMeasureId ID;
 	AdClientId ID;
 	AdOrgId ID;

@@ -1,0 +1,34 @@
+@Remarks("Client/Tenant for this installation.")
+@Refby("67")
+type AdClient {
+	!AdClientId ID;
+	Value String;
+	Name;
+	?Description;
+	?SmtpHost Host;
+	?RequestEmail Description;
+	?RequestUser Description;
+	?RequestUserpw String;
+	?RequestFolder String;
+	?AdLanguage;
+	IsMultilingualdocument YesNo;/* 'N' */
+	IsSmtpAuthorization YesNo;/* 'N'  */
+	IsUsebetafunctions YesNo;/* 'N'  */
+	?LdapQuery String;
+	?Modelvalidationclasses Note;
+	AutoArchive YesNo;/* 'N'  */
+	Mmpolicy YesNo;/* 'F'  */
+	?Emailtest YesNo;
+	IsServerEmail YesNo;/* 'N'  */
+	?DocumentDir Description;
+	IsPostImmediate YesNo;/* 'N'  */
+	IsCostimmediate YesNo;/* 'N'  */
+	StoreAttachmentsonfilesystem YesNo;/* 'N'  */
+	?WindowsAttachmentpath Note;
+	?UnixAttachmentpath Note;
+	StoreArchiveOnfilesystem YesNo;/* 'N'  */
+	?WindowsArchivePath Note;
+	?UnixArchivePath Note;
+	IsUseasp YesNo;/* 'N'  */
+};
+

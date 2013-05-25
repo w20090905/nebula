@@ -4,7 +4,7 @@ type PaDashboardcontent {
 	!PaDashboardcontentId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?AdWindow;
 	?Description;
 	?Html Note;

@@ -5,7 +5,7 @@ type SResource {
 	AdClientId ID;
 	AdOrgId ID;
 	Value String;
-	Name;
+	*Name;
 	?Description;
 	SResourceType;
 	MWarehouse;

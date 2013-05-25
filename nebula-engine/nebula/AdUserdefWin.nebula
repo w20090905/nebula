@@ -7,7 +7,7 @@ type AdUserdefWin {
 	?AdRole;
 	?AdUser;
 	AdWindow;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	?AdLanguage;

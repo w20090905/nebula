@@ -1,6 +1,6 @@
 @Remarks("Import Inventory Transactions")
 @Refby("0")
-type IInventory {
+tx IInventory {
 	!IInventoryId ID;
 	?AdClientId ID;
 	?AdOrgId ID;

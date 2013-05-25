@@ -1,6 +1,6 @@
 @Remarks("Request Update")
 @Refby("0")
-type RRequestUpdate {
+tx RRequestUpdate {
 	!RRequestUpdateId ID;
 	AdClientId ID;
 	AdOrgId ID;

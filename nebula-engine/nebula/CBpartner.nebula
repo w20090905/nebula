@@ -5,7 +5,7 @@ type CBpartner {
 	AdClient;
 	AdOrg;
 	Value String;
-	Name;
+	*Name;
 	?Name2 Name;
 	?Description;
 	IsSummary YesNo;/* 'N' */

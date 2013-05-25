@@ -1,6 +1,6 @@
 @Remarks("M_MovementLineMA")
 @Refby("0")
-type MMovementlinema {
+tx MMovementlinema {
 	!MMovementline;
 	!MAttributesetinstance;
 	AdClientId ID;

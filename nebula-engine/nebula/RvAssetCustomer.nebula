@@ -5,7 +5,7 @@ type RvAssetCustomer {
 	AdClientId ID;
 	AdOrgId ID;
 	Value String;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	AAssetGroupId ID;

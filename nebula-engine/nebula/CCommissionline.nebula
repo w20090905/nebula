@@ -1,6 +1,6 @@
 @Remarks("Commission Line")
 @Refby("1")
-type CCommissionline {
+tx CCommissionline {
 	!CCommissionlineId ID;
 	AdClientId ID;
 	AdOrgId ID;

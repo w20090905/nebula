@@ -4,7 +4,7 @@ type PaReportlineset {
 	!PaReportlinesetId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	Processing YesNo;
 };

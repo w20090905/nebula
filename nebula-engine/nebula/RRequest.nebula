@@ -1,6 +1,6 @@
 @Remarks("Request from a Business Partner or Prospect")
 @Refby("6")
-type RRequest {
+tx RRequest {
 	!RRequestId ID;
 	AdClientId ID;
 	AdOrgId ID;

@@ -1,6 +1,6 @@
 @Remarks("Import General Ledger Journal")
 @Refby("0")
-type IGljournal {
+tx IGljournal {
 	!IGljournalId ID;
 	?AdClientId ID;
 	?ClientValue Description;

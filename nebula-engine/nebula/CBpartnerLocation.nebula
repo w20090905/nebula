@@ -4,7 +4,7 @@ type CBpartnerLocation {
 	!CBpartnerLocationId ID;
 	AdClient;
 	AdOrg;
-	Name;
+	*Name;
 	IsBillto YesNo;/* 'Y'  */
 	IsShipto YesNo;/* 'Y'  */
 	IsPayfrom YesNo;/* 'Y'  */

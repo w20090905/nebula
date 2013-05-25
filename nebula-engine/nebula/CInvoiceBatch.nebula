@@ -1,6 +1,6 @@
 @Remarks("Expense Invoice Batch Header")
 @Refby("1")
-type CInvoiceBatch {
+tx CInvoiceBatch {
 	!CInvoiceBatchId ID;
 	AdClientId ID;
 	AdOrgId ID;

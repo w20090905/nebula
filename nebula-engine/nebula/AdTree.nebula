@@ -4,7 +4,7 @@ type AdTree {
 	!AdTreeId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	Treetype Attr;
 	IsAllnodes YesNo;/* 'Y'  */

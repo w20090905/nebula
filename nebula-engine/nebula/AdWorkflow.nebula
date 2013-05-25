@@ -4,7 +4,7 @@ type AdWorkflow {
 	!AdWorkflowId ID;
 	AdClient;
 	AdOrg;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	AccessLevel Attr;

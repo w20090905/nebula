@@ -1,6 +1,6 @@
 @Remarks("T_Aging")
 @Refby("0")
-type TAging {
+tx TAging {
 	!AdPinstance;
 	!CBpartner;
 	!CCurrency;

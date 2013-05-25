@@ -4,7 +4,7 @@ type AdFieldGroup {
 	!AdFieldGroupId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	EntityType AdEntityType;/* 'D'  */
 	?FieldGrouptype Attr;
 	?IsCollapsedbydefault YesNo;/* 'N'  */

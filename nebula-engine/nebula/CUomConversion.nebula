@@ -1,6 +1,6 @@
 @Remarks("Unit of Measure Conversion")
 @Refby("0")
-type CUomConversion {
+tx CUomConversion {
 	!CUomConversionId ID;
 	AdClient;
 	AdOrg;

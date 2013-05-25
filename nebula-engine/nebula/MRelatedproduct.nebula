@@ -6,7 +6,7 @@ type MRelatedproduct {
 	!Relatedproducttype Attr;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 };
 

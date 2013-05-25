@@ -6,7 +6,7 @@ type AdImpformatRow {
 	AdOrgId ID;
 	AdImpformat;
 	Seqno SeqNo;
-	Name;
+	*Name;
 	AdColumn;
 	?Startno SeqNo;
 	?Endno SeqNo;

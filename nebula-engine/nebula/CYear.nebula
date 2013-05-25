@@ -1,6 +1,6 @@
 @Remarks("Calendar Year")
 @Refby("3")
-type CYear {
+tx CYear {
 	!CYearId ID;
 	AdClient;
 	AdOrg;

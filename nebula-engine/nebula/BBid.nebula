@@ -4,7 +4,7 @@ type BBid {
 	!BBidId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	BTopic;
 	AdUser BBuyer;
 	IsWillingtocommit YesNo;/* 'Y'  */

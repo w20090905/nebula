@@ -1,6 +1,6 @@
 @Remarks("Valid Account Combination")
 @Refby("142")
-type CValidcombination {
+tx CValidcombination {
 	!CValidcombinationId ID;
 	AdClient;
 	AdOrg;

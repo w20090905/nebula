@@ -6,7 +6,7 @@ type MAttributevalue {
 	AdOrgId ID;
 	MAttribute;
 	Value String;
-	Name;
+	*Name;
 	?Description;
 };
 

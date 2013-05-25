@@ -1,6 +1,6 @@
 @Remarks("C_ProjectIssueMA")
 @Refby("0")
-type CProjectIssuema {
+tx CProjectIssuema {
 	!CProjectIssue;
 	!MAttributesetinstance;
 	AdClientId ID;

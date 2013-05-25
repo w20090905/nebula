@@ -5,7 +5,7 @@ type CActivity {
 	AdClientId ID;
 	AdOrgId ID;
 	Value String;
-	Name;
+	*Name;
 	?Description;
 	IsSummary YesNo;/* 'N'  */
 	?Help;

@@ -1,6 +1,6 @@
 @Remarks("Allocation Line")
 @Refby("2")
-type CAllocationline {
+tx CAllocationline {
 	!CAllocationlineId ID;
 	AdClientId ID;
 	AdOrgId ID;

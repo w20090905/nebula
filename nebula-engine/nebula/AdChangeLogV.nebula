@@ -8,6 +8,6 @@ type AdChangeLogV {
 	Columnname Name;
 	?OldValue Note;
 	?NewValue Note;
-	Name;
+	*Name;
 };
 

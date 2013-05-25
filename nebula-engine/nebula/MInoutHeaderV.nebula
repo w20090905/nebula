@@ -24,7 +24,7 @@ type MInoutHeaderV {
 	Movementdate Date;
 	Movementtype Attr;
 	?Bpgreeting Description;
-	Name;
+	*Name;
 	?Name2 Name;
 	?BpcontactGreeting Description;
 	?Title String;

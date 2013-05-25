@@ -4,7 +4,7 @@ type CInvoiceSchedule {
 	!CInvoiceScheduleId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	IsAmount YesNo;/* 'N'  */
 	?Amt Amount;/* 0 */

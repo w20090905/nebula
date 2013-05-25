@@ -1,6 +1,6 @@
 @Remarks("Optional Delivery Record for a Subscription")
 @Refby("0")
-type CSubscriptionDelivery {
+tx CSubscriptionDelivery {
 	!CSubscriptionDeliveryId ID;
 	AdClientId ID;
 	AdOrgId ID;

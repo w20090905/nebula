@@ -4,7 +4,7 @@ type CDunning {
 	!CDunningId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	Senddunningletter YesNo;/* 'Y'  */
 	IsDefault YesNo;/* 'N'  */

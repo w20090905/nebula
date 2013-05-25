@@ -1,6 +1,6 @@
 @Remarks("Recurring Document Run")
 @Refby("0")
-type CRecurringRun {
+tx CRecurringRun {
 	!CRecurringRunId ID;
 	AdClientId ID;
 	AdOrgId ID;

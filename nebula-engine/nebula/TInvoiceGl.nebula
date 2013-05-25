@@ -1,6 +1,6 @@
 @Remarks("Gain/Loss - actual data shown id T_InvoiceGL_v")
 @Refby("0")
-type TInvoiceGl {
+tx TInvoiceGl {
 	!AdPinstance;
 	!CInvoice;
 	!FactAcct;

@@ -1,6 +1,6 @@
 @Remarks("Line on a statement from this Bank")
 @Refby("1")
-type CBankstatementline {
+tx CBankstatementline {
 	!CBankstatementlineId ID;
 	AdClientId ID;
 	AdOrgId ID;

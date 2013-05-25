@@ -4,7 +4,7 @@ type RvPrintFormatdetail {
 	AdClientId ID;
 	AdOrgId ID;
 	AdPrintFormatId ID;
-	Name;
+	*Name;
 	?Description;
 	IsTablebased YesNo;
 	IsForm YesNo;

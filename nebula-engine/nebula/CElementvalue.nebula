@@ -5,7 +5,7 @@ type CElementvalue {
 	AdClient;
 	AdOrg;
 	Value String;
-	Name;
+	*Name;
 	?Description;
 	Accounttype Attr;
 	Accountsign YesNo;

@@ -4,7 +4,7 @@ type CPeriod {
 	!CPeriodId ID;
 	AdClient;
 	AdOrg;
-	Name;
+	*Name;
 	Periodno SeqNo;
 	CYear;
 	Startdate Date;

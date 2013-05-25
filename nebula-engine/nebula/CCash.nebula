@@ -5,7 +5,7 @@ type CCash {
 	AdClientId ID;
 	AdOrg;
 	CCashBook;
-	Name;
+	*Name;
 	?Description;
 	Statementdate Date;
 	DateAcct Date;

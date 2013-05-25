@@ -5,7 +5,7 @@ type AdRefList {
 	AdClient;
 	AdOrg;
 	Value String;
-	Name;
+	*Name;
 	?Description;
 	AdReference;
 	?Validfrom Date;

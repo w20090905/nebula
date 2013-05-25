@@ -9,7 +9,7 @@ type AdRule {
 	?EntityType AdEntityType;/* 'U' */
 	?EventType Attr;
 	?Help;
-	Name;
+	*Name;
 	?Ruletype Attr;
 	?Script Note;
 	Value String;

@@ -4,7 +4,7 @@ type BSeller {
 	!AdUser;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	Validto Date;
 	IsInternal YesNo;/* 'N'  */

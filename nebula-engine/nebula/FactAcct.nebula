@@ -1,6 +1,6 @@
 @Remarks("Accounting Fact")
 @Refby("2")
-type FactAcct {
+tx FactAcct {
 	!FactAcctId ID;
 	AdClient;
 	AdOrg;

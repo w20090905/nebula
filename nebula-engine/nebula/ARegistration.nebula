@@ -4,7 +4,7 @@ type ARegistration {
 	!ARegistrationId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	?AAsset;

@@ -1,6 +1,6 @@
 @Remarks("T_ReportStatement")
 @Refby("0")
-type TReportstatement {
+tx TReportstatement {
 	!AdPinstance;
 	!FactAcctId ID;
 	Levelno SeqNo;

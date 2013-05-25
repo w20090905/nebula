@@ -1,6 +1,6 @@
 @Remarks("M_InOutLineMA")
 @Refby("0")
-type MInoutlinema {
+tx MInoutlinema {
 	!MInoutline;
 	!MAttributesetinstance;
 	AdClientId ID;

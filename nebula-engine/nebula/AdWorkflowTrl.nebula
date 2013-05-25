@@ -5,7 +5,7 @@ type AdWorkflowTrl {
 	!AdLanguage;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	IsTranslated YesNo;/* 'N'  */

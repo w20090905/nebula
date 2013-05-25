@@ -1,6 +1,6 @@
 @Remarks("M_Storage")
 @Refby("0")
-type MStorage {
+tx MStorage {
 	!MProduct;
 	!MLocator;
 	AdClient;

@@ -5,7 +5,7 @@ type BTopic {
 	AdClientId ID;
 	AdOrgId ID;
 	DocumentNo Long;
-	Name;
+	*Name;
 	?Description;
 	?TextMsg Note;
 	Topicstatus Attr;

@@ -5,7 +5,7 @@ type AdUserSubstitute {
 	AdClientId ID;
 	AdOrgId ID;
 	AdUser;
-	Name;
+	*Name;
 	?Description;
 	Substitute AdUser;
 	?Validfrom Date;

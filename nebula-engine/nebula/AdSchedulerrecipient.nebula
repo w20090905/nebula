@@ -1,6 +1,6 @@
 @Remarks("Recipient of the Scheduler Notification")
 @Refby("0")
-type AdSchedulerrecipient {
+tx AdSchedulerrecipient {
 	!AdSchedulerrecipientId ID;
 	AdClientId ID;
 	AdOrgId ID;

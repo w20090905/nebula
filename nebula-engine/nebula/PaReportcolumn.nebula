@@ -5,7 +5,7 @@ type PaReportcolumn {
 	AdClientId ID;
 	AdOrgId ID;
 	PaReportcolumnset;
-	Name;
+	*Name;
 	Seqno SeqNo;
 	?Description;
 	IsPrintEd YesNo;/* 'Y'  */

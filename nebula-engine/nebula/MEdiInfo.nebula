@@ -1,6 +1,6 @@
 @Remarks("EDI Log")
 @Refby("0")
-type MEdiInfo {
+tx MEdiInfo {
 	!MEdiInfoId ID;
 	AdClientId ID;
 	AdOrgId ID;

@@ -4,7 +4,7 @@ type AdLabelPrintErFunction {
 	!AdLabelPrintErFunctionId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	AdLabelPrintEr;
 	?FunctionPrefix Description;

@@ -4,7 +4,7 @@ type MSernoctl {
 	!MSernoctlId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	Startno SeqNo;
 	Incrementno SeqNo;

@@ -1,6 +1,6 @@
 @Remarks("Line on Shipment or Receipt document")
 @Refby("17")
-type MInoutline {
+tx MInoutline {
 	!MInoutlineId ID;
 	AdClientId ID;
 	AdOrg;

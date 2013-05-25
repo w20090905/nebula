@@ -4,7 +4,7 @@ type AdModelvalidator {
 	AdClientId ID;/* 0  */
 	!AdModelvalidatorId ID;
 	AdOrgId ID;/* 0  */
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	EntityType AdEntityType;

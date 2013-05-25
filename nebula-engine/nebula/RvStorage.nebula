@@ -5,7 +5,7 @@ type RvStorage {
 	AdOrgId ID;
 	MProductId ID;
 	Value String;
-	Name;
+	*Name;
 	?Description;
 	?Upc UPC;
 	?Sku String;

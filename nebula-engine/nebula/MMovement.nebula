@@ -1,6 +1,6 @@
 @Remarks("Movement of Inventory")
 @Refby("2")
-type MMovement {
+tx MMovement {
 	!MMovementId ID;
 	AdClientId ID;
 	AdOrg;

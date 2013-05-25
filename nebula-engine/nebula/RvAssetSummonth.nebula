@@ -7,7 +7,7 @@ type RvAssetSummonth {
 	AAssetGroupId ID;
 	?MProductId ID;
 	Value String;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	?Guaranteedate Date;

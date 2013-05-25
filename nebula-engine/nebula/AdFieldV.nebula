@@ -6,7 +6,7 @@ type AdFieldV {
 	AdFieldId ID;
 	?AdTableId ID;
 	?AdColumnId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	IsDisplayEd YesNo;

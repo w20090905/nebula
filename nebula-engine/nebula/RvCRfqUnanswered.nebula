@@ -4,7 +4,7 @@ type RvCRfqUnanswered {
 	AdClientId ID;
 	AdOrgId ID;
 	CRfqId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	SalesRepId ID;

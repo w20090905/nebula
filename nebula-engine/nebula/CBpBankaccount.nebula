@@ -1,6 +1,6 @@
 @Remarks("Bank Account of the Business Partner")
 @Refby("2")
-type CBpBankaccount {
+tx CBpBankaccount {
 	!CBpBankaccountId ID;
 	AdClientId ID;
 	AdOrgId ID;

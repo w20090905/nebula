@@ -5,7 +5,7 @@ type AdPrintFormatitem {
 	AdClientId ID;
 	AdOrgId ID;
 	AdPrintFormat;
-	Name;
+	*Name;
 	?PrintName Name;
 	IsPrintEd YesNo;/* 'Y'  */
 	PrintAreatype Attr;

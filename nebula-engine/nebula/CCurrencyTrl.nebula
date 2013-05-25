@@ -1,6 +1,6 @@
 @Remarks("The Currency for this record")
 @Refby("0")
-type CCurrencyTrl {
+tx CCurrencyTrl {
 	!CCurrency;
 	!AdLanguage;
 	AdClientId ID;

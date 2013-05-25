@@ -4,7 +4,7 @@ type RInterestArea {
 	!RInterestAreaId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	IsSelfservice YesNo;/* 'N' */
 	Value String;/* NULL

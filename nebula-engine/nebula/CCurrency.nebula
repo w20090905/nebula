@@ -1,6 +1,6 @@
 @Remarks("The Currency for this record")
 @Refby("49")
-type CCurrency {
+tx CCurrency {
 	!CCurrencyId ID;
 	AdClient;
 	AdOrg;

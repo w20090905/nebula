@@ -4,7 +4,7 @@ type CChannel {
 	!CChannelId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?AdPrintColor;
 };

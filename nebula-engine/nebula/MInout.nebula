@@ -1,6 +1,6 @@
 @Remarks("Material Shipment Document")
 @Refby("8")
-type MInout {
+tx MInout {
 	!MInoutId ID;
 	AdClientId ID;
 	AdOrg;

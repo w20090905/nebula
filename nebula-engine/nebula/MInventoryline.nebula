@@ -1,6 +1,6 @@
 @Remarks("Unique line in an Inventory document")
 @Refby("9")
-type MInventoryline {
+tx MInventoryline {
 	!MInventorylineId ID;
 	AdClientId ID;
 	AdOrgId ID;

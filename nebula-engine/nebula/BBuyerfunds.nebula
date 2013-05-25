@@ -1,6 +1,6 @@
 @Remarks("Buyer Funds for Bids on Topics")
 @Refby("1")
-type BBuyerfunds {
+tx BBuyerfunds {
 	!BBuyerfundsId ID;
 	AdClientId ID;
 	AdOrgId ID;

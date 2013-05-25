@@ -1,6 +1,6 @@
 @Remarks("")
 @Refby("0")
-type RIsSuesource {
+tx RIsSuesource {
 	!RIsSuesourceId ID;
 	AdClientId ID;
 	AdOrgId ID;

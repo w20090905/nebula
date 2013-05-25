@@ -1,6 +1,6 @@
 @Remarks("Web Basket")
 @Refby("1")
-type WBasket {
+tx WBasket {
 	!WBasketId ID;
 	AdClientId ID;
 	AdOrgId ID;

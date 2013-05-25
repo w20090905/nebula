@@ -1,6 +1,6 @@
 @Remarks("Payment Selection Check")
 @Refby("1")
-type CPayselectioncheck {
+tx CPayselectioncheck {
 	!CPayselectioncheckId ID;
 	AdClientId ID;
 	AdOrgId ID;

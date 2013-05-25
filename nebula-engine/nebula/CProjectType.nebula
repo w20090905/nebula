@@ -4,7 +4,7 @@ type CProjectType {
 	!CProjectTypeId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	ProjectCategory YesNo;/* 'N'  */

@@ -1,6 +1,6 @@
 @Remarks("Time and Expense Report Line")
 @Refby("1")
-type STimeexpenseline {
+tx STimeexpenseline {
 	!STimeexpenselineId ID;
 	AdClientId ID;
 	AdOrgId ID;

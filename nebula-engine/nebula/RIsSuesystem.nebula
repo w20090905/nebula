@@ -1,6 +1,6 @@
 @Remarks("Issue System")
 @Refby("2")
-type RIsSuesystem {
+tx RIsSuesystem {
 	!RIsSuesystemId ID;
 	AdClientId ID;
 	AdOrgId ID;

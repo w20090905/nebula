@@ -5,7 +5,7 @@ type AdEntityType {
 	AdClientId ID;
 	AdOrgId ID;
 	AdEntityTypeId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	?Version String;

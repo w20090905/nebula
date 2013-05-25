@@ -1,6 +1,6 @@
 @Remarks("Request for Quotation Topic Subscriber")
 @Refby("1")
-type CRfqTopicsubscriber {
+tx CRfqTopicsubscriber {
 	!CRfqTopicsubscriberId ID;
 	AdClientId ID;
 	AdOrgId ID;

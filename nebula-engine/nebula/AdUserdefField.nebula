@@ -6,7 +6,7 @@ type AdUserdefField {
 	AdOrgId ID;
 	AdUserdefTab;
 	AdField;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	IsDisplayEd YesNo;/* 'Y'  */

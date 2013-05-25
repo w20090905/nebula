@@ -5,7 +5,7 @@ type MProductDownload {
 	AdClientId ID;
 	AdOrgId ID;
 	MProduct;
-	Name;
+	*Name;
 	Downloadurl URL;
 };
 

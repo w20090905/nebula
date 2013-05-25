@@ -1,6 +1,6 @@
 @Remarks("News item or article defines base content")
 @Refby("0")
-type CmNewSitem {
+tx CmNewSitem {
 	!CmNewSitemId ID;
 	AdClientId ID;
 	AdOrgId ID;

@@ -4,7 +4,7 @@ type AdReplicationstrategy {
 	!AdReplicationstrategyId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	EntityType AdEntityType;/* 'D'  */

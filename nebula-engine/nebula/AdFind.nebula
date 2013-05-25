@@ -1,6 +1,6 @@
 @Remarks("Find")
 @Refby("0")
-type AdFind {
+tx AdFind {
 	!AdFindId ID;
 	FindId ID;
 	AdClientId ID;

@@ -6,7 +6,7 @@ type CUom {
 	AdOrg;
 	X12de355 String;
 	?Uomsymbol String;
-	Name;
+	*Name;
 	?Description;
 	Stdprecision Number;
 	Costingprecision Number;

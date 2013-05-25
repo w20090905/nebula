@@ -1,6 +1,6 @@
 @Remarks("Internally used asset is not longer used.")
 @Refby("1")
-type AAssetRetirement {
+tx AAssetRetirement {
 	!AAssetRetirementId ID;
 	AdClientId ID;
 	AdOrgId ID;

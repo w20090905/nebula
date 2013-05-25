@@ -1,6 +1,6 @@
 @Remarks("C_InvoiceTax")
 @Refby("0")
-type CInvoiceTax {
+tx CInvoiceTax {
 	!CTax;
 	!CInvoice;
 	AdClientId ID;

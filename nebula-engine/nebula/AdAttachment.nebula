@@ -1,6 +1,6 @@
 @Remarks("Attachment for the document")
 @Refby("1")
-type AdAttachment {
+tx AdAttachment {
 	!AdAttachmentId ID;
 	AdClientId ID;
 	AdOrgId ID;

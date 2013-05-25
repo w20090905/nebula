@@ -4,7 +4,7 @@ type AdAttribute {
 	!AdAttributeId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	AdTable;

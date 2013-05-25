@@ -4,7 +4,7 @@ type CDoctypeCounter {
 	!CDoctypeCounterId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	CDoctype;
 	?CounterCDoctype CDoctype;

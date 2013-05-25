@@ -1,6 +1,6 @@
 @Remarks("Payment Selection Line")
 @Refby("0")
-type CPayselectionline {
+tx CPayselectionline {
 	!CPayselectionlineId ID;
 	AdClientId ID;
 	AdOrgId ID;

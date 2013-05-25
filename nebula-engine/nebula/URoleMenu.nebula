@@ -1,6 +1,6 @@
 @Remarks("Role Menu")
 @Refby("0")
-type URoleMenu {
+tx URoleMenu {
 	!URoleMenuId ID;
 	AdClientId ID;
 	AdOrgId ID;

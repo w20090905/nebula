@@ -1,6 +1,6 @@
 @Remarks("Workflow Process Context")
 @Refby("0")
-type AdWfProcessdata {
+tx AdWfProcessdata {
 	!AdWfProcessdataId ID;
 	AdClientId ID;
 	AdOrgId ID;

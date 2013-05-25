@@ -7,7 +7,7 @@ type AdUserdefTab {
 	AdUserdefWin;
 	AdTab;
 	IsMultirowonly YesNo;/* 'N'  */
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	IsReadonly YesNo;/* 'N'  */

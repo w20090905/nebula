@@ -4,7 +4,7 @@ type WStore {
 	!WStoreId ID;
 	AdClient;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	?Wstoreemail Description;

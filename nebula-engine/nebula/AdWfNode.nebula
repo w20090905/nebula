@@ -4,7 +4,7 @@ type AdWfNode {
 	!AdWfNodeId ID;
 	AdClient;
 	AdOrg;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	AdWorkflow;

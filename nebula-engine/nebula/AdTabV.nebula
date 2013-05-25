@@ -4,7 +4,7 @@ type AdTabV {
 	AdTabId ID;
 	AdWindowId ID;
 	AdTableId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	Seqno SeqNo;

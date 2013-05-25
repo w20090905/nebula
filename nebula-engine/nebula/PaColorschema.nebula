@@ -4,7 +4,7 @@ type PaColorschema {
 	!PaColorschemaId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	Mark1percent Number;/* 0  */
 	AdPrintColor1 AdPrintColor;

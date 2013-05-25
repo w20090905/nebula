@@ -1,6 +1,6 @@
 @Remarks("Dunning Run Line")
 @Refby("0")
-type CDunningRunline {
+tx CDunningRunline {
 	!CDunningRunlineId ID;
 	AdClientId ID;
 	AdOrgId ID;

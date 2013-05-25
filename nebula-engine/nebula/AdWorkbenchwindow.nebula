@@ -1,6 +1,6 @@
 @Remarks("Workbench Window")
 @Refby("0")
-type AdWorkbenchwindow {
+tx AdWorkbenchwindow {
 	!AdWorkbenchwindowId ID;
 	AdClientId ID;
 	AdOrgId ID;

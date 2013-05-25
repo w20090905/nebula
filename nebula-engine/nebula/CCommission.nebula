@@ -4,7 +4,7 @@ type CCommission {
 	!CCommissionId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	CBpartner;
 	CCurrency;

@@ -4,7 +4,7 @@ type KCategoryvalue {
 	!KCategoryvalueId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	KCategory;
 };

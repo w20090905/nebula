@@ -1,6 +1,6 @@
 @Remarks("Inventory Transaction")
 @Refby("3")
-type MTransaction {
+tx MTransaction {
 	!MTransactionId ID;
 	AdClientId ID;
 	AdOrgId ID;

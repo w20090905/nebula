@@ -1,6 +1,6 @@
 @Remarks("System Notice")
 @Refby("0")
-type AdNote {
+tx AdNote {
 	!AdNoteId ID;
 	AdClientId ID;
 	AdOrgId ID;

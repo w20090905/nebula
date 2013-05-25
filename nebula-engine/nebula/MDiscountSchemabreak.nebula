@@ -1,6 +1,6 @@
 @Remarks("Trade Discount Break")
 @Refby("0")
-type MDiscountSchemabreak {
+tx MDiscountSchemabreak {
 	!MDiscountSchemabreakId ID;
 	AdClientId ID;
 	AdOrgId ID;

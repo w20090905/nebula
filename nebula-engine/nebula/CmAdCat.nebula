@@ -5,7 +5,7 @@ type CmAdCat {
 	CmWebproject;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 };

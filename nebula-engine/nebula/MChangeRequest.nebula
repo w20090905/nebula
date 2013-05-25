@@ -7,7 +7,7 @@ type MChangeRequest {
 	MBom;
 	?MChangeNotice;
 	DocumentNo Long;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	?Detailinfo Note;

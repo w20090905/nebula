@@ -4,7 +4,7 @@ type CWithholding {
 	!CWithholdingId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	CPaymentTerm;
 	IsTaxWithholding YesNo;/* 'Y'  */

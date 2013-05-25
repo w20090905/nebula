@@ -5,7 +5,7 @@ type CAcctschemaElement {
 	AdOrg;
 	CAcctschema;
 	Elementtype Attr;
-	Name;
+	*Name;
 	Seqno SeqNo;
 	?CElement;
 	AdClient;

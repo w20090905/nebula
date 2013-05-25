@@ -4,7 +4,7 @@ type PaBenchmark {
 	!PaBenchmarkId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	Accumulationtype Attr;

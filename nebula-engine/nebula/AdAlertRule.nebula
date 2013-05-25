@@ -4,7 +4,7 @@ type AdAlertRule {
 	!AdAlertRuleId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	AdAlert;
 	SelectClause Note;
 	Fromclause Note;

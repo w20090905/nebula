@@ -5,7 +5,7 @@ type CPaymentTermTrl {
 	!AdLanguage;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?DocumentNote Note;
 	IsTranslated YesNo;/* 'N'  */

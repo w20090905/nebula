@@ -4,7 +4,7 @@ type CmWebprojectDomain {
 	!CmWebprojectDomainId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	CmWebproject;

@@ -1,6 +1,6 @@
 @Remarks("Trial Balance")
 @Refby("0")
-type TTrialbalance {
+tx TTrialbalance {
 	!AdPinstance;
 	!FactAcctId ID;
 	AdClientId ID;

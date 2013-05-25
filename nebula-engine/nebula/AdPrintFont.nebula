@@ -4,7 +4,7 @@ type AdPrintFont {
 	!AdPrintFontId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	IsDefault YesNo;/* 'N'  */
 	Code Note;
 };

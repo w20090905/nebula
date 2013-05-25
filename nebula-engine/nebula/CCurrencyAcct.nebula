@@ -1,6 +1,6 @@
 @Remarks("C_Currency_Acct")
 @Refby("0")
-type CCurrencyAcct {
+tx CCurrencyAcct {
 	!CAcctschema;
 	!CCurrency;
 	AdClientId ID;

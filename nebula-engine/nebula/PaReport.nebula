@@ -4,7 +4,7 @@ type PaReport {
 	!PaReportId ID;
 	AdClientId ID;
 	?AdOrg;
-	Name;
+	*Name;
 	?Description;
 	PaReportlineset;
 	PaReportcolumnset;

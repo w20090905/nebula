@@ -4,7 +4,7 @@ type CmCstagettable {
 	!CmCstagettableId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	CmCstage;
 	CmTemplatetable;

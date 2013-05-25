@@ -1,6 +1,6 @@
 @Remarks("Known Issue")
 @Refby("1")
-type RIsSueknown {
+tx RIsSueknown {
 	!RIsSueknownId ID;
 	AdClientId ID;
 	AdOrgId ID;

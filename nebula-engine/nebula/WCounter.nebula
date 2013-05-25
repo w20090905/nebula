@@ -1,6 +1,6 @@
 @Remarks("Individual Count hit")
 @Refby("0")
-type WCounter {
+tx WCounter {
 	!WCounterId ID;
 	AdClientId ID;
 	AdOrgId ID;

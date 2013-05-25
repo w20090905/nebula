@@ -5,7 +5,7 @@ type CProject {
 	AdClient;
 	AdOrg;
 	Value String;
-	Name;
+	*Name;
 	?Description;
 	?Note;
 	IsSummary YesNo;/* 'N'  */

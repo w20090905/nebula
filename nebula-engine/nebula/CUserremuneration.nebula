@@ -1,6 +1,6 @@
 @Remarks("Employee Wage or Salary Overwrite")
 @Refby("0")
-type CUserremuneration {
+tx CUserremuneration {
 	!CUserremunerationId ID;
 	AdClientId ID;
 	AdOrgId ID;

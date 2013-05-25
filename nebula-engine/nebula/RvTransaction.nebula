@@ -15,7 +15,7 @@ type RvTransaction {
 	?Guaranteedate Date;
 	MProductId ID;
 	Value String;
-	Name;
+	*Name;
 	?Description;
 	?Upc UPC;
 	?Sku String;

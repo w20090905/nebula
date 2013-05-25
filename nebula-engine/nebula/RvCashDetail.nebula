@@ -6,7 +6,7 @@ type RvCashDetail {
 	AdClientId ID;
 	AdOrgId ID;
 	CCashBookId ID;
-	Name;
+	*Name;
 	Statementdate Date;
 	DateAcct Date;
 	Processed YesNo;

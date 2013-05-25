@@ -5,7 +5,7 @@ type SResourceAssignment {
 	AdClientId ID;
 	AdOrgId ID;
 	SResource;
-	Name;
+	*Name;
 	?Description;
 	Assigndatefrom Date;
 	?Assigndateto Date;

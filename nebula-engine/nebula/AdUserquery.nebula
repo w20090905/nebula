@@ -4,7 +4,7 @@ type AdUserquery {
 	!AdUserqueryId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?AdUser;
 	AdTable;

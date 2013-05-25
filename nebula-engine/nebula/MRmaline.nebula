@@ -1,6 +1,6 @@
 @Remarks("Return Material Authorization Line")
 @Refby("2")
-type MRmaline {
+tx MRmaline {
 	!MRmalineId ID;
 	AdClientId ID;
 	AdOrgId ID;

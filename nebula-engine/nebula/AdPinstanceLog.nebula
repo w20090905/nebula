@@ -1,6 +1,6 @@
 @Remarks("(Non Standard Table)")
 @Refby("0")
-type AdPinstanceLog {
+tx AdPinstanceLog {
 	!AdPinstance;
 	!LogId ID;
 	?PDate Date;/* SYSDATE      */

@@ -4,7 +4,7 @@ type CAcctschema {
 	!CAcctschemaId ID;
 	AdClient;
 	AdOrg;
-	Name;
+	*Name;
 	?Description;
 	Gaap GAAP;
 	IsAccrual YesNo;/* 'Y'  */

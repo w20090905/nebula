@@ -1,6 +1,6 @@
 @Remarks("Commission Run or Process")
 @Refby("1")
-type CCommissionrun {
+tx CCommissionrun {
 	!CCommissionrunId ID;
 	AdClientId ID;
 	AdOrgId ID;

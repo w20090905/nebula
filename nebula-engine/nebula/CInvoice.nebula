@@ -1,6 +1,6 @@
 @Remarks("Invoice Identifier")
 @Refby("24")
-type CInvoice {
+tx CInvoice {
 	!CInvoiceId ID;
 	AdClientId ID;
 	AdOrg;

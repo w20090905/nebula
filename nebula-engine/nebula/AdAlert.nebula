@@ -4,7 +4,7 @@ type AdAlert {
 	!AdAlertId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	AlertSubject Description;

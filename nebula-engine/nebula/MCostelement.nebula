@@ -4,7 +4,7 @@ type MCostelement {
 	!MCostelementId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	Costelementtype Attr;
 	?Costingmethod YesNo;

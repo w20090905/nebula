@@ -5,7 +5,7 @@ type AdModification {
 	AdClientId ID;
 	AdOrgId ID;
 	Seqno SeqNo;/* 0  */
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	EntityType AdEntityType;/* 'D'  */

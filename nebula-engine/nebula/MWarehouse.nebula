@@ -5,7 +5,7 @@ type MWarehouse {
 	AdClient;
 	AdOrg;
 	Value String;
-	Name;
+	*Name;
 	?Description;
 	CLocation;
 	Separator YesNo;

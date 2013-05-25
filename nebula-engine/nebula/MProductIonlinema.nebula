@@ -1,6 +1,6 @@
 @Remarks("Production Line MA")
 @Refby("0")
-type MProductIonlinema {
+tx MProductIonlinema {
 	!MProductIonline;
 	!MAttributesetinstance;
 	AdClientId ID;

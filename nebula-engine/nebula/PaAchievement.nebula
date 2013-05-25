@@ -4,7 +4,7 @@ type PaAchievement {
 	!PaAchievementId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Note;
 	Seqno SeqNo;/* 0  */

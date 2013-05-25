@@ -1,6 +1,6 @@
 @Remarks("BOM Line")
 @Refby("0")
-type MProductBom {
+tx MProductBom {
 	!MProductBomId ID;
 	AdClientId ID;
 	AdOrgId ID;

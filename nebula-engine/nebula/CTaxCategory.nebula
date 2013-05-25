@@ -4,7 +4,7 @@ type CTaxCategory {
 	!CTaxCategoryId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Commoditycode String;
 	IsDefault YesNo;/* 'N'  */

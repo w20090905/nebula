@@ -1,6 +1,6 @@
 @Remarks("Restriction of what will be shown in Report Line")
 @Refby("1")
-type PaReportsource {
+tx PaReportsource {
 	!PaReportsourceId ID;
 	AdClientId ID;
 	AdOrgId ID;

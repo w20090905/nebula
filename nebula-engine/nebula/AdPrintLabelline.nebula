@@ -5,7 +5,7 @@ type AdPrintLabelline {
 	AdClientId ID;
 	AdOrgId ID;
 	AdPrintLabel;
-	Name;
+	*Name;
 	Seqno SeqNo;
 	LabelFormatType Attr;
 	?PrintName Name;

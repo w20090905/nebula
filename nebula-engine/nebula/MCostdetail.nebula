@@ -1,6 +1,6 @@
 @Remarks("Cost Detail Information")
 @Refby("0")
-type MCostdetail {
+tx MCostdetail {
 	!MCostdetailId ID;
 	AdClient;
 	AdOrg;

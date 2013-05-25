@@ -1,6 +1,6 @@
 @Remarks("Material Requisition Line")
 @Refby("1")
-type MRequisitionline {
+tx MRequisitionline {
 	!MRequisitionlineId ID;
 	AdClientId ID;
 	AdOrgId ID;

@@ -15,7 +15,7 @@ type CPayselectionCheckV {
 	?Naics NAICS;
 	?Duns String;
 	?Bpgreeting Description;
-	Name;
+	*Name;
 	?Name2 Name;
 	?CLocationId ID;
 	?ReferenceNo Description;

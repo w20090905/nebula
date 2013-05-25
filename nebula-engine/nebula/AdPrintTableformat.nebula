@@ -17,7 +17,7 @@ type AdPrintTableformat {
 	IsPaintHlines YesNo;/* 'N'  */
 	IsPaintVlines YesNo;/* 'N'  */
 	IsPrintFunctionsymbols YesNo;/* 'Y'  */
-	Name;
+	*Name;
 	IsDefault YesNo;/* 'N'  */
 	?ImageUrl URL;
 	?HeaderLeft Note;

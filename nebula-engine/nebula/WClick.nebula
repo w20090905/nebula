@@ -1,6 +1,6 @@
 @Remarks("Individual Web Click")
 @Refby("0")
-type WClick {
+tx WClick {
 	!WClickId ID;
 	AdClientId ID;
 	AdOrgId ID;

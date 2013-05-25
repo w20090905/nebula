@@ -1,6 +1,6 @@
 @Remarks("Position Remuneration")
 @Refby("0")
-type CJobremuneration {
+tx CJobremuneration {
 	!CJobremunerationId ID;
 	AdClientId ID;
 	AdOrgId ID;

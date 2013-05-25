@@ -1,6 +1,6 @@
 @Remarks("Index Log")
 @Refby("0")
-type KIndexlog {
+tx KIndexlog {
 	!KIndexlogId ID;
 	AdClientId ID;
 	AdOrgId ID;

@@ -1,6 +1,6 @@
 @Remarks("Script model validator for tables")
 @Refby("0")
-type AdTableScriptvalidator {
+tx AdTableScriptvalidator {
 	AdClientId ID;/* NULL   */
 	AdOrgId ID;/* NULL   */
 	AdRule;

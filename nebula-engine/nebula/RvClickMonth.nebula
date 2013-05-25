@@ -3,7 +3,7 @@
 type RvClickMonth {
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	Targeturl URL;
 	?CBpartnerId ID;

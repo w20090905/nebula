@@ -1,6 +1,6 @@
 @Remarks("Exclude the ability to enter Attribute Sets")
 @Refby("0")
-type MAttributesetexclude {
+tx MAttributesetexclude {
 	!MAttributesetexcludeId ID;
 	AdClientId ID;
 	AdOrgId ID;

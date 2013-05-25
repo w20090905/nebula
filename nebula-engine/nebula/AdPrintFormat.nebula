@@ -4,7 +4,7 @@ type AdPrintFormat {
 	!AdPrintFormatId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	IsTablebased YesNo;/* 'Y'  */
 	IsForm YesNo;/* 'N'  */

@@ -1,6 +1,6 @@
 @Remarks("Recipient of the Alert Notification")
 @Refby("0")
-type AdAlertRecipient {
+tx AdAlertRecipient {
 	!AdAlertRecipientId ID;
 	AdClientId ID;
 	AdOrgId ID;

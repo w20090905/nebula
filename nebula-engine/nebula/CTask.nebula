@@ -5,7 +5,7 @@ type CTask {
 	AdClientId ID;
 	AdOrgId ID;
 	Seqno SeqNo;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	CPhase;

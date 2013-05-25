@@ -1,6 +1,6 @@
 @Remarks("Workflow Process Activity Event Audit Information")
 @Refby("0")
-type AdWfEventAudit {
+tx AdWfEventAudit {
 	!AdWfEventAuditId ID;
 	AdClientId ID;
 	AdOrgId ID;

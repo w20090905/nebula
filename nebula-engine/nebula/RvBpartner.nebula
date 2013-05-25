@@ -5,7 +5,7 @@ type RvBpartner {
 	AdOrgId ID;
 	CBpartnerId ID;
 	Value String;
-	Name;
+	*Name;
 	?Name2 Name;
 	?Description;
 	IsSummary YesNo;
@@ -81,7 +81,7 @@ type RvBpartner {
 	?Emailverify Description;
 	?LdapUser Description;
 	?Emailverifydate Date;
-	?Notificationtype Attr;
+	?NotificationType Attr;
 	?CBpartnerLocationId ID;
 	?PostAl Code;
 	?City Name;

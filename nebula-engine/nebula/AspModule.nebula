@@ -6,7 +6,7 @@ type AspModule {
 	!AspModuleId ID;
 	?Description;
 	?Help;
-	Name;
+	*Name;
 	Value String;
 };
 

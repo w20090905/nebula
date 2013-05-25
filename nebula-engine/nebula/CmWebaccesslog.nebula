@@ -1,6 +1,6 @@
 @Remarks("Web Access Log")
 @Refby("0")
-type CmWebaccesslog {
+tx CmWebaccesslog {
 	!CmWebaccesslogId ID;
 	AdClientId ID;
 	AdOrgId ID;

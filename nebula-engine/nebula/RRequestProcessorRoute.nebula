@@ -1,6 +1,6 @@
 @Remarks("Automatic routing of requests")
 @Refby("0")
-type RRequestProcessorRoute {
+tx RRequestProcessorRoute {
 	!RRequestProcessorRouteId ID;
 	AdClientId ID;
 	AdOrgId ID;

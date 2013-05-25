@@ -6,7 +6,7 @@ type RMailtextTrl {
 	AdClientId ID;
 	AdOrgId ID;
 	IsTranslated YesNo;/* 'N'  */
-	Name;
+	*Name;
 	?Mailheader Note;/* NULL */
 	Mailtext Note;
 	?Mailtext2 Note;

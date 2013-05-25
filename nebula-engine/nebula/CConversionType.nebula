@@ -5,7 +5,7 @@ type CConversionType {
 	AdClientId ID;
 	AdOrgId ID;
 	Value String;
-	Name;
+	*Name;
 	?Description;
 	IsDefault YesNo;/* 'N'  */
 };

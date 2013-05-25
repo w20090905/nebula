@@ -1,6 +1,6 @@
 @Remarks("Report view Column")
 @Refby("0")
-type AdReportviewCol {
+tx AdReportviewCol {
 	!AdReportviewColId ID;
 	AdClientId ID;
 	AdOrgId ID;

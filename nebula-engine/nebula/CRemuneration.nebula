@@ -4,7 +4,7 @@ type CRemuneration {
 	!CRemunerationId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	RemunerationType Attr;

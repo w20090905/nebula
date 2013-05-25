@@ -4,7 +4,7 @@ type MAttribute {
 	!MAttributeId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	IsMandatory YesNo;/* 'N'  */
 	IsInstanceattribute YesNo;/* 'N'  */

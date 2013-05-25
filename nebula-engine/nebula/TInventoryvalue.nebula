@@ -1,6 +1,6 @@
 @Remarks("T_InventoryValue")
 @Refby("0")
-type TInventoryvalue {
+tx TInventoryvalue {
 	!AdPinstance;
 	!MWarehouse;
 	!MProduct;

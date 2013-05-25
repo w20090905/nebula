@@ -23,7 +23,7 @@ type CInvoiceHeaderV {
 	?SalesRepName Name;
 	DateInvoiceD Date;
 	?Bpgreeting Description;
-	Name;
+	*Name;
 	?Name2 Name;
 	?BpcontactGreeting Description;
 	?Title String;

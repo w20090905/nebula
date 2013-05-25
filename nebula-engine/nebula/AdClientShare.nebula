@@ -4,7 +4,7 @@ type AdClientShare {
 	!AdClientShareId ID;
 	AdClient;
 	AdOrg;
-	Name;
+	*Name;
 	?Description;
 	AdTable;
 	Sharetype Attr;

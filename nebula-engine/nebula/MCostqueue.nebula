@@ -1,6 +1,6 @@
 @Remarks("FiFo/LiFo Cost Queue")
 @Refby("0")
-type MCostqueue {
+tx MCostqueue {
 	!MCostqueueId ID;
 	AdClientId ID;
 	AdOrgId ID;

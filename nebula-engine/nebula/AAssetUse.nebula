@@ -1,6 +1,6 @@
 @Remarks("")
 @Refby("0")
-type AAssetUse {
+tx AAssetUse {
 	!AAssetUseId ID;
 	AdClientId ID;
 	AdOrgId ID;

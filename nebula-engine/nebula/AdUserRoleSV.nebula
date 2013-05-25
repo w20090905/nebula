@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 type AdUserRoleSV {
-	Name;
+	*Name;
 	RoleName Name;
 };
 

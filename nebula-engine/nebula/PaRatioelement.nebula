@@ -4,7 +4,7 @@ type PaRatioelement {
 	!PaRatioelementId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	PaRatio;
 	Ratiooperand YesNo;

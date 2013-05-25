@@ -4,7 +4,7 @@ type RStandardResponse {
 	!RStandardResponseId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	Responsetext Note;
 };
 

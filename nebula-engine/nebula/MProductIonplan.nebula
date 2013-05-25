@@ -1,6 +1,6 @@
 @Remarks("Plan for how a product is produced")
 @Refby("1")
-type MProductIonplan {
+tx MProductIonplan {
 	!MProductIonplanId ID;
 	AdClientId ID;
 	AdOrgId ID;

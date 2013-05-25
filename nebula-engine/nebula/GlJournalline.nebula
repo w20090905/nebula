@@ -1,6 +1,6 @@
 @Remarks("General Ledger Journal Line")
 @Refby("1")
-type GlJournalline {
+tx GlJournalline {
 	!GlJournallineId ID;
 	AdClient;
 	AdOrg;

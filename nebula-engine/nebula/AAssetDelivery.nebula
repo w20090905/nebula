@@ -1,6 +1,6 @@
 @Remarks("Delivery of Asset")
 @Refby("0")
-type AAssetDelivery {
+tx AAssetDelivery {
 	!AAssetDeliveryId ID;
 	AdClientId ID;
 	AdOrgId ID;

@@ -1,6 +1,6 @@
 @Remarks("Exclude the ability to create Lots in Attribute Sets")
 @Refby("0")
-type MLotctlexclude {
+tx MLotctlexclude {
 	!MLotctlexcludeId ID;
 	AdClientId ID;
 	AdOrgId ID;

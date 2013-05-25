@@ -4,7 +4,7 @@ type MDiscountSchema {
 	!MDiscountSchemaId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	Validfrom Date;
 	DiscountType Attr;

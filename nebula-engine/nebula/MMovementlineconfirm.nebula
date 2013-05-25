@@ -1,6 +1,6 @@
 @Remarks("Inventory Move Line Confirmation")
 @Refby("0")
-type MMovementlineconfirm {
+tx MMovementlineconfirm {
 	!MMovementlineconfirmId ID;
 	AdClientId ID;
 	AdOrgId ID;

@@ -1,6 +1,6 @@
 @Remarks("Match Purchase Order to Shipment/Receipt and Invoice")
 @Refby("0")
-type MMatchpo {
+tx MMatchpo {
 	!MMatchpoId ID;
 	AdClientId ID;
 	AdOrgId ID;

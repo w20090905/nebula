@@ -4,7 +4,7 @@ type MProductIon {
 	!MProductIonId ID;
 	AdClientId ID;
 	AdOrg;
-	Name;
+	*Name;
 	?Description;
 	Movementdate Date;
 	IsCreateD YesNo;/* 'N'  */

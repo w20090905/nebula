@@ -1,6 +1,6 @@
 @Remarks("Personal Attachment Note")
 @Refby("0")
-type AdAttachmentnote {
+tx AdAttachmentnote {
 	!AdAttachmentnoteId ID;
 	AdClientId ID;
 	AdOrgId ID;

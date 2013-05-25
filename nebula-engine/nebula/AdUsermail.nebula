@@ -1,6 +1,6 @@
 @Remarks("Mail sent to the user")
 @Refby("0")
-type AdUsermail {
+tx AdUsermail {
 	!AdUsermailId ID;
 	AdClientId ID;
 	AdOrgId ID;

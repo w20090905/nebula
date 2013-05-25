@@ -1,6 +1,6 @@
 @Remarks("The actual training class instance")
 @Refby("0")
-type STrainingClass {
+tx STrainingClass {
 	!STrainingClassId ID;
 	AdClientId ID;
 	AdOrgId ID;

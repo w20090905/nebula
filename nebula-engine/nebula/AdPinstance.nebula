@@ -1,6 +1,6 @@
 @Remarks("Instance of the process")
 @Refby("11")
-type AdPinstance {
+tx AdPinstance {
 	!AdPinstanceId ID;
 	AdProcess;
 	RecordId ID;

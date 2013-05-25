@@ -6,7 +6,7 @@ type CCountryTrl {
 	AdClientId ID;
 	AdOrgId ID;
 	IsTranslated YesNo;/* 'N'  */
-	Name;
+	*Name;
 	?Description;
 	?Regionname Name;
 };

@@ -1,6 +1,6 @@
 @Remarks("Tax Postal/ZIP")
 @Refby("0")
-type CTaxPostal {
+tx CTaxPostal {
 	!CTaxPostalId ID;
 	AdClientId ID;
 	AdOrgId ID;

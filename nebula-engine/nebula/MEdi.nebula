@@ -1,6 +1,6 @@
 @Remarks("EDI Transaction")
 @Refby("1")
-type MEdi {
+tx MEdi {
 	!MEdiId ID;
 	AdClientId ID;
 	AdOrgId ID;

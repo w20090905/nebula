@@ -4,7 +4,7 @@ type CPaymentTerm {
 	!CPaymentTermId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?DocumentNote Note;
 	AfterDelivery YesNo;/* 'N'  */

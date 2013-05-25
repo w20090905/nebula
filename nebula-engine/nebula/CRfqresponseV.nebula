@@ -8,7 +8,7 @@ type CRfqresponseV {
 	?AdLanguage String;
 	?OrgLocationId ID;
 	TaxId Code;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	CCurrencyId ID;

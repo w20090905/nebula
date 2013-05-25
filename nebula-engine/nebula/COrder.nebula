@@ -1,6 +1,6 @@
 @Remarks("Order")
 @Refby("20")
-type COrder {
+tx COrder {
 	!COrderId ID;
 	AdClientId ID;
 	AdOrg;

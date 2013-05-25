@@ -1,6 +1,6 @@
 @Remarks("Material Shipment or Receipt Confirmation Line")
 @Refby("1")
-type MInoutlineconfirm {
+tx MInoutlineconfirm {
 	!MInoutlineconfirmId ID;
 	AdClientId ID;
 	AdOrgId ID;

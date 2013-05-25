@@ -4,7 +4,7 @@ type CmWikitoken {
 	!CmWikitokenId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	Tokentype Attr;
 	?SelectClause Note;

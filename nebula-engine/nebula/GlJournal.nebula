@@ -1,6 +1,6 @@
 @Remarks("General Ledger Journal")
 @Refby("3")
-type GlJournal {
+tx GlJournal {
 	!GlJournalId ID;
 	AdClientId ID;
 	AdOrgId ID;

@@ -1,6 +1,6 @@
 @Remarks("Parameters for a Physical Inventory")
 @Refby("4")
-type MInventory {
+tx MInventory {
 	!MInventoryId ID;
 	AdClientId ID;
 	AdOrg;

@@ -1,6 +1,6 @@
 @Remarks("Payment Schedule Template")
 @Refby("1")
-type CPayschedule {
+tx CPayschedule {
 	!CPayscheduleId ID;
 	AdClientId ID;
 	AdOrgId ID;

@@ -5,7 +5,7 @@ type PaReportline {
 	AdClientId ID;
 	AdOrgId ID;
 	PaReportlineset;
-	Name;
+	*Name;
 	Seqno SeqNo;
 	?Description;
 	IsPrintEd YesNo;/* 'Y'  */

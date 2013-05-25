@@ -5,7 +5,7 @@ type CBankaccountdoc {
 	AdClientId ID;
 	AdOrgId ID;
 	CBankaccount;
-	Name;
+	*Name;
 	?Description;
 	PaymentRule Name;
 	Currentnext Number;

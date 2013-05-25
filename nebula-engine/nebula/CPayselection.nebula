@@ -4,7 +4,7 @@ type CPayselection {
 	!CPayselectionId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	CBankaccount;
 	Paydate Date;

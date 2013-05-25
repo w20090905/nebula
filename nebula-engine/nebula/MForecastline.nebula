@@ -1,6 +1,6 @@
 @Remarks("Forecast Line")
 @Refby("1")
-type MForecastline {
+tx MForecastline {
 	!MForecastlineId ID;
 	AdClientId ID;
 	AdOrgId ID;

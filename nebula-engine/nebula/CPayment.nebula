@@ -1,6 +1,6 @@
 @Remarks("Payment identifier")
 @Refby("16")
-type CPayment {
+tx CPayment {
 	!CPaymentId ID;
 	AdClientId ID;
 	AdOrg;

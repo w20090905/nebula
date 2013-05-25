@@ -1,6 +1,6 @@
 @Remarks("Client Exception")
 @Refby("0")
-type AspClientException {
+tx AspClientException {
 	AdClientId ID;/* NULL   */
 	?AdField;
 	?AdForm;

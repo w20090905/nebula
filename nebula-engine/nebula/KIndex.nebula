@@ -1,6 +1,6 @@
 @Remarks("Index")
 @Refby("0")
-type KIndex {
+tx KIndex {
 	!KIndexId ID;
 	AdClientId ID;
 	AdOrgId ID;

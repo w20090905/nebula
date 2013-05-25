@@ -5,7 +5,7 @@ type CDoctypeTrl {
 	!AdLanguage;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	PrintName Name;
 	?DocumentNote Note;
 	IsTranslated YesNo;/* 'N'  */

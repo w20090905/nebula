@@ -7,7 +7,7 @@ type CmContainerElementTrl {
 	AdOrgId ID;
 	IsTranslated YesNo;/* 'N'  */
 	?Contenthtml Note;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 };

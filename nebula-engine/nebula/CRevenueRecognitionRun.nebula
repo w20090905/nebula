@@ -1,6 +1,6 @@
 @Remarks("Revenue Recognition Run or Process")
 @Refby("0")
-type CRevenueRecognitionRun {
+tx CRevenueRecognitionRun {
 	!CRevenueRecognitionRunId ID;
 	AdClientId ID;
 	AdOrgId ID;

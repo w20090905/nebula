@@ -5,7 +5,7 @@ type PaGoal {
 	AdClientId ID;
 	AdOrgId ID;
 	Seqno SeqNo;/* 0  */
-	Name;
+	*Name;
 	?Description;
 	?Note;
 	?AdUser;

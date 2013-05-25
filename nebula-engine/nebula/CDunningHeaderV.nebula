@@ -19,7 +19,7 @@ type CDunningHeaderV {
 	SalesRepId ID;
 	?SalesRepName Name;
 	?Bpgreeting Description;
-	Name;
+	*Name;
 	?Name2 Name;
 	?BpcontactGreeting Description;
 	?Title String;

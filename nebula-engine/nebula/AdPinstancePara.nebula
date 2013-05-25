@@ -1,6 +1,6 @@
 @Remarks("AD_PInstance_Para")
 @Refby("0")
-type AdPinstancePara {
+tx AdPinstancePara {
 	!AdPinstance;
 	!Seqno SeqNo;
 	?Parametername Name;

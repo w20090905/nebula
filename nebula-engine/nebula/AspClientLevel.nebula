@@ -1,6 +1,6 @@
 @Remarks("Client Level")
 @Refby("0")
-type AspClientLevel {
+tx AspClientLevel {
 	AdClientId ID;/* NULL   */
 	AdOrgId ID;/* 0  */
 	!AspClientLevelId ID;

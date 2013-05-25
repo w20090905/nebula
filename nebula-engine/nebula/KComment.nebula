@@ -1,6 +1,6 @@
 @Remarks("Knowledge Entry Comment")
 @Refby("0")
-type KComment {
+tx KComment {
 	!KCommentId ID;
 	AdClientId ID;
 	AdOrgId ID;

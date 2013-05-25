@@ -4,7 +4,7 @@ type PaBenchmarkdata {
 	!PaBenchmarkdataId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	PaBenchmark;
 	Benchmarkdate Date;

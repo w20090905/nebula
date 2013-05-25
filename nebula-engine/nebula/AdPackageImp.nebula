@@ -4,7 +4,7 @@ type AdPackageImp {
 	!AdPackageImpId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?PkStatus String;
 	?ReleaseNo String;
 	?PkVersion String;

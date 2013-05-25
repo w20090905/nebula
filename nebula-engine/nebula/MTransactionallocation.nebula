@@ -1,6 +1,6 @@
 @Remarks("M_TransactionAllocation")
 @Refby("0")
-type MTransactionallocation {
+tx MTransactionallocation {
 	!MTransaction;
 	!Allocationstrategytype Attr;
 	AdClientId ID;

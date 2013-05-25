@@ -4,7 +4,7 @@ type CAcctprocessor {
 	!CAcctprocessorId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	FrequencyType Attr;
 	Frequency Number;

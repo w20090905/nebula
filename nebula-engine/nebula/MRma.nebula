@@ -5,7 +5,7 @@ type MRma {
 	AdClientId ID;
 	AdOrgId ID;
 	DocumentNo Long;
-	Name;
+	*Name;
 	?Description;
 	Inout MInout;
 	?Processing YesNo;

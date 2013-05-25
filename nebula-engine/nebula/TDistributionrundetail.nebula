@@ -1,6 +1,6 @@
 @Remarks("T_DistributionRunDetail")
 @Refby("0")
-type TDistributionrundetail {
+tx TDistributionrundetail {
 	!MDistributionrun;
 	!MDistributionrunline;
 	!MDistributionlist;

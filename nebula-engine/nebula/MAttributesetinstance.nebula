@@ -1,6 +1,6 @@
 @Remarks("Product Attribute Set Instance")
 @Refby("26")
-type MAttributesetinstance {
+tx MAttributesetinstance {
 	!MAttributesetinstanceId ID;
 	AdClientId ID;
 	AdOrgId ID;

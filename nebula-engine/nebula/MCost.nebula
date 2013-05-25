@@ -1,6 +1,6 @@
 @Remarks("Product Cost")
 @Refby("0")
-type MCost {
+tx MCost {
 	!AdClient;
 	!AdOrg;
 	!MProduct;

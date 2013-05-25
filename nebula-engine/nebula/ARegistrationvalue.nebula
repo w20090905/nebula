@@ -5,7 +5,7 @@ type ARegistrationvalue {
 	!ARegistrationattribute;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 };
 

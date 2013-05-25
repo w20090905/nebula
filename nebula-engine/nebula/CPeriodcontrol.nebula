@@ -1,6 +1,6 @@
 @Remarks("Period Control")
 @Refby("0")
-type CPeriodcontrol {
+tx CPeriodcontrol {
 	!CPeriodcontrolId ID;
 	AdClientId ID;
 	AdOrgId ID;

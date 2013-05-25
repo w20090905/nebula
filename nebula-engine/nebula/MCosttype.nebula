@@ -4,7 +4,7 @@ type MCosttype {
 	!MCosttypeId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 };

@@ -1,6 +1,6 @@
 @Remarks("Personal Preference")
 @Refby("0")
-type AdPreference {
+tx AdPreference {
 	!AdPreferenceId ID;
 	AdClient;
 	AdOrg;

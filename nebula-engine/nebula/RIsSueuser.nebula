@@ -1,6 +1,6 @@
 @Remarks("User who reported issues")
 @Refby("2")
-type RIsSueuser {
+tx RIsSueuser {
 	!RIsSueuserId ID;
 	AdClientId ID;
 	AdOrgId ID;

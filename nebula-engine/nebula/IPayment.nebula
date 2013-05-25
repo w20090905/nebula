@@ -1,6 +1,6 @@
 @Remarks("Import Payment")
 @Refby("0")
-type IPayment {
+tx IPayment {
 	!IPaymentId ID;
 	?AdClientId ID;
 	?AdOrgId ID;

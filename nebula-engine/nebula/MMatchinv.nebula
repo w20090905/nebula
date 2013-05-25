@@ -1,6 +1,6 @@
 @Remarks("Match Shipment/Receipt to Invoice")
 @Refby("0")
-type MMatchinv {
+tx MMatchinv {
 	!MMatchinvId ID;
 	AdClientId ID;
 	AdOrgId ID;

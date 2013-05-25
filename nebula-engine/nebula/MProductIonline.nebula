@@ -1,6 +1,6 @@
 @Remarks("Document Line representing a production")
 @Refby("6")
-type MProductIonline {
+tx MProductIonline {
 	!MProductIonlineId ID;
 	AdClientId ID;
 	AdOrgId ID;

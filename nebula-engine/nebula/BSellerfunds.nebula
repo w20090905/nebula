@@ -1,6 +1,6 @@
 @Remarks("Seller Funds from Offers on Topics")
 @Refby("1")
-type BSellerfunds {
+tx BSellerfunds {
 	!BSellerfundsId ID;
 	AdClientId ID;
 	AdOrgId ID;

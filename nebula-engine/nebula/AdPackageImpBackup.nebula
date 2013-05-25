@@ -1,6 +1,6 @@
 @Remarks("AD_Package_Imp_Backup_ID")
 @Refby("0")
-type AdPackageImpBackup {
+tx AdPackageImpBackup {
 	!AdPackageImpBackupId ID;
 	AdClientId ID;
 	AdOrgId ID;

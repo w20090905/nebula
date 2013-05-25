@@ -43,7 +43,7 @@ type RvFactAcct {
 	Orgvalue Description;
 	Orgname Name;
 	Accountvalue Description;
-	Name;
+	*Name;
 	Accounttype Attr;
 	?BpartnerValue Description;
 	?Bpname Name;

@@ -5,7 +5,7 @@ type CCampaign {
 	AdClientId ID;
 	AdOrgId ID;
 	Value String;
-	Name;
+	*Name;
 	?Description;
 	?CChannel;
 	?Startdate Date;

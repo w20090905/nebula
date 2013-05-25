@@ -4,7 +4,7 @@ type AdArchive {
 	!AdArchiveId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	?AdTable;

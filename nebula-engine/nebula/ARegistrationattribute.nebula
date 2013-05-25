@@ -4,7 +4,7 @@ type ARegistrationattribute {
 	!ARegistrationattributeId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	Seqno SeqNo;/* 0  */
 	AdReference;

@@ -4,7 +4,7 @@ type AdReference {
 	!AdReferenceId ID;
 	AdClient;
 	AdOrg;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	ValidationType Attr;

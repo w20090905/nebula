@@ -1,6 +1,6 @@
 @Remarks("Chat")
 @Refby("2")
-type CmChat {
+tx CmChat {
 	!CmChatId ID;
 	AdClientId ID;
 	AdOrgId ID;

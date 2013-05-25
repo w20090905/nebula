@@ -4,7 +4,7 @@ type CmBroadcastserver {
 	!CmBroadcastserverId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	IpAddress String;

@@ -4,7 +4,7 @@ type BOffer {
 	!BOfferId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	BTopic;
 	AdUser BSeller;
 	IsWillingtocommit YesNo;/* 'Y'  */

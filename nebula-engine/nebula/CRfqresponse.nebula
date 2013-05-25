@@ -5,7 +5,7 @@ type CRfqresponse {
 	AdClientId ID;
 	AdOrgId ID;
 	CRfq;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	CBpartner;

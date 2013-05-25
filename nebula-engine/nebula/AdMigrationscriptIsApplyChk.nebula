@@ -6,7 +6,7 @@ type AdMigrationscriptIsApplyChk {
 	AdOrgId ID;
 	?Description;
 	?Developername Name;/* NULL */
-	Name;
+	*Name;
 	ProjectName Name;
 	?Reference Note;
 	ReleaseNo String;/* NULL */

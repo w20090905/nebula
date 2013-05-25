@@ -4,7 +4,7 @@ type CRfq {
 	!CRfqId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	CRfqTopic;

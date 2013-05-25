@@ -4,7 +4,7 @@ type AdImpformat {
 	!AdImpformatId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	AdTable;
 	FormAttype Attr;

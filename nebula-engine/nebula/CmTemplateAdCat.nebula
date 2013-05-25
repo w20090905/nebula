@@ -5,7 +5,7 @@ type CmTemplateAdCat {
 	!CmTemplate;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 };
 

@@ -4,7 +4,7 @@ type AdImage {
 	!AdImageId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?ImageUrl URL;
 	?Binarydata Note;
 	EntityType AdEntityType;/* 'D'  */

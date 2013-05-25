@@ -1,6 +1,6 @@
 @Remarks("System Message")
 @Refby("0")
-type AdMessageTrl {
+tx AdMessageTrl {
 	!AdMessage;
 	!AdLanguage;
 	AdClientId ID;

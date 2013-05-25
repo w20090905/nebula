@@ -4,7 +4,7 @@ type AdError {
 	!AdErrorId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Code Note;
 	?AdLanguage;
 };

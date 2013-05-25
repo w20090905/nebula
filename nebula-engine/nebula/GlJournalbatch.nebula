@@ -1,6 +1,6 @@
 @Remarks("General Ledger Journal Batch")
 @Refby("4")
-type GlJournalbatch {
+tx GlJournalbatch {
 	!GlJournalbatchId ID;
 	AdClientId ID;
 	AdOrgId ID;

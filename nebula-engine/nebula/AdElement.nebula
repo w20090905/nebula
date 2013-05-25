@@ -6,7 +6,7 @@ type AdElement {
 	AdOrgId ID;/* NULL */
 	Columnname Name;
 	EntityType AdEntityType;/* 'D'  */
-	Name;/* NULL */
+	*Name;/* NULL */
 	PrintName Name;
 	?Description;
 	?Help;

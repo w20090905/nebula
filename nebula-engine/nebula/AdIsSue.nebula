@@ -6,7 +6,7 @@ type AdIsSue {
 	AdOrgId ID;
 	ReleaseNo String;
 	Version Description;
-	Name;
+	*Name;
 	Username Name;
 	?SupportEmail Description;
 	?Dbaddress Name;

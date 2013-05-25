@@ -5,7 +5,7 @@ type RIsSuerecommendation {
  */
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 };

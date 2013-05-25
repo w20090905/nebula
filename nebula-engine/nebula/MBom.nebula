@@ -8,7 +8,7 @@ type MBom {
 	?MChangeNotice;
 	Bomtype Attr;
 	Bomuse YesNo;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	?Processing YesNo;

@@ -7,7 +7,7 @@ type AdPackageExp {
 	?AdPackageType String;
 	Email;
 	Instructions Note;
-	Name;
+	*Name;
 	?Processed YesNo;
 	ReleaseNo String;
 	Version String;

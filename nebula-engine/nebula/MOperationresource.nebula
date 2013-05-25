@@ -5,7 +5,7 @@ type MOperationresource {
 	AdClientId ID;
 	AdOrgId ID;
 	MProductOperation;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	?AAsset;

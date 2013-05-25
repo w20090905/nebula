@@ -1,6 +1,6 @@
 @Remarks("Data Replication Strategy Table Info")
 @Refby("1")
-type AdReplicationtable {
+tx AdReplicationtable {
 	!AdReplicationtableId ID;
 	AdClientId ID;
 	AdOrgId ID;

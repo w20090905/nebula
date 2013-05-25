@@ -4,7 +4,7 @@ type AdWorkbench {
 	!AdWorkbenchId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	AdColumn;

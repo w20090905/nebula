@@ -3,7 +3,7 @@
 type AdClient {
 	!AdClientId ID;
 	Value String;
-	Name;
+	*Name;
 	?Description;
 	?SmtpHost Host;
 	?RequestEmail Description;

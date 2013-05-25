@@ -1,6 +1,6 @@
 @Remarks("T_Transaction")
 @Refby("0")
-type TTransaction {
+tx TTransaction {
 	!AdPinstance;
 	!MTransaction;
 	AdClientId ID;

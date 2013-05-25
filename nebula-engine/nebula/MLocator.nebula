@@ -1,6 +1,6 @@
 @Remarks("Warehouse Locator")
 @Refby("14")
-type MLocator {
+tx MLocator {
 	!MLocatorId ID;
 	AdClient;
 	AdOrg;

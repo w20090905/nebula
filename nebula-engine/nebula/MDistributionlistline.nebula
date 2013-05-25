@@ -1,6 +1,6 @@
 @Remarks("Distribution List Line with Business Partner and Quantity/Percentage")
 @Refby("1")
-type MDistributionlistline {
+tx MDistributionlistline {
 	!MDistributionlistlineId ID;
 	AdClientId ID;
 	AdOrgId ID;

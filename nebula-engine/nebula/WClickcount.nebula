@@ -4,7 +4,7 @@ type WClickcount {
 	!WClickcountId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	Targeturl URL;
 	?CBpartner;

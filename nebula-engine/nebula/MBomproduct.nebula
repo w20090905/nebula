@@ -1,6 +1,6 @@
 @Remarks("Bill of Material Component (Product)")
 @Refby("0")
-type MBomproduct {
+tx MBomproduct {
 	!MBomproductId ID;
 	AdClientId ID;
 	AdOrgId ID;

@@ -1,6 +1,6 @@
 @Remarks("M_InventoryLineMA")
 @Refby("0")
-type MInventorylinema {
+tx MInventorylinema {
 	!MInventoryline;
 	!MAttributesetinstance;
 	AdClientId ID;

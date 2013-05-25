@@ -5,7 +5,7 @@ type AdProcess {
 	AdClientId ID;
 	AdOrgId ID;
 	Value String;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	AccessLevel Attr;

@@ -1,6 +1,6 @@
 @Remarks("Tax Declaration Document Information")
 @Refby("0")
-type CTaxDeclarationline {
+tx CTaxDeclarationline {
 	!CTaxDeclarationlineId ID;
 	AdClientId ID;
 	AdOrgId ID;

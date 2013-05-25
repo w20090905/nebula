@@ -4,7 +4,7 @@ type AdPrintColor {
 	!AdPrintColorId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	IsDefault YesNo;/* 'N'  */
 	Code Note;
 };

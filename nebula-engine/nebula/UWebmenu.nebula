@@ -4,7 +4,7 @@ type UWebmenu {
 	!UWebmenuId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	Menulink Note;
 	Module Description;
 	?Parentmenu UWebmenu;

@@ -4,7 +4,7 @@ type AdMenu {
 	!AdMenuId ID;
 	AdClient;
 	AdOrg;
-	Name;
+	*Name;
 	?Description;
 	IsSummary YesNo;/* 'N'  */
 	IsSotrx YesNo;/* 'Y'  */

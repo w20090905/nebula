@@ -1,6 +1,6 @@
 @Remarks("Index Stop")
 @Refby("0")
-type KIndexstop {
+tx KIndexstop {
 	!KIndexstopId ID;
 	AdClientId ID;
 	AdOrgId ID;

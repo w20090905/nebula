@@ -4,7 +4,7 @@ type KEntry {
 	!KEntryId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	KTopic;
 	Rating YesNo;
 	IsPublic YesNo;/* 'Y'  */

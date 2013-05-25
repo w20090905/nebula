@@ -5,7 +5,7 @@ type MProductTrl {
 	!AdLanguage;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;/* NULL */
+	*Name;/* NULL */
 	?DocumentNote Note;
 	IsTranslated YesNo;/* 'N'  */
 	?Description;

@@ -5,7 +5,7 @@ type CSalesRegion {
 	AdClientId ID;
 	AdOrgId ID;
 	Value String;
-	Name;
+	*Name;
 	?Description;
 	IsSummary YesNo;/* 'N'  */
 	IsDefault YesNo;/* 'N'  */

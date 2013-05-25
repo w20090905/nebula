@@ -4,7 +4,7 @@ type AdPrintForm {
 	!AdPrintFormId ID;
 	?AdClient;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?InvoicePrintFormat AdPrintFormat;
 	?OrderPrintFormat AdPrintFormat;

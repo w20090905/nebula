@@ -4,7 +4,7 @@ type RRequestType {
 	!RRequestTypeId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	IsDefault YesNo;/* 'N'  */
 	IsSelfservice YesNo;/* 'Y' */

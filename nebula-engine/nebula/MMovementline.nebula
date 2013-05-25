@@ -1,6 +1,6 @@
 @Remarks("Inventory Move document Line")
 @Refby("5")
-type MMovementline {
+tx MMovementline {
 	!MMovementlineId ID;
 	AdClientId ID;
 	AdOrgId ID;

@@ -4,7 +4,7 @@ type MPerpetualinv {
 	!MPerpetualinvId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	Noinventorycount Count;
 	Noproductcount Count;

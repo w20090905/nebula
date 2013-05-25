@@ -1,6 +1,6 @@
 @Remarks("Assigment to (transaction) Organization")
 @Refby("0")
-type COrgassignment {
+tx COrgassignment {
 	!COrgassignmentId ID;
 	AdClientId ID;
 	AdOrg;

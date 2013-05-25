@@ -4,7 +4,7 @@ type AdLdapProcessor {
 	!AdLdapProcessorId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	LdapPort Long;/* 0  */
 	?DateLastrun Date;

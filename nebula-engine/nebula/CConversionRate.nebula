@@ -1,6 +1,6 @@
 @Remarks("Rate used for converting currencies")
 @Refby("1")
-type CConversionRate {
+tx CConversionRate {
 	!CConversionRateId ID;
 	AdClient;
 	AdOrg;

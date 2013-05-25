@@ -5,7 +5,7 @@ type AdRefListTrl {
 	!AdLanguage;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	IsTranslated YesNo;/* 'N'  */
 };

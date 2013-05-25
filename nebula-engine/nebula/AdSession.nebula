@@ -1,6 +1,6 @@
 @Remarks("User Session Online or Web")
 @Refby("3")
-type AdSession {
+tx AdSession {
 	!AdSessionId ID;
 	AdClientId ID;
 	AdOrgId ID;

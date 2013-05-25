@@ -5,7 +5,7 @@ type CmMedia {
 	AdClientId ID;
 	AdOrgId ID;
 	?Mediatype Attr;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	IsSummary YesNo;/* 'N'  */

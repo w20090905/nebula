@@ -4,7 +4,7 @@ type CBankstatementmatcher {
 	!CBankstatementmatcherId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	ClassName Name;
 	Seqno SeqNo;

@@ -5,7 +5,7 @@ type AdFieldGroupTrl {
 	!AdLanguage;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	IsTranslated YesNo;/* 'N'  */
 };
 

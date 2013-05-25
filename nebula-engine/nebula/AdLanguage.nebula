@@ -2,7 +2,7 @@
 @Refby("48")
 type AdLanguage {
 	!AdLanguage String;
-	Name;
+	*Name;
 	?Languageiso Code;
 	?CountryCode Code;
 	IsBaselanguage YesNo;/* 'N'  */

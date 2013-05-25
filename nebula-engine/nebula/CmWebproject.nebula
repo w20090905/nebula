@@ -4,7 +4,7 @@ type CmWebproject {
 	!CmWebprojectId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	MetaCopyright Note;

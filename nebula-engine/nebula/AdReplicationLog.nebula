@@ -1,6 +1,6 @@
 @Remarks("Data Replication Log Details")
 @Refby("0")
-type AdReplicationLog {
+tx AdReplicationLog {
 	!AdReplicationLogId ID;
 	AdClientId ID;
 	AdOrgId ID;

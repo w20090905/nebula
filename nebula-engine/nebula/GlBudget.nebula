@@ -4,7 +4,7 @@ type GlBudget {
 	!GlBudgetId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	IsPrimary YesNo;/* 'Y'  */
 	?Budgetstatus Attr;

@@ -4,7 +4,7 @@ type WMailmsg {
 	!WMailmsgId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	WStore;
 	Mailmsgtype Attr;

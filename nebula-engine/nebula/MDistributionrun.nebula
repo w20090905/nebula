@@ -4,7 +4,7 @@ type MDistributionrun {
 	!MDistributionrunId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	IsCreateSingleorder YesNo;/* 'N'  */
 	?CBpartner;

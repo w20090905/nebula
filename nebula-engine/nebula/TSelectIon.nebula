@@ -1,6 +1,6 @@
 @Remarks("")
 @Refby("0")
-type TSelectIon {
+tx TSelectIon {
 	!AdPinstanceId ID;
 	!TSelectIonId ID;
 };

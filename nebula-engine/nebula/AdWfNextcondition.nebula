@@ -1,6 +1,6 @@
 @Remarks("Workflow Node Transition Condition")
 @Refby("0")
-type AdWfNextcondition {
+tx AdWfNextcondition {
 	!AdWfNextconditionId ID;
 	AdClientId ID;
 	AdOrgId ID;

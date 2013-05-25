@@ -4,7 +4,7 @@ type AdUser {
 	!AdUserId ID;
 	AdClient;
 	AdOrg;
-	Name;
+	*Name;
 	?Description;
 	?Password String;
 	?Email;
@@ -26,7 +26,7 @@ type AdUser {
 	?AdOrgtrx AdOrg;
 	?Emailverify Description;
 	?Emailverifydate Date;
-	Notificationtype Attr;/* 'E'  */
+	NotificationType Attr;/* 'E'  */
 	IsFullbpaccess YesNo;/* 'Y'  */
 	?CJob;
 	?LdapUser Description;

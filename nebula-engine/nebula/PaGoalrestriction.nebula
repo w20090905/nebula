@@ -4,7 +4,7 @@ type PaGoalrestriction {
 	!PaGoalrestrictionId ID;
 	AdClientId ID;
 	AdOrg;
-	Name;
+	*Name;
 	Goalrestrictiontype Attr;
 	PaGoal;
 	?CBpartner;

@@ -6,7 +6,7 @@ type CUomTrl {
 	AdClientId ID;
 	AdOrgId ID;
 	?Uomsymbol String;
-	Name;
+	*Name;
 	?Description;
 	IsTranslated YesNo;/* 'N'  */
 };

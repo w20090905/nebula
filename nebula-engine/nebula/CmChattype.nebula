@@ -4,7 +4,7 @@ type CmChattype {
 	!CmChattypeId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	AdTable;
 	?Moderationtype Attr;/* NULL   */

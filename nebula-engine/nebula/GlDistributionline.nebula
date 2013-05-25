@@ -1,6 +1,6 @@
 @Remarks("General Ledger Distribution Line")
 @Refby("0")
-type GlDistributionline {
+tx GlDistributionline {
 	!GlDistributionlineId ID;
 	AdClientId ID;
 	AdOrg;

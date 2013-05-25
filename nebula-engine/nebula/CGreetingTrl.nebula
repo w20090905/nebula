@@ -5,7 +5,7 @@ type CGreetingTrl {
 	!CGreeting;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Greeting Description;
 	IsTranslated YesNo;/* 'N'  */
 };

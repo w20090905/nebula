@@ -1,6 +1,6 @@
 @Remarks("AD_Package_Exp_Detail_ID")
 @Refby("0")
-type AdPackageExpDetail {
+tx AdPackageExpDetail {
 	!AdPackageExpDetailId ID;
 	AdClientId ID;
 	AdOrgId ID;

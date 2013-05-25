@@ -1,6 +1,6 @@
 @Remarks("Resource Unavailability")
 @Refby("0")
-type SResourceUnavailable {
+tx SResourceUnavailable {
 	!SResourceUnavailableId ID;
 	AdClientId ID;
 	AdOrgId ID;

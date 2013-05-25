@@ -1,6 +1,6 @@
 @Remarks("AD_Package_Imp_Proc_ID")
 @Refby("0")
-type AdPackageImpProc {
+tx AdPackageImpProc {
 	!AdPackageImpProcId ID;
 	AdClientId ID;
 	AdOrgId ID;

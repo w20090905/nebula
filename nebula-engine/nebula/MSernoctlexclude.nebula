@@ -1,6 +1,6 @@
 @Remarks("Exclude the ability to create Serial Numbers in Attribute Sets")
 @Refby("0")
-type MSernoctlexclude {
+tx MSernoctlexclude {
 	!MSernoctlexcludeId ID;
 	AdClientId ID;
 	AdOrgId ID;

@@ -6,7 +6,7 @@ type CmCstageTrl {
 	AdClientId ID;
 	AdOrgId ID;
 	IsTranslated YesNo;/* 'N'  */
-	Name;
+	*Name;
 	?Title String;
 	?MetaDescription Note;
 	?MetaKeywords Note;

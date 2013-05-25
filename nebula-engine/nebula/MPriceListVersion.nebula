@@ -4,7 +4,7 @@ type MPriceListVersion {
 	!MPriceListVersionId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	MPriceList;
 	MDiscountSchema;

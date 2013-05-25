@@ -5,7 +5,7 @@ type SExpensetype {
 	AdClientId ID;
 	AdOrgId ID;
 	Value String;
-	Name;
+	*Name;
 	?Description;
 	IsInvoiceD YesNo;/* 'Y'  */
 	CUom;

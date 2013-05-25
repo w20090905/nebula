@@ -4,7 +4,7 @@ type CPoskeylayout {
 	!CPoskeylayoutId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 };

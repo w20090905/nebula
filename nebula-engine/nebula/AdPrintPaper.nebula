@@ -4,7 +4,7 @@ type AdPrintPaper {
 	!AdPrintPaperId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	IsDefault YesNo;/* 'N'  */
 	IsLandscape YesNo;/* 'Y'  */

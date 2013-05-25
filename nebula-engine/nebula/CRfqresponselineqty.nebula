@@ -1,6 +1,6 @@
 @Remarks("Request for Quotation Response Line Quantity")
 @Refby("0")
-type CRfqresponselineqty {
+tx CRfqresponselineqty {
 	!CRfqresponselineqtyId ID;
 	AdClientId ID;
 	AdOrgId ID;

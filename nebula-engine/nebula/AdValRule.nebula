@@ -4,7 +4,7 @@ type AdValRule {
 	!AdValRuleId ID;
 	AdClient;
 	AdOrg;
-	Name;
+	*Name;
 	?Description;
 	?Type Attr;/* NULL */
 	?Code Note;

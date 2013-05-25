@@ -4,7 +4,7 @@ type RvProductCosting {
 	MProductId ID;
 	CAcctschemaId ID;
 	Value String;
-	Name;
+	*Name;
 	MProductCategoryId ID;
 	AdClientId ID;
 	AdOrgId ID;

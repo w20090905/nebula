@@ -7,7 +7,7 @@ type RvWarehouseprice {
 	MPriceListVersionId ID;
 	MWarehouseId ID;
 	Value String;
-	Name;
+	*Name;
 	?Upc UPC;
 	?Sku String;
 	CUomId ID;

@@ -4,7 +4,7 @@ type CDoctype {
 	!CDoctypeId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	PrintName Name;
 	?Description;
 	Docbasetype Attr;

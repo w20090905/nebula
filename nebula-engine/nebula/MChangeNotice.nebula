@@ -4,7 +4,7 @@ type MChangeNotice {
 	!MChangeNoticeId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	?Detailinfo Note;

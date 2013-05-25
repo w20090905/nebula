@@ -5,7 +5,7 @@ type AdElementTrl {
 	!AdLanguage;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	PrintName Name;
 	?Description;
 	?Help;

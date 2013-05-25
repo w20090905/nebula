@@ -1,6 +1,6 @@
 @Remarks("Invoice Payment Schedule")
 @Refby("1")
-type CInvoicePayschedule {
+tx CInvoicePayschedule {
 	!CInvoicePayscheduleId ID;
 	AdClientId ID;
 	AdOrgId ID;

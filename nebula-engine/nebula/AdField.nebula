@@ -4,7 +4,7 @@ type AdField {
 	!AdFieldId ID;
 	AdClient;
 	AdOrg;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	IsCentrallyMaintained YesNo;/* 'Y'

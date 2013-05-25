@@ -4,7 +4,7 @@ type MShipper {
 	!MShipperId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?CBpartner;
 	?Trackingurl URL;

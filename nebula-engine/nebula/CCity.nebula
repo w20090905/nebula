@@ -4,7 +4,7 @@ type CCity {
 	!CCityId ID;
 	AdClient;
 	AdOrg;
-	Name;
+	*Name;
 	?Locode Code;
 	?Coordinates Code;
 	?PostAl Code;

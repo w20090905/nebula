@@ -4,7 +4,7 @@ type CRegion {
 	!CRegionId ID;
 	AdClient;
 	AdOrg;
-	Name;
+	*Name;
 	?Description;
 	CCountry;
 	?IsDefault YesNo;/* 'N'

@@ -1,6 +1,6 @@
 @Remarks("Freight Rate")
 @Refby("0")
-type MFreight {
+tx MFreight {
 	!MFreightId ID;
 	AdClientId ID;
 	AdOrgId ID;

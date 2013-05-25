@@ -1,6 +1,6 @@
 @Remarks("The detail content of the Package")
 @Refby("0")
-type MPackageline {
+tx MPackageline {
 	!MPackagelineId ID;
 	AdClientId ID;
 	AdOrgId ID;

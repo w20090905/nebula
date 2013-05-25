@@ -1,6 +1,6 @@
 @Remarks("Include Subscriber only for certain products or product categories")
 @Refby("0")
-type CRfqTopicsubscriberonly {
+tx CRfqTopicsubscriberonly {
 	!CRfqTopicsubscriberonlyId ID;
 	AdClientId ID;
 	AdOrgId ID;

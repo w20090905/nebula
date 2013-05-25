@@ -4,7 +4,7 @@ type GlDistribution {
 	!GlDistributionId ID;
 	AdClientId ID;
 	AdOrg;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	?PostIngtype Attr;

@@ -5,7 +5,7 @@ type CBankstatement {
 	AdClientId ID;
 	AdOrgId ID;
 	CBankaccount;
-	Name;
+	*Name;
 	?Description;
 	IsManual YesNo;/* 'Y'  */
 	Statementdate Date;

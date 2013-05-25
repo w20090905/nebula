@@ -4,7 +4,7 @@ type PaMeasure {
 	!PaMeasureId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	Measuretype Attr;
 	?Manualactual Number;

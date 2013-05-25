@@ -1,6 +1,6 @@
 @Remarks("Project Issues (Material, Labor)")
 @Refby("5")
-type CProjectIssue {
+tx CProjectIssue {
 	!CProjectIssueId ID;
 	AdClientId ID;
 	AdOrgId ID;

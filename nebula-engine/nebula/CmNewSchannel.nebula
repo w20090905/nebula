@@ -4,7 +4,7 @@ type CmNewSchannel {
 	!CmNewSchannelId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	Description;
 	?Help;
 	?AdLanguage;

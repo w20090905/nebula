@@ -14,7 +14,7 @@ type CDunningLevel {
 	ChargeFee YesNo;/* 'Y'  */
 	?FeeAmt Amount;/* 0 */
 	?DunningPrintFormat AdPrintFormat;
-	Name;/* 'x'  */
+	*Name;/* 'x'  */
 	?Description;
 	IsShowAlldue YesNo;/* 'N'  */
 	IsShowNotdue YesNo;/* 'N'  */

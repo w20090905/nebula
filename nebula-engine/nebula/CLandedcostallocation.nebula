@@ -1,6 +1,6 @@
 @Remarks("Landed Cost Allocation")
 @Refby("0")
-type CLandedcostallocation {
+tx CLandedcostallocation {
 	!CLandedcostallocationId ID;
 	AdClientId ID;
 	AdOrgId ID;

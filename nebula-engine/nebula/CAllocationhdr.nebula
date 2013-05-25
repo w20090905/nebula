@@ -1,6 +1,6 @@
 @Remarks("Payment allocation")
 @Refby("1")
-type CAllocationhdr {
+tx CAllocationhdr {
 	!CAllocationhdrId ID;
 	AdClientId ID;
 	AdOrgId ID;

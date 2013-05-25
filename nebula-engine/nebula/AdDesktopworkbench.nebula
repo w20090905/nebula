@@ -1,6 +1,6 @@
 @Remarks("Desktop Workbench")
 @Refby("0")
-type AdDesktopworkbench {
+tx AdDesktopworkbench {
 	!AdDesktopworkbenchId ID;
 	AdClientId ID;
 	AdOrgId ID;

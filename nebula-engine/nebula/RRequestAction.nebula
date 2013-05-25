@@ -1,6 +1,6 @@
 @Remarks("Request History")
 @Refby("0")
-type RRequestAction {
+tx RRequestAction {
 	!RRequestActionId ID;
 	AdClientId ID;
 	AdOrgId ID;

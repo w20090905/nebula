@@ -5,7 +5,7 @@ type RvCostsummary {
 	AdOrgId ID;
 	MProductId ID;
 	Value String;
-	Name;
+	*Name;
 	?Upc UPC;
 	IsBom YesNo;
 	ProductType Attr;

@@ -4,7 +4,7 @@ type PaHierarchy {
 	!PaHierarchyId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?Description;
 	?Help;
 	AdTreeOrg AdTree;

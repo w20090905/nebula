@@ -1,6 +1,6 @@
 @Remarks("Shipment Package")
 @Refby("1")
-type MPackage {
+tx MPackage {
 	!MPackageId ID;
 	AdClientId ID;
 	AdOrgId ID;

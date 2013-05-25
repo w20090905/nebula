@@ -4,7 +4,7 @@ type CPaymentBatch {
 	!CPaymentBatchId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	?CPaymentProcessor;
 	?DocumentNo Long;
 	?Processingdate Date;

@@ -1,6 +1,6 @@
 @Remarks("Workflow Activity")
 @Refby("2")
-type AdWfActivity {
+tx AdWfActivity {
 	!AdWfActivityId ID;
 	AdClientId ID;
 	AdOrgId ID;

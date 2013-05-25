@@ -4,7 +4,7 @@ type AdSystem {
 	!AdSystemId ID;
 	!AdClientId ID;
 	AdOrgId ID;
-	Name;
+	*Name;
 	Username Name;
 	?Info Description;
 	?Version String;
