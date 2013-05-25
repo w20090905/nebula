@@ -9,6 +9,14 @@ function AppControl($scope, $cookies, $location) {
 	$scope.LoginUserID = $cookies.LoginUserID;
 }
 
+function PaginationCtrl($scope){
+    $scope.currentPage = 1;
+    $scope.pageSize = 50;
+    $scope.$setCurrentPage = function(cur){
+    	$scope.currentPage = cur;
+    }
+} 
+
 function TypeQuickEditCtrl($scope, $resource, $routeParams, $location) {
 
 	'use strict';
