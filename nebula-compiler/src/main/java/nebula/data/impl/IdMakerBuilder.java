@@ -97,7 +97,7 @@ public class IdMakerBuilder {
 
 		@Override
 		public String apply(Entity entity) {
-			return (String) entity.get(key1);
+			return (String) entity.get(key1).toString();
 		}
 	}
 
