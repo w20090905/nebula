@@ -1,9 +1,0 @@
-@Package("Application Dictionary") type  Org{  
-Client;
-!Name;
-Description;
-?Isactive YesNo;
-?Issummary YesNo;
-?Isvalid YesNo;
-?Value String;
-};

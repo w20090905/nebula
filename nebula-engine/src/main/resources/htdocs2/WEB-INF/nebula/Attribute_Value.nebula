@@ -1,6 +1,0 @@
-@Package("Application Dictionary") type  Attribute_Value{  
-!Attribute;
-V_Date Date;
-V_Number Number;
-V_String Note;
-}; 

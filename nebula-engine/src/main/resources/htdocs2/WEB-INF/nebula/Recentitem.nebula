@@ -1,8 +1,0 @@
-@Package("Application Dictionary") type  Recentitem{  
-Created Timestamp;
-Createdby ID;
-Isactive YesNo;
-!Name;
-Updated Timestamp;
-Updatedby Date;
-}; 
