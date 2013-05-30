@@ -64,12 +64,23 @@
 
 [#macro popupBox field pField id ngModel placeholder key=false required=true readonly=false] [#-- // TODO Need Refact --]
 	[#assign optRequired][#if required] required[/#if][/#assign]
-		<input type="text" id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"
-				readonly ${optRequired}
+		[#assign beforePopup][/#assign]
+		[#assign afterPopup][/#assign]
+		[#assign showValue][/#assign]
+	[#list field.type.fields as in2f][#t]
+		[#if !in2f.array && in2f.refer == "ByVal"
+				&& (in2f.key || in2f.core)]												
+				[#assign beforePopup]${beforePopup} ${in2f.name}=${ngModel}.${in2f.name};[/#assign]
+				[#assign afterPopup]${afterPopup} ${ngModel}.${in2f.name}=ret.${in2f.name};[/#assign]
+				[#assign showValue]${showValue} {{${ngModel}.${in2f.name}}}&nbsp;[/#assign]
+		[/#if]
+	[/#list]
+	
+		<div id="${id}"  class="uneditable-input" placeholder="${placeholder}"
 				x-popup="/d/${pField.type.name}/" 
-				x-beforePopup="${field.name}=${ngModel}" 
-				x-afterPopup="${ngModel}=ret.${field.name}"
-			/>
+				x-beforePopup="${beforePopup}"
+				x-afterPopup="${afterPopup}"
+			>${showValue}</div>
 [/#macro]
 
 <article class="module width_full">
@@ -156,17 +167,8 @@
 			<div class="control-group">
 				<label class="control-label" for="${of.name}${in1f.name}">${in1f.name}</label>
 				<div class="controls">
-									[#list in1f.type.fields as in2f][#t]
-										[#if !in2f.array && in2f.refer == "ByVal"
-												&& (in2f.key || in2f.core)]
-					[@popupBox field=in2f pField=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"
-						readonly=true required=!(of.ignorable || in1f.ignorable || in2f.ignorable)/]		
-						
-						
-			[#--input type="hidden" x-ng-model="data'field.name}{rF.name}'"/>{{data'{field.name}{rF.name}'}}--]			
-									
-										[/#if] 
-									[/#list]
+					[@popupBox field=in1f pField=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name} ${in1f.name}"
+						readonly=true required=!(of.ignorable || in1f.ignorable)/]		
 				</div>
 			</div>
 									[#break]
@@ -225,18 +227,14 @@
 					</fieldset>
 						[#break]
 					[#case "ByRef"] <!--  Type A3   -->
-					[#case "Cascade"] <!--  Type A4   -->
-						[#list of.type.fields as in1f][#t]
-							[#if !in1f.array && in1f.refer == "ByVal" && (in1f.key || in1f.core)]									
+					[#case "Cascade"] <!--  Type A4   -->							
 			<div class="control-group">
-				<label class="control-label" for="${of.name}${in1f.name}">${of.name} ${in1f.name}</label>
+				<label class="control-label" for="${of.name}">${of.name}</label>
 				<div class="controls">
-					[@popupBox field=in1f pField=of id="${of.name}${in1f.name}" ngModel="data.${of.name}${in1f.name}" placeholder="${of.name} ${in1f.name}"
-						key=(of.key && in1f.key) readonly=true required=!(of.ignorable || in1f.ignorable)/]
+					[@popupBox field=of pField=of id="${of.name}" ngModel="data.${of.name}"  placeholder="${of.name}"
+						key=(of.key) readonly=true required=!(of.ignorable)/]
 				</div>
 			</div>
-							[/#if] 
-						[/#list]
 						[#break]
 					[/#switch]
 				[#else] <!--  数组不可以是Key   -->

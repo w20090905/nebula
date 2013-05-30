@@ -1,0 +1,4 @@
+@MaxLength(20)
+@Desc("版本号")
+define Version extends String {
+};

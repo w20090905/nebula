@@ -1,0 +1,3 @@
+@MaxLength(1200)
+define Summary|zh:简述  extends Text {
+};

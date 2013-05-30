@@ -1,0 +1,7 @@
+type User{
+  !Name;
+  ?Description;
+  Password;
+  EMail;
+  ?Note;
+};

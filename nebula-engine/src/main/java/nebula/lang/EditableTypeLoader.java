@@ -12,26 +12,29 @@ import org.antlr.runtime.RecognitionException;
 
 import util.FileUtil;
 
+import com.google.common.collect.Lists;
+
 public class EditableTypeLoader extends TypeLoader {
-	final File root;
+	final List<File> paths;
 
 	public EditableTypeLoader(TypeLoader parent, File root) {
 		super(parent);
-		this.root = root;
-		this.loadFolder(root);
+		this.paths = Lists.newCopyOnWriteArrayList();
+		this.paths.add(root);
+		this.doLoadFolder(root, root);
 	}
 
-	public void loadFolder(File root) {
+	public void loadFolder(File folder) {
+		this.paths.add(0, folder);
 		if (log.isDebugEnabled()) {
-			log.debug("load type define from folder - " + root.getPath());
+			log.debug("load type define from folder - " + folder.getPath());
 		}
-		loadFolder(root, root);
+		doLoadFolder(folder, folder);
 	}
 
-	private void loadFolder(File root, File d) {
+	private void doLoadFolder(File root, File d) {
 		try {
-			if (!d.exists() || !d.isDirectory())
-				return;
+			if (!d.exists() || !d.isDirectory()) return;
 
 			for (File f : d.listFiles()) {
 				if (f.isFile() && f.getName().endsWith(".nebula")) {
@@ -40,7 +43,7 @@ public class EditableTypeLoader extends TypeLoader {
 					}
 					this.defineNebula(f.toURI().toURL());
 				} else if (f.isDirectory()) {
-					loadFolder(root, f);
+					doLoadFolder(root, f);
 				}
 			}
 		} catch (Exception e) {
@@ -65,26 +68,26 @@ public class EditableTypeLoader extends TypeLoader {
 		}
 		return typeList;
 	}
-	
+
 	@Override
-	public Type update(Type oldType,String newCode) {
+	public Type update(Type oldType, String newCode) {
 		try {
 			List<Type> newTypes = tryDefineNebula(new StringReader(newCode));
-			
+
 			File file;
 			if (oldType == null) {
 				String name = newTypes.get(0).getName();
-				file = new File(root, name + ".nebula");
+				file = new File(paths.get(0), name + ".nebula");
 			} else {
 				assert oldType.getName().equals(newTypes.get(0).getName());
-				
+
 				oldType = this.findType(oldType.getName());
 				if (!oldType.mutable) {
 					throw new RuntimeException("Cannot edit");
 				}
 
 				if (oldType.getTypeLoader() != this) {
-					return oldType.getTypeLoader().update(oldType,newCode);
+					return oldType.getTypeLoader().update(oldType, newCode);
 				}
 
 				URL url = oldType.url;
@@ -106,10 +109,10 @@ public class EditableTypeLoader extends TypeLoader {
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		} catch (RecognitionException e) {
-			log.error(e.getClass().getName(),e);
+			log.error(e.getClass().getName(), e);
 			throw new RuntimeException(e);
 		} catch (IOException e) {
-			log.error(e.getClass().getName(),e);
+			log.error(e.getClass().getName(), e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -117,8 +120,18 @@ public class EditableTypeLoader extends TypeLoader {
 	@Override
 	protected URL loadClassData(String name) {
 		try {
-			File file = new File(root, name.replace('.', '/') + ".nebula");
-			return file.toURI().toURL();
+			File file = null;
+			for (File path : this.paths) {
+				file = new File(path, name.replace('.', '/') + ".nebula");
+				if (file.exists()) {
+					break;
+				}
+			}
+			if (file != null) {
+				return file.toURI().toURL();
+			} else {
+				return null;
+			}
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}

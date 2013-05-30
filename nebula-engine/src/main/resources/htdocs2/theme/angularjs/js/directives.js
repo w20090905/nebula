@@ -120,10 +120,12 @@ var neFromListDirective = [
 		function($http, $templateCache, $route, $anchorScroll, $compile,
 				$controller, $interpolate) {
 	return {
-		require : 'ngModel',
 		restrict : 'A',
-		terminal : true,
-		link : function(scope, element, attrs, ngModelCtrl) {
+		terminal : false,
+	    replace: true,
+	    transclude: true,
+		template: '<div ng-transclude></div>',
+		link : function(scope, element, attrs) {
 			var reqUrl = attrs.popup;
 			var beforePopupExp = attrs.beforepopup || '';
 			var afterPopupExp = attrs.afterpopup || '';

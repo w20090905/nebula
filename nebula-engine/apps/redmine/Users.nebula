@@ -1,8 +1,8 @@
 @Remarks("")
 @Refby("0")
-tx Users {
+type Users {
 	!Id ID;
-	Login String;
+	*Login String;
 	HashedPassword Password;
 	Firstname FirstName;
 	Lastname LastName;
@@ -16,7 +16,6 @@ tx Users {
 	?UpdatedOn Datetime;
 	?Type Attr;
 	?IdentityUrl Url;
-	MailNotification String;
+	MailNotification YesNo;
 	?Salt String;
 };
-

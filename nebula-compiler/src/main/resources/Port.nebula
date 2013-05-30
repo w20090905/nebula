@@ -1,0 +1,2 @@
+define Port extends Long {
+};

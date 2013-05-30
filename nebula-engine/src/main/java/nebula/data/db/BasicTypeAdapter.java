@@ -156,6 +156,10 @@ class DbTimestampTypeAdapter extends BasicTypeAdapter<Long> {
 
 	@Override
 	public void writeTo(int index, Object v, PreparedStatement res) throws Exception {
+		if(v!=null){
 		res.setTimestamp(index, new Timestamp((Long) v));
+		}else{
+			res.setTimestamp(index, null);
+		}
 	}
 }

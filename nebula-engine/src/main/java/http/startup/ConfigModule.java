@@ -78,7 +78,8 @@ public class ConfigModule extends AbstractModule {
 				throw new RuntimeException("cannot find " + PATH_OF_ROOT);
 			}
 
-			EditableTypeLoader typeLoader = new EditableTypeLoader(new SystemTypeLoader(), new File("nebula"));
+			EditableTypeLoader typeLoader = new EditableTypeLoader(new SystemTypeLoader(), new File("apps/system"));
+			typeLoader.loadFolder(new File("apps/redmine"));
 
 			this.bind(EditableTypeLoader.class).toInstance(typeLoader);
 			this.bind(TypeLoader.class).toInstance(typeLoader);

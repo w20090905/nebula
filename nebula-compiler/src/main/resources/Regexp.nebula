@@ -1,0 +1,3 @@
+@MaxLength(256)
+define Regexp extends String {
+};

@@ -8,7 +8,7 @@ tx Issues {
 	?Description;
 	?DueDate Date;
 	?CategoryId ID;
-	StatusId ID;/* 0 */
+	Status IssueStatuses;/* 0 */
 	?AssignedToId ID;
 	PriorityId ID;/* 0 */
 	?FixedVersionId ID;
@@ -25,4 +25,3 @@ tx Issues {
 	?Rgt Count;
 	IsPrivate YesNo;/* 0 */
 };
-

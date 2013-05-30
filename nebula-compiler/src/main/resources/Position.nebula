@@ -1,0 +1,2 @@
+define Position extends Long {
+};

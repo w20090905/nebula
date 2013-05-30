@@ -1,0 +1,3 @@
+@MaxLength(65534)
+define Content extends String {
+};
