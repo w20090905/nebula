@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Members {
+	!Id ID;
+	UserId Users;/* 0 */
+	ProjectId Projects;/* 0 */
+	?CreateDOn Datetime;
+	MailNotification YesNo;/* 0 */
+};
+

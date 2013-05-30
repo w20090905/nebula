@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Workflows {
+	!Id ID;
+	TrackerId Trackers;/* 0 */
+	OldStatusId ID;/* 0 */
+	NewStatusId ID;/* 0 */
+	RoleId Roles;/* 0 */
+	Assignee YesNo;/* 0 */
+	Author YesNo;/* 0 */
+};
+

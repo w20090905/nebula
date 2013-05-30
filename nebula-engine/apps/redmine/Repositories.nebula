@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx Repositories {
+	!Id ID;
+	ProjectId Projects;/* 0 */
+	Url;
+	?Login String;
+	?Password;
+	?RootUrl Url;
+	?Type Attr;
+	?PathEncoding String;
+	?LogEncoding String;
+	?ExtraInfo Note;
+	?Identifier String;
+	?IsDefault YesNo;/* 0 */
+};
+

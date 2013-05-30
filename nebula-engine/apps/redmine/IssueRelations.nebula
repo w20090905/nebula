@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx IssueRelations {
+	!Id ID;
+	IsSueFromId ID;
+	IsSueToId ID;
+	RelationType Attr;
+	?Delay Count;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Comments {
+	!Id ID;
+	CommentedType Attr;
+	CommentedId ID;/* 0 */
+	AuthorId ID;/* 0 */
+	?Comments Note;
+	CreateDOn Datetime;
+	UpdatedOn Datetime;
+};
+

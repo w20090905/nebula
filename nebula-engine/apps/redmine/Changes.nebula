@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Changes {
+	!Id ID;
+	ChangeSetId Changesets;
+	Action String;
+	Path;
+	?FromPath Path;
+	?FromRevision String;
+	?Revision;
+	?Branch String;
+};
+

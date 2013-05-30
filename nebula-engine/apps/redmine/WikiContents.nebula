@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx WikiContents {
+	!Id ID;
+	PageId ID;
+	?AuthorId ID;
+	?Text;
+	?Comments Note;
+	UpdatedOn Datetime;
+	Version;
+};
+

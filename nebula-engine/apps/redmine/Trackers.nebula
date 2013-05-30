@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type Trackers {
+	!Id ID;
+	*Name;
+	IsInChlog YesNo;/* 0 */
+	?Position;/* 1 */
+	IsInRoadmap YesNo;/* 1 */
+};
+

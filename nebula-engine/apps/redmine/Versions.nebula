@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+type Versions {
+	!Id ID;
+	ProjectId Projects;/* 0 */
+	*Name;
+	?Description;
+	?EffectiveDate Date;
+	?CreateDOn Datetime;
+	?UpdatedOn Datetime;
+	?WikiPageTitle Title;
+	?Status;/* open */
+	Sharing String;/* none */
+};
+

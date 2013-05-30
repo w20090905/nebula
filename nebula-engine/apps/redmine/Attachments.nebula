@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx Attachments {
+	!Id ID;
+	?ContainerId ID;
+	?ContainerType Attr;
+	Filename;
+	DiskFilename FileName;
+	FileSize;/* 0 */
+	?ContentType Attr;
+	Digest String;
+	Downloads Count;/* 0 */
+	AuthorId ID;/* 0 */
+	?CreateDOn Datetime;
+	?Description;
+};
+

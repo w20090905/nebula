@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx WikiPages {
+	!Id ID;
+	WikiId Wikis;
+	Title;
+	CreateDOn Datetime;
+	Protected YesNo;/* 0 */
+	?ParentId ID;
+};
+

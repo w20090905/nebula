@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx JournalDetails {
+	!Id ID;
+	JournalId Journals;/* 0 */
+	Property String;
+	PropKey String;
+	?OldValue String;
+	?Value String;
+};
+

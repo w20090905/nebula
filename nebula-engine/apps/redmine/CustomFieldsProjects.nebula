@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("0")
+type CustomFieldsProjects {
+	CustomFieldId CustomFields;/* 0 */
+	ProjectId Projects;/* 0 */
+};
+

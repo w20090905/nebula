@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx Messages {
+	!Id ID;
+	BoardId Boards;
+	?ParentId ID;
+	Subject;
+	?Content;
+	?AuthorId ID;
+	RepliesCount Count;/* 0 */
+	?LastReplyId ID;
+	CreateDOn Datetime;
+	UpdatedOn Datetime;
+	?Locked YesNo;/* 0 */
+	?Sticky Count;/* 0 */
+};
+

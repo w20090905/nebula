@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx News {
+	!Id ID;
+	?ProjectId Projects;
+	Title;
+	?Summary;
+	?Description;
+	AuthorId ID;/* 0 */
+	?CreateDOn Datetime;
+	CommentsCount Count;/* 0 */
+};
+

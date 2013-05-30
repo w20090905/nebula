@@ -339,7 +339,7 @@ public class ImportDataDefine {
 					  				     + "NAICS     NAICS "
 					  				     + "NAME     Name "
 					  				     + "NOTE     Note "
-					  				     + "PASSWORD     String "
+					  				     + "PASSWORD     Password "
 					  				     + "PHONE     PhoneNumber "
 					  				     + "PHONE2     PhoneNumber "
 					  				     + "PIN     PIN "

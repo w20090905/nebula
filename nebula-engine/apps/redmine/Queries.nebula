@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+type Queries {
+	!Id ID;
+	?ProjectId Projects;
+	*Name;
+	?Filters Note;
+	UserId Users;/* 0 */
+	IsPublic YesNo;/* 0 */
+	?ColumnNames Note;
+	?SortCriteria Note;
+	?GroupBy String;
+};
+

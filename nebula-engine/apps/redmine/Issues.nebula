@@ -1,0 +1,28 @@
+@Remarks("")
+@Refby("0")
+tx Issues {
+	!Id ID;
+	TrackerId Trackers;/* 0 */
+	ProjectId Projects;/* 0 */
+	Subject;
+	?Description;
+	?DueDate Date;
+	?CategoryId ID;
+	StatusId ID;/* 0 */
+	?AssignedToId ID;
+	PriorityId ID;/* 0 */
+	?FixedVersionId ID;
+	AuthorId ID;/* 0 */
+	LockVersion Count;/* 0 */
+	?CreateDOn Datetime;
+	?UpdatedOn Datetime;
+	?StartDate Date;
+	DoneRatio Ratio;/* 0 */
+	?EstimatedHours Number;
+	?ParentId ID;
+	?RootId ID;
+	?Lft Count;
+	?Rgt Count;
+	IsPrivate YesNo;/* 0 */
+};
+

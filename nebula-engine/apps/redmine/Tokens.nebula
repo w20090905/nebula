@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Tokens {
+	!Id ID;
+	UserId Users;/* 0 */
+	Action String;
+	Value String;
+	CreateDOn Datetime;
+};
+

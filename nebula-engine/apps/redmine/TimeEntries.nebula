@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+tx TimeEntries {
+	!Id ID;
+	ProjectId Projects;
+	UserId Users;
+	?IsSueId Issues;
+	Hours Number;
+	?Comments Note;
+	ActivityId ID;
+	SpentOn Date;
+	Tyear Count;
+	Tmonth Count;
+	Tweek Count;
+	CreateDOn Datetime;
+	UpdatedOn Datetime;
+};
+

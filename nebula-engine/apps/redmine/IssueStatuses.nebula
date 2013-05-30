@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type IssueStatuses {
+	!Id ID;
+	*Name;
+	IsClosed YesNo;/* 0 */
+	IsDefault YesNo;/* 0 */
+	?Position;/* 1 */
+	?DefaultDoneRatio Ratio;
+};
+

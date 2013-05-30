@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx WikiRedirects {
+	!Id ID;
+	WikiId Wikis;
+	?Title;
+	?RedirectsTo Url;
+	CreateDOn Datetime;
+};
+

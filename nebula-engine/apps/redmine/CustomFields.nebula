@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+type CustomFields {
+	!Id ID;
+	Type Attr;
+	*Name;
+	FieldFormAt String;
+	?PossibleValueS Note;
+	?Regexp;
+	MinLength Length;/* 0 */
+	MaxLength Length;/* 0 */
+	IsRequired YesNo;/* 0 */
+	IsForAll YesNo;/* 0 */
+	IsFilter YesNo;/* 0 */
+	?Position;/* 1 */
+	?Searchable YesNo;/* 0 */
+	?DefaultValue String;
+	?Editable YesNo;/* 1 */
+	Visible YesNo;/* 1 */
+	?Multiple YesNo;/* 0 */
+};
+

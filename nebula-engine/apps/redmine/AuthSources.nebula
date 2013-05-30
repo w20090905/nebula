@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+type AuthSources {
+	!Id ID;
+	Type Attr;
+	*Name;
+	?Host;
+	?Port;
+	?Account;
+	?AccountPassword Password;
+	?BaseDn String;
+	?AttrLogin String;
+	?AttrFirstname FirstName;
+	?AttrLastname LastName;
+	?AttrMail EMail;
+	OntheflyRegister YesNo;/* 0 */
+	Tls YesNo;/* 0 */
+	?Filter String;
+};
+

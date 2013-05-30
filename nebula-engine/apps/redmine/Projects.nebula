@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+type Projects {
+	!Id ID;
+	*Name;
+	?Description;
+	?Homepage Url;
+	IsPublic YesNo;/* 1 */
+	?ParentId ID;
+	?CreateDOn Datetime;
+	?UpdatedOn Datetime;
+	?Identifier String;
+	Status;/* 1 */
+	?Lft Count;
+	?Rgt Count;
+};
+

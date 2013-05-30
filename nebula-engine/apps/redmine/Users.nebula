@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+tx Users {
+	!Id ID;
+	Login String;
+	HashedPassword Password;
+	Firstname FirstName;
+	Lastname LastName;
+	Mail EMail;
+	Admin YesNo;/* 0 */
+	Status;/* 1 */
+	?LastLoginOn Datetime;
+	?Language String;
+	?AuthSourceId AuthSources;
+	?CreateDOn Datetime;
+	?UpdatedOn Datetime;
+	?Type Attr;
+	?IdentityUrl Url;
+	MailNotification String;
+	?Salt String;
+};
+

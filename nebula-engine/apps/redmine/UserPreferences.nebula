@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx UserPreferences {
+	!Id ID;
+	UserId Users;/* 0 */
+	?OtherS Note;
+	?HideMail YesNo;/* 0 */
+	?TimeZone String;
+};
+

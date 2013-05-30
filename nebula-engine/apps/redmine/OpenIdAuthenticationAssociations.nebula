@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx OpenIdAuthenticationAssociations {
+	!Id ID;
+	?IsSued Count;
+	?Lifetime Count;
+	?Handle String;
+	?AssocType Attr;
+	?ServerUrl Note;
+	?Secret Note;
+};
+

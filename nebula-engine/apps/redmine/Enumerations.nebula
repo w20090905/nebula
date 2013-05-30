@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+type Enumerations {
+	!Id ID;
+	*Name;
+	?Position;/* 1 */
+	IsDefault YesNo;/* 0 */
+	?Type Attr;
+	Active YesNo;/* 1 */
+	?ProjectId Projects;
+	?ParentId ID;
+};
+

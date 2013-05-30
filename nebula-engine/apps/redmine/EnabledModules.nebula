@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+type EnabledModules {
+	!Id ID;
+	?ProjectId Projects;
+	*Name;
+};
+

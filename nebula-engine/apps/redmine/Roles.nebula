@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type Roles {
+	!Id ID;
+	*Name;
+	?Position;/* 1 */
+	?Assignable YesNo;/* 1 */
+	Builtin Count;/* 0 */
+	?Permissions Note;
+	IsSuesVisibility String;/* default */
+};
+

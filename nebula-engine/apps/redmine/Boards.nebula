@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+type Boards {
+	!Id ID;
+	ProjectId Projects;
+	*Name;
+	?Description;
+	?Position;/* 1 */
+	TopicsCount Count;/* 0 */
+	MessagesCount Count;/* 0 */
+	?LastMessageId ID;
+};
+
