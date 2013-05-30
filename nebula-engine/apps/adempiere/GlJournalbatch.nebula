@@ -1,0 +1,57 @@
+@Remarks("General Ledger Journal Batch")
+@Refby("4")
+tx GlJournalbatch {
+	@Remarks("General Ledger Journal Batch")
+	!GlJournalbatchId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Document sequence number of the document")
+	DocumentNo Code;
+	@Remarks("Optional short description of the record")
+	Description;
+	@Remarks("The type of posted amount for the transaction")
+	PostIngtype Attr;
+	@Remarks("General Ledger Category")
+	?GlCategoryId GlCategory;
+	@Remarks("Date of the Document")
+	?DateDoc Date;
+	@Remarks("Accounting Date")
+	?DateAcct Date;
+	@Remarks("Period of the Calendar")
+	?CPeriodId CPeriod;
+	@Remarks("The Currency for this record")
+	?CCurrencyId CCurrency;
+	@Remarks("Total debit in document currency")
+	TotalDr null;/* 0  */
+	@Remarks("Total Credit in document currency")
+	TotalCr null;/* 0  */
+	@Remarks("If not zero, the Debit amount of the document must be equal this amount")
+	?Controlamt Amount;/* 0 */
+	@Remarks("Process Now")
+	Processing YesNo;/* 'N'  */
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Copy From Record")
+	?Copyfrom null;
+	@Remarks("Document type or rules")
+	CDoctypeId CDoctype;
+	@Remarks("The current status of the document")
+	Docstatus Attr;
+	@Remarks("The targeted status of the document")
+	Docaction Attr;
+	@Remarks("Indicates if this document requires approval")
+	?IsApproved YesNo;
+};
+

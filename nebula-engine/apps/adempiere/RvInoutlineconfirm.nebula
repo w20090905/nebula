@@ -1,0 +1,34 @@
+@Remarks("")
+@Refby("0")
+type RvInoutlineconfirm {
+	MInoutconfirmId MInoutconfirm;
+	MInoutlineconfirmId MInoutlineconfirm;
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;
+	CreateD null;
+	CreateDby null;
+	Updated null;
+	Updatedby null;
+	Targetqty Quantity;
+	Confirmedqty Quantity;
+	?Differenceqty Quantity;
+	?Scrappedqty Quantity;
+	?Description;
+	Processed YesNo;
+	MInoutId MInout;
+	DocumentNo Code;
+	Confirmtype Attr;
+	IsApproved YesNo;
+	IsCancelled YesNo;
+	CBpartnerId CBpartner;
+	CBpartnerLocationId CBpartnerLocation;
+	MWarehouseId MWarehouse;
+	?COrderId COrder;
+	IsSotrx YesNo;
+	MInoutlineId MInoutline;
+	?MProductId MProduct;
+	?MAttributesetinstanceId MAttributesetinstance;
+	?MLocatorId MLocator;
+};
+

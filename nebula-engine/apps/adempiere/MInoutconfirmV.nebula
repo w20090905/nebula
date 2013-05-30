@@ -1,0 +1,39 @@
+@Remarks("")
+@Refby("0")
+type MInoutconfirmV {
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;
+	CreateD null;
+	CreateDby null;
+	Updated null;
+	Updatedby null;
+	?AdLanguage Attr;
+	MInoutconfirmId MInoutconfirm;
+	DocumentNo Code;
+	Confirmtype Attr;
+	IsApproved YesNo;
+	IsCancelled YesNo;
+	?Description;
+	MInoutId MInout;
+	?Shipdescription Description;
+	CBpartnerId CBpartner;
+	CBpartnerLocationId CBpartnerLocation;
+	?AdUserId AdUser;
+	?SalesRepId ID;
+	CDoctypeId CDoctype;
+	DocumentType Attr;
+	?COrderId COrder;
+	?DateOrdered Date;
+	Movementdate Date;
+	Movementtype Attr;
+	MWarehouseId MWarehouse;
+	?Poreference String;
+	DeliveryRule Attr;
+	FreightCostrule Attr;
+	DeliveryViarule Attr;
+	?MShipperId MShipper;
+	PriorityRule Attr;
+	Processed YesNo;
+};
+

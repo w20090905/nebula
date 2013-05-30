@@ -1,0 +1,49 @@
+@Remarks("Dunning Run Line")
+@Refby("0")
+tx CDunningRunline {
+	@Remarks("Dunning Run Line")
+	!CDunningRunlineId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Dunning Run Entry")
+	CDunningRunentryId CDunningRunentry;
+	@Remarks("Invoice Identifier")
+	?CInvoiceId CInvoice;
+	@Remarks("Payment identifier")
+	?CPaymentId CPayment;
+	@Remarks("Amount")
+	Amt Amount;/* 0  */
+	@Remarks("Converted Amount")
+	Convertedamt Amount;/* 0  */
+	@Remarks("Number of days due (negative: due in number of days)")
+	DaysDue Count;/* 0  */
+	@Remarks("Number of times dunned previously")
+	TimesDunned Count;/* 0  */
+	@Remarks("Interest Amount")
+	InterestAmt Amount;/* 0  */
+	@Remarks("Fee amount in invoice currency")
+	FeeAmt Amount;/* 0  */
+	@Remarks("Total Amount")
+	TotalAmt Amount;/* 0  */
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Document is in dispute")
+	IsIndispute YesNo;/* 'N'  */
+	@Remarks("Open item amount")
+	Openamt Amount;
+	@Remarks("Invoice Payment Schedule")
+	?CInvoicePayscheduleId CInvoicePayschedule;
+};
+

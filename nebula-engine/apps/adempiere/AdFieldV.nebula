@@ -1,0 +1,54 @@
+@Remarks("")
+@Refby("0")
+type AdFieldV {
+	?AdWindowId AdWindow;
+	AdTabId AdTab;
+	AdFieldId AdField;
+	?AdTableId AdTable;
+	?AdColumnId AdColumn;
+	*Name;
+	?Description;
+	?Help;
+	IsDisplayEd YesNo;
+	?DisplayLogic String;
+	?DisplayLength Length;
+	?SeqNo;
+	?Sortno SeqNo;
+	?IsSameline YesNo;
+	IsHeading YesNo;
+	?IsFieldOnly YesNo;
+	IsReadonly YesNo;
+	?IsEncryptedfield YesNo;
+	?Obscuretype Attr;
+	?Columnname Name;
+	?Columnsql String;
+	?FieldLength Length;
+	?Vformat String;
+	?Defaultvalue String;
+	?IsKey YesNo;
+	?IsParent YesNo;
+	?IsMandatory YesNo;
+	?IsIdentifier YesNo;
+	?IsTranslated YesNo;
+	?AdReferenceValueId ID;
+	?Callout String;
+	?AdReferenceId AdReference;
+	?AdValRuleId AdValRule;
+	?AdProcessId AdProcess;
+	?IsAlwaysupdateable YesNo;
+	?ReadonlyLogic String;
+	?Mandatorylogic String;
+	?IsUpdateable YesNo;
+	?IsEncryptedcolumn YesNo;
+	?IsSelectIonColumn YesNo;
+	?Tablename Name;
+	?ValueMin String;
+	?ValueMax String;
+	?FieldGroup null;
+	?ValidationCode Code;
+	?IncludedTabId ID;
+	?FieldGrouptype Attr;
+	?IsCollapsedbydefault YesNo;
+	?Infofactoryclass null;
+};
+

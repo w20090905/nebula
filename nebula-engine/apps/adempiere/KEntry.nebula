@@ -1,0 +1,41 @@
+@Remarks("Knowledge Entry")
+@Refby("4")
+type KEntry {
+	@Remarks("Knowledge Entry")
+	!KEntryId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Knowledge Topic")
+	KTopicId KTopic;
+	@Remarks("Classification or Importance")
+	Rating;
+	@Remarks("Public can read entry")
+	IsPublic YesNo;/* 'Y'  */
+	@Remarks("List of Keywords - separated by space, comma or semicolon")
+	?Keywords null;
+	@Remarks("Source of a Knowledge Entry")
+	?KSourceId KSource;
+	@Remarks("URL for the description")
+	?Descriptionurl Url;
+	@Remarks("Valid to including this date (last day)")
+	?Validto Date;
+	@Remarks("User Session Online or Web")
+	?AdSessionId AdSession;
+	@Remarks("Text Message")
+	TextMsg Msg;
+};
+

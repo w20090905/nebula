@@ -1,0 +1,47 @@
+@Remarks("Auction Topic")
+@Refby("3")
+type BTopic {
+	@Remarks("Auction Topic")
+	!BTopicId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Document sequence number of the document")
+	DocumentNo Code;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Text Message")
+	?TextMsg Msg;
+	@Remarks("Topic Status")
+	Topicstatus Attr;
+	@Remarks("Topic Action")
+	Topicaction null;
+	@Remarks("The Topic is published and can be viewed")
+	IsPublished YesNo;/* 'Y'  */
+	@Remarks("Details")
+	?TextDetails Note;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Auction Topic Type")
+	BTopictypeId BTopictype;
+	@Remarks("Auction Topic Category")
+	BTopiccategoryId BTopiccategory;
+	@Remarks("Decision date")
+	Decisiondate Date;
+};
+

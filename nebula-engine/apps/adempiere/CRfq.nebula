@@ -1,0 +1,79 @@
+@Remarks("Request for Quotation")
+@Refby("2")
+type CRfq {
+	@Remarks("Request for Quotation")
+	!CRfqId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Topic for Request for Quotations")
+	CRfqTopicId CRfqTopic;
+	@Remarks("The Currency for this record")
+	CCurrencyId CCurrency;
+	@Remarks("Date of the Response")
+	DateResponse Date;
+	@Remarks("Are Resonses to the Request for Quotation accepted")
+	IsRfqresponseaccepted YesNo;/* 'Y'  */
+	@Remarks("Date when work is (planned to be) started")
+	?DateWorkstart Date;
+	@Remarks("Number of Days (planned) until Delivery")
+	?DeliveryDays Count;/* 0 */
+	@Remarks("Date when work is (planned to be) complete")
+	?DateWorkcomplete Date;
+	@Remarks("Request for Quotation Type")
+	Quotetype Attr;
+	@Remarks("The respnse can have just the total amount for the RfQ")
+	IsQuotetotalamt YesNo;/* 'N'  */
+	@Remarks("Suppliers are requested to provide responses for all quantities")
+	IsQuoteallqty YesNo;/* 'Y'  */
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
+	IsSelfservice YesNo;/* 'N'  */
+	@Remarks("Only invited vendors can respond to an RfQ")
+	IsInvitedvendorsonly YesNo;/* 'N'  */
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("Identifies the (ship to) address for this Business Partner")
+	?CBpartnerLocationId CBpartnerLocation;
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	?AdUserId AdUser;
+	@Remarks("Sales Representative or Company Agent")
+	SalesRepId AdUser;
+	@Remarks("Margin for a product as a percentage")
+	?Margin Length;
+	@Remarks("Create SO")
+	?CreateSo YesNo;
+	@Remarks("Create Purchase Order")
+	?CreatePo YesNo;
+	@Remarks("Publish RfQ")
+	?Publishrfq null;
+	@Remarks("Order")
+	?COrderId COrder;
+	@Remarks("Copy Lines")
+	?Copylines null;
+	@Remarks("Rank RfQ")
+	?Rankrfq null;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Document sequence number of the document")
+	DocumentNo Code;/* '.'  */
+};
+

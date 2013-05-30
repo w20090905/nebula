@@ -1,0 +1,91 @@
+@Remarks("T_Aging")
+@Refby("0")
+tx TAging {
+	@Remarks("Instance of the process")
+	!AdPinstanceId AdPinstance;
+	@Remarks("Identifies a Business Partner")
+	!CBpartnerId CBpartner;
+	@Remarks("The Currency for this record")
+	!CCurrencyId CCurrency;
+	@Remarks("Invoice Identifier")
+	!CInvoiceId ID;
+	@Remarks("Invoice Payment Schedule")
+	!CInvoicePayscheduleId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Date of the statement")
+	Statementdate Date;
+	@Remarks("Date when the payment is due")
+	Duedate Date;
+	@Remarks("Number of days due (negative: due in number of days)")
+	?DaysDue Count;/* 0 */
+	@Remarks("Include List of Invoices")
+	IsListinvoices YesNo;/* 'N'  */
+	@Remarks("This is a Sales Transaction")
+	IsSotrx YesNo;/* 'Y'  */
+	@Remarks("Business Partner Group")
+	CBpGroupId CBpGroup;
+	@Remarks("The amount invoiced")
+	InvoiceDamt Amount;/* 0  */
+	@Remarks("Open item amount")
+	Openamt Amount;/* 0  */
+	@Remarks("Past Due > 91")
+	Pastdue91Plus Amount;/* 0  */
+	@Remarks("Past Due 61-90")
+	Pastdue6190 Amount;/* 0  */
+	@Remarks("Past Due > 61")
+	Pastdue61Plus Amount;/* 0  */
+	@Remarks("Past Due 31-60")
+	Pastdue3160 Amount;/* 0  */
+	@Remarks("Past Due > 31")
+	Pastdue31Plus Amount;/* 0  */
+	@Remarks("Past Due 1-30")
+	Pastdue130 Amount;/* 0  */
+	@Remarks("Past Due 8-30")
+	Pastdue830 Amount;/* 0  */
+	@Remarks("Past Due 1-7")
+	Pastdue17 Amount;/* 0  */
+	@Remarks("Past Due")
+	Pastdueamt Amount;/* 0  */
+	@Remarks("Amount of the payment due")
+	Dueamt Amount;/* 0  */
+	@Remarks("Due Today")
+	Due0 Amount;/* 0  */
+	@Remarks("Due Today-7")
+	Due07 Amount;/* 0  */
+	@Remarks("Due 1-7")
+	Due17 Amount;/* 0  */
+	@Remarks("Due 8-30")
+	Due830 Amount;/* 0  */
+	@Remarks("Due Today-30")
+	Due030 Amount;/* 0  */
+	@Remarks("Due > 31")
+	Due31Plus Amount;/* 0  */
+	@Remarks("Due 31-60")
+	Due3160 Amount;/* 0  */
+	@Remarks("Due > 61")
+	Due61Plus Amount;/* 0  */
+	@Remarks("Due 61-90")
+	Due6190 Amount;/* 0  */
+	@Remarks("Due > 91")
+	Due91Plus Amount;/* 0  */
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Marketing Campaign")
+	?CCampaignId CCampaign;
+	@Remarks("Business Activity")
+	?CActivityId CActivity;
+};
+

@@ -1,0 +1,53 @@
+@Remarks("Import Currency Conversion Rate")
+@Refby("0")
+tx IConversionRate {
+	@Remarks("Import Currency Conversion Rate")
+	!IConversionRateId ID;
+	@Remarks("Client/Tenant for this installation.")
+	?AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	?AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	?IsActive YesNo;/* 'Y'                               */
+	@Remarks("Date this record was created")
+	?CreateD null;/* SYSDATE */
+	@Remarks("User who created this records")
+	?CreateDby null;
+	@Remarks("Date this record was updated")
+	?Updated null;/* SYSDATE */
+	@Remarks("User who updated this records")
+	?Updatedby null;
+	@Remarks("Rate used for converting currencies")
+	?CConversionRateId CConversionRate;
+	@Remarks("Three letter ISO 4217 Code of the Currency")
+	?IsOCode Code;
+	@Remarks("The Currency for this record")
+	?CCurrencyId CCurrency;
+	@Remarks("Three letter ISO 4217 Code of the To Currency")
+	?IsOCodeTo YesNo;
+	@Remarks("Target currency")
+	?CCurrencyIdTo CCurrency;
+	@Remarks("Key value for the Currency Conversion Rate Type")
+	?ConversionTypevalue String;
+	@Remarks("Currency Conversion Rate Type")
+	?CConversionTypeId CConversionType;
+	@Remarks("Valid from including this date (first day)")
+	?Validfrom Date;
+	@Remarks("Valid to including this date (last day)")
+	?Validto Date;
+	@Remarks("Rate to multiple the source by to calculate the target.")
+	?Multiplyrate Rate;
+	@Remarks("To convert Source number to Target number, the Source is divided")
+	?Dividerate Rate;
+	@Remarks("Create Reciprocal Rate from current information")
+	?CreateReciprocalrate YesNo;/* 'N'                               */
+	@Remarks("Has this import been processed")
+	?IIsImported YesNo;/* 'N'  */
+	@Remarks("Messages generated from import process")
+	?IErrorMsg Msg;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The document has been processed")
+	?Processed YesNo;/* 'N' */
+};
+

@@ -1,0 +1,43 @@
+@Remarks("Definition of the alert element")
+@Refby("0")
+type AdAlertRule {
+	@Remarks("Definition of the alert element")
+	!AdAlertRuleId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Adempiere Alert")
+	AdAlertId AdAlert;
+	@Remarks("SQL SELECT clause")
+	SelectClause String;
+	@Remarks("SQL FROM clause")
+	Fromclause String;
+	@Remarks("Fully qualified SQL WHERE clause")
+	?WhereClause String;
+	@Remarks("Database Table information")
+	?AdTableId AdTable;
+	@Remarks("Process SQL before executing the query")
+	?Preprocessing null;
+	@Remarks("Process SQL after executing the query")
+	?PostProcessing null;
+	@Remarks("Element is valid")
+	IsValid YesNo;/* 'Y'  */
+	@Remarks("Error Msg")
+	?ErrorMsg Msg;
+	@Remarks("Other SQL Clause")
+	?OtherClause String;
+};
+

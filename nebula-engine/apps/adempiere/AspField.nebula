@@ -1,0 +1,27 @@
+@Remarks("ASP Field")
+@Refby("0")
+type AspField {
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;/* NULL   */
+	@Remarks("Field on a database table")
+	!AdFieldId AdField;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;/* NULL   */
+	@Remarks("Tab within a Window")
+	!AdTabId AdTab;
+	@Remarks("ASP Level")
+	!AspLevelId AspLevel;
+	@Remarks("ASP Status")
+	AspStatus Attr;/* 'U'  */
+	@Remarks("Date this record was created")
+	CreateD null;
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was updated")
+	Updated null;
+	@Remarks("User who updated this records")
+	Updatedby null;
+};
+

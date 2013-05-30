@@ -1,0 +1,47 @@
+@Remarks("Template defines how content is displayed")
+@Refby("4")
+type CmTemplate {
+	@Remarks("Template defines how content is displayed")
+	!CmTemplateId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("A web project is the main data container for Containers, URLs, Ads, Media etc.")
+	?CmWebprojectId CmWebproject;
+	@Remarks("Search key for the record in the format required - must be unique")
+	Value String;
+	@Remarks("Defines whether this content / template is included into another one")
+	IsInclude YesNo;/* 'Y'  */
+	@Remarks("Whether or not this templates uses Ad_s")
+	IsUsead YesNo;/* 'Y'  */
+	@Remarks("Template or container uses news channels")
+	IsNewS YesNo;/* 'Y'  */
+	@Remarks("Contains list of elements seperated by CR")
+	?Elements null;
+	@Remarks("Contains the template code itself")
+	?Templatexst Note;
+	@Remarks("This is a summary entity")
+	IsSummary Comment;/* 'N'  */
+	@Remarks("Element is valid")
+	IsValid YesNo;/* 'N'  */
+	@Remarks("Process Now")
+	?Processing YesNo;
+};
+

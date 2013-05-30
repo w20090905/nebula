@@ -1,0 +1,106 @@
+@Remarks("Asset used internally or by customers")
+@Refby("15")
+type AAsset {
+	@Remarks("Asset used internally or by customers")
+	!AAssetId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Search key for the record in the format required - must be unique")
+	Value String;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Group of Assets")
+	AAssetGroupId AAssetGroup;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Product Serial Number")
+	?Serno Code;
+	@Remarks("Lot number (alphanumeric)")
+	?LOT;
+	@Remarks("Version Number")
+	?Versionno Code;
+	@Remarks("Date when guarantee expires")
+	?Guaranteedate Date;
+	@Remarks("Date when Asset was put into service")
+	?Assetservicedate Date;
+	@Remarks("The asset is owned by the organization")
+	IsOwned YesNo;/* 'Y'  */
+	@Remarks("Date of last depreciation")
+	?Assetdepreciationdate Date;
+	@Remarks("Years of the usable life of the asset")
+	?Uselifeyears Count;
+	@Remarks("Months of the usable life of the asset")
+	?Uselifemonths Count;
+	@Remarks("Units of use until the asset is not usable anymore")
+	?Lifeuseunits null;
+	@Remarks("Currently used units of the assets")
+	?Useunits null;
+	@Remarks("The asset is disposed")
+	IsDisposed YesNo;/* 'N'  */
+	@Remarks("Date when the asset is/was disposed")
+	?Assetdisposaldate Date;
+	@Remarks("The asset is in the possession of the organization")
+	IsInposession YesNo;/* 'Y'  */
+	@Remarks("Additional comments or remarks concerning the location")
+	?Locationcomment null;
+	@Remarks("Warehouse Locator")
+	?MLocatorId MLocator;
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("Identifies the (ship to) address for this Business Partner")
+	?CBpartnerLocationId CBpartnerLocation;
+	@Remarks("Location or Address")
+	?CLocationId CLocation;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The asset will be depreciated")
+	IsDepreciated YesNo;/* 'Y'  */
+	@Remarks("The asset is fully depreciated")
+	IsFullydepreciated YesNo;/* 'N'  */
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	?AdUserId AdUser;
+	@Remarks("Product Attribute Set Instance")
+	?MAttributesetinstanceId MAttributesetinstance;/* 0 */
+	@Remarks("Quantity")
+	?Qty Quantity;
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Business Partner (Agent or Sales Rep)")
+	?CBpartnerSrId CBpartner;
+	@Remarks("Line on Shipment or Receipt document")
+	?MInoutlineId MInoutline;
+	?Lastmaintenencedate Date;
+	@Remarks("Next Maintenence Date")
+	?Nextmaintenencedate Date;/* NULL  */
+	?Lastmaintenanceuseunit Unit;
+	?Nextmaintenanceuseunit Unit;
+	@Remarks("Lease Termination Date")
+	?Leaseterminationdate Date;/* NULL  */
+	@Remarks("The Business Partner who rents or leases")
+	?LeaseBpartnerId CBpartner;/* NULL  */
+	@Remarks("Last Maintenance Note")
+	?Lastmaintenancenote Note;/* NULL  */
+	@Remarks("Last Maintenance Date")
+	?Lastmaintenancedate Date;/* NULL  */
+	@Remarks("Last Maintenance Unit")
+	?Lastmaintenanceunit Unit;/* NULL  */
+	@Remarks("Next Maintenence Unit")
+	?Nextmaintenenceunit Unit;/* NULL  */
+};
+

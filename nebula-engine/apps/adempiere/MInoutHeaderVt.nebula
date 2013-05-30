@@ -1,0 +1,51 @@
+@Remarks("")
+@Refby("0")
+type MInoutHeaderVt {
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;
+	CreateD null;
+	CreateDby null;
+	Updated null;
+	Updatedby null;
+	?AdLanguage Attr;
+	MInoutId MInout;
+	IsSotrx YesNo;
+	DocumentNo Code;
+	Docstatus Attr;
+	CDoctypeId CDoctype;
+	?CBpartnerId CBpartner;
+	?Bpvalue String;
+	?Bptaxid Code;
+	?NAICS;
+	?DUNS;
+	?OrgLocationId ID;
+	TaxId Code;
+	MWarehouseId MWarehouse;
+	WarehouseLocationId ID;
+	?DocumentType Attr;
+	?DocumentTypenote Note;
+	?COrderId COrder;
+	?Phone;
+	?Movementdate Date;
+	Movementtype Attr;
+	?Bpgreeting String;
+	?Name;
+	?Name2 Name;
+	?BpcontactGreeting String;
+	?Title;
+	?Contactname Name;
+	?CLocationId CLocation;
+	?PostAl Postal;
+	?ReferenceNo Code;
+	?Description;
+	?Poreference String;
+	?DateOrdered Date;
+	?Volume;
+	?Weight;
+	?MShipperId MShipper;
+	DeliveryRule Attr;
+	DeliveryViarule Attr;
+	PriorityRule Attr;
+};
+

@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+type MProductSubstituterelateV {
+	?AdClientId AdClient;
+	?AdOrgId AdOrg;
+	?IsActive YesNo;
+	?CreateD null;
+	?CreateDby null;
+	?Updated null;
+	?Updatedby null;
+	?MProductId MProduct;
+	?SubstituteId ID;
+	?Description;
+	?Rowtype Attr;
+	?QtyAvailable Quantity;
+	?QtyOnhand Quantity;
+	?QtyReserved Quantity;
+	?PriceStd Price;
+	?MPriceListVersionId MPriceListVersion;
+	?MWarehouseId MWarehouse;
+};
+

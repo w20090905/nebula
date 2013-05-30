@@ -1,0 +1,31 @@
+@Remarks("")
+@Refby("0")
+type RvCostdetail {
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;
+	CreateD null;
+	CreateDby null;
+	Updated null;
+	Updatedby null;
+	MProductId MProduct;
+	Value String;
+	*Name;
+	?UPC;
+	IsBom YesNo;
+	ProductType Attr;
+	MProductCategoryId MProductCategory;
+	?MInoutlineId MInoutline;
+	?CInvoiceLineId CInvoiceLine;
+	MAttributesetinstanceId MAttributesetinstance;
+	?MAttributesetId MAttributeset;
+	?LOT;
+	?Serno Code;
+	CAcctschemaId CAcctschema;
+	CCurrencyId CCurrency;
+	Amt Amount;
+	Qty Quantity;
+	?Description;
+	Processed YesNo;
+};
+

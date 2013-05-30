@@ -1,0 +1,39 @@
+@Remarks("Supporting information for Commission Amounts")
+@Refby("0")
+tx CCommissiondetail {
+	@Remarks("Supporting information for Commission Amounts")
+	!CCommissiondetailId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Generated Commission Amount")
+	CCommissionamtId CCommissionamt;
+	@Remarks("Reference for this record")
+	?Reference String;
+	@Remarks("Sales Order Line")
+	?COrderlineId COrderline;
+	@Remarks("Invoice Detail Line")
+	?CInvoiceLineId CInvoiceLine;
+	@Remarks("Information")
+	?Info;
+	@Remarks("The Currency for this record")
+	CCurrencyId CCurrency;
+	@Remarks("The actual amount")
+	Actualamt Amount;/* 0  */
+	@Remarks("Converted Amount")
+	Convertedamt Amount;/* 0  */
+	@Remarks("The actual quantity")
+	Actualqty Quantity;/* 0  */
+};
+

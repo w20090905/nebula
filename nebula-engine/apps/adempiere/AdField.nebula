@@ -1,0 +1,72 @@
+@Remarks("Field on a database table")
+@Refby("4")
+type AdField {
+	@Remarks("Field on a database table")
+	!AdFieldId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Information maintained in System Element table")
+	IsCentrallyMaintained YesNo;/* 'Y'                               */
+	@Remarks("Tab within a Window")
+	AdTabId AdTab;
+	@Remarks("Column in the table")
+	?AdColumnId AdColumn;
+	@Remarks("Logical grouping of fields")
+	?AdFieldGroupId AdFieldGroup;
+	@Remarks("Determines, if this field is displayed")
+	IsDisplayEd YesNo;/* 'Y'  */
+	@Remarks("If the Field is displayed, the result determines if the field is actually displayed")
+	?DisplayLogic String;
+	@Remarks("Length of the display in characters")
+	?DisplayLength Length;
+	@Remarks("Field is read only")
+	IsReadonly YesNo;/* 'N'  */
+	@Remarks("Method of ordering records; lowest number comes first")
+	?SeqNo;
+	@Remarks("Determines in what order the records are displayed")
+	?Sortno SeqNo;
+	@Remarks("Displayed on same line as previous field")
+	IsSameline YesNo;/* 'N'  */
+	@Remarks("Field without Column - Only label is displayed")
+	IsHeading YesNo;/* 'N'  */
+	@Remarks("Label is not displayed")
+	IsFieldOnly YesNo;/* 'N'  */
+	@Remarks("Display or Storage is encrypted")
+	IsEncrypted YesNo;/* 'N'  */
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
+	EntityType AdEntityType;/* 'D'  */
+	@Remarks("Type of obscuring the data (limiting the display)")
+	?Obscuretype Attr;
+	@Remarks("System Reference and Validation")
+	?AdReferenceId AdReference;
+	@Remarks("Data entry is required in this column")
+	?IsMandatory YesNo;
+	?IncludedTabId ID;
+	@Remarks("Default value hierarchy, separated by ;")
+	?Defaultvalue String;
+	@Remarks("Required to specify, if data type is Table or List")
+	?AdReferenceValueId AdReference;/* NULL */
+	@Remarks("Dynamic Validation Rule")
+	?AdValRuleId AdValRule;/* NULL */
+	@Remarks("Fully qualified class name that implements the InfoFactory interface")
+	?Infofactoryclass null;
+};
+

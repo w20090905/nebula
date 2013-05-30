@@ -1,0 +1,63 @@
+@Remarks("Parameters for a Physical Inventory")
+@Refby("4")
+tx MInventory {
+	@Remarks("Parameters for a Physical Inventory")
+	!MInventoryId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Document sequence number of the document")
+	DocumentNo Code;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Storage Warehouse and Service Point")
+	MWarehouseId MWarehouse;
+	@Remarks("Date a product was moved in or out of inventory")
+	Movementdate Date;
+	@Remarks("Posting status")
+	PostEd YesNo;/* 'N'  */
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Update Quantities")
+	?Updateqty YesNo;/* 'N'                           */
+	@Remarks("Generate List")
+	?Generatelist YesNo;/* 'Y'                           */
+	@Remarks("Rules for generating physical inventory")
+	?MPerpetualinvId MPerpetualinv;
+	@Remarks("Performing or initiating organization")
+	?AdOrgtrxId AdOrg;
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Marketing Campaign")
+	?CCampaignId CCampaign;
+	@Remarks("Business Activity")
+	?CActivityId CActivity;
+	@Remarks("User defined list element #1")
+	?User1Id CElementvalue;
+	@Remarks("User defined list element #2")
+	?User2Id CElementvalue;
+	@Remarks("Indicates if this document requires approval")
+	IsApproved YesNo;/* 'N'  */
+	@Remarks("The current status of the document")
+	Docstatus Attr;
+	@Remarks("The targeted status of the document")
+	Docaction Attr;
+	@Remarks("Document Approval Amount")
+	?Approvalamt Amount;
+	@Remarks("Document type or rules")
+	CDoctypeId CDoctype;
+};
+

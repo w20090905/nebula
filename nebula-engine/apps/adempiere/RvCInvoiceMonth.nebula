@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+type RvCInvoiceMonth {
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	?SalesRepId ID;
+	?DateInvoiceD Date;
+	?LineNetamt Line;
+	?LineListamt Line;
+	?LineLimitamt Line;
+	?LineDiscountamt Line;
+	?LineDiscount Line;
+	?LineOverlimitamt Line;
+	?LineOverlimit Line;
+	IsSotrx YesNo;
+};
+

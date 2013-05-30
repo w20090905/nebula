@@ -1,0 +1,11 @@
+@Remarks("Temporary Spool Table")
+@Refby("0")
+tx TSpool {
+	@Remarks("Instance of the process")
+	!AdPinstanceId AdPinstance;
+	@Remarks("Method of ordering records; lowest number comes first")
+	!SeqNo;
+	@Remarks("Textual Informational, Menu or Error Message")
+	Msgtext Text;
+};
+

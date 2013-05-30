@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+tx RIsSuesource {
+	!RIsSuesourceId ID;
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;/* 'Y'  */
+	CreateD null;/* SYSDATE  */
+	CreateDby null;
+	Updated null;/* SYSDATE  */
+	Updatedby null;
+	RIsSuesystemId RIsSuesystem;
+	RIsSueprojectId RIsSueproject;
+	RIsSueuserId RIsSueuser;
+	?Statisticsinfo Info;
+	?Profileinfo Info;
+};
+

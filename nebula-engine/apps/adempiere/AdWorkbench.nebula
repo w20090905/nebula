@@ -1,0 +1,35 @@
+@Remarks("Collection of windows, reports")
+@Refby("6")
+type AdWorkbench {
+	@Remarks("Collection of windows, reports")
+	!AdWorkbenchId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Column in the table")
+	AdColumnId AdColumn;
+	@Remarks("Image or Icon")
+	?AdImageId AdImage;
+	@Remarks("Color for backgrounds or indicators")
+	?AdColorId AdColor;
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
+	EntityType AdEntityType;/* 'D'  */
+};
+

@@ -1,0 +1,57 @@
+@Remarks("Phase of a Project")
+@Refby("8")
+type CProjectPhase {
+	@Remarks("Financial Project")
+	CProjectId CProject;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  	  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  	  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  	  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("First effective day (inclusive)")
+	?Startdate Date;
+	@Remarks("Last effective date (inclusive)")
+	?Enddate Date;
+	@Remarks("It is complete")
+	IsComplete YesNo;/* 'N'  	  */
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Actual Price")
+	?PriceActual Price;/* 0  	  */
+	@Remarks("Generate Order")
+	?Generateorder Attr;
+	@Remarks("Order")
+	?COrderId COrder;
+	@Remarks("Standard Phase of the Project Type")
+	?CPhaseId CPhase;
+	@Remarks("Phase of a Project")
+	!CProjectPhaseId ID;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Quantity")
+	?Qty Quantity;/* 0  */
+	@Remarks("Method of ordering records; lowest number comes first")
+	SeqNo;
+	@Remarks("The (legal) commitment amount")
+	CommittedAmt Amount;/* 0  */
+	@Remarks("The commitment amount/quantity is the chargeable ceiling")
+	IsCommitceiling YesNo;/* 'N'  */
+	@Remarks("Invoice Rule for the project")
+	?Projinvoicerule Attr;
+	@Remarks("Planned amount for this project")
+	PlannedAmt Amount;/* 0  */
+};
+

@@ -1,0 +1,47 @@
+@Remarks("Plan for producing a product")
+@Refby("1")
+type MProductIon {
+	@Remarks("Plan for producing a product")
+	!MProductIonId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Date a product was moved in or out of inventory")
+	Movementdate Date;
+	@Remarks("Records created")
+	IsCreateD YesNo;/* 'N'  */
+	@Remarks("Posting status")
+	PostEd YesNo;/* 'N'  */
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Performing or initiating organization")
+	?AdOrgtrxId AdOrg;
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Marketing Campaign")
+	?CCampaignId CCampaign;
+	@Remarks("Business Activity")
+	?CActivityId CActivity;
+	@Remarks("User defined list element #1")
+	?User1Id CElementvalue;
+	@Remarks("User defined list element #2")
+	?User2Id CElementvalue;
+};
+

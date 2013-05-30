@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+type MInoutCandidateV {
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	CBpartnerId CBpartner;
+	COrderId COrder;
+	DocumentNo Code;
+	DateOrdered Date;
+	CDoctypeId CDoctype;
+	?Poreference String;
+	?Description;
+	?SalesRepId ID;
+	MWarehouseId MWarehouse;
+	?TotalLines Line;
+};
+

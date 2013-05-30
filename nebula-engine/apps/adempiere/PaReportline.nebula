@@ -1,0 +1,49 @@
+@Remarks("Report Line")
+@Refby("6")
+type PaReportline {
+	@Remarks("Report Line")
+	!PaReportlineId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Report Line Set")
+	PaReportlinesetId PaReportlineset;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Method of ordering records; lowest number comes first")
+	SeqNo;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Indicates if this document / line is printed")
+	IsPrintEd YesNo;/* 'Y'  */
+	@Remarks("Parent of Entity")
+	?ParentId PaReportline;
+	@Remarks("This is a summary entity")
+	IsSummary Comment;/* 'N'  */
+	@Remarks("Line Type")
+	LineType Attr;
+	@Remarks("Calculation")
+	?Calculationtype Attr;
+	@Remarks("First operand for calculation")
+	?Oper1Id PaReportline;
+	@Remarks("Second operand for calculation")
+	?Oper2Id PaReportline;
+	@Remarks("The type of posted amount for the transaction")
+	?PostIngtype Attr;
+	@Remarks("General Ledger Budget")
+	?GlBudgetId GlBudget;
+	@Remarks("Type of amount to report")
+	?Amounttype Attr;
+};
+

@@ -1,0 +1,74 @@
+@Remarks("Client/Tenant for this installation.")
+@Refby("67")
+type AdClient {
+	@Remarks("Client/Tenant for this installation.")
+	!AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Search key for the record in the format required - must be unique")
+	Value String;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Hostname of Mail Server for SMTP and IMAP")
+	?SmtpHost Host;
+	@Remarks("EMail address to send automated mails from or receive mails for automated processing (fully qualified)")
+	?RequestEmail EMail;
+	@Remarks("User Name (ID) of the email owner")
+	?RequestUser String;
+	@Remarks("Password of the user name (ID) for mail processing")
+	?RequestUserpw String;
+	@Remarks("EMail folder to process incoming emails; if empty INBOX is used")
+	?RequestFolder String;
+	@Remarks("Language for this entity")
+	?AdLanguage;
+	@Remarks("Documents are Multi Lingual")
+	IsMultilingualdocument YesNo;/* 'N' */
+	@Remarks("Your mail server requires Authentication")
+	IsSmtpAuthorization YesNo;/* 'N'  */
+	@Remarks("Enable the use of Beta Functionality")
+	IsUsebetafunctions YesNo;/* 'N'  */
+	?LdapQuery null;
+	@Remarks("List of data model validation classes separated by ;")
+	?Modelvalidationclasses null;
+	@Remarks("Enable and level of automatic Archive of documents")
+	AutoArchive null;/* 'N'  */
+	@Remarks("Material Movement Policy")
+	Mmpolicy null;/* 'F'  */
+	@Remarks("Test EMail")
+	?Emailtest EMail;
+	@Remarks("Send EMail from Server")
+	IsServerEmail EMail;/* 'N'  */
+	@Remarks("Directory for documents from the application server")
+	?DocumentDir null;
+	@Remarks("Post the accounting immediately for testing")
+	IsPostImmediate YesNo;/* 'N'  */
+	@Remarks("Update Costs immediately for testing")
+	IsCostimmediate YesNo;/* 'N'  */
+	@Remarks("Store Attachments On File System")
+	StoreAttachmentsonfilesystem null;/* 'N'  */
+	@Remarks("Windows Attachment Path")
+	?WindowsAttachmentpath Path;
+	@Remarks("Unix Attachment Path")
+	?UnixAttachmentpath Path;
+	@Remarks("Store Archive On File System")
+	StoreArchiveOnfilesystem null;/* 'N'  */
+	@Remarks("Windows Archive Path")
+	?WindowsArchivePath Path;
+	@Remarks("Unix Archive Path")
+	?UnixArchivePath Path;
+	@Remarks("IsUseASP")
+	IsUseasp YesNo;/* 'N'  */
+};
+

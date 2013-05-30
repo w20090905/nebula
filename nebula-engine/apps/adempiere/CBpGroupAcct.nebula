@@ -1,0 +1,51 @@
+@Remarks("Business Partner Group Acct")
+@Refby("0")
+type CBpGroupAcct {
+	@Remarks("Rules for accounting")
+	!CAcctschemaId CAcctschema;
+	@Remarks("Business Partner Group")
+	!CBpGroupId CBpGroup;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Account for Customer Receivables")
+	CReceivableAcct CValidcombination;
+	@Remarks("Account for customer prepayments")
+	CPrepaymentAcct CValidcombination;
+	@Remarks("Account for Vendor Liability")
+	VLiabilityAcct CValidcombination;
+	@Remarks("Account for Vender Service Liability")
+	VLiabilityServicesAcct CValidcombination;
+	@Remarks("Account for Vendor Prepayments")
+	VPrepaymentAcct CValidcombination;
+	@Remarks("Payment Discount Expense Account")
+	PaydiscountExpAcct CValidcombination;
+	@Remarks("Payment Discount Revenue Account")
+	PaydiscountRevAcct CValidcombination;
+	@Remarks("Account for Receivables write-off")
+	WriteoffAcct CValidcombination;
+	@Remarks("Account for not-invoiced Material Receipts")
+	NotinvoicedreceiptsAcct CValidcombination;
+	@Remarks("Account for unearned revenue")
+	UnearnedRevenueAcct CValidcombination;
+	@Remarks("Account for not invoiced Revenue")
+	NotinvoicedrevenueAcct CValidcombination;
+	@Remarks("Account for not invoiced Receivables")
+	NotinvoicedreceivablesAcct CValidcombination;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Customer Accounts Receivables Services Account")
+	?CReceivableServicesAcct Amount;
+};
+

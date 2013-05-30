@@ -1,0 +1,35 @@
+@Remarks("Trade Discount Break")
+@Refby("0")
+tx MDiscountSchemabreak {
+	@Remarks("Trade Discount Break")
+	!MDiscountSchemabreakId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Schema to calculate the trade discount percentage")
+	MDiscountSchemaId MDiscountSchema;
+	@Remarks("Method of ordering records; lowest number comes first")
+	SeqNo;
+	@Remarks("Low Value of trade discount break level")
+	Breakvalue null;
+	@Remarks("Trade Discount in Percent for the break level")
+	Breakdiscount Count;
+	@Remarks("Category of a Product")
+	?MProductCategoryId MProductCategory;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Use flat discount defined on Business Partner Level")
+	IsBpartnerFlatdiscount YesNo;/* 'N'  */
+};
+

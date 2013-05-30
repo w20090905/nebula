@@ -1,0 +1,33 @@
+@Remarks("C_Tax_Acct")
+@Refby("0")
+type CTaxAcct {
+	@Remarks("Tax identifier")
+	!CTaxId CTax;
+	@Remarks("Rules for accounting")
+	!CAcctschemaId CAcctschema;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Account for Tax you have to pay")
+	TDueAcct CValidcombination;
+	@Remarks("Account for Tax declaration liability")
+	TLiabilityAcct CValidcombination;
+	@Remarks("Account for Tax you can reclaim")
+	TCreditAcct CValidcombination;
+	@Remarks("Account for Tax credit after tax declaration")
+	TReceivablesAcct CValidcombination;
+	@Remarks("Account for paid tax you cannot reclaim")
+	TExpenseAcct CValidcombination;
+};
+

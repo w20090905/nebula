@@ -1,0 +1,63 @@
+@Remarks("Test ID")
+@Refby("0")
+type Test {
+	@Remarks("Test ID")
+	!TestId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Integer")
+	?TInteger null;
+	@Remarks("Number")
+	?TNumber null;/* 0 */
+	@Remarks("Date")
+	?TDate Date;
+	@Remarks("DateTime")
+	?TDateTime Date;
+	@Remarks("Unit of Measure")
+	?CUomId CUom;
+	@Remarks("Qty")
+	?TQty Quantity;/* 0 */
+	@Remarks("The Currency for this record")
+	?CCurrencyId CCurrency;
+	@Remarks("Amount")
+	?TAmount Amount;/* 0 */
+	@Remarks("Location or Address")
+	?CLocationId CLocation;
+	@Remarks("Account_Acct")
+	?AccountAcct CValidcombination;
+	@Remarks("Payment identifier")
+	?CPaymentId CPayment;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("Warehouse Locator")
+	?MLocatorId MLocator;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Binary Data")
+	?Binarydata Note;
+	@Remarks("The document has been processed")
+	?Processed YesNo;/* 'N'                        */
+	@Remarks("Long Character Field")
+	?Characterdata Note;
+};
+

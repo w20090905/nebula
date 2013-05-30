@@ -1,0 +1,31 @@
+@Remarks("M_Replenish")
+@Refby("0")
+type MReplenish {
+	@Remarks("Product, Service, Item")
+	!MProductId MProduct;
+	@Remarks("Storage Warehouse and Service Point")
+	!MWarehouseId MWarehouse;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Method for re-ordering a product")
+	Replenishtype Attr;
+	@Remarks("Minimum Inventory level for this product")
+	LevelMin Count;/* 0  */
+	@Remarks("Maximum Inventory level for this product")
+	LevelMax Count;/* 0  */
+	@Remarks("Optional Warehouse to replenish from")
+	?MWarehousesourceId MWarehouse;
+};
+

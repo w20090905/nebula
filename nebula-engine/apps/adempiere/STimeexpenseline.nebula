@@ -1,0 +1,79 @@
+@Remarks("Time and Expense Report Line")
+@Refby("1")
+tx STimeexpenseline {
+	@Remarks("Time and Expense Report Line")
+	!STimeexpenselineId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Time and Expense Report")
+	STimeexpenseId STimeexpense;
+	@Remarks("Unique line for this document")
+	Line;
+	@Remarks("Line is a time report only (no expense)")
+	IsTimereport YesNo;/* 'N'  */
+	@Remarks("Date of expense")
+	?DateExpense Date;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Quantity")
+	?Qty Quantity;/* 0 */
+	@Remarks("Amount for this expense")
+	?Expenseamt Amount;/* 0 */
+	@Remarks("The Currency for this record")
+	?CCurrencyId CCurrency;
+	@Remarks("Converted Amount")
+	?Convertedamt Amount;/* 0 */
+	@Remarks("Resource Assignment")
+	?SResourceAssignmentId SResourceAssignment;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Optional additional user defined information")
+	?Note;
+	@Remarks("Is this invoiced?")
+	IsInvoiceD YesNo;/* 'N'  */
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Business Activity")
+	?CActivityId CActivity;
+	@Remarks("Marketing Campaign")
+	?CCampaignId CCampaign;
+	@Remarks("Invoice Detail Line")
+	?CInvoiceLineId CInvoiceLine;
+	@Remarks("Unit price to be invoiced or 0 for default price")
+	?InvoicePrice Price;/* 0 */
+	@Remarks("Unit of Measure")
+	?CUomId CUom;
+	@Remarks("Sales Order Line")
+	?COrderlineId COrderline;
+	@Remarks("Phase of a Project")
+	?CProjectPhaseId CProjectPhase;
+	@Remarks("Actual Project Task in a Phase")
+	?CProjectTaskId CProjectTask;
+	@Remarks("Type of time recorded")
+	?STimetypeId STimetype;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Invoiced Quantity")
+	?QtyInvoiced Quantity;
+	@Remarks("The reimbursed quantity")
+	?QtyReimbursed Quantity;
+	@Remarks("The priced invoiced to the customer (in the currency of the customer_s AR price list) - 0 for default price")
+	?PriceInvoiced Price;
+	@Remarks("The reimbursed price (in currency of the employee_s AP price list)")
+	?PriceReimbursed Price;
+};
+

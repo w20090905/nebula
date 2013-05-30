@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("0")
+type AdOrgV {
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;
+	CreateD null;
+	CreateDby null;
+	Updated null;
+	Updatedby null;
+	Value String;
+	*Name;
+	?Description;
+	IsSummary Comment;
+	?CLocationId CLocation;
+	DUNS;
+	TaxId Code;
+	?SupervisorId ID;
+	?ParentOrgId ID;
+	?AdOrgtypeId AdOrgtype;
+	?MWarehouseId MWarehouse;
+	?CBpartnerId CBpartner;
+};
+

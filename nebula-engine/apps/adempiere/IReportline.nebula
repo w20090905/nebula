@@ -1,0 +1,59 @@
+@Remarks("Import Report Line Set values")
+@Refby("0")
+type IReportline {
+	@Remarks("Import Report Line Set values")
+	!IReportlineId ID;
+	@Remarks("Client/Tenant for this installation.")
+	?AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	?AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	?IsActive YesNo;/* 'Y' */
+	@Remarks("Date this record was created")
+	?CreateD null;/* SYSDATE */
+	@Remarks("User who created this records")
+	?CreateDby null;
+	@Remarks("Date this record was updated")
+	?Updated null;/* SYSDATE */
+	@Remarks("User who updated this records")
+	?Updatedby null;
+	@Remarks("Has this import been processed")
+	IIsImported YesNo;/* 'N'  */
+	@Remarks("Messages generated from import process")
+	?IErrorMsg Msg;
+	@Remarks("Name of the Report Line Set")
+	?Reportlinesetname Name;
+	@Remarks("Report Line Set")
+	?PaReportlinesetId PaReportlineset;
+	@Remarks("Alphanumeric identifier of the entity")
+	?Name;
+	@Remarks("Report Line")
+	?PaReportlineId PaReportline;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Method of ordering records; lowest number comes first")
+	?SeqNo;
+	@Remarks("This is a summary entity")
+	?IsSummary Comment;/* 'N' */
+	@Remarks("Indicates if this document / line is printed")
+	?IsPrintEd YesNo;/* 'Y' */
+	@Remarks("Line Type")
+	?LineType Attr;
+	@Remarks("Calculation")
+	?Calculationtype Attr;
+	@Remarks("Type of amount to report")
+	?Amounttype Attr;
+	@Remarks("The type of posted amount for the transaction")
+	?PostIngtype Attr;
+	@Remarks("Restriction of what will be shown in Report Line")
+	?PaReportsourceId PaReportsource;
+	@Remarks("Account Element")
+	?CElementvalueId CElementvalue;
+	@Remarks("Key of the element")
+	?Elementvalue String;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The document has been processed")
+	?Processed YesNo;/* 'N' */
+};
+

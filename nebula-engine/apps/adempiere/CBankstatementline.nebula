@@ -1,0 +1,87 @@
+@Remarks("Line on a statement from this Bank")
+@Refby("1")
+tx CBankstatementline {
+	@Remarks("Line on a statement from this Bank")
+	!CBankstatementlineId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Bank Statement of account")
+	CBankstatementId CBankstatement;
+	@Remarks("Unique line for this document")
+	Line;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("This is a reversing transaction")
+	IsReversal YesNo;/* 'N'  */
+	@Remarks("Payment identifier")
+	?CPaymentId CPayment;
+	@Remarks("Date when money is available")
+	Valutadate Date;
+	@Remarks("Accounting Date")
+	DateAcct Date;
+	@Remarks("The Currency for this record")
+	CCurrencyId CCurrency;
+	@Remarks("Amount of a transaction")
+	Trxamt Amount;/* 0  */
+	@Remarks("Statement Amount")
+	Stmtamt Amount;/* 0  */
+	@Remarks("Additional document charges")
+	?CChargeId CCharge;
+	@Remarks("Charge Amount")
+	ChargeAmt Amount;/* 0  */
+	@Remarks("Interest Amount")
+	InterestAmt Amount;/* 0  */
+	@Remarks("Memo Text")
+	?Memo;
+	@Remarks("Your customer or vendor number at the Business Partner_s site")
+	?ReferenceNo Code;
+	@Remarks("This is a manual process")
+	IsManual YesNo;/* 'N' */
+	@Remarks("Electronic Funds Transfer Transaction ID")
+	?Efttrxid Code;
+	@Remarks("Electronic Funds Transfer Transaction Type")
+	?Efttrxtype String;
+	@Remarks("Electronic Funds Transfer Memo")
+	?Eftmemo Memo;
+	@Remarks("Electronic Funds Transfer Payee information")
+	?Eftpayee String;
+	@Remarks("Electronic Funds Transfer Payyee Account Information")
+	?Eftpayeeaccount String;
+	@Remarks("Create Payment")
+	?CreatePayment YesNo;
+	@Remarks("Date of the Statement Line")
+	Statementlinedate Date;
+	@Remarks("Electronic Funds Transfer Statement Line Date")
+	?Eftstatementlinedate Date;
+	@Remarks("Electronic Funds Transfer Valuta (effective) Date")
+	?Eftvalutadate Date;
+	@Remarks("Electronic Funds Transfer Reference")
+	?Eftreference String;
+	@Remarks("Electronic Funds Transfer Currency")
+	?Eftcurrency String;
+	@Remarks("Electronic Funds Transfer Amount")
+	?Eftamt Amount;/* 0 */
+	@Remarks("Electronic Funds Transfer Check No")
+	?Eftcheckno Code;
+	@Remarks("Match Statement")
+	?Matchstatement null;
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("Invoice Identifier")
+	?CInvoiceId CInvoice;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+};
+

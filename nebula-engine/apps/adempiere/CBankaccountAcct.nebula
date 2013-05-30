@@ -1,0 +1,47 @@
+@Remarks("C_BankAccount_Acct")
+@Refby("0")
+type CBankaccountAcct {
+	@Remarks("Account at the Bank")
+	!CBankaccountId CBankaccount;
+	@Remarks("Rules for accounting")
+	!CAcctschemaId CAcctschema;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Bank In Transit Account")
+	BIntransitAcct CValidcombination;
+	@Remarks("Bank Asset Account")
+	BAssetAcct CValidcombination;
+	@Remarks("Bank Expense Account")
+	BExpenseAcct CValidcombination;
+	@Remarks("Bank Interest Revenue Account")
+	BInterestRevAcct CValidcombination;
+	@Remarks("Bank Interest Expense Account")
+	BInterestExpAcct CValidcombination;
+	@Remarks("Bank Unidentified Receipts Account")
+	BUnidentifiedAcct CValidcombination;
+	@Remarks("Unallocated Cash Clearing Account")
+	BUnallocatedcashAcct CValidcombination;
+	@Remarks("AP Payment Selection Clearing Account")
+	BPaymentSelectAcct CValidcombination;
+	@Remarks("Bank Settlement Gain Account")
+	BSettlementgainAcct CValidcombination;
+	@Remarks("Bank Settlement Loss Account")
+	BSettlementlossAcct CValidcombination;
+	@Remarks("Bank Revaluation Gain Account")
+	BRevaluationgainAcct CValidcombination;
+	@Remarks("Bank Revaluation Loss Account")
+	BRevaluationlossAcct CValidcombination;
+};
+

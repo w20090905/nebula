@@ -1,0 +1,39 @@
+@Remarks("Inventory Move Line Confirmation")
+@Refby("0")
+tx MMovementlineconfirm {
+	@Remarks("Inventory Move Line Confirmation")
+	!MMovementlineconfirmId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Inventory Move Confirmation")
+	MMovementconfirmId MMovementconfirm;
+	@Remarks("Inventory Move document Line")
+	MMovementlineId MMovementline;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Target Movement Quantity")
+	Targetqty Quantity;/* 0  */
+	@Remarks("Confirmation of a received quantity")
+	Confirmedqty Quantity;/* 0  */
+	@Remarks("Difference Quantity")
+	Differenceqty Quantity;/* 0  */
+	@Remarks("The Quantity scrapped due to QA issues")
+	Scrappedqty Quantity;/* 0  */
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Unique line in an Inventory document")
+	?MInventorylineId MInventoryline;
+};
+

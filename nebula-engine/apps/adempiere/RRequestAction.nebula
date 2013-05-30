@@ -1,0 +1,95 @@
+@Remarks("Request History")
+@Refby("0")
+tx RRequestAction {
+	@Remarks("Request has been changed")
+	!RRequestActionId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Request from a Business Partner or Prospect")
+	RRequestId RRequest;
+	@Remarks("Request Group")
+	?RGroupId RGroup;
+	@Remarks("Request Category")
+	?RCategoryId RCategory;
+	@Remarks("Request Status")
+	?RStatusId RStatus;
+	@Remarks("Request Resolution")
+	?RResolutionId RResolution;
+	@Remarks("Sales Representative or Company Agent")
+	?SalesRepId AdUser;
+	@Remarks("Responsibility Role")
+	?AdRoleId AdRole;
+	@Remarks("This request has been escalated")
+	?IsEscalated YesNo;
+	@Remarks("Is this invoiced?")
+	?IsInvoiceD YesNo;
+	@Remarks("Type of Confidentiality")
+	?Confidentialtype Attr;
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
+	?IsSelfservice YesNo;
+	@Remarks("Indicates if this request is of a high, medium or low priority.")
+	?Priority YesNo;
+	@Remarks("Priority of the issue for the User")
+	?PriorityUser YesNo;
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	?AdUserId AdUser;
+	@Remarks("Order")
+	?COrderId COrder;
+	@Remarks("Invoice Identifier")
+	?CInvoiceId CInvoice;
+	@Remarks("Payment identifier")
+	?CPaymentId CPayment;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Textual summary of this request")
+	?Summary;
+	@Remarks("Date that this request should be acted on")
+	?DateNextaction Date;
+	@Remarks("Business Activity")
+	?CActivityId CActivity;
+	@Remarks("Type of request (e.g. Inquiry, Complaint, ..)")
+	?RRequestTypeId RRequestType;
+	@Remarks("Asset used internally or by customers")
+	?AAssetId AAsset;
+	@Remarks("Material Shipment Document")
+	?MInoutId MInout;
+	@Remarks("Return Material Authorization")
+	?MRmaId MRma;
+	@Remarks("Columns with NULL value")
+	?Nullcolumns String;
+	@Remarks("Status of the Task")
+	?Taskstatus Attr;
+	@Remarks("Planned Completion Date")
+	?DateCompleteplan Date;
+	@Remarks("Planned Quantity")
+	?QtyPlan Quantity;
+	@Remarks("Quantity used for this event")
+	?QtySpent Quantity;
+	@Remarks("First effective day (inclusive)")
+	?Startdate Date;
+	@Remarks("Last effective date (inclusive)")
+	?Enddate Date;
+	@Remarks("Planned Start Date")
+	?DateStartplan Date;
+	@Remarks("Invoiced Quantity")
+	?QtyInvoiced Quantity;
+	@Remarks("Product/Resource/Service used in Request")
+	?MProductSpentId MProduct;
+};
+

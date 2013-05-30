@@ -1,0 +1,59 @@
+@Remarks("Electronic Data Interchange")
+@Refby("1")
+type CBpEdi {
+	@Remarks("Electronic Data Interchange")
+	!CBpEdiId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Identifies a Business Partner")
+	CBpartnerId CBpartner;
+	@Remarks("Storage Warehouse and Service Point")
+	MWarehouseId MWarehouse;
+	@Remarks("EDI Type")
+	Editype Attr;
+	@Remarks("Activate Audit Trail of what numbers are generated")
+	IsAudited YesNo;/* 'N'  */
+	@Remarks("EDI Identification Number")
+	Customerno Code;
+	@Remarks("Document Sequence")
+	AdSequenceId AdSequence;
+	@Remarks("EMail address to send requests to - e.g. edi@manufacturer.com")
+	?EmailTo EMail;
+	@Remarks("Full EMail address used to send requests - e.g. edi@organization.com")
+	?EmailFrom EMail;
+	@Remarks("User ID of the sending EMail address (on default SMTP Host) - e.g. edi")
+	?EmailFromUid EMail;
+	@Remarks("Password of the sending EMail address")
+	?EmailFromPwd EMail;
+	@Remarks("Email address to send error messages to")
+	EmailErrorTo EMail;
+	@Remarks("Send informational messages and copies")
+	IsInfosent YesNo;/* 'N'  */
+	@Remarks("EMail address to send informational messages and copies")
+	EmailInfoTo EMail;
+	@Remarks("Quantity Availability Inquiry")
+	Sendinquiry null;/* 'Y'  */
+	@Remarks("Received Inquiry Reply")
+	Receiveinquiryreply String;/* 'Y'  */
+	@Remarks("Send Order")
+	Sendorder null;/* 'Y'  */
+	@Remarks("Receive Order Reply")
+	Receiveorderreply String;/* 'Y'  */
+};
+

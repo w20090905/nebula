@@ -1,0 +1,35 @@
+@Remarks("Product Operation")
+@Refby("2")
+type MProductOperation {
+	@Remarks("Product Manufacturing Operation")
+	!MProductOperationId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Product, Service, Item")
+	MProductId MProduct;
+	@Remarks("Setup time before starting Production")
+	?Setuptime Count;/* 0 */
+	@Remarks("Time to produce one unit")
+	?Unitruntime Unit;/* 0 */
+	@Remarks("Time at the end of the operation")
+	?Teardowntime Count;/* 0 */
+};
+

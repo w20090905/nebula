@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("0")
+type RvClickUnprocessed {
+	WClickId WClick;
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;
+	CreateD null;
+	CreateDby null;
+	Updated null;
+	Updatedby null;
+	?Targeturl Url;
+	?Referrer String;
+	?RemoteHost Host;
+	?RemoteAddr Address;
+	?Useragent String;
+	?AcceptLanguage String;
+	Processed YesNo;
+	?WClickcountId WClickcount;
+	?AdUserId AdUser;
+	?Email EMail;
+};
+

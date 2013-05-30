@@ -1,0 +1,41 @@
+@Remarks("Language ID")
+@Refby("48")
+type AdLanguage {
+	@Remarks("Language for this entity")
+	!AdLanguage Attr;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'N'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Lower-case two-letter ISO-3166 code - http://www.ics.uci.edu/pub/ietf/http/related/iso639.txt")
+	?LanguageIso null;
+	@Remarks("Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1 - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html")
+	?CountryCode Code;
+	@Remarks("The system information is maintained in this language")
+	IsBaselanguage YesNo;/* 'N'  */
+	@Remarks("The screens, etc. are maintained in this Language")
+	IsSystemLanguage YesNo;/* 'N'  */
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Language ID")
+	AdLanguageId AdLanguage;
+	@Remarks("The number notation has a decimal point (no decimal comma)")
+	IsDecimalPoint YesNo;/* 'Y'  */
+	@Remarks("Java Date Pattern")
+	?DatePattern null;
+	@Remarks("Java Time Pattern")
+	?Timepattern null;
+};
+

@@ -1,0 +1,61 @@
+@Remarks("Process or Report")
+@Refby("19")
+type AdProcess {
+	@Remarks("Process or Report")
+	!AdProcessId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Search key for the record in the format required - must be unique")
+	Value String;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Access Level required")
+	AccessLevel null;
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
+	EntityType AdEntityType;/* 'D'  */
+	@Remarks("Name of the Database Procedure")
+	?ProcedureName Name;
+	@Remarks("Indicates a Report record")
+	IsReport YesNo;/* 'Y'  */
+	@Remarks("Print without dialog")
+	?IsDirectprint YesNo;/* 'N'                           */
+	@Remarks("View used to generate this report")
+	?AdReportviewId AdReportview;
+	@Remarks("Java Classname")
+	?ClassName Name;
+	@Remarks("Internal statistics how often the entity was used")
+	?StatisticCount Count;
+	@Remarks("Internal statistics how many seconds a process took")
+	?StatisticSeconds null;
+	@Remarks("Data Print Format")
+	?AdPrintFormatId AdPrintFormat;
+	@Remarks("Key of the Workflow to start")
+	?Workflowvalue String;
+	@Remarks("Workflow or combination of tasks")
+	?AdWorkflowId AdWorkflow;
+	@Remarks("This functionality is considered Beta")
+	IsBetaFunctionality YesNo;/* 'N'  */
+	@Remarks("Run this Process on Server only")
+	IsServerProcess YesNo;/* 'N'  */
+	@Remarks("Show Help")
+	?ShowHelp null;/* 'Y' */
+	@Remarks("Jasper Report")
+	?Jasperreport null;
+};
+

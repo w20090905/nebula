@@ -1,0 +1,87 @@
+@Remarks("System Definition")
+@Refby("2")
+type AdSystem {
+	@Remarks("System Definition")
+	!AdSystemId ID;
+	@Remarks("Client/Tenant for this installation.")
+	!AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Email of the responsible for the System")
+	Username Name;
+	@Remarks("Information")
+	?Info;
+	@Remarks("Version of the table definition")
+	?Version String;
+	@Remarks("Internal Release Number")
+	ReleaseNo String;
+	@Remarks("Number of Internal Users for Adempiere Support")
+	?SupportUnits null;
+	@Remarks("Password of any length (case sensitive)")
+	?Password;
+	@Remarks("Type of Data Replication")
+	Replicationtype Attr;/* 'L' */
+	@Remarks("Start of the ID Range used")
+	?Idrangestart null;
+	@Remarks("End if the ID Range used")
+	?Idrangeend null;
+	@Remarks("Connection String to LDAP server starting with ldap://")
+	?LdapHost Host;
+	@Remarks("Prefix for Custom entities")
+	?Customprefix String;
+	@Remarks("Value set by Migration for post-Migation tasks.")
+	?IsJustmigrated YesNo;/* 'N'  */
+	@Remarks("Database Name")
+	?Dbinstance null;
+	@Remarks("JDBC URL of the database server")
+	?Address null;
+	@Remarks("Number of Database Processors")
+	?Noprocessors null;
+	@Remarks("Textual summary of this request")
+	?Summary;
+	@Remarks("Encryption Class used for securing data content")
+	?Encryptionkey null;
+	@Remarks("Directory service domain name - e.g. adempiere.org")
+	?LdapDomain null;
+	@Remarks("Automatically report Errors")
+	IsAutoErrorReport YesNo;/* 'Y'  */
+	@Remarks("Direct internal record ID")
+	?RecordId ID;
+	@Remarks("Date when the Adempiere support expires")
+	?SupportExpdate Date;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("EMail address to send support information and updates to")
+	?SupportEmail EMail;
+	@Remarks("Maintain general statistics")
+	IsAllowstatistics YesNo;/* 'Y'  */
+	@Remarks("Information to help profiling the system for solving support issues")
+	?Statisticsinfo Info;
+	@Remarks("Information to help profiling the system for solving support issues")
+	?Profileinfo Info;
+	@Remarks("Old Name")
+	?OldName Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Status of the system - Support priority depends on system status")
+	SystemStatus Attr;/* 'E'  */
+	@Remarks("Fail on Missing Model Validator")
+	IsFailonmissingmodelvalidator YesNo;/* 'Y'  */
+	@Remarks("Last Build Info")
+	?Lastbuildinfo Info;
+	@Remarks("Fail if Build Differ")
+	IsFailonbuilddiffer YesNo;/* 'N'  */
+};
+

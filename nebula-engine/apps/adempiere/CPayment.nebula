@@ -1,0 +1,173 @@
+@Remarks("Payment identifier")
+@Refby("16")
+tx CPayment {
+	@Remarks("Payment identifier")
+	!CPaymentId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Document sequence number of the document")
+	DocumentNo Code;
+	@Remarks("Transaction Date")
+	DateTrx Date;
+	@Remarks("This is a sales transaction (receipt)")
+	IsReceipt YesNo;/* 'Y'  */
+	@Remarks("Document type or rules")
+	CDoctypeId CDoctype;
+	@Remarks("Type of credit card transaction")
+	Trxtype Attr;
+	@Remarks("Account at the Bank")
+	CBankaccountId CBankaccount;
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("Invoice Identifier")
+	?CInvoiceId CInvoice;
+	@Remarks("Bank Account of the Business Partner")
+	?CBpBankaccountId CBpBankaccount;
+	@Remarks("Payment batch for EFT")
+	?CPaymentBatchId CPaymentBatch;
+	@Remarks("Method of Payment")
+	TenderType Attr;
+	@Remarks("Credit Card (Visa, MC, AmEx)")
+	?CreditcardType Attr;
+	@Remarks("Credit Card Number")
+	?CreditcardNumber Code;
+	@Remarks("Credit Card Verification code on credit card")
+	?CreditcardVv String;
+	@Remarks("Expiry Month")
+	?CreditcardExpmm null;
+	@Remarks("Expiry Year")
+	?CreditcardExpyy null;
+	@Remarks("Combination of routing no, account and check no")
+	?Micr null;
+	@Remarks("Bank Routing Number")
+	?Routingno Code;
+	@Remarks("Account Number")
+	?Accountno Code;
+	@Remarks("Check Number")
+	?Checkno Code;
+	@Remarks("Name on Credit Card or Account holder")
+	?AName Name;
+	@Remarks("Street address of the Credit Card or Account holder")
+	?AStreet null;
+	@Remarks("City or the Credit Card or Account Holder")
+	?ACity null;
+	@Remarks("State of the Credit Card or Account holder")
+	?AState null;
+	@Remarks("Zip Code of the Credit Card or Account Holder")
+	?AZip null;
+	@Remarks("Payment Identification - Driver License")
+	?AIdentDl null;
+	@Remarks("Payment Identification - Social Security No")
+	?AIdentSsn null;
+	@Remarks("Email Address")
+	?AEmail EMail;
+	@Remarks("Voice Authorization Code from credit card company")
+	?VoiceAuthcode Code;
+	@Remarks("Original Transaction ID")
+	?OrigTrxid Code;
+	@Remarks("Purchase Order Number")
+	?Ponum Code;
+	@Remarks("The Currency for this record")
+	CCurrencyId CCurrency;
+	@Remarks("Amount being paid")
+	Payamt Amount;/* 0  */
+	@Remarks("Calculated amount of discount")
+	?DiscountAmt Amount;/* 0 */
+	@Remarks("Amount to write-off")
+	?WriteoffAmt Amount;/* 0 */
+	@Remarks("Tax Amount for a document")
+	?TaxAmt Amount;/* 0 */
+	@Remarks("Indicates if this document requires approval")
+	IsApproved YesNo;/* 'N'  */
+	@Remarks("Payment reference")
+	?RPnref null;
+	@Remarks("Result of transmission")
+	?RResult null;
+	@Remarks("Response message")
+	?RRespmsg Msg;
+	@Remarks("Authorization Code returned")
+	?RAuthcode Code;
+	@Remarks("This address has been verified")
+	?RAvsaddr Address;
+	@Remarks("The Zip Code has been verified")
+	?RAvszip null;
+	@Remarks("Response info")
+	?RInfo Info;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("This payment can be processed online")
+	?Oprocessing null;
+	@Remarks("The current status of the document")
+	Docstatus Attr;
+	@Remarks("The targeted status of the document")
+	Docaction Attr;
+	@Remarks("Payment is reconciled with bank statement")
+	IsReconciled YesNo;/* 'N'  */
+	@Remarks("Indicates if the payment has been allocated")
+	IsAllocated YesNo;/* 'N'  */
+	@Remarks("Can be accessed online")
+	IsOnline YesNo;/* 'N'  */
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Posting status")
+	PostEd YesNo;/* 'N'  */
+	@Remarks("Over-Payment (unallocated) or Under-Payment (partial payment)")
+	IsOverunderpayment YesNo;/* 'N'  */
+	@Remarks("Over-Payment (unallocated) or Under-Payment (partial payment) Amount")
+	?Overunderamt Amount;/* 0 */
+	@Remarks("Country")
+	?ACountry null;
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
+	IsSelfservice YesNo;/* 'N' */
+	@Remarks("Charge Amount")
+	?ChargeAmt Amount;/* 0 */
+	@Remarks("Additional document charges")
+	?CChargeId CCharge;
+	@Remarks("Charge after Shipment")
+	IsDelayedcapture YesNo;/* 'N'  */
+	@Remarks("Authorization Code Delayed Capture returned")
+	?RAuthcodeDc null;
+	@Remarks("Credit Card Verification Code Match")
+	?RCvv2match null;
+	@Remarks("Payment Reference Delayed Capture")
+	?RPnrefDc null;
+	@Remarks("Track 1 and 2 of the Credit Card")
+	?SWIPE;
+	@Remarks("Performing or initiating organization")
+	?AdOrgtrxId AdOrg;
+	@Remarks("Marketing Campaign")
+	?CCampaignId CCampaign;
+	@Remarks("Business Activity")
+	?CActivityId CActivity;
+	@Remarks("User defined list element #1")
+	?User1Id CElementvalue;
+	@Remarks("User defined list element #2")
+	?User2Id CElementvalue;
+	@Remarks("Currency Conversion Rate Type")
+	?CConversionTypeId CConversionType;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Accounting Date")
+	DateAcct Date;
+	@Remarks("Order")
+	?COrderId COrder;
+	@Remarks("The Payment/Receipt is a Prepayment")
+	IsPrepayment YesNo;/* 'N'  */
+	@Remarks("Referenced Payment")
+	?RefPaymentId CPayment;
+};
+

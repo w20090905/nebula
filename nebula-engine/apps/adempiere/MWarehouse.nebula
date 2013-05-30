@@ -1,0 +1,35 @@
+@Remarks("Storage Warehouse and Service Point")
+@Refby("24")
+type MWarehouse {
+	@Remarks("Storage Warehouse and Service Point")
+	!MWarehouseId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Search key for the record in the format required - must be unique")
+	Value String;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Location or Address")
+	CLocationId CLocation;
+	@Remarks("Element Separator")
+	Separator null;
+	@Remarks("Optional Warehouse to replenish from")
+	?MWarehousesourceId MWarehouse;
+	@Remarks("Custom class to calculate Quantity to Order")
+	?Replenishmentclass null;
+};
+

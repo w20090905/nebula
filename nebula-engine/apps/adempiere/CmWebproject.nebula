@@ -1,0 +1,45 @@
+@Remarks("A web project is the main data container for Containers, URLs, Ads, Media etc.")
+@Refby("12")
+type CmWebproject {
+	@Remarks("A web project is the main data container for Containers, URLs, Ads, Media etc.")
+	!CmWebprojectId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Contains Copyright information for the content")
+	MetaCopyright String;
+	@Remarks("Meta Publisher defines the publisher of the content")
+	MetaPublisher String;
+	@Remarks("RobotsTag defines how search robots should handle this content")
+	MetaRobotstag String;
+	@Remarks("Author of the content")
+	MetaAuthor String;
+	@Remarks("Defines the type of content i.e. 'text/html; charset=UTF-8'")
+	MetaContent String;
+	@Remarks("Container Tree")
+	AdTreecmcId AdTree;
+	@Remarks("Stage Tree")
+	AdTreecmsId AdTree;
+	@Remarks("Media Tree")
+	AdTreecmmId AdTree;
+	@Remarks("Template Tree")
+	AdTreecmtId AdTree;
+};
+

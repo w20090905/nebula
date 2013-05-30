@@ -1,0 +1,35 @@
+@Remarks("Product Serial Number Control")
+@Refby("2")
+type MSernoctl {
+	@Remarks("Product Serial Number Control")
+	!MSernoctlId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Starting number/position")
+	Startno SeqNo;
+	@Remarks("The number to increment the last document number by")
+	Incrementno SeqNo;
+	@Remarks("The next number to be used")
+	Currentnext null;
+	@Remarks("Prefix before the sequence number")
+	?Prefix String;
+	@Remarks("Suffix after the number")
+	?Suffix String;
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE */
+};
+

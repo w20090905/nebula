@@ -1,0 +1,61 @@
+@Remarks("The terms for Payment of this transaction")
+@Refby("12")
+type CPaymentTerm {
+	@Remarks("The terms of Payment (timing, discount)")
+	!CPaymentTermId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Additional information for a Document")
+	?DocumentNote Note;
+	@Remarks("Due after delivery rather than after invoicing")
+	AfterDelivery YesNo;/* 'N'  */
+	@Remarks("Payment is due on a fixed date")
+	IsDuefixed YesNo;/* 'N'  */
+	@Remarks("Net Days in which payment is due")
+	Netdays Count;
+	@Remarks("Days after due date to send first dunning letter")
+	Gracedays Count;
+	@Remarks("Last day to include for next due date")
+	?Fixmonthcutoff null;
+	@Remarks("Day of the month of the due date")
+	?Fixmonthday null;
+	@Remarks("Number of months (0=same, 1=following)")
+	?Fixmonthoffset null;
+	@Remarks("Number of days from invoice date to be eligible for discount")
+	DiscountDays Count;
+	@Remarks("Discount in percent")
+	Discount Count;
+	@Remarks("Number of days from invoice date to be eligible for discount")
+	DiscountDays2 null;
+	@Remarks("Discount in percent")
+	Discount2 null;
+	@Remarks("Payment due on the next business day")
+	?IsNextbusinessday YesNo;/* 'Y'                           */
+	@Remarks("Default value")
+	?IsDefault YesNo;/* 'N' */
+	@Remarks("Search key for the record in the format required - must be unique")
+	Value String;
+	@Remarks("Day when payment is due net")
+	?Netday null;
+	@Remarks("Element is valid")
+	IsValid YesNo;/* 'N'  */
+	@Remarks("Process Now")
+	?Processing YesNo;
+};
+

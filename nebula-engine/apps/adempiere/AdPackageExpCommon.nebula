@@ -1,0 +1,67 @@
+@Remarks("AD_Package_Exp_Common_ID")
+@Refby("0")
+type AdPackageExpCommon {
+	@Remarks("AD_Package_Exp_Common_ID")
+	!AdPackageExpCommonId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'                    */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE                */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE                */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Special Form")
+	?AdFormId AdForm;
+	@Remarks("Import Format")
+	?AdImpformatId AdImpformat;
+	@Remarks("View used to generate this report")
+	?AdReportviewId AdReportview;
+	@Remarks("Database Table information")
+	?AdTableId AdTable;
+	@Remarks("Collection of windows, reports")
+	?AdWorkbenchId AdWorkbench;
+	@Remarks("DBType")
+	?Dbtype Attr;
+	@Remarks("The document has been processed")
+	?Processed YesNo;
+	@Remarks("Alphanumeric identifier of the entity")
+	?Name;
+	@Remarks("Additional Name")
+	?Name2 Name;
+	@Remarks("Unique line for this document")
+	?Line;
+	@Remarks("File_Directory")
+	?FileDirectory null;
+	@Remarks("Name of the local file or URL")
+	?Filename;
+	@Remarks("Destination_Directory")
+	?DestinationDirectory null;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Type of Validation (SQL, Java Script, Java Language)")
+	?Type Attr;
+	@Remarks("Target_Directory")
+	?TargetDirectory null;
+	@Remarks("SQLStatement")
+	?Sqlstatement null;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Workflow or combination of tasks")
+	?AdWorkflowId AdWorkflow;
+	@Remarks("Data entry or display window")
+	?AdWindowId AdWindow;
+	@Remarks("Responsibility Role")
+	?AdRoleId AdRole;
+	@Remarks("Process or Report")
+	?AdProcessId AdProcess;
+	@Remarks("Identifies a Menu")
+	?AdMenuId AdMenu;
+};
+

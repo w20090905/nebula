@@ -1,0 +1,59 @@
+@Remarks("Data Print Format")
+@Refby("16")
+type AdPrintFormat {
+	@Remarks("Data Print Format")
+	!AdPrintFormatId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Table based List Reporting")
+	IsTablebased YesNo;/* 'Y'  */
+	@Remarks("If Selected, a Form is printed, if not selected a columnar List report")
+	IsForm YesNo;/* 'N'  */
+	@Remarks("Database Table information")
+	AdTableId AdTable;
+	@Remarks("Printer paper definition")
+	AdPrintPaperId AdPrintPaper;
+	@Remarks("Color used for printing and display")
+	AdPrintColorId AdPrintColor;
+	@Remarks("Maintain Print Font")
+	AdPrintFontId AdPrintFont;
+	@Remarks("The standard Header and Footer is used")
+	IsStandardHeaderfooter YesNo;/* 'Y'  */
+	@Remarks("Margin of the Header in 1/72 of an inch")
+	HeaderMargin Length;
+	@Remarks("Margin of the Footer in 1/72 of an inch")
+	FooterMargin Length;
+	@Remarks("Create Copy")
+	?CreateCopy YesNo;
+	@Remarks("View used to generate this report")
+	?AdReportviewId AdReportview;
+	@Remarks("Table Format in Reports")
+	?AdPrintTableformatId AdPrintTableformat;
+	@Remarks("Name of the Printer")
+	?PrintErName Name;
+	@Remarks("Default value")
+	IsDefault YesNo;/* 'N'  */
+	@Remarks("The Jasper Process used by the printengine if any process defined")
+	?JasperprocessId AdProcess;
+	@Remarks("ClassName")
+	?ClassName Name;
+	@Remarks("Args")
+	?Args String;
+};
+

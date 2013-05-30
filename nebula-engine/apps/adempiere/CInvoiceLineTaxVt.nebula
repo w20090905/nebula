@@ -1,0 +1,50 @@
+@Remarks("")
+@Refby("0")
+type CInvoiceLineTaxVt {
+	?AdClientId AdClient;
+	?AdOrgId AdOrg;
+	?IsActive YesNo;
+	?CreateD null;
+	?CreateDby null;
+	?Updated null;
+	?Updatedby null;
+	?AdLanguage Attr;
+	?CInvoiceId CInvoice;
+	?CInvoiceLineId CInvoiceLine;
+	?CTaxId CTax;
+	?TaxAmt Amount;
+	?LineTotalAmt Line;
+	?TaxIndicator null;
+	?Line;
+	?MProductId MProduct;
+	?QtyInvoiced Quantity;
+	?QtyEntered Quantity;
+	?Uomsymbol Symbol;
+	?Name;
+	?Description;
+	?DocumentNote Note;
+	?UPC;
+	?SKU;
+	?ProductValue String;
+	?ResourceDescription Description;
+	?PriceList Price;
+	?PriceEnteredlist Price;
+	?Discount Count;
+	?PriceActual Price;
+	?PriceEntered Price;
+	?LineNetamt Line;
+	?MAttributesetinstanceId MAttributesetinstance;
+	?MAttributesetId MAttributeset;
+	?Serno Code;
+	?LOT;
+	?MLotId MLot;
+	?Guaranteedate Date;
+	?ProductDescription Description;
+	?ImageUrl Url;
+	?CCampaignId CCampaign;
+	?CProjectId CProject;
+	?CActivityId CActivity;
+	?CProjectPhaseId CProjectPhase;
+	?CProjectTaskId CProjectTask;
+};
+

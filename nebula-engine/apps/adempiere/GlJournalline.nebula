@@ -1,0 +1,53 @@
+@Remarks("General Ledger Journal Line")
+@Refby("1")
+tx GlJournalline {
+	@Remarks("General Ledger Journal Line")
+	!GlJournallineId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("General Ledger Journal")
+	GlJournalId GlJournal;
+	@Remarks("Unique line for this document")
+	Line;
+	@Remarks("This Line is generated")
+	IsGenerated YesNo;/* 'N'  */
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Source Debit Amount")
+	AmtSourcedr Amount;/* 0  */
+	@Remarks("Source Credit Amount")
+	AmtSourcecr Amount;/* 0  */
+	@Remarks("The Currency for this record")
+	CCurrencyId CCurrency;
+	@Remarks("Currency Conversion Rate")
+	Currencyrate Rate;/* 0  */
+	@Remarks("Accounting Date")
+	DateAcct Date;
+	@Remarks("Accounted Debit Amount")
+	AmtAcctdr Amount;/* 0  */
+	@Remarks("Accounted Credit Amount")
+	AmtAcctcr Amount;/* 0  */
+	@Remarks("Unit of Measure")
+	?CUomId CUom;
+	@Remarks("Quantity")
+	?Qty Quantity;/* 0 */
+	@Remarks("Valid Account Combination")
+	CValidcombinationId CValidcombination;
+	@Remarks("Currency Conversion Rate Type")
+	CConversionTypeId CConversionType;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+};
+

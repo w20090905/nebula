@@ -1,0 +1,51 @@
+@Remarks("Product Costing")
+@Refby("0")
+type MProductCosting {
+	@Remarks("Product, Service, Item")
+	!MProductId MProduct;
+	@Remarks("Rules for accounting")
+	!CAcctschemaId CAcctschema;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("The currently used cost price")
+	Currentcostprice Price;/* 0  */
+	@Remarks("Future Cost Price")
+	Futurecostprice Price;/* 0  */
+	@Remarks("Standard Costs")
+	Coststandard Cost;/* 0  */
+	@Remarks("Standard Cost Purchase Order Quantity Sum (internal)")
+	Coststandardpoqty Cost;/* 0  */
+	@Remarks("Standard Cost Purchase Order Amount Sum (internal)")
+	Coststandardpoamt Cost;/* 0  */
+	@Remarks("Standard Cost Invoice Quantity Sum (internal)")
+	Coststandardcumqty Cost;/* 0  */
+	@Remarks("Standard Cost Invoice Amount Sum (internal)")
+	Coststandardcumamt Cost;/* 0  */
+	@Remarks("Weighted average costs")
+	Costaverage Cost;/* 0  */
+	@Remarks("Cumulative average cost quantities (internal)")
+	Costaveragecumqty Cost;/* 0  */
+	@Remarks("Cumulative average cost amounts (internal)")
+	Costaveragecumamt Cost;/* 0  */
+	@Remarks("Price of the last purchase order for the product")
+	PriceLastpo Price;/* 0  */
+	@Remarks("Price of the last invoice for the product")
+	PriceLastinv Price;/* 0  */
+	@Remarks("Cumulative total lifetime invoice quantity")
+	TotalInvqty Quantity;/* 0  */
+	@Remarks("Cumulative total lifetime invoice amount")
+	TotalInvamt Amount;/* 0  */
+};
+

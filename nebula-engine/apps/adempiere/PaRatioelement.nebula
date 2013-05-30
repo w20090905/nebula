@@ -1,0 +1,43 @@
+@Remarks("Performance Ratio Element")
+@Refby("0")
+type PaRatioelement {
+	@Remarks("Performance Ratio Element")
+	!PaRatioelementId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Performace Ratio")
+	PaRatioId PaRatio;
+	@Remarks("Ratio Operand")
+	Ratiooperand null;
+	@Remarks("Ratio Element Type")
+	Ratioelementtype Attr;
+	@Remarks("Account used")
+	?AccountId CElementvalue;
+	@Remarks("Performace Ratio Used")
+	?PaRatiousedId PaRatio;
+	@Remarks("Calculation method for measuring performance")
+	?PaMeasurecalcId PaMeasurecalc;
+	@Remarks("Constant value")
+	?Constantvalue null;
+	@Remarks("Method of ordering records; lowest number comes first")
+	SeqNo;
+	@Remarks("The type of posted amount for the transaction")
+	?PostIngtype Attr;
+};
+

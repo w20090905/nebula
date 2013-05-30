@@ -1,0 +1,63 @@
+@Remarks("Task or step in a project")
+@Refby("0")
+tx CProjectLine {
+	@Remarks("Task or step in a project")
+	!CProjectLineId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Financial Project")
+	CProjectId CProject;
+	@Remarks("Unique line for this document")
+	Line;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Planned quantity for this project")
+	PlannedQty Quantity;/* 0  */
+	@Remarks("Planned price for this project line")
+	PlannedPrice Price;/* 0  */
+	@Remarks("Planned amount for this project")
+	PlannedAmt Amount;/* 0  */
+	@Remarks("Project_s planned margin amount")
+	PlannedMarginamt Amount;/* 0  */
+	@Remarks("The (legal) commitment amount")
+	?CommittedAmt Amount;/* 0  */
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Category of a Product")
+	?MProductCategoryId MProductCategory;
+	@Remarks("The amount invoiced")
+	InvoiceDamt Amount;/* 0  */
+	@Remarks("The quantity invoiced")
+	InvoiceDqty Quantity;/* 0  */
+	@Remarks("The (legal) commitment Quantity")
+	?CommittedQty Quantity;/* 0  */
+	@Remarks("Project Issues (Material, Labor)")
+	?CProjectIssueId CProjectIssue;
+	@Remarks("Order")
+	?COrderId COrder;
+	@Remarks("Purchase Order")
+	?COrderpoId COrder;
+	@Remarks("Indicates if this document / line is printed")
+	IsPrintEd YesNo;/* 'Y'  */
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Pricing")
+	?Dopricing YesNo;/* 'Y' */
+	@Remarks("Phase of a Project")
+	?CProjectPhaseId CProjectPhase;
+	@Remarks("Actual Project Task in a Phase")
+	?CProjectTaskId CProjectTask;
+};
+

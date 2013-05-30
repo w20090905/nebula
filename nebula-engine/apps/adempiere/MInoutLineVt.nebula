@@ -1,0 +1,47 @@
+@Remarks("")
+@Refby("0")
+type MInoutLineVt {
+	?AdClientId AdClient;
+	?AdOrgId AdOrg;
+	?IsActive YesNo;
+	?CreateD null;
+	?CreateDby null;
+	?Updated null;
+	?Updatedby null;
+	?AdLanguage Attr;
+	?MInoutId MInout;
+	?MInoutlineId MInoutline;
+	?Line;
+	?MProductId MProduct;
+	?Movementqty Quantity;
+	?QtyEntered Quantity;
+	?Uomsymbol Symbol;
+	?QtyOrdered Quantity;
+	?QtyDelivered Quantity;
+	?QtyBackordered Quantity;
+	?Name;
+	?Description;
+	?DocumentNote Note;
+	?UPC;
+	?SKU;
+	?ProductValue String;
+	?MLocatorId MLocator;
+	?MWarehouseId MWarehouse;
+	?X String;
+	?Y String;
+	?Z String;
+	?MAttributesetinstanceId MAttributesetinstance;
+	?MAttributesetId MAttributeset;
+	?Serno Code;
+	?LOT;
+	?MLotId MLot;
+	?Guaranteedate Date;
+	?ProductDescription Description;
+	?ImageUrl Url;
+	?CCampaignId CCampaign;
+	?CProjectId CProject;
+	?CActivityId CActivity;
+	?CProjectPhaseId CProjectPhase;
+	?CProjectTaskId CProjectTask;
+};
+

@@ -1,0 +1,49 @@
+@Remarks("Business Partner Group")
+@Refby("7")
+type CBpGroup {
+	@Remarks("Business Partner Group")
+	!CBpGroupId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Search key for the record in the format required - must be unique")
+	Value String;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Default value")
+	IsDefault YesNo;/* 'N'  */
+	@Remarks("Color used for printing and display")
+	?AdPrintColorId AdPrintColor;
+	@Remarks("Can enter confidential information")
+	IsConfidentialinfo Info;/* 'N'  */
+	@Remarks("Base of Priority")
+	?PriorityBase null;
+	@Remarks("Unique identifier of a Price List")
+	?MPriceListId MPriceList;
+	@Remarks("Price List used by this Business Partner")
+	?PoPriceListId MPriceList;
+	@Remarks("Schema to calculate the trade discount percentage")
+	?MDiscountSchemaId MDiscountSchema;
+	@Remarks("Schema to calculate the purchase trade discount percentage")
+	?PoDiscountSchemaId MDiscountSchema;
+	@Remarks("Credit Watch - Percent of Credit Limit when OK switches to Watch")
+	?Creditwatchpercent Percent;
+	@Remarks("PO-Invoice Match Price Tolerance in percent of the purchase price")
+	?PriceMatchtolerance Price;
+	@Remarks("Dunning Rules for overdue invoices")
+	?CDunningId CDunning;
+};
+

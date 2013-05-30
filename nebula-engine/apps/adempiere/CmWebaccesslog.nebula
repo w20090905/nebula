@@ -1,0 +1,57 @@
+@Remarks("Web Access Log")
+@Refby("0")
+tx CmWebaccesslog {
+	@Remarks("Web Access Log Information")
+	!CmWebaccesslogId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Web Log Type")
+	Logtype Attr;
+	@Remarks("A web project is the main data container for Containers, URLs, Ads, Media etc.")
+	?CmWebprojectId CmWebproject;
+	@Remarks("Defines the IP address to transfer data to")
+	Address null;
+	@Remarks("Web Broadcast Server")
+	?CmBroadcastserverId CmBroadcastserver;
+	@Remarks("Request Type")
+	RequestType Attr;
+	@Remarks("Page URL")
+	?Pageurl Url;
+	@Remarks("Referring web address")
+	?Referrer String;
+	@Remarks("Remote host Info")
+	?RemoteHost Host;
+	@Remarks("Remote Address")
+	?RemoteAddr Address;
+	@Remarks("Browser Used")
+	?Useragent String;
+	@Remarks("Language accepted based on browser information")
+	?AcceptLanguage String;
+	@Remarks("Web Session ID")
+	?Websession String;
+	@Remarks("Hyphen")
+	?Hyphen null;
+	@Remarks("Protocol")
+	Protocol String;
+	@Remarks("Status Code")
+	?Statuscode null;/* 0 */
+	@Remarks("Size of the File in bytes")
+	?FileSize;
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	?AdUserId AdUser;
+	@Remarks("Contains media content like images, flash movies etc.")
+	?CmMediaId CmMedia;
+};
+

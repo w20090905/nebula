@@ -1,0 +1,37 @@
+@Remarks("Allocate Payment to Invoices")
+@Refby("0")
+tx CPaymentAllocate {
+	@Remarks("Allocate Payment to Invoices")
+	!CPaymentAllocateId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Payment identifier")
+	CPaymentId CPayment;
+	@Remarks("Invoice Identifier")
+	CInvoiceId CInvoice;
+	@Remarks("Amount in a defined currency")
+	Amount;/* 0  */
+	@Remarks("Calculated amount of discount")
+	DiscountAmt Amount;/* 0  */
+	@Remarks("Amount to write-off")
+	WriteoffAmt Amount;/* 0  */
+	@Remarks("Over-Payment (unallocated) or Under-Payment (partial payment) Amount")
+	Overunderamt Amount;/* 0  */
+	@Remarks("Invoice Amt")
+	?InvoiceAmt Amount;/* 0 */
+	@Remarks("Allocation Line")
+	?CAllocationlineId CAllocationline;
+};
+

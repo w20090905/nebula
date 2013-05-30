@@ -1,0 +1,31 @@
+@Remarks("System Message")
+@Refby("5")
+tx AdMessage {
+	@Remarks("System Message")
+	!AdMessageId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Search key for the record in the format required - must be unique")
+	Value String;
+	@Remarks("Textual Informational, Menu or Error Message")
+	Msgtext Text;
+	@Remarks("Additional tip or help for this message")
+	?Msgtip null;
+	@Remarks("Type of message (Informational, Menu or Error)")
+	Msgtype Attr;
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
+	EntityType AdEntityType;/* 'D'  */
+};
+

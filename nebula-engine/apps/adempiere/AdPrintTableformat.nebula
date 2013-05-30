@@ -1,0 +1,77 @@
+@Remarks("Table Format in Reports")
+@Refby("1")
+type AdPrintTableformat {
+	@Remarks("Table Format in Reports")
+	!AdPrintTableformatId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Header row Font")
+	?HdrPrintFontId AdPrintFont;
+	@Remarks("Foreground color if the table header row")
+	?HdrTextfgPrintColorId AdPrintColor;
+	@Remarks("Background color of header row")
+	?HdrTextbgPrintColorId AdPrintColor;
+	@Remarks("Table header row line color")
+	?HdrLinePrintColorId AdPrintColor;
+	@Remarks("Function row Font")
+	?FunctPrintFontId AdPrintFont;
+	@Remarks("Function Background Color")
+	?FunctbgPrintColorId AdPrintColor;
+	@Remarks("Function Foreground Color")
+	?FunctfgPrintColorId AdPrintColor;
+	@Remarks("Table line color")
+	?LinePrintColorId AdPrintColor;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Paint table boundary lines")
+	IsPaintBoundarylines YesNo;/* 'N'  */
+	@Remarks("Paint horizontal lines")
+	IsPaintHlines YesNo;/* 'N'  */
+	@Remarks("Paint vertical lines")
+	IsPaintVlines YesNo;/* 'N'  */
+	@Remarks("Print Symbols for Functions (Sum, Average, Count)")
+	IsPrintFunctionsymbols YesNo;/* 'Y'  */
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Default value")
+	IsDefault YesNo;/* 'N'  */
+	@Remarks("URL of  image")
+	?ImageUrl Url;
+	@Remarks("Content of the left portion of the header.")
+	?HeaderLeft String;
+	@Remarks("Content of the center portion of the header.")
+	?HeaderCenter String;
+	@Remarks("Content of the right portion of the header.")
+	?HeaderRight String;
+	@Remarks("Content of the left portion of the footer.")
+	?FooterLeft String;
+	@Remarks("Content of the center portion of the footer.")
+	?FooterCenter String;
+	@Remarks("Content of the right portion of the footer.")
+	?FooterRight String;
+	@Remarks("The image to be printed is attached to the record")
+	?ImageIsattached null;/* 'N' */
+	@Remarks("Width of the Header Line Stroke")
+	?HdrStroke null;
+	@Remarks("Width of the Line Stroke")
+	?LineStroke Line;
+	@Remarks("Type of the Header Line Stroke")
+	?HdrStroketype Attr;
+	@Remarks("Type of the Line Stroke")
+	?LineStroketype Attr;
+	@Remarks("Paint Lines over/under the Header Line")
+	IsPaintHeaderlines YesNo;/* 'Y'  */
+};
+

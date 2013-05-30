@@ -1,0 +1,31 @@
+@Remarks("Attachment for the document")
+@Refby("1")
+tx AdAttachment {
+	@Remarks("Attachment for the document")
+	!AdAttachmentId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Database Table information")
+	AdTableId AdTable;
+	@Remarks("Direct internal record ID")
+	RecordId ID;
+	@Remarks("Name this entity is referred to as")
+	Title;
+	@Remarks("Binary Data")
+	?Binarydata Note;
+	@Remarks("Text Message")
+	?TextMsg Msg;
+};
+

@@ -1,0 +1,45 @@
+@Remarks("Restriction of what will be shown in Report Line")
+@Refby("1")
+tx PaReportsource {
+	@Remarks("Restriction of what will be shown in Report Line")
+	!PaReportsourceId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Report Line")
+	PaReportlineId PaReportline;
+	@Remarks("Element Type (account or user defined)")
+	Elementtype Attr;
+	@Remarks("Organizational entity within client")
+	?OrgId AdOrg;
+	@Remarks("Account Element")
+	?CElementvalueId CElementvalue;
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Marketing Campaign")
+	?CCampaignId CCampaign;
+	@Remarks("Location or Address")
+	?CLocationId CLocation;
+	@Remarks("Sales coverage region")
+	?CSalesRegionId CSalesRegion;
+	@Remarks("Business Activity")
+	?CActivityId CActivity;
+};
+

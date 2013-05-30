@@ -1,0 +1,65 @@
+@Remarks("Request for Quotation Response from a potential Vendor")
+@Refby("1")
+type CRfqresponse {
+	@Remarks("Request for Quotation Response from a potential Vendor")
+	!CRfqresponseId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Request for Quotation")
+	CRfqId CRfq;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Identifies a Business Partner")
+	CBpartnerId CBpartner;
+	@Remarks("Identifies the (ship to) address for this Business Partner")
+	CBpartnerLocationId CBpartnerLocation;
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	?AdUserId AdUser;
+	@Remarks("The Currency for this record")
+	CCurrencyId CCurrency;
+	@Remarks("Date when (last) invitation was sent")
+	?DateInvited Date;
+	@Remarks("Date of the Response")
+	?DateResponse Date;
+	@Remarks("Date when work is (planned to be) started")
+	?DateWorkstart Date;
+	@Remarks("Number of Days (planned) until Delivery")
+	?DeliveryDays Count;/* 0 */
+	@Remarks("Date when work is (planned to be) complete")
+	?DateWorkcomplete Date;
+	@Remarks("Price")
+	Price;/* 0  */
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
+	IsSelfservice YesNo;/* 'N'  */
+	@Remarks("It is complete")
+	IsComplete YesNo;/* 'N'  */
+	@Remarks("The resonse is the selected winner")
+	IsSelectEdwinner YesNo;/* 'N'  */
+	@Remarks("Relative Rank Number")
+	?Ranking;/* 0 */
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Order")
+	?COrderId COrder;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Check Complete")
+	?Checkcomplete null;
+};
+

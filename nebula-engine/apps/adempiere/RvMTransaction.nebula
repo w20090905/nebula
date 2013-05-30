@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+type RvMTransaction {
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	Movementdate Date;
+	Movementqty Quantity;
+	MProductId MProduct;
+	MLocatorId MLocator;
+	MAttributesetinstanceId MAttributesetinstance;
+	MProductCategoryId MProductCategory;
+	Value String;
+	CBpartnerId CBpartner;
+	?PricePo Price;
+	?PriceLastpo Price;
+	?PriceList Price;
+};
+

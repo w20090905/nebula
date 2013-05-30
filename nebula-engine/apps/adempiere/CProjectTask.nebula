@@ -1,0 +1,43 @@
+@Remarks("Actual Project Task in a Phase")
+@Refby("7")
+type CProjectTask {
+	@Remarks("Actual Project Task in a Phase")
+	!CProjectTaskId ID;
+	@Remarks("Standard Project Type Task")
+	?CTaskId CTask;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  	  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  	  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  	  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Method of ordering records; lowest number comes first")
+	SeqNo;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Phase of a Project")
+	CProjectPhaseId CProjectPhase;
+	@Remarks("Quantity")
+	?Qty Quantity;/* 0  	  */
+	@Remarks("Invoice Rule for the project")
+	?Projinvoicerule Attr;
+	@Remarks("Planned amount for this project")
+	PlannedAmt Amount;/* 0  */
+	@Remarks("The (legal) commitment amount")
+	CommittedAmt Amount;/* 0  */
+};
+

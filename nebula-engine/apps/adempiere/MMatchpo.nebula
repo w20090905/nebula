@@ -1,0 +1,51 @@
+@Remarks("Match Purchase Order to Shipment/Receipt and Invoice")
+@Refby("0")
+tx MMatchpo {
+	@Remarks("Match Purchase Order to Shipment/Receipt and Invoice")
+	!MMatchpoId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Sales Order Line")
+	COrderlineId COrderline;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Line on Shipment or Receipt document")
+	?MInoutlineId MInoutline;
+	@Remarks("Invoice Detail Line")
+	?CInvoiceLineId CInvoiceLine;
+	@Remarks("Transaction Date")
+	DateTrx Date;
+	@Remarks("Quantity")
+	Qty Quantity;/* 0  */
+	@Remarks("Process Now")
+	Processing YesNo;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Posting status")
+	PostEd YesNo;/* 'N'  */
+	@Remarks("Document sequence number of the document")
+	?DocumentNo Code;
+	@Remarks("Accounting Date")
+	?DateAcct Date;
+	@Remarks("Product Attribute Set Instance")
+	?MAttributesetinstanceId MAttributesetinstance;
+	@Remarks("Difference between Purchase and Invoice Price per matched line")
+	?PriceMatchdifference Price;
+	@Remarks("Indicates if this document requires approval")
+	?IsApproved YesNo;/* 'Y' */
+	@Remarks("Optional short description of the record")
+	?Description;
+};
+

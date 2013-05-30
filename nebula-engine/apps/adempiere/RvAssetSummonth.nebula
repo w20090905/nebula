@@ -1,0 +1,28 @@
+@Remarks("")
+@Refby("0")
+type RvAssetSummonth {
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;
+	CreateD null;
+	CreateDby null;
+	Updated null;
+	Updatedby null;
+	AAssetId AAsset;
+	AAssetGroupId AAssetGroup;
+	?MProductId MProduct;
+	Value String;
+	*Name;
+	?Description;
+	?Help;
+	?Guaranteedate Date;
+	?Assetservicedate Date;
+	?CBpartnerId CBpartner;
+	?AdUserId AdUser;
+	?Serno Code;
+	?LOT;
+	?Versionno Code;
+	?Movementdate Date;
+	?DeliveryCount Count;
+};
+

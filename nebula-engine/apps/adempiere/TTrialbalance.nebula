@@ -1,0 +1,93 @@
+@Remarks("Trial Balance")
+@Refby("0")
+tx TTrialbalance {
+	@Remarks("Instance of the process")
+	!AdPinstanceId AdPinstance;
+	@Remarks("Accounting Fact")
+	!FactAcctId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	?AdOrgId AdOrg;
+	@Remarks("Date this record was created")
+	CreateD null;
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Rules for accounting")
+	CAcctschemaId CAcctschema;
+	@Remarks("Account used")
+	?AccountId ID;
+	@Remarks("Transaction Date")
+	?DateTrx Date;
+	@Remarks("Accounting Date")
+	DateAcct Date;
+	@Remarks("Period of the Calendar")
+	?CPeriodId CPeriod;
+	@Remarks("Database Table information")
+	?AdTableId AdTable;
+	@Remarks("Direct internal record ID")
+	?RecordId ID;
+	@Remarks("Transaction line ID (internal)")
+	?LineId ID;
+	@Remarks("General Ledger Category")
+	?GlCategoryId GlCategory;
+	@Remarks("General Ledger Budget")
+	?GlBudgetId GlBudget;
+	@Remarks("Tax identifier")
+	?CTaxId CTax;
+	@Remarks("Warehouse Locator")
+	?MLocatorId MLocator;
+	@Remarks("The type of posted amount for the transaction")
+	PostIngtype Attr;
+	@Remarks("The Currency for this record")
+	?CCurrencyId CCurrency;
+	@Remarks("Source Debit Amount")
+	?AmtSourcedr Amount;
+	@Remarks("Source Credit Amount")
+	?AmtSourcecr Amount;
+	@Remarks("Source Balance Amount")
+	?AmtSourcebalance Amount;
+	@Remarks("Accounted Debit Amount")
+	AmtAcctdr Amount;
+	@Remarks("Accounted Credit Amount")
+	AmtAcctcr Amount;
+	@Remarks("Accounted Balance Amount")
+	AmtAcctbalance Amount;
+	@Remarks("Unit of Measure")
+	?CUomId CUom;
+	@Remarks("Quantity")
+	?Qty Quantity;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("Performing or initiating organization")
+	?AdOrgtrxId ID;
+	@Remarks("Location that inventory was moved from")
+	?CLocfromId ID;
+	@Remarks("Location that inventory was moved to")
+	?CLoctoId ID;
+	@Remarks("Sales coverage region")
+	?CSalesRegionId CSalesRegion;
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Marketing Campaign")
+	?CCampaignId CCampaign;
+	@Remarks("Business Activity")
+	?CActivityId CActivity;
+	@Remarks("User defined list element #1")
+	?User1Id ID;
+	@Remarks("User defined list element #2")
+	?User2Id ID;
+	@Remarks("Asset used internally or by customers")
+	?AAssetId AAsset;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Key of Account Element")
+	?Accountvalue String;
+};
+

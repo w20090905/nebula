@@ -1,0 +1,67 @@
+@Remarks("Country")
+@Refby("12")
+type CCountry {
+	@Remarks("Country")
+	!CCountryId CCountry;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1 - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html")
+	CountryCode Code;
+	@Remarks("Country contains Regions")
+	Hasregion YesNo;/* 'N'  */
+	@Remarks("Name of the Region")
+	?Regionname Name;
+	@Remarks("Format of the phone; Can contain fixed format elements, Variables: '_lLoOaAcCa09'")
+	?Expressionphone Phone;
+	@Remarks("Format for printing this Address")
+	DisplaySequence String;
+	@Remarks("Format of the postal code; Can contain fixed format elements, Variables: '_lLoOaAcCa09'")
+	?Expressionpostal Postal;
+	@Remarks("Has Additional Postal Code")
+	HaspostalAdd YesNo;/* 'N'  */
+	@Remarks("Format of the value; Can contain fixed format elements, Variables: '_lLoOaAcCa09'")
+	?ExpressionpostalAdd null;
+	@Remarks("Language for this entity")
+	?AdLanguage;
+	@Remarks("The Currency for this record")
+	?CCurrencyId CCurrency;
+	@Remarks("Format for printing this Address locally")
+	?DisplaySequencelocal String;
+	@Remarks("Print Address in reverse Order")
+	IsAddresslinesreverse YesNo;/* 'N'  */
+	@Remarks("Print Local Address in reverse Order")
+	IsAddresslineslocalreverse YesNo;/* 'N'  */
+	@Remarks("Format of the Bank Routing Number")
+	?Expressionbankroutingno Code;
+	@Remarks("Format of the Bank Account")
+	?Expressionbankaccountno Code;
+	@Remarks("Java Media Size")
+	?Mediasize null;
+	@Remarks("Does this country have a post code web service")
+	IsPostCodelookup YesNo;/* 'N'  */
+	@Remarks("The class name of the postcode lookup plugin")
+	?Lookupclassname Name;/* NULL   */
+	@Remarks("The ClientID or Login submitted to the Lookup URL")
+	?Lookupclientid String;/* NULL   */
+	@Remarks("The password submitted to the Lookup URL")
+	?Lookuppassword Password;/* NULL   */
+	@Remarks("The URL of the web service that the plugin connects to in order to retrieve postcode data")
+	?Lookupurl Url;/* NULL   */
+};
+

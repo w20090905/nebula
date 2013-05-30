@@ -1,0 +1,37 @@
+@Remarks("LDAP Server")
+@Refby("2")
+type AdLdapProcessor {
+	@Remarks("LDAP Server to authenticate and authorize external systems based on Adempiere")
+	!AdLdapProcessorId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("The port the server is listening")
+	LdapPort Port;/* 0  */
+	@Remarks("Date the process was last run.")
+	?DateLastrun Date;
+	@Remarks("Date the process will run next")
+	?DateNextrun Date;
+	@Remarks("Supervisor for this user/organization - used for escalation and approval")
+	SupervisorId AdUser;
+	@Remarks("Number of days to keep the log entries")
+	KeepLogdays Count;/* 0  */
+	@Remarks("Process Now")
+	?Processing YesNo;
+};
+

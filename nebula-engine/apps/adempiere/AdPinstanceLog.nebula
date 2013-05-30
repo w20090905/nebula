@@ -1,0 +1,17 @@
+@Remarks("(Non Standard Table)")
+@Refby("0")
+tx AdPinstanceLog {
+	@Remarks("Instance of the process")
+	!AdPinstanceId AdPinstance;
+	@Remarks("Log")
+	!LogId ID;
+	@Remarks("Process Parameter")
+	?PDate Date;/* SYSDATE      */
+	@Remarks("Process ID")
+	?PId ID;
+	@Remarks("Process Parameter")
+	?PNumber null;
+	@Remarks("Process Message")
+	?PMsg Msg;
+};
+

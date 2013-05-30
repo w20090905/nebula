@@ -1,0 +1,41 @@
+@Remarks("AD_PInstance_Para")
+@Refby("0")
+tx AdPinstancePara {
+	@Remarks("Instance of the process")
+	!AdPinstanceId AdPinstance;
+	@Remarks("Method of ordering records; lowest number comes first")
+	!SeqNo;
+	@Remarks("Parameter Name")
+	?Parametername Name;
+	@Remarks("Process Parameter")
+	?PString null;/* NULL */
+	@Remarks("Process Parameter")
+	?PStringTo null;/* NULL */
+	@Remarks("Process Parameter")
+	?PNumber null;/* NULL */
+	@Remarks("Process Parameter")
+	?PNumberTo null;/* NULL */
+	@Remarks("Process Parameter")
+	?PDate Date;
+	@Remarks("Process Parameter")
+	?PDateTo null;
+	@Remarks("Information")
+	?Info;
+	@Remarks("Info To")
+	?InfoTo null;
+	@Remarks("Client/Tenant for this installation.")
+	?AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	?AdOrgId AdOrg;
+	@Remarks("Date this record was created")
+	?CreateD null;/* SYSDATE */
+	@Remarks("User who created this records")
+	?CreateDby null;
+	@Remarks("Date this record was updated")
+	?Updated null;/* SYSDATE */
+	@Remarks("User who updated this records")
+	?Updatedby null;
+	@Remarks("The record is active in the system")
+	?IsActive YesNo;/* 'Y' */
+};
+

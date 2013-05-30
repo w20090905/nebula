@@ -1,0 +1,58 @@
+@Remarks("")
+@Refby("0")
+type CInvoiceHeaderVt {
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;
+	CreateD null;
+	CreateDby null;
+	Updated null;
+	Updatedby null;
+	?AdLanguage Attr;
+	CInvoiceId CInvoice;
+	IsSotrx YesNo;
+	DocumentNo Code;
+	Docstatus Attr;
+	CDoctypeId CDoctype;
+	CBpartnerId CBpartner;
+	?Bpvalue String;
+	?Bptaxid Code;
+	?NAICS;
+	?DUNS;
+	?OrgLocationId ID;
+	TaxId Code;
+	DocumentType Attr;
+	?DocumentTypenote Note;
+	?COrderId COrder;
+	?SalesRepId ID;
+	?SalesRepName Name;
+	DateInvoiceD Date;
+	?Bpgreeting String;
+	?Name;
+	?Name2 Name;
+	?BpcontactGreeting String;
+	?Title;
+	?Phone;
+	?Contactname Name;
+	?CLocationId CLocation;
+	?ReferenceNo Code;
+	?PostAl Postal;
+	?Description;
+	?Poreference String;
+	?DateOrdered Date;
+	CCurrencyId CCurrency;
+	?PaymentTerm String;
+	?PaymentTermnote Note;
+	?CChargeId CCharge;
+	?ChargeAmt Amount;
+	?TotalLines Line;
+	GrandTotal null;
+	AmtInwords Amount;
+	MPriceListId MPriceList;
+	IsTaxIncluded YesNo;
+	?CCampaignId CCampaign;
+	?CProjectId CProject;
+	?CActivityId CActivity;
+	IsPaid YesNo;
+};
+

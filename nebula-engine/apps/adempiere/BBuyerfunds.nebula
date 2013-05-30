@@ -1,0 +1,31 @@
+@Remarks("Buyer Funds for Bids on Topics")
+@Refby("1")
+tx BBuyerfunds {
+	@Remarks("Buyer Funds for Bids on Topics")
+	!BBuyerfundsId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	AdUserId BBuyer;
+	@Remarks("Order")
+	?COrderId COrder;
+	@Remarks("Payment identifier")
+	?CPaymentId CPayment;
+	@Remarks("The (legal) commitment amount")
+	CommittedAmt Amount;/* 0  */
+	@Remarks("Amount not committed yet")
+	Noncommittedamt Amount;/* 0  */
+};
+

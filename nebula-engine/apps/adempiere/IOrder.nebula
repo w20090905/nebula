@@ -1,0 +1,129 @@
+@Remarks("Import Orders")
+@Refby("0")
+type IOrder {
+	@Remarks("Import Orders")
+	!IOrderId ID;
+	@Remarks("Client/Tenant for this installation.")
+	?AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	?AdOrgId AdOrg;
+	@Remarks("Performing or initiating organization")
+	?AdOrgtrxId AdOrg;
+	@Remarks("The record is active in the system")
+	?IsActive YesNo;/* 'Y' */
+	@Remarks("Date this record was created")
+	?CreateD null;/* SYSDATE */
+	@Remarks("User who created this records")
+	?CreateDby null;
+	@Remarks("Date this record was updated")
+	?Updated null;/* SYSDATE */
+	@Remarks("User who updated this records")
+	?Updatedby null;
+	@Remarks("Has this import been processed")
+	IIsImported YesNo;/* 'N'  */
+	@Remarks("Messages generated from import process")
+	?IErrorMsg Msg;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The document has been processed")
+	?Processed YesNo;/* 'N' */
+	@Remarks("Sales Representative or Company Agent")
+	?SalesRepId AdUser;
+	@Remarks("Storage Warehouse and Service Point")
+	?MWarehouseId MWarehouse;
+	@Remarks("Unique identifier of a Price List")
+	?MPriceListId MPriceList;
+	@Remarks("The Currency for this record")
+	?CCurrencyId CCurrency;
+	@Remarks("Method or manner of product delivery")
+	?MShipperId MShipper;
+	@Remarks("This is a Sales Transaction")
+	?IsSotrx YesNo;/* 'Y' */
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("Key of the Business Partner")
+	?BpartnerValue String;
+	@Remarks("Alphanumeric identifier of the entity")
+	?Name;
+	@Remarks("Identifies the (ship to) address for this Business Partner")
+	?CBpartnerLocationId CBpartnerLocation;
+	@Remarks("Bill to Address")
+	?BilltoId CBpartnerLocation;
+	@Remarks("Location or Address")
+	?CLocationId CLocation;
+	@Remarks("Address line 1 for this location")
+	?Address null;
+	@Remarks("Address line 2 for this location")
+	?Address null;
+	@Remarks("Postal code")
+	?PostAl Postal;
+	@Remarks("Identifies a City")
+	?City null;
+	@Remarks("Identifies a geographical Region")
+	?CRegionId CRegion;
+	@Remarks("Name of the Region")
+	?Regionname Name;
+	@Remarks("Country")
+	?CCountryId CCountry;
+	@Remarks("Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1 - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html")
+	?CountryCode Code;
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	?AdUserId AdUser;
+	@Remarks("Business Partner Contact Name")
+	?Contactname Name;
+	@Remarks("Electronic Mail Address")
+	?Email EMail;
+	@Remarks("Identifies a telephone number")
+	?Phone;
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Business Activity")
+	?CActivityId CActivity;
+	@Remarks("Document type or rules")
+	?CDoctypeId CDoctype;
+	@Remarks("Name of the Document Type")
+	?DoctypeName Name;
+	@Remarks("The terms of Payment (timing, discount)")
+	?CPaymentTermId CPaymentTerm;
+	@Remarks("Key of the Payment Term")
+	?PaymentTermvalue String;
+	@Remarks("Order")
+	?COrderId COrder;
+	@Remarks("Document sequence number of the document")
+	?DocumentNo Code;
+	@Remarks("Date of Order")
+	?DateOrdered Date;
+	@Remarks("Accounting Date")
+	?DateAcct Date;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Key of the Product")
+	?ProductValue String;
+	@Remarks("Bar Code (Universal Product Code or its superset European Article Number)")
+	?UPC;
+	@Remarks("Stock Keeping Unit")
+	?SKU;
+	@Remarks("Tax identifier")
+	?CTaxId CTax;
+	@Remarks("Short form for Tax to be printed on documents")
+	?TaxIndicator null;
+	@Remarks("Tax Amount for a document")
+	?TaxAmt Amount;/* 0 */
+	@Remarks("Sales Order Line")
+	?COrderlineId COrderline;
+	@Remarks("Description of the Line")
+	?LineDescription Description;
+	@Remarks("Unit of Measure")
+	?CUomId CUom;
+	@Remarks("Ordered Quantity")
+	?QtyOrdered Quantity;/* 0 */
+	@Remarks("Actual Price")
+	?PriceActual Price;/* 0 */
+	@Remarks("Freight Amount")
+	?FreightAmt Amount;/* 0 */
+	@Remarks("Marketing Campaign")
+	?CCampaignId CCampaign;
+};
+

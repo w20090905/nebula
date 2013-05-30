@@ -1,0 +1,45 @@
+@Remarks("Log of data changes")
+@Refby("0")
+type AdChangeLog {
+	@Remarks("Log of data changes")
+	!AdChangeLogId ID;
+	@Remarks("User Session Online or Web")
+	!AdSessionId AdSession;
+	@Remarks("Database Table information")
+	!AdTableId AdTable;
+	@Remarks("Column in the table")
+	!AdColumnId AdColumn;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Direct internal record ID")
+	RecordId ID;
+	@Remarks("The old file data")
+	?OldValue String;
+	@Remarks("New field value")
+	?NewValue String;
+	@Remarks("Undo")
+	?Undo null;
+	@Remarks("Redo")
+	?Redo null;
+	@Remarks("The change is a customization of the data dictionary and can be applied after Migration")
+	IsCustomization YesNo;/* 'N'  */
+	@Remarks("Name of the transaction")
+	?Trxname Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Type of Event in Change Log")
+	?EventChangeLog null;
+};
+

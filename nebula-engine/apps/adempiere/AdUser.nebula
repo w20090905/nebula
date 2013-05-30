@@ -1,0 +1,79 @@
+@Remarks("User within the system - Internal or Business Partner Contact")
+@Refby("94")
+type AdUser {
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	!AdUserId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Password of any length (case sensitive)")
+	?Password;
+	@Remarks("Electronic Mail Address")
+	?Email EMail;
+	@Remarks("Supervisor for this user/organization - used for escalation and approval")
+	?SupervisorId AdUser;
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("User Name (ID) in the Mail System")
+	?Emailuser EMail;
+	@Remarks("Password of your email user id")
+	?Emailuserpw EMail;
+	@Remarks("Identifies the (ship to) address for this Business Partner")
+	?CBpartnerLocationId CBpartnerLocation;
+	@Remarks("Greeting to print on correspondence")
+	?CGreetingId CGreeting;
+	@Remarks("Name this entity is referred to as")
+	?Title;
+	@Remarks("Comments or additional information")
+	?Comments Note;
+	@Remarks("Identifies a telephone number")
+	?Phone;
+	@Remarks("Identifies an alternate telephone number.")
+	?Phone2 Phone;
+	@Remarks("Facsimile number")
+	?Fax;
+	@Remarks("Date this individual was last contacted")
+	?Lastcontact Date;
+	@Remarks("Result of last contact")
+	?Lastresult null;
+	@Remarks("Birthday or Anniversary day")
+	?Birthday;
+	@Remarks("Performing or initiating organization")
+	?AdOrgtrxId AdOrg;
+	@Remarks("Verification information of EMail Address")
+	?Emailverify EMail;
+	@Remarks("Date Email was verified")
+	?Emailverifydate Date;
+	@Remarks("Type of Notifications")
+	NotificationType Attr;/* 'E'  */
+	@Remarks("The user/concat has full access to Business Partner information and resources")
+	IsFullbpaccess YesNo;/* 'Y'  */
+	@Remarks("Job Position")
+	?CJobId CJob;
+	@Remarks("User Name used for authorization via LDAP (directory) services")
+	?LdapUser null;
+	@Remarks("How a Java Client connects to the server(s)")
+	?Connectionprofile null;
+	@Remarks("Search key for the record in the format required - must be unique")
+	?Value String;/* NULL   */
+	@Remarks("UserPIN")
+	?Userpin null;
+};
+

@@ -1,0 +1,49 @@
+@Remarks("Product Category Acct")
+@Refby("0")
+type MProductCategoryAcct {
+	@Remarks("Category of a Product")
+	!MProductCategoryId MProductCategory;
+	@Remarks("Rules for accounting")
+	!CAcctschemaId CAcctschema;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Account for Product Revenue (Sales Account)")
+	PRevenueAcct CValidcombination;
+	@Remarks("Account for Product Expense")
+	PExpenseAcct CValidcombination;
+	@Remarks("Account for Product Asset (Inventory)")
+	PAssetAcct CValidcombination;
+	@Remarks("Account for Cost of Goods Sold")
+	PCogsAcct CValidcombination;
+	@Remarks("Difference between Standard Cost and Purchase Price (PPV)")
+	PPurchasepricevarianceAcct CValidcombination;
+	@Remarks("Difference between Costs and Invoice Price (IPV)")
+	PInvoicePriceVarianceAcct CValidcombination;
+	@Remarks("Trade Discount Receivable Account")
+	PTradediscountrecAcct CValidcombination;
+	@Remarks("Trade Discount Granted Account")
+	PTradediscountgrantAcct CValidcombination;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Indicates how Costs will be calculated")
+	?Costingmethod Attr;
+	@Remarks("The lowest level to accumulate Costing Information")
+	?Costinglevel null;
+	@Remarks("Product Inventory Clearing Account")
+	?PInventoryclearingAcct Amount;
+	@Remarks("Product Cost Adjustment Account")
+	?PCostadjustmentAcct Amount;
+};
+

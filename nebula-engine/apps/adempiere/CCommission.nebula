@@ -1,0 +1,43 @@
+@Remarks("Commission")
+@Refby("2")
+type CCommission {
+	@Remarks("Commission")
+	!CCommissionId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Identifies a Business Partner")
+	CBpartnerId CBpartner;
+	@Remarks("The Currency for this record")
+	CCurrencyId CCurrency;
+	@Remarks("Frequency of event")
+	FrequencyType Attr;
+	@Remarks("Basis for the calculation the commission")
+	Docbasistype Attr;
+	@Remarks("List document details")
+	Listdetails null;/* 'N'  */
+	@Remarks("Date the process was last run.")
+	?DateLastrun Date;
+	@Remarks("Process which will generate a new document lines based on an existing document")
+	?CreateFrom YesNo;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Additional document charges")
+	CChargeId CCharge;
+};
+

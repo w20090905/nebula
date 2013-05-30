@@ -1,0 +1,49 @@
+@Remarks("Withholding type defined")
+@Refby("2")
+type CWithholding {
+	@Remarks("Withholding type defined")
+	!CWithholdingId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("The terms of Payment (timing, discount)")
+	CPaymentTermId CPaymentTerm;
+	@Remarks("This is a tax related withholding")
+	IsTaxWithholding YesNo;/* 'Y'  */
+	@Remarks("Tax is Prorated")
+	IsTaxProrated YesNo;/* 'N'  */
+	@Remarks("Amount paid to someone other than the Business Partner")
+	IsPaidto3party YesNo;/* 'Y'  */
+	@Remarks("Business Partner to whom payment is made")
+	?Beneficiary CBpartner;
+	@Remarks("Withholding amount is a percentage of the invoice amount")
+	IsPercentwithholding YesNo;/* 'Y'  */
+	@Remarks("Percentage")
+	?Percent;/* 0 */
+	@Remarks("Fix amounted amount to be levied or paid")
+	?Fixamt Amount;/* 0 */
+	@Remarks("Minimum gross amount for withholding calculation")
+	?Thresholdmin null;/* 0 */
+	@Remarks("Maximum gross amount for withholding calculation  (0=no limit)")
+	?Thresholdmax null;/* 0 */
+	@Remarks("Minimum Amount in invoice currency")
+	?Minamt Amount;/* 0 */
+	@Remarks("Maximum Amount in invoice currency")
+	?Maxamt Amount;/* 0 */
+};
+

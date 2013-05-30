@@ -1,0 +1,47 @@
+@Remarks("Printer paper definition")
+@Refby("1")
+type AdPrintPaper {
+	@Remarks("Printer paper definition")
+	!AdPrintPaperId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Default value")
+	IsDefault YesNo;/* 'N'  */
+	@Remarks("Landscape orientation")
+	IsLandscape YesNo;/* 'Y'  */
+	@Remarks("Validation Code")
+	Code;
+	@Remarks("Top Space in 1/72 inch")
+	MarginTop Length;/* 36 */
+	@Remarks("Left Space in 1/72 inch")
+	MarginLeft Length;/* 36  */
+	@Remarks("Right Space in 1/72 inch")
+	MarginRight Length;/* 36  */
+	@Remarks("Bottom Space in 1/72 inch")
+	MarginBottom Length;/* 36  */
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("X (horizontal) dimension size")
+	?Sizex Size;/* NULL  */
+	@Remarks("Y (vertical) dimension size")
+	?Sizey Size;/* NULL  */
+	@Remarks("Units of Dimension")
+	?DimensionUnits null;
+};
+

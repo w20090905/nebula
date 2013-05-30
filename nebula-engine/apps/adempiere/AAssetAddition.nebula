@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("1")
+tx AAssetAddition {
+	!AAssetAdditionId ID;
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;/* 'Y'  */
+	CreateD null;/* SYSDATE  */
+	CreateDby null;
+	Updated null;/* SYSDATE  */
+	Updatedby null;
+	AAssetId AAsset;
+	Assetvalueamt Amount;/* 0  */
+	?CInvoiceLineId CInvoiceLine;
+};
+

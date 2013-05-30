@@ -1,0 +1,34 @@
+@Remarks("")
+@Refby("0")
+type CRfqresponseV {
+	CRfqresponseId CRfqresponse;
+	CRfqId CRfq;
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;
+	CreateD null;
+	CreateDby null;
+	Updated null;
+	Updatedby null;
+	?AdLanguage Attr;
+	?OrgLocationId ID;
+	TaxId Code;
+	*Name;
+	?Description;
+	?Help;
+	CCurrencyId CCurrency;
+	IsOCode Code;
+	DateResponse Date;
+	?DateWorkstart Date;
+	?DeliveryDays Count;
+	CBpartnerId CBpartner;
+	Bpname Name;
+	?Bpname2 null;
+	CBpartnerLocationId CBpartnerLocation;
+	?CLocationId CLocation;
+	?AdUserId AdUser;
+	?Title;
+	?Phone;
+	?Contactname Name;
+};
+

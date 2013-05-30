@@ -1,0 +1,37 @@
+@Remarks("Performance Goal Restriction")
+@Refby("0")
+type PaGoalrestriction {
+	@Remarks("Performance Goal Restriction")
+	!PaGoalrestrictionId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Goal Restriction Type")
+	Goalrestrictiontype Attr;
+	@Remarks("Performance Goal")
+	PaGoalId PaGoal;
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Organizational entity within client")
+	?OrgId AdOrg;
+	@Remarks("Business Partner Group")
+	?CBpGroupId CBpGroup;
+	@Remarks("Category of a Product")
+	?MProductCategoryId MProductCategory;
+};
+

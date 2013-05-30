@@ -1,0 +1,57 @@
+@Remarks("Table for the Fields")
+@Refby("44")
+type AdTable {
+	@Remarks("Database Table information")
+	!AdTableId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Name of the table in the database")
+	Tablename Name;
+	@Remarks("This is a view")
+	IsView YesNo;/* 'N'  */
+	@Remarks("Access Level required")
+	AccessLevel null;
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
+	EntityType AdEntityType;/* 'D'  */
+	@Remarks("Data entry or display window")
+	?AdWindowId AdWindow;
+	@Remarks("Dynamic Validation Rule")
+	?AdValRuleId AdValRule;
+	@Remarks("Sequence")
+	?Loadseq null;
+	@Remarks("If security is enabled, user access to data can be restricted via Roles")
+	IsSecurityenabled YesNo;/* 'N'  */
+	@Remarks("Indicates if records can be deleted from the database")
+	IsDeleteable YesNo;/* 'Y'  */
+	@Remarks("Use Search instead of Pick list")
+	IsHighvolume YesNo;/* 'N'  */
+	@Remarks("Import Table Columns from Database")
+	?Importtable null;
+	@Remarks("Maintain a log of changes")
+	IsChangeLog YesNo;/* 'N'  */
+	@Remarks("Type of Data Replication")
+	Replicationtype Attr;/* 'L' */
+	@Remarks("Purchase Order Window")
+	?PoWindowId AdWindow;
+	@Remarks("Copy Columns From Table")
+	?Copycolumnsfromtable null;
+};
+

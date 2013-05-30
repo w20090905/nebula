@@ -1,0 +1,39 @@
+@Remarks("Request for Quotation Response Line")
+@Refby("1")
+tx CRfqresponseline {
+	@Remarks("Request for Quotation Response Line")
+	!CRfqresponselineId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Request for Quotation Line")
+	CRfqlineId CRfqline;
+	@Remarks("Request for Quotation Response from a potential Vendor")
+	CRfqresponseId CRfqresponse;
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
+	IsSelfservice YesNo;/* 'N'  */
+	@Remarks("The resonse is the selected winner")
+	IsSelectEdwinner YesNo;/* 'N'  */
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Date when work is (planned to be) started")
+	?DateWorkstart Date;
+	@Remarks("Number of Days (planned) until Delivery")
+	?DeliveryDays Count;/* 0 */
+	@Remarks("Date when work is (planned to be) complete")
+	?DateWorkcomplete Date;
+};
+

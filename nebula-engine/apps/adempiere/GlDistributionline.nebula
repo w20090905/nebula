@@ -1,0 +1,81 @@
+@Remarks("General Ledger Distribution Line")
+@Refby("0")
+tx GlDistributionline {
+	@Remarks("General Ledger Distribution Line")
+	!GlDistributionlineId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("General Ledger Distribution")
+	GlDistributionId GlDistribution;
+	@Remarks("Unique line for this document")
+	Line;/* 0  */
+	@Remarks("Percentage")
+	Percent;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Overwrite the account segment Organization with the value specified")
+	OverwriteOrg YesNo;/* 'N'  */
+	@Remarks("Organizational entity within client")
+	?OrgId AdOrg;
+	@Remarks("Overwrite the account segment Account with the value specified")
+	OverwriteAcct YesNo;/* 'N'  */
+	@Remarks("Account used")
+	?AccountId CElementvalue;
+	@Remarks("Overwrite the account segment Product with the value specified")
+	OverwriteProduct YesNo;/* 'N'  */
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Overwrite the account segment Business Partner with the value specified")
+	OverwriteBpartner YesNo;/* 'N'  */
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("Overwrite the account segment Project with the value specified")
+	OverwriteProject YesNo;/* 'N'  */
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Overwrite the account segment Campaign with the value specified")
+	OverwriteCampaign YesNo;/* 'N'  */
+	@Remarks("Marketing Campaign")
+	?CCampaignId CCampaign;
+	@Remarks("Overwrite the account segment Activity with the value specified")
+	OverwriteActivity YesNo;/* 'N'  */
+	@Remarks("Business Activity")
+	?CActivityId CActivity;
+	@Remarks("Overwrite the account segment Sales Region with the value specified")
+	OverwriteSalesRegion YesNo;/* 'N'  */
+	@Remarks("Sales coverage region")
+	?CSalesRegionId CSalesRegion;
+	@Remarks("Overwrite the account segment Transaction Organization with the value specified")
+	OverwriteOrgtrx YesNo;/* 'N'  */
+	@Remarks("Performing or initiating organization")
+	?AdOrgtrxId AdOrg;
+	@Remarks("Overwrite the account segment Location From with the value specified")
+	OverwriteLocto YesNo;/* 'N'  */
+	@Remarks("Location that inventory was moved to")
+	?CLoctoId CLocation;
+	@Remarks("Overwrite the account segment Location From with the value specified")
+	OverwriteLocfrom YesNo;/* 'N'  */
+	@Remarks("Location that inventory was moved from")
+	?CLocfromId CLocation;
+	@Remarks("Overwrite the account segment User 1 with the value specified")
+	OverwriteUser1 YesNo;/* 'N'  */
+	@Remarks("User defined list element #1")
+	?User1Id CElementvalue;
+	@Remarks("Overwrite the account segment User 2 with the value specified")
+	OverwriteUser2 YesNo;/* 'N'  */
+	@Remarks("User defined list element #2")
+	?User2Id CElementvalue;
+};
+

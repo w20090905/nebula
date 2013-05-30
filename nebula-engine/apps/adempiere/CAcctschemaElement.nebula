@@ -1,0 +1,55 @@
+@Remarks("Acct.Schema Element")
+@Refby("0")
+type CAcctschemaElement {
+	@Remarks("Acct.Schema Element")
+	!CAcctschemaElementId ID;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Rules for accounting")
+	CAcctschemaId CAcctschema;
+	@Remarks("Element Type (account or user defined)")
+	Elementtype Attr;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Method of ordering records; lowest number comes first")
+	SeqNo;
+	@Remarks("Accounting Element")
+	?CElementId CElement;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Data entry is required in this column")
+	IsMandatory YesNo;/* 'N'  */
+	@Remarks("Balanced")
+	IsBalanceD YesNo;/* 'N'  */
+	@Remarks("Organizational entity within client")
+	?OrgId AdOrg;
+	@Remarks("Account Element")
+	?CElementvalueId CElementvalue;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("Location or Address")
+	?CLocationId CLocation;
+	@Remarks("Sales coverage region")
+	?CSalesRegionId CSalesRegion;
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Marketing Campaign")
+	?CCampaignId CCampaign;
+	@Remarks("Business Activity")
+	?CActivityId CActivity;
+	@Remarks("Column in the table")
+	?AdColumnId AdColumn;
+};
+

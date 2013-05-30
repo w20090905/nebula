@@ -1,0 +1,23 @@
+@Remarks("AD_Role_OrgAccess")
+@Refby("0")
+type AdRoleOrgaccess {
+	@Remarks("Responsibility Role")
+	!AdRoleId AdRole;
+	@Remarks("Organizational entity within client")
+	!AdOrgId AdOrg;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Field is read only")
+	IsReadonly YesNo;/* 'N'  */
+};
+

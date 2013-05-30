@@ -1,0 +1,35 @@
+@Remarks("Landed Cost")
+@Refby("0")
+tx CLandedcost {
+	@Remarks("Landed cost to be allocated to material receipts")
+	!CLandedcostId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Invoice Detail Line")
+	CInvoiceLineId CInvoiceLine;
+	@Remarks("Product Cost Element")
+	MCostelementId MCostelement;
+	@Remarks("Line on Shipment or Receipt document")
+	?MInoutlineId MInoutline;
+	@Remarks("Material Shipment Document")
+	?MInoutId MInout;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Landed Cost Distribution")
+	Landedcostdistribution null;
+	@Remarks("Process Now")
+	?Processing YesNo;
+};
+

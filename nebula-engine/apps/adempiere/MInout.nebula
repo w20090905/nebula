@@ -1,0 +1,129 @@
+@Remarks("Material Shipment Document")
+@Refby("8")
+tx MInout {
+	@Remarks("Material Shipment Document")
+	!MInoutId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("This is a Sales Transaction")
+	IsSotrx YesNo;/* 'Y'  */
+	@Remarks("Document sequence number of the document")
+	DocumentNo Code;
+	@Remarks("The targeted status of the document")
+	Docaction Attr;
+	@Remarks("The current status of the document")
+	Docstatus Attr;
+	@Remarks("Posting status")
+	PostEd YesNo;/* 'N'  */
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Document type or rules")
+	CDoctypeId CDoctype;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Order")
+	?COrderId COrder;
+	@Remarks("Date of Order")
+	?DateOrdered Date;
+	@Remarks("Indicates if this document / line is printed")
+	IsPrintEd YesNo;/* 'N'  */
+	@Remarks("Method of moving the inventory")
+	Movementtype Attr;
+	@Remarks("Date a product was moved in or out of inventory")
+	Movementdate Date;
+	@Remarks("Accounting Date")
+	DateAcct Date;
+	@Remarks("Identifies a Business Partner")
+	CBpartnerId CBpartner;
+	@Remarks("Identifies the (ship to) address for this Business Partner")
+	CBpartnerLocationId CBpartnerLocation;
+	@Remarks("Storage Warehouse and Service Point")
+	MWarehouseId MWarehouse;
+	@Remarks("Transaction Reference Number (Sales Order, Purchase Order) of your Business Partner")
+	?Poreference String;
+	@Remarks("Defines the timing of Delivery")
+	DeliveryRule Attr;
+	@Remarks("Method for charging Freight")
+	FreightCostrule Attr;
+	@Remarks("Freight Amount")
+	?FreightAmt Amount;/* 0 */
+	@Remarks("How the order will be delivered")
+	DeliveryViarule Attr;
+	@Remarks("Method or manner of product delivery")
+	?MShipperId MShipper;
+	@Remarks("Additional document charges")
+	?CChargeId CCharge;
+	@Remarks("Charge Amount")
+	?ChargeAmt Amount;/* 0 */
+	@Remarks("Priority of a document")
+	PriorityRule Attr;
+	@Remarks("Date the document was printed.")
+	?DatePrintEd Date;
+	@Remarks("Invoice Identifier")
+	?CInvoiceId CInvoice;
+	@Remarks("Process which will generate a new document lines based on an existing document")
+	?CreateFrom YesNo;
+	@Remarks("Generate To")
+	?Generateto Attr;
+	@Remarks("Enable sending Document EMail")
+	Sendemail EMail;/* 'N'  */
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	?AdUserId AdUser;
+	@Remarks("Sales Representative or Company Agent")
+	?SalesRepId AdUser;
+	@Remarks("Number of packages shipped")
+	?Nopackages null;
+	@Remarks("Date/Time when picked for Shipment")
+	?Pickdate Date;
+	@Remarks("Shipment Date/Time")
+	?Shipdate Date;
+	@Remarks("Number to track the shipment")
+	?Trackingno null;
+	@Remarks("Performing or initiating organization")
+	?AdOrgtrxId AdOrg;
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Marketing Campaign")
+	?CCampaignId CCampaign;
+	@Remarks("Business Activity")
+	?CActivityId CActivity;
+	@Remarks("User defined list element #1")
+	?User1Id CElementvalue;
+	@Remarks("User defined list element #2")
+	?User2Id CElementvalue;
+	@Remarks("Date a product was received")
+	?DateReceived Date;
+	@Remarks("Movement is in transit")
+	IsIntransit YesNo;/* 'N'  */
+	@Remarks("Referenced Shipment")
+	?RefInoutId MInout;
+	@Remarks("Create Confirm")
+	?CreateConfirm YesNo;
+	@Remarks("Create Package")
+	?CreatePackage YesNo;
+	@Remarks("Indicates if this document requires approval")
+	IsApproved YesNo;/* 'N'  */
+	@Remarks("Document is in dispute")
+	IsIndispute YesNo;/* 'N'  */
+	@Remarks("Volume of a product")
+	?Volume;
+	@Remarks("Weight of a product")
+	?Weight;
+	@Remarks("Return Material Authorization")
+	?MRmaId MRma;/* NULL */
+};
+

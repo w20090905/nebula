@@ -1,0 +1,159 @@
+@Remarks("Order")
+@Refby("20")
+tx COrder {
+	@Remarks("Order")
+	!COrderId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("This is a Sales Transaction")
+	IsSotrx YesNo;/* 'Y'  */
+	@Remarks("Document sequence number of the document")
+	DocumentNo Code;
+	@Remarks("The current status of the document")
+	Docstatus Attr;
+	@Remarks("The targeted status of the document")
+	Docaction Attr;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Document type or rules")
+	CDoctypeId CDoctype;
+	@Remarks("Target document type for conversing documents")
+	CDoctypeTargetId CDoctype;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Indicates if this document requires approval")
+	IsApproved YesNo;/* 'Y'  */
+	@Remarks("Credit  has been approved")
+	IsCreditapproved YesNo;/* 'N'  */
+	@Remarks("Delivered")
+	IsDelivered YesNo;/* 'N'  */
+	@Remarks("Is this invoiced?")
+	IsInvoiceD YesNo;/* 'N'  */
+	@Remarks("Indicates if this document / line is printed")
+	IsPrintEd YesNo;/* 'N'  */
+	@Remarks("Transferred to General Ledger (i.e. accounted)")
+	IsTransferred YesNo;/* 'N'  */
+	@Remarks("Selected")
+	IsSelectEd YesNo;/* 'N'  */
+	@Remarks("Sales Representative or Company Agent")
+	?SalesRepId AdUser;
+	@Remarks("Date of Order")
+	DateOrdered Date;
+	@Remarks("Date Order was promised")
+	?DatePromised Date;
+	@Remarks("Date the document was printed.")
+	?DatePrintEd Date;
+	@Remarks("Accounting Date")
+	DateAcct Date;
+	@Remarks("Identifies a Business Partner")
+	CBpartnerId CBpartner;
+	@Remarks("Identifies the (ship to) address for this Business Partner")
+	CBpartnerLocationId CBpartnerLocation;
+	@Remarks("Transaction Reference Number (Sales Order, Purchase Order) of your Business Partner")
+	?Poreference String;
+	@Remarks("Print Discount on Invoice and Order")
+	IsDiscountPrintEd YesNo;/* 'Y'  */
+	@Remarks("The Currency for this record")
+	CCurrencyId CCurrency;
+	@Remarks("How you pay the invoice")
+	PaymentRule Attr;
+	@Remarks("The terms of Payment (timing, discount)")
+	CPaymentTermId CPaymentTerm;
+	@Remarks("Frequency and method of invoicing")
+	InvoiceRule Attr;
+	@Remarks("Defines the timing of Delivery")
+	DeliveryRule Attr;
+	@Remarks("Method for charging Freight")
+	FreightCostrule Attr;
+	@Remarks("Freight Amount")
+	?FreightAmt Amount;/* 0 */
+	@Remarks("How the order will be delivered")
+	DeliveryViarule Attr;
+	@Remarks("Method or manner of product delivery")
+	?MShipperId MShipper;
+	@Remarks("Additional document charges")
+	?CChargeId CCharge;
+	@Remarks("Charge Amount")
+	?ChargeAmt Amount;/* 0 */
+	@Remarks("Priority of a document")
+	PriorityRule Attr;
+	@Remarks("Total of all document lines")
+	TotalLines Line;/* 0  */
+	@Remarks("Total amount of document")
+	GrandTotal null;/* 0  */
+	@Remarks("Storage Warehouse and Service Point")
+	MWarehouseId MWarehouse;
+	@Remarks("Unique identifier of a Price List")
+	MPriceListId MPriceList;
+	@Remarks("Tax is included in the price")
+	IsTaxIncluded YesNo;/* 'N'  */
+	@Remarks("Marketing Campaign")
+	?CCampaignId CCampaign;
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Business Activity")
+	?CActivityId CActivity;
+	@Remarks("Posting status")
+	PostEd YesNo;/* 'N'  */
+	@Remarks("Payment identifier")
+	?CPaymentId CPayment;
+	@Remarks("Cash Journal Line")
+	?CCashLineId CCashLine;
+	@Remarks("Enable sending Document EMail")
+	Sendemail EMail;/* 'N'  */
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	?AdUserId AdUser;
+	@Remarks("Copy From Record")
+	?Copyfrom null;
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
+	IsSelfservice YesNo;/* 'N'  */
+	@Remarks("Performing or initiating organization")
+	?AdOrgtrxId AdOrg;
+	@Remarks("User defined list element #1")
+	?User1Id CElementvalue;
+	@Remarks("User defined list element #2")
+	?User2Id CElementvalue;
+	@Remarks("Currency Conversion Rate Type")
+	?CConversionTypeId CConversionType;
+	@Remarks("Business Partner to be invoiced")
+	?BillBpartnerId CBpartner;
+	@Remarks("Business Partner Location for invoicing")
+	?BillLocationId CBpartnerLocation;
+	@Remarks("Business Partner Contact for invoicing")
+	?BillUserId AdUser;
+	@Remarks("Business Partner responsible for the payment")
+	?PayBpartnerId CBpartner;
+	@Remarks("Location of the Business Partner responsible for the payment")
+	?PayLocationId CBpartnerLocation;
+	@Remarks("Reference to corresponding Sales/Purchase Order")
+	?RefOrderId COrder;
+	@Remarks("Drop Shipments are sent from the Vendor directly to the Customer")
+	IsDropship YesNo;/* 'N'  */
+	@Remarks("Volume of a product")
+	?Volume;
+	@Remarks("Weight of a product")
+	?Weight;
+	@Remarks("OrderType")
+	?Ordertype Attr;
+	@Remarks("Point of Sales Terminal")
+	?CPosId CPos;
+	@Remarks("AmountTendered")
+	?Amounttendered Amount;
+	@Remarks("AmountRefunded")
+	?Amountrefunded Amount;
+};
+

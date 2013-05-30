@@ -1,0 +1,32 @@
+@Remarks("")
+@Refby("0")
+type CProjectDetailsV {
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;
+	CreateD null;
+	CreateDby null;
+	Updated null;
+	Updatedby null;
+	?AdLanguage Attr;
+	CProjectId CProject;
+	CProjectLineId CProjectLine;
+	Line;
+	PlannedQty Quantity;
+	PlannedPrice Price;
+	PlannedAmt Amount;
+	PlannedMarginamt Amount;
+	?CommittedAmt Amount;
+	?MProductId MProduct;
+	?Name;
+	?Description;
+	?DocumentNote Note;
+	?UPC;
+	?SKU;
+	?ProductValue String;
+	?MProductCategoryId MProductCategory;
+	InvoiceDamt Amount;
+	InvoiceDqty Quantity;
+	?CommittedQty Quantity;
+};
+

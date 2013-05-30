@@ -1,0 +1,137 @@
+@Remarks("Import General Ledger Journal")
+@Refby("0")
+tx IGljournal {
+	@Remarks("Import General Ledger Journal")
+	!IGljournalId ID;
+	@Remarks("Client/Tenant for this installation.")
+	?AdClientId AdClient;
+	@Remarks("Key of the Client")
+	?ClientValue String;
+	@Remarks("Document Organization (independent from account organization)")
+	?AdOrgdocId AdOrg;
+	@Remarks("The record is active in the system")
+	?IsActive YesNo;/* 'Y' */
+	@Remarks("Date this record was created")
+	?CreateD null;/* SYSDATE */
+	@Remarks("User who created this records")
+	?CreateDby null;
+	@Remarks("Date this record was updated")
+	?Updated null;/* SYSDATE */
+	@Remarks("User who updated this records")
+	?Updatedby null;
+	@Remarks("Has this import been processed")
+	IIsImported YesNo;/* 'N'  */
+	@Remarks("Messages generated from import process")
+	?IErrorMsg Msg;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The document has been processed")
+	?Processed YesNo;/* 'N' */
+	@Remarks("General Ledger Journal Batch")
+	?GlJournalbatchId GlJournalbatch;
+	@Remarks("Document Number of the Batch")
+	?Batchdocumentno Code;
+	@Remarks("Description of the Batch")
+	?Batchdescription Description;
+	@Remarks("General Ledger Journal")
+	?GlJournalId GlJournal;
+	@Remarks("Document number of the Journal")
+	?Journaldocumentno Code;
+	@Remarks("The type of posted amount for the transaction")
+	?PostIngtype Attr;
+	@Remarks("Rules for accounting")
+	?CAcctschemaId CAcctschema;
+	@Remarks("Name of the Accounting Schema")
+	?Acctschemaname Name;
+	@Remarks("Document type or rules")
+	?CDoctypeId CDoctype;
+	@Remarks("Name of the Document Type")
+	?DoctypeName Name;
+	@Remarks("General Ledger Category")
+	?GlCategoryId GlCategory;
+	@Remarks("Name of the Category")
+	?Categoryname Name;
+	@Remarks("Period of the Calendar")
+	?CPeriodId CPeriod;
+	@Remarks("General Ledger Budget")
+	?GlBudgetId GlBudget;
+	@Remarks("General Ledger Journal Line")
+	?GlJournallineId GlJournalline;
+	@Remarks("Unique line for this document")
+	?Line;
+	@Remarks("Accounting Date")
+	?DateAcct Date;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Source Debit Amount")
+	?AmtSourcedr Amount;/* 0 */
+	@Remarks("Accounted Debit Amount")
+	?AmtAcctdr Amount;/* 0 */
+	@Remarks("Source Credit Amount")
+	?AmtSourcecr Amount;/* 0 */
+	@Remarks("Accounted Credit Amount")
+	?AmtAcctcr Amount;/* 0 */
+	@Remarks("The Currency for this record")
+	?CCurrencyId CCurrency;
+	@Remarks("Three letter ISO 4217 Code of the Currency")
+	?IsOCode Code;
+	@Remarks("Key value for the Currency Conversion Rate Type")
+	?ConversionTypevalue String;
+	@Remarks("Currency Conversion Rate Type")
+	?CConversionTypeId CConversionType;
+	@Remarks("Currency Conversion Rate")
+	?Currencyrate Rate;/* 0 */
+	@Remarks("Unit of Measure")
+	?CUomId CUom;
+	@Remarks("Quantity")
+	?Qty Quantity;/* 0 */
+	@Remarks("Valid Account Combination")
+	?CValidcombinationId CValidcombination;
+	@Remarks("Key of the Organization")
+	?Orgvalue String;
+	@Remarks("Organizational entity within client")
+	?AdOrgId AdOrg;
+	@Remarks("Account used")
+	?AccountId CElementvalue;
+	@Remarks("Key of Account Element")
+	?Accountvalue String;
+	@Remarks("Performing or initiating organization")
+	?AdOrgtrxId AdOrg;
+	@Remarks("Key of the Transaction Organization")
+	?Orgtrxvalue String;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Key of the Product")
+	?ProductValue String;
+	@Remarks("Bar Code (Universal Product Code or its superset European Article Number)")
+	?UPC;
+	@Remarks("Stock Keeping Unit")
+	?SKU;
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("Key of the Business Partner")
+	?BpartnerValue String;
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Key of the Project")
+	?ProjectValue String;
+	@Remarks("Location that inventory was moved to")
+	?CLoctoId CLocation;
+	@Remarks("Location that inventory was moved from")
+	?CLocfromId CLocation;
+	@Remarks("Sales coverage region")
+	?CSalesRegionId CSalesRegion;
+	@Remarks("Business Activity")
+	?CActivityId CActivity;
+	@Remarks("Marketing Campaign")
+	?CCampaignId CCampaign;
+	@Remarks("User defined list element #1")
+	?User1Id CElementvalue;
+	@Remarks("User defined list element #2")
+	?User2Id CElementvalue;
+	@Remarks("If selected a new batch is created")
+	?IsCreateNewbatch YesNo;
+	@Remarks("If selected a new journal within the batch is created")
+	?IsCreateNewjournal YesNo;
+};
+

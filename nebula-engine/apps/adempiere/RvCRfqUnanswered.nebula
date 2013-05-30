@@ -1,0 +1,25 @@
+@Remarks("")
+@Refby("0")
+type RvCRfqUnanswered {
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	CRfqId CRfq;
+	*Name;
+	?Description;
+	?Help;
+	SalesRepId ID;
+	CRfqTopicId CRfqTopic;
+	Quotetype Attr;
+	IsQuotetotalamt YesNo;
+	IsQuoteallqty YesNo;
+	CCurrencyId CCurrency;
+	DateResponse Date;
+	IsRfqresponseaccepted YesNo;
+	?DateWorkstart Date;
+	?DeliveryDays Count;
+	?DateWorkcomplete Date;
+	CBpartnerId CBpartner;
+	CBpartnerLocationId CBpartnerLocation;
+	?AdUserId AdUser;
+};
+

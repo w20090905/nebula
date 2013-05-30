@@ -1,0 +1,65 @@
+@Remarks("Product Purchasing")
+@Refby("0")
+type MProductPo {
+	@Remarks("Product, Service, Item")
+	!MProductId MProduct;
+	@Remarks("Identifies a Business Partner")
+	!CBpartnerId CBpartner;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Use this Vendor for pricing and stock replenishment")
+	IsCurrentvendor YesNo;/* 'Y'  */
+	@Remarks("Unit of Measure")
+	?CUomId CUom;
+	@Remarks("The Currency for this record")
+	?CCurrencyId CCurrency;
+	@Remarks("List Price")
+	?PriceList Price;/* 0 */
+	@Remarks("Price based on a purchase order")
+	?PricePo Price;/* 0 */
+	@Remarks("Effective Date of Price")
+	?PriceEffective Date;
+	@Remarks("Price of the last purchase order for the product")
+	?PriceLastpo Price;/* 0 */
+	@Remarks("Price of the last invoice for the product")
+	?PriceLastinv Price;/* 0 */
+	@Remarks("Product Key of the Business Partner")
+	Vendorproductno Code;
+	@Remarks("Bar Code (Universal Product Code or its superset European Article Number)")
+	?UPC;
+	@Remarks("Product Category of the Business Partner")
+	?Vendorcategory null;
+	@Remarks("This product is no longer available")
+	?Discontinued YesNo;/* 'N'                               */
+	@Remarks("Discontinued By")
+	?Discontinuedby Date;
+	@Remarks("Minimum order quantity in UOM")
+	?OrderMin null;/* 0 */
+	@Remarks("Package order size in UOM (e.g. order set of 5 units)")
+	?OrderPack null;/* 0 */
+	@Remarks("Fixed Cost Per Order")
+	?Costperorder Cost;/* 0 */
+	@Remarks("Promised days between order and delivery")
+	?DeliveryTimePromised Count;
+	@Remarks("Actual days between order and delivery")
+	?DeliveryTimeActual Count;
+	@Remarks("Method for rating vendors")
+	?Qualityrating Rating;
+	@Remarks("(Included) Amount for copyright, etc.")
+	?Royaltyamt Amount;/* 0 */
+	@Remarks("Manufacturer of the Product")
+	?Manufacturer null;
+};
+

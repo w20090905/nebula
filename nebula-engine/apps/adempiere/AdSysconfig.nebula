@@ -1,0 +1,31 @@
+@Remarks("System Configurator")
+@Refby("0")
+type AdSysconfig {
+	@Remarks("System Configurator")
+	!AdSysconfigId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("Date this record was created")
+	CreateD null;
+	@Remarks("Date this record was updated")
+	Updated null;
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'                    */
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Search key for the record in the format required - must be unique")
+	Value String;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
+	EntityType AdEntityType;/* 'U'  */
+	@Remarks("Configuration Level for this parameter")
+	?Configurationlevel null;/* 'S' */
+};
+

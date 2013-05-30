@@ -1,0 +1,29 @@
+@Remarks("Contains info on used URLs")
+@Refby("0")
+tx CmContainerUrl {
+	@Remarks("Contains info on used URLs")
+	!CmContainerUrlId ID;/* NULL  */
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Web Container contains content like images, text etc.")
+	CmContainerId CmContainer;
+	@Remarks("Info when we did the last check")
+	Checked null;
+	@Remarks("Status of the currently running check")
+	Status;
+	@Remarks("Contains data on the last check result")
+	LastResult null;
+};
+

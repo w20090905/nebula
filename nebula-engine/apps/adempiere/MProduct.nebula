@@ -1,0 +1,123 @@
+@Remarks("Product, Service, Item")
+@Refby("89")
+type MProduct {
+	@Remarks("Product, Service, Item")
+	!MProductId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Search key for the record in the format required - must be unique")
+	Value String;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Additional information for a Document")
+	?DocumentNote Note;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Bar Code (Universal Product Code or its superset European Article Number)")
+	?UPC;
+	@Remarks("Stock Keeping Unit")
+	?SKU;
+	@Remarks("Unit of Measure")
+	CUomId CUom;
+	@Remarks("Sales Representative or Company Agent")
+	?SalesRepId AdUser;
+	@Remarks("This is a summary entity")
+	IsSummary Comment;/* 'N'  */
+	@Remarks("Organization stocks this product")
+	IsStocked YesNo;/* 'Y'  */
+	@Remarks("Organization purchases this product")
+	IsPurchased YesNo;/* 'Y'  */
+	@Remarks("Organization sells this product")
+	IsSold YesNo;/* 'Y'  */
+	@Remarks("Bill of Materials")
+	IsBom YesNo;/* 'N'  */
+	@Remarks("Print detail BOM elements on the invoice")
+	IsInvoicePrintdetails YesNo;/* 'N'  */
+	@Remarks("Print detail BOM elements on the pick list")
+	IsPicklistprintdetails YesNo;/* 'N'  */
+	@Remarks("The BOM configuration has been verified")
+	IsVerified YesNo;/* 'N'  */
+	@Remarks("Method for recording revenue")
+	?CRevenueRecognitionId CRevenueRecognition;
+	@Remarks("Category of a Product")
+	MProductCategoryId MProductCategory;
+	@Remarks("Classification for grouping")
+	?ClassIfication YesNo;
+	@Remarks("Volume of a product")
+	?Volume;/* 0 */
+	@Remarks("Weight of a product")
+	?Weight;/* 0 */
+	@Remarks("Shelf width required")
+	?Shelfwidth Width;
+	@Remarks("Shelf height required")
+	?Shelfheight Height;
+	@Remarks("Shelf depth required")
+	?Shelfdepth Depth;
+	@Remarks("Units Per Pallet")
+	?Unitsperpallet Unit;
+	@Remarks("Tax Category")
+	CTaxCategoryId CTaxCategory;
+	@Remarks("Resource")
+	?SResourceId SResource;
+	@Remarks("This product is no longer available")
+	?Discontinued YesNo;/* 'N'                                 */
+	@Remarks("Discontinued By")
+	?Discontinuedby Date;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Expense report type")
+	?SExpensetypeId SExpensetype;
+	@Remarks("Type of product")
+	ProductType Attr;/* 'I'  */
+	@Remarks("URL of  image")
+	?ImageUrl Url;
+	@Remarks("URL for the description")
+	?Descriptionurl Url;
+	@Remarks("Number of days the product is guaranteed or available")
+	?Guaranteedays Count;
+	@Remarks("Text templates for mailings")
+	?RMailtextId RMailtext;
+	@Remarks("Version Number")
+	?Versionno Code;
+	@Remarks("Product Attribute Set")
+	?MAttributesetId MAttributeset;
+	@Remarks("Product Attribute Set Instance")
+	?MAttributesetinstanceId MAttributesetinstance;/* 0 */
+	@Remarks("URL of the Download files")
+	?Downloadurl Url;
+	@Remarks("Category of the Freight")
+	?MFreightCategoryId MFreightCategory;
+	@Remarks("Warehouse Locator")
+	?MLocatorId MLocator;
+	@Remarks("Minumum number of guarantee days")
+	?Guaranteedaysmin null;
+	@Remarks("If selected, the product is displayed in the inital or any empy search")
+	IsWebstorefeatured YesNo;/* 'N'  */
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
+	IsSelfservice YesNo;/* 'Y'  */
+	@Remarks("Type of subscription")
+	?CSubscriptiontypeId CSubscriptiontype;
+	@Remarks("Drop Shipments are sent from the Vendor directly to the Customer")
+	IsDropship YesNo;/* 'N'  */
+	@Remarks("Exclude from automatic Delivery")
+	IsExcludeautodelivery YesNo;/* 'N'  */
+	@Remarks("Group1")
+	?Group1 null;
+	@Remarks("Group2")
+	?Group2 null;
+};
+

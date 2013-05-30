@@ -1,0 +1,63 @@
+@Remarks("Temporary Reporting Table")
+@Refby("0")
+type TReport {
+	@Remarks("Instance of the process")
+	!AdPinstanceId AdPinstance;
+	@Remarks("Report Line")
+	!PaReportlineId PaReportline;
+	@Remarks("Direct internal record ID")
+	!RecordId ID;
+	@Remarks("Accounting Fact")
+	!FactAcctId ID;
+	@Remarks("Method of ordering records; lowest number comes first")
+	?SeqNo;
+	@Remarks("Level no")
+	?Levelno Count;/* 0 */
+	@Remarks("Alphanumeric identifier of the entity")
+	?Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Col_0")
+	?Col0 Length;
+	@Remarks("Col_2")
+	?Col2 Length;
+	@Remarks("Col_1")
+	?Col1 Length;
+	@Remarks("Col_3")
+	?Col3 Length;
+	@Remarks("Col_4")
+	?Col4 Length;
+	@Remarks("Col_5")
+	?Col5 Length;
+	@Remarks("Col_6")
+	?Col6 Length;
+	@Remarks("Col_7")
+	?Col7 Length;
+	@Remarks("Col_8")
+	?Col8 Length;
+	@Remarks("Col_9")
+	?Col9 Length;
+	@Remarks("Col_10")
+	?Col10 Length;
+	@Remarks("Col_11")
+	?Col11 Length;
+	@Remarks("Col_12")
+	?Col12 Length;
+	@Remarks("Col_13")
+	?Col13 Length;
+	@Remarks("Col_14")
+	?Col14 Length;
+	@Remarks("Col_15")
+	?Col15 Length;
+	@Remarks("Col_16")
+	?Col16 Length;
+	@Remarks("Col_17")
+	?Col17 Length;
+	@Remarks("Col_18")
+	?Col18 Length;
+	@Remarks("Col_19")
+	?Col19 Length;
+	@Remarks("Col_20")
+	?Col20 Length;
+};
+

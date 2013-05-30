@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("0")
+type RvBpartnerOpen {
+	?AdClientId AdClient;
+	?AdOrgId AdOrg;
+	?IsActive YesNo;
+	?CreateD null;
+	?CreateDby null;
+	?Updated null;
+	?Updatedby null;
+	?CBpartnerId CBpartner;
+	?CCurrencyId CCurrency;
+	?Amt Amount;
+	?Openamt Amount;
+	?DateDoc Date;
+	?DaysDue Count;
+	?CCampaignId CCampaign;
+	?CProjectId CProject;
+	?CActivityId CActivity;
+};
+

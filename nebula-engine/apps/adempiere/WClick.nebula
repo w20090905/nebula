@@ -1,0 +1,41 @@
+@Remarks("Individual Web Click")
+@Refby("0")
+tx WClick {
+	@Remarks("Individual Web Click")
+	!WClickId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("URL for the Target")
+	?Targeturl Url;
+	@Remarks("Referring web address")
+	?Referrer String;
+	@Remarks("Remote host Info")
+	?RemoteHost Host;
+	@Remarks("Remote Address")
+	?RemoteAddr Address;
+	@Remarks("Browser Used")
+	?Useragent String;
+	@Remarks("Language accepted based on browser information")
+	?AcceptLanguage String;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Web Click Management")
+	?WClickcountId WClickcount;
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	?AdUserId AdUser;
+	@Remarks("Electronic Mail Address")
+	?Email EMail;
+};
+

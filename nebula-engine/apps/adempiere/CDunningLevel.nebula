@@ -1,0 +1,55 @@
+@Remarks("Dunning Level")
+@Refby("3")
+type CDunningLevel {
+	@Remarks("Dunning Level")
+	!CDunningLevelId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Dunning Rules for overdue invoices")
+	CDunningId CDunning;
+	@Remarks("The label text to be printed on a document or correspondence.")
+	PrintName Name;
+	@Remarks("Days after due date to dun (if negative days until due)")
+	DaysAfterDue Count;
+	@Remarks("Days between sending dunning notices")
+	DaysBetweenDunning Count;
+	@Remarks("Optional additional user defined information")
+	?Note;
+	@Remarks("Indicates if interest will be charged on overdue invoices")
+	ChargeInterest null;/* 'Y'  */
+	@Remarks("Percentage interest to charge on overdue invoices")
+	?InterestPercent Percent;/* 0 */
+	@Remarks("Indicates if fees will be charged for overdue invoices")
+	ChargeFee null;/* 'Y'  */
+	@Remarks("Fee amount in invoice currency")
+	?FeeAmt Amount;/* 0 */
+	@Remarks("Print Format for printing Dunning Letters")
+	?DunningPrintFormatId AdPrintFormat;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;/* 'x'  */
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Show/print all due invoices")
+	IsShowAlldue YesNo;/* 'N'  */
+	@Remarks("Show/print all invoices which are not due (yet).")
+	IsShowNotdue YesNo;/* 'N'  */
+	@Remarks("Set the business partner to credit stop")
+	IsSetcreditstop YesNo;/* 'N'  */
+	@Remarks("Set the payment term of the Business Partner")
+	IsSetpaymentterm String;/* 'N'  */
+	@Remarks("The terms of Payment (timing, discount)")
+	?CPaymentTermId CPaymentTerm;/* NULL   */
+};
+

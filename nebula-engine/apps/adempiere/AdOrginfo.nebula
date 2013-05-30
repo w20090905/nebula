@@ -1,0 +1,34 @@
+@Remarks("Organization Info")
+@Refby("0")
+type AdOrginfo {
+	@Remarks("Organizational entity within client")
+	!AdOrgId AdOrg;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Location or Address")
+	?CLocationId CLocation;
+	@Remarks("Dun & Bradstreet Number")
+	DUNS;
+	@Remarks("Tax Identification")
+	TaxId Code;
+	?PaGoalId PaGoal;
+	@Remarks("Supervisor for this user/organization - used for escalation and approval")
+	?SupervisorId AdUser;
+	@Remarks("Parent (superior) Organization")
+	?ParentOrgId AdOrg;
+	@Remarks("Organization Type allows you to categorize your organizations")
+	?AdOrgtypeId AdOrgtype;
+	@Remarks("Storage Warehouse and Service Point")
+	?MWarehouseId MWarehouse;
+};
+

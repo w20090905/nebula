@@ -1,0 +1,61 @@
+@Remarks("T_Transaction")
+@Refby("0")
+tx TTransaction {
+	@Remarks("Instance of the process")
+	!AdPinstanceId AdPinstance;
+	@Remarks("Inventory Transaction")
+	!MTransactionId MTransaction;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Method of moving the inventory")
+	Movementtype Attr;
+	@Remarks("Warehouse Locator")
+	MLocatorId MLocator;
+	@Remarks("Product, Service, Item")
+	MProductId MProduct;
+	@Remarks("Product Attribute Set Instance")
+	MAttributesetinstanceId MAttributesetinstance;
+	@Remarks("Date a product was moved in or out of inventory")
+	Movementdate Date;
+	@Remarks("Quantity of a product moved.")
+	Movementqty Quantity;/* 0  */
+	@Remarks("Line on Shipment or Receipt document")
+	?MInoutlineId MInoutline;
+	@Remarks("Material Shipment Document")
+	?MInoutId MInout;
+	@Remarks("Inventory Move document Line")
+	?MMovementlineId MMovementline;
+	@Remarks("Movement of Inventory")
+	?MMovementId MMovement;
+	@Remarks("Unique line in an Inventory document")
+	?MInventorylineId MInventoryline;
+	@Remarks("Parameters for a Physical Inventory")
+	?MInventoryId MInventory;
+	@Remarks("Document Line representing a production")
+	?MProductIonlineId MProductIonline;
+	@Remarks("Plan for producing a product")
+	?MProductIonId MProductIon;
+	@Remarks("Project Issues (Material, Labor)")
+	?CProjectIssueId CProjectIssue;
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Order Identifier")
+	?SearchOrderId ID;
+	@Remarks("Search Invoice Identifier")
+	?SearchInvoiceId ID;
+	@Remarks("Material Shipment Document")
+	?SearchInoutId ID;
+};
+

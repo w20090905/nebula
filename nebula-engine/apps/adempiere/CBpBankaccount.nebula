@@ -1,0 +1,69 @@
+@Remarks("Bank Account of the Business Partner")
+@Refby("2")
+tx CBpBankaccount {
+	@Remarks("Bank Account of the Business Partner")
+	!CBpBankaccountId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Identifies a Business Partner")
+	CBpartnerId CBpartner;
+	@Remarks("Bank")
+	?CBankId CBank;
+	@Remarks("Automatic Clearing House")
+	IsAch YesNo;/* 'N'  */
+	@Remarks("Bank Account Type")
+	?Bankaccounttype Attr;
+	@Remarks("Bank Routing Number")
+	?Routingno Code;
+	@Remarks("Account Number")
+	?Accountno Code;
+	@Remarks("Credit Card (Visa, MC, AmEx)")
+	?CreditcardType Attr;
+	@Remarks("Credit Card Number")
+	?CreditcardNumber Code;
+	@Remarks("Credit Card Verification code on credit card")
+	?CreditcardVv String;
+	@Remarks("Expiry Month")
+	?CreditcardExpmm null;
+	@Remarks("Expiry Year")
+	?CreditcardExpyy null;
+	@Remarks("Name on Credit Card or Account holder")
+	?AName Name;
+	@Remarks("Street address of the Credit Card or Account holder")
+	?AStreet null;
+	@Remarks("City or the Credit Card or Account Holder")
+	?ACity null;
+	@Remarks("State of the Credit Card or Account holder")
+	?AState null;
+	@Remarks("Zip Code of the Credit Card or Account Holder")
+	?AZip null;
+	@Remarks("Payment Identification - Driver License")
+	?AIdentDl null;
+	@Remarks("Email Address")
+	?AEmail EMail;
+	@Remarks("Payment Identification - Social Security No")
+	?AIdentSsn null;
+	@Remarks("This address has been verified")
+	?RAvsaddr Address;
+	@Remarks("The Zip Code has been verified")
+	?RAvszip null;
+	@Remarks("Country")
+	?ACountry null;
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	?AdUserId AdUser;
+	@Remarks("Business Partner Bank Account usage")
+	?Bpbankacctuse null;/* NULL   */
+};
+

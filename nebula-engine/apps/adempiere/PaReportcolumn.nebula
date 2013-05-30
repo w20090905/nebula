@@ -1,0 +1,73 @@
+@Remarks("Column in Report")
+@Refby("2")
+type PaReportcolumn {
+	@Remarks("Column in Report")
+	!PaReportcolumnId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Collection of Columns for Report")
+	PaReportcolumnsetId PaReportcolumnset;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Method of ordering records; lowest number comes first")
+	SeqNo;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Indicates if this document / line is printed")
+	IsPrintEd YesNo;/* 'Y'  */
+	@Remarks("The type of posted amount for the transaction")
+	PostIngtype Attr;
+	@Remarks("General Ledger Budget")
+	?GlBudgetId GlBudget;
+	@Remarks("Column Type")
+	Columntype Attr;
+	@Remarks("Period offset (0 is current)")
+	?Relativeperiod null;
+	@Remarks("Currency Type")
+	?Currencytype Attr;
+	@Remarks("Calculation")
+	?Calculationtype Attr;
+	@Remarks("Type of amount to report")
+	?Amounttype Attr;
+	@Remarks("The Currency for this record")
+	?CCurrencyId CCurrency;
+	@Remarks("Perform conversion for all amounts to currency")
+	?IsAdhocconversion YesNo;/* 'N' */
+	@Remarks("First operand for calculation")
+	?Oper1Id PaReportcolumn;
+	@Remarks("Second operand for calculation")
+	?Oper2Id PaReportcolumn;
+	@Remarks("Element Type (account or user defined)")
+	?Elementtype Attr;
+	@Remarks("Organizational entity within client")
+	?OrgId AdOrg;
+	@Remarks("Account Element")
+	?CElementvalueId CElementvalue;
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Marketing Campaign")
+	?CCampaignId CCampaign;
+	@Remarks("Location or Address")
+	?CLocationId CLocation;
+	@Remarks("Sales coverage region")
+	?CSalesRegionId CSalesRegion;
+	@Remarks("Business Activity")
+	?CActivityId CActivity;
+};
+

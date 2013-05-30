@@ -1,0 +1,31 @@
+@Remarks("Cost Element")
+@Refby("6")
+type MCostelement {
+	@Remarks("Product Cost Element")
+	!MCostelementId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Type of Cost Element")
+	Costelementtype Attr;
+	@Remarks("Indicates how Costs will be calculated")
+	?Costingmethod Attr;
+	@Remarks("The value is calculated by the system")
+	IsCalculated YesNo;/* 'N'  */
+};
+

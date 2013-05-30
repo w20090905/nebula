@@ -1,0 +1,47 @@
+@Remarks("Payment Selection Check")
+@Refby("1")
+tx CPayselectioncheck {
+	@Remarks("Payment Selection Check")
+	!CPayselectioncheckId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Payment Selection")
+	CPayselectionId CPayselection;
+	@Remarks("Identifies a Business Partner")
+	CBpartnerId CBpartner;
+	@Remarks("Amount being paid")
+	Payamt Amount;/* 0  */
+	@Remarks("Quantity")
+	Qty Quantity;/* 0  */
+	@Remarks("Payment identifier")
+	?CPaymentId CPayment;
+	@Remarks("Document sequence number of the document")
+	?DocumentNo Code;
+	@Remarks("Indicates if this document / line is printed")
+	IsPrintEd YesNo;/* 'N'  */
+	@Remarks("How you pay the invoice")
+	PaymentRule Attr;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Calculated amount of discount")
+	DiscountAmt Amount;/* 0  */
+	@Remarks("This is a sales transaction (receipt)")
+	IsReceipt YesNo;/* 'N'  */
+	@Remarks("Bank Account of the Business Partner")
+	?CBpBankaccountId CBpBankaccount;/* NULL   */
+	@Remarks("Generated Draft")
+	IsGenerateddraft YesNo;/* 'N'  */
+};
+

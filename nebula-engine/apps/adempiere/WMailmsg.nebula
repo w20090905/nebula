@@ -1,0 +1,37 @@
+@Remarks("Web Store Mail Message Template")
+@Refby("2")
+type WMailmsg {
+	@Remarks("Web Store Mail Message Template")
+	!WMailmsgId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("A Web Store of the Client")
+	WStoreId WStore;
+	@Remarks("Mail Message Type")
+	Mailmsgtype Attr;
+	@Remarks("Email Message Subject")
+	Subject;
+	@Remarks("EMail Message")
+	Message;
+	@Remarks("Optional second part of the EMail Message")
+	?Message2 Message;
+	@Remarks("Optional third part of the EMail Message")
+	?Message3 Message;
+};
+

@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+type AAssetAcct {
+	!AAssetId AAsset;
+	!CAcctschemaId CAcctschema;
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;/* 'Y'  */
+	CreateD null;/* SYSDATE  */
+	CreateDby null;
+	Updated null;/* SYSDATE  */
+	Updatedby null;
+	ADepreciationId ADepreciation;
+	ADepreciationAcct Amount;
+	AAccumdepreciationAcct Amount;
+	ADisposalLoss null;
+	ADisposalGain null;
+	AAssetAcct Amount;
+};
+

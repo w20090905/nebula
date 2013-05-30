@@ -1,0 +1,143 @@
+@Remarks("C_AcctSchema_Default")
+@Refby("0")
+type CAcctschemaDefault {
+	@Remarks("Rules for accounting")
+	!CAcctschemaId CAcctschema;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Warehouse Inventory Asset Account - Currently not used")
+	WInventoryAcct CValidcombination;
+	@Remarks("Account for Inventory value adjustments for Actual Costing")
+	WInvactualadjustAcct CValidcombination;
+	@Remarks("Warehouse Differences Account")
+	WDifferencesAcct CValidcombination;
+	@Remarks("Account for Inventory Revaluation")
+	WRevaluationAcct CValidcombination;
+	@Remarks("Account for Product Revenue (Sales Account)")
+	PRevenueAcct CValidcombination;
+	@Remarks("Account for Product Expense")
+	PExpenseAcct CValidcombination;
+	@Remarks("Account for Product Asset (Inventory)")
+	PAssetAcct CValidcombination;
+	@Remarks("Difference between Standard Cost and Purchase Price (PPV)")
+	PPurchasepricevarianceAcct CValidcombination;
+	@Remarks("Difference between Costs and Invoice Price (IPV)")
+	PInvoicePriceVarianceAcct CValidcombination;
+	@Remarks("Trade Discount Receivable Account")
+	PTradediscountrecAcct CValidcombination;
+	@Remarks("Trade Discount Granted Account")
+	PTradediscountgrantAcct CValidcombination;
+	@Remarks("Account for Cost of Goods Sold")
+	PCogsAcct CValidcombination;
+	@Remarks("Account for Customer Receivables")
+	CReceivableAcct CValidcombination;
+	@Remarks("Account for customer prepayments")
+	CPrepaymentAcct CValidcombination;
+	@Remarks("Account for Vendor Liability")
+	VLiabilityAcct CValidcombination;
+	@Remarks("Account for Vender Service Liability")
+	VLiabilityServicesAcct CValidcombination;
+	@Remarks("Account for Vendor Prepayments")
+	VPrepaymentAcct CValidcombination;
+	@Remarks("Payment Discount Expense Account")
+	PaydiscountExpAcct CValidcombination;
+	@Remarks("Account for Receivables write-off")
+	WriteoffAcct CValidcombination;
+	@Remarks("Payment Discount Revenue Account")
+	PaydiscountRevAcct CValidcombination;
+	@Remarks("Unrealized Gain Account for currency revaluation")
+	UnrealizedGainAcct CValidcombination;
+	@Remarks("Unrealized Loss Account for currency revaluation")
+	UnrealizedLossAcct CValidcombination;
+	@Remarks("Realized Gain Account")
+	RealizedgainAcct CValidcombination;
+	@Remarks("Realized Loss Account")
+	RealizedlossAcct CValidcombination;
+	@Remarks("Account for Withholdings")
+	WithholdingAcct CValidcombination;
+	@Remarks("Account for Employee Expense Prepayments")
+	EPrepaymentAcct CValidcombination;
+	@Remarks("Account for Employee Expenses")
+	EExpenseAcct CValidcombination;
+	@Remarks("Project Asset Account")
+	PjAssetAcct CValidcombination;
+	@Remarks("Account for Work in Progress")
+	PjWipAcct CValidcombination;
+	@Remarks("Account for paid tax you cannot reclaim")
+	TExpenseAcct CValidcombination;
+	@Remarks("Account for Tax declaration liability")
+	TLiabilityAcct CValidcombination;
+	@Remarks("Account for Tax credit after tax declaration")
+	TReceivablesAcct CValidcombination;
+	@Remarks("Account for Tax you have to pay")
+	TDueAcct CValidcombination;
+	@Remarks("Account for Tax you can reclaim")
+	TCreditAcct CValidcombination;
+	@Remarks("Bank In Transit Account")
+	BIntransitAcct CValidcombination;
+	@Remarks("Bank Asset Account")
+	BAssetAcct CValidcombination;
+	@Remarks("Bank Expense Account")
+	BExpenseAcct CValidcombination;
+	@Remarks("Bank Interest Revenue Account")
+	BInterestRevAcct CValidcombination;
+	@Remarks("Bank Interest Expense Account")
+	BInterestExpAcct CValidcombination;
+	@Remarks("Bank Unidentified Receipts Account")
+	BUnidentifiedAcct CValidcombination;
+	@Remarks("Unallocated Cash Clearing Account")
+	BUnallocatedcashAcct CValidcombination;
+	@Remarks("AP Payment Selection Clearing Account")
+	BPaymentSelectAcct CValidcombination;
+	@Remarks("Bank Settlement Gain Account")
+	BSettlementgainAcct CValidcombination;
+	@Remarks("Bank Settlement Loss Account")
+	BSettlementlossAcct CValidcombination;
+	@Remarks("Bank Revaluation Gain Account")
+	BRevaluationgainAcct CValidcombination;
+	@Remarks("Bank Revaluation Loss Account")
+	BRevaluationlossAcct CValidcombination;
+	@Remarks("Charge Expense Account")
+	ChExpenseAcct CValidcombination;
+	@Remarks("Charge Revenue Account")
+	ChRevenueAcct CValidcombination;
+	@Remarks("Account for unearned revenue")
+	UnearnedRevenueAcct CValidcombination;
+	@Remarks("Account for not invoiced Receivables")
+	NotinvoicedreceivablesAcct CValidcombination;
+	@Remarks("Account for not invoiced Revenue")
+	NotinvoicedrevenueAcct CValidcombination;
+	@Remarks("Account for not-invoiced Material Receipts")
+	NotinvoicedreceiptsAcct CValidcombination;
+	@Remarks("Cash Book Asset Account")
+	CbAssetAcct CValidcombination;
+	@Remarks("Cash Transfer Clearing Account")
+	CbCashTransferAcct CValidcombination;
+	@Remarks("Cash Book Differences Account")
+	CbDifferencesAcct CValidcombination;
+	@Remarks("Cash Book Expense Account")
+	CbExpenseAcct CValidcombination;
+	@Remarks("Cash Book Receipts Account")
+	CbReceiptAcct CValidcombination;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Customer Accounts Receivables Services Account")
+	CReceivableServicesAcct Amount;
+	@Remarks("Product Inventory Clearing Account")
+	PInventoryclearingAcct Amount;
+	@Remarks("Product Cost Adjustment Account")
+	PCostadjustmentAcct Amount;
+};
+

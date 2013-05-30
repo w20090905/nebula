@@ -1,0 +1,35 @@
+@Remarks("Unit of Measure")
+@Refby("22")
+type CUom {
+	@Remarks("Unit of Measure")
+	!CUomId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("UOM EDI X12 Code")
+	X12de355 String;
+	@Remarks("Symbol for a Unit of Measure")
+	?Uomsymbol Symbol;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Rule for rounding  calculated amounts")
+	Stdprecision Precision;
+	@Remarks("Rounding used costing calculations")
+	Costingprecision Cost;
+	@Remarks("Default value")
+	IsDefault YesNo;/* 'N'  */
+};
+

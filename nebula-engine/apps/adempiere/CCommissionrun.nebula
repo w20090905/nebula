@@ -1,0 +1,35 @@
+@Remarks("Commission Run or Process")
+@Refby("1")
+tx CCommissionrun {
+	@Remarks("Commission Run or Process")
+	!CCommissionrunId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Document sequence number of the document")
+	DocumentNo Code;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Commission")
+	CCommissionId CCommission;
+	@Remarks("First effective day (inclusive)")
+	Startdate Date;
+	@Remarks("Total amount of document")
+	GrandTotal null;/* 0  */
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+};
+

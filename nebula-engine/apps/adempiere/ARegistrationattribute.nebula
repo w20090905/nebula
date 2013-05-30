@@ -1,0 +1,35 @@
+@Remarks("Asset Registration Attribute")
+@Refby("2")
+type ARegistrationattribute {
+	@Remarks("Asset Registration Attribute")
+	!ARegistrationattributeId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Method of ordering records; lowest number comes first")
+	SeqNo;/* 0  */
+	@Remarks("System Reference and Validation")
+	AdReferenceId AdReference;
+	@Remarks("Name of the column in the database")
+	?Columnname Name;
+	@Remarks("Required to specify, if data type is Table or List")
+	?AdReferenceValueId AdReference;
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
+	IsSelfservice YesNo;/* 'Y'  */
+};
+

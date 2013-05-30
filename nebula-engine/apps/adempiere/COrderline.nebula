@@ -1,0 +1,111 @@
+@Remarks("Sales Order Line")
+@Refby("10")
+tx COrderline {
+	@Remarks("Sales Order Line")
+	!COrderlineId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Order")
+	COrderId COrder;
+	@Remarks("Unique line for this document")
+	Line;
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("Identifies the (ship to) address for this Business Partner")
+	?CBpartnerLocationId CBpartnerLocation;
+	@Remarks("Date of Order")
+	DateOrdered Date;
+	@Remarks("Date Order was promised")
+	?DatePromised Date;
+	@Remarks("Date when the product was delivered")
+	?DateDelivered Date;
+	@Remarks("Date printed on Invoice")
+	?DateInvoiceD Date;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Storage Warehouse and Service Point")
+	MWarehouseId MWarehouse;
+	@Remarks("Unit of Measure")
+	CUomId CUom;
+	@Remarks("Ordered Quantity")
+	QtyOrdered Quantity;/* 0  */
+	@Remarks("Reserved Quantity")
+	QtyReserved Quantity;/* 0  */
+	@Remarks("Delivered Quantity")
+	QtyDelivered Quantity;/* 0  */
+	@Remarks("Invoiced Quantity")
+	QtyInvoiced Quantity;/* 0  */
+	@Remarks("Method or manner of product delivery")
+	?MShipperId MShipper;
+	@Remarks("The Currency for this record")
+	CCurrencyId CCurrency;
+	@Remarks("List Price")
+	PriceList Price;/* 0  */
+	@Remarks("Actual Price")
+	PriceActual Price;/* 0  */
+	@Remarks("Lowest price for a product")
+	PriceLimit Price;/* 0  */
+	@Remarks("Line Extended Amount (Quantity * Actual Price) without Freight and Charges")
+	LineNetamt Line;/* 0  */
+	@Remarks("Discount in percent")
+	?Discount Count;
+	@Remarks("Freight Amount")
+	FreightAmt Amount;/* 0  */
+	@Remarks("Additional document charges")
+	?CChargeId CCharge;
+	@Remarks("Tax identifier")
+	CTaxId CTax;
+	@Remarks("Resource Assignment")
+	?SResourceAssignmentId SResourceAssignment;
+	@Remarks("Reference to corresponding Sales/Purchase Order")
+	?RefOrderlineId COrderline;
+	@Remarks("Product Attribute Set Instance")
+	?MAttributesetinstanceId MAttributesetinstance;/* 0 */
+	@Remarks("if true, the line is just description and no transaction")
+	IsDescription Description;/* 'N'  */
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("The Quantity Entered is based on the selected UoM")
+	QtyEntered Quantity;
+	@Remarks("Price Entered - the price based on the selected/base UoM")
+	PriceEntered Price;
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Price per Unit of Measure including all indirect costs (Freight, etc.)")
+	?PriceCost Price;
+	@Remarks("Quantity of potential sales")
+	QtyLostsales Quantity;/* 0  */
+	@Remarks("Phase of a Project")
+	?CProjectPhaseId CProjectPhase;
+	@Remarks("Actual Project Task in a Phase")
+	?CProjectTaskId CProjectTask;
+	@Remarks("Revenue Recognition Start Date")
+	?Rrstartdate Date;
+	@Remarks("Revenue Recognition Amount")
+	?Rramt Amount;
+	@Remarks("Marketing Campaign")
+	?CCampaignId CCampaign;
+	@Remarks("Business Activity")
+	?CActivityId CActivity;
+	@Remarks("User defined list element #1")
+	?User1Id CElementvalue;
+	@Remarks("User defined list element #2")
+	?User2Id CElementvalue;
+	@Remarks("Performing or initiating organization")
+	?AdOrgtrxId AdOrg;
+};
+

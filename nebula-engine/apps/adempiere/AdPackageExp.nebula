@@ -1,0 +1,45 @@
+@Remarks("AD_Package_Exp_ID")
+@Refby("0")
+type AdPackageExp {
+	@Remarks("AD_Package_Exp_ID")
+	!AdPackageExpId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'                    */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE                */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE                */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("AD_Package_Type")
+	?AdPackageType Attr;
+	@Remarks("Electronic Mail Address")
+	Email EMail;
+	@Remarks("Instructions")
+	Instructions null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("The document has been processed")
+	?Processed YesNo;
+	@Remarks("Internal Release Number")
+	ReleaseNo String;
+	@Remarks("Version of the table definition")
+	Version String;
+	@Remarks("Email of the responsible for the System")
+	Username Name;
+	@Remarks("Process Now")
+	Processing YesNo;
+	@Remarks("Package Version")
+	PkVersion null;
+	@Remarks("File_Directory")
+	FileDirectory null;
+	@Remarks("Optional short description of the record")
+	Description;
+};
+

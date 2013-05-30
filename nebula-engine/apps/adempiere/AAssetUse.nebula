@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx AAssetUse {
+	!AAssetUseId ID;
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;/* 'Y'  */
+	CreateD null;/* SYSDATE  */
+	CreateDby null;
+	Updated null;/* SYSDATE  */
+	Updatedby null;
+	AAssetId AAsset;
+	Usedate Date;
+	Useunits null;
+	?Description;
+};
+

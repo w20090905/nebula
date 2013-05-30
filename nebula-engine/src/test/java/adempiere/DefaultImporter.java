@@ -57,7 +57,7 @@ public class DefaultImporter {
 		dbColumnMap.put(Varchar, Lists.newArrayList("VARCHAR", "VARCHAR2"));
 		dbColumnMap.put(NVarchar, Lists.newArrayList("NVARCHAR", "NVARCHAR2"));
 		dbColumnMap.put(Bit, Lists.newArrayList("BIT"));
-		dbColumnMap.put(Long, Lists.newArrayList("INT", "LONG"));
+		dbColumnMap.put(Long, Lists.newArrayList("INT", "LONG","NUMBER"));
 		dbColumnMap.put(Decimal, Lists.newArrayList("FLOAT", "NUMERIC"));
 		dbColumnMap.put(Date, Lists.newArrayList("DATE"));
 		dbColumnMap.put(Time, Lists.newArrayList("TIME"));
@@ -65,7 +65,7 @@ public class DefaultImporter {
 		dbColumnMap.put(Timestamp, Lists.newArrayList("BIT"));
 		dbColumnMap.put(String, Lists.newArrayList("CHAR", "VARCHAR", "VARCHAR2", "NVARCHAR", "NVARCHAR2", "TEXT"));
 		dbColumnMap.put(Text, Lists.newArrayList("TEXT", "LONGTEXT"));
-		dbColumnMap.put(Blob, Lists.newArrayList("BLOB", "LONGBLOB"));
+		dbColumnMap.put(Blob, Lists.newArrayList("BLOB", "LONGBLOB","CLOB"));
 	}
 
 	public void initRules() {
@@ -128,20 +128,23 @@ public class DefaultImporter {
 		}
 		for (RuleBuilder rule : rules) {
 
-			boolean matched = false;
+			boolean matched = true;
 			DBColumnType matchedColumnType = null;
-			for (DBColumnType type : rule.dbTypes) {
-				if (this.match(field.typename, type)) {
-					matched = true;
-					matchedColumnType = type;
-					break;
+			if (rule.dbTypes != null) {
+				matched = false;
+				for (DBColumnType type : rule.dbTypes) {
+					if (this.match(field.typename, type)) {
+						matched = true;
+						matchedColumnType = type;
+						break;
+					}
 				}
 			}
 
 			if (!matched) continue;
-			
-			if(rule.tableName!=null){
-				if(!field.resideType.name.equalsIgnoreCase(rule.tableName)){
+
+			if (rule.tableName != null) {
+				if (!field.resideType.name.equalsIgnoreCase(rule.tableName)) {
 					continue;
 				}
 			}
@@ -181,9 +184,9 @@ public class DefaultImporter {
 		if (!outputFolder.exists()) {
 			outputFolder.mkdir();
 		} else { //
-//			for (File file : outputFolder.listFiles()) {
-//				// file.delete();
-//			}
+		// for (File file : outputFolder.listFiles()) {
+		// // file.delete();
+		// }
 		}
 		OutputStreamWriter out = null;
 		StringBuilder sb = new StringBuilder(5000);

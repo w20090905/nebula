@@ -1,0 +1,43 @@
+@Remarks("Info Column")
+@Refby("1")
+type AdInfocolumn {
+	@Remarks("Info Window Column")
+	!AdInfocolumnId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Info and search/select Window")
+	AdInfowindowId AdInfowindow;
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
+	EntityType AdEntityType;/* 'D'  */
+	@Remarks("SQL SELECT clause")
+	SelectClause String;
+	@Remarks("Method of ordering records; lowest number comes first")
+	SeqNo;/* 0  */
+	@Remarks("Determines, if this field is displayed")
+	IsDisplayEd YesNo;/* 'Y'  */
+	@Remarks("The column is also used as a query criteria")
+	IsQuerycriteria YesNo;/* 'N'  */
+	@Remarks("System Element enables the central maintenance of column description and help.")
+	?AdElementId AdElement;
+	@Remarks("System Reference and Validation")
+	AdReferenceId AdReference;
+};
+

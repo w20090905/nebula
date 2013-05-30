@@ -1,0 +1,35 @@
+@Remarks("")
+@Refby("0")
+type CRfqresponselineVt {
+	CRfqresponseId CRfqresponse;
+	CRfqresponselineId CRfqresponseline;
+	CRfqlineId CRfqline;
+	CRfqresponselineqtyId CRfqresponselineqty;
+	CRfqlineqtyId CRfqlineqty;
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;
+	CreateD null;
+	CreateDby null;
+	Updated null;
+	Updatedby null;
+	AdLanguage Attr;
+	Line;
+	?MProductId MProduct;
+	?MAttributesetinstanceId MAttributesetinstance;
+	?Name;
+	?Description;
+	?DocumentNote Note;
+	?UPC;
+	?SKU;
+	?ProductValue String;
+	?Help;
+	?DateWorkstart Date;
+	?DeliveryDays Count;
+	CUomId CUom;
+	?Uomsymbol Symbol;
+	Qty Quantity;
+	Price;
+	?Discount Count;
+};
+

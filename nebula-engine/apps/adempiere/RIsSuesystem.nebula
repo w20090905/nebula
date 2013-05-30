@@ -1,0 +1,31 @@
+@Remarks("Issue System")
+@Refby("2")
+tx RIsSuesystem {
+	@Remarks("System creating the issue")
+	!RIsSuesystemId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("JDBC URL of the database server")
+	Address null;
+	@Remarks("Information to help profiling the system for solving support issues")
+	?Statisticsinfo Info;
+	@Remarks("Information to help profiling the system for solving support issues")
+	?Profileinfo Info;
+	@Remarks("Status of the system - Support priority depends on system status")
+	SystemStatus Attr;
+	@Remarks("Asset used internally or by customers")
+	?AAssetId AAsset;
+};
+

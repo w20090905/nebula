@@ -1,0 +1,37 @@
+@Remarks("")
+@Refby("0")
+type RvProjectLineissue {
+	?AdClientId AdClient;
+	?AdOrgId AdOrg;
+	?IsActive YesNo;
+	?CreateD null;
+	?CreateDby null;
+	?Updated null;
+	?Updatedby null;
+	?CProjectId CProject;
+	?MProductId MProduct;
+	?CProjectLineId CProjectLine;
+	?Line;
+	?Description;
+	?PlannedQty Quantity;
+	?PlannedPrice Price;
+	?PlannedAmt Amount;
+	?PlannedMarginamt Amount;
+	?CommittedQty Quantity;
+	?CProjectIssueId CProjectIssue;
+	?MLocatorId MLocator;
+	?Movementqty Quantity;
+	?Movementdate Date;
+	?IsSueline Line;
+	?IsSuedescription Description;
+	?MInoutlineId MInoutline;
+	?STimeexpenselineId STimeexpenseline;
+	?CAcctschemaId CAcctschema;
+	?AccountId ID;
+	?AmtSourcedr Amount;
+	?AmtSourcecr Amount;
+	?AmtAcctdr Amount;
+	?AmtAcctcr Amount;
+	?LineMargin Line;
+};
+

@@ -1,0 +1,47 @@
+@Remarks("Format Field")
+@Refby("0")
+type AdImpformatRow {
+	@Remarks("Format Field")
+	!AdImpformatRowId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Import Format")
+	AdImpformatId AdImpformat;
+	@Remarks("Method of ordering records; lowest number comes first")
+	SeqNo;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Column in the table")
+	AdColumnId AdColumn;
+	@Remarks("Starting number/position")
+	?Startno SeqNo;
+	@Remarks("End No")
+	?Endno SeqNo;
+	@Remarks("Type of data")
+	Datatype Attr;
+	@Remarks("Format String in Java Notation, e.g. ddMMyy")
+	?Dataformat String;
+	@Remarks("Decimal Point in the data file - if any")
+	DecimalPoint null;
+	@Remarks("Divide number by 100 to get correct amount")
+	Divideby100 null;/* 'N'  */
+	@Remarks("Constant value")
+	?Constantvalue String;
+	@Remarks("Fully qualified class names and method - separated by semicolons")
+	?Callout String;
+	@Remarks("Dynamic Java Language Script to calculate result")
+	?Script String;
+};
+

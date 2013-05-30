@@ -1,0 +1,47 @@
+@Remarks("M_TransactionAllocation")
+@Refby("0")
+tx MTransactionallocation {
+	@Remarks("Inventory Transaction")
+	!MTransactionId MTransaction;
+	@Remarks("Allocation Strategy")
+	!Allocationstrategytype Attr;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Product, Service, Item")
+	MProductId MProduct;
+	@Remarks("Product Attribute Set Instance")
+	MAttributesetinstanceId MAttributesetinstance;/* 0 */
+	@Remarks("Indicates if the payment has been allocated")
+	IsAllocated YesNo;/* 'N'  */
+	@Remarks("Quantity")
+	Qty Quantity;/* 0  */
+	@Remarks("This is a manual process")
+	IsManual YesNo;/* 'N'  */
+	@Remarks("Line on Shipment or Receipt document")
+	?MInoutlineId MInoutline;
+	@Remarks("Document Line representing a production")
+	?MProductIonlineId MProductIonline;
+	@Remarks("Unique line in an Inventory document")
+	?MInventorylineId MInventoryline;
+	@Remarks("Outgoing Transaction")
+	?OutMTransactionId MTransaction;
+	@Remarks("Outgoing Shipment/Receipt")
+	?OutMInoutlineId MInoutline;
+	@Remarks("Outgoing Production Line")
+	?OutMProductIonlineId MProductIonline;
+	@Remarks("Outgoing Inventory Line")
+	?OutMInventorylineId MInventoryline;
+};
+

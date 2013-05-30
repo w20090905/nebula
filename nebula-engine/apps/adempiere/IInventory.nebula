@@ -1,0 +1,65 @@
+@Remarks("Import Inventory Transactions")
+@Refby("0")
+tx IInventory {
+	@Remarks("Import Inventory Transactions")
+	!IInventoryId ID;
+	@Remarks("Client/Tenant for this installation.")
+	?AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	?AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	?IsActive YesNo;/* 'Y' */
+	@Remarks("Date this record was created")
+	?CreateD null;/* SYSDATE */
+	@Remarks("User who created this records")
+	?CreateDby null;
+	@Remarks("Date this record was updated")
+	?Updated null;/* SYSDATE */
+	@Remarks("User who updated this records")
+	?Updatedby null;
+	@Remarks("Has this import been processed")
+	IIsImported YesNo;/* 'N'  */
+	@Remarks("Messages generated from import process")
+	?IErrorMsg Msg;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Bar Code (Universal Product Code or its superset European Article Number)")
+	?UPC;
+	@Remarks("Search key for the record in the format required - must be unique")
+	?Value String;
+	@Remarks("Lot number (alphanumeric)")
+	?LOT;
+	@Remarks("Product Serial Number")
+	?Serno Code;
+	@Remarks("Warehouse Locator")
+	?MLocatorId MLocator;
+	@Remarks("Storage Warehouse and Service Point")
+	?MWarehouseId MWarehouse;
+	@Remarks("Key of the Warehouse")
+	?Warehousevalue String;
+	@Remarks("Key of the Warehouse Locator")
+	?Locatorvalue String;
+	@Remarks("X dimension, e.g., Aisle")
+	?X String;
+	@Remarks("Y dimension, e.g., Bin")
+	?Y String;
+	@Remarks("Z dimension, e.g., Level")
+	?Z String;
+	@Remarks("Parameters for a Physical Inventory")
+	?MInventoryId MInventory;
+	@Remarks("Unique line in an Inventory document")
+	?MInventorylineId MInventoryline;
+	@Remarks("Book Quantity")
+	?QtyBook Quantity;/* 0 */
+	@Remarks("Counted Quantity")
+	?QtyCount Count;/* 0 */
+	@Remarks("Date a product was moved in or out of inventory")
+	?Movementdate Date;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The document has been processed")
+	?Processed YesNo;/* 'N' */
+};
+

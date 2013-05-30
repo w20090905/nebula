@@ -1,0 +1,55 @@
+@Remarks("An Advertisement is something like a banner")
+@Refby("0")
+type CmAd {
+	@Remarks("An Advertisement is something like a banner")
+	!CmAdId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Advertisement Category like Banner Homepage")
+	CmAdCatId CmAdCat;
+	@Remarks("Contains media content like images, flash movies etc.")
+	CmMediaId CmMedia;
+	@Remarks("URL for the Target")
+	?Targeturl Url;
+	@Remarks("Which target should be used if user clicks?")
+	TargetFrame null;
+	@Remarks("How many clicks have been counted")
+	Actualclick null;/* 0  */
+	@Remarks("Maximum Click Count until banner is deactivated")
+	Maxclick null;/* 0  */
+	@Remarks("How many impressions have been counted")
+	Actualimpression null;/* 0  */
+	@Remarks("Maximum Impression Count until banner is deactivated")
+	Maximpression null;/* 0  */
+	@Remarks("For rotation we need a start count")
+	Startimpression null;/* 0  */
+	@Remarks("First effective day (inclusive)")
+	Startdate Date;
+	@Remarks("Last effective date (inclusive)")
+	?Enddate Date;
+	@Remarks("Contains the content itself")
+	?Contenthtml String;
+	@Remarks("Do we need to specially mention this ad?")
+	IsAdflag YesNo;/* 'Y'  */
+	@Remarks("Do we need to log the banner impressions and clicks? (needs much performance)")
+	IsLogged YesNo;/* 'Y'  */
+};
+

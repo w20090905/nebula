@@ -1,0 +1,29 @@
+@Remarks("")
+@Refby("0")
+type MTransactionV {
+	MTransactionId MTransaction;
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;
+	CreateD null;
+	CreateDby null;
+	Updated null;
+	Updatedby null;
+	Movementtype Attr;
+	MLocatorId MLocator;
+	MProductId MProduct;
+	Movementdate Date;
+	Movementqty Quantity;
+	?MInventorylineId MInventoryline;
+	?MInventoryId MInventory;
+	?MMovementlineId MMovementline;
+	?MMovementId MMovement;
+	?MInoutlineId MInoutline;
+	?MInoutId MInout;
+	?MProductIonlineId MProductIonline;
+	?MProductIonId MProductIon;
+	?CProjectIssueId CProjectIssue;
+	?CProjectId CProject;
+	MAttributesetinstanceId MAttributesetinstance;
+};
+

@@ -1,0 +1,45 @@
+@Remarks("Known Issue")
+@Refby("1")
+tx RIsSueknown {
+	@Remarks("Known Issue")
+	!RIsSueknownId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Issue Summary")
+	IsSuesummary Comment;
+	@Remarks("Internal Release Number")
+	ReleaseNo String;
+	@Remarks("Source Class Name")
+	?SourceClassName Name;
+	@Remarks("Source Method Name")
+	?SourceMethodName Name;
+	@Remarks("Logger Name")
+	?LoggerName Name;
+	@Remarks("Line No")
+	?LineNo Line;/* 0 */
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Current Status of the Issue")
+	?IsSuestatus null;
+	@Remarks("Status of an Issue")
+	?RIsSuestatusId RIsSuestatus;
+	@Remarks("Request from a Business Partner or Prospect")
+	?RRequestId RRequest;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Recommendations how to fix an Issue")
+	?RIsSuerecommendationId RIsSuerecommendation;
+};
+

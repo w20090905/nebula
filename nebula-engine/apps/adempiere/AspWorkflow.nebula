@@ -1,0 +1,25 @@
+@Remarks("ASP Workflow")
+@Refby("0")
+type AspWorkflow {
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;/* NULL   */
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;/* NULL   */
+	@Remarks("Workflow or combination of tasks")
+	!AdWorkflowId AdWorkflow;
+	@Remarks("ASP Level")
+	!AspLevelId AspLevel;
+	@Remarks("ASP Status")
+	AspStatus Attr;/* 'U'  */
+	@Remarks("Date this record was created")
+	CreateD null;
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was updated")
+	Updated null;
+	@Remarks("User who updated this records")
+	Updatedby null;
+};
+

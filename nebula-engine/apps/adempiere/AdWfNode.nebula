@@ -1,0 +1,99 @@
+@Remarks("Workflow Node (activity), step or process")
+@Refby("8")
+type AdWfNode {
+	@Remarks("Workflow Node (activity), step or process")
+	!AdWfNodeId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Workflow or combination of tasks")
+	AdWorkflowId AdWorkflow;
+	@Remarks("Information maintained in System Element table")
+	IsCentrallyMaintained YesNo;/* 'Y'  */
+	@Remarks("Indicates the Action to be performed")
+	Action null;
+	@Remarks("Data entry or display window")
+	?AdWindowId AdWindow;
+	@Remarks("Workflow or tasks")
+	?WorkflowId AdWorkflow;
+	@Remarks("Operation System Task")
+	?AdTaskId AdTask;
+	@Remarks("Process or Report")
+	?AdProcessId AdProcess;
+	@Remarks("Special Form")
+	?AdFormId AdForm;
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
+	EntityType AdEntityType;/* 'D'  */
+	@Remarks("Absolute X (horizontal) position in 1/72 of an inch")
+	Xposition Length;/* 0 */
+	@Remarks("Absolute Y (vertical) position in 1/72 of an inch")
+	Yposition Length;/* 0 */
+	@Remarks("Workflow Transaction Execution Block")
+	?AdWfBlockId AdWfBlock;
+	@Remarks("Mode how the sub-workflow is executed")
+	?Subflowexecution null;
+	@Remarks("Workflow Activity Start Mode")
+	?Startmode null;
+	@Remarks("Workflow Activity Finish Mode")
+	?Finishmode null;
+	@Remarks("Maximum Duration in Duration Unit")
+	Limit Count;/* 0 */
+	@Remarks("Indicates if this request is of a high, medium or low priority.")
+	?Priority null;
+	@Remarks("Normal Duration in Duration Unit")
+	Duration null;/* 0 */
+	@Remarks("Cost information")
+	Cost;/* 0 */
+	@Remarks("Workflow Simulation Execution Time")
+	?Workingtime Count;
+	@Remarks("Workflow Simulation Waiting time")
+	Waitingtime Count;/* 0 */
+	@Remarks("Responsible for Workflow Execution")
+	?AdWfResponsibleId AdWfResponsible;
+	@Remarks("Image or Icon")
+	?AdImageId AdImage;
+	@Remarks("Semantics for multiple incoming Transitions")
+	Joinelement null;/* NULL */
+	@Remarks("Semantics for multiple outgoing Transitions")
+	Splitelement null;/* NULL */
+	@Remarks("Time in minutes to wait (sleep)")
+	?Waittime Count;
+	@Remarks("Column in the table")
+	?AdColumnId AdColumn;
+	@Remarks("Name of the Attribute")
+	?Attributename Name;
+	@Remarks("Value of the Attribute")
+	?Attributevalue String;
+	@Remarks("The targeted status of the document")
+	?Docaction Attr;
+	@Remarks("Search key for the record in the format required - must be unique")
+	Value String;
+	@Remarks("Change of priority when Activity is suspended waiting for user")
+	?Dynpriorityunit null;
+	@Remarks("Change of priority when Activity is suspended waiting for user")
+	?Dynprioritychange null;
+	@Remarks("Recipient of the EMail")
+	?Emailrecipient EMail;
+	@Remarks("Electronic Mail Address")
+	?Email EMail;
+	@Remarks("Text templates for mailings")
+	?RMailtextId RMailtext;
+};
+

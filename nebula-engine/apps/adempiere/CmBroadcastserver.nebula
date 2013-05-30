@@ -1,0 +1,33 @@
+@Remarks("Web Broadcast Server")
+@Refby("1")
+type CmBroadcastserver {
+	@Remarks("Web Broadcast Server")
+	!CmBroadcastserverId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Defines the IP address to transfer data to")
+	Address null;
+	@Remarks("Date when last synchronized")
+	?Lastsynchronized null;
+	@Remarks("A web project is the main data container for Containers, URLs, Ads, Media etc.")
+	?CmWebprojectId CmWebproject;
+};
+

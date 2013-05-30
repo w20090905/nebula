@@ -1,0 +1,49 @@
+@Remarks("User defined Field")
+@Refby("0")
+type AdUserdefField {
+	@Remarks("User defined Field")
+	!AdUserdefFieldId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("User defined Tab")
+	AdUserdefTabId AdUserdefTab;
+	@Remarks("Field on a database table")
+	AdFieldId AdField;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Determines, if this field is displayed")
+	IsDisplayEd YesNo;/* 'Y'  */
+	@Remarks("Field is read only")
+	IsReadonly YesNo;/* 'N'  */
+	@Remarks("Displayed on same line as previous field")
+	IsSameline YesNo;/* 'N'  */
+	@Remarks("Determines, if the field can be updated")
+	IsUpdateable YesNo;/* 'Y'  */
+	@Remarks("Length of the display in characters")
+	DisplayLength Length;/* 0  */
+	@Remarks("If the Field is displayed, the result determines if the field is actually displayed")
+	DisplayLogic String;
+	@Remarks("Default value hierarchy, separated by ;")
+	Defaultvalue String;
+	@Remarks("Determines in what order the records are displayed")
+	Sortno SeqNo;/* 0  */
+	@Remarks("Method of ordering records; lowest number comes first")
+	SeqNo;/* 0  */
+};
+

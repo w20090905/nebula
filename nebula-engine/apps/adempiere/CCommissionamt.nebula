@@ -1,0 +1,31 @@
+@Remarks("Generated Commission Amount")
+@Refby("1")
+tx CCommissionamt {
+	@Remarks("Generated Commission Amount")
+	!CCommissionamtId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Commission Run or Process")
+	CCommissionrunId CCommissionrun;
+	@Remarks("Commission Line")
+	CCommissionlineId CCommissionline;
+	@Remarks("Converted Amount")
+	Convertedamt Amount;/* 0  */
+	@Remarks("The actual quantity")
+	Actualqty Quantity;/* 0  */
+	@Remarks("Commission Amount")
+	Commissionamt Amount;/* 0  */
+};
+

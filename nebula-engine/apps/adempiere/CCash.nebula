@@ -1,0 +1,61 @@
+@Remarks("Cash Journal")
+@Refby("1")
+type CCash {
+	@Remarks("Cash Journal")
+	!CCashId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Cash Book for recording petty cash transactions")
+	CCashBookId CCashBook;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Date of the statement")
+	Statementdate Date;
+	@Remarks("Accounting Date")
+	DateAcct Date;
+	@Remarks("Balance prior to any transactions")
+	Beginningbalance null;/* 0  */
+	@Remarks("Ending  or closing balance")
+	Endingbalance null;/* 0  */
+	@Remarks("Difference between statement ending balance and actual ending balance")
+	?Statementdifference null;/* 0 */
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Posting status")
+	PostEd YesNo;/* 'N'  */
+	@Remarks("Performing or initiating organization")
+	?AdOrgtrxId AdOrg;
+	@Remarks("Financial Project")
+	?CProjectId CProject;
+	@Remarks("Marketing Campaign")
+	?CCampaignId CCampaign;
+	@Remarks("Business Activity")
+	?CActivityId CActivity;
+	@Remarks("User defined list element #1")
+	?User1Id CElementvalue;
+	@Remarks("User defined list element #2")
+	?User2Id CElementvalue;
+	@Remarks("Indicates if this document requires approval")
+	IsApproved YesNo;/* 'N'  */
+	@Remarks("The current status of the document")
+	Docstatus Attr;
+	@Remarks("The targeted status of the document")
+	Docaction Attr;
+};
+

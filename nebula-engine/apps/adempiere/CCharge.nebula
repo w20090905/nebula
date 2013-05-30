@@ -1,0 +1,37 @@
+@Remarks("Additional document charges")
+@Refby("18")
+type CCharge {
+	@Remarks("Additional document charges")
+	!CChargeId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Charge Amount")
+	ChargeAmt Amount;/* 0  */
+	@Remarks("Use the same tax as the main transaction")
+	IsSametax YesNo;/* 'N'  */
+	@Remarks("Same Currency")
+	IsSamecurrency YesNo;/* 'N'  */
+	@Remarks("Tax Category")
+	?CTaxCategoryId CTaxCategory;
+	@Remarks("Tax is included in the price")
+	IsTaxIncluded YesNo;/* 'N' */
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+};
+

@@ -1,0 +1,45 @@
+@Remarks("T_Replenish")
+@Refby("0")
+type TReplenish {
+	@Remarks("Instance of the process")
+	!AdPinstanceId AdPinstance;
+	@Remarks("Storage Warehouse and Service Point")
+	!MWarehouseId MWarehouse;
+	@Remarks("Product, Service, Item")
+	!MProductId MProduct;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("On Hand Quantity")
+	QtyOnhand Quantity;/* 0  */
+	@Remarks("Reserved Quantity")
+	QtyReserved Quantity;/* 0  */
+	@Remarks("Ordered Quantity")
+	QtyOrdered Quantity;/* 0  */
+	@Remarks("Method for re-ordering a product")
+	Replenishtype Attr;
+	@Remarks("Minimum Inventory level for this product")
+	LevelMin Count;/* 0  */
+	@Remarks("Maximum Inventory level for this product")
+	LevelMax Count;/* 0  */
+	@Remarks("Identifies a Business Partner")
+	CBpartnerId CBpartner;
+	@Remarks("Minimum order quantity in UOM")
+	OrderMin null;/* 0  */
+	@Remarks("Package order size in UOM (e.g. order set of 5 units)")
+	OrderPack null;/* 0  */
+	@Remarks("Quantity to Order")
+	QtyToorder Quantity;/* 0  */
+	@Remarks("Create from Replenishment")
+	?Replenishmentcreate null;
+	@Remarks("Optional Warehouse to replenish from")
+	?MWarehousesourceId MWarehouse;
+	@Remarks("Document type or rules")
+	?CDoctypeId CDoctype;
+	@Remarks("Date this record was updated")
+	?Updated null;
+	@Remarks("User who updated this records")
+	?Updatedby null;
+};
+

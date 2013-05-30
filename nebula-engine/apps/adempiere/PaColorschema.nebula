@@ -1,0 +1,43 @@
+@Remarks("Performance Color Schema")
+@Refby("1")
+type PaColorschema {
+	@Remarks("Performance Color Schema")
+	!PaColorschemaId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Percentage up to this color is used")
+	Mark1percent Percent;/* 0  */
+	@Remarks("First color used")
+	AdPrintColor1Id AdPrintColor;
+	@Remarks("Percentage up to this color is used")
+	Mark2percent Percent;/* 0  */
+	@Remarks("Second color used")
+	AdPrintColor2Id AdPrintColor;
+	@Remarks("Percentage up to this color is used")
+	?Mark3percent Percent;/* 0 */
+	@Remarks("Third color used")
+	?AdPrintColor3Id AdPrintColor;
+	@Remarks("Percentage up to this color is used")
+	?Mark4percent Percent;/* 0 */
+	@Remarks("Forth color used")
+	?AdPrintColor4Id AdPrintColor;
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
+	EntityType AdEntityType;
+};
+

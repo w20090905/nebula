@@ -1,0 +1,39 @@
+@Remarks("Request for Quotation Line")
+@Refby("2")
+tx CRfqline {
+	@Remarks("Request for Quotation Line")
+	!CRfqlineId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Request for Quotation")
+	CRfqId CRfq;
+	@Remarks("Unique line for this document")
+	Line;/* 0  */
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Product Attribute Set Instance")
+	?MAttributesetinstanceId MAttributesetinstance;/* 0 */
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Number of Days (planned) until Delivery")
+	?DeliveryDays Count;/* 0 */
+	@Remarks("Date when work is (planned to be) complete")
+	?DateWorkcomplete Date;
+	@Remarks("Date when work is (planned to be) started")
+	?DateWorkstart Date;
+};
+

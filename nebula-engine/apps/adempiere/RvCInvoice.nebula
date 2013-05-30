@@ -1,0 +1,57 @@
+@Remarks("")
+@Refby("0")
+type RvCInvoice {
+	CInvoiceId CInvoice;
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;
+	CreateD null;
+	CreateDby null;
+	Updated null;
+	Updatedby null;
+	IsSotrx YesNo;
+	DocumentNo Code;
+	Docstatus Attr;
+	Docaction Attr;
+	IsPrintEd YesNo;
+	IsDiscountPrintEd YesNo;
+	?Processing YesNo;
+	Processed YesNo;
+	IsTransferred YesNo;
+	IsPaid YesNo;
+	CDoctypeId CDoctype;
+	CDoctypeTargetId ID;
+	?COrderId COrder;
+	?Description;
+	IsApproved YesNo;
+	?SalesRepId ID;
+	DateInvoiceD Date;
+	?DatePrintEd Date;
+	DateAcct Date;
+	CBpartnerId CBpartner;
+	CBpartnerLocationId CBpartnerLocation;
+	?AdUserId AdUser;
+	CBpGroupId CBpGroup;
+	?Poreference String;
+	?DateOrdered Date;
+	CCurrencyId CCurrency;
+	?CConversionTypeId CConversionType;
+	PaymentRule Attr;
+	CPaymentTermId CPaymentTerm;
+	MPriceListId MPriceList;
+	?CCampaignId CCampaign;
+	?CProjectId CProject;
+	?CActivityId CActivity;
+	IsPayschedulevalid YesNo;
+	?InvoiceCollectiontype Attr;
+	CCountryId CCountry;
+	?CRegionId CRegion;
+	?PostAl Postal;
+	?City null;
+	?CChargeId CCharge;
+	?ChargeAmt Amount;
+	?TotalLines Line;
+	?GrandTotal null;
+	?Multiplier null;
+};
+

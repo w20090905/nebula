@@ -1,0 +1,55 @@
+@Remarks("Color for backgrounds or indicators")
+@Refby("3")
+type AdColor {
+	@Remarks("Color for backgrounds or indicators")
+	!AdColorId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Default value")
+	IsDefault YesNo;/* 'N'  */
+	@Remarks("Color presentation for this color")
+	Colortype Attr;
+	@Remarks("RGB value")
+	Red null;
+	@Remarks("RGB value")
+	Green null;
+	@Remarks("Color RGB blue value")
+	Blue null;
+	@Remarks("Color Alpha value 0-255")
+	Alpha null;
+	@Remarks("Image or Icon")
+	?AdImageId AdImage;
+	@Remarks("Image Texture Composite Alpha")
+	ImageAlpha null;
+	@Remarks("RGB value for second color")
+	?Red1 null;
+	@Remarks("RGB value for second color")
+	?Green1 null;
+	@Remarks("RGB value for second color")
+	?Blue1 null;
+	@Remarks("Alpha value for second color")
+	?Alpha1 null;
+	@Remarks("Width of the lines")
+	?LineWidth Line;
+	@Remarks("Distance between lines")
+	?LineDistance Line;
+	@Remarks("Start point of the gradient colors")
+	?Startpoint null;
+	@Remarks("Distance in points to repeat gradient color - or zero")
+	?Repeatdistance null;
+};
+

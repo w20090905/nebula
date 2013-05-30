@@ -1,0 +1,47 @@
+@Remarks("Tax Declaration Document Information")
+@Refby("0")
+tx CTaxDeclarationline {
+	@Remarks("Tax Declaration Document Information")
+	!CTaxDeclarationlineId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Unique line for this document")
+	Line;/* 0  */
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("This is a manual process")
+	IsManual YesNo;/* 'N'  */
+	@Remarks("Define the declaration to the tax authorities")
+	CTaxDeclarationId CTaxDeclaration;
+	@Remarks("Identifies a Business Partner")
+	CBpartnerId CBpartner;
+	@Remarks("Tax identifier")
+	CTaxId CTax;
+	@Remarks("Invoice Identifier")
+	?CInvoiceId CInvoice;
+	@Remarks("Invoice Detail Line")
+	?CInvoiceLineId CInvoiceLine;
+	@Remarks("Allocation Line")
+	?CAllocationlineId CAllocationline;
+	@Remarks("The Currency for this record")
+	CCurrencyId CCurrency;
+	@Remarks("Base for calculating the tax amount")
+	TaxBaseamt Amount;/* 0  */
+	@Remarks("Tax Amount for a document")
+	TaxAmt Amount;/* 0  */
+	@Remarks("Accounting Date")
+	DateAcct Date;
+};
+

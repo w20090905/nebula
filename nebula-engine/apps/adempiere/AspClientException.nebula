@@ -1,0 +1,41 @@
+@Remarks("Client Exception")
+@Refby("0")
+tx AspClientException {
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;/* NULL   */
+	@Remarks("Field on a database table")
+	?AdFieldId AdField;
+	@Remarks("Special Form")
+	?AdFormId AdForm;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;/* 0  */
+	@Remarks("Process or Report")
+	?AdProcessId AdProcess;
+	@Remarks("Process Parameter")
+	?AdProcessParaId AdProcessPara;
+	@Remarks("Tab within a Window")
+	?AdTabId AdTab;
+	@Remarks("Operation System Task")
+	?AdTaskId AdTask;
+	@Remarks("Workflow Node (activity), step or process")
+	?AdWfNodeId AdWfNode;
+	@Remarks("Data entry or display window")
+	?AdWindowId AdWindow;
+	@Remarks("Workflow or combination of tasks")
+	?AdWorkflowId AdWorkflow;
+	@Remarks("Client Exception")
+	!AspClientExceptionId ID;
+	@Remarks("ASP Status")
+	AspStatus Attr;/* 'U'  */
+	@Remarks("Date this record was created")
+	CreateD null;
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was updated")
+	Updated null;
+	@Remarks("User who updated this records")
+	Updatedby null;
+};
+

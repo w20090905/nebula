@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+type RvRequestUpdates {
+	?AdClientId AdClient;
+	?AdOrgId AdOrg;
+	?IsActive YesNo;
+	?CreateD null;
+	?CreateDby null;
+	?Updated null;
+	?Updatedby null;
+	?RRequestId RRequest;
+	?AdUserId AdUser;
+	?IsSelfservice YesNo;
+	?RGroupId RGroup;
+	?RRequestTypeId RRequestType;
+	?RCategoryId RCategory;
+};
+

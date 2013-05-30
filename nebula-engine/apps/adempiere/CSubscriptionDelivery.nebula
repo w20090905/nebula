@@ -1,0 +1,23 @@
+@Remarks("Optional Delivery Record for a Subscription")
+@Refby("0")
+tx CSubscriptionDelivery {
+	@Remarks("Optional Delivery Record for a Subscription")
+	!CSubscriptionDeliveryId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  	  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  	  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  	  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Subscription of a Business Partner of a Product to renew")
+	CSubscriptionId CSubscription;
+};
+

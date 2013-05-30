@@ -1,0 +1,29 @@
+@Remarks("C_BP_Withholding")
+@Refby("0")
+type CBpWithholding {
+	@Remarks("Identifies a Business Partner")
+	!CBpartnerId CBpartner;
+	@Remarks("Withholding type defined")
+	!CWithholdingId CWithholding;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Monies must be withheld")
+	IsMandatorywithholding YesNo;/* 'N'  */
+	@Remarks("Temporarily do not withhold taxes")
+	IsTemporaryexempt YesNo;/* 'N'  */
+	@Remarks("Reason for not withholding")
+	?Exemptreason null;
+};
+

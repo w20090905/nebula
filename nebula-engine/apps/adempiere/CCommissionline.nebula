@@ -1,0 +1,51 @@
+@Remarks("Commission Line")
+@Refby("1")
+tx CCommissionline {
+	@Remarks("Commission Line")
+	!CCommissionlineId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Commission")
+	CCommissionId CCommission;
+	@Remarks("Unique line for this document")
+	Line;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Subtract Amount for generating commissions")
+	AmtSubtract Amount;
+	@Remarks("Multiplier Amount for generating commissions")
+	AmtMultiplier Amount;
+	@Remarks("Quantity to subtract when generating commissions")
+	QtySubtract Quantity;
+	@Remarks("Value to multiply quantities by for generating commissions.")
+	QtyMultiplier Quantity;
+	@Remarks("Do not generate negative commissions")
+	IsPositiveonly YesNo;/* 'Y'  */
+	@Remarks("Commission only Orders or Invoices, where this Sales Rep is entered")
+	Commissionorders null;/* 'N'  */
+	@Remarks("Organizational entity within client")
+	?OrgId AdOrg;
+	@Remarks("Category of a Product")
+	?MProductCategoryId MProductCategory;
+	@Remarks("Product, Service, Item")
+	?MProductId MProduct;
+	@Remarks("Business Partner Group")
+	?CBpGroupId CBpGroup;
+	@Remarks("Identifies a Business Partner")
+	?CBpartnerId CBpartner;
+	@Remarks("Sales coverage region")
+	?CSalesRegionId CSalesRegion;
+};
+

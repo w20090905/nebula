@@ -1,0 +1,79 @@
+@Remarks("Document type or rules")
+@Refby("31")
+type CDoctype {
+	@Remarks("Document type or rules")
+	!CDoctypeId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("The label text to be printed on a document or correspondence.")
+	PrintName Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Logical type of document")
+	Docbasetype Attr;
+	@Remarks("This is a Sales Transaction")
+	IsSotrx YesNo;/* 'Y'  */
+	@Remarks("Sales Order Sub Type")
+	?Docsubtypeso null;
+	@Remarks("Indicates if Pro Forma Invoices can be generated from this document")
+	?Hasproforma YesNo;/* 'N'                                */
+	@Remarks("Document type used for pro forma invoices generated from this sales document")
+	?CDoctypeProformaId CDoctype;
+	@Remarks("Document type used for shipments generated from this sales document")
+	?CDoctypeShipmentId CDoctype;
+	@Remarks("Document type used for invoices generated from this sales document")
+	?CDoctypeInvoiceId CDoctype;
+	@Remarks("The document has a document sequence")
+	IsDocnoControlled YesNo;/* 'N'  */
+	@Remarks("Document sequence determines the numbering of documents")
+	?DocnoSequenceId AdSequence;
+	@Remarks("General Ledger Category")
+	GlCategoryId GlCategory;
+	@Remarks("Charges can be added to the document")
+	Hascharges YesNo;/* 'N'  */
+	@Remarks("Additional information for a Document")
+	?DocumentNote Note;
+	@Remarks("Default value")
+	IsDefault YesNo;/* 'N'  */
+	@Remarks("Number of copies to be printed")
+	DocumentCopies Count;
+	@Remarks("Data Print Format")
+	?AdPrintFormatId AdPrintFormat;
+	@Remarks("The document type is the default counter document type")
+	IsDefaultcounterdoc YesNo;/* 'N'  */
+	@Remarks("Require Ship or Receipt Confirmation before processing")
+	IsShipconfirm YesNo;/* 'N'  */
+	@Remarks("Require Pick or QA Confirmation before processing")
+	IsPickqaconfirm YesNo;/* 'N'  */
+	@Remarks("Movement is in transit")
+	IsIntransit YesNo;/* 'N'  */
+	@Remarks("Split document when there is a difference")
+	IsSplitwhendifference YesNo;/* 'N'  */
+	@Remarks("Document type for generating in dispute Shipments")
+	?CDoctypeDifferenceId CDoctype;
+	@Remarks("Create Counter Document")
+	IsCreateCounter YesNo;/* 'Y'  */
+	@Remarks("Index the document for the internal search engine")
+	IsIndexed YesNo;/* 'Y'  */
+	@Remarks("Overwrite Sequence on Complete")
+	?IsOverwriteSeqoncomplete YesNo;/* 'N'  */
+	@Remarks("Definite Sequence")
+	?DefinitesequenceId AdSequence;
+	@Remarks("Overwrite Date on Complete")
+	?IsOverwriteDateoncomplete YesNo;/* 'N'  */
+};
+

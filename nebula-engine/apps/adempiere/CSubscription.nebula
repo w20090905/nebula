@@ -1,0 +1,37 @@
+@Remarks("Subscription of a Business Partner of a Product to renew")
+@Refby("1")
+type CSubscription {
+	@Remarks("Subscription of a Business Partner of a Product to renew")
+	!CSubscriptionId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  	  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  	  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  	  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Identifies a Business Partner")
+	CBpartnerId CBpartner;
+	@Remarks("Product, Service, Item")
+	MProductId MProduct;
+	@Remarks("Type of subscription")
+	CSubscriptiontypeId CSubscriptiontype;
+	@Remarks("First effective day (inclusive)")
+	Startdate Date;
+	@Remarks("Subscription is paid/valid until this date")
+	Paiduntildate Date;
+	@Remarks("Subscription Renewal is Due")
+	IsDue YesNo;/* 'N'  	  */
+	@Remarks("Renewal Date")
+	Renewaldate Date;
+};
+

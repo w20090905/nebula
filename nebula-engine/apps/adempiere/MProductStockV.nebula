@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("0")
+type MProductStockV {
+	IsActive YesNo;
+	CreateD null;
+	CreateDby null;
+	Updated null;
+	Updatedby null;
+	Value String;
+	?Help;
+	?QtyAvailable Quantity;
+	QtyOnhand Quantity;
+	QtyReserved Quantity;
+	?Description;
+	Warehouse null;
+	MWarehouseId MWarehouse;
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	?DocumentNote Note;
+};
+

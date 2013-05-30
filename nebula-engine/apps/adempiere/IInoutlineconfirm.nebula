@@ -1,0 +1,41 @@
+@Remarks("Material Shipment or Receipt Confirmation Import Line")
+@Refby("0")
+tx IInoutlineconfirm {
+	@Remarks("Material Shipment or Receipt Confirmation Import Line")
+	!IInoutlineconfirmId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Has this import been processed")
+	IIsImported YesNo;/* 'N'  */
+	@Remarks("Messages generated from import process")
+	?IErrorMsg Msg;
+	@Remarks("Material Shipment or Receipt Confirmation Line")
+	?MInoutlineconfirmId MInoutlineconfirm;
+	@Remarks("Confirmation Number")
+	?Confirmationno Code;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Confirmation of a received quantity")
+	?Confirmedqty Quantity;/* 0 */
+	@Remarks("The Quantity scrapped due to QA issues")
+	?Scrappedqty Quantity;/* 0 */
+	@Remarks("Difference Quantity")
+	?Differenceqty Quantity;/* 0 */
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+};
+

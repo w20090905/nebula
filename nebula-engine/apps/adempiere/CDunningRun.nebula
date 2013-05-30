@@ -1,0 +1,33 @@
+@Remarks("Dunning Run")
+@Refby("1")
+tx CDunningRun {
+	@Remarks("Dunning Run")
+	!CDunningRunId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Date of Dunning")
+	DunningDate Date;
+	@Remarks("Dunning Level")
+	CDunningLevelId CDunningLevel;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Send")
+	?Sendit null;
+	@Remarks("Optional short description of the record")
+	?Description;
+};
+

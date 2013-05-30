@@ -1,0 +1,31 @@
+@Remarks("AD_Package_Imp_Proc_ID")
+@Refby("0")
+tx AdPackageImpProc {
+	@Remarks("AD_Package_Imp_Proc_ID")
+	!AdPackageImpProcId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'                    */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE                */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE                */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Update System Maintained Application Dictionary")
+	?AdOverrideDict null;
+	@Remarks("Package directory, default to AdempiereHome/packages")
+	?AdPackageDir null;
+	@Remarks("Fully qualified package source file name")
+	?AdPackageSource null;
+	@Remarks("Type of package source - file, ftp, webservice etc")
+	AdPackageSourceType Attr;
+	@Remarks("Process Now")
+	?Processing YesNo;
+};
+

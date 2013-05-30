@@ -1,0 +1,81 @@
+@Remarks("Payment processor for electronic payments")
+@Refby("1")
+type CPaymentProcessor {
+	@Remarks("Payment processor for electronic payments")
+	!CPaymentProcessorId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Account at the Bank")
+	CBankaccountId CBankaccount;
+	@Remarks("Document Sequence")
+	?AdSequenceId AdSequence;
+	@Remarks("Payment Processor Java Class")
+	?Payprocessorclass null;
+	@Remarks("User ID or account number")
+	?Userid null;
+	@Remarks("Password of any length (case sensitive)")
+	?Password;
+	@Remarks("Host Address URL or DNS")
+	?Address null;
+	@Remarks("Host Communication Port")
+	?Hostport Port;
+	@Remarks("Address of your proxy server")
+	?Address null;
+	@Remarks("Port of your proxy server")
+	?ProxyPort Port;
+	@Remarks("Logon of your proxy server")
+	?ProxyLogon null;
+	@Remarks("Password of your proxy server")
+	?ProxyPassword Password;
+	@Remarks("Accept Visa Cards")
+	AcceptVisa YesNo;/* 'Y'  */
+	@Remarks("Accept Master Card")
+	AcceptMc YesNo;/* 'Y'  */
+	@Remarks("Accept American Express Card")
+	AcceptAmex YesNo;/* 'Y'  */
+	@Remarks("Accept Diner_s Club")
+	AcceptDiners YesNo;/* 'Y'  */
+	@Remarks("Accept Discover Card")
+	AcceptDiscover YesNo;/* 'Y'  */
+	@Remarks("Accept Corporate Purchase Cards")
+	AcceptCorporate YesNo;/* 'Y'  */
+	@Remarks("Accept ECheck (Electronic Checks)")
+	AcceptCheck YesNo;/* 'Y'  */
+	@Remarks("Accept Bank ATM Card")
+	AcceptAtm YesNo;/* 'Y'  */
+	@Remarks("Require 3/4 digit Credit Verification Code")
+	Requirevv YesNo;/* 'N'  */
+	@Remarks("The Currency for this record")
+	?CCurrencyId CCurrency;
+	@Remarks("Fixed cost per transaction")
+	Costpertrx Cost;/* 0  */
+	@Remarks("Commission stated as a percentage")
+	Commission null;
+	@Remarks("Partner ID or Account for the Payment Processor")
+	?Partnerid null;
+	@Remarks("Vendor ID for the Payment Processor")
+	?Vendorid null;
+	@Remarks("Minumum Amout in Document Currency")
+	?Minimumamt Amount;/* 0 */
+	@Remarks("Accept Direct Debits (vendor initiated)")
+	AcceptDirectdebit YesNo;/* 'N'  */
+	@Remarks("Accept Direct Deposit (payee initiated)")
+	AcceptDirectdeposit YesNo;/* 'N'  */
+};
+

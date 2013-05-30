@@ -1,0 +1,35 @@
+@Remarks("Reference Table Definitions")
+@Refby("0")
+type AdRefTable {
+	@Remarks("System Reference and Validation")
+	!AdReferenceId AdReference;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Database Table information")
+	AdTableId AdTable;
+	@Remarks("Unique identifier of a record")
+	AdKey AdColumn;
+	@Remarks("Column that will display")
+	AdDisplay AdColumn;
+	@Remarks("Displays Value column with the Display column")
+	IsValueDisplayed YesNo;/* 'N'  */
+	@Remarks("Fully qualified SQL WHERE clause")
+	?WhereClause String;
+	@Remarks("Fully qualified ORDER BY clause")
+	?OrderbyClause String;
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
+	EntityType AdEntityType;/* 'D'  */
+};
+

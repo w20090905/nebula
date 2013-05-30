@@ -1,0 +1,26 @@
+@Remarks("")
+@Refby("1")
+tx AAssetChange {
+	!AAssetChangeId ID;
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;/* 'Y'  */
+	CreateD null;/* SYSDATE  */
+	CreateDby null;
+	Updated null;/* SYSDATE  */
+	Updatedby null;
+	AAssetId AAsset;
+	ChangeType Attr;
+	ChangeDate Date;
+	?ChangeAmt Amount;/* 0 */
+	?Uselifeyears Count;
+	?Uselifemonths Count;
+	?Lifeuseunits null;
+	?Assetdepreciationdate Date;
+	?AAssetRetirementId AAssetRetirement;
+	?AAssetAdditionId AAssetAddition;
+	?Serno Code;
+	?LOT;
+	?Versionno Code;
+};
+

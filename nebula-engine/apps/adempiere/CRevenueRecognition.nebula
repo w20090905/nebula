@@ -1,0 +1,31 @@
+@Remarks("Method for recording revenue")
+@Refby("2")
+type CRevenueRecognition {
+	@Remarks("Method for recording revenue")
+	!CRevenueRecognitionId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Time based Revenue Recognition rather than Service Level based")
+	IsTimebased YesNo;
+	@Remarks("Recognition frequency")
+	?Recognitionfrequency null;
+	@Remarks("Number of Months")
+	?Nomonths Count;
+};
+

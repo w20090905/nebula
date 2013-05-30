@@ -1,0 +1,35 @@
+@Remarks("News item or article defines base content")
+@Refby("0")
+tx CmNewSitem {
+	@Remarks("News item or article defines base content")
+	!CmNewSitemId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("News channel for rss feed")
+	CmNewSchannelId CmNewSchannel;
+	@Remarks("Name this entity is referred to as")
+	?Title;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Author/Creator of the Entity")
+	?Author null;
+	@Remarks("Contains URL to a target")
+	?Linkurl Url;
+	@Remarks("Date on which this article will / should get published")
+	?Pubdate Date;
+	@Remarks("Contains the content itself")
+	?Contenthtml Note;
+};
+

@@ -1,0 +1,55 @@
+@Remarks("System Registration")
+@Refby("0")
+type AdRegistration {
+	@Remarks("System Registration")
+	!AdRegistrationId ID;
+	@Remarks("Client/Tenant for this installation.")
+	!AdClientId AdSystem;
+	@Remarks("System Definition")
+	!AdSystemId AdSystem;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("The application is registered.")
+	IsRegistered YesNo;/* 'N'  */
+	@Remarks("Direct internal record ID")
+	?RecordId ID;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Location or Address")
+	?CLocationId CLocation;
+	@Remarks("The system is in production")
+	IsInproduction YesNo;/* 'N'  */
+	@Remarks("The day you started the implementation (if implementing) - or production (went life) with Adempiere")
+	?Startproductiondate Date;
+	@Remarks("You allow to publish the information, not just statistical summary info")
+	IsAllowpublish YesNo;/* 'Y'  */
+	@Remarks("Maintain general statistics")
+	IsAllowstatistics YesNo;/* 'Y'  */
+	@Remarks("Information about Server and Client Platform")
+	?Platforminfo Info;
+	@Remarks("Information of the industry (e.g. professional service, distribution of furnitures, ..)")
+	?Industryinfo Info;
+	@Remarks("Total Volume of Sales in Thousands of Currency")
+	?SalesVolume Volume;/* 0 */
+	@Remarks("The Currency for this record")
+	?CCurrencyId CCurrency;
+	@Remarks("Number of employees")
+	?Numberemployees null;/* 0 */
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Remote host Info")
+	?RemoteHost Host;
+	@Remarks("Remote Address")
+	?RemoteAddr Address;
+};
+

@@ -1,0 +1,51 @@
+@Remarks("Document Sequence")
+@Refby("6")
+type AdSequence {
+	@Remarks("Document Sequence")
+	!AdSequenceId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	?IsActive YesNo;/* 'Y'                        */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Format of the value; Can contain fixed format elements, Variables: '_lLoOaAcCa09'")
+	?Vformat String;
+	@Remarks("Automatically assign the next number")
+	IsAutoSequence YesNo;/* 'Y'  */
+	@Remarks("The number to increment the last document number by")
+	Incrementno SeqNo;
+	@Remarks("Starting number/position")
+	Startno SeqNo;
+	@Remarks("The next number to be used")
+	Currentnext null;
+	@Remarks("Next sequence for system use")
+	Currentnextsys null;
+	@Remarks("Activate Audit Trail of what numbers are generated")
+	?IsAudited YesNo;/* 'N'                        */
+	@Remarks("The document number  will be used as the record key")
+	?IsTableid YesNo;/* 'N'                        */
+	@Remarks("Prefix before the sequence number")
+	?Prefix String;/* NULL */
+	@Remarks("Suffix after the number")
+	?Suffix String;/* NULL */
+	@Remarks("Restart the sequence with Start on every 1/1")
+	?Startnewyear null;/* 'N'                        */
+	@Remarks("Fully qualified date column")
+	?DateColumn null;
+	@Remarks("Java Decimal Pattern")
+	?DecimalPattern null;
+};
+

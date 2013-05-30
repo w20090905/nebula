@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+type MInoutlinemaV {
+	?AdClientId AdClient;
+	?AdOrgId AdOrg;
+	?IsActive YesNo;
+	?CreateD null;
+	?CreateDby null;
+	?Updated null;
+	?Updatedby null;
+	?MInoutId MInout;
+	?MInoutlineId MInoutline;
+	?Line;
+	?MProductId MProduct;
+	?MAttributesetinstanceId MAttributesetinstance;
+	?Movementqty Quantity;
+	?MLocatorId MLocator;
+};
+

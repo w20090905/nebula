@@ -1,0 +1,56 @@
+@Remarks("")
+@Refby("0")
+type CInvoiceV1 {
+	CInvoiceId CInvoice;
+	AdClientId AdClient;
+	AdOrgId AdOrg;
+	IsActive YesNo;
+	CreateD null;
+	CreateDby null;
+	Updated null;
+	Updatedby null;
+	IsSotrx YesNo;
+	DocumentNo Code;
+	Docstatus Attr;
+	Docaction Attr;
+	?Processing YesNo;
+	Processed YesNo;
+	CDoctypeId CDoctype;
+	CDoctypeTargetId ID;
+	?COrderId COrder;
+	?Description;
+	IsApproved YesNo;
+	IsTransferred YesNo;
+	?SalesRepId ID;
+	DateInvoiceD Date;
+	?DatePrintEd Date;
+	DateAcct Date;
+	CBpartnerId CBpartner;
+	CBpartnerLocationId CBpartnerLocation;
+	?AdUserId AdUser;
+	?Poreference String;
+	?DateOrdered Date;
+	CCurrencyId CCurrency;
+	?CConversionTypeId CConversionType;
+	PaymentRule Attr;
+	CPaymentTermId CPaymentTerm;
+	?CChargeId CCharge;
+	MPriceListId MPriceList;
+	?CCampaignId CCampaign;
+	?CProjectId CProject;
+	?CActivityId CActivity;
+	IsPrintEd YesNo;
+	IsDiscountPrintEd YesNo;
+	IsPaid YesNo;
+	IsIndispute YesNo;
+	IsPayschedulevalid YesNo;
+	?CInvoicePayscheduleId null;
+	?InvoiceCollectiontype Attr;
+	?ChargeAmt Amount;
+	?TotalLines Line;
+	?GrandTotal null;
+	?Multiplier null;
+	?Multiplierap null;
+	Docbasetype Attr;
+};
+

@@ -1,0 +1,29 @@
+@Remarks("User/concat access to Business Partner information and resources")
+@Refby("0")
+tx AdUserbpaccess {
+	@Remarks("User/concat access to Business Partner information and resources")
+	!AdUserbpaccessId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	AdUserId AdUser;
+	@Remarks("Type of Access of the user/contact to Business Partner information and resources")
+	Bpaccesstype Attr;
+	@Remarks("Type of request (e.g. Inquiry, Complaint, ..)")
+	?RRequestTypeId RRequestType;
+	@Remarks("Logical type of document")
+	?Docbasetype Attr;
+};
+

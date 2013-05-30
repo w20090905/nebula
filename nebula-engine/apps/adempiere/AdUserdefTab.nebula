@@ -1,0 +1,37 @@
+@Remarks("User defined Tab")
+@Refby("1")
+type AdUserdefTab {
+	@Remarks("User defined Tab")
+	!AdUserdefTabId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("User defined Window")
+	AdUserdefWinId AdUserdefWin;
+	@Remarks("Tab within a Window")
+	AdTabId AdTab;
+	@Remarks("This applies to Multi-Row view only")
+	IsMultirowonly YesNo;/* 'N'  */
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Field is read only")
+	IsReadonly YesNo;/* 'N'  */
+	@Remarks("Default for toggle between Single- and Multi-Row (Grid) Layout")
+	IsSinglerow YesNo;/* 'N'  */
+};
+

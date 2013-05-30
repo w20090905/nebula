@@ -1,0 +1,39 @@
+@Remarks("Adempiere Alert")
+@Refby("2")
+type AdAlert {
+	@Remarks("Adempiere Alert")
+	!AdAlertId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrgId AdOrg;
+	@Remarks("The record is active in the system")
+	IsActive YesNo;/* 'Y'  */
+	@Remarks("Date this record was created")
+	CreateD null;/* SYSDATE  */
+	@Remarks("User who created this records")
+	CreateDby null;
+	@Remarks("Date this record was updated")
+	Updated null;/* SYSDATE  */
+	@Remarks("User who updated this records")
+	Updatedby null;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Subject of the Alert")
+	AlertSubject null;
+	@Remarks("Message of the Alert")
+	AlertMessage null;
+	@Remarks("Send alerts to recipient only if the client security rules of the role allows")
+	EnforceClientSecurity null;/* 'Y'  */
+	@Remarks("Send alerts to recipient only if the data security rules of the role allows")
+	EnforceRoleSecurity null;/* 'Y'  */
+	@Remarks("Alert Processor/Server Parameter")
+	?AdAlertProcessorId AdAlertProcessor;
+	@Remarks("Element is valid")
+	IsValid YesNo;/* 'Y'  */
+};
+
