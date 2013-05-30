@@ -1,2 +1,2 @@
-define PhoneNumber|zh:电话号码 extends Code {
+define Phone|zh:电话号码 extends Code {
 };
