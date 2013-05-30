@@ -1,4 +1,0 @@
-type System{
-  !Name;
-  Theme Attr;
-};

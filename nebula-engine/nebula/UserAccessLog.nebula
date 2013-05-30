@@ -1,5 +1,0 @@
-tx UserAccessLog{
-	!AutoID;
-	User;
-	Date;
-};
