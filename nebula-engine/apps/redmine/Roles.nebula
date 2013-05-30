@@ -7,6 +7,6 @@ type Roles {
 	?Assignable YesNo;/* 1 */
 	Builtin Count;/* 0 */
 	?Permissions Note;
-	IsSuesVisibility String;/* default */
+	IssuesVisibility String;/* default */
 };
 

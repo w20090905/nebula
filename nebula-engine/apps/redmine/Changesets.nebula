@@ -2,7 +2,7 @@
 @Refby("0")
 tx Changesets {
 	!Id ID;
-	RepositoryId ID;
+	RepositoryId Repositories;
 	Revision;
 	?Committer String;
 	CommittedOn Datetime;

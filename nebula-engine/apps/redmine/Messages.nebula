@@ -9,7 +9,7 @@ tx Messages {
 	?AuthorId ID;
 	RepliesCount Count;/* 0 */
 	?LastReplyId ID;
-	CreateDOn Datetime;
+	CreatedOn Datetime;
 	UpdatedOn Datetime;
 	?Locked YesNo;/* 0 */
 	?Sticky Count;/* 0 */

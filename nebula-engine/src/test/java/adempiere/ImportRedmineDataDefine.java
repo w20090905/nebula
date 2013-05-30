@@ -42,6 +42,12 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 	}
 
 	public ImportRedmineDataDefine() {
+
+		when(EqualsIgnoreCase).with("repository_id").table("Changesets").setReferTo("Repositories");
+		when(EqualsIgnoreCase).with("status_id").table("issues").setReferTo("IssueStatuses");
+
+		when(EqualsIgnoreCase).with("login").table("users").setAsMaster();
+		
 		when(EqualsIgnoreCase).with("ID").is(Long).setTypeName("ID");
 
 		when(EqualsIgnoreCase)
@@ -70,7 +76,7 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 		when(EndWithIgnoreCase).with("Value").is(String).setTypeName("String");
 
 		when(EndWithIgnoreCase).with("Comments").is(String).setTypeName("Note");
-		when(EndWithIgnoreCase).with("Mail").is(String).setTypeName("EMail");
+		when(EndWithIgnoreCase).with("Mail").is(Varchar, NVarchar).setTypeName("EMail");
 		when(EndWithIgnoreCase).with("Hours").is(Decimal).setTypeName("Number");
 		when(EndWithIgnoreCase).with("Encoding").is(String).setTypeName("String");
 		when(EndWithIgnoreCase).with("Notes").is(Text).setTypeName("Note");
@@ -84,8 +90,6 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 		when().is(Varchar, NVarchar).setTypeName("String");
 		when().is(Text, Blob).setTypeName("Note");
 		when().is(Long).setTypeName("Count");
-		
-		when(EqualsIgnoreCase).with("repository_id") .table("Changesets").setReferTo("Repositories");
 
 		// Skip System Column
 		// when(EqualsIgnoreCase).with("CREATED_ON","UPDATED_ON").is(Date,Datetime,Timestamp).skip();
@@ -126,13 +130,15 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 				}
 			}
 
-			if (hasIDKey && !hasName) {
-				type.standalone = TypeStandalone.Transaction;
-			} else if (hasNameKey) {
-				type.standalone = TypeStandalone.Master;
-			} else if (hasIDKey && hasNameRequired) {
-				type.standalone = TypeStandalone.Master;
-			} 
+			if (type.standalone == TypeStandalone.Abstract) {
+				if (hasIDKey && !hasName) {
+					type.standalone = TypeStandalone.Transaction;
+				} else if (hasNameKey) {
+					type.standalone = TypeStandalone.Master;
+				} else if (hasIDKey && hasNameRequired) {
+					type.standalone = TypeStandalone.Master;
+				}
+			}
 
 			// System.out.println("##\t" + type.rawName + "\t" + type.name +
 			// "\t" + hasIDKey + "\t" + hasNameKey + "\t"
@@ -158,7 +164,7 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 						field.resultTypeName = typeMapByRawName.get(typename + "s").name;
 						field.isForeignKey = true;
 						field.foreignKeyTable = typename + "s";
-					}else{
+					} else {
 						System.out.println("Fail check foreign key : " + type.name + " - " + field.name);
 					}
 				}
@@ -169,7 +175,7 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 		for (Type type : types) {
 			for (Field field : type.fields) {
 				if (field.isKey) {
-					if (field.name.endsWith("_ID") && !"ID".equals(field.resultTypeName)
+					if (field.name.toUpperCase().endsWith("_ID") && !"ID".equals(field.resultTypeName)
 							&& typeMapByName.containsKey(field.resultTypeName)) {
 						Type refType = typeMapByName.get(field.resultTypeName);
 						switch (refType.standalone) {
@@ -195,7 +201,8 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 		System.out.println("\n\n\n=================================================\n\n\n");
 		for (Type type : types) {
 			for (Field field : type.fields) {
-				 System.out.println(type.rawName + "\t" + type.name + "\t" + type.standalone.name() + "\t" + type.comment +  "\t" +   field);
+				System.out.println(type.rawName + "\t" + type.name + "\t" + type.standalone.name() + "\t"
+						+ type.comment + "\t" + field);
 			}
 		}
 	}

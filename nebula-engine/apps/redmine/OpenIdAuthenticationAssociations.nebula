@@ -2,7 +2,7 @@
 @Refby("0")
 tx OpenIdAuthenticationAssociations {
 	!Id ID;
-	?IsSued Count;
+	?Issued Count;
 	?Lifetime Count;
 	?Handle String;
 	?AssocType Attr;

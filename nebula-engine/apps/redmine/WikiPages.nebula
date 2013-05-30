@@ -4,7 +4,7 @@ tx WikiPages {
 	!Id ID;
 	WikiId Wikis;
 	Title;
-	CreateDOn Datetime;
+	CreatedOn Datetime;
 	Protected YesNo;/* 0 */
 	?ParentId ID;
 };

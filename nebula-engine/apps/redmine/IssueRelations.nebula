@@ -2,8 +2,8 @@
 @Refby("0")
 tx IssueRelations {
 	!Id ID;
-	IsSueFromId ID;
-	IsSueToId ID;
+	IssueFromId ID;
+	IssueToId ID;
 	RelationType Attr;
 	?Delay Count;
 };

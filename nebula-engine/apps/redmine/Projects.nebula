@@ -7,7 +7,7 @@ type Projects {
 	?Homepage Url;
 	IsPublic YesNo;/* 1 */
 	?ParentId ID;
-	?CreateDOn Datetime;
+	?CreatedOn Datetime;
 	?UpdatedOn Datetime;
 	?Identifier String;
 	Status;/* 1 */

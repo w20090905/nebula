@@ -11,7 +11,7 @@ tx Attachments {
 	Digest String;
 	Downloads Count;/* 0 */
 	AuthorId ID;/* 0 */
-	?CreateDOn Datetime;
+	?CreatedOn Datetime;
 	?Description;
 };
 

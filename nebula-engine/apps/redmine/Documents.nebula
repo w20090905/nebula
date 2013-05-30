@@ -6,6 +6,6 @@ tx Documents {
 	CategoryId ID;/* 0 */
 	Title;
 	?Description;
-	?CreateDOn Datetime;
+	?CreatedOn Datetime;
 };
 

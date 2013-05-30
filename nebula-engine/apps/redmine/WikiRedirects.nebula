@@ -5,6 +5,6 @@ tx WikiRedirects {
 	WikiId Wikis;
 	?Title;
 	?RedirectsTo Url;
-	CreateDOn Datetime;
+	CreatedOn Datetime;
 };
 

@@ -2,7 +2,7 @@
 @Refby("0")
 type Users {
 	!Id ID;
-	*Login String;
+	Login String;
 	HashedPassword Password;
 	Firstname FirstName;
 	Lastname LastName;
@@ -12,10 +12,11 @@ type Users {
 	?LastLoginOn Datetime;
 	?Language String;
 	?AuthSourceId AuthSources;
-	?CreateDOn Datetime;
+	?CreatedOn Datetime;
 	?UpdatedOn Datetime;
 	?Type Attr;
 	?IdentityUrl Url;
-	MailNotification YesNo;
+	MailNotification String;
 	?Salt String;
 };
+

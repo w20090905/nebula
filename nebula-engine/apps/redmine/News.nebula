@@ -7,7 +7,7 @@ tx News {
 	?Summary;
 	?Description;
 	AuthorId ID;/* 0 */
-	?CreateDOn Datetime;
+	?CreatedOn Datetime;
 	CommentsCount Count;/* 0 */
 };
 

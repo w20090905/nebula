@@ -57,7 +57,7 @@ public class DefaultImporter {
 		dbColumnMap.put(Varchar, Lists.newArrayList("VARCHAR", "VARCHAR2"));
 		dbColumnMap.put(NVarchar, Lists.newArrayList("NVARCHAR", "NVARCHAR2"));
 		dbColumnMap.put(Bit, Lists.newArrayList("BIT"));
-		dbColumnMap.put(Long, Lists.newArrayList("INT", "LONG","NUMBER"));
+		dbColumnMap.put(Long, Lists.newArrayList("INT", "LONG", "NUMBER"));
 		dbColumnMap.put(Decimal, Lists.newArrayList("FLOAT", "NUMERIC"));
 		dbColumnMap.put(Date, Lists.newArrayList("DATE"));
 		dbColumnMap.put(Time, Lists.newArrayList("TIME"));
@@ -65,7 +65,7 @@ public class DefaultImporter {
 		dbColumnMap.put(Timestamp, Lists.newArrayList("BIT"));
 		dbColumnMap.put(String, Lists.newArrayList("CHAR", "VARCHAR", "VARCHAR2", "NVARCHAR", "NVARCHAR2", "TEXT"));
 		dbColumnMap.put(Text, Lists.newArrayList("TEXT", "LONGTEXT"));
-		dbColumnMap.put(Blob, Lists.newArrayList("BLOB", "LONGBLOB","CLOB"));
+		dbColumnMap.put(Blob, Lists.newArrayList("BLOB", "LONGBLOB", "CLOB"));
 	}
 
 	public void initRules() {
@@ -103,13 +103,13 @@ public class DefaultImporter {
 
 	public Rule when(MatchPattern... ruleTypes) {
 		RuleBuilder builder = new RuleBuilder(ruleTypes);
-		this.rules.add(builder);
+		this.rules.add(0, builder);
 		return builder;
 	}
 
 	public Rule when() {
 		RuleBuilder builder = new RuleBuilder();
-		this.rules.add(builder);
+		this.rules.add(0, builder);
 		return builder;
 	}
 
@@ -123,8 +123,9 @@ public class DefaultImporter {
 	}
 
 	public Field match(Field field) {
-		if ("ID".equalsIgnoreCase(field.name)) {
-			// System.out.println("sdfdsf");
+		Field lastResult = null;
+		if ("Mail_Notification".equalsIgnoreCase(field.name)) {
+			System.out.println("sdfdsf");
 		}
 		for (RuleBuilder rule : rules) {
 
@@ -142,10 +143,12 @@ public class DefaultImporter {
 			}
 
 			if (!matched) continue;
-
+			System.out.println("%%%%" + rule.tableName);
 			if (rule.tableName != null) {
-				if (!field.resideType.name.equalsIgnoreCase(rule.tableName)) {
+				if (!field.resideType.rawName.equalsIgnoreCase(rule.tableName)) {
 					continue;
+				}else{
+					System.out.println("match table");
 				}
 			}
 
@@ -167,11 +170,11 @@ public class DefaultImporter {
 			if (matched) {
 				field.comment = "Matched\t" + field.name + "\t"
 						+ (matchedMatchPattern == null ? "" : matchedMatchPattern.name()) + "\t" + matchedName + "\t"
-						+ matchedColumnType.name();
+						+  (matchedColumnType == null ? "" : matchedColumnType.name()) ;
 				for (Action action : rule.actions) {
 					action.apply(field, matchedName);
 				}
-				return field;
+				lastResult = field;
 			}
 		}
 		return null;
@@ -184,9 +187,9 @@ public class DefaultImporter {
 		if (!outputFolder.exists()) {
 			outputFolder.mkdir();
 		} else { //
-		// for (File file : outputFolder.listFiles()) {
-		// // file.delete();
-		// }
+			// for (File file : outputFolder.listFiles()) {
+			// // file.delete();
+			// }
 		}
 		OutputStreamWriter out = null;
 		StringBuilder sb = new StringBuilder(5000);
@@ -266,7 +269,7 @@ public class DefaultImporter {
 				if ("column".equals(node.getNodeName())) {
 					readColumn(type, (Element) node);
 				} else if ("primaryKey".equals(node.getNodeName())) {
-					String primaryKey = ((Element) node).getAttribute("column").toUpperCase();
+					String primaryKey = ((Element) node).getAttribute("column");
 					type.addKeyField(primaryKey);
 				}
 			}
@@ -276,7 +279,7 @@ public class DefaultImporter {
 	}
 
 	public void readColumn(Type type, Element column) throws IOException {
-		String rawColName = column.getAttribute("name").toUpperCase();
+		String rawColName = column.getAttribute("name");
 
 		String tColName = null;
 		String tTypeName = null;
@@ -403,7 +406,7 @@ public class DefaultImporter {
 		return text.replace('\"', '\'').replace('\n', ' ').replace('\r', ' ');
 	}
 
-	static final String[] revs = ("is display field where Enforce Support release database"
+	static final String[] revs = ("CREATED issues issue is display field where Enforce Support release database"
 			+ " Logger source method class Function ldap Date Selection client Alert role Frequency "
 			+ "Keep Select Form Event Change Request Auto Smtp Store unix windows 	File Discount "
 			+ " Line Bpartner cash Readonly Other Error Post Record entity Access Centrally Dependent "

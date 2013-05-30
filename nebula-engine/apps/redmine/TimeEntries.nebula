@@ -4,7 +4,7 @@ tx TimeEntries {
 	!Id ID;
 	ProjectId Projects;
 	UserId Users;
-	?IsSueId Issues;
+	?IssueId Issues;
 	Hours Number;
 	?Comments Note;
 	ActivityId ID;
@@ -12,7 +12,7 @@ tx TimeEntries {
 	Tyear Count;
 	Tmonth Count;
 	Tweek Count;
-	CreateDOn Datetime;
+	CreatedOn Datetime;
 	UpdatedOn Datetime;
 };
 

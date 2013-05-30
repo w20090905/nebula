@@ -6,7 +6,7 @@ type Versions {
 	*Name;
 	?Description;
 	?EffectiveDate Date;
-	?CreateDOn Datetime;
+	?CreatedOn Datetime;
 	?UpdatedOn Datetime;
 	?WikiPageTitle Title;
 	?Status;/* open */

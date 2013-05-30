@@ -1,6 +1,9 @@
 package adempiere;
 
+import java.util.Arrays;
 import java.util.List;
+
+import nebula.lang.TypeStandalone;
 
 import adempiere.DefaultImporter.Field;
 
@@ -20,6 +23,10 @@ interface Rule {
 	public Rule useMatchedNameAsTypeName();
 
 	public Rule useMatchedNameAsFieldName();
+
+	public Rule setAsMaster();
+	
+	public Rule setAsTransaction();
 	
 	public Rule setReferTo(String typename);
 }
@@ -79,6 +86,18 @@ class RuleBuilder implements Rule {
 	}
 
 	@Override
+	public Rule setAsMaster() {
+		this.actions.add(new SetStandalone(TypeStandalone.Master));
+		return this;
+	}
+
+	@Override
+	public Rule setAsTransaction() {
+		this.actions.add(new SetStandalone(TypeStandalone.Transaction));
+		return this;
+	}
+	
+	@Override
 	public Rule skip() {
 		this.actions.add(new SkipField());
 		return this;
@@ -89,6 +108,18 @@ class RuleBuilder implements Rule {
 		return null;
 	}
 
+	class SetStandalone implements Action {
+		final TypeStandalone standalone;
+		SetStandalone(TypeStandalone standalone) {
+			this.standalone = standalone;
+		}
+		@Override
+		public DefaultImporter.Field apply(Field input, String match, String... params) {
+			input.resideType.standalone = this.standalone;
+			return input;
+		}
+	}
+	
 
 	class UseMatchedNameAsTypeName implements Action {
 		@Override
@@ -146,5 +177,12 @@ class RuleBuilder implements Rule {
 			return input;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "RuleBuilder [dbTypes=" + Arrays.toString(dbTypes) + ", ruleTypes=" + Arrays.toString(ruleTypes)
+				+ ", with=" + Arrays.toString(with) + ", tableName=" + tableName + ", actions=" + actions + "]";
+	}
+
 
 }

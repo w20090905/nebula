@@ -2,7 +2,7 @@
 @Refby("0")
 tx OpenIdAuthenticationNonces {
 	!Id ID;
-	TimesTamp Count;
+	Timestamp Count;
 	?ServerUrl Url;
 	Salt String;
 };

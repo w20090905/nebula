@@ -5,6 +5,6 @@ tx Tokens {
 	UserId Users;/* 0 */
 	Action String;
 	Value String;
-	CreateDOn Datetime;
+	CreatedOn Datetime;
 };
 

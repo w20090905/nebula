@@ -6,6 +6,6 @@ tx Journals {
 	JournalizedType Attr;
 	UserId Users;/* 0 */
 	?Notes Note;
-	CreateDOn Datetime;
+	CreatedOn Datetime;
 };
 

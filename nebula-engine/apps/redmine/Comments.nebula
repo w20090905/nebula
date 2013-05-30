@@ -6,7 +6,7 @@ tx Comments {
 	CommentedId ID;/* 0 */
 	AuthorId ID;/* 0 */
 	?Comments Note;
-	CreateDOn Datetime;
+	CreatedOn Datetime;
 	UpdatedOn Datetime;
 };
 

@@ -8,13 +8,13 @@ tx Issues {
 	?Description;
 	?DueDate Date;
 	?CategoryId ID;
-	Status IssueStatuses;/* 0 */
+	StatusId IssueStatuses;/* 0 */
 	?AssignedToId ID;
 	PriorityId ID;/* 0 */
 	?FixedVersionId ID;
 	AuthorId ID;/* 0 */
 	LockVersion Count;/* 0 */
-	?CreateDOn Datetime;
+	?CreatedOn Datetime;
 	?UpdatedOn Datetime;
 	?StartDate Date;
 	DoneRatio Ratio;/* 0 */
@@ -25,3 +25,4 @@ tx Issues {
 	?Rgt Count;
 	IsPrivate YesNo;/* 0 */
 };
+

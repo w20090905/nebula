@@ -4,8 +4,8 @@ type CustomFields {
 	!Id ID;
 	Type Attr;
 	*Name;
-	FieldFormAt String;
-	?PossibleValueS Note;
+	FieldFormat String;
+	?PossibleValues Note;
 	?Regexp;
 	MinLength Length;/* 0 */
 	MaxLength Length;/* 0 */
