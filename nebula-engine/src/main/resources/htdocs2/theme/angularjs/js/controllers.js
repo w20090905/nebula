@@ -306,10 +306,10 @@ function ContactRecordsCtrl($scope, $resource) {
 	'use strict';
 	$scope.data = {};
 
-	$scope.companyList = $resource('/d/Company/?SCMRole=客户', {}, {
+	$scope.companyList = $resource('/d/Company/', {}, {
 		query : {
 			method : 'GET',
-			params : {},
+			params : {"SCMRole": "客户"},
 			isArray : true
 		}
 	}).query(function() {
