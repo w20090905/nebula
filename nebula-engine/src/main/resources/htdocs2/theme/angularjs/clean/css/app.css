@@ -42,11 +42,6 @@ table {
 	display: none;
 }
 
-#content article>header {
-	min-height: 50px;
-	padding-top: 1px;
-}
-
 #content article>header h1,#content article>header .btn-toolbar {
 	margin-top: 10px;
 }
@@ -153,7 +148,11 @@ border-radius: 0px;
 }
 
 #content article>header{
-	margin-bottom: -10px;
+	margin-top: 0px;
+	margin-bottom: -20px;
+	background: none;
+	min-height: 50px;
+	padding-top: 1px;
 }
 
 #breadcrumb{
@@ -169,9 +168,6 @@ border-radius: 0px;
 	left: 160px;
 }
 
-#content article>header{
-	background: none;
-}
 
 #style-switcher {
 	top: 39px;
@@ -197,4 +193,29 @@ div.required > .control-label{
 .datepicker table {
 	width: inherit;
 	margin: 0;
+}
+.mask {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	z-index: 1000;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+}
+
+.opacity {
+	opacity: 0.4;
+	filter: alpha(opacity = 30);
+	background-color: #FFFFFF;
+}
+
+.innerPanel{
+	position: relative;
+	min-height: 600px;
+}
+
+#content{
+	margin-top: -38px;
 }

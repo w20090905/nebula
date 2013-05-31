@@ -11,7 +11,7 @@ function AppControl($scope, $cookies, $location) {
 
 function PaginationCtrl($scope){
     $scope.currentPage = 1;
-    $scope.pageSize = 50;
+    $scope.pageSize = 20;
     $scope.$setCurrentPage = function(cur){
     	$scope.currentPage = cur;
     }
@@ -73,9 +73,13 @@ function EntityListCtrl($scope, $route, $resource, $routeParams) {
 			isArray : true
 		}
 	});
-	$scope.datalist = DataResource.query();
+	$scope.datalist = DataResource.query(function() {
+		$scope.$dataReady();
+	});
 	$scope.$reload = function() {
-		$scope.datalist = DataResource.query();
+		$scope.datalist = DataResource.query(function() {
+			$scope.$dataReady();
+		});
 	};
 }
 
@@ -104,7 +108,9 @@ function EntityCtrl($scope, $resource, $routeParams, $location, $interpolate) {
 					method : 'PUT'
 				}
 			});
-	$scope.data = DataResource.get($routeParams);
+	$scope.data = DataResource.get($routeParams,function() {
+		$scope.$dataReady();
+	});
 	$scope.update = true;
 	$scope.$save = function() {
 		$scope.data.$save(function(u, getResponseHeaders) {
@@ -126,7 +132,9 @@ function TypeListCtrl($scope, $route, $resource, $routeParams) {
 			isArray : true
 		}
 	});
-	$scope.datalist = DataResource.query();
+	$scope.datalist = DataResource.query(function() {
+		$scope.$dataReady();
+	});
 }
 
 function NewTypeCtrl($scope, $resource, $routeParams, $http, $location,
@@ -159,7 +167,9 @@ function TypeCtrl($scope, $resource, $routeParams, $http, $location,
 					method : 'PUT'
 				}
 			});
-	$scope.data = DataResource.get($routeParams);
+	$scope.data = DataResource.get($routeParams,function() {
+		$scope.$dataReady();
+	});
 	$scope.update = true;
 	$scope.$save = function() {
 		$http.put($scope.resourcename, $scope.data.Code).success(
@@ -183,7 +193,9 @@ function AttributeEditCtrl($scope, $resource) {
 			}
 		});
 		$scope.entityData = {};
-		$scope.entityData = AttributeDataResource.get({});
+		$scope.entityData = AttributeDataResource.get({},function() {
+			$scope.$dataReady();
+		});
 		$scope.update = true;
 		$scope.$save = function() {
 			$scope.entityData.$save(function(u, getResponseHeaders) {

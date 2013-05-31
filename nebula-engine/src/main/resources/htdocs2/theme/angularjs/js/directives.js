@@ -264,13 +264,15 @@ var nbViewDirective = ['$http', '$templateCache', '$route', '$anchorScroll', '$c
   return {
     restrict: 'ECA',
     terminal: true,
-    link: function(scope, element, attr) {
+    link: function(scope, rawElement, attr) {
       var lastScope,
           onloadExp = attr.onload || '';
-
+      rawElement.html("<div class='innerPanel row-fluid'></div><div  class='innerPanel row-fluid' style='visible=hidden'></div>");
+      var lastElement = $(rawElement.children().get(0));
+      var element = $(rawElement.children().get(1));
+            
       scope.$on('$routeChangeSuccess', update);
       update();
-
 
       function destroyLastScope() {
         if (lastScope) {
@@ -283,16 +285,42 @@ var nbViewDirective = ['$http', '$templateCache', '$route', '$anchorScroll', '$c
         element.html('');
         destroyLastScope();
       }
+      var isLoading = false;
+      function prepareLoad(){
+    	  isLoading = true;
+    	  if($("#mask").length<1){
+    		  $("<div id='mask' class='mask opacity'></div>").appendTo(rawElement);
+    	  }
+
+          setTimeout(function(){
+        	  if(isLoading){
+        		  $("#mask").fadeIn();
+        	  }    	  
+          },100);
+      }
+      function finishLoad(){
+    	  if(isLoading){
+        	  $("#mask").hide(3);
+        	  var old = lastElement;
+        	  lastElement = element;
+        	  lastElement.show();
+        	  element = old;
+        	  element.hide(3);    	
+              isLoading = false;	  
+    	  }
+      }
 
       function update() {
         var locals = $route.current && $route.current.locals,
             template = locals && locals.$template;
-
+        
         if (template) {
+        	prepareLoad();
           element.html(template);
           element.find("input[required]").parents(".control-group").addClass("required");
           element.find("select[required]").parents(".control-group").addClass("required");
           element.find("input.datepicker").datepicker();
+          
           destroyLastScope();
 
           var link = $compile(element.contents()),
@@ -309,7 +337,11 @@ var nbViewDirective = ['$http', '$templateCache', '$route', '$anchorScroll', '$c
           link(lastScope);
           lastScope.$emit('$viewContentLoaded');
           lastScope.$eval(onloadExp);
-
+          lastScope.$dataReady = function(){
+        	  finishLoad();
+          }
+          setTimeout(finishLoad,3000);
+          
           // $anchorScroll might listen on event...
           $anchorScroll();
         } else {
