@@ -2,13 +2,13 @@
 @Refby("0")
 tx Messages {
 	!Id ID;
-	BoardId Boards;
-	?ParentId ID;
+	Board Boards;
+	?Parent ID;
 	Subject;
 	?Content;
-	?AuthorId ID;
+	?Author ID;
 	RepliesCount Count;/* 0 */
-	?LastReplyId ID;
+	?LastReply ID;
 	CreatedOn Datetime;
 	UpdatedOn Datetime;
 	?Locked YesNo;/* 0 */

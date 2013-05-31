@@ -3,8 +3,8 @@
 tx Comments {
 	!Id ID;
 	CommentedType Attr;
-	CommentedId ID;/* 0 */
-	AuthorId ID;/* 0 */
+	Commented ID;/* 0 */
+	Author ID;/* 0 */
 	?Comments Note;
 	CreatedOn Datetime;
 	UpdatedOn Datetime;

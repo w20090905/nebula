@@ -2,10 +2,10 @@
 @Refby("0")
 tx WikiPages {
 	!Id ID;
-	WikiId Wikis;
+	Wiki Wikis;
 	Title;
 	CreatedOn Datetime;
 	Protected YesNo;/* 0 */
-	?ParentId ID;
+	?Parent ID;
 };
 

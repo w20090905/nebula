@@ -2,7 +2,7 @@
 @Refby("0")
 type EnabledModules {
 	!Id ID;
-	?ProjectId Projects;
+	?Project Projects;
 	*Name;
 };
 

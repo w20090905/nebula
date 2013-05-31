@@ -2,8 +2,8 @@
 @Refby("0")
 tx Members {
 	!Id ID;
-	UserId Users;/* 0 */
-	ProjectId Projects;/* 0 */
+	User Users;/* 0 */
+	Project Projects;/* 0 */
 	?CreatedOn Datetime;
 	MailNotification YesNo;/* 0 */
 };

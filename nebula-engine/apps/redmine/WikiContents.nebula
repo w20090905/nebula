@@ -2,8 +2,8 @@
 @Refby("0")
 tx WikiContents {
 	!Id ID;
-	PageId ID;
-	?AuthorId ID;
+	Page ID;
+	?Author ID;
 	?Text;
 	?Comments Note;
 	UpdatedOn Datetime;

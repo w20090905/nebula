@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 type CustomFieldsTrackers {
-	CustomFieldId CustomFields;/* 0 */
-	TrackerId Trackers;/* 0 */
+	CustomField CustomFields;/* 0 */
+	Tracker Trackers;/* 0 */
 };
 

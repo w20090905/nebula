@@ -2,7 +2,7 @@
 @Refby("0")
 tx Changes {
 	!Id ID;
-	ChangesetId Changesets;
+	Changeset Changesets;
 	Action String;
 	Path;
 	?FromPath Path;

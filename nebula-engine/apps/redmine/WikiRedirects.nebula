@@ -2,7 +2,7 @@
 @Refby("0")
 tx WikiRedirects {
 	!Id ID;
-	WikiId Wikis;
+	Wiki Wikis;
 	?Title;
 	?RedirectsTo Url;
 	CreatedOn Datetime;

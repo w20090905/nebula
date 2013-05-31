@@ -2,8 +2,8 @@
 @Refby("0")
 tx MemberRoles {
 	!Id ID;
-	MemberId Members;
-	RoleId Roles;
+	Member Members;
+	Role Roles;
 	?InheritedFrom Count;
 };
 

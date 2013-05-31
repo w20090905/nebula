@@ -11,7 +11,7 @@ type Users {
 	Status;/* 1 */
 	?LastLoginOn Datetime;
 	?Language String;
-	?AuthSourceId AuthSources;
+	?AuthSource AuthSources;
 	?CreatedOn Datetime;
 	?UpdatedOn Datetime;
 	?Type Attr;

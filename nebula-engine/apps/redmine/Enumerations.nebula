@@ -7,7 +7,7 @@ type Enumerations {
 	IsDefault YesNo;/* 0 */
 	?Type Attr;
 	Active YesNo;/* 1 */
-	?ProjectId Projects;
-	?ParentId ID;
+	?Project Projects;
+	?Parent ID;
 };
 

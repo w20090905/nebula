@@ -3,7 +3,7 @@
 tx Watchers {
 	!Id ID;
 	WatchableType Attr;
-	WatchableId ID;/* 0 */
-	?UserId Users;
+	Watchable ID;/* 0 */
+	?User Users;
 };
 

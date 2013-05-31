@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 type ProjectsTrackers {
-	ProjectId Projects;/* 0 */
-	TrackerId Trackers;/* 0 */
+	Project Projects;/* 0 */
+	Tracker Trackers;/* 0 */
 };
 

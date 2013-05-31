@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 type ChangesetParents {
-	ChangesetId Changesets;
-	ParentId ID;
+	Changeset Changesets;
+	Parent ID;
 };
 

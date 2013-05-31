@@ -2,8 +2,8 @@
 @Refby("0")
 type IssueCategories {
 	!Id ID;
-	ProjectId Projects;/* 0 */
+	Project Projects;/* 0 */
 	*Name;
-	?AssignedToId ID;
+	?AssignedTo ID;
 };
 

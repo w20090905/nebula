@@ -9,6 +9,6 @@ tx Changesets {
 	?Comments Note;
 	?CommitDate Date;
 	?Scmid String;
-	?UserId Users;
+	?User Users;
 };
 

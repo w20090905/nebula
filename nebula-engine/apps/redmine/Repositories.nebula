@@ -2,7 +2,7 @@
 @Refby("0")
 tx Repositories {
 	!Id ID;
-	ProjectId Projects;/* 0 */
+	Project Projects;/* 0 */
 	Url;
 	?Login String;
 	?Password;

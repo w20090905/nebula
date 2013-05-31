@@ -6,7 +6,7 @@ type Projects {
 	?Description;
 	?Homepage Url;
 	IsPublic YesNo;/* 1 */
-	?ParentId ID;
+	?Parent ID;
 	?CreatedOn Datetime;
 	?UpdatedOn Datetime;
 	?Identifier String;

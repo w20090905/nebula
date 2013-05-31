@@ -2,7 +2,7 @@
 @Refby("0")
 type Versions {
 	!Id ID;
-	ProjectId Projects;/* 0 */
+	Project Projects;/* 0 */
 	*Name;
 	?Description;
 	?EffectiveDate Date;

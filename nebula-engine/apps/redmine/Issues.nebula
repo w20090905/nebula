@@ -2,25 +2,25 @@
 @Refby("0")
 tx Issues {
 	!Id ID;
-	TrackerId Trackers;/* 0 */
-	ProjectId Projects;/* 0 */
+	Tracker Trackers;/* 0 */
+	Project Projects;/* 0 */
 	Subject;
 	?Description;
 	?DueDate Date;
-	?CategoryId ID;
+	?Category ID;
 	StatusId IssueStatuses;/* 0 */
-	?AssignedToId ID;
-	PriorityId ID;/* 0 */
-	?FixedVersionId ID;
-	AuthorId ID;/* 0 */
+	?AssignedTo ID;
+	Priority ID;/* 0 */
+	?FixedVersion ID;
+	Author ID;/* 0 */
 	LockVersion Count;/* 0 */
 	?CreatedOn Datetime;
 	?UpdatedOn Datetime;
 	?StartDate Date;
 	DoneRatio Ratio;/* 0 */
 	?EstimatedHours Number;
-	?ParentId ID;
-	?RootId ID;
+	?Parent ID;
+	?Root ID;
 	?Lft Count;
 	?Rgt Count;
 	IsPrivate YesNo;/* 0 */

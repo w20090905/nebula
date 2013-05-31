@@ -2,11 +2,11 @@
 @Refby("0")
 tx News {
 	!Id ID;
-	?ProjectId Projects;
+	?Project Projects;
 	Title;
 	?Summary;
 	?Description;
-	AuthorId ID;/* 0 */
+	Author ID;/* 0 */
 	?CreatedOn Datetime;
 	CommentsCount Count;/* 0 */
 };

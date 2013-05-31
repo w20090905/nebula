@@ -2,7 +2,7 @@
 @Refby("0")
 tx UserPreferences {
 	!Id ID;
-	UserId Users;/* 0 */
+	User Users;/* 0 */
 	?Others Note;
 	?HideMail YesNo;/* 0 */
 	?TimeZone String;

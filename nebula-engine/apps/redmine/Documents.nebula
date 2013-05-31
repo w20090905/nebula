@@ -2,8 +2,8 @@
 @Refby("0")
 tx Documents {
 	!Id ID;
-	ProjectId Projects;/* 0 */
-	CategoryId ID;/* 0 */
+	Project Projects;/* 0 */
+	Category ID;/* 0 */
 	Title;
 	?Description;
 	?CreatedOn Datetime;

@@ -2,9 +2,9 @@
 @Refby("0")
 tx Journals {
 	!Id ID;
-	JournalizedId ID;/* 0 */
+	Journalized ID;/* 0 */
 	JournalizedType Attr;
-	UserId Users;/* 0 */
+	User Users;/* 0 */
 	?Notes Note;
 	CreatedOn Datetime;
 };

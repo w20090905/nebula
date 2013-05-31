@@ -2,12 +2,12 @@
 @Refby("0")
 tx TimeEntries {
 	!Id ID;
-	ProjectId Projects;
-	UserId Users;
-	?IssueId Issues;
+	Project Projects;
+	User Users;
+	?Issue Issues;
 	Hours Number;
 	?Comments Note;
-	ActivityId ID;
+	Activity ID;
 	SpentOn Date;
 	Tyear Count;
 	Tmonth Count;

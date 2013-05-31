@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 type GroupsUsers {
-	GroupId ID;
-	UserId Users;
+	Group ID;
+	User Users;
 };
 

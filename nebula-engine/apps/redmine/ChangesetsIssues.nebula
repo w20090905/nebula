@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 type ChangesetsIssues {
-	ChangesetId Changesets;
-	IssueId Issues;
+	Changeset Changesets;
+	Issue Issues;
 };
 

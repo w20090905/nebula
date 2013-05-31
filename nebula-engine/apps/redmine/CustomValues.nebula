@@ -3,8 +3,8 @@
 tx CustomValues {
 	!Id ID;
 	CustomizedType Attr;
-	CustomizedId ID;/* 0 */
-	CustomFieldId CustomFields;/* 0 */
+	Customized ID;/* 0 */
+	CustomField CustomFields;/* 0 */
 	?Value String;
 };
 

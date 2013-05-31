@@ -2,7 +2,7 @@
 @Refby("0")
 tx Attachments {
 	!Id ID;
-	?ContainerId ID;
+	?Container ID;
 	?ContainerType Attr;
 	Filename;
 	DiskFilename FileName;
@@ -10,7 +10,7 @@ tx Attachments {
 	?ContentType Attr;
 	Digest String;
 	Downloads Count;/* 0 */
-	AuthorId ID;/* 0 */
+	Author ID;/* 0 */
 	?CreatedOn Datetime;
 	?Description;
 };

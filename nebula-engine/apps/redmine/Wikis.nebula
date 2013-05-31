@@ -2,7 +2,7 @@
 @Refby("0")
 tx Wikis {
 	!Id ID;
-	ProjectId Projects;
+	Project Projects;
 	StartPage String;
 	Status;/* 1 */
 };
