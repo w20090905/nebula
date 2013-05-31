@@ -23,7 +23,6 @@ import com.google.common.collect.Maps;
 
 public class EntityDataStore implements DataStore<Entity> {
 	private static Log log = LogFactory.getLog(EntityDataStore.class);
-	public static final String KEY_NAME = "ID";
 
 	final DataPersister<Entity> persistence;
 	final SmartList<Object, Entity> values;
@@ -114,7 +113,7 @@ public class EntityDataStore implements DataStore<Entity> {
 			}
 		} else {
 			Object id = idMaker.apply(newEntity);
-			newEntity.put(KEY_NAME, id);
+			newEntity.put(Entity.PRIMARY_KEY, id);
 			Map<String, Object> newData = new HashMap<String, Object>(newEntity.newData);
 			lock.lock();
 			try {

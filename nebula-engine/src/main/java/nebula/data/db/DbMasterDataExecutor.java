@@ -37,6 +37,8 @@ public class DbMasterDataExecutor implements DbDataExecutor {
 	final private PreparedStatement SQL_UPDATE;
 	final private PreparedStatement SQL_DELETE;
 	final private PreparedStatement SQL_LIST;
+	final private PreparedStatement SQL_MAX_ID;
+
 	// final private String SQL_COUNT;
 
 	final DatabaseColumn[] userColumns;
@@ -75,6 +77,7 @@ public class DbMasterDataExecutor implements DbDataExecutor {
 			SQL_UPDATE = conn.prepareStatement(builder.builderUpdate());
 			SQL_DELETE = conn.prepareStatement(builder.builderDelete());
 			SQL_LIST = conn.prepareStatement(builder.builderList());
+			SQL_MAX_ID = conn.prepareStatement(builder.builderMaxId());
 		} catch (Exception e) {
 			log.error(e.getClass().getName(), e);
 			throw new RuntimeException(e);
@@ -495,6 +498,34 @@ public class DbMasterDataExecutor implements DbDataExecutor {
 		} catch (SQLException e) {
 			log.error(e.getClass().getName(), e);
 			throw new RuntimeException(e);
+		}
+	}
+
+	public long getCurrentMaxID() {
+		ResultSet res = null;
+		try {
+			res = SQL_MAX_ID.executeQuery();
+			if (log.isTraceEnabled()) {
+				log.trace("\texecuteQuery Open Recordset");
+			}
+			while (res.next()) {
+				return res.getLong(1);
+			}
+			return 0;
+
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				if (res != null) {
+					res.close();
+					if (log.isTraceEnabled()) {
+						log.trace("\texecuteQuery Close Recordset");
+					}
+				}
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
 		}
 	}
 }

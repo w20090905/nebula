@@ -22,7 +22,7 @@ public class EntityImp implements Entity {
 
 	@Override
 	public String getID() {
-		return (String) this.get("ID");
+		return (String) this.get(PRIMARY_KEY);
 	}
 
 	@Override

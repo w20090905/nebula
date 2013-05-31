@@ -2,7 +2,7 @@
 @Refby("0")
 type Users {
 	!Id ID;
-	Login String;
+	*Login String;
 	HashedPassword Password;
 	Firstname FirstName;
 	Lastname LastName;
@@ -19,4 +19,3 @@ type Users {
 	MailNotification String;
 	?Salt String;
 };
-

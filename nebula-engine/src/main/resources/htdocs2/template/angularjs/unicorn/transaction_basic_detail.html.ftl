@@ -14,7 +14,7 @@
 	[#assign optClass][@compress single_line=true]
 		[#switch field.attrs.FormatType!"text"]
 			[#case "date"]datepicker [#break]
-		[/#switch]			
+		[/#switch]
 	[/@compress][/#assign]
 	
 	[#assign optTitle][@compress single_line=true]
@@ -69,10 +69,10 @@
 		[#assign showValue][/#assign]
 	[#list field.type.fields as in2f][#t]
 		[#if !in2f.array && in2f.refer == "ByVal"
-				&& (in2f.key || in2f.core)]												
+				&& (in2f.key || in2f.core)]
 				[#assign beforePopup]${beforePopup} ${in2f.name}=${ngModel}${in2f.name};[/#assign]
 				[#assign afterPopup]${afterPopup} ${ngModel}${in2f.name}=ret.${in2f.name};[/#assign]
-				[#assign showValue]${showValue} {{${ngModel}${in2f.name}}}&nbsp;[/#assign]
+				[#if !in2f.key || in2f.type.name!="ID" || field.type.standalone != "Master"] [#assign showValue]${showValue}{{${ngModel}${in2f.name}}}&nbsp;[/#assign][/#if]
 		[/#if]
 	[/#list]
 	
@@ -85,7 +85,7 @@
 
 <article class="module width_full">
 	<header>
-		<h1 class="tabs_involved">${type.name}</h1>	
+		<h1 class="tabs_involved">${type.name}&nbsp;${"#"}{{data.Id}}</h1>	
 		<div class="btn-toolbar">
 			<div class="btn-group">
 		  		<a href="#/d/Type/${type.name}" class="btn">Define</a>

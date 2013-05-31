@@ -24,26 +24,25 @@ public class DbTransactionEntityDataStore extends EntityDataStore {
 		super(IdMakerBuilder.getIDReader(type), persistence, type);
 		this.db = exec;
 
-		String localKey = null;
-
+		Field localKey = null;
 		for (Field f : type.getFields()) {
 			if (f.isKey()) {
 				if (f.getType().getStandalone() == TypeStandalone.Basic) {
-					localKey = f.getName();
+					localKey = f;
 					break;
 				}
 			}
 		}
-		key = checkNotNull(localKey);
+		key = checkNotNull(localKey).getName();
 
 		idGenerator = IDGenerators.build(type);
+		idGenerator.init(exec.getCurrentMaxID());
+		idGenerator.setSeed((long) type.getName().hashCode() % (1 << 8));
 
 		List<EditableEntity> list = exec.getAll();
 		for (EditableEntity data : list) {
 			loadin(data);
 		}
-		idGenerator.init(exec.getCurrentMaxID());
-		idGenerator.setSeed((long) type.getName().hashCode() % (1 << 8));
 	}
 
 	@Override
@@ -94,14 +93,14 @@ public class DbTransactionEntityDataStore extends EntityDataStore {
 	}
 
 	private EntityImp loadin(EditableEntity entity) {
-		entity.put(KEY_NAME,  String.valueOf((Long)entity.get(key)));
+		entity.put(Entity.PRIMARY_KEY,  String.valueOf((Long)entity.get(key)));
 		DbEntity inner = new DbEntity(this, entity.newData, this.values.size());
 		this.values.add(inner);
 		return inner;
 	}
 
 	private EntityImp loadin(DbEntity sourceEntity, EditableEntity newEntity) {
-		newEntity.put(KEY_NAME, String.valueOf((Long)newEntity.get(key)));
+		newEntity.put(Entity.PRIMARY_KEY, String.valueOf((Long)newEntity.get(key)));
 		DbEntity inner = new DbEntity(this, newEntity.newData, sourceEntity.index);
 		this.values.add(inner);
 		return inner;

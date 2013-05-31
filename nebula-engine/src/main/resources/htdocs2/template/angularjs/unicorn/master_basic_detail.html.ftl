@@ -14,7 +14,7 @@
 	[#assign optClass][@compress single_line=true]
 		[#switch field.attrs.FormatType!"text"]
 			[#case "date"]datepicker [#break]
-		[/#switch]			
+		[/#switch]
 	[/@compress][/#assign]
 	
 	[#assign optTitle][@compress single_line=true]
@@ -69,10 +69,10 @@
 		[#assign showValue][/#assign]
 	[#list field.type.fields as in2f][#t]
 		[#if !in2f.array && in2f.refer == "ByVal"
-				&& (in2f.key || in2f.core)]												
-				[#assign beforePopup]${beforePopup} ${in2f.name}=${ngModel}.${in2f.name};[/#assign]
-				[#assign afterPopup]${afterPopup} ${ngModel}.${in2f.name}=ret.${in2f.name};[/#assign]
-				[#assign showValue]${showValue} {{${ngModel}.${in2f.name}}}&nbsp;[/#assign]
+				&& (in2f.key || in2f.core)]
+				[#assign beforePopup]${beforePopup} ${in2f.name}=${ngModel}${in2f.name};[/#assign]
+				[#assign afterPopup]${afterPopup} ${ngModel}${in2f.name}=ret.${in2f.name};[/#assign]
+				[#if !in2f.key || in2f.type.name!="ID" || field.type.standalone != "Master"] [#assign showValue]${showValue}{{${ngModel}${in2f.name}}}&nbsp;[/#assign][/#if]
 		[/#if]
 	[/#list]
 	
@@ -123,6 +123,7 @@
 				[#if !of.array]
 					[#switch of.refer]
 					[#case "ByVal"] <!--  Basic Type Field <!--  Type A1-->
+						[#if !of.key || of.type.name != "ID"]
 		<div class="control-group">
 			<label class="control-label" for="${of.name}">${of.name}</label>
 			<div class="controls">
@@ -130,6 +131,7 @@
 						key=of.key required=!of.ignorable/]
 			</div>
 		</div>
+						[/#if]
 						[#break]
 					[#case "Inline"] <!--  inline object -->
 		<fieldset>

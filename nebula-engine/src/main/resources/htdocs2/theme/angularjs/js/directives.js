@@ -294,7 +294,7 @@ var nbViewDirective = ['$http', '$templateCache', '$route', '$anchorScroll', '$c
 
           setTimeout(function(){
         	  if(isLoading){
-        		  $("#mask").fadeIn();
+        		  $("#mask").show()
         	  }    	  
           },100);
       }
@@ -340,7 +340,7 @@ var nbViewDirective = ['$http', '$templateCache', '$route', '$anchorScroll', '$c
           lastScope.$dataReady = function(){
         	  finishLoad();
           }
-          setTimeout(finishLoad,3000);
+          setTimeout(finishLoad,300);
           
           // $anchorScroll might listen on event...
           $anchorScroll();

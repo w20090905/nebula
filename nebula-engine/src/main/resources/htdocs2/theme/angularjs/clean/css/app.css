@@ -219,3 +219,11 @@ div.required > .control-label{
 #content{
 	margin-top: -38px;
 }
+.table th.id{
+	text-align: right;
+	width: 8%;
+	min-width: 100px;
+}
+.table td.id{
+	text-align: right;
+}

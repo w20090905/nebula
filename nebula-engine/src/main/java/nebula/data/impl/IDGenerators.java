@@ -9,9 +9,11 @@ import nebula.lang.TypeStandalone;
 public class IDGenerators {
 
 	public static IDGenerator build(Type type) {
+		Field keyField;
+		String idGenerationStrategy;
 		switch (type.getStandalone()) {
 		case Transaction:
-			Field keyField = null;
+			keyField = null;
 			for (Field f : type.getFields()) {
 				if (f.isKey()) {
 					if (f.getType().getStandalone() == TypeStandalone.Basic) {
@@ -21,7 +23,28 @@ public class IDGenerators {
 			}
 			checkNotNull(keyField);
 
-			String idGenerationStrategy = (String) keyField.getAttrs().get("IDGenerationStrategy");
+			idGenerationStrategy = (String) keyField.getAttrs().get("IDGenerationStrategy");
+
+			if ("default".equals(idGenerationStrategy)) {
+				return new CurrentTimeIDGenerator();
+			} else if ("native".equals(idGenerationStrategy)) {
+				return new NativeIDGenerator();
+			} else {
+				throw new UnsupportedOperationException("not master,");
+			}
+
+		case Master:
+			keyField = null;
+			for (Field f : type.getFields()) {
+				if (f.isKey()) {
+					if (f.getType().getStandalone() == TypeStandalone.Basic) {
+						keyField = f;
+					}
+				}
+			}
+			checkNotNull(keyField);
+
+			idGenerationStrategy = (String) keyField.getAttrs().get("IDGenerationStrategy");
 
 			if ("default".equals(idGenerationStrategy)) {
 				return new CurrentTimeIDGenerator();

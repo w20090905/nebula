@@ -40,11 +40,13 @@
 	<table class="table table-striped table-bordered table-hover">
 		<thead>
 			<tr>
-				<th width="3em">#</th>
+				<th class="id">#</th>
 				[#list type.fields as field][#if !field.array && field.importance != "Unimportant"]
 					[#switch field.refer]
 					[#case "ByVal"]
+						[#if !field.key || field.type.name!="ID"]
 				<th>${field.name}</th>
+						[/#if]
 						[#break]
 						
 					[#case "Inline"]
@@ -54,19 +56,11 @@
 						[#break]
 						
 					[#case "ByRef"]
-						[#list field.type.fields as rF]
-							[#if rF.key]	
 				<th>${field.name}</th>
-							[/#if]
-						[/#list]
 						[#break]
 						
 					[#case "Cascade"]
-						[#list field.type.fields as rF]
-							[#if rF.key]	
 				<th>${field.name}</th>
-							[/#if]
-						[/#list]
 						[#break]
 					[/#switch]
 				[/#if][/#list]
@@ -74,12 +68,16 @@
 		</thead>
 		<tbody>
 			<tr x-ng-repeat="data in datalist | filter:query | orderBy:orderProp">
-			<td>{{$index+1}}</td>
+				[#assign keyfieldname][/#assign]
 			[#list type.fields as field][#if !field.array  && field.importance != "Unimportant"]
 				[#switch field.refer]
 				[#case "ByVal"]
 					[#if field.key]
-			<td><a href="#/d/${type.name}/{{data.${field.name}}}">{{data["${field.name}"]}}</a></td>
+			<td class="id"><a href="#/d/${type.name}/{{data.${field.name}}}">{{data["${field.name}"]}}</a></td>
+						[#assign keyfieldname]${field.name}[/#assign]
+			
+					[#elseif field.core]	
+			<td><a href="#/d/${type.name}/{{data.${keyfieldname}}}">{{data["${field.name}"]}}</a></td>
 					[#else]	
 			<td>{{data["${field.name}"]}}</td>
 					[/#if]
@@ -90,26 +88,16 @@
 					[/#if][/#list][/#if]
 					[#break]
 				[#case "ByRef"]
+				[#case "Cascade"]
 					<td>[#list field.type.fields as rF]
-						[#if field.key && rF.key]
+						[#if field.key && rF.key && rF.type.name!="ID"]
 						{{ data["${field.name}${rF.name}"] }}&nbsp;
-						[#elseif rF.key]
+						[#elseif rF.key && rF.key && rF.type.name!="ID"]
 						{{ data["${field.name}${rF.name}"] }}&nbsp;
 						[#elseif rF.core]
 						{{ data["${field.name}${rF.name}"] }}&nbsp;
 						[/#if]
 					[/#list]</td>
-					[#break]	
-				[#case "Cascade"]
-					[#list field.type.fields as rF]
-						[#if field.key && rF.key]
-						<td>{{ data["${field.name}${rF.name}"] }}</td>
-						[#elseif rF.key]
-						<td>{{ data["${field.name}${rF.name}"] }}</td>
-						[#elseif rF.core]
-						<td>{{ data["${field.name}${rF.name}"] }}</td>
-						[/#if]
-					[/#list]
 					[#break]
 				[/#switch]
 			[/#if][/#list]

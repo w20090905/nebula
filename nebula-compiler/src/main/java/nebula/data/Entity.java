@@ -1,6 +1,7 @@
 package nebula.data;
 
 public interface Entity extends Timable {
+	public final String PRIMARY_KEY="PrimaryKey";
 	Object getID();
 
 	Object get(String name);

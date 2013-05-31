@@ -22,5 +22,7 @@ public interface DbDataExecutor {
 	void drop();
 
 	void close();
+	
+	long getCurrentMaxID();
 
 }
