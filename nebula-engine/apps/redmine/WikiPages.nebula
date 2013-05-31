@@ -3,7 +3,7 @@
 tx WikiPages {
 	!Id ID;
 	Wiki Wikis;
-	Title;
+	*Title;
 	CreatedOn Datetime;
 	Protected YesNo;/* 0 */
 	?Parent ID;

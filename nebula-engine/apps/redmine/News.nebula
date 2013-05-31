@@ -3,7 +3,7 @@
 tx News {
 	!Id ID;
 	?Project Projects;
-	Title;
+	*Title;
 	?Summary;
 	?Description;
 	Author ID;/* 0 */

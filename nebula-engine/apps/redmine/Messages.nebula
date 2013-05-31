@@ -4,7 +4,7 @@ tx Messages {
 	!Id ID;
 	Board Boards;
 	?Parent ID;
-	Subject;
+	*Subject;
 	?Content;
 	?Author ID;
 	RepliesCount Count;/* 0 */
