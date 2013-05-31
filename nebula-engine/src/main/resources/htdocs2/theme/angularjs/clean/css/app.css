@@ -58,7 +58,9 @@ form.form-horizontal input.ng-valid.ng-dirty {
 	background-color: #78FA89;
 }
 
-.form-horizontal table tr.newLine input[type=text],.form-horizontal  table tr.newLine input[type=password],.form-horizontal  table tr.newLine textarea
+.form-horizontal table tr.newLine input[type=text],
+.form-horizontal  table tr.newLine input[type=password],
+.form-horizontal  table tr.newLine textarea
 	{
 	width: 90% !important;
 }
@@ -67,7 +69,8 @@ form.form-horizontal input.ng-valid.ng-dirty {
 	width: 90% !important;
 }
 
-.form-horizontal table tr.newLine .input-append input {
+.form-horizontal table tr.newLine .input-append input,
+.form-horizontal table tr.newLine .input-append .uneditable-input {
 	width: 70% !important;
 }
 

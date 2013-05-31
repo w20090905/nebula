@@ -77,7 +77,7 @@
 	[/#list]
 	
 		<div id="${id}"  class="uneditable-input" placeholder="${placeholder}"
-				x-popup="/d/${pField.type.name}/" 
+				x-popup="/d/${field.type.name}/" 
 				x-beforePopup="${beforePopup}"
 				x-afterPopup="${afterPopup}"
 			>${showValue}</div>
@@ -349,15 +349,9 @@
 									[/#list]
 									[#break]
 								[#case "ByRef"]<!--  Type E3-->
-								[#case "Cascade"]<!--  Type E4-->
-									[#list in1f.type.fields as in2f][#t]
-										[#if !in2f.array && in2f.refer == "ByVal" && (in2f.key || in2f.core)]
-										
-					<td>[@popupBox field=in2f pField=in1f id="${of.name}_new_${in1f.name}${in2f.name}" ngModel="data.${of.name}_new.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"
-						key=(of.key && in1f.key) readonly=true required=false/]</td>[#--  required=!(of.ignorable) --]
-												
-										[/#if] 
-									[/#list]
+								[#case "Cascade"]<!--  Type E4-->										
+					<td>[@popupBox field=in1f pField=in1f id="${of.name}_new_${in1f.name}" ngModel="data.${of.name}_new.${in1f.name}" placeholder="${of.name} ${in1f.name}"
+						key=of.key readonly=true required=false/]</td>[#--  required=!(of.ignorable) --]
 									[#break]
 								[/#switch]
 							[/#if] 
