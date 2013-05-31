@@ -153,8 +153,9 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 					}
 				} else if (!field.isKey && "ID".equals(field.resultTypeName)) {
 					String typename = field.name;
-					if (typename.toUpperCase().endsWith("_ID")) {
+					if (typename.toUpperCase().endsWith("_ID")) {						
 						typename = typename.substring(0, typename.length() - 3);
+						field.resultName =  field.resultName.substring(0, field.resultName.length() - 2);
 					}
 					if (typeMapByRawName.containsKey(typename)) {
 						field.resultTypeName = typeMapByRawName.get(typename).name;

@@ -216,9 +216,11 @@ public class DefaultImporter {
 				if (field.isKey) {
 					sb.append("!");
 				}
-				if (!field.nullable && "Name".equals(field.resultName)) {
-					sb.append("*");
-				}
+				if (!field.nullable ){
+					if("Name Subject Title".toUpperCase().indexOf(field.resultTypeName.toUpperCase())>=0) {
+						sb.append("*");
+					}
+				} 
 
 				sb.append(field.resultName);
 				if (!field.resultName.equals(field.resultTypeName)) {

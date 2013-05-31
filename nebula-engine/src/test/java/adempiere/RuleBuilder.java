@@ -137,6 +137,9 @@ class RuleBuilder implements Rule {
 		}
 		@Override
 		public DefaultImporter.Field apply(Field input, String match, String... params) {
+			if(input.name.toUpperCase().endsWith("_ID")){
+				input.name = input.name.substring(0,input.name.length() - 3);
+			}
 			input.resultTypeName = typename; // Type Name
 			input.isForeignKey = true;
 			input.foreignKeyTable = typename;//Raw Table Name
