@@ -90,15 +90,15 @@
 					[/#if][/#list][/#if]
 					[#break]
 				[#case "ByRef"]
-					[#list field.type.fields as rF]
+					<td>[#list field.type.fields as rF]
 						[#if field.key && rF.key]
-						<td>{{ data["${field.name}${rF.name}"] }}</td>
+						{{ data["${field.name}${rF.name}"] }}&nbsp;
 						[#elseif rF.key]
-						<td>{{ data["${field.name}${rF.name}"] }}</td>
+						{{ data["${field.name}${rF.name}"] }}&nbsp;
 						[#elseif rF.core]
-						<td>{{ data["${field.name}${rF.name}"] }}</td>
+						{{ data["${field.name}${rF.name}"] }}&nbsp;
 						[/#if]
-					[/#list]
+					[/#list]</td>
 					[#break]	
 				[#case "Cascade"]
 					[#list field.type.fields as rF]

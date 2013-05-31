@@ -70,9 +70,9 @@
 	[#list field.type.fields as in2f][#t]
 		[#if !in2f.array && in2f.refer == "ByVal"
 				&& (in2f.key || in2f.core)]												
-				[#assign beforePopup]${beforePopup} ${in2f.name}=${ngModel}.${in2f.name};[/#assign]
-				[#assign afterPopup]${afterPopup} ${ngModel}.${in2f.name}=ret.${in2f.name};[/#assign]
-				[#assign showValue]${showValue} {{${ngModel}.${in2f.name}}}&nbsp;[/#assign]
+				[#assign beforePopup]${beforePopup} ${in2f.name}=${ngModel}${in2f.name};[/#assign]
+				[#assign afterPopup]${afterPopup} ${ngModel}${in2f.name}=ret.${in2f.name};[/#assign]
+				[#assign showValue]${showValue} {{${ngModel}${in2f.name}}}&nbsp;[/#assign]
 		[/#if]
 	[/#list]
 	
