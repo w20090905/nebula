@@ -296,7 +296,7 @@ var nbViewDirective = ['$http', '$templateCache', '$route', '$anchorScroll', '$c
         	  if(isLoading){
         		  $("#mask").show()
         	  }    	  
-          },100);
+          },300);
       }
       function finishLoad(){
     	  if(isLoading){

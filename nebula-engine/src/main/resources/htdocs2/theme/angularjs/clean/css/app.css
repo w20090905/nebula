@@ -230,3 +230,9 @@ div.required > .control-label{
 .table td.id{
 	text-align: right;
 }
+.widget-box form.form-horizontal{
+	margin-bottom: 0px;
+}
+.widget-box form.form-horizontal .form-actions{
+	margin-bottom: 0px;	
+}
