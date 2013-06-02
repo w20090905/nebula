@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx Issues {
-	!Id ID;
+	!ID;
 	Tracker Trackers;/* 0 */
 	Project Projects;/* 0 */
 	*Subject;

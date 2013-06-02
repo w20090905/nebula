@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 type Versions {
-	!Id ID;
+	!ID;
 	Project Projects;/* 0 */
 	*Name;
 	?Description;

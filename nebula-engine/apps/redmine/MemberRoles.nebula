@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx MemberRoles {
-	!Id ID;
+	!ID;
 	Member Members;
 	Role Roles;
 	?InheritedFrom Count;

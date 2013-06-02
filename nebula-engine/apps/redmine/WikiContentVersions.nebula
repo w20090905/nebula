@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx WikiContentVersions {
-	!Id ID;
+	!ID;
 	WikiContent WikiContents;
 	Page ID;
 	?Author ID;

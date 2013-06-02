@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx Journals {
-	!Id ID;
+	!ID;
 	Journalized ID;/* 0 */
 	JournalizedType Attr;
 	User Users;/* 0 */

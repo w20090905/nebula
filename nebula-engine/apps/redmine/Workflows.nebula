@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx Workflows {
-	!Id ID;
+	!ID;
 	Tracker Trackers;/* 0 */
 	OldStatus ID;/* 0 */
 	NewStatus ID;/* 0 */

@@ -1,11 +1,11 @@
 @Remarks("")
 @Refby("0")
 type Users {
-	!Id ID;
+	!ID;
 	*Login String;
 	HashedPassword Password;
-	Firstname FirstName;
-	Lastname LastName;
+	FirstName;
+	LastName;
 	Mail EMail;
 	Admin YesNo;/* 0 */
 	Status;/* 1 */
@@ -19,3 +19,4 @@ type Users {
 	MailNotification String;
 	?Salt String;
 };
+

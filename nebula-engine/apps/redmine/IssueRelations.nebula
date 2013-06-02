@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx IssueRelations {
-	!Id ID;
+	!ID;
 	IssueFrom ID;
 	IssueTo ID;
 	RelationType Attr;

@@ -222,9 +222,11 @@ public class DefaultImporter {
 					}
 				} 
 
-				sb.append(field.resultName);
-				if (!field.resultName.equals(field.resultTypeName)) {
-					sb.append(" " + field.resultTypeName);
+				if (field.resultName.equalsIgnoreCase(field.resultTypeName)) {
+					sb.append(field.resultTypeName);
+				}else{
+					sb.append(field.resultName);		
+					sb.append(" " + field.resultTypeName);			
 				}
 				sb.append(";");
 

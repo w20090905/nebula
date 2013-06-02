@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx Comments {
-	!Id ID;
+	!ID;
 	CommentedType Attr;
 	Commented ID;/* 0 */
 	Author ID;/* 0 */

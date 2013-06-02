@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 type Queries {
-	!Id ID;
+	!ID;
 	?Project Projects;
 	*Name;
 	?Filters Note;

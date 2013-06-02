@@ -47,12 +47,12 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 		when(EqualsIgnoreCase).with("status_id").table("issues").setReferTo("IssueStatuses");
 
 		when(EqualsIgnoreCase).with("login").table("users").setAsMaster();
-		
-		when(EqualsIgnoreCase).with("ID").is(Long).setTypeName("ID");
+
+		when(EqualsIgnoreCase).with("ID").is(Long).useMatchedNameAsTypeName().useMatchedNameAsFieldName();
 
 		when(EqualsIgnoreCase)
 				.with("Name", "Description", "Comment", "Account", "Regexp", "Title", "Host", "Filename", "TimeZone",
-						"Status", "Url", "Password", "Subject", "Content", "Summary", "Revision").is(String)
+						"Status", "Url", "Password", "Subject", "Content", "Summary", "Revision","Path", "FirstName","LastName").is(String)
 				.useMatchedNameAsTypeName().useMatchedNameAsFieldName();
 		when(EqualsIgnoreCase).with("FileSize", "Port", "Status", "Version", "Position").is(Long)
 				.useMatchedNameAsTypeName().useMatchedNameAsFieldName();
@@ -153,9 +153,9 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 					}
 				} else if (!field.isKey && "ID".equals(field.resultTypeName)) {
 					String typename = field.name;
-					if (typename.toUpperCase().endsWith("_ID")) {						
+					if (typename.toUpperCase().endsWith("_ID")) {
 						typename = typename.substring(0, typename.length() - 3);
-						field.resultName =  field.resultName.substring(0, field.resultName.length() - 2);
+						field.resultName = field.resultName.substring(0, field.resultName.length() - 2);
 					}
 					if (typeMapByRawName.containsKey(typename)) {
 						field.resultTypeName = typeMapByRawName.get(typename).name;
@@ -188,6 +188,15 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 							break;
 						}
 					}
+				}
+			}
+		}
+
+		// 附属表的情况，主键为另一个对象的主键
+		for (Type type : types) {
+			for (Field field : type.fields) {
+				if(field.resultName.equalsIgnoreCase(field.typename)){
+					field.resultName = field.typename;
 				}
 			}
 		}

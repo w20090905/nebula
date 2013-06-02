@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx Tokens {
-	!Id ID;
+	!ID;
 	User Users;/* 0 */
 	Action String;
 	Value String;

@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 type Boards {
-	!Id ID;
+	!ID;
 	Project Projects;
 	*Name;
 	?Description;

@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx TimeEntries {
-	!Id ID;
+	!ID;
 	Project Projects;
 	User Users;
 	?Issue Issues;

@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx UserPreferences {
-	!Id ID;
+	!ID;
 	User Users;/* 0 */
 	?Others Note;
 	?HideMail YesNo;/* 0 */

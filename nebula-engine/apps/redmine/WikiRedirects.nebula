@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx WikiRedirects {
-	!Id ID;
+	!ID;
 	Wiki Wikis;
 	?Title;
 	?RedirectsTo Url;

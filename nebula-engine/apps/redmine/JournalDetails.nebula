@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx JournalDetails {
-	!Id ID;
+	!ID;
 	Journal Journals;/* 0 */
 	Property String;
 	PropKey String;

@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx Repositories {
-	!Id ID;
+	!ID;
 	Project Projects;/* 0 */
 	Url;
 	?Login String;

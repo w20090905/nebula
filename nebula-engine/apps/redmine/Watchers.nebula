@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx Watchers {
-	!Id ID;
+	!ID;
 	WatchableType Attr;
 	Watchable ID;/* 0 */
 	?User Users;

@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 type IssueStatuses {
-	!Id ID;
+	!ID;
 	*Name;
 	IsClosed YesNo;/* 0 */
 	IsDefault YesNo;/* 0 */

@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 type Enumerations {
-	!Id ID;
+	!ID;
 	*Name;
 	?Position;/* 1 */
 	IsDefault YesNo;/* 0 */

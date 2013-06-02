@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx CustomValues {
-	!Id ID;
+	!ID;
 	CustomizedType Attr;
 	Customized ID;/* 0 */
 	CustomField CustomFields;/* 0 */

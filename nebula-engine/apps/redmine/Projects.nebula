@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 type Projects {
-	!Id ID;
+	!ID;
 	*Name;
 	?Description;
 	?Homepage Url;

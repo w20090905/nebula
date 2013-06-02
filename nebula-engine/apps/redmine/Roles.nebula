@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 type Roles {
-	!Id ID;
+	!ID;
 	*Name;
 	?Position;/* 1 */
 	?Assignable YesNo;/* 1 */

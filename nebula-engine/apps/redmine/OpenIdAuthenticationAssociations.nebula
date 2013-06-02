@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx OpenIdAuthenticationAssociations {
-	!Id ID;
+	!ID;
 	?Issued Count;
 	?Lifetime Count;
 	?Handle String;

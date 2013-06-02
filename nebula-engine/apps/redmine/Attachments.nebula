@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx Attachments {
-	!Id ID;
+	!ID;
 	?Container ID;
 	?ContainerType Attr;
 	Filename;

@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx Documents {
-	!Id ID;
+	!ID;
 	Project Projects;/* 0 */
 	Category ID;/* 0 */
 	*Title;

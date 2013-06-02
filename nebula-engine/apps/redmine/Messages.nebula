@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 tx Messages {
-	!Id ID;
+	!ID;
 	Board Boards;
 	?Parent ID;
 	*Subject;
