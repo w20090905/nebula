@@ -2,7 +2,7 @@
 @Refby("0")
 tx Issues {
 	!ID;
-	Tracker Trackers;/* 0 */
+	@HasFollowing Tracker Trackers;/* 0 */
 	Project Projects;/* 0 */
 	*Subject;
 	?Description;
@@ -12,7 +12,7 @@ tx Issues {
 	?AssignedTo ID;
 	Priority ID;/* 0 */
 	?FixedVersion ID;
-	Author ID;/* 0 */
+	Author Users;/* 0 */
 	LockVersion Count;/* 0 */
 	?CreatedOn Datetime;
 	?UpdatedOn Datetime;
@@ -25,4 +25,3 @@ tx Issues {
 	?Rgt Count;
 	IsPrivate YesNo;/* 0 */
 };
-

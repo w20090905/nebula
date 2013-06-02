@@ -83,6 +83,25 @@
 			>${showValue}</div>
 [/#macro]
 
+[#assign opening=false /]
+[#macro controls field for label]	
+	[#if !opening]	
+	<div class="row-fluid">
+	[/#if]
+		<div class="control-group span6">
+			<label class="control-label" for="${for}">${label}</label>		
+			<div class="controls">
+			[#nested]
+			</div>
+		</div>
+	[#if !opening && field.attrs.HasFollowing??]	
+		[#assign opening=true/]		
+	[#else]	
+	</div>
+		[#assign opening=false /]
+	[/#if]
+[/#macro]
+
 <article class="module width_full">
 	<header>
 		<h1 class="tabs_involved">${type.name}</h1>	
@@ -124,13 +143,10 @@
 					[#switch of.refer]
 					[#case "ByVal"] <!--  Basic Type Field <!--  Type A1-->
 						[#if !of.key || of.type.name != "ID"]
-		<div class="control-group">
-			<label class="control-label" for="${of.name}">${of.name}</label>
-			<div class="controls">
+			[@controls field=of for="${of.name}" label="${of.name}"]
 					[@inputBox field=of id="${of.name}"  ngModel="data.${of.name}" placeholder="${of.name}" 
 						key=of.key required=!of.ignorable/]
-			</div>
-		</div>
+			[/@controls]
 						[/#if]
 						[#break]
 					[#case "Inline"] <!--  inline object -->
@@ -140,52 +156,40 @@
 							[#if !in1f.array]<!-- -->
 								[#switch in1f.refer]
 								[#case "ByVal"] <!--  Type B1-->
-			<div class="control-group">
-				<label class="control-label" for="${in1f.name}">${in1f.name}</label>
-				<div class="controls">
+				[@controls field=in1f for="${of.name}${in1f.name}" label="${in1f.name}"]
 					[@inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name} ${in1f.name}"
 						required=!(of.ignorable || in1f.ignorable)/]
-				</div>
-			</div>
+				[/@controls]
 									[#break]
 								[#case "Inline"] <!--  Type B2-->
 									[#list in1f.type.fields as in2f][#t]
 										[#if !in2f.array && in2f.refer == "ByVal"] <!--  Type
 																										<!--  C1   -->
 
-			<div class="control-group">
-				<label class="control-label" for="${of.name}${in1f.name}${in2f.name}">${in1f.name}${in2f.name}</label>
-				<div class="controls">
+				[@controls  field=in2f for="${of.name}${in1f.name}${in2f.name}" label="${in1f.name}${in2f.name}"]
 					[@inputBox field=in2f id="${of.name}${in1f.name}${in2f.name}" ngModel="data.${of.name}.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"
 						required=!(of.ignorable || in1f.ignorable || in2f.ignorable)/]
-				</div>
-			</div>
+				[/@controls]
 										[/#if] 
 									[/#list]
 									[#break]
 								[#case "ByRef"] <!--  Type B3   -->
 								[#case "Cascade"] <!--  Type B4   -->
 
-			<div class="control-group">
-				<label class="control-label" for="${of.name}${in1f.name}">${in1f.name}</label>
-				<div class="controls">
+				[@controls  field=in1f for="${of.name}${in1f.name}" label="${in1f.name}"]
 					[@popupBox field=in1f pField=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name} ${in1f.name}"
 						readonly=true required=!(of.ignorable || in1f.ignorable)/]		
-				</div>
-			</div>
+				[/@controls]
 									[#break]
 								[/#switch]
 							[#else]
 								[#switch in1f.refer]
 								[#case "ByVal"] <!--  Type B5   -->
 											
-		<div class="control-group">
-			<label class="control-label" for="${of.name}${in1f.name}"">${of.name} ${in1f.name}</label>
-			<div class="controls">
+			[@controls  field=in1f for="${of.name}${in1f.name}" label="${of.name} ${in1f.name}"]
 					[@inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name}${in1f.name}"
 						required=!(of.ignorable || in1f.ignorable) /] <!-- ngList -->
-			</div>
-		</div>
+			[/@controls]
 									[#break]
 								[#case "Inline"] <!--  Type B6   -->
 								
@@ -229,26 +233,20 @@
 					</fieldset>
 						[#break]
 					[#case "ByRef"] <!--  Type A3   -->
-					[#case "Cascade"] <!--  Type A4   -->							
-			<div class="control-group">
-				<label class="control-label" for="${of.name}">${of.name}</label>
-				<div class="controls">
+					[#case "Cascade"] <!--  Type A4   -->
+				[@controls field=of for="${of.name}" label="${of.name}"]
 					[@popupBox field=of pField=of id="${of.name}" ngModel="data.${of.name}"  placeholder="${of.name}"
 						key=(of.key) readonly=true required=!(of.ignorable)/]
-				</div>
-			</div>
+				[/@controls]
 						[#break]
 					[/#switch]
 				[#else] <!--  数组不可以是Key   -->
 					[#switch of.refer]
 					[#case "ByVal"] <!--  Basic Type Field  --> <!--  Type A5   -->
-		<div class="control-group">
-			<label class="control-label" for="${of.name}">${of.name}</label>
-			<div class="controls">
+			[@controls  field=of for="${of.name}" label="${of.name}"]
 					[@inputBox field=of id="${of.name}" ngModel="data.${of.name}" placeholder="${of.name}"
 						required=!(of.ignorable) ex="x-ng-list"/] <!-- ngList -->
-			</div>
-		</div>
+			[/@controls]
 						[#break]
 					[#case "Inline"] <!--  inline object --> <!--  Type A6   -->
 		<table class="table table-hover table-striped table-bordered table-condensed">
