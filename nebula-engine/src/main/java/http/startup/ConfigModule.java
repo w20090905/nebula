@@ -102,6 +102,7 @@ public class ConfigModule extends AbstractModule {
 			freemarkerConfiguration.setDefaultEncoding("utf-8");
 			freemarkerConfiguration.setEncoding(Locale.getDefault(),"utf-8");
 			freemarkerConfiguration.setTemplateUpdateDelay(1);
+			freemarkerConfiguration.setNumberFormat("0.####");
 			freemarkerConfiguration.setDirectoryForTemplateLoading(new File(root, "template"));
 			this.bind(Configuration.class).toInstance(freemarkerConfiguration);
 

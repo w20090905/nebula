@@ -10,6 +10,5 @@ type Versions {
 	?UpdatedOn Datetime;
 	?WikiPageTitle Title;
 	?Status;/* open */
-	Sharing String;/* none */
+	Sharing Attr;/* none */
 };
-

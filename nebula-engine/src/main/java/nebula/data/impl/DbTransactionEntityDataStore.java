@@ -69,7 +69,7 @@ public class DbTransactionEntityDataStore extends EntityDataStore {
 		} else { // insert
 			Long id = idGenerator.nextValue();
 			newEntity.put(key, id);
-			newEntity.put("ID", String.valueOf(id));
+			newEntity.put(Entity.PRIMARY_KEY, String.valueOf(id));
 
 			lock.lock();
 

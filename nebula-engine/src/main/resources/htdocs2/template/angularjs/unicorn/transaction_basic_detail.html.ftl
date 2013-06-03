@@ -47,8 +47,8 @@
 			<option value="">-- 选择 ${field.name} --</option>
 		</select>
 	[#elseif field.attrs.FormatType! = "textarea"]
-		<textarea id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
-			${optReadonly} ${optRequired}  ${optValidateRule} 	${optTitle}	 class="${optClass}"
+		<textarea id="${id}"  x-ng-model="${ngModel}" rows="8" placeholder="${placeholder}"  ${ex}
+			${optReadonly} ${optRequired}  ${optValidateRule} 	${optTitle}	 class="${optClass} input-block-level"
 			></textarea>		
 	[#elseif field.attrs.FormatType! = "checkbox"]
 		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
@@ -88,12 +88,22 @@
 	[#if !opening]	
 	<div class="row-fluid">
 	[/#if]
+	[#if field.attrs.FormatType! = "textarea"]	
+		<div class="control-group span12">
+			<label class="control-label" for="${for}">${label}</label>		
+			<div class="controls">
+			[#nested]
+			</div>
+		</div>
+	[#else]
 		<div class="control-group span6">
 			<label class="control-label" for="${for}">${label}</label>		
 			<div class="controls">
 			[#nested]
 			</div>
 		</div>
+	[/#if]	
+	
 	[#if !opening && field.attrs.HasFollowing??]	
 		[#assign opening=true/]		
 	[#else]	
@@ -104,7 +114,7 @@
 
 <article class="module width_full">
 	<header>
-		<h1 class="tabs_involved">${type.name}&nbsp;${"#"}{{data.Id}}</h1>	
+		<h1 class="tabs_involved">${type.name}&nbsp;${"#"}{{data.ID}}</h1>	
 		<div class="btn-toolbar">
 			<div class="btn-group">
 		  		<a href="#/d/Type/${type.name}" class="btn">Define</a>
@@ -142,10 +152,12 @@
 				[#if !of.array]
 					[#switch of.refer]
 					[#case "ByVal"] <!--  Basic Type Field <!--  Type A1-->
+						[#if !of.key || of.type.name != "ID"]
 			[@controls field=of for="${of.name}" label="${of.name}"]
 					[@inputBox field=of id="${of.name}"  ngModel="data.${of.name}" placeholder="${of.name}" 
 						key=of.key required=!of.ignorable/]
 			[/@controls]
+						[/#if]
 						[#break]
 					[#case "Inline"] <!--  inline object -->
 		<fieldset>

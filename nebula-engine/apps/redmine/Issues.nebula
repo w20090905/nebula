@@ -5,23 +5,23 @@ tx Issues {
 	@HasFollowing Tracker Trackers;/* 0 */
 	Project Projects;/* 0 */
 	*Subject;
-	?Description;
-	?DueDate Date;
+	?Description Note;
+	@HasFollowing ?DueDate Date;
 	?Category ID;
-	StatusId IssueStatuses;/* 0 */
+	@HasFollowing StatusId IssueStatuses;/* 0 */
 	?AssignedTo ID;
-	Priority ID;/* 0 */
-	?FixedVersion ID;
-	Author Users;/* 0 */
+	@HasFollowing Priority ID;/* 0 */
+	?FixedVersion Versions;
+	@HasFollowing Author Users;/* 0 */
 	LockVersion Count;/* 0 */
-	?CreatedOn Datetime;
-	?UpdatedOn Datetime;
-	?StartDate Date;
+	@HasFollowing ?StartDate Date;
 	DoneRatio Ratio;/* 0 */
-	?EstimatedHours Number;
+	@HasFollowing ?EstimatedHours Number;
 	?Parent ID;
 	?Root ID;
-	?Lft Count;
+	@HasFollowing ?Lft Count;
 	?Rgt Count;
 	IsPrivate YesNo;/* 0 */
+	@HasFollowing ?CreatedOn Datetime;
+	?UpdatedOn Datetime;
 };
