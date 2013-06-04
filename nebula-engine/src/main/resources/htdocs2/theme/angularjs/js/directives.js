@@ -374,8 +374,41 @@ var nbJsonDataDirective = ['$http', '$controller','$resource',
     }
   };
 }];
+var nbInlineShowDataDirective = [ '$http', '$controller', '$resource', function($http, $controller, $resource) {
+	return {
+		restrict : 'A',
+		require : '?ngModel',
+		link : function(scope, element, attr, ctrl) {
+			scope.$watch(attr.ngModel + "ID", function(newValue, oldValue) {
+				if(scope.$eval(attr.ngModel + "ID" + "==" + attr.ngModel + ".ID"  + "")){
+				}else{
+					$.each(scope[attr.id + "values"],function(i,o){
+						if(o.ID == scope.$eval(attr.ngModel + "ID") ){
+							scope.$eval(attr.ngModel + "=" + attr.id + "values"+ "[" + i+ "]"  + ";");
+						}
+					});
+				}
+			});
+
+			scope.$watch(attr.ngModel, function(newValue, oldValue) {
+				if (newValue) {
+					if(scope.$eval(attr.ngModel + "ID" + "==" + attr.ngModel + ".ID"  + "")){
+						
+					}else{
+						scope.$eval(attr.ngModel + "ID" + "=" + attr.ngModel + ".ID"  + ";");
+						scope.$eval(attr.ngModel + "Name" + "=" + attr.ngModel + ".Name"  + ";");						
+					}
+				} else {
+					scope.$eval(attr.ngModel + "ID" + "='';");
+					scope.$eval(attr.ngModel + "Name" + "='';");
+				}
+			});
+		}
+	};
+} ];
 
 angular.module('nebulaDirectives', [])
 .directive('nbView', nbViewDirective)
 .directive('popup', neFromListDirective)
-.directive('jsondataurl', nbJsonDataDirective);
+.directive('jsondataurl', nbJsonDataDirective)
+.directive('inlineshow', nbInlineShowDataDirective);

@@ -23,6 +23,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 	private final Configuration templateConfig;
 	final Holder<DataStore<Entity>> attributes;
 	final TypeLoader typeLoader;
+	final DataPersister<Entity> dataWareHouse;
 
 	@Inject
 	public TemplateResouceEngine(Loader resourceLoader, TypeLoader typeLoader,
@@ -31,6 +32,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 		this.templateConfig = cfg;
 		this.typeLoader = typeLoader;
 		this.attributes = dataWareHouse.define(String.class, Entity.class, "Attribute");
+		this.dataWareHouse = dataWareHouse;
 		this.age = 30L * 24L * 60L * 60L;
 	}
 
@@ -87,7 +89,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 		} else if ((idxType = name.indexOf("-")) > 0) {
 			String typeName = name.substring(0, idxType);
 			String actionName = name.substring(idxType + 1);
-			return new TypeTemplateResouce(templateConfig, typeLoader, attributes, theme, skin, typeName, actionName);
+			return new TypeTemplateResouce(templateConfig, typeLoader,dataWareHouse, attributes, theme, skin, typeName, actionName);
 		} else {
 			return new StaticTemplateResouce(templateConfig, typeLoader, attributes, theme, skin, name);
 		}

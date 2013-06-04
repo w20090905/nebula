@@ -35,7 +35,6 @@
 			[#if field.attrs.MaxLength??] maxLength	="${field.attrs.MaxLength}" [/#if]
 	[/@compress][/#assign]
 	[#assign optRequired][#if !key && required] required[/#if][/#assign]
-
 	[#if field.type.attrs.SP?? &&  field.type.attrs.SP = "Attr"]
 		[#assign attrValues][@compress single_line=true]			
 			[#list (attrs[field.name].Values)![] as attr],{name:'${attr.Name}'}[/#list]
@@ -67,6 +66,7 @@
 		[#assign beforePopup][/#assign]
 		[#assign afterPopup][/#assign]
 		[#assign showValue][/#assign]
+		
 	[#list field.type.fields as in2f][#t]
 		[#if !in2f.array && in2f.refer == "ByVal"
 				&& (in2f.key || in2f.core)]
@@ -76,11 +76,21 @@
 		[/#if]
 	[/#list]
 	
+	[#if field.attrs.InlineShow?? &&  field.attrs.InlineShow = "InlineShow"]
+		[#assign attrValues][@compress single_line=true]			
+			[#list (alldatas[field.type.name])![] as attr],{ID:${attr.ID},Name:'${attr.Name}'}[/#list]
+		[/@compress] [/#assign]		
+		<select id="${id}"  x-ng-init="${id}values = [${attrValues?substring(1)}];" 
+				x-ng-model="${ngModel}" x-ng-options="c as c.Name for c in ${id}values" placeholder="${placeholder}"	 inlineshow>	
+			<option value="">-- 选择 ${field.name} --</option>
+		</select>
+	[#else]	
 		<div id="${id}"  class="uneditable-input" placeholder="${placeholder}"
 				x-popup="/d/${field.type.name}/" 
 				x-beforePopup="${beforePopup}"
 				x-afterPopup="${afterPopup}"
 			>${showValue}</div>
+	[/#if]
 [/#macro]
 
 [#assign opening=false /]

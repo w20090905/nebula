@@ -47,8 +47,8 @@
 			<option value="">-- 选择 ${field.name} --</option>
 		</select>
 	[#elseif field.attrs.FormatType! = "textarea"]
-		<textarea id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
-			${optReadonly} ${optRequired}  ${optValidateRule} 	${optTitle}	 class="${optClass}"
+		<textarea id="${id}"  x-ng-model="${ngModel}" rows="8" placeholder="${placeholder}"  ${ex}
+			${optReadonly} ${optRequired}  ${optValidateRule} 	${optTitle}	 class="${optClass} input-block-level"
 			></textarea>		
 	[#elseif field.attrs.FormatType! = "checkbox"]
 		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
@@ -67,6 +67,7 @@
 		[#assign beforePopup][/#assign]
 		[#assign afterPopup][/#assign]
 		[#assign showValue][/#assign]
+		
 	[#list field.type.fields as in2f][#t]
 		[#if !in2f.array && in2f.refer == "ByVal"
 				&& (in2f.key || in2f.core)]
@@ -76,11 +77,21 @@
 		[/#if]
 	[/#list]
 	
+	[#if field.attrs.InlineShow?? &&  field.attrs.InlineShow = "InlineShow"]
+		[#assign attrValues][@compress single_line=true]			
+			[#list (alldatas[field.type.name])![] as attr],{ID:${attr.ID},Name:'${attr.Name}'}[/#list]
+		[/@compress] [/#assign]		
+		<select id="${id}"  x-ng-init="${id}values = [${attrValues?substring(1)}];" 
+				x-ng-model="${ngModel}" x-ng-options="c as c.Name for c in ${id}values" placeholder="${placeholder}"	 inlineshow>	
+			<option value="">-- 选择 ${field.name} --</option>
+		</select>
+	[#else]	
 		<div id="${id}"  class="uneditable-input" placeholder="${placeholder}"
 				x-popup="/d/${field.type.name}/" 
 				x-beforePopup="${beforePopup}"
 				x-afterPopup="${afterPopup}"
 			>${showValue}</div>
+	[/#if]
 [/#macro]
 
 [#assign opening=false /]
@@ -88,12 +99,22 @@
 	[#if !opening]	
 	<div class="row-fluid">
 	[/#if]
+	[#if field.attrs.FormatType! = "textarea"]	
+		<div class="control-group span12">
+			<label class="control-label" for="${for}">${label}</label>		
+			<div class="controls">
+			[#nested]
+			</div>
+		</div>
+	[#else]
 		<div class="control-group span6">
 			<label class="control-label" for="${for}">${label}</label>		
 			<div class="controls">
 			[#nested]
 			</div>
 		</div>
+	[/#if]	
+	
 	[#if !opening && field.attrs.HasFollowing??]	
 		[#assign opening=true/]		
 	[#else]	
