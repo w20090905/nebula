@@ -91,7 +91,7 @@ public class BasicResourceContainer extends AbstractHandler {
 	public void handle(String target, Request baseRequest, HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 		if (log.isDebugEnabled()) {
-			log.debug("client request "+req.getMethod() +" - " + req.getPathInfo() + " - " + URIUtil.decodePath(req.getQueryString()));
+			log.debug("client request "+req.getMethod() +" - " + req.getPathInfo() + (req.getQueryString()==null?"":(" - " + URIUtil.decodePath(req.getQueryString()))));
 		}
 		try {
 			String path = req.getPathInfo();
@@ -111,7 +111,7 @@ public class BasicResourceContainer extends AbstractHandler {
 
 				} else {
 					String key = path.substring(1, idx);
-					if ("js css e font img images f".indexOf(key) > 0) {
+					if ("js css lib e font img images f".indexOf(key) > 0) {
 
 					} else {
 						redirectToLoginResouce.handle(req, resp);

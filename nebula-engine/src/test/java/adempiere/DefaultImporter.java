@@ -177,7 +177,7 @@ public class DefaultImporter {
 				lastResult = field;
 			}
 		}
-		return null;
+		return lastResult;
 	}
 
 	public void output(String outputFolderName) throws IOException {
