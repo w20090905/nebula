@@ -55,7 +55,7 @@ public class TypesTest extends TestCase {
 				 " Note;\n" + 
 				 " Password;\n" + 
 				 " Percent;\n" + 
-				 " PhoneNumber;\n" + 
+				 " Phone;\n" + 
 				 " PIN;\n" + 
 				 " PostalCode;\n" + 
 				 " Precision;\n" + 
@@ -135,7 +135,7 @@ public class TypesTest extends TestCase {
 		i++;	assertEquals("Note", type.fields.get(i).name);
 		i++;	assertEquals("Password", type.fields.get(i).name);
 		i++;	assertEquals("Percent", type.fields.get(i).name);
-		i++;	assertEquals("PhoneNumber", type.fields.get(i).name);
+		i++;	assertEquals("Phone", type.fields.get(i).name);
 		i++;	assertEquals("PIN", type.fields.get(i).name);
 		i++;	assertEquals("PostalCode", type.fields.get(i).name);
 		i++;	assertEquals("Precision", type.fields.get(i).name);

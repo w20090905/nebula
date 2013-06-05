@@ -46,7 +46,7 @@ public class PersistenceMemTest extends TestCase {
 
 		assertEquals(false, v.isDirty());
 		assertEquals("wangshilian", v.get("Name"));
-		assertEquals("wangshilian", store.get("wangshilian").get("ID"));
+		assertEquals("wangshilian", store.get("wangshilian").getID());
 
 		v.put("length", "120");
 

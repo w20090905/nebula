@@ -46,8 +46,8 @@ public class InMemoryPersisterTest extends TestCase {
 		p.flush();
 
 		assertEquals(false, v.isDirty());
-		assertEquals("wangshilian", v.get("ID"));
-		assertEquals("wangshilian", store.get("wangshilian").get("ID"));
+		assertEquals("wangshilian", v.get(Entity.PRIMARY_KEY));
+		assertEquals("wangshilian", store.get("wangshilian").get(Entity.PRIMARY_KEY));
 
 		v.put("length", "120");
 
