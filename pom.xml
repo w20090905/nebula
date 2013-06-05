@@ -12,6 +12,7 @@
 	<modules>
 		<module>nebula-rest</module>
 		<module>nebula-rest-sample</module>
+		<module>nebula-flow</module>
 	</modules>
 
 	<build>
