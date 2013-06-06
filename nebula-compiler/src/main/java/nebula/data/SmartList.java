@@ -98,6 +98,10 @@ public class SmartList<I, V extends Timable> extends ForwardingList<V> {
 	public Set<I> keySet() {
 		return this.indexedValues.keySet();
 	}
+	
+	public boolean containsKey(String key){
+		return this.indexedIndex.containsKey(key);
+	}
 
 	@Override
 	public V set(int index, V element) {
