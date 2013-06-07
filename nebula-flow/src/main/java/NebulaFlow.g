@@ -24,6 +24,7 @@ options {
 
 @members {
     TypeLoader loader;
+    int cntInnerType = 0;
     public NebulaFlowParser(TokenStream input,TypeLoader loader) {
         this(input);
         this.loader = loader;
@@ -103,7 +104,7 @@ stepDefinition[Flow resideFlow]
                 superType = resolveType($superTypeID.text);                
             }
         } 
-       ('{' { stepType = new Type(loader,resideFlow,$stepID.text,superType); }
+       ('{' { stepType = new Type(loader,resideFlow,resideFlow.name + "$" + String.valueOf(++cntInnerType) + $stepID.text ,superType); addType(stepType);}
             fieldDefinition[stepType]* 
         '}')?
         {

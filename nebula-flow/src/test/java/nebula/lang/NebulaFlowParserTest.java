@@ -14,6 +14,13 @@ public class NebulaFlowParserTest extends TestCase {
 		compiler = new TypeLoaderForTest(new SystemTypeLoader());
 	}
 
+	NebulaFlowLexer a1 = new NebulaFlowLexer(null){
+		String d= "d";
+	};
+	NebulaFlowLexer a2 = new NebulaFlowLexer(null){
+		String d= "d";
+	};
+
 	public void testTypeDefinition() {
 		try {
 			//@formatter:off
@@ -27,6 +34,7 @@ public class NebulaFlowParserTest extends TestCase {
 					"	};\n" +
 					"	[me.company.hr.$leader] Approve{ \n" +
 					"	};\n" +
+					"	[me.company.hr.$leader] Approve;\n" +
 					"	[me.company.hr.$leader] Step1:  Approve{ \n" +
 					"	};\n" +
 					"	[me.company.hr.$leader] Step2 : Approve;\n" +
@@ -40,12 +48,12 @@ public class NebulaFlowParserTest extends TestCase {
 
 			assertEquals("Issue", flow.name);
 
-			assertEquals(5, flow.steps.size());
+			assertEquals(6, flow.steps.size());
 
 			Flow.Step step = flow.steps.get(0);
 
 			assertEquals("Begin",  step.name);
-			assertEquals("Begin",  step.stepType.name);
+			assertEquals("Issue$1Begin",  step.stepType.name);
 			
 			assertEquals(2,  step.stepType.fields.size());
 			int i = 0;
@@ -58,7 +66,7 @@ public class NebulaFlowParserTest extends TestCase {
 			 step = flow.steps.get(1);
 
 			assertEquals("Approve", step.name);
-			assertEquals("Approve", step.stepType.name);
+			assertEquals("Issue$2Approve", step.stepType.name);
 			i = 0;
 
 			step = null;
@@ -66,20 +74,27 @@ public class NebulaFlowParserTest extends TestCase {
 			step = flow.steps.get(2);
 
 			assertEquals("Approve2", step.name);
-			assertEquals("Approve", step.stepType.name);
+			assertEquals("Issue$3Approve", step.stepType.name);
 			i = 0;
 			step = null;
 			
 
 			step = flow.steps.get(3);
 
+			assertEquals("Approve3", step.name);
+			assertEquals("Approve", step.stepType.name);
+			i = 0;
+			step = null;
+			
+			step = flow.steps.get(4);
+
 			assertEquals("Step1", step.name);
-			assertEquals("Step1", step.stepType.name);
+			assertEquals("Issue$4Step1", step.stepType.name);
 			assertEquals("Approve", step.stepType.superType.name);
 			i = 0;
 			step = null;
 
-			step = flow.steps.get(4);
+			step = flow.steps.get(5);
 
 			assertEquals("Step2", step.name);
 			assertEquals("Approve", step.stepType.name);
