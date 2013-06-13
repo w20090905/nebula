@@ -54,9 +54,9 @@
 			<td colspan="4">
 				<div class="pagination">
 					<ul x-ng-init="tablePages= [1,2,3,4,5,6,7,8,9,10] ;">
-						<li x-ng-class="(currentPage>1) | select:'':'disabled'"><a href=""  x-ng-click="$setCurrentPage(currentPage-1);" >Prev</a></li>
-						<li x-ng-repeat="page in tablePages | limitTo: (datalist.length/pageSize+1)"  x-ng-class="(page==currentPage) | select:'active':''"><a href="" x-ng-click="$setCurrentPage(page);" >{{page}}</a></li>
-						<li x-ng-class="(currentPage<(datalist.length/pageSize)) | select:'':'disabled'"><a href=""  x-ng-click="$setCurrentPage(currentPage+1);" >Next</a></li>
+						<li x-ng-class="{'disabled' : currentPage<=1}"><a href=""  x-ng-click="$setCurrentPage(currentPage-1);" >Prev</a></li>
+						<li x-ng-repeat="page in tablePages | limitTo: (datalist.length/pageSize+1)"  x-ng-class="{'active':page==currentPage}"><a href="" x-ng-click="$setCurrentPage(page);" >{{page}}</a></li>
+						<li x-ng-class="{'disabled' : currentPage>=(datalist.length/pageSize)}"><a href=""  x-ng-click="$setCurrentPage(currentPage+1);" >Next</a></li>
 					</ul>
 				</div>
 			</td>
