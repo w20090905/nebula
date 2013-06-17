@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+tx Activityexpense {
+	!Activityexpenseid ID;
+	*Expensetype null;
+	Applyfordate Date;
+	Applyforamount Amount;
+	?Reimburseddate Date;
+	?Reimbursedamount Amount;
+	?Remark null;
+	Customerid ID;
+	?Contactid ID;
+	Activityid Activity;
+	*Expensetypecode null;
+	Amount;
+	?Attachnumber null;
+	?Comments Note;
+	DateLastupdated Date;
+};
+

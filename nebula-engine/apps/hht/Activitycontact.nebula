@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("1")
+tx Activitycontact {
+	!Activitycontactid ID;
+	Orgid ID;
+	Contactid ID;
+	Activityid Activity;
+	?IsPresence YesNo;
+	?IsPrimary YesNo;
+	?Maker null;
+};
+

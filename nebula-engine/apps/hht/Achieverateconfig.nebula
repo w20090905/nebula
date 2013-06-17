@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type Achieverateconfig {
+	Achieverateconfigid ID;
+	Examineplanid ID;
+	?Lowerlimit Count;
+	?Upperlimit Count;
+	?Coefficient null;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("19")
+tx Accountingyear {
+	!Accyearid ID;
+	Booksetid ID;
+	*Accyear null;
+	Begindate Date;
+	Enddate Date;
+	Status;
+	?DateLastupdated Date;
+};
+

@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Activitybrand {
+	!Activitybrandid ID;
+	Activityid Activity;
+	Prodbrandcode Code;
+	Weight;
+	?Budgetamount Amount;
+	?SalesTarget null;
+	?Remark null;
+	?DateLastupdated Date;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Accountcheckdetail {
+	!Accountcheckdetailid ID;
+	Glaccountid ID;
+	Checkelementid ID;
+	?IsNeed YesNo;
+	*Actiontype null;
+	?Para1 null;
+	?Flagcontainer null;
+};
+

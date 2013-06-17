@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx Activitydetail {
+	!Activitydetailid ID;
+	Activityid Activity;
+	?Description;
+	?Planedstarttime null;
+	?Planedendtime null;
+	?Actualstarttime null;
+	?Actualendtime null;
+	?LineStatus Line;
+	?SalesRepid ID;
+};
+

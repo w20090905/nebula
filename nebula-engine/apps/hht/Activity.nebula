@@ -1,0 +1,48 @@
+@Remarks("")
+@Refby("17")
+tx Activity {
+	!Activityid ID;
+	Orgid ID;
+	Ownerorgid ID;
+	?Activitytypeid ID;
+	SalesRepid ID;
+	Activitycode Code;
+	*Activityname Name;
+	*Activityprioritytype null;
+	?Description;
+	*Planedstarttime null;
+	?Actualstarttime null;
+	*Planedendtime null;
+	?Actualendtime null;
+	?ReferenceNo Code;
+	Currencycode Code;
+	?Exchangerate Rate;
+	?Basebudgetamount Amount;
+	?Budgetamount Amount;
+	?Actualamount Amount;
+	*Maker null;
+	CreateDAte Date;
+	DateLastupdated Date;
+	Status;
+	*SalesOrmarket null;
+	?Marketingplanid ID;
+	?Marketingplandetailid ID;
+	?SalesJounalplanid ID;
+	?Customerid ID;
+	?SalesTarget null;
+	?Actualsalesamount Amount;
+	?Opportunityid ID;
+	?SalesRep2id ID;
+	?Relatedorgid ID;
+	?SalesActivityplanid ID;
+	?Followactivityplanid ID;
+	?Pjpid ID;
+	?Pjpcode Code;
+	?Originalactivityid ID;
+	?SourceActivityid ID;
+	?Version;
+	?StoreNumber null;
+	?Remark null;
+	?Contactname Name;
+};
+

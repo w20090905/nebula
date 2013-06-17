@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Activitycategory {
+	!Activitycategoryid ID;
+	?DateLastupdated Date;
+	Activityid Activity;
+	Categoryid ID;
+	Weight;
+	?Bugetamount Amount;
+	?SalesTarget null;
+	?Remark null;
+};
+

@@ -35,6 +35,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.google.common.base.CaseFormat;
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -147,7 +148,7 @@ public class DefaultImporter {
 			if (rule.tableName != null) {
 				if (!field.resideType.rawName.equalsIgnoreCase(rule.tableName)) {
 					continue;
-				}else{
+				} else {
 					System.out.println("match table");
 				}
 			}
@@ -170,7 +171,7 @@ public class DefaultImporter {
 			if (matched) {
 				field.comment = "Matched\t" + field.name + "\t"
 						+ (matchedMatchPattern == null ? "" : matchedMatchPattern.name()) + "\t" + matchedName + "\t"
-						+  (matchedColumnType == null ? "" : matchedColumnType.name()) ;
+						+ (matchedColumnType == null ? "" : matchedColumnType.name());
 				for (Action action : rule.actions) {
 					action.apply(field, matchedName);
 				}
@@ -216,17 +217,18 @@ public class DefaultImporter {
 				if (field.isKey) {
 					sb.append("!");
 				}
-				if (!field.nullable ){
-					if("Name Subject Title".toUpperCase().indexOf(field.resultTypeName.toUpperCase())>=0) {
+				if (!field.nullable) {
+					if ("Name Subject Title".toUpperCase().indexOf(
+							Strings.nullToEmpty(field.resultTypeName).toUpperCase()) >= 0) {
 						sb.append("*");
 					}
-				} 
+				}
 
 				if (field.resultName.equalsIgnoreCase(field.resultTypeName)) {
 					sb.append(field.resultTypeName);
-				}else{
-					sb.append(field.resultName);		
-					sb.append(" " + field.resultTypeName);			
+				} else {
+					sb.append(field.resultName);
+					sb.append(" " + field.resultTypeName);
 				}
 				sb.append(";");
 
@@ -244,17 +246,21 @@ public class DefaultImporter {
 
 	public void read(String outputFolderName, Element rootElement) throws IOException {
 		NodeList nodeList = rootElement.getElementsByTagName("table");
-		if (nodeList != null) {
-			for (int i = 0; i < nodeList.getLength(); i++) {
-				Element element = (Element) nodeList.item(i);
-				String tableName = element.getAttribute("name");
-				this.tables.put(tableName, tableName);
-			}
+		if (nodeList == null) {
+			return;
+		}
 
-			for (int i = 0; i < nodeList.getLength(); i++) {
-				Element element = (Element) nodeList.item(i);
-				this.readTable(element);
-			}
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Element element = (Element) nodeList.item(i);
+			String tableName = element.getAttribute("name");
+			this.tables.put(tableName, tableName);
+		}
+
+		int MAX = 10;
+		for (int i = 0; i < nodeList.getLength() && i < MAX; i++) {
+			Element element = (Element) nodeList.item(i);
+			this.readTable(element);
+			System.out.println("reading... " + i);
 		}
 	}
 

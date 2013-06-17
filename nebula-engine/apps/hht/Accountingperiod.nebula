@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("39")
+tx Accountingperiod {
+	!Accperiodid ID;
+	?No SeqNo;
+	?Begindate Date;
+	?Enddate Date;
+	?Closedate Date;
+	Status;
+	?DateLastupdated Date;
+	Accyearid Accountingyear;
+	?Specialperiodflag null;
+	?Fastatus null;
+	?Faclosedate Date;
+};
+
