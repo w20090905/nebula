@@ -1,5 +1,8 @@
 package nebula.lang;
 
+import java.lang.instrument.Instrumentation;
+import java.util.zip.GZIPOutputStream;
+
 import junit.framework.TestCase;
 
 import org.antlr.runtime.ANTLRStringStream;
