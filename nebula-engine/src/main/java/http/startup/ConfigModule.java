@@ -60,8 +60,10 @@ public class ConfigModule extends AbstractModule {
 		String password = "password";
 
 		try {
+
+			// ROOT Folder
 			File root = null;
-			URL url = this.getClass().getResource("/"+ PATH_OF_ROOT + "/WEB-INF/web.xml");
+			URL url = this.getClass().getResource("/" + PATH_OF_ROOT + "/WEB-INF/web.xml");
 			if (url != null) {
 				root = new File(url.getPath()).getParentFile().getParentFile();
 			}
@@ -78,29 +80,34 @@ public class ConfigModule extends AbstractModule {
 				throw new RuntimeException("cannot find " + PATH_OF_ROOT);
 			}
 
+			// Type Define locator
 			EditableTypeLoader typeLoader = new EditableTypeLoader(new SystemTypeLoader(), new File("apps/system"));
 			typeLoader.loadFolder(new File("apps/redmine"));
 
 			this.bind(EditableTypeLoader.class).toInstance(typeLoader);
 			this.bind(TypeLoader.class).toInstance(typeLoader);
 
+			// Resource scan loader
 			Loader loader = new MultiLoader(new ClassPathLoader(this.getClass().getClassLoader(), PATH_OF_ROOT),
 					new FileSystemLoader(root));
 			this.bind(Loader.class).toInstance(loader);
 
-
+			// Filter
 			this.bind(EntityFilterBuilder.class);
 			this.bind(TypeFilterBuilder.class);
 
+			// Database configuration
 			this.bind(DbConfiguration.class).toInstance(
 					DbConfiguration.getEngine(driverclass, dburl, username, password));
 			
+			// Data Persister
 			this.bind(new TypeLiteral<DataPersister<Entity>>() {
 			}).to(DbEntityDataPersister.class).in(Scopes.SINGLETON);
 
+			// Freemarker
 			Configuration freemarkerConfiguration = new Configuration();
 			freemarkerConfiguration.setDefaultEncoding("utf-8");
-			freemarkerConfiguration.setEncoding(Locale.getDefault(),"utf-8");
+			freemarkerConfiguration.setEncoding(Locale.getDefault(), "utf-8");
 			freemarkerConfiguration.setTemplateUpdateDelay(1);
 			freemarkerConfiguration.setNumberFormat("0.####");
 			freemarkerConfiguration.setDirectoryForTemplateLoading(new File(root, "template"));
@@ -109,7 +116,8 @@ public class ConfigModule extends AbstractModule {
 			this.bind(StaticResourceEngine.class).in(Singleton.class);
 			this.bind(ResourceEngine.class).to(StaticResourceEngine.class).in(Singleton.class);
 			this.bind(EntityResouceEngine.class);
-			
+
+			//Jetty Handler
 			this.bind(Handler.class).to(BasicResourceContainer.class).in(Singleton.class);
 
 			this.bind(new TypeLiteral<Configurable<BasicResourceContainer>>() {
@@ -133,13 +141,13 @@ public class ConfigModule extends AbstractModule {
 				public void setEngine(StaticResourceEngine engine) {
 					this.staticEngine = engine;
 				}
-				
+
 				@SuppressWarnings("unused")
 				@Inject
 				public void setEngine(LongTermStaticResourceEngine engine) {
 					this.longTermStaticEngine = engine;
 				}
-				
+
 				@SuppressWarnings("unused")
 				@Inject
 				public void setEngine(UserHomeResouceEngine engine) {
@@ -169,8 +177,8 @@ public class ConfigModule extends AbstractModule {
 				public void configure(BasicResourceContainer site) {
 					site.register("*", staticEngine);
 					site.register("theme", templateResouceEngine);
-					site.register("js lib img images css font", longTermStaticEngine);					
-					site.register("d", dataResouceEngine);					
+					site.register("js lib img images css font", longTermStaticEngine);
+					site.register("d", dataResouceEngine);
 					site.register("f", frameworkResouceEngine);
 					site.register("u", userHomeResouceEngine);
 				}
