@@ -5,7 +5,6 @@ import static nebula.lang.Importance.Key;
 import static nebula.lang.Importance.Require;
 import static nebula.lang.Importance.Unimportant;
 import static nebula.lang.Reference.ByVal;
-import static nebula.lang.Reference.Cascade;
 import static nebula.lang.Reference.Inline;
 
 import java.math.BigDecimal;
@@ -18,6 +17,7 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 
 import util.InheritHashMap;
+
 public class NebulaParserTest extends TestCase {
 	TypeLoaderForTest compiler;
 
@@ -25,7 +25,6 @@ public class NebulaParserTest extends TestCase {
 	protected void setUp() throws Exception {
 		compiler = new TypeLoaderForTest(new SystemTypeLoader());
 	}
-
 
 	public void testTypeDefinition() {
 		try {
@@ -40,310 +39,158 @@ public class NebulaParserTest extends TestCase {
 			NebulaParser parser = new NebulaParser(tokens, compiler);
 
 			Type type = parser.typeDefinition();
-			
+
 			assertEquals("Person", type.name);
 
 			assertEquals(1, type.fields.size());
-			
+
 			Field f = type.fields.get(0);
 
-			assertEquals("姓名", f.name);	
-			assertEquals(ByVal, f.refer);	
-			assertEquals(Require, f.importance);			
-			
+			assertEquals("姓名", f.name);
+			assertEquals(ByVal, f.refer);
+			assertEquals(Require, f.importance);
+
 		} catch (RecognitionException e) {
 			fail(e.toString());
+		}
+	}
+
+	private Field parseField(String text) {
+		try {
+			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			NebulaParser parser = new NebulaParser(tokens, compiler);
+			Type type = new Type(compiler, "Test");
+			;
+			Field field = parser.fieldDefinition(type);
+
+			return field;
+		} catch (RecognitionException e) {
+			fail(e.toString());
+			return null;
 		}
 	}
 
 	public void testFieldDefinition() {
-		try {
-			//@formatter:off
-			String text = "!Name;";
-			//@formatter:on		
-			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, compiler);
+		String text = "!Name;";
 
-			Type type = new Type(compiler,"Test");
-			Field v = parser.fieldDefinition(type);
+		Field v = parseField(text);
 
-			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			assertEquals("Name", v.name);
-			assertEquals(Key, v.importance);
-		} catch (RecognitionException e) {
-			fail(e.toString());
-		}
+		assertEquals("Name", v.name);
+		assertEquals(Key, v.importance);
 	}
-	
+
 	public void testFieldDefinition_subType() {
-		try {
-			//@formatter:off
-			String text = "!Detail{Name;Age Height;};";
-			//@formatter:on		
-			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, compiler);
+		String text = "!Detail{Name;Age Height;};";
 
-			Type type = new Type(compiler,"Test");
-			Field v = parser.fieldDefinition(type);
+		Field f = parseField(text);
 
-			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			assertEquals("Detail", v.name);
-			assertEquals("Test$Detail", v.type.name);
-			assertEquals(Inline, v.refer);
-			assertEquals("Name", v.type.fields.get(0).name);
-			assertEquals("Name", v.type.fields.get(0).type.name);
-			assertEquals("Age", v.type.fields.get(1).name);
-			assertEquals("Height", v.type.fields.get(1).type.name);
-		} catch (RecognitionException e) {
-			fail(e.toString());
-		}
+		assertEquals("Detail", f.name);
+		assertEquals("Test$Detail", f.type.name);
+		assertEquals(Inline, f.refer);
+		assertEquals("Name", f.type.fields.get(0).name);
+		assertEquals("Name", f.type.fields.get(0).type.name);
+		assertEquals("Age", f.type.fields.get(1).name);
+		assertEquals("Height", f.type.fields.get(1).type.name);
 	}
 
-	/*
-	 *  '!' {v=Key;} 
-      | '*' {v=Core;} 
-      | '#' {v=Require;} 
-      | '?' {v=Unimportant;}
-      |     {v=Require;}
-	 */
-	public void testFieldImportance_KEY() {
-		try {
-			//@formatter:off
-			String text = "!";
-			//@formatter:on		
-			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, compiler);
-			
-			Importance v = parser.fieldImportance();
+	public void testFieldDefinition_default() {
+		String text = "!Age := 10;";
 
-			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			assertEquals(Key, v);
-		} catch (RecognitionException e) {
-			fail(e.toString());
-		}
-	}
-	public void testFieldImportance_CORE() {
-		try {
-			//@formatter:off
-			String text = "*";
-			//@formatter:on		
-			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, compiler);
-			
-			Importance v = parser.fieldImportance();
-
-			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			assertEquals(Core, v);
-		} catch (RecognitionException e) {
-			fail(e.toString());
-		}
-	}
-	public void testFieldImportance_REQUIRE() {
-		try {
-			//@formatter:off
-			String text = "#";
-			//@formatter:on		
-			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, compiler);
-			
-			Importance v = parser.fieldImportance();
-
-			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			assertEquals(Require, v);
-		} catch (RecognitionException e) {
-			fail(e.toString());
-		}
-	}
-	public void testFieldImportance_UNIMPORTANT() {
-		try {
-			//@formatter:off
-			String text = "?";
-			//@formatter:on		
-			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, compiler);
-			
-			Importance v = parser.fieldImportance();
-
-			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			assertEquals(Unimportant, v);
-		} catch (RecognitionException e) {
-			fail(e.toString());
-		}
+		Field f = parseField(text);
+		assertEquals("Age", f.name);
 	}
 
-	public void testInlineDefinition_Inline() {
-		try {
-			//@formatter:off
-			String text = "&";
-			//@formatter:on		
-			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, compiler);
-			
-			Reference v = parser.inlineDefinition();
-
-			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			assertEquals(Reference.Inline, v);
-		} catch (RecognitionException e) {
-			fail(e.toString());
-		}
-	}
-
-	public void testInlineDefinition_CASCADE() {
-		try {
-			//@formatter:off
-			String text = "%";
-			//@formatter:on		
-			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, compiler);
-			
-			Reference v = parser.inlineDefinition();
-
-			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			assertEquals(Cascade, v);
-		} catch (RecognitionException e) {
-			fail(e.toString());
-		}
+	public void testFieldDefinition_derived() {
+		Field f = parseField("!Age = 10;");
+		assertEquals("Age", f.name);
+		assertEquals(true, f.derived);
 	}
 	
+	public void testFieldDefinition_quicktype() {
+		Field f = parseField("	Max-Age;");
+		assertEquals("MaxAge", f.name);
+	}
+	
+	public void testFieldImportance_Importance() {
+		assertEquals(Key, parseField("!Name;").importance);
+		assertEquals(Core, parseField("*Name;").importance);
+		assertEquals(Require, parseField("#Name;").importance);
+		assertEquals(Unimportant, parseField("?Name;").importance);
+		assertEquals(Key, parseField("!Name;").importance);
+	}
+
+	private NebulaParser.arrayDefinition_return parseArray(String text) {
+		try {
+
+			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			NebulaParser parser = new NebulaParser(tokens, compiler);
+
+			NebulaParser.arrayDefinition_return v = parser.arrayDefinition();
+			assertEquals(0, parser.getNumberOfSyntaxErrors());
+
+			return v;
+		} catch (RecognitionException e) {
+			fail(e.toString());
+			return null;
+		}
+	}
+
 	public void testArrayDefinition() {
-		try {
-			//@formatter:off
-			String text = "[]";
-			//@formatter:on		
-			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, compiler);
-			
-			NebulaParser.arrayDefinition_return v = parser.arrayDefinition();
 
-			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			assertEquals(null, v.from);
-			assertEquals(null, v.to);
-		} catch (RecognitionException e) {
-			fail(e.toString());
-		}
-	}
-	public void testArrayDefinition_1() {
-		try {
-			//@formatter:off
-			String text = "[1]";
-			//@formatter:on		
-			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, compiler);
-			
-			NebulaParser.arrayDefinition_return v = parser.arrayDefinition();
+		NebulaParser.arrayDefinition_return v = parseArray("[]");
+		assertEquals(null, v.from);
+		assertEquals(null, v.to);
 
-			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			assertEquals("1", v.from);
-			assertEquals(null, v.to);
-		} catch (RecognitionException e) {
-			fail(e.toString());
-		}
-	}
-	public void testArrayDefinition_1_() {
-		try {
-			//@formatter:off
-			String text = "[1..]";
-			//@formatter:on		
-			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, compiler);
-			
-			NebulaParser.arrayDefinition_return v = parser.arrayDefinition();
+		v = parseArray("[1]");
+		assertEquals("1", v.from);
+		assertEquals(null, v.to);
 
-			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			assertEquals("1", v.from);
-			assertEquals(null, v.to);
-		} catch (RecognitionException e) {
-			fail(e.toString());
-		}
-	}
-	public void testArrayDefinition_1_10() {
-		try {
-			//@formatter:off
-			String text = "[1..10]";
-			//@formatter:on		
-			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, compiler);
-			
-			NebulaParser.arrayDefinition_return v = parser.arrayDefinition();
+		v = parseArray("[1..]");
+		assertEquals("1", v.from);
+		assertEquals(null, v.to);
 
-			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			assertEquals("1", v.from);
-			assertEquals("10", v.to);
-		} catch (RecognitionException e) {
-			fail(e.toString());
-		}
+		v = parseArray("[1..10]");
+		assertEquals("1", v.from);
+		assertEquals("10", v.to);
+
+		v = parseArray("[..10]");
+		assertEquals(null, v.from);
+		assertEquals("10", v.to);
 	}
 
-	public void testArrayDefinition_0_10() {
+	private InheritHashMap parseAttr(String text) {
 		try {
-			//@formatter:off
-			String text = "[..10]";
-			//@formatter:on		
-			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, compiler);
-			
-			NebulaParser.arrayDefinition_return v = parser.arrayDefinition();
-
-			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			assertEquals(null, v.from);
-			assertEquals("10", v.to);
-		} catch (RecognitionException e) {
-			fail(e.toString());
-		}
-	}
-
-	public void testAttrDefinition_String_X() {
-		try {
-			//@formatter:off
-			String text = "MaxLength(\"X\")";
-			//@formatter:on		
-			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, compiler);
-			
 			InheritHashMap attrs = new InheritHashMap();
-			parser.attrItemDefinition(attrs);
 
-			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			assertEquals("X", attrs.get("MaxLength"));
-		} catch (RecognitionException e) {
-			fail(e.toString());
-		}
-	}
-	
-	public void testAttrDefinition_BigDecimal_10() {
-		try {
-			//@formatter:off
-			String text = "MaxLength(1.1) ";
-			//@formatter:on		
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, compiler);
 
-			InheritHashMap attrs = new InheritHashMap();
 			parser.attrItemDefinition(attrs);
-
 			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			assertEquals(new BigDecimal("1.1"), attrs.get("MaxLength"));
+
+			return attrs;
 		} catch (RecognitionException e) {
 			fail(e.toString());
+			return null;
 		}
 	}
-	
-	
+
+	public void testAttr() {
+		InheritHashMap attrs;
+
+		attrs = parseAttr("MaxLength");
+		assertEquals("MaxLength", attrs.get("MaxLength"));
+
+		attrs = parseAttr("MaxLength(\"X\")");
+		assertEquals("X", attrs.get("MaxLength"));
+
+		attrs = parseAttr("MaxLength(1.1) ");
+		assertEquals(new BigDecimal("1.1"), attrs.get("MaxLength"));
+	}
+
 	public void testAliasDefinition() {
 		try {
 			//@formatter:off
@@ -357,21 +204,20 @@ public class NebulaParserTest extends TestCase {
 			NebulaParser parser = new NebulaParser(tokens, compiler);
 
 			Type type = parser.typeDefinition();
-			
+
 			assertEquals("Person", type.name);
 
 			assertEquals(1, type.fields.size());
-			assertEquals("Name", type.fields.get(0).name);	
-			assertEquals("员工", type.nameAlias.get("zh"));	
-			assertEquals(Require, type.fields.get(0).importance);	
-			assertEquals("姓名", type.fields.get(0).nameAlias.get("zh"));			
-			
+			assertEquals("Name", type.fields.get(0).name);
+			assertEquals("员工", type.nameAlias.get("zh"));
+			assertEquals(Require, type.fields.get(0).importance);
+			assertEquals("姓名", type.fields.get(0).nameAlias.get("zh"));
+
 		} catch (RecognitionException e) {
 			fail(e.toString());
 		}
 	}
-	
-	
+
 	public void testNestTypeAliasDefinition() {
 		try {
 			//@formatter:off
@@ -389,25 +235,26 @@ public class NebulaParserTest extends TestCase {
 			NebulaParser parser = new NebulaParser(tokens, compiler);
 
 			Type type = parser.typeDefinition();
-			
+
 			assertEquals("Person", type.name);
-			assertEquals("员工", type.nameAlias.get("zh"));	
+			assertEquals("员工", type.nameAlias.get("zh"));
 
 			assertEquals(2, type.fields.size());
-			int i=0;
-			assertEquals("Name", type.fields.get(i).name);	
-			assertEquals(Require, type.fields.get(i).importance);	
-			assertEquals("姓名", type.fields.get(i).nameAlias.get("zh"));			
+			int i = 0;
+			assertEquals("Name", type.fields.get(i).name);
+			assertEquals(Require, type.fields.get(i).importance);
+			assertEquals("姓名", type.fields.get(i).nameAlias.get("zh"));
 
-			i++;	
+			i++;
 			assertEquals("Detail", type.fields.get(i).name);
 			assertEquals(Inline, type.fields.get(i).refer);
-			assertEquals("明细", type.fields.get(i).nameAlias.get("zh"));	
-			assertEquals("明细", type.fields.get(i).type.nameAlias.get("zh"));			
+			assertEquals("明细", type.fields.get(i).nameAlias.get("zh"));
+			assertEquals("明细", type.fields.get(i).type.nameAlias.get("zh"));
 		} catch (RecognitionException e) {
 			fail(e.toString());
 		}
 	}
+
 	public void testProgramDefinition() {
 		try {
 			//@formatter:off
@@ -425,28 +272,27 @@ public class NebulaParserTest extends TestCase {
 			NebulaParser parser = new NebulaParser(tokens, compiler);
 
 			List<Type> types = parser.programDefinition();
-			
+
 			Type type = types.get(0);
-			
+
 			assertEquals("Person", type.name);
-			assertEquals("员工", type.nameAlias.get("zh"));	
+			assertEquals("员工", type.nameAlias.get("zh"));
 
 			assertEquals(2, type.fields.size());
-			int i=0;
-			assertEquals("Name", type.fields.get(i).name);	
-			assertEquals(Require, type.fields.get(i).importance);	
-			assertEquals("姓名", type.fields.get(i).nameAlias.get("zh"));			
+			int i = 0;
+			assertEquals("Name", type.fields.get(i).name);
+			assertEquals(Require, type.fields.get(i).importance);
+			assertEquals("姓名", type.fields.get(i).nameAlias.get("zh"));
 
-			i++;	
+			i++;
 			assertEquals("Detail", type.fields.get(i).name);
-			assertEquals("明细", type.fields.get(i).nameAlias.get("zh"));	
-			assertEquals("明细", type.fields.get(i).type.nameAlias.get("zh"));	
-			
+			assertEquals("明细", type.fields.get(i).nameAlias.get("zh"));
+			assertEquals("明细", type.fields.get(i).type.nameAlias.get("zh"));
 
 			type = types.get(1);
 			assertEquals("Person$Detail", type.name);
-			assertEquals("明细", type.nameAlias.get("zh"));	
-			
+			assertEquals("明细", type.nameAlias.get("zh"));
+
 		} catch (RecognitionException e) {
 			fail(e.toString());
 		}

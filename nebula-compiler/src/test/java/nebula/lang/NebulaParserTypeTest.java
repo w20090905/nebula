@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 
 import junit.framework.TestCase;
 
-public class NebulaParserAdvTest extends TestCase {
+public class NebulaParserTypeTest extends TestCase {
 	TypeLoaderForTest compiler;
 
 	@Override
@@ -22,7 +22,7 @@ public class NebulaParserAdvTest extends TestCase {
 
 	final StringBuilder sb = new StringBuilder();
 
-	public void test_basic_1() throws Exception {
+	public void test_buildin() throws Exception {
 		//@formatter:off
 		String text = "" +
 				"define FullName extends Name { " +
@@ -35,8 +35,26 @@ public class NebulaParserAdvTest extends TestCase {
 
 		assertEquals(0, type.fields.size());
 	}
+
+	public void test_buildin_extends() throws Exception {
+		//@formatter:off
+		String text = "" +
+				"@MaxLength(120)\n" +
+				"define Name extends String { \n" +
+				"};";
+		//@formatter:on
+
+		Type type = compiler.load(text);
+
+		assertEquals("Name", type.name);
+		assertEquals("String", type.superType.name);
+		assertEquals(TypeStandalone.Basic, type.standalone);
+
+		assertEquals(0, type.fields.size());
+		assertEquals(new Integer("120"), type.attrs.get("MaxLength"));
+	}
 	
-	public void test_tx_1() throws Exception {
+	public void test_Transaction_1() throws Exception {
 		//@formatter:off
 		String text = "" +
 				"tx Order { " +
@@ -300,38 +318,4 @@ public class NebulaParserAdvTest extends TestCase {
 		assertEquals(new BigDecimal("3.8"), type.attrs.get("Max"));
 	}
 	
-	public void test_quicktype_attr() throws Exception {
-		//@formatter:off
-		String text = "" +
-				"type Name { \n" +
-				"	Max-Age;" +
-				"};";
-		//@formatter:on
-
-		Type type = compiler.load(text);
-
-		assertEquals("Name", type.name);
-
-		assertEquals(1, type.fields.size());
-		int i = 0;
-		assertEquals("MaxAge", type.fields.get(i).name);
-		assertEquals("Age", type.fields.get(i).type.name);
-	}
-
-	public void test_buildin_extends() throws Exception {
-		//@formatter:off
-		String text = "" +
-				"	@MaxLength(120)\n" +
-				"define Name extends String { \n" +
-				"};";
-		//@formatter:on
-
-		Type type = compiler.load(text);
-
-		assertEquals("Name", type.name);
-		assertEquals("String", type.superType.name);
-
-		assertEquals(0, type.fields.size());
-		assertEquals(new Integer("120"), type.attrs.get("MaxLength"));
-	}
 }

@@ -132,13 +132,16 @@ fieldDefinition[Type resideType] returns[Field field]
           }
         ('|' aliasLiteral[field.nameAlias])?
         range=arrayDefinition
-        (INIT 
-        |)
         (
             type=ID { field.type = resolveType($type.text);}
             | nestedType = nestedTypeDefinition[resideType,$name.text,field.nameAlias] {field.type = nestedType;}
            | {if(field.type==null)field.type = resolveType(field.name);} 
         )
+        
+        (
+          ':=' defaultExpr=expr
+          | '=' transisentExpr=expr {field.derived = true;}
+        )?
         
         ';'{
             field.attrs.setDefaults(field.type.attrs);
