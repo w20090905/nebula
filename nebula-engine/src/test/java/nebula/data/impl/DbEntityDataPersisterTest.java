@@ -145,7 +145,7 @@ public class DbEntityDataPersisterTest extends TestCase {
 
 		assertEquals(false, v.isDirty());
 		assertEquals("wangshilian", v.get("Name"));
-		assertEquals("wangshilian", store.get("wangshilian").get("ID"));
+		assertEquals("wangshilian", store.get("wangshilian").get(Entity.PRIMARY_KEY));
 		
 		@SuppressWarnings("unchecked")
 		List<Entity> educationList = (List<Entity>)v.get("Education");
