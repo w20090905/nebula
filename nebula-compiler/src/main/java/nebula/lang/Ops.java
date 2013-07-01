@@ -643,10 +643,11 @@ public class Ops {
 		}
 
 		public void compile(final MethodVisitor mv) {
-			// compiles e1, e2, and adds an instruction to multiply the two
-			// values
-			// mv.visitLdcInsn(new Integer(0));
-			// mv.visitInsn(INE);//TODO
+			mv.visitVarInsn(ALOAD, 1);
+			mv.visitLdcInsn(this.name);
+			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "get", "(Ljava/lang/String;)Ljava/lang/Object;");
+			mv.visitTypeInsn(CHECKCAST, "java/lang/Integer");
+			mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Integer", "intValue", "()I");
 		}
 
 		@Override
