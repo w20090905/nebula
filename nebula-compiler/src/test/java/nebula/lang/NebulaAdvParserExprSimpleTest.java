@@ -111,9 +111,9 @@ public class NebulaAdvParserExprSimpleTest extends TestCase {
 	}
 
 	private Expr parse(String exprText) throws RecognitionException {
-		NebulaAdvLexer lexer = new NebulaAdvLexer(new ANTLRStringStream(exprText));
+		NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(exprText));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
-		NebulaAdvParser parser = new NebulaAdvParser(tokens, compiler);
+		NebulaParser parser = new NebulaParser(tokens, compiler);
 
 		return parser.expr();
 	}

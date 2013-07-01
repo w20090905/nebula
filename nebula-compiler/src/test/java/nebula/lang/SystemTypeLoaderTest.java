@@ -26,7 +26,6 @@ public class SystemTypeLoaderTest extends TestCase {
 		File tmp = new File("tmp");
 		root1 = new File(tmp,"test-nebula");
 		root2 = new File(tmp,"test-nebula2");
-		
 		if(tmp.exists()){
 			if(root1.exists()){
 				for(File f : root1.listFiles()){
@@ -54,6 +53,7 @@ public class SystemTypeLoaderTest extends TestCase {
 
 		String sample1 = "type Sample{Name;};";
 		File file1 = new File(root1,"Sample.nebula");
+		
 		Writer w1 = new FileWriter(file1);
 		w1.write(sample1);
 		w1.close();

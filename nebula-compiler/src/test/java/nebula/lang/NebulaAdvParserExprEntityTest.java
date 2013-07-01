@@ -114,9 +114,9 @@ public class NebulaAdvParserExprEntityTest extends TestCase {
 	}
 
 	private Expr parse(String exprText) throws RecognitionException {
-		NebulaAdvLexer lexer = new NebulaAdvLexer(new ANTLRStringStream(exprText));
+		NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(exprText));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
-		NebulaAdvParser parser = new NebulaAdvParser(tokens, compiler);
+		NebulaParser parser = new NebulaParser(tokens, compiler);
 
 		return parser.expr();
 	}
@@ -133,8 +133,10 @@ public class NebulaAdvParserExprEntityTest extends TestCase {
 
 		eqValue(data,"age", 10);
 		eqValue(data,"age + 10",age + 10);
+		eqValue(data,"age - 10",age - 10);
 		eqValue(data,"age * 10",age * 10);
 		eqValue(data,"age / 10",age / 10);
 		eqValue(data,"age % 10",age % 10);
+		eqValue(data,"age == 10",age == 10);
 	}
 }

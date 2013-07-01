@@ -18,6 +18,7 @@ public class Field {
     final Alias nameAlias;
     String displayName;
     Importance importance = Importance.Unimportant;
+    boolean isTransient = false;
 
     final Type resideType;
     boolean array = false;
@@ -122,4 +123,13 @@ public class Field {
 	public Alias getNameAlias() {
 		return nameAlias;
 	}
+
+	public boolean isTransient() {
+		return isTransient;
+	}
+
+	public void setTransient(boolean isTransient) {
+		this.isTransient = isTransient;
+	}
+	
 }

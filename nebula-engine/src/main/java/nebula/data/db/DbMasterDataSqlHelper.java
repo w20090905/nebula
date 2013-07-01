@@ -88,6 +88,8 @@ public class DbMasterDataSqlHelper {
 			List<Field> fl = type.getFields();
 			ArrayList<DatabaseColumn> listUserColumns = new ArrayList<DatabaseColumn>();
 			for (Field of : fl) {
+				if (of.isTransient()) continue;
+
 				if (!of.isArray()) {
 					switch (of.getRefer()) {
 					case ByVal: // Basic Type Field // Type A1
@@ -98,6 +100,8 @@ public class DbMasterDataSqlHelper {
 					case Inline: // inline object
 						subFieldSerializer = new ArrayList<DefaultFieldSerializer<?>>();
 						for (Field in1f : of.getType().getFields()) {
+							if (in1f.isTransient()) continue;// Skip when is Transient
+							
 							if (!in1f.isArray()) {//
 								switch (in1f.getRefer()) {
 								case ByVal: // Type B1

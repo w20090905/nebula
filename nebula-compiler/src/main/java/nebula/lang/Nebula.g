@@ -49,14 +49,8 @@ options {
         typesMap.put(type.name,type);  
         types.add(type);    
     }
-    
     protected void info(String str) {
     if (str.charAt(str.length() - 1) == '\n') {
-//      String txtTemps = "";
-//      for (TempVar v : tmps) {
-//        txtTemps += "" + (v.applied ? " " : v.reg) + " ";
-//      }
-//      str = "|" + txtTemps + "|" + "\t\t" + str;
     ;
     }
     System.out.print(str);
@@ -243,8 +237,90 @@ flexID returns[String text]
       | ID  {text = $ID.text;}
     ;
 
+statement:
+  expr ';'
+  ;
+  
+expr returns [Expr v]
+    :   e=logicalORExpr {v = $e.v;}
+;
 
+logicalORExpr returns [Expr v]
+    :   a=logicalAndExpr {v = a;}
+        (   '||' b=logicalAndExpr  {v=Ops.opOr(v,b);}
+        |   'or' b=logicalAndExpr  {v=Ops.opOr(v,b);}
+        )*
+    ;
 
+logicalAndExpr returns [Expr v]
+    :   a=equalityExpr {v = a;}
+        (   '&&' b=equalityExpr  {v=Ops.opAnd(v,b);}
+        |   'and' b=equalityExpr  {v=Ops.opAnd(v,b);}
+        )*
+    ;
+
+equalityExpr returns [Expr v]
+    :   a=logicalNotExpr {v = a;}
+        (   '==' b=logicalNotExpr  {v=Ops.opEqualTo(v,b);}
+          | '!=' b=logicalNotExpr  {v=Ops.opNotEqualTo(v,b);}
+        )*
+    ;
+
+logicalNotExpr returns [Expr v]
+    :   '!' b=relationalExpr {v=Ops.opNot(b);} 
+        | 'not'  b=relationalExpr {v=Ops.opNot(b);} 
+        | b=relationalExpr {v=b;} 
+    ;
+    
+relationalExpr returns [Expr v]
+    :   a=additiveExpr {v = a;}
+        (   '>=' b=additiveExpr  {v=Ops.opGreaterThanOrEqualTo(v,b);}
+        |   '>' c=additiveExpr  {v=Ops.opGreaterThan(v,c);}
+        |   '<=' c=additiveExpr  {v=Ops.opLessThanOrEqualTo(v,c);}
+        |   '<' c=additiveExpr  {v=Ops.opLessThan(v,c);}
+        )*
+    ;
+    
+additiveExpr returns [Expr v]
+    :   a=multiplicativeExpr {v = a;}
+        (   '+' b=multiplicativeExpr  {v=Ops.opAdd(v,b);}
+        |   '-' c=multiplicativeExpr  {v=Ops.opSub(v,c);}
+        )*
+    ;
+multiplicativeExpr returns [Expr v]
+    :   a=postfixExpr {v=a;} 
+        (   '*' b=postfixExpr {v=Ops.opMulti(v,b);} 
+          | '/' b=postfixExpr {v=Ops.opDiv(v,b);} 
+          | '%' b=postfixExpr {v=Ops.opRemainder(v,b);} 
+        )*
+    ;
+
+unary returns [Expr v]
+    :   '++' b=postfixExpr {v=Ops.opIncrement(b);} 
+        | '+'  b=postfixExpr {v=Ops.opPositive(b);} 
+        | '--'  b=postfixExpr {v=Ops.opDecrement(b);} 
+        | '-'  b=postfixExpr {v=Ops.opNegates(b);} 
+        | b=postfixExpr {v=b;} 
+    ;
+
+postfixExpr returns [Expr v]:
+    a=primaryExpr  {v=a;} 
+    (
+      '.' ID {v = Ops.opFieldOf(v,$ID.text);}
+    )* 
+;
+
+primaryExpr returns [Expr v]
+  :  a=constExpr  {v=a;} 
+  | ID  {v=Ops.opVar($ID.text);} 
+  | '(' expr ')'   {v = $expr.v;}
+;
+
+constExpr returns [Expr v]
+    : StringLiteral {v=Ops.opCst($StringLiteral.text.substring(1,$StringLiteral.text.length()-1));}
+      | decimal {v=Ops.opCst($decimal.text);}
+      | INT {v=Ops.opCst($INT.text);}  
+    ;
 
 // *************   START  :  BASIC   *************
 
