@@ -1,4 +1,4 @@
-grammar NebulaScan;
+grammar NebulaDef;
 
 options {
   language = Java;
@@ -28,7 +28,7 @@ options {
     InheritHashMap attrsBuffer = new InheritHashMap();
     
     TypeLoader loader;
-    public NebulaScanParser(TokenStream input,TypeLoader loader) {
+    public NebulaDefParser(TokenStream input,TypeLoader loader) {
         this(input);
         this.loader = loader;
     }
