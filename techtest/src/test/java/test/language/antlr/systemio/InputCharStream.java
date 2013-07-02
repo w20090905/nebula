@@ -7,7 +7,10 @@ import org.antlr.runtime.CharStream;
 
 
 /*
+ * 扩展Antlr可以直接接受控制台输入
+ * 
  * 改进Input Char Stream,默认使用8K缓冲区。也就是说最大的语法单元为8K；
+ * 
  * pos使用了int型，导致最大可处理2G数据。
  */
 public class InputCharStream implements CharStream {
