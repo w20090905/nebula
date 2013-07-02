@@ -1,4 +1,4 @@
-package test.db.h2;
+ package test.db.h2;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import java.sql.Statement;
 public class TestH2 {
 	public static void main(String[] a) throws Exception {
 		Class.forName("org.h2.Driver");
-		Connection conn = DriverManager.getConnection("jdbc:h2:test", "sa", "");
+		Connection conn = DriverManager.getConnection("jdbc:h2:db/test", "sa", "");
 		Statement s;
 		long start=0,end=0;
 		
