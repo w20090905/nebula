@@ -1,4 +1,4 @@
-package test.java.bytecode;
+package test.java.classfile;
 
 import java.io.FileInputStream;
 import java.io.InputStream;

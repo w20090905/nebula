@@ -1,4 +1,4 @@
-package test.guice;
+package test.DependencyInjection.guice;
 
 
 public class TOImp implements TO<String> {

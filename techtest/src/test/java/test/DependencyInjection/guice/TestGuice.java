@@ -1,4 +1,4 @@
-package test.guice;
+package test.DependencyInjection.guice;
 
 
 import com.google.inject.AbstractModule;

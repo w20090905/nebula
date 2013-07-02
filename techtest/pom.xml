@@ -124,11 +124,23 @@
 			<artifactId>guava-collections</artifactId>
 			<version>r03</version>
 		</dependency>
-		
-  	<dependency>
-  		<groupId>com.h2database</groupId>
-  		<artifactId>h2</artifactId>
-  		<version>1.3.171</version>
-  	</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.3.171</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.squareup.dagger</groupId>
+			<artifactId>dagger</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.dagger</groupId>
+			<artifactId>dagger-compiler</artifactId>
+			<version>1.0.0</version>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 </project>

@@ -1,4 +1,4 @@
-package test.guice;
+package test.DependencyInjection.guice;
 
 
 public class TOImpA implements TO<Integer> {
