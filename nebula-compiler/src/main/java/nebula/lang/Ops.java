@@ -1,117 +1,148 @@
 package nebula.lang;
 
+import java.math.BigDecimal;
+
+import nebula.data.Entity;
+
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 public class Ops {
-	static public Expr opAnd(Expr e1, Expr e2) {
+	static EntityExpressionComplier compiler = new EntityExpressionComplier();
+
+	static public <T> EntityExpression compile(Expr<T> expr, Type type) {
+		return compiler.compile(expr, type);
+	}
+
+	static public Expr<Boolean> opAnd(Expr<Boolean> e1, Expr<Boolean> e2) {
 		return new And(e1, e2);
 	}
-	
-	static public Expr opNot(Expr e1) {
+
+	static public Expr<Boolean> opNot(Expr<Boolean> e1) {
 		return new Not(e1);
 	}
 
-	static public Expr opOr(Expr e1, Expr e2) {
+	static public Expr<Boolean> opOr(Expr<Boolean> e1, Expr<Boolean> e2) {
 		return new Or(e1, e2);
 	}
 
-	static public Expr opNotEqualTo(Expr e1, Expr e2) {
-		return new NotEqualTo(e1, e2);
+	static public <V extends Comparable<V>> Expr<Boolean> opNotEqualTo(Expr<V> e1, Expr<V> e2) {
+		return new NotEqualTo<V>(e1, e2);
 	}
 
-	static public Expr opEqualTo(Expr e1, Expr e2) {
-		return new EqualTo(e1, e2);
+	static public <V extends Comparable<V>> Expr<Boolean> opEqualTo(Expr<V> e1, Expr<V> e2) {
+		return new EqualTo<V>(e1, e2);
 	}
 
-	static public Expr opGreaterThan(Expr e1, Expr e2) {
-		return new GreaterThan(e1, e2);
+	static public <V extends Comparable<V>> Expr<Boolean> opGreaterThan(Expr<V> e1, Expr<V> e2) {
+		return new GreaterThan<V>(e1, e2);
 	}
 
-	static public Expr opGreaterThanOrEqualTo(Expr e1, Expr e2) {
-		return new GreaterThanOrEqualTo(e1, e2);
+	static public <V extends Comparable<V>> Expr<Boolean> opGreaterThanOrEqualTo(Expr<V> e1, Expr<V> e2) {
+		return new GreaterThanOrEqualTo<V>(e1, e2);
 	}
 
-	static public Expr opLessThan(Expr e1, Expr e2) {
-		return new LessThan(e1, e2);
+	static public <V extends Comparable<V>> Expr<Boolean> opLessThan(Expr<V> e1, Expr<V> e2) {
+		return new LessThan<V>(e1, e2);
 	}
 
-	static public Expr opLessThanOrEqualTo(Expr e1, Expr e2) {
-		return new LessThanOrEqualTo(e1, e2);
+	static public <V extends Comparable<V>> Expr<Boolean> opLessThanOrEqualTo(Expr<V> e1, Expr<V> e2) {
+		return new LessThanOrEqualTo<V>(e1, e2);
 	}
 
-	static public Expr opAdd(Expr e1, Expr e2) {
+	static public Expr<Integer> opAdd(Expr<Integer> e1, Expr<Integer> e2) {
 		return new Add(e1, e2);
 	}
 
-	static public Expr opSub(Expr e1, Expr e2) {
+	static public Expr<Integer> opSub(Expr<Integer> e1, Expr<Integer> e2) {
 		return new Sub(e1, e2);
 	}
 
-	static public Expr opMulti(Expr e1, Expr e2) {
+	static public Expr<Integer> opMulti(Expr<Integer> e1, Expr<Integer> e2) {
 		return new Multi(e1, e2);
 	}
 
-	static public Expr opDiv(Expr e1, Expr e2) {
+	static public Expr<Integer> opDiv(Expr<Integer> e1, Expr<Integer> e2) {
 		return new Div(e1, e2);
 	}
 
-	static public Expr opRemainder(Expr e1, Expr e2) {
+	static public Expr<Integer> opRemainder(Expr<Integer> e1, Expr<Integer> e2) {
 		return new Remainder(e1, e2);
 	}
 
-	static public Expr opIncrement(Expr e1) {
+	static public Expr<Integer> opIncrement(Expr<Integer> e1) {
 		return new Increment(e1);
 	}
 
-	static public Expr opDecrement(Expr e1) {
+	static public Expr<Integer> opDecrement(Expr<Integer> e1) {
 		return new Decrement(e1);
 	}
 
-	static public Expr opPositive(Expr e1) {
+	static public Expr<Integer> opPositive(Expr<Integer> e1) {
 		return new Positive(e1);
 	}
 
-	static public Expr opNegates(Expr e1) {
+	static public Expr<Integer> opNegates(Expr<Integer> e1) {
 		return new Negates(e1);
 	}
 
-	static public Expr opCst(String e1) {
-		return new Cst(e1);
+	static public Expr<Integer> opIntegerCst(String value) {
+		return new IntegerCst(value);
 	}
 
-	static public Expr opVar(String e1) {
-		return new Var(e1);
+	static public Expr<BigDecimal> opDecimalCst(String value) {
+		return new DecimalCst(value);
 	}
 
-	static public Expr opFieldOf(Expr e1, String name) {
-		return new FieldOf(e1, name);
+	static public Expr<String> opStringCst(String value) {
+		return new StringCst(value);
+	}
+	
+	static public Expr<DateTime> opTimestampCst(String value) {
+		return new TimestampCst(value);
 	}
 
-	static abstract class Expression implements Opcodes, Expr {
+	static public Expr<DateTime> opDatetimeCst(String value) {
+		return new DatetimeCst(value);
 	}
 
-	static abstract class Unary extends Expression {
+	static public Expr<DateTime> opDateCst(String value) {
+		return new DateCst(value);
 	}
 
-	static abstract class BinaryExp extends Expression {
-		Expr e1;
-		Expr e2;
+	static public Expr<DateTime> opTimeCst(String value) {
+		return new TimeCst(value);
+	}
 
-		BinaryExp(final Expr e1, final Expr e2) {
-			this.e1 = e1;
-			this.e2 = e2;
-		}
+	// TODO
+	static public Expr<Integer> opVar(String e1) {
+		return new IntegerVar(e1);
+	}
+
+	static public Expr<Integer> opFieldOf(Expr<Entity> e1, String name) {
+		return new IntegerFieldOf(e1, name);
+	}
+
+	static abstract class Expression<T> implements Opcodes, Expr<T> {
+	}
+
+	static abstract class LogicExpr extends Expression<Boolean> {
 	}
 
 	/**
 	 * A logical "and" expression.
 	 */
-	static class And extends BinaryExp {
+	static class And extends LogicExpr {
+		final Expr<Boolean> e1;
+		final Expr<Boolean> e2;
 
-		And(final Expr e1, final Expr e2) {
-			super(e1, e2);
+		public And(Expr<Boolean> e1, Expr<Boolean> e2) {
+			this.e1 = e1;
+			this.e2 = e2;
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -130,8 +161,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public Boolean exec() {
+			return e1.exec() && e2.exec();
 		}
 
 		@Override
@@ -143,39 +174,41 @@ public class Ops {
 	/**
 	 * A logical "not" expression.
 	 */
-	static class Not extends Unary {
-		Expr e;
+	static class Not extends LogicExpr {
+		final Expr<Boolean> e1;
 
-		Not(final Expr e) {
-			this.e = e;
+		Not(Expr<Boolean> e1) {
+			this.e1 = e1;
 		}
 
 		public void compile(final MethodVisitor mv) {
 			// computes !e1 by evaluating 1 - e1
 			mv.visitLdcInsn(new Integer(1));
-			e.compile(mv);
+			e1.compile(mv);
 			mv.visitInsn(ISUB);
 		}
 
 		@Override
-		public Object exec() {
-			// TODO Auto-generated method stub
-			return null;
+		public Boolean exec() {
+			return !e1.exec();
 		}
 
 		@Override
 		public String toString() {
-			return "(!" + e.toString() + ")";
+			return "(!" + e1.toString() + ")";
 		}
 	}
 
 	/**
 	 * A logical "or" expression.
 	 */
-	static class Or extends BinaryExp {
+	static class Or extends LogicExpr {
+		final Expr<Boolean> e1;
+		final Expr<Boolean> e2;
 
-		Or(final Expr e1, final Expr e2) {
-			super(e1, e2);
+		public Or(Expr<Boolean> e1, Expr<Boolean> e2) {
+			this.e1 = e1;
+			this.e2 = e2;
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -194,8 +227,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public Boolean exec() {
+			return e1.exec() || e2.exec();
 		}
 
 		@Override
@@ -204,9 +237,16 @@ public class Ops {
 		}
 	}
 
-	static class NotEqualTo extends ConditionalOP {
-		NotEqualTo(Expr e1, Expr e2) {
-			super(e1, e2);
+	abstract static class CompareExpr<V extends Comparable<V>> extends Expression<Boolean> {
+	}
+
+	static class NotEqualTo<V extends Comparable<V>> extends CompareExpr<V> {
+		final Expr<V> e1;
+		final Expr<V> e2;
+
+		NotEqualTo(Expr<V> e1, Expr<V> e2) {
+			this.e1 = e1;
+			this.e2 = e2;
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -225,8 +265,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public Boolean exec() {
+			return e1.exec().compareTo(e2.exec()) != 0;
 		}
 
 		@Override
@@ -235,9 +275,13 @@ public class Ops {
 		}
 	}
 
-	static class EqualTo extends ConditionalOP {
-		EqualTo(Expr e1, Expr e2) {
-			super(e1, e2);
+	static class EqualTo<V extends Comparable<V>> extends CompareExpr<V> {
+		final Expr<V> e1;
+		final Expr<V> e2;
+
+		EqualTo(Expr<V> e1, Expr<V> e2) {
+			this.e1 = e1;
+			this.e2 = e2;
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -256,8 +300,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public Boolean exec() {
+			return e1.exec().compareTo(e2.exec()) == 0;
 		}
 
 		@Override
@@ -266,24 +310,16 @@ public class Ops {
 		}
 	}
 
-	abstract static class ConditionalOP extends BinaryExp {
-		ConditionalOP(Expr e1, Expr e2) {
-			super(e1, e2);
-		}
-
-		@Override
-		public Object exec() {
-			return null;
-		}
-	}
-
 	/**
 	 * A "greater than" expression.
 	 */
-	static class GreaterThan extends BinaryExp {
+	static class GreaterThan<V extends Comparable<V>> extends CompareExpr<V> {
+		final Expr<V> e1;
+		final Expr<V> e2;
 
-		GreaterThan(final Expr e1, final Expr e2) {
-			super(e1, e2);
+		GreaterThan(Expr<V> e1, Expr<V> e2) {
+			this.e1 = e1;
+			this.e2 = e2;
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -302,8 +338,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return (Integer) e1.exec() > (Integer) e2.exec();
+		public Boolean exec() {
+			return e1.exec().compareTo(e2.exec()) > 0;
 		}
 
 		@Override
@@ -312,9 +348,13 @@ public class Ops {
 		}
 	}
 
-	static class GreaterThanOrEqualTo extends ConditionalOP {
-		GreaterThanOrEqualTo(Expr e1, Expr e2) {
-			super(e1, e2);
+	static class GreaterThanOrEqualTo<V extends Comparable<V>> extends CompareExpr<V> {
+		final Expr<V> e1;
+		final Expr<V> e2;
+
+		GreaterThanOrEqualTo(Expr<V> e1, Expr<V> e2) {
+			this.e1 = e1;
+			this.e2 = e2;
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -333,8 +373,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public Boolean exec() {
+			return e1.exec().compareTo(e2.exec()) >= 0;
 		}
 
 		@Override
@@ -343,9 +383,13 @@ public class Ops {
 		}
 	}
 
-	static class LessThan extends ConditionalOP {
-		LessThan(Expr e1, Expr e2) {
-			super(e1, e2);
+	static class LessThan<V extends Comparable<V>> extends CompareExpr<V> {
+		final Expr<V> e1;
+		final Expr<V> e2;
+
+		LessThan(Expr<V> e1, Expr<V> e2) {
+			this.e1 = e1;
+			this.e2 = e2;
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -365,8 +409,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public Boolean exec() {
+			return e1.exec().compareTo(e2.exec()) < 0;
 		}
 
 		@Override
@@ -375,9 +419,13 @@ public class Ops {
 		}
 	}
 
-	static class LessThanOrEqualTo extends ConditionalOP {
-		LessThanOrEqualTo(Expr e1, Expr e2) {
-			super(e1, e2);
+	static class LessThanOrEqualTo<V extends Comparable<V>> extends CompareExpr<V> {
+		final Expr<V> e1;
+		final Expr<V> e2;
+
+		LessThanOrEqualTo(Expr<V> e1, Expr<V> e2) {
+			this.e1 = e1;
+			this.e2 = e2;
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -399,8 +447,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public Boolean exec() {
+			return e1.exec().compareTo(e2.exec()) <= 0;
 		}
 
 		@Override
@@ -409,13 +457,20 @@ public class Ops {
 		}
 	}
 
+	static abstract class IntegerExpr extends Expression<Integer> {
+
+	}
+
 	/**
 	 * An addition expression.
 	 */
-	static class Add extends BinaryExp {
+	static class Add extends IntegerExpr {
+		final Expr<Integer> e1;
+		final Expr<Integer> e2;
 
-		Add(final Expr e1, final Expr e2) {
-			super(e1, e2);
+		Add(final Expr<Integer> e1, final Expr<Integer> e2) {
+			this.e1 = e1;
+			this.e2 = e2;
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -426,8 +481,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public Integer exec() {
+			return e1.exec() + e2.exec();
 		}
 
 		@Override
@@ -436,9 +491,13 @@ public class Ops {
 		}
 	}
 
-	static class Sub extends BinaryExp {
-		Sub(Expr e1, Expr e2) {
-			super(e1, e2);
+	static class Sub extends IntegerExpr {
+		final Expr<Integer> e1;
+		final Expr<Integer> e2;
+
+		Sub(final Expr<Integer> e1, final Expr<Integer> e2) {
+			this.e1 = e1;
+			this.e2 = e2;
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -449,8 +508,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public Integer exec() {
+			return e1.exec() - e2.exec();
 		}
 
 		@Override
@@ -462,10 +521,13 @@ public class Ops {
 	/**
 	 * A multiplication expression.
 	 */
-	static class Multi extends BinaryExp {
+	static class Multi extends IntegerExpr {
+		final Expr<Integer> e1;
+		final Expr<Integer> e2;
 
-		Multi(final Expr e1, final Expr e2) {
-			super(e1, e2);
+		Multi(final Expr<Integer> e1, final Expr<Integer> e2) {
+			this.e1 = e1;
+			this.e2 = e2;
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -477,9 +539,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			// TODO Auto-generated method stub
-			return null;
+		public Integer exec() {
+			return e1.exec() * e2.exec();
 		}
 
 		@Override
@@ -488,9 +549,13 @@ public class Ops {
 		}
 	}
 
-	static class Div extends BinaryExp {
-		Div(Expr e1, Expr e2) {
-			super(e1, e2);
+	static class Div extends IntegerExpr {
+		final Expr<Integer> e1;
+		final Expr<Integer> e2;
+
+		Div(final Expr<Integer> e1, final Expr<Integer> e2) {
+			this.e1 = e1;
+			this.e2 = e2;
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -502,8 +567,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public Integer exec() {
+			return e1.exec() / e2.exec();
 		}
 
 		@Override
@@ -512,9 +577,13 @@ public class Ops {
 		}
 	}
 
-	static class Remainder extends BinaryExp {
-		Remainder(Expr e1, Expr e2) {
-			super(e1, e2);
+	static class Remainder extends IntegerExpr {
+		final Expr<Integer> e1;
+		final Expr<Integer> e2;
+
+		Remainder(final Expr<Integer> e1, final Expr<Integer> e2) {
+			this.e1 = e1;
+			this.e2 = e2;
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -526,8 +595,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public Integer exec() {
+			return e1.exec() % e2.exec();
 		}
 
 		@Override
@@ -536,10 +605,10 @@ public class Ops {
 		}
 	}
 
-	static class Increment extends Unary {
-		Expr e1;
+	static class Increment extends IntegerExpr {
+		Expr<Integer> e1;
 
-		Increment(final Expr e1) {
+		Increment(Expr<Integer> e1) {
 			this.e1 = e1;
 		}
 
@@ -552,8 +621,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public Integer exec() {
+			return e1.exec() + 1;
 		}
 
 		@Override
@@ -562,10 +631,10 @@ public class Ops {
 		}
 	}
 
-	static class Decrement extends Unary {
-		Expr e1;
+	static class Decrement extends IntegerExpr {
+		Expr<Integer> e1;
 
-		Decrement(Expr e1) {
+		Decrement(Expr<Integer> e1) {
 			this.e1 = e1;
 		}
 
@@ -578,8 +647,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public Integer exec() {
+			return e1.exec() - 1;
 		}
 
 		@Override
@@ -588,10 +657,10 @@ public class Ops {
 		}
 	}
 
-	static class Positive extends Unary {
-		Expr e1;
+	static class Positive extends IntegerExpr {
+		Expr<Integer> e1;
 
-		Positive(Expr e1) {
+		Positive(Expr<Integer> e1) {
 			this.e1 = e1;
 		}
 
@@ -600,8 +669,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public Integer exec() {
+			return e1.exec();
 		}
 
 		@Override
@@ -610,10 +679,10 @@ public class Ops {
 		}
 	}
 
-	static class Negates extends Unary {
-		Expr e1;
+	static class Negates extends IntegerExpr {
+		Expr<Integer> e1;
 
-		Negates(Expr e1) {
+		Negates(Expr<Integer> e1) {
 			this.e1 = e1;
 		}
 
@@ -625,8 +694,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public Integer exec() {
+			return -e1.exec();
 		}
 
 		@Override
@@ -635,10 +704,10 @@ public class Ops {
 		}
 	}
 
-	static class Var extends Expression {
+	static class IntegerVar extends IntegerExpr {
 		final String name;
 
-		Var(String name) {
+		IntegerVar(String name) {
 			this.name = name;
 		}
 
@@ -651,8 +720,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public Integer exec() {
+			return null;// TODO
 		}
 
 		@Override
@@ -661,22 +730,90 @@ public class Ops {
 		}
 	}
 
-	static class Cst extends Expression {
-		final int value;
+	static class StringCst extends Expression<String> {
+		final String value;
 
-		Cst(String value) {
-			this.value = Integer.parseInt(value);
+		StringCst(String value) {
+			this.value = value;
 		}
 
 		public void compile(final MethodVisitor mv) {
-			// compiles e1, e2, and adds an instruction to multiply the two
-			// values
+			// TODO String
 			mv.visitLdcInsn(value);
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public String exec() {
+			return this.value;
+		}
+
+		@Override
+		public String toString() {
+			return value;
+		}
+	}
+
+	static class DecimalCst extends Expression<BigDecimal> {
+		final BigDecimal value;
+
+		DecimalCst(String value) {
+			this.value = new BigDecimal(value);
+		}
+
+		public void compile(final MethodVisitor mv) {
+			// TODO BigDecimal
+			mv.visitLdcInsn(value);
+		}
+
+		@Override
+		public BigDecimal exec() {
+			return this.value;
+		}
+
+		@Override
+		public String toString() {
+			return value.toString();
+		}
+	}
+
+	static class IntegerCst extends IntegerExpr {
+		final int value;
+
+		IntegerCst(String text) {
+			this.value = Integer.parseInt(text);
+		}
+
+		public void compile(final MethodVisitor mv) {
+			mv.visitLdcInsn(value);
+		}
+
+		@Override
+		public Integer exec() {
+			return this.value;
+		}
+
+		@Override
+		public String toString() {
+			return String.valueOf(value);
+		}
+	}
+	
+
+	static class TimestampCst extends Expression<DateTime> {
+		static final DateTimeFormatter formater = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS");
+		final DateTime value;
+
+		TimestampCst(String text) {
+			this.value =formater.parseDateTime(text);
+		}
+
+		public void compile(final MethodVisitor mv) {
+			mv.visitLdcInsn(value);//TODO
+		}
+
+		@Override
+		public DateTime exec() {
+			return this.value;
 		}
 
 		@Override
@@ -685,11 +822,86 @@ public class Ops {
 		}
 	}
 
-	static class FieldOf implements Expr {
-		final Expr e1;
+
+	static class DatetimeCst extends Expression<DateTime> {
+		static final DateTimeFormatter formater = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+		final DateTime value;
+
+		DatetimeCst(String text) {
+			this.value =formater.parseDateTime(text);
+		}
+
+		public void compile(final MethodVisitor mv) {
+			mv.visitLdcInsn(value);//TODO
+		}
+
+		@Override
+		public DateTime exec() {
+			return this.value;
+		}
+
+		@Override
+		public String toString() {
+			return String.valueOf(value);
+		}
+	}
+	
+
+	static class DateCst extends Expression<DateTime> {
+		static final DateTimeFormatter formater = DateTimeFormat.forPattern("yyyy-MM-dd");
+		final DateTime value;
+
+		DateCst(String text) {
+			this.value =formater.parseDateTime(text);
+		}
+
+		public void compile(final MethodVisitor mv) {
+			mv.visitLdcInsn(value);//TODO
+		}
+
+		@Override
+		public DateTime exec() {
+			return this.value;
+		}
+
+		@Override
+		public String toString() {
+			return String.valueOf(value);
+		}
+	}
+	
+
+	static class TimeCst extends Expression<DateTime> {
+		static final DateTimeFormatter formater = DateTimeFormat.forPattern("HH:mm:ss");
+		final DateTime value;
+
+		TimeCst(String text) {
+			this.value =formater.parseDateTime(text);
+		}
+
+		public void compile(final MethodVisitor mv) {
+			mv.visitLdcInsn(value);//TODO
+		}
+
+		@Override
+		public DateTime exec() {
+			return this.value;
+		}
+
+		@Override
+		public String toString() {
+			return String.valueOf(value);
+		}
+	}
+	
+
+	
+
+	static class IntegerFieldOf extends IntegerExpr {
+		final Expr<Entity> e1;
 		final String name;
 
-		FieldOf(Expr e1, String name) {
+		IntegerFieldOf(Expr<Entity> e1, String name) {
 			this.e1 = e1;
 			this.name = name;
 		}
@@ -702,8 +914,8 @@ public class Ops {
 		}
 
 		@Override
-		public Object exec() {
-			return null;
+		public Integer exec() {
+			return (Integer) e1.exec().get(name);
 		}
 
 		@Override

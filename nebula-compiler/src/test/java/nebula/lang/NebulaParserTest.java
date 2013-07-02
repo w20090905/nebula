@@ -12,9 +12,13 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import nebula.data.Entity;
+import nebula.data.impl.EditableEntity;
+
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
+import org.joda.time.format.DateTimeFormat;
 
 import util.InheritHashMap;
 
@@ -101,16 +105,29 @@ public class NebulaParserTest extends TestCase {
 	}
 
 	public void testFieldDefinition_default() {
-		String text = "!Age := 10;";
+		Field f = parseField("!Age := 1014 * 1024;");
+		assertEquals(1014 * 1024, f.defaultValue);
 
-		Field f = parseField(text);
-		assertEquals("Age", f.name);
+		f = parseField("!Age := \"test\";");
+		assertEquals("test", f.defaultValue);
+
+		f = parseField("!Age := 1.3;");
+		assertEquals(new BigDecimal("1.3"), f.defaultValue);
+
+		f = parseField("!Age := 4 > 5;");
+		assertEquals(false, f.defaultValue);
 	}
 
 	public void testFieldDefinition_derived() {
-		Field f = parseField("!Age = 10;");
-		assertEquals("Age", f.name);
+		Field f = parseField("!MyAge Age = Age + 10 * 1000;");
+		assertEquals("MyAge", f.name);
 		assertEquals(true, f.derived);
+		EntityExpression expr = f.derivedExpr;
+		Entity e = new EditableEntity();
+		int Age = 15;
+		e.put("Age", Age);
+
+		assertEquals(Age + 10 * 1000, expr.eval(e));
 	}
 
 	public void testFieldDefinition_quicktype() {
@@ -214,6 +231,36 @@ public class NebulaParserTest extends TestCase {
 		assertEquals("员工", type.nameAlias.get("zh"));
 		assertEquals(Require, type.fields.get(0).importance);
 		assertEquals("姓名", type.fields.get(0).nameAlias.get("zh"));
+	}
+
+	private Expr<?> parseCst(String text) {
+		try {
+
+			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			NebulaParser parser = new NebulaParser(tokens, compiler);
+
+			Expr<?> expr = parser.constExpr();
+			assertEquals(0, parser.getNumberOfSyntaxErrors());
+
+			return expr;
+		} catch (RecognitionException e) {
+			fail(e.toString());
+			return null;
+		}
+	}
+
+	public void testConstExpr() {
+		assertEquals(1234, parseCst("1234").exec());
+		assertEquals(new BigDecimal("1.1"), parseCst("1.1").exec());
+		assertEquals("1.1", parseCst("\"1.1\"").exec());
+
+		assertEquals(DateTimeFormat.forPattern("HH:mm:ss").parseDateTime("12:23:00"), parseCst("12:23:00").exec());
+		assertEquals(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS").parseDateTime("2006-11-23 12:23:00.234"),
+				parseCst("2006-11-23 12:23:00.234").exec());
+		assertEquals(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss").parseDateTime("2006-11-23 12:23:00"),
+				parseCst("2006-11-23 12:23:00").exec());
+		assertEquals(DateTimeFormat.forPattern("yyyy-MM-dd").parseDateTime("2006-11-23"), parseCst("2006-11-23").exec());
 	}
 
 	public void testNestTypeAliasDefinition() {

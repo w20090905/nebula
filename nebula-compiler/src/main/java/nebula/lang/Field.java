@@ -19,11 +19,15 @@ public class Field {
     String displayName;
     Importance importance = Importance.Unimportant;
     boolean derived = false;
+    EntityExpression derivedExpr;
+    String derivedExprText;
+    Object defaultValue;
 
     final Type resideType;
     boolean array = false;
     int rangeFrom = 0;
     int rangeTo = Integer.MAX_VALUE;
+    
     
     Type type;
     String _typeName;
@@ -131,5 +135,20 @@ public class Field {
 	public void setDerived(boolean derived) {
 		this.derived = derived;
 	}
-	
+
+	public EntityExpression getValueExpr() {
+		return derivedExpr;
+	}
+
+	public void setValueExpr(EntityExpression valueExpr) {
+		this.derivedExpr = valueExpr;
+	}
+
+	public String getValueExprText() {
+		return derivedExprText;
+	}
+
+	public void setValueExprText(String valueExprText) {
+		this.derivedExprText = valueExprText;
+	}	
 }

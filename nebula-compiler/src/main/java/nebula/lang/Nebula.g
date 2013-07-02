@@ -139,8 +139,8 @@ fieldDefinition[Type resideType] returns[Field field]
         )
         
         (
-          ':=' defaultExpr=expr
-          | '=' transisentExpr=expr {field.derived = true;}
+          ':=' defaultExpr=expr {field.defaultValue = defaultExpr.exec();}
+          | '=' transisentExpr=expr {field.derived = true;field.derivedExpr = Ops.compile(transisentExpr,resideType);}
         )?
         
         ';'{
@@ -320,9 +320,13 @@ primaryExpr returns [Expr v]
 ;
 
 constExpr returns [Expr v]
-    : StringLiteral {v=Ops.opCst($StringLiteral.text.substring(1,$StringLiteral.text.length()-1));}
-      | decimal {v=Ops.opCst($decimal.text);}
-      | INT {v=Ops.opCst($INT.text);}  
+    : StringLiteral {v=Ops.opStringCst($StringLiteral.text.substring(1,$StringLiteral.text.length()-1));}
+      | decimal {v=Ops.opDecimalCst($decimal.text);}
+      | INT {v=Ops.opIntegerCst($INT.text);}  
+      | TimestampLiteral {v=Ops.opTimestampCst($TimestampLiteral.text);}  
+      | DateTimeLiteral {v=Ops.opDatetimeCst($DateTimeLiteral.text);}  
+      | DateLiteral {v=Ops.opDateCst($DateLiteral.text);}  
+      | TimeLiteral {v=Ops.opTimeCst($TimeLiteral.text);}  
     ;
 
 // *************   START  :  BASIC   *************
@@ -330,6 +334,22 @@ constExpr returns [Expr v]
 StringLiteral :
   '"' (~('"'|'\n'|'\r'))* '"';
 
+TimestampLiteral :
+  Date ' ' Time '.' MillSecond
+;
+DateTimeLiteral :
+   Date ' ' Time 
+;
+DateLiteral :
+  Date
+;
+TimeLiteral :
+  Time
+;
+
+fragment Date: Digit Digit Digit Digit '-' Digit? Digit '-' Digit? Digit;
+fragment Time: Digit? Digit ':' Digit? Digit ':' Digit? Digit;
+fragment MillSecond:  ((Digit Digit) | Digit | ) Digit;
 /*ID :  Letter (Letter | Digit | '-' | '_')*;*/  
 INT :  Digit Digit*;
 fragment Digit :  '0'..'9';

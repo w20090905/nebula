@@ -26,7 +26,7 @@ public class NebulaAdvParserExprSimpleTest extends TestCase {
 		 * Returns the byte code of an Expression class corresponding to this
 		 * expression.
 		 */
-		byte[] compile(final String name, final Expr expr) {
+		byte[] compile(final String name, final Expr<?> expr) {
 			// class header
 			ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 			cw.visit(V1_1, ACC_PUBLIC, name, null, "java/lang/Object", new String[] { ExpressionForSimpleTest.class.getName()
@@ -51,7 +51,7 @@ public class NebulaAdvParserExprSimpleTest extends TestCase {
 			return cw.toByteArray();
 		}
 
-		protected int compute(Expr exp) {
+		protected int compute(Expr<?> exp) {
 			try {
 				byte[] b = this.compile("Example", exp);
 				FileOutputStream fos = new FileOutputStream("tmp\\Example.class");
@@ -75,7 +75,7 @@ public class NebulaAdvParserExprSimpleTest extends TestCase {
 		}
 	}
 
-	private int compute(Expr expr) {
+	private int compute(Expr<?> expr) {
 		Complier complier = new Complier();
 		return complier.compute(expr);
 	}
@@ -102,7 +102,7 @@ public class NebulaAdvParserExprSimpleTest extends TestCase {
 
 	private void eqExpr(String exprText, String expectedResult) {
 		try {
-			Expr expr = parse(exprText);
+			Expr<?> expr = parse(exprText);
 			assertEquals(expectedResult, expr.toString());
 
 		} catch (RecognitionException e) {
@@ -110,7 +110,7 @@ public class NebulaAdvParserExprSimpleTest extends TestCase {
 		}
 	}
 
-	private Expr parse(String exprText) throws RecognitionException {
+	private Expr<?> parse(String exprText) throws RecognitionException {
 		NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(exprText));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		NebulaParser parser = new NebulaParser(tokens, compiler);
