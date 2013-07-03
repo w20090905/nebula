@@ -17,15 +17,15 @@ import org.antlr.runtime.CommonTokenStream;
 public class TestNebulaParser_If extends TestCase {
 	final StringBuilder sb = new StringBuilder();
 
-	private NebulaParser loadFromString(String code) throws Exception {
+	private NebulaRegisterParser loadFromString(String code) throws Exception {
 		return parse(new ANTLRStringStream(code));
 	}
 
-	private NebulaParser parse(CharStream stream) throws Exception {
-		NebulaLexer assemblerLexer = new NebulaLexer(stream);
+	private NebulaRegisterParser parse(CharStream stream) throws Exception {
+		NebulaRegisterLexer assemblerLexer = new NebulaRegisterLexer(stream);
 		CommonTokenStream tokens = new CommonTokenStream(assemblerLexer);
 		sb.setLength(0);
-		NebulaParser parser = new NebulaParser(tokens) {
+		NebulaRegisterParser parser = new NebulaRegisterParser(tokens) {
 			protected void info(String str) {
 				if (str.charAt(str.length() - 1) == '\n') {
 					String txtTemps = "";
@@ -56,7 +56,7 @@ public class TestNebulaParser_If extends TestCase {
                 "    }" +
                 "}";
         //@formatter:on     
-        NebulaParser parser = loadFromString(text);
+        NebulaRegisterParser parser = loadFromString(text);
         
         ClassSymbol clz = parser.classDefinition();
         assertTrue(parser.getNumberOfSyntaxErrors() == 0);

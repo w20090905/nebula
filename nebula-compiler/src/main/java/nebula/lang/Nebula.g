@@ -130,18 +130,25 @@ fieldDefinition[Type resideType] returns[Field field]
               field = new Field(resideType,$name.text);
            }
           }
+          
+        /* alias name */
         ('|' aliasLiteral[field.nameAlias])?
+        
+        /* Array? */
         range=arrayDefinition
+        
+        /* Field Type */
         (
             type=ID { field.type = resolveType($type.text);}
             | nestedType = nestedTypeDefinition[resideType,$name.text,field.nameAlias] {field.type = nestedType;}
            | {if(field.type==null)field.type = resolveType(field.name);} 
         )
         
-        (
-          ':=' defaultExpr=expr {field.defaultValue = defaultExpr.exec();}
-          | '=' transisentExpr=expr {field.derived = true;field.derivedExpr = Ops.compile(transisentExpr,resideType);}
-        )?
+        /* Default value */
+        (':=' defaultExpr=expr        {   field.hasDefaultValue = true;   field.defaultValueExpr = Ops.compile(defaultExpr,resideType);})?
+        
+        /* Derived expr */
+        ('=' transisentExpr=expr   {   field.derived = true;               field.derivedExpr = Ops.compile(transisentExpr,resideType);} )?
         
         ';'{
             field.attrs.setDefaults(field.type.attrs);

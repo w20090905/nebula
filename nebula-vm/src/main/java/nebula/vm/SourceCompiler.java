@@ -23,7 +23,7 @@ import java.util.List;
 
 import org.antlr.runtime.TokenStream;
 
-public class SourceCompiler extends NebulaParser {
+public class SourceCompiler extends NebulaRegisterParser {
 	public static final int INITIAL_CODE_SIZE = 1024;
 	public static final short UNKNOWN = 0;
 	// protected Map<String, Integer> instructionOpcodeMapping = new

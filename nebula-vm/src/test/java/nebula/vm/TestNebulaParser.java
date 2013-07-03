@@ -18,19 +18,19 @@ import org.antlr.runtime.CommonTokenStream;
 public class TestNebulaParser extends TestCase {
 	final StringBuilder sb = new StringBuilder();
 
-	private NebulaParser loadFromString(String code) throws Exception {
+	private NebulaRegisterParser loadFromString(String code) throws Exception {
 		return parse(new ANTLRStringStream(code));
 	}
 
-	private NebulaParser loadFromFile(String filename) throws Exception {
+	private NebulaRegisterParser loadFromFile(String filename) throws Exception {
 		return parse(new ANTLRFileStream(filename));
 	}
 
-	private NebulaParser parse(CharStream stream) throws Exception {
-		NebulaLexer assemblerLexer = new NebulaLexer(stream);
+	private NebulaRegisterParser parse(CharStream stream) throws Exception {
+		NebulaRegisterLexer assemblerLexer = new NebulaRegisterLexer(stream);
 		CommonTokenStream tokens = new CommonTokenStream(assemblerLexer);
 		sb.setLength(0);
-		NebulaParser parser = new NebulaParser(tokens) {
+		NebulaRegisterParser parser = new NebulaRegisterParser(tokens) {
 			protected void info(String str) {
 				if (str.charAt(str.length() - 1) == '\n') {
 					String txtTemps = "";
@@ -48,7 +48,7 @@ public class TestNebulaParser extends TestCase {
 
 	public void testClassDefineFile() throws Exception {
 		String filename = "ClsDefineOnly.n";
-		NebulaParser parser = loadFromFile(filename);
+		NebulaRegisterParser parser = loadFromFile(filename);
 		ClassSymbol clz = parser.classDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
 		System.out.println(sb.toString());
@@ -57,10 +57,10 @@ public class TestNebulaParser extends TestCase {
 	}
 
 	public void testClsFieldGet() throws Exception {
-		NebulaParser result = loadFromFile("ClsFieldGet.n");
+		NebulaRegisterParser result = loadFromFile("ClsFieldGet.n");
 		System.out.println(result);
 		String filename = "ClsFieldGet.n";
-		NebulaParser parser = loadFromFile(filename);
+		NebulaRegisterParser parser = loadFromFile(filename);
 		ClassSymbol clz = parser.classDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
 		System.out.println(sb.toString());
@@ -75,7 +75,7 @@ public class TestNebulaParser extends TestCase {
 				"	int i;" +
 				"}";
 		//@formatter:on		
-		NebulaParser parser = loadFromString(text);
+		NebulaRegisterParser parser = loadFromString(text);
 		ClassSymbol clz = parser.classDefinition();
 		assertTrue(parser.getNumberOfSyntaxErrors() == 0);
 		
@@ -97,7 +97,7 @@ public class TestNebulaParser extends TestCase {
 				"	int i = 9;" +
 				"}";
 		//@formatter:on		
-		NebulaParser parser = loadFromString(text);
+		NebulaRegisterParser parser = loadFromString(text);
 		
 		ClassSymbol clz = parser.enterClass("Test",null);
 		MethodSymbol method = parser.methodDeclaration(clz);
@@ -126,7 +126,7 @@ public class TestNebulaParser extends TestCase {
 				"	int i = 1+2;" +
 				"}";
 		//@formatter:on		
-		NebulaParser parser = loadFromString(text);
+		NebulaRegisterParser parser = loadFromString(text);
 		
 		ClassSymbol clz = parser.enterClass("test",null);
 		MethodSymbol method = parser.methodDeclaration(clz);
@@ -157,7 +157,7 @@ public class TestNebulaParser extends TestCase {
 				"	int i = this.test();" +
 				"}";
 		//@formatter:on		
-		NebulaParser parser = loadFromString(text);
+		NebulaRegisterParser parser = loadFromString(text);
 		
 		ClassSymbol clz = parser.enterClass("Test",null);
 		MethodSymbol method = parser.methodDeclaration(clz);
@@ -185,7 +185,7 @@ public class TestNebulaParser extends TestCase {
 				"	int we = this.test(2);" +
 				"}";
 		//@formatter:on		
-		NebulaParser parser = loadFromString(text);
+		NebulaRegisterParser parser = loadFromString(text);
 		
 		ClassSymbol clz = parser.enterClass("Test",null);
 		MethodSymbol method = parser.methodDeclaration(clz);
@@ -215,7 +215,7 @@ public class TestNebulaParser extends TestCase {
 				"	int i = this.test(2,a+9);" +
 				"}";
 		//@formatter:on		
-		NebulaParser parser = loadFromString(text);
+		NebulaRegisterParser parser = loadFromString(text);
 		
 		ClassSymbol clz = parser.enterClass("Test",null);
 		MethodSymbol method = parser.methodDeclaration(clz);
@@ -257,7 +257,7 @@ public class TestNebulaParser extends TestCase {
                 "    }" +
                 "}";
         //@formatter:on     
-        NebulaParser parser = loadFromString(text);
+        NebulaRegisterParser parser = loadFromString(text);
         
         ClassSymbol clz = parser.classDefinition();
         assertTrue(parser.getNumberOfSyntaxErrors() == 0);
@@ -299,7 +299,7 @@ public class TestNebulaParser extends TestCase {
 				"	int c = a + b;" +
 				"}";
 		//@formatter:on		
-		NebulaParser parser = loadFromString(text);
+		NebulaRegisterParser parser = loadFromString(text);
 		
 		ClassSymbol clz = parser.enterClass("test",null);
 		MethodSymbol method = parser.methodDeclaration(clz);

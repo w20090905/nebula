@@ -4,38 +4,38 @@ import util.InheritHashMap;
 
 public class Field {
 
-//    public static final Reference BASIC = Reference.ByVal;
-//    public static final Reference INLINE = Reference.Inline;
-//    public static final Reference REFERENCE =Reference.ByRef;
-//    public static final Reference CASCADE = Reference.Cascade;
-//
-//    public static final Importance KEY = Importance.Key;
-//    public static final Importance CORE = Importance.Core; 
-//    public static final Importance REQUIRE =Importance.Require;
-//    public static final Importance UNIMPORTANT = Importance.Unimportant;
+	// public static final Reference BASIC = Reference.ByVal;
+	// public static final Reference INLINE = Reference.Inline;
+	// public static final Reference REFERENCE =Reference.ByRef;
+	// public static final Reference CASCADE = Reference.Cascade;
+	//
+	// public static final Importance KEY = Importance.Key;
+	// public static final Importance CORE = Importance.Core;
+	// public static final Importance REQUIRE =Importance.Require;
+	// public static final Importance UNIMPORTANT = Importance.Unimportant;
 
-    final String name;
-    final Alias nameAlias;
-    String displayName;
-    Importance importance = Importance.Unimportant;
-    boolean derived = false;
-    EntityExpression derivedExpr;
-    String derivedExprText;
-    Object defaultValue;
+	final String name;
+	final Alias nameAlias;
+	String displayName;
+	Importance importance = Importance.Unimportant;
+	boolean derived = false;
+	EntityExpression derivedExpr;
 
-    final Type resideType;
-    boolean array = false;
-    int rangeFrom = 0;
-    int rangeTo = Integer.MAX_VALUE;
-    
-    
-    Type type;
-    String _typeName;
-    Reference refer;
+	boolean hasDefaultValue = false;
+	EntityExpression defaultValueExpr;
+
+	final Type resideType;
+	boolean array = false;
+	int rangeFrom = 0;
+	int rangeTo = Integer.MAX_VALUE;
+
+	Type type;
+	String _typeName;
+	Reference refer;
 
 	InheritHashMap attrs;
-	
-    public String getType_name() {
+
+	public String getType_name() {
 		return _typeName;
 	}
 
@@ -43,14 +43,14 @@ public class Field {
 		this._typeName = type_name;
 	}
 
-    public Field(Type resideType,String name) {
-        super();
-        this.name = name;
-        this.displayName = name;
-        this.resideType = resideType;
-        this.attrs =  new InheritHashMap();
-        this.nameAlias = new Alias(name);
-    }
+	public Field(Type resideType, String name) {
+		super();
+		this.name = name;
+		this.displayName = name;
+		this.resideType = resideType;
+		this.attrs = new InheritHashMap();
+		this.nameAlias = new Alias(name);
+	}
 
 	public String getDisplayName() {
 		return displayName;
@@ -64,13 +64,15 @@ public class Field {
 		return importance;
 	}
 
-	public boolean isKey(){
+	public boolean isKey() {
 		return this.importance == Importance.Key;
 	}
-	public boolean isCore(){
+
+	public boolean isCore() {
 		return this.importance == Importance.Core;
 	}
-	public boolean isIgnorable(){
+
+	public boolean isIgnorable() {
 		return this.importance == Importance.Unimportant;
 	}
 
@@ -143,12 +145,4 @@ public class Field {
 	public void setValueExpr(EntityExpression valueExpr) {
 		this.derivedExpr = valueExpr;
 	}
-
-	public String getValueExprText() {
-		return derivedExprText;
-	}
-
-	public void setValueExprText(String valueExprText) {
-		this.derivedExprText = valueExprText;
-	}	
 }

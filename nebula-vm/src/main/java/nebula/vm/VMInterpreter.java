@@ -255,7 +255,7 @@ public class VMInterpreter {
     private static ClassSymbol loadFromSource(InputStream input) throws Exception {
         boolean hasErrors = false;
         try {
-            NebulaLexer lexer = new NebulaLexer(new ANTLRInputStream(input));
+        	NebulaRegisterLexer lexer = new NebulaRegisterLexer(new ANTLRInputStream(input));
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             SourceCompiler parser = new SourceCompiler(tokens);
             // parser.compilationUnit();

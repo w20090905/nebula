@@ -1,4 +1,4 @@
-grammar Nebula;
+grammar NebulaRegister ;
 
 options {
   language = Java;
