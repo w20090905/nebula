@@ -1,9 +1,8 @@
 package adempiere;
 
-import static adempiere.DBColumnType.Bit;
 import static adempiere.DBColumnType.Blob;
-import static adempiere.DBColumnType.Date;
 import static adempiere.DBColumnType.Char;
+import static adempiere.DBColumnType.Date;
 import static adempiere.DBColumnType.Datetime;
 import static adempiere.DBColumnType.Decimal;
 import static adempiere.DBColumnType.Long;
@@ -14,7 +13,8 @@ import static adempiere.DBColumnType.Timestamp;
 import static adempiere.DBColumnType.Varchar;
 import static adempiere.MatchPattern.EndWithIgnoreCase;
 import static adempiere.MatchPattern.EqualsIgnoreCase;
-import static adempiere.MatchPattern.*;
+import static adempiere.MatchPattern.Include;
+import static adempiere.MatchPattern.StartWithIgnoreCase;
 
 import java.io.IOException;
 import java.util.List;

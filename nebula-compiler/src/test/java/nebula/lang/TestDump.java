@@ -1,9 +1,5 @@
 package nebula.lang;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import nebula.asm.ASMSampleDump;
 
 import org.objectweb.asm.Opcodes;

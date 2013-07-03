@@ -7,8 +7,6 @@ import nebula.lang.Type;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonParser;
 
-import util.InheritHashMap;
-
 public class SimpleTypeSerializer extends DefaultFieldSerializer<Type> implements JsonDataHelper<Type> {
 
 

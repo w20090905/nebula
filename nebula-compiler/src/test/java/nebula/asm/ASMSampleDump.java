@@ -3,9 +3,7 @@ package nebula.asm;
 import nebula.lang.EntityExpression;
 import nebula.lang.TestDump;
 
-import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
@@ -16,7 +14,7 @@ public class ASMSampleDump extends ClassLoader implements Opcodes {
 		String actualClass = "java/lang/Integer";
 
 		ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-		FieldVisitor fv;
+		
 		MethodVisitor mv;
 
 		// Class define
