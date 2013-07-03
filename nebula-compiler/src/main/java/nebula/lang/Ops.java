@@ -14,7 +14,7 @@ import org.objectweb.asm.Opcodes;
 public class Ops {
 	static EntityExpressionComplier compiler = new EntityExpressionComplier();
 
-	static public <T> EntityExpression compile(Expr<T> expr, Type type) {
+	static public <T> EntityExpression<T> compile(Expr<T> expr, Type type) {
 		return compiler.compile(expr, type);
 	}
 
@@ -754,25 +754,27 @@ public class Ops {
 	}
 
 	static class DecimalCst extends Expression<BigDecimal> {
-		final BigDecimal value;
+		final String text;
 
-		DecimalCst(String value) {
-			this.value = new BigDecimal(value);
+		DecimalCst(String text) {
+			this.text = text;
 		}
 
 		public void compile(final MethodVisitor mv) {
-			// TODO BigDecimal
-			mv.visitLdcInsn(value);
+			mv.visitTypeInsn(NEW, "java/math/BigDecimal");
+			mv.visitInsn(DUP);
+			mv.visitLdcInsn(text);
+			mv.visitMethodInsn(INVOKESPECIAL, "java/math/BigDecimal", "<init>", "(Ljava/lang/String;)V");
 		}
 
 		@Override
 		public BigDecimal exec() {
-			return this.value;
+			return new BigDecimal(this.text);
 		}
 
 		@Override
 		public String toString() {
-			return value.toString();
+			return text;
 		}
 	}
 

@@ -108,22 +108,21 @@ public class NebulaParserTest extends TestCase {
 		Field f = parseField("!Age := 1014 * 1024;");
 		assertEquals(1014 * 1024, f.defaultValueExpr.eval(null));
 
-		//TODO 
 		f = parseField("!Age := \"test\";");
-		assertEquals("test", f);
+		assertEquals("test", f.defaultValueExpr.eval(null));
 
-//		f = parseField("!Age := 1.3;");
-//		assertEquals(new BigDecimal("1.3"), f.defaultValueExpr.eval(null));
-//
-//		f = parseField("!Age := 4 > 5;");
-//		assertEquals(false, f.defaultValueExpr.eval(null));
+		f = parseField("!Age := 1.3;");
+		assertEquals(new BigDecimal("1.3"), f.defaultValueExpr.eval(null));
+
+		f = parseField("!Age := 4 > 5;");
+		assertEquals(false, f.defaultValueExpr.eval(null));
 	}
 
 	public void testFieldDefinition_derived() {
 		Field f = parseField("!MyAge Age = Age + 10 * 1000;");
 		assertEquals("MyAge", f.name);
 		assertEquals(true, f.derived);
-		EntityExpression expr = f.derivedExpr;
+		EntityExpression<?> expr = f.derivedExpr;
 		Entity e = new EditableEntity();
 		int Age = 15;
 		e.put("Age", Age);

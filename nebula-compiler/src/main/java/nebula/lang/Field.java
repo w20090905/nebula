@@ -19,10 +19,10 @@ public class Field {
 	String displayName;
 	Importance importance = Importance.Unimportant;
 	boolean derived = false;
-	EntityExpression derivedExpr;
+	EntityExpression<?> derivedExpr;
 
 	boolean hasDefaultValue = false;
-	EntityExpression defaultValueExpr;
+	EntityExpression<?> defaultValueExpr;
 
 	final Type resideType;
 	boolean array = false;
@@ -138,11 +138,12 @@ public class Field {
 		this.derived = derived;
 	}
 
-	public EntityExpression getValueExpr() {
-		return derivedExpr;
+	@SuppressWarnings("unchecked")
+	public <T> EntityExpression<T> getValueExpr() {
+		return (EntityExpression<T>) derivedExpr;
 	}
 
-	public void setValueExpr(EntityExpression valueExpr) {
+	public <T> void setValueExpr(EntityExpression<T> valueExpr) {
 		this.derivedExpr = valueExpr;
 	}
 }
