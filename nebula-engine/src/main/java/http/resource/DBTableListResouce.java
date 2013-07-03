@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import nebula.data.Classificator;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.Holder;
+import nebula.data.Broker;
 import nebula.data.json.DataHelper;
 
 import org.eclipse.jetty.util.URIUtil;
@@ -31,8 +31,8 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
 public class DBTableListResouce extends AbstractResouce {
-	private final Holder<DataHelper<Entity, Reader, Writer>> jsonHolder;
-	private final Holder<DataStore<Entity>> datastoreHolder;
+	private final Broker<DataHelper<Entity, Reader, Writer>> jsonHolder;
+	private final Broker<DataStore<Entity>> datastoreHolder;
 	final EntityFilterBuilder filterBuilder;
 	final LoadingCache<String, DataHolder> dataCache;
 
@@ -73,7 +73,7 @@ public class DBTableListResouce extends AbstractResouce {
 		return bout.toByteArray();
 	}
 
-	public DBTableListResouce(Holder<DataHelper<Entity, Reader, Writer>> json, Holder<DataStore<Entity>> datas,
+	public DBTableListResouce(Broker<DataHelper<Entity, Reader, Writer>> json, Broker<DataStore<Entity>> datas,
 			final EntityFilterBuilder filterBuilder) {
 		super("text/json", 0, 1000);
 		this.jsonHolder = json;

@@ -5,7 +5,7 @@ import java.io.Reader;
 import java.io.Writer;
 
 import nebula.data.Entity;
-import nebula.data.Holder;
+import nebula.data.Broker;
 import nebula.lang.Type;
 
 import org.codehaus.jackson.JsonFactory;
@@ -42,12 +42,12 @@ public class JsonHelperProvider {
 	// return new DefaultJsonHelper<>(factory, new EntityJsonDataDealer(type));
 	// }
 
-	public static Holder<DataHelper<Entity, Reader, Writer>> getHelper(final Holder<Type> typeHolder) {
+	public static Broker<DataHelper<Entity, Reader, Writer>> getHelper(final Broker<Type> typeHolder) {
 		final Type initType = typeHolder.get();
 		DataHelper<Entity, Reader, Writer> lastJsonHelper = (DataHelper<Entity, Reader, Writer>) new DefaultJsonHelper<Entity>(
 				factory, new EntitySerializer(typeHolder.get()));
 
-		final Holder<DataHelper<Entity, Reader, Writer>> holder = new Holder<DataHelper<Entity, Reader, Writer>>(
+		final Broker<DataHelper<Entity, Reader, Writer>> holder = new Broker<DataHelper<Entity, Reader, Writer>>(
 				lastJsonHelper) {
 			Type lastType = initType;
 
@@ -66,12 +66,12 @@ public class JsonHelperProvider {
 		return holder;
 	}
 
-	public static Holder<DataHelper<Entity, Reader, Writer>> getSimpleHelper(final Holder<Type> typeHolder) {
+	public static Broker<DataHelper<Entity, Reader, Writer>> getSimpleHelper(final Broker<Type> typeHolder) {
 		final Type initType = typeHolder.get();
 		DataHelper<Entity, Reader, Writer> lastJsonHelper = (DataHelper<Entity, Reader, Writer>) new DefaultJsonHelper<Entity>(
 				factory, new SimpleEntitySerializer(typeHolder.get()));
 
-		final Holder<DataHelper<Entity, Reader, Writer>> holder = new Holder<DataHelper<Entity, Reader, Writer>>(
+		final Broker<DataHelper<Entity, Reader, Writer>> holder = new Broker<DataHelper<Entity, Reader, Writer>>(
 				lastJsonHelper) {
 			Type lastType = initType;
 

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import nebula.data.Holder;
+import nebula.data.Broker;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
@@ -22,11 +22,11 @@ import org.apache.commons.logging.LogFactory;
 public class LoginListResouce implements Resource {
 	protected Log log = LogFactory.getLog(this.getClass());
 
-	private final Holder<DataStore<Entity>> users;
+	private final Broker<DataStore<Entity>> users;
 	final RedirectResouce redirectTo;
 
-	public LoginListResouce(DataHelper<Entity, Reader, Writer> json, Holder<DataStore<Entity>> users,
-			Holder<DataStore<Entity>> datas) {
+	public LoginListResouce(DataHelper<Entity, Reader, Writer> json, Broker<DataStore<Entity>> users,
+			Broker<DataStore<Entity>> datas) {
 		this.users = users;
 		redirectTo = new RedirectResouce("/index.html");
 	}

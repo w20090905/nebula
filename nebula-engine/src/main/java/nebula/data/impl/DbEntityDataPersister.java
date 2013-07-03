@@ -12,7 +12,7 @@ import nebula.data.Callback;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.Holder;
+import nebula.data.Broker;
 import nebula.data.db.DbConfiguration;
 import nebula.data.db.DbTxDataExecutor;
 import nebula.lang.Type;
@@ -23,19 +23,19 @@ public class DbEntityDataPersister implements DataPersister<Entity> {
 
 	final TypeLoader typeLoader;
 	ReentrantLock lock = new ReentrantLock();
-	final Map<String, Holder<DataStore<Entity>>> storeHolders;
+	final Map<String, Broker<DataStore<Entity>>> storeHolders;
 	final DbConfiguration dbConfig;
 
 	@Inject
 	public DbEntityDataPersister(TypeLoader loader, DbConfiguration dbConfig) {
 		this.typeLoader = loader;
-		this.storeHolders = new HashMap<String, Holder<DataStore<Entity>>>();
+		this.storeHolders = new HashMap<String, Broker<DataStore<Entity>>>();
 		this.dbConfig = dbConfig;
 	}
 
 	@Override
-	public <I> Holder<DataStore<Entity>> define(Class<I> clzIndex, Class<Entity> clz, String name) {
-		Holder<DataStore<Entity>> datastoreHolder = this.storeHolders.get(name);
+	public <I> Broker<DataStore<Entity>> define(Class<I> clzIndex, Class<Entity> clz, String name) {
+		Broker<DataStore<Entity>> datastoreHolder = this.storeHolders.get(name);
 		if (datastoreHolder == null) {
 			Type type = typeLoader.findType(name);
 			DataStore<Entity> datastore = null;
@@ -44,7 +44,7 @@ public class DbEntityDataPersister implements DataPersister<Entity> {
 			} else {
 				datastore = new DbMasterEntityDataStore(this, type, dbConfig.getPersister(type));
 			}
-			datastoreHolder = Holder.of(datastore);
+			datastoreHolder = Broker.of(datastore);
 			storeHolders.put(name, datastoreHolder);
 		}
 		return datastoreHolder;
@@ -58,8 +58,8 @@ public class DbEntityDataPersister implements DataPersister<Entity> {
 	// }
 
 	@Override
-	public <I> Holder<DataStore<Entity>> reload(Class<I> clzIndex, Class<Entity> clz, String name) {
-		Holder<DataStore<Entity>> datastoreHolder = this.storeHolders.get(name);
+	public <I> Broker<DataStore<Entity>> reload(Class<I> clzIndex, Class<Entity> clz, String name) {
+		Broker<DataStore<Entity>> datastoreHolder = this.storeHolders.get(name);
 
 		if (datastoreHolder != null) {
 			DataStore<Entity> oldData = datastoreHolder.get();

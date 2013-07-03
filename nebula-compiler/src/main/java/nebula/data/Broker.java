@@ -4,28 +4,28 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Holder<T> {
+public class Broker<T> {
 
-	public static <T> Holder<T> of(T data) {
-		return new Holder<T>(data);
+	public static <T> Broker<T> of(T data) {
+		return new Broker<T>(data);
 	}
 
-	List<WeakReference<HolderListener<T>>> listeners;
+	List<WeakReference<BrokerListener<T>>> listeners;
 	protected T curData;
 
-	public Holder(T newData) {
-		listeners = new CopyOnWriteArrayList<WeakReference<HolderListener<T>>>();
+	public Broker(T newData) {
+		listeners = new CopyOnWriteArrayList<WeakReference<BrokerListener<T>>>();
 		this.curData = newData;
 	}
 
-	public void addListener(HolderListener<T> listener) {
-		listeners.add(new WeakReference<HolderListener<T>>(listener));
+	public void addListener(BrokerListener<T> listener) {
+		listeners.add(new WeakReference<BrokerListener<T>>(listener));
 	}
 
 	public void update(T newData) {
 		boolean hasLostReference = false;
-		for (WeakReference<HolderListener<T>> weakReference : listeners) {
-			HolderListener<T> listener = weakReference.get();
+		for (WeakReference<BrokerListener<T>> weakReference : listeners) {
+			BrokerListener<T> listener = weakReference.get();
 			if (listener != null) {
 				boolean result = listener.arrive(newData, this.curData);
 				if (!result) break;
@@ -35,7 +35,7 @@ public class Holder<T> {
 		}
 		if (hasLostReference) {
 			for (int i = listeners.size() - 1; i >= 0; i--) {
-				HolderListener<T> listener = listeners.get(i).get();
+				BrokerListener<T> listener = listeners.get(i).get();
 				if (listener == null) {
 					listeners.remove(i);
 				}

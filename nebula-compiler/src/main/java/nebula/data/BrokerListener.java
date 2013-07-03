@@ -1,5 +1,5 @@
 package nebula.data;
 
-public interface HolderListener<T> {
+public interface BrokerListener<T> {
 	boolean arrive(T newData, T oldData);
 }

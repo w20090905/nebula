@@ -1,11 +1,11 @@
 package http.engine;
 
-import nebula.data.Holder;
+import nebula.data.Broker;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 
 //TODO  refact
-public class TypeHolder extends Holder<Type> {
+public class TypeHolder extends Broker<Type> {
 	final TypeLoader loader;
 	final String name;
 

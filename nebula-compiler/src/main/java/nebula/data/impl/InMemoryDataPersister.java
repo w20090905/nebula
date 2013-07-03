@@ -10,7 +10,7 @@ import nebula.data.Callback;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.Holder;
+import nebula.data.Broker;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 
@@ -18,20 +18,20 @@ public class InMemoryDataPersister implements DataPersister<Entity> {
 
 	final TypeLoader loader;
 	ReentrantLock lock = new ReentrantLock();
-	final Map<String, Holder<DataStore<Entity>>> stores;
+	final Map<String, Broker<DataStore<Entity>>> stores;
 
 	public InMemoryDataPersister(TypeLoader loader) {
 		this.loader = loader;
-		this.stores = new HashMap<String, Holder<DataStore<Entity>>>();
+		this.stores = new HashMap<String, Broker<DataStore<Entity>>>();
 	}
 
 	@Override
-	public <I> Holder<DataStore<Entity>> define(Class<I> clzIndex, Class<Entity> clz, String name) {
-		Holder<DataStore<Entity>> store = this.stores.get(name);
+	public <I> Broker<DataStore<Entity>> define(Class<I> clzIndex, Class<Entity> clz, String name) {
+		Broker<DataStore<Entity>> store = this.stores.get(name);
 		if (store == null) {
 			Type type = loader.findType(name);
 			DataStore<Entity> newData = new EntityDataStore(IdMakerBuilder.getIDReader(type), this, type);
-			store = Holder.of(newData);
+			store = Broker.of(newData);
 			stores.put(name, store);
 		}
 		return store;
@@ -46,8 +46,8 @@ public class InMemoryDataPersister implements DataPersister<Entity> {
 
 	// TODO
 	@Override
-	public <I> Holder<DataStore<Entity>> reload(Class<I> clzIndex, Class<Entity> clz, String name) {
-		Holder<DataStore<Entity>> datastoreHolder = this.stores.get(name);
+	public <I> Broker<DataStore<Entity>> reload(Class<I> clzIndex, Class<Entity> clz, String name) {
+		Broker<DataStore<Entity>> datastoreHolder = this.stores.get(name);
 		if (datastoreHolder != null) {
 			EntityDataStore oldData = (EntityDataStore) datastoreHolder.get();
 			oldData.unload();

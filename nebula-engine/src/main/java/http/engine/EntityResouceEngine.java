@@ -18,7 +18,7 @@ import javax.inject.Inject;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.Holder;
+import nebula.data.Broker;
 import nebula.data.json.DataHelper;
 import nebula.data.json.JsonHelperProvider;
 import nebula.lang.EditableTypeLoader;
@@ -76,26 +76,26 @@ public class EntityResouceEngine implements ResourceEngine {
 			Type type = typeLoader.findType(typeName);
 			if (type.getStandalone() == TypeStandalone.Transaction) {
 
-				Holder<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);
+				Broker<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);
 
 				if (id != null) {
-					Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
+					Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
 							.getHelper(new TypeHolder(typeLoader, typeName));
 					return new TxEntityResource(jsonHolder, storeHolder, id);
 				} else {
-					Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
+					Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
 							.getSimpleHelper(new TypeHolder(typeLoader, typeName));
 					return new EntityListResouce(jsonHolder, storeHolder, entityFilterBuilder);
 				}
 			} else {
-				Holder<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);
+				Broker<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);
 
 				if (id != null) {
-					Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
+					Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
 							.getHelper(new TypeHolder(typeLoader, typeName));
 					return new EntityResouce(jsonHolder, storeHolder, id);
 				} else {
-					Holder<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
+					Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
 							.getSimpleHelper(new TypeHolder(typeLoader, typeName));
 					return new EntityListResouce(jsonHolder, storeHolder, entityFilterBuilder);
 				}

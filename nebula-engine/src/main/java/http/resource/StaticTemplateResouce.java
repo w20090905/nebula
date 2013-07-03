@@ -9,7 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nebula.data.Holder;
+import nebula.data.Broker;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.lang.TypeLoader;
@@ -26,9 +26,9 @@ public class StaticTemplateResouce extends AbstractResouce {
 	final String theme;
 	final String skin;
 	final String name;
-	final Holder<DataStore<Entity>> attributes;
+	final Broker<DataStore<Entity>> attributes;
 
-	public StaticTemplateResouce(Configuration cfg, TypeLoader typeLoader, Holder<DataStore<Entity>> attributes,
+	public StaticTemplateResouce(Configuration cfg, TypeLoader typeLoader, Broker<DataStore<Entity>> attributes,
 			String theme, String skin, String name) {
 		super("text/template", 1000, 1000);
 

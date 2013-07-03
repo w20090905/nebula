@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.Holder;
+import nebula.data.Broker;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 import freemarker.cache.TemplateLoader;
@@ -61,7 +61,7 @@ class DataPersisterTemplateHashModel implements TemplateHashModel {
 
 	@Override
 	public TemplateModel get(String key) throws TemplateModelException {
-		Holder<DataStore<Entity>> datastore = dataWareHouse.define(String.class, Entity.class, key);
+		Broker<DataStore<Entity>> datastore = dataWareHouse.define(String.class, Entity.class, key);
 		return new DatastoreTemplateHashModel(datastore.get());
 	}
 
@@ -84,11 +84,11 @@ public class TypeTemplateResouce extends AbstractResouce {
 	final String typeName;
 	final String actionName;
 	final String name;
-	final Holder<DataStore<Entity>> attributes;
+	final Broker<DataStore<Entity>> attributes;
 	TemplateHashModel dataWareHouseModel;
 
 	public TypeTemplateResouce(Configuration cfg, TypeLoader typeLoader, DataPersister<Entity> dataWareHouse,
-			Holder<DataStore<Entity>> attributes, String theme, String skin, String typeName, String actionName) {
+			Broker<DataStore<Entity>> attributes, String theme, String skin, String typeName, String actionName) {
 		super("text/template", 0, 0);// TODO
 
 		this.cfg = cfg;

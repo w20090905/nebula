@@ -11,17 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.Holder;
+import nebula.data.Broker;
 import nebula.data.json.DataHelper;
 
 
 public class EntityResouce extends AbstractResouce {
-	private final Holder<DataHelper<Entity, Reader, Writer>> jsonHolder;
+	private final Broker<DataHelper<Entity, Reader, Writer>> jsonHolder;
 
 	private final String key;
-	private final Holder<DataStore<Entity>> datastoreHolder;
+	private final Broker<DataStore<Entity>> datastoreHolder;
 
-	public EntityResouce(Holder<DataHelper<Entity, Reader, Writer>> json, Holder<DataStore<Entity>> datas,
+	public EntityResouce(Broker<DataHelper<Entity, Reader, Writer>> json, Broker<DataStore<Entity>> datas,
 			String key) {
 		super("text/json", 0, 0);
 		this.jsonHolder = json;

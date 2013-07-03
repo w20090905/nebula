@@ -8,7 +8,7 @@ import http.resource.TypeTemplateResouce;
 
 import javax.inject.Inject;
 
-import nebula.data.Holder;
+import nebula.data.Broker;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -21,7 +21,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 	private final long age;
 
 	private final Configuration templateConfig;
-	final Holder<DataStore<Entity>> attributes;
+	final Broker<DataStore<Entity>> attributes;
 	final TypeLoader typeLoader;
 	final DataPersister<Entity> dataWareHouse;
 

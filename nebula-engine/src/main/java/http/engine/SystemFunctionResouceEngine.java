@@ -10,7 +10,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import nebula.data.Holder;
+import nebula.data.Broker;
 import nebula.data.DataPersister;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -27,8 +27,8 @@ public class SystemFunctionResouceEngine implements ResourceEngine {
 	public SystemFunctionResouceEngine(DataPersister<Entity> dataWareHouse) {
 		this.persistence = dataWareHouse;
 		DataHelper<Entity, Reader, Writer> json = JsonHelperProvider.getSerialize(Entity.class);
-		Holder<DataStore<Entity>> users = persistence.define(String.class, Entity.class, "User");
-		Holder<DataStore<Entity>> datas = persistence.define(Long.class, Entity.class, "UserAccessLog");
+		Broker<DataStore<Entity>> users = persistence.define(String.class, Entity.class, "User");
+		Broker<DataStore<Entity>> datas = persistence.define(Long.class, Entity.class, "UserAccessLog");
 
 		cachedLinks.put("login", new LoginListResouce(json, users, datas));
 		cachedLinks.put("signup", new SignupResouce(json, users));
