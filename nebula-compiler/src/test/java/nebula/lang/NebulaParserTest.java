@@ -218,7 +218,8 @@ public class NebulaParserTest extends TestCase {
 		//@formatter:off
 			String text = "" +
 					"type Person|zh:员工  { " +
-					"	Name|zh:姓名;" +
+					"	Name|zh:姓名|\"zh-tw\":台湾姓名;" +
+					"	Age|年龄;" +
 					"};";
 			//@formatter:on		
 
@@ -226,11 +227,14 @@ public class NebulaParserTest extends TestCase {
 
 		assertEquals("Person", type.name);
 
-		assertEquals(1, type.fields.size());
+		assertEquals(2, type.fields.size());
 		assertEquals("Name", type.fields.get(0).name);
 		assertEquals("员工", type.nameAlias.get("zh"));
-		assertEquals(Require, type.fields.get(0).importance);
+		assertEquals("台湾姓名", type.fields.get(0).nameAlias.get("zh-tw"));
+		assertEquals("姓名", type.fields.get(0).nameAlias.get("zh-cn"));
 		assertEquals("姓名", type.fields.get(0).nameAlias.get("zh"));
+		assertEquals("年龄", type.fields.get(1).nameAlias.getDefault());
+		assertEquals(null, type.fields.get(1).nameAlias.get("zh"));
 	}
 
 	private Expr<?> parseCst(String text) {

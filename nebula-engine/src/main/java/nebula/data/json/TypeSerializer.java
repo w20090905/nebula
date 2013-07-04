@@ -3,7 +3,7 @@ package nebula.data.json;
 import java.util.List;
 
 import nebula.data.Entity;
-import nebula.lang.Alias;
+import nebula.lang.Aliases;
 import nebula.lang.Field;
 import nebula.lang.Type;
 
@@ -49,7 +49,7 @@ public class TypeSerializer extends DefaultFieldSerializer<Type> implements Json
 
 		fieldListDataDealer.writeTo(null, type.getFields(), out);
 
-		Alias n = type.getNameAlias();
+		Aliases n = type.getNameAlias();
 		out.writeFieldName("NameAlias");
 		out.writeStartObject();
 		for (String k : n.alias.keySet()) {
@@ -105,7 +105,7 @@ class FieldJsonDataDealer extends DefaultTypeAdapter<Field> {
 		out.writeStringField("TypeName", field.getType().getName());
 		out.writeStringField("Refer", field.getRefer().name());
 
-		Alias n = field.getNameAlias();
+		Aliases n = field.getNameAlias();
 		out.writeFieldName("NameAlias");
 		out.writeStartObject();
 		for (String k : n.alias.keySet()) {

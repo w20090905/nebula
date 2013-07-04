@@ -23,24 +23,6 @@ import org.apache.commons.logging.LogFactory;
 import util.FileUtil;
 
 import com.google.common.base.Function;
-
-//class AutoIdentifiableType implements AutoIdentifiable<Type> {
-//	@Override
-//	public String getID(Type data) {
-//		return data.name;
-//	}
-//
-//	@Override
-//	public void set(Map<String, Type> map, Type data) {
-//		map.put(data.name, data);
-//		if (data.nameAlias != null) {
-//			for (String v : data.nameAlias.alias.values()) {
-//				map.put(v, data);
-//			}
-//		}
-//	}
-//};
-
 public abstract class TypeLoader {
 	protected Log log = LogFactory.getLog(this.getClass());
 

@@ -1,5 +1,5 @@
 tx UserAccessLog{
-	!AutoID;
+	!ID;
 	User;
 	Date;
 };

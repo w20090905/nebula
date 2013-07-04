@@ -58,7 +58,7 @@ public class NebulaParserTypeTest extends TestCase {
 		//@formatter:off
 		String text = "" +
 				"tx Order { " +
-				"	!AutoID;" +
+				"	!ID;" +
 				"};";
 		//@formatter:on		
 		Type type = compiler.load(text);
@@ -67,7 +67,7 @@ public class NebulaParserTypeTest extends TestCase {
 		assertEquals(TypeStandalone.Transaction, type.standalone);
 
 		assertEquals(1, type.fields.size());
-		assertEquals("AutoID", type.fields.get(0).name);
+		assertEquals("ID", type.fields.get(0).name);
 	}
 	
 	public void test_type_1() throws Exception {

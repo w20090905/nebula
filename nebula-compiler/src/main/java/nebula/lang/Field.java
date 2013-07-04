@@ -3,19 +3,8 @@ package nebula.lang;
 import util.InheritHashMap;
 
 public class Field {
-
-	// public static final Reference BASIC = Reference.ByVal;
-	// public static final Reference INLINE = Reference.Inline;
-	// public static final Reference REFERENCE =Reference.ByRef;
-	// public static final Reference CASCADE = Reference.Cascade;
-	//
-	// public static final Importance KEY = Importance.Key;
-	// public static final Importance CORE = Importance.Core;
-	// public static final Importance REQUIRE =Importance.Require;
-	// public static final Importance UNIMPORTANT = Importance.Unimportant;
-
 	final String name;
-	final Alias nameAlias;
+	final Aliases nameAlias;
 	String displayName;
 	Importance importance = Importance.Unimportant;
 	boolean derived = false;
@@ -49,7 +38,15 @@ public class Field {
 		this.displayName = name;
 		this.resideType = resideType;
 		this.attrs = new InheritHashMap();
-		this.nameAlias = new Alias(name);
+		this.nameAlias = new Aliases(name);
+	}
+	public Field(Type resideType, String name,Aliases aliases) {
+		super();
+		this.resideType = resideType;
+		this.name = name;
+		this.nameAlias = aliases;
+		this.displayName = aliases.getDefault();
+		this.attrs = new InheritHashMap();
 	}
 
 	public String getDisplayName() {
@@ -126,7 +123,7 @@ public class Field {
 		return attrs;
 	}
 
-	public Alias getNameAlias() {
+	public Aliases getNameAlias() {
 		return nameAlias;
 	}
 

@@ -3,10 +3,10 @@ package nebula.lang;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Alias {
+public class Aliases {
 	final String defaultValue;
 	public final Map<String, String> alias;
-	public Alias(String defaultValue){
+	public Aliases(String defaultValue){
 		this.alias = new HashMap<String, String>();
 		this.defaultValue = defaultValue;
 	}

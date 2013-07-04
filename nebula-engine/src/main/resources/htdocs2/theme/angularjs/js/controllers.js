@@ -372,7 +372,7 @@ function ContactRecordsCtrl($scope, $resource) {
 
 	$scope.addContactRecord = function() {
 		$.extend($scope.data, {
-			AutoID : new Date().getTime(),
+			ID : new Date().getTime(),
 			Done : false,
 			LastUpdated : new Date().format("yyyy-MM-dd hh:mm:ss.S")
 		});
@@ -404,12 +404,12 @@ function ContactRecordsCtrl($scope, $resource) {
 		});
 	};
 
-	$scope.remove = function(AutoID) {
-		var Record = $resource('/d/ContactRecord/:AutoID', {
-			AutoID : '@AutoID'
+	$scope.remove = function(ID) {
+		var Record = $resource('/d/ContactRecord/:ID', {
+			ID : '@ID'
 		});
 		var record = Record.get({
-			AutoID : AutoID
+			ID : ID
 		}, function() {
 			record.$remove();
 		});

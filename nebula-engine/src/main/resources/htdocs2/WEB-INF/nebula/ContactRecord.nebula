@@ -1,5 +1,5 @@
 tx ContactRecord {
-	!AutoID;
+	!ID;
 	@GroupBy Company;
 	Person;
 	Content Text;

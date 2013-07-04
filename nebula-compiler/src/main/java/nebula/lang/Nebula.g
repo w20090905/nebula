@@ -65,8 +65,11 @@ programDefinition returns[List<Type> retTypes]
 typeDefinition returns[Type type]
     :   (attrs = attrListDefinition)?
         typeType=typeDefineKeyword 
-        typeID=ID {Alias alias = new Alias($typeID.text);} 
-        ('|' aliasLiteral[alias])?
+        typeID=ID 
+        /* Aliases */
+         ('|' aliases=aliasesLiteral[$typeID.text]
+         | {aliases = new Aliases($typeID.text);}
+         )
         ('extends' superTypeID=ID)? { 
             if($superTypeID==null){
                 switch(typeType){
@@ -91,10 +94,7 @@ typeDefinition returns[Type type]
             }
             
             addType(type);
-           
-            if(alias!=null){
-                type.setNameAlias(alias);
-            }
+            type.setNameAlias(aliases);
         }
         '{' 
             fieldDefinition[type]* 
@@ -107,7 +107,7 @@ typeDefineKeyword returns[TypeStandalone typeType]
       | ('flow')    {typeType = TypeStandalone.Flow;}
       | ('action')    {typeType = TypeStandalone.Action;};
 
-nestedTypeDefinition[Type resideType,String name,Alias nameAlias] returns[Type type]
+nestedTypeDefinition[Type resideType,String name,Aliases nameAlias] returns[Type type]
     :   '{' 
             {
               String typeName = resideType.name + "$" + name;
@@ -122,18 +122,27 @@ fieldDefinition[Type resideType] returns[Field field]
     :   (attrs = attrListDefinition)?  
         imp=fieldImportance
         inline=inlineDefinition
-        name=ID ('-' qtype=ID)?  { 
+        name=ID ('-' qtype=ID)?  
+        /* Aliases */
+         ('|' aliases=aliasesLiteral[$name.text]
+         | {aliases = new Aliases($name.text);}
+         )
+         { 
             if($qtype!=null){
-              field = new Field(resideType,$name.text + $qtype.text);
+              field = new Field(resideType,$name.text + $qtype.text,aliases);
               field.type = resolveType($qtype.text);
             } else {
-              field = new Field(resideType,$name.text);
+              field = new Field(resideType,$name.text,aliases);
            }
           }
           
         /* alias name */
-        ('|' aliasLiteral[field.nameAlias])?
+       
         
+        
+        /* Actions */
+        ('()' |
+        )
         /* Array? */
         range=arrayDefinition
         
@@ -237,14 +246,21 @@ decimal
         | '.' INT+
     ;
     
-aliasLiteral[Alias alias]
-    :   language=flexID ':' value=flexID {alias.add(language,value);}
-        ('|' language=flexID ':' value=flexID {alias.add(language,value);} )*
+aliasesLiteral[String name] returns[Aliases aliases]
+    :   text = flexID (':'  value=flexID)? {
+            if(value!=null){
+                aliases = new Aliases(name);
+                aliases.add(text,value);
+            }else{
+                aliases = new Aliases(text);
+            }
+        }
+        ('|' language=flexID ':' value=flexID {aliases.add(language,value);} )*
     ;
 
 flexID returns[String text]
     :   StringLiteral {text = $StringLiteral.text.substring(1,$StringLiteral.text.length()-1);}
-      | ID  {text = $ID.text;}
+      | pre=ID  ('-' post=ID)?{text = $pre.text; if($post!=null) text = text + "-" + $post.text;}
     ;
 
 statement:

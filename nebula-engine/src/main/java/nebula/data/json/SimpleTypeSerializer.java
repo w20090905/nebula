@@ -1,7 +1,7 @@
 package nebula.data.json;
 
 import nebula.data.Entity;
-import nebula.lang.Alias;
+import nebula.lang.Aliases;
 import nebula.lang.Type;
 
 import org.codehaus.jackson.JsonGenerator;
@@ -39,7 +39,7 @@ public class SimpleTypeSerializer extends DefaultFieldSerializer<Type> implement
 		}
 		out.writeStringField("Standalone", type.getStandalone().name());
 
-		Alias n = type.getNameAlias();
+		Aliases n = type.getNameAlias();
 		out.writeFieldName("NameAlias");
 		out.writeStartObject();
 		for (String k : n.alias.keySet()) {

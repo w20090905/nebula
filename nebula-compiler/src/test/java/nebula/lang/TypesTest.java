@@ -22,7 +22,6 @@ public class TypesTest extends TestCase {
 				 " Address;\n" + 
 				 " Age;\n" + 
 				 " Amount;\n" + 
-				 " AutoID;\n" + 
 				 " BBAN;\n" + 
 				 " Birthday;\n" + 
 				 " Code;\n" + 
@@ -94,7 +93,7 @@ public class TypesTest extends TestCase {
 
 		assertEquals("Person", type.name);
 
-		assertEquals(72, type.fields.size());
+		assertEquals(71, type.fields.size());
 		int i = -1;
 		i++;	assertEquals("Account", type.fields.get(i).name);
 		i++;	assertEquals("AccountNo", type.fields.get(i).name);
@@ -102,7 +101,6 @@ public class TypesTest extends TestCase {
 		i++;	assertEquals("Address", type.fields.get(i).name);
 		i++;	assertEquals("Age", type.fields.get(i).name);
 		i++;	assertEquals("Amount", type.fields.get(i).name);
-		i++;	assertEquals("AutoID", type.fields.get(i).name);
 		i++;	assertEquals("BBAN", type.fields.get(i).name);
 		i++;	assertEquals("Birthday", type.fields.get(i).name);
 		i++;	assertEquals("Code", type.fields.get(i).name);
