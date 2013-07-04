@@ -1,5 +1,6 @@
 package nebula.expr;
 
+@Deprecated
 public interface V<T> extends Exp {
 	T exec();
 

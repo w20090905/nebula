@@ -11,8 +11,6 @@ import http.io.ClassPathLoader;
 import http.io.FileSystemLoader;
 import http.io.Loader;
 import http.io.MultiLoader;
-import http.resource.EntityFilterBuilder;
-import http.resource.TypeFilterBuilder;
 import http.server.BasicResourceContainer;
 
 import java.io.File;
@@ -93,10 +91,6 @@ public class ConfigModule extends AbstractModule {
 			Loader loader = new MultiLoader(new ClassPathLoader(this.getClass().getClassLoader(), PATH_OF_ROOT),
 					new FileSystemLoader(root));
 			this.bind(Loader.class).toInstance(loader);
-
-			// Filter
-			this.bind(EntityFilterBuilder.class);
-			this.bind(TypeFilterBuilder.class);
 
 			// Database configuration
 			this.bind(DbConfiguration.class).toInstance(

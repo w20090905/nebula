@@ -50,6 +50,7 @@ public abstract class TypeLoader {
 	protected long lastModified;
 	final Classificator<String, Type> classifyBy;
 
+	@SuppressWarnings("unchecked")
 	public TypeLoader(TypeLoader parent) {
 		this.parent = parent;
 		if (parent != null) {

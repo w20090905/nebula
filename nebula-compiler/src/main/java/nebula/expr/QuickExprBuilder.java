@@ -1,5 +1,6 @@
 package nebula.expr;
 
+@Deprecated
 public abstract class QuickExprBuilder {
 	protected Exp exp;
 

@@ -16,10 +16,10 @@ import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import nebula.data.Broker;
 import nebula.data.Classificator;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.Broker;
 import nebula.data.json.DataHelper;
 
 import org.eclipse.jetty.util.URIUtil;
@@ -33,7 +33,6 @@ import com.google.common.cache.LoadingCache;
 public class EntityListResouce extends AbstractResouce {
 	private final Broker<DataHelper<Entity, Reader, Writer>> jsonHolder;
 	private final Broker<DataStore<Entity>> datastoreHolder;
-	final EntityFilterBuilder filterBuilder;
 	final LoadingCache<String, DataHolder> dataCache;
 
 	class DataHolder {
@@ -73,34 +72,31 @@ public class EntityListResouce extends AbstractResouce {
 		return bout.toByteArray();
 	}
 
-	public EntityListResouce(Broker<DataHelper<Entity, Reader, Writer>> json, Broker<DataStore<Entity>> datas,
-			final EntityFilterBuilder filterBuilder) {
+	public EntityListResouce(Broker<DataHelper<Entity, Reader, Writer>> json, Broker<DataStore<Entity>> datas) {
 		super("text/json", 0, 1000);
 		this.jsonHolder = json;
 		this.datastoreHolder = datas;
-		this.filterBuilder = filterBuilder;
-		this.dataCache = CacheBuilder.newBuilder().maximumSize(1000)
-				.build(new CacheLoader<String, DataHolder>() {
-					public DataHolder load(String query) {
-						String[] params = query.split("&");
-						DataStore<Entity> dataStore = datastoreHolder.get();
-						Map<String, Classificator<String, Entity>> classificatores = dataStore.getClassificatores();
-						String cKey = null;
-						String cValue  = null;
-						for (String keyvalue : params) {
-							String[] kv = keyvalue.split("=");
-							String key = kv[0];
-							String value = kv[1];
-							if (classificatores.containsKey(key)) {
-								cKey = key;
-								cValue = value;
-								break;
-							}
-						}
-
-						return new DataHolder(classificatores.get(checkNotNull(cKey)), cValue);
+		this.dataCache = CacheBuilder.newBuilder().maximumSize(1000).build(new CacheLoader<String, DataHolder>() {
+			public DataHolder load(String query) {
+				String[] params = query.split("&");
+				DataStore<Entity> dataStore = datastoreHolder.get();
+				Map<String, Classificator<String, Entity>> classificatores = dataStore.getClassificatores();
+				String cKey = null;
+				String cValue = null;
+				for (String keyvalue : params) {
+					String[] kv = keyvalue.split("=");
+					String key = kv[0];
+					String value = kv[1];
+					if (classificatores.containsKey(key)) {
+						cKey = key;
+						cValue = value;
+						break;
 					}
-				});
+				}
+
+				return new DataHolder(classificatores.get(checkNotNull(cKey)), cValue);
+			}
+		});
 	}
 
 	protected void get(HttpServletRequest req) {

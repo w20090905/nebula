@@ -1,5 +1,6 @@
 package nebula.expr;
 
+@Deprecated
 public interface LogicExp extends Exp {
 	LogicExp and(LogicExp v);
 

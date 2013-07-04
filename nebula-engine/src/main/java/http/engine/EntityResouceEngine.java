@@ -1,11 +1,9 @@
 package http.engine;
 
-import http.resource.EntityFilterBuilder;
 import http.resource.EntityListResouce;
 import http.resource.EntityResouce;
 import http.resource.TxEntityResource;
 import http.resource.TypeEditableResouce;
-import http.resource.TypeFilterBuilder;
 import http.resource.TypeListResouce;
 
 import java.io.Reader;
@@ -37,18 +35,12 @@ public class EntityResouceEngine implements ResourceEngine {
 	final DataRepos persistence;
 	final TypeLoader typeLoader;
 	final TypeDatastore typeBrokers;
-	final EntityFilterBuilder entityFilterBuilder;
-	final TypeFilterBuilder typeFilterBuilder;
 
 	Map<String, String> tmap = new HashMap<String, String>();
 
 	@Inject
-	public EntityResouceEngine(final DataRepos dataWareHouse, EditableTypeLoader typeLoader,
-			TypeDatastore typeBrokers, final EntityFilterBuilder entityFilterBuilder,
-			TypeFilterBuilder typeFilterBuilder) {
+	public EntityResouceEngine(final DataRepos dataWareHouse, EditableTypeLoader typeLoader, TypeDatastore typeBrokers) {
 		this.persistence = dataWareHouse;
-		this.entityFilterBuilder = entityFilterBuilder;
-		this.typeFilterBuilder = typeFilterBuilder;
 		this.typeLoader = typeLoader;
 		this.typeBrokers = typeBrokers;
 	}
@@ -74,7 +66,7 @@ public class EntityResouceEngine implements ResourceEngine {
 				return new TypeEditableResouce(persistence, typeLoader, id);
 			} else {
 				DataHelper<Type, Reader, Writer> json = JsonHelperProvider.getSimpleSerialize(Type.class);
-				return new TypeListResouce(typeLoader, json, typeFilterBuilder);
+				return new TypeListResouce(typeLoader, json);
 			}
 		} else {
 			Broker<Type> typeBroker = typeBrokers.getBroker(typeName);
@@ -88,7 +80,7 @@ public class EntityResouceEngine implements ResourceEngine {
 				} else {
 					Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
 							.getSimpleHelper(typeBroker);
-					return new EntityListResouce(jsonHolder, storeHolder, entityFilterBuilder);
+					return new EntityListResouce(jsonHolder, storeHolder);
 				}
 			} else {
 				Broker<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);
@@ -99,7 +91,7 @@ public class EntityResouceEngine implements ResourceEngine {
 				} else {
 					Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
 							.getSimpleHelper(typeBroker);
-					return new EntityListResouce(jsonHolder, storeHolder, entityFilterBuilder);
+					return new EntityListResouce(jsonHolder, storeHolder);
 				}
 
 			}

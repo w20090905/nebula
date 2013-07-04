@@ -45,7 +45,7 @@ public class DefaultDataRepos implements DataReposEx {
 						return false;
 					}
 				};
-				typeBroker.addListener(datastoreBroker);
+				typeBroker.addWatcher(datastoreBroker);
 
 				return datastoreBroker;
 			}

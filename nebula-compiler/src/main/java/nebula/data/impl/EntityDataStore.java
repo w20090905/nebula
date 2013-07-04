@@ -17,8 +17,6 @@ import nebula.lang.TypeStandalone;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import util.Entities;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 
@@ -41,8 +39,13 @@ public class EntityDataStore implements DataStoreEx<Entity> {
 		for (Field f : type.getFields()) {
 			if (f.getAttrs().containsKey("GroupBy")) {
 				if (f.getType().getStandalone() == TypeStandalone.Basic) {
-					String name = f.getName();
-					Classificator<String, Entity> classificator = Entities.classify(f.getName());
+					final String name = f.getName();
+					DataClassificator<String, Entity> classificator = new DataClassificator<String, Entity>( new Function<Entity, String>() {
+						@Override
+						public String apply(Entity from) {
+							return  String.valueOf(from.get(name));
+						}
+					});
 					this.values.addListener(classificator);
 					classificatores.put(name, classificator);
 					if (log.isDebugEnabled()) {
@@ -51,8 +54,13 @@ public class EntityDataStore implements DataStoreEx<Entity> {
 				} else if (f.getRefer() == Reference.ByRef) {
 					for (Field inf : f.getType().getFields()) {
 						if (inf.isKey() && inf.getType().getStandalone() == TypeStandalone.Basic) {
-							String name = f.getName() + inf.getName();
-							Classificator<String, Entity> classificator = Entities.classify(name);
+							final String name = f.getName() + inf.getName();
+							DataClassificator<String, Entity> classificator = new DataClassificator<String, Entity>( new Function<Entity, String>() {
+								@Override
+								public String apply(Entity from) {
+									return  String.valueOf(from.get(name));
+								}
+							});
 							this.values.addListener(classificator);
 							classificatores.put(name, classificator);
 							if (log.isDebugEnabled()) {

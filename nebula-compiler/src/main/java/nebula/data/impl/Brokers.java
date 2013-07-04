@@ -21,7 +21,7 @@ class Brokers {
 			this.lastData = newData;
 		}
 
-		public void addListener(DataWatcher<T> listener) {
+		public void addWatcher(DataWatcher<T> listener) {
 			listeners.add(listener);
 		}
 

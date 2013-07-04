@@ -10,8 +10,6 @@ import nebula.data.util.RecentDateClassificatorFunction;
 
 import org.joda.time.DateTime;
 
-import util.Entities;
-
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 
@@ -30,9 +28,10 @@ public class RecentDateDataClassificatorTest extends TestCase {
 			}
 		});
 
-		classificator = list.addListener(Entities.classify(new Function<Entity, String>() {
+		classificator = list.addListener(new DataClassificator<String, Entity>(new Function<Entity, String>() {
 			Function<DateTime, String> convertFunction = new RecentDateClassificatorFunction(new DateTime()
 					.withDayOfMonth(10).withDayOfWeek(3));
+
 			@Override
 			public String apply(Entity from) {
 				return convertFunction.apply((DateTime) from.get("Date"));

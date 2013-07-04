@@ -25,15 +25,13 @@ public class TypeListResouce extends AbstractResouce {
 	private static Log log = LogFactory.getLog(TypeListResouce.class);
 	private final DataHelper<Type, Reader, Writer> json;
 	final TypeLoader typeLoader;
-	final TypeFilterBuilder filterBuilder;
 
 	protected byte[] cacheAll;
 
-	public TypeListResouce(TypeLoader typeLoader, DataHelper<Type, Reader, Writer> json, TypeFilterBuilder filterBuilder) {
+	public TypeListResouce(TypeLoader typeLoader, DataHelper<Type, Reader, Writer> json) {
 		super("text/json", 0, 1000);
 		this.typeLoader = typeLoader;
 		this.json = json;
-		this.filterBuilder = filterBuilder;
 	}
 
 	@Override

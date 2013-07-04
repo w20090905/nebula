@@ -3,9 +3,10 @@ package nebula.data;
 import java.util.List;
 import java.util.Set;
 
-public interface Classificator<K, V> extends DataListener<V>{
+public interface Classificator<K, V> {
 	Set<K> getClassifications();
 
 	List<V> getData(K classification);
-	List<V> getData(K classification,K classification2);
+
+	List<V> getData(K classification, K classification2);
 }
