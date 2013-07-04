@@ -9,8 +9,7 @@ import java.io.Writer;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nebula.data.DataPersister;
-import nebula.data.Entity;
+import nebula.data.DataRepos;
 import nebula.data.json.DataHelper;
 import nebula.data.json.JsonHelperProvider;
 import nebula.lang.Type;
@@ -21,9 +20,9 @@ public class TypeEditableResouce extends AbstractResouce {
 	private final DataHelper<Type, Reader, Writer> json;
 	private final String key;
 	final TypeLoader typeLoader;
-	final DataPersister<Entity> dataWareHouse;
+	final DataRepos dataWareHouse;
 
-	public TypeEditableResouce(final DataPersister<Entity> dataWareHouse, TypeLoader typeLoader, String key) {
+	public TypeEditableResouce(final DataRepos dataWareHouse, TypeLoader typeLoader, String key) {
 		super("text/json", 60 * 60, 1000);
 		this.dataWareHouse = dataWareHouse;
 		this.key = key;
@@ -73,7 +72,7 @@ public class TypeEditableResouce extends AbstractResouce {
 				log.trace(type.getCode());
 			}
 			type = typeLoader.update(type, newCode);
-			dataWareHouse.reload(String.class, Entity.class, type.getName());
+//			dataWareHouse.reload(String.class, Entity.class, type.getName());//TODO
 		} else {
 			if (log.isTraceEnabled()) {
 				log.trace("No Change:");

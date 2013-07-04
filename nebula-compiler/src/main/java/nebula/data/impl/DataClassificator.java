@@ -30,12 +30,12 @@ public class DataClassificator<K, V extends Timable> implements DataListener<V>,
 		}
 	}
 
-	public void add(V v) {
+	public void onAdd(V v) {
 		K classification = indexFunction.apply(v);
 		if (classification != null) this.values.get(classification).add(v);
 	}
 
-	public void update(V oldData, V newData) {
+	public void onUpdate(V oldData, V newData) {
 		if (Objects.equal(oldData, newData)) {
 			return;
 		}
@@ -46,7 +46,7 @@ public class DataClassificator<K, V extends Timable> implements DataListener<V>,
 		if (newClassification != null) this.values.get(newClassification).add(newData);
 	}
 
-	public void remove(V v) {
+	public void onRemove(V v) {
 		K classification = indexFunction.apply(v);
 		if (classification != null) this.values.get(classification).remove(v);
 	}

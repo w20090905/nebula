@@ -108,7 +108,7 @@ public class EntityListResouce extends AbstractResouce {
 			String query = URIUtil.decodePath(req.getQueryString());
 			List<Entity> dataList;
 			if (query == null || query.length() == 0) {
-				dataList = datastoreHolder.get().all();
+				dataList = datastoreHolder.get().listAll();
 				this.cache = buildFrom(dataList);
 			} else {
 				this.cache = dataCache.get(query).get();

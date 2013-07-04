@@ -23,10 +23,10 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import nebula.data.DataPersister;
-import nebula.data.Entity;
+import nebula.data.DataRepos;
 import nebula.data.db.DbConfiguration;
-import nebula.data.impl.DbEntityDataPersister;
+import nebula.data.impl.DbDataRepos;
+import nebula.data.impl.TypeDatastore;
 import nebula.lang.EditableTypeLoader;
 import nebula.lang.SystemTypeLoader;
 import nebula.lang.TypeLoader;
@@ -83,6 +83,8 @@ public class ConfigModule extends AbstractModule {
 			// Type Define locator
 			EditableTypeLoader typeLoader = new EditableTypeLoader(new SystemTypeLoader(), new File("apps/system"));
 			typeLoader.loadFolder(new File("apps/redmine"));
+			
+			this.bind(TypeDatastore.class).toInstance(new TypeDatastore(typeLoader));
 
 			this.bind(EditableTypeLoader.class).toInstance(typeLoader);
 			this.bind(TypeLoader.class).toInstance(typeLoader);
@@ -101,8 +103,7 @@ public class ConfigModule extends AbstractModule {
 					DbConfiguration.getEngine(driverclass, dburl, username, password));
 			
 			// Data Persister
-			this.bind(new TypeLiteral<DataPersister<Entity>>() {
-			}).to(DbEntityDataPersister.class).in(Scopes.SINGLETON);
+			this.bind(DataRepos.class).to(DbDataRepos.class).in(Scopes.SINGLETON);
 
 			// Freemarker
 			Configuration freemarkerConfiguration = new Configuration();

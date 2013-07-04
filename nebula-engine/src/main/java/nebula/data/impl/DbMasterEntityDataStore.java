@@ -5,15 +5,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 import java.util.Map;
 
-import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.IDGenerator;
 import nebula.data.db.DbDataExecutor;
 import nebula.lang.Field;
 import nebula.lang.Type;
 import nebula.lang.TypeStandalone;
 
-public class DbMasterEntityDataStore extends EntityDataStore {
+class DbMasterEntityDataStore extends EntityDataStore {
 
 	final DbDataExecutor db;
 
@@ -21,7 +19,7 @@ public class DbMasterEntityDataStore extends EntityDataStore {
 	final String key;
 	boolean withID = false;
 
-	DbMasterEntityDataStore(final DbEntityDataPersister persistence, Type type, final DbDataExecutor exec) {
+	DbMasterEntityDataStore(final DbDataRepos persistence, Type type, final DbDataExecutor exec) {
 		super(IdMakerBuilder.getIDReader(type), persistence, type);
 		this.db = exec;
 
@@ -63,7 +61,7 @@ public class DbMasterEntityDataStore extends EntityDataStore {
 				lock.lock();
 				try {
 					// DB
-					long id = (Long)sourceEntity.get(key);
+					long id = (Long) sourceEntity.get(key);
 					db.update(newEntity, id);
 
 					EntityImp newSource = loadin(sourceEntity, db.get(id));
@@ -123,7 +121,7 @@ public class DbMasterEntityDataStore extends EntityDataStore {
 	class DbEntity extends EntityImp {
 		final int index;
 
-		DbEntity(DataStore<Entity> store, Map<String, Object> data, int index) {
+		DbEntity(DataStoreEx<Entity> store, Map<String, Object> data, int index) {
 			super(store, data);
 			this.index = index;
 		}
@@ -143,7 +141,7 @@ public class DbMasterEntityDataStore extends EntityDataStore {
 		return inner;
 	}
 
-	public void clear() {
+	public void clearChanges() {
 		db.deleteAll();
 	}
 

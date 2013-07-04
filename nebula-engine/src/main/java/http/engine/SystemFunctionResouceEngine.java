@@ -11,7 +11,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import nebula.data.Broker;
-import nebula.data.DataPersister;
+import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
@@ -21,10 +21,10 @@ import nebula.server.ResourceEngine;
 
 public class SystemFunctionResouceEngine implements ResourceEngine {
 	final private Map<String, Resource> cachedLinks = new HashMap<String, Resource>();
-	DataPersister<Entity> persistence;
+	DataRepos persistence;
 
 	@Inject
-	public SystemFunctionResouceEngine(DataPersister<Entity> dataWareHouse) {
+	public SystemFunctionResouceEngine(DataRepos dataWareHouse) {
 		this.persistence = dataWareHouse;
 		DataHelper<Entity, Reader, Writer> json = JsonHelperProvider.getSerialize(Entity.class);
 		Broker<DataStore<Entity>> users = persistence.define(String.class, Entity.class, "User");

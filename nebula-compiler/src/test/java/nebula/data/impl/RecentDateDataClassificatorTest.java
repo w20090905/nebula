@@ -10,9 +10,12 @@ import nebula.data.util.RecentDateClassificatorFunction;
 
 import org.joda.time.DateTime;
 
+import util.Entities;
+
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 
+@Deprecated
 public class RecentDateDataClassificatorTest extends TestCase {
 	SmartList<String, Entity> list;
 	Classificator<String, Entity> classificator;

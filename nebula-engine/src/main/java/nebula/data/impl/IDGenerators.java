@@ -1,12 +1,11 @@
 package nebula.data.impl;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import nebula.data.IDGenerator;
 import nebula.lang.Field;
 import nebula.lang.Type;
 import nebula.lang.TypeStandalone;
 
-public class IDGenerators {
+class IDGenerators {
 
 	public static IDGenerator build(Type type) {
 		Field keyField;

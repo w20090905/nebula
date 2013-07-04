@@ -15,10 +15,11 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import nebula.data.DataPersister;
+import nebula.data.Broker;
+import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.Broker;
+import nebula.data.impl.TypeDatastore;
 import nebula.data.json.DataHelper;
 import nebula.data.json.JsonHelperProvider;
 import nebula.lang.EditableTypeLoader;
@@ -33,20 +34,23 @@ import org.apache.commons.logging.LogFactory;
 
 public class EntityResouceEngine implements ResourceEngine {
 	private Log log = LogFactory.getLog(this.getClass());
-	final DataPersister<Entity> persistence;
+	final DataRepos persistence;
 	final TypeLoader typeLoader;
+	final TypeDatastore typeBrokers;
 	final EntityFilterBuilder entityFilterBuilder;
 	final TypeFilterBuilder typeFilterBuilder;
 
 	Map<String, String> tmap = new HashMap<String, String>();
 
 	@Inject
-	public EntityResouceEngine(final DataPersister<Entity> dataWareHouse, EditableTypeLoader typeLoader,
-			final EntityFilterBuilder entityFilterBuilder, TypeFilterBuilder typeFilterBuilder) {
+	public EntityResouceEngine(final DataRepos dataWareHouse, EditableTypeLoader typeLoader,
+			TypeDatastore typeBrokers, final EntityFilterBuilder entityFilterBuilder,
+			TypeFilterBuilder typeFilterBuilder) {
 		this.persistence = dataWareHouse;
 		this.entityFilterBuilder = entityFilterBuilder;
 		this.typeFilterBuilder = typeFilterBuilder;
 		this.typeLoader = typeLoader;
+		this.typeBrokers = typeBrokers;
 	}
 
 	@Override
@@ -73,30 +77,28 @@ public class EntityResouceEngine implements ResourceEngine {
 				return new TypeListResouce(typeLoader, json, typeFilterBuilder);
 			}
 		} else {
-			Type type = typeLoader.findType(typeName);
-			if (type.getStandalone() == TypeStandalone.Transaction) {
+			Broker<Type> typeBroker = typeBrokers.getBroker(typeName);
+			if (typeBroker.get().getStandalone() == TypeStandalone.Transaction) {
 
 				Broker<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);
 
 				if (id != null) {
-					Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
-							.getHelper(new TypeHolder(typeLoader, typeName));
+					Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(typeBroker);
 					return new TxEntityResource(jsonHolder, storeHolder, id);
 				} else {
 					Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
-							.getSimpleHelper(new TypeHolder(typeLoader, typeName));
+							.getSimpleHelper(typeBroker);
 					return new EntityListResouce(jsonHolder, storeHolder, entityFilterBuilder);
 				}
 			} else {
 				Broker<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);
 
 				if (id != null) {
-					Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
-							.getHelper(new TypeHolder(typeLoader, typeName));
+					Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(typeBroker);
 					return new EntityResouce(jsonHolder, storeHolder, id);
 				} else {
 					Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider
-							.getSimpleHelper(new TypeHolder(typeLoader, typeName));
+							.getSimpleHelper(typeBroker);
 					return new EntityListResouce(jsonHolder, storeHolder, entityFilterBuilder);
 				}
 

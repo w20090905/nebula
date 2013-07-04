@@ -3,20 +3,19 @@ package nebula.data.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import nebula.data.DataStore;
 import nebula.data.Entity;
 
 public class EntityImp implements Entity {
 	Map<String, Object> data;
-	DataStore<Entity> store;
+	DataStoreEx<Entity> store;
 	long lastModified;
 
-	EntityImp(DataStore<Entity> store, Map<String, Object> data) {
+	EntityImp(DataStoreEx<Entity> store, Map<String, Object> data) {
 		this.store = store;
 		this.data = data;
 	}
 
-	EntityImp(DataStore<Entity> store) {
+	EntityImp(DataStoreEx<Entity> store) {
 		this(store, new HashMap<String, Object>());
 	}
 

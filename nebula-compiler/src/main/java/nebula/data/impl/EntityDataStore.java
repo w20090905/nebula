@@ -6,8 +6,7 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
 import nebula.data.Classificator;
-import nebula.data.DataPersister;
-import nebula.data.DataStore;
+import nebula.data.Editable;
 import nebula.data.Entity;
 import nebula.data.SmartList;
 import nebula.lang.Field;
@@ -18,20 +17,22 @@ import nebula.lang.TypeStandalone;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import util.Entities;
+
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 
-public class EntityDataStore implements DataStore<Entity> {
+public class EntityDataStore implements DataStoreEx<Entity> {
 	private static Log log = LogFactory.getLog(EntityDataStore.class);
 
-	final DataPersister<Entity> persistence;
+	final DataReposEx persistence;
 	final SmartList<Object, Entity> values;
 	final ReentrantLock lock = new ReentrantLock();
 	final Function<Entity, Object> idMaker;
 	long lastModified;
 	final Map<String, Classificator<String, Entity>> classificatores;
 
-	EntityDataStore(Function<Entity, Object> keyMaker, DataPersister<Entity> persistence, Type type) {
+	EntityDataStore(Function<Entity, Object> keyMaker, DataReposEx persistence, Type type) {
 		this.persistence = persistence;
 		this.values = new SmartList<Object, Entity>(keyMaker);
 		this.idMaker = keyMaker;
@@ -71,11 +72,11 @@ public class EntityDataStore implements DataStore<Entity> {
 
 	@Override
 	public void add(Entity v) {
+		EditableEntity entity = (EditableEntity) v;
 		if (v.isTransient()) {
-			EditableEntity entity = (EditableEntity) v;
 			entity.store = this;
 		}
-		persistence.add(v);
+		persistence.markChanged(entity);
 	}
 
 	@Override
@@ -88,7 +89,7 @@ public class EntityDataStore implements DataStore<Entity> {
 	}
 
 	@Override
-	public void markChanged(Entity v) {
+	public void markChanged(Editable v) {
 		persistence.markChanged(v);
 	}
 
@@ -127,12 +128,12 @@ public class EntityDataStore implements DataStore<Entity> {
 	}
 
 	@Override
-	public List<Entity> all() {
+	public List<Entity> listAll() {
 		return this.values;
 	}
 
-	public void clear() {
-		values.clear();
+	public void clearChanges() {
+		persistence.clearChanges();
 	}
 
 	@Override
@@ -143,39 +144,6 @@ public class EntityDataStore implements DataStore<Entity> {
 	@Override
 	public void unload() {
 	}
-
-	//
-	// @Override
-	// public <K> Classificator<K, Entity> classify(Function<Entity, K>
-	// indexerFunction) {
-	// DataClassificator<K, Entity> classificator = new DataClassificator<K,
-	// Entity>(this.values, indexerFunction);
-	// return classificator;
-	// }
-	//
-	// @Override
-	// public <K> Classificator<K, Entity> liveClassify(Function<Entity, K>
-	// indexerFunction) {
-	// DataClassificator<K, Entity> classificator = new DataClassificator<K,
-	// Entity>(indexerFunction);
-	// values.addListener(classificator);
-	// return classificator;
-	// }
-	//
-	// @Override
-	// public List<Entity> filter(Predicate<Entity> filterFunction) {
-	// Filter<Entity> filter = Entities.filter(filterFunction);
-	// this.values.addListener((DataListener<Entity>) filter);
-	// return filter.get();
-	// }
-	//
-	// @Override
-	// public ClassifiableFilter<Entity> liveFilter(Predicate<Entity>
-	// filterFunction) {
-	// ClassifiableFilter<Entity> filter = Entities.filter(filterFunction);
-	// this.values.addListener((DataListener<Entity>) filter);
-	// return filter;
-	// }
 
 	@Override
 	public long getLastModified() {

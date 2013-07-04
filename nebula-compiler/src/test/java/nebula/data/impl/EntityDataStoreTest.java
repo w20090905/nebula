@@ -3,20 +3,20 @@ package nebula.data.impl;
 import java.util.List;
 
 import junit.framework.TestCase;
-import nebula.data.DataPersister;
+import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.impl.EditableEntity;
-import nebula.data.impl.InMemoryDataPersister;
+import nebula.data.impl.DefaultDataRepos;
 import nebula.lang.SystemTypeLoader;
 
 public class EntityDataStoreTest extends TestCase {
 
-	DataPersister<Entity> p;
+	DataRepos p;
 	DataStore<Entity> store;
 
 	protected void setUp() throws Exception {
-		p = new InMemoryDataPersister(new SystemTypeLoader());
+		p = new DefaultDataRepos(new TypeDatastore(new SystemTypeLoader()));
 		store = p.define(String.class,Entity.class, "Person").get();
 	}
 
@@ -34,7 +34,7 @@ public class EntityDataStoreTest extends TestCase {
 		v.put("Name", "wangshilian");
 		store.add(v);
 		store.flush();
-		assertEquals(1, store.all().size());
+		assertEquals(1, store.listAll().size());
 	}
 
 	public final void testLoad() {
@@ -49,7 +49,7 @@ public class EntityDataStoreTest extends TestCase {
 
 		v = store.get("wangshilian");
 		assertNotNull(v);
-		assertEquals(1, store.all().size());
+		assertEquals(1, store.listAll().size());
 		assertEquals("wangshilian", v.getID());
 
 		try {
@@ -62,7 +62,7 @@ public class EntityDataStoreTest extends TestCase {
 
 		v.put("length", "180");
 
-		List<Entity> list = store.all();
+		List<Entity> list = store.listAll();
 		assertEquals(1, list.size());
 		Entity e1 = list.get(0);
 		assertEquals("wangshilian", e1.getID());
@@ -72,7 +72,7 @@ public class EntityDataStoreTest extends TestCase {
 		store.add(v);
 		store.flush();
 
-		list = store.all();
+		list = store.listAll();
 		assertEquals(2, list.size());
 		Entity e2 = list.get(1);
 		assertEquals("test", e2.getID());

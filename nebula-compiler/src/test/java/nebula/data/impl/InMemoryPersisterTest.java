@@ -1,20 +1,20 @@
 package nebula.data.impl;
 
 import junit.framework.TestCase;
-import nebula.data.DataPersister;
+import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.impl.EditableEntity;
-import nebula.data.impl.InMemoryDataPersister;
+import nebula.data.impl.DefaultDataRepos;
 import nebula.lang.SystemTypeLoader;
 
 public class InMemoryPersisterTest extends TestCase {
 
-	DataPersister<Entity> p;
+	DataRepos p;
 	DataStore<Entity> store;
 
 	protected void setUp() throws Exception {
-		p = new InMemoryDataPersister(new SystemTypeLoader());
+		p = new DefaultDataRepos(new TypeDatastore(new SystemTypeLoader()));
 		store = p.define(String.class, Entity.class, "Person").get();
 	}
 
@@ -36,14 +36,14 @@ public class InMemoryPersisterTest extends TestCase {
 		assertEquals("wangshilian", v.get("Name"));
 		// assertEquals(null, ((EditableEntity)v).source);
 
-		p.flush();
+		store.flush();
 
 		assertEquals(true, v.isDirty());
 		assertEquals("wangshilian", v.get("Name"));
 		// assertEquals(null, ((EditableEntity)v).source);
 
 		store.add(v);
-		p.flush();
+		store.flush();
 
 		assertEquals(false, v.isDirty());
 		assertEquals("wangshilian", v.get(Entity.PRIMARY_KEY));
@@ -67,15 +67,15 @@ public class InMemoryPersisterTest extends TestCase {
 		assertEquals("180", v.get("length"));
 		assertEquals("120", store.get("wangshilian").get("length"));
 
-		p.clearChanges();
-		p.flush();
+		store.clearChanges();
+		store.flush();
 
 		assertEquals(true, v.isDirty());
 		assertEquals("180", v.get("length"));
 		assertEquals("120", store.get("wangshilian").get("length"));
 
-		p.add(v);
-		p.flush();
+		store.add(v);
+		store.flush();
 
 		assertEquals(false, v.isDirty());
 		assertEquals("180", v.get("length"));

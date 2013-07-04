@@ -76,6 +76,13 @@ public abstract class TypeLoader {
 		types.addListener((DataListener<Type>) classifyBy);
 	}
 
+	public void addListener(DataListener<Type> listener) {
+		types.addListener(listener);
+		if (this.parent != null) {
+			parent.addListener(listener);
+		}
+	}
+
 	//
 	// public Filter<Type> liveFilter(Predicate<Type> filterFunction) {
 	// return types.liveFilter(filterFunction);
@@ -172,6 +179,7 @@ public abstract class TypeLoader {
 	}
 
 	static long cntLevel = 0;
+
 	public Type findType(String name) {
 		if (log.isTraceEnabled()) {
 			log.trace("\tsearch type [" + name + "]  from " + this.getClass().getName());
@@ -194,7 +202,8 @@ public abstract class TypeLoader {
 				return type;
 			}
 			if (log.isDebugEnabled()) {
-				log.debug( "[ "+ ++cntLevel +  " ] " + name + " - before loadClassData from " + this.getClass().getName());
+				log.debug("[ " + ++cntLevel + " ] " + name + " - before loadClassData from "
+						+ this.getClass().getName());
 			}
 			URL url = loadClassData(name);
 			if (url != null) {
@@ -203,12 +212,14 @@ public abstract class TypeLoader {
 					log.debug("loaded type [" + name + "]  \tfrom " + this.getClass().getName());
 				}
 				if (log.isDebugEnabled()) {
-					log.debug( "[ "+ cntLevel-- +  " ] " + name + " - succeed loadClassData from " + this.getClass().getName());
+					log.debug("[ " + cntLevel-- + " ] " + name + " - succeed loadClassData from "
+							+ this.getClass().getName());
 				}
 				return typeList.get(0);
 			} else {
 				if (log.isDebugEnabled()) {
-					log.debug( "[ "+ cntLevel -- +  " ] " + name + " - fail loadClassData from " + this.getClass().getName());
+					log.debug("[ " + cntLevel-- + " ] " + name + " - fail loadClassData from "
+							+ this.getClass().getName());
 				}
 				return null;
 			}

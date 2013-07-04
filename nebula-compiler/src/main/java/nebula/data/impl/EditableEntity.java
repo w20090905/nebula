@@ -3,7 +3,6 @@ package nebula.data.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import nebula.data.DataStore;
 import nebula.data.Editable;
 import nebula.data.Entity;
 
@@ -14,13 +13,13 @@ public class EditableEntity extends EntityImp implements Editable {
 	boolean dirty = false;// <->pristine
 	boolean valid = true;// <->invalid
 
-	EditableEntity(DataStore<Entity> store) {
+	EditableEntity(DataStoreEx<Entity> store) {
 		super(store, null);
 		this.source = null;
 		this.newData = new HashMap<String, Object>();
 	}
 
-	EditableEntity(DataStore<Entity> store, EntityImp source) {
+	EditableEntity(DataStoreEx<Entity> store, EntityImp source) {
 		super(store, source.data);
 		this.source = source;
 		this.newData = new HashMap<String, Object>();
@@ -64,5 +63,10 @@ public class EditableEntity extends EntityImp implements Editable {
 	@Override
 	public boolean isFresh() {
 		return true;
+	}
+
+	@Override
+	public void apply() {
+		this.store.apply(this);
 	}
 }

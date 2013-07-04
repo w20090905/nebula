@@ -1,8 +1,6 @@
 package nebula.data.impl;
 
-import nebula.data.IDGenerator;
-
-public class NativeIDGenerator implements IDGenerator {
+class NativeIDGenerator implements IDGenerator {
 	private long currentMaxValue;
 
 	public NativeIDGenerator() {
@@ -30,6 +28,6 @@ public class NativeIDGenerator implements IDGenerator {
 
 	@Override
 	public Long nextValue(Long seed) {
-		return this.currentMaxValue+=seed;
+		return this.currentMaxValue += seed;
 	}
 }

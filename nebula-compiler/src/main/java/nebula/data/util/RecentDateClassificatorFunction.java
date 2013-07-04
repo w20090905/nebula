@@ -2,8 +2,10 @@ package nebula.data.util;
 
 import org.joda.time.DateTime;
 
+import com.google.common.annotations.Beta;
 import com.google.common.base.Function;
 
+@Beta
 public class RecentDateClassificatorFunction implements Function<DateTime, String> {
 	String[] classifications = { "Today", "ThisWeek", "ThisMonth", "ThreeMonth", "SixMonth" };
 	final DateTime today;

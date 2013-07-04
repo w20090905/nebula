@@ -2,16 +2,16 @@ package nebula.data.impl;
 
 import junit.framework.TestCase;
 import nebula.data.Entity;
-import nebula.data.DataPersister;
+import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.db.DbConfiguration;
 import nebula.data.impl.EditableEntity;
-import nebula.data.impl.DbEntityDataPersister;
+import nebula.data.impl.DbDataRepos;
 import nebula.lang.SystemTypeLoader;
 
 public class DbMasterEntityDataStoreTest extends TestCase {
 
-	DataPersister<Entity> p;
+	DataRepos p;
 	DataStore<Entity> store;
 	DbConfiguration dbconfig;
 
@@ -23,12 +23,11 @@ public class DbMasterEntityDataStoreTest extends TestCase {
 		String password = "password";
 
 		dbconfig = DbConfiguration.getEngine(driverclass, url, username, password);
-		p = new DbEntityDataPersister(new SystemTypeLoader(), dbconfig);
+		p = new DbDataRepos(new TypeDatastore(new SystemTypeLoader()), dbconfig);
 		store = p.define(String.class,Entity.class, "Person").get();
 	}
 
 	protected void tearDown() throws Exception {
-		p.unload();
 		dbconfig.shutdown();
 		super.tearDown();
 	}

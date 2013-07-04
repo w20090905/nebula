@@ -13,6 +13,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
+@Deprecated
 class DataFilter<V extends Timable> implements ClassifiableFilter<V>, Filter<V> {
 	final List<V> values = Lists.newArrayList();
 	final List<DataListener<V>> listeneres;
@@ -44,42 +45,42 @@ class DataFilter<V extends Timable> implements ClassifiableFilter<V>, Filter<V> 
 	}
 
 	@Override
-	public void add(V v) {
+	public void onAdd(V v) {
 		if (filterFunction.apply(v)) this.values.add(v);
 		for (DataListener<V> listener : this.listeneres) {
-			listener.add(v);
+			listener.onAdd(v);
 		}
 	}
 
 	@Override
-	public void update(V oldData, V newData) {
+	public void onUpdate(V oldData, V newData) {
 		boolean hasOld = filterFunction.apply(oldData);
 		boolean hasNew = filterFunction.apply(newData);
 		if (hasOld && hasNew) {
 			this.values.remove(oldData);
 			this.values.add(newData);
 			for (DataListener<V> listener : this.listeneres) {
-				listener.update(oldData, newData);
+				listener.onUpdate(oldData, newData);
 			}
 		} else if (hasNew) {
 			this.values.add(newData);
 			for (DataListener<V> listener : this.listeneres) {
-				listener.add(newData);
+				listener.onAdd(newData);
 			}
 		} else if (hasOld) {
 			this.values.remove(oldData);
 			for (DataListener<V> listener : this.listeneres) {
-				listener.remove(oldData);
+				listener.onRemove(oldData);
 			}
 		}
 	}
 
 	@Override
-	public void remove(V v) {
+	public void onRemove(V v) {
 		if (filterFunction.apply(v)) {
 			this.values.remove(v);
 			for (DataListener<V> listener : this.listeneres) {
-				listener.remove(v);
+				listener.onRemove(v);
 			}
 		}
 	}

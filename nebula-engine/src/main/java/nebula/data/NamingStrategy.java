@@ -1,6 +1,7 @@
 package nebula.data;
 
 //TODO copy from hibernate need refact
+@Deprecated
 public interface NamingStrategy {
 	String classToTableName(String className);
 

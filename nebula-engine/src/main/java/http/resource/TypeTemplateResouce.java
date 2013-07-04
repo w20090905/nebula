@@ -9,7 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nebula.data.DataPersister;
+import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.Broker;
@@ -42,20 +42,20 @@ class DatastoreTemplateHashModel implements TemplateHashModel, TemplateCollectio
 
 	@Override
 	public boolean isEmpty() throws TemplateModelException {
-		return datastore.all().size() < 1;
+		return datastore.listAll().size() < 1;
 	}
 
 	@Override
 	public TemplateModelIterator iterator() throws TemplateModelException {
-		return new SimpleCollection(datastore.all().iterator()).iterator();
+		return new SimpleCollection(datastore.listAll().iterator()).iterator();
 	}
 
 }
 
 class DataPersisterTemplateHashModel implements TemplateHashModel {
-	DataPersister<Entity> dataWareHouse;
+	DataRepos dataWareHouse;
 
-	public DataPersisterTemplateHashModel(DataPersister<Entity> dataWareHouse) {
+	public DataPersisterTemplateHashModel(DataRepos dataWareHouse) {
 		this.dataWareHouse = dataWareHouse;
 	}
 
@@ -77,7 +77,7 @@ public class TypeTemplateResouce extends AbstractResouce {
 	// private final String templateName;
 
 	private Map<String, Object> root = new HashMap<String, Object>();
-	final DataPersister<Entity> dataWareHouse;
+	final DataRepos dataWareHouse;
 	final TypeLoader typeLoader;
 	final String theme;
 	final String skin;
@@ -87,7 +87,7 @@ public class TypeTemplateResouce extends AbstractResouce {
 	final Broker<DataStore<Entity>> attributes;
 	TemplateHashModel dataWareHouseModel;
 
-	public TypeTemplateResouce(Configuration cfg, TypeLoader typeLoader, DataPersister<Entity> dataWareHouse,
+	public TypeTemplateResouce(Configuration cfg, TypeLoader typeLoader, DataRepos dataWareHouse,
 			Broker<DataStore<Entity>> attributes, String theme, String skin, String typeName, String actionName) {
 		super("text/template", 0, 0);// TODO
 

@@ -3,7 +3,7 @@ package nebula.data.util;
 import com.google.common.base.Function;
 
 public class Functions{
-	
+	@Deprecated
 	public<F,I,T> Function<F, T> link(Function<F, I> fromF,Function<I, T> fromI){
 		final Function<F, I> f = fromF;
 		final Function<I, T> i = fromI;
@@ -15,6 +15,7 @@ public class Functions{
 		};
 	}
 
+	@Deprecated
 	public<F,I,J,T> Function<F, T> link(Function<F, I> fromF,Function<I, J> fromI,Function<J, T> fromJ){
 		final Function<F, I> f = fromF;
 		final Function<I, J> i = fromI;

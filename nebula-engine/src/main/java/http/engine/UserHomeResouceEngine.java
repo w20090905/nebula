@@ -8,7 +8,7 @@ import http.resource.StaticTemplateResouce;
 import javax.inject.Inject;
 
 import nebula.data.Broker;
-import nebula.data.DataPersister;
+import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.lang.TypeLoader;
@@ -23,7 +23,7 @@ public class UserHomeResouceEngine extends StaticResourceEngine {
 
 	@Inject
 	public UserHomeResouceEngine(Loader resourceLoader, TypeLoader typeLoader,
-			final DataPersister<Entity> dataWareHouse, Configuration cfg) {
+			final DataRepos dataWareHouse, Configuration cfg) {
 		super(resourceLoader);
 		this.templateConfig = cfg;
 		this.typeLoader = typeLoader;

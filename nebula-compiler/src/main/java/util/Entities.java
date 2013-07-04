@@ -1,17 +1,19 @@
-package nebula.data.impl;
+package util;
 
-import nebula.data.ClassifiableFilter;
 import nebula.data.Classificator;
 import nebula.data.Entity;
+import nebula.data.impl.DataClassificator;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 
 public class Entities {
-	public static ClassifiableFilter<Entity> filter(Predicate<Entity> filterFunction) {
-		return new DataFilter<Entity>(filterFunction);
-	}
 	
+//	@Deprecated
+//	public static ClassifiableFilter<Entity> filter(Predicate<Entity> filterFunction) {
+//		return new DataFilter<Entity>(filterFunction);
+//	}
+	
+	@Deprecated
 	public static <K> Classificator<K, Entity> classify(Function<Entity, K> indexerFunction) {
 		return new DataClassificator<K, Entity>(indexerFunction);
 	}

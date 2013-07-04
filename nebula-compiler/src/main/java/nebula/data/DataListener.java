@@ -1,7 +1,7 @@
 package nebula.data;
 
 public interface DataListener<V> {
-	public void add(V v);
-	public void update(V oldData, V newData);
-	public void remove(V v);
+	public void onAdd(V v);
+	public void onUpdate(V oldData, V newData);
+	public void onRemove(V v);
 }

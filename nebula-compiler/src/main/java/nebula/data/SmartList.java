@@ -33,7 +33,7 @@ public class SmartList<I, V extends Timable> extends ForwardingList<V> {
 
 	public <T extends DataListener<V>> T addListener(T listener) {
 		for (V v : values) {
-			listener.add(v);
+			listener.onAdd(v);
 		}
 		listeneres.add(listener);
 		return listener;
@@ -63,7 +63,7 @@ public class SmartList<I, V extends Timable> extends ForwardingList<V> {
 	@Override
 	public void add(int index, V v) {
 		for (DataListener<V> listener : this.listeneres) {
-			listener.add(v);
+			listener.onAdd(v);
 		}
 		I key = indexFunction.apply(v);
 		this.indexedValues.put(key, v);
@@ -76,7 +76,7 @@ public class SmartList<I, V extends Timable> extends ForwardingList<V> {
 		I key = indexFunction.apply(v);
 		if (!this.indexedValues.containsKey(key)) {
 			for (DataListener<V> listener : this.listeneres) {
-				listener.add(v);
+				listener.onAdd(v);
 			}
 			boolean result = super.add(v);
 			this.indexedValues.put(key, v);
@@ -89,7 +89,7 @@ public class SmartList<I, V extends Timable> extends ForwardingList<V> {
 			this.indexedValues.put(key, v);
 
 			for (DataListener<V> listener : this.listeneres) {
-				listener.update(oldData, v);
+				listener.onUpdate(oldData, v);
 			}
 		}
 		return true;
@@ -98,8 +98,8 @@ public class SmartList<I, V extends Timable> extends ForwardingList<V> {
 	public Set<I> keySet() {
 		return this.indexedValues.keySet();
 	}
-	
-	public boolean containsKey(String key){
+
+	public boolean containsKey(String key) {
 		return this.indexedIndex.containsKey(key);
 	}
 
@@ -120,7 +120,7 @@ public class SmartList<I, V extends Timable> extends ForwardingList<V> {
 	@Override
 	public V remove(int index) {
 		for (DataListener<V> listener : this.listeneres) {
-			listener.remove(this.get(index));
+			listener.onRemove(this.get(index));
 		}
 		I key = indexFunction.apply(this.get(index));
 		this.indexedValues.remove(key);
@@ -137,7 +137,7 @@ public class SmartList<I, V extends Timable> extends ForwardingList<V> {
 	@Override
 	public boolean remove(Object v) {
 		for (DataListener<V> listener : this.listeneres) {
-			listener.remove((V) v);
+			listener.onRemove((V) v);
 		}
 		I key = indexFunction.apply((V) v);
 		this.indexedValues.remove(key);

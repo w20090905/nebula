@@ -12,7 +12,7 @@ import nebula.lang.SystemTypeLoader;
 
 public class DbEntityDataPersisterTest extends TestCase {
 
-	DbEntityDataPersister p;
+	DbDataRepos p;
 	DataStore<Entity> store;
 	DbConfiguration dbconfig;
 
@@ -23,10 +23,10 @@ public class DbEntityDataPersisterTest extends TestCase {
 		String password = "password";
 
 		dbconfig = DbConfiguration.getEngine(driverclass, url, username, password);
-		p = new DbEntityDataPersister(new SystemTypeLoader(), dbconfig);
+		p = new DbDataRepos(new TypeDatastore(new SystemTypeLoader()), dbconfig);
 
 		store = p.define(String.class, Entity.class, "Person").get();
-		store.clear();
+		store.clearChanges();
 	}
 
 	protected void tearDown() throws Exception {
@@ -87,8 +87,8 @@ public class DbEntityDataPersisterTest extends TestCase {
 		assertEquals(180L, v.get("Height"));
 		assertEquals(120L, store.get("wangshilian").get("Height"));
 
-		p.add(v);
-		p.flush();
+		store.add(v);
+		store.flush();
 
 		assertEquals(false, v.isDirty());
 		assertEquals(180L, v.get("Height"));

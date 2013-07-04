@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.TestCase;
-import nebula.data.DataPersister;
+import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.db.DbConfiguration;
@@ -23,7 +23,7 @@ public class DbTransactionDataExecutorTest extends TestCase {
 	DbTransactionDataExecutor dbExec;
 	DbConfiguration config;
 
-	DataPersister<Entity> p;
+	DataRepos p;
 	DataStore<Entity> store;
 
 	protected void setUp() throws Exception {
