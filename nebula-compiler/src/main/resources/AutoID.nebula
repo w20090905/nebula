@@ -1,5 +1,0 @@
-@MaxLength ( 12)
-@Editable ("false")
-@AutoCreate("true")
-define AutoID extends ID {
-};
