@@ -49,6 +49,7 @@ public class NebulaParserTest extends TestCase {
 			String text = "" +
 					"type Person { " +
 					"	姓名  Name;" +
+					"	姓名2  Name\n" +
 					"};";
 			//@formatter:on	
 
@@ -56,7 +57,7 @@ public class NebulaParserTest extends TestCase {
 
 		assertEquals("Person", type.name);
 
-		assertEquals(1, type.fields.size());
+		assertEquals(2, type.fields.size());
 
 		Field f = type.fields.get(0);
 
@@ -105,29 +106,19 @@ public class NebulaParserTest extends TestCase {
 	}
 
 	public void testFieldDefinition_default() {
-		Field f = parseField("!Age := 1014 * 1024;");
-		assertEquals(1014 * 1024, f.defaultValueExpr.eval(null));
-
-		f = parseField("!Age := \"test\";");
-		assertEquals("test", f.defaultValueExpr.eval(null));
-
-		f = parseField("!Age := 1.3;");
-		assertEquals(new BigDecimal("1.3"), f.defaultValueExpr.eval(null));
-
-		f = parseField("!Age := 4 > 5;");
-		assertEquals(false, f.defaultValueExpr.eval(null));
+		assertEquals(1014 * 1024, parseField("!Age := 1014 * 1024;").defaultValueExpr.eval(null));
+		assertEquals("test", parseField("!Age := \"test\";").defaultValueExpr.eval(null));
+		assertEquals(new BigDecimal("1.3"), parseField("!Age := 1.3;").defaultValueExpr.eval(null));
+		assertEquals(4 > 5,parseField("!Age := 4 > 5;").defaultValueExpr.eval(null));
 	}
 
 	public void testFieldDefinition_derived() {
-		Field f = parseField("!MyAge Age = Age + 10 * 1000;");
-		assertEquals("MyAge", f.name);
-		assertEquals(true, f.derived);
-		EntityExpression<?> expr = f.derivedExpr;
 		Entity e = new EditableEntity();
 		int Age = 15;
 		e.put("Age", Age);
 
-		assertEquals(Age + 10 * 1000, expr.eval(e));
+		assertEquals(Age + 10 * 1000, parseField("!MyAge Age = Age + 10 * 1000;").derivedExpr.eval(e));
+		assertEquals(Age, parseField("!MyAge Age = Age;").derivedExpr.eval(e));
 	}
 
 	public void testFieldDefinition_quicktype() {
@@ -183,7 +174,7 @@ public class NebulaParserTest extends TestCase {
 		assertEquals("10", v.to);
 	}
 
-	private InheritHashMap parseAttr(String text) {
+	private InheritHashMap parseAnnotation(String text) {
 		try {
 			InheritHashMap attrs = new InheritHashMap();
 
@@ -191,7 +182,7 @@ public class NebulaParserTest extends TestCase {
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, compiler);
 
-			parser.attrItemDefinition(attrs);
+			parser.annotationItemDefinition(attrs);
 			assertEquals(0, parser.getNumberOfSyntaxErrors());
 
 			return attrs;
@@ -201,17 +192,10 @@ public class NebulaParserTest extends TestCase {
 		}
 	}
 
-	public void testAttr() {
-		InheritHashMap attrs;
-
-		attrs = parseAttr("MaxLength");
-		assertEquals("MaxLength", attrs.get("MaxLength"));
-
-		attrs = parseAttr("MaxLength(\"X\")");
-		assertEquals("X", attrs.get("MaxLength"));
-
-		attrs = parseAttr("MaxLength(1.1) ");
-		assertEquals(new BigDecimal("1.1"), attrs.get("MaxLength"));
+	public void testAnnotation() {
+		assertEquals("MaxLength", parseAnnotation("MaxLength").get("MaxLength"));
+		assertEquals("X", parseAnnotation("MaxLength(\"X\")").get("MaxLength"));
+		assertEquals(new BigDecimal("1.1"), parseAnnotation("MaxLength(1.1) ").get("MaxLength"));
 	}
 
 	public void testTypeAliases(){

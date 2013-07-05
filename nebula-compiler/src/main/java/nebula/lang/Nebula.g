@@ -58,12 +58,12 @@ options {
 }
 
 programDefinition returns[List<Type> retTypes]
-    : typeDefinition
+    : typeDefinition NEWLINE*
       {retTypes = this.types;}
     ;
     
 typeDefinition returns[Type type]
-    :   (attrs = attrListDefinition)?
+    :   (annotations = annotationListDefinition)?
         typeType=typeDefineKeyword 
         typeID=ID 
         /* Aliases */
@@ -89,16 +89,17 @@ typeDefinition returns[Type type]
                 type = new Type(loader,$typeID.text,superType);
             } 
            
-            if(attrs != null){
-                type.attrs.putAll(attrs);
+            if(annotations != null){
+                type.attrs.putAll(annotations);
             }
             
             addType(type);
             type.nameAlias.extend(aliases);
         }
-        '{' 
-            fieldDefinition[type]* 
-        '}' ';';
+        (
+          '{' NEWLINE? (fieldDefinition[type])*  '}' (';'|NEWLINE)
+        )
+        ;
 
 typeDefineKeyword returns[TypeStandalone typeType]
     :   'define'                  {typeType = TypeStandalone.Basic;} 
@@ -119,7 +120,7 @@ nestedTypeDefinition[Type resideType,String name,Aliases nameAlias] returns[Type
         ;
 
 fieldDefinition[Type resideType] returns[Field field]
-    :   (attrs = attrListDefinition)?  
+    :   (annotations = annotationListDefinition)?  
         imp=fieldImportance
         inline=inlineDefinition
         name=ID ('-' qtype=ID)?  
@@ -146,9 +147,9 @@ fieldDefinition[Type resideType] returns[Field field]
         /* Field Type */
         (
             typeText=ID { field.type = resolveType($typeText.text);}
-            |   '{'     { if(aliases==null) aliases = new Aliases(field.name); } 
+            |   '{'     NEWLINE ? { if(aliases==null) aliases = new Aliases(field.name); } 
                     nestedType = nestedTypeDefinition[resideType,$name.text,aliases] 
-                '}'     { field.type = nestedType;}
+                '}'   { field.type = nestedType;}
            |            {
                             if(field.type==null)  {
                                 field.type = resolveType(field.name);  
@@ -163,7 +164,9 @@ fieldDefinition[Type resideType] returns[Field field]
         /* Derived expr */
         ('=' transisentExpr=expr   {   field.derived = true;               field.derivedExpr = Ops.compile(transisentExpr,resideType);} )?
         
-        ';'{
+          (';' NEWLINE?| NEWLINE)
+
+        {
             field.attrs.setDefaults(field.type.attrs);
             field.importance = imp;
             if(field.type.standalone == TypeStandalone.Basic){
@@ -192,8 +195,8 @@ fieldDefinition[Type resideType] returns[Field field]
                 field.array = true;
             }
             
-            if(attrs != null){
-                field.attrs.putAll(attrs);
+            if(annotations != null){
+                field.attrs.putAll(annotations);
             }
            if(aliases!=null)field.setNameAlias(aliases);
            else field.setNameAlias(new Aliases(field.name));
@@ -229,15 +232,16 @@ arrayDefinition returns[String from,String to]
     ;
 
 
-attrListDefinition returns[InheritHashMap attrs]
-    @init{if(attrs==null)attrs = new InheritHashMap();else attrs.clear();}
-    :('@' attrItemDefinition[attrs])+
+annotationListDefinition returns[InheritHashMap annotations]
+    @init{annotations = new InheritHashMap();}
+    :('@' annotationItemDefinition[annotations])+
 ;
 
-attrItemDefinition[InheritHashMap attrs]
-    :   ID ('(' v=constValueDefinition ')')? {      
-        if(v!=null)attrs.put($ID.text,v);
-        else attrs.put($ID.text,$ID.text);
+annotationItemDefinition[InheritHashMap annotations]
+    :   ID ('(' v=constValueDefinition ')')? NEWLINE?
+    {      
+        if(v!=null)annotations.put($ID.text,v);
+        else annotations.put($ID.text,$ID.text);
       }
     ;
 
@@ -386,10 +390,10 @@ fragment Letter : 'a'..'z' | 'A'..'Z';
 
 INIT  : ':=';
 
-NEWLINE:'\r'? '\n'  {$channel=HIDDEN;};   
+NEWLINE:'\r'? '\n';   
 Whitespace :  (' ' | '\t' | '\f')+ {$channel=HIDDEN;};   
 SingleLineComment :
-  '//' (~('\n'|'\r'))* ('\n'|'\r'('\n')?)? {$channel=HIDDEN;};
+  '//' (~('\n'|'\r'))*  {$channel=HIDDEN;};
 MultiLineComment :
     '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
     
