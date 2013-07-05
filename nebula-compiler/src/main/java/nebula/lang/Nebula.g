@@ -24,6 +24,11 @@ options {
 @members {
 //    Map<String,Type> typesMap = new HashMap<String,Type>();
     List<Type> types = new ArrayList<Type>();
+    List<Field> fieldsWithDefaultExpr = new ArrayList<Field>();
+    List<Expr> fieldsWithDefaultExprExpr = new ArrayList<Expr>();
+    List<Field> fieldsWithDerivedExpr = new ArrayList<Field>();
+    List<Expr> fieldsWithDerivedExprExpr= new ArrayList<Expr>();
+    Compiler op = new Compiler();
 
     InheritHashMap attrsBuffer = new InheritHashMap();
     
@@ -51,11 +56,23 @@ options {
     protected void loading(Type type){
         typesLoading.put(type.name,type);
         types.add(type);
-        System.out.println("\t$$$\ttypesLoading : " + typesLoading.size());
     }
     protected void loadingFinish(Type type){
         typesLoading.remove(type.name);
-        System.out.println("\t$$$\ttypesLoading : " + typesLoading.size());
+    }
+    
+    protected void exitTopType(){
+          for (int i = 0; i < fieldsWithDefaultExpr.size(); i++) {
+            Field f = fieldsWithDefaultExpr.get(i);
+            Expr e = fieldsWithDefaultExprExpr.get(i);
+            f.defaultValueExpr = op.compile(e, f.getResideType());
+      }
+
+          for (int i = 0; i < fieldsWithDerivedExpr.size(); i++) {
+            Field f = fieldsWithDerivedExpr.get(i);
+            Expr e = fieldsWithDerivedExprExpr.get(i);
+            f.derivedExpr = op.compile(e, f.getResideType());
+      }
     }
     protected void info(String str) {
     if (str.charAt(str.length() - 1) == '\n') {
@@ -109,7 +126,7 @@ typeDefinition returns[Type type]
         )
         
         /* Finish */
-        {loadingFinish(type);}
+        {loadingFinish(type);exitTopType();}
         ;
 
 typeDefineKeyword returns[TypeStandalone typeType]
@@ -170,10 +187,10 @@ fieldDefinition[Type resideType] returns[Field field]
         )
         
         /* Default value */
-        (':=' defaultExpr=expr      {   field.hasDefaultValue = true;   field.defaultValueExpr = Ops.compile(defaultExpr,resideType);})?
+        (':=' defaultExpr=expr      {   field.hasDefaultValue = true;   fieldsWithDefaultExpr.add(field); fieldsWithDefaultExprExpr.add(defaultExpr);})?
         
         /* Derived expr */
-        ('=' transisentExpr=expr   {   field.derived = true;               field.derivedExpr = Ops.compile(transisentExpr,resideType);} )?
+        ('=' derivedExpr=expr   {   field.derived = true;               fieldsWithDerivedExpr.add(field); fieldsWithDerivedExprExpr.add(derivedExpr);} )?
         
           (';' NEWLINE?| NEWLINE)
 
@@ -294,83 +311,83 @@ expr returns [Expr v]
 
 logicalORExpr returns [Expr v]
     :   a=logicalAndExpr {v = a;}
-        (   '||' b=logicalAndExpr  {v=Ops.opOr(v,b);}
-        |   'or' b=logicalAndExpr  {v=Ops.opOr(v,b);}
+        (   '||' b=logicalAndExpr  {v=op.opOr(v,b);}
+        |   'or' b=logicalAndExpr  {v=op.opOr(v,b);}
         )*
     ;
 
 logicalAndExpr returns [Expr v]
     :   a=equalityExpr {v = a;}
-        (   '&&' b=equalityExpr  {v=Ops.opAnd(v,b);}
-        |   'and' b=equalityExpr  {v=Ops.opAnd(v,b);}
+        (   '&&' b=equalityExpr  {v=op.opAnd(v,b);}
+        |   'and' b=equalityExpr  {v=op.opAnd(v,b);}
         )*
     ;
 
 equalityExpr returns [Expr v]
     :   a=logicalNotExpr {v = a;}
-        (   '==' b=logicalNotExpr  {v=Ops.opEqualTo(v,b);}
-          | '!=' b=logicalNotExpr  {v=Ops.opNotEqualTo(v,b);}
+        (   '==' b=logicalNotExpr  {v=op.opEqualTo(v,b);}
+          | '!=' b=logicalNotExpr  {v=op.opNotEqualTo(v,b);}
         )*
     ;
 
 logicalNotExpr returns [Expr v]
-    :   '!' b=relationalExpr {v=Ops.opNot(b);} 
-        | 'not'  b=relationalExpr {v=Ops.opNot(b);} 
+    :   '!' b=relationalExpr {v=op.opNot(b);} 
+        | 'not'  b=relationalExpr {v=op.opNot(b);} 
         | b=relationalExpr {v=b;} 
     ;
     
 relationalExpr returns [Expr v]
     :   a=additiveExpr {v = a;}
-        (   '>=' b=additiveExpr  {v=Ops.opGreaterThanOrEqualTo(v,b);}
-        |   '>' c=additiveExpr  {v=Ops.opGreaterThan(v,c);}
-        |   '<=' c=additiveExpr  {v=Ops.opLessThanOrEqualTo(v,c);}
-        |   '<' c=additiveExpr  {v=Ops.opLessThan(v,c);}
+        (   '>=' b=additiveExpr  {v=op.opGreaterThanOrEqualTo(v,b);}
+        |   '>' c=additiveExpr  {v=op.opGreaterThan(v,c);}
+        |   '<=' c=additiveExpr  {v=op.opLessThanOrEqualTo(v,c);}
+        |   '<' c=additiveExpr  {v=op.opLessThan(v,c);}
         )*
     ;
     
 additiveExpr returns [Expr v]
     :   a=multiplicativeExpr {v = a;}
-        (   '+' b=multiplicativeExpr  {v=Ops.opAdd(v,b);}
-        |   '-' c=multiplicativeExpr  {v=Ops.opSub(v,c);}
+        (   '+' b=multiplicativeExpr  {v=op.opAdd(v,b);}
+        |   '-' c=multiplicativeExpr  {v=op.opSub(v,c);}
         )*
     ;
 multiplicativeExpr returns [Expr v]
     :   a=postfixExpr {v=a;} 
-        (   '*' b=postfixExpr {v=Ops.opMulti(v,b);} 
-          | '/' b=postfixExpr {v=Ops.opDiv(v,b);} 
-          | '%' b=postfixExpr {v=Ops.opRemainder(v,b);} 
+        (   '*' b=postfixExpr {v=op.opMulti(v,b);} 
+          | '/' b=postfixExpr {v=op.opDiv(v,b);} 
+          | '%' b=postfixExpr {v=op.opRemainder(v,b);} 
         )*
     ;
 
 unary returns [Expr v]
-    :   '++' b=postfixExpr {v=Ops.opIncrement(b);} 
-        | '+'  b=postfixExpr {v=Ops.opPositive(b);} 
-        | '--'  b=postfixExpr {v=Ops.opDecrement(b);} 
-        | '-'  b=postfixExpr {v=Ops.opNegates(b);} 
+    :   '++' b=postfixExpr {v=op.opIncrement(b);} 
+        | '+'  b=postfixExpr {v=op.opPositive(b);} 
+        | '--'  b=postfixExpr {v=op.opDecrement(b);} 
+        | '-'  b=postfixExpr {v=op.opNegates(b);} 
         | b=postfixExpr {v=b;} 
     ;
 
 postfixExpr returns [Expr v]:
     a=primaryExpr  {v=a;} 
     (
-      '.' ID {v = Ops.opFieldOf(v,$ID.text);}
+      '.' ID {v = op.opFieldOf(v,$ID.text);}
     )* 
 ;
 
 primaryExpr returns [Expr v]
   :  a=constExpr  {v=a;} 
-  | ID  {v=Ops.opVar($ID.text);} 
+  | ID  {v=op.opVar($ID.text);} 
   | '(' expr ')'   {v = $expr.v;}
 ;
 
 constExpr returns [Expr v]
-    : StringLiteral {v=Ops.opStringCst($StringLiteral.text.substring(1,$StringLiteral.text.length()-1));}
-      | decimal {v=Ops.opDecimalCst($decimal.text);}
-      | INT {v=Ops.opIntegerCst($INT.text);}  
-      | TimestampLiteral {v=Ops.opTimestampCst($TimestampLiteral.text);}  
-      | DateTimeLiteral {v=Ops.opDatetimeCst($DateTimeLiteral.text);}  
-      | DateLiteral {v=Ops.opDateCst($DateLiteral.text);}  
-      | TimeLiteral {v=Ops.opTimeCst($TimeLiteral.text);}  
+    : StringLiteral {v=op.opStringCst($StringLiteral.text.substring(1,$StringLiteral.text.length()-1));}
+      | decimal {v=op.opDecimalCst($decimal.text);}
+      | INT {v=op.opIntegerCst($INT.text);}  
+      | TimestampLiteral {v=op.opTimestampCst($TimestampLiteral.text);}  
+      | DateTimeLiteral {v=op.opDatetimeCst($DateTimeLiteral.text);}  
+      | DateLiteral {v=op.opDateCst($DateLiteral.text);}  
+      | TimeLiteral {v=op.opTimeCst($TimeLiteral.text);}  
     ;
 
 // *************   START  :  BASIC   *************

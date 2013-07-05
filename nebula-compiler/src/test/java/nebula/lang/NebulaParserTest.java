@@ -74,6 +74,7 @@ public class NebulaParserTest extends TestCase {
 			Type type = new Type(compiler, "Test");
 			;
 			Field field = parser.fieldDefinition(type);
+			parser.exitTopType();
 
 			return field;
 		} catch (RecognitionException e) {

@@ -11,10 +11,27 @@ import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-public class Ops {
-	static EntityExpressionComplier compiler = new EntityExpressionComplier();
-
-	static public <T> EntityExpression<T> compile(Expr<T> expr, Type type) {
+public class Compiler {
+	EntityExpressionComplier compiler = new EntityExpressionComplier();
+	
+	class EntityExpressionAgent<T> implements EntityExpression<T> {
+		final Expr<T> expr;
+		final Type type;
+		EntityExpressionAgent(final Expr<T> expr, final Type type){
+			this.expr = expr;
+			this.type = type;
+		}
+		
+		@Override
+		public T eval(Entity entity) {
+			return null;
+		}
+		EntityExpression<T> compile(){
+			return compiler.compile(expr, type);
+		}
+	}
+	
+	public <T> EntityExpression<T> compile(Expr<T> expr, Type type) {
 		return compiler.compile(expr, type);
 	}
 
