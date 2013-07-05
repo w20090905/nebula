@@ -69,7 +69,8 @@ public class ImportAdempiereDataDefine extends DefaultImporter {
 
 		when(EndWithIgnoreCase)
 				.with("Value", "GREETING", "TERM", "PREFIX", "SUFFIX", "KEYWORD", "POREFERENCE", "REFERENCE",
-						"REFERRER", "RELEASENO", "TAXINDICATOR","DIRECTORY","CREATEDDATE","UPDATEDDATE","DATECOLUMN","USERID").is(String).setTypeName("String");
+						"REFERRER", "RELEASENO", "TAXINDICATOR", "DIRECTORY", "CREATEDDATE", "UPDATEDDATE",
+						"DATECOLUMN", "USERID").is(String).setTypeName("String");
 
 		when(EndWithIgnoreCase)
 				.with("CREDITCARDNUMBER", "TAXID", "CHECKNO", "ACCOUNTNO", "DOCUMENTNO", "CUSTOMERNO",
