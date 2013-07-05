@@ -35,11 +35,11 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.google.common.base.CaseFormat;
-import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 public class DefaultImporter {
+	int MAX = 1000;
 
 	List<Type> types = Lists.newArrayList();
 	Map<String, Type> typeMapByName = Maps.newHashMap();
@@ -207,6 +207,9 @@ public class DefaultImporter {
 			}
 
 			for (Field field : type.fields) {
+				if(field.skip){
+					continue;
+				}
 				if (field.remarks.length() > 0) {
 					sb.append("\t@Remarks(\"" + escape(field.remarks) + "\")\n");
 				}
@@ -217,9 +220,8 @@ public class DefaultImporter {
 				if (field.isKey) {
 					sb.append("!");
 				}
-				if (!field.nullable) {
-					if ("Name Subject Title".toUpperCase().indexOf(
-							Strings.nullToEmpty(field.resultTypeName).toUpperCase()) >= 0) {
+				if (!field.nullable && field.resultTypeName != null) {
+					if ("Name Subject Title".toUpperCase().indexOf(field.resultTypeName.toUpperCase()) >= 0) {
 						sb.append("*");
 					}
 				}
@@ -256,7 +258,6 @@ public class DefaultImporter {
 			this.tables.put(tableName, tableName);
 		}
 
-		int MAX = 10;
 		for (int i = 0; i < nodeList.getLength() && i < MAX; i++) {
 			Element element = (Element) nodeList.item(i);
 			this.readTable(element);
@@ -416,13 +417,13 @@ public class DefaultImporter {
 		return text.replace('\"', '\'').replace('\n', ' ').replace('\r', ' ');
 	}
 
-	static final String[] revs = ("CREATED issues issue is display field where Enforce Support release database"
+	static final String[] revs = (" issues issue is display field where Enforce Support release database"
 			+ " Logger source method class Function ldap Date Selection client Alert role Frequency "
 			+ "Keep Select Form Event Change Request Auto Smtp Store unix windows 	File Discount "
 			+ " Line Bpartner cash Readonly Other Error Post Record entity Access Centrally Dependent "
 			+ "Label Validation Old New Text Dimension format paper Margin Hdr Image Footer header "
 			+ "value  Paint Printer Print orderby Line Procedure Beta Server show Unrealized Docno Overwrite "
-			+ "Create Days between after Charge Interest Dunning Doctype Invoice  payment Times Tender "
+			+ " Days between after Charge Interest Dunning Doctype Invoice  payment Times Tender "
 			+ " Archive Conversion Amt Foreign Document Fee Total Qty Price Freight Resource Tax"
 			+ " Accept Bpcontact Delivery Priority Grand Product Creditcard Voice Writeoff Proxy Attribute"
 			+ "Require Planned Project  Reference balance Committed Sales Standard Notification"

@@ -26,6 +26,8 @@ interface Rule {
 
 	public Rule setAsMaster();
 	
+	public Rule nullable();
+	
 	public Rule setAsTransaction();
 	
 	public Rule setReferTo(String typename);
@@ -103,6 +105,11 @@ class RuleBuilder implements Rule {
 		return this;
 	}
 	@Override
+	public Rule nullable() {
+		this.actions.add(new NullableField());
+		return this;
+	}
+	@Override
 	public Rule setReferTo(String typename) {
 		this.actions.add(new SetReferTo(typename));
 		return null;
@@ -176,6 +183,16 @@ class RuleBuilder implements Rule {
 		@Override
 		public DefaultImporter.Field apply(Field input, String match, String... params) {
 			input.skip = true;
+			input.comment = input.comment + "\tskip";
+			return input;
+		}
+	}
+	
+
+	class  NullableField implements Action {
+		@Override
+		public DefaultImporter.Field apply(Field input, String match, String... params) {
+			input.nullable = true;
 			input.comment = input.comment + "\tskip";
 			return input;
 		}

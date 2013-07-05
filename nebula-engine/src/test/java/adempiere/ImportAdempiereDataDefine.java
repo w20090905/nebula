@@ -210,9 +210,9 @@ public class ImportAdempiereDataDefine extends DefaultImporter {
 		when(EqualsIgnoreCase).with("repository_id").table("Changesets").setReferTo("Repositories");
 
 		// Skip System Column
-		when(EqualsIgnoreCase).with("ISACTIVE").is(Char).skip();
-		when(EqualsIgnoreCase).with("CREATEDBY", "UPDATEDBY").is(Long).skip();
-		when(EqualsIgnoreCase).with("CREATED", "UPDATED").is(Date).skip();
+//		when(EqualsIgnoreCase).with("ISACTIVE").is(Char).skip();
+//		when(EqualsIgnoreCase).with("CREATEDBY", "UPDATEDBY").is(Long).skip();
+//		when(EqualsIgnoreCase).with("CREATED", "UPDATED").is(Date).skip();
 	}
 
 	public void analyze(List<Type> types) {
