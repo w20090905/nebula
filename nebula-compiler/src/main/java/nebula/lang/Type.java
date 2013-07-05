@@ -15,7 +15,7 @@ public class Type implements Timable {
 	final RawTypes rawType;// For Basic Type
 
 	final String name;
-	final Aliases nameAlias;
+	Aliases nameAlias;
 
 	final TypeStandalone standalone;
 
@@ -53,6 +53,9 @@ public class Type implements Timable {
 		this.nameAlias = new Aliases(name);
 	}
 
+	public String getDisplayName() {
+		return nameAlias.getDefault();
+	}
 	/**
 	 * Used by Basic type, Master,Tx
 	 */
@@ -101,7 +104,6 @@ public class Type implements Timable {
 
 		this.references = new CopyOnWriteArrayList<Field>();
 		this.nameAlias = new Aliases(name);
-
 	}
 
 	public String getName() {
@@ -117,7 +119,7 @@ public class Type implements Timable {
 	}
 
 	public void setNameAlias(Aliases alias) {
-		nameAlias.alias.putAll(alias.alias);
+		this.nameAlias = alias;
 	}
 
 	public InheritHashMap getAttrs() {

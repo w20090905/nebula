@@ -69,6 +69,7 @@ class BootstrapTypeLoader extends TypeLoader {
 		timestamp.attrs.put("FormatString", "YYYY-MM-DD HH:mm:ss.S");
 
 		Type name = new Type(this, "Name", string);
+		name.nameAlias= new Aliases("名称");
 		name.attrs.put("MaxLength", 60);
 
 		Type attr = new Type(this, "Attr", string);

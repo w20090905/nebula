@@ -4,8 +4,7 @@ import util.InheritHashMap;
 
 public class Field {
 	final String name;
-	final Aliases nameAlias;
-	String displayName;
+	Aliases nameAlias;
 	Importance importance = Importance.Unimportant;
 	boolean derived = false;
 	EntityExpression<?> derivedExpr;
@@ -35,26 +34,12 @@ public class Field {
 	public Field(Type resideType, String name) {
 		super();
 		this.name = name;
-		this.displayName = name;
 		this.resideType = resideType;
-		this.attrs = new InheritHashMap();
-		this.nameAlias = new Aliases(name);
-	}
-	public Field(Type resideType, String name,Aliases aliases) {
-		super();
-		this.resideType = resideType;
-		this.name = name;
-		this.nameAlias = aliases;
-		this.displayName = aliases.getDefault();
 		this.attrs = new InheritHashMap();
 	}
 
 	public String getDisplayName() {
-		return displayName;
-	}
-
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
+		return this.nameAlias.defaultValue;
 	}
 
 	public Importance getImportance() {
@@ -113,7 +98,7 @@ public class Field {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Field [name=").append(name).append(", displayName=").append(displayName)
+		builder.append("Field [name=").append(name).append(", displayName=").append(getDisplayName())
 				.append(", importance=").append(importance).append(", array=").append(array).append(", from=")
 				.append(refer).append("]");
 		return builder.toString();
@@ -142,5 +127,9 @@ public class Field {
 
 	public <T> void setValueExpr(EntityExpression<T> valueExpr) {
 		this.derivedExpr = valueExpr;
+	}
+
+	public void setNameAlias(Aliases nameAlias) {
+		this.nameAlias = nameAlias;
 	}
 }

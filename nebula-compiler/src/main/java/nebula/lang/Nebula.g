@@ -94,7 +94,7 @@ typeDefinition returns[Type type]
             }
             
             addType(type);
-            type.setNameAlias(aliases);
+            type.nameAlias.extend(aliases);
         }
         '{' 
             fieldDefinition[type]* 
@@ -108,7 +108,7 @@ typeDefineKeyword returns[TypeStandalone typeType]
       | ('action')    {typeType = TypeStandalone.Action;};
 
 nestedTypeDefinition[Type resideType,String name,Aliases nameAlias] returns[Type type]
-    :   '{' 
+    :  
             {
               String typeName = resideType.name + "$" + name;
               type = new Type(loader,resideType,typeName,resolveType(TypeStandalone.Mixin.name()));
@@ -116,7 +116,7 @@ nestedTypeDefinition[Type resideType,String name,Aliases nameAlias] returns[Type
               addType(type);
             }
             fieldDefinition[type]* 
-        '}';
+        ;
 
 fieldDefinition[Type resideType] returns[Field field]
     :   (attrs = attrListDefinition)?  
@@ -124,20 +124,17 @@ fieldDefinition[Type resideType] returns[Field field]
         inline=inlineDefinition
         name=ID ('-' qtype=ID)?  
         /* Aliases */
-         ('|' aliases=aliasesLiteral[$name.text]
-         | {aliases = new Aliases($name.text);}
-         )
-         { 
-            if($qtype!=null){
-              field = new Field(resideType,$name.text + $qtype.text,aliases);
-              field.type = resolveType($qtype.text);
-            } else {
-              field = new Field(resideType,$name.text,aliases);
-           }
-          }
-          
-        /* alias name */
+         ('|' aliases=aliasesLiteral[$name.text])?
        
+          { 
+            if($qtype!=null){
+              field = new Field(resideType,$name.text + $qtype.text);
+              field.type = resolveType($qtype.text);            
+
+            } else {
+              field = new Field(resideType,$name.text);
+           }
+          }       
         
         
         /* Actions */
@@ -148,13 +145,20 @@ fieldDefinition[Type resideType] returns[Field field]
         
         /* Field Type */
         (
-            type=ID { field.type = resolveType($type.text);}
-            | nestedType = nestedTypeDefinition[resideType,$name.text,field.nameAlias] {field.type = nestedType;}
-           | {if(field.type==null)field.type = resolveType(field.name);} 
+            typeText=ID { field.type = resolveType($typeText.text);}
+            |   '{'     { if(aliases==null) aliases = new Aliases(field.name); } 
+                    nestedType = nestedTypeDefinition[resideType,$name.text,aliases] 
+                '}'     { field.type = nestedType;}
+           |            {
+                            if(field.type==null)  {
+                                field.type = resolveType(field.name);  
+                                if(aliases==null && field.type.getNameAlias() !=null) aliases = field.type.getNameAlias();
+                             }
+                        } 
         )
         
         /* Default value */
-        (':=' defaultExpr=expr        {   field.hasDefaultValue = true;   field.defaultValueExpr = Ops.compile(defaultExpr,resideType);})?
+        (':=' defaultExpr=expr      {   field.hasDefaultValue = true;   field.defaultValueExpr = Ops.compile(defaultExpr,resideType);})?
         
         /* Derived expr */
         ('=' transisentExpr=expr   {   field.derived = true;               field.derivedExpr = Ops.compile(transisentExpr,resideType);} )?
@@ -191,6 +195,8 @@ fieldDefinition[Type resideType] returns[Field field]
             if(attrs != null){
                 field.attrs.putAll(attrs);
             }
+           if(aliases!=null)field.setNameAlias(aliases);
+           else field.setNameAlias(new Aliases(field.name));
             
             resideType.fields.add(field);
           }

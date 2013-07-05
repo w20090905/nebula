@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Aliases {
-	final String defaultValue;
+	String defaultValue;
 	public final Map<String, String> alias;
 	public Aliases(String defaultValue){
 		this.alias = new HashMap<String, String>();
@@ -17,6 +17,11 @@ public class Aliases {
 	
 	public String getDefault(){
 		return defaultValue;		
+	}
+	
+	public void extend(Aliases other){
+		this.defaultValue = other.defaultValue;
+		this.alias.putAll(other.alias);
 	}
 	
 	public String get(String language){

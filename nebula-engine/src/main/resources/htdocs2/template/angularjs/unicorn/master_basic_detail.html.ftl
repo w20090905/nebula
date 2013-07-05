@@ -125,7 +125,7 @@
 
 <article class="module width_full">
 	<header>
-		<h1 class="tabs_involved">${type.name}</h1>	
+		<h1 class="tabs_involved">${type.displayName}</h1>	
 		<div class="btn-toolbar">
 			<div class="btn-group">
 		  		<a href="#/d/Type/${type.name}" class="btn">Define</a>
@@ -164,7 +164,7 @@
 					[#switch of.refer]
 					[#case "ByVal"] <!--  Basic Type Field <!--  Type A1-->
 						[#if !of.key || of.type.name != "ID"]
-			[@controls field=of for="${of.name}" label="${of.name}"]
+			[@controls field=of for="${of.name}" label="${of.displayName}"]
 					[@inputBox field=of id="${of.name}"  ngModel="data.${of.name}" placeholder="${of.name}" 
 						key=of.key required=!of.ignorable/]
 			[/@controls]
@@ -177,7 +177,7 @@
 							[#if !in1f.array]<!-- -->
 								[#switch in1f.refer]
 								[#case "ByVal"] <!--  Type B1-->
-				[@controls field=in1f for="${of.name}${in1f.name}" label="${in1f.name}"]
+				[@controls field=in1f for="${of.name}${in1f.name}" label="${in1f.displayName}"]
 					[@inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name} ${in1f.name}"
 						required=!(of.ignorable || in1f.ignorable)/]
 				[/@controls]
@@ -187,7 +187,7 @@
 										[#if !in2f.array && in2f.refer == "ByVal"] <!--  Type
 																										<!--  C1   -->
 
-				[@controls  field=in2f for="${of.name}${in1f.name}${in2f.name}" label="${in1f.name}${in2f.name}"]
+				[@controls  field=in2f for="${of.name}${in1f.name}${in2f.name}" label="${in1f.displayName}${in2f.displayName}"]
 					[@inputBox field=in2f id="${of.name}${in1f.name}${in2f.name}" ngModel="data.${of.name}.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"
 						required=!(of.ignorable || in1f.ignorable || in2f.ignorable)/]
 				[/@controls]
@@ -197,7 +197,7 @@
 								[#case "ByRef"] <!--  Type B3   -->
 								[#case "Cascade"] <!--  Type B4   -->
 
-				[@controls  field=in1f for="${of.name}${in1f.name}" label="${in1f.name}"]
+				[@controls  field=in1f for="${of.name}${in1f.name}" label="${in1f.displayName}"]
 					[@popupBox field=in1f pField=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name} ${in1f.name}"
 						readonly=true required=!(of.ignorable || in1f.ignorable)/]		
 				[/@controls]
@@ -207,7 +207,7 @@
 								[#switch in1f.refer]
 								[#case "ByVal"] <!--  Type B5   -->
 											
-			[@controls  field=in1f for="${of.name}${in1f.name}" label="${of.name} ${in1f.name}"]
+			[@controls  field=in1f for="${of.name}${in1f.name}" label="${of.displayName} ${in1f.displayName}"]
 					[@inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name}${in1f.name}"
 						required=!(of.ignorable || in1f.ignorable) /] <!-- ngList -->
 			[/@controls]
@@ -255,7 +255,7 @@
 						[#break]
 					[#case "ByRef"] <!--  Type A3   -->
 					[#case "Cascade"] <!--  Type A4   -->
-				[@controls field=of for="${of.name}" label="${of.name}"]
+				[@controls field=of for="${of.name}" label="${of.displayName}"]
 					[@popupBox field=of pField=of id="${of.name}" ngModel="data.${of.name}"  placeholder="${of.name}"
 						key=(of.key) readonly=true required=!(of.ignorable)/]
 				[/@controls]
@@ -264,7 +264,7 @@
 				[#else] <!--  数组不可以是Key   -->
 					[#switch of.refer]
 					[#case "ByVal"] <!--  Basic Type Field  --> <!--  Type A5   -->
-			[@controls  field=of for="${of.name}" label="${of.name}"]
+			[@controls  field=of for="${of.name}" label="${of.displayName}"]
 					[@inputBox field=of id="${of.name}" ngModel="data.${of.name}" placeholder="${of.name}"
 						required=!(of.ignorable) ex="x-ng-list"/] <!-- ngList -->
 			[/@controls]
@@ -288,7 +288,7 @@
 									[#list in1f.type.fields as in2f][#t]
 										[#if !in2f.array && in2f.refer == "ByVal"]
 										
-					<th>${in1f.name} ${in2f.name}</th>
+					<th>${in1f.displayName} ${in2f.displayName}</th>
 					
 										[/#if]
 									[/#list]
@@ -298,7 +298,7 @@
 									[#list in1f.type.fields as in2f][#t]
 										[#if !in2f.array && in2f.refer == "ByVal" && (in2f.key || in2f.core)]
 										
-					<th>${in1f.name} ${in2f.name}</th>
+					<th>${in1f.displayName} ${in2f.displayName}</th>
 					
 										[/#if] 
 									[/#list]

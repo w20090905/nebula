@@ -1,8 +1,8 @@
-type Person {
+type Person|人员 {
 	!Name;
-	Full-Name;
-	?Given-Name;
-	?Family-Name;
+	Full-Name|全名;
+	?Given-Name|名;
+	?Family-Name|姓;
 	?AlternateNames[] Name;
 	?Description;
 	Sex Attr;

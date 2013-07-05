@@ -1,8 +1,8 @@
 @Remarks("")
 @Refby("0")
-type Projects {
+type Projects|项目 {
 	!ID;
-	*Name;
+	*Name|名称;
 	?Description;
 	?Homepage Url;
 	IsPublic YesNo;/* 1 */
@@ -14,4 +14,3 @@ type Projects {
 	?Lft Count;
 	?Rgt Count;
 };
-

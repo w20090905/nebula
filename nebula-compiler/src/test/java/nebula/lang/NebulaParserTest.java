@@ -214,27 +214,23 @@ public class NebulaParserTest extends TestCase {
 		assertEquals(new BigDecimal("1.1"), attrs.get("MaxLength"));
 	}
 
-	public void testAliasDefinition() {
-		//@formatter:off
-			String text = "" +
-					"type Person|zh:员工  { " +
-					"	Name|zh:姓名|\"zh-tw\":台湾姓名;" +
-					"	Age|年龄;" +
-					"};";
-			//@formatter:on		
+	public void testTypeAliases(){
+		assertEquals("Person", parseType("type Person {Name;};").getDisplayName());
+		assertEquals("员工", parseType("type Person|员工  {Name;};").getDisplayName());
+		assertEquals("Person", parseType("type Person|zh:员工  {Name;};").getDisplayName());
+		assertEquals("员工", parseType("type Person|zh:员工  {Name;};").nameAlias.get("zh"));
+	}
+	public void testFieldAliases(){
+		assertEquals("年龄", parseField("Age;").getDisplayName());
+		assertEquals("Age", parseField("Age Age;").getDisplayName());
+		assertEquals("年龄Local", parseField("Age|年龄Local Age;").getDisplayName());
+		assertEquals("临时Age", parseField("临时-Age Age;").getDisplayName());
+		assertEquals("永久年龄", parseField("临时-Age|永久年龄 Age;").getDisplayName());
 
-		Type type = parseType(text);
-
-		assertEquals("Person", type.name);
-
-		assertEquals(2, type.fields.size());
-		assertEquals("Name", type.fields.get(0).name);
-		assertEquals("员工", type.nameAlias.get("zh"));
-		assertEquals("台湾姓名", type.fields.get(0).nameAlias.get("zh-tw"));
-		assertEquals("姓名", type.fields.get(0).nameAlias.get("zh-cn"));
-		assertEquals("姓名", type.fields.get(0).nameAlias.get("zh"));
-		assertEquals("年龄", type.fields.get(1).nameAlias.getDefault());
-		assertEquals(null, type.fields.get(1).nameAlias.get("zh"));
+		assertEquals("Name", parseField("Name|zh:姓名|\"zh-tw\":台湾姓名;").getDisplayName());
+		assertEquals("姓名", parseField("Name|zh:姓名|\"zh-tw\":台湾姓名;").nameAlias.get("zh-cn"));
+		assertEquals("台湾姓名", parseField("Name|zh:姓名|\"zh-tw\":台湾姓名;").nameAlias.get("zh-tw"));
+		assertEquals("姓名", parseField("Name|zh:姓名|\"zh-tw\":台湾姓名;").nameAlias.get("zh"));
 	}
 
 	private Expr<?> parseCst(String text) {
@@ -276,6 +272,10 @@ public class NebulaParserTest extends TestCase {
 					"		Name;" +
 					"		Age;" +
 					"	};" +
+					"	Detail2 {" +
+					"		Name;" +
+					"		Age;" +
+					"	};" +
 					"};";
 			//@formatter:on		
 
@@ -284,7 +284,7 @@ public class NebulaParserTest extends TestCase {
 		assertEquals("Person", type.name);
 		assertEquals("员工", type.nameAlias.get("zh"));
 
-		assertEquals(2, type.fields.size());
+		assertEquals(3, type.fields.size());
 		int i = 0;
 		assertEquals("Name", type.fields.get(i).name);
 		assertEquals(Require, type.fields.get(i).importance);
@@ -295,6 +295,10 @@ public class NebulaParserTest extends TestCase {
 		assertEquals(Inline, type.fields.get(i).refer);
 		assertEquals("明细", type.fields.get(i).nameAlias.get("zh"));
 		assertEquals("明细", type.fields.get(i).type.nameAlias.get("zh"));
+		i++;
+		assertEquals("Detail2", type.fields.get(i).name);
+		assertEquals(Inline, type.fields.get(i).refer);
+		assertEquals("Detail2", type.fields.get(i).nameAlias.getDefault());
 	}
 
 	public void testProgramDefinition() {
