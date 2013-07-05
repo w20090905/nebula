@@ -103,6 +103,22 @@ public class NebulaParserTypeTest extends TestCase {
 		assertEquals(0, type.fields.get(i).rangeFrom);
 		assertEquals(5, type.fields.get(i).rangeTo);
 	}
+
+	public void test_type_PersonCircularDependency() throws Exception {
+		Type type = compiler.findType("PersonCircularDependency");
+
+		assertEquals("PersonCircularDependency", type.name);
+
+		assertEquals(8, type.fields.size());
+		int i=0;
+		assertEquals("Name", type.fields.get(i).name);
+
+		i=1;
+		assertEquals("CompanyCircularDependency", type.fields.get(i).name);
+		assertEquals("CompanyCircularDependency", type.fields.get(i).type.name);
+		assertEquals("Manager", type.fields.get(i).type.fields.get(i).name);
+		assertEquals("PersonCircularDependency", type.fields.get(i).type.fields.get(i).type.name);
+	}
 	
 
 	public void test_type_with_importance() throws Exception {

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
 import nebula.data.Classificator;
 import nebula.data.DataListener;
@@ -23,33 +24,36 @@ import org.apache.commons.logging.LogFactory;
 import util.FileUtil;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Maps;
 public abstract class TypeLoader {
 	protected Log log = LogFactory.getLog(this.getClass());
 
 	final TypeLoader parent;
 	final SmartList<String, Type> types;
+	final Map<String, Type> typesLoading;
 
 	protected long lastModified;
 	final Classificator<String, Type> classifyBy;
 
+	
+	Function<Type, String> typeIndexFunction =new Function<Type, String>() {
+		@Override
+		public String apply(Type from) {
+			return from.name;
+		}
+	};
+	
 	@SuppressWarnings("unchecked")
 	public TypeLoader(TypeLoader parent) {
 		this.parent = parent;
 		if (parent != null) {
-			types = new InheritSmartList<String, Type>(parent.types, new Function<Type, String>() {
-				@Override
-				public String apply(Type from) {
-					return from.name;
-				}
-			});
+			types = new InheritSmartList<String, Type>(parent.types, typeIndexFunction);
 		} else {
-			types = new SmartList<String, Type>(new Function<Type, String>() {
-				@Override
-				public String apply(Type from) {
-					return from.name;
-				}
-			});
+			types = new SmartList<String, Type>(typeIndexFunction);
 		}
+		
+		typesLoading = Maps.newHashMap();
+		
 		classifyBy = new DataClassificator<String, Type>(new Function<Type, String>() {
 			@Override
 			public String apply(Type from) {

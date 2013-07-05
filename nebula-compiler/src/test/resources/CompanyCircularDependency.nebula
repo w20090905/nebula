@@ -1,0 +1,4 @@
+type CompanyCircularDependency {
+	!Name;
+	Manager PersonCircularDependency;
+};

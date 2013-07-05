@@ -22,19 +22,22 @@ options {
 }
 
 @members {
-    Map<String,Type> typesMap = new HashMap<String,Type>();
+//    Map<String,Type> typesMap = new HashMap<String,Type>();
     List<Type> types = new ArrayList<Type>();
 
     InheritHashMap attrsBuffer = new InheritHashMap();
     
     TypeLoader loader;
+    
+    Map<String, Type> typesLoading;
     public NebulaParser(TokenStream input,TypeLoader loader) {
         this(input);
         this.loader = loader;
+        this.typesLoading = loader.typesLoading;
     }
     
     protected Type resolveType(String name){
-        Type type = typesMap.get(name);
+        Type type = typesLoading.get(name);
         if(type!=null)
             return type;
         type = loader.findType(name);
@@ -45,9 +48,14 @@ options {
         }
     }
     
-    protected void addType(Type type){
-        typesMap.put(type.name,type);  
-        types.add(type);    
+    protected void loading(Type type){
+        typesLoading.put(type.name,type);
+        types.add(type);
+        System.out.println("\t$$$\ttypesLoading : " + typesLoading.size());
+    }
+    protected void loadingFinish(Type type){
+        typesLoading.remove(type.name);
+        System.out.println("\t$$$\ttypesLoading : " + typesLoading.size());
     }
     protected void info(String str) {
     if (str.charAt(str.length() - 1) == '\n') {
@@ -93,12 +101,15 @@ typeDefinition returns[Type type]
                 type.attrs.putAll(annotations);
             }
             
-            addType(type);
+            loading(type);
             type.nameAlias.extend(aliases);
         }
         (
           '{' NEWLINE? (fieldDefinition[type])*  '}' (';'|NEWLINE)
         )
+        
+        /* Finish */
+        {loadingFinish(type);}
         ;
 
 typeDefineKeyword returns[TypeStandalone typeType]
@@ -114,7 +125,7 @@ nestedTypeDefinition[Type resideType,String name,Aliases nameAlias] returns[Type
               String typeName = resideType.name + "$" + name;
               type = new Type(loader,resideType,typeName,resolveType(TypeStandalone.Mixin.name()));
               if(nameAlias!=null)type.setNameAlias(nameAlias);
-              addType(type);
+              loading(type);
             }
             fieldDefinition[type]* 
         ;
@@ -149,7 +160,7 @@ fieldDefinition[Type resideType] returns[Field field]
             typeText=ID { field.type = resolveType($typeText.text);}
             |   '{'     NEWLINE ? { if(aliases==null) aliases = new Aliases(field.name); } 
                     nestedType = nestedTypeDefinition[resideType,$name.text,aliases] 
-                '}'   { field.type = nestedType;}
+                '}'   { field.type = nestedType; loadingFinish(nestedType);}
            |            {
                             if(field.type==null)  {
                                 field.type = resolveType(field.name);  
