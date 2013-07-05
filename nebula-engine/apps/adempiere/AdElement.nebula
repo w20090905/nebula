@@ -10,7 +10,7 @@ type AdElement {
 	@Remarks("The record is active in the system")
 	IsActive YesNo;/* 'Y'  */
 	@Remarks("Date this record was created")
-	CreateD null;/* NULL */
+	Created null;/* NULL */
 	@Remarks("User who created this records")
 	Createdby null;/* NULL */
 	@Remarks("Date this record was updated")

@@ -2,7 +2,7 @@
 @Refby("0")
 type MProductStockV {
 	IsActive YesNo;
-	CreateD null;
+	Created null;
 	Createdby null;
 	Updated null;
 	Updatedby null;

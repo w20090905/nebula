@@ -12,7 +12,7 @@ tx AdTableScriptvalidator {
 	@Remarks("Table Script Validator")
 	!AdTableScriptvalidatorId ID;
 	@Remarks("Date this record was created")
-	CreateD null;
+	Created null;
 	@Remarks("User who created this records")
 	Createdby null;
 	@Remarks("Event Model Validator")

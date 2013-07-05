@@ -12,7 +12,7 @@ type IElementvalue {
 	@Remarks("User who created this records")
 	?Createdby null;
 	@Remarks("Date this record was created")
-	?CreateD null;/* SYSDATE */
+	?Created null;/* SYSDATE */
 	@Remarks("Date this record was updated")
 	?Updated null;/* SYSDATE */
 	@Remarks("User who updated this records")

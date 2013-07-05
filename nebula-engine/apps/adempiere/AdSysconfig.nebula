@@ -8,7 +8,7 @@ type AdSysconfig {
 	@Remarks("Organizational entity within client")
 	AdOrgId AdOrg;
 	@Remarks("Date this record was created")
-	CreateD null;
+	Created null;
 	@Remarks("Date this record was updated")
 	Updated null;
 	@Remarks("User who created this records")

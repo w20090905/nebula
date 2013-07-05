@@ -8,7 +8,7 @@ tx CBpBankaccount {
 	@Remarks("Organizational entity within client")
 	AdOrgId AdOrg;
 	@Remarks("Date this record was created")
-	CreateD null;/* SYSDATE  */
+	Created null;/* SYSDATE  */
 	@Remarks("Date this record was updated")
 	Updated null;/* SYSDATE  */
 	@Remarks("The record is active in the system")

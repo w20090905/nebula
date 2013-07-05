@@ -10,7 +10,7 @@ tx TTrialbalance {
 	@Remarks("Organizational entity within client")
 	?AdOrgId AdOrg;
 	@Remarks("Date this record was created")
-	CreateD null;
+	Created null;
 	@Remarks("User who created this records")
 	Createdby null;
 	@Remarks("Date this record was updated")

@@ -5,7 +5,7 @@ type RvCostsummary {
 	AdOrgId AdOrg;
 	IsActive YesNo;
 	?Createdby null;
-	?CreateD null;
+	?Created null;
 	?Updatedby null;
 	?Updated null;
 	MProductId MProduct;

@@ -6,7 +6,7 @@ type CRfqresponseV {
 	AdClientId AdClient;
 	AdOrgId AdOrg;
 	IsActive YesNo;
-	CreateD null;
+	Created null;
 	Createdby null;
 	Updated null;
 	Updatedby null;

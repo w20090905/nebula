@@ -10,7 +10,7 @@ type AspLevel {
 	@Remarks("ASP Module")
 	AspModuleId AspModule;
 	@Remarks("Date this record was created")
-	CreateD null;
+	Created null;
 	@Remarks("User who created this records")
 	Createdby null;
 	@Remarks("Optional short description of the record")

@@ -46,7 +46,7 @@ type FactAcctBalance {
 	@Remarks("User who created this records")
 	Createdby null;/* 0 */
 	@Remarks("Date this record was created")
-	CreateD null;/* SYSDATE */
+	Created null;/* SYSDATE */
 	@Remarks("User who updated this records")
 	Updatedby null;/* 0 */
 	@Remarks("Date this record was updated")

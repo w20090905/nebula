@@ -6,7 +6,7 @@ type AAssetGroupAcct {
 	AdClientId AdClient;
 	AdOrgId AdOrg;
 	IsActive YesNo;/* 'Y'  */
-	CreateD null;/* SYSDATE  */
+	Created null;/* SYSDATE  */
 	Createdby null;
 	Updated null;/* SYSDATE  */
 	Updatedby null;

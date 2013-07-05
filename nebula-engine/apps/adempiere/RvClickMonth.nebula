@@ -7,7 +7,7 @@ type RvClickMonth {
 	?Description;
 	Targeturl Url;
 	?CBpartnerId CBpartner;
-	?CreateD null;
+	?Created null;
 	?Counter Count;
 };
 

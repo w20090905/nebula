@@ -10,7 +10,7 @@ tx AdPinstance {
 	@Remarks("Processing")
 	IsProcessing YesNo;/* 'N'  */
 	@Remarks("Date this record was created")
-	CreateD null;/* SYSDATE  */
+	Created null;/* SYSDATE  */
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUserId AdUser;
 	@Remarks("Date this record was updated")
