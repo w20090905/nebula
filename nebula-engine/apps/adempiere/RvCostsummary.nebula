@@ -4,7 +4,7 @@ type RvCostsummary {
 	AdClientId AdClient;
 	AdOrgId AdOrg;
 	IsActive YesNo;
-	?CreateDby null;
+	?Createdby null;
 	?CreateD null;
 	?Updatedby null;
 	?Updated null;

@@ -44,7 +44,7 @@ type FactAcctBalance {
 	@Remarks("Quantity")
 	Qty Quantity;/* 0  */
 	@Remarks("User who created this records")
-	CreateDby null;/* 0 */
+	Createdby null;/* 0 */
 	@Remarks("Date this record was created")
 	CreateD null;/* SYSDATE */
 	@Remarks("User who updated this records")

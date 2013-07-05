@@ -10,7 +10,7 @@ type CRfqresponselineVt {
 	AdOrgId AdOrg;
 	IsActive YesNo;
 	CreateD null;
-	CreateDby null;
+	Createdby null;
 	Updated null;
 	Updatedby null;
 	AdLanguage Attr;

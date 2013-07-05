@@ -6,7 +6,7 @@ type RvCInvoice {
 	AdOrgId AdOrg;
 	IsActive YesNo;
 	CreateD null;
-	CreateDby null;
+	Createdby null;
 	Updated null;
 	Updatedby null;
 	IsSotrx YesNo;

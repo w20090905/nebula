@@ -12,7 +12,7 @@ type WMailmsg {
 	@Remarks("Date this record was created")
 	CreateD null;/* SYSDATE  */
 	@Remarks("User who created this records")
-	CreateDby null;
+	Createdby null;
 	@Remarks("Date this record was updated")
 	Updated null;/* SYSDATE  */
 	@Remarks("User who updated this records")

@@ -14,7 +14,7 @@ tx AdTableScriptvalidator {
 	@Remarks("Date this record was created")
 	CreateD null;
 	@Remarks("User who created this records")
-	CreateDby null;
+	Createdby null;
 	@Remarks("Event Model Validator")
 	EventModelvalidator null;
 	@Remarks("The record is active in the system")

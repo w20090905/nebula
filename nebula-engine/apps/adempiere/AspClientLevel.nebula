@@ -14,7 +14,7 @@ tx AspClientLevel {
 	@Remarks("Date this record was created")
 	CreateD null;
 	@Remarks("User who created this records")
-	CreateDby null;
+	Createdby null;
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("The record is active in the system")

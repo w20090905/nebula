@@ -12,7 +12,7 @@ tx MMovement {
 	@Remarks("Date this record was created")
 	CreateD null;/* SYSDATE  */
 	@Remarks("User who created this records")
-	CreateDby null;
+	Createdby null;
 	@Remarks("User who updated this records")
 	Updatedby null;
 	@Remarks("Date this record was updated")

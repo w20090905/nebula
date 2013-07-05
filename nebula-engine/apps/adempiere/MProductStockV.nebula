@@ -3,7 +3,7 @@
 type MProductStockV {
 	IsActive YesNo;
 	CreateD null;
-	CreateDby null;
+	Createdby null;
 	Updated null;
 	Updatedby null;
 	Value String;

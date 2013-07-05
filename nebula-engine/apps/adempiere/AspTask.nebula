@@ -14,7 +14,7 @@ type AspTask {
 	@Remarks("Date this record was created")
 	CreateD null;
 	@Remarks("User who created this records")
-	CreateDby null;
+	Createdby null;
 	@Remarks("The record is active in the system")
 	IsActive YesNo;/* 'Y'  */
 	@Remarks("Date this record was updated")

@@ -12,7 +12,7 @@ type AdElement {
 	@Remarks("Date this record was created")
 	CreateD null;/* NULL */
 	@Remarks("User who created this records")
-	CreateDby null;/* NULL */
+	Createdby null;/* NULL */
 	@Remarks("Date this record was updated")
 	Updated null;/* SYSDATE  */
 	@Remarks("User who updated this records")

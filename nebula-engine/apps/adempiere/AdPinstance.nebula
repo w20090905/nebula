@@ -24,7 +24,7 @@ tx AdPinstance {
 	@Remarks("Organizational entity within client")
 	?AdOrgId AdOrg;
 	@Remarks("User who created this records")
-	?CreateDby null;
+	?Createdby null;
 	@Remarks("User who updated this records")
 	Updatedby null;
 	@Remarks("The record is active in the system")

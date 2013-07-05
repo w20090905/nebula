@@ -7,7 +7,7 @@ type AAssetGroupAcct {
 	AdOrgId AdOrg;
 	IsActive YesNo;/* 'Y'  */
 	CreateD null;/* SYSDATE  */
-	CreateDby null;
+	Createdby null;
 	Updated null;/* SYSDATE  */
 	Updatedby null;
 	AAssetAcct Amount;

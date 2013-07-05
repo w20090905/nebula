@@ -6,7 +6,7 @@ tx AAssetAddition {
 	AdOrgId AdOrg;
 	IsActive YesNo;/* 'Y'  */
 	CreateD null;/* SYSDATE  */
-	CreateDby null;
+	Createdby null;
 	Updated null;/* SYSDATE  */
 	Updatedby null;
 	AAssetId AAsset;

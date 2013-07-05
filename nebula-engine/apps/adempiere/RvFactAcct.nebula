@@ -5,7 +5,7 @@ type RvFactAcct {
 	AdOrgId AdOrg;
 	IsActive YesNo;
 	CreateD null;
-	CreateDby null;
+	Createdby null;
 	Updated null;
 	Updatedby null;
 	FactAcctId FactAcct;

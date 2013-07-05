@@ -12,7 +12,7 @@ tx TTrialbalance {
 	@Remarks("Date this record was created")
 	CreateD null;
 	@Remarks("User who created this records")
-	CreateDby null;
+	Createdby null;
 	@Remarks("Date this record was updated")
 	Updated null;
 	@Remarks("User who updated this records")

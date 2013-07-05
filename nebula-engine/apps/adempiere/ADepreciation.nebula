@@ -6,7 +6,7 @@ type ADepreciation {
 	AdOrgId AdOrg;
 	IsActive YesNo;/* 'Y'  */
 	CreateD null;/* SYSDATE  */
-	CreateDby null;
+	Createdby null;
 	Updated null;/* SYSDATE  */
 	Updatedby null;
 	*Name;
