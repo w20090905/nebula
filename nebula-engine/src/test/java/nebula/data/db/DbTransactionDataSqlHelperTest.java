@@ -35,8 +35,8 @@ public class DbTransactionDataSqlHelperTest extends TestCase {
 		//@formatter:off
 		String text = "" +
 				"type Person { " +
-				"	!Name;" +
-				"   !Test{" +
+				"	!!Name;" +
+				"   !!Test{" +
 				"		!Key Name;" +
 				"		*Core Age;" +
 				"		#Require Age;" +

@@ -98,10 +98,10 @@ class FieldJsonDataDealer extends DefaultTypeAdapter<Field> {
 		out.writeStartObject();
 
 		out.writeStringField("Name", field.getName());
-		out.writeStringField("Importance", field.getImportance().name());
-		out.writeBooleanField("isKey", field.isKey());
-		out.writeBooleanField("isCore", field.isCore());
-		out.writeBooleanField("isArray", field.isArray());
+		out.writeBooleanField("Key", field.isKey());
+		out.writeBooleanField("Unique", field.isKey());
+		out.writeBooleanField("Core", field.isCore());
+		out.writeBooleanField("Array", field.isArray());
 		out.writeStringField("TypeName", field.getType().getName());
 		out.writeStringField("Refer", field.getRefer().name());
 

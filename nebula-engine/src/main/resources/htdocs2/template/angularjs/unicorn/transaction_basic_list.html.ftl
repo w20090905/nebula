@@ -1,7 +1,7 @@
 [#ftl/]
 <article class="module width_full">
 	<header>
-		<h1 class="tabs_involved">${type.name}</h1>
+		<h1 class="tabs_involved">${type.displayName}</h1>
 			
 		<div class="btn-toolbar">
 			<div class="btn-group">
@@ -29,7 +29,7 @@
 					<div class="widget-title">
 						<span class="icon"> <i class="icon-align-justify"></i>
 						</span>
-						<h5>${type.name}</h5>						
+						<h5>${type.displayName}</h5>						
 						<div class="buttons btn-toolbar" x-ng-show="data.standealone='Master'">
 							<input type="text" x-ng-model="query" class="input-medium search-query ctrl" placeholder="Filter">	
 							<a href="#/d/${type.name}/!new" class="btn btn-small btn-success ctrl"><i class="icon-plus icon-white"></i> 新建</a>
@@ -41,26 +41,26 @@
 		<thead>
 			<tr>
 				<th class="id">#</th>
-				[#list type.fields as field][#if !field.array && field.importance != "Unimportant"]
+				[#list type.fields as field][#if !field.array && !field.ignorable]
 					[#switch field.refer]
 					[#case "ByVal"]
 						[#if !field.key || field.type.name!="ID"]
-				<th>${field.name}</th>
+				<th>${field.displayName}</th>
 						[/#if]
 						[#break]
 						
 					[#case "Inline"]
 						[#if field.key || field.core][#list field.type.fields as rF][#if field.key && rF.key]
-				<th>${field.name}&nbsp;${rF.name}</th>
+				<th>${field.displayName}&nbsp;${rF.displayName}</th>
 						[/#if][/#list][/#if]
 						[#break]
 						
 					[#case "ByRef"]
-				<th>${field.name}</th>
+				<th>${field.displayName}</th>
 						[#break]
 						
 					[#case "Cascade"]
-				<th>${field.name}</th>
+				<th>${field.displayName}</th>
 						[#break]
 					[/#switch]
 				[/#if][/#list]
@@ -69,13 +69,12 @@
 		<tbody>
 			<tr x-ng-repeat="data in datalist | filter:query | orderBy:orderProp">
 				[#assign keyfieldname][/#assign]
-			[#list type.fields as field][#if !field.array  && field.importance != "Unimportant"]
+			[#list type.fields as field][#if !field.array  && !field.ignorable]
 				[#switch field.refer]
 				[#case "ByVal"]
 					[#if field.key]
 			<td class="id"><a href="#/d/${type.name}/{{data.${field.name}}}">{{data["${field.name}"]}}</a></td>
 						[#assign keyfieldname]${field.name}[/#assign]
-			
 					[#elseif field.core]	
 			<td><a href="#/d/${type.name}/{{data.${keyfieldname}}}">{{data["${field.name}"]}}</a></td>
 					[#else]	
@@ -83,16 +82,16 @@
 					[/#if]
 					[#break]
 				[#case "Inline"]
-					[#if field.key || field.core][#list field.type.fields as rF][#if field.key && rF.key]	
+					[#if field.key || field.core][#list field.type.fields as rF][#if field.key && rF.key]
 						<td>{{ data["${field.name}${rF.name}"] }}</td>
 					[/#if][/#list][/#if]
 					[#break]
 				[#case "ByRef"]
 				[#case "Cascade"]
 					<td>[#list field.type.fields as rF]
-						[#if field.key && rF.key && rF.type.name!="ID"]
+						[#if field.key && rF.key && rF.name!="Id"]
 						{{ data["${field.name}${rF.name}"] }}&nbsp;
-						[#elseif rF.key && rF.key && rF.type.name!="ID"]
+						[#elseif rF.key && rF.key && rF.name!="Id"]
 						{{ data["${field.name}${rF.name}"] }}&nbsp;
 						[#elseif rF.core]
 						{{ data["${field.name}${rF.name}"] }}&nbsp;

@@ -76,7 +76,8 @@
 										<tr>
 											<th width="3em">#</th>
 											<th width="15%">Name</th>
-											<th width="15%">Importance</th>
+											<th width="15%">Key</th>
+											<th width="15%">Unique</th>
 											<th width="15%">Type</th>
 											<th width="15%">Refer</th>
 											<th>Attrs</th>
@@ -87,7 +88,8 @@
 											<td>{{$index+1}}</td>
 											<td align="left">{{item.Name}}<span x-ng-repeat="(key, value) in item.NameAlias">&nbsp; {{key}}:
 													{{value}}</span></td>
-											<td>{{item.Importance}}</td>
+											<td>{{item.Key}}</td>
+											<td>{{item.Unique}}</td>
 											<td><a href="#/d/Type/{{item.TypeName}}">{{item.TypeName}}</a></td>
 											<td>{{item.Refer}}</td>
 											<td>{{item.Attrs}}</td>

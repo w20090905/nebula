@@ -3,7 +3,7 @@ package nebula.asm;
 import nebula.data.Entity;
 import nebula.lang.EntityExpression;
 
-public class ASMSample implements EntityExpression<Integer> {
+public class ASMSample implements EntityExpression {
 	int i = 100;
 	int j = 100;
 

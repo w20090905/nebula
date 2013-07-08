@@ -16,8 +16,7 @@ public class TestDump extends ClassLoader implements Opcodes {
 
 			Class<?> expClass = this.defineClass("nebula.lang.ASMSample", b, 0, b.length);
 			// instantiates this compiled expression class...
-			@SuppressWarnings("unchecked")
-			EntityExpression<Integer> expr = (EntityExpression<Integer>) expClass.newInstance();
+			EntityExpression expr = (EntityExpression) expClass.newInstance();
 			
 			System.out.println(expr.eval(null));
 		} catch (ClassFormatError e) {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nebula.lang.Field;
-import static nebula.lang.Importance.*;
 import nebula.lang.RawTypes;
 import nebula.lang.Reference;
 import nebula.lang.Type;
@@ -41,7 +40,7 @@ public class DbMasterDataSqlHelper {
 		v = attrs.get("Scale");
 		int scale = v != null ? (Integer) v : 0;
 
-		boolean nullable = field.getImportance() == Unimportant;
+		boolean nullable = field.isNullable();
 
 		DatabaseColumn c = new DatabaseColumn(fieldName, columnName, key, nullable, array, rawType, size, precision,
 				scale);

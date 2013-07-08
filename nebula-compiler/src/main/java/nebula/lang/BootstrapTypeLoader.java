@@ -35,36 +35,36 @@ class BootstrapTypeLoader extends TypeLoader {
 		number.attrs.put("Precision", 10);
 		number.attrs.put("Scale", 2);
 
-		Type typeBoolean = new Type(this, "Boolean", number, RawTypes.Boolean);
+		Type typeBoolean = new Type(this, RawTypes.Boolean.name(), number, RawTypes.Boolean);
 		typeBoolean.attrs.put("FormatType", "checkbox");
 
-		Type typeLong = new Type(this, "Long", number, RawTypes.Long);
+		Type typeLong = new Type(this, RawTypes.Long.name(), number, RawTypes.Long);
 
-		Type decimal = new Type(this, "Decimal", number, RawTypes.Decimal);
+		Type decimal = new Type(this, RawTypes.Decimal.name(), number, RawTypes.Decimal);
 		decimal.attrs.put("Precision", 10);
 		decimal.attrs.put("Scale", 2);
 
-		Type string = new Type(this, "String", basicType, RawTypes.String);
+		Type string = new Type(this, RawTypes.String.name(), basicType, RawTypes.String);
 		string.attrs.put("FormatType", "text");
 		string.attrs.put("MaxLength", 60);
 
-		Type text = new Type(this, "Text", basicType, RawTypes.Text);
+		Type text = new Type(this, RawTypes.Text.name(), basicType, RawTypes.Text);
 		text.attrs.put("FormatType", "textarea");
 		text.attrs.put("MaxLength", 1024);
 
-		Type date = new Type(this, "Date", basicType, RawTypes.Date);
+		Type date = new Type(this, RawTypes.Date.name(), basicType, RawTypes.Date);
 		date.attrs.put("FormatType", "date");
 		date.attrs.put("FormatString", "YYYY-MM-DD");
 
-		Type time = new Type(this, "Time", basicType, RawTypes.Time);
+		Type time = new Type(this, RawTypes.Time.name(), basicType, RawTypes.Time);
 		time.attrs.put("FormatType", "time");
 		time.attrs.put("FormatString", "HH:mm:ss");
 
-		Type datetime = new Type(this, "Datetime", basicType, RawTypes.Datetime);
+		Type datetime = new Type(this, RawTypes.Datetime.name(), basicType, RawTypes.Datetime);
 		datetime.attrs.put("FormatType", "datetime");
 		datetime.attrs.put("FormatString", "YYYY-MM-DD HH:mm:ss");
 
-		Type timestamp = new Type(this, "Timestamp", basicType, RawTypes.Timestamp);
+		Type timestamp = new Type(this, RawTypes.Timestamp.name(), basicType, RawTypes.Timestamp);
 		timestamp.attrs.put("FormatType", "timestamp");
 		timestamp.attrs.put("FormatString", "YYYY-MM-DD HH:mm:ss.S");
 

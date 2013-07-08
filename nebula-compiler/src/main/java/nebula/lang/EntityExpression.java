@@ -7,7 +7,7 @@ import nebula.data.Entity;
  * 
  * @author Eric Bruneton
  */
-public interface EntityExpression<T> {
+public interface EntityExpression {
 
 	/**
 	 * Evaluates this expression.
@@ -18,5 +18,5 @@ public interface EntityExpression<T> {
 	 *            the value of the second variable.
 	 * @return the value of this expression for the given variable values.
 	 */
-	T eval(Entity entity);
+	Object eval(Entity entity);
 }

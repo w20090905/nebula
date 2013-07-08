@@ -41,7 +41,7 @@
 		<thead>
 			<tr>
 				<th class="id">#</th>
-				[#list type.fields as field][#if !field.array && field.importance != "Unimportant"]
+				[#list type.fields as field][#if !field.array && !field.ignorable]
 					[#switch field.refer]
 					[#case "ByVal"]
 						[#if !field.key || field.type.name!="ID"]
@@ -58,6 +58,7 @@
 					[#case "ByRef"]
 				<th>${field.displayName}</th>
 						[#break]
+						
 					[#case "Cascade"]
 				<th>${field.displayName}</th>
 						[#break]
@@ -69,7 +70,7 @@
 			<tr x-ng-repeat="data in datalist | filter:query | orderBy:orderProp">
 			<td class="id">{{$index+1}}</td>
 				[#assign keyfieldname][/#assign]
-			[#list type.fields as field][#if !field.array  && field.importance != "Unimportant"]
+			[#list type.fields as field][#if !field.array  && !field.ignorable]
 				[#switch field.refer]
 				[#case "ByVal"]
 					[#if field.key]

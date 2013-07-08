@@ -11,149 +11,191 @@ import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
+import com.google.common.base.Function;
+
 public class Compiler {
+	Function<String, Type> typeResolve;
+
+	Compiler(Function<String, Type> typeResolve) {
+		this.typeResolve = typeResolve;
+	}
+
+	Type resolveType(String name) {
+		return typeResolve.apply(name);
+	}
+
+	Type resolveType(Type type, String name) {
+		for (Field f : type.getFields()) {
+			if (f.name.equals(name)) {
+				return f.getType();
+			}
+		}
+		throw new RuntimeException("Cannot find field");
+	}
+
 	EntityExpressionComplier compiler = new EntityExpressionComplier();
-	
-	class EntityExpressionAgent<T> implements EntityExpression<T> {
+
+	class EntityExpressionAgent<T> implements EntityExpression {
 		final Expr<T> expr;
 		final Type type;
-		EntityExpressionAgent(final Expr<T> expr, final Type type){
+
+		EntityExpressionAgent(final Expr<T> expr, final Type type) {
 			this.expr = expr;
 			this.type = type;
 		}
-		
+
 		@Override
 		public T eval(Entity entity) {
 			return null;
 		}
-		EntityExpression<T> compile(){
+
+		EntityExpression compile() {
 			return compiler.compile(expr, type);
 		}
 	}
-	
-	public <T> EntityExpression<T> compile(Expr<T> expr, Type type) {
+
+	public <T> EntityExpression compile(Expr<T> expr, Type type) {
 		return compiler.compile(expr, type);
 	}
 
-	static public Expr<Boolean> opAnd(Expr<Boolean> e1, Expr<Boolean> e2) {
+	public Expr<Boolean> opAnd(Expr<Boolean> e1, Expr<Boolean> e2) {
 		return new And(e1, e2);
 	}
 
-	static public Expr<Boolean> opNot(Expr<Boolean> e1) {
+	public Expr<Boolean> opNot(Expr<Boolean> e1) {
 		return new Not(e1);
 	}
 
-	static public Expr<Boolean> opOr(Expr<Boolean> e1, Expr<Boolean> e2) {
+	public Expr<Boolean> opOr(Expr<Boolean> e1, Expr<Boolean> e2) {
 		return new Or(e1, e2);
 	}
 
-	static public <V extends Comparable<V>> Expr<Boolean> opNotEqualTo(Expr<V> e1, Expr<V> e2) {
+	public <V extends Comparable<V>> Expr<Boolean> opNotEqualTo(Expr<V> e1, Expr<V> e2) {
 		return new NotEqualTo<V>(e1, e2);
 	}
 
-	static public <V extends Comparable<V>> Expr<Boolean> opEqualTo(Expr<V> e1, Expr<V> e2) {
+	public <V extends Comparable<V>> Expr<Boolean> opEqualTo(Expr<V> e1, Expr<V> e2) {
 		return new EqualTo<V>(e1, e2);
 	}
 
-	static public <V extends Comparable<V>> Expr<Boolean> opGreaterThan(Expr<V> e1, Expr<V> e2) {
+	public <V extends Comparable<V>> Expr<Boolean> opGreaterThan(Expr<V> e1, Expr<V> e2) {
 		return new GreaterThan<V>(e1, e2);
 	}
 
-	static public <V extends Comparable<V>> Expr<Boolean> opGreaterThanOrEqualTo(Expr<V> e1, Expr<V> e2) {
+	public <V extends Comparable<V>> Expr<Boolean> opGreaterThanOrEqualTo(Expr<V> e1, Expr<V> e2) {
 		return new GreaterThanOrEqualTo<V>(e1, e2);
 	}
 
-	static public <V extends Comparable<V>> Expr<Boolean> opLessThan(Expr<V> e1, Expr<V> e2) {
+	public <V extends Comparable<V>> Expr<Boolean> opLessThan(Expr<V> e1, Expr<V> e2) {
 		return new LessThan<V>(e1, e2);
 	}
 
-	static public <V extends Comparable<V>> Expr<Boolean> opLessThanOrEqualTo(Expr<V> e1, Expr<V> e2) {
+	public <V extends Comparable<V>> Expr<Boolean> opLessThanOrEqualTo(Expr<V> e1, Expr<V> e2) {
 		return new LessThanOrEqualTo<V>(e1, e2);
 	}
 
-	static public Expr<Integer> opAdd(Expr<Integer> e1, Expr<Integer> e2) {
+	public Expr<Object> opAdd(Expr<Object> e1, Expr<Object> e2) {
 		return new Add(e1, e2);
 	}
 
-	static public Expr<Integer> opSub(Expr<Integer> e1, Expr<Integer> e2) {
+	public Expr<Object> opSub(Expr<Object> e1, Expr<Object> e2) {
 		return new Sub(e1, e2);
 	}
 
-	static public Expr<Integer> opMulti(Expr<Integer> e1, Expr<Integer> e2) {
+	public Expr<Object> opMulti(Expr<Object> e1, Expr<Object> e2) {
 		return new Multi(e1, e2);
 	}
 
-	static public Expr<Integer> opDiv(Expr<Integer> e1, Expr<Integer> e2) {
+	public Expr<Object> opDiv(Expr<Object> e1, Expr<Object> e2) {
 		return new Div(e1, e2);
 	}
 
-	static public Expr<Integer> opRemainder(Expr<Integer> e1, Expr<Integer> e2) {
+	public Expr<Object> opRemainder(Expr<Object> e1, Expr<Object> e2) {
 		return new Remainder(e1, e2);
 	}
 
-	static public Expr<Integer> opIncrement(Expr<Integer> e1) {
+	public Expr<Object> opIncrement(Expr<Object> e1) {
 		return new Increment(e1);
 	}
 
-	static public Expr<Integer> opDecrement(Expr<Integer> e1) {
+	public Expr<Object> opDecrement(Expr<Object> e1) {
 		return new Decrement(e1);
 	}
 
-	static public Expr<Integer> opPositive(Expr<Integer> e1) {
+	public Expr<Object> opPositive(Expr<Object> e1) {
 		return new Positive(e1);
 	}
 
-	static public Expr<Integer> opNegates(Expr<Integer> e1) {
+	public Expr<Object> opNegates(Expr<Object> e1) {
 		return new Negates(e1);
 	}
 
-	static public Expr<Integer> opIntegerCst(String value) {
+	public Expr<Integer> opIntegerCst(String value) {
 		return new IntegerCst(value);
 	}
 
-	static public Expr<BigDecimal> opDecimalCst(String value) {
+	public Expr<BigDecimal> opDecimalCst(String value) {
 		return new DecimalCst(value);
 	}
 
-	static public Expr<String> opStringCst(String value) {
+	public Expr<String> opStringCst(String value) {
 		return new StringCst(value);
 	}
-	
-	static public Expr<DateTime> opTimestampCst(String value) {
+
+	public Expr<DateTime> opTimestampCst(String value) {
 		return new TimestampCst(value);
 	}
 
-	static public Expr<DateTime> opDatetimeCst(String value) {
+	public Expr<DateTime> opDatetimeCst(String value) {
 		return new DatetimeCst(value);
 	}
 
-	static public Expr<DateTime> opDateCst(String value) {
+	public Expr<DateTime> opDateCst(String value) {
 		return new DateCst(value);
 	}
 
-	static public Expr<DateTime> opTimeCst(String value) {
+	public Expr<DateTime> opTimeCst(String value) {
 		return new TimeCst(value);
 	}
 
-	// TODO
-	static public Expr<Integer> opVar(String e1) {
-		return new IntegerVar(e1);
+	public Expr<Object> opThis() {
+		return new VarRefer("this");
 	}
 
-	static public Expr<Integer> opFieldOf(Expr<Entity> e1, String name) {
-		return new IntegerFieldOf(e1, name);
+	public Expr<Object> opVar(String text) {
+		return new VarRefer(text);
 	}
 
-	static abstract class Expression<T> implements Opcodes, Expr<T> {
+	public Expr<Object> opFieldOf(Expr<Object> e1, String name) {
+		return new FieldOf(e1, name);
 	}
 
-	static abstract class LogicExpr extends Expression<Boolean> {
+	public Statement opPut(Expr<Object> field, Expr<Object> value) {
+		return new PutField((FieldOf) field, value);
+	}
+
+	public Expr<Object> opMethodCall(Expr<Entity> e1, String name) {
+		return new MethodCall(e1, name);
+	}
+
+	abstract class Expression<T> implements Opcodes, Expr<T> {
+		@Override
+		public T exec() {
+			throw new UnsupportedOperationException();
+		}
+	}
+
+	abstract class LogicExpr extends Expression<Boolean> {
+		@Override
+		public Type getExprType() {
+			return resolveType(RawTypes.Boolean.name());
+		}
 	}
 
 	/**
 	 * A logical "and" expression.
 	 */
-	static class And extends LogicExpr {
+	class And extends LogicExpr {
 		final Expr<Boolean> e1;
 		final Expr<Boolean> e2;
 
@@ -191,7 +233,7 @@ public class Compiler {
 	/**
 	 * A logical "not" expression.
 	 */
-	static class Not extends LogicExpr {
+	class Not extends LogicExpr {
 		final Expr<Boolean> e1;
 
 		Not(Expr<Boolean> e1) {
@@ -219,7 +261,7 @@ public class Compiler {
 	/**
 	 * A logical "or" expression.
 	 */
-	static class Or extends LogicExpr {
+	class Or extends LogicExpr {
 		final Expr<Boolean> e1;
 		final Expr<Boolean> e2;
 
@@ -254,10 +296,14 @@ public class Compiler {
 		}
 	}
 
-	abstract static class CompareExpr<V extends Comparable<V>> extends Expression<Boolean> {
+	abstract class CompareExpr<V extends Comparable<V>> extends Expression<Boolean> {
+		@Override
+		public Type getExprType() {
+			return resolveType(RawTypes.Boolean.name());
+		}
 	}
 
-	static class NotEqualTo<V extends Comparable<V>> extends CompareExpr<V> {
+	class NotEqualTo<V extends Comparable<V>> extends CompareExpr<V> {
 		final Expr<V> e1;
 		final Expr<V> e2;
 
@@ -292,7 +338,7 @@ public class Compiler {
 		}
 	}
 
-	static class EqualTo<V extends Comparable<V>> extends CompareExpr<V> {
+	class EqualTo<V extends Comparable<V>> extends CompareExpr<V> {
 		final Expr<V> e1;
 		final Expr<V> e2;
 
@@ -330,7 +376,7 @@ public class Compiler {
 	/**
 	 * A "greater than" expression.
 	 */
-	static class GreaterThan<V extends Comparable<V>> extends CompareExpr<V> {
+	class GreaterThan<V extends Comparable<V>> extends CompareExpr<V> {
 		final Expr<V> e1;
 		final Expr<V> e2;
 
@@ -365,7 +411,7 @@ public class Compiler {
 		}
 	}
 
-	static class GreaterThanOrEqualTo<V extends Comparable<V>> extends CompareExpr<V> {
+	class GreaterThanOrEqualTo<V extends Comparable<V>> extends CompareExpr<V> {
 		final Expr<V> e1;
 		final Expr<V> e2;
 
@@ -400,7 +446,7 @@ public class Compiler {
 		}
 	}
 
-	static class LessThan<V extends Comparable<V>> extends CompareExpr<V> {
+	class LessThan<V extends Comparable<V>> extends CompareExpr<V> {
 		final Expr<V> e1;
 		final Expr<V> e2;
 
@@ -436,7 +482,7 @@ public class Compiler {
 		}
 	}
 
-	static class LessThanOrEqualTo<V extends Comparable<V>> extends CompareExpr<V> {
+	class LessThanOrEqualTo<V extends Comparable<V>> extends CompareExpr<V> {
 		final Expr<V> e1;
 		final Expr<V> e2;
 
@@ -474,20 +520,27 @@ public class Compiler {
 		}
 	}
 
-	static abstract class IntegerExpr extends Expression<Integer> {
+	abstract class ArithmeticExpr extends Expression<Object> {
+		final Expr<Object> e1;
+		final Expr<Object> e2;
 
+		ArithmeticExpr(final Expr<Object> e1, final Expr<Object> e2) {
+			this.e1 = e1;
+			this.e2 = e2;
+		}
+
+		@Override
+		public Type getExprType() {
+			return e1.getExprType();
+		}
 	}
 
 	/**
 	 * An addition expression.
 	 */
-	static class Add extends IntegerExpr {
-		final Expr<Integer> e1;
-		final Expr<Integer> e2;
-
-		Add(final Expr<Integer> e1, final Expr<Integer> e2) {
-			this.e1 = e1;
-			this.e2 = e2;
+	class Add extends ArithmeticExpr {
+		Add(final Expr<Object> e1, final Expr<Object> e2) {
+			super(e1, e2);
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -499,7 +552,7 @@ public class Compiler {
 
 		@Override
 		public Integer exec() {
-			return e1.exec() + e2.exec();
+			return (Integer) e1.exec() + (Integer) e2.exec();
 		}
 
 		@Override
@@ -508,13 +561,9 @@ public class Compiler {
 		}
 	}
 
-	static class Sub extends IntegerExpr {
-		final Expr<Integer> e1;
-		final Expr<Integer> e2;
-
-		Sub(final Expr<Integer> e1, final Expr<Integer> e2) {
-			this.e1 = e1;
-			this.e2 = e2;
+	class Sub extends ArithmeticExpr {
+		Sub(final Expr<Object> e1, final Expr<Object> e2) {
+			super(e1, e2);
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -522,11 +571,6 @@ public class Compiler {
 			e1.compile(mv);
 			e2.compile(mv);
 			mv.visitInsn(ISUB);
-		}
-
-		@Override
-		public Integer exec() {
-			return e1.exec() - e2.exec();
 		}
 
 		@Override
@@ -538,13 +582,9 @@ public class Compiler {
 	/**
 	 * A multiplication expression.
 	 */
-	static class Multi extends IntegerExpr {
-		final Expr<Integer> e1;
-		final Expr<Integer> e2;
-
-		Multi(final Expr<Integer> e1, final Expr<Integer> e2) {
-			this.e1 = e1;
-			this.e2 = e2;
+	class Multi extends ArithmeticExpr {
+		Multi(final Expr<Object> e1, final Expr<Object> e2) {
+			super(e1, e2);
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -556,23 +596,14 @@ public class Compiler {
 		}
 
 		@Override
-		public Integer exec() {
-			return e1.exec() * e2.exec();
-		}
-
-		@Override
 		public String toString() {
 			return "(" + e1.toString() + " * " + e2.toString() + ")";
 		}
 	}
 
-	static class Div extends IntegerExpr {
-		final Expr<Integer> e1;
-		final Expr<Integer> e2;
-
-		Div(final Expr<Integer> e1, final Expr<Integer> e2) {
-			this.e1 = e1;
-			this.e2 = e2;
+	class Div extends ArithmeticExpr {
+		Div(final Expr<Object> e1, final Expr<Object> e2) {
+			super(e1, e2);
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -584,23 +615,14 @@ public class Compiler {
 		}
 
 		@Override
-		public Integer exec() {
-			return e1.exec() / e2.exec();
-		}
-
-		@Override
 		public String toString() {
 			return "(" + e1.toString() + " / " + e2.toString() + ")";
 		}
 	}
 
-	static class Remainder extends IntegerExpr {
-		final Expr<Integer> e1;
-		final Expr<Integer> e2;
-
-		Remainder(final Expr<Integer> e1, final Expr<Integer> e2) {
-			this.e1 = e1;
-			this.e2 = e2;
+	class Remainder extends ArithmeticExpr {
+		Remainder(final Expr<Object> e1, final Expr<Object> e2) {
+			super(e1, e2);
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -612,21 +634,27 @@ public class Compiler {
 		}
 
 		@Override
-		public Integer exec() {
-			return e1.exec() % e2.exec();
-		}
-
-		@Override
 		public String toString() {
 			return "(" + e1.toString() + " % " + e2.toString() + ")";
 		}
 	}
 
-	static class Increment extends IntegerExpr {
-		Expr<Integer> e1;
+	abstract class UnaryArithmeticExpr extends Expression<Object> {
+		final Expr<Object> e1;
 
-		Increment(Expr<Integer> e1) {
+		UnaryArithmeticExpr(final Expr<Object> e1) {
 			this.e1 = e1;
+		}
+
+		@Override
+		public Type getExprType() {
+			return e1.getExprType();
+		}
+	}
+
+	class Increment extends UnaryArithmeticExpr {
+		Increment(Expr<Object> e1) {
+			super(e1);
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -638,21 +666,14 @@ public class Compiler {
 		}
 
 		@Override
-		public Integer exec() {
-			return e1.exec() + 1;
-		}
-
-		@Override
 		public String toString() {
 			return "++" + e1.toString();
 		}
 	}
 
-	static class Decrement extends IntegerExpr {
-		Expr<Integer> e1;
-
-		Decrement(Expr<Integer> e1) {
-			this.e1 = e1;
+	class Decrement extends UnaryArithmeticExpr {
+		Decrement(Expr<Object> e1) {
+			super(e1);
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -664,30 +685,18 @@ public class Compiler {
 		}
 
 		@Override
-		public Integer exec() {
-			return e1.exec() - 1;
-		}
-
-		@Override
 		public String toString() {
 			return "--" + e1.toString();
 		}
 	}
 
-	static class Positive extends IntegerExpr {
-		Expr<Integer> e1;
-
-		Positive(Expr<Integer> e1) {
-			this.e1 = e1;
+	class Positive extends UnaryArithmeticExpr {
+		Positive(Expr<Object> e1) {
+			super(e1);
 		}
 
 		public void compile(final MethodVisitor mv) {
 			e1.compile(mv);
-		}
-
-		@Override
-		public Integer exec() {
-			return e1.exec();
 		}
 
 		@Override
@@ -696,11 +705,9 @@ public class Compiler {
 		}
 	}
 
-	static class Negates extends IntegerExpr {
-		Expr<Integer> e1;
-
-		Negates(Expr<Integer> e1) {
-			this.e1 = e1;
+	class Negates extends UnaryArithmeticExpr {
+		Negates(Expr<Object> e1) {
+			super(e1);
 		}
 
 		public void compile(final MethodVisitor mv) {
@@ -711,43 +718,12 @@ public class Compiler {
 		}
 
 		@Override
-		public Integer exec() {
-			return -e1.exec();
-		}
-
-		@Override
 		public String toString() {
 			return "+" + e1.toString();
 		}
 	}
 
-	static class IntegerVar extends IntegerExpr {
-		final String name;
-
-		IntegerVar(String name) {
-			this.name = name;
-		}
-
-		public void compile(final MethodVisitor mv) {
-			mv.visitVarInsn(ALOAD, 1);
-			mv.visitLdcInsn(this.name);
-			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "get", "(Ljava/lang/String;)Ljava/lang/Object;");
-			mv.visitTypeInsn(CHECKCAST, "java/lang/Integer");
-			mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Integer", "intValue", "()I");
-		}
-
-		@Override
-		public Integer exec() {
-			return null;// TODO
-		}
-
-		@Override
-		public String toString() {
-			return name.toString();
-		}
-	}
-
-	static class StringCst extends Expression<String> {
+	class StringCst extends Expression<String> {
 		final String value;
 
 		StringCst(String value) {
@@ -768,9 +744,14 @@ public class Compiler {
 		public String toString() {
 			return value;
 		}
+
+		@Override
+		public Type getExprType() {
+			return resolveType(RawTypes.String.name());
+		}
 	}
 
-	static class DecimalCst extends Expression<BigDecimal> {
+	class DecimalCst extends Expression<BigDecimal> {
 		final String text;
 
 		DecimalCst(String text) {
@@ -793,10 +774,15 @@ public class Compiler {
 		public String toString() {
 			return text;
 		}
+
+		@Override
+		public Type getExprType() {
+			return resolveType(RawTypes.Decimal.name());
+		}
 	}
 
-	static class IntegerCst extends IntegerExpr {
-		final int value;
+	class IntegerCst extends Expression<Integer> {
+		final Integer value;
 
 		IntegerCst(String text) {
 			this.value = Integer.parseInt(text);
@@ -815,19 +801,23 @@ public class Compiler {
 		public String toString() {
 			return String.valueOf(value);
 		}
-	}
-	
 
-	static class TimestampCst extends Expression<DateTime> {
-		static final DateTimeFormatter formater = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS");
+		@Override
+		public Type getExprType() {
+			return resolveType(RawTypes.Long.name());
+		}
+	}
+
+	class TimestampCst extends Expression<DateTime> {
+		final DateTimeFormatter formater = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS");
 		final DateTime value;
 
 		TimestampCst(String text) {
-			this.value =formater.parseDateTime(text);
+			this.value = formater.parseDateTime(text);
 		}
 
 		public void compile(final MethodVisitor mv) {
-			mv.visitLdcInsn(value);//TODO
+			mv.visitLdcInsn(value);// TODO
 		}
 
 		@Override
@@ -839,19 +829,23 @@ public class Compiler {
 		public String toString() {
 			return String.valueOf(value);
 		}
+
+		@Override
+		public Type getExprType() {
+			return resolveType(RawTypes.Timestamp.name());
+		}
 	}
 
-
-	static class DatetimeCst extends Expression<DateTime> {
-		static final DateTimeFormatter formater = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+	class DatetimeCst extends Expression<DateTime> {
+		final DateTimeFormatter formater = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 		final DateTime value;
 
 		DatetimeCst(String text) {
-			this.value =formater.parseDateTime(text);
+			this.value = formater.parseDateTime(text);
 		}
 
 		public void compile(final MethodVisitor mv) {
-			mv.visitLdcInsn(value);//TODO
+			mv.visitLdcInsn(value);// TODO
 		}
 
 		@Override
@@ -863,19 +857,23 @@ public class Compiler {
 		public String toString() {
 			return String.valueOf(value);
 		}
-	}
-	
 
-	static class DateCst extends Expression<DateTime> {
-		static final DateTimeFormatter formater = DateTimeFormat.forPattern("yyyy-MM-dd");
+		@Override
+		public Type getExprType() {
+			return resolveType(RawTypes.Datetime.name());
+		}
+	}
+
+	class DateCst extends Expression<DateTime> {
+		final DateTimeFormatter formater = DateTimeFormat.forPattern("yyyy-MM-dd");
 		final DateTime value;
 
 		DateCst(String text) {
-			this.value =formater.parseDateTime(text);
+			this.value = formater.parseDateTime(text);
 		}
 
 		public void compile(final MethodVisitor mv) {
-			mv.visitLdcInsn(value);//TODO
+			mv.visitLdcInsn(value);// TODO
 		}
 
 		@Override
@@ -887,19 +885,23 @@ public class Compiler {
 		public String toString() {
 			return String.valueOf(value);
 		}
-	}
-	
 
-	static class TimeCst extends Expression<DateTime> {
-		static final DateTimeFormatter formater = DateTimeFormat.forPattern("HH:mm:ss");
+		@Override
+		public Type getExprType() {
+			return resolveType(RawTypes.Date.name());
+		}
+	}
+
+	class TimeCst extends Expression<DateTime> {
+		final DateTimeFormatter formater = DateTimeFormat.forPattern("HH:mm:ss");
 		final DateTime value;
 
 		TimeCst(String text) {
-			this.value =formater.parseDateTime(text);
+			this.value = formater.parseDateTime(text);
 		}
 
 		public void compile(final MethodVisitor mv) {
-			mv.visitLdcInsn(value);//TODO
+			mv.visitLdcInsn(value);// TODO
 		}
 
 		@Override
@@ -911,16 +913,72 @@ public class Compiler {
 		public String toString() {
 			return String.valueOf(value);
 		}
+
+		@Override
+		public Type getExprType() {
+			return resolveType(RawTypes.Time.name());
+		}
 	}
-	
 
-	
+	class FieldOf extends Expression<Object> {
+		final Expr<Object> e1;
+		final String name;
 
-	static class IntegerFieldOf extends IntegerExpr {
+		FieldOf(Expr<Object> e1, String name) {
+			this.e1 = e1;
+			this.name = name;
+		}
+
+		public void compile(final MethodVisitor mv) {
+			switch (this.getExprType().rawType) {
+			case Long:
+				compileInteger(mv);
+				break;
+			case String:
+				compileString(mv);
+				break;
+			default:
+				break;
+			}
+		}
+		
+		public void compileInteger(final MethodVisitor mv) {
+			mv.visitVarInsn(ALOAD, 1);
+			mv.visitLdcInsn(this.name);
+			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "get", "(Ljava/lang/String;)Ljava/lang/Object;");
+			mv.visitTypeInsn(CHECKCAST, "java/lang/Integer");
+			mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Integer", "intValue", "()I");
+		}
+
+		public void compileString(final MethodVisitor mv) {
+			mv.visitVarInsn(ALOAD, 1);
+			mv.visitLdcInsn(this.name);
+			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "get", "(Ljava/lang/String;)Ljava/lang/Object;");
+			mv.visitTypeInsn(CHECKCAST, "java/lang/String");
+		}
+		
+
+		@Override
+		public Object exec() {
+			return ((Entity) e1.exec()).get(name);
+		}
+
+		@Override
+		public String toString() {
+			return e1.toString() + "." + name.toString();
+		}
+
+		@Override
+		public Type getExprType() {
+			return resolveType(e1.getExprType(), name);
+		}
+	}
+
+	class MethodCall extends Expression<Object> {
 		final Expr<Entity> e1;
 		final String name;
 
-		IntegerFieldOf(Expr<Entity> e1, String name) {
+		MethodCall(Expr<Entity> e1, String name) {
 			this.e1 = e1;
 			this.name = name;
 		}
@@ -941,6 +999,62 @@ public class Compiler {
 		public String toString() {
 			return e1.toString() + "." + name.toString();
 		}
+
+		@Override
+		public Type getExprType() {
+			return resolveType(e1.getExprType(), name);
+		}
 	}
 
+	class VarRefer extends Expression<Object> {
+		final String name;
+
+		VarRefer(final String name) {
+			this.name = name;
+		}
+
+		@Override
+		public void compile(MethodVisitor mv) {
+		}
+
+		@Override
+		public Type getExprType() {
+			return resolveType(name);
+		}
+
+		@Override
+		public String toString() {
+			return name;
+		}
+
+	}
+
+	class PutField implements Statement {
+		final Expr<Object> parent;
+		final Expr<Object> value;
+		final String name;
+
+		PutField(FieldOf field, Expr<Object> value) {
+			this.parent = field.e1;
+			this.name = field.name;
+			this.value = value;
+		}
+
+		public void compile(final MethodVisitor mv) {
+			// compiles e1, e2, and adds an instruction to multiply the two
+			// values
+			// mv.visitLdcInsn(value);
+			// TODO
+		}
+
+		@Override
+		public void exec() {
+			// return (Integer) e1.exec().get(name);
+		}
+
+		@Override
+		public String toString() {
+			return parent.toString() + "." + name.toString() + " = " + value.toString() + ";\n";
+		}
+	}
 }

@@ -2,9 +2,7 @@ package nebula.lang;
 
 import org.objectweb.asm.MethodVisitor;
 
-public interface Expr<T> {
+public interface Statement {
     void compile(MethodVisitor mv);
-    Type getExprType();
-    
-	T exec();
+	void exec();
 }

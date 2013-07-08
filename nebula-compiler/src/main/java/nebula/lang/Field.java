@@ -5,12 +5,10 @@ import util.InheritHashMap;
 public class Field {
 	final String name;
 	Aliases nameAlias;
-	Importance importance = Importance.Unimportant;
-	boolean derived = false;
-	EntityExpression<?> derivedExpr;
-
-	boolean hasDefaultValue = false;
-	EntityExpression<?> defaultValueExpr;
+	int modifiers = 0;
+	
+	EntityExpression derivedExpr;
+	EntityExpression defaultValueExpr;
 
 	final Type resideType;
 	boolean array = false;
@@ -42,24 +40,26 @@ public class Field {
 		return this.nameAlias.defaultValue;
 	}
 
-	public Importance getImportance() {
-		return importance;
-	}
-
 	public boolean isKey() {
-		return this.importance == Importance.Key;
+		return Modifier.isKey(modifiers);
 	}
 
+	public boolean isUnique() {
+		return Modifier.isUnique(modifiers);
+	}
 	public boolean isCore() {
-		return this.importance == Importance.Core;
+		return Modifier.isCore(modifiers);
 	}
 
 	public boolean isIgnorable() {
-		return this.importance == Importance.Unimportant;
+		return Modifier.isNullable(modifiers);
 	}
-
-	public void setImportance(Importance importance) {
-		this.importance = importance;
+	public boolean isRequired() {
+		return !Modifier.isNullable(modifiers);
+	}
+	
+	public boolean isNullable() {
+		return Modifier.isNullable(modifiers);
 	}
 
 	public boolean isArray() {
@@ -99,7 +99,7 @@ public class Field {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Field [name=").append(name).append(", displayName=").append(getDisplayName())
-				.append(", importance=").append(importance).append(", array=").append(array).append(", from=")
+				.append(", array=").append(array).append(", from=")
 				.append(refer).append("]");
 		return builder.toString();
 	}
@@ -113,21 +113,13 @@ public class Field {
 	}
 
 	public boolean isDerived() {
-		return derived;
+		return Modifier.isDerived(modifiers);
 	}
 
-	public void setDerived(boolean derived) {
-		this.derived = derived;
+	public EntityExpression getDerivedExpr() {
+		return (EntityExpression) derivedExpr;
 	}
 
-	@SuppressWarnings("unchecked")
-	public <T> EntityExpression<T> getValueExpr() {
-		return (EntityExpression<T>) derivedExpr;
-	}
-
-	public <T> void setValueExpr(EntityExpression<T> valueExpr) {
-		this.derivedExpr = valueExpr;
-	}
 
 	public void setNameAlias(Aliases nameAlias) {
 		this.nameAlias = nameAlias;

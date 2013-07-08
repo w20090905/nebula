@@ -13,7 +13,7 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-public class NebulaAdvParserExprSimpleTest extends TestCase {
+public class NebulaParser_Expr_SimpleTest extends TestCase {
 	TypeLoaderForTest compiler;
 
 	@Override

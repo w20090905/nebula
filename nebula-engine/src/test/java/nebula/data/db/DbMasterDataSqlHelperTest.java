@@ -35,8 +35,8 @@ public class DbMasterDataSqlHelperTest extends TestCase {
 		//@formatter:off
 		String text = "" +
 				"type Person { " +
-				"	!Name;" +
-				"   !Test{" +
+				"	!!Name;" +
+				"   !!Test{" +
 				"		!Key Name;" +
 				"		*Core Age;" +
 				"		#Require Age;" +
@@ -52,9 +52,13 @@ public class DbMasterDataSqlHelperTest extends TestCase {
 		assertEquals(5, h.userColumns.length);
 		int i = 0;
 		assertEquals("Name", h.userColumns[i].fieldName);
+		assertEquals(true, t.getFields().get(i).isKey());
 		assertEquals(true, h.userColumns[i].key);
 		i++;
 		assertEquals("TestKey", h.userColumns[i].fieldName);
+		assertEquals(true, t.getFields().get(i).isKey());
+		assertEquals(true, t.getFields().get(i).getType().getFields().get(0).isKey());
+		assertEquals(false, t.getFields().get(i).getType().getFields().get(0).isNullable());
 		assertEquals(true, h.userColumns[i].key);
 		i++;
 		assertEquals("TestCore", h.userColumns[i].fieldName);

@@ -1,9 +1,5 @@
 package nebula.lang;
 
-import static nebula.lang.Importance.Core;
-import static nebula.lang.Importance.Key;
-import static nebula.lang.Importance.Require;
-import static nebula.lang.Importance.Unimportant;
 import static nebula.lang.Reference.ByVal;
 import static nebula.lang.Reference.Inline;
 
@@ -11,7 +7,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import junit.framework.TestCase;
-
 import nebula.data.Entity;
 import nebula.data.impl.EditableEntity;
 
@@ -22,7 +17,7 @@ import org.joda.time.format.DateTimeFormat;
 
 import util.InheritHashMap;
 
-public class NebulaParserTest extends TestCase {
+public class NebulaParser_BasicTest extends TestCase {
 	TypeLoaderForTest compiler;
 
 	@Override
@@ -63,7 +58,84 @@ public class NebulaParserTest extends TestCase {
 
 		assertEquals("姓名", f.name);
 		assertEquals(ByVal, f.refer);
-		assertEquals(Require, f.importance);
+		assertFalse(f.isNullable());
+	}
+
+	public void testTypeKeyUnique() {
+		//@formatter:off
+			String text = "" +
+					"type Person { " +
+					"	姓名  Name;" +
+					"	姓名2  Name\n" +
+					"};";
+			//@formatter:on	
+
+		Type type = parseType(text);
+
+		assertEquals(false, type.fields.get(0).isKey());
+		assertEquals(false, type.fields.get(0).isUnique());
+		assertEquals(false, type.fields.get(1).isKey());
+		assertEquals(false, type.fields.get(1).isUnique());
+
+		//@formatter:off
+		text = "" +
+				"type Person { " +
+				"	!姓名  Name;" +
+				"	姓名2  Name\n" +
+				"};";
+		//@formatter:on	
+
+		type = parseType(text);
+
+		assertEquals(true, type.fields.get(0).isKey());
+		assertEquals(true, type.fields.get(0).isUnique());
+		assertEquals(false, type.fields.get(1).isKey());
+		assertEquals(false, type.fields.get(1).isUnique());
+
+		//@formatter:off
+		text = "" +
+				"type Person { " +
+				"	!!姓名  Name;" +
+				"	姓名2  Name\n" +
+				"};";
+		//@formatter:on	
+
+		type = parseType(text);
+
+		assertEquals(true, type.fields.get(0).isKey());
+		assertEquals(true, type.fields.get(0).isUnique());
+		assertEquals(false, type.fields.get(1).isKey());
+		assertEquals(false, type.fields.get(1).isUnique());
+
+		//@formatter:off
+		text = "" +
+				"type Person { " +
+				"	!!姓名  Name;" +
+				"	!姓名2  Name\n" +
+				"};";
+		//@formatter:on	
+
+		type = parseType(text);
+
+		assertEquals(true, type.fields.get(0).isKey());
+		assertEquals(true, type.fields.get(0).isUnique());
+		assertEquals(false, type.fields.get(1).isKey());
+		assertEquals(true, type.fields.get(1).isUnique());
+
+		//@formatter:off
+		text = "" +
+				"type Person { " +
+				"	!姓名  Name;" +
+				"	!姓名2  Name\n" +
+				"};";
+		//@formatter:on	
+
+		type = parseType(text);
+
+		assertEquals(true, type.fields.get(0).isKey());
+		assertEquals(true, type.fields.get(0).isUnique());
+		assertEquals(false, type.fields.get(1).isKey());
+		assertEquals(true, type.fields.get(1).isUnique());
 	}
 
 	private Field parseField(String text) {
@@ -72,8 +144,18 @@ public class NebulaParserTest extends TestCase {
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, compiler);
 			Type type = new Type(compiler, "Test");
-			;
-			Field field = parser.fieldDefinition(type);
+			Field field;
+			field = new Field(type, "Name");
+			field.type = parser.resolveType("Name");
+			type.fields.add(field);
+
+			field = new Field(type, "Age");
+			field.type = parser.resolveType("Age");
+			type.fields.add(field);
+
+			parser.currentType = type;
+
+			field = parser.fieldDefinition(type);
 			parser.exitTopType();
 
 			return field;
@@ -89,7 +171,7 @@ public class NebulaParserTest extends TestCase {
 		Field v = parseField(text);
 
 		assertEquals("Name", v.name);
-		assertEquals(Key, v.importance);
+		assertEquals(true, v.isUnique());
 	}
 
 	public void testFieldDefinition_subType() {
@@ -107,19 +189,25 @@ public class NebulaParserTest extends TestCase {
 	}
 
 	public void testFieldDefinition_default() {
-		assertEquals(1014 * 1024, parseField("!Age := 1014 * 1024;").defaultValueExpr.eval(null));
-		assertEquals("test", parseField("!Age := \"test\";").defaultValueExpr.eval(null));
-		assertEquals(new BigDecimal("1.3"), parseField("!Age := 1.3;").defaultValueExpr.eval(null));
-		assertEquals(4 > 5,parseField("!Age := 4 > 5;").defaultValueExpr.eval(null));
+		assertEquals(1014 * 1024, parseField("!MyAge Age := 1014 * 1024;").defaultValueExpr.eval(null));
+		assertEquals("test", parseField("!MyAge Age := \"test\";").defaultValueExpr.eval(null));
+
+		assertEquals(new BigDecimal("1.3"), parseField("!MyAge Age := 1.3;").defaultValueExpr.eval(null));
+		assertEquals(4 > 5, parseField("!MyAge Age := 4 > 5;").defaultValueExpr.eval(null));
+
 	}
 
 	public void testFieldDefinition_derived() {
 		Entity e = new EditableEntity();
 		int Age = 15;
+		String name = "wangshilian";
+		e.put("Name", name);
 		e.put("Age", Age);
 
-		assertEquals(Age + 10 * 1000, parseField("!MyAge Age = Age + 10 * 1000;").derivedExpr.eval(e));
-		assertEquals(Age, parseField("!MyAge Age = Age;").derivedExpr.eval(e));
+		assertEquals(Age, parseField("!MyAge Age = this.Age;").derivedExpr.eval(e));
+		assertEquals(Age + 10 * 1000, parseField("!MyAge Age = this.Age + 10 * 1000;").derivedExpr.eval(e));
+
+		assertEquals(name, parseField("!MyAge Name = this.Name;").derivedExpr.eval(e));
 	}
 
 	public void testFieldDefinition_quicktype() {
@@ -128,11 +216,13 @@ public class NebulaParserTest extends TestCase {
 	}
 
 	public void testFieldImportance_Importance() {
-		assertEquals(Key, parseField("!Name;").importance);
-		assertEquals(Core, parseField("*Name;").importance);
-		assertEquals(Require, parseField("#Name;").importance);
-		assertEquals(Unimportant, parseField("?Name;").importance);
-		assertEquals(Key, parseField("!Name;").importance);
+		assertEquals(true, parseField("!!Name;").isKey());
+		assertEquals(true, parseField("!!Name;").isUnique());
+		assertEquals(true, parseField("!Name;").isUnique());
+		assertEquals(true, parseField("*Name;").isCore());
+		assertEquals(true, parseField("#Name;").isRequired());
+		assertEquals(true, parseField("?Name;").isNullable());
+		assertEquals(true, parseField("!Name;").isUnique());
 	}
 
 	private NebulaParser.arrayDefinition_return parseArray(String text) {
@@ -199,13 +289,14 @@ public class NebulaParserTest extends TestCase {
 		assertEquals(new BigDecimal("1.1"), parseAnnotation("MaxLength(1.1) ").get("MaxLength"));
 	}
 
-	public void testTypeAliases(){
+	public void testTypeAliases() {
 		assertEquals("Person", parseType("type Person {Name;};").getDisplayName());
 		assertEquals("员工", parseType("type Person|员工  {Name;};").getDisplayName());
 		assertEquals("Person", parseType("type Person|zh:员工  {Name;};").getDisplayName());
 		assertEquals("员工", parseType("type Person|zh:员工  {Name;};").nameAlias.get("zh"));
 	}
-	public void testFieldAliases(){
+
+	public void testFieldAliases() {
 		assertEquals("年龄", parseField("Age;").getDisplayName());
 		assertEquals("Age", parseField("Age Age;").getDisplayName());
 		assertEquals("年龄Local", parseField("Age|年龄Local Age;").getDisplayName());
@@ -272,7 +363,7 @@ public class NebulaParserTest extends TestCase {
 		assertEquals(3, type.fields.size());
 		int i = 0;
 		assertEquals("Name", type.fields.get(i).name);
-		assertEquals(Require, type.fields.get(i).importance);
+		assertEquals(true, type.fields.get(i).isRequired());
 		assertEquals("姓名", type.fields.get(i).nameAlias.get("zh"));
 
 		i++;
@@ -312,7 +403,7 @@ public class NebulaParserTest extends TestCase {
 			assertEquals(2, type.fields.size());
 			int i = 0;
 			assertEquals("Name", type.fields.get(i).name);
-			assertEquals(Require, type.fields.get(i).importance);
+			assertEquals(true, type.fields.get(i).isRequired());
 			assertEquals("姓名", type.fields.get(i).nameAlias.get("zh"));
 
 			i++;

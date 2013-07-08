@@ -20,7 +20,7 @@ public class EntityExpressionComplier extends ClassLoader implements Opcodes {
 	 * Returns the byte code of an Expression class corresponding to this
 	 * expression.
 	 */
-	<T> byte[] doCompile(final String name, final Expr<T> expr) {
+	<T> byte[]  doCompile(final String name, final Expr<T> expr) {
 		String actualClass = null;
 
 		Class<?> cls = expr.getClass();
@@ -66,7 +66,7 @@ public class EntityExpressionComplier extends ClassLoader implements Opcodes {
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
-
+/**
 		// generic method
 		{
 			mv = cw.visitMethod(ACC_PUBLIC, "eval", "(Lnebula/data/Entity;)L" + actualClass + ";", null, null);
@@ -92,13 +92,39 @@ public class EntityExpressionComplier extends ClassLoader implements Opcodes {
 			mv.visitEnd();
 		}
 		cw.visitEnd();
+		*/
+		
+
+		// method
+		{
+			mv = cw.visitMethod(ACC_PUBLIC + ACC_BRIDGE + ACC_SYNTHETIC, "eval",
+					"(Lnebula/data/Entity;)Ljava/lang/Object;", null, null);
+			
+			expr.compile(mv);
+			
+			switch (expr.getExprType().rawType) {
+			case Boolean:
+				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");	
+				break;
+			case Long:
+				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;");			
+				break;				
+			default:
+				break;
+			}
+			
+			mv.visitInsn(ARETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+		cw.visitEnd();
 
 		return cw.toByteArray();
 	}
 
 	static long count = 0;
 
-	public <T> EntityExpression<T> compile(Expr<T> exp, Type type) {
+	public <T> EntityExpression compile(Expr<T> exp, Type type) {
 		String name = "EntityExpression" + String.valueOf(count++);
 		try {
 			byte[] b = this.doCompile(name, exp);
@@ -117,8 +143,7 @@ public class EntityExpressionComplier extends ClassLoader implements Opcodes {
 			}
 			Class<?> expClass = this.defineClass(name, b, 0, b.length);
 			// instantiates this compiled expression class...
-			@SuppressWarnings("unchecked")
-			EntityExpression<T> expr = (EntityExpression<T>) expClass.newInstance();
+			EntityExpression expr = (EntityExpression) expClass.newInstance();
 			return expr;
 		} catch (ClassFormatError e) {
 			throw new RuntimeException(e);

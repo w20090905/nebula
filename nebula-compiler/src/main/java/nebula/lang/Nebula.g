@@ -12,9 +12,10 @@ options {
 	import java.util.List;
 	import java.util.Map;
 	import util.InheritHashMap;
-		
-  import static nebula.lang.Importance.*;
+	
   import static nebula.lang.Reference.*;  
+  import static nebula.lang.Modifier.*;
+  import com.google.common.base.Function;
 	
 }
 @lexer::header{
@@ -28,7 +29,12 @@ options {
     List<Expr> fieldsWithDefaultExprExpr = new ArrayList<Expr>();
     List<Field> fieldsWithDerivedExpr = new ArrayList<Field>();
     List<Expr> fieldsWithDerivedExprExpr= new ArrayList<Expr>();
-    Compiler op = new Compiler();
+    Compiler op = new Compiler(new Function<String, Type>() {
+      @Override
+	    public Type apply(String input) {
+	      return resolveType(input);
+	    }
+    });
 
     InheritHashMap attrsBuffer = new InheritHashMap();
     
@@ -41,7 +47,13 @@ options {
         this.typesLoading = loader.typesLoading;
     }
     
+    Type currentType;
+    
     protected Type resolveType(String name){
+        if("this".equals(name)){
+            return currentType;
+        }
+        
         Type type = typesLoading.get(name);
         if(type!=null)
             return type;
@@ -56,9 +68,33 @@ options {
     protected void loading(Type type){
         typesLoading.put(type.name,type);
         types.add(type);
+        currentType = type;
+    }
+    
+     protected void makeSureHasKey(Type type){
+            Field firstKey = null;
+            Field firstUnique = null;
+            for(Field f : type.fields){
+                if(f.isKey()){firstKey = f;break;}
+                if(f.isUnique()){firstUnique = f;break;}
+            }
+            
+            if(firstKey==null && firstUnique!=null){
+              firstUnique.modifiers |= Key;
+            }
+        }
+    
+    
+    protected void loadingFinish(Type resideType, Type type){
+        typesLoading.remove(type.name);
+        
+        makeSureHasKey(type);
+        currentType = resideType;
     }
     protected void loadingFinish(Type type){
-        typesLoading.remove(type.name);
+        typesLoading.remove(type.name);        
+        makeSureHasKey(type);
+        currentType = null;
     }
     
     protected void exitTopType(){
@@ -124,7 +160,7 @@ typeDefinition returns[Type type]
         (
           '{' NEWLINE? (fieldDefinition[type])*  '}' (';'|NEWLINE)
         )
-        
+                
         /* Finish */
         {loadingFinish(type);exitTopType();}
         ;
@@ -149,7 +185,7 @@ nestedTypeDefinition[Type resideType,String name,Aliases nameAlias] returns[Type
 
 fieldDefinition[Type resideType] returns[Field field]
     :   (annotations = annotationListDefinition)?  
-        imp=fieldImportance
+        modifiers=fieldImportance
         inline=inlineDefinition
         name=ID ('-' qtype=ID)?  
         /* Aliases */
@@ -164,11 +200,9 @@ fieldDefinition[Type resideType] returns[Field field]
               field = new Field(resideType,$name.text);
            }
           }       
-        
-        
+                
         /* Actions */
-        ('()' |
-        )
+        ( '()' block )?
         /* Array? */
         range=arrayDefinition
         
@@ -177,7 +211,7 @@ fieldDefinition[Type resideType] returns[Field field]
             typeText=ID { field.type = resolveType($typeText.text);}
             |   '{'     NEWLINE ? { if(aliases==null) aliases = new Aliases(field.name); } 
                     nestedType = nestedTypeDefinition[resideType,$name.text,aliases] 
-                '}'   { field.type = nestedType; loadingFinish(nestedType);}
+                '}'   { field.type = nestedType; loadingFinish(resideType,nestedType);}
            |            {
                             if(field.type==null)  {
                                 field.type = resolveType(field.name);  
@@ -187,16 +221,16 @@ fieldDefinition[Type resideType] returns[Field field]
         )
         
         /* Default value */
-        (':=' defaultExpr=expr      {   field.hasDefaultValue = true;   fieldsWithDefaultExpr.add(field); fieldsWithDefaultExprExpr.add(defaultExpr);})?
+        (':=' defaultExpr=expr      {   field.modifiers |=DefaultValue;   fieldsWithDefaultExpr.add(field); fieldsWithDefaultExprExpr.add(defaultExpr);})?
         
         /* Derived expr */
-        ('=' derivedExpr=expr   {   field.derived = true;               fieldsWithDerivedExpr.add(field); fieldsWithDerivedExprExpr.add(derivedExpr);} )?
+        ('=' derivedExpr=expr   {   field.modifiers |=Derived;               fieldsWithDerivedExpr.add(field); fieldsWithDerivedExprExpr.add(derivedExpr);} )?
         
           (';' NEWLINE?| NEWLINE)
 
         {
             field.attrs.setDefaults(field.type.attrs);
-            field.importance = imp;
+            field.modifiers |= modifiers;
             if(field.type.standalone == TypeStandalone.Basic){
               field.refer = ByVal;
             }else if(field.type.standalone == TypeStandalone.Mixin){
@@ -235,12 +269,13 @@ fieldDefinition[Type resideType] returns[Field field]
 
 
 
-fieldImportance returns[Importance v] 
-    :   '!' {v=Key;} 
-      | '*' {v=Core;} 
-      | '#' {v=Require;} 
-      | '?' {v=Unimportant;}
-      |     {v=Require;}
+fieldImportance returns[int v] 
+  @init{v=0;}
+    :   ('!!' {v|=Key;v|=Unique;} )?
+        ('!'  {v|=Unique;})?
+        ('*' {v|=Core;} )?
+        ('#' {v&=Required;} )?/* TODO */
+        ('?' {v|=Nullable;})?
     ;
 
 inlineDefinition returns[Reference v] 
@@ -300,11 +335,30 @@ flexID returns[String text]
     :   StringLiteral {text = $StringLiteral.text.substring(1,$StringLiteral.text.length()-1);}
       | pre=ID  ('-' post=ID)?{text = $pre.text; if($post!=null) text = text + "-" + $post.text;}
     ;
-
-statement:
-  expr ';'
+    
+block returns [Statement s]
+    :   '{' NEWLINE? statement* '}'
+    ;
+    
+statement returns [Statement s]:
+  stBlock = block   {s = stBlock;}
+  | stVar=varDeclaration {s = stVar;}
+  | stExpr=exprStatement {s = stExpr;}
   ;
   
+varDeclaration returns [Statement s]:
+  type=ID name=ID ('=' expr)? (';' (NEWLINE)?|NEWLINE)
+  ;
+
+exprStatement returns [Statement s]
+    :   to=postfixExpr
+        ('=' from=expr  )? (';' NEWLINE?|NEWLINE) {if(from!=null) s=op.opPut(to,from);}
+    ;
+
+paramList:
+  expr ( ',' expr)*
+;
+
 expr returns [Expr v]
     :   e=logicalORExpr {v = $e.v;}
 ;
@@ -367,15 +421,18 @@ unary returns [Expr v]
         | b=postfixExpr {v=b;} 
     ;
 
-postfixExpr returns [Expr v]:
-    a=primaryExpr  {v=a;} 
-    (
-      '.' ID {v = op.opFieldOf(v,$ID.text);}
-    )* 
-;
+postfixExpr returns [Expr v]
+    :   p=primaryExpr {v = p;}
+        (
+         '.' methodName=ID '()' {v = op.opMethodCall(v,$methodName.text);}
+         |  '.' methodNameWithParams=ID '(' paramList ')'{v = op.opMethodCall(v,$methodNameWithParams.text);}
+         |  '.'  fieldName=ID {v = op.opFieldOf(v,$fieldName.text);}
+        )*
+    ;
 
 primaryExpr returns [Expr v]
   :  a=constExpr  {v=a;} 
+  | 'this'{v=op.opThis();}
   | ID  {v=op.opVar($ID.text);} 
   | '(' expr ')'   {v = $expr.v;}
 ;
