@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("4")
+type SmpVdmLastNotifSeqPertype {
+	!NotificationType null;
+	?LastNotifSequence Sequence;
+};
+

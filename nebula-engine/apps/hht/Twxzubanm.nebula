@@ -1,0 +1,41 @@
+@Remarks("")
+@Refby("1")
+tx Twxzubanm {
+	!Zubanmid ID;
+	Kojocd null;
+	Zuban String;
+	Hinban null;
+	Zureki String;
+	?Sonae null;
+	?Hinmei null;
+	?Tani null;
+	?ChumonCd null;
+	?SiireCd null;
+	?HinmeiCd null;
+	?JyoubiCd null;
+	?Ruibetu null;
+	?KensyuKbn null;
+	?KeiyakuFuka null;
+	?JyuTanka null;
+	?HatTanka null;
+	?Groupcd null;
+	?SyuturyokuKbn null;
+	?Comento null;
+	?KyoteiKbn null;
+	?DelF null;
+	?Orgid Organization;
+	?Userid Usr;
+	?Createdate Date;
+	?DateLastupdated Date;
+	@Remarks("処理ﾀｲﾌﾟ    20111121 ADD")
+	?Shoritype null;/* 0 */
+	@Remarks("倉庫コード     20111121 ADD")
+	?Warehouseid Physicalwarehouse;
+	@Remarks("在庫認可No    20111121 ADD")
+	?Inventorycode Code;
+	@Remarks("SAPﾛｯﾄNo    20111121 ADD")
+	?Saplotno null;
+	@Remarks("SAP評価ﾀｲﾌﾟ     20111121 ADD")
+	?Sapevaluation null;
+};
+

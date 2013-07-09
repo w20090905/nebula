@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("3")
+type SmpLmvSearchObject {
+	!SearchId ID;
+	*Name;
+	Type null;
+	DbName Name;
+	Options null;
+	OptionCount Count;
+	LogCount Count;
+	ResultCount Count;
+	?StartTime null;
+	?StopTime null;
+	?ResultTime null;
+	?DictName Name;
+	?SqlSelect null;
+	?SqlDescribe null;
+	?TextConstraint Text;
+	?GraphicConstraint Note;
+	?StartScn null;
+	?EndScn null;
+};
+

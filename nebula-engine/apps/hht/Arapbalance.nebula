@@ -1,0 +1,29 @@
+@Remarks("")
+@Refby("0")
+tx Arapbalance {
+	!Arapbalanceid ID;
+	SourceOrgid ID;
+	?Booksetid Bookset;
+	Araptype null;
+	Year null;
+	Accperiodid Accountingperiod;
+	Partnerid ID;
+	?Initialamount Amount;
+	?Debitamount Amount;
+	?Debitamountall null;
+	?Creditamount Amount;
+	?Creditamountall null;
+	?BalanceAmount Amount;
+	?DateLastupdated Date;
+	?Glaccountid Glaccount;
+	?Accountingyearid ID;
+	?Period null;
+	?Zctcurrencycode Code;
+	?Zctinitialamount Amount;
+	?Zctdebitamount Amount;
+	?Zctdebitamountall null;
+	?Zctcreditamount Amount;
+	?Zctcreditamountall null;
+	?Zctbalanceamount Amount;
+};
+

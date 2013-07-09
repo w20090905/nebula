@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("3")
+tx Pickslip {
+	!Pickslipid ID;
+	Orgid Organization;
+	Pickslipcode Code;
+	?Warehouseid Physicalwarehouse;
+	Relatedtrantype null;
+	?Relatedtranid ID;
+	?Relatedtranno null;
+	?Relatedtrandate Date;
+	?Picksliptype null;
+	?Pickdate Date;
+	?Createdate Date;
+	?Maker null;
+	?Status;
+	?Comments Note;
+	?DateLastupdated Date;
+	?PrintNum null;
+	?Docdate Date;
+	?Gldate Date;
+	?ExportTaskcode Code;
+};
+

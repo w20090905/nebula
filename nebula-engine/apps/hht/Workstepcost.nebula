@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx Workstepcost {
+	!Workstepcostid ID;
+	Workstepid Workstep;
+	Prodcosttypecode Code;
+	?Hours null;
+};
+

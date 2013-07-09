@@ -1,0 +1,21 @@
+@Remarks("List of all notifications send by this repository")
+@Refby("0")
+type SmpViewNotificationHistory {
+	@Remarks("Type of object this notification was send for: EVENT, JOB, OTHER")
+	?ObjectType Attr;
+	@Remarks("Internal ID of this object")
+	?ObjectId null;
+	@Remarks("Name of the service that caused the notification")
+	?TargetName Name;
+	@Remarks("Administrator who is to receive the notification")
+	?AdministratorName Name;
+	@Remarks("Notification method: Email, Paging")
+	?Method null;
+	@Remarks("Time the notification was send")
+	?TimesTamp null;
+	@Remarks("Boolean value: Was the notification send succesfully?")
+	?Status;
+	@Remarks("The status of the object at the time of the notification")
+	?ObjectStatus null;
+};
+

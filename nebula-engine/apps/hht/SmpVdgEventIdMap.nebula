@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+type SmpVdgEventIdMap {
+	?Nodename SmpVdgNodeList;
+	?Targetname Name;
+	?Targettype Attr;
+	?Masid ID;/* -1 */
+	?Agentid ID;/* -1 */
+	?EventName Name;
+	?Agenteventname Name;
+	?EventArgs null;
+	?Status;/* 15 */
+	?OldStatus null;/* -1 */
+	?TimesTamp null;/* SYSDATE */
+	?Frequency;/* -1 */
+	?RegComplete null;/* -1 */
+	?EventIndex null;/* 0 */
+	?Unsolfilter null;/* 300A */
+};
+

@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type VTrninvsap {
+	?Zztan null;
+	Matnr null;
+	Werks null;
+	Lgort null;
+	Zzsygymd null;
+	Charg null;
+	Bwtar null;
+};
+

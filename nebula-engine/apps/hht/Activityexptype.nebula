@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("1")
+tx Activityexptype {
+	!Activityexptypeid ID;
+	Expensetypecode Code;
+	Expensetype null;
+	?PlannedAmount Amount;
+	?Distributeamount Amount;
+	?IsActivityneed YesNo;
+	?IsAutoAgreement YesNo;
+	?Actualamount Amount;
+	?Description;
+	Activityid Activity;
+	Activitystoreid Activitystore;
+};
+

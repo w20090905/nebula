@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+type SmpViewSessionNotifMap {
+	SessionId SmpVdsSessionsTable;
+	PrincipalName Name;
+	SequenceNum SmpVdeTryRemoveEventQueue;
+	?NotificationId ID;
+	?NotificationType SmpVdmLastNotifSeqPertype;
+	?Subtype null;
+	?NodeName Name;
+	?ServiceName Name;
+	?ServiceType Attr;
+	?TimeStamp Count;
+	?TimeZone Count;
+	?Verbose null;
+	?Domain null;
+};
+

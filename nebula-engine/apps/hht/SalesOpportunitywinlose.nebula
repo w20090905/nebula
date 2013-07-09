@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx SalesOpportunitywinlose {
+	!Opportunitywinloseid ID;
+	Opportunityid SalesOpportunity;
+	Opponent null;
+	Opponentproduct null;
+	Qty Quantity;
+	Price;
+	Amount;
+	?Comments Note;
+	DateLastupdated Date;
+};
+

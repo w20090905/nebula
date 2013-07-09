@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+type SmpVdnViewTargWithProp {
+	?Id SmpVdnGroupList;
+	?Target null;
+	?Type Attr;
+	?Node null;
+	?TargetPropertyName Name;
+	?TargetPropertyValue String;
+	?NodePropertyName Name;
+	?NodePropertyValue String;
+};
+

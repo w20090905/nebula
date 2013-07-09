@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+type SmpVarSmrActiveJob {
+	?Jobid null;
+	?Targetdb null;
+	?Jobname Name;
+	?Oemusername Name;
+};
+

@@ -4,19 +4,9 @@ type CBpartnerLocation {
 	@Remarks("Identifies the (ship to) address for this Business Partner")
 	!CBpartnerLocationId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Business Partner Invoice/Bill Address")
@@ -36,10 +26,10 @@ type CBpartnerLocation {
 	@Remarks("ISDN or modem line")
 	?ISDN;
 	@Remarks("Sales coverage region")
-	?CSalesRegionId CSalesRegion;
+	?CSalesRegion;
 	@Remarks("Identifies a Business Partner")
-	CBpartnerId CBpartner;
+	CBpartner;
 	@Remarks("Location or Address")
-	?CLocationId CLocation;
+	?CLocation;
 };
 

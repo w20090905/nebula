@@ -1,0 +1,27 @@
+@Remarks("")
+@Refby("4")
+tx Zxjpproductprice {
+	!Zxjpproductpriceid ID;
+	Prodid Product;
+	Status;
+	?Listprice Price;
+	Ntsprice Price;
+	?Factoryprice Price;
+	?Untaxfactoryprice Price;
+	?Tradeprice Price;
+	?Untaxtradeprice Price;
+	Ntsfactor null;
+	Createdate Date;
+	?Comments Note;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr5 null;
+	?Attr6 null;
+	?Attr7 null;
+	?Attr8 null;
+	?Startdate Date;
+	?Enddate Date;
+};
+

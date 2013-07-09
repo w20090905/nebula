@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Receiptfee {
+	!Receiptfeeid ID;
+	Receiptid Receipt;
+	FeeType null;
+	?Amount;
+	?Comments Note;
+	?Status;
+};
+

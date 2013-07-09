@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("1")
+tx Fasummary {
+	!Fasummaryid ID;
+	Booksetid Bookset;
+	Periodid ID;
+	Orgid Organization;
+	Createdate Date;
+	Facategoryid Facategory;
+	Fixedassetsid Fixedassets;
+	?Initialamt Amount;
+	?Debitamt Amount;
+	?Creditamt Amount;
+	?BalanceAmt Amount;
+	?Glaccountid Glaccount;
+	DateLastupdated Date;
+	Legertype null;
+	?Qty Quantity;
+};
+

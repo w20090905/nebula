@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Orgcopyoption {
+	!Orgcopyoptionid ID;
+	Optioncode Code;
+	Optiontype Attr;
+	LanguageCode Lang;
+	?Optiondesc null;
+	IsReadonly YesNo;
+};
+

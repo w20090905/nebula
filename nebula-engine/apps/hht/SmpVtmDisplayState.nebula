@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("1")
+tx SmpVtmDisplayState {
+	?Version;
+	!RefId SmpVtmUdchartDefn;
+	OwnerName Name;
+	ServiceType Attr;
+	?ServiceName Name;
+	CartridgeId null;
+	ClassName Name;
+	ChartName Name;
+	?OrigChartName Name;
+	?DisplayState null;
+};
+

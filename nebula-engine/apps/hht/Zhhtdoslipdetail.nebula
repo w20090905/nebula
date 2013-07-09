@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtdoslipdetail {
+	!Doslipdetailid ID;
+	?Doslipid Zhhtdoslip;
+	?Receiptid Receipt;
+	?DateLastupdated Date;
+	?Cancelflag null;/* 0 */
+	?Dlexchangecode Code;
+	?Dlzctrate Rate;
+};
+

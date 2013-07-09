@@ -1,23 +1,18 @@
 @Remarks("")
 @Refby("0")
 type RvCostsummary {
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;
-	?Createdby null;
-	?Created null;
-	?Updatedby null;
-	?Updated null;
-	MProductId MProduct;
+	AdClientId ID;
+	AdOrgId ID;
+	MProductId ID;
 	Value String;
 	*Name;
 	?UPC;
 	IsBom YesNo;
 	ProductType Attr;
-	MProductCategoryId MProductCategory;
-	MCosttypeId MCosttype;
-	CAcctschemaId CAcctschema;
-	CCurrencyId CCurrency;
+	MProductCategoryId ID;
+	MCosttypeId ID;
+	CAcctschemaId ID;
+	CCurrencyId ID;
 	?Currentcostprice Price;
 	?Futurecostprice Price;
 };

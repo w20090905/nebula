@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("0")
+type VdkIndexColumn {
+	?VdkTableColumnId ID;
+	?VdkName Name;
+	?VdkParentId ID;
+	?VdkLschemaId ID;
+	?VdkPosition Length;
+	?VdkDirectCnt null;
+	?VdkRangeCnt null;
+	?VdkDataLength Length;
+	?VdkDescending null;
+	?VdkDataType null;
+	?VdkTotSelect null;
+	?VdkTotOrderBy null;
+	?VdkTotGroupBy null;
+	?VdkJoin null;
+	?VdkNumDistinct null;
+	?VdkOriginal null;
+};
+

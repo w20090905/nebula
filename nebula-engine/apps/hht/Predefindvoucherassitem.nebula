@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Predefindvoucherassitem {
+	!Predefindvoucherassitemid ID;
+	Predefindvoucherid Predefindvoucher;
+	Predefindvoucherdetailid Predefindvoucherdetail;
+	Assistantitemid Assistantitem;
+	?Assistantitemvalue null;
+	Dcflag null;
+	Assistantitemrate Rate;
+	?Description;
+};
+

@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx LanguageContent {
+	!Contentid ID;
+	?EntityId ID;
+	?EntityType Attr;
+	?Tablename Name;
+	?LanguageCode Lang;
+	?Content;
+};
+

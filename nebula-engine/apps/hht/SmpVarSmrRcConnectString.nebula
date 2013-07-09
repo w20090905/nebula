@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type SmpVarSmrRcConnectString {
+	?Dbname Name;
+	?Username Name;
+	?Password null;
+	?Service null;
+	?Oemusername Name;
+};
+

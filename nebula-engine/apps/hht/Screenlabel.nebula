@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Screenlabel {
+	!LabelId ID;
+	LanguageCode Lang;
+	Module null;
+	LabelCode Code;
+	LabelName Name;
+	App null;
+};
+

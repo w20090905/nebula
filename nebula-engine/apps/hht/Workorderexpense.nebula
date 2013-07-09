@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+tx Workorderexpense {
+	!Workorderexpenseid ID;
+	Workorderid Workorder;
+	Orgid Organization;
+	?ReferenceNo Code;
+	Docdate Date;
+	Itemid Item;
+	Vendorid ID;
+	?Currencycode Code;
+	?Rate;
+	?Amount;
+	?Localamount Amount;
+	?TaxRate Rate;
+	?TaxAmount Amount;
+	?Pretaxamount Amount;
+	?Description;
+	?IsTocost YesNo;
+	?TaxName Name;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Clearrelationdetail {
+	!Clearrelationdetailid ID;
+	Clearrelationid Clearrelation;
+	Clearslipid ID;
+	Clearslipcode Code;
+	Clearsliptype null;
+	SourceFlag null;
+	DateLastupdated Date;
+};
+

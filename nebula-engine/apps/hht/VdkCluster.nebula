@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+type VdkCluster {
+	?VdkId ID;
+	?VdkName Name;
+	?VdkParentId ID;
+	?VdkDatabaseId VdkDatabase;
+	?VdkOwnerName Name;
+	?VdkClusterType null;
+	?VdkDataLength Length;
+	?VdkHashKeys null;
+	?VdkHashType null;
+	?VdkHashExpressionId ID;
+	?VdkInitrans null;
+	?VdkMaxtrans null;
+	?VdkPctfree null;
+	?VdkPctused null;
+	?VdkTablespaceName Name;
+	?VdkSegmentId VdkSegment;
+	?VdkRecomTablespaceName Name;
+};
+

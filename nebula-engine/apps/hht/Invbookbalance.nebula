@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+tx Invbookbalance {
+	!Invbookbalanceid ID;
+	Booksetid Bookset;
+	Periodid ID;
+	?Invbooktype null;
+	?DateLastupdated Date;
+	Itemid Item;
+	?Initialamt Amount;
+	?Initialqty Quantity;
+	?Debitamt Amount;
+	?Debit null;
+	?Creditamt Amount;
+	?Credit null;
+	?Endamt Amount;
+	?Endqty Quantity;
+};
+

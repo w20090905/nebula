@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type SmpVdnViewGroupGroup {
+	?Parentgrpowner null;
+	Parentgrpname Name;
+	?Membergrpowner null;
+	Membergrpname Name;
+	Membergrpid ID;
+	?X null;
+	?Y null;
+};
+

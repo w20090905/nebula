@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx TaxGroup {
+	!TaxGroupid ID;
+	TaxGroupcode Code;
+	TaxGroupname Name;
+	TaxGrouptype null;
+	?Description;
+};
+

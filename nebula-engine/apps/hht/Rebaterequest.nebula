@@ -1,0 +1,33 @@
+@Remarks("")
+@Refby("3")
+tx Rebaterequest {
+	!Rebaterequestid ID;
+	Orgid Organization;
+	Rrcode Code;
+	?Rebatepolicyid Rebatepolicy;
+	Rebatetype null;
+	Partnerid ID;
+	?Rebatecalcperiodid Rebatecalcperiod;
+	?Periodno SeqNo;
+	Createdate Date;
+	?Docdate Date;
+	Maker null;
+	?Comments Note;
+	?Currencycode Code;
+	?Exchangerate Rate;
+	?TotalAmount Amount;
+	?Localtotalamount Amount;
+	DateLastupdated Date;
+	Status;
+	?Gldate Date;
+	?Rebatereason null;
+	?Deptid Department;
+	?Activitycode Code;
+	?Rpsettletype null;
+	?Activityid Activity;
+	?Accountingyearid ID;
+	?Year null;
+	?Accperiodid Accountingperiod;
+	?Period null;
+};
+

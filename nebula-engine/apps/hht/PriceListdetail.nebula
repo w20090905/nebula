@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("4")
+tx PriceListdetail {
+	!PriceListdetailid ID;
+	PriceListid PriceList;
+	?Itemid Item;
+	?Minqty Quantity;
+	?Amount;
+	?PaymentTermid PaymentTerm;
+	?Shipmenttermid ID;
+	?Minprice Price;
+	?Maxprice Price;
+	?Comments Note;
+	?DateLastupdated Date;
+	?Umcode Code;
+	?QtyType Quantity;
+	?QtyUmcode Code;
+	?Boughtqty Quantity;
+	?Relateditemid ID;
+	?Boughtqtyup null;
+};
+

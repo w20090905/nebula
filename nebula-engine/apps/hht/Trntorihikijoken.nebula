@@ -1,0 +1,153 @@
+@Remarks("")
+@Refby("0")
+tx Trntorihikijoken {
+	@Remarks("ｼｰｹﾝｽID")
+	!Seqid Twxmitumoriiraiumhistroy;
+	Activekbn null;/* 1  */
+	?Inoutkbn null;/* 1 */
+	?Editkbn null;/* 0 */
+	@Remarks("新規時刻")
+	Createdate null;
+	@Remarks("更新時刻")
+	Updatedate null;
+	?Messageid Message;
+	?Orgid Organization;
+	@Remarks("仕入先ID")
+	?Edivendorid null;
+	@Remarks("処理区分 １：新規；２：変更；３：削除")
+	?Disposekbn null;
+	?Disposeymd null;
+	?Disposetime null;
+	@Remarks("発注者企業コード")
+	?Buyercd null;
+	@Remarks("発注者部門コード")
+	?Buyerdeptcd null;
+	@Remarks("受注者企業コード")
+	?Sellercd null;
+	@Remarks("受注者部門コード")
+	?Sellerdeptcd null;
+	@Remarks("請求者企業コード")
+	?RequestErcd null;
+	@Remarks("請求者部門コード")
+	?RequestErdeptcd null;
+	@Remarks("支払者企業コード")
+	?Payercd null;
+	@Remarks("支払者部門コード")
+	?Payerdeptcd null;
+	@Remarks("契約番号")
+	?Contractno null;
+	@Remarks("実施年月日")
+	?Startdate Date;
+	@Remarks("品名グループ")
+	?Itemgroup null;
+	@Remarks("品名（ｶﾅ）")
+	?Itemnamekn null;
+	@Remarks("品名（漢字）")
+	?Itemnamekj null;
+	@Remarks("需要家企業コード")
+	?Endcustomercd null;
+	@Remarks("需要家部門コード")
+	?Endcustomerdeptcd null;
+	@Remarks("需要家名称(ｶﾅ)")
+	?Endcustomernamekn null;
+	@Remarks("需要家名称（漢字）")
+	?Endcustomernamekj null;
+	@Remarks("２次店企業コード")
+	?Sndcompanycd null;
+	@Remarks("２次店部門コード")
+	?Sndcompanydeptcd null;
+	@Remarks("２次店名称(ｶﾅ)")
+	?Sndcompanynamekn null;
+	@Remarks("２次店名称（漢字）")
+	?Sndcompanynamekj null;
+	@Remarks("３次店企業コード")
+	?Trdcompanycd null;
+	@Remarks("３次店部門コード")
+	?Trdcompanydeptcd null;
+	@Remarks("３次店名称(ｶﾅ)")
+	?Trdcompanynamekn null;
+	@Remarks("３次店名称（漢字）")
+	?Trdcompanynamekj null;
+	@Remarks("決済条件手段")
+	?Billmethod null;
+	@Remarks("決裁基準")
+	?Billbase null;
+	@Remarks("決済条件")
+	?Billcondition null;
+	@Remarks("数量確定区分")
+	?QtyKbn null;
+	@Remarks("販売単価")
+	?Saleprice Price;
+	@Remarks("単価単位")
+	?Unitcode Code;
+	@Remarks("単価区分")
+	?Unitkbn null;
+	@Remarks("口銭区分")
+	?Commissionkbn null;
+	@Remarks("口銭単価")
+	?Commissionprice Price;
+	@Remarks("口銭")
+	?Commision null;
+	@Remarks("２次店口銭区分")
+	?Sndcommissionkbn null;
+	@Remarks("２次店口銭単価")
+	?Sndcommissionprice Price;
+	@Remarks("２次店口銭")
+	?Sndcommission null;
+	@Remarks("納入先企業コード")
+	?Receivercd null;
+	@Remarks("納入先部門コード")
+	?Receiverdeptcd null;
+	@Remarks("納入先名称（ｶﾅ）")
+	?Receivernamekn null;
+	@Remarks("納入先名称（漢字）")
+	?Receivernamekj null;
+	@Remarks("受渡条件")
+	?DeliveryCondition null;
+	@Remarks("振込銀行（コード）")
+	?Bankcd null;
+	@Remarks("振込銀行名称（ｶﾅ）")
+	?Banknamekn null;
+	@Remarks("振込銀行名称（漢字)")
+	?Banknamekj null;
+	@Remarks("口座番号")
+	?Bankaccount null;
+	@Remarks("支払要件")
+	?Paydemand null;
+	@Remarks("注文数量単位")
+	?Orderqtyunit null;
+	@Remarks("荷姿")
+	?Packing null;
+	@Remarks("容量")
+	?Capacity null;
+	@Remarks("取引区分")
+	?Tradekbn null;
+	@Remarks("課税区分")
+	?TaxKbn null;
+	@Remarks("バックオーダ区分")
+	?Backorderkbn null;
+	@Remarks("発注者情報")
+	?Buyerinfo Info;
+	@Remarks("受注者情報")
+	?Sellerinfo Info;
+	@Remarks("国内輸出区分")
+	?Exportkbn null;
+	@Remarks("予備欄（ｶﾅ）")
+	?Memokn Memo;
+	@Remarks("予備欄（漢字）")
+	?Memokj Memo;
+	@Remarks("単価導入区分")
+	?Status;
+	?Buyid ID;
+	?Sellid ID;
+	?Addid ID;
+	?Itmecode Code;
+	?Itmeid ID;
+	?Disposeymd1 null;
+	@Remarks("展開フラグ　；0：展開要1:展開不要")
+	?Dlcount Count;/* 0 */
+	@Remarks("DL日付時刻")
+	?Dltime null;
+	?Tenkaiflg null;
+};
+

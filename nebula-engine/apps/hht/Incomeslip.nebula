@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("1")
+tx Incomeslip {
+	!Incomeslipid ID;
+	?Incomeslipcode Code;
+	Orgid Organization;
+	?Createdate Date;
+	?Contactid Contact;
+	?Comments Note;
+	?Maker null;
+	?Applytotalamount Amount;
+	?Approvaltotalamount Amount;
+	Status;
+	?DateLastupdated Date;
+};
+

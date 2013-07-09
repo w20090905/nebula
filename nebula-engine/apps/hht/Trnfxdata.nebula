@@ -1,0 +1,73 @@
+@Remarks("FX送信データ中間TBL")
+@Refby("0")
+tx Trnfxdata {
+	@Remarks("ｼｰｹﾝｽID")
+	!Seqid Twxmitumoriiraiumhistroy;
+	@Remarks("契機No")
+	?TkonnEx null;
+	@Remarks("事業領域")
+	?Gsber null;
+	@Remarks("輸出入区分")
+	?Tctyp null;
+	@Remarks("実費仕切区分")
+	?Zzexchres String;
+	@Remarks("売契約通貨コード")
+	?Sdwrs null;
+	@Remarks("売契約レート")
+	?ZztkrSd null;
+	@Remarks("売予約No")
+	?Zzyoyakusd String;
+	@Remarks("入金条件")
+	?ZtermSales String;
+	@Remarks("注文主コード")
+	?Kunnr null;
+	@Remarks("買契約通貨コード")
+	?WaersPurch null;
+	@Remarks("買契約レート")
+	?ZztkrMm null;
+	@Remarks("買り予約No")
+	?Zzyoyakumm String;
+	@Remarks("支払条件")
+	?Zterm String;
+	@Remarks("仕入先コード")
+	?Elifn null;
+	@Remarks("受注金額")
+	?NetprSd null;
+	@Remarks("受注額符号")
+	?NetprSdEm null;
+	@Remarks("発注金額")
+	?NetprMm null;
+	@Remarks("発注額符号")
+	?NetprMmEm null;
+	@Remarks("受付日")
+	?Datum null;
+	@Remarks("業務ステータス")
+	?Btbsta null;
+	@Remarks("TcNo")
+	?Tkonn null;
+	@Remarks("明細")
+	?Tposn null;
+	@Remarks("売渡月")
+	?CountmonthSd null;
+	@Remarks("買渡月")
+	?CountmonthMm null;
+	@Remarks("売レートタイプ")
+	?RatetypeSd null;
+	@Remarks("買レートタイプ")
+	?RatetypeMm null;
+	@Remarks("元オーダー明細ID")
+	?Detailid MrpFctdetailTmp;
+	@Remarks("送信状態")
+	?Sendflg null;
+	@Remarks("取込時刻")
+	?Receivetime null;
+	@Remarks("送信時刻")
+	?Senttime null;
+	@Remarks("FX送信FLG")
+	?Fxsendflg null;
+	@Remarks("操作区分")
+	?Fxoperatekbn null;
+	@Remarks("黒赤区分")
+	?Brkbn null;
+};
+

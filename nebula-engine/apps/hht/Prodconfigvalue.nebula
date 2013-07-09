@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("1")
+tx Prodconfigvalue {
+	!Prodconfigvalueid ID;
+	Prodconfigid Prodconfig;
+	ValueCode Code;
+	?Comments Note;
+};
+

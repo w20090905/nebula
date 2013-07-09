@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("3")
+type SmpVdpNodes {
+	!Node null;
+	?TimesTamp null;
+	?RegionName Name;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type EdiPotmpNg2 {
+	?Contractcode Code;
+	?Ordercode Code;
+	?DeliveryFactdate Date;
+	?Receivercode Code;
+	?Soandate Date;
+	?Soanno null;
+	?Hhtdocode Code;
+};
+

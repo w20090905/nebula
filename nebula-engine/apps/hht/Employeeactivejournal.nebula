@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx Employeeactivejournal {
+	!Employeeactivityjournalid ID;
+	Employeeid Employee;
+	Workcenterid Workcenter;
+	Orderid Ord;
+	Ordercode Code;
+	Workday null;
+	Needhours null;
+	Status;
+	DateLastupdated Date;
+};
+

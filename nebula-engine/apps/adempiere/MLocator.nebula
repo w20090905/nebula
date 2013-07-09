@@ -4,23 +4,13 @@ tx MLocator {
 	@Remarks("Warehouse Locator")
 	!MLocatorId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
 	@Remarks("Storage Warehouse and Service Point")
-	MWarehouseId MWarehouse;
+	MWarehouse;
 	@Remarks("Where inventory should be picked from first")
 	PriorityNo SeqNo;
 	@Remarks("Default value")

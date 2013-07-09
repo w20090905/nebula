@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type SmpVdnViewGroupTarget {
+	?Parentgrpowner null;
+	Parentgrpname Name;
+	Targetname Name;
+	Targettype Attr;
+	?X null;
+	?Y null;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("2")
+tx Costarea {
+	!Costareaid ID;
+	Orgid Organization;
+	Costareacode Code;
+	LanguageCode Lang;
+	Costareaname Name;
+	?Costareadesc null;
+	DateLastupdated Date;
+};
+

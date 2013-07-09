@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("0")
+tx DeliveryDateupload {
+	!DeliveryDateuploadid ID;
+	?Contracttypeid Contracttype;
+	?Contracttypecode Code;
+	?Contracttypename Name;
+	?Orderid Ord;
+	?Ordercode Code;
+	?Itemid Item;
+	?Itemcode Code;
+	?Orgid Organization;
+	?Userid Usr;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Status;
+	?Orderdetailid Orderdetail;
+	?Sodeliverydateold null;
+	?Sodeliverydatenew null;
+	?Podeliverydatenew null;
+	?Podeliverydateold null;
+};
+

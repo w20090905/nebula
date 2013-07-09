@@ -1,11 +1,6 @@
 @Remarks("")
 @Refby("0")
 type MProductStockV {
-	IsActive YesNo;
-	Created null;
-	Createdby null;
-	Updated null;
-	Updatedby null;
 	Value String;
 	?Help;
 	?QtyAvailable Quantity;
@@ -13,9 +8,9 @@ type MProductStockV {
 	QtyReserved Quantity;
 	?Description;
 	Warehouse null;
-	MWarehouseId MWarehouse;
-	AdClientId AdClient;
-	AdOrgId AdOrg;
+	MWarehouseId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?DocumentNote Note;
 };
 

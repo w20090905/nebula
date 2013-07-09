@@ -4,23 +4,13 @@ tx CBpBankaccount {
 	@Remarks("Bank Account of the Business Partner")
 	!CBpBankaccountId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Identifies a Business Partner")
-	CBpartnerId CBpartner;
+	CBpartner;
 	@Remarks("Bank")
-	?CBankId CBank;
+	?CBank;
 	@Remarks("Automatic Clearing House")
 	IsAch YesNo;/* 'N'  */
 	@Remarks("Bank Account Type")
@@ -36,33 +26,33 @@ tx CBpBankaccount {
 	@Remarks("Credit Card Verification code on credit card")
 	?CreditcardVv String;
 	@Remarks("Expiry Month")
-	?CreditcardExpmm null;
+	?CreditcardExpmm Number;
 	@Remarks("Expiry Year")
-	?CreditcardExpyy null;
+	?CreditcardExpyy Number;
 	@Remarks("Name on Credit Card or Account holder")
 	?AName Name;
 	@Remarks("Street address of the Credit Card or Account holder")
-	?AStreet null;
+	?AStreet String;
 	@Remarks("City or the Credit Card or Account Holder")
-	?ACity null;
+	?ACity String;
 	@Remarks("State of the Credit Card or Account holder")
-	?AState null;
+	?AState String;
 	@Remarks("Zip Code of the Credit Card or Account Holder")
-	?AZip null;
+	?AZip String;
 	@Remarks("Payment Identification - Driver License")
-	?AIdentDl null;
+	?AIdentDl String;
 	@Remarks("Email Address")
 	?AEmail EMail;
 	@Remarks("Payment Identification - Social Security No")
-	?AIdentSsn null;
+	?AIdentSsn String;
 	@Remarks("This address has been verified")
 	?RAvsaddr Address;
 	@Remarks("The Zip Code has been verified")
-	?RAvszip null;
+	?RAvszip String;
 	@Remarks("Country")
-	?ACountry null;
+	?ACountry String;
 	@Remarks("User within the system - Internal or Business Partner Contact")
-	?AdUserId AdUser;
+	?AdUser;
 	@Remarks("Business Partner Bank Account usage")
 	?Bpbankacctuse null;/* NULL   */
 };

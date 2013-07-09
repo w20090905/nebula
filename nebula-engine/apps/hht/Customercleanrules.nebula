@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Customercleanrules {
+	!Customercleanrulesid ID;
+	?Zxjpsaleschannelrulesid Zxjpsaleschannelrules;
+	?Sequence null;
+	?Orgid Organization;
+	?Scruletype null;
+};
+

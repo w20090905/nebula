@@ -4,21 +4,11 @@ type AdPrintFormatitem {
 	@Remarks("Item/Column in the Print format")
 	!AdPrintFormatitemId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Data Print Format")
-	AdPrintFormatId AdPrintFormat;
+	AdPrintFormat;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("The label text to be printed on a document or correspondence.")
@@ -32,9 +22,9 @@ type AdPrintFormatitem {
 	@Remarks("Print Format Type")
 	PrintFormattype Attr;
 	@Remarks("Column in the table")
-	?AdColumnId AdColumn;
+	?AdColumn;
 	@Remarks("Print format that is included here.")
-	?AdPrintFormatchildId AdPrintFormat;
+	?AdPrintFormatchild AdPrintFormat;
 	@Remarks("The item is relative positioned (not absolute)")
 	IsRelativeposition YesNo;/* 'Y'  */
 	@Remarks("Print item on next line")
@@ -58,9 +48,9 @@ type AdPrintFormatitem {
 	@Remarks("Line Alignment")
 	LineAlignmenttype Attr;
 	@Remarks("Color used for printing and display")
-	?AdPrintColorId AdPrintColor;
+	?AdPrintColor;
 	@Remarks("Maintain Print Font")
-	?AdPrintFontId AdPrintFont;
+	?AdPrintFont;
 	@Remarks("Include in sort order")
 	IsOrderby YesNo;/* 'N'  */
 	@Remarks("Determines in what order the records are displayed")
@@ -72,7 +62,7 @@ type AdPrintFormatitem {
 	@Remarks("Calculate the Sum of numeric content or length")
 	IsSummarized YesNo;/* 'N'  */
 	@Remarks("The image to be printed is attached to the record")
-	ImageIsattached null;/* 'N'  */
+	ImageIsattached YesNo;/* 'N'  */
 	@Remarks("URL of  image")
 	?ImageUrl Url;
 	@Remarks("Calculate Average of numeric content or length")
@@ -84,15 +74,15 @@ type AdPrintFormatitem {
 	@Remarks("Suppress columns or elements with NULL value")
 	IsSuppressnull YesNo;/* 'N' */
 	@Remarks("Print this column below the column index entered")
-	?Belowcolumn null;
+	?Belowcolumn Number;
 	@Remarks("Graph included in Reports")
-	?AdPrintGraphId AdPrintGraph;
+	?AdPrintGraph;
 	@Remarks("Column has a fixed width")
 	IsFixedwidth YesNo;/* 'N' */
 	@Remarks("The column is printed on the next page")
 	IsNextpage YesNo;/* 'N' */
 	@Remarks("The label text to be printed on a document or correspondence after the field")
-	?PrintNamesuffix String;
+	?PrintNamesuffix Description;
 	@Remarks("Calculate the minimum amount")
 	IsMincalc YesNo;/* 'N'  */
 	@Remarks("Calculate the maximim amount")
@@ -108,9 +98,9 @@ type AdPrintFormatitem {
 	@Remarks("Fill the shape with the color selected")
 	IsFilledrectangle YesNo;/* 'N'  */
 	@Remarks("Width of the lines")
-	?LineWidth Line;
+	?LineWidth Number;
 	@Remarks("Arc Diameter for rounded Rectangles")
-	?Arcdiameter null;
+	?Arcdiameter Number;
 	@Remarks("Type of the shape to be painted")
 	?Shapetype Attr;
 	@Remarks("Information maintained in System Element table")

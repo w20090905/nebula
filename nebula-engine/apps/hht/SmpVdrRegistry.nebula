@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx SmpVdrRegistry {
+	!Id SmpVdnGroupList;
+	?Key null;
+	?Parent null;
+	?Value String;
+};
+

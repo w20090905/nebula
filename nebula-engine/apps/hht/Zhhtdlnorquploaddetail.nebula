@@ -1,0 +1,69 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtdlnorquploaddetail {
+	!Dlnorquploaddetailid ID;
+	Dlnorquploadid Zhhtdlnorqupload;
+	?Itemid Item;
+	?Itemcode Code;
+	?Qty Quantity;
+	?Saplotno null;
+	?Sapevaluation null;
+	@Remarks("貿易・共通")
+	?Zzinsuranc String;
+	@Remarks("輸出通関・許可番号")
+	?Zzelno String;
+	@Remarks("PO宛先など")
+	?ZzpoAttn String;
+	@Remarks("SO宛先など")
+	?ZzscAttn String;
+	@Remarks("検閲を行った場所を入力")
+	?Zzinspctn String;
+	@Remarks("仕様を入力")
+	?Zzspcfctn String;
+	@Remarks("梱包")
+	?Zzpacking String;
+	@Remarks("経由地")
+	?Zzshipvia1 String;
+	@Remarks("経由地2")
+	?Zzshipvia2 String;
+	@Remarks("船荷マークを入力")
+	?Zzfrom String;
+	@Remarks("船荷マークを入力")
+	?Zzto String;
+	@Remarks("船荷マークを入力")
+	?Zzshpmark1 String;
+	@Remarks("船荷マークを入力")
+	?Zzshpmark2 String;
+	@Remarks("船荷マークを入力")
+	?Zzshpmark3 String;
+	@Remarks("船荷マークを入力")
+	?Zzshpmark4 String;
+	@Remarks("船荷マークを入力")
+	?Zzshpmark5 String;
+	@Remarks("船荷マークを入力")
+	?Zzshpmark6 String;
+	@Remarks("船荷マークを入力")
+	?Zzshpmark7 String;
+	@Remarks("銀行信用状番号を入力")
+	?Zzlcno String;
+	@Remarks("船便名を入力")
+	?Zzshpper String;
+	@Remarks("住所を入力")
+	?Zzconsigh1 String;
+	@Remarks("会社名称を入力")
+	?Zzconsigh2 String;
+	@Remarks("船荷証券番号などを入力")
+	?Bolnr null;
+	@Remarks("包括・個別")
+	?Zzhktkbt String;
+	@Remarks("輸出許可番号")
+	?Zzspno String;
+	@Remarks("FROM NAME")
+	?Zzfromname Name;
+	@Remarks("TO NAME")
+	?Zztoname Name;
+	@Remarks("包括・個別名")
+	?Zzhktkbtname Name;
+	?Detailid MrpFctdetailTmp;
+};
+

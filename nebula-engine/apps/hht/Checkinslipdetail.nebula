@@ -1,0 +1,29 @@
+@Remarks("")
+@Refby("0")
+tx Checkinslipdetail {
+	!Checkinslipdetailid ID;
+	Checkinslipid Checkinslip;
+	Itemid Item;
+	Invstatus null;
+	?Locationno null;
+	?Lotno null;
+	?Batchno null;
+	?Serialno null;
+	?Qty Quantity;
+	?Price;
+	?Costprice Cost;
+	?Amount;
+	?Manufacturedate Date;
+	?Expiredate Date;
+	?Inventoryflag null;
+	?Orderdetailid Orderdetail;
+	?SourceTrantype null;
+	?SourceTranid ID;
+	?Umcode Code;
+	?Baseqty Quantity;
+	?Glaccountid Glaccount;
+	?PlannedQty Quantity;
+	?Saplotno null;
+	?Sapevaluation null;
+};
+

@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+type EdiGrtmpNg {
+	?Contractcode Code;
+	?Ordercode Code;
+	?Warehousecode Code;
+	?Receiptfactdate Date;
+	?Receivercode Code;
+	?Soandate Date;
+	?Invrelatedno null;
+	?Hhtdocode Code;
+	?Inputinvoiceno null;
+};
+

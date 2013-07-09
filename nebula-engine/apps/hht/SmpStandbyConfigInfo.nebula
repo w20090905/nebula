@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type SmpStandbyConfigInfo {
+	Name SmpVxaSystemPrefs;
+	?CurrConnect null;
+	DerivedFrom null;
+	Incarnation null;
+	ConfigUid ID;
+	ConfigUidseq null;
+	TargetName Name;
+};
+

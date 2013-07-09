@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("1")
+tx Ordermaterial {
+	!Ordermaterialid ID;
+	Orderid Ord;
+	Itemid Item;
+	?QtyNeeded Quantity;
+	?QtyGot Quantity;
+	?QtyUsed Quantity;
+	?Ordertaskid Ordertask;
+};
+

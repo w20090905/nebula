@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("11")
+tx Marketingplan {
+	!Marketingplanid ID;
+	Orgid Organization;
+	Mcptypeid Mcptype;
+	Marketingplancode Code;
+	Marketingplanname Name;
+	?Marketingplandesc null;
+	?Customerid Organization;
+	Status;
+	Maker null;
+	Createdate Date;
+	DateLastupdated Date;
+	?Marketingbudgetid Marketingbudget;
+};
+

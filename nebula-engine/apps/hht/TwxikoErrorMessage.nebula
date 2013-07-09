@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type TwxikoErrorMessage {
+	!TableName InitTable;
+	!SeqNo;
+	?Key1 null;
+	?Key2 null;
+	?Key3 null;
+	!ErrorCode Code;
+	?ErrorMessage null;
+};
+

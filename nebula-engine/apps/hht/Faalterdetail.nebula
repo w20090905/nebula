@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("0")
+tx Faalterdetail {
+	!Faalterdetailid ID;
+	Orgid Organization;
+	Faaltercode Code;
+	Altertypecode Code;
+	Planalterdate Date;
+	?Realalterdate Date;
+	?Faalterdesc null;
+	Fixedassetsid Fixedassets;
+	Alterreasoncode Code;
+	Maker null;
+	Createdate Date;
+	DateLastupdated Date;
+	Status;
+	?OldValue String;
+	?NewValue String;
+	?Fadeprbooksetid Fadeprbookset;
+	?OldValueStr null;
+	?NewValueStr null;
+};
+

@@ -1,15 +1,10 @@
 @Remarks("")
 @Refby("0")
 type RvInoutconfirm {
-	MInoutconfirmId MInoutconfirm;
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;
-	Created null;
-	Createdby null;
-	Updated null;
-	Updatedby null;
-	MInoutId MInout;
+	MInoutconfirmId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	MInoutId ID;
 	DocumentNo Code;
 	Confirmtype Attr;
 	IsApproved YesNo;
@@ -17,10 +12,10 @@ type RvInoutconfirm {
 	?Description;
 	?Processing YesNo;
 	Processed YesNo;
-	CBpartnerId CBpartner;
-	CBpartnerLocationId CBpartnerLocation;
-	MWarehouseId MWarehouse;
-	?COrderId COrder;
+	CBpartnerId ID;
+	CBpartnerLocationId ID;
+	MWarehouseId ID;
+	?COrderId ID;
 	IsSotrx YesNo;
 };
 

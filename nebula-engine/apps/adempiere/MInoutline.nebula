@@ -4,41 +4,31 @@ tx MInoutline {
 	@Remarks("Line on Shipment or Receipt document")
 	!MInoutlineId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("Unique line for this document")
 	Line;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Material Shipment Document")
-	MInoutId MInout;
+	MInout;
 	@Remarks("Sales Order Line")
-	?COrderlineId COrderline;
+	?COrderline;
 	@Remarks("Warehouse Locator")
-	?MLocatorId MLocator;
+	?MLocator;
 	@Remarks("Product, Service, Item")
-	?MProductId MProduct;
+	?MProduct;
 	@Remarks("Unit of Measure")
-	CUomId CUom;
+	CUom;
 	@Remarks("Quantity of a product moved.")
 	Movementqty Quantity;/* 0  */
 	@Remarks("Is this invoiced?")
 	IsInvoiceD YesNo;/* 'N'  */
 	@Remarks("Product Attribute Set Instance")
-	?MAttributesetinstanceId MAttributesetinstance;/* 0 */
+	?MAttributesetinstance;/* 0 */
 	@Remarks("if true, the line is just description and no transaction")
-	IsDescription Description;/* 'N'  */
+	IsDescription YesNo;/* 'N'  */
 	@Remarks("Confirmation of a received quantity")
 	?Confirmedqty Quantity;/* 0 */
 	@Remarks("Picked Quantity")
@@ -48,30 +38,30 @@ tx MInoutline {
 	@Remarks("Target Movement Quantity")
 	?Targetqty Quantity;/* 0 */
 	@Remarks("Referenced Shipment Line")
-	?RefInoutlineId MInoutline;
+	?RefInoutline MInoutline;
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("The Quantity Entered is based on the selected UoM")
 	QtyEntered Quantity;
 	@Remarks("Additional document charges")
-	?CChargeId CCharge;
+	?CCharge;
 	@Remarks("Financial Project")
-	?CProjectId CProject;
+	?CProject;
 	@Remarks("Phase of a Project")
-	?CProjectPhaseId CProjectPhase;
+	?CProjectPhase;
 	@Remarks("Actual Project Task in a Phase")
-	?CProjectTaskId CProjectTask;
+	?CProjectTask;
 	@Remarks("Marketing Campaign")
-	?CCampaignId CCampaign;
+	?CCampaign;
 	@Remarks("Business Activity")
-	?CActivityId CActivity;
+	?CActivity;
 	@Remarks("User defined list element #1")
-	?User1Id CElementvalue;
+	?User1 CElementvalue;
 	@Remarks("User defined list element #2")
-	?User2Id CElementvalue;
+	?User2 CElementvalue;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrxId AdOrg;
+	?AdOrgtrx AdOrg;
 	@Remarks("Return Material Authorization Line")
-	?MRmalineId MRmaline;/* NULL */
+	?MRmaline;/* NULL */
 };
 

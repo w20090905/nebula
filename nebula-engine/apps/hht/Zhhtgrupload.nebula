@@ -1,0 +1,45 @@
+@Remarks("")
+@Refby("1")
+tx Zhhtgrupload {
+	!Gruploadid ID;
+	?Orgid Organization;
+	?Contractid Contract;
+	?Contractcode Code;
+	?Orderid Ord;
+	?Ordercode Code;
+	?Warehouseid Physicalwarehouse;
+	?Warehousecode Code;
+	?Receiptdate Date;
+	?Receiveraddresscode Code;
+	?Docdate Date;
+	?Invrelatedno null;
+	?Hhtdocode Code;
+	?Source null;
+	?Status;
+	?Userid Usr;
+	?Createdate Date;
+	?DateLastupdated Date;
+	@Remarks("運送方法　")
+	?Shipmentmethod null;
+	@Remarks("運送方法名")
+	?Shipmentmethodname Name;
+	@Remarks("購買起算日")
+	?Buystartdate Date;
+	@Remarks("仕入先CODE")
+	?Sellercode Code;
+	@Remarks("為替予約NO")
+	?Exchagedatecode Code;
+	@Remarks("通貨")
+	?Currencycode Code;
+	@Remarks("為替レート")
+	?Zctrate Rate;
+	@Remarks("処理区分")
+	?Dealstatus null;
+	@Remarks("仕入先出荷コード")
+	?Wpdlcode Code;
+	?Generateflag null;
+	?Inputinvoiceno null;
+	?Checkflag null;
+	?LineNo Line;
+};
+

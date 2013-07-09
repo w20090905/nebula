@@ -4,19 +4,9 @@ type CPos {
 	@Remarks("Point of Sales Terminal")
 	!CPosId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")
@@ -24,23 +14,23 @@ type CPos {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("Sales Representative or Company Agent")
-	SalesRepId AdUser;
+	SalesRep AdUser;
 	@Remarks("Unique identifier of a Price List")
-	MPriceListId MPriceList;
+	MPriceList;
 	@Remarks("Cash Book for recording petty cash transactions")
-	CCashBookId CCashBook;
+	CCashBook;
 	@Remarks("Storage Warehouse and Service Point")
-	MWarehouseId MWarehouse;
+	MWarehouse;
 	@Remarks("Name of the Printer")
 	?PrintErName Name;
 	@Remarks("POS Function Key Layout")
-	?CPoskeylayoutId CPoskeylayout;
+	?CPoskeylayout;
 	@Remarks("Allow modifying the price")
 	IsModifyprice YesNo;/* 'N'  */
 	@Remarks("Business Partner used for creating new Business Partners on the fly")
-	?CBpartnerCashTrxId CBpartner;
+	?CBpartnerCashTrx CBpartner;
 	@Remarks("Document type or rules")
-	?CDoctypeId CDoctype;
+	?CDoctype;
 	@Remarks("CashDrawer")
 	?CashDrawer null;
 };

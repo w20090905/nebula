@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+tx Workorderininvalloc {
+	!Workorderininvallocid ID;
+	Workorderid Workorder;
+	Invsummaryid Invsummary;
+	?Warehouseid Physicalwarehouse;
+	?Locationcode Code;
+	Itemid Item;
+	Invstatus null;
+	?Lotno null;
+	?Batchno null;
+	?Manufacturedate Date;
+	?Expiredate Date;
+	?QtyAlloc Quantity;
+	?QtyCheckined Quantity;
+};
+

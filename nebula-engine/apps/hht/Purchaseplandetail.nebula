@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+tx Purchaseplandetail {
+	!Purchaseplandetailid ID;
+	Itemid Item;
+	Umcode Code;
+	?Sellingrate Rate;
+	?Safetystock null;
+	?Curstock null;
+	?Recomendedqty Quantity;
+	PlannedQty Quantity;
+	Orderedqty Quantity;
+	Purchaseplanid Purchaseplan;
+	Vendorid ID;
+	?Onwayqty Quantity;
+	?LineStatus Line;
+};
+

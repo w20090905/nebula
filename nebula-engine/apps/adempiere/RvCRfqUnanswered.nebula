@@ -1,25 +1,25 @@
 @Remarks("")
 @Refby("0")
 type RvCRfqUnanswered {
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	CRfqId CRfq;
+	AdClientId ID;
+	AdOrgId ID;
+	CRfqId ID;
 	*Name;
 	?Description;
 	?Help;
 	SalesRepId ID;
-	CRfqTopicId CRfqTopic;
+	CRfqTopicId ID;
 	Quotetype Attr;
 	IsQuotetotalamt YesNo;
 	IsQuoteallqty YesNo;
-	CCurrencyId CCurrency;
+	CCurrencyId ID;
 	DateResponse Date;
 	IsRfqresponseaccepted YesNo;
 	?DateWorkstart Date;
 	?DeliveryDays Count;
 	?DateWorkcomplete Date;
-	CBpartnerId CBpartner;
-	CBpartnerLocationId CBpartnerLocation;
-	?AdUserId AdUser;
+	CBpartnerId ID;
+	CBpartnerLocationId ID;
+	?AdUserId ID;
 };
 

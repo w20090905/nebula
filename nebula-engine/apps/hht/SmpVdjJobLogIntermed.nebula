@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx SmpVdjJobLogIntermed {
+	!JobId SmpVdjJob;
+	!TargetName Name;
+	!ExecNum null;
+	!IntermedIndex null;
+	?Time null;
+	?Output null;
+};
+

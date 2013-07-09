@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Workordermaterialtrace {
+	!Workordermaterialtraceid ID;
+	Workordermaterialid Workordermaterial;
+	Workorderid Workorder;
+	Pickslipid Pickslip;
+	?Pickslipcode Code;
+	?Qty Quantity;
+	?Docdate Date;
+	?Price;
+	?Amount;
+	?Umcode Code;
+};
+

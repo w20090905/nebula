@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+type Twxikohikiate {
+	?Hikiateid Twxhikiate;
+	?Kojocd null;
+	?ChumonNo null;
+	?Groupcd null;
+	?SiireCd null;
+	?Toroku null;
+	?BhachuKbn null;
+	?KeikiNo null;
+	?SyuturyokuKbn null;
+	?SisyuSyain null;
+	?Insymd null;
+	?Updymd null;
+	?Updtime null;
+	?Status;
+	?Pattern null;
+};
+

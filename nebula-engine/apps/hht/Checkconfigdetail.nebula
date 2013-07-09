@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+tx Checkconfigdetail {
+	!Checkconfigdetailid ID;
+	Checkconfigid Checkconfig;
+	?Vtablename Name;
+	?Qlname Name;
+	?Urlkey Url;
+	?Urlstring Url;
+	LabelCode Code;
+	Sequence;
+	DateLastupdated Date;
+	?Slipcodename Name;
+	?Slipidname Name;
+	?Docdatename Name;
+	?Orgidname Name;
+	?Statusname Name;
+	?Coretablename Name;
+	?Strstatuslist null;
+	?Sliptype null;
+};
+

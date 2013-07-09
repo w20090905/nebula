@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("0")
+tx Task {
+	!Taskid ID;
+	Taskname Name;
+	?Taskdesc null;
+	?Assigndate Date;
+	?Begindate Date;
+	?Enddate Date;
+	Responsibleentityid ID;
+	Responsibilitytype Attr;
+	Status;
+	?DateLastupdated Date;
+	?Transactioncode Code;
+	?Transactionid ID;
+	?Subjectcode Code;
+	?Expbegindate Date;
+	?Expenddate Date;
+	?Sequence;
+};
+

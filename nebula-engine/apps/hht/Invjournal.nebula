@@ -1,0 +1,42 @@
+@Remarks("")
+@Refby("0")
+tx Invjournal {
+	!Invjournalid ID;
+	?Periodid ID;
+	Orgid Organization;
+	Warehouseid Physicalwarehouse;
+	?Locationcode Code;
+	Itemid Item;
+	Invsummaryid Invsummary;
+	Invstatus null;
+	?Lotno null;
+	?Batchno null;
+	?Serialno null;
+	Sliptype null;
+	Slipid ID;
+	Slipno null;
+	?Slipdate Date;
+	?Amount;
+	?Relatedorgid ID;
+	Maker null;
+	Createdate Date;
+	?Comments Note;
+	?Price;
+	?Debit null;
+	?Credit null;
+	?Manufacturedate Date;
+	?Expiredate Date;
+	?DateLastupdated Date;
+	?Relatedtrantype null;
+	?Relatedtranid ID;
+	?Relatedtranno null;
+	?Glaccountid Glaccount;
+	?Docdate Date;
+	?Subcubeflag1 null;
+	?Subcubeflag2 null;
+	?Subcubeflag3 null;
+	?Gldate Date;
+	?Saplotno null;
+	?Sapevaluation null;
+};
+

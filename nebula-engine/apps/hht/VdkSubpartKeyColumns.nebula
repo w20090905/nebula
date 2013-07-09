@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+type VdkSubpartKeyColumns {
+	?VdkId ID;
+	?VdkParentId ID;
+	?VdkDatabaseId VdkDatabase;
+	?VdkOwnerName Name;
+	?VdkObjectName Name;
+	?VdkObjectType Attr;
+	?VdkColumnName Name;
+	?VdkColumnPosition Length;
+};
+

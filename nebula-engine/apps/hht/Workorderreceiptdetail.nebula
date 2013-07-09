@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("2")
+tx Workorderreceiptdetail {
+	!Workorderreceiptdetailid ID;
+	Workorderid Workorder;
+	Workorderreceipttype null;
+	Itemid Item;
+	?Needqty Quantity;
+	?Checkedqty Quantity;
+	?Qty Quantity;
+	?Umcode Code;
+	?Baseqty Quantity;
+	?LineStatus Line;
+	?Warehouseid Physicalwarehouse;
+	?Costprice Cost;
+	?Costamount Cost;
+	?TotalCostamount Amount;
+	?Remark null;
+	?Baseneedqty Quantity;
+	?Basecheckedqty Quantity;
+};
+

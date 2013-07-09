@@ -1,0 +1,26 @@
+@Remarks("")
+@Refby("0")
+tx Vansalesbalance {
+	!Vansalesbalanceid ID;
+	Orgid Organization;
+	Partnerid ID;
+	Vansalesslipid Vansalesslip;
+	Itemid Item;
+	?Vansalesslipcode Code;
+	?Umcode Code;
+	?Lotno null;
+	?Initialqty Quantity;
+	?Initialamt Amount;
+	?Debitqty Quantity;
+	?Debitamt Amount;
+	?Creditqty Quantity;
+	?Creditamt Amount;
+	?Endqty Quantity;
+	?Endamt Amount;
+	?Loseqty Quantity;
+	?Loseamt Amount;
+	?Costprice Cost;
+	?Createdate Date;
+	?DateLastupdated Date;
+};
+

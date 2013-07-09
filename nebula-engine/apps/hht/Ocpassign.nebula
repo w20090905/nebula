@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Ocpassign {
+	!Ocpassignid ID;
+	Ocpid Procurementparameter;
+	?Orgid Organization;
+	Ordertypeid Ordertype;
+	?Orggroupid Orggroup;
+	?Creditlevelcode Creditlevel;
+	?Maker null;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Ownerorgid ID;
+};
+

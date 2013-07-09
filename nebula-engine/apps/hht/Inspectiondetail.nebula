@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx Inspectiondetail {
+	!Inspectiondetailid ID;
+	Receiptdetailid Receiptdetail;
+	Inspectionid Inspection;
+	?Batchno null;
+	?Lotno null;
+	?Serialno null;
+	Itemid Item;
+	?QtyReceived Quantity;
+	?Qty Quantity;
+	?LineStatus Line;
+	?Qalitycode Code;
+	?Reasoncode Code;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("4")
+tx SmpVtmUdchartDefn {
+	!RefId ID;
+	ServiceName Name;
+	ServiceType Attr;
+	ChartName Name;
+	CartridgeName Name;
+	OwnerName Name;
+	ScriptText null;
+};
+

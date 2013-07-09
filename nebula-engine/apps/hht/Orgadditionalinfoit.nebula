@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx Orgadditionalinfoit {
+	!Orgadditionalinfoitid ID;
+	Orgid Organization;
+	?Employeeqty Quantity;
+	?Managerqty Quantity;
+	?Installrate Rate;
+	?Potentialqty Quantity;
+	?Installedqty Quantity;
+	?Abccode Code;
+	?Orgsize Size;
+	?Attentiondegree null;
+	?Currentbrand null;
+	?Comments Note;
+};
+

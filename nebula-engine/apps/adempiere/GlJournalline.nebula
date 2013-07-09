@@ -4,21 +4,11 @@ tx GlJournalline {
 	@Remarks("General Ledger Journal Line")
 	!GlJournallineId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("General Ledger Journal")
-	GlJournalId GlJournal;
+	GlJournal;
 	@Remarks("Unique line for this document")
 	Line;
 	@Remarks("This Line is generated")
@@ -30,7 +20,7 @@ tx GlJournalline {
 	@Remarks("Source Credit Amount")
 	AmtSourcecr Amount;/* 0  */
 	@Remarks("The Currency for this record")
-	CCurrencyId CCurrency;
+	CCurrency;
 	@Remarks("Currency Conversion Rate")
 	Currencyrate Rate;/* 0  */
 	@Remarks("Accounting Date")
@@ -40,13 +30,13 @@ tx GlJournalline {
 	@Remarks("Accounted Credit Amount")
 	AmtAcctcr Amount;/* 0  */
 	@Remarks("Unit of Measure")
-	?CUomId CUom;
+	?CUom;
 	@Remarks("Quantity")
 	?Qty Quantity;/* 0 */
 	@Remarks("Valid Account Combination")
-	CValidcombinationId CValidcombination;
+	CValidcombination;
 	@Remarks("Currency Conversion Rate Type")
-	CConversionTypeId CConversionType;
+	CConversionType;
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 };

@@ -2,7 +2,7 @@
 @Refby("0")
 type Achieverateconfig {
 	Achieverateconfigid ID;
-	Examineplanid ID;
+	Examineplanid Examineplan;
 	?Lowerlimit Count;
 	?Upperlimit Count;
 	?Coefficient null;

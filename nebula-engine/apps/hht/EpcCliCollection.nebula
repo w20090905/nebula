@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("10")
+tx EpcCliCollection {
+	!RepUserId EpcCliRepUsers;
+	!CollectionId ID;
+	?CollectionName Name;
+	?EnvironmentId EpcCliEnvironment;
+	?CollectionStatus Length;
+	?CollectionDesc null;
+	?ScheduleString null;
+	?DurationSeconds null;
+	?ResultsFilename FileName;
+	?ResultsFilemax null;
+	?FormAtUsername Name;
+	?FormAtPassword null;
+	?FormAtService null;
+	?FormAtFlags null;
+	?CommitInterval null;
+	?PartialFormAt null;
+	?NodeName Name;
+	?AutoFormatId ID;
+};
+

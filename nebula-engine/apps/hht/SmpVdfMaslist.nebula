@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("0")
+type SmpVdfMaslist {
+	!MasName Name;
+	?TimesTamp null;
+};
+

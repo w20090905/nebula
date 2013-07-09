@@ -1,24 +1,19 @@
 @Remarks("")
 @Refby("0")
 type COrderLineTaxV {
-	?AdClientId AdClient;
-	?AdOrgId AdOrg;
-	?IsActive YesNo;
-	?Created null;
-	?Createdby null;
-	?Updated null;
-	?Updatedby null;
-	?AdLanguage Attr;
-	?COrderId COrder;
-	?COrderlineId COrderline;
-	?CTaxId CTax;
-	?TaxIndicator null;
-	?CBpartnerId CBpartner;
-	?CBpartnerLocationId CBpartnerLocation;
+	?AdClientId ID;
+	?AdOrgId ID;
+	?AdLanguage String;
+	?COrderId ID;
+	?COrderlineId ID;
+	?CTaxId ID;
+	?TaxIndicator String;
+	?CBpartnerId ID;
+	?CBpartnerLocationId ID;
 	?Bpname Name;
-	?CLocationId CLocation;
+	?CLocationId ID;
 	?Line;
-	?MProductId MProduct;
+	?MProductId ID;
 	?QtyOrdered Quantity;
 	?QtyEntered Quantity;
 	?Uomsymbol Symbol;
@@ -27,20 +22,20 @@ type COrderLineTaxV {
 	?DocumentNote Note;
 	?UPC;
 	?SKU;
-	?ProductValue String;
+	?ProductValue Note;
 	?ResourceDescription Description;
-	?PriceList Price;
-	?PriceEnteredlist Price;
+	?PriceList Number;
+	?PriceEnteredlist Number;
 	?Discount Count;
-	?PriceActual Price;
-	?PriceEntered Price;
-	?LineNetamt Line;
+	?PriceActual Number;
+	?PriceEntered Number;
+	?LineNetamt Amount;
 	?ProductDescription Description;
 	?ImageUrl Url;
-	?CCampaignId CCampaign;
-	?CProjectId CProject;
-	?CActivityId CActivity;
-	?CProjectPhaseId CProjectPhase;
-	?CProjectTaskId CProjectTask;
+	?CCampaignId ID;
+	?CProjectId ID;
+	?CActivityId ID;
+	?CProjectPhaseId ID;
+	?CProjectTaskId ID;
 };
 

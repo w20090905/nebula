@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Phcpolicycriteria {
+	!Phcpolicycriteriaid ID;
+	Phcpolicyid Phcpolicy;
+	Sortno SeqNo;
+	FieldName Name;
+	Operator null;
+	Value String;
+	?Joinoperator null;
+	?Comments Note;
+};
+

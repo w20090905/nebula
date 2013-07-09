@@ -1,0 +1,40 @@
+@Remarks("")
+@Refby("0")
+tx Originalsalesdata {
+	!Originalsalesdataid ID;
+	?Dtname Name;
+	?SalesDate Date;
+	?Customer null;
+	?Prodname Name;
+	?Spec null;
+	?Qty Quantity;
+	?Umname Name;
+	?IsProcessed YesNo;
+	?Dtid ID;
+	?Prodid Product;
+	?Prodclear null;
+	?Customerclear null;
+	?SalesChannelname Name;
+	?SalesChannelid SalesChannel;
+	?Prodcode Code;
+	?Customercode Code;
+	?Partnerid ID;
+	?Comments Note;
+	?Taskcode Code;
+	?Attr1 null;
+	?Categoryid Category;
+	?Categorycode Code;
+	?Categoryname Name;
+	?Version;
+	?DateLastupdated Date;
+	?SalesDatafileid SalesDatafile;
+	?Checkstatus null;
+	?Realprodname Name;
+	?Customerid ID;
+	?Price;
+	?SalesPerson null;
+	?LineType Line;
+	?Ercode Code;
+	?Relatedprodid ID;
+};
+

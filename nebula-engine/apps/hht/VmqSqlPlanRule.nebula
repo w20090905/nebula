@@ -1,0 +1,32 @@
+@Remarks("")
+@Refby("0")
+type VmqSqlPlanRule {
+	?DatabaseId VmqSqlItem;
+	?Sqlid VmqSqlItem;
+	?StatementId null;
+	?TimesTamp null;
+	?Remarks null;
+	?Operation null;
+	?Options null;
+	?ObjectNode null;
+	?ObjectOwner null;
+	?ObjectName Name;
+	?ObjectInstance null;
+	?ObjectType Attr;
+	?Optimizer null;
+	?SearchColumns null;
+	?ID;
+	?ParentId ID;
+	?Position;
+	?Cost;
+	?Cardinality null;
+	?Bytes null;
+	?OtherTag null;
+	?PartitionStart null;
+	?PartitionStop null;
+	?PartitionId ID;
+	?Other null;
+	?Executions null;
+	?Distribution null;
+};
+

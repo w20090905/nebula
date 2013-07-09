@@ -1,0 +1,47 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtfxchangehis {
+	@Remarks("seqid")
+	!Fxchangeid ID;
+	@Remarks("成約コード")
+	?Contractcode Code;
+	@Remarks("成約タイプ")
+	?Contracttype null;
+	@Remarks("入出荷伝票タイプ")
+	?Relatedtrantype null;
+	@Remarks("入出荷伝票コード")
+	?Relatedtrancode Code;
+	@Remarks("通関NO")
+	?Sidocode Code;
+	@Remarks("旧為替区分")
+	?OldExchangetype Attr;
+	@Remarks("旧為替予約NO")
+	?OldExchangedatacode Code;
+	@Remarks("旧通貨")
+	?OldCurrencycode Code;
+	@Remarks("旧為替レート")
+	?OldZctrate Rate;
+	@Remarks("旧基準通貨税抜金額")
+	?OldZctamount Amount;
+	@Remarks("新為替区分")
+	?NewExchangetype Attr;
+	@Remarks("新為替予約NO")
+	?NewExchangedatacode Code;
+	@Remarks("新通貨")
+	?NewCurrencycode Code;
+	@Remarks("新為替レート")
+	?NewZctrate Rate;
+	@Remarks("新基準通貨税抜金額")
+	?NewZctamount Amount;
+	@Remarks("最終更新者")
+	?Lastmaker null;
+	@Remarks("作成日")
+	?Createdate Date;
+	@Remarks("最終更新日")
+	?DateLastupdated Date;
+	@Remarks("orgid")
+	?Orgid Organization;
+	@Remarks("税抜金額")
+	?Amount;
+};
+

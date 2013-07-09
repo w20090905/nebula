@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx SmpVdgJobidMap {
+	?Nodename SmpVdgNodeList;
+	!Targetname Name;
+	?Targettype Attr;
+	?Masid ID;
+	!Agentid ID;
+	?Status;
+	?ScheduleTs null;
+};
+

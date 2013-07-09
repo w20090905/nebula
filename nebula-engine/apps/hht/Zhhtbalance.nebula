@@ -1,0 +1,46 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtbalance {
+	!Zhhtbalanceid ID;
+	?Expdate Date;
+	?Getsudo null;
+	?Sellercode Code;
+	?Sellername Name;
+	?Syoname Name;
+	?Buname Name;
+	?Kaname Name;
+	?Orgcode Code;
+	?Orgname Name;
+	?Employeename Name;
+	?Contractcode Code;
+	?Ordercode Code;
+	?LineNo null;
+	?Docdate Date;
+	?DeliveryDate Date;
+	?PaymentTermname Name;
+	?PaymentTermcomments Note;
+	?Itemname Name;
+	?Remqty Quantity;
+	?Remamount Amount;
+	?Currencycode Code;
+	?Qty Quantity;
+	?Zctrate Rate;
+	?Exchangedatecode Code;
+	?Unitprice Unit;
+	?Amount;
+	?Zctamount Amount;
+	?Remzctamount Amount;
+	?Umcode Code;
+	?Itemcode Code;
+	?Incoterms null;
+	?Exceedflg null;
+	?Buyername Name;
+	?TaxCode Code;
+	?Exchangetype Attr;
+	?Shoritype Attr;
+	?Shoriflg null;/* 0 */
+	?Createdate Date;/* SYSDATE */
+	?DateLastupdated Date;/* SYSDATE */
+	?ChumonNo null;
+};
+

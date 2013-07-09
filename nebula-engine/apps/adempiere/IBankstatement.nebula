@@ -4,63 +4,53 @@ type IBankstatement {
 	@Remarks("Import of the Bank Statement")
 	!IBankstatementId ID;
 	@Remarks("Client/Tenant for this installation.")
-	?AdClientId AdClient;
+	?AdClientId ID;
 	@Remarks("Organizational entity within client")
-	?AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	?IsActive YesNo;/* 'Y' */
-	@Remarks("Date this record was created")
-	?Created null;/* SYSDATE */
-	@Remarks("User who created this records")
-	?Createdby null;
-	@Remarks("Date this record was updated")
-	?Updated null;/* SYSDATE */
-	@Remarks("User who updated this records")
-	?Updatedby null;
+	?AdOrgId ID;
 	@Remarks("Has this import been processed")
 	IIsImported YesNo;/* 'N'  */
 	@Remarks("Messages generated from import process")
-	?IErrorMsg Msg;
+	?IErrorMsg Note;
 	@Remarks("The document has been processed")
 	?Processed YesNo;/* 'N' */
 	@Remarks("Bank Statement of account")
-	?CBankstatementId CBankstatement;
+	?CBankstatement;
 	@Remarks("Date of the statement")
 	?Statementdate Date;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Account at the Bank")
-	?CBankaccountId CBankaccount;
+	?CBankaccount;
 	@Remarks("Bank Routing Number")
 	?Routingno Code;
 	@Remarks("Bank Account Number")
 	?Bankaccountno Code;
 	@Remarks("Payment identifier")
-	?CPaymentId CPayment;
+	?CPayment;
 	@Remarks("Document number of the Payment")
 	?PaymentDocumentNo Code;
 	@Remarks("The Currency for this record")
-	?CCurrencyId CCurrency;
+	?CCurrency;
 	@Remarks("Three letter ISO 4217 Code of the Currency")
-	?IsOCode Code;
+	?IsOCode Note;
 	@Remarks("Identifies a Business Partner")
-	?CBpartnerId CBpartner;
+	?CBpartner;
 	@Remarks("Alphanumeric identifier of the entity")
 	?Name;
 	@Remarks("Key of the Business Partner")
-	?BpartnerValue String;
+	?BpartnerValue Note;
 	@Remarks("Invoice Identifier")
-	?CInvoiceId CInvoice;
+	?CInvoice;
 	@Remarks("Document Number of the Invoice")
 	?InvoiceDocumentNo Code;
 	@Remarks("Additional document charges")
-	?CChargeId CCharge;
+	?CCharge;
 	@Remarks("Name of the Charge")
 	?ChargeName Name;
 	@Remarks("Charge Amount")
 	?ChargeAmt Amount;/* 0 */
 	@Remarks("Line on a statement from this Bank")
-	?CBankstatementlineId CBankstatementline;
+	?CBankstatementline;
 	@Remarks("Unique line for this document")
 	?Line;
 	@Remarks("Accounting Date")
@@ -88,13 +78,13 @@ type IBankstatement {
 	@Remarks("Electronic Funds Transfer Statement Date")
 	?Eftstatementdate Date;
 	@Remarks("Electronic Funds Transfer Statement Reference")
-	?Eftstatementreference String;
+	?Eftstatementreference Note;
 	@Remarks("Electronic Funds Transfer Statement Line Date")
 	?Eftstatementlinedate Date;
 	@Remarks("Electronic Funds Transfer Valuta (effective) Date")
 	?Eftvalutadate Date;
 	@Remarks("Electronic Funds Transfer Reference")
-	?Eftreference String;
+	?Eftreference Note;
 	@Remarks("Electronic Funds Transfer Check No")
 	?Eftcheckno Code;
 	@Remarks("Electronic Funds Transfer Transaction ID")
@@ -112,7 +102,7 @@ type IBankstatement {
 	@Remarks("Electronic Funds Transfer Currency")
 	?Eftcurrency String;
 	@Remarks("Create Payment")
-	?CreatePayment YesNo;
+	?Createpayment YesNo;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Match Statement")

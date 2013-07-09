@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Ordercounter {
+	!Ordercounterid ID;
+	Orderid Ord;
+	Counterid Counter;
+	?Readdate Date;
+	?Currentvalue null;
+	?Deductvalue null;
+	?Prevalue null;
+	?Scalar null;
+};
+

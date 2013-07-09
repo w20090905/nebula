@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("2")
+tx Orgcopyaddress {
+	!Orgcopyaddressid ID;
+	Orgcopyid Orgcopy;
+	?Address Code;
+	Address Name;
+	Addressroletype null;
+	CountryCode Code;
+	Regioncode Code;
+	Zipcode Code;
+	Address null;
+	Status;
+	DateLastupdated Date;
+	?Srcaddressid ID;
+	?Tgtaddressid ID;
+	?Cityname Name;
+	?Receiptname Name;
+};
+

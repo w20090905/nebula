@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx AutoJobrecord {
+	!AutoJobrecordid ID;
+	?Createdate Date;
+	?AutoJobtype null;
+	?Jobname Name;
+	?Messagename Name;
+	?Status;
+	?DateLastupdated Date;
+};
+

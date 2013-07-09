@@ -1,0 +1,55 @@
+@Remarks("")
+@Refby("6")
+tx Vansalesslip {
+	!Vansalesslipid ID;
+	Vansalesslipcode Code;
+	?Originalvansalesslipid ID;
+	Vansalestype null;
+	Orgid Organization;
+	Partnerid ID;
+	?Begindate Date;
+	?Enddate Date;
+	SalesRepid ID;
+	?Vehicleno null;
+	?Remark null;
+	?Beginmileage null;
+	?Endmileage null;
+	?TotalMiles null;
+	?TotalSalesAmt Amount;
+	?TotalSalesPriceamt Amount;
+	?TotalTaxAmt Amount;
+	?TotalPretaxamt Amount;
+	?TotalCostamt Amount;
+	?TotalExpenseamt Amount;
+	Currencycode Code;
+	?Warehouseid Physicalwarehouse;
+	?Createdate Date;
+	?DateLastupdated Date;
+	Status;
+	?Maker null;
+	?Loadstatus null;
+	?SalesStatus null;
+	?Unloadstatus null;
+	?PrintNum null;
+	?Vandocdate Date;
+	?Pickdocdate Date;
+	?Unloaddocdate Date;
+	?SalesDocdate Date;
+	?SalesGldate Date;
+	?Pickgldate Date;
+	?Unloadgldate Date;
+	?Booksetid Bookset;
+	?Pickaccountingyearid ID;
+	?Pickaccperiodid ID;
+	?Pickyear null;
+	?Pickperiod null;
+	?Unloadaccountingyearid ID;
+	?Unloadaccperiodid ID;
+	?Unloadyear null;
+	?Unloadperiod null;
+	?SalesAccountingyearid ID;
+	?SalesAccperiodid ID;
+	?SalesYear null;
+	?SalesPeriod null;
+};
+

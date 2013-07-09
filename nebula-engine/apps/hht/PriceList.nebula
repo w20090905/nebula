@@ -1,0 +1,45 @@
+@Remarks("")
+@Refby("10")
+tx PriceList {
+	!PriceListid ID;
+	Orgid Organization;
+	?Prgid PriceRelationgroup;
+	?Orggroupid Orggroup;
+	?Categoryid Category;
+	?Createdate Date;
+	?Maker null;
+	?Promotionid Promotion;
+	?Relationitemid ID;
+	?PriceListcode Code;
+	?PriceListdesc null;
+	?Customerid ID;
+	?Itemid Item;
+	?Applicationtype null;
+	?Begindate Date;
+	?Expiredate Date;
+	?PriceTypecode Price;
+	?Combotype null;
+	?Currencycode Code;
+	?Umcode Code;
+	?Ownerorgid ID;
+	?Orderqty Quantity;
+	?QtyType Quantity;
+	Status;
+	?DateLastupdated Date;
+	?SourcePlid ID;
+	?ProductLineid ID;
+	?ProductBrandcode Code;
+	?Criteriaflag null;
+	?Detailtype null;
+	?Priority;
+	?Calctypeid Calctype;
+	?Promotioncode Code;
+	?Promotionbudget null;
+	?Conditionid Condition;
+	?Promethod null;
+	?Expensetype null;
+	?Expensetypecode Code;
+	?Promotionformid Promotionform;
+	?Attr21 null;
+};
+

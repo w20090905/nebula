@@ -1,0 +1,36 @@
+@Remarks("")
+@Refby("0")
+type ContactBeforeImp {
+	Contactid Contact;
+	Contactroletype null;
+	?Employeeid Employee;
+	?DateLastupdated Date;
+	?Gender null;
+	?Addressid Address;
+	?EMail;
+	?Officephone Phone;
+	?Orgid Organization;
+	?Status;
+	?Contactcode Code;
+	?Jobtitlecode null;
+	?Leaderid ID;
+	?Birthday;
+	?IsExternalcontact YesNo;
+	?Userid Usr;
+	?Ownerorgid ID;
+	?Appellationtype null;
+	?Departmentname Name;
+	?Department null;
+	?Attitude null;
+	?Contactrole null;
+	?Relationdegree null;
+	?Mobile null;
+	?Character null;
+	?Homephone Phone;
+	?Address null;
+	?Zipcode Code;
+	?Comments Note;
+	?AcceptPrice null;
+	?Parentcontactid ID;
+};
+

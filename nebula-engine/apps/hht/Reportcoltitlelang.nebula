@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx Reportcoltitlelang {
+	!Reportcoltitlelangid ID;
+	?Reportcoltitle Title;
+	LanguageCode Lang;
+	Reportcoltitleid Reportcoltitle;
+};
+

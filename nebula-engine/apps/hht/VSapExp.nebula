@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+type VSapExp {
+	?Exp001DataType Attr;
+	?Exp002Tkonn null;
+	?Exp003ExpClassGroup null;
+	?Exp004ExpClass null;
+	?Exp005AccountType Attr;
+	?Exp006PostType Attr;
+	?Exp007Partner null;
+	?Exp008Kbetr null;
+	?Exp009Zterm String;
+	?Exp010Datab null;
+	?Exp011TkonnEx null;
+	?Exp012Tmp13 null;
+	?Exp013Tposn null;
+	Returnid Returnslip;
+};
+

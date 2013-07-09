@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("1")
+tx Sophierarchy {
+	!Sophierarchyid ID;
+	Sopid Sop;
+	Analyzecodeid Analyzecode;
+	Analyzecodevalueid ID;
+	Analyzecodevalue String;
+	?Analyzecodevaluename Name;
+	?Parentid ID;
+	Grade null;
+	?IsBottom YesNo;
+	?Parentidstr null;
+	@Remarks("状？")
+	?Status;
+	@Remarks("最后修改？？")
+	?DateLastupdated Date;
+};
+

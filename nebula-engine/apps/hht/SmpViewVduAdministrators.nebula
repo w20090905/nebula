@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type SmpViewVduAdministrators {
+	PrincipalName Name;
+	PrincipalId ID;
+	?Superuser null;
+	?JobSystem null;
+	?EventSystem null;
+};
+

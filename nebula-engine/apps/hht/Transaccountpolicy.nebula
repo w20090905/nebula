@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx Transaccountpolicy {
+	!Transaccountpolicyid ID;
+	?Bookset null;
+	?Bill null;
+	?Customer null;
+};
+

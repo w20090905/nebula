@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("4")
+tx Prodconfig {
+	!Prodconfigid ID;
+	Orgid Organization;
+	Prodconfigcode Code;
+	Configtype null;
+	Getmethod null;
+	?Umcode Code;
+	?Scopestart null;
+	?Scopeend null;
+	?Comments Note;
+};
+

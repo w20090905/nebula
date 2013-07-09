@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type VdkInstance {
+	?VdkId ID;
+	?VdkMaxConcurrentUsers null;
+	?VdkMaxMbrCount Count;
+	?VdkSystemName Name;
+	?VdkMtsEnabled null;
+	?VdkParentId ID;
+	?VdkRollbackSegCount Count;
+};
+

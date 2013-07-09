@@ -1,0 +1,38 @@
+@Remarks("")
+@Refby("0")
+type Getinspectiondata {
+	?PaymentKbn001 null;
+	?Orgcode002 null;
+	?Customercode003 null;
+	?RecordLoginno004 null;
+	?Claimdate005 null;
+	?Inspectiondate006 null;
+	?AcceptDate007 null;
+	?AcceptIme008 null;
+	?DateContent009 null;
+	?TaxClaimdate010 null;
+	?TaxInspectiondate011 null;
+	?AutoProcesscontent012 null;
+	?AutoKeycontent013 null;
+	?Soanno014 null;
+	?Soandate015 null;
+	?Buyerpono016 null;
+	?Text017 Text;
+	?Specification018 null;
+	?Redkbn019 null;
+	?Currency020 null;
+	?Qty021 null;
+	?Price022 null;
+	?Fcamount023 null;
+	?Amount024 null;
+	?Purchasecontent025 null;
+	?TaxFcamount026 null;
+	?TaxAmount027 null;
+	?Finaluser028 null;
+	?Pono029 null;
+	?Poevent030 null;
+	?Unit031 null;
+	?E032 null;
+	Zhhtinspectiondataid Zhhtinspectiondata;
+};
+

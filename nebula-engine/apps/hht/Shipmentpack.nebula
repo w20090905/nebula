@@ -1,0 +1,31 @@
+@Remarks("")
+@Refby("1")
+tx Shipmentpack {
+	!Shipmentpackid ID;
+	Shipmentid Shipment;
+	?Grade null;
+	?Rootshipmentpackid ID;
+	?Parentshipmentpackid ID;
+	?IsBottom YesNo;
+	?Handleunittype Attr;
+	?Handleunit Unit;
+	?Sortno SeqNo;
+	?Contents null;
+	?Lotno null;
+	?Qty Quantity;
+	?QtyUmcode Code;
+	?Volume;
+	?Volumeumcode Code;
+	?GrossWeight Weight;
+	?Netweight Weight;
+	?Weightumcode Code;
+	?Label null;
+	?Shipmentdetailid Shipmentdetail;
+	?Baring null;
+	?Baringrate Rate;
+	?Filling null;
+	?Fillingrate Rate;
+	?Loadstatus null;
+	?Loadqty Quantity;
+};
+

@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+type ItemcostpriceAfterImp {
+	Itemcostpriceid Itemcostprice;
+	Itemid Item;
+	Costareacode Code;
+	?Costmethod Cost;
+	?Costprice Cost;
+	?Stdcostprice Price;
+	DateLastupdated Date;
+	Orgid Organization;
+};
+

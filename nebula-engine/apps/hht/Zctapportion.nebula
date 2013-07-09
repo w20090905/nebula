@@ -1,0 +1,27 @@
+@Remarks("")
+@Refby("3")
+tx Zctapportion {
+	!Apportionid ID;
+	Orgid Organization;
+	Ownerorgid ID;
+	Apportioncode Code;
+	?ReferenceNo Code;
+	Docdate Date;
+	Gldate Date;
+	Createdate Date;
+	?TotalAmount Amount;
+	?Apportionamount Amount;
+	Status;
+	?Description;
+	Maker null;
+	DateLastupdated Date;
+	?ServerAmount Amount;
+	?Unapportionamount Amount;
+	?Accperiodid Accountingperiod;
+	?Year null;
+	?Period null;
+	?Accountingyearid ID;
+	?Slipapportionamount Amount;
+	?Itemapportionamount Amount;
+};
+

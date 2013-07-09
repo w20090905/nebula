@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+tx Agreementterm {
+	!Agreementtermid ID;
+	Agreementid Agreement;
+	Orgtermid Orgterms;
+};
+

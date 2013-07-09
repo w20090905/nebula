@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+tx Relatedfields {
+	!Relatedfieldid ID;
+	Checkrulemgtid Checkrulemgt;
+	?Columnname Name;
+};
+

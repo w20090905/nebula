@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Ovaltableconstraints {
+	!Tableconstraintsid ID;
+	SourceTable null;
+	SourceField null;
+	Tablename Name;
+	FieldName Name;
+};
+

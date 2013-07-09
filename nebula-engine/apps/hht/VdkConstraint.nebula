@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+type VdkConstraint {
+	?VdkId ID;
+	?VdkName Name;
+	?VdkParentId ID;
+	?VdkDatabaseId VdkDatabase;
+	?VdkLschemaId ID;
+	?VdkConstraintType null;
+	?VdkTableOwnerName Name;
+	?VdkTableName Name;
+	?VdkRefTableId ID;
+	?VdkRefTableName Name;
+	?VdkRefTableOwnerName Name;
+	?VdkSqlId VdkSql;
+	?VdkIndexId VdkIndex;
+	?VdkDisable null;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Itemtoplist {
+	!Itemtoplistid ID;
+	Orgid Organization;
+	Partnerid ID;
+	Itemid Item;
+	Listtype null;
+	Frequency;
+	?DateLastupdated Date;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type Ovalreportlang {
+	!Ovalreportlangid ID;
+	Ovalreportid Ovalreport;
+	?Name SmpVxaSystemPrefs;
+	?Description;
+	LanguageCode Lang;
+};
+

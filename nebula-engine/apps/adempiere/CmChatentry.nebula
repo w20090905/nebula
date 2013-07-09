@@ -4,36 +4,26 @@ tx CmChatentry {
 	@Remarks("Individual Chat / Discussion Entry")
 	!CmChatentryId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Chat or discussion thread")
-	CmChatId CmChat;
+	CmChat;
 	@Remarks("Type of Confidentiality")
 	Confidentialtype Attr;
 	@Remarks("Long Character Field")
 	?Characterdata Note;
 	@Remarks("Link to direct Parent")
-	?CmChatentryparentId CmChatentry;/* NULL   */
+	?CmChatentryparent CmChatentry;/* NULL   */
 	@Remarks("Link to Grand Parent (root level)")
-	?CmChatentrygrandparentId CmChatentry;/* NULL   */
+	?CmChatentrygrandparent CmChatentry;/* NULL   */
 	@Remarks("Type of Chat/Forum Entry")
 	Chatentrytype Attr;/* NULL  */
 	@Remarks("Status of Moderation")
 	?Moderatorstatus Attr;/* NULL   */
 	@Remarks("Email Message Subject")
-	?Subject;/* NULL   */
+	?Subject Description;/* NULL   */
 	@Remarks("User within the system - Internal or Business Partner Contact")
-	?AdUserId AdUser;/* NULL   */
+	?AdUser;/* NULL   */
 };
 

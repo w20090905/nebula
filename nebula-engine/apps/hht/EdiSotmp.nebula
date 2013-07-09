@@ -1,0 +1,140 @@
+@Remarks("")
+@Refby("2")
+tx EdiSotmp {
+	@Remarks("SO_TMPID")
+	!Sotmpid ID;
+	@Remarks("処理区分")
+	?Dealkbn null;
+	@Remarks("処理年月日")
+	?Dealymd null;
+	@Remarks("処理時刻")
+	?Dealtime null;
+	@Remarks("部署ｺｰﾄﾞ")
+	?Deptcode Code;
+	@Remarks("成約ｺｰﾄﾞ")
+	?Contractcode Code;
+	@Remarks("成約ﾀｲﾌﾟ")
+	?Contractype Attr;
+	@Remarks("責任者No.")
+	?Employeecode Code;
+	@Remarks("ｵｰﾀﾞｰ番号")
+	?Ordercode Code;
+	@Remarks("仕入先ｺｰﾄﾞ")
+	?Sellercode Code;
+	@Remarks("ｵｰﾀﾞｰﾀｲﾌﾟ")
+	?Ordertype Attr;
+	@Remarks("受注先ｺｰﾄﾞ")
+	?Buyercode Code;
+	@Remarks("出荷先ｺｰﾄﾞ")
+	?Receivercode Code;
+	@Remarks("注文日")
+	?Orderdate Date;
+	@Remarks("HHT管理番号")
+	?Hhtmanagecode Code;
+	@Remarks("得意先発注日付")
+	?Receivedate Date;
+	@Remarks("原産国ｺｰﾄﾞ")
+	?ProductCountryCode Code;
+	@Remarks("仕向国ｺｰﾄﾞ")
+	?Purchasecountrycode Code;
+	@Remarks("通貨")
+	?Currencycode Code;
+	@Remarks("為替区分")
+	?Exchagetype Attr;
+	@Remarks("為替予約No.")
+	?Exchagedatecode Code;
+	@Remarks("為替ﾚｰﾄ")
+	?Zctrate Rate;
+	@Remarks("支払条件")
+	?PaymentTerm String;
+	@Remarks("支払方法")
+	?PaymentMethod null;
+	@Remarks("L/C No.")
+	?Lcno null;
+	@Remarks("運送条件（ｲﾝｺﾀｰﾑｽﾞ）")
+	?Shipmentterm String;
+	@Remarks("運送条件 テキスト（ｲﾝｺﾀｰﾑｽﾞ）")
+	?Shipmenttermtext Text;
+	@Remarks("運送方法")
+	?Shipmentmethod null;
+	@Remarks("優先度")
+	?Priority null;
+	@Remarks("輸管審査No.")
+	?Transno null;
+	@Remarks("E/L区分")
+	?Eltype Attr;
+	@Remarks("レートタイプ")
+	?Ratetype Attr;
+	@Remarks("得意先税分類")
+	?TaxCode Code;
+	@Remarks("在庫認可No")
+	?Inventorycode Code;
+	@Remarks("計上基準区分")
+	?StandardType Attr;
+	@Remarks("分納完納区分")
+	?Bunnokubun null;
+	@Remarks("ｵｰﾀﾞｰ特性")
+	?Orderproperty null;
+	@Remarks("備考")
+	?Comments Note;
+	@Remarks("据付/検収予定日")
+	?Retandrecpdate Date;
+	@Remarks("LINENO")
+	?LineNo null;
+	@Remarks("顧客注番")
+	?Customerpono null;
+	@Remarks("要求納期１")
+	?DeliveryDate1 null;
+	@Remarks("要求納期２")
+	?DeliveryDate2 null;
+	@Remarks("ｱｲﾃﾑｺｰﾄﾞ")
+	?Itemcode Code;
+	@Remarks("発注数量")
+	?Ordergty null;
+	@Remarks("単位")
+	?Umcode Code;
+	@Remarks("単価")
+	?Unitprice Unit;
+	@Remarks("末端単価")
+	?Endunitprice Price;
+	@Remarks("口銭率")
+	?Commissionrate Rate;
+	@Remarks("SAPﾛｯﾄNo.")
+	?Saplotno null;
+	@Remarks("SAP評価ﾀｲﾌﾟ")
+	?Sapevalution null;
+	@Remarks("EAR要否")
+	?Eartype Attr;
+	@Remarks("別表項番")
+	?OtherCode Code;
+	@Remarks("明細カテゴリ")
+	?Concategory null;
+	@Remarks("ｻｲｽﾞ/寸法")
+	?Sizeproperty null;
+	@Remarks("ｱｲﾃﾑ特性1")
+	?Itemproperty1 null;
+	@Remarks("ｱｲﾃﾑ特性2")
+	?Itemproperty2 null;
+	@Remarks("顧客品番")
+	?Customercomments Note;
+	?Edicustomername Name;
+	?Edisellername Name;
+	?Ctxtd01 null;
+	?Ctxtd02 null;
+	?Ctxtd03 null;
+	?Ctxtd04 null;
+	?Ctxtd05 null;
+	?Ctxtd06 null;
+	?Ctxtd07 null;
+	?Ctxtd08 null;
+	?Ctxtd09 null;
+	?Ctxtd10 null;
+	?Ctxtd11 null;
+	?Ctxtd12 null;
+	?Ctxtd13 null;
+	?Ctxtd14 null;
+	?Ctxtd15 null;
+	?Ctxtd16 null;
+	?Ctxtd17 null;
+};
+

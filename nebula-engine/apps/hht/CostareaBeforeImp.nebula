@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type CostareaBeforeImp {
+	Costareaid Costarea;
+	Orgid Organization;
+	Costareacode Code;
+	LanguageCode Lang;
+	Costareaname Name;
+	?Costareadesc null;
+	DateLastupdated Date;
+};
+

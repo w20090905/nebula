@@ -1,0 +1,51 @@
+@Remarks("")
+@Refby("0")
+type VdkInstanceStatsBegin {
+	?VdkParentId ID;
+	?VdkCollectDate Date;
+	?VdkInstanceStartTime Count;
+	?VdkAvgPoolSegmentSize Size;
+	?VdkAvgSqlRequestSize Size;
+	?VdkConcurrentRequestS null;
+	?VdkConcurrentUsers null;
+	?VdkMaxConcurrentUsers null;
+	?VdkMaxOpenCursors null;
+	?VdkMaxPoolSegmentSize Size;
+	?VdkMaxTxnLogBufferSize Size;
+	?VdkPqMessageMemory null;
+	?VdkPqoServerSBusy null;
+	?VdkPqoServerSessions null;
+	?VdkReservedListLastMiss null;
+	?VdkReservedListMaxFree null;
+	?VdkReservedListUsedCount Count;
+	?VdkSdPoolSegmentSize Size;
+	?VdkSharedPoolAllocFailSz null;
+	?VdkTotalSgaSize Size;
+	?VdkConsistentGets null;
+	?VdkDbBlockGets null;
+	?VdkDirtyQueueLength Length;
+	?VdkDiskSorts null;
+	?VdkFreeBufferWaits null;
+	?VdkLongTableScans null;
+	?VdkMemorySorts null;
+	?VdkPhysicalReads null;
+	?VdkSharedPoolReloads null;
+	?VdkSharedPoolRequestS null;
+	?VdkShortTableScans null;
+	?VdkTableFetchRowid ID;
+	?VdkTableScanBlocks null;
+	?VdkTableScanRows null;
+	?VdkWriteRequestS null;
+	?VdkTotalLatchSleeps null;
+	?VdkSortLatchSleeps null;
+	?VdkSysUndoHeaderWaits null;
+	?VdkSysUndoBlockWaits null;
+	?VdkUndoHeaderWaits null;
+	?VdkUndoBlockWaits null;
+	?VdkLogSwitchWaits null;
+	?VdkLogBufferWaits null;
+	?VdkConcurrentTrans null;
+	?VdkConcurrentParallelTrans null;
+	?VdkOnlineRbs null;
+};
+

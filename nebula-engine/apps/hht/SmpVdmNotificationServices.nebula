@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+type SmpVdmNotificationServices {
+	!ServiceType Attr;
+	!Nodename Name;
+	?Ior null;
+	?TimeStamp null;
+};
+

@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Remedymethod {
+	!Remedymethodid ID;
+	Remedymethodcode null;
+	?Description;
+	Saleflag null;
+	Inventoryflag null;
+	Arflag null;
+	?LanguageCode Lang;
+	?Relatedtrans null;
+};
+

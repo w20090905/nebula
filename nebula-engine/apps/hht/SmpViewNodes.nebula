@@ -1,0 +1,17 @@
+@Remarks("List of all the services known in Enterprise Manager")
+@Refby("0")
+type SmpViewNodes {
+	@Remarks("Name of the node")
+	NodeName Name;
+	@Remarks("Boolean flag: Is this service automatically discovered?")
+	?Discovery null;
+	@Remarks("Timestamp the agent was last contacted on this node")
+	?LastChecked null;
+	@Remarks("Boolean flag: Is the agent up and running?")
+	?AgentStatus null;
+	@Remarks("Name of the machine running the OMS currently checking this node")
+	?OmsMachine null;
+	@Remarks("Region this node belongs to")
+	?Region null;
+};
+

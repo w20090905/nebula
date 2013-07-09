@@ -4,27 +4,17 @@ tx COrderline {
 	@Remarks("Sales Order Line")
 	!COrderlineId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("Order")
-	COrderId COrder;
+	COrder;
 	@Remarks("Unique line for this document")
 	Line;
 	@Remarks("Identifies a Business Partner")
-	?CBpartnerId CBpartner;
+	?CBpartner;
 	@Remarks("Identifies the (ship to) address for this Business Partner")
-	?CBpartnerLocationId CBpartnerLocation;
+	?CBpartnerLocation;
 	@Remarks("Date of Order")
 	DateOrdered Date;
 	@Remarks("Date Order was promised")
@@ -36,11 +26,11 @@ tx COrderline {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Product, Service, Item")
-	?MProductId MProduct;
+	?MProduct;
 	@Remarks("Storage Warehouse and Service Point")
-	MWarehouseId MWarehouse;
+	MWarehouse;
 	@Remarks("Unit of Measure")
-	CUomId CUom;
+	CUom;
 	@Remarks("Ordered Quantity")
 	QtyOrdered Quantity;/* 0  */
 	@Remarks("Reserved Quantity")
@@ -50,62 +40,62 @@ tx COrderline {
 	@Remarks("Invoiced Quantity")
 	QtyInvoiced Quantity;/* 0  */
 	@Remarks("Method or manner of product delivery")
-	?MShipperId MShipper;
+	?MShipper;
 	@Remarks("The Currency for this record")
-	CCurrencyId CCurrency;
+	CCurrency;
 	@Remarks("List Price")
-	PriceList Price;/* 0  */
+	PriceList Number;/* 0  */
 	@Remarks("Actual Price")
-	PriceActual Price;/* 0  */
+	PriceActual Number;/* 0  */
 	@Remarks("Lowest price for a product")
-	PriceLimit Price;/* 0  */
+	PriceLimit Count;/* 0  */
 	@Remarks("Line Extended Amount (Quantity * Actual Price) without Freight and Charges")
-	LineNetamt Line;/* 0  */
+	LineNetamt Amount;/* 0  */
 	@Remarks("Discount in percent")
 	?Discount Count;
 	@Remarks("Freight Amount")
 	FreightAmt Amount;/* 0  */
 	@Remarks("Additional document charges")
-	?CChargeId CCharge;
+	?CCharge;
 	@Remarks("Tax identifier")
-	CTaxId CTax;
+	CTax;
 	@Remarks("Resource Assignment")
-	?SResourceAssignmentId SResourceAssignment;
+	?SResourceAssignment;
 	@Remarks("Reference to corresponding Sales/Purchase Order")
-	?RefOrderlineId COrderline;
+	?RefOrderline COrderline;
 	@Remarks("Product Attribute Set Instance")
-	?MAttributesetinstanceId MAttributesetinstance;/* 0 */
+	?MAttributesetinstance;/* 0 */
 	@Remarks("if true, the line is just description and no transaction")
-	IsDescription Description;/* 'N'  */
+	IsDescription YesNo;/* 'N'  */
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("The Quantity Entered is based on the selected UoM")
 	QtyEntered Quantity;
 	@Remarks("Price Entered - the price based on the selected/base UoM")
-	PriceEntered Price;
+	PriceEntered Number;
 	@Remarks("Financial Project")
-	?CProjectId CProject;
+	?CProject;
 	@Remarks("Price per Unit of Measure including all indirect costs (Freight, etc.)")
-	?PriceCost Price;
+	?PriceCost Cost;
 	@Remarks("Quantity of potential sales")
 	QtyLostsales Quantity;/* 0  */
 	@Remarks("Phase of a Project")
-	?CProjectPhaseId CProjectPhase;
+	?CProjectPhase;
 	@Remarks("Actual Project Task in a Phase")
-	?CProjectTaskId CProjectTask;
+	?CProjectTask;
 	@Remarks("Revenue Recognition Start Date")
 	?Rrstartdate Date;
 	@Remarks("Revenue Recognition Amount")
 	?Rramt Amount;
 	@Remarks("Marketing Campaign")
-	?CCampaignId CCampaign;
+	?CCampaign;
 	@Remarks("Business Activity")
-	?CActivityId CActivity;
+	?CActivity;
 	@Remarks("User defined list element #1")
-	?User1Id CElementvalue;
+	?User1 CElementvalue;
 	@Remarks("User defined list element #2")
-	?User2Id CElementvalue;
+	?User2 CElementvalue;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrxId AdOrg;
+	?AdOrgtrx AdOrg;
 };
 

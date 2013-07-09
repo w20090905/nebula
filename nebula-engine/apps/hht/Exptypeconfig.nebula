@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx Exptypeconfig {
+	!Exptypeconfigid ID;
+	?Glaccountid Glaccount;
+	?IsTocost Cost;
+	?Prodid Product;
+	?TaxRate Rate;
+	?Costapportionmethod Cost;
+	Expensetypecode Code;
+	?Orgid Organization;
+	?Reglaccountid ID;
+};
+

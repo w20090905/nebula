@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Warehousezonedetail {
+	!Warehousezonedetailid ID;
+	?Startlocationcode Code;
+	?Endlocationcode Code;
+	?Remarks null;
+	Warehousezoneid Warehousezone;
+};
+

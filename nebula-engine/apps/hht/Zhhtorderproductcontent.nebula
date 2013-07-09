@@ -1,0 +1,13 @@
+@Remarks("?????????")
+@Refby("0")
+tx Zhhtorderproductcontent {
+	@Remarks("??")
+	!Orderproductcontentid ID;
+	@Remarks("????id")
+	Buyerorgid ID;
+	@Remarks("??id")
+	Itemid Item;
+	@Remarks("??????")
+	DateLastupdated Date;
+};
+

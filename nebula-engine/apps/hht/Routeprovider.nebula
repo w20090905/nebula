@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("0")
+tx Routeprovider {
+	!Routeproviderid ID;
+	Routeprovidercode Code;
+	?Routename Name;
+	?Fromportcode Code;
+	?Toportcode Code;
+	?Providerid ID;
+	?Carrierid ID;
+	?Carriername Name;
+	?Carrierqty Quantity;
+	?TotalTimes null;
+	?Timeumcode Code;
+	?Expense null;
+	?Expenseperumcode Code;
+	?Advantage null;
+	IsBase YesNo;
+	?Address null;
+	?Address null;
+	?Remart null;
+	Routeid Route;
+};
+

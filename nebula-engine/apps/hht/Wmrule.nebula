@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("1")
+tx Wmrule {
+	!Wmruleid ID;
+	Wmrulecode Code;
+	?Wmrulename Name;
+	Jobname Name;
+	?LabelOne null;
+	?LabelTwo null;
+	Ruletype null;
+	?Attrone null;
+	?Attrtwo null;
+	?Attrthree null;
+	?Attrfour null;
+	?Attrfive null;
+	?Attrsix null;
+};
+

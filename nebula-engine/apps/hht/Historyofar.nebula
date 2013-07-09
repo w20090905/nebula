@@ -1,0 +1,38 @@
+@Remarks("")
+@Refby("0")
+tx Historyofar {
+	!Historyofarid ID;
+	?Historytype Attr;
+	?Booksetid Bookset;
+	?Createdate Date;
+	?Accountingyearid ID;
+	?Accyear null;
+	?Accountingperiorid ID;
+	?Accperiod null;
+	?Startdate Date;
+	?Enddate Date;
+	?Orgid Organization;
+	?Orgcode Code;
+	?Orgname Name;
+	?Areaid Businessarea;
+	?Areacode Code;
+	?Areaname Name;
+	?Partnerid ID;
+	?Partnercode Code;
+	?Partnername Name;
+	?Partnerareaid ID;
+	?Partnerareacode Code;
+	?Partnerareaname Name;
+	?Partnergroupid ID;
+	?Partnergroupcode Code;
+	?Partnergroupname Name;
+	?Parentmapgroupid ID;
+	?Parentmapgroupcode Code;
+	?Parentmapgroupname Name;
+	?Initialamount Amount;
+	?Debitamount Amount;
+	?Creditamount Amount;
+	?Endamount Amount;
+	?Businessperiodid Businessperiod;
+};
+

@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+type SmpVdeEventTargetInfo {
+	?EventId SmpVdeEvent;
+	?TargetName Name;
+	?TargetType Attr;
+	?NodeName Name;
+	?AgentStatus null;
+	?TimesTamp null;
+	?Timezone Count;
+	?ErrorCode null;
+	?ErrorMessage null;
+};
+

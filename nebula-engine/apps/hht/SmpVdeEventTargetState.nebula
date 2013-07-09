@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type SmpVdeEventTargetState {
+	?EventId ID;
+	?TargetName Name;
+	?TargetType Attr;
+	?NodeName Name;
+	?AgentSeverity null;
+	?NodeState null;
+};
+

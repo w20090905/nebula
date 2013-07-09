@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx Rebatebalance {
+	!Rebatebalanceid ID;
+	Rebatetype null;
+	Createdate Date;
+	Partnerid ID;
+	?Debitamt Amount;
+	?Creditamt Amount;
+	?BalanceAmt Amount;
+	DateLastupdated Date;
+	Orgid Organization;
+	Booksetid Bookset;
+	?Allocamt Amount;
+};
+

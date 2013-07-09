@@ -1,0 +1,34 @@
+@Remarks("")
+@Refby("3")
+tx Assitemjournal {
+	!Assitemjournalid ID;
+	Booksetid Bookset;
+	Accyearid Accountingyear;
+	Accperiodid Accountingperiod;
+	Glaccountid Glaccount;
+	?Accyear null;
+	?Accperiod null;
+	?Voucherid Voucher;
+	?Vouchercode Code;
+	?Voucherdetailid Voucherdetail;
+	?Vouchersigner null;
+	?Relatedtranstype null;
+	?Relatedtransid ID;
+	?Relatedtransdetailid ID;
+	?Description;
+	?Dcflag null;
+	?Currencycode Code;
+	?Exchangerate Rate;
+	?Debitamount Amount;
+	?Creditamount Amount;
+	?Debitamountfore null;
+	?Creditamountfore null;
+	?Createdate Date;
+	?Docdate Date;
+	Assistantitemid Assistantitem;
+	?Assistantitemvalue null;
+	?Responsecenterid Responsecenter;
+	?Vouchertype null;
+	?Relatedtranscode Code;
+};
+

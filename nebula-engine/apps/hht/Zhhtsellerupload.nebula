@@ -1,0 +1,39 @@
+@Remarks("")
+@Refby("1")
+tx Zhhtsellerupload {
+	!Selleruploadid ID;
+	?Receiptcode Code;
+	?Inquirycode Code;
+	?Orgid Organization;
+	?Buyerid ID;
+	?Buyercode Code;
+	?Buyername Name;
+	?Inquirydate Date;
+	?Limitdate Date;
+	?DeliveryDate Date;
+	?Sellerid ID;
+	?Sellercode Code;
+	?Sellername Name;
+	?Sellerinquirydate Date;
+	?Sellerlimitdate Date;
+	?Purchasecurrencycode Code;
+	?PaymentTermid PaymentTerm;
+	?PaymentTermname Name;
+	?Shipmenttermid ID;
+	?Shipmenttermname Name;
+	?Shipmentmethodid ID;
+	?Shipmentmethodname Name;
+	?Shipfrom null;
+	?Shipto null;
+	?Comments Note;
+	?Replydeliverydate Date;
+	?Replydate Date;
+	?Amountsubtotal Amount;
+	?Discount Count;
+	?Amounttotal Amount;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Source null;
+	?Status;
+};
+

@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+type SmpVdmNotificationDetails {
+	?Name;
+	?Type null;
+	?Target null;
+	?Execnum null;
+	?Owner null;
+	?TimeStamp null;
+	?TimeZone Count;
+	?Method null;
+	?Status;
+	?Message;
+	?OperationStatus null;
+};
+

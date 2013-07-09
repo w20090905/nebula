@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Vanexpense {
+	!Vanexpenseid ID;
+	Vansalesslipid Vansalesslip;
+	?Expenseamt Amount;
+	?Expensetypecode Code;
+	?Actualdate Date;
+	?Remark null;
+	?Createdate Date;
+	?DateLastupdated Date;
+};
+

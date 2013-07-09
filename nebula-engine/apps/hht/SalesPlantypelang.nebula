@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type SalesPlantypelang {
+	!SalesPlantypelangid ID;
+	SalesPlantypeid SalesPlantype;
+	?LanguageCode Lang;
+	?Name;
+	?Description;
+};
+

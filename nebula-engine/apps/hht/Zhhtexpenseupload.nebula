@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtexpenseupload {
+	!Expenseuploadid ID;
+	?Orgid Organization;
+	?Customerpono null;
+	?Expenseclasscode Code;
+	?Partnerorgcode Code;
+	?PaymentTerm String;
+	?Exchagetype Attr;
+	?Currencycode Code;
+	?Exchagedatecode Code;
+	?Currencyrate Rate;
+	?Amount;
+	?Source null;
+	?Status;
+	?Createdate Date;
+	?DateLastupdated Date;
+};
+

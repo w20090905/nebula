@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("4")
+tx Combocodesequence {
+	!Sequenceid ID;
+	Sequencetype Attr;
+	?Startvalue null;
+	?Maxvalue null;
+	?Increments null;
+	?Cycle null;
+	?DateLastupdated Date;
+};
+

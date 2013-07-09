@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Possettlepolicy {
+	!Possettlepolicyid ID;
+	Orgid Organization;
+	?Itemid null;
+	Poscode Code;
+	?CashErid null;
+	?SalesType Attr;
+	?SalesRepid null;
+	?Vipno null;
+};
+

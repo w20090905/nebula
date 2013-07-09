@@ -4,19 +4,9 @@ type RRequestType {
 	@Remarks("Type of request (e.g. Inquiry, Complaint, ..)")
 	!RRequestTypeId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")
@@ -40,9 +30,9 @@ type RRequestType {
 	@Remarks("Automatically create BOM (Engineering) Change Request")
 	IsAutoChangerequest YesNo;/* 'N'  */
 	@Remarks("Can enter confidential information")
-	IsConfidentialinfo Info;/* 'N'  */
+	IsConfidentialinfo YesNo;/* 'N'  */
 	@Remarks("Request Status Category")
-	RStatuscategoryId RStatuscategory;
+	RStatuscategory;
 	@Remarks("Index the document for the internal search engine")
 	IsIndexed YesNo;/* 'Y'  */
 };

@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx Ordertool {
+	!Ordertoolid ID;
+	Orderid Ord;
+	Itemid Item;
+	?Lotno null;
+	?QtyNeeded Quantity;
+	?QtyGot Quantity;
+	?QtyUsed Quantity;
+	?Employeeid Employee;
+	?Ordertaskid Ordertask;
+};
+

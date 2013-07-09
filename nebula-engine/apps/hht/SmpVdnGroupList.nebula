@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("15")
+type SmpVdnGroupList {
+	!ID;
+	Name SmpVxaSystemPrefs;
+	?Owner null;
+	?Description;
+	?Backgroundfileurl Url;
+	?Iconsize Size;
+};
+

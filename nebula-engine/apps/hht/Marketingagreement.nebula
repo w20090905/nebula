@@ -1,0 +1,31 @@
+@Remarks("")
+@Refby("6")
+tx Marketingagreement {
+	Marketingagreementcode Code;
+	?Orgid Organization;
+	?ReferenceNo Code;
+	?Marketingagreementtype null;
+	?Marketingagreementproperty null;
+	?Activityid Activity;
+	?LineNum Line;
+	?Apportionrule null;
+	?PaymentOrgid ID;
+	?Begindate Date;
+	?Enddate Date;
+	?PaymentTermid PaymentTerm;
+	?PaymentMethod null;
+	?Agreementamount Amount;
+	?Confirmamount Amount;
+	?Expamount Amount;
+	?StoreNums null;
+	?Proposer null;
+	?Maker null;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Revision null;
+	Status;
+	?Description;
+	!Marketingagreementid ID;
+	?Executeorgid ID;
+};
+

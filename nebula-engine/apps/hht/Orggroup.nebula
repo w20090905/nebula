@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("14")
+tx Orggroup {
+	!Orggroupid ID;
+	Orgid Organization;
+	Groupcode Code;
+	Groupname Name;
+	?Groupdesc null;
+	Globalpccode null;
+	?Parentgroupid ID;
+	Grade null;
+	IsBottom YesNo;
+	?DateLastupdated Date;
+};
+

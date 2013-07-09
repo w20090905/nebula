@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type SmpVdeEventTargetAck {
+	?EventId ID;
+	?TargetName Name;
+	?TargetType Attr;
+	?NodeName Name;
+	?Userid String;
+};
+

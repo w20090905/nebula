@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("2")
+tx Wmpolicy {
+	!Wmpolicyid ID;
+	Wmpolicycode Code;
+	?Wmpolicyname Name;
+	?Description;
+	Status;
+	Wmpolicytype null;
+	Orgid Organization;
+};
+

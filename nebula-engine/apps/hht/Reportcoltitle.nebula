@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("1")
+tx Reportcoltitle {
+	!Reportcoltitleid ID;
+	Reportdefineid Reportdefine;
+	?Colno SeqNo;
+	?Alignment null;
+	?Fontsize Size;
+	?Fontcolor null;
+	?Fontattr null;
+	?Width;
+};
+

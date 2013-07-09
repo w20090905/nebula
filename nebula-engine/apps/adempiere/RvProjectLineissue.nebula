@@ -1,16 +1,11 @@
 @Remarks("")
 @Refby("0")
 type RvProjectLineissue {
-	?AdClientId AdClient;
-	?AdOrgId AdOrg;
-	?IsActive YesNo;
-	?Created null;
-	?Createdby null;
-	?Updated null;
-	?Updatedby null;
-	?CProjectId CProject;
-	?MProductId MProduct;
-	?CProjectLineId CProjectLine;
+	?AdClientId ID;
+	?AdOrgId ID;
+	?CProjectId ID;
+	?MProductId ID;
+	?CProjectLineId ID;
 	?Line;
 	?Description;
 	?PlannedQty Quantity;
@@ -18,20 +13,20 @@ type RvProjectLineissue {
 	?PlannedAmt Amount;
 	?PlannedMarginamt Amount;
 	?CommittedQty Quantity;
-	?CProjectIssueId CProjectIssue;
-	?MLocatorId MLocator;
+	?CProjectIssueId ID;
+	?MLocatorId ID;
 	?Movementqty Quantity;
 	?Movementdate Date;
-	?IsSueline Line;
-	?IsSuedescription Description;
-	?MInoutlineId MInoutline;
-	?STimeexpenselineId STimeexpenseline;
-	?CAcctschemaId CAcctschema;
+	?IsSueLine Line;
+	?IsSueDescription Description;
+	?MInoutlineId ID;
+	?STimeexpenselineId ID;
+	?CAcctschemaId ID;
 	?AccountId ID;
 	?AmtSourcedr Amount;
 	?AmtSourcecr Amount;
 	?AmtAcctdr Amount;
 	?AmtAcctcr Amount;
-	?LineMargin Line;
+	?LineMargin Length;
 };
 

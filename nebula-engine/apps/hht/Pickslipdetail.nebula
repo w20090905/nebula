@@ -1,0 +1,29 @@
+@Remarks("")
+@Refby("0")
+tx Pickslipdetail {
+	!Pickslipdetailid ID;
+	Pickslipid Pickslip;
+	Itemid Item;
+	Invstatus null;
+	SourceTranid ID;
+	SourceTrantype null;
+	?Orderdetailid Orderdetail;
+	?Locationno null;
+	?Lotno null;
+	?Batchno null;
+	?Serialno null;
+	Invsummaryid Invsummary;
+	?Qty Quantity;
+	?Price;
+	?Costprice Cost;
+	?Amount;
+	?Manufacturedate Date;
+	?Expiredate Date;
+	?Inventoryflag null;
+	?Umcode Code;
+	?Baseqty Quantity;
+	?PlannedQty Quantity;
+	?Saplotno null;
+	?Sapevaluation null;
+};
+

@@ -4,25 +4,15 @@ tx IInoutlineconfirm {
 	@Remarks("Material Shipment or Receipt Confirmation Import Line")
 	!IInoutlineconfirmId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Has this import been processed")
 	IIsImported YesNo;/* 'N'  */
 	@Remarks("Messages generated from import process")
-	?IErrorMsg Msg;
+	?IErrorMsg Note;
 	@Remarks("Material Shipment or Receipt Confirmation Line")
-	?MInoutlineconfirmId MInoutlineconfirm;
+	?MInoutlineconfirm;
 	@Remarks("Confirmation Number")
 	?Confirmationno Code;
 	@Remarks("Optional short description of the record")

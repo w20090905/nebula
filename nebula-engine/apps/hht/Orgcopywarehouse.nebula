@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+tx Orgcopywarehouse {
+	!Orgcopywarehouseid ID;
+	Orgcopyid Orgcopy;
+	Warehousecode Code;
+	Warehousename Name;
+	Orgcopyaddressid Orgcopyaddress;
+	?Warehousedesc null;
+	?Atp null;
+	?Whgroupcode Code;
+	?Admlocationtype null;
+	Status;
+	DateLastupdated Date;
+	?Srcwarehouseid ID;
+	?Tgtwarehouseid ID;
+	?Net null;
+};
+

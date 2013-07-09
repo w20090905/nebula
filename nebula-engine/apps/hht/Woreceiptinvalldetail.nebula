@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("0")
+tx Woreceiptinvalldetail {
+	!Woreceiptinvalldetailid ID;
+	Workorderid Workorder;
+	?Invsummaryid Invsummary;
+	Warehouseid Physicalwarehouse;
+	?Locationno null;
+	?Itemid Item;
+	?Invstatus null;
+	?Lotno null;
+	?Batchno null;
+	?Alldate Date;
+	?Manufacturedate Date;
+	?Expiredate Date;
+	?QtyAll Quantity;
+	?Baseqtyall null;
+	?Checkinslipid Checkinslip;
+	Workorderreceiptdetailid Workorderreceiptdetail;
+	?PostStatus null;
+	?Voucherid Voucher;
+};
+

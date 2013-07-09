@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("3")
+tx SmpVdvPage {
+	!UserId ID;
+	?IsPageToEmail null;/* 0 */
+	?Carrier null;
+	?Pin null;
+	?PageEmailId null;
+	?PagePrefix String;
+	?PageDataLength Length;/* 256 */
+	?PageFilter null;/* -1 */
+	?BodyHeaderFormAt String;/* '%N %TN %TT %NN %ST' */
+	?BodyDetailFormAt String;/* '%ETN %ETR %ETST{MMM dd yyyy hh:mm:ss a}' */
+};
+

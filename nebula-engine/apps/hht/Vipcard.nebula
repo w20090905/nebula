@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Vipcard {
+	!Vipcardid ID;
+	Vipcardno null;
+	?Vipcardtype null;
+	?IsSueDate Date;
+	?Expiredate Date;
+	DateLastupdated Date;
+	Oncecustomerid Oncecustomer;
+	?Comments Note;
+};
+

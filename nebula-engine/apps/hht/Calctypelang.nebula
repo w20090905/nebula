@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Calctypelang {
+	!Calctypelangid ID;
+	Calctypeid Calctype;
+	LanguageCode Lang;
+	Ctn null;
+	?Ctd null;
+};
+

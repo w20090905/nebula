@@ -4,21 +4,11 @@ tx STimeexpenseline {
 	@Remarks("Time and Expense Report Line")
 	!STimeexpenselineId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Time and Expense Report")
-	STimeexpenseId STimeexpense;
+	STimeexpense;
 	@Remarks("Unique line for this document")
 	Line;
 	@Remarks("Line is a time report only (no expense)")
@@ -26,17 +16,17 @@ tx STimeexpenseline {
 	@Remarks("Date of expense")
 	?DateExpense Date;
 	@Remarks("Product, Service, Item")
-	?MProductId MProduct;
+	?MProduct;
 	@Remarks("Quantity")
 	?Qty Quantity;/* 0 */
 	@Remarks("Amount for this expense")
 	?Expenseamt Amount;/* 0 */
 	@Remarks("The Currency for this record")
-	?CCurrencyId CCurrency;
+	?CCurrency;
 	@Remarks("Converted Amount")
 	?Convertedamt Amount;/* 0 */
 	@Remarks("Resource Assignment")
-	?SResourceAssignmentId SResourceAssignment;
+	?SResourceAssignment;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Optional additional user defined information")
@@ -44,27 +34,27 @@ tx STimeexpenseline {
 	@Remarks("Is this invoiced?")
 	IsInvoiceD YesNo;/* 'N'  */
 	@Remarks("Identifies a Business Partner")
-	?CBpartnerId CBpartner;
+	?CBpartner;
 	@Remarks("Financial Project")
-	?CProjectId CProject;
+	?CProject;
 	@Remarks("Business Activity")
-	?CActivityId CActivity;
+	?CActivity;
 	@Remarks("Marketing Campaign")
-	?CCampaignId CCampaign;
+	?CCampaign;
 	@Remarks("Invoice Detail Line")
-	?CInvoiceLineId CInvoiceLine;
+	?CInvoiceLine;
 	@Remarks("Unit price to be invoiced or 0 for default price")
 	?InvoicePrice Price;/* 0 */
 	@Remarks("Unit of Measure")
-	?CUomId CUom;
+	?CUom;
 	@Remarks("Sales Order Line")
-	?COrderlineId COrderline;
+	?COrderline;
 	@Remarks("Phase of a Project")
-	?CProjectPhaseId CProjectPhase;
+	?CProjectPhase;
 	@Remarks("Actual Project Task in a Phase")
-	?CProjectTaskId CProjectTask;
+	?CProjectTask;
 	@Remarks("Type of time recorded")
-	?STimetypeId STimetype;
+	?STimetype;
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("Invoiced Quantity")
@@ -72,8 +62,8 @@ tx STimeexpenseline {
 	@Remarks("The reimbursed quantity")
 	?QtyReimbursed Quantity;
 	@Remarks("The priced invoiced to the customer (in the currency of the customer_s AR price list) - 0 for default price")
-	?PriceInvoiced Price;
+	?PriceInvoiced Number;
 	@Remarks("The reimbursed price (in currency of the employee_s AP price list)")
-	?PriceReimbursed Price;
+	?PriceReimbursed Number;
 };
 

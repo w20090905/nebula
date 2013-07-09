@@ -1,0 +1,46 @@
+@Remarks("")
+@Refby("1")
+tx Comtransrecord {
+	!Comtransrecordid ID;
+	?Orgid Organization;
+	?Deptid Department;
+	?TotalAmount Amount;
+	?Transcode Code;
+	?Sellerid ID;
+	?Buyerid ID;
+	?Sellerflag null;
+	?Buyerflag null;
+	?Currencycode Code;
+	?Original null;
+	?Destination null;
+	?Docdate Date;
+	?Sellerorderid ID;
+	?Buyerorderid ID;
+	?Comments Note;
+	?DateLastupdated Date;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Status;
+	?Currencyrate Rate;
+	?Maker null;
+	?Attr31 null;
+	?Attr32 null;
+	?Baseamountforbuyer null;
+	?Baseamountforseller null;
+	?Createdate Date;
+	?Originaltransid ID;
+	?Sbuid ID;
+	?Sbuflag null;
+	?Sbuorderid ID;
+	?Sbucomtype null;
+	?Sbucheck null;
+	?Tpflag null;
+	?Tpid ID;
+	?Tporderid ID;
+	?Baseamountfortp null;
+	?Commisiontype null;
+	?PaymentMethod null;
+};
+

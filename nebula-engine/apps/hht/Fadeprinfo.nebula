@@ -1,0 +1,29 @@
+@Remarks("")
+@Refby("0")
+tx Fadeprinfo {
+	!Fadeprinfoid ID;
+	?Facategoryid Facategory;
+	?Fixedassetsid Fixedassets;
+	Fadeprbooksetid Fadeprbookset;
+	?IsDepr YesNo;
+	?Limitedyears Count;
+	?Origianlvalue null;
+	?TotalWorkhours null;
+	?Residualvalue null;
+	?Residualrate Rate;
+	Deprmethodcode Code;
+	Alterdeprmethod null;
+	Deprdiffmethod null;
+	?Deprcalcmonth null;
+	?Monthlydeprrate Rate;
+	?Monthlydeprvalue null;
+	?TotalDepr null;
+	?Netvalue null;
+	DateLastupdated Date;
+	?Numdepred null;
+	?Hoursworked null;
+	?Monthlyworkhours null;
+	?Revision null;
+	?IsResidualvalue String;
+};
+

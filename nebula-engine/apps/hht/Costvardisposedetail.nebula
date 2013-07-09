@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("1")
+tx Costvardisposedetail {
+	!Costvardisposedetailid ID;
+	Costvardisposeid Costvardispose;
+	?Costvarbalanceid Costvarbalance;
+	?Costvarjournalid Costvarjournal;
+	?Itemid Item;
+	?Amount;
+	?Initialamount Amount;
+	?Remark null;
+	?LineStatus Line;
+};
+

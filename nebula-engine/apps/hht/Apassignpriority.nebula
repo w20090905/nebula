@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Apassignpriority {
+	!Apassignpriorityid ID;
+	?Orgid Organization;
+	?Columnname Name;
+	?Sortno SeqNo;
+	?Ad null;
+};
+

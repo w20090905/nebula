@@ -1,0 +1,27 @@
+@Remarks("")
+@Refby("10")
+tx Workorder {
+	!Workorderid ID;
+	Workordercode Code;
+	Orgid Organization;
+	Itemid Item;
+	Needqty Quantity;
+	?Checkinqty Quantity;
+	?Warehouseid Physicalwarehouse;
+	Docdate Date;
+	Maker null;
+	?Plandate Date;
+	?Realdate Date;
+	?TotalCostamount Amount;
+	Status;
+	DateLastupdated Date;
+	?Umcode Code;
+	?IsBom YesNo;
+	?Createdate Date;
+	?Deptid Department;
+	?Thispickdate Date;
+	?Thischeckindate Date;
+	?Baseneedqty Quantity;
+	?Basecheckingqty Quantity;
+};
+

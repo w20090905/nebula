@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+tx RequestQuestion {
+	!RequestQuestionid ID;
+	Servicerequestid Servicerequest;
+	?Questiondesc null;
+};
+

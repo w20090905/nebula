@@ -2,16 +2,11 @@
 @Refby("2")
 type ADepreciation {
 	!ADepreciationId ID;
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;/* 'Y'  */
-	Created null;/* SYSDATE  */
-	Createdby null;
-	Updated null;/* SYSDATE  */
-	Updatedby null;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	Depreciationtype Attr;
-	?Script String;
+	?Script Note;
 };
 

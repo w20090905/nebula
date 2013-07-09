@@ -1,0 +1,35 @@
+@Remarks("")
+@Refby("0")
+type Twxikogroupm {
+	?Groupmid ID;
+	?Groupcd null;
+	?Syozokicd null;
+	?Bucd null;
+	?Kacd null;
+	?Kakaricd null;
+	?Bumoncd null;
+	?Tel null;
+	?Fax;
+	?YubinNo String;
+	?KaMei null;
+	?BumonMei null;
+	?Addr1 null;
+	?Addr2 null;
+	?KeikiKotei null;
+	?KeikiKaiten null;
+	?KeiyakuFuka null;
+	?Eigyosyo null;
+	?SitenKbn null;
+	?BoekiKbn null;
+	?SyuturyokuKbn null;
+	?Tani null;
+	?HinmeiCd null;
+	?SisyuSyain null;
+	?Insymd null;
+	?Updymd null;
+	?Updtime null;
+	?Employeecode Code;
+	?Status;
+	?Pattern null;
+};
+

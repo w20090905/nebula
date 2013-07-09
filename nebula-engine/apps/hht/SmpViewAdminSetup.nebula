@@ -1,0 +1,15 @@
+@Remarks("Notification setup per administrator")
+@Refby("0")
+type SmpViewAdminSetup {
+	@Remarks("Name of the administrator")
+	AdministratorName Name;
+	@Remarks("Email address of the administrator to send the notifications to")
+	?Address EMail;
+	@Remarks("Title to be used for the notification email")
+	?EmailTitle Title;
+	@Remarks("Name of the discovered paging service to use for notifications")
+	?PagingService null;
+	@Remarks("PIN code to use for paging notifications")
+	?PagingPin null;
+};
+

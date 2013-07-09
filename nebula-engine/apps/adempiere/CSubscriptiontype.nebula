@@ -4,17 +4,7 @@ type CSubscriptiontype {
 	@Remarks("Type of subscription")
 	!CSubscriptiontypeId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  	  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  	  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  	  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdClientId ID;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")
@@ -24,6 +14,6 @@ type CSubscriptiontype {
 	@Remarks("Frequency of events")
 	Frequency;
 	@Remarks("Organizational entity within client")
-	?AdOrgId AdOrg;
+	?AdOrgId ID;
 };
 

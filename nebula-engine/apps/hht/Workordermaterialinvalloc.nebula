@@ -1,0 +1,25 @@
+@Remarks("")
+@Refby("0")
+tx Workordermaterialinvalloc {
+	!Workordermaterialinvallocid ID;
+	Workordermaterialid Workordermaterial;
+	?Workorderid Workorder;
+	?Invsummaryid Invsummary;
+	?Warehouseid Physicalwarehouse;
+	?Locationcode Code;
+	Itemid Item;
+	Invstatus null;
+	?Lotno null;
+	?Batchno null;
+	?Manufacturedate Date;
+	?Expiredate Date;
+	?QtyAlloc Quantity;
+	?QtyPicked Quantity;
+	?Costprice Cost;
+	?Pickslipid Pickslip;
+	?PostStatus null;
+	?Voucherid Voucher;
+	?Baseqtyalloc null;
+	?Baseqtypicked null;
+};
+

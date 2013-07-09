@@ -1,0 +1,25 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtordremark {
+	!Ordremarkid ID;
+	Orderid Ord;
+	?Za01 String;
+	?Za02 String;
+	?Za03 String;
+	?Zc01 String;
+	?Zc02 String;
+	?Zd01 String;
+	?Zd02 String;
+	?Status;
+	Ownerorgid ID;
+	?Maker null;
+	Createdate Date;
+	DateLastupdated Date;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Attr21 null;
+	?Attr22 null;
+};
+

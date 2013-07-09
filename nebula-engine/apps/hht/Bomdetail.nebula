@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+tx Bomdetail {
+	!Bomdetailid ID;
+	Bomid Bom;
+	Materialid ID;
+	?Umcode Code;
+	?Workstepno SeqNo;
+	Materialqty Quantity;
+	?Wasterate Rate;
+	DateLastupdated Date;
+	?Splitflag null;
+	?Begindate Date;
+	?Enddate Date;
+	Status;
+	?Bomitemid ID;
+};
+

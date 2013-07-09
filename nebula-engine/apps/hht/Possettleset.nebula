@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Possettleset {
+	!Possettlesetid ID;
+	Orgid Organization;
+	?Pickwhid ID;
+	?SalesCustomerid ID;
+	?IsDebit YesNo;
+	?Debitorgid ID;
+	?Ordertypeid Ordertype;
+};
+

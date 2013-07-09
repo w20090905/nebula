@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Forumrecord {
+	!RecordId ID;
+	Forumid Forum;
+	Readerid ID;
+	Readdate Date;
+	Fromorgid ID;
+};
+

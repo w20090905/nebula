@@ -1,0 +1,32 @@
+@Remarks("")
+@Refby("0")
+type VdkPartIndexes {
+	?VdkId ID;
+	?VdkName Name;
+	?VdkParentId ID;
+	?VdkDatabaseId VdkDatabase;
+	?VdkOwnerName Name;
+	?VdkIndexName Name;
+	?VdkPartitioningType Attr;
+	?VdkSubpartitioningType Attr;
+	?VdkPartitionCount Count;
+	?VdkDefSubpartitionCount Count;
+	?VdkPartitioningKeyCount Count;
+	?VdkSubpartitioningKeyCount Count;
+	?VdkLocality null;
+	?VdkAlignment null;
+	?VdkDefTablespaceName Name;
+	?VdkDefPctFree null;
+	?VdkDefIniTrans null;
+	?VdkDefMaxTrans null;
+	?VdkDefInitialExtent null;
+	?VdkDefNextExtent null;
+	?VdkDefMinExtents null;
+	?VdkDefMaxExtents null;
+	?VdkDefPctIncrease null;
+	?VdkDefFreelists null;
+	?VdkDefFreelistGroups null;
+	?VdkDefLogging null;
+	?VdkDefBufferPool null;
+};
+

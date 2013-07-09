@@ -1,0 +1,53 @@
+@Remarks("")
+@Refby("0")
+type MvHattyuujisseki {
+	?Porowid null;
+	?Podrowid null;
+	?Pgrowid null;
+	?Ptrowid null;
+	?Urowid null;
+	?Plrowid  null;
+	?Dprowid null;
+	?Pdrowid null;
+	?Poorowid null;
+	?Sorowid null;
+	?Sgrowid null;
+	Poorderdetailid ID;
+	Ownorgname Name;
+	Ownorgcode Code;
+	Sellerorgid ID;
+	Sellerorgcode Code;
+	Sellerorgname Name;
+	?Contractid Contract;
+	?ReferenceNo Code;
+	?Poordercode Code;
+	Shipmentterm String;
+	?PaymentTermname Name;
+	?Currencyname Name;
+	?Zctrate Rate;
+	?Exchagedatecode Code;
+	?Exchagetype Attr;
+	?Docdate Date;
+	?DateLastupdated Date;
+	?TaxCode Code;
+	?TaxRate Rate;
+	Username Name;
+	Prdn null;
+	?Selleritemcode Code;
+	?Umcode Code;
+	?Unitprice Unit;
+	?Orderqty Quantity;
+	?Amount;
+	?Zctamount Amount;
+	?Remanentqty Quantity;
+	LanguageCode Lang;
+	Ownerorgid ID;
+	?Buyerid ID;
+	?Makerid ID;
+	?Sostatus null;
+	?DeliveryDate Date;
+	?AutoDevgrflag null;
+	?Buyerorgname Name;
+	?Receivedqty Quantity;
+};
+

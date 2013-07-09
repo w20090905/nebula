@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type VdkConstraintColumn {
+	?VdkParentId ID;
+	?VdkName Name;
+	?VdkTableColumnId ID;
+	?VdkRefColumnId ID;
+	?VdkRefColumnName Name;
+	?VdkPosition Length;
+};
+

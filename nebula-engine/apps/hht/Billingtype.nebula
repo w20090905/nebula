@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("3")
+tx Billingtype {
+	!Billingtypeid ID;
+	?Billingtypedesc null;
+	Araptype null;
+};
+

@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("26")
+tx Businessarea {
+	!Areaid ID;
+	Orgid Organization;
+	Areaname Name;
+	Areacode Code;
+	?Areadesc null;
+	?Parentareaid ID;
+	?Grade null;
+	?IsBottom YesNo;
+	?DateLastupdated Date;
+};
+

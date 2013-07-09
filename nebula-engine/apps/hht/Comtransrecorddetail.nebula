@@ -1,0 +1,25 @@
+@Remarks("")
+@Refby("0")
+tx Comtransrecorddetail {
+	!Comtransrecorddetailid ID;
+	?Comtransrecordid Comtransrecord;
+	?Itemid Item;
+	?Qty Quantity;
+	?Unitprice Unit;
+	?Umcode Code;
+	?Amount;
+	?Remark null;
+	?DateLastupdated Date;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Localprice Price;
+	?Localamount Amount;
+	?Attr21 null;
+	?Attr22 null;
+	?Originaldetailid ID;
+	?Attr23 null;
+	?Attr24 null;
+};
+

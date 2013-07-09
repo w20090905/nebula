@@ -1,0 +1,27 @@
+@Remarks("List of all events known in the repository")
+@Refby("0")
+type SmpViewEventStatus {
+	@Remarks("Internal ID of this event")
+	?EventId ID;
+	@Remarks("Name of this event")
+	?EventName Name;
+	@Remarks("Name of the node where this event is registered for")
+	?NodeName Name;
+	@Remarks("Name of the service this event is registered for")
+	?TargetName Name;
+	@Remarks("Type of service this event is registered for")
+	?TargetType Attr;
+	@Remarks("Translated name for the target type")
+	?TargetNlsType Attr;
+	@Remarks("Name of the administrator who owns this event")
+	?AdministratorName Name;
+	@Remarks("Date and time of the last notification of this event")
+	?TimesTamp null;
+	@Remarks("Current state: 0 (No status), 204 (Pending registration), 205 (Registered), 206 (Registration failed), 207 (Pending deregistration), 208 (Deregistered)")
+	?EventStatus null;
+	@Remarks("Current state: 0 (DOWN), 1 (UP)")
+	?AgentStatus null;
+	@Remarks("Current state: 15 (Clear), 18 (Error), 20 (Warning), 25 (Alert)")
+	?Severity null;
+};
+

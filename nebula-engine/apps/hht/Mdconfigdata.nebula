@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Mdconfigdata {
+	!Mdconfigdataid ID;
+	Mdconfigid Mdconfig;
+	?Startdate Date;
+	?Enddate Date;
+	?Dataid ID;
+	?Datastr null;
+	Modifier null;
+	DateLastupdated Date;
+	EntityId ID;
+	?Datacode Code;
+};
+

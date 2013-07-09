@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtsoporemantuploadtmp2 {
+	!Soporemantuploadtmp2id ID;
+	Tmpid Zhhtexpensetmp;
+	?Contracttypecode Code;
+	?Soordercode Code;
+	?Poordercode Code;
+	?Orderdetailid Orderdetail;
+	?Itemcode Code;
+	?Orderqty Quantity;
+	?AfterBuyprice Price;
+	?AfterSellprice Price;
+};
+

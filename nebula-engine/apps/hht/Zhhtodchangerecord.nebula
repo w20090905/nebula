@@ -1,0 +1,36 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtodchangerecord {
+	!Odchangerecordid ID;
+	?ChangeType null;
+	?Contractid Contract;
+	?Contractcode Code;
+	?Orderid Ord;
+	?Ordercode Code;
+	?Orderdetailid Orderdetail;
+	?LineNum Line;
+	?Itemid Item;
+	?OldDeliveryDate Date;
+	?OldComments Note;
+	?OldOrderqty Quantity;
+	?OldUmcode Code;
+	?OldUnitprice Price;
+	?OldDlorgrqty Quantity;
+	?NewDeliveryDate Date;
+	?NewComments Note;
+	?NewOrderqty Quantity;
+	?NewUmcode Code;
+	?NewUnitprice Price;
+	?Status;
+	?Orgid Organization;
+	?Userid Usr;
+	?Createdate Date;
+	?DateLastupdated Date;
+	@Remarks("訂正注文書出力者")
+	?Teiseireportuser null;
+	@Remarks("訂正注文書出力ﾌﾗｸﾞ")
+	?Teiseireportflag null;/* 0 */
+	@Remarks("訂正注文書出力日")
+	?Teiseireportdate Date;
+};
+

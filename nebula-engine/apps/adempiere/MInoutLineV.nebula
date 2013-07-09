@@ -1,18 +1,13 @@
 @Remarks("")
 @Refby("0")
 type MInoutLineV {
-	?AdClientId AdClient;
-	?AdOrgId AdOrg;
-	?IsActive YesNo;
-	?Created null;
-	?Createdby null;
-	?Updated null;
-	?Updatedby null;
-	?AdLanguage Attr;
-	?MInoutId MInout;
-	?MInoutlineId MInoutline;
+	?AdClientId ID;
+	?AdOrgId ID;
+	?AdLanguage String;
+	?MInoutId ID;
+	?MInoutlineId ID;
 	?Line;
-	?MProductId MProduct;
+	?MProductId ID;
 	?Movementqty Quantity;
 	?QtyEntered Quantity;
 	?Uomsymbol Symbol;
@@ -24,24 +19,24 @@ type MInoutLineV {
 	?DocumentNote Note;
 	?UPC;
 	?SKU;
-	?ProductValue String;
-	?MLocatorId MLocator;
-	?MWarehouseId MWarehouse;
+	?ProductValue Note;
+	?MLocatorId ID;
+	?MWarehouseId ID;
 	?X String;
 	?Y String;
 	?Z String;
-	?MAttributesetinstanceId MAttributesetinstance;
-	?MAttributesetId MAttributeset;
+	?MAttributesetinstanceId ID;
+	?MAttributesetId ID;
 	?Serno Code;
 	?LOT;
-	?MLotId MLot;
+	?MLotId ID;
 	?Guaranteedate Date;
 	?ProductDescription Description;
 	?ImageUrl Url;
-	?CCampaignId CCampaign;
-	?CProjectId CProject;
-	?CActivityId CActivity;
-	?CProjectPhaseId CProjectPhase;
-	?CProjectTaskId CProjectTask;
+	?CCampaignId ID;
+	?CProjectId ID;
+	?CActivityId ID;
+	?CProjectPhaseId ID;
+	?CProjectTaskId ID;
 };
 

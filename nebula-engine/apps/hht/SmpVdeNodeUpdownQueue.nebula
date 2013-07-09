@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type SmpVdeNodeUpdownQueue {
+	!SequenceNum SmpVdeTryRemoveEventQueue;
+	?Node null;
+	?Updown null;
+	?TimesTamp null;
+	?Timezone Count;
+};
+

@@ -1,0 +1,38 @@
+@Remarks("")
+@Refby("63")
+tx Bookset {
+	!Booksetid ID;
+	Orgid Organization;
+	Booksetcode Code;
+	Booksetname Name;
+	Begindate Date;
+	Ownerorgid ID;
+	Currencycode Code;
+	Accperiodnum null;
+	Beginmonth null;
+	Beginday null;
+	Endmonth null;
+	Endday null;
+	Status;
+	?DateLastupdated Date;
+	?Industrytypecode Code;
+	?Importglaccflag null;
+	?Publiccontrolgrade null;
+	?Gliniflag null;
+	?Segmentdatenum null;
+	?Specialaccperiodnum null;
+	?Accperiodtype Attr;
+	?Gradecount Count;
+	?Grade1 null;
+	?Grade2 null;
+	?Grade3 null;
+	?Grade4 null;
+	?Grade5 null;
+	?Grade6 null;
+	?Glaccountlistid Glaccountlist;
+	?Createtopaccountflag YesNo;
+	?Glaccountstructure null;
+	?Mabooksetid ID;
+	?Booksettype null;
+};
+

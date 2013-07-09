@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx EpcCliProgress {
+	!RepUserId EpcCliRepUsers;
+	!ProgressId ID;
+	?CollectionId EpcCliCollection;
+	?ProgressStatus null;
+	?ProgressType null;
+	?ProgressTime null;
+	?ProgressText Text;
+};
+

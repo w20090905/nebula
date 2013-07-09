@@ -1,0 +1,37 @@
+@Remarks("")
+@Refby("1")
+tx Arapassign {
+	!Arapassignid ID;
+	Booksetid Bookset;
+	?Orgid Organization;
+	SourceOrgid ID;
+	?Partnerid ID;
+	Accountingyearid ID;
+	Year null;
+	Accperiodid Accountingperiod;
+	Period null;
+	?Docdate Date;
+	?PostDate Date;
+	?Arapassigncode Code;
+	?Assigntype Attr;
+	Arapid Arap;
+	?Assignamount Amount;
+	?Createdate Date;
+	?Maker null;
+	Status;
+	?Comments Note;
+	?DateLastupdated Date;
+	?PrintNum null;
+	?Gldate Date;
+	?Assignmethod null;
+	?BalanceAmount Amount;
+	?Zctassignlcamount Amount;
+	?Zctrealamtsettled null;
+	?Zctreallcamtsettled null;
+	?Zcttranprofitloss null;
+	?Zctcurrencycode Code;
+	?Zctbalanceamount Amount;
+	?Zctrate Rate;
+	?Relatedtrandetailid ID;
+};
+

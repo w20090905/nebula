@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Orginstrumentpurplan {
+	!Orginstrumentpurplanid ID;
+	Orgid Organization;
+	?Plandate null;
+	?Planqty Quantity;
+	?Planamount Amount;
+};
+

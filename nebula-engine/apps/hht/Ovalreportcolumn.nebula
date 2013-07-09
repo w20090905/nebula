@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+tx Ovalreportcolumn {
+	!Ovalreportcolumnid ID;
+	Ovalreportid Ovalreport;
+	?Ovalreportcolumnname Name;
+	?Ovalreportcolumntitle Title;
+	?Columntype Length;
+	?Useflag null;
+	?Description;
+	?Widthpercent Width;
+	?Aggreateflag null;
+	?Aggreateexpression null;
+	?Rownums null;
+	?Columnnum Length;
+	?Cellnum null;
+};
+

@@ -1,0 +1,32 @@
+@Remarks("")
+@Refby("0")
+tx Rebatejournal {
+	!Rebatejournalid ID;
+	Rebaterequestid Rebaterequest;
+	Createdate Date;
+	Rebatetype null;
+	?Currencycode Code;
+	?Exchangerate Rate;
+	Partnerid ID;
+	Relatedtrantype null;
+	?Relatedtranid ID;
+	?Debitamt Amount;
+	?Localdebitamt Amount;
+	?Relatedtranno null;
+	?Creditamt Amount;
+	?Localcreditamt Amount;
+	?Relatedtrandate Date;
+	?Description;
+	DateLastupdated Date;
+	Orgid Organization;
+	Booksetid Bookset;
+	?Glaccountid Glaccount;
+	?Relatedtrandetailid ID;
+	?Itemid Item;
+	?Docdate Date;
+	?Gldate Date;
+	?Deptid Department;
+	?Activityid Activity;
+	?Rebatereason null;
+};
+

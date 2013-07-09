@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("1")
+tx Checkconfig {
+	!Checkconfigid ID;
+	Checkviewid ID;
+	?Booksetid Bookset;
+	DateLastupdated Date;
+	?Checkelementtype null;
+};
+

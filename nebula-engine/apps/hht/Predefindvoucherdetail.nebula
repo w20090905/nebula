@@ -1,0 +1,27 @@
+@Remarks("")
+@Refby("1")
+tx Predefindvoucherdetail {
+	!Predefindvoucherdetailid ID;
+	Predefindvoucherid Predefindvoucher;
+	?Description;
+	Glaccountid Glaccount;
+	?Virementdirection null;
+	?Virementtype null;
+	?Virementrate Rate;
+	?Virementformula null;
+	?Virementamount Amount;
+	?Dcflag null;
+	?Currencycode Code;
+	?Settletype null;
+	?Currencyrate Rate;
+	?Virementamountfore null;
+	?Settleno null;
+	?Settledate Date;
+	?Assitemstatus Attr;
+	?Settlementstatus Attr;
+	?Copstatus Attr;
+	?Coporgid ID;
+	?Copdeptid ID;
+	?Copemployeeid ID;
+};
+

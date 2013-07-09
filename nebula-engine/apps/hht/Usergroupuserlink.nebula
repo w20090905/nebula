@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("2")
+tx Usergroupuserlink {
+	!Usergroupuserlinkid ID;
+	Usergroupid Usergroup;
+	Userid Usr;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Invvoucherlink {
+	!Invvoucherlinkid ID;
+	?Vouchertype null;
+	?Transtype null;
+	?Dcflag null;
+	?Description;
+};
+

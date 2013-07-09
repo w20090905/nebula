@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Orderpricingproc {
+	!Orderpriceprocedureid ID;
+	?Orgid Organization;
+	?Ordertypeid Ordertype;
+	Pricingprocid Pricingproc;
+	?Maker null;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Ownerorgid ID;
+	?Orggroupid Orggroup;
+	?Customerid ID;
+};
+

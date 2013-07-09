@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Ovalreportcondition {
+	!Ovalreportconditionid ID;
+	Ovalreportid Ovalreport;
+	Ovalpageelementid Ovalpageelement;
+	?Description;
+	?LineNum Line;
+};
+

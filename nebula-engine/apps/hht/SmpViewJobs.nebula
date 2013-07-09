@@ -1,0 +1,27 @@
+@Remarks("List of all jobs known in the repository")
+@Refby("0")
+type SmpViewJobs {
+	@Remarks("Internal ID of this job")
+	JobId SmpVdjJob;
+	@Remarks("Name of this job")
+	?JobName Name;
+	@Remarks("Administrator who owns this job")
+	?AdministratorName Name;
+	@Remarks("Description of this event")
+	?Description;
+	@Remarks("Type of service this job is meant for")
+	?TargetType Attr;
+	@Remarks("Translated name for the target type")
+	?TargetNlsType Attr;
+	@Remarks("Boolean value: Is this a fixit job?")
+	?FixitJob null;
+	@Remarks("Boolean value: Is this a library job?")
+	?LibraryJob null;
+	@Remarks("Boolean value: Is this a job that runs for a period of time?")
+	?IntervalJob null;
+	@Remarks("Administrator who made the last modificiation to this job")
+	?ModifiedBy null;
+	@Remarks("Date the last modificiation to this job were made")
+	?ModifiedDate Date;
+};
+

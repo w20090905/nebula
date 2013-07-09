@@ -1,0 +1,47 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtselleruploadtmp {
+	!Selleruploadtmpid ID;
+	?Tmpid Zhhtexpensetmp;
+	?LineNo Line;
+	?Receiptcode Code;
+	?Inquirycode Code;
+	?Buyercode Code;
+	?Buyername Name;
+	?Sellercode Code;
+	?Sellername Name;
+	?Buyerinquirydate Date;
+	?Buyerlimitdate Date;
+	?Sellerinquirydate Date;
+	?Sellerlimitdate Date;
+	?Replydeliverydate Date;
+	?Replydate Date;
+	?DeliveryDate Date;
+	?PaymentTermname Name;
+	?Shipmenttermcode null;
+	?Shipmentmethodcode null;
+	?Shipfrom null;
+	?Shipto null;
+	?Comments Note;
+	?Amountsubtotal Amount;
+	?Discount Count;
+	?Amounttotal Amount;
+	?Itemserial null;
+	?Itemid Item;
+	?Itemcode Code;
+	?Itemname Name;
+	?Itemnameadd null;
+	?Receiveraddresscode Code;
+	?Receiveraddressname Name;
+	?Qty Quantity;
+	?Umcode Code;
+	?DeliveryPrice Price;
+	?DeliveryCurrencycode Code;
+	?DeliveryDatedetail null;
+	?Replydeliverydatedetail null;
+	?Purchaseprice Price;
+	?Purchasecurrencycode Code;
+	?Commentsdetail null;
+	?Inquirycodemeisai null;
+};
+

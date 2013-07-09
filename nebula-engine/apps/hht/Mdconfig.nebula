@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("1")
+tx Mdconfig {
+	!Mdconfigid ID;
+	Mdtablename Name;
+	Mdcolumnname Name;
+	ValueSource null;
+	?Qlname Name;
+	DateManageflag null;
+	DateLastupdated Date;
+};
+

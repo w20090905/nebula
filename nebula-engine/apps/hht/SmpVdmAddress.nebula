@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type SmpVdmAddress {
+	SequenceNum SmpVdmNotification;
+	?Username Name;
+	?AppName Name;
+	?EnhancedNotification null;
+	?Proxy null;
+	?Slotretrievaltime null;
+};
+

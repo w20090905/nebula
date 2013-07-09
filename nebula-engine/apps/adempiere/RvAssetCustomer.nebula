@@ -1,28 +1,23 @@
 @Remarks("")
 @Refby("0")
 type RvAssetCustomer {
-	AAssetId AAsset;
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;
-	Created null;
-	Createdby null;
-	Updated null;
-	Updatedby null;
+	AAssetId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;
 	?Help;
-	AAssetGroupId AAssetGroup;
-	?MProductId MProduct;
+	AAssetGroupId ID;
+	?MProductId ID;
 	?Serno Code;
 	?LOT;
 	?Versionno Code;
 	?Guaranteedate Date;
 	?Assetservicedate Date;
-	?CBpartnerId CBpartner;
-	?CBpartnerLocationId CBpartnerLocation;
-	?AdUserId AdUser;
+	?CBpartnerId ID;
+	?CBpartnerLocationId ID;
+	?AdUserId ID;
 	?DeliveryCount Count;
 };
 

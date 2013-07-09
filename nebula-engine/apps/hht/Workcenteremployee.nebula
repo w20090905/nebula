@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Workcenteremployee {
+	!Workcenteremployeeid ID;
+	Workcenterid Workcenter;
+	Employeeid Employee;
+	Capability null;
+	?Comments Note;
+};
+

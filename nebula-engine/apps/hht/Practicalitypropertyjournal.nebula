@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx Practicalitypropertyjournal {
+	!Practicalitypropertyjournalid ID;
+	Practicalityid Practicality;
+	Createdate Date;
+	Relatedtrantype null;
+	Relatedtranid ID;
+	Relatedtrancode Code;
+	Partnerid ID;
+	?Contactid Contact;
+	?Ownerid ID;
+	?Comments Note;
+	DateLastupdated Date;
+};
+

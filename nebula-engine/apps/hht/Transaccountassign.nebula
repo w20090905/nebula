@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Transaccountassign {
+	!Transaccountassignid ID;
+	Orgid Organization;
+	?Transtype null;
+	Debitglaccountid ID;
+	Creditglaccountid ID;
+	?IsPublic YesNo;
+};
+

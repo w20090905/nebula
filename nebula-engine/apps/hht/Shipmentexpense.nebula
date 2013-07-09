@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx Shipmentexpense {
+	!Shipmentexpenseid ID;
+	Expensetypecode Code;
+	Shipmentid Shipment;
+	?Bearingorgid ID;
+	?Carrier null;
+	?Term null;
+	?Vehicleno null;
+	?Amount;
+	?Remark null;
+	?Occuratedate Date;
+	?ReferenceNo Code;
+};
+

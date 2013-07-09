@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx InvoiceGrouppolicy {
+	!InvoiceGrouppolicyid ID;
+	SourceOrg null;
+	?SalesRep null;
+	?Transaction null;
+	?PaymentTermid null;
+	?Currency null;
+	?Dept null;
+	?Ordertype Attr;
+};
+

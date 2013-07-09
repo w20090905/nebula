@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Stgrouppolicy {
+	!Stgrouppolicyid ID;
+	?Shipmenttype Attr;
+	?Seller null;
+	Buyer null;
+	?Shipfrom null;
+	Shipto null;
+	?Carrier null;
+	?Shipmentmethod null;
+	?DeliveryDate null;
+	?Orgid Organization;
+};
+

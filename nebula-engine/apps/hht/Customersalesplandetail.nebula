@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+tx Customersalesplandetail {
+	!Customersalesplandetailid ID;
+	Customersalesplanid Customersalesplan;
+	?Periodtype null;
+	?Periodnumber null;
+	?Measuretype Length;
+	?Target null;
+	?Actual null;
+	?Achievementrate Rate;
+	?Comments Note;
+	?SalesPlanid SalesPlan;
+	?Attr31 null;
+	?Attr32 null;
+	?Attr33 null;
+};
+

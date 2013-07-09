@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("7")
+tx Pricingproc {
+	!Pricingprocid ID;
+	?Pricingproccode Code;
+	?Ownerorgid ID;
+	?Orgid Organization;
+	?Description;
+	?Maker null;
+	?Createdate Date;
+	?Datalastupdated null;
+	?Modified null;
+	?IsFinal YesNo;
+};
+

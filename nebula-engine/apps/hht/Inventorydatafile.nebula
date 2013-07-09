@@ -1,0 +1,26 @@
+@Remarks("")
+@Refby("6")
+tx Inventorydatafile {
+	!Inventorydatafileid ID;
+	Filename;
+	Orgid Organization;
+	?Batchno null;
+	Filestatus null;
+	?Checkstatus null;
+	Receivedate Date;
+	Createdate Date;
+	?TotalQty Quantity;
+	?Passqty Quantity;
+	?ErrorQty Quantity;
+	?Deleteqty Quantity;
+	?Warnqty Quantity;
+	?Startdate Date;
+	?Enddate Date;
+	?Eaistatus null;
+	?Canceldate Date;
+	?Reffileid null;
+	?Description;
+	?Invdate Date;
+	?Maker null;
+};
+

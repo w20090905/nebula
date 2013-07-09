@@ -1,18 +1,13 @@
 @Remarks("")
 @Refby("0")
 type CRfqresponselineqtyV {
-	CRfqresponselineId CRfqresponseline;
-	CRfqresponselineqtyId CRfqresponselineqty;
-	CRfqlineqtyId CRfqlineqty;
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;
-	Created null;
-	Createdby null;
-	Updated null;
-	Updatedby null;
-	?AdLanguage Attr;
-	CUomId CUom;
+	CRfqresponselineId ID;
+	CRfqresponselineqtyId ID;
+	CRfqlineqtyId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	?AdLanguage String;
+	CUomId ID;
 	?Uomsymbol Symbol;
 	Qty Quantity;
 	Price;

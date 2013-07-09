@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("1")
+tx Offeraddress {
+	!Offeraddressid ID;
+	?Orgid Organization;
+	EntityId ID;
+	?EntityType Attr;
+	?Originaladdressid ID;
+	Address Name;
+	Addressroletype null;
+	?Receiver null;
+	?Cityname Name;
+	CountryCode Code;
+	Regioncode Code;
+	?Portcode Code;
+	Zipcode Code;
+	?Address null;
+};
+

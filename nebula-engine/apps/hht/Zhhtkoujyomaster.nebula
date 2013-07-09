@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtkoujyomaster {
+	!Sequenceid Combocodesequence;
+	Koujyocd null;
+	Torihikicd null;
+	?Createtime null;
+	?Createuser null;
+	?Updatetime null;
+	?Updateuser null;
+};
+

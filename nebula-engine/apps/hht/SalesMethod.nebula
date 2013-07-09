@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("2")
+tx SalesMethod {
+	!SalesMethodid ID;
+	SalesMethodcode Code;
+	SalesMethodname Name;
+	?Description;
+	DateLastupdated Date;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Glaccountlang {
+	!Glaccountlangid ID;
+	Glaccountid Glaccount;
+	LanguageCode Lang;
+	?Accountname Name;
+	?Description;
+};
+

@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+type SmpVdeEventLog {
+	?EventOccurrenceId SmpVdeEventOccurrence;
+	?Entry null;
+	?Author null;
+	?TimesTamp null;
+	?Timezone Count;
+	?Severity null;/* -1 */
+	?EventTestId ID;/* -1 */
+	?EventTestSeverity null;/* -1 */
+};
+

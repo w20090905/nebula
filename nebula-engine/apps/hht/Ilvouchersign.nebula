@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx Ilvouchersign {
+	!Ilvouchersignid ID;
+	Ilbooksetid ID;
+	Vouchersignid Vouchersign;
+	DateLastupdated Date;
+};
+

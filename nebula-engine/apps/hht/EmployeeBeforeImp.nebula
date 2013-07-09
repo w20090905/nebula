@@ -1,0 +1,36 @@
+@Remarks("")
+@Refby("0")
+type EmployeeBeforeImp {
+	Employeeid Employee;
+	Orgid Organization;
+	?Officeaddressid ID;
+	?Addressid Address;
+	Employeecode Code;
+	Deptid Department;
+	?Titleid ID;
+	Employeename Name;
+	?FirstName;
+	?LastName;
+	?Gender null;
+	?Jobtitlecode null;
+	?Educationlevelcode null;
+	?Marriagestatus null;
+	?Birthday;
+	?Entrydate Date;
+	?Leavedate Date;
+	?Idcardnumber null;
+	?Privatebankaccount null;
+	?Officephone Phone;
+	?Faxnumber null;
+	?Homephone Phone;
+	?Mobilephone Phone;
+	?EMail;
+	?Bpnumber null;
+	Status;
+	?DateLastupdated Date;
+	?Parentemployeeid ID;
+	?Grade null;
+	?IsBottom YesNo;
+	?Glaccountid Glaccount;
+};
+

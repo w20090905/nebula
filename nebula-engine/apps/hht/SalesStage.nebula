@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("3")
+tx SalesStage {
+	!SalesStageid ID;
+	SalesStageno SeqNo;
+	SalesStagecode Code;
+	SalesStagename Name;
+	?Description;
+};
+

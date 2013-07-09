@@ -1,0 +1,49 @@
+@Remarks("")
+@Refby("0")
+type Twxikozubanm {
+	?Zubanmid Twxzubanm;
+	?DelF null;
+	?Kojocd null;
+	?Zuban String;
+	?Hinban null;
+	?Zureki String;
+	?Sonae null;
+	?Hinmei null;
+	?Tani null;
+	?ChumonCd null;
+	?SiireCd null;
+	?HinmeiCd null;
+	?JyoubiCd null;
+	?Ruibetu null;
+	?KensyuKbn null;
+	?KeiyakuFuka null;
+	?JyuTanka null;
+	?HatTanka null;
+	?TankaDate null;
+	?JyuTanka1 null;
+	?HatTanka1 null;
+	?TankaDate1 null;
+	?JyuTanka2 null;
+	?HatTanka2 null;
+	?TankaDate2 null;
+	?JyuTanka3 null;
+	?HatTanka3 null;
+	?TankaDate3 null;
+	?JyuTanka4 null;
+	?HatTanka4 null;
+	?TankaDate4 null;
+	?JyuTanka5 null;
+	?HatTanka5 null;
+	?TankaDate5 null;
+	?Groupcd null;
+	?SyuturyokuKbn null;
+	?Comento null;
+	?KyoteiKbn null;
+	?SisyuSyain null;
+	?Insymd null;
+	?Updymd null;
+	?Updtime null;
+	?Status;
+	?Pattern null;
+};
+

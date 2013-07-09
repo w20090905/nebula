@@ -1,0 +1,68 @@
+@Remarks("")
+@Refby("3")
+tx Receiptdetail {
+	!Receiptdetailid ID;
+	Receiptid Receipt;
+	Itemid Item;
+	?DeliveryDetailid DeliveryDetail;
+	?Needinspection null;
+	?Orderid Ord;
+	?Orderdetailid Orderdetail;
+	?QtyShipped Quantity;
+	?QtyReceived Quantity;
+	?QtyInspected Quantity;
+	?QtyAcceptEd Quantity;
+	?QtyInvalid ID;
+	?Complaintreasoncode null;
+	Invstatus null;
+	?Price;
+	?Saleflag null;
+	?Inventoryflag null;
+	?Arflag null;
+	?Amount;
+	?TaxRate Rate;
+	?Pretaxprice Price;
+	?Pretaxamount Amount;
+	?TaxAmount Amount;
+	?Comments Note;
+	?LineStatus Line;
+	?Costprice Cost;
+	?Umcode Code;
+	?Ordertypeid Ordertype;
+	?PaymentMethod null;
+	?Allocflag null;
+	?Warehouseid Physicalwarehouse;
+	?InvoiceMethod null;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Baseqty Quantity;
+	?Localamount Amount;
+	?Localprice Price;
+	?Lotno null;
+	@Remarks("ＳＡＰ評価タイプ")
+	?Sapevaluation null;
+	@Remarks("在庫認可番号")
+	?Inventorycode Code;
+	@Remarks("ＳＡＰロットＮｏ")
+	?Saplotno null;
+	Zhhteaiflag String;/* 0  */
+	?QtyRemanet Quantity;
+	@Remarks("末端単価")
+	?Endprice Price;
+	@Remarks("口?率")
+	?Commissionrate Rate;
+	?Convertfactor null;
+	?PriceCoefficient Price;
+	?TaxEdamount Amount;
+	?Localnettaxedamount Amount;
+	?Exchagetype Attr;
+	?Exchagedatecode Code;
+	?Refsodetailid ID;
+	?Unitprice Unit;
+	?Tmpseqid ID;
+};
+

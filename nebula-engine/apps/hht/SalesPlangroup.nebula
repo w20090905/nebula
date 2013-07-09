@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("3")
+tx SalesPlangroup {
+	!SalesPlangroupid ID;
+	Orgid Organization;
+	Plangroupcode Code;
+	Plangroupname Name;
+	?Description;
+	DateLastupdated Date;
+};
+

@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+tx Itemcustomer {
+	!Itemcustomerid ID;
+	Orgid Organization;
+	Itemid Item;
+	Customerid ID;
+	Customeritemcode Code;
+	Customeritemname Name;
+	Availabledate Date;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr5 null;
+	?Attr6 null;
+	?Attr7 null;
+	?Attr8 null;
+	?Tranleadtime Count;
+	?IsPrimarycustomer YesNo;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Invtranlink {
+	!Invtranlinkid ID;
+	?Relatedtrantype Attr;
+	?Dcflag null;
+	?FieldName Name;
+	?Description;
+};
+

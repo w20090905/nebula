@@ -4,19 +4,9 @@ type GlDistribution {
 	@Remarks("General Ledger Distribution")
 	!GlDistributionId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")
@@ -26,63 +16,63 @@ type GlDistribution {
 	@Remarks("The type of posted amount for the transaction")
 	?PostIngtype Attr;
 	@Remarks("Document type or rules")
-	?CDoctypeId CDoctype;
+	?CDoctype;
 	@Remarks("Rules for accounting")
-	CAcctschemaId CAcctschema;
+	CAcctschema;
 	@Remarks("Match any value of the Organization segment")
 	Anyorg YesNo;/* 'Y'  */
 	@Remarks("Organizational entity within client")
-	?OrgId AdOrg;
+	?Org AdOrg;
 	@Remarks("Match any value of the Account segment")
 	Anyacct YesNo;/* 'Y'  */
 	@Remarks("Account used")
-	?AccountId CElementvalue;
+	?Account CElementvalue;
 	@Remarks("Match any value of the Product segment")
 	Anyproduct YesNo;/* 'Y'  */
 	@Remarks("Product, Service, Item")
-	?MProductId MProduct;
+	?MProduct;
 	@Remarks("Match any value of the Business Partner segment")
 	Anybpartner YesNo;/* 'Y'  */
 	@Remarks("Identifies a Business Partner")
-	?CBpartnerId CBpartner;
+	?CBpartner;
 	@Remarks("Match any value of the Project segment")
 	Anyproject YesNo;/* 'Y'  */
 	@Remarks("Financial Project")
-	?CProjectId CProject;
+	?CProject;
 	@Remarks("Match any value of the Campaign segment")
 	Anycampaign YesNo;/* 'Y'  */
 	@Remarks("Marketing Campaign")
-	?CCampaignId CCampaign;
+	?CCampaign;
 	@Remarks("Match any value of the Activity segment")
 	Anyactivity YesNo;/* 'Y'  */
 	@Remarks("Business Activity")
-	?CActivityId CActivity;
+	?CActivity;
 	@Remarks("Match any value of the Sales Region segment")
 	Anysalesregion YesNo;/* 'Y'  */
 	@Remarks("Sales coverage region")
-	?CSalesRegionId CSalesRegion;
+	?CSalesRegion;
 	@Remarks("Match any value of the Transaction Organization segment")
 	Anyorgtrx YesNo;/* 'Y'  */
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrxId AdOrg;
+	?AdOrgtrx AdOrg;
 	@Remarks("Match any value of the Location To segment")
 	Anylocto YesNo;/* 'Y'  */
 	@Remarks("Location that inventory was moved to")
-	?CLoctoId CLocation;
+	?CLocto CLocation;
 	@Remarks("Match any value of the Location From segment")
 	Anylocfrom YesNo;/* 'Y'  */
 	@Remarks("Location that inventory was moved from")
-	?CLocfromId CLocation;
+	?CLocfrom CLocation;
 	@Remarks("Match any value of the User 1 segment")
 	Anyuser1 YesNo;/* 'Y'  */
 	@Remarks("User defined list element #1")
-	?User1Id CElementvalue;
+	?User1 CElementvalue;
 	@Remarks("Match any value of the User 2 segment")
 	Anyuser2 YesNo;/* 'Y'  */
 	@Remarks("User defined list element #2")
-	?User2Id CElementvalue;
+	?User2 CElementvalue;
 	@Remarks("Sum of the Percent details")
-	Percenttotal Percent;
+	Percenttotal Number;
 	@Remarks("Element is valid")
 	IsValid YesNo;/* 'N'  */
 	@Remarks("Process Now")

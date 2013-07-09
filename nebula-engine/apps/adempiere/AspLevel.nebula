@@ -2,31 +2,21 @@
 @Refby("9")
 type AspLevel {
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;/* NULL   */
+	AdClientId ID;/* NULL   */
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;/* NULL   */
+	AdOrgId ID;/* NULL   */
 	@Remarks("ASP Level")
 	!AspLevelId ID;
 	@Remarks("ASP Module")
-	AspModuleId AspModule;
-	@Remarks("Date this record was created")
-	Created null;
-	@Remarks("User who created this records")
-	Createdby null;
+	AspModule;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Comment or Hint")
 	?Help;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Process Now")
 	?Processing YesNo;
-	@Remarks("Date this record was updated")
-	Updated null;
-	@Remarks("User who updated this records")
-	Updatedby null;
 	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
 };

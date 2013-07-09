@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Noteslang {
+	!Noteslangid ID;
+	Notesid Notes;
+	LanguageCode Lang;
+	Nt null;
+	?Nc null;
+};
+

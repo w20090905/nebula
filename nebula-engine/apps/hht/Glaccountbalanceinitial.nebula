@@ -1,0 +1,29 @@
+@Remarks("")
+@Refby("0")
+tx Glaccountbalanceinitial {
+	!Glaccountbalanceinitialid ID;
+	Glaccountid Glaccount;
+	Booksetid Bookset;
+	Accyearid Accountingyear;
+	Accperiodid Accountingperiod;
+	?Currencycode Code;
+	?Grade null;
+	?Dcflag null;
+	?Initialamount Amount;
+	?Debitamount Amount;
+	?Creditamount Amount;
+	?Endamount Amount;
+	?Initialamountfore null;
+	?Debitamountfore null;
+	?Creditamountfore null;
+	?Endamountfore null;
+	?Profitlossyear null;
+	?Profitlossyearfore null;
+	?Description;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Exchangerate Rate;
+	?Originalbooksetid ID;
+	?Originalglaccountid ID;
+};
+

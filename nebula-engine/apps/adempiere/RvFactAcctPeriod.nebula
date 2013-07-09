@@ -1,17 +1,17 @@
 @Remarks("")
 @Refby("0")
 type RvFactAcctPeriod {
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	CAcctschemaId CAcctschema;
+	AdClientId ID;
+	AdOrgId ID;
+	CAcctschemaId ID;
 	AccountId ID;
-	?CPeriodId CPeriod;
-	?GlCategoryId GlCategory;
-	?GlBudgetId GlBudget;
-	?CTaxId CTax;
-	?MLocatorId MLocator;
+	?CPeriodId ID;
+	?GlCategoryId ID;
+	?GlBudgetId ID;
+	?CTaxId ID;
+	?MLocatorId ID;
 	PostIngtype Attr;
-	CCurrencyId CCurrency;
+	CCurrencyId ID;
 	?AmtSourcedr Amount;
 	?AmtSourcecr Amount;
 	?AmtSource Amount;
@@ -19,17 +19,17 @@ type RvFactAcctPeriod {
 	?AmtAcctcr Amount;
 	?AmtAcct Amount;
 	?Rate;
-	?MProductId MProduct;
-	?CBpartnerId CBpartner;
+	?MProductId ID;
+	?CBpartnerId ID;
 	?AdOrgtrxId ID;
 	?CLocfromId ID;
 	?CLoctoId ID;
-	?CSalesRegionId CSalesRegion;
-	?CProjectId CProject;
-	?CCampaignId CCampaign;
-	?CActivityId CActivity;
+	?CSalesRegionId ID;
+	?CProjectId ID;
+	?CCampaignId ID;
+	?CActivityId ID;
 	?User1Id ID;
 	?User2Id ID;
-	?AAssetId AAsset;
+	?AAssetId ID;
 };
 

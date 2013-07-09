@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx SmpVtpUdclassColumns {
+	!ClassRefId SmpVtpUdclassDefn;
+	!ColumnSeq Length;
+	ColumnLabel null;
+	Function1 null;
+	Column1 Length;
+	Operation null;
+	Function2 null;
+	Column2 Length;
+	KeyColumn null;
+};
+

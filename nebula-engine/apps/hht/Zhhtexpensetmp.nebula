@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("14")
+tx Zhhtexpensetmp {
+	!Tmpid ID;
+	?Customerpono null;
+	?Expenseclasscode Code;
+	?Partnerorgcode Code;
+	?PaymentTerm String;
+	?Currencycode Code;
+	?Exchagedatecode Code;
+	?Currencyrate Rate;
+	?Amount;
+	?Extmpid ID;
+	?Exchagetype Attr;
+};
+

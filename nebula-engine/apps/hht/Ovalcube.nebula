@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("1")
+tx Ovalcube {
+	!Ovalcubeid ID;
+	Cubename Name;
+	Subcubename Name;
+	FieldName Name;
+	Status;
+	?Startdate Date;
+	?Targettable null;
+	?Bgorgid ID;
+	?ProcFlag null;
+};
+

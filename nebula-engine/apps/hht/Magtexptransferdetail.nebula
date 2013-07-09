@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Magtexptransferdetail {
+	!Magtexptransferdetailid ID;
+	Transinresponsecenterid ID;
+	Gsvalue null;
+	Propweight Weight;
+	Magtexptransferid Magtexptransfer;
+};
+

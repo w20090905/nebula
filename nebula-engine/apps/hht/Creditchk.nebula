@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Creditchk {
+	!Creditchkid ID;
+	?IsInway YesNo;
+	?IsUnallocline YesNo;
+	?Involveordertype Attr;
+	?Orgid Organization;
+};
+

@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtkensyutanihenkan {
+	!Sequenceid Combocodesequence;
+	Tanicd null;
+	?Tanimei null;
+	?TanimeiKana null;
+	SapTani null;
+	?SisyuSyain null;
+	?Createtime null;
+	?Createuser null;
+	?Updatetime null;
+	?Updateuser null;
+};
+

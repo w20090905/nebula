@@ -2,42 +2,32 @@
 @Refby("4")
 tx AdWfProcess {
 	@Remarks("Actual Workflow Process Instance")
-	!AdWfProcessId AdWfProcess;
+	!AdWfProcess;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("Workflow or combination of tasks")
-	AdWorkflowId AdWorkflow;
+	AdWorkflow;
 	@Remarks("Responsible for Workflow Execution")
-	AdWfResponsibleId AdWfResponsible;
+	AdWfResponsible;
 	@Remarks("User within the system - Internal or Business Partner Contact")
-	?AdUserId AdUser;
+	?AdUser;
 	@Remarks("State of the execution of the workflow")
 	Wfstate null;
 	@Remarks("System Message")
-	?AdMessageId AdMessage;
+	?AdMessage;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("Text Message")
-	?TextMsg Msg;
+	?TextMsg Note;
 	@Remarks("Database Table information")
-	AdTableId AdTable;
+	AdTable;
 	@Remarks("Direct internal record ID")
 	RecordId ID;
 	@Remarks("Indicates if this request is of a high, medium or low priority.")
-	?Priority null;
+	?Priority;
 };
 

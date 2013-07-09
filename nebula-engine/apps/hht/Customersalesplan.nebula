@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("1")
+tx Customersalesplan {
+	!Customersalesplanid ID;
+	SalesPlanid SalesPlan;
+	Analyzecodeid Analyzecode;
+	Analyzevalue String;
+	?Parentid ID;
+	Grade null;
+	IsBottom YesNo;
+	?LineNum Line;
+	?Analyzevalueid ID;
+};
+

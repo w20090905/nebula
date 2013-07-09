@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("1")
+tx Twxkojocdm {
+	Kojyocd null;
+	?Kojyomei null;
+	?Kojyokana null;
+	?MituSiharai null;
+	@Remarks("買掛出力先区分(20100924 VARCHAR2->NUMBER(19) 修正 )")
+	?KaiakeOut null;
+	?SisyuSyain null;
+	@Remarks("登録日")
+	?Insymd null;
+	@Remarks("更新日")
+	?Updymd null;
+	@Remarks("ID")
+	!Kojocdmid ID;
+	?ReportKbn null;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Maker null;
+};
+

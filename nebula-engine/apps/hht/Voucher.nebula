@@ -1,0 +1,47 @@
+@Remarks("")
+@Refby("8")
+tx Voucher {
+	!Voucherid ID;
+	Orgid Organization;
+	Booksetid Bookset;
+	Accyearid Accountingyear;
+	Accperiodid Accountingperiod;
+	?Vouchersigncode Code;
+	?Vouchercode Code;
+	?Numberofattachments null;
+	?Numberoflines Line;
+	?TotalDebitamount Amount;
+	?TotalCreditamount Amount;
+	?Maker null;
+	?Createdate Date;
+	?Docdate Date;
+	?Checker null;
+	?Checkdate Date;
+	?PostEr null;
+	?PostDate Date;
+	?Relatedtranstype null;
+	?Relatedtransid ID;
+	?Relatedtransdate Date;
+	?DateLastupdated Date;
+	?Comments Note;
+	?Status;
+	?IsSystem YesNo;
+	?Restrictionstatus null;
+	?Endadjustflag null;
+	?Vouchertypecode null;
+	?Relatedvouchercode Code;
+	?Gldate Date;
+	?Relatedvoucherid ID;
+	?Viflag null;
+	?Voucherinterfaceid Voucherinterface;
+	?Predefinedflag null;
+	?Predefinedvoucherid ID;
+	?Relatedtranscode Code;
+	SourceOrgid ID;
+	?Currencycode Code;
+	?Exchangerate Rate;
+	?ExportTaskcode Code;
+	?Favoucherid ID;
+	?Offsettype null;
+};
+

@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx Sopdetail {
+	!Sopdetailid ID;
+	Sopid Sop;
+	Sophierarchyid Sophierarchy;
+	Kpicode Code;
+	?Startdate Date;
+	?Weight;
+	?Amount;
+	?Adjustamount Amount;
+	Status;
+	Maker null;
+	Createdate Date;
+	DateLastupdated Date;
+};
+

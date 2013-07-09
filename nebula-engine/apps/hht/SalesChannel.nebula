@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("13")
+tx SalesChannel {
+	!SalesChannelid ID;
+	?Orgid Organization;
+	?SalesChannelcode Code;
+	?SalesChannelname Name;
+	?Parentsaleschannelid ID;
+	?Grade null;
+	?IsBottom YesNo;
+	?Lft null;
+	?Rgt null;
+};
+

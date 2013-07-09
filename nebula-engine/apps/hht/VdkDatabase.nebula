@@ -1,0 +1,28 @@
+@Remarks("")
+@Refby("0")
+type VdkDatabase {
+	?VdkId ID;
+	?VdkName Name;
+	?VdkParentId ID;
+	?VdkModelType null;
+	?VdkProductName Name;
+	?VdkModelVersion null;
+	?VdkTotalDatafiles null;
+	?VdkDegreeOfParallelism null;
+	?VdkParallelPercentage null;
+	?VdkBlockCommonHdrTypeSize Size;
+	?VdkExtentControlTypeSize Size;
+	?VdkExtentTableTypeSize Size;
+	?VdkBlockAddrTypeSize Size;
+	?VdkIndexBranchHdrTypeSize Size;
+	?VdkIndexLeafHdrTypeSize Size;
+	?VdkTxnFixedHdrTypeSize Size;
+	?VdkTxnVarHdrTypeSize Size;
+	?VdkPqoInstalled null;
+	?VdkOpsInstalled null;
+	?VdkDistributedInstalled null;
+	?VdkProceduralInstalled null;
+	?VdkPartitioningInstalled null;
+	?VdkBitmapInstalled null;
+};
+

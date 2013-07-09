@@ -1,0 +1,25 @@
+@Remarks("")
+@Refby("22")
+tx PaymentTerm {
+	!PaymentTermid ID;
+	?Orgid Organization;
+	PaymentTermcode Code;
+	?PaymentTermname Name;
+	?Comments Note;
+	?Baseondatetype null;
+	?Adddays Count;
+	?DiscountDays1 null;
+	?Discount1 null;
+	?DiscountDays2 null;
+	?Discount2 null;
+	?DiscountDays3 null;
+	?Discount3 null;
+	?PaymentDuedays Count;
+	?PaymentPercent Percent;
+	?Descriptions Description;
+	?Createdate Date;
+	?Maker null;
+	?DateLastupdated Date;
+	?Status;
+};
+

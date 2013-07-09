@@ -1,0 +1,25 @@
+@Remarks("")
+@Refby("2")
+type Predefindvoucher {
+	!Predefindvoucherid ID;
+	?Predefindvouchercode Code;
+	*Name;
+	?Description;
+	Booksetid Bookset;
+	?Orgid Organization;
+	?Vouchersigncode Code;
+	?Vouchercode Code;
+	?Numberoflines Line;
+	?Beginperiod null;
+	?Endperiod null;
+	?Cycle null;
+	?Necessaryflag null;
+	Createdate Date;
+	?Maker null;
+	DateLastupdated Date;
+	Status;
+	?Monthruntimes null;
+	?Mrtcontroltype null;
+	?Currentruntimes null;
+};
+

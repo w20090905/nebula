@@ -1,0 +1,180 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtsouploadtmp {
+	!Souploadtmpid ID;
+	Tmpid Zhhtexpensetmp;
+	?LineNo Line;
+	?Contracttypecode Code;
+	?Customerpono null;
+	?Buyercode Code;
+	?Receiveraddresscode Code;
+	?Docdate Date;
+	?TaxCode Code;
+	?Exchagedatecode Code;
+	?Currencycode Code;
+	?Zctrate Rate;
+	?PaymentMethodname Name;
+	?Lcno null;
+	?Itemcode Code;
+	?Orderqty Quantity;
+	?Umname Name;
+	?Unitprice Unit;
+	?DeliveryDate Date;
+	?DeliveryDate2 null;
+	?Comments Note;
+	?ProductCountry null;
+	?Purchasecountry null;
+	?Sunstandardtype Attr;
+	?Retandrecpdate Date;
+	?Employeecode Code;
+	?Saplotno null;
+	?Sapevaluation null;
+	?Dealflag null;
+	@Remarks("在庫認可No.")
+	?Inventorycode Code;
+	@Remarks("輸管審査No.")
+	?Transno null;
+	@Remarks("E/L区分")
+	?Eltype Attr;
+	@Remarks("運送方法")
+	?Shipmentmethod null;
+	@Remarks("支払方法")
+	?PaymentMethod null;
+	@Remarks("オーダー特性")
+	?Orderproperty null;
+	@Remarks("備考")
+	?Edicomments Note;
+	@Remarks("末端単価")
+	?Endprice Price;
+	@Remarks("口銭率")
+	?Commissionrate Rate;
+	@Remarks("EAR要否")
+	?Earflag null;
+	@Remarks("別表項番")
+	?OtherCode Code;
+	@Remarks("サイズ/寸法")
+	?Dimension null;
+	@Remarks("アイテム特性１")
+	?Itempropertya null;
+	@Remarks("アイテム特性2")
+	?Itempropertyb null;
+	@Remarks("明細カテゴリ")
+	?Concategory null;
+	@Remarks("支払条件")
+	?PaymentTermname Name;
+	@Remarks("仕入先コード")
+	?Sellercode Code;
+	@Remarks("支払条件PO")
+	?PaymentTermnamepo null;
+	@Remarks("為替予約NoPO")
+	?Exchagedatecodepo null;
+	@Remarks("出荷先コードPO")
+	?Receiveraddresscodepo null;
+	@Remarks("消費税コード")
+	?TaxCodepo null;
+	@Remarks("LCNOPO")
+	?Lcnopo null;
+	@Remarks("通貨PO")
+	?Currencycodepo null;
+	@Remarks("為替レートPO")
+	?Zctratepo null;
+	@Remarks("単価PO")
+	?Unitpricepo Unit;
+	@Remarks("末端単価PO")
+	?Endpricepo null;
+	@Remarks("口銭率PO")
+	?Commissionratepo null;
+	@Remarks("要求納期PO")
+	?DeliveryDatepo null;
+	@Remarks("要求納期2PO")
+	?DeliveryDate2po null;
+	@Remarks("オーダー特性PO")
+	?Orderpropertypo null;
+	@Remarks("備考PO")
+	?Edicommentspo null;
+	@Remarks("アイテム特性１PO")
+	?Itempropertyapo null;
+	@Remarks("アイテム特性2PO")
+	?Itempropertybpo null;
+	@Remarks("顧客注番PO")
+	?Commentspo null;
+	@Remarks("作番")
+	?Ctxtm01 null;
+	@Remarks("運送条件")
+	?Shipmentterm null;
+	@Remarks("運送条件text")
+	?Incoterms null;
+	@Remarks("得意先発注日付")
+	?Customerpurdate Date;
+	@Remarks("発注コメント（漢字）")
+	?Ordcomment null;
+	@Remarks("発注コメント（カナ）")
+	?Ordcommentkn null;
+	@Remarks("納入要件（漢字）")
+	?Receiverdemand null;
+	@Remarks("納入要件（カナ）")
+	?Receiverdemandkj null;
+	@Remarks("レートタイプ")
+	?Ratetype Attr;
+	@Remarks("ﾒｰｶｰﾛｯﾄNo")
+	?Makelotno null;
+	@Remarks("運送条件po")
+	?Shipmenttermpo null;
+	@Remarks("運送条件textpo")
+	?Incotermspo null;
+	@Remarks("得意先発注日付po")
+	?Customerpurdatepo null;
+	@Remarks("発注コメント（漢字）po")
+	?Ordcommentpo null;
+	@Remarks("発注コメント（カナ）po")
+	?Ordcommentknpo null;
+	@Remarks("納入要件（漢字）po")
+	?Receiverdemandpo null;
+	@Remarks("納入要件（カナ）po")
+	?Receiverdemandkjpo null;
+	@Remarks("レートタイプpo")
+	?Ratetypepo null;
+	@Remarks("ﾒｰｶｰﾛｯﾄNopo")
+	?Makelotnopo null;
+	?Inquirycode Code;
+	?Createkbn YesNo;
+	?Torihikicd null;
+	?Kigyocd null;
+	?Kojocd null;
+	?Souhuno null;
+	?Groupcd null;
+	?Chumonkbn null;
+	?Testkbn null;
+	?Hinmei null;
+	?Karikakakukbn null;
+	?Nonyusijikbn null;
+	?Hachudate Date;
+	?Keiyakujoken null;
+	?Hikiwatasijoken null;
+	?Bukacd null;
+	?Zumensiyosyo String;
+	?Maisu null;
+	?Hinban null;
+	?Zuban String;
+	?Zureki String;
+	?Koubaisyacdcode Code;
+	?Sikyukbn null;
+	?Kensakbn null;
+	?Jyohikbn null;
+	?Hachukbn null;
+	?Hinsyacd null;
+	?Senyoran null;
+	?Syuturyokukbn null;
+	?Sakubanafter null;
+	?Sibanafter null;
+	?Osamesaki null;
+	?Siyou null;
+	?Ctxtd01 null;
+	?Ctxtd02 null;
+	?Ctxtd04 null;
+	?Ctxtd07 null;
+	?Ctxtd10 null;
+	?Biko null;
+	?Nyukayotei null;
+};
+

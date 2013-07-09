@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type VdkRepControl {
+	?VdkProdVersion null;
+	?VdkReposVersion null;
+	?VdkRulesLoaded null;
+	?VdkOldProdVersion null;
+	?VdkOldReposVersion null;
+};
+

@@ -1,0 +1,28 @@
+@Remarks("")
+@Refby("1")
+tx Container {
+	!Containerid ID;
+	Orgid Organization;
+	?Itemid Item;
+	?Containercode Code;
+	?Containertype null;
+	?Containername Name;
+	?Containerdesc null;
+	?Length;
+	?Width;
+	?Height;
+	?Lengthumcode Code;
+	?Volumn null;
+	?Capacity null;
+	?Volumnumcode Code;
+	?Weight;
+	?Bearing null;
+	?Weightumcode Code;
+	?DateLastupdated Date;
+	?Createdate Date;
+	?Maker null;
+	?Fixedassetsid Fixedassets;
+	?Status;
+	?Relatedlocationtype null;
+};
+

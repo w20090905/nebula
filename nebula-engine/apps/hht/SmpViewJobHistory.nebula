@@ -1,0 +1,20 @@
+@Remarks("Status details of each job notification in the repository")
+@Refby("0")
+type SmpViewJobHistory {
+	@Remarks("Internal ID of this job")
+	?JobId SmpVdjJob;
+	@Remarks("Name of this job")
+	?JobName Name;
+	@Remarks("Name of the service this job was submitted against")
+	?TargetName Name;
+	@Remarks("Type of service this job was submitted against")
+	?TargetType Attr;
+	?TargetNlsType Attr;
+	@Remarks("The current number of executions this job has already done")
+	?ExecNum null;
+	@Remarks("Date and time this status was recorded")
+	?TimesTamp null;
+	@Remarks("Status of the exeuction: 1 (Submitted), 2 (Scheduled), 4 (Running), 9 (Success), 11 (Failed), 13 (Deleting), 14 (Deleted), 15 (Expired)")
+	?Status;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtinvlimitmiddle {
+	!Zhhtinvlimitmiddleid ID;
+	?Inventorycode Code;
+	?Orgcode Code;
+	?Ordlimitamount Amount;
+	?Ordlimitcontrolflag null;
+	?Invlimitamount Amount;
+	?Invlimitcontrolflag null;
+};
+

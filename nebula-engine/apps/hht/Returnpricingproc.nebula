@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Returnpricingproc {
+	!Returnpriceprocedureid ID;
+	?Orgid Organization;
+	?Returntype null;
+	Pricingprocid Pricingproc;
+	?Maker null;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Ownerorgid ID;
+	?Orggroupid Orggroup;
+	?Customerid ID;
+};
+

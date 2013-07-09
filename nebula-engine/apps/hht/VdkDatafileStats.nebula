@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+type VdkDatafileStats {
+	?VdkId ID;
+	?VdkDatabaseId VdkDatabase;
+	?VdkFileId ID;
+	?VdkFileName Name;
+	?VdkTablespaceName Name;
+	?VdkBlocks null;
+	?VdkUsedBlk null;
+	?VdkDirtyBlk null;
+	?VdkPhysBlkWrt null;
+	?VdkCollectDate Date;
+};
+

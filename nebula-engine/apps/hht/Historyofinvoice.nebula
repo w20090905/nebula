@@ -1,0 +1,51 @@
+@Remarks("")
+@Refby("0")
+tx Historyofinvoice {
+	!Historyofinvoiceid ID;
+	?Historytype Attr;
+	?Booksetid Bookset;
+	?Createdate Date;
+	?Accountingyearid ID;
+	?Accyear null;
+	?Accountingperiorid ID;
+	?Accperiod null;
+	?Startdate Date;
+	?Enddate Date;
+	?Orgid Organization;
+	?Orgcode Code;
+	?Orgname Name;
+	?Areaid Businessarea;
+	?Areacode Code;
+	?Areaname Name;
+	?Partnerid ID;
+	?Partnercode Code;
+	?Partnername Name;
+	?Partnerareaid ID;
+	?Partnerareacode Code;
+	?Partnerareaname Name;
+	?Partnergroupid ID;
+	?Partnergroupcode Code;
+	?Partnergroupname Name;
+	?Parentmapgroupid ID;
+	?Parentmapgroupcode Code;
+	?Parentmapgroupname Name;
+	InvoiceType null;
+	Araptype null;
+	?Duedate Date;
+	?InvoiceDate Date;
+	?SourceOrgid ID;
+	?SourceOrgcode Code;
+	?SourceOrgname Name;
+	?SalesRep null;
+	?SalesRepname Name;
+	?TotalAmount Amount;
+	?Pretaxamount Amount;
+	?TaxAmount Amount;
+	?TaxRate Rate;
+	?LineCount Line;
+	?Itemcount Count;
+	?Comments Note;
+	Businessperiodid Businessperiod;
+	?Vendorid ID;
+};
+

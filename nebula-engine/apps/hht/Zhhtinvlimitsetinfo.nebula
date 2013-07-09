@@ -1,0 +1,33 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtinvlimitsetinfo {
+	@Remarks("在庫認可設定ID")
+	!Zhhtinvlimitsetinfoid ID;
+	@Remarks("在庫認可設定ｺｰﾄﾞ")
+	Zhhtinvlimitsetinfocode Code;
+	@Remarks("在庫認可No")
+	Inventorycode Code;
+	@Remarks("職判ID")
+	Orgid Organization;
+	@Remarks("職判ｺｰﾄﾞ")
+	Orgcode Code;
+	@Remarks("発注限度額")
+	Ordlimitamount Amount;
+	@Remarks("発注限度制御ﾌﾗｸﾞ")
+	Ordlimitcontrolflag null;
+	@Remarks("在庫限度額")
+	Invlimitamount Amount;
+	@Remarks("在庫限度制御ﾌﾗｸﾞ")
+	Invlimitcontrolflag null;
+	@Remarks("作成者")
+	?Createuserid ID;
+	@Remarks("作成者")
+	?Createdate Date;
+	@Remarks("更新者")
+	?Updateuserid ID;
+	@Remarks("更新日付")
+	?Updatedate Date;
+	@Remarks("作成元")
+	?Source null;
+};
+

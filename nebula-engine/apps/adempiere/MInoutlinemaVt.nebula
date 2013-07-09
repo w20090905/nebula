@@ -1,19 +1,14 @@
 @Remarks("")
 @Refby("0")
 type MInoutlinemaVt {
-	?AdClientId AdClient;
-	?AdOrgId AdOrg;
-	?IsActive YesNo;
-	?Created null;
-	?Createdby null;
-	?Updated null;
-	?Updatedby null;
-	?MInoutId MInout;
-	?MInoutlineId MInoutline;
+	?AdClientId ID;
+	?AdOrgId ID;
+	?MInoutId ID;
+	?MInoutlineId ID;
 	?Line;
-	?MProductId MProduct;
-	?MAttributesetinstanceId MAttributesetinstance;
+	?MProductId ID;
+	?MAttributesetinstanceId ID;
 	?Movementqty Quantity;
-	?MLocatorId MLocator;
+	?MLocatorId ID;
 };
 

@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+type SmpVdeThresholdAssoc {
+	?Id SmpVdeMetricThresholds;/* 300A09090909 */
+	?PrincipalId ID;/* 4E554C4C0A09090909 */
+	?State null;/* 0 */
+};
+

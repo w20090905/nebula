@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type Checkelementlang {
+	!Checkelementlangid ID;
+	Checkelementid Checkelement;
+	?Name;
+	?Description;
+	?LanguageCode Lang;
+};
+

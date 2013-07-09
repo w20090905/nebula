@@ -1,0 +1,46 @@
+@Remarks("")
+@Refby("0")
+tx Twxkaikakemeisai {
+	!Twxkaikakemeisaiid ID;
+	?Zhhtkensyujyohouheadid Zhhtkensyujyohouhead;
+	?Zhhtkensyujyohoudetailid Zhhtkensyujyohoudetail;
+	?Syuturyokukbn null;
+	?Kojyocd null;
+	?Kojyomei null;
+	?Hikiatekbn null;
+	?Torihikisakicd null;
+	?Chuban null;
+	@Remarks("20101101 VARCHAR2(10)をVARCHAR2(30)に修正する")
+	?Zuban String;
+	@Remarks("20101101 VARCHAR2(4)をVARCHAR2(12)に修正する")
+	?Hinban null;
+	?Hinmei null;
+	?Suryou null;
+	?Tanka null;
+	?Hontaikingaku null;
+	?Syohizei null;
+	?Syohizeikbn null;
+	?Kensyubi null;
+	?Tanntou null;
+	?Nounyukbn null;
+	?Jyohikbn null;
+	?Keikino null;
+	?Siiresakimei null;
+	?Siiresakikana null;
+	?Groupcd null;
+	?Bikou null;
+	?Ikkatukeijyoukbn null;
+	?Keijyouym null;
+	?Keijyoukaisu null;
+	?Tanni null;
+	?Siiresakicd null;
+	?Chumoncd null;
+	?Syokuhanid ID;
+	?Sakuseibi null;
+	?PrintFlg null;
+	?PrintDate Date;
+	?Maker null;
+	?Createdate Date;
+	?DateLastupdated Date;
+};
+

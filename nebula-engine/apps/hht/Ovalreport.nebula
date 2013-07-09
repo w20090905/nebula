@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("9")
+tx Ovalreport {
+	!Ovalreportid ID;
+	?Ovalreportcode Code;
+	?Reportcategory null;
+	?Managemethod null;
+	?Privilegeid Privilege;
+	?Reportformat null;
+	Status;
+	?Createdate Date;
+	?DateLastupdated Date;
+	Orgid Organization;
+	?Reportdefinedmethod null;
+	?Rpttemplatename Name;
+	?Reportdatasource null;
+	?Reportlayout null;
+};
+

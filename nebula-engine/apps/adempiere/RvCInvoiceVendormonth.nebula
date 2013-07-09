@@ -1,18 +1,18 @@
 @Remarks("")
 @Refby("0")
 type RvCInvoiceVendormonth {
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	CBpartnerId CBpartner;
-	?MProductCategoryId MProductCategory;
+	AdClientId ID;
+	AdOrgId ID;
+	CBpartnerId ID;
+	?MProductCategoryId ID;
 	?DateInvoiceD Date;
-	?LineNetamt Line;
-	?LineListamt Line;
-	?LineLimitamt Line;
-	?LineDiscountamt Line;
-	?LineDiscount Line;
-	?LineOverlimitamt Line;
-	?LineOverlimit Line;
+	?LineNetamt Amount;
+	?LineListamt Amount;
+	?LineLimitamt Amount;
+	?LineDiscountamt Amount;
+	?LineDiscount Count;
+	?LineOverlimitamt Amount;
+	?LineOverlimit Count;
 	?QtyInvoiced Quantity;
 };
 

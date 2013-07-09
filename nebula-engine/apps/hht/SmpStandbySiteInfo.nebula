@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+type SmpStandbySiteInfo {
+	Name SmpVxaSystemPrefs;
+	Id SmpVdnGroupList;
+	InstName Name;
+	HostName Host;
+	Tnsaddr Address;
+	SiteType Attr;
+	DbResourceName Name;
+	ConfigUid ID;
+	?LogDir null;
+};
+

@@ -4,19 +4,9 @@ type CmWebproject {
 	@Remarks("A web project is the main data container for Containers, URLs, Ads, Media etc.")
 	!CmWebprojectId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")
@@ -34,12 +24,12 @@ type CmWebproject {
 	@Remarks("Defines the type of content i.e. 'text/html; charset=UTF-8'")
 	MetaContent String;
 	@Remarks("Container Tree")
-	AdTreecmcId AdTree;
+	AdTreecmc AdTree;
 	@Remarks("Stage Tree")
-	AdTreecmsId AdTree;
+	AdTreecms AdTree;
 	@Remarks("Media Tree")
-	AdTreecmmId AdTree;
+	AdTreecmm AdTree;
 	@Remarks("Template Tree")
-	AdTreecmtId AdTree;
+	AdTreecmt AdTree;
 };
 

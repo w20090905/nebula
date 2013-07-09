@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("0")
+tx Servicetarget {
+	!Servicetargetid ID;
+	Orderid Ord;
+	Itemid Item;
+	?SourceQty Quantity;
+	?SourceUmcode Code;
+	?SourcePrice Price;
+	?Amount;
+	?DeliveryQty Quantity;
+	?DeliveryUmcode Code;
+	?Receiptqty Quantity;
+	?Receiptumcode Code;
+	DeliveryId Delivery;
+	DeliveryDetailid DeliveryDetail;
+	?DeliveryStatus null;
+	?Weight;
+	?Weightumcode Code;
+};
+

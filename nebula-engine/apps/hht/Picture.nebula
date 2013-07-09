@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Picture {
+	!Pictureid ID;
+	EntityId ID;
+	EntityType Attr;
+	Picturename Name;
+	?Picturecontent null;
+	?Picturepath Path;
+	?IsDefault YesNo;
+};
+

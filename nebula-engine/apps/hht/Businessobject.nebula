@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("4")
+tx Businessobject {
+	!Businessobjectid ID;
+	?Businessobjectname Name;
+	?Orgid Organization;
+	?AutoCheck null;
+	?Controlmethod null;
+	?Applytoall null;
+	?Vtablename Name;
+	?Businessobjectcode Code;
+};
+

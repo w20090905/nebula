@@ -1,0 +1,33 @@
+@Remarks("")
+@Refby("0")
+type VdkTablespace {
+	?VdkId ID;
+	?VdkName Name;
+	?VdkParentId ID;
+	?VdkFlags null;
+	?VdkAnalysisFlags null;
+	?VdkInitialExtent null;
+	?VdkNextExtent null;
+	?VdkMinExtents null;
+	?VdkMaxExtents null;
+	?VdkPctIncrease null;
+	?VdkFreelists null;
+	?VdkFreelistGroups null;
+	?VdkMinimumExtent null;
+	?VdkExtentManagement null;
+	?VdkAllocationType null;
+	?VdkRecomInitialExtent null;
+	?VdkRecomNextExtent null;
+	?VdkRecomMinExtents null;
+	?VdkRecomMaxExtents null;
+	?VdkRecomPctIncrease null;
+	?VdkRecomMinimumExtent null;
+	?VdkDedicatedType null;
+	?VdkValidSummaryInfo null;
+	?VdkSegmentTypes null;
+	?VdkSystemOwnedSegment null;
+	?VdkUserDefault null;
+	?VdkUserTemporary null;
+	?VdkUserIsSystem null;
+};
+

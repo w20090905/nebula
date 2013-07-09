@@ -1,0 +1,27 @@
+@Remarks("")
+@Refby("0")
+tx Zxjpyeartargetplandetail {
+	!Zxjpyeartargetplandetailid ID;
+	Zxjpyeartargetplanid Zxjpyeartargetplan;
+	Targettype null;
+	Prodid Product;
+	?Prodcode Code;
+	?Prodname Name;
+	?Umname Name;
+	?Brandcode Code;
+	?Brandname Name;
+	?M1 null;
+	?M2 null;
+	?M3 null;
+	?M4 null;
+	?M5 null;
+	?M6 null;
+	?M7 null;
+	?M8 null;
+	?M9 null;
+	?M10 null;
+	?M11 null;
+	?M12 null;
+	?Mtotal null;
+};
+

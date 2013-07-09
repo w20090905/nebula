@@ -1,0 +1,51 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtazukashininfo {
+	@Remarks("PK")
+	!Azukainfoid ID;
+	@Remarks("職判ID")
+	?Orgid Organization;
+	@Remarks("職判ｺｰﾄﾞ")
+	?Orgcode Code;
+	@Remarks("事業主ｺｰﾄﾞ")
+	?Sellercd null;
+	@Remarks("信用限度額")
+	?Sinyougk null;
+	@Remarks("SAP売掛金額残高")
+	?Sapurikzan null;
+	@Remarks("SAP受取手形残高")
+	?Sapuritzan null;
+	@Remarks("SAP受信残高")
+	?Sapjusinzan null;
+	@Remarks("受信日")
+	?Receptdate Date;
+	@Remarks("DCMS累計受注残高")
+	?Dcmsjuchuzan null;
+	@Remarks("DCMS累計受渡高")
+	?Dcmsukewtzan null;
+	@Remarks("受注ﾌﾗｸﾞ")
+	?Juchuflg null;
+	@Remarks("出荷ﾌﾗｸﾞ")
+	?Syukaflg null;
+	@Remarks("新規日時")
+	?Createdate Date;
+	@Remarks("新規者")
+	?Createuserid String;
+	@Remarks("更新日時")
+	?Updatedate Date;
+	@Remarks("更新者")
+	?Updateuserid ID;
+	@Remarks("課ｺｰﾄﾞ")
+	?Deptcd null;
+	@Remarks("課ID")
+	?Deptid Department;
+	@Remarks("受注信用限度額")
+	?Jyuchusinyougk null;
+	@Remarks("計上信用限度額")
+	?Keijyosinyougk null;
+	@Remarks("EDI更新者")
+	?Updateuser null;
+	@Remarks("新規者FOR画面")
+	?Createuser null;
+};
+

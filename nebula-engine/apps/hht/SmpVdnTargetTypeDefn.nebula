@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("1")
+type SmpVdnTargetTypeDefn {
+	!Id SmpVdnGroupList;
+	Name SmpVxaSystemPrefs;
+	?Category null;
+};
+

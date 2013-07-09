@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("2")
+tx SalesTarget {
+	!SalesTargetid ID;
+	Orgid Organization;
+	SalesTargetcode Code;
+	SalesTargetname Name;
+	SalesPlantypeid SalesPlantype;
+	SalesPlangroupid SalesPlangroup;
+	Year null;
+	?Month null;
+	?Description;
+	?Comments Note;
+	Maker null;
+	Createdate Date;
+	Status;
+	Revision null;
+	DateLastupdated Date;
+};
+

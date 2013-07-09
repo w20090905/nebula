@@ -1,0 +1,25 @@
+@Remarks("")
+@Refby("11")
+tx Contracttype {
+	!Contracttypeid ID;
+	Contracttypecode Code;
+	?Contracttypename Name;
+	?Sotypeid ID;
+	?Potypeid ID;
+	?Woflag null;
+	?AutoDevgrflag null;
+	?Detailcopyflag null;
+	?Comments Note;
+	?DateLastupdated Date;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Sapordertype null;
+	?Sapordertype2 null;
+	?Inouttype null;
+	?Customflag null;
+	?Biztype null;
+	?Bizinouttype null;
+};
+

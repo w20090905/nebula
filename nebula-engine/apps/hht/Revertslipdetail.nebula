@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Revertslipdetail {
+	!Revertslipdetailid ID;
+	Itemid Item;
+	Umcode Code;
+	?Lotno null;
+	?Qty Quantity;
+	?Remark null;
+	Revertslipid Revertslip;
+	?Baseqty Quantity;
+};
+

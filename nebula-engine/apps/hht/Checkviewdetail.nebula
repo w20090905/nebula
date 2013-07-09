@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Checkviewdetail {
+	!Checkviewdetailid ID;
+	?Checkviewid ID;
+	Columnname Name;
+	?IsUrl Url;
+	LabelCode Code;
+	Sequence;
+	DateLastupdated Date;
+};
+

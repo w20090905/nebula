@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx InvoiceAmtLimit {
+	!InvoiceAmtLimitid ID;
+	Orgid Organization;
+	InvoiceTypeid ID;
+	Limitamount Amount;
+	?Remark null;
+};
+

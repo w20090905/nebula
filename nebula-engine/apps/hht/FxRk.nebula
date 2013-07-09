@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+tx FxRk {
+	!Seqid Twxmitumoriiraiumhistroy;
+	@Remarks("ﾚｰﾄﾀｲﾌﾟ")
+	?Ratetype Attr;
+	@Remarks("例外予約No")
+	?Exno null;
+	@Remarks("SAP連携可否")
+	?Sapflg null;
+	@Remarks("Status")
+	?Status;
+	@Remarks("担当者")
+	?Userid Usr;
+	@Remarks("更新日")
+	?Updatedate Date;
+	@Remarks("作成日")
+	?Creatdate Date;
+};
+

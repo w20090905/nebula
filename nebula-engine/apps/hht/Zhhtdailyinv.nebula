@@ -1,0 +1,34 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtdailyinv {
+	!Zhhtdailyinvid ID;
+	?Createdate Date;
+	?Orgid Organization;
+	?Orgcode Code;
+	?Shortname Name;
+	?Orgname Name;
+	?Warehouseid Physicalwarehouse;
+	?Warehousecode Code;
+	?Warehousename Name;
+	?Itemid Item;
+	?Itemcode Code;
+	?Itemname Name;
+	?Umcode Code;
+	?Umname Name;
+	?Debit null;
+	?Credit null;
+	?Price;
+	?Endqty Quantity;
+	?Endamt Amount;
+	?Invcreatedate Date;
+	?Invsummaryid Invsummary;
+	?DateLastupdated Date;
+	?Saporgcode Code;
+	?Deptcode Code;
+	?Deptname Name;
+	?Sapwhcode Code;
+	?Saplotno null;
+	?Sapevaluation null;
+	?Currencyname Name;
+};
+

@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("0")
+tx Originalinventorydata {
+	!Originalinventorydataid ID;
+	?Prodname Name;
+	?Qty Quantity;
+	?Spec null;
+	?Invdate Date;
+	?Prodid Product;
+	?Prodcode Code;
+	?Realprodname Name;
+	?Dtid ID;
+	?Dtname Name;
+	?Checkstatus null;
+	Inventorydatafileid Inventorydatafile;
+	?IsProcessed YesNo;
+	?Targetinvdate Date;
+	?Description;
+	?Umcode Code;
+};
+

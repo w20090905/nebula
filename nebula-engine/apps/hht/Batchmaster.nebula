@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+tx Batchmaster {
+	!Batchmasterid ID;
+	Itemid Item;
+	Orgid Organization;
+	?Batchno null;
+	Relatedtrantype null;
+	?Relatedtransid ID;
+	?Relatedtrancode Code;
+	?Relatedtrandetailid ID;
+	?Createdate Date;
+	?Originalqty Quantity;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr31 null;
+	?Comments Note;
+};
+

@@ -1,0 +1,39 @@
+@Remarks("")
+@Refby("0")
+tx Zhhttrade {
+	!Insuranceid ID;
+	?Contractid Contract;
+	?Contractcode Code;
+	?Zzinsuranc String;
+	?Zzelno String;
+	?ZzpoAttn String;
+	?ZzscAttn String;
+	?Zzpacking String;
+	?Zzinspctn String;
+	?Zzspcfctn String;
+	?Zzshipvia1 String;
+	?Zzshipvia2 String;
+	?Zzshpmark1 String;
+	?Zzshpmark2 String;
+	?Zzshpmark3 String;
+	?Zzshpmark4 String;
+	?Zzshpmark5 String;
+	?Zzshpmark6 String;
+	?Zzshpmark7 String;
+	?Zzfrom String;
+	?Zzto String;
+	?Zzshpper String;
+	?Zzlcno String;
+	?Zzconsigh1 String;
+	?Zzconsigh2 String;
+	?Bolnr null;
+	?Zzspno String;
+	?Zzhktkbt String;
+	?Orgid Organization;
+	?Userid Usr;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Zzfromname Name;
+	?Zztoname Name;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("1")
+tx Port {
+	!Portid ID;
+	Portcode Code;
+	CountryCode Code;
+	LanguageCode Lang;
+	Portname Name;
+	Orgid Organization;
+	?IsSystem YesNo;
+};
+

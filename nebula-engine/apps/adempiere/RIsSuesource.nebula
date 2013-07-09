@@ -1,18 +1,13 @@
 @Remarks("")
 @Refby("0")
-tx RIsSuesource {
-	!RIsSuesourceId ID;
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;/* 'Y'  */
-	Created null;/* SYSDATE  */
-	Createdby null;
-	Updated null;/* SYSDATE  */
-	Updatedby null;
-	RIsSuesystemId RIsSuesystem;
-	RIsSueprojectId RIsSueproject;
-	RIsSueuserId RIsSueuser;
-	?Statisticsinfo Info;
-	?Profileinfo Info;
+tx RIsSueSOurce {
+	!RIsSueSOurceId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	RIsSueSYstem;
+	RIsSueProject;
+	RIsSueUser;
+	?Statisticsinfo Note;
+	?Profileinfo Note;
 };
 

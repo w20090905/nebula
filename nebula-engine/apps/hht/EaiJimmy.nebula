@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("0")
+tx EaiJimmy {
+	!Eaijimmyid ID;
+	Eaicreatedate Date;
+	Eaibatchno null;
+	Eaiheadcount Count;
+	Eaidetailcount Count;
+	Eaicurrentheadnum null;
+	Eaicurrentdetailnum null;
+	Eaiimportstatus null;
+	?Eaiheadname Name;
+	?Eaidetailname Name;
+	?Eaiheadparseerror null;
+	?Eaidetailparseerror null;
+	?Eaiimportdate Date;
+	?Eaiimportcomments Note;
+	?Headusername Name;
+	?Headuserage null;
+	?Headuserbirth null;
+	?Headuserstatus Attr;
+	?Headuserpay null;
+};
+

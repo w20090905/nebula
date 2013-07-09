@@ -4,19 +4,9 @@ type CBpartner {
 	@Remarks("Identifies a Business Partner")
 	!CBpartnerId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
 	@Remarks("Alphanumeric identifier of the entity")
@@ -26,9 +16,9 @@ type CBpartner {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("This is a summary entity")
-	IsSummary Comment;/* 'N' */
+	IsSummary YesNo;/* 'N' */
 	@Remarks("Business Partner Group")
-	CBpGroupId CBpGroup;
+	CBpGroup;
 	@Remarks("One time transaction")
 	IsOnetime YesNo;/* 'N'  */
 	@Remarks("Indicates this is a Prospect")
@@ -44,7 +34,7 @@ type CBpartner {
 	@Remarks("Your customer or vendor number at the Business Partner_s site")
 	?ReferenceNo Code;
 	@Remarks("Dun & Bradstreet Number")
-	?DUNS;
+	?DUNS String;
 	@Remarks("Full URL address - e.g. http://www.adempiere.org")
 	?Url;
 	@Remarks("Language for this entity")
@@ -54,13 +44,13 @@ type CBpartner {
 	@Remarks("Business partner is exempt from tax")
 	?IsTaxExempt YesNo;/* 'N'                                */
 	@Remarks("Schedule for generating Invoices")
-	?CInvoiceScheduleId CInvoiceSchedule;
+	?CInvoiceSchedule;
 	@Remarks("Classification or Importance")
 	?Rating null;
 	@Remarks("Total Volume of Sales in Thousands of Currency")
 	?SalesVolume Volume;
 	@Remarks("Number of employees")
-	?Numberemployees null;
+	?Numberemployees Number;
 	@Remarks("Standard Industry Code or its successor NAIC - http://www.osha.gov/oshstats/sicser.html")
 	?NAICS;
 	@Remarks("Date of First Sale")
@@ -68,43 +58,43 @@ type CBpartner {
 	@Remarks("The cost of gaining the prospect as a customer")
 	?Acqusitioncost Cost;/* 0 */
 	@Remarks("Total Revenue expected")
-	?Potentiallifetimevalue null;/* 0 */
+	?Potentiallifetimevalue Number;/* 0 */
 	@Remarks("Actual Life Time Revenue")
-	?Actuallifetimevalue null;/* 0 */
+	?Actuallifetimevalue Number;/* 0 */
 	@Remarks("Share of Customer_s business as a percentage")
-	?Shareofcustomer null;
+	?Shareofcustomer Number;
 	@Remarks("How you pay the invoice")
 	?PaymentRule Attr;
 	@Remarks("Total outstanding invoice amounts allowed")
 	?SoCreditlimit Count;/* 0 */
 	@Remarks("Current open balance")
-	?SoCreditused null;/* 0 */
+	?SoCreditused Number;/* 0 */
 	@Remarks("The terms of Payment (timing, discount)")
-	?CPaymentTermId CPaymentTerm;
+	?CPaymentTerm;
 	@Remarks("Unique identifier of a Price List")
-	?MPriceListId MPriceList;
+	?MPriceList;
 	@Remarks("Schema to calculate the trade discount percentage")
-	?MDiscountSchemaId MDiscountSchema;
+	?MDiscountSchema;
 	@Remarks("Dunning Rules for overdue invoices")
-	?CDunningId CDunning;
+	?CDunning;
 	@Remarks("Print Discount on Invoice and Order")
 	?IsDiscountPrintEd YesNo;/* 'Y'                                */
 	@Remarks("Description to be used on orders")
 	?SoDescription Description;
 	@Remarks("Transaction Reference Number (Sales Order, Purchase Order) of your Business Partner")
-	?Poreference String;
+	?Poreference Note;
 	@Remarks("Purchase payment option")
 	?PaymentRulepo null;
 	@Remarks("Price List used by this Business Partner")
-	?PoPriceListId MPriceList;
+	?PoPriceList MPriceList;
 	@Remarks("Schema to calculate the purchase trade discount percentage")
-	?PoDiscountSchemaId MDiscountSchema;
+	?PoDiscountSchema MDiscountSchema;
 	@Remarks("Payment rules for a purchase order")
-	?PoPaymentTermId CPaymentTerm;
+	?PoPaymentTerm CPaymentTerm;
 	@Remarks("Number of copies to be printed")
 	?DocumentCopies Count;
 	@Remarks("Greeting to print on correspondence")
-	?CGreetingId CGreeting;
+	?CGreeting;
 	@Remarks("Frequency and method of invoicing")
 	?InvoiceRule Attr;
 	@Remarks("Defines the timing of Delivery")
@@ -114,23 +104,23 @@ type CBpartner {
 	@Remarks("How the order will be delivered")
 	?DeliveryViarule Attr;
 	@Remarks("Sales Representative or Company Agent")
-	?SalesRepId AdUser;
+	?SalesRep AdUser;
 	@Remarks("Enable sending Document EMail")
-	Sendemail EMail;/* 'N'  */
+	Sendemail YesNo;/* 'N'  */
 	@Remarks("Business Partner Parent")
-	?BpartnerParentId CBpartner;
+	?BpartnerParent CBpartner;
 	@Remarks("Print Format for printing Invoices")
-	?InvoicePrintFormatId AdPrintFormat;
+	?InvoicePrintFormat AdPrintFormat;
 	@Remarks("Business Partner Credit Status")
 	?Socreditstatus Attr;/* 'O' */
 	@Remarks("Minimum Shelf Life in percent based on Product Instance Guarantee Date")
-	?Shelflifeminpct null;
+	?Shelflifeminpct Number;
 	@Remarks("The Business Partner is another Organization for explicit Inter-Org transactions")
-	?AdOrgbpId AdOrg;
+	?AdOrgbp AdOrg;
 	@Remarks("Flat discount percentage")
 	?Flatdiscount Count;
 	@Remarks("Total Open Balance Amount in primary Accounting Currency")
-	?TotalOpenbalance null;
+	?TotalOpenbalance Number;
 	@Remarks("Dunning Grace")
 	?DunningGrace Date;
 };

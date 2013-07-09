@@ -1,0 +1,32 @@
+@Remarks("")
+@Refby("1")
+tx Posinvoice {
+	!Posinvoiceid ID;
+	?Posinvoicecode Code;
+	Orgid Organization;
+	Poscode Code;
+	CashErid ID;
+	SalesDate Date;
+	SalesType Attr;
+	?SalesRepid ID;
+	?Receiptcash null;
+	?Cash null;
+	?Cheque null;
+	?Coupon null;
+	?Creditcard null;
+	?Accttrans Amount;
+	?Vipcardamt Amount;
+	?Other null;
+	?Vipno null;
+	?Listamt Amount;
+	?Realamt Amount;
+	?Overamt Amount;
+	?TotalDiscount Count;
+	?TotalDiscountamt Amount;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Originalposinvoiceid ID;
+	Status;
+};
+

@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+type DeliveryGrouppolicy {
+	!DeliveryGrouppolicy null;
+	Orgid Organization;
+	?Buyer null;
+	?Billto null;
+	?Shipfrom null;
+	?Shipto null;
+	?Shipmentmethod null;
+	?Shipmentterm null;
+	?DeliveryDate null;
+	?Ord null;
+	?Ordertype null;
+	?Seller null;
+	?Carrier null;
+	?Currency null;
+	?Dept null;
+};
+

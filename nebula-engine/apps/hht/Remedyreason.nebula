@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Remedyreason {
+	!Remedyreasonid ID;
+	Orgid Organization;
+	Remedyreasoncode null;
+	?LanguageCode Lang;
+	?Description;
+	?DateLastupdated Date;
+};
+

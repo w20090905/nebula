@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("1")
+tx DeliveryAddress {
+	!DeliveryAddressid ID;
+	DeliveryId Delivery;
+	?Orgid Organization;
+	?Address Attr;
+	?Originaladdressid ID;
+	Address Name;
+	Addressroletype null;
+	?Receiver null;
+	?Cityname Name;
+	?CountryCode Code;
+	?Portcode Code;
+	Zipcode Code;
+	?Regioncode Code;
+	?Address null;
+};
+

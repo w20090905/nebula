@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("0")
+tx Invbalance {
+	!Invbalanceid ID;
+	Orgid Organization;
+	Itemid Item;
+	Invstatus null;
+	Periodid ID;
+	?DateLastupdated Date;
+	?Initialamt Amount;
+	?Initialqty Quantity;
+	?Credit null;
+	?Creditamt Amount;
+	?Debit null;
+	?Debitamt Amount;
+	?Endqty Quantity;
+	?Endamt Amount;
+	?QtyAll Quantity;
+	?Glaccountid Glaccount;
+};
+

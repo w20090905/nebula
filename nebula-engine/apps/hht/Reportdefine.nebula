@@ -1,0 +1,26 @@
+@Remarks("")
+@Refby("8")
+tx Reportdefine {
+	!Reportdefineid ID;
+	?Orgid Organization;
+	?Booksetid Bookset;
+	?Reportdefinecode Code;
+	?Reporttype null;
+	?Interalcode null;
+	?Definetable null;
+	?Columncount Count;
+	?Rowcountnum null;
+	?Headtitlecount Count;
+	?Tailtitlecount Count;
+	IsPublic YesNo;
+	?Maker null;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Interalnum null;
+	?Modelname Name;
+	?Macroname Name;
+	?Manualmodifyflag null;
+	?Manualentryprotflag null;
+	?Glaccountlistid Glaccountlist;
+};
+

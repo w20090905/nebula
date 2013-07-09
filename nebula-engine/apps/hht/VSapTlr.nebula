@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+type VSapTlr {
+	?Tlr01TDatatype Attr;
+	?Tlr02TDocid null;
+	?Tlr03TDoccode Code;
+	?Tlr04TDateYmd null;
+	?Tlr05TDateTime null;
+	?Tlr06TDoccount null;
+	?Tlr07TId null;
+	Returnid Returnslip;
+};
+

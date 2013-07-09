@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Globjsrestrictiondetail {
+	!Globjsrelationdetailid ID;
+	Globjsrestrictionid Globjsrestriction;
+	?Dcflag null;
+	?Restricttype Attr;
+	?Glaccountid Glaccount;
+	?Createdate Date;
+};
+

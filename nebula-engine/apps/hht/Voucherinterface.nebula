@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("2")
+tx Voucherinterface {
+	!Voucherinterfaceid ID;
+	?Status;
+	?Transactionhandle null;
+	?Vitriggertype null;
+	?Relatedtrantype null;
+	?Vouchersigncode Code;
+	Booksetid Bookset;
+	?Maker null;
+	?Createdate Date;
+	?Lastupdated null;
+	?Lastmodifiedby null;
+	?Rwdcconvertflag null;
+	?Glaccountlistid Glaccountlist;
+	?Responsecenterid Responsecenter;
+};
+

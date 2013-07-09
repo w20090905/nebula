@@ -1,0 +1,32 @@
+@Remarks("")
+@Refby("2")
+tx Zhhtkensyujyohoudetail {
+	!Zhhtkensyujyohoudetailid ID;
+	?Zhhtkensyujyohouheadid Zhhtkensyujyohouhead;
+	?Torihikisakicd null;
+	?Eigyosyocd null;
+	?Kigyocd null;
+	?Jigyosyocd null;
+	?Soufuno SeqNo;
+	?Hachuno null;
+	?Keijyodate Date;
+	?Keijyonum null;
+	?Tanni null;
+	?Keijyotanka null;
+	?Keijyokingaku null;
+	@Remarks("20101101　VARCHAR2(16)をVARCHAR2(48)に修正する")
+	?Keijyonaiyo null;
+	?Syohizeikbn null;
+	?Nounyuno null;
+	?Coment null;
+	@Remarks("20101101　VARCHAR2(20)をVARCHAR2(60)に修正する")
+	?Senyouran null;
+	?Inflag null;
+	?Nounyukbn null;
+	?Createdate Date;/* SYSDATE */
+	@Remarks("ﾃﾞｰﾀ区分")
+	?Datakbn null;
+	@Remarks("買掛ﾌﾗｸﾞ(0:未処理,1:処理済み,9:処理対象外)")
+	?Kaikakeflg null;/* 1 */
+};
+

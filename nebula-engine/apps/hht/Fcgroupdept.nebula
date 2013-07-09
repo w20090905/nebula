@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx Fcgroupdept {
+	!Fcgroupdeptid ID;
+	SalesFcgroupid SalesFcgroup;
+	?Deptid Department;
+	DateLastupdated Date;
+};
+

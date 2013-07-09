@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+type SmpVborChannelsInformation {
+	?Configname Name;
+	?Name SmpVxaSystemPrefs;
+	?Type Attr;
+	?Filename;
+	?Directory String;
+	?Overridecapacity null;
+	?Maxcapacity null;
+	?Overridereadrate null;
+	?Maxreadrate Rate;
+	?Overrideopenfiles null;
+	?Maxopenfiles null;
+};
+

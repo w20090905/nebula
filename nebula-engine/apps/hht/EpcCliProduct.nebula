@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type EpcCliProduct {
+	?RepUserId EpcCliRepUsers;
+	?NodeId ID;
+	?EnvironmentId ID;
+	?ProductName Name;
+	?FacNum null;
+	?FdfFileStatus null;
+	?FdfFileActive null;
+};
+

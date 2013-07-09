@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx MrpFctSumExp {
+	!Sid MrpRecommend;
+	Fctsumcode MrpFctSum;
+	Forecastcode MrpFct;
+	Itemid Item;
+	Fctdate Date;
+	Qty Quantity;
+	Umcode Code;
+};
+

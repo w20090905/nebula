@@ -1,0 +1,19 @@
+@Remarks("Overview of all the jobs in the library")
+@Refby("0")
+type SmpViewJobLibrary {
+	@Remarks("Internal ID of this job")
+	JobId SmpVdjJob;
+	@Remarks("Name of this job")
+	?JobName Name;
+	@Remarks("Name of the service this job was submitted against")
+	TargetName Name;
+	@Remarks("Type of service this job was submitted against")
+	TargetType Attr;
+	@Remarks("Translated name for the target type")
+	?TargetNlsType Attr;
+	@Remarks("Name of the administrator who owns this job")
+	?AdministratorName Name;
+	@Remarks("Date and time this status was recorded")
+	?TimesTamp null;
+};
+

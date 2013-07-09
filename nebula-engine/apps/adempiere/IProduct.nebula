@@ -4,25 +4,15 @@ type IProduct {
 	@Remarks("Import Item or Service")
 	!IProductId ID;
 	@Remarks("Client/Tenant for this installation.")
-	?AdClientId AdClient;
+	?AdClientId ID;
 	@Remarks("Organizational entity within client")
-	?AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	?IsActive YesNo;/* 'Y' */
-	@Remarks("Date this record was created")
-	?Created null;/* SYSDATE */
-	@Remarks("User who created this records")
-	?Createdby null;
-	@Remarks("Date this record was updated")
-	?Updated null;/* SYSDATE */
-	@Remarks("User who updated this records")
-	?Updatedby null;
+	?AdOrgId ID;
 	@Remarks("Has this import been processed")
 	IIsImported YesNo;/* 'N'  */
 	@Remarks("Messages generated from import process")
-	?IErrorMsg Msg;
+	?IErrorMsg Note;
 	@Remarks("Product, Service, Item")
-	?MProductId MProduct;
+	?MProduct;
 	@Remarks("Search key for the record in the format required - must be unique")
 	?Value String;
 	@Remarks("Alphanumeric identifier of the entity")
@@ -40,11 +30,11 @@ type IProduct {
 	@Remarks("UOM EDI X12 Code")
 	?X12de355 String;
 	@Remarks("Unit of Measure")
-	?CUomId CUom;
+	?CUom;
 	@Remarks("Product Category Key")
-	?ProductCategoryValue String;
+	?ProductCategoryValue Note;
 	@Remarks("Category of a Product")
-	?MProductCategoryId MProductCategory;
+	?MProductCategory;
 	@Remarks("Type of product")
 	?ProductType Attr;/* 'I' */
 	@Remarks("Classification for grouping")
@@ -60,7 +50,7 @@ type IProduct {
 	@Remarks("Shelf depth required")
 	?Shelfdepth Depth;
 	@Remarks("Units Per Pallet")
-	?Unitsperpallet Unit;
+	?Unitsperpallet Number;
 	@Remarks("This product is no longer available")
 	?Discontinued YesNo;/* 'N' */
 	@Remarks("Discontinued By")
@@ -68,19 +58,19 @@ type IProduct {
 	@Remarks("URL of  image")
 	?ImageUrl Url;
 	@Remarks("URL for the description")
-	?Descriptionurl Url;
+	?Descriptionurl Description;
 	@Remarks("The Key of the Business Partner")
-	?BpartnerValue String;
+	?BpartnerValue Note;
 	@Remarks("Identifies a Business Partner")
-	?CBpartnerId CBpartner;
+	?CBpartner;
 	@Remarks("Three letter ISO 4217 Code of the Currency")
-	?IsOCode Code;
+	?IsOCode Note;
 	@Remarks("The Currency for this record")
-	?CCurrencyId CCurrency;
+	?CCurrency;
 	@Remarks("List Price")
-	?PriceList Price;/* 0 */
+	?PriceList Number;/* 0 */
 	@Remarks("Price based on a purchase order")
-	?PricePo Price;/* 0 */
+	?PricePo Number;/* 0 */
 	@Remarks("(Included) Amount for copyright, etc.")
 	?Royaltyamt Amount;/* 0 */
 	@Remarks("Effective Date of Price")
@@ -92,11 +82,11 @@ type IProduct {
 	@Remarks("Manufacturer of the Product")
 	?Manufacturer null;
 	@Remarks("Minimum order quantity in UOM")
-	?OrderMin null;/* 0 */
+	?OrderMin Number;/* 0 */
 	@Remarks("Package order size in UOM (e.g. order set of 5 units)")
-	?OrderPack null;/* 0 */
+	?OrderPack Number;/* 0 */
 	@Remarks("Fixed Cost Per Order")
-	?Costperorder Cost;/* 0 */
+	?Costperorder Number;/* 0 */
 	@Remarks("Promised days between order and delivery")
 	?DeliveryTimePromised Count;
 	@Remarks("Process Now")
@@ -104,8 +94,8 @@ type IProduct {
 	@Remarks("The document has been processed")
 	?Processed YesNo;/* 'N' */
 	@Remarks("Standard Price")
-	?PriceStd Price;
+	?PriceStd Number;
 	@Remarks("Lowest price for a product")
-	?PriceLimit Price;
+	?PriceLimit Count;
 };
 

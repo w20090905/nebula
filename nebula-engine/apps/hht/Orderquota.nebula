@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("1")
+tx Orderquota {
+	!Orderquotaid ID;
+	Orderquotacode Code;
+	Orgid Organization;
+	?Comments Note;
+	Status;
+	DateLastupdated Date;
+};
+

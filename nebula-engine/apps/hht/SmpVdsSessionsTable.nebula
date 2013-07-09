@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("2")
+tx SmpVdsSessionsTable {
+	!SessionId ID;
+	PrincipalName Name;
+	PrincipalType Attr;
+	?PrincipalIor null;
+	?LoginTime null;
+	Oms null;
+};
+

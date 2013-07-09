@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type TmpPrivilege {
+	Privilegeid Privilege;
+	?Parentprivid ID;
+	?Lft null;
+	?Rgt null;
+	?RootId ID;
+	?LeafFlag null;/* 0 */
+	?LevelId ID;/* 0 */
+};
+

@@ -1,0 +1,131 @@
+@Remarks("")
+@Refby("1")
+tx Zhhtsouploaddetail {
+	!Souploaddetailid ID;
+	Souploadid Zhhtsoupload;
+	?Itemid Item;
+	?Itemcode Code;
+	?Orderqty Quantity;
+	?Umcode Code;
+	?Umname Name;
+	?Unitprice Unit;
+	?DeliveryDate Date;
+	?DeliveryDate2 null;
+	?Saplotno null;
+	?Sapevaluation null;
+	?Comments Note;
+	@Remarks("LineNo")
+	?LineNum Line;
+	@Remarks("末端単価")
+	?Endprice Price;
+	@Remarks("口銭率")
+	?Commissionrate Rate;
+	@Remarks("EAR要否")
+	?Earflag null;
+	@Remarks("EAR要否NAME")
+	?Earflagname Name;
+	@Remarks("別表項番")
+	?OtherCode Code;
+	@Remarks("サイズ/寸法")
+	?Dimension null;
+	@Remarks("明細カテゴリ")
+	?Concategory null;
+	@Remarks("明細カテゴリ名")
+	?Concategoryname Name;
+	@Remarks("アイテム特性1")
+	?Itempropertya null;
+	@Remarks("アイテム特性2")
+	?Itempropertyb null;
+	@Remarks("顧客品番")
+	?Customercomments Note;
+	@Remarks("単価PO")
+	?Unitpricepo Unit;
+	@Remarks("末端単価PO")
+	?Endpricepo null;
+	@Remarks("口銭率PO")
+	?Commissionratepo null;
+	@Remarks("要求納期PO")
+	?DeliveryDatepo null;
+	@Remarks("要求納期2PO")
+	?DeliveryDate2po null;
+	@Remarks("アイテム特性１PO")
+	?Itempropertyapo null;
+	@Remarks("アイテム特性2PO")
+	?Itempropertybpo null;
+	@Remarks("顧客注番PO")
+	?Commentspo null;
+	?PaymentTermidpo null;
+	?PaymentTermnamepo null;
+	?Exchagedatecodepo null;
+	?Receiveraddresscodepo null;
+	?TaxNamepo null;
+	?TaxRatepo null;
+	?TaxCodepo null;
+	?Lcnopo null;
+	?Currencycodepo null;
+	?Zctratepo null;
+	?Edicommentspo null;
+	?Orderpropertypo null;
+	?Receiveraddressnamepo null;
+	?Currencynamepo null;
+	?Warehouseidpo null;
+	?Sellerid ID;
+	?Sellercode Code;
+	?Sellername Name;
+	?Customerpurdate Date;
+	?Docdatepo null;
+	?Sodetailid ID;
+	?Eltype Attr;
+	?Ctxtd01 null;
+	?Ctxtd02 null;
+	?Ctxtd03 null;
+	?Ctxtd04 null;
+	?Ctxtd05 null;
+	?Ctxtd06 null;
+	?Ctxtd07 null;
+	?Ctxtd08 null;
+	?Ctxtd09 null;
+	?Ctxtd10 null;
+	?Ctxtd11 null;
+	?Ctxtd12 null;
+	?Ctxtd13 null;
+	?Ctxtd14 null;
+	?Ctxtd15 null;
+	?Ctxtd16 null;
+	?Ctxtd17 null;
+	?Inquirycode Code;
+	@Remarks("ﾒｰｶｰﾛｯﾄNo")
+	?Makelotno null;
+	@Remarks("ﾒｰｶｰﾛｯﾄNopo")
+	?Makelotnopo null;
+	?Testkbn null;
+	?Hinmei null;
+	?Karikakakukbn null;
+	?Nonyusijikbn null;
+	?Hachudate Date;
+	?Keiyakujoken null;
+	?Hikiwatasijoken null;
+	?Bukacd null;
+	?Zumensiyosyo String;
+	?Maisu null;
+	?Hinban null;
+	?Zuban String;
+	?Zureki String;
+	?Koubaisyacdcode Code;
+	?Sikyukbn null;
+	?Kensakbn null;
+	?Jyohikbn null;
+	?Hachukbn null;
+	?Hinsyacd null;
+	?Senyoran null;
+	?Syuturyokukbn null;
+	?Sakuban null;
+	?Sakubanafter null;
+	?Sibanafter null;
+	?Osamesaki null;
+	?Twxseqid ID;
+	?Siyou null;
+	?Biko null;
+	?Nyukayotei null;
+};
+

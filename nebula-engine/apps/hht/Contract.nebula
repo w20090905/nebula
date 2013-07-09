@@ -1,0 +1,43 @@
+@Remarks("")
+@Refby("18")
+tx Contract {
+	!Contractid ID;
+	Contractcode Code;
+	?Contracttypeid Contracttype;
+	Ownerorgid ID;
+	?Relatedcode Code;
+	?Shipfrom null;
+	?Shipto null;
+	Createdate Date;
+	Maker null;
+	?Deptid Department;
+	?Comments Note;
+	DateLastupdated Date;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Status;
+	?Revision null;
+	?Zhhtbecopied String;
+	?Flag null;/* 0 */
+	@Remarks("担当者No")
+	?Employeeid Employee;
+	?Expensetotalamt Amount;
+	?Venderanswerflag null;/* 0 */
+	@Remarks("成約承認日付")
+	?Approvedate Date;
+	?Inquirycode Code;
+	?Chumonkbn null;
+	?Groupcd null;
+	?Teiseikbn null;
+	?Teisikaisu null;
+	?Torihikicd null;
+	?Kigyocd null;
+	?Kojocd null;
+	?Souhuno null;
+	@Remarks("1：茨城レコード")
+	?Twxdataflg null;
+	?Tracekbn null;
+};
+

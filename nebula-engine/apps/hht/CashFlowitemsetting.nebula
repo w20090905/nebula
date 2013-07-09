@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx CashFlowitemsetting {
+	!CashFlowitemsettingid ID;
+	Booksetid Bookset;
+	?Orgid Organization;
+	Relatedtranstype null;
+	?Businessreason null;
+	CashFlowitemid CashFlowitem;
+	?Comments Note;
+};
+

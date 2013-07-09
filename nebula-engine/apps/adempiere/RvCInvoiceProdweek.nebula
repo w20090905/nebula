@@ -1,17 +1,17 @@
 @Remarks("")
 @Refby("0")
 type RvCInvoiceProdweek {
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	?MProductCategoryId MProductCategory;
+	AdClientId ID;
+	AdOrgId ID;
+	?MProductCategoryId ID;
 	?DateInvoiceD Date;
-	?LineNetamt Line;
-	?LineListamt Line;
-	?LineLimitamt Line;
-	?LineDiscountamt Line;
-	?LineDiscount Line;
-	?LineOverlimitamt Line;
-	?LineOverlimit Line;
+	?LineNetamt Amount;
+	?LineListamt Amount;
+	?LineLimitamt Amount;
+	?LineDiscountamt Amount;
+	?LineDiscount Count;
+	?LineOverlimitamt Amount;
+	?LineOverlimit Count;
 	?QtyInvoiced Quantity;
 	IsSotrx YesNo;
 };

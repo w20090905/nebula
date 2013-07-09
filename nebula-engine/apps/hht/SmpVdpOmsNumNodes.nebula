@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("0")
+type SmpVdpOmsNumNodes {
+	?Oms null;
+	?NumNodes null;
+};
+

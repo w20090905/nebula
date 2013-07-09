@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("0")
+type Offerplan {
+	Offerplanid ID;
+	Offerid Offer;
+	?Offerdetailid Offerdetail;
+	Itemid Item;
+	?Lotno null;
+	?Orderqty Quantity;
+	?Planqty Quantity;
+	?Price;
+	?DeliveryDate Date;
+	?Status;
+	?Comments Note;
+	?LineType Line;
+	?Arrivaldate Date;
+	Umcode Code;
+	?LineNo Line;
+	?Zhhteaiflag String;/* ('0') */
+};
+

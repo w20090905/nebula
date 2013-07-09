@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx Faspecial {
+	!Faspecialid ID;
+	Fixedassetsid Fixedassets;
+	?Address null;
+	?Area null;
+	?Buildingarea null;
+	?Usablefloorarea null;
+	?Umcode Code;
+	?Contractor null;
+	?Realtymanager null;
+	?Qty Quantity;
+	?Power null;
+};
+

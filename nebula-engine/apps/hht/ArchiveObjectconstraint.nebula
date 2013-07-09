@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx ArchiveObjectconstraint {
+	!ArchiveObjconstraintid ID;
+	SourceTablename Name;
+	SourceFieldname Name;
+	Relationtablename Name;
+	Relationfield null;
+	?ArchiveObjid ArchiveObject;
+};
+

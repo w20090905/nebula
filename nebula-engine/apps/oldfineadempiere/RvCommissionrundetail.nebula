@@ -1,0 +1,35 @@
+@Remarks("")
+@Refby("0")
+type RvCommissionrundetail {
+	AdClientId ID;
+	AdOrgId ID;
+	CCommissionrunId ID;
+	DocumentNo Long;
+	?Description;
+	Startdate Date;
+	GrandTotal Number;
+	Processed YesNo;
+	CCommissionId ID;
+	CommissionBpartnerId ID;
+	CCommissionamtId ID;
+	Commissionconvertedamt Amount;
+	Commissionqty Quantity;
+	Commissionamt Amount;
+	CCommissiondetailId ID;
+	?Reference Note;
+	?COrderlineId ID;
+	?CInvoiceLineId ID;
+	?Info Description;
+	CCurrencyId ID;
+	Actualamt Amount;
+	Convertedamt Amount;
+	Actualqty Quantity;
+	?InvoiceDocumentNo String;
+	?DateDoc Date;
+	?MProductId ID;
+	?CBpartnerId ID;
+	?CBpartnerLocationId ID;
+	?AdUserId ID;
+	?CDoctypeId ID;
+};
+

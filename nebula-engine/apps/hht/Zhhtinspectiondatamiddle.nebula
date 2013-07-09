@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtinspectiondatamiddle {
+	!Zhhtinspectiondatamiddleid ID;
+	?Zhhtinspectiondataid Zhhtinspectiondata;
+	?Orgcode Code;
+	?Sendkbn null;
+	?Pono null;
+	?Text;
+	?Tmpid Zhhtexpensetmp;
+};
+

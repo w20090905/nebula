@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+type VSapAdi {
+	?Adi001DataType Attr;
+	?Adi002TkonnEx null;
+	?Adi003TrcontItem null;
+	?Adi004Zzairsea null;
+	?Adi005Zzhktkbt null;
+	?Adi006Zzelno null;
+	?Adi007Zzspno null;
+	?Adi008Bolnr null;
+	?Adi009Zzairseax null;
+	?Adi010Zzhktkbtx null;
+	?Adi011Zzelnox null;
+	?Adi012Zzspnox null;
+	?Adi013Bolnrx null;
+	Returnid Returnslip;
+};
+

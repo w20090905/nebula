@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Pppurchaselist {
+	!Pppurchaselistid ID;
+	Ppid Promotionpresent;
+	FieldName Name;
+	Operator null;
+	Value String;
+	?Purchaseqty Quantity;
+	?Comments Note;
+	DateLastupdated Date;
+};
+

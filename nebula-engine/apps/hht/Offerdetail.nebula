@@ -1,0 +1,31 @@
+@Remarks("")
+@Refby("3")
+tx Offerdetail {
+	!Offerdetailid ID;
+	Offerid Offer;
+	?Qty Quantity;
+	?Umcode Code;
+	?Selleritemid ID;
+	?Unitprice Unit;
+	?Amount;
+	?Listprice Price;
+	?Discount Count;
+	?DiscountAmt Amount;
+	?Netprice Price;
+	?DeliveryDate Date;
+	?Unitweight Unit;
+	?Weight;
+	?LineStatus Line;
+	?Buyeritemid ID;
+	?LineNetprice Line;
+	?TaxRate Rate;
+	?Pretaxamount Amount;
+	?TaxAmount Amount;
+	?Pretaxprice Price;
+	?Kiorderno null;
+	?Receiptcd null;
+	?PriceRate Price;
+	?Convertfactor null;
+	?PriceCoefficient Price;
+};
+

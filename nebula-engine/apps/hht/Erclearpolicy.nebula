@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Erclearpolicy {
+	!Erclearpolicyid ID;
+	Relationid Orgrelation;
+	Cleardirection null;
+	Clearop null;
+	DateLastupdated Date;
+};
+

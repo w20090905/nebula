@@ -4,7 +4,7 @@ tx Activitycategory {
 	!Activitycategoryid ID;
 	?DateLastupdated Date;
 	Activityid Activity;
-	Categoryid ID;
+	Categoryid Category;
 	Weight;
 	?Bugetamount Amount;
 	?SalesTarget null;

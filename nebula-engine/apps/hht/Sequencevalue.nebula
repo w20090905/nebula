@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Sequencevalue {
+	!Sequencevalueid ID;
+	?Orgid Organization;
+	?Segmentstr null;
+	?Nextval null;
+	?Sequenceid Combocodesequence;
+};
+

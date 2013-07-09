@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx SalesOpportunitycontact {
+	!Opportunitycontactid ID;
+	Opportunityid SalesOpportunity;
+	Contactid Contact;
+	?Comments Note;
+	DateLastupdated Date;
+};
+

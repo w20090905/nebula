@@ -1,0 +1,126 @@
+@Remarks("")
+@Refby("16")
+tx Delivery {
+	!DeliveryId ID;
+	?DeliveryCode Code;
+	?Createdate Date;
+	?DeliveryDate Date;
+	Maker null;
+	Shipfrom null;
+	Shipto null;
+	?Carrier null;
+	?Sellerid ID;
+	?Buyerid ID;
+	?Billto null;
+	?Orderid Ord;
+	?SalesRepid ID;
+	?Refrenceno null;
+	?Shipmentterm null;
+	?Shipmentmethod null;
+	?Fromportcode Code;
+	?Toportcode Code;
+	?TotalAmount Amount;
+	?TaxAmount Amount;
+	?Pretaxamount Amount;
+	?Netweight Weight;
+	?GrossWeight Weight;
+	?Volume;
+	?Numberofcontainers null;
+	?Status;
+	?Revision null;
+	?Originaldeliveryid ID;
+	?Comments Note;
+	?Currencycode Code;
+	?DateLastupdated null;
+	?Warehouseid Physicalwarehouse;
+	?Ordertypeid Ordertype;
+	?PaymentMethod null;
+	?Shipmentstatus null;
+	?PrintNum null;
+	?Creditcheckresult null;
+	?Creditstatus null;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Accountingyearid ID;
+	?Year null;
+	?Accperiodid Accountingperiod;
+	?Period null;
+	?Docdate Date;
+	?Gldate Date;
+	?Receiptwarehouseid ID;
+	?Localtotalamount Amount;
+	?Apportionfinished null;
+	?Receiptstatus null;
+	?Deptid Department;
+	?ExportTaskcode Code;
+	?Sapordertype null;
+	@Remarks("販売起算日")
+	?Edistartdate Date;
+	@Remarks("出庫No")
+	?Invrelatedno null;
+	@Remarks("伝票日付")
+	?Edidocdate Date;
+	@Remarks("出荷日/出港日")
+	?Edideliverydate Date;
+	@Remarks("【山九EDI連携　追加字段】?方?注")
+	?OtherCom null;
+	@Remarks("【山九EDI連携　追加字段】???注")
+	?DeliverCom null;
+	@Remarks("【山九EDI連携　追加字段】指示?注")
+	?DirectCom null;
+	@Remarks("担当者")
+	?Employeeid Employee;
+	@Remarks("在庫認可No．")
+	?Inventorycode Code;
+	@Remarks("送案No")
+	?Relatedno null;
+	?Intransitflag null;/* 0 */
+	?Expamount Amount;
+	?Hhtsiflag null;
+	?Hhtsicode Code;
+	?TaxEdamount Amount;
+	?Localnettaxedamount Amount;
+	?Contractid Contract;
+	?Refreceiptid ID;
+	?Reportflag null;
+	?Reportuser null;
+	?Reportdate Date;
+	?Eta null;
+	?Tradeflag2 null;/* 0 */
+	?Sieta null;
+	?Tradekeijyodata null;
+	?Tradearrivedate Date;
+	?Ordtokusei null;
+	?Dealstatus null;
+	?Reportflagseikyou null;/* 0 */
+	?Reportdateseikyou null;
+	?Reportuserseikyou null;
+	?Exchagetype Attr;
+	?Exchagedatecode Code;
+	?OldZctrate Rate;
+	?OldExchagedatecode Code;
+	?Rateupdateuserid ID;
+	?Rateupdatetime null;
+	?Zctrate Rate;
+	?Reportflagdelivery null;/* 0 */
+	?Reportdatedelivery null;
+	?Reportuserdelivery null;
+	?Reportflagdeliverylist null;/* 0 */
+	?Reportdatedeliverylist null;
+	?Reportuserdeliverylist null;
+	?Reportflagseikyoulist null;/* 0 */
+	?Reportdateseikyoulist null;
+	?Reportuserseikyoulist null;
+	?Reportlistflag null;/* 0 */
+	?Reportlistuser null;
+	?Reportlistdate Date;
+	?OFlg null;
+	?Fxchangeflg null;
+	Saptransmitstatus null;/* 1  */
+	?Sapresulttreattime null;
+};
+

@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Wmputawaytemp {
+	!Wmputawaytempid ID;
+	?Locationno null;
+	?Warehouseid Physicalwarehouse;
+	?Orgid Organization;
+	?Availableqty Quantity;
+	?Existqty Quantity;
+	?Allqty Quantity;
+	?Qty Quantity;
+	?Userid Usr;
+	?Groupid Twxgroupm;
+};
+

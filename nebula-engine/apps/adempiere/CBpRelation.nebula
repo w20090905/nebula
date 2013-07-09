@@ -4,27 +4,17 @@ type CBpRelation {
 	@Remarks("Business Partner Relation")
 	!CBpRelationId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  	  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  	  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  	  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Identifies a Business Partner")
-	CBpartnerId CBpartner;
+	CBpartner;
 	@Remarks("Identifies the (ship to) address for this Business Partner")
-	?CBpartnerLocationId CBpartnerLocation;
+	?CBpartnerLocation;
 	@Remarks("Business Partner Shipment Address")
 	IsShipto YesNo;/* 'N'  	  */
 	@Remarks("Business Partner Invoice/Bill Address")
@@ -34,8 +24,8 @@ type CBpRelation {
 	@Remarks("Business Partner payment address")
 	IsRemitto YesNo;/* 'N'  	  */
 	@Remarks("Related Business Partner")
-	CBpartnerRelationId CBpartner;
+	CBpartnerRelation CBpartner;
 	@Remarks("Location of the related Business Partner")
-	CBpartnerRelationLocationId CBpartnerLocation;
+	CBpartnerRelationLocation CBpartnerLocation;
 };
 

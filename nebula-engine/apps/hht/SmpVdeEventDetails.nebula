@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type SmpVdeEventDetails {
+	?EventId SmpVdeEvent;
+	?TestId ID;
+	?Company null;
+	?Organization null;
+	?Product null;
+	?Filename;
+};
+

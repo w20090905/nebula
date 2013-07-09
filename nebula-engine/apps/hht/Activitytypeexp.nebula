@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Activitytypeexp {
+	!Activitytypeexpid ID;
+	?Description;
+	Expensetypecode Code;
+	?IsNeed YesNo;
+	Activitytypeid Activitytype;
+	?Expensetype null;
+};
+

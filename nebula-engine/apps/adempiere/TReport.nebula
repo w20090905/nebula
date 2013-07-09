@@ -2,9 +2,9 @@
 @Refby("0")
 type TReport {
 	@Remarks("Instance of the process")
-	!AdPinstanceId AdPinstance;
+	!AdPinstance;
 	@Remarks("Report Line")
-	!PaReportlineId PaReportline;
+	!PaReportline;
 	@Remarks("Direct internal record ID")
 	!RecordId ID;
 	@Remarks("Accounting Fact")

@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Faprocessreason {
+	!Faprocessreasonid ID;
+	Processtype null;
+	Reasoncode Code;
+	LanguageCode Lang;
+	Reasonname Name;
+	?Reasondesc null;
+	?IsDepr YesNo;
+	DateLastupdated Date;
+};
+

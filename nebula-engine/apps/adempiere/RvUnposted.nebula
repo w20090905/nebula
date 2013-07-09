@@ -1,17 +1,12 @@
 @Remarks("")
 @Refby("0")
 type RvUnposted {
-	?AdClientId AdClient;
-	?AdOrgId AdOrg;
-	?Created null;
-	?Createdby null;
-	?Updated null;
-	?Updatedby null;
-	?IsActive YesNo;
+	?AdClientId ID;
+	?AdOrgId ID;
 	?DocumentNo Code;
 	?DateDoc Date;
 	?DateAcct Date;
-	?AdTableId AdTable;
+	?AdTableId ID;
 	?RecordId ID;
 	?IsSotrx YesNo;
 };

@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Zxjpsaleschannelrulesdetail {
+	!Zxjpsaleschannelrulesdetailid ID;
+	Zxjpsaleschannelrulesid Zxjpsaleschannelrules;
+	?Sortno SeqNo;
+	?Logicsign null;
+	?FieldName Name;
+	?Operatename Name;
+	?FieldValue String;
+	?Comments Note;
+};
+

@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("1")
+tx Magtexptransfer {
+	!Magtexptransferid ID;
+	Magtexptransfercode Code;
+	Magreementcode Code;
+	Effectaccyearid ID;
+	Effectaccyear null;
+	Expireaccyearid ID;
+	Expireaccyear null;
+	Effectaccperiodid ID;
+	Effectno SeqNo;
+	Expireaccperiodid ID;
+	Expireno SeqNo;
+	Transoutresponsecenterid ID;
+	Maker null;
+	Createdate Date;
+	Status;
+	DateLastupdated Date;
+	?DateLastrun Date;
+	?Description;
+	Vouchersigncode Code;
+};
+

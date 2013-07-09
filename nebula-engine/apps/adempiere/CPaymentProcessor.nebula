@@ -4,35 +4,25 @@ type CPaymentProcessor {
 	@Remarks("Payment processor for electronic payments")
 	!CPaymentProcessorId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Account at the Bank")
-	CBankaccountId CBankaccount;
+	CBankaccount;
 	@Remarks("Document Sequence")
-	?AdSequenceId AdSequence;
+	?AdSequence;
 	@Remarks("Payment Processor Java Class")
 	?Payprocessorclass null;
 	@Remarks("User ID or account number")
-	?Userid null;
+	?Userid String;
 	@Remarks("Password of any length (case sensitive)")
 	?Password;
 	@Remarks("Host Address URL or DNS")
-	?Address null;
+	?Address Host;
 	@Remarks("Host Communication Port")
 	?Hostport Port;
 	@Remarks("Address of your proxy server")
@@ -62,11 +52,11 @@ type CPaymentProcessor {
 	@Remarks("Require 3/4 digit Credit Verification Code")
 	Requirevv YesNo;/* 'N'  */
 	@Remarks("The Currency for this record")
-	?CCurrencyId CCurrency;
+	?CCurrency;
 	@Remarks("Fixed cost per transaction")
-	Costpertrx Cost;/* 0  */
+	Costpertrx Number;/* 0  */
 	@Remarks("Commission stated as a percentage")
-	Commission null;
+	Commission Number;
 	@Remarks("Partner ID or Account for the Payment Processor")
 	?Partnerid null;
 	@Remarks("Vendor ID for the Payment Processor")

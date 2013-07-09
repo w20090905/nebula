@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("2")
+tx Itemgroupdeptmap {
+	!Itemgroupdeptmapid ID;
+	?Deptid Department;
+	Itemgroupid Itemgroup;
+	?Orgid Organization;
+};
+

@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("1")
+tx Twxhikiate {
+	!Hikiateid ID;
+	Kojocd null;
+	@Remarks("顧客注番である")
+	ChumonNo null;
+	?Groupcd null;
+	?SiireCd null;
+	?Toroku null;
+	?BhachuKbn null;
+	@Remarks("成約番号である")
+	?KeikiNo null;
+	@Remarks("取得方法:DICTIONARY.TYPE='SyuturyokuKbn'  出力先区分はVALUECODEに保存されてます")
+	?SyuturyokuKbn null;
+	?SisyuSyain null;
+	?Insymd null;
+	?Maker null;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?SyuturyokuKbncd null;
+};
+

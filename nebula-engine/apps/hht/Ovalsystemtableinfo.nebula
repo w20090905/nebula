@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("1")
+tx Ovalsystemtableinfo {
+	!SystemTableinfoid ID;
+	SystemTableid Ovalsystemtable;
+	Columnname Name;
+	Columntype Attr;
+	Columnlength Length;
+	IsNullable YesNo;
+	IsPk YesNo;
+};
+

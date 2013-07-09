@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtitemcostprice {
+	!Zhhtitemcostpriceid ID;
+	?Orgid Organization;
+	?Itemid Item;
+	?Sapevaluation null;
+	?Costareacode Code;
+	?Costmethod Cost;
+	?Costprice Cost;
+	?Createdate Date;
+	?DateLastupdated Date;
+};
+

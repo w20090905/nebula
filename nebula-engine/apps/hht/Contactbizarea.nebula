@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx Contactbizarea {
+	!Contactbizareaid ID;
+	Contactid Contact;
+	Areaid Businessarea;
+	DateLastupdated Date;
+};
+

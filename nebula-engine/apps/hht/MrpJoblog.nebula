@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+tx MrpJoblog {
+	!JobId ID;
+	MrpCode MrpInfo;
+	MrpName Name;
+	ProcedureName Name;
+	Createdate Date;
+	Jobstart null;
+	?Jobend null;
+	?Message;
+	?Data1 null;
+	?Data2 null;
+	?Data3 null;
+	?Data4 null;
+	?Data5 null;
+	?Data6 null;
+};
+

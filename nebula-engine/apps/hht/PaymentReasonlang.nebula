@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx PaymentReasonlang {
+	!PaymentReasonlangid ID;
+	?PaymentReasoncode Code;
+	?LanguageCode Lang;
+	?Descriptions Description;
+	?Comments Note;
+};
+

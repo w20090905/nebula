@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("3")
+tx Unspsc {
+	!Cid ID;
+	?Sgcode Code;
+	?Sgtitle Title;
+	?Facode Code;
+	?Fatitle Title;
+	?Clcode Code;
+	?Cocode Code;
+	?Unspsc null;
+	?Cltitle Title;
+	?Cotitle Title;
+};
+

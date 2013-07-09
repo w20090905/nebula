@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("3")
+type MrpFct {
+	!Forecastcode Code;
+	Forecastname Name;
+	Sellerdept null;
+	?Buyercode Code;
+	?Buyername Name;
+	Forecastlife null;
+	Forecastlifenum null;
+	Forecaststart null;
+	Status;
+	Source null;
+	Creator null;
+	Createdate Date;
+	?Memo;
+	?Updatedate Date;
+	?Updater null;
+};
+

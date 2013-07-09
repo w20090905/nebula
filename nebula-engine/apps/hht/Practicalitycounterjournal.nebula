@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+tx Practicalitycounterjournal {
+	!Counterjournalid ID;
+	Practicalitycounterid Practicalitycounter;
+	Counterid Counter;
+	Docdate Date;
+	Relatedtranid ID;
+	Relatedtrancode Code;
+	Relatedtrantype null;
+	Currentvalue null;
+	?Prevalue null;
+	?Scalar null;
+	?Precounterjournalid ID;
+	Practicalityid Practicality;
+	?Createdate Date;
+};
+

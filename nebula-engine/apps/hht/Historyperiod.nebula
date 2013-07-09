@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("4")
+tx Historyperiod {
+	!Historyperiodid ID;
+	Cubename Name;
+	Subcubename Name;
+	?Accountingyearid ID;
+	?Accyear null;
+	?Accperiod null;
+	?Year null;
+	?Month null;
+	?Week null;
+	?Day null;
+	Startdate Date;
+	Enddate Date;
+	Status;
+	?Lasthistoryperiodid ID;
+	DateLastupdated Date;
+	?Accountingperiodid ID;
+	?Weekpermonth null;
+	?Description;
+	?Weekno null;
+};
+

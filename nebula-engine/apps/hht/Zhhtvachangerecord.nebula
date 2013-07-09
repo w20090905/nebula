@@ -1,0 +1,35 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtvachangerecord {
+	!Vachangerecordid ID;
+	?Contractcode Code;
+	?Ordercode Code;
+	?Buyerid ID;
+	?Buyercode Code;
+	?Buyershortname Name;
+	?Sellerid ID;
+	?Sellercode Code;
+	?Sellershortname Name;
+	?LineNo Line;
+	?Itemid Item;
+	?Itemcode Code;
+	?Itemname Name;
+	?Vendoritemcode Code;
+	?Vendoritemname Name;
+	?Reqdelidate Date;
+	?Reqdelitime null;
+	?Answerdate Date;
+	?Answertime null;
+	?Updatetime null;
+	?Shiptocode Code;
+	?Shiptoname Name;
+	?Subno SeqNo;
+	?Orderqty Quantity;
+	?Deliveredqty Quantity;
+	?Answerqty Quantity;
+	?Docdate Date;
+	?Status;
+	?Source null;
+	?Comments Note;
+};
+

@@ -13,6 +13,8 @@ interface Rule {
 	public Rule with(String... strings);
 
 	public Rule is(DBColumnType... dbTypes);
+	
+	public Rule length(int length);
 
 	public Rule setTypeName(String type);
 
@@ -25,6 +27,8 @@ interface Rule {
 	public Rule useMatchedNameAsFieldName();
 
 	public Rule setAsMaster();
+	
+	public Rule defaultValue(String... values);
 	
 	public Rule nullable();
 	
@@ -40,7 +44,9 @@ interface Action {
 class RuleBuilder implements Rule {
 	DBColumnType[] dbTypes;
 	MatchPattern[] ruleTypes;
+	String[] defaultValues;
 	String[] with;
+	int length;
 	String tableName = null;
 	final List<Action> actions;
 
@@ -202,6 +208,18 @@ class RuleBuilder implements Rule {
 	public String toString() {
 		return "RuleBuilder [dbTypes=" + Arrays.toString(dbTypes) + ", ruleTypes=" + Arrays.toString(ruleTypes)
 				+ ", with=" + Arrays.toString(with) + ", tableName=" + tableName + ", actions=" + actions + "]";
+	}
+
+	@Override
+	public Rule length(int length) {
+		this.length = length;
+		return this;
+	}
+
+	@Override
+	public Rule defaultValue(String... values) {
+		this.defaultValues = values;
+		return this;
 	}
 
 

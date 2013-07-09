@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+tx Kpitargetplandetail {
+	!Kpitargetplandetailid ID;
+	Ktphierarchyid Ktphierarchy;
+	?Examineplanid Examineplan;
+	Kpitargetplanid Kpitargetplan;
+	?Month null;
+	?Actualvalue null;
+	?Targetvalue null;
+	?Achieverate Rate;
+	?Status;
+	?Examinegene null;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr21 null;
+	?Attr22 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Kpiid Kpi;
+};
+

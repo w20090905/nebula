@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx Fabalance {
+	!Fabalanceid ID;
+	Booksetid Bookset;
+	Periodid ID;
+	Orgid Organization;
+	Createdate Date;
+	Facategoryid Facategory;
+	?Initialamt Amount;
+	?Debitamt Amount;
+	?Creditamt Amount;
+	?BalanceAmt Amount;
+	DateLastupdated Date;
+	Legertype null;
+};
+

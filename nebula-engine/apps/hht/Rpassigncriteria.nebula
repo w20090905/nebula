@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Rpassigncriteria {
+	!Rpassigncriteriaid ID;
+	Rpassignmentid Rpassignment;
+	Sortno SeqNo;
+	FieldName Name;
+	Operator null;
+	Value String;
+	?Joinoperator null;
+	?Comments Note;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Reportdefineauthority {
+	!Rdauthorityid ID;
+	Reportdefineid Reportdefine;
+	?EntityType Attr;
+	?EntityId ID;
+	?DateLastupdated Date;
+	?Orgid Organization;
+	?Maker null;
+};
+

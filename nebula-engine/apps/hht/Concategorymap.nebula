@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Concategorymap {
+	!Concategorymapid ID;
+	?Convaluecode Code;
+	?Condesc null;
+	?Retvaluecode Code;
+	?Retdesc null;
+};
+

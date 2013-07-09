@@ -1,0 +1,30 @@
+@Remarks("")
+@Refby("0")
+tx Shiftassignment {
+	!Shiftassignmentid ID;
+	Orgid Organization;
+	?Poscode Code;
+	CashErid ID;
+	?Userid Usr;
+	Begindate Date;
+	?Enddate Date;
+	?Standbycash null;
+	?Cash null;
+	?Cheque null;
+	?Coupon null;
+	?Creditcard null;
+	?Accttrans Amount;
+	?Vipcardamt Amount;
+	?Other null;
+	?Syscash null;
+	?Syscheque null;
+	?Syscoupon null;
+	?Syscreditcard null;
+	?Sysaccttrans null;
+	?Sysvipcardamt Amount;
+	?Sysother null;
+	?TotalSalesAmt Amount;
+	?TotalRtnamt Amount;
+	Status;
+};
+

@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Agreementexptermdetail {
+	!Expensetermdetailid ID;
+	Itemid Item;
+	Minqty Quantity;
+	Expensetermvaluetype null;
+	Umcode Code;
+	Value null;
+	Itemserviceagreementid Itemserviceagreement;
+	?Detailtype null;
+	?Expensegroup null;
+	?Periodgroup null;
+};
+

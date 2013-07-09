@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("0")
+type Getnewsapitemdata {
+	Itemid Item;
+	?Deptid Department;
+	?Orgcode Code;
+	?Itemcode Code;
+	?Materialtypename Name;
+	?Prdnjp null;
+	?Umcode Code;
+	?Matkl null;
+	?Extwg null;
+	?Ctgy null;
+	?Dcgyg null;
+	?Ingrp null;
+	?Incls null;
+	?Vendorid ID;
+	?Vendoritemcode Code;
+	?Labor null;
+	?Magrv null;
+	?Prdnen null;
+};
+

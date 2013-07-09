@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+type AddressBeforeImp {
+	Addressid Address;
+	?Orgid Organization;
+	Address Name;
+	?Address Attr;
+	Addressroletype null;
+	CountryCode Code;
+	Regioncode Code;
+	?Portcode Code;
+	Zipcode Code;
+	Status;
+	?IsPrimary YesNo;
+	?DateLastupdated Date;
+	?Address Code;
+	?Contactid Contact;
+	?Orgrelationdetailid Orgrelationdetail;
+};
+

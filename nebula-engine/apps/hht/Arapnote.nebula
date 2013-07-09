@@ -1,0 +1,35 @@
+@Remarks("")
+@Refby("1")
+tx Arapnote {
+	!Noteid ID;
+	Journalnum null;
+	Notenum null;
+	Orgid Organization;
+	Araptype Attr;
+	Notetype null;
+	Partnerid ID;
+	DateOfdraft Date;
+	Maturitydate Date;
+	Faceamount Amount;
+	Rate;
+	Payer null;
+	AcceptOr null;
+	?Endorsor null;
+	?Endorsedate Date;
+	?DiscountDate Date;
+	?DiscountRate Rate;
+	?DiscountAmount Amount;
+	?Gatheringdate Date;
+	?Gatheringamount Amount;
+	?Relatedtrancode Code;
+	?Relatedtranid ID;
+	?Createdate Date;
+	?Returnreason null;
+	?Remark null;
+	?DateLastupdated Date;
+	?Maker null;
+	Status;
+	?Revision null;
+	?Orginalarapnoteid ID;
+};
+

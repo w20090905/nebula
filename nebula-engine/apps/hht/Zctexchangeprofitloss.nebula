@@ -1,0 +1,27 @@
+@Remarks("")
+@Refby("1")
+tx Zctexchangeprofitloss {
+	!Exchangeprofitlossid ID;
+	Exchangeprofitlosscode Code;
+	?ReferenceNo Code;
+	Docdate Date;
+	?Gldate Date;
+	?Currencycode Code;
+	?Rate;
+	?Maker null;
+	Createdate Date;
+	?Comments Note;
+	?Unassignamount Amount;
+	?Unassignlocalamount Amount;
+	?AfterExchangelocalamount Amount;
+	?Profitlossamount Amount;
+	Status;
+	Orgid Organization;
+	Ownerorgid ID;
+	?DateLastupdated Date;
+	?Accperiodid Accountingperiod;
+	?Accountingyearid ID;
+	?Period null;
+	?Year null;
+};
+

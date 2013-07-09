@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("3")
+tx Orgterms {
+	!Orgtermid ID;
+	Orgid Organization;
+	?DateLastupdated Date;
+};
+

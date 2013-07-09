@@ -1,0 +1,15 @@
+@Remarks("List of all services put in a group, including services of member groups")
+@Refby("0")
+type SmpViewGroupAllServices {
+	@Remarks("Name of the group")
+	GroupName Name;
+	@Remarks("Name of member group")
+	MemberName Name;
+	@Remarks("Name of the service in the group")
+	TargetName Name;
+	@Remarks("Type of service in the group")
+	TargetType Attr;
+	@Remarks("Translated name for the target type")
+	?TargetNlsType Attr;
+};
+

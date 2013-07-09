@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Workorderwaster {
+	!Workorderwasterid ID;
+	Workorderid Workorder;
+	Wastername Name;
+	Umname Name;
+	Qty Quantity;
+	?Description;
+	?Createdate Date;
+};
+

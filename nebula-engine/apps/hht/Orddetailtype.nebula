@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Orddetailtype {
+	!Orddetailtypeid ID;
+	Orddetailtypecode Code;
+	?Comments Note;
+	DateLastupdated Date;
+	?Arflag null;
+};
+

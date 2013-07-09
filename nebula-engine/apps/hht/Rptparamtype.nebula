@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Rptparamtype {
+	!Rptparamtypeid ID;
+	?Rptcolname Name;
+	?Rptcoldesc null;
+	?Rptcolcode Code;
+	?Sequence;
+	?Type null;
+};
+

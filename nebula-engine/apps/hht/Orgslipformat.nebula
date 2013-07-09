@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("1")
+tx Orgslipformat {
+	!Slipformatid ID;
+	Sliptype null;
+	FormAtname Name;
+	?FormAtdesc null;
+	?Modelname Name;
+	?Marconame Name;
+	?Modeltype null;
+};
+

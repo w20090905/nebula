@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx Orgcopyer {
+	!Orgcopyerid ID;
+	Orgcopyid Orgcopy;
+	Partnerid ID;
+	?Orggroupid Orggroup;
+	?Areaid Businessarea;
+	?Contactid Contact;
+	?Abccode Code;
+	?Creditlimit Count;
+	?Creditexpiredate Date;
+	?Warehouseid Physicalwarehouse;
+	DateLastupdated Date;
+	?Srcrelationdetailid ID;
+};
+

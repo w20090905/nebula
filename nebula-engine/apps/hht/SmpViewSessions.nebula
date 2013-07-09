@@ -1,0 +1,11 @@
+@Remarks("List of all administrators currently logged on to the repository")
+@Refby("0")
+type SmpViewSessions {
+	@Remarks("Name of the logged on administrator")
+	AdministratorName Name;
+	@Remarks("Name OMS this administrator is connected to")
+	OmsMachine null;
+	@Remarks("Data and time this administrator logged on to the system")
+	?LoginTime null;
+};
+

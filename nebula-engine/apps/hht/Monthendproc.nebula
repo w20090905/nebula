@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Monthendproc {
+	!Monthendprocid ID;
+	Booksetid Bookset;
+	?Orgid Organization;
+	Accountingyearid ID;
+	Accountingperiodid ID;
+	?Mepsteptype null;
+	?Stepno SeqNo;
+	?Description;
+	?Status;
+	?Referid ID;
+};
+

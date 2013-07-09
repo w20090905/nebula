@@ -4,42 +4,32 @@ type AdPrintForm {
 	@Remarks("Form")
 	!AdPrintFormId ID;
 	@Remarks("Client/Tenant for this installation.")
-	?AdClientId AdClient;
+	?AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Print Format for printing Invoices")
-	?InvoicePrintFormatId AdPrintFormat;
+	?InvoicePrintFormat AdPrintFormat;
 	@Remarks("Print Format for Orders, Quotes, Offers")
-	?OrderPrintFormatId AdPrintFormat;
+	?OrderPrintFormat AdPrintFormat;
 	@Remarks("Print Format for separate Remittances")
-	?RemittancePrintFormatId AdPrintFormat;
+	?RemittancePrintFormat AdPrintFormat;
 	@Remarks("Print Format for Shipments, Receipts, Pick Lists")
-	?ShipmentPrintFormatId AdPrintFormat;
+	?ShipmentPrintFormat AdPrintFormat;
 	@Remarks("Email text used for sending invoices")
-	?InvoiceMailtextId RMailtext;
+	?InvoiceMailtext RMailtext;
 	@Remarks("Email text used for sending order acknowledgements or quotations")
-	?OrderMailtextId RMailtext;
+	?OrderMailtext RMailtext;
 	@Remarks("Email text used for sending payment remittances")
-	?RemittanceMailtextId RMailtext;
+	?RemittanceMailtext RMailtext;
 	@Remarks("Email text used for sending delivery notes")
-	?ShipmentMailtextId RMailtext;
+	?ShipmentMailtext RMailtext;
 	@Remarks("Standard text for Project EMails")
-	?ProjectMailtextId RMailtext;
+	?ProjectMailtext RMailtext;
 	@Remarks("Standard Project Print Format")
-	?ProjectPrintFormatId AdPrintFormat;
+	?ProjectPrintFormat AdPrintFormat;
 };
 

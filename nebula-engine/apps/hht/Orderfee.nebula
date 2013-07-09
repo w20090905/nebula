@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Orderfee {
+	!Orderfeeid ID;
+	Orderid Ord;
+	FeeType null;
+	?Amount;
+	?Comments Note;
+};
+

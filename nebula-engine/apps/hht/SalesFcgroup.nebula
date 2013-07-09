@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("2")
+tx SalesFcgroup {
+	!SalesFcgroupid ID;
+	Orgid Organization;
+	Fcgroupcode Code;
+	Fcgroupname Name;
+	?Whgroupcode Code;
+	SalesFclevel null;
+	?Description;
+	DateLastupdated Date;
+};
+

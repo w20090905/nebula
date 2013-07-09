@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type SmpVarSmrSavedJob {
+	?Jobname Name;
+	?Jobdescription Description;
+	?Dbname Name;
+	?Jobtype Attr;
+	?Oemusername Name;
+};
+

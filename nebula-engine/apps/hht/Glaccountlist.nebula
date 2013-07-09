@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("4")
+tx Glaccountlist {
+	!Glaccountlistid ID;
+	Orgid Organization;
+	Glaccountlistcode Code;
+	?Glaccountstructure null;
+	Status;
+	?Createdate Date;
+	?Maker null;
+	?Createtopaccountflag YesNo;
+	?Comments Note;
+	?DateLastupdated Date;
+	?Currencycode Code;
+	?Gradecount Count;
+	?Grade1 null;
+	?Grade2 null;
+	?Grade3 null;
+	?Grade4 null;
+	?Grade5 null;
+	?Grade6 null;
+};
+

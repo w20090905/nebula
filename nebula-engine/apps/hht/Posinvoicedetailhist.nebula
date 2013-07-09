@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("0")
+tx Posinvoicedetailhist {
+	!Posinvoicedetailhistid ID;
+	Posinvoicehistid Posinvoicehist;
+	Posdailysettleid Posdailysettle;
+	Itemid Item;
+	?Itemcode Code;
+	?Barcode Code;
+	?Lotno null;
+	?Itemname Name;
+	?Umcode Code;
+	?Umname Name;
+	?Listprice Price;
+	?Netprice Price;
+	?LineNetprice Line;
+	?Retailqty Quantity;
+	?Unrtnqty Quantity;
+	?Amount;
+	?DiscountRate Rate;
+	?LineType Line;
+	?Originalposinvoicedetailhistid ID;
+};
+

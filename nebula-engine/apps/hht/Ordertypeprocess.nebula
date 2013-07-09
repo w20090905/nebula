@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+tx Ordertypeprocess {
+	!Ordertypeprocessid ID;
+	Ordertypeid Ordertype;
+	Orderprocessid Orderprocess;
+};
+

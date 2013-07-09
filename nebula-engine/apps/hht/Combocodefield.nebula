@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("1")
+tx Combocodefield {
+	!FieldId ID;
+	?Orgid Organization;
+	Tablename Name;
+	FieldName Name;
+	?Comments Note;
+	?IsAuto YesNo;
+	?DateLastupdated Date;
+};
+

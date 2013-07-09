@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("2")
+tx Route {
+	!Routeid ID;
+	Routecode Code;
+	?Routename Name;
+	?Fromportcode Code;
+	?Toportcode Code;
+	?Shipmentmethod null;
+	?TotalMiles null;
+	?Umcode Code;
+	?Comments Note;
+	Orgid Organization;
+	?Shipmentday null;
+};
+

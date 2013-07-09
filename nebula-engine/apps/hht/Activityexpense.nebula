@@ -2,16 +2,16 @@
 @Refby("0")
 tx Activityexpense {
 	!Activityexpenseid ID;
-	*Expensetype null;
+	Expensetype null;
 	Applyfordate Date;
 	Applyforamount Amount;
 	?Reimburseddate Date;
 	?Reimbursedamount Amount;
 	?Remark null;
 	Customerid ID;
-	?Contactid ID;
+	?Contactid Contact;
 	Activityid Activity;
-	*Expensetypecode null;
+	Expensetypecode null;
 	Amount;
 	?Attachnumber null;
 	?Comments Note;

@@ -1,0 +1,109 @@
+@Remarks("")
+@Refby("0")
+tx Tradecondition {
+	!Tradeconditionid ID;
+	Tradeconditioncode Code;
+	?Buyerid ID;
+	?Buyercd null;
+	?Buyerdept null;
+	?Buyerdeptcd null;
+	?Sellerid ID;
+	?Sellercd null;
+	?Sellerdept null;
+	?Sellerdeptcd null;
+	?RequestEr null;
+	?RequestErcd null;
+	?RequestErdept null;
+	?RequestErdeptcd null;
+	?Payer null;
+	?Payercd null;
+	?Payerdept null;
+	?Payerdeptcd null;
+	?Endcustomer null;
+	?Endcustomerdept null;
+	?Endcustormername Name;
+	?Startdate Date;
+	?Itemid Item;
+	?Itemname Name;
+	?Itemgroupid Itemgroup;
+	?Sndcompany null;
+	?Sndcompanydept null;
+	?Sndcompanyname Name;
+	?Trdcompany null;
+	?Trdcompanydept null;
+	?Trdcompanyname Name;
+	?Billtomethod null;
+	?Billtobase null;
+	?Billtocondition null;
+	?QtyType Attr;
+	?Unitprice Unit;
+	?Umcode Code;/* 'KG' */
+	?Unittype Attr;
+	?Commissiontype Attr;
+	?Sndcompanycommissiontype Attr;
+	?Sndcompanycommissionrate Rate;
+	?Receivecompanyid ID;
+	?Receivecompanydept null;
+	?Receivecompname Name;
+	?DeliveryCondition null;/* '0' */
+	?Bankcode Code;
+	?Paycondition null;
+	?Capacity null;
+	?Koucode Code;
+	?Zhuwenqtyunit String;/* 'KG' */
+	?Hezi null;
+	?Quyindiff null;
+	?TaxDiff null;/* '1' */
+	?Batuguorderdiff null;
+	?DeliveryDiff null;/* '1' */
+	?Memo;
+	?Hhtendprice Price;
+	?Purchaseprice Price;
+	?Purchaseendprice Price;
+	?Purcommissionrate Rate;
+	?Purapplieddate Date;
+	?Sellprice Price;
+	?Sellendprice Price;
+	?Sellcommissionrate Rate;
+	?Sellapplieddate Date;
+	?Sellcommissionprice Price;
+	?Sapevaluation null;
+	?Sapcode Code;
+	?Hezicode Code;
+	?Inventorycode Code;
+	?Saplotno null;
+	?Itemcoderight4 null;
+	?Supplementcode Code;
+	?Evaluation null;
+	?Suitbase null;
+	?Invflag null;
+	?Lastupdateddate null;
+	?Contractno null;
+	?Orgid Organization;
+	?Status;
+	?Userid Usr;
+	?Pgid null;
+	?Createdate null;
+	Currencycode Code;/* 'JPY'  */
+	?Juchucode Code;
+	?Juchuid ID;
+	?Itemcode Code;
+	?Bankname Name;
+	?Commissionprice Price;
+	?Downloadflg null;/* 0 */
+	?Dcmssellerid null;
+	?Dcmssellercd null;
+	?Endcustomercd null;
+	?Endcustomerdeptcd null;
+	?Sndcompanycd null;
+	?Sndcompanydeptcd null;
+	?Trdcompanycd null;
+	?Trdcompanydeptcd null;
+	?Receivecompanycd null;
+	?Receivecompanydeptcd null;
+	?Purchasediffprice Price;
+	?Selldiffprice Price;
+	?Sapbilltoname Name;
+	?Daihyonisugata null;
+};
+

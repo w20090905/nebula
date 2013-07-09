@@ -1,0 +1,42 @@
+@Remarks("")
+@Refby("20")
+tx Invsummary {
+	!Invsummaryid ID;
+	?Periodid ID;
+	Orgid Organization;
+	Warehouseid Physicalwarehouse;
+	?Locationno null;
+	Itemid Item;
+	Invstatus null;
+	?Lotno null;
+	?Batchno null;
+	?Serialno null;
+	Sliptype null;
+	Slipid ID;
+	Slipno null;
+	?Comments Note;
+	?Initialqty Quantity;
+	?Initialamt Amount;
+	?Debit null;
+	?Credit null;
+	Price;
+	?Amount;
+	Endqty Quantity;
+	?Endamt Amount;
+	QtyAll Quantity;
+	?Checkindate Date;
+	DateLastupdated Date;
+	?Vendorid ID;
+	Slipdetailid ID;
+	?Originalinvsummaryid ID;
+	?Debitamt Amount;
+	?Creditamt Amount;
+	?Glaccountid Glaccount;
+	?Transactioncode Code;
+	?Customerid ID;
+	?Investimateno null;
+	?Dailyinvtodate Date;
+	?Saplotno null;
+	?Sapevaluation null;
+};
+

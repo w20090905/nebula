@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Activityperiod {
+	!Activityperiodid ID;
+	Activityid Activity;
+	Accyearid Accountingyear;
+	Accperiodid Accountingperiod;
+	Year null;
+	Periodno SeqNo;
+	Weight;
+	?Budgetamount Amount;
+	?SalesTarget null;
+	?Remark null;
+};
+

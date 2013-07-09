@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Twxdensocrpthistroy {
+	!Seqid Twxmitumoriiraiumhistroy;
+	?PrintFlg null;
+	?Orgid Organization;
+	?Userid Usr;
+	?Createdate Date;
+	?DateLastupdated Date;
+};
+

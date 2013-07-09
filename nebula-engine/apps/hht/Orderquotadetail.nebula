@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("0")
+tx Orderquotadetail {
+	!Orderquotadetailid ID;
+	Orderquotaid Orderquota;
+	?Partnerid ID;
+	Prodcondition null;
+	?Prodlineid ProductLine;
+	?Prodid Product;
+	Quotaperiodtype null;
+	?Startdate Date;
+	?Enddate Date;
+	Quotachecktype null;
+	Qty Quantity;
+	?Time Count;
+	DateLastupdated Date;
+	?Brandcode Code;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr11 null;
+	?Attr31 null;
+};
+

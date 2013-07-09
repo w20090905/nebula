@@ -1,0 +1,405 @@
+@Remarks("")
+@Refby("0")
+type Trnshukaseikyu {
+	@Remarks("ｼｰｹﾝｽID")
+	Seqid Twxmitumoriiraiumhistroy;
+	@Remarks("有効区分")
+	Activekbn null;/* 1  */
+	@Remarks("導出入区分")
+	Inoutkbn null;/* 1  */
+	@Remarks("編集区分")
+	Editkbn null;/* 0  */
+	@Remarks("新規時刻")
+	Createdate null;
+	@Remarks("更新時刻")
+	Updatedate null;
+	@Remarks("エラーメッセージ")
+	?Messageid Message;
+	@Remarks("処理区・")
+	Disposekbn null;
+	@Remarks("処理年月日")
+	?Disposeymd null;
+	@Remarks("処理時刻")
+	?Disposetime null;
+	@Remarks("部署ｺｰﾄﾞ")
+	?Deptcd null;
+	@Remarks("成約ｺｰﾄﾞ")
+	?Contractcd null;
+	@Remarks("成約ﾀｲﾌﾟ")
+	?Contracttype Attr;
+	@Remarks("責任者No.")
+	?Personinchargeno null;
+	@Remarks("ｵｰﾀﾞｰ番号")
+	?Orderno null;
+	@Remarks("仕入先ｺｰﾄﾞ")
+	?Vendorcd null;
+	@Remarks("出荷先ｺｰﾄﾞ")
+	?Shippmenttocd null;
+	@Remarks("注文日")
+	?Orderdate Date;
+	@Remarks("HHT管理番号")
+	?Hhtmgmtno null;
+	@Remarks("原産国ｺｰﾄﾞ")
+	?ProductCountryCd null;
+	@Remarks("仕向国ｺｰﾄﾞ")
+	?Purchasecountrycd null;
+	@Remarks("通貨")
+	?Currencycd null;
+	@Remarks("為替区分")
+	?Fxkbn null;
+	@Remarks("為替予約No.")
+	?Fxpreno null;
+	@Remarks("為替ﾚｰﾄ")
+	?Fxrate null;
+	@Remarks("支払条件")
+	?Paycondition null;
+	@Remarks("L/C No.")
+	?Lcno1 null;
+	@Remarks("運送条件")
+	?Transportcond null;
+	@Remarks("運送条件 テキスト")
+	?Transportcondtext Text;
+	@Remarks("運送方法")
+	?Transportmethod null;
+	@Remarks("優先度")
+	?Priority null;
+	@Remarks("レートタイプ")
+	?Ratetype Attr;
+	@Remarks("消費税ｺｰﾄﾞ")
+	?Consumptiontaxcd null;
+	@Remarks("在庫認可No")
+	?Inventoryno null;
+	@Remarks("ｵｰﾀﾞｰ特性")
+	?Orderattr null;
+	@Remarks("備考")
+	?Memo;
+	@Remarks("Insurance")
+	?Insurance null;
+	@Remarks("E/L No")
+	?Elno null;
+	@Remarks("P/O Attn")
+	?Poattn null;
+	@Remarks("S/C Attn")
+	?Scattn null;
+	@Remarks("Inspection")
+	?Inspection null;
+	@Remarks("Specification")
+	?Specifications null;
+	@Remarks("Packing")
+	?Packing null;
+	@Remarks("Ship Via1")
+	?Shipvia1 null;
+	@Remarks("Ship Via2")
+	?Shipvia2 null;
+	@Remarks("Ship From")
+	?Shipfrom null;
+	@Remarks("Ship To")
+	?Shipto null;
+	@Remarks("Shipping Mark1")
+	?Shipmark1 null;
+	@Remarks("Shipping Mark2")
+	?Shipmark2 null;
+	@Remarks("Shipping Mark3")
+	?Shipmark3 null;
+	@Remarks("Shipping Mark4")
+	?Shipmark4 null;
+	@Remarks("Shipping Mark5")
+	?Shipmark5 null;
+	@Remarks("Shipping Mark6")
+	?Shipmark6 null;
+	@Remarks("Shipping Mark7")
+	?Shipmark7 null;
+	@Remarks("L/C No")
+	?Lcno2 null;
+	@Remarks("Shipped Per")
+	?Shippedper null;
+	@Remarks("Consignee(名称)")
+	?Consigneename Name;
+	@Remarks("Consignee(住所)")
+	?Consigneeaddr Address;
+	@Remarks("B/L No")
+	?Blno null;
+	@Remarks("包括/個別")
+	?Includespec null;
+	@Remarks("C/P No")
+	?Cpno null;
+	@Remarks("着荷予定日")
+	?Arrivalplandate Date;
+	@Remarks("出荷実績日")
+	?DeliveryDate Date;
+	@Remarks("伝票日付")
+	?Billdate Date;
+	@Remarks("販売起算日")
+	?SalesTartdate Date;
+	@Remarks("送案No")
+	?Soanno null;
+	@Remarks("通関No")
+	?Customsclearanceno null;
+	@Remarks("Line No")
+	?LineNo null;
+	@Remarks("顧客注番")
+	?Customerodrno null;
+	@Remarks("ｱｲﾃﾑｺｰﾄﾞ")
+	?Itemcode Code;
+	@Remarks("ｱｲﾃﾑ名称")
+	?Itemname Name;
+	@Remarks("要求納期１")
+	?RequestDate1 null;
+	@Remarks("要求納期２")
+	?RequestDate2 null;
+	@Remarks("回答納期１")
+	?Answerdate1 null;
+	@Remarks("回答納期２")
+	?Answerdate2 null;
+	@Remarks("発注数量")
+	?Orderqty Quantity;
+	@Remarks("単位")
+	?Unit null;
+	@Remarks("単価")
+	?Price;
+	@Remarks("末端単価")
+	?Endprice Price;
+	@Remarks("口銭率")
+	?Commisionrate Rate;
+	@Remarks("SAPﾛｯﾄNo.")
+	?Saplotno null;
+	@Remarks("SAP評価ﾀｲﾌﾟ")
+	?Sapevaluatetype Attr;
+	@Remarks("明細カテゴリ")
+	?Detailcategory null;
+	@Remarks("ｻｲｽﾞ/寸法")
+	?Sz null;
+	@Remarks("ｱｲﾃﾑ特性1")
+	?Itemattr1 null;
+	@Remarks("ｱｲﾃﾑ特性2")
+	?Itemattr2 null;
+	@Remarks("出荷数量")
+	?DeliveryQty Quantity;
+	@Remarks("仕入先図番")
+	?Vendorinxno null;
+	@Remarks("受注先ｺｰﾄﾞ")
+	?Buyercd null;
+	@Remarks("受注先名称")
+	?Buyername Name;
+	@Remarks("仕入先名称")
+	?Shippmenttoname Name;
+	@Remarks("輸入Invoice No")
+	?Importinvoiceno null;
+	@Remarks("出荷先名称（正式）")
+	?DeliveryNormalname Name;
+	@Remarks("出荷先名称（略称）")
+	?DeliveryShortname Name;
+	@Remarks("ﾄﾗﾝｻﾞｸｼｮﾝ区分")
+	?Transactionkbn null;
+	@Remarks("在直区分 1：在庫；２：直送")
+	?Zaichokukbn String;
+	@Remarks("バッチ要ｴﾗｰｺｰﾄﾞ")
+	?Errcode Code;
+	@Remarks("発注単価")
+	?Odrprice Price;
+	@Remarks("仕入先ID")
+	?Edivendorid null;
+	@Remarks("赤黒区分")
+	?Redblackkbn null;
+	@Remarks("発注者企業コード")
+	?Buyercd1 null;
+	@Remarks("発注者部門コード")
+	?Buyerdeptcd null;
+	@Remarks("受注者企業コード")
+	?Sellercd null;
+	@Remarks("受注者部門コード")
+	?Sellerdeptcd null;
+	@Remarks("請求者企業コード")
+	?RequestErcd null;
+	@Remarks("請求者部門コード")
+	?RequestErdeptcd null;
+	@Remarks("支払者企業コード")
+	?Payercd null;
+	@Remarks("支払者部門コード")
+	?Payerdeptcd null;
+	@Remarks("契約番号")
+	?Pactno null;
+	@Remarks("実施年月日")
+	?Startdate Date;
+	@Remarks("注文番号")
+	?Ediorderno null;
+	@Remarks("発注者・注文日")
+	?Orderdate1 null;
+	@Remarks("ｵｰﾀﾞｰ区分")
+	?Orderkbn null;
+	@Remarks("連絡要否区分")
+	?Linkkbn null;
+	@Remarks("数量指定区分")
+	?Numkbn null;
+	@Remarks("発注コメント　カナ")
+	?Ordcommentkn null;
+	@Remarks("発注コメント　漢字")
+	?Ordcommentkj null;
+	@Remarks("受注番号")
+	?AcceptOrdno null;
+	@Remarks("受注者・注文確定日")
+	?AcceptOrddate Date;
+	@Remarks("受注者注文受付日")
+	?AcceptOrddateymd null;
+	@Remarks("受注者注文受付時刻")
+	?AcceptOrddatehms null;
+	@Remarks("受注者・注文確定日")
+	?Confirmorddate Date;
+	@Remarks("分納区分")
+	?Installmentkbn null;
+	@Remarks("受注者処理区分")
+	?AcceptOrprockbn null;
+	@Remarks("品名ｸﾞﾙｰﾌﾟ")
+	?Itemgroup null;
+	@Remarks("品名")
+	?Itemname1 null;
+	@Remarks("ロット番号指定区分")
+	?Lotnokbn null;
+	@Remarks("ロット番号")
+	?Lotno null;
+	@Remarks("需要家企業コード")
+	?Endcustomercd null;
+	@Remarks("需要家部門コード")
+	?Endcustomerdeptcd null;
+	@Remarks("需要家名称(ｶﾅ)")
+	?Endcustomernamekn null;
+	@Remarks("需要家名称（漢字）")
+	?Endcustomernamekj null;
+	@Remarks("需要家注文番号")
+	?Endcustomerordno null;
+	@Remarks("２次店企業コード")
+	?Sndcompanycd null;
+	@Remarks("２次店部門コード")
+	?Sndcompanydeptcd null;
+	@Remarks("２次店名称(ｶﾅ)")
+	?Sndcompanynamekn null;
+	@Remarks("２次店名称（漢字）")
+	?Sndcompanynamekj null;
+	@Remarks("決済条件締切日")
+	?Billcondstartdate Date;
+	@Remarks("決済条件起算日")
+	?Billcondenddate Date;
+	@Remarks("決済条件手段")
+	?Billmethod null;
+	@Remarks("決裁条件満期日")
+	?Billcondduedate Date;
+	@Remarks("決裁基準")
+	?Billbase null;
+	@Remarks("決済条件")
+	?Billcondition null;
+	@Remarks("販売単価")
+	?Saleprice Price;
+	@Remarks("単価単位")
+	?Unitcode Code;
+	@Remarks("単価区分")
+	?Unitkbn null;
+	@Remarks("口銭区分")
+	?Commisionkbn null;
+	@Remarks("口銭")
+	?Commision null;
+	@Remarks("納入先企業コード")
+	?Receivercd null;
+	@Remarks("納入先部門コード")
+	?Receiverdeptcd null;
+	@Remarks("納入先名称（ｶﾅ）")
+	?Receivernamekn null;
+	@Remarks("納入先名称（漢字）")
+	?Receivernamekj null;
+	@Remarks("受渡条件")
+	?DeliveryCondition null;
+	@Remarks("受渡場所住所（ｶﾅ）")
+	?DeliveryAddrkn null;
+	@Remarks("受渡場所住所（漢字）")
+	?DeliveryAddrkj null;
+	@Remarks("郵便番号")
+	?Zip String;
+	@Remarks("電話番号")
+	?Tel null;
+	@Remarks("FAX電話番号")
+	?Fax;
+	@Remarks("希望納入年月日")
+	?Hopedate Date;
+	@Remarks("納入年月日（予定）")
+	?Receiverdate Date;
+	@Remarks("納入要件")
+	?Receiverdemand null;
+	@Remarks("納入要件（漢字）")
+	?Receiverdemandkj null;
+	@Remarks("注文数量")
+	?Orderqty1 null;
+	@Remarks("注文数量単位")
+	?Orderunit null;
+	@Remarks("注文・販売個数")
+	?Ordsaleqty Quantity;
+	@Remarks("販売数量")
+	?Saleqty Quantity;
+	@Remarks("金額算出数量")
+	?Calcqty Quantity;
+	@Remarks("荷姿")
+	?Packing1 null;
+	@Remarks("容量")
+	?Capacity null;
+	@Remarks("販売金額")
+	?Saleamount Amount;
+	@Remarks("請求金額")
+	?Reqamount Amount;
+	@Remarks("消費税額")
+	?Consumetaxamount Amount;
+	@Remarks("税込請求額")
+	?Reqsumtaxamount Amount;
+	@Remarks("単価・金額区分")
+	?Unitamountkbn null;
+	@Remarks("取引区分")
+	?Tradekbn null;
+	@Remarks("遡及区分")
+	?Tracekbn null;
+	@Remarks("出荷請求区分")
+	?Dispachreqkbn null;
+	@Remarks("課税区分")
+	?TaxKbn null;
+	@Remarks("バックオーダ区分")
+	?Backorderkbn null;
+	@Remarks("計上年月")
+	?Sumupym null;
+	@Remarks("割増割引区分")
+	?DiscountKbn null;
+	@Remarks("割増割引理由")
+	?DiscountReason null;
+	@Remarks("出荷年月日（予定）")
+	?Dispatchdate Date;
+	@Remarks("出荷報告番号")
+	?Dispatchreportno null;
+	@Remarks("出荷請求番号")
+	?Dispatchreqno null;
+	@Remarks("出荷指図ｺﾒﾝﾄ（漢字）")
+	?Dispatchinstructcmt null;
+	@Remarks("発注者情報")
+	?Buyerinfo Info;
+	@Remarks("受注者情報")
+	?Sellerinfo Info;
+	@Remarks("国内輸出区分")
+	?Exportkbn null;
+	@Remarks("ｴﾗｰ理由（ｶﾅ）")
+	?Errreasonkn null;
+	@Remarks("ｴﾗｰ理由（漢字）")
+	?Errreasonkj null;
+	@Remarks("請求確認区分")
+	?Reqconfirmkbn null;
+	@Remarks("予備欄（漢字）")
+	?Edimemokj null;
+	@Remarks("実績作成区分")
+	?Jisekifilekbn null;/* 0 */
+	@Remarks("実績送信区分")
+	?Jisekisendkbn null;/* 0 */
+	@Remarks("請求確認作成区分")
+	?Seikyufilekbn null;/* 0 */
+	@Remarks("請求確認送信区分")
+	?Seikyusendkbn null;/* 0 */
+	@Remarks("画面処理区分")
+	?Gamenshorikbn null;
+	@Remarks("取引条件ー契約番号")
+	?Tccontractno null;
+	?Orgid Organization;
+	?Disposeymd1 null;
+};
+

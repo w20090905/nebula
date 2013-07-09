@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("14")
+type SmpVxaSystemPrefs {
+	!*Name;
+	?Value String;
+};
+

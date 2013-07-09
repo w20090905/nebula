@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx SalesOpportunitystage {
+	!Opportunitystageid ID;
+	Opportunityid SalesOpportunity;
+	Opportunityamount Amount;
+	Winrate Rate;
+	Forecastamount Amount;
+	Opportunitystage null;
+	?Stagechangereason null;
+	?Forecastorderdate Date;
+	DateLastupdated Date;
+};
+

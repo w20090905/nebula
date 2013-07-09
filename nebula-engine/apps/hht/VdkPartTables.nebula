@@ -1,0 +1,31 @@
+@Remarks("")
+@Refby("0")
+type VdkPartTables {
+	?VdkId ID;
+	?VdkName Name;
+	?VdkParentId ID;
+	?VdkDatabaseId VdkDatabase;
+	?VdkOwnerName Name;
+	?VdkTableName Name;
+	?VdkPartitioningType Attr;
+	?VdkSubpartitioningType Attr;
+	?VdkPartitionCount Count;
+	?VdkDefSubpartitionCount Count;
+	?VdkPartitioningKeyCount Count;
+	?VdkSubpartitioningKeyCount Count;
+	?VdkDefTablespaceName Name;
+	?VdkDefPctFree null;
+	?VdkDefPctUsed null;
+	?VdkDefIniTrans null;
+	?VdkDefMaxTrans null;
+	?VdkDefInitialExtent null;
+	?VdkDefNextExtent null;
+	?VdkDefMinExtents null;
+	?VdkDefMaxExtents null;
+	?VdkDefPctIncrease null;
+	?VdkDefFreelists null;
+	?VdkDefFreelistGroups null;
+	?VdkDefLogging null;
+	?VdkDefBufferPool null;
+};
+

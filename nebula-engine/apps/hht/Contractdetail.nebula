@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("0")
+tx Contractdetail {
+	!Contractdetailid ID;
+	?Contractid Contract;
+	?Partnerid ID;
+	?Ordertype null;
+	?Currencycode Code;
+	?Relatedtranid ID;
+	?Relatedtrantype null;
+	?Relatedtrancode Code;
+	?DateLastupdated Date;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Docdate Date;
+	?Currencyrate Rate;
+	?InterestRate Rate;
+	@Remarks("EDI送信 接口?志 checkbox (1:checked; 0:unchecked)")
+	?Ediobflag null;
+};
+

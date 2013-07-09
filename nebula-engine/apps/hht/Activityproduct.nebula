@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Activityproduct {
+	!Activityproductid ID;
+	Activityid Activity;
+	Prodid Product;
+	Weight;
+	?Budgetamount Amount;
+	?SalesTarget null;
+	?Remark null;
+	?DateLastupdated Date;
+};
+

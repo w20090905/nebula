@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type Userauthoritycondition {
+	!Userauthoritycondition null;
+	Userid Usr;
+	Privilegeid Privilege;
+	?Conditionid Condition;
+	?DateLastupdated Date;
+};
+

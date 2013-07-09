@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+type Itemp {
+	Itemid Item;
+	Orgid Organization;
+	Itemcode Code;
+	?Prodlevel null;
+};
+

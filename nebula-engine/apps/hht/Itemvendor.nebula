@@ -1,0 +1,46 @@
+@Remarks("")
+@Refby("2")
+tx Itemvendor {
+	!Itemvendorid ID;
+	Orgid Organization;
+	Itemid Item;
+	Vendorid ID;
+	?Vendoritemid ID;
+	?Replenishtype null;
+	?Safetystock null;
+	?Safetyday null;
+	?Recosafetyday null;
+	?Leadtime Count;
+	?Recoleadtime Count;
+	?Sellingrate Rate;
+	?Recosellingrate Rate;
+	?Ordercycletime Count;
+	?Recoordercycletime Count;
+	?Minorderqty Quantity;
+	?Maxorderqty Quantity;
+	?Avgorderday null;
+	?Abccode Code;
+	?Comments Note;
+	?Historyplanqty Quantity;
+	?Historypurcharsqty Quantity;
+	?Historysaleqty Quantity;
+	?DateLastupdated Date;
+	?Vendoritemcode Code;
+	?IsPrimaryvendor YesNo;
+	?Vendorprice Price;
+	?ExportTaskcode Code;
+	?Incrementqty Quantity;
+	?PriorityType null;
+	?Vendratio Ratio;
+	?Availabledate Date;
+	?Vendorendprice Price;
+	?Pursnp null;
+	?Moq null;
+	?Purleadtime Count;
+	?Tranleadtime Count;
+	?Leadtimecycle null;
+	?Currencycode Code;
+	?Currencyforsaleprice null;
+	?Vendoritemname Name;
+};
+

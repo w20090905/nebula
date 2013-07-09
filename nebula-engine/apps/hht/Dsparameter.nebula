@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Dsparameter {
+	!Dsparameterid ID;
+	Datasourceid Datasource;
+	?Pname Name;
+	Pdatatype Attr;
+	?Defaultvalue String;
+	?LabelName Name;
+	Parametertype null;
+};
+

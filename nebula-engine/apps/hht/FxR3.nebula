@@ -1,0 +1,25 @@
+@Remarks("")
+@Refby("0")
+type FxR3 {
+	Seqid Twxmitumoriiraiumhistroy;
+	?F01 null;
+	@Remarks("換算前通貨（伝送通貨そのまま）")
+	?F02 null;
+	?F03 null;
+	?F04 null;
+	?F05 null;
+	?F06 null;
+	@Remarks("レート")
+	?F07 null;
+	@Remarks("通貨")
+	?F08 null;
+	@Remarks("換算前通貨係数")
+	?F09 null;
+	@Remarks("価格表記法")
+	?F10 null;
+	@Remarks("換算前通貨係数")
+	?F11 null;
+	@Remarks("ステータス")
+	?F12 null;
+};
+

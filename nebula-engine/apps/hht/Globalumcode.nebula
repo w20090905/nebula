@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Globalumcode {
+	!Umid ID;
+	Umcode Code;
+	LanguageCode Lang;
+	Umname Name;
+	?Umdesc null;
+	?Umtype Attr;
+	?IsBase YesNo;
+	?Factor null;
+};
+

@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+tx SystemLog {
+	!Logid ID;
+	?Logdate Date;
+	?Userid Usr;
+};
+

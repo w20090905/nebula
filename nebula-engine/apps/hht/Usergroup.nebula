@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("6")
+tx Usergroup {
+	!Usergroupid ID;
+	Orgid Organization;
+	Usergroupname Name;
+	Status;
+	?Description;
+	?DateLastupdated Date;
+};
+

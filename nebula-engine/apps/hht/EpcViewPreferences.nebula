@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("0")
+type EpcViewPreferences {
+	?MaxRowsRetrieved null;
+	?SortOrder null;
+	?ShowWelcome null;
+	?DiscardChangeSWithoutprompt null;
+	?DiscardRecursiveSql null;
+	?PfontHeight Height;/* 0 */
+	?PfontWeight Weight;
+	?PfontItalic null;
+	?PfontUline Line;
+	?PfontPitchfamily null;
+	?PfontCharset null;
+	?PfontFacename Name;
+	?ShowSelectS null;
+	?ShowInserts null;
+	?ShowUpdates null;
+	?ShowDeletes null;
+};
+

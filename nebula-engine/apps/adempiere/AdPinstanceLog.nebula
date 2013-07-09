@@ -2,7 +2,7 @@
 @Refby("0")
 tx AdPinstanceLog {
 	@Remarks("Instance of the process")
-	!AdPinstanceId AdPinstance;
+	!AdPinstance;
 	@Remarks("Log")
 	!LogId ID;
 	@Remarks("Process Parameter")
@@ -10,8 +10,8 @@ tx AdPinstanceLog {
 	@Remarks("Process ID")
 	?PId ID;
 	@Remarks("Process Parameter")
-	?PNumber null;
+	?PNumber Number;
 	@Remarks("Process Message")
-	?PMsg Msg;
+	?PMsg Note;
 };
 

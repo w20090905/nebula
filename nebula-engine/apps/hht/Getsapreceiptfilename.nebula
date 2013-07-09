@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+type Getsapreceiptfilename {
+	?Filename;
+	?ValueName Name;
+	?Deptcode Code;
+	?Receiptid Receipt;
+	?Dcode Code;
+	?Flag null;
+	?Status;
+	?OFlg null;
+	?DateLastupdated null;
+	?Receiptcode Code;
+};
+

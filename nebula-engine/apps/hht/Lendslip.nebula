@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("1")
+tx Lendslip {
+	!Lendslipid ID;
+	Lendslipcode Code;
+	Orgid Organization;
+	Partnerid ID;
+	Createdate Date;
+	Deptid Department;
+	Employeeid Employee;
+	Maker null;
+	Slipdate Date;
+	?Comments Note;
+	Status;
+	DateLastupdated Date;
+	?PrintNum null;
+};
+

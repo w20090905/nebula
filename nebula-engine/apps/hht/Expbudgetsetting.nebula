@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Expbudgetsetting {
+	!Expbudgetsettingid ID;
+	Analyzecodeid Analyzecode;
+	IsRestrict YesNo;
+	DateLastupdated Date;
+	?Sortno SeqNo;
+};
+

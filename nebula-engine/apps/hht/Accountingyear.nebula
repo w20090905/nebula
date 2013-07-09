@@ -2,8 +2,8 @@
 @Refby("19")
 tx Accountingyear {
 	!Accyearid ID;
-	Booksetid ID;
-	*Accyear null;
+	Booksetid Bookset;
+	Accyear null;
 	Begindate Date;
 	Enddate Date;
 	Status;

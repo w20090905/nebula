@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+type ItemgroupdeptmapBeforeImp {
+	Itemgroupdeptmapid Itemgroupdeptmap;
+	?Deptid Department;
+	Itemgroupid Itemgroup;
+	?Orgid Organization;
+};
+

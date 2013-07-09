@@ -4,19 +4,9 @@ tx CLocation {
 	@Remarks("Location or Address")
 	!CLocationId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("Address line 1 for this location")
 	?Address null;
 	@Remarks("Address line 2 for this location")
@@ -24,15 +14,15 @@ tx CLocation {
 	@Remarks("Identifies a City")
 	?City null;
 	@Remarks("Postal code")
-	?PostAl Postal;
+	?Postal;
 	@Remarks("Additional ZIP or Postal code")
 	?PostAlAdd Postal;
 	@Remarks("Country")
-	CCountryId CCountry;
+	CCountry;
 	@Remarks("Identifies a geographical Region")
-	?CRegionId CRegion;
+	?CRegion;
 	@Remarks("City")
-	?CCityId CCity;
+	?CCity;
 	@Remarks("Name of the Region")
 	?Regionname Name;
 	@Remarks("Address Line 3 for the location")

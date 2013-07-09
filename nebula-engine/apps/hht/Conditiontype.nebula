@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Conditiontype {
+	!Conditiontypeid ID;
+	?Conditiontype null;
+	?LanguageCode Lang;
+	?Description;
+	?Transtable null;
+	?Transfield null;
+	?Relatedpage null;
+};
+

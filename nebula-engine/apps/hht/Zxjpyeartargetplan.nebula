@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("1")
+tx Zxjpyeartargetplan {
+	!Zxjpyeartargetplanid ID;
+	?Zxjpyeartargetplancode Code;
+	Year null;
+	?Regioncode Code;
+	?Regionname Name;
+	?Citycode Code;
+	?Cityname Name;
+	?Dtorgid ID;
+	?Maker null;
+	?Createdate Date;
+	?Modifyer null;
+	?Lastupdateddate Date;
+	?Comments Note;
+	?Orgid Organization;
+	?Status;
+	?Refplancode Code;
+};
+

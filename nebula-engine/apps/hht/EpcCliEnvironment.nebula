@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("8")
+tx EpcCliEnvironment {
+	!RepUserId EpcCliNode;
+	!EnvironmentId ID;
+	?OracleHome null;
+	?NodeId EpcCliNode;
+	?EnvironmentStatus null;
+	?EnvironmentActive null;
+};
+

@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx Examineplandetail {
+	!Examineplandetailid ID;
+	Examineplanid Examineplan;
+	?Weight;
+	?Symbol;
+};
+

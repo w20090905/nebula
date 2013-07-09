@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx SmpVdiPos {
+	!Id SmpVdnGroupList;
+	!Taskid ID;
+	!Type Attr;
+	?Data null;
+};
+

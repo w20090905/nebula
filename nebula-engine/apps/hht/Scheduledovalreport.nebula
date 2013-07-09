@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("3")
+tx Scheduledovalreport {
+	!Scheduledovalreportid ID;
+	?Scheduledovalreportcode Code;
+	?Scheduledovalreportname Name;
+	Ovalreportid Ovalreport;
+	?Status;
+	?Description;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Maker null;
+	?Orgid Organization;
+};
+

@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx ProductLinelang {
+	!ProductLinelangid ID;
+	Prodlineid ProductLine;
+	LanguageCode Lang;
+	Prdln null;
+	?Prdlpd null;
+	?Prdlsd null;
+	?Prdldd null;
+	?Prdloc null;
+	?Prdlm null;
+	?Prdlwd null;
+	?Prdlap null;
+	?Prdlshi null;
+};
+

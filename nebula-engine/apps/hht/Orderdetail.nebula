@@ -1,0 +1,240 @@
+@Remarks("")
+@Refby("21")
+tx Orderdetail {
+	!Orderdetailid ID;
+	Orderid Ord;
+	?LineNum Line;
+	?Orderqty Quantity;
+	?Selleritemid ID;
+	?Buyeritemid ID;
+	?Shipfromitemid ID;
+	?Umcode Code;
+	?Listprice Price;
+	?Unitprice Unit;
+	?Discount Count;
+	?DiscountAmt Amount;
+	?Netprice Price;
+	?Amount;
+	?IsReturnable YesNo;
+	?Shipto null;
+	?DeliveryDate Date;
+	?Pricingdate Date;
+	?Remark null;
+	?Lotno null;
+	?Allocatedqty Quantity;
+	?Pickedqty Quantity;
+	Shippedqty Quantity;
+	?Receivedqty Quantity;
+	?InvoiceDqty Quantity;
+	?Complaintqty Quantity;
+	LineStatus Line;
+	?TaxRate Rate;
+	?Pretaxprice Price;
+	?TaxAmount Amount;
+	?Pretaxamount Amount;
+	Invstatus null;
+	?IsPromotion YesNo;
+	?Deliveredqty Quantity;
+	?PlannedQty Quantity;
+	?Checkinqty Quantity;
+	?LineNetprice Line;
+	?Baseqty Quantity;
+	?Baseqtyall null;
+	?Suggestedqty Quantity;
+	?Warehouseid Physicalwarehouse;
+	?SourceOrderid ID;
+	?Billto null;
+	?InvoiceMethod null;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Selleritemcode Code;
+	?Buyeritemcode Code;
+	?Shipfromitemcode Code;
+	?Prodid Product;
+	?Sellerumcode Code;
+	?Buyerumcode Code;
+	?Sellerqty Quantity;
+	?Buyerqty Quantity;
+	?Sellernetprice Price;
+	?Buyernetprice Price;
+	?Creditcheckresult null;
+	?Attr5 null;
+	?Attr6 null;
+	?Attr31 null;
+	?Attr32 null;
+	?Attr33 null;
+	?Attr34 null;
+	?Attr35 null;
+	?Attr36 null;
+	?SourceOrderdetailid ID;
+	?Costprice Cost;
+	?ReleaseDqty Quantity;
+	?Weight;
+	?Zctamount Amount;
+	?LineType Line;
+	?Netamount Amount;
+	?Deliveredamount Amount;
+	?Locallinenetprice Price;
+	?Localnetprice Price;
+	?Attr37 null;
+	?Attr38 null;
+	?Attr21 null;
+	?Attr22 null;
+	?Comments Note;
+	?Invallocateddate Date;
+	?Ordersuitid Ordersuit;
+	?IsSystem null;
+	?Promotionid Promotion;
+	?Promotiondesc null;
+	?Itemproperty null;
+	?Zhhteaiflag String;/* ('0') */
+	@Remarks("?????")
+	?Commissionrate Rate;
+	@Remarks("??????")
+	?Endprice Price;
+	@Remarks("SAP?????")
+	?Sapevaluation null;
+	@Remarks("??????")
+	?Inventorycode Code;
+	@Remarks("SAP???No")
+	?Saplotno null;
+	?Reqdelidate Date;
+	?Venderanswerdate Date;
+	?RequestEdqty Quantity;
+	@Remarks("原？含税金？")
+	?Hastaxamount Amount;
+	@Remarks("本？含税金？")
+	?Zcthastaxamount Amount;
+	@Remarks("契？NO（取自交易条件表）")
+	?Contractno null;
+	?DeliveryManner null;
+	@Remarks("大小/尺寸")
+	?Dimension null;
+	@Remarks("明細カテゴリ")
+	?Concategory null;
+	@Remarks("相?采?价格")
+	?Purchaseprice Price;
+	@Remarks("相?采?末端价格")
+	?Purchaseendprice Price;
+	@Remarks("相?采?口?率")
+	?Purcommissionrate Rate;
+	?Snp null;
+	?Moq null;
+	@Remarks("？价系数")
+	?PriceCoefficient Price;
+	@Remarks("相？SO detailid")
+	?Refsodetailid ID;
+	@Remarks("？？残余数量")
+	?Remanentqty Quantity;
+	@Remarks("MOQ数量")
+	?Moqqty Quantity;
+	@Remarks("SNP数量")
+	?Snpqty Quantity;
+	@Remarks("EAR要否")
+	?Earflag null;
+	@Remarks("？表？？")
+	?OtherCode Code;
+	?Characteristic1 null;
+	?Characteristic2 null;
+	?Tccontractno null;
+	?Edistatus null;
+	@Remarks("ﾒｰｶｰﾛｯﾄNo")
+	?Makelotno null;
+	?Eltype Attr;
+	?Ctxtd01 null;
+	?Ctxtd02 null;
+	?Ctxtd03 null;
+	?Ctxtd04 null;
+	?Ctxtd05 null;
+	?Ctxtd06 null;
+	?Ctxtd07 null;
+	?Ctxtd08 null;
+	?Ctxtd09 null;
+	?Ctxtd10 null;
+	?Ctxtd11 null;
+	?Ctxtd12 null;
+	?Ctxtd13 null;
+	?Ctxtd14 null;
+	?Ctxtd15 null;
+	?Ctxtd16 null;
+	?Ctxtd17 null;
+	@Remarks("在庫原価")
+	?Price;
+	@Remarks("営業所コード")
+	?Eigyocd null;
+	@Remarks("企業コード")
+	?Kigyocd null;
+	@Remarks("送付No.")
+	?Sofuno null;
+	@Remarks("テスト区分")
+	?Testkbn null;
+	@Remarks("品名")
+	?Hinmei null;
+	@Remarks("仮価格区分")
+	?Karikakakukbn null;
+	@Remarks("納入指示区分")
+	?Nonyusijikbn null;
+	@Remarks("発注納期")
+	?Hachudate Date;
+	@Remarks("契約条件")
+	?Keiyakujoken null;
+	@Remarks("引渡条件")
+	?Hikiwatasijoken null;
+	@Remarks("部課コード")
+	?Bukacd null;
+	@Remarks("図面仕様書区分")
+	?Zumensiyosyo String;
+	@Remarks("枚数")
+	?Maisu null;
+	@Remarks("品番")
+	?Hinban null;
+	@Remarks("事業所（工場）コード")
+	?Kojocd null;
+	@Remarks("図番")
+	?Zuban String;
+	@Remarks("図歴")
+	?Zureki String;
+	@Remarks("購買者（コード）")
+	?Koubaisyacdcode Code;
+	@Remarks("支給区分")
+	?Sikyukbn null;
+	@Remarks("検査区分")
+	?Kensakbn null;
+	@Remarks("常非区分")
+	?Jyohikbn null;
+	@Remarks("発注区分")
+	?Hachukbn null;
+	@Remarks("品種コード")
+	?Hinsyacd null;
+	@Remarks("専用欄")
+	?Senyoran null;
+	@Remarks("備考")
+	?Biko null;
+	@Remarks("入荷予定")
+	?Nyukayotei null;
+	@Remarks("作番（製作番号）")
+	?Sakuban null;
+	@Remarks("作番")
+	?Sakubanafter null;
+	@Remarks("仕番")
+	?Sibanafter null;
+	?Syuturyokukbn null;
+	?Osamesaki null;
+	?Kensyuuym null;
+	?Kensyuunum null;
+	?Kensyuukingaku null;
+	?Siyou null;
+	@Remarks("FX送信FLG")
+	?Fxsendflg null;
+	@Remarks("操作区分")
+	?Fxoperatekbn null;
+	@Remarks("FX送信超過FLG 20110614")
+	?Fxsendflg2 null;/* 0 */
+	@Remarks("操作区分2")
+	?Fxoperatekbn2 null;
+};
+

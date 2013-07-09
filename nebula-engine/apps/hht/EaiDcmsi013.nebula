@@ -1,0 +1,33 @@
+@Remarks("")
+@Refby("0")
+tx EaiDcmsi013 {
+	!Eaidcmsi013id ID;
+	Eaicreatedate Date;
+	Eaibatchno null;
+	Eaiheadcount Count;
+	Eaidetailcount Count;
+	Eaicurrentheadnum null;
+	Eaicurrentdetailnum null;
+	Eaiimportstatus null;
+	?Eaiheadname Name;
+	?Eaidetailname Name;
+	?Eaiheadparseerror null;
+	?Eaidetailparseerror null;
+	?Eaiimportdate Date;
+	?Eaiimportcomments Note;
+	?Headzhhteaiflag null;
+	Headordercode Code;
+	?Headsellercode Code;
+	?Headorgcode Code;
+	?Headwarehousecode Code;
+	Headordtype null;
+	Headbuyeritemcode Code;
+	?Headbuyeritem null;
+	?Headlineno SeqNo;
+	?Headplanqty Quantity;
+	Headarrivaldate Date;
+	?Headarrivaldate2 null;
+	Headstatus null;
+	Headsource null;
+};
+

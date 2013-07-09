@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+type VdkObject {
+	?VdkId ID;
+	?VdkParentId ID;
+	?VdkType null;
+	?VdkName Name;
+	?VdkAncestryIds null;
+	?VdkCreDate Date;
+	?VdkModDate Date;
+	?VdkCreationStatus null;
+	?VdkWorkingStatus null;
+	?VdkIsHidden null;
+	?VdkIsIncomplete null;
+	?VdkIsInvalid ID;
+	?VdkIsCollect null;
+	?VdkUdrExists null;
+};
+

@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("0")
+type Tblnewid {
+	!Tblname Name;
+	Tblid ID;
+};
+

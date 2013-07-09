@@ -1,0 +1,44 @@
+@Remarks("")
+@Refby("0")
+type VContractM {
+	?Attr1 null;
+	?Attr4 null;
+	?Umname Name;
+	?Prodlevel null;
+	?Prodpack null;
+	?Contractstatus null;
+	?Contracttypeid Contracttype;
+	?Sellername Name;
+	?LineNum Line;
+	?BalanceQty Quantity;
+	?Buyerid ID;
+	?Itemid Item;
+	?Ordercode Code;
+	?Status;
+	?Contractid Contract;
+	?Contractcode Code;
+	?Createdate Date;
+	?Attr2 null;
+	?Customerpono null;
+	?Orderqty Quantity;
+	?Deliveredqty Quantity;
+	?Sellnetprice Price;
+	?Sellcommissionrate Rate;
+	?Sellendprice Price;
+	?Purnetprice Price;
+	?Purcommissionrate Rate;
+	?Purendprice Price;
+	?Prdn null;
+	?DeliveryDate Date;
+	?DeliveryDate2 null;
+	?Comments Note;
+	?Buyername Name;
+	?Contracttypename Name;
+	?Statusname Name;
+	?Username Name;
+	?DeliveryDate3 null;
+	?Qty Quantity;
+	?Orgcode Code;
+	?RowId ID;
+};
+

@@ -4,91 +4,81 @@ type IOrder {
 	@Remarks("Import Orders")
 	!IOrderId ID;
 	@Remarks("Client/Tenant for this installation.")
-	?AdClientId AdClient;
+	?AdClientId ID;
 	@Remarks("Organizational entity within client")
-	?AdOrgId AdOrg;
+	?AdOrg;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrxId AdOrg;
-	@Remarks("The record is active in the system")
-	?IsActive YesNo;/* 'Y' */
-	@Remarks("Date this record was created")
-	?Created null;/* SYSDATE */
-	@Remarks("User who created this records")
-	?Createdby null;
-	@Remarks("Date this record was updated")
-	?Updated null;/* SYSDATE */
-	@Remarks("User who updated this records")
-	?Updatedby null;
+	?AdOrgtrx AdOrg;
 	@Remarks("Has this import been processed")
 	IIsImported YesNo;/* 'N'  */
 	@Remarks("Messages generated from import process")
-	?IErrorMsg Msg;
+	?IErrorMsg Note;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("The document has been processed")
 	?Processed YesNo;/* 'N' */
 	@Remarks("Sales Representative or Company Agent")
-	?SalesRepId AdUser;
+	?SalesRep AdUser;
 	@Remarks("Storage Warehouse and Service Point")
-	?MWarehouseId MWarehouse;
+	?MWarehouse;
 	@Remarks("Unique identifier of a Price List")
-	?MPriceListId MPriceList;
+	?MPriceList;
 	@Remarks("The Currency for this record")
-	?CCurrencyId CCurrency;
+	?CCurrency;
 	@Remarks("Method or manner of product delivery")
-	?MShipperId MShipper;
+	?MShipper;
 	@Remarks("This is a Sales Transaction")
 	?IsSotrx YesNo;/* 'Y' */
 	@Remarks("Identifies a Business Partner")
-	?CBpartnerId CBpartner;
+	?CBpartner;
 	@Remarks("Key of the Business Partner")
-	?BpartnerValue String;
+	?BpartnerValue Note;
 	@Remarks("Alphanumeric identifier of the entity")
 	?Name;
 	@Remarks("Identifies the (ship to) address for this Business Partner")
-	?CBpartnerLocationId CBpartnerLocation;
+	?CBpartnerLocation;
 	@Remarks("Bill to Address")
-	?BilltoId CBpartnerLocation;
+	?Billto CBpartnerLocation;
 	@Remarks("Location or Address")
-	?CLocationId CLocation;
+	?CLocation;
 	@Remarks("Address line 1 for this location")
 	?Address null;
 	@Remarks("Address line 2 for this location")
 	?Address null;
 	@Remarks("Postal code")
-	?PostAl Postal;
+	?Postal;
 	@Remarks("Identifies a City")
 	?City null;
 	@Remarks("Identifies a geographical Region")
-	?CRegionId CRegion;
+	?CRegion;
 	@Remarks("Name of the Region")
 	?Regionname Name;
 	@Remarks("Country")
-	?CCountryId CCountry;
+	?CCountry;
 	@Remarks("Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1 - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html")
 	?CountryCode Code;
 	@Remarks("User within the system - Internal or Business Partner Contact")
-	?AdUserId AdUser;
+	?AdUser;
 	@Remarks("Business Partner Contact Name")
 	?Contactname Name;
 	@Remarks("Electronic Mail Address")
-	?Email EMail;
+	?EMail;
 	@Remarks("Identifies a telephone number")
 	?Phone;
 	@Remarks("Financial Project")
-	?CProjectId CProject;
+	?CProject;
 	@Remarks("Business Activity")
-	?CActivityId CActivity;
+	?CActivity;
 	@Remarks("Document type or rules")
-	?CDoctypeId CDoctype;
+	?CDoctype;
 	@Remarks("Name of the Document Type")
 	?DoctypeName Name;
 	@Remarks("The terms of Payment (timing, discount)")
-	?CPaymentTermId CPaymentTerm;
+	?CPaymentTerm;
 	@Remarks("Key of the Payment Term")
-	?PaymentTermvalue String;
+	?PaymentTermvalue Note;
 	@Remarks("Order")
-	?COrderId COrder;
+	?COrder;
 	@Remarks("Document sequence number of the document")
 	?DocumentNo Code;
 	@Remarks("Date of Order")
@@ -98,32 +88,32 @@ type IOrder {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Product, Service, Item")
-	?MProductId MProduct;
+	?MProduct;
 	@Remarks("Key of the Product")
-	?ProductValue String;
+	?ProductValue Note;
 	@Remarks("Bar Code (Universal Product Code or its superset European Article Number)")
 	?UPC;
 	@Remarks("Stock Keeping Unit")
 	?SKU;
 	@Remarks("Tax identifier")
-	?CTaxId CTax;
+	?CTax;
 	@Remarks("Short form for Tax to be printed on documents")
-	?TaxIndicator null;
+	?TaxIndicator String;
 	@Remarks("Tax Amount for a document")
 	?TaxAmt Amount;/* 0 */
 	@Remarks("Sales Order Line")
-	?COrderlineId COrderline;
+	?COrderline;
 	@Remarks("Description of the Line")
 	?LineDescription Description;
 	@Remarks("Unit of Measure")
-	?CUomId CUom;
+	?CUom;
 	@Remarks("Ordered Quantity")
 	?QtyOrdered Quantity;/* 0 */
 	@Remarks("Actual Price")
-	?PriceActual Price;/* 0 */
+	?PriceActual Number;/* 0 */
 	@Remarks("Freight Amount")
 	?FreightAmt Amount;/* 0 */
 	@Remarks("Marketing Campaign")
-	?CCampaignId CCampaign;
+	?CCampaign;
 };
 

@@ -1,0 +1,21 @@
+@Remarks("List of all Data Gatherer collections defined in the repository")
+@Refby("0")
+type SmpViewCollections {
+	@Remarks("Node on which the Data Gatherer is running")
+	DgName Name;
+	@Remarks("Node from which the information is gathered")
+	NodeName Name;
+	@Remarks("Name of the service collecting for")
+	TargetName Name;
+	@Remarks("Type of service collecting for")
+	TargetType Attr;
+	@Remarks("Translated name for the target type")
+	?TargetNlsType Attr;
+	@Remarks("Administrator who owns this collection")
+	AdministratorName Name;
+	@Remarks("Boolean value: Is the collection still active?")
+	Active null;
+	@Remarks("Boolean value: Is the collection stored in the local repository?")
+	Local null;
+};
+

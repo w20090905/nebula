@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("3")
+tx Orgtaxregistration {
+	!Orgtaxregid ID;
+	Orgid Organization;
+	TaxNo null;
+	TaxRegbureau null;
+	Regdate Date;
+	?DateLastupdated Date;
+};
+

@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx Agreementwarehouse {
+	!Agreementwarehouseid ID;
+	Agreementid Agreement;
+	Warehouseid Physicalwarehouse;
+	?Pricingtype null;
+	?Effectivearea null;
+	?Effectivevolume Volume;
+	?Portid Port;
+	?Receipttitle Title;
+	?Receiptman null;
+	?Address null;
+	?Phone;
+	?Allocationcontroler null;
+};
+

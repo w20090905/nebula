@@ -1,0 +1,137 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtiteminquiryuploaddetail {
+	@Remarks("見積UL中間表明細ID")
+	!Zhhtiteminquiryuploaddetailid ID;
+	@Remarks("見積UL中間表ID")
+	?Zhhtiteminquiryuploadid Zhhtiteminquiryupload;
+	@Remarks("見積行番号")
+	?Inquirylineno SeqNo;
+	@Remarks("ｱｲﾃﾑ区分")
+	?NewItemflg null;
+	@Remarks("在庫出荷ﾌﾗｸﾞ")
+	?Stockflg null;
+	@Remarks("顧客注番(明細)")
+	?Inquirycodemeisai null;
+	@Remarks("販売先回答納期")
+	?Replydeliverydate Date;
+	@Remarks("顧客品番")
+	?Itemserial null;
+	@Remarks("ｱｲﾃﾑID")
+	?Itemid Item;
+	@Remarks("ｱｲﾃﾑｺｰﾄﾞ")
+	?Itemcode Code;
+	@Remarks("ｱｲﾃﾑ名称")
+	?Itemname Name;
+	@Remarks("品名補助")
+	?Itemnameadd null;
+	@Remarks("仕様")
+	?Dimension null;
+	@Remarks("出荷先ID")
+	?Receiveraddressid Receiveraddress;
+	@Remarks("出荷先名称")
+	?Receiveraddresscode Code;
+	@Remarks("出荷先ｺｰﾄﾞ")
+	?Receiveraddressname Name;
+	@Remarks("納先")
+	?Osamesaki null;
+	@Remarks("単価係数")
+	?PriceCoefficient Price;
+	@Remarks("単価単位")
+	?PriceUmcode Code;
+	@Remarks("数量")
+	?Qty Quantity;
+	@Remarks("単位")
+	?Umcode Code;
+	@Remarks("仕入単価")
+	?Purchaseprice Price;
+	@Remarks("販売単価")
+	?DeliveryPrice Price;
+	@Remarks("要求納期")
+	?DeliveryDate Date;
+	@Remarks("仕入金額")
+	?Purchaseamount Amount;
+	@Remarks("販売金額")
+	?Amount;
+	@Remarks("粗利益")
+	?Profit null;
+	@Remarks("利益率")
+	?Profitrate Rate;
+	@Remarks("作番")
+	?Sakubanafter null;
+	@Remarks("仕番")
+	?Sibanafter null;
+	@Remarks("図番")
+	?Zuban String;
+	@Remarks("品番")
+	?Hinban null;
+	@Remarks("図歴")
+	?Zureki String;
+	@Remarks("送付NO.")
+	?Sofuno null;
+	@Remarks("テスト区分")
+	?Testkbn null;
+	@Remarks("照会番号")
+	?Syokaicode Code;
+	@Remarks("見積区分")
+	?Mitumorikbn null;
+	@Remarks("品名1")
+	?Hinmei1 null;
+	@Remarks("品名2")
+	?Hinmei2 null;
+	@Remarks("希望単価")
+	?Kibotanka null;
+	@Remarks("見積様式指定コード")
+	?Mitumoriyoushikicd null;
+	@Remarks("見積回数")
+	?Mitumorikaisuu null;
+	@Remarks("納入先")
+	?Nounyusaki null;
+	@Remarks("発注番号")
+	?Hatno null;
+	@Remarks("送付区分")
+	?Sofukbn null;
+	@Remarks("部課コード")
+	?Bukacd null;
+	@Remarks("備付区分")
+	?Sonaekbn null;
+	@Remarks("枚数")
+	?Maisu null;
+	@Remarks("購買者(コード)")
+	?Koubaisyacdcode Code;
+	@Remarks("入荷予定")
+	?Nyukayotei null;
+	@Remarks("（類別）品種コード")
+	?Hinsyacd null;
+	@Remarks("専用欄")
+	?Senyoran null;
+	@Remarks("備考")
+	?Biko null;
+	@Remarks("仕入先図番")
+	?Selleritemserial null;
+	@Remarks("納入先ID")
+	?Sellerreceiveraddressid ID;
+	@Remarks("納入先ｺｰﾄﾞ")
+	?Sellerreceiveraddresscode Code;
+	@Remarks("納入先名称")
+	?Sellerreceiveraddressname Name;
+	@Remarks("納先（仕入先）")
+	?Sellerosamesaki null;
+	@Remarks("備考（仕入先明細）")
+	?Comments Note;
+	@Remarks("仕入先回答納期")
+	?Sellerreplydeliverydate Date;
+	@Remarks("作成日")
+	?Createdate Date;
+	@Remarks("更新日")
+	?DateLastupdated Date;
+	@Remarks("作成者ID")
+	?Userid Usr;
+	@Remarks("組織ID")
+	?Orgid Organization;
+	@Remarks("販売先見積明細ID")
+	?Zhhtiteminquirydetailid Zhhtiteminquirydetail;
+	@Remarks("仕入先見積明細ID")
+	?Szhhtiteminquirydetailid ID;
+};
+

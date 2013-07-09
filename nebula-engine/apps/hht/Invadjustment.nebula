@@ -1,0 +1,36 @@
+@Remarks("")
+@Refby("1")
+tx Invadjustment {
+	!Invadjustmentid ID;
+	Orgid Organization;
+	Adjusttype null;
+	?Adjustmentcode Code;
+	?Warehouseid Physicalwarehouse;
+	?Comments Note;
+	?Maker null;
+	?Adjustdate Date;
+	?Createdate Date;
+	Status;
+	?DateLastupdated Date;
+	?Saleflag null;
+	?Inventoryflag null;
+	?Arflag null;
+	?Adjustreason null;
+	?PrintNum null;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr5 null;
+	?Attr6 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Docdate Date;
+	?Gldate Date;
+	?Accountingyearid ID;
+	?Accperiodid Accountingperiod;
+	?Year null;
+	?Period null;
+	?Deptid Department;
+};
+

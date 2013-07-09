@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Magreementexptypecat {
+	!Magreementexptypecatid ID;
+	Marketingagreementperiodid Marketingagreementperiod;
+	Marketingagreementid Marketingagreement;
+	Categoryid Category;
+	Magreementperiodexptypeid Magreementperiodexptype;
+	?Agreementamount Amount;
+};
+

@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("0")
+type SmpVborStrategyInformation {
+	?Targetname Name;
+	?Blobid ID;
+};
+

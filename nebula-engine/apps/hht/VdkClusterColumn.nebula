@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+type VdkClusterColumn {
+	?VdkParentId ID;
+	?VdkName Name;
+	?VdkLschemaId ID;
+	?VdkPosition Length;
+	?VdkDataType null;
+	?VdkDataLength Length;
+	?VdkDataPrecision Precision;
+	?VdkDataScale null;
+};
+

@@ -1,0 +1,27 @@
+@Remarks("")
+@Refby("0")
+tx SalesFcdetail {
+	!SalesFcdetailid ID;
+	SalesFcid SalesFc;
+	SalesFchierarchyid SalesFchierarchy;
+	Customerid ID;
+	Itemid Item;
+	?Startdate Date;
+	?Qty Quantity;
+	?Adjustqty Quantity;
+	Status;
+	Maker null;
+	Createdate Date;
+	DateLastupdated Date;
+	?Lf null;
+	?Esf null;
+	?Tef null;
+	?Sef null;
+	?Tsef null;
+	?Fbase null;
+	?Trendindex null;
+	?OldSeasonindex null;
+	?NewSeasonindex null;
+	?Period null;
+};
+

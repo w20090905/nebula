@@ -1,0 +1,26 @@
+@Remarks("")
+@Refby("3")
+tx Complaint {
+	!Complaintid ID;
+	?Originalcomplaintid ID;
+	Complaintcode Code;
+	Complainttype null;
+	?Remedymethodcode null;
+	Orgid Organization;
+	Vendorid ID;
+	?Contactid Contact;
+	?Maker null;
+	?Createdate Date;
+	?Docdate Date;
+	?Receiptid Receipt;
+	?Receiptcode Code;
+	?TotalAmount Amount;
+	?Currencycode Code;
+	?Begindate Date;
+	?Enddate Date;
+	?Status;
+	?Remark null;
+	?Revision null;
+	?DateLastupdated Date;
+};
+

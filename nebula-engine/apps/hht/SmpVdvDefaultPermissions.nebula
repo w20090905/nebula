@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+tx SmpVdvDefaultPermissions {
+	!UserId SmpVdvUser;
+	!OtherUserId SmpVdvUser;
+	Permission null;
+};
+

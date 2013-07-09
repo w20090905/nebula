@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Mcptypestruct {
+	!Mcptypestructid ID;
+	Structseq null;
+	?Analyzecodeid Analyzecode;
+	?Analyzecode Code;
+	IsBottom YesNo;
+	Mcptypeid Mcptype;
+};
+

@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Userassignagent {
+	!Userassignagentid ID;
+	SourceUserid ID;
+	Targetuserid ID;
+	?Starttime Date;
+	?Endtime Date;
+	?Actualendtime null;
+	?Createdate Date;
+	?DateLastupdated Date;
+	Status;
+	?Description;
+};
+

@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("2")
+tx PriceProtect {
+	!PriceProtectid ID;
+	Orgid Organization;
+	Subsidytype null;
+	PriceProtectcode Code;
+	Vendorid ID;
+	?Comments Note;
+	?Maker null;
+	?Docdate Date;
+	?TotalDiffamount Amount;
+	?Createdate Date;
+	?Status;
+	?DateLastupdated Date;
+	?Gldate Date;
+	?Accountingyearid ID;
+	?Accperiodid Accountingperiod;
+	?Year null;
+	?Period null;
+};
+

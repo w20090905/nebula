@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Demandplandetail {
+	!Demandplandetailid ID;
+	Demandplanid Demandplan;
+	Prodid Product;
+	?Umcode Code;
+	?Cycledate Date;
+	?Qty Quantity;
+	?DateLastupdated Date;
+	?Fcgroupcycledateid Fcgroupcycledate;
+	?Sequence;
+	?Invqty Quantity;
+};
+

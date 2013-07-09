@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Ordertimelimitdetail {
+	!Ordertimelimitdetailid ID;
+	Orderwarrantyid Orderwarranty;
+	Value null;
+	Umcode Code;
+	?Joinoperator null;
+};
+

@@ -4,31 +4,21 @@ tx CRevenueRecognitionPlan {
 	@Remarks("Plan for recognizing or recording revenue")
 	!CRevenueRecognitionPlanId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Rules for accounting")
-	CAcctschemaId CAcctschema;
+	CAcctschema;
 	@Remarks("Method for recording revenue")
-	CRevenueRecognitionId CRevenueRecognition;
+	CRevenueRecognition;
 	@Remarks("Invoice Detail Line")
-	CInvoiceLineId CInvoiceLine;
+	CInvoiceLine;
 	@Remarks("Account for unearned revenue")
 	UnearnedRevenueAcct CValidcombination;
 	@Remarks("Account for Product Revenue (Sales Account)")
 	PRevenueAcct CValidcombination;
 	@Remarks("The Currency for this record")
-	CCurrencyId CCurrency;
+	CCurrency;
 	@Remarks("Total Amount")
 	TotalAmt Amount;/* 0  */
 	@Remarks("Recognized Amount")

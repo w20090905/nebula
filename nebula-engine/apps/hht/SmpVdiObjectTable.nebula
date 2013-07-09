@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type SmpVdiObjectTable {
+	ObjectId ID;
+	!Type Attr;
+	!Owner null;
+	!ObjectName Name;
+	?Version;/* 0 */
+};
+

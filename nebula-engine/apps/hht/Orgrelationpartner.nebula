@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx Orgrelationpartner {
+	!Orgrelationpartnerid ID;
+	Orgid Organization;
+	Relationid Orgrelation;
+	Orgrelationdetailid Orgrelationdetail;
+	Partnerorgid ID;
+	Partnertype null;
+	?Relationtype null;
+	?Comments Note;
+	?Contactid Contact;
+};
+

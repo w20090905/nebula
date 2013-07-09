@@ -4,19 +4,9 @@ type WStore {
 	@Remarks("A Web Store of the Client")
 	!WStoreId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")
@@ -30,7 +20,7 @@ type WStore {
 	@Remarks("Password of the Web Store EMail address")
 	?Wstoreuserpw null;
 	@Remarks("Web Store Header Information")
-	?Webinfo Info;
+	?Webinfo Note;
 	@Remarks("Web Site Parameter 1 (default: header image)")
 	?Webparam1 String;
 	@Remarks("Web Site Parameter 2 (default index page)")
@@ -68,17 +58,17 @@ type WStore {
 	@Remarks("Footer added to EMails")
 	?Emailfooter EMail;
 	@Remarks("Sales Representative or Company Agent")
-	SalesRepId AdUser;
+	SalesRep AdUser;
 	@Remarks("Storage Warehouse and Service Point")
-	MWarehouseId MWarehouse;
+	MWarehouse;
 	@Remarks("Unique identifier of a Price List")
-	MPriceListId MPriceList;
+	MPriceList;
 	@Remarks("Web Server Context - e.g. /wstore")
 	Webcontext Text;
 	@Remarks("EMail address to receive notifications when web orders were processed")
 	?Weborderemail EMail;
 	@Remarks("The terms of Payment (timing, discount)")
-	?CPaymentTermId CPaymentTerm;
+	?CPaymentTerm;
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 	@Remarks("Full URL address - e.g. http://www.adempiere.org")

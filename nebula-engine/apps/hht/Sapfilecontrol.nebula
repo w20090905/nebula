@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+type Sapfilecontrol {
+	@Remarks("シーケンス番号")
+	SeqId ID;
+	@Remarks("SAP連携ファイル名")
+	FileName Name;
+	@Remarks("入出荷伝票番号")
+	DocId null;
+	@Remarks("赤・黒連携フラグ")
+	Rbflg null;
+	@Remarks("ファイル出力状態フラグ")
+	?FinishFlg null;
+	@Remarks("ファイルFTP送信状態フラグ")
+	?SendFig null;
+	@Remarks("生成時間")
+	CreatDate Date;
+	?TranDate null;
+	@Remarks("1:delivey 2:receipt 3:returnslip 4:transfer")
+	?Type Attr;
+};
+

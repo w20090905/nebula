@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Countercriteria {
+	!Countercriteriaid ID;
+	Counterid Counter;
+	Orgid Organization;
+	?Prodlineid ProductLine;
+	?Categoryid Category;
+	?Prodid Product;
+};
+

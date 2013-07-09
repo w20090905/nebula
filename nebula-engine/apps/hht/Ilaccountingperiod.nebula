@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Ilaccountingperiod {
+	!Ilaccountingperiodid ID;
+	Ilbooksetid ID;
+	Accperiodid Accountingperiod;
+	Status;
+	?Closedate Date;
+	DateLastupdated Date;
+};
+

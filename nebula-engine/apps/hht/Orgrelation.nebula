@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("9")
+tx Orgrelation {
+	!Relationid ID;
+	Ownerorgid ID;
+	?DateLastupdated Date;
+};
+

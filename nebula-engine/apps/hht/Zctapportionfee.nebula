@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx Zctapportionfee {
+	!Apportionfeeid ID;
+	Apportionid Zctapportion;
+	Docdate Date;
+	?ReferenceNo Code;
+	FeeItemid ID;
+	Vendorid ID;
+	Currencycode Code;
+	SourceAmount Amount;
+	Localamount Amount;
+	?Needapportion null;
+	?Zctrate Rate;
+};
+

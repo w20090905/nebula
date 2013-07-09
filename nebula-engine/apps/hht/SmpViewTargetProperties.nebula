@@ -1,0 +1,15 @@
+@Remarks("List of all properties of a managed target")
+@Refby("0")
+type SmpViewTargetProperties {
+	@Remarks("Name of the service")
+	TargetName Name;
+	@Remarks("Type of service")
+	TargetType Attr;
+	@Remarks("Translated name for the target type")
+	?TargetNlsType Attr;
+	@Remarks("Name of the property")
+	?Name;
+	@Remarks("Value of the property")
+	?Value String;
+};
+

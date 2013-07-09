@@ -1,0 +1,77 @@
+@Remarks("")
+@Refby("0")
+tx Trnseikyudata {
+	!Seqid Twxmitumoriiraiumhistroy;
+	?Redblackkbn null;
+	?RequestErcd null;
+	?RequestErdeptcd null;
+	?Contractno null;
+	?Orderno null;
+	?AcceptEdorderno null;
+	?Bunnokbn null;
+	?Kesaicondenddate Date;
+	?Kesaicondstartdate Date;
+	?Kesaicondmethod null;
+	?Kesaiconddate Date;
+	?Kesainorm null;
+	?Kesaicondition null;
+	?QtyType Attr;
+	?Nonyudate Date;
+	?Sellqty Quantity;
+	?Calculateqty Quantity;
+	?Packing null;
+	?Sellamount null;
+	?RequestAmount null;
+	?Consumptiontax null;
+	?RequestTaxAmount null;
+	?Unitpricekbn null;
+	?Dealkbn null;
+	?Gobackkbn null;
+	?DeliveryRequestkbn null;
+	?TaxKbn null;
+	?Backodrkbn null;
+	?Keijodate null;
+	?DeliveryDate Date;
+	?DeliveryReportno null;
+	?DeliveryRequestno null;
+	?Address null;
+	?DeliveryComment null;
+	?Errreason null;
+	?Errcomment null;
+	?RequestKbn null;
+	?Memo;
+	?Createdate null;
+	?Lastupdateddate null;
+	?Pgid null;
+	?Status;
+	?Confirmkbn null;/* '0' */
+	?Filesendkbn null;/* '0' */
+	?Endcustomername Name;
+	?Endcustomerorderno null;
+	?Sndcompanyname Name;
+	?Trdcompanyname Name;
+	?Unitprice Unit;
+	?Umcode Code;
+	?Unittype Attr;
+	?Commissiontype Attr;
+	?Commissionprice Price;
+	?Commission null;
+	?Tel null;
+	?Ordernumber null;
+	?Address null;
+	?Shorikbn null;/* '1' */
+	?Itemname Name;
+	?Receivecompanycd null;
+	?Receivecompanydeptcd null;
+	?Receivecompanyname Name;
+	?Orderqty Quantity;
+	?Orderqtyunit null;
+	?Tankakingakukbn null;
+	?Buyerinfo Info;
+	?DeliveryKbn null;
+	?Gamenshorikbn null;
+	?Zaichokukbn String;
+	?Jisekisakusekbn null;/* '0' */
+	?Jisekisoshinkbn null;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Workcalendar {
+	!Calendarid ID;
+	Orgid Organization;
+	Restday null;
+	?Restdaytype null;
+	?Restdaydesc null;
+};
+

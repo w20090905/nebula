@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("8")
+tx Facategory {
+	!Facategoryid ID;
+	?Bgorgid ID;
+	?Booksetid Bookset;
+	Facategorycode Code;
+	Createdate Date;
+	?Parentfacategoryid Facategory;
+	Grade null;
+	IsBottom YesNo;
+	?Glaccountid Glaccount;
+	Subordinatepermitted null;
+	?Specialattr null;
+	Glintegration null;
+	DateLastupdated Date;
+	?Baseflag null;
+	?SourceFacategoryid Facategory;
+	?Deprglaccountid ID;
+};
+

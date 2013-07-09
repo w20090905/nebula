@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type CategorylangBeforeImp {
+	Categorylangid Categorylang;
+	Categoryid Category;
+	?LanguageCode Lang;
+	Catn null;
+	?Catd null;
+};
+

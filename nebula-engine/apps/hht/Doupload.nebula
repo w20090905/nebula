@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("0")
+tx Doupload {
+	!Douploadid ID;
+	Douploadcode Code;
+	?ReferenceNo Code;
+	?Vendorid ID;
+	?Carrierid ID;
+	?Shiptoid ID;
+	?Warehouseid Physicalwarehouse;
+	?DeliveryId Delivery;
+	?Itemid Item;
+	?Batchno SeqNo;
+	?Lotno null;
+	?Qty Quantity;
+	?Umcode Code;
+	?Actdlvdate Date;
+	?Status;
+	Orgid Organization;
+};
+

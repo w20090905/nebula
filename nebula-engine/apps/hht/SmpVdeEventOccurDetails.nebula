@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+type SmpVdeEventOccurDetails {
+	?EventOccurrenceId SmpVdeEventOccurrence;
+	?Company null;
+	?Organization null;
+	?Product null;
+	?Filename;
+	?TestName Name;
+	?Severity null;
+	?OccurDate Date;
+	?Timezone Count;
+	?EventTestId ID;/* -1 */
+	?Message;
+};
+

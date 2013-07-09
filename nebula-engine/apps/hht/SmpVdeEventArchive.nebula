@@ -1,0 +1,26 @@
+@Remarks("")
+@Refby("0")
+type SmpVdeEventArchive {
+	?Owner null;
+	?EventId ID;
+	?EventTestId ID;/* 0 */
+	?EventOccurrenceId ID;/* 0 */
+	?TargetName Name;
+	?TargetType Attr;
+	?Node null;
+	?OccurDate Date;
+	?LocalDate Date;
+	?Timezone Count;
+	?Severity null;/* 0 */
+	?RegistrationStatus null;/* 0 */
+	?TargetAgentState null;/* 0 */
+	?RecordType null;/* 0 */
+	?TestName Name;
+	?Company null;
+	?Organization null;
+	?Product null;
+	?Filename;
+	?MsgOutput Msg;
+	?Annotation null;
+};
+

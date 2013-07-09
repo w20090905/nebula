@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("0")
+tx Twxhikiatehistory {
+	!Hikiatehistoryid ID;
+	?Kojocd null;
+	?ChumonNo null;
+	?Groupcd null;
+	?SiireCd null;
+	?Toroku null;
+	?BhachuKbn null;
+	?KeikiNo null;
+	?SyuturyokuKbn null;
+	?SisyuSyain null;
+	?Insymd null;
+	?Maker null;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?SyuturyokuKbncd null;
+	?Hikiatedate Date;
+	?Zhhtkensyujyohouheadid Zhhtkensyujyohouhead;
+	?Zhhtkensyujyohoudetailid Zhhtkensyujyohoudetail;
+};
+

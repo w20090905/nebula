@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("1")
+tx Orgtax {
+	!Orgtaxid ID;
+	Orgid Organization;
+	Orgtaxregid Orgtaxregistration;
+	TaxName Name;
+	?TaxBasecode null;
+	?Basetaxid ID;
+	TaxRatetype null;
+	TaxRate Rate;
+	?IsInprice YesNo;
+	?DateLastupdated Date;
+	?TaxCode Code;
+	?TaxType null;
+	?Effectstartdate Date;
+	?Effectenddate Date;
+};
+

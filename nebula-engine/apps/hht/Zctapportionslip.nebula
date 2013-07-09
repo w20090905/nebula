@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("1")
+tx Zctapportionslip {
+	!Apportionslipid ID;
+	Apportionid Zctapportion;
+	Relatedtrantype null;
+	Relatedtranid ID;
+	Relatedtrancode Code;
+	?SourceSlipid ID;
+	?SourceSlipcode Code;
+	?ReferenceNo Code;
+	?Docdate Date;
+	?Localamount Amount;
+	?Apportionamount Amount;
+};
+

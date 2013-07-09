@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("1")
+tx Dcperioddetail {
+	!Dcperioddetailid ID;
+	Periodno SeqNo;
+	Startdate Date;
+	Enddate Date;
+	?Targetinvdate Date;
+	?Status;
+	Datacleanperiodid Datacleanperiod;
+	?Inuse null;
+};
+

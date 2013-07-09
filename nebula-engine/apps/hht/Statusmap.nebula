@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+tx Statusmap {
+	!Statusmapid ID;
+	Statustype Attr;
+	Statuscode null;
+};
+

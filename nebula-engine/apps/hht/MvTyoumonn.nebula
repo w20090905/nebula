@@ -1,0 +1,29 @@
+@Remarks("")
+@Refby("0")
+type MvTyoumonn {
+	?Orowid null;
+	?Odrowid null;
+	?Prowid null;
+	?Pdrowid null;
+	?Plrowid null;
+	?Ptrowid null;
+	?Rarowid null;
+	?A1 null;
+	?A2 null;
+	?A3 null;
+	?A41 null;
+	?A4 null;
+	?A5 null;
+	A6 null;
+	?B1 null;
+	?B2 null;
+	?Buyeritemcode Code;
+	B3 null;
+	?B4 null;
+	?B5 null;
+	?B6 null;
+	?C1 null;
+	?D1 null;
+	LanguageCode Lang;
+};
+

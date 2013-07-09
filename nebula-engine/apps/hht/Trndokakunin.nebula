@@ -1,0 +1,29 @@
+@Remarks("")
+@Refby("0")
+tx Trndokakunin {
+	!Dokakuninid ID;
+	?Nonyudate Date;
+	?Shukayoteymd null;
+	?Ordcode Code;
+	?LineNo Line;
+	?Itemcode Code;
+	?Qty Quantity;
+	?Umcode Code;
+	?Lotcount Count;
+	?Lotno1 null;
+	?Shukaqty1 null;
+	?Lotno2 null;
+	?Shukaqty2 null;
+	?Lotno3 null;
+	?Shukaqty3 null;
+	?Shiptocode Code;
+	?Sellercode Code;
+	?Incompanygrade null;
+	?Packing null;
+	?Status;
+	?Createdate null;
+	?Lastupdateddate null;
+	?Pgid null;
+	?Datakbn null;/* '0' */
+};
+

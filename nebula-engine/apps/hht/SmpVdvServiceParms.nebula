@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+type SmpVdvServiceParms {
+	!ServiceType Attr;
+	!ServiceName Name;
+	!PropertyName Name;
+	?PropertyValue String;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("6")
+tx Condition {
+	!Conditionid ID;
+	Orgid Organization;
+	Conditioncode Code;
+	Conditiontype null;
+	Conditiondesc null;
+	Status;
+	?DateLastupdated Date;
+};
+

@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("1")
+tx Rebatecalcperiod {
+	!Rebatecalcperiodid ID;
+	Orgid Organization;
+	Rebatepolicyid Rebatepolicy;
+	Periodno SeqNo;
+	?Begindate Date;
+	?Enddate Date;
+	?Calcdate Date;
+	?Status;
+	Customerid ID;
+};
+

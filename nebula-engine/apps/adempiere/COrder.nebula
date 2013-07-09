@@ -4,19 +4,9 @@ tx COrder {
 	@Remarks("Order")
 	!COrderId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("This is a Sales Transaction")
 	IsSotrx YesNo;/* 'Y'  */
 	@Remarks("Document sequence number of the document")
@@ -30,9 +20,9 @@ tx COrder {
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("Document type or rules")
-	CDoctypeId CDoctype;
+	CDoctype;
 	@Remarks("Target document type for conversing documents")
-	CDoctypeTargetId CDoctype;
+	CDoctypeTarget CDoctype;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Indicates if this document requires approval")
@@ -50,7 +40,7 @@ tx COrder {
 	@Remarks("Selected")
 	IsSelectEd YesNo;/* 'N'  */
 	@Remarks("Sales Representative or Company Agent")
-	?SalesRepId AdUser;
+	?SalesRep AdUser;
 	@Remarks("Date of Order")
 	DateOrdered Date;
 	@Remarks("Date Order was promised")
@@ -60,19 +50,19 @@ tx COrder {
 	@Remarks("Accounting Date")
 	DateAcct Date;
 	@Remarks("Identifies a Business Partner")
-	CBpartnerId CBpartner;
+	CBpartner;
 	@Remarks("Identifies the (ship to) address for this Business Partner")
-	CBpartnerLocationId CBpartnerLocation;
+	CBpartnerLocation;
 	@Remarks("Transaction Reference Number (Sales Order, Purchase Order) of your Business Partner")
-	?Poreference String;
+	?Poreference Note;
 	@Remarks("Print Discount on Invoice and Order")
 	IsDiscountPrintEd YesNo;/* 'Y'  */
 	@Remarks("The Currency for this record")
-	CCurrencyId CCurrency;
+	CCurrency;
 	@Remarks("How you pay the invoice")
 	PaymentRule Attr;
 	@Remarks("The terms of Payment (timing, discount)")
-	CPaymentTermId CPaymentTerm;
+	CPaymentTerm;
 	@Remarks("Frequency and method of invoicing")
 	InvoiceRule Attr;
 	@Remarks("Defines the timing of Delivery")
@@ -84,9 +74,9 @@ tx COrder {
 	@Remarks("How the order will be delivered")
 	DeliveryViarule Attr;
 	@Remarks("Method or manner of product delivery")
-	?MShipperId MShipper;
+	?MShipper;
 	@Remarks("Additional document charges")
-	?CChargeId CCharge;
+	?CCharge;
 	@Remarks("Charge Amount")
 	?ChargeAmt Amount;/* 0 */
 	@Remarks("Priority of a document")
@@ -94,53 +84,53 @@ tx COrder {
 	@Remarks("Total of all document lines")
 	TotalLines Line;/* 0  */
 	@Remarks("Total amount of document")
-	GrandTotal null;/* 0  */
+	GrandTotal Amount;/* 0  */
 	@Remarks("Storage Warehouse and Service Point")
-	MWarehouseId MWarehouse;
+	MWarehouse;
 	@Remarks("Unique identifier of a Price List")
-	MPriceListId MPriceList;
+	MPriceList;
 	@Remarks("Tax is included in the price")
 	IsTaxIncluded YesNo;/* 'N'  */
 	@Remarks("Marketing Campaign")
-	?CCampaignId CCampaign;
+	?CCampaign;
 	@Remarks("Financial Project")
-	?CProjectId CProject;
+	?CProject;
 	@Remarks("Business Activity")
-	?CActivityId CActivity;
+	?CActivity;
 	@Remarks("Posting status")
 	PostEd YesNo;/* 'N'  */
 	@Remarks("Payment identifier")
-	?CPaymentId CPayment;
+	?CPayment;
 	@Remarks("Cash Journal Line")
-	?CCashLineId CCashLine;
+	?CCashLine;
 	@Remarks("Enable sending Document EMail")
-	Sendemail EMail;/* 'N'  */
+	Sendemail YesNo;/* 'N'  */
 	@Remarks("User within the system - Internal or Business Partner Contact")
-	?AdUserId AdUser;
+	?AdUser;
 	@Remarks("Copy From Record")
 	?Copyfrom null;
 	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
 	IsSelfservice YesNo;/* 'N'  */
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrxId AdOrg;
+	?AdOrgtrx AdOrg;
 	@Remarks("User defined list element #1")
-	?User1Id CElementvalue;
+	?User1 CElementvalue;
 	@Remarks("User defined list element #2")
-	?User2Id CElementvalue;
+	?User2 CElementvalue;
 	@Remarks("Currency Conversion Rate Type")
-	?CConversionTypeId CConversionType;
+	?CConversionType;
 	@Remarks("Business Partner to be invoiced")
-	?BillBpartnerId CBpartner;
+	?BillBpartner CBpartner;
 	@Remarks("Business Partner Location for invoicing")
-	?BillLocationId CBpartnerLocation;
+	?BillLocation CBpartnerLocation;
 	@Remarks("Business Partner Contact for invoicing")
-	?BillUserId AdUser;
+	?BillUser AdUser;
 	@Remarks("Business Partner responsible for the payment")
-	?PayBpartnerId CBpartner;
+	?PayBpartner CBpartner;
 	@Remarks("Location of the Business Partner responsible for the payment")
-	?PayLocationId CBpartnerLocation;
+	?PayLocation CBpartnerLocation;
 	@Remarks("Reference to corresponding Sales/Purchase Order")
-	?RefOrderId COrder;
+	?RefOrder COrder;
 	@Remarks("Drop Shipments are sent from the Vendor directly to the Customer")
 	IsDropship YesNo;/* 'N'  */
 	@Remarks("Volume of a product")
@@ -150,10 +140,10 @@ tx COrder {
 	@Remarks("OrderType")
 	?Ordertype Attr;
 	@Remarks("Point of Sales Terminal")
-	?CPosId CPos;
+	?CPos;
 	@Remarks("AmountTendered")
-	?Amounttendered Amount;
+	?Amounttendered Number;
 	@Remarks("AmountRefunded")
-	?Amountrefunded Amount;
+	?Amountrefunded Number;
 };
 

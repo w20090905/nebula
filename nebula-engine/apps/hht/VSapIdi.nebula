@@ -1,0 +1,40 @@
+@Remarks("")
+@Refby("0")
+type VSapIdi {
+	?Idi001DataType Attr;
+	?Idi002TkonnEx null;
+	?Idi003TrcontItem null;
+	?Idi004TrcontSubitem null;
+	?Idi005Material null;
+	?Idi006Plant null;
+	?Idi007StgeLoc null;
+	?Idi008ReqQty null;
+	?Idi009SalesUnit null;
+	?Idi010SalesUnitIsO null;
+	?Idi011ShortText Text;
+	?Idi012PurPrice null;
+	?Idi013PriceUnit null;
+	?Idi014PoPrUom null;
+	?Idi015PoPrUomIsO null;
+	?Idi016PoUnit null;
+	?Idi017PoUnitIsO null;
+	?Idi018PurCurrency null;
+	?Idi019PurCurrencyIsO null;
+	?Idi020MatlGroup null;
+	?Idi021EanUpc null;
+	?Idi022SalesPrice null;
+	?Idi023CondPUnt null;
+	?Idi024CondUnit null;
+	?Idi025CondUnitIsO null;
+	?Idi026Currency null;
+	?Idi027CurrencyIsO null;
+	?Idi028Ordered null;
+	?Idi029VendMat null;
+	?Idi030CustMat null;
+	?Idi031ItemCat null;
+	?Idi032Batch null;
+	?Idi033ValType Attr;
+	?Idi034Complete null;
+	Returnid Returnslip;
+};
+

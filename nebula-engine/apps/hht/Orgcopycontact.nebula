@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+tx Orgcopycontact {
+	!Orgcopycontactid ID;
+	Orgcopyid Orgcopy;
+	?Contactcode Code;
+	Contactname Name;
+	Gender null;
+	?Address Code;
+	Contactroletype null;
+	?Officephone Phone;
+	DateLastupdated Date;
+	?Srccontactid ID;
+	?Tgtcontactid ID;
+	?EMail;
+	?Orgcopyaddressid Orgcopyaddress;
+};
+

@@ -1,0 +1,37 @@
+@Remarks("")
+@Refby("2")
+tx Twxgroupm {
+	!Groupid ID;
+	?Syozokicd null;
+	?Bucd null;
+	?Kacd null;
+	?Kakaricd null;
+	?Bumoncd null;
+	?Tel null;
+	?Fax;
+	?Yubinno String;
+	?Kamei null;
+	?Bumonmei null;
+	?Addr1 null;
+	?Addr2 null;
+	?Keikikotei null;
+	?Keikikaiten null;
+	?Keiyakufuka null;
+	?Eigyosyo null;
+	?Sitenkbn null;
+	?Boekikbn null;
+	?Syuturyokukbn null;
+	?Tani null;
+	?Hinmeicd null;
+	?Sisyusyain null;
+	?Insymd null;
+	?Updymd null;
+	?Updtime null;
+	?Groupcd null;
+	?Employeeid Employee;
+	?Orgid ID;
+	?Maker null;
+	?Createdate Date;
+	?DateLastupdated Date;
+};
+

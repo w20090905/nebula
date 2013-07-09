@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type Kpilang {
+	!Kpilangid ID;
+	?Name;
+	?Description;
+	LanguageCode Lang;
+	?Kpiid Kpi;
+};
+

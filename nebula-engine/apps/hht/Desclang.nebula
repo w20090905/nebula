@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Desclang {
+	!Descid ID;
+	Desctype null;
+	LanguageCode Lang;
+	?Description;
+	?EntityId ID;
+};
+

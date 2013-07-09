@@ -4,30 +4,20 @@ tx AdPinstance {
 	@Remarks("Instance of the process")
 	!AdPinstanceId ID;
 	@Remarks("Process or Report")
-	AdProcessId AdProcess;
+	AdProcess;
 	@Remarks("Direct internal record ID")
 	RecordId ID;
 	@Remarks("Processing")
 	IsProcessing YesNo;/* 'N'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
 	@Remarks("User within the system - Internal or Business Partner Contact")
-	?AdUserId AdUser;
-	@Remarks("Date this record was updated")
-	?Updated null;/* SYSDATE */
+	?AdUser;
 	@Remarks("Result of the action taken")
-	?Result null;
+	?Result Number;
 	@Remarks("Error Msg")
-	?ErrorMsg Msg;
+	?ErrorMsg Note;
 	@Remarks("Client/Tenant for this installation.")
-	?AdClientId AdClient;
+	?AdClientId ID;
 	@Remarks("Organizational entity within client")
-	?AdOrgId AdOrg;
-	@Remarks("User who created this records")
-	?Createdby null;
-	@Remarks("User who updated this records")
-	Updatedby null;
-	@Remarks("The record is active in the system")
-	?IsActive YesNo;/* 'Y' */
+	?AdOrgId ID;
 };
 

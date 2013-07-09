@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+tx Rebaterequestdetail {
+	!Rrdetailid ID;
+	Rebaterequestid Rebaterequest;
+	Customerid ID;
+	SourceOrgid ID;
+	?SalesRep null;
+	Relatedtrantype null;
+	?Relatedtranid ID;
+	?Relatedtranno null;
+	?Relatedtrandate Date;
+	?Baseamount Amount;
+	?Rebateamount Amount;
+	?Settleamount Amount;
+	?Balance null;
+	DateLastupdated Date;
+};
+

@@ -1,0 +1,41 @@
+@Remarks("")
+@Refby("0")
+type VdkIndSubpartitions {
+	?VdkId ID;
+	?VdkName Name;
+	?VdkParentId ID;
+	?VdkDatabaseId VdkDatabase;
+	?VdkLschemaId ID;
+	?VdkIndexId VdkIndex;
+	?VdkIndexOwnerName Name;
+	?VdkIndexName Name;
+	?VdkPartitionName Name;
+	?VdkSegmentId VdkSegment;
+	?VdkSubpartitionPosition Length;
+	?VdkStatus null;
+	?VdkTablespaceName Name;
+	?VdkPctFree null;
+	?VdkIniTrans null;
+	?VdkMaxTrans null;
+	?VdkLogging null;
+	?VdkBufferPool null;
+	?VdkBlevel null;
+	?VdkUnique null;
+	?VdkReverseKey null;
+	?VdkLeafBlocks null;
+	?VdkDistinctKeys null;
+	?VdkAvgLeafBlocksPerKey null;
+	?VdkAvgDataBlocksPerKey null;
+	?VdkValidAnalyzeStats null;
+	?VdkSampleSize Size;
+	?VdkClusteringFactor null;
+	?VdkNumRows null;
+	?VdkHeight Height;
+	?VdkDelLfRows null;
+	?VdkLfRows null;
+	?VdkDelLfRowsLen null;
+	?VdkLfRowsLen null;
+	?VdkImplement null;
+	?VdkEstimatedSize Size;
+};
+

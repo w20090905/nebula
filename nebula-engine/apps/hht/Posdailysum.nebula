@@ -1,0 +1,31 @@
+@Remarks("")
+@Refby("1")
+tx Posdailysum {
+	!Posdailysumid ID;
+	Posdailysettleid Posdailysettle;
+	Orgid Organization;
+	?Posdailysumcode Code;
+	?Poscode Code;
+	?CashErid ID;
+	?SalesDate Date;
+	?SalesType Attr;
+	?SalesRepid ID;
+	?Vipno null;
+	?Listamt Amount;
+	?Realamt Amount;
+	?TotalDiscount Count;
+	?TotalDiscountamt Amount;
+	Itemid Item;
+	?Umcode Code;
+	?Listprice Price;
+	?Netprice Price;
+	?Retailqty Quantity;
+	?Unrtnqty Quantity;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Originalposinvoiceid ID;
+	?Memo;
+	Status;
+};
+

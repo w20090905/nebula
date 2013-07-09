@@ -4,25 +4,15 @@ type CWithholding {
 	@Remarks("Withholding type defined")
 	!CWithholdingId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("The terms of Payment (timing, discount)")
-	CPaymentTermId CPaymentTerm;
+	CPaymentTerm;
 	@Remarks("This is a tax related withholding")
 	IsTaxWithholding YesNo;/* 'Y'  */
 	@Remarks("Tax is Prorated")
@@ -38,9 +28,9 @@ type CWithholding {
 	@Remarks("Fix amounted amount to be levied or paid")
 	?Fixamt Amount;/* 0 */
 	@Remarks("Minimum gross amount for withholding calculation")
-	?Thresholdmin null;/* 0 */
+	?Thresholdmin Number;/* 0 */
 	@Remarks("Maximum gross amount for withholding calculation  (0=no limit)")
-	?Thresholdmax null;/* 0 */
+	?Thresholdmax Number;/* 0 */
 	@Remarks("Minimum Amount in invoice currency")
 	?Minamt Amount;/* 0 */
 	@Remarks("Maximum Amount in invoice currency")

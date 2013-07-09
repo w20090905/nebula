@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+tx Solutiontask {
+	!Solutiontaskid ID;
+	StandardTaskid StandardTask;
+	Solutionid Solution;
+};
+

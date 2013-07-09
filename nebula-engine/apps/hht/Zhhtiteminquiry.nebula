@@ -1,0 +1,87 @@
+@Remarks("")
+@Refby("3")
+tx Zhhtiteminquiry {
+	!Zhhtiteminquiryid ID;
+	?Receiptcode Code;
+	?Inquirycode Code;
+	?Orireceiptcode Code;
+	?Buyerid ID;
+	?Inquirydate Date;
+	?Replydate Date;
+	?DeliveryDate Date;
+	?Currencycode Code;
+	?PaymentTermid PaymentTerm;
+	?PaymentMethodid ID;
+	?Shipmenttermid ID;
+	?Shipmentmethodid ID;
+	?Shipfrom null;
+	?Shipto null;
+	?Comments Note;
+	?Replydeliverydate Date;
+	?Startvaliddate Date;
+	?Endvaliddate Date;
+	?Comments1 null;
+	?Comments2 null;
+	?Comments3 null;
+	?Comments4 null;
+	?Comments5 null;
+	?Comments6 null;
+	?Status;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Userid Usr;
+	?Orgid Organization;
+	?Sellerid ID;
+	?Sellerinquirydate Date;
+	?Sellerlimitdate Date;
+	?Purchasediscount Count;
+	?TotalPuramount Amount;
+	?NewTotalAmount Amount;
+	?NewTotalProfit null;
+	?NewTotalPuramount Amount;
+	?Receiptautocode Code;
+	?Receiptsubcode1 null;
+	?Receiptsubcode2 null;
+	?Limitdate Date;
+	?Typeflg null;
+	?TotalAmount Amount;
+	?TotalProfit null;
+	?Discount Count;
+	?Refinquiryid ID;
+	?TotalProfitrate Rate;
+	?NewTotalProfitrate Rate;
+	?Ctxtm01 null;
+	@Remarks("注文状態 20110531 update for REQ-388")
+	?Customstatus null;/* 0 */
+	?Zhhtinquirymanagecode Code;
+	@Remarks("2010/09/14 追加")
+	?Groupcd null;
+	?Yuukodd null;
+	?Busu null;
+	?Yuukomd null;
+	?Kojocd null;
+	?Eigyocd null;
+	?Kigyocd null;
+	@Remarks("取引先コード 2010/09/21 追加")
+	?Torihikicd null;
+	@Remarks("見積まとめ番号  2010/09/21 追加")
+	?Zhhtinquirymatomeno SeqNo;
+	?Twxdataflg null;
+	?Zuban null;
+	?Zureki String;
+	?Buyreportoutflg null;
+	?Sellreportoutflg null;
+	@Remarks("任者ID 20101010 追加")
+	?Employeeid Employee;
+	@Remarks("現品送り先名 20110517add")
+	?Okurisakimei null;
+	@Remarks("現品送り住所１ 20110517add")
+	?Okurisakiaddr1 null;
+	@Remarks("現品送り住所２ 20110517add")
+	?Okurisakiaddr2 null;
+	@Remarks("成約承認者 20110531 add for REQ-388")
+	?Approveuserid ID;
+	@Remarks("成約承認日付 20110531 add for REQ-388")
+	?Approvedate Date;
+};
+

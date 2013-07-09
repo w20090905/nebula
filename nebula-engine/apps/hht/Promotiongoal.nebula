@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Promotiongoal {
+	!Promotiongoalid ID;
+	Kpicode Code;
+	?Expectedinreasedrate Rate;
+	?Goaldescription Description;
+	Promotionid Promotion;
+};
+

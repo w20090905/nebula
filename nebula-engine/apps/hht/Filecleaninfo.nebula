@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Filecleaninfo {
+	!Filecleaninfoid ID;
+	Cleantype null;
+	Fileid ID;
+	?ErrorQty Quantity;
+	?ErrorMessage null;
+	?Datacleanrule null;
+};
+

@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("5")
+tx Question {
+	!Questionid ID;
+	Orgid Organization;
+	Questioncode Code;
+	Questionname Name;
+	Questioncategoryid Questioncategory;
+	Deviceid ID;
+	?Comments Note;
+	Status;
+	DateLastupdated Date;
+};
+

@@ -1,0 +1,25 @@
+@Remarks("")
+@Refby("0")
+tx Twxzubanmtmp {
+	!Zubanmtmpid ID;
+	?Tmpid Zhhtexpensetmp;
+	?Kojocd null;
+	?Zuban String;
+	?Hinban null;
+	?Zureki String;
+	?Sonae null;
+	?Hinmei null;
+	?Tani null;
+	?ChumonCd null;
+	?SiireCd null;
+	?HinmeiCd null;
+	?JyoubiCd null;
+	?Ruibetu null;
+	?KensyuKbn null;
+	?KeiyakuFuka null;
+	?Groupcd null;
+	?SyuturyokuKbn null;
+	?Comento null;
+	?KyoteiKbn null;
+};
+

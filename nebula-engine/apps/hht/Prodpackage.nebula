@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+tx Prodpackage {
+	!Prodpackageid ID;
+	Prodid Product;
+	Containertype null;
+	?Length;
+	?Width;
+	?Height;
+	?Umcode1 null;
+	?Volume;
+	?Umcode2 null;
+	?Weight;
+	?Umcode3 null;
+	?Qty Quantity;
+	?Containerid Container;
+};
+

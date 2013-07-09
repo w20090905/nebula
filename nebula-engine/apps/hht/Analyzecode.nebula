@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("17")
+tx Analyzecode {
+	!Analyzecodeid ID;
+	?Analyzecode Code;
+	?Analyzecodename Name;
+	?Codetype Attr;
+	?Cubename Name;
+	?Diomensionname Name;
+	?Tablename Name;
+	?FieldName Name;
+	?Segementno SeqNo;
+	?Primarykey null;
+	?SourceTable null;
+	?SourceKeyfield null;
+	?SourceValueField null;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("3")
+tx Promotionform {
+	!Promotionformid ID;
+	Calctypeid Calctype;
+	Promotioncode Code;
+	Promotiontype null;
+	Orgid Organization;
+};
+

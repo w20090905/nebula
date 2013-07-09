@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("1")
+tx Bominstance {
+	!Bominstanceid ID;
+	Orgid Organization;
+	?Itemid Item;
+	Bomtype null;
+	Umcode Code;
+	Qty Quantity;
+	IsAutoPack YesNo;
+	IsAutoUnpack YesNo;
+	?Createdate Date;
+	?Maker null;
+	Revision null;
+	?IsPlanbom YesNo;
+	DateLastupdated Date;
+	Status;
+	?Lotno null;
+	Bomid Bom;
+};
+

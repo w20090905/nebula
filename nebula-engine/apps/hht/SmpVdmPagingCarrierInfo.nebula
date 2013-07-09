@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx SmpVdmPagingCarrierInfo {
+	?PagingServerName Name;
+	!PagingCarrierId ID;
+	PagingCarrierName Name;
+	PagingCarrierType null;
+	PagingCarrierTimeout null;
+	PagingCarrierConnDelay null;
+	?PagingCarrierProtocol String;
+	PhoneCountryCode null;
+	PhoneAreaCode null;
+	PhoneNumber Phone;
+	?PhoneNumberSuffix Phone;
+};
+

@@ -39,13 +39,14 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 public class DefaultImporter {
-	int MAX = 1000;
+	int MAX = 1500;
+	final boolean manageRelationInDB;
+	final boolean seperateWithUnder;
+	final String indenfyKey;
 
 	List<Type> types = Lists.newArrayList();
 	Map<String, Type> typeMapByName = Maps.newHashMap();
-	Map<String, Type> typeMapByRawName = Maps.newHashMap();
-
-	Map<String, String> tables = Maps.newHashMap();
+	Map<String, Type> typesByRawName = Maps.newHashMap();
 
 	DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
 
@@ -53,7 +54,15 @@ public class DefaultImporter {
 
 	EnumMap<DBColumnType, List<String>> dbColumnMap = Maps.newEnumMap(DBColumnType.class);
 
-	public DefaultImporter() {
+	public DefaultImporter(boolean manageRelationInDB, boolean seperateWithUnder) {
+		this(manageRelationInDB, seperateWithUnder, "ID");
+	}
+
+	public DefaultImporter(boolean manageRelationInDB, boolean seperateWithUnder, String indenfyKey) {
+		this.manageRelationInDB = manageRelationInDB;
+		this.seperateWithUnder = seperateWithUnder;
+		this.indenfyKey = indenfyKey;
+
 		dbColumnMap.put(Char, Lists.newArrayList("CHAR"));
 		dbColumnMap.put(Varchar, Lists.newArrayList("VARCHAR", "VARCHAR2"));
 		dbColumnMap.put(NVarchar, Lists.newArrayList("NVARCHAR", "NVARCHAR2"));
@@ -94,7 +103,7 @@ public class DefaultImporter {
 	public Type addType(String rawName, String name, Type type) {
 		types.add(type);
 		typeMapByName.put(name, type);
-		typeMapByRawName.put(rawName, type);
+		typesByRawName.put(rawName, type);
 		return type;
 	}
 
@@ -142,9 +151,15 @@ public class DefaultImporter {
 					}
 				}
 			}
+			
+			if (rule.length>0) {
+				matched = false;
+				if(field.size==rule.length){
+					matched=true;
+				}
+			}
 
 			if (!matched) continue;
-			System.out.println("%%%%" + rule.tableName);
 			if (rule.tableName != null) {
 				if (!field.resideType.rawName.equalsIgnoreCase(rule.tableName)) {
 					continue;
@@ -168,9 +183,25 @@ public class DefaultImporter {
 				matched = matched && machPattern;
 			}
 
+			if (!matched) continue;
+			
+			if (rule.defaultValues != null) {
+				matched = false;
+				if(field.name.equalsIgnoreCase("EnforceClientSecurity")){
+					System.out.println("dsfdsf");
+				}
+				for (String defaultValue : rule.defaultValues) {					
+					if (defaultValue.equalsIgnoreCase(field.defaultValue.trim())) {
+						matched = true;
+						break;
+					}
+				}
+			}
+			
+			if (!matched) continue;
+			
 			if (matched) {
-				field.comment = "Matched\t" + field.name + "\t"
-						+ (matchedMatchPattern == null ? "" : matchedMatchPattern.name()) + "\t" + matchedName + "\t"
+				field.comment = "Matched\t" + field.name + "\t" + (matchedMatchPattern == null ? "" : matchedMatchPattern.name()) + "\t" + matchedName + "\t"
 						+ (matchedColumnType == null ? "" : matchedColumnType.name());
 				for (Action action : rule.actions) {
 					action.apply(field, matchedName);
@@ -179,6 +210,154 @@ public class DefaultImporter {
 			}
 		}
 		return lastResult;
+	}
+
+	public void analyze(List<Type> types) {
+
+		// Costruct Type
+		for (Type type : types) {
+			for (Field field : type.fields) {
+				Field result = this.match(field);
+				if (result != null) {
+				} else {
+					System.out.println(field);
+				}
+			}
+		}
+
+		// check type
+		for (Type type : types) {
+			boolean hasIDKey = false;
+			boolean hasNameKey = false;
+			boolean hasNameRequired = false;
+			boolean hasName = false;
+			for (Field field : type.fields) {
+				if ("Name".equalsIgnoreCase(field.resultName)) {
+					hasName = true;
+					if (!field.nullable) {
+						hasNameRequired = true;
+					}
+					if (field.isKey) {
+						hasNameKey = true;
+					}
+				} else if (field.isKey) {
+					if ("ID".equalsIgnoreCase(field.resultTypeName)) {
+						hasIDKey = true;
+					}
+				}
+			}
+
+			if (hasIDKey && !hasName) {
+				type.standalone = TypeStandalone.Transaction;
+			} else if (hasNameKey) {
+				type.standalone = TypeStandalone.Master;
+			} else if (hasIDKey && hasNameRequired) {
+				type.standalone = TypeStandalone.Master;
+			}
+
+			// System.out.println("##\t" + type.rawName + "\t" + type.name +
+			// "\t" + hasIDKey + "\t" + hasNameKey + "\t"
+			// + hasNameRequired + "\t" + hasName);
+		}
+
+		if (manageRelationInDB) {
+			String key = this.seperateWithUnder ? "_" + this.indenfyKey : this.indenfyKey;
+
+			for (Type type : types) {
+				for (Field field : type.fields) {
+					if (field.isForeignKey) {
+						if (typesByRawName.containsKey(field.foreignKeyTable)) {
+							field.resultTypeName = typesByRawName.get(field.foreignKeyTable).name;
+							if (field.name.toUpperCase().endsWith(key)) {
+								if (field.name.substring(0, field.name.length() - key.length()).equalsIgnoreCase(field.foreignKeyTable)) {
+									field.resultName = field.resultTypeName;
+								} else {
+									field.resultName = field.resultName.substring(0, field.resultName.length() - indenfyKey.length());
+								}
+							}
+						}
+					} else if (!field.isKey && this.indenfyKey.equals(field.resultTypeName)) {
+						String typename = field.name;
+						if (typename.toUpperCase().endsWith(key)) {
+							typename = typename.substring(0, typename.length() - 3);
+						}
+						if (typesByRawName.containsKey(typename)) {
+							// field.resultTypeName =
+							// typesByRawName.get(typename).name;
+							field.isForeignKey = false;
+							field.foreignKeyTable = typename;
+						} else if (typesByRawName.containsKey(typename + "s")) {
+							// field.resultTypeName =
+							// typesByRawName.get(typename + "s").name;
+							field.isForeignKey = false;
+							field.foreignKeyTable = typename + "s";
+						} else {
+							System.out.println("Fail check foreign key : " + type.name + " - " + field.name);
+						}
+					}
+				}
+			}
+
+		} else {
+			String key = this.seperateWithUnder ? "_" + this.indenfyKey : this.indenfyKey;
+			for (Type type : types) {
+				for (Field field : type.fields) {
+					if (this.indenfyKey.equals(field.resultTypeName)) {
+						String typename = field.name;
+						if (typename.toUpperCase().endsWith(key)) {
+							typename = typename.substring(0, typename.length() - 3);
+						}
+						if (typesByRawName.containsKey(typename)) {
+							field.resultTypeName = typesByRawName.get(typename).name;
+							field.isForeignKey = true;
+							field.foreignKeyTable = typename;
+						} else if (typesByRawName.containsKey(typename + "s")) {
+							field.resultTypeName = typesByRawName.get(typename + "s").name;
+							field.isForeignKey = true;
+							field.foreignKeyTable = typename + "s";
+						} else {
+							// System.out.println("Fail check foreign key : " +
+							// type.name + " - " + field.name);
+						}
+					}
+				}
+			}
+		}
+
+		// 附属表的情况，主键为另一个对象的主键
+		for (Type type : types) {
+			for (Field field : type.fields) {
+				if (field.isKey) {
+					if (field.name.endsWith("_ID") && !"ID".equals(field.resultTypeName) && typeMapByName.containsKey(field.resultTypeName)) {
+						Type refType = typeMapByName.get(field.resultTypeName);
+						switch (refType.standalone) {
+						case Master:
+							type.standalone = TypeStandalone.Master;
+							break;
+						case Transaction:
+							type.standalone = TypeStandalone.Transaction;
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		for (Type type : types) {
+			if (type.standalone == TypeStandalone.Abstract) {
+				type.standalone = TypeStandalone.Master;
+				type.comment = "TODO Type not sure ！！ ";
+				// System.out.println("## Type not sure  " + type.name);
+			}
+		}
+		// System.out.println("\n\n\n=================================================\n\n\n");
+		// for (Type type : types) {
+		// for (Field field : type.fields) {
+		// System.out.println(type.rawName + "\t" + type.name + "\t" +
+		// type.standalone.name() + "\t"
+		// + type.comment + "\t" + field);
+		// }
+		// }
 	}
 
 	public void output(String outputFolderName) throws IOException {
@@ -194,7 +373,8 @@ public class DefaultImporter {
 		}
 		OutputStreamWriter out = null;
 		StringBuilder sb = new StringBuilder(5000);
-		for (Type type : types) {
+		for (int i = 0; i < types.size() && i < MAX; i++) {
+			Type type = types.get(i);
 			out = new OutputStreamWriter(new FileOutputStream(new File(outputFolder, type.name + ".nebula")));
 
 			sb.setLength(0);
@@ -207,7 +387,7 @@ public class DefaultImporter {
 			}
 
 			for (Field field : type.fields) {
-				if(field.skip){
+				if (field.skip) {
 					continue;
 				}
 				if (field.remarks.length() > 0) {
@@ -220,8 +400,15 @@ public class DefaultImporter {
 				if (field.isKey) {
 					sb.append("!");
 				}
-				if (!field.nullable && field.resultTypeName != null) {
+				
+				/*				if (!field.nullable && field.resultTypeName != null) {
 					if ("Name Subject Title".toUpperCase().indexOf(field.resultTypeName.toUpperCase()) >= 0) {
+						sb.append("*");
+					}
+				}
+				*/
+				if (!field.nullable && field.resultTypeName != null) {
+					if ("Name".toUpperCase().indexOf(field.resultTypeName.toUpperCase()) >= 0 && "Name".toUpperCase().indexOf(field.resultName.toUpperCase()) >= 0) {
 						sb.append("*");
 					}
 				}
@@ -255,23 +442,21 @@ public class DefaultImporter {
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Element element = (Element) nodeList.item(i);
 			String tableName = element.getAttribute("name");
-			this.tables.put(tableName, tableName);
+			this.addType(tableName, refineName(tableName), element.getAttribute("remarks"));
 		}
+		System.out.println("preload reading " + nodeList.getLength());
 
 		for (int i = 0; i < nodeList.getLength() && i < MAX; i++) {
 			Element element = (Element) nodeList.item(i);
-			this.readTable(element);
-			System.out.println("reading... " + i);
+			Type type = this.readTable(element);
+			System.out.println("reading... " + i + " " + type.name);
 		}
 	}
 
 	public Type readTable(Element table) throws IOException {
 		String tableName = table.getAttribute("name");
-		String remarks = table.getAttribute("remarks");
 
-		// buf += "@NumRows(" + table.getAttribute("numRows") + ")\n";
-
-		Type type = this.addType(tableName, refineName(tableName), remarks);
+		Type type = this.typesByRawName.get(tableName);
 
 		NodeList nodes = table.getChildNodes();
 		for (int i = 0; i < nodes.getLength(); i++) {
@@ -304,7 +489,7 @@ public class DefaultImporter {
 		field.digits = Integer.parseInt(column.getAttribute("digits"));
 		field.nullable = "true".equals(column.getAttribute("nullable"));
 		field.remarks = column.getAttribute("remarks");
-		field.size = column.getAttribute("size");
+		field.size = Integer.parseInt(column.getAttribute("size"));
 		field.typename = column.getAttribute("type");
 		field.name = column.getAttribute("name");
 
@@ -371,7 +556,7 @@ public class DefaultImporter {
 		String name;
 		boolean nullable;
 		String remarks;
-		String size;
+		int size;
 		String typename;
 
 		String comment;
@@ -406,9 +591,8 @@ public class DefaultImporter {
 
 		@Override
 		public String toString() {
-			return name + "\t" + typename + "\t" + resultName + "\t" + resultTypeName + " " + "\t" + defaultValue
-					+ "\t" + digits + "\t" + nullable + "\t" + remarks + "\t" + size + "\t" + comment + " " + "\t"
-					+ skip + "\t" + autoUpdated + "\t" + isKey;
+			return name + "\t" + typename + "\t" + resultName + "\t" + resultTypeName + " " + "\t" + defaultValue + "\t" + digits + "\t" + nullable + "\t"
+					+ remarks + "\t" + size + "\t" + comment + " " + "\t" + skip + "\t" + autoUpdated + "\t" + isKey;
 		}
 
 	}
@@ -426,9 +610,8 @@ public class DefaultImporter {
 			+ " Days between after Charge Interest Dunning Doctype Invoice  payment Times Tender "
 			+ " Archive Conversion Amt Foreign Document Fee Total Qty Price Freight Resource Tax"
 			+ " Accept Bpcontact Delivery Priority Grand Product Creditcard Voice Writeoff Proxy Attribute"
-			+ "Require Planned Project  Reference balance Committed Sales Standard Notification"
-			+ " Country System Remuneration  Revenue Unearned Gross " + " UnixAttachmentpath Language Decimal")
-			.toUpperCase().split(" ");
+			+ "Require Planned Project  Reference balance Committed Sales Standard Notification" + " Country System Remuneration  Revenue Unearned Gross "
+			+ " UnixAttachmentpath Language Decimal").toUpperCase().split(" ");
 
 	public String refineName(String name) {
 		if (name == null) return null;

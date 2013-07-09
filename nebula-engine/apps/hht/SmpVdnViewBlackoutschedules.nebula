@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+type SmpVdnViewBlackoutschedules {
+	?Targetid ID;
+	TargetName Name;
+	TargetType Attr;
+	?Schedulename Name;
+	?Schedulestate null;
+	?Schedule null;
+	?StartTime null;
+	?EndTime null;
+	?DurationLength Length;
+	?Units Unit;
+	?DurationMode null;
+	?TotalBlackout null;
+};
+

@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("2")
+tx Forum {
+	!Forumid ID;
+	Orgid Organization;
+	?Forumcode Code;
+	Forumtype null;
+	?Maker null;
+	?Createdate Date;
+	?Expiredate Date;
+	?Areaid Businessarea;
+	Status;
+	?Orggroupid Orggroup;
+	?Toorglist null;
+	?DateLastupdated Date;
+};
+

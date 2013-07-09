@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("1")
+tx Vouchersign {
+	!Vouchersignid ID;
+	?Vouchersigncode Code;
+	?LanguageCode Lang;
+	?Vouchersignname Name;
+	?Comments Note;
+	?Status;
+};
+

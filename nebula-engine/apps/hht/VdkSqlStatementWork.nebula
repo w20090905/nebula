@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+type VdkSqlStatementWork {
+	?VdkId ID;
+	?VdkRequestId VdkRequest;
+	?VdkSqlId VdkSql;
+	?VdkLength Length;
+	?VdkRefCnt null;
+	?VdkSqlHashId null;
+	?VdkCaseHashId null;
+	?VdkSpacingHashId null;
+	?VdkVariableHashId null;
+	?VdkOrderHashId null;
+	?VdkFormAtHashId null;
+};
+

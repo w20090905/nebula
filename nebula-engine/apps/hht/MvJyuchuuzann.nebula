@@ -1,0 +1,57 @@
+@Remarks("")
+@Refby("0")
+type MvJyuchuuzann {
+	?Sorowid null;
+	?Sodrowid null;
+	?Sgrowid null;
+	?Sdrowid null;
+	?Ptrowid null;
+	?Urowid null;
+	?Plrowid  null;
+	?Dprowid null;
+	?Pgrowid null;
+	?Soorowid null;
+	?Podrowid null;
+	?Ogwrowid null;
+	?Sellerid ID;
+	Soorderdetailid ID;
+	Ownorgname Name;
+	Ownorgcode Code;
+	Buyerorgcode Code;
+	Buyerorgid ID;
+	Buyerorgname Name;
+	?Contractid Contract;
+	?ReferenceNo Code;
+	?Soordercode Code;
+	Shipmentterm String;
+	?PaymentTermname Name;
+	?Currencyname Name;
+	?Zctrate Rate;
+	?Exchagedatecode Code;
+	?Exchagetype Attr;
+	?Docdate Date;
+	Username Name;
+	?TaxCode Code;
+	?TaxRate Rate;
+	?Comments Note;
+	?Buyeritemcode Code;
+	Prdn null;
+	?Umcode Code;
+	?Unitprice Unit;
+	?Pounitprice Price;
+	?Orderqty Quantity;
+	?Amount;
+	?Zctamount Amount;
+	?Remanentqty Quantity;
+	?Sellerorgname Name;
+	LanguageCode Lang;
+	Ownerorgid ID;
+	?DeliveryDate Date;
+	?Makerid ID;
+	?Sostatus null;
+	?AutoDevgrflag null;
+	?Sapwhcode Code;
+	?Saplotno null;
+	?Sapevaluation null;
+};
+

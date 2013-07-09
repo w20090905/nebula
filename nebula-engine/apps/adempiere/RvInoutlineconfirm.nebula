@@ -1,34 +1,29 @@
 @Remarks("")
 @Refby("0")
 type RvInoutlineconfirm {
-	MInoutconfirmId MInoutconfirm;
-	MInoutlineconfirmId MInoutlineconfirm;
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;
-	Created null;
-	Createdby null;
-	Updated null;
-	Updatedby null;
+	MInoutconfirmId ID;
+	MInoutlineconfirmId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Targetqty Quantity;
 	Confirmedqty Quantity;
 	?Differenceqty Quantity;
 	?Scrappedqty Quantity;
 	?Description;
 	Processed YesNo;
-	MInoutId MInout;
+	MInoutId ID;
 	DocumentNo Code;
 	Confirmtype Attr;
 	IsApproved YesNo;
 	IsCancelled YesNo;
-	CBpartnerId CBpartner;
-	CBpartnerLocationId CBpartnerLocation;
-	MWarehouseId MWarehouse;
-	?COrderId COrder;
+	CBpartnerId ID;
+	CBpartnerLocationId ID;
+	MWarehouseId ID;
+	?COrderId ID;
 	IsSotrx YesNo;
-	MInoutlineId MInoutline;
-	?MProductId MProduct;
-	?MAttributesetinstanceId MAttributesetinstance;
-	?MLocatorId MLocator;
+	MInoutlineId ID;
+	?MProductId ID;
+	?MAttributesetinstanceId ID;
+	?MLocatorId ID;
 };
 

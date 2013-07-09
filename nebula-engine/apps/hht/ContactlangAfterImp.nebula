@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+type ContactlangAfterImp {
+	Contactlangid Contactlang;
+	Contactid Contact;
+	?LanguageCode Lang;
+	?Cn null;
+};
+

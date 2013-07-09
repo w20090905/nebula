@@ -1,0 +1,82 @@
+@Remarks("")
+@Refby("2")
+tx Zhhtinspectiondata {
+	!Zhhtinspectiondataid ID;
+	@Remarks("関連ヘッダID")
+	?Refheadid ID;
+	@Remarks("入金支払区分")
+	?PaymentKbn null;
+	@Remarks("事業領域ID")
+	?Orgid Organization;
+	@Remarks("事業領域コード")
+	?Orgcode Code;
+	@Remarks("取引先コード")
+	?Customercode Code;
+	@Remarks("レコード登録番号")
+	?RecordLoginno null;
+	@Remarks("請求年月日")
+	?Claimdate Date;
+	@Remarks("検収年月日")
+	?Inspectiondate Date;
+	@Remarks("受付年月日")
+	?AcceptDate Date;
+	@Remarks("受付時刻")
+	?AcceptTime null;
+	@Remarks("データ内容(20101101 VARCHAR2(15)をVARCHAR2(45)に修正する)")
+	?Datacontent null;
+	@Remarks("税請求年月日")
+	?TaxClaimdate Date;
+	@Remarks("税検収年月日")
+	?TaxInspectiondate Date;
+	@Remarks("自動処理内容")
+	?AutoProcesscontent null;
+	@Remarks("自動キー内容")
+	?AutoKeycontent null;
+	@Remarks("送案ＮＯ")
+	?Soanno null;
+	@Remarks("送案日付")
+	?Soandate Date;
+	@Remarks("得意先発注番号(20101101 VARCHAR2(20)をVARCHAR2(60)に修正する)")
+	?Buyerpono null;
+	@Remarks("テキスト(20101101 VARCHAR2(50)をVARCHAR2(150)に修正する)")
+	?Text;
+	@Remarks("仕様(20101101 VARCHAR2(20)をVARCHAR2(60)に修正する)")
+	?Specification null;
+	@Remarks("赤区分")
+	?Redkbn null;
+	@Remarks("通貨コード")
+	?Currency null;
+	@Remarks("数量")
+	?Qty Quantity;
+	@Remarks("単価")
+	?Price;
+	@Remarks("外貨額")
+	?Fcamount Amount;
+	@Remarks("金額")
+	?Amount;
+	@Remarks("購買内容(20101101 VARCHAR2(15)をVARCHAR2(45)に修正する)")
+	?Purchasecontent null;
+	@Remarks("税外貨額")
+	?TaxFcamount Amount;
+	@Remarks("税額")
+	?TaxAmount Amount;
+	@Remarks("需要家名(20101101 VARCHAR2(15)をVARCHAR2(45)に修正する)")
+	?Finaluser null;
+	@Remarks("発注ＮＯ")
+	?Pono null;
+	@Remarks("発注項")
+	?Poevent null;
+	@Remarks("単位")
+	?Unit null;
+	@Remarks("送信状態")
+	?Sendkbn null;
+	?Refdetailid ID;
+	?Createdate Date;/* SYSDATE */
+	@Remarks("一括計上区分(0:非一括計上,1:一括計上)")
+	?Ikkatukeijyoukbn null;/* 0 */
+	@Remarks("関連検収ﾃﾞｰﾀID")
+	?Refzhhtinspectiondataid ID;
+	@Remarks("集計日付")
+	?Summarydate Date;
+};
+

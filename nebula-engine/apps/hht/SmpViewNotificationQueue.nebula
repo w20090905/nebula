@@ -1,0 +1,23 @@
+@Remarks("List of all pending notifications in the queue")
+@Refby("0")
+type SmpViewNotificationQueue {
+	@Remarks("Internal sequence number for the notification")
+	SequenceNum SmpVdeTryRemoveEventQueue;
+	@Remarks("Subsystem which has generated this notification")
+	?Subsystem null;
+	@Remarks("Type of notification for this subsystem")
+	?NotificationType SmpVdmLastNotifSeqPertype;
+	@Remarks("Name of the node which generated this notification")
+	?NodeName Name;
+	@Remarks("Name of the service responsible for this notification")
+	?TargetName Name;
+	@Remarks("Type of service responsible for this notification")
+	?TargetType Attr;
+	@Remarks("Translated name for the target type")
+	?TargetNlsType Attr;
+	@Remarks("Name of the administrator owning the object")
+	?AdministratorName Name;
+	@Remarks("Time and date the notification was received")
+	?TimesTamp Count;
+};
+

@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx Marketingplanperiod {
+	!Marketingplanperiodid ID;
+	Marketingplandetailid Marketingplandetail;
+	Marketingplanid Marketingplan;
+	Accyearid Accountingyear;
+	Accperiodid Accountingperiod;
+	Year null;
+	Periodno SeqNo;
+	Weight;
+	?Budgetamount Amount;
+	?SalesTarget null;
+	?Remark null;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type SmpVdgGatewayMap {
+	!Nodename SmpVdgNodeList;
+	?Hostname Host;
+	?TimesTamp null;/* SYSDATE */
+	?UpDown null;/* 'UP' */
+	UpIndex null;
+};
+

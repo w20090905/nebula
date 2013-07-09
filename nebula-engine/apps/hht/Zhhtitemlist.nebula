@@ -1,0 +1,208 @@
+@Remarks("")
+@Refby("0")
+type Zhhtitemlist {
+	Zhhtitemlistid ID;
+	@Remarks("ｱｲﾃﾑ中間表ｺｰﾄﾞ")
+	Itemlistcode Code;
+	@Remarks("枝番")
+	?Itemlistsubcode null;
+	@Remarks("職判ID")
+	Orgid Organization;
+	@Remarks("ｱｲﾃﾑｺｰﾄﾞ")
+	?Itemcode Code;
+	@Remarks("ﾀｲﾌﾟ")
+	?Categorycode Code;
+	@Remarks("製品ｺｰﾄﾞ")
+	?Prodcode Code;
+	@Remarks("製品名（jp）")
+	?Prdnjp null;
+	@Remarks("製品名（cn）")
+	?Prdncn null;
+	@Remarks("製品名（en）")
+	?Prdnen null;
+	@Remarks("ﾌﾞﾗﾝﾄﾞ")
+	?Brandcode Code;
+	@Remarks("製品ライン")
+	?Prdln null;
+	@Remarks("原産地（jp）")
+	?Prdocjp null;
+	@Remarks("原産地（cn）")
+	?Prdoccn null;
+	@Remarks("原産地（en）")
+	?Prdocen null;
+	@Remarks("製造ﾒｰｶｰ（jp）")
+	?Prdmjp null;
+	@Remarks("製造ﾒｰｶｰ（cn）")
+	?Prdmcn null;
+	@Remarks("製造ﾒｰｶｰ（en）")
+	?Prdmen null;
+	@Remarks("計量単位")
+	?Umcode Code;
+	@Remarks("単価")
+	?Unitprice Unit;
+	@Remarks("ﾗｲﾌｻｲｸﾙ")
+	?Lifecycle null;
+	@Remarks("有効期間制御Flag")
+	?IsExpirationcontrol YesNo;
+	@Remarks("単位名")
+	?Umcode1 null;
+	@Remarks("換算係数１")
+	?Factor null;
+	@Remarks("基本単位")
+	?Umcode2 null;
+	@Remarks("換算係数2")
+	?Factor2 null;
+	@Remarks("少数桁数")
+	?Scale null;
+	@Remarks("備考")
+	?Memo;
+	@Remarks("属性類")
+	?Prodlistconfigname Name;
+	@Remarks("製品属性")
+	?Attricode Code;
+	@Remarks("基本単位（ITEM）")
+	?Umcode3 null;
+	@Remarks("販売単位（ITEM）")
+	?Saleumcode Code;
+	@Remarks("販売単位（ITEM）")
+	?Purumcode Code;
+	@Remarks("在庫単位（ITEM）")
+	?Invumcode Code;
+	@Remarks("単価係数（ITEM）")
+	?PriceCoefficient Price;
+	@Remarks("通貨")
+	?Currencyforsaleprice null;
+	@Remarks("売単価")
+	?Saleprice Price;
+	@Remarks("通貨")
+	?Currencyforsaleendprice null;
+	@Remarks("売末端単価")
+	?Saleendprice Price;
+	@Remarks("バーコード")
+	?Itembarcode Code;
+	@Remarks("品目タイプ")
+	?Materialtypename Name;
+	@Remarks("在庫属性")
+	?Invattricode null;
+	@Remarks("ロット番号制御ｆｌｇ")
+	?IsLotcontrol YesNo;
+	@Remarks("シリアル番号制御ｆｌｇ")
+	?IsSerialnumcontrol YesNo;
+	@Remarks("供給/需要")
+	?RoleTypename Name;
+	@Remarks("ABC分類")
+	?Abccode Code;
+	@Remarks("ディフォルト倉庫")
+	?Warehousename Name;
+	@Remarks("ディフォルト在庫位置")
+	?Defaultlocationcode Code;
+	@Remarks("販売開始日")
+	?Beginsalesdate Date;
+	@Remarks("販売中止日")
+	?Endsalesdate Date;
+	@Remarks("原価計算方法")
+	?Costmethod Cost;
+	@Remarks("元帳グループ")
+	?Glgroupcode Code;
+	@Remarks("標準アイテム")
+	?Stditemcode Code;
+	@Remarks("ﾋﾟﾝｲﾝｺｰﾄﾞ")
+	?Itemspellcode Code;
+	@Remarks("アイテムグループ")
+	?Itemgroupcode Code;
+	@Remarks("倉庫管理組")
+	?Wmgroup null;
+	@Remarks("販売SNP")
+	?SalesNp null;
+	@Remarks("販売MOQ")
+	?Salemoq null;
+	@Remarks("商品補足１")
+	?Prodlevel null;
+	@Remarks("商品補足２")
+	?Prodpack null;
+	@Remarks("在直区分")
+	?DeliveryMannername Name;
+	@Remarks("安全在庫数/安全在庫日数Flag")
+	?Safestockflag null;
+	@Remarks("安全在庫数")
+	?Safestockrate1 null;
+	@Remarks("安全在庫日数")
+	?Safestockrate2 null;
+	@Remarks("EAR要否value")
+	?Earflag null;
+	@Remarks("税率組分け")
+	?TaxGroupcode Code;
+	@Remarks("大分類（研究室設計室）")
+	?Labor null;
+	@Remarks("中分類（外部品目GRP)")
+	?Extwg null;
+	@Remarks("小分類（品目グループ）")
+	?Matkl null;
+	@Remarks("全社製品群（品目GRP梱包材）")
+	?Magrv null;
+	@Remarks("別表項番")
+	?OtherCode Code;
+	@Remarks("製品登録番号")
+	?Itemtourokuno null;
+	@Remarks("属性1")
+	?Attr1 null;
+	@Remarks("属性2")
+	?Attr2 null;
+	@Remarks("属性3")
+	?Attr3 null;
+	@Remarks("属性4")
+	?Attr4 null;
+	@Remarks("属性5")
+	?Attr5 null;
+	@Remarks("属性6")
+	?Attr6 null;
+	@Remarks("属性7")
+	?Attr7 null;
+	@Remarks("属性8")
+	?Attr8 null;
+	@Remarks("属性9")
+	?Attr9 null;
+	@Remarks("属性10")
+	?Attr10 null;
+	@Remarks("Status")
+	?Status;
+	@Remarks("生成元")
+	?Source null;
+	@Remarks("作成者")
+	?Createuserid ID;
+	@Remarks("作成日時")
+	?Createdate Date;
+	@Remarks("更新者")
+	?Updateuserid ID;
+	@Remarks("更新日時")
+	?Updatedate Date;
+	@Remarks("ﾀｲﾌﾟID")
+	?Categoryid Category;
+	@Remarks("ディフォルト倉庫ID")
+	?Defaultwarehouseid ID;
+	@Remarks("品目タイプcode")
+	?Materialtypecode Code;
+	@Remarks("在直区分value")
+	?DeliveryManner null;
+	@Remarks("製品説明")
+	?Prdsd null;
+	@Remarks("製品略称")
+	?Prdpd null;
+	@Remarks("供給/需要code")
+	?RoleTypecode null;
+	@Remarks("在庫属性name")
+	?Invattriname Name;
+	@Remarks("計量単位name")
+	?Umname Name;
+	@Remarks("単位名称name")
+	?Umname1 null;
+	@Remarks("基本単位名称")
+	?Umname2 null;
+	@Remarks("ITEMGROUPID")
+	?Itemgroupid Itemgroup;
+	@Remarks("製品政策")
+	?Policycode Code;
+	?Prodlineid ProductLine;
+	?IsCopy YesNo;
+};
+

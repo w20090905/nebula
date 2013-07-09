@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+type SmpVarSmrChannelDevice {
+	?Channelname Name;
+	?FormAtstring null;
+	?FormAtdest null;
+	?Channeldevice null;
+	?Devicename Name;
+	?Devicetype Attr;
+	?Parameters null;
+	?Limitsize null;
+	?Readrate null;
+	?Openfiles null;
+	?Dbname Name;
+	?Oemusername Name;
+};
+

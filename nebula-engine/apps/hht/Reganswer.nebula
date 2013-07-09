@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Reganswer {
+	!Answerid ID;
+	Questionid Question;
+	?Answerdesc null;
+	Orgid Organization;
+	?DateLastupdated Date;
+};
+

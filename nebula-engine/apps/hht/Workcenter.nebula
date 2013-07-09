@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("6")
+tx Workcenter {
+	!Workcenterid ID;
+	Workcentercode Code;
+	Workcentername Name;
+	Orgid Organization;
+	Deptid Department;
+	?Workcenterdesc null;
+	?Workcalendarcode Code;
+	?Headcounts null;
+	?Machines null;
+	Capacitytype null;
+	?Utilizationrate Rate;
+	DateLastupdated Date;
+	?Grade null;
+};
+

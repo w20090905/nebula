@@ -1,0 +1,25 @@
+@Remarks("")
+@Refby("3")
+tx Zhhtpricecondition {
+	!PriceConditionid ID;
+	PriceConditioncode Code;
+	Orgid Organization;
+	Itemid Item;
+	Tradeflg null;
+	Currencycode Code;
+	?Conditionflg null;
+	?StandardPrice Price;
+	?Specialconditionid Zhhtspecialcondition;
+	?Buyerflg null;
+	?Sellerflg null;
+	?Receiverflg null;
+	?Shipmenttermflg null;
+	?QtyFlg Quantity;
+	?StandardDate null;
+	?Createdate Date;
+	?Updatedate Date;
+	?Userid Usr;
+	?Source null;
+	?Tradeconditioncode Code;/* 'NA' */
+};
+

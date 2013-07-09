@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("1")
+tx Checkrulemgt {
+	!Checkrulemgtid ID;
+	Businessobjectid Businessobject;
+	Checkruleid ID;
+	Actionid ID;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("1")
+tx Locationrelation {
+	!ID;
+	?Joinedtype null;
+	?Firstlocationid ID;
+	?Firstlocationcode Code;
+	?Secondlocationid ID;
+	?Secondlocationcode Code;
+	?Warehouseid Physicalwarehouse;
+};
+

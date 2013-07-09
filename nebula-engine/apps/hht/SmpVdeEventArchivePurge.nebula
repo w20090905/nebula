@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type SmpVdeEventArchivePurge {
+	?TriggerPurgeInterval null;/* 25 */
+	?KeepDays Count;/* 1095 */
+	?KeepRows null;
+	?ArchiveRowCount Count;
+	?TimeMeasure Count;
+};
+

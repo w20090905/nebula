@@ -1,0 +1,91 @@
+@Remarks("")
+@Refby("2")
+tx Returndetail {
+	!Returndetailid ID;
+	Returnid Returnslip;
+	Itemid Item;
+	?Orderid Ord;
+	?Orderdetailid Orderdetail;
+	?QtyOriginal Quantity;
+	?QtyReturn Quantity;
+	?QtyFulfilled Quantity;
+	?Complaintreasoncode null;
+	?Price;
+	@Remarks("税抜合計")
+	?Amount;
+	?TaxRate Rate;
+	?Pretaxprice Price;
+	?TaxAmount Amount;
+	?Pretaxamount Amount;
+	Invstatus null;
+	?Remark null;
+	?LineStatus Line;
+	?Listprice Price;
+	?Costprice Cost;
+	?Warehouseid Physicalwarehouse;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Attr5 null;
+	?Attr6 null;
+	?Attr31 null;
+	?Attr32 null;
+	?Attr33 null;
+	?Attr34 null;
+	?Attr35 null;
+	?Attr36 null;
+	?Umcode Code;
+	?Baseqty Quantity;
+	?Billingid Billing;
+	?Deptid Department;
+	?Localprice Price;
+	?Rate;
+	@Remarks("基準通貨税抜金額")
+	?Localamount Amount;
+	?Currencycode Code;
+	Zhhteaiflag String;/* 0  */
+	@Remarks("要求納期1")
+	?DeliveryDate Date;
+	@Remarks("明細ｶﾃｺﾞﾘ")
+	?Concategory null;
+	@Remarks("ｻｲｽﾞ/寸法")
+	?Dimension null;
+	@Remarks("顧客注番")
+	?Customerpono null;
+	@Remarks("E/L区分")
+	?Eltype Attr;
+	@Remarks("EAR要否")
+	?Earflag null;
+	@Remarks("別表項番")
+	?OtherCode Code;
+	@Remarks("単価係数")
+	?PriceCoefficient Price;
+	@Remarks("SAPLOTNO")
+	?Saplotno null;
+	@Remarks("SAPEVALUATION")
+	?Sapevaluation null;
+	@Remarks("SO detailid")
+	?Refsoreturndetailid ID;
+	@Remarks("税込合計")
+	?TaxEdamount Amount;
+	@Remarks("基準通貨税込金額")
+	?Localtaxedamount Amount;
+	?Attr100 null;
+	?Attr101 null;
+	?Attr102 null;
+	?Attr103 null;
+	?Attr104 null;
+	?Attr105 null;
+	?Attr106 null;
+	?Attr107 null;
+	?Attr108 null;
+	?Attr109 null;
+	@Remarks("FX送信FLG")
+	?Fxsendflg null;
+	@Remarks("操作区分")
+	?Fxoperatekbn null;
+};
+

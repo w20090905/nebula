@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+type VdkSynonym {
+	?VdkId ID;
+	?VdkName Name;
+	?VdkParentId ID;
+	?VdkDatabaseId VdkDatabase;
+	?VdkOwnerName Name;
+	?VdkTableOwnerName Name;
+	?VdkTableName Name;
+	?VdkDbLink null;
+	?VdkReferenceId ID;
+	?VdkReferenceType null;
+};
+

@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("1")
+tx Report {
+	!Reportid ID;
+	?Booksetid Bookset;
+	?Orgid Organization;
+	Reportdefineid Reportdefine;
+	?Accyearid Accountingyear;
+	?Accperiodid Accountingperiod;
+	?Weekno SeqNo;
+	?Docdate Date;
+	?Createdate Date;
+	?Maker null;
+	?DateLastupdated Date;
+	?Updatemaker null;
+	?Status;
+	?Responsecenterid Responsecenter;
+	?Responsecentertype null;
+};
+

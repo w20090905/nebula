@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Workorderreceipttrace {
+	!Workorderreceipttraceid ID;
+	Workorderreceiptdetailid Workorderreceiptdetail;
+	Workorderid Workorder;
+	Checkinslipid Checkinslip;
+	?Checkinslipcode Code;
+	?Qty Quantity;
+	?Docdate Date;
+	?Price;
+	?Amount;
+	?Umcode Code;
+};
+

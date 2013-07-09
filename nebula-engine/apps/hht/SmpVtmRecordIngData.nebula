@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx SmpVtmRecordIngData {
+	!ChartRefId SmpVtmChartDefn;
+	!StartTime Count;
+	?FilePath Path;
+	?Status;
+	?EndTime Count;
+	?Interval null;
+	?RecordIngName Name;
+};
+

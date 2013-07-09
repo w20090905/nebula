@@ -1,0 +1,33 @@
+@Remarks("")
+@Refby("0")
+tx Arapjournal {
+	!Arapjournalid ID;
+	Glaccountid Glaccount;
+	Arapid Arap;
+	?Dcflag null;
+	?Relatedtranstype null;
+	?Relatedtransid ID;
+	?Relatedtranno null;
+	?Relatedtrandetailid ID;
+	?Relatedtrandate Date;
+	?Debitamount Amount;
+	?Creditamount Amount;
+	?PaymentTermid PaymentTerm;
+	?Discount Count;
+	?Realamtsettled null;
+	?Varamt Amount;
+	?Createdate Date;
+	?Maker null;
+	?Comments Note;
+	?Zctcurrencycode Code;
+	?Zctdebitamount Amount;
+	?Zctcreditamount Amount;
+	?Zcttranprofitloss null;
+	?Zctrealamtsettled null;
+	?Booksetid Bookset;
+	?Accperiodid Accountingperiod;
+	?Docdate Date;
+	?Gldate Date;
+	?Deptid Department;
+};
+

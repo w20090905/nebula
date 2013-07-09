@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("0")
+type SmpVdpOmsRegionMap {
+	Oms null;
+	?RegionName Name;
+};
+

@@ -4,90 +4,80 @@ tx CInvoiceLine {
 	@Remarks("Invoice Detail Line")
 	!CInvoiceLineId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("Invoice Identifier")
-	CInvoiceId CInvoice;
+	CInvoice;
 	@Remarks("Sales Order Line")
-	?COrderlineId COrderline;
+	?COrderline;
 	@Remarks("Line on Shipment or Receipt document")
-	?MInoutlineId MInoutline;
+	?MInoutline;
 	@Remarks("Unique line for this document")
 	Line;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Product, Service, Item")
-	?MProductId MProduct;
+	?MProduct;
 	@Remarks("Invoiced Quantity")
 	QtyInvoiced Quantity;/* 0  */
 	@Remarks("List Price")
-	PriceList Price;/* 0  */
+	PriceList Number;/* 0  */
 	@Remarks("Actual Price")
-	PriceActual Price;/* 0  */
+	PriceActual Number;/* 0  */
 	@Remarks("Lowest price for a product")
-	PriceLimit Price;/* 0  */
+	PriceLimit Count;/* 0  */
 	@Remarks("Line Extended Amount (Quantity * Actual Price) without Freight and Charges")
-	LineNetamt Line;/* 0  */
+	LineNetamt Amount;/* 0  */
 	@Remarks("Additional document charges")
-	?CChargeId CCharge;
+	?CCharge;
 	@Remarks("Unit of Measure")
-	?CUomId CUom;
+	?CUom;
 	@Remarks("Tax identifier")
-	?CTaxId CTax;
+	?CTax;
 	@Remarks("Resource Assignment")
-	?SResourceAssignmentId SResourceAssignment;
+	?SResourceAssignment;
 	@Remarks("Asset used internally or by customers")
-	?AAssetId AAsset;
+	?AAsset;
 	@Remarks("Tax Amount for a document")
 	?TaxAmt Amount;/* 0 */
 	@Remarks("Product Attribute Set Instance")
-	?MAttributesetinstanceId MAttributesetinstance;/* 0 */
+	?MAttributesetinstance;/* 0 */
 	@Remarks("if true, the line is just description and no transaction")
-	IsDescription Description;/* 'N'  */
+	IsDescription YesNo;/* 'N'  */
 	@Remarks("Indicates if this document / line is printed")
 	IsPrintEd YesNo;/* 'Y' */
 	@Remarks("Total line amount incl. Tax")
-	?LineTotalAmt Line;/* 0 */
+	?LineTotalAmt Amount;/* 0 */
 	@Remarks("Referenced Invoice Line")
-	?RefInvoiceLineId CInvoiceLine;
+	?RefInvoiceLine CInvoiceLine;
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("The Quantity Entered is based on the selected UoM")
 	QtyEntered Quantity;
 	@Remarks("Price Entered - the price based on the selected/base UoM")
-	PriceEntered Price;
+	PriceEntered Number;
 	@Remarks("Financial Project")
-	?CProjectId CProject;
+	?CProject;
 	@Remarks("Phase of a Project")
-	?CProjectPhaseId CProjectPhase;
+	?CProjectPhase;
 	@Remarks("Actual Project Task in a Phase")
-	?CProjectTaskId CProjectTask;
+	?CProjectTask;
 	@Remarks("Revenue Recognition Start Date")
 	?Rrstartdate Date;
 	@Remarks("Revenue Recognition Amount")
 	?Rramt Amount;
 	@Remarks("Marketing Campaign")
-	?CCampaignId CCampaign;
+	?CCampaign;
 	@Remarks("Business Activity")
-	?CActivityId CActivity;
+	?CActivity;
 	@Remarks("User defined list element #1")
-	?User1Id CElementvalue;
+	?User1 CElementvalue;
 	@Remarks("User defined list element #2")
-	?User2Id CElementvalue;
+	?User2 CElementvalue;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrxId AdOrg;
+	?AdOrgtrx AdOrg;
 	@Remarks("Return Material Authorization Line")
-	?MRmalineId MRmaline;/* NULL */
+	?MRmaline;/* NULL */
 };
 

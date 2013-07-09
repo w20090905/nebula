@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+type MrpFctSumPara {
+	Fctsumcode MrpFctSum;
+	Forecastcode MrpFct;
+	?Saleflag null;
+};
+

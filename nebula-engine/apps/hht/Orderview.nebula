@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("0")
+type Orderview {
+	Orderdetailid Orderdetail;
+	?Ordercode Code;
+};
+

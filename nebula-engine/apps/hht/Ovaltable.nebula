@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("1")
+tx Ovaltable {
+	!Tableid ID;
+	Tablename Name;
+	Tabletype Attr;
+	LanguageCode Lang;
+	?Tabledesc null;
+	?Module null;
+	App null;
+	?ArchiveObjtype null;
+};
+

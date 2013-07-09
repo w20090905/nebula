@@ -1,0 +1,31 @@
+@Remarks("List of all occurrences per event in the repository")
+@Refby("0")
+type SmpViewEventHistory {
+	@Remarks("Internal ID of this event")
+	EventId ID;
+	@Remarks("Name of this event")
+	?EventName Name;
+	@Remarks("Internal occurrence sequence of this event")
+	?OccurrenceId ID;
+	@Remarks("Name of the node where this event is registered for")
+	?NodeName Name;
+	@Remarks("Name of the service this event is registered for")
+	?TargetName Name;
+	@Remarks("Type of service this event is registered for")
+	?TargetType Attr;
+	@Remarks("Translated name for the target type")
+	?TargetNlsType Attr;
+	@Remarks("Administrator assigned to follow up this occurrence")
+	?Owner null;
+	@Remarks("Date and time of the last notification of this event")
+	?TimesTamp null;
+	@Remarks("Message logged for this state change of the occurrence")
+	?Message;
+	@Remarks("Current state: 0 (DOWN), 1 (UP)")
+	?AgentStatus null;
+	@Remarks("Current state: -1 (Admin), 15 (Clear), 18 (Error), 20 (Warning), 25 (Alert), 303 (Down)")
+	?Severity null;
+	@Remarks("Boolean value: Is the event severity still outstanding?")
+	?Active null;
+};
+

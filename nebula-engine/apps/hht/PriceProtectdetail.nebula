@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("1")
+tx PriceProtectdetail {
+	!PriceProtectdetailid ID;
+	PriceProtectid PriceProtect;
+	Itemid Item;
+	Umcode Code;
+	?SourcePrice Price;
+	?Price;
+	?Status;
+	?Diffamount Amount;
+};
+

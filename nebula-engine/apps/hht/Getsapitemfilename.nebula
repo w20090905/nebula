@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type Getsapitemfilename {
+	?Filename;
+	?Itemcode Code;
+	?Itemid Item;
+	?Datatype Attr;
+	?DateLastupdated Date;
+};
+

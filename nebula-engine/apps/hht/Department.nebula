@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("50")
+tx Department {
+	!Deptid ID;
+	Orgid Organization;
+	Deptcode Code;
+	Deptname Name;
+	?Deptdesc null;
+	Grade null;
+	?Parentdeptid ID;
+	?IsBottom YesNo;
+	Status;
+	?DateLastupdated Date;
+	?Responsecenterid Responsecenter;
+	?Glgroupcode Code;
+	?Lft null;
+	?Rgt null;
+	?Zhhtcode Code;
+};
+

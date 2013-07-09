@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type SmpVdnViewGroupContent {
+	?Parentgrp null;
+	?Membername Name;
+	?Membertype Attr;
+	?X null;
+	?Y null;
+};
+

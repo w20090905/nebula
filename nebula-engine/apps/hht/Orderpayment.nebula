@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx Orderpayment {
+	!Orderpaymentid ID;
+	Orderid Ord;
+	?Sequence;
+	?PaymentDate Date;
+	?Orderstatus null;
+	?Intervalcode null;
+	?Period null;
+	?Percentage Percent;
+	?Amount;
+	?Comments Note;
+	?DateLastupdated Date;
+};
+

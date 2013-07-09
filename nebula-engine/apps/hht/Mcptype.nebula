@@ -1,0 +1,28 @@
+@Remarks("")
+@Refby("6")
+tx Mcptype {
+	!Mcptypeid ID;
+	Orgid Organization;
+	Mcptypecode Code;
+	?Mcptypedesc null;
+	?IsCustomerrelated YesNo;
+	?Analyzecodeid1 Analyzecode;
+	?Analyzecodeid2 Analyzecode;
+	?Analyzecodeid3 Analyzecode;
+	?Analyzecodeid4 Analyzecode;
+	Createdate Date;
+	DateLastupdated Date;
+	Maker null;
+	?Status;
+	?Orgcheckflag null;
+	?Activitycheckflag null;
+	?Plancheckflag null;
+	?FeeCheckflag null;
+	?Mcpreason null;
+	?StoreLevelcontrol null;
+	?AmtControlscope Amount;
+	?StoreUniquecontrol null;
+	?Decomposetype null;
+	?Noagreement null;
+};
+

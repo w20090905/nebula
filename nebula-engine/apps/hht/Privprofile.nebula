@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("1")
+tx Privprofile {
+	!Privprofid ID;
+	Orgid Organization;
+	Privprofcode Code;
+	Privprofname Name;
+	?Description;
+	?DateLastupdated Date;
+};
+

@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+type VdkService {
+	?VdkId ID;
+	?VdkFlags null;
+	?VdkAttr01 null;
+	?VdkParentId ID;
+	?VdkCreate null;
+	?VdkAttr02 null;
+	?VdkAttr03 null;
+	?VdkAttr04 null;
+	?VdkAttr05 null;
+	?VdkAttr06 null;
+};
+

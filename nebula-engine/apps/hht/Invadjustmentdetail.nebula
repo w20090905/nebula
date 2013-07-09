@@ -1,0 +1,26 @@
+@Remarks("")
+@Refby("0")
+tx Invadjustmentdetail {
+	!Invadjustmentdetailid ID;
+	Invadjustmentid Invadjustment;
+	Itemid Item;
+	Invstatus null;
+	?Locationno null;
+	?Lotno null;
+	?Batchno null;
+	?Serialno null;
+	?Qty Quantity;
+	?Costprice Cost;
+	?Amount;
+	?Remark null;
+	?Price;
+	?Costamount Cost;
+	?Manufacturedate Date;
+	?Expiredate Date;
+	?Invsummaryid Invsummary;
+	?Umcode Code;
+	?Baseqty Quantity;
+	?Saplotno null;
+	?Sapevaluation null;
+};
+

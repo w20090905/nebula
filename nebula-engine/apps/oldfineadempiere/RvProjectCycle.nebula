@@ -1,0 +1,41 @@
+@Remarks("")
+@Refby("0")
+type RvProjectCycle {
+	AdClientId ID;
+	AdOrgId ID;
+	CCycleId ID;
+	Cyclename Name;
+	CCurrencyId ID;
+	CCyclestepId ID;
+	Cyclestepname Name;
+	SeqNo;
+	Relativeweight Weight;
+	CPhaseId ID;
+	ProjectPhasename Name;
+	CProjectTypeId ID;
+	ProjectTypename Name;
+	ProjectValue Description;
+	ProjectName Name;
+	?Description;
+	?Note;
+	?CBpartnerId ID;
+	?CBpartnerLocationId ID;
+	?AdUserId ID;
+	?Poreference Name;
+	?SalesRepId ID;
+	?MWarehouseId ID;
+	?ProjectCategory YesNo;
+	?DateContract Date;
+	?DateFinish Date;
+	IsCommitment YesNo;
+	IsCommitceiling YesNo;
+	?CommittedQty Quantity;
+	?CommittedAmt Amount;
+	?PlannedQty Quantity;
+	?PlannedAmt Amount;
+	?PlannedMarginamt Amount;
+	?InvoiceDamt Amount;
+	?InvoiceDqty Quantity;
+	?ProjectBalanceAmt Amount;
+};
+

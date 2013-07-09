@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx Transfervoucherdetail {
+	!Transfervoucherdetailid ID;
+	Transfervoucherid Transfervoucher;
+	?Description;
+	?Dcflag null;
+	Glaccountid Glaccount;
+	?Debitamount Amount;
+	?Creditamount Amount;
+	?Assistantitemid Assistantitem;
+	?Costobjectid ID;
+	?Assitemjournalid Assitemjournal;
+	?Responsecenterid Responsecenter;
+	?Glaccountjournalid Glaccountjournal;
+};
+

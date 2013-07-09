@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Fadeprmethod {
+	!Fadeprmethodid ID;
+	Deprmethodcode Code;
+	LanguageCode Lang;
+	Deprmethodname Name;
+	?Deprmethoddesc null;
+	?FormUla null;
+	DateLastupdated Date;
+};
+

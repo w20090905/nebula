@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+tx Glaccountstructure {
+	!Glaccountstructureid ID;
+	?Booksetid Bookset;
+	?Length;
+	?Gradecount Count;
+	?Controlgrade null;
+	?Status;
+	?Orgid Organization;
+	?Grade1 null;
+	?Grade2 null;
+	?Grade3 null;
+	?Grade4 null;
+	?Grade5 null;
+	?Grade6 null;
+};
+

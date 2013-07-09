@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+type SmpVddOperationsTable {
+	RequestId ID;
+	RequestSubtype Attr;
+	RequestType Attr;
+	Target null;
+	Node null;
+	UserName Name;
+	?Owner null;
+	?Callback null;
+	?TimesTamp Count;
+	?Outgoing null;
+	!SequenceNum SmpVdeTryRemoveEventQueue;
+};
+

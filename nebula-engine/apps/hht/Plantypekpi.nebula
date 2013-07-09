@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Plantypekpi {
+	!Plantypekpiid ID;
+	SalesPlantypeid SalesPlantype;
+	Kpiid Kpi;
+	?Description;
+	DateLastupdated Date;
+	?IsNecessary YesNo;
+	?Kpiseq null;
+};
+

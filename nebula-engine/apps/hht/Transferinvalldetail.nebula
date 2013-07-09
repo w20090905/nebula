@@ -1,0 +1,27 @@
+@Remarks("")
+@Refby("0")
+type Transferinvalldetail {
+	!Transferinvalldetail null;
+	Transferdetailid Transferdetail;
+	?Transferid Transfer;
+	?Warehouseid Physicalwarehouse;
+	?Invsummaryid Invsummary;
+	Itemid Item;
+	Invstatus null;
+	?Locationcode Code;
+	?Lotno null;
+	?Batchno null;
+	?Alldate Date;
+	?QtyAll Quantity;
+	QtyPicking Quantity;
+	?QtyPicked Quantity;
+	?Manufacturedate Date;
+	?Expiredate Date;
+	?Inoutflag null;
+	?Inbaseqtyall null;
+	?Outbaseqtyall null;
+	?Customerid ID;
+	?Saplotno null;
+	?Sapevaluation null;
+};
+

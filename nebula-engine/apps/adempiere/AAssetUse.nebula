@@ -2,16 +2,11 @@
 @Refby("0")
 tx AAssetUse {
 	!AAssetUseId ID;
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;/* 'Y'  */
-	Created null;/* SYSDATE  */
-	Createdby null;
-	Updated null;/* SYSDATE  */
-	Updatedby null;
-	AAssetId AAsset;
+	AdClientId ID;
+	AdOrgId ID;
+	AAsset;
 	Usedate Date;
-	Useunits null;
+	Useunits Number;
 	?Description;
 };
 

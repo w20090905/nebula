@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+type OrgrelationAfterImp {
+	Relationid Orgrelation;
+	Ownerorgid ID;
+	?DateLastupdated Date;
+};
+

@@ -1,0 +1,83 @@
+@Remarks("")
+@Refby("3")
+tx Zhhtiteminquirydetail {
+	!Zhhtiteminquirydetailid ID;
+	?Refinquiryid ID;
+	?NewItemflg null;
+	?Stockflg null;
+	?Itemserial null;
+	?Itemid Item;
+	?Itemnameadd null;
+	?Sellerid ID;
+	?Receiveraddressid Receiveraddress;
+	?PriceCoefficient Price;
+	?PriceUmcode Code;
+	?Qty Quantity;
+	?Umcode Code;
+	?Purchaseprice Price;
+	?Purchasecurrencycode Code;
+	?DeliveryPrice Price;
+	?DeliveryCurrencycode Code;
+	?DeliveryDate Date;
+	?Amount;
+	?Profit null;
+	?Replydeliverydate Date;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Orgid Organization;
+	?Userid Usr;
+	?Itemname Name;
+	?Refinquirydetailid ID;
+	?Discount Count;
+	?Itemcode Code;
+	?Comments Note;
+	?Purchaseamount Amount;
+	?Profitrate Rate;
+	@Remarks("2010/09/14 　追加")
+	?Creatmd null;
+	?Creatime null;
+	?Eigyocd null;
+	?Kigyocd null;
+	?Sofuno null;
+	?Testkbn null;
+	?Syokaicode Code;
+	?Hinmei1 null;
+	?Hinmei2 null;
+	?Kibotanka null;
+	?Mitumoriyoushikicd null;
+	?Mitumorikbn null;
+	?Nounyusaki null;
+	?Mitumorikaisuu null;
+	?Hatno null;
+	?Bukacd null;
+	?Sofukbn null;
+	?Koubaisyacdcode Code;
+	?Sonaekbn null;
+	?Hinsyacd null;
+	?Senyoran null;
+	?Biko null;
+	?Nyukayotei null;
+	?Dimension null;
+	?Employeeid Employee;
+	@Remarks("顧客注番(明細)")
+	?Inquirycodemeisai null;
+	@Remarks("作番（製作番号）　20100921追加")
+	?Sakuban null;
+	@Remarks("作番20100921追加")
+	?Sakubanafter null;
+	@Remarks("仕番20100921追加")
+	?Sibanafter null;
+	@Remarks("納先20100921追加")
+	?Osamesaki null;
+	?Hinban null;
+	?Kojocd null;
+	?Maisu null;
+	?Zuban String;
+	?Zureki String;
+	?Kensyuuym null;
+	?Kensyuunum null;
+	?Kensyuukingaku null;
+	@Remarks("成約コード")
+	?Contractcode Code;
+};
+

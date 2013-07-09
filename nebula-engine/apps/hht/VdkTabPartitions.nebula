@@ -1,0 +1,31 @@
+@Remarks("")
+@Refby("0")
+type VdkTabPartitions {
+	?VdkId ID;
+	?VdkName Name;
+	?VdkTableId VdkTable;
+	?VdkParentId ID;
+	?VdkDatabaseId VdkDatabase;
+	?VdkLschemaId ID;
+	?VdkSegmentId VdkSegment;
+	?VdkTableOwnerName Name;
+	?VdkTableName Name;
+	?VdkComposite null;
+	?VdkSubpartitionCount Count;
+	?VdkHighValue null;
+	?VdkHighValueLength Length;
+	?VdkPartitionPosition Length;
+	?VdkTablespaceName Name;
+	?VdkPctFree null;
+	?VdkPctUsed null;
+	?VdkIniTrans null;
+	?VdkMaxTrans null;
+	?VdkLogging null;
+	?VdkBufferPool null;
+	?VdkValidAnalyzeStats null;
+	?VdkNumRows null;
+	?VdkAvgRowLen null;
+	?VdkVolatility null;
+	?VdkRecomTablespaceName Name;
+};
+

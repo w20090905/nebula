@@ -1,0 +1,13 @@
+@Remarks("List of all the administrators defined in Enterprise Manager")
+@Refby("0")
+type SmpViewAdministrators {
+	@Remarks("Name of the administrator")
+	AdministratorName Name;
+	@Remarks("Boolean flag: Is this administrator a superuser?")
+	?Superuser null;
+	@Remarks("Boolean flag: Can this administrator access the job sub-system?")
+	?JobSystem null;
+	@Remarks("Boolean flag: Can this administrator access the event sub-system?")
+	?EventSystem null;
+};
+

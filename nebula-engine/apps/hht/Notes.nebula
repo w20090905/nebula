@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("1")
+tx Notes {
+	!Notesid ID;
+	Subjectcode Code;
+	?Fromuserid ID;
+	?Touserid ID;
+	?Transactionid ID;
+	?Transactioncode Code;
+	?Begindate Date;
+	?Enddate Date;
+	?IsPublic YesNo;
+	Status;
+	?Parentnotesid ID;
+	?Grade null;
+	?DateLastupdated Date;
+	?IsBottom YesNo;
+	?IsApproval YesNo;
+	?Sequence;
+};
+

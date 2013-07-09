@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("1")
+tx Defaulttask {
+	!Defaulttaskid ID;
+	Defaulttaskname Name;
+	Sequence;
+	?Defaulttaskdesc null;
+	?Defaultintervaltype null;
+	?Defaultperiodnum null;
+	?IsNecessary YesNo;
+	Subjectcode Code;
+	Responsibleentityid ID;
+	Responsibilitytype Attr;
+	?IsDecisionmaker YesNo;
+	Orgid Organization;
+	?DateLastupdated Date;
+};
+

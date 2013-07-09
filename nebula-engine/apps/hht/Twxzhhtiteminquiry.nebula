@@ -1,0 +1,91 @@
+@Remarks("")
+@Refby("0")
+tx Twxzhhtiteminquiry {
+	!Twxzhhtiteminquiryid ID;
+	?Receiptcode Code;
+	?Zhhtinquirymanagecode Code;
+	?Disposekbn null;
+	?Orgcode Code;
+	?Employeecode Code;
+	?Inquirycode Code;
+	?Ctxtm01 null;
+	?Buyerid null;
+	?Inquirydate Date;
+	?Limitdate Date;
+	?Currencycode Code;
+	?DeliveryDate Date;
+	?PaymentTerm String;
+	?Shipmentterm String;
+	?Shipmentmethod null;
+	?Shipfrom null;
+	?Shipto null;
+	?Comments Note;
+	?Inoutkbn null;
+	?Sendkbn null;
+	?Editkbn null;
+	?Filekbn null;
+	?Orgeditkbn null;
+	?Messageid Message;
+	?Createsource YesNo;
+	?Userid Usr;
+	?Createdate Date;
+	?Updateuserid ID;
+	?Orgid Organization;
+	?DateLastupdated Date;
+	?Updatesoruce null;
+	?Ietmflag null;
+	?Hinban null;
+	?Kojocd null;
+	?Zuban String;
+	?Zureki String;
+	?Itemserial null;
+	?Itemcode Code;
+	?Itemnameadd null;
+	?Sellerid null;
+	?Receiveraddressid null;
+	?Qty Quantity;
+	?Umcode Code;
+	?DeliveryDateitem null;
+	?Creatmd null;
+	?Creatime null;
+	?Eigyocd null;
+	?Kigyocd null;
+	?Sofuno null;
+	?Testkbn null;
+	?Syokaicode Code;
+	?Kibotanka null;
+	?Nounyusaki null;
+	?Bukacd null;
+	?Maisu null;
+	?Koubaisyacdcode Code;
+	?Hinsyacd null;
+	?Senyoran null;
+	?Employeeid Employee;
+	@Remarks("顧客注番(明細)")
+	?Inquirycodemeisai null;
+	@Remarks("品名１(09/14 追加)")
+	?Hinmei1 null;
+	?Hinmei2 null;
+	?Mitumoriyoushikicd null;
+	?Mitumorikbn null;
+	?Mitumorikaisuu null;
+	?Hatno null;
+	?Sofukbn null;
+	?Sonaekbn null;
+	?Groupcd null;
+	@Remarks("見積まとめ番号 (2010/09/20 追加)")
+	?Zhhtinquirymatomeno SeqNo;
+	@Remarks("取引先コード (2010/09/20 追加)")
+	?Torihikicd null;
+	@Remarks("仕番(2010/09/20 追加)")
+	?Sibanafter null;
+	@Remarks("作番(2010/09/20 追加)")
+	?Sakubanafter null;
+	@Remarks("EDIファイル名(20100921 追加)")
+	?Edifilename FileName;
+	@Remarks("twxエラーコード")
+	?Twxerrorcode Code;
+	@Remarks("twxエラーメッセージ")
+	?Twxerrmessage null;
+};
+

@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx Offervendor {
+	!Offervendorid ID;
+	Vendorid ID;
+	Offerid Offer;
+	?Comments Note;
+};
+

@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+type Reportbackrunprocess {
+	?Reportbackrunprocessid ID;
+	?Begindate Date;
+	?Enddate Date;
+	?Makername Name;
+	?Maker null;
+	?Reporttype null;
+	?Reportname Name;
+	?Status;
+	?Attr1 null;
+	?Attr2 null;
+};
+

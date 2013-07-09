@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+type SmpVdnViewTargetList {
+	Id SmpVdnGroupList;
+	Name SmpVxaSystemPrefs;
+	?Description;
+	Type Attr;
+	Node null;
+	?Tnsaddr Address;
+	?Userdata null;
+	?Agent null;
+	?TotalBlackout null;
+};
+

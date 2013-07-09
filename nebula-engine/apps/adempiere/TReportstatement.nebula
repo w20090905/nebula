@@ -2,7 +2,7 @@
 @Refby("0")
 tx TReportstatement {
 	@Remarks("Instance of the process")
-	!AdPinstanceId AdPinstance;
+	!AdPinstance;
 	@Remarks("Accounting Fact")
 	!FactAcctId ID;
 	@Remarks("Level no")
@@ -18,7 +18,7 @@ tx TReportstatement {
 	@Remarks("Accounted Credit Amount")
 	?AmtAcctcr Amount;/* 0 */
 	@Remarks("Balance")
-	?Balance null;/* 0 */
+	?Balance Number;/* 0 */
 	@Remarks("Quantity")
 	?Qty Quantity;/* 0 */
 };

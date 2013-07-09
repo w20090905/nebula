@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Mdconfigcolumn {
+	!Mdconfigcolumnid ID;
+	Mdtablename Name;
+	Mdcolumnname Name;
+	LanguageCode Lang;
+	Mdcolumndesc null;
+	DateLastupdated Date;
+};
+

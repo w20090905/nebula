@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+type SmpViewVdeActiveEventInfo {
+	?EventId ID;
+	?TargetName Name;
+	?TargetType Attr;
+	?NodeName Name;
+	?AgentStatus null;
+	?TimesTamp null;
+	?Timezone Count;
+	?ErrorCode null;
+	?ErrorMessage null;
+	?AgentVersion null;
+};
+

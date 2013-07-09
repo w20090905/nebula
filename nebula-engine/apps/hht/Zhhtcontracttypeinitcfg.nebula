@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtcontracttypeinitcfg {
+	!Configid ID;
+	?Contracttypeid Contracttype;
+	?ProductCountry null;
+	?Purchasecountry null;
+	?SoTaxCode Code;
+	?SoExchagetype Attr;
+	?SoCurrencycode Code;
+	?SoCurrencyrate Rate;
+	?PoTaxCode Code;
+	?PoExchagetype Attr;
+	?PoCurrencycode Code;
+	?PoCurrencyrate Rate;
+	?Orgid Organization;
+	?DateLastupdated Date;
+};
+

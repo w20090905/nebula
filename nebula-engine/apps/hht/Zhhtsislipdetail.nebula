@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtsislipdetail {
+	!Sislipdetailid ID;
+	?Sislipid Zhhtsislip;
+	?DeliveryId Delivery;
+	?DateLastupdated Date;
+	?Cancelflag null;/* 0 */
+};
+

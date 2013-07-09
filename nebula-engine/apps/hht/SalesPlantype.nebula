@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("10")
+tx SalesPlantype {
+	!SalesPlantypeid ID;
+	Orgid Organization;
+	Plantypecode Code;
+	Plantypename Name;
+	Mainperiod null;
+	?Subperiod null;
+	?IsRolling YesNo;
+	?Rollingperiodqty Quantity;
+	?Planmethod null;
+	Usevalue null;
+	Createdate Date;
+	Status;
+	?Description;
+	DateLastupdated Date;
+};
+

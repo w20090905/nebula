@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("1")
+tx Globalcurrencycode {
+	!Currencyid ID;
+	Currencycode Code;
+	LanguageCode Lang;
+	Currencyname Name;
+};
+

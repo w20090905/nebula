@@ -1,0 +1,28 @@
+@Remarks("")
+@Refby("0")
+tx MrpInout {
+	!Sid MrpRecommend;
+	?TargetCode Code;
+	?Itemid Item;
+	?Inoutdate Date;
+	?Inventqty Quantity;
+	?Poleaveqty Quantity;
+	?Fctqty Quantity;
+	?Soleaveqty Quantity;
+	?Mrpqty Quantity;
+	?Fctinventqty Quantity;
+	?IoInventqty Quantity;
+	?IoSointransitBefore null;
+	?IoSointransitAfter null;
+	?IoPointransitBefore null;
+	?IoPointransitAfter null;
+	?IoSobalance null;
+	?IoSobehind null;
+	?IoPobalance null;
+	?IoPobacklog null;
+	?IoPobehind null;
+	?IoFcstinventory null;
+	?IoPoblPobefore null;
+	?IoPoblPoafter null;
+};
+

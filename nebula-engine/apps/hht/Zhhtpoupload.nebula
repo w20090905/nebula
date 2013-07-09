@@ -1,0 +1,101 @@
+@Remarks("")
+@Refby("2")
+tx Zhhtpoupload {
+	!Pouploadid ID;
+	?Contracttypeid Contracttype;
+	?Contracttypecode Code;
+	?Contracttypename Name;
+	?Customerpono null;
+	?Sellerid ID;
+	?Sellercode Code;
+	?Sellername Name;
+	?Receiveraddresscode Code;
+	?Receiveraddressname Name;
+	?Warehouseid Physicalwarehouse;
+	?Inventorycode Code;
+	?Docdate Date;
+	?TaxCode Code;
+	?TaxName Name;
+	?TaxRate Rate;
+	?Exchagedatecode Code;
+	?Currencycode Code;
+	?Currencyname Name;
+	?Zctrate Rate;
+	?PaymentMethodvalue null;
+	?Lcno null;
+	?ProductCountry null;
+	?ProductCountryName Name;
+	?Purchasecountry null;
+	?Purchasecountryname Name;
+	?Employeeid Employee;
+	?Employeecode Code;
+	?Status;
+	?Source null;
+	?Orgid Organization;
+	?Userid Usr;
+	?Createdate Date;
+	?DateLastupdated Date;
+	@Remarks("輸管審査No.")
+	?Transno null;
+	@Remarks("E/L区分")
+	?Eltype Attr;
+	@Remarks("運送方法")
+	?Shipmentmethod null;
+	@Remarks("運送方法名称")
+	?Shipmentmethodname Name;
+	@Remarks("成約ｺｰﾄﾞ")
+	?Contractcode Code;
+	@Remarks("ｵｰﾀﾞｰｺｰﾄﾞ")
+	?Ordercode Code;
+	@Remarks("処理区分")
+	?Dealstatus null;
+	?Retandrecpdate Date;
+	?Exchagetype Attr;
+	?Shipmentterm null;
+	?Shipmenttermtext Text;
+	?Ratetype Attr;
+	?Orderproperty null;
+	?PaymentTermname Name;
+	?Sunstandardtype Attr;
+	?Shipmenttermname Name;
+	?Ratetypename Name;
+	?Edicomments Note;
+	@Remarks("支払条件")
+	?PaymentTermid PaymentTerm;
+	@Remarks("支付方法")
+	?PaymentMethodname Name;
+	?Generateflag null;
+	@Remarks("運送条件text")
+	?Incoterms null;
+	@Remarks("発注コメント（漢字）")
+	?Ordcomment null;
+	@Remarks("発注コメント（カナ）")
+	?Ordcommentkn null;
+	@Remarks("納入要件（漢字）")
+	?Receiverdemand null;
+	@Remarks("納入要件（カナ）")
+	?Receiverdemandkj null;
+	@Remarks("見積受付番号")
+	?Inquirycode Code;
+	@Remarks("成約自動生成区分")
+	?Createkbn YesNo;
+	@Remarks("営業所(取引先)コード")
+	?Torihikicd null;
+	@Remarks("企業コード")
+	?Kigyocd null;
+	@Remarks("工場コード")
+	?Kojocd null;
+	@Remarks("送付No.")
+	?Souhuno null;
+	@Remarks("グループコード")
+	?Groupcd null;
+	@Remarks("茨城レコード区分")
+	?Twxdataflg null;
+	@Remarks("注文書出力区分")
+	?Chumonkbn null;
+	@Remarks("受注TWXID")
+	?Twxseqid ID;
+	@Remarks("処理状態フラグ")
+	?Processflag null;
+};
+

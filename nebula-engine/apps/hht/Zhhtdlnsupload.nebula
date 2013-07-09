@@ -1,0 +1,34 @@
+@Remarks("")
+@Refby("1")
+tx Zhhtdlnsupload {
+	!Dlnsuploadid ID;
+	?Orgid Organization;
+	?Contractid Contract;
+	?Contractcode Code;
+	?Orderid Ord;
+	?Ordercode Code;
+	?DeliveryDate Date;
+	?Receiveraddresscode Code;
+	?Docdate Date;
+	?Invrelatedno null;
+	?Hhtsicode Code;
+	?Source null;
+	?Status;
+	?Userid Usr;
+	?Createdate Date;
+	?DateLastupdated Date;
+	@Remarks("輸入Invoice No.")
+	?Inputinvoiceno null;
+	@Remarks("仕入先出荷コード")
+	?Wpdlcode Code;
+	@Remarks("着荷予定日")
+	?Receiptdestimedate Date;
+	@Remarks("販売起算日")
+	?Sellstartdate Date;
+	?Dlstatus null;
+	?Generateflag null;
+	?Checkflag null;
+	?Shipmentmethod null;
+	?LineNo Line;
+};
+

@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("0")
+tx Glaccountmodel {
+	!Glaccountid Glaccount;
+	Industrytypeid Industrytype;
+	Orgid Organization;
+	?Accountcode Code;
+	?ForeignCurrencyflag null;
+	?Currencycode Code;
+	?Glaccountclasscode Code;
+	?Quickcode Code;
+	?Glaccountattribute null;
+	?Grade null;
+	?Parentaccountid ID;
+	?IsBottom YesNo;
+	?Dcflag null;
+	?Dailyaccountflag null;
+	?Settlementflag null;
+	?Adjustflag null;
+	?InterestFlag null;
+	?TaxRelatedflag null;
+	?IsPublic YesNo;
+};
+

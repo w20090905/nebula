@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("1")
+tx Fcgroupcycledate {
+	!Fcgroupcycledateid ID;
+	Cycledate Date;
+	Sequence;
+	Fcgroupid Fcgroup;
+	?Demandplanid Demandplan;
+};
+

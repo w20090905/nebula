@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Pjpdaydetail {
+	!Pjpdaydetailid ID;
+	Pjpdetailid Pjpday;
+	?Begintime null;
+	?Endtime Date;
+	Visitedorgid ID;
+	?Remark null;
+	Pjpid Pjp;
+};
+

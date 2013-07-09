@@ -4,29 +4,19 @@ tx CPayselectioncheck {
 	@Remarks("Payment Selection Check")
 	!CPayselectioncheckId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Payment Selection")
-	CPayselectionId CPayselection;
+	CPayselection;
 	@Remarks("Identifies a Business Partner")
-	CBpartnerId CBpartner;
+	CBpartner;
 	@Remarks("Amount being paid")
 	Payamt Amount;/* 0  */
 	@Remarks("Quantity")
 	Qty Quantity;/* 0  */
 	@Remarks("Payment identifier")
-	?CPaymentId CPayment;
+	?CPayment;
 	@Remarks("Document sequence number of the document")
 	?DocumentNo Code;
 	@Remarks("Indicates if this document / line is printed")
@@ -40,7 +30,7 @@ tx CPayselectioncheck {
 	@Remarks("This is a sales transaction (receipt)")
 	IsReceipt YesNo;/* 'N'  */
 	@Remarks("Bank Account of the Business Partner")
-	?CBpBankaccountId CBpBankaccount;/* NULL   */
+	?CBpBankaccount;/* NULL   */
 	@Remarks("Generated Draft")
 	IsGenerateddraft YesNo;/* 'N'  */
 };

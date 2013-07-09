@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+tx Agreementpriceterm {
+	!Agreementpricetermid ID;
+	Periodgroup null;
+	Baseamount Amount;
+	Baseqty Quantity;
+	Deductrate Rate;
+	?Minamount Amount;
+	?Discount Count;
+	?DiscountRate Rate;
+	?Needunite null;
+	Startdate Date;
+	?Enddate Date;
+	Status;
+	Itemserviceagreementid Itemserviceagreement;
+};
+

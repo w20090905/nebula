@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type EpcCliEventSet {
+	?RepUserId EpcCliRepUsers;
+	?FdfFileId ID;
+	?ProductName Name;
+	?EventSetName Name;
+	?EnvironmentId ID;
+	?FdfFileDesc null;
+};
+

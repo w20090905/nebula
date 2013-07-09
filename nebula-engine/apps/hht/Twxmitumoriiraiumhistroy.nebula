@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("20")
+tx Twxmitumoriiraiumhistroy {
+	!Seqid ID;
+	?PrintFlg null;
+	?Orgid Organization;
+	?Userid Usr;
+	?Createdate Date;
+	?DateLastupdated Date;
+};
+

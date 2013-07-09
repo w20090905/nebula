@@ -1,0 +1,11 @@
+@Remarks("Internal list of all objects known in the framework")
+@Refby("0")
+type SmpViewRegistry {
+	@Remarks("-- Dummy field, used only for output purposes")
+	?Filler null;
+	@Remarks("Name of the internal object")
+	?Key null;
+	@Remarks("Value of the internal object")
+	?Value String;
+};
+

@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx Expexecutionsetting {
+	!Expexecutionsettingid ID;
+	?Expensereason null;
+	?Genpurinv null;
+	?AutoGenpurinvforpre null;
+	?AutoGensalesinv null;
+	?Alloctopg null;
+	?Alloctoassistantitem null;
+	?Alloctosd null;
+	?AutoGenpurinvforsup null;
+	?Expensetype null;
+	?Booksetid Bookset;
+	?Orgid Organization;
+};
+

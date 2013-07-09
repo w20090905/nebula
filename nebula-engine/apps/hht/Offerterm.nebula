@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Offerterm {
+	!Offertermid ID;
+	Offerid Offer;
+	?Originaltermid ID;
+	?Termname Name;
+	?Termcontent null;
+};
+

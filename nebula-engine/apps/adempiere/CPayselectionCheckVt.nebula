@@ -1,25 +1,25 @@
 @Remarks("")
 @Refby("0")
 type CPayselectionCheckVt {
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	?AdLanguage Attr;
-	CPayselectionId CPayselection;
-	CPayselectioncheckId CPayselectioncheck;
+	AdClientId ID;
+	AdOrgId ID;
+	?AdLanguage String;
+	CPayselectionId ID;
+	CPayselectioncheckId ID;
 	?OrgLocationId ID;
 	?TaxId Code;
-	?CDoctypeId CDoctype;
-	?CBpartnerId CBpartner;
-	?Bpvalue String;
+	?CDoctypeId ID;
+	?CBpartnerId ID;
+	?Bpvalue Note;
 	?Bptaxid Code;
 	?NAICS;
-	?DUNS;
+	?DUNS String;
 	?Bpgreeting String;
 	?Name;
 	?Name2 Name;
-	?CLocationId CLocation;
+	?CLocationId ID;
 	?ReferenceNo Code;
-	?Poreference String;
+	?Poreference Note;
 	?Paydate Date;
 	Payamt Amount;
 	AmtInwords Amount;

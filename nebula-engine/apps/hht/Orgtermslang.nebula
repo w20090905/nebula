@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Orgtermslang {
+	!Orgtermslangid ID;
+	Orgtermid Orgterms;
+	LanguageCode Lang;
+	Otn null;
+	?Otd null;
+};
+

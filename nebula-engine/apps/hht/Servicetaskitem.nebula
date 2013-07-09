@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Servicetaskitem {
+	!Servicetaskitemid ID;
+	Type Attr;
+	Itemid Item;
+	Umcode Code;
+	StandardTaskid StandardTask;
+	Qty Quantity;
+	?Baseqty Quantity;
+};
+

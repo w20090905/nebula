@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx Materialtype {
+	!Materialtypeid ID;
+	?Materialtypecode Code;
+	?LanguageCode Lang;
+	?Materialtypename Name;
+	?Materialtypedesc null;
+	Invattricode null;
+	?RoleTypecode null;
+	?IsPracticality YesNo;
+	?IsTool YesNo;
+};
+

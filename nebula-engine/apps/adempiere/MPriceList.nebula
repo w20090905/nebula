@@ -4,25 +4,15 @@ type MPriceList {
 	@Remarks("Unique identifier of a Price List")
 	!MPriceListId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Pricelist to be used, if product not found on this pricelist")
-	?BasepricelistId MPriceList;
+	?Basepricelist MPriceList;
 	@Remarks("Tax is included in the price")
 	IsTaxIncluded YesNo;/* 'N'  */
 	@Remarks("This is a Sales Price List")
@@ -30,10 +20,10 @@ type MPriceList {
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 	@Remarks("The Currency for this record")
-	CCurrencyId CCurrency;
+	CCurrency;
 	@Remarks("Do not allow prices below the limit price")
 	EnforcePriceLimit YesNo;/* 'N'  */
 	@Remarks("Precision (number of decimals) for the Price")
-	PricePrecision Price;/* 2  */
+	PricePrecision Precision;/* 2  */
 };
 

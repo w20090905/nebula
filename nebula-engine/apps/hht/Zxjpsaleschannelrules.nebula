@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("2")
+tx Zxjpsaleschannelrules {
+	!Zxjpsaleschannelrulesid ID;
+	?SalesChannelid SalesChannel;
+	?SalesChannelname Name;
+	?Sqldesc1 null;
+	?Sqldesc2 null;
+	?Sqlname Name;
+	?IsCustomedsql String;
+	?Orgid Organization;
+	?Createdate Date;
+	?Lastmodifydate Date;
+	?Scruletype null;
+};
+

@@ -2,29 +2,19 @@
 @Refby("0")
 tx MCost {
 	@Remarks("Client/Tenant for this installation.")
-	!AdClientId AdClient;
+	!AdClient;
 	@Remarks("Organizational entity within client")
-	!AdOrgId AdOrg;
+	!AdOrg;
 	@Remarks("Product, Service, Item")
-	!MProductId MProduct;
+	!MProduct;
 	@Remarks("Type of Cost (e.g. Current, Plan, Future)")
-	!MCosttypeId MCosttype;
+	!MCosttype;
 	@Remarks("Rules for accounting")
-	!CAcctschemaId CAcctschema;
+	!CAcctschema;
 	@Remarks("Product Cost Element")
-	!MCostelementId MCostelement;
+	!MCostelement;
 	@Remarks("Product Attribute Set Instance")
-	!MAttributesetinstanceId MAttributesetinstance;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	!MAttributesetinstance;
 	@Remarks("The currently used cost price")
 	Currentcostprice Price;
 	@Remarks("Current Quantity")

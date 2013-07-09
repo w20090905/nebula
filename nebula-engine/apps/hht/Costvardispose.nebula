@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("2")
+tx Costvardispose {
+	!Costvardisposeid ID;
+	?Costvardisposecode Code;
+	?Bookset null;
+	?Orgid Organization;
+	Disposetype null;
+	?TotalAmount Amount;
+	?Comments Note;
+	?Maker null;
+	Status;
+	Createdate Date;
+	DateLastupdated Date;
+	?PrintNum null;
+	?Docdate Date;
+	?Gldate Date;
+	?Accountingyearid ID;
+	?Accperiodid Accountingperiod;
+	?Year null;
+	?Period null;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Complaintreason {
+	!Complaintreasonid ID;
+	Complaintreasoncode null;
+	?LanguageCode Lang;
+	?Description;
+	Invstatus null;
+};
+

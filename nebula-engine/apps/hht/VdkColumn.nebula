@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+type VdkColumn {
+	?VdkId ID;
+	?VdkParentId ID;
+	?VdkPosition Length;
+	?VdkClusterPosition Length;
+	?VdkTableName Name;
+	?VdkTableOwnerName Name;
+	?VdkLschemaId ID;
+	?VdkDatabaseId VdkDatabase;
+	?VdkNumDistinct null;
+	?VdkDataType null;
+	?VdkDataLength Length;
+	?VdkDataPrecision Precision;
+	?VdkDataScale null;
+	?VdkVolatility null;
+	?VdkUpdMax null;
+	?VdkUpdAvg null;
+	?VdkUpdSum null;
+};
+

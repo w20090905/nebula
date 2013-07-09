@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+tx Approveinfo {
+	!Approveinfoid ID;
+	Transactionid ID;
+	Subjectcode Code;
+	Defaulttaskname Name;
+	Sequence;
+	?Defaulttaskdesc null;
+	?Defaultintervaltype null;
+	?Defaultperiodnum null;
+	?IsNecessary YesNo;
+	Responsibleentityid ID;
+	Responsibilitytype Attr;
+	?Responsibilityname Name;
+	?IsDecisionmaker YesNo;
+	?Approvestatus null;
+	?DateLastupdated Date;
+};
+

@@ -4,43 +4,33 @@ type AdMenu {
 	@Remarks("Identifies a Menu")
 	!AdMenuId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
+	AdOrg;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
-	@Remarks("User who updated this records")
-	Updatedby null;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("This is a summary entity")
-	IsSummary Comment;/* 'N'  */
+	IsSummary YesNo;/* 'N'  */
 	@Remarks("This is a Sales Transaction")
 	IsSotrx YesNo;/* 'Y'  */
 	@Remarks("Field is read only")
 	IsReadonly YesNo;/* 'N'  */
 	@Remarks("Indicates the Action to be performed")
-	?Action null;
+	?Action YesNo;
 	@Remarks("Data entry or display window")
-	?AdWindowId AdWindow;
+	?AdWindow;
 	@Remarks("Workflow or combination of tasks")
-	?AdWorkflowId AdWorkflow;
+	?AdWorkflow;
 	@Remarks("Operation System Task")
-	?AdTaskId AdTask;
+	?AdTask;
 	@Remarks("Process or Report")
-	?AdProcessId AdProcess;
+	?AdProcess;
 	@Remarks("Special Form")
-	?AdFormId AdForm;
+	?AdForm;
 	@Remarks("Collection of windows, reports")
-	?AdWorkbenchId AdWorkbench;
+	?AdWorkbench;
 	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
 };

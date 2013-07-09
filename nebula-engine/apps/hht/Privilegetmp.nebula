@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+tx Privilegetmp {
+	!Privilegeid Privilege;
+	Privilegecode Code;
+	Privilegetype Attr;
+	Sortno SeqNo;
+	?Url;
+	Status;
+	?Parentprivid ID;
+	?Grade null;
+	?IsBottom YesNo;
+	?DateLastupdated Date;
+	?App null;
+	?Module null;
+	?Lft null;
+	?Rgt null;
+};
+

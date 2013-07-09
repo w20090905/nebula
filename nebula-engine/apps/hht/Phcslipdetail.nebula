@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+tx Phcslipdetail {
+	!Phcslipdetailid ID;
+	Phcslipid Phcslip;
+	?Itemid Item;
+	?Umcode Code;
+	?Warehouseid Physicalwarehouse;
+	?Lotno null;
+	?Expiredate Date;
+	?Locationno null;
+	?Employeename Name;
+	?Ledgerqty Quantity;
+	?Actualqty Quantity;
+	?Diffqty Quantity;
+	?Needadjusted null;
+	?Remark null;
+	Dataflag null;
+};
+

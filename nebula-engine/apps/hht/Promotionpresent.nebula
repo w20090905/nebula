@@ -1,0 +1,26 @@
+@Remarks("")
+@Refby("3")
+tx Promotionpresent {
+	!Ppid ID;
+	Orgid Organization;
+	Ppcode Code;
+	?Ppdesc null;
+	Begindate Date;
+	Expiredate Date;
+	Priority;
+	Purchasetype null;
+	?Maxpurchaseqty Quantity;
+	Presenttype null;
+	?Maxpresentqty Quantity;
+	Createdate Date;
+	Maker null;
+	Status;
+	?Promotionid Promotion;
+	?Promotioncode Code;
+	?Promotionbuget null;
+	?Expensetype null;
+	?Expensetypecode Code;
+	DateLastupdated Date;
+	?Promotionformid Promotionform;
+};
+

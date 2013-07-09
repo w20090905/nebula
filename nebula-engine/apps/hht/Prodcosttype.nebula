@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("1")
+tx Prodcosttype {
+	!Prodcosttypeid ID;
+	Prodcosttypecode Code;
+	?Activitycode Code;
+};
+

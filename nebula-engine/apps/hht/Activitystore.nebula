@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("2")
+tx Activitystore {
+	!Activitystoreid ID;
+	Activityid Activity;
+	?Planedstarttime null;
+	?Planedendtime null;
+	?Actualstarttime null;
+	?Actualendtime null;
+	?Customerid ID;
+	?Customercode Code;
+	Contactid Contact;
+	?Subactivitycode Code;
+	?Budgetamount Amount;
+	?Actualamount Amount;
+	?SalesTarget null;
+	?LineStatus Line;
+	?Contactname Name;
+	?Description;
+	?LineNum Line;
+	?Actualsalesamount Amount;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type Reportdefinelang {
+	!Reportdefinelangid ID;
+	Reportdefineid Reportdefine;
+	?Name SmpVxaSystemPrefs;
+	?Description;
+	LanguageCode Lang;
+};
+

@@ -1,0 +1,43 @@
+@Remarks("")
+@Refby("2")
+tx Selfuseslip {
+	!Selfuseslipid ID;
+	Orgid Organization;
+	?Departmentid ID;
+	?Selfusecode Code;
+	?Employeeid Employee;
+	?Comments Note;
+	?Maker null;
+	?Createdate Date;
+	?Selfusedate Date;
+	Status;
+	?DateLastupdated Date;
+	?Saleflag null;
+	?Arflag null;
+	?Inventoryflag null;
+	?PrintNum null;
+	?Accountingyearid ID;
+	?Year null;
+	?Accperiodid Accountingperiod;
+	?Period null;
+	?Docdate Date;
+	?Gldate Date;
+	?Warehouseid Physicalwarehouse;
+	?Partnerid ID;
+	?Reasontype null;
+	?Allocationstatus null;
+	?Receiptaddressid ID;
+	?Reciptaddressline null;
+	?Reciptcontactid ID;
+	?Carrier null;
+	?Shipmentterm null;
+	?Shiptmentmethod null;
+	?ExportTaskcode Code;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr11 null;
+	?Attr12 null;
+};
+

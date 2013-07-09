@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("0")
+type ProdumAfterImp {
+	Produmid Produm;
+	Prodid Product;
+	Umcode Code;
+	Factor null;
+	?IsDecimal YesNo;
+	?Memo;
+	?DateLastupdated Date;
+	?Baseflag null;
+	Factor2 null;
+	?Volume;
+	?Weight;
+	?Netweight Weight;
+	Scale null;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr5 null;
+	?Attr6 null;
+};
+

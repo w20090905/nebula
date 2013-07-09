@@ -1,0 +1,35 @@
+@Remarks("")
+@Refby("0")
+tx Originalpurchasedata {
+	!Originalpurchasedataid ID;
+	?Dtname Name;
+	?Purchasedate Date;
+	?Vendor null;
+	?Prodname Name;
+	?Spec null;
+	?Qty Quantity;
+	?Umname Name;
+	?IsProcessed YesNo;
+	?Dtid ID;
+	?Prodclear null;
+	?Prodid Product;
+	?Prodcode Code;
+	?Vendorclear null;
+	?Vendorcode Code;
+	?SalesChannelid SalesChannel;
+	?SalesChannelname Name;
+	?Comments Note;
+	?Taskcode Code;
+	?Attr1 null;
+	?Categoryid Category;
+	?Categorycode Code;
+	?Categoryname Name;
+	?Version;
+	?DateLastupdated Date;
+	?Partnerid ID;
+	Purchasedatafileid Purchasedatafile;
+	?Checkstatus null;
+	?Realprodname Name;
+	?Vendorid ID;
+};
+

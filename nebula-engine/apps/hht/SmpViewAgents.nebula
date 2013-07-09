@@ -1,0 +1,21 @@
+@Remarks("List of all the Intelligent Agents discovered in Enterprise Manager")
+@Refby("0")
+type SmpViewAgents {
+	@Remarks("Name of the node")
+	NodeName Name;
+	@Remarks("Name of the node, as known by the Intelligent Agent")
+	?AgentAlias null;
+	@Remarks("Timestamp the agent was last contacted on this node")
+	?LastChecked null;
+	@Remarks("Time difference with GMT: Offset in hours")
+	?AgentTimezone null;
+	@Remarks("Boolean flag: Is the agent up and running?")
+	?AgentStatus null;
+	@Remarks("Boolean flag: Is the information of the Agent and the OMS in sync?")
+	?AgentState null;
+	@Remarks("Name of the machine running the OMS currently checking this node")
+	?OmsMachine null;
+	@Remarks("Current event severity of this node")
+	?Severity null;
+};
+

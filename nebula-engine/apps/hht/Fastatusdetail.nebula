@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx Fastatusdetail {
+	!Fastatusdetailid ID;
+	Fixedassetsid Fixedassets;
+	?Planchangedate Date;
+	?Realchangedate Date;
+	?Comments Note;
+	?Inputdate Date;
+	?Maker null;
+	?Fastatus null;
+	?Stopreasoncode Code;
+	?Status;
+	DateLastupdated Date;
+};
+

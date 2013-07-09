@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("0")
+type SmpVdpPgsrvRegionMap {
+	PagingServer null;
+	?RegionName Name;
+};
+

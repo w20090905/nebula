@@ -1,21 +1,16 @@
 @Remarks("")
 @Refby("0")
 type RvBpartnerOpen {
-	?AdClientId AdClient;
-	?AdOrgId AdOrg;
-	?IsActive YesNo;
-	?Created null;
-	?Createdby null;
-	?Updated null;
-	?Updatedby null;
-	?CBpartnerId CBpartner;
-	?CCurrencyId CCurrency;
+	?AdClientId ID;
+	?AdOrgId ID;
+	?CBpartnerId ID;
+	?CCurrencyId ID;
 	?Amt Amount;
 	?Openamt Amount;
 	?DateDoc Date;
 	?DaysDue Count;
-	?CCampaignId CCampaign;
-	?CProjectId CProject;
-	?CActivityId CActivity;
+	?CCampaignId ID;
+	?CProjectId ID;
+	?CActivityId ID;
 };
 

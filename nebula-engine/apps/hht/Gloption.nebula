@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+tx Gloption {
+	!Gloptionid ID;
+	Booksetid Bookset;
+	Orgid Organization;
+	Optiontype Attr;
+	Optionname Name;
+	?Optionvalue String;
+	?Rw null;
+	IsRequired YesNo;
+	?Optionlevel null;
+	?Defaultvalue String;
+	?DateLastupdated Date;
+	?Optionvaluetype null;
+	?Descriptions Description;
+};
+

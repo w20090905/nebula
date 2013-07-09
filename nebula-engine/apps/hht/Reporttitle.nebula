@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("1")
+tx Reporttitle {
+	!Reporttitleid ID;
+	Reportdefineid Reportdefine;
+	?LineNum Line;
+	?Titletype null;
+	?Alignment null;
+	?Fontsize Size;
+	?Fontcolor null;
+	?Fontattr null;
+	?Width;
+};
+

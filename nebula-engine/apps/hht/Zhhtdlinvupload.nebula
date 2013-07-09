@@ -1,0 +1,48 @@
+@Remarks("")
+@Refby("1")
+tx Zhhtdlinvupload {
+	!Dlinvuploadid ID;
+	?Orgid Organization;
+	?Contractid Contract;
+	?Contractcode Code;
+	?Orderid Ord;
+	?Ordercode Code;
+	?DeliveryId Delivery;
+	?DeliveryCode Code;
+	?Warehouseid Physicalwarehouse;
+	?Warehousecode Code;
+	?DeliveryDate Date;
+	?Receiveraddresscode Code;
+	?Docdate Date;
+	?Invrelatedno null;
+	?Hhtsicode Code;
+	?Source null;
+	?Status;
+	?Userid Usr;
+	?Createdate Date;
+	?DateLastupdated Date;
+	@Remarks("運送方法　")
+	?Shipmentmethod null;
+	@Remarks("運送方法名")
+	?Shipmentmethodname Name;
+	@Remarks("着荷予定日")
+	?Receiptdestimedate Date;
+	@Remarks("販売起算日")
+	?Sellstartdate Date;
+	@Remarks("処理区分")
+	?Dealstatus null;
+	@Remarks("仕入先CODE")
+	?Sellercode Code;
+	@Remarks("通貨")
+	?Currencycode Code;
+	@Remarks("為替予約NO")
+	?Exchagedatecode Code;
+	@Remarks("為替レート")
+	?Zctrate Rate;
+	@Remarks("消費税コード")
+	?TaxCode Code;
+	?Generateflag null;
+	?Checkflag null;
+	?LineNo Line;
+};
+

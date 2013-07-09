@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Favoritemenu {
+	!Favoritemenuid ID;
+	EntityId ID;
+	Type null;
+	?Privilegeid Privilege;
+	?Packageid ID;
+	DateLastupdated Date;
+	?LabelName Name;
+	LanguageCode Lang;
+};
+

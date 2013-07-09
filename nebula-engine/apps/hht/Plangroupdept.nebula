@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx Plangroupdept {
+	!Plangroupdeptid ID;
+	SalesPlangroupid SalesPlangroup;
+	?Deptid Department;
+	DateLastupdated Date;
+};
+

@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Itemplanwarehouse {
+	!Itemplanwarehouseid ID;
+	Orgid Organization;
+	Itemid Item;
+	Warehouseid Physicalwarehouse;
+	?Maxstockqty Quantity;
+	?Minstockqty Quantity;
+	?Minorderqty Quantity;
+	?Safetyday null;
+};
+

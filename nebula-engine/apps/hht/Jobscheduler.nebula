@@ -1,0 +1,26 @@
+@Remarks("")
+@Refby("2")
+tx Jobscheduler {
+	!Jobschedulerid ID;
+	Jobhandlerid Jobhandler;
+	?Jobschedulercode Code;
+	?Jobschedulername Name;
+	?Jobschedulertype null;
+	?Description;
+	?Jobloglevel null;
+	?Status;
+	?Maker null;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Year String;
+	?Month null;
+	?Day null;
+	?Hour null;
+	?Minute null;
+	?Second null;
+	?Dayofmonth null;
+	?Dayofweek null;
+	?Periodtype null;
+	?Scheduledovalreportid Scheduledovalreport;
+};
+

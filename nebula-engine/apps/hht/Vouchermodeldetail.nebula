@@ -1,0 +1,28 @@
+@Remarks("")
+@Refby("2")
+tx Vouchermodeldetail {
+	!Vouchermodeldetailid ID;
+	Vouchermodelid Vouchermodel;
+	Glaccountid Glaccount;
+	?Description;
+	?Currencycode Code;
+	?Exchangerate Rate;
+	?Dcflag null;
+	?Debitamount Amount;
+	?Debitamountfore null;
+	?Creditamount Amount;
+	?Creditamountfore null;
+	?Settletype null;
+	?Settleno null;
+	?Settledate Date;
+	?Restrictionstatus null;
+	?Assitemstatus Attr;
+	?Settlementstatus null;
+	?Checkstatus Attr;
+	?Copstatus Attr;
+	?Coporgid ID;
+	?Copdeptid ID;
+	?Copemployeeid ID;
+	?LineNum Line;
+};
+

@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx Ktpperiodstatus {
+	!Ktpperiodstatusid ID;
+	Kpitargetplanid Kpitargetplan;
+	Period null;
+	?Status;
+	Createdate Date;
+	?Opendate Date;
+	?Examinedate Date;
+	?Closedate Date;
+	?Accperiodid Accountingperiod;
+};
+

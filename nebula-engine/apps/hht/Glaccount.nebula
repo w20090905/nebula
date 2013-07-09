@@ -1,0 +1,51 @@
+@Remarks("")
+@Refby("39")
+tx Glaccount {
+	!Glaccountid ID;
+	?EntityId ID;
+	?EntityType null;
+	?Orgid Organization;
+	?Accountcode Code;
+	?Quickcode Code;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Status;
+	?Grade null;
+	?Parentaccountid ID;
+	?IsBottom YesNo;
+	?Dcflag null;
+	?Referexchangeaccountid ID;
+	?Glaccountclasscode Code;
+	?Profitandlosstype null;
+	?Ledgerflag null;
+	?Ledgertype null;
+	?TaxRelatedflag null;
+	?TaxType null;
+	?Glassitemflag null;
+	?Copassignflag null;
+	?Createsubaccountflag YesNo;
+	?ForeignCurrencyflag null;
+	?Currencytype null;
+	?Currencycode Code;
+	?Forecurrencycode Code;
+	?DateControlflag null;
+	?Startdate Date;
+	?Enddateflag null;
+	?Enddate Date;
+	?Lockflag null;
+	?Dailyaccountflag null;
+	?Settlementflag null;
+	?Forciblesettlementflag null;
+	?InterestFlag null;
+	?Adjustflag null;
+	?Controlflag null;
+	?Fromtype null;
+	?Assistantitemid Assistantitem;
+	?Flagcontainer null;
+	?CashFlowitemflag null;
+	?Lcaccounttype null;
+	?Relatedglaccountid ID;
+	?Costglaccountid ID;
+	?Invglaccountid ID;
+};
+

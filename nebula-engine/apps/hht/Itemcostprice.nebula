@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("2")
+tx Itemcostprice {
+	!Itemcostpriceid ID;
+	Itemid Item;
+	Costareacode Code;
+	?Costmethod Cost;
+	?Costprice Cost;
+	?Stdcostprice Price;
+	DateLastupdated Date;
+	Orgid Organization;
+};
+

@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("0")
+type Spacetmp {
+	Spaceid ID;
+	Spacenm null;
+};
+

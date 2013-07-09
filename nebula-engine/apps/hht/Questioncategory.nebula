@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("1")
+tx Questioncategory {
+	!Questioncategoryid ID;
+	Orgid Organization;
+	Categorycode Code;
+	Categoryname Name;
+	?Categorydesc null;
+	Status;
+	DateLastupdated Date;
+};
+

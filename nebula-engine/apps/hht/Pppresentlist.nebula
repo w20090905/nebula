@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Pppresentlist {
+	!Pppresentlistid ID;
+	Ppid Promotionpresent;
+	Itemid Item;
+	Prodid Product;
+	?Presentqty Quantity;
+	?Comments Note;
+	DateLastupdated Date;
+};
+

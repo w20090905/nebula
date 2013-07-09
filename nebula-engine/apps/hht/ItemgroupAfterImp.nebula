@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type ItemgroupAfterImp {
+	Itemgroupid Itemgroup;
+	Itemgroupcode Code;
+	Itemgroupname Name;
+	?Description;
+	?IsSystem YesNo;
+};
+

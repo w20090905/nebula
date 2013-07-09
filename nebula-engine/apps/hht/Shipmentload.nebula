@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("1")
+tx Shipmentload {
+	!Shipmentloadid ID;
+	Shipmentid Shipment;
+	?Sortno SeqNo;
+	?Vehicletype null;
+	?Vehicleno null;
+	?Vehicleid Vehicle;
+	?GrossWeight Weight;
+	?Netweight Weight;
+	?Weightumcode Code;
+	?Fromport null;
+	?Toport null;
+};
+

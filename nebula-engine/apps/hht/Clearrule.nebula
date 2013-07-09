@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Clearrule {
+	!Clearruleid ID;
+	Clearrulecode Code;
+	Cleartype null;
+	LanguageCode Lang;
+	Clearruledesc null;
+	Headflag null;
+	DateLastupdated Date;
+};
+

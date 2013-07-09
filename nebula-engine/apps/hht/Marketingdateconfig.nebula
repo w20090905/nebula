@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Marketingdateconfig {
+	!Marketingdateconfigid ID;
+	?Elementtype null;
+	?Elementcode Code;
+	?Elementname Name;
+	?Daynum null;
+};
+

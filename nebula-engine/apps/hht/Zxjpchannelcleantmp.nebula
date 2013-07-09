@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type Zxjpchannelcleantmp {
+	?Customercode Code;
+	?Customer null;
+	?AutoSalesChannelname Name;
+	?AutoSalesChannelid ID;
+	?Manualsaleschannelid ID;
+};
+

@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx FormUla {
+	!FormUlaid ID;
+	Orgid Organization;
+	?FormUlacode Code;
+	?FormUlatype null;
+	?FormUla null;
+	?Comments Note;
+};
+

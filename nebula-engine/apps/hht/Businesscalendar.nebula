@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Businesscalendar {
+	@Remarks("ｼｰｹﾝｽID")
+	!Seqid Twxmitumoriiraiumhistroy;
+	@Remarks("日付")
+	?Hhtdate Date;
+	@Remarks("営業日FLG 0:休日　1:営業日")
+	?Businessflg null;
+};
+

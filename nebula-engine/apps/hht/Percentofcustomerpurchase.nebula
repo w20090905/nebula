@@ -1,0 +1,25 @@
+@Remarks("")
+@Refby("0")
+type Percentofcustomerpurchase {
+	?Areaid Businessarea;
+	?Dtareaname Name;
+	?Regioncode Code;
+	?Regionname Name;
+	?Citycode Code;
+	?Cityname Name;
+	?Dtorgid ID;
+	?Dtname Name;
+	?Brandcode Code;
+	?Brandname Name;
+	?SalesChannelid SalesChannel;
+	?SalesChannelname Name;
+	?Prodid Product;
+	?Prodname Name;
+	?Contactcode Code;
+	?Year null;
+	?Month null;
+	?Countqty Count;
+	?Monthallqty Quantity;
+	?LanguageCode Lang;
+};
+

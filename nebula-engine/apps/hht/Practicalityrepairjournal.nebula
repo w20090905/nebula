@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx Practicalityrepairjournal {
+	!Practicalityrepairjournalid ID;
+	Practicalityid Practicality;
+	Itemid Item;
+	?Lotno null;
+	Relatedtranid ID;
+	Relatedtrancode Code;
+	Partnerid ID;
+	?Installdate Date;
+	?Repairdate Date;
+	?Warrantyid Warranty;
+	DateLastupdated Date;
+	?Relatedtrandetailid ID;
+};
+

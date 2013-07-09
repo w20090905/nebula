@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx ProductBrand {
+	!ProductBrandid ID;
+	?Brandtype null;
+	?Orgid Organization;
+	?Brandcode Code;
+	?LanguageCode Lang;
+	?Brandname Name;
+	?Attr1 null;
+	?Attr31 null;
+};
+

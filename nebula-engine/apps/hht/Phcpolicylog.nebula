@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Phcpolicylog {
+	!Phcpolicylogid ID;
+	Phcpolicyid Phcpolicy;
+	Phcdate Date;
+	?Phcslipid Phcslip;
+	?Phcslipcode Code;
+};
+

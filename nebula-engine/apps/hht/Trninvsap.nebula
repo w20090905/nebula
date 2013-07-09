@@ -1,0 +1,29 @@
+@Remarks("")
+@Refby("0")
+type Trninvsap {
+	!Burk null;
+	!Zzdaihyoka String;
+	!Gtext Text;
+	!Lgort null;
+	?Lgobe null;
+	!Werks null;
+	?Name1 Name;
+	!Matnr null;
+	?Maktx null;
+	?Groes null;
+	!Charg null;
+	!Bwtar null;
+	?Meins null;
+	?Matkl null;
+	?Clabs null;
+	?Zztan null;
+	?Zzzan null;
+	?Zznyu null;
+	?Zzshu null;
+	?Zzwaers String;
+	!Zzsygymd null;
+	?Datsu null;
+	?TimesU null;
+	?Memo;
+};
+

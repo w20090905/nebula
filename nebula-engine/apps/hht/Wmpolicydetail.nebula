@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx Wmpolicydetail {
+	!Wmpolicdetailid ID;
+	Wmruleid Wmrule;
+	Rulesn null;
+	?Attrone null;
+	?Attrtwo null;
+	Goonflag null;
+	Wmpolicyid Wmpolicy;
+	?Attrthree null;
+	?Attrfour null;
+	?Attrfive null;
+	?Attrsix null;
+};
+

@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+type Ordqty {
+	?Ordercode Code;
+	?Orderqty Quantity;
+	?Receivedqty Quantity;
+};
+

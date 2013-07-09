@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Orginstrument {
+	!Orginstrumentid ID;
+	Orgid Organization;
+	?Manufactureid Organization;
+	?Instrumentid ID;
+	?Instrumentcode Code;
+	?Instrumentname Name;
+	?Instrumentbrand null;
+	?Instrumentqty Quantity;
+	?Whenpurchased null;
+	?Manufacturer null;
+};
+

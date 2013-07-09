@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx ErrorLog {
+	!ErrorLogid ID;
+	?Filename;
+	?Sheetname Name;
+	?ErrorInfo Info;
+	?Rowno null;
+	?Colno null;
+	?Cityname Name;
+	?Attachmentid Attachment;
+	?Businesstype null;
+	?DateLastupdated Date;
+	?Status;
+};
+

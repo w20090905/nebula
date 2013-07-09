@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx SmpVdvSmtpEmail {
+	!UserId SmpVdvPage;
+	?Address EMail;
+	?SubjectPrefix String;
+	?SubjectFormAt String;/* '%NT %N %ST' */
+	?BodyHeaderFormAt String;/* '%TITLE %N %TN %TT %NN %ST' */
+	?BodyDetailFormAt String;/* '%ETN %ETR %ETST %ETTS{MMM dd yyyy hh:mm:ss a}' */
+	?EmailLength Length;/* -1 */
+	?EmailFilter null;/* -1 */
+};
+

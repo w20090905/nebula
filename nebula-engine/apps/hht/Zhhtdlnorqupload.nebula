@@ -1,0 +1,34 @@
+@Remarks("")
+@Refby("1")
+tx Zhhtdlnorqupload {
+	!Dlnorquploadid ID;
+	?Orgid Organization;
+	?Contractid Contract;
+	?Contractcode Code;
+	?Orderid Ord;
+	?Ordercode Code;
+	?Warehouseid Physicalwarehouse;
+	?Warehousecode Code;
+	?DeliveryDate Date;
+	?Receiveraddresscode Code;
+	?Docdate Date;
+	?Invrelatedno null;
+	?Hhtsicode Code;
+	?Source null;
+	?Status;
+	?Userid Usr;
+	?Createdate Date;
+	?DateLastupdated Date;
+	@Remarks("運送方法　")
+	?Shipmentmethod null;
+	@Remarks("運送方法名")
+	?Shipmentmethodname Name;
+	@Remarks("着荷予定日")
+	?Receiptdestimedate Date;
+	@Remarks("販売起算日")
+	?Sellstartdate Date;
+	?Generateflag null;
+	?Checkflag null;
+	?LineNo Line;
+};
+

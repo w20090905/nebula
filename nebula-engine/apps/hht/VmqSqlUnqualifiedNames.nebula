@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+type VmqSqlUnqualifiedNames {
+	?DatabaseId VmqSqlItem;
+	?Sqlid VmqSqlItem;
+	?TableName Name;
+	?Type Attr;
+};
+

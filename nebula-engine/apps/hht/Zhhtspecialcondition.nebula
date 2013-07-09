@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("2")
+tx Zhhtspecialcondition {
+	!Specialconditionid ID;
+	?Orgid Organization;
+	?Specialconditioncode Code;
+	?Specialconditionname Name;
+	?Tradeflg null;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr5 null;
+	?Attr6 null;
+	?Attr7 null;
+	?Attr8 null;
+	?Attr9 null;
+	?Attr10 null;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Userid Usr;
+};
+

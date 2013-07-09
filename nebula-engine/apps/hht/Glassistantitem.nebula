@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Glassistantitem {
+	!Glassistantitemid ID;
+	Orgid Organization;
+	Glaccountid Glaccount;
+	Assistantitemid Assistantitem;
+	?SourceTablename Name;
+	?SourcePrimarykey null;
+};
+

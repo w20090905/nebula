@@ -1,0 +1,25 @@
+@Remarks("")
+@Refby("0")
+type InitorgitemTmp {
+	?Itemid Item;
+	?Itemcode Code;
+	?IsBom YesNo;
+	?RoleTypecode null;
+	?IsSerialnumcontrol YesNo;
+	?IsLotcontrol YesNo;
+	?Umcode Code;
+	?Categoryid Category;
+	?Prodid Product;
+	?Prodlineid ProductLine;
+	?Listprice Price;
+	?Itemspellcode Code;
+	?Itembarcode Code;
+	?Brandcode Code;
+	?Materialtypecode Code;
+	?Invattricode null;
+	?Itemgroupid Itemgroup;
+	?Glgroupcode Code;
+	?Wmgroup null;
+	?TaxGroupcode Code;
+};
+

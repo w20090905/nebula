@@ -2,10 +2,10 @@
 @Refby("0")
 tx Accountcheckdetail {
 	!Accountcheckdetailid ID;
-	Glaccountid ID;
-	Checkelementid ID;
+	Glaccountid Glaccount;
+	Checkelementid Checkelement;
 	?IsNeed YesNo;
-	*Actiontype null;
+	Actiontype null;
 	?Para1 null;
 	?Flagcontainer null;
 };

@@ -1,0 +1,28 @@
+@Remarks("")
+@Refby("4")
+tx Rebatepolicy {
+	!Rebatepolicyid ID;
+	Orgid Organization;
+	Ownerorgid ID;
+	Rebatepolicycode Code;
+	Rpdescription Description;
+	Currencycode Code;
+	Maker null;
+	Createdate Date;
+	?Begindate Date;
+	?Enddate Date;
+	?Periodtype null;
+	?Periodnum null;
+	?Fixperioddays Count;
+	Rpbasetype null;
+	?Pprpbaseno SeqNo;
+	IsRealtime YesNo;
+	?Pprpno SeqNo;
+	Calctypeid Calctype;
+	Rpsettletype null;
+	?Virtualitemid ID;
+	DateLastupdated Date;
+	Status;
+	?Rebatetype null;
+};
+

@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("2")
+type SmpVdeEvent {
+	!Id SmpVdnGroupList;
+	?Name;
+	?Owner null;
+	?Description;
+	?TargetType Attr;
+	?Schedule null;
+	?AppName Name;
+	?IsLibrary YesNo;
+	?FixitJobId ID;
+	?FixitJobName Name;
+	?FixitJobOwner null;
+	?IsUnsolicited YesNo;
+	?Incomplete null;
+	?SnmpTrapAttribute null;
+	?LastModified null;/* 535953444154450A */
+};
+

@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+type Zhhtkensyutimeset {
+	Zhhtkensyutimesetid ID;
+	?No null;
+	?Setdate Date;
+	?Status;
+	?Createdate Date;
+	?Createuserid ID;
+	?Updatedate Date;
+	?Updateuserid ID;
+};
+

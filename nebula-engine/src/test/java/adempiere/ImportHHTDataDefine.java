@@ -43,6 +43,7 @@ public class ImportHHTDataDefine extends DefaultImporter {
 	}
 
 	public ImportHHTDataDefine() {
+		super(true, false);
 		// ID
 		when(EqualsIgnoreCase).with("ID").is(Long).setTypeName("ID");
 		when(EndWithIgnoreCase).with("ID").is(Long).setTypeName("ID");
@@ -265,20 +266,20 @@ public class ImportHHTDataDefine extends DefaultImporter {
 		for (Type type : types) {
 			for (Field field : type.fields) {
 				if (field.isForeignKey) {
-					if (typeMapByRawName.containsKey(field.foreignKeyTable)) {
-						field.resultTypeName = typeMapByRawName.get(field.foreignKeyTable).name;
+					if (typesByRawName.containsKey(field.foreignKeyTable)) {
+						field.resultTypeName = typesByRawName.get(field.foreignKeyTable).name;
 					}
 				} else if (!field.isKey && "ID".equals(field.resultTypeName)) {
 					String typename = field.name;
 					if (typename.toUpperCase().endsWith("_ID")) {
 						typename = typename.substring(0, typename.length() - 3);
 					}
-					if (typeMapByRawName.containsKey(typename)) {
-						field.resultTypeName = typeMapByRawName.get(typename).name;
+					if (typesByRawName.containsKey(typename)) {
+						field.resultTypeName = typesByRawName.get(typename).name;
 						field.isForeignKey = true;
 						field.foreignKeyTable = typename;
-					} else if (typeMapByRawName.containsKey(typename + "s")) {
-						field.resultTypeName = typeMapByRawName.get(typename + "s").name;
+					} else if (typesByRawName.containsKey(typename + "s")) {
+						field.resultTypeName = typesByRawName.get(typename + "s").name;
 						field.isForeignKey = true;
 						field.foreignKeyTable = typename + "s";
 					} else {

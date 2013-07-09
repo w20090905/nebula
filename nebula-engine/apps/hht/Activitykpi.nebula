@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Activitykpi {
+	!Activitykpiid ID;
+	Activityid Activity;
+	Kpicode Code;
+	?Kpi1plannedvalue String;
+	?Kpiactualvalue String;
+	?Description;
+	?PlannedKpivalue String;
+	?Actualkpivalue String;
+};
+

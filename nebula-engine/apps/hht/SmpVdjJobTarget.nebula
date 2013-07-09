@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+tx SmpVdjJobTarget {
+	!JobId SmpVdjJob;
+	!TargetName Name;
+	!TargetType Attr;
+};
+

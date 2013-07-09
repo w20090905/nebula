@@ -1,0 +1,25 @@
+@Remarks("")
+@Refby("0")
+tx Notessubject {
+	Subjectcode Code;
+	Subjecttypeid Notessubjecttype;
+	Subjectname Name;
+	?AlertSubjectcode Code;
+	?Subjectdesc null;
+	?Transactiontype Attr;
+	?Transactionfield null;
+	?IsDependency YesNo;
+	?IsEmail EMail;
+	?IsPicture YesNo;
+	?Defaultexpiredays Count;
+	!Notessubjectid ID;
+	?LanguageCode Lang;
+	Status;
+	?Orgkeyname Name;
+	?Slipstatus null;
+	?Traceflag null;
+	?IsAlert YesNo;
+	?Groupnotes null;
+	?Mcpauthorityflag null;
+};
+

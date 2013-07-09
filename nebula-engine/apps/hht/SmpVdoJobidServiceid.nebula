@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type SmpVdoJobidServiceid {
+	!V1JobId ID;
+	Name SmpVxaSystemPrefs;
+	Owner null;
+	?ServiceId null;
+	?LastUpdate Date;
+};
+

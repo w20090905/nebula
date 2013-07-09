@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx Offercontact {
+	!Offercontactid ID;
+	Offerid Offer;
+	?Offeraddressid Offeraddress;
+	?Originalcontactid ID;
+	Contactroletype null;
+	?Contactname Name;
+	?Employeeid Employee;
+	?Gender null;
+	?Officephone Phone;
+	?Faxnumber null;
+	?EMail;
+};
+

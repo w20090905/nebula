@@ -1,0 +1,47 @@
+@Remarks("")
+@Refby("10")
+tx Marketingplandetail {
+	!Marketingplandetailid ID;
+	?Mcphierarchyid Marketingplanhierarchy;
+	Marketingplanid Marketingplan;
+	?Marketingplandetailcode Code;
+	?Marketingplandesc null;
+	Begindate Date;
+	Enddate Date;
+	Currencycode Code;
+	?Exchangerate Rate;
+	Budgetamount Amount;
+	?Basebudgetamount Amount;
+	?Actualamount Amount;
+	?SalesTarget null;
+	?StoreNumber null;
+	?Childnumber null;
+	Status;
+	Revision null;
+	Maker null;
+	Createdate Date;
+	DateLastupdated Date;
+	?Marketingplandetailname Name;
+	?Relatedplan null;
+	?Mcptypeid Mcptype;
+	?Activitytypeid Activitytype;
+	?Customerid ID;
+	?PlannedAmount Amount;
+	?Distributeamount Amount;
+	?Confirmamount Amount;
+	?StoreLevel null;
+	?Deptid Department;
+	?Relatednotesid ID;
+	?Attachmentid Attachment;
+	?Orgcheckflag null;
+	?Activitycheckflag null;
+	?Plancheckflag null;
+	?FeeCheckflag null;
+	?IsTracing null;
+	?Tracingfrequence null;
+	?Starttracingdate Date;
+	?Endtracingdate Date;
+	?AmtControlscope Amount;
+	?Stconfirmamount Amount;
+};
+

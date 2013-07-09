@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("2")
+tx Ordertask {
+	!Ordertaskid ID;
+	Orderid Ord;
+	StandardTaskid StandardTask;
+	Priority;
+	?Startdate Date;
+	?Planhours null;
+	?Workcenterid Workcenter;
+	?Employeeid Employee;
+	?Spendhours null;
+	?Comments Note;
+	?Attr11 null;
+	?Attr12 null;
+	?Attr13 null;
+	?Attr14 null;
+	?Relatedorderno null;
+};
+

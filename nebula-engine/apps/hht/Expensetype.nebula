@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Expensetype {
+	!Expensetypeid ID;
+	Expensetypecode Code;
+	?LanguageCode Lang;
+	?Expensetype null;
+	?Expensetypedesc null;
+	?IsSystem YesNo;
+};
+

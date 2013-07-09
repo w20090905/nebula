@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("3")
+tx Pjp {
+	!Pjpid ID;
+	Contactid Contact;
+	Orgid Organization;
+	Pjpcode Code;
+	?Createdate Date;
+	?Maker null;
+	?Comments Note;
+	Revision null;
+	Status;
+	?DateLastupdated Date;
+};
+

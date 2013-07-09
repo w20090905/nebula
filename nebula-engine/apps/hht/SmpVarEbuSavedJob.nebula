@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+type SmpVarEbuSavedJob {
+	?Jobname Name;
+	?Jobdescription Description;
+	?Dbname Name;
+	?Oemusername Name;
+};
+

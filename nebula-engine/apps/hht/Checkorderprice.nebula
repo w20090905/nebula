@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("0")
+type Checkorderprice {
+	Orgcode Code;
+	?Journalpriceflag null;
+};
+

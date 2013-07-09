@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("2")
+tx Orgaccount {
+	!Accountid ID;
+	Orgid Organization;
+	Bankname Name;
+	Accountno Code;
+	Currencycode Code;
+	Opendate Date;
+	IsBased YesNo;
+	Status;
+	?DateLastupdated Date;
+	?Glaccountid Glaccount;
+	?Bankcode Code;
+};
+

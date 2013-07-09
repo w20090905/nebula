@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Arappolicy {
+	!Arappolicyid ID;
+	SourceOrg null;
+	?Invoice null;
+	?Item null;
+	?InvoiceLine null;
+	?Billing null;
+	?Booksetid Bookset;
+};
+

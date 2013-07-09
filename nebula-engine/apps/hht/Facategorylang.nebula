@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Facategorylang {
+	!Facategorylangid ID;
+	LanguageCode Code;
+	Facategoryname Name;
+	?Facategorydesc null;
+	Facategoryid Facategory;
+};
+

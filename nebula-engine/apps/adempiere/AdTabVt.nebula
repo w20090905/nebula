@@ -1,10 +1,10 @@
 @Remarks("")
 @Refby("0")
 type AdTabVt {
-	AdLanguage Attr;
-	AdTabId AdTab;
-	AdWindowId AdWindow;
-	AdTableId AdTable;
+	AdLanguage String;
+	AdTabId ID;
+	AdWindowId ID;
+	AdTableId ID;
 	*Name;
 	?Description;
 	?Help;
@@ -14,7 +14,7 @@ type AdTabVt {
 	?IsInfotab YesNo;
 	Replicationtype Attr;
 	Tablename Name;
-	AccessLevel null;
+	AccessLevel Attr;
 	IsSecurityenabled YesNo;
 	IsDeleteable YesNo;
 	IsHighvolume YesNo;
@@ -22,15 +22,15 @@ type AdTabVt {
 	?Hasassociation YesNo;
 	IsTranslationtab YesNo;
 	IsReadonly YesNo;
-	?AdImageId AdImage;
-	Tablevel null;
-	?WhereClause String;
-	?OrderbyClause String;
-	?Commitwarning null;
-	?ReadonlyLogic String;
-	?DisplayLogic String;
-	?AdColumnId AdColumn;
-	?AdProcessId AdProcess;
+	?AdImageId ID;
+	Tablevel Number;
+	?WhereClause Note;
+	?OrderbyClause Note;
+	?Commitwarning Note;
+	?ReadonlyLogic Note;
+	?DisplayLogic Note;
+	?AdColumnId ID;
+	?AdProcessId ID;
 	IsSorttab YesNo;
 	IsInsertrecord YesNo;
 	IsAdvancedtab YesNo;

@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+type Sapfilecontrolhistory {
+	SeqId ID;
+	FileName Name;
+	DocId null;
+	Rbflg null;
+	?FinishFlg null;
+	?SendFig null;
+	CreatDate Date;
+	?TranDate null;
+	?Type Attr;
+};
+

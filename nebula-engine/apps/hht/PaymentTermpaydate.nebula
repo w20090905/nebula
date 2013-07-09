@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx PaymentTermpaydate {
+	!PaymentTermpaydateid ID;
+	PaymentTermid PaymentTerm;
+	?LineNum Line;
+	?PaymentDuedays Count;
+	?PaymentPercent Percent;
+	?Descriptions Description;
+};
+

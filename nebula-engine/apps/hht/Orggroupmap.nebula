@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx Orggroupmap {
+	!Orggroupmapid ID;
+	Orgrelationdetailid Orgrelationdetail;
+	?SourceOrggroupid ID;
+	?Targetorggroupid ID;
+};
+

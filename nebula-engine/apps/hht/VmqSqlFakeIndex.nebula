@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+type VmqSqlFakeIndex {
+	?DatabaseId VmqSqlItem;
+	?Sqlid VmqSqlItem;
+	?IndexName Name;
+	?IndexOwner null;
+	?IndexType Attr;
+	?TableName Name;
+	?TableOwner null;
+	?Uniqueness null;
+	?LastAnalyzed null;
+	?Blevel null;
+	?LeafBlocks null;
+	?DistinctKeys null;
+	?AvgLeafBlocksPerKey null;
+	?AvgDataBlocksPerKey null;
+	?ClusteringFactor null;
+};
+

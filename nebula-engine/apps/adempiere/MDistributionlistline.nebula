@@ -4,25 +4,15 @@ tx MDistributionlistline {
 	@Remarks("Distribution List Line with Business Partner and Quantity/Percentage")
 	!MDistributionlistlineId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Distribution Lists allow to distribute products to a selected list of partners")
-	MDistributionlistId MDistributionlist;
+	MDistributionlist;
 	@Remarks("Identifies a Business Partner")
-	CBpartnerId CBpartner;
+	CBpartner;
 	@Remarks("Identifies the (ship to) address for this Business Partner")
-	CBpartnerLocationId CBpartnerLocation;
+	CBpartnerLocation;
 	@Remarks("Minimum quantity for the business partner")
 	Minqty Quantity;/* 0  */
 	@Remarks("Relative Ratio for Distributions")

@@ -1,0 +1,32 @@
+@Remarks("")
+@Refby("0")
+type VdkSegment {
+	?VdkId ID;
+	?VdkName Name;
+	?VdkParentId ID;
+	?VdkDatabaseId VdkDatabase;
+	?VdkOwnerName Name;
+	?VdkSegmentName Name;
+	?VdkPartitionName Name;
+	?VdkSegmentType null;
+	?VdkTablespaceName Name;
+	?VdkExtents null;
+	?VdkInitialExtent null;
+	?VdkNextExtent null;
+	?VdkMinExtents null;
+	?VdkMaxExtents null;
+	?VdkPctIncrease null;
+	?VdkFreelists null;
+	?VdkFreelistGroups null;
+	?VdkFlags null;
+	?VdkRbsStatus null;
+	?VdkRbsOptimal null;
+	?VdkRecomTablespaceName Name;
+	?VdkRecomInitialExtent null;
+	?VdkRecomNextExtent null;
+	?VdkRecomMinExtents null;
+	?VdkRecomMaxExtents null;
+	?VdkRecomPctIncrease null;
+	?VdkRecomRbsOptimal null;
+};
+

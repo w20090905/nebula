@@ -1,42 +1,37 @@
 @Remarks("")
 @Refby("0")
 type GlJournallineAcctV {
-	GlJournallineId GlJournalline;
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;
-	Created null;
-	Createdby null;
-	Updated null;
-	Updatedby null;
-	GlJournalId GlJournal;
+	GlJournallineId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	GlJournalId ID;
 	Line;
 	IsGenerated YesNo;
 	?Description;
 	AmtSourcedr Amount;
 	AmtSourcecr Amount;
-	CCurrencyId CCurrency;
-	CConversionTypeId CConversionType;
+	CCurrencyId ID;
+	CConversionTypeId ID;
 	Currencyrate Rate;
 	DateAcct Date;
 	AmtAcctdr Amount;
 	AmtAcctcr Amount;
-	?CUomId CUom;
+	?CUomId ID;
 	?Qty Quantity;
-	CValidcombinationId CValidcombination;
-	CAcctschemaId CAcctschema;
+	CValidcombinationId ID;
+	CAcctschemaId ID;
 	AccountId ID;
-	?MProductId MProduct;
-	?CBpartnerId CBpartner;
+	?MProductId ID;
+	?CBpartnerId ID;
 	?AdOrgtrxId ID;
 	?CLocfromId ID;
 	?CLoctoId ID;
-	?CSalesRegionId CSalesRegion;
-	?CProjectId CProject;
-	?CCampaignId CCampaign;
+	?CSalesRegionId ID;
+	?CProjectId ID;
+	?CCampaignId ID;
 	?User1Id ID;
 	?User2Id ID;
 	IsFullyqualified YesNo;
-	?CActivityId CActivity;
+	?CActivityId ID;
 };
 

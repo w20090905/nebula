@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx SalesWeek {
+	!Weekid ID;
+	Weekcode Code;
+	Weekname Name;
+	Accyearid Accountingyear;
+	DateLastupdated Date;
+	?Status;
+};
+

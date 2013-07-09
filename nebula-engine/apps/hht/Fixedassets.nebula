@@ -1,0 +1,49 @@
+@Remarks("")
+@Refby("15")
+tx Fixedassets {
+	!Fixedassetsid ID;
+	Orgid Organization;
+	Facode Code;
+	Faname Name;
+	?Fadesc null;
+	Facategoryid Facategory;
+	?Qty Quantity;
+	?Umcode Code;
+	?Madein null;
+	?Spec null;
+	?Suppliername Name;
+	?Manufactory null;
+	?KeepEr null;
+	?Maintenancer null;
+	?Guaranteeorg null;
+	Addtypecode Code;
+	Ownerdeptid ID;
+	?Fausedeptcode Code;
+	?Fausedeptstr null;
+	?Position null;
+	?Begindate Date;
+	?Originalvalue null;
+	?TotalDepr null;
+	Status;
+	?Itemid Item;
+	?Practicalityid Practicality;
+	Createdate Date;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr5 null;
+	?Attr6 null;
+	?Attr11 null;
+	?Attr12 null;
+	DateLastupdated Date;
+	?Relatedtrantype Attr;
+	?Relatedtranid ID;
+	?Relatedtrandetailid ID;
+	?Glaccountid Glaccount;
+	?Glgroupcode Code;
+	?Addreasoncode Code;
+	?Gldate Date;
+	?Deprglaccountid ID;
+};
+

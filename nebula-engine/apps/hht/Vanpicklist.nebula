@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("1")
+tx Vanpicklist {
+	!Vanpicklistid ID;
+	Vansalesslipid Vansalesslip;
+	Vanpicklisttype Attr;
+	Itemid Item;
+	?Umcode Code;
+	?Vanpicklistcode Code;
+	?Qty Quantity;
+	?Costprice Cost;
+	?Costamount Cost;
+	Status;
+	?SalesPrice Price;
+	?SalesAmount Amount;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Baseqty Quantity;
+};
+

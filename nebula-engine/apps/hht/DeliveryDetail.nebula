@@ -1,0 +1,71 @@
+@Remarks("")
+@Refby("5")
+tx DeliveryDetail {
+	!DeliveryDetailid ID;
+	DeliveryId Delivery;
+	Orderid Ord;
+	Orderdetailid Orderdetail;
+	Itemid Item;
+	?Qty Quantity;
+	?Listprice Price;
+	?Unitprice Unit;
+	?Netprice Price;
+	?Amount;
+	?TaxRate Rate;
+	?Pretaxprice Price;
+	?TaxAmount Amount;
+	?Pretaxamount Amount;
+	?DeliveryPlanid DeliveryPlan;
+	Invstatus null;
+	?Inventoryflag null;
+	?Saleflag null;
+	?Arflag null;
+	?LineStatus Line;
+	?Costprice Cost;
+	?Umcode Code;
+	?Baseqty Quantity;
+	?Warehouseid Physicalwarehouse;
+	?Ordertypeid Ordertype;
+	?PaymentMethod null;
+	?Allocflag null;
+	?InvoiceMethod null;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr11 null;
+	?Attr12 null;
+	?PaymentTermid PaymentTerm;
+	?LineNum Line;
+	?Exchangerate Rate;
+	?Localamount Amount;
+	?Localnetprice Price;
+	?QtyReceived Quantity;
+	?QtyAcceptEd Quantity;
+	?QtyInvalid ID;
+	?Complaintreasoncode null;
+	?Deptid Department;
+	?Comments Note;
+	?Zhhteaiflag String;/* ('0') */
+	?RequestQty Quantity;
+	?DeliveryCondition null;
+	?Outputdate Date;
+	?Reportdate Date;
+	?Reportuser null;
+	@Remarks("評価タイプ")
+	?Sapevaluation null;
+	@Remarks("在庫認可No")
+	?Inventorycode Code;
+	@Remarks("ロット番号")
+	?Saplotno null;
+	@Remarks("末端単価")
+	?Endprice Price;
+	@Remarks("口?率")
+	?Commissionrate Rate;
+	?TaxEdamount Amount;
+	?Localnettaxedamount Amount;
+	?Ablealloc null;
+	?PriceCoefficient Price;
+	?Refreceiptdetailid ID;
+};
+

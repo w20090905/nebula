@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx Incometype {
+	!Incometypeid ID;
+	Incometypecode null;
+	?LanguageCode Lang;
+	?Incometypedesc null;
+};
+

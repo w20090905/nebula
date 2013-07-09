@@ -1,0 +1,27 @@
+@Remarks("")
+@Refby("0")
+type VdkInstanceSortStats {
+	?VdkCollectDate Date;
+	?VdkParentId ID;
+	?VdkDatabaseId VdkDatabase;
+	?VdkTablespaceName Name;
+	?VdkExtentSize Size;
+	?VdkCurrentUsers null;
+	?VdkTotalExtents null;
+	?VdkTotalBlocks null;
+	?VdkUsedExtents null;
+	?VdkUsedBlocks null;
+	?VdkFreeExtents null;
+	?VdkFreeBlocks null;
+	?VdkAddedExtents null;
+	?VdkFreedExtents null;
+	?VdkExtentHits null;
+	?VdkFreeRequestS null;
+	?VdkMaxSize Size;
+	?VdkMaxBlocks null;
+	?VdkMaxUsedSize Size;
+	?VdkMaxUsedBlocks null;
+	?VdkMaxSortSize Size;
+	?VdkMaxSortBlocks null;
+};
+

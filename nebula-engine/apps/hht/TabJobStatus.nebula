@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("0")
+type TabJobStatus {
+	!JobName Name;
+	?JobStatus null;
+};
+

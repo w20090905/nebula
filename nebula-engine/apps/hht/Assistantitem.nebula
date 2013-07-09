@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("12")
+tx Assistantitem {
+	!Assistantitemid ID;
+	?Assitemtype null;
+	?Itemname Name;
+	?SourceTablename Name;
+	?SourcePrimarykey null;
+	?Assistanttype null;
+};
+

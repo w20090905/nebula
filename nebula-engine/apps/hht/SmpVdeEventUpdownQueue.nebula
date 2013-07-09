@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type SmpVdeEventUpdownQueue {
+	?SequenceNum SmpVdeTryRemoveEventQueue;
+	?EventId ID;
+	?TargetName Name;
+	?TargetType Attr;
+	?Updown null;
+	?TimesTamp null;
+	?Timezone Count;
+};
+

@@ -1,0 +1,15 @@
+@Remarks("List of all known services per node")
+@Refby("0")
+type SmpViewNodeServices {
+	@Remarks("Name of the service")
+	TargetName Name;
+	@Remarks("Type of service")
+	TargetType Attr;
+	@Remarks("Translated name for the target type")
+	?TargetNlsType Attr;
+	@Remarks("Name of the node")
+	NodeName Name;
+	@Remarks("Details on how to contact this service")
+	?Userdata null;
+};
+

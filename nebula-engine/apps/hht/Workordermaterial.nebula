@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("2")
+tx Workordermaterial {
+	!Workordermaterialid ID;
+	Workorderid Workorder;
+	Itemid Item;
+	?QtyNeeded Quantity;
+	?QtyGot Quantity;
+	?Costprice Cost;
+	?QtyThis Quantity;
+	?Costamount Cost;
+	?TotalCostamount Amount;
+	?Status;
+	?Umcode Code;
+	?Baseqtyneeded null;
+	?Baseqtygot null;
+	?Baseqtythis null;
+};
+

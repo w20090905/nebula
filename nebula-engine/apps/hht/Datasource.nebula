@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("2")
+tx Datasource {
+	!Datasourceid ID;
+	Orgid Organization;
+	Datasourcename Name;
+	?Datasourcedesc null;
+	Datasourcetype null;
+	?Vtablename Name;
+	Maker null;
+	Createdate Date;
+	DateLastupdated Date;
+	?Qlname Name;
+};
+

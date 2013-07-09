@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("1")
+tx Magreementperiodexptype {
+	!Magreementperiodexptypeid ID;
+	Marketingagreementperiodid Marketingagreementperiod;
+	Expensetypecode Code;
+	Expensetype null;
+	?Agreementamount Amount;
+	?Marketingagreementid Marketingagreement;
+};
+

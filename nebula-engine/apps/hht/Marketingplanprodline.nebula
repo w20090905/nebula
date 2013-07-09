@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Marketingplanprodline {
+	!Marketingplanprodlineid ID;
+	Marketingplanid Marketingplan;
+	Marketingplandetailid Marketingplandetail;
+	Prodlineid ProductLine;
+	Weight;
+	?Budgetamount Amount;
+	?SalesTarget null;
+	?Remark null;
+};
+

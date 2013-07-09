@@ -1,0 +1,40 @@
+@Remarks("")
+@Refby("0")
+tx Editype {
+	!Editypeid ID;
+	?Orgid Organization;
+	?Endcustomercode1 null;
+	?Endcustomercode2 null;
+	?Endcustomercode3 null;
+	?Endcustomercode4 null;
+	?Endcustomercode5 null;
+	?Endcustomercode6 null;
+	?Endcustomercode7 null;
+	?Endcustomercode8 null;
+	?Endcustomercode9 null;
+	?Endcustomercode10 null;
+	?Endcustomername1 null;
+	?Endcustomername2 null;
+	?Endcustomername3 null;
+	?Endcustomername4 null;
+	?Endcustomername5 null;
+	?Endcustomername6 null;
+	?Endcustomername7 null;
+	?Endcustomername8 null;
+	?Endcustomername9 null;
+	?Endcustomername10 null;
+	?Comment1 null;
+	?Comment2 null;
+	?Comment3 null;
+	?Comment4 null;
+	?Comment5 null;
+	?Comment6 null;
+	?Comment7 null;
+	?Comment8 null;
+	?Comment9 null;
+	?Comment10 null;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Userid Usr;
+};
+

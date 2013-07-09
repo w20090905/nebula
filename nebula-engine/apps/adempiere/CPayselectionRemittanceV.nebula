@@ -1,22 +1,22 @@
 @Remarks("")
 @Refby("0")
 type CPayselectionRemittanceV {
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	?AdLanguage Attr;
-	CPayselectionId CPayselection;
-	CPayselectionlineId CPayselectionline;
-	?CPayselectioncheckId CPayselectioncheck;
+	AdClientId ID;
+	AdOrgId ID;
+	?AdLanguage String;
+	CPayselectionId ID;
+	CPayselectionlineId ID;
+	?CPayselectioncheckId ID;
 	PaymentRule Attr;
 	Line;
 	Openamt Amount;
 	Payamt Amount;
 	DiscountAmt Amount;
 	Differenceamt Amount;
-	CBpartnerId CBpartner;
+	CBpartnerId ID;
 	DocumentNo Code;
 	DateInvoiceD Date;
-	GrandTotal null;
+	GrandTotal Amount;
 	AmtInwords Amount;
 };
 

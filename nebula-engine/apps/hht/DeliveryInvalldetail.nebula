@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("1")
+tx DeliveryInvalldetail {
+	!DeliveryInvalldetailid ID;
+	DeliveryDetailid DeliveryDetail;
+	Invsummaryid Invsummary;
+	Itemid Item;
+	Invstatus null;
+	?Saleflag null;
+	?Inventoryflag null;
+	?Arflag null;
+	?Warehouseid Physicalwarehouse;
+	?Locationcode Code;
+	?Lotno null;
+	?Batchno null;
+	?Manufacturedate Date;
+	?Expiredate Date;
+	?QtyAll Quantity;
+	?QtyPicked Quantity;
+	DeliveryId Delivery;
+	?Baseqtyall null;
+	?Investimateno null;
+};
+

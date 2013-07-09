@@ -1,0 +1,30 @@
+@Remarks("")
+@Refby("1")
+tx Rebatesummary {
+	!Rebatesummaryid ID;
+	Rebatetype null;
+	Createdate Date;
+	Rebaterequestid Rebaterequest;
+	Rrcode Code;
+	Docdate Date;
+	Rpsettletype null;
+	Partnerid ID;
+	?Exchangerate Rate;
+	?Currencycode Code;
+	?Debitamt Amount;
+	?Localdebitamt Amount;
+	?Creditamt Amount;
+	?Localcreditamt Amount;
+	?Description;
+	?BalanceAmt Amount;
+	?Localbalanceamt Amount;
+	DateLastupdated Date;
+	Orgid Organization;
+	Booksetid Bookset;
+	?Glaccountid Glaccount;
+	?Localallocamt Amount;
+	?Deptid Department;
+	?Activityid Activity;
+	?Rebatereason null;
+};
+

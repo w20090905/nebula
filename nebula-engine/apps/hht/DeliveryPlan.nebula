@@ -1,0 +1,44 @@
+@Remarks("")
+@Refby("3")
+tx DeliveryPlan {
+	!DeliveryPlanid ID;
+	Orderid Ord;
+	?Orderdetailid Orderdetail;
+	Itemid Item;
+	?Lotno null;
+	?Orderqty Quantity;
+	?Planqty Quantity;
+	?Price;
+	?DeliveryDate Date;
+	?Status;
+	?Comments Note;
+	?LineType Line;
+	?Arrivaldate Date;
+	Umcode Code;
+	?LineNo Line;
+	?Zhhteaiflag String;/* ('0') */
+	?DeliveryDate2 null;
+	?Arrivaldate2 null;
+	?Sellerid ID;
+	?Purumcode Code;
+	?Purchaseqty Quantity;
+	?PriceCoefficient Price;
+	?Currencycode Code;
+	?Vendorprice Price;
+	?Pursnp null;
+	?Moq null;
+	?Amount;
+	?Zctamount Amount;
+	?Moqqty Quantity;
+	?Snpqty Quantity;
+	?Baseqty Quantity;
+	?Purbaseumcode Code;
+	?Dealstatus null;/* '1' */
+	?Posendstatus null;
+	?Grsendstatus null;
+	?DeliveryDatew null;
+	?DeliveryDated null;
+	?Edistatus null;
+	?Updatetime null;
+};
+

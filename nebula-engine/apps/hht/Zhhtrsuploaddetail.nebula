@@ -1,0 +1,29 @@
+@Remarks("")
+@Refby("0")
+type Zhhtrsuploaddetail {
+	Zhhtrsuploaddetailid ID;
+	Zhhtrsuploadid Zhhtrsupload;
+	?LineNum Line;
+	Itemid Item;
+	?Itemcd null;
+	?QtyReturn Quantity;
+	?Srdeliverydate Date;
+	?Sreltype Attr;
+	?Srearflag null;
+	?Srearflagname Name;
+	?Srothercode Code;
+	?Srprice Price;
+	?Srcomplaintreasoncode null;
+	?Srsaplotno null;
+	?Srsapevaluation null;
+	?Srconcategory null;
+	?Srdimension null;
+	?Prdeliverydate Date;
+	?Prprice Price;
+	?Prcomplaintreasoncode null;
+	?Prsaplotno null;
+	?Prsapevaluation null;
+	?Prconcategory null;
+	?Prdimension null;
+};
+

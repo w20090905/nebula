@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+type VSapHti {
+	?Hti01DataType Attr;
+	?Hti02TkonnEx null;
+	?Hti03TextId Text;
+	?Hti04Langu null;
+	?Hti05LanguIsO null;
+	?Hti06FormAtCol null;
+	?Hti07TextLine Text;
+	?Hti08Function null;
+	?Hti09Updateflag null;
+	?Returnid null;
+};
+

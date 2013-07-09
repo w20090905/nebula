@@ -1,0 +1,50 @@
+@Remarks("")
+@Refby("7")
+tx Agreement {
+	!Agreementid ID;
+	Relationid Orgrelation;
+	Agreementcode Code;
+	?Relationtype Attr;
+	Revision null;
+	Seller null;
+	Buyer null;
+	?PaymentTerm null;
+	?PaymentMethod null;
+	?Shipmentterm null;
+	?Shipmentmethod null;
+	?Creditlimit Count;
+	?Intervalcode null;
+	?Creditperiod null;
+	?Shipto null;
+	?Billto null;
+	?InvoiceTo null;
+	?Shipfrom null;
+	?Returnto null;
+	?Carryby null;
+	Status;
+	?DateLastupdated Date;
+	Startdate Date;
+	Expiredate Date;
+	?Maker null;
+	?DeliveryPeriod null;
+	?Delintervalcode null;
+	?Servicemethod null;
+	?Servicestartdate Date;
+	?Serviceperiodid ID;
+	?Createdate Date;
+	?Comments Note;
+	?Billtype null;
+	?Billstartdate Date;
+	?Billperiodid ID;
+	?Refertorelatedslip null;
+	?AmtLimited Amount;
+	?QtyLimited Quantity;
+	?Itemlimited null;
+	?Serviceagreementtype null;
+	?Defaultwarehouseid ID;
+	?Expenseitemid ID;
+	?Billamount Amount;
+	?Aheaddays Count;
+	?Attr11 null;
+};
+

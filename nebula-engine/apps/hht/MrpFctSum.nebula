@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("4")
+type MrpFctSum {
+	!Fctsumcode Code;
+	?Fctsumname Name;
+	?Sumlife null;
+	?Sumlifenum null;
+	?Sumstart null;
+	?Status;/* 0 */
+	?Creator null;
+	?Createdate Date;
+	?Memo;
+	?Updatedate Date;
+	?Updater null;
+	?Orgid Organization;
+};
+

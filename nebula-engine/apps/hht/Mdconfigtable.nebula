@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Mdconfigtable {
+	!Mdconfigtableid ID;
+	Mdtablename Name;
+	LanguageCode Lang;
+	Mdtabledesc null;
+	DateLastupdated Date;
+};
+

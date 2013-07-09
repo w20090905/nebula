@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx DeliveryContainer {
+	!DeliveryContainerid ID;
+	Itemid Item;
+	Umcode Code;
+	?Lotno null;
+	?Qty Quantity;
+	?Remark null;
+	?Baseqty Quantity;
+	DeliveryId Delivery;
+};
+

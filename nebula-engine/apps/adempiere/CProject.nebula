@@ -4,19 +4,9 @@ type CProject {
 	@Remarks("Financial Project")
 	!CProjectId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
 	@Remarks("Alphanumeric identifier of the entity")
@@ -26,23 +16,23 @@ type CProject {
 	@Remarks("Optional additional user defined information")
 	?Note;
 	@Remarks("This is a summary entity")
-	IsSummary Comment;/* 'N'  */
+	IsSummary YesNo;/* 'N'  */
 	@Remarks("User within the system - Internal or Business Partner Contact")
-	?AdUserId AdUser;
+	?AdUser;
 	@Remarks("Identifies a Business Partner")
-	?CBpartnerId CBpartner;
+	?CBpartner;
 	@Remarks("Identifies the (ship to) address for this Business Partner")
-	?CBpartnerLocationId CBpartnerLocation;
+	?CBpartnerLocation;
 	@Remarks("Transaction Reference Number (Sales Order, Purchase Order) of your Business Partner")
-	?Poreference String;
+	?Poreference Note;
 	@Remarks("The terms of Payment (timing, discount)")
-	?CPaymentTermId CPaymentTerm;
+	?CPaymentTerm;
 	@Remarks("The Currency for this record")
-	CCurrencyId CCurrency;
+	CCurrency;
 	@Remarks("Identifies a unique instance of a Price List")
-	?MPriceListVersionId MPriceListVersion;
+	?MPriceListVersion;
 	@Remarks("Marketing Campaign")
-	?CCampaignId CCampaign;
+	?CCampaign;
 	@Remarks("Is this document a (legal) commitment?")
 	IsCommitment YesNo;/* 'Y'  */
 	@Remarks("Planned amount for this project")
@@ -62,11 +52,11 @@ type CProject {
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("Sales Representative or Company Agent")
-	?SalesRepId AdUser;
+	?SalesRep AdUser;
 	@Remarks("Copy From Record")
 	?Copyfrom null;
 	@Remarks("Type of the project")
-	?CProjectTypeId CProjectType;
+	?CProjectType;
 	@Remarks("The (legal) commitment Quantity")
 	CommittedQty Quantity;/* 0  */
 	@Remarks("The amount invoiced")
@@ -76,17 +66,17 @@ type CProject {
 	@Remarks("Total Project Balance")
 	ProjectBalanceAmt Amount;/* 0  */
 	@Remarks("Standard Phase of the Project Type")
-	?CPhaseId CPhase;
+	?CPhase;
 	@Remarks("The commitment amount/quantity is the chargeable ceiling")
 	IsCommitceiling YesNo;/* 'N'  */
 	@Remarks("Storage Warehouse and Service Point")
-	?MWarehouseId MWarehouse;
+	?MWarehouse;
 	@Remarks("Project Category")
 	?ProjectCategory YesNo;/* 'N'  */
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Business Partner (Agent or Sales Rep)")
-	?CBpartnerSrId CBpartner;
+	?CBpartnerSr CBpartner;
 	@Remarks("Invoice Rule for the project")
 	Projinvoicerule Attr;/* '-'  */
 	@Remarks("Project Line Level")

@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Warehouseemployeelocation {
+	!Whemployeelocationid ID;
+	Whemployeeid Warehouseemployee;
+	?Fromlocationcode Code;
+	?Tolocationcode Code;
+	?Comments Note;
+	?DateLastupdated Date;
+};
+

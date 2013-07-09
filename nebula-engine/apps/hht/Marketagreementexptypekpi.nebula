@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Marketagreementexptypekpi {
+	!Marketingagreementexptypekpiid ID;
+	Kpicode Code;
+	?Kpivalue String;
+	?Actualkpivalue String;
+	Marketingagreementexptypeid Marketingagreementexptype;
+	Marketingagreementid Marketingagreement;
+};
+

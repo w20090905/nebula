@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx Ovalsystemtableinfolang {
+	!SystemTableinfolangid ID;
+	SystemTableinfoid Ovalsystemtableinfo;
+	LanguageCode Lang;
+	Description;
+};
+

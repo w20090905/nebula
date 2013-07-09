@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("2")
+tx Sop {
+	!Sopid ID;
+	Orgid Organization;
+	Sopcode Code;
+	Sopname Name;
+	SalesPlantypeid SalesPlantype;
+	SalesPlangroupid SalesPlangroup;
+	Year null;
+	?Description;
+	?Comments Note;
+	?Calcbasis null;
+	?Increaserate Rate;
+	Maker null;
+	Createdate Date;
+	Revision null;
+	Status;
+	DateLastupdated Date;
+};
+

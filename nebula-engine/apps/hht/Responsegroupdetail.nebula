@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Responsegroupdetail {
+	!Responsegroupdetailid ID;
+	Groupdetailtype null;
+	Relatedtranid ID;
+	DateLastupdated Date;
+	?Responsegroupid Responsegroup;
+};
+

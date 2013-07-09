@@ -2,24 +2,14 @@
 @Refby("0")
 type AdSequenceNo {
 	@Remarks("Document Sequence")
-	!AdSequenceId AdSequence;
+	!AdSequence;
 	@Remarks("Calendar Year")
 	!Calendaryear null;/* '0000'  */
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("The next number to be used")
-	Currentnext null;
+	Currentnext Number;
 };
 

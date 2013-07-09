@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx Promotionitemstmp {
+	!Promotionitemstmpid ID;
+	?Orderid Ord;
+	?Itemid Item;
+	?Qty Quantity;
+	?PriceListid PriceList;
+	?Promethod null;
+	?Promotionid Promotion;
+	?Promotiondesc null;
+	?Presenttype null;
+	?Maxpresentqty Quantity;
+	?Ppid Promotionpresent;
+};
+

@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Marketingbudgetperiod {
+	!Marketingbudgetperiodid ID;
+	Marketingbudgetid Marketingbudget;
+	?Accyearid Accountingyear;
+	?Accperiodid Accountingperiod;
+	?Budgetyear null;
+	Periodno SeqNo;
+	?Description;
+	?Budgetamount Amount;
+	?PlannedAmount Amount;
+	?Actualamount Amount;
+};
+

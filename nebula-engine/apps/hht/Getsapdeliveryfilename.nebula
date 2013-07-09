@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+type Getsapdeliveryfilename {
+	?Filename;
+	?ValueName Name;
+	?Deptcode Code;
+	?DeliveryId Delivery;
+	?Dcode Code;
+	?Flag null;
+	?Status;
+	?OFlg null;
+	?DateLastupdated null;
+	?DeliveryCode Code;
+};
+

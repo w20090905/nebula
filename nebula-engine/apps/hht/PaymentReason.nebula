@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx PaymentReason {
+	!PaymentReasonid ID;
+	Orgid Organization;
+	?PaymentReasoncode Code;
+	?Creditflag null;
+	?Assignflag null;
+	?Createdate Date;
+	?Maker null;
+	?DateLastupdated Date;
+	?PaymentType null;
+	?Processtype null;
+};
+

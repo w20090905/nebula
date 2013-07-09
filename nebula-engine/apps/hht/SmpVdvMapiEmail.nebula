@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx SmpVdvMapiEmail {
+	!UserId SmpVdvUser;
+	!AccountName Name;
+	?DisplayName Name;
+	Address EMail;
+	?Password;
+	?Address null;
+	MapiServer null;
+};
+

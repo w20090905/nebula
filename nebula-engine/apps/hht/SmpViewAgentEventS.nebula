@@ -1,0 +1,34 @@
+@Remarks("Intelligent Agent specific information about all registered events")
+@Refby("0")
+type SmpViewAgentEventS {
+	@Remarks("Internal repository ID for this event")
+	EventId ID;
+	@Remarks("Internal Intelligent Agent ID for this event")
+	?AgentId ID;
+	@Remarks("Name of this event")
+	?EventName Name;
+	@Remarks("Name of the event test the Agent has to evaluate")
+	?EventTest null;
+	@Remarks("Administrator who owns this event")
+	?AdministratorName Name;
+	?Description;
+	@Remarks("Name of the node where this event is registered for")
+	?NodeName Name;
+	@Remarks("Name of the service this event is registered for")
+	?TargetName Name;
+	@Remarks("Type of service this event is registered for")
+	?TargetType Attr;
+	@Remarks("Translated name for the target type")
+	?TargetNlsType Attr;
+	@Remarks("ID of the fixit job associated with this event")
+	?FixitJobId ID;
+	@Remarks("Boolean value: Is this event an unsolicited event?")
+	?Unsolicited null;
+	@Remarks("Boolean value: Send an SNMP notification trap?")
+	?SnmpTrap null;
+	@Remarks("Current state: 15 (Clear), 18 (Error), 20 (Warning), 25 (Alert)")
+	?Severity null;
+	@Remarks("Current state: 0 (DOWN), 1 (UP)")
+	?AgentStatus null;
+};
+

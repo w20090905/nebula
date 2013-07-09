@@ -1,17 +1,17 @@
 @Remarks("")
 @Refby("0")
 type MInoutCandidateV {
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	CBpartnerId CBpartner;
-	COrderId COrder;
+	AdClientId ID;
+	AdOrgId ID;
+	CBpartnerId ID;
+	COrderId ID;
 	DocumentNo Code;
 	DateOrdered Date;
-	CDoctypeId CDoctype;
-	?Poreference String;
+	CDoctypeId ID;
+	?Poreference Note;
 	?Description;
 	?SalesRepId ID;
-	MWarehouseId MWarehouse;
+	MWarehouseId ID;
 	?TotalLines Line;
 };
 

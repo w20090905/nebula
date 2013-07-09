@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Faappendixdetail {
+	!Faappendixdetailid ID;
+	Fixedassetsid Fixedassets;
+	?Appendixfaid Fixedassets;
+	?Comments Note;
+	DateLastupdated Date;
+};
+

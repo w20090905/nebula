@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("1")
+tx Orderwarranty {
+	!Orderwarrantyid ID;
+	Orgid Organization;
+	Warrantycode Code;
+	Warrantyname Name;
+	?Description;
+	Calcdatetype null;
+	Status;
+	DateLastupdated Date;
+	Orderdetailid Orderdetail;
+};
+

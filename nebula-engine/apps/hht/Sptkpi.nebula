@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Sptkpi {
+	!Sptkpiid ID;
+	SalesPlantypeid SalesPlantype;
+	?Kpioption null;
+	?Calctype null;
+	?Canedit null;
+	?Kpiid Kpi;
+};
+

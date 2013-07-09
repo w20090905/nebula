@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type UsergroupBeforeImp {
+	Usergroupid Usergroup;
+	Orgid Organization;
+	Usergroupname Name;
+	Status;
+	?Description;
+	?DateLastupdated Date;
+};
+

@@ -2,50 +2,50 @@
 @Refby("0")
 tx TInventoryvalue {
 	@Remarks("Instance of the process")
-	!AdPinstanceId AdPinstance;
+	!AdPinstance;
 	@Remarks("Storage Warehouse and Service Point")
-	!MWarehouseId MWarehouse;
+	!MWarehouse;
 	@Remarks("Product, Service, Item")
-	!MProductId MProduct;
+	!MProduct;
 	@Remarks("Product Attribute Set Instance")
-	!MAttributesetinstanceId MAttributesetinstance;
+	!MAttributesetinstance;
 	@Remarks("Client/Tenant for this installation.")
-	?AdClientId AdClient;
+	?AdClientId ID;
 	@Remarks("Organizational entity within client")
-	?AdOrgId AdOrg;
+	?AdOrgId ID;
 	@Remarks("Identifies a unique instance of a Price List")
-	?MPriceListVersionId MPriceListVersion;
+	?MPriceListVersion;
 	@Remarks("Date of valuation")
 	?DateValue Date;
 	@Remarks("The Currency for this record")
-	?CCurrencyId CCurrency;
+	?CCurrency;
 	@Remarks("On Hand Quantity")
 	?QtyOnhand Quantity;/* 0 */
 	@Remarks("Price based on a purchase order")
-	?PricePo Price;/* 0 */
+	?PricePo Number;/* 0 */
 	@Remarks("List Price")
-	?PriceList Price;/* 0 */
+	?PriceList Number;/* 0 */
 	@Remarks("Standard Price")
-	?PriceStd Price;/* 0 */
+	?PriceStd Number;/* 0 */
 	@Remarks("Lowest price for a product")
-	?PriceLimit Price;/* 0 */
+	?PriceLimit Count;/* 0 */
 	@Remarks("Standard Costs")
-	?Coststandard Cost;/* 0 */
+	?Coststandard Number;/* 0 */
 	@Remarks("Cost information")
 	?Cost;/* 0 */
 	@Remarks("Valuation with PO Price")
-	?PricePoamt Price;/* 0 */
+	?PricePoamt Amount;/* 0 */
 	@Remarks("Valuation with List Price")
-	?PriceListamt Price;/* 0 */
+	?PriceListamt Amount;/* 0 */
 	@Remarks("Valuation with standard price")
-	?PriceStdamt Price;/* 0 */
+	?PriceStdamt Amount;/* 0 */
 	@Remarks("Value with limit price")
-	?PriceLimitamt Price;/* 0 */
+	?PriceLimitamt Amount;/* 0 */
 	@Remarks("Value in Standard Costs")
-	?Coststandardamt Cost;/* 0 */
+	?Coststandardamt Amount;/* 0 */
 	@Remarks("Value with Cost")
-	?Costamt Cost;/* 0 */
+	?Costamt Amount;/* 0 */
 	@Remarks("Product Cost Element")
-	?MCostelementId MCostelement;
+	?MCostelement;
 };
 

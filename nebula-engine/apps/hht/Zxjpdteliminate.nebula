@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+tx Zxjpdteliminate {
+	!Zxjpdteliminateid ID;
+	KeepDtid ID;
+	Dtid ID;
+	Dtcode Code;
+	Dtname Name;
+	?Address null;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr5 null;
+	?Attr6 null;
+	?Attr7 null;
+	?Attr8 null;
+};
+

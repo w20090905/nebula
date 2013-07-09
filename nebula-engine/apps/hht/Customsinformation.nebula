@@ -1,0 +1,49 @@
+@Remarks("")
+@Refby("0")
+tx Customsinformation {
+	!Customsinformationid ID;
+	@Remarks("処理区分")
+	?Processingflag null;
+	@Remarks("処理年月日")
+	?Processingymd null;
+	@Remarks("処理時刻")
+	?Processingmoment null;
+	@Remarks("部署ｺｰﾄﾞ")
+	?Deploymentcode Code;
+	@Remarks("通関No")
+	?Hhtsidocode Code;
+	@Remarks("出荷実績日")
+	?Edideliverydate Date;
+	@Remarks("Shipped Per")
+	?Zzshpper String;
+	@Remarks("E/L No")
+	?Zzelno String;
+	@Remarks("B/L No")
+	?Bolnr null;
+	@Remarks("運送方法")
+	?Shipmentmethod null;
+	@Remarks("計上年月日")
+	?Tradekeijyodata null;
+	@Remarks("許可年月日")
+	?Licenseymd null;
+	@Remarks("status")
+	?Status;
+	?Dealstatus null;
+	?Orgid Organization;
+	@Remarks("行番号(INVOICE NO単位の行番号)")
+	?LineNo Line;
+	@Remarks("通貨別通関金額(実数)")
+	?Amount;
+	@Remarks("通貨コード(Ｒ／３で運用しているコード)")
+	?Currencycode Code;
+	@Remarks("FILLER(SPACE)")
+	?Filler null;
+	@Remarks("導入区分")
+	?Inoutkbn null;
+	@Remarks("メッセージID")
+	?Messageid Message;
+	?Sidoflag null;
+	?Zyusindate Date;
+	?Gyousyaflag null;
+};
+

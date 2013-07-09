@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+type EpcCliUsage {
+	?RepUserId EpcCliRepUsers;
+	?CollectionId EpcCliCollection;
+	?ProductName Name;
+	?EventSetName Name;
+};
+

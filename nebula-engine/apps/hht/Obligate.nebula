@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("1")
+tx Obligate {
+	!Obligateid ID;
+	Orgid Organization;
+	?Obligatecode Code;
+	?Obligatereason null;
+	?Relatedtranid ID;
+	?Relatedtrancode Code;
+	?Relatedtrantype null;
+	?Createdate Date;
+	?Maker null;
+	Status;
+	?Comments Note;
+	DateLastupdated Date;
+};
+

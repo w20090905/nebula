@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+type VdkRequest {
+	?VdkSessionId VdkSession;
+	?VdkId ID;
+	?VdkParentId ID;
+	?VdkName Name;
+	?VdkImportance null;
+	?VdkExecutions null;
+	?VdkAbsImportance null;
+	?VdkAbsExecutions null;
+	?VdkAppImportance null;
+	?VdkAppExecutions null;
+	?VdkSqlId VdkSql;
+	?VdkSqlHashId null;
+	?VdkViewReqFlag null;
+	?VdkViewReqName Name;
+	?VdkViewReqId ID;
+	?VdkUserName Name;
+	?VdkCompressionId null;
+};
+

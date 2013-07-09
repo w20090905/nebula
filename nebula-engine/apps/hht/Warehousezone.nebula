@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("2")
+tx Warehousezone {
+	!Warehousezoneid ID;
+	Warehousezonecode Code;
+	Warehousezonename Name;
+	?Description;
+	Status;
+	?DateLastupdated Date;
+	Warehouseid Physicalwarehouse;
+};
+

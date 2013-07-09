@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Calcfactor {
+	!Calcfactorid ID;
+	?Calcfactorcode Code;
+	?Description;
+	?LanguageCode Lang;
+	?Returntype null;
+};
+

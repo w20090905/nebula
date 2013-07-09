@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type VdkStorageDevice {
+	?VdkId ID;
+	?VdkDeviceType null;
+	?VdkDeviceSize Size;
+	?VdkPercentAvail null;
+	?VdkDeviceRating Rating;
+	?VdkPhysicalLocation null;
+	?VdkParentId ID;
+};
+

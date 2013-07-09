@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+tx Reportdetail {
+	!Reportdetailid ID;
+	Reportdefineid Reportdefine;
+	Reportid Report;
+	Booksetid Bookset;
+	Orgid Organization;
+	?Coladata null;
+	?Colbdata null;
+	?Colcdata null;
+	?Colddata null;
+	?Coledata null;
+	?Colfdata null;
+	?Colgdata null;
+	?Colhdata null;
+	?Colidata null;
+	?Coljdata null;
+	Reportdefinedetailid Reportdefinedetail;
+	?LineNum Line;
+};
+

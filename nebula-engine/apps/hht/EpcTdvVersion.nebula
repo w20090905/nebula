@@ -1,0 +1,6 @@
+@Remarks("")
+@Refby("0")
+type EpcTdvVersion {
+	?VersionProduct null;
+};
+

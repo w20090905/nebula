@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("1")
+tx Clearrelation {
+	!Clearrelationid ID;
+	Clearrelationcode Code;
+	Cleartype null;
+	Clearmethod null;
+	Cleardate Date;
+	?Clearer null;
+	?Clearreason null;
+	DateLastupdated Date;
+	Orgid Organization;
+};
+

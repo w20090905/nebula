@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx EpcCliJob {
+	!RepUserId EpcCliRepUsers;
+	!JobId SmpVdjJob;
+	?JobCollectionId ID;
+	?JobInputFilename FileName;
+	?JobType null;
+	?JobStatus null;
+};
+

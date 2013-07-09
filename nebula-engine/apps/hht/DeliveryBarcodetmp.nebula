@@ -1,0 +1,33 @@
+@Remarks("")
+@Refby("0")
+type DeliveryBarcodetmp {
+	DeliveryBarcodetmpid ID;
+	?Orgid Organization;
+	?DeliveryId Delivery;
+	?Itemid Item;
+	?Warehouseid Physicalwarehouse;
+	?Arflag null;
+	?Inventoryflag null;
+	?Saleflag null;
+	?Expiredate Date;
+	?Manufacturedate Date;
+	?Baseqtyall null;
+	?Batchno null;
+	?QtyAll Quantity;
+	?Invstatus null;
+	?Locationcode Code;
+	?Lotno null;
+	?Invsummaryid Invsummary;
+	?Itemname Name;
+	?Warehousename Name;
+	?Baseumcode Code;
+	?Baseumname Name;
+	?Realumcode Code;
+	?Realumname Name;
+	?Brandname Name;
+	?Barcode Code;
+	?Itemcode Code;
+	?DeliveryDetailid DeliveryDetail;
+	?DeliveryQtyall null;
+};
+

@@ -4,34 +4,24 @@ type PaGoalrestriction {
 	@Remarks("Performance Goal Restriction")
 	!PaGoalrestrictionId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Goal Restriction Type")
 	Goalrestrictiontype Attr;
 	@Remarks("Performance Goal")
-	PaGoalId PaGoal;
+	PaGoal;
 	@Remarks("Identifies a Business Partner")
-	?CBpartnerId CBpartner;
+	?CBpartner;
 	@Remarks("Product, Service, Item")
-	?MProductId MProduct;
+	?MProduct;
 	@Remarks("Organizational entity within client")
-	?OrgId AdOrg;
+	?Org AdOrg;
 	@Remarks("Business Partner Group")
-	?CBpGroupId CBpGroup;
+	?CBpGroup;
 	@Remarks("Category of a Product")
-	?MProductCategoryId MProductCategory;
+	?MProductCategory;
 };
 

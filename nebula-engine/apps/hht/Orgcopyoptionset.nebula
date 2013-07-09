@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Orgcopyoptionset {
+	!Orgcopyoptionsetid ID;
+	Orgid Organization;
+	Orgtype null;
+	Optioncode Code;
+	Setflag null;
+	DateLastupdated Date;
+};
+

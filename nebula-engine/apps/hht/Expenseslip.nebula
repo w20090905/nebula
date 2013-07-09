@@ -1,0 +1,41 @@
+@Remarks("")
+@Refby("4")
+tx Expenseslip {
+	!Expenseslipid ID;
+	?Expenseslipcode Code;
+	Orgid Organization;
+	?Contactid Contact;
+	?Createdate Date;
+	?Comments Note;
+	?Maker null;
+	?Approvaltotalamount Amount;
+	?Applytotalamount Amount;
+	Status;
+	?DateLastupdated Date;
+	?Accountingyearid ID;
+	?Year null;
+	?Accperiodid Accountingperiod;
+	?Period null;
+	?Docdate Date;
+	?Gldate Date;
+	?Expensetype null;
+	?Relatedtrantype null;
+	?Relatedtranid ID;
+	?Relatedtrancode Code;
+	?Vendorid ID;
+	?Glaccountid Glaccount;
+	?Deptid Department;
+	?Expreason null;
+	?Dcdirection null;
+	?Ail null;
+	?IsOrg YesNo;
+	?Ownerorgid ID;
+	?Expensereasonid Expensereason;
+	?ReferenceNo Code;
+	?PaymentMethod null;
+	?Duedate Date;
+	?IsInvoiceArrived YesNo;
+	?InvoiceDate Date;
+	?Contactname Name;
+};
+

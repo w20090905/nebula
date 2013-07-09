@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Initialize {
+	!Initializeid ID;
+	?Orgid Organization;
+	?Userid Usr;
+	?Step null;
+	?DateLastupdated Date;
+};
+

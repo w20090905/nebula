@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("14")
+tx SmpVdjJob {
+	!JobId ID;
+	?JobName Name;
+	?Owner null;
+	?Description;
+	?AppName Name;
+	?TargetType Attr;
+	?Schedule null;
+	?SubmitTime null;
+	?IsFixit null;
+	?IsLib null;
+	?LastModBy null;
+	?LastModTime null;
+	?TimeZone Count;
+	?NumberTasks null;
+	?Incomplete null;
+	?OverridingNodeCreds null;/* 4E554C4C0A20 */
+};
+

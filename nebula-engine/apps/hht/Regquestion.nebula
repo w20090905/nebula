@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Regquestion {
+	!Questionid Question;
+	Globalpccode null;
+	Sortno SeqNo;
+	?IsOption YesNo;
+	?LineNum Line;
+	?DateLastupdated Date;
+};
+

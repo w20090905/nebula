@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Marketingplancategory {
+	!Marketingplancategoryid ID;
+	Marketingplanid Marketingplan;
+	Marketingplandetailid Marketingplandetail;
+	Categoryid Category;
+	Weight;
+	?Budgetamount Amount;
+	?SalesTarget null;
+	?Remark null;
+	?Confirmamount Amount;
+	?Stconfirmamount Amount;
+};
+

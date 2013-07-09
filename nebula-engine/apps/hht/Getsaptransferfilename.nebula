@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type Getsaptransferfilename {
+	?Filename;
+	Deptcode Code;
+	Transferid Transfer;
+	Dcode Code;
+	?Transfercode Code;
+	?DateLastupdated null;
+};
+

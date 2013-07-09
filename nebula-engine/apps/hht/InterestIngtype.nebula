@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("4")
+tx InterestIngtype {
+	!InterestIngtypeid ID;
+	InterestIngtypecode Code;
+	IsBottom YesNo;
+	Grade null;
+	?Parenttypeid InterestIngtype;
+	Orgid Organization;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Marketingplanexptypekpi {
+	!Marketingplanexptypekpiid ID;
+	Kpicode Code;
+	?Kpivalue String;
+	?Actualkpivalue String;
+	Marketingplanexptypeid Marketingplanexptype;
+	?Marketingplanid Marketingplan;
+	?Marketingplandetailid Marketingplandetail;
+};
+

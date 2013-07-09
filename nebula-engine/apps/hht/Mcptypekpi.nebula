@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Mcptypekpi {
+	!Mcptypekpiid ID;
+	Mcptypeid Mcptype;
+	Kpicode Code;
+	?Description;
+	?IsNeed YesNo;
+};
+

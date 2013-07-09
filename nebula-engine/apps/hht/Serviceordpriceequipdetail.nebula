@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+tx Serviceordpriceequipdetail {
+	!Ordpriceequipdetailid ID;
+	Serviceorderpricedetailid Serviceorderpricedetail;
+	Orderdetailid Orderdetail;
+	Orderid Ord;
+	?Device null;
+	?Counterid Counter;
+	?Currentvalue null;
+	Countergroupid Agreementcountergroup;
+	?Lotno null;
+	?Prevalue null;
+	?Deductvalue null;
+	?Specdeductvalue null;
+	?Scalar null;
+	?Price;
+	?Amount;
+};
+

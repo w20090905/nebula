@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtselleruploaddetail {
+	!Selleruploaddetailid ID;
+	?Selleruploadid Zhhtsellerupload;
+	?Itemserial null;
+	?Itemid Item;
+	?Itemcode Code;
+	?Itemname Name;
+	?Itemnameadd null;
+	?Receiveraddressid Receiveraddress;
+	?Receiveraddresscode Code;
+	?Receiveraddressname Name;
+	?Qty Quantity;
+	?Umcode Code;
+	?Purchaseprice Price;
+	?Replydeliverydatedetail null;
+	?DeliveryDatedetail null;
+	?Commentsdetail null;
+	?Inquirycodemeisai null;
+};
+

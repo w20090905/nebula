@@ -1,0 +1,29 @@
+@Remarks("")
+@Refby("0")
+tx Invbookjournal {
+	!Invbookjournalid ID;
+	?Booksetid Bookset;
+	?Periodid ID;
+	Orgid Organization;
+	?Invbooktype null;
+	Itemid Item;
+	Sliptype null;
+	?Slipid ID;
+	Slipno null;
+	Slipdetailid ID;
+	?Slipdate Date;
+	?Relatedorgid ID;
+	?SalesRep null;
+	Maker null;
+	?Comments Note;
+	?Debit null;
+	?Credit null;
+	?Price;
+	?Amount;
+	?Costamt Cost;
+	?Costprice Cost;
+	?InvoiceDqty Quantity;
+	Createdate Date;
+	Invbooksummaryid Invbooksummary;
+};
+

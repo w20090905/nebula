@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+tx Seasonparam {
+	!Seasonparamid ID;
+	?Itemid Item;
+	?Param1 null;
+	?Param2 null;
+	?Param3 null;
+	?Param4 null;
+	?Param5 null;
+	?Param6 null;
+	?Param7 null;
+	?Param8 null;
+	?Param9 null;
+	?Param10 null;
+	?Param11 null;
+	?Param12 null;
+	DateLastupdated Date;
+};
+

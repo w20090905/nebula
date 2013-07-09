@@ -1,14 +1,13 @@
 @Remarks("")
 @Refby("0")
 type AdChangeLogV {
-	AdSessionId AdSession;
-	AdChangeLogId AdChangeLog;
+	AdSessionId ID;
+	AdChangeLogId ID;
 	Tablename Name;
 	RecordId ID;
 	Columnname Name;
-	?OldValue String;
-	?NewValue String;
+	?OldValue Note;
+	?NewValue Note;
 	*Name;
-	Created null;
 };
 

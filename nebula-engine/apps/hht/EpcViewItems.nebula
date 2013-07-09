@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+type EpcViewItems {
+	?ViewId EpcView;
+	?ItemNumber null;
+	?ItemName Name;
+	?ItemOrder null;
+};
+

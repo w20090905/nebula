@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Wmpolicyallocate {
+	!Wmpolicyallocateid ID;
+	Orgid Organization;
+	Allocateto null;
+	?Transtype null;
+	?Wmgroup null;
+	Wmpolicyid Wmpolicy;
+	Wmpolicyallotype null;
+};
+

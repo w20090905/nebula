@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("1")
+tx Inspection {
+	!Inspectionid ID;
+	?Orgid Organization;
+	Receiptid Receipt;
+	Inspectioncode Code;
+	?Createdate Date;
+	?Inspector null;
+	?Status;
+};
+

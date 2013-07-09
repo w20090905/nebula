@@ -1,0 +1,11 @@
+@Remarks("List of all machines running an OMS towards this repository")
+@Refby("0")
+type SmpViewRunningOmsMachines {
+	@Remarks("Name of the machine running the OMS")
+	OmsMachine null;
+	@Remarks("Name of the region this OMS belongs to")
+	?Region null;
+	@Remarks("Data and time the OMS last confirmed it was still operational")
+	?LastChecked null;
+};
+

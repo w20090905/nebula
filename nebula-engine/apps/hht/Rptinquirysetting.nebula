@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("2")
+tx Rptinquirysetting {
+	!Rptinquirysettingid ID;
+	?Rptinquirysettingcode Code;
+	?Rptinquirysettingname Name;
+	?Userid Usr;
+	?Createdate Date;
+	?Ovalreportid Ovalreport;
+	?Contactid Contact;
+	?Scheduledovalreportid Scheduledovalreport;
+	?Jobschedulerid Jobscheduler;
+};
+

@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+type VmqSqlImportStats {
+	?DatabaseId VmqSqlItem;
+	?Sqlid VmqSqlItem;
+	?Name;
+	?Value String;
+};
+

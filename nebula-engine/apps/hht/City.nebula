@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+tx City {
+	!Cityid ID;
+	Citycode Code;
+	CountryCode Code;
+	?Regioncode Code;
+	LanguageCode Lang;
+	Cityname Name;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Parentcitycode Code;
+	?Responsecenterid Responsecenter;
+	?Lft null;
+	?Rgt null;
+	?Grade null;
+	?IsBottom YesNo;
+	?Parentcityid ID;
+};
+

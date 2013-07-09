@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type UsrmonitorBeforeImp {
+	Usrmonitorid Usrmonitor;
+	Userid Usr;
+	Logindate Date;
+	?Logoutdate Date;
+	DateLastupdated Date;
+};
+

@@ -1,0 +1,167 @@
+@Remarks("")
+@Refby("0")
+type EdiTwxpotmpErr {
+	@Remarks("キー")
+	Potmpid EdiPotmp;
+	@Remarks("処理区分")
+	?Dealkbn null;
+	@Remarks("処理年月日")
+	?Dealymd null;
+	@Remarks("処理時点")
+	?Dealtime null;
+	@Remarks("部門コード")
+	?Deptcode Code;
+	@Remarks("成約ﾀｲﾌﾟ")
+	?Contractype Attr;
+	@Remarks("責任者No")
+	?Employeecode Code;
+	@Remarks("仕入先ｺｰﾄﾞ")
+	?Sellercode Code;
+	@Remarks("出荷先ｺｰﾄﾞ")
+	?Receivercode Code;
+	@Remarks("注文日")
+	?Orderdate Date;
+	@Remarks("HHT管理番号")
+	?Hhtmanagecode Code;
+	@Remarks("原産国")
+	?ProductCountryCode Code;
+	@Remarks("仕向国")
+	?Purchasecountrycode Code;
+	@Remarks("通貨")
+	?Currencycode Code;
+	@Remarks("為替区分")
+	?Exchagetype Attr;
+	@Remarks("予約No.")
+	?Exchagedatecode Code;
+	@Remarks("為替レート")
+	?Zctrate Rate;
+	@Remarks("支払条件")
+	?PaymentTerm String;
+	@Remarks("L/C No.")
+	?Lcno null;
+	@Remarks("運送条件")
+	?Shipmentterm String;
+	@Remarks("運送条件ﾃｷｽﾄ")
+	?Shipmenttermtext Text;
+	@Remarks("運送方法")
+	?Shipmentmethod null;
+	@Remarks("レートタイプ")
+	?Ratetype Attr;
+	@Remarks("在庫認可No")
+	?Inventorycode Code;
+	@Remarks("計上基準区分")
+	?StandardType Attr;
+	@Remarks("ｵｰﾀﾞｰ特性")
+	?Orderproperty null;
+	@Remarks("備考")
+	?Comments Note;
+	@Remarks("据付/検収予定日")
+	?Retandrecpdate Date;
+	@Remarks("顧客注番")
+	?Customerpono null;
+	@Remarks("要求納期1")
+	?DeliveryDate1 null;
+	@Remarks("要求納期2")
+	?DeliveryDate2 null;
+	@Remarks("ｱｲﾃﾑｺｰﾄﾞ")
+	?Itemcode Code;
+	@Remarks("数量")
+	?Orderqty Quantity;
+	@Remarks("単位")
+	?Umcode Code;
+	@Remarks("末端単価")
+	?Endunitprice Price;
+	@Remarks("口銭率")
+	?Commissionrate Rate;
+	@Remarks("SAP評価ﾀｲﾌﾟ")
+	?Saplotno null;
+	@Remarks("SAPﾛｯﾄNo")
+	?Sapevalution null;
+	@Remarks("明細カテゴリ")
+	?Concategory null;
+	@Remarks("サイズ/寸法")
+	?Sizeproperty null;
+	@Remarks("ｱｲﾃﾑ特性1")
+	?Itemproperty1 null;
+	@Remarks("ｱｲﾃﾑ特性2")
+	?Itemproperty2 null;
+	@Remarks("Line Item No")
+	?Ctxtd01 null;
+	@Remarks("パーツNo")
+	?Ctxtd02 null;
+	@Remarks("Customer Ref")
+	?Ctxtd04 null;
+	@Remarks("出荷条件テキスト")
+	?Ctxtd07 null;
+	@Remarks("テキスト")
+	?Ctxtd10 null;
+	@Remarks("関連見積受付番号")
+	?Inquirycode Code;
+	@Remarks("作番（製作番号）")
+	?Ctxtm01 null;
+	@Remarks("品番")
+	?Hinban null;
+	@Remarks("工場コード")
+	?Kojocd null;
+	@Remarks("図番")
+	?Zuban String;
+	@Remarks("図歴")
+	?Zureki String;
+	@Remarks("作成区分")
+	?Createkbn YesNo;
+	@Remarks("営業所（取引先）コード")
+	?Eigyocd null;
+	@Remarks("企業コード")
+	?Kigyocd null;
+	@Remarks("送付No.")
+	?Sofuno null;
+	@Remarks("テスト区分")
+	?Testkbn null;
+	@Remarks("品名")
+	?Hinmei null;
+	@Remarks("仮価格区分")
+	?Karikakakukbn null;
+	@Remarks("納入指示区分")
+	?Nonyusijikbn null;
+	@Remarks("発注納期")
+	?Hachudate Date;
+	@Remarks("契約条件")
+	?Keiyakujoken null;
+	@Remarks("引渡条件")
+	?Hikiwatasijoken null;
+	@Remarks("部課コード")
+	?Bukacd null;
+	@Remarks("図面仕様書区分")
+	?Zumensiyosyo String;
+	@Remarks("枚数")
+	?Maisu null;
+	@Remarks("購買者（コード）")
+	?Koubaisyacdcode Code;
+	@Remarks("支給区分")
+	?Sikyukbn null;
+	@Remarks("検査区分")
+	?Kensakbn null;
+	@Remarks("常非区分")
+	?Jyohikbn null;
+	@Remarks("発注区分")
+	?Hachukbn null;
+	@Remarks("品種コード")
+	?Hinsyacd null;
+	@Remarks("専用欄")
+	?Senyoran null;
+	@Remarks("グループコード")
+	?Groupcd null;
+	@Remarks("出力先区分")
+	?Syuturyokukbn null;
+	@Remarks("排他年月日")
+	?Processingymd null;
+	@Remarks("排他時刻")
+	?Processingmoment null;
+	@Remarks("仕入単価")
+	?Unitpricepo Unit;
+	@Remarks("TWXSEQID")
+	?Twxseqid ID;
+	@Remarks("排他フラグ")
+	?Processflag null;
+};
+

@@ -2,54 +2,44 @@
 @Refby("0")
 type AdClientInfo {
 	@Remarks("Client/Tenant for this installation.")
-	!AdClientId AdClient;
+	!AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Payment Discount calculation does not include Taxes and Charges")
 	IsDiscountLineAmt YesNo;/* 'Y'  */
 	@Remarks("Accounting Calendar Name")
-	?CCalendarId CCalendar;
+	?CCalendar;
 	@Remarks("Primary rules for accounting")
-	?CAcctschema1Id CAcctschema;
+	?CAcctschema1 CAcctschema;
 	@Remarks("Standard Unit of Measure for Volume")
-	?CUomVolumeId CUom;
+	?CUomVolume CUom;
 	@Remarks("Standard Unit of Measure for Weight")
-	?CUomWeightId CUom;
+	?CUomWeight CUom;
 	@Remarks("Standard Unit of Measure for Length")
-	?CUomLengthId CUom;
+	?CUomLength CUom;
 	@Remarks("Standard Unit of Measure for Time")
-	?CUomTimeId CUom;
+	?CUomTime CUom;
 	@Remarks("Tree of the menu")
-	?AdTreeMenuId AdTree;
+	?AdTreeMenu AdTree;
 	@Remarks("Tree to determine organizational hierarchy")
-	?AdTreeOrgId AdTree;
+	?AdTreeOrg AdTree;
 	@Remarks("Tree to determine business partner hierarchy")
-	?AdTreeBpartnerId AdTree;
+	?AdTreeBpartner AdTree;
 	@Remarks("Tree to determine project hierarchy")
-	?AdTreeProjectId AdTree;
+	?AdTreeProject AdTree;
 	@Remarks("Tree to determine sales regional hierarchy")
-	?AdTreeSalesRegionId AdTree;
+	?AdTreeSalesRegion AdTree;
 	@Remarks("Tree to determine product hierarchy")
-	?AdTreeProductId AdTree;
+	?AdTreeProduct AdTree;
 	@Remarks("Product for Freight")
-	?MProductFreightId MProduct;
+	?MProductFreight MProduct;
 	@Remarks("Business Partner used for creating new Business Partners on the fly")
-	?CBpartnerCashTrxId CBpartner;
+	?CBpartnerCashTrx CBpartner;
 	@Remarks("Number of days to keep the log entries")
 	?KeepLogdays Count;
 	@Remarks("Tree to determine activity hierarchy")
-	?AdTreeActivityId AdTree;
+	?AdTreeActivity AdTree;
 	@Remarks("Tree to determine marketing campaign hierarchy")
-	?AdTreeCampaignId AdTree;
+	?AdTreeCampaign AdTree;
 };
 

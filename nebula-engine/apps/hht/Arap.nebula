@@ -1,0 +1,53 @@
+@Remarks("")
+@Refby("5")
+tx Arap {
+	!Arapid ID;
+	?Booksetid Bookset;
+	Accperiodid Accountingperiod;
+	Createdate Date;
+	?Duedate Date;
+	Orgid Organization;
+	Partnerid ID;
+	?SourceOrgid ID;
+	Araptype null;
+	Relatedtrantype null;
+	?Relatedtranid ID;
+	?Relatedtrandetailid ID;
+	?Relatedtrandate Date;
+	?Comments Note;
+	?InvoiceCode Code;
+	?SalesRep null;
+	?Itemid Item;
+	?Billingid Billing;
+	?Debitamount Amount;
+	?Debitamountall null;
+	?Creditamount Amount;
+	?Creditamountall null;
+	?BalanceAmount Amount;
+	?DateLastupdated Date;
+	?Glaccountid Glaccount;
+	?Accountingyearid ID;
+	?Relatedtrancode Code;
+	?Year null;
+	?Period null;
+	?DiscountDays1 null;
+	?Discount1 null;
+	?DiscountDays2 null;
+	?Discount2 null;
+	?DiscountDays3 null;
+	?Discount3 null;
+	?PaymentTermname Name;
+	?Creditflag null;
+	?Assignflag null;
+	?Baseondate Date;
+	?Zctcurrencycode Code;
+	?Zctdebitamount Amount;
+	?Zctdebitamountall null;
+	?Zctcreditamount Amount;
+	?Zctcreditamountall null;
+	?Zctprofitlossid ID;
+	?Zctbalanceamount Amount;
+	?Zctrate Rate;
+	?Deptid Department;
+};
+

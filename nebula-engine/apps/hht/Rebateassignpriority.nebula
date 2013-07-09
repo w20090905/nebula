@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Rebateassignpriority {
+	!Rebateassignpriorityid ID;
+	Orgid Organization;
+	Rebatetype null;
+	?Columnname Name;
+	?Sortno SeqNo;
+	?Ad null;
+};
+

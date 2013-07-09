@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("1")
+tx Vehicle {
+	!Vehicleid ID;
+	Orgid Organization;
+	Vehiclecode Code;
+	Vehicletype null;
+	Vehiclename Name;
+	?Vehicledesc null;
+	?Length;
+	?Width;
+	?Height;
+	Umcode1 null;
+	Volume;
+	Umcode2 null;
+	Umcode3 null;
+	Maxweight Weight;
+	?DateLastupdated Date;
+	?Fixedassetsid Fixedassets;
+	?Itemid Item;
+};
+

@@ -1,0 +1,27 @@
+@Remarks("")
+@Refby("0")
+tx Returninvalldetail {
+	!Returninvalldetailid ID;
+	Returndetailid Returndetail;
+	Itemid Item;
+	Invstatus null;
+	?Lotno null;
+	?Batchno null;
+	?Manufacture null;
+	?Manufacturedate Date;
+	?Expiredate Date;
+	?QtyAll Quantity;
+	?QtyFulfilled Quantity;
+	?Warehouseid Physicalwarehouse;
+	?Locationcode Code;
+	?Saleflag null;
+	?Inventoryflag null;
+	?Arflag null;
+	?Invalidflag null;
+	?Invsummaryid Invsummary;
+	?Returnid Returnslip;
+	?Baseqtyall null;
+	?Saplotno null;
+	?Sapevaluation null;
+};
+

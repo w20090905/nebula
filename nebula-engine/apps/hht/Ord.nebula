@@ -1,0 +1,181 @@
+@Remarks("")
+@Refby("34")
+tx Ord {
+	!Orderid ID;
+	Ownerorgid ID;
+	?Maker null;
+	?SourceOrderid ID;
+	?Createdate Date;
+	?Sellerid ID;
+	?Buyerid ID;
+	?Carrierid ID;
+	?ReferenceNo Code;
+	?Ordercode Code;
+	?Offerid Offer;
+	?Specialrequestcode null;
+	?Revision null;
+	?Originalorderid ID;
+	?Shipto null;
+	?Billto null;
+	?Shipfrom null;
+	?InvoiceTo null;
+	?Returnto null;
+	?Currencycode Code;
+	?PaymentTerm null;
+	?Shipmentterm null;
+	?PaymentMethod null;
+	?Shipmentmethod null;
+	?Startdate Date;
+	?Expiredate Date;
+	?DeliveryDate Date;
+	?Pricingdate Date;
+	?Status;
+	?Creditstatus null;
+	?TotalAmount Amount;
+	?TotalTaxAmount Amount;
+	?Fillprioritycode null;
+	?DateLastupdated Date;
+	?SalesRepid ID;
+	Ordertypeid Ordertype;
+	Invstatus null;
+	@Remarks("備考")
+	?Comments Note;
+	?Subtotalamt Amount;
+	?TotalDiscount Count;
+	?TotalDiscountamt Amount;
+	?Purcharseagent null;
+	?Purcharseordertypeid ID;
+	?Purchaseplanid Purchaseplan;
+	?TotalWeight Weight;
+	?Warehouseid Physicalwarehouse;
+	?PrintNum null;
+	?Creditcheckresult null;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Routeid Route;
+	?Portcode Code;
+	?Attr31 null;
+	?Attr32 null;
+	?Attr33 null;
+	?Attr34 null;
+	?Npprotectpolicy null;
+	?Customerpono null;
+	?Vendorsono null;
+	?Docdate Date;
+	?PaymentTermid PaymentTerm;
+	?Gldate Date;
+	?Duedate Date;
+	?Deviceid ID;
+	?Lotno null;
+	?Deviceposition null;
+	?SourceTrantype null;
+	?SourceTranid ID;
+	?SourceTrancode Code;
+	?Accountingyearid ID;
+	?Year null;
+	?Accperiodid Accountingperiod;
+	?Period null;
+	?Relatedtrantype null;
+	?Relatedtranid ID;
+	?Relatedtrancode Code;
+	?ExportTaskcode Code;
+	?Zcttotalamount Amount;
+	?Zctsubtotalamt Amount;
+	?SalesRep2id ID;
+	?Deptid Department;
+	?Accountid Orgaccount;
+	?Prepayamt Amount;
+	?Localprepayamt Amount;
+	?Attr21 null;
+	?Attr35 null;
+	?Attr5 null;
+	?Portfrom null;
+	?Portto null;
+	?Zctrate Rate;
+	?Rebateflag null;
+	?Prepayratio Ratio;
+	?Needmodify null;
+	?Podeptid ID;
+	?Powarehouseid ID;
+	?Uniteflag null;
+	?Attr6 null;
+	?Attr7 null;
+	?Attr8 null;
+	?Attr61 null;
+	?Attr62 null;
+	?Attr63 null;
+	?Attr36 null;
+	?Remitdate Date;
+	?Remitno null;
+	?Source null;/* 10 */
+	?Precontractcode Code;
+	?Venderanswerflag null;
+	?Sapbilltocode Code;
+	?Sapbilltoname Name;
+	@Remarks("得意先発注日付")
+	?Customerpurdate Date;
+	@Remarks("担当者")
+	?Employeeid Employee;
+	@Remarks("0:Not To EDI, 1:To EDI")
+	?EdiObFlg null;/* '1' */
+	@Remarks("在庫認可No．")
+	?Inventorycode Code;
+	@Remarks("相?采???供?商")
+	?Pursellerid ID;
+	?ProductCountry null;
+	?Purchasecountry null;
+	?Exchagetype Attr;
+	?Exchagedatecode Code;
+	?Lcno null;
+	?TaxType Attr;
+	?Sunstandardtype Attr;
+	?Retandrecpdate Date;
+	?Incoterms null;
+	?Bunnokubun null;
+	?Ratetype Attr;
+	?Transno null;
+	?Eltype Attr;
+	?TaxCode Code;
+	?TaxRate Rate;
+	?AutoDevgrflag null;
+	?Characteristic null;
+	?Dealstatus null;
+	@Remarks("出力者")
+	?Reportuser null;
+	@Remarks("出力flag")
+	?Reportflag null;/* 0 */
+	@Remarks("出力日")
+	?Reportdate Date;
+	@Remarks("発注コメント（カナ）")
+	?Ordcommentkn null;
+	@Remarks("納入要件（漢字）")
+	?Receiverdemand null;
+	@Remarks("納入要件（カナ）")
+	?Receiverdemandkj null;
+	?Reportlistuser null;
+	?Reportlistflag null;/* 0 */
+	?Reportlistdate Date;
+	@Remarks("発注コメント（漢字）")
+	?Ordcomment null;
+	?OldZctrate Rate;
+	?OldExchagedatecode Code;
+	?Rateupdateuserid ID;
+	?Rateupdatetime null;
+	@Remarks("作番")
+	?Ctxtm01 null;
+	?Chumonkbn null;
+	?Reportoutflg null;
+	@Remarks("入金日/支払日")
+	?Paydate Date;
+	@Remarks("訂正注文書出力者")
+	?Teiseireportuser null;
+	@Remarks("訂正注文書出力ﾌﾗｸﾞ")
+	?Teiseireportflag null;/* 0 */
+	@Remarks("訂正注文書出力日")
+	?Teiseireportdate Date;
+};
+

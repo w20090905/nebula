@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Jobhandlerconstraint {
+	!Jobhandlerconstraintid ID;
+	Constraintcode Code;
+	Constraintname Name;
+	Jobhandlercode Code;
+	?Comments Note;
+};
+

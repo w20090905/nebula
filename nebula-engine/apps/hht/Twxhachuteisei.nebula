@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+tx Twxhachuteisei {
+	!Hachuteiseiid ID;
+	?Torihikisakicd null;
+	?Jigyousyocd null;
+	?Souhuno null;
+	?Hattyuuno null;
+	?Teiseikasyocd null;
+	?Jyoukenncd null;
+	?Teiseimae null;
+	?Teiseigo null;
+	?Teiseibi null;
+	?PrintFlg null;
+	?Maker null;
+	?Createdate Date;
+	?DateLastupdated Date;
+};
+

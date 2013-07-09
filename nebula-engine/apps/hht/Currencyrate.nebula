@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+tx Currencyrate {
+	!Currencyrateid ID;
+	?Orgid Organization;
+	Currencycode1 null;
+	Currencycode2 null;
+	Ratetype Rate;
+	Inputtype null;
+	?Inputrate Rate;
+	?Inputrate2 null;
+	?Currencyrate Rate;
+	?Currencyrate2 null;
+	Ratedate Date;
+	Rateyear Rate;
+	Ratemonth Rate;
+	Rateday Rate;
+	?DateLastupdated Date;
+};
+

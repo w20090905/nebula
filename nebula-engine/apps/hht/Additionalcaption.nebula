@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Additionalcaption {
+	!Additionalcaptionid ID;
+	?Datacategory null;
+	Attrname Name;
+	?Attrtype null;
+	?Inuse null;
+	?Captionname Name;
+	?IsDict YesNo;
+	?Dicttype Attr;
+};
+

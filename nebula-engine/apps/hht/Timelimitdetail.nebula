@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Timelimitdetail {
+	!Timelimitdetailid ID;
+	Warrantyid Warranty;
+	Value null;
+	Umcode Code;
+	?Joinoperator null;
+	?Comments Note;
+};
+

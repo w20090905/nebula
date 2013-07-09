@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+type SmpViewVdjPrivJob {
+	JobId SmpVdjJob;
+	?JobName Name;
+	?Owner null;
+	?Description;
+	?TargetType Attr;
+	?IsFixit null;
+	?IsLib null;
+	?NumberTasks null;
+	?Incomplete null;
+	PrincipalName Name;
+	Privilege null;
+};
+

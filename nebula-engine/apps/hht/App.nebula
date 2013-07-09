@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx App {
+	!Appid ID;
+	?Appcode Code;
+	?Applicationname Name;
+	?Description;
+	?Firstcharactors null;
+	?IsSystem YesNo;
+	?Status;
+};
+

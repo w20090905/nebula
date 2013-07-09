@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("1")
+tx Pjpday {
+	!Pjpdetailid ID;
+	Pjpid Pjp;
+	Weekno SeqNo;
+	Dayno SeqNo;
+	?Areaid Businessarea;
+	?Router null;
+};
+

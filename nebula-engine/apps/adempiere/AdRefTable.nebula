@@ -2,23 +2,13 @@
 @Refby("0")
 type AdRefTable {
 	@Remarks("System Reference and Validation")
-	!AdReferenceId AdReference;
+	!AdReference;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("Database Table information")
-	AdTableId AdTable;
+	AdTable;
 	@Remarks("Unique identifier of a record")
 	AdKey AdColumn;
 	@Remarks("Column that will display")
@@ -26,9 +16,9 @@ type AdRefTable {
 	@Remarks("Displays Value column with the Display column")
 	IsValueDisplayed YesNo;/* 'N'  */
 	@Remarks("Fully qualified SQL WHERE clause")
-	?WhereClause String;
+	?WhereClause Note;
 	@Remarks("Fully qualified ORDER BY clause")
-	?OrderbyClause String;
+	?OrderbyClause Note;
 	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
 };

@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type VdkFunction {
+	?VdkId ID;
+	?VdkName Name;
+	?VdkParentId ID;
+	?VdkDatabaseId VdkDatabase;
+	?VdkOwnerName Name;
+};
+

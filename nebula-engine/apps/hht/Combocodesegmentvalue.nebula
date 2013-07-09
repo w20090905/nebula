@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Combocodesegmentvalue {
+	!ValueId ID;
+	Segmentid Combocodesegment;
+	?Value String;
+	?IsDefault YesNo;
+	?DateLastupdated Date;
+};
+

@@ -1,0 +1,26 @@
+@Remarks("")
+@Refby("5")
+tx Shipment {
+	!Shipmentid ID;
+	Orgid Organization;
+	?Shipmenttype null;
+	?Shipmentcode Code;
+	?Buyerid ID;
+	?Sellerid ID;
+	?Shipfrom null;
+	?Shipto null;
+	?Fromport null;
+	?Toport null;
+	?Shipmentmethod null;
+	?Carrier null;
+	?GrossWeight Weight;
+	?Netweight Weight;
+	?Weightumcode Code;
+	?Maker null;
+	?Status;
+	?Createdate Date;
+	?Shippingdate Date;
+	?DateLastupdated Date;
+	?Comments Note;
+};
+

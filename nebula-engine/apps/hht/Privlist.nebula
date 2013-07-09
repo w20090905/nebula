@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("5")
+tx Privlist {
+	!Privlistid ID;
+	Privlistcode Code;
+	?DateLastupdated Date;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("1")
+tx Industrytype {
+	!Industrytypeid ID;
+	?Industrytypecode Code;
+	?Accountcontrolgrade null;
+	?Grade1 null;
+	?Grade2 null;
+};
+

@@ -4,19 +4,9 @@ type SExpensetype {
 	@Remarks("Expense report type")
 	!SExpensetypeId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
 	@Remarks("Alphanumeric identifier of the entity")
@@ -26,10 +16,10 @@ type SExpensetype {
 	@Remarks("Is this invoiced?")
 	IsInvoiceD YesNo;/* 'Y'  */
 	@Remarks("Unit of Measure")
-	CUomId CUom;
+	CUom;
 	@Remarks("Category of a Product")
-	MProductCategoryId MProductCategory;
+	MProductCategory;
 	@Remarks("Tax Category")
-	CTaxCategoryId CTaxCategory;
+	CTaxCategory;
 };
 

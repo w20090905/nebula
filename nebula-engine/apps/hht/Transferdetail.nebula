@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("1")
+tx Transferdetail {
+	!Transferdetailid ID;
+	Transferid Transfer;
+	Itemid Item;
+	Invstatus null;
+	?Qty Quantity;
+	?Costprice Cost;
+	?Amount;
+	?Remark null;
+	?LineStatus Line;
+	?Toitemid ID;
+	?Umcode Code;
+	?Inbaseqty Quantity;
+	?Outbaseqty Quantity;
+	?Transfersuitid Transfersuit;
+};
+

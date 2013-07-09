@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("12")
+tx Responsecenter {
+	!Responsecenterid ID;
+	Responsecode Code;
+	Responsename Name;
+	?Description;
+	Mabooksetid ID;
+	Fabooksetid ID;
+	Responsetype Attr;
+	Profitcenterid ID;
+	Effectdate Date;
+	Expiredate Date;
+	Status;
+	DateLastupdated Date;
+};
+

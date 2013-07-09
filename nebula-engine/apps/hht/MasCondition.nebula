@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("0")
+type MasCondition {
+	?Name;
+	?Code null;
+};
+

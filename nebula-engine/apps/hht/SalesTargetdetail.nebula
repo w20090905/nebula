@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx SalesTargetdetail {
+	!SalesTargetdetailid ID;
+	SalesTargetid SalesTarget;
+	SalesTargethierarchyid SalesTargethierarchy;
+	Kpicode Code;
+	?Startdate Date;
+	?Weight;
+	?Amount;
+	?Adjustamount Amount;
+	Status;
+	Maker null;
+	Createdate Date;
+	DateLastupdated Date;
+};
+

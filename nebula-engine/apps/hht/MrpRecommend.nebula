@@ -1,0 +1,38 @@
+@Remarks("")
+@Refby("7")
+tx MrpRecommend {
+	!Sid ID;
+	MrpCode MrpInfo;
+	Itemid Item;
+	Snp null;
+	Moq null;
+	Orderqty Quantity;
+	Mrpqty Quantity;
+	Umcode Code;
+	Polimitdate Date;
+	Salercode null;
+	Status;
+	?Corderqty Quantity;
+	?Cacceptdate Date;
+	?AcceptDate Date;
+	?Supplyerid ID;
+	?Inventoryqty Quantity;
+	?Salepileqty Quantity;
+	?Buypileqty Quantity;
+	?Forcastqty Quantity;
+	?Safeqty Quantity;
+	?Contracttypeid Contracttype;
+	?Currencyid Globalcurrencycode;
+	?Zctrate Rate;
+	?Exchagedatecode Code;
+	?Inventorycode Code;
+	?Lcno null;
+	?PaymentMethodvalue null;
+	?Purchasecountry null;
+	?ProductCountry null;
+	?TaxCode Code;
+	?Sapevaluation null;
+	?Saplotno null;
+	?Source null;
+};
+

@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Posinfo {
+	!Posinfoid ID;
+	Poscode Code;
+	Orgid Organization;
+	?Address null;
+	?Vendor null;
+	?Vendortel null;
+};
+

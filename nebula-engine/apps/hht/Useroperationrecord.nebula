@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Useroperationrecord {
+	!Useroperationrecordid ID;
+	Userid Usr;
+	?Useroperationtype null;
+	Operationtime null;
+	?Operationpath Path;
+};
+

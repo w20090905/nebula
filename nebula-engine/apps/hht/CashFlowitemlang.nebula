@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx CashFlowitemlang {
+	!CashFlowitemlangid ID;
+	?CashFlowitemname Name;
+	CashFlowitemid CashFlowitem;
+	?LanguageCode Lang;
+};
+

@@ -1,0 +1,53 @@
+@Remarks("")
+@Refby("3")
+tx Voucherdetail {
+	!Voucherdetailid ID;
+	Voucherid Voucher;
+	Glaccountid Glaccount;
+	?Description;
+	?Currencycode Code;
+	?Exchangerate Rate;
+	?Dcflag null;
+	?Debitamount Amount;
+	?Creditamount Amount;
+	?Debitamountfore null;
+	?Creditamountfore null;
+	?IsSystem YesNo;
+	?Glaccountjournalid Glaccountjournal;
+	?Settletype null;
+	?Settleno null;
+	?Restrictionstatus null;
+	?Assitemstatus Attr;
+	?Settlementstatus Attr;
+	?Settledate Date;
+	?LineStatus Attr;
+	?Copstatus Attr;
+	?Coporgid ID;
+	?Copdeptid ID;
+	?Copemployeeid ID;
+	?LineNum Line;
+	?TaxRate Rate;
+	?Deptid Department;
+	?PaymentTermid PaymentTerm;
+	?PaymentMethod null;
+	?Orderid Ord;
+	?Ordercode Code;
+	?Itemid Item;
+	?Partnerid ID;
+	?TaxCode Code;
+	?Itemcode Code;
+	?Partnercode Code;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Attr31 null;
+	?Attr32 null;
+	?Responsecenterid Responsecenter;
+	?Maglaccountid ID;
+	?Favoucherdetailid ID;
+	?Activityid Activity;
+};
+

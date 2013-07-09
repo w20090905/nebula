@@ -1,0 +1,26 @@
+@Remarks("")
+@Refby("9")
+tx SalesOpportunity {
+	!Opportunityid ID;
+	Orgid Organization;
+	Ownerorgid Organization;
+	Opportunitycode Code;
+	Opportunityname Name;
+	Createdate Date;
+	Closedate Date;
+	?Winlosereason null;
+	?Description;
+	Maker null;
+	DateLastupdated Date;
+	Contactid Contact;
+	SalesMethodid SalesMethod;
+	?SalesStageid SalesStage;
+	?Status;
+	Revision null;
+	?Originalopportunityid SalesOpportunity;
+	?Opportunitywinlosereason null;
+	?Customerid ID;
+	?Startdate Date;
+	?Enddate Date;
+};
+

@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx Rptinquiryexecutioninfo {
+	!Rptinquiryexecutioninfoid ID;
+	?DisplayString null;
+	?Sqlstring null;
+	?Groupstring null;
+};
+

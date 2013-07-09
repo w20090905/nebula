@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("5")
+tx Checkelement {
+	!Checkelementid ID;
+	Orgid Organization;
+	?Stepno SeqNo;
+	?Checkelementtype null;
+	Actiontype null;
+	?IsSystem YesNo;
+	?Refclass null;
+};
+

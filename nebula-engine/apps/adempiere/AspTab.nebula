@@ -2,30 +2,20 @@
 @Refby("0")
 type AspTab {
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;/* NULL   */
+	AdClientId ID;/* NULL   */
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;/* NULL   */
+	AdOrgId ID;/* NULL   */
 	@Remarks("Tab within a Window")
-	!AdTabId AdTab;
+	!AdTab;
 	@Remarks("Data entry or display window")
-	!AdWindowId AdWindow;
+	!AdWindow;
 	@Remarks("ASP Level")
-	!AspLevelId AspLevel;
+	!AspLevel;
 	@Remarks("ASP Status")
 	AspStatus Attr;/* 'U'  */
 	@Remarks("AllFields")
-	?Allfields null;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
+	?Allfields YesNo;/* 'Y'  */
 	@Remarks("Process Now")
 	?Processing YesNo;
-	@Remarks("Date this record was updated")
-	Updated null;
-	@Remarks("User who updated this records")
-	Updatedby null;
 };
 

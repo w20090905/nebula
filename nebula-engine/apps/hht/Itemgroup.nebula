@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("14")
+tx Itemgroup {
+	!Itemgroupid ID;
+	Itemgroupcode Code;
+	Itemgroupname Name;
+	?Description;
+	?IsSystem YesNo;
+};
+

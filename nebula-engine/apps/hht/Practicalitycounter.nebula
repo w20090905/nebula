@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("1")
+tx Practicalitycounter {
+	!Practicalitycounterid ID;
+	Counterid Counter;
+	Purpose null;
+	?Readinitvalue null;
+	?Copyinitvalue null;
+	Status;
+	Createdate Date;
+	Practicalityid Practicality;
+};
+

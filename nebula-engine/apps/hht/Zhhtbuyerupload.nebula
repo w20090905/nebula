@@ -1,0 +1,41 @@
+@Remarks("")
+@Refby("1")
+tx Zhhtbuyerupload {
+	!Buyeruploadid ID;
+	?Inquirycode Code;
+	?Buyerid ID;
+	?Orgid Organization;
+	?Buyercode Code;
+	?Buyername Name;
+	?Inquirydate Date;
+	?Limitdate Date;
+	?DeliveryDate Date;
+	?Sellerid ID;
+	?Sellercode Code;
+	?Sellername Name;
+	?PaymentTermid PaymentTerm;
+	?PaymentTermname Name;
+	?Shipmenttermid ID;
+	?Shipmenttermname Name;
+	?Shipmentmethodid ID;
+	?Shipmentmethodname Name;
+	?Shipfrom null;
+	?Shipto null;
+	?Comments Note;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Source null;
+	?Status;
+	?Currencycode Code;
+	@Remarks("作番")
+	?Ctxtm01 null;
+	?Torihikicd null;
+	?Kigyocd null;
+	?Kojocd null;
+	?Yuukodd null;
+	?Busu null;
+	?Siirebusu null;
+	?Yuukomd null;
+	?Groupcd null;
+};
+

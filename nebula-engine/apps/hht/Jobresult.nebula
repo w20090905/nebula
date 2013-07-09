@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("2")
+tx Jobresult {
+	!Jobresultid ID;
+	Jobschedulerid Jobscheduler;
+	?Begintime null;
+	?Endtime Date;
+	?Jobduration null;
+	?Jobmessage null;
+	?Status;
+	?DateLastupdated Date;
+	?Attr101 null;
+	?Attr102 null;
+	?Attr103 null;
+	?Attr104 null;
+	?Attr405 null;
+};
+

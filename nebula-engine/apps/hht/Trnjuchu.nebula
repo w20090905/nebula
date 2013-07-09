@@ -1,0 +1,108 @@
+@Remarks("")
+@Refby("0")
+tx Trnjuchu {
+	!Seqid Twxmitumoriiraiumhistroy;
+	Activekbn null;/* ('1')  */
+	Inoutkbn null;
+	Editkbn null;/* ('0')  */
+	Createdate null;/* (CURRENT_TIMESTAMP)  */
+	Updatedate null;/* (CURRENT_TIMESTAMP)  */
+	Disposekbn null;
+	?Deptcd null;
+	?Contractcd null;
+	?Contracttype Attr;
+	?Employeecode Code;
+	?Orderno null;
+	?Sellercode Code;
+	?Ordertype Attr;
+	?Buyercode Code;
+	?Receivercode Code;
+	?Orderdate Date;
+	?Hhtmanagecode Code;
+	?Customerorderdate Date;
+	?ProductCountryCd null;
+	?Purchasecountrycd null;
+	?Currencycd null;
+	?Exchagetype Attr;
+	?Exchagedatecode Code;
+	?Zctrate Rate;
+	?PaymentTerm String;
+	?Lcno null;
+	?Shipmentterm String;
+	?Shipmenttermtext Text;
+	?Shipmentmethod null;
+	?Priority null;
+	?Transno null;
+	?Eltype Attr;
+	?Ratetype Attr;
+	?TaxCode Code;
+	?Inventorycode Code;
+	?StandardType Attr;
+	?Bunnokubun null;
+	?Orderproperty null;
+	?Comments Note;
+	?Retandrecpdate Date;
+	?LineNo null;
+	?Customerodrno null;
+	?RequestDate1 null;
+	?RequestDate2 null;
+	?Itemcode Code;
+	?Orderqty Quantity;
+	?Umcode Code;
+	?Unitprice Unit;
+	?Endunitprice Price;
+	?Commisionrate Rate;
+	?Saplotno null;
+	?Sapevalution null;
+	?Eartype Attr;
+	?OtherCode Code;
+	?Concategory null;
+	?Sizeproperty null;
+	?Itemproperty1 null;
+	?Itemproperty2 null;
+	?Customerhinban null;
+	?Edicustomername Name;
+	?Edisellername Name;
+	?TextType1 Text;
+	?TextType2 Text;
+	?Ctxtm01 null;
+	?Ctxtm02 null;
+	?Ctxtm03 null;
+	?Ctxtm04 null;
+	?Ctxtm05 null;
+	?Ctxtm06 null;
+	?Ctxtm07 null;
+	?Ctxtm08 null;
+	?Ctxtm09 null;
+	?Ctxtm10 null;
+	?Ctxtm11 null;
+	?Ctxtm12 null;
+	?Ctxtm13 null;
+	?Ctxtm14 null;
+	?Ctxtm15 null;
+	?Ctxtm16 null;
+	?Ctxtm17 null;
+	?Ctxtd01 null;
+	?Ctxtd02 null;
+	?Ctxtd03 null;
+	?Ctxtd04 null;
+	?Ctxtd05 null;
+	?Ctxtd06 null;
+	?Ctxtd07 null;
+	?Ctxtd08 null;
+	?Ctxtd09 null;
+	?Ctxtd10 null;
+	?Ctxtd11 null;
+	?Ctxtd12 null;
+	?Ctxtd13 null;
+	?Ctxtd14 null;
+	?Ctxtd15 null;
+	?Ctxtd16 null;
+	?Ctxtd17 null;
+	?Gamenshorikbn null;/* 2827302729202020202D2D3F3F3F3F3F3F0A20 */
+	?Filekbn null;/* 2827302729202020202D2D3F3F3F3F3F3F3F0A20 */
+	?Sendkbn null;/* 2827302729202020202D2D3F3F3F3F3F0A20 */
+	?Messageid Message;
+	?Orgid Organization;
+};
+

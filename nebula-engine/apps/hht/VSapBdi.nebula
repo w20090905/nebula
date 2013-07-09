@@ -1,0 +1,36 @@
+@Remarks("")
+@Refby("0")
+type VSapBdi {
+	?Bdi001DataType Attr;
+	?Bdi002TkonnEx null;
+	?Bdi003TrcontItem null;
+	?Bdi004TrcontSubitem null;
+	?Bdi005Vendor null;
+	Bdi006PurchOrg null;
+	?Bdi007PurGroup null;
+	?Bdi008Ref1 null;
+	?Bdi009DocDate null;
+	?Bdi010DelivDate null;
+	?Bdi011DelDatcat null;
+	?Bdi012Currency null;
+	?Bdi013CurrencyIsO null;
+	?Bdi014ExchRateP null;
+	?Bdi015ExchRateV null;
+	?Bdi016ExchgRate null;
+	?Bdi017Pmnttrms null;
+	?Bdi018PaymTerm String;
+	?Bdi019PriceDate null;
+	?Bdi020Incoterms1 null;
+	?Bdi021Incoterms2 null;
+	?Bdi022QuotDate null;
+	?Bdi023ReqDateH null;
+	?Bdi024DateType Attr;
+	?Bdi025Incoterms1Sd null;
+	?Bdi026Incoterms2Sd null;
+	?Bdi027PmnttrmsSd null;
+	?Bdi028PaymTermSd null;
+	?Bdi029PaymethodeSd null;
+	?Bdi030Posplit null;
+	Returnid Returnslip;
+};
+

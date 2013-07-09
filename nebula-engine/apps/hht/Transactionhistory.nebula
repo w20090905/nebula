@@ -1,0 +1,37 @@
+@Remarks("")
+@Refby("0")
+tx Transactionhistory {
+	!Transactionhistoryid ID;
+	?Createdate Date;
+	?Orgid Organization;
+	?Orgcode Code;
+	?Orgname Name;
+	?Partnerid ID;
+	?Partnercode Code;
+	?Partnername Name;
+	?Partnergroupcode Code;
+	?Partnergroupname Name;
+	Itemid Item;
+	?Orgitemcode Code;
+	?Coreorgitemcode Code;
+	?Itemname Name;
+	?Itemdescription Description;
+	?Spec null;
+	?Lotno null;
+	?Transactiondate Date;
+	?Transactioncode Code;
+	?Qty Quantity;
+	?Price;
+	?Amount;
+	?TaxRate Rate;
+	?TaxAmount Amount;
+	?Pretaxprice Price;
+	?Pretaxamount Amount;
+	?SalesRepname Name;
+	?Reserved1 null;
+	?Reserved2 null;
+	?Reserved3 null;
+	?Reserved4 null;
+	Flag null;
+};
+

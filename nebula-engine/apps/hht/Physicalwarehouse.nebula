@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("68")
+tx Physicalwarehouse {
+	!Warehouseid ID;
+	Orgid Organization;
+	Warehousecode Code;
+	Warehousename Name;
+	?Warehousedesc null;
+	Addressid Address;
+	?Length;
+	?Width;
+	?Height;
+	?Umcode1 null;
+	?Volume;
+	?Umcode2 null;
+	Status;
+	?DateLastupdated Date;
+	?Avgtemperature null;
+	?Avghumidity null;
+	?Locationadmin null;
+};
+

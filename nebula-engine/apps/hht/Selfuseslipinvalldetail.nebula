@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("0")
+type Selfuseslipinvalldetail {
+	!Selfuseslipinvalldetail null;
+	Selfuseslipdetailid Selfuseslipdetail;
+	?Selfuseslipid Selfuseslip;
+	Invsummaryid Invsummary;
+	?Warehouseid Physicalwarehouse;
+	?Locationcode Code;
+	Itemid Item;
+	Invstatus null;
+	?Lotno null;
+	?Batchno null;
+	?Alldate Date;
+	?QtyAll Quantity;
+	QtyPicking Quantity;
+	?QtyPicked Quantity;
+	?Manufacturedate Date;
+	?Expiredate Date;
+	?Baseqtyall null;
+	?QtyConfirmed Quantity;
+};
+

@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("3")
+tx Kpitargetplan {
+	!Kpitargetplanid ID;
+	Ktpcode Code;
+	Orgid Organization;
+	Maker null;
+	?Year null;
+	?Description;
+	SalesPlantypeid SalesPlantype;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Status;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr21 null;
+	?Attr22 null;
+	?Attr11 null;
+	?Attr12 null;
+};
+

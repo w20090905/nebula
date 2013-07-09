@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type SmpVtdHistoricalLocation {
+	TargetId ID;
+	?Username Name;
+	?Password null;
+	?Service null;
+	PrincipalId ID;
+	?LastModified null;
+	IsRepository null;
+};
+

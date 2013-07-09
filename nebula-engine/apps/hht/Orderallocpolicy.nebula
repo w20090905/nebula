@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type Orderallocpolicy {
+	!Orderallocpolicyid ID;
+	?Orderallocpolicycode Code;
+	?Name;
+	?LanguageCode Lang;
+	?Description;
+	?Commences null;
+};
+

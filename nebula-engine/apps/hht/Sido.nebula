@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+type Sido {
+	?Doslipcode Code;
+	?Currencycode Code;
+	?Flag null;
+	?TotalAmount Amount;
+};
+

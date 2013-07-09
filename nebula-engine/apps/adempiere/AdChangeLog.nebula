@@ -4,35 +4,25 @@ type AdChangeLog {
 	@Remarks("Log of data changes")
 	!AdChangeLogId ID;
 	@Remarks("User Session Online or Web")
-	!AdSessionId AdSession;
+	!AdSession;
 	@Remarks("Database Table information")
-	!AdTableId AdTable;
+	!AdTable;
 	@Remarks("Column in the table")
-	!AdColumnId AdColumn;
+	!AdColumn;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Direct internal record ID")
 	RecordId ID;
 	@Remarks("The old file data")
-	?OldValue String;
+	?OldValue Note;
 	@Remarks("New field value")
-	?NewValue String;
+	?NewValue Note;
 	@Remarks("Undo")
-	?Undo null;
+	?Undo YesNo;
 	@Remarks("Redo")
-	?Redo null;
+	?Redo YesNo;
 	@Remarks("The change is a customization of the data dictionary and can be applied after Migration")
 	IsCustomization YesNo;/* 'N'  */
 	@Remarks("Name of the transaction")
@@ -40,6 +30,6 @@ type AdChangeLog {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Type of Event in Change Log")
-	?EventChangeLog null;
+	?EventChangeLog YesNo;
 };
 

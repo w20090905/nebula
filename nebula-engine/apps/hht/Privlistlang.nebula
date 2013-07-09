@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Privlistlang {
+	!Privlistlangid ID;
+	Privlistid Privlist;
+	LanguageCode Lang;
+	?Prln null;
+	?Prld null;
+};
+

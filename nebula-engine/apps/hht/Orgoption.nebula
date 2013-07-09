@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx Orgoption {
+	!Orgoptionid ID;
+	Orgid Organization;
+	Optiontype Attr;
+	Optionname Name;
+	?Optionvalue String;
+	?Defaultvalue String;
+	?Rw null;
+	IsRequired YesNo;
+	?DateLastupdated Date;
+	?Optionlevel null;
+	Optionvaluetype null;
+	?Descriptions Description;
+};
+

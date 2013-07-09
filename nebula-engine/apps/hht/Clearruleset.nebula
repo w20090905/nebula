@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Clearruleset {
+	!Clearrulesetid ID;
+	Orgid Organization;
+	Setflag null;
+	?Param1 null;
+	?Param2 null;
+	DateLastupdated Date;
+	?Clearrulecode Code;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Itemmap {
+	!Itemmapid ID;
+	SourceOrgid ID;
+	SourceItemid ID;
+	Targetorgid ID;
+	Targetitemid ID;
+	Factor null;
+	Factor2 null;
+};
+

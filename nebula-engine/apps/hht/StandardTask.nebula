@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("3")
+tx StandardTask {
+	!StandardTaskid ID;
+	Orgid Organization;
+	StandardTaskcode Code;
+	StandardTaskname Name;
+	StandardTasktype Attr;
+	Needhours null;
+	?Grade null;
+	?Comments Note;
+	Status;
+	DateLastupdated Date;
+	?Attr1 null;
+};
+

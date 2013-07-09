@@ -1,0 +1,23 @@
+@Remarks("List of all pending operations in the queue")
+@Refby("0")
+type SmpViewOperationQueue {
+	@Remarks("Internal repository ID of the object")
+	ObjectId ID;
+	@Remarks("Subsystem which has generated this operation")
+	Subsystem null;
+	@Remarks("Type of operation for this subsystem")
+	OperationType Attr;
+	@Remarks("Name of the node which generated this operation")
+	NodeName Name;
+	@Remarks("Name of the service responsible for this operation")
+	TargetName Name;
+	@Remarks("Type of service responsible for this operation")
+	TargetType Attr;
+	@Remarks("Translated name for the target type")
+	?TargetNlsType Attr;
+	@Remarks("Name of the administrator owning the object")
+	AdministratorName Name;
+	@Remarks("Name of the OMS currently working on this")
+	?OmsMachine null;
+};
+

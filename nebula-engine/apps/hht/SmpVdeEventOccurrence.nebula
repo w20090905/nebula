@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("2")
+tx SmpVdeEventOccurrence {
+	!EventOccurrenceId ID;
+	?EventId ID;
+	?TargetName Name;
+	?TargetType Attr;
+	?NodeName Name;
+	?Status;
+	?OccurDate Date;
+	?Timezone Count;
+	?Severity null;
+	?Assignee null;
+	?Markedfordelete null;/* 300A */
+};
+

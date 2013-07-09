@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Dailysettleoption {
+	!Dailysettleoptionid ID;
+	Optioncode Code;
+	Orgid Organization;
+	Needflag null;
+	?Comments Note;
+	?Para1 null;
+	?Para2 null;
+	?DateLastupdated Date;
+};
+

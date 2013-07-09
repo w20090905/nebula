@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+tx Wmpickingtemp {
+	!Wmpickingtempid ID;
+	?Invsummaryid Invsummary;
+	?Lotno null;
+	?Locationno null;
+	?Batchno null;
+	?Invstatus null;
+	?Orgid Organization;
+	?Warehouseid Physicalwarehouse;
+	?Itemid Item;
+	?Seriousno null;
+	?Availableqty Quantity;
+	?Allqty Quantity;
+	?Qty Quantity;
+	?Userid Usr;
+	?Groupid Twxgroupm;
+};
+

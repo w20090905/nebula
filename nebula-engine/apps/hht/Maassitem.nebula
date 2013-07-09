@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Maassitem {
+	!Maassitemid ID;
+	Mabooksetid ID;
+	Assistantitemid Assistantitem;
+	DateLastupdated Date;
+	?IsMust YesNo;
+	?IsCompletely YesNo;
+};
+

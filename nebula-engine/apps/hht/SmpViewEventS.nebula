@@ -1,0 +1,24 @@
+@Remarks("List of all events known in the repository")
+@Refby("0")
+type SmpViewEventS {
+	@Remarks("Internal ID of this event")
+	EventId ID;
+	@Remarks("Name of this event")
+	?EventName Name;
+	@Remarks("Administrator who owns this event")
+	?AdministratorName Name;
+	?Description;
+	@Remarks("Type of service this event is meant for")
+	?TargetType Attr;
+	@Remarks("Translated name for the target type")
+	?TargetNlsType Attr;
+	@Remarks("Boolean value: Is this a library event?")
+	?LibraryEvent null;
+	@Remarks("ID of the fixit job associated with this event")
+	?FixitJobId ID;
+	@Remarks("Boolean value: Is this event an unsolicited event?")
+	?Unsolicited null;
+	@Remarks("Boolean value: Send an SNMP notification trap?")
+	?SnmpTrap null;
+};
+

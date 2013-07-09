@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Fausedept {
+	!Fausedeptid ID;
+	Fixedassetsid Fixedassets;
+	Fausedeptcode Code;
+	Deptid Department;
+	?Usagerate Rate;
+	?Employeeid Employee;
+	DateLastupdated Date;
+};
+

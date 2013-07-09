@@ -1,0 +1,28 @@
+@Remarks("")
+@Refby("4")
+tx Bom {
+	!Bomid ID;
+	Orgid Organization;
+	?Itemid Item;
+	Bomtype null;
+	?Umcode Code;
+	?Qty Quantity;
+	IsAutoPack YesNo;
+	IsAutoUnpack YesNo;
+	?Createdate Date;
+	?Maker null;
+	Revision null;
+	?IsPlanbom YesNo;
+	DateLastupdated Date;
+	Status;
+	?IsChecked YesNo;
+	?Groupname Name;
+	?Effectdate Date;
+	?Expiredate Date;
+	?PricePolicy Price;
+	?Price;
+	?Setcode Code;
+	?Setname Name;
+	?Bomsalestype null;
+};
+

@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("2")
+tx Marketingagreementperiod {
+	!Marketingagreementperiodid ID;
+	?Accyearid Accountingyear;
+	?Accperiodid Accountingperiod;
+	?Budgetyear null;
+	Periodno SeqNo;
+	?Description;
+	?Budgetamount Amount;
+	?Voucherid Voucher;
+	?Vouchercode Code;
+	?Status;
+	Marketingagreementid Marketingagreement;
+	?Gldate Date;
+};
+

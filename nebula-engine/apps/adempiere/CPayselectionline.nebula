@@ -4,21 +4,11 @@ tx CPayselectionline {
 	@Remarks("Payment Selection Line")
 	!CPayselectionlineId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Payment Selection")
-	CPayselectionId CPayselection;
+	CPayselection;
 	@Remarks("Unique line for this document")
 	Line;
 	@Remarks("Optional short description of the record")
@@ -28,13 +18,13 @@ tx CPayselectionline {
 	@Remarks("This is a manual process")
 	IsManual YesNo;/* 'Y'  */
 	@Remarks("Invoice Identifier")
-	CInvoiceId CInvoice;
+	CInvoice;
 	@Remarks("Amount being paid")
 	Payamt Amount;/* 0  */
 	@Remarks("Difference Amount")
 	Differenceamt Amount;/* 0  */
 	@Remarks("Payment Selection Check")
-	?CPayselectioncheckId CPayselectioncheck;
+	?CPayselectioncheck;
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("Calculated amount of discount")

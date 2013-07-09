@@ -1,0 +1,120 @@
+@Remarks("")
+@Refby("9")
+tx Receipt {
+	!Receiptid ID;
+	Orgid Organization;
+	Shipfrom null;
+	?Sellerid ID;
+	?Buyerid ID;
+	?Billto null;
+	?Carrier null;
+	?Needinspection null;
+	Receipttype null;
+	?Receiptcode Code;
+	?Receivedate Date;
+	Maker null;
+	Relatedtrantype null;
+	?Relatedtrancode Code;
+	?Relatedtranid ID;
+	?Refrenceno null;
+	?Shipmentterm null;
+	?Shipmentmethod null;
+	?PaymentTerm null;
+	?PaymentMethod null;
+	?Fromportcode Code;
+	?Toportcode Code;
+	?TotalAmount Amount;
+	?Pretaxamount Amount;
+	?TaxAmount Amount;
+	?Numberofcontainers null;
+	?Status;
+	?Createdate Date;
+	?Comments Note;
+	?Revision null;
+	?Originalreceiptid ID;
+	Shipto null;
+	?Relatedtrandate Date;
+	?Currencycode Code;
+	?DateLastupdated null;
+	?Ordertypeid Ordertype;
+	?PrintNum null;
+	?Warehouseid Physicalwarehouse;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Receiptreason null;
+	?Accountingyearid ID;
+	?Year null;
+	?Accperiodid Accountingperiod;
+	?Period null;
+	?Docdate Date;
+	?Gldate Date;
+	?Duedate Date;
+	?DeliveryNo null;
+	?Zctapportionfinished String;
+	?ExportTaskcode Code;
+	?Shiptoreceiptcode Code;
+	?Shiptopocode Code;
+	?Sccode Code;
+	?Billtopocode Code;
+	?Deptid Department;
+	?Allocationstatus null;
+	?TotalLocalamount Amount;
+	?Zctrate Rate;
+	?Sapordertype null;
+	@Remarks("担当者")
+	?Employeeid Employee;
+	@Remarks("購買起算日")
+	?Edistartdate Date;
+	@Remarks("入庫No")
+	?Invrelatedno null;
+	@Remarks("出荷日/出港日")
+	?Edideliverydate Date;
+	@Remarks("伝票日付")
+	?Edidocdate Date;
+	@Remarks("在庫認可No．")
+	?Inventorycode Code;
+	@Remarks("送案No")
+	?Relatedno null;
+	?Intransitflag null;
+	?Expamount Amount;
+	?Hhtdoflag null;
+	?Hhtdocode Code;
+	?Inputinvoiceno null;
+	?Portcode Code;
+	?Portcodefrom null;
+	?Portcodeto null;
+	?TotalTaxEdamount Amount;
+	?TotalLocalnettaxedamount Amount;
+	?Contractid Contract;
+	?Abroadunboatflag null;
+	?Customerarrivalflag null;
+	?Tradekeijyodata null;
+	?Tradearrivedate Date;
+	?Doeta null;
+	?Ordtokusei null;
+	?Abroadunboatymd null;
+	?Intransitymd null;
+	?Dealstatus null;
+	@Remarks("出力flag")
+	?Reportflag null;/* 0 */
+	@Remarks("出力日")
+	?Reportdate Date;
+	@Remarks("出力者")
+	?Reportuser null;
+	?Exchagetype Attr;
+	?Exchagedatecode Code;
+	?OldZctrate Rate;
+	?OldExchagedatecode Code;
+	?Rateupdateuserid ID;
+	?Rateupdatetime null;
+	?OFlg null;
+	?Fxchangeflg null;
+	Saptransmitstatus null;/* 1  */
+	?Sapresulttreattime null;
+	?Wpdlcode Code;
+};
+

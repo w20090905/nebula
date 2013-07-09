@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Locationbinding {
+	!Id Locationrelation;
+	Wmgroup null;
+	Locationbindingtype null;
+	?Startlocationcode Code;
+	?Endlocationcode Code;
+	?Remarks null;
+	Warehouseid Physicalwarehouse;
+	?Warehousezoneid Warehousezone;
+};
+

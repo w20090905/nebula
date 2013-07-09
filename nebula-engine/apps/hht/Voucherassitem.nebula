@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx Voucherassitem {
+	!Voucherassitemid ID;
+	Voucherid Voucher;
+	Voucherdetailid Voucherdetail;
+	Assistantitemid Assistantitem;
+	?Assitemjournalid Assitemjournal;
+	?Assistantitemvalue null;
+	?Description;
+	?Assistantitemamount Amount;
+	?Assistantitemamountfore null;
+	Dcflag null;
+	?Responsecenterid Responsecenter;
+};
+

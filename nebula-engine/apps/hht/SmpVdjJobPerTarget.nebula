@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("0")
+tx SmpVdjJobPerTarget {
+	!JobId SmpVdjJob;
+	!TargetName Name;
+	?JobName Name;
+	?TargetType Attr;
+	?NodeName Name;
+	?DeliverTime null;
+	?ExecNum null;
+	?StartTime null;
+	?FinishTime null;
+	?NextExecTime null;
+	?OccurTime null;
+	?TimeZone Count;
+	?Status;
+	?Parameters null;
+	?LoginUsername Name;
+	?LoginPassword Password;
+};
+

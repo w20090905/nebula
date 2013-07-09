@@ -4,23 +4,13 @@ type AdPackageExp {
 	@Remarks("AD_Package_Exp_ID")
 	!AdPackageExpId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'                    */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE                */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE                */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("AD_Package_Type")
 	?AdPackageType Attr;
 	@Remarks("Electronic Mail Address")
-	Email EMail;
+	EMail;
 	@Remarks("Instructions")
 	Instructions null;
 	@Remarks("Alphanumeric identifier of the entity")
@@ -36,9 +26,9 @@ type AdPackageExp {
 	@Remarks("Process Now")
 	Processing YesNo;
 	@Remarks("Package Version")
-	PkVersion null;
+	PkVersion Description;
 	@Remarks("File_Directory")
-	FileDirectory null;
+	FileDirectory String;
 	@Remarks("Optional short description of the record")
 	Description;
 };

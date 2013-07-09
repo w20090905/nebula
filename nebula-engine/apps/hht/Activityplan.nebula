@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("1")
+tx Activityplan {
+	!Activityplanid ID;
+	Orgid Organization;
+	Maker null;
+	Planedstarttime null;
+	Planedendtime null;
+	Activitytypeid Activitytype;
+	?Customerid Organization;
+	?Contactid Contact;
+	?Mobile null;
+	Purpose null;
+	Needassistance null;
+	Status;
+	?IsAutoApproval YesNo;
+	?Approveopinion null;
+	DateLastupdated Date;
+	Revision null;
+	?Originalactivityplanid Activityplan;
+	?Approveopiniondesc null;
+};
+

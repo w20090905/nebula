@@ -2,31 +2,21 @@
 @Refby("0")
 type CAcctschemaGl {
 	@Remarks("Rules for accounting")
-	!CAcctschemaId CAcctschema;
+	!CAcctschema;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Use Suspense Balancing")
-	Usesuspensebalancing null;/* 'Y'  */
+	Usesuspensebalancing YesNo;/* 'Y'  */
 	@Remarks("Suspense Balancing Acct")
 	?SuspensebalancingAcct CValidcombination;
 	@Remarks("Use Suspense Error")
-	Usesuspenseerror null;/* 'Y'  */
+	Usesuspenseerror YesNo;/* 'Y'  */
 	@Remarks("Suspense Error Acct")
 	?SuspenseerrorAcct CValidcombination;
 	@Remarks("Use Currency Balancing")
-	Usecurrencybalancing null;/* 'Y'  */
+	Usecurrencybalancing YesNo;/* 'Y'  */
 	@Remarks("Account used when a currency is out of balance")
 	?CurrencybalancingAcct CValidcombination;
 	@Remarks("Retained Earning Acct")

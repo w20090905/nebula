@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx EpcCliService {
+	!RepUserId EpcCliRepUsers;
+	!ServiceId ID;
+	?ServiceName Name;
+	?EnvironmentId EpcCliEnvironment;
+	?ServiceSid null;
+	?ServiceStatus null;
+	?ServiceActive null;
+};
+

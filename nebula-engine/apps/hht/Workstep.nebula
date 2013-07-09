@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("1")
+tx Workstep {
+	!Workstepid ID;
+	Workstepno SeqNo;
+	?Workstepname Name;
+	Workroutingid Workrouting;
+	Workcenterid Workcenter;
+};
+

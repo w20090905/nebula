@@ -1,12 +1,12 @@
 @Remarks("")
 @Refby("0")
 type RvOpenitem {
-	?AdOrgId AdOrg;
-	?AdClientId AdClient;
+	?AdOrgId ID;
+	?AdClientId ID;
 	?DocumentNo Code;
-	?CInvoiceId CInvoice;
-	?COrderId COrder;
-	?CBpartnerId CBpartner;
+	?CInvoiceId ID;
+	?COrderId ID;
+	?CBpartnerId ID;
 	?IsSotrx YesNo;
 	?DateInvoiceD Date;
 	?DateAcct Date;
@@ -15,17 +15,17 @@ type RvOpenitem {
 	?DaysDue Count;
 	?DiscountDate Date;
 	?DiscountAmt Amount;
-	?GrandTotal null;
+	?GrandTotal Amount;
 	?Paidamt Amount;
 	?Openamt Amount;
-	?CCurrencyId CCurrency;
-	?CConversionTypeId CConversionType;
-	?CPaymentTermId CPaymentTerm;
+	?CCurrencyId ID;
+	?CConversionTypeId ID;
+	?CPaymentTermId ID;
 	?IsPayschedulevalid YesNo;
-	?CInvoicePayscheduleId CInvoicePayschedule;
+	?CInvoicePayscheduleId ID;
 	?InvoiceCollectiontype Attr;
-	?CCampaignId CCampaign;
-	?CProjectId CProject;
-	?CActivityId CActivity;
+	?CCampaignId ID;
+	?CProjectId ID;
+	?CActivityId ID;
 };
 

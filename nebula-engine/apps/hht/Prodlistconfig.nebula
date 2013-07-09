@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("6")
+tx Prodlistconfig {
+	!Prodlistconfigid ID;
+	Orgid Organization;
+	Prodlistconfigcode Code;
+	?Comments Note;
+};
+

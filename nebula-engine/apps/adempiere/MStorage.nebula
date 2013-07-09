@@ -2,23 +2,13 @@
 @Refby("0")
 tx MStorage {
 	@Remarks("Product, Service, Item")
-	!MProductId MProduct;
+	!MProduct;
 	@Remarks("Warehouse Locator")
-	!MLocatorId MLocator;
+	!MLocator;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("On Hand Quantity")
 	QtyOnhand Quantity;/* 0  */
 	@Remarks("Reserved Quantity")
@@ -28,6 +18,6 @@ tx MStorage {
 	@Remarks("Date of Last Inventory Count")
 	?DateLastinventory Date;
 	@Remarks("Product Attribute Set Instance")
-	!MAttributesetinstanceId MAttributesetinstance;/* 0 */
+	!MAttributesetinstance;/* 0 */
 };
 

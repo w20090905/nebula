@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type SmpVaiDbconfig {
+	Dbname Name;
+	ConfigName Name;
+	?Comments Note;
+	IsGlobal null;
+	Len null;
+	?Value null;
+};
+

@@ -1,0 +1,15 @@
+@Remarks("？用？？移信息表")
+@Refby("0")
+tx Expensesliptransinfo {
+	@Remarks("主？ID")
+	!Expensesliptransinfoid ID;
+	@Remarks("？用？ID")
+	Expenseslipid Expenseslip;
+	@Remarks("？用？？号")
+	?Expenseslipcode Code;
+	@Remarks("相？？据号")
+	Relatedtranscode Code;
+	@Remarks("？？")
+	?Remark null;
+};
+

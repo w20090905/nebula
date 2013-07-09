@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("1")
+tx SmpVdjJobOutput {
+	!BlobId ID;
+	?Length;
+	?Data null;
+};
+

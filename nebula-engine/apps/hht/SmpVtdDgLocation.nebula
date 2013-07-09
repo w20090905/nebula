@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type SmpVtdDgLocation {
+	TargetId ID;
+	DgNode null;
+	PrincipalId ID;
+	?CollectionModified null;
+	CollectionActive Length;
+	DirectConnect null;
+};
+

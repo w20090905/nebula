@@ -4,19 +4,9 @@ type AdProcessPara {
 	@Remarks("Process Parameter")
 	!AdProcessParaId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")
@@ -24,15 +14,15 @@ type AdProcessPara {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("Process or Report")
-	AdProcessId AdProcess;
+	AdProcess;
 	@Remarks("Method of ordering records; lowest number comes first")
 	SeqNo;
 	@Remarks("System Reference and Validation")
-	AdReferenceId AdReference;
+	AdReference;
 	@Remarks("Required to specify, if data type is Table or List")
-	?AdReferenceValueId AdReference;
+	?AdReferenceValue AdReference;
 	@Remarks("Dynamic Validation Rule")
-	?AdValRuleId AdValRule;
+	?AdValRule;
 	@Remarks("Name of the column in the database")
 	Columnname Name;
 	@Remarks("Information maintained in System Element table")
@@ -44,17 +34,17 @@ type AdProcessPara {
 	@Remarks("The parameter is a range of values")
 	IsRange YesNo;/* 'N'  */
 	@Remarks("Default value hierarchy, separated by ;")
-	?Defaultvalue String;
+	?Defaultvalue Note;
 	@Remarks("Default value hierarchy, separated by ;")
 	?Defaultvalue2 null;
 	@Remarks("Format of the value; Can contain fixed format elements, Variables: '_lLoOaAcCa09'")
-	?Vformat String;
+	?Vformat Description;
 	@Remarks("Minimum Value for a field")
 	?ValueMin String;
 	@Remarks("Maximum Value for a field")
 	?ValueMax String;
 	@Remarks("System Element enables the central maintenance of column description and help.")
-	?AdElementId AdElement;
+	?AdElement;
 	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
 };

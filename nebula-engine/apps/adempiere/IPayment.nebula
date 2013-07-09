@@ -4,27 +4,17 @@ tx IPayment {
 	@Remarks("Import Payment")
 	!IPaymentId ID;
 	@Remarks("Client/Tenant for this installation.")
-	?AdClientId AdClient;
+	?AdClientId ID;
 	@Remarks("Organizational entity within client")
-	?AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	?IsActive YesNo;/* 'Y' */
-	@Remarks("Date this record was created")
-	?Created null;/* SYSDATE */
-	@Remarks("User who created this records")
-	?Createdby null;
-	@Remarks("Date this record was updated")
-	?Updated null;/* SYSDATE */
-	@Remarks("User who updated this records")
-	?Updatedby null;
+	?AdOrgId ID;
 	@Remarks("Has this import been processed")
 	IIsImported YesNo;/* 'N'  */
 	@Remarks("Messages generated from import process")
-	?IErrorMsg Msg;
+	?IErrorMsg Note;
 	@Remarks("The document has been processed")
 	?Processed YesNo;/* 'N' */
 	@Remarks("Payment identifier")
-	?CPaymentId CPayment;
+	?CPayment;
 	@Remarks("Document sequence number of the document")
 	?DocumentNo Code;
 	@Remarks("Transaction Date")
@@ -32,21 +22,21 @@ tx IPayment {
 	@Remarks("This is a sales transaction (receipt)")
 	?IsReceipt YesNo;/* 'Y' */
 	@Remarks("Document type or rules")
-	?CDoctypeId CDoctype;
+	?CDoctype;
 	@Remarks("Name of the Document Type")
 	?DoctypeName Name;
 	@Remarks("Type of credit card transaction")
 	?Trxtype Attr;
 	@Remarks("Account at the Bank")
-	?CBankaccountId CBankaccount;
+	?CBankaccount;
 	@Remarks("Bank Account Number")
 	?Bankaccountno Code;
 	@Remarks("Identifies a Business Partner")
-	?CBpartnerId CBpartner;
+	?CBpartner;
 	@Remarks("Key of the Business Partner")
-	?BpartnerValue String;
+	?BpartnerValue Note;
 	@Remarks("Invoice Identifier")
-	?CInvoiceId CInvoice;
+	?CInvoice;
 	@Remarks("Document Number of the Invoice")
 	?InvoiceDocumentNo Code;
 	@Remarks("Method of Payment")
@@ -58,9 +48,9 @@ tx IPayment {
 	@Remarks("Credit Card Verification code on credit card")
 	?CreditcardVv String;
 	@Remarks("Expiry Month")
-	?CreditcardExpmm null;
+	?CreditcardExpmm Number;
 	@Remarks("Expiry Year")
-	?CreditcardExpyy null;
+	?CreditcardExpyy Number;
 	@Remarks("Combination of routing no, account and check no")
 	?Micr null;
 	@Remarks("Bank Routing Number")
@@ -72,23 +62,23 @@ tx IPayment {
 	@Remarks("Name on Credit Card or Account holder")
 	?AName Name;
 	@Remarks("Street address of the Credit Card or Account holder")
-	?AStreet null;
+	?AStreet String;
 	@Remarks("City or the Credit Card or Account Holder")
-	?ACity null;
+	?ACity String;
 	@Remarks("State of the Credit Card or Account holder")
-	?AState null;
+	?AState String;
 	@Remarks("Zip Code of the Credit Card or Account Holder")
-	?AZip null;
+	?AZip String;
 	@Remarks("Country")
-	?ACountry null;
+	?ACountry String;
 	@Remarks("Payment Identification - Driver License")
-	?AIdentDl null;
+	?AIdentDl String;
 	@Remarks("Payment Identification - Social Security No")
-	?AIdentSsn null;
+	?AIdentSsn String;
 	@Remarks("Email Address")
 	?AEmail EMail;
 	@Remarks("Voice Authorization Code from credit card company")
-	?VoiceAuthcode Code;
+	?VoiceAuthcode Note;
 	@Remarks("Track 1 and 2 of the Credit Card")
 	?SWIPE;
 	@Remarks("Original Transaction ID")
@@ -96,7 +86,7 @@ tx IPayment {
 	@Remarks("Purchase Order Number")
 	?Ponum Code;
 	@Remarks("The Currency for this record")
-	?CCurrencyId CCurrency;
+	?CCurrency;
 	@Remarks("Amount being paid")
 	?Payamt Amount;/* 0 */
 	@Remarks("Calculated amount of discount")
@@ -108,7 +98,7 @@ tx IPayment {
 	@Remarks("Over-Payment (unallocated) or Under-Payment (partial payment) Amount")
 	?Overunderamt Amount;/* 0 */
 	@Remarks("Additional document charges")
-	?CChargeId CCharge;
+	?CCharge;
 	@Remarks("Name of the Charge")
 	?ChargeName Name;
 	@Remarks("Charge Amount")
@@ -122,19 +112,19 @@ tx IPayment {
 	@Remarks("Charge after Shipment")
 	?IsDelayedcapture YesNo;/* 'N' */
 	@Remarks("Payment reference")
-	?RPnref null;
+	?RPnref String;
 	@Remarks("Result of transmission")
-	?RResult null;
+	?RResult String;
 	@Remarks("Response message")
-	?RRespmsg Msg;
+	?RRespmsg Note;
 	@Remarks("Authorization Code returned")
-	?RAuthcode Code;
+	?RAuthcode Note;
 	@Remarks("Response info")
-	?RInfo Info;
+	?RInfo Note;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Three letter ISO 4217 Code of the Currency")
-	?IsOCode Code;
+	?IsOCode Note;
 	@Remarks("Accounting Date")
 	?DateAcct Date;
 };

@@ -1,0 +1,169 @@
+@Remarks("")
+@Refby("0")
+tx EdiGrtmp {
+	@Remarks("GR_TMPID")
+	!Grtmpid ID;
+	@Remarks("処理区分")
+	?Dealkbn null;
+	@Remarks("処理年月日")
+	?Dealymd null;
+	@Remarks("処理時刻")
+	?Dealtime null;
+	@Remarks("部署ｺｰﾄﾞ")
+	?Deptcode Code;
+	@Remarks("成約ｺｰﾄﾞ")
+	?Contractcode Code;
+	@Remarks("成約ﾀｲﾌﾟ")
+	?Contracttype Attr;
+	@Remarks("責任者No.")
+	?Employeecode Code;
+	@Remarks("ｵｰﾀﾞｰ番号")
+	?Ordercode Code;
+	@Remarks("仕入先ｺｰﾄﾞ")
+	?Sellercode Code;
+	@Remarks("出荷先ｺｰﾄﾞ")
+	?Receivercode Code;
+	@Remarks("注文日")
+	?Orderdate Date;
+	@Remarks("HHT管理番号")
+	?Hhtmanagementcode Code;
+	@Remarks("原産国ｺｰﾄﾞ")
+	?ProductCountryCode Code;
+	@Remarks("仕向国ｺｰﾄﾞ")
+	?Purchasecountrycode Code;
+	@Remarks("通貨")
+	?Currencycode Code;
+	@Remarks("為替区分")
+	?Exchagetype Attr;
+	@Remarks("為替予約No")
+	?Exchagedatecode Code;
+	@Remarks("為替ﾚｰﾄ")
+	?Zctrate Rate;
+	@Remarks("支払条件")
+	?PaymentTerm String;
+	@Remarks("支払方法")
+	?PaymentMethod null;
+	@Remarks("L/C No.")
+	?Lcno null;
+	@Remarks("運送条件（ｲﾝｺﾀｰﾑｽﾞ）")
+	?Shipmentterm String;
+	@Remarks("運送条件 テキスト（ｲﾝｺﾀｰﾑｽﾞ）")
+	?Shipmenttermtext Text;
+	@Remarks("運送方法")
+	?Shipmentmethod null;
+	@Remarks("優先度")
+	?Priority null;
+	@Remarks("レートタイプ")
+	?Ratetype Attr;
+	@Remarks("消費税ｺｰﾄﾞ")
+	?TaxCode Code;
+	@Remarks("在庫認可No")
+	?Inventorycode Code;
+	@Remarks("ｵｰﾀﾞｰ特性")
+	?Orderproperty null;
+	@Remarks("備考")
+	?Comments Note;
+	@Remarks("Insurance")
+	?Insurance null;
+	@Remarks("E/L No")
+	?Elno null;
+	@Remarks("P/O Attn")
+	?Poattn null;
+	@Remarks("S/C Attn")
+	?Scattn null;
+	@Remarks("Inspection")
+	?Inspection null;
+	@Remarks("Specification")
+	?Specification null;
+	@Remarks("Packing")
+	?Packing null;
+	@Remarks("Ship Via1")
+	?Shipvia1 null;
+	@Remarks("Ship Via2")
+	?Shipvia2 null;
+	@Remarks("Ship From")
+	?Shipfrom null;
+	@Remarks("Ship To")
+	?Shipto null;
+	@Remarks("Shipping Mark1")
+	?Shippingmark1 null;
+	@Remarks("Shipping Mark2")
+	?Shippingmark2 null;
+	@Remarks("Shipping Mark3")
+	?Shippingmark3 null;
+	@Remarks("Shipping Mark4")
+	?Shippingmark4 null;
+	@Remarks("Shipping Mark5")
+	?Shippingmark5 null;
+	@Remarks("Shipping Mark6")
+	?Shippingmark6 null;
+	@Remarks("Shipping Mark7")
+	?Shippingmark7 null;
+	@Remarks("L/C No")
+	?Tradelcno null;
+	@Remarks("Shipped Per")
+	?Shippedper null;
+	@Remarks("Consignee(名称)")
+	?Consigneename Name;
+	@Remarks("Consignee(住所)")
+	?Address null;
+	@Remarks("B/L No")
+	?Blno null;
+	@Remarks("包括/個別")
+	?Hktkbt null;
+	@Remarks("C/P No")
+	?Cpno null;
+	@Remarks("入荷予定日")
+	?Receiptdestinedate Date;
+	@Remarks("入荷予定時刻")
+	?Receiptdestinetime null;
+	@Remarks("入荷実績日")
+	?Receiptfactdate Date;
+	@Remarks("送案到着日")
+	?Soandate Date;
+	@Remarks("購買起算日")
+	?Buystartdate Date;
+	@Remarks("倉庫ｺｰﾄﾞ")
+	?Warehousecode Code;
+	@Remarks("出荷先ｺｰﾄﾞ（入荷先倉庫）")
+	?DeliveryCode Code;
+	@Remarks("入出庫No")
+	?Invrelatedno null;
+	@Remarks("通関No.")
+	?Hhtdocode Code;
+	@Remarks("輸入Invoice No")
+	?Inputinvoiceno null;
+	@Remarks("Line No")
+	?LineNo null;
+	@Remarks("顧客注番")
+	?Customerno Code;
+	@Remarks("ｱｲﾃﾑｺｰﾄﾞ")
+	?Itemcode Code;
+	@Remarks("ｱｲﾃﾑ名称")
+	?Itemname Name;
+	@Remarks("発注数量")
+	?DeliveryQty Quantity;
+	@Remarks("入荷実績数")
+	?Receiptqty Quantity;
+	@Remarks("単位")
+	?Umcode Code;
+	@Remarks("単価")
+	?Unitprice Unit;
+	@Remarks("末端単価")
+	?Endunitprice Price;
+	@Remarks("口銭率")
+	?Commissionrate Rate;
+	@Remarks("SAPﾛｯﾄNo")
+	?Saplotno null;
+	@Remarks("SAP評価ﾀｲﾌﾟ")
+	?Sapevalution null;
+	@Remarks("明細カテゴリ")
+	?Concategory null;
+	@Remarks("ｻｲｽﾞ/寸法")
+	?Sizeproperty null;
+	@Remarks("ｱｲﾃﾑ特性1")
+	?Itemproperty1 null;
+	@Remarks("ｱｲﾃﾑ特性2")
+	?Itemproperty2 null;
+};
+

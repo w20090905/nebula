@@ -4,25 +4,15 @@ type IBpartner {
 	@Remarks("Import Business Partner")
 	!IBpartnerId ID;
 	@Remarks("Client/Tenant for this installation.")
-	?AdClientId AdClient;
+	?AdClientId ID;
 	@Remarks("Organizational entity within client")
-	?AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	?IsActive YesNo;/* 'Y' */
-	@Remarks("Date this record was created")
-	?Created null;/* SYSDATE */
-	@Remarks("User who created this records")
-	?Createdby null;
-	@Remarks("Date this record was updated")
-	?Updated null;/* SYSDATE */
-	@Remarks("User who updated this records")
-	?Updatedby null;
+	?AdOrgId ID;
 	@Remarks("Has this import been processed")
 	IIsImported YesNo;/* 'N'  */
 	@Remarks("Messages generated from import process")
-	?IErrorMsg Msg;
+	?IErrorMsg Note;
 	@Remarks("Identifies a Business Partner")
-	?CBpartnerId CBpartner;
+	?CBpartner;
 	@Remarks("Search key for the record in the format required - must be unique")
 	?Value String;
 	@Remarks("Alphanumeric identifier of the entity")
@@ -32,43 +22,43 @@ type IBpartner {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Dun & Bradstreet Number")
-	?DUNS;
+	?DUNS String;
 	@Remarks("Tax Identification")
 	?TaxId Code;
 	@Remarks("Standard Industry Code or its successor NAIC - http://www.osha.gov/oshstats/sicser.html")
 	?NAICS;
 	@Remarks("Business Partner Group Key")
-	?Groupvalue String;
+	?Groupvalue Note;
 	@Remarks("Business Partner Group")
-	?CBpGroupId CBpGroup;
+	?CBpGroup;
 	@Remarks("Identifies the (ship to) address for this Business Partner")
-	?CBpartnerLocationId CBpartnerLocation;
+	?CBpartnerLocation;
 	@Remarks("Address line 1 for this location")
 	?Address null;
 	@Remarks("Address line 2 for this location")
 	?Address null;
 	@Remarks("Postal code")
-	?PostAl Postal;
+	?Postal;
 	@Remarks("Additional ZIP or Postal code")
 	?PostAlAdd Postal;
 	@Remarks("Identifies a City")
 	?City null;
 	@Remarks("Identifies a geographical Region")
-	?CRegionId CRegion;
+	?CRegion;
 	@Remarks("Name of the Region")
 	?Regionname Name;
 	@Remarks("Country")
-	?CCountryId CCountry;
+	?CCountry;
 	@Remarks("Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1 - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html")
 	?CountryCode Code;
 	@Remarks("Name this entity is referred to as")
-	?Title;
+	?Title String;
 	@Remarks("Business Partner Contact Name")
 	?Contactname Name;
 	@Remarks("Description of Contact")
 	?Contactdescription Description;
 	@Remarks("Comments or additional information")
-	?Comments Note;
+	?Comments Comment;
 	@Remarks("Identifies a telephone number")
 	?Phone;
 	@Remarks("Identifies an alternate telephone number.")
@@ -76,13 +66,13 @@ type IBpartner {
 	@Remarks("Facsimile number")
 	?Fax;
 	@Remarks("Electronic Mail Address")
-	?Email EMail;
+	?EMail;
 	@Remarks("Password of any length (case sensitive)")
 	?Password;
 	@Remarks("Birthday or Anniversary day")
 	?Birthday;
 	@Remarks("Greeting to print on correspondence")
-	?CGreetingId CGreeting;
+	?CGreeting;
 	@Remarks("Greeting for Business Partner Contact")
 	?BpcontactGreeting String;
 	@Remarks("Process Now")
@@ -90,9 +80,9 @@ type IBpartner {
 	@Remarks("The document has been processed")
 	?Processed YesNo;/* 'N' */
 	@Remarks("User within the system - Internal or Business Partner Contact")
-	?AdUserId AdUser;
+	?AdUser;
 	@Remarks("Interest Area or Topic")
-	?RInterestAreaId RInterestArea;
+	?RInterestArea;
 	@Remarks("Name of the Interest Area")
 	?InterestAreaname Name;
 };

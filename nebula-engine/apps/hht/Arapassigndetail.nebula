@@ -1,0 +1,25 @@
+@Remarks("")
+@Refby("0")
+tx Arapassigndetail {
+	!Arapassigndetailid ID;
+	Arapassignid Arapassign;
+	?Arapid Arap;
+	?Dcflag null;
+	?Arapiniamt Amount;
+	?Arapsettleamt Amount;
+	?Discount Count;
+	?Realamtsettled null;
+	?Varamt Amount;
+	?Varamtdisposetype null;
+	?PaymentTermname Name;
+	?Relatedtrancode Code;
+	?Relatedtrandate Date;
+	?Zctassignlcamt Amount;
+	?Zctreallcamtsettled null;
+	?Zctaraplcamt Amount;
+	?Zctarapsettleamt Amount;
+	?Zctexchangeprofitloss null;
+	?Zctvaramt Amount;
+	?Zctrate Rate;
+};
+

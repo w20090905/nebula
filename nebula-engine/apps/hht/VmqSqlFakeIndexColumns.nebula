@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+type VmqSqlFakeIndexColumns {
+	?DatabaseId VmqSqlItem;
+	?Sqlid VmqSqlItem;
+	?IndexName Name;
+	?IndexOwner null;
+	?TableName Name;
+	?TableOwner null;
+	?ColumnName Name;
+	?ColumnPosition Length;
+};
+

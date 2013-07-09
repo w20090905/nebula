@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type Getsapreturnslipfilename {
+	?Filename;
+	ValueName Name;
+	Deptcode Code;
+	Returnid Returnslip;
+	Dcode Code;
+	?DateLastupdated null;
+	?Returncode Code;
+};
+

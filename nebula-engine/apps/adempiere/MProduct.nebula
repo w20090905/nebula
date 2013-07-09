@@ -4,19 +4,9 @@ type MProduct {
 	@Remarks("Product, Service, Item")
 	!MProductId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
 	@Remarks("Alphanumeric identifier of the entity")
@@ -32,11 +22,11 @@ type MProduct {
 	@Remarks("Stock Keeping Unit")
 	?SKU;
 	@Remarks("Unit of Measure")
-	CUomId CUom;
+	CUom;
 	@Remarks("Sales Representative or Company Agent")
-	?SalesRepId AdUser;
+	?SalesRep AdUser;
 	@Remarks("This is a summary entity")
-	IsSummary Comment;/* 'N'  */
+	IsSummary YesNo;/* 'N'  */
 	@Remarks("Organization stocks this product")
 	IsStocked YesNo;/* 'Y'  */
 	@Remarks("Organization purchases this product")
@@ -52,9 +42,9 @@ type MProduct {
 	@Remarks("The BOM configuration has been verified")
 	IsVerified YesNo;/* 'N'  */
 	@Remarks("Method for recording revenue")
-	?CRevenueRecognitionId CRevenueRecognition;
+	?CRevenueRecognition;
 	@Remarks("Category of a Product")
-	MProductCategoryId MProductCategory;
+	MProductCategory;
 	@Remarks("Classification for grouping")
 	?ClassIfication YesNo;
 	@Remarks("Volume of a product")
@@ -68,11 +58,11 @@ type MProduct {
 	@Remarks("Shelf depth required")
 	?Shelfdepth Depth;
 	@Remarks("Units Per Pallet")
-	?Unitsperpallet Unit;
+	?Unitsperpallet Number;
 	@Remarks("Tax Category")
-	CTaxCategoryId CTaxCategory;
+	CTaxCategory;
 	@Remarks("Resource")
-	?SResourceId SResource;
+	?SResource;
 	@Remarks("This product is no longer available")
 	?Discontinued YesNo;/* 'N'                                 */
 	@Remarks("Discontinued By")
@@ -80,37 +70,37 @@ type MProduct {
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Expense report type")
-	?SExpensetypeId SExpensetype;
+	?SExpensetype;
 	@Remarks("Type of product")
 	ProductType Attr;/* 'I'  */
 	@Remarks("URL of  image")
 	?ImageUrl Url;
 	@Remarks("URL for the description")
-	?Descriptionurl Url;
+	?Descriptionurl Description;
 	@Remarks("Number of days the product is guaranteed or available")
 	?Guaranteedays Count;
 	@Remarks("Text templates for mailings")
-	?RMailtextId RMailtext;
+	?RMailtext;
 	@Remarks("Version Number")
 	?Versionno Code;
 	@Remarks("Product Attribute Set")
-	?MAttributesetId MAttributeset;
+	?MAttributeset;
 	@Remarks("Product Attribute Set Instance")
-	?MAttributesetinstanceId MAttributesetinstance;/* 0 */
+	?MAttributesetinstance;/* 0 */
 	@Remarks("URL of the Download files")
 	?Downloadurl Url;
 	@Remarks("Category of the Freight")
-	?MFreightCategoryId MFreightCategory;
+	?MFreightCategory;
 	@Remarks("Warehouse Locator")
-	?MLocatorId MLocator;
+	?MLocator;
 	@Remarks("Minumum number of guarantee days")
-	?Guaranteedaysmin null;
+	?Guaranteedaysmin Number;
 	@Remarks("If selected, the product is displayed in the inital or any empy search")
 	IsWebstorefeatured YesNo;/* 'N'  */
 	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
 	IsSelfservice YesNo;/* 'Y'  */
 	@Remarks("Type of subscription")
-	?CSubscriptiontypeId CSubscriptiontype;
+	?CSubscriptiontype;
 	@Remarks("Drop Shipments are sent from the Vendor directly to the Customer")
 	IsDropship YesNo;/* 'N'  */
 	@Remarks("Exclude from automatic Delivery")

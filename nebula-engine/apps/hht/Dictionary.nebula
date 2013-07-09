@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Dictionary {
+	!Dictionaryid ID;
+	LanguageCode Lang;
+	Type Attr;
+	Value null;
+	ValueName Name;
+	?Description;
+	?ValueCode Code;
+};
+

@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Rptcondition {
+	!Rptconditionid ID;
+	Rptinquirysettingid Rptinquirysetting;
+	?Ovalreportid Ovalreport;
+	?Colname Name;
+	?Colvalue String;
+	?Colvaluename Name;
+};
+

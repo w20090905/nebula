@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+type VdkUserRule {
+	?VdkOwnerId ID;
+	?VdkRuleId ID;
+	?VdkRuleType null;
+	?VdkRuleName Name;
+	?VdkDatatype null;
+	?VdkInt null;
+	?VdkFloat null;
+	?VdkString null;
+	?VdkHidden null;
+	?VdkAdvanced null;
+	?VdkReadonly null;
+	?VdkEditFlags null;
+	?VdkValueMin null;
+	?VdkValueMax null;
+	?VdkDescId ID;
+	?VdkHelpId ID;
+	?VdkRuleDescription Description;
+};
+

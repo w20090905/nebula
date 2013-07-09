@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx Ocpdetail {
+	!Ocpdetailid ID;
+	Ocpid Procurementparameter;
+	Checkelementid Checkelement;
+	?IsNeed YesNo;
+	Actiontype null;
+	?IsSystem YesNo;
+	?Para1 null;
+	?Para2 null;
+	?Comments Note;
+};
+

@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx Epassign {
+	!Epassignid ID;
+	Examineplanid Examineplan;
+	Epassignname Name;
+	?Jobtitlecode null;
+	?Year null;
+	?Month null;
+	?Quarter null;
+	?Createdate Date;
+	?Modifyer null;
+	?DateLastupdated Date;
+	?Comments Note;
+};
+

@@ -1,26 +1,21 @@
 @Remarks("")
 @Refby("0")
 type RvWarehouseprice {
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	?IsActive YesNo;
-	Created null;
-	Createdby null;
-	Updated null;
-	Updatedby null;
-	MProductId MProduct;
-	MPriceListVersionId MPriceListVersion;
-	MWarehouseId MWarehouse;
+	AdClientId ID;
+	AdOrgId ID;
+	MProductId ID;
+	MPriceListVersionId ID;
+	MWarehouseId ID;
 	Value String;
 	*Name;
 	?UPC;
 	?SKU;
-	CUomId CUom;
+	CUomId ID;
 	?Uomsymbol Symbol;
-	?PriceList Price;
-	?PriceStd Price;
+	?PriceList Number;
+	?PriceStd Number;
 	?Margin Length;
-	?PriceLimit Price;
+	?PriceLimit Count;
 	Warehousename Name;
 	?QtyAvailable Quantity;
 	?QtyOnhand Quantity;

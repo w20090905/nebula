@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+tx Obligatedetail {
+	!Obligatedetailid ID;
+	Obligateid Obligate;
+	Itemid Item;
+	?Umcode Code;
+	?Warehouseid Physicalwarehouse;
+	?Locationno null;
+	?Lotno null;
+	?Batchno null;
+	?Manufacturedate Date;
+	?Expiredate Date;
+	?Qty Quantity;
+	?Ledgerqty Quantity;
+	?Availqty Quantity;
+	?Baseqty Quantity;
+	?Actualqty Quantity;
+	Invsummaryid Invsummary;
+	?Useqty Quantity;
+};
+

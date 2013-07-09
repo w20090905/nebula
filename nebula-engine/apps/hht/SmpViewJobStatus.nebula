@@ -1,0 +1,25 @@
+@Remarks("Current status of the job on each of the submitted targets")
+@Refby("0")
+type SmpViewJobStatus {
+	@Remarks("Internal ID of this job")
+	JobId SmpVdjJob;
+	@Remarks("Name of this job")
+	?JobName Name;
+	@Remarks("Name of the node on which this job is running on")
+	?NodeName Name;
+	@Remarks("Name of the service this job was submitted against")
+	TargetName Name;
+	@Remarks("Type of service this job was submitted against")
+	?TargetType Attr;
+	@Remarks("Translated name for the target type")
+	?TargetNlsType Attr;
+	@Remarks("Name of the administrator who owns this job")
+	?AdministratorName Name;
+	@Remarks("The current number of executions this job has already done")
+	?ExecNum null;
+	@Remarks("Date and time this status was recorded")
+	?TimesTamp null;
+	@Remarks("Status of the exeuction: 0 (No status), 1 (Submitted), 2 (Scheduled), 4 (Running), 9 (Success), 11 (Failed), 13 (Deleting), 14 (Deleted), 15 (Expired)")
+	?Status;
+};
+

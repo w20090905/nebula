@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+tx PriceProtectinvallocdetail {
+	!PriceProtectinvallocdetailid ID;
+	PriceProtectdetailid PriceProtectdetail;
+	PriceProtectid PriceProtect;
+	Itemid Item;
+	Invstatus null;
+	?Locationno null;
+	?Lotno null;
+	?Batchno null;
+	?Qty Quantity;
+	?Price;
+	?Invsummaryid Invsummary;
+	?Umcode Code;
+	?Manufacturedate Date;
+	?Expiredate Date;
+	?Diffamount Amount;
+};
+

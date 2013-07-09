@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Contactinteresting {
+	!Contactinterestingid ID;
+	Contactid Contact;
+	InterestIngtypeid InterestIngtype;
+	?InterestRingsubtypeid InterestIngtype;
+	InterestDegree null;
+	?Description;
+};
+

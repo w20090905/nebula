@@ -1,0 +1,35 @@
+@Remarks("")
+@Refby("1")
+tx Arapadjustment {
+	!Arapadjustmentid ID;
+	?Arapadjustmentcode Code;
+	?Orgid Organization;
+	Araptype null;
+	Partnerid ID;
+	SalesRep null;
+	?Maker null;
+	?Createdate Date;
+	?Adjustdate Date;
+	Status;
+	?TotalAmount Amount;
+	?Comments Note;
+	?DateLastupdated Date;
+	?PrintNum null;
+	?Booksetid Bookset;
+	?SourceOrgid ID;
+	?Accountingyearid ID;
+	?Year null;
+	?Accperiodid Accountingperiod;
+	?Period null;
+	?Docdate Date;
+	?Gldate Date;
+	?Zcttotalamount Amount;
+	?Zcttaxrate Rate;
+	?Zcttotaltaxamount Amount;
+	?Zcttotalpretaxamount Amount;
+	?IsAutoAssign YesNo;
+	?Rebateamt Amount;
+	?Currencycode Code;
+	?Exchangerate Rate;
+};
+

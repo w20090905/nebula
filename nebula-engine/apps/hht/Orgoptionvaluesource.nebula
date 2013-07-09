@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Orgoptionvaluesource {
+	!Orgoptionvaluesourceid ID;
+	Optionname Name;
+	?Optionvalue String;
+	?Descrition null;
+	?LanguageCode Lang;
+};
+

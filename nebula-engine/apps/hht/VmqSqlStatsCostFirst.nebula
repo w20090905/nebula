@@ -1,0 +1,26 @@
+@Remarks("")
+@Refby("0")
+type VmqSqlStatsCostFirst {
+	?DatabaseId VmqSqlItem;
+	?Sqlid VmqSqlItem;
+	?StatisticType null;
+	?ElapsedTime Count;
+	?CpuTime Count;
+	?LogicalBlkRds null;
+	?PhysicalBlkRds null;
+	?RecursiveCalls null;
+	?DatabaseCalls null;
+	?ChainedRows null;
+	?RowsReturned null;
+	?UgaMemory null;
+	?PgaMemory null;
+	?DbBlkChangeS null;
+	?RedoEntries null;
+	?RedoSize Size;
+	?RowsGotten null;
+	?SortsMemory null;
+	?SortsDisk null;
+	?SortsRows null;
+	?FirstRowTime Count;
+};
+

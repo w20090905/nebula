@@ -4,19 +4,9 @@ type AAsset {
 	@Remarks("Asset used internally or by customers")
 	!AAssetId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
 	@Remarks("Alphanumeric identifier of the entity")
@@ -26,9 +16,9 @@ type AAsset {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("Group of Assets")
-	AAssetGroupId AAssetGroup;
+	AAssetGroup;
 	@Remarks("Product, Service, Item")
-	?MProductId MProduct;
+	?MProduct;
 	@Remarks("Product Serial Number")
 	?Serno Code;
 	@Remarks("Lot number (alphanumeric)")
@@ -48,9 +38,9 @@ type AAsset {
 	@Remarks("Months of the usable life of the asset")
 	?Uselifemonths Count;
 	@Remarks("Units of use until the asset is not usable anymore")
-	?Lifeuseunits null;
+	?Lifeuseunits Number;
 	@Remarks("Currently used units of the assets")
-	?Useunits null;
+	?Useunits Number;
 	@Remarks("The asset is disposed")
 	IsDisposed YesNo;/* 'N'  */
 	@Remarks("Date when the asset is/was disposed")
@@ -60,13 +50,13 @@ type AAsset {
 	@Remarks("Additional comments or remarks concerning the location")
 	?Locationcomment null;
 	@Remarks("Warehouse Locator")
-	?MLocatorId MLocator;
+	?MLocator;
 	@Remarks("Identifies a Business Partner")
-	?CBpartnerId CBpartner;
+	?CBpartner;
 	@Remarks("Identifies the (ship to) address for this Business Partner")
-	?CBpartnerLocationId CBpartnerLocation;
+	?CBpartnerLocation;
 	@Remarks("Location or Address")
-	?CLocationId CLocation;
+	?CLocation;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("The asset will be depreciated")
@@ -74,17 +64,17 @@ type AAsset {
 	@Remarks("The asset is fully depreciated")
 	IsFullydepreciated YesNo;/* 'N'  */
 	@Remarks("User within the system - Internal or Business Partner Contact")
-	?AdUserId AdUser;
+	?AdUser;
 	@Remarks("Product Attribute Set Instance")
-	?MAttributesetinstanceId MAttributesetinstance;/* 0 */
+	?MAttributesetinstance;/* 0 */
 	@Remarks("Quantity")
 	?Qty Quantity;
 	@Remarks("Financial Project")
-	?CProjectId CProject;
+	?CProject;
 	@Remarks("Business Partner (Agent or Sales Rep)")
-	?CBpartnerSrId CBpartner;
+	?CBpartnerSr CBpartner;
 	@Remarks("Line on Shipment or Receipt document")
-	?MInoutlineId MInoutline;
+	?MInoutline;
 	?Lastmaintenencedate Date;
 	@Remarks("Next Maintenence Date")
 	?Nextmaintenencedate Date;/* NULL  */
@@ -93,7 +83,7 @@ type AAsset {
 	@Remarks("Lease Termination Date")
 	?Leaseterminationdate Date;/* NULL  */
 	@Remarks("The Business Partner who rents or leases")
-	?LeaseBpartnerId CBpartner;/* NULL  */
+	?LeaseBpartner CBpartner;/* NULL  */
 	@Remarks("Last Maintenance Note")
 	?Lastmaintenancenote Note;/* NULL  */
 	@Remarks("Last Maintenance Date")

@@ -4,33 +4,23 @@ tx RRequestAction {
 	@Remarks("Request has been changed")
 	!RRequestActionId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Request from a Business Partner or Prospect")
-	RRequestId RRequest;
+	RRequest;
 	@Remarks("Request Group")
-	?RGroupId RGroup;
+	?RGroup;
 	@Remarks("Request Category")
-	?RCategoryId RCategory;
+	?RCategory;
 	@Remarks("Request Status")
-	?RStatusId RStatus;
+	?RStatus;
 	@Remarks("Request Resolution")
-	?RResolutionId RResolution;
+	?RResolution;
 	@Remarks("Sales Representative or Company Agent")
-	?SalesRepId AdUser;
+	?SalesRep AdUser;
 	@Remarks("Responsibility Role")
-	?AdRoleId AdRole;
+	?AdRole;
 	@Remarks("This request has been escalated")
 	?IsEscalated YesNo;
 	@Remarks("Is this invoiced?")
@@ -44,33 +34,33 @@ tx RRequestAction {
 	@Remarks("Priority of the issue for the User")
 	?PriorityUser YesNo;
 	@Remarks("Identifies a Business Partner")
-	?CBpartnerId CBpartner;
+	?CBpartner;
 	@Remarks("User within the system - Internal or Business Partner Contact")
-	?AdUserId AdUser;
+	?AdUser;
 	@Remarks("Order")
-	?COrderId COrder;
+	?COrder;
 	@Remarks("Invoice Identifier")
-	?CInvoiceId CInvoice;
+	?CInvoice;
 	@Remarks("Payment identifier")
-	?CPaymentId CPayment;
+	?CPayment;
 	@Remarks("Product, Service, Item")
-	?MProductId MProduct;
+	?MProduct;
 	@Remarks("Financial Project")
-	?CProjectId CProject;
+	?CProject;
 	@Remarks("Textual summary of this request")
 	?Summary;
 	@Remarks("Date that this request should be acted on")
 	?DateNextaction Date;
 	@Remarks("Business Activity")
-	?CActivityId CActivity;
+	?CActivity;
 	@Remarks("Type of request (e.g. Inquiry, Complaint, ..)")
-	?RRequestTypeId RRequestType;
+	?RRequestType;
 	@Remarks("Asset used internally or by customers")
-	?AAssetId AAsset;
+	?AAsset;
 	@Remarks("Material Shipment Document")
-	?MInoutId MInout;
+	?MInout;
 	@Remarks("Return Material Authorization")
-	?MRmaId MRma;
+	?MRma;
 	@Remarks("Columns with NULL value")
 	?Nullcolumns String;
 	@Remarks("Status of the Task")
@@ -90,6 +80,6 @@ tx RRequestAction {
 	@Remarks("Invoiced Quantity")
 	?QtyInvoiced Quantity;
 	@Remarks("Product/Resource/Service used in Request")
-	?MProductSpentId MProduct;
+	?MProductSpent MProduct;
 };
 

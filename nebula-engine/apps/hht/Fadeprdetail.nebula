@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+tx Fadeprdetail {
+	!Fadeprdetailid ID;
+	Fadeprrequestid Fadeprrequest;
+	Orgid Organization;
+	?Ownerdeptid ID;
+	?Fausedeptstr null;
+	Fixedassetsid Fixedassets;
+	Derptypecode Code;
+	?Description;
+	?Deprrate Rate;
+	?Deprvalue null;
+	?Calcdate Date;
+	?Confirmdate Date;
+	DateLastupdated Date;
+	?Deprnum null;
+};
+

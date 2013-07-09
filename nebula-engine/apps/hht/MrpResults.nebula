@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+tx MrpResults {
+	!Sid MrpRecommend;
+	MrpCode MrpInfo;
+	Itemid Item;
+	StoreQty Quantity;
+	Poleaveqty Quantity;
+	Soleaveqty Quantity;
+	Fctqty Quantity;
+	Saftyqty Quantity;
+	Mrpqty Quantity;
+	Umcode Code;
+	Polimitdate Date;
+	Salercode null;
+	?Cacceptdate Date;
+	?NetMrpqty Quantity;
+	?OrderMrpFlag null;
+};
+

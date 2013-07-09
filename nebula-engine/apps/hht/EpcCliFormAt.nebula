@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx EpcCliFormAt {
+	!RepUserId EpcCliRepUsers;
+	!FormAtId ID;
+	?CollectionId EpcCliCollection;
+	?FormAtTime null;
+	?FormAtUsername Name;
+	?FormAtPassword null;
+	?FormAtService null;
+	?PartialFormAt null;
+	?FormAtStatus null;
+	?FormAtColId null;
+};
+

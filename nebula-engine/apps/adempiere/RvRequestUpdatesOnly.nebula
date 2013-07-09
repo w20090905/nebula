@@ -1,14 +1,9 @@
 @Remarks("")
 @Refby("0")
 type RvRequestUpdatesOnly {
-	?AdClientId AdClient;
-	?AdOrgId AdOrg;
-	?IsActive YesNo;
-	?Created null;
-	?Createdby null;
-	?Updated null;
-	?Updatedby null;
-	?RRequestId RRequest;
-	?AdUserId AdUser;
+	?AdClientId ID;
+	?AdOrgId ID;
+	?RRequestId ID;
+	?AdUserId ID;
 };
 

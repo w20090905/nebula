@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+type ItempolicyBeforeImp {
+	Policyid Itempolicy;
+	Orgid Organization;
+	Policycode Code;
+	Policydesc null;
+	Itemcondid ID;
+	Orgcondid ID;
+	Createdate Date;
+	Status;
+	?DateLastupdated Date;
+	?Itemsql String;
+	?Orgsql String;
+	?Globalpccode null;
+};
+

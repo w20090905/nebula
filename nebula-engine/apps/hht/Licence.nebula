@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx Licence {
+	!Licenceid ID;
+	?ProductKey null;
+	?Solutionname Name;
+	?Applicationname Name;
+	?App null;
+	?Version String;
+	?Companyname Name;
+	?Regiserno Code;
+	?Expiredate Date;
+};
+

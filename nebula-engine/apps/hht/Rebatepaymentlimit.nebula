@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Rebatepaymentlimit {
+	!Rebatepaymentlimitid ID;
+	Orgid Organization;
+	DiscountType null;
+	Rebatetype null;
+	?Proportion null;
+	?Amount;
+};
+

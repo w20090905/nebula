@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("10")
+tx Businessperiod {
+	!Businessperiodid ID;
+	?Orgid Organization;
+	?Year null;
+	?Periodnum null;
+	?Status;
+	?Startdate Date;
+	?Enddate Date;
+	?DateLastupdated Date;
+};
+

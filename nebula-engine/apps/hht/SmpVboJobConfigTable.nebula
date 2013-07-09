@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+type SmpVboJobConfigTable {
+	?Uitype Attr;
+	?Username Name;
+	?ShowIntropage null;
+};
+

@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("1")
+tx Workorderstep {
+	!Workorderstepid ID;
+	Workorderid Workorder;
+	Workstepno SeqNo;
+	?Workstepname Name;
+	Workcenterid Workcenter;
+	?Employeeid Employee;
+	?Startdate Date;
+	?Planhours null;
+	?Spendhours null;
+	?Costamount Cost;
+};
+

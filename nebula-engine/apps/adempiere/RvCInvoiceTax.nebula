@@ -1,17 +1,12 @@
 @Remarks("")
 @Refby("0")
 type RvCInvoiceTax {
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;
-	Created null;
-	Createdby null;
-	Updated null;
-	Updatedby null;
-	CTaxId CTax;
-	CInvoiceId CInvoice;
-	CDoctypeId CDoctype;
-	CBpartnerId CBpartner;
+	AdClientId ID;
+	AdOrgId ID;
+	CTaxId ID;
+	CInvoiceId ID;
+	CDoctypeId ID;
+	CBpartnerId ID;
 	?TaxId Code;
 	?IsTaxExempt YesNo;
 	DateAcct Date;
@@ -19,10 +14,10 @@ type RvCInvoiceTax {
 	IsSotrx YesNo;
 	DocumentNo Code;
 	IsPaid YesNo;
-	CCurrencyId CCurrency;
+	CCurrencyId ID;
 	?TaxBaseamt Amount;
 	?TaxAmt Amount;
-	?TaxLinetotal null;
-	?Multiplier null;
+	?TaxLinetotal Number;
+	?Multiplier Number;
 };
 

@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx SmpVdvGeneral {
+	!UserId SmpVdvUser;
+	AdvancedFeatures null;
+	?Description;
+	?TimeZone null;
+	?TimeZonePref Count;
+};
+

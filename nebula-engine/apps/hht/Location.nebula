@@ -1,0 +1,34 @@
+@Remarks("")
+@Refby("0")
+tx Location {
+	!Locationid ID;
+	Warehouseid Physicalwarehouse;
+	Locationcode Code;
+	Locationtype;
+	?Locationdesc null;
+	?Length;
+	?Width;
+	?Height;
+	?Umcode1 null;
+	?Volume;
+	?Umcode2 null;
+	?Maxweight Weight;
+	?Umcode3 null;
+	?Status;
+	?Atp null;
+	?Net null;
+	?DateLastupdated Date;
+	?Takeorder null;
+	?Distinctitemflag null;
+	?Distinctlotnoflag null;
+	?Crossdockflag null;
+	?Checkcode Code;
+	?Segment1 null;
+	?Segment2 null;
+	?Segment3 null;
+	?Segment4 null;
+	?Shippingdockflag null;
+	?Pickpriority null;
+	?Putawaypriority null;
+};
+

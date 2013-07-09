@@ -1,0 +1,17 @@
+@Remarks("List of all administrators who will get notified about event conditions")
+@Refby("0")
+type SmpViewEventNotificationS {
+	@Remarks("Internal ID of this event")
+	EventId ID;
+	@Remarks("Name of this event")
+	?EventName Name;
+	@Remarks("Administrator who will get notified for this event")
+	AdministratorName Name;
+	@Remarks("Name of the service this event is registered for")
+	?TargetName Name;
+	@Remarks("Type of service this event is registered for")
+	?TargetType Attr;
+	@Remarks("Translated name for the target type")
+	?TargetNlsType Attr;
+};
+

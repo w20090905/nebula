@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Monthendenactment {
+	!Monthendenactmentid ID;
+	Booksetid Bookset;
+	?Orgid Organization;
+	?Mepsteptype null;
+	?Glaccountid Glaccount;
+	?Vouchersigncode Code;
+	?Description;
+};
+

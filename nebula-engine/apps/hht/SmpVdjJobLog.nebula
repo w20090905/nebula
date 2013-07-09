@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type SmpVdjJobLog {
+	?JobId SmpVdjJob;
+	?TargetName Name;
+	?ExecNum null;
+	?Status;
+	?TimeStamp null;
+	?TimeZone Count;
+	?OutputId ID;
+};
+

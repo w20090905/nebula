@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("0")
+tx Expenseapportionitem {
+	!Expenseapportionitemid ID;
+	?Expenseslipid Expenseslip;
+	?Expenseslipdetailid Expenseslipdetail;
+	?Relatedtranid ID;
+	?Relatedtrandetailid ID;
+	?Itemid Item;
+	?Amount;
+	?TaxRate Rate;
+	?TaxAmount Amount;
+	?Pretaxamount Amount;
+	?Localamount Amount;
+	?Nocostamount Amount;
+	?Attr31 null;
+	?Assitemtype null;
+	?Comments Note;
+	?Invendqty Quantity;
+};
+

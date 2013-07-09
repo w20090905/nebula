@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Ovalcolumn {
+	!Columnid ID;
+	?App null;
+	?Module null;
+	?Tableid Ovaltable;
+	Columnname Name;
+	LanguageCode Lang;
+	Columndesc null;
+	Tablename Name;
+};
+

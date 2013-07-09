@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx PrintParameter {
+	!PrintParameterid ID;
+	?Orgid Organization;
+	?Booksetid Bookset;
+	?Transid ID;
+	?PaperType null;
+	?Slipcount Count;
+	?Rowcountnum null;
+	?IsEmptyofend YesNo;
+	?Orgslipformatid Slipformat;
+};
+

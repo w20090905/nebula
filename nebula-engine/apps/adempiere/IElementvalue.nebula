@@ -4,29 +4,19 @@ type IElementvalue {
 	@Remarks("Import Account Value")
 	!IElementvalueId ID;
 	@Remarks("Client/Tenant for this installation.")
-	?AdClientId AdClient;
+	?AdClientId ID;
 	@Remarks("Organizational entity within client")
-	?AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	?IsActive YesNo;/* 'Y' */
-	@Remarks("User who created this records")
-	?Createdby null;
-	@Remarks("Date this record was created")
-	?Created null;/* SYSDATE */
-	@Remarks("Date this record was updated")
-	?Updated null;/* SYSDATE */
-	@Remarks("User who updated this records")
-	?Updatedby null;
+	?AdOrgId ID;
 	@Remarks("Has this import been processed")
 	IIsImported YesNo;/* 'N'  */
 	@Remarks("Messages generated from import process")
-	?IErrorMsg Msg;
+	?IErrorMsg Note;
 	@Remarks("Accounting Element")
-	?CElementId CElement;
+	?CElement;
 	@Remarks("Name of the Element")
 	?Elementname Name;
 	@Remarks("Account Element")
-	?CElementvalueId CElementvalue;
+	?CElementvalue;
 	@Remarks("Search key for the record in the format required - must be unique")
 	?Value String;
 	@Remarks("Alphanumeric identifier of the entity")
@@ -40,11 +30,11 @@ type IElementvalue {
 	@Remarks("Control account - If an account is controlled by a document, you cannot post manually to it")
 	?IsDoccontrolled YesNo;/* 'N' */
 	@Remarks("This is a summary entity")
-	?IsSummary Comment;/* 'N' */
+	?IsSummary YesNo;/* 'N' */
 	@Remarks("Key if the Parent")
-	?Parentvalue String;
+	?Parentvalue Note;
 	@Remarks("The parent (summary) account")
-	?ParentelementvalueId CElementvalue;
+	?Parentelementvalue CElementvalue;
 	@Remarks("Actual Values can be posted")
 	?PostActual YesNo;/* 'Y' */
 	@Remarks("Budget values can be posted")
@@ -56,7 +46,7 @@ type IElementvalue {
 	@Remarks("Name of the Default Account Column")
 	?DefaultAccount null;
 	@Remarks("Column in the table")
-	?AdColumnId AdColumn;
+	?AdColumn;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("The document has been processed")

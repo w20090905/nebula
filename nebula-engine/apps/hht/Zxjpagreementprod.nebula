@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx Zxjpagreementprod {
+	!Zxjpagreementprodid ID;
+	!Zxjpagreementid Zxjpagreement;
+	Prodid Product;
+	?Agrprodcategory null;
+	?AmtLimited Amount;
+	Startmonth null;
+	Endmonth null;
+	DateLastupdated Date;
+	Createdate Date;
+	?Status;
+	?Comments Note;
+};
+

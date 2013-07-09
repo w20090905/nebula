@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+type SmpVdnTargetProperties {
+	?Targetid ID;
+	?Name;
+	?Value String;
+};
+

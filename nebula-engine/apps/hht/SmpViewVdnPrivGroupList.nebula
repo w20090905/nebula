@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+type SmpViewVdnPrivGroupList {
+	Id SmpVdnGroupList;
+	Name SmpVxaSystemPrefs;
+	?Owner null;
+	?Description;
+	?Backgroundfileurl Url;
+	?Iconsize Size;
+	PrincipalName Name;
+	PrivilegeString null;
+};
+

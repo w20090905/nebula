@@ -4,33 +4,23 @@ tx RRequest {
 	@Remarks("Request from a Business Partner or Prospect")
 	!RRequestId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Document sequence number of the document")
 	DocumentNo Code;
 	@Remarks("Type of request (e.g. Inquiry, Complaint, ..)")
-	RRequestTypeId RRequestType;
+	RRequestType;
 	@Remarks("Request Group")
-	?RGroupId RGroup;
+	?RGroup;
 	@Remarks("Request Category")
-	?RCategoryId RCategory;
+	?RCategory;
 	@Remarks("Request Status")
-	?RStatusId RStatus;
+	?RStatus;
 	@Remarks("Request Resolution")
-	?RResolutionId RResolution;
+	?RResolution;
 	@Remarks("Related Request (Master Issue, ..)")
-	?RRequestRelatedId RRequest;
+	?RRequestRelated RRequest;
 	@Remarks("Indicates if this request is of a high, medium or low priority.")
 	Priority YesNo;
 	@Remarks("Priority of the issue for the User")
@@ -46,9 +36,9 @@ tx RRequest {
 	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
 	IsSelfservice YesNo;/* 'N'  */
 	@Remarks("Sales Representative or Company Agent")
-	?SalesRepId AdUser;
+	?SalesRep AdUser;
 	@Remarks("Responsibility Role")
-	?AdRoleId AdRole;
+	?AdRole;
 	@Remarks("Date this request was last acted on")
 	?DateLastaction Date;
 	@Remarks("Date when last alert were sent")
@@ -60,41 +50,41 @@ tx RRequest {
 	@Remarks("Is this invoiced?")
 	IsInvoiceD YesNo;/* 'N'  */
 	@Remarks("Identifies a Business Partner")
-	?CBpartnerId CBpartner;
+	?CBpartner;
 	@Remarks("User within the system - Internal or Business Partner Contact")
-	?AdUserId AdUser;
+	?AdUser;
 	@Remarks("Marketing Campaign")
-	?CCampaignId CCampaign;
+	?CCampaign;
 	@Remarks("Order")
-	?COrderId COrder;
+	?COrder;
 	@Remarks("Invoice Identifier")
-	?CInvoiceId CInvoice;
+	?CInvoice;
 	@Remarks("Payment identifier")
-	?CPaymentId CPayment;
+	?CPayment;
 	@Remarks("Product, Service, Item")
-	?MProductId MProduct;
+	?MProduct;
 	@Remarks("Financial Project")
-	?CProjectId CProject;
+	?CProject;
 	@Remarks("Asset used internally or by customers")
-	?AAssetId AAsset;
+	?AAsset;
 	@Remarks("Material Shipment Document")
-	?MInoutId MInout;
+	?MInout;
 	@Remarks("Return Material Authorization")
-	?MRmaId MRma;
+	?MRma;
 	@Remarks("Database Table information")
-	?AdTableId AdTable;
+	?AdTable;
 	@Remarks("Direct internal record ID")
 	?RecordId ID;
 	@Remarks("Amount associated with this request")
 	RequestAmt Amount;/* 0  */
 	@Remarks("Text templates for mailings")
-	?RMailtextId RMailtext;
+	?RMailtext;
 	@Remarks("Result of the action taken")
 	?Result null;
 	@Remarks("Confidentiality of the individual entry")
 	Confidentialtypeentry null;
 	@Remarks("Request Standard Response")
-	?RStandardResponseId RStandardResponse;
+	?RStandardResponse;
 	@Remarks("Next Action to be taken")
 	?Nextaction null;
 	@Remarks("Date that this request should be acted on")
@@ -108,17 +98,17 @@ tx RRequest {
 	@Remarks("Invoiced Quantity")
 	?QtyInvoiced Quantity;/* 0 */
 	@Remarks("Product/Resource/Service used in Request")
-	?MProductSpentId MProduct;
+	?MProductSpent MProduct;
 	@Remarks("Business Activity")
-	?CActivityId CActivity;
+	?CActivity;
 	@Remarks("First effective day (inclusive)")
 	?Startdate Date;
 	@Remarks("Close Date")
 	?Closedate Date;
 	@Remarks("The generated invoice for this request")
-	?CInvoiceRequestId CInvoice;
+	?CInvoiceRequest CInvoice;
 	@Remarks("BOM (Engineering) Change Request")
-	?MChangeRequestId MChangeRequest;
+	?MChangeRequest;
 	@Remarks("Status of the Task")
 	?Taskstatus Attr;
 	@Remarks("Planned Quantity")
@@ -128,6 +118,6 @@ tx RRequest {
 	@Remarks("Planned Start Date")
 	?DateStartplan Date;
 	@Remarks("Fixed in Change Notice")
-	?MFixchangenoticeId MChangeNotice;
+	?MFixchangenotice MChangeNotice;
 };
 

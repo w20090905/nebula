@@ -1,0 +1,25 @@
+@Remarks("")
+@Refby("3")
+tx Marketingbudget {
+	!Marketingbudgetid ID;
+	Marketingbudgetcode Code;
+	?Budgetyear null;
+	?Accyearid Accountingyear;
+	?Baseamount Amount;
+	?Budgetpercent Percent;
+	?Adjustamount Amount;
+	?Budgetamount Amount;
+	?Maker null;
+	?Createdate Date;
+	?DateLastupdated Date;
+	Revision null;
+	Status;
+	?Originalmarketingbudgetid ID;
+	?SourceMarketingbudgetid ID;
+	?Budgettype null;
+	?Description;
+	?Orgid Organization;
+	?Budgetbasedtype null;
+	?Mabooksetid ID;
+};
+

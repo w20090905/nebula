@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("2")
+tx Marketingplanhierarchy {
+	!Mcphierarchyid ID;
+	?Parentid Marketingplanhierarchy;
+	Marketingplanid Marketingplan;
+	Analyzecodeid Analyzecode;
+	Analyzecodevalueid ID;
+	Analyzecodevalue String;
+	Grade null;
+	?IsBottom YesNo;
+	?Analyzecodevaluename Name;
+};
+

@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Datacleanprocessdetail {
+	!Datacleanprocessdetailid ID;
+	?Sortno null;
+	?Cleanrule null;
+	?ErrorLevel null;
+	?Param null;
+	?Comments Note;
+	?Runcircle null;
+	Datacleanprocessid Datacleanprocess;
+};
+

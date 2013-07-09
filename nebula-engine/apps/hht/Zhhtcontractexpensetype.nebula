@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtcontractexpensetype {
+	!Contractexpensetypeid ID;
+	?Contracttypeid Contracttype;
+	?Contracttypecode Code;
+	?Expenseclassgroupcode Code;
+	?Expenseclassgroupname Name;
+	?Expenseclasscode Code;
+	?Expenseclassname Name;
+	?Calculationtypecode Code;
+	?Calculationtypename Name;
+	?PostTypecode Code;
+	?PostTypename Name;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Attr21 null;
+	?Attr22 null;
+};
+

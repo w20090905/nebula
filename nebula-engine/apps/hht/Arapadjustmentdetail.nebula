@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+tx Arapadjustmentdetail {
+	!Arapadjustmentdetailid ID;
+	Arapadjustmentid Arapadjustment;
+	Arapadjusttype null;
+	?InvoiceCode Code;
+	?InvoiceDate Date;
+	?Duedate Date;
+	?Amount;
+	?Remark null;
+	?Baseondate Date;
+	?Zctcurrencycode Code;
+	?Zctamount Amount;
+	?Zcttaxrate Rate;
+	?Zctpretaxamount Amount;
+	?Zcttaxamount Amount;
+	?Zctrate Rate;
+	?LineStatus Line;
+	?Deptid Department;
+};
+

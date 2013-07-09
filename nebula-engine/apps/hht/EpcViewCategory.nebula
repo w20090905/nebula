@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("1")
+tx EpcViewCategory {
+	!ViewCatId ID;
+	?ParentCatId ID;/* 0 */
+	CatName Name;
+	?CatDesc null;
+	?CatExpanded null;/* 310A */
+};
+

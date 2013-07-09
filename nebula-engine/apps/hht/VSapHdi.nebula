@@ -1,0 +1,45 @@
+@Remarks("")
+@Refby("0")
+type VSapHdi {
+	?Hdi001DataType Attr;
+	Hdi002TrcontType Attr;
+	?Hdi003SoldTo null;
+	?Hdi004TrcontStat null;
+	?Hdi005TrcontCurrency null;
+	?Hdi006TrcontCurrencyIsO null;
+	?Hdi007ExchgRate null;
+	?Hdi008ExchRateP null;
+	?Hdi009ExchRateV null;
+	?Hdi010TransDate null;
+	Hdi011SalesOrg null;
+	?Hdi012DistrChan null;
+	?Hdi013Division null;
+	?Hdi014SalesGrp null;
+	?Hdi015SalesOff null;
+	?Hdi016PurchNo null;
+	?Hdi017PurchDate null;
+	?Hdi018Currency null;
+	?Hdi019CurrencyIsO null;
+	?Hdi020PriceDate null;
+	?Hdi021OrdReason null;
+	?Hdi022ShipCond null;
+	?Hdi023ExchgRateSd null;
+	?Hdi024ExchRateSdP null;
+	?Hdi025ExchRateSdV null;
+	?Hdi026LastChangeParty null;
+	?Hdi027Testrun null;
+	?Hdi028TkonnEx null;
+	?Hdi029TewType Attr;
+	?Hdi030TaxClass1 null;
+	?Hdi031TaxClass2 null;
+	?Hdi032TaxClass3 null;
+	?Hdi033TaxClass4 null;
+	?Hdi034TaxClass5 null;
+	?Hdi035TaxClass6 null;
+	?Hdi036TaxClass7 null;
+	?Hdi037TaxClass8 null;
+	?Hdi038TaxClass9 null;
+	?Hdi039HoldStatus null;
+	Returnid Returnslip;
+};
+

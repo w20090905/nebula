@@ -1,0 +1,28 @@
+@Remarks("")
+@Refby("0")
+tx Receiptinvalldetail {
+	!Receiptinvalldetailid ID;
+	Receiptdetailid Receiptdetail;
+	?Returnid Returnslip;
+	Itemid Item;
+	?Invstatus null;
+	?Lotno null;
+	?Batchno null;
+	?Manufacture null;
+	?Manufacturedate Date;
+	?Expiredate Date;
+	?QtyAll Quantity;
+	?QtyCheckined Quantity;
+	?Warehouseid Physicalwarehouse;
+	?Locationcode Code;
+	?Saleflag null;
+	?Inventoryflag null;
+	?Arflag null;
+	?Invalidflag null;
+	?Receiptid Receipt;
+	?Invsummaryid Invsummary;
+	?QtyConfirmed Quantity;
+	?Saplotno null;
+	?Sapevaluation null;
+};
+

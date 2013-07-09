@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type SmpVdpNodeInfo {
+	?Node SmpVdpNodes;
+	?Status;
+	?DownTime null;
+	?DownTimezone null;
+	?LastChecked null;
+};
+

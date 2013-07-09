@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+tx Expenseapportionslip {
+	!Expenseapportionslipid ID;
+	?Expenseslipid Expenseslip;
+	?Relatedtrantype null;
+	?Relatedtranid ID;
+	?Relatedtrancode Code;
+	?SourceSlipid ID;
+	?SourceSlipcode Code;
+	?Currencycode Code;
+	?Docdate Date;
+	?Amount;
+	?Localamount Amount;
+	?ReferenceNo Code;
+	?Qty Quantity;
+};
+

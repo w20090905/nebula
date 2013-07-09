@@ -1,0 +1,167 @@
+@Remarks("")
+@Refby("2")
+tx Zhhtsoupload {
+	!Souploadid ID;
+	?Contracttypeid Contracttype;
+	?Contracttypecode Code;
+	?Contracttypename Name;
+	?Customerpono null;
+	?Buyerid ID;
+	?Buyercode Code;
+	?Buyername Name;
+	?Receiveraddresscode Code;
+	?Receiveraddressname Name;
+	?Warehouseid Physicalwarehouse;
+	?Docdate Date;
+	?TaxCode Code;
+	?TaxName Name;
+	?TaxRate Rate;
+	?Exchagedatecode Code;
+	?Currencycode Code;
+	?Currencyname Name;
+	?Zctrate Rate;
+	?PaymentMethodvalue null;
+	?PaymentMethodname Name;
+	?Lcno null;
+	?ProductCountry null;
+	?ProductCountryName Name;
+	?Purchasecountry null;
+	?Purchasecountryname Name;
+	?Sunstandardtype Attr;
+	?Retandrecpdate Date;
+	?Employeeid Employee;
+	?Employeecode Code;
+	?Status;
+	?Source null;
+	?Orgid Organization;
+	?Userid Usr;
+	?Createdate Date;
+	?DateLastupdated Date;
+	@Remarks("在庫認可No.")
+	?Inventorycode Code;
+	@Remarks("輸管審査No.")
+	?Transno null;
+	@Remarks("E/L区分")
+	?Eltype Attr;
+	@Remarks("運送方法")
+	?Shipmentmethod null;
+	@Remarks("運送方法名称")
+	?Shipmentmethodname Name;
+	@Remarks("仕入先コード")
+	?Sellercode Code;
+	@Remarks("仕入先名")
+	?Sellername Name;
+	@Remarks("得意先発注日付")
+	?Customerpurdate Date;
+	@Remarks("支払条件ID")
+	?PaymentTermid PaymentTerm;
+	@Remarks("支払条件コード")
+	?PaymentTermname Name;
+	@Remarks("為替区分")
+	?Exchagetype null;
+	@Remarks("運送条件名")
+	?Shipmenttermname Name;
+	@Remarks("運送条件")
+	?Shipmentterm null;
+	@Remarks("運送条件テキスト")
+	?Incoterms null;
+	@Remarks("優先度ID")
+	?Fillpriority null;
+	@Remarks("優先度")
+	?Fillpriorityname Name;
+	@Remarks("レートタイプ")
+	?Ratetype Attr;
+	@Remarks("レートタイプ名")
+	?Ratetypename Name;
+	@Remarks("分納完納区分CODE")
+	?Bunnokubun null;
+	@Remarks("分納完納区分")
+	?Bunnokubunname Name;
+	@Remarks("オーダー特性")
+	?Orderproperty null;
+	@Remarks("処理区分")
+	?Dealstatus null;
+	@Remarks("成約ｺｰﾄﾞ")
+	?Contractcode Code;
+	@Remarks("ｵｰﾀﾞｰｺｰﾄﾞ")
+	?Ordercode Code;
+	@Remarks("備考")
+	?Edicomments Note;
+	@Remarks("支払条件PO")
+	?PaymentTermidpo null;
+	@Remarks("支払条件名PO")
+	?PaymentTermnamepo null;
+	@Remarks("為替予約NoPO")
+	?Exchagedatecodepo null;
+	@Remarks("出荷先コードPO")
+	?Receiveraddresscodepo null;
+	@Remarks("消費税名PO")
+	?TaxNamepo null;
+	@Remarks("税率PO")
+	?TaxRatepo null;
+	@Remarks("消費税コード")
+	?TaxCodepo null;
+	@Remarks("LCNOPO")
+	?Lcnopo null;
+	@Remarks("通貨PO")
+	?Currencycodepo null;
+	@Remarks("為替レートPO")
+	?Zctratepo null;
+	@Remarks("備考PO")
+	?Edicommentspo null;
+	@Remarks("オーダー特性PO")
+	?Orderpropertypo null;
+	@Remarks("出荷先名")
+	?Receiveraddressnamepo null;
+	@Remarks("通貨名")
+	?Currencynamepo null;
+	@Remarks("倉庫IDPO")
+	?Warehouseidpo null;
+	?Edibuyername Name;
+	?Edisellername Name;
+	?Generateflag null;
+	?Sellerid ID;
+	@Remarks("作番")
+	?Ctxtm01 null;
+	@Remarks("発注コメント（漢字）")
+	?Ordcomment null;
+	@Remarks("発注コメント（カナ）")
+	?Ordcommentkn null;
+	@Remarks("納入要件（漢字）")
+	?Receiverdemand null;
+	@Remarks("納入要件（カナ）")
+	?Receiverdemandkj null;
+	@Remarks("運送条件po")
+	?Shipmenttermpo null;
+	@Remarks("運送条件text")
+	?Incotermspo null;
+	@Remarks("発注コメント（漢字）po")
+	?Ordcommentpo null;
+	@Remarks("発注コメント（カナ）po")
+	?Ordcommentknpo null;
+	@Remarks("納入要件（漢字）po")
+	?Receiverdemandpo null;
+	@Remarks("納入要件（カナ）po")
+	?Receiverdemandkjpo null;
+	@Remarks("得意先発注日付po")
+	?Customerpurdatepo null;
+	@Remarks("レートタイプpo")
+	?Ratetypepo null;
+	?Inquirycode Code;
+	?Createkbn YesNo;
+	?Kensyukbn null;
+	?Errkbn1 null;
+	?Errkbn2 null;
+	?Hikiatecode Code;
+	?Torihikicd null;
+	?Kigyocd null;
+	?Kojocd null;
+	?Souhuno null;
+	?Groupcd null;
+	?Twxdataflg null;
+	?Chumonkbn null;
+	?Twxseqid ID;
+	@Remarks("0：未処理、1：処理中、2：処理済、3：処理エラー")
+	?Processflag null;
+};
+

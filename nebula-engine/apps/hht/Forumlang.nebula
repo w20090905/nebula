@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Forumlang {
+	!Forumlangid ID;
+	Forumid Forum;
+	LanguageCode Lang;
+	Frmt null;
+	?Frmd null;
+};
+

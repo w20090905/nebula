@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("5")
+tx Orgcopy {
+	!Orgcopyid ID;
+	SourceOrgid ID;
+	Orgcode Code;
+	Maker null;
+	?Copydate Date;
+	Shortname Name;
+	Orgname Name;
+	?Parentorgid ID;
+	Ownerorgid ID;
+	Adminname Name;
+	Adminpwd null;
+	Status;
+	DateLastupdated Date;
+	Orgtype null;
+};
+

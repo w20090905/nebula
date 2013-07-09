@@ -4,19 +4,9 @@ type CRfq {
 	@Remarks("Request for Quotation")
 	!CRfqId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")
@@ -24,9 +14,9 @@ type CRfq {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("Topic for Request for Quotations")
-	CRfqTopicId CRfqTopic;
+	CRfqTopic;
 	@Remarks("The Currency for this record")
-	CCurrencyId CCurrency;
+	CCurrency;
 	@Remarks("Date of the Response")
 	DateResponse Date;
 	@Remarks("Are Resonses to the Request for Quotation accepted")
@@ -48,23 +38,23 @@ type CRfq {
 	@Remarks("Only invited vendors can respond to an RfQ")
 	IsInvitedvendorsonly YesNo;/* 'N'  */
 	@Remarks("Identifies a Business Partner")
-	?CBpartnerId CBpartner;
+	?CBpartner;
 	@Remarks("Identifies the (ship to) address for this Business Partner")
-	?CBpartnerLocationId CBpartnerLocation;
+	?CBpartnerLocation;
 	@Remarks("User within the system - Internal or Business Partner Contact")
-	?AdUserId AdUser;
+	?AdUser;
 	@Remarks("Sales Representative or Company Agent")
-	SalesRepId AdUser;
+	SalesRep AdUser;
 	@Remarks("Margin for a product as a percentage")
 	?Margin Length;
 	@Remarks("Create SO")
-	?CreateSo YesNo;
+	?Createso YesNo;
 	@Remarks("Create Purchase Order")
-	?CreatePo YesNo;
+	?Createpo YesNo;
 	@Remarks("Publish RfQ")
 	?Publishrfq null;
 	@Remarks("Order")
-	?COrderId COrder;
+	?COrder;
 	@Remarks("Copy Lines")
 	?Copylines null;
 	@Remarks("Rank RfQ")

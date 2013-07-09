@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+tx Orgrelationremark {
+	!Orgrelationremarkid ID;
+	?Orgrelationdetailid ID;
+	?Remark1 null;
+	?Remark2 null;
+	?Remark3 null;
+	?Remark4 null;
+	?Remark5 null;
+	?Remark6 null;
+	?Remark7 null;
+	?Remark8 null;
+	?Remark9 null;
+	?Remark10 null;
+	?Updatetime null;
+	?Userid ID;
+};
+

@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("4")
+tx Examineplan {
+	!Examineplanid ID;
+	SalesPlantypeid SalesPlantype;
+	?Orgid Organization;
+	?Epcode Code;
+	?Epname Name;
+	?Description;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Maker null;
+	?Status;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr21 null;
+	?Attr22 null;
+	?Attr11 null;
+	?Attr12 null;
+};
+

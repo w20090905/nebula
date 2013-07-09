@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("2")
+tx EpcView {
+	!ViewId ID;
+	Vendor null;
+	FacilityNumber null;
+	MinFacilityVersion null;
+	ViewName Name;
+	EventNum null;
+	?SortItemNum null;/* 0 */
+	?SortItemName Name;/* 0 */
+	?SortOrder null;/* 0 */
+	?NumRows null;/* 2D310A */
+};
+

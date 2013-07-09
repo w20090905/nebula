@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx Insuranceinfo {
+	!Insuranceinfoid ID;
+	Fixedassetsid Fixedassets;
+	Startdate Date;
+	?Enddate Date;
+	?Insurancetype null;
+	Policycode Code;
+	?Insurancecompanyid ID;
+	?Insuranceagent null;
+	?Insurancepremium null;
+	?PaymentMethod null;
+	?Insuredamount Amount;
+	DateLastupdated Date;
+};
+

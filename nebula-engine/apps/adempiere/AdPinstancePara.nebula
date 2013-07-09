@@ -2,7 +2,7 @@
 @Refby("0")
 tx AdPinstancePara {
 	@Remarks("Instance of the process")
-	!AdPinstanceId AdPinstance;
+	!AdPinstance;
 	@Remarks("Method of ordering records; lowest number comes first")
 	!SeqNo;
 	@Remarks("Parameter Name")
@@ -12,30 +12,20 @@ tx AdPinstancePara {
 	@Remarks("Process Parameter")
 	?PStringTo null;/* NULL */
 	@Remarks("Process Parameter")
-	?PNumber null;/* NULL */
+	?PNumber Number;/* NULL */
 	@Remarks("Process Parameter")
-	?PNumberTo null;/* NULL */
+	?PNumberTo Number;/* NULL */
 	@Remarks("Process Parameter")
 	?PDate Date;
 	@Remarks("Process Parameter")
 	?PDateTo null;
 	@Remarks("Information")
-	?Info;
+	?Info Note;
 	@Remarks("Info To")
-	?InfoTo null;
+	?InfoTo Info;
 	@Remarks("Client/Tenant for this installation.")
-	?AdClientId AdClient;
+	?AdClientId ID;
 	@Remarks("Organizational entity within client")
-	?AdOrgId AdOrg;
-	@Remarks("Date this record was created")
-	?Created null;/* SYSDATE */
-	@Remarks("User who created this records")
-	?Createdby null;
-	@Remarks("Date this record was updated")
-	?Updated null;/* SYSDATE */
-	@Remarks("User who updated this records")
-	?Updatedby null;
-	@Remarks("The record is active in the system")
-	?IsActive YesNo;/* 'Y' */
+	?AdOrgId ID;
 };
 

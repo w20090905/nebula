@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("2")
+tx Phcslip {
+	!Phcslipid ID;
+	?Orgid Organization;
+	Phcslipcode Code;
+	?Description;
+	Maker null;
+	Createdate Date;
+	?Docdate Date;
+	Status;
+	DateLastupdated Date;
+};
+

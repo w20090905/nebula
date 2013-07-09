@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Agreementaddress {
+	!Agreementaddressid ID;
+	Agreementid Agreement;
+	Orgid Organization;
+	Addressroletype null;
+	Addressid Address;
+};
+

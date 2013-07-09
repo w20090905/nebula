@@ -4,35 +4,25 @@ tx MBomproduct {
 	@Remarks("Bill of Material Component (Product)")
 	!MBomproductId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Unique line for this document")
 	Line;/* 0  */
 	@Remarks("Bill of Material")
-	MBomId MBom;
+	MBom;
 	@Remarks("BOM Product Type")
 	Bomproducttype Attr;
 	@Remarks("Phantom Component")
 	IsPhantom YesNo;/* 'N'  */
 	@Remarks("Bill of Material Component Product")
-	?MProductBomId MProduct;
+	?MProductBom MProduct;
 	@Remarks("Bill of Materials (Engineering) Change Notice (Version)")
-	?MChangeNoticeId MChangeNotice;
+	?MChangeNotice;
 	@Remarks("Product Attribute Set Instance")
-	?MAttributesetinstanceId MAttributesetinstance;
+	?MAttributesetinstance;
 	@Remarks("Product BOM Alternative Group")
-	?MBomalternativeId MBomalternative;
+	?MBomalternative;
 	@Remarks("Bill of Materials Quantity")
 	Bomqty Quantity;/* 0  */
 	@Remarks("Optional short description of the record")
@@ -40,10 +30,10 @@ tx MBomproduct {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("Product Manufacturing Operation")
-	?MProductOperationId MProductOperation;
+	?MProductOperation;
 	@Remarks("Method of ordering records; lowest number comes first")
 	?SeqNo;/* 0 */
 	@Remarks("Optional Lead Time offest before starting production")
-	Leadtimeoffset null;/* 0  */
+	Leadtimeoffset Number;/* 0  */
 };
 

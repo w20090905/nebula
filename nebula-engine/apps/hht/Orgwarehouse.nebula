@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("0")
+tx Orgwarehouse {
+	!Orgwarehouseid ID;
+	Orgid Organization;
+	Warehouseid Physicalwarehouse;
+	?Warehousecode Code;
+	?Warehousename Name;
+	?Warehousedesc null;
+	?Atp null;
+	?Net null;
+	?Admlocationtype null;
+	?Takeorder null;
+	?Whgroupcode Code;
+	?DateLastupdated Date;
+	?Costareacode Code;
+	?Physicalwarehouseid ID;
+	@Remarks("SAP倉庫コード")
+	?Sapwhcode Code;
+};
+

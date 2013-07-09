@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+tx Marketingbudgetdetail {
+	!Marketingbudgetdetailid ID;
+	Marketingbudgetid Marketingbudget;
+	?Analyzecodeid Analyzecode;
+	?Analyzecodevalueid ID;
+	?Analyzecodevalue String;
+	?Analyzecodevaluename Name;
+	?Description;
+	?Budgetamount Amount;
+	?PlannedAmount Amount;
+	?Actualamount Amount;
+	?Grade null;
+	?Parentid ID;
+	?Adjustamount Amount;
+};
+

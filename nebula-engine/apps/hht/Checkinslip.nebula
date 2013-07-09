@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("3")
+tx Checkinslip {
+	!Checkinslipid ID;
+	?Relatedtrandate Date;
+	?Relatedtrantype null;
+	?Relatedtranid ID;
+	?Relatedtranno null;
+	Checkinslipcode Code;
+	Orgid Organization;
+	?Receiptid Receipt;
+	?Warehouseid Physicalwarehouse;
+	?Checkinsliptype null;
+	?Maker null;
+	?Checkindate Date;
+	?Createdate Date;
+	?Comments Note;
+	?Status;
+	?DateLastupdated Date;
+	?PrintNum null;
+	?Docdate Date;
+	?Gldate Date;
+};
+

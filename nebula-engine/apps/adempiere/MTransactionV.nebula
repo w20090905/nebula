@@ -1,29 +1,24 @@
 @Remarks("")
 @Refby("0")
 type MTransactionV {
-	MTransactionId MTransaction;
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;
-	Created null;
-	Createdby null;
-	Updated null;
-	Updatedby null;
+	MTransactionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Movementtype Attr;
-	MLocatorId MLocator;
-	MProductId MProduct;
+	MLocatorId ID;
+	MProductId ID;
 	Movementdate Date;
 	Movementqty Quantity;
-	?MInventorylineId MInventoryline;
-	?MInventoryId MInventory;
-	?MMovementlineId MMovementline;
-	?MMovementId MMovement;
-	?MInoutlineId MInoutline;
-	?MInoutId MInout;
-	?MProductIonlineId MProductIonline;
-	?MProductIonId MProductIon;
-	?CProjectIssueId CProjectIssue;
-	?CProjectId CProject;
-	MAttributesetinstanceId MAttributesetinstance;
+	?MInventorylineId ID;
+	?MInventoryId ID;
+	?MMovementlineId ID;
+	?MMovementId ID;
+	?MInoutlineId ID;
+	?MInoutId ID;
+	?MProductIonlineId ID;
+	?MProductIonId ID;
+	?CProjectIssueId ID;
+	?CProjectId ID;
+	MAttributesetinstanceId ID;
 };
 

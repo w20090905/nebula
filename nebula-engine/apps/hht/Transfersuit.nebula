@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("1")
+tx Transfersuit {
+	!Transfersuitid ID;
+	Transferid Transfer;
+	Bomid Bom;
+	Qty Quantity;
+};
+

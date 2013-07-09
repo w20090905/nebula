@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("2")
+tx Ktphierarchy {
+	!Ktphierarchyid ID;
+	Kpitargetplanid Kpitargetplan;
+	?Parentid Ktphierarchy;
+	?Analyzecodevalueid ID;
+	Analyzecodevalue String;
+	?Grade null;
+	?IsBottom YesNo;
+	?Analyzecodeid Analyzecode;
+};
+

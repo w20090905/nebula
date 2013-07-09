@@ -1,0 +1,14 @@
+@Remarks("List of all groups defined in the navigator")
+@Refby("0")
+type SmpViewGroups {
+	@Remarks("Name of the group")
+	GroupName Name;
+	?GroupOwner null;
+	@Remarks("Description of the group")
+	?Description;
+	@Remarks("Bitmap to use for this group in the navigator")
+	?BackgroundImage null;
+	@Remarks("Boolean value: Large (1) or Small (0) icons?")
+	?IconSize Size;
+};
+

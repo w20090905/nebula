@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("2")
+tx Attachment {
+	!Attachmentid ID;
+	Filename;
+	Attachmentname Name;
+	Filesize null;
+	Filetype Attr;
+	?Comments Note;
+	Relatedentitytype null;
+	Relatedentityid ID;
+	Maker null;
+	Orgid Organization;
+	?Filegeneratetime null;
+	?Uploadpath Path;
+	?Importflag null;
+	?Importdatatype Attr;
+	?Importstatus null;
+	?Backupflag null;
+	?DateLastupdated Date;
+};
+

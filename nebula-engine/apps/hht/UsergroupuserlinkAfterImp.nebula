@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+type UsergroupuserlinkAfterImp {
+	Usergroupuserlinkid Usergroupuserlink;
+	Usergroupid Usergroup;
+	Userid Usr;
+};
+

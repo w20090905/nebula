@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Costvardispjounallink {
+	!Costvardisjournallinkid ID;
+	Costvardisposeid Costvardispose;
+	Costvardisposedetailid Costvardisposedetail;
+	Costvarjournalid Costvarjournal;
+	?Amount;
+};
+

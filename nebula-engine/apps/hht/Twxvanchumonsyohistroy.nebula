@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type Twxvanchumonsyohistroy {
+	?Seqid Twxmitumoriiraiumhistroy;
+	?PrintFlg null;
+	?Orgid Organization;
+	?Userid Usr;
+	?Createdate Date;
+	?DateLastupdated Date;
+};
+

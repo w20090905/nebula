@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("1")
+tx Workrouting {
+	!Workroutingid ID;
+	Orgid Organization;
+	Itemid Item;
+	?Workroutingcode Code;
+	?Workroutingname Name;
+	?Begindate Date;
+	?Enddate Date;
+	Revision null;
+	DateLastupdated Date;
+	Status;
+};
+

@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Hhtdictionary {
+	!Hhtdictionaryid ID;
+	?Createdate Date;
+	?Orgid Organization;
+	?Type Attr;
+	?Hhtvaluecode Code;
+	?Hhtvaluename Name;
+	?Comments Note;
+	?DateLastupdated Date;
+};
+

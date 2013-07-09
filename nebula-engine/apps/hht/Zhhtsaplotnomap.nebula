@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtsaplotnomap {
+	!Saplotnomapid ID;
+	?Orgid Organization;
+	?Createdate Date;
+	?Itemid Item;
+	?Warehouseid Physicalwarehouse;
+	Saplotno null;
+	Sapevaluation null;
+};
+

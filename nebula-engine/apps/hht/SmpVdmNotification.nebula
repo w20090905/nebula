@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("2")
+type SmpVdmNotification {
+	!SequenceNum SmpVdeTryRemoveEventQueue;
+	?NotificationId ID;
+	?NotificationType SmpVdmLastNotifSeqPertype;
+	?Subtype null;
+	?NodeName Name;
+	?ServiceName Name;
+	?ServiceType Attr;
+	?TimeStamp Count;
+	?TimeZone Count;
+	?Verbose null;
+	?Domain null;
+	?NumClientS null;
+};
+

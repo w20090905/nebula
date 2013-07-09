@@ -1,0 +1,27 @@
+@Remarks("")
+@Refby("3")
+tx Zhhtkensyujyohouhead {
+	!Zhhtkensyujyohouheadid ID;
+	?Torihikisakicd null;
+	?Eigyosyocd null;
+	?Kigyocd null;
+	?Jigyosyocd null;
+	?Soufuno SeqNo;
+	?Coment1 null;
+	?Sakuseihiduke null;
+	?Sakuseijikoku null;
+	?Coment2 null;
+	?Testkbn null;
+	?Meisaikensu null;
+	?Keijyouym null;
+	?Keijyoukaisu null;
+	?Coment3 null;
+	?Inflag null;
+	?Keijyosuryousum null;
+	?Keijyoutankasum null;
+	?Keijyokinngakusum null;
+	?Createdate Date;/* SYSDATE */
+	@Remarks("ﾃﾞｰﾀ区分")
+	?Datakbn null;
+};
+

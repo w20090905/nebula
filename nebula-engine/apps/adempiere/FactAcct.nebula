@@ -4,47 +4,37 @@ tx FactAcct {
 	@Remarks("Accounting Fact")
 	!FactAcctId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("Rules for accounting")
-	CAcctschemaId CAcctschema;
+	CAcctschema;
 	@Remarks("Account used")
-	AccountId CElementvalue;
+	Account CElementvalue;
 	@Remarks("Transaction Date")
 	DateTrx Date;
 	@Remarks("Accounting Date")
 	DateAcct Date;
 	@Remarks("Period of the Calendar")
-	?CPeriodId CPeriod;
+	?CPeriod;
 	@Remarks("Database Table information")
-	AdTableId AdTable;
+	AdTable;
 	@Remarks("Direct internal record ID")
 	RecordId ID;
 	@Remarks("Transaction line ID (internal)")
 	?LineId ID;
 	@Remarks("General Ledger Category")
-	?GlCategoryId GlCategory;
+	?GlCategory;
 	@Remarks("General Ledger Budget")
-	?GlBudgetId GlBudget;
+	?GlBudget;
 	@Remarks("Tax identifier")
-	?CTaxId CTax;
+	?CTax;
 	@Remarks("Warehouse Locator")
-	?MLocatorId MLocator;
+	?MLocator;
 	@Remarks("The type of posted amount for the transaction")
 	PostIngtype Attr;
 	@Remarks("The Currency for this record")
-	CCurrencyId CCurrency;
+	CCurrency;
 	@Remarks("Source Debit Amount")
 	AmtSourcedr Amount;/* 0  */
 	@Remarks("Source Credit Amount")
@@ -54,44 +44,44 @@ tx FactAcct {
 	@Remarks("Accounted Credit Amount")
 	AmtAcctcr Amount;/* 0  */
 	@Remarks("Unit of Measure")
-	?CUomId CUom;
+	?CUom;
 	@Remarks("Quantity")
 	?Qty Quantity;/* 0 */
 	@Remarks("Product, Service, Item")
-	?MProductId MProduct;
+	?MProduct;
 	@Remarks("Identifies a Business Partner")
-	?CBpartnerId CBpartner;
+	?CBpartner;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrxId AdOrg;
+	?AdOrgtrx AdOrg;
 	@Remarks("Location that inventory was moved from")
-	?CLocfromId CLocation;
+	?CLocfrom CLocation;
 	@Remarks("Location that inventory was moved to")
-	?CLoctoId CLocation;
+	?CLocto CLocation;
 	@Remarks("Sales coverage region")
-	?CSalesRegionId CSalesRegion;
+	?CSalesRegion;
 	@Remarks("Financial Project")
-	?CProjectId CProject;
+	?CProject;
 	@Remarks("Marketing Campaign")
-	?CCampaignId CCampaign;
+	?CCampaign;
 	@Remarks("Business Activity")
-	?CActivityId CActivity;
+	?CActivity;
 	@Remarks("User defined list element #1")
-	?User1Id CElementvalue;
+	?User1 CElementvalue;
 	@Remarks("User defined list element #2")
-	?User2Id CElementvalue;
+	?User2 CElementvalue;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Asset used internally or by customers")
-	?AAssetId AAsset;
+	?AAsset;
 	@Remarks("Sub account for Element Value")
-	?CSubacctId CSubacct;
+	?CSubacct;
 	@Remarks("User defined accounting Element")
 	?Userelement1Id ID;
 	@Remarks("User defined accounting Element")
 	?Userelement2Id ID;
 	@Remarks("Phase of a Project")
-	?CProjectPhaseId CProjectPhase;
+	?CProjectPhase;
 	@Remarks("Actual Project Task in a Phase")
-	?CProjectTaskId CProjectTask;
+	?CProjectTask;
 };
 

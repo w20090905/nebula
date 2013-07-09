@@ -2,26 +2,16 @@
 @Refby("0")
 type RContactinterest {
 	@Remarks("Interest Area or Topic")
-	RInterestAreaId RInterestArea;
+	RInterestArea;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Date the contact actively subscribed")
 	?Subscribedate Date;
 	@Remarks("Date the contact opted out")
 	?Optoutdate Date;
 	@Remarks("User within the system - Internal or Business Partner Contact")
-	AdUserId AdUser;
+	AdUser;
 };
 

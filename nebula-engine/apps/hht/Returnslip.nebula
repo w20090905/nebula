@@ -1,0 +1,149 @@
+@Remarks("")
+@Refby("17")
+tx Returnslip {
+	!Returnid ID;
+	Returntype null;
+	?Returncode Code;
+	?Createdate Date;
+	?Returndate Date;
+	?Remedyid Remedy;
+	?Maker null;
+	?Complaintreasoncode null;
+	?Dutyman null;
+	Orgid Organization;
+	?Invstatus null;
+	?Shipfrom null;
+	?Shipto null;
+	?Partnerid ID;
+	?Carrier null;
+	?Relatedtrantype null;
+	?Relatedtranid ID;
+	?Relatedtrancode Code;
+	?Refrenceno null;
+	@Remarks("税抜合計")
+	?TotalAmount Amount;
+	?TaxAmount Amount;
+	?Pretaxamount Amount;
+	?Volume;
+	?Netweight Weight;
+	?GrossWeight Weight;
+	?Numberofcontainers null;
+	?Status;
+	?Comments Note;
+	?Currencycode Code;
+	?Remedymethodcode null;
+	?Originalreturnid ID;
+	?Revision null;
+	?DateLastupdated null;
+	?SalesRepid ID;
+	?Warehouseid Physicalwarehouse;
+	?PrintNum null;
+	?Billto null;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Accountingyearid ID;
+	?Year null;
+	?Accperiodid Accountingperiod;
+	?Period null;
+	?Docdate Date;
+	?Gldate Date;
+	?PaymentTermid PaymentTerm;
+	?Duedate Date;
+	?Deptid Department;
+	?Attr31 null;
+	?Attr5 null;
+	?Returnreason null;
+	?Sapordertype null;
+	@Remarks("SAP取引先ｺｰﾄﾞ")
+	?Sapbilltocode Code;
+	@Remarks("SAP取引先名称")
+	?Sapbilltoname Name;
+	@Remarks("得意先発注日付")
+	?Customerpurdate Date;
+	@Remarks("原産国")
+	?ProductCountry null;
+	@Remarks("仕向国")
+	?Purchasecountry null;
+	@Remarks("為替区分")
+	?Exchagetype Attr;
+	@Remarks("予約コード")
+	?Exchagedatecode Code;
+	@Remarks("L/C No")
+	?Lcno null;
+	@Remarks("得意先税区分")
+	?TaxType Attr;
+	@Remarks("運送条件（ﾃｷｽﾄ）")
+	?Incoterms null;
+	@Remarks("分納/完納区分")
+	?Bunnokubun null;
+	@Remarks("レートタイプ")
+	?Ratetype Attr;
+	@Remarks("輸管番号")
+	?Transno null;
+	@Remarks("消費税ｺｰﾄﾞ")
+	?TaxCode Code;
+	@Remarks("税率")
+	?TaxRate Rate;
+	@Remarks("直送フラグ")
+	?AutoDevgrflag null;
+	@Remarks("so returnid")
+	?Refsrslipid ID;
+	@Remarks("在庫認可No")
+	?Inventorycode Code;
+	@Remarks("送案No")
+	?Relatedno null;
+	@Remarks("販売起算日/購買起算日")
+	?Edistartdate Date;
+	@Remarks("通関No")
+	?Hhtsidocode Code;
+	@Remarks("出荷日/出港日")
+	?Edideliverydate Date;
+	@Remarks("計上基準区分")
+	?Sunstandardtype Attr;
+	@Remarks("据付/検収予定日")
+	?Retandrecpdate Date;
+	@Remarks("出入庫No")
+	?Invrelatedno null;
+	@Remarks("輸入Invoice No")
+	?Inputinvoiceno null;
+	@Remarks("運送方法")
+	?Shipmentmethod null;
+	@Remarks("伝票日付")
+	?Edidocdate Date;
+	@Remarks("顧客注番")
+	?Customerpono null;
+	@Remarks("ｵｰﾀﾞｰ注文日")
+	?Podocdate Date;
+	@Remarks("為替レート")
+	?Zctrate Rate;
+	@Remarks("税込合計")
+	?TotalTaxEdamount Amount;
+	@Remarks("基準通貨税抜金額")
+	?TotalLocalamount Amount;
+	@Remarks("基準通貨税込金額")
+	?TotalLocaltaxedamount Amount;
+	@Remarks("運送条件")
+	?Shipmentterm null;
+	?Zhhteaiflag String;/* '0' */
+	?Attr100 null;
+	?Attr101 null;
+	?Attr102 null;
+	?Attr103 null;
+	?Attr104 null;
+	?Attr105 null;
+	?Attr106 null;
+	?Attr107 null;
+	?Attr108 null;
+	?Attr109 null;
+	Saptransmitstatus null;/* 1  */
+	?Sapresulttreattime null;
+	?OFlg null;
+	?Source null;
+	?Hhtrsmanagecode Code;
+	?Paydate Date;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Ovalreportsubscribe {
+	!Ovalreportsubscribeid ID;
+	Scheduledovalreportid Scheduledovalreport;
+	?Userid Usr;
+	?EMail;
+	?Remark null;
+};
+

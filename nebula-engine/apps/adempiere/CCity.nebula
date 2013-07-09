@@ -4,32 +4,22 @@ type CCity {
 	@Remarks("City")
 	!CCityId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Location code - UN/LOCODE")
-	?Locode Code;
+	?Locode Note;
 	@Remarks("Location coordinate")
 	?Coordinates null;
 	@Remarks("Postal code")
-	?PostAl Postal;
+	?Postal;
 	@Remarks("Phone Area Code")
-	?Areacode Code;
+	?Areacode Note;
 	@Remarks("Country")
-	?CCountryId CCountry;
+	?CCountry;
 	@Remarks("Identifies a geographical Region")
-	?CRegionId CRegion;
+	?CRegion;
 };
 

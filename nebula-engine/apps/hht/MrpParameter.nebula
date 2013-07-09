@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx MrpParameter {
+	!Sid MrpRecommend;
+	MrpCode MrpInfo;
+	ParaType null;
+	ParaValue String;
+};
+

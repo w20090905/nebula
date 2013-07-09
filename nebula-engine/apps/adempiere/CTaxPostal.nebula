@@ -4,23 +4,13 @@ tx CTaxPostal {
 	@Remarks("Tax Postal/ZIP")
 	!CTaxPostalId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Tax identifier")
-	CTaxId CTax;
+	CTax;
 	@Remarks("Postal code")
-	PostAl Postal;
+	Postal;
 	@Remarks("Postal code to")
 	?PostAlTo Postal;
 };

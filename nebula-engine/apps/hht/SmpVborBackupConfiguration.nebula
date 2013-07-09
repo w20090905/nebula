@@ -1,0 +1,35 @@
+@Remarks("")
+@Refby("0")
+type SmpVborBackupConfiguration {
+	?Configname Name;
+	?Description;
+	?Type Attr;
+	?Userc null;
+	?Rcusername Name;
+	?Rcpassword null;
+	?Rcservicename Name;
+	?Overrideprefcred null;
+	?Prefusername Name;
+	?Prefpassword null;
+	?Overridermandef null;
+	?Usefilesbackupset null;
+	?Filesbackupset null;
+	?Usesizebackupset null;
+	?Usesizebackupsetal null;
+	?Sizebackupset Size;
+	?Sizeal Size;
+	?Copinitora null;
+	?Copyfromdef null;
+	?Copyfromlocation null;
+	?Copydestination null;
+	?Oemuser null;
+	?Permission null;
+	?Usefilesbackupsetal null;
+	?Filesbackupsetal null;
+	?IsAppliancedatabase null;
+	?Nsrserver null;
+	?ProxyUsage null;
+	?Usenewrc null;
+	?NewRctriplet null;
+};
+

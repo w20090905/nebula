@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+tx Privlistdetail {
+	!Privlistdetailid ID;
+	Privlistid Privlist;
+	Privilegeid Privilege;
+};
+

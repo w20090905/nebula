@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+type SmpVdnViewPrivTargetList {
+	Id SmpVdnGroupList;
+	Name SmpVxaSystemPrefs;
+	?Description;
+	Type Attr;
+	Typeid ID;
+	Node null;
+	Nodeid ID;
+	?Tnsaddr Address;
+	?Userdata null;
+	?Agent null;
+	?Withagent null;
+	?TotalBlackout null;
+	PrincipalName Name;
+};
+

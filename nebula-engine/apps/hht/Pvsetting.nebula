@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Pvsetting {
+	!Pvsettingid ID;
+	Userid Usr;
+	Orgid Organization;
+	Pageid ID;
+	Seq null;
+	?Colwidth Width;
+	?Colname Name;
+	?Colproperty null;
+};
+

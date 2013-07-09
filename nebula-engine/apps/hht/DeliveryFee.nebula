@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx DeliveryFee {
+	!DeliveryFeeid ID;
+	DeliveryId Delivery;
+	FeeType null;
+	?Amount;
+	?Comments Note;
+	?Status;
+};
+

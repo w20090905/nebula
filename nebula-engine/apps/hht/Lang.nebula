@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("91")
+type Lang {
+	!LanguageCode Code;
+	LanguageName Name;
+};
+

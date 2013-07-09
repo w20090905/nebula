@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx Etlconfig {
+	!Etlconfigid ID;
+	Ovalcubeid Ovalcube;
+	Analyzecodeid Analyzecode;
+	?Groupflag null;
+};
+

@@ -1,34 +1,29 @@
 @Remarks("")
 @Refby("0")
 type RvProductCosting {
-	MProductId MProduct;
-	CAcctschemaId CAcctschema;
+	MProductId ID;
+	CAcctschemaId ID;
 	Value String;
 	*Name;
-	MProductCategoryId MProductCategory;
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;
-	Created null;
-	Createdby null;
-	Updated null;
-	Updatedby null;
+	MProductCategoryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Currentcostprice Price;
 	Futurecostprice Price;
-	Coststandard Cost;
-	Coststandardpoqty Cost;
-	Coststandardpoamt Cost;
-	?Coststandardpodiff Cost;
-	Coststandardcumqty Cost;
-	Coststandardcumamt Cost;
-	?Coststandardinvdiff Cost;
-	Costaverage Cost;
-	Costaveragecumqty Cost;
-	Costaveragecumamt Cost;
+	Coststandard Number;
+	Coststandardpoqty Quantity;
+	Coststandardpoamt Amount;
+	?Coststandardpodiff Number;
+	Coststandardcumqty Quantity;
+	Coststandardcumamt Amount;
+	?Coststandardinvdiff Number;
+	Costaverage Number;
+	Costaveragecumqty Quantity;
+	Costaveragecumamt Amount;
 	TotalInvqty Quantity;
 	TotalInvamt Amount;
 	?TotalInvcost Cost;
-	PriceLastpo Price;
-	PriceLastinv Price;
+	PriceLastpo Number;
+	PriceLastinv Number;
 };
 

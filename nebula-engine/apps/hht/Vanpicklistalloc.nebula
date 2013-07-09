@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("0")
+tx Vanpicklistalloc {
+	!Vanpicklistallocid ID;
+	?Vansalesslipid Vansalesslip;
+	?Invsummaryid Invsummary;
+	Warehouseid Physicalwarehouse;
+	Vanpicklistid Vanpicklist;
+	Itemid Item;
+	?Locationno null;
+	?Lotno null;
+	?Batchno null;
+	?Serialno null;
+	Invstatus null;
+	?Expiredate Date;
+	?Qty Quantity;
+	?Costprice Cost;
+	?Createdate Date;
+	?DateLastupdated Date;
+};
+

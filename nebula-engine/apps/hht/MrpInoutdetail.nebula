@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx MrpInoutdetail {
+	!Sid MrpRecommend;
+	MrpCode MrpInfo;
+	Itemid Item;
+	Inoutdate Date;
+	?Qty Quantity;
+	?QtyStatus Quantity;
+	?Iefid null;
+	?Cmt null;
+	?Origin null;
+};
+

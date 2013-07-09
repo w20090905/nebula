@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx Glceenactment {
+	!Glceenactmentid ID;
+	?Booksetid Bookset;
+	?Orgid Organization;
+	Checkelementid Checkelement;
+	Actiontype null;
+	IsSystem YesNo;
+	?IsNeed YesNo;
+	?IsNeed2 YesNo;
+	?Actiontype2 null;
+};
+

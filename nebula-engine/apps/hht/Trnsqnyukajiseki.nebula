@@ -1,0 +1,39 @@
+@Remarks("")
+@Refby("0")
+tx Trnsqnyukajiseki {
+	!Seqid Twxmitumoriiraiumhistroy;
+	?Kyokyusaki null;
+	?Konyusaki null;
+	?Nyukasoko null;
+	?Nyukaymd null;
+	?Nyukasaki null;
+	?Unsosha null;
+	?Kanrendenpyono null;
+	?Gaibusankono null;
+	?Itemcd null;
+	?LineNo Line;
+	?Keiryotani null;
+	?Nyukanum null;
+	?Tenkiymd null;
+	?Sanshodenpyono null;
+	?Denpyoheadtext Text;
+	?Transactionkbn null;
+	?Lotno null;
+	?Idotype Attr;
+	?Zaikotype String;
+	?Genkacenter null;
+	?Sashizuno null;
+	?Inouthinmei null;
+	?Inouthokanbasho null;
+	?Inoutlot null;
+	?Idokbn null;
+	?Glkanjyocd null;
+	?Idoriyu null;
+	?Meisaitext Text;
+	?Shorikbn null;/* '0' */
+	?Createdate null;
+	?Lastupdateddate null;
+	?Pgid null;
+	?Status;/* 41 */
+};
+

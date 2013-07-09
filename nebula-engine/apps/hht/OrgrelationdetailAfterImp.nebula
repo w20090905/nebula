@@ -1,0 +1,51 @@
+@Remarks("")
+@Refby("0")
+type OrgrelationdetailAfterImp {
+	Orgrelationdetailid Orgrelationdetail;
+	Relationid Orgrelation;
+	SourceOrgid ID;
+	Targetorgid ID;
+	Globalpccode null;
+	?Areaid Businessarea;
+	?Orggroupid Orggroup;
+	?Creditlevelcode Creditlevel;
+	?SalesRepid ID;
+	?Creditlimit Count;
+	?Creditdays Count;
+	?OldEstardate Date;
+	?TotalSalesAmt Amount;
+	?SalesReturntimes null;
+	?SalesReturnamt Amount;
+	?Openorderamount Amount;
+	?DateLastupdated Date;
+	?Warehouseid Physicalwarehouse;
+	?Abccode Code;
+	?Creditexpiredate Date;
+	?Arapamount Amount;
+	?Oeitemtype Attr;
+	?Oeumtype Attr;
+	?Onceflag YesNo;
+	?Ordertypeid Ordertype;
+	?PriceMethod Price;
+	?Glgroupcode Code;
+	?IsCheckvendor YesNo;
+	?Ercode Code;
+	?Zctcurrencycode Code;
+	?Ratetype Rate;
+	?SalesRep2id ID;
+	?Eranalysisattr1 null;
+	?Eranalysisattr2 null;
+	?Eranalysisattr3 null;
+	?Eranalysisattr4 null;
+	?Crediteffectdate Date;
+	?Zctrate Rate;
+	?Freezeflag null;
+	?TaxGroupcode Code;
+	?Deptid Department;
+	?Status;
+	?Attr31 null;
+	?DeliveryManner null;
+	?PaymentTermid ID;
+	?Uploadrange null;
+};
+

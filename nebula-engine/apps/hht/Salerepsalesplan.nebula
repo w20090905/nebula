@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+tx Salerepsalesplan {
+	!Salerepsalesplanid ID;
+	SalesPlanid SalesPlan;
+	Periodtype null;
+	?Periodnumber null;
+	?PlannedValue null;
+	?Actualvalue null;
+	?Achievementvaluerate Rate;
+	?PlannedPocrate Rate;
+	?Actualpocrate Rate;
+	?Achievementpocrate Rate;
+	?PlannedPos null;
+	?Actualpos null;
+	?Achievementposrate Rate;
+	?Comments Note;
+};
+

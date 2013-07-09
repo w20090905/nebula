@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Serviceschedule {
+	!Servicescheduleid ID;
+	Orderid Ord;
+	?Time null;
+	?Address null;
+	Operator null;
+	?Action null;
+	ReferenceCode Code;
+};
+

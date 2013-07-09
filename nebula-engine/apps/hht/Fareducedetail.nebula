@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+tx Fareducedetail {
+	!Fareducedetailid ID;
+	Fixedassetsid Fixedassets;
+	Fareducecode Code;
+	Reducetypecode Code;
+	Planreducedate Date;
+	?Reducedesc null;
+	Reducereasoncode Code;
+	Maker null;
+	Createdate Date;
+	DateLastupdated Date;
+	?Realreducedate Date;
+	Orgid Organization;
+	Status;
+};
+

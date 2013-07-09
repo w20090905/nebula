@@ -1,28 +1,23 @@
 @Remarks("")
 @Refby("0")
 type RvCostdetail {
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;
-	Created null;
-	Createdby null;
-	Updated null;
-	Updatedby null;
-	MProductId MProduct;
+	AdClientId ID;
+	AdOrgId ID;
+	MProductId ID;
 	Value String;
 	*Name;
 	?UPC;
 	IsBom YesNo;
 	ProductType Attr;
-	MProductCategoryId MProductCategory;
-	?MInoutlineId MInoutline;
-	?CInvoiceLineId CInvoiceLine;
-	MAttributesetinstanceId MAttributesetinstance;
-	?MAttributesetId MAttributeset;
+	MProductCategoryId ID;
+	?MInoutlineId ID;
+	?CInvoiceLineId ID;
+	MAttributesetinstanceId ID;
+	?MAttributesetId ID;
 	?LOT;
 	?Serno Code;
-	CAcctschemaId CAcctschema;
-	CCurrencyId CCurrency;
+	CAcctschemaId ID;
+	CCurrencyId ID;
 	Amt Amount;
 	Qty Quantity;
 	?Description;

@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+type Getupdatesapitemdata {
+	Itemid Item;
+	?Deptid Department;
+	?Orgcode Code;
+	?Itemcode Code;
+	?Prdnjp null;
+	?Prdnen null;
+	?Umcode Code;
+	?Magrv null;
+	?Matkl null;
+	?Vendoritemcode Code;
+	?Labor null;
+	?Datatype Attr;
+};
+

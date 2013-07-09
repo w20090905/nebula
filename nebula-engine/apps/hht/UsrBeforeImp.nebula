@@ -1,0 +1,27 @@
+@Remarks("")
+@Refby("0")
+type UsrBeforeImp {
+	Userid Usr;
+	?Orgid Organization;
+	Username Name;
+	?Usertype null;
+	?EMail;
+	?Employeeid Employee;
+	?Addressid Address;
+	Status;
+	Password;
+	?Passwordstartdate Date;
+	?Passwordexpiredate Date;
+	Canupdatepassword Password;
+	?Gracecountused null;
+	?Syncpassword Password;
+	?IsPrimaryadmin YesNo;
+	?DateLastupdated Date;
+	?Comments Note;
+	?Fullname Name;
+	?Passwordexpiredays Count;
+	?Passwordsetdate Date;
+	?Zxjpisini String;
+	?Contactid Contact;
+};
+

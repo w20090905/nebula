@@ -1,0 +1,41 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtpricemasterhistory {
+	!PriceMasterhistoryid ID;
+	?Dealtype null;
+	?PriceMastercode Code;
+	?PriceConditionid Zhhtpricecondition;
+	?Orgid Organization;
+	?Itemid Item;
+	?Tradeflg null;
+	?Currencycode Code;
+	?Buyerid ID;
+	?Sellerid ID;
+	?Receiveraddressid Receiveraddress;
+	?QtyFrom Quantity;
+	?QtyTo Quantity;
+	?Shipmentterm null;
+	?StandardDatefrom null;
+	?StandardDateto null;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr5 null;
+	?Attr6 null;
+	?Attr7 null;
+	?Attr8 null;
+	?Attr9 null;
+	?Attr10 null;
+	?Unitprice Unit;
+	?Endprice Price;
+	?Commissionrate Rate;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Userid Usr;
+	?Tradeconditioncode Code;/* 'NA' */
+	?Source null;
+	?Utpricemodrange null;
+	?Edpricemodrange null;
+};
+

@@ -1,0 +1,48 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtsoporemantuploaddetail {
+	!Soporemantuploaddetailid ID;
+	?Soporemantuploadid Zhhtsoporemantupload;
+	?LineNum null;
+	?Itemcode Code;
+	?Itemname Name;
+	?Itemproperty1 null;
+	?Itemproperty2 null;
+	?Syouhinhosoku1 null;
+	?Syouhinhosoku2 null;
+	?Sizeproperty null;
+	?Orderqty Quantity;
+	?Umname Name;
+	?RequestDate1 null;
+	?RequestDate2 null;
+	?DeliveryDate1 null;
+	?DeliveryDate2 null;
+	?DeliveryQty Quantity;
+	?DeliveryDated null;
+	?Deliveredqty Quantity;
+	?BalanceQty Quantity;
+	?Sellendprice Price;
+	?Sellcommissionrate null;
+	?Sellnetprice Price;
+	?Purorderqty Quantity;
+	?Purumname Name;
+	?Purendprice Price;
+	?Purcommissionrate null;
+	?Purnetprice Price;
+	?Purdeliverydqty Quantity;
+	?Purbalanceqty Quantity;
+	?SalesSnp null;
+	?SalesMoq null;
+	?Purchasesnp null;
+	?Purchasemoq null;
+	?Orderdetailid Orderdetail;
+	?Sodeliverydate Date;
+	?Podeliverydate Date;
+	?Sokyuuuritanka null;
+	?Sokyuukaitanka null;
+	?Itemid Item;
+	?DeliveryDate Date;
+	?DeliveryDatew2 null;
+	?DeliveryDated2 null;
+};
+

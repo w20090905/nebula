@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx Prodconfiglang {
+	!Prodconfiglangid ID;
+	Prodconfigid Prodconfig;
+	LanguageCode Lang;
+	Prodconfigname Name;
+};
+

@@ -4,31 +4,21 @@ type AdRole {
 	@Remarks("Responsibility Role")
 	!AdRoleId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
+	AdOrg;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
-	@Remarks("User who updated this records")
-	Updatedby null;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("System Client Organization")
-	Userlevel null;/* '  O'  */
+	Userlevel Attr;/* '  O'  */
 	@Remarks("The Currency for this record")
-	?CCurrencyId CCurrency;
+	?CCurrency;
 	@Remarks("The approval amount limit for this role")
 	?AmtApproval Amount;/* 0 */
 	@Remarks("Tree of the menu")
-	?AdTreeMenuId AdTree;
+	?AdTreeMenu AdTree;
 	@Remarks("This is a manual process")
 	IsManual YesNo;/* 'N' */
 	@Remarks("Users with this role can see accounting information")
@@ -42,7 +32,7 @@ type AdRole {
 	@Remarks("Users with this role can create reports")
 	IsCanreport YesNo;/* 'Y'  */
 	@Remarks("Supervisor for this user/organization - used for escalation and approval")
-	?SupervisorId AdUser;
+	?Supervisor AdUser;
 	@Remarks("Users with this role can approve their own documents")
 	IsCanapproveowndoc YesNo;/* 'Y'  */
 	@Remarks("Access all Organizations (no org access control) of the client")
@@ -56,11 +46,11 @@ type AdRole {
 	@Remarks("Use Org Access defined by user instead of Role Org Access")
 	IsUseuserorgaccess YesNo;/* 'N'  */
 	@Remarks("Tree to determine organizational hierarchy")
-	?AdTreeOrgId AdTree;
+	?AdTreeOrg AdTree;
 	@Remarks("Require Confirmation if more records will be returned by the query (If not defined 500)")
-	Confirmqueryrecords null;/* 0  */
+	Confirmqueryrecords Number;/* 0  */
 	@Remarks("If defined, you cannot query more records as defined - the query criteria needs to be changed to query less records")
-	Maxqueryrecords null;/* 0  */
+	Maxqueryrecords Number;/* 0  */
 	@Remarks("How a Java Client connects to the server(s)")
 	?Connectionprofile null;
 	@Remarks("Allow Info Account")

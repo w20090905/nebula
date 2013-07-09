@@ -1,0 +1,29 @@
+@Remarks("")
+@Refby("2")
+tx Phcpolicy {
+	!Phcpolicyid ID;
+	?Orgid Organization;
+	Phcpolicycode Code;
+	Description;
+	Createdate Date;
+	?Maker null;
+	?Begindate Date;
+	?Enddate Date;
+	?IsRecursive YesNo;
+	?Startdate Date;
+	?Categoryid Category;
+	?Brandcode Code;
+	?Fromitemcode Code;
+	?Toitemcode Code;
+	?Abccode Code;
+	?Invqtyflag null;
+	?Minqty Quantity;
+	?Invactiveflag null;
+	?Mindays Count;
+	?Warehouseid Physicalwarehouse;
+	?Nextphcdate Date;
+	DateLastupdated Date;
+	Status;
+	?Periodpolicyid Periodpolicy;
+};
+

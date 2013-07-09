@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("1")
+type MrpFctTmp {
+	!Forecastcode null;
+	?Forecastid null;
+	?Forecastname Name;
+	?Sellerdept null;
+	?Buyercode Code;
+	?Buyername Name;
+	?Forecastlife null;
+	?Forecastlifenum null;
+	?Forecaststart null;
+	?Status;
+	?Source null;
+	?Creator null;
+	?Createdate Date;
+	?Memo;
+	?Updatedate Date;
+	?Updater null;
+};
+

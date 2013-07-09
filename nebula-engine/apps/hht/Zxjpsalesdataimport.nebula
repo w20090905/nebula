@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Zxjpsalesdataimport {
+	!Zxjpsalesdataimportid ID;
+	?Makername Name;
+	?TotalRecords null;
+	?Finishedrecords null;
+	?Status;
+	?Begindate Date;
+	?Enddate Date;
+};
+

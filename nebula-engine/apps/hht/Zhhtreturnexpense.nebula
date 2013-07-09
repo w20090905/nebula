@@ -1,0 +1,31 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtreturnexpense {
+	!Returnexpenseid ID;
+	Returnid Returnslip;
+	?Expenseclassgroupcode Code;
+	?Expenseclasscode Code;
+	?Calculationtypecode Code;
+	?PostTypecode Code;
+	?Partnerid ID;
+	?Conditionrate null;
+	?PaymentTerm String;
+	?Exchagetype Attr;
+	?Exchagedatecode Code;
+	?Currencycode Code;
+	?Currencyrate Rate;
+	?Amount;
+	?Ownerorgid ID;
+	?Maker null;
+	Createdate Date;
+	DateLastupdated Date;
+	?Status;
+	?Partnerorgcode Code;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Attr21 null;
+	?Attr22 null;
+};
+

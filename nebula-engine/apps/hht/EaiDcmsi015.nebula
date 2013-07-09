@@ -1,0 +1,49 @@
+@Remarks("")
+@Refby("0")
+tx EaiDcmsi015 {
+	!Eaidcmsi015id ID;
+	Eaicreatedate Date;
+	Eaibatchno null;
+	Eaiheadcount Count;
+	Eaidetailcount Count;
+	Eaicurrentheadnum null;
+	Eaicurrentdetailnum null;
+	Eaiimportstatus null;
+	?Eaiheadname Name;
+	?Eaidetailname Name;
+	?Eaiheadparseerror null;
+	?Eaidetailparseerror null;
+	?Eaiimportdate Date;
+	?Eaiimportcomments Note;
+	Headdatatype Attr;
+	Headordtype null;
+	?Headdeliverycode Code;
+	Headordcode Code;
+	?Headrefrenceno null;
+	?Headsellercode Code;
+	?Headbuyercode Code;
+	?Headwarehousecode Code;
+	?Headdeliverydate Date;
+	Headshiptocode Code;
+	Headcarriercode Code;
+	?Headrefno null;
+	Headitemcode Code;
+	?Headlineno SeqNo;
+	?Headqty Quantity;
+	?Headumcode Code;
+	?Headbatchno null;
+	?Headlotno null;
+	Headchgdate Date;
+	Headchguser null;
+	?Headcomments Note;
+	Headstatus null;
+	Headsource null;
+	?Headzzsoanno null;
+	?Headzznsyko null;
+	?Headbldat null;
+	?Headzzsoandate Date;
+	?Headzzsdksn null;
+	?Headsaplotno null;
+	?Headsapevaluation null;
+};
+

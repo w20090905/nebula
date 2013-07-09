@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type Getcontractdata {
+	Createdate Date;
+	?Kojocd null;
+	Contractcode Code;
+	?Comments Note;
+	Orderdetailid Orderdetail;
+	?LineNum null;
+};
+

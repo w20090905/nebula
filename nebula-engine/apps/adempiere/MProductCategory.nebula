@@ -4,19 +4,9 @@ type MProductCategory {
 	@Remarks("Category of a Product")
 	!MProductCategoryId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
 	@Remarks("Alphanumeric identifier of the entity")
@@ -28,14 +18,14 @@ type MProductCategory {
 	@Remarks("Project_s planned margin as a percentage")
 	PlannedMargin Length;
 	@Remarks("Group of Assets")
-	?AAssetGroupId AAssetGroup;
+	?AAssetGroup;
 	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
 	IsSelfservice YesNo;/* 'Y'  */
 	@Remarks("Color used for printing and display")
-	?AdPrintColorId AdPrintColor;
+	?AdPrintColor;
 	@Remarks("Material Movement Policy")
 	Mmpolicy null;/* 'F'  */
 	@Remarks("Parent Product Category")
-	?MProductCategoryParentId MProductCategory;
+	?MProductCategoryParent MProductCategory;
 };
 

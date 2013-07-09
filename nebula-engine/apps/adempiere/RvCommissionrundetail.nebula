@@ -1,40 +1,35 @@
 @Remarks("")
 @Refby("0")
 type RvCommissionrundetail {
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;
-	Created null;
-	Createdby null;
-	Updated null;
-	Updatedby null;
-	CCommissionrunId CCommissionrun;
+	AdClientId ID;
+	AdOrgId ID;
+	CCommissionrunId ID;
 	DocumentNo Code;
 	?Description;
 	Startdate Date;
-	GrandTotal null;
+	GrandTotal Amount;
 	Processed YesNo;
-	CCommissionId CCommission;
+	CCommissionId ID;
 	CommissionBpartnerId ID;
-	CCommissionamtId CCommissionamt;
+	CCommissionamtId ID;
 	Commissionconvertedamt Amount;
 	Commissionqty Quantity;
 	Commissionamt Amount;
-	CCommissiondetailId CCommissiondetail;
-	?Reference String;
-	?COrderlineId COrderline;
-	?CInvoiceLineId CInvoiceLine;
-	?Info;
-	CCurrencyId CCurrency;
+	CCommissiondetailId ID;
+	?Reference Note;
+	?COrderlineId ID;
+	?CInvoiceLineId ID;
+	?Info Note;
+	CCurrencyId ID;
 	Actualamt Amount;
 	Convertedamt Amount;
 	Actualqty Quantity;
 	?InvoiceDocumentNo Code;
 	?DateDoc Date;
-	?MProductId MProduct;
-	?CBpartnerId CBpartner;
-	?CBpartnerLocationId CBpartnerLocation;
-	?AdUserId AdUser;
-	?CDoctypeId CDoctype;
+	?MProductId ID;
+	?CBpartnerId ID;
+	?CBpartnerLocationId ID;
+	?AdUserId ID;
+	?CDoctypeId ID;
 };
 

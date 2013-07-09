@@ -1,23 +1,18 @@
 @Remarks("")
 @Refby("0")
 type CInvoiceV1 {
-	CInvoiceId CInvoice;
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;
-	Created null;
-	Createdby null;
-	Updated null;
-	Updatedby null;
+	CInvoiceId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IsSotrx YesNo;
 	DocumentNo Code;
 	Docstatus Attr;
 	Docaction Attr;
 	?Processing YesNo;
 	Processed YesNo;
-	CDoctypeId CDoctype;
+	CDoctypeId ID;
 	CDoctypeTargetId ID;
-	?COrderId COrder;
+	?COrderId ID;
 	?Description;
 	IsApproved YesNo;
 	IsTransferred YesNo;
@@ -25,20 +20,20 @@ type CInvoiceV1 {
 	DateInvoiceD Date;
 	?DatePrintEd Date;
 	DateAcct Date;
-	CBpartnerId CBpartner;
-	CBpartnerLocationId CBpartnerLocation;
-	?AdUserId AdUser;
-	?Poreference String;
+	CBpartnerId ID;
+	CBpartnerLocationId ID;
+	?AdUserId ID;
+	?Poreference Note;
 	?DateOrdered Date;
-	CCurrencyId CCurrency;
-	?CConversionTypeId CConversionType;
+	CCurrencyId ID;
+	?CConversionTypeId ID;
 	PaymentRule Attr;
-	CPaymentTermId CPaymentTerm;
-	?CChargeId CCharge;
-	MPriceListId MPriceList;
-	?CCampaignId CCampaign;
-	?CProjectId CProject;
-	?CActivityId CActivity;
+	CPaymentTermId ID;
+	?CChargeId ID;
+	MPriceListId ID;
+	?CCampaignId ID;
+	?CProjectId ID;
+	?CActivityId ID;
 	IsPrintEd YesNo;
 	IsDiscountPrintEd YesNo;
 	IsPaid YesNo;
@@ -48,9 +43,9 @@ type CInvoiceV1 {
 	?InvoiceCollectiontype Attr;
 	?ChargeAmt Amount;
 	?TotalLines Line;
-	?GrandTotal null;
-	?Multiplier null;
-	?Multiplierap null;
+	?GrandTotal Amount;
+	?Multiplier Number;
+	?Multiplierap Number;
 	Docbasetype Attr;
 };
 

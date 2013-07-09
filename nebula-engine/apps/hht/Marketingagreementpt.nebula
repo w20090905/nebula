@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Marketingagreementpt {
+	!Marketingagreementptid ID;
+	?PaymentTermid PaymentTerm;
+	?PaymentTermname Name;
+	?Description;
+	Marketingagreementid Marketingagreement;
+};
+

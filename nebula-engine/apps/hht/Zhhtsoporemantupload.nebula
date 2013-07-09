@@ -1,0 +1,42 @@
+@Remarks("")
+@Refby("1")
+tx Zhhtsoporemantupload {
+	!Soporemantuploadid ID;
+	?Contracttypename Name;
+	?Customerodrno null;
+	?Contractcode Code;
+	?Contractstatus null;
+	?Beforeordercode Code;
+	?Orderstatus null;
+	?AfterOrdercode Code;
+	?Buyerid ID;
+	?Buyercode Code;
+	?Buyername Name;
+	?Receiverid ID;
+	?Receivercode Code;
+	?Receivername Name;
+	?Tyuumonstatus null;
+	?Senddate Date;
+	?Sellerid ID;
+	?Sellercode Code;
+	?Sellername Name;
+	?Arrivalid ID;
+	?Arrivalcode Code;
+	?Arrivalname Name;
+	?Ordercreatedate Date;
+	?Maker null;
+	?Hhtmanagecode Code;
+	?Edichumonno null;
+	?Soorderno null;
+	?Poorderno null;
+	?Contractdate Date;
+	?SourceMoto null;
+	?Orgid Organization;
+	?Userid Usr;
+	?Createdate Date;
+	?Lastmakerid ID;
+	?DateLastupdated Date;
+	?Status;
+	?Source null;
+};
+

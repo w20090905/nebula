@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("1")
+tx Ordersuit {
+	!Ordersuitid ID;
+	Ordid ID;
+	Bomid Bom;
+	Qty Quantity;
+	PricePolicy Price;
+	?Price;
+};
+

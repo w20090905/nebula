@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("2")
+tx ArchiveObject {
+	!ArchiveObjid ID;
+	SourceTablename Name;
+	ArchiveObjtype null;
+	?ArchiveCondition null;
+	?DaysToarchive Count;
+	IsDelete YesNo;
+	ArchiveTo null;
+	?IsNeedarchive YesNo;
+	?ArchiveObjname Name;
+};
+

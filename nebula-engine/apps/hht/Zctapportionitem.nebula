@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Zctapportionitem {
+	!Apportionitemid ID;
+	Apportionid Zctapportion;
+	Apportionslipid Zctapportionslip;
+	Relatedtransdetailid ID;
+	Itemid Item;
+	?Localamount Amount;
+	?Apportionamount Amount;
+};
+

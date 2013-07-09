@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("14")
+tx ProductLine {
+	!Prodlineid ID;
+	Orgid Organization;
+	Prodlinecode Code;
+	?Categoryid Category;
+	Umcode Code;
+	?Revision null;
+	Status;
+	?DateLastupdated Date;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type SmpLogSql {
+	?Oemusername Name;
+	?Service null;
+	?Dbusername Name;
+	?TimesTamp null;
+	?Sql String;
+};
+

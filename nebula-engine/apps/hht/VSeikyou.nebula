@@ -1,0 +1,42 @@
+@Remarks("")
+@Refby("0")
+type VSeikyou {
+	LanguageCode Lang;
+	?Sellerid ID;
+	?TaxAmount Amount;
+	?DeliveryCode Code;
+	?Getsysdate null;
+	?Napingshucode Code;
+	?E1 null;
+	Buyerorgcode Code;
+	A1 null;
+	?A2 null;
+	Sellerorgcode Code;
+	?A3 null;
+	Sellerorgname Name;
+	?C1 null;
+	?B6 null;
+	?B4 null;
+	?B5 null;
+	?D1 null;
+	?PaymentTerm null;
+	?A5 null;
+	?Comments Note;
+	A6 null;
+	?Buyersoname Name;
+	?B2 null;
+	B1 null;
+	?A4 null;
+	?Attr1 null;
+	?A7 null;
+	?Qty Quantity;
+	?B3 null;
+	?Comment01 null;
+	?Comment02 null;
+	?Comment03 null;
+	?Comment04 null;
+	?Comment05 null;
+	?Comment06 null;
+	?Comment07 null;
+};
+

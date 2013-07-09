@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("4")
+tx Purchasedatafile {
+	!Purchasedatafileid ID;
+	Filename;
+	Buyerorgid ID;
+	?Batchno null;
+	Filestatus null;
+	?Checkstatus null;
+	Createdate Date;
+	Receivedate Date;
+	?TotalQty Quantity;
+	?Passqty Quantity;
+	?ErrorQty Quantity;
+	?Deleteqty Quantity;
+	?Warnqty Quantity;
+	?Startdate Date;
+	?Enddate Date;
+	?Eaistatus null;
+	?Canceldate Date;
+	?Reffileid null;
+};
+

@@ -1,0 +1,41 @@
+@Remarks("")
+@Refby("0")
+tx Zadioriginalsalesinvdata {
+	!Zadioriginalsalesinvdataid ID;
+	?Customerid ID;
+	?Customerno Code;
+	?Posid ID;
+	?Poscode Code;
+	?Zmonth String;
+	?Zyear String;
+	?Qty Quantity;
+	?Amount;
+	?Division null;
+	?Markdown null;
+	?Zdate Date;
+	?Ticketdate Date;
+	?Ticketno null;
+	?Itemid Item;
+	?Articleno null;
+	?Articlesize null;
+	?Soldamount Amount;
+	?Retailamount Amount;
+	?Inventoryamount Amount;
+	?Trafficcounting null;
+	Businessobjectid Businessobject;
+	?Zfilename FileName;
+	?Uploaddate Date;
+	?IsDuplicate null;
+	?Checkrulestatus null;
+	?RecordStatus null;
+	?Reservedvarone null;
+	?Reservedvartwo null;
+	?Reservedvarthree null;
+	?Reservednumone null;
+	?Reservednumtwo null;
+	?Reservednumthree null;
+	?Reserveddateone null;
+	?Reserveddatetwo null;
+	?Reserveddatethree null;
+};
+

@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+tx SalesOpportunitydetail {
+	!Opportunitydetailid ID;
+	?Begindate Date;
+	Opportunityamt Amount;
+	Currencycode Code;
+	Probability null;
+	Expectedamt Amount;
+	IsForecast YesNo;
+	?Forecastamt Amount;
+	?Stagechangereason null;
+	?Description;
+	LineStatus Line;
+	Rate;
+	?Baseopportunityamt Amount;
+	?Baseexpectedamt Amount;
+	?Baseforecastamt Amount;
+	SalesStageid SalesStage;
+	Opportunityid SalesOpportunity;
+};
+

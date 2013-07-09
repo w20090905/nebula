@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Rebateallocdetail {
+	!Rebateallocdetailid ID;
+	Rebatesummaryid Rebatesummary;
+	?Relatedtranid ID;
+	Relatedtrantype null;
+	?Localallocamt Amount;
+	?Processedamt Amount;
+	?Allocdate Date;
+};
+

@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Itemcriteria {
+	!Itemcriteriaid ID;
+	PriceListid PriceList;
+	Sortno SeqNo;
+	FieldName Name;
+	Operator null;
+	Value String;
+	?Joinoperator null;
+	?Comments Note;
+};
+

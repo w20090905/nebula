@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("5")
+tx Calctype {
+	!Calctypeid ID;
+	?Orgid Organization;
+	?Calctypecode Code;
+	?Calcfactorcode Code;
+	?Maker null;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?SourceTable null;
+	?SourceField null;
+	?Negative null;
+	IsPublic YesNo;
+};
+

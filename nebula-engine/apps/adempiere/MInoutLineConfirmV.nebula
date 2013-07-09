@@ -1,26 +1,21 @@
 @Remarks("")
 @Refby("0")
 type MInoutLineConfirmV {
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;
-	Created null;
-	Createdby null;
-	Updated null;
-	Updatedby null;
-	?AdLanguage Attr;
-	MInoutlineconfirmId MInoutlineconfirm;
-	MInoutconfirmId MInoutconfirm;
+	AdClientId ID;
+	AdOrgId ID;
+	?AdLanguage String;
+	MInoutlineconfirmId ID;
+	MInoutconfirmId ID;
 	Targetqty Quantity;
 	Confirmedqty Quantity;
 	?Differenceqty Quantity;
 	?Scrappedqty Quantity;
 	?Description;
 	Processed YesNo;
-	MInoutId MInout;
-	MInoutlineId MInoutline;
+	MInoutId ID;
+	MInoutlineId ID;
 	Line;
-	?MProductId MProduct;
+	?MProductId ID;
 	Movementqty Quantity;
 	?Uomsymbol Symbol;
 	?QtyBackordered Quantity;
@@ -29,17 +24,17 @@ type MInoutLineConfirmV {
 	?DocumentNote Note;
 	?UPC;
 	?SKU;
-	?ProductValue String;
-	?MLocatorId MLocator;
-	?MWarehouseId MWarehouse;
+	?ProductValue Note;
+	?MLocatorId ID;
+	?MWarehouseId ID;
 	?X String;
 	?Y String;
 	?Z String;
-	?MAttributesetinstanceId MAttributesetinstance;
-	?MAttributesetId MAttributeset;
+	?MAttributesetinstanceId ID;
+	?MAttributesetId ID;
 	?Serno Code;
 	?LOT;
-	?MLotId MLot;
+	?MLotId ID;
 	?Guaranteedate Date;
 };
 

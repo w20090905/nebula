@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx SalesPlantypestruct {
+	!SalesPlantypestructid ID;
+	SalesPlantypeid SalesPlantype;
+	Structseq null;
+	Analyzecodeid Analyzecode;
+	?Analyzecode Code;
+	?Description;
+	DateLastupdated Date;
+	?Allocatequota null;
+	?IsPrivilegecontrol YesNo;
+	?Grade null;
+};
+

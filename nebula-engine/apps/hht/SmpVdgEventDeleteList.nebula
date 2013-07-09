@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type SmpVdgEventDeleteList {
+	?Masid ID;
+	?Agentid ID;
+	?Targetname Name;
+	?Targettype Attr;
+	?EventName Name;
+	?Nodename SmpVdgNodeList;
+};
+

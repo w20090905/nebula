@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("0")
+tx Uploadstatus {
+	@Remarks("シーケンスID")
+	!Uploadstatusid ID;
+	@Remarks("職判ID")
+	?Orgid Organization;
+	@Remarks("情報タイプ")
+	?Type null;
+	@Remarks("件数")
+	?Ulcount Count;
+	@Remarks("ステータス")
+	?Status;
+	@Remarks("新規ユーザID")
+	?Createuserid ID;
+	@Remarks("新規日時")
+	?Createdatetime null;
+	@Remarks("更新ユーザID")
+	?Updateuserid ID;
+	@Remarks("更新日時")
+	?Updatedatetime null;
+};
+

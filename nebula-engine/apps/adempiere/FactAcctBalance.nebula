@@ -2,66 +2,56 @@
 @Refby("0")
 type FactAcctBalance {
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
+	AdOrg;
 	@Remarks("Rules for accounting")
-	CAcctschemaId CAcctschema;
+	CAcctschema;
 	@Remarks("Accounting Date")
 	DateAcct Date;
 	@Remarks("Account used")
-	AccountId CElementvalue;
+	Account CElementvalue;
 	@Remarks("The type of posted amount for the transaction")
 	PostIngtype Attr;
 	@Remarks("Product, Service, Item")
-	?MProductId MProduct;
+	?MProduct;
 	@Remarks("Identifies a Business Partner")
-	?CBpartnerId CBpartner;
+	?CBpartner;
 	@Remarks("Financial Project")
-	?CProjectId CProject;
+	?CProject;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrxId AdOrg;
+	?AdOrgtrx AdOrg;
 	@Remarks("Sales coverage region")
-	?CSalesRegionId CSalesRegion;
+	?CSalesRegion;
 	@Remarks("Business Activity")
-	?CActivityId CActivity;
+	?CActivity;
 	@Remarks("Marketing Campaign")
-	?CCampaignId CCampaign;
+	?CCampaign;
 	@Remarks("Location that inventory was moved to")
-	?CLoctoId CLocation;
+	?CLocto CLocation;
 	@Remarks("Location that inventory was moved from")
-	?CLocfromId CLocation;
+	?CLocfrom CLocation;
 	@Remarks("User defined list element #1")
-	?User1Id CElementvalue;
+	?User1 CElementvalue;
 	@Remarks("User defined list element #2")
-	?User2Id CElementvalue;
+	?User2 CElementvalue;
 	@Remarks("General Ledger Budget")
-	?GlBudgetId GlBudget;
+	?GlBudget;
 	@Remarks("Accounted Debit Amount")
 	AmtAcctdr Amount;/* 0  */
 	@Remarks("Accounted Credit Amount")
 	AmtAcctcr Amount;/* 0  */
 	@Remarks("Quantity")
 	Qty Quantity;/* 0  */
-	@Remarks("User who created this records")
-	Createdby null;/* 0 */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE */
-	@Remarks("User who updated this records")
-	Updatedby null;/* 0 */
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE */
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
 	@Remarks("Sub account for Element Value")
-	?CSubacctId CSubacct;
+	?CSubacct;
 	@Remarks("User defined accounting Element")
 	?Userelement1Id ID;
 	@Remarks("User defined accounting Element")
 	?Userelement2Id ID;
 	@Remarks("Phase of a Project")
-	?CProjectPhaseId CProjectPhase;
+	?CProjectPhase;
 	@Remarks("Actual Project Task in a Phase")
-	?CProjectTaskId CProjectTask;
+	?CProjectTask;
 };
 

@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("1")
+tx Agreementcountergroup {
+	!Countergroupid ID;
+	Counterid Counter;
+	Groupcode Code;
+	?Comments Note;
+	Itemserviceagreementid Itemserviceagreement;
+	?Expensegroup null;
+};
+

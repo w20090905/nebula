@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("2")
+tx Servicerequest {
+	!Servicerequestid ID;
+	RequestCode Code;
+	RequestMethod null;
+	Orgid Organization;
+	Providerid ID;
+	Customerid ID;
+	Telephone Phone;
+	Contactid Contact;
+	Deviceid ID;
+	Deviceposition null;
+	Lotno null;
+	?Priority;
+	Createdate Date;
+	Docdate Date;
+	Expectdate Date;
+	Maker null;
+	?Comments Note;
+	Status;
+	DateLastupdated Date;
+};
+

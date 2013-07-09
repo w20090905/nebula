@@ -1,0 +1,36 @@
+@Remarks("")
+@Refby("0")
+tx Remedydetail {
+	!Remedydetailid ID;
+	?Complaintdetailid Complaintdetail;
+	Remedyid Remedy;
+	?Complaintid Complaint;
+	Itemid Item;
+	?QtyRemedy Quantity;
+	?Remedymethodcode null;
+	?Replaceitemid ID;
+	?Remedyamount Amount;
+	?Remark null;
+	?Complaintreasoncode null;
+	?Remedyprice Price;
+	?TaxRate Rate;
+	?Remedypretaxprice Price;
+	?Remedypretaxamount Amount;
+	?Remedytaxamount Amount;
+	?Buyeritemid ID;
+	?Replacebuyeritemid ID;
+	?Replaceumcode Code;
+	?Replaceqty Quantity;
+	?QtyComplaint Quantity;
+	?AmtComplaint Amount;
+	?Complaintumcode Code;
+	?QtyDeal Quantity;
+	?Remedyumcode Code;
+	Remedyreasoncode null;
+	?Employeeid Employee;
+	?Deptid Department;
+	LineStatus Line;
+	?DeliveryId Delivery;
+	?DeliveryCode Code;
+};
+

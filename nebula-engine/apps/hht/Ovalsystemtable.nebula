@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("2")
+tx Ovalsystemtable {
+	!SystemTableid ID;
+	Tablename Name;
+};
+

@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Marketingplanbrand {
+	!Marketingplanbrandid ID;
+	Marketingplanid Marketingplan;
+	Marketingplandetailid Marketingplandetail;
+	Prodbrandcode Code;
+	Weight;
+	?Budgetamount Amount;
+	?SalesTarget null;
+	?Remark null;
+};
+

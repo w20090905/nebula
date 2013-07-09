@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("9")
+type SmpVdeTryRemoveEventQueue {
+	!SequenceNum Sequence;
+	?EventId ID;
+};
+

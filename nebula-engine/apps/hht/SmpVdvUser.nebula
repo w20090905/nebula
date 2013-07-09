@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("11")
+tx SmpVdvUser {
+	!UserId SmpVdvPage;
+	UserName Name;
+	?DisplayName Name;
+};
+

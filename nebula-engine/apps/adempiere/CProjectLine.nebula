@@ -4,21 +4,11 @@ tx CProjectLine {
 	@Remarks("Task or step in a project")
 	!CProjectLineId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Financial Project")
-	CProjectId CProject;
+	CProject;
 	@Remarks("Unique line for this document")
 	Line;
 	@Remarks("Optional short description of the record")
@@ -34,9 +24,9 @@ tx CProjectLine {
 	@Remarks("The (legal) commitment amount")
 	?CommittedAmt Amount;/* 0  */
 	@Remarks("Product, Service, Item")
-	?MProductId MProduct;
+	?MProduct;
 	@Remarks("Category of a Product")
-	?MProductCategoryId MProductCategory;
+	?MProductCategory;
 	@Remarks("The amount invoiced")
 	InvoiceDamt Amount;/* 0  */
 	@Remarks("The quantity invoiced")
@@ -44,11 +34,11 @@ tx CProjectLine {
 	@Remarks("The (legal) commitment Quantity")
 	?CommittedQty Quantity;/* 0  */
 	@Remarks("Project Issues (Material, Labor)")
-	?CProjectIssueId CProjectIssue;
+	?CProjectIssue;
 	@Remarks("Order")
-	?COrderId COrder;
+	?COrder;
 	@Remarks("Purchase Order")
-	?COrderpoId COrder;
+	?COrderpo COrder;
 	@Remarks("Indicates if this document / line is printed")
 	IsPrintEd YesNo;/* 'Y'  */
 	@Remarks("The document has been processed")
@@ -56,8 +46,8 @@ tx CProjectLine {
 	@Remarks("Pricing")
 	?Dopricing YesNo;/* 'Y' */
 	@Remarks("Phase of a Project")
-	?CProjectPhaseId CProjectPhase;
+	?CProjectPhase;
 	@Remarks("Actual Project Task in a Phase")
-	?CProjectTaskId CProjectTask;
+	?CProjectTask;
 };
 

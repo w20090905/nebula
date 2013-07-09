@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("1")
+tx Slipformat {
+	!Orgslipformatid ID;
+	Orgid Organization;
+	Slipformatid Orgslipformat;
+};
+

@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("3")
+type Vouchermodel {
+	!Vouchermodelid ID;
+	?Vouchermodelcode Code;
+	Booksetid Bookset;
+	Orgid Organization;
+	*Name;
+	?Description;
+	?Vouchersigncode Code;
+	?Numberofattachments null;
+	?Numberoflines Line;
+	Createdate Date;
+	?Maker null;
+	?DateLastupdated Date;
+	Status;
+};
+

@@ -1,0 +1,29 @@
+@Remarks("")
+@Refby("0")
+tx EaiDcmsi003 {
+	!Eaidcmsi003id ID;
+	Eaicreatedate Date;
+	Eaibatchno null;
+	Eaiheadcount Count;
+	Eaidetailcount Count;
+	Eaicurrentheadnum null;
+	Eaicurrentdetailnum null;
+	Eaiimportstatus null;
+	?Eaiheadname Name;
+	?Eaidetailname Name;
+	?Eaiheadparseerror null;
+	?Eaidetailparseerror null;
+	?Eaiimportdate Date;
+	?Eaiimportcomments Note;
+	?Headmanagecode Code;
+	Headrateno null;
+	Headmonth null;
+	Headrate Rate;
+	Headcurrencycode Code;
+	Headtype null;
+	?Headstatus null;
+	?Headratetype Attr;
+	?Headcoefficient null;/* 1 */
+	?Headapplydate Date;
+};
+

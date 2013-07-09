@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type OrgtaxregistrationBeforeImp {
+	Orgtaxregid Orgtaxregistration;
+	Orgid Organization;
+	TaxNo null;
+	TaxRegbureau null;
+	Regdate Date;
+	?DateLastupdated Date;
+};
+

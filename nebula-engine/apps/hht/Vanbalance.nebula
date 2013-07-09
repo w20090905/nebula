@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("0")
+tx Vanbalance {
+	!Vanbalanceid ID;
+	?Periodid ID;
+	Orgid Organization;
+	Partnerid ID;
+	Itemid Item;
+	?Umcode Code;
+	?Initialqty Quantity;
+	?Initialamt Amount;
+	?Debitqty Quantity;
+	?Debitamt Amount;
+	?Creditqty Quantity;
+	?Creditamt Amount;
+	?Endqty Quantity;
+	?Endamt Amount;
+	?Loseqty Quantity;
+	?Loseamt Amount;
+	?Createdate Date;
+	?DateLastupdated Date;
+};
+

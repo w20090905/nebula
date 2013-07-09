@@ -1,0 +1,35 @@
+@Remarks("")
+@Refby("18")
+tx Ordertype {
+	!Ordertypeid ID;
+	?Ordertypecode Code;
+	?Trantypename Name;
+	?Saleflag null;
+	?Inventoryflag null;
+	?Arflag null;
+	?IsSystem YesNo;
+	?Invstatus null;
+	?Whgroupcode Code;
+	?RoleType null;
+	?Refordertypeid ID;
+	?Allocflag null;
+	?AutoDeliveryFlag null;
+	?Payflag null;
+	?IsWholesale null;
+	?Hardallocflag null;
+	?IsAdjust null;
+	?Comments Note;
+	?DateLastupdated Date;
+	?AutoReceiptflag null;
+	?Faflag null;
+	?Suitflag null;
+	?Rebateflag null;
+	?AutoAllocpoint null;
+	?Needmodify null;
+	?Status;
+	?Linkordertypeid ID;
+	?Tporderflag null;
+	?IsService YesNo;
+	?Attr31 null;
+};
+

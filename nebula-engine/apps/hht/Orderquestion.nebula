@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+tx Orderquestion {
+	!Orderquestionid ID;
+	Orderid Ord;
+	?Questiondesc null;
+};
+

@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Agreementitem {
+	!Agreementitemid ID;
+	Itemserviceagreementid Itemserviceagreement;
+	Itemid Item;
+	?Lotno null;
+	?Checktype null;
+	?Serviceamount Amount;
+};
+

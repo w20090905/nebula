@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("1")
+tx Jobhandler {
+	!Jobhandlerid ID;
+	?Jobhandlercode Code;
+	?Jobhandlername Name;
+	?Jobhandlertype null;
+	?Jobhandlersrc null;
+	?Description;
+	?DateLastupdated Date;
+};
+

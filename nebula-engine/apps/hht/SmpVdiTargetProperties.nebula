@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type SmpVdiTargetProperties {
+	ObjectId ID;
+	ObjectType Attr;
+	PropertyName Name;
+	?PropertyValue String;
+	?PropertyType null;
+};
+

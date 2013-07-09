@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+type Zxjppointrecord {
+	?Processid ID;
+	?Sumlevelname Name;
+	?Sumlevelvalue String;
+	?Detailtoname Name;
+	?Detailtovalue String;
+	?SalesChannelname Name;
+	?SalesChannelvalue String;
+	?Actpoint null;
+	?Theorypoint null;
+	?Pointpercent Percent;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+};
+

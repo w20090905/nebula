@@ -2,26 +2,16 @@
 @Refby("0")
 tx AspClientLevel {
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;/* NULL   */
+	AdClientId ID;/* NULL   */
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;/* 0  */
+	AdOrgId ID;/* 0  */
 	@Remarks("Client Level")
 	!AspClientLevelId ID;
 	@Remarks("ASP Level")
-	AspLevelId AspLevel;
+	AspLevel;
 	@Remarks("ASP Module")
-	AspModuleId AspModule;
-	@Remarks("Date this record was created")
-	Created null;
-	@Remarks("User who created this records")
-	Createdby null;
+	AspModule;
 	@Remarks("Comment or Hint")
 	?Help;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was updated")
-	Updated null;
-	@Remarks("User who updated this records")
-	Updatedby null;
 };
 

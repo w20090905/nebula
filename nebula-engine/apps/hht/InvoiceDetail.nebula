@@ -1,0 +1,49 @@
+@Remarks("")
+@Refby("0")
+tx InvoiceDetail {
+	!InvoiceDetailid ID;
+	?InvoiceCode Code;
+	InvoiceId Invoice;
+	Billingid Billing;
+	Itemid Item;
+	?SourceOrgid ID;
+	?SalesRep null;
+	Relatedtrantype null;
+	?Relatedtrancode Code;
+	?Relatedtranid ID;
+	?Relatedtrandetailid ID;
+	?Price;
+	?Qty Quantity;
+	?Amount;
+	?TaxRate Rate;
+	?Pretaxprice Price;
+	?Pretaxamount Amount;
+	?TaxAmount Amount;
+	?Ordertypeid Ordertype;
+	?PaymentMethod null;
+	?Billprice Price;
+	?Billamount Amount;
+	?Billpretaxamount Amount;
+	?Billtaxamount Amount;
+	?Diffamount Amount;
+	?Costvarjournalid Costvarjournal;
+	?Umcode Code;
+	?Relatedtrandate Date;
+	?Zctprice Price;
+	?Zctbillprice Price;
+	?Zctamount Amount;
+	?Zctbillamount Amount;
+	?Zctsrcdiffamount Amount;
+	?Zcttotalamount Amount;
+	?Zctsubtotalamt Amount;
+	?Deptid Department;
+	?Attr1 null;
+	?Attr32 null;
+	?Attr34 null;
+	?Attr33 null;
+	?Zctrate Rate;
+	?Invcostdiffamt Amount;
+	?Gldiffamt Amount;
+	?Invendqty Quantity;
+};
+

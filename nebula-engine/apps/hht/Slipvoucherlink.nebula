@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Slipvoucherlink {
+	!Slipvoucherlinkid ID;
+	Voucherid Voucher;
+	?Sliptype null;
+	?Slipid ID;
+	?Slipdetailid ID;
+};
+

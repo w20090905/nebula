@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Ovalreportauthority {
+	!Reportauthorityid ID;
+	Ovalreportid Ovalreport;
+	EntityType null;
+	EntityId ID;
+	?EntityCode Code;
+	?EntityName Name;
+	?DateLastupdated Date;
+	Orgid Organization;
+};
+

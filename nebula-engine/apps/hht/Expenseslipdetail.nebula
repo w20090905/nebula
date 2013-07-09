@@ -1,0 +1,39 @@
+@Remarks("")
+@Refby("1")
+tx Expenseslipdetail {
+	!Expenseslipdetailid ID;
+	?Expenseslipid Expenseslip;
+	Itemid Item;
+	?Vendorid ID;
+	?Relatedtrantype null;
+	?Relatedtranid ID;
+	?Relatedtrancode Code;
+	?Expensetype null;
+	?Refdocdate Date;
+	?Refno null;
+	?Currencycode Code;
+	?Rate;
+	?Amount;
+	?Localamount Amount;
+	?Status;
+	?Comments Note;
+	?IsTocost Cost;
+	?Apportionmethod null;
+	?Deptid Department;
+	?TaxRate Rate;
+	?TaxAmount Amount;
+	?Pretaxamount Amount;
+	?Originalexpenseslipdetailid ID;
+	?Dcdirection null;
+	?Costapportionmethod Cost;
+	?Reforgid ID;
+	?Refitemid ID;
+	?Refamount Amount;
+	?PaymentTermid PaymentTerm;
+	?TaxName Name;
+	?Expensetypecode Code;
+	?Attr1 null;
+	?Attr2 null;
+	?Relatedtranslipid ID;
+};
+

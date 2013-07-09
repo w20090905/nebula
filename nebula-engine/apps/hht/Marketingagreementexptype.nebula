@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("1")
+tx Marketingagreementexptype {
+	!Marketingagreementexptypeid ID;
+	Expensetypecode Code;
+	Expensetype null;
+	?Agreementamount Amount;
+	?Confirmamount Amount;
+	?Expamount Amount;
+	?IsActivityneed YesNo;
+	?IsAutoAgreement YesNo;
+	?Description;
+	Marketingagreementid Marketingagreement;
+	?LineStatus Line;
+};
+

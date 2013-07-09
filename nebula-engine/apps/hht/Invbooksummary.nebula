@@ -1,0 +1,28 @@
+@Remarks("")
+@Refby("1")
+tx Invbooksummary {
+	!Invbooksummaryid ID;
+	?Booksetid Bookset;
+	?Periodid ID;
+	Orgid Organization;
+	?Entrydate Date;
+	?DateLastupdated Date;
+	?Invbooktype null;
+	Itemid Item;
+	Vendorid ID;
+	Sliptype null;
+	Slipid ID;
+	Slipno null;
+	Slipdetailid ID;
+	?Comments Note;
+	?Initialamt Amount;
+	?Initialqty Quantity;
+	?Debit null;
+	?Credit null;
+	?Price;
+	?Amount;
+	?Endamt Amount;
+	?Endqty Quantity;
+	?Batchno null;
+};
+

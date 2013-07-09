@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx SmpVboReportElements {
+	!ReportId SmpVboReports;
+	!SequenceNum SmpVdeTryRemoveEventQueue;
+	DescriptorName Name;
+	?Parameters null;
+};
+

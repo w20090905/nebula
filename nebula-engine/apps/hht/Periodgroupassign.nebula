@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx Periodgroupassign {
+	!Periodgroupassignid ID;
+	Periodgrouptype Attr;
+	Periodgroupvalue null;
+	Datacleanperiodid Datacleanperiod;
+};
+

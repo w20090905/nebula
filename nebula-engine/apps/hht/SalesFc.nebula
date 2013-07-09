@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("2")
+tx SalesFc {
+	!SalesFcid ID;
+	Orgid Organization;
+	SalesFccode Code;
+	SalesFcname Name;
+	SalesPlantypeid SalesPlantype;
+	SalesFcgroupid SalesFcgroup;
+	?Description;
+	?Comments Note;
+	Maker null;
+	Createdate Date;
+	Status;
+	Revision null;
+	DateLastupdated Date;
+	?Fcmethods null;
+	?Startdate Date;
+};
+

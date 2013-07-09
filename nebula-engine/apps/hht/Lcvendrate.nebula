@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Lcvendrate {
+	!Lcvendrateid ID;
+	Lcbooksetid ID;
+	Accyearid Accountingyear;
+	Accperiodid Accountingperiod;
+	Glaccountid Glaccount;
+	Vendrate Rate;
+	DateLastupdated Date;
+};
+

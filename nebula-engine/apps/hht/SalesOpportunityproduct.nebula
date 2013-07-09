@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+tx SalesOpportunityproduct {
+	!Opportunityproductid ID;
+	Opportunityid SalesOpportunity;
+	Itemid Item;
+	Qty Quantity;
+	Unitprice Unit;
+	DiscountAmt Amount;
+	Netprice Price;
+	?Comments Note;
+	DateLastupdated Date;
+	?Amount;
+	?TaxRate Rate;
+	?Pretaxprice Price;
+	?TaxAmount Amount;
+	?Pretaxamount Amount;
+	?Listprice Price;
+};
+

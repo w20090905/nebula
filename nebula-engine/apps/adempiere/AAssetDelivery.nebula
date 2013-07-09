@@ -4,21 +4,11 @@ tx AAssetDelivery {
 	@Remarks("Delivery of Asset")
 	!AAssetDeliveryId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Asset used internally or by customers")
-	AAssetId AAsset;
+	AAsset;
 	@Remarks("Date a product was moved in or out of inventory")
 	Movementdate Date;
 	@Remarks("Product Serial Number")
@@ -28,9 +18,9 @@ tx AAssetDelivery {
 	@Remarks("Version Number")
 	?Versionno Code;
 	@Remarks("Line on Shipment or Receipt document")
-	?MInoutlineId MInoutline;
+	?MInoutline;
 	@Remarks("Electronic Mail Address")
-	?Email EMail;
+	?EMail;
 	@Remarks("EMail Message ID")
 	?Messageid Message;
 	@Remarks("EMail Delivery confirmation")
@@ -38,16 +28,16 @@ tx AAssetDelivery {
 	@Remarks("Full URL address - e.g. http://www.adempiere.org")
 	?Url;
 	@Remarks("Remote Address")
-	?RemoteAddr Address;
+	?RemoteAddr Name;
 	@Remarks("Remote host Info")
 	?RemoteHost Host;
 	@Remarks("Referring web address")
 	?Referrer String;
 	@Remarks("User within the system - Internal or Business Partner Contact")
-	?AdUserId AdUser;
+	?AdUser;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Product downloads")
-	?MProductDownloadId MProductDownload;
+	?MProductDownload;
 };
 

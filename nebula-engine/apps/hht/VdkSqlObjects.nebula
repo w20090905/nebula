@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type VdkSqlObjects {
+	?VdkSessionId VdkSession;
+	?VdkSqlId VdkSql;
+	?VdkType null;
+	?VdkOwnerName Name;
+	?VdkName Name;
+};
+

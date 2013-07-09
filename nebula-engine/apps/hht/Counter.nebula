@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("6")
+tx Counter {
+	!Counterid ID;
+	Countercode Code;
+	Countername Name;
+	Umcode Code;
+	?Description;
+};
+

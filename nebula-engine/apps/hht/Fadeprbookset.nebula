@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("3")
+tx Fadeprbookset {
+	!Fadeprbooksetid ID;
+	Orgid Organization;
+	Fadeprbooksetcode Code;
+	Fadeprbooksetname Name;
+	?Fadeprbooksetdesc null;
+	DateLastupdated Date;
+	IsAdmin YesNo;
+};
+

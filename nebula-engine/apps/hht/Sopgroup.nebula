@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Sopgroup {
+	!Sopgroupid ID;
+	Sopgroupcode Code;
+	Sopgroupname Name;
+	Orgid Organization;
+	?Comments Note;
+	Status;
+	Createdate Date;
+	DateLastupdated Date;
+};
+

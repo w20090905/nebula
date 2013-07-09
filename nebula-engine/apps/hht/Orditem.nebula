@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type Orditem {
+	?Ordercode Code;
+	?Selleritemid ID;
+	Itemcode Code;
+	Prdn null;
+	LanguageCode Lang;
+};
+

@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("0")
+tx Fajournal {
+	!Fajournalid ID;
+	Booksetid Bookset;
+	Periodid ID;
+	Orgid Organization;
+	Createdate Date;
+	Facategoryid Facategory;
+	Fixedassetsid Fixedassets;
+	?Debitamt Amount;
+	?Creditamt Amount;
+	?Glaccountid Glaccount;
+	Fasummaryid Fasummary;
+	DateLastupdated Date;
+	Legertype null;
+	?Qty Quantity;
+	?Gldate Date;
+	?Relatedtrantype null;
+	?Relatedtranid ID;
+	?Relatedtrancode Code;
+	?Relatedtrandate Date;
+};
+

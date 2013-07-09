@@ -42,6 +42,7 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 	}
 
 	public ImportRedmineDataDefine() {
+		super(false, true);
 
 		when(EqualsIgnoreCase).with("repository_id").table("Changesets").setReferTo("Repositories");
 		when(EqualsIgnoreCase).with("status_id").table("issues").setReferTo("IssueStatuses");
@@ -148,8 +149,8 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 		for (Type type : types) {
 			for (Field field : type.fields) {
 				if (field.isForeignKey) {
-					if (typeMapByRawName.containsKey(field.foreignKeyTable)) {
-						field.resultTypeName = typeMapByRawName.get(field.foreignKeyTable).name;
+					if (typesByRawName.containsKey(field.foreignKeyTable)) {
+						field.resultTypeName = typesByRawName.get(field.foreignKeyTable).name;
 					}
 				} else if (!field.isKey && "ID".equals(field.resultTypeName)) {
 					String typename = field.name;
@@ -157,12 +158,12 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 						typename = typename.substring(0, typename.length() - 3);
 						field.resultName = field.resultName.substring(0, field.resultName.length() - 2);
 					}
-					if (typeMapByRawName.containsKey(typename)) {
-						field.resultTypeName = typeMapByRawName.get(typename).name;
+					if (typesByRawName.containsKey(typename)) {
+						field.resultTypeName = typesByRawName.get(typename).name;
 						field.isForeignKey = true;
 						field.foreignKeyTable = typename;
-					} else if (typeMapByRawName.containsKey(typename + "s")) {
-						field.resultTypeName = typeMapByRawName.get(typename + "s").name;
+					} else if (typesByRawName.containsKey(typename + "s")) {
+						field.resultTypeName = typesByRawName.get(typename + "s").name;
 						field.isForeignKey = true;
 						field.foreignKeyTable = typename + "s";
 					} else {

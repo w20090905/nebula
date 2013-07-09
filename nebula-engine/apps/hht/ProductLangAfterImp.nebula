@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+type ProductLangAfterImp {
+	ProductLangid ProductLang;
+	Prodid Product;
+	LanguageCode Lang;
+	Prdn null;
+	?Prdpd null;
+	?Prdsd null;
+	?Prddd null;
+	?Prdoc null;
+	?Prdm null;
+	?Prdwd null;
+	?Prdap null;
+	?Prdshi null;
+	?Prdac null;
+};
+

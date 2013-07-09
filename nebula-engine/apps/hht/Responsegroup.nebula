@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("1")
+tx Responsegroup {
+	!Responsegroupid ID;
+	Responsegroupcode Code;
+	Responsegroupname Name;
+	Responsegrouptype null;
+	Mabooksetid ID;
+	?Description;
+	Status;
+	DateLastupdated Date;
+};
+

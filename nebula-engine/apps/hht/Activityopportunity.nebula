@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Activityopportunity {
+	!Activityopportunityid ID;
+	Activityid Activity;
+	Orgid Organization;
+	Opportunityid SalesOpportunity;
+	?Apportionmentamount Amount;
+	?Status;
+	Activitycontactid Activitycontact;
+};
+

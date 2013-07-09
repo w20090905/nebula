@@ -1,0 +1,11 @@
+@Remarks("All repository components currenty created in the repository")
+@Refby("0")
+type SmpViewVersions {
+	@Remarks("Component created in the repository")
+	?Component null;
+	@Remarks("Current version of this component")
+	?Version String;
+	@Remarks("Boolean flag: Is EMCA currently updating this component?")
+	Locked null;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Receiverrelationdetail {
+	!Receiverrelationid Orgreceiverrelationdetail;
+	Orgrelationdetailid Orgrelationdetail;
+	Receiveraddressid Receiveraddress;
+	?Updatetime null;
+	?Userid Usr;
+};
+

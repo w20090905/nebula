@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("1")
+tx Rpassignment {
+	!Rpassignmentid ID;
+	Rebatepolicyid Rebatepolicy;
+	Areaid Businessarea;
+	Orggroupid Orggroup;
+	?Toorglist null;
+	?DateLastupdated Date;
+};
+

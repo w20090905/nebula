@@ -1,0 +1,17 @@
+@Remarks("List of all potential targets for jobs and events")
+@Refby("0")
+type SmpViewTargets {
+	@Remarks("Name of the target")
+	TargetName Name;
+	@Remarks("Type of target")
+	TargetType Attr;
+	@Remarks("Translated name for the target type")
+	?TargetNlsType Attr;
+	@Remarks("Name of the node")
+	NodeName Name;
+	@Remarks("Details on how to contact this service")
+	?Userdata null;
+	@Remarks("Current event severity of this target")
+	?Severity null;
+};
+

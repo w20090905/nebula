@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("1")
+tx DeliveryRequest {
+	!DeliveryRequestid ID;
+	Orderdetailid Orderdetail;
+	DeliveryId Delivery;
+	?Itemid Item;
+	?Warehouseid Physicalwarehouse;
+	?RequestQty Quantity;
+	?DateLastupdated Date;
+	?Planqty Quantity;
+	@Remarks("要求納期2")
+	?DeliveryDate2 null;
+	?Dlcondition null;
+	?Zhhteaiflag String;/* '0' */
+	?Dlsendstatus null;
+};
+

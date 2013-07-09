@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+type SmpVdgEventNotifList {
+	?Masid ID;
+	?EventName Name;
+	?Targetname Name;
+	?Targettype Attr;
+	?Nodename SmpVdgNodeList;
+	?Status;/* 0 */
+	?Maxstatus null;/* -1 */
+	?Hold null;/* -1 */
+	?Agentid ID;/* 0 */
+	?EventIndex null;/* 0 */
+	?EventArgs null;
+};
+

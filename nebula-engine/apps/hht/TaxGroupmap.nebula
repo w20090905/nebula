@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx TaxGroupmap {
+	!TaxGroupmapid ID;
+	Orgid Organization;
+	Itemtaxgroupcode Code;
+	?Orgtaxgroupcode Code;
+	TaxType null;
+	TaxCode Code;
+	TaxRate Rate;
+	?Description;
+};
+

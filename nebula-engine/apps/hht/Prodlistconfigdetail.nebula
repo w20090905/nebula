@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Prodlistconfigdetail {
+	!Prodlistconfigdetailid ID;
+	Prodconfigid Prodconfig;
+	Prodlistconfigid Prodlistconfig;
+	Sortno SeqNo;
+	IsNeed YesNo;
+};
+

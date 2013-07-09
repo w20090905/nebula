@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+tx Reportdefinesql {
+	!Reportdefinesqlid ID;
+	?Orgid Organization;
+	?Maker null;
+	?Makedate Date;
+	?DateLastupdated Date;
+	IsPublic YesNo;
+	?Description;
+	?Reportname Name;
+	?Vtablename Name;
+	?Orderby null;
+	?Sumby null;
+	?Cols null;
+	?WhereClause String;
+};
+

@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("1")
+tx Globjsrestriction {
+	!Globjsrestrictionid ID;
+	Booksetid Bookset;
+	?Globjtype null;
+	Globjid ID;
+	?Maker null;
+	?Createdate Date;
+	?DateLastupdated Date;
+};
+

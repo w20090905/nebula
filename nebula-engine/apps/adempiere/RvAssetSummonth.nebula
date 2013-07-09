@@ -1,24 +1,19 @@
 @Remarks("")
 @Refby("0")
 type RvAssetSummonth {
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;
-	Created null;
-	Createdby null;
-	Updated null;
-	Updatedby null;
-	AAssetId AAsset;
-	AAssetGroupId AAssetGroup;
-	?MProductId MProduct;
+	AdClientId ID;
+	AdOrgId ID;
+	AAssetId ID;
+	AAssetGroupId ID;
+	?MProductId ID;
 	Value String;
 	*Name;
 	?Description;
 	?Help;
 	?Guaranteedate Date;
 	?Assetservicedate Date;
-	?CBpartnerId CBpartner;
-	?AdUserId AdUser;
+	?CBpartnerId ID;
+	?AdUserId ID;
 	?Serno Code;
 	?LOT;
 	?Versionno Code;

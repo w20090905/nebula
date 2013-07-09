@@ -1,0 +1,42 @@
+@Remarks("List of all jobs known in the repository")
+@Refby("0")
+type SmpViewAgentJobs {
+	@Remarks("Internal repository ID of this job")
+	JobId SmpVdjJob;
+	@Remarks("Internal Intelligent Agent ID of this job")
+	AgentId ID;
+	@Remarks("Name of this job")
+	?JobName Name;
+	@Remarks("Administrator who owns this job")
+	?AdministratorName Name;
+	@Remarks("Description of this event")
+	?Description;
+	@Remarks("Name of the node this job is running on")
+	?NodeName Name;
+	@Remarks("Name of the service this job is meant for")
+	TargetName Name;
+	@Remarks("Type of service this job is meant for")
+	?TargetType Attr;
+	@Remarks("Translated name for the target type")
+	?TargetNlsType Attr;
+	@Remarks("Boolean value: Is this a fixit job?")
+	?FixitJob null;
+	?IntervalJob null;
+	@Remarks("The current number of executions this job has already done")
+	?ExecNum null;
+	@Remarks("Administrator who made the last modificiation to this job")
+	?ModifiedBy null;
+	@Remarks("Date the last modificiation to this job were made")
+	?ModifiedDate Date;
+	@Remarks("Status of the exeuction: 1 (Submitted), 2 (Scheduled), 4 (Running), 9 (Success), 11 (Failed), 13 (Deleting), 14 (Deleted)")
+	?Status;
+	@Remarks("Date the job was started")
+	?Started null;
+	@Remarks("Date the job finished")
+	?Finished null;
+	@Remarks("Time and date for the next execution, for interval jobs")
+	?NextExec null;
+	@Remarks("Current state: 0 (DOWN), 1 (UP)")
+	?AgentStatus null;
+};
+

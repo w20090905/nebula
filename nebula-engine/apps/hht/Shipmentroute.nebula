@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("0")
+tx Shipmentroute {
+	!Shipmentrouteid ID;
+	Shipmentid Shipment;
+	?Sortno SeqNo;
+	?Fromport null;
+	?Toport null;
+	?Shipmentmethod null;
+	?Carrier null;
+	?TotalMiles null;
+	?Mileageumcode Code;
+	?TotalTimes null;
+	?Timeumcode Code;
+	?TotalCost Cost;
+	?Costumcode Code;
+	?Sat null;
+	?Sdt null;
+	?Aat null;
+	?Adt null;
+	?Comments Note;
+};
+

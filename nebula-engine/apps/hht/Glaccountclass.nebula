@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Glaccountclass {
+	!Glaccountclassid ID;
+	?Glaccountclasscode Code;
+	?Grade null;
+	?Parentclasscode Code;
+	?LanguageCode Lang;
+	?Glaccountclassname Name;
+};
+

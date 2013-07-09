@@ -1,0 +1,32 @@
+@Remarks("")
+@Refby("1")
+tx Vansaleslist {
+	!Vansaleslistid ID;
+	?Vansaleslistcode Code;
+	Vansalesslipid Vansalesslip;
+	?Customerid ID;
+	Itemid Item;
+	?Umcode Code;
+	?Lotno null;
+	?Qty Quantity;
+	?Price;
+	?Discount Count;
+	?DiscountAmt Amount;
+	?Netprice Price;
+	?Amount;
+	?Remark null;
+	?Status;
+	?Gatheringflag null;
+	?Costprice Cost;
+	?Costamt Cost;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Listprice Price;
+	?TaxRate Rate;
+	?TaxAmount Amount;
+	?Pretaxprice Price;
+	?Pretaxamount Amount;
+	?Baseqty Quantity;
+	?PaymentTermid PaymentTerm;
+};
+

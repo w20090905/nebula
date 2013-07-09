@@ -1,0 +1,30 @@
+@Remarks("")
+@Refby("0")
+tx Trialorg {
+	!Orgid Organization;
+	Orgname Name;
+	Username Name;
+	Password;
+	EMail;
+	Telephone Phone;
+	?Fax;
+	Shortname Name;
+	Globalpccode null;
+	?Areaid Businessarea;
+	Corporationtype null;
+	CountryCode Code;
+	?Url;
+	Defaultlanguage null;
+	Preferedcurrency null;
+	Corporateperson null;
+	?Registerfund null;
+	Workingscope null;
+	?Opendate Date;
+	?PaymentMethod null;
+	?PaymentTerm null;
+	?Shipmentterm null;
+	Status;
+	?DateLastupdated Date;
+	?Ownerorgid ID;
+};
+

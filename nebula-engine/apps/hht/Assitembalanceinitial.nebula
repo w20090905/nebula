@@ -1,0 +1,30 @@
+@Remarks("")
+@Refby("0")
+tx Assitembalanceinitial {
+	!Assitembalanceinitialid ID;
+	Glaccountid Glaccount;
+	Booksetid Bookset;
+	Accyearid Accountingyear;
+	Accperiodid Accountingperiod;
+	?Currencycode Code;
+	?LineType Attr;
+	?Dcflag null;
+	?Initialamount Amount;
+	?Debitamount Amount;
+	?Creditamount Amount;
+	?Endamount Amount;
+	?Initialamountfore null;
+	?Debitamountfore null;
+	?Creditamountfore null;
+	?Endamountfore null;
+	?Profitlossyear null;
+	?Profitlossyearfore null;
+	?Description;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Assistantitemid Assistantitem;
+	?Assistantitemvalue null;
+	?Responsecenterid Responsecenter;
+	?Originalbooksetid ID;
+};
+

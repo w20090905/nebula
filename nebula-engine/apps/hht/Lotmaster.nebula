@@ -1,0 +1,28 @@
+@Remarks("")
+@Refby("1")
+tx Lotmaster {
+	!Lotmasterid ID;
+	Itemid Item;
+	Orgid Organization;
+	?Lotno null;
+	?Manufacture null;
+	?Manufacturedate Date;
+	?Expiredate Date;
+	?Carrier null;
+	?Relatedtrantype null;
+	?Relatedtransid ID;
+	?Relatedtrancode Code;
+	?Relatedtrandetailid ID;
+	?Vendorname Name;
+	?Manufacturelotno null;
+	?Vendorlotno null;
+	?Createdate Date;
+	?Originalqty Quantity;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr5 null;
+	?Attr6 null;
+};
+

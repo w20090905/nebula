@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx Transnoelrule {
+	!Transnoelruleid ID;
+	Transno null;
+	Eltype Attr;
+	OtherCode Code;
+	Earflag null;
+	Modifier null;
+	DateLastupdated Date;
+	Maker null;
+	Createdate Date;
+};
+

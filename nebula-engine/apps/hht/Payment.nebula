@@ -1,0 +1,58 @@
+@Remarks("")
+@Refby("1")
+tx Payment {
+	!PaymentId ID;
+	?PaymentCode Code;
+	PaymentMethod null;
+	Orgid Organization;
+	Partnerid ID;
+	?SourceOrgid ID;
+	?Contactid Contact;
+	?Comments Note;
+	?Paydate Date;
+	?TotalAmount Amount;
+	?TotalSettleamount Amount;
+	?BalanceAmount Amount;
+	?Currencycode Code;
+	?Createdate Date;
+	?Maker null;
+	Status;
+	?Voucher null;
+	?PaymentType Attr;
+	?DateLastupdated Date;
+	?Accountid Orgaccount;
+	?PrintNum null;
+	?PaymentReason null;
+	?Booksetid Bookset;
+	?Accountingyearid ID;
+	?Year null;
+	?Accperiodid Accountingperiod;
+	?Period null;
+	?Docdate Date;
+	?Gldate Date;
+	?ReferenceNo Code;
+	?Partnertrancode Code;
+	?Partnertranid ID;
+	?BalanceSlipcode Code;
+	?ExportTaskcode Code;
+	?Relatedtrancode Code;
+	?Relatedtrantype null;
+	?Relatedtranid ID;
+	?Zcttotalamount Amount;
+	?Zcttotalsettleamount Amount;
+	?Zctbalanceamount Amount;
+	?Zcttranprofitloss null;
+	?Zctrate Rate;
+	?IsInway YesNo;
+	?Noteid Arapnote;
+	?Rebateamt Amount;
+	?Accountname Name;
+	?Bankname Name;
+	?Accountno Code;
+	?Bankcode Code;
+	?Exportflag null;
+	?Remitno null;
+	?Remitdate Date;
+	?CashFlowitemid CashFlowitem;
+};
+

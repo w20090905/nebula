@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Activityexptypekpi {
+	!Activityexptypekpiid ID;
+	Kpicode Code;
+	?Kpivalue String;
+	?Actualkpivalue String;
+	Activityexptypeid Activityexptype;
+	?Activityid Activity;
+	?Activitystoreid Activitystore;
+};
+

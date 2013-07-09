@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type VSapHdr {
+	?HDatatype1 null;
+	?HDocid2 null;
+	?HDoccode3 null;
+	?HDateAndhTime4 null;
+	?HId5 null;
+	Returnid Returnslip;
+};
+

@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("1")
+tx Notessubjecttype {
+	!Subjecttypeid ID;
+	Subjecttypename Name;
+	?Subjecttypedesc null;
+};
+

@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Fcelement {
+	!Fcelementid ID;
+	Fccode Code;
+	?Fcqty Quantity;
+	?Description;
+	DateLastupdated Date;
+};
+

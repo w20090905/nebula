@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Rpperiod {
+	!Rpperiodid ID;
+	Rebatepolicyid Rebatepolicy;
+	Periodno SeqNo;
+	?Begindate Date;
+	?Enddate Date;
+	?Calcdate Date;
+	?Status;
+};
+

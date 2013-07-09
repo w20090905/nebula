@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("0")
+tx MrpFctYytmp {
+	!Forecasttmpid ID;
+	Forecastname Name;
+	Sellerdept null;
+	?Buyercode Code;
+	Forecastlifename Name;
+	Forecastlifenum null;
+	Forecaststart null;
+	?Memo;
+	?Itemcode Code;
+	?Customeritemcode Code;
+	Startdate Date;
+	Qty Quantity;
+	Umcode Code;
+	?Enddate Date;
+	?Tmpid Zhhtexpensetmp;
+	?Forecastlife null;
+	?Enddateflg null;
+	?LineNo Line;
+};
+

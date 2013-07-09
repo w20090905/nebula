@@ -2,24 +2,14 @@
 @Refby("0")
 type AspWindow {
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;/* NULL   */
+	AdClientId ID;/* NULL   */
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;/* NULL   */
+	AdOrgId ID;/* NULL   */
 	@Remarks("Data entry or display window")
-	!AdWindowId AdWindow;
+	!AdWindow;
 	@Remarks("ASP Level")
-	!AspLevelId AspLevel;
+	!AspLevel;
 	@Remarks("ASP Status")
 	AspStatus Attr;/* 'U'  */
-	@Remarks("Date this record was created")
-	Created null;
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was updated")
-	Updated null;
-	@Remarks("User who updated this records")
-	Updatedby null;
 };
 

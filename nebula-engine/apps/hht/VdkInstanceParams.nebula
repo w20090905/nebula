@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+type VdkInstanceParams {
+	?VdkParentId ID;
+	?VdkSymbolId ID;
+	?VdkName Name;
+	?VdkCollectDate Date;
+	?VdkStatus null;
+	?VdkIsDefault null;
+	?VdkValue String;
+	?VdkValueRecom null;
+};
+

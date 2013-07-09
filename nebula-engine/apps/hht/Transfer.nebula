@@ -1,0 +1,49 @@
+@Remarks("")
+@Refby("4")
+tx Transfer {
+	!Transferid ID;
+	Orgid Organization;
+	?Transfercode Code;
+	?Fromwarehouseid ID;
+	?Towarehouseid ID;
+	?Comments Note;
+	?Maker null;
+	?Createdate Date;
+	?Transferdate Date;
+	Status;
+	?DateLastupdated null;
+	?Saleflag null;
+	?Inventoryflag null;
+	?Arflag null;
+	?PrintNum null;
+	?Fromorgid ID;
+	?Toorgid ID;
+	?IsOnestep null;
+	?Transferreason null;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Attr5 null;
+	?Attr6 null;
+	?Attr11 null;
+	?Attr12 null;
+	?Accountingyearid ID;
+	?Year null;
+	?Accperiodid Accountingperiod;
+	?Period null;
+	?Docdate Date;
+	?Gldate Date;
+	?Transfertype null;
+	?Customerid ID;
+	?ExportTaskcode Code;
+	?Shipmentterm null;
+	?Shiptmentmethod null;
+	?Receiptaddressid ID;
+	?Carrier null;
+	Zhhteaiflag String;/* 0  */
+	Saptransmitstatus null;/* 1  */
+	?Sapresulttreattime null;
+	?OFlg null;
+};
+

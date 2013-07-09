@@ -1,0 +1,28 @@
+@Remarks("")
+@Refby("0")
+tx Ediset {
+	!Edisetid ID;
+	?Orgid Organization;
+	?Jpcasocompanycode Code;
+	?Jpcasodepartmentcode Code;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+	?Item1 null;
+	?Item2 null;
+	?Item3 null;
+	?Item4 null;
+	?Item5 null;
+	?Item6 null;
+	?Item7 null;
+	?Item8 null;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Userid Usr;
+	?NewSendflag null;
+	?ChangeSendflag null;
+	?Cancelsendflag null;
+	?Ediorg null;
+};
+

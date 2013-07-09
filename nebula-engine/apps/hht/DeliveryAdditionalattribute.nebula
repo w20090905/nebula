@@ -1,0 +1,57 @@
+@Remarks("")
+@Refby("0")
+tx DeliveryAdditionalattribute {
+	!DeliveryAdditionalattributeid ID;
+	?Attr101 null;
+	?Attr102 null;
+	?Attr103 null;
+	?Attr104 null;
+	?Attr105 null;
+	?Attr106 null;
+	?Attr107 null;
+	?Attr108 null;
+	?Attr109 null;
+	?Attr110 null;
+	?Attr111 null;
+	?Attr112 null;
+	?Attr113 null;
+	?Attr114 null;
+	?Attr115 null;
+	?Attr116 null;
+	?Attr117 null;
+	?Attr118 null;
+	?Attr119 null;
+	?Attr120 null;
+	?Attr201 null;
+	?Attr202 null;
+	?Attr203 null;
+	?Attr204 null;
+	?Attr205 null;
+	?Attr206 null;
+	?Attr207 null;
+	?Attr208 null;
+	?Attr209 null;
+	?Attr210 null;
+	?Attr211 null;
+	?Attr212 null;
+	?Attr213 null;
+	?Attr214 null;
+	?Attr215 null;
+	?Attr216 null;
+	?Attr217 null;
+	?Attr218 null;
+	?Attr219 null;
+	?Attr220 null;
+	?Attr301 null;
+	?Attr302 null;
+	?Attr303 null;
+	?Attr304 null;
+	?Attr305 null;
+	?Attr306 null;
+	?Attr307 null;
+	?Attr308 null;
+	?Attr309 null;
+	?Attr310 null;
+	?DeliveryId Delivery;
+};
+

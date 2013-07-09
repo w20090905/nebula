@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("6")
+tx Practicality {
+	!Practicalityid ID;
+	Orgid Organization;
+	?Itemid Item;
+	?Lotno null;
+	?Lotmasterid Lotmaster;
+	?QtyTotal Quantity;
+	?QtyAvailable Quantity;
+	?QtyAlloc Quantity;
+	?Position null;
+	?Ownerid ID;
+	DateLastupdated Date;
+	?Ownerdeptid ID;
+	?Status;
+};
+

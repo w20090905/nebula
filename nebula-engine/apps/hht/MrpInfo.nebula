@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("5")
+type MrpInfo {
+	!MrpCode Code;
+	MrpName Name;
+	Fctsumcode MrpFctSum;
+	Mrpstart null;
+	?Mrpend null;
+	Sorttype null;
+	Status;
+	Creator null;
+	Createdate Date;
+	?Memo;
+	?RcdStatus null;
+	?Viewname Name;
+	?Inoutlife null;
+	?Inoutlifenum null;/* 0 */
+};
+

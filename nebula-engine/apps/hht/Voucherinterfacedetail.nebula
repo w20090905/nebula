@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+tx Voucherinterfacedetail {
+	!Voucherinterfacedetailid ID;
+	Orgid Organization;
+	?Glgroupcode Code;
+	?Businessreason null;
+	?Glaccountid Glaccount;
+	?ValueType null;
+	Voucherinterfaceid Voucherinterface;
+	?Dcflag null;
+	Createdate Date;
+	?Lastupdated null;
+	?Businessreason2 null;
+	?Groupno null;
+	?Createtype null;
+	?Zerotreatmenttype null;
+	?Zctisforeign String;
+};
+

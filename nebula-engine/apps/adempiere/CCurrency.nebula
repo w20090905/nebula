@@ -4,21 +4,11 @@ tx CCurrency {
 	@Remarks("The Currency for this record")
 	!CCurrencyId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("Three letter ISO 4217 Code of the Currency")
-	IsOCode Code;
+	IsOCode Note;
 	@Remarks("Symbol of the currency (opt used for printing only)")
 	?Cursymbol Symbol;
 	@Remarks("Optional short description of the record")
@@ -26,7 +16,7 @@ tx CCurrency {
 	@Remarks("Rule for rounding  calculated amounts")
 	Stdprecision Precision;
 	@Remarks("Rounding used costing calculations")
-	Costingprecision Cost;
+	Costingprecision Precision;
 	@Remarks("This currency is the Euro")
 	IsEuro YesNo;/* 'N'  */
 	@Remarks("This currency is member if the European Monetary Union")

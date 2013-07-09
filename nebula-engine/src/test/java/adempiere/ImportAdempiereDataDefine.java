@@ -17,9 +17,6 @@ import static adempiere.MatchPattern.Include;
 import static adempiere.MatchPattern.StartWithIgnoreCase;
 
 import java.io.IOException;
-import java.util.List;
-
-import nebula.lang.TypeStandalone;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -42,12 +39,65 @@ public class ImportAdempiereDataDefine extends DefaultImporter {
 		parser.output(outputFolder);
 	}
 
-	public ImportAdempiereDataDefine() {
+	public ImportAdempiereDataDefine() {		
+		super(true, true);
+		
 		// ID
 		when(EqualsIgnoreCase).with("ID").is(Long).setTypeName("ID");
 		when(EndWithIgnoreCase).with("_ID").is(Long).setTypeName("ID");
 
 		// String
+
+		/* NEW */
+
+		when(StartWithIgnoreCase).with("is").is(Char).length(1).setTypeName("YesNo");
+		when(EqualsIgnoreCase).with("Action").is(Char).length(1).setTypeName("YesNo");
+		when(StartWithIgnoreCase).defaultValue("'Y'","'N'").is(Char).length(1).setTypeName("YesNo");
+		
+		when(EqualsIgnoreCase).with("Languageiso","CountryCode").is(String).setTypeName("Code");
+		when(EqualsIgnoreCase).with("Summary").is(String).setTypeName("Summary");
+		when(EqualsIgnoreCase).with("Dbaddress","Remote_Addr").setTypeName("Name");
+		
+		when(EqualsIgnoreCase).with("RequestEmail","RequestUser","DocumentDir",
+				"ReleaseTag","FieldGroup","Constantvalue","FunctionColumn").is(String).setTypeName("Description");
+		
+		when(EqualsIgnoreCase).with("Help").is(String).setTypeName("Help");
+		when(EqualsIgnoreCase).with("Value","LdapQuery","DatePattern","Timepattern",
+				"Version","Duns").is(String).setTypeName("String");
+		
+		when(EndWithIgnoreCase).with("Msg").is(String).setTypeName("Note");
+		when(EndWithIgnoreCase).with("Subject","Version","SupportEmail","Prefix",
+				"Suffix").is(String).setTypeName("Description");
+		
+		when(EndWithIgnoreCase).with("Message","Reply","Clause","Path","Help",
+				"Preprocessing","Modelpackage","Code","Logic","Callout","Sql","Infofactoryclass",
+				"PostProcessing","Value","DisplayLogic","Modelvalidationclasses",
+				"info","Trace","Responsetext","Script","warning","Msgtext","Msgtip","Reference","Modelvalidationclass").is(String).setTypeName("Note");
+		
+		
+		
+		when(EqualsIgnoreCase).with("Comments").is(String).setTypeName("Comment");
+		when(EqualsIgnoreCase).with("Callout","Vformat","Value2").is(String).setTypeName("Description");
+
+		when(EqualsIgnoreCase).with("Title","EntityType","Ad_Language","Operation","RequestDocumentNo").setTypeName("String");
+		
+		when(EqualsIgnoreCase).with("V_String").is(String).setTypeName("Note");
+		when(EqualsIgnoreCase).with("V_Number").is(Long).setTypeName("Number");
+		when(EqualsIgnoreCase).with("LineNo").is(Long).setTypeName("Long");
+		
+		
+		when(EqualsIgnoreCase).with("EVENTCHANGELOG","Undo","Redo").is(Char).length(1).setTypeName("YesNo");
+		when(EndWithIgnoreCase).with("Type","Level","Status").is(Char).setTypeName("Attr");
+		when(EndWithIgnoreCase).with("Jspurl").is(Char).setTypeName("URL");
+
+
+		when(EqualsIgnoreCase).with("LineWidth").is(Long).setTypeName("Number");
+		when(EqualsIgnoreCase).with("Version").is(Long).setTypeName("Number");
+		
+		
+		/*End New*/
+		
+		
 		when(EqualsIgnoreCase)
 				.with("Name", "Description", "Comment", "Account", "Regexp", "Title", "Host", "Filename", "TimeZone",
 						"Status", "Url", "Password", "Subject", "Content", "Summary", "Revision", "Symbol", "Fax")
@@ -128,7 +178,7 @@ public class ImportAdempiereDataDefine extends DefaultImporter {
 				.useMatchedNameAsTypeName().useMatchedNameAsFieldName();
 		when(EndWithIgnoreCase).with("Port").is(Long).useMatchedNameAsTypeName();
 
-		when(StartWithIgnoreCase, EndWithIgnoreCase)
+		when(EndWithIgnoreCase)
 				.with("Count", "Length", "Height", "Width", "Size", "Weight", "Ratio", "Rate", "Rating", "Depth",
 						"Price", "Line", "Cost", "Volume", "Amount", "Percent", "Frequency", "Sequence", "Unit",
 						"Precision", "Ranking").is(Long).useMatchedNameAsTypeName();
@@ -206,125 +256,14 @@ public class ImportAdempiereDataDefine extends DefaultImporter {
 		// when().is(Varchar, NVarchar).setTypeName("String");
 		when().is(Text, Blob).setTypeName("Note");
 		// when().is(Long).setTypeName("Count");
+		 when().is(Long).setTypeName("Number");
 
 		when(EqualsIgnoreCase).with("repository_id").table("Changesets").setReferTo("Repositories");
 
 		// Skip System Column
-//		when(EqualsIgnoreCase).with("ISACTIVE").is(Char).skip();
-//		when(EqualsIgnoreCase).with("CREATEDBY", "UPDATEDBY").is(Long).skip();
-//		when(EqualsIgnoreCase).with("CREATED", "UPDATED").is(Date).skip();
-	}
-
-	public void analyze(List<Type> types) {
-
-		// Costruct Type
-		for (Type type : types) {
-			for (Field field : type.fields) {
-				Field result = this.match(field);
-				if (result != null) {
-				} else {
-					System.out.println(field);
-				}
-			}
-		}
-
-		// check type
-		for (Type type : types) {
-			boolean hasIDKey = false;
-			boolean hasNameKey = false;
-			boolean hasNameRequired = false;
-			boolean hasName = false;
-			for (Field field : type.fields) {
-				if ("Name".equalsIgnoreCase(field.resultName)) {
-					hasName = true;
-					if (!field.nullable) {
-						hasNameRequired = true;
-					}
-					if (field.isKey) {
-						hasNameKey = true;
-					}
-				} else if (field.isKey) {
-					if ("ID".equalsIgnoreCase(field.resultTypeName)) {
-						hasIDKey = true;
-					}
-				}
-			}
-
-			if (hasIDKey && !hasName) {
-				type.standalone = TypeStandalone.Transaction;
-			} else if (hasNameKey) {
-				type.standalone = TypeStandalone.Master;
-			} else if (hasIDKey && hasNameRequired) {
-				type.standalone = TypeStandalone.Master;
-			}
-
-			// System.out.println("##\t" + type.rawName + "\t" + type.name +
-			// "\t" + hasIDKey + "\t" + hasNameKey + "\t"
-			// + hasNameRequired + "\t" + hasName);
-		}
-
-		for (Type type : types) {
-			for (Field field : type.fields) {
-				if (field.isForeignKey) {
-					if (typeMapByRawName.containsKey(field.foreignKeyTable)) {
-						field.resultTypeName = typeMapByRawName.get(field.foreignKeyTable).name;
-					}
-				} else if (!field.isKey && "ID".equals(field.resultTypeName)) {
-					String typename = field.name;
-					if (typename.toUpperCase().endsWith("_ID")) {
-						typename = typename.substring(0, typename.length() - 3);
-					}
-					if (typeMapByRawName.containsKey(typename)) {
-						field.resultTypeName = typeMapByRawName.get(typename).name;
-						field.isForeignKey = true;
-						field.foreignKeyTable = typename;
-					} else if (typeMapByRawName.containsKey(typename + "s")) {
-						field.resultTypeName = typeMapByRawName.get(typename + "s").name;
-						field.isForeignKey = true;
-						field.foreignKeyTable = typename + "s";
-					} else {
-						// System.out.println("Fail check foreign key : " +
-						// type.name + " - " + field.name);
-					}
-				}
-			}
-		}
-
-		// 附属表的情况，主键为另一个对象的主键
-		for (Type type : types) {
-			for (Field field : type.fields) {
-				if (field.isKey) {
-					if (field.name.endsWith("_ID") && !"ID".equals(field.resultTypeName)
-							&& typeMapByName.containsKey(field.resultTypeName)) {
-						Type refType = typeMapByName.get(field.resultTypeName);
-						switch (refType.standalone) {
-						case Master:
-							type.standalone = TypeStandalone.Master;
-							break;
-						case Transaction:
-							type.standalone = TypeStandalone.Transaction;
-							break;
-						}
-					}
-				}
-			}
-		}
-
-		for (Type type : types) {
-			if (type.standalone == TypeStandalone.Abstract) {
-				type.standalone = TypeStandalone.Master;
-				type.comment = "TODO Type not sure ！！ ";
-				// System.out.println("## Type not sure  " + type.name);
-			}
-		}
-		// System.out.println("\n\n\n=================================================\n\n\n");
-		// for (Type type : types) {
-		// for (Field field : type.fields) {
-		// System.out.println(type.rawName + "\t" + type.name + "\t" +
-		// type.standalone.name() + "\t"
-		// + type.comment + "\t" + field);
-		// }
-		// }
+		when(EqualsIgnoreCase).with("ISACTIVE").is(Char).skip();
+		when(EqualsIgnoreCase).with("CREATEDBY", "UPDATEDBY").is(Long).skip();
+		when(EqualsIgnoreCase).with("CREATED", "UPDATED").is(Date).skip();
 	}
 
 }

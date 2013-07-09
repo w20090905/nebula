@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("1")
+tx Warehouseemployee {
+	!Whemployeeid ID;
+	Warehouseid Physicalwarehouse;
+	Employeeid Employee;
+	?Status;
+	?Startdate Date;
+	?DateLastupdated Date;
+	?Leavedate Date;
+};
+

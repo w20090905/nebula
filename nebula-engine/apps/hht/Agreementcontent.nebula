@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Agreementcontent {
+	!Agreementcontentid ID;
+	Agreementid Agreement;
+	Selleritemid ID;
+	Buyeritemid ID;
+	?Pricingtype null;
+	?Commonprice Price;
+	?Description;
+};
+

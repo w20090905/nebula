@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Runbatchhistory {
+	!Runbatchhistoryid ID;
+	?Mitumoriirai null;
+	?Densoc null;
+	?Unmatchlist null;
+	?Vanchumonsyo null;
+	?Buhinseisaku2 null;
+	?Kaikakemeisai null;
+};
+

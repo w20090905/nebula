@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx Vantrack {
+	!Vantrackid ID;
+	Vansalesslipid Vansalesslip;
+	?Fromport null;
+	?Toport null;
+	?Miles null;
+	Begindate Date;
+	?Enddate Date;
+	?Days Count;
+	?Createdate Date;
+	?DateLastupdated Date;
+	?Remark null;
+};
+

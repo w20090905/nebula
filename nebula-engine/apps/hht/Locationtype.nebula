@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("1")
+type Locationtype {
+	!Locationtype null;
+	Locationtypecode Code;
+	?Locationtypename Name;
+	?Length;
+	?Width;
+	?Height;
+	?Umcode1 null;
+	?Volume;
+	?Umcode2 null;
+	?Maxweight Weight;
+	?Umcode3 null;
+	?DateLastupdated Date;
+	?Limiteddimensionflag null;
+	?Limitedweightflag null;
+	?Locationcodestructure null;
+	?Warehouseid Physicalwarehouse;
+};
+

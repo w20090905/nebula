@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx Faprocesstype {
+	!Faprocesstypeid ID;
+	Processtype null;
+	Typecode Code;
+	LanguageCode Lang;
+	Typename Name;
+	?Typedesc Attr;
+	?IsClear YesNo;
+	?IsCleardepr YesNo;
+	DateLastupdated Date;
+};
+

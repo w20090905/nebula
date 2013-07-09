@@ -1,0 +1,40 @@
+@Remarks("")
+@Refby("2")
+tx Glaccountjournal {
+	!Glaccountjournalid ID;
+	Booksetid Bookset;
+	Accyearid Accountingyear;
+	Accperiodid Accountingperiod;
+	Glaccountid Glaccount;
+	?Accyear null;
+	?Accperiod null;
+	?Voucherid Voucher;
+	?Vouchercode Code;
+	?Voucherdetailid Voucherdetail;
+	?Vouchersigner null;
+	?Relatedtranstype null;
+	?Relatedtransid ID;
+	?Relatedtransdetailid ID;
+	?Description;
+	?Dcflag null;
+	?Currencycode Code;
+	?Exchangerate Rate;
+	?Debitamount Amount;
+	?Creditamount Amount;
+	?Debitamountfore null;
+	?Creditamountfore null;
+	?Createdate Date;
+	?Docdate Date;
+	?Opposingglaccounts null;
+	?Settletype null;
+	?Settleno null;
+	?Coporgid ID;
+	?Copdeptid ID;
+	?Copemployeeid ID;
+	?Gldate Date;
+	?Vouchertype null;
+	?Relatedtranscode Code;
+	?Endamount Amount;
+	?Endamountfore null;
+};
+

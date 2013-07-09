@@ -1,15 +1,10 @@
 @Remarks("")
 @Refby("0")
 type AAssetChangeAmt {
-	!AAssetChangeId AAssetChange;
-	!CAcctschemaId CAcctschema;
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;/* 'Y'  */
-	Created null;/* SYSDATE  */
-	Createdby null;
-	Updated null;/* SYSDATE  */
-	Updatedby null;
+	!AAssetChange;
+	!CAcctschema;
+	AdClientId ID;
+	AdOrgId ID;
 	Assetvalueamt Amount;/* 0  */
 	Assetmarketvalueamt Amount;/* 0  */
 	Assetbookvalueamt Amount;/* 0  */

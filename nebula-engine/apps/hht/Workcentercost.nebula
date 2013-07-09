@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Workcentercost {
+	!Workcentercostid ID;
+	Workcenterid Workcenter;
+	Prodcosttypecode Code;
+	Price;
+	?Remark null;
+};
+

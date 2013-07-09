@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+tx DeliveryContact {
+	!DeliveryContactid ID;
+	DeliveryId Delivery;
+	?DeliveryAddressid DeliveryAddress;
+	?Originalcontactid ID;
+	?Contactname Name;
+	?Contactroletype null;
+	?Employeeid Employee;
+	?Deptid Department;
+	?Gender null;
+	?Officephone Phone;
+	?Faxnumber null;
+	?EMail;
+};
+

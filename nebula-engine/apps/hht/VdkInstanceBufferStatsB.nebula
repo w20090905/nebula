@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+type VdkInstanceBufferStatsB {
+	?VdkCollectDate Date;
+	?VdkParentId ID;
+	?VdkDatabaseId VdkDatabase;
+	?VdkBufferName Name;
+	?VdkFreeBufferWait null;
+	?VdkBufferBusyWait null;
+	?VdkDbBlockGets null;
+	?VdkConsistentGets null;
+	?VdkPhysicalReads null;
+	?VdkPhysicalWrites null;
+};
+

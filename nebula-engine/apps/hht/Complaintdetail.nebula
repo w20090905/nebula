@@ -1,0 +1,25 @@
+@Remarks("")
+@Refby("1")
+tx Complaintdetail {
+	!Complaintdetailid ID;
+	Complaintid Complaint;
+	?Receiptid Receipt;
+	?Receiptdetailid Receiptdetail;
+	Itemid Item;
+	?Selleritemid ID;
+	?QtyReceived Quantity;
+	?QtyComplaint Quantity;
+	?Umcode Code;
+	?Price;
+	?Amount;
+	?Pretaxprice Price;
+	?Pretaxamount Amount;
+	?TaxRate Rate;
+	?TaxAmount Amount;
+	?QtyRemedy Quantity;
+	Complaintreasoncode null;
+	Remedymethodcode null;
+	?Remark null;
+	?LineStatus Line;
+};
+

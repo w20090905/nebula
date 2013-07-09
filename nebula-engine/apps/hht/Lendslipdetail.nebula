@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Lendslipdetail {
+	!Lendslipdetailid ID;
+	Itemid Item;
+	Umcode Code;
+	?Lotno null;
+	?Qty Quantity;
+	?Remark null;
+	Lendslipid Lendslip;
+	?Baseqty Quantity;
+};
+

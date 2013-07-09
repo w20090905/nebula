@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type VdkDbuser {
+	?VdkId ID;
+	?VdkName Name;
+	?VdkParentId ID;
+	?VdkDefaultTablespaceName Name;
+	?VdkTempTablespaceName Name;
+	?VdkRecomDefTablespaceName Name;
+	?VdkRecomTempTablespaceName Name;
+};
+

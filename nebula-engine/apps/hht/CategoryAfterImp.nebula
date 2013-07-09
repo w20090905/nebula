@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+type CategoryAfterImp {
+	Categoryid Category;
+	Orgid Organization;
+	Categorycode Code;
+	?Parentcategoryid ID;
+	Grade null;
+	IsBottom YesNo;
+	?Cid Unspsc;
+	?DateLastupdated Date;
+	?Stdcategoryid ID;
+	?Lft null;
+	?Rgt null;
+};
+

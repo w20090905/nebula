@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("1")
+tx Combocodesegment {
+	!Segmentid ID;
+	?Segmentdesc null;
+	?Segmentno SeqNo;
+	?Segmentwidth Width;
+	?ValueSource null;
+	?Tablename Name;
+	?FieldName Name;
+	?Funcname Name;
+	FieldId Combocodefield;
+	?Sequenceid Combocodesequence;
+	?DateLastupdated Date;
+};
+

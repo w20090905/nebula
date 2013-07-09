@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+tx Reportrefds {
+	!Reportrefdsid ID;
+	Reportdefineid Reportdefine;
+	Datasourceid Datasource;
+};
+

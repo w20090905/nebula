@@ -1,0 +1,52 @@
+@Remarks("")
+@Refby("0")
+type VdkSql {
+	?VdkSessionId VdkSession;
+	?VdkSqlId VdkSql;
+	?VdkSqlHashId null;
+	?VdkReferenceD null;
+	?VdkOwnerName Name;
+	?VdkApplName Name;
+	?VdkReqName Name;
+	?VdkApplImp null;
+	?VdkReqImp null;
+	?VdkText null;
+	?VdkValidObjects null;
+	?VdkCompressionId null;
+	?VdkSampleCount Count;
+	?InstId ID;
+	?SharableMem null;
+	?PersistentMem null;
+	?RuntimeMem null;
+	?Sorts null;
+	?VersionCount Count;
+	?LoadedVersions null;
+	?OpenVersions null;
+	?UsersOpening null;
+	?Executions null;
+	?UsersExecuting null;
+	?Loads null;
+	?FirstLoadTime null;
+	?Invalidations null;
+	?ParseCalls null;
+	?DiskReads null;
+	?BufferGets null;
+	?RowsProcessed null;
+	?CommandType null;
+	?OptimizerMode null;
+	?OptimizerCost Cost;
+	?ParsingUserId ID;
+	?ParsingUserName Name;
+	?ParsingSchemaId ID;
+	?ParsingSchemaName Name;
+	?KeptVersions null;
+	?Address null;
+	?HashValue null;
+	?Module null;
+	?ModuleHash null;
+	?Action null;
+	?ActionHash null;
+	?SerializableAborts null;
+	?AvgDiskReads null;
+};
+

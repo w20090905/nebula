@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("1")
+type SmpVdnNodeList {
+	!Id SmpVdnGroupList;
+	Name SmpVxaSystemPrefs;
+	?Description;
+	?Agent null;
+	?Status;
+};
+

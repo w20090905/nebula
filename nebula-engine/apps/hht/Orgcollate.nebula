@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Orgcollate {
+	!Orgcollateid ID;
+	?Orgname Name;
+	?Orgid Organization;
+	?Dtid ID;
+	?Status;
+	?Scruletype null;
+};
+

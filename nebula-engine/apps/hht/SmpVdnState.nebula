@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type SmpVdnState {
+	TargetName Name;
+	TargetType Attr;
+	Node null;
+	?NumEventS null;
+	State null;
+};
+

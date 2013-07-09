@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("4")
+tx Pricingprocdetail {
+	!Pricingprocdetailid ID;
+	Pricingprocid Pricingproc;
+	?Stepno SeqNo;
+	Calctypeid Calctype;
+	?Calcmethod null;
+	?Basestepno SeqNo;
+	?Modified null;
+	?Userenterprotected null;
+};
+

@@ -1,0 +1,7 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtcopytemp {
+	!Zhhtcopytempid ID;
+	?Itemcode Code;
+};
+

@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("2")
+tx Demandplan {
+	!Demandplanid ID;
+	Demandplancode Code;
+	Declareddate Date;
+	Supplier null;
+	Demander null;
+	Fcgroupid Fcgroup;
+	?Comments Note;
+	Status;
+	?Createdate Date;
+	?DateLastupdated Date;
+	Fctype null;
+	?Maker null;
+};
+

@@ -1,0 +1,25 @@
+@Remarks("")
+@Refby("1")
+tx Shipmentdetail {
+	!Shipmentdetailid ID;
+	Shipmentid Shipment;
+	Itemid Item;
+	DeliveryId Delivery;
+	DeliveryDetailid DeliveryDetail;
+	?DeliveryInvalldetailid DeliveryInvalldetail;
+	?Buyerid ID;
+	?Sellerid ID;
+	?Shipfrom null;
+	?Shipto null;
+	?Fromport null;
+	?Toport null;
+	?Address null;
+	?Address null;
+	?Lotno null;
+	?Qty Quantity;
+	?QtyUmcode Code;
+	?Amount;
+	?Amountumcode Code;
+	?Remark null;
+};
+

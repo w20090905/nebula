@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx MrpFctSumDtl {
+	!Sid MrpRecommend;
+	Fctsumcode MrpFctSum;
+	Itemid Item;
+	Fctdate Date;
+	Qty Quantity;
+	Umcode Code;
+	Plandate Date;
+};
+

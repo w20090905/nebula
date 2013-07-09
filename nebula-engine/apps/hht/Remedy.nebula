@@ -1,0 +1,29 @@
+@Remarks("")
+@Refby("2")
+tx Remedy {
+	!Remedyid ID;
+	?Refrenceno null;
+	Orgid Organization;
+	Customerid ID;
+	?Carrier null;
+	?TotalAmount Amount;
+	?Status;
+	?Comments Note;
+	?Remedymethodcode null;
+	?Maker null;
+	?Contacter null;
+	?Createdate Date;
+	?Complaintid Complaint;
+	Remedycode Code;
+	?Complaintreasoncode null;
+	?Currencycode Code;
+	?PrintNum null;
+	?Contactid Contact;
+	?Begindate Date;
+	?Enddate Date;
+	?Docdate Date;
+	?Originalremedyid ID;
+	?Revision null;
+	?DateLastupdated Date;
+};
+

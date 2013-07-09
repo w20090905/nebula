@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("1")
+tx Periodpolicy {
+	!Periodpolicyid ID;
+	Orgid Organization;
+	Policyname Name;
+	?Description;
+	Periodtype null;
+	Periodnum null;
+	?Daynum null;
+	?Weeknum null;
+	?Weekday null;
+	?IsPublic YesNo;
+};
+

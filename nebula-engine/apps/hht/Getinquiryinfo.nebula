@@ -1,0 +1,30 @@
+@Remarks("")
+@Refby("0")
+type Getinquiryinfo {
+	Zhhtiteminquiryid Zhhtiteminquiry;
+	?Receiptcode Code;
+	?Inquirycode Code;
+	?Orgid Organization;
+	?Status;
+	?Twxdataflg null;
+	?Inquirycodemeisai null;
+	?Itemid Item;
+	?Itemcode Code;
+	?DeliveryPrice Price;
+	?Qty Quantity;
+	?Umcode Code;
+	?Kojocd null;
+	?Sellerid ID;
+	?Purchaseprice Price;
+	?Amount;
+	?Osamesaki null;
+	?Typeflg null;
+	?DeliveryAmount Amount;
+	?Hinmei1 null;
+	?LineNum null;
+	?Buyerid ID;
+	?Receiveraddressid Receiveraddress;
+	?NewItemflg null;
+	?Groupcd null;
+};
+

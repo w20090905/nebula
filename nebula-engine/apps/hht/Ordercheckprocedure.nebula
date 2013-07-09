@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Ordercheckprocedure {
+	!Ocpid Procurementparameter;
+	Ocpcode Code;
+	Ownerorgid ID;
+	Orgid Organization;
+	Ordercheckpoint null;
+	?Description;
+	DateLastupdated Date;
+	Status;
+};
+

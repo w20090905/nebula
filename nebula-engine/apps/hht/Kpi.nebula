@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("4")
+tx Kpi {
+	!Kpiid ID;
+	Kpicode Code;
+	Kpiname Name;
+	Kpitype null;
+	?IsQualitative YesNo;
+	?IsMensurable YesNo;
+	?LanguageCode Lang;
+	?Kpioption null;
+	?FormUla null;
+	?Calctype null;
+	?Canedit null;
+};
+

@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("0")
+tx Offerinvalldetail {
+	!Offerinvalldetailid ID;
+	Offerdetailid Offerdetail;
+	Offerid Offer;
+	?Itemid Item;
+	Invsummaryid Invsummary;
+	Invstatus null;
+	?Saleflag null;
+	?Inventoryflag null;
+	?Arflag null;
+	?Warehouseid Physicalwarehouse;
+	?Locationcode Code;
+	?Lotno null;
+	?Batchno null;
+	?Manufacturedate Date;
+	?Expiredate Date;
+	?QtyAll Quantity;
+	?QtyPicked Quantity;
+	?Baseqtyall null;
+	?Costprice Cost;
+};
+

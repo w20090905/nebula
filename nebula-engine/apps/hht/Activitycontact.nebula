@@ -2,8 +2,8 @@
 @Refby("1")
 tx Activitycontact {
 	!Activitycontactid ID;
-	Orgid ID;
-	Contactid ID;
+	Orgid Organization;
+	Contactid Contact;
 	Activityid Activity;
 	?IsPresence YesNo;
 	?IsPrimary YesNo;

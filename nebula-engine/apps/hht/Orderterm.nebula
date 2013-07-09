@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Orderterm {
+	!Ordertermid ID;
+	Orderid Ord;
+	?Originaltermid ID;
+	?Termname Name;
+	?Termcontent null;
+};
+

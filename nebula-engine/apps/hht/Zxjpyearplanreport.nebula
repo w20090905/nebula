@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("0")
+type Zxjpyearplanreport {
+	Userid Usr;
+	?Regionname Name;
+	?Dtname Name;
+	?Titlename Title;
+	?M1qty Quantity;
+	?M2qty Quantity;
+	?M3qty Quantity;
+	?M4qty Quantity;
+	?M5qty Quantity;
+	?M6qty Quantity;
+	?M7qty Quantity;
+	?M8qty Quantity;
+	?M9qty Quantity;
+	?M10qty Quantity;
+	?M11qty Quantity;
+	?M12qty Quantity;
+	?Mtotal null;
+};
+

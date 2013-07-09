@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Conditiondetail {
+	!Conditiondetailid ID;
+	Conditionid Condition;
+	Sortno SeqNo;
+	FieldName Name;
+	Operator null;
+	Value String;
+	?Memo;
+};
+

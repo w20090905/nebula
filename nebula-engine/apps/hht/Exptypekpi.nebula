@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Exptypekpi {
+	!Exptypekpiid ID;
+	Kpicode Code;
+	?Kpiname Name;
+	?Description;
+	Expensetypecode Code;
+	Expensetype null;
+};
+

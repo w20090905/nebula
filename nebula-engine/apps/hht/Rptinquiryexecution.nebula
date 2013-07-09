@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx Rptinquiryexecution {
+	!Rptinquiryexecutionid ID;
+	Rptinquirysettingid Rptinquirysetting;
+	?Createdate Date;
+	?Userid Usr;
+	?Ovalreportid Ovalreport;
+	?Completefilename FileName;
+	?Filetype Attr;
+	?Filename;
+	?Contactid Contact;
+	?Comments Note;
+	?Jobresultid Jobresult;
+};
+

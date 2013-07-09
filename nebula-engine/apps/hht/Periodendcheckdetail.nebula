@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Periodendcheckdetail {
+	!Periodendcheckdetailid ID;
+	Orgid Organization;
+	Checkelementid Checkelement;
+	?Periodisneed null;
+	?Yearisneed String;
+	Periodendactiontype null;
+	Yearendactiontype null;
+};
+

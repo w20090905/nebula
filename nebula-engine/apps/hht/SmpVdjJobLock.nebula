@@ -1,0 +1,6 @@
+@Remarks("")
+@Refby("0")
+type SmpVdjJobLock {
+	?C1 null;
+};
+

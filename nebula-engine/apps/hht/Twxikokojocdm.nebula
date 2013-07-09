@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("0")
+type Twxikokojocdm {
+	?Kojocdmid Twxkojocdm;
+	?Kojyocd null;
+	?Kojyomei null;
+	?Kojyokana null;
+	?MituSiharai null;
+	?KaiakeOut null;
+	?SisyuSyain null;
+	?Insymd null;
+	?Updymd null;
+	?Updtime null;
+	?ReportKbn null;
+	?Status;
+	?Pattern null;
+};
+

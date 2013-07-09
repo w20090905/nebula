@@ -2,25 +2,15 @@
 @Refby("0")
 type AdTableAccess {
 	@Remarks("Responsibility Role")
-	!AdRoleId AdRole;
+	!AdRole;
 	@Remarks("Database Table information")
-	!AdTableId AdTable;
+	!AdTable;
 	@Remarks("The type of access for this rule")
 	!AccessTyperule Attr;/* 'G'  */
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("User who updated this records")
-	Updatedby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
+	AdOrg;
 	@Remarks("Field is read only")
 	IsReadonly YesNo;/* 'N'  */
 	@Remarks("Users with this role can create reports")

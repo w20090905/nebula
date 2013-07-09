@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("6")
+type SmpVdgNodeList {
+	!Nodename Name;
+	?TimesTamp null;
+	?Gatewayname Name;
+	?Status;/* 'UP' */
+	?Processing null;
+	NodeIndex null;
+	?Agentname Name;
+	?Agenttz null;
+	?Agentstate null;/* 'UNK' */
+	?Agentversion null;/* 27270A */
+};
+

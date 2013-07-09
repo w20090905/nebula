@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type SmpVboReportsConfig {
+	?OmsLocation null;
+	?WebServerName Name;
+	?WebServerPort Port;
+	?SslPort Port;
+	?HistoricalDataLocation null;
+	?IsConfigured null;
+};
+

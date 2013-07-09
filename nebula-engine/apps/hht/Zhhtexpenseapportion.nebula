@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+tx Zhhtexpenseapportion {
+	!Expenseapportionid ID;
+	?Orgid Organization;
+	?Contractid Contract;
+	?Slipid ID;
+	?Refslipid ID;
+	?Contractexpensedetailid Zhhtcontractexpensedetail;
+	?Amount;
+	?Userid Usr;
+	?Status;
+	?Createdate Date;
+	?DateLastupdated Date;
+};
+

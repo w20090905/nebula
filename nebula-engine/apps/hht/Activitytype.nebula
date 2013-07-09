@@ -1,0 +1,18 @@
+@Remarks("")
+@Refby("7")
+tx Activitytype {
+	!Activitytypeid ID;
+	Activitytypecode Code;
+	?Activityprioritytype null;
+	Activitytypeproperty null;
+	?IsBudget YesNo;
+	?IsApprove YesNo;
+	?IsService YesNo;
+	IsSystem YesNo;
+	SalesOrmarket null;
+	?Status;
+	?Activitytypeeditflag null;
+	?Activitytypedesc null;
+	?Orgid Organization;
+};
+

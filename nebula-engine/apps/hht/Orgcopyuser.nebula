@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Orgcopyuser {
+	!Orgcopyuserid ID;
+	Orgcopyid Orgcopy;
+	SourceUserid ID;
+	Username Name;
+	Password;
+	DateLastupdated Date;
+	?Tgtuserid ID;
+};
+

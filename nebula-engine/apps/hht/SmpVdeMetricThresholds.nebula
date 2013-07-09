@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("1")
+tx SmpVdeMetricThresholds {
+	!Id SmpVdnGroupList;/* 0  */
+	?MetricId null;/* NULL */
+	?TargetName Name;/* NULL */
+	?TargetType Attr;/* NULL */
+	?Datasource null;/* NULL */
+	?EventId ID;/* NULL */
+	?TestId ID;/* NULL */
+	?WarningThreshold null;/* NULL */
+	?AlertThreshold null;/* NULL */
+	?CompOperation null;/* 0 */
+	?State null;/* 300A */
+};
+

@@ -4,35 +4,25 @@ type AdPrintTableformat {
 	@Remarks("Table Format in Reports")
 	!AdPrintTableformatId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Header row Font")
-	?HdrPrintFontId AdPrintFont;
+	?HdrPrintFont AdPrintFont;
 	@Remarks("Foreground color if the table header row")
-	?HdrTextfgPrintColorId AdPrintColor;
+	?HdrTextfgPrintColor AdPrintColor;
 	@Remarks("Background color of header row")
-	?HdrTextbgPrintColorId AdPrintColor;
+	?HdrTextbgPrintColor AdPrintColor;
 	@Remarks("Table header row line color")
-	?HdrLinePrintColorId AdPrintColor;
+	?HdrLinePrintColor AdPrintColor;
 	@Remarks("Function row Font")
-	?FunctPrintFontId AdPrintFont;
+	?FunctPrintFont AdPrintFont;
 	@Remarks("Function Background Color")
-	?FunctbgPrintColorId AdPrintColor;
+	?FunctbgPrintColor AdPrintColor;
 	@Remarks("Function Foreground Color")
-	?FunctfgPrintColorId AdPrintColor;
+	?FunctfgPrintColor AdPrintColor;
 	@Remarks("Table line color")
-	?LinePrintColorId AdPrintColor;
+	?LinePrintColor AdPrintColor;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Paint table boundary lines")
@@ -62,9 +52,9 @@ type AdPrintTableformat {
 	@Remarks("Content of the right portion of the footer.")
 	?FooterRight String;
 	@Remarks("The image to be printed is attached to the record")
-	?ImageIsattached null;/* 'N' */
+	?ImageIsattached YesNo;/* 'N' */
 	@Remarks("Width of the Header Line Stroke")
-	?HdrStroke null;
+	?HdrStroke Number;
 	@Remarks("Width of the Line Stroke")
 	?LineStroke Line;
 	@Remarks("Type of the Header Line Stroke")

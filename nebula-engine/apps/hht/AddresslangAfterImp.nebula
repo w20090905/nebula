@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type AddresslangAfterImp {
+	Addresslangid Addresslang;
+	Addressid Address;
+	?LanguageCode Lang;
+	?Ar null;
+	?Al1 null;
+	?Ac null;
+};
+

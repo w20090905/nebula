@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("2")
+tx Datacleanperiod {
+	!Datacleanperiodid ID;
+	Periodname Name;
+	Currentqty Quantity;
+	IsContinuum YesNo;
+	?Startdate Date;
+	?Enddate Date;
+	Createdate Date;
+	Status;
+};
+

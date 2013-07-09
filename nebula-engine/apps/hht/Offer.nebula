@@ -1,0 +1,57 @@
+@Remarks("")
+@Refby("7")
+tx Offer {
+	!Offerid ID;
+	Ownerorgid ID;
+	Offertype null;
+	?Sellerid ID;
+	?Buyerid ID;
+	?ReferenceNo Code;
+	?Offercode Code;
+	?Createdate Date;
+	?Maker null;
+	Receipentid ID;
+	?Receipentcondid ID;
+	?Carrierid ID;
+	?Orggroupid Orggroup;
+	?Revision null;
+	?Originalofferid ID;
+	?Originaloffercode Code;
+	?SourceOfferid ID;
+	?SourceOffercode Code;
+	?IsPublic YesNo;
+	?Shipto null;
+	?Billto null;
+	?Shipfrom null;
+	?InvoiceTo null;
+	?Returnto null;
+	?Currencycode Code;
+	?PaymentTerm null;
+	?Shipmentterm null;
+	?PaymentMethod null;
+	?Shipmentmethod null;
+	?Fromportcode Code;
+	?Toportcode Code;
+	?Startdate Date;
+	?Expiredate Date;
+	?Responddate Date;
+	?DeliveryDate Date;
+	?IsWhole YesNo;
+	?IsStrictterm String;
+	Status;
+	?TotalAmount Amount;
+	DateLastupdated Date;
+	?Comments Note;
+	?TotalDiscount Count;
+	?TotalDiscountamt Amount;
+	?Opportunityid SalesOpportunity;
+	?SalesRepid ID;
+	?SalesRep2id ID;
+	?Ordertypeid Ordertype;
+	?Attr1 null;
+	?Acitivityid ID;
+	?Attr31 null;
+	?Venderanswerflag null;
+	?Downloaddate Date;
+};
+

@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+type VdkHostInfo {
+	?VdkId ID;
+	?VdkTotalMemory null;
+	?VdkCpuCount Count;
+	?VdkOsType null;
+	?VdkOsBlockSize Size;
+	?VdkAvgMemUtil null;
+	?VdkMaxMemUtil null;
+	?VdkAvgCpuUtil null;
+	?VdkMaxCpuUtil null;
+	?VdkPctMemInst null;
+	?VdkParentId ID;
+};
+

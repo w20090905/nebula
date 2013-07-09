@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("5")
+tx SalesPlan {
+	!SalesPlanid ID;
+	Orgid Organization;
+	Ownerorgid ID;
+	?SalesPlancode Code;
+	?ReferenceNo Code;
+	SalesPlantype null;
+	Year null;
+	?SalesRep null;
+	Status;
+	Revision null;
+	?Originalsalesplanid ID;
+	?Comments Note;
+	Maker null;
+	Createdate Date;
+	DateLastupdated Date;
+};
+

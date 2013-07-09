@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Prodcollatetmp {
+	!Prodcollatetmpid ID;
+	?Prodcode Code;
+	?Prodname Name;
+	?Userid Usr;
+	?Spec null;
+	?Needsync null;
+	?Dtid ID;
+};
+

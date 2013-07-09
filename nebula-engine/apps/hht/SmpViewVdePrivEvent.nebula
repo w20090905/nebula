@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+type SmpViewVdePrivEvent {
+	Id SmpVdnGroupList;
+	?Name;
+	?Owner null;
+	?Description;
+	?TargetType Attr;
+	?IsLibrary YesNo;
+	?FixitJobId ID;
+	?FixitJobName Name;
+	?FixitJobOwner null;
+	?IsUnsolicited YesNo;
+	?Incomplete null;
+	?SnmpTrapAttribute null;
+	PrincipalName Name;
+	Privilege null;
+};
+

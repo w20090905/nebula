@@ -1,0 +1,30 @@
+@Remarks("")
+@Refby("0")
+tx Trnsqsyukajiseki {
+	!Seqid Twxmitumoriiraiumhistroy;
+	?Orderno null;
+	?Kyokyusaki null;
+	?Shukasoko null;
+	?Shukodymd null;
+	?Nyukasaki null;
+	?Hansoshacd null;
+	?Gaibuno null;
+	?Itemcd null;
+	?LineNo Line;
+	?Jisaisu null;
+	?Tani null;
+	?Locationcd null;
+	?Lotno null;
+	?Datakbn null;
+	?Shukasashizuno null;
+	?Shukahokokuymd null;
+	?Hataikbn null;
+	?Shanaigrade null;
+	?Nisugata null;
+	?Shorikbn null;/* '0' */
+	?Createdate null;
+	?Lastupdateddate null;
+	?Pgid null;
+	?Status;/* 41 */
+};
+

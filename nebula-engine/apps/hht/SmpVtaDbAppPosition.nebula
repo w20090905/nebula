@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+type SmpVtaDbAppPosition {
+	?Appname Name;
+	?Username Name;
+	?Height;
+	?Width;
+	?Xcoordinate null;
+	?Ycoordinate null;
+	?Advancedmode null;
+};
+

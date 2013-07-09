@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx Prodcollate {
+	!Prodcollateid ID;
+	?Dtname Name;
+	?Prodname Name;
+	?Prodcode Code;
+	?Spec null;
+	?Umname Name;
+	?Dtid ID;
+	?Status;
+};
+

@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("2")
+tx Purchaseplan {
+	!Purchaseplanid ID;
+	?Purchaseplancode Code;
+	Orgid Organization;
+	?Maker null;
+	?Createdate Date;
+	?Comments Note;
+	Status;
+	?DateLastupdated Date;
+};
+

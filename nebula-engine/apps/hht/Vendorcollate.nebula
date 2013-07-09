@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Vendorcollate {
+	!Vendorcollateid ID;
+	?Orgname Name;
+	?Orgid Organization;
+	?Dtid ID;
+	?Status;
+};
+

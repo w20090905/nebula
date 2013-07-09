@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("2")
+tx PriceRelationgroup {
+	!Prgid ID;
+	?Orgid Organization;
+	?Prgcode Code;
+	?Prgname Name;
+	?Prgdesc null;
+	?Status;
+};
+

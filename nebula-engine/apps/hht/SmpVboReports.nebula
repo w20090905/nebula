@@ -1,0 +1,32 @@
+@Remarks("")
+@Refby("2")
+tx SmpVboReports {
+	!ReportId ID;
+	ReportName Name;
+	Owner null;
+	Folder String;
+	?Description;
+	?ReportTitle Title;
+	ReportType Attr;
+	?Tab null;
+	?Category null;
+	?SubCategory null;
+	?LastEditTime null;
+	?Schedule null;
+	?IsPublished null;
+	?IsOndemand null;
+	?IsOnjob null;
+	?ExtPassword Password;
+	?IsPublic null;
+	?IsArchiveD null;
+	?Status;
+	?TimeStamp null;
+	?LastGenerationStatus null;
+	?LastGenerationTime null;
+	?CanTimeOut null;
+	?TimeOut Count;
+	?IsEditable null;
+	?AppName Name;
+	?IsGeneric null;
+};
+

@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+tx Hhtcategory {
+	!Hhtcategoryid ID;
+	?Createdate Date;
+	?Orgid Organization;
+	?Hhtcategorycode Code;
+	?Hhtcategoryname Name;
+	?Parenthhtcategoryid ID;
+	?Grade null;
+	?IsBottom YesNo;
+	?Comments Note;
+	?DateLastupdated Date;
+};
+

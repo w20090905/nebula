@@ -1,0 +1,8 @@
+@Remarks("")
+@Refby("0")
+type EpcCliEnvironmentVersion {
+	?RepUserId EpcCliRepUsers;
+	?EnvironmentId EpcCliEnvironment;
+	?CliVersion null;
+};
+

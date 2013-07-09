@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("3")
+tx CashFlowitem {
+	!CashFlowitemid ID;
+	?Flowflag null;
+	?CashFlowitemcode Code;
+	?Orgid Organization;
+};
+

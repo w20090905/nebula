@@ -1,24 +1,19 @@
 @Remarks("")
 @Refby("0")
 type CDunningHeaderVt {
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;
-	Created null;
-	Createdby null;
-	Updated null;
-	Updatedby null;
-	?AdLanguage Attr;
-	CDunningRunId CDunningRun;
-	?CDunningRunentryId CDunningRunentry;
+	AdClientId ID;
+	AdOrgId ID;
+	?AdLanguage String;
+	CDunningRunId ID;
+	?CDunningRunentryId ID;
 	DunningDate Date;
 	?PrintName Name;
 	?DocumentNote Note;
-	?CBpartnerId CBpartner;
-	?Bpvalue String;
+	?CBpartnerId ID;
+	?Bpvalue Note;
 	?Bptaxid Code;
 	?NAICS;
-	?DUNS;
+	?DUNS String;
 	?OrgLocationId ID;
 	TaxId Code;
 	?SalesRepId ID;
@@ -27,12 +22,12 @@ type CDunningHeaderVt {
 	?Name;
 	?Name2 Name;
 	?BpcontactGreeting String;
-	?Title;
+	?Title String;
 	?Phone;
 	?Contactname Name;
-	?CLocationId CLocation;
+	?CLocationId ID;
 	?ReferenceNo Code;
-	?PostAl Postal;
+	?Postal;
 	?Amt Amount;
 	?Qty Quantity;
 	?Note;

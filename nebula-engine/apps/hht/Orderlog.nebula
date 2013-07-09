@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Orderlog {
+	!Orderlogid ID;
+	Orderid Ord;
+	Prestatus null;
+	AfterStatus null;
+	Userid Usr;
+	Currentdate Date;
+	?Action null;
+};
+

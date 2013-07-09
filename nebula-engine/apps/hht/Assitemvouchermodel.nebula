@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx Assitemvouchermodel {
+	!Assitemvoucherid ID;
+	Vouchermodelid Vouchermodel;
+	Vouchermodeldetailid Vouchermodeldetail;
+	Assistantitemid Assistantitem;
+	Assitemjournalid Assitemjournal;
+	?Assistantitemvalue String;
+	?Description;
+};
+

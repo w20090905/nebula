@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Glaccountmap {
+	!Glaccountmapid ID;
+	SourceGlaccountid ID;
+	Targetglaccountid ID;
+	DateLastupdated Date;
+	?Targetbooksetid ID;
+};
+

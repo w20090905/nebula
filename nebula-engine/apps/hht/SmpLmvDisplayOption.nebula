@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+type SmpLmvDisplayOption {
+	SearchId SmpLmvSearchObject;
+	*Name;
+	RowOrder null;
+	Visible null;
+	?DisplayName Name;
+};
+

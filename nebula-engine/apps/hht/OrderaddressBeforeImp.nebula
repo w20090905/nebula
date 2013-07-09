@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+type OrderaddressBeforeImp {
+	Orderaddressid Orderaddress;
+	Orgid Organization;
+	?EntityId ID;
+	?EntityType Attr;
+	?Originaladdressid ID;
+	Address Name;
+	Addressroletype null;
+	?Receiver null;
+	?Cityname Name;
+	?CountryCode Code;
+	?Portcode Code;
+	?Regioncode Code;
+	Zipcode Code;
+	?Address null;
+	?Address Code;
+};
+

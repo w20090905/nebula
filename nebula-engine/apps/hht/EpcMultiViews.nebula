@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("2")
+tx EpcMultiViews {
+	!MultiViewId ID;
+	Vendor null;
+	FacilityNumber null;
+	MinFacilityVersion null;
+	?ParentEventNum null;/* 0 */
+	ViewName Name;
+	?ViewDescription Description;
+	?FullViewDesc null;
+	?StateMask null;/* 0 */
+	?ViewType null;/* 3020200A */
+};
+

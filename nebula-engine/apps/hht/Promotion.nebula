@@ -1,0 +1,31 @@
+@Remarks("")
+@Refby("5")
+tx Promotion {
+	!Promotionid ID;
+	Promotioncode Code;
+	?Description;
+	?TotalBudget null;
+	Makerdate Date;
+	Begindate Date;
+	?DateLastupdated Date;
+	Expiredate Date;
+	?Customerid ID;
+	?Orggroupid Orggroup;
+	?Areaid Businessarea;
+	?Status;
+	?Orgid Organization;
+	?Prodlineid ProductLine;
+	?ProductBrandcode Code;
+	?Categoryid Category;
+	?Ownerorgid ID;
+	Maker null;
+	?Currencycode Code;
+	?ReferenceStartdate Date;
+	?ReferenceEnddate Date;
+	?Itemid Item;
+	?IsPublic YesNo;
+	?Includeself null;
+	?Conditionid Condition;
+	?Marketingplandetailid Marketingplandetail;
+};
+

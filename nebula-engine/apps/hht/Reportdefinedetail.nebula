@@ -1,0 +1,22 @@
+@Remarks("")
+@Refby("1")
+tx Reportdefinedetail {
+	!Reportdefinedetailid ID;
+	Reportdefineid Reportdefine;
+	?Orgid Organization;
+	?Booksetid Bookset;
+	?Colaformular null;
+	?Colbformular null;
+	?Colcformular null;
+	?Coldformular null;
+	?Coleformular null;
+	?Colfformular null;
+	?Colgformular null;
+	?Colhformular null;
+	?Coliformular null;
+	?Coljformular null;
+	?Calcsortno SeqNo;
+	?Alignment null;
+	?LineNum Line;
+};
+

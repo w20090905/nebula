@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("1")
+tx SmpVtpUdclassDefn {
+	!RefId SmpVtmUdchartDefn;
+	ServiceName Name;
+	ServiceType Attr;
+	ClassName Name;
+	CartridgeName Name;
+	OwnerName Name;
+	Collected Length;
+	ScriptText null;
+};
+

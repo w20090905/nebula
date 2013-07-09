@@ -2,23 +2,18 @@
 @Refby("1")
 tx AAssetChange {
 	!AAssetChangeId ID;
-	AdClientId AdClient;
-	AdOrgId AdOrg;
-	IsActive YesNo;/* 'Y'  */
-	Created null;/* SYSDATE  */
-	Createdby null;
-	Updated null;/* SYSDATE  */
-	Updatedby null;
-	AAssetId AAsset;
+	AdClientId ID;
+	AdOrgId ID;
+	AAsset;
 	ChangeType Attr;
 	ChangeDate Date;
 	?ChangeAmt Amount;/* 0 */
 	?Uselifeyears Count;
 	?Uselifemonths Count;
-	?Lifeuseunits null;
+	?Lifeuseunits Number;
 	?Assetdepreciationdate Date;
-	?AAssetRetirementId AAssetRetirement;
-	?AAssetAdditionId AAssetAddition;
+	?AAssetRetirement;
+	?AAssetAddition;
 	?Serno Code;
 	?LOT;
 	?Versionno Code;

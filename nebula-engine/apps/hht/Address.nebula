@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("17")
+tx Address {
+	!Addressid ID;
+	?Orgid Organization;
+	Address Name;
+	?Address Attr;
+	Addressroletype null;
+	CountryCode Code;
+	Regioncode Code;
+	?Portcode Code;
+	Zipcode Code;
+	Status;
+	?IsPrimary YesNo;
+	?DateLastupdated Date;
+	?Address Code;
+	?Contactid Contact;
+	@Remarks("外部関係企業ID")
+	?Orgrelationdetailid Orgrelationdetail;
+};
+

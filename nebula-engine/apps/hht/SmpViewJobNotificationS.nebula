@@ -1,0 +1,17 @@
+@Remarks("List of all administrators who will get notified about job conditions")
+@Refby("0")
+type SmpViewJobNotificationS {
+	@Remarks("Internal ID of this job")
+	JobId SmpVdjJob;
+	@Remarks("Name of this job")
+	?JobName Name;
+	@Remarks("Administrator who will get notified for this job")
+	AdministratorName Name;
+	@Remarks("Name of the service this job is submitted to")
+	TargetName Name;
+	@Remarks("Type of service this job is submitted to")
+	?TargetType Attr;
+	@Remarks("Translated name for the target type")
+	?TargetNlsType Attr;
+};
+

@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+type Reportbackrunprocessdetail {
+	?Reportbackrunprocessdetailid ID;
+	?Reportbackrunprocessid ID;
+	?Conditionname Name;
+	?Conditiondesc null;
+	?Columnname Name;
+	?Columnvalue String;
+	?Attr1 null;
+	?Attr2 null;
+	?Attr3 null;
+	?Attr4 null;
+};
+

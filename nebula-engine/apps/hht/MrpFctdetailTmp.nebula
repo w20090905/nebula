@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("7")
+tx MrpFctdetailTmp {
+	!Detailid ID;
+	Forecastcode MrpFctTmp;
+	Itemid Item;
+	Startdate Date;
+	Qty Quantity;
+	Umcode Code;
+	?Enddate Date;
+	?Enddateflg null;
+};
+

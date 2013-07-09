@@ -1,0 +1,41 @@
+@Remarks("")
+@Refby("6")
+tx Itemserviceagreement {
+	!Itemserviceagreementid ID;
+	Relationid Orgrelation;
+	?Maker null;
+	Agreementcode Code;
+	Revision null;
+	?Seller null;
+	?Buyer null;
+	?PaymentTerm null;
+	?PaymentMethod null;
+	?Shipmentterm null;
+	?Shipmentmethod null;
+	?Creditlimit Count;
+	?Intervalcode null;
+	?Creditperoid ID;
+	Status;
+	?DateLastupdated Date;
+	Startdate Date;
+	Expiredate Date;
+	?Nextbilldate Date;
+	?Nextservicedate Date;
+	?Servicemethod null;
+	?Servicestartdate Date;
+	?Serviceperiodid ID;
+	Createdate Date;
+	?Comments Note;
+	?Billtype null;
+	?Billstartdate Date;
+	?Billperiodid ID;
+	?Agreementid Agreement;
+	?Billto null;
+	?Serviceagreementtype null;
+	?Defaultwarehouseid ID;
+	?Expenseitemid ID;
+	?Billamount Amount;
+	?Aheaddays Count;
+	?Attr11 null;
+};
+

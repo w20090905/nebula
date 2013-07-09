@@ -1,0 +1,28 @@
+@Remarks("")
+@Refby("1")
+tx Transfervoucher {
+	!Transfervoucherid ID;
+	Orgid Organization;
+	Booksetid Bookset;
+	Mabooksetid ID;
+	Accyearid Accountingyear;
+	Accperiodid Accountingperiod;
+	?Transfervouchersigncode Code;
+	?Transfervouchercode Code;
+	?Numberoflines Line;
+	?TotalDebitamount Amount;
+	?TotalCreditamount Amount;
+	?Maker null;
+	?Createdate Date;
+	?Docdate Date;
+	?Gldate Date;
+	?DateLastupdated Date;
+	?Description;
+	Status;
+	Assistantitemid Assistantitem;
+	?Relatedtransid ID;
+	?Relatedtranstype null;
+	?Relatedtranscode Code;
+	?Relatedtransdate Date;
+};
+

@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+type Zhhtmontlytimeset {
+	?Zhhtmontlytimesetid ID;
+	?Getsudo null;
+	?Monthlydate Date;
+	?Shoritype Attr;
+	?Shoriflg null;/* 0 */
+	?DateLastupdated null;
+};
+

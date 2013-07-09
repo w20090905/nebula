@@ -1,0 +1,11 @@
+@Remarks("")
+@Refby("0")
+tx Warrantyitem {
+	!Warrantyitemid ID;
+	Warrantyid Warranty;
+	Type Attr;
+	Itemid Item;
+	?Lotno null;
+	?IsWhole YesNo;
+};
+

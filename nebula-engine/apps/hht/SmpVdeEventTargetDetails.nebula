@@ -1,0 +1,20 @@
+@Remarks("")
+@Refby("0")
+type SmpVdeEventTargetDetails {
+	?EventId ID;
+	?EventTestId ID;/* -1 */
+	?TargetName Name;
+	?TargetType Attr;
+	?NodeName Name;
+	?Company null;
+	?Organization null;
+	?Product null;
+	?Filename;
+	?TestName Name;
+	?Severity null;
+	?OccurDate Date;
+	?Timezone Count;
+	?Operation null;/* -1 */
+	?Message;
+};
+

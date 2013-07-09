@@ -4,19 +4,9 @@ type CInvoiceSchedule {
 	@Remarks("Schedule for generating Invoices")
 	!CInvoiceScheduleId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClientId ID;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrgId ID;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")
@@ -32,11 +22,11 @@ type CInvoiceSchedule {
 	@Remarks("Last day in the week for shipments to be included")
 	?InvoiceWeekdaycutoff null;
 	@Remarks("Send invoices on even weeks")
-	?Eveninvoiceweek null;/* 'Y'                              */
+	?Eveninvoiceweek YesNo;/* 'Y'                              */
 	@Remarks("Day of Invoice Generation")
-	?InvoiceDay null;
+	?InvoiceDay Number;
 	@Remarks("Last day for including shipments")
-	?InvoiceDaycutoff null;
+	?InvoiceDaycutoff Number;
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 };

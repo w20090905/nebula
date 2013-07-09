@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("1")
+tx Zhhtsoporemantupload2 {
+	!Soporemantupload2id ID;
+	?Contracttypecode Code;
+	?Beforesoordercode Code;
+	?Beforepoordercode Code;
+	?AfterSoordercode Code;
+	?AfterPoordercode Code;
+	?Status;
+	?Source null;
+	?Orgid Organization;
+	?Userid Usr;
+	?Createdate Date;
+	?DateLastupdated Date;
+};
+

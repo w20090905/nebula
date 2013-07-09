@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("3")
+tx Customerdcperiodstatus {
+	!Customerdcperiodstatusid ID;
+	Orgid Organization;
+	Dcperioddetailid Dcperioddetail;
+	Status;
+	IsChangePeriod YesNo;
+	?Startdate Date;
+	?Enddate Date;
+	Datacleantype null;
+	?Targetinvdate Date;
+	?Targetstatus null;
+};
+

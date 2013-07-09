@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx SmpVdvUserLocale {
+	!UserId SmpVdvUser;
+	?Language null;
+	?Country null;
+	?Variant null;
+};
+

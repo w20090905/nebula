@@ -1,0 +1,146 @@
+@Remarks("")
+@Refby("1")
+tx Zhhtiteminquiryupload {
+	@Remarks("見積UL中間表ID")
+	!Zhhtiteminquiryuploadid ID;
+	@Remarks("販売先見積依頼番号")
+	?Inquirycode Code;
+	@Remarks("見積受付番号")
+	?Receiptcode Code;
+	@Remarks("コピー元見積受付番号")
+	?Orireceiptcode Code;
+	@Remarks("取引先コード")
+	?Torihikicd null;
+	@Remarks("企業コード")
+	?Kigyocd null;
+	@Remarks("工場コード")
+	?Kojocd null;
+	@Remarks("販売先ID")
+	?Buyerid ID;
+	@Remarks("販売先コード")
+	?Buyercode Code;
+	@Remarks("販売先名称")
+	?Buyername Name;
+	@Remarks("販売先見積依頼日")
+	?Inquirydate Date;
+	@Remarks("販売先見積回答期限")
+	?Limitdate Date;
+	@Remarks("要求納期")
+	?DeliveryDate Date;
+	@Remarks("通貨")
+	?Currencycode Code;
+	@Remarks("支払条件ID")
+	?PaymentTermid PaymentTerm;
+	@Remarks("支払条件")
+	?PaymentTermname Name;
+	@Remarks("グループコード")
+	?Groupcd null;
+	@Remarks("運送条件ID")
+	?Shipmenttermid ID;
+	@Remarks("運送条件")
+	?Shipmenttermname Name;
+	@Remarks("運送方法ID")
+	?Shipmentmethodid ID;
+	@Remarks("運送方法")
+	?Shipmentmethodname Name;
+	@Remarks("積出港")
+	?Shipfrom null;
+	@Remarks("目的港")
+	?Shipto null;
+	@Remarks("備考")
+	?Comments Note;
+	@Remarks("見積状態")
+	?Inquirystatus null;
+	@Remarks("販売先回答納期")
+	?Replydeliverydate Date;
+	@Remarks("支払条件ID")
+	?PaymentMethodid ID;
+	@Remarks("支払条件")
+	?PaymentMethodname Name;
+	@Remarks("有効開始日")
+	?Startvaliddate Date;
+	@Remarks("有効終了日")
+	?Endvaliddate Date;
+	@Remarks("備考1")
+	?Comments1 null;
+	@Remarks("備考2")
+	?Comments2 null;
+	@Remarks("備考3")
+	?Comments3 null;
+	@Remarks("備考4")
+	?Comments4 null;
+	@Remarks("備考5")
+	?Comments5 null;
+	@Remarks("備考6")
+	?Comments6 null;
+	@Remarks("印刷部数(販売先)")
+	?Busu null;
+	@Remarks("有効期限日数")
+	?Yuukodd null;
+	@Remarks("受渡場所")
+	?Ctxtm01 null;
+	@Remarks("責任者ID")
+	?Employeeid Employee;
+	@Remarks("仕入先見積依頼番号")
+	?Sellerinquirycode Code;
+	@Remarks("印刷部数(仕入先)")
+	?Sellerbusu null;
+	@Remarks("仕入先ID")
+	?Sellerid ID;
+	@Remarks("仕入先コード")
+	?Sellercode Code;
+	@Remarks("仕入先名称")
+	?Sellername Name;
+	@Remarks("仕入先見積依頼日")
+	?Sellerinquirydate Date;
+	@Remarks("仕入先見積回答期限")
+	?Sellerlimitdate Date;
+	@Remarks("仕入先見積回答日")
+	?Replydate Date;
+	@Remarks("仕入先回答納期")
+	?Sellerreplydeliverydate Date;
+	@Remarks("仕入先通貨")
+	?Sellercurrencycode Code;
+	@Remarks("仕入先支払条件ID")
+	?Sellerpaymenttermid ID;
+	?Sellerpaymenttermname Name;
+	@Remarks("有効期限日")
+	?Yuukomd null;
+	@Remarks("仕入先運送条件ID")
+	?Sellershipmenttermid ID;
+	@Remarks("仕入先運送条件")
+	?Sellershipmenttermname Name;
+	@Remarks("仕入先運送方法ID")
+	?Sellershipmentmethodid ID;
+	@Remarks("仕入先運送方法")
+	?Sellershipmentmethodname Name;
+	@Remarks("仕入先積出港")
+	?Sellershipfrom null;
+	@Remarks("仕入先目的港")
+	?Sellershipto null;
+	@Remarks("仕入先備考")
+	?Sellercomments Note;
+	@Remarks("タイプフラグ")
+	?Typeflg null;
+	@Remarks("入力元")
+	?Source null;
+	@Remarks("状態")
+	?Status;
+	@Remarks("作成日")
+	?Createdate Date;
+	@Remarks("更新日")
+	?DateLastupdated Date;
+	@Remarks("作成者ID")
+	?Userid Usr;
+	@Remarks("組織ID")
+	?Orgid Organization;
+	@Remarks("見積UL臨時表ID")
+	?Zhhtiteminquiryuploadtmpid Zhhtiteminquiryuploadtmp;
+	@Remarks("現品送り先名     20110517 ADD")
+	?Okurisakimei null;
+	@Remarks("現品送り住所１   20110517 ADD")
+	?Okurisakiaddr1 null;
+	@Remarks("現品送り住所２   20110517 ADD")
+	?Okurisakiaddr2 null;
+};
+

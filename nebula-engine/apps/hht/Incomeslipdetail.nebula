@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx Incomeslipdetail {
+	!Incomeslipdetailid ID;
+	Vendorid ID;
+	Incometypecode null;
+	?Applydate Date;
+	?Applyamount Amount;
+	?Approvaldate Date;
+	?Approvalamount Amount;
+	Incomeslipid Incomeslip;
+	?Remark null;
+};
+

@@ -1,0 +1,11 @@
+@Remarks("List of all events known in the repository")
+@Refby("0")
+type SmpViewEventTests {
+	@Remarks("Internal ID of this event")
+	EventId ID;
+	@Remarks("Name of this event")
+	?EventName Name;
+	@Remarks("Name of the test which is part of this event")
+	?EventTest null;
+};
+

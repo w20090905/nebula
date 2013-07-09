@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("4")
+tx Solution {
+	!Solutionid ID;
+	Orgid Organization;
+	Solutioncode Code;
+	Solutionname Name;
+	Solutiontype null;
+	Priority;
+	Status;
+	DateLastupdated Date;
+};
+

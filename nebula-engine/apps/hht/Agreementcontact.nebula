@@ -1,0 +1,10 @@
+@Remarks("")
+@Refby("0")
+tx Agreementcontact {
+	!Agreementcontactid ID;
+	Agreementid Agreement;
+	Contactid Contact;
+	EntityId ID;
+	EntityType Attr;
+};
+

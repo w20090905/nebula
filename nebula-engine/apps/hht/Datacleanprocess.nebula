@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("1")
+tx Datacleanprocess {
+	!Datacleanprocessid ID;
+	Dcpcode Code;
+	?Processdesc null;
+	Processtype null;
+	?Needsort null;
+	DateLastupdated Date;
+	Maker null;
+	?Orgid Organization;
+};
+

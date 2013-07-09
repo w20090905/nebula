@@ -1,0 +1,26 @@
+@Remarks("")
+@Refby("0")
+tx Itemavailable {
+	!Itemavailableid ID;
+	Userid Usr;
+	Orgid Organization;
+	?SourceItemid ID;
+	SourceOrgid ID;
+	Prodlineid ProductLine;
+	Prodid Product;
+	?Policyid Itempolicy;
+	Itemcode Code;
+	Categoryid Category;
+	Umcode Code;
+	?Listprice Price;
+	?Minstockqty Quantity;
+	?Maxstockqty Quantity;
+	IsLotcontrol YesNo;
+	IsSerialnumcontrol YesNo;
+	RoleTypecode null;
+	?Abccode Code;
+	IsBom YesNo;
+	IsPublic YesNo;
+	?DateLastupdated Date;
+};
+

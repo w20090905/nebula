@@ -4,19 +4,9 @@ type CAcctschema {
 	@Remarks("Rules for accounting")
 	!CAcctschemaId ID;
 	@Remarks("Client/Tenant for this installation.")
-	AdClientId AdClient;
+	AdClient;
 	@Remarks("Organizational entity within client")
-	AdOrgId AdOrg;
-	@Remarks("The record is active in the system")
-	IsActive YesNo;/* 'Y'  */
-	@Remarks("Date this record was created")
-	Created null;/* SYSDATE  */
-	@Remarks("User who created this records")
-	Createdby null;
-	@Remarks("Date this record was updated")
-	Updated null;/* SYSDATE  */
-	@Remarks("User who updated this records")
-	Updatedby null;
+	AdOrg;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")
@@ -28,15 +18,15 @@ type CAcctschema {
 	@Remarks("Indicates how Costs will be calculated")
 	Costingmethod Attr;
 	@Remarks("The Currency for this record")
-	CCurrencyId CCurrency;
+	CCurrency;
 	@Remarks("If selected, the periods are automatically opened and closed")
-	AutoPeriodcontrol null;/* 'N'  */
+	AutoPeriodcontrol YesNo;/* 'N'  */
 	@Remarks("Period of the Calendar")
-	?CPeriodId CPeriod;
+	?CPeriod;
 	@Remarks("Number of days to be able to post in the past (based on system date)")
-	?PeriodOpenhistory null;
+	?PeriodOpenhistory Number;
 	@Remarks("Number of days to be able to post to a future date (based on system date)")
-	?PeriodOpenfuture null;
+	?PeriodOpenfuture Number;
 	@Remarks("Element Separator")
 	Separator null;
 	@Remarks("Ability to select (partial) account combinations by an Alias")
@@ -48,19 +38,19 @@ type CAcctschema {
 	@Remarks("Correct the tax for payment discount and charges")
 	IsDiscountCorrectstax YesNo;/* 'N'  */
 	@Remarks("Type of Cost (e.g. Current, Plan, Future)")
-	?MCosttypeId MCosttype;
+	?MCosttype;
 	@Remarks("The lowest level to accumulate Costing Information")
-	Costinglevel null;/* 'C'  */
+	Costinglevel Attr;/* 'C'  */
 	@Remarks("Adjust Cost of Good Sold")
 	IsAdjustcogs YesNo;/* 'N'  */
 	@Remarks("Create posting entries only for this organization")
-	?AdOrgonlyId AdOrg;
+	?AdOrgonly AdOrg;
 	@Remarks("Differentiate between Services and Product Receivable/Payables")
 	IsPostServices YesNo;/* ('N')  */
 	@Remarks("Post the cost adjustment explicitly")
 	IsExplicitcostadjustment YesNo;/* ('N')  */
 	@Remarks("Create Commitment and/or Reservations for Budget Control")
-	Commitmenttype Attr;/* 'N'  */
+	Commitmenttype YesNo;/* 'N'  */
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Type of Tax Correction")

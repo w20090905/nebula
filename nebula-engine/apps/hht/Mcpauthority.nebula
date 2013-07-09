@@ -1,0 +1,14 @@
+@Remarks("")
+@Refby("0")
+tx Mcpauthority {
+	!Mcpauthorityid ID;
+	Analyzecodeid Analyzecode;
+	Orgid Organization;
+	Analyzecodevalueid ID;
+	Analyzecodevalue String;
+	?Userid Usr;
+	?Usergroupid Usergroup;
+	Createdate Date;
+	?SalesPlantypeid SalesPlantype;
+};
+

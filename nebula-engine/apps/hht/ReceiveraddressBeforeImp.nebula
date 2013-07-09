@@ -1,0 +1,48 @@
+@Remarks("")
+@Refby("0")
+type ReceiveraddressBeforeImp {
+	?Receiveraddressid Receiveraddress;
+	?Receiveraddresscode Code;
+	Orgid Organization;
+	?Receiveraddressname Name;
+	?Receiveraddressshortname Name;
+	Warehouseid Physicalwarehouse;
+	?Zipcode Code;
+	?Address null;
+	?Address null;
+	?Address null;
+	?Jiscode Code;
+	?Telephone Phone;
+	?Assistiteminfo Info;
+	?Receiveconditiongroup null;
+	?Shippmentmethod null;
+	?Respecttime null;
+	?Vehicletype Attr;
+	?Waitingplace null;
+	?Testscoreflag null;
+	?Checkincard null;
+	?Receiptcard null;
+	?Comment1 null;
+	?Comment2 null;
+	?Comment3 null;
+	?Comment4 null;
+	?Comment5 null;
+	?Comment6 null;
+	?Comment7 null;
+	?Comment8 null;
+	?Comment9 null;
+	?Mark null;
+	?Invflag null;
+	?Sellerid1 null;
+	?Sellerid2 null;
+	?Sellerid3 null;
+	?Sellerid4 null;
+	?DeliveryDate Date;
+	?Status;
+	?Endcustomername1 null;
+	?Endcustomername2 null;
+	?Endcustomername3 null;
+	?Endcustomername4 null;
+	?Source null;
+};
+

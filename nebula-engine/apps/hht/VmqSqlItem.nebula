@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("22")
+tx VmqSqlItem {
+	!DatabaseId ID;
+	!Sqlid ID;
+	?Label null;
+	?GroupName Name;
+	?OptimizerChoice null;
+	?SchemaContext Text;
+	?TunesessionId ID;
+	?Flags null;
+};
+

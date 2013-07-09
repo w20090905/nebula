@@ -1,0 +1,9 @@
+@Remarks("")
+@Refby("0")
+tx Lcbooksetmap {
+	!Lcbooksetmapid ID;
+	Lcbooksetid ID;
+	Childbooksetid ID;
+	DateLastupdated Date;
+};
+

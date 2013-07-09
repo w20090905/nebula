@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("1")
+tx Serviceorderpricedetail {
+	!Serviceorderpricedetailid ID;
+	?Orderdetailid Orderdetail;
+	Orderid Ord;
+	?Currentvalue null;
+	?Prevalue null;
+	?Deductvalue null;
+	?Specdeductvalue null;
+	?Value null;
+	?Amount;
+	?Createdate Date;
+	?Expensegroup null;
+};
+
