@@ -1,8 +1,9 @@
 package nebula.lang;
 
-import org.objectweb.asm.MethodVisitor;
+import nebula.data.DataRepos;
+import nebula.data.Entity;
 
-public interface Statement {
-    void compile(MethodVisitor mv);
-	void exec();
+
+public interface Statement extends Code {
+	void exec(Entity entity, DataRepos repos);
 }

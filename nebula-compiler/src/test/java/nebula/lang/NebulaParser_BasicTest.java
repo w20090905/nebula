@@ -189,11 +189,11 @@ public class NebulaParser_BasicTest extends TestCase {
 	}
 
 	public void testFieldDefinition_default() {
-		assertEquals(1014 * 1024, parseField("!MyAge Age := 1014 * 1024;").defaultValueExpr.eval(null));
-		assertEquals("test", parseField("!MyAge Age := \"test\";").defaultValueExpr.eval(null));
+		assertEquals(1014 * 1024, parseField("!MyAge Age := 1014 * 1024;").expr.eval(null));
+		assertEquals("test", parseField("!MyAge Age := \"test\";").expr.eval(null));
 
-		assertEquals(new BigDecimal("1.3"), parseField("!MyAge Age := 1.3;").defaultValueExpr.eval(null));
-		assertEquals(4 > 5, parseField("!MyAge Age := 4 > 5;").defaultValueExpr.eval(null));
+		assertEquals(new BigDecimal("1.3"), parseField("!MyAge Age := 1.3;").expr.eval(null));
+		assertEquals(4 > 5, parseField("!MyAge Age := 4 > 5;").expr.eval(null));
 
 	}
 
@@ -204,10 +204,10 @@ public class NebulaParser_BasicTest extends TestCase {
 		e.put("Name", name);
 		e.put("Age", Age);
 
-		assertEquals(Age, parseField("!MyAge Age = this.Age;").derivedExpr.eval(e));
-		assertEquals(Age + 10 * 1000, parseField("!MyAge Age = this.Age + 10 * 1000;").derivedExpr.eval(e));
+		assertEquals(Age, parseField("!MyAge Age = this.Age;").expr.eval(e));
+		assertEquals(Age + 10 * 1000, parseField("!MyAge Age = this.Age + 10 * 1000;").expr.eval(e));
 
-		assertEquals(name, parseField("!MyAge Name = this.Name;").derivedExpr.eval(e));
+		assertEquals(name, parseField("!MyAge Name = this.Name;").expr.eval(e));
 	}
 
 	public void testFieldDefinition_quicktype() {
@@ -327,16 +327,16 @@ public class NebulaParser_BasicTest extends TestCase {
 	}
 
 	public void testConstExpr() {
-		assertEquals(1234, parseCst("1234").exec());
-		assertEquals(new BigDecimal("1.1"), parseCst("1.1").exec());
-		assertEquals("1.1", parseCst("\"1.1\"").exec());
+		assertEquals(1234, parseCst("1234").eval());
+		assertEquals(new BigDecimal("1.1"), parseCst("1.1").eval());
+		assertEquals("1.1", parseCst("\"1.1\"").eval());
 
-		assertEquals(DateTimeFormat.forPattern("HH:mm:ss").parseDateTime("12:23:00"), parseCst("12:23:00").exec());
+		assertEquals(DateTimeFormat.forPattern("HH:mm:ss").parseDateTime("12:23:00"), parseCst("12:23:00").eval());
 		assertEquals(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS").parseDateTime("2006-11-23 12:23:00.234"),
-				parseCst("2006-11-23 12:23:00.234").exec());
+				parseCst("2006-11-23 12:23:00.234").eval());
 		assertEquals(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss").parseDateTime("2006-11-23 12:23:00"),
-				parseCst("2006-11-23 12:23:00").exec());
-		assertEquals(DateTimeFormat.forPattern("yyyy-MM-dd").parseDateTime("2006-11-23"), parseCst("2006-11-23").exec());
+				parseCst("2006-11-23 12:23:00").eval());
+		assertEquals(DateTimeFormat.forPattern("yyyy-MM-dd").parseDateTime("2006-11-23"), parseCst("2006-11-23").eval());
 	}
 
 	public void testNestTypeAliasDefinition() {

@@ -20,6 +20,7 @@ public class Type implements Timable {
 	final TypeStandalone standalone;
 
 	final List<Field> fields;
+	final List<Field> actions;
 
 	final InheritHashMap attrs;
 
@@ -48,6 +49,7 @@ public class Type implements Timable {
 		this.standalone = TypeStandalone.Abstract;
 		this.name = name;
 		this.fields = new CopyOnWriteArrayList<Field>();
+		this.actions = new CopyOnWriteArrayList<Field>();
 		this.attrs = new InheritHashMap();
 		this.references = new CopyOnWriteArrayList<Field>();
 		this.nameAlias = new Aliases(name);
@@ -99,6 +101,7 @@ public class Type implements Timable {
 		this.residedType = residedType; // Mixin
 
 		this.fields = new CopyOnWriteArrayList<Field>();
+		this.actions = new CopyOnWriteArrayList<Field>();
 
 		this.attrs = new InheritHashMap(this.superType.attrs);
 

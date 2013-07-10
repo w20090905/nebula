@@ -53,8 +53,7 @@ public class EntityExpressionComplier extends ClassLoader implements Opcodes {
 		MethodVisitor mv;
 
 		// Class define
-		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, name, "Ljava/lang/Object;Lnebula/lang/EntityExpression<L" + actualClass
-				+ ";>;", "java/lang/Object", new String[] { "nebula/lang/EntityExpression" });
+		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, name, "Ljava/lang/Object;Lnebula/lang/EntityExpression;", "java/lang/Object", new String[] { "nebula/lang/EntityExpression" });
 
 		// Init method
 		{

@@ -1,7 +1,9 @@
 package nebula.lang;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import nebula.data.DataRepos;
 import nebula.data.Entity;
 
 import org.joda.time.DateTime;
@@ -33,7 +35,10 @@ public class Compiler {
 		throw new RuntimeException("Cannot find field");
 	}
 
-	EntityExpressionComplier compiler = new EntityExpressionComplier();
+	EntityExpressionComplier exprCompiler = new EntityExpressionComplier();
+	EntityActionComplier stCompiler = new EntityActionComplier();
+
+	// EntityActionComplier
 
 	class EntityExpressionAgent<T> implements EntityExpression {
 		final Expr<T> expr;
@@ -50,12 +55,16 @@ public class Compiler {
 		}
 
 		EntityExpression compile() {
-			return compiler.compile(expr, type);
+			return exprCompiler.compile(expr, type);
 		}
 	}
 
 	public <T> EntityExpression compile(Expr<T> expr, Type type) {
-		return compiler.compile(expr, type);
+		return exprCompiler.compile(expr, type);
+	}
+
+	public EntityAction compile(Statement statement, Type type) {
+		return stCompiler.compile(statement, type);
 	}
 
 	public Expr<Boolean> opAnd(Expr<Boolean> e1, Expr<Boolean> e2) {
@@ -170,17 +179,29 @@ public class Compiler {
 		return new FieldOf(e1, name);
 	}
 
-	public Statement opPut(Expr<Object> field, Expr<Object> value) {
+	public Statement stPut(Expr<Object> field, Expr<Object> value) {
 		return new PutField((FieldOf) field, value);
+	}
+
+	public Statement stVarDefine(String typeName, String name, Expr<Object> initExpr) {
+		return new VarDefineField(typeName, name, initExpr);
+	}
+
+	public Statement stBlock(List<Statement> statements) {
+		return new Block(statements);
 	}
 
 	public Expr<Object> opMethodCall(Expr<Entity> e1, String name) {
 		return new MethodCall(e1, name);
 	}
 
+	public Statement stCall(Expr<Object> e1) {
+		return new CallStatment(e1);
+	}
+
 	abstract class Expression<T> implements Opcodes, Expr<T> {
 		@Override
-		public T exec() {
+		public T eval() {
 			throw new UnsupportedOperationException();
 		}
 	}
@@ -220,8 +241,8 @@ public class Compiler {
 		}
 
 		@Override
-		public Boolean exec() {
-			return e1.exec() && e2.exec();
+		public Boolean eval() {
+			return e1.eval() && e2.eval();
 		}
 
 		@Override
@@ -248,8 +269,8 @@ public class Compiler {
 		}
 
 		@Override
-		public Boolean exec() {
-			return !e1.exec();
+		public Boolean eval() {
+			return !e1.eval();
 		}
 
 		@Override
@@ -286,8 +307,8 @@ public class Compiler {
 		}
 
 		@Override
-		public Boolean exec() {
-			return e1.exec() || e2.exec();
+		public Boolean eval() {
+			return e1.eval() || e2.eval();
 		}
 
 		@Override
@@ -328,8 +349,8 @@ public class Compiler {
 		}
 
 		@Override
-		public Boolean exec() {
-			return e1.exec().compareTo(e2.exec()) != 0;
+		public Boolean eval() {
+			return e1.eval().compareTo(e2.eval()) != 0;
 		}
 
 		@Override
@@ -363,8 +384,8 @@ public class Compiler {
 		}
 
 		@Override
-		public Boolean exec() {
-			return e1.exec().compareTo(e2.exec()) == 0;
+		public Boolean eval() {
+			return e1.eval().compareTo(e2.eval()) == 0;
 		}
 
 		@Override
@@ -401,8 +422,8 @@ public class Compiler {
 		}
 
 		@Override
-		public Boolean exec() {
-			return e1.exec().compareTo(e2.exec()) > 0;
+		public Boolean eval() {
+			return e1.eval().compareTo(e2.eval()) > 0;
 		}
 
 		@Override
@@ -436,8 +457,8 @@ public class Compiler {
 		}
 
 		@Override
-		public Boolean exec() {
-			return e1.exec().compareTo(e2.exec()) >= 0;
+		public Boolean eval() {
+			return e1.eval().compareTo(e2.eval()) >= 0;
 		}
 
 		@Override
@@ -472,8 +493,8 @@ public class Compiler {
 		}
 
 		@Override
-		public Boolean exec() {
-			return e1.exec().compareTo(e2.exec()) < 0;
+		public Boolean eval() {
+			return e1.eval().compareTo(e2.eval()) < 0;
 		}
 
 		@Override
@@ -510,8 +531,8 @@ public class Compiler {
 		}
 
 		@Override
-		public Boolean exec() {
-			return e1.exec().compareTo(e2.exec()) <= 0;
+		public Boolean eval() {
+			return e1.eval().compareTo(e2.eval()) <= 0;
 		}
 
 		@Override
@@ -551,8 +572,8 @@ public class Compiler {
 		}
 
 		@Override
-		public Integer exec() {
-			return (Integer) e1.exec() + (Integer) e2.exec();
+		public Integer eval() {
+			return (Integer) e1.eval() + (Integer) e2.eval();
 		}
 
 		@Override
@@ -736,7 +757,7 @@ public class Compiler {
 		}
 
 		@Override
-		public String exec() {
+		public String eval() {
 			return this.value;
 		}
 
@@ -766,7 +787,7 @@ public class Compiler {
 		}
 
 		@Override
-		public BigDecimal exec() {
+		public BigDecimal eval() {
 			return new BigDecimal(this.text);
 		}
 
@@ -793,7 +814,7 @@ public class Compiler {
 		}
 
 		@Override
-		public Integer exec() {
+		public Integer eval() {
 			return this.value;
 		}
 
@@ -821,7 +842,7 @@ public class Compiler {
 		}
 
 		@Override
-		public DateTime exec() {
+		public DateTime eval() {
 			return this.value;
 		}
 
@@ -849,7 +870,7 @@ public class Compiler {
 		}
 
 		@Override
-		public DateTime exec() {
+		public DateTime eval() {
 			return this.value;
 		}
 
@@ -877,7 +898,7 @@ public class Compiler {
 		}
 
 		@Override
-		public DateTime exec() {
+		public DateTime eval() {
 			return this.value;
 		}
 
@@ -905,7 +926,7 @@ public class Compiler {
 		}
 
 		@Override
-		public DateTime exec() {
+		public DateTime eval() {
 			return this.value;
 		}
 
@@ -941,7 +962,7 @@ public class Compiler {
 				break;
 			}
 		}
-		
+
 		public void compileInteger(final MethodVisitor mv) {
 			mv.visitVarInsn(ALOAD, 1);
 			mv.visitLdcInsn(this.name);
@@ -956,11 +977,10 @@ public class Compiler {
 			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "get", "(Ljava/lang/String;)Ljava/lang/Object;");
 			mv.visitTypeInsn(CHECKCAST, "java/lang/String");
 		}
-		
 
 		@Override
-		public Object exec() {
-			return ((Entity) e1.exec()).get(name);
+		public Object eval() {
+			return ((Entity) e1.eval()).get(name);
 		}
 
 		@Override
@@ -991,8 +1011,9 @@ public class Compiler {
 		}
 
 		@Override
-		public Integer exec() {
-			return (Integer) e1.exec().get(name);
+		public Integer eval() {
+//			return (Integer) e1.eval().get(name);//TODO
+			return null;
 		}
 
 		@Override
@@ -1029,7 +1050,69 @@ public class Compiler {
 
 	}
 
-	class PutField implements Statement {
+	class Block implements Opcodes, Statement {
+		final List<Statement> statements;
+
+		Block(List<Statement> statements) {
+			this.statements = statements;
+		}
+
+		public void compile(final MethodVisitor mv) {
+			for (Statement st : statements) {
+				st.compile(mv);
+			}
+		}
+
+		@Override
+		public void exec(Entity entity, DataRepos repos) {
+			for (Statement st : statements) {
+				st.exec(entity,repos);
+			}
+		}
+
+		@Override
+		public String toString() {
+			StringBuilder sb = new StringBuilder(1024);
+			sb.append("{");
+			for (Statement st : statements) {
+				sb.append(st);
+			}
+			sb.append("}");
+			return sb.toString();
+		}
+	}
+
+	class VarDefineField implements Opcodes, Statement {
+		final String typeName;
+		final String name;
+		final Expr<Object> initExpr;
+
+		VarDefineField(String typeName, String name, Expr<Object> initExpr) {
+			this.typeName = typeName;
+			this.name = name;
+			this.initExpr = initExpr;
+		}
+
+		public void compile(final MethodVisitor mv) {
+			// compiles e1, e2, and adds an instruction to multiply the two
+			// values
+			// mv.visitLdcInsn(value);
+			// TODO
+		}
+
+		@Override
+		public void exec(Entity entity, DataRepos repos) {
+			// return (Integer) e1.exec().get(name);
+		}
+
+		@Override
+		public String toString() {
+			return typeName + " " + name.toString() + " = " + initExpr.toString() + ";";
+		}
+	}
+	
+
+	class PutField implements Opcodes, Statement {
 		final Expr<Object> parent;
 		final Expr<Object> value;
 		final String name;
@@ -1037,6 +1120,44 @@ public class Compiler {
 		PutField(FieldOf field, Expr<Object> value) {
 			this.parent = field.e1;
 			this.name = field.name;
+			this.value = value;
+		}
+
+		private void toObject(final MethodVisitor mv,Expr<Object> expr){
+			switch (expr.getExprType().rawType) {
+			case Boolean:
+				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");	
+				break;
+			case Long:
+				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;");			
+				break;				
+			default:
+				break;
+			}
+		}
+		public void compile(final MethodVisitor mv) {
+			mv.visitVarInsn(ALOAD, 1);
+			mv.visitLdcInsn(this.name);
+			value.compile(mv);			
+			toObject(mv,value);			
+			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "put", "(Ljava/lang/String;Ljava/lang/Object;)V");
+		}
+
+		@Override
+		public void exec(Entity entity, DataRepos repos) {
+			entity.put(name, value.eval());
+		}
+
+		@Override
+		public String toString() {
+			return parent.toString() + "." + name.toString() + " = " + value.toString() + ";";
+		}
+	}
+
+	class CallStatment implements Opcodes, Statement {
+		final Expr<Object> value;
+
+		CallStatment(Expr<Object> value) {
 			this.value = value;
 		}
 
@@ -1048,13 +1169,13 @@ public class Compiler {
 		}
 
 		@Override
-		public void exec() {
+		public void exec(Entity entity, DataRepos repos) {
 			// return (Integer) e1.exec().get(name);
 		}
 
 		@Override
 		public String toString() {
-			return parent.toString() + "." + name.toString() + " = " + value.toString() + ";\n";
+			return value.toString() + ";";
 		}
 	}
 }

@@ -115,7 +115,7 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		NebulaParser parser = new NebulaParser(tokens, compiler);
 
-		return parser.expr();
+		return parser.expression();
 	}
 
 	public void testTypeDefinition() {

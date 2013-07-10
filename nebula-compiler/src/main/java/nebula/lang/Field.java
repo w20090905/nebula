@@ -7,8 +7,8 @@ public class Field {
 	Aliases nameAlias;
 	int modifiers = 0;
 	
-	EntityExpression derivedExpr;
-	EntityExpression defaultValueExpr;
+	EntityExpression expr;
+	EntityAction code;
 
 	final Type resideType;
 	boolean array = false;
@@ -117,7 +117,7 @@ public class Field {
 	}
 
 	public EntityExpression getDerivedExpr() {
-		return (EntityExpression) derivedExpr;
+		return (EntityExpression) code;
 	}
 
 

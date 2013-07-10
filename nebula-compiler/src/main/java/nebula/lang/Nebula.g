@@ -25,10 +25,10 @@ options {
 @members {
 //    Map<String,Type> typesMap = new HashMap<String,Type>();
     List<Type> types = new ArrayList<Type>();
-    List<Field> fieldsWithDefaultExpr = new ArrayList<Field>();
-    List<Expr> fieldsWithDefaultExprExpr = new ArrayList<Expr>();
-    List<Field> fieldsWithDerivedExpr = new ArrayList<Field>();
-    List<Expr> fieldsWithDerivedExprExpr= new ArrayList<Expr>();
+    
+    Map<Field, Expr> derivedFields = new HashMap<Field, Expr>();
+    Map<Field, Statement> actionFields = new HashMap<Field, Statement>();
+  
     Compiler op = new Compiler(new Function<String, Type>() {
       @Override
 	    public Type apply(String input) {
@@ -98,17 +98,12 @@ options {
     }
     
     protected void exitTopType(){
-          for (int i = 0; i < fieldsWithDefaultExpr.size(); i++) {
-            Field f = fieldsWithDefaultExpr.get(i);
-            Expr e = fieldsWithDefaultExprExpr.get(i);
-            f.defaultValueExpr = op.compile(e, f.getResideType());
-      }
-
-          for (int i = 0; i < fieldsWithDerivedExpr.size(); i++) {
-            Field f = fieldsWithDerivedExpr.get(i);
-            Expr e = fieldsWithDerivedExprExpr.get(i);
-            f.derivedExpr = op.compile(e, f.getResideType());
-      }
+    for (Map.Entry<Field, Expr> e : derivedFields.entrySet()) {
+      e.getKey().expr = op.compile(e.getValue(), e.getKey().getResideType());
+    }
+    for (Map.Entry<Field, Statement> e : actionFields.entrySet()) {
+      e.getKey().code = op.compile(e.getValue(), e.getKey().getResideType());
+    }
     }
     protected void info(String str) {
     if (str.charAt(str.length() - 1) == '\n') {
@@ -202,7 +197,7 @@ fieldDefinition[Type resideType] returns[Field field]
           }       
                 
         /* Actions */
-        ( '()' block )?
+        ( '()' action=block {actionFields.put(field, action);} )?
         /* Array? */
         range=arrayDefinition
         
@@ -213,7 +208,7 @@ fieldDefinition[Type resideType] returns[Field field]
                     nestedType = nestedTypeDefinition[resideType,$name.text,aliases] 
                 '}'   { field.type = nestedType; loadingFinish(resideType,nestedType);}
            |            {
-                            if(field.type==null)  {
+                            if(field.type==null && action==null)  {
                                 field.type = resolveType(field.name);  
                                 if(aliases==null && field.type.getNameAlias() !=null) aliases = field.type.getNameAlias();
                              }
@@ -221,15 +216,16 @@ fieldDefinition[Type resideType] returns[Field field]
         )
         
         /* Default value */
-        (':=' defaultExpr=expr      {   field.modifiers |=DefaultValue;   fieldsWithDefaultExpr.add(field); fieldsWithDefaultExprExpr.add(defaultExpr);})?
+        (':=' defaultExpr=expression      {   field.modifiers |=DefaultValue;   derivedFields.put(field, defaultExpr); })?
         
         /* Derived expr */
-        ('=' derivedExpr=expr   {   field.modifiers |=Derived;               fieldsWithDerivedExpr.add(field); fieldsWithDerivedExprExpr.add(derivedExpr);} )?
+        ('=' derivedExpr=expression   {   field.modifiers |=Derived;            derivedFields.put(field, derivedExpr); } )?
         
           (';' NEWLINE?| NEWLINE)
 
         {
-            field.attrs.setDefaults(field.type.attrs);
+            if(field.type!=null){
+              field.attrs.setDefaults(field.type.attrs);
             field.modifiers |= modifiers;
             if(field.type.standalone == TypeStandalone.Basic){
               field.refer = ByVal;
@@ -257,13 +253,20 @@ fieldDefinition[Type resideType] returns[Field field]
                 field.array = true;
             }
             
+            }
+            
             if(annotations != null){
                 field.attrs.putAll(annotations);
             }
            if(aliases!=null)field.setNameAlias(aliases);
            else field.setNameAlias(new Aliases(field.name));
             
-            resideType.fields.add(field);
+            if(action==null){            
+              resideType.fields.add(field);
+            }else{
+              resideType.actions.add(field);            
+            }
+            
           }
         ;
 
@@ -337,9 +340,15 @@ flexID returns[String text]
     ;
     
 block returns [Statement s]
-    :   '{' NEWLINE? statement* '}'
+    :   '{' NEWLINE? ss=statements {s=op.stBlock(ss);} '}'
     ;
-    
+
+statements returns [List<Statement> statments]   
+@init{statments = new ArrayList<Statement>();}
+:
+  (s=statement {statments.add(s);})* 
+;
+
 statement returns [Statement s]:
   stBlock = block   {s = stBlock;}
   | stVar=varDeclaration {s = stVar;}
@@ -347,19 +356,19 @@ statement returns [Statement s]:
   ;
   
 varDeclaration returns [Statement s]:
-  type=ID name=ID ('=' expr)? (';' (NEWLINE)?|NEWLINE)
+  type=ID name=ID ('=' from=expression)? (';' (NEWLINE)?|NEWLINE) {if(from!=null) s=op.stVarDefine($type.text,$name.text,from);else s=op.stVarDefine($type.text,$name.text,null);}
   ;
 
 exprStatement returns [Statement s]
-    :   to=postfixExpr
-        ('=' from=expr  )? (';' NEWLINE?|NEWLINE) {if(from!=null) s=op.opPut(to,from);}
+    :   expr=postfixExpr
+        ('=' from=expression  )? (';' NEWLINE?|NEWLINE) {if(from!=null) s=op.stPut(expr,from);else op.stCall(expr);}
     ;
 
 paramList:
-  expr ( ',' expr)*
+  expression ( ',' expression)*
 ;
 
-expr returns [Expr v]
+expression returns [Expr v]
     :   e=logicalORExpr {v = $e.v;}
 ;
 
@@ -434,7 +443,7 @@ primaryExpr returns [Expr v]
   :  a=constExpr  {v=a;} 
   | 'this'{v=op.opThis();}
   | ID  {v=op.opVar($ID.text);} 
-  | '(' expr ')'   {v = $expr.v;}
+  | '(' expr=expression ')'   {v = expr;}
 ;
 
 constExpr returns [Expr v]

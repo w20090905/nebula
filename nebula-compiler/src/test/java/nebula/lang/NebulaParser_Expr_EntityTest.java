@@ -1,6 +1,8 @@
 package nebula.lang;
 
 import junit.framework.TestCase;
+import nebula.data.Entity;
+import nebula.data.impl.EditableEntity;
 
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -8,37 +10,30 @@ import org.antlr.runtime.RecognitionException;
 
 public class NebulaParser_Expr_EntityTest extends TestCase {
 	TypeLoaderForTest compiler;
+	Entity data = new EditableEntity();
+	Type type;
+	int Age = 10;
 
 	@Override
 	protected void setUp() throws Exception {
 		compiler = new TypeLoaderForTest(new SystemTypeLoader());
 	}
-//
-//	private <T> T compute(Expr<T> expr, Entity entity) {
-//		EntityExpressionComplier complier = new EntityExpressionComplier();
-//		
-//		
-//		
-//		return (T) complier.compile(expr, null).eval(entity);
-//	}
-//
-//	private void eqValue(Entity entity, String exprText, boolean result) {
-//		try {
-//			assertEquals(result, compute(parse(exprText), entity));
-//		} catch (RecognitionException e) {
-//			fail(e.toString());
-//		}
-//	}
-//
-//	private void eqValue(Entity entity, String exprText, int result) {
-//		try {
-//			assertEquals(result, compute(parse(exprText), entity));
-//		} catch (RecognitionException e) {
-//			fail(e.toString());
-//		}
-//	}
 
-	private void eqExpr(String exprText, String expectedResult) {
+	@SuppressWarnings("unchecked")
+	private <T> T compute(Expr<T> expr, Entity entity) {
+		EntityExpressionComplier complier = new EntityExpressionComplier();
+		return (T) complier.compile(expr, null).eval(entity);
+	}
+
+	private void eqValue(String exprText, Object result) {
+		try {
+			assertEquals(result, compute(parse(exprText), data));
+		} catch (RecognitionException e) {
+			fail(e.toString());
+		}
+	}
+
+	private void eqExpr(String exprText, Object expectedResult) {
 		try {
 			Expr<?> expr = parse(exprText);
 			assertEquals(expectedResult, expr.toString());
@@ -52,8 +47,25 @@ public class NebulaParser_Expr_EntityTest extends TestCase {
 		NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(exprText));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		NebulaParser parser = new NebulaParser(tokens, compiler);
+		type = new Type(compiler, "Test");
+		Field field;
+		field = new Field(type, "Name");
+		field.type = parser.resolveType("Name");
+		type.fields.add(field);
 
-		return parser.expr();
+		field = new Field(type, "Age");
+		field.type = parser.resolveType("Age");
+		type.fields.add(field);
+
+		field = new Field(type, "Height");
+		field.type = parser.resolveType("Age");
+		type.fields.add(field);
+
+		parser.typesLoading.put(type.name, type);
+
+		parser.currentType = type;
+
+		return parser.expression();
 	}
 
 	public void testTypeDefinition() {
@@ -61,18 +73,16 @@ public class NebulaParser_Expr_EntityTest extends TestCase {
 		//
 	}
 
-//	public void testCompute() {
-//		Entity data = new EditableEntity();
-//		data.put("age", 10);
-//		int age = (Integer) data.get("age");
-//
-//		eqValue(data, "this.age", 10);
-//		eqValue(data, "age + 10", age + 10);
-//		eqValue(data, "age - 10", age - 10);
-//		eqValue(data, "age * 10", age * 10);
-//		eqValue(data, "age / 10", age / 10);
-//		eqValue(data, "age % 10", age % 10);
-//		eqValue(data, "age == 10", age == 10);
-//		eqValue(data, "age >= 10", age >= 10);
-//	}
+	public void testCompute() {
+		data.put("Age", Age);
+
+		eqValue("this.Age", this.Age);
+		eqValue("this.Age + 10", this.Age + 10);
+		eqValue("this.Age - 10", this.Age - 10);
+		eqValue("this.Age * 10", this.Age * 10);
+		eqValue("this.Age / 10", this.Age / 10);
+		eqValue("this.Age % 10", this.Age % 10);
+		eqValue("this.Age == 10", this.Age == 10);
+		eqValue("this.Age >= 10", this.Age >= 10);
+	}
 }
