@@ -49,7 +49,7 @@ public class NebulaParser_TypeTest extends TestCase {
 		assertEquals(0, type.fields.size());
 		assertEquals(new Integer("120"), type.attrs.get("MaxLength"));
 	}
-	
+
 	public void test_Transaction_1() throws Exception {
 		//@formatter:off
 		String text = "" +
@@ -65,7 +65,7 @@ public class NebulaParser_TypeTest extends TestCase {
 		assertEquals(1, type.fields.size());
 		assertEquals("ID", type.fields.get(0).name);
 	}
-	
+
 	public void test_type_1() throws Exception {
 		//@formatter:off
 		String text = "" +
@@ -81,17 +81,40 @@ public class NebulaParser_TypeTest extends TestCase {
 		assertEquals(1, type.fields.size());
 		assertEquals("Name", type.fields.get(0).name);
 	}
-	
+
+	public void test_type_File_import() throws Exception {
+		Type type = compiler.findType("PersonTest");
+
+		assertEquals("PersonTest", type.name);
+
+		assertEquals(9, type.fields.size());
+		int i = 0;
+		assertEquals("Name", type.fields.get(i).name);
+
+		i = 7;
+		assertEquals("Welcome", type.fields.get(i).name);
+
+		assertEquals("#	this is a <h1> tag\n## this is a <h2> tag\n###### this is a <h6> tag\n", ((String)type.fields.get(i).expr.eval(null)).replaceAll("\r\n", "\n"));
+
+		i++;
+		assertEquals("Education", type.fields.get(i).name);
+		assertEquals("PersonTest$Education", type.fields.get(i).type.name);
+		assertEquals(Inline, type.fields.get(i).refer);
+		assertEquals(true, type.fields.get(i).array);
+		assertEquals(0, type.fields.get(i).rangeFrom);
+		assertEquals(5, type.fields.get(i).rangeTo);
+	}
+
 	public void test_type_Person() throws Exception {
 		Type type = compiler.findType("Person");
 
 		assertEquals("Person", type.name);
 
 		assertEquals(8, type.fields.size());
-		int i=0;
+		int i = 0;
 		assertEquals("Name", type.fields.get(i).name);
-		
-		i=7;
+
+		i = 7;
 		assertEquals("Education", type.fields.get(i).name);
 		assertEquals("Person$Education", type.fields.get(i).type.name);
 		assertEquals(Inline, type.fields.get(i).refer);
@@ -106,16 +129,15 @@ public class NebulaParser_TypeTest extends TestCase {
 		assertEquals("PersonCircularDependency", type.name);
 
 		assertEquals(8, type.fields.size());
-		int i=0;
+		int i = 0;
 		assertEquals("Name", type.fields.get(i).name);
 
-		i=1;
+		i = 1;
 		assertEquals("CompanyCircularDependency", type.fields.get(i).name);
 		assertEquals("CompanyCircularDependency", type.fields.get(i).type.name);
 		assertEquals("Manager", type.fields.get(i).type.fields.get(i).name);
 		assertEquals("PersonCircularDependency", type.fields.get(i).type.fields.get(i).type.name);
 	}
-	
 
 	public void test_type_with_importance() throws Exception {
 		//@formatter:off
@@ -155,8 +177,6 @@ public class NebulaParser_TypeTest extends TestCase {
 		assertEquals(true, type.fields.get(i).isRequired());
 
 	}
-	
-	
 
 	public void test_type_inline() throws Exception {
 		//@formatter:off
@@ -315,7 +335,7 @@ public class NebulaParser_TypeTest extends TestCase {
 		int i = 0;
 		assertEquals("Name", type.fields.get(i).name);
 		assertEquals(60, type.fields.get(i).attrs.get("MaxLength"));
-		
+
 		i++;
 		assertEquals("WithCustomAttr", type.fields.get(i).name);
 		assertEquals(120, type.fields.get(i).attrs.get("MaxLength"));
@@ -325,5 +345,5 @@ public class NebulaParser_TypeTest extends TestCase {
 		assertEquals("dd", type.attrs.get("Match"));
 		assertEquals(new BigDecimal("3.8"), type.attrs.get("Max"));
 	}
-	
+
 }

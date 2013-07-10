@@ -191,6 +191,9 @@ public class NebulaParser_BasicTest extends TestCase {
 	public void testFieldDefinition_default() {
 		assertEquals(1014 * 1024, parseField("!MyAge Age := 1014 * 1024;").expr.eval(null));
 		assertEquals("test", parseField("!MyAge Age := \"test\";").expr.eval(null));
+		assertEquals("test", parseField("!Name := ```test``` ;").expr.eval(null));
+		
+		assertEquals("# Title\n## firstline\ntest content", parseField("!Name := ```\n# Title\n## firstline\ntest content``` ;").expr.eval(null));
 
 		assertEquals(new BigDecimal("1.3"), parseField("!MyAge Age := 1.3;").expr.eval(null));
 		assertEquals(4 > 5, parseField("!MyAge Age := 4 > 5;").expr.eval(null));
@@ -331,11 +334,17 @@ public class NebulaParser_BasicTest extends TestCase {
 		assertEquals(new BigDecimal("1.1"), parseCst("1.1").eval());
 		assertEquals("1.1", parseCst("\"1.1\"").eval());
 
+		assertEquals("QWEQWEQWEWQE", parseCst("\"QWEQWEQWEWQE\"").eval());
+		assertEquals("QWEQWEQWEWQE", parseCst("\'QWEQWEQWEWQE\'").eval());
+
+		assertEquals("1234567890", parseCst("```1234567890```").eval());
+		assertEquals("12345\n67890", parseCst("```12345\n67890```").eval());
+		assertEquals("12345\n67890", parseCst("```\n12345\n67890```").eval());
+		assertEquals("12345\n67890", parseCst("```\n\r12345\n67890```").eval());
+
 		assertEquals(DateTimeFormat.forPattern("HH:mm:ss").parseDateTime("12:23:00"), parseCst("12:23:00").eval());
-		assertEquals(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS").parseDateTime("2006-11-23 12:23:00.234"),
-				parseCst("2006-11-23 12:23:00.234").eval());
-		assertEquals(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss").parseDateTime("2006-11-23 12:23:00"),
-				parseCst("2006-11-23 12:23:00").eval());
+		assertEquals(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS").parseDateTime("2006-11-23 12:23:00.234"), parseCst("2006-11-23 12:23:00.234").eval());
+		assertEquals(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss").parseDateTime("2006-11-23 12:23:00"), parseCst("2006-11-23 12:23:00").eval());
 		assertEquals(DateTimeFormat.forPattern("yyyy-MM-dd").parseDateTime("2006-11-23"), parseCst("2006-11-23").eval());
 	}
 

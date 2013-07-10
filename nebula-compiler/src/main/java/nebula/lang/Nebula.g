@@ -219,7 +219,7 @@ fieldDefinition[Type resideType] returns[Field field]
         (':=' defaultExpr=expression      {   field.modifiers |=DefaultValue;   derivedFields.put(field, defaultExpr); })?
         
         /* Derived expr */
-        ('=' derivedExpr=expression   {   field.modifiers |=Derived;            derivedFields.put(field, derivedExpr); } )?
+        ('=' derivedExpr=expression     {   field.modifiers |=Derived;            derivedFields.put(field, derivedExpr); } )?
         
           (';' NEWLINE?| NEWLINE)
 
@@ -312,7 +312,7 @@ annotationItemDefinition[InheritHashMap annotations]
     ;
 
 constValueDefinition returns [Object v]
-    : StringLiteral {v=$StringLiteral.text.substring(1,$StringLiteral.text.length()-1);}
+    : string=stringLiteral {v=string;}
       | decimal {v=new BigDecimal($decimal.text);}
       | INT {v=new Integer($INT.text);}  
     ;
@@ -335,7 +335,7 @@ aliasesLiteral[String name] returns[Aliases aliases]
     ;
 
 flexID returns[String text]
-    :   StringLiteral {text = $StringLiteral.text.substring(1,$StringLiteral.text.length()-1);}
+    :   string=stringLiteral {text = string;}
       | pre=ID  ('-' post=ID)?{text = $pre.text; if($post!=null) text = text + "-" + $post.text;}
     ;
     
@@ -447,7 +447,7 @@ primaryExpr returns [Expr v]
 ;
 
 constExpr returns [Expr v]
-    : StringLiteral {v=op.opStringCst($StringLiteral.text.substring(1,$StringLiteral.text.length()-1));}
+    : string=stringLiteral {v=op.opStringCst(string);}
       | decimal {v=op.opDecimalCst($decimal.text);}
       | INT {v=op.opIntegerCst($INT.text);}  
       | TimestampLiteral {v=op.opTimestampCst($TimestampLiteral.text);}  
@@ -458,8 +458,21 @@ constExpr returns [Expr v]
 
 // *************   START  :  BASIC   *************
 
-StringLiteral :
+stringLiteral returns[String text]:
+    blockString=BlockStringLiteral {text=$blockString.text.substring(3,$blockString.text.length()-3);int start=0;if(text.charAt(0)=='\r')start=1;if(text.charAt(1)=='\n')start=2;text=text.substring(start,text.length());}
+    | singleString=SingleQuotationStringLiteral  {text=$singleString.text.substring(1,$singleString.text.length()-1);}
+    | doubleString=DoubleQuotationStringLiteral  {text=$doubleString.text.substring(1,$doubleString.text.length()-1);}
+; 
+
+SingleQuotationStringLiteral :
   '"' (~('"'|'\n'|'\r'))* '"';
+
+DoubleQuotationStringLiteral:
+    '\'' (~('\''|'\n'|'\r'))* '\'';
+
+BlockStringLiteral :
+  '```' ( options {greedy=false;} : . )* '```';
+  
 
 TimestampLiteral :
   Date ' ' Time '.' MillSecond
