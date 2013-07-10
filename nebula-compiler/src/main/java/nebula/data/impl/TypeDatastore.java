@@ -45,13 +45,13 @@ public class TypeDatastore implements DataStore<Type>, DataListener<Type> {
 
 	@Override
 	public Classificator<String, Type> getClassificator(String name) {
-		// TODO Auto-generated method stub
+		// TODO Not realized getClassificator(String name) 
 		return null;
 	}
 
 	@Override
 	public Map<String, Classificator<String, Entity>> getClassificatores() {
-		// TODO Auto-generated method stub
+		// TODO Not realized getClassificatores() 
 		return null;
 	}
 

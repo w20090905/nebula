@@ -82,11 +82,4 @@ public class InMemoryPersisterTest extends TestCase {
 		assertEquals("180", store.get("wangshilian").get("length"));
 	}
 
-	// public final void testRemove() {
-	// fail("Not yet implemented"); // TODO
-	// }
-	//
-	// public final void testTransaction() {
-	// fail("Not yet implemented"); // TODO
-	// }
 }

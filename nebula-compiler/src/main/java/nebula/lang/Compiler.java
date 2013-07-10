@@ -752,7 +752,6 @@ public class Compiler {
 		}
 
 		public void compile(final MethodVisitor mv) {
-			// TODO String
 			mv.visitLdcInsn(value);
 		}
 
@@ -829,26 +828,41 @@ public class Compiler {
 		}
 	}
 
-	class TimestampCst extends Expression<DateTime> {
-		final DateTimeFormatter formater = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS");
-		final DateTime value;
+	abstract class Tempral<T> extends Expression<T> {
+		final DateTimeFormatter formater;
+		final long value;
 
-		TimestampCst(String text) {
-			this.value = formater.parseDateTime(text);
+		Tempral(String text) {
+			this(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS"), text);
+		}
+
+		Tempral(DateTimeFormatter formater, String text) {
+			this.formater = formater;
+			this.value = formater.parseDateTime(text).getMillis();
 		}
 
 		public void compile(final MethodVisitor mv) {
-			mv.visitLdcInsn(value);// TODO
-		}
-
-		@Override
-		public DateTime eval() {
-			return this.value;
+			mv.visitTypeInsn(NEW, "org/joda/time/DateTime");
+			mv.visitInsn(DUP);
+			mv.visitLdcInsn(this.value);
+			mv.visitMethodInsn(INVOKESPECIAL, "org/joda/time/DateTime", "<init>", "(J)V");
 		}
 
 		@Override
 		public String toString() {
-			return String.valueOf(value);
+			return formater.print(value);
+		}
+	}
+
+	class TimestampCst extends Tempral<DateTime> {
+
+		TimestampCst(String text) {
+			super(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS"), text);
+		}
+
+		@Override
+		public DateTime eval() {
+			return new DateTime(this.value);
 		}
 
 		@Override
@@ -857,26 +871,14 @@ public class Compiler {
 		}
 	}
 
-	class DatetimeCst extends Expression<DateTime> {
-		final DateTimeFormatter formater = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-		final DateTime value;
-
+	class DatetimeCst extends Tempral<DateTime> {
 		DatetimeCst(String text) {
-			this.value = formater.parseDateTime(text);
-		}
-
-		public void compile(final MethodVisitor mv) {
-			mv.visitLdcInsn(value);// TODO
+			super(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss"), text);
 		}
 
 		@Override
 		public DateTime eval() {
-			return this.value;
-		}
-
-		@Override
-		public String toString() {
-			return String.valueOf(value);
+			return new DateTime(this.value);
 		}
 
 		@Override
@@ -885,26 +887,14 @@ public class Compiler {
 		}
 	}
 
-	class DateCst extends Expression<DateTime> {
-		final DateTimeFormatter formater = DateTimeFormat.forPattern("yyyy-MM-dd");
-		final DateTime value;
-
+	class DateCst extends Tempral<DateTime> {
 		DateCst(String text) {
-			this.value = formater.parseDateTime(text);
-		}
-
-		public void compile(final MethodVisitor mv) {
-			mv.visitLdcInsn(value);// TODO
+			super(DateTimeFormat.forPattern("yyyy-MM-dd"), text);
 		}
 
 		@Override
 		public DateTime eval() {
-			return this.value;
-		}
-
-		@Override
-		public String toString() {
-			return String.valueOf(value);
+			return new DateTime(this.value);
 		}
 
 		@Override
@@ -913,26 +903,14 @@ public class Compiler {
 		}
 	}
 
-	class TimeCst extends Expression<DateTime> {
-		final DateTimeFormatter formater = DateTimeFormat.forPattern("HH:mm:ss");
-		final DateTime value;
-
+	class TimeCst extends Tempral<DateTime> {
 		TimeCst(String text) {
-			this.value = formater.parseDateTime(text);
-		}
-
-		public void compile(final MethodVisitor mv) {
-			mv.visitLdcInsn(value);// TODO
+			super(DateTimeFormat.forPattern("HH:mm:ss"), text);
 		}
 
 		@Override
 		public DateTime eval() {
-			return this.value;
-		}
-
-		@Override
-		public String toString() {
-			return String.valueOf(value);
+			return new DateTime(this.value);
 		}
 
 		@Override
@@ -993,7 +971,7 @@ public class Compiler {
 			return resolveType(e1.getExprType(), name);
 		}
 	}
-
+	// TODO Not realized MethodCall
 	class MethodCall extends Expression<Object> {
 		final Expr<Entity> e1;
 		final String name;
@@ -1007,12 +985,10 @@ public class Compiler {
 			// compiles e1, e2, and adds an instruction to multiply the two
 			// values
 			// mv.visitLdcInsn(value);
-			// TODO
 		}
 
 		@Override
 		public Integer eval() {
-//			return (Integer) e1.eval().get(name);//TODO
 			return null;
 		}
 
@@ -1066,7 +1042,7 @@ public class Compiler {
 		@Override
 		public void exec(Entity entity, DataRepos repos) {
 			for (Statement st : statements) {
-				st.exec(entity,repos);
+				st.exec(entity, repos);
 			}
 		}
 
@@ -1081,7 +1057,7 @@ public class Compiler {
 			return sb.toString();
 		}
 	}
-
+	// TODO Not realized VarDefineField
 	class VarDefineField implements Opcodes, Statement {
 		final String typeName;
 		final String name;
@@ -1097,7 +1073,7 @@ public class Compiler {
 			// compiles e1, e2, and adds an instruction to multiply the two
 			// values
 			// mv.visitLdcInsn(value);
-			// TODO
+			
 		}
 
 		@Override
@@ -1110,7 +1086,6 @@ public class Compiler {
 			return typeName + " " + name.toString() + " = " + initExpr.toString() + ";";
 		}
 	}
-	
 
 	class PutField implements Opcodes, Statement {
 		final Expr<Object> parent;
@@ -1123,23 +1098,24 @@ public class Compiler {
 			this.value = value;
 		}
 
-		private void toObject(final MethodVisitor mv,Expr<Object> expr){
+		private void toObject(final MethodVisitor mv, Expr<Object> expr) {
 			switch (expr.getExprType().rawType) {
 			case Boolean:
-				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");	
+				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");
 				break;
 			case Long:
-				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;");			
-				break;				
+				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;");
+				break;
 			default:
 				break;
 			}
 		}
+
 		public void compile(final MethodVisitor mv) {
 			mv.visitVarInsn(ALOAD, 1);
 			mv.visitLdcInsn(this.name);
-			value.compile(mv);			
-			toObject(mv,value);			
+			value.compile(mv);
+			toObject(mv, value);
 			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "put", "(Ljava/lang/String;Ljava/lang/Object;)V");
 		}
 
@@ -1154,6 +1130,7 @@ public class Compiler {
 		}
 	}
 
+	// TODO Not realized CallStatment
 	class CallStatment implements Opcodes, Statement {
 		final Expr<Object> value;
 
@@ -1165,7 +1142,6 @@ public class Compiler {
 			// compiles e1, e2, and adds an instruction to multiply the two
 			// values
 			// mv.visitLdcInsn(value);
-			// TODO
 		}
 
 		@Override

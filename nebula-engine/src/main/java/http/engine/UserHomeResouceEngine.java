@@ -34,7 +34,7 @@ public class UserHomeResouceEngine extends StaticResourceEngine {
 	public Resource resolve(String path) {
 		// HttpSession session = path.getSession();
 		String theme = "angularjs";// (String) session.getAttribute("Theme");
-		String skin = "clean";// (String) session.getAttribute("Skin"); TODO
+		String skin = "clean";// (String) session.getAttribute("Skin"); TODO Not realized UserHome Skin
 		String extension = "text/html";
 		String[] segs = path.split("/");
 		String name = "index.html";

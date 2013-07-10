@@ -1,7 +1,6 @@
 package nebula.data;
 
-//TODO copy from hibernate need refact
-@Deprecated
+//TODO Need refactoring NamingStrategy
 public interface NamingStrategy {
 	String classToTableName(String className);
 

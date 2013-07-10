@@ -34,7 +34,7 @@ public class EntityListSerializer extends DefaultFieldSerializer<List<Entity>> {
 //		int i = 0;
 		while ((token = in.nextToken()) != JsonToken.END_ARRAY) {
 			Entity newly = entityMerger.doReadInList(in, current);
-//			long idx = (long) newly.get("_idx"); // TODO remove when no data changed
+//			long idx = (long) newly.get("_idx"); // TODO Not realized remove when no data changed
 //			if (idx != i) {
 //				newly.put("_idx", idx);
 //				dirty = true;

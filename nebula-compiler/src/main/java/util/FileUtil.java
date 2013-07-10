@@ -20,6 +20,7 @@ import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+//TODO Need refactoring  FileUtil 
 public class FileUtil {
 	private static Log log = LogFactory.getLog(FileUtil.class);
 
@@ -36,7 +37,6 @@ public class FileUtil {
 		}
 	}
 
-	// TODO move to other place
 	public static String readAllTextFrom(File file) {
 		try {
 			return readAllTextFrom(new FileReader(file));
@@ -45,7 +45,6 @@ public class FileUtil {
 		}
 	}
 
-	// TODO move to other place
 	public static String readAllTextFrom(URL url) {
 		try {
 			return readAllTextFrom(new InputStreamReader(url.openStream()));
@@ -54,12 +53,10 @@ public class FileUtil {
 		}
 	}
 
-	// TODO move to other place
 	public static String readAllTextFrom(InputStream in) {
 		return readAllTextFrom(new InputStreamReader(in));
 	}
 
-	// TODO move to other place
 	public static String readAllTextFrom(BufferedInputStream bin) {
 		try {
 			bin.mark(4 * 1024 * 1024);
@@ -71,7 +68,6 @@ public class FileUtil {
 		}
 	}
 
-	// TODO move to other place
 	public static String readAllTextFrom(BufferedReader br) {
 		try {
 			br.mark(4 * 1024 * 1024);

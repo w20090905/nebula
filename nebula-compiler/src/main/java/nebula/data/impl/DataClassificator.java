@@ -61,7 +61,7 @@ public class DataClassificator<K, V extends Timable> implements DataListener<V>,
 
 	@Override
 	public List<V> getData(K classification, K classification2) {
-		// TODO Auto-generated method stub
+		// TODO Not realized getData(K classification, K classification2) 
 		return null;
 	}
 }

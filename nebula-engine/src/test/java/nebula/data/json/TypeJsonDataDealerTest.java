@@ -49,7 +49,7 @@ public class TypeJsonDataDealerTest extends TestCase {
 		JsonParser jsonParser = factory.createJsonParser(in);
 		try {
 			dataDealer.readFrom(null, jsonParser);
-			fail("Should throw new exception"); // TODO
+			fail("Should throw new exception");
 		} catch (RuntimeException e) {
 			assertTrue(e instanceof UnsupportedOperationException);
 		}

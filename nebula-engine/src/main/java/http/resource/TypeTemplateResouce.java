@@ -89,7 +89,7 @@ public class TypeTemplateResouce extends AbstractResouce {
 
 	public TypeTemplateResouce(Configuration cfg, TypeLoader typeLoader, DataRepos dataWareHouse,
 			Broker<DataStore<Entity>> attributes, String theme, String skin, String typeName, String actionName) {
-		super("text/template", 0, 0);// TODO
+		super("text/template", 0, 0);//TODO Not realized TypeTemplateResouce super("text/template", 0, 0)
 
 		this.cfg = cfg;
 		this.typeLoader = typeLoader;

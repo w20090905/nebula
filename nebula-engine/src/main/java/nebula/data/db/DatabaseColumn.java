@@ -68,7 +68,7 @@ public class DatabaseColumn implements Timable{
 
 	@Override
 	public long getLastModified() {
-		// TODO Auto-generated method stub
+		// TODO Not realized getLastModified
 		return 0;
 	}
 

@@ -41,7 +41,7 @@ public class TypeLoaderForTest extends TypeLoader {
 
 	@Override
 	protected URL loadClassData(String name) {
-		// TODO Auto-generated method stub
+		// TODO Not realized loadClassData
 		return null;
 	}
 }
