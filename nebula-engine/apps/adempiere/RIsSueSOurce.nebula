@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx RIsSueSOurce {
+	!RIsSueSOurceId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	RIsSueSYstem;
+	RIsSueProject;
+	RIsSueUser;
+	?Statisticsinfo Note;
+	?Profileinfo Note;
+};
+
