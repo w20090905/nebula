@@ -459,7 +459,7 @@ constExpr returns [Expr v]
 // *************   START  :  BASIC   *************
 
 stringLiteral returns[String text]:
-    blockString=BlockStringLiteral {text=$blockString.text.substring(3,$blockString.text.length()-3);int start=0;if(text.charAt(0)=='\r')start=1;if(text.charAt(1)=='\n')start=2;text=text.substring(start,text.length());}
+    blockString=BlockStringLiteral {text=$blockString.text.substring(3,$blockString.text.length()-3);if(text.length()>0){int start=0;if(text.charAt(start)=='\r')start++;if(text.charAt(start)=='\n')start++;text=text.substring(start,text.length());}}
     | singleString=SingleQuotationStringLiteral  {text=$singleString.text.substring(1,$singleString.text.length()-1);}
     | doubleString=DoubleQuotationStringLiteral  {text=$doubleString.text.substring(1,$doubleString.text.length()-1);}
 ; 

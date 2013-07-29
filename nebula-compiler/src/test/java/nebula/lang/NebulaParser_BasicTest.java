@@ -337,10 +337,11 @@ public class NebulaParser_BasicTest extends TestCase {
 		assertEquals("QWEQWEQWEWQE", parseCst("\"QWEQWEQWEWQE\"").eval());
 		assertEquals("QWEQWEQWEWQE", parseCst("\'QWEQWEQWEWQE\'").eval());
 
+		assertEquals("", parseCst("``````").eval());
 		assertEquals("1234567890", parseCst("```1234567890```").eval());
 		assertEquals("12345\n67890", parseCst("```12345\n67890```").eval());
 		assertEquals("12345\n67890", parseCst("```\n12345\n67890```").eval());
-		assertEquals("12345\n67890", parseCst("```\n\r12345\n67890```").eval());
+		assertEquals("12345\n67890", parseCst("```\r\n12345\n67890```").eval());
 
 		assertEquals(DateTimeFormat.forPattern("HH:mm:ss").parseDateTime("12:23:00"), parseCst("12:23:00").eval());
 		assertEquals(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS").parseDateTime("2006-11-23 12:23:00.234"), parseCst("2006-11-23 12:23:00.234").eval());
