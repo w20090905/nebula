@@ -2,6 +2,7 @@ package nebula.lang;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import nebula.data.DataRepos;
 import nebula.data.Entity;
@@ -14,12 +15,23 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Maps;
 
 public class Compiler {
 	Function<String, Type> typeResolve;
 
+	Map<String, Operator> opTypes = Maps.newHashMap();
+
+	Operator resolveOperator(Type type) {
+		Operator op = opTypes.get(type.getName());
+		if (op != null) return op;
+		else if (type.getSuperType() != null) return resolveOperator(type.getSuperType());
+		else throw new RuntimeException("Cannot find type" + type.name);
+	}
+
 	Compiler(Function<String, Type> typeResolve) {
 		this.typeResolve = typeResolve;
+		opTypes.put(RawTypes.Long.name(), new LongOperator());
 	}
 
 	Type resolveType(String name) {
@@ -334,18 +346,7 @@ public class Compiler {
 		}
 
 		public void compile(final MethodVisitor mv) {
-			e1.compile(mv);
-			e2.compile(mv);
-			Label iftrue = new Label();
-			Label end = new Label();
-			mv.visitJumpInsn(IF_ICMPEQ, iftrue);
-			// case where e1 <= e2 : pushes false and jump to "end"
-			mv.visitInsn(ICONST_1);
-			mv.visitJumpInsn(GOTO, end);
-			// case where e1 > e2 : pushes true
-			mv.visitLabel(iftrue);
-			mv.visitInsn(ICONST_0);
-			mv.visitLabel(end);
+			resolveOperator(e1.getExprType()).ne(mv, e1, e2);
 		}
 
 		@Override
@@ -369,18 +370,7 @@ public class Compiler {
 		}
 
 		public void compile(final MethodVisitor mv) {
-			e1.compile(mv);
-			e2.compile(mv);
-			Label iftrue = new Label();
-			Label end = new Label();
-			mv.visitJumpInsn(IF_ICMPEQ, iftrue);
-			// case where e1 <= e2 : pushes false and jump to "end"
-			mv.visitInsn(ICONST_0);
-			mv.visitJumpInsn(GOTO, end);
-			// case where e1 > e2 : pushes true
-			mv.visitLabel(iftrue);
-			mv.visitInsn(ICONST_1);
-			mv.visitLabel(end);
+			resolveOperator(e1.getExprType()).eq(mv, e1, e2);
 		}
 
 		@Override
@@ -407,18 +397,7 @@ public class Compiler {
 		}
 
 		public void compile(final MethodVisitor mv) {
-			e1.compile(mv);
-			e2.compile(mv);
-			Label iftrue = new Label();
-			Label end = new Label();
-			mv.visitJumpInsn(IF_ICMPGT, iftrue);
-			// case where e1 <= e2 : pushes false and jump to "end"
-			mv.visitInsn(ICONST_0);
-			mv.visitJumpInsn(GOTO, end);
-			// case where e1 > e2 : pushes true
-			mv.visitLabel(iftrue);
-			mv.visitInsn(ICONST_1);
-			mv.visitLabel(end);
+			resolveOperator(e1.getExprType()).gt(mv, e1, e2);
 		}
 
 		@Override
@@ -442,18 +421,7 @@ public class Compiler {
 		}
 
 		public void compile(final MethodVisitor mv) {
-			e1.compile(mv);
-			e2.compile(mv);
-			Label iftrue = new Label();
-			Label end = new Label();
-			mv.visitJumpInsn(IF_ICMPGE, iftrue);
-			// case where e1 <= e2 : pushes false and jump to "end"
-			mv.visitInsn(ICONST_0);
-			mv.visitJumpInsn(GOTO, end);
-			// case where e1 > e2 : pushes true
-			mv.visitLabel(iftrue);
-			mv.visitInsn(ICONST_1);
-			mv.visitLabel(end);
+			resolveOperator(e1.getExprType()).ge(mv, e1, e2);
 		}
 
 		@Override
@@ -477,19 +445,7 @@ public class Compiler {
 		}
 
 		public void compile(final MethodVisitor mv) {
-
-			e1.compile(mv);
-			e2.compile(mv);
-			Label iftrue = new Label();
-			Label end = new Label();
-			mv.visitJumpInsn(IF_ICMPLT, iftrue);
-			// case where e1 <= e2 : pushes false and jump to "end"
-			mv.visitInsn(ICONST_0);
-			mv.visitJumpInsn(GOTO, end);
-			// case where e1 > e2 : pushes true
-			mv.visitLabel(iftrue);
-			mv.visitInsn(ICONST_1);
-			mv.visitLabel(end);
+			resolveOperator(e1.getExprType()).lt(mv, e1, e2);
 		}
 
 		@Override
@@ -513,21 +469,7 @@ public class Compiler {
 		}
 
 		public void compile(final MethodVisitor mv) {
-			// compiles e1, e2, and adds the instructions to compare the two
-			// values
-
-			e1.compile(mv);
-			e2.compile(mv);
-			Label iftrue = new Label();
-			Label end = new Label();
-			mv.visitJumpInsn(IF_ICMPLE, iftrue);
-			// case where e1 <= e2 : pushes false and jump to "end"
-			mv.visitInsn(ICONST_0);
-			mv.visitJumpInsn(GOTO, end);
-			// case where e1 > e2 : pushes true
-			mv.visitLabel(iftrue);
-			mv.visitInsn(ICONST_1);
-			mv.visitLabel(end);
+			resolveOperator(e1.getExprType()).le(mv, e1, e2);
 		}
 
 		@Override
@@ -565,10 +507,7 @@ public class Compiler {
 		}
 
 		public void compile(final MethodVisitor mv) {
-			// compiles e1, e2, and adds an instruction to add the two values
-			e1.compile(mv);
-			e2.compile(mv);
-			mv.visitInsn(IADD);
+			resolveOperator(e1.getExprType()).add(mv, e1, e2);
 		}
 
 		@Override
@@ -588,10 +527,7 @@ public class Compiler {
 		}
 
 		public void compile(final MethodVisitor mv) {
-			// compiles e1, e2, and adds an instruction to add the two values
-			e1.compile(mv);
-			e2.compile(mv);
-			mv.visitInsn(ISUB);
+			resolveOperator(e1.getExprType()).sub(mv, e1, e2);
 		}
 
 		@Override
@@ -609,11 +545,7 @@ public class Compiler {
 		}
 
 		public void compile(final MethodVisitor mv) {
-			// compiles e1, e2, and adds an instruction to multiply the two
-			// values
-			e1.compile(mv);
-			e2.compile(mv);
-			mv.visitInsn(IMUL);
+			resolveOperator(e1.getExprType()).multi(mv, e1, e2);
 		}
 
 		@Override
@@ -628,11 +560,7 @@ public class Compiler {
 		}
 
 		public void compile(final MethodVisitor mv) {
-			// compiles e1, e2, and adds an instruction to multiply the two
-			// values
-			e1.compile(mv);
-			e2.compile(mv);
-			mv.visitInsn(IDIV);
+			resolveOperator(e1.getExprType()).div(mv, e1, e2);
 		}
 
 		@Override
@@ -647,11 +575,7 @@ public class Compiler {
 		}
 
 		public void compile(final MethodVisitor mv) {
-			// compiles e1, e2, and adds an instruction to multiply the two
-			// values
-			e1.compile(mv);
-			e2.compile(mv);
-			mv.visitInsn(IREM);
+			resolveOperator(e1.getExprType()).remainder(mv, e1, e2);
 		}
 
 		@Override
@@ -679,11 +603,7 @@ public class Compiler {
 		}
 
 		public void compile(final MethodVisitor mv) {
-			// compiles e1, e2, and adds an instruction to multiply the two
-			// values
-			e1.compile(mv);
-			mv.visitInsn(ICONST_1);
-			mv.visitInsn(IADD);
+			resolveOperator(e1.getExprType()).increment(mv, e1);
 		}
 
 		@Override
@@ -698,11 +618,7 @@ public class Compiler {
 		}
 
 		public void compile(final MethodVisitor mv) {
-			// compiles e1, e2, and adds an instruction to multiply the two
-			// values
-			e1.compile(mv);
-			mv.visitInsn(ICONST_1);
-			mv.visitInsn(ISUB);
+			resolveOperator(e1.getExprType()).decrement(mv, e1);
 		}
 
 		@Override
@@ -717,7 +633,7 @@ public class Compiler {
 		}
 
 		public void compile(final MethodVisitor mv) {
-			e1.compile(mv);
+			resolveOperator(e1.getExprType()).positive(mv, e1);
 		}
 
 		@Override
@@ -732,10 +648,7 @@ public class Compiler {
 		}
 
 		public void compile(final MethodVisitor mv) {
-			// compiles e1, e2, and adds an instruction to multiply the two
-			// values
-			e1.compile(mv);
-			mv.visitInsn(INEG);
+			resolveOperator(e1.getExprType()).negates(mv, e1);
 		}
 
 		@Override
@@ -971,6 +884,7 @@ public class Compiler {
 			return resolveType(e1.getExprType(), name);
 		}
 	}
+
 	// TODO Not realized MethodCall
 	class MethodCall extends Expression<Object> {
 		final Expr<Entity> e1;
@@ -1057,6 +971,7 @@ public class Compiler {
 			return sb.toString();
 		}
 	}
+
 	// TODO Not realized VarDefineField
 	class VarDefineField implements Opcodes, Statement {
 		final String typeName;
@@ -1073,7 +988,7 @@ public class Compiler {
 			// compiles e1, e2, and adds an instruction to multiply the two
 			// values
 			// mv.visitLdcInsn(value);
-			
+
 		}
 
 		@Override
