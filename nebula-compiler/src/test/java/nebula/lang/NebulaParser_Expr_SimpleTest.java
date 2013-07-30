@@ -26,7 +26,7 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 		 * Returns the byte code of an Expression class corresponding to this
 		 * expression.
 		 */
-		byte[] compile(final String name, final Expr<?> expr) {
+		byte[] compile(final String name, final Expr<?> expr,Context context) {
 			// class header
 			ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 			cw.visit(V1_1, ACC_PUBLIC, name, null, "java/lang/Object", new String[] { ExpressionForSimpleTest.class.getName()
@@ -42,7 +42,7 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 
 			// eval method
 			mv = cw.visitMethod(ACC_PUBLIC, "eval", "(II)I", null, null);
-			expr.compile(mv);
+			expr.compile(mv, context);
 			mv.visitInsn(IRETURN);
 			// max stack and max locals automatically computed
 			mv.visitMaxs(0, 0);
@@ -51,9 +51,9 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 			return cw.toByteArray();
 		}
 
-		protected int compute(Expr<?> exp) {
+		protected int compute(Expr<?> exp,Context context) {
 			try {
-				byte[] b = this.compile("Example", exp);
+				byte[] b = this.compile("Example", exp,context);
 				FileOutputStream fos = new FileOutputStream("tmp\\Example.class");
 				fos.write(b);
 				fos.close();
@@ -77,7 +77,13 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 
 	private int compute(Expr<?> expr) {
 		Complier complier = new Complier();
-		return complier.compute(expr);
+		return complier.compute(expr,new Context() {
+			
+			@Override
+			public Type resolveType(String name) {
+				return compiler.findType(name);
+			}
+		});
 	}
 
 	private void eqValue(String exprText, boolean result) {
@@ -114,7 +120,9 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 		NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(exprText));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		NebulaParser parser = new NebulaParser(tokens, compiler);
-
+		parser.pushLocal("a", (Type)null);
+		parser.pushLocal("b", (Type)null);
+		parser.pushLocal("n", (Type)null);
 		return parser.expression();
 	}
 

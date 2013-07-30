@@ -15,7 +15,8 @@ options {
 	
   import static nebula.lang.Reference.*;  
   import static nebula.lang.Modifier.*;
-  import com.google.common.base.Function;
+  
+import nebula.lang.Compiler.VarRefer;
 	
 }
 @lexer::header{
@@ -29,11 +30,12 @@ options {
     Map<Field, Expr> derivedFields = new HashMap<Field, Expr>();
     Map<Field, Statement> actionFields = new HashMap<Field, Statement>();
   
-    Compiler op = new Compiler(new Function<String, Type>() {
+    Compiler op = new Compiler(new Context() {
+    
       @Override
-	    public Type apply(String input) {
-	      return resolveType(input);
-	    }
+      public Type resolveType(String name) {
+              return NebulaParser.this.resolveType(name);
+      }
     });
 
     InheritHashMap attrsBuffer = new InheritHashMap();
@@ -111,6 +113,40 @@ options {
     }
     System.out.print(str);
   }
+  
+  protected void enterMethod(Type type, String name) {
+    locals.clear();
+    pushLocal("nop", (Type)null);
+    pushLocal("this", type);
+    pushLocal("repos", "Type");
+  };
+
+  protected void exitMethod() {
+    locals.clear();
+  };
+
+  private Map<String, Var> locals = new HashMap<String, Var>();
+  protected int maxLocals = 0;
+
+  protected void initLocals() {
+    locals.clear();
+  }
+
+      protected Var pushLocal(String name, String typeName) {
+        Var var = new Var(name, resolveType(typeName),locals.size());
+        locals.put(var.name, var);
+        return var;
+      }
+      protected Var pushLocal(String name, Type type) {
+          Var var = new Var(name, type, locals.size());
+          locals.put(var.name, var);
+          return var;
+        }
+
+  protected Var v(String name) {
+    Var var = locals.get(name);
+    return var;
+  };
 }
 
 programDefinition returns[List<Type> retTypes]
@@ -216,10 +252,10 @@ fieldDefinition[Type resideType] returns[Field field]
         )
         
         /* Default value */
-        (':=' defaultExpr=expression      {   field.modifiers |=DefaultValue;   derivedFields.put(field, defaultExpr); })?
+        (':=' { enterMethod(currentType,"");} defaultExpr=expression  { exitMethod();}    {   field.modifiers |=DefaultValue;   derivedFields.put(field, defaultExpr); })?
         
         /* Derived expr */
-        ('=' derivedExpr=expression     {   field.modifiers |=Derived;            derivedFields.put(field, derivedExpr); } )?
+        ('='  { enterMethod(currentType,"");} derivedExpr=expression  { exitMethod();}    {   field.modifiers |=Derived;            derivedFields.put(field, derivedExpr); } )?
         
           (';' NEWLINE?| NEWLINE)
 
@@ -356,7 +392,11 @@ statement returns [Statement s]:
   ;
   
 varDeclaration returns [Statement s]:
-  type=ID name=ID ('=' from=expression)? (';' (NEWLINE)?|NEWLINE) {if(from!=null) s=op.stVarDefine($type.text,$name.text,from);else s=op.stVarDefine($type.text,$name.text,null);}
+  type=ID name=ID ('=' from=expression)? (';' (NEWLINE)?|NEWLINE) 
+    {
+      Var var = pushLocal($name.text,$type.text);
+      if(from!=null) s=op.stPutVar(var,from);      
+    }
   ;
 
 exprStatement returns [Statement s]
@@ -440,9 +480,10 @@ postfixExpr returns [Expr v]
     ;
 
 primaryExpr returns [Expr v]
-  :  a=constExpr  {v=a;} 
-  | 'this'{v=op.opThis();}
-  | ID  {v=op.opVar($ID.text);} 
+  :  c=constExpr  {v=c;} 
+  | 'this' {v=op.opLocal(v("this"));}  // this
+ // | ('$' ID  {v=op.opType($ID.text);})     //  实体对象
+  | ID  {v=op.opLocal(v($ID.text));}         // 
   | '(' expr=expression ')'   {v = expr;}
 ;
 

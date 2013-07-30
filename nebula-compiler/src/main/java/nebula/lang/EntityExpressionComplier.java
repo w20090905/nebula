@@ -20,7 +20,7 @@ public class EntityExpressionComplier extends ClassLoader implements Opcodes {
 	 * Returns the byte code of an Expression class corresponding to this
 	 * expression.
 	 */
-	<T> byte[]  doCompile(final String name, final Expr<T> expr) {
+	<T> byte[]  doCompile(final String name, final Expr<T> expr,Context context) {
 		String actualClass = null;
 
 		Class<?> cls = expr.getClass();
@@ -99,9 +99,9 @@ public class EntityExpressionComplier extends ClassLoader implements Opcodes {
 			mv = cw.visitMethod(ACC_PUBLIC + ACC_BRIDGE + ACC_SYNTHETIC, "eval",
 					"(Lnebula/data/Entity;)Ljava/lang/Object;", null, null);
 			
-			expr.compile(mv);
+			expr.compile(mv, context);
 			
-			switch (expr.getExprType().rawType) {
+			switch (expr.getExprType(context).rawType) {
 			case Boolean:
 				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");	
 				break;
@@ -123,10 +123,10 @@ public class EntityExpressionComplier extends ClassLoader implements Opcodes {
 
 	static long count = 0;
 
-	public <T> EntityExpression compile(Expr<T> exp, Type type) {
+	public <T> EntityExpression compile(Expr<T> exp, Type type,Context context) {
 		String name = "EntityExpression" + String.valueOf(count++);
 		try {
-			byte[] b = this.doCompile(name, exp);
+			byte[] b = this.doCompile(name, exp,context);
 			if (log.isDebugEnabled()) {
 				try {
 					FileOutputStream fos = new FileOutputStream("tmp\\" + name + ".class");

@@ -48,7 +48,9 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 
 			parser.currentType = type;
 
+			parser.enterMethod(type, text);
 			field = parser.fieldDefinition(type);
+			parser.exitMethod();
 			parser.exitTopType();
 
 			return field;

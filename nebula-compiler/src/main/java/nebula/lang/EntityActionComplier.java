@@ -17,7 +17,7 @@ public class EntityActionComplier extends ClassLoader implements Opcodes {
 	 * Returns the byte code of an Expression class corresponding to this
 	 * expression.
 	 */
-	<T> byte[] doCompile(final String name, final Code code) {
+	<T> byte[] doCompile(final String name, final Code code,Context context) {
 
 		// class header
 		ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
@@ -40,7 +40,7 @@ public class EntityActionComplier extends ClassLoader implements Opcodes {
 		// method
 		{
 			mv = cw.visitMethod(ACC_PUBLIC, "exec", "(Lnebula/data/Entity;Lnebula/data/DataRepos;)V", null, null);
-			code.compile(mv);
+			code.compile(mv, context);
 			mv.visitInsn(RETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
@@ -52,10 +52,10 @@ public class EntityActionComplier extends ClassLoader implements Opcodes {
 
 	static long count = 0;
 
-	public EntityAction compile(Code code, Type type) {
+	public EntityAction compile(Code code, Type type,Context context) {
 		String name = "EntityExpression" + String.valueOf(count++);
 		try {
-			byte[] b = this.doCompile(name, code);
+			byte[] b = this.doCompile(name, code,context);
 			if (log.isDebugEnabled()) {
 				try {
 					FileOutputStream fos = new FileOutputStream("tmp\\" + name + ".class");

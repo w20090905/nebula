@@ -22,7 +22,13 @@ public class NebulaParser_Expr_EntityTest extends TestCase {
 	@SuppressWarnings("unchecked")
 	private <T> T compute(Expr<T> expr, Entity entity) {
 		EntityExpressionComplier complier = new EntityExpressionComplier();
-		return (T) complier.compile(expr, null).eval(entity);
+		return (T) complier.compile(expr, null,new Context() {
+			
+			@Override
+			public Type resolveType(String name) {
+				return compiler.findType(name);
+			}
+		}).eval(entity);
 	}
 
 	private void eqValue(String exprText, Object result) {
@@ -65,11 +71,12 @@ public class NebulaParser_Expr_EntityTest extends TestCase {
 
 		parser.currentType = type;
 
+		parser.enterMethod(type, "");
 		return parser.expression();
 	}
 
 	public void testTypeDefinition() {
-		eqExpr("age", "age");
+		eqExpr("this.Age", "this.Age");
 		//
 	}
 
