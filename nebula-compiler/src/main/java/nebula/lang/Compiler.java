@@ -101,16 +101,51 @@ public class Compiler {
 		return new LessThanOrEqualTo<V>(e1, e2);
 	}
 
-	public void enterMethod() {
-
-	}
-
-	public void exitMethod() {
-
-	}
 
 	public Expr<Object> opAdd(Expr<Object> e1, Expr<Object> e2) {
 		return new Add(e1, e2);
+	}
+
+	public Expr<Object> range(Expr<Object> from, Expr<Object> to) {
+		if (from == null) {
+			return new Range_0_To(to);
+		} else if (to == null) {
+			return new Range_From_(from);
+		} else {
+			return new Range(from, to);
+		}
+	}
+
+	public Expr<Object> index(Expr<Object> from) {
+		return new Index(from);
+	}
+
+	public Expr<Object> entities(Expr<Object> repos,String string) {
+		return new DatastoreGet(repos, string);
+	}
+
+	public Expr<Object> list(Expr<Object> list, List<Expr<Object>> ranges) {
+		if (ranges.size() == 1) {
+			return new ListGet(list, ranges.get(0));
+		} else {
+			return new ListRanges(list, ranges);
+		}
+	}
+
+	public Expr<Object> list(Expr<Object> list, Expr<Object> clause) {
+		// Lists.
+		return null;
+		// TODO
+	}
+
+	public Expr<Object> opUnit(Expr<Object> v, String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Expr<Object> opFieldInList(String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public Expr<Object> opSub(Expr<Object> e1, Expr<Object> e2) {
@@ -836,6 +871,8 @@ public class Compiler {
 		}
 
 		public void compile(final MethodVisitor mv, Context context) {
+			e1.compile(mv, context);
+			mv.visitLdcInsn(this.name);
 			switch (this.getExprType(context).rawType) {
 			case Long:
 				compileInteger(mv);
@@ -846,19 +883,16 @@ public class Compiler {
 			default:
 				break;
 			}
+			
 		}
 
 		public void compileInteger(final MethodVisitor mv) {
-			mv.visitVarInsn(ALOAD, 1);
-			mv.visitLdcInsn(this.name);
 			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "get", "(Ljava/lang/String;)Ljava/lang/Object;");
 			mv.visitTypeInsn(CHECKCAST, "java/lang/Integer");
 			mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Integer", "intValue", "()I");
 		}
 
 		public void compileString(final MethodVisitor mv) {
-			mv.visitVarInsn(ALOAD, 1);
-			mv.visitLdcInsn(this.name);
 			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "get", "(Ljava/lang/String;)Ljava/lang/Object;");
 			mv.visitTypeInsn(CHECKCAST, "java/lang/String");
 		}
@@ -941,7 +975,33 @@ public class Compiler {
 
 		@Override
 		public void compile(MethodVisitor mv, Context context) {
-			// TODO
+			mv.visitVarInsn(ALOAD, 2);
+			mv.visitLdcInsn(org.objectweb.asm.Type.getType("Ljava/lang/String;"));
+			mv.visitLdcInsn(org.objectweb.asm.Type.getType("Lnebula/data/Entity;"));
+			mv.visitLdcInsn(name);
+			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/DataRepos", "define", "(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)Lnebula/data/Broker;");
+			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Broker", "get", "()Ljava/lang/Object;");
+			mv.visitTypeInsn(CHECKCAST, "nebula/data/DataStore");
+
+			//
+			//
+			// mv.visitVarInsn(ALOAD, 3);
+			// mv.visitLdcInsn("wangshilian");
+			// mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/DataStore",
+			// "get", "(Ljava/lang/Object;)Lnebula/data/Timable;");
+			// mv.visitTypeInsn(CHECKCAST, "nebula/data/Entity");
+			// mv.visitVarInsn(ASTORE, 4);
+			//
+			//
+			// mv.visitVarInsn(ALOAD, 1);
+			// mv.visitLdcInsn("Age");
+			// mv.visitVarInsn(ALOAD, 4);
+			// mv.visitLdcInsn("Age");
+			// mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "get",
+			// "(Ljava/lang/String;)Ljava/lang/Object;");
+			// mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "put",
+			// "(Ljava/lang/String;Ljava/lang/Object;)V");
+
 		}
 
 		@Override
@@ -952,6 +1012,154 @@ public class Compiler {
 		@Override
 		public String toString() {
 			return "$" + name;
+		}
+	}
+
+	static class Index extends Expression<Object> {
+		final Expr<Object> index;
+
+		Index(final Expr<Object> index) {
+			this.index = index;
+		}
+
+		@Override
+		public Type getExprType(Context context) {
+			return this.index.getExprType(context);
+		}
+
+		@Override
+		public void compile(MethodVisitor mv, Context context) {
+			index.compile(mv, context);
+		}
+	}
+
+	static class Range_0_To extends Expression<Object> {
+		final Expr<Object> to;
+
+		Range_0_To(final Expr<Object> index) {
+			this.to = index;
+		}
+
+		@Override
+		public Type getExprType(Context context) {
+			return this.to.getExprType(context);
+		}
+
+		@Override
+		public void compile(MethodVisitor mv, Context context) {
+			to.compile(mv, context);
+		}
+	}
+
+	static class Range_From_ extends Expression<Object> {
+		final Expr<Object> from;
+
+		Range_From_(final Expr<Object> index) {
+			this.from = index;
+		}
+
+		@Override
+		public Type getExprType(Context context) {
+			return this.from.getExprType(context);
+		}
+
+		@Override
+		public void compile(MethodVisitor mv, Context context) {
+			from.compile(mv, context);
+		}
+	}
+
+	static class Range extends Expression<Object> {
+		final Expr<Object> from;
+		final Expr<Object> to;
+
+		Range(final Expr<Object> from, final Expr<Object> to) {
+			this.from = from;
+			this.to = to;
+		}
+
+		@Override
+		public Type getExprType(Context context) {
+			if (from != null) return this.from.getExprType(context);
+			else return this.to.getExprType(context);
+		}
+
+		@Override
+		public void compile(MethodVisitor mv, Context context) {
+			from.compile(mv, context);
+			to.compile(mv, context);
+		}
+	}
+
+	static class ListGet extends Expression<Object> {
+		final Expr<Object> list;
+		final Expr<Object> index;
+
+		ListGet(final Expr<Object> list, final Expr<Object> index) {
+			this.list = list;
+			this.index = index;
+		}
+
+		@Override
+		public Type getExprType(Context context) {
+			return list.getExprType(context);
+		}
+
+		@Override
+		public void compile(MethodVisitor mv, Context context) {
+			list.compile(mv, context);
+			mv.visitTypeInsn(CHECKCAST, "java/util/List");
+			index.compile(mv, context);
+			mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "get", "(I)Ljava/lang/Object;");
+			 mv.visitTypeInsn(CHECKCAST, "nebula/data/Entity");
+//			 mv.visitInsn(POP);
+		}
+	}
+
+	static class DatastoreGet extends Expression<Object> {
+		final Expr<Object> repos;
+		final String name;
+
+		DatastoreGet(final Expr<Object> repos, final String name) {
+			this.repos = repos;
+			this.name = name;
+		}
+
+		@Override
+		public Type getExprType(Context context) {
+			return context.resolveType(name);
+		}
+
+		@Override
+		public void compile(MethodVisitor mv, Context context) {
+			repos.compile(mv, context);
+			mv.visitLdcInsn(org.objectweb.asm.Type.getType("Ljava/lang/String;"));
+			mv.visitLdcInsn(org.objectweb.asm.Type.getType("Lnebula/data/Entity;"));
+			mv.visitLdcInsn(name);
+			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/DataRepos", "define", "(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)Lnebula/data/Broker;");
+			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Broker", "get", "()Ljava/lang/Object;");
+			mv.visitTypeInsn(CHECKCAST, "nebula/data/DataStore");
+			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/DataStore", "listAll", "()Ljava/util/List;");
+		}
+	}
+
+	static class ListRanges extends Expression<Object> {
+		final Expr<Object> list;
+		final List<Expr<Object>> ranges;
+
+		ListRanges(final Expr<Object> list, final List<Expr<Object>> ranges) {
+			this.list = list;
+			this.ranges = ranges;
+		}
+
+		@Override
+		public Type getExprType(Context context) {
+			return new ListType(list.getExprType(context));
+		}
+
+		@Override
+		public void compile(MethodVisitor mv, Context context) {
+			// TODO
 		}
 	}
 
@@ -1062,8 +1270,10 @@ public class Compiler {
 			}
 		}
 
+
+		 
 		public void compile(final MethodVisitor mv, Context context) {
-			mv.visitVarInsn(ALOAD, 1);
+			parent.compile(mv, context);
 			mv.visitLdcInsn(this.name);
 			value.compile(mv, context);
 			toObject(mv, value, context);
@@ -1105,4 +1315,5 @@ public class Compiler {
 			return value.toString() + ";";
 		}
 	}
+
 }

@@ -26,11 +26,10 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 		 * Returns the byte code of an Expression class corresponding to this
 		 * expression.
 		 */
-		byte[] compile(final String name, final Expr<?> expr,Context context) {
+		byte[] compile(final String name, final Expr<?> expr, Context context) {
 			// class header
 			ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
-			cw.visit(V1_1, ACC_PUBLIC, name, null, "java/lang/Object", new String[] { ExpressionForSimpleTest.class.getName()
-					.replace('.', '/') });
+			cw.visit(V1_1, ACC_PUBLIC, name, null, "java/lang/Object", new String[] { ExpressionForSimpleTest.class.getName().replace('.', '/') });
 
 			// default public constructor
 			MethodVisitor mv = cw.visitMethod(ACC_PUBLIC, "<init>", "()V", null, null);
@@ -51,9 +50,9 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 			return cw.toByteArray();
 		}
 
-		protected int compute(Expr<?> exp,Context context) {
+		protected int compute(Expr<?> exp, Context context) {
 			try {
-				byte[] b = this.compile("Example", exp,context);
+				byte[] b = this.compile("Example", exp, context);
 				FileOutputStream fos = new FileOutputStream("tmp\\Example.class");
 				fos.write(b);
 				fos.close();
@@ -77,8 +76,8 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 
 	private int compute(Expr<?> expr) {
 		Complier complier = new Complier();
-		return complier.compute(expr,new Context() {
-			
+		return complier.compute(expr, new Context() {
+
 			@Override
 			public Type resolveType(String name) {
 				return compiler.findType(name);
@@ -120,9 +119,9 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 		NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(exprText));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		NebulaParser parser = new NebulaParser(tokens, compiler);
-		parser.pushLocal("a", (Type)null);
-		parser.pushLocal("b", (Type)null);
-		parser.pushLocal("n", (Type)null);
+		parser.pushLocal("a", (Type) null);
+		parser.pushLocal("b", (Type) null);
+		parser.pushLocal("n", (Type) null);
 		return parser.expression();
 	}
 
@@ -153,6 +152,17 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 		eqExpr("not(a==b)", "(!(a == b))");
 
 		eqExpr(" a >=10 && n==1 or a!= !b ", "(((a >= 10) && (n == 1)) || (a != (!b)))");
+
+		try {
+			parse("$Person[12]");
+			parse("$Person[12,34234,33..33,22..]");
+			parse("$Person[a==10 && b==2]");
+			parse("$Person[a==10 && b==2]");
+		} catch (RecognitionException e) {
+			throw new RuntimeException(e);
+		}
+
+		// eqExpr("$Person[a==10 && b==2]","");
 		//
 	}
 

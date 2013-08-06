@@ -2,6 +2,7 @@ grammar Nebula;
 
 options {
   language = Java;
+  backtrack=true;
 }
 
 @header {
@@ -482,10 +483,78 @@ postfixExpr returns [Expr v]
 primaryExpr returns [Expr v]
   :  c=constExpr  {v=c;} 
   | 'this' {v=op.opLocal(v("this"));}  // this
- // | ('$' ID  {v=op.opType($ID.text);})     //  实体对象
+  | '$' list=datalistexpr   {v=list;}    //  实体对象
   | ID  {v=op.opLocal(v($ID.text));}         // 
   | '(' expr=expression ')'   {v = expr;}
 ;
+
+datalistexpr returns [Expr v] 
+  @init{List<Expr<Object>> ranges = new ArrayList<Expr<Object>>();} 
+  :
+  typename=ID { v=op.entities(op.opLocal(v("repos")),$typename.text); } '[' (
+    (decimal{v=op.opDecimalCst($decimal.text);} | INT{v=op.opIntegerCst($INT.text);}) unit=ID{v=op.opUnit(v,$unit.text);}
+    | clause=clauseOr { v=op.list(v,clause);}
+    | range=singleRange{ranges.add(range);}  (',' range=singleRange{ranges.add(range);})* { v=op.list(v,ranges);}
+  ) ']'
+;
+
+multiRange  returns [List<Expr<Object>> ranges]
+@init{ranges = new ArrayList<Expr<Object>>();}:
+  range=singleRange{ranges.add(range);}  (',' range=singleRange{ranges.add(range);})* 
+;
+
+singleRange returns [Expr v]:
+    (r='..' to=additiveExpr
+    | from=additiveExpr (r='..' to=additiveExpr? )?)
+    {
+        if($r!=null){// Range
+            v=op.range(from,to);
+        } else {//Single
+            v=op.index(from);          
+        }    
+    }
+;
+
+clauseOr returns [Expr v]
+  :
+a=clauseAnd {v = a;}
+        (
+          (  '||' |   'or') 
+          b=clauseAnd {v=op.opOr(v,b);}
+        )*
+    ;
+
+clauseAnd returns [Expr v]
+  :
+     a=clausePrimary {v = a;}
+       (
+          ( '&&' | 'and') 
+          b=clausePrimary   {v=op.opAnd(v,b);}
+      )*
+    ;
+
+clausePrimary  returns [Expr v] options  {k=1;}
+  :
+    s=scalar{v = s;}
+    | c=clauseRelationalExpr {v = c;}
+    ;
+   
+clauseRelationalExpr  returns [Expr v] options {backtrack=true;}
+    :   ID{v=op.opFieldInList($ID.text);}
+        (   
+          '==' b=additiveExpr  {v=op.opEqualTo(v,b);}
+        |  '!=' b=additiveExpr  {v=op.opNotEqualTo(v,b);}
+        | '>=' b=additiveExpr  {v=op.opGreaterThanOrEqualTo(v,b);}
+        |   '>' c=additiveExpr  {v=op.opGreaterThan(v,c);}
+        | '<=' c=additiveExpr  {v=op.opLessThanOrEqualTo(v,c);}
+        |   '<' c=additiveExpr  {v=op.opLessThan(v,c);}
+        )
+    ;
+
+scalar returns [Expr v] options {k=1;}
+  :
+  (decimal{v=op.opDecimalCst($decimal.text);} | INT{v=op.opIntegerCst($INT.text);}) unit=ID{v=op.opUnit(v,$unit.text);};
+
 
 constExpr returns [Expr v]
     : string=stringLiteral {v=op.opStringCst(string);}

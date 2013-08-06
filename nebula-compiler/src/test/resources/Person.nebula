@@ -2,6 +2,7 @@ type Person {
 	!Name				Text;
 	*Company				//dd
 	Birthday				;/*Age = Today.year - BirthdayDay.year;*/
+	Age;
 	?Roles1[]				Text;	
 	Roles2[1..]				Text;
 	Roles3[..5]				Text;	

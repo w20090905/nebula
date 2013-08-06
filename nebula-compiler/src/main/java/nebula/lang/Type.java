@@ -109,6 +109,9 @@ public class Type implements Timable {
 		this.nameAlias = new Aliases(name);
 	}
 
+	public boolean isArray(){
+		return false;
+	}
 	public String getName() {
 		return name;
 	}
