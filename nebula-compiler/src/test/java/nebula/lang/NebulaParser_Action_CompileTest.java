@@ -1,5 +1,6 @@
 package nebula.lang;
 
+import static nebula.lang.Reference.ByVal;
 import junit.framework.TestCase;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
@@ -68,8 +69,22 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 			return null;
 		}
 	}
+	
+	private Type parseType(String text) {
+		try {
+			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			NebulaParser parser = new NebulaParser(tokens, typeLoader);
+			Type type = parser.typeDefinition();
 
-	public void testTypeDefinition() {
+			return type;
+		} catch (RecognitionException e) {
+			fail(e.toString());
+			return null;
+		}
+	}
+	
+	public void testBasic() {
 		data = new EditableEntity();
 		String Name = "wangshilian";
 		data.put("Name", Name);
@@ -102,4 +117,33 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 
 		eqValue("Height", (Long)person.get("Age") + 10, "Test(){this.Height = $Person[0].Age + 10;};");
 	}
+	
+	
+	public void testTypeDefinition() {
+		//@formatter:off
+			String text = "" +
+					"type Order { " +
+					"	!ID;" +
+					"	Person\n" +
+					"   Age;" +
+					"   Complete(){" +
+					"		this.Age=1;" +
+					"	};" +
+					"};";
+			//@formatter:on	
+
+		Type type = parseType(text);
+
+		assertEquals("Order", type.name);
+
+		assertEquals(3, type.fields.size());
+	
+
+		assertEquals(1, type.actions.size());
+		
+		int i=0;
+		assertEquals("Complete",type.actions.get(i).name);
+		assertNotNull(type.actions.get(i).code);
+	}
+
 }

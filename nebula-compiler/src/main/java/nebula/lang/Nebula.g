@@ -234,7 +234,7 @@ fieldDefinition[Type resideType] returns[Field field]
           }       
                 
         /* Actions */
-        ( '()' action=block {actionFields.put(field, action);} )?
+        ( '()' { enterMethod(currentType,"");} action=block { exitMethod();} {actionFields.put(field, action);} )?
         /* Array? */
         range=arrayDefinition
         
