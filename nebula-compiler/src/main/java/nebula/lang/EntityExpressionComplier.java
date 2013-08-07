@@ -106,7 +106,7 @@ public class EntityExpressionComplier extends ClassLoader implements Opcodes {
 				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");	
 				break;
 			case Long:
-				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;");			
+				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Long", "valueOf", "(J)Ljava/lang/Long;");			
 				break;				
 			default:
 				break;

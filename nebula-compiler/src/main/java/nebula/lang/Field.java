@@ -115,9 +115,12 @@ public class Field {
 	public boolean isDerived() {
 		return Modifier.isDerived(modifiers);
 	}
+	public boolean isDefaultValue() {
+		return Modifier.isDefaultValue(modifiers);
+	}
 
 	public EntityExpression getDerivedExpr() {
-		return (EntityExpression) code;
+		return expr;
 	}
 
 

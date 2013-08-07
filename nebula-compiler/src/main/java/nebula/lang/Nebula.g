@@ -351,7 +351,7 @@ annotationItemDefinition[InheritHashMap annotations]
 constValueDefinition returns [Object v]
     : string=stringLiteral {v=string;}
       | decimal {v=new BigDecimal($decimal.text);}
-      | INT {v=new Integer($INT.text);}  
+      | INT {v=new Long($INT.text);}  
     ;
     
 decimal
@@ -492,7 +492,7 @@ datalistexpr returns [Expr v]
   @init{List<Expr<Object>> ranges = new ArrayList<Expr<Object>>();} 
   :
   typename=ID { v=op.entities(op.opLocal(v("repos")),$typename.text); } '[' (
-    (decimal{v=op.opDecimalCst($decimal.text);} | INT{v=op.opIntegerCst($INT.text);}) unit=ID{v=op.opUnit(v,$unit.text);}
+    (decimal{v=op.opDecimalCst($decimal.text);} | INT{v=op.opLongCst($INT.text);}) unit=ID{v=op.opUnit(v,$unit.text);}
     | clause=clauseOr { v=op.list(v,clause);}
     | range=singleRange{ranges.add(range);}  (',' range=singleRange{ranges.add(range);})* { v=op.list(v,ranges);}
   ) ']'
@@ -553,13 +553,13 @@ clauseRelationalExpr  returns [Expr v] options {backtrack=true;}
 
 scalar returns [Expr v] options {k=1;}
   :
-  (decimal{v=op.opDecimalCst($decimal.text);} | INT{v=op.opIntegerCst($INT.text);}) unit=ID{v=op.opUnit(v,$unit.text);};
+  (decimal{v=op.opDecimalCst($decimal.text);} | INT{v=op.opLongCst($INT.text);}) unit=ID{v=op.opUnit(v,$unit.text);};
 
 
 constExpr returns [Expr v]
     : string=stringLiteral {v=op.opStringCst(string);}
       | decimal {v=op.opDecimalCst($decimal.text);}
-      | INT {v=op.opIntegerCst($INT.text);}  
+      | INT {v=op.opLongCst($INT.text);}  
       | TimestampLiteral {v=op.opTimestampCst($TimestampLiteral.text);}  
       | DateTimeLiteral {v=op.opDatetimeCst($DateTimeLiteral.text);}  
       | DateLiteral {v=op.opDateCst($DateLiteral.text);}  

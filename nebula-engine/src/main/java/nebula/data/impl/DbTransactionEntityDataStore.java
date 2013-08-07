@@ -5,6 +5,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Lists;
+
 import nebula.data.Entity;
 import nebula.data.db.DbTxDataExecutor;
 import nebula.lang.Field;
@@ -18,10 +20,15 @@ class DbTransactionEntityDataStore extends EntityDataStore {
 	final IDGenerator idGenerator;
 	final String key;
 
+	final Field[] derivedFields;
+	final Field[] defaultOnSaveFields;
+
 	DbTransactionEntityDataStore(final DbDataRepos persistence, Type type, final DbTxDataExecutor exec) {
 		super(IdMakerBuilder.getIDReader(type), persistence, type);
 		this.db = exec;
 
+		List<Field> derivedFields = Lists.newCopyOnWriteArrayList();
+		List<Field> defaultOnSaveFields = Lists.newCopyOnWriteArrayList();
 		Field localKey = null;
 		for (Field f : type.getFields()) {
 			if (f.isKey()) {
@@ -30,8 +37,17 @@ class DbTransactionEntityDataStore extends EntityDataStore {
 					break;
 				}
 			}
+			if (f.isDerived()) {
+				derivedFields.add(f);
+			}
+			if (f.isDefaultValue()) {
+				defaultOnSaveFields.add(f);
+			}
 		}
 		key = checkNotNull(localKey).getName();
+
+		this.derivedFields = derivedFields.toArray(new Field[0]);
+		this.defaultOnSaveFields = defaultOnSaveFields.toArray(new Field[0]);
 
 		idGenerator = IDGenerators.build(type);
 		idGenerator.init(exec.getCurrentMaxID());
@@ -93,6 +109,9 @@ class DbTransactionEntityDataStore extends EntityDataStore {
 	private EntityImp loadin(EditableEntity entity) {
 		entity.put(Entity.PRIMARY_KEY, String.valueOf((Long) entity.get(key)));
 		DbEntity inner = new DbEntity(this, entity.newData, this.values.size());
+		for (Field f : derivedFields) {
+			entity.put(f.getName(), f.getDerivedExpr().eval(entity));
+		}
 		this.values.add(inner);
 		return inner;
 	}
@@ -100,6 +119,9 @@ class DbTransactionEntityDataStore extends EntityDataStore {
 	private EntityImp loadin(DbEntity sourceEntity, EditableEntity newEntity) {
 		newEntity.put(Entity.PRIMARY_KEY, String.valueOf((Long) newEntity.get(key)));
 		DbEntity inner = new DbEntity(this, newEntity.newData, sourceEntity.index);
+		for (Field f : derivedFields) {
+			newEntity.put(f.getName(), f.getDerivedExpr().eval(newEntity));
+		}
 		this.values.add(inner);
 		return inner;
 	}

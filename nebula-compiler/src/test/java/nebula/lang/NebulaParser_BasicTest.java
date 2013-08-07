@@ -189,7 +189,7 @@ public class NebulaParser_BasicTest extends TestCase {
 	}
 
 	public void testFieldDefinition_default() {
-		assertEquals(1014 * 1024, parseField("!MyAge Age := 1014 * 1024;").expr.eval(null));
+		assertEquals(1014L * 1024L, parseField("!MyAge Age := 1014 * 1024;").expr.eval(null));
 		assertEquals("test", parseField("!MyAge Age := \"test\";").expr.eval(null));
 		assertEquals("test", parseField("!Name := ```test``` ;").expr.eval(null));
 		
@@ -202,7 +202,7 @@ public class NebulaParser_BasicTest extends TestCase {
 
 	public void testFieldDefinition_derived() {
 		Entity e = new EditableEntity();
-		int Age = 15;
+		long Age = 15;
 		String name = "wangshilian";
 		e.put("Name", name);
 		e.put("Age", Age);
@@ -330,7 +330,7 @@ public class NebulaParser_BasicTest extends TestCase {
 	}
 
 	public void testConstExpr() {
-		assertEquals(1234, parseCst("1234").eval());
+		assertEquals(1234L, parseCst("1234").eval());
 		assertEquals(new BigDecimal("1.1"), parseCst("1.1").eval());
 		assertEquals("1.1", parseCst("\"1.1\"").eval());
 

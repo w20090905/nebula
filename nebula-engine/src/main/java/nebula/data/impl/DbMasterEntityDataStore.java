@@ -5,6 +5,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+
 import nebula.data.Entity;
 import nebula.data.db.DbDataExecutor;
 import nebula.lang.Field;
@@ -18,21 +21,38 @@ class DbMasterEntityDataStore extends EntityDataStore {
 	final IDGenerator idGenerator;
 	final String key;
 	boolean withID = false;
+	final Field[] derivedFields;
+	final Field[] defaultOnSaveFields;
 
 	DbMasterEntityDataStore(final DbDataRepos persistence, Type type, final DbDataExecutor exec) {
-		super(IdMakerBuilder.getIDReader(type), persistence, type);
+		this(IdMakerBuilder.getIDReader(type), persistence, type, exec);
+	}
+
+	DbMasterEntityDataStore(Function<Entity, Object> keyMaker, final DbDataRepos persistence, Type type, final DbDataExecutor exec) {
+		super(keyMaker, persistence, type);
 		this.db = exec;
+
+		List<Field> derivedFields = Lists.newCopyOnWriteArrayList();
+		List<Field> defaultOnSaveFields = Lists.newCopyOnWriteArrayList();
 
 		Field localKey = null;
 		for (Field f : type.getFields()) {
-			if (f.isKey()) {
+			if (localKey==null && f.isKey()) {
 				if (f.getType().getStandalone() == TypeStandalone.Basic) {
 					localKey = f;
-					break;
 				}
 			}
+			if (f.isDerived()) {
+				derivedFields.add(f);
+			}
+			if (f.isDefaultValue()) {
+				defaultOnSaveFields.add(f);
+			}
 		}
+
 		key = checkNotNull(localKey).getName();
+		this.derivedFields = derivedFields.toArray(new Field[0]);
+		this.defaultOnSaveFields = defaultOnSaveFields.toArray(new Field[0]);
 
 		if (localKey.getType().getName().equals("ID")) {
 			idGenerator = IDGenerators.build(type);
@@ -91,6 +111,10 @@ class DbMasterEntityDataStore extends EntityDataStore {
 			if (withID) {
 				Long id = idGenerator.nextValue();
 				newEntity.put(key, id);
+				
+				for (Field f : defaultOnSaveFields) {
+					newEntity.put(f.getName(), f.getDerivedExpr().eval(newEntity));
+				}
 
 				lock.lock();
 				// DB
@@ -130,6 +154,9 @@ class DbMasterEntityDataStore extends EntityDataStore {
 	private EntityImp loadin(EditableEntity entity) {
 		entity.put(Entity.PRIMARY_KEY, idMaker.apply(entity));
 		DbEntity inner = new DbEntity(this, entity.newData, this.values.size());
+		for (Field f : derivedFields) {
+			entity.put(f.getName(), f.getDerivedExpr().eval(entity));
+		}
 		this.values.add(inner);
 		return inner;
 	}
@@ -137,6 +164,9 @@ class DbMasterEntityDataStore extends EntityDataStore {
 	private EntityImp loadin(DbEntity sourceEntity, EditableEntity newEntity) {
 		newEntity.put(Entity.PRIMARY_KEY, sourceEntity.getID());
 		DbEntity inner = new DbEntity(this, newEntity.newData, sourceEntity.index);
+		for (Field f : derivedFields) {
+			newEntity.put(f.getName(), f.getDerivedExpr().eval(newEntity));
+		}
 		this.values.add(inner);
 		return inner;
 	}

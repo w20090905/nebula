@@ -34,7 +34,7 @@ package nebula.lang;
  *
  * @author Eric Bruneton
  */
-public interface ExpressionForSimpleTest {
+public interface ExpressionForSimpleTestBoolean {
 
     /**
      * Evaluates this expression.
@@ -43,5 +43,5 @@ public interface ExpressionForSimpleTest {
      * @param j the value of the second variable.
      * @return the value of this expression for the given variable values.
      */
-	long eval(long i, long j);
+	int eval(long i, long j);
 }

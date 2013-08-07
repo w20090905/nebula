@@ -40,7 +40,35 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 			mv.visitEnd();
 
 			// eval method
-			mv = cw.visitMethod(ACC_PUBLIC, "eval", "(II)I", null, null);
+			mv = cw.visitMethod(ACC_PUBLIC, "eval", "(JJ)J", null, null);
+			expr.compile(mv, context);
+			mv.visitInsn(LRETURN);
+			// max stack and max locals automatically computed
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+
+			return cw.toByteArray();
+		}
+
+		/*
+		 * Returns the byte code of an Expression class corresponding to this
+		 * expression.
+		 */
+		byte[] compileBoolean(final String name, final Expr<?> expr, Context context) {
+			// class header
+			ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+			cw.visit(V1_1, ACC_PUBLIC, name, null, "java/lang/Object", new String[] { ExpressionForSimpleTestBoolean.class.getName().replace('.', '/') });
+
+			// default public constructor
+			MethodVisitor mv = cw.visitMethod(ACC_PUBLIC, "<init>", "()V", null, null);
+			mv.visitVarInsn(ALOAD, 0);
+			mv.visitMethodInsn(INVOKESPECIAL, "java/lang/Object", "<init>", "()V");
+			mv.visitInsn(RETURN);
+			mv.visitMaxs(1, 1);
+			mv.visitEnd();
+
+			// eval method
+			mv = cw.visitMethod(ACC_PUBLIC, "eval", "(JJ)I", null, null);
 			expr.compile(mv, context);
 			mv.visitInsn(IRETURN);
 			// max stack and max locals automatically computed
@@ -50,7 +78,7 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 			return cw.toByteArray();
 		}
 
-		protected int compute(Expr<?> exp, Context context) {
+		protected Long compute(Expr<?> exp, Context context) {
 			try {
 				byte[] b = this.compile("Example", exp, context);
 				FileOutputStream fos = new FileOutputStream("tmp\\Example.class");
@@ -59,7 +87,30 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 				Class<?> expClass = this.defineClass("Example", b, 0, b.length);
 				// instantiates this compiled expression class...
 				ExpressionForSimpleTest iexp = (ExpressionForSimpleTest) expClass.newInstance();
-				return iexp.eval(0, 0);
+				return iexp.eval(0L, 0L);
+			} catch (FileNotFoundException e) {
+				throw new RuntimeException(e);
+			} catch (ClassFormatError e) {
+				throw new RuntimeException(e);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			} catch (InstantiationException e) {
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+		protected Integer computeBoolean(Expr<?> exp, Context context) {
+			try {
+				byte[] b = this.compileBoolean("Example", exp, context);
+				FileOutputStream fos = new FileOutputStream("tmp\\Example.class");
+				fos.write(b);
+				fos.close();
+				Class<?> expClass = this.defineClass("Example", b, 0, b.length);
+				// instantiates this compiled expression class...
+				ExpressionForSimpleTestBoolean iexp = (ExpressionForSimpleTestBoolean) expClass.newInstance();
+				return iexp.eval(0L, 0L);
 			} catch (FileNotFoundException e) {
 				throw new RuntimeException(e);
 			} catch (ClassFormatError e) {
@@ -74,9 +125,20 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 		}
 	}
 
-	private int compute(Expr<?> expr) {
+	private long compute(Expr<?> expr) {
 		Complier complier = new Complier();
 		return complier.compute(expr, new Context() {
+
+			@Override
+			public Type resolveType(String name) {
+				return compiler.findType(name);
+			}
+		});
+	}
+
+	private int computeBoolean(Expr<?> expr) {
+		Complier complier = new Complier();
+		return complier.computeBoolean(expr, new Context() {
 
 			@Override
 			public Type resolveType(String name) {
@@ -88,9 +150,9 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 	private void eqValue(String exprText, boolean result) {
 		try {
 			if (result) {
-				assertEquals(1, compute(parse(exprText)));
+				assertEquals(1, computeBoolean(parse(exprText)));
 			} else {
-				assertEquals(0, compute(parse(exprText)));
+				assertEquals(0, computeBoolean(parse(exprText)));
 			}
 		} catch (RecognitionException e) {
 			fail(e.toString());

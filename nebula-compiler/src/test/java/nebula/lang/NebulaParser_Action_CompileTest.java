@@ -74,19 +74,19 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 		String Name = "wangshilian";
 		data.put("Name", Name);
 
-		int Age = 10;
+		long Age = 10;
 		data.put("Age", Age);
-		int Height = 120;
+		long Height = 120;
 		data.put("Height", Height);
 
-		eqValue("Age", 30, "Test(){this.Age=30;};");
-		eqValue("Age", 30 * 10, "Test(){this.Age = this.Age * 10;};");
+		eqValue("Age", 30L, "Test(){this.Age=30;};");
+		eqValue("Age", 30L * 10L, "Test(){this.Age = this.Age * 10;};");
 		eqValue("Height", Height + Height / 10 - 1, "Test(){this.Height=this.Height +  this.Height / 10 - 1;};");
 	}
 	public void testTypeDefinition_Repos_1() {
 		EditableEntity person = new EditableEntity();
 		person.put("Name", "wangshilian");
-		person.put("Age", 10);
+		person.put("Age", 10L);
 		store.add(person);
 		store.flush();
 		
@@ -95,11 +95,11 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 		String Name = "wangshilian";
 		data.put("Name", Name);
 
-		int Age = 10;
+		long Age = 10;
 		data.put("Age", Age);
-		int Height = 120;
+		long Height = 120;
 		data.put("Height", Height);
 
-		eqValue("Height", (Integer)person.get("Age") + 10, "Test(){this.Height = $Person[0].Age + 10;};");
+		eqValue("Height", (Long)person.get("Age") + 10, "Test(){this.Height = $Person[0].Age + 10;};");
 	}
 }

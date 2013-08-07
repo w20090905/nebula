@@ -1,5 +1,9 @@
 package nebula.asm;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
@@ -80,5 +84,20 @@ public class EntityActionSampleDump implements Opcodes {
 		cw.visitEnd();
 
 		return cw.toByteArray();
+	}
+	
+	public static void main(String[] args) {
+		try {
+			byte[] bt = dump();
+			FileOutputStream fos = new FileOutputStream("tmp\\EntityActionSample.class");
+			fos.write(bt);
+			fos.close();
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

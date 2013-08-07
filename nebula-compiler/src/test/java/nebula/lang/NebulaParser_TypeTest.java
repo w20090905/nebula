@@ -47,7 +47,7 @@ public class NebulaParser_TypeTest extends TestCase {
 		assertEquals(TypeStandalone.Basic, type.standalone);
 
 		assertEquals(0, type.fields.size());
-		assertEquals(new Integer("120"), type.attrs.get("MaxLength"));
+		assertEquals(new Long("120"), type.attrs.get("MaxLength"));
 	}
 
 	public void test_Transaction_1() throws Exception {
@@ -110,11 +110,11 @@ public class NebulaParser_TypeTest extends TestCase {
 
 		assertEquals("Person", type.name);
 
-		assertEquals(8, type.fields.size());
+		assertEquals(9, type.fields.size());
 		int i = 0;
 		assertEquals("Name", type.fields.get(i).name);
 
-		i = 7;
+		i = 8;
 		assertEquals("Education", type.fields.get(i).name);
 		assertEquals("Person$Education", type.fields.get(i).type.name);
 		assertEquals(Inline, type.fields.get(i).refer);
@@ -338,10 +338,10 @@ public class NebulaParser_TypeTest extends TestCase {
 
 		i++;
 		assertEquals("WithCustomAttr", type.fields.get(i).name);
-		assertEquals(120, type.fields.get(i).attrs.get("MaxLength"));
+		assertEquals(120L, type.fields.get(i).attrs.get("MaxLength"));
 
 		assertEquals(4, type.attrs.size());
-		assertEquals(1, type.attrs.get("Length"));
+		assertEquals(1L, type.attrs.get("Length"));
 		assertEquals("dd", type.attrs.get("Match"));
 		assertEquals(new BigDecimal("3.8"), type.attrs.get("Max"));
 	}

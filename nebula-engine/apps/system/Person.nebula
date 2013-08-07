@@ -8,6 +8,7 @@ type Person|人员 {
 	Sex Attr;
 	?DateOfBirth Date;
 	?Age;
+          Age2 Age=this.Age + 10;
 	?Home{
 		Street Name;
 		Neighborhood String;

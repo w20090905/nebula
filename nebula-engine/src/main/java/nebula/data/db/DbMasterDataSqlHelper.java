@@ -24,26 +24,24 @@ public class DbMasterDataSqlHelper {
 
 	final EntityFieldSerializer entitySerializer;
 
-	private void addColumn(ArrayList<DatabaseColumn> list, String fieldName, String columnName, boolean array,
-			Field field, boolean key) {
+	private void addColumn(ArrayList<DatabaseColumn> list, String fieldName, String columnName, boolean array, Field field, boolean key) {
 		InheritHashMap attrs = field.getAttrs();
 		Object v;
 
 		RawTypes rawType = field.getType().getRawType();
 
 		v = attrs.get("MaxLength");
-		long size = v != null ? (Integer) v : 0;
+		long size = v != null ? (Long) v : 0;
 
 		v = attrs.get("Precision");
-		int precision = v != null ? (Integer) v : 0;
+		int precision = v != null ? ((Long) v).intValue() : 0;
 
 		v = attrs.get("Scale");
-		int scale = v != null ? (Integer) v : 0;
+		int scale = v != null ? ((Long) v).intValue() : 0;
 
 		boolean nullable = field.isNullable();
 
-		DatabaseColumn c = new DatabaseColumn(fieldName, columnName, key, nullable, array, rawType, size, precision,
-				scale);
+		DatabaseColumn c = new DatabaseColumn(fieldName, columnName, key, nullable, array, rawType, size, precision, scale);
 		list.add(c);
 	}
 
@@ -93,50 +91,41 @@ public class DbMasterDataSqlHelper {
 					switch (of.getRefer()) {
 					case ByVal: // Basic Type Field // Type A1
 						addColumn(listUserColumns, toF(of.getName()), toC(of.getName()), false, of, of.isKey());
-						fieldSerializer.add(new BasicTypeFieldSerializer(toF(of.getName()), toC(of.getName()), false,
-								of.getType().getRawType()));
+						fieldSerializer.add(new BasicTypeFieldSerializer(toF(of.getName()), toC(of.getName()), false, of.getType().getRawType()));
 						break;
 					case Inline: // inline object
 						subFieldSerializer = new ArrayList<DefaultFieldSerializer<?>>();
 						for (Field in1f : of.getType().getFields()) {
-							if (in1f.isDerived()) continue;// Skip when is Transient
-							
+							if (in1f.isDerived()) continue;// Skip when is
+															// Transient
+
 							if (!in1f.isArray()) {//
 								switch (in1f.getRefer()) {
 								case ByVal: // Type B1
-									addColumn(listUserColumns, toF(of.getName(), in1f.getName()),
-											toC(of.getName(), in1f.getName()), false, in1f, of.isKey() && in1f.isKey());
-									subFieldSerializer.add(new BasicTypeFieldSerializer(in1f.getName(), toC(
-											of.getName(), in1f.getName()), false, in1f.getType().getRawType()));
+									addColumn(listUserColumns, toF(of.getName(), in1f.getName()), toC(of.getName(), in1f.getName()), false, in1f, of.isKey()
+											&& in1f.isKey());
+									subFieldSerializer.add(new BasicTypeFieldSerializer(in1f.getName(), toC(of.getName(), in1f.getName()), false, in1f
+											.getType().getRawType()));
 									break;
 								case Inline: // Type B2
 									for (Field in2f : in1f.getType().getFields()) {
 										if (!in2f.isArray() && in2f.getRefer() == Reference.ByVal) { // Type
 																										// C1
-											addColumn(listUserColumns,
-													toF(of.getName(), in1f.getName() + in2f.getName()),
-													toC(of.getName(), in1f.getName() + in2f.getName()), false, in2f,
-													of.isKey() && in1f.isKey() && in2f.isKey());
-											subFieldSerializer.add(new BasicTypeFieldSerializer(in1f.getName()
-													+ in2f.getName(),
-													toC(of.getName(), in1f.getName() + in2f.getName()), false, in2f
-															.getType().getRawType()));
+											addColumn(listUserColumns, toF(of.getName(), in1f.getName() + in2f.getName()),
+													toC(of.getName(), in1f.getName() + in2f.getName()), false, in2f, of.isKey() && in1f.isKey() && in2f.isKey());
+											subFieldSerializer.add(new BasicTypeFieldSerializer(in1f.getName() + in2f.getName(), toC(of.getName(),
+													in1f.getName() + in2f.getName()), false, in2f.getType().getRawType()));
 										}
 									}
 									break;
 								case ByRef: // Type B3
 								case Cascade: // Type B4
 									for (Field in2f : in1f.getType().getFields()) {
-										if (!in2f.isArray() && in2f.getRefer() == Reference.ByVal
-												&& (in2f.isKey() || in2f.isCore())) {
-											addColumn(listUserColumns,
-													toF(of.getName(), in1f.getName() + in2f.getName()),
-													toC(of.getName(), in1f.getName() + in2f.getName()), false, in2f,
-													of.isKey() && in1f.isKey() && in2f.isKey());
-											subFieldSerializer.add(new BasicTypeFieldSerializer(in1f.getName()
-													+ in2f.getName(),
-													toC(of.getName(), in1f.getName() + in2f.getName()), false, in2f
-															.getType().getRawType()));
+										if (!in2f.isArray() && in2f.getRefer() == Reference.ByVal && (in2f.isKey() || in2f.isCore())) {
+											addColumn(listUserColumns, toF(of.getName(), in1f.getName() + in2f.getName()),
+													toC(of.getName(), in1f.getName() + in2f.getName()), false, in2f, of.isKey() && in1f.isKey() && in2f.isKey());
+											subFieldSerializer.add(new BasicTypeFieldSerializer(in1f.getName() + in2f.getName(), toC(of.getName(),
+													in1f.getName() + in2f.getName()), false, in2f.getType().getRawType()));
 										}
 									}
 									break;
@@ -144,10 +133,10 @@ public class DbMasterDataSqlHelper {
 							} else {
 								switch (in1f.getRefer()) {
 								case ByVal: // Type B5
-									addColumn(listUserColumns, toF(of.getName(), in1f.getName()),
-											toC(of.getName(), in1f.getName()), true, in1f, of.isKey() && in1f.isKey());
-									subFieldSerializer.add(new BasicTypeFieldSerializer(in1f.getName(), toC(
-											of.getName(), in1f.getName()), true, in1f.getType().getRawType()));
+									addColumn(listUserColumns, toF(of.getName(), in1f.getName()), toC(of.getName(), in1f.getName()), true, in1f, of.isKey()
+											&& in1f.isKey());
+									subFieldSerializer.add(new BasicTypeFieldSerializer(in1f.getName(), toC(of.getName(), in1f.getName()), true, in1f.getType()
+											.getRawType()));
 									break;
 								case Inline: // Type B6
 									ArrayList<ListTypeAdapter<?>> adapteres = new ArrayList<ListTypeAdapter<?>>();
@@ -156,38 +145,31 @@ public class DbMasterDataSqlHelper {
 									for (Field in2f : in1f.getType().getFields()) {
 										if (!in2f.isArray() && in2f.getRefer() == Reference.ByVal) { // Type
 																										// D1
-											addColumn(listUserColumns,
-													toF(of.getName() + in1f.getName(), in2f.getName()),
-													toC(of.getName() + in1f.getName(), in2f.getName()), true, in2f,
-													false);
+											addColumn(listUserColumns, toF(of.getName() + in1f.getName(), in2f.getName()),
+													toC(of.getName() + in1f.getName(), in2f.getName()), true, in2f, false);
 											adapteres.add(ListTypeAdapter.getAdapter(in2f.getType().getRawType()));
 											subFieldNames.add(in2f.getName());
 										}
 									}
 
-									subFieldSerializer.add(new EntityListFieldSerializer(in1f.getName(), adapteres,
-											subFieldNames));
+									subFieldSerializer.add(new EntityListFieldSerializer(in1f.getName(), adapteres, subFieldNames));
 									break;
 								case ByRef: // Type B7
 								case Cascade: // Type B8
-									throw new UnsupportedOperationException(
-											"Refer Object cannot has array,must user inline array");
+									throw new UnsupportedOperationException("Refer Object cannot has array,must user inline array");
 								}
 							}
 						}
-						fieldSerializer.add(new EntityFieldSerializer(toF(of.getName()), toC(of.getName()),
-								subFieldSerializer));
+						fieldSerializer.add(new EntityFieldSerializer(toF(of.getName()), toC(of.getName()), subFieldSerializer));
 						break;
 					case ByRef: // Type A3
 					case Cascade: // Type A4
 						for (Field in1f : of.getType().getFields()) {
-							if (!in1f.isArray() && in1f.getRefer() == Reference.ByVal
-									&& (in1f.isKey() || in1f.isCore())) {
-								addColumn(listUserColumns, toF(of.getName(), in1f.getName()),
-										toC(of.getName(), in1f.getName()), false, in1f, of.isKey() && in1f.isKey()
-												&& in1f.isKey());
-								fieldSerializer.add(new BasicTypeFieldSerializer(toF(of.getName(), in1f.getName()),
-										toC(of.getName(), in1f.getName()), false, in1f.getType().getRawType()));
+							if (!in1f.isArray() && in1f.getRefer() == Reference.ByVal && (in1f.isKey() || in1f.isCore())) {
+								addColumn(listUserColumns, toF(of.getName(), in1f.getName()), toC(of.getName(), in1f.getName()), false, in1f, of.isKey()
+										&& in1f.isKey() && in1f.isKey());
+								fieldSerializer.add(new BasicTypeFieldSerializer(toF(of.getName(), in1f.getName()), toC(of.getName(), in1f.getName()), false,
+										in1f.getType().getRawType()));
 							}
 						}
 						break;
@@ -196,8 +178,7 @@ public class DbMasterDataSqlHelper {
 					switch (of.getRefer()) {
 					case ByVal: // Basic Type Field // Type A5
 						addColumn(listUserColumns, toF(of.getName()), toC(of.getName()), true, of, of.isKey());
-						fieldSerializer.add(new BasicTypeFieldSerializer(toF(of.getName()), toC(of.getName()), true, of
-								.getType().getRawType()));
+						fieldSerializer.add(new BasicTypeFieldSerializer(toF(of.getName()), toC(of.getName()), true, of.getType().getRawType()));
 						break;
 					case Inline: // inline object // Type A6
 						List<ListTypeAdapter<?>> adapteres = new ArrayList<ListTypeAdapter<?>>();
@@ -207,18 +188,15 @@ public class DbMasterDataSqlHelper {
 							if (!in1f.isArray()) {
 								switch (in1f.getRefer()) {
 								case ByVal: // Type E1
-									addColumn(listUserColumns, toF(of.getName(), in1f.getName()),
-											toC(of.getName(), in1f.getName()), true, in1f, false);
+									addColumn(listUserColumns, toF(of.getName(), in1f.getName()), toC(of.getName(), in1f.getName()), true, in1f, false);
 									adapteres.add(ListTypeAdapter.getAdapter(in1f.getType().getRawType()));
 									subFieldNames.add(in1f.getName());
 									break;
 								case Inline:// Type E2
 									for (Field in2f : in1f.getType().getFields()) {
 										if (!in2f.isArray() && in2f.getRefer() == Reference.ByVal) {
-											addColumn(listUserColumns,
-													toF(of.getName(), in1f.getName() + in2f.getName()),
-													toC(of.getName(), in1f.getName() + in2f.getName()), true, in2f,
-													false);
+											addColumn(listUserColumns, toF(of.getName(), in1f.getName() + in2f.getName()),
+													toC(of.getName(), in1f.getName() + in2f.getName()), true, in2f, false);
 											adapteres.add(ListTypeAdapter.getAdapter(in2f.getType().getRawType()));
 											subFieldNames.add(in1f.getName() + in2f.getName());
 										}
@@ -227,12 +205,9 @@ public class DbMasterDataSqlHelper {
 								case ByRef:// Type E3
 								case Cascade:// Type E4
 									for (Field in2f : in1f.getType().getFields()) {
-										if (!in2f.isArray() && in2f.getRefer() == Reference.ByVal
-												&& (in2f.isKey() || in2f.isCore())) {
-											addColumn(listUserColumns,
-													toF(of.getName(), in1f.getName() + in2f.getName()),
-													toC(of.getName(), in1f.getName() + in2f.getName()), true, in2f,
-													false);
+										if (!in2f.isArray() && in2f.getRefer() == Reference.ByVal && (in2f.isKey() || in2f.isCore())) {
+											addColumn(listUserColumns, toF(of.getName(), in1f.getName() + in2f.getName()),
+													toC(of.getName(), in1f.getName() + in2f.getName()), true, in2f, false);
 											adapteres.add(ListTypeAdapter.getAdapter(in2f.getType().getRawType()));
 											subFieldNames.add(in1f.getName() + in2f.getName());
 										}
@@ -271,12 +246,10 @@ public class DbMasterDataSqlHelper {
 			}
 
 			ArrayList<DatabaseColumn> listSystemColumns = new ArrayList<DatabaseColumn>();
-			DatabaseColumn col = new DatabaseColumn("LastModified_", "TIMESTAMP_", false, false, false,
-					RawTypes.Timestamp, 0, 0, 0);
+			DatabaseColumn col = new DatabaseColumn("LastModified_", "TIMESTAMP_", false, false, false, RawTypes.Timestamp, 0, 0, 0);
 			listSystemColumns.add(col);
 
-			fieldSerializer.add(new SystemTypeFieldSerializer("LastModified_", "LastModified_", false,
-					RawTypes.Timestamp));
+			fieldSerializer.add(new SystemTypeFieldSerializer("LastModified_", "LastModified_", false, RawTypes.Timestamp));
 
 			this.entitySerializer = new EntityFieldSerializer(fieldSerializer);
 
@@ -321,8 +294,7 @@ public class DbMasterDataSqlHelper {
 
 		for (DatabaseColumn column : this.userColumns) {
 			if (column.key) {
-				sb.append(column.columnName).append(' ').append(config.toColumnDefine(column)).append(" NOT NULL")
-						.append(",");
+				sb.append(column.columnName).append(' ').append(config.toColumnDefine(column)).append(" NOT NULL").append(",");
 			} else {
 				sb.append(column.columnName).append(' ').append(config.toColumnDefine(column)).append(",");
 			}
@@ -345,8 +317,7 @@ public class DbMasterDataSqlHelper {
 	}
 
 	public String builderInsert() {
-		return "INSERT INTO  " + this.tableName + "(" + fieldlist_comma + ",TIMESTAMP_) values(" + fieldlist_questions
-				+ ",CURRENT_TIMESTAMP)";
+		return "INSERT INTO  " + this.tableName + "(" + fieldlist_comma + ",TIMESTAMP_) values(" + fieldlist_questions + ",CURRENT_TIMESTAMP)";
 
 	}
 
@@ -367,11 +338,9 @@ public class DbMasterDataSqlHelper {
 
 	public String builderAddColumn(DatabaseColumn column) {
 		if (column.key) {
-			return "ALTER TABLE " + this.tableName + " ADD COLUMN " + column.columnName + " "
-					+ config.toColumnDefine(column) + " NOT NULL";
+			return "ALTER TABLE " + this.tableName + " ADD COLUMN " + column.columnName + " " + config.toColumnDefine(column) + " NOT NULL";
 		} else {
-			return "ALTER TABLE " + this.tableName + " ADD COLUMN " + column.columnName + " "
-					+ config.toColumnDefine(column);
+			return "ALTER TABLE " + this.tableName + " ADD COLUMN " + column.columnName + " " + config.toColumnDefine(column);
 
 		}
 	}
@@ -385,8 +354,7 @@ public class DbMasterDataSqlHelper {
 	}
 
 	public String builderModifyColumnDateType(DatabaseColumn column) {
-		return "ALTER TABLE " + this.tableName + " ALTER COLUMN " + column.columnName + " SET DATA TYPE "
-				+ config.toColumnDefine(column);
+		return "ALTER TABLE " + this.tableName + " ALTER COLUMN " + column.columnName + " SET DATA TYPE " + config.toColumnDefine(column);
 	}
 
 	public String builderRemoveColumn(String columnName) {

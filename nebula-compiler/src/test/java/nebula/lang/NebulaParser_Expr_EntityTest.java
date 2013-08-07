@@ -12,7 +12,7 @@ public class NebulaParser_Expr_EntityTest extends TestCase {
 	TypeLoaderForTest compiler;
 	Entity data = new EditableEntity();
 	Type type;
-	int Age = 10;
+	long Age = 10;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -31,7 +31,7 @@ public class NebulaParser_Expr_EntityTest extends TestCase {
 		}).eval(entity);
 	}
 
-	private void eqValue(String exprText, Object result) {
+	private void eqValue(Object result, String exprText) {
 		try {
 			assertEquals(result, compute(parse(exprText), data));
 		} catch (RecognitionException e) {
@@ -83,13 +83,13 @@ public class NebulaParser_Expr_EntityTest extends TestCase {
 	public void testCompute() {
 		data.put("Age", Age);
 
-		eqValue("this.Age", this.Age);
-		eqValue("this.Age + 10", this.Age + 10);
-		eqValue("this.Age - 10", this.Age - 10);
-		eqValue("this.Age * 10", this.Age * 10);
-		eqValue("this.Age / 10", this.Age / 10);
-		eqValue("this.Age % 10", this.Age % 10);
-		eqValue("this.Age == 10", this.Age == 10);
-		eqValue("this.Age >= 10", this.Age >= 10);
+		eqValue(this.Age, "this.Age");
+		eqValue(this.Age + 10, "this.Age + 10");
+		eqValue(this.Age - 10, "this.Age - 10");
+		eqValue(this.Age * 10, "this.Age * 10");
+		eqValue(this.Age / 10, "this.Age / 10");
+		eqValue(this.Age % 10, "this.Age % 10");
+		eqValue(this.Age == 10L, "this.Age == 10");
+		eqValue(this.Age >= 10, "this.Age >= 10");
 	}
 }

@@ -32,8 +32,8 @@ class BootstrapTypeLoader extends TypeLoader {
 
 		Type number = new Type(this, "Number", basicType, RawTypes.Long);
 		number.attrs.put("FormatType", "numeric");
-		number.attrs.put("Precision", 10);
-		number.attrs.put("Scale", 2);
+		number.attrs.put("Precision", 10L);
+		number.attrs.put("Scale", 2L);
 
 		Type typeBoolean = new Type(this, RawTypes.Boolean.name(), number, RawTypes.Boolean);
 		typeBoolean.attrs.put("FormatType", "checkbox");
@@ -41,16 +41,16 @@ class BootstrapTypeLoader extends TypeLoader {
 		Type typeLong = new Type(this, RawTypes.Long.name(), number, RawTypes.Long);
 
 		Type decimal = new Type(this, RawTypes.Decimal.name(), number, RawTypes.Decimal);
-		decimal.attrs.put("Precision", 10);
-		decimal.attrs.put("Scale", 2);
+		decimal.attrs.put("Precision", 10L);
+		decimal.attrs.put("Scale", 2L);
 
 		Type string = new Type(this, RawTypes.String.name(), basicType, RawTypes.String);
 		string.attrs.put("FormatType", "text");
-		string.attrs.put("MaxLength", 60);
+		string.attrs.put("MaxLength", 60L);
 
 		Type text = new Type(this, RawTypes.Text.name(), basicType, RawTypes.Text);
 		text.attrs.put("FormatType", "textarea");
-		text.attrs.put("MaxLength", 1024);
+		text.attrs.put("MaxLength", 1024L);
 
 		Type date = new Type(this, RawTypes.Date.name(), basicType, RawTypes.Date);
 		date.attrs.put("FormatType", "date");
@@ -70,11 +70,11 @@ class BootstrapTypeLoader extends TypeLoader {
 
 		Type name = new Type(this, "Name", string);
 		name.nameAlias= new Aliases("名称");
-		name.attrs.put("MaxLength", 60);
+		name.attrs.put("MaxLength", 60L);
 
 		Type attr = new Type(this, "Attr", string);
 		attr.attrs.put("SP", "Attr");
-		attr.attrs.put("MaxLength", 60);
+		attr.attrs.put("MaxLength", 60L);
 
 		List<Type> typeList = new ArrayList<Type>();
 

@@ -180,8 +180,8 @@ public class Compiler {
 		return new Negates(e1);
 	}
 
-	public Expr<Integer> opIntegerCst(String value) {
-		return new IntegerCst(value);
+	public Expr<Long> opLongCst(String value) {
+		return new LongCst(value);
 	}
 
 	public Expr<BigDecimal> opDecimalCst(String value) {
@@ -540,8 +540,8 @@ public class Compiler {
 		}
 
 		@Override
-		public Integer eval() {
-			return (Integer) e1.eval() + (Integer) e2.eval();
+		public Long eval() {
+			return (Long) e1.eval() + (Long) e2.eval();
 		}
 
 		@Override
@@ -743,11 +743,11 @@ public class Compiler {
 		}
 	}
 
-	static class IntegerCst extends Expression<Integer> {
-		final Integer value;
+	static class LongCst extends Expression<Long> {
+		final Long value;
 
-		IntegerCst(String text) {
-			this.value = Integer.parseInt(text);
+		LongCst(String text) {
+			this.value = Long.parseLong(text);
 		}
 
 		public void compile(final MethodVisitor mv, Context context) {
@@ -755,7 +755,7 @@ public class Compiler {
 		}
 
 		@Override
-		public Integer eval() {
+		public Long eval() {
 			return this.value;
 		}
 
@@ -875,21 +875,20 @@ public class Compiler {
 			mv.visitLdcInsn(this.name);
 			switch (this.getExprType(context).rawType) {
 			case Long:
-				compileInteger(mv);
+				compileLong(mv);
 				break;
 			case String:
 				compileString(mv);
 				break;
 			default:
 				break;
-			}
-			
+			}			
 		}
 
-		public void compileInteger(final MethodVisitor mv) {
+		public void compileLong(final MethodVisitor mv) {
 			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "get", "(Ljava/lang/String;)Ljava/lang/Object;");
-			mv.visitTypeInsn(CHECKCAST, "java/lang/Integer");
-			mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Integer", "intValue", "()I");
+			mv.visitTypeInsn(CHECKCAST, "java/lang/Long");
+			mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Long", "longValue", "()J");
 		}
 
 		public void compileString(final MethodVisitor mv) {
@@ -945,7 +944,7 @@ public class Compiler {
 		}
 
 		@Override
-		public Integer eval() {
+		public Long eval() {
 			return null;
 		}
 
@@ -1110,6 +1109,7 @@ public class Compiler {
 			list.compile(mv, context);
 			mv.visitTypeInsn(CHECKCAST, "java/util/List");
 			index.compile(mv, context);
+			mv.visitInsn(L2I);
 			mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "get", "(I)Ljava/lang/Object;");
 			 mv.visitTypeInsn(CHECKCAST, "nebula/data/Entity");
 //			 mv.visitInsn(POP);
@@ -1237,7 +1237,7 @@ public class Compiler {
 
 		@Override
 		public void exec(Entity entity, DataRepos repos) {
-			// return (Integer) e1.exec().get(name);
+			// return (Long) e1.exec().get(name);
 		}
 
 		@Override
@@ -1263,7 +1263,7 @@ public class Compiler {
 				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");
 				break;
 			case Long:
-				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;");
+				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Long", "valueOf", "(J)Ljava/lang/Long;");
 				break;
 			default:
 				break;
@@ -1307,7 +1307,7 @@ public class Compiler {
 
 		@Override
 		public void exec(Entity entity, DataRepos repos) {
-			// return (Integer) e1.exec().get(name);
+			// return (Long) e1.exec().get(name);
 		}
 
 		@Override
