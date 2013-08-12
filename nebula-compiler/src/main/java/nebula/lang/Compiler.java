@@ -10,6 +10,7 @@ import nebula.data.Entity;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -266,16 +267,16 @@ public class Compiler {
 			this.e2 = e2;
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
 			// compiles e1
-			e1.compile(mv, context);
+			e1.compile(cw, mv, context);
 			// tests if e1 is false
 			mv.visitInsn(DUP);
 			Label end = new Label();
 			mv.visitJumpInsn(IFEQ, end);
 			// case where e1 is true : e1 && e2 is equal to e2
 			mv.visitInsn(POP);
-			e2.compile(mv, context);
+			e2.compile(cw, mv, context);
 			// if e1 is false, e1 && e2 is equal to e1:
 			// we jump directly to this label, without evaluating e2
 			mv.visitLabel(end);
@@ -302,10 +303,10 @@ public class Compiler {
 			this.e1 = e1;
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
 			// computes !e1 by evaluating 1 - e1
 			mv.visitLdcInsn(new Integer(1));
-			e1.compile(mv, context);
+			e1.compile(cw, mv, context);
 			mv.visitInsn(ISUB);
 		}
 
@@ -332,16 +333,16 @@ public class Compiler {
 			this.e2 = e2;
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
 			// compiles e1
-			e1.compile(mv, context);
+			e1.compile(cw, mv, context);
 			// tests if e1 is true
 			mv.visitInsn(DUP);
 			Label end = new Label();
 			mv.visitJumpInsn(IFNE, end);
 			// case where e1 is false : e1 || e2 is equal to e2
 			mv.visitInsn(POP);
-			e2.compile(mv, context);
+			e2.compile(cw, mv, context);
 			// if e1 is true, e1 || e2 is equal to e1:
 			// we jump directly to this label, without evaluating e2
 			mv.visitLabel(end);
@@ -374,8 +375,8 @@ public class Compiler {
 			this.e2 = e2;
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).ne(mv, context, e1, e2);
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			resolveOperator(e1.getExprType(context)).ne(cw,mv, context, e1, e2);
 		}
 
 		@Override
@@ -398,8 +399,8 @@ public class Compiler {
 			this.e2 = e2;
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).eq(mv, context, e1, e2);
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			resolveOperator(e1.getExprType(context)).eq(cw,mv, context, e1, e2);
 		}
 
 		@Override
@@ -425,8 +426,8 @@ public class Compiler {
 			this.e2 = e2;
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).gt(mv, context, e1, e2);
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			resolveOperator(e1.getExprType(context)).gt(cw,mv, context, e1, e2);
 		}
 
 		@Override
@@ -449,8 +450,8 @@ public class Compiler {
 			this.e2 = e2;
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).ge(mv, context, e1, e2);
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			resolveOperator(e1.getExprType(context)).ge(cw,mv, context, e1, e2);
 		}
 
 		@Override
@@ -473,8 +474,8 @@ public class Compiler {
 			this.e2 = e2;
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).lt(mv, context, e1, e2);
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			resolveOperator(e1.getExprType(context)).lt(cw,mv, context, e1, e2);
 		}
 
 		@Override
@@ -497,8 +498,8 @@ public class Compiler {
 			this.e2 = e2;
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).le(mv, context, e1, e2);
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			resolveOperator(e1.getExprType(context)).le(cw,mv, context, e1, e2);
 		}
 
 		@Override
@@ -535,8 +536,8 @@ public class Compiler {
 			super(e1, e2);
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).add(mv, context, e1, e2);
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			resolveOperator(e1.getExprType(context)).add(cw,mv, context, e1, e2);
 		}
 
 		@Override
@@ -555,8 +556,8 @@ public class Compiler {
 			super(e1, e2);
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).sub(mv, context, e1, e2);
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			resolveOperator(e1.getExprType(context)).sub(cw,mv, context, e1, e2);
 		}
 
 		@Override
@@ -573,8 +574,8 @@ public class Compiler {
 			super(e1, e2);
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).multi(mv, context, e1, e2);
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			resolveOperator(e1.getExprType(context)).multi(cw,mv, context, e1, e2);
 		}
 
 		@Override
@@ -588,8 +589,8 @@ public class Compiler {
 			super(e1, e2);
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).div(mv, context, e1, e2);
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			resolveOperator(e1.getExprType(context)).div(cw,mv, context, e1, e2);
 		}
 
 		@Override
@@ -603,8 +604,8 @@ public class Compiler {
 			super(e1, e2);
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).remainder(mv, context, e1, e2);
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			resolveOperator(e1.getExprType(context)).remainder(cw,mv, context, e1, e2);
 		}
 
 		@Override
@@ -631,8 +632,8 @@ public class Compiler {
 			super(e1);
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).increment(mv, context, e1);
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			resolveOperator(e1.getExprType(context)).increment(cw,mv, context, e1);
 		}
 
 		@Override
@@ -646,8 +647,8 @@ public class Compiler {
 			super(e1);
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).decrement(mv, context, e1);
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			resolveOperator(e1.getExprType(context)).decrement(cw,mv, context, e1);
 		}
 
 		@Override
@@ -661,8 +662,8 @@ public class Compiler {
 			super(e1);
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).positive(mv, context, e1);
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			resolveOperator(e1.getExprType(context)).positive(cw,mv, context, e1);
 		}
 
 		@Override
@@ -676,8 +677,8 @@ public class Compiler {
 			super(e1);
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).negates(mv, context, e1);
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			resolveOperator(e1.getExprType(context)).negates(cw,mv, context, e1);
 		}
 
 		@Override
@@ -693,7 +694,7 @@ public class Compiler {
 			this.value = value;
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
 			mv.visitLdcInsn(value);
 		}
 
@@ -720,7 +721,7 @@ public class Compiler {
 			this.text = text;
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
 			mv.visitTypeInsn(NEW, "java/math/BigDecimal");
 			mv.visitInsn(DUP);
 			mv.visitLdcInsn(text);
@@ -750,7 +751,7 @@ public class Compiler {
 			this.value = Long.parseLong(text);
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
 			mv.visitLdcInsn(value);
 		}
 
@@ -783,7 +784,7 @@ public class Compiler {
 			this.value = formater.parseDateTime(text).getMillis();
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
 			mv.visitTypeInsn(NEW, "org/joda/time/DateTime");
 			mv.visitInsn(DUP);
 			mv.visitLdcInsn(this.value);
@@ -870,8 +871,8 @@ public class Compiler {
 			this.name = name;
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
-			e1.compile(mv, context);
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			e1.compile(cw, mv, context);
 			mv.visitLdcInsn(this.name);
 			switch (this.getExprType(context).rawType) {
 			case Long:
@@ -937,7 +938,7 @@ public class Compiler {
 			this.name = name;
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
 			// compiles e1, e2, and adds an instruction to multiply the two
 			// values
 			// mv.visitLdcInsn(value);
@@ -973,7 +974,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(MethodVisitor mv, Context context) {
+		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
 			mv.visitVarInsn(ALOAD, 2);
 			mv.visitLdcInsn(org.objectweb.asm.Type.getType("Ljava/lang/String;"));
 			mv.visitLdcInsn(org.objectweb.asm.Type.getType("Lnebula/data/Entity;"));
@@ -1027,8 +1028,8 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(MethodVisitor mv, Context context) {
-			index.compile(mv, context);
+		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
+			index.compile(cw, mv, context);
 		}
 	}
 
@@ -1045,8 +1046,8 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(MethodVisitor mv, Context context) {
-			to.compile(mv, context);
+		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
+			to.compile(cw, mv, context);
 		}
 	}
 
@@ -1063,8 +1064,8 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(MethodVisitor mv, Context context) {
-			from.compile(mv, context);
+		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
+			from.compile(cw, mv, context);
 		}
 	}
 
@@ -1084,9 +1085,9 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(MethodVisitor mv, Context context) {
-			from.compile(mv, context);
-			to.compile(mv, context);
+		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
+			from.compile(cw, mv, context);
+			to.compile(cw, mv, context);
 		}
 	}
 
@@ -1105,10 +1106,10 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(MethodVisitor mv, Context context) {
-			list.compile(mv, context);
+		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
+			list.compile(cw, mv, context);
 			mv.visitTypeInsn(CHECKCAST, "java/util/List");
-			index.compile(mv, context);
+			index.compile(cw, mv, context);
 			mv.visitInsn(L2I);
 			mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "get", "(I)Ljava/lang/Object;");
 			 mv.visitTypeInsn(CHECKCAST, "nebula/data/Entity");
@@ -1131,8 +1132,8 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(MethodVisitor mv, Context context) {
-			repos.compile(mv, context);
+		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
+			repos.compile(cw, mv, context);
 			mv.visitLdcInsn(org.objectweb.asm.Type.getType("Ljava/lang/String;"));
 			mv.visitLdcInsn(org.objectweb.asm.Type.getType("Lnebula/data/Entity;"));
 			mv.visitLdcInsn(name);
@@ -1158,7 +1159,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(MethodVisitor mv, Context context) {
+		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
 			// TODO
 		}
 	}
@@ -1171,7 +1172,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(MethodVisitor mv, Context context) {
+		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
 			mv.visitVarInsn(ALOAD, var.index);
 		}
 
@@ -1193,9 +1194,9 @@ public class Compiler {
 			this.statements = statements;
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
 			for (Statement st : statements) {
-				st.compile(mv, context);
+				st.compile(cw, mv, context);
 			}
 		}
 
@@ -1228,7 +1229,7 @@ public class Compiler {
 			this.initExpr = initExpr;
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
 			// compiles e1, e2, and adds an instruction to multiply the two
 			// values
 			// mv.visitLdcInsn(value);
@@ -1272,10 +1273,10 @@ public class Compiler {
 
 
 		 
-		public void compile(final MethodVisitor mv, Context context) {
-			parent.compile(mv, context);
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			parent.compile(cw, mv, context);
 			mv.visitLdcInsn(this.name);
-			value.compile(mv, context);
+			value.compile(cw, mv, context);
 			toObject(mv, value, context);
 			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "put", "(Ljava/lang/String;Ljava/lang/Object;)V");
 		}
@@ -1299,7 +1300,7 @@ public class Compiler {
 			this.value = value;
 		}
 
-		public void compile(final MethodVisitor mv, Context context) {
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
 			// compiles e1, e2, and adds an instruction to multiply the two
 			// values
 			// mv.visitLdcInsn(value);

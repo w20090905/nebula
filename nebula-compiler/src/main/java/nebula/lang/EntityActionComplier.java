@@ -40,7 +40,7 @@ public class EntityActionComplier extends ClassLoader implements Opcodes {
 		// method
 		{
 			mv = cw.visitMethod(ACC_PUBLIC, "exec", "(Lnebula/data/Entity;Lnebula/data/DataRepos;)V", null, null);
-			code.compile(mv, context);
+			code.compile(cw, mv, context);
 			mv.visitInsn(RETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();

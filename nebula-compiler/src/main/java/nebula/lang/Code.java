@@ -1,7 +1,8 @@
 package nebula.lang;
 
+import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 
 public interface Code {
-    void compile(MethodVisitor mv, Context context);
+    void compile(ClassWriter cw, MethodVisitor mv, Context context);
 }

@@ -41,7 +41,7 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 
 			// eval method
 			mv = cw.visitMethod(ACC_PUBLIC, "eval", "(JJ)J", null, null);
-			expr.compile(mv, context);
+			expr.compile(cw, mv, context);
 			mv.visitInsn(LRETURN);
 			// max stack and max locals automatically computed
 			mv.visitMaxs(0, 0);
@@ -69,7 +69,7 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 
 			// eval method
 			mv = cw.visitMethod(ACC_PUBLIC, "eval", "(JJ)I", null, null);
-			expr.compile(mv, context);
+			expr.compile(cw, mv, context);
 			mv.visitInsn(IRETURN);
 			// max stack and max locals automatically computed
 			mv.visitMaxs(0, 0);

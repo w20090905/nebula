@@ -1,36 +1,37 @@
 package nebula.lang;
 
+import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 
 public interface Operator {
-	<V> void eq(final MethodVisitor mv,Context context, final Expr<V> e1, final Expr<V> e2);
+	<V> void eq(ClassWriter cw, final MethodVisitor mv,Context context, final Expr<V> e1, final Expr<V> e2);
 
-	<V> void ne(final MethodVisitor mv,Context context, final Expr<V> e1, final Expr<V> e2);
+	<V> void ne(ClassWriter cw, final MethodVisitor mv,Context context, final Expr<V> e1, final Expr<V> e2);
 
-	<V> void le(final MethodVisitor mv,Context context, final Expr<V> e1, final Expr<V> e2);
+	<V> void le(ClassWriter cw, final MethodVisitor mv,Context context, final Expr<V> e1, final Expr<V> e2);
 
-	<V> void lt(final MethodVisitor mv,Context context, final Expr<V> e1, final Expr<V> e2);
+	<V> void lt(ClassWriter cw, final MethodVisitor mv,Context context, final Expr<V> e1, final Expr<V> e2);
 
-	<V> void ge(final MethodVisitor mv,Context context, final Expr<V> e1, final Expr<V> e2);
+	<V> void ge(ClassWriter cw, final MethodVisitor mv,Context context, final Expr<V> e1, final Expr<V> e2);
 
-	<V> void gt(final MethodVisitor mv,Context context, final Expr<V> e1, final Expr<V> e2);
+	<V> void gt(ClassWriter cw, final MethodVisitor mv,Context context, final Expr<V> e1, final Expr<V> e2);
 
 	
-	void add(final MethodVisitor mv,Context context, final Expr<Object> e1, final Expr<Object> e2);
+	void add(ClassWriter cw, final MethodVisitor mv,Context context, final Expr<Object> e1, final Expr<Object> e2);
 
-	void sub(final MethodVisitor mv,Context context, final Expr<Object> e1, final Expr<Object> e2);
+	void sub(ClassWriter cw, final MethodVisitor mv,Context context, final Expr<Object> e1, final Expr<Object> e2);
 
-	void multi(final MethodVisitor mv,Context context, final Expr<Object> e1, final Expr<Object> e2);
+	void multi(ClassWriter cw, final MethodVisitor mv,Context context, final Expr<Object> e1, final Expr<Object> e2);
 
-	void div(final MethodVisitor mv,Context context, final Expr<Object> e1, final Expr<Object> e2);
+	void div(ClassWriter cw, final MethodVisitor mv,Context context, final Expr<Object> e1, final Expr<Object> e2);
 
-	void remainder(final MethodVisitor mv,Context context, final Expr<Object> e1, final Expr<Object> e2);
+	void remainder(ClassWriter cw, final MethodVisitor mv,Context context, final Expr<Object> e1, final Expr<Object> e2);
 
-	void increment(final MethodVisitor mv,Context context, final Expr<Object> e1);
+	void increment(ClassWriter cw, final MethodVisitor mv,Context context, final Expr<Object> e1);
 
-	void decrement(final MethodVisitor mv,Context context, final Expr<Object> e1);
+	void decrement(ClassWriter cw, final MethodVisitor mv,Context context, final Expr<Object> e1);
 
-	void positive(final MethodVisitor mv,Context context, final Expr<Object> e1);
+	void positive(ClassWriter cw, final MethodVisitor mv,Context context, final Expr<Object> e1);
 
-	void negates(final MethodVisitor mv,Context context, final Expr<Object> e1);
+	void negates(ClassWriter cw, final MethodVisitor mv,Context context, final Expr<Object> e1);
 }

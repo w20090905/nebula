@@ -99,7 +99,7 @@ public class EntityExpressionComplier extends ClassLoader implements Opcodes {
 			mv = cw.visitMethod(ACC_PUBLIC + ACC_BRIDGE + ACC_SYNTHETIC, "eval",
 					"(Lnebula/data/Entity;)Ljava/lang/Object;", null, null);
 			
-			expr.compile(mv, context);
+			expr.compile(cw, mv, context);
 			
 			switch (expr.getExprType(context).rawType) {
 			case Boolean:

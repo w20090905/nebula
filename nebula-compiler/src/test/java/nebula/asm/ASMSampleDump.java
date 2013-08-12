@@ -20,16 +20,7 @@ public class ASMSampleDump extends ClassLoader implements Opcodes {
 		// Class define
 		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, name,"Ljava/lang/Object;Lnebula/lang/EntityExpression<L" + actualClass+ ";>;", "java/lang/Object",new String[] { "nebula/lang/EntityExpression" });
 
-		// Init method
-		{
-			// default public constructor
-			mv = cw.visitMethod(ACC_PUBLIC, "<init>", "()V", null, null);
-			mv.visitVarInsn(ALOAD, 0);
-			mv.visitMethodInsn(INVOKESPECIAL, "java/lang/Object", "<init>", "()V");
-			mv.visitInsn(RETURN);
-			mv.visitMaxs(0, 0);
-			mv.visitEnd();
-		}
+
 
 		// generic method
 		{
@@ -37,6 +28,14 @@ public class ASMSampleDump extends ClassLoader implements Opcodes {
 			mv.visitLdcInsn(new Integer(1014));
 			mv.visitLdcInsn(new Integer(1024));
 			mv.visitInsn(IMUL);
+			
+			
+			MethodVisitor mv1  = cw.visitMethod(ACC_PUBLIC, "<init>", "()V", null, null);
+			mv1.visitVarInsn(ALOAD, 0);
+			mv1.visitMethodInsn(INVOKESPECIAL, "java/lang/Object", "<init>", "()V");
+			mv1.visitInsn(RETURN);
+			mv1.visitMaxs(0, 0);
+			mv1.visitEnd();
 			
 			mv.visitMethodInsn(INVOKESTATIC,actualClass, "valueOf", "(I)L" + actualClass + ";");
 			mv.visitInsn(ARETURN);
