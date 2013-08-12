@@ -20,10 +20,10 @@ import com.google.common.collect.Maps;
 public class Compiler {
 	Context context;
 
-	static Map<String, Operator> opTypes = Maps.newHashMap();
+	static Map<String, OperatorExpr> opTypes = Maps.newHashMap();
 
-	static Operator resolveOperator(Type type) {
-		Operator op = opTypes.get(type.getName());
+	static OperatorExpr resolveOperator(Type type) {
+		OperatorExpr op = opTypes.get(type.getName());
 		if (op != null) return op;
 		else if (type.getSuperType() != null) return resolveOperator(type.getSuperType());
 		else throw new RuntimeException("Cannot find type" + type.name);
@@ -78,35 +78,10 @@ public class Compiler {
 		return new Or(e1, e2);
 	}
 
-	public <V extends Comparable<V>> Expr<Boolean> opNotEqualTo(Expr<V> e1, Expr<V> e2) {
-		return new NotEqualTo<V>(e1, e2);
+	public <V extends Comparable<V>> Expr<Boolean> opRelational(Operator op, Expr<V> e1, Expr<V> e2) {
+		return new Relational<V>(op, e1, e2);
 	}
-
-	public <V extends Comparable<V>> Expr<Boolean> opEqualTo(Expr<V> e1, Expr<V> e2) {
-		return new EqualTo<V>(e1, e2);
-	}
-
-	public <V extends Comparable<V>> Expr<Boolean> opGreaterThan(Expr<V> e1, Expr<V> e2) {
-		return new GreaterThan<V>(e1, e2);
-	}
-
-	public <V extends Comparable<V>> Expr<Boolean> opGreaterThanOrEqualTo(Expr<V> e1, Expr<V> e2) {
-		return new GreaterThanOrEqualTo<V>(e1, e2);
-	}
-
-	public <V extends Comparable<V>> Expr<Boolean> opLessThan(Expr<V> e1, Expr<V> e2) {
-		return new LessThan<V>(e1, e2);
-	}
-
-	public <V extends Comparable<V>> Expr<Boolean> opLessThanOrEqualTo(Expr<V> e1, Expr<V> e2) {
-		return new LessThanOrEqualTo<V>(e1, e2);
-	}
-
-
-	public Expr<Object> opAdd(Expr<Object> e1, Expr<Object> e2) {
-		return new Add(e1, e2);
-	}
-
+	
 	public Expr<Object> range(Expr<Object> from, Expr<Object> to) {
 		if (from == null) {
 			return new Range_0_To(to);
@@ -121,7 +96,7 @@ public class Compiler {
 		return new Index(from);
 	}
 
-	public Expr<Object> entities(Expr<Object> repos,String string) {
+	public Expr<Object> entities(Expr<Object> repos, String string) {
 		return new DatastoreGet(repos, string);
 	}
 
@@ -149,21 +124,10 @@ public class Compiler {
 		return null;
 	}
 
-	public Expr<Object> opSub(Expr<Object> e1, Expr<Object> e2) {
-		return new Sub(e1, e2);
+	public Expr<Object> opArithmetic(Operator op, Expr<Object> e1, Expr<Object> e2) {
+		return new Arithmetic(op, e1, e2);
 	}
 
-	public Expr<Object> opMulti(Expr<Object> e1, Expr<Object> e2) {
-		return new Multi(e1, e2);
-	}
-
-	public Expr<Object> opDiv(Expr<Object> e1, Expr<Object> e2) {
-		return new Div(e1, e2);
-	}
-
-	public Expr<Object> opRemainder(Expr<Object> e1, Expr<Object> e2) {
-		return new Remainder(e1, e2);
-	}
 
 	public Expr<Object> opIncrement(Expr<Object> e1) {
 		return new Increment(e1);
@@ -359,99 +323,23 @@ public class Compiler {
 		}
 	}
 
-	abstract static class CompareExpr<V extends Comparable<V>> extends Expression<Boolean> {
-		@Override
-		public Type getExprType(Context context) {
-			return context.resolveType(RawTypes.Boolean.name());
-		}
-	}
-
-	static class NotEqualTo<V extends Comparable<V>> extends CompareExpr<V> {
-		final Expr<V> e1;
-		final Expr<V> e2;
-
-		NotEqualTo(Expr<V> e1, Expr<V> e2) {
-			this.e1 = e1;
-			this.e2 = e2;
-		}
-
-		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).ne(cw,mv, context, e1, e2);
-		}
-
-		@Override
-		public Boolean eval() {
-			return e1.eval().compareTo(e2.eval()) != 0;
-		}
-
-		@Override
-		public String toString() {
-			return "(" + e1.toString() + " != " + e2.toString() + ")";
-		}
-	}
-
-	static class EqualTo<V extends Comparable<V>> extends CompareExpr<V> {
-		final Expr<V> e1;
-		final Expr<V> e2;
-
-		EqualTo(Expr<V> e1, Expr<V> e2) {
-			this.e1 = e1;
-			this.e2 = e2;
-		}
-
-		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).eq(cw,mv, context, e1, e2);
-		}
-
-		@Override
-		public Boolean eval() {
-			return e1.eval().compareTo(e2.eval()) == 0;
-		}
-
-		@Override
-		public String toString() {
-			return "(" + e1.toString() + " == " + e2.toString() + ")";
-		}
-	}
-
 	/**
-	 * A "greater than" expression.
+	 * An addition expression.
 	 */
-	static class GreaterThan<V extends Comparable<V>> extends CompareExpr<V> {
+	static class Relational<V extends Comparable<V>> extends Expression<Boolean> implements Expr<Boolean> {
+		final Operator op;
 		final Expr<V> e1;
 		final Expr<V> e2;
 
-		GreaterThan(Expr<V> e1, Expr<V> e2) {
+		Relational(final Operator op,Expr<V> e1, Expr<V> e2) {
+			this.op = op;
 			this.e1 = e1;
 			this.e2 = e2;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).gt(cw,mv, context, e1, e2);
-		}
-
 		@Override
-		public Boolean eval() {
-			return e1.eval().compareTo(e2.eval()) > 0;
-		}
-
-		@Override
-		public String toString() {
-			return "(" + e1.toString() + " > " + e2.toString() + ")";
-		}
-	}
-
-	static class GreaterThanOrEqualTo<V extends Comparable<V>> extends CompareExpr<V> {
-		final Expr<V> e1;
-		final Expr<V> e2;
-
-		GreaterThanOrEqualTo(Expr<V> e1, Expr<V> e2) {
-			this.e1 = e1;
-			this.e2 = e2;
-		}
-
 		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).ge(cw,mv, context, e1, e2);
+			resolveOperator(e1.getExprType(context)).relational(cw, mv, context, op, e1, e2);
 		}
 
 		@Override
@@ -459,85 +347,31 @@ public class Compiler {
 			return e1.eval().compareTo(e2.eval()) >= 0;
 		}
 
-		@Override
-		public String toString() {
-			return "(" + e1.toString() + " >= " + e2.toString() + ")";
-		}
-	}
-
-	static class LessThan<V extends Comparable<V>> extends CompareExpr<V> {
-		final Expr<V> e1;
-		final Expr<V> e2;
-
-		LessThan(Expr<V> e1, Expr<V> e2) {
-			this.e1 = e1;
-			this.e2 = e2;
-		}
-
-		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).lt(cw,mv, context, e1, e2);
-		}
-
-		@Override
-		public Boolean eval() {
-			return e1.eval().compareTo(e2.eval()) < 0;
-		}
 
 		@Override
 		public String toString() {
-			return "(" + e1.toString() + " < " + e2.toString() + ")";
-		}
-	}
-
-	static class LessThanOrEqualTo<V extends Comparable<V>> extends CompareExpr<V> {
-		final Expr<V> e1;
-		final Expr<V> e2;
-
-		LessThanOrEqualTo(Expr<V> e1, Expr<V> e2) {
-			this.e1 = e1;
-			this.e2 = e2;
-		}
-
-		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).le(cw,mv, context, e1, e2);
-		}
-
-		@Override
-		public Boolean eval() {
-			return e1.eval().compareTo(e2.eval()) <= 0;
-		}
-
-		@Override
-		public String toString() {
-			return "(" + e1.toString() + " <= " + e2.toString() + ")";
-		}
-	}
-
-	abstract static class ArithmeticExpr extends Expression<Object> {
-		final Expr<Object> e1;
-		final Expr<Object> e2;
-
-		ArithmeticExpr(final Expr<Object> e1, final Expr<Object> e2) {
-			this.e1 = e1;
-			this.e2 = e2;
+			return "(" + e1.toString() + " " +  op.toString() + " " + e2.toString() + ")";
 		}
 
 		@Override
 		public Type getExprType(Context context) {
-			return e1.getExprType(context);
+			return context.resolveType(RawTypes.Boolean.name());
 		}
 	}
+	
+	static class Arithmetic extends Expression<Object> {
+		final Expr<Object> e1;
+		final Expr<Object> e2;
+		final Operator op;
 
-	/**
-	 * An addition expression.
-	 */
-	static class Add extends ArithmeticExpr {
-		Add(final Expr<Object> e1, final Expr<Object> e2) {
-			super(e1, e2);
+		Arithmetic(final Operator op, final Expr<Object> e1, final Expr<Object> e2) {
+			this.e1 = e1;
+			this.e2 = e2;
+			this.op = op;
 		}
 
 		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).add(cw,mv, context, e1, e2);
+			resolveOperator(e1.getExprType(context)).arithmetic(cw, mv, context, op, e1, e2);
 		}
 
 		@Override
@@ -546,73 +380,16 @@ public class Compiler {
 		}
 
 		@Override
-		public String toString() {
-			return "(" + e1.toString() + " + " + e2.toString() + ")";
-		}
-	}
-
-	static class Sub extends ArithmeticExpr {
-		Sub(final Expr<Object> e1, final Expr<Object> e2) {
-			super(e1, e2);
-		}
-
-		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).sub(cw,mv, context, e1, e2);
+		public Type getExprType(Context context) {
+			return e1.getExprType(context);
 		}
 
 		@Override
 		public String toString() {
-			return "(" + e1.toString() + " - " + e2.toString() + ")";
+			return "(" + e1.toString() + " " +  op.toString() + " " + e2.toString() + ")";
 		}
 	}
 
-	/**
-	 * A multiplication expression.
-	 */
-	static class Multi extends ArithmeticExpr {
-		Multi(final Expr<Object> e1, final Expr<Object> e2) {
-			super(e1, e2);
-		}
-
-		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).multi(cw,mv, context, e1, e2);
-		}
-
-		@Override
-		public String toString() {
-			return "(" + e1.toString() + " * " + e2.toString() + ")";
-		}
-	}
-
-	static class Div extends ArithmeticExpr {
-		Div(final Expr<Object> e1, final Expr<Object> e2) {
-			super(e1, e2);
-		}
-
-		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).div(cw,mv, context, e1, e2);
-		}
-
-		@Override
-		public String toString() {
-			return "(" + e1.toString() + " / " + e2.toString() + ")";
-		}
-	}
-
-	static class Remainder extends ArithmeticExpr {
-		Remainder(final Expr<Object> e1, final Expr<Object> e2) {
-			super(e1, e2);
-		}
-
-		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).remainder(cw,mv, context, e1, e2);
-		}
-
-		@Override
-		public String toString() {
-			return "(" + e1.toString() + " % " + e2.toString() + ")";
-		}
-	}
 
 	abstract static class UnaryArithmeticExpr extends Expression<Object> {
 		final Expr<Object> e1;
@@ -633,7 +410,7 @@ public class Compiler {
 		}
 
 		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).increment(cw,mv, context, e1);
+			resolveOperator(e1.getExprType(context)).increment(cw, mv, context, e1);
 		}
 
 		@Override
@@ -648,7 +425,7 @@ public class Compiler {
 		}
 
 		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).decrement(cw,mv, context, e1);
+			resolveOperator(e1.getExprType(context)).decrement(cw, mv, context, e1);
 		}
 
 		@Override
@@ -663,7 +440,7 @@ public class Compiler {
 		}
 
 		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).positive(cw,mv, context, e1);
+			resolveOperator(e1.getExprType(context)).positive(cw, mv, context, e1);
 		}
 
 		@Override
@@ -678,7 +455,7 @@ public class Compiler {
 		}
 
 		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
-			resolveOperator(e1.getExprType(context)).negates(cw,mv, context, e1);
+			resolveOperator(e1.getExprType(context)).negates(cw, mv, context, e1);
 		}
 
 		@Override
@@ -883,7 +660,7 @@ public class Compiler {
 				break;
 			default:
 				break;
-			}			
+			}
 		}
 
 		public void compileLong(final MethodVisitor mv) {
@@ -1112,8 +889,8 @@ public class Compiler {
 			index.compile(cw, mv, context);
 			mv.visitInsn(L2I);
 			mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "get", "(I)Ljava/lang/Object;");
-			 mv.visitTypeInsn(CHECKCAST, "nebula/data/Entity");
-//			 mv.visitInsn(POP);
+			mv.visitTypeInsn(CHECKCAST, "nebula/data/Entity");
+			// mv.visitInsn(POP);
 		}
 	}
 
@@ -1271,8 +1048,6 @@ public class Compiler {
 			}
 		}
 
-
-		 
 		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
 			parent.compile(cw, mv, context);
 			mv.visitLdcInsn(this.name);

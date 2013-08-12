@@ -168,6 +168,20 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 	}
 
 	private void eqExpr(String exprText, String expectedResult) {
+		expectedResult = expectedResult.replace("+",Operator.ADD.name());
+		expectedResult = expectedResult.replace("-",Operator.SUB.name());
+		expectedResult = expectedResult.replace("*",Operator.MUL.name());
+		expectedResult = expectedResult.replace("/",Operator.DIV.name());
+		expectedResult = expectedResult.replace("%",Operator.REM.name());
+		
+
+		expectedResult = expectedResult.replace("==",Operator.EQ.name());
+		expectedResult = expectedResult.replace("!=",Operator.NE.name());
+		expectedResult = expectedResult.replace(">=",Operator.GE.name());
+		expectedResult = expectedResult.replace(">",Operator.GT.name());
+		expectedResult = expectedResult.replace("<=",Operator.LE.name());
+		expectedResult = expectedResult.replace("<",Operator.LT.name());
+		
 		try {
 			Expr<?> expr = parse(exprText);
 			assertEquals(expectedResult, expr.toString());
@@ -213,7 +227,7 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 
 		eqExpr("not(a==b)", "(!(a == b))");
 
-		eqExpr(" a >=10 && n==1 or a!= !b ", "(((a >= 10) && (n == 1)) || (a != (!b)))");
+		eqExpr(" a >=10 && n==1 or a!= b ", "(((a >= 10) && (n == 1)) || (a != b))");
 
 		try {
 			parse("$Person[12]");

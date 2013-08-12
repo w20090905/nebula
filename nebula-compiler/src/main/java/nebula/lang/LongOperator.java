@@ -1,103 +1,70 @@
 package nebula.lang;
 
+import java.util.EnumMap;
+
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-public class LongOperator implements Operator, Opcodes {
+import com.google.common.collect.Maps;
+import static nebula.lang.Operator.*;
 
-	@Override
-	public void add(ClassWriter cw, MethodVisitor mv,Context context, Expr<Object> e1, Expr<Object> e2) {
-		e1.compile(cw, mv, context);
-		e2.compile(cw, mv, context);
-		mv.visitInsn(LADD);
+public class LongOperator implements OperatorExpr, Opcodes {
+	EnumMap<Operator, Integer> ops = Maps.newEnumMap(Operator.class);
+
+	public LongOperator() {
+		ops.put(ADD, LADD);
+		ops.put(SUB, LSUB);
+		ops.put(MUL, LMUL);
+		ops.put(DIV, LDIV);
+		ops.put(REM, LREM);
+
+		ops.put(EQ, IFEQ);// '==';
+		ops.put(NE, IFNE);// '!=';
+		ops.put(GE, IFGE); // '>=';
+		ops.put(GT, IFGT);// '>';
+		ops.put(LE, IFLE); // '<=';
+		ops.put(LT, IFLT);// '<';
 	}
 
-	@Override
-	public void sub(ClassWriter cw, MethodVisitor mv,Context context, Expr<Object> e1, Expr<Object> e2) {
+	public void arithmetic(ClassWriter cw, MethodVisitor mv, Context context, Operator op, Expr<Object> e1, Expr<Object> e2) {
 		e1.compile(cw, mv, context);
 		e2.compile(cw, mv, context);
-		mv.visitInsn(LSUB);
+		mv.visitInsn(ops.get(op));
 	}
 
-	@Override
-	public void multi(ClassWriter cw, MethodVisitor mv,Context context, Expr<Object> e1, Expr<Object> e2) {
-		e1.compile(cw, mv, context);
-		e2.compile(cw, mv, context);
-		mv.visitInsn(LMUL);
-	}
-	
-	@Override
-	public void div(ClassWriter cw, MethodVisitor mv,Context context, Expr<Object> e1, Expr<Object> e2) {
-		e1.compile(cw, mv, context);
-		e2.compile(cw, mv, context);
-		mv.visitInsn(LDIV);
-	}
 
 	@Override
-	public void remainder(ClassWriter cw, MethodVisitor mv,Context context, Expr<Object> e1, Expr<Object> e2) {
-		e1.compile(cw, mv, context);
-		e2.compile(cw, mv, context);
-		mv.visitInsn(LREM);
-	}
-
-	@Override
-	public void increment(ClassWriter cw, MethodVisitor mv,Context context, Expr<Object> e1) {
+	public void increment(ClassWriter cw, MethodVisitor mv, Context context, Expr<Object> e1) {
 		e1.compile(cw, mv, context);
 		mv.visitInsn(LCONST_1);
 		mv.visitInsn(LADD);
 	}
 
 	@Override
-	public void decrement(ClassWriter cw, MethodVisitor mv,Context context, Expr<Object> e1) {
+	public void decrement(ClassWriter cw, MethodVisitor mv, Context context, Expr<Object> e1) {
 		e1.compile(cw, mv, context);
 		mv.visitInsn(LCONST_1);
 		mv.visitInsn(LSUB);
 	}
 
 	@Override
-	public void positive(ClassWriter cw, MethodVisitor mv,Context context, Expr<Object> e1) {
+	public void positive(ClassWriter cw, MethodVisitor mv, Context context, Expr<Object> e1) {
 		e1.compile(cw, mv, context);
 	}
 
 	@Override
-	public void negates(ClassWriter cw, MethodVisitor mv,Context context, Expr<Object> e1) {
+	public void negates(ClassWriter cw, MethodVisitor mv, Context context, Expr<Object> e1) {
 		e1.compile(cw, mv, context);
 		mv.visitInsn(LNEG);
 	}
 
-	@Override
-	public <V> void eq(ClassWriter cw, MethodVisitor mv,Context context, Expr<V> e1, Expr<V> e2) {		
-		cmp(cw, mv, context, e1, e2, IFEQ);
+	public <V> void relational(ClassWriter cw, MethodVisitor mv, Context context, Operator op, Expr<V> e1, Expr<V> e2) {
+		cmp(cw, mv, context, e1, e2, ops.get(op));
 	}
 
-	@Override
-	public <V> void ne(ClassWriter cw, MethodVisitor mv,Context context, Expr<V> e1, Expr<V> e2) {
-		cmp(cw, mv, context, e1, e2, IFNE);
-	}
-	
-	@Override
-	public <V> void le(ClassWriter cw, MethodVisitor mv,Context context, Expr<V> e1, Expr<V> e2) {
-		cmp(cw, mv, context, e1, e2, IFLE);
-	}
-
-	@Override
-	public <V> void lt(ClassWriter cw, MethodVisitor mv,Context context, Expr<V> e1, Expr<V> e2) {
-		cmp(cw, mv, context, e1, e2, IFLT);
-	}
-
-	@Override
-	public <V> void ge(ClassWriter cw, MethodVisitor mv,Context context, Expr<V> e1, Expr<V> e2) {	
-		cmp(cw, mv, context, e1, e2, IFGE);
-	}
-
-	@Override
-	public <V> void gt(ClassWriter cw, MethodVisitor mv,Context context, Expr<V> e1, Expr<V> e2) {
-		cmp(cw, mv, context, e1, e2, IFGT);
-	}
-
-	public <V> void cmp(ClassWriter cw, MethodVisitor mv,Context context, Expr<V> e1, Expr<V> e2,int op) {
+	public <V> void cmp(ClassWriter cw, MethodVisitor mv, Context context, Expr<V> e1, Expr<V> e2, int op) {
 		e1.compile(cw, mv, context);
 		e2.compile(cw, mv, context);
 
@@ -111,4 +78,5 @@ public class LongOperator implements Operator, Opcodes {
 		mv.visitInsn(ICONST_1);
 		mv.visitLabel(end);
 	}
+
 }

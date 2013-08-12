@@ -17,8 +17,7 @@ options {
   import static nebula.lang.Reference.*;  
   import static nebula.lang.Modifier.*;
   
-import nebula.lang.Compiler.VarRefer;
-	
+  import nebula.lang.Compiler.VarRefer;
 }
 @lexer::header{
     package nebula.lang;
@@ -421,16 +420,9 @@ logicalORExpr returns [Expr v]
     ;
 
 logicalAndExpr returns [Expr v]
-    :   a=equalityExpr {v = a;}
-        (   '&&' b=equalityExpr  {v=op.opAnd(v,b);}
-        |   'and' b=equalityExpr  {v=op.opAnd(v,b);}
-        )*
-    ;
-
-equalityExpr returns [Expr v]
     :   a=logicalNotExpr {v = a;}
-        (   '==' b=logicalNotExpr  {v=op.opEqualTo(v,b);}
-          | '!=' b=logicalNotExpr  {v=op.opNotEqualTo(v,b);}
+        (   '&&' b=logicalNotExpr  {v=op.opAnd(v,b);}
+        |   'and' b=logicalNotExpr  {v=op.opAnd(v,b);}
         )*
     ;
 
@@ -441,25 +433,19 @@ logicalNotExpr returns [Expr v]
     ;
     
 relationalExpr returns [Expr v]
-    :   a=additiveExpr {v = a;}
-        (   '>=' b=additiveExpr  {v=op.opGreaterThanOrEqualTo(v,b);}
-        |   '>' c=additiveExpr  {v=op.opGreaterThan(v,c);}
-        |   '<=' c=additiveExpr  {v=op.opLessThanOrEqualTo(v,c);}
-        |   '<' c=additiveExpr  {v=op.opLessThan(v,c);}
+    :   a=additiveExpr {v = a;} //equalityAndRelationalOperators
+        (    operator=equalityAndRelationalOperators  c=additiveExpr  {v=op.opRelational(operator,v,c);}
         )*
     ;
     
 additiveExpr returns [Expr v]
     :   a=multiplicativeExpr {v = a;}
-        (   '+' b=multiplicativeExpr  {v=op.opAdd(v,b);}
-        |   '-' c=multiplicativeExpr  {v=op.opSub(v,c);}
+        (   operator=additiveOperators  c=multiplicativeExpr  {v=op.opArithmetic(operator,v,c);}
         )*
     ;
 multiplicativeExpr returns [Expr v]
     :   a=postfixExpr {v=a;} 
-        (   '*' b=postfixExpr {v=op.opMulti(v,b);} 
-          | '/' b=postfixExpr {v=op.opDiv(v,b);} 
-          | '%' b=postfixExpr {v=op.opRemainder(v,b);} 
+        (  operator=multiplicativeOperators  c=postfixExpr  {v=op.opArithmetic(operator,v,c);} 
         )*
     ;
 
@@ -541,14 +527,8 @@ clausePrimary  returns [Expr v] options  {k=1;}
    
 clauseRelationalExpr  returns [Expr v] options {backtrack=true;}
     :   ID{v=op.opFieldInList($ID.text);}
-        (   
-          '==' b=additiveExpr  {v=op.opEqualTo(v,b);}
-        |  '!=' b=additiveExpr  {v=op.opNotEqualTo(v,b);}
-        | '>=' b=additiveExpr  {v=op.opGreaterThanOrEqualTo(v,b);}
-        |   '>' c=additiveExpr  {v=op.opGreaterThan(v,c);}
-        | '<=' c=additiveExpr  {v=op.opLessThanOrEqualTo(v,c);}
-        |   '<' c=additiveExpr  {v=op.opLessThan(v,c);}
-        )
+        operator=equalityAndRelationalOperators  
+        c=additiveExpr  {v=op.opRelational(operator,v,c);}
     ;
 
 scalar returns [Expr v] options {k=1;}
@@ -565,6 +545,40 @@ constExpr returns [Expr v]
       | DateLiteral {v=op.opDateCst($DateLiteral.text);}  
       | TimeLiteral {v=op.opTimeCst($TimeLiteral.text);}  
     ;
+
+unaryOperators returns [Operator op]:
+    INC     {op = Operator.INC; }
+  | DEC     {op = Operator.DEC; }
+  | NOT    {op = Operator.NOT; }
+  | ADD    {op = Operator.ADD; }
+  | SUB     {op = Operator.SUB; }
+;
+equalityAndRelationalOperators returns [Operator op]:
+      EQ      {op = Operator.EQ; }
+    | NE      {op = Operator.NE; }
+    | GE      {op = Operator.GE; }
+    | GT      {op = Operator.GT; }
+    |  LE      {op = Operator.LE; }
+    | LT       {op = Operator.LT; }
+;
+
+conditionalOperators returns [Operator op]:
+    AND     {op = Operator.AND; }
+  | 'and'     {op = Operator.AND; }
+  | OR        {op = Operator.OR; }
+  | 'or'        {op = Operator.OR; }
+;
+
+multiplicativeOperators returns [Operator op]:
+  | MUL     {op = Operator.MUL; }
+  | DIV       {op = Operator.DIV; }
+  | REM     {op = Operator.REM; }
+;
+
+additiveOperators returns [Operator op]:
+    ADD     {op = Operator.ADD; }
+  | SUB      {op = Operator.SUB; }
+;
 
 // *************   START  :  BASIC   *************
 
@@ -605,7 +619,40 @@ INT :  Digit Digit*;
 fragment Digit :  '0'..'9';
 fragment Letter : 'a'..'z' | 'A'..'Z';
 
+
+
 INIT  : ':=';
+
+
+/* Unary Operators */
+INC : '++';
+DEC : '--'; 
+NOT : '!';
+
+
+/* Equality and Relational Operators */
+EQ  : '==';
+NE  : '!=';
+GE  : '>=';
+GT  : '>';
+LE  : '<=';
+LT  : '<';
+
+
+/* Conditional Operators  */
+AND   : '&&';
+OR     : '||';
+
+
+/* Arithmetic Operators  */
+ADD : '+';
+SUB : '-';
+MUL : '*';
+DIV  : '/';
+REM: '%';
+
+/* Simple Assignment Operator */
+ASSIGN : '=';
 
 NEWLINE:'\r'? '\n';   
 Whitespace :  (' ' | '\t' | '\f')+ {$channel=HIDDEN;};   
