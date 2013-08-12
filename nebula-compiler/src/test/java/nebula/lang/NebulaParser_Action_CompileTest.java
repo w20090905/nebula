@@ -98,7 +98,8 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 		eqValue("Age", 30L * 10L, "Test(){this.Age = this.Age * 10;};");
 		eqValue("Height", Height + Height / 10 - 1, "Test(){this.Height=this.Height +  this.Height / 10 - 1;};");
 	}
-	public void testTypeDefinition_Repos_1() {
+	
+	public void testTypeDefinition_Repos_getByIndex() {
 		EditableEntity person = new EditableEntity();
 		person.put("Name", "wangshilian");
 		person.put("Age", 10L);

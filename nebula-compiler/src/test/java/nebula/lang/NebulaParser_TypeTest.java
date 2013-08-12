@@ -334,7 +334,7 @@ public class NebulaParser_TypeTest extends TestCase {
 		assertEquals(2, type.fields.size());
 		int i = 0;
 		assertEquals("Name", type.fields.get(i).name);
-		assertEquals(60, type.fields.get(i).attrs.get("MaxLength"));
+		assertEquals(60L, type.fields.get(i).attrs.get("MaxLength"));
 
 		i++;
 		assertEquals("WithCustomAttr", type.fields.get(i).name);
