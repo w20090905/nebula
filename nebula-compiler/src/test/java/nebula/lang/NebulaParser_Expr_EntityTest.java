@@ -89,7 +89,48 @@ public class NebulaParser_Expr_EntityTest extends TestCase {
 		eqValue(this.Age * 10, "this.Age * 10");
 		eqValue(this.Age / 10, "this.Age / 10");
 		eqValue(this.Age % 10, "this.Age % 10");
+		
+		this.Age =10L;		
+		data.put("Age", Age);		
 		eqValue(this.Age == 10L, "this.Age == 10");
+		
+		this.Age = 9L;
+		data.put("Age", Age);
+		eqValue(this.Age == 10L, "this.Age == 10");
+
+		this.Age = 9L;
+		data.put("Age", Age);
 		eqValue(this.Age >= 10, "this.Age >= 10");
+		
+		this.Age = 10L;
+		data.put("Age", Age);
+		eqValue(this.Age >= 10, "this.Age >= 10");
+		
+		this.Age = 11L;
+		data.put("Age", Age);
+		eqValue(this.Age >= 10, "this.Age >= 10");
+		
+		
+		this.Age = 10;
+		data.put("Age", Age);
+		eqValue(this.Age > 10 && this.Age < 40, "this.Age > 10 && this.Age < 40");
+		
+		this.Age = 20;
+		data.put("Age", Age);
+		eqValue(this.Age > 10 && this.Age < 40, "this.Age > 10 && this.Age < 40");
+		
+		this.Age = 30;
+		data.put("Age", Age);
+		eqValue(this.Age > 10 && this.Age < 40, "this.Age > 10 && this.Age < 40");
+		
+		this.Age = 40;
+		data.put("Age", Age);
+		eqValue(this.Age > 10 , "this.Age > 10 ");
+		eqValue(this.Age < 40, " this.Age < 40");
+		eqValue(this.Age > 10 && this.Age < 40, "this.Age > 10 && this.Age < 40");
+
+		eqValue(this.Age > 20 && this.Age<= 40, "this.Age > 20 && this.Age <= 40");
+		eqValue(this.Age > 40 && this.Age == 30, "this.Age > 40 && this.Age == 30");
+		eqValue(this.Age > 40 || this.Age == 30, "this.Age > 40 || this.Age == 30");
 	}
 }

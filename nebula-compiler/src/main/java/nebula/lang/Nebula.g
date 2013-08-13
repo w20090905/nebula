@@ -409,20 +409,12 @@ paramList:
 ;
 
 expression returns [Expr v]
-    :   e=logicalORExpr {v = $e.v;}
+    :   e=conditionalExpr {v = $e.v;}
 ;
 
-logicalORExpr returns [Expr v]
-    :   a=logicalAndExpr {v = a;}
-        (   '||' b=logicalAndExpr  {v=op.opOr(v,b);}
-        |   'or' b=logicalAndExpr  {v=op.opOr(v,b);}
-        )*
-    ;
-
-logicalAndExpr returns [Expr v]
+conditionalExpr returns [Expr v]
     :   a=logicalNotExpr {v = a;}
-        (   '&&' b=logicalNotExpr  {v=op.opAnd(v,b);}
-        |   'and' b=logicalNotExpr  {v=op.opAnd(v,b);}
+        (   operator=conditionalOperators b=logicalNotExpr  {v=op.opConditional(operator,v,b);}
         )*
     ;
 
@@ -434,7 +426,7 @@ logicalNotExpr returns [Expr v]
     
 relationalExpr returns [Expr v]
     :   a=additiveExpr {v = a;} //equalityAndRelationalOperators
-        (    operator=equalityAndRelationalOperators  c=additiveExpr  {v=op.opRelational(operator,v,c);}
+        (    operator=relationalOperators  c=additiveExpr  {v=op.opRelational(operator,v,c);}
         )*
     ;
     
@@ -460,33 +452,36 @@ unary returns [Expr v]
 postfixExpr returns [Expr v]
     :   p=primaryExpr {v = p;}
         (
-         '.' methodName=ID '()' {v = op.opMethodCall(v,$methodName.text);}
-         |  '.' methodNameWithParams=ID '(' paramList ')'{v = op.opMethodCall(v,$methodNameWithParams.text);}
-         |  '.'  fieldName=ID {v = op.opFieldOf(v,$fieldName.text);}
+         '[' (
+          e=datalistexpr[v] {v=e;}
+         ) ']'
+         | '.' m=ID '()' {v = op.opMethodCall(v,$m.text);}
+         |  '.' mp=ID '(' paramList ')'{v = op.opMethodCall(v,$mp.text);}
+         |  '.'  f=ID {v = op.opFieldOf(v,$f.text);}
         )*
     ;
-
 primaryExpr returns [Expr v]
   :  c=constExpr  {v=c;} 
   | 'this' {v=op.opLocal(v("this"));}  // this
-  | '$' list=datalistexpr   {v=list;}    //  实体对象
+  | '$' entityName=ID { v=op.entities(op.opLocal(v("repos")),$entityName.text); }    //  实体对象
   | ID  {v=op.opLocal(v($ID.text));}         // 
   | '(' expr=expression ')'   {v = expr;}
 ;
 
-datalistexpr returns [Expr v] 
-  @init{List<Expr<Object>> ranges = new ArrayList<Expr<Object>>();} 
-  :
-  typename=ID { v=op.entities(op.opLocal(v("repos")),$typename.text); } '[' (
-    (decimal{v=op.opDecimalCst($decimal.text);} | INT{v=op.opLongCst($INT.text);}) unit=ID{v=op.opUnit(v,$unit.text);}
-    | clause=clauseOr { v=op.list(v,clause);}
-    | range=singleRange{ranges.add(range);}  (',' range=singleRange{ranges.add(range);})* { v=op.list(v,ranges);}
-  ) ']'
-;
 
-multiRange  returns [List<Expr<Object>> ranges]
-@init{ranges = new ArrayList<Expr<Object>>();}:
-  range=singleRange{ranges.add(range);}  (',' range=singleRange{ranges.add(range);})* 
+datalistexpr[Expr list]  returns [Expr v] 
+  @init{List<Expr<Object>> ranges = new ArrayList<Expr<Object>>();Expr<Boolean> b = null;} 
+  :              (decimal {v=op.opDecimalCst($decimal.text);} | INT{v=op.opLongCst($INT.text);}) unit=ID{v=op.opUnit(v,$unit.text);} 
+              |  
+              (  f=ID rop=relationalOperators   c=additiveExpr  { v=op.opRelational(rop,(Expr)op.opFieldInList(list,$f.text),(Expr)op.opParamsl(c,ranges.size())); ranges.add(c); } )
+              (              
+                   cop=conditionalOperators
+                   
+                  ( f=ID rop=relationalOperators   c=additiveExpr  { b=op.opRelational(rop,(Expr)op.opFieldInList(list,$f.text),(Expr)op.opParamsl(c,ranges.size())); ranges.add(c); } )
+                  {v = op.opConditional(cop,v,b);}
+              )*
+              { v=op.list(list,v,ranges);}
+              | r=singleRange{ranges.add(r);}  (',' r=singleRange{ranges.add(r);})* { v=op.list(list,ranges);}
 ;
 
 singleRange returns [Expr v]:
@@ -501,6 +496,7 @@ singleRange returns [Expr v]:
     }
 ;
 
+   /*
 clauseOr returns [Expr v]
   :
 a=clauseAnd {v = a;}
@@ -515,22 +511,21 @@ clauseAnd returns [Expr v]
      a=clausePrimary {v = a;}
        (
           ( '&&' | 'and') 
-          b=clausePrimary   {v=op.opAnd(v,b);}
+          b=clausePrimary  {v=op.opAnd(v,b);}
       )*
     ;
 
-clausePrimary  returns [Expr v] options  {k=1;}
+clausePrimary returns [Expr v] options  {k=1;}
   :
     s=scalar{v = s;}
     | c=clauseRelationalExpr {v = c;}
     ;
-   
-clauseRelationalExpr  returns [Expr v] options {backtrack=true;}
+clauseRelationalExpr returns [Expr v] options {backtrack=true;}
     :   ID{v=op.opFieldInList($ID.text);}
-        operator=equalityAndRelationalOperators  
+        operator=relationalOperators  
         c=additiveExpr  {v=op.opRelational(operator,v,c);}
     ;
-
+*/
 scalar returns [Expr v] options {k=1;}
   :
   (decimal{v=op.opDecimalCst($decimal.text);} | INT{v=op.opLongCst($INT.text);}) unit=ID{v=op.opUnit(v,$unit.text);};
@@ -553,12 +548,13 @@ unaryOperators returns [Operator op]:
   | ADD    {op = Operator.ADD; }
   | SUB     {op = Operator.SUB; }
 ;
-equalityAndRelationalOperators returns [Operator op]:
+
+relationalOperators returns [Operator op]:
       EQ      {op = Operator.EQ; }
     | NE      {op = Operator.NE; }
     | GE      {op = Operator.GE; }
     | GT      {op = Operator.GT; }
-    |  LE      {op = Operator.LE; }
+    | LE       {op = Operator.LE; }
     | LT       {op = Operator.LT; }
 ;
 

@@ -1,9 +1,6 @@
 package nebula.asm;
 
-import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.FieldVisitor;
-import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
@@ -12,9 +9,7 @@ public class EntityFunctionSampleDump extends ClassLoader implements Opcodes {
 	public static byte[] dump () throws Exception {
 
 		ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
-		FieldVisitor fv;
 		MethodVisitor mv;
-		AnnotationVisitor av0;
 
 		cw.visit(51, ACC_PUBLIC + ACC_SUPER, "nebula/asm/EntityFunctionSample1", "Ljava/lang/Object;Lcom/google/common/base/Function<Lnebula/data/Entity;Ljava/lang/Boolean;>;", "java/lang/Object", new String[] { "com/google/common/base/Function" });
 

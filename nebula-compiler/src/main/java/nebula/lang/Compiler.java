@@ -66,16 +66,12 @@ public class Compiler {
 		return stCompiler.compile(statement, type, context);
 	}
 
-	public Expr<Boolean> opAnd(Expr<Boolean> e1, Expr<Boolean> e2) {
-		return new And(e1, e2);
+	public Expr<Boolean> opConditional(Operator op, Expr<Boolean> e1, Expr<Boolean> e2) {
+		return new Conditional(op, e1, e2);
 	}
 
 	public Expr<Boolean> opNot(Expr<Boolean> e1) {
 		return new Not(e1);
-	}
-
-	public Expr<Boolean> opOr(Expr<Boolean> e1, Expr<Boolean> e2) {
-		return new Or(e1, e2);
 	}
 
 	public <V extends Comparable<V>> Expr<Boolean> opRelational(Operator op, Expr<V> e1, Expr<V> e2) {
@@ -108,10 +104,8 @@ public class Compiler {
 		}
 	}
 
-	public Expr<Object> list(Expr<Object> list, Expr<Object> clause) {
-		// Lists.
-		return null;
-		// TODO
+	public Expr<Object> list(Expr<Object> list, Expr<Object> clause, List<Expr<Object>> params) {
+		return new ListClause(list, clause, params);
 	}
 
 	public Expr<Object> opUnit(Expr<Object> v, String string) {
@@ -119,9 +113,8 @@ public class Compiler {
 		return null;
 	}
 
-	public Expr<Object> opFieldInList(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public Expr<Object> opFieldInList(Expr<Object> list, String name) {
+		return new FieldOf(new ListThisRefer(list, 1), name);
 	}
 
 	public Expr<Object> opArithmetic(Operator op, Expr<Object> e1, Expr<Object> e2) {
@@ -180,6 +173,10 @@ public class Compiler {
 		return new VarRefer(var);
 	}
 
+	public Expr<Object> opParamsl(Expr<Object> e1, int i) {
+		return new ParamsRefer(e1, 2, i);
+	}
+
 	public Expr<Object> opFieldOf(Expr<Object> e1, String name) {
 		return new FieldOf(e1, name);
 	}
@@ -209,6 +206,37 @@ public class Compiler {
 		public T eval() {
 			throw new UnsupportedOperationException();
 		}
+
+		protected void toObject(final MethodVisitor mv, Expr<Object> expr, Context context) {
+			switch (expr.getExprType(context).rawType) {
+			case Boolean:
+				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");
+				break;
+			case Long:
+				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Long", "valueOf", "(J)Ljava/lang/Long;");
+				break;
+			default:
+				break;
+			}
+		}
+
+		protected void fromObject(final MethodVisitor mv, Expr<Object> expr, Context context) {
+			switch (expr.getExprType(context).rawType) {
+			case Boolean:
+				mv.visitTypeInsn(CHECKCAST, "java/lang/Boolean");
+				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Boolean", "booleanValue", "()Z");
+				break;
+			case Long:
+				mv.visitTypeInsn(CHECKCAST, "java/lang/Long");
+				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Long", "longValue", "()J");
+				break;
+			case String:
+				mv.visitTypeInsn(CHECKCAST, "java/lang/String");
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
 	abstract static class LogicExpr extends Expression<Boolean> {
@@ -221,11 +249,13 @@ public class Compiler {
 	/**
 	 * A logical "and" expression.
 	 */
-	static class And extends LogicExpr {
+	static class Conditional extends LogicExpr {
+		final Operator op;
 		final Expr<Boolean> e1;
 		final Expr<Boolean> e2;
 
-		public And(Expr<Boolean> e1, Expr<Boolean> e2) {
+		public Conditional(Operator op, Expr<Boolean> e1, Expr<Boolean> e2) {
+			this.op = op;
 			this.e1 = e1;
 			this.e2 = e2;
 		}
@@ -236,7 +266,13 @@ public class Compiler {
 			// tests if e1 is false
 			mv.visitInsn(DUP);
 			Label end = new Label();
-			mv.visitJumpInsn(IFEQ, end);
+			if (op == Operator.AND) {
+				mv.visitJumpInsn(IFEQ, end);
+			} else if (op == Operator.OR) {
+				mv.visitJumpInsn(IFNE, end);
+			} else {
+				throw new UnsupportedOperationException();
+			}
 			// case where e1 is true : e1 && e2 is equal to e2
 			mv.visitInsn(POP);
 			e2.compile(cw, mv, context);
@@ -252,7 +288,7 @@ public class Compiler {
 
 		@Override
 		public String toString() {
-			return "(" + e1.toString() + " && " + e2.toString() + ")";
+			return "(" + e1.toString() + " " + op.getSign() + " " + e2.toString() + ")";
 		}
 	}
 
@@ -285,44 +321,6 @@ public class Compiler {
 	}
 
 	/**
-	 * A logical "or" expression.
-	 */
-	static class Or extends LogicExpr {
-		final Expr<Boolean> e1;
-		final Expr<Boolean> e2;
-
-		public Or(Expr<Boolean> e1, Expr<Boolean> e2) {
-			this.e1 = e1;
-			this.e2 = e2;
-		}
-
-		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
-			// compiles e1
-			e1.compile(cw, mv, context);
-			// tests if e1 is true
-			mv.visitInsn(DUP);
-			Label end = new Label();
-			mv.visitJumpInsn(IFNE, end);
-			// case where e1 is false : e1 || e2 is equal to e2
-			mv.visitInsn(POP);
-			e2.compile(cw, mv, context);
-			// if e1 is true, e1 || e2 is equal to e1:
-			// we jump directly to this label, without evaluating e2
-			mv.visitLabel(end);
-		}
-
-		@Override
-		public Boolean eval() {
-			return e1.eval() || e2.eval();
-		}
-
-		@Override
-		public String toString() {
-			return "(" + e1.toString() + " || " + e2.toString() + ")";
-		}
-	}
-
-	/**
 	 * An addition expression.
 	 */
 	static class Relational<V extends Comparable<V>> extends Expression<Boolean> implements Expr<Boolean> {
@@ -348,7 +346,7 @@ public class Compiler {
 
 		@Override
 		public String toString() {
-			return "(" + e1.toString() + " " + op.toString() + " " + e2.toString() + ")";
+			return "(" + e1.toString() + " " + op.getSign() + " " + e2.toString() + ")";
 		}
 
 		@Override
@@ -384,7 +382,7 @@ public class Compiler {
 
 		@Override
 		public String toString() {
-			return "(" + e1.toString() + " " + op.toString() + " " + e2.toString() + ")";
+			return "(" + e1.toString() + " " + op.getSign() + " " + e2.toString() + ")";
 		}
 	}
 
@@ -636,63 +634,6 @@ public class Compiler {
 		}
 	}
 
-	static class FieldOf extends Expression<Object> {
-		final Expr<Object> e1;
-		final String name;
-
-		FieldOf(Expr<Object> e1, String name) {
-			this.e1 = e1;
-			this.name = name;
-		}
-
-		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
-			e1.compile(cw, mv, context);
-			mv.visitLdcInsn(this.name);
-			switch (this.getExprType(context).rawType) {
-			case Long:
-				compileLong(mv);
-				break;
-			case String:
-				compileString(mv);
-				break;
-			default:
-				break;
-			}
-		}
-
-		public void compileLong(final MethodVisitor mv) {
-			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "get", "(Ljava/lang/String;)Ljava/lang/Object;");
-			mv.visitTypeInsn(CHECKCAST, "java/lang/Long");
-			mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Long", "longValue", "()J");
-		}
-
-		public void compileString(final MethodVisitor mv) {
-			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "get", "(Ljava/lang/String;)Ljava/lang/Object;");
-			mv.visitTypeInsn(CHECKCAST, "java/lang/String");
-		}
-
-		@Override
-		public Object eval() {
-			return ((Entity) e1.eval()).get(name);
-		}
-
-		@Override
-		public String toString() {
-			return e1.toString() + "." + name.toString();
-		}
-
-		@Override
-		public Type getExprType(Context context) {
-			Type type = e1.getExprType(context);
-			for (Field f : type.getFields()) {
-				if (f.name.equals(name)) {
-					return f.getType();
-				}
-			}
-			throw new RuntimeException("Cannot find field");
-		}
-	}
-
 	// Type resolveType(Type type, String name) {
 	// for (Field f : type.getFields()) {
 	// if (f.name.equals(name)) {
@@ -868,10 +809,12 @@ public class Compiler {
 	static class ListClause extends Expression<Object> {
 		final Expr<Object> list;
 		final Expr<Object> clause;
+		final List<Expr<Object>> params;
 
-		ListClause(final Expr<Object> list, final Expr<Object> clause) {
+		ListClause(final Expr<Object> list, final Expr<Object> clause, final List<Expr<Object>> params) {
 			this.list = list;
 			this.clause = clause;
+			this.params = params;
 		}
 
 		@Override
@@ -881,18 +824,28 @@ public class Compiler {
 
 		@Override
 		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
-			// Function<Entity, Boolean> funcClause = new
-			// EntityFuncitonComplier().compile(clause, context);
+			list.compile(cw, mv, context);
+			String clauseName = new EntityClauseComplier().compile(clause, context);
+			mv.visitTypeInsn(NEW, clauseName);
+			mv.visitInsn(DUP);
+			mv.visitMethodInsn(INVOKESPECIAL, clauseName, "<init>", "()V");
 
-			// list.compile(cw, mv, context);
-			// mv.visitTypeInsn(CHECKCAST, "java/util/List");
-			// index.compile(cw, mv, context);
-			// mv.visitInsn(L2I);
-			// mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "get",
-			// "(I)Ljava/lang/Object;");
-			// mv.visitTypeInsn(CHECKCAST, "nebula/data/Entity");
-			// // mv.visitInsn(POP);
+			mv.visitIntInsn(BIPUSH, params.size());
+			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+
+			for (int i = 0; i < params.size(); i++) {
+				mv.visitInsn(DUP);
+				mv.visitIntInsn(BIPUSH, i);
+
+				params.get(i).compile(cw, mv, context);
+				toObject(mv, params.get(i), context);
+
+				mv.visitInsn(AASTORE);
+			}
+
+			mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/Nebula", "filter", "(Ljava/util/List;Lnebula/lang/Clause;[Ljava/lang/Object;)Ljava/util/List;");
 		}
+
 	}
 
 	static class ListGet extends Expression<Object> {
@@ -991,6 +944,61 @@ public class Compiler {
 		}
 	}
 
+	static class ParamsRefer extends Expression<Object> {
+		final Expr<Object> in;
+		final int params;
+		final int index;
+
+		ParamsRefer(Expr<Object> in, int params, int index) {
+			this.in = in;
+			this.params = params;
+			this.index = index;
+		}
+
+		@Override
+		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
+			mv.visitVarInsn(ALOAD, params);
+			mv.visitIntInsn(SIPUSH, index);
+			mv.visitInsn(AALOAD);
+			fromObject(mv, in, context);
+		}
+
+		@Override
+		public Type getExprType(Context context) {
+			return in.getExprType(context);
+		}
+
+		@Override
+		public String toString() {
+			return "params[" + String.valueOf(index) + "]";
+		}
+	}
+
+	static class ListThisRefer extends Expression<Object> {
+		final Expr<Object> list;
+		final int index;
+
+		ListThisRefer(final Expr<Object> list, int index) {
+			this.list = list;
+			this.index = index;
+		}
+
+		@Override
+		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
+			mv.visitVarInsn(ALOAD, index);
+		}
+
+		@Override
+		public Type getExprType(Context context) {
+			return list.getExprType(context);
+		}
+
+		@Override
+		public String toString() {
+			return "this";// TODO
+		}
+	}
+
 	static class Block implements Opcodes, Statement {
 		final List<Statement> statements;
 
@@ -1048,6 +1056,44 @@ public class Compiler {
 		@Override
 		public String toString() {
 			return var.name + " = " + initExpr.toString() + ";";
+		}
+	}
+
+	static class FieldOf extends Expression<Object> {
+		final Expr<Object> e1;
+		final String name;
+
+		FieldOf(Expr<Object> e1, String name) {
+			this.e1 = e1;
+			this.name = name;
+		}
+
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			e1.compile(cw, mv, context);
+			mv.visitLdcInsn(this.name);
+			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "get", "(Ljava/lang/String;)Ljava/lang/Object;");
+			fromObject(mv, this, context);
+		}
+
+		@Override
+		public Object eval() {
+			return ((Entity) e1.eval()).get(name);
+		}
+
+		@Override
+		public String toString() {
+			return e1.toString() + "." + name.toString();
+		}
+
+		@Override
+		public Type getExprType(Context context) {
+			Type type = e1.getExprType(context);
+			for (Field f : type.getFields()) {
+				if (f.name.equals(name)) {
+					return f.getType();
+				}
+			}
+			throw new RuntimeException("Cannot find field");
 		}
 	}
 

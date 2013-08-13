@@ -20,12 +20,12 @@ public class LongOperator implements OperatorExpr, Opcodes {
 		ops.put(DIV, LDIV);
 		ops.put(REM, LREM);
 
-		ops.put(EQ, IFEQ);// '==';
-		ops.put(NE, IFNE);// '!=';
-		ops.put(GE, IFGE); // '>=';
-		ops.put(GT, IFGT);// '>';
-		ops.put(LE, IFLE); // '<=';
-		ops.put(LT, IFLT);// '<';
+		ops.put(EQ, IFNE);// '==';
+		ops.put(NE, IFEQ);// '!=';
+		ops.put(GE, IFLT); // '>=';
+		ops.put(GT, IFLE);// '>';
+		ops.put(LE, IFGT); // '<=';
+		ops.put(LT, IFGE);// '<';
 	}
 
 	public void arithmetic(ClassWriter cw, MethodVisitor mv, Context context, Operator op, Expr<Object> e1, Expr<Object> e2) {
@@ -71,11 +71,11 @@ public class LongOperator implements OperatorExpr, Opcodes {
 		mv.visitInsn(LCMP);
 		Label ifFalse = new Label();
 		mv.visitJumpInsn(op, ifFalse);
-		mv.visitInsn(ICONST_0);
+		mv.visitInsn(ICONST_1);
 		Label end = new Label();
 		mv.visitJumpInsn(GOTO, end);
 		mv.visitLabel(ifFalse);
-		mv.visitInsn(ICONST_1);
+		mv.visitInsn(ICONST_0);
 		mv.visitLabel(end);
 	}
 

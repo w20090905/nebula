@@ -8,13 +8,13 @@ import junit.framework.TestCase;
 
 public class EntityFuncitonComplierTest extends TestCase {
 	TypeLoaderForTest loader;
-	EntityFuncitonComplier funcCmp;
+	EntityClauseComplier funcCmp;
 	Compiler cp;
 	Context context;
 
 	protected void setUp() throws Exception {
 		loader = new TypeLoaderForTest(new SystemTypeLoader());
-		funcCmp = new EntityFuncitonComplier();
+		funcCmp = new EntityClauseComplier();
 		context = new Context() {
 
 			@Override
@@ -39,7 +39,7 @@ public class EntityFuncitonComplierTest extends TestCase {
 			Class<?> clz = NebulaClassLoader.getInstance().loadClass(name);
 
 			@SuppressWarnings("unchecked")
-			Function<Entity, Boolean> func = (Function<Entity, Boolean>) clz.newInstance();
+			Clause<Entity> func = (Clause<Entity>) clz.newInstance();
 			assertFalse(func.apply(null));
 			
 		} catch (InstantiationException e) {

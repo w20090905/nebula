@@ -1,13 +1,13 @@
 package nebula.asm;
 
 import nebula.data.Entity;
+import nebula.lang.Clause;
 
-import com.google.common.base.Function;
-
-public class EntityFunctionSample implements Function<Entity, Boolean> {
+public class EntityFunctionSample implements Clause<Entity> {
 
 	@Override
-	public Boolean apply(Entity input) {
-		return false;
+	public boolean apply(Entity entity, Object... params) {
+		long Age = 10;
+		return Age > 10L && Age < 40L;
 	}
 }
