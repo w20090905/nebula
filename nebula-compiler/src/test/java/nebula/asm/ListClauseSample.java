@@ -4,12 +4,20 @@ import java.util.List;
 
 import nebula.data.Entity;
 import nebula.lang.Nebula;
+import nebula.lang.Range;
 
 public class ListClauseSample {
 
 	public List<Entity> search(List<Entity> in) {
-		int i= 1000;
-		List<Entity>  out = Nebula.filter(in, new EntityFunctionSample(),i+10,i+11,i+12,i+13,i+14,i+15,i+16,i+17,i+18,i+19,i+20);		
+		Range[] ranges = new Range[4];
+		long ii = 10;
+		ranges[0] = Range.atLeast((int)ii);
+		ranges[1] = Range.atMost(10);
+		ranges[2] = Range.closed(1, 3);
+		ranges[3] = Range.closed(1, 1);
+
+		int i = 1000;
+		List<Entity> out = Nebula.filter(in, ranges);
 		return out;
 	}
 }

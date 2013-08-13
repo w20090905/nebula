@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Range;
 
 public class Nebula {
 	public static <V> List<V> filter(List<V> list, Clause<V> func, Object... params) {
@@ -23,15 +22,11 @@ public class Nebula {
 		return out;
 	}
 
-	public static <V> List<V> filter(List<V> list, Range<Integer>... ranges) {
+	// TODO need refact
+	public static <V> List<V> filter(List<V> list, Range... ranges) {
 		List<V> out = Lists.newArrayList();
-		for (int i = 0; i < list.size(); i++) {
-			for (Range<Integer> range : ranges) {
-				if (range.contains(i)) {
-					out.add(list.get(i));
-					break;
-				}
-			}
+		for (Range range : ranges) {
+			out = range.filter(list, out);
 		}
 		return out;
 	}

@@ -97,8 +97,8 @@ public class Compiler {
 	}
 
 	public Expr<Object> list(Expr<Object> list, List<Expr<Object>> ranges) {
-		if (ranges.size() == 1) {
-			return new ListGet(list, ranges.get(0));
+		if (ranges.size() == 1 && ranges.get(0) instanceof Index) {
+			return new ListGet(list, (Index) ranges.get(0));
 		} else {
 			return new ListRanges(list, ranges);
 		}
@@ -745,6 +745,9 @@ public class Compiler {
 		@Override
 		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
 			index.compile(cw, mv, context);
+			mv.visitInsn(L2I);
+			mv.visitInsn(DUP);
+			mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/Range", "closed", "(II)Lnebula/lang/Range;");
 		}
 	}
 
@@ -763,6 +766,8 @@ public class Compiler {
 		@Override
 		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
 			to.compile(cw, mv, context);
+			mv.visitInsn(L2I);
+			mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/Range", "atMost", "(I)Lnebula/lang/Range;");
 		}
 	}
 
@@ -781,6 +786,8 @@ public class Compiler {
 		@Override
 		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
 			from.compile(cw, mv, context);
+			mv.visitInsn(L2I);
+			mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/Range", "atLeast", "(I)Lnebula/lang/Range;");
 		}
 	}
 
@@ -801,8 +808,17 @@ public class Compiler {
 
 		@Override
 		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
-			from.compile(cw, mv, context);
-			to.compile(cw, mv, context);
+			if (from == to) {
+				from.compile(cw, mv, context);
+				mv.visitInsn(L2I);
+				mv.visitInsn(DUP);
+			} else {
+				from.compile(cw, mv, context);
+				mv.visitInsn(L2I);
+				to.compile(cw, mv, context);
+				mv.visitInsn(L2I);
+			}
+			mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/Range", "closed", "(II)Lnebula/lang/Range;");
 		}
 	}
 
@@ -850,23 +866,23 @@ public class Compiler {
 
 	static class ListGet extends Expression<Object> {
 		final Expr<Object> list;
-		final Expr<Object> index;
+		final Index index;
 
-		ListGet(final Expr<Object> list, final Expr<Object> index) {
+		ListGet(final Expr<Object> list, final Index index) {
 			this.list = list;
 			this.index = index;
 		}
 
 		@Override
 		public Type getExprType(Context context) {
-			return list.getExprType(context);
+			return ((ListType) list.getExprType(context)).getUnderlyType();
 		}
 
 		@Override
 		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
 			list.compile(cw, mv, context);
 			mv.visitTypeInsn(CHECKCAST, "java/util/List");
-			index.compile(cw, mv, context);
+			index.index.compile(cw, mv, context);
 			mv.visitInsn(L2I);
 			mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "get", "(I)Ljava/lang/Object;");
 			mv.visitTypeInsn(CHECKCAST, "nebula/data/Entity");
@@ -885,7 +901,7 @@ public class Compiler {
 
 		@Override
 		public Type getExprType(Context context) {
-			return context.resolveType(name);
+			return new ListType(context.resolveType(name));
 		}
 
 		@Override
@@ -912,12 +928,24 @@ public class Compiler {
 
 		@Override
 		public Type getExprType(Context context) {
-			return new ListType(list.getExprType(context));
+			return list.getExprType(context);
 		}
 
 		@Override
 		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
-			// TODO
+			list.compile(cw, mv, context);
+
+			mv.visitIntInsn(BIPUSH, ranges.size());
+			mv.visitTypeInsn(ANEWARRAY, "nebula/lang/Range");
+
+			for (int i = 0; i < ranges.size(); i++) {
+				mv.visitInsn(DUP);
+				mv.visitIntInsn(BIPUSH, i);
+				ranges.get(i).compile(cw, mv, context);
+				mv.visitInsn(AASTORE);
+			}
+
+			mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/Nebula", "filter", "(Ljava/util/List;[Lnebula/lang/Range;)Ljava/util/List;");
 		}
 	}
 
@@ -990,7 +1018,7 @@ public class Compiler {
 
 		@Override
 		public Type getExprType(Context context) {
-			return list.getExprType(context);
+			return ((ListType) list.getExprType(context)).getUnderlyType();
 		}
 
 		@Override
