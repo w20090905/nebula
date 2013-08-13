@@ -10,7 +10,7 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-public class EntityActionComplier implements Opcodes {
+public class EntityFuncitonComplier implements Opcodes {
 	Log log = LogFactory.getLog(getClass());
 
 	/*
@@ -24,7 +24,8 @@ public class EntityActionComplier implements Opcodes {
 		MethodVisitor mv;
 
 		// Class define
-		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, name, null, "java/lang/Object", new String[] { "nebula/lang/EntityAction" });
+		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, name, "Ljava/lang/Object;Lcom/google/common/base/Function<Lnebula/data/Entity;Ljava/lang/Boolean;>;",
+				"java/lang/Object", new String[] { "com/google/common/base/Function" });
 
 		// Init method
 		{
@@ -39,9 +40,21 @@ public class EntityActionComplier implements Opcodes {
 
 		// method
 		{
-			mv = cw.visitMethod(ACC_PUBLIC, "exec", "(Lnebula/data/Entity;Lnebula/data/DataRepos;)V", null, null);
+			mv = cw.visitMethod(ACC_PUBLIC, "apply", "(Lnebula/data/Entity;)Ljava/lang/Boolean;", null, null);
 			code.compile(cw, mv, context);
-			mv.visitInsn(RETURN);
+			mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");
+			mv.visitInsn(ARETURN);
+			mv.visitMaxs(0, 0);
+			mv.visitEnd();
+		}
+		{
+			mv = cw.visitMethod(ACC_PUBLIC + ACC_BRIDGE + ACC_SYNTHETIC, "apply", "(Ljava/lang/Object;)Ljava/lang/Object;", null, null);
+			mv.visitCode();
+			mv.visitVarInsn(ALOAD, 0);
+			mv.visitVarInsn(ALOAD, 1);
+			mv.visitTypeInsn(CHECKCAST, "nebula/data/Entity");
+			mv.visitMethodInsn(INVOKEVIRTUAL, name, "apply", "(Lnebula/data/Entity;)Ljava/lang/Boolean;");
+			mv.visitInsn(ARETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
@@ -52,8 +65,8 @@ public class EntityActionComplier implements Opcodes {
 
 	static long count = 0;
 
-	public EntityAction compile(Code code, Type type, Context context) {
-		String name = "EntityAction" + String.valueOf(count++);
+	public String compile(Code code, Context context) {
+		String name = "EntityFunciton" + String.valueOf(count++);
 		try {
 			byte[] b = this.doCompile(name, code, context);
 			if (log.isDebugEnabled()) {
@@ -69,15 +82,9 @@ public class EntityActionComplier implements Opcodes {
 					throw new RuntimeException(e);
 				}
 			}
-			Class<?> expClass = NebulaClassLoader.defineClass(name, b);
-			// instantiates this compiled expression class...
-			EntityAction expr = (EntityAction) expClass.newInstance();
-			return expr;
+			NebulaClassLoader.defineClass(name, b);
+			return name;
 		} catch (ClassFormatError e) {
-			throw new RuntimeException(e);
-		} catch (InstantiationException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
 			throw new RuntimeException(e);
 		}
 	}

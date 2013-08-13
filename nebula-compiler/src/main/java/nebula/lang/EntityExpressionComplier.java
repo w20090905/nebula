@@ -13,14 +13,14 @@ import org.objectweb.asm.Opcodes;
 
 import com.google.common.base.Preconditions;
 
-public class EntityExpressionComplier extends ClassLoader implements Opcodes {
+public class EntityExpressionComplier implements Opcodes {
 	Log log = LogFactory.getLog(getClass());
 
 	/*
 	 * Returns the byte code of an Expression class corresponding to this
 	 * expression.
 	 */
-	<T> byte[]  doCompile(final String name, final Expr<T> expr,Context context) {
+	<T> byte[] doCompile(final String name, final Expr<T> expr, Context context) {
 		String actualClass = null;
 
 		Class<?> cls = expr.getClass();
@@ -53,7 +53,8 @@ public class EntityExpressionComplier extends ClassLoader implements Opcodes {
 		MethodVisitor mv;
 
 		// Class define
-		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, name, "Ljava/lang/Object;Lnebula/lang/EntityExpression;", "java/lang/Object", new String[] { "nebula/lang/EntityExpression" });
+		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, name, "Ljava/lang/Object;Lnebula/lang/EntityExpression;", "java/lang/Object",
+				new String[] { "nebula/lang/EntityExpression" });
 
 		// Init method
 		{
@@ -65,53 +66,43 @@ public class EntityExpressionComplier extends ClassLoader implements Opcodes {
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
-/**
-		// generic method
-		{
-			mv = cw.visitMethod(ACC_PUBLIC, "eval", "(Lnebula/data/Entity;)L" + actualClass + ";", null, null);
-			expr.compile(mv);
-			if ("java/lang/Integer".equals(actualClass)) {
-				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;");
-			} else if ("java/lang/Boolean".equals(actualClass)) {
-				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");
-			}
-
-			mv.visitInsn(ARETURN);
-			mv.visitMaxs(0, 0);
-			mv.visitEnd();
-		}
-		{
-			mv = cw.visitMethod(ACC_PUBLIC + ACC_BRIDGE + ACC_SYNTHETIC, "eval",
-					"(Lnebula/data/Entity;)Ljava/lang/Object;", null, null);
-			mv.visitVarInsn(ALOAD, 0);
-			mv.visitVarInsn(ALOAD, 1);
-			mv.visitMethodInsn(INVOKEVIRTUAL, name, "eval", "(Lnebula/data/Entity;)L" + actualClass + ";");
-			mv.visitInsn(ARETURN);
-			mv.visitMaxs(0, 0);
-			mv.visitEnd();
-		}
-		cw.visitEnd();
-		*/
-		
+		/**
+		 * // generic method { mv = cw.visitMethod(ACC_PUBLIC, "eval",
+		 * "(Lnebula/data/Entity;)L" + actualClass + ";", null, null);
+		 * expr.compile(mv); if ("java/lang/Integer".equals(actualClass)) {
+		 * mv.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf",
+		 * "(I)Ljava/lang/Integer;"); } else if
+		 * ("java/lang/Boolean".equals(actualClass)) {
+		 * mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf",
+		 * "(Z)Ljava/lang/Boolean;"); }
+		 * 
+		 * mv.visitInsn(ARETURN); mv.visitMaxs(0, 0); mv.visitEnd(); } { mv =
+		 * cw.visitMethod(ACC_PUBLIC + ACC_BRIDGE + ACC_SYNTHETIC, "eval",
+		 * "(Lnebula/data/Entity;)Ljava/lang/Object;", null, null);
+		 * mv.visitVarInsn(ALOAD, 0); mv.visitVarInsn(ALOAD, 1);
+		 * mv.visitMethodInsn(INVOKEVIRTUAL, name, "eval",
+		 * "(Lnebula/data/Entity;)L" + actualClass + ";");
+		 * mv.visitInsn(ARETURN); mv.visitMaxs(0, 0); mv.visitEnd(); }
+		 * cw.visitEnd();
+		 */
 
 		// method
 		{
-			mv = cw.visitMethod(ACC_PUBLIC + ACC_BRIDGE + ACC_SYNTHETIC, "eval",
-					"(Lnebula/data/Entity;)Ljava/lang/Object;", null, null);
-			
+			mv = cw.visitMethod(ACC_PUBLIC + ACC_BRIDGE + ACC_SYNTHETIC, "eval", "(Lnebula/data/Entity;)Ljava/lang/Object;", null, null);
+
 			expr.compile(cw, mv, context);
-			
+
 			switch (expr.getExprType(context).rawType) {
 			case Boolean:
-				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");	
+				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");
 				break;
 			case Long:
-				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Long", "valueOf", "(J)Ljava/lang/Long;");			
-				break;				
+				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Long", "valueOf", "(J)Ljava/lang/Long;");
+				break;
 			default:
 				break;
 			}
-			
+
 			mv.visitInsn(ARETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
@@ -123,10 +114,10 @@ public class EntityExpressionComplier extends ClassLoader implements Opcodes {
 
 	static long count = 0;
 
-	public <T> EntityExpression compile(Expr<T> exp, Type type,Context context) {
+	public <T> EntityExpression compile(Expr<T> exp, Type type, Context context) {
 		String name = "EntityExpression" + String.valueOf(count++);
 		try {
-			byte[] b = this.doCompile(name, exp,context);
+			byte[] b = this.doCompile(name, exp, context);
 			if (log.isDebugEnabled()) {
 				try {
 					FileOutputStream fos = new FileOutputStream("tmp\\" + name + ".class");
@@ -140,7 +131,7 @@ public class EntityExpressionComplier extends ClassLoader implements Opcodes {
 					throw new RuntimeException(e);
 				}
 			}
-			Class<?> expClass = this.defineClass(name, b, 0, b.length);
+			Class<?> expClass = NebulaClassLoader.defineClass(name, b);
 			// instantiates this compiled expression class...
 			EntityExpression expr = (EntityExpression) expClass.newInstance();
 			return expr;

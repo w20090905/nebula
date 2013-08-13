@@ -81,7 +81,7 @@ public class Compiler {
 	public <V extends Comparable<V>> Expr<Boolean> opRelational(Operator op, Expr<V> e1, Expr<V> e2) {
 		return new Relational<V>(op, e1, e2);
 	}
-	
+
 	public Expr<Object> range(Expr<Object> from, Expr<Object> to) {
 		if (from == null) {
 			return new Range_0_To(to);
@@ -127,7 +127,6 @@ public class Compiler {
 	public Expr<Object> opArithmetic(Operator op, Expr<Object> e1, Expr<Object> e2) {
 		return new Arithmetic(op, e1, e2);
 	}
-
 
 	public Expr<Object> opIncrement(Expr<Object> e1) {
 		return new Increment(e1);
@@ -331,7 +330,7 @@ public class Compiler {
 		final Expr<V> e1;
 		final Expr<V> e2;
 
-		Relational(final Operator op,Expr<V> e1, Expr<V> e2) {
+		Relational(final Operator op, Expr<V> e1, Expr<V> e2) {
 			this.op = op;
 			this.e1 = e1;
 			this.e2 = e2;
@@ -347,10 +346,9 @@ public class Compiler {
 			return e1.eval().compareTo(e2.eval()) >= 0;
 		}
 
-
 		@Override
 		public String toString() {
-			return "(" + e1.toString() + " " +  op.toString() + " " + e2.toString() + ")";
+			return "(" + e1.toString() + " " + op.toString() + " " + e2.toString() + ")";
 		}
 
 		@Override
@@ -358,7 +356,7 @@ public class Compiler {
 			return context.resolveType(RawTypes.Boolean.name());
 		}
 	}
-	
+
 	static class Arithmetic extends Expression<Object> {
 		final Expr<Object> e1;
 		final Expr<Object> e2;
@@ -386,10 +384,9 @@ public class Compiler {
 
 		@Override
 		public String toString() {
-			return "(" + e1.toString() + " " +  op.toString() + " " + e2.toString() + ")";
+			return "(" + e1.toString() + " " + op.toString() + " " + e2.toString() + ")";
 		}
 	}
-
 
 	abstract static class UnaryArithmeticExpr extends Expression<Object> {
 		final Expr<Object> e1;
@@ -865,6 +862,36 @@ public class Compiler {
 		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
 			from.compile(cw, mv, context);
 			to.compile(cw, mv, context);
+		}
+	}
+
+	static class ListClause extends Expression<Object> {
+		final Expr<Object> list;
+		final Expr<Object> clause;
+
+		ListClause(final Expr<Object> list, final Expr<Object> clause) {
+			this.list = list;
+			this.clause = clause;
+		}
+
+		@Override
+		public Type getExprType(Context context) {
+			return list.getExprType(context);
+		}
+
+		@Override
+		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
+			// Function<Entity, Boolean> funcClause = new
+			// EntityFuncitonComplier().compile(clause, context);
+
+			// list.compile(cw, mv, context);
+			// mv.visitTypeInsn(CHECKCAST, "java/util/List");
+			// index.compile(cw, mv, context);
+			// mv.visitInsn(L2I);
+			// mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "get",
+			// "(I)Ljava/lang/Object;");
+			// mv.visitTypeInsn(CHECKCAST, "nebula/data/Entity");
+			// // mv.visitInsn(POP);
 		}
 	}
 
