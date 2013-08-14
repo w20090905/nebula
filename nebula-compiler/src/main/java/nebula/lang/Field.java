@@ -16,18 +16,9 @@ public class Field {
 	int rangeTo = Integer.MAX_VALUE;
 
 	Type type;
-	String _typeName;
 	Reference refer;
 
 	InheritHashMap attrs;
-
-	public String getType_name() {
-		return _typeName;
-	}
-
-	public void setType_name(String type_name) {
-		this._typeName = type_name;
-	}
 
 	public Field(Type resideType, String name) {
 		super();

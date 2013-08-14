@@ -436,16 +436,16 @@ additiveExpr returns [Expr v]
         )*
     ;
 multiplicativeExpr returns [Expr v]
-    :   a=postfixExpr {v=a;} 
-        (  operator=multiplicativeOperators  c=postfixExpr  {v=op.opArithmetic(operator,v,c);} 
+    :   a=unary {v=a;}
+        (  operator=multiplicativeOperators  c=unary  {v=op.opArithmetic(operator,v,c);} 
         )*
     ;
 
 unary returns [Expr v]
-    :   '++' b=postfixExpr {v=op.opIncrement(b);} 
-        | '+'  b=postfixExpr {v=op.opPositive(b);} 
-        | '--'  b=postfixExpr {v=op.opDecrement(b);} 
-        | '-'  b=postfixExpr {v=op.opNegates(b);} 
+    :  INC b=postfixExpr {v=op.opIncrement(b);} 
+        | DEC  b=postfixExpr {v=op.opDecrement(b);} 
+//        | ADD  b=postfixExpr {v=op.opPositive(b);} 
+//        | SUB  b=postfixExpr {v=op.opNegates(b);} 
         | b=postfixExpr {v=b;} 
     ;
 

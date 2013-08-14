@@ -15,6 +15,7 @@ import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 
 public class Compiler {
@@ -24,9 +25,9 @@ public class Compiler {
 
 	static OperatorExpr resolveOperator(Type type) {
 		OperatorExpr op = opTypes.get(type.getName());
-		if (op != null) return op;
-		else if (type.getSuperType() != null) return resolveOperator(type.getSuperType());
-		else throw new RuntimeException("Cannot find type" + type.name);
+		if (op == null && type.getSuperType() != null) op = resolveOperator(type.getSuperType());
+		Preconditions.checkNotNull(op);
+		return op;
 	}
 
 	Compiler(Context context) {
@@ -410,7 +411,7 @@ public class Compiler {
 
 		@Override
 		public String toString() {
-			return "++" + e1.toString();
+			return "(++" + e1.toString() + ")";
 		}
 	}
 
@@ -425,7 +426,7 @@ public class Compiler {
 
 		@Override
 		public String toString() {
-			return "--" + e1.toString();
+			return "(--" + e1.toString() + ")";
 		}
 	}
 
@@ -440,7 +441,7 @@ public class Compiler {
 
 		@Override
 		public String toString() {
-			return "+" + e1.toString();
+			return "(+" + e1.toString() + ")";
 		}
 	}
 
@@ -455,7 +456,7 @@ public class Compiler {
 
 		@Override
 		public String toString() {
-			return "+" + e1.toString();
+			return "(-" + e1.toString() + ")";
 		}
 	}
 
@@ -808,16 +809,11 @@ public class Compiler {
 
 		@Override
 		public void compile(ClassWriter cw, MethodVisitor mv, Context context) {
-			if (from == to) {
-				from.compile(cw, mv, context);
-				mv.visitInsn(L2I);
-				mv.visitInsn(DUP);
-			} else {
-				from.compile(cw, mv, context);
-				mv.visitInsn(L2I);
-				to.compile(cw, mv, context);
-				mv.visitInsn(L2I);
-			}
+			from.compile(cw, mv, context);
+			mv.visitInsn(L2I);
+			to.compile(cw, mv, context);
+			mv.visitInsn(L2I);
+
 			mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/Range", "closed", "(II)Lnebula/lang/Range;");
 		}
 	}
@@ -1125,7 +1121,7 @@ public class Compiler {
 		}
 	}
 
-	static class PutField implements Opcodes, Statement {
+	static class PutField extends Expression<Object> implements Opcodes, Statement {
 		final Expr<Object> parent;
 		final Expr<Object> value;
 		final String name;
@@ -1134,19 +1130,6 @@ public class Compiler {
 			this.parent = field.e1;
 			this.name = field.name;
 			this.value = value;
-		}
-
-		private void toObject(final MethodVisitor mv, Expr<Object> expr, Context context) {
-			switch (expr.getExprType(context).rawType) {
-			case Boolean:
-				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");
-				break;
-			case Long:
-				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Long", "valueOf", "(J)Ljava/lang/Long;");
-				break;
-			default:
-				break;
-			}
 		}
 
 		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
@@ -1165,6 +1148,12 @@ public class Compiler {
 		@Override
 		public String toString() {
 			return parent.toString() + "." + name.toString() + " = " + value.toString() + ";";
+		}
+
+		@Override
+		public Type getExprType(Context context) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 	}
 

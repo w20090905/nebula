@@ -193,6 +193,10 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 		eqExpr("a*b", "(a * b)");
 		eqExpr("a/b", "(a / b)");
 		eqExpr("a%b", "(a % b)");
+		eqExpr("++a", "(++a)");
+		eqExpr("--a", "(--a)");
+//		eqExpr("+a", "(+a)");
+//		eqExpr("-a", "(-a)");
 
 		eqExpr("a +1 * b /10-1", "((a + ((1 * b) / 10)) - 1)");
 
