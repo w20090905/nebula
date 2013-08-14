@@ -149,6 +149,59 @@ options {
   };
 }
 
+flowDefinition returns[Flow flow]
+    : 
+      'flow'
+      typeID=ID
+      ('extends' superTypeID=ID)?
+      { flow = new Flow(loader,$typeID.text);  loading(flow); }
+      '{' NEWLINE?
+          stepDefinition[flow]* 
+      '}' {loadingFinish(flow);exitTopType();}  (';' NEWLINE?| NEWLINE)
+    
+    ;
+
+stepDefinition[Flow resideFlow]  returns[Flow.Step step]
+  @init{
+      Type stepType = null;
+      Type superType = null;
+    }
+    :
+      actorQuery = queryLiteral?
+      stepID = ID
+        (('extends' | ':') superTypeID=ID )?    
+        {
+            if($superTypeID==null){
+                superType = resolveType($stepID.text);
+                if(superType==null){
+                    superType = resolveType(Flow.APPROVE);
+                 } 
+            }else{
+                superType = resolveType($superTypeID.text);                
+            }
+        } 
+        (
+            '{'  NEWLINE?   
+                { 
+                    String name = resideFlow.name + "$" + $stepID.text + ( superTypeID==null?(resideFlow.steps.size()+1) : "");
+                    stepType = new Type(loader,resideFlow,name, superType); 
+                    loading(stepType);
+                }
+                fieldDefinition[stepType]* 
+            '}'     {loadingFinish(stepType);} 
+        )?
+        {          
+            if(stepType==null){
+                stepType = superType;
+            }
+            step = resideFlow.addStep($actorQuery.text,$stepID.text,stepType);            
+        }
+         (';' NEWLINE?| NEWLINE)
+    ;
+
+queryLiteral
+    : ('[' ((~(']'))*) ']')  ;
+
 programDefinition returns[List<Type> retTypes]
     : typeDefinition NEWLINE*
       {retTypes = this.types;}
@@ -158,7 +211,7 @@ typeDefinition returns[Type type]
     :   (annotations = annotationListDefinition)?
         typeType=typeDefineKeyword 
         typeID=ID 
-        /* Aliases */
+        // Aliases
          ('|' aliases=aliasesLiteral[$typeID.text]
          | {aliases = new Aliases($typeID.text);}
          )
@@ -192,7 +245,7 @@ typeDefinition returns[Type type]
           '{' NEWLINE? (fieldDefinition[type])*  '}' (';'|NEWLINE)
         )
                 
-        /* Finish */
+        // Finish
         {loadingFinish(type);exitTopType();}
         ;
 

@@ -32,6 +32,8 @@ public class NebulaParser_BasicTest extends TestCase {
 			NebulaParser parser = new NebulaParser(tokens, compiler);
 			Type type = parser.typeDefinition();
 
+			assertEquals(0, parser.getNumberOfSyntaxErrors());
+			
 			return type;
 		} catch (RecognitionException e) {
 			fail(e.toString());
