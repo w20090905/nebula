@@ -1,10 +1,7 @@
 package nebula.lang;
 
-import nebula.data.Entity;
-
-import com.google.common.base.Function;
-
 import junit.framework.TestCase;
+import nebula.data.Entity;
 
 public class EntityFuncitonComplierTest extends TestCase {
 	TypeLoaderForTest loader;
