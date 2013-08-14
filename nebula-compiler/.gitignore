@@ -2,8 +2,6 @@ bin
 gen
 .settings
 target
-*/*/*/*.tokens
-*/*/*.tokens
-*/*.tokens
+*.tokens
 /logs
 /tmp
