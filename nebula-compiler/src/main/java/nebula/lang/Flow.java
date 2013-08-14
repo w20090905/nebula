@@ -14,8 +14,11 @@ public class Flow extends Type {
 
 	SmartList<String, Step> steps;
 
-	Flow(TypeLoader typeLoader, String name) {
-		super(typeLoader, name);
+	Flow(TypeLoader typeLoader, Type superType, String name) {
+		super(typeLoader, name, superType, TypeStandalone.Flow);
+		// Type(TypeLoader typeLoader, String name, Type superType,
+		// TypeStandalone standalone) {
+		// super(typeLoader, name);
 		steps = new SmartList<String, Step>(new Function<Step, String>() {
 			@Override
 			public String apply(Step input) {
@@ -57,7 +60,7 @@ public class Flow extends Type {
 		@Override
 		public String toString() {
 			// TODO Auto-generated method stub
-			return this.name + "[" + stepType.toString()+  "]";
+			return this.name + "[" + stepType.toString() + "]";
 		}
 	}
 }

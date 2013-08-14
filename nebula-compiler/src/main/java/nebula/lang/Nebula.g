@@ -150,11 +150,21 @@ options {
 }
 
 flowDefinition returns[Flow flow]
+  @init{
+      Type superType = null;
+    }
     : 
       'flow'
       typeID=ID
       ('extends' superTypeID=ID)?
-      { flow = new Flow(loader,$typeID.text);  loading(flow); }
+      {
+            if($superTypeID==null){
+                superType = resolveType(TypeStandalone.Flow.name());
+            }else{
+                superType = resolveType($superTypeID.text);                
+            }
+       } 
+      { flow = new Flow(loader,superType,$typeID.text);  loading(flow); }
       '{' NEWLINE?
           stepDefinition[flow]* 
       '}' {loadingFinish(flow);exitTopType();}  (';' NEWLINE?| NEWLINE)

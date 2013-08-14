@@ -8,18 +8,18 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 
 public class NebulaParser_Flow_BasicTest extends TestCase {
-	TypeLoaderForFlowTest compiler;
+	TypeLoaderForFlowTest typeLoader;
 
 	@Override
 	protected void setUp() throws Exception {
-		compiler = new TypeLoaderForFlowTest(new SystemTypeLoader());
+		typeLoader = new TypeLoaderForFlowTest(new SystemTypeLoader());
 	}
 
 	private Flow parseFlow(String text) {
 		try {
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, compiler);
+			NebulaParser parser = new NebulaParser(tokens, typeLoader);
 			Flow flow = parser.flowDefinition();
 			assertEquals(0, parser.getNumberOfSyntaxErrors());
 			return flow;
@@ -33,9 +33,9 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 		try {
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, compiler);
-			Flow flow = new Flow(compiler, "Test");
-			flow.addStep("test", "Approve", compiler.findType("Approve"));
+			NebulaParser parser = new NebulaParser(tokens, typeLoader);
+			Flow flow = new Flow(typeLoader, typeLoader.findType(TypeStandalone.Flow.name()), "Test");
+			flow.addStep("test", "Approve", typeLoader.findType("Approve"));
 			Step step = parser.stepDefinition(flow);
 			assertEquals(0, parser.getNumberOfSyntaxErrors());
 			return step;
@@ -65,7 +65,7 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 		//@formatter:on		
 
 		Flow flow = parseFlow(text);
-		
+
 		assertEquals("Issue", flow.name);
 		assertEquals("Issue", flow.name);
 
@@ -134,7 +134,7 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 		//@formatter:on		
 
 		Flow flow = parseFlow(text);
-		
+
 		assertEquals("Issue", flow.name);
 		assertEquals("Issue", flow.name);
 
@@ -152,7 +152,6 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 
 	}
 
-	
 	public void testStepDefinition() {
 		// String text = null;
 		Step step = null;
@@ -173,7 +172,7 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 		assertEquals("aa", step.name);
 		assertEquals("Approve", step.stepType.name);
 		assertEquals("Step", step.stepType.superType.name);
-		
+
 		step = parseStep("AA extends Approve{};");
 		assertEquals("AA", step.name);
 		assertEquals(step.resideFlow.name + "$AA", step.stepType.name);
