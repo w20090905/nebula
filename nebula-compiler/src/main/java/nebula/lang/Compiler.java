@@ -138,6 +138,10 @@ public class Compiler {
 		return new Negates(e1);
 	}
 
+	public Expr opYesnoCst(boolean b) {
+		return new YesnoCst(b);
+	}
+
 	public Expr<Long> opLongCst(String value) {
 		return new LongCst(value);
 	}
@@ -514,6 +518,34 @@ public class Compiler {
 		@Override
 		public Type getExprType(Context context) {
 			return context.resolveType(RawTypes.Decimal.name());
+		}
+	}
+
+	static class YesnoCst extends Expression<Long> {
+		final Long value;
+
+		YesnoCst(boolean v) {
+			if (v) this.value = 1L;
+			else this.value = 0L;
+		}
+
+		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
+			mv.visitLdcInsn(value);
+		}
+
+		@Override
+		public Long eval() {
+			return this.value;
+		}
+
+		@Override
+		public String toString() {
+			return value == 1 ? "Yes" : "No";
+		}
+
+		@Override
+		public Type getExprType(Context context) {
+			return context.resolveType(RawTypes.Boolean.name());
 		}
 	}
 

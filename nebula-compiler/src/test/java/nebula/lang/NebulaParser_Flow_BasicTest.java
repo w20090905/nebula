@@ -1,6 +1,7 @@
 package nebula.lang;
 
 import junit.framework.TestCase;
+import nebula.data.impl.EditableEntity;
 import nebula.lang.Flow.Step;
 
 import org.antlr.runtime.ANTLRStringStream;
@@ -29,6 +30,20 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 		}
 	}
 
+	private Type parseType(String text) {
+		try {
+			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			NebulaParser parser = new NebulaParser(tokens, typeLoader);
+			Type type = parser.typeDefinition();
+			assertEquals(0, parser.getNumberOfSyntaxErrors());
+			return type;
+		} catch (RecognitionException e) {
+			fail(e.toString());
+			return null;
+		}
+	}
+
 	private Step parseStep(String text) {
 		try {
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
@@ -43,6 +58,96 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 			fail(e.toString());
 			return null;
 		}
+	}
+
+	public void testFlowDefinition_Flow_Base() {
+		//@formatter:off
+		String text = "" +
+				"type Flow { };";
+		//@formatter:on		
+
+		Type type = parseType(text);
+
+		assertNotNull(type);
+	}
+
+	public void testFlowDefinition_Step_Base() {
+
+		//@formatter:off
+		String text = "" +
+				"type Step {" +
+				"		NextStep String := \"Next\";" +
+				"		DoItNow YesNo := false;" +
+				"		init(){" +
+				"		}; " +
+				"		next(){" +
+				"			this.DoItNow = true;" +
+				"		};" +
+				"		end(){" +
+				"			this.NextStep = \"End\";" +
+				"			this.DoItNow = true;" +
+				"		};" +
+				"		skip(){" +
+				"			this.NextStep = \"Skip\";" +
+				"			this.DoItNow = true;" +
+				"		};" +
+				"};";
+		//@formatter:on	
+
+		Type type = parseType(text);
+
+		EditableEntity entity = new EditableEntity();
+		
+		assertNotNull(type);
+		int i = 0;
+		assertEquals("NextStep", type.fields.get(i).name);
+		assertEquals("String", type.fields.get(i).type.name);
+		type.fields.get(i).expr.eval(entity);
+		
+		assertEquals("Next", entity.get("NextStep"));
+		assertEquals(null, entity.get("DoItNow"));
+		
+		i++;
+		assertEquals("DoItNow", type.fields.get(i).name);
+		assertEquals("YesNo", type.fields.get(i).type.name);
+		type.fields.get(i).expr.eval(entity);
+
+		assertEquals("Next", entity.get("NextStep"));
+		assertEquals(false, entity.get("DoItNow"));
+		
+		i = 0;
+
+
+		assertEquals("init", type.actions.get(i).name);
+
+		type.actions.get(i).code.exec(entity, null);
+		assertEquals("Next", entity.get("NextStep"));
+		assertEquals(false, entity.get("DoItNow"));
+
+		i++;
+
+		assertEquals("next", type.actions.get(i).name);
+
+		type.actions.get(i).code.exec(entity, null);
+		
+		assertEquals("Next", entity.get("NextStep"));
+		assertEquals(true, entity.get("DoItNow"));
+
+		i++;
+
+		assertEquals("end", type.actions.get(i).name);
+
+		type.actions.get(i).code.exec(entity, null);
+		assertEquals("End", entity.get("NextStep"));
+		assertEquals(true, entity.get("DoItNow"));
+
+		i++;
+
+		assertEquals("skip", type.actions.get(i).name);
+
+		type.actions.get(i).code.exec(entity, null);
+		assertEquals("Skip", entity.get("NextStep"));
+		assertEquals(true, entity.get("DoItNow"));
 	}
 
 	public void testFlowDefinition_basic() {
