@@ -559,36 +559,6 @@ singleRange returns [Expr v]:
     }
 ;
 
-   /*
-clauseOr returns [Expr v]
-  :
-a=clauseAnd {v = a;}
-        (
-          (  '||' |   'or') 
-          b=clauseAnd {v=op.opOr(v,b);}
-        )*
-    ;
-
-clauseAnd returns [Expr v]
-  :
-     a=clausePrimary {v = a;}
-       (
-          ( '&&' | 'and') 
-          b=clausePrimary  {v=op.opAnd(v,b);}
-      )*
-    ;
-
-clausePrimary returns [Expr v] options  {k=1;}
-  :
-    s=scalar{v = s;}
-    | c=clauseRelationalExpr {v = c;}
-    ;
-clauseRelationalExpr returns [Expr v] options {backtrack=true;}
-    :   ID{v=op.opFieldInList($ID.text);}
-        operator=relationalOperators  
-        c=additiveExpr  {v=op.opRelational(operator,v,c);}
-    ;
-*/
 scalar returns [Expr v] options {k=1;}
   :
   (decimal{v=op.opDecimalCst($decimal.text);} | INT{v=op.opLongCst($INT.text);}) unit=ID{v=op.opUnit(v,$unit.text);};
