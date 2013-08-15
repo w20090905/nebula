@@ -58,6 +58,7 @@ public class Type implements Timable {
 	public String getDisplayName() {
 		return nameAlias.getDefault();
 	}
+
 	/**
 	 * Used by Basic type, Master,Tx
 	 */
@@ -87,8 +88,7 @@ public class Type implements Timable {
 		this(typeLoader, residedType, name, superType, null, TypeStandalone.Mixin);
 	}
 
-	Type(TypeLoader typeLoader, Type residedType, String name, Type superType, RawTypes rawType,
-			TypeStandalone standalone) {
+	Type(TypeLoader typeLoader, Type residedType, String name, Type superType, RawTypes rawType, TypeStandalone standalone) {
 		super();
 		this.loader = typeLoader;
 		this.name = name;
@@ -109,9 +109,10 @@ public class Type implements Timable {
 		this.nameAlias = new Aliases(name);
 	}
 
-	public boolean isArray(){
+	public boolean isArray() {
 		return false;
 	}
+
 	public String getName() {
 		return name;
 	}
@@ -176,8 +177,7 @@ public class Type implements Timable {
 
 	@Override
 	public String toString() {
-		return "Type [name=" + name + ", nameAlias=" + nameAlias + ", standalone=" + standalone + ", text=" + code
-				+ "]";
+		return "Type [name=" + name + ", nameAlias=" + nameAlias + ", standalone=" + standalone + ", text=" + code + "]";
 	}
 
 	public long getLastModified() {
@@ -186,6 +186,23 @@ public class Type implements Timable {
 
 	public void setLastModified(long lastModified) {
 		this.lastModified = lastModified;
+	}
+
+	public List<Field> getActions() {
+		return actions;
+	}
+
+	public Field getActionByName(String name) {
+		Field action = null;
+		for (Field f : actions) {
+			if (name.equals(f.name)) {
+				action = f;
+			}
+		}
+		if (action == null && this.superType != null) {
+			action = this.superType.getActionByName(name);
+		}
+		return action;
 	}
 
 }

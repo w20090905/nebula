@@ -521,12 +521,12 @@ public class Compiler {
 		}
 	}
 
-	static class YesnoCst extends Expression<Long> {
-		final Long value;
+	static class YesnoCst extends Expression<Integer> {
+		final int value;
 
 		YesnoCst(boolean v) {
-			if (v) this.value = 1L;
-			else this.value = 0L;
+			if (v) this.value = 1;
+			else this.value = 0;
 		}
 
 		public void compile(ClassWriter cw, final MethodVisitor mv, Context context) {
@@ -534,7 +534,7 @@ public class Compiler {
 		}
 
 		@Override
-		public Long eval() {
+		public Integer eval() {
 			return this.value;
 		}
 

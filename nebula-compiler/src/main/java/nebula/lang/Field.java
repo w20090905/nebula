@@ -118,4 +118,12 @@ public class Field {
 	public void setNameAlias(Aliases nameAlias) {
 		this.nameAlias = nameAlias;
 	}
+
+	public EntityExpression getExpr() {
+		return expr;
+	}
+
+	public EntityAction getCode() {
+		return code;
+	}
 }
