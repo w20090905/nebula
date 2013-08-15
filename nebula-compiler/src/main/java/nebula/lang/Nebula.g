@@ -602,6 +602,8 @@ constExpr returns [Expr v]
       | DateTimeLiteral {v=op.opDatetimeCst($DateTimeLiteral.text);}  
       | DateLiteral {v=op.opDateCst($DateLiteral.text);}  
       | TimeLiteral {v=op.opTimeCst($TimeLiteral.text);}  
+      | Yes {v=op.opYesnoCst(true);}  
+      | No {v=op.opYesnoCst(false);}  
     ;
 
 unaryOperators returns [Operator op]:
@@ -646,6 +648,9 @@ stringLiteral returns[String text]:
     | singleString=SingleQuotationStringLiteral  {text=$singleString.text.substring(1,$singleString.text.length()-1);}
     | doubleString=DoubleQuotationStringLiteral  {text=$doubleString.text.substring(1,$doubleString.text.length()-1);}
 ; 
+ 
+Yes: 'Yes' | 'yes' | 'Y' | 'y' | 'true';
+No: 'No' | 'no' | 'N' | 'n' | 'false';
 
 SingleQuotationStringLiteral :
   '"' (~('"'|'\n'|'\r'))* '"';
