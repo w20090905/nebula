@@ -8,6 +8,10 @@ import nebula.data.Timable;
 import util.InheritHashMap;
 
 public class Type implements Timable {
+	public static final String CTOR = "<ctor>";
+	public static final String ONSAVE = "<onSave>";
+	public static final String ONLOAD = "<onLoad>";
+
 	final TypeLoader loader;
 
 	final Type residedType;
@@ -193,16 +197,14 @@ public class Type implements Timable {
 	}
 
 	public Field getActionByName(String name) {
-		Field action = null;
 		for (Field f : actions) {
 			if (name.equals(f.name)) {
-				action = f;
+				return f;
 			}
 		}
-		if (action == null && this.superType != null) {
-			action = this.superType.getActionByName(name);
-		}
-		return action;
+		if (this.superType != null) return this.superType.getActionByName(name);
+
+		return null;
 	}
 
 }

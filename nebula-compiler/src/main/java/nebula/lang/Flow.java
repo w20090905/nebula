@@ -34,20 +34,34 @@ public class Flow extends Type {
 			name = name + cnt;
 		}
 
-		Step step = new Step(this, name, actorQuery, stepType);
+		Step step = new Step(this, this.steps.size(), name, actorQuery, stepType);
 		this.steps.add(step);
 		return step;
 	}
 
-	class Step implements Timable {
+	public class Step implements Timable {
+		// Runtime Field
+		public final static String NextStep = "NextStep";
+		public final static String DoItNow = "DoItNow";
+		// Actions
+		public final static String Init = "init";
+		public final static String Submit = "submit";
+		
+		// Steps
+		public final static String Begin = "Begin";
+		public final static String Next = "Next";
+		public final static String End = "End";
+		
 		final Flow resideFlow;
-		final Type stepType;
+		final Type type;
 		final String name;
 		final String actorQuery;
+		final int index;
 
-		Step(Flow resideFlow, String name, String actorQuery, Type stepType) {
+		Step(Flow resideFlow, int index, String name, String actorQuery, Type stepType) {
 			this.resideFlow = resideFlow;
-			this.stepType = stepType;
+			this.index = index;
+			this.type = stepType;
 			this.name = name;
 			this.actorQuery = actorQuery;
 		}
@@ -60,7 +74,27 @@ public class Flow extends Type {
 		@Override
 		public String toString() {
 			// TODO Auto-generated method stub
-			return this.name + "[" + stepType.toString() + "]";
+			return this.name + "[" + type.toString() + "]";
 		}
+
+		public Flow getResideFlow() {
+			return resideFlow;
+		}
+
+		public Type getType() {
+			return type;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public int getIndex() {
+			return index;
+		}
+	}
+
+	public SmartList<String, Step> getSteps() {
+		return steps;
 	}
 }

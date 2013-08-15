@@ -73,7 +73,7 @@ options {
         currentType = type;
     }
     
-     protected void makeSureHasKey(Type type){
+     protected void makeSureHasKeyField(Type type){
             Field firstKey = null;
             Field firstUnique = null;
             for(Field f : type.fields){
@@ -88,16 +88,50 @@ options {
     
     
     protected void loadingFinish(Type resideType, Type type){
+        makeInitOnSaveAction ();
+        
         typesLoading.remove(type.name);
         
-        makeSureHasKey(type);
+        makeSureHasKeyField(type);
         currentType = resideType;
     }
     protected void loadingFinish(Type type){
+        makeInitOnSaveAction ();
+        
         typesLoading.remove(type.name);        
-        makeSureHasKey(type);
+        makeSureHasKeyField(type);
         currentType = null;
     }
+    
+  protected void makeInitOnSaveAction() {
+    List<Statement> stList_Ctor_ = new ArrayList<Statement>();
+    List<Statement> stList_onLoad_ = new ArrayList<Statement>();
+    List<Statement> stList_onSave_ = new ArrayList<Statement>();
+    Expr<Object> thisType = op.opLocal(new Var("this", currentType, 1));
+
+    for (Map.Entry<Field, Expr> e : derivedFields.entrySet()) {
+      if (e.getKey().resideType != currentType) continue;
+
+      Expr<Object> fieldof = op.opFieldOf(thisType, e.getKey().name);
+      Statement statement = op.stPut(fieldof, e.getValue());
+      if (e.getKey().isDefaultValue()) {
+        stList_Ctor_.add(statement);
+      } else if (e.getKey().isDerived()) {
+        stList_onLoad_.add(statement);
+      }
+    }
+    Field fInit = new Field(currentType, Type.CTOR);
+    actionFields.put(fInit, op.stBlock(stList_Ctor_));
+    currentType.actions.add(fInit);
+
+    Field onSave = new Field(currentType, Type.ONSAVE);
+    actionFields.put(onSave, op.stBlock(stList_onSave_));
+    currentType.actions.add(onSave);
+    
+    Field fOnLoad = new Field(currentType, Type.ONLOAD);
+    actionFields.put(fOnLoad, op.stBlock(stList_onLoad_));
+    currentType.actions.add(fOnLoad);
+  }
     
     protected void exitTopType(){
     for (Map.Entry<Field, Expr> e : derivedFields.entrySet()) {
@@ -198,7 +232,7 @@ stepDefinition[Flow resideFlow]  returns[Flow.Step step]
                     loading(stepType);
                 }
                 fieldDefinition[stepType]* 
-            '}'     {loadingFinish(stepType);} 
+            '}'     {loadingFinish(resideFlow,stepType);} 
         )?
         {          
             if(stepType==null){
@@ -619,8 +653,8 @@ stringLiteral returns[String text]:
     | doubleString=DoubleQuotationStringLiteral  {text=$doubleString.text.substring(1,$doubleString.text.length()-1);}
 ; 
  
-Yes: 'Yes' | 'yes' | 'Y' | 'y' | 'true';
-No: 'No' | 'no' | 'N' | 'n' | 'false';
+Yes: 'yes' | 'true';
+No: 'no'  | 'false';
 
 SingleQuotationStringLiteral :
   '"' (~('"'|'\n'|'\r'))* '"';

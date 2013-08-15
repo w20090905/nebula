@@ -1,0 +1,82 @@
+package nebula.flow;
+
+import nebula.data.DataRepos;
+import nebula.data.Entity;
+import nebula.data.impl.EditableEntity;
+import nebula.lang.Field;
+import nebula.lang.Flow;
+import nebula.lang.Flow.Step;
+import nebula.lang.NebulaNative;
+
+import com.google.common.base.Preconditions;
+
+public class FlowEngine {
+	EditableEntity data;
+	final Flow flow;
+	Step currentStep = null;
+	Entity currentStepEntity = null;
+	DataRepos datarepos;
+
+	FlowEngine(final Flow flow) {
+		this.flow = flow;
+	}
+
+	void start() {
+		stepIn(flow.getSteps().get(Step.Begin));
+		data = new EditableEntity();
+	}
+
+	void stepIn(Step step) {
+		currentStep = step;
+		currentStepEntity = new EditableEntity();
+
+		NebulaNative.ctor(currentStepEntity, step.getType(), datarepos);
+		
+		Field action = step.getType().getActionByName(Step.Init);
+		Preconditions.checkNotNull(action);		
+		action.getCode().exec(currentStepEntity, datarepos);
+
+		if ((Boolean) currentStepEntity.get(Step.DoItNow) != null && (Boolean) currentStepEntity.get(Step.DoItNow)) {
+			String next = (String) currentStepEntity.get(Step.NextStep);
+			Step nextStep = null;
+			if (Step.Next.equals(next)) {
+				nextStep = flow.getSteps().get(currentStep.getIndex() + 1);
+			} else {
+				nextStep = flow.getSteps().get(next);
+			}
+			stepIn(nextStep);
+			return;
+		}
+
+		for (Field f : step.getType().getFields()) {
+			System.out.println(f.getName());
+		}
+	}
+
+	void stepSubmit(String actionName) {
+		for (Field f : currentStep.getType().getFields()) {
+			data.put(f.getName(), currentStepEntity.get(f.getName()));
+			System.out.println("entity." + f.getName() + " = this." + f.getName());
+		}		
+
+		Field action = currentStep.getType().getActionByName(actionName);
+		Preconditions.checkNotNull(action);		
+		action.getCode().exec(currentStepEntity, datarepos);
+
+		if ((Boolean) currentStepEntity.get(Step.DoItNow) != null && (Boolean) currentStepEntity.get(Step.DoItNow)) {
+			String next = (String) currentStepEntity.get(Step.NextStep);
+			Step nextStep = null;
+			if (Step.Next.equals(next)) {
+				nextStep = flow.getSteps().get(currentStep.getIndex() + 1);
+			} else {
+				nextStep = flow.getSteps().get(next);
+			}
+			stepIn(nextStep);
+			return;
+		}
+	}
+
+	void stepSubmit() {
+		stepSubmit(Step.Submit);
+	}
+}

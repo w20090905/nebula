@@ -3,7 +3,7 @@ package nebula.asm;
 import java.util.List;
 
 import nebula.data.Entity;
-import nebula.lang.Nebula;
+import nebula.lang.NebulaNative;
 import nebula.lang.Range;
 
 public class ListClauseSample {
@@ -16,7 +16,7 @@ public class ListClauseSample {
 		ranges[2] = Range.closed(1, 3);
 		ranges[3] = Range.closed(1, 1);
 
-		List<Entity> out = Nebula.filter(in, ranges);
+		List<Entity> out = NebulaNative.filter(in, ranges);
 		return out;
 	}
 }

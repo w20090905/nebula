@@ -5,14 +5,14 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
-
 import nebula.data.Entity;
 import nebula.data.db.DbDataExecutor;
 import nebula.lang.Field;
+import nebula.lang.NebulaNative;
 import nebula.lang.Type;
 import nebula.lang.TypeStandalone;
+
+import com.google.common.base.Function;
 
 class DbMasterEntityDataStore extends EntityDataStore {
 
@@ -21,38 +21,26 @@ class DbMasterEntityDataStore extends EntityDataStore {
 	final IDGenerator idGenerator;
 	final String key;
 	boolean withID = false;
-	final Field[] derivedFields;
-	final Field[] defaultOnSaveFields;
 
-	DbMasterEntityDataStore(final DbDataRepos persistence, Type type, final DbDataExecutor exec) {
-		this(IdMakerBuilder.getIDReader(type), persistence, type, exec);
+	DbMasterEntityDataStore(final DbDataRepos dataRepos, Type type, final DbDataExecutor exec) {
+		this(IdMakerBuilder.getIDReader(type), dataRepos, type, exec);
 	}
 
-	DbMasterEntityDataStore(Function<Entity, Object> keyMaker, final DbDataRepos persistence, Type type, final DbDataExecutor exec) {
-		super(keyMaker, persistence, type);
+	DbMasterEntityDataStore(Function<Entity, Object> keyMaker, final DbDataRepos dataRepos, Type type, final DbDataExecutor exec) {
+		super(keyMaker, dataRepos, type);
 		this.db = exec;
-
-		List<Field> derivedFields = Lists.newCopyOnWriteArrayList();
-		List<Field> defaultOnSaveFields = Lists.newCopyOnWriteArrayList();
 
 		Field localKey = null;
 		for (Field f : type.getFields()) {
-			if (localKey==null && f.isKey()) {
+			if (f.isKey()) {
 				if (f.getType().getStandalone() == TypeStandalone.Basic) {
 					localKey = f;
+					break;
 				}
-			}
-			if (f.isDerived()) {
-				derivedFields.add(f);
-			}
-			if (f.isDefaultValue()) {
-				defaultOnSaveFields.add(f);
 			}
 		}
 
 		key = checkNotNull(localKey).getName();
-		this.derivedFields = derivedFields.toArray(new Field[0]);
-		this.defaultOnSaveFields = defaultOnSaveFields.toArray(new Field[0]);
 
 		if (localKey.getType().getName().equals("ID")) {
 			idGenerator = IDGenerators.build(type);
@@ -77,66 +65,42 @@ class DbMasterEntityDataStore extends EntityDataStore {
 			DbEntity sourceEntity = (DbEntity) newEntity.source;
 
 			assert sourceEntity == this.values.get(sourceEntity.index);
-			if (withID) {
-				lock.lock();
-				try {
-					// DB
-					long id = (Long) sourceEntity.get(key);
-					db.update(newEntity, id);
+			Object id = null;
 
-					EntityImp newSource = loadin(sourceEntity, db.get(id));
+			lock.lock();
+			try {
+				// DB
+				if (withID) id = (Long) sourceEntity.get(key);
+				else id = sourceEntity.getID();
 
-					newEntity.resetWith(newSource);
+				NebulaNative.onSave(newEntity, type, dataRepos);
+				db.update(newEntity, id);
+				EntityImp newSource = loadin(sourceEntity, db.get(id));
 
-				} finally {
-					lock.unlock();
-				}
-			} else {
-				lock.lock();
-				try {
-					// DB
-					String id = sourceEntity.getID();
-					db.update(newEntity, id);
-
-					EntityImp newSource = loadin(sourceEntity, db.get(id));
-
-					newEntity.resetWith(newSource);
-
-				} finally {
-					lock.unlock();
-				}
+				newEntity.resetWith(newSource);
+			} finally {
+				lock.unlock();
 			}
 		} else { // insert
+			Object id = null;
 
-			if (withID) {
-				Long id = idGenerator.nextValue();
-				newEntity.put(key, id);
-				
-				for (Field f : defaultOnSaveFields) {
-					newEntity.put(f.getName(), f.getDerivedExpr().eval(newEntity));
+			lock.lock();
+			try {
+				if (withID){
+					id =idGenerator.nextValue();
+					newEntity.put(key, id);
+				}
+				else {
+					id = (String) this.idMaker.apply(newEntity);
 				}
 
-				lock.lock();
+				NebulaNative.onSave(newEntity, type, dataRepos);
+
 				// DB
 				db.insert(newEntity);
 				EntityImp newSource = loadin(db.get(id));
 				newEntity.resetWith(newSource);
-				lock.unlock();
-
-			} else {
-				String referKey = (String) this.idMaker.apply(newEntity);
-				newEntity.put(Entity.PRIMARY_KEY, referKey);
-
-				lock.lock();
-
-				// DB
-				db.insert(newEntity);
-				EntityImp newSource;
-
-				newSource = loadin(db.get(referKey));
-
-				newEntity.resetWith(newSource);
-
+			} finally {
 				lock.unlock();
 			}
 		}
@@ -154,9 +118,7 @@ class DbMasterEntityDataStore extends EntityDataStore {
 	private EntityImp loadin(EditableEntity entity) {
 		entity.put(Entity.PRIMARY_KEY, idMaker.apply(entity));
 		DbEntity inner = new DbEntity(this, entity.newData, this.values.size());
-		for (Field f : derivedFields) {
-			entity.put(f.getName(), f.getDerivedExpr().eval(entity));
-		}
+		NebulaNative.onLoad(entity, this.type, dataRepos);
 		this.values.add(inner);
 		return inner;
 	}
@@ -164,9 +126,7 @@ class DbMasterEntityDataStore extends EntityDataStore {
 	private EntityImp loadin(DbEntity sourceEntity, EditableEntity newEntity) {
 		newEntity.put(Entity.PRIMARY_KEY, sourceEntity.getID());
 		DbEntity inner = new DbEntity(this, newEntity.newData, sourceEntity.index);
-		for (Field f : derivedFields) {
-			newEntity.put(f.getName(), f.getDerivedExpr().eval(newEntity));
-		}
+		NebulaNative.onLoad(newEntity, super.type, dataRepos);
 		this.values.add(inner);
 		return inner;
 	}

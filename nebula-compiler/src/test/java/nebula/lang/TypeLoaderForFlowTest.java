@@ -12,16 +12,42 @@ public class TypeLoaderForFlowTest extends TypeLoader {
 	public TypeLoaderForFlowTest(TypeLoader parent) {
 		super(parent);
 		Type flow = new Type(this, TypeStandalone.Flow.name(), parent.findType(Type.ROOT_TYPE));
-		Type typeStep = new Type(this, "Step", parent.findType("Master"));
-		Type typeBegin = new Type(this, "Begin", typeStep);
-		Type typeEnd = new Type(this, "End", typeStep);
-		Type typeApprove = new Type(this, "Approve", typeStep);
 		this.types.add(flow);
-		this.types.add(typeStep);
-		this.types.add(typeBegin);
-		this.types.add(typeEnd);
-		this.types.add(typeApprove);
 
+		try {
+			parent.defineNebula(new StringReader(
+//@formatter:off
+				"type Step {" +
+				"		@Runtime NextStep String := \"Next\";" +
+				"		@Runtime DoItNow YesNo := false;" +
+				"		@Runtime init(){" +
+				"		}; " +
+				"		@Runtime next(){" +
+				"			this.DoItNow = true;" +
+				"		};" +
+				"		@Runtime end(){" +
+				"			this.NextStep = \"End\";" +
+				"			this.DoItNow = true;" +
+				"		};" +
+				"		@Runtime skip(){" +
+				"			this.NextStep = \"Next\";" +
+				"			this.DoItNow = true;" +
+				"		};" +
+				"		@Runtime submit(){" +
+				"			this.DoItNow = true;" +
+				"		};" +
+				"};"
+			//@formatter:on
+			));
+
+			parent.defineNebula(new StringReader("type Begin extends Step { };"));
+			parent.defineNebula(new StringReader("type End extends Step { @Runtime submit(){}; };"));
+			parent.defineNebula(new StringReader("type Approve extends Step {};"));
+
+		} catch (RecognitionException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		}
 	}
 
 	public Type load(String text) {

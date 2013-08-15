@@ -1,0 +1,18 @@
+flow Qingjia {
+	[employee] Begin{
+		ReasonType Attr;
+		Reason Note;
+		Days Count;
+		Hours Count;
+	};
+
+	[me.department.leader] Approve{
+		init(){
+			Days < 3 => skip();
+		}
+	};
+
+	Approve(Hr.Leader);
+	
+	End;
+};

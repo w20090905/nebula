@@ -246,7 +246,7 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 
 		assertEquals(3, type.fields.size());
 
-		assertEquals(1, type.actions.size());
+		assertEquals(4, type.actions.size());
 
 		int i = 0;
 		assertEquals("Complete", type.actions.get(i).name);

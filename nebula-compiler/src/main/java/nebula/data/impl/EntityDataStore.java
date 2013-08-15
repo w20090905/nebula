@@ -23,17 +23,19 @@ import com.google.common.collect.Maps;
 public class EntityDataStore implements DataStoreEx<Entity> {
 	private static Log log = LogFactory.getLog(EntityDataStore.class);
 
-	final DataReposEx persistence;
+	final DataReposEx dataRepos;
 	final SmartList<Object, Entity> values;
 	final ReentrantLock lock = new ReentrantLock();
 	final Function<Entity, Object> idMaker;
 	long lastModified;
 	final Map<String, Classificator<String, Entity>> classificatores;
+	final Type type;
 
-	EntityDataStore(Function<Entity, Object> keyMaker, DataReposEx persistence, Type type) {
-		this.persistence = persistence;
+	EntityDataStore(Function<Entity, Object> keyMaker, DataReposEx dataRepos, Type type) {
+		this.dataRepos = dataRepos;
 		this.values = new SmartList<Object, Entity>(keyMaker);
 		this.idMaker = keyMaker;
+		this.type = type;
 		classificatores = Maps.newHashMap();
 
 		for (Field f : type.getFields()) {
@@ -84,7 +86,7 @@ public class EntityDataStore implements DataStoreEx<Entity> {
 		if (v.isTransient()) {
 			entity.store = this;
 		}
-		persistence.markChanged(entity);
+		dataRepos.markChanged(entity);
 	}
 
 	@Override
@@ -93,12 +95,12 @@ public class EntityDataStore implements DataStoreEx<Entity> {
 
 	@Override
 	public void flush() {
-		persistence.flush();
+		dataRepos.flush();
 	}
 
 	@Override
 	public void markChanged(Editable v) {
-		persistence.markChanged(v);
+		dataRepos.markChanged(v);
 	}
 
 	@Override
@@ -141,7 +143,7 @@ public class EntityDataStore implements DataStoreEx<Entity> {
 	}
 
 	public void clearChanges() {
-		persistence.clearChanges();
+		dataRepos.clearChanges();
 	}
 
 	@Override

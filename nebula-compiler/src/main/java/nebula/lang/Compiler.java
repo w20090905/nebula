@@ -138,7 +138,7 @@ public class Compiler {
 		return new Negates(e1);
 	}
 
-	public Expr opYesnoCst(boolean b) {
+	public Expr<Integer> opYesnoCst(boolean b) {
 		return new YesnoCst(b);
 	}
 
@@ -887,7 +887,7 @@ public class Compiler {
 				mv.visitInsn(AASTORE);
 			}
 
-			mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/Nebula", "filter", "(Ljava/util/List;Lnebula/lang/Clause;[Ljava/lang/Object;)Ljava/util/List;");
+			mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/NebulaNative", "filter", "(Ljava/util/List;Lnebula/lang/Clause;[Ljava/lang/Object;)Ljava/util/List;");
 		}
 
 	}
@@ -973,7 +973,7 @@ public class Compiler {
 				mv.visitInsn(AASTORE);
 			}
 
-			mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/Nebula", "filter", "(Ljava/util/List;[Lnebula/lang/Range;)Ljava/util/List;");
+			mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/NebulaNative", "filter", "(Ljava/util/List;[Lnebula/lang/Range;)Ljava/util/List;");
 		}
 	}
 
