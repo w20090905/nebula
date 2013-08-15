@@ -5,10 +5,10 @@ type Person|人员 {
 	?Family-Name|姓;
 	?AlternateNames[] Name;
 	?Description;
-	Sex Attr;
+	Sex|性别 Attr;
 	?DateOfBirth Date;
 	?Age;
-          Age2 Age=this.Age + 10;
+          Age2|年龄 Age=this.Age + 10;
 	?Home{
 		Street Name;
 		Neighborhood String;
@@ -20,5 +20,5 @@ type Person|人员 {
 		ProfileUrls[] String;
 	};
 	@GroupBy Company;
-	EMail;
+	EMail|邮件;
 };

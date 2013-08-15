@@ -92,9 +92,9 @@
 				[#case "ByRef"]
 				[#case "Cascade"]
 					<td>[#list field.type.fields as rF]
-						[#if field.key && rF.key && rF.name!="Id"]
+						[#if field.key && rF.key && rF.name!="ID"]
 						{{ data["${field.name}${rF.name}"] }}&nbsp;
-						[#elseif rF.key && rF.key && rF.name!="Id"]
+						[#elseif rF.key && rF.key && rF.name!="ID"]
 						{{ data["${field.name}${rF.name}"] }}&nbsp;
 						[#elseif rF.core]
 						{{ data["${field.name}${rF.name}"] }}&nbsp;
