@@ -3,12 +3,15 @@ package nebula.lang;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+
+import util.NamesEncoding;
 
 public class EntityActionComplier implements Opcodes {
 	Log log = LogFactory.getLog(getClass());
@@ -17,7 +20,7 @@ public class EntityActionComplier implements Opcodes {
 	 * Returns the byte code of an Expression class corresponding to this
 	 * expression.
 	 */
-	<T> byte[] doCompile(final String name, final Code code, Context context) {
+	<T> byte[] doCompile(final String name, final Code code, CompilerContext context) {
 
 		// class header
 		ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
@@ -39,7 +42,7 @@ public class EntityActionComplier implements Opcodes {
 
 		// method
 		{
-			mv = cw.visitMethod(ACC_PUBLIC, "exec", "(Lnebula/data/Entity;Lnebula/data/DataRepos;)V", null, null);
+			mv = cw.visitMethod(ACC_PUBLIC, "exec", "(Lnebula/lang/RuntimeContext;Lnebula/data/DataRepos;Lnebula/data/Entity;)V", null, null);
 			code.compile(cw, mv, context);
 			mv.visitInsn(RETURN);
 			mv.visitMaxs(0, 0);
@@ -52,8 +55,8 @@ public class EntityActionComplier implements Opcodes {
 
 	static long count = 0;
 
-	public EntityAction compile(Code code, Type type, Context context) {
-		String name = "EntityAction" + String.valueOf(count++);
+	public EntityAction compile(CompilerContext context, Type type, String actionName, Code code) {
+		String name = type.name + "_" + NamesEncoding.encode(actionName) + "_" + String.valueOf(count++);
 		try {
 			byte[] b = this.doCompile(name, code, context);
 			if (log.isDebugEnabled()) {

@@ -7,12 +7,12 @@ public class EntityFuncitonComplierTest extends TestCase {
 	TypeLoaderForTest loader;
 	EntityClauseComplier funcCmp;
 	Compiler cp;
-	Context context;
+	CompilerContext context;
 
 	protected void setUp() throws Exception {
 		loader = new TypeLoaderForTest(new SystemTypeLoader());
 		funcCmp = new EntityClauseComplier();
-		context = new Context() {
+		context = new CompilerContext() {
 
 			@Override
 			public Type resolveType(String name) {
@@ -30,14 +30,15 @@ public class EntityFuncitonComplierTest extends TestCase {
 	public final void testDoCompile() {
 
 		Code code = cp.opRelational(Operator.EQ, cp.opLongCst("10"), cp.opLongCst("100"));
+		Type type = new Type(loader, "test");
 
-		String name = funcCmp.compile(code, context);
+		String name = funcCmp.compile(context, type, code);
 		try {
 			Class<?> clz = NebulaClassLoader.getInstance().loadClass(name);
 
 			@SuppressWarnings("unchecked")
 			Clause<Entity> func = (Clause<Entity>) clz.newInstance();
-			assertFalse(func.apply(null));
+			assertFalse(func.apply(null, null, null));
 			
 		} catch (InstantiationException e) {
 			throw new RuntimeException(e);

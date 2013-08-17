@@ -12,7 +12,7 @@ public class NebulaNative {
 	public static <V> List<V> filter(List<V> list, Clause<V> func, Object... params) {
 		List<V> out = Lists.newArrayList();
 		for (V v : list) {
-			if (func.apply(v, params)) out.add(v);
+			if (func.apply(null, null, v, params)) out.add(v);
 		}
 		return out;
 	}
@@ -34,27 +34,22 @@ public class NebulaNative {
 		return out;
 	}
 
-	public static void ctor(Entity entity, Type type, DataRepos dataRepos) {
-		if (type.superType != null) ctor(entity, type.superType, dataRepos);
+	public static void execMethod(RuntimeContext context, DataRepos dataRepos, Entity entity, Type type, String methodName) {
+		if (type.superType != null) execMethod(context, dataRepos, entity, type.superType, methodName);
 
-		Field sysInitAction = type.getActionByName(Type.CTOR);
-		if (sysInitAction == null) return;
-		sysInitAction.getCode().exec(entity, dataRepos);
+		Field sysInitAction = type.getActionByName(methodName);
+		if (sysInitAction != null) sysInitAction.getCode().exec(context, dataRepos, entity);
 	}
 
-	public static void onSave(Entity entity, Type type, DataRepos dataRepos) {
-		if (type.superType != null) onSave(entity, type.superType, dataRepos);
-
-		Field sysInitAction = type.getActionByName(Type.ONSAVE);
-		if (sysInitAction == null) return;
-		sysInitAction.getCode().exec(entity, dataRepos);
+	public static void ctor(RuntimeContext context, DataRepos dataRepos, Entity entity, Type type) {
+		execMethod(context, dataRepos, entity, type, Type.CTOR);
 	}
 
-	public static void onLoad(Entity entity, Type type, DataRepos dataRepos) {
-		if (type.superType != null) onLoad(entity, type.superType, dataRepos);
+	public static void onSave(RuntimeContext context, DataRepos dataRepos, Entity entity, Type type) {
+		execMethod(context, dataRepos, entity, type, Type.ONSAVE);
+	}
 
-		Field sysInitAction = type.getActionByName(Type.ONLOAD);
-		if (sysInitAction == null) return;
-		sysInitAction.getCode().exec(entity, dataRepos);
+	public static void onLoad(RuntimeContext context, DataRepos dataRepos, Entity entity, Type type) {
+		execMethod(context, dataRepos, entity, type, Type.ONLOAD);
 	}
 }

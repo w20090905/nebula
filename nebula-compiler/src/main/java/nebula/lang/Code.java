@@ -4,5 +4,5 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 
 public interface Code {
-    void compile(ClassWriter cw, MethodVisitor mv, Context context);
+    void compile(ClassWriter cw, MethodVisitor mv, CompilerContext context);
 }

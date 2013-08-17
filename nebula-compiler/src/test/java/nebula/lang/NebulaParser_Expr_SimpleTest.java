@@ -26,7 +26,7 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 		 * Returns the byte code of an Expression class corresponding to this
 		 * expression.
 		 */
-		byte[] compile(final String name, final Expr<?> expr, Context context) {
+		byte[] compile(final String name, final Expr<?> expr, CompilerContext context) {
 			// class header
 			ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 			cw.visit(V1_1, ACC_PUBLIC, name, null, "java/lang/Object", new String[] { ExpressionForSimpleTest.class.getName().replace('.', '/') });
@@ -54,7 +54,7 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 		 * Returns the byte code of an Expression class corresponding to this
 		 * expression.
 		 */
-		byte[] compileBoolean(final String name, final Expr<?> expr, Context context) {
+		byte[] compileBoolean(final String name, final Expr<?> expr, CompilerContext context) {
 			// class header
 			ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 			cw.visit(V1_1, ACC_PUBLIC, name, null, "java/lang/Object", new String[] { ExpressionForSimpleTestBoolean.class.getName().replace('.', '/') });
@@ -78,7 +78,7 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 			return cw.toByteArray();
 		}
 
-		protected Long compute(Expr<?> exp, Context context) {
+		protected Long compute(Expr<?> exp, CompilerContext context) {
 			try {
 				byte[] b = this.compile("Example", exp, context);
 				FileOutputStream fos = new FileOutputStream("tmp\\Example.class");
@@ -101,7 +101,7 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 			}
 		}
 
-		protected Integer computeBoolean(Expr<?> exp, Context context) {
+		protected Integer computeBoolean(Expr<?> exp, CompilerContext context) {
 			try {
 				byte[] b = this.compileBoolean("Example", exp, context);
 				FileOutputStream fos = new FileOutputStream("tmp\\Example.class");
@@ -127,7 +127,7 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 
 	private long compute(Expr<?> expr) {
 		Complier complier = new Complier();
-		return complier.compute(expr, new Context() {
+		return complier.compute(expr, new CompilerContext() {
 
 			@Override
 			public Type resolveType(String name) {
@@ -138,7 +138,7 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 
 	private int computeBoolean(Expr<?> expr) {
 		Complier complier = new Complier();
-		return complier.computeBoolean(expr, new Context() {
+		return complier.computeBoolean(expr, new CompilerContext() {
 
 			@Override
 			public Type resolveType(String name) {

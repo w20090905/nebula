@@ -73,7 +73,7 @@ class DbMasterEntityDataStore extends EntityDataStore {
 				if (withID) id = (Long) sourceEntity.get(key);
 				else id = sourceEntity.getID();
 
-				NebulaNative.onSave(newEntity, type, dataRepos);
+				NebulaNative.onSave(null, dataRepos, newEntity, type);
 				db.update(newEntity, id);
 				EntityImp newSource = loadin(sourceEntity, db.get(id));
 
@@ -86,15 +86,14 @@ class DbMasterEntityDataStore extends EntityDataStore {
 
 			lock.lock();
 			try {
-				if (withID){
-					id =idGenerator.nextValue();
+				if (withID) {
+					id = idGenerator.nextValue();
 					newEntity.put(key, id);
-				}
-				else {
+				} else {
 					id = (String) this.idMaker.apply(newEntity);
 				}
 
-				NebulaNative.onSave(newEntity, type, dataRepos);
+				NebulaNative.onSave(null, dataRepos, newEntity, type);
 
 				// DB
 				db.insert(newEntity);
@@ -118,7 +117,7 @@ class DbMasterEntityDataStore extends EntityDataStore {
 	private EntityImp loadin(EditableEntity entity) {
 		entity.put(Entity.PRIMARY_KEY, idMaker.apply(entity));
 		DbEntity inner = new DbEntity(this, entity.newData, this.values.size());
-		NebulaNative.onLoad(entity, this.type, dataRepos);
+		NebulaNative.onLoad(null, dataRepos, entity, this.type);
 		this.values.add(inner);
 		return inner;
 	}
@@ -126,7 +125,7 @@ class DbMasterEntityDataStore extends EntityDataStore {
 	private EntityImp loadin(DbEntity sourceEntity, EditableEntity newEntity) {
 		newEntity.put(Entity.PRIMARY_KEY, sourceEntity.getID());
 		DbEntity inner = new DbEntity(this, newEntity.newData, sourceEntity.index);
-		NebulaNative.onLoad(newEntity, super.type, dataRepos);
+		NebulaNative.onLoad(null, dataRepos, newEntity, super.type);
 		this.values.add(inner);
 		return inner;
 	}

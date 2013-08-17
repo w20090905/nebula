@@ -7,6 +7,7 @@ import nebula.lang.Field;
 import nebula.lang.Flow;
 import nebula.lang.Flow.Step;
 import nebula.lang.NebulaNative;
+import nebula.lang.RuntimeContext;
 
 import com.google.common.base.Preconditions;
 
@@ -16,8 +17,10 @@ public class FlowEngine {
 	Step currentStep = null;
 	Entity currentStepEntity = null;
 	DataRepos datarepos;
+	final RuntimeContext context;
 
-	FlowEngine(final Flow flow) {
+	FlowEngine(final RuntimeContext context, final Flow flow) {
+		this.context = context;
 		this.flow = flow;
 	}
 
@@ -30,11 +33,11 @@ public class FlowEngine {
 		currentStep = step;
 		currentStepEntity = new EditableEntity();
 
-		NebulaNative.ctor(currentStepEntity, step.getType(), datarepos);
-		
+		NebulaNative.ctor(context, datarepos, currentStepEntity, step.getType());
+
 		Field action = step.getType().getActionByName(Step.Init);
-		Preconditions.checkNotNull(action);		
-		action.getCode().exec(currentStepEntity, datarepos);
+		Preconditions.checkNotNull(action);
+		action.getCode().exec(context, datarepos, currentStepEntity);
 
 		if ((Boolean) currentStepEntity.get(Step.DoItNow) != null && (Boolean) currentStepEntity.get(Step.DoItNow)) {
 			String next = (String) currentStepEntity.get(Step.NextStep);
@@ -57,11 +60,11 @@ public class FlowEngine {
 		for (Field f : currentStep.getType().getFields()) {
 			data.put(f.getName(), currentStepEntity.get(f.getName()));
 			System.out.println("entity." + f.getName() + " = this." + f.getName());
-		}		
+		}
 
 		Field action = currentStep.getType().getActionByName(actionName);
-		Preconditions.checkNotNull(action);		
-		action.getCode().exec(currentStepEntity, datarepos);
+		Preconditions.checkNotNull(action);
+		action.getCode().exec(context, datarepos, currentStepEntity);
 
 		if ((Boolean) currentStepEntity.get(Step.DoItNow) != null && (Boolean) currentStepEntity.get(Step.DoItNow)) {
 			String next = (String) currentStepEntity.get(Step.NextStep);

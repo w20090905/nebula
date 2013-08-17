@@ -11,6 +11,8 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
+import util.NamesEncoding;
+
 import com.google.common.base.Preconditions;
 
 public class EntityExpressionComplier implements Opcodes {
@@ -20,7 +22,7 @@ public class EntityExpressionComplier implements Opcodes {
 	 * Returns the byte code of an Expression class corresponding to this
 	 * expression.
 	 */
-	<T> byte[] doCompile(final String name, final Expr<T> expr, Context context) {
+	<T> byte[] doCompile(final String name, final Expr<T> expr, CompilerContext context) {
 		String actualClass = null;
 
 		Class<?> cls = expr.getClass();
@@ -88,7 +90,8 @@ public class EntityExpressionComplier implements Opcodes {
 
 		// method
 		{
-			mv = cw.visitMethod(ACC_PUBLIC + ACC_BRIDGE + ACC_SYNTHETIC, "eval", "(Lnebula/data/Entity;)Ljava/lang/Object;", null, null);
+			mv = cw.visitMethod(ACC_PUBLIC + ACC_BRIDGE + ACC_SYNTHETIC, "eval",
+					"(Lnebula/lang/RuntimeContext;Lnebula/data/DataRepos;Lnebula/data/Entity;)Ljava/lang/Object;", null, null);
 
 			expr.compile(cw, mv, context);
 
@@ -114,8 +117,8 @@ public class EntityExpressionComplier implements Opcodes {
 
 	static long count = 0;
 
-	public <T> EntityExpression compile(Expr<T> exp, Type type, Context context) {
-		String name = "EntityExpression" + String.valueOf(count++);
+	public <T> EntityExpression compile(CompilerContext context, Type type, String actionName, Expr<T> exp) {
+		String name = "EntityAction_" + type.name + "_" + NamesEncoding.encode(actionName) + "_" + String.valueOf(count++);
 		try {
 			byte[] b = this.doCompile(name, exp, context);
 			if (log.isDebugEnabled()) {

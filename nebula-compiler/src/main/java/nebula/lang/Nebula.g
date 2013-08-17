@@ -30,7 +30,7 @@ options {
     Map<Field, Expr> derivedFields = new HashMap<Field, Expr>();
     Map<Field, Statement> actionFields = new HashMap<Field, Statement>();
   
-    Compiler op = new Compiler(new Context() {
+    Compiler op = new Compiler(new CompilerContext() {
     
       @Override
       public Type resolveType(String name) {
@@ -107,7 +107,7 @@ options {
     List<Statement> stList_Ctor_ = new ArrayList<Statement>();
     List<Statement> stList_onLoad_ = new ArrayList<Statement>();
     List<Statement> stList_onSave_ = new ArrayList<Statement>();
-    Expr<Object> thisType = op.opLocal(new Var("this", currentType, 1));
+    Expr<Object> thisType = op.opLocal(new Var("this", currentType, Compiler.THIS));
 
     for (Map.Entry<Field, Expr> e : derivedFields.entrySet()) {
       if (e.getKey().resideType != currentType) continue;
@@ -133,14 +133,16 @@ options {
     currentType.actions.add(fOnLoad);
   }
     
-    protected void exitTopType(){
+
+  protected void exitTopType() {
     for (Map.Entry<Field, Expr> e : derivedFields.entrySet()) {
-      e.getKey().expr = op.compile(e.getValue(), e.getKey().getResideType());
+      e.getKey().expr = op.compile(e.getKey().getResideType(), e.getKey().name, e.getValue());
     }
     for (Map.Entry<Field, Statement> e : actionFields.entrySet()) {
-      e.getKey().code = op.compile(e.getValue(), e.getKey().getResideType());
+      e.getKey().code = op.compile(e.getKey().getResideType(), e.getKey().name, e.getValue());
     }
-    }
+  }
+  
     protected void info(String str) {
     if (str.charAt(str.length() - 1) == '\n') {
     ;
@@ -151,8 +153,9 @@ options {
   protected void enterMethod(Type type, String name) {
     locals.clear();
     pushLocal("nop", (Type)null);
+    pushLocal("context", (Type)null);
+    pushLocal("repos",  (Type)null);
     pushLocal("this", type);
-    pushLocal("repos", "Type");
   };
 
   protected void exitMethod() {

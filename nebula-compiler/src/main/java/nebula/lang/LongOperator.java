@@ -28,7 +28,7 @@ public class LongOperator implements OperatorExpr, Opcodes {
 		ops.put(LT, IFGE);// '<';
 	}
 
-	public void arithmetic(ClassWriter cw, MethodVisitor mv, Context context, Operator op, Expr<Object> e1, Expr<Object> e2) {
+	public void arithmetic(ClassWriter cw, MethodVisitor mv, CompilerContext context, Operator op, Expr<Object> e1, Expr<Object> e2) {
 		e1.compile(cw, mv, context);
 		e2.compile(cw, mv, context);
 		mv.visitInsn(ops.get(op));
@@ -36,35 +36,35 @@ public class LongOperator implements OperatorExpr, Opcodes {
 
 
 	@Override
-	public void increment(ClassWriter cw, MethodVisitor mv, Context context, Expr<Object> e1) {
+	public void increment(ClassWriter cw, MethodVisitor mv, CompilerContext context, Expr<Object> e1) {
 		e1.compile(cw, mv, context);
 		mv.visitInsn(LCONST_1);
 		mv.visitInsn(LADD);
 	}
 
 	@Override
-	public void decrement(ClassWriter cw, MethodVisitor mv, Context context, Expr<Object> e1) {
+	public void decrement(ClassWriter cw, MethodVisitor mv, CompilerContext context, Expr<Object> e1) {
 		e1.compile(cw, mv, context);
 		mv.visitInsn(LCONST_1);
 		mv.visitInsn(LSUB);
 	}
 
 	@Override
-	public void positive(ClassWriter cw, MethodVisitor mv, Context context, Expr<Object> e1) {
+	public void positive(ClassWriter cw, MethodVisitor mv, CompilerContext context, Expr<Object> e1) {
 		e1.compile(cw, mv, context);
 	}
 
 	@Override
-	public void negates(ClassWriter cw, MethodVisitor mv, Context context, Expr<Object> e1) {
+	public void negates(ClassWriter cw, MethodVisitor mv, CompilerContext context, Expr<Object> e1) {
 		e1.compile(cw, mv, context);
 		mv.visitInsn(LNEG);
 	}
 
-	public <V> void relational(ClassWriter cw, MethodVisitor mv, Context context, Operator op, Expr<V> e1, Expr<V> e2) {
+	public <V> void relational(ClassWriter cw, MethodVisitor mv, CompilerContext context, Operator op, Expr<V> e1, Expr<V> e2) {
 		cmp(cw, mv, context, e1, e2, ops.get(op));
 	}
 
-	public <V> void cmp(ClassWriter cw, MethodVisitor mv, Context context, Expr<V> e1, Expr<V> e2, int op) {
+	public <V> void cmp(ClassWriter cw, MethodVisitor mv, CompilerContext context, Expr<V> e1, Expr<V> e2, int op) {
 		e1.compile(cw, mv, context);
 		e2.compile(cw, mv, context);
 

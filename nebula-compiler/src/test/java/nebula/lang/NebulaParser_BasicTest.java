@@ -33,7 +33,7 @@ public class NebulaParser_BasicTest extends TestCase {
 			Type type = parser.typeDefinition();
 
 			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			
+
 			return type;
 		} catch (RecognitionException e) {
 			fail(e.toString());
@@ -191,14 +191,14 @@ public class NebulaParser_BasicTest extends TestCase {
 	}
 
 	public void testFieldDefinition_default() {
-		assertEquals(1014L * 1024L, parseField("!MyAge Age := 1014 * 1024;").expr.eval(null));
-		assertEquals("test", parseField("!MyAge Age := \"test\";").expr.eval(null));
-		assertEquals("test", parseField("!Name := ```test``` ;").expr.eval(null));
-		
-		assertEquals("# Title\n## firstline\ntest content", parseField("!Name := ```\n# Title\n## firstline\ntest content``` ;").expr.eval(null));
+		assertEquals(1014L * 1024L, parseField("!MyAge Age := 1014 * 1024;").expr.eval(null, null, null));
+		assertEquals("test", parseField("!MyAge Age := \"test\";").expr.eval(null, null, null));
+		assertEquals("test", parseField("!Name := ```test``` ;").expr.eval(null, null, null));
 
-		assertEquals(new BigDecimal("1.3"), parseField("!MyAge Age := 1.3;").expr.eval(null));
-		assertEquals(4 > 5, parseField("!MyAge Age := 4 > 5;").expr.eval(null));
+		assertEquals("# Title\n## firstline\ntest content", parseField("!Name := ```\n# Title\n## firstline\ntest content``` ;").expr.eval(null, null, null));
+
+		assertEquals(new BigDecimal("1.3"), parseField("!MyAge Age := 1.3;").expr.eval(null, null, null));
+		assertEquals(4 > 5, parseField("!MyAge Age := 4 > 5;").expr.eval(null, null, null));
 
 	}
 
@@ -209,10 +209,10 @@ public class NebulaParser_BasicTest extends TestCase {
 		e.put("Name", name);
 		e.put("Age", Age);
 
-		assertEquals(Age, parseField("!MyAge Age = this.Age;").expr.eval(e));
-		assertEquals(Age + 10 * 1000, parseField("!MyAge Age = this.Age + 10 * 1000;").expr.eval(e));
+		assertEquals(Age, parseField("!MyAge Age = this.Age;").expr.eval(null, null, e));
+		assertEquals(Age + 10 * 1000, parseField("!MyAge Age = this.Age + 10 * 1000;").expr.eval(null, null, e));
 
-		assertEquals(name, parseField("!MyAge Name = this.Name;").expr.eval(e));
+		assertEquals(name, parseField("!MyAge Name = this.Name;").expr.eval(null, null, e));
 	}
 
 	public void testFieldDefinition_quicktype() {

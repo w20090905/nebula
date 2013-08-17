@@ -18,7 +18,7 @@ public class TestDump extends ClassLoader implements Opcodes {
 			// instantiates this compiled expression class...
 			EntityExpression expr = (EntityExpression) expClass.newInstance();
 			
-			System.out.println(expr.eval(null));
+			System.out.println(expr.eval(null, null, null));
 		} catch (ClassFormatError e) {
 			throw new RuntimeException(e);
 		} catch (InstantiationException e) {

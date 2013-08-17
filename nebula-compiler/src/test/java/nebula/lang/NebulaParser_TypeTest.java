@@ -9,6 +9,8 @@ import java.math.BigDecimal;
 import junit.framework.TestCase;
 
 public class NebulaParser_TypeTest extends TestCase {
+	RuntimeContext context = new RuntimeContext() {
+	};
 	TypeLoaderForTest compiler;
 
 	@Override
@@ -94,7 +96,8 @@ public class NebulaParser_TypeTest extends TestCase {
 		i = 7;
 		assertEquals("Welcome", type.fields.get(i).name);
 
-		assertEquals("#	this is a <h1> tag\n## this is a <h2> tag\n###### this is a <h6> tag\n", ((String)type.fields.get(i).expr.eval(null)).replaceAll("\r\n", "\n"));
+		assertEquals("#	this is a <h1> tag\n## this is a <h2> tag\n###### this is a <h6> tag\n",
+				((String) type.fields.get(i).expr.eval(context, null, null)).replaceAll("\r\n", "\n"));
 
 		i++;
 		assertEquals("Education", type.fields.get(i).name);

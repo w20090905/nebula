@@ -4,5 +4,5 @@ import nebula.data.DataRepos;
 import nebula.data.Entity;
 
 public interface EntityAction {
-	void exec(Entity entity, DataRepos repos);
+	void exec(RuntimeContext context, DataRepos repos, Entity entity);
 }

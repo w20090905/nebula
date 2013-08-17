@@ -1,6 +1,5 @@
 package nebula.lang;
 
-
-public interface Context {
+public interface CompilerContext {
 	Type resolveType(String name);
 }

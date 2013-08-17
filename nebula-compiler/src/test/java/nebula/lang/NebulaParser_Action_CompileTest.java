@@ -13,6 +13,8 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 
 public class NebulaParser_Action_CompileTest extends TestCase {
+	RuntimeContext context = new RuntimeContext() {
+	};
 	TypeLoaderForTest typeLoader;
 	Type type;
 	Entity data;
@@ -30,7 +32,7 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 	private void eqValue(String fieldname, Object expectedResult, String exprText) {
 		Field fieldTest = parseField(exprText);
 
-		fieldTest.code.exec(data, repos);
+		fieldTest.code.exec(context, repos, data);
 		assertEquals(expectedResult, data.get(fieldname));
 	}
 
@@ -39,7 +41,7 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, typeLoader);
-			type = new Type(typeLoader, "Test");
+			type = new Type(typeLoader, this.getClass().getName());
 			Field field;
 			field = new Field(type, "Name");
 			field.type = parser.resolveType("Name");
@@ -123,7 +125,7 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 		person0.put("Name", "wangshilian01");
 		person0.put("Age", 1L);
 		store.add(person0);
-		
+
 		EditableEntity person1 = new EditableEntity();
 		person1.put("Name", "wangshilian10");
 		person1.put("Age", 10L);
@@ -138,7 +140,7 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 		person3.put("Name", "wangshilian30");
 		person3.put("Age", 30L);
 		store.add(person3);
-		
+
 		EditableEntity person4 = new EditableEntity();
 		person4.put("Name", "wangshilian40");
 		person4.put("Age", 40L);
@@ -148,7 +150,7 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 		person5.put("Name", "wangshilian50");
 		person5.put("Age", 50L);
 		store.add(person5);
-		
+
 		store.flush();
 
 		data = new EditableEntity();
@@ -160,33 +162,32 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 		long Height = 120;
 		data.put("Height", Height);
 
-//		eqValue("Height", (Long)person2.get("Age") + 10, "Test(){this.Height = $Person[2].Age + 10;};");
-		eqValue("Height", (Long)person2.get("Age") + 10, "Test(){this.Height = $Person[2,1,0][0].Age + 10;};");
-		eqValue("Height", (Long)person1.get("Age") + 10, "Test(){this.Height = $Person[2,1,0][1].Age + 10;};");
-		eqValue("Height", (Long)person0.get("Age") + 10, "Test(){this.Height = $Person[2,1,0][2].Age + 10;};");
+		// eqValue("Height", (Long)person2.get("Age") + 10,
+		// "Test(){this.Height = $Person[2].Age + 10;};");
+		eqValue("Height", (Long) person2.get("Age") + 10, "Test(){this.Height = $Person[2,1,0][0].Age + 10;};");
+		eqValue("Height", (Long) person1.get("Age") + 10, "Test(){this.Height = $Person[2,1,0][1].Age + 10;};");
+		eqValue("Height", (Long) person0.get("Age") + 10, "Test(){this.Height = $Person[2,1,0][2].Age + 10;};");
 
-		eqValue("Height", (Long)person1.get("Age") + 10, "Test(){this.Height = $Person[1..3][0].Age + 10;};");
-		eqValue("Height", (Long)person2.get("Age") + 10, "Test(){this.Height = $Person[1..3][1].Age + 10;};");
-		eqValue("Height", (Long)person3.get("Age") + 10, "Test(){this.Height = $Person[1..3][2].Age + 10;};");
-		
+		eqValue("Height", (Long) person1.get("Age") + 10, "Test(){this.Height = $Person[1..3][0].Age + 10;};");
+		eqValue("Height", (Long) person2.get("Age") + 10, "Test(){this.Height = $Person[1..3][1].Age + 10;};");
+		eqValue("Height", (Long) person3.get("Age") + 10, "Test(){this.Height = $Person[1..3][2].Age + 10;};");
 
-		eqValue("Height", (Long)person0.get("Age") + 10, "Test(){this.Height = $Person[..3][0].Age + 10;};");
-		eqValue("Height", (Long)person1.get("Age") + 10, "Test(){this.Height = $Person[..3][1].Age + 10;};");
-		eqValue("Height", (Long)person2.get("Age") + 10, "Test(){this.Height = $Person[..3][2].Age + 10;};");
-		eqValue("Height", (Long)person3.get("Age") + 10, "Test(){this.Height = $Person[..3][3].Age + 10;};");
-		
-		eqValue("Height", (Long)person2.get("Age") + 10, "Test(){this.Height = $Person[2..][0].Age + 10;};");
-		eqValue("Height", (Long)person3.get("Age") + 10, "Test(){this.Height = $Person[2..][1].Age + 10;};");
-		eqValue("Height", (Long)person4.get("Age") + 10, "Test(){this.Height = $Person[2..][2].Age + 10;};");
-		eqValue("Height", (Long)person5.get("Age") + 10, "Test(){this.Height = $Person[2..][3].Age + 10;};");
-		
+		eqValue("Height", (Long) person0.get("Age") + 10, "Test(){this.Height = $Person[..3][0].Age + 10;};");
+		eqValue("Height", (Long) person1.get("Age") + 10, "Test(){this.Height = $Person[..3][1].Age + 10;};");
+		eqValue("Height", (Long) person2.get("Age") + 10, "Test(){this.Height = $Person[..3][2].Age + 10;};");
+		eqValue("Height", (Long) person3.get("Age") + 10, "Test(){this.Height = $Person[..3][3].Age + 10;};");
 
-		eqValue("Height", (Long)person0.get("Age") + 10, "Test(){this.Height = $Person[..1,3,2,4..][0].Age + 10;};");
-		eqValue("Height", (Long)person1.get("Age") + 10, "Test(){this.Height = $Person[..1,3,2,4..][1].Age + 10;};");
-		eqValue("Height", (Long)person3.get("Age") + 10, "Test(){this.Height = $Person[..1,3,2,4..][2].Age + 10;};");
-		eqValue("Height", (Long)person2.get("Age") + 10, "Test(){this.Height = $Person[..1,3,2,4..][3].Age + 10;};");
-		eqValue("Height", (Long)person4.get("Age") + 10, "Test(){this.Height = $Person[..1,3,2,4..][4].Age + 10;};");
-		eqValue("Height", (Long)person5.get("Age") + 10, "Test(){this.Height = $Person[..1,3,2,4..][5].Age + 10;};");
+		eqValue("Height", (Long) person2.get("Age") + 10, "Test(){this.Height = $Person[2..][0].Age + 10;};");
+		eqValue("Height", (Long) person3.get("Age") + 10, "Test(){this.Height = $Person[2..][1].Age + 10;};");
+		eqValue("Height", (Long) person4.get("Age") + 10, "Test(){this.Height = $Person[2..][2].Age + 10;};");
+		eqValue("Height", (Long) person5.get("Age") + 10, "Test(){this.Height = $Person[2..][3].Age + 10;};");
+
+		eqValue("Height", (Long) person0.get("Age") + 10, "Test(){this.Height = $Person[..1,3,2,4..][0].Age + 10;};");
+		eqValue("Height", (Long) person1.get("Age") + 10, "Test(){this.Height = $Person[..1,3,2,4..][1].Age + 10;};");
+		eqValue("Height", (Long) person3.get("Age") + 10, "Test(){this.Height = $Person[..1,3,2,4..][2].Age + 10;};");
+		eqValue("Height", (Long) person2.get("Age") + 10, "Test(){this.Height = $Person[..1,3,2,4..][3].Age + 10;};");
+		eqValue("Height", (Long) person4.get("Age") + 10, "Test(){this.Height = $Person[..1,3,2,4..][4].Age + 10;};");
+		eqValue("Height", (Long) person5.get("Age") + 10, "Test(){this.Height = $Person[..1,3,2,4..][5].Age + 10;};");
 	}
 
 	public void testTypeDefinition_Repos_getByClause() {

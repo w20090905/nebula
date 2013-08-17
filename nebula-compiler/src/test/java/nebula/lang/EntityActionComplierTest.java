@@ -6,12 +6,12 @@ public class EntityActionComplierTest extends TestCase {
 	TypeLoaderForTest loader;
 	EntityActionComplier funcCmp;
 	Compiler cp;
-	Context context;
+	CompilerContext context;
 
 	protected void setUp() throws Exception {
 		loader = new TypeLoaderForTest(new SystemTypeLoader());
 		funcCmp = new EntityActionComplier();
-		context = new Context() {
+		context = new CompilerContext() {
 
 			@Override
 			public Type resolveType(String name) {
@@ -29,9 +29,9 @@ public class EntityActionComplierTest extends TestCase {
 	public final void testDoCompile() {
 
 		Code code = cp.opRelational(Operator.EQ, cp.opLongCst("10"), cp.opLongCst("100"));
+		Type type = new Type(loader, "test");
 
-		EntityAction action = funcCmp.compile(code, null, context);
-		action.exec(null, null);
-
+		EntityAction action = funcCmp.compile(context, type, "test", code);
+		action.exec(null, null, null);
 	}
 }

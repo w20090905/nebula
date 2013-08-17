@@ -1,6 +1,6 @@
 type Person|人员 {
 	!Name;
-	Full-Name|全名;
+	Full-Name|全名1;
 	?Given-Name|名;
 	?Family-Name|姓;
 	?AlternateNames[] Name;
