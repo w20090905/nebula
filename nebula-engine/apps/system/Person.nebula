@@ -1,12 +1,12 @@
 type Person|人员 {
 	!Name;
-	Full-Name|全名1;
+	Full-Name|全名;
 	?Given-Name|名;
 	?Family-Name|姓;
-	?AlternateNames[] Name;
+	?AlternateNames|别名[] Name;
 	?Description;
 	Sex|性别 Attr;
-	?DateOfBirth Date;
+	?DateOfBirth|出生日期 Date;
 	?Age;
           Age2|年龄 Age=this.Age + 10;
 	?Home{
