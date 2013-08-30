@@ -1,0 +1,22 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Menu List</h3>
+    <div class="ctrls">
+		<input type="text" x-ng-model="query" class="input-medium search-query ctrl" placeholder="Filter"/>
+	</div>
+</div>
+<div class="modal-body">
+	<ul x-ng-tree="datalist" class="testtree" x-multiple>
+    	<li select="$retData(this.item)" parentName="ParentName" idName="Name">{{item.Name}}</li>
+	</ul>
+	
+    <!-- <tr ng-repeat="data in datalist | filter:query | orderBy:orderProp" ng-click="$ret($index)">
+			<td>{{$index+1}}</td>
+			<td>{{data["IconGroup"]}}</td>
+			<td><i x-ng-class="data['Name']"></i> </td>
+			<td>{{data["Name"]}}</td> -->    
+
+</div>
+<div class="modal-footer">
+    <button class="btn popup-close" data-dismiss="modal" aria-hidden="true">Close</button>
+</div>

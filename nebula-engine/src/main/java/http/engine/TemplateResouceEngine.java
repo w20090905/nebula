@@ -26,14 +26,13 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 	final DataRepos dataWareHouse;
 
 	@Inject
-	public TemplateResouceEngine(Loader resourceLoader, TypeLoader typeLoader,
-			final DataRepos dataWareHouse, Configuration cfg) {
+	public TemplateResouceEngine(Loader resourceLoader, TypeLoader typeLoader, final DataRepos dataWareHouse, Configuration cfg) {
 		super(resourceLoader);
 		this.templateConfig = cfg;
 		this.typeLoader = typeLoader;
 		this.attributes = dataWareHouse.define(String.class, Entity.class, "Attribute");
 		this.dataWareHouse = dataWareHouse;
-		this.age = 0;//30L * 24L * 60L * 60L;
+		this.age = 0;// 30L * 24L * 60L * 60L;
 	}
 
 	@Override
@@ -87,9 +86,20 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 		if (name.indexOf('/', prev) > 0) {
 			return new StaticTemplateResouce(templateConfig, typeLoader, attributes, theme, skin, name);
 		} else if ((idxType = name.indexOf("-")) > 0) {
-			String typeName = name.substring(0, idxType);
-			String actionName = name.substring(idxType + 1);
-			return new TypeTemplateResouce(templateConfig, typeLoader,dataWareHouse, attributes, theme, skin, typeName, actionName);
+			String typeName;
+			String layoutName;
+			String actionName;
+
+			typeName = name.substring(0, idxType);
+			int idxType2 = -1;
+			if ((idxType2 = name.indexOf("-", idxType + 1)) > 0) {
+				layoutName = name.substring(idxType + 1, idxType2);
+				actionName = name.substring(idxType2 + 1);
+			} else {
+				layoutName = null;
+				actionName = name.substring(idxType + 1);
+			}
+			return new TypeTemplateResouce(templateConfig, typeLoader, dataWareHouse, attributes, theme, skin, typeName, layoutName, actionName);
 		} else {
 			return new StaticTemplateResouce(templateConfig, typeLoader, attributes, theme, skin, name);
 		}

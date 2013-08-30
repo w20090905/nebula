@@ -376,7 +376,10 @@ fieldDefinition[Type resideType] returns[Field field]
                 }else if(inline == Cascade){
                     field.refer = Cascade;   
                     field.modifiers |=  Modifier.CASCADE;
-                    field.attrs.put("Layout","Tree");
+                    //TODO type defined Layout go first
+                    if("Basic".equals(resideType.attrs.get("Layout"))){                    
+                        resideType.attrs.put("Layout","Tree");
+                    }
                 }
                 
                 if(range.from=="f"){

@@ -87,9 +87,15 @@ public class TypeTemplateResouce extends AbstractResouce {
 	final Broker<DataStore<Entity>> attributes;
 	TemplateHashModel dataWareHouseModel;
 
-	public TypeTemplateResouce(Configuration cfg, TypeLoader typeLoader, DataRepos dataWareHouse,
-			Broker<DataStore<Entity>> attributes, String theme, String skin, String typeName, String actionName) {
-		super("text/template", 0, 0);//TODO Not realized TypeTemplateResouce super("text/template", 0, 0)
+	public TypeTemplateResouce(Configuration cfg, TypeLoader typeLoader, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes, String theme,
+			String skin, String typeName, String actionName) {
+		this(cfg, typeLoader, dataWareHouse, attributes, theme, skin, typeName, null, actionName);
+	}
+
+	public TypeTemplateResouce(Configuration cfg, TypeLoader typeLoader, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes, String theme,
+			String skin, String typeName, String layout, String actionName) {
+		super("text/template", 0, 0);// TODO Not realized TypeTemplateResouce
+										// super("text/template", 0, 0)
 
 		this.cfg = cfg;
 		this.typeLoader = typeLoader;
@@ -105,10 +111,11 @@ public class TypeTemplateResouce extends AbstractResouce {
 
 		Type type = this.typeLoader.findType(typeName);
 
-		String dataType = (String) type.getStandalone().name().toLowerCase();
-		String style = (String) type.getAttrs().get("Style");
+		String entityType = (String) type.getStandalone().name().toLowerCase();
+		
+		layout = layout != null ? layout : (String) type.getAttrs().get("Layout");
 
-		this.name = dataType + "_" + style + "_" + actionName + ".ftl";
+		this.name = entityType + "_" + layout.toLowerCase() + "_" + actionName.toLowerCase() + ".ftl";
 		// this.templateName = templateTypeName + "-" + actionName + ".ftl";
 		this.attributes = attributes;
 	}

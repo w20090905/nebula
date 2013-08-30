@@ -1,0 +1,7 @@
+type Menu{
+	%Parent Menu;
+	!Name;
+	Title;
+	?Icon;
+	URL;
+};
