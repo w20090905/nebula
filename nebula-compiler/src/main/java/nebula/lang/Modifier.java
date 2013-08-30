@@ -41,6 +41,10 @@ public class Modifier {
 	public static boolean isAbstract(int mod) {
 		return (mod & ABSTRACT) != 0;
 	}
+	
+	public static boolean isCascade(int mod) {
+		return (mod & CASCADE) != 0;
+	}
 
 	public static String toString(int mod) {
 		StringBuffer sb = new StringBuffer();
@@ -134,11 +138,7 @@ public class Modifier {
 	 */
 	public static final int STRICT = 0x00000800;
 
-	// Bits not (yet) exposed in the public API either because they
-	// have different meanings for fields and methods and there is no
-	// way to distinguish between the two in this class, or because
-	// they are not Java programming language keywords
-	static final int BRIDGE = 0x00000040;
+	static final int CASCADE = 0x00000040;
 	static final int VARARGS = 0x00000080;
 	static final int SYNTHETIC = 0x00001000;
 	static final int ANNOTATION = 0x00002000;

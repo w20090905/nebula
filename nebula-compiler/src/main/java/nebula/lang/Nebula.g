@@ -6,14 +6,14 @@ options {
 }
 
 @header {
-	package nebula.lang;
-	import java.math.BigDecimal;
-	import java.util.ArrayList;
-	import java.util.HashMap;
-	import java.util.List;
-	import java.util.Map;
-	import util.InheritHashMap;
-	
+    package nebula.lang;
+    import java.math.BigDecimal;
+    import java.util.ArrayList;
+    import java.util.HashMap;
+    import java.util.List;
+    import java.util.Map;
+    import util.InheritHashMap;
+    
   import static nebula.lang.Reference.*;  
   import static nebula.lang.Modifier.*;
   
@@ -266,17 +266,17 @@ typeDefinition returns[Type type]
             if($superTypeID==null){
                 switch(typeType){
                   case Transaction:
-                    type = new Type(loader,$typeID.text,resolveType(TypeStandalone.Transaction.name()),typeType);
-                    break;
+                      type = new Type(loader,$typeID.text,resolveType(TypeStandalone.Transaction.name()),typeType);
+                      break;
                   case Master:
                   default:
-                    type = new Type(loader,$typeID.text,resolveType(TypeStandalone.Master.name()),typeType);
-                    break;
+                      type = new Type(loader,$typeID.text,resolveType(TypeStandalone.Master.name()),typeType);
+                      break;
                 }
             }else{
                 Type superType = resolveType($superTypeID.text);
                 if(typeType != superType.standalone){
-                  throw new RuntimeException("Type's standalone [" + typeType + "] not match super type's standalone [" + superType.standalone + "]");
+                    throw new RuntimeException("Type's standalone [" + typeType + "] not match super type's standalone [" + superType.standalone + "]");
                 }
                 type = new Type(loader,$typeID.text,superType);
             } 
@@ -298,10 +298,10 @@ typeDefinition returns[Type type]
 
 typeDefineKeyword returns[TypeStandalone typeType]
     :   'define'                  {typeType = TypeStandalone.Basic;} 
-      | ('type' | 'master' ) {typeType = TypeStandalone.Master;} 
-      | ('tx'|'transaction')    {typeType = TypeStandalone.Transaction;}
-      | ('flow')    {typeType = TypeStandalone.Flow;}
-      | ('action')    {typeType = TypeStandalone.Action;};
+      | ('type' | 'master' )    {typeType = TypeStandalone.Master;} 
+      | ('tx'|'transaction')     {typeType = TypeStandalone.Transaction;}
+      | ('flow')                    {typeType = TypeStandalone.Flow;}
+      | ('action')                 {typeType = TypeStandalone.Action;};
 
 nestedTypeDefinition[Type resideType,String name,Aliases nameAlias] returns[Type type]
     :  
@@ -323,13 +323,12 @@ fieldDefinition[Type resideType] returns[Field field]
          ('|' aliases=aliasesLiteral[$name.text])?
        
           { 
-            if($qtype!=null){
-              field = new Field(resideType,$name.text + $qtype.text);
-              field.type = resolveType($qtype.text);            
-
-            } else {
-              field = new Field(resideType,$name.text);
-           }
+              if($qtype!=null){
+                  field = new Field(resideType,$name.text + $qtype.text);
+                  field.type = resolveType($qtype.text);  
+              } else {
+                  field = new Field(resideType,$name.text);
+              }
           }       
                 
         /* Actions */
@@ -361,39 +360,47 @@ fieldDefinition[Type resideType] returns[Field field]
 
         {
             if(field.type!=null){
-              field.attrs.setDefaults(field.type.attrs);
-            field.modifiers |= modifiers;
-            if(field.type.standalone == TypeStandalone.Basic){
-              field.refer = ByVal;
-            }else if(field.type.standalone == TypeStandalone.Mixin){
-              field.refer = Inline;
-            }else{
-              field.refer = ByRef;            
-            }
-            if(inline==Inline || inline == Cascade){
-                field.refer = inline;
-            }
-            if(range.from=="f"){
-            }else if(range.from!=null){
-                field.rangeFrom = Integer.parseInt(range.from);
-                field.array = true;               
-            }else{
-                field.array = true;
-            }
+                field.attrs.setDefaults(field.type.attrs);
+                field.modifiers |= modifiers;
+                
+                if(field.type.standalone == TypeStandalone.Basic){
+                    field.refer = ByVal;
+                }else if(field.type.standalone == TypeStandalone.Mixin){
+                    field.refer = Inline;
+                }else{
+                    field.refer = ByRef;            
+                }
+                    
+                if(inline==Inline){
+                    field.refer = inline;
+                }else if(inline == Cascade){
+                    field.refer = Cascade;   
+                    field.modifiers |=  Modifier.CASCADE;
+                    field.attrs.put("Layout","Tree");
+                }
+                
+                if(range.from=="f"){
+                }else if(range.from!=null){
+                    field.rangeFrom = Integer.parseInt(range.from);
+                    field.array = true;               
+                }else{
+                    field.array = true;
+                }
+        
+                if(range.to=="f"){
+                }else if(range.to!=null){
+                    field.rangeTo = Integer.parseInt(range.to);
+                    field.array = true;               
+                }else{
+                    field.array = true;
+                }
             
-            if(range.to=="f"){
-            }else if(range.to!=null){
-                field.rangeTo = Integer.parseInt(range.to);
-                field.array = true;               
-            }else{
-                field.array = true;
-            }
-            
-            }
+            } // if(field.type!=null){
             
             if(annotations != null){
                 field.attrs.putAll(annotations);
             }
+            
            if(aliases!=null)field.setNameAlias(aliases);
            else field.setNameAlias(new Aliases(field.name));
             
@@ -403,7 +410,7 @@ fieldDefinition[Type resideType] returns[Field field]
               resideType.actions.add(field);            
             }
             
-          }
+        }
         ;
 
 

@@ -25,9 +25,9 @@ class BootstrapTypeLoader extends TypeLoader {
 		Type basicType = new Type(this, TypeStandalone.Basic.name(), typeRoot, TypeStandalone.Abstract);
 
 		Type master = new Type(this, TypeStandalone.Master.name(), typeRoot, TypeStandalone.Abstract);
-		master.attrs.put("Style", "basic");
+		master.attrs.put("Layout", "Basic");
 		Type transaction = new Type(this, TypeStandalone.Transaction.name(), typeRoot, TypeStandalone.Abstract);
-		transaction.attrs.put("Style", "basic");
+		transaction.attrs.put("Layout", "Basic");
 		Type mixin = new Type(this, TypeStandalone.Mixin.name(), typeRoot, TypeStandalone.Abstract);
 
 		Type number = new Type(this, "Number", basicType, RawTypes.Long);
@@ -129,7 +129,7 @@ class BootstrapTypeLoader extends TypeLoader {
 		}
 
 		Type typeAttribute = this.findType("Attribute");
-		typeAttribute.attrs.put("Style", "compact");
+		typeAttribute.attrs.put("Layout", "Compact");
 
 		//@formatter:off
 		String typeDefine = "" +
