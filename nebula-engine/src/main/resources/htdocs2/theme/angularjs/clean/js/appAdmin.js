@@ -1,7 +1,7 @@
 'use strict';
 
 /* App Module */
-angular.module('appAdmin', ['nebulaFilters', 'nebulaServices','nebulaDirectives','ngResource','ngCookies']).
+angular.module('appAdmin', ['nebulaFilters', 'nebulaServices','nebulaDirectives','angularTree','ngResource','ngCookies']).
 	config(['$routeProvider', function($routeProvider) {
 		$routeProvider.
 			/* Template edit */

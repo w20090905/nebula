@@ -33,7 +33,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 		this.typeLoader = typeLoader;
 		this.attributes = dataWareHouse.define(String.class, Entity.class, "Attribute");
 		this.dataWareHouse = dataWareHouse;
-		this.age = 30L * 24L * 60L * 60L;
+		this.age = 0;//30L * 24L * 60L * 60L;
 	}
 
 	@Override

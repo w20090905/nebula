@@ -218,6 +218,15 @@ var neFromListDirective = [
 									var data =lastScope.$returnData(index);
 									onReturn(data);
 								}
+
+								lastScope.$retData = function(data){
+									$('#mask , #popup-window').fadeOut(300 , function() {
+										$('#mask').remove();  
+									});
+									
+//									var data =lastScope.$returnData(index);
+									onReturn(data);
+								}
 								
 								popupwinBody.contents().data(
 												'$ngControllerController',

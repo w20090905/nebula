@@ -13,11 +13,11 @@ public class StaticResource extends AbstractResouce {
 	private final Source underlySource;
 
 	public StaticResource(Source source, String mime) {
-		this(source, mime, 1L * 10L * 60L);
+		this(source, mime,0);// 1L * 10L * 60L);
 	}
 
 	public StaticResource(Source source, String mime, long age) {
-		super(mime, age, 1000);
+		super(mime, age, 0);//1000);
 		this.underlySource = source;
 	}
 

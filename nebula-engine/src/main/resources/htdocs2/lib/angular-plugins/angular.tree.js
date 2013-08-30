@@ -96,6 +96,8 @@
         var collectionExpr = 'item.children';
         var selectExpr = itemTemplate.attr('select');
         var selectedName = itemTemplate.attr('selected');
+        var parentName = itemTemplate.attr('parentName');
+        var idName = itemTemplate.attr('idName');
 
         if (eachIter) {
             var match = /^\s*(\w+)\s+in\s+(.*?)\s*$/.exec(eachIter);
@@ -146,6 +148,37 @@
                 }
             }
         };
+        // add by wangshilian 
+        if(parentName){
+            tree.treeModelListWatch = tree.treeModelWatch;
+            tree.treeModelWatch = function (scope) {
+        		var array = tree.treeModelListWatch(scope);        		
+        	    var filtered = [];
+        	    for ( var j = 0; j < array.length; j++) {
+        	      var value = array[j];
+        	      if (!value[parentName] || value[parentName].length ==0) {
+          	        filtered.push(value);
+        	      }
+        	    }
+        	    return filtered;            	
+            };
+            
+        	tree.collectionWatch = function (scope) {
+        		var item = scope.$eval(tree.contextName);
+        		var array = tree.treeModelListWatch(scope);
+        		var id = item[idName];
+        		
+        	    var filtered = [];
+        	    for ( var j = 0; j < array.length; j++) {
+        	      var value = array[j];
+        	      if (id == value[parentName]) {
+        	        filtered.push(value);
+        	      }
+        	    }
+        	    return filtered;
+            };	
+        }
+        // add by wangshilian 
 
         if (tree.trackSelection) {
             treeElem.bind('click', function (evt) {
