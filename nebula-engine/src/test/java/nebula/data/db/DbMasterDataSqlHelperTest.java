@@ -129,6 +129,60 @@ public class DbMasterDataSqlHelperTest extends TestCase {
 				+ "TEST_CORE bigint," + "TEST_REQUIRE bigint," + "TEST_IGNORE bigint," + "TESTREF_KEY varchar(60),"
 				+ "TESTREF_CORE varchar(60)," + "PRIMARY KEY ( NAME)," + "TIMESTAMP_ TIMESTAMP)", h.builderCreate());
 	}
+	
+
+	public final void testRefTypeAnnotation() {
+		//@formatter:off
+		String text = "" +
+				"type TestPerson { " +
+				"	!Name;" +
+				"   Test{" +
+				"		@Column(\"KeyKeyName\") !Key Name;" +
+				"		*Core Age;" +
+				"		#Require Age;" +
+				"		?Ignore Age;" +
+				"	 };" +
+				"	TestRef;" +
+				"};";
+		//@formatter:on		
+
+		t = loader.testDefineNebula(new StringReader(text)).get(0);
+		h = new DbMasterDataSqlHelper(config, t);
+		assertEquals("NTestPerson", h.getTableName());
+
+		int i = 0;
+		assertEquals("Name", h.userColumns[i].fieldName);
+		assertEquals(true, h.userColumns[i].key);
+		i++;
+		assertEquals("TestKey", h.userColumns[i].fieldName);
+		assertEquals("TEST_KEYKEYNAME", h.userColumns[i].columnName);
+		assertEquals(false, h.userColumns[i].key);
+		i++;
+		assertEquals("TestCore", h.userColumns[i].fieldName);
+		assertEquals(false, h.userColumns[i].key);
+		i++;
+		assertEquals("TestRequire", h.userColumns[i].fieldName);
+		assertEquals(false, h.userColumns[i].key);
+		i++;
+		assertEquals("TestIgnore", h.userColumns[i].fieldName);
+		assertEquals(false, h.userColumns[i].key);
+
+		i++;
+		assertEquals("TestRefKey", h.userColumns[i].fieldName);
+		assertEquals(false, h.userColumns[i].key);
+
+		i++;
+		assertEquals("TestRefCore", h.userColumns[i].fieldName);
+		assertEquals(false, h.userColumns[i].key);
+
+		assertEquals(i + 1, h.userColumns.length);
+
+		assertEquals("SELECT count(1) FROM NTestPerson ", h.builderCount());
+
+		assertEquals("CREATE TABLE NTestPerson(" + "NAME varchar(60) NOT NULL," + "TEST_KEYKEYNAME varchar(60),"
+				+ "TEST_CORE bigint," + "TEST_REQUIRE bigint," + "TEST_IGNORE bigint," + "TESTREF_KEY varchar(60),"
+				+ "TESTREF_CORE varchar(60)," + "PRIMARY KEY ( NAME)," + "TIMESTAMP_ TIMESTAMP)", h.builderCreate());
+	}
 
 	public final void testNestArrayType() {
 		//@formatter:off
