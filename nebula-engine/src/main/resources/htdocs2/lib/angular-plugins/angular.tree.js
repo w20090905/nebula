@@ -211,6 +211,12 @@
                 	}
                 	return;
                 }
+                
+
+//                treeElem.bind('mouseover', function (evt) {
+//                    var selectedItemElem = findParentListItem(evt.target);
+//                    var selectedItemScope = selectedItemElem ? selectedItemElem.scope() : null;
+//                });
                 // add by wangshilian end
                 
                 if (evt[multiSelectKey] && tree.multiple) {

@@ -17,6 +17,13 @@ function PaginationCtrl($scope){
     }
 } 
 
+function TreeListCtrl($scope){
+	$scope.data = null;
+	$scope.selectData = function(data,selected){
+		if(selected)$scope.data = data;
+	}
+}
+
 function TypeQuickEditCtrl($scope, $resource, $routeParams, $location) {
 
 	'use strict';

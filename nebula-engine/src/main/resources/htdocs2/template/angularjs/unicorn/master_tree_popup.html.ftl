@@ -34,11 +34,13 @@
 								[#case "ByVal"]
 									[#if field.key]
 										[#if field.type.name!="ID"]
-							{{item["${field.name}"]}}
+							{{item["${field.name}"]}}&nbsp;
 										[/#if]
 										[#assign keyfieldname]${field.name}[/#assign]			
 									[#elseif field.core]	
-							{{item["${field.name}"]}}
+							{{item["${field.name}"]}}&nbsp;
+									[#else]	
+							{{item["${field.name}"]}}&nbsp;
 									[/#if]
 									[#break]
 								[/#switch]
