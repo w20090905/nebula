@@ -1,11 +1,9 @@
 package test.httpd;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
-import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.nio.channels.ClosedChannelException;
 import java.nio.channels.FileChannel;
@@ -115,6 +113,7 @@ public class webserver {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	public static void handle_ready_read(File wwwBase, SelectionKey selkey) throws IOException, MalformedURLException,
 			FileNotFoundException {
 		ByteBuffer buffer = (ByteBuffer) selkey.attachment();

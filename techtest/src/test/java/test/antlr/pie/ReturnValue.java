@@ -10,6 +10,7 @@ package test.antlr.pie;
 /** Unchecked exception used to pass Pie return value all the way out
  *  of deeply nested java method call chain.
  */
+@SuppressWarnings("serial")
 public class ReturnValue extends Error {
     public Object value;
     public ReturnValue() { super(""); }

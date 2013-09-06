@@ -1,4 +1,4 @@
-package test.java.performance;
+package test.java.performance.getField;
 
 public interface Runable {
     void setup() throws Exception;

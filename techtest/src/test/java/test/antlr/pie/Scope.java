@@ -7,8 +7,6 @@ package test.antlr.pie;
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/tpdsl for more book information.
 ***/
-import java.util.Map;
-import java.util.HashMap;
 
 public interface Scope {
     public String getScopeName();

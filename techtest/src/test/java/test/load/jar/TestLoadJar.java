@@ -4,7 +4,6 @@ import java.io.File;
 import java.net.URL;
 import java.security.CodeSource;
 import java.security.ProtectionDomain;
-import java.util.ServiceLoader;
 
 import freemarker.template.Template;
 

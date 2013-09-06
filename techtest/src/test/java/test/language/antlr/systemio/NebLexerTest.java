@@ -17,8 +17,8 @@ import test.systemio.antlr.neb.NebLexer;
  */
 public class NebLexerTest extends TestCase {
 
-    private static final String SCRIPT =
-        "dsfdsfds\nsdfsdf\n";
+//    private static final String SCRIPT =
+//        "dsfdsfds\nsdfsdf\n";
 
     /**
      * Unit test for AST generation.

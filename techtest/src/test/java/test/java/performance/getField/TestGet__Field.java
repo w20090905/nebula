@@ -1,6 +1,6 @@
-package test.java.performance;
+package test.java.performance.getField;
 
-public class TestGet__InstanceOf implements Runable {
+public class TestGet__Field implements Runable {
 
     long max;
     String name,test;
@@ -16,19 +16,18 @@ public class TestGet__InstanceOf implements Runable {
 
     @Override
     public long run() throws Exception {
-        boolean is =false;
         for (int i = 0; i < max; i++) {
             // 1
-            is = p.name instanceof String;
-            is = p.sex instanceof String;
-            is = p.name instanceof String;
-            is = p.sex instanceof String;
-            is = p.name instanceof String;
-            is = p.sex instanceof String;
-            is = p.name instanceof String;
-            is = p.sex instanceof String;
-            is = p.name instanceof String;
-            is = p.sex instanceof String;
+            name = p.name;
+            name = p.sex;
+            test = p.name;
+            test = p.sex;
+            name = p.name;
+            test = p.sex;
+            name = p.name;
+            name = p.sex;
+            test = p.name;
+            test = p.sex;
         }
 
         return max * 10;

@@ -1,4 +1,4 @@
-package test.java.performance;
+package test.java.performance.getField;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -6,19 +6,21 @@ import java.util.Map;
 
 import org.mvel2.MVEL;
 
-public class TestGet__MVEL implements Runable {
+public class TestGet__MVMGet implements Runable {
 
     String expression = "foobar + foobar  + foobar  + foobar  + foobar  + foobar  + foobar  + foobar  + foobar  + foobar  + foobar  + foobar  + foobar  + foobar ";
     // Compile the expression.
     Serializable compiled = MVEL.compileExpression(expression);
-    Map vars;
+    @SuppressWarnings("rawtypes")
+	Map vars;
     Integer result = null;
     long max;
 
-    @Override
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
     public void setup() throws Exception {
         result = null;
-        max = 1000 * 1000;
+        max = 1000 * 100;
         vars = new HashMap();
         vars.put("foobar", new Integer(100));
     }

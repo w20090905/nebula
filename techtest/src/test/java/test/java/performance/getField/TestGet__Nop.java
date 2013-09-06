@@ -1,6 +1,6 @@
-package test.java.performance;
+package test.java.performance.getField;
 
-public class TestGet__Field implements Runable {
+public class TestGet__Nop implements Runable {
 
     long max;
     String name,test;
@@ -11,23 +11,14 @@ public class TestGet__Field implements Runable {
     public void setup() throws Exception {
         p.setName("name");
         p.setSex("sex");
-        max = 1000 * 1000 * 10;
+        max = 1000 * 1000;
     }
 
     @Override
     public long run() throws Exception {
         for (int i = 0; i < max; i++) {
-            // 1
-            name = p.name;
-            name = p.sex;
-            test = p.name;
-            test = p.sex;
-            name = p.name;
-            test = p.sex;
-            name = p.name;
-            name = p.sex;
-            test = p.name;
-            test = p.sex;
+            max++;
+            max--;
         }
 
         return max * 10;

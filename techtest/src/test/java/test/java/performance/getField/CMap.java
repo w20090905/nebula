@@ -1,4 +1,4 @@
-package test.java.performance;
+package test.java.performance.getField;
 
 public interface CMap {
     void put(String key, String value);

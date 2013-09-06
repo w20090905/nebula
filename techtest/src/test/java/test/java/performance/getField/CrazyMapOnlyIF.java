@@ -1,4 +1,4 @@
-package test.java.performance;
+package test.java.performance.getField;
 
 public abstract class CrazyMapOnlyIF {
 	public CrazyMapOnlyIF addKey(String key) {

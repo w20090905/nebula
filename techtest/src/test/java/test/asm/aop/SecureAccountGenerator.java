@@ -26,6 +26,7 @@ public class SecureAccountGenerator {
 	}
 
 	private class AccountGeneratorClassLoader extends ClassLoader {
+		@SuppressWarnings("rawtypes")
 		public Class defineClassFromClassFile(String className, byte[] classFile) throws ClassFormatError {
 			return defineClass("Account$EnhancedByASM", classFile, 0, classFile.length);
 		}

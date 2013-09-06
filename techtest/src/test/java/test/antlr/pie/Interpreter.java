@@ -93,7 +93,8 @@ public class Interpreter {
         return null;
     }
 
-    public void block(PieAST t) {
+    @SuppressWarnings("unchecked")
+	public void block(PieAST t) {
         if ( t.getType()!=PieParser.BLOCK ) {
             listener.error("not a block: "+t.toStringTree());
         }

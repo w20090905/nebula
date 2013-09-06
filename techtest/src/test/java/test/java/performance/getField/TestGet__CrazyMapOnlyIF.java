@@ -1,11 +1,11 @@
-package test.java.performance;
+package test.java.performance.getField;
 
 
-public class TestGet__CrazyMap implements Runable {
+public class TestGet__CrazyMapOnlyIF implements Runable {
 
     long max;
     String name;
-    CrazyMap map = CrazyMap.newMap("name","sex","age");
+    CrazyMapOnlyIF map = CrazyMapOnlyIF.newMap("name","sex","age");
 
     @Override
     public void setup() throws Exception {

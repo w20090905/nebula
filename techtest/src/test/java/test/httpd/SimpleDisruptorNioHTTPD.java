@@ -69,6 +69,7 @@ public class SimpleDisruptorNioHTTPD {
 	}
 	
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws Exception {
 		for (int i = 0; i < 1024; i++) {
 			bufferPool.add(ByteBuffer.allocate(1024));

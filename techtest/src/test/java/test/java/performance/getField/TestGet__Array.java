@@ -1,4 +1,4 @@
-package test.java.performance;
+package test.java.performance.getField;
 
 public class TestGet__Array implements Runable {
 

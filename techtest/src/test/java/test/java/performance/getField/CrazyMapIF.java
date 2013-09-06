@@ -1,4 +1,4 @@
-package test.java.performance;
+package test.java.performance.getField;
 
 public abstract class CrazyMapIF implements CMap{
 	public CMap addKey(String key) {

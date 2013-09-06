@@ -1,33 +1,46 @@
-package test.java.performance;
+package test.java.performance.getField;
 
+import java.lang.reflect.Method;
 
-public class TestGet__Properties implements Runable {
+public class TestGet__Reflect implements Runable {
 
-    String name;
     long max;
+    String name;
+
+
     Person p = new Person();
+    Method mName;
+
     @Override
     public void setup() throws Exception {
         p.setName("name");
         p.setSex("sex");
-        max = 1000 * 1000;
+        max = 1000 * 1000 /10;
+        // Compile the expression.
+        try {
+            mName = p.getClass().getMethod("getName", (Class<?>[])null);
+        } catch (SecurityException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Override
     public long run() throws Exception {
-        //Properties
         for (int i = 0; i < max; i++) {
-            // 1
-            name = p.getName();
-            name = p.getSex();
-            name = p.getName();
-            name = p.getSex();
-            name = p.getName();
-            name = p.getSex();
-            name = p.getName();
-            name = p.getSex();
-            name = p.getName();
-            name = p.getSex();
+            name = (String) mName.invoke(p, (Object[])null);
+            name = (String) mName.invoke(p, (Object[])null);
+            name = (String) mName.invoke(p, (Object[])null);
+            name = (String) mName.invoke(p, (Object[])null);
+            name = (String) mName.invoke(p, (Object[])null);
+            name = (String) mName.invoke(p, (Object[])null);
+            name = (String) mName.invoke(p, (Object[])null);
+            name = (String) mName.invoke(p, (Object[])null);
+            name = (String) mName.invoke(p, (Object[])null);
+            name = (String) mName.invoke(p, (Object[])null);
         }
         return max * 10;
     }
@@ -221,6 +234,5 @@ public class TestGet__Properties implements Runable {
             this.sex = sex;
         }
     }
-
 
 }

@@ -1,7 +1,6 @@
-package test.java.performance;
+package test.java.performance.getField;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class TestGet__Map implements Runable {
 

@@ -17,7 +17,8 @@ import java.util.Set;
  */
 public class Send {
 
-    public static void main(String[] args) throws Exception {
+    @SuppressWarnings("unused")
+	public static void main(String[] args) throws Exception {
         SocketChannel sc = SocketChannel.open();
         ByteBuffer buffer = ByteBuffer.allocate(1024);
         Selector se = Selector.open();

@@ -67,6 +67,7 @@ import java.io.FileOutputStream;
  * See the end of the source file for distribution license
  * (Modified BSD licence)
  */
+@SuppressWarnings({"unused","unchecked","rawtypes","deprecation"})
 public class NanoHTTPD
 {
 	// ==================================================

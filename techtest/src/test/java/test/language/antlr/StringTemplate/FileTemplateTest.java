@@ -7,7 +7,6 @@ import junit.framework.TestCase;
 import org.antlr.stringtemplate.CommonGroupLoader;
 import org.antlr.stringtemplate.StringTemplate;
 import org.antlr.stringtemplate.StringTemplateGroup;
-import org.antlr.tool.ErrorManager;
 
 
 public class FileTemplateTest  extends TestCase{

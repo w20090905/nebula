@@ -8,10 +8,10 @@ public class TestReg {
 	public static void main(String[] args) {
 
 		String s1 ="WEAPON[TYPE=1,SUBTYPE=1].OUTPUT=0.01;";
-		String s2 ="WEAPON[TYPE:1].OUTPUT=0.01;";
+//		String s2 ="WEAPON[TYPE:1].OUTPUT=0.01;";
 		
 		Pattern p1 = Pattern.compile("([a-zA-Z]*)([\\[]([a-zA-Z]*)[\\=]([0-9]*)([,][a-zA-Z]*)[\\=]([0-9]*)*[\\]])?[\\.]([a-zA-Z]*)[\\=]([0-9\\.]*)[;]");
-		Pattern p2 = Pattern.compile("");
+//		Pattern p2 = Pattern.compile("");
 		
 		Matcher m;
 		

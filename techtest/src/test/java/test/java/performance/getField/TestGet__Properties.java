@@ -1,46 +1,33 @@
-package test.java.performance;
+package test.java.performance.getField;
 
-import java.lang.reflect.Method;
 
-public class TestGet__Reflect implements Runable {
+public class TestGet__Properties implements Runable {
 
-    long max;
     String name;
-
-
+    long max;
     Person p = new Person();
-    Method mName;
-
     @Override
     public void setup() throws Exception {
         p.setName("name");
         p.setSex("sex");
-        max = 1000 * 1000 /10;
-        // Compile the expression.
-        try {
-            mName = p.getClass().getMethod("getName", null);
-        } catch (SecurityException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        max = 1000 * 1000;
     }
 
     @Override
     public long run() throws Exception {
+        //Properties
         for (int i = 0; i < max; i++) {
-            name = (String) mName.invoke(p, null);
-            name = (String) mName.invoke(p, null);
-            name = (String) mName.invoke(p, null);
-            name = (String) mName.invoke(p, null);
-            name = (String) mName.invoke(p, null);
-            name = (String) mName.invoke(p, null);
-            name = (String) mName.invoke(p, null);
-            name = (String) mName.invoke(p, null);
-            name = (String) mName.invoke(p, null);
-            name = (String) mName.invoke(p, null);
+            // 1
+            name = p.getName();
+            name = p.getSex();
+            name = p.getName();
+            name = p.getSex();
+            name = p.getName();
+            name = p.getSex();
+            name = p.getName();
+            name = p.getSex();
+            name = p.getName();
+            name = p.getSex();
         }
         return max * 10;
     }
@@ -234,5 +221,6 @@ public class TestGet__Reflect implements Runable {
             this.sex = sex;
         }
     }
+
 
 }
