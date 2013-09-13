@@ -2,7 +2,7 @@
 
 
 // Declare app level module which depends on filters, and services
-var nebulaModule = angular.module('app', ['nebulaFilters', 'nebulaServices', 'nebulaDirectives','ngResource','ngCookies']);
+var nebulaModule = angular.module('app', ['nebulaFilters', 'nebulaServices', 'nebulaDirectives','angularTree','ngResource','ngCookies']);
 
 nebulaModule.config(['$routeProvider', function($routeProvider,$cookies) {
 	$routeProvider.
