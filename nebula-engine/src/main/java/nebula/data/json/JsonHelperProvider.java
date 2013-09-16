@@ -48,14 +48,16 @@ public class JsonHelperProvider {
 		DataHelper<Entity, Reader, Writer> lastJsonHelper = (DataHelper<Entity, Reader, Writer>) new DefaultJsonHelper<Entity>(
 				factory, new EntitySerializer(typeHolder.get()));
 
-		final Broker<DataHelper<Entity, Reader, Writer>> broker = new BrokerCascade<DataHelper<Entity,Reader,Writer>, Type>(lastJsonHelper){
+		final BrokerCascade<DataHelper<Entity,Reader,Writer>, Type> broker = new BrokerCascade<DataHelper<Entity,Reader,Writer>, Type>(lastJsonHelper){
 			@Override
 			public boolean onUpdate(Type newData, Type oldData) {
 				this.put(new DefaultJsonHelper<Entity>(factory, new EntitySerializer(newData)));
-				return true;
+				return false;
 			}
 			
 		};
+		
+		typeHolder.addWatcher(broker);
 
 		return broker;
 	}
@@ -64,14 +66,16 @@ public class JsonHelperProvider {
 		DataHelper<Entity, Reader, Writer> lastJsonHelper = (DataHelper<Entity, Reader, Writer>) new DefaultJsonHelper<Entity>(
 				factory, new SimpleEntitySerializer(typeHolder.get()));
 
-		final Broker<DataHelper<Entity, Reader, Writer>> broker = new BrokerCascade<DataHelper<Entity,Reader,Writer>, Type>(lastJsonHelper){
+		final BrokerCascade<DataHelper<Entity,Reader,Writer>, Type> broker = new BrokerCascade<DataHelper<Entity,Reader,Writer>, Type>(lastJsonHelper){
 			@Override
 			public boolean onUpdate(Type newData, Type oldData) {
 				this.put(new DefaultJsonHelper<Entity>(factory, new SimpleEntitySerializer(newData)));
-				return true;
+				return false;
 			}
 			
 		};
+		
+		typeHolder.addWatcher(broker);
 
 		return broker;
 	}

@@ -3,7 +3,7 @@
 tx Issues {
 	!ID;
 	@InlineShow @HasFollowing Tracker Trackers;/* 0 */
-	Project|项目 Projects;/* 0 */
+	@GroupBy Project|项目 Projects;/* 0 */
 	*Subject;
 	?Description Note;
 	@HasFollowing ?DueDate Date;

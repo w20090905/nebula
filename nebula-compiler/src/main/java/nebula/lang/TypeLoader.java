@@ -89,6 +89,7 @@ public abstract class TypeLoader {
 	// return types.liveClassify(indexerFunction);
 	// }
 
+	//TODO refact
 	public Classificator<String, Type> groupByStandalone() {
 		return this.classifyBy;
 	}

@@ -25,7 +25,7 @@ public class LoginListResouce implements Resource {
 	private final Broker<DataStore<Entity>> users;
 	final RedirectResouce redirectTo;
 
-	public LoginListResouce(DataHelper<Entity, Reader, Writer> json, Broker<DataStore<Entity>> users,
+	public LoginListResouce(Broker<DataHelper<Entity, Reader, Writer>> json, Broker<DataStore<Entity>> users,
 			Broker<DataStore<Entity>> datas) {
 		this.users = users;
 		redirectTo = new RedirectResouce("/index.html");

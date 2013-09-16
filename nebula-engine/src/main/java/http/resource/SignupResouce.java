@@ -24,7 +24,7 @@ public class SignupResouce implements Resource {
 	private final Broker<DataStore<Entity>> users;
 	final RedirectResouce redirectTo;
 
-	public SignupResouce(DataHelper<Entity, Reader, Writer> json, Broker<DataStore<Entity>> users) {
+	public SignupResouce(Broker<DataHelper<Entity, Reader, Writer>> json, Broker<DataStore<Entity>> users) {
 		this.users = users;
 		redirectTo = new RedirectResouce("/index.html");
 	}

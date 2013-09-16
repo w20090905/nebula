@@ -30,7 +30,7 @@ class Brokers {
 			for (DataWatcher<T> listener : listeners) {
 				if (listener != null) {
 					boolean result = listener.onUpdate(newData, this.lastData);
-					if (!result) break;
+					if (result) break;
 				} else {
 					hasLostReference = true;
 				}

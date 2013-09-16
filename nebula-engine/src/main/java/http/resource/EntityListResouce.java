@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import nebula.data.Broker;
 import nebula.data.Classificator;
 import nebula.data.DataStore;
+import nebula.data.DataWatcher;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
 
@@ -95,6 +96,15 @@ public class EntityListResouce extends AbstractResouce {
 				}
 
 				return new DataHolder(classificatores.get(checkNotNull(cKey)), cValue);
+			}
+		});
+		
+		json.addWatcher(new DataWatcher<DataHelper<Entity,Reader,Writer>>() {
+			
+			@Override
+			public boolean onUpdate(DataHelper<Entity, Reader, Writer> newData, DataHelper<Entity, Reader, Writer> oldData) {
+				dataCache.cleanUp();
+				return false;
 			}
 		});
 	}

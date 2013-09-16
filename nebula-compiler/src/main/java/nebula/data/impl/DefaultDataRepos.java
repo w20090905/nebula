@@ -40,7 +40,7 @@ public class DefaultDataRepos implements DataReposEx {
 				BrokerCascade<DataStore, Type> datastoreBroker = new BrokerCascade<DataStore, Type>(datastore) {
 					@Override
 					public boolean onUpdate(Type newData, Type oldData) {
-						DataStore datastore = DefaultDataRepos.this.loadDataStore(newData.getName(), oldData);
+						DataStore datastore = DefaultDataRepos.this.loadDataStore(newData.getName(), newData);
 						this.put(datastore);
 						return false;
 					}
