@@ -1,0 +1,7 @@
+tx Message{
+      !ID;
+     @GroupBy User;
+     *Title;
+     ?Text;
+      ?MessageStatus|Status Attr := "Draft";
+}
