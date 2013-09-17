@@ -19,7 +19,7 @@ type SmpVdeEventArchive {
 	?Company null;
 	?Organization null;
 	?Product null;
-	?Filename;
+	?FileName;
 	?MsgOutput Msg;
 	?Annotation null;
 };

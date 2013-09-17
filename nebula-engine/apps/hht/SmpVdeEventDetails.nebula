@@ -6,6 +6,6 @@ type SmpVdeEventDetails {
 	?Company null;
 	?Organization null;
 	?Product null;
-	?Filename;
+	?FileName;
 };
 

@@ -12,6 +12,6 @@ type MProductDownload {
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("URL of the Download files")
-	Downloadurl Url;
+	Downloadurl URL;
 };
 

@@ -74,7 +74,7 @@ type MProduct {
 	@Remarks("Type of product")
 	ProductType Attr;/* 'I'  */
 	@Remarks("URL of  image")
-	?ImageUrl Url;
+	?ImageURL URL;
 	@Remarks("URL for the description")
 	?Descriptionurl Description;
 	@Remarks("Number of days the product is guaranteed or available")
@@ -88,7 +88,7 @@ type MProduct {
 	@Remarks("Product Attribute Set Instance")
 	?MAttributesetinstance;/* 0 */
 	@Remarks("URL of the Download files")
-	?Downloadurl Url;
+	?Downloadurl URL;
 	@Remarks("Category of the Freight")
 	?MFreightCategory;
 	@Remarks("Warehouse Locator")

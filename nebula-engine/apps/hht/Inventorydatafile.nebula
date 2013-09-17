@@ -2,7 +2,7 @@
 @Refby("6")
 tx Inventorydatafile {
 	!Inventorydatafileid ID;
-	Filename;
+	FileName;
 	Orgid Organization;
 	?Batchno null;
 	Filestatus null;

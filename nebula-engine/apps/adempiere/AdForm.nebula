@@ -22,6 +22,6 @@ type AdForm {
 	@Remarks("This functionality is considered Beta")
 	IsBetaFunctionality YesNo;/* 'N'  */
 	@Remarks("Web URL of the jsp function")
-	?Jspurl Url;
+	?Jspurl URL;
 };
 

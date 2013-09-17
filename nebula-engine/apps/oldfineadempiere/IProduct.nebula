@@ -56,7 +56,7 @@ type IProduct {
 	@Remarks("Discontinued By")
 	?Discontinuedby Date;
 	@Remarks("URL of  image")
-	?ImageUrl URL;
+	?ImageURL URL;
 	@Remarks("URL for the description")
 	?Descriptionurl URL;
 	@Remarks("The Key of the Business Partner")

@@ -82,7 +82,7 @@ tx Twxzhhtiteminquiry {
 	@Remarks("作番(2010/09/20 追加)")
 	?Sakubanafter null;
 	@Remarks("EDIファイル名(20100921 追加)")
-	?Edifilename FileName;
+	?EdiFileName FileName;
 	@Remarks("twxエラーコード")
 	?Twxerrorcode Code;
 	@Remarks("twxエラーメッセージ")

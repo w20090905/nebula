@@ -31,7 +31,7 @@ type COrderLineTaxV {
 	?PriceEntered Number;
 	?LineNetamt Amount;
 	?ProductDescription Description;
-	?ImageUrl Url;
+	?ImageURL URL;
 	?CCampaignId ID;
 	?CProjectId ID;
 	?CActivityId ID;

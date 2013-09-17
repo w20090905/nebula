@@ -5,7 +5,7 @@ type SmpVdnGroupList {
 	Name SmpVxaSystemPrefs;
 	?Owner null;
 	?Description;
-	?Backgroundfileurl Url;
+	?Backgroundfileurl URL;
 	?Iconsize Size;
 };
 

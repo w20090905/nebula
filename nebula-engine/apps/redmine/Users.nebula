@@ -15,7 +15,7 @@ type Users {
 	?CreatedOn Datetime;
 	?UpdatedOn Datetime;
 	?Type Attr;
-	?IdentityUrl Url;
+	?IdentityURL URL;
 	MailNotification String;
 	?Salt String;
 };

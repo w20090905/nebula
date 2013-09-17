@@ -23,7 +23,7 @@ tx Zadioriginalsalesinvdata {
 	?Inventoryamount Amount;
 	?Trafficcounting null;
 	Businessobjectid Businessobject;
-	?Zfilename FileName;
+	?ZFileName FileName;
 	?Uploaddate Date;
 	?IsDuplicate null;
 	?Checkrulestatus null;

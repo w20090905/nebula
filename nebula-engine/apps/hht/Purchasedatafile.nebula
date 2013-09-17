@@ -2,7 +2,7 @@
 @Refby("4")
 tx Purchasedatafile {
 	!Purchasedatafileid ID;
-	Filename;
+	FileName;
 	Buyerorgid ID;
 	?Batchno null;
 	Filestatus null;

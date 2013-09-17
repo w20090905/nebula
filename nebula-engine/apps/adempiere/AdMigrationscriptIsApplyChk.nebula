@@ -24,11 +24,11 @@ type AdMigrationscriptIsApplyChk {
 	@Remarks("Status of the currently running check")
 	Status Attr;/* NULL */
 	@Remarks("Full URL address - e.g. http://www.adempiere.org")
-	?Url;
+	?URL;
 	@Remarks("Apply Script")
 	IsApply YesNo;/* NULL */
 	@Remarks("Name of the local file or URL")
-	Filename;
+	FileName;
 	@Remarks("Dynamic Java Language Script to calculate result")
 	?Script Note;
 };

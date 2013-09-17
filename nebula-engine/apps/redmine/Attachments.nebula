@@ -4,8 +4,8 @@ tx Attachments {
 	!ID;
 	?Container ID;
 	?ContainerType Attr;
-	Filename;
-	DiskFilename FileName;
+	FileName;
+	DiskFileName FileName;
 	FileSize;/* 0 */
 	?ContentType Attr;
 	Digest String;

@@ -14,6 +14,6 @@ type MShipper {
 	@Remarks("Identifies a Business Partner")
 	?CBpartner;
 	@Remarks("URL of the shipper to track shipments")
-	?Trackingurl Url;
+	?Trackingurl URL;
 };
 

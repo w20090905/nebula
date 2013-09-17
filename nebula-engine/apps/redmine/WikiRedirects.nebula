@@ -4,7 +4,7 @@ tx WikiRedirects {
 	!ID;
 	Wiki Wikis;
 	?Title;
-	?RedirectsTo Url;
+	?RedirectsTo URL;
 	CreatedOn Datetime;
 };
 

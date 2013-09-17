@@ -10,7 +10,7 @@ type AdImage {
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("URL of  image")
-	?ImageUrl Url;
+	?ImageURL URL;
 	@Remarks("Binary Data")
 	?Binarydata Note;
 	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")

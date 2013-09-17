@@ -24,9 +24,9 @@ tx AdPackageExpDetail {
 	@Remarks("File_Directory")
 	?FileDirectory String;
 	@Remarks("Name of the local file or URL")
-	?Filename;
+	?FileName;
 	@Remarks("Destination_FileName")
-	?DestinationFilename FileName;
+	?DestinationFileName FileName;
 	@Remarks("Destination_Directory")
 	?DestinationDirectory String;
 	@Remarks("Optional short description of the record")

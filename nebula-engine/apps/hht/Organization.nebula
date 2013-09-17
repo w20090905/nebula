@@ -17,7 +17,7 @@ tx Organization {
 	?Fax;
 	Preferedcurrency null;
 	Defaultlanguage null;
-	?Url;
+	?URL;
 	?PaymentMethod null;
 	?PaymentTerm null;
 	?Shipmentmethod null;

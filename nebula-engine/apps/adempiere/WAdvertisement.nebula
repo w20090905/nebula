@@ -28,7 +28,7 @@ type WAdvertisement {
 	@Remarks("Valid to including this date (last day)")
 	?Validto Date;
 	@Remarks("URL of  image")
-	?ImageUrl Url;
+	?ImageURL URL;
 	@Remarks("Text of the Advertisement")
 	?Adtext Text;
 	@Remarks("Web Site Parameter 1 (default: header image)")

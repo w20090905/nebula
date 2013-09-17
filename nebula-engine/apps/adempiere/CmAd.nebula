@@ -18,7 +18,7 @@ type CmAd {
 	@Remarks("Contains media content like images, flash movies etc.")
 	CmMedia;
 	@Remarks("URL for the Target")
-	?Targeturl Url;
+	?Targeturl URL;
 	@Remarks("Which target should be used if user clicks?")
 	TargetFrame null;
 	@Remarks("How many clicks have been counted")

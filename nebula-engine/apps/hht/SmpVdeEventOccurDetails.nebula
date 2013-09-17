@@ -5,7 +5,7 @@ type SmpVdeEventOccurDetails {
 	?Company null;
 	?Organization null;
 	?Product null;
-	?Filename;
+	?FileName;
 	?TestName Name;
 	?Severity null;
 	?OccurDate Date;

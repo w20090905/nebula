@@ -9,7 +9,7 @@ tx EpcCliFdfFile {
 	?FdfFileDesc null;
 	?FdfFileStatus null;
 	?FdfFileModifiable null;
-	?FdfFileFilename FileName;
+	?FdfFileFileName FileName;
 	?FdfFileFacVer null;
 	?FdfFileFacNum null;
 	?FdfFileFacVendor null;

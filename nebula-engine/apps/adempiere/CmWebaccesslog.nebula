@@ -18,7 +18,7 @@ tx CmWebaccesslog {
 	@Remarks("Request Type")
 	RequestType Attr;
 	@Remarks("Page URL")
-	?Pageurl Url;
+	?Pageurl URL;
 	@Remarks("Referring web address")
 	?Referrer String;
 	@Remarks("Remote host Info")

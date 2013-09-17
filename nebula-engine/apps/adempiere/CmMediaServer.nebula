@@ -18,7 +18,7 @@ type CmMediaServer {
 	@Remarks("FTP passive transfer")
 	IsPassive YesNo;/* 'Y'  */
 	@Remarks("Full URL address - e.g. http://www.adempiere.org")
-	?Url;
+	?URL;
 	@Remarks("Defines the IP address to transfer data to")
 	?Address null;
 	@Remarks("Email of the responsible for the System")

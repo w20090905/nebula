@@ -3,7 +3,7 @@
 tx OpenIdAuthenticationNonces {
 	!ID;
 	Timestamp Count;
-	?ServerUrl Url;
+	?ServerURL URL;
 	Salt String;
 };
 

@@ -60,7 +60,7 @@ public class EntityActionComplier implements Opcodes {
 			byte[] b = this.doCompile(name, code, context);
 			if (log.isDebugEnabled()) {
 				try {
-					FileOutputStream fos = new FileOutputStream("tmp\\" + name + ".class");
+					FileOutputStream fos = new FileOutputStream("tmp/" + name + ".class");
 					fos.write(b);
 					fos.close();
 				} catch (FileNotFoundException e) {

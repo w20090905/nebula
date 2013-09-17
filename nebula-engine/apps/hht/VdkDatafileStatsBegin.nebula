@@ -4,7 +4,7 @@ type VdkDatafileStatsBegin {
 	?VdkId ID;
 	?VdkDatabaseId VdkDatabase;
 	?VdkFileId ID;
-	?VdkFilename FileName;
+	?VdkFileName FileName;
 	?VdkTablespaceName Name;
 	?VdkBlocks null;
 	?VdkUsedBlk null;

@@ -30,7 +30,7 @@ type RvPrintFormatdetail {
 	?AdColumnId ID;
 	?AdPrintFormatchildId ID;
 	ImageIsattached YesNo;
-	?ImageUrl URL;
+	?ImageURL URL;
 	IsRelativeposition YesNo;
 	IsNextline YesNo;
 	Xspace Number;

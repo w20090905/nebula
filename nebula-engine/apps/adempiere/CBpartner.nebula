@@ -36,7 +36,7 @@ type CBpartner {
 	@Remarks("Dun & Bradstreet Number")
 	?DUNS String;
 	@Remarks("Full URL address - e.g. http://www.adempiere.org")
-	?Url;
+	?URL;
 	@Remarks("Language for this entity")
 	?AdLanguage;
 	@Remarks("Tax Identification")

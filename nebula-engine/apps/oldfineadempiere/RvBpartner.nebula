@@ -18,7 +18,7 @@ type RvBpartner {
 	IsSalesRep YesNo;
 	?ReferenceNo Description;
 	?Duns String;
-	?Url URL;
+	?URL URL;
 	?AdLanguage String;
 	?TaxId Code;
 	?IsTaxExempt YesNo;

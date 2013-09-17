@@ -4,7 +4,7 @@ type Projects|项目 {
 	!ID;
 	*Name|名称;
 	?Description;
-	?Homepage Url;
+	?Homepage URL;
 	IsPublic YesNo;/* 1 */
 	%Parent Projects;
 	?CreatedOn Datetime;

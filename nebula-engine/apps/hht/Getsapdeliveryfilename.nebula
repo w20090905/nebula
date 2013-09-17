@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
-type Getsapdeliveryfilename {
-	?Filename;
+type GetsapdeliveryFileName {
+	?FileName;
 	?ValueName Name;
 	?Deptcode Code;
 	?DeliveryId Delivery;

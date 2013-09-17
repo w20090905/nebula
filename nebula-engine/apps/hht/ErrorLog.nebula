@@ -2,7 +2,7 @@
 @Refby("0")
 tx ErrorLog {
 	!ErrorLogid ID;
-	?Filename;
+	?FileName;
 	?Sheetname Name;
 	?ErrorInfo Info;
 	?Rowno null;

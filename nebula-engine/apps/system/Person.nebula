@@ -16,8 +16,8 @@ type Person|人员 {
 		State Name;
 		PostalCode Name;
 		Country Name;
-		PhotoUrl String;
-		ProfileUrls[] String;
+		PhotoURL URL;
+		ProfileURLs[] URL;
 	};
 	@GroupBy Company;
 	EMail|邮件;

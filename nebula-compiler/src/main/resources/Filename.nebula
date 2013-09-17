@@ -1,3 +1,0 @@
-@MaxLength(256)
-define Filename extends String {
-};

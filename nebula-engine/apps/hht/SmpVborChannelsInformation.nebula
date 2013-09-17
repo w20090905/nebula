@@ -4,7 +4,7 @@ type SmpVborChannelsInformation {
 	?Configname Name;
 	?Name SmpVxaSystemPrefs;
 	?Type Attr;
-	?Filename;
+	?FileName;
 	?Directory String;
 	?Overridecapacity null;
 	?Maxcapacity null;

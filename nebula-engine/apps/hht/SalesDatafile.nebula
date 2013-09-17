@@ -2,7 +2,7 @@
 @Refby("4")
 tx SalesDatafile {
 	!SalesDatafileid ID;
-	?Filename;
+	?FileName;
 	Sellerorgid ID;
 	?Batchno null;
 	Filestatus null;

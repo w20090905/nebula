@@ -4,7 +4,7 @@ tx Checkviewdetail {
 	!Checkviewdetailid ID;
 	?Checkviewid ID;
 	Columnname Name;
-	?IsUrl Url;
+	?IsURL URL;
 	LabelCode Code;
 	Sequence;
 	DateLastupdated Date;

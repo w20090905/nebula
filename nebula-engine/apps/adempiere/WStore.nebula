@@ -72,7 +72,7 @@ type WStore {
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 	@Remarks("Full URL address - e.g. http://www.adempiere.org")
-	Url;/* 'http://localhost'  */
+	URL;/* 'http://localhost'  */
 	@Remarks("CSS (Stylesheet) used")
 	?Stylesheet null;
 };

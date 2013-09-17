@@ -3,10 +3,10 @@
 tx Repositories {
 	!ID;
 	Project Projects;/* 0 */
-	Url;
+	URL;
 	?Login String;
 	?Password;
-	?RootUrl Url;
+	?RootURL URL;
 	?Type Attr;
 	?PathEncoding String;
 	?LogEncoding String;

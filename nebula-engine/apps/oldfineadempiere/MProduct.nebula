@@ -74,7 +74,7 @@ type MProduct {
 	@Remarks("Type of product")
 	ProductType Attr;/* 'I'  */
 	@Remarks("URL of  image")
-	?ImageUrl URL;
+	?ImageURL URL;
 	@Remarks("URL for the description")
 	?Descriptionurl URL;
 	@Remarks("Number of days the product is guaranteed or available")

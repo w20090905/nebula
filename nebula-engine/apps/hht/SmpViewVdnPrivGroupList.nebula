@@ -5,7 +5,7 @@ type SmpViewVdnPrivGroupList {
 	Name SmpVxaSystemPrefs;
 	?Owner null;
 	?Description;
-	?Backgroundfileurl Url;
+	?Backgroundfileurl URL;
 	?Iconsize Size;
 	PrincipalName Name;
 	PrivilegeString null;

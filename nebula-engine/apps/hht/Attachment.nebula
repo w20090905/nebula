@@ -2,7 +2,7 @@
 @Refby("2")
 tx Attachment {
 	!Attachmentid ID;
-	Filename;
+	FileName;
 	Attachmentname Name;
 	Filesize null;
 	Filetype Attr;

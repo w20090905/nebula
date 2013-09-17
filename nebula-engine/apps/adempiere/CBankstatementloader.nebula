@@ -40,7 +40,7 @@ type CBankstatementloader {
 	@Remarks("Password of your proxy server")
 	?ProxyPassword Password;
 	@Remarks("Name of the local file or URL")
-	?Filename;
+	?FileName;
 	@Remarks("Date the process was last run.")
 	?DateLastrun Date;
 	@Remarks("Date format used in the imput format")

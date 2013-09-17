@@ -79,7 +79,7 @@
 	
 	[#if field.attrs.InlineShow?? &&  field.attrs.InlineShow = "InlineShow"]
 		[#assign attrValues][@compress single_line=true]			
-			[#list (alldatas[field.type.name])![] as attr],{ID:${attr.ID},Name:'${attr.Name}'}[/#list]
+			[#list (alldatas[field.type.name])![] as attr],{ID:'${attr.ID}',Name:'${attr.Name}'}[/#list]
 		[/@compress] [/#assign]		
 		<select id="${id}"  x-ng-init="${id}values = [${attrValues?substring(1)}];" 
 				x-ng-model="${ngModel}" x-ng-options="c as c.Name for c in ${id}values" placeholder="${placeholder}"	 inlineshow>	
@@ -133,7 +133,7 @@
 				    <span class="caret"></span>
 				  </button>
 				  <ul class="dropdown-menu">
-			  	<li><a tabindex="-1" href="#/t/angularjs/unicorn/${type.name}-list.html">View Template</a></li>
+			  	<li><a tabindex="-1" href="#/t/angularjs/unicorn/${type.name}-detail.html">View Template</a></li>
 				  </ul>
 			</div>
 		</div>

@@ -52,6 +52,6 @@ type CCountry {
 	@Remarks("The password submitted to the Lookup URL")
 	?Lookuppassword Password;/* NULL   */
 	@Remarks("The URL of the web service that the plugin connects to in order to retrieve postcode data")
-	?Lookupurl Url;/* NULL   */
+	?Lookupurl URL;/* NULL   */
 };
 

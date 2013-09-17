@@ -13,7 +13,7 @@ tx Trialorg {
 	?Areaid Businessarea;
 	Corporationtype null;
 	CountryCode Code;
-	?Url;
+	?URL;
 	Defaultlanguage null;
 	Preferedcurrency null;
 	Corporateperson null;

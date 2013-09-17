@@ -15,8 +15,8 @@ type Person {
 		State Name;
 		PostalCode Name;
 		Country Name;
-		PhotoUrl String;
-		ProfileUrls[] String;
+		PhotoURL String;
+		ProfileURLs[] String;
 	};
 	@GroupBy Company;
 	EMail;

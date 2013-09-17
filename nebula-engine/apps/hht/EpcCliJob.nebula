@@ -4,7 +4,7 @@ tx EpcCliJob {
 	!RepUserId EpcCliRepUsers;
 	!JobId SmpVdjJob;
 	?JobCollectionId ID;
-	?JobInputFilename FileName;
+	?JobInputFileName FileName;
 	?JobType null;
 	?JobStatus null;
 };

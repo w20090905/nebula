@@ -38,7 +38,7 @@ type AdPrintTableformat {
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 	@Remarks("URL of  image")
-	?ImageUrl Url;
+	?ImageURL URL;
 	@Remarks("Content of the left portion of the header.")
 	?HeaderLeft String;
 	@Remarks("Content of the center portion of the header.")

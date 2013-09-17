@@ -6,7 +6,7 @@ tx OpenIdAuthenticationAssociations {
 	?Lifetime Count;
 	?Handle String;
 	?AssocType Attr;
-	?ServerUrl Note;
+	?ServerURL Note;
 	?Secret Note;
 };
 

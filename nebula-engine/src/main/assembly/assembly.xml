@@ -8,7 +8,7 @@
 		<format>zip</format>
 		<format>tar.gz</format>
 	</formats>
-	<baseDirectory>nebula-${project.version}</baseDirectory>
+	<baseDirectory>nebula</baseDirectory>
 	<dependencySets>
 		<dependencySet>
 			<useProjectArtifact>true</useProjectArtifact>
@@ -36,6 +36,14 @@
 		<fileSet>
 			<directory>src/main/resources/htdocs2</directory>
 			<outputDirectory>htdocs2</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>apps</directory>
+			<outputDirectory>apps</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>logs</directory>
+			<outputDirectory>logs</outputDirectory>
 		</fileSet>
 	</fileSets>
 </assembly>

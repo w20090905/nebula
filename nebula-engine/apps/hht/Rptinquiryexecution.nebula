@@ -6,9 +6,9 @@ tx Rptinquiryexecution {
 	?Createdate Date;
 	?Userid Usr;
 	?Ovalreportid Ovalreport;
-	?Completefilename FileName;
+	?CompleteFileName FileName;
 	?Filetype Attr;
-	?Filename;
+	?FileName;
 	?Contactid Contact;
 	?Comments Note;
 	?Jobresultid Jobresult;

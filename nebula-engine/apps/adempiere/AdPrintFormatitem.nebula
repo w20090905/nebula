@@ -64,7 +64,7 @@ type AdPrintFormatitem {
 	@Remarks("The image to be printed is attached to the record")
 	ImageIsattached YesNo;/* 'N'  */
 	@Remarks("URL of  image")
-	?ImageUrl Url;
+	?ImageURL URL;
 	@Remarks("Calculate Average of numeric content or length")
 	IsAveraged YesNo;/* 'N'  */
 	@Remarks("Count number of not empty elements")

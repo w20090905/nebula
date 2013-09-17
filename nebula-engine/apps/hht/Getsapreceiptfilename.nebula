@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
-type Getsapreceiptfilename {
-	?Filename;
+type GetsapreceiptFileName {
+	?FileName;
 	?ValueName Name;
 	?Deptcode Code;
 	?Receiptid Receipt;

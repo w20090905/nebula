@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
-type Getsapreturnslipfilename {
-	?Filename;
+type GetsapreturnslipFileName {
+	?FileName;
 	ValueName Name;
 	Deptcode Code;
 	Returnid Returnslip;

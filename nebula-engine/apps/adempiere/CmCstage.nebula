@@ -24,9 +24,9 @@ type CmCstage {
 	@Remarks("Web Container Type")
 	?Containertype Attr;
 	@Remarks("External Link (IRL) for the Container")
-	?Containerlinkurl Url;
+	?Containerlinkurl URL;
 	@Remarks("Contains the relative URL for the container")
-	?Relativeurl Url;
+	?Relativeurl URL;
 	@Remarks("Indicates if this request is of a high, medium or low priority.")
 	?Priority;/* 0  */
 	@Remarks("Index the document for the internal search engine")

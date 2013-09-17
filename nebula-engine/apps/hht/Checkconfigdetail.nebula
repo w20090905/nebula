@@ -5,8 +5,8 @@ tx Checkconfigdetail {
 	Checkconfigid Checkconfig;
 	?Vtablename Name;
 	?Qlname Name;
-	?Urlkey Url;
-	?Urlstring Url;
+	?URLkey URL;
+	?URLstring URL;
 	LabelCode Code;
 	Sequence;
 	DateLastupdated Date;

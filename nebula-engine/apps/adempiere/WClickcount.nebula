@@ -12,7 +12,7 @@ type WClickcount {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("URL for the Target")
-	Targeturl Url;
+	Targeturl URL;
 	@Remarks("Identifies a Business Partner")
 	?CBpartner;
 };

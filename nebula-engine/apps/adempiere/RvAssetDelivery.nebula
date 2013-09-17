@@ -19,7 +19,7 @@ type RvAssetDelivery {
 	?EMail;
 	?Messageid Message;
 	?DeliveryConfirmation null;
-	?Url;
+	?URL;
 	?RemoteAddr Name;
 	?RemoteHost Host;
 	?Referrer String;

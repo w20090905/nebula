@@ -12,7 +12,7 @@ type WCountercount {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Page URL")
-	Pageurl Url;
+	Pageurl URL;
 	@Remarks("Identifies a Business Partner")
 	?CBpartner;
 };

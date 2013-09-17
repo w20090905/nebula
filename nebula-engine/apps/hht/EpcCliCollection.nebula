@@ -9,7 +9,7 @@ tx EpcCliCollection {
 	?CollectionDesc null;
 	?ScheduleString null;
 	?DurationSeconds null;
-	?ResultsFilename FileName;
+	?ResultsFileName FileName;
 	?ResultsFilemax null;
 	?FormAtUsername Name;
 	?FormAtPassword null;

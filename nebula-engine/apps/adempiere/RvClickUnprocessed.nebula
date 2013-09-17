@@ -4,7 +4,7 @@ type RvClickUnprocessed {
 	WClickId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	?Targeturl Url;
+	?Targeturl URL;
 	?Referrer String;
 	?RemoteHost Host;
 	?RemoteAddr Name;

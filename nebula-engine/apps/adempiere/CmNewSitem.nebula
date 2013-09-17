@@ -16,7 +16,7 @@ tx CmNewSitem {
 	@Remarks("Author/Creator of the Entity")
 	?Author null;
 	@Remarks("Contains URL to a target")
-	?Linkurl Url;
+	?Linkurl URL;
 	@Remarks("Date on which this article will / should get published")
 	?Pubdate Date;
 	@Remarks("Contains the content itself")

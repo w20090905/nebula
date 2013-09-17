@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
-type Getsapitemfilename {
-	?Filename;
+type GetsapitemFileName {
+	?FileName;
 	?Itemcode Code;
 	?Itemid Item;
 	?Datatype Attr;

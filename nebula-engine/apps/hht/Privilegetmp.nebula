@@ -5,7 +5,7 @@ tx Privilegetmp {
 	Privilegecode Code;
 	Privilegetype Attr;
 	Sortno SeqNo;
-	?Url;
+	?URL;
 	Status;
 	?Parentprivid ID;
 	?Grade null;

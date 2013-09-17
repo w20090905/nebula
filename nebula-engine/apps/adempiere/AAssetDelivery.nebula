@@ -26,7 +26,7 @@ tx AAssetDelivery {
 	@Remarks("EMail Delivery confirmation")
 	?DeliveryConfirmation null;
 	@Remarks("Full URL address - e.g. http://www.adempiere.org")
-	?Url;
+	?URL;
 	@Remarks("Remote Address")
 	?RemoteAddr Name;
 	@Remarks("Remote host Info")
