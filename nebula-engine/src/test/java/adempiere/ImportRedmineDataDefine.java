@@ -44,53 +44,53 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 	public ImportRedmineDataDefine() {
 		super(false, true);
 
-		when(EqualsIgnoreCase).with("repository_id").table("Changesets").setReferTo("Repositories");
-		when(EqualsIgnoreCase).with("status_id").table("issues").setReferTo("IssueStatuses");
+		when(EqualsIgnoreCase).with("repository_id").inTable("Changesets").then().setReferTo("Repositories");
+		when(EqualsIgnoreCase).with("status_id").inTable("issues").then().setReferTo("IssueStatuses");
 
-		when(EqualsIgnoreCase).with("login").table("users").setAsMaster();
+		when(EqualsIgnoreCase).with("login").inTable("users").then().setAsMaster();
 
-		when(EqualsIgnoreCase).with("ID").is(Long).useMatchedNameAsTypeName().useMatchedNameAsFieldName();
+		when(EqualsIgnoreCase).with("ID").typeOf(Long).then().useMatchedNameAsTypeName().useMatchedNameAsFieldName();
 
 		when(EqualsIgnoreCase)
 				.with("Name", "Description", "Comment", "Account", "Regexp", "Title", "Host", "Filename", "TimeZone",
-						"Status", "Url", "Password", "Subject", "Content", "Summary", "Revision","Path", "FirstName","LastName").is(String)
-				.useMatchedNameAsTypeName().useMatchedNameAsFieldName();
-		when(EqualsIgnoreCase).with("FileSize", "Port", "Status", "Version", "Position").is(Long)
-				.useMatchedNameAsTypeName().useMatchedNameAsFieldName();
+						"Status", "Url", "Password", "Subject", "Content", "Summary", "Revision","Path", "FirstName","LastName").typeOf(String)
+				.then().useMatchedNameAsTypeName().useMatchedNameAsFieldName();
+		when(EqualsIgnoreCase).with("FileSize", "Port", "Status", "Version", "Position").typeOf(Long)
+				.then().useMatchedNameAsTypeName().useMatchedNameAsFieldName();
 
 		when(EndWithIgnoreCase).with("Path", "Password", "FirstName", "FileName", "LastName", "Title", "Url")
-				.is(String).useMatchedNameAsTypeName();
-		when(EndWithIgnoreCase).with("Count", "Length", "Height", "Size", "Weight", "Ratio").is(Long)
-				.useMatchedNameAsTypeName();
+				.typeOf(String).then().useMatchedNameAsTypeName();
+		when(EndWithIgnoreCase).with("Count", "Length", "Height", "Size", "Weight", "Ratio").typeOf(Long)
+				.then().useMatchedNameAsTypeName();
 
-		when(EndWithIgnoreCase).with("Text").is(Text).useMatchedNameAsTypeName();
+		when(EndWithIgnoreCase).with("Text").typeOf(Text).then().useMatchedNameAsTypeName();
 
-		when(EndWithIgnoreCase).with("_On").is(Datetime).setTypeName(Datetime.name());
-		when(EndWithIgnoreCase).with("_On").is(Date).setTypeName(Date.name());
-		when(EndWithIgnoreCase).with("_Date").is(Date).setTypeName(Date.name());
-		when(EndWithIgnoreCase).with("_Timestamp").is(Timestamp).setTypeName(Timestamp.name());
+		when(EndWithIgnoreCase).with("_On").typeOf(Datetime).then().setTypeName(Datetime.name());
+		when(EndWithIgnoreCase).with("_On").typeOf(Date).then().setTypeName(Date.name());
+		when(EndWithIgnoreCase).with("_Date").typeOf(Date).then().setTypeName(Date.name());
+		when(EndWithIgnoreCase).with("_Timestamp").typeOf(Timestamp).then().setTypeName(Timestamp.name());
 
-		when(StartWithIgnoreCase, EndWithIgnoreCase, EqualsIgnoreCase).with("Type").is(String).setTypeName("Attr");
-		when(StartWithIgnoreCase).with("Is_").is(Bit).setTypeName("YesNo");
-		when(EndWithIgnoreCase).with("_ID").is(Long).setTypeName("ID");
+		when(StartWithIgnoreCase, EndWithIgnoreCase, EqualsIgnoreCase).with("Type").typeOf(String).then().setTypeName("Attr");
+		when(StartWithIgnoreCase).with("Is_").typeOf(Bit).then().setTypeName("YesNo");
+		when(EndWithIgnoreCase).with("_ID").typeOf(Long).then().setTypeName("ID");
 
-		when(EndWithIgnoreCase).with("Value").is(String).setTypeName("String");
+		when(EndWithIgnoreCase).with("Value").typeOf(String).then().setTypeName("String");
 
-		when(EndWithIgnoreCase).with("Comments").is(String).setTypeName("Note");
-		when(EndWithIgnoreCase).with("Mail").is(Varchar, NVarchar).setTypeName("EMail");
-		when(EndWithIgnoreCase).with("Hours").is(Decimal).setTypeName("Number");
-		when(EndWithIgnoreCase).with("Encoding").is(String).setTypeName("String");
-		when(EndWithIgnoreCase).with("Notes").is(Text).setTypeName("Note");
+		when(EndWithIgnoreCase).with("Comments").typeOf(String).then().setTypeName("Note");
+		when(EndWithIgnoreCase).with("Mail").typeOf(Varchar, NVarchar).then().setTypeName("EMail");
+		when(EndWithIgnoreCase).with("Hours").typeOf(Decimal).then().setTypeName("Number");
+		when(EndWithIgnoreCase).with("Encoding").typeOf(String).then().setTypeName("String");
+		when(EndWithIgnoreCase).with("Notes").typeOf(Text).then().setTypeName("Note");
 
-		when(EqualsIgnoreCase).with("tyear", "tmonth", "tweek").is(Long).setTypeName("Count");
+		when(EqualsIgnoreCase).with("tyear", "tmonth", "tweek").typeOf(Long).then().setTypeName("Count");
 		// notsure
 
-		when(EqualsIgnoreCase).with("Redirects_to", "Homepage").is(String).setTypeName("Url");
+		when(EqualsIgnoreCase).with("Redirects_to", "Homepage").typeOf(String).then().setTypeName("Url");
 
-		when().is(Bit).setTypeName("YesNo");
-		when().is(Varchar, NVarchar).setTypeName("String");
-		when().is(Text, Blob).setTypeName("Note");
-		when().is(Long).setTypeName("Count");
+		when().typeOf(Bit).then().setTypeName("YesNo");
+		when().typeOf(Varchar, NVarchar).then().setTypeName("String");
+		when().typeOf(Text, Blob).then().setTypeName("Note");
+		when().typeOf(Long).then().setTypeName("Count");
 
 		// Skip System Column
 		// when(EqualsIgnoreCase).with("CREATED_ON","UPDATED_ON").is(Date,Datetime,Timestamp).skip();

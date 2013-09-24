@@ -10,38 +10,49 @@ import adempiere.DefaultImporter.Field;
 import com.google.common.collect.Lists;
 
 interface Rule {
+	//
 	public Rule with(String... strings);
 
-	public Rule is(DBColumnType... dbTypes);
+	// 所在数据表
+	public Rule inTable(String tablenames);
 	
+	// 数据类型
+	public Rule typeOf(DBColumnType... dbTypes);
+	
+	// 字段长度
 	public Rule length(int length);
 
-	public Rule setTypeName(String type);
 
 	public Rule skip();
 	
-	public Rule table(String tablenames);
-
-	public Rule useMatchedNameAsTypeName();
-
-	public Rule useMatchedNameAsFieldName();
-
-	public Rule setAsMaster();
-	
 	public Rule defaultValue(String... values);
 	
-	public Rule nullable();
+	public Actions then();
 	
-	public Rule setAsTransaction();
-	
-	public Rule setReferTo(String typename);
 }
+
+interface Actions{
+	public Actions useMatchedNameAsTypeName();
+
+	public Actions useMatchedNameAsFieldName();
+
+	public Actions setAsMaster();
+	
+	public Actions setAsTransaction();
+	
+	public Actions setReferTo(String typename);
+	
+	public Actions setNullable();
+	
+	public Rule setTypeName(String type);
+}
+
 
 interface Action {
 	Field apply(Field input,String match, String... params);
 }
 
-class RuleBuilder implements Rule {
+class RuleBuilder implements Rule,Actions {
 	DBColumnType[] dbTypes;
 	MatchPattern[] ruleTypes;
 	String[] defaultValues;
@@ -59,7 +70,7 @@ class RuleBuilder implements Rule {
 		this.ruleTypes = ruleTypes;
 	}
 
-	public Rule table(String tablename) {
+	public Rule inTable(String tablename) {
 		this.tableName = tablename;
 		return this;
 	}
@@ -70,7 +81,7 @@ class RuleBuilder implements Rule {
 	}
 
 	@Override
-	public Rule is(DBColumnType... dbTypes) {
+	public Rule typeOf(DBColumnType... dbTypes) {
 		this.dbTypes = dbTypes;
 		return this;
 	}
@@ -82,25 +93,25 @@ class RuleBuilder implements Rule {
 	}
 
 	@Override
-	public Rule useMatchedNameAsTypeName() {
+	public Actions useMatchedNameAsTypeName() {
 		this.actions.add(new UseMatchedNameAsTypeName());
 		return this;
 	}
 
 	@Override
-	public Rule useMatchedNameAsFieldName() {
+	public Actions useMatchedNameAsFieldName() {
 		this.actions.add(new UseMatchedNameAsFieldName());
 		return this;
 	}
 
 	@Override
-	public Rule setAsMaster() {
+	public Actions setAsMaster() {
 		this.actions.add(new SetStandalone(TypeStandalone.Master));
 		return this;
 	}
 
 	@Override
-	public Rule setAsTransaction() {
+	public Actions setAsTransaction() {
 		this.actions.add(new SetStandalone(TypeStandalone.Transaction));
 		return this;
 	}
@@ -111,12 +122,12 @@ class RuleBuilder implements Rule {
 		return this;
 	}
 	@Override
-	public Rule nullable() {
+	public Actions setNullable() {
 		this.actions.add(new NullableField());
 		return this;
 	}
 	@Override
-	public Rule setReferTo(String typename) {
+	public Actions setReferTo(String typename) {
 		this.actions.add(new SetReferTo(typename));
 		return null;
 	}
@@ -219,6 +230,11 @@ class RuleBuilder implements Rule {
 	@Override
 	public Rule defaultValue(String... values) {
 		this.defaultValues = values;
+		return this;
+	}
+
+	@Override
+	public Actions then() {
 		return this;
 	}
 
