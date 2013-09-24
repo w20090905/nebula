@@ -1,5 +1,6 @@
 @MaxLength ( 4000)
 @FormatType ( "textarea")
 @Desc("多行的文本内容，可以使用Wiki标记")
+@SingleLine
 define Note|zh:笔记  extends Text {
 };

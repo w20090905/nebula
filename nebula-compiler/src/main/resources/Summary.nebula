@@ -1,3 +1,4 @@
 @MaxLength(1200)
+@SingleLine
 define Summary|zh:简述  extends Text {
 };

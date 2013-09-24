@@ -1,4 +1,5 @@
 @MaxLength(256)
 @Desc("主题")
+@SingleLine
 define Title|zh:主题 extends String {
 };

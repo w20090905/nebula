@@ -92,9 +92,7 @@
 
 [#assign opening=false /]
 [#macro controls field for label]	
-	[#if !opening]	
 	<div class="row-fluid">
-	[/#if]
 	[#if field.attrs.FormatType! = "textarea"]	
 		<div class="control-group span12">
 			<label class="control-label" for="${for}">${label}</label>		
@@ -110,13 +108,7 @@
 			</div>
 		</div>
 	[/#if]	
-	
-	[#if !opening && field.attrs.HasFollowing??]	
-		[#assign opening=true/]		
-	[#else]	
 	</div>
-		[#assign opening=false /]
-	[/#if]
 [/#macro]
 
 
@@ -202,7 +194,7 @@
 					<div class="widget-title">
 						<span class="icon"> <i class="icon-align-justify"></i>
 						</span>
-						<h5>${type.name}</h5>
+						<h5>${type.displayName}</h5>
 						<div class="buttons btn-toolbar" x-ng-show="data.standealone='Master'">
 							<a href="#/d/${type.name}/{{data.${idName}}}" class="btn btn-small btn-success ctrl" x-ng-show="data.${idName}"><i class="icon-edit icon-white"></i> 编辑</a>
 							<a href="#/d/${type.name}/!New" class="btn btn-small btn-success ctrl" disabled x-ng-show="data.${idName}"><i class="icon-plus icon-white"></i> 新建子${type.displayName}</a>

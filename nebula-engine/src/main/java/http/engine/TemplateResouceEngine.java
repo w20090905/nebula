@@ -12,6 +12,8 @@ import nebula.data.Broker;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
+import nebula.data.impl.TypeDatastore;
+import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 import nebula.server.Resource;
 import freemarker.template.Configuration;
@@ -24,15 +26,17 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 	final Broker<DataStore<Entity>> attributes;
 	final TypeLoader typeLoader;
 	final DataRepos dataWareHouse;
+	final TypeDatastore typeBrokers;
 
 	@Inject
-	public TemplateResouceEngine(Loader resourceLoader, TypeLoader typeLoader, final DataRepos dataWareHouse, Configuration cfg) {
+	public TemplateResouceEngine(Loader resourceLoader, TypeLoader typeLoader, TypeDatastore typeBrokers,final DataRepos dataWareHouse, Configuration cfg) {
 		super(resourceLoader);
 		this.templateConfig = cfg;
 		this.typeLoader = typeLoader;
 		this.attributes = dataWareHouse.define(String.class, Entity.class, "Attribute");
 		this.dataWareHouse = dataWareHouse;
 		this.age = 0;// 30L * 24L * 60L * 60L;
+		this.typeBrokers = typeBrokers;
 	}
 
 	@Override
@@ -99,7 +103,9 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 				layoutName = null;
 				actionName = name.substring(idxType + 1);
 			}
-			return new TypeTemplateResouce(templateConfig, typeLoader, dataWareHouse, attributes, theme, skin, typeName, layoutName, actionName);
+			Broker<Type> type = typeBrokers.getBroker(typeName);
+					
+			return new TypeTemplateResouce(templateConfig, typeLoader, type,dataWareHouse, attributes, theme, skin, typeName, layoutName, actionName);
 		} else {
 			return new StaticTemplateResouce(templateConfig, typeLoader, attributes, theme, skin, name);
 		}

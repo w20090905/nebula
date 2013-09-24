@@ -1,3 +1,4 @@
 @MaxLength(1200)
+@SingleLine
 define Comment|备注  extends Text {
 };

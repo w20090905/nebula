@@ -76,14 +76,8 @@ public class TypeJsonDataDealerTest extends TestCase {
 		gen.flush();
 
 		assertEquals(
-				"{\"Name\":\"Person\",\"SuperType\":\"Master\",\"Standalone\":\"Master\","
-						+ "\"Fields\":["
-						+ "{\"Name\":\"PersonName\",\"Key\":true,\"Unique\":true,\"Core\":false,\"Array\":false,\"TypeName\":\"Name\","
-						+ "\"Refer\":\"ByVal\",\"NameAlias\":{},\"Attrs\":{\"FormatType\":\"text\",\"MaxLength\":\"60\"}},"
-						+ "{\"Name\":\"Age\",\"Key\":false,\"Unique\":false,\"Core\":false,\"Array\":false,\"TypeName\":\"Age\","
-						+ "\"Refer\":\"ByVal\",\"NameAlias\":{},\"Attrs\":{\"FormatType\":\"numeric\",\"InputSize\":\"small\",\"Max\":\"160\",\"MaxLength\":\"3\",\"Min\":\"0\",\"Precision\":\"10\",\"Scale\":\"2\"}}],"
-						+ "\"NameAlias\":{},\"Attrs\":{\"Layout\":\"Basic\"},\"Mutable\":false,"
-						+ "\"Code\":\"type Person {\\t!PersonName Name;\\tAge;};\\n\"}", out.toString());
+				"{\"Name\":\"Person\",\"SuperType\":\"Master\",\"Standalone\":\"Master\",\"Fields\":[{\"Name\":\"PersonName\",\"Key\":true,\"Unique\":true,\"Core\":false,\"Array\":false,\"TypeName\":\"Name\",\"Refer\":\"ByVal\",\"NameAlias\":{},\"Attrs\":{\"FormatType\":\"text\",\"MaxLength\":\"60\",\"ShouldBeLeader\":\"ShouldBeLeader\"}},{\"Name\":\"Age\",\"Key\":false,\"Unique\":false,\"Core\":false,\"Array\":false,\"TypeName\":\"Age\",\"Refer\":\"ByVal\",\"NameAlias\":{},\"Attrs\":{\"FormatType\":\"numeric\",\"InputSize\":\"small\",\"Max\":\"160\",\"MaxLength\":\"3\",\"Min\":\"0\",\"Precision\":\"10\",\"Scale\":\"2\"}}],\"NameAlias\":{},\"Attrs\":{\"Layout\":\"Basic\"},\"Mutable\":false,\"Code\":\"type Person {\\t!PersonName Name;\\tAge;};\\n\"}",
+				out.toString());
 		System.out.println(out.toString());
 	}
 

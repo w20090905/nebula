@@ -71,6 +71,7 @@ class BootstrapTypeLoader extends TypeLoader {
 		Type name = new Type(this, "Name", string);
 		name.nameAlias= new Aliases("名称");
 		name.attrs.put("MaxLength", 60L);
+		name.attrs.put("ShouldBeLeader", "ShouldBeLeader");
 
 		Type attr = new Type(this, "Attr", string);
 		attr.attrs.put("SP", "Attr");

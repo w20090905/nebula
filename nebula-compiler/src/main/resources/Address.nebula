@@ -1,3 +1,4 @@
 @MaxLength(80)
+@SingleLine
 define Address|zh:地址 extends String {
 };

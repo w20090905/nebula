@@ -1,3 +1,4 @@
 @MaxLength(256)
+@SingleLine
 define URL|zh:网址 extends String {
 };

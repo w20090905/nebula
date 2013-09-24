@@ -5,14 +5,16 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import nebula.data.Broker;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.Broker;
+import nebula.lang.Field;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 import freemarker.cache.TemplateLoader;
@@ -86,14 +88,15 @@ public class TypeTemplateResouce extends AbstractResouce {
 	final String name;
 	final Broker<DataStore<Entity>> attributes;
 	TemplateHashModel dataWareHouseModel;
+	final Broker<Type> type;
 
-	public TypeTemplateResouce(Configuration cfg, TypeLoader typeLoader, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes, String theme,
-			String skin, String typeName, String actionName) {
-		this(cfg, typeLoader, dataWareHouse, attributes, theme, skin, typeName, null, actionName);
+	public TypeTemplateResouce(Configuration cfg, TypeLoader typeLoader, Broker<Type> type, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes,
+			String theme, String skin, String typeName, String actionName) {
+		this(cfg, typeLoader, type, dataWareHouse, attributes, theme, skin, typeName, null, actionName);
 	}
 
-	public TypeTemplateResouce(Configuration cfg, TypeLoader typeLoader, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes, String theme,
-			String skin, String typeName, String layout, String actionName) {
+	public TypeTemplateResouce(Configuration cfg, TypeLoader typeLoader, Broker<Type> type, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes,
+			String theme, String skin, String typeName, String layout, String actionName) {
 		super("text/template", 0, 0);// TODO Not realized TypeTemplateResouce
 										// super("text/template", 0, 0)
 
@@ -109,11 +112,12 @@ public class TypeTemplateResouce extends AbstractResouce {
 
 		this.dataWareHouseModel = new DataPersisterTemplateHashModel(dataWareHouse);
 
-		Type type = this.typeLoader.findType(typeName);
+		this.type = type;
+		// Type type = this.typeLoader.findType(typeName);
 
-		String entityType = (String) type.getStandalone().name().toLowerCase();
-		
-		layout = layout != null ? layout : (String) type.getAttrs().get("Layout");
+		String entityType = (String) type.get().getStandalone().name().toLowerCase();
+
+		layout = layout != null ? layout : (String) type.get().getAttrs().get("Layout");
 
 		this.name = entityType + "_" + layout.toLowerCase() + "_" + actionName.toLowerCase() + ".ftl";
 		// this.templateName = templateTypeName + "-" + actionName + ".ftl";
@@ -138,7 +142,7 @@ public class TypeTemplateResouce extends AbstractResouce {
 			ByteArrayOutputStream bout = new ByteArrayOutputStream();
 			Writer w = new OutputStreamWriter(bout);
 
-			root.put("type", typeLoader.findType(this.typeName));
+			root.put("type", layout(type.get()));
 
 			DataStore<Entity> attrs = attributes.get();
 
@@ -155,5 +159,29 @@ public class TypeTemplateResouce extends AbstractResouce {
 			log.error("Template prase error", e);
 			throw new IOException(e);
 		}
+	}
+
+	private Type layout(Type type) {
+		List<Field> fields = type.getFields();
+		Field lastField = null;
+		for (int i = 0; i < fields.size(); i++) {
+			Field field = fields.get(i);
+			if (field.getAttrs().containsKey("SingleLine")) {
+				if (lastField != null) {
+					lastField.getAttrs().remove("HasFollowing");
+				}
+				lastField = null;
+			} else {
+				if (lastField != null) {
+					if (field.getAttrs().containsKey("ShouldBeLeader")) {
+						lastField.getAttrs().remove("HasFollowing");
+					} else {
+						lastField.getAttrs().put("HasFollowing", "HasFollowing");
+					}
+				}
+				lastField = field;
+			}
+		}
+		return type;
 	}
 }

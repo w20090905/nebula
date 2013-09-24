@@ -1,3 +1,4 @@
 @MaxLength(65534)
+@SingleLine
 define Content extends String {
 };

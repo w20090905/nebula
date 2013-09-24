@@ -1,4 +1,5 @@
 @MaxLength(255)
 @Desc("单行的描述")
+@SingleLine
 define Description|描述 extends String {
 };

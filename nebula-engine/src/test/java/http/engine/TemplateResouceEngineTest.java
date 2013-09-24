@@ -22,6 +22,7 @@ import nebula.data.Broker;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
+import nebula.data.impl.TypeDatastore;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 import nebula.lang.TypeStandalone;
@@ -45,6 +46,8 @@ public class TemplateResouceEngineTest extends TestCase {
 	@Mock
 	TypeLoader typeLoader;
 	@Mock
+	TypeDatastore typeBrokers;
+	@Mock
 	DataRepos dataWareHouse;
 	@Mock
 	Loader loader;
@@ -60,7 +63,7 @@ public class TemplateResouceEngineTest extends TestCase {
 	public final void testResolve_loader_findSource() {
 
 		when(dataWareHouse.define(String.class, Entity.class, "Attribute")).thenReturn(attributes);
-		TemplateResouceEngine templateResouceEngine = new TemplateResouceEngine(loader, typeLoader, dataWareHouse, templateConfig);
+		TemplateResouceEngine templateResouceEngine = new TemplateResouceEngine(loader, typeLoader,typeBrokers, dataWareHouse, templateConfig);
 
 		String path = "test.js";
 		Source source = mock(Source.class);
@@ -78,7 +81,7 @@ public class TemplateResouceEngineTest extends TestCase {
 	public final void testResolve_Static_No_Theme() {
 
 		when(dataWareHouse.define(String.class, Entity.class, "Attribute")).thenReturn(attributes);
-		TemplateResouceEngine templateResouceEngine = new TemplateResouceEngine(loader, typeLoader, dataWareHouse, templateConfig);
+		TemplateResouceEngine templateResouceEngine = new TemplateResouceEngine(loader, typeLoader, typeBrokers,dataWareHouse, templateConfig);
 
 		String path = "/theme/test.js";
 		String reqPath = "/theme/test.js";
@@ -97,7 +100,7 @@ public class TemplateResouceEngineTest extends TestCase {
 	public final void testResolve_Static_Theme() {
 
 		when(dataWareHouse.define(String.class, Entity.class, "Attribute")).thenReturn(attributes);
-		TemplateResouceEngine templateResouceEngine = new TemplateResouceEngine(loader, typeLoader, dataWareHouse, templateConfig);
+		TemplateResouceEngine templateResouceEngine = new TemplateResouceEngine(loader, typeLoader, typeBrokers,dataWareHouse, templateConfig);
 
 		String path = "/theme/angular/test.js";
 		String reqPath = "/theme/angular/test.js";
@@ -116,7 +119,7 @@ public class TemplateResouceEngineTest extends TestCase {
 	public final void testResolve_Static_Theme_1() {
 
 		when(dataWareHouse.define(String.class, Entity.class, "Attribute")).thenReturn(attributes);
-		TemplateResouceEngine templateResouceEngine = new TemplateResouceEngine(loader, typeLoader, dataWareHouse, templateConfig);
+		TemplateResouceEngine templateResouceEngine = new TemplateResouceEngine(loader, typeLoader, typeBrokers,dataWareHouse, templateConfig);
 
 		String reqPath = "/theme/angular/test.js";
 		String path = "/theme/test.js";
@@ -135,7 +138,7 @@ public class TemplateResouceEngineTest extends TestCase {
 	public final void testResolve_Static_Theme_2() {
 
 		when(dataWareHouse.define(String.class, Entity.class, "Attribute")).thenReturn(attributes);
-		TemplateResouceEngine templateResouceEngine = new TemplateResouceEngine(loader, typeLoader, dataWareHouse, templateConfig);
+		TemplateResouceEngine templateResouceEngine = new TemplateResouceEngine(loader, typeLoader, typeBrokers,dataWareHouse, templateConfig);
 
 		String reqPath = "/theme/angular/test.js";
 		String path = "/test.js";
@@ -154,7 +157,7 @@ public class TemplateResouceEngineTest extends TestCase {
 	public final void testResolve_StaticTemplateResouce() {
 
 		when(dataWareHouse.define(String.class, Entity.class, "Attribute")).thenReturn(attributes);
-		TemplateResouceEngine templateResouceEngine = new TemplateResouceEngine(loader, typeLoader, dataWareHouse, templateConfig);
+		TemplateResouceEngine templateResouceEngine = new TemplateResouceEngine(loader, typeLoader, typeBrokers,dataWareHouse, templateConfig);
 
 		String path = "test.js";
 		when(loader.findSource(path)).thenReturn(null);
@@ -170,13 +173,16 @@ public class TemplateResouceEngineTest extends TestCase {
 	public final void testResolve_Type_1() throws IOException, ServletException {
 
 		when(dataWareHouse.define(String.class, Entity.class, "Attribute")).thenReturn(attributes);
-		TemplateResouceEngine templateResouceEngine = new TemplateResouceEngine(loader, typeLoader, dataWareHouse, templateConfig);
+		TemplateResouceEngine templateResouceEngine = new TemplateResouceEngine(loader, typeLoader, typeBrokers,dataWareHouse, templateConfig);
 
 		String reqPath = "/theme/angularjs/Type-simple-list.html";
 
+		@SuppressWarnings("unchecked")
+		Broker<Type>  typeBroker = (Broker<Type>)mock(Broker.class);
 		Type type = mock(Type.class);
 
-		when(typeLoader.findType("Type")).thenReturn(type);
+		when(typeBrokers.getBroker("Type")).thenReturn(typeBroker);
+		when(typeBroker.get()).thenReturn(type);
 
 		when(type.getStandalone()).thenReturn(TypeStandalone.Master);
 		when(type.getAttrs()).thenReturn(mock(InheritHashMap.class));
