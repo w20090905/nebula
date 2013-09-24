@@ -38,7 +38,7 @@
 
 	[#if field.type.attrs.SP?? &&  field.type.attrs.SP = "Attr"]
 		[#assign attrValues][@compress single_line=true]			
-			[#list (attrs[field.name].Values)![] as attr],{name:'${attr.Name}'}[/#list]
+			[#list (attrs[field.name].Values)![] as attr],{'name':'${attr.Name}'}[/#list]
 		[/@compress] [/#assign]
 		
 		<select id="${id}" x-ng-init="${id}values = [${attrValues?substring(1)}];"  ${ex}

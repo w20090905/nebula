@@ -37,7 +37,7 @@
 	[#assign optRequired][#if !key && required] required[/#if][/#assign]
 	[#if field.type.attrs.SP?? &&  field.type.attrs.SP = "Attr"]
 		[#assign attrValues][@compress single_line=true]			
-			[#list (attrs[field.name].Values)![] as attr],{name:'${attr.Name}'}[/#list]
+			[#list (attrs[field.name].Values)![] as attr],{'name':'${attr.Name}'}[/#list]
 		[/@compress] [/#assign]
 		
 		<select id="${id}" x-ng-init="${id}values = [${attrValues?substring(1)}];"  ${ex}
@@ -63,28 +63,38 @@
 
 [#macro popupBox field pField id ngModel placeholder key=false required=true readonly=false] [#-- // TODO Need Refact --]
 	[#assign optRequired][#if required] required[/#if][/#assign]
+
+	[#if field.attrs.InlineShow?? &&  field.attrs.InlineShow = "InlineShow"]
+		
+		[#assign newNgModel][/#assign]
+		
+		[#list field.type.fields as in2f][#t]
+			[#if !in2f.array && in2f.refer == "ByVal"
+					&& (in2f.key)]
+					[#assign keyName]${in2f.name}[/#assign]
+			[/#if]
+		[/#list]
+	
+		[#assign attrValues][@compress single_line=true]			
+			[#list (alldatas[field.type.name])![] as attr],{ID:'${attr.ID}',Name:'${attr.Name}'}[/#list]
+		[/@compress] [/#assign]		
+		<select id="${id}"  x-ng-init="${id}values = [${attrValues?substring(1)}];" 
+				x-ng-model="${ngModel}${keyName}" x-ng-options="c.${keyName} as c.Name for c in ${id}values" placeholder="${placeholder}"	 inlineshow>	
+			<option value="">-- 选择 ${field.name} --</option>
+		</select>
+	[#else]	
 		[#assign beforePopup][/#assign]
 		[#assign afterPopup][/#assign]
 		[#assign showValue][/#assign]
 		
-	[#list field.type.fields as in2f][#t]
-		[#if !in2f.array && in2f.refer == "ByVal"
-				&& (in2f.key || in2f.core)]
-				[#assign beforePopup]${beforePopup} ${in2f.name}=${ngModel}${in2f.name};[/#assign]
-				[#assign afterPopup]${afterPopup} ${ngModel}${in2f.name}=ret.${in2f.name};[/#assign]
-				[#if !in2f.key || in2f.type.name!="ID" || field.type.standalone != "Master"] [#assign showValue]${showValue}{{${ngModel}${in2f.name}}}&nbsp;[/#assign][/#if]
-		[/#if]
-	[/#list]
-	
-	[#if field.attrs.InlineShow?? &&  field.attrs.InlineShow = "InlineShow"]
-		[#assign attrValues][@compress single_line=true]			
-			[#list (alldatas[field.type.name])![] as attr],{ID:${attr.ID},Name:'${attr.Name}'}[/#list]
-		[/@compress] [/#assign]		
-		<select id="${id}"  x-ng-init="${id}values = [${attrValues?substring(1)}];" 
-				x-ng-model="${ngModel}" x-ng-options="c as c.Name for c in ${id}values" placeholder="${placeholder}"	 inlineshow>	
-			<option value="">-- 选择 ${field.name} --</option>
-		</select>
-	[#else]	
+		[#list field.type.fields as in2f][#t]
+			[#if !in2f.array && in2f.refer == "ByVal"
+					&& (in2f.key || in2f.core)]
+					[#assign beforePopup]${beforePopup} ${in2f.name}=${ngModel}${in2f.name};[/#assign]
+					[#assign afterPopup]${afterPopup} ${ngModel}${in2f.name}=ret.${in2f.name};[/#assign]
+					[#if !in2f.key || in2f.type.name!="ID" || field.type.standalone != "Master"] [#assign showValue]${showValue}{{${ngModel}${in2f.name}}}&nbsp;[/#assign][/#if]
+			[/#if]
+		[/#list]
 		<div id="${id}"  class="uneditable-input" placeholder="${placeholder}"
 				x-popup="/d/${field.type.name}/" 
 				x-beforePopup="${beforePopup}"
@@ -124,7 +134,7 @@
 
 <article class="module width_full">
 	<header>
-		<h1 class="tabs_involved">${type.name}&nbsp;${"#"}{{data.ID}}</h1>	
+		<h1 class="tabs_involved">${type.displayName}&nbsp;${"#"}{{data.ID}}</h1>	
 		<div class="btn-toolbar">
 			<div class="btn-group">
 		  		<a href="#/d/Type/${type.name}" class="btn">Define</a>
@@ -163,7 +173,7 @@
 					[#switch of.refer]
 					[#case "ByVal"] <!--  Basic Type Field <!--  Type A1-->
 						[#if !of.key || of.type.name != "ID"]
-			[@controls field=of for="${of.name}" label="${of.name}"]
+			[@controls field=of for="${of.name}" label="${of.displayName}"]
 					[@inputBox field=of id="${of.name}"  ngModel="data.${of.name}" placeholder="${of.name}" 
 						key=of.key required=!of.ignorable/]
 			[/@controls]
@@ -176,7 +186,7 @@
 							[#if !in1f.array]<!-- -->
 								[#switch in1f.refer]
 								[#case "ByVal"] <!--  Type B1-->
-				[@controls field=in1f for="${of.name}${in1f.name}" label="${in1f.name}"]
+				[@controls field=in1f for="${of.name}${in1f.name}" label="${in1f.displayName}"]
 					[@inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name} ${in1f.name}"
 						required=!(of.ignorable || in1f.ignorable)/]
 				[/@controls]
@@ -186,7 +196,7 @@
 										[#if !in2f.array && in2f.refer == "ByVal"] <!--  Type
 																										<!--  C1   -->
 
-				[@controls  field=in2f for="${of.name}${in1f.name}${in2f.name}" label="${in1f.name}${in2f.name}"]
+				[@controls  field=in2f for="${of.name}${in1f.name}${in2f.name}" label="${in1f.displayName}${in2f.displayName}"]
 					[@inputBox field=in2f id="${of.name}${in1f.name}${in2f.name}" ngModel="data.${of.name}.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"
 						required=!(of.ignorable || in1f.ignorable || in2f.ignorable)/]
 				[/@controls]
@@ -196,7 +206,7 @@
 								[#case "ByRef"] <!--  Type B3   -->
 								[#case "Cascade"] <!--  Type B4   -->
 
-				[@controls  field=in1f for="${of.name}${in1f.name}" label="${in1f.name}"]
+				[@controls  field=in1f for="${of.name}${in1f.name}" label="${in1f.displayName}"]
 					[@popupBox field=in1f pField=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name} ${in1f.name}"
 						readonly=true required=!(of.ignorable || in1f.ignorable)/]		
 				[/@controls]
@@ -206,7 +216,7 @@
 								[#switch in1f.refer]
 								[#case "ByVal"] <!--  Type B5   -->
 											
-			[@controls  field=in1f for="${of.name}${in1f.name}" label="${of.name} ${in1f.name}"]
+			[@controls  field=in1f for="${of.name}${in1f.name}" label="${of.displayName} ${in1f.displayName}"]
 					[@inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name}${in1f.name}"
 						required=!(of.ignorable || in1f.ignorable) /] <!-- ngList -->
 			[/@controls]
@@ -254,7 +264,7 @@
 						[#break]
 					[#case "ByRef"] <!--  Type A3   -->
 					[#case "Cascade"] <!--  Type A4   -->
-				[@controls field=of for="${of.name}" label="${of.name}"]
+				[@controls field=of for="${of.name}" label="${of.displayName}"]
 					[@popupBox field=of pField=of id="${of.name}" ngModel="data.${of.name}"  placeholder="${of.name}"
 						key=(of.key) readonly=true required=!(of.ignorable)/]
 				[/@controls]
@@ -263,7 +273,7 @@
 				[#else] <!--  数组不可以是Key   -->
 					[#switch of.refer]
 					[#case "ByVal"] <!--  Basic Type Field  --> <!--  Type A5   -->
-			[@controls  field=of for="${of.name}" label="${of.name}"]
+			[@controls  field=of for="${of.name}" label="${of.displayName}"]
 					[@inputBox field=of id="${of.name}" ngModel="data.${of.name}" placeholder="${of.name}"
 						required=!(of.ignorable) ex="x-ng-list"/] <!-- ngList -->
 			[/@controls]
@@ -287,7 +297,7 @@
 									[#list in1f.type.fields as in2f][#t]
 										[#if !in2f.array && in2f.refer == "ByVal"]
 										
-					<th>${in1f.name} ${in2f.name}</th>
+					<th>${in1f.displayName} ${in2f.displayName}</th>
 					
 										[/#if]
 									[/#list]
@@ -297,7 +307,7 @@
 									[#list in1f.type.fields as in2f][#t]
 										[#if !in2f.array && in2f.refer == "ByVal" && (in2f.key || in2f.core)]
 										
-					<th>${in1f.name} ${in2f.name}</th>
+					<th>${in1f.displayName} ${in2f.displayName}</th>
 					
 										[/#if] 
 									[/#list]

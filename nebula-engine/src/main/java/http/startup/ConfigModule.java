@@ -80,7 +80,7 @@ public class ConfigModule extends AbstractModule {
 
 			// Type Define locator
 			EditableTypeLoader typeLoader = new EditableTypeLoader(new SystemTypeLoader(), new File("apps/system"));
-			typeLoader.loadFolder(new File("apps/redmine"));
+			typeLoader.loadFolder(new File("apps/ids"));
 			
 			this.bind(TypeDatastore.class).toInstance(new TypeDatastore(typeLoader));
 

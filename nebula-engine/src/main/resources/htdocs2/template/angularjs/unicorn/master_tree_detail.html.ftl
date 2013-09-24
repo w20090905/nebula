@@ -64,28 +64,38 @@
 
 [#macro popupBox field pField id ngModel placeholder key=false required=true readonly=false] [#-- // TODO Need Refact --]
 	[#assign optRequired][#if required] required[/#if][/#assign]
+
+	[#if field.attrs.InlineShow?? &&  field.attrs.InlineShow = "InlineShow"]
+		
+		[#assign newNgModel][/#assign]
+		
+		[#list field.type.fields as in2f][#t]
+			[#if !in2f.array && in2f.refer == "ByVal"
+					&& (in2f.key)]
+					[#assign keyName]${in2f.name}[/#assign]
+			[/#if]
+		[/#list]
+	
+		[#assign attrValues][@compress single_line=true]			
+			[#list (alldatas[field.type.name])![] as attr],{ID:'${attr.ID}',Name:'${attr.Name}'}[/#list]
+		[/@compress] [/#assign]		
+		<select id="${id}"  x-ng-init="${id}values = [${attrValues?substring(1)}];" 
+				x-ng-model="${ngModel}${keyName}" x-ng-options="c.${keyName} as c.Name for c in ${id}values" placeholder="${placeholder}"	 inlineshow>	
+			<option value="">-- 选择 ${field.name} --</option>
+		</select>
+	[#else]	
 		[#assign beforePopup][/#assign]
 		[#assign afterPopup][/#assign]
 		[#assign showValue][/#assign]
 		
-	[#list field.type.fields as in2f][#t]
-		[#if !in2f.array && in2f.refer == "ByVal"
-				&& (in2f.key || in2f.core)]
-				[#assign beforePopup]${beforePopup} ${in2f.name}=${ngModel}${in2f.name};[/#assign]
-				[#assign afterPopup]${afterPopup} ${ngModel}${in2f.name}=ret.${in2f.name};[/#assign]
-				[#if !in2f.key || in2f.type.name!="ID" || field.type.standalone != "Master"] [#assign showValue]${showValue}{{${ngModel}${in2f.name}}}&nbsp;[/#assign][/#if]
-		[/#if]
-	[/#list]
-	
-	[#if field.attrs.InlineShow?? &&  field.attrs.InlineShow = "InlineShow"]
-		[#assign attrValues][@compress single_line=true]			
-			[#list (alldatas[field.type.name])![] as attr],{ID:${attr.ID},Name:'${attr.Name}'}[/#list]
-		[/@compress] [/#assign]		
-		<select id="${id}"  x-ng-init="${id}values = [${attrValues?substring(1)}];" 
-				x-ng-model="${ngModel}" x-ng-options="c as c.Name for c in ${id}values" placeholder="${placeholder}"	 inlineshow>	
-			<option value="">-- 选择 ${field.name} --</option>
-		</select>
-	[#else]	
+		[#list field.type.fields as in2f][#t]
+			[#if !in2f.array && in2f.refer == "ByVal"
+					&& (in2f.key || in2f.core)]
+					[#assign beforePopup]${beforePopup} ${in2f.name}=${ngModel}${in2f.name};[/#assign]
+					[#assign afterPopup]${afterPopup} ${ngModel}${in2f.name}=ret.${in2f.name};[/#assign]
+					[#if !in2f.key || in2f.type.name!="ID" || field.type.standalone != "Master"] [#assign showValue]${showValue}{{${ngModel}${in2f.name}}}&nbsp;[/#assign][/#if]
+			[/#if]
+		[/#list]
 		<div id="${id}"  class="uneditable-input" placeholder="${placeholder}"
 				x-popup="/d/${field.type.name}/" 
 				x-beforePopup="${beforePopup}"
