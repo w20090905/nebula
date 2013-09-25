@@ -25,7 +25,7 @@ import util.FileUtil;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
-public abstract class TypeLoader {
+public abstract class TypeLoader {	
 	protected Log log = LogFactory.getLog(this.getClass());
 
 	final TypeLoader parent;
@@ -104,7 +104,7 @@ public abstract class TypeLoader {
 			for (Type t : typeList) {
 				t.code = code;
 				t.url = null;
-				t.link(this);
+				link(t);
 				t.lastModified = this.lastModified;
 			}
 
@@ -141,17 +141,29 @@ public abstract class TypeLoader {
 		List<Type> typeList = parse(new ANTLRInputStream(in.openStream(), "utf-8"));
 		long lastModified = in.openConnection().getLastModified();
 		this.lastModified = lastModified > this.lastModified ? lastModified : this.lastModified;
-		for (Type t : typeList) {
-			t.code = code;
-			t.url = in;
-			t.lastModified = lastModified;
-			t.link(this);
+		Type topType = typeList.get(0);
+		for (Type type : typeList) {
+			type.code = code;
+			type.url = in;
+			type.lastModified = lastModified;
+			link(type);
+			topType.subTypes.add(type);
 		}
 		types.addAll(typeList);
 		if (log.isTraceEnabled()) {
 			log.trace("\tload type [" + typeList.get(0).getName() + "]  succeed  from url - " + typeList.get(0).url);
 		}
 		return typeList;
+	}
+
+
+	protected void link(Type type) {
+		for (Field f : type.fields) {
+			f.type.references.add(f);
+			if(f.attrs.containsKey(Type.ATTACH_TO)){
+				f.type.attachedBy.add(type);
+			}
+		}
 	}
 
 	private List<Type> parse(CharStream in) throws RecognitionException {
@@ -190,7 +202,7 @@ public abstract class TypeLoader {
 				return type;
 			}
 			if (log.isDebugEnabled()) {
-				log.debug("[ " + ++cntLevel + " ] " + name + " - before loadClassData from "
+				log.debug("[ " + ++cntLevel + " ] " + name + " - try     loadClassData within "
 						+ this.getClass().getName());
 			}
 			URL url = loadClassData(name);
@@ -200,13 +212,13 @@ public abstract class TypeLoader {
 					log.debug("loaded type [" + name + "]  \tfrom " + this.getClass().getName());
 				}
 				if (log.isDebugEnabled()) {
-					log.debug("[ " + cntLevel-- + " ] " + name + " - succeed loadClassData from "
+					log.debug("[ " + cntLevel-- + " ] " + name + " - succeed loadClassData within "
 							+ this.getClass().getName());
 				}
 				return typeList.get(0);
 			} else {
 				if (log.isDebugEnabled()) {
-					log.debug("[ " + cntLevel-- + " ] " + name + " - fail loadClassData from "
+					log.debug("[ " + cntLevel-- + " ] " + name + " - cannot   loadClassData within "
 							+ this.getClass().getName());
 				}
 				return null;

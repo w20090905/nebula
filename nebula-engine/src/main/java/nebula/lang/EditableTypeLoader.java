@@ -7,21 +7,26 @@ import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
 import org.antlr.runtime.RecognitionException;
 
 import util.FileUtil;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 public class EditableTypeLoader extends TypeLoader {
 	final List<File> paths;
+	final Map<URL, Type> loadedTypes;
 
 	public EditableTypeLoader(TypeLoader parent, File root) {
 		super(parent);
 		this.paths = Lists.newCopyOnWriteArrayList();
 		this.paths.add(root);
+		loadedTypes = Maps.newHashMap();
 		this.doLoadFolder(root, root);
+
 	}
 
 	public void loadFolder(File folder) {
@@ -41,7 +46,10 @@ public class EditableTypeLoader extends TypeLoader {
 					if (log.isDebugEnabled()) {
 						log.debug("load type define from  - " + f.toURI().toURL());
 					}
-					this.defineNebula(f.toURI().toURL());
+					URL url = f.toURI().toURL();
+					if (!loadedTypes.containsKey(url)) {
+						this.defineNebula(f.toURI().toURL());
+					}
 				} else if (f.isDirectory()) {
 					doLoadFolder(root, f);
 				}
@@ -66,7 +74,9 @@ public class EditableTypeLoader extends TypeLoader {
 		for (Type t : typeList) {
 			t.mutable = true;
 		}
+		loadedTypes.put(in, typeList.get(0));
 		return typeList;
+
 	}
 
 	@Override
@@ -86,6 +96,8 @@ public class EditableTypeLoader extends TypeLoader {
 					throw new RuntimeException("Cannot edit");
 				}
 
+				unlink(oldType);
+				
 				if (oldType.getTypeLoader() != this) {
 					return oldType.getTypeLoader().update(oldType, newCode);
 				}
@@ -114,6 +126,26 @@ public class EditableTypeLoader extends TypeLoader {
 		} catch (IOException e) {
 			log.error(e.getClass().getName(), e);
 			throw new RuntimeException(e);
+		}
+	}
+
+	protected void unlink(Type topType) {
+		for (Type oldType : topType.subTypes) {
+			for (Field f : oldType.fields) {
+				f.type.references.remove(f);
+				if (f.attrs.containsKey(Type.ATTACH_TO)) {
+					f.type.attachedBy.remove(oldType);
+				}
+			}
+		}
+	}
+
+	public void link(Type type) {
+		for (Field f : type.fields) {
+			f.type.references.add(f);
+			if (f.attrs.containsKey(Type.ATTACH_TO)) {
+				f.type.attachedBy.add(type);
+			}
 		}
 	}
 

@@ -2,6 +2,7 @@ package http.engine;
 
 import http.io.Loader;
 import http.io.Source;
+import http.resource.AttachedTypeTemplateResouce;
 import http.resource.StaticResource;
 import http.resource.StaticTemplateResouce;
 import http.resource.TypeTemplateResouce;
@@ -29,7 +30,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 	final TypeDatastore typeBrokers;
 
 	@Inject
-	public TemplateResouceEngine(Loader resourceLoader, TypeLoader typeLoader, TypeDatastore typeBrokers,final DataRepos dataWareHouse, Configuration cfg) {
+	public TemplateResouceEngine(Loader resourceLoader, TypeLoader typeLoader, TypeDatastore typeBrokers, final DataRepos dataWareHouse, Configuration cfg) {
 		super(resourceLoader);
 		this.templateConfig = cfg;
 		this.typeLoader = typeLoader;
@@ -86,26 +87,41 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 			return new StaticResource(source, TheMimeTypes.get(extension), this.age);
 		}
 
-		int idxType = 0;
+		String[] names = null;
+
 		if (name.indexOf('/', prev) > 0) {
 			return new StaticTemplateResouce(templateConfig, typeLoader, attributes, theme, skin, name);
-		} else if ((idxType = name.indexOf("-")) > 0) {
+		} else if ((names = name.split("-")).length > 0) {
+
+			String attachedTypeName;
 			String typeName;
 			String layoutName;
 			String actionName;
-
-			typeName = name.substring(0, idxType);
-			int idxType2 = -1;
-			if ((idxType2 = name.indexOf("-", idxType + 1)) > 0) {
-				layoutName = name.substring(idxType + 1, idxType2);
-				actionName = name.substring(idxType2 + 1);
-			} else {
+			Broker<Type> type;
+			switch (names.length) {
+			default:
+			case 4:
+				attachedTypeName = names[0];
+				typeName = names[1];
+				layoutName = names[2];
+				actionName = names[3];
+				Broker<Type> attachedType = typeBrokers.getBroker(attachedTypeName);
+				type = typeBrokers.getBroker(typeName);
+				return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, attachedType, type, layoutName, actionName);
+			case 3:
+				typeName = names[0];
+				layoutName = names[1];
+				actionName = names[2];
+				type = typeBrokers.getBroker(typeName);
+				return new TypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, type, layoutName, actionName);
+			case 2:
+				typeName = names[0];
 				layoutName = null;
-				actionName = name.substring(idxType + 1);
+				actionName = names[2];
+				type = typeBrokers.getBroker(typeName);
+				return new TypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, type, layoutName, actionName);
 			}
-			Broker<Type> type = typeBrokers.getBroker(typeName);
-					
-			return new TypeTemplateResouce(templateConfig, typeLoader, type,dataWareHouse, attributes, theme, skin, typeName, layoutName, actionName);
+
 		} else {
 			return new StaticTemplateResouce(templateConfig, typeLoader, attributes, theme, skin, name);
 		}

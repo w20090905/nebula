@@ -16,7 +16,6 @@ import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.lang.Field;
 import nebula.lang.Type;
-import nebula.lang.TypeLoader;
 import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.ObjectWrapper;
@@ -75,55 +74,61 @@ class DataPersisterTemplateHashModel implements TemplateHashModel {
 }
 
 public class TypeTemplateResouce extends AbstractResouce {
-	private final Configuration cfg;
+	final Configuration cfg;
 	// private final String templateName;
 
-	private Map<String, Object> root = new HashMap<String, Object>();
+	TemplateHashModel dataWareHouseModel;
+
+	final Map<String, Object> root = new HashMap<String, Object>();
 	final DataRepos dataWareHouse;
-	final TypeLoader typeLoader;
+	final Broker<DataStore<Entity>> attributes;
+	// final TypeLoader typeLoader;
 	final String theme;
 	final String skin;
-	final String typeName;
-	final String actionName;
-	final String name;
-	final Broker<DataStore<Entity>> attributes;
-	TemplateHashModel dataWareHouseModel;
 	final Broker<Type> type;
+//	final String actionName;
+	final String name;
 
-	public TypeTemplateResouce(Configuration cfg, TypeLoader typeLoader, Broker<Type> type, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes,
-			String theme, String skin, String typeName, String actionName) {
-		this(cfg, typeLoader, type, dataWareHouse, attributes, theme, skin, typeName, null, actionName);
+	public TypeTemplateResouce(Configuration cfg, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes, String theme, String skin, Broker<Type> type,
+			String layout, String actionName) {
+		this(cfg, dataWareHouse, attributes, theme, skin, type,makeName(type, layout, actionName));
 	}
 
-	public TypeTemplateResouce(Configuration cfg, TypeLoader typeLoader, Broker<Type> type, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes,
-			String theme, String skin, String typeName, String layout, String actionName) {
-		super("text/template", 0, 0);// TODO Not realized TypeTemplateResouce
-										// super("text/template", 0, 0)
-
-		this.cfg = cfg;
-		this.typeLoader = typeLoader;
-
-		this.theme = theme;
-		this.skin = skin;
-		this.typeName = typeName;
-		this.actionName = actionName;
-
-		this.dataWareHouse = dataWareHouse;
-
-		this.dataWareHouseModel = new DataPersisterTemplateHashModel(dataWareHouse);
-
-		this.type = type;
-		// Type type = this.typeLoader.findType(typeName);
-
+	private static String makeName(Broker<Type> type, String layout, String actionName) {
 		String entityType = (String) type.get().getStandalone().name().toLowerCase();
 
 		layout = layout != null ? layout : (String) type.get().getAttrs().get("Layout");
 
-		this.name = entityType + "_" + layout.toLowerCase() + "_" + actionName.toLowerCase() + ".ftl";
-		// this.templateName = templateTypeName + "-" + actionName + ".ftl";
-		this.attributes = attributes;
+		String name = entityType + "_" + layout.toLowerCase() + "_" + actionName.toLowerCase() + ".ftl";
+		return name;
 	}
 
+	public TypeTemplateResouce(Configuration cfg, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes, String theme, String skin, Broker<Type> type,
+			 String name) {
+		super("text/template", 0, 0);// TODO Not realized TypeTemplateResouce
+										// super("text/template", 0, 0)
+
+		this.cfg = cfg;
+		
+		this.dataWareHouse = dataWareHouse;
+		this.dataWareHouseModel = new DataPersisterTemplateHashModel(dataWareHouse);
+		this.attributes = attributes;
+
+		this.theme = theme;
+		this.skin = skin;
+
+		this.type = type;
+		this.name = name;
+	}
+
+	protected void fillData(){
+		root.put("type", layout(type.get()));
+
+		DataStore<Entity> attrs = attributes.get();
+
+		root.put("attrs", attrs);
+		root.put("alldatas", dataWareHouseModel);
+	}
 	protected void get(HttpServletRequest req) throws IOException {
 		try {
 			TemplateLoader loader = cfg.getTemplateLoader();
@@ -142,12 +147,8 @@ public class TypeTemplateResouce extends AbstractResouce {
 			ByteArrayOutputStream bout = new ByteArrayOutputStream();
 			Writer w = new OutputStreamWriter(bout);
 
-			root.put("type", layout(type.get()));
-
-			DataStore<Entity> attrs = attributes.get();
-
-			root.put("attrs", attrs);
-			root.put("alldatas", dataWareHouseModel);
+			fillData();
+			
 			Template template = cfg.getTemplate(templateName);
 			template.process(root, w);
 			w.flush();

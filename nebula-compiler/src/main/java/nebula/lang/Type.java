@@ -7,7 +7,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import nebula.data.Timable;
 import util.InheritHashMap;
 
-public class Type implements Timable {
+public class Type implements Timable {	
+	public static final String ATTACH_TO = "AttachTo";
+	
 	public static final String CTOR = "<ctor>";
 	public static final String ONSAVE = "<onSave>";
 	public static final String ONLOAD = "<onLoad>";
@@ -34,7 +36,9 @@ public class Type implements Timable {
 
 	long lastModified;
 
+	final List<Type> subTypes;
 	final List<Field> references;
+	final List<Type> attachedBy;
 
 	public static String ROOT_TYPE = "T";
 
@@ -57,6 +61,8 @@ public class Type implements Timable {
 		this.attrs = new InheritHashMap();
 		this.references = new CopyOnWriteArrayList<Field>();
 		this.nameAlias = new Aliases(name);
+		this.attachedBy = new CopyOnWriteArrayList<Type>();
+		this.subTypes = new CopyOnWriteArrayList<Type>();
 	}
 
 	public String getDisplayName() {
@@ -111,6 +117,8 @@ public class Type implements Timable {
 
 		this.references = new CopyOnWriteArrayList<Field>();
 		this.nameAlias = new Aliases(name);
+		this.attachedBy = new CopyOnWriteArrayList<Type>();
+		this.subTypes = new CopyOnWriteArrayList<Type>();
 	}
 
 	public boolean isArray() {
@@ -169,12 +177,6 @@ public class Type implements Timable {
 		return code;
 	}
 
-	public void link(TypeLoader loader) {
-		for (Field f : fields) {
-			f.type.references.add(f);
-		}
-	}
-
 	public List<Field> getReferences() {
 		return references;
 	}
@@ -205,6 +207,10 @@ public class Type implements Timable {
 		if (this.superType != null) return this.superType.getActionByName(name);
 
 		return null;
+	}
+
+	public List<Type> getAttachedBy() {
+		return attachedBy;
 	}
 
 }
