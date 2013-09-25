@@ -70,6 +70,33 @@ function NewUserCtrl($scope, $resource, $routeParams, $location) {
 	};
 }
 
+function AttachedEntityListCtrl($scope, $route, $resource, $routeParams) {
+	'use strict';
+	$scope.attachedTypename = $routeParams.attachedtypename;
+	$scope.attachedID = $routeParams.attachedid;
+	var DataResource = $scope.resource = $resource('/d/:attachedtypename/:attachedid',$routeParams, {});
+	$scope.data = DataResource.get($routeParams,function() {
+		$scope.$dataReady();
+	});
+	
+	$scope.typename = $routeParams.typename;
+	var DataResource = $resource('/d/:attachedtypename/:attachedid/:typename/', $routeParams, {
+		query : {
+			method : 'GET',
+			params : {},
+			isArray : true
+		}
+	});
+	$scope.datalist = DataResource.query(function() {
+		$scope.$dataReady();
+	});
+	$scope.$reload = function() {
+		$scope.datalist = DataResource.query(function() {
+			$scope.$dataReady();
+		});
+	};
+}
+
 function EntityListCtrl($scope, $route, $resource, $routeParams) {
 	'use strict';
 	$scope.typename = $routeParams.typename;

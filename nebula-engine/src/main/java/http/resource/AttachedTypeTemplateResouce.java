@@ -1,12 +1,6 @@
 package http.resource;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import nebula.data.Broker;
 import nebula.data.DataRepos;
@@ -14,10 +8,7 @@ import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.lang.Field;
 import nebula.lang.Type;
-import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
 
 public class AttachedTypeTemplateResouce extends TypeTemplateResouce {
 
@@ -51,6 +42,9 @@ public class AttachedTypeTemplateResouce extends TypeTemplateResouce {
 		Field lastField = null;
 		for (int i = 0; i < fields.size(); i++) {
 			Field field = fields.get(i);
+			if(field.getAttrs().containsKey(Type.ATTACH)){
+				continue;
+			}
 			if (field.getAttrs().containsKey("SingleLine")) {
 				if (lastField != null) {
 					lastField.getAttrs().remove("HasFollowing");

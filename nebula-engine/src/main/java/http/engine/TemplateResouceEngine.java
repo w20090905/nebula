@@ -98,6 +98,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 			String layoutName;
 			String actionName;
 			Broker<Type> type;
+			Broker<Type> attachedType;
 			switch (names.length) {
 			default:
 			case 4:
@@ -105,20 +106,24 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 				typeName = names[1];
 				layoutName = names[2];
 				actionName = names[3];
-				Broker<Type> attachedType = typeBrokers.getBroker(attachedTypeName);
+				attachedType = typeBrokers.getBroker(attachedTypeName);
 				type = typeBrokers.getBroker(typeName);
 				return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, attachedType, type, layoutName, actionName);
 			case 3:
 				typeName = names[0];
 				layoutName = names[1];
 				actionName = names[2];
-				type = typeBrokers.getBroker(typeName);
-				return new TypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, type, layoutName, actionName);
 			case 2:
 				typeName = names[0];
 				layoutName = null;
-				actionName = names[2];
+				actionName = names[1];
+				
 				type = typeBrokers.getBroker(typeName);
+				if(type.get().getAttrs().containsKey(Type.ATTACH_TO)){
+					attachedTypeName =(String)type.get().getAttrs().get(Type.ATTACH_TO);
+					attachedType = typeBrokers.getBroker(attachedTypeName);
+					return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, attachedType, type, layoutName, actionName);
+				}
 				return new TypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, type, layoutName, actionName);
 			}
 

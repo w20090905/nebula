@@ -1,7 +1,7 @@
 'use strict';
 
 /* App Module */
-angular.module('appAdmin', ['nebulaFilters', 'nebulaServices','angularTree','nebulaDirectives','angularTree','ngResource','ngCookies']).
+angular.module('appAdmin', ['nebulaFilters', 'nebulaServices','nebulaDirectives','angularTree','ngResource','ngCookies']).
 	config(['$routeProvider', function($routeProvider) {
 		$routeProvider.
 			/* Template edit */
@@ -13,8 +13,9 @@ angular.module('appAdmin', ['nebulaFilters', 'nebulaServices','angularTree','neb
 			when('/d/Type/:id', {templateUrlWP: '/theme/angularjs/unicorn/Type-detail.html', controller: TypeCtrl}).
 			/* Entity edit */
 			when('/d/:typename', {templateUrlWP: '/theme/angularjs/unicorn/{{typename}}-list.html',   controller: EntityListCtrl}).
-			when('/d/:typename/!new', {templateUrlWP: '/theme/angularjs/unicorn/{{typename}}-detail.html', controller: NewEntityCtrl}).
-			when('/d/:typename/:id', {templateUrlWP: '/theme/angularjs/unicorn/{{typename}}-detail.html', controller: EntityCtrl}).
+			when('/d/:attachedtypename/:attachedid/:typename/', {templateUrlWP: '/theme/angularjs/unicorn/{{attachedtypename}}-{{typename}}-basic-list.html',   controller: AttachedEntityListCtrl}).
+			when('/d/:typename/!new', {templateUrlWP: '/theme/angularjs/unicorn/{{typename}}-home.html', controller: NewEntityCtrl}).
+			when('/d/:typename/:id', {templateUrlWP: '/theme/angularjs/unicorn/{{typename}}-home.html', controller: EntityCtrl}).
 			when('/welcome', {templateUrl: '/theme/angularjs/unicorn/welcome.html', controller: DoNothingCtrl}).
 			otherwise({redirectTo: '/welcome'});
 	}])	.run(function($rootScope, $location,  $interpolate) {
@@ -25,4 +26,8 @@ angular.module('appAdmin', ['nebulaFilters', 'nebulaServices','angularTree','neb
 	});
 });
 
+
+(function($) { 
+	$("input[required]").parents(".control-group").find(".control-label").addClass("required");
+})(jQuery);
 

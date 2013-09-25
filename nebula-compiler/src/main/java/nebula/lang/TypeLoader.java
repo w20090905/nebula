@@ -160,7 +160,8 @@ public abstract class TypeLoader {
 	protected void link(Type type) {
 		for (Field f : type.fields) {
 			f.type.references.add(f);
-			if(f.attrs.containsKey(Type.ATTACH_TO)){
+			if(f.attrs.containsKey(Type.ATTACH)){
+				type.attrs.put(Type.ATTACH_TO, f.type.name);
 				f.type.attachedBy.add(type);
 			}
 		}

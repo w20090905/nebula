@@ -20,3 +20,9 @@ nebulaModule.config(['$routeProvider', function($routeProvider,$cookies) {
 });
 });
 
+
+(function($) { 
+	$("input.require").parents(".control-group").find(".control-label").addClass("require");
+})(jQuery);
+
+
