@@ -27,14 +27,15 @@
 		[/#if]			
 	[/@compress][/#assign]
 	
-	[#assign optReadonly][#if key] readonly [#elseif readonly]readonly[/#if][/#assign]
+	[#assign optReadonly][#if key] x-ng-readonly ="update" [#elseif readonly]readonly[/#if][/#assign]
 	[#assign optValidateRule][@compress single_line=true]
 			[#if field.attrs.Min??		] min		="${field.attrs.Min}" 			[/#if]
 			[#if field.attrs.Max??		] max		="${field.attrs.Max}" 			[/#if]
 			[#if field.attrs.MinLength??] minLength	="${field.attrs.MinLength}" [/#if]
 			[#if field.attrs.MaxLength??] maxLength	="${field.attrs.MaxLength}" [/#if]
 	[/@compress][/#assign]
-	[#assign optRequired][#if !key && required] required[/#if][/#assign]
+	[#assign optRequired][#if required] required[/#if][/#assign]
+
 	[#if field.type.attrs.SP?? &&  field.type.attrs.SP = "Attr"]
 		[#assign attrValues][@compress single_line=true]			
 			[#list (attrs[field.name].Values)![] as attr],{'name':'${attr.Name}'}[/#list]
@@ -63,38 +64,28 @@
 
 [#macro popupBox field pField id ngModel placeholder key=false required=true readonly=false] [#-- // TODO Need Refact --]
 	[#assign optRequired][#if required] required[/#if][/#assign]
-
-	[#if field.attrs.InlineShow?? &&  field.attrs.InlineShow = "InlineShow"]
-		
-		[#assign newNgModel][/#assign]
-		
-		[#list field.type.fields as in2f][#t]
-			[#if !in2f.array && in2f.refer == "ByVal"
-					&& (in2f.key)]
-					[#assign keyName]${in2f.name}[/#assign]
-			[/#if]
-		[/#list]
-	
-		[#assign attrValues][@compress single_line=true]			
-			[#list (alldatas[field.type.name])![] as attr],{ID:'${attr.ID}',Name:'${attr.Name}'}[/#list]
-		[/@compress] [/#assign]		
-		<select id="${id}"  x-ng-init="${id}values = [${attrValues?substring(1)}];" 
-				x-ng-model="${ngModel}${keyName}" x-ng-options="c.${keyName} as c.Name for c in ${id}values" placeholder="${placeholder}"	 inlineshow>	
-			<option value="">-- 选择 ${field.name} --</option>
-		</select>
-	[#else]	
 		[#assign beforePopup][/#assign]
 		[#assign afterPopup][/#assign]
 		[#assign showValue][/#assign]
 		
-		[#list field.type.fields as in2f][#t]
-			[#if !in2f.array && in2f.refer == "ByVal"
-					&& (in2f.key || in2f.core)]
-					[#assign beforePopup]${beforePopup} ${in2f.name}=${ngModel}${in2f.name};[/#assign]
-					[#assign afterPopup]${afterPopup} ${ngModel}${in2f.name}=ret.${in2f.name};[/#assign]
-					[#if !in2f.key || in2f.type.name!="ID" || field.type.standalone != "Master"] [#assign showValue]${showValue}{{${ngModel}${in2f.name}}}&nbsp;[/#assign][/#if]
-			[/#if]
-		[/#list]
+	[#list field.type.fields as in2f][#t]
+		[#if !in2f.array && in2f.refer == "ByVal"
+				&& (in2f.key || in2f.core)]
+				[#assign beforePopup]${beforePopup} ${in2f.name}=${ngModel}${in2f.name};[/#assign]
+				[#assign afterPopup]${afterPopup} ${ngModel}${in2f.name}=ret.${in2f.name};[/#assign]
+				[#if !in2f.key || in2f.type.name!="ID" || field.type.standalone != "Master"] [#assign showValue]${showValue}{{${ngModel}${in2f.name}}}&nbsp;[/#assign][/#if]
+		[/#if]
+	[/#list]
+	
+	[#if field.attrs.InlineShow?? &&  field.attrs.InlineShow = "InlineShow"]
+		[#assign attrValues][@compress single_line=true]			
+			[#list (alldatas[field.type.name])![] as attr],{ID:'${attr.ID}',Name:'${attr.Name}'}[/#list]
+		[/@compress] [/#assign]		
+		<select id="${id}"  x-ng-init="${id}values = [${attrValues?substring(1)}];" 
+				x-ng-model="${ngModel}" x-ng-options="c as c.Name for c in ${id}values" placeholder="${placeholder}"	 inlineshow>	
+			<option value="">-- 选择 ${field.name} --</option>
+		</select>
+	[#else]	
 		<div id="${id}"  class="uneditable-input" placeholder="${placeholder}"
 				x-popup="/d/${field.type.name}/" 
 				x-beforePopup="${beforePopup}"
@@ -132,17 +123,12 @@
 	[/#if]
 [/#macro]
 
-
+[#assign attachedType=type /]
 [#assign attachFieldName][/#assign]
-[#list type.fields as f][#t]
-	[#if f.attrs.Attach??]	
-		[#assign attachFieldName]${f.name}[/#assign]
-	[/#if]
-[/#list]
 
 <article class="module width_full">
 	<header>
-		<h1 class="tabs_involved">${attachedType.displayName} - {{data.${attachFieldName}Name}}</h1>
+		<h1 class="tabs_involved">${attachedType.displayName} - {{data.Name}}</h1>
 		<div class="btn-toolbar">
 			<div class="btn-group">
 		  		<a href="#/d/Type/${type.name}" class="btn">Define</a>
@@ -150,7 +136,7 @@
 				    <span class="caret"></span>
 				  </button>
 				  <ul class="dropdown-menu">
-			  	<li><a tabindex="-1" href="#/t/angularjs/unicorn/${type.name}-list.html">View Template</a></li>
+			  	<li><a tabindex="-1" href="#/t/angularjs/unicorn/${type.name}-detail.html">View Template</a></li>
 				  </ul>
 			</div>
 		</div>
@@ -170,19 +156,12 @@
 						<span class="icon"> <i class="icon-align-justify"></i>
 						</span>
 						<ul class="nav nav-tabs">
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.${attachFieldName}Name}}"><h5>基本信息</h5></a></li>
-	[#list attachedType.attachedBy as atby]
-		[#if atby.name == type.name]
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.${attachFieldName}Name}}/${atby.name}/" class="active">${atby.name}</a></li>
-		[#else]
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.${attachFieldName}Name}}/${atby.name}/">${atby.name}</a></li>
-		[/#if]
-	[/#list]
-						</ul>				
-						<!-- <div class="buttons btn-toolbar" x-ng-show="data.standealone='Master'">
-							<input type="text" x-ng-model="query" class="input-medium search-query ctrl" placeholder="Filter">	
-							<a href="#/d/${type.name}/!new" class="btn btn-small btn-success ctrl"><i class="icon-plus icon-white"></i> 新建</a>
-						</div> -->
+				  			<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}">概述</a></li>
+	[#list attachedType.attachedBy as atby]	[#if atby.standalone=="Transaction"]
+				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/${atby.name}/">${atby.name}</a></li>
+	[/#if][/#list]
+							<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/setting/info">Settings</a></li>
+						</ul>
 					</div>
 					<div class="widget-content nopadding">
 					
@@ -285,13 +264,10 @@
 						[#break]
 					[#case "ByRef"] <!--  Type A3   -->
 					[#case "Cascade"] <!--  Type A4   -->
-					[#if of.attrs.Attach??]
-					[#else]					
 				[@controls field=of for="${of.name}" label="${of.displayName}"]
 					[@popupBox field=of pField=of id="${of.name}" ngModel="data.${of.name}"  placeholder="${of.name}"
 						key=(of.key) readonly=true required=!(of.ignorable)/]
 				[/@controls]
-					[/#if]
 						[#break]
 					[/#switch]
 				[#else] <!--  数组不可以是Key   -->
@@ -425,7 +401,7 @@
 	
 		<div class="form-actions">
 	  		<input type="submit" class="btn btn-primary" x-ng-disabled="form.$invalid" value="Save changes">
-	  		<a href="#/d/${attachedType.name}/{{data.${attachFieldName}Name}}/${type.name}/" class="btn">返回</a>
+	  		<a href="" class="btn" x-ng-click="$back()">返回</a>
 			<!-- button type="button" class="btn">Cancel</button--> 
 		</div>
 		<!-- End Form -->

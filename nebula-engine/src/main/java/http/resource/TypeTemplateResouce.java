@@ -86,30 +86,31 @@ public class TypeTemplateResouce extends AbstractResouce {
 	final String theme;
 	final String skin;
 	final Broker<Type> type;
-//	final String actionName;
+	// final String actionName;
 	final String name;
 
 	public TypeTemplateResouce(Configuration cfg, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes, String theme, String skin, Broker<Type> type,
-			String layout, String actionName) {
-		this(cfg, dataWareHouse, attributes, theme, skin, type,makeName(type, layout, actionName));
+			String specName, String layoutName, String actionName) {
+		this(cfg, dataWareHouse, attributes, theme, skin, type, makeName(type, specName, layoutName, actionName));
 	}
 
-	private static String makeName(Broker<Type> type, String layout, String actionName) {
+	private static String makeName(Broker<Type> type, String specName, String layout, String actionName) {
 		String entityType = (String) type.get().getStandalone().name().toLowerCase();
 
 		layout = layout != null ? layout : (String) type.get().getAttrs().get("Layout");
 
 		String name = entityType + "_" + layout.toLowerCase() + "_" + actionName.toLowerCase() + ".ftl";
+		name = specName != null ? specName + "_" + name : name;
 		return name;
 	}
 
 	public TypeTemplateResouce(Configuration cfg, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes, String theme, String skin, Broker<Type> type,
-			 String name) {
+			String name) {
 		super("text/template", 0, 0);// TODO Not realized TypeTemplateResouce
 										// super("text/template", 0, 0)
 
 		this.cfg = cfg;
-		
+
 		this.dataWareHouse = dataWareHouse;
 		this.dataWareHouseModel = new DataPersisterTemplateHashModel(dataWareHouse);
 		this.attributes = attributes;
@@ -121,7 +122,7 @@ public class TypeTemplateResouce extends AbstractResouce {
 		this.name = name;
 	}
 
-	protected void fillData(){
+	protected void fillData() {
 		root.put("type", layout(type.get()));
 
 		DataStore<Entity> attrs = attributes.get();
@@ -129,6 +130,7 @@ public class TypeTemplateResouce extends AbstractResouce {
 		root.put("attrs", attrs);
 		root.put("alldatas", dataWareHouseModel);
 	}
+
 	protected void get(HttpServletRequest req) throws IOException {
 		try {
 			TemplateLoader loader = cfg.getTemplateLoader();
@@ -148,7 +150,7 @@ public class TypeTemplateResouce extends AbstractResouce {
 			Writer w = new OutputStreamWriter(bout);
 
 			fillData();
-			
+
 			Template template = cfg.getTemplate(templateName);
 			template.process(root, w);
 			w.flush();

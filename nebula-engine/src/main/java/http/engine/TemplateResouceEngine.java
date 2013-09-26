@@ -16,6 +16,7 @@ import nebula.data.Entity;
 import nebula.data.impl.TypeDatastore;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
+import nebula.lang.TypeStandalone;
 import nebula.server.Resource;
 import freemarker.template.Configuration;
 
@@ -92,6 +93,14 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 		if (name.indexOf('/', prev) > 0) {
 			return new StaticTemplateResouce(templateConfig, typeLoader, attributes, theme, skin, name);
 		} else if ((names = name.split("-")).length > 0) {
+			String specName = null;
+			final int start;
+			if ("setting info admin dev profile".indexOf(names[0]) >= 0) {
+				start = 1;
+				specName = names[0];
+			} else {
+				start = 0;
+			}
 
 			String attachedTypeName;
 			String typeName;
@@ -99,32 +108,52 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 			String actionName;
 			Broker<Type> type;
 			Broker<Type> attachedType;
-			switch (names.length) {
+			switch (names.length - start) {
 			default:
 			case 4:
-				attachedTypeName = names[0];
-				typeName = names[1];
-				layoutName = names[2];
-				actionName = names[3];
+				attachedTypeName = names[start + 0];
+				typeName = names[start + 1];
+				layoutName = names[start + 2];
+				actionName = names[start + 3];
 				attachedType = typeBrokers.getBroker(attachedTypeName);
 				type = typeBrokers.getBroker(typeName);
-				return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, attachedType, type, layoutName, actionName);
-			case 3:
-				typeName = names[0];
-				layoutName = names[1];
-				actionName = names[2];
-			case 2:
-				typeName = names[0];
-				layoutName = null;
-				actionName = names[1];
-				
-				type = typeBrokers.getBroker(typeName);
-				if(type.get().getAttrs().containsKey(Type.ATTACH_TO)){
-					attachedTypeName =(String)type.get().getAttrs().get(Type.ATTACH_TO);
-					attachedType = typeBrokers.getBroker(attachedTypeName);
-					return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, attachedType, type, layoutName, actionName);
+				if (specName == null && type.get().getStandalone() == TypeStandalone.Master) {
+					specName = "setting";
 				}
-				return new TypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, type, layoutName, actionName);
+				return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, attachedType, type, specName, layoutName,
+						actionName);
+			case 3:
+				typeName = names[start + 0];
+				layoutName = names[start + 1];
+				actionName = names[start + 2];
+				type = typeBrokers.getBroker(typeName);
+				if (type.get().getAttrs().containsKey(Type.ATTACH_TO)) {
+					attachedTypeName = (String) type.get().getAttrs().get(Type.ATTACH_TO);
+					attachedType = typeBrokers.getBroker(attachedTypeName);
+					if (specName == null && type.get().getStandalone() == TypeStandalone.Master) {
+						specName = "setting";
+					}
+					return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, attachedType, type, specName, layoutName,
+							actionName);
+				}
+				return new TypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, type, specName, layoutName, actionName);
+
+			case 2:
+				typeName = names[start + 0];
+				layoutName = null;
+				actionName = names[start + 1];
+
+				type = typeBrokers.getBroker(typeName);
+				if (type.get().getAttrs().containsKey(Type.ATTACH_TO)) {
+					attachedTypeName = (String) type.get().getAttrs().get(Type.ATTACH_TO);
+					attachedType = typeBrokers.getBroker(attachedTypeName);
+					if (specName == null && type.get().getStandalone() == TypeStandalone.Master) {
+						specName = "setting";
+					}
+					return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, attachedType, type, specName, layoutName,
+							actionName);
+				}
+				return new TypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, type, specName, layoutName, actionName);
 			}
 
 		} else {

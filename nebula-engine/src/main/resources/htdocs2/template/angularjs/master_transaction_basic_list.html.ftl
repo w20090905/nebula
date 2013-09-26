@@ -29,19 +29,21 @@
 						<span class="icon"> <i class="icon-align-justify"></i>
 						</span>
 						<ul class="nav nav-tabs">
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}"><h5>基本信息</h5></a></li>
-	[#list attachedType.attachedBy as atby]
+				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}">概述</a></li>
+	[#list attachedType.attachedBy as atby][#if atby.standalone=="Transaction"]
 		[#if atby.name == type.name]
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/${atby.name}/" class="active">${atby.name}</a></li>
+				  			<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/${atby.name}/" >${atby.name}</a></li>
 		[#else]
 				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/${atby.name}/">${atby.name}</a></li>
 		[/#if]
-	[/#list]
-						</ul>				
-						<!-- <div class="buttons btn-toolbar" x-ng-show="data.standealone='Master'">
+	[/#if][/#list]
+							<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/setting/info">Settings</a></li>
+						</ul>
+						
+						<div class="buttons btn-toolbar pull-right" x-ng-show="data.standealone='Master'">
 							<input type="text" x-ng-model="query" class="input-medium search-query ctrl" placeholder="Filter">	
-							<a href="#/d/${type.name}/!new" class="btn btn-small btn-success ctrl"><i class="icon-plus icon-white"></i> 新建</a>
-						</div> -->
+							<a href="##/d/${attachedType.name}/{{data.Name}}/${type.name}/!new" class="btn btn-small btn-success ctrl"><i class="icon-plus icon-white"></i> 新建</a>
+						</div>
 					</div>
 					<div class="widget-content nopadding">
 			

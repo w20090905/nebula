@@ -123,9 +123,12 @@
 	[/#if]
 [/#macro]
 
+[#assign attachedType=type /]
+[#assign attachFieldName][/#assign]
+
 <article class="module width_full">
 	<header>
-		<h1 class="tabs_involved">${type.displayName} - {{data.Name}}</h1>	
+		<h1 class="tabs_involved">${attachedType.displayName} - {{data.${attachFieldName}Name}}</h1>
 		<div class="btn-toolbar">
 			<div class="btn-group">
 		  		<a href="#/d/Type/${type.name}" class="btn">Define</a>
@@ -154,10 +157,15 @@
 						<span class="icon"> <i class="icon-align-justify"></i>
 						</span>
 						<ul class="nav nav-tabs">
-				  			<li><a tabindex="-1" href="#/d/${type.name}/{{data.Name}}"><h5>基本信息</h5></a></li>
-	[#list type.attachedBy as atby]
-				  			<li><a tabindex="-1" href="#/d/${type.name}/{{data.Name}}/${atby.name}/">${atby.name}</a></li>
-	[/#list]
+				  			<li class="active"><a tabindex="-1" href="#/d/${type.name}/{{data.Name}}">概述</a></li>
+	[#list attachedType.attachedBy as atby]	[#if atby.standalone=="Transaction"]
+		[#if atby.name == attachedType.name]
+				  			<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/${atby.name}/">${atby.name}</a></li>
+		[#else]
+				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/${atby.name}/">${atby.name}</a></li>
+		[/#if]
+	[/#if][/#list]
+							<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/settings">Settings</a></li>
 						</ul>
 
 					</div>

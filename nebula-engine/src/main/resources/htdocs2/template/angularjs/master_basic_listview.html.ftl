@@ -1,7 +1,8 @@
 [#ftl/]
 <article class="module width_full">
 	<header>
-		<h1 class="tabs_involved">${attachedType.displayName} - {{data.Name}}</h1>
+		<h1 class="tabs_involved">${type.displayName}</h1>
+			
 		<div class="btn-toolbar">
 			<div class="btn-group">
 		  		<a href="#/d/Type/${type.name}" class="btn">Define</a>
@@ -28,20 +29,11 @@
 					<div class="widget-title">
 						<span class="icon"> <i class="icon-align-justify"></i>
 						</span>
-						<ul class="nav nav-tabs">
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}"><h5>基本信息</h5></a></li>
-	[#list attachedType.attachedBy as atby]
-		[#if atby.name == type.name]
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/${atby.name}/" class="active">${atby.name}</a></li>
-		[#else]
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/${atby.name}/">${atby.name}</a></li>
-		[/#if]
-	[/#list]
-						</ul>				
-						<!-- <div class="buttons btn-toolbar" x-ng-show="data.standealone='Master'">
+						<h5>${type.displayName}</h5>						
+						<div class="buttons btn-toolbar" x-ng-show="data.standealone='Master'">
 							<input type="text" x-ng-model="query" class="input-medium search-query ctrl" placeholder="Filter">	
 							<a href="#/d/${type.name}/!new" class="btn btn-small btn-success ctrl"><i class="icon-plus icon-white"></i> 新建</a>
-						</div> -->
+						</div>
 					</div>
 					<div class="widget-content nopadding">
 			
@@ -49,7 +41,7 @@
 		<thead>
 			<tr>
 				<th class="id">#</th>
-				[#list type.fields as field][#if !field.array && !field.ignorable && !field.attrs.Attach??]
+				[#list type.fields as field][#if !field.array && !field.ignorable]
 					[#switch field.refer]
 					[#case "ByVal"]
 						[#if !field.key || field.type.name!="ID"]
@@ -78,7 +70,7 @@
 			<tr x-ng-repeat="data in datalist | filter:query | orderBy:orderProp">
 			<td class="id">{{$index+1}}</td>
 				[#assign keyfieldname][/#assign]
-			[#list type.fields as field][#if !field.array  && !field.ignorable && !field.attrs.Attach??]
+			[#list type.fields as field][#if !field.array  && !field.ignorable]
 				[#switch field.refer]
 				[#case "ByVal"]
 					[#if field.key]
