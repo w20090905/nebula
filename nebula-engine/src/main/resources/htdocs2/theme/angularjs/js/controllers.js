@@ -75,7 +75,7 @@ function AttachedEntityListCtrl($scope, $route, $resource, $routeParams) {
 	$scope.attachedTypename = $routeParams.attachedtypename;
 	$scope.attachedID = $routeParams.attachedid;
 	var DataResource = $scope.resource = $resource('/d/:attachedtypename/:attachedid',$routeParams, {});
-	$scope.data = DataResource.get($routeParams,function() {
+	$scope.attachedData = DataResource.get($routeParams,function() {
 		$scope.$dataReady();
 	});
 	
@@ -96,6 +96,59 @@ function AttachedEntityListCtrl($scope, $route, $resource, $routeParams) {
 		});
 	};
 }
+
+function AttachedNewEntityCtrl($scope, $route, $resource, $routeParams, $location,$interpolate) {
+	'use strict';
+	$scope.attachedTypename = $routeParams.attachedtypename;
+	$scope.attachedID = $routeParams.attachedid;
+	var DataResource = $scope.resource = $resource('/d/:attachedtypename/:attachedid',$routeParams, {});
+	$scope.attachedData = DataResource.get($routeParams,function() {
+		$scope.$dataReady();
+	});
+	
+	$scope.typename = $routeParams.typename;
+	
+	var DataResource = $resource('/d/:attachedtypename/:attachedid/:typename/', $routeParams);
+	$scope.data = {};
+	$scope.data[$scope.attachedTypename] = $scope.attachedData; // TODO
+	$scope.data.$save = DataResource.prototype.$save;
+	$scope.$save = function() {
+		$scope.data.$save(function(u, getResponseHeaders) {
+			$location.url($interpolate('/d/{{attachedtypename}}/{{attachedid}}/{{typename}}/')($routeParams));
+		});
+	};
+}
+
+function AttachedEntityCtrl($scope, $route, $resource, $routeParams, $location,$interpolate) {
+	'use strict';
+	$scope.attachedTypename = $routeParams.attachedtypename;
+	$scope.attachedID = $routeParams.attachedid;
+	var DataResource = $scope.resource = $resource('/d/:attachedtypename/:attachedid',$routeParams, {});
+	$scope.attachedData = DataResource.get($routeParams,function() {
+		$scope.$dataReady();
+	});
+	
+	$scope.typename = $routeParams.typename;
+	var DataResource = $scope.resource = $resource('/d/:typename/:id',
+			$routeParams, {
+				'save' : {
+					method : 'PUT'
+				}
+			});
+	$scope.data = DataResource.get($routeParams,function() {
+		$scope.$dataReady();
+	});
+	$scope.update = true;
+	$scope.$save = function() {
+		$scope.data.$save(function(u, getResponseHeaders) {
+			$location.url($interpolate('/d/{{attachedtypename}}/{{attachedid}}/{{typename}}/')($routeParams));
+		});
+	};
+	$scope.$back = function() {
+		$location.url($interpolate('/d/{{attachedtypename}}/{{attachedid}}/{{typename}}/')($routeParams));
+	};
+}
+
 
 function EntityListCtrl($scope, $route, $resource, $routeParams) {
 	'use strict';

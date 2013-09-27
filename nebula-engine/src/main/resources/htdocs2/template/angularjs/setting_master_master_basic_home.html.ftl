@@ -103,6 +103,15 @@
 	[/#if]
 [/#macro]
 
+[#macro hiddenRefer field pField id ngModel key=false] [#-- // TODO Need Refact --]
+		[#list field.type.fields as in2f][#t]
+			[#if !in2f.array && in2f.refer == "ByVal"
+					&& (in2f.key || in2f.core)]
+						<input type="hidden" id="${ngModel}${in2f.name}"  value="{{attachedData.${in2f.name}}}"   x-ng-model="${ngModel}${in2f.name}" />		
+			[/#if]
+		[/#list]
+[/#macro]
+
 [#assign opening=false /]
 [#macro controls field for label]	
 	[#if !opening]	
@@ -133,16 +142,9 @@
 [/#macro]
 
 
-[#assign attachFieldName][/#assign]
-[#list type.fields as f][#t]
-	[#if f.attrs.Attach??]	
-		[#assign attachFieldName]${f.name}[/#assign]
-	[/#if]
-[/#list]
-
 <article class="module width_full">
 	<header>
-		<h1 class="tabs_involved">${attachedType.displayName} - {{data.${attachFieldName}Name}}</h1>
+		<h1 class="tabs_involved">${attachedType.displayName} - {{attachedData.Name}}</h1>
 		<div class="btn-toolbar">
 			<div class="btn-group">
 		  		<a href="#/d/Type/${type.name}" class="btn">Define</a>
@@ -170,11 +172,11 @@
 						<span class="icon"> <i class="icon-align-justify"></i>
 						</span>
 						<ul class="nav nav-tabs">
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.${attachFieldName}Name}}">概述</a></li>
+				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}">概述</a></li>
 	[#list attachedType.attachedBy as atby][#if atby.standalone=="Transaction"]
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.${attachFieldName}Name}}/${atby.name}/">${atby.name}</a></li>
+				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}/${atby.name}/">${atby.name}</a></li>
 	[/#if][/#list]
-							<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/setting/info">Settings</a></li>
+							<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}/setting/info">Settings</a></li>
 						</ul>
 						<!-- <div class="buttons btn-toolbar" x-ng-show="data.standealone='Master'">
 							<input type="text" x-ng-model="query" class="input-medium search-query ctrl" placeholder="Filter">	
@@ -183,12 +185,12 @@
 					</div>
 					<div class="widget-content nopadding">
 						<ul class="nav nav-tabs">
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.${attachFieldName}Name}}/setting/info">信息</a></li>
+				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}/setting/info">信息</a></li>
 	[#list attachedType.attachedBy as atby][#if atby.standalone!="Transaction"]
 		[#if atby.name == type.name]
-				  			<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{data.${attachFieldName}Name}}/setting/${atby.name}/">${atby.name}</a></li>
+				  			<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}/setting/${atby.name}/">${atby.name}</a></li>
 		[#else]
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.${attachFieldName}Name}}/setting/${atby.name}/">${atby.name}</a></li>
+				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}/setting/${atby.name}/">${atby.name}</a></li>
 		[/#if]
 	[/#if][/#list]
 						</ul>
@@ -293,6 +295,7 @@
 					[#case "ByRef"] <!--  Type A3   -->
 					[#case "Cascade"] <!--  Type A4   -->
 					[#if of.attrs.Attach??]
+					[@hiddenRefer field=of pField=of id="${of.name}" ngModel="data.${of.name}"	key=(of.key)/]
 					[#else]					
 				[@controls field=of for="${of.name}" label="${of.displayName}"]
 					[@popupBox field=of pField=of id="${of.name}" ngModel="data.${of.name}"  placeholder="${of.name}"
@@ -432,7 +435,7 @@
 	
 		<div class="form-actions">
 	  		<input type="submit" class="btn btn-primary" x-ng-disabled="form.$invalid" value="Save changes">
-	  		<a href="#/d/${attachedType.name}/{{data.${attachFieldName}Name}}/${type.name}/" class="btn">返回</a>
+	  		<a href="#/d/${attachedType.name}/{{attachedData.Name}}/${type.name}/" class="btn">返回</a>
 			<!-- button type="button" class="btn">Cancel</button--> 
 		</div>
 		<!-- End Form -->

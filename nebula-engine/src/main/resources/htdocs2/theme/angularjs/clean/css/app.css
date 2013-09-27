@@ -8,8 +8,21 @@ table {
 	table-layout: fixed;
 	overflow: hidden;
 }
+.widget-content{
+	position: relative;
+}
+.nav-tabs .buttons{
+	position: absolute;
+	top: 0;
+	right:0;
+	float: right;
+	margin: 6px 10px 0 0;	
+}
 
 .widget-title .buttons {
+	position: absolute;
+	top: 0;
+	right:0;
 	float: right;
 	margin: 6px 10px 0 0;
 }

@@ -1,7 +1,7 @@
 [#ftl/]
 <article class="module width_full">
 	<header>
-		<h1 class="tabs_involved">${attachedType.displayName} - {{data.Name}}</h1>
+		<h1 class="tabs_involved">${attachedType.displayName} - {{attachedData.Name}}</h1>
 		<div class="btn-toolbar">
 			<div class="btn-group">
 		  		<a href="#/d/Type/${type.name}" class="btn">Define</a>
@@ -29,26 +29,33 @@
 						<span class="icon"> <i class="icon-align-justify"></i>
 						</span>
 						<ul class="nav nav-tabs">
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}">概述</a></li>
+				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}">概述</a></li>
 	[#list attachedType.attachedBy as atby][#if atby.standalone=="Transaction"]
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/${atby.name}/">${atby.name}</a></li>
+				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}/${atby.name}/">${atby.name}</a></li>
 	[/#if][/#list]
-							<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/setting/info">Settings</a></li>
+							<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}/setting/info">Settings</a></li>
 						</ul>
-
 					</div>
+					
 					<div class="widget-content nopadding">
 					
 						<ul class="nav nav-tabs">
 				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/setting/info">信息</a></li>
 	[#list attachedType.attachedBy as atby][#if atby.standalone!="Transaction"]
 		[#if atby.name == type.name]
-				  			<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/setting/${atby.name}/">${atby.name}</a></li>
+				  			<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}/setting/${atby.name}/">${atby.name}</a></li>
 		[#else]
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/setting/${atby.name}/">${atby.name}</a></li>
+				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}/setting/${atby.name}/">${atby.name}</a></li>
 		[/#if]
 	[/#if][/#list]
+	
+						<div class="buttons btn-toolbar pull-right" x-ng-show="data.standealone='Master'">
+							<input type="text" x-ng-model="query" class="input-medium search-query ctrl" placeholder="Filter">	
+							<a href="#/d/${attachedType.name}/{{attachedData.Name}}/${type.name}/!new" class="btn btn-small btn-success ctrl"><i class="icon-plus icon-white"></i> 新建</a>
+						</div>
+						
 						</ul>
+						
 			
 	<table class="table table-striped table-bordered table-hover">
 		<thead>
@@ -88,11 +95,11 @@
 				[#case "ByVal"]
 					[#if field.key]
 						[#if field.type.name!="ID"]
-			<td><a href="#/d/${type.name}/{{data.${field.name}}}">{{data["${field.name}"]}}</a></td>
+			<td><a href="#/d/${attachedType.name}/{{attachedData.Name}}/${type.name}/{{data.${field.name}}}">{{data["${field.name}"]}}</a></td>
 						[/#if]
 						[#assign keyfieldname]${field.name}[/#assign]			
 					[#elseif field.core]	
-			<td><a href="#/d/${type.name}/{{data.${keyfieldname}}}">{{data["${field.name}"]}}</a></td>
+			<td><a href="#/d/${attachedType.name}/{{attachedData.Name}}/${type.name}/{{data.${keyfieldname}}}">{{data["${field.name}"]}}</a></td>
 					[#else]	
 			<td>{{data["${field.name}"]}}</td>
 					[/#if]
