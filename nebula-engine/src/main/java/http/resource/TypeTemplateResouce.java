@@ -82,6 +82,7 @@ public class TypeTemplateResouce extends AbstractResouce {
 	final Map<String, Object> root = new HashMap<String, Object>();
 	final DataRepos dataWareHouse;
 	final Broker<DataStore<Entity>> attributes;
+	final String path;
 	// final TypeLoader typeLoader;
 	final String theme;
 	final String skin;
@@ -89,9 +90,9 @@ public class TypeTemplateResouce extends AbstractResouce {
 	// final String actionName;
 	final String name;
 
-	public TypeTemplateResouce(Configuration cfg, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes, String theme, String skin, Broker<Type> type,
-			String specName, String layoutName, String actionName) {
-		this(cfg, dataWareHouse, attributes, theme, skin, type, makeName(type, specName, layoutName, actionName));
+	public TypeTemplateResouce(Configuration cfg, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes, String path, String theme, String skin,
+			Broker<Type> type, String specName, String layoutName, String actionName) {
+		this(cfg, dataWareHouse, attributes, path, theme, skin, type, makeName(type, specName, layoutName, actionName));
 	}
 
 	private static String makeName(Broker<Type> type, String specName, String layout, String actionName) {
@@ -104,8 +105,8 @@ public class TypeTemplateResouce extends AbstractResouce {
 		return name;
 	}
 
-	public TypeTemplateResouce(Configuration cfg, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes, String theme, String skin, Broker<Type> type,
-			String name) {
+	public TypeTemplateResouce(Configuration cfg, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes, String path, String theme, String skin,
+			Broker<Type> type, String name) {
 		super("text/template", 0, 0);// TODO Not realized TypeTemplateResouce
 										// super("text/template", 0, 0)
 
@@ -115,20 +116,25 @@ public class TypeTemplateResouce extends AbstractResouce {
 		this.dataWareHouseModel = new DataPersisterTemplateHashModel(dataWareHouse);
 		this.attributes = attributes;
 
+		this.path = path;
+
 		this.theme = theme;
 		this.skin = skin;
 
 		this.type = type;
 		this.name = name;
+
+		root.put("alldatas", dataWareHouseModel);
+		root.put("_path", path);
+		root.put("_theme", this.theme);
+		root.put("_skin", this.skin);
+		root.put("_spec", "admin");
 	}
 
 	protected void fillData() {
 		root.put("type", layout(type.get()));
-
 		DataStore<Entity> attrs = attributes.get();
-
 		root.put("attrs", attrs);
-		root.put("alldatas", dataWareHouseModel);
 	}
 
 	protected void get(HttpServletRequest req) throws IOException {

@@ -120,7 +120,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 				if (specName == null && type.get().getStandalone() == TypeStandalone.Master) {
 					specName = "setting";
 				}
-				return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, attachedType, type, specName, layoutName,
+				return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, path, theme, skin, attachedType, type, specName, layoutName,
 						actionName);
 			case 3:
 				typeName = names[start + 0];
@@ -133,10 +133,10 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 					if (specName == null && type.get().getStandalone() == TypeStandalone.Master) {
 						specName = "setting";
 					}
-					return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, attachedType, type, specName, layoutName,
-							actionName);
+					return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, path, theme, skin, attachedType, type, specName,
+							layoutName, actionName);
 				}
-				return new TypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, type, specName, layoutName, actionName);
+				return new TypeTemplateResouce(templateConfig, dataWareHouse, attributes, path, theme, skin, type, specName, layoutName, actionName);
 
 			case 2:
 				typeName = names[start + 0];
@@ -150,10 +150,10 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 					if (specName == null && type.get().getStandalone() == TypeStandalone.Master) {
 						specName = "setting";
 					}
-					return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, attachedType, type, specName, layoutName,
-							actionName);
+					return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, path, theme, skin, attachedType, type, specName,
+							layoutName, actionName);
 				}
-				return new TypeTemplateResouce(templateConfig, dataWareHouse, attributes, theme, skin, type, specName, layoutName, actionName);
+				return new TypeTemplateResouce(templateConfig, dataWareHouse, attributes, path, theme, skin, type, specName, layoutName, actionName);
 			}
 
 		} else {

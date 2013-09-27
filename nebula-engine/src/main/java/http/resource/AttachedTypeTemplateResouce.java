@@ -14,9 +14,9 @@ public class AttachedTypeTemplateResouce extends TypeTemplateResouce {
 
 	final Broker<Type> attachedType;
 
-	public AttachedTypeTemplateResouce(Configuration cfg, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes, String theme, String skin,
-			Broker<Type> attachedType, Broker<Type> type, String specName, String layoutName, String actionName) {
-		super(cfg, dataWareHouse, attributes, theme, skin, type, makeName(attachedType, type, specName, layoutName, actionName));
+	public AttachedTypeTemplateResouce(Configuration cfg, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes, String path, String theme,
+			String skin, Broker<Type> attachedType, Broker<Type> type, String specName, String layoutName, String actionName) {
+		super(cfg, dataWareHouse, attributes, path, theme, skin, type, makeName(attachedType, type, specName, layoutName, actionName));
 		this.attachedType = attachedType;
 	}
 

@@ -6,7 +6,7 @@ angular.module('appAdmin', ['nebulaFilters', 'nebulaServices','nebulaDirectives'
 		$routeProvider.
 			/* Template edit */
 			when('/t/template/:typename-:cat.html.ftl', {templateUrl: '/theme/angularjs/unicorn/Theme-edit.html', controller: FreeMarkerCtrl}).
-			when('/t/:theme/:skin/:typename-:cat.html', {templateUrl: '/theme/angularjs/unicorn/Theme-edit.html', controller: AngularJSCtrl}).
+			when('/t/theme/:theme/:skin/:typename-:cat.html', {templateUrl: '/theme/angularjs/unicorn/Theme-edit.html', controller: AngularJSCtrl}).
 
 			/* Type edit */
 			when('/d/Type/', {templateUrlWP: '/theme/angularjs/unicorn/Type-list.html',   controller: TypeListCtrl}).

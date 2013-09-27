@@ -1,27 +1,10 @@
 [#ftl/]
-<article class="module width_full">
-	<header>
-		<h1 class="tabs_involved">${attachedType.displayName} - {{attachedData.Name}}</h1>
-		<div class="btn-toolbar">
-			<div class="btn-group">
-		  		<a href="#/d/Type/${type.name}" class="btn">Define</a>
-				  <button class="btn dropdown-toggle" data-toggle="dropdown">
-				    <span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu">
-			  	<li><a tabindex="-1" href="#/t/angularjs/unicorn/${type.name}-list.html">View Template</a></li>
-				  </ul>
-			</div>
-		</div>
-	</header>
-	
-	<div id="breadcrumb">
-		<a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
-		<a href="#" class="tip-bottom">Form elements</a>
-		<a href="#" class="current">Common elements</a>
-	</div>
-	
-	<div class="container-fluid">
+[#import "./lib/controls.ftl" as nc]
+[#import "./lib/forms.ftl" as nf]
+[#import "./lib/layouts.ftl" as nl]
+
+[@nl.article title="${attachedType.displayName} - {{attachedData.Name}}" type=type]
+
 		<div class="row-fluid">
 			<div class="span12">
 				<div class="widget-box">
@@ -120,6 +103,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	
-</article>
+
+[/@nl.article]

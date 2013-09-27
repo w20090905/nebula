@@ -10,8 +10,8 @@ import freemarker.template.Configuration;
 public class SettingTypeTemplateResouce extends TypeTemplateResouce {
 
 	public SettingTypeTemplateResouce(Configuration cfg, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes, String theme, String skin,
-			Broker<Type> type, String spec, String layout, String actionName) {
-		super(cfg, dataWareHouse, attributes, theme, skin, type, makeName(spec, type, layout, actionName));
+			Broker<Type> type, String path, String spec, String layout, String actionName) {
+		super(cfg, dataWareHouse, attributes, path, theme, skin, type, makeName(spec, type, layout, actionName));
 	}
 
 	private static String makeName(String spec, Broker<Type> type, String layout, String actionName) {
