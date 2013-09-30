@@ -16,25 +16,41 @@ import util.FileUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-public class EditableTypeLoader extends TypeLoader {
+public class EditableTypeLoader extends TypeLoader implements Runnable {
 	final List<File> paths;
 	final Map<URL, Type> loadedTypes;
 
-	public EditableTypeLoader(TypeLoader parent, File root) {
+	public EditableTypeLoader(TypeLoader parent, File... paths) {
 		super(parent);
 		this.paths = Lists.newCopyOnWriteArrayList();
-		this.paths.add(root);
+		for (File file : paths) {
+			this.paths.add(file);
+		}
 		loadedTypes = Maps.newHashMap();
-		this.doLoadFolder(root, root);
-
 	}
 
-	public void loadFolder(File folder) {
+	public void start() {
+		new Thread(this).start();
+	}
+
+	@Override
+	public void run() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		}
+		for (File path : this.paths) {
+			this.doLoadFolder(path, path);
+		}
+	}
+
+	public void registerPath(File folder) {
 		this.paths.add(0, folder);
 		if (log.isDebugEnabled()) {
-			log.debug("load type define from folder - " + folder.getPath());
+			log.debug("register folder - " + folder.getPath());
 		}
-		doLoadFolder(folder, folder);
 	}
 
 	private void doLoadFolder(File root, File d) {
@@ -97,7 +113,7 @@ public class EditableTypeLoader extends TypeLoader {
 				}
 
 				unlink(oldType);
-				
+
 				if (oldType.getTypeLoader() != this) {
 					return oldType.getTypeLoader().update(oldType, newCode);
 				}

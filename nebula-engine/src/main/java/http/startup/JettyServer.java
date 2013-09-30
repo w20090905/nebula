@@ -42,5 +42,5 @@ public class JettyServer {
 		}
 	}
 
-	private static final String LICENCE = "Copyright (C) 2013-2013 by Wangshilian\n";
+	private static final String LICENCE = "Copyright (C) 2013-2013 by Jixian\n";
 }

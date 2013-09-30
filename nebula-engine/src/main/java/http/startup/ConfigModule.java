@@ -80,7 +80,7 @@ public class ConfigModule extends AbstractModule {
 
 			// Type Define locator
 			EditableTypeLoader typeLoader = new EditableTypeLoader(new SystemTypeLoader(), new File("apps/system"));
-			typeLoader.loadFolder(new File("apps/ids"));
+			typeLoader.registerPath(new File("apps/ids"));
 			
 			this.bind(TypeDatastore.class).toInstance(new TypeDatastore(typeLoader));
 
@@ -178,6 +178,8 @@ public class ConfigModule extends AbstractModule {
 					site.register("u", userHomeResouceEngine);
 				}
 			});
+			
+			typeLoader.start();
 
 		} catch (IOException e) {
 			e.printStackTrace();
