@@ -1,0 +1,8 @@
+tx Issue{
+!ID;
+@Attach Project;
+@InlineShow *IssueType;
+*Subject;
+?Note;
+@InlineShow ?Version;
+}
