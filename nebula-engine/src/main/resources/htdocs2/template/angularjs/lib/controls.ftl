@@ -106,8 +106,7 @@
 [#macro hiddenRefer field pField id ngModel key=false] [#-- // TODO Need Refact --]
 		[#list field.type.fields as in2f][#t]
 			[#if !in2f.array && in2f.refer == "ByVal"
-					&& (in2f.key || in2f.core)]
-						<input type="hidden" id="${ngModel}${in2f.name}"  value="{{attachedData.${in2f.name}}}"   x-ng-model="${ngModel}${in2f.name}" />		
+					&& (in2f.key || in2f.core)]						
 			[/#if]
 		[/#list]
 [/#macro]

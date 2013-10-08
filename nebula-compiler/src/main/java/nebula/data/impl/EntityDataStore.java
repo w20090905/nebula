@@ -39,7 +39,7 @@ public class EntityDataStore implements DataStoreEx<Entity> {
 		classificatores = Maps.newHashMap();
 
 		for (Field f : type.getFields()) {
-			if (f.getAttrs().containsKey("GroupBy")) {
+			if (f.getAttrs().containsKey(Type.GROUP_BY) || f.getAttrs().containsKey(Type.ATTACH)) {
 				if (f.getType().getStandalone() == TypeStandalone.Basic) {
 					final String name = f.getName();
 					DataClassificator<String, Entity> classificator = new DataClassificator<String, Entity>( new Function<Entity, String>() {
@@ -64,7 +64,7 @@ public class EntityDataStore implements DataStoreEx<Entity> {
 								}
 							});
 							this.values.addListener(classificator);
-							classificatores.put(name, classificator);
+							classificatores.put(f.getName(), classificator);
 							if (log.isDebugEnabled()) {
 								log.debug(type.getName() + " add classificator " + name);
 							}

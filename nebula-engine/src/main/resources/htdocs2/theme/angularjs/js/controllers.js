@@ -111,8 +111,12 @@ function AttachedNewEntityCtrl($scope, $route, $resource, $routeParams, $locatio
 	var DataResource = $resource('/d/:attachedtypename/:attachedid/:typename/', $routeParams);
 	$scope.data = {};
 	$scope.data[$scope.attachedTypename] = $scope.attachedData; // TODO
+	
 	$scope.data.$save = DataResource.prototype.$save;
 	$scope.$save = function() {
+		angular.forEach($scope.attachedData || {}, function(value, key) {
+			$scope.data[$scope.attachedTypename + key] = value;
+		});
 		$scope.data.$save(function(u, getResponseHeaders) {
 			$location.url($interpolate('/d/{{attachedtypename}}/{{attachedid}}/{{typename}}/')($routeParams));
 		});

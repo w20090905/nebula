@@ -127,15 +127,15 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 				layoutName = names[start + 1];
 				actionName = names[start + 2];
 				type = typeBrokers.getBroker(typeName);
-				if (type.get().getAttrs().containsKey(Type.ATTACH_TO)) {
-					attachedTypeName = (String) type.get().getAttrs().get(Type.ATTACH_TO);
-					attachedType = typeBrokers.getBroker(attachedTypeName);
-					if (specName == null && type.get().getStandalone() == TypeStandalone.Master) {
-						specName = "setting";
-					}
-					return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, path, theme, skin, attachedType, type, specName,
-							layoutName, actionName);
-				}
+//				if (type.get().getAttrs().containsKey(Type.ATTACH_TO)) {
+//					attachedTypeName = (String) type.get().getAttrs().get(Type.ATTACH_TO);
+//					attachedType = typeBrokers.getBroker(attachedTypeName);
+//					if (specName == null && type.get().getStandalone() == TypeStandalone.Master) {
+//						specName = "setting";
+//					}
+//					return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, path, theme, skin, attachedType, type, specName,
+//							layoutName, actionName);
+//				}
 				return new TypeTemplateResouce(templateConfig, dataWareHouse, attributes, path, theme, skin, type, specName, layoutName, actionName);
 
 			case 2:
@@ -144,15 +144,15 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 				actionName = names[start + 1];
 
 				type = typeBrokers.getBroker(typeName);
-				if (type.get().getAttrs().containsKey(Type.ATTACH_TO)) {
-					attachedTypeName = (String) type.get().getAttrs().get(Type.ATTACH_TO);
-					attachedType = typeBrokers.getBroker(attachedTypeName);
-					if (specName == null && type.get().getStandalone() == TypeStandalone.Master) {
-						specName = "setting";
-					}
-					return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, path, theme, skin, attachedType, type, specName,
-							layoutName, actionName);
-				}
+//				if (type.get().getAttrs().containsKey(Type.ATTACH_TO)) {
+//					attachedTypeName = (String) type.get().getAttrs().get(Type.ATTACH_TO);
+//					attachedType = typeBrokers.getBroker(attachedTypeName);
+//					if (specName == null && type.get().getStandalone() == TypeStandalone.Master) {
+//						specName = "setting";
+//					}
+//					return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, path, theme, skin, attachedType, type, specName,
+//							layoutName, actionName);
+//				}
 				return new TypeTemplateResouce(templateConfig, dataWareHouse, attributes, path, theme, skin, type, specName, layoutName, actionName);
 			}
 

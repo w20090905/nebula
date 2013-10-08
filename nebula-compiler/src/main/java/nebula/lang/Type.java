@@ -10,6 +10,9 @@ import util.InheritHashMap;
 public class Type implements Timable {	
 	public static final String ATTACH_TO = "AttachTo";
 	public static final String ATTACH = "Attach";
+	public static final String GROUP_BY = "GroupBy";
+	
+	
 	
 	public static final String CTOR = "<ctor>";
 	public static final String ONSAVE = "<onSave>";
