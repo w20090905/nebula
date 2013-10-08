@@ -1,0 +1,2 @@
+*/5 * * * * pi cd /home/pi/nebula-redmine-backup && /usr/bin/mysqldump -uredmine_default -p'Pa$$w0rd' redmine_baseline --skip-comments > redmine_baseline.mysql.sql && sudo rsync -a /var/lib/redmine/default/files ./ && sudo chmod 777 files -R &&  git fetch -q --all &&  git add . && git commit -a -m "Auto Backup" && git push
+
