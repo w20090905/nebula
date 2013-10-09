@@ -44,12 +44,12 @@
 					<li><a class="sOutbox" title="" href="#">outbox</a></li>
 					<li><a class="sTrash" title="" href="#">trash</a></li>
 				</ul></li>
-			<li class="btn btn-inverse"><a href="/u/{{LoginUserID}}/Admin" class="tip-bottom" title="系统配置"><i class="icon icon-cog"></i> </a></li>
-			<li class="btn btn-inverse"><a href="/login.html" class="tip-bottom" title="登出"><i class="icon icon-share-alt"></i> </a></li>
+			<li class="btn btn-inverse"><a href="/u/{{LoginUserID}}/Admin" class="tip-bottom" title="绯荤粺閰嶇疆"><i class="icon icon-cog"></i> </a></li>
+			<li class="btn btn-inverse"><a href="/login.html" class="tip-bottom" title="鐧诲嚭"><i class="icon icon-share-alt"></i> </a></li>
 		</ul>
 	</div>
 	<div id="sidebar">
-		<a href="#" class="visible-phone"><i class="icon icon-th-list"></i> 菜单</a>
+		<a href="#" class="visible-phone"><i class="icon icon-th-list"></i> 鑿滃崟</a>
 		<ul x-jsonDataUrl="/d/MenuBar/CommonUserMenu" class="ng-cloak">
 			<li class="section"><a href=""><span>{{jsonData.Title}}</span></a></li>
 			<li x-ng-repeat="menu in jsonData.Menu" class="submenu"><a x-ng-href="#{{menu.URL}}"><i class="icon {{menu.IconName}}"></i> <span>{{menu.Name}}</span><span class="label"

@@ -8,21 +8,23 @@ table {
 	table-layout: fixed;
 	overflow: hidden;
 }
-.widget-content{
+
+.widget-content {
 	position: relative;
 }
-.nav-tabs .buttons{
+
+.nav-tabs .buttons {
 	position: absolute;
 	top: 0;
-	right:0;
+	right: 0;
 	float: right;
-	margin: 6px 10px 0 0;	
+	margin: 6px 10px 0 0;
 }
 
 .widget-title .buttons {
 	position: absolute;
 	top: 0;
-	right:0;
+	right: 0;
 	float: right;
 	margin: 6px 10px 0 0;
 }
@@ -71,9 +73,7 @@ form.form-horizontal input.ng-valid.ng-dirty {
 	background-color: #78FA89;
 }
 
-.form-horizontal table tr.newLine input[type=text],
-.form-horizontal  table tr.newLine input[type=password],
-.form-horizontal  table tr.newLine textarea
+.form-horizontal table tr.newLine input[type=text],.form-horizontal  table tr.newLine input[type=password],.form-horizontal  table tr.newLine textarea
 	{
 	width: 90% !important;
 }
@@ -82,8 +82,8 @@ form.form-horizontal input.ng-valid.ng-dirty {
 	width: 90% !important;
 }
 
-.form-horizontal table tr.newLine .input-append input,
-.form-horizontal table tr.newLine .input-append .uneditable-input {
+.form-horizontal table tr.newLine .input-append input,.form-horizontal table tr.newLine .input-append .uneditable-input
+	{
 	width: 70% !important;
 }
 
@@ -117,9 +117,11 @@ a.inlinePopup{
 	font-weight: 800;
 	text-shadow: 0 1px 0 #000;
 }
+
 #sidebar>ul>li.section {
 	cursor: default;
 }
+
 #sidebar>ul>li.section a {
 	cursor: default;
 }
@@ -132,38 +134,34 @@ a.inlinePopup{
 	margin-right: 4px;
 }
 
-
-
-.widget-content > .table-bordered thead:first-child tr:first-child>th:first-child, 
-.widget-content >.table-bordered tbody:first-child tr:first-child>td:first-child, 
-.widget-content >.table-bordered tbody:first-child tr:first-child>th:first-child {
--webkit-border-top-left-radius: 0px;
-border-top-left-radius: 0px;
--moz-border-radius-topleft: 0px;
+.widget-content>.table-bordered thead:first-child tr:first-child>th:first-child,.widget-content>.table-bordered tbody:first-child tr:first-child>td:first-child,.widget-content>.table-bordered tbody:first-child tr:first-child>th:first-child
+	{
+	-webkit-border-top-left-radius: 0px;
+	border-top-left-radius: 0px;
+	-moz-border-radius-topleft: 0px;
 }
 
-.widget-content > .table-bordered thead tr>th:first-child, 
-.widget-content >.table-bordered tbody tr>td:first-child, 
-.widget-content >.table-bordered tbody tr>th:first-child {
-border-left: 0px;
+.widget-content>.table-bordered thead tr>th:first-child,.widget-content>.table-bordered tbody tr>td:first-child,.widget-content>.table-bordered tbody tr>th:first-child
+	{
+	border-left: 0px;
 }
 
-.widget-content > .table-bordered {
-border: 1px solid #ddd;
-border-collapse: separate;
-border: 0;
--webkit-border-radius: 0px;
--moz-border-radius: 0px;
-border-radius: 0px;
+.widget-content>.table-bordered {
+	border: 1px solid #ddd;
+	border-collapse: separate;
+	border: 0;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
 }
 
-.widget-box{
+.widget-box {
 	-webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#content article>header{
+#content article>header {
 	margin-top: 0px;
 	margin-bottom: -20px;
 	background: none;
@@ -171,11 +169,11 @@ border-radius: 0px;
 	padding-top: 1px;
 }
 
-#breadcrumb{
+#breadcrumb {
 	display: none;
 }
 
-#content{
+#content {
 	background: url("../img/content_bg.jpg");
 	min-height: 600px;
 }
@@ -183,7 +181,6 @@ border-radius: 0px;
 #search {
 	left: 160px;
 }
-
 
 #style-switcher {
 	top: 39px;
@@ -198,18 +195,20 @@ border-radius: 0px;
 	background-color: #000000;
 }
 
-tr.dataline-D{
+tr.dataline-D {
 	text-decoration: line-through;
 	color: grey;
 }
 
-div.required > .control-label{
+div.required>.control-label {
 	color: red;
 }
+
 .datepicker table {
 	width: inherit;
 	margin: 0;
 }
+
 .mask {
 	height: 100%;
 	width: 100%;
@@ -223,32 +222,37 @@ div.required > .control-label{
 
 .opacity {
 	opacity: 0.4;
-	filter: alpha(opacity = 30);
+	filter: alpha(opacity =   30);
 	background-color: #FFFFFF;
 }
 
-.innerPanel{
+.innerPanel {
 	position: relative;
 	min-height: 600px;
 }
 
-#content{
+#content {
 	margin-top: -38px;
 }
-.table th.id{
+
+.table th.id {
 	text-align: right;
 	width: 8%;
 	min-width: 100px;
 }
-.table td.id{
+
+.table td.id {
 	text-align: right;
 }
-.widget-box form.form-horizontal{
+
+.widget-box form.form-horizontal {
 	margin-bottom: 0px;
 }
-.widget-box form.form-horizontal .form-actions{
-	margin-bottom: 0px;	
+
+.widget-box form.form-horizontal .form-actions {
+	margin-bottom: 0px;
 }
+
 .form-horizontal .control-label {
 	width: 120px;
 }
