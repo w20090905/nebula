@@ -61,15 +61,12 @@
 		</thead>
 		<tbody>
 			<tr x-ng-repeat="data in datalist | filter:query | orderBy:orderProp">
-			<td class="id">{{$index+1}}</td>
 				[#assign keyfieldname][/#assign]
 			[#list type.fields as field][#if !field.array  && !field.ignorable && !field.attrs.Attach??]
 				[#switch field.refer]
 				[#case "ByVal"]
 					[#if field.key]
-						[#if field.type.name!="ID"]
 			<td><a href="#/d/${attachedType.name}/{{attachedData.Name}}/${type.name}/{{data.${field.name}}}">{{data["${field.name}"]}}</a></td>
-						[/#if]
 						[#assign keyfieldname]${field.name}[/#assign]			
 					[#elseif field.core]	
 			<td><a href="#/d/${attachedType.name}/{{attachedData.Name}}/${type.name}/{{data.${keyfieldname}}}">{{data["${field.name}"]}}</a></td>
@@ -84,7 +81,9 @@
 					[#break]
 				[#case "ByRef"]
 				[#case "Cascade"]
-					<td>[#list field.type.fields as rF]
+					<td>[#if field.unique]<a href="#/d/${attachedType.name}/{{attachedData.Name}}/${type.name}/{{data.${keyfieldname}}}">[/#if]
+					
+					[#list field.type.fields as rF]
 						[#if field.key && rF.key && rF.name!="ID"]
 						{{ data["${field.name}${rF.name}"] }}&nbsp;
 						[#elseif rF.key && rF.key && rF.name!="ID"]
@@ -92,7 +91,8 @@
 						[#elseif rF.core]
 						{{ data["${field.name}${rF.name}"] }}&nbsp;
 						[/#if]
-					[/#list]</td>
+					[/#list]
+					[#if field.core]</a>[/#if]</td>
 					[#break]
 				[/#switch]
 			[/#if][/#list]
