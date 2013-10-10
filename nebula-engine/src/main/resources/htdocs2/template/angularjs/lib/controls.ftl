@@ -113,29 +113,21 @@
 
 [#assign opening=false /]
 [#macro controls field for label]	
-	[#if !opening]	
-	<div class="row-fluid">
-	[/#if]
+
 	[#if field.attrs.FormatType! = "textarea"]	
-		<div class="control-group span12">
+		<div class="control-group">
 			<label class="control-label" for="${for}">${label}</label>		
 			<div class="controls">
 			[#nested]
 			</div>
 		</div>
 	[#else]
-		<div class="control-group span6">
+		<div class="control-group">
 			<label class="control-label" for="${for}">${label}</label>		
 			<div class="controls">
 			[#nested]
 			</div>
 		</div>
 	[/#if]	
-	
-	[#if !opening && field.attrs.HasFollowing??]	
-		[#assign opening=true/]		
-	[#else]	
-	</div>
-		[#assign opening=false /]
-	[/#if]
+
 [/#macro]

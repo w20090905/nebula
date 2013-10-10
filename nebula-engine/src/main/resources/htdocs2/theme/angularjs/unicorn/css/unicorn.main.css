@@ -99,14 +99,12 @@ a:hover {
 #user-nav > ul > li > a:hover, #user-nav > ul > li.open > a {
 	color: #ffffff;
 }
-/*
 #user-nav > ul > li > a > i, #sidebar li a i {
 	vertical-align: top;
-	color: white;
 	background-image: url('../img/glyphicons-halflings-white.png');
 	opacity: .5;
 	margin-top: 2px;
-}*/
+}
 #user-nav > ul > li > a:hover > i, #user-nav > ul > li.open > a > i {
 	opacity: 1;
 }
@@ -133,7 +131,7 @@ a:hover {
     display: block;
     float: left;
     position: relative;
-    width: 160px;
+    width: 220px;
     z-index: 16;
 }
 
@@ -142,7 +140,7 @@ a:hover {
 	margin: 10px 0 0;
 	padding: 0;
 	position: absolute;
-	width: 160px;
+	width: 220px;
 }
 #sidebar > ul > li {
 	display: block;	
@@ -201,7 +199,7 @@ a:hover {
 /* Content */
 #content {
     background: none repeat scroll 0 0 #eeeeee;
-    margin-left: 160px;
+    margin-left: 220px;
     margin-right: 0;
     padding-bottom: 25px;
     position: relative;
@@ -311,8 +309,7 @@ a:hover {
 }
 #style-switcher i {
 	display: inline-block;
-	vertical-align: top;
-	margin: 8px;
+	margin: -5px 10px 0 10px;
 }
 #style-switcher i:hover {
 	cursor: pointer;

@@ -6,7 +6,7 @@
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	<h3>${type.name}</h3>
-	<div class="ctrls">
+	<div class="buttons">
 		<input type="text" x-ng-model="query" class="input-medium search-query ctrl" placeholder="Filter"/>
 	</div>
 </div>
@@ -44,7 +44,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="data in datalist | filter:query | orderBy:orderProp" ng-click="$ret($index)">
+			<tr ng-repeat="data in datalist | filter:query | orderBy:orderProp" ng-click="$retData(this.data)">
 			<td class="id">{{$index+1}}</td>
 			  
 			[#list type.fields as field][#if !field.array && (field.key || field.core)]

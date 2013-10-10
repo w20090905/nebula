@@ -20,18 +20,12 @@ table {
 }
 
 /* Main Page */
+/*
 #search {
 	left: 160px;
-}
+}*/
 
-#sidebar>ul>li.section a {
-	text-transform: uppercase;
-	padding: 4px 0 4px 8px;
-	font-size: 11px;
-	font-weight: 800;
-	text-shadow: 0 1px 0 #000;
-}
-
+/* don't need ?
 #sidebar>ul>li.section {
 	cursor: default;
 }
@@ -39,7 +33,20 @@ table {
 #sidebar>ul>li.section a {
 	cursor: default;
 }
+*/
 
+/* change top level menu font */
+#sidebar>ul>li.section a {
+	text-transform: uppercase;
+	padding: 4px 0 4px 8px;
+	font-size: 11px;
+	font-weight: 800;
+	text-shadow: 0 1px 0 #000;
+}
+#user-nav > ul > li > a > i, #sidebar li a i {
+	background: none;
+}
+/* 
 #sidebar>ul>li>a {
 	padding: 4px 0 4px 8px;
 }
@@ -51,39 +58,39 @@ table {
 #sidebar>ul>li>ul>li>a>i {
 	margin-right: 10px;
 }
+*/
 
 #content {
 	background: url("../img/content_bg.jpg");
 	min-height: 600px;
 }
 
-#content {
+#content .innerPanel {
+	position: relative;
+	min-height: 600px;
+}
+
+
+#content{
 	margin-top: -38px;
 }
 
 #content article>header {
 	background: none;
-	min-height: 50px;
+	min-height: 80px;
 	margin-top: 0px;
 	margin-bottom: -20px;
 	padding-top: 1px
 }
 
-#content article>header h1,#content article>header .btn-toolbar {
-	margin-top: 10px;
-}
-
-#content article>header .btn-toolbar {
-	margin-top: -40px;
+#content article>header h1{
+	margin-top: 20px;
 }
 
 #breadcrumb {
 	display: none;
 }
 
-#breadcrumb a {
-	padding: 6px 20px 6px 10px;
-}
 
 #style-switcher {
 	top: 39px;
@@ -111,31 +118,27 @@ table {
 	top: 0;
 	right: 0;
 	float: right;
-	margin: 6px 10px 0 0;
+	margin: 4px 10px 0 0;
 }
 
-.widget-title .search-query {
-	padding-right: 12px;
-	padding-left: 12px;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	margin-bottom: 0;
-	-webkit-border-radius: 16px;
-	-moz-border-radius: 16px;
-	border-radius: 16px;
-	height: 20px;
-	margin-right: 1em;
+.widget-title .buttons input,.widget-title .buttons .btn{
+	margin-right: 1em;	
 }
 
-.nav-tabs .buttons {
+.widget-content {
+	position: relative;
+}
+
+.widget-content .nav-tabs {
+	margin-bottom: 0px;
+}
+
+.widget-content .nav-tabs .buttons {
 	position: absolute;
 	top: 0;
 	right: 0;
 	float: right;
-	margin: 6px 10px 0 0;
-}
-.widget-content {
-	position: relative;
+	margin: 4px 10px 0 0;
 }
 
 .widget-content>.table-bordered thead:first-child tr:first-child>th:first-child,.widget-content>.table-bordered tbody:first-child tr:first-child>td:first-child,.widget-content>.table-bordered tbody:first-child tr:first-child>th:first-child
@@ -159,46 +162,38 @@ table {
 	border-radius: 0px;
 }
 
-.widget-content .nav-tabs {
-	margin-bottom: 0px;
-}
-
 
 /* form */
-
-
 form.form-horizontal input.ng-valid.ng-dirty {
 	background-color: #78FA89;
 }
-
 .form-horizontal table tr.newLine input[type=text],.form-horizontal  table tr.newLine input[type=password],.form-horizontal  table tr.newLine textarea
 	{
-	width: 90% !important;
+	width: 92% !important;
 }
 
 .form-horizontal table tr.newLine .input-append {
-	width: 90% !important;
+	width: 95% !important;
 }
 
 .form-horizontal table tr.newLine .input-append input,.form-horizontal table tr.newLine .input-append .uneditable-input
 	{
-	width: 70% !important;
+	width: 75% !important;
 }
 
 
 /* modal */
-
-.modal-header .ctrls {
+.modal-header .buttons {
 	position: absolute;
 	right: 40px;
 	top: 6px;
 }
 
-/* Table */
 
+/* Table */
 .table th.id {
 	text-align: right;
-	width: 8%;
+	width: 4em;
 	min-width: 100px;
 }
 
@@ -239,11 +234,7 @@ div.required>.control-label {
 	background-color: #FFFFFF;
 }
 
-.innerPanel {
-	position: relative;
-	min-height: 600px;
-}
+/*??*/
 .container-fluid .row-fluid:first-child {
 	margin-top: 5px;
 }
-
