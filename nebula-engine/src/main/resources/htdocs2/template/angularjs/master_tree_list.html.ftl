@@ -63,7 +63,7 @@
 						<h5>${type.displayName}</h5>
 						<div class="buttons btn-toolbar" x-ng-show="data.standealone='Master'">
 							<a href="#/d/${type.name}/{{data.${idName}}}" class="btn btn-small btn-success ctrl" x-ng-show="data.${idName}"><i class="icon-edit icon-white"></i> 编辑</a>
-							<a href="#/d/${type.name}/!New" class="btn btn-small btn-success ctrl" disabled x-ng-show="data.${idName}"><i class="icon-plus icon-white"></i> 新建子${type.displayName}</a>
+							<a ng-href="#/d/${type.name}/!new?${parentName}={{data.${idName}}}" class="btn btn-small btn-success ctrl"  x-ng-show="data.${idName}"><i class="icon-plus icon-white"></i> 新建子${type.displayName}</a>
 						</div>
 					</div>
 					<div class="widget-content nopadding">

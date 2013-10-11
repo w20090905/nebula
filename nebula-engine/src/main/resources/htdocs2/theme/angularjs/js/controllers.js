@@ -101,15 +101,20 @@ function AttachedNewEntityCtrl($scope, $route, $resource, $routeParams, $locatio
 	'use strict';
 	$scope.attachedTypename = $routeParams.attachedtypename;
 	$scope.attachedID = $routeParams.attachedid;
-	var DataResource = $scope.resource = $resource('/d/:attachedtypename/:attachedid',$routeParams, {});
-	$scope.attachedData = DataResource.get($routeParams,function() {
+
+//	$scope.data = $resource('/d/:typename/!new', $routeParams).get($routeParams,function() {
+//		$scope.$dataReady();
+//	});
+	$scope.data = $routeParams;
+	
+	$scope.attachedData = $resource('/d/:attachedtypename/:attachedid',$routeParams, {}).get($routeParams,function() {
 		$scope.$dataReady();
 	});
 	
 	$scope.typename = $routeParams.typename;
 	
 	var DataResource = $resource('/d/:attachedtypename/:attachedid/:typename/', $routeParams);
-	$scope.data = {};
+	$scope.data={};
 	$scope.data[$scope.attachedTypename] = $scope.attachedData; // TODO
 	
 	$scope.data.$save = DataResource.prototype.$save;
@@ -177,8 +182,13 @@ function EntityListCtrl($scope, $route, $resource, $routeParams) {
 function NewEntityCtrl($scope, $resource, $routeParams, $location, $interpolate) {
 	'use strict';
 	$scope.typename = $routeParams.typename;
+
+//	$scope.data = $resource('/d/:typename/!new', $routeParams).get($routeParams,function() {
+//		$scope.$dataReady();
+//	});
+	$scope.data=$routeParams;
+	
 	var DataResource = $resource('/d/:typename/', $routeParams);
-	$scope.data = {};
 	$scope.data.$save = DataResource.prototype.$save;
 	$scope.$save = function() {
 		$scope.data.$save(function(u, getResponseHeaders) {

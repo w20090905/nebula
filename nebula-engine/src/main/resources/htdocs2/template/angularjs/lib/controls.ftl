@@ -83,7 +83,7 @@
 		[/@compress] [/#assign]		
 		<select id="${id}"  x-ng-init="${id}values = [${attrValues?substring(1)}];" 
 				x-ng-model="${ngModel}${keyName}" x-ng-options="c.${keyName} as c.Name for c in ${id}values" placeholder="${placeholder}"	 inlineshow>	
-			<option value="">-- 选择 ${field.name} --</option>
+			<option value="">-- 选择 ${field.displayName} --</option>
 		</select>
 	[#else]	
 		[#assign beforePopup][/#assign]

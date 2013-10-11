@@ -26,6 +26,7 @@ table {
 #search button {
 	border: 0;
 	margin-top: -9px;
+	margin-left: -3px;
 }
 
 /* change top level menu font */
@@ -115,12 +116,16 @@ table {
 	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.widget-title{
+	height: 32px;
+}
+
 .widget-title .buttons {
 	position: absolute;
 	top: 0;
 	right: 0;
 	float: right;
-	margin: 6px 10px 0 0;
+	margin: 4px 10px 0 0;
 }
 
 .widget-title .buttons input,.widget-title .buttons .btn {
@@ -140,7 +145,7 @@ table {
 	top: 0;
 	right: 0;
 	float: right;
-	margin: 6px 10px 0 0;
+	margin: 4px 10px 0 0;
 }
 
 .widget-title input.search-query {

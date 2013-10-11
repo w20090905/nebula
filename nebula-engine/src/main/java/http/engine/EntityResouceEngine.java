@@ -2,6 +2,7 @@ package http.engine;
 
 import http.resource.AttachedEntityListResouce;
 import http.resource.EntityListResouce;
+import http.resource.EntityNewResouce;
 import http.resource.EntityResouce;
 import http.resource.TxEntityResource;
 import http.resource.TypeEditableResouce;
@@ -64,21 +65,25 @@ public class EntityResouceEngine implements ResourceEngine {
 
 		switch (paths.length) {
 		case 5:
-			return makeResouce(paths[ATTACHTO_TYPENAME], paths[ATTACHTO_ID], paths[ATTACH_TYPENAME]);
+			return makeAttachedEntityListResouce(paths[ATTACHTO_TYPENAME], paths[ATTACHTO_ID], paths[ATTACH_TYPENAME]);
 		case 4:
 			typeName = paths[TYPENAME];
+			
+			if("!new".equalsIgnoreCase(paths[ID])){
+				return makeEntityNewResouce(typeName);				
+			}
 
 			if ("Type".equals(typeName)) {
 				return makeTypeResouce(typeName, paths[ID]);
 			} else {
-				return makeResouce(typeName, paths[ID]);
+				return makeEntityResouce(typeName, paths[ID]);
 			}
 		case 3:
 			typeName = paths[TYPENAME];
 			if ("Type".equals(typeName)) {
 				return makeTypeResouce(typeName);
 			} else {
-				return makeResouce(typeName);
+				return makeEntityListResouce(typeName);
 			}
 		default:
 			return null;
@@ -94,14 +99,26 @@ public class EntityResouceEngine implements ResourceEngine {
 		return new TypeEditableResouce(persistence, typeLoader, id);
 	}
 
-	private Resource makeResouce(String typeName) {
+	private Resource makeEntityListResouce(String typeName) {
 		Broker<Type> typeBroker = typeBrokers.getBroker(typeName);
 		Broker<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);
 		Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getSimpleHelper(typeBroker);
 		return new EntityListResouce(jsonHolder, storeHolder);
 	}
 
-	private Resource makeResouce(String typeName, String id) {
+	private Resource makeEntityNewResouce(String typeName) {
+		Broker<Type> typeBroker = typeBrokers.getBroker(typeName);
+		Broker<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);
+		Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(typeBroker);
+
+//		if (typeBroker.get().getStandalone() == TypeStandalone.Transaction) {
+////			return new TxEntityResource(jsonHolder, storeHolder, id);
+//		} else {
+			return new EntityNewResouce(jsonHolder, storeHolder);
+//		}
+	}
+	
+	private Resource makeEntityResouce(String typeName, String id) {
 		Broker<Type> typeBroker = typeBrokers.getBroker(typeName);
 		Broker<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);
 		Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(typeBroker);
@@ -113,7 +130,7 @@ public class EntityResouceEngine implements ResourceEngine {
 		}
 	}
 
-	private Resource makeResouce(String attachToTypeName, String attachToID, String typeName) {
+	private Resource makeAttachedEntityListResouce(String attachToTypeName, String attachToID, String typeName) {
 		Broker<Type> typeBroker = typeBrokers.getBroker(typeName);
 		Broker<DataStore<Entity>> storeHolder = persistence.define(Long.class, Entity.class, typeName);
 		Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getSimpleHelper(typeBroker);
