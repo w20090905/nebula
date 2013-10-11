@@ -412,7 +412,7 @@ function ContactRecordsCtrl($scope, $resource) {
 		query : {
 			method : 'GET',
 			params : {
-				"CompanyName" : $scope.data.CompanyName
+				"Company" : $scope.data.CompanyName
 			},
 			isArray : true
 		}
@@ -430,7 +430,7 @@ function ContactRecordsCtrl($scope, $resource) {
 			query : {
 				method : 'GET',
 				params : {
-					"CompanyName" : $scope.data.CompanyName
+					"Company" : $scope.data.CompanyName
 				},
 				isArray : true
 			}
@@ -443,7 +443,7 @@ function ContactRecordsCtrl($scope, $resource) {
 				query : {
 					method : 'GET',
 					params : {
-						"CompanyName" : $scope.data.CompanyName
+						"Company" : $scope.data.CompanyName
 					},
 					isArray : true
 				}
