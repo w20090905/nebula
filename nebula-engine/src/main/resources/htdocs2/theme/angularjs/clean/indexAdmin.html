@@ -2,16 +2,23 @@
 <html lang="en" x-ng-app="appAdmin">
 <head>
 <meta charset="UTF-8" />
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 <title>Nebula Admin</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+[ng-cloak] {
+	display: none;
+}
+</style>
 <link rel="stylesheet" href="/css/jquery-ui.css" />
 <link rel="stylesheet" href="/theme/angularjs/clean/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/theme/angularjs/clean/css/bootstrap-responsive.min.css" />
 <link rel="stylesheet" href="/css/colorpicker.css" />
 <link rel="stylesheet" href="/css/datepicker.css" />
 <link rel="stylesheet" href="/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/uniform.css" />
 <link rel="stylesheet" href="/css/select2.css" />
-<link rel="stylesheet" href="/lib/angular-plugins/angular.tree.css" />	
+<link rel="stylesheet" href="/lib/angular-plugins/angular.tree.css" />
 <link rel="stylesheet" href="/theme/angularjs/clean/css/unicorn.main.css" />
 <link rel="stylesheet" href="/theme/angularjs/clean/css/unicorn.grey.css" class="skin-color" />
 <!-- Custom CSS Style -->
@@ -29,7 +36,10 @@
 		</h1>
 	</div>
 	<div id="search">
-	<input type="text" placeholder="Search here..." /><button type="submit" class="tip-right" title="Search"><i class="icon-search icon-white"></i></button>
+		<input type="text" placeholder="Search here..." />
+		<button type="submit" class="tip-right" title="Search">
+			<i class="icon-search icon-white"></i>
+		</button>
 	</div>
 	<div id="user-nav" class="navbar navbar-inverse">
 		<ul class="nav btn-group">
@@ -48,20 +58,20 @@
 			<li class="btn btn-inverse"><a href="/login.html" class="tip-bottom" title="登出"><i class="icon icon-share-alt"></i> </a></li>
 		</ul>
 	</div>
-	<div id="sidebar">
+	<div id="sidebar" x-jsonDataUrl="/d/MenuBar/AdminMainMenu">
 		<a href="#" class="visible-phone"><i class="icon icon-th-list"></i> 菜单</a>
-		<ul x-jsonDataUrl="/d/MenuBar/AdminMainMenu" class="ng-cloak">
+		<ul class="ng-cloak">
 			<li class="section"><a href=""><span>基础</span></a></li>
 			<li class="submenu"><a href="#/d/Type/?Standalone=Master"><i class="icon icon-glass"></i> <span>实体</span></a>
 			<li class="submenu"><a href="#/d/Type/?Standalone=Transaction"><i class="icon icon-glass"></i> <span>事务</span></a>
 			<li class="submenu"><a href="#/d/Type/?Standalone=Basic"><i class="icon icon-glass"></i> <span>基础类型</span></a>
 			<li class="submenu"><a href="#/d/Attribute/"><i class="icon icon-glass"></i> <span>属性</span></a>
 			<li class="section"><a href=""><span>{{jsonData.Title}}</span></a></li>
-			<li x-ng-repeat="menu in jsonData.Menu" class="submenu"><a x-ng-href="#{{menu.URL}}"><i class="icon {{menu.IconName}}"></i> <span>{{menu.Name}}</span><span class="label"
-					x-ng-show="menu.items.length > 0"
-				>{{menuGroup.items.length}}</span></a>
+			<li x-ng-repeat="menu in jsonData.Menu" class="submenu"><a x-ng-href="#{{menu.URL | replace : '$LoginUserID$': LoginUserID}}"> <i
+					class="icon {{menu.IconName}}"
+				></i> <span>{{menu.Name}}</span> <span class="label" x-ng-show="menu.items.length > 0">{{menuGroup.items.length}}</span></a>
 				<ul x-ng-show="menuGroup.items.length > 0">
-					<li x-ng-repeat="menu in menuGroup.items"><a x-ng-href="#{{menu.href}}"><i class="icon-edit"></i>{{menu.label}}</a></li>
+					<li x-ng-repeat="menu in menuGroup.items"><a x-ng-href="#{{menu.URL}}"><i class="icon-edit"></i>{{menu.label}}</a></li>
 				</ul></li>
 		</ul>
 	</div>
@@ -75,15 +85,15 @@
 	<div id="content" x-nb-view>
 		<article class="module width_full">
 			<header>
-				<h1 class="tabs_involved">Welcome</h1>
+				<h1 class="tabs_involved" ng-cloak>Welcome</h1>
 			</header>
-			<div id="breadcrumb">
+			<div id="breadcrumb" ng-cloak>
 				<a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#"
 					class="current"
 				>Common elements</a>
 			</div>
 			<div class="container-fluid">
-				<div class="row-fluid">
+				<div class="row-fluid" ng-cloak>
 					<div class="span12">
 						<div class="widget-box">
 							<div class="widget-title">
