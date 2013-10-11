@@ -1,7 +1,7 @@
 'use strict';
 
 /* App Module */
-angular.module('appProfile', ['nebulaFilters', 'nebulaServices','nebulaDirectives','angularTree','ngResource','ngCookies']).
+angular.module('nebula', ['nebulaFilters', 'nebulaServices','nebulaDirectives','angularTree','ngResource','ngCookies']).
 	config(['$routeProvider', function($routeProvider) {
 		$routeProvider.
 			when('/d/:typename', {templateUrlWP: '/theme/angularjs/unicorn/{{typename}}-list.html',   controller: EntityListCtrl}).

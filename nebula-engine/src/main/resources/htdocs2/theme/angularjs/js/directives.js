@@ -1,12 +1,4 @@
 'use strict';
-/*utility */
-function isUndefined(value) {
-	return typeof value == 'undefined';
-}
-function isEmpty(value) {
-	return isUndefined(value) || value === '' || value === null
-			|| value !== value;
-}
 
 /* Directives */
 function PopupListCtrl($scope,$resource,urlParams){
@@ -19,53 +11,7 @@ function PopupListCtrl($scope,$resource,urlParams){
 	};
 }
 
-function simpleMap(data){
-	var params =  {};
-	
-	var setS = data.split(/[\{\}\,\ ]/);
-	for(var i=0;i<setS.length;i++){
-		var kvSet = setS[i];
-		if(kvSet.length>0){
-			var kv = kvSet.split(":");
-			var k = kv[0];
-			var v = kv[1];
-			params[k]=v;
-		}		
-	}
-	return params;
-}
 
-function getVal(map,key){
-	var keys = key.split(/\./);
-
-	var vl=map,lastVl=vl;
-	for(var i=0;i<keys.length-1;i++){
-		vl = lastVl[keys[i]];
-		if(typeof vl == 'undefined'){
-			lastVl[keys[i]] = {};
-			vl = lastVl[keys[i]];
-		}
-		lastVl = vl;
-	}
-	
-	return vl[keys[keys.length-1]];
-}
-
-function putVal(map,key,v){
-	var keys = key.split(/\./);
-	
-	var vl=map,lastVl=vl;
-	for(var i=0;i<keys.length-1;i++){
-		vl = lastVl[keys[i]];
-		if(isUndefined(vl)){
-			lastVl[keys[i]] = {};
-			vl = lastVl[keys[i]];
-		}
-		lastVl = vl;
-	}
-	
-	vl[keys[keys.length-1]] = v;
-}
 var PathMatchProvider = function(when) {
     // TODO(i): this code is convoluted and inefficient, we should construct the route matching
     //   regex only once and then reuse it
@@ -276,12 +222,17 @@ var nbViewDirective = ['$http', '$templateCache', '$route', '$anchorScroll', '$c
     link: function(scope, rawElement, attr) {
       var lastScope,
           onloadExp = attr.onload || '';
+      var rawHtml = rawElement.html();
       rawElement.html("<div class='innerPanel row-fluid'></div><div  class='innerPanel row-fluid' style='visible=hidden'></div>");
-      var lastElement = $(rawElement.children().get(0));
-      var element = $(rawElement.children().get(1));
-            
-      scope.$on('$routeChangeSuccess', update);
+      var lastElement = jQuery(rawElement.children()[0]);
+      var element = jQuery(rawElement.children()[1]);
+      lastElement.html(rawHtml);
+      element.html(rawHtml);
+      var mask = jQuery("<div id='mask' class='mask opacity'></div>").appendTo(rawElement);
+	  
       update();
+      
+      scope.$on('$routeChangeSuccess', update);
 
       function destroyLastScope() {
         if (lastScope) {
@@ -291,25 +242,22 @@ var nbViewDirective = ['$http', '$templateCache', '$route', '$anchorScroll', '$c
       }
 
       function clearContent() {
-        element.html('');
+        element.html(rawHtml);
         destroyLastScope();
       }
       var isLoading = false;
       function prepareLoad(){
     	  isLoading = true;
-    	  if($("#mask").length<1){
-    		  $("<div id='mask' class='mask opacity'></div>").appendTo(rawElement);
-    	  }
 
           setTimeout(function(){
         	  if(isLoading){
-        		  $("#mask").show()
+        		  mask.show()
         	  }    	  
           },300);
       }
       function finishLoad(){
     	  if(isLoading){
-        	  $("#mask").hide(3);
+        	  mask.hide(3);
         	  var old = lastElement;
         	  lastElement = element;
         	  lastElement.show();
@@ -326,9 +274,11 @@ var nbViewDirective = ['$http', '$templateCache', '$route', '$anchorScroll', '$c
         if (template) {
         	prepareLoad();
           element.html(template);
+          $script.ready("plugins",function(){
           element.find("input[required]").parents(".control-group").addClass("required");
           element.find("select[required]").parents(".control-group").addClass("required");
           element.find("input.datepicker").datepicker();
+          });
           
           destroyLastScope();
 

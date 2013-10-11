@@ -2,7 +2,7 @@
 
 
 /* App Module */
-angular.module('app', ['nebulaFilters', 'nebulaServices', 'nebulaDirectives','angularTree','ngResource','ngCookies']).
+angular.module('nebula', ['nebulaFilters', 'nebulaServices', 'nebulaDirectives','angularTree','ngResource','ngCookies']).
 	config(['$routeProvider', function($routeProvider,$cookies) {
 		$routeProvider.
 			when('/d/ContactRecord', {templateUrl: '/theme/angularjs/unicorn/ContactRecord-list.html', controller: ContactRecordsCtrl}).
@@ -30,8 +30,8 @@ angular.module('app', ['nebulaFilters', 'nebulaServices', 'nebulaDirectives','an
 });
 
 
-(function($) { 
+$script.ready('jQuery', function() {(function($) { 
 	$("input[required]").parents(".control-group").find(".control-label").addClass("required");
-})(jQuery);
+})(jQuery);});
 
 
