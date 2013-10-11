@@ -15,6 +15,9 @@
 		[#switch field.attrs.FormatType!"text"]
 			[#case "date"]datepicker [#break]
 		[/#switch]
+		[#if field.attrs.SingleLine??]
+			input-xxlarge 
+		[/#if]		
 	[/@compress][/#assign]
 	
 	[#assign optTitle][@compress single_line=true]
@@ -23,7 +26,7 @@
 		[#elseif field.attrs.Desc??]]
 			title="${field.attrs.Desc}"
 		[#else]]
-			title="${field.name}"
+			title="${field.displayName}"
 		[/#if]			
 	[/@compress][/#assign]
 	
@@ -47,7 +50,7 @@
 		</select>
 	[#elseif field.attrs.FormatType! = "textarea"]
 		<textarea id="${id}"  x-ng-model="${ngModel}" rows="8" placeholder="${placeholder}"  ${ex}
-			${optReadonly} ${optRequired}  ${optValidateRule} 	${optTitle}	 class="${optClass} input-block-level"
+			${optReadonly} ${optRequired}  ${optValidateRule} 	${optTitle}	 class="${optClass} input-xxlarge "
 			></textarea>		
 	[#elseif field.attrs.FormatType! = "checkbox"]
 		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
@@ -114,15 +117,15 @@
 [#assign opening=false /]
 [#macro controls field for label]	
 
-	[#if field.attrs.FormatType! = "textarea"]	
-		<div class="control-group">
+	[#if field.attrs.SingleLine??]	
+		<div class="control-group singleline ">
 			<label class="control-label" for="${for}">${label}</label>		
 			<div class="controls">
 			[#nested]
 			</div>
 		</div>
 	[#else]
-		<div class="control-group">
+		<div class="control-group thin">
 			<label class="control-label" for="${for}">${label}</label>		
 			<div class="controls">
 			[#nested]

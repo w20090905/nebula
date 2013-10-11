@@ -1,4 +1,3 @@
 @MaxLength(20)
-@SingleLine
 define Code|zh:编码 extends String {
 };

@@ -69,7 +69,7 @@
 					<div class="widget-content nopadding">
 					
 <!-- Start Form -->
-	<form name="form" x-ng-submit="$save()"  class="form-horizontal" novalidate>
+	<form name="form" x-ng-submit="$save()"  class="form-horizontal form-thin" novalidate>
 
 	[#list type.fields as of][#t]
 				[#if !of.array]

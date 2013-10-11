@@ -22,7 +22,8 @@ import freemarker.template.Configuration;
 
 @SuppressWarnings("deprecation")
 public class TemplateResouceEngine extends StaticResourceEngine {
-	private final long age;
+	private final long staticAge;
+	private final long dynamicAge;
 
 	private final Configuration templateConfig;
 	final Broker<DataStore<Entity>> attributes;
@@ -37,17 +38,26 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 		this.typeLoader = typeLoader;
 		this.attributes = dataWareHouse.define(String.class, Entity.class, "Attribute");
 		this.dataWareHouse = dataWareHouse;
-		this.age = 0;// 30L * 24L * 60L * 60L;
+		this.staticAge = 30L * 24L * 60L * 60L;
+		this.dynamicAge = 3L;//3 Seconds 
 		this.typeBrokers = typeBrokers;
 	}
 
 	@Override
 	public Resource resolve(String path) {
 		String extension = path.substring(path.lastIndexOf('.') + 1);
+		
+		long maxAge = 0;
+		
+		if("css js jpg png".indexOf(extension)>=0){
+			maxAge =  this.staticAge;
+		}else{
+			maxAge =  this.dynamicAge;			
+		}
 
 		Source source = loader.findSource(path);
 		if (source != null) {
-			return new StaticResource(source, TheMimeTypes.get(extension), this.age);
+			return new StaticResource(source, TheMimeTypes.get(extension), maxAge);
 		}
 
 		String theme = "$";
@@ -77,15 +87,15 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 		String name = path.substring(prev);
 
 		if ((source = loader.findSource("/" + "theme/" + theme + "/" + skin + "/" + name)) != null) {
-			return new StaticResource(source, TheMimeTypes.get(extension), this.age);
+			return new StaticResource(source, TheMimeTypes.get(extension), maxAge);
 		} else if ((source = loader.findSource("/" + "theme/" + theme + "/" + name)) != null) {
-			return new StaticResource(source, TheMimeTypes.get(extension), this.age);
+			return new StaticResource(source, TheMimeTypes.get(extension), maxAge);
 		} else if ((source = loader.findSource("/" + "theme/" + name)) != null) {
-			return new StaticResource(source, TheMimeTypes.get(extension), this.age);
+			return new StaticResource(source, TheMimeTypes.get(extension), maxAge);
 		} else if ((source = loader.findSource("/" + "default/" + name)) != null) {
-			return new StaticResource(source, TheMimeTypes.get(extension), this.age);
+			return new StaticResource(source, TheMimeTypes.get(extension), maxAge);
 		} else if ((source = loader.findSource("/" + name)) != null) {
-			return new StaticResource(source, TheMimeTypes.get(extension), this.age);
+			return new StaticResource(source, TheMimeTypes.get(extension), maxAge);
 		}
 
 		String[] names = null;
