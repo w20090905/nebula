@@ -132,6 +132,11 @@ table {
 	margin-right: 1em;
 }
 
+.widget-title .buttons .btn-small {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
 .widget-content {
 	position: relative;
 }
