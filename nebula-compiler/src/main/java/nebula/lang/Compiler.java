@@ -48,8 +48,8 @@ public class Compiler {
 		}
 	}
 
-	EntityExpressionComplier exprCompiler = new EntityExpressionComplier();
-	EntityActionComplier stCompiler = new EntityActionComplier();
+	EntityExpressionComplier exprCompiler = EntityExpressionComplier.DEFAULT;
+	EntityActionComplier stCompiler = EntityActionComplier.DEFAULT;
 
 	// EntityActionComplier
 
@@ -885,7 +885,7 @@ public class Compiler {
 		@Override
 		public void compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
 			list.compile(cw, mv, context);
-			String clauseName = new EntityClauseComplier().compile(context, this.list.getExprType(context), clause); //(clause, context);
+			String clauseName = EntityClauseComplier.DEFAULT.compile(context, this.list.getExprType(context), clause); //(clause, context);
 			mv.visitTypeInsn(NEW, clauseName);
 			mv.visitInsn(DUP);
 			mv.visitMethodInsn(INVOKESPECIAL, clauseName, "<init>", "()V");

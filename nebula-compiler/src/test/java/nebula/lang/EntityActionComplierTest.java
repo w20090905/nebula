@@ -10,7 +10,7 @@ public class EntityActionComplierTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		loader = new TypeLoaderForTest(new SystemTypeLoader());
-		funcCmp = new EntityActionComplier();
+		funcCmp = EntityActionComplier.DEFAULT;
 		context = new CompilerContext() {
 
 			@Override

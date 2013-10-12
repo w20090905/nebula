@@ -17,6 +17,11 @@ import com.google.common.base.Preconditions;
 
 public class EntityExpressionComplier implements Opcodes {
 	Log log = LogFactory.getLog(getClass());
+	static EntityExpressionComplier DEFAULT = new EntityExpressionComplier();
+
+	private EntityExpressionComplier() {
+
+	}
 
 	/*
 	 * Returns the byte code of an Expression class corresponding to this
@@ -55,8 +60,7 @@ public class EntityExpressionComplier implements Opcodes {
 		MethodVisitor mv;
 
 		// Class define
-		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, name, "Ljava/lang/Object;Lnebula/lang/EntityExpression;", "java/lang/Object",
-				new String[] { "nebula/lang/EntityExpression" });
+		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, name, null, "java/lang/Object", new String[] { "nebula/lang/EntityExpression" });
 
 		// Init method
 		{
@@ -90,8 +94,7 @@ public class EntityExpressionComplier implements Opcodes {
 
 		// method
 		{
-			mv = cw.visitMethod(ACC_PUBLIC + ACC_BRIDGE + ACC_SYNTHETIC, "eval",
-					"(Lnebula/lang/RuntimeContext;Lnebula/data/DataRepos;Lnebula/data/Entity;)Ljava/lang/Object;", null, null);
+			mv = cw.visitMethod(ACC_PUBLIC, "eval", "(Lnebula/lang/RuntimeContext;Lnebula/data/DataRepos;Lnebula/data/Entity;)Ljava/lang/Object;", null, null);
 
 			expr.compile(cw, mv, context);
 
@@ -118,7 +121,7 @@ public class EntityExpressionComplier implements Opcodes {
 	static long count = 0;
 
 	public <T> EntityExpression compile(CompilerContext context, Type type, String actionName, Expr<T> exp) {
-		String name = "EntityAction_" + type.name + "_" + NamesEncoding.encode(actionName) + "_" + String.valueOf(count++);
+		String name = this.getClass().getSimpleName() + "_" + type.name + "_" + NamesEncoding.encode(actionName) + "_" + String.valueOf(count++);
 		try {
 			byte[] b = this.doCompile(name, exp, context);
 			if (log.isDebugEnabled()) {

@@ -13,6 +13,12 @@ import org.objectweb.asm.Opcodes;
 public class EntityClauseComplier implements Opcodes {
 	Log log = LogFactory.getLog(getClass());
 
+	static EntityClauseComplier DEFAULT = new EntityClauseComplier();
+
+	private EntityClauseComplier() {
+
+	}
+
 	/*
 	 * Returns the byte code of an Expression class corresponding to this
 	 * expression.
@@ -72,7 +78,7 @@ public class EntityClauseComplier implements Opcodes {
 	static long count = 0;
 
 	public String compile(CompilerContext context, Type type, Code code) {
-		String name = "EntityAction_" + type.name + "_" + "_" + String.valueOf(count++);
+		String name = this.getClass().getSimpleName()+ "_" + type.name + "_" + "_" + String.valueOf(count++);
 		try {
 			byte[] b = this.doCompile(name, code, context);
 			if (log.isDebugEnabled()) {

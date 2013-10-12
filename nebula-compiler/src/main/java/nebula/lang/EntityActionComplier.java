@@ -3,6 +3,7 @@ package nebula.lang;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,6 +15,25 @@ import util.NamesEncoding;
 
 public class EntityActionComplier implements Opcodes {
 	Log log = LogFactory.getLog(getClass());
+	private EntityAction noop;
+
+	static EntityActionComplier DEFAULT = new EntityActionComplier();
+
+	private EntityActionComplier() {
+		String name = "EntityActionNoop";
+		try {
+			byte[] code = doCompile(name, new Compiler.Block(new ArrayList<Statement>()), null);
+			Class<?> expClass = NebulaClassLoader.defineClass(name, code);
+			// instantiates this compiled expression class...
+			this.noop = (EntityAction) expClass.newInstance();
+		} catch (InstantiationException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		}
+	}
 
 	/*
 	 * Returns the byte code of an Expression class corresponding to this
@@ -55,7 +75,11 @@ public class EntityActionComplier implements Opcodes {
 	static long count = 0;
 
 	public EntityAction compile(CompilerContext context, Type type, String actionName, Code code) {
-		String name = type.name + "_" + NamesEncoding.encode(actionName) + "_" + String.valueOf(count++);
+		if (code instanceof Compiler.Block && ((Compiler.Block) code).statements.size() == 0) {
+			return this.noop;
+		}
+
+		String name = this.getClass().getSimpleName()+ "_" + type.name + "_" + NamesEncoding.encode(actionName) + "_" + String.valueOf(count++);
 		try {
 			byte[] b = this.doCompile(name, code, context);
 			if (log.isDebugEnabled()) {

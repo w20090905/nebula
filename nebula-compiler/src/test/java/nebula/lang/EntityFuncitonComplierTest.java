@@ -11,7 +11,7 @@ public class EntityFuncitonComplierTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		loader = new TypeLoaderForTest(new SystemTypeLoader());
-		funcCmp = new EntityClauseComplier();
+		funcCmp = EntityClauseComplier.DEFAULT;
 		context = new CompilerContext() {
 
 			@Override
