@@ -2,10 +2,15 @@
 
 /* Directives */
 function PopupListCtrl($scope,$resource,urlParams){
-	var DataResource = $resource('/d/:typename/', urlParams, {
-		query: {method:'GET', params:{}, isArray:true}
-	});
-	$scope.datalist = DataResource.query({});
+	if(urlParams.attachedtypename){
+		$scope.datalist = $resource('/d/:attachedtypename/:attachedid/:typename/', urlParams, {
+			query: {method:'GET', params:{}, isArray:true}
+		}).query({});		
+	} else{
+		$scope.datalist = $resource('/d/:typename/', urlParams, {
+			query: {method:'GET', params:{}, isArray:true}
+		}).query({});		
+	}
 	$scope.$returnData = function(index){
 		return $scope.datalist[index];
 	};
@@ -72,15 +77,13 @@ var neFromListDirective = [
 	    transclude: true,
 		template: '<div ng-transclude></div>',
 		link : function(scope, element, attrs) {
-			var reqUrl = attrs.popup;
 			var beforePopupExp = attrs.beforepopup || '';
 			var afterPopupExp = attrs.afterpopup || '';
 			
 			if(element.parents("form table").length<1){
 				element.wrap('<div class="input-append"></div>').after('<a class="addon btn"><i class="icon-search"></i></a>').next().click(function(){
 					var inparams = {};
-					
-					popup(reqUrl,inparams,function(retData){
+					popup(attrs.popup,inparams,function(retData){
 						scope.ret = retData;
 						scope.$eval(afterPopupExp);
 					});
@@ -128,11 +131,18 @@ var neFromListDirective = [
 						popupwinBody.html('');
 						destroyLastScope();
 					}
-				}				
+				}
 				
 				var matcher = PathMatchProvider("/d/:typename/");
 				var urlParams = matcher.check(reqUrl);
-				var template = matcher.replace(reqUrl,"/theme/angularjs/unicorn/:typename-popup.html");
+				var template;
+				if(urlParams){
+					template = matcher.replace(reqUrl,"/theme/angularjs/unicorn/:typename-popup.html");					
+				}else{
+					matcher = PathMatchProvider("/d/:attachedtypename/:attachedid/:typename/");
+					urlParams = matcher.check(reqUrl);	
+					template = matcher.replace(reqUrl,"/theme/angularjs/unicorn/:typename-popup.html");				
+				}
 				if(template){
 					popupwin.fadeIn(300);
 					

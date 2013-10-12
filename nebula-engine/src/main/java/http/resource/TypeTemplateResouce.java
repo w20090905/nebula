@@ -16,7 +16,12 @@ import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.lang.Field;
 import nebula.lang.Type;
+
+import com.google.common.base.Preconditions;
+
 import freemarker.cache.TemplateLoader;
+import freemarker.ext.beans.BeansWrapper;
+import freemarker.ext.beans.CollectionModel;
 import freemarker.template.Configuration;
 import freemarker.template.ObjectWrapper;
 import freemarker.template.SimpleCollection;
@@ -24,6 +29,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateCollectionModel;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateHashModel;
+import freemarker.template.TemplateMethodModel;
 import freemarker.template.TemplateModel;
 import freemarker.template.TemplateModelException;
 import freemarker.template.TemplateModelIterator;
@@ -53,31 +59,44 @@ class DatastoreTemplateHashModel implements TemplateHashModel, TemplateCollectio
 
 }
 
-class DataPersisterTemplateHashModel implements TemplateHashModel {
+class LoadDataMethod implements TemplateMethodModel {
 	DataRepos dataWareHouse;
 
-	public DataPersisterTemplateHashModel(DataRepos dataWareHouse) {
+	public LoadDataMethod(DataRepos dataWareHouse) {
 		this.dataWareHouse = dataWareHouse;
 	}
 
-	@Override
-	public TemplateModel get(String key) throws TemplateModelException {
+	@SuppressWarnings("rawtypes")
+	public TemplateModel exec(List args) throws TemplateModelException {
+		if (args.size() == 1) {
+			Preconditions.checkNotNull(args.get(0));
+			return this.doLoad((String) args.get(0));
+		} else if (args.size() == 3) {
+			Preconditions.checkNotNull(args.get(0));
+			Preconditions.checkNotNull(args.get(1));
+			Preconditions.checkNotNull(args.get(2));
+			return this.doLoad((String) args.get(0), (String) args.get(1), (String) args.get(2));
+		}
+		return null;
+	}
+
+	public TemplateModel doLoad(String key) throws TemplateModelException {
 		Broker<DataStore<Entity>> datastore = dataWareHouse.define(String.class, Entity.class, key);
 		return new DatastoreTemplateHashModel(datastore.get());
 	}
 
-	@Override
-	public boolean isEmpty() throws TemplateModelException {
-		return false;
+	public TemplateModel doLoad(String key, String classificatorName, String classificatorValue) throws TemplateModelException {
+		Broker<DataStore<Entity>> datastore = dataWareHouse.define(String.class, Entity.class, key);
+		List<Entity> list = datastore.get().getClassificator(classificatorName).getData(classificatorValue);
+		return new CollectionModel(list, (BeansWrapper) ObjectWrapper.SIMPLE_WRAPPER);
 	}
-
 }
 
 public class TypeTemplateResouce extends AbstractResouce {
 	final Configuration cfg;
 	// private final String templateName;
 
-	TemplateHashModel dataWareHouseModel;
+	TemplateMethodModel dataWareHouseModel;
 
 	final Map<String, Object> root = new HashMap<String, Object>();
 	final DataRepos dataWareHouse;
@@ -113,7 +132,7 @@ public class TypeTemplateResouce extends AbstractResouce {
 		this.cfg = cfg;
 
 		this.dataWareHouse = dataWareHouse;
-		this.dataWareHouseModel = new DataPersisterTemplateHashModel(dataWareHouse);
+		this.dataWareHouseModel = new LoadDataMethod(dataWareHouse);
 		this.attributes = attributes;
 
 		this.path = path;

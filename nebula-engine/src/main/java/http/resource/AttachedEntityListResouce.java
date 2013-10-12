@@ -15,7 +15,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import nebula.data.Broker;
-import nebula.data.Classificator;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
@@ -28,17 +27,17 @@ public class AttachedEntityListResouce extends AbstractResouce {
 	DataHolder dataCached;
 
 	class DataHolder {
-		Classificator<String, Entity> classificator;
+		String classificatorName;
 		String value;
 		byte[] buffer;
 
-		public DataHolder(Classificator<String, Entity> classificator, String value) {
-			this.classificator = checkNotNull(classificator);
+		public DataHolder(Broker<DataStore<Entity>> datastoreHolder, String classificatorName, String value) {
+			this.classificatorName = classificatorName;
 			this.value = checkNotNull(value);
 		}
 
 		byte[] get() {
-			List<Entity> dataList = classificator.getData(value);
+			List<Entity> dataList = datastoreHolder.get().getClassificator(classificatorName).getData(value);
 			return buildFrom(dataList);
 		}
 	}
@@ -69,7 +68,7 @@ public class AttachedEntityListResouce extends AbstractResouce {
 		super("text/json", 0, 1000);
 		this.jsonHolder = json;
 		this.datastoreHolder = datas;
-		this.dataCached = new DataHolder(datastoreHolder.get().getClassificator(checkNotNull(attachedToTypeName)), attachToID);
+		this.dataCached = new DataHolder(datastoreHolder, attachedToTypeName, attachToID);
 	}
 
 	protected void get(HttpServletRequest req) {

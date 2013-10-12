@@ -135,7 +135,7 @@
 					
 					[#else]					
 				[@nc.controls field=of for="${of.name}" label="${of.displayName}"]
-					[@nc.popupBox field=of pField=of id="${of.name}" ngModel="data.${of.name}"  placeholder="${of.displayName}"
+					[@nc.popupBox  field=of pField=of id="${of.name}" ngModel="data.${of.name}"  placeholder="${of.displayName}"
 						key=(of.key) readonly=true required=!(of.ignorable)/]
 				[/@nc.controls]
 					[/#if]

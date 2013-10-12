@@ -65,10 +65,10 @@
 
 
 [#macro popupBox field pField id ngModel placeholder key=false required=true readonly=false] [#-- // TODO Need Refact --]
-	[#assign optRequired][#if required] required[/#if][/#assign]
+	[#assign optRequired][#if required] required[/#if][/#assign]	
 
 	[#if field.attrs.InlineShow?? &&  field.attrs.InlineShow = "InlineShow"]
-		
+	
 		[#assign newNgModel][/#assign]
 		
 		[#list field.type.fields as in2f][#t]
@@ -78,13 +78,43 @@
 			[/#if]
 		[/#list]
 	
-		[#assign attrValues][@compress single_line=true]			
-			[#list (alldatas[field.type.name])![] as attr],{ID:'${attr.ID}',Name:'${attr.Name}'}[/#list]
-		[/@compress] [/#assign]		
-		<select id="${id}"  x-ng-init="${id}values = [${attrValues?substring(1)}];" 
-				x-ng-model="${ngModel}${keyName}" x-ng-options="c.${keyName} as c.Name for c in ${id}values" placeholder="${placeholder}"	 inlineshow>	
-			<option value="">-- 选择 ${field.displayName} --</option>
-		</select>
+		[#if field.type.attrs.AttachTo?? && field.resideType.attrs.AttachTo?? && field.type.attrs.AttachTo = field.resideType.attrs.AttachTo]
+		
+			[#assign attachField][/#assign]
+			[#list field.type.fields as nfield][#t]
+				[#if nfield.attrs.Attach??]						
+						[#assign attachField = nfield]
+				[/#if]
+			[/#list]
+			[#assign attachName = attachField.name]
+			[#assign attachKeyName][/#assign]
+			[#list attachField.type.fields as in2f][#t]
+				[#if !in2f.array && in2f.refer == "ByVal" && (in2f.key)]
+					[#assign attachKeyName=in2f.name]
+				[/#if]
+			[/#list]
+			
+			[#assign attachValueName=attachName + attachKeyName]
+			
+			[#assign attrValues][@compress single_line=true]	
+				[#list (alldatas(field.type.name))![] as attr],{'ID':'${attr.ID}','Name':'${attr.Name}','${attachName}':'${attr[attachValueName]!""}' }[/#list]
+			[/@compress] [/#assign]
+			
+			<select id="${id}"  x-ng-init="${id}values = [${attrValues?substring(1)}];" 
+					x-ng-model="${ngModel}${keyName}" x-ng-options="c.${keyName} as c.Name for c in ${id}values  | filter: data.${attachName +attachKeyName }" placeholder="${placeholder}"	 inlineshow>	
+				<option value="">-- 选择 ${field.displayName} --</option>
+			</select>
+		
+		[#else]
+			[#assign attrValues][@compress single_line=true]	
+				[#list (alldatas(field.type.name))![] as attr],{'ID':'${attr.ID}','Name':'${attr.Name}'}[/#list]
+			[/@compress] [/#assign]
+			
+			<select id="${id}"  x-ng-init="${id}values = [${attrValues?substring(1)}];" 
+					x-ng-model="${ngModel}${keyName}" x-ng-options="c.${keyName} as c.Name for c in ${id}values" placeholder="${placeholder}"	 inlineshow>	
+				<option value="">-- 选择 ${field.displayName} --</option>
+			</select>
+		[/#if]
 	[#else]	
 		[#assign beforePopup][/#assign]
 		[#assign afterPopup][/#assign]
@@ -98,11 +128,34 @@
 					[#if !in2f.key || in2f.type.name!="ID" || field.type.standalone != "Master"] [#assign showValue]${showValue}{{${ngModel}${in2f.name}}}&nbsp;[/#assign][/#if]
 			[/#if]
 		[/#list]
+		
+		[#if field.type.attrs.AttachTo?? && field.resideType.attrs.AttachTo?? && field.type.attrs.AttachTo = field.resideType.attrs.AttachTo]
+			[#assign attachField][/#assign]
+			[#list field.type.fields as nfield][#t]
+				[#if nfield.attrs.Attach??]						
+						[#assign attachField = nfield]
+				[/#if]
+			[/#list]
+			[#assign attachName = attachField.name]
+			[#assign attachKeyName][/#assign]
+			[#list attachField.type.fields as in2f][#t]
+				[#if !in2f.array && in2f.refer == "ByVal" && (in2f.key)]
+					[#assign attachKeyName=in2f.name]
+				[/#if]
+			[/#list]
+		<div id="${id}"  class="uneditable-input" placeholder="${placeholder}"
+				x-popup="/d/${attachName}/{{data.${attachName+attachKeyName}}}/${field.type.name}/" 
+				x-beforePopup="${beforePopup}"
+				x-afterPopup="${afterPopup}"
+			>${showValue}</div>
+			
+		[#else]
 		<div id="${id}"  class="uneditable-input" placeholder="${placeholder}"
 				x-popup="/d/${field.type.name}/" 
 				x-beforePopup="${beforePopup}"
 				x-afterPopup="${afterPopup}"
-			>${showValue}</div>
+			>${showValue}</div>		
+		[/#if]
 	[/#if]
 [/#macro]
 
