@@ -41,7 +41,6 @@ public class TypeLoaderForTest extends TypeLoader {
 
 	@Override
 	protected URL loadClassData(String name) {
-		// TODO Not realized loadClassData
-		return null;
+		throw new UnsupportedOperationException();
 	}
 }

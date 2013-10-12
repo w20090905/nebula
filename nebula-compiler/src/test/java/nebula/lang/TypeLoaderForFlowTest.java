@@ -78,7 +78,6 @@ public class TypeLoaderForFlowTest extends TypeLoader {
 
 	@Override
 	protected URL loadClassData(String name) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

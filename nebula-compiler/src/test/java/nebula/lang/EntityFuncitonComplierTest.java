@@ -49,8 +49,5 @@ public class EntityFuncitonComplierTest extends TestCase {
 		}
 	}
 
-//	public final void testCompile() {
-//		fail("Not yet implemented"); // TODO
-//	}
 
 }
