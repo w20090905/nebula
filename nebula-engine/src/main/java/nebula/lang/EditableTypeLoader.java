@@ -146,10 +146,16 @@ public class EditableTypeLoader extends TypeLoader implements Runnable {
 	}
 
 	protected void unlink(Type topType) {
+		for (Field f : topType.fields) {
+			f.type.references.remove(f);
+			if (f.attrs.containsKey(Type.ATTACH)) {
+				f.type.attachedBy.remove(topType);
+			}
+		}
 		for (Type oldType : topType.subTypes) {
 			for (Field f : oldType.fields) {
 				f.type.references.remove(f);
-				if (f.attrs.containsKey(Type.ATTACH_TO)) {
+				if (f.attrs.containsKey(Type.ATTACH)) {
 					f.type.attachedBy.remove(oldType);
 				}
 			}
