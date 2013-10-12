@@ -221,14 +221,14 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 		data.put("Height", Height);
 
 		//TODO not test
-//		eqValue("Height", 10L + 10, "Test(){this.Height = $Person[Age<30][0].Age + 10;};");
-//		eqValue("Height", 20L + 10, "Test(){this.Height = $Person[Age>10][0].Age + 10;};");
-//		eqValue("Height", 30L + 10, "Test(){this.Height = $Person[Age>20][0].Age + 10;};");
-//		eqValue("Height", 10L + 10, "Test(){this.Height = $Person[Age<40][0].Age + 10;};");
-//		eqValue("Height", 20L + 10, "Test(){this.Height = $Person[Age > 10 && Age < 40][0].Age + 10;};");
-//
-//		eqValue("Height", 10L + 10, "Test(){this.Height = $Person[Age == 10 || Age == 30][0].Age + 10;};");
-//		eqValue("Height", 30L + 10, "Test(){this.Height = $Person[Age == 10 || Age == 30][1].Age + 10;};");
+		eqValue("Height", 10L + 10, "Test(){this.Height = $Person[Age<30][0].Age + 10;};");
+		eqValue("Height", 20L + 10, "Test(){this.Height = $Person[Age>10][0].Age + 10;};");
+		eqValue("Height", 30L + 10, "Test(){this.Height = $Person[Age>20][0].Age + 10;};");
+		eqValue("Height", 10L + 10, "Test(){this.Height = $Person[Age<40][0].Age + 10;};");
+		eqValue("Height", 20L + 10, "Test(){this.Height = $Person[Age > 10 && Age < 40][0].Age + 10;};");
+
+		eqValue("Height", 10L + 10, "Test(){this.Height = $Person[Age == 10 || Age == 30][0].Age + 10;};");
+		eqValue("Height", 30L + 10, "Test(){this.Height = $Person[Age == 10 || Age == 30][1].Age + 10;};");
 	}
 
 	public void testTypeDefinition() {

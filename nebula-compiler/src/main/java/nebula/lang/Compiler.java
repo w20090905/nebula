@@ -1,5 +1,6 @@
 package nebula.lang;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,8 @@ import java.util.Map;
 import nebula.data.DataRepos;
 import nebula.data.Entity;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -19,10 +22,12 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 
 public class Compiler {
+	Log log = LogFactory.getLog(getClass());
 	public final static int SYSTEM_THIS = 0;
 	public final static int CONTEXT = 1;
 	public final static int REPOS = 2;
 	public final static int THIS = 3;
+	public final static int PARAMS = 4;
 
 	CompilerContext context;
 
@@ -38,6 +43,9 @@ public class Compiler {
 	Compiler(CompilerContext context) {
 		this.context = context;
 		opTypes.put(RawTypes.Long.name(), new LongOperator());
+		if (log.isDebugEnabled()) {
+			if (!new File("tmp").exists()) new File("tmp/").mkdir();
+		}
 	}
 
 	EntityExpressionComplier exprCompiler = new EntityExpressionComplier();
@@ -120,7 +128,7 @@ public class Compiler {
 	}
 
 	public Expr<Object> opFieldInList(Expr<Object> list, String name) {
-		return new FieldOf(new ListThisRefer(list, 2), name);
+		return new FieldOf(new ListThisRefer(list, THIS), name);
 	}
 
 	public Expr<Object> opArithmetic(Operator op, Expr<Object> e1, Expr<Object> e2) {
@@ -184,7 +192,7 @@ public class Compiler {
 	}
 
 	public Expr<Object> opParamsl(Expr<Object> e1, int i) {
-		return new ParamsRefer(e1, 2, i);
+		return new ParamsRefer(e1, PARAMS, i);
 	}
 
 	public Expr<Object> opFieldOf(Expr<Object> e1, String name) {

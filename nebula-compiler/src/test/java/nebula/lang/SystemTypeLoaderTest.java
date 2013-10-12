@@ -44,10 +44,10 @@ public class SystemTypeLoaderTest extends TestCase {
 			for(File f : tmp.listFiles()){
 				f.delete();
 			}
-			tmp.delete();
+//			tmp.delete();
 		}
 		
-		tmp.mkdir();
+//		tmp.mkdir();
 		root1.mkdir();
 		root2.mkdir();
 
