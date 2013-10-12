@@ -17,7 +17,7 @@
 						<ul class="nav nav-tabs">
 				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}">概述</a></li>
 	[#list attachedType.attachedBy as atby]	[#if atby.standalone=="Transaction"]
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/${atby.name}/">${atby.name}</a></li>
+				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/${atby.name}/">${atby.displayName}</a></li>
 	[/#if][/#list]
 							<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/setting/info">Settings</a></li>
 						</ul>
@@ -29,9 +29,9 @@
 				  			<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/setting/info">信息</a></li>
 	[#list attachedType.attachedBy as atby][#if atby.standalone!="Transaction"]
 		[#if atby.name == type.name]
-				  			<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/setting/${atby.name}/">${atby.name}</a></li>
+				  			<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/setting/${atby.name}/">${atby.displayName}</a></li>
 		[#else]
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/setting/${atby.name}/">${atby.name}</a></li>
+				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/setting/${atby.name}/">${atby.displayName}</a></li>
 		[/#if]
 	[/#if][/#list]
 						</ul>

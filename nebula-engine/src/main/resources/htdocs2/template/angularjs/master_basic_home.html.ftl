@@ -6,54 +6,8 @@
 [#assign attachedType=type /]
 [#assign attachFieldName][/#assign]
 
-<article class="module width_full">
-	<header>
-		<h1 class="tabs_involved">${type.displayName} - {{data.Name}}</h1>
-		<div class="btn-toolbar">
-			<div class="btn-group">
-		  		<a href="#/d/Type/${type.name}" class="btn">Define</a>
-				  <button class="btn dropdown-toggle" data-toggle="dropdown">
-				    <span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu">
-			  	<li><a tabindex="-1" href="#/t/angularjs/unicorn/${type.name}-detail.html">View Template</a></li>
-				  </ul>
-			</div>
-		</div>
-	</header>
-	
-	<div id="breadcrumb">
-		<a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
-		<a href="#" class="tip-bottom">Form elements</a>
-		<a href="#" class="current">Common elements</a>
-	</div>
-	
-	<div class="container-fluid">
-		<div class="row-fluid">
-			<div class="span12">
-				<div class="widget-box">
-					<div class="widget-title">
-						<span class="icon"> <i class="icon-align-justify"></i>
-						</span>
-	[#if attachedType.attachedBy?size=0]
-						<h5>概述</h5>	
-	[#else]				
-						<ul class="nav nav-tabs">
-				  			<li class="active"><a tabindex="-1" href="#/d/${type.name}/{{data.Name}}">概述</a></li>
-
-	[#list attachedType.attachedBy as atby]	[#if atby.standalone=="Transaction"]
-		[#if atby.name == attachedType.name]
-				  			<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/${atby.name}/">${atby.name}</a></li>
-		[#else]
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/${atby.name}/">${atby.name}</a></li>
-		[/#if]
-	[/#if][/#list]
-							<li><a tabindex="-1" href="#/d/${attachedType.name}/{{data.Name}}/settings">Settings</a></li>
-						</ul>
-	[/#if]
-
-					</div>
-					<div class="widget-content nopadding">
+[@nl.article title="${attachedType.displayName} - {{data.Name}}" type=type]
+[@nl.simpleAttachedHome attachedType=attachedType type=type]
 					
 <!-- Start Form -->
 	<form name="form" x-ng-submit="$save()"  class="form-horizontal" novalidate>
@@ -296,10 +250,7 @@
 		</div>
 		<!-- End Form -->
 	</form>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	
-</article>
+
+[/@nl.simpleAttachedHome]
+
+[/@nl.article]

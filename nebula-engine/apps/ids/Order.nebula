@@ -1,0 +1,8 @@
+tx Order{
+!ID;
+From Person;
+Detail[]{
+  !Product;
+  Price;
+};
+}

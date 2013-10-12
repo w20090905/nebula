@@ -4,32 +4,7 @@
 [#import "./lib/layouts.ftl" as nl]
 
 [@nl.article title="${attachedType.displayName} - {{attachedData.Name}}" type=type]
-
-		<div class="row-fluid">
-			<div class="span12">
-				<div class="widget-box">
-					<div class="widget-title">
-						<span class="icon"> <i class="icon-align-justify"></i>
-						</span>
-						<ul class="nav nav-tabs">
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}">概述</a></li>
-	[#list attachedType.attachedBy as atby][#if atby.standalone=="Transaction"]
-		[#if atby.name == type.name]
-				  			<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}/${atby.name}/">${atby.name}</a></li>
-		[#else]
-				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}/${atby.name}/">${atby.name}</a></li>
-		[/#if]
-	[/#if][/#list]
-							<li><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}/setting/info">Settings</a></li>
-						</ul>
-						
-						<!-- <div class="buttons btn-toolbar" x-ng-show="data.standealone='Master'">
-							<input type="text" x-ng-model="query" class="input-medium search-query ctrl" placeholder="Filter">	
-							<a href="#/d/${type.name}/!new" class="btn btn-small btn-success ctrl"><i class="icon-plus icon-white"></i> 新建</a>
-						</div> -->
-					</div>
-					<div class="widget-content nopadding">
-					
+[@nl.simpleAttached attachedType=attachedType type=type]
 <!-- Start Form -->
 	<form name="form" x-ng-submit="$save()"  class="form-horizontal" novalidate>
 
@@ -277,9 +252,6 @@
 		</div>
 		<!-- End Form -->
 	</form>
-	</div>
-	</div>
-	</div>
-	</div>
+[/@nl.simpleAttached]
 
 [/@nl.article]

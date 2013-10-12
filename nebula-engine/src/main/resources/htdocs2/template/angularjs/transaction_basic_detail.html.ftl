@@ -4,7 +4,7 @@
 [#import "./lib/layouts.ftl" as nl]
 
 [@nl.article title="${type.displayName}&nbsp;" + '#' + "{{data.ID}}" type=type]
-[@nl.simple title="${type.name}"]
+[@nl.simple title="${type.displayName}"]
 					
 <!-- Start Form -->
 	<form name="form" x-ng-submit="$save()"  class="form-horizontal" novalidate>

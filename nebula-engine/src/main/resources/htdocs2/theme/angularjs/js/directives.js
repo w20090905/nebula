@@ -93,7 +93,7 @@ var neFromListDirective = [
 				//element.addClass("inlinePopup").after('<a class="inlinePopup"><i class="icon-search"></i></a>').click(function(){
 					var inparams = {};
 					
-					popup(reqUrl,inparams,function(retData){
+					popup(attrs.popup,inparams,function(retData){
 						scope.ret = retData;
 						scope.$eval(afterPopupExp);
 					});

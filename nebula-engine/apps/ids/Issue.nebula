@@ -2,7 +2,9 @@ tx Issue{
 !ID;
 @Attach Project;
 @InlineShow *IssueType;
+DataStatus|状态 Attr;
 *Subject;
 ?Note;
+?Date;
 @InlineShow ?Version;
 }

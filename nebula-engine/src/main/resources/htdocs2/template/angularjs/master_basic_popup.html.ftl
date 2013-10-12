@@ -5,7 +5,7 @@
 
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	<h3>${type.name}</h3>
+	<h3>${type.displayName}</h3>
 	<div class="buttons">
 		<input type="text" x-ng-model="query" class="input-medium search-query ctrl" placeholder="Filter"/>
 	</div>

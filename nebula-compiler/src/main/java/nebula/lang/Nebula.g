@@ -300,8 +300,8 @@ typeDefineKeyword returns[TypeStandalone typeType]
     :   'define'                  {typeType = TypeStandalone.Basic;} 
       | ('type' | 'master' )    {typeType = TypeStandalone.Master;} 
       | ('tx'|'transaction')     {typeType = TypeStandalone.Transaction;}
-      | ('flow')                    {typeType = TypeStandalone.Flow;}
-      | ('action')                 {typeType = TypeStandalone.Action;};
+      | ('cfg'|'config')     {typeType = TypeStandalone.Config;}
+      | ('rt'|'relation')     {typeType = TypeStandalone.Relation;};
 
 nestedTypeDefinition[Type resideType,String name,Aliases nameAlias] returns[Type type]
     :  
