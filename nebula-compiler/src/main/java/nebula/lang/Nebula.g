@@ -262,6 +262,7 @@ typeDefinition returns[Type type]
          ('|' aliases=aliasesLiteral[$typeID.text]
          | {aliases = new Aliases($typeID.text);}
          )
+         ('<' relations=relationsDefinition '>')?
         ('extends' superTypeID=ID)? { 
             if($superTypeID==null){
                 switch(typeType){
@@ -280,6 +281,10 @@ typeDefinition returns[Type type]
                 }
                 type = new Type(loader,$typeID.text,superType);
             } 
+            
+            if(relations!=null){        
+              type.relations.addAll(relations);
+            }
            
             if(annotations != null){
                 type.attrs.putAll(annotations);
@@ -420,7 +425,10 @@ fieldDefinition[Type resideType] returns[Field field]
         }
         ;
 
-
+relationsDefinition returns [List<Type> relations]   
+@init{relations = new ArrayList<Type>();}
+: first=ID {relations.add(resolveType($first.text));} (',' left=ID{relations.add(resolveType($left.text));})
+;
 
 fieldImportance returns[int v] 
   @init{v=0;}

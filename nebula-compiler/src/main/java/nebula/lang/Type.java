@@ -20,6 +20,8 @@ public class Type implements Timable {
 
 	final Type residedType;
 	final Type superType;
+	final List<Type> relations;
+	
 	final RawTypes rawType;// For Basic Type
 
 	final String name;
@@ -58,6 +60,7 @@ public class Type implements Timable {
 		this.nameAlias = new Aliases(name);
 		this.attachedBy = new CopyOnWriteArrayList<Type>();
 		this.subTypes = new CopyOnWriteArrayList<Type>();
+		this.relations = new CopyOnWriteArrayList<Type>();
 	}
 
 	public String getDisplayName() {
@@ -114,6 +117,7 @@ public class Type implements Timable {
 		this.nameAlias = new Aliases(name);
 		this.attachedBy = new CopyOnWriteArrayList<Type>();
 		this.subTypes = new CopyOnWriteArrayList<Type>();
+		this.relations = new CopyOnWriteArrayList<Type>();
 	}
 
 	public boolean isArray() {

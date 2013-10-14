@@ -125,7 +125,23 @@ public class NebulaParser_TypeTest extends TestCase {
 		assertEquals(0, type.fields.get(i).rangeFrom);
 		assertEquals(5, type.fields.get(i).rangeTo);
 	}
+	
+	public void test_type_relation() throws Exception {
+		//@formatter:off
+		String text = "" +
+				"rt Memeber<Company,Person> { " +
+				"	Name;" +
+				"};";
+		//@formatter:on	
+		Type type = compiler.load(text);
 
+		assertEquals("Memeber", type.name);
+		assertEquals(2, type.relations.size());//TODO add relation function
+		assertEquals(TypeStandalone.Relation, type.standalone);
+
+		assertEquals(1, type.fields.size());
+		assertEquals("Name", type.fields.get(0).name);
+	}
 	public void test_type_PersonCircularDependency() throws Exception {
 		Type type = compiler.findType("PersonCircularDependency");
 
