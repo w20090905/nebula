@@ -159,15 +159,15 @@ public class TemplateResouceEngineTest extends TestCase {
 		when(dataWareHouse.define(String.class, Entity.class, "Attribute")).thenReturn(attributes);
 		TemplateResouceEngine templateResouceEngine = new TemplateResouceEngine(loader, typeLoader, typeBrokers,dataWareHouse, templateConfig);
 
-		String path = "test.js";
+		String path = "js/test.js";
 		when(loader.findSource(path)).thenReturn(null);
 
 		Resource resource = templateResouceEngine.resolve(path);
 
 		verify(loader, times(1)).findSource(path);
 
-		assertNotNull(resource);
-		assertEquals(StaticTemplateResouce.class, resource.getClass());
+		assertNull(resource);
+//		assertEquals(StaticTemplateResouce.class, resource.getClass());
 	}
 
 	public final void testResolve_Type_1() throws IOException, ServletException {

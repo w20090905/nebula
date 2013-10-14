@@ -120,6 +120,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 			Broker<Type> attachedType;
 			switch (names.length - start) {
 			default:
+				return null;
 			case 4:
 				attachedTypeName = names[start + 0];
 				typeName = names[start + 1];
