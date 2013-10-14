@@ -7,13 +7,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import nebula.data.Timable;
 import util.InheritHashMap;
 
-public class Type implements Timable {	
+public class Type implements Timable {
 	public static final String ATTACH_TO = "AttachTo";
 	public static final String ATTACH = "Attach";
 	public static final String GROUP_BY = "GroupBy";
-	
-	
-	
+
 	public static final String CTOR = "<ctor>";
 	public static final String ONSAVE = "<onSave>";
 	public static final String ONLOAD = "<onLoad>";
@@ -45,13 +43,6 @@ public class Type implements Timable {
 	final List<Type> attachedBy;
 
 	public static String ROOT_TYPE = "T";
-
-	/*
-	 * 
-	 * public static String BASIC = "Basic"; public static String MASTER =
-	 * "Master"; public static String TRANSACTION = "Transaction"; public static
-	 * String MIXIN = "Mixin";
-	 */
 
 	Type(TypeLoader typeLoader, String name) {
 		this.superType = null;
