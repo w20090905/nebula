@@ -104,6 +104,10 @@ function AttachedNewEntityCtrl($scope, $route, $resource, $routeParams, $locatio
 	
 	var DataResource = $resource('/d/:attachedtypename/:attachedid/:typename/', $routeParams,{});
 	$scope.data = new DataResource();
+		
+	var initData = $resource('/d/:attachedtypename/:attachedid/:typename/!new', $routeParams).get($routeParams,function() {
+		angular.extend($scope.data,initData);
+	});
 	
 	angular.extend($scope.data,$routeParams);
 

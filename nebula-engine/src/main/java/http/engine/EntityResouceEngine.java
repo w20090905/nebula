@@ -1,6 +1,7 @@
 package http.engine;
 
 import http.resource.AttachedEntityListResouce;
+import http.resource.AttachedEntityNewResouce;
 import http.resource.EntityListResouce;
 import http.resource.EntityNewResouce;
 import http.resource.EntityResouce;
@@ -38,6 +39,7 @@ public class EntityResouceEngine implements ResourceEngine {
 	private static final int ATTACHTO_TYPENAME = 2;
 	private static final int ATTACHTO_ID = 3;
 	private static final int ATTACH_TYPENAME = 4;
+	private static final int ATTACH_ID = 5;
 
 	private Log log = LogFactory.getLog(this.getClass());
 	final DataRepos dataRepos;
@@ -64,6 +66,10 @@ public class EntityResouceEngine implements ResourceEngine {
 		String typeName = null;
 
 		switch (paths.length) {
+		case 6:
+			if ("!new".equalsIgnoreCase(paths[ATTACH_ID])) {
+				return makeAttachedEntityNewResouce(paths[ATTACHTO_TYPENAME], paths[ATTACHTO_ID], paths[ATTACH_TYPENAME]);
+			}
 		case 5:
 			return makeAttachedEntityListResouce(paths[ATTACHTO_TYPENAME], paths[ATTACHTO_ID], paths[ATTACH_TYPENAME]);
 		case 4:
@@ -114,7 +120,19 @@ public class EntityResouceEngine implements ResourceEngine {
 		// if (typeBroker.get().getStandalone() == TypeStandalone.Transaction) {
 		// // return new TxEntityResource(jsonHolder, storeHolder, id);
 		// } else {
-		return new EntityNewResouce(null, dataRepos, jsonHolder,typeBroker, storeHolder);
+		return new EntityNewResouce(null, dataRepos, jsonHolder, typeBroker, storeHolder);
+		// }
+	}
+
+	private Resource makeAttachedEntityNewResouce(String attachToTypeName, String attachToID, String typeName) {
+		Broker<Type> typeBroker = typeBrokers.getBroker(typeName);
+		Broker<DataStore<Entity>> storeHolder = dataRepos.define(Long.class, Entity.class, typeName);
+		Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(typeBroker);
+
+		// if (typeBroker.get().getStandalone() == TypeStandalone.Transaction) {
+		// // return new TxEntityResource(jsonHolder, storeHolder, id);
+		// } else {
+		return new AttachedEntityNewResouce(null, dataRepos, jsonHolder, typeBroker, storeHolder, attachToTypeName, attachToID);
 		// }
 	}
 

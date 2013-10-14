@@ -4,7 +4,7 @@
 [#import "./lib/layouts.ftl" as nl]
 
 [@nl.article title="${attachedType.displayName} - {{attachedData.Name}}" type=type]
-[@nl.simpleAttached attachedType=attachedType type=type]
+[@nl.simpleAttachedList attachedType=attachedType type=type]
 			
 	<table class="table table-striped table-bordered table-hover">
 		<thead>
@@ -75,5 +75,5 @@
 			</tr>
 		</tbody>
 	</table>
-[/@nl.simpleAttached]
+[/@nl.simpleAttachedList]
 [/@nl.article]

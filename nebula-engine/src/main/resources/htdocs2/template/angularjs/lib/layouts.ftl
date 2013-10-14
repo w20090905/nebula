@@ -102,7 +102,6 @@
 [/#macro]
 
 [#macro simpleAttachedList attachedType type]
-*********************
 		<div class="row-fluid">
 			<div class="span12">
 				<div class="widget-box">
