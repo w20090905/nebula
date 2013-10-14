@@ -177,8 +177,10 @@ function NewEntityCtrl($scope, $resource, $routeParams, $location, $interpolate)
 
 	var DataResource = $resource('/d/:typename/', $routeParams);
 	$scope.data = new DataResource();
-	
-	angular.extend($scope.data,$routeParams);
+
+	var initData = $resource('/d/:typename/!new', $routeParams).get($routeParams,function() {
+		angular.extend($scope.data,initData);
+	});
 	
 	$scope.$save = function() {
 		$scope.data.$save(function(u, getResponseHeaders) {
