@@ -30,7 +30,7 @@
 		[/#if]			
 	[/@compress][/#assign]
 	
-	[#assign optReadonly][#if key && !field.attrs.Auto??] x-ng-readonly ="update"[#elseif key] readonly [#elseif readonly]readonly[/#if][/#assign]
+	[#assign optReadonly][#if key && !field.attrs.Auto??] x-ng-readonly ="update"[#elseif key || field.derived] readonly [#elseif readonly]readonly[/#if][/#assign]
 	[#assign optValidateRule][@compress single_line=true]
 			[#if field.attrs.Min??		] min		="${field.attrs.Min}" 			[/#if]
 			[#if field.attrs.Max??		] max		="${field.attrs.Max}" 			[/#if]
