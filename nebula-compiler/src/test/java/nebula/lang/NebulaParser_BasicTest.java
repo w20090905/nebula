@@ -305,7 +305,8 @@ public class NebulaParser_BasicTest extends TestCase {
 		assertEquals("年龄", parseField("Age;").getDisplayName());
 		assertEquals("Age", parseField("Age Age;").getDisplayName());
 		assertEquals("年龄Local", parseField("Age|年龄Local Age;").getDisplayName());
-		assertEquals("临时Age", parseField("临时-Age Age;").getDisplayName());
+		assertEquals("临时 Age", parseField("临时-Age;").getDisplayName());
+		assertEquals("临时 Age", parseField("临时-Age Age;").getDisplayName());
 		assertEquals("永久年龄", parseField("临时-Age|永久年龄 Age;").getDisplayName());
 
 		assertEquals("Name", parseField("Name|zh:姓名|\"zh-tw\":台湾姓名;").getDisplayName());

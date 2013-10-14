@@ -405,7 +405,11 @@ fieldDefinition[Type resideType] returns[Field field]
             }
             
            if(aliases!=null)field.setNameAlias(aliases);
-           else field.setNameAlias(new Aliases(field.name));
+           else if($qtype==null){
+              field.setNameAlias(new Aliases(field.name));
+            }else{
+              field.setNameAlias(new Aliases($name.text + " " + $qtype.text));
+            }
             
             if(action==null){            
               resideType.fields.add(field);
