@@ -37,7 +37,7 @@
 			[#if field.attrs.MinLength??] minLength	="${field.attrs.MinLength}" [/#if]
 			[#if field.attrs.MaxLength??] maxLength	="${field.attrs.MaxLength}" [/#if]
 	[/@compress][/#assign]
-	[#assign optRequired][#if key && !field.attrs.Auto??] x-ng-required ="update" [#elseif !key && required] required[/#if][/#assign]
+	[#assign optRequired][#if key && !field.attrs.Auto??] x-ng-required ="update" [#elseif field.derived] [#elseif !key && required] required[/#if][/#assign]
 	[#if field.type.attrs.SP?? &&  field.type.attrs.SP = "Attr"]
 		[#assign attrValues][@compress single_line=true]			
 			[#list (attrs[field.name].Values)![] as attr],{'name':'${attr.Name}'}[/#list]
