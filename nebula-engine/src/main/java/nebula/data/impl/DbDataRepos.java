@@ -21,9 +21,12 @@ public class DbDataRepos extends DefaultDataRepos implements DataReposEx {
 	@Override
 	@SuppressWarnings("rawtypes")
 	protected DataStore loadDataStore(String name, Type type) {
-		if (type.getStandalone() == TypeStandalone.Transaction) {
+		switch (type.getStandalone()) {
+		case Transaction:
+		case Relation:
 			return new DbTransactionEntityDataStore(this, type, (DbTxDataExecutor) dbConfig.getPersister(type));
-		} else {
+		case Master:
+		default:
 			return new DbMasterEntityDataStore(this, type, dbConfig.getPersister(type));
 		}
 	}

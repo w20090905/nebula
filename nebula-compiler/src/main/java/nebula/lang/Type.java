@@ -7,6 +7,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import nebula.data.Timable;
 import util.InheritHashMap;
 
+import com.google.common.collect.Lists;
+
 public class Type implements Timable {
 	public static final String ATTACH_TO = "AttachTo";
 	public static final String ATTACH = "Attach";
@@ -21,7 +23,7 @@ public class Type implements Timable {
 	final Type residedType;
 	final Type superType;
 	final List<Type> relations;
-	
+
 	final RawTypes rawType;// For Basic Type
 
 	final String name;
@@ -129,6 +131,17 @@ public class Type implements Timable {
 	}
 
 	public List<Field> getFields() {
+		List<Field> allFields = null;
+		if (this.superType == null) {
+			allFields = Lists.newArrayList();
+		} else {
+			allFields = this.superType.getFields();
+		}
+		allFields.addAll(this.fields);
+		return allFields;
+	}
+
+	public List<Field> getDeclaredFields() {
 		return fields;
 	}
 

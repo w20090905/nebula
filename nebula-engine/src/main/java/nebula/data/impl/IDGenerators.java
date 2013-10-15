@@ -12,6 +12,7 @@ class IDGenerators {
 		String idGenerationStrategy;
 		switch (type.getStandalone()) {
 		case Transaction:
+		case Relation:
 			keyField = null;
 			for (Field f : type.getFields()) {
 				if (f.isKey()) {

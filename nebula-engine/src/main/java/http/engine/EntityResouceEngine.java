@@ -141,9 +141,12 @@ public class EntityResouceEngine implements ResourceEngine {
 		Broker<DataStore<Entity>> storeHolder = dataRepos.define(Long.class, Entity.class, typeName);
 		Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(typeBroker);
 
-		if (typeBroker.get().getStandalone() == TypeStandalone.Transaction) {
+		switch (typeBroker.get().getStandalone()) {
+		case Transaction:
+		case Relation:
 			return new TxEntityResource(jsonHolder, storeHolder, id);
-		} else {
+		case Master:
+		default:
 			return new EntityResouce(jsonHolder, storeHolder, id);
 		}
 	}

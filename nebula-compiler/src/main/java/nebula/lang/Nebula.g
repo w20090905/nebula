@@ -262,8 +262,7 @@ typeDefinition returns[Type type]
          ('|' aliases=aliasesLiteral[$typeID.text]
          | {aliases = new Aliases($typeID.text);}
          )
-         ('<' relations=relationsDefinition '>')?
-        ('extends' superTypeID=ID)? { 
+        ('extends' superTypeID=ID  ('<' relations=relationsDefinition '>')?)? { 
             if($superTypeID==null){
                 switch(typeType){
                   case Transaction:
@@ -280,12 +279,19 @@ typeDefinition returns[Type type]
                     throw new RuntimeException("Type's standalone [" + typeType + "] not match super type's standalone [" + superType.standalone + "]");
                 }
                 type = new Type(loader,$typeID.text,superType);
+		            if(relations!=null){        
+			              type.relations.addAll(relations);
+			              for(Type rt : relations){
+					              Field field = new Field(type,rt.name);
+					              field.type = rt; 
+					              field.attrs.put("Attach","Attach");        
+					              field.refer = ByRef;    
+              field.setNameAlias(new Aliases(field.name));
+			                  type.fields.add(field);
+			              }
+		            }
             } 
-            
-            if(relations!=null){        
-              type.relations.addAll(relations);
-            }
-           
+                       
             if(annotations != null){
                 type.attrs.putAll(annotations);
             }

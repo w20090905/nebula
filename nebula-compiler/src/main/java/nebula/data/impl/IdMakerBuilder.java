@@ -49,6 +49,7 @@ public class IdMakerBuilder {
 				throw new UnsupportedOperationException("max 4 key");
 			}
 		case Transaction:
+		case Relation:
 			for (Field f : type.getFields()) {
 				if (f.getType().getStandalone() == TypeStandalone.Basic && f.isKey()) {
 					keys.add(f.getName());

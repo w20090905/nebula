@@ -4,7 +4,37 @@
 [#import "./lib/layouts.ftl" as nl]
 
 [@nl.article title="${attachedType.displayName} - {{attachedData.Name}}" type=type]
-[@nl.simpleAttached attachedType=attachedType type=type]
+
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="widget-box">
+					<div class="widget-title">
+						<span class="icon"> <i class="icon-align-justify"></i>
+						</span>
+						<ul class="nav nav-tabs">
+				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}">概述</a></li>
+	[#list attachedType.attachedBy as atby][#if atby.standalone=="Transaction"]
+				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}/${atby.name}/">${atby.displayName}</a></li>
+	[/#if][/#list]
+							<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}/setting/info">Settings</a></li>
+						</ul>
+						<!-- <div class="buttons btn-toolbar" x-ng-show="data.standealone='Master'">
+							<input type="text" x-ng-model="query" class="input-medium search-query ctrl" placeholder="Filter">	
+							<a href="#/d/${type.name}/!new" class="btn btn-small btn-success ctrl"><i class="icon-plus icon-white"></i> 新建</a>
+						</div> -->
+					</div>
+					<div class="widget-content nopadding">
+						<ul class="nav nav-tabs">
+				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}/setting/info">信息</a></li>
+	[#list attachedType.attachedBy as atby][#if atby.standalone!="Transaction"]
+		[#if atby.name == type.name]
+				  			<li class="active"><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}/setting/${atby.name}/">${atby.displayName}</a></li>
+		[#else]
+				  			<li><a tabindex="-1" href="#/d/${attachedType.name}/{{attachedData.Name}}/setting/${atby.name}/">${atby.displayName}</a></li>
+		[/#if]
+	[/#if][/#list]
+						</ul>
+					
 <!-- Start Form -->
 	<form name="form" x-ng-submit="$save()"  class="form-horizontal" novalidate>
 
@@ -104,7 +134,7 @@
 						[#break]
 					[#case "ByRef"] <!--  Type A3   -->
 					[#case "Cascade"] <!--  Type A4   -->
-					[#if of.attrs.Attach?? && of.name = attachedType.name]
+					[#if of.attrs.Attach?? && of.attrs.Attach = attachedType.name]
 					[@nc.hiddenRefer field=of pField=of id="${of.name}" ngModel="data.${of.name}"	key=(of.key)/]
 					[#else]					
 				[@nc.controls field=of for="${of.name}" label="${of.displayName}"]
@@ -250,6 +280,9 @@
 		</div>
 		<!-- End Form -->
 	</form>
-[/@nl.simpleAttached]
+	</div>
+	</div>
+	</div>
+	</div>
 
 [/@nl.article]

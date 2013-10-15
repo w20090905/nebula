@@ -125,23 +125,36 @@ public class NebulaParser_TypeTest extends TestCase {
 		assertEquals(0, type.fields.get(i).rangeFrom);
 		assertEquals(5, type.fields.get(i).rangeTo);
 	}
-	
-	public void test_type_relation() throws Exception {
+
+	public void test_type_Relation() throws Exception {
 		//@formatter:off
 		String text = "" +
-				"rt Memeber<Company,Person> { " +
-				"	Name;" +
+				"rt CompanyPersonMemeber extends Member<Company,Person> { " +
 				"};";
 		//@formatter:on	
 		Type type = compiler.load(text);
 
-		assertEquals("Memeber", type.name);
-		assertEquals(2, type.relations.size());//TODO add relation function
+		assertEquals("CompanyPersonMemeber", type.name);
+		assertEquals(2, type.relations.size());// TODO add relation function
 		assertEquals(TypeStandalone.Relation, type.standalone);
 
-		assertEquals(1, type.fields.size());
-		assertEquals("Name", type.fields.get(0).name);
+		assertEquals(2, type.getDeclaredFields().size());
+		int i = 0;
+		assertEquals("Company", type.getDeclaredFields().get(i++).name);
+		assertEquals("Person", type.getDeclaredFields().get(i++).name);
+		i = 0;
+		assertEquals("Attach", type.getDeclaredFields().get(i++).attrs.get("Attach"));
+		assertEquals("Attach", type.getDeclaredFields().get(i++).attrs.get("Attach"));
+
+		assertEquals(5, type.getFields().size());
+		i = 0;
+		assertEquals("ID", type.getFields().get(i++).name);
+		assertEquals("FromDate", type.getFields().get(i++).name);
+		assertEquals("ToDate", type.getFields().get(i++).name);
+		assertEquals("Company", type.getFields().get(i++).name);
+		assertEquals("Person", type.getFields().get(i++).name);
 	}
+
 	public void test_type_PersonCircularDependency() throws Exception {
 		Type type = compiler.findType("PersonCircularDependency");
 

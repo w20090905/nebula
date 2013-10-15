@@ -10,7 +10,7 @@
 		<thead>
 			<tr>
 				<th class="id">#</th>
-				[#list type.fields as field][#if !field.array && !field.ignorable && !(field.attrs.Attach?? && field.name ==attachedType.name)]
+				[#list type.fields as field][#if !field.array && !field.ignorable && !field.attrs.Attach??]
 					[#switch field.refer]
 					[#case "ByVal"]
 						[#if !field.key || field.type.name!="ID"]
@@ -38,7 +38,7 @@
 		<tbody>
 			<tr x-ng-repeat="data in datalist | filter:query | orderBy:orderProp">
 				[#assign keyfieldname][/#assign]
-			[#list type.fields as field][#if !field.array  && !field.ignorable && !(field.attrs.Attach?? && field.name ==attachedType.name)]
+			[#list type.fields as field][#if !field.array  && !field.ignorable && !field.attrs.Attach??]
 				[#switch field.refer]
 				[#case "ByVal"]
 					[#if field.key]

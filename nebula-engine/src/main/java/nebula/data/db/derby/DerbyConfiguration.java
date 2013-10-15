@@ -28,6 +28,7 @@ public class DerbyConfiguration extends DbConfiguration {
 
 		switch (type.getStandalone()) {
 		case Transaction:
+		case Relation:
 			executor = new DbTransactionDataExecutor(this, conn, type, new DerbySQLHelper(this, type));
 			break;
 

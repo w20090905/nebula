@@ -3,14 +3,14 @@
 [#import "./lib/forms.ftl" as nf]
 [#import "./lib/layouts.ftl" as nl]
 
-[@nl.article title="${attachedType.displayName} - {{attachedData.Name}}" type=type]
-[@nl.simpleAttachedList attachedType=attachedType type=type]
+[@nl.article title="${type.displayName}" type=type]
+	[@nl.simplelist title="${type.displayName}"  type=type]
 			
 	<table class="table table-striped table-bordered table-hover">
 		<thead>
 			<tr>
 				<th class="id">#</th>
-				[#list type.fields as field][#if !field.array && !field.ignorable && !(field.attrs.Attach?? && field.name ==attachedType.name)]
+				[#list type.fields as field][#if !field.array && !field.ignorable]
 					[#switch field.refer]
 					[#case "ByVal"]
 						[#if !field.key || field.type.name!="ID"]
@@ -38,14 +38,14 @@
 		<tbody>
 			<tr x-ng-repeat="data in datalist | filter:query | orderBy:orderProp">
 				[#assign keyfieldname][/#assign]
-			[#list type.fields as field][#if !field.array  && !field.ignorable && !(field.attrs.Attach?? && field.name ==attachedType.name)]
+			[#list type.fields as field][#if !field.array  && !field.ignorable]
 				[#switch field.refer]
 				[#case "ByVal"]
 					[#if field.key]
-			<td><a href="#/d/${attachedType.name}/{{attachedData.Name}}/${type.name}/{{data.${field.name}}}">{{data["${field.name}"]}}</a></td>
-						[#assign keyfieldname]${field.name}[/#assign]			
+			<td class="id"><a href="#/d/${type.name}/{{data.${field.name}}}">{{data["${field.name}"]}}</a></td>
+						[#assign keyfieldname]${field.name}[/#assign]
 					[#elseif field.core]	
-			<td><a href="#/d/${attachedType.name}/{{attachedData.Name}}/${type.name}/{{data.${keyfieldname}}}">{{data["${field.name}"]}}</a></td>
+			<td><a href="#/d/${type.name}/{{data.${keyfieldname}}}">{{data["${field.name}"]}}</a></td>
 					[#else]	
 			<td>{{data["${field.name}"]}}</td>
 					[/#if]
@@ -57,9 +57,7 @@
 					[#break]
 				[#case "ByRef"]
 				[#case "Cascade"]
-					<td>[#if field.unique]<a href="#/d/${attachedType.name}/{{attachedData.Name}}/${type.name}/{{data.${keyfieldname}}}">[/#if]
-					
-					[#list field.type.fields as rF]
+					<td>[#list field.type.fields as rF]
 						[#if field.key && rF.key && rF.name!="ID"]
 						{{ data["${field.name}${rF.name}"] }}&nbsp;
 						[#elseif rF.key && rF.key && rF.name!="ID"]
@@ -67,13 +65,12 @@
 						[#elseif rF.core]
 						{{ data["${field.name}${rF.name}"] }}&nbsp;
 						[/#if]
-					[/#list]
-					[#if field.core]</a>[/#if]</td>
+					[/#list]</td>
 					[#break]
 				[/#switch]
 			[/#if][/#list]
 			</tr>
 		</tbody>
-	</table>
-[/@nl.simpleAttachedList]
+	</table>		
+[/@nl.simplelist]
 [/@nl.article]

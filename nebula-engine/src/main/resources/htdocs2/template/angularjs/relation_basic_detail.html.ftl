@@ -3,8 +3,9 @@
 [#import "./lib/forms.ftl" as nf]
 [#import "./lib/layouts.ftl" as nl]
 
-[@nl.article title="${attachedType.displayName} - {{attachedData.Name}}" type=type]
-[@nl.simpleAttached attachedType=attachedType type=type]
+[@nl.article title="${type.displayName}&nbsp;" + '#' + "{{data.ID}}" type=type]
+[@nl.simple title="${type.displayName}"]
+					
 <!-- Start Form -->
 	<form name="form" x-ng-submit="$save()"  class="form-horizontal" novalidate>
 
@@ -14,7 +15,7 @@
 					[#case "ByVal"] <!--  Basic Type Field <!--  Type A1-->
 						[#if !of.key || of.type.name != "ID"]
 			[@nc.controls field=of for="${of.name}" label="${of.displayName}"]
-					[@nc.inputBox field=of id="${of.name}"  ngModel="data.${of.name}" placeholder="${of.displayName}" 
+					[@nc.inputBox field=of id="${of.name}"  ngModel="data.${of.name}" placeholder="${of.name}" 
 						key=of.key required=!of.ignorable/]
 			[/@nc.controls]
 						[/#if]
@@ -27,7 +28,7 @@
 								[#switch in1f.refer]
 								[#case "ByVal"] <!--  Type B1-->
 				[@nc.controls field=in1f for="${of.name}${in1f.name}" label="${in1f.displayName}"]
-					[@nc.inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.displayName} ${in1f.displayName}"
+					[@nc.inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name} ${in1f.name}"
 						required=!(of.ignorable || in1f.ignorable)/]
 				[/@nc.controls]
 									[#break]
@@ -37,7 +38,7 @@
 																										<!--  C1   -->
 
 				[@nc.controls  field=in2f for="${of.name}${in1f.name}${in2f.name}" label="${in1f.displayName}${in2f.displayName}"]
-					[@nc.inputBox field=in2f id="${of.name}${in1f.name}${in2f.name}" ngModel="data.${of.name}.${in1f.name}${in2f.name}" placeholder="${of.displayName} ${in1f.displayName} ${in2f.displayName}"
+					[@nc.inputBox field=in2f id="${of.name}${in1f.name}${in2f.name}" ngModel="data.${of.name}.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}"
 						required=!(of.ignorable || in1f.ignorable || in2f.ignorable)/]
 				[/@nc.controls]
 										[/#if] 
@@ -47,7 +48,7 @@
 								[#case "Cascade"] <!--  Type B4   -->
 
 				[@nc.controls  field=in1f for="${of.name}${in1f.name}" label="${in1f.displayName}"]
-					[@nc.popupBox field=in1f pField=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.displayName} ${in1f.displayName}"
+					[@nc.popupBox field=in1f pField=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name} ${in1f.name}"
 						readonly=true required=!(of.ignorable || in1f.ignorable)/]		
 				[/@nc.controls]
 									[#break]
@@ -57,7 +58,7 @@
 								[#case "ByVal"] <!--  Type B5   -->
 											
 			[@nc.controls  field=in1f for="${of.name}${in1f.name}" label="${of.displayName} ${in1f.displayName}"]
-					[@nc.inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.displayName}${in1f.displayName}"
+					[@nc.inputBox field=in1f id="${of.name}${in1f.name}" ngModel="data.${of.name}.${in1f.name}" placeholder="${of.name}${in1f.name}"
 						required=!(of.ignorable || in1f.ignorable) /] <!-- ngList -->
 			[/@nc.controls]
 									[#break]
@@ -104,21 +105,17 @@
 						[#break]
 					[#case "ByRef"] <!--  Type A3   -->
 					[#case "Cascade"] <!--  Type A4   -->
-					[#if of.attrs.Attach?? && of.name = attachedType.name]
-					[@nc.hiddenRefer field=of pField=of id="${of.name}" ngModel="data.${of.name}"	key=(of.key)/]
-					[#else]					
 				[@nc.controls field=of for="${of.name}" label="${of.displayName}"]
-					[@nc.popupBox field=of pField=of id="${of.name}" ngModel="data.${of.name}"  placeholder="${of.displayName}"
+					[@nc.popupBox field=of pField=of id="${of.name}" ngModel="data.${of.name}"  placeholder="${of.name}"
 						key=(of.key) readonly=true required=!(of.ignorable)/]
 				[/@nc.controls]
-					[/#if]
 						[#break]
 					[/#switch]
 				[#else] <!--  数组不可以是Key   -->
 					[#switch of.refer]
 					[#case "ByVal"] <!--  Basic Type Field  --> <!--  Type A5   -->
 			[@nc.controls  field=of for="${of.name}" label="${of.displayName}"]
-					[@nc.inputBox field=of id="${of.name}" ngModel="data.${of.name}" placeholder="${of.displayName}"
+					[@nc.inputBox field=of id="${of.name}" ngModel="data.${of.name}" placeholder="${of.name}"
 						required=!(of.ignorable) ex="x-ng-list"/] <!-- ngList -->
 			[/@nc.controls]
 						[#break]
@@ -206,7 +203,7 @@
 								[#switch in1f.refer]
 								[#case "ByVal"] <!--  Type E1   -->
 									
-					<td>	[@nc.inputBox field=in1f id="${of.name}${in1f.name}_new"  ngModel="data.${of.name}_new.${in1f.name}" placeholder="${of.displayName} ${in1f.displayName}" 
+					<td>	[@nc.inputBox field=in1f id="${of.name}${in1f.name}_new"  ngModel="data.${of.name}_new.${in1f.name}" placeholder="${of.name} ${in1f.name}" 
 						required=false/]</td>[#--TODO  key=in1f.key  required=!in1f.ignorable--]
 					
 									[#break]
@@ -214,7 +211,7 @@
 									[#list in1f.type.fields as in2f][#t]
 										[#if !in2f.array && in2f.refer == "ByVal"]
 										
-					<td>	[@nc.inputBox field=in1f id="${of.name}_new_${in1f.name}${in2f.name}"  ngModel="data.${of.name}_new.${in1f.name}${in2f.name}" placeholder="${of.displayName} ${in1f.displayName} ${in2f.displayName}" 
+					<td>	[@nc.inputBox field=in1f id="${of.name}_new_${in1f.name}${in2f.name}"  ngModel="data.${of.name}_new.${in1f.name}${in2f.name}" placeholder="${of.name} ${in1f.name} ${in2f.name}" 
 						key=in1f.key required=false/]</td>[#--TODO required=!in1f.ignorable --] 
 					
 										[/#if]
@@ -222,7 +219,7 @@
 									[#break]
 								[#case "ByRef"]<!--  Type E3-->
 								[#case "Cascade"]<!--  Type E4-->										
-					<td>[@nc.popupBox field=in1f pField=in1f id="${of.name}_new_${in1f.name}" ngModel="data.${of.name}_new.${in1f.name}" placeholder="${of.displayName} ${in1f.displayName}"
+					<td>[@nc.popupBox field=in1f pField=in1f id="${of.name}_new_${in1f.name}" ngModel="data.${of.name}_new.${in1f.name}" placeholder="${of.name} ${in1f.name}"
 						key=of.key readonly=true required=false/]</td>[#--  required=!(of.ignorable) --]
 									[#break]
 								[/#switch]
@@ -245,11 +242,11 @@
 	
 		<div class="form-actions">
 	  		<input type="submit" class="btn btn-primary" x-ng-disabled="form.$invalid" value="Save changes">
-	  		<a href="#/d/${attachedType.name}/{{attachedData.Name}}/${type.name}/" class="btn">返回</a>
+	  		<a href="" class="btn" x-ng-click="$back()">返回</a>
 			<!-- button type="button" class="btn">Cancel</button--> 
 		</div>
 		<!-- End Form -->
 	</form>
-[/@nl.simpleAttached]
 
+[/@nl.simple]
 [/@nl.article]
