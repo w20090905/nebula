@@ -128,7 +128,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 				actionName = names[start + 3];
 				attachedType = typeBrokers.getBroker(attachedTypeName);
 				type = typeBrokers.getBroker(typeName);
-				if (specName == null && type.get().getStandalone() == TypeStandalone.Master) {
+				if (specName == null && type.get().getStandalone() != TypeStandalone.Transaction) {
 					specName = "setting";
 				}
 				return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, path, theme, skin, attachedType, type, specName, layoutName,

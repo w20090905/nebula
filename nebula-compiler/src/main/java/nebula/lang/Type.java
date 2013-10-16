@@ -45,6 +45,7 @@ public class Type implements Timable {
 	final List<Type> subTypes;
 	final List<Field> references;
 	final List<Type> attachedBy;
+	Field keyField;
 
 	public static String ROOT_TYPE = "T";
 
@@ -223,6 +224,10 @@ public class Type implements Timable {
 
 	public List<Type> getAttachedBy() {
 		return attachedBy;
+	}
+
+	public Field getKeyField() {
+		return keyField;
 	}
 
 }

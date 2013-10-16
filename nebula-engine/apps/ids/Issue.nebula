@@ -2,6 +2,7 @@ tx Issue{
 !ID;
 @Attach Project;
 @InlineShow *IssueType;
+@InlineShow AssignTo Person;
 DataStatus|状态 Attr:="Draft";
 *Subject;
 ?Note;

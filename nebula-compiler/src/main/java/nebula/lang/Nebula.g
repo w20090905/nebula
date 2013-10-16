@@ -84,6 +84,7 @@ options {
             if(firstKey==null && firstUnique!=null){
               firstUnique.modifiers |= Key;
             }
+            type.keyField = firstKey!=null?firstKey:firstUnique;
         }
     
     
@@ -286,7 +287,8 @@ typeDefinition returns[Type type]
 					              field.type = rt; 
 					              field.attrs.put("Attach","Attach");        
 					              field.refer = ByRef;    
-              field.setNameAlias(new Aliases(field.name));
+					              field.setNameAlias(new Aliases(field.name));
+					              field.modifiers |= Core;
 			                  type.fields.add(field);
 			              }
 		            }

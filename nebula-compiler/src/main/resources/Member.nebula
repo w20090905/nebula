@@ -1,0 +1,5 @@
+rt Member{
+	!ID;
+	From-Date;
+	?To-Date;
+};

@@ -1,6 +1,0 @@
-tx  MemberShip{
-!!ID;
-@Attach Project;
-!*Person;
-@InlineShow *ProjectRole;
-}

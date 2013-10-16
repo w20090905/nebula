@@ -104,7 +104,7 @@
 						[#break]
 					[#case "ByRef"] <!--  Type A3   -->
 					[#case "Cascade"] <!--  Type A4   -->
-					[#if of.attrs.Attach?? && of.name = attachedType.name]
+					[#if of.attrs.Attach?? && of.type.name = attachedType.name]
 					[@nc.hiddenRefer field=of pField=of id="${of.name}" ngModel="data.${of.name}"	key=(of.key)/]
 					[#else]					
 				[@nc.controls field=of for="${of.name}" label="${of.displayName}"]

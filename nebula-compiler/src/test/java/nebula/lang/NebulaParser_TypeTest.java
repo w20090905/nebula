@@ -143,7 +143,10 @@ public class NebulaParser_TypeTest extends TestCase {
 		assertEquals("Company", type.getDeclaredFields().get(i++).name);
 		assertEquals("Person", type.getDeclaredFields().get(i++).name);
 		i = 0;
+		assertEquals(true, type.getDeclaredFields().get(i).isCore());
 		assertEquals("Attach", type.getDeclaredFields().get(i++).attrs.get("Attach"));
+		
+		assertEquals(true, type.getDeclaredFields().get(i).isCore());
 		assertEquals("Attach", type.getDeclaredFields().get(i++).attrs.get("Attach"));
 
 		assertEquals(5, type.getFields().size());

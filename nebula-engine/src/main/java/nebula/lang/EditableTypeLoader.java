@@ -28,6 +28,12 @@ public class EditableTypeLoader extends TypeLoader implements Runnable {
 		}
 		loadedTypes = Maps.newHashMap();
 	}
+	
+	public void loadAllImmediately(){
+		for (File path : this.paths) {
+			this.doLoadFolder(path, path);
+		}
+	}
 
 	public void start() {
 		new Thread(this).start();

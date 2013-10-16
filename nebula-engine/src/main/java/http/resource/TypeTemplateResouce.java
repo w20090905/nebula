@@ -1,5 +1,7 @@
 package http.resource;
 
+import http.resource.template.LoadDataMethod;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -17,80 +19,12 @@ import nebula.data.Entity;
 import nebula.lang.Field;
 import nebula.lang.Type;
 
-import com.google.common.base.Preconditions;
 
 import freemarker.cache.TemplateLoader;
-import freemarker.ext.beans.BeansWrapper;
-import freemarker.ext.beans.CollectionModel;
 import freemarker.template.Configuration;
-import freemarker.template.ObjectWrapper;
-import freemarker.template.SimpleCollection;
 import freemarker.template.Template;
-import freemarker.template.TemplateCollectionModel;
 import freemarker.template.TemplateException;
-import freemarker.template.TemplateHashModel;
 import freemarker.template.TemplateMethodModel;
-import freemarker.template.TemplateModel;
-import freemarker.template.TemplateModelException;
-import freemarker.template.TemplateModelIterator;
-
-class DatastoreTemplateHashModel implements TemplateHashModel, TemplateCollectionModel {
-	DataStore<Entity> datastore;
-
-	public DatastoreTemplateHashModel(DataStore<Entity> dataWareHouse) {
-		this.datastore = dataWareHouse;
-	}
-
-	@Override
-	public TemplateModel get(String key) throws TemplateModelException {
-		Entity entity = datastore.get(key);
-		return ObjectWrapper.SIMPLE_WRAPPER.wrap(entity);
-	}
-
-	@Override
-	public boolean isEmpty() throws TemplateModelException {
-		return datastore.listAll().size() < 1;
-	}
-
-	@Override
-	public TemplateModelIterator iterator() throws TemplateModelException {
-		return new SimpleCollection(datastore.listAll().iterator()).iterator();
-	}
-
-}
-
-class LoadDataMethod implements TemplateMethodModel {
-	DataRepos dataWareHouse;
-
-	public LoadDataMethod(DataRepos dataWareHouse) {
-		this.dataWareHouse = dataWareHouse;
-	}
-
-	@SuppressWarnings("rawtypes")
-	public TemplateModel exec(List args) throws TemplateModelException {
-		if (args.size() == 1) {
-			Preconditions.checkNotNull(args.get(0));
-			return this.doLoad((String) args.get(0));
-		} else if (args.size() == 3) {
-			Preconditions.checkNotNull(args.get(0));
-			Preconditions.checkNotNull(args.get(1));
-			Preconditions.checkNotNull(args.get(2));
-			return this.doLoad((String) args.get(0), (String) args.get(1), (String) args.get(2));
-		}
-		return null;
-	}
-
-	public TemplateModel doLoad(String key) throws TemplateModelException {
-		Broker<DataStore<Entity>> datastore = dataWareHouse.define(String.class, Entity.class, key);
-		return new DatastoreTemplateHashModel(datastore.get());
-	}
-
-	public TemplateModel doLoad(String key, String classificatorName, String classificatorValue) throws TemplateModelException {
-		Broker<DataStore<Entity>> datastore = dataWareHouse.define(String.class, Entity.class, key);
-		List<Entity> list = datastore.get().getClassificator(classificatorName).getData(classificatorValue);
-		return new CollectionModel(list, (BeansWrapper) ObjectWrapper.SIMPLE_WRAPPER);
-	}
-}
 
 public class TypeTemplateResouce extends AbstractResouce {
 	final Configuration cfg;
