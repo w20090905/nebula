@@ -3,5 +3,5 @@ tx ProductPrice|产品价格{
 @Attach Product;
 !From-Date;
 ?To-Date;
-Price;
+@Attach Price;
 }

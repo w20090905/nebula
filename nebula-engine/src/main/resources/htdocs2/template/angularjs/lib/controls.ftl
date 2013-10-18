@@ -73,6 +73,7 @@
 	[#assign relationType][/#assign]
 	[#assign relationSrcField][/#assign]
 	[#assign relationDestField][/#assign]
+	[#assign relationThisDestField][/#assign]
 	
 	[#if field.resideType.attrs.AttachTo?? && !field.attrs.Attach??]
 		[#assign atTypeName = attachedTypeName]
@@ -105,6 +106,36 @@
 				[/#if]
 			[/#list]		
 		[/#if]
+	[/#if]
+	
+	[#if field.attrs.Relation??]		
+		[#list field.type.attachedBy![] as atBy]
+			[#if atBy.name == field.attrs.Relation]
+				[#assign relationType = atBy]
+				
+				[#list atBy.declaredFields![] as fd]
+					[#if fd.attrs.Attach?? && fd.type.name = field.type.name]
+											
+						[#assign relationSrcField=fd]
+					[#elseif fd.attrs.Attach??]
+						[#assign relationDestField=fd]
+					[/#if]
+				[/#list]				
+				
+				[#list field.resideType.fields as fd]
+					[#if relationDestField.type.name = fd.type.name]
+						[#assign relationThisDestField=fd] 
+						[#if relationThisDestField.type.standalone = "Basic"]
+							[#assign mode="attachBasic"]
+						[#else]
+							[#assign mode="attachObject"]
+						[/#if]
+					[/#if]
+				[/#list]	
+		
+			[/#if]
+		[/#list]
+			
 	[/#if]
 		
 	[#assign fieldKeyName=field.type.keyField.name]
@@ -173,8 +204,7 @@
 						x-popup="/d/${attachField.type.name}/{{data.${attachField.name+attachField.type.keyField.name}}}/${field.type.name}/" 
 						x-beforePopup="${beforePopup}"
 						x-afterPopup="${afterPopup}"
-					>${showValue}</div>
-		
+					>${showValue}</div>		
 		[#elseif mode=="relation"]
 			[#assign beforePopup][/#assign]
 			[#assign afterPopup][/#assign]
@@ -193,7 +223,27 @@
 					x-beforePopup="${beforePopup}"
 					x-afterPopup="${afterPopup}"
 				>${showValue}</div>
-		[#else]				
+		[#elseif mode=="attachBasic"]
+			[#assign beforePopup][/#assign]
+			[#assign afterPopup][/#assign]
+			[#assign showValue][/#assign]
+			
+			[#list field.type.fields as in2f][#t]
+				[#if !in2f.array && in2f.refer == "ByVal"
+						&& (in2f.key || in2f.core)]
+						[#assign beforePopup]${beforePopup} ${in2f.name}=${ngModel}${in2f.name};[/#assign]
+						[#assign afterPopup]${afterPopup} ${ngModel}${in2f.name}=ret.${relationSrcField.name}${in2f.name};[/#assign]
+						[#if !in2f.key || in2f.type.name!="ID" || field.type.standalone != "Master"] [#assign showValue]${showValue}{{${ngModel}${in2f.name}}}&nbsp;[/#assign][/#if]
+				[/#if]
+				
+				[#assign afterPopup]${afterPopup} ${ngModel?substring(0,ngModel?last_index_of("."))}.${relationThisDestField.name}=ret.${relationDestField.name};[/#assign]
+			[/#list]
+			<div id="${id}"  class="uneditable-input" placeholder="${placeholder}"
+					x-popup="/d/${relationType.name}/" 
+					x-beforePopup="${beforePopup}"
+					x-afterPopup="${afterPopup}"
+				>${showValue}</div>
+		[#else]
 				[#assign beforePopup][/#assign]
 				[#assign afterPopup][/#assign]
 				[#assign showValue][/#assign]
@@ -212,7 +262,7 @@
 					x-afterPopup="${afterPopup}"
 				>${showValue}</div>
 		[/#if]
-	[/#if]	
+	[/#if]
 [/#macro]
 
 [#macro hiddenRefer field pField id ngModel key=false] [#-- // TODO Need Refact --]

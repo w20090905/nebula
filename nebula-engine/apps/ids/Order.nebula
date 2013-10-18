@@ -1,7 +1,9 @@
 tx Order{
 !ID;
+@Attach Organization;
 From Person;
 Detail[]{
+  @Relation("ProductPrice")
   !Product;
   Price;
 };
