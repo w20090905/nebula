@@ -249,7 +249,15 @@
 			<!-- button type="button" class="btn">Cancel</button--> 
 		</div>
 		<!-- End Form -->
-	</form>
+	</form>	
 [/@nl.simpleAttached]
+
+		[#list type.attachedBy![] as atBy]
+			${atBy.name}
+			[#assign attachedType=type]
+			[#assign type = atBy]
+			[#include "inline_transaction_transaction_basic_list.html.ftl"]
+		[/#list]
+
 
 [/@nl.article]

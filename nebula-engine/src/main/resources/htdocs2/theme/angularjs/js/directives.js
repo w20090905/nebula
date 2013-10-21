@@ -330,19 +330,39 @@ var nbViewDirective = ['$http', '$templateCache', '$route', '$anchorScroll', '$c
  * @description
  * Emitted every time the ngView content is reloaded.
  */
-var nbJsonDataDirective = ['$http', '$controller','$resource',
-               function($http, $controller,$resource) {
-  return {
-	scope:true, 
-    restrict: 'A',
-    link: function(scope, element, attr,controller) {
-     var at = attr; 
-     scope.jsonData = $resource(attr.jsondataurl).get({},function(){
-      	var d = 	 scope.jsonData;
-     });
-    }
-  };
-}];
+var nbJsonDataDirective =  ['$interpolate', '$http',  '$resource', function($interpolate,$http, $resource) {
+	return {
+		restrict : 'A',
+		link : function(scope, element, attr) {
+			var isArray = attr.jsonarray;
+			
+			/*
+		    var interpolateFn = $interpolate(element.attr(attr.$attr.ngBindTemplate));
+		    element.addClass('ng-binding').data('$binding', interpolateFn);*/
+		    var interpolateFn = $interpolate(element.attr(attr.$attr.jsondataurl));
+		    element.addClass('ng-binding').data('$binding', interpolateFn);
+			
+		    attr.$observe('jsondataurl', function(value) {
+		    	if(isArray){
+					scope.jsonData = $resource(value,{}, {
+						query : {
+							method : 'GET',
+							params : {},
+							isArray : true
+						}
+					}).query(function() {
+						var d = scope.jsonData;
+					});
+
+		    	}else{
+					scope.jsonData = $resource(value).get({}, function() {
+						var d = scope.jsonData;
+					});
+		    	}
+		    });
+		}
+	};
+} ];
 var nbInlineShowDataDirective = [ '$http', '$controller', '$resource', function($http, $controller, $resource) {
 	return {
 		restrict : 'A',

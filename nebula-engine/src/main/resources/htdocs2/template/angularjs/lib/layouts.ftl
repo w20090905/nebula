@@ -131,16 +131,16 @@
 </div>
 [/#macro]
 
-[#macro simplelist title type]
+[#macro simplelist type title="" query="query"]
 <div class="row-fluid">
 	<div class="span12">
 		<div class="widget-box">
 			<div class="widget-title">
 				<span class="icon"> <i class="icon-align-justify"></i>
 				</span>
-				<h5>${title}</h5>			
+				<h5>${type.displayName}</h5>			
 				<div class="buttons btn-toolbar" x-ng-show="data.standealone='Master'">
-					<input type="text" x-ng-model="query" class="input-medium search-query ctrl" placeholder="Filter">	
+					<input type="text" x-ng-model="${query}" class="input-medium search-query ctrl" placeholder="Filter">	
 					<a href="#/d/${type.name}/!new" class="btn btn-small btn-success ctrl"><i class="icon-plus icon-white"></i> 新建</a>
 				</div>
 			</div>

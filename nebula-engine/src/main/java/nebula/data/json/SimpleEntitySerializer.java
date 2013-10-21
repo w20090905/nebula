@@ -10,6 +10,7 @@ import nebula.data.Entity;
 import nebula.data.impl.EditableEntity;
 import nebula.lang.Field;
 import nebula.lang.RawTypes;
+import nebula.lang.Reference;
 import nebula.lang.Type;
 
 import org.codehaus.jackson.JsonGenerator;
@@ -114,7 +115,7 @@ class SimpleEntitySerializer extends DefaultFieldSerializer<Entity> implements J
 				case ByRef: // Type A3 Type A4
 				case Cascade:
 					for (Field inf : of.getType().getFields()) {
-						if (!inf.isArray() && (inf.isKey() || inf.isCore())) {
+						if (!inf.isArray() && inf.getRefer() == Reference.ByVal && (inf.isKey() || inf.isCore())) {
 							addPageField(of.getName(), of.getName() + inf.getName(), getBasicDateDealer(inf.getType()
 									.getRawType()));
 						}
