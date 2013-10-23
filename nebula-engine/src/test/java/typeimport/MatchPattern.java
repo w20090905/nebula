@@ -1,4 +1,4 @@
-package adempiere;
+package typeimport;
 
 enum MatchPattern {
 	StartWithIgnoreCase {

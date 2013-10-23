@@ -1,4 +1,4 @@
-package adempiere;
+package typeimport;
 
 import java.io.File;
 import java.io.FileOutputStream;

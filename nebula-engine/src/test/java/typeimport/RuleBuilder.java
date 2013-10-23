@@ -1,11 +1,12 @@
-package adempiere;
+package typeimport;
 
 import java.util.Arrays;
 import java.util.List;
 
+import typeimport.DefaultImporter.Field;
+
 import nebula.lang.TypeStandalone;
 
-import adempiere.DefaultImporter.Field;
 
 import com.google.common.collect.Lists;
 

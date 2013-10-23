@@ -1,4 +1,4 @@
-package adempiere;
+package typeimport;
 
 enum DBColumnType {
 	Char, Varchar, NVarchar, Bit, Long, Decimal, Date, Time, Datetime, Timestamp,

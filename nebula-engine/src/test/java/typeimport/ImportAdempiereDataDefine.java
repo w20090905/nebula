@@ -1,61 +1,114 @@
-package adempiere;
+package typeimport;
 
-import static adempiere.DBColumnType.Blob;
-import static adempiere.DBColumnType.Char;
-import static adempiere.DBColumnType.Date;
-import static adempiere.DBColumnType.Datetime;
-import static adempiere.DBColumnType.Decimal;
-import static adempiere.DBColumnType.Long;
-import static adempiere.DBColumnType.NVarchar;
-import static adempiere.DBColumnType.String;
-import static adempiere.DBColumnType.Text;
-import static adempiere.DBColumnType.Timestamp;
-import static adempiere.DBColumnType.Varchar;
-import static adempiere.MatchPattern.EndWithIgnoreCase;
-import static adempiere.MatchPattern.EqualsIgnoreCase;
-import static adempiere.MatchPattern.Include;
-import static adempiere.MatchPattern.StartWithIgnoreCase;
+import static typeimport.DBColumnType.*;
+import static typeimport.DBColumnType.Date;
+import static typeimport.DBColumnType.Long;
+import static typeimport.DBColumnType.String;
+import static typeimport.MatchPattern.*;
+import static typeimport.MatchPattern.EqualsIgnoreCase;
+import static typeimport.MatchPattern.StartWithIgnoreCase;
 
 import java.io.IOException;
-import java.util.List;
-
-import nebula.lang.TypeStandalone;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class ImportHHTDataDefine extends DefaultImporter {
+public class ImportAdempiereDataDefine extends DefaultImporter {
 	Log log = LogFactory.getLog(getClass());
 
 	public static void main(String[] args) throws IOException {
-		String inputFileName = "apps/hht/orcl.DMS2.xml";
-		String outputFolder = "apps/hht";
+		String inputFileName = "apps/adempiere/orclqss.ADEMPIERE340.xml";
+		String outputFolder = "apps/adempiere";
 
-		ImportHHTDataDefine parser = new ImportHHTDataDefine();
+		ImportAdempiereDataDefine parser = new ImportAdempiereDataDefine();
 		Document document = parser.parse(inputFileName);
 		// get root element
 		Element rootElement = document.getDocumentElement();
-		parser.read(outputFolder, rootElement);
+//		parser.readByReations(outputFolder, rootElement, "C_ORDER");
+		parser.readAll(outputFolder, rootElement);
+
 		parser.analyze(parser.types);
-		parser.output(outputFolder);
+//		parser.outputByRelations(outputFolder, parser.typeMapByName.get("COrder"));
+		parser.outputAll(outputFolder);
+		parser.info();
 	}
 
-	public ImportHHTDataDefine() {
-		super(true, false);
+	public ImportAdempiereDataDefine() {
+		super(true, true);
+
 		// ID
 		when(EqualsIgnoreCase).with("ID").typeOf(Long).then().setTypeName("ID");
-		when(EndWithIgnoreCase).with("ID").typeOf(Long).then().setTypeName("ID");
+		when(EndWithIgnoreCase).with("_ID").typeOf(Long).then().setTypeName("ID");
 
-		// String
+		// YESNO
+		when(StartWithIgnoreCase).with("is").typeOf(Char).length(1).then().setTypeName("YesNo");
+		when(StartWithIgnoreCase).defaultValue("'Y'", "'N'").typeOf(Char).length(1).then().setTypeName("YesNo");
+		when(EqualsIgnoreCase).with("Action").typeOf(Char).length(1).then().setTypeName("YesNo");
+
+		// 默认字段
 		when(EqualsIgnoreCase)
 				.with("Name", "Description", "Comment", "Account", "Regexp", "Title", "Host", "Filename", "TimeZone", "Status", "Url", "Password", "Subject",
-						"Content", "Summary", "Revision", "Symbol", "Fax").typeOf(String).then().useMatchedNameAsTypeName().useMatchedNameAsFieldName();
+						"Content", "Summary", "Revision", "Help", "Symbol", "Fax").typeOf(String).then().useMatchedNameAsTypeName().useMatchedNameAsFieldName();
+		when(EqualsIgnoreCase).with("Summary").typeOf(String).then().setTypeName("Summary");
+
+		when(EqualsIgnoreCase).with("Languageiso", "CountryCode").typeOf(String).then().setTypeName("Code");
 
 		when(StartWithIgnoreCase, EndWithIgnoreCase)
 				.with("Path", "Password", "Description", "FirstName", "FileName", "LastName", "Phone", "Postal", "Title", "Url", "Host", "Name", "Msg", "Info",
 						"Memo", "Notice", "Symbol", "Help").typeOf(String).then().useMatchedNameAsTypeName();
+
+		when(EndWithIgnoreCase).with("LANGUAGE").typeOf(Varchar).then().setTypeName("Code");
+
+		// 垃圾字段
+
+		when(EqualsIgnoreCase).with("Value", "LdapQuery", "DatePattern", "Timepattern", "Version", "Duns").typeOf(String).then().setTypeName("String");
+		when(EqualsIgnoreCase)
+				.with("RequestEmail", "RequestUser", "RequestUserpw", "RequestFolder", "DocumentDir", "ReleaseTag", "FieldGroup", "Constantvalue",
+						"FunctionColumn").typeOf(String).then().setTypeName("String");
+
+		when(EndWithIgnoreCase).with("classes", "Path").then().setTypeName("String");
+		when(EqualsIgnoreCase).with("Mmpolicy", "Emailtest").then().setTypeName("String");
+
+		// Boolean
+		when(EqualsIgnoreCase).with("PROCESSING", "PROCESSED", "POSTED").typeOf(Char).then().setTypeName("YesNo");
+		when(StartWithIgnoreCase).with("Is", "I_IS", "HAS", "POST", "ALLOW", "Create").typeOf(Char).then().setTypeName("YesNo");
+		when(StartWithIgnoreCase).with("On", "ACCEPT", "AFTER", "OVERWRITE", "ANY", "DISCONTINUED").typeOf(Char).then().setTypeName("YesNo");
+		when(EqualsIgnoreCase)
+				.with("DOPRICING", "CREATEPO", "CLASSIFICATION", "CREATESO", "PRIORITY", "PRIORITYUSER", "REQUIREVV", "PROJECTCATEGORY",
+						"REQUIRESTAXCERTIFICATE", "UPDATEQTY", "LISTTRX", "LISTSOURCES", "GENERATELIST", "ENFORCEPRICELIMIT", "CREATERECIPROCALRATE",
+						"COUNTHIGHMOVEMENT").typeOf(Char).then().setTypeName("YesNo");// TODO
+
+		/* NEW */
+
+		when(EqualsIgnoreCase).with("Dbaddress", "Remote_Addr").then().setTypeName("Name");
+
+		when(EndWithIgnoreCase).with("Msg").typeOf(String).then().setTypeName("Note");
+		when(EndWithIgnoreCase).with("Subject", "Version", "SupportEmail", "Prefix", "Suffix").typeOf(String).then().setTypeName("Description");
+
+		when(EndWithIgnoreCase)
+				.with("Message", "Reply", "Clause", "Path", "Help", "Preprocessing", "Modelpackage", "Code", "Logic", "Callout", "Sql", "Infofactoryclass",
+						"PostProcessing", "Value", "DisplayLogic", "Modelvalidationclasses", "info", "Trace", "Responsetext", "Script", "warning", "Msgtext",
+						"Msgtip", "Reference", "Modelvalidationclass").typeOf(String).then().setTypeName("Note");
+
+		when(EqualsIgnoreCase).with("Comments").typeOf(String).then().setTypeName("Comment");
+		when(EqualsIgnoreCase).with("Callout", "Vformat", "Value2").typeOf(String).then().setTypeName("Description");
+
+		when(EqualsIgnoreCase).with("Title", "EntityType", "Ad_Language", "Operation", "RequestDocumentNo").then().setTypeName("String");
+
+		when(EqualsIgnoreCase).with("V_String").typeOf(String).then().setTypeName("Note");
+		when(EqualsIgnoreCase).with("V_Number").typeOf(Long).then().setTypeName("Number");
+		when(EqualsIgnoreCase).with("LineNo").typeOf(Long).then().setTypeName("Long");
+
+		when(EqualsIgnoreCase).with("EVENTCHANGELOG", "Undo", "Redo").typeOf(Char).length(1).then().setTypeName("YesNo");
+		when(EndWithIgnoreCase).with("Type", "Level", "Status").typeOf(Char).then().setTypeName("Attr");
+		when(EndWithIgnoreCase).with("Jspurl").typeOf(Char).then().setTypeName("URL");
+
+		when(EqualsIgnoreCase).with("LineWidth").typeOf(Long).then().setTypeName("Number");
+		when(EqualsIgnoreCase).with("Version").typeOf(Long).then().setTypeName("Number");
+
+		/* End New */
 
 		when(StartWithIgnoreCase, EndWithIgnoreCase).with("EMail", "Name", "Phone", "Postal").typeOf(String).then().useMatchedNameAsTypeName();
 
@@ -119,7 +172,7 @@ public class ImportHHTDataDefine extends DefaultImporter {
 				.useMatchedNameAsFieldName();
 		when(EndWithIgnoreCase).with("Port").typeOf(Long).then().useMatchedNameAsTypeName();
 
-		when(StartWithIgnoreCase, EndWithIgnoreCase)
+		when(EndWithIgnoreCase)
 				.with("Count", "Length", "Height", "Width", "Size", "Weight", "Ratio", "Rate", "Rating", "Depth", "Price", "Line", "Cost", "Volume", "Amount",
 						"Percent", "Frequency", "Sequence", "Unit", "Precision", "Ranking").typeOf(Long).then().useMatchedNameAsTypeName();
 
@@ -132,9 +185,9 @@ public class ImportHHTDataDefine extends DefaultImporter {
 		when(StartWithIgnoreCase, EndWithIgnoreCase).with("Lines").typeOf(Long).then().setTypeName("Line");
 		when(EndWithIgnoreCase).with("No").typeOf(Long).then().setTypeName("SeqNo");
 		when(StartWithIgnoreCase, EndWithIgnoreCase).with("Due", "PASTDUE").typeOf(Long).then().setTypeName("Amount");// TODO
-		when(StartWithIgnoreCase, EndWithIgnoreCase).with("Acct").typeOf(Long).then().setTypeName("Amount");// TODO
-		when(StartWithIgnoreCase, EndWithIgnoreCase).with("Time").typeOf(Long).then().setTypeName("Count");// TODO
-		when(StartWithIgnoreCase).with("Measure").typeOf(Long).then().setTypeName("Length");// TODO
+		when(StartWithIgnoreCase, EndWithIgnoreCase).with("Acct").typeOf(Long).then().setTypeName("Amount");
+		when(StartWithIgnoreCase, EndWithIgnoreCase).with("Time").typeOf(Long).then().setTypeName("Count");
+		when(StartWithIgnoreCase).with("Measure").typeOf(Long).then().setTypeName("Length");
 
 		when(EndWithIgnoreCase).with("QTYAVAILABLE", "QTYCONFIRMED").typeOf(Long).then().setTypeName("Quantity");
 
@@ -168,15 +221,6 @@ public class ImportHHTDataDefine extends DefaultImporter {
 				.with("AD_LANGUAGE", "COUNTRYCODE", "COSTINGMETHOD", "DOCACTION", "GENERATEORDER", "GENERATETO", "PROJECTLINELEVEL", "ACCESSLEVEL")
 				.typeOf(Char, Varchar).then().setTypeName("Attr");
 
-		// Boolean
-		when(EqualsIgnoreCase).with("PROCESSING", "PROCESSED", "POSTED").typeOf(Char).then().setTypeName("YesNo");
-		when(StartWithIgnoreCase).with("Is", "I_IS", "HAS", "POST", "ALLOW", "Create").typeOf(Char).then().setTypeName("YesNo");
-		when(StartWithIgnoreCase).with("On", "ACCEPT", "AFTER", "OVERWRITE", "ANY", "DISCONTINUED").typeOf(Char).then().setTypeName("YesNo");
-		when(EqualsIgnoreCase)
-				.with("DOPRICING", "CREATEPO", "CLASSIFICATION", "CREATESO", "PRIORITY", "PRIORITYUSER", "REQUIREVV", "PROJECTCATEGORY",
-						"REQUIRESTAXCERTIFICATE", "UPDATEQTY", "LISTTRX", "LISTSOURCES", "GENERATELIST", "ENFORCEPRICELIMIT", "CREATERECIPROCALRATE",
-						"COUNTHIGHMOVEMENT").typeOf(Char).then().setTypeName("YesNo");// TODO
-
 		// Spacial
 		when(EndWithIgnoreCase).with("Comments").typeOf(String).then().setTypeName("Note");
 		when(EndWithIgnoreCase).with("Mail").typeOf(String).then().setTypeName("EMail");
@@ -190,6 +234,7 @@ public class ImportHHTDataDefine extends DefaultImporter {
 		// when().is(Varchar, NVarchar).then().setTypeName("String");
 		when().typeOf(Text, Blob).then().setTypeName("Note");
 		// when().is(Long).then().setTypeName("Count");
+		when().typeOf(Long).then().setTypeName("Number");
 
 		when(EqualsIgnoreCase).with("repository_id").inTable("Changesets").then().setReferTo("Repositories");
 
@@ -198,116 +243,4 @@ public class ImportHHTDataDefine extends DefaultImporter {
 		when(EqualsIgnoreCase).with("CREATEDBY", "UPDATEDBY").typeOf(Long).skip();
 		when(EqualsIgnoreCase).with("CREATED", "UPDATED").typeOf(Date).skip();
 	}
-
-	public void analyze(List<Type> types) {
-
-		// Costruct Type
-		for (Type type : types) {
-			for (Field field : type.fields) {
-				Field result = this.match(field);
-				if (result != null) {
-				} else {
-					System.out.println(field);
-				}
-			}
-		}
-
-		// check type
-		for (Type type : types) {
-			boolean hasIDKey = false;
-			boolean hasNameKey = false;
-			boolean hasNameRequired = false;
-			boolean hasName = false;
-			for (Field field : type.fields) {
-				if ("Name".equalsIgnoreCase(field.resultName)) {
-					hasName = true;
-					if (!field.nullable) {
-						hasNameRequired = true;
-					}
-					if (field.isKey) {
-						hasNameKey = true;
-					}
-				} else if (field.isKey) {
-					if ("ID".equalsIgnoreCase(field.resultTypeName)) {
-						hasIDKey = true;
-					}
-				}
-			}
-
-			if (hasIDKey && !hasName) {
-				type.standalone = TypeStandalone.Transaction;
-			} else if (hasNameKey) {
-				type.standalone = TypeStandalone.Master;
-			} else if (hasIDKey && hasNameRequired) {
-				type.standalone = TypeStandalone.Master;
-			}
-
-			// System.out.println("##\t" + type.rawName + "\t" + type.name +
-			// "\t" + hasIDKey + "\t" + hasNameKey + "\t"
-			// + hasNameRequired + "\t" + hasName);
-		}
-
-		for (Type type : types) {
-			for (Field field : type.fields) {
-				if (field.isForeignKey) {
-					if (typesByRawName.containsKey(field.foreignKeyTable)) {
-						field.resultTypeName = typesByRawName.get(field.foreignKeyTable).name;
-					}
-				} else if (!field.isKey && "ID".equals(field.resultTypeName)) {
-					String typename = field.name;
-					if (typename.toUpperCase().endsWith("_ID")) {
-						typename = typename.substring(0, typename.length() - 3);
-					}
-					if (typesByRawName.containsKey(typename)) {
-						field.resultTypeName = typesByRawName.get(typename).name;
-						field.isForeignKey = true;
-						field.foreignKeyTable = typename;
-					} else if (typesByRawName.containsKey(typename + "s")) {
-						field.resultTypeName = typesByRawName.get(typename + "s").name;
-						field.isForeignKey = true;
-						field.foreignKeyTable = typename + "s";
-					} else {
-						// System.out.println("Fail check foreign key : " +
-						// type.name + " - " + field.name);
-					}
-				}
-			}
-		}
-
-		// 附属表的情况，主键为另一个对象的主键
-		for (Type type : types) {
-			for (Field field : type.fields) {
-				if (field.isKey) {
-					if (field.name.endsWith("_ID") && !"ID".equals(field.resultTypeName) && typeMapByName.containsKey(field.resultTypeName)) {
-						Type refType = typeMapByName.get(field.resultTypeName);
-						switch (refType.standalone) {
-						case Master:
-							type.standalone = TypeStandalone.Master;
-							break;
-						case Transaction:
-							type.standalone = TypeStandalone.Transaction;
-							break;
-						}
-					}
-				}
-			}
-		}
-
-		for (Type type : types) {
-			if (type.standalone == TypeStandalone.Abstract) {
-				type.standalone = TypeStandalone.Master;
-				type.comment = "TODO Type not sure ！！ ";
-				// System.out.println("## Type not sure  " + type.name);
-			}
-		}
-		// System.out.println("\n\n\n=================================================\n\n\n");
-		// for (Type type : types) {
-		// for (Field field : type.fields) {
-		// System.out.println(type.rawName + "\t" + type.name + "\t" +
-		// type.standalone.name() + "\t"
-		// + type.comment + "\t" + field);
-		// }
-		// }
-	}
-
 }

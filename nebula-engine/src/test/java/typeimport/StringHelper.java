@@ -1,4 +1,4 @@
-package adempiere;
+package typeimport;
 
 import java.util.Hashtable;
 import java.util.Map;

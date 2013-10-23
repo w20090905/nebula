@@ -1,19 +1,19 @@
-package adempiere;
+package typeimport;
 
-import static adempiere.DBColumnType.Bit;
-import static adempiere.DBColumnType.Blob;
-import static adempiere.DBColumnType.Date;
-import static adempiere.DBColumnType.Datetime;
-import static adempiere.DBColumnType.Decimal;
-import static adempiere.DBColumnType.Long;
-import static adempiere.DBColumnType.NVarchar;
-import static adempiere.DBColumnType.String;
-import static adempiere.DBColumnType.Text;
-import static adempiere.DBColumnType.Timestamp;
-import static adempiere.DBColumnType.Varchar;
-import static adempiere.MatchPattern.EndWithIgnoreCase;
-import static adempiere.MatchPattern.EqualsIgnoreCase;
-import static adempiere.MatchPattern.StartWithIgnoreCase;
+import static typeimport.DBColumnType.Bit;
+import static typeimport.DBColumnType.Blob;
+import static typeimport.DBColumnType.Date;
+import static typeimport.DBColumnType.Datetime;
+import static typeimport.DBColumnType.Decimal;
+import static typeimport.DBColumnType.Long;
+import static typeimport.DBColumnType.NVarchar;
+import static typeimport.DBColumnType.String;
+import static typeimport.DBColumnType.Text;
+import static typeimport.DBColumnType.Timestamp;
+import static typeimport.DBColumnType.Varchar;
+import static typeimport.MatchPattern.EndWithIgnoreCase;
+import static typeimport.MatchPattern.EqualsIgnoreCase;
+import static typeimport.MatchPattern.StartWithIgnoreCase;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,6 +24,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
 
 public class ImportRedmineDataDefine extends DefaultImporter {
 	Log log = LogFactory.getLog(getClass());
@@ -36,9 +37,9 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 		Document document = parser.parse(inputFileName);
 		// get root element
 		Element rootElement = document.getDocumentElement();
-		parser.read(outputFolder, rootElement);
+		parser.readAll(outputFolder, rootElement);
 		parser.analyze(parser.types);
-		parser.output(outputFolder);
+		parser.outputAll(outputFolder);
 	}
 
 	public ImportRedmineDataDefine() {

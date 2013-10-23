@@ -1,95 +1,55 @@
-package adempiere;
+package typeimport;
 
-import static adempiere.DBColumnType.Blob;
-import static adempiere.DBColumnType.Char;
-import static adempiere.DBColumnType.Date;
-import static adempiere.DBColumnType.Datetime;
-import static adempiere.DBColumnType.Decimal;
-import static adempiere.DBColumnType.Long;
-import static adempiere.DBColumnType.NVarchar;
-import static adempiere.DBColumnType.String;
-import static adempiere.DBColumnType.Text;
-import static adempiere.DBColumnType.Timestamp;
-import static adempiere.DBColumnType.Varchar;
-import static adempiere.MatchPattern.EndWithIgnoreCase;
-import static adempiere.MatchPattern.EqualsIgnoreCase;
-import static adempiere.MatchPattern.Include;
-import static adempiere.MatchPattern.StartWithIgnoreCase;
+import static typeimport.DBColumnType.Blob;
+import static typeimport.DBColumnType.Char;
+import static typeimport.DBColumnType.Date;
+import static typeimport.DBColumnType.Datetime;
+import static typeimport.DBColumnType.Decimal;
+import static typeimport.DBColumnType.Long;
+import static typeimport.DBColumnType.NVarchar;
+import static typeimport.DBColumnType.String;
+import static typeimport.DBColumnType.Text;
+import static typeimport.DBColumnType.Timestamp;
+import static typeimport.DBColumnType.Varchar;
+import static typeimport.MatchPattern.EndWithIgnoreCase;
+import static typeimport.MatchPattern.EqualsIgnoreCase;
+import static typeimport.MatchPattern.Include;
+import static typeimport.MatchPattern.StartWithIgnoreCase;
 
 import java.io.IOException;
+import java.util.List;
+
+import nebula.lang.TypeStandalone;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class ImportAdempiereDataDefine extends DefaultImporter {
+
+public class ImportHHTDataDefine extends DefaultImporter {
 	Log log = LogFactory.getLog(getClass());
 
 	public static void main(String[] args) throws IOException {
-		String inputFileName = "apps/adempiere/orclqss.ADEMPIERE340.xml";
-		String outputFolder = "apps/adempiere";
+		String inputFileName = "apps/hht/orcl.DMS2.xml";
+		String outputFolder = "apps/hht";
 
-		ImportAdempiereDataDefine parser = new ImportAdempiereDataDefine();
+		ImportHHTDataDefine parser = new ImportHHTDataDefine();
 		Document document = parser.parse(inputFileName);
 		// get root element
 		Element rootElement = document.getDocumentElement();
-		parser.read(outputFolder, rootElement);
+		parser.readAll(outputFolder, rootElement);
 		parser.analyze(parser.types);
-		parser.output(outputFolder);
+		parser.outputAll(outputFolder);
 	}
 
-	public ImportAdempiereDataDefine() {
-		super(true, true);
-
+	public ImportHHTDataDefine() {
+		super(true, false);
 		// ID
 		when(EqualsIgnoreCase).with("ID").typeOf(Long).then().setTypeName("ID");
-		when(EndWithIgnoreCase).with("_ID").typeOf(Long).then().setTypeName("ID");
+		when(EndWithIgnoreCase).with("ID").typeOf(Long).then().setTypeName("ID");
 
 		// String
-
-		/* NEW */
-
-		when(StartWithIgnoreCase).with("is").typeOf(Char).length(1).then().setTypeName("YesNo");
-		when(EqualsIgnoreCase).with("Action").typeOf(Char).length(1).then().setTypeName("YesNo");
-		when(StartWithIgnoreCase).defaultValue("'Y'", "'N'").typeOf(Char).length(1).then().setTypeName("YesNo");
-
-		when(EqualsIgnoreCase).with("Languageiso", "CountryCode").typeOf(String).then().setTypeName("Code");
-		when(EqualsIgnoreCase).with("Summary").typeOf(String).then().setTypeName("Summary");
-		when(EqualsIgnoreCase).with("Dbaddress", "Remote_Addr").then().setTypeName("Name");
-
-		when(EqualsIgnoreCase).with("RequestEmail", "RequestUser", "DocumentDir", "ReleaseTag", "FieldGroup", "Constantvalue", "FunctionColumn").typeOf(String)
-				.then().setTypeName("Description");
-
-		when(EqualsIgnoreCase).with("Help").typeOf(String).then().setTypeName("Help");
-		when(EqualsIgnoreCase).with("Value", "LdapQuery", "DatePattern", "Timepattern", "Version", "Duns").typeOf(String).then().setTypeName("String");
-
-		when(EndWithIgnoreCase).with("Msg").typeOf(String).then().setTypeName("Note");
-		when(EndWithIgnoreCase).with("Subject", "Version", "SupportEmail", "Prefix", "Suffix").typeOf(String).then().setTypeName("Description");
-
-		when(EndWithIgnoreCase)
-				.with("Message", "Reply", "Clause", "Path", "Help", "Preprocessing", "Modelpackage", "Code", "Logic", "Callout", "Sql", "Infofactoryclass",
-						"PostProcessing", "Value", "DisplayLogic", "Modelvalidationclasses", "info", "Trace", "Responsetext", "Script", "warning", "Msgtext",
-						"Msgtip", "Reference", "Modelvalidationclass").typeOf(String).then().setTypeName("Note");
-
-		when(EqualsIgnoreCase).with("Comments").typeOf(String).then().setTypeName("Comment");
-		when(EqualsIgnoreCase).with("Callout", "Vformat", "Value2").typeOf(String).then().setTypeName("Description");
-
-		when(EqualsIgnoreCase).with("Title", "EntityType", "Ad_Language", "Operation", "RequestDocumentNo").then().setTypeName("String");
-
-		when(EqualsIgnoreCase).with("V_String").typeOf(String).then().setTypeName("Note");
-		when(EqualsIgnoreCase).with("V_Number").typeOf(Long).then().setTypeName("Number");
-		when(EqualsIgnoreCase).with("LineNo").typeOf(Long).then().setTypeName("Long");
-
-		when(EqualsIgnoreCase).with("EVENTCHANGELOG", "Undo", "Redo").typeOf(Char).length(1).then().setTypeName("YesNo");
-		when(EndWithIgnoreCase).with("Type", "Level", "Status").typeOf(Char).then().setTypeName("Attr");
-		when(EndWithIgnoreCase).with("Jspurl").typeOf(Char).then().setTypeName("URL");
-
-		when(EqualsIgnoreCase).with("LineWidth").typeOf(Long).then().setTypeName("Number");
-		when(EqualsIgnoreCase).with("Version").typeOf(Long).then().setTypeName("Number");
-
-		/* End New */
-
 		when(EqualsIgnoreCase)
 				.with("Name", "Description", "Comment", "Account", "Regexp", "Title", "Host", "Filename", "TimeZone", "Status", "Url", "Password", "Subject",
 						"Content", "Summary", "Revision", "Symbol", "Fax").typeOf(String).then().useMatchedNameAsTypeName().useMatchedNameAsFieldName();
@@ -160,7 +120,7 @@ public class ImportAdempiereDataDefine extends DefaultImporter {
 				.useMatchedNameAsFieldName();
 		when(EndWithIgnoreCase).with("Port").typeOf(Long).then().useMatchedNameAsTypeName();
 
-		when(EndWithIgnoreCase)
+		when(StartWithIgnoreCase, EndWithIgnoreCase)
 				.with("Count", "Length", "Height", "Width", "Size", "Weight", "Ratio", "Rate", "Rating", "Depth", "Price", "Line", "Cost", "Volume", "Amount",
 						"Percent", "Frequency", "Sequence", "Unit", "Precision", "Ranking").typeOf(Long).then().useMatchedNameAsTypeName();
 
@@ -231,7 +191,6 @@ public class ImportAdempiereDataDefine extends DefaultImporter {
 		// when().is(Varchar, NVarchar).then().setTypeName("String");
 		when().typeOf(Text, Blob).then().setTypeName("Note");
 		// when().is(Long).then().setTypeName("Count");
-		when().typeOf(Long).then().setTypeName("Number");
 
 		when(EqualsIgnoreCase).with("repository_id").inTable("Changesets").then().setReferTo("Repositories");
 
@@ -239,6 +198,117 @@ public class ImportAdempiereDataDefine extends DefaultImporter {
 		when(EqualsIgnoreCase).with("ISACTIVE").typeOf(Char).skip();
 		when(EqualsIgnoreCase).with("CREATEDBY", "UPDATEDBY").typeOf(Long).skip();
 		when(EqualsIgnoreCase).with("CREATED", "UPDATED").typeOf(Date).skip();
+	}
+
+	public void analyze(List<Type> types) {
+
+		// Costruct Type
+		for (Type type : types) {
+			for (Field field : type.fields) {
+				Field result = this.match(field);
+				if (result != null) {
+				} else {
+					System.out.println(field);
+				}
+			}
+		}
+
+		// check type
+		for (Type type : types) {
+			boolean hasIDKey = false;
+			boolean hasNameKey = false;
+			boolean hasNameRequired = false;
+			boolean hasName = false;
+			for (Field field : type.fields) {
+				if ("Name".equalsIgnoreCase(field.resultName)) {
+					hasName = true;
+					if (!field.nullable) {
+						hasNameRequired = true;
+					}
+					if (field.isKey) {
+						hasNameKey = true;
+					}
+				} else if (field.isKey) {
+					if ("ID".equalsIgnoreCase(field.resultTypeName)) {
+						hasIDKey = true;
+					}
+				}
+			}
+
+			if (hasIDKey && !hasName) {
+				type.standalone = TypeStandalone.Transaction;
+			} else if (hasNameKey) {
+				type.standalone = TypeStandalone.Master;
+			} else if (hasIDKey && hasNameRequired) {
+				type.standalone = TypeStandalone.Master;
+			}
+
+			// System.out.println("##\t" + type.rawName + "\t" + type.name +
+			// "\t" + hasIDKey + "\t" + hasNameKey + "\t"
+			// + hasNameRequired + "\t" + hasName);
+		}
+
+		for (Type type : types) {
+			for (Field field : type.fields) {
+				if (field.isForeignKey) {
+					if (typesByRawName.containsKey(field.foreignKeyTable)) {
+						field.resultTypeName = typesByRawName.get(field.foreignKeyTable).name;
+					}
+				} else if (!field.isKey && "ID".equals(field.resultTypeName)) {
+					String typename = field.name;
+					if (typename.toUpperCase().endsWith("_ID")) {
+						typename = typename.substring(0, typename.length() - 3);
+					}
+					if (typesByRawName.containsKey(typename)) {
+						field.resultTypeName = typesByRawName.get(typename).name;
+						field.isForeignKey = true;
+						field.foreignKeyTable = typename;
+					} else if (typesByRawName.containsKey(typename + "s")) {
+						field.resultTypeName = typesByRawName.get(typename + "s").name;
+						field.isForeignKey = true;
+						field.foreignKeyTable = typename + "s";
+					} else {
+						// System.out.println("Fail check foreign key : " +
+						// type.name + " - " + field.name);
+					}
+				}
+			}
+		}
+
+		// 附属表的情况，主键为另一个对象的主键
+		for (Type type : types) {
+			for (Field field : type.fields) {
+				if (field.isKey) {
+					if (field.name.endsWith("_ID") && !"ID".equals(field.resultTypeName) && typeMapByName.containsKey(field.resultTypeName)) {
+						Type refType = typeMapByName.get(field.resultTypeName);
+						switch (refType.standalone) {
+						case Master:
+							type.standalone = TypeStandalone.Master;
+							break;
+						case Transaction:
+							type.standalone = TypeStandalone.Transaction;
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		for (Type type : types) {
+			if (type.standalone == TypeStandalone.Abstract) {
+				type.standalone = TypeStandalone.Master;
+				type.comment = "TODO Type not sure ！！ ";
+				// System.out.println("## Type not sure  " + type.name);
+			}
+		}
+		// System.out.println("\n\n\n=================================================\n\n\n");
+		// for (Type type : types) {
+		// for (Field field : type.fields) {
+		// System.out.println(type.rawName + "\t" + type.name + "\t" +
+		// type.standalone.name() + "\t"
+		// + type.comment + "\t" + field);
+		// }
+		// }
 	}
 
 }

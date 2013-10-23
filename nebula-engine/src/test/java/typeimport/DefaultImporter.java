@@ -1,18 +1,18 @@
-package adempiere;
+package typeimport;
 
-import static adempiere.DBColumnType.Bit;
-import static adempiere.DBColumnType.Blob;
-import static adempiere.DBColumnType.Char;
-import static adempiere.DBColumnType.Date;
-import static adempiere.DBColumnType.Datetime;
-import static adempiere.DBColumnType.Decimal;
-import static adempiere.DBColumnType.Long;
-import static adempiere.DBColumnType.NVarchar;
-import static adempiere.DBColumnType.String;
-import static adempiere.DBColumnType.Text;
-import static adempiere.DBColumnType.Time;
-import static adempiere.DBColumnType.Timestamp;
-import static adempiere.DBColumnType.Varchar;
+import static typeimport.DBColumnType.Bit;
+import static typeimport.DBColumnType.Blob;
+import static typeimport.DBColumnType.Char;
+import static typeimport.DBColumnType.Date;
+import static typeimport.DBColumnType.Datetime;
+import static typeimport.DBColumnType.Decimal;
+import static typeimport.DBColumnType.Long;
+import static typeimport.DBColumnType.NVarchar;
+import static typeimport.DBColumnType.String;
+import static typeimport.DBColumnType.Text;
+import static typeimport.DBColumnType.Time;
+import static typeimport.DBColumnType.Timestamp;
+import static typeimport.DBColumnType.Varchar;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -37,6 +37,8 @@ import org.xml.sax.SAXException;
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multiset;
+import com.google.common.collect.TreeMultiset;
 
 public class DefaultImporter {
 	int MAX = 1500;
@@ -107,8 +109,8 @@ public class DefaultImporter {
 		return type;
 	}
 
-	public Type addType(String rawName, String name, String remarks) {
-		return addType(rawName, name, new Type(rawName, name, remarks));
+	public Type addType(Element element, String rawName, String name, String remarks) {
+		return addType(rawName, name, new Type(element, rawName, name, remarks));
 	}
 
 	public Rule when(MatchPattern... ruleTypes) {
@@ -151,11 +153,11 @@ public class DefaultImporter {
 					}
 				}
 			}
-			
-			if (rule.length>0) {
+
+			if (rule.length > 0) {
 				matched = false;
-				if(field.size==rule.length){
-					matched=true;
+				if (field.size == rule.length) {
+					matched = true;
 				}
 			}
 
@@ -184,22 +186,22 @@ public class DefaultImporter {
 			}
 
 			if (!matched) continue;
-			
+
 			if (rule.defaultValues != null) {
 				matched = false;
-				if(field.name.equalsIgnoreCase("EnforceClientSecurity")){
+				if (field.name.equalsIgnoreCase("EnforceClientSecurity")) {
 					System.out.println("dsfdsf");
 				}
-				for (String defaultValue : rule.defaultValues) {					
+				for (String defaultValue : rule.defaultValues) {
 					if (defaultValue.equalsIgnoreCase(field.defaultValue.trim())) {
 						matched = true;
 						break;
 					}
 				}
 			}
-			
+
 			if (!matched) continue;
-			
+
 			if (matched) {
 				field.comment = "Matched\t" + field.name + "\t" + (matchedMatchPattern == null ? "" : matchedMatchPattern.name()) + "\t" + matchedName + "\t"
 						+ (matchedColumnType == null ? "" : matchedColumnType.name());
@@ -360,7 +362,66 @@ public class DefaultImporter {
 		// }
 	}
 
-	public void output(String outputFolderName) throws IOException {
+	protected void outputToFile(File outputFolder, Type type) throws IOException {
+		OutputStreamWriter out = null;
+		StringBuilder sb = new StringBuilder(5000);
+		out = new OutputStreamWriter(new FileOutputStream(new File(outputFolder, type.name + ".nebula")));
+
+		sb.setLength(0);
+		sb.append("@Remarks(\"" + escape(type.remarks) + "\")\n");
+		sb.append("@Refby(\"" + type.cntReference + "\")\n");
+		if (type.standalone == TypeStandalone.Transaction) {
+			sb.append("tx " + type.name + " {\n");
+		} else {
+			sb.append("type " + type.name + " {\n");
+		}
+
+		for (Field field : type.fields) {
+			if (field.skip) {
+				continue;
+			}
+			if (field.remarks.length() > 0) {
+				sb.append("\t@Remarks(\"" + escape(field.remarks) + "\")\n");
+			}
+			sb.append("\t");
+			if (field.nullable) {
+				sb.append("?");
+			}
+			if (field.isKey) {
+				sb.append("!");
+			}
+
+			/*
+			 * if (!field.nullable && field.resultTypeName != null) { if
+			 * ("Name Subject Title"
+			 * .toUpperCase().indexOf(field.resultTypeName.toUpperCase()) >= 0)
+			 * { sb.append("*"); } }
+			 */
+			if (!field.nullable && field.resultTypeName != null) {
+				if ("Name".toUpperCase().indexOf(field.resultTypeName.toUpperCase()) >= 0 && "Name".toUpperCase().indexOf(field.resultName.toUpperCase()) >= 0) {
+					sb.append("*");
+				}
+			}
+
+			if (field.resultName.equalsIgnoreCase(field.resultTypeName)) {
+				sb.append(field.resultTypeName);
+			} else {
+				sb.append(field.resultName);
+				sb.append(" " + field.resultTypeName);
+			}
+			sb.append(";");
+
+			if (field.defaultValue.length() > 0) {
+				sb.append("/" + "* " + escape(field.defaultValue) + " *" + "/");
+			}
+			sb.append("\n");
+		}
+		sb.append("};\n\n");
+		out.write(sb.toString());
+		out.close();
+	}
+
+	public void outputAll(String outputFolderName) throws IOException {
 
 		File outputFolder = new File(outputFolderName);
 
@@ -371,69 +432,52 @@ public class DefaultImporter {
 			// // file.delete();
 			// }
 		}
-		OutputStreamWriter out = null;
-		StringBuilder sb = new StringBuilder(5000);
 		for (int i = 0; i < types.size() && i < MAX; i++) {
 			Type type = types.get(i);
-			out = new OutputStreamWriter(new FileOutputStream(new File(outputFolder, type.name + ".nebula")));
+			outputToFile(outputFolder, type);
+		}
+	}
 
-			sb.setLength(0);
-			sb.append("@Remarks(\"" + escape(type.remarks) + "\")\n");
-			sb.append("@Refby(\"" + type.cntReference + "\")\n");
-			if (type.standalone == TypeStandalone.Transaction) {
-				sb.append("tx " + type.name + " {\n");
-			} else {
-				sb.append("type " + type.name + " {\n");
+	Map<String, Type> outputed = Maps.newHashMap();
+
+	protected void outputRelationType(final File outputFolder, Type rootType) throws IOException {
+		if (outputed.containsKey(rootType.name)) {
+			return;
+		}
+		outputed.put(rootType.name, rootType);
+
+		System.out.println("#### Output " + rootType.name);
+
+		outputToFile(outputFolder, rootType);
+
+		// for (Type refer : rootType.referby.values()) {
+		// this.outputRelationType(outputFolder, refer);
+		// }
+
+		for (Field field : rootType.fields) {
+			if (field.isForeignKey) {
+				this.outputRelationType(outputFolder, this.typesByRawName.get(field.foreignKeyTable));
 			}
-
-			for (Field field : type.fields) {
-				if (field.skip) {
-					continue;
-				}
-				if (field.remarks.length() > 0) {
-					sb.append("\t@Remarks(\"" + escape(field.remarks) + "\")\n");
-				}
-				sb.append("\t");
-				if (field.nullable) {
-					sb.append("?");
-				}
-				if (field.isKey) {
-					sb.append("!");
-				}
-				
-				/*				if (!field.nullable && field.resultTypeName != null) {
-					if ("Name Subject Title".toUpperCase().indexOf(field.resultTypeName.toUpperCase()) >= 0) {
-						sb.append("*");
-					}
-				}
-				*/
-				if (!field.nullable && field.resultTypeName != null) {
-					if ("Name".toUpperCase().indexOf(field.resultTypeName.toUpperCase()) >= 0 && "Name".toUpperCase().indexOf(field.resultName.toUpperCase()) >= 0) {
-						sb.append("*");
-					}
-				}
-
-				if (field.resultName.equalsIgnoreCase(field.resultTypeName)) {
-					sb.append(field.resultTypeName);
-				} else {
-					sb.append(field.resultName);
-					sb.append(" " + field.resultTypeName);
-				}
-				sb.append(";");
-
-				if (field.defaultValue.length() > 0) {
-					sb.append("/" + "* " + escape(field.defaultValue) + " *" + "/");
-				}
-				sb.append("\n");
-			}
-			sb.append("};\n\n");
-			out.write(sb.toString());
-			out.close();
 		}
 
 	}
 
-	public void read(String outputFolderName, Element rootElement) throws IOException {
+	public void outputByRelations(String outputFolderName, Type rootType) throws IOException {
+
+		File outputFolder = new File(outputFolderName);
+
+		if (!outputFolder.exists()) {
+			outputFolder.mkdir();
+		} else { //
+			// for (File file : outputFolder.listFiles()) {
+			// // file.delete();
+			// }
+		}
+		outputRelationType(outputFolder, rootType);
+
+	}
+
+	public void readByReations(String outputFolderName, Element rootElement, String rootTable) throws IOException {
 		NodeList nodeList = rootElement.getElementsByTagName("table");
 		if (nodeList == null) {
 			return;
@@ -442,7 +486,49 @@ public class DefaultImporter {
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Element element = (Element) nodeList.item(i);
 			String tableName = element.getAttribute("name");
-			this.addType(tableName, refineName(tableName), element.getAttribute("remarks"));
+			this.addType(element, tableName, refineName(tableName), element.getAttribute("remarks"));
+		}
+		System.out.println("preload reading " + nodeList.getLength());
+
+		Type rootType = this.typesByRawName.get(rootTable);
+
+		this.readByReations(rootType);
+
+		// for (int i = 0; i < nodeList.getLength() && i < MAX; i++) {
+		// Element element = (Element) nodeList.item(i);
+		// Type type = this.readTable(element);
+		// System.out.println("reading... " + i + " " + type.name);
+		// }
+	}
+
+	Map<String, Type> readedTypes = Maps.newHashMap();
+
+	public void readByReations(Type rootType) throws IOException {
+		if (readedTypes.containsKey(rootType.rawName)) {
+			return;
+		}
+		readedTypes.put(rootType.rawName, rootType);
+		System.out.println("$$$$ Read   :  " + rootType.name);
+
+		readTable(rootType.element);
+
+		for (Field field : rootType.fields) {
+			if (field.isForeignKey) {
+				this.readByReations(this.typesByRawName.get(field.foreignKeyTable));
+			}
+		}
+	}
+
+	public void readAll(String outputFolderName, Element rootElement) throws IOException {
+		NodeList nodeList = rootElement.getElementsByTagName("table");
+		if (nodeList == null) {
+			return;
+		}
+
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Element element = (Element) nodeList.item(i);
+			String tableName = element.getAttribute("name");
+			this.addType(element, tableName, refineName(tableName), element.getAttribute("remarks"));
 		}
 		System.out.println("preload reading " + nodeList.getLength());
 
@@ -502,8 +588,12 @@ public class DefaultImporter {
 					field.resultTypeName = refineName(parent.getAttribute("table"));
 					field.isForeignKey = true;
 					field.foreignKeyTable = parent.getAttribute("table");
+
+					Type parentType = this.typesByRawName.get(parent.getAttribute("table"));
+					parentType.referby.put(type.name, type);
 				} else if ("child".equals(node.getNodeName())) {
 					type.cntReference++;
+					// type.referby.add(type);
 				}
 			}
 		}
@@ -520,8 +610,11 @@ public class DefaultImporter {
 		long cntReference;
 		String comment = "";
 		TypeStandalone standalone = TypeStandalone.Abstract;
+		Map<String, Type> referby = Maps.newHashMap();
+		final Element element;
 
-		public Type(String rawName, String name, String remarks) {
+		public Type(Element element, String rawName, String name, String remarks) {
+			this.element = element;
 			this.rawName = rawName;
 			this.name = name;
 			this.remarks = remarks;
@@ -601,27 +694,74 @@ public class DefaultImporter {
 		return text.replace('\"', '\'').replace('\n', ' ').replace('\r', ' ');
 	}
 
-	static final String[] revs = (" issues issue is display field where Enforce Support release database"
-			+ " Logger source method class Function ldap Date Selection client Alert role Frequency "
-			+ "Keep Select Form Event Change Request Auto Smtp Store unix windows 	File Discount "
-			+ " Line Bpartner cash Readonly Other Error Post Record entity Access Centrally Dependent "
-			+ "Label Validation Old New Text Dimension format paper Margin Hdr Image Footer header "
-			+ "value  Paint Printer Print orderby Line Procedure Beta Server show Unrealized Docno Overwrite "
-			+ " Days between after Charge Interest Dunning Doctype Invoice  payment Times Tender "
-			+ " Archive Conversion Amt Foreign Document Fee Total Qty Price Freight Resource Tax"
-			+ " Accept Bpcontact Delivery Priority Grand Product Creditcard Voice Writeoff Proxy Attribute"
-			+ "Require Planned Project  Reference balance Committed Sales Standard Notification" + " Country System Remuneration  Revenue Unearned Gross "
-			+ " UnixAttachmentpath Language Decimal").toUpperCase().split(" ");
+	static final Multiset<String> hadWords = TreeMultiset.create();
+	//@formatter:off
+ static final String words = ("As Asp activity Accept Access Account Acct Achievement Acqusition Actual Address After Alert Allocation Allow Always Amt Amount Approve Approved Archive Archived Asset Attachment Attachments Attribute Auto " +
+ 		"Balance bank Base Based basket batch Begin beginning benchmark Beta Between Bid binary black bom boundary bp Bpartner Bpcontact broadcast budget business Buyer " +
+ 		"commodity current cumulative confidential Can Cash category Centrally Change Chare Charge chars chattype Class Classes Click Client collection color column columns Commission Committed Confirm Connection contact container Conversion copies copy Cost Costs costing Country Counter create created createdby credit Credit_card currency Customer cut_off " +
+ 		"Due direct discontinued dashboard dyn Database Date Days Declaration Decimal Definite Delayed default Delivery Dependent Description Desktop Dimension Discount Display distribution Doc Document Download Dunning Duration " +
+ 		"entry even exclude element Email Enforce End Ending entity Error Event expression Exp Expense export " +
+ 		"func flat flow first Factory Fee Field File Files FileSystem Finish fix Footer Foreign Form Format Forecast Freight Frequency From Full Function Functionality Functions Function_symbols fund " +
+ 		"gl group Grand Gross Guarantee Goal Grace " +
+ 		"high has Hdr Header " +
+ 		"increment Image Immediate Info Inactivity Inout instance Interest inventory Invoice Is Iso Is_Own Is_Online Is_Over Is_Overwrite Is_Owned Is_One Is_Orderby Issue Issues " +
+ 		"Jsp join journal Jasper job " +
+ 		"Key Keep " +
+ 		"local lifetime Label Language Language_Iso Landed Last Ldap Level Levels Line Lines Line_Stroke Lingual List Logger lookup Lot " +
+ 		"month months mail mandatory Margin match Max Method migration Model modify Movement Msg Multi " +
+ 		"Name Natural New next No Non Not Node Note Notification number " +
+ 		"Old On Online Only One Open Operation Or Order Orderby Ordered Org Orig Other Over Overwrite own Owned " +
+ 		"publish priority Package Paint Page paper Path Pay Payer payment Per Percent Personal Pick Planned Po Point Port Pos Post postal P_instance Posting Position Preference Price Print Printed Printer Priority Procedure process Processor Processors Processing Processed Product Proj Project Proxy " +
+ 		"Qa Qty Quantity Query Readonly " +
+ 		"ratio repeat routing recognition Record Reference region registration related replenish release Remuneration replication report Request Require Required requisition Resource Response Responsible ression Revenue rfq_response Role " +
+ 		"SWIFT self same Sales scheduler schema script seconds security Select Selection seller Send seq sequence sequentially ser_no Server service Set share shelf Ship Shipper Show Single Smtp So Sold Source Split Standard start Status statement Std Store sub subscription substitute Support Sync Sys System " +
+ 		"tential track type table Target Task Tax Tender Template Test Text time Times topic Total Tracking transaction tree " +
+ 		"under Unearned units Unix Unrealized Uom Use used User " +
+ 		"valid validate Validation Value vendor Verify Version Voice " +
+ 		"waiting warehouse Watch web webstore Week Weekday When Where win Window Windows workbench workflow Working Writeoff");
+  //@formatter:on
+
+	static final String[] finds = words.toUpperCase().replace("_", "").split(" ");
+
+	static final String[] replaces = words.toLowerCase().split(" ");
 
 	public String refineName(String name) {
 		if (name == null) return null;
-		for (String rev : revs) {
-			name = name.replaceFirst("^" + rev, rev + "_");
-			name = name.replaceFirst("_" + rev, "_" + rev + "_");
-		}
+
+		boolean isFind = false;
+		do {
+			for (int i = finds.length - 1; i >= 0; i--) {
+				String find = finds[i];
+				String replace = replaces[i];
+				if (name.startsWith(find)) {
+					name = name.replaceFirst("^" + find, replace + "_");
+					isFind = true;
+					break;
+				} else if (name.indexOf("_" + find) >= 0) {
+					name = name.replaceFirst("_" + find, "_" + replace + "_");
+					isFind = true;
+					break;
+				} else {
+					isFind = false;
+				}
+			}
+		} while (isFind);
 		name = name.replaceFirst("__", "_");
 
+		String[] sp = name.split("_");
+		for (String string : sp) {
+			hadWords.add(string);
+		}
+
+		name = name.toUpperCase();
+
 		return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name);
+	}
+
+	public void info() {
+		for (Multiset.Entry<String> set : hadWords.entrySet()) {
+			System.out.println(set.getElement() + "\t" + set.getCount());
+		}
 	}
 
 }
