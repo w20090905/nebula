@@ -1,8 +1,8 @@
 @Remarks("")
 @Refby("0")
-tx TSelectIon2 {
-	!AdPinstanceId ID;
+tx TSelection2 {
+	!AdPInstanceId ID;
 	!QueryId ID;
-	!TSelectIonId ID;
+	!TSelectionId ID;
 };
 

@@ -14,6 +14,6 @@ type PaBenchmark {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("How to accumulate data on time axis")
-	Accumulationtype Attr;
+	AccumulationType Attr;
 };
 

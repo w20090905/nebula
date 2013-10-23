@@ -14,51 +14,51 @@ type AdClient {
 	@Remarks("Hostname of Mail Server for SMTP and IMAP")
 	?SmtpHost Host;
 	@Remarks("EMail address to send automated mails from or receive mails for automated processing (fully qualified)")
-	?RequestEmail Description;
+	?RequestEmail String;
 	@Remarks("User Name (ID) of the email owner")
-	?RequestUser Description;
+	?RequestUser String;
 	@Remarks("Password of the user name (ID) for mail processing")
-	?RequestUserpw String;
+	?RequestUserPw String;
 	@Remarks("EMail folder to process incoming emails; if empty INBOX is used")
 	?RequestFolder String;
 	@Remarks("Language for this entity")
 	?AdLanguage;
 	@Remarks("Documents are Multi Lingual")
-	IsMultilingualdocument YesNo;/* 'N' */
+	IsMultiLingualDocument YesNo;/* 'N' */
 	@Remarks("Your mail server requires Authentication")
 	IsSmtpAuthorization YesNo;/* 'N'  */
 	@Remarks("Enable the use of Beta Functionality")
-	IsUsebetafunctions YesNo;/* 'N'  */
+	IsUseBetaFunctions YesNo;/* 'N'  */
 	?LdapQuery String;
 	@Remarks("List of data model validation classes separated by ;")
-	?Modelvalidationclasses Note;
+	?ModelValidationClasses String;
 	@Remarks("Enable and level of automatic Archive of documents")
 	AutoArchive YesNo;/* 'N'  */
 	@Remarks("Material Movement Policy")
-	Mmpolicy null;/* 'F'  */
+	MmPoLicy String;/* 'F'  */
 	@Remarks("Test EMail")
-	?Emailtest EMail;
+	?EmailTest String;
 	@Remarks("Send EMail from Server")
 	IsServerEmail YesNo;/* 'N'  */
 	@Remarks("Directory for documents from the application server")
-	?DocumentDir Description;
+	?DocumentDir String;
 	@Remarks("Post the accounting immediately for testing")
 	IsPostImmediate YesNo;/* 'N'  */
 	@Remarks("Update Costs immediately for testing")
-	IsCostimmediate YesNo;/* 'N'  */
+	IsCostImmediate YesNo;/* 'N'  */
 	@Remarks("Store Attachments On File System")
-	StoreAttachmentsonfilesystem YesNo;/* 'N'  */
+	StoreAttachmentsOnFileSystem YesNo;/* 'N'  */
 	@Remarks("Windows Attachment Path")
-	?WindowsAttachmentpath Note;
+	?WindowsAttachmentPath Path;
 	@Remarks("Unix Attachment Path")
-	?UnixAttachmentpath Note;
+	?UnixAttachmentPath Path;
 	@Remarks("Store Archive On File System")
-	StoreArchiveOnfilesystem YesNo;/* 'N'  */
+	StoreArchiveOnFileSystem YesNo;/* 'N'  */
 	@Remarks("Windows Archive Path")
-	?WindowsArchivePath Note;
+	?WindowsArchivePath Path;
 	@Remarks("Unix Archive Path")
-	?UnixArchivePath Note;
+	?UnixArchivePath Path;
 	@Remarks("IsUseASP")
-	IsUseasp YesNo;/* 'N'  */
+	IsUseAsp YesNo;/* 'N'  */
 };
 

@@ -14,10 +14,10 @@ type MAttribute {
 	@Remarks("Data entry is required in this column")
 	IsMandatory YesNo;/* 'N'  */
 	@Remarks("The product attribute is specific to the instance (like Serial No, Lot or Guarantee Date)")
-	IsInstanceattribute YesNo;/* 'N'  */
+	IsInstanceAttribute YesNo;/* 'N'  */
 	@Remarks("Common Search Attribute")
-	?MAttributesearch;
+	?MAttributeSearch;
 	@Remarks("Type of Attribute Value")
-	Attributevaluetype Attr;/* 'S'  */
+	AttributeValueType Attr;/* 'S'  */
 };
 

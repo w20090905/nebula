@@ -1,6 +1,6 @@
 @Remarks("AD_Role_OrgAccess")
 @Refby("0")
-type AdRoleOrgaccess {
+type AdRoleOrgAccess {
 	@Remarks("Responsibility Role")
 	!AdRole;
 	@Remarks("Organizational entity within client")

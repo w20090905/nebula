@@ -18,25 +18,25 @@ type CmAd {
 	@Remarks("Contains media content like images, flash movies etc.")
 	CmMedia;
 	@Remarks("URL for the Target")
-	?Targeturl URL;
+	?TargetUrl Url;
 	@Remarks("Which target should be used if user clicks?")
 	TargetFrame null;
 	@Remarks("How many clicks have been counted")
-	Actualclick Number;/* 0  */
+	ActualClick Number;/* 0  */
 	@Remarks("Maximum Click Count until banner is deactivated")
-	Maxclick Number;/* 0  */
+	MaxClick Number;/* 0  */
 	@Remarks("How many impressions have been counted")
-	Actualimpression Number;/* 0  */
+	ActualImpRession Number;/* 0  */
 	@Remarks("Maximum Impression Count until banner is deactivated")
-	Maximpression Number;/* 0  */
+	MaxImpRession Number;/* 0  */
 	@Remarks("For rotation we need a start count")
-	Startimpression Number;/* 0  */
+	StartImpRession Number;/* 0  */
 	@Remarks("First effective day (inclusive)")
-	Startdate Date;
+	StartDate Date;
 	@Remarks("Last effective date (inclusive)")
-	?Enddate Date;
+	?EndDate Date;
 	@Remarks("Contains the content itself")
-	?Contenthtml String;
+	?ContentHtml String;
 	@Remarks("Do we need to specially mention this ad?")
 	IsAdflag YesNo;/* 'Y'  */
 	@Remarks("Do we need to log the banner impressions and clicks? (needs much performance)")

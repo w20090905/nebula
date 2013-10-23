@@ -1,14 +1,14 @@
 @Remarks("")
 @Refby("0")
-type MInoutCandidateV {
+type MInoutCanDidateV {
 	AdClientId ID;
 	AdOrgId ID;
 	CBpartnerId ID;
 	COrderId ID;
 	DocumentNo Code;
 	DateOrdered Date;
-	CDoctypeId ID;
-	?Poreference Note;
+	CDocTypeId ID;
+	?PoReference Note;
 	?Description;
 	?SalesRepId ID;
 	MWarehouseId ID;

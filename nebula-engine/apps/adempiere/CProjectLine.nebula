@@ -20,7 +20,7 @@ tx CProjectLine {
 	@Remarks("Planned amount for this project")
 	PlannedAmt Amount;/* 0  */
 	@Remarks("Project_s planned margin amount")
-	PlannedMarginamt Amount;/* 0  */
+	PlannedMarginAmt Amount;/* 0  */
 	@Remarks("The (legal) commitment amount")
 	?CommittedAmt Amount;/* 0  */
 	@Remarks("Product, Service, Item")
@@ -38,13 +38,13 @@ tx CProjectLine {
 	@Remarks("Order")
 	?COrder;
 	@Remarks("Purchase Order")
-	?COrderpo COrder;
+	?COrderPo COrder;
 	@Remarks("Indicates if this document / line is printed")
-	IsPrintEd YesNo;/* 'Y'  */
+	IsPrinted YesNo;/* 'Y'  */
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("Pricing")
-	?Dopricing YesNo;/* 'Y' */
+	?DoPricing YesNo;/* 'Y' */
 	@Remarks("Phase of a Project")
 	?CProjectPhase;
 	@Remarks("Actual Project Task in a Phase")

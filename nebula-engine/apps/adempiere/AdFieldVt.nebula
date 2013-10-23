@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 type AdFieldVt {
-	?AdLanguage String;
+	?AdLanguage Code;
 	?AdWindowId ID;
 	AdTabId ID;
 	AdFieldId ID;
@@ -14,18 +14,18 @@ type AdFieldVt {
 	?DisplayLogic Note;
 	?DisplayLength Length;
 	?SeqNo;
-	?Sortno SeqNo;
-	?IsSameline YesNo;
+	?SortNo SeqNo;
+	?IsSameLine YesNo;
 	IsHeading YesNo;
 	?IsFieldOnly YesNo;
 	IsReadonly YesNo;
-	?IsEncryptedfield YesNo;
-	?Obscuretype Attr;
-	?Columnname Name;
-	?Columnsql Note;
+	?IsEncryptedField YesNo;
+	?ObscureType Attr;
+	?ColumnName Name;
+	?ColumnsQl Note;
 	?FieldLength Length;
 	?Vformat Description;
-	?Defaultvalue Note;
+	?DefaultValue Note;
 	?IsKey YesNo;
 	?IsParent YesNo;
 	?IsMandatory YesNo;
@@ -36,20 +36,20 @@ type AdFieldVt {
 	?AdReferenceId ID;
 	?AdValRuleId ID;
 	?AdProcessId ID;
-	?IsAlwaysupdateable YesNo;
+	?IsAlwaysUpdateable YesNo;
 	?ReadonlyLogic Note;
-	?Mandatorylogic Note;
+	?MandatoryLogic Note;
 	?IsUpdateable YesNo;
-	?IsEncryptedcolumn YesNo;
-	?IsSelectIonColumn YesNo;
-	?Tablename Name;
+	?IsEncryptedColumn YesNo;
+	?IsSelectionColumn YesNo;
+	?TableName Name;
 	?ValueMin String;
 	?ValueMax String;
-	?FieldGroup Description;
+	?FieldGroup String;
 	?ValidationCode Note;
 	?IncludedTabId ID;
-	?FieldGrouptype Attr;
-	?IsCollapsedbydefault YesNo;
-	?Infofactoryclass Note;
+	?FieldGroupType Attr;
+	?IsCollapsedByDefault YesNo;
+	?InfoFactoryClass Info;
 };
 

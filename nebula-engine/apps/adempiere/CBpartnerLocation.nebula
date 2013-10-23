@@ -10,11 +10,11 @@ type CBpartnerLocation {
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Business Partner Invoice/Bill Address")
-	IsBillto YesNo;/* 'Y'  */
+	IsBillTo YesNo;/* 'Y'  */
 	@Remarks("Business Partner Shipment Address")
-	IsShipto YesNo;/* 'Y'  */
+	IsShipTo YesNo;/* 'Y'  */
 	@Remarks("Business Partner pays from that address and we_ll send dunning letters there")
-	IsPayfrom YesNo;/* 'Y'  */
+	IsPayFrom YesNo;/* 'Y'  */
 	@Remarks("Business Partner payment address")
 	IsRemitto YesNo;/* 'Y'  */
 	@Remarks("Identifies a telephone number")

@@ -8,15 +8,15 @@ tx CRevenueRecognitionPlan {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Rules for accounting")
-	CAcctschema;
+	CAcctSchema;
 	@Remarks("Method for recording revenue")
 	CRevenueRecognition;
 	@Remarks("Invoice Detail Line")
 	CInvoiceLine;
 	@Remarks("Account for unearned revenue")
-	UnearnedRevenueAcct CValidcombination;
+	UnearnedRevenueAcct CValidCombination;
 	@Remarks("Account for Product Revenue (Sales Account)")
-	PRevenueAcct CValidcombination;
+	PRevenueAcct CValidCombination;
 	@Remarks("The Currency for this record")
 	CCurrency;
 	@Remarks("Total Amount")

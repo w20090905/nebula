@@ -12,9 +12,9 @@ tx CUomConversion {
 	@Remarks("Target or destination Unit of Measure")
 	CUomTo CUom;
 	@Remarks("Rate to multiple the source by to calculate the target.")
-	Multiplyrate Rate;/* 0  */
+	MultiPlyrate Rate;/* 0  */
 	@Remarks("To convert Source number to Target number, the Source is divided")
-	Dividerate Rate;/* 0  */
+	DivideRate Rate;/* 0  */
 	@Remarks("Product, Service, Item")
 	?MProduct;
 };

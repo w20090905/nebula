@@ -1,6 +1,6 @@
 @Remarks("AD_User_OrgAccess")
 @Refby("0")
-type AdUserOrgaccess {
+type AdUserOrgAccess {
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	!AdUser;
 	@Remarks("Organizational entity within client")

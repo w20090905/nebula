@@ -16,17 +16,17 @@ type AdReplication {
 	@Remarks("Host Address URL or DNS")
 	Address Host;
 	@Remarks("Host Communication Port")
-	Hostport Port;
+	HostPort Port;
 	@Remarks("Data Replication Strategy")
-	AdReplicationstrategy;
+	AdReplicationStrategy;
 	@Remarks("Connect to Server via HTTP Tunnel")
 	IsRmioverhttp YesNo;/* 'Y' */
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Start of the ID Range used")
-	?Idrangestart Number;
+	?IdRangeStart Number;
 	@Remarks("End if the ID Range used")
-	?Idrangeend Number;
+	?IdRangeEnd Number;
 	@Remarks("Remote Client to be used to replicate / synchronize data with.")
 	?RemoteClient AdClient;
 	@Remarks("Remote Organization to be used to replicate / synchronize data with.")
@@ -36,6 +36,6 @@ type AdReplication {
 	@Remarks("Suffix after the number")
 	?Suffix Description;
 	@Remarks("Date the process was last run.")
-	?DateLastrun Date;
+	?DateLastRun Date;
 };
 

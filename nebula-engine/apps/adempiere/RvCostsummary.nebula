@@ -1,6 +1,6 @@
 @Remarks("")
 @Refby("0")
-type RvCostsummary {
+type RvCostsUmmary {
 	AdClientId ID;
 	AdOrgId ID;
 	MProductId ID;
@@ -10,10 +10,10 @@ type RvCostsummary {
 	IsBom YesNo;
 	ProductType Attr;
 	MProductCategoryId ID;
-	MCosttypeId ID;
-	CAcctschemaId ID;
+	MCostTypeId ID;
+	CAcctSchemaId ID;
 	CCurrencyId ID;
-	?Currentcostprice Price;
-	?Futurecostprice Price;
+	?CurrentCostPrice Price;
+	?FutureCostPrice Price;
 };
 

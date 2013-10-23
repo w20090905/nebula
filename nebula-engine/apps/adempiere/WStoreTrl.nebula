@@ -12,22 +12,22 @@ type WStoreTrl {
 	@Remarks("This column is translated")
 	IsTranslated YesNo;/* 'N'  */
 	@Remarks("Web Store Header Information")
-	?Webinfo Note;
+	?WebInfo Info;
 	@Remarks("Web Site Parameter 1 (default: header image)")
-	?Webparam1 String;
+	?WebParam1 String;
 	@Remarks("Web Site Parameter 2 (default index page)")
-	?Webparam2 String;
+	?WebParam2 String;
 	@Remarks("Web Site Parameter 3 (default left - menu)")
-	?Webparam3 String;
+	?WebParam3 String;
 	@Remarks("Web Site Parameter 4 (default footer left)")
-	?Webparam4 String;
+	?WebParam4 String;
 	@Remarks("Web Site Parameter 5 (default footer center)")
-	?Webparam5 String;
+	?WebParam5 String;
 	@Remarks("Web Site Parameter 6 (default footer right)")
-	?Webparam6 String;
+	?WebParam6 String;
 	@Remarks("Header added to EMails")
-	?Emailheader EMail;
+	?EmailHeader EMail;
 	@Remarks("Footer added to EMails")
-	?Emailfooter EMail;
+	?EmailFooter EMail;
 };
 

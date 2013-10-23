@@ -12,7 +12,7 @@ type CTaxCategory {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Commodity code used for tax calculation")
-	?Commoditycode Note;
+	?CommodityCode Note;
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 };

@@ -14,7 +14,7 @@ tx CmMediadeploy {
 	@Remarks("Entity is deployed")
 	IsDeployed YesNo;/* 'N'  */
 	@Remarks("Date when last synchronized")
-	?Lastsynchronized null;
+	?LastSyncHronized null;
 	@Remarks("Optional short description of the record")
 	?Description;
 };

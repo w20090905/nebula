@@ -20,23 +20,23 @@ type CRfq {
 	@Remarks("Date of the Response")
 	DateResponse Date;
 	@Remarks("Are Resonses to the Request for Quotation accepted")
-	IsRfqresponseaccepted YesNo;/* 'Y'  */
+	IsRfqResponseAcceptEd YesNo;/* 'Y'  */
 	@Remarks("Date when work is (planned to be) started")
-	?DateWorkstart Date;
+	?DateWorkStart Date;
 	@Remarks("Number of Days (planned) until Delivery")
 	?DeliveryDays Count;/* 0 */
 	@Remarks("Date when work is (planned to be) complete")
-	?DateWorkcomplete Date;
+	?DateWorkComplete Date;
 	@Remarks("Request for Quotation Type")
-	Quotetype Attr;
+	QuoteType Attr;
 	@Remarks("The respnse can have just the total amount for the RfQ")
-	IsQuotetotalamt YesNo;/* 'N'  */
+	IsQuoteTotalAmt YesNo;/* 'N'  */
 	@Remarks("Suppliers are requested to provide responses for all quantities")
-	IsQuoteallqty YesNo;/* 'Y'  */
+	IsQuoteAllQty YesNo;/* 'Y'  */
 	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
-	IsSelfservice YesNo;/* 'N'  */
+	IsSelfService YesNo;/* 'N'  */
 	@Remarks("Only invited vendors can respond to an RfQ")
-	IsInvitedvendorsonly YesNo;/* 'N'  */
+	IsInvitedVendorsOnly YesNo;/* 'N'  */
 	@Remarks("Identifies a Business Partner")
 	?CBpartner;
 	@Remarks("Identifies the (ship to) address for this Business Partner")
@@ -48,15 +48,15 @@ type CRfq {
 	@Remarks("Margin for a product as a percentage")
 	?Margin Length;
 	@Remarks("Create SO")
-	?Createso YesNo;
+	?CreateSo YesNo;
 	@Remarks("Create Purchase Order")
-	?Createpo YesNo;
+	?CreatePo YesNo;
 	@Remarks("Publish RfQ")
-	?Publishrfq null;
+	?PublishRfq null;
 	@Remarks("Order")
 	?COrder;
 	@Remarks("Copy Lines")
-	?Copylines null;
+	?CopyLines null;
 	@Remarks("Rank RfQ")
 	?Rankrfq null;
 	@Remarks("Process Now")

@@ -5,7 +5,7 @@ tx AAssetAddition {
 	AdClientId ID;
 	AdOrgId ID;
 	AAsset;
-	Assetvalueamt Amount;/* 0  */
+	AssetValueAmt Amount;/* 0  */
 	?CInvoiceLine;
 };
 

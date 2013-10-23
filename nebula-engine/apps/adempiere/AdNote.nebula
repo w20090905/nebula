@@ -26,6 +26,6 @@ tx AdNote {
 	@Remarks("Workflow Activity")
 	?AdWfActivity;
 	@Remarks("Text Message")
-	?TextMsg Note;
+	?TextMsg Msg;
 };
 

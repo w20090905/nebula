@@ -12,10 +12,10 @@ type CDunning {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Indicates if dunning letters will be sent")
-	Senddunningletter YesNo;/* 'Y'  */
+	SendDunningLetter YesNo;/* 'Y'  */
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 	@Remarks("Create Dunning Letter by level sequentially")
-	Createlevelssequentially YesNo;/* 'N'  */
+	CreateLevelsSequentially YesNo;/* 'N'  */
 };
 

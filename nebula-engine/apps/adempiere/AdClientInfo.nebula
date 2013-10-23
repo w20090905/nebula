@@ -10,7 +10,7 @@ type AdClientInfo {
 	@Remarks("Accounting Calendar Name")
 	?CCalendar;
 	@Remarks("Primary rules for accounting")
-	?CAcctschema1 CAcctschema;
+	?CAcctSchema1 CAcctSchema;
 	@Remarks("Standard Unit of Measure for Volume")
 	?CUomVolume CUom;
 	@Remarks("Standard Unit of Measure for Weight")
@@ -36,7 +36,7 @@ type AdClientInfo {
 	@Remarks("Business Partner used for creating new Business Partners on the fly")
 	?CBpartnerCashTrx CBpartner;
 	@Remarks("Number of days to keep the log entries")
-	?KeepLogdays Count;
+	?KeepLogDays Count;
 	@Remarks("Tree to determine activity hierarchy")
 	?AdTreeActivity AdTree;
 	@Remarks("Tree to determine marketing campaign hierarchy")

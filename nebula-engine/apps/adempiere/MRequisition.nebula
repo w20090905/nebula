@@ -28,9 +28,9 @@ tx MRequisition {
 	@Remarks("Total of all document lines")
 	TotalLines Line;/* 0  */
 	@Remarks("The targeted status of the document")
-	Docaction Attr;
+	DocAction Attr;
 	@Remarks("The current status of the document")
-	Docstatus Attr;
+	DocStatus Attr;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("The document has been processed")
@@ -40,6 +40,6 @@ tx MRequisition {
 	@Remarks("Date of the Document")
 	DateDoc Date;/* sysDate  */
 	@Remarks("Document type or rules")
-	CDoctype;
+	CDocType;
 };
 

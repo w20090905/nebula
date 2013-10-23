@@ -1,6 +1,6 @@
 @Remarks("Tree Node BP")
 @Refby("0")
-type AdTreenodebp {
+type AdTreeNodeBp {
 	@Remarks("Identifies a Tree")
 	!AdTree;
 	@Remarks("Node_ID")

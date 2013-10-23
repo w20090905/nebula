@@ -16,6 +16,6 @@ type RGroup {
 	@Remarks("Bill of Material")
 	?MBom;
 	@Remarks("Bill of Materials (Engineering) Change Notice (Version)")
-	?MChangeNotice;
+	?MChangeNotIce;
 };
 

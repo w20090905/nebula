@@ -12,10 +12,10 @@ type CRevenueRecognition {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Time based Revenue Recognition rather than Service Level based")
-	IsTimebased YesNo;
+	IsTimeBased YesNo;
 	@Remarks("Recognition frequency")
-	?Recognitionfrequency null;
+	?RecognitionFrequency null;
 	@Remarks("Number of Months")
-	?Nomonths Count;
+	?NoMonths Count;
 };
 

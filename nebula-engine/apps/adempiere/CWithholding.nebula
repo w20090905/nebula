@@ -18,22 +18,22 @@ type CWithholding {
 	@Remarks("Tax is Prorated")
 	IsTaxProrated YesNo;/* 'N'  */
 	@Remarks("Amount paid to someone other than the Business Partner")
-	IsPaidto3party YesNo;/* 'Y'  */
+	IsPaidTo3party YesNo;/* 'Y'  */
 	@Remarks("Business Partner to whom payment is made")
 	?Beneficiary CBpartner;
 	@Remarks("Withholding amount is a percentage of the invoice amount")
-	IsPercentwithholding YesNo;/* 'Y'  */
+	IsPercentWithholding YesNo;/* 'Y'  */
 	@Remarks("Percentage")
 	?Percent;/* 0 */
 	@Remarks("Fix amounted amount to be levied or paid")
-	?Fixamt Amount;/* 0 */
+	?FixAmt Amount;/* 0 */
 	@Remarks("Minimum gross amount for withholding calculation")
 	?Thresholdmin Number;/* 0 */
 	@Remarks("Maximum gross amount for withholding calculation  (0=no limit)")
 	?Thresholdmax Number;/* 0 */
 	@Remarks("Minimum Amount in invoice currency")
-	?Minamt Amount;/* 0 */
+	?MinAmt Amount;/* 0 */
 	@Remarks("Maximum Amount in invoice currency")
-	?Maxamt Amount;/* 0 */
+	?MaxAmt Amount;/* 0 */
 };
 

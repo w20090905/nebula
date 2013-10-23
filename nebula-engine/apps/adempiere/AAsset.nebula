@@ -20,35 +20,35 @@ type AAsset {
 	@Remarks("Product, Service, Item")
 	?MProduct;
 	@Remarks("Product Serial Number")
-	?Serno Code;
+	?SerNo Code;
 	@Remarks("Lot number (alphanumeric)")
 	?LOT;
 	@Remarks("Version Number")
-	?Versionno Code;
+	?VersionNo Code;
 	@Remarks("Date when guarantee expires")
-	?Guaranteedate Date;
+	?GuaranteeDate Date;
 	@Remarks("Date when Asset was put into service")
-	?Assetservicedate Date;
+	?AssetServiceDate Date;
 	@Remarks("The asset is owned by the organization")
 	IsOwned YesNo;/* 'Y'  */
 	@Remarks("Date of last depreciation")
-	?Assetdepreciationdate Date;
+	?AssetDepreciationDate Date;
 	@Remarks("Years of the usable life of the asset")
-	?Uselifeyears Count;
+	?UseLifeYears Count;
 	@Remarks("Months of the usable life of the asset")
-	?Uselifemonths Count;
+	?UseLifeMonths Count;
 	@Remarks("Units of use until the asset is not usable anymore")
-	?Lifeuseunits Number;
+	?LifeUseUnits Number;
 	@Remarks("Currently used units of the assets")
-	?Useunits Number;
+	?UseUnits Number;
 	@Remarks("The asset is disposed")
 	IsDisposed YesNo;/* 'N'  */
 	@Remarks("Date when the asset is/was disposed")
-	?Assetdisposaldate Date;
+	?AssetDisposalDate Date;
 	@Remarks("The asset is in the possession of the organization")
 	IsInposession YesNo;/* 'Y'  */
 	@Remarks("Additional comments or remarks concerning the location")
-	?Locationcomment null;
+	?LocationComment null;
 	@Remarks("Warehouse Locator")
 	?MLocator;
 	@Remarks("Identifies a Business Partner")
@@ -62,11 +62,11 @@ type AAsset {
 	@Remarks("The asset will be depreciated")
 	IsDepreciated YesNo;/* 'Y'  */
 	@Remarks("The asset is fully depreciated")
-	IsFullydepreciated YesNo;/* 'N'  */
+	IsFullYdepreciated YesNo;/* 'N'  */
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
 	@Remarks("Product Attribute Set Instance")
-	?MAttributesetinstance;/* 0 */
+	?MAttributeSetInstance;/* 0 */
 	@Remarks("Quantity")
 	?Qty Quantity;
 	@Remarks("Financial Project")
@@ -74,23 +74,23 @@ type AAsset {
 	@Remarks("Business Partner (Agent or Sales Rep)")
 	?CBpartnerSr CBpartner;
 	@Remarks("Line on Shipment or Receipt document")
-	?MInoutline;
-	?Lastmaintenencedate Date;
+	?MInoutLine;
+	?LastMaintenenceDate Date;
 	@Remarks("Next Maintenence Date")
-	?Nextmaintenencedate Date;/* NULL  */
-	?Lastmaintenanceuseunit Unit;
-	?Nextmaintenanceuseunit Unit;
+	?NextMaintenenceDate Date;/* NULL  */
+	?LastMaintenanceUseUnit Unit;
+	?NextMaintenanceUseUnit Unit;
 	@Remarks("Lease Termination Date")
-	?Leaseterminationdate Date;/* NULL  */
+	?LeaseTerminationDate Date;/* NULL  */
 	@Remarks("The Business Partner who rents or leases")
 	?LeaseBpartner CBpartner;/* NULL  */
 	@Remarks("Last Maintenance Note")
-	?Lastmaintenancenote Note;/* NULL  */
+	?LastMaintenanceNote Note;/* NULL  */
 	@Remarks("Last Maintenance Date")
-	?Lastmaintenancedate Date;/* NULL  */
+	?LastMaintenanceDate Date;/* NULL  */
 	@Remarks("Last Maintenance Unit")
-	?Lastmaintenanceunit Unit;/* NULL  */
+	?LastMaintenanceUnit Unit;/* NULL  */
 	@Remarks("Next Maintenence Unit")
-	?Nextmaintenenceunit Unit;/* NULL  */
+	?NextMaintenenceUnit Unit;/* NULL  */
 };
 

@@ -12,7 +12,7 @@ type AdOrgV {
 	TaxId Code;
 	?SupervisorId ID;
 	?ParentOrgId ID;
-	?AdOrgtypeId ID;
+	?AdOrgTypeId ID;
 	?MWarehouseId ID;
 	?CBpartnerId ID;
 };

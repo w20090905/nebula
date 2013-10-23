@@ -10,11 +10,11 @@ type MBom {
 	@Remarks("Product, Service, Item")
 	MProduct;
 	@Remarks("Bill of Materials (Engineering) Change Notice (Version)")
-	?MChangeNotice;
+	?MChangeNotIce;
 	@Remarks("Type of BOM")
-	Bomtype Attr;
+	BomType Attr;
 	@Remarks("The use of the Bill of Material")
-	Bomuse null;
+	BomUse null;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")

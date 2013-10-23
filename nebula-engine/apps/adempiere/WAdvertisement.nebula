@@ -14,33 +14,33 @@ type WAdvertisement {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
-	IsSelfservice YesNo;/* 'N'  	  */
+	IsSelfService YesNo;/* 'N'  	  */
 	@Remarks("Identifies a Business Partner")
 	CBpartner;
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
 	@Remarks("Web Click Management")
-	?WClickcount;
+	?WClickCount;
 	@Remarks("Web Counter Count Management")
-	?WCountercount;
+	?WCounterCount;
 	@Remarks("Valid from including this date (first day)")
-	?Validfrom Date;
+	?ValidFrom Date;
 	@Remarks("Valid to including this date (last day)")
-	?Validto Date;
+	?ValidTo Date;
 	@Remarks("URL of  image")
-	?ImageURL URL;
+	?ImageUrl Url;
 	@Remarks("Text of the Advertisement")
-	?Adtext Text;
+	?AdText Text;
 	@Remarks("Web Site Parameter 1 (default: header image)")
-	?Webparam1 String;
+	?WebParam1 String;
 	@Remarks("Web Site Parameter 2 (default index page)")
-	?Webparam2 String;
+	?WebParam2 String;
 	@Remarks("Web Site Parameter 3 (default left - menu)")
-	?Webparam3 String;
+	?WebParam3 String;
 	@Remarks("Web Site Parameter 4 (default footer left)")
-	?Webparam4 String;
+	?WebParam4 String;
 	@Remarks("Status of Publication")
-	Publishstatus Attr;/* NULL */
+	PublishStatus Attr;/* NULL */
 	@Remarks("Version of the table definition")
 	?Version Number;
 	@Remarks("Process Now")

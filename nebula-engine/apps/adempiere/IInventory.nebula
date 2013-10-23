@@ -10,7 +10,7 @@ tx IInventory {
 	@Remarks("Has this import been processed")
 	IIsImported YesNo;/* 'N'  */
 	@Remarks("Messages generated from import process")
-	?IErrorMsg Note;
+	?IErrorMsg Msg;
 	@Remarks("Product, Service, Item")
 	?MProduct;
 	@Remarks("Bar Code (Universal Product Code or its superset European Article Number)")
@@ -20,15 +20,15 @@ tx IInventory {
 	@Remarks("Lot number (alphanumeric)")
 	?LOT;
 	@Remarks("Product Serial Number")
-	?Serno Code;
+	?SerNo Code;
 	@Remarks("Warehouse Locator")
 	?MLocator;
 	@Remarks("Storage Warehouse and Service Point")
 	?MWarehouse;
 	@Remarks("Key of the Warehouse")
-	?Warehousevalue Note;
+	?WarehouseValue Note;
 	@Remarks("Key of the Warehouse Locator")
-	?Locatorvalue Note;
+	?LocatorValue Note;
 	@Remarks("X dimension, e.g., Aisle")
 	?X String;
 	@Remarks("Y dimension, e.g., Bin")
@@ -38,13 +38,13 @@ tx IInventory {
 	@Remarks("Parameters for a Physical Inventory")
 	?MInventory;
 	@Remarks("Unique line in an Inventory document")
-	?MInventoryline;
+	?MInventoryLine;
 	@Remarks("Book Quantity")
 	?QtyBook Quantity;/* 0 */
 	@Remarks("Counted Quantity")
 	?QtyCount Count;/* 0 */
 	@Remarks("Date a product was moved in or out of inventory")
-	?Movementdate Date;
+	?MovementDate Date;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Process Now")

@@ -1,6 +1,6 @@
 @Remarks("Web Access Role")
 @Refby("0")
-type CmAccessListrole {
+type CmAccessListRole {
 	@Remarks("Web Access Profile")
 	!CmAccessProfile;
 	@Remarks("Responsibility Role")

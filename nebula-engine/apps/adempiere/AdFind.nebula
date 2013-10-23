@@ -10,7 +10,7 @@ tx AdFind {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Logical operation: AND or OR")
-	Andor null;
+	AndOr null;
 	@Remarks("Column in the table")
 	AdColumn;
 	@Remarks("Compare Operation")

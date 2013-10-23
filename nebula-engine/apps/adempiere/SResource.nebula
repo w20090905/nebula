@@ -22,6 +22,6 @@ type SResource {
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
 	@Remarks("Chargeable Quantity")
-	?ChargeAbleqty Quantity;/* 0 */
+	?ChargeableQty Quantity;/* 0 */
 };
 

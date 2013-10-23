@@ -18,20 +18,20 @@ type AdScheduler {
 	@Remarks("Frequency of events")
 	Frequency;
 	@Remarks("Date the process was last run.")
-	?DateLastrun Date;
+	?DateLastRun Date;
 	@Remarks("Date the process will run next")
-	?DateNextrun Date;
+	?DateNextRun Date;
 	@Remarks("Supervisor for this user/organization - used for escalation and approval")
 	Supervisor AdUser;
 	@Remarks("Number of days to keep the log entries")
-	KeepLogdays Count;
+	KeepLogDays Count;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Day of the Week")
 	?Weekday null;
 	@Remarks("Type of schedule")
-	Scheduletype Attr;/* 'F'  */
+	ScheduleType Attr;/* 'F'  */
 	@Remarks("Day of the month 1 to 28/29/30/31")
-	?Monthday Number;
+	?MonthDay Number;
 };
 

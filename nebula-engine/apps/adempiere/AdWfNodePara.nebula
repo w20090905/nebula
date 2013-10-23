@@ -10,13 +10,13 @@ tx AdWfNodePara {
 	@Remarks("Workflow Node (activity), step or process")
 	AdWfNode;
 	@Remarks("Name of the Attribute")
-	?Attributename Name;
+	?AttributeName Name;
 	@Remarks("Process Parameter")
 	?AdProcessPara;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Value of the Attribute")
-	?Attributevalue Note;
+	?AttributeValue Note;
 	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
 };

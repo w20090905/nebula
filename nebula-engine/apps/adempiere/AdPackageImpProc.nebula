@@ -8,7 +8,7 @@ tx AdPackageImpProc {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Update System Maintained Application Dictionary")
-	?AdOverrideDict null;
+	?AdOverRideDict null;
 	@Remarks("Package directory, default to AdempiereHome/packages")
 	?AdPackageDir null;
 	@Remarks("Fully qualified package source file name")

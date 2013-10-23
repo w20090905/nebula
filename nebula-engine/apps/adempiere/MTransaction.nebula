@@ -8,26 +8,26 @@ tx MTransaction {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Method of moving the inventory")
-	Movementtype Attr;
+	MovementType Attr;
 	@Remarks("Warehouse Locator")
 	MLocator;
 	@Remarks("Product, Service, Item")
 	MProduct;
 	@Remarks("Date a product was moved in or out of inventory")
-	Movementdate Date;
+	MovementDate Date;
 	@Remarks("Quantity of a product moved.")
-	Movementqty Quantity;/* 0  */
+	MovementQty Quantity;/* 0  */
 	@Remarks("Unique line in an Inventory document")
-	?MInventoryline;
+	?MInventoryLine;
 	@Remarks("Inventory Move document Line")
-	?MMovementline;
+	?MMovementLine;
 	@Remarks("Line on Shipment or Receipt document")
-	?MInoutline;
+	?MInoutLine;
 	@Remarks("Document Line representing a production")
-	?MProductIonline;
+	?MProductionLine;
 	@Remarks("Project Issues (Material, Labor)")
 	?CProjectIssue;
 	@Remarks("Product Attribute Set Instance")
-	MAttributesetinstance;/* 0 */
+	MAttributeSetInstance;/* 0 */
 };
 

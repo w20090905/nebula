@@ -12,7 +12,7 @@ tx MMovement {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Date a product was moved in or out of inventory")
-	Movementdate Date;
+	MovementDate Date;
 	@Remarks("Posting status")
 	PostEd YesNo;/* 'N'  */
 	@Remarks("The document has been processed")
@@ -20,7 +20,7 @@ tx MMovement {
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrx AdOrg;
+	?AdOrgTrx AdOrg;
 	@Remarks("Financial Project")
 	?CProject;
 	@Remarks("Marketing Campaign")
@@ -28,22 +28,22 @@ tx MMovement {
 	@Remarks("Business Activity")
 	?CActivity;
 	@Remarks("User defined list element #1")
-	?User1 CElementvalue;
+	?User1 CElementValue;
 	@Remarks("User defined list element #2")
-	?User2 CElementvalue;
+	?User2 CElementValue;
 	@Remarks("Date a product was received")
 	?DateReceived Date;
 	@Remarks("The targeted status of the document")
-	Docaction Attr;
+	DocAction Attr;
 	@Remarks("The current status of the document")
-	Docstatus Attr;
+	DocStatus Attr;
 	@Remarks("Movement is in transit")
 	IsIntransit YesNo;/* 'N'  */
 	@Remarks("Document type or rules")
-	CDoctype;
+	CDocType;
 	@Remarks("Indicates if this document requires approval")
 	IsApproved YesNo;/* 'N'  */
 	@Remarks("Document Approval Amount")
-	?Approvalamt Amount;
+	?ApprovalAmt Amount;
 };
 

@@ -20,6 +20,6 @@ type MLot {
 	@Remarks("End date of a date range")
 	?DateTo Date;
 	@Remarks("Product Lot Control")
-	?MLotctl;
+	?MLotCtl;
 };
 

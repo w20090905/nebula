@@ -12,20 +12,20 @@ type MDiscountSchema {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Valid from including this date (first day)")
-	Validfrom Date;
+	ValidFrom Date;
 	@Remarks("Type of trade discount calculation")
 	DiscountType Attr;
 	@Remarks("Dynamic Java Language Script to calculate result")
 	?Script Note;
 	@Remarks("Flat discount percentage")
-	?Flatdiscount Count;
+	?FlatDiscount Count;
 	@Remarks("Trade discount break level based on Quantity (not value)")
-	IsQuantitybased YesNo;/* 'Y'  */
+	IsQuantityBased YesNo;/* 'Y'  */
 	@Remarks("Level for accumulative calculations")
-	?Cumulativelevel Attr;
+	?CumulativeLevel Attr;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Use flat discount defined on Business Partner Level")
-	IsBpartnerFlatdiscount YesNo;/* 'N'  */
+	IsBpartnerFlatDiscount YesNo;/* 'N'  */
 };
 

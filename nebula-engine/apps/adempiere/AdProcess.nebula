@@ -24,9 +24,9 @@ type AdProcess {
 	@Remarks("Indicates a Report record")
 	IsReport YesNo;/* 'Y'  */
 	@Remarks("Print without dialog")
-	?IsDirectprint YesNo;/* 'N'                           */
+	?IsDirectPrint YesNo;/* 'N'                           */
 	@Remarks("View used to generate this report")
-	?AdReportview;
+	?AdReportView;
 	@Remarks("Java Classname")
 	?ClassName Name;
 	@Remarks("Internal statistics how often the entity was used")
@@ -36,7 +36,7 @@ type AdProcess {
 	@Remarks("Data Print Format")
 	?AdPrintFormat;
 	@Remarks("Key of the Workflow to start")
-	?Workflowvalue Note;
+	?WorkflowValue Note;
 	@Remarks("Workflow or combination of tasks")
 	?AdWorkflow;
 	@Remarks("This functionality is considered Beta")
@@ -46,6 +46,6 @@ type AdProcess {
 	@Remarks("Show Help")
 	?ShowHelp YesNo;/* 'Y' */
 	@Remarks("Jasper Report")
-	?Jasperreport null;
+	?JasperReport null;
 };
 

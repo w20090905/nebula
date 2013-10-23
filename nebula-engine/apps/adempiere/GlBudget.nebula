@@ -14,6 +14,6 @@ type GlBudget {
 	@Remarks("Indicates if this is the primary budget")
 	IsPrimary YesNo;/* 'Y'  */
 	@Remarks("Indicates the current status of this budget")
-	?Budgetstatus Attr;
+	?BudgetStatus Attr;
 };
 

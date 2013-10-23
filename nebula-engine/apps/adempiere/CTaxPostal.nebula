@@ -12,6 +12,6 @@ tx CTaxPostal {
 	@Remarks("Postal code")
 	Postal;
 	@Remarks("Postal code to")
-	?PostAlTo Postal;
+	?PostalTo Postal;
 };
 

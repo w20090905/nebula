@@ -10,9 +10,9 @@ type AdSystem {
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Email of the responsible for the System")
-	Username Name;
+	UserName Name;
 	@Remarks("Information")
-	?Info Note;
+	?Info;
 	@Remarks("Version of the table definition")
 	?Version String;
 	@Remarks("Internal Release Number")
@@ -22,27 +22,27 @@ type AdSystem {
 	@Remarks("Password of any length (case sensitive)")
 	?Password;
 	@Remarks("Type of Data Replication")
-	Replicationtype Attr;/* 'L' */
+	ReplicationType Attr;/* 'L' */
 	@Remarks("Start of the ID Range used")
-	?Idrangestart Number;
+	?IdRangeStart Number;
 	@Remarks("End if the ID Range used")
-	?Idrangeend Number;
+	?IdRangeEnd Number;
 	@Remarks("Connection String to LDAP server starting with ldap://")
 	?LdapHost Host;
 	@Remarks("Prefix for Custom entities")
-	?Customprefix Description;
+	?CustomPrefix Description;
 	@Remarks("Value set by Migration for post-Migation tasks.")
 	?IsJustmigrated YesNo;/* 'N'  */
 	@Remarks("Database Name")
-	?Dbinstance null;
+	?DbInstance null;
 	@Remarks("JDBC URL of the database server")
 	?Address Name;
 	@Remarks("Number of Database Processors")
-	?Noprocessors Number;
+	?NoProcessors Number;
 	@Remarks("Textual summary of this request")
 	?Summary;
 	@Remarks("Encryption Class used for securing data content")
-	?Encryptionkey null;
+	?EncryptionKey null;
 	@Remarks("Directory service domain name - e.g. adempiere.org")
 	?LdapDomain null;
 	@Remarks("Automatically report Errors")
@@ -50,17 +50,17 @@ type AdSystem {
 	@Remarks("Direct internal record ID")
 	?RecordId ID;
 	@Remarks("Date when the Adempiere support expires")
-	?SupportExpdate Date;
+	?SupportExpDate Date;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("EMail address to send support information and updates to")
 	?SupportEmail Description;
 	@Remarks("Maintain general statistics")
-	IsAllowstatistics YesNo;/* 'Y'  */
+	IsAllowStatistics YesNo;/* 'Y'  */
 	@Remarks("Information to help profiling the system for solving support issues")
-	?Statisticsinfo Note;
+	?StatisticsInfo Info;
 	@Remarks("Information to help profiling the system for solving support issues")
-	?Profileinfo Note;
+	?ProfileInfo Info;
 	@Remarks("Old Name")
 	?OldName Name;
 	@Remarks("Optional short description of the record")
@@ -68,10 +68,10 @@ type AdSystem {
 	@Remarks("Status of the system - Support priority depends on system status")
 	SystemStatus Attr;/* 'E'  */
 	@Remarks("Fail on Missing Model Validator")
-	IsFailonmissingmodelvalidator YesNo;/* 'Y'  */
+	IsFailOnMissingModelValidator YesNo;/* 'Y'  */
 	@Remarks("Last Build Info")
-	?Lastbuildinfo Note;
+	?LastBuildInfo Info;
 	@Remarks("Fail if Build Differ")
-	IsFailonbuilddiffer YesNo;/* 'N'  */
+	IsFailOnBuildDiffer YesNo;/* 'N'  */
 };
 

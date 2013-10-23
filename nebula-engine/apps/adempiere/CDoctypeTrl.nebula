@@ -1,8 +1,8 @@
 @Remarks("Document type or rules")
 @Refby("0")
-type CDoctypeTrl {
+type CDocTypeTrl {
 	@Remarks("Document type or rules")
-	!CDoctype;
+	!CDocType;
 	@Remarks("Language for this entity")
 	!AdLanguage;
 	@Remarks("Client/Tenant for this installation.")

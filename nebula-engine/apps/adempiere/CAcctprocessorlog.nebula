@@ -1,10 +1,10 @@
 @Remarks("Result of the execution of the Accounting Processor")
 @Refby("0")
-type CAcctprocessorlog {
+type CAcctProcessorLog {
 	@Remarks("Accounting Processor/Server Parameters")
-	!CAcctprocessor;
+	!CAcctProcessor;
 	@Remarks("Result of the execution of the Accounting Processor")
-	!CAcctprocessorlogId ID;
+	!CAcctProcessorLogId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -18,8 +18,8 @@ type CAcctprocessorlog {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Text Message")
-	?TextMsg Note;
+	?TextMsg Msg;
 	@Remarks("Binary Data")
-	?Binarydata Note;
+	?BinaryData Note;
 };
 

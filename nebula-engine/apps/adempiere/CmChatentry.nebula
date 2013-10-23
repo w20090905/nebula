@@ -1,8 +1,8 @@
 @Remarks("Chat Entry")
 @Refby("2")
-tx CmChatentry {
+tx CmChatEntry {
 	@Remarks("Individual Chat / Discussion Entry")
-	!CmChatentryId ID;
+	!CmChatEntryId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -10,19 +10,19 @@ tx CmChatentry {
 	@Remarks("Chat or discussion thread")
 	CmChat;
 	@Remarks("Type of Confidentiality")
-	Confidentialtype Attr;
+	ConfidentialType Attr;
 	@Remarks("Long Character Field")
-	?Characterdata Note;
+	?CharacterData Note;
 	@Remarks("Link to direct Parent")
-	?CmChatentryparent CmChatentry;/* NULL   */
+	?CmChatEntryParent CmChatEntry;/* NULL   */
 	@Remarks("Link to Grand Parent (root level)")
-	?CmChatentrygrandparent CmChatentry;/* NULL   */
+	?CmChatEntryGrandParent CmChatEntry;/* NULL   */
 	@Remarks("Type of Chat/Forum Entry")
-	Chatentrytype Attr;/* NULL  */
+	ChatEntryType Attr;/* NULL  */
 	@Remarks("Status of Moderation")
-	?Moderatorstatus Attr;/* NULL   */
+	?ModeratorStatus Attr;/* NULL   */
 	@Remarks("Email Message Subject")
-	?Subject Description;/* NULL   */
+	?Subject;/* NULL   */
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;/* NULL   */
 };

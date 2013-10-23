@@ -1,8 +1,8 @@
 @Remarks("Account Element")
 @Refby("0")
-type CElementvalueTrl {
+type CElementValueTrl {
 	@Remarks("Account Element")
-	!CElementvalue;
+	!CElementValue;
 	@Remarks("Language for this entity")
 	!AdLanguage;
 	@Remarks("Client/Tenant for this installation.")

@@ -14,11 +14,11 @@ type AdRefTable {
 	@Remarks("Column that will display")
 	AdDisplay AdColumn;
 	@Remarks("Displays Value column with the Display column")
-	IsValueDisplayed YesNo;/* 'N'  */
+	IsValueDisplayEd YesNo;/* 'N'  */
 	@Remarks("Fully qualified SQL WHERE clause")
 	?WhereClause Note;
 	@Remarks("Fully qualified ORDER BY clause")
-	?OrderbyClause Note;
+	?OrderByClause Note;
 	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
 };

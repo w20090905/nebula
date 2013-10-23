@@ -8,23 +8,23 @@ tx GlJournal {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Rules for accounting")
-	CAcctschema;
+	CAcctSchema;
 	@Remarks("Document type or rules")
-	CDoctype;
+	CDocType;
 	@Remarks("Document sequence number of the document")
 	DocumentNo Code;
 	@Remarks("The current status of the document")
-	Docstatus Attr;
+	DocStatus Attr;
 	@Remarks("The targeted status of the document")
-	Docaction Attr;
+	DocAction Attr;
 	@Remarks("Indicates if this document requires approval")
 	IsApproved YesNo;/* 'N'  */
 	@Remarks("Indicates if this document / line is printed")
-	IsPrintEd YesNo;/* 'N'  */
+	IsPrinted YesNo;/* 'N'  */
 	@Remarks("Optional short description of the record")
 	Description;
 	@Remarks("The type of posted amount for the transaction")
-	PostIngtype Attr;
+	PostingType YesNo;
 	@Remarks("General Ledger Budget")
 	?GlBudget;
 	@Remarks("General Ledger Category")
@@ -38,15 +38,15 @@ tx GlJournal {
 	@Remarks("The Currency for this record")
 	?CCurrency;
 	@Remarks("Currency Conversion Rate")
-	Currencyrate Rate;/* 0  */
+	CurrencyRate Rate;/* 0  */
 	@Remarks("General Ledger Journal Batch")
-	?GlJournalbatch;
+	?GlJournalBatch;
 	@Remarks("Total debit in document currency")
 	TotalDr Number;/* 0  */
 	@Remarks("Total Credit in document currency")
 	TotalCr Number;/* 0  */
 	@Remarks("If not zero, the Debit amount of the document must be equal this amount")
-	?Controlamt Amount;/* 0 */
+	?ControlAmt Amount;/* 0 */
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("The document has been processed")

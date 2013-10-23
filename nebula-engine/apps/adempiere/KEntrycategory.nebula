@@ -1,6 +1,6 @@
 @Remarks("K_EntryCategory")
 @Refby("0")
-type KEntrycategory {
+type KEntryCategory {
 	@Remarks("Knowledge Category")
 	!KCategory;
 	@Remarks("Knowledge Entry")
@@ -10,6 +10,6 @@ type KEntrycategory {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("The value of the category")
-	KCategoryvalue;
+	KCategoryValue;
 };
 

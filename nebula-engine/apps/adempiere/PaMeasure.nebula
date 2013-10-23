@@ -12,15 +12,15 @@ type PaMeasure {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Determines how the actual performance is derived")
-	Measuretype Attr;
+	MeasureType Attr;
 	@Remarks("Manually entered actual value")
-	?Manualactual Number;
+	?ManualActual Number;
 	@Remarks("Note for manual entry")
-	?Manualnote Note;
+	?ManualNote Note;
 	@Remarks("Java Class for calculation, implementing Interface Measure")
-	?Calculationclass null;
+	?CalculationClass null;
 	@Remarks("Calculation method for measuring performance")
-	?PaMeasurecalc;
+	?PaMeasureCalc;
 	@Remarks("Performance Benchmark")
 	?PaBenchmark;
 	@Remarks("Performace Ratio")
@@ -28,7 +28,7 @@ type PaMeasure {
 	@Remarks("Optional Reporting Hierarchy - If not selected the default hierarchy trees are used.")
 	?PaHierarchy;
 	@Remarks("Type of data - Status or in Time")
-	Measuredatatype Attr;
+	MeasureDataType Attr;
 	@Remarks("Type of request (e.g. Inquiry, Complaint, ..)")
 	?RRequestType;
 	@Remarks("Type of the project")

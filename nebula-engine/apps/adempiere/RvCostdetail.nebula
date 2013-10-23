@@ -1,6 +1,6 @@
 @Remarks("")
 @Refby("0")
-type RvCostdetail {
+type RvCostDetail {
 	AdClientId ID;
 	AdOrgId ID;
 	MProductId ID;
@@ -10,13 +10,13 @@ type RvCostdetail {
 	IsBom YesNo;
 	ProductType Attr;
 	MProductCategoryId ID;
-	?MInoutlineId ID;
+	?MInoutLineId ID;
 	?CInvoiceLineId ID;
-	MAttributesetinstanceId ID;
-	?MAttributesetId ID;
+	MAttributeSetInstanceId ID;
+	?MAttributeSetId ID;
 	?LOT;
-	?Serno Code;
-	CAcctschemaId ID;
+	?SerNo Code;
+	CAcctSchemaId ID;
 	CCurrencyId ID;
 	Amt Amount;
 	Qty Quantity;

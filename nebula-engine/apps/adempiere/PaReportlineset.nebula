@@ -1,8 +1,8 @@
 @Remarks("Report Line Set")
 @Refby("3")
-type PaReportlineset {
+type PaReportLinesEt {
 	@Remarks("Report Line Set")
-	!PaReportlinesetId ID;
+	!PaReportLinesEtId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")

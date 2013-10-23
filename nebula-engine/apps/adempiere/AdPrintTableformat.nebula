@@ -1,8 +1,8 @@
 @Remarks("Table Format in Reports")
 @Refby("1")
-type AdPrintTableformat {
+type AdPrintTableFormat {
 	@Remarks("Table Format in Reports")
-	!AdPrintTableformatId ID;
+	!AdPrintTableFormatId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -10,35 +10,35 @@ type AdPrintTableformat {
 	@Remarks("Header row Font")
 	?HdrPrintFont AdPrintFont;
 	@Remarks("Foreground color if the table header row")
-	?HdrTextfgPrintColor AdPrintColor;
+	?HdrTextFgPrintColor AdPrintColor;
 	@Remarks("Background color of header row")
-	?HdrTextbgPrintColor AdPrintColor;
+	?HdrTextBgPrintColor AdPrintColor;
 	@Remarks("Table header row line color")
 	?HdrLinePrintColor AdPrintColor;
 	@Remarks("Function row Font")
-	?FunctPrintFont AdPrintFont;
+	?FuncTPrintFont AdPrintFont;
 	@Remarks("Function Background Color")
-	?FunctbgPrintColor AdPrintColor;
+	?FuncTbgPrintColor AdPrintColor;
 	@Remarks("Function Foreground Color")
-	?FunctfgPrintColor AdPrintColor;
+	?FuncTfgPrintColor AdPrintColor;
 	@Remarks("Table line color")
 	?LinePrintColor AdPrintColor;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Paint table boundary lines")
-	IsPaintBoundarylines YesNo;/* 'N'  */
+	IsPaintBoundaryLines YesNo;/* 'N'  */
 	@Remarks("Paint horizontal lines")
 	IsPaintHlines YesNo;/* 'N'  */
 	@Remarks("Paint vertical lines")
 	IsPaintVlines YesNo;/* 'N'  */
 	@Remarks("Print Symbols for Functions (Sum, Average, Count)")
-	IsPrintFunctionsymbols YesNo;/* 'Y'  */
+	IsPrintFunctionSymbols YesNo;/* 'Y'  */
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 	@Remarks("URL of  image")
-	?ImageURL URL;
+	?ImageUrl Url;
 	@Remarks("Content of the left portion of the header.")
 	?HeaderLeft String;
 	@Remarks("Content of the center portion of the header.")
@@ -52,7 +52,7 @@ type AdPrintTableformat {
 	@Remarks("Content of the right portion of the footer.")
 	?FooterRight String;
 	@Remarks("The image to be printed is attached to the record")
-	?ImageIsattached YesNo;/* 'N' */
+	?ImageIsAttached YesNo;/* 'N' */
 	@Remarks("Width of the Header Line Stroke")
 	?HdrStroke Number;
 	@Remarks("Width of the Line Stroke")
@@ -60,8 +60,8 @@ type AdPrintTableformat {
 	@Remarks("Type of the Header Line Stroke")
 	?HdrStroketype Attr;
 	@Remarks("Type of the Line Stroke")
-	?LineStroketype Attr;
+	?LineStrokeType Attr;
 	@Remarks("Paint Lines over/under the Header Line")
-	IsPaintHeaderlines YesNo;/* 'Y'  */
+	IsPaintHeaderLines YesNo;/* 'Y'  */
 };
 

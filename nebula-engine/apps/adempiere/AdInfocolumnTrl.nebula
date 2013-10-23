@@ -1,8 +1,8 @@
 @Remarks("Info Window Column")
 @Refby("0")
-type AdInfocolumnTrl {
+type AdInfoColumnTrl {
 	@Remarks("Info Window Column")
-	!AdInfocolumn;
+	!AdInfoColumn;
 	@Remarks("Language for this entity")
 	!AdLanguage;
 	@Remarks("Client/Tenant for this installation.")

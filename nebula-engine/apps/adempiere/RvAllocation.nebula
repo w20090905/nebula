@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
 type RvAllocation {
-	CAllocationhdrId ID;
+	CAllocationHdrId ID;
 	AdClientId ID;
 	AdOrgId ID;
 	DocumentNo Code;
@@ -9,12 +9,12 @@ type RvAllocation {
 	DateTrx Date;
 	DateAcct Date;
 	CCurrencyId ID;
-	Approvalamt Amount;
+	ApprovalAmt Amount;
 	IsManual YesNo;
-	Docstatus Attr;
-	Docaction Attr;
+	DocStatus Attr;
+	DocAction Attr;
 	Processed YesNo;
-	CAllocationlineId ID;
+	CAllocationLineId ID;
 	?CInvoiceId ID;
 	?CBpartnerId ID;
 	?COrderId ID;
@@ -22,7 +22,7 @@ type RvAllocation {
 	?CCashLineId ID;
 	Amount;
 	DiscountAmt Amount;
-	WriteoffAmt Amount;
-	?Overunderamt Amount;
+	WriteOffAmt Amount;
+	?OverUnderAmt Amount;
 };
 

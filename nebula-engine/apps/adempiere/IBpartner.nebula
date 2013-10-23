@@ -10,7 +10,7 @@ type IBpartner {
 	@Remarks("Has this import been processed")
 	IIsImported YesNo;/* 'N'  */
 	@Remarks("Messages generated from import process")
-	?IErrorMsg Note;
+	?IErrorMsg Msg;
 	@Remarks("Identifies a Business Partner")
 	?CBpartner;
 	@Remarks("Search key for the record in the format required - must be unique")
@@ -28,7 +28,7 @@ type IBpartner {
 	@Remarks("Standard Industry Code or its successor NAIC - http://www.osha.gov/oshstats/sicser.html")
 	?NAICS;
 	@Remarks("Business Partner Group Key")
-	?Groupvalue Note;
+	?GroupValue Note;
 	@Remarks("Business Partner Group")
 	?CBpGroup;
 	@Remarks("Identifies the (ship to) address for this Business Partner")
@@ -40,23 +40,23 @@ type IBpartner {
 	@Remarks("Postal code")
 	?Postal;
 	@Remarks("Additional ZIP or Postal code")
-	?PostAlAdd Postal;
+	?PostalAdd Postal;
 	@Remarks("Identifies a City")
 	?City null;
 	@Remarks("Identifies a geographical Region")
 	?CRegion;
 	@Remarks("Name of the Region")
-	?Regionname Name;
+	?RegionName Name;
 	@Remarks("Country")
 	?CCountry;
 	@Remarks("Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1 - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html")
 	?CountryCode Code;
 	@Remarks("Name this entity is referred to as")
-	?Title String;
+	?Title;
 	@Remarks("Business Partner Contact Name")
-	?Contactname Name;
+	?ContactName Name;
 	@Remarks("Description of Contact")
-	?Contactdescription Description;
+	?ContactDescription Description;
 	@Remarks("Comments or additional information")
 	?Comments Comment;
 	@Remarks("Identifies a telephone number")
@@ -74,7 +74,7 @@ type IBpartner {
 	@Remarks("Greeting to print on correspondence")
 	?CGreeting;
 	@Remarks("Greeting for Business Partner Contact")
-	?BpcontactGreeting String;
+	?BpContactGreeting String;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("The document has been processed")
@@ -84,6 +84,6 @@ type IBpartner {
 	@Remarks("Interest Area or Topic")
 	?RInterestArea;
 	@Remarks("Name of the Interest Area")
-	?InterestAreaname Name;
+	?InterestAreaName Name;
 };
 

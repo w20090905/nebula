@@ -1,8 +1,8 @@
 @Remarks("Item/Column in the Print format")
 @Refby("0")
-type AdPrintFormatitemTrl {
+type AdPrintFormatItemTrl {
 	@Remarks("Item/Column in the Print format")
-	!AdPrintFormatitem;
+	!AdPrintFormatItem;
 	@Remarks("Language for this entity")
 	!AdLanguage;
 	@Remarks("Client/Tenant for this installation.")
@@ -14,6 +14,6 @@ type AdPrintFormatitemTrl {
 	@Remarks("This column is translated")
 	IsTranslated YesNo;/* 'N'  */
 	@Remarks("The label text to be printed on a document or correspondence after the field")
-	?PrintNamesuffix Description;
+	?PrintNameSuffix Description;
 };
 

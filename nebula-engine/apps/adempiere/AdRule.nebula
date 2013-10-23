@@ -20,7 +20,7 @@ type AdRule {
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Rule Type")
-	?Ruletype Attr;
+	?RuleType Attr;
 	@Remarks("Dynamic Java Language Script to calculate result")
 	?Script Note;
 	@Remarks("Search key for the record in the format required - must be unique")

@@ -10,31 +10,31 @@ tx IConversionRate {
 	@Remarks("Rate used for converting currencies")
 	?CConversionRate;
 	@Remarks("Three letter ISO 4217 Code of the Currency")
-	?IsOCode Note;
+	?IsoCode YesNo;
 	@Remarks("The Currency for this record")
 	?CCurrency;
 	@Remarks("Three letter ISO 4217 Code of the To Currency")
-	?IsOCodeTo YesNo;
+	?IsoCodeTo YesNo;
 	@Remarks("Target currency")
 	?CCurrencyIdTo CCurrency;
 	@Remarks("Key value for the Currency Conversion Rate Type")
-	?ConversionTypevalue Note;
+	?ConversionTypeValue Note;
 	@Remarks("Currency Conversion Rate Type")
 	?CConversionType;
 	@Remarks("Valid from including this date (first day)")
-	?Validfrom Date;
+	?ValidFrom Date;
 	@Remarks("Valid to including this date (last day)")
-	?Validto Date;
+	?ValidTo Date;
 	@Remarks("Rate to multiple the source by to calculate the target.")
-	?Multiplyrate Rate;
+	?MultiPlyrate Rate;
 	@Remarks("To convert Source number to Target number, the Source is divided")
-	?Dividerate Rate;
+	?DivideRate Rate;
 	@Remarks("Create Reciprocal Rate from current information")
-	?Createreciprocalrate YesNo;/* 'N'                               */
+	?CreateReciprocalrate YesNo;/* 'N'                               */
 	@Remarks("Has this import been processed")
 	?IIsImported YesNo;/* 'N'  */
 	@Remarks("Messages generated from import process")
-	?IErrorMsg Note;
+	?IErrorMsg Msg;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("The document has been processed")

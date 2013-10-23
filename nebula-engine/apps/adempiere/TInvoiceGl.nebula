@@ -2,7 +2,7 @@
 @Refby("0")
 tx TInvoiceGl {
 	@Remarks("Instance of the process")
-	!AdPinstance;
+	!AdPInstance;
 	@Remarks("Invoice Identifier")
 	!CInvoice;
 	@Remarks("Accounting Fact")
@@ -14,30 +14,30 @@ tx TInvoiceGl {
 	@Remarks("Total amount of document")
 	GrandTotal Amount;/* 0  */
 	@Remarks("Open item amount")
-	Openamt Amount;/* 0  */
+	OpenAmt Amount;/* 0  */
 	@Remarks("Percentage")
 	?Percent;
 	@Remarks("Include Receivables and/or Payables transactions")
 	?APAR;
 	@Remarks("Source Balance Amount")
-	AmtSourcebalance Amount;/* 0  */
+	AmtSourceBalance Amount;/* 0  */
 	@Remarks("Accounted Balance Amount")
-	AmtAcctbalance Amount;/* 0  */
+	AmtAcctBalance Amount;/* 0  */
 	@Remarks("Revaluation Currency Conversion Type")
-	CConversionTypereval CConversionType;
+	CConversionTypeReval CConversionType;
 	@Remarks("Revaluated Dr Amount")
-	AmtRevaldr Amount;/* 0  */
+	AmtRevalDr Amount;/* 0  */
 	@Remarks("Revaluated Cr Amount")
-	AmtRevalcr Amount;/* 0  */
+	AmtRevalCr Amount;/* 0  */
 	@Remarks("Date of Revaluation")
 	DateReval Date;
 	@Remarks("Revaluated Dr Amount Difference")
-	AmtRevaldrdiff Amount;/* 0  */
+	AmtRevalDrDiff Amount;/* 0  */
 	@Remarks("Revaluated Cr Amount Difference")
-	AmtRevalcrdiff Amount;/* 0  */
+	AmtRevalCrDiff Amount;/* 0  */
 	@Remarks("Document Type for Revaluation Journal")
-	?CDoctypeReval CDoctype;
+	?CDocTypeReval CDocType;
 	@Remarks("Report not just foreign currency Invoices")
-	IsAllcurrencies YesNo;/* 'N'  */
+	IsAllCurrencies YesNo;/* 'N'  */
 };
 

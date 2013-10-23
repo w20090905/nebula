@@ -14,12 +14,12 @@ type BBid {
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	AdUser BBuyer;
 	@Remarks("Willing to commit")
-	IsWillingtocommit YesNo;/* 'Y'  */
+	IsWillingToCommit YesNo;/* 'Y'  */
 	@Remarks("Buyer Funds for Bids on Topics")
-	BBuyerfunds;
+	BBuyerFundS;
 	@Remarks("Text Message")
-	?TextMsg Note;
+	?TextMsg Msg;
 	@Remarks("Private Note - not visible to the other parties")
-	?Privatenote Note;
+	?PrivateNote Note;
 };
 

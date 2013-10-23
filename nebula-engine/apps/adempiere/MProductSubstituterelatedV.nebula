@@ -1,14 +1,14 @@
 @Remarks("")
 @Refby("0")
-type MProductSubstituterelatedV {
+type MProductSubstituteRelatedV {
 	?AdClientId ID;
 	?AdOrgId ID;
 	?MProductId ID;
 	?SubstituteId ID;
 	?Description;
-	?Rowtype Attr;
+	?RowType Attr;
 	?QtyAvailable Quantity;
-	?QtyOnhand Quantity;
+	?QtyOnHand Quantity;
 	?QtyReserved Quantity;
 	?PriceStd Number;
 	?MPriceListVersionId ID;

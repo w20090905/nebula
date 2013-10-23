@@ -1,31 +1,31 @@
 @Remarks("")
 @Refby("0")
-type MInoutconfirmV {
+type MInoutConfirmV {
 	AdClientId ID;
 	AdOrgId ID;
 	?AdLanguage String;
-	MInoutconfirmId ID;
+	MInoutConfirmId ID;
 	DocumentNo Code;
-	Confirmtype Attr;
+	ConfirmType Attr;
 	IsApproved YesNo;
-	IsCancelled YesNo;
+	IsCanCelled YesNo;
 	?Description;
 	MInoutId ID;
-	?Shipdescription Description;
+	?ShipDescription Description;
 	CBpartnerId ID;
 	CBpartnerLocationId ID;
 	?AdUserId ID;
 	?SalesRepId ID;
-	CDoctypeId ID;
+	CDocTypeId ID;
 	DocumentType Attr;
 	?COrderId ID;
 	?DateOrdered Date;
-	Movementdate Date;
-	Movementtype Attr;
+	MovementDate Date;
+	MovementType Attr;
 	MWarehouseId ID;
-	?Poreference Note;
+	?PoReference Note;
 	DeliveryRule Attr;
-	FreightCostrule Attr;
+	FreightCostRule Attr;
 	DeliveryViarule Attr;
 	?MShipperId ID;
 	PriorityRule Attr;

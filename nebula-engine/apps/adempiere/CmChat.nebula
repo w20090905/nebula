@@ -14,10 +14,10 @@ tx CmChat {
 	@Remarks("Direct internal record ID")
 	RecordId ID;
 	@Remarks("Type of Confidentiality")
-	Confidentialtype Attr;
+	ConfidentialType Attr;
 	@Remarks("Type of discussion / chat")
-	?CmChattype;
+	?CmChatType;
 	@Remarks("Type of moderation")
-	?Moderationtype Attr;/* NULL   */
+	?ModerationType Attr;/* NULL   */
 };
 

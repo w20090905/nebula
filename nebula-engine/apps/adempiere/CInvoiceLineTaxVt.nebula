@@ -3,7 +3,7 @@
 type CInvoiceLineTaxVt {
 	?AdClientId ID;
 	?AdOrgId ID;
-	?AdLanguage String;
+	?AdLanguage Code;
 	?CInvoiceId ID;
 	?CInvoiceLineId ID;
 	?CTaxId ID;
@@ -12,9 +12,9 @@ type CInvoiceLineTaxVt {
 	?TaxIndicator String;
 	?Line;
 	?MProductId ID;
-	?QtyInvoiced Quantity;
+	?QtyInvoiceD Quantity;
 	?QtyEntered Quantity;
-	?Uomsymbol Symbol;
+	?UomSymbol Symbol;
 	?Name;
 	?Description;
 	?DocumentNote Note;
@@ -23,19 +23,19 @@ type CInvoiceLineTaxVt {
 	?ProductValue Note;
 	?ResourceDescription Description;
 	?PriceList Number;
-	?PriceEnteredlist Number;
+	?PriceEnteredList Number;
 	?Discount Count;
 	?PriceActual Number;
 	?PriceEntered Number;
-	?LineNetamt Amount;
-	?MAttributesetinstanceId ID;
-	?MAttributesetId ID;
-	?Serno Code;
+	?LineNetAmt Amount;
+	?MAttributeSetInstanceId ID;
+	?MAttributeSetId ID;
+	?SerNo Code;
 	?LOT;
 	?MLotId ID;
-	?Guaranteedate Date;
+	?GuaranteeDate Date;
 	?ProductDescription Description;
-	?ImageURL URL;
+	?ImageUrl Url;
 	?CCampaignId ID;
 	?CProjectId ID;
 	?CActivityId ID;

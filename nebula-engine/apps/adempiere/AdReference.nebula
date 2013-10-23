@@ -20,6 +20,6 @@ type AdReference {
 	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
 	@Remarks("Order list using the value column instead of the name column")
-	?IsOrderbyValue YesNo;/* 'N' */
+	?IsOrderByValue YesNo;/* 'N' */
 };
 

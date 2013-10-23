@@ -12,7 +12,7 @@ tx CCurrencyTrl {
 	@Remarks("This column is translated")
 	IsTranslated YesNo;/* 'N'  */
 	@Remarks("Symbol of the currency (opt used for printing only)")
-	?Cursymbol Symbol;
+	?CurSymbol Symbol;
 	@Remarks("Optional short description of the record")
 	Description;
 };

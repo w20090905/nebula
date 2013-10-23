@@ -1,8 +1,8 @@
 @Remarks("Counter Document Relationship")
 @Refby("0")
-type CDoctypeCounter {
+type CDocTypeCounter {
 	@Remarks("Counter Document Relationship")
-	!CDoctypeCounterId ID;
+	!CDocTypeCounterId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -12,16 +12,16 @@ type CDoctypeCounter {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Document type or rules")
-	CDoctype;
+	CDocType;
 	@Remarks("Generated Counter Document Type (To)")
-	?CounterCDoctype CDoctype;
+	?CounterCDocType CDocType;
 	@Remarks("Element is valid")
 	IsValid YesNo;/* 'N'  */
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("The targeted status of the document")
-	?Docaction Attr;
+	?DocAction Attr;
 	@Remarks("Create Counter Document")
-	IsCreatecounter YesNo;/* 'Y'  */
+	IsCreateCounter YesNo;/* 'Y'  */
 };
 

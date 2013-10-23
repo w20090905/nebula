@@ -10,6 +10,6 @@ type RStandardResponse {
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Request Response Text")
-	Responsetext Note;
+	ResponseText Note;
 };
 

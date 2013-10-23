@@ -14,7 +14,7 @@ type AdTable {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("Name of the table in the database")
-	Tablename Name;
+	TableName Name;
 	@Remarks("This is a view")
 	IsView YesNo;/* 'N'  */
 	@Remarks("Access Level required")
@@ -26,22 +26,22 @@ type AdTable {
 	@Remarks("Dynamic Validation Rule")
 	?AdValRule;
 	@Remarks("Sequence")
-	?Loadseq Number;
+	?LoadSeq Number;
 	@Remarks("If security is enabled, user access to data can be restricted via Roles")
-	IsSecurityenabled YesNo;/* 'N'  */
+	IsSecurityEnabled YesNo;/* 'N'  */
 	@Remarks("Indicates if records can be deleted from the database")
 	IsDeleteable YesNo;/* 'Y'  */
 	@Remarks("Use Search instead of Pick list")
-	IsHighvolume YesNo;/* 'N'  */
+	IsHighVolume YesNo;/* 'N'  */
 	@Remarks("Import Table Columns from Database")
-	?Importtable null;
+	?ImportTable null;
 	@Remarks("Maintain a log of changes")
 	IsChangeLog YesNo;/* 'N'  */
 	@Remarks("Type of Data Replication")
-	Replicationtype Attr;/* 'L' */
+	ReplicationType Attr;/* 'L' */
 	@Remarks("Purchase Order Window")
 	?PoWindow AdWindow;
 	@Remarks("Copy Columns From Table")
-	?Copycolumnsfromtable null;
+	?CopyColumnsFromTable null;
 };
 

@@ -14,7 +14,7 @@ type AspTab {
 	@Remarks("ASP Status")
 	AspStatus Attr;/* 'U'  */
 	@Remarks("AllFields")
-	?Allfields YesNo;/* 'Y'  */
+	?AllFields YesNo;/* 'Y'  */
 	@Remarks("Process Now")
 	?Processing YesNo;
 };

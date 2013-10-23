@@ -14,7 +14,7 @@ type AdAlertRule {
 	@Remarks("SQL SELECT clause")
 	SelectClause Note;
 	@Remarks("SQL FROM clause")
-	Fromclause Note;
+	FromClause Note;
 	@Remarks("Fully qualified SQL WHERE clause")
 	?WhereClause Note;
 	@Remarks("Database Table information")
@@ -26,7 +26,7 @@ type AdAlertRule {
 	@Remarks("Element is valid")
 	IsValid YesNo;/* 'Y'  */
 	@Remarks("Error Msg")
-	?ErrorMsg Note;
+	?ErrorMsg Msg;
 	@Remarks("Other SQL Clause")
 	?OtherClause Note;
 };

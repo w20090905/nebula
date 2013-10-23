@@ -12,19 +12,19 @@ type AdPrintGraph {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Type of graph to be painted")
-	Graphtype Attr;
+	GraphType Attr;
 	@Remarks("Description Column for Pie/Line/Bar Charts")
-	DescriptionPrintFormatitem AdPrintFormatitem;
+	DescriptionPrintFormatItem AdPrintFormatItem;
 	@Remarks("Data Column for Pie and Line Charts")
-	DataPrintFormatitem AdPrintFormatitem;
+	DataPrintFormatItem AdPrintFormatItem;
 	@Remarks("Data Column for Line Charts")
-	?Data1PrintFormatitem AdPrintFormatitem;
+	?Data1PrintFormatItem AdPrintFormatItem;
 	@Remarks("Data Column for Line Charts")
-	?Data2PrintFormatitem AdPrintFormatitem;
+	?Data2PrintFormatItem AdPrintFormatItem;
 	@Remarks("Data Column for Line Charts")
-	?Data3PrintFormatitem AdPrintFormatitem;
+	?Data3PrintFormatItem AdPrintFormatItem;
 	@Remarks("Data Column for Line Charts")
-	?Data4PrintFormatitem AdPrintFormatitem;
+	?Data4PrintFormatItem AdPrintFormatItem;
 	@Remarks("Data Print Format")
 	AdPrintFormat;
 };

@@ -12,8 +12,8 @@ type AdFieldGroup {
 	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
 	@Remarks("Field Group Type")
-	?FieldGrouptype Attr;
+	?FieldGroupType Attr;
 	@Remarks("Flag to set the initial state of collapsible field group.")
-	?IsCollapsedbydefault YesNo;/* 'N'  */
+	?IsCollapsedByDefault YesNo;/* 'N'  */
 };
 

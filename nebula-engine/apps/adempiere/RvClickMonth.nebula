@@ -5,7 +5,7 @@ type RvClickMonth {
 	AdOrgId ID;
 	*Name;
 	?Description;
-	Targeturl URL;
+	TargetUrl Url;
 	?CBpartnerId ID;
 	?Counter Number;
 };

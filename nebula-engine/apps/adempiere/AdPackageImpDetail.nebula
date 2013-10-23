@@ -12,9 +12,9 @@ type AdPackageImpDetail {
 	@Remarks("AD_Package_Imp_ID")
 	AdPackageImpId ID;
 	@Remarks("AD_Original_ID")
-	AdOriginalId ID;
+	AdOrigInalId ID;
 	@Remarks("Ad_Backup_ID")
-	?AdBackupId ID;
+	?AdBackUpId ID;
 	@Remarks("Indicates the Action to be performed")
 	?Action null;
 	@Remarks("Success")
@@ -22,7 +22,7 @@ type AdPackageImpDetail {
 	@Remarks("Type of Validation (SQL, Java Script, Java Language)")
 	?Type Attr;
 	@Remarks("Name of the table in the database")
-	?Tablename Name;
+	?TableName Name;
 	@Remarks("Database Table information")
 	?AdTableId ID;
 	@Remarks("Uninstall")

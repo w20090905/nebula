@@ -12,7 +12,7 @@ type AdRole {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("System Client Organization")
-	Userlevel Attr;/* '  O'  */
+	UserLevel Attr;/* '  O'  */
 	@Remarks("The Currency for this record")
 	?CCurrency;
 	@Remarks("The approval amount limit for this role")
@@ -24,35 +24,35 @@ type AdRole {
 	@Remarks("Users with this role can see accounting information")
 	IsShowAcct YesNo;/* 'Y' */
 	@Remarks("Allow users with role to lock access to personal records")
-	IsPersonallock YesNo;/* 'N'  */
+	IsPersonalLock YesNo;/* 'N'  */
 	@Remarks("Allow access to all personal records")
-	IsPersonalaccess YesNo;/* 'N'  */
+	IsPersonalAccess YesNo;/* 'N'  */
 	@Remarks("Users with this role can export data")
-	IsCanexport YesNo;/* 'Y'  */
+	IsCanExport YesNo;/* 'Y'  */
 	@Remarks("Users with this role can create reports")
-	IsCanreport YesNo;/* 'Y'  */
+	IsCanReport YesNo;/* 'Y'  */
 	@Remarks("Supervisor for this user/organization - used for escalation and approval")
 	?Supervisor AdUser;
 	@Remarks("Users with this role can approve their own documents")
-	IsCanapproveowndoc YesNo;/* 'Y'  */
+	IsCanApproveOwnDoc YesNo;/* 'Y'  */
 	@Remarks("Access all Organizations (no org access control) of the client")
-	IsAccessAllorgs YesNo;/* 'N'  */
+	IsAccessAllOrgs YesNo;/* 'N'  */
 	@Remarks("Maintain a log of changes")
 	IsChangeLog YesNo;/* 'N'  */
 	@Remarks("Determines what preferences the user can set")
-	Preferencetype Attr;/* 'C'  */
+	PreferenceType Attr;/* 'C'  */
 	@Remarks("Overwrite Price Limit if the Price List  enforces the Price Limit")
 	OverwritePriceLimit YesNo;/* 'N'  */
 	@Remarks("Use Org Access defined by user instead of Role Org Access")
-	IsUseuserorgaccess YesNo;/* 'N'  */
+	IsUseUserOrgAccess YesNo;/* 'N'  */
 	@Remarks("Tree to determine organizational hierarchy")
 	?AdTreeOrg AdTree;
 	@Remarks("Require Confirmation if more records will be returned by the query (If not defined 500)")
-	Confirmqueryrecords Number;/* 0  */
+	ConfirmQueryRecordS Number;/* 0  */
 	@Remarks("If defined, you cannot query more records as defined - the query criteria needs to be changed to query less records")
-	Maxqueryrecords Number;/* 0  */
+	MaxQueryRecordS Number;/* 0  */
 	@Remarks("How a Java Client connects to the server(s)")
-	?Connectionprofile null;
+	?ConnectionProfile null;
 	@Remarks("Allow Info Account")
 	?AllowInfoAccount YesNo;/* 'Y'  */
 	@Remarks("Allow Info Asset")
@@ -76,6 +76,6 @@ type AdRole {
 	@Remarks("Allow Info Schedule")
 	?AllowInfoSchedule YesNo;/* 'Y'  */
 	@Remarks("UserDiscount")
-	?Userdiscount Count;
+	?UserDiscount Count;
 };
 

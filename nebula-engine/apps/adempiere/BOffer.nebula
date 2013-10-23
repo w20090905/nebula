@@ -14,12 +14,12 @@ type BOffer {
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	AdUser BSeller;
 	@Remarks("Willing to commit")
-	IsWillingtocommit YesNo;/* 'Y'  */
+	IsWillingToCommit YesNo;/* 'Y'  */
 	@Remarks("Seller Funds from Offers on Topics")
-	BSellerfunds;
+	BSellerFundS;
 	@Remarks("Text Message")
-	?TextMsg Note;
+	?TextMsg Msg;
 	@Remarks("Private Note - not visible to the other parties")
-	?Privatenote Note;
+	?PrivateNote Note;
 };
 

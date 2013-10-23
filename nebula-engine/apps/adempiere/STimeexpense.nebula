@@ -1,8 +1,8 @@
 @Remarks("Time and Expense Report")
 @Refby("1")
-tx STimeexpense {
+tx STimeExpense {
 	@Remarks("Time and Expense Report")
-	!STimeexpenseId ID;
+	!STimeExpenseId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -26,10 +26,10 @@ tx STimeexpense {
 	@Remarks("Indicates if this document requires approval")
 	IsApproved YesNo;/* 'N'  */
 	@Remarks("The current status of the document")
-	Docstatus Attr;
+	DocStatus Attr;
 	@Remarks("The targeted status of the document")
-	Docaction Attr;
+	DocAction Attr;
 	@Remarks("Document Approval Amount")
-	?Approvalamt Amount;
+	?ApprovalAmt Amount;
 };
 

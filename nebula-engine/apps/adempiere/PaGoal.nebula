@@ -18,31 +18,31 @@ type PaGoal {
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
 	@Remarks("Performance Color Schema")
-	PaColorschema;
+	PaColorSchema;
 	@Remarks("This is a summary entity")
 	IsSummary YesNo;/* 'N'  */
 	@Remarks("Parent Goal")
-	?PaGoalparent PaGoal;
+	?PaGoalParent PaGoal;
 	@Remarks("Concrete Performance Measurement")
 	?PaMeasure;
 	@Remarks("Relative weight of this step (0 = ignored)")
-	?Relativeweight Weight;
+	?RelativeWeight Weight;
 	@Remarks("Target value for measure")
-	Measuretarget Length;/* 0  */
+	MeasureTarget Length;/* 0  */
 	@Remarks("Performance Measure Scope")
-	Measurescope null;
+	MeasureScope null;
 	@Remarks("Measure Scope initially displayed")
-	?Measuredisplay null;
+	?MeasureDisplay null;
 	@Remarks("Starting date for a range")
 	?DateFrom Date;
 	@Remarks("End date of a date range")
 	?DateTo Date;
 	@Remarks("Actual value that has been measured.")
-	?Measureactual Length;/* 0 */
+	?MeasureActual Length;/* 0 */
 	@Remarks("Target achievement from 0..1")
-	?Goalperformance Number;
+	?GoalPerFormAnce Number;
 	@Remarks("Date the process was last run.")
-	?DateLastrun Date;
+	?DateLastRun Date;
 	@Remarks("Responsibility Role")
 	?AdRole;
 };

@@ -10,6 +10,6 @@ tx URoleMenu {
 	@Remarks("Responsibility Role")
 	AdRole;
 	@Remarks("Web Menu")
-	UWebmenu;
+	UWebMenu;
 };
 

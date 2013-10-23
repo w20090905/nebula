@@ -16,9 +16,9 @@ type CCampaign {
 	@Remarks("Sales Channel")
 	?CChannel;
 	@Remarks("First effective day (inclusive)")
-	?Startdate Date;
+	?StartDate Date;
 	@Remarks("Last effective date (inclusive)")
-	?Enddate Date;
+	?EndDate Date;
 	@Remarks("Costs in accounting currency")
 	Costs Number;/* 0  */
 	@Remarks("This is a summary entity")

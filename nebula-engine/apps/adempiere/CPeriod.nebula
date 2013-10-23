@@ -10,15 +10,15 @@ type CPeriod {
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Unique Period Number")
-	Periodno SeqNo;
+	PeriodNo SeqNo;
 	@Remarks("Calendar Year")
 	CYear;
 	@Remarks("First effective day (inclusive)")
-	Startdate Date;
+	StartDate Date;
 	@Remarks("Last effective date (inclusive)")
-	?Enddate Date;
+	?EndDate Date;
 	@Remarks("Period Type")
-	Periodtype Attr;
+	PeriodType Attr;
 	@Remarks("Process Now")
 	?Processing YesNo;
 };

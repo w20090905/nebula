@@ -14,9 +14,9 @@ tx MEdi {
 	@Remarks("Unique line for this document")
 	Line;
 	@Remarks("Type of credit card transaction")
-	Trxtype Attr;
+	TrxType Attr;
 	@Remarks("EDI Status")
-	Edistatus Attr;
+	EdiStatus Attr;
 	@Remarks("Storage Warehouse and Service Point")
 	MWarehouse;
 	@Remarks("Product, Service, Item")
@@ -24,13 +24,13 @@ tx MEdi {
 	@Remarks("Request Qty")
 	RequestQty Quantity;/* 0  */
 	@Remarks("Request Ship date")
-	RequestShipdate Date;
+	RequestShipDate Date;
 	@Remarks("Request Price")
 	?RequestPrice Price;/* 0 */
 	@Remarks("Transaction sent")
-	Trxsent Date;
+	TrxSent Date;
 	@Remarks("Transaction received")
-	?Trxreceived Date;
+	?TrxReceived Date;
 	@Remarks("Reply Received")
 	?ReplyReceived Date;
 	@Remarks("Reply Qty Confirmed")
@@ -38,7 +38,7 @@ tx MEdi {
 	@Remarks("Reply Qty Available")
 	?ReplyQtyAvailable Quantity;/* 0 */
 	@Remarks("Reply Ship date")
-	?ReplyShipdate Date;
+	?ReplyShipDate Date;
 	@Remarks("Confirmed Price from EDI Partner")
 	?ReplyPrice Price;/* 0 */
 	@Remarks("Reply Remarks")

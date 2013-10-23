@@ -2,12 +2,12 @@
 @Refby("0")
 type AAssetGroupAcct {
 	!AAssetGroup;
-	!CAcctschema;
+	!CAcctSchema;
 	AdClientId ID;
 	AdOrgId ID;
 	AAssetAcct Amount;
 	ADepreciationAcct Amount;
-	AAccumdepreciationAcct Amount;
+	AAccumdePreciationAcct Amount;
 	ADisposalLoss Number;
 	ADisposalGain Number;
 	ADepreciation;

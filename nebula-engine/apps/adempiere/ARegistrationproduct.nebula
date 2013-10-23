@@ -1,8 +1,8 @@
 @Remarks("Registration Product")
 @Refby("0")
-type ARegistrationproduct {
+type ARegistrationProduct {
 	@Remarks("Asset Registration Attribute")
-	!ARegistrationattribute;
+	!ARegistrationAttribute;
 	@Remarks("Product, Service, Item")
 	!MProduct;
 	@Remarks("Client/Tenant for this installation.")

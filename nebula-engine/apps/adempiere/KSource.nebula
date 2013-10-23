@@ -10,6 +10,6 @@ type KSource {
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("URL for the description")
-	?Descriptionurl Description;
+	?DescriptionUrl Description;
 };
 

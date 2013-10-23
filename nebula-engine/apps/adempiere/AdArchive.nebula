@@ -20,7 +20,7 @@ type AdArchive {
 	@Remarks("Process or Report")
 	?AdProcess;
 	@Remarks("Binary Data")
-	?Binarydata Note;
+	?BinaryData Note;
 	@Remarks("Identifies a Business Partner")
 	?CBpartner;
 	@Remarks("Indicates a Report record")

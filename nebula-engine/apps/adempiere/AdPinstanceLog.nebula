@@ -1,8 +1,8 @@
 @Remarks("(Non Standard Table)")
 @Refby("0")
-tx AdPinstanceLog {
+tx AdPInstanceLog {
 	@Remarks("Instance of the process")
-	!AdPinstance;
+	!AdPInstance;
 	@Remarks("Log")
 	!LogId ID;
 	@Remarks("Process Parameter")
@@ -12,6 +12,6 @@ tx AdPinstanceLog {
 	@Remarks("Process Parameter")
 	?PNumber Number;
 	@Remarks("Process Message")
-	?PMsg Note;
+	?PMsg Msg;
 };
 

@@ -12,11 +12,11 @@ type PaReport {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Report Line Set")
-	PaReportlineset;
+	PaReportLinesEt;
 	@Remarks("Collection of Columns for Report")
-	PaReportcolumnset;
+	PaReportColumnsEt;
 	@Remarks("Rules for accounting")
-	CAcctschema;
+	CAcctSchema;
 	@Remarks("Accounting Calendar Name")
 	CCalendar;
 	@Remarks("Process Now")
@@ -24,12 +24,12 @@ type PaReport {
 	@Remarks("Data Print Format")
 	?AdPrintFormat;
 	@Remarks("List Report Line Sources")
-	Listsources YesNo;/* 'N'  */
+	ListSourceS YesNo;/* 'N'  */
 	@Remarks("List the report transactions")
-	Listtrx YesNo;/* 'N'  */
+	ListTrx YesNo;/* 'N'  */
 	@Remarks("The Jasper Process used by the printengine if any process defined")
-	?Jasperprocess AdProcess;
+	?JasperProcess AdProcess;
 	@Remarks("Jasper Process Now")
-	?Jasperprocessing null;
+	?JasperProcessing null;
 };
 

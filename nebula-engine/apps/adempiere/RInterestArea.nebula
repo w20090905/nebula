@@ -12,7 +12,7 @@ type RInterestArea {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
-	IsSelfservice YesNo;/* 'N' */
+	IsSelfService YesNo;/* 'N' */
 	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;/* NULL  */
 };

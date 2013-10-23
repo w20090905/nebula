@@ -26,7 +26,7 @@ type AdChangeLog {
 	@Remarks("The change is a customization of the data dictionary and can be applied after Migration")
 	IsCustomization YesNo;/* 'N'  */
 	@Remarks("Name of the transaction")
-	?Trxname Name;
+	?TrxName Name;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Type of Event in Change Log")

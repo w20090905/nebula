@@ -26,9 +26,9 @@ tx RRequestAction {
 	@Remarks("Is this invoiced?")
 	?IsInvoiceD YesNo;
 	@Remarks("Type of Confidentiality")
-	?Confidentialtype Attr;
+	?ConfidentialType Attr;
 	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
-	?IsSelfservice YesNo;
+	?IsSelfService YesNo;
 	@Remarks("Indicates if this request is of a high, medium or low priority.")
 	?Priority YesNo;
 	@Remarks("Priority of the issue for the User")
@@ -50,7 +50,7 @@ tx RRequestAction {
 	@Remarks("Textual summary of this request")
 	?Summary;
 	@Remarks("Date that this request should be acted on")
-	?DateNextaction Date;
+	?DateNextAction Date;
 	@Remarks("Business Activity")
 	?CActivity;
 	@Remarks("Type of request (e.g. Inquiry, Complaint, ..)")
@@ -62,23 +62,23 @@ tx RRequestAction {
 	@Remarks("Return Material Authorization")
 	?MRma;
 	@Remarks("Columns with NULL value")
-	?Nullcolumns String;
+	?NullColumns String;
 	@Remarks("Status of the Task")
-	?Taskstatus Attr;
+	?TaskStatus Attr;
 	@Remarks("Planned Completion Date")
-	?DateCompleteplan Date;
+	?DateCompletePlan Date;
 	@Remarks("Planned Quantity")
 	?QtyPlan Quantity;
 	@Remarks("Quantity used for this event")
 	?QtySpent Quantity;
 	@Remarks("First effective day (inclusive)")
-	?Startdate Date;
+	?StartDate Date;
 	@Remarks("Last effective date (inclusive)")
-	?Enddate Date;
+	?EndDate Date;
 	@Remarks("Planned Start Date")
-	?DateStartplan Date;
+	?DateStartPlan Date;
 	@Remarks("Invoiced Quantity")
-	?QtyInvoiced Quantity;
+	?QtyInvoiceD Quantity;
 	@Remarks("Product/Resource/Service used in Request")
 	?MProductSpent MProduct;
 };

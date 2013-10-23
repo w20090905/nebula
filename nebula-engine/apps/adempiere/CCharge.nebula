@@ -14,9 +14,9 @@ type CCharge {
 	@Remarks("Charge Amount")
 	ChargeAmt Amount;/* 0  */
 	@Remarks("Use the same tax as the main transaction")
-	IsSametax YesNo;/* 'N'  */
+	IsSameTax YesNo;/* 'N'  */
 	@Remarks("Same Currency")
-	IsSamecurrency YesNo;/* 'N'  */
+	IsSameCurrency YesNo;/* 'N'  */
 	@Remarks("Tax Category")
 	?CTaxCategory;
 	@Remarks("Tax is included in the price")

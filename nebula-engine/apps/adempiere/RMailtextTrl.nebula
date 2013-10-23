@@ -1,8 +1,8 @@
 @Remarks("Text templates for mailings")
 @Refby("0")
-type RMailtextTrl {
+type RMailTextTrl {
 	@Remarks("Text templates for mailings")
-	!RMailtext;
+	!RMailText;
 	@Remarks("Language for this entity")
 	!AdLanguage;
 	@Remarks("Client/Tenant for this installation.")
@@ -14,12 +14,12 @@ type RMailtextTrl {
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Mail Header (Subject)")
-	?Mailheader null;/* NULL */
+	?MailHeader null;/* NULL */
 	@Remarks("Text used for Mail message")
-	Mailtext Text;
+	MailText Text;
 	@Remarks("Optional second text part used for Mail message")
-	?Mailtext2 Text;
+	?MailText2 Text;
 	@Remarks("Optional third text part used for Mail message")
-	?Mailtext3 Text;
+	?MailText3 Text;
 };
 

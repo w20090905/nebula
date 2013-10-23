@@ -1,8 +1,8 @@
 @Remarks("Landed Cost Allocation")
 @Refby("0")
-tx CLandedcostallocation {
+tx CLandedCostAllocation {
 	@Remarks("Allocation for Land Costs")
-	!CLandedcostallocationId ID;
+	!CLandedCostAllocationId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -12,9 +12,9 @@ tx CLandedcostallocation {
 	@Remarks("Product, Service, Item")
 	MProduct;
 	@Remarks("Product Attribute Set Instance")
-	?MAttributesetinstance;
+	?MAttributeSetInstance;
 	@Remarks("Product Cost Element")
-	MCostelement;
+	MCostElement;
 	@Remarks("Amount")
 	Amt Amount;/* 0  */
 	@Remarks("Quantity")

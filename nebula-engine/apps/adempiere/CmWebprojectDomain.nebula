@@ -1,8 +1,8 @@
 @Remarks("Web Project Domain handling")
 @Refby("0")
-type CmWebprojectDomain {
+type CmWebProjectDomain {
 	@Remarks("Definition of Domainhandling")
-	!CmWebprojectDomainId ID;
+	!CmWebProjectDomainId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -14,7 +14,7 @@ type CmWebprojectDomain {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("A web project is the main data container for Containers, URLs, Ads, Media etc.")
-	CmWebproject;
+	CmWebProject;
 	@Remarks("Web Container contains content like images, text etc.")
 	?CmContainer;
 	@Remarks("Fully Qualified Domain Name i.e. www.comdivision.com")

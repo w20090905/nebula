@@ -12,7 +12,7 @@ type AdWfResponsible {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Type of the Responsibility for a workflow")
-	Responsibletype Attr;
+	ResponsibleType Attr;
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
 	@Remarks("Responsibility Role")

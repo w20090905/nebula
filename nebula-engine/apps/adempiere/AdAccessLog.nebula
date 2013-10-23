@@ -20,7 +20,7 @@ tx AdAccessLog {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Text Message")
-	?TextMsg Note;
+	?TextMsg Msg;
 	@Remarks("Reply or Answer")
 	?Reply Note;
 };

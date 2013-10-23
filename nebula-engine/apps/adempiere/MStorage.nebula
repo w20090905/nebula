@@ -10,14 +10,14 @@ tx MStorage {
 	@Remarks("Organizational entity within client")
 	AdOrg;
 	@Remarks("On Hand Quantity")
-	QtyOnhand Quantity;/* 0  */
+	QtyOnHand Quantity;/* 0  */
 	@Remarks("Reserved Quantity")
 	QtyReserved Quantity;/* 0  */
 	@Remarks("Ordered Quantity")
 	QtyOrdered Quantity;/* 0  */
 	@Remarks("Date of Last Inventory Count")
-	?DateLastinventory Date;
+	?DateLastInventory Date;
 	@Remarks("Product Attribute Set Instance")
-	!MAttributesetinstance;/* 0 */
+	!MAttributeSetInstance;/* 0 */
 };
 

@@ -1,8 +1,8 @@
 @Remarks("Line on Shipment or Receipt document")
 @Refby("17")
-tx MInoutline {
+tx MInoutLine {
 	@Remarks("Line on Shipment or Receipt document")
-	!MInoutlineId ID;
+	!MInoutLineId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -14,7 +14,7 @@ tx MInoutline {
 	@Remarks("Material Shipment Document")
 	MInout;
 	@Remarks("Sales Order Line")
-	?COrderline;
+	?COrderLine;
 	@Remarks("Warehouse Locator")
 	?MLocator;
 	@Remarks("Product, Service, Item")
@@ -22,23 +22,23 @@ tx MInoutline {
 	@Remarks("Unit of Measure")
 	CUom;
 	@Remarks("Quantity of a product moved.")
-	Movementqty Quantity;/* 0  */
+	MovementQty Quantity;/* 0  */
 	@Remarks("Is this invoiced?")
 	IsInvoiceD YesNo;/* 'N'  */
 	@Remarks("Product Attribute Set Instance")
-	?MAttributesetinstance;/* 0 */
+	?MAttributeSetInstance;/* 0 */
 	@Remarks("if true, the line is just description and no transaction")
 	IsDescription YesNo;/* 'N'  */
 	@Remarks("Confirmation of a received quantity")
-	?Confirmedqty Quantity;/* 0 */
+	?ConfirmedQty Quantity;/* 0 */
 	@Remarks("Picked Quantity")
-	?Pickedqty Quantity;/* 0 */
+	?PickedQty Quantity;/* 0 */
 	@Remarks("The Quantity scrapped due to QA issues")
-	?Scrappedqty Quantity;/* 0 */
+	?ScrappedQty Quantity;/* 0 */
 	@Remarks("Target Movement Quantity")
-	?Targetqty Quantity;/* 0 */
+	?TargetQty Quantity;/* 0 */
 	@Remarks("Referenced Shipment Line")
-	?RefInoutline MInoutline;
+	?RefInoutLine MInoutLine;
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("The Quantity Entered is based on the selected UoM")
@@ -56,11 +56,11 @@ tx MInoutline {
 	@Remarks("Business Activity")
 	?CActivity;
 	@Remarks("User defined list element #1")
-	?User1 CElementvalue;
+	?User1 CElementValue;
 	@Remarks("User defined list element #2")
-	?User2 CElementvalue;
+	?User2 CElementValue;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrx AdOrg;
+	?AdOrgTrx AdOrg;
 	@Remarks("Return Material Authorization Line")
 	?MRmaline;/* NULL */
 };

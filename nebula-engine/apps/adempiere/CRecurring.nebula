@@ -14,7 +14,7 @@ type CRecurring {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("Type of Recurring Document")
-	Recurringtype Attr;
+	RecurringType Attr;
 	@Remarks("Order")
 	?COrder;
 	@Remarks("Invoice Identifier")
@@ -24,17 +24,17 @@ type CRecurring {
 	@Remarks("Financial Project")
 	?CProject;
 	@Remarks("General Ledger Journal Batch")
-	?GlJournalbatch;
+	?GlJournalBatch;
 	@Remarks("Frequency of event")
 	FrequencyType Attr;
 	@Remarks("Number of recurring runs")
-	Runsmax Number;
+	RunsMax Number;
 	@Remarks("Number of recurring runs remaining")
-	Runsremaining Number;
+	RunsRemaining Number;
 	@Remarks("Date the process was last run.")
-	?DateLastrun Date;
+	?DateLastRun Date;
 	@Remarks("Date the process will run next")
-	?DateNextrun Date;
+	?DateNextRun Date;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Frequency of events")

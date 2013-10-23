@@ -16,6 +16,6 @@ type KType {
 	@Remarks("Public can read entry")
 	IsPublic YesNo;/* 'N'  */
 	@Remarks("Public can write entries")
-	IsPublicwrite YesNo;/* 'Y' */
+	IsPublicWrite YesNo;/* 'Y' */
 };
 

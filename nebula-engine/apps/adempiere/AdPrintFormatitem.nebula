@@ -1,8 +1,8 @@
 @Remarks("Item/Column in the Print format")
 @Refby("7")
-type AdPrintFormatitem {
+type AdPrintFormatItem {
 	@Remarks("Item/Column in the Print format")
-	!AdPrintFormatitemId ID;
+	!AdPrintFormatItemId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -14,21 +14,21 @@ type AdPrintFormatitem {
 	@Remarks("The label text to be printed on a document or correspondence.")
 	?PrintName Name;
 	@Remarks("Indicates if this document / line is printed")
-	IsPrintEd YesNo;/* 'Y'  */
+	IsPrinted YesNo;/* 'Y'  */
 	@Remarks("Print Area")
-	PrintAreatype Attr;
+	PrintAreaType Attr;
 	@Remarks("Method of ordering records; lowest number comes first")
 	SeqNo;
 	@Remarks("Print Format Type")
-	PrintFormattype Attr;
+	PrintFormatType Attr;
 	@Remarks("Column in the table")
 	?AdColumn;
 	@Remarks("Print format that is included here.")
-	?AdPrintFormatchild AdPrintFormat;
+	?AdPrintFormatChild AdPrintFormat;
 	@Remarks("The item is relative positioned (not absolute)")
-	IsRelativeposition YesNo;/* 'Y'  */
+	IsRelativePosition YesNo;/* 'Y'  */
 	@Remarks("Print item on next line")
-	IsNextline YesNo;/* 'Y'  */
+	IsNextLine YesNo;/* 'Y'  */
 	@Remarks("Relative X (horizontal) space in 1/72 of an inch")
 	Xspace Length;
 	@Remarks("Relative Y (vertical) space in 1/72 of an inch")
@@ -38,69 +38,69 @@ type AdPrintFormatitem {
 	@Remarks("Absolute Y (vertical) position in 1/72 of an inch")
 	Yposition Length;
 	@Remarks("Maximum Width in 1/72 if an inch - 0 = no restriction")
-	Maxwidth Width;
+	MaxWidth Width;
 	@Remarks("If selected, only one line is printed")
-	IsHeightoneline YesNo;/* 'Y'  */
+	IsHeightOneLine YesNo;/* 'Y'  */
 	@Remarks("Maximum Height in 1/72 if an inch - 0 = no restriction")
-	Maxheight Height;
+	MaxHeight Height;
 	@Remarks("Field Text Alignment")
-	FieldAlignmenttype Attr;
+	FieldAlignmentType Attr;
 	@Remarks("Line Alignment")
-	LineAlignmenttype Attr;
+	LineAlignmentType Attr;
 	@Remarks("Color used for printing and display")
 	?AdPrintColor;
 	@Remarks("Maintain Print Font")
 	?AdPrintFont;
 	@Remarks("Include in sort order")
-	IsOrderby YesNo;/* 'N'  */
+	IsOrderBy YesNo;/* 'N'  */
 	@Remarks("Determines in what order the records are displayed")
-	Sortno SeqNo;
+	SortNo SeqNo;
 	@Remarks("After a group change, totals, etc. are printed")
-	IsGroupby YesNo;/* 'N'  */
+	IsGroupBy YesNo;/* 'N'  */
 	@Remarks("Start with new page")
-	IsPagebreak YesNo;/* 'N'  */
+	IsPageBreak YesNo;/* 'N'  */
 	@Remarks("Calculate the Sum of numeric content or length")
 	IsSummarized YesNo;/* 'N'  */
 	@Remarks("The image to be printed is attached to the record")
-	ImageIsattached YesNo;/* 'N'  */
+	ImageIsAttached YesNo;/* 'N'  */
 	@Remarks("URL of  image")
-	?ImageURL URL;
+	?ImageUrl Url;
 	@Remarks("Calculate Average of numeric content or length")
 	IsAveraged YesNo;/* 'N'  */
 	@Remarks("Count number of not empty elements")
 	IsCounted YesNo;/* 'N'  */
 	@Remarks("Set New Line Position")
-	IsSetnlposition YesNo;/* 'N' */
+	IsSetNlposition YesNo;/* 'N' */
 	@Remarks("Suppress columns or elements with NULL value")
-	IsSuppressnull YesNo;/* 'N' */
+	IsSuppressNull YesNo;/* 'N' */
 	@Remarks("Print this column below the column index entered")
-	?Belowcolumn Number;
+	?BelowColumn Number;
 	@Remarks("Graph included in Reports")
 	?AdPrintGraph;
 	@Remarks("Column has a fixed width")
-	IsFixedwidth YesNo;/* 'N' */
+	IsFixedWidth YesNo;/* 'N' */
 	@Remarks("The column is printed on the next page")
-	IsNextpage YesNo;/* 'N' */
+	IsNextPage YesNo;/* 'N' */
 	@Remarks("The label text to be printed on a document or correspondence after the field")
-	?PrintNamesuffix Description;
+	?PrintNameSuffix Description;
 	@Remarks("Calculate the minimum amount")
-	IsMincalc YesNo;/* 'N'  */
+	IsMinCalc YesNo;/* 'N'  */
 	@Remarks("Calculate the maximim amount")
-	IsMaxcalc YesNo;/* 'N'  */
+	IsMaxCalc YesNo;/* 'N'  */
 	@Remarks("Create a running total (sum)")
-	IsRunningtotal YesNo;/* 'N'  */
+	IsRunningTotal YesNo;/* 'N'  */
 	@Remarks("Create Running Total Lines (page break) every x lines")
-	?Runningtotallines Line;
+	?RunningTotalLines Line;
 	@Remarks("Calculate Variance")
 	IsVariancecalc YesNo;/* 'N'  */
 	@Remarks("Calculate Standard Deviation")
-	IsDeviationcalc YesNo;/* 'N'  */
+	IsDeviationCalc YesNo;/* 'N'  */
 	@Remarks("Fill the shape with the color selected")
-	IsFilledrectangle YesNo;/* 'N'  */
+	IsFilledRectangle YesNo;/* 'N'  */
 	@Remarks("Width of the lines")
 	?LineWidth Number;
 	@Remarks("Arc Diameter for rounded Rectangles")
-	?Arcdiameter Number;
+	?ArcDiameter Number;
 	@Remarks("Type of the shape to be painted")
 	?Shapetype Attr;
 	@Remarks("Information maintained in System Element table")
@@ -108,6 +108,6 @@ type AdPrintFormatitem {
 	@Remarks("The image is retrieved from the data column")
 	IsImageField YesNo;/* 'N'  */
 	@Remarks("Type of barcode")
-	?Barcodetype Attr;
+	?BarCodeType Attr;
 };
 

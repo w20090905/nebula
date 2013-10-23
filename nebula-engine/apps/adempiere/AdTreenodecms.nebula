@@ -1,6 +1,6 @@
 @Remarks("Tree Node CM Stage")
 @Refby("0")
-type AdTreenodecms {
+type AdTreeNodeCms {
 	@Remarks("Identifies a Tree")
 	!AdTree;
 	@Remarks("Node_ID")

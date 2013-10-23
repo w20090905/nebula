@@ -10,7 +10,7 @@ type AdSchedulerPara {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Default value of the parameter")
-	?Parameterdefault null;
+	?ParameterDefault null;
 	@Remarks("Optional short description of the record")
 	?Description;
 };

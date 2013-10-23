@@ -1,8 +1,8 @@
 @Remarks("Mail sent to the user")
 @Refby("0")
-tx AdUsermail {
+tx AdUserMail {
 	@Remarks("Mail sent to the user")
-	!AdUsermailId ID;
+	!AdUserMailId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -10,18 +10,18 @@ tx AdUsermail {
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	AdUser;
 	@Remarks("Text templates for mailings")
-	?RMailtext;
+	?RMailText;
 	@Remarks("Web Store Mail Message Template")
-	?WMailmsg;
+	?WMailMsg;
 	@Remarks("EMail Message ID")
-	?Messageid Message;
+	?MessageId Message;
 	@Remarks("EMail Delivery confirmation")
-	?DeliveryConfirmation null;
+	?DeliveryConfirmAtion null;
 	@Remarks("Delivered")
 	?IsDelivered YesNo;
 	@Remarks("Email Message Subject")
-	?Subject Description;
+	?Subject;
 	@Remarks("Text used for Mail message")
-	?Mailtext Text;
+	?MailText Text;
 };
 

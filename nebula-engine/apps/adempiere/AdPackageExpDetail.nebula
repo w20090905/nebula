@@ -10,7 +10,7 @@ tx AdPackageExpDetail {
 	@Remarks("Special Form")
 	?AdForm;
 	@Remarks("Import Format")
-	?AdImpformat;
+	?AdImpFormat;
 	@Remarks("Identifies a Menu")
 	?AdMenu;
 	@Remarks("Process or Report")
@@ -22,23 +22,23 @@ tx AdPackageExpDetail {
 	@Remarks("Workflow or combination of tasks")
 	?AdWorkflow;
 	@Remarks("File_Directory")
-	?FileDirectory String;
+	?FileDirectOrY String;
 	@Remarks("Name of the local file or URL")
-	?FileName;
+	?Filename;
 	@Remarks("Destination_FileName")
 	?DestinationFileName FileName;
 	@Remarks("Destination_Directory")
-	?DestinationDirectory String;
+	?DestinationDirectOrY String;
 	@Remarks("Optional short description of the record")
 	Description;
 	@Remarks("DBType")
-	?Dbtype Attr;
+	?DbType Attr;
 	@Remarks("Type of Validation (SQL, Java Script, Java Language)")
 	Type Attr;
 	@Remarks("Target_Directory")
-	?TargetDirectory String;
+	?TargetDirectOrY String;
 	@Remarks("SQLStatement")
-	?Sqlstatement null;
+	?SqlStatement null;
 	@Remarks("Internal Release Number")
 	?ReleaseNo String;
 	@Remarks("Process Now")
@@ -54,7 +54,7 @@ tx AdPackageExpDetail {
 	@Remarks("Database Table information")
 	?AdTable;
 	@Remarks("View used to generate this report")
-	?AdReportview;
+	?AdReportView;
 	@Remarks("AD_Package_Exp_ID")
 	AdPackageExpId ID;
 	@Remarks("AD_Package_Code_New")

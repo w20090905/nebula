@@ -1,18 +1,18 @@
 @Remarks("")
 @Refby("0")
-type RvCInvoiceProdmonth {
+type RvCInvoiceProdMonth {
 	AdClientId ID;
 	AdOrgId ID;
 	?MProductCategoryId ID;
 	?DateInvoiceD Date;
-	?LineNetamt Amount;
-	?LineListamt Amount;
-	?LineLimitamt Amount;
-	?LineDiscountamt Amount;
+	?LineNetAmt Amount;
+	?LineListAmt Amount;
+	?LineLimitAmt Amount;
+	?LineDiscountAmt Amount;
 	?LineDiscount Count;
-	?LineOverlimitamt Amount;
-	?LineOverlimit Count;
-	?QtyInvoiced Quantity;
-	IsSotrx YesNo;
+	?LineOverLimitAmt Amount;
+	?LineOverLimit Count;
+	?QtyInvoiceD Quantity;
+	IsSoTrx YesNo;
 };
 

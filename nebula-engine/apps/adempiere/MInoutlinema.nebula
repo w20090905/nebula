@@ -1,15 +1,15 @@
 @Remarks("M_InOutLineMA")
 @Refby("0")
-tx MInoutlinema {
+tx MInoutLineMa {
 	@Remarks("Line on Shipment or Receipt document")
-	!MInoutline;
+	!MInoutLine;
 	@Remarks("Product Attribute Set Instance")
-	!MAttributesetinstance;
+	!MAttributeSetInstance;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Quantity of a product moved.")
-	Movementqty Quantity;/* 0  */
+	MovementQty Quantity;/* 0  */
 };
 

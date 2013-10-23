@@ -2,7 +2,7 @@
 @Refby("0")
 tx TTransaction {
 	@Remarks("Instance of the process")
-	!AdPinstance;
+	!AdPInstance;
 	@Remarks("Inventory Transaction")
 	!MTransaction;
 	@Remarks("Client/Tenant for this installation.")
@@ -10,33 +10,33 @@ tx TTransaction {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Method of moving the inventory")
-	Movementtype Attr;
+	MovementType Attr;
 	@Remarks("Warehouse Locator")
 	MLocator;
 	@Remarks("Product, Service, Item")
 	MProduct;
 	@Remarks("Product Attribute Set Instance")
-	MAttributesetinstance;
+	MAttributeSetInstance;
 	@Remarks("Date a product was moved in or out of inventory")
-	Movementdate Date;
+	MovementDate Date;
 	@Remarks("Quantity of a product moved.")
-	Movementqty Quantity;/* 0  */
+	MovementQty Quantity;/* 0  */
 	@Remarks("Line on Shipment or Receipt document")
-	?MInoutline;
+	?MInoutLine;
 	@Remarks("Material Shipment Document")
 	?MInoutId ID;
 	@Remarks("Inventory Move document Line")
-	?MMovementline;
+	?MMovementLine;
 	@Remarks("Movement of Inventory")
 	?MMovementId ID;
 	@Remarks("Unique line in an Inventory document")
-	?MInventoryline;
+	?MInventoryLine;
 	@Remarks("Parameters for a Physical Inventory")
 	?MInventoryId ID;
 	@Remarks("Document Line representing a production")
-	?MProductIonline;
+	?MProductionLine;
 	@Remarks("Plan for producing a product")
-	?MProductIonId ID;
+	?MProductionId ID;
 	@Remarks("Project Issues (Material, Labor)")
 	?CProjectIssue;
 	@Remarks("Financial Project")

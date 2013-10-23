@@ -18,12 +18,12 @@ type CmMedia {
 	@Remarks("This is a summary entity")
 	IsSummary YesNo;/* 'N'  */
 	@Remarks("A web project is the main data container for Containers, URLs, Ads, Media etc.")
-	CmWebproject;
+	CmWebProject;
 	@Remarks("Image or Icon")
 	?AdImageId ID;
 	@Remarks("Content")
-	?Contenttext Note;
+	?ContentText Note;
 	@Remarks("Direct Deploy")
-	?Directdeploy null;
+	?DirectDeploy null;
 };
 

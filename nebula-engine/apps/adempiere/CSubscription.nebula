@@ -14,11 +14,11 @@ type CSubscription {
 	@Remarks("Product, Service, Item")
 	MProduct;
 	@Remarks("Type of subscription")
-	CSubscriptiontype;
+	CSubscriptionType;
 	@Remarks("First effective day (inclusive)")
-	Startdate Date;
+	StartDate Date;
 	@Remarks("Subscription is paid/valid until this date")
-	Paiduntildate Date;
+	PaidUntilDate Date;
 	@Remarks("Subscription Renewal is Due")
 	IsDue YesNo;/* 'N'  	  */
 	@Remarks("Renewal Date")

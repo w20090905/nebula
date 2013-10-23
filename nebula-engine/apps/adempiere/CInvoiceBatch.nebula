@@ -14,7 +14,7 @@ tx CInvoiceBatch {
 	@Remarks("Date of the Document")
 	DateDoc Date;
 	@Remarks("This is a Sales Transaction")
-	IsSotrx YesNo;/* 'N'  */
+	IsSoTrx YesNo;/* 'N'  */
 	@Remarks("Sales Representative or Company Agent")
 	SalesRep AdUser;
 	@Remarks("The Currency for this record")
@@ -22,7 +22,7 @@ tx CInvoiceBatch {
 	@Remarks("Currency Conversion Rate Type")
 	?CConversionType;
 	@Remarks("If not zero, the Debit amount of the document must be equal this amount")
-	Controlamt Amount;/* 0  */
+	ControlAmt Amount;/* 0  */
 	@Remarks("Document Amount")
 	DocumentAmt Amount;/* 0  */
 	@Remarks("Process Now")

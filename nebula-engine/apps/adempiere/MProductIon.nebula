@@ -1,8 +1,8 @@
 @Remarks("Plan for producing a product")
 @Refby("1")
-type MProductIon {
+type MProduction {
 	@Remarks("Plan for producing a product")
-	!MProductIonId ID;
+	!MProductionId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -12,7 +12,7 @@ type MProductIon {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Date a product was moved in or out of inventory")
-	Movementdate Date;
+	MovementDate Date;
 	@Remarks("Records created")
 	IsCreated YesNo;/* 'N'  */
 	@Remarks("Posting status")
@@ -22,7 +22,7 @@ type MProductIon {
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrx AdOrg;
+	?AdOrgTrx AdOrg;
 	@Remarks("Financial Project")
 	?CProject;
 	@Remarks("Marketing Campaign")
@@ -30,8 +30,8 @@ type MProductIon {
 	@Remarks("Business Activity")
 	?CActivity;
 	@Remarks("User defined list element #1")
-	?User1 CElementvalue;
+	?User1 CElementValue;
 	@Remarks("User defined list element #2")
-	?User2 CElementvalue;
+	?User2 CElementValue;
 };
 

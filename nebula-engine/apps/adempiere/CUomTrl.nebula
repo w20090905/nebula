@@ -10,7 +10,7 @@ type CUomTrl {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Symbol for a Unit of Measure")
-	?Uomsymbol Symbol;
+	?UomSymbol Symbol;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")

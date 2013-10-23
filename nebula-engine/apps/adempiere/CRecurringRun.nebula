@@ -16,7 +16,7 @@ tx CRecurringRun {
 	@Remarks("Financial Project")
 	?CProject;
 	@Remarks("General Ledger Journal Batch")
-	?GlJournalbatch;
+	?GlJournalBatch;
 	@Remarks("Recurring Document")
 	CRecurring;
 	@Remarks("Date of the Document")

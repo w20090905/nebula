@@ -2,7 +2,7 @@
 @Refby("48")
 type AdLanguage {
 	@Remarks("Language for this entity")
-	!AdLanguage String;
+	!AdLanguage Code;
 	@Remarks("Client/Tenant for this installation.")
 	AdClient;
 	@Remarks("Organizational entity within client")
@@ -14,7 +14,7 @@ type AdLanguage {
 	@Remarks("Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1 - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html")
 	?CountryCode Code;
 	@Remarks("The system information is maintained in this language")
-	IsBaselanguage YesNo;/* 'N'  */
+	IsBaseLanguage YesNo;/* 'N'  */
 	@Remarks("The screens, etc. are maintained in this Language")
 	IsSystemLanguage YesNo;/* 'N'  */
 	@Remarks("Process Now")
@@ -26,6 +26,6 @@ type AdLanguage {
 	@Remarks("Java Date Pattern")
 	?DatePattern String;
 	@Remarks("Java Time Pattern")
-	?Timepattern String;
+	?TimePattern String;
 };
 

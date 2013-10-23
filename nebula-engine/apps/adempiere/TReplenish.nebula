@@ -2,7 +2,7 @@
 @Refby("0")
 type TReplenish {
 	@Remarks("Instance of the process")
-	!AdPinstance;
+	!AdPInstance;
 	@Remarks("Storage Warehouse and Service Point")
 	!MWarehouse;
 	@Remarks("Product, Service, Item")
@@ -12,13 +12,13 @@ type TReplenish {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("On Hand Quantity")
-	QtyOnhand Quantity;/* 0  */
+	QtyOnHand Quantity;/* 0  */
 	@Remarks("Reserved Quantity")
 	QtyReserved Quantity;/* 0  */
 	@Remarks("Ordered Quantity")
 	QtyOrdered Quantity;/* 0  */
 	@Remarks("Method for re-ordering a product")
-	Replenishtype Attr;
+	ReplenishType Attr;
 	@Remarks("Minimum Inventory level for this product")
 	LevelMin Count;/* 0  */
 	@Remarks("Maximum Inventory level for this product")
@@ -32,10 +32,10 @@ type TReplenish {
 	@Remarks("Quantity to Order")
 	QtyToorder Quantity;/* 0  */
 	@Remarks("Create from Replenishment")
-	?Replenishmentcreate null;
+	?ReplenishMentcreate null;
 	@Remarks("Optional Warehouse to replenish from")
-	?MWarehousesource MWarehouse;
+	?MWarehouseSource MWarehouse;
 	@Remarks("Document type or rules")
-	?CDoctype;
+	?CDocType;
 };
 

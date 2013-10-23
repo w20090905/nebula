@@ -1,6 +1,6 @@
 @Remarks("R_CategoryUpdates")
 @Refby("0")
-type RCategoryupdates {
+type RCategoryUpdates {
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	!AdUser;
 	@Remarks("Request Category")
@@ -10,6 +10,6 @@ type RCategoryupdates {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
-	IsSelfservice YesNo;/* 'N'  */
+	IsSelfService YesNo;/* 'N'  */
 };
 

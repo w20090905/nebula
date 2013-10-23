@@ -1,8 +1,8 @@
 @Remarks("Product Attribute Set")
 @Refby("4")
-type MAttributeset {
+type MAttributeSet {
 	@Remarks("Product Attribute Set")
-	!MAttributesetId ID;
+	!MAttributeSetId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -12,34 +12,34 @@ type MAttributeset {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("The product instances have Serial Numbers")
-	IsSerno YesNo;/* 'Y'  */
+	IsSerNo YesNo;/* 'Y'  */
 	@Remarks("Product Serial Number Control")
-	?MSernoctl;
+	?MSerNoCtl;
 	@Remarks("The product instances have a Lot Number")
 	IsLot YesNo;/* 'Y'  */
 	@Remarks("Product Lot Control")
-	?MLotctl;
+	?MLotCtl;
 	@Remarks("Product has Guarantee or Expiry Date")
-	IsGuaranteedate YesNo;/* 'N'  */
+	IsGuaranteeDate YesNo;/* 'N'  */
 	@Remarks("Number of days the product is guaranteed or available")
-	?Guaranteedays Count;
+	?GuaranteeDays Count;
 	@Remarks("The product attribute is specific to the instance (like Serial No, Lot or Guarantee Date)")
-	IsInstanceattribute YesNo;/* 'N'  */
+	IsInstanceAttribute YesNo;/* 'N'  */
 	@Remarks("The specification of a Product Attribute Instance is mandatory")
-	Mandatorytype YesNo;/* 'N'  */
+	MandatoryType YesNo;/* 'N'  */
 	@Remarks("The entry of a Guarantee Date is mandatory when creating a Product Instance")
-	IsGuaranteedatemandatory YesNo;/* 'N'  */
+	IsGuaranteeDateMandatory YesNo;/* 'N'  */
 	@Remarks("The entry of Lot info is mandatory when creating a Product Instance")
-	IsLotmandatory YesNo;/* 'N'  */
+	IsLotMandatory YesNo;/* 'N'  */
 	@Remarks("The entry of a Serial No is mandatory when creating a Product Instance")
-	IsSernomandatory YesNo;/* 'N'  */
+	IsSerNoMandatory YesNo;/* 'N'  */
 	@Remarks("Serial Number Start Indicator overwrite - default #")
-	?Sernocharsoverwrite null;
+	?SerNoCharsOverwrite null;
 	@Remarks("Lot/Batch Start Indicator overwrite - default «")
-	?Lotcharsoverwrite null;
+	?LotCharsOverwrite null;
 	@Remarks("Lot/Batch End Indicator overwrite - default »")
-	?Lotchareoverwrite null;
+	?LotChareOverwrite null;
 	@Remarks("Serial Number End Indicator overwrite - default empty")
-	?Sernochareoverwrite null;
+	?SerNoChareOverwrite null;
 };
 

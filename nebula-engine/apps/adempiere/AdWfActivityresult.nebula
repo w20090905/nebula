@@ -1,8 +1,8 @@
 @Remarks("Result of the Workflow Process Activity")
 @Refby("0")
-tx AdWfActivityresult {
+tx AdWfActivityResult {
 	@Remarks("Result of the Workflow Process Activity")
-	!AdWfActivityresultId ID;
+	!AdWfActivityResultId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -10,9 +10,9 @@ tx AdWfActivityresult {
 	@Remarks("Workflow Activity")
 	AdWfActivity;
 	@Remarks("Name of the Attribute")
-	Attributename Name;
+	AttributeName Name;
 	@Remarks("Value of the Attribute")
-	?Attributevalue Note;
+	?AttributeValue Note;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Comment or Hint")

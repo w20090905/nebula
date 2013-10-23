@@ -1,6 +1,6 @@
 @Remarks("")
 @Refby("0")
-type RvCRfqresponse {
+type RvCRfqResponse {
 	AdClientId ID;
 	AdOrgId ID;
 	CRfqId ID;
@@ -8,29 +8,29 @@ type RvCRfqresponse {
 	CBpartnerId ID;
 	CBpartnerLocationId ID;
 	?AdUserId ID;
-	CRfqresponseId ID;
+	CRfqResponseId ID;
 	CCurrencyId ID;
 	?DateResponse Date;
-	?DateWorkstart Date;
+	?DateWorkStart Date;
 	?DeliveryDays Count;
-	?DateWorkcomplete Date;
+	?DateWorkComplete Date;
 	Price;
 	?Ranking;
-	IsSelfservice YesNo;
+	IsSelfService YesNo;
 	?Description;
 	?Help;
 	?MProductId ID;
-	?MAttributesetinstanceId ID;
+	?MAttributeSetInstanceId ID;
 	Line;
-	?LineDateworkstart Date;
+	?LineDateWorkStart Date;
 	?LineDeliveryDays Count;
-	?LineDateworkcomplete Date;
+	?LineDateWorkComplete Date;
 	?LineDescription Description;
-	?LineHelp Note;
+	?LineHelp Help;
 	CUomId ID;
 	Qty Quantity;
-	Benchmarkprice Price;
-	?Benchmarkdifference Number;
+	BenchmarkPrice Price;
+	?BenchmarkDifference Number;
 	QtyPrice Price;
 	?Discount Count;
 	?QtyRanking Ranking;

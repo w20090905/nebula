@@ -1,8 +1,8 @@
 @Remarks("Document type or rules")
 @Refby("31")
-type CDoctype {
+type CDocType {
 	@Remarks("Document type or rules")
-	!CDoctypeId ID;
+	!CDocTypeId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -14,27 +14,27 @@ type CDoctype {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Logical type of document")
-	Docbasetype Attr;
+	DocBaseType Attr;
 	@Remarks("This is a Sales Transaction")
-	IsSotrx YesNo;/* 'Y'  */
+	IsSoTrx YesNo;/* 'Y'  */
 	@Remarks("Sales Order Sub Type")
-	?Docsubtypeso null;
+	?DocSubTypeSo null;
 	@Remarks("Indicates if Pro Forma Invoices can be generated from this document")
-	?Hasproforma YesNo;/* 'N'                                */
+	?HasProforma YesNo;/* 'N'                                */
 	@Remarks("Document type used for pro forma invoices generated from this sales document")
-	?CDoctypeProforma CDoctype;
+	?CDocTypeProforma CDocType;
 	@Remarks("Document type used for shipments generated from this sales document")
-	?CDoctypeShipment CDoctype;
+	?CDocTypeShipMent CDocType;
 	@Remarks("Document type used for invoices generated from this sales document")
-	?CDoctypeInvoice CDoctype;
+	?CDocTypeInvoice CDocType;
 	@Remarks("The document has a document sequence")
-	IsDocnoControlled YesNo;/* 'N'  */
+	IsDocNoControlled YesNo;/* 'N'  */
 	@Remarks("Document sequence determines the numbering of documents")
-	?DocnoSequence AdSequence;
+	?DocNoSequence AdSequence;
 	@Remarks("General Ledger Category")
 	GlCategory;
 	@Remarks("Charges can be added to the document")
-	Hascharges YesNo;/* 'N'  */
+	HasChargeS YesNo;/* 'N'  */
 	@Remarks("Additional information for a Document")
 	?DocumentNote Note;
 	@Remarks("Default value")
@@ -44,26 +44,26 @@ type CDoctype {
 	@Remarks("Data Print Format")
 	?AdPrintFormat;
 	@Remarks("The document type is the default counter document type")
-	IsDefaultcounterdoc YesNo;/* 'N'  */
+	IsDefaultCounterDoc YesNo;/* 'N'  */
 	@Remarks("Require Ship or Receipt Confirmation before processing")
-	IsShipconfirm YesNo;/* 'N'  */
+	IsShipConfirm YesNo;/* 'N'  */
 	@Remarks("Require Pick or QA Confirmation before processing")
-	IsPickqaconfirm YesNo;/* 'N'  */
+	IsPickQaConfirm YesNo;/* 'N'  */
 	@Remarks("Movement is in transit")
 	IsIntransit YesNo;/* 'N'  */
 	@Remarks("Split document when there is a difference")
-	IsSplitwhendifference YesNo;/* 'N'  */
+	IsSplitWhenDifference YesNo;/* 'N'  */
 	@Remarks("Document type for generating in dispute Shipments")
-	?CDoctypeDifference CDoctype;
+	?CDocTypeDifference CDocType;
 	@Remarks("Create Counter Document")
-	IsCreatecounter YesNo;/* 'Y'  */
+	IsCreateCounter YesNo;/* 'Y'  */
 	@Remarks("Index the document for the internal search engine")
 	IsIndexed YesNo;/* 'Y'  */
 	@Remarks("Overwrite Sequence on Complete")
-	?IsOverwriteSeqoncomplete YesNo;/* 'N'  */
+	?IsOverwriteSeqOnComplete YesNo;/* 'N'  */
 	@Remarks("Definite Sequence")
-	?Definitesequence AdSequence;
+	?DefiniteSequence AdSequence;
 	@Remarks("Overwrite Date on Complete")
-	?IsOverwriteDateoncomplete YesNo;/* 'N'  */
+	?IsOverwriteDateOnComplete YesNo;/* 'N'  */
 };
 

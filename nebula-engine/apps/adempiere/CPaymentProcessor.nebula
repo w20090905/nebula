@@ -12,19 +12,19 @@ type CPaymentProcessor {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Account at the Bank")
-	CBankaccount;
+	CBankAccount;
 	@Remarks("Document Sequence")
 	?AdSequence;
 	@Remarks("Payment Processor Java Class")
-	?Payprocessorclass null;
+	?PayProcessorClass null;
 	@Remarks("User ID or account number")
-	?Userid String;
+	?UserId String;
 	@Remarks("Password of any length (case sensitive)")
 	?Password;
 	@Remarks("Host Address URL or DNS")
 	?Address Host;
 	@Remarks("Host Communication Port")
-	?Hostport Port;
+	?HostPort Port;
 	@Remarks("Address of your proxy server")
 	?Address null;
 	@Remarks("Port of your proxy server")
@@ -50,22 +50,22 @@ type CPaymentProcessor {
 	@Remarks("Accept Bank ATM Card")
 	AcceptAtm YesNo;/* 'Y'  */
 	@Remarks("Require 3/4 digit Credit Verification Code")
-	Requirevv YesNo;/* 'N'  */
+	RequireVv YesNo;/* 'N'  */
 	@Remarks("The Currency for this record")
 	?CCurrency;
 	@Remarks("Fixed cost per transaction")
-	Costpertrx Number;/* 0  */
+	CostPerTrx Number;/* 0  */
 	@Remarks("Commission stated as a percentage")
 	Commission Number;
 	@Remarks("Partner ID or Account for the Payment Processor")
 	?Partnerid null;
 	@Remarks("Vendor ID for the Payment Processor")
-	?Vendorid null;
+	?VendorId null;
 	@Remarks("Minumum Amout in Document Currency")
-	?Minimumamt Amount;/* 0 */
+	?MinimumAmt Amount;/* 0 */
 	@Remarks("Accept Direct Debits (vendor initiated)")
-	AcceptDirectdebit YesNo;/* 'N'  */
+	AcceptDirectDebit YesNo;/* 'N'  */
 	@Remarks("Accept Direct Deposit (payee initiated)")
-	AcceptDirectdeposit YesNo;/* 'N'  */
+	AcceptDirectDeposit YesNo;/* 'N'  */
 };
 

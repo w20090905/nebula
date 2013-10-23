@@ -1,8 +1,8 @@
 @Remarks("Workflow Node Transition")
 @Refby("1")
-tx AdWfNodenext {
+tx AdWfNodeNext {
 	@Remarks("Workflow Node Transition")
-	!AdWfNodenextId ID;
+	!AdWfNodeNextId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClient;
 	@Remarks("Organizational entity within client")
@@ -18,8 +18,8 @@ tx AdWfNodenext {
 	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
 	@Remarks("Code resulting in TRUE of FALSE")
-	?Transitioncode Note;
+	?TransitionCode Note;
 	@Remarks("Standard Manual User Approval Workflow")
-	IsStduserworkflow YesNo;/* 'N'  */
+	IsStdUserWorkflow YesNo;/* 'N'  */
 };
 

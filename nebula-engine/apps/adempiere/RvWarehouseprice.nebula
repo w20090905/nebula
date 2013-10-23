@@ -1,6 +1,6 @@
 @Remarks("")
 @Refby("0")
-type RvWarehouseprice {
+type RvWarehousePrice {
 	AdClientId ID;
 	AdOrgId ID;
 	MProductId ID;
@@ -11,16 +11,16 @@ type RvWarehouseprice {
 	?UPC;
 	?SKU;
 	CUomId ID;
-	?Uomsymbol Symbol;
+	?UomSymbol Symbol;
 	?PriceList Number;
 	?PriceStd Number;
 	?Margin Length;
 	?PriceLimit Count;
-	Warehousename Name;
+	WarehouseName Name;
 	?QtyAvailable Quantity;
-	?QtyOnhand Quantity;
+	?QtyOnHand Quantity;
 	?QtyReserved Quantity;
 	?QtyOrdered Quantity;
-	?IsInstanceattribute YesNo;
+	?IsInstanceAttribute YesNo;
 };
 

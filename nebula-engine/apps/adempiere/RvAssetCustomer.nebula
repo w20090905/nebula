@@ -10,11 +10,11 @@ type RvAssetCustomer {
 	?Help;
 	AAssetGroupId ID;
 	?MProductId ID;
-	?Serno Code;
+	?SerNo Code;
 	?LOT;
-	?Versionno Code;
-	?Guaranteedate Date;
-	?Assetservicedate Date;
+	?VersionNo Code;
+	?GuaranteeDate Date;
+	?AssetServiceDate Date;
 	?CBpartnerId ID;
 	?CBpartnerLocationId ID;
 	?AdUserId ID;

@@ -22,13 +22,13 @@ type AdPackageExp {
 	@Remarks("Version of the table definition")
 	Version String;
 	@Remarks("Email of the responsible for the System")
-	Username Name;
+	UserName Name;
 	@Remarks("Process Now")
 	Processing YesNo;
 	@Remarks("Package Version")
 	PkVersion Description;
 	@Remarks("File_Directory")
-	FileDirectory String;
+	FileDirectOrY String;
 	@Remarks("Optional short description of the record")
 	Description;
 };

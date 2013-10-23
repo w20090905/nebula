@@ -14,38 +14,38 @@ type SResourceType {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Only one assignment at a time (no double-booking or overlapping)")
-	IsSingleassignment YesNo;/* 'N'  */
+	IsSingleAsSignment YesNo;/* 'N'  */
 	@Remarks("Unit of Measure")
 	CUom;
 	@Remarks("Allow Unit of Measure Fractions")
-	Allowuomfractions YesNo;/* 'N'  */
+	AllowUomFractions YesNo;/* 'N'  */
 	@Remarks("Time when timeslot starts")
-	?TimesLotstart Date;
+	?TimesLotStart Date;
 	@Remarks("Time when timeslot ends")
-	?TimesLotend Date;
+	?TimesLotEnd Date;
 	@Remarks("Resource has time slot availability")
 	IsTimesLot YesNo;/* 'N'  */
 	@Remarks("Resource has day slot availability")
 	IsDateSlot YesNo;/* 'N'  */
 	@Remarks("Available on Sundays")
-	Onsunday YesNo;/* 'N'  */
+	OnSunday YesNo;/* 'N'  */
 	@Remarks("Available on Mondays")
-	Onmonday YesNo;/* 'Y'  */
+	OnMonday YesNo;/* 'Y'  */
 	@Remarks("Available on Tuesdays")
-	Ontuesday YesNo;/* 'Y'  */
+	OnTuesday YesNo;/* 'Y'  */
 	@Remarks("Available on Wednesdays")
-	Onwednesday YesNo;/* 'Y'  */
+	OnWednesday YesNo;/* 'Y'  */
 	@Remarks("Available on Thursdays")
-	Onthursday YesNo;/* 'Y'  */
+	OnThursday YesNo;/* 'Y'  */
 	@Remarks("Available on Fridays")
-	Onfriday YesNo;/* 'Y'  */
+	OnFriday YesNo;/* 'Y'  */
 	@Remarks("Available on Saturday")
-	Onsaturday YesNo;/* 'N'  */
+	OnSaturday YesNo;/* 'N'  */
 	@Remarks("Category of a Product")
 	MProductCategory;
 	@Remarks("Tax Category")
 	CTaxCategory;
 	@Remarks("Chargeable Quantity")
-	?ChargeAbleqty Quantity;/* 0 */
+	?ChargeableQty Quantity;/* 0 */
 };
 

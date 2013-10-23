@@ -1,8 +1,8 @@
 @Remarks("Definition of Bank Statement Loader (SWIFT, OFX)")
 @Refby("0")
-type CBankstatementloader {
+type CBankStatementLoader {
 	@Remarks("Definition of Bank Statement Loader (SWIFT, OFX)")
-	!CBankstatementloaderId ID;
+	!CBankStatementLoaderId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -12,25 +12,25 @@ type CBankstatementloader {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Account at the Bank")
-	CBankaccount;
+	CBankAccount;
 	@Remarks("Class name of the bank statement loader")
 	?Stmtloaderclass null;
 	@Remarks("The ID of the Financial Institution / Bank")
-	?Financialinstitutionid null;
+	?FinancialInstitutionId null;
 	@Remarks("Bank Branch ID")
-	?Branchid null;
+	?BranchId null;
 	@Remarks("User ID or account number")
-	?Userid String;
+	?UserId String;
 	@Remarks("Password of any length (case sensitive)")
 	?Password;
 	@Remarks("Personal Identification Number")
 	?Pin null;
 	@Remarks("Account Number")
-	?Accountno Code;
+	?AccountNo Code;
 	@Remarks("Host Address URL or DNS")
 	?Address Host;
 	@Remarks("Host Communication Port")
-	?Hostport Port;
+	?HostPort Port;
 	@Remarks("Address of your proxy server")
 	?Address null;
 	@Remarks("Port of your proxy server")
@@ -40,10 +40,10 @@ type CBankstatementloader {
 	@Remarks("Password of your proxy server")
 	?ProxyPassword Password;
 	@Remarks("Name of the local file or URL")
-	?FileName;
+	?Filename;
 	@Remarks("Date the process was last run.")
-	?DateLastrun Date;
+	?DateLastRun Date;
 	@Remarks("Date format used in the imput format")
-	?DateFormAt String;
+	?DateFormat String;
 };
 

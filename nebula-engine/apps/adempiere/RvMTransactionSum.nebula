@@ -3,11 +3,11 @@
 type RvMTransactionSum {
 	AdClientId ID;
 	AdOrgId ID;
-	Movementtype Attr;
+	MovementType Attr;
 	MWarehouseId ID;
 	MLocatorId ID;
 	MProductId ID;
-	Movementdate Date;
-	?Movementqty Quantity;
+	MovementDate Date;
+	?MovementQty Quantity;
 };
 

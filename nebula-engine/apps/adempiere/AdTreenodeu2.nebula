@@ -1,6 +1,6 @@
 @Remarks("User defined tree 2")
 @Refby("0")
-type AdTreenodeu2 {
+type AdTreeNodeU2 {
 	@Remarks("Identifies a Tree")
 	!AdTree;
 	@Remarks("Node_ID")

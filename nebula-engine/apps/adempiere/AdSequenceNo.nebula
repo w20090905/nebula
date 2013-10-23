@@ -4,12 +4,12 @@ type AdSequenceNo {
 	@Remarks("Document Sequence")
 	!AdSequence;
 	@Remarks("Calendar Year")
-	!Calendaryear null;/* '0000'  */
+	!CalendarYear null;/* '0000'  */
 	@Remarks("Client/Tenant for this installation.")
 	AdClient;
 	@Remarks("Organizational entity within client")
 	AdOrg;
 	@Remarks("The next number to be used")
-	Currentnext Number;
+	CurrentNext Number;
 };
 

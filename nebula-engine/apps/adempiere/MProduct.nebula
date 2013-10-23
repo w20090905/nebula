@@ -36,9 +36,9 @@ type MProduct {
 	@Remarks("Bill of Materials")
 	IsBom YesNo;/* 'N'  */
 	@Remarks("Print detail BOM elements on the invoice")
-	IsInvoicePrintdetails YesNo;/* 'N'  */
+	IsInvoicePrintDetails YesNo;/* 'N'  */
 	@Remarks("Print detail BOM elements on the pick list")
-	IsPicklistprintdetails YesNo;/* 'N'  */
+	IsPickListPrintDetails YesNo;/* 'N'  */
 	@Remarks("The BOM configuration has been verified")
 	IsVerified YesNo;/* 'N'  */
 	@Remarks("Method for recording revenue")
@@ -52,13 +52,13 @@ type MProduct {
 	@Remarks("Weight of a product")
 	?Weight;/* 0 */
 	@Remarks("Shelf width required")
-	?Shelfwidth Width;
+	?ShelfWidth Width;
 	@Remarks("Shelf height required")
-	?Shelfheight Height;
+	?ShelfHeight Height;
 	@Remarks("Shelf depth required")
-	?Shelfdepth Depth;
+	?ShelfDepth Depth;
 	@Remarks("Units Per Pallet")
-	?Unitsperpallet Number;
+	?UnitsPerPallet Number;
 	@Remarks("Tax Category")
 	CTaxCategory;
 	@Remarks("Resource")
@@ -66,45 +66,45 @@ type MProduct {
 	@Remarks("This product is no longer available")
 	?Discontinued YesNo;/* 'N'                                 */
 	@Remarks("Discontinued By")
-	?Discontinuedby Date;
+	?DiscontinuedBy Date;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Expense report type")
-	?SExpensetype;
+	?SExpenseType;
 	@Remarks("Type of product")
 	ProductType Attr;/* 'I'  */
 	@Remarks("URL of  image")
-	?ImageURL URL;
+	?ImageUrl Url;
 	@Remarks("URL for the description")
-	?Descriptionurl Description;
+	?DescriptionUrl Description;
 	@Remarks("Number of days the product is guaranteed or available")
-	?Guaranteedays Count;
+	?GuaranteeDays Count;
 	@Remarks("Text templates for mailings")
-	?RMailtext;
+	?RMailText;
 	@Remarks("Version Number")
-	?Versionno Code;
+	?VersionNo Code;
 	@Remarks("Product Attribute Set")
-	?MAttributeset;
+	?MAttributeSet;
 	@Remarks("Product Attribute Set Instance")
-	?MAttributesetinstance;/* 0 */
+	?MAttributeSetInstance;/* 0 */
 	@Remarks("URL of the Download files")
-	?Downloadurl URL;
+	?DownloadUrl Url;
 	@Remarks("Category of the Freight")
 	?MFreightCategory;
 	@Remarks("Warehouse Locator")
 	?MLocator;
 	@Remarks("Minumum number of guarantee days")
-	?Guaranteedaysmin Number;
+	?GuaranteeDaysMin Number;
 	@Remarks("If selected, the product is displayed in the inital or any empy search")
-	IsWebstorefeatured YesNo;/* 'N'  */
+	IsWebStoreFeatured YesNo;/* 'N'  */
 	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
-	IsSelfservice YesNo;/* 'Y'  */
+	IsSelfService YesNo;/* 'Y'  */
 	@Remarks("Type of subscription")
-	?CSubscriptiontype;
+	?CSubscriptionType;
 	@Remarks("Drop Shipments are sent from the Vendor directly to the Customer")
-	IsDropship YesNo;/* 'N'  */
+	IsDropShip YesNo;/* 'N'  */
 	@Remarks("Exclude from automatic Delivery")
-	IsExcludeautodelivery YesNo;/* 'N'  */
+	IsExcludeAutoDelivery YesNo;/* 'N'  */
 	@Remarks("Group1")
 	?Group1 null;
 	@Remarks("Group2")

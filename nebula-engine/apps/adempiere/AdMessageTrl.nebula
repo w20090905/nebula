@@ -10,9 +10,9 @@ tx AdMessageTrl {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Textual Informational, Menu or Error Message")
-	Msgtext Note;
+	MsgText Msg;
 	@Remarks("Additional tip or help for this message")
-	?Msgtip Note;
+	?MsgTip Msg;
 	@Remarks("This column is translated")
 	IsTranslated YesNo;/* 'N'  */
 };

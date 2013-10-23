@@ -12,15 +12,15 @@ type CBpartnerProduct {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Minimum Shelf Life in percent based on Product Instance Guarantee Date")
-	Shelflifeminpct Number;
+	ShelfLifeMinPct Number;
 	@Remarks("Minimum Shelf Life in days based on Product Instance Guarantee Date")
-	Shelflifemindays Count;
+	ShelfLifeMinDays Count;
 	@Remarks("Method for rating vendors")
-	?Qualityrating Rating;
+	?QualityRating Rating;
 	@Remarks("Product Key of the Business Partner")
-	?Vendorproductno Code;
+	?VendorProductNo Code;
 	@Remarks("Product Category of the Business Partner")
-	?Vendorcategory null;
+	?VendorCategory null;
 	@Remarks("Manufacturer of the Product")
 	?Manufacturer null;
 };

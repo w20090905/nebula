@@ -14,39 +14,39 @@ tx CPayment {
 	@Remarks("This is a sales transaction (receipt)")
 	IsReceipt YesNo;/* 'Y'  */
 	@Remarks("Document type or rules")
-	CDoctype;
+	CDocType;
 	@Remarks("Type of credit card transaction")
-	Trxtype Attr;
+	TrxType Attr;
 	@Remarks("Account at the Bank")
-	CBankaccount;
+	CBankAccount;
 	@Remarks("Identifies a Business Partner")
 	?CBpartner;
 	@Remarks("Invoice Identifier")
 	?CInvoice;
 	@Remarks("Bank Account of the Business Partner")
-	?CBpBankaccount;
+	?CBpBankAccount;
 	@Remarks("Payment batch for EFT")
 	?CPaymentBatch;
 	@Remarks("Method of Payment")
 	TenderType Attr;
 	@Remarks("Credit Card (Visa, MC, AmEx)")
-	?CreditcardType Attr;
+	?CreditCardType Attr;
 	@Remarks("Credit Card Number")
-	?CreditcardNumber Code;
+	?CreditCardNumber Code;
 	@Remarks("Credit Card Verification code on credit card")
-	?CreditcardVv String;
+	?CreditCardVv String;
 	@Remarks("Expiry Month")
-	?CreditcardExpmm Number;
+	?CreditCardExpMm Number;
 	@Remarks("Expiry Year")
-	?CreditcardExpyy Number;
+	?CreditCardExpYy Number;
 	@Remarks("Combination of routing no, account and check no")
 	?Micr null;
 	@Remarks("Bank Routing Number")
-	?Routingno Code;
+	?RoutingNo Code;
 	@Remarks("Account Number")
-	?Accountno Code;
+	?AccountNo Code;
 	@Remarks("Check Number")
-	?Checkno Code;
+	?CheckNo Code;
 	@Remarks("Name on Credit Card or Account holder")
 	?AName Name;
 	@Remarks("Street address of the Credit Card or Account holder")
@@ -64,19 +64,19 @@ tx CPayment {
 	@Remarks("Email Address")
 	?AEmail EMail;
 	@Remarks("Voice Authorization Code from credit card company")
-	?VoiceAuthcode Note;
+	?VoiceAuthCode Note;
 	@Remarks("Original Transaction ID")
-	?OrigTrxid Code;
+	?OrigTrxId Code;
 	@Remarks("Purchase Order Number")
-	?Ponum Code;
+	?PoNum Code;
 	@Remarks("The Currency for this record")
 	CCurrency;
 	@Remarks("Amount being paid")
-	Payamt Amount;/* 0  */
+	PayAmt Amount;/* 0  */
 	@Remarks("Calculated amount of discount")
 	?DiscountAmt Amount;/* 0 */
 	@Remarks("Amount to write-off")
-	?WriteoffAmt Amount;/* 0 */
+	?WriteOffAmt Amount;/* 0 */
 	@Remarks("Tax Amount for a document")
 	?TaxAmt Amount;/* 0 */
 	@Remarks("Indicates if this document requires approval")
@@ -86,23 +86,23 @@ tx CPayment {
 	@Remarks("Result of transmission")
 	?RResult String;
 	@Remarks("Response message")
-	?RRespmsg Note;
+	?RRespmsg Msg;
 	@Remarks("Authorization Code returned")
-	?RAuthcode Note;
+	?RAuthCode Note;
 	@Remarks("This address has been verified")
-	?RAvsaddr Address;
+	?RAvsAddr Address;
 	@Remarks("The Zip Code has been verified")
-	?RAvszip String;
+	?RAvsZip String;
 	@Remarks("Response info")
-	?RInfo Note;
+	?RInfo Info;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("This payment can be processed online")
 	?Oprocessing null;
 	@Remarks("The current status of the document")
-	Docstatus Attr;
+	DocStatus Attr;
 	@Remarks("The targeted status of the document")
-	Docaction Attr;
+	DocAction Attr;
 	@Remarks("Payment is reconciled with bank statement")
 	IsReconciled YesNo;/* 'N'  */
 	@Remarks("Indicates if the payment has been allocated")
@@ -114,23 +114,23 @@ tx CPayment {
 	@Remarks("Posting status")
 	PostEd YesNo;/* 'N'  */
 	@Remarks("Over-Payment (unallocated) or Under-Payment (partial payment)")
-	IsOverunderpayment YesNo;/* 'N'  */
+	IsOverUnderPayment YesNo;/* 'N'  */
 	@Remarks("Over-Payment (unallocated) or Under-Payment (partial payment) Amount")
-	?Overunderamt Amount;/* 0 */
+	?OverUnderAmt Amount;/* 0 */
 	@Remarks("Country")
 	?ACountry String;
 	@Remarks("Financial Project")
 	?CProject;
 	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
-	IsSelfservice YesNo;/* 'N' */
+	IsSelfService YesNo;/* 'N' */
 	@Remarks("Charge Amount")
 	?ChargeAmt Amount;/* 0 */
 	@Remarks("Additional document charges")
 	?CCharge;
 	@Remarks("Charge after Shipment")
-	IsDelayedcapture YesNo;/* 'N'  */
+	IsDelayedCapture YesNo;/* 'N'  */
 	@Remarks("Authorization Code Delayed Capture returned")
-	?RAuthcodeDc String;
+	?RAuthCodeDc String;
 	@Remarks("Credit Card Verification Code Match")
 	?RCvv2match String;
 	@Remarks("Payment Reference Delayed Capture")
@@ -138,15 +138,15 @@ tx CPayment {
 	@Remarks("Track 1 and 2 of the Credit Card")
 	?SWIPE;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrx AdOrg;
+	?AdOrgTrx AdOrg;
 	@Remarks("Marketing Campaign")
 	?CCampaign;
 	@Remarks("Business Activity")
 	?CActivity;
 	@Remarks("User defined list element #1")
-	?User1 CElementvalue;
+	?User1 CElementValue;
 	@Remarks("User defined list element #2")
-	?User2 CElementvalue;
+	?User2 CElementValue;
 	@Remarks("Currency Conversion Rate Type")
 	?CConversionType;
 	@Remarks("Optional short description of the record")

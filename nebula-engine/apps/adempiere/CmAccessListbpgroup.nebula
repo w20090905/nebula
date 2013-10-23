@@ -1,6 +1,6 @@
 @Remarks("Web Access BP Group")
 @Refby("0")
-type CmAccessListbpgroup {
+type CmAccessListBpGroup {
 	@Remarks("Web Access Profile")
 	!CmAccessProfile;
 	@Remarks("Business Partner Group")

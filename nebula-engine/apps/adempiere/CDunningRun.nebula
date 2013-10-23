@@ -16,7 +16,7 @@ tx CDunningRun {
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Send")
-	?Sendit null;
+	?SendIt null;
 	@Remarks("Optional short description of the record")
 	?Description;
 };

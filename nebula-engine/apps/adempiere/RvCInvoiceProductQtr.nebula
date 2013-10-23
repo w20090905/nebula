@@ -5,14 +5,14 @@ type RvCInvoiceProductQtr {
 	AdOrgId ID;
 	?MProductId ID;
 	?DateInvoiceD Date;
-	?LineNetamt Amount;
-	?LineListamt Amount;
-	?LineLimitamt Amount;
-	?LineDiscountamt Amount;
+	?LineNetAmt Amount;
+	?LineListAmt Amount;
+	?LineLimitAmt Amount;
+	?LineDiscountAmt Amount;
 	?LineDiscount Count;
-	?LineOverlimitamt Amount;
-	?LineOverlimit Count;
-	?QtyInvoiced Quantity;
-	IsSotrx YesNo;
+	?LineOverLimitAmt Amount;
+	?LineOverLimit Count;
+	?QtyInvoiceD Quantity;
+	IsSoTrx YesNo;
 };
 

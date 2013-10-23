@@ -22,8 +22,8 @@ type CRemuneration {
 	@Remarks("Gross Remuneration Costs")
 	GrossRcost Cost;/* 0  */
 	@Remarks("Hourly Overtime Rate")
-	Overtimeamt Amount;/* 0  */
+	OverTimeAmt Amount;/* 0  */
 	@Remarks("Hourly Overtime Cost")
-	Overtimecost Cost;/* 0  */
+	OverTimeCost Cost;/* 0  */
 };
 

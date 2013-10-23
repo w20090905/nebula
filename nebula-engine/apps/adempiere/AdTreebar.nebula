@@ -1,6 +1,6 @@
 @Remarks("User Selected tree nodes")
 @Refby("0")
-type AdTreebar {
+type AdTreeBar {
 	@Remarks("Identifies a Tree")
 	!AdTree;
 	@Remarks("User within the system - Internal or Business Partner Contact")

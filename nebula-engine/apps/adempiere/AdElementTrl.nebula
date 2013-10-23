@@ -24,7 +24,7 @@ type AdElementTrl {
 	@Remarks("Description in PO Screens")
 	?PoDescription Description;
 	@Remarks("Help for PO Screens")
-	?PoHelp Note;
+	?PoHelp Help;
 	@Remarks("This column is translated")
 	IsTranslated YesNo;/* 'N'  */
 };

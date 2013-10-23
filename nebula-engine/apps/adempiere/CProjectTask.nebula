@@ -24,7 +24,7 @@ type CProjectTask {
 	@Remarks("Quantity")
 	?Qty Quantity;/* 0  	  */
 	@Remarks("Invoice Rule for the project")
-	?Projinvoicerule Attr;
+	?ProjInvoiceRule Attr;
 	@Remarks("Planned amount for this project")
 	PlannedAmt Amount;/* 0  */
 	@Remarks("The (legal) commitment amount")

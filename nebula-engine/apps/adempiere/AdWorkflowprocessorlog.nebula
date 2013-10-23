@@ -1,10 +1,10 @@
 @Remarks("Result of the execution of the Workflow Processor")
 @Refby("0")
-type AdWorkflowprocessorlog {
+type AdWorkflowProcessorLog {
 	@Remarks("Workflow Processor Server")
-	!AdWorkflowprocessor;
+	!AdWorkflowProcessor;
 	@Remarks("Result of the execution of the Workflow Processor")
-	!AdWorkflowprocessorlogId ID;
+	!AdWorkflowProcessorLogId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -18,8 +18,8 @@ type AdWorkflowprocessorlog {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Text Message")
-	?TextMsg Note;
+	?TextMsg Msg;
 	@Remarks("Binary Data")
-	?Binarydata Note;
+	?BinaryData Note;
 };
 

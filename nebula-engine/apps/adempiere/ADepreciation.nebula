@@ -6,7 +6,7 @@ type ADepreciation {
 	AdOrgId ID;
 	*Name;
 	?Description;
-	Depreciationtype Attr;
+	DepreciationType Attr;
 	?Script Note;
 };
 

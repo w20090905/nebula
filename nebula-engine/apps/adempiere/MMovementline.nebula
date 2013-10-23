@@ -1,8 +1,8 @@
 @Remarks("Inventory Move document Line")
 @Refby("5")
-tx MMovementline {
+tx MMovementLine {
 	@Remarks("Inventory Move document Line")
-	!MMovementlineId ID;
+	!MMovementLineId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -12,26 +12,26 @@ tx MMovementline {
 	@Remarks("Warehouse Locator")
 	MLocator;
 	@Remarks("Location inventory is moved to")
-	MLocatorto MLocator;
+	MLocatorTo MLocator;
 	@Remarks("Product, Service, Item")
 	MProduct;
 	@Remarks("Unique line for this document")
 	?Line;
 	@Remarks("Quantity of a product moved.")
-	Movementqty Quantity;/* 0  */
+	MovementQty Quantity;/* 0  */
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Product Attribute Set Instance")
-	?MAttributesetinstance;/* 0 */
+	?MAttributeSetInstance;/* 0 */
 	@Remarks("Confirmation of a received quantity")
-	?Confirmedqty Quantity;/* 0 */
+	?ConfirmedQty Quantity;/* 0 */
 	@Remarks("The Quantity scrapped due to QA issues")
-	?Scrappedqty Quantity;/* 0 */
+	?ScrappedQty Quantity;/* 0 */
 	@Remarks("Target Movement Quantity")
-	?Targetqty Quantity;/* 0 */
+	?TargetQty Quantity;/* 0 */
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("Target Product Attribute Set Instance")
-	?MAttributesetinstancetoId ID;
+	?MAttributeSetInstanceToId ID;
 };
 

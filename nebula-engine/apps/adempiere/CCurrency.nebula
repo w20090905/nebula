@@ -8,22 +8,22 @@ tx CCurrency {
 	@Remarks("Organizational entity within client")
 	AdOrg;
 	@Remarks("Three letter ISO 4217 Code of the Currency")
-	IsOCode Note;
+	IsoCode YesNo;
 	@Remarks("Symbol of the currency (opt used for printing only)")
-	?Cursymbol Symbol;
+	?CurSymbol Symbol;
 	@Remarks("Optional short description of the record")
 	Description;
 	@Remarks("Rule for rounding  calculated amounts")
-	Stdprecision Precision;
+	StdPrecision Precision;
 	@Remarks("Rounding used costing calculations")
-	Costingprecision Precision;
+	CostingPrecision Precision;
 	@Remarks("This currency is the Euro")
 	IsEuro YesNo;/* 'N'  */
 	@Remarks("This currency is member if the European Monetary Union")
-	IsEmumember YesNo;/* 'N'  */
+	IsEmuMember YesNo;/* 'N'  */
 	@Remarks("Date when the currency joined / will join the EMU")
-	?Emuentrydate Date;
+	?EmuEntryDate Date;
 	@Remarks("Official rate to the Euro")
-	?Emurate Rate;/* 0 */
+	?EmuRate Rate;/* 0 */
 };
 

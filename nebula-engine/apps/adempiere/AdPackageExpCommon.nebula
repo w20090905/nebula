@@ -10,15 +10,15 @@ type AdPackageExpCommon {
 	@Remarks("Special Form")
 	?AdForm;
 	@Remarks("Import Format")
-	?AdImpformat;
+	?AdImpFormat;
 	@Remarks("View used to generate this report")
-	?AdReportview;
+	?AdReportView;
 	@Remarks("Database Table information")
 	?AdTable;
 	@Remarks("Collection of windows, reports")
 	?AdWorkbench;
 	@Remarks("DBType")
-	?Dbtype Attr;
+	?DbType Attr;
 	@Remarks("The document has been processed")
 	?Processed YesNo;
 	@Remarks("Alphanumeric identifier of the entity")
@@ -28,19 +28,19 @@ type AdPackageExpCommon {
 	@Remarks("Unique line for this document")
 	?Line;
 	@Remarks("File_Directory")
-	?FileDirectory String;
+	?FileDirectOrY String;
 	@Remarks("Name of the local file or URL")
-	?FileName;
+	?Filename;
 	@Remarks("Destination_Directory")
-	?DestinationDirectory String;
+	?DestinationDirectOrY String;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Type of Validation (SQL, Java Script, Java Language)")
 	?Type Attr;
 	@Remarks("Target_Directory")
-	?TargetDirectory String;
+	?TargetDirectOrY String;
 	@Remarks("SQLStatement")
-	?Sqlstatement null;
+	?SqlStatement null;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Workflow or combination of tasks")

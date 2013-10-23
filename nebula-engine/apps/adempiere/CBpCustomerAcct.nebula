@@ -4,16 +4,16 @@ type CBpCustomerAcct {
 	@Remarks("Identifies a Business Partner")
 	!CBpartner;
 	@Remarks("Rules for accounting")
-	!CAcctschema;
+	!CAcctSchema;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Account for Customer Receivables")
-	?CReceivableAcct CValidcombination;
+	?CReceivableAcct CValidCombination;
 	@Remarks("Account for customer prepayments")
-	?CPrepaymentAcct CValidcombination;
+	?CPrepaymentAcct CValidCombination;
 	@Remarks("Customer Accounts Receivables Services Account")
-	?CReceivableServicesAcct Amount;
+	?CReceivableServiceSAcct Amount;
 };
 

@@ -1,14 +1,14 @@
 @Remarks("")
 @Refby("0")
-type CRfqresponselineqtyVt {
-	CRfqresponselineId ID;
-	CRfqresponselineqtyId ID;
-	CRfqlineqtyId ID;
+type CRfqResponseLineQtyVt {
+	CRfqResponseLineId ID;
+	CRfqResponseLineQtyId ID;
+	CRfqLineQtyId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	AdLanguage String;
+	AdLanguage Code;
 	CUomId ID;
-	?Uomsymbol Symbol;
+	?UomSymbol Symbol;
 	Qty Quantity;
 	Price;
 	?Discount Count;

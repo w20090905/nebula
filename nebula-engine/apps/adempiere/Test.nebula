@@ -32,7 +32,7 @@ type Test {
 	@Remarks("Location or Address")
 	?CLocationId ID;
 	@Remarks("Account_Acct")
-	?AccountAcct CValidcombination;
+	?AccountAcct CValidCombination;
 	@Remarks("Payment identifier")
 	?CPaymentId ID;
 	@Remarks("Product, Service, Item")
@@ -44,10 +44,10 @@ type Test {
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Binary Data")
-	?Binarydata Note;
+	?BinaryData Note;
 	@Remarks("The document has been processed")
 	?Processed YesNo;/* 'N'                        */
 	@Remarks("Long Character Field")
-	?Characterdata Note;
+	?CharacterData Note;
 };
 

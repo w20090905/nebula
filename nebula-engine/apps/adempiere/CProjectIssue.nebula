@@ -14,11 +14,11 @@ tx CProjectIssue {
 	@Remarks("Product, Service, Item")
 	MProduct;
 	@Remarks("Product Attribute Set Instance")
-	?MAttributesetinstance;/* 0 */
+	?MAttributeSetInstance;/* 0 */
 	@Remarks("Warehouse Locator")
 	MLocator;
 	@Remarks("Quantity of a product moved.")
-	Movementqty Quantity;/* 0  */
+	MovementQty Quantity;/* 0  */
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("The document has been processed")
@@ -26,11 +26,11 @@ tx CProjectIssue {
 	@Remarks("Posting status")
 	PostEd YesNo;/* 'N'  */
 	@Remarks("Date a product was moved in or out of inventory")
-	Movementdate Date;
+	MovementDate Date;
 	@Remarks("Time and Expense Report Line")
-	?STimeexpenseline;
+	?STimeExpenseLine;
 	@Remarks("Line on Shipment or Receipt document")
-	?MInoutline;
+	?MInoutLine;
 	@Remarks("Process Now")
 	?Processing YesNo;
 };

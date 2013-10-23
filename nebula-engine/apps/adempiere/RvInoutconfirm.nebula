@@ -1,14 +1,14 @@
 @Remarks("")
 @Refby("0")
-type RvInoutconfirm {
-	MInoutconfirmId ID;
+type RvInoutConfirm {
+	MInoutConfirmId ID;
 	AdClientId ID;
 	AdOrgId ID;
 	MInoutId ID;
 	DocumentNo Code;
-	Confirmtype Attr;
+	ConfirmType Attr;
 	IsApproved YesNo;
-	IsCancelled YesNo;
+	IsCanCelled YesNo;
 	?Description;
 	?Processing YesNo;
 	Processed YesNo;
@@ -16,6 +16,6 @@ type RvInoutconfirm {
 	CBpartnerLocationId ID;
 	MWarehouseId ID;
 	?COrderId ID;
-	IsSotrx YesNo;
+	IsSoTrx YesNo;
 };
 

@@ -16,9 +16,9 @@ type STraining {
 	@Remarks("Additional information for a Document")
 	?DocumentNote Note;
 	@Remarks("URL of  image")
-	?ImageURL URL;
+	?ImageUrl Url;
 	@Remarks("URL for the description")
-	?Descriptionurl Description;
+	?DescriptionUrl Description;
 	@Remarks("Category of a Product")
 	MProductCategory;
 	@Remarks("Tax Category")

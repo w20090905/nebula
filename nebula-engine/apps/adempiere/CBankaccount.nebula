@@ -1,8 +1,8 @@
 @Remarks("Account at the Bank")
 @Refby("11")
-tx CBankaccount {
+tx CBankAccount {
 	@Remarks("Account at the Bank")
-	!CBankaccountId ID;
+	!CBankAccountId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -12,13 +12,13 @@ tx CBankaccount {
 	@Remarks("The Currency for this record")
 	CCurrency;
 	@Remarks("Bank Account Type")
-	Bankaccounttype Attr;
+	BankAccountType Attr;
 	@Remarks("Account Number")
-	Accountno Code;
+	AccountNo Code;
 	@Remarks("Current Balance")
-	Currentbalance Number;/* 0  */
+	CurrentBalance Number;/* 0  */
 	@Remarks("Amount of Credit allowed")
-	Creditlimit Count;/* 0  */
+	CreditLimit Count;/* 0  */
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 	@Remarks("International Bank Account Number")

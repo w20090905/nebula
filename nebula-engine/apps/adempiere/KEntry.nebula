@@ -16,16 +16,16 @@ type KEntry {
 	@Remarks("Public can read entry")
 	IsPublic YesNo;/* 'Y'  */
 	@Remarks("List of Keywords - separated by space, comma or semicolon")
-	?Keywords null;
+	?KeyWords null;
 	@Remarks("Source of a Knowledge Entry")
 	?KSource;
 	@Remarks("URL for the description")
-	?Descriptionurl Description;
+	?DescriptionUrl Description;
 	@Remarks("Valid to including this date (last day)")
-	?Validto Date;
+	?ValidTo Date;
 	@Remarks("User Session Online or Web")
 	?AdSession;
 	@Remarks("Text Message")
-	TextMsg Note;
+	TextMsg Msg;
 };
 

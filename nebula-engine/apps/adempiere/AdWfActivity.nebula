@@ -24,7 +24,7 @@ tx AdWfActivity {
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("Text Message")
-	?TextMsg Note;
+	?TextMsg Msg;
 	@Remarks("Workflow or combination of tasks")
 	AdWorkflow;
 	@Remarks("Database Table information")
@@ -34,10 +34,10 @@ tx AdWfActivity {
 	@Remarks("Indicates if this request is of a high, medium or low priority.")
 	?Priority;
 	@Remarks("End of sleep time")
-	?Endwaittime null;
+	?EndWaittime null;
 	@Remarks("Date when last alert were sent")
-	?DateLastalert Date;
+	?DateLastAlert Date;
 	@Remarks("Starting priority before changed dynamically")
-	?Dynprioritystart Number;
+	?DynPriorityStart Number;
 };
 

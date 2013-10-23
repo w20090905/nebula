@@ -2,7 +2,7 @@
 @Refby("0")
 tx CCurrencyAcct {
 	@Remarks("Rules for accounting")
-	!CAcctschema;
+	!CAcctSchema;
 	@Remarks("The Currency for this record")
 	!CCurrency;
 	@Remarks("Client/Tenant for this installation.")
@@ -10,12 +10,12 @@ tx CCurrencyAcct {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Unrealized Gain Account for currency revaluation")
-	UnrealizedGainAcct CValidcombination;
+	UnrealizedGainAcct CValidCombination;
 	@Remarks("Unrealized Loss Account for currency revaluation")
-	UnrealizedLossAcct CValidcombination;
+	UnrealizedLossAcct CValidCombination;
 	@Remarks("Realized Gain Account")
-	RealizedgainAcct CValidcombination;
+	RealizedGainAcct CValidCombination;
 	@Remarks("Realized Loss Account")
-	RealizedlossAcct CValidcombination;
+	RealizedLossAcct CValidCombination;
 };
 

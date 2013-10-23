@@ -24,7 +24,7 @@ type CProject {
 	@Remarks("Identifies the (ship to) address for this Business Partner")
 	?CBpartnerLocation;
 	@Remarks("Transaction Reference Number (Sales Order, Purchase Order) of your Business Partner")
-	?Poreference Note;
+	?PoReference Note;
 	@Remarks("The terms of Payment (timing, discount)")
 	?CPaymentTerm;
 	@Remarks("The Currency for this record")
@@ -40,7 +40,7 @@ type CProject {
 	@Remarks("Planned quantity for this project")
 	PlannedQty Quantity;/* 0  */
 	@Remarks("Project_s planned margin amount")
-	PlannedMarginamt Amount;/* 0  */
+	PlannedMarginAmt Amount;/* 0  */
 	@Remarks("The (legal) commitment amount")
 	CommittedAmt Amount;/* 0  */
 	@Remarks("The (planned) effective date of this document.")
@@ -48,13 +48,13 @@ type CProject {
 	@Remarks("Finish or (planned) completion date")
 	?DateFinish Date;
 	@Remarks("Generate To")
-	?Generateto Attr;
+	?GenerateTo Attr;
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("Sales Representative or Company Agent")
 	?SalesRep AdUser;
 	@Remarks("Copy From Record")
-	?Copyfrom null;
+	?CopyFrom null;
 	@Remarks("Type of the project")
 	?CProjectType;
 	@Remarks("The (legal) commitment Quantity")
@@ -68,7 +68,7 @@ type CProject {
 	@Remarks("Standard Phase of the Project Type")
 	?CPhase;
 	@Remarks("The commitment amount/quantity is the chargeable ceiling")
-	IsCommitceiling YesNo;/* 'N'  */
+	IsCommitCeiling YesNo;/* 'N'  */
 	@Remarks("Storage Warehouse and Service Point")
 	?MWarehouse;
 	@Remarks("Project Category")
@@ -78,8 +78,8 @@ type CProject {
 	@Remarks("Business Partner (Agent or Sales Rep)")
 	?CBpartnerSr CBpartner;
 	@Remarks("Invoice Rule for the project")
-	Projinvoicerule Attr;/* '-'  */
+	ProjInvoiceRule Attr;/* '-'  */
 	@Remarks("Project Line Level")
-	ProjectLinelevel Attr;/* 'P'  */
+	ProjectLineLevel Attr;/* 'P'  */
 };
 

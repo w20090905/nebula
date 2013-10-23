@@ -16,11 +16,11 @@ type CTax {
 	@Remarks("Tax is calculated on document level (rather than line by line)")
 	IsDocumentLevel YesNo;/* 'Y'  */
 	@Remarks("Valid from including this date (first day)")
-	Validfrom Date;
+	ValidFrom Date;
 	@Remarks("This is a summary entity")
 	IsSummary YesNo;/* 'N'  */
 	@Remarks("This tax rate requires the Business Partner to be tax exempt")
-	Requirestaxcertificate YesNo;/* 'N'  */
+	RequireStaxcertificate YesNo;/* 'N'  */
 	@Remarks("Rate or Tax or Exchange")
 	Rate;
 	@Remarks("Parent Tax indicates a tax that is made up of multiple taxes")
@@ -40,7 +40,7 @@ type CTax {
 	@Remarks("Business partner is exempt from tax")
 	IsTaxExempt YesNo;/* 'N'  */
 	@Remarks("Sales Tax applies to sales situations, Purchase Tax to purchase situations")
-	Sopotype Attr;/* 'B'  */
+	SoPoType Attr;/* 'B'  */
 	@Remarks("This is a sales tax (i.e. not a value added tax)")
 	IsSalesTax YesNo;/* 'N'  */
 };

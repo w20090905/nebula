@@ -6,7 +6,7 @@ type AdDocumentActionAccess {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Document type or rules")
-	CDoctype;
+	CDocType;
 	@Remarks("Responsibility Role")
 	AdRole;
 	@Remarks("Reference List based on Table")

@@ -10,10 +10,10 @@ type CBpWithholding {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Monies must be withheld")
-	IsMandatorywithholding YesNo;/* 'N'  */
+	IsMandatoryWithholding YesNo;/* 'N'  */
 	@Remarks("Temporarily do not withhold taxes")
-	IsTemporaryexempt YesNo;/* 'N'  */
+	IsTemporaryExempt YesNo;/* 'N'  */
 	@Remarks("Reason for not withholding")
-	?Exemptreason null;
+	?ExemptReason null;
 };
 

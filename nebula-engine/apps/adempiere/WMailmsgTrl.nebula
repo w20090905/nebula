@@ -1,8 +1,8 @@
 @Remarks("Web Store Mail Message Template")
 @Refby("0")
-type WMailmsgTrl {
+type WMailMsgTrl {
 	@Remarks("Web Store Mail Message Template")
-	!WMailmsg;
+	!WMailMsg;
 	@Remarks("Language for this entity")
 	!AdLanguage;
 	@Remarks("Client/Tenant for this installation.")
@@ -12,7 +12,7 @@ type WMailmsgTrl {
 	@Remarks("This column is translated")
 	IsTranslated YesNo;/* 'N'  */
 	@Remarks("Email Message Subject")
-	Subject Description;
+	Subject;
 	@Remarks("EMail Message")
 	Message Note;
 	@Remarks("Optional second part of the EMail Message")

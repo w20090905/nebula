@@ -10,7 +10,7 @@ type CProjectDetailsV {
 	PlannedQty Quantity;
 	PlannedPrice Price;
 	PlannedAmt Amount;
-	PlannedMarginamt Amount;
+	PlannedMarginAmt Amount;
 	?CommittedAmt Amount;
 	?MProductId ID;
 	?Name;

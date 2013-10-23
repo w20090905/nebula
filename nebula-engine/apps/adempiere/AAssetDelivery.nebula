@@ -10,23 +10,23 @@ tx AAssetDelivery {
 	@Remarks("Asset used internally or by customers")
 	AAsset;
 	@Remarks("Date a product was moved in or out of inventory")
-	Movementdate Date;
+	MovementDate Date;
 	@Remarks("Product Serial Number")
-	?Serno Code;
+	?SerNo Code;
 	@Remarks("Lot number (alphanumeric)")
 	?LOT;
 	@Remarks("Version Number")
-	?Versionno Code;
+	?VersionNo Code;
 	@Remarks("Line on Shipment or Receipt document")
-	?MInoutline;
+	?MInoutLine;
 	@Remarks("Electronic Mail Address")
 	?EMail;
 	@Remarks("EMail Message ID")
-	?Messageid Message;
+	?MessageId Message;
 	@Remarks("EMail Delivery confirmation")
-	?DeliveryConfirmation null;
+	?DeliveryConfirmAtion null;
 	@Remarks("Full URL address - e.g. http://www.adempiere.org")
-	?URL;
+	?Url;
 	@Remarks("Remote Address")
 	?RemoteAddr Name;
 	@Remarks("Remote host Info")

@@ -26,25 +26,25 @@ tx RRequest {
 	@Remarks("Priority of the issue for the User")
 	?PriorityUser YesNo;
 	@Remarks("Status of the next action for this Request")
-	Duetype Attr;
+	DueType Attr;
 	@Remarks("Textual summary of this request")
 	Summary;
 	@Remarks("Type of Confidentiality")
-	Confidentialtype Attr;/* 'C' */
+	ConfidentialType Attr;/* 'C' */
 	@Remarks("This request has been escalated")
 	IsEscalated YesNo;/* 'N'  */
 	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
-	IsSelfservice YesNo;/* 'N'  */
+	IsSelfService YesNo;/* 'N'  */
 	@Remarks("Sales Representative or Company Agent")
 	?SalesRep AdUser;
 	@Remarks("Responsibility Role")
 	?AdRole;
 	@Remarks("Date this request was last acted on")
-	?DateLastaction Date;
+	?DateLastAction Date;
 	@Remarks("Date when last alert were sent")
-	?DateLastalert Date;
+	?DateLastAlert Date;
 	@Remarks("Result of last contact")
-	?Lastresult null;
+	?LastResult null;
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("Is this invoiced?")
@@ -78,46 +78,46 @@ tx RRequest {
 	@Remarks("Amount associated with this request")
 	RequestAmt Amount;/* 0  */
 	@Remarks("Text templates for mailings")
-	?RMailtext;
+	?RMailText;
 	@Remarks("Result of the action taken")
 	?Result null;
 	@Remarks("Confidentiality of the individual entry")
-	Confidentialtypeentry null;
+	ConfidentialTypeEntry null;
 	@Remarks("Request Standard Response")
 	?RStandardResponse;
 	@Remarks("Next Action to be taken")
-	?Nextaction null;
+	?NextAction null;
 	@Remarks("Date that this request should be acted on")
-	?DateNextaction Date;
+	?DateNextAction Date;
 	@Remarks("Time started")
-	?Starttime Date;
+	?StartTime Date;
 	@Remarks("End of the time span")
-	?Endtime Date;
+	?EndTime Date;
 	@Remarks("Quantity used for this event")
 	?QtySpent Quantity;/* 0 */
 	@Remarks("Invoiced Quantity")
-	?QtyInvoiced Quantity;/* 0 */
+	?QtyInvoiceD Quantity;/* 0 */
 	@Remarks("Product/Resource/Service used in Request")
 	?MProductSpent MProduct;
 	@Remarks("Business Activity")
 	?CActivity;
 	@Remarks("First effective day (inclusive)")
-	?Startdate Date;
+	?StartDate Date;
 	@Remarks("Close Date")
-	?Closedate Date;
+	?CloseDate Date;
 	@Remarks("The generated invoice for this request")
 	?CInvoiceRequest CInvoice;
 	@Remarks("BOM (Engineering) Change Request")
 	?MChangeRequest;
 	@Remarks("Status of the Task")
-	?Taskstatus Attr;
+	?TaskStatus Attr;
 	@Remarks("Planned Quantity")
 	?QtyPlan Quantity;
 	@Remarks("Planned Completion Date")
-	?DateCompleteplan Date;
+	?DateCompletePlan Date;
 	@Remarks("Planned Start Date")
-	?DateStartplan Date;
+	?DateStartPlan Date;
 	@Remarks("Fixed in Change Notice")
-	?MFixchangenotice MChangeNotice;
+	?MFixChangeNotIce MChangeNotIce;
 };
 

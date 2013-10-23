@@ -10,9 +10,9 @@ tx AAssetRetirement {
 	@Remarks("Asset used internally or by customers")
 	AAsset;
 	@Remarks("Book Value of the asset")
-	Assetvalueamt Amount;/* 0  */
+	AssetValueAmt Amount;/* 0  */
 	@Remarks("Market value of the asset")
-	Assetmarketvalueamt Amount;/* 0  */
+	AssetMarketValueAmt Amount;/* 0  */
 	@Remarks("Invoice Detail Line")
 	?CInvoiceLine;
 };

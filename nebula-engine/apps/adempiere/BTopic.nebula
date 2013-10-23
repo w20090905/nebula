@@ -14,13 +14,13 @@ type BTopic {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Text Message")
-	?TextMsg Note;
+	?TextMsg Msg;
 	@Remarks("Topic Status")
-	Topicstatus Attr;
+	TopicStatus Attr;
 	@Remarks("Topic Action")
-	Topicaction null;
+	TopicAction null;
 	@Remarks("The Topic is published and can be viewed")
-	IsPublished YesNo;/* 'Y'  */
+	IsPublishEd YesNo;/* 'Y'  */
 	@Remarks("Details")
 	?TextDetails Note;
 	@Remarks("Process Now")
@@ -28,10 +28,10 @@ type BTopic {
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("Auction Topic Type")
-	BTopictype;
+	BTopicType;
 	@Remarks("Auction Topic Category")
-	BTopiccategory;
+	BTopicCategory;
 	@Remarks("Decision date")
-	Decisiondate Date;
+	DecisionDate Date;
 };
 

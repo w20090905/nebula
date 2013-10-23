@@ -2,10 +2,10 @@
 @Refby("0")
 tx TSpool {
 	@Remarks("Instance of the process")
-	!AdPinstance;
+	!AdPInstance;
 	@Remarks("Method of ordering records; lowest number comes first")
 	!SeqNo;
 	@Remarks("Textual Informational, Menu or Error Message")
-	Msgtext Note;
+	MsgText Msg;
 };
 

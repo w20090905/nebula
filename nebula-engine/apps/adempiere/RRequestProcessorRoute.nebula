@@ -12,7 +12,7 @@ tx RRequestProcessorRoute {
 	@Remarks("Method of ordering records; lowest number comes first")
 	SeqNo;
 	@Remarks("Case insensitive keyword")
-	?Keyword String;
+	?KeyWord String;
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	AdUser;
 	@Remarks("Type of request (e.g. Inquiry, Complaint, ..)")

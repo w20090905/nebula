@@ -1,8 +1,8 @@
 @Remarks("Info and search/select Window")
 @Refby("0")
-type AdInfowindowTrl {
+type AdInfoWindowTrl {
 	@Remarks("Info and search/select Window")
-	!AdInfowindow;
+	!AdInfoWindow;
 	@Remarks("Language for this entity")
 	!AdLanguage;
 	@Remarks("Client/Tenant for this installation.")

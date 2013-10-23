@@ -18,8 +18,8 @@ type MWarehouse {
 	@Remarks("Element Separator")
 	Separator null;
 	@Remarks("Optional Warehouse to replenish from")
-	?MWarehousesource MWarehouse;
+	?MWarehouseSource MWarehouse;
 	@Remarks("Custom class to calculate Quantity to Order")
-	?Replenishmentclass null;
+	?ReplenishMentclass null;
 };
 

@@ -6,7 +6,7 @@ type RvBpartnerOpen {
 	?CBpartnerId ID;
 	?CCurrencyId ID;
 	?Amt Amount;
-	?Openamt Amount;
+	?OpenAmt Amount;
 	?DateDoc Date;
 	?DaysDue Count;
 	?CCampaignId ID;

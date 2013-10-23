@@ -1,8 +1,8 @@
 @Remarks("C_CyclePhase")
 @Refby("0")
-type CCyclephase {
+type CCyclePhase {
 	@Remarks("The step for this Cycle")
-	!CCyclestep;
+	!CCycleStep;
 	@Remarks("Standard Phase of the Project Type")
 	!CPhase;
 	@Remarks("Client/Tenant for this installation.")

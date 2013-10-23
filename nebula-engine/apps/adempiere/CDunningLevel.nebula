@@ -32,13 +32,13 @@ type CDunningLevel {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Show/print all due invoices")
-	IsShowAlldue YesNo;/* 'N'  */
+	IsShowAllDue YesNo;/* 'N'  */
 	@Remarks("Show/print all invoices which are not due (yet).")
-	IsShowNotdue YesNo;/* 'N'  */
+	IsShowNotDue YesNo;/* 'N'  */
 	@Remarks("Set the business partner to credit stop")
-	IsSetcreditstop YesNo;/* 'N'  */
+	IsSetCreditStop YesNo;/* 'N'  */
 	@Remarks("Set the payment term of the Business Partner")
-	IsSetpaymentterm YesNo;/* 'N'  */
+	IsSetPaymentTerm YesNo;/* 'N'  */
 	@Remarks("The terms of Payment (timing, discount)")
 	?CPaymentTerm;/* NULL   */
 };

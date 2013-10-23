@@ -22,7 +22,7 @@ tx AdWfProcess {
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("Text Message")
-	?TextMsg Note;
+	?TextMsg Msg;
 	@Remarks("Database Table information")
 	AdTable;
 	@Remarks("Direct internal record ID")

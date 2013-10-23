@@ -12,7 +12,7 @@ type AdColor {
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 	@Remarks("Color presentation for this color")
-	Colortype Attr;
+	ColorType Attr;
 	@Remarks("RGB value")
 	Red Number;
 	@Remarks("RGB value")
@@ -38,8 +38,8 @@ type AdColor {
 	@Remarks("Distance between lines")
 	?LineDistance Number;
 	@Remarks("Start point of the gradient colors")
-	?Startpoint Number;
+	?StartPoint Number;
 	@Remarks("Distance in points to repeat gradient color - or zero")
-	?Repeatdistance Number;
+	?RepeatDistance Number;
 };
 

@@ -12,9 +12,9 @@ type AdTree {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Element this tree is built on (i.e Product, Business Partner)")
-	Treetype Attr;
+	TreeType Attr;
 	@Remarks("All Nodes are included (Complete Tree)")
-	IsAllnodes YesNo;/* 'Y'  */
+	IsAllNodes YesNo;/* 'Y'  */
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Default value")

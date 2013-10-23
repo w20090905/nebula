@@ -18,9 +18,9 @@ type AdEntityType {
 	@Remarks("Version of the table definition")
 	?Version String;
 	@Remarks("Java Package of the model classes")
-	?Modelpackage Note;
+	?ModelPackage Note;
 	@Remarks("Extension Classpath")
-	?ClassPath Note;
+	?ClassPath Path;
 	@Remarks("Process Now")
 	?Processing YesNo;
 };

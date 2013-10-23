@@ -1,15 +1,15 @@
 @Remarks("")
 @Refby("0")
-type MMovementlinemaV {
+type MMovementLineMaV {
 	?AdClientId ID;
 	?AdOrgId ID;
 	?MMovementId ID;
-	?MMovementlineId ID;
+	?MMovementLineId ID;
 	?Line;
 	?MProductId ID;
-	?MAttributesetinstanceId ID;
-	?Movementqty Quantity;
+	?MAttributeSetInstanceId ID;
+	?MovementQty Quantity;
 	?MLocatorId ID;
-	?MLocatortoId ID;
+	?MLocatorToId ID;
 };
 

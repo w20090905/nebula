@@ -18,7 +18,7 @@ type AdColumn {
 	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
 	@Remarks("Name of the column in the database")
-	Columnname Name;
+	ColumnName Name;
 	@Remarks("Database Table information")
 	AdTable;
 	@Remarks("System Reference and Validation")
@@ -30,7 +30,7 @@ type AdColumn {
 	@Remarks("Length of the column in the database")
 	?FieldLength Length;
 	@Remarks("Default value hierarchy, separated by ;")
-	?Defaultvalue Note;
+	?DefaultValue Note;
 	@Remarks("This column is the key in this table")
 	IsKey YesNo;/* 'N'  */
 	@Remarks("This column is a link to the parent table (e.g. header from lines) - incl. Association key columns")
@@ -58,20 +58,20 @@ type AdColumn {
 	@Remarks("Maximum Value for a field")
 	?ValueMax String;
 	@Remarks("Is this column used for finding rows in windows")
-	IsSelectIonColumn YesNo;/* 'N'  */
+	IsSelectionColumn YesNo;/* 'N'  */
 	@Remarks("System Element enables the central maintenance of column description and help.")
 	?AdElement;
 	@Remarks("Process or Report")
 	?AdProcess;
 	@Remarks("Change database table definition when changing dictionary definition")
-	?IsSyncdatabase YesNo;/* 'N'                               */
+	?IsSyncDatabase YesNo;/* 'N'                               */
 	@Remarks("The column is always updateable, even if the record is not active or processed")
-	IsAlwaysupdateable YesNo;/* 'N'  */
+	IsAlwaysUpdateable YesNo;/* 'N'  */
 	@Remarks("Virtual Column (r/o)")
-	?Columnsql Note;
+	?ColumnsQl Note;
 	@Remarks("Mandatory Logic")
-	?Mandatorylogic Note;
+	?MandatoryLogic Note;
 	@Remarks("Fully qualified class name that implements the InfoFactory interface")
-	?Infofactoryclass Note;
+	?InfoFactoryClass Info;
 };
 

@@ -10,12 +10,12 @@ type MReplenish {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Method for re-ordering a product")
-	Replenishtype Attr;
+	ReplenishType Attr;
 	@Remarks("Minimum Inventory level for this product")
 	LevelMin Count;/* 0  */
 	@Remarks("Maximum Inventory level for this product")
 	LevelMax Count;/* 0  */
 	@Remarks("Optional Warehouse to replenish from")
-	?MWarehousesource MWarehouse;
+	?MWarehouseSource MWarehouse;
 };
 

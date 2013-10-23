@@ -16,17 +16,17 @@ type CPaymentTerm {
 	@Remarks("Due after delivery rather than after invoicing")
 	AfterDelivery YesNo;/* 'N'  */
 	@Remarks("Payment is due on a fixed date")
-	IsDuefixed YesNo;/* 'N'  */
+	IsDueFixed YesNo;/* 'N'  */
 	@Remarks("Net Days in which payment is due")
-	Netdays Count;
+	NetDays Count;
 	@Remarks("Days after due date to send first dunning letter")
-	Gracedays Count;
+	GraceDays Count;
 	@Remarks("Last day to include for next due date")
-	?Fixmonthcutoff Number;
+	?FixMonthCutOff Number;
 	@Remarks("Day of the month of the due date")
-	?Fixmonthday Number;
+	?FixMonthDay Number;
 	@Remarks("Number of months (0=same, 1=following)")
-	?Fixmonthoffset Number;
+	?FixMonthOffset Number;
 	@Remarks("Number of days from invoice date to be eligible for discount")
 	DiscountDays Count;
 	@Remarks("Discount in percent")
@@ -36,13 +36,13 @@ type CPaymentTerm {
 	@Remarks("Discount in percent")
 	Discount2 Number;
 	@Remarks("Payment due on the next business day")
-	?IsNextbusinessday YesNo;/* 'Y'                           */
+	?IsNextBusinessDay YesNo;/* 'Y'                           */
 	@Remarks("Default value")
 	?IsDefault YesNo;/* 'N' */
 	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
 	@Remarks("Day when payment is due net")
-	?Netday null;
+	?NetDay null;
 	@Remarks("Element is valid")
 	IsValid YesNo;/* 'N'  */
 	@Remarks("Process Now")

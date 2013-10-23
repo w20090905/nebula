@@ -4,14 +4,14 @@ type CChargeAcct {
 	@Remarks("Additional document charges")
 	!CCharge;
 	@Remarks("Rules for accounting")
-	!CAcctschema;
+	!CAcctSchema;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Charge Expense Account")
-	ChExpenseAcct CValidcombination;
+	ChExpenseAcct CValidCombination;
 	@Remarks("Charge Revenue Account")
-	ChRevenueAcct CValidcombination;
+	ChRevenueAcct CValidCombination;
 };
 

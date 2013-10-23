@@ -1,44 +1,44 @@
 @Remarks("Cost Detail Information")
 @Refby("0")
-tx MCostdetail {
+tx MCostDetail {
 	@Remarks("Cost Detail Information")
-	!MCostdetailId ID;
+	!MCostDetailId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClient;
 	@Remarks("Organizational entity within client")
 	AdOrg;
 	@Remarks("Rules for accounting")
-	CAcctschema;
+	CAcctSchema;
 	@Remarks("Product, Service, Item")
 	MProduct;
 	@Remarks("Product Attribute Set Instance")
-	MAttributesetinstance;
+	MAttributeSetInstance;
 	@Remarks("Product Cost Element")
-	?MCostelement;
+	?MCostElement;
 	@Remarks("Sales Order Line")
-	?COrderline;
+	?COrderLine;
 	@Remarks("Line on Shipment or Receipt document")
-	?MInoutline;
+	?MInoutLine;
 	@Remarks("Invoice Detail Line")
 	?CInvoiceLine;
 	@Remarks("Inventory Move document Line")
-	?MMovementline;
+	?MMovementLine;
 	@Remarks("Unique line in an Inventory document")
-	?MInventoryline;
+	?MInventoryLine;
 	@Remarks("Document Line representing a production")
-	?MProductIonline;
+	?MProductionLine;
 	@Remarks("Project Issues (Material, Labor)")
 	?CProjectIssue;
 	@Remarks("This is a Sales Transaction")
-	IsSotrx YesNo;/* 'Y'  */
+	IsSoTrx YesNo;/* 'Y'  */
 	@Remarks("Amount")
 	Amt Amount;/* 0  */
 	@Remarks("Quantity")
 	Qty Quantity;/* 0  */
 	@Remarks("Difference Amount")
-	?Deltaamt Amount;/* 0 */
+	?DeltaAmt Amount;/* 0 */
 	@Remarks("Quantity Difference")
-	?Deltaqty Quantity;/* 0 */
+	?DeltaQty Quantity;/* 0 */
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("The document has been processed")

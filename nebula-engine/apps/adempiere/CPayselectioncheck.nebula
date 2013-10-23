@@ -1,18 +1,18 @@
 @Remarks("Payment Selection Check")
 @Refby("1")
-tx CPayselectioncheck {
+tx CPaySelectionCheck {
 	@Remarks("Payment Selection Check")
-	!CPayselectioncheckId ID;
+	!CPaySelectionCheckId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Payment Selection")
-	CPayselection;
+	CPaySelection;
 	@Remarks("Identifies a Business Partner")
 	CBpartner;
 	@Remarks("Amount being paid")
-	Payamt Amount;/* 0  */
+	PayAmt Amount;/* 0  */
 	@Remarks("Quantity")
 	Qty Quantity;/* 0  */
 	@Remarks("Payment identifier")
@@ -20,7 +20,7 @@ tx CPayselectioncheck {
 	@Remarks("Document sequence number of the document")
 	?DocumentNo Code;
 	@Remarks("Indicates if this document / line is printed")
-	IsPrintEd YesNo;/* 'N'  */
+	IsPrinted YesNo;/* 'N'  */
 	@Remarks("How you pay the invoice")
 	PaymentRule Attr;
 	@Remarks("The document has been processed")
@@ -30,8 +30,8 @@ tx CPayselectioncheck {
 	@Remarks("This is a sales transaction (receipt)")
 	IsReceipt YesNo;/* 'N'  */
 	@Remarks("Bank Account of the Business Partner")
-	?CBpBankaccount;/* NULL   */
+	?CBpBankAccount;/* NULL   */
 	@Remarks("Generated Draft")
-	IsGenerateddraft YesNo;/* 'N'  */
+	IsGeneratedDraft YesNo;/* 'N'  */
 };
 

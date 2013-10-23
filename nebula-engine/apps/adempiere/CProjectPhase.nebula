@@ -10,9 +10,9 @@ type CProjectPhase {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("First effective day (inclusive)")
-	?Startdate Date;
+	?StartDate Date;
 	@Remarks("Last effective date (inclusive)")
-	?Enddate Date;
+	?EndDate Date;
 	@Remarks("It is complete")
 	IsComplete YesNo;/* 'N'  	  */
 	@Remarks("Product, Service, Item")
@@ -20,7 +20,7 @@ type CProjectPhase {
 	@Remarks("Actual Price")
 	?PriceActual Number;/* 0  	  */
 	@Remarks("Generate Order")
-	?Generateorder Attr;
+	?GenerateOrder Attr;
 	@Remarks("Order")
 	?COrder;
 	@Remarks("Standard Phase of the Project Type")
@@ -38,9 +38,9 @@ type CProjectPhase {
 	@Remarks("The (legal) commitment amount")
 	CommittedAmt Amount;/* 0  */
 	@Remarks("The commitment amount/quantity is the chargeable ceiling")
-	IsCommitceiling YesNo;/* 'N'  */
+	IsCommitCeiling YesNo;/* 'N'  */
 	@Remarks("Invoice Rule for the project")
-	?Projinvoicerule Attr;
+	?ProjInvoiceRule Attr;
 	@Remarks("Planned amount for this project")
 	PlannedAmt Amount;/* 0  */
 };

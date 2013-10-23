@@ -12,7 +12,7 @@ tx PaSlaMeasure {
 	@Remarks("Transaction Date")
 	DateTrx Date;
 	@Remarks("Actual value that has been measured.")
-	Measureactual Length;/* 0  */
+	MeasureActual Length;/* 0  */
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Database Table information")

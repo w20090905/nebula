@@ -1,17 +1,17 @@
 @Remarks("")
 @Refby("0")
-type CRfqresponselineV {
-	CRfqresponseId ID;
-	CRfqresponselineId ID;
-	CRfqlineId ID;
-	CRfqresponselineqtyId ID;
-	CRfqlineqtyId ID;
+type CRfqResponseLineV {
+	CRfqResponseId ID;
+	CRfqResponseLineId ID;
+	CRfqLineId ID;
+	CRfqResponseLineQtyId ID;
+	CRfqLineQtyId ID;
 	AdClientId ID;
 	AdOrgId ID;
 	?AdLanguage String;
 	Line;
 	?MProductId ID;
-	?MAttributesetinstanceId ID;
+	?MAttributeSetInstanceId ID;
 	?Name;
 	?Description;
 	?DocumentNote Note;
@@ -19,11 +19,11 @@ type CRfqresponselineV {
 	?SKU;
 	?ProductValue Note;
 	?Help;
-	?DateWorkstart Date;
+	?DateWorkStart Date;
 	?DeliveryDays Count;
 	CUomId ID;
-	?Uomsymbol Symbol;
-	Benchmarkprice Price;
+	?UomSymbol Symbol;
+	BenchmarkPrice Price;
 	Qty Quantity;
 	Price;
 	?Discount Count;

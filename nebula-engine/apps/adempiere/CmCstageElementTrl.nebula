@@ -1,8 +1,8 @@
 @Remarks("Container element i.e. Headline, Content, Footer etc.")
 @Refby("0")
-type CmCstageElementTrl {
+type CmCStageElementTrl {
 	@Remarks("Container element i.e. Headline, Content, Footer etc.")
-	!CmCstageElement;
+	!CmCStageElement;
 	@Remarks("Language for this entity")
 	!AdLanguage;
 	@Remarks("Client/Tenant for this installation.")
@@ -18,6 +18,6 @@ type CmCstageElementTrl {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("Contains the content itself")
-	?Contenthtml Note;
+	?ContentHtml Note;
 };
 

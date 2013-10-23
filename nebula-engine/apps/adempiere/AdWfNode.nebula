@@ -38,11 +38,11 @@ type AdWfNode {
 	@Remarks("Workflow Transaction Execution Block")
 	?AdWfBlock;
 	@Remarks("Mode how the sub-workflow is executed")
-	?Subflowexecution null;
+	?SubFlowExecution null;
 	@Remarks("Workflow Activity Start Mode")
-	?Startmode null;
+	?StartMode null;
 	@Remarks("Workflow Activity Finish Mode")
-	?Finishmode null;
+	?FinishMode null;
 	@Remarks("Maximum Duration in Duration Unit")
 	Limit Count;/* 0 */
 	@Remarks("Indicates if this request is of a high, medium or low priority.")
@@ -52,38 +52,38 @@ type AdWfNode {
 	@Remarks("Cost information")
 	Cost;/* 0 */
 	@Remarks("Workflow Simulation Execution Time")
-	?Workingtime Count;
+	?WorkingTime Count;
 	@Remarks("Workflow Simulation Waiting time")
-	Waitingtime Count;/* 0 */
+	WaitingTime Count;/* 0 */
 	@Remarks("Responsible for Workflow Execution")
 	?AdWfResponsible;
 	@Remarks("Image or Icon")
 	?AdImage;
 	@Remarks("Semantics for multiple incoming Transitions")
-	Joinelement null;/* NULL */
+	JoinElement null;/* NULL */
 	@Remarks("Semantics for multiple outgoing Transitions")
-	Splitelement null;/* NULL */
+	SplitElement null;/* NULL */
 	@Remarks("Time in minutes to wait (sleep)")
 	?Waittime Count;
 	@Remarks("Column in the table")
 	?AdColumn;
 	@Remarks("Name of the Attribute")
-	?Attributename Name;
+	?AttributeName Name;
 	@Remarks("Value of the Attribute")
-	?Attributevalue Note;
+	?AttributeValue Note;
 	@Remarks("The targeted status of the document")
-	?Docaction Attr;
+	?DocAction Attr;
 	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
 	@Remarks("Change of priority when Activity is suspended waiting for user")
-	?Dynpriorityunit null;
+	?DynPriorityUnit null;
 	@Remarks("Change of priority when Activity is suspended waiting for user")
-	?Dynprioritychange Number;
+	?DynPriorityChange Number;
 	@Remarks("Recipient of the EMail")
-	?Emailrecipient EMail;
+	?EmailRecipient EMail;
 	@Remarks("Electronic Mail Address")
 	?EMail;
 	@Remarks("Text templates for mailings")
-	?RMailtext;
+	?RMailText;
 };
 

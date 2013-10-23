@@ -14,7 +14,7 @@ type GlFund {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("Rules for accounting")
-	CAcctschema;
+	CAcctSchema;
 	@Remarks("Amount")
 	Amt Amount;/* 0  */
 	@Remarks("Starting date for a range")

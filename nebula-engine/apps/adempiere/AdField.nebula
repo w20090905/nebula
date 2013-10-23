@@ -32,9 +32,9 @@ type AdField {
 	@Remarks("Method of ordering records; lowest number comes first")
 	?SeqNo;
 	@Remarks("Determines in what order the records are displayed")
-	?Sortno SeqNo;
+	?SortNo SeqNo;
 	@Remarks("Displayed on same line as previous field")
-	IsSameline YesNo;/* 'N'  */
+	IsSameLine YesNo;/* 'N'  */
 	@Remarks("Field without Column - Only label is displayed")
 	IsHeading YesNo;/* 'N'  */
 	@Remarks("Label is not displayed")
@@ -44,19 +44,19 @@ type AdField {
 	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
 	@Remarks("Type of obscuring the data (limiting the display)")
-	?Obscuretype Attr;
+	?ObscureType Attr;
 	@Remarks("System Reference and Validation")
 	?AdReference;
 	@Remarks("Data entry is required in this column")
 	?IsMandatory YesNo;
 	?IncludedTabId ID;
 	@Remarks("Default value hierarchy, separated by ;")
-	?Defaultvalue Note;
+	?DefaultValue Note;
 	@Remarks("Required to specify, if data type is Table or List")
 	?AdReferenceValue AdReference;/* NULL */
 	@Remarks("Dynamic Validation Rule")
 	?AdValRule;/* NULL */
 	@Remarks("Fully qualified class name that implements the InfoFactory interface")
-	?Infofactoryclass Note;
+	?InfoFactoryClass Info;
 };
 

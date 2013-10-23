@@ -1,6 +1,6 @@
 @Remarks("Request Type Updates")
 @Refby("0")
-type RRequestTypeupdates {
+type RRequestTypeUpdates {
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	!AdUser;
 	@Remarks("Type of request (e.g. Inquiry, Complaint, ..)")
@@ -10,6 +10,6 @@ type RRequestTypeupdates {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
-	IsSelfservice YesNo;/* 'N'  */
+	IsSelfService YesNo;/* 'N'  */
 };
 

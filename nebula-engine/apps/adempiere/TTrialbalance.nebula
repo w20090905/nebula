@@ -2,7 +2,7 @@
 @Refby("0")
 tx TTrialbalance {
 	@Remarks("Instance of the process")
-	!AdPinstance;
+	!AdPInstance;
 	@Remarks("Accounting Fact")
 	!FactAcctId ID;
 	@Remarks("Client/Tenant for this installation.")
@@ -10,7 +10,7 @@ tx TTrialbalance {
 	@Remarks("Organizational entity within client")
 	?AdOrgId ID;
 	@Remarks("Rules for accounting")
-	CAcctschemaId ID;
+	CAcctSchemaId ID;
 	@Remarks("Account used")
 	?AccountId ID;
 	@Remarks("Transaction Date")
@@ -34,21 +34,21 @@ tx TTrialbalance {
 	@Remarks("Warehouse Locator")
 	?MLocatorId ID;
 	@Remarks("The type of posted amount for the transaction")
-	PostIngtype Attr;
+	PostingType YesNo;
 	@Remarks("The Currency for this record")
 	?CCurrencyId ID;
 	@Remarks("Source Debit Amount")
-	?AmtSourcedr Amount;
+	?AmtSourceDr Amount;
 	@Remarks("Source Credit Amount")
-	?AmtSourcecr Amount;
+	?AmtSourceCr Amount;
 	@Remarks("Source Balance Amount")
-	?AmtSourcebalance Amount;
+	?AmtSourceBalance Amount;
 	@Remarks("Accounted Debit Amount")
-	AmtAcctdr Amount;
+	AmtAcctDr Amount;
 	@Remarks("Accounted Credit Amount")
-	AmtAcctcr Amount;
+	AmtAcctCr Amount;
 	@Remarks("Accounted Balance Amount")
-	AmtAcctbalance Amount;
+	AmtAcctBalance Amount;
 	@Remarks("Unit of Measure")
 	?CUomId ID;
 	@Remarks("Quantity")
@@ -58,11 +58,11 @@ tx TTrialbalance {
 	@Remarks("Identifies a Business Partner")
 	?CBpartnerId ID;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrxId ID;
+	?AdOrgTrxId ID;
 	@Remarks("Location that inventory was moved from")
-	?CLocfromId ID;
+	?CLocFromId ID;
 	@Remarks("Location that inventory was moved to")
-	?CLoctoId ID;
+	?CLocToId ID;
 	@Remarks("Sales coverage region")
 	?CSalesRegionId ID;
 	@Remarks("Financial Project")
@@ -80,6 +80,6 @@ tx TTrialbalance {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Key of Account Element")
-	?Accountvalue Note;
+	?AccountValue Note;
 };
 

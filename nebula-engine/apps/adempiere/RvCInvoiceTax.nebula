@@ -5,19 +5,19 @@ type RvCInvoiceTax {
 	AdOrgId ID;
 	CTaxId ID;
 	CInvoiceId ID;
-	CDoctypeId ID;
+	CDocTypeId ID;
 	CBpartnerId ID;
 	?TaxId Code;
 	?IsTaxExempt YesNo;
 	DateAcct Date;
 	DateInvoiceD Date;
-	IsSotrx YesNo;
+	IsSoTrx YesNo;
 	DocumentNo Code;
 	IsPaid YesNo;
 	CCurrencyId ID;
-	?TaxBaseamt Amount;
+	?TaxBaseAmt Amount;
 	?TaxAmt Amount;
-	?TaxLinetotal Number;
+	?TaxLineTotal Number;
 	?Multiplier Number;
 };
 

@@ -1,8 +1,8 @@
 @Remarks("Trade Discount Break")
 @Refby("0")
-tx MDiscountSchemabreak {
+tx MDiscountSchemaBreak {
 	@Remarks("Trade Discount Break")
-	!MDiscountSchemabreakId ID;
+	!MDiscountSchemaBreakId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -12,14 +12,14 @@ tx MDiscountSchemabreak {
 	@Remarks("Method of ordering records; lowest number comes first")
 	SeqNo;
 	@Remarks("Low Value of trade discount break level")
-	Breakvalue Number;
+	BreakValue Number;
 	@Remarks("Trade Discount in Percent for the break level")
-	Breakdiscount Count;
+	BreakDiscount Count;
 	@Remarks("Category of a Product")
 	?MProductCategory;
 	@Remarks("Product, Service, Item")
 	?MProduct;
 	@Remarks("Use flat discount defined on Business Partner Level")
-	IsBpartnerFlatdiscount YesNo;/* 'N'  */
+	IsBpartnerFlatDiscount YesNo;/* 'N'  */
 };
 

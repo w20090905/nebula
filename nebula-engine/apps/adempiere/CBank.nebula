@@ -10,13 +10,13 @@ type CBank {
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Bank Routing Number")
-	Routingno Code;
+	RoutingNo Code;
 	@Remarks("Location or Address")
 	?CLocation;
 	@Remarks("Swift Code or BIC")
 	?SWIFTCode Note;
 	@Remarks("Bank for this Organization")
-	IsOwnbank YesNo;/* 'N'  */
+	IsOwnBank YesNo;/* 'N'  */
 	@Remarks("Optional short description of the record")
 	?Description;
 };

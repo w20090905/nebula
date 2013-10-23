@@ -4,7 +4,7 @@ type MProductStockV {
 	Value String;
 	?Help;
 	?QtyAvailable Quantity;
-	QtyOnhand Quantity;
+	QtyOnHand Quantity;
 	QtyReserved Quantity;
 	?Description;
 	Warehouse null;

@@ -1,14 +1,14 @@
 @Remarks("User who reported issues")
 @Refby("2")
-tx RIsSueUser {
+tx RIssueUser {
 	@Remarks("User who reported issues")
-	!RIsSueUserId ID;
+	!RIssueUserId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Email of the responsible for the System")
-	Username Name;
+	UserName Name;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("User within the system - Internal or Business Partner Contact")

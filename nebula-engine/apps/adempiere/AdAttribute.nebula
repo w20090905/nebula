@@ -28,7 +28,7 @@ type AdAttribute {
 	@Remarks("Maximum Value for a field")
 	?ValueMax String;
 	@Remarks("Default value hierarchy, separated by ;")
-	?Defaultvalue Note;
+	?DefaultValue Note;
 	@Remarks("Field is read only")
 	IsReadonly YesNo;/* 'N'  */
 	@Remarks("Determines, if the field can be updated")
@@ -46,7 +46,7 @@ type AdAttribute {
 	@Remarks("Format of the value; Can contain fixed format elements, Variables: '_lLoOaAcCa09'")
 	?Vformat Description;
 	@Remarks("Displayed on same line as previous field")
-	IsSameline YesNo;/* 'N'  */
+	IsSameLine YesNo;/* 'N'  */
 	@Remarks("Field without Column - Only label is displayed")
 	IsHeading YesNo;/* 'N'  */
 	@Remarks("Label is not displayed")

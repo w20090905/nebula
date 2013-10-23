@@ -1,14 +1,14 @@
 @Remarks("Column in Report")
 @Refby("2")
-type PaReportcolumn {
+type PaReportColumn {
 	@Remarks("Column in Report")
-	!PaReportcolumnId ID;
+	!PaReportColumnId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Collection of Columns for Report")
-	PaReportcolumnset;
+	PaReportColumnsEt;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Method of ordering records; lowest number comes first")
@@ -16,35 +16,35 @@ type PaReportcolumn {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Indicates if this document / line is printed")
-	IsPrintEd YesNo;/* 'Y'  */
+	IsPrinted YesNo;/* 'Y'  */
 	@Remarks("The type of posted amount for the transaction")
-	PostIngtype Attr;
+	PostingType YesNo;
 	@Remarks("General Ledger Budget")
 	?GlBudget;
 	@Remarks("Column Type")
-	Columntype Attr;
+	ColumnType Attr;
 	@Remarks("Period offset (0 is current)")
-	?Relativeperiod Number;
+	?RelativePeriod Number;
 	@Remarks("Currency Type")
-	?Currencytype Attr;
+	?CurrencyType Attr;
 	@Remarks("Calculation")
-	?Calculationtype Attr;
+	?CalculationType Attr;
 	@Remarks("Type of amount to report")
-	?Amounttype Attr;
+	?AmountType Attr;
 	@Remarks("The Currency for this record")
 	?CCurrency;
 	@Remarks("Perform conversion for all amounts to currency")
-	?IsAdhocconversion YesNo;/* 'N' */
+	?IsAdhocConversion YesNo;/* 'N' */
 	@Remarks("First operand for calculation")
-	?Oper1 PaReportcolumn;
+	?Oper1 PaReportColumn;
 	@Remarks("Second operand for calculation")
-	?Oper2 PaReportcolumn;
+	?Oper2 PaReportColumn;
 	@Remarks("Element Type (account or user defined)")
-	?Elementtype Attr;
+	?ElementType Attr;
 	@Remarks("Organizational entity within client")
 	?Org AdOrg;
 	@Remarks("Account Element")
-	?CElementvalue;
+	?CElementValue;
 	@Remarks("Financial Project")
 	?CProject;
 	@Remarks("Identifies a Business Partner")

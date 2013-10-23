@@ -14,15 +14,15 @@ type RvMRequisition {
 	PriorityRule Attr;
 	DateRequired Date;
 	TotalLines Line;
-	Docaction Attr;
-	Docstatus Attr;
+	DocAction Attr;
+	DocStatus Attr;
 	Processed YesNo;
-	MRequisitionlineId ID;
+	MRequisitionLineId ID;
 	Line;
 	Qty Quantity;
 	?MProductId ID;
 	?LineDescription Description;
 	PriceActual Number;
-	LineNetamt Amount;
+	LineNetAmt Amount;
 };
 

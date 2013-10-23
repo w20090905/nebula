@@ -12,11 +12,11 @@ type MPriceList {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Pricelist to be used, if product not found on this pricelist")
-	?Basepricelist MPriceList;
+	?BasePriceList MPriceList;
 	@Remarks("Tax is included in the price")
 	IsTaxIncluded YesNo;/* 'N'  */
 	@Remarks("This is a Sales Price List")
-	IsSopricelist YesNo;/* 'Y'  */
+	IsSoPriceList YesNo;/* 'Y'  */
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 	@Remarks("The Currency for this record")

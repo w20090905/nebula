@@ -8,13 +8,13 @@ tx MInout {
 	@Remarks("Organizational entity within client")
 	AdOrg;
 	@Remarks("This is a Sales Transaction")
-	IsSotrx YesNo;/* 'Y'  */
+	IsSoTrx YesNo;/* 'Y'  */
 	@Remarks("Document sequence number of the document")
 	DocumentNo Code;
 	@Remarks("The targeted status of the document")
-	Docaction Attr;
+	DocAction Attr;
 	@Remarks("The current status of the document")
-	Docstatus Attr;
+	DocStatus Attr;
 	@Remarks("Posting status")
 	PostEd YesNo;/* 'N'  */
 	@Remarks("Process Now")
@@ -22,7 +22,7 @@ tx MInout {
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("Document type or rules")
-	CDoctype;
+	CDocType;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Order")
@@ -30,11 +30,11 @@ tx MInout {
 	@Remarks("Date of Order")
 	?DateOrdered Date;
 	@Remarks("Indicates if this document / line is printed")
-	IsPrintEd YesNo;/* 'N'  */
+	IsPrinted YesNo;/* 'N'  */
 	@Remarks("Method of moving the inventory")
-	Movementtype Attr;
+	MovementType Attr;
 	@Remarks("Date a product was moved in or out of inventory")
-	Movementdate Date;
+	MovementDate Date;
 	@Remarks("Accounting Date")
 	DateAcct Date;
 	@Remarks("Identifies a Business Partner")
@@ -44,11 +44,11 @@ tx MInout {
 	@Remarks("Storage Warehouse and Service Point")
 	MWarehouse;
 	@Remarks("Transaction Reference Number (Sales Order, Purchase Order) of your Business Partner")
-	?Poreference Note;
+	?PoReference Note;
 	@Remarks("Defines the timing of Delivery")
 	DeliveryRule Attr;
 	@Remarks("Method for charging Freight")
-	FreightCostrule Attr;
+	FreightCostRule Attr;
 	@Remarks("Freight Amount")
 	?FreightAmt Amount;/* 0 */
 	@Remarks("How the order will be delivered")
@@ -62,29 +62,29 @@ tx MInout {
 	@Remarks("Priority of a document")
 	PriorityRule Attr;
 	@Remarks("Date the document was printed.")
-	?DatePrintEd Date;
+	?DatePrinted Date;
 	@Remarks("Invoice Identifier")
 	?CInvoice;
 	@Remarks("Process which will generate a new document lines based on an existing document")
-	?Createfrom YesNo;
+	?CreateFrom YesNo;
 	@Remarks("Generate To")
-	?Generateto Attr;
+	?GenerateTo Attr;
 	@Remarks("Enable sending Document EMail")
-	Sendemail YesNo;/* 'N'  */
+	SendEmail YesNo;/* 'N'  */
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
 	@Remarks("Sales Representative or Company Agent")
 	?SalesRep AdUser;
 	@Remarks("Number of packages shipped")
-	?Nopackages Number;
+	?NoPackageS Number;
 	@Remarks("Date/Time when picked for Shipment")
-	?Pickdate Date;
+	?PickDate Date;
 	@Remarks("Shipment Date/Time")
-	?Shipdate Date;
+	?ShipDate Date;
 	@Remarks("Number to track the shipment")
-	?Trackingno null;
+	?TrackingNo null;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrx AdOrg;
+	?AdOrgTrx AdOrg;
 	@Remarks("Financial Project")
 	?CProject;
 	@Remarks("Marketing Campaign")
@@ -92,9 +92,9 @@ tx MInout {
 	@Remarks("Business Activity")
 	?CActivity;
 	@Remarks("User defined list element #1")
-	?User1 CElementvalue;
+	?User1 CElementValue;
 	@Remarks("User defined list element #2")
-	?User2 CElementvalue;
+	?User2 CElementValue;
 	@Remarks("Date a product was received")
 	?DateReceived Date;
 	@Remarks("Movement is in transit")
@@ -102,9 +102,9 @@ tx MInout {
 	@Remarks("Referenced Shipment")
 	?RefInout MInout;
 	@Remarks("Create Confirm")
-	?Createconfirm YesNo;
+	?CreateConfirm YesNo;
 	@Remarks("Create Package")
-	?Createpackage YesNo;
+	?CreatePackage YesNo;
 	@Remarks("Indicates if this document requires approval")
 	IsApproved YesNo;/* 'N'  */
 	@Remarks("Document is in dispute")

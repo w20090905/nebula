@@ -2,7 +2,7 @@
 @Refby("0")
 type CBpGroupAcct {
 	@Remarks("Rules for accounting")
-	!CAcctschema;
+	!CAcctSchema;
 	@Remarks("Business Partner Group")
 	!CBpGroup;
 	@Remarks("Client/Tenant for this installation.")
@@ -10,32 +10,32 @@ type CBpGroupAcct {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Account for Customer Receivables")
-	CReceivableAcct CValidcombination;
+	CReceivableAcct CValidCombination;
 	@Remarks("Account for customer prepayments")
-	CPrepaymentAcct CValidcombination;
+	CPrepaymentAcct CValidCombination;
 	@Remarks("Account for Vendor Liability")
-	VLiabilityAcct CValidcombination;
+	VLiabilityAcct CValidCombination;
 	@Remarks("Account for Vender Service Liability")
-	VLiabilityServicesAcct CValidcombination;
+	VLiabilityServiceSAcct CValidCombination;
 	@Remarks("Account for Vendor Prepayments")
-	VPrepaymentAcct CValidcombination;
+	VPrepaymentAcct CValidCombination;
 	@Remarks("Payment Discount Expense Account")
-	PaydiscountExpAcct CValidcombination;
+	PayDiscountExpAcct CValidCombination;
 	@Remarks("Payment Discount Revenue Account")
-	PaydiscountRevAcct CValidcombination;
+	PayDiscountRevAcct CValidCombination;
 	@Remarks("Account for Receivables write-off")
-	WriteoffAcct CValidcombination;
+	WriteOffAcct CValidCombination;
 	@Remarks("Account for not-invoiced Material Receipts")
-	NotinvoicedreceiptsAcct CValidcombination;
+	NotInvoiceDreceiptsAcct CValidCombination;
 	@Remarks("Account for unearned revenue")
-	UnearnedRevenueAcct CValidcombination;
+	UnearnedRevenueAcct CValidCombination;
 	@Remarks("Account for not invoiced Revenue")
-	NotinvoicedrevenueAcct CValidcombination;
+	NotInvoiceDrevenueAcct CValidCombination;
 	@Remarks("Account for not invoiced Receivables")
-	NotinvoicedreceivablesAcct CValidcombination;
+	NotInvoiceDreceivablesAcct CValidCombination;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Customer Accounts Receivables Services Account")
-	?CReceivableServicesAcct Amount;
+	?CReceivableServiceSAcct Amount;
 };
 

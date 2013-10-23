@@ -10,15 +10,15 @@ type CUom {
 	@Remarks("UOM EDI X12 Code")
 	X12de355 String;
 	@Remarks("Symbol for a Unit of Measure")
-	?Uomsymbol Symbol;
+	?UomSymbol Symbol;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Rule for rounding  calculated amounts")
-	Stdprecision Precision;
+	StdPrecision Precision;
 	@Remarks("Rounding used costing calculations")
-	Costingprecision Precision;
+	CostingPrecision Precision;
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 };

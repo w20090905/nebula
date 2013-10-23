@@ -12,6 +12,6 @@ type BBuyer {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Valid to including this date (last day)")
-	Validto Date;
+	ValidTo Date;
 };
 

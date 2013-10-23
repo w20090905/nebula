@@ -20,15 +20,15 @@ type AdWorkflow {
 	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
 	@Remarks("Unit of Duration")
-	?Durationunit null;
+	?DurationUnit null;
 	@Remarks("Author/Creator of the Entity")
 	Author null;/* 'ComPiere' */
 	@Remarks("Version of the table definition")
 	Version Number;/* 0 */
 	@Remarks("Valid from including this date (first day)")
-	?Validfrom Date;
+	?ValidFrom Date;
 	@Remarks("Valid to including this date (last day)")
-	?Validto Date;
+	?ValidTo Date;
 	@Remarks("Indicates if this request is of a high, medium or low priority.")
 	?Priority;
 	@Remarks("Maximum Duration in Duration Unit")
@@ -38,15 +38,15 @@ type AdWorkflow {
 	@Remarks("Cost information")
 	Cost;/* 0 */
 	@Remarks("Workflow Simulation Execution Time")
-	Workingtime Count;/* 0 */
+	WorkingTime Count;/* 0 */
 	@Remarks("Workflow Simulation Waiting time")
-	Waitingtime Count;/* 0 */
+	WaitingTime Count;/* 0 */
 	@Remarks("Responsible for Workflow Execution")
 	?AdWfResponsible;
 	@Remarks("Status of Publication")
-	Publishstatus Attr;/* NULL */
+	PublishStatus Attr;/* NULL */
 	@Remarks("Workflow Processor Server")
-	?AdWorkflowprocessor;
+	?AdWorkflowProcessor;
 	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
 	@Remarks("Default value")
@@ -54,11 +54,11 @@ type AdWorkflow {
 	@Remarks("Database Table information")
 	?AdTable;
 	@Remarks("Validate Workflow")
-	?Validateworkflow null;
+	?ValidateWorkflow null;
 	@Remarks("Type of Worflow")
-	Workflowtype Attr;/* 'G'  */
+	WorkflowType Attr;/* 'G'  */
 	@Remarks("Logic to determine Workflow Start - If true, a workflow process is started for the document")
-	?Docvaluelogic Note;
+	?DocValueLogic Note;
 	@Remarks("Element is valid")
 	IsValid YesNo;/* 'N'  */
 };

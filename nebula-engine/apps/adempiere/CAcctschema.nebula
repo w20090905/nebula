@@ -1,8 +1,8 @@
 @Remarks("Rules for accounting")
 @Refby("39")
-type CAcctschema {
+type CAcctSchema {
 	@Remarks("Rules for accounting")
-	!CAcctschemaId ID;
+	!CAcctSchemaId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClient;
 	@Remarks("Organizational entity within client")
@@ -16,48 +16,48 @@ type CAcctschema {
 	@Remarks("Indicates if Accrual or Cash Based accounting will be used")
 	IsAccrual YesNo;/* 'Y'  */
 	@Remarks("Indicates how Costs will be calculated")
-	Costingmethod Attr;
+	CostingMethod Attr;
 	@Remarks("The Currency for this record")
 	CCurrency;
 	@Remarks("If selected, the periods are automatically opened and closed")
-	AutoPeriodcontrol YesNo;/* 'N'  */
+	AutoPeriodControl YesNo;/* 'N'  */
 	@Remarks("Period of the Calendar")
 	?CPeriod;
 	@Remarks("Number of days to be able to post in the past (based on system date)")
-	?PeriodOpenhistory Number;
+	?PeriodOpenHistory Number;
 	@Remarks("Number of days to be able to post to a future date (based on system date)")
-	?PeriodOpenfuture Number;
+	?PeriodOpenFuture Number;
 	@Remarks("Element Separator")
 	Separator null;
 	@Remarks("Ability to select (partial) account combinations by an Alias")
-	Hasalias YesNo;/* 'Y'  */
+	HasAlias YesNo;/* 'Y'  */
 	@Remarks("Combination of account elements are checked")
-	Hascombination YesNo;/* 'Y'  */
+	HasCombination YesNo;/* 'Y'  */
 	@Remarks("Generate postings for trade discounts")
-	IsTradediscountposted YesNo;/* 'N'  */
+	IsTradeDiscountPostEd YesNo;/* 'N'  */
 	@Remarks("Correct the tax for payment discount and charges")
-	IsDiscountCorrectstax YesNo;/* 'N'  */
+	IsDiscountCorrectsTax YesNo;/* 'N'  */
 	@Remarks("Type of Cost (e.g. Current, Plan, Future)")
-	?MCosttype;
+	?MCostType;
 	@Remarks("The lowest level to accumulate Costing Information")
-	Costinglevel Attr;/* 'C'  */
+	CostingLevel Attr;/* 'C'  */
 	@Remarks("Adjust Cost of Good Sold")
 	IsAdjustcogs YesNo;/* 'N'  */
 	@Remarks("Create posting entries only for this organization")
-	?AdOrgonly AdOrg;
+	?AdOrgOnly AdOrg;
 	@Remarks("Differentiate between Services and Product Receivable/Payables")
-	IsPostServices YesNo;/* ('N')  */
+	IsPostServiceS YesNo;/* ('N')  */
 	@Remarks("Post the cost adjustment explicitly")
-	IsExplicitcostadjustment YesNo;/* ('N')  */
+	IsExpLicitCostAdjustment YesNo;/* ('N')  */
 	@Remarks("Create Commitment and/or Reservations for Budget Control")
-	Commitmenttype YesNo;/* 'N'  */
+	CommitmentType YesNo;/* 'N'  */
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Type of Tax Correction")
-	?TaxCorrectiontype Attr;
+	?TaxCorrectionType Attr;
 	@Remarks("Allow to post negative accounting values")
-	?IsAllownegativeposting YesNo;/* 'Y'  */
+	?IsAllowNegativePosting YesNo;/* 'Y'  */
 	@Remarks("This flag controls if Adempiere must post when clearing (transit) and final accounts are the same")
-	?IsPostIfclearingequal YesNo;/* 'Y'  */
+	?IsPostIfClearingEqual YesNo;/* 'Y'  */
 };
 

@@ -16,7 +16,7 @@ tx CCashLine {
 	@Remarks("Source of Cash")
 	CashType Attr;
 	@Remarks("Account at the Bank")
-	?CBankaccount;
+	?CBankAccount;
 	@Remarks("Additional document charges")
 	?CCharge;
 	@Remarks("Invoice Identifier")
@@ -28,7 +28,7 @@ tx CCashLine {
 	@Remarks("Calculated amount of discount")
 	?DiscountAmt Amount;/* 0 */
 	@Remarks("Amount to write-off")
-	?WriteoffAmt Amount;/* 0 */
+	?WriteOffAmt Amount;/* 0 */
 	@Remarks("This Line is generated")
 	?IsGenerated YesNo;/* 'N'                          */
 	@Remarks("The document has been processed")

@@ -1,12 +1,12 @@
 @Remarks("AD_PInstance_Para")
 @Refby("0")
-tx AdPinstancePara {
+tx AdPInstancePara {
 	@Remarks("Instance of the process")
-	!AdPinstance;
+	!AdPInstance;
 	@Remarks("Method of ordering records; lowest number comes first")
 	!SeqNo;
 	@Remarks("Parameter Name")
-	?Parametername Name;
+	?ParameterName Name;
 	@Remarks("Process Parameter")
 	?PString null;/* NULL */
 	@Remarks("Process Parameter")
@@ -20,7 +20,7 @@ tx AdPinstancePara {
 	@Remarks("Process Parameter")
 	?PDateTo null;
 	@Remarks("Information")
-	?Info Note;
+	?Info;
 	@Remarks("Info To")
 	?InfoTo Info;
 	@Remarks("Client/Tenant for this installation.")

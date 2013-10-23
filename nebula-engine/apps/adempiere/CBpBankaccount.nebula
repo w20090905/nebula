@@ -1,8 +1,8 @@
 @Remarks("Bank Account of the Business Partner")
 @Refby("2")
-tx CBpBankaccount {
+tx CBpBankAccount {
 	@Remarks("Bank Account of the Business Partner")
-	!CBpBankaccountId ID;
+	!CBpBankAccountId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -14,21 +14,21 @@ tx CBpBankaccount {
 	@Remarks("Automatic Clearing House")
 	IsAch YesNo;/* 'N'  */
 	@Remarks("Bank Account Type")
-	?Bankaccounttype Attr;
+	?BankAccountType Attr;
 	@Remarks("Bank Routing Number")
-	?Routingno Code;
+	?RoutingNo Code;
 	@Remarks("Account Number")
-	?Accountno Code;
+	?AccountNo Code;
 	@Remarks("Credit Card (Visa, MC, AmEx)")
-	?CreditcardType Attr;
+	?CreditCardType Attr;
 	@Remarks("Credit Card Number")
-	?CreditcardNumber Code;
+	?CreditCardNumber Code;
 	@Remarks("Credit Card Verification code on credit card")
-	?CreditcardVv String;
+	?CreditCardVv String;
 	@Remarks("Expiry Month")
-	?CreditcardExpmm Number;
+	?CreditCardExpMm Number;
 	@Remarks("Expiry Year")
-	?CreditcardExpyy Number;
+	?CreditCardExpYy Number;
 	@Remarks("Name on Credit Card or Account holder")
 	?AName Name;
 	@Remarks("Street address of the Credit Card or Account holder")
@@ -46,14 +46,14 @@ tx CBpBankaccount {
 	@Remarks("Payment Identification - Social Security No")
 	?AIdentSsn String;
 	@Remarks("This address has been verified")
-	?RAvsaddr Address;
+	?RAvsAddr Address;
 	@Remarks("The Zip Code has been verified")
-	?RAvszip String;
+	?RAvsZip String;
 	@Remarks("Country")
 	?ACountry String;
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
 	@Remarks("Business Partner Bank Account usage")
-	?Bpbankacctuse null;/* NULL   */
+	?BpBankAcctUse null;/* NULL   */
 };
 

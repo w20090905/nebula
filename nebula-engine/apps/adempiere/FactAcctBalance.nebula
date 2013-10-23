@@ -6,13 +6,13 @@ type FactAcctBalance {
 	@Remarks("Organizational entity within client")
 	AdOrg;
 	@Remarks("Rules for accounting")
-	CAcctschema;
+	CAcctSchema;
 	@Remarks("Accounting Date")
 	DateAcct Date;
 	@Remarks("Account used")
-	Account CElementvalue;
+	Account CElementValue;
 	@Remarks("The type of posted amount for the transaction")
-	PostIngtype Attr;
+	PostingType YesNo;
 	@Remarks("Product, Service, Item")
 	?MProduct;
 	@Remarks("Identifies a Business Partner")
@@ -20,7 +20,7 @@ type FactAcctBalance {
 	@Remarks("Financial Project")
 	?CProject;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrx AdOrg;
+	?AdOrgTrx AdOrg;
 	@Remarks("Sales coverage region")
 	?CSalesRegion;
 	@Remarks("Business Activity")
@@ -28,27 +28,27 @@ type FactAcctBalance {
 	@Remarks("Marketing Campaign")
 	?CCampaign;
 	@Remarks("Location that inventory was moved to")
-	?CLocto CLocation;
+	?CLocTo CLocation;
 	@Remarks("Location that inventory was moved from")
-	?CLocfrom CLocation;
+	?CLocFrom CLocation;
 	@Remarks("User defined list element #1")
-	?User1 CElementvalue;
+	?User1 CElementValue;
 	@Remarks("User defined list element #2")
-	?User2 CElementvalue;
+	?User2 CElementValue;
 	@Remarks("General Ledger Budget")
 	?GlBudget;
 	@Remarks("Accounted Debit Amount")
-	AmtAcctdr Amount;/* 0  */
+	AmtAcctDr Amount;/* 0  */
 	@Remarks("Accounted Credit Amount")
-	AmtAcctcr Amount;/* 0  */
+	AmtAcctCr Amount;/* 0  */
 	@Remarks("Quantity")
 	Qty Quantity;/* 0  */
 	@Remarks("Sub account for Element Value")
-	?CSubacct;
+	?CSubAcct;
 	@Remarks("User defined accounting Element")
-	?Userelement1Id ID;
+	?UserElement1Id ID;
 	@Remarks("User defined accounting Element")
-	?Userelement2Id ID;
+	?UserElement2Id ID;
 	@Remarks("Phase of a Project")
 	?CProjectPhase;
 	@Remarks("Actual Project Task in a Phase")

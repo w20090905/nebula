@@ -12,8 +12,8 @@ tx STrainingClass {
 	@Remarks("Product, Service, Item")
 	MProduct;
 	@Remarks("First effective day (inclusive)")
-	Startdate Date;
+	StartDate Date;
 	@Remarks("Last effective date (inclusive)")
-	Enddate Date;
+	EndDate Date;
 };
 

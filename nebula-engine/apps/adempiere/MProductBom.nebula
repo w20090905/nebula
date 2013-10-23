@@ -14,10 +14,10 @@ tx MProductBom {
 	@Remarks("Bill of Material Component Product")
 	MProductBom MProduct;
 	@Remarks("Bill of Materials Quantity")
-	Bomqty Quantity;/* 0  */
+	BomQty Quantity;/* 0  */
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Type of BOM")
-	?Bomtype Attr;
+	?BomType Attr;
 };
 

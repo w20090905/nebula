@@ -10,7 +10,7 @@ type IProduct {
 	@Remarks("Has this import been processed")
 	IIsImported YesNo;/* 'N'  */
 	@Remarks("Messages generated from import process")
-	?IErrorMsg Note;
+	?IErrorMsg Msg;
 	@Remarks("Product, Service, Item")
 	?MProduct;
 	@Remarks("Search key for the record in the format required - must be unique")
@@ -44,27 +44,27 @@ type IProduct {
 	@Remarks("Weight of a product")
 	?Weight;/* 0 */
 	@Remarks("Shelf width required")
-	?Shelfwidth Width;
+	?ShelfWidth Width;
 	@Remarks("Shelf height required")
-	?Shelfheight Height;
+	?ShelfHeight Height;
 	@Remarks("Shelf depth required")
-	?Shelfdepth Depth;
+	?ShelfDepth Depth;
 	@Remarks("Units Per Pallet")
-	?Unitsperpallet Number;
+	?UnitsPerPallet Number;
 	@Remarks("This product is no longer available")
 	?Discontinued YesNo;/* 'N' */
 	@Remarks("Discontinued By")
-	?Discontinuedby Date;
+	?DiscontinuedBy Date;
 	@Remarks("URL of  image")
-	?ImageURL URL;
+	?ImageUrl Url;
 	@Remarks("URL for the description")
-	?Descriptionurl Description;
+	?DescriptionUrl Description;
 	@Remarks("The Key of the Business Partner")
 	?BpartnerValue Note;
 	@Remarks("Identifies a Business Partner")
 	?CBpartner;
 	@Remarks("Three letter ISO 4217 Code of the Currency")
-	?IsOCode Note;
+	?IsoCode YesNo;
 	@Remarks("The Currency for this record")
 	?CCurrency;
 	@Remarks("List Price")
@@ -76,9 +76,9 @@ type IProduct {
 	@Remarks("Effective Date of Price")
 	?PriceEffective Date;
 	@Remarks("Product Key of the Business Partner")
-	?Vendorproductno Code;
+	?VendorProductNo Code;
 	@Remarks("Product Category of the Business Partner")
-	?Vendorcategory null;
+	?VendorCategory null;
 	@Remarks("Manufacturer of the Product")
 	?Manufacturer null;
 	@Remarks("Minimum order quantity in UOM")
@@ -86,7 +86,7 @@ type IProduct {
 	@Remarks("Package order size in UOM (e.g. order set of 5 units)")
 	?OrderPack Number;/* 0 */
 	@Remarks("Fixed Cost Per Order")
-	?Costperorder Number;/* 0 */
+	?CostPerOrder Number;/* 0 */
 	@Remarks("Promised days between order and delivery")
 	?DeliveryTimePromised Count;
 	@Remarks("Process Now")

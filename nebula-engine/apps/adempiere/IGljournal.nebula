@@ -1,52 +1,52 @@
 @Remarks("Import General Ledger Journal")
 @Refby("0")
-tx IGljournal {
+tx IGlJournal {
 	@Remarks("Import General Ledger Journal")
-	!IGljournalId ID;
+	!IGlJournalId ID;
 	@Remarks("Client/Tenant for this installation.")
 	?AdClientId ID;
 	@Remarks("Key of the Client")
 	?ClientValue Note;
 	@Remarks("Document Organization (independent from account organization)")
-	?AdOrgdoc AdOrg;
+	?AdOrgDoc AdOrg;
 	@Remarks("Has this import been processed")
 	IIsImported YesNo;/* 'N'  */
 	@Remarks("Messages generated from import process")
-	?IErrorMsg Note;
+	?IErrorMsg Msg;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("The document has been processed")
 	?Processed YesNo;/* 'N' */
 	@Remarks("General Ledger Journal Batch")
-	?GlJournalbatch;
+	?GlJournalBatch;
 	@Remarks("Document Number of the Batch")
-	?Batchdocumentno Code;
+	?BatchDocumentNo Code;
 	@Remarks("Description of the Batch")
-	?Batchdescription Description;
+	?BatchDescription Description;
 	@Remarks("General Ledger Journal")
 	?GlJournal;
 	@Remarks("Document number of the Journal")
-	?Journaldocumentno Code;
+	?JournalDocumentNo Code;
 	@Remarks("The type of posted amount for the transaction")
-	?PostIngtype Attr;
+	?PostingType YesNo;
 	@Remarks("Rules for accounting")
-	?CAcctschema;
+	?CAcctSchema;
 	@Remarks("Name of the Accounting Schema")
-	?Acctschemaname Name;
+	?AcctSchemaName Name;
 	@Remarks("Document type or rules")
-	?CDoctype;
+	?CDocType;
 	@Remarks("Name of the Document Type")
-	?DoctypeName Name;
+	?DocTypeName Name;
 	@Remarks("General Ledger Category")
 	?GlCategory;
 	@Remarks("Name of the Category")
-	?Categoryname Name;
+	?CategoryName Name;
 	@Remarks("Period of the Calendar")
 	?CPeriod;
 	@Remarks("General Ledger Budget")
 	?GlBudget;
 	@Remarks("General Ledger Journal Line")
-	?GlJournalline;
+	?GlJournalLine;
 	@Remarks("Unique line for this document")
 	?Line;
 	@Remarks("Accounting Date")
@@ -54,41 +54,41 @@ tx IGljournal {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Source Debit Amount")
-	?AmtSourcedr Amount;/* 0 */
+	?AmtSourceDr Amount;/* 0 */
 	@Remarks("Accounted Debit Amount")
-	?AmtAcctdr Amount;/* 0 */
+	?AmtAcctDr Amount;/* 0 */
 	@Remarks("Source Credit Amount")
-	?AmtSourcecr Amount;/* 0 */
+	?AmtSourceCr Amount;/* 0 */
 	@Remarks("Accounted Credit Amount")
-	?AmtAcctcr Amount;/* 0 */
+	?AmtAcctCr Amount;/* 0 */
 	@Remarks("The Currency for this record")
 	?CCurrency;
 	@Remarks("Three letter ISO 4217 Code of the Currency")
-	?IsOCode Note;
+	?IsoCode YesNo;
 	@Remarks("Key value for the Currency Conversion Rate Type")
-	?ConversionTypevalue Note;
+	?ConversionTypeValue Note;
 	@Remarks("Currency Conversion Rate Type")
 	?CConversionType;
 	@Remarks("Currency Conversion Rate")
-	?Currencyrate Rate;/* 0 */
+	?CurrencyRate Rate;/* 0 */
 	@Remarks("Unit of Measure")
 	?CUom;
 	@Remarks("Quantity")
 	?Qty Quantity;/* 0 */
 	@Remarks("Valid Account Combination")
-	?CValidcombination;
+	?CValidCombination;
 	@Remarks("Key of the Organization")
-	?Orgvalue Note;
+	?OrgValue Note;
 	@Remarks("Organizational entity within client")
 	?AdOrg;
 	@Remarks("Account used")
-	?Account CElementvalue;
+	?Account CElementValue;
 	@Remarks("Key of Account Element")
-	?Accountvalue Note;
+	?AccountValue Note;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrx AdOrg;
+	?AdOrgTrx AdOrg;
 	@Remarks("Key of the Transaction Organization")
-	?Orgtrxvalue Note;
+	?OrgTrxValue Note;
 	@Remarks("Product, Service, Item")
 	?MProduct;
 	@Remarks("Key of the Product")
@@ -106,9 +106,9 @@ tx IGljournal {
 	@Remarks("Key of the Project")
 	?ProjectValue Note;
 	@Remarks("Location that inventory was moved to")
-	?CLocto CLocation;
+	?CLocTo CLocation;
 	@Remarks("Location that inventory was moved from")
-	?CLocfrom CLocation;
+	?CLocFrom CLocation;
 	@Remarks("Sales coverage region")
 	?CSalesRegion;
 	@Remarks("Business Activity")
@@ -116,12 +116,12 @@ tx IGljournal {
 	@Remarks("Marketing Campaign")
 	?CCampaign;
 	@Remarks("User defined list element #1")
-	?User1 CElementvalue;
+	?User1 CElementValue;
 	@Remarks("User defined list element #2")
-	?User2 CElementvalue;
+	?User2 CElementValue;
 	@Remarks("If selected a new batch is created")
-	?IsCreatenewbatch YesNo;
+	?IsCreateNewBatch YesNo;
 	@Remarks("If selected a new journal within the batch is created")
-	?IsCreatenewjournal YesNo;
+	?IsCreateNewJournal YesNo;
 };
 

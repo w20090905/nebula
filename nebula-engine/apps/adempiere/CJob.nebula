@@ -14,7 +14,7 @@ type CJob {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("Job Position Category")
-	CJobcategory;
+	CJobCategory;
 	@Remarks("Indicates if  this Business Partner is an employee")
 	IsEmployee YesNo;/* 'N'  */
 };

@@ -16,23 +16,23 @@ type AdSequence {
 	@Remarks("Automatically assign the next number")
 	IsAutoSequence YesNo;/* 'Y'  */
 	@Remarks("The number to increment the last document number by")
-	Incrementno SeqNo;
+	IncrementNo SeqNo;
 	@Remarks("Starting number/position")
-	Startno SeqNo;
+	StartNo SeqNo;
 	@Remarks("The next number to be used")
-	Currentnext Number;
+	CurrentNext Number;
 	@Remarks("Next sequence for system use")
-	Currentnextsys Number;
+	CurrentNextSys Number;
 	@Remarks("Activate Audit Trail of what numbers are generated")
 	?IsAudited YesNo;/* 'N'                        */
 	@Remarks("The document number  will be used as the record key")
-	?IsTableid YesNo;/* 'N'                        */
+	?IsTableId YesNo;/* 'N'                        */
 	@Remarks("Prefix before the sequence number")
 	?Prefix Description;/* NULL */
 	@Remarks("Suffix after the number")
 	?Suffix Description;/* NULL */
 	@Remarks("Restart the sequence with Start on every 1/1")
-	?Startnewyear YesNo;/* 'N'                        */
+	?StartNewYear YesNo;/* 'N'                        */
 	@Remarks("Fully qualified date column")
 	?DateColumn String;
 	@Remarks("Java Decimal Pattern")

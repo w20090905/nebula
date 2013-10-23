@@ -1,6 +1,6 @@
 @Remarks("Order Tax")
 @Refby("0")
-type COrdertax {
+type COrderTax {
 	@Remarks("Order")
 	!COrder;
 	@Remarks("Tax identifier")
@@ -10,7 +10,7 @@ type COrdertax {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Base for calculating the tax amount")
-	TaxBaseamt Amount;/* 0  */
+	TaxBaseAmt Amount;/* 0  */
 	@Remarks("Tax Amount for a document")
 	TaxAmt Amount;/* 0  */
 	@Remarks("The document has been processed")

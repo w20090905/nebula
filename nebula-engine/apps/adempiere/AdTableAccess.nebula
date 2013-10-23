@@ -6,7 +6,7 @@ type AdTableAccess {
 	@Remarks("Database Table information")
 	!AdTable;
 	@Remarks("The type of access for this rule")
-	!AccessTyperule Attr;/* 'G'  */
+	!AccessTypeRule Attr;/* 'G'  */
 	@Remarks("Client/Tenant for this installation.")
 	AdClient;
 	@Remarks("Organizational entity within client")
@@ -14,9 +14,9 @@ type AdTableAccess {
 	@Remarks("Field is read only")
 	IsReadonly YesNo;/* 'N'  */
 	@Remarks("Users with this role can create reports")
-	IsCanreport YesNo;/* 'Y'  */
+	IsCanReport YesNo;/* 'Y'  */
 	@Remarks("Users with this role can export data")
-	IsCanexport YesNo;/* 'Y'  */
+	IsCanExport YesNo;/* 'Y'  */
 	@Remarks("Exclude access to the data - if not selected Include access to the data")
 	IsExclude YesNo;/* 'Y'  */
 };

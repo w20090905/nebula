@@ -4,14 +4,14 @@ type RvClickUnprocessed {
 	WClickId ID;
 	AdClientId ID;
 	AdOrgId ID;
-	?Targeturl URL;
+	?TargetUrl Url;
 	?Referrer String;
 	?RemoteHost Host;
 	?RemoteAddr Name;
-	?Useragent String;
+	?UserAgent String;
 	?AcceptLanguage String;
 	Processed YesNo;
-	?WClickcountId ID;
+	?WClickCountId ID;
 	?AdUserId ID;
 	?EMail;
 };

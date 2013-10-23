@@ -24,7 +24,7 @@ type AdProcessPara {
 	@Remarks("Dynamic Validation Rule")
 	?AdValRule;
 	@Remarks("Name of the column in the database")
-	Columnname Name;
+	ColumnName Name;
 	@Remarks("Information maintained in System Element table")
 	IsCentrallyMaintained YesNo;/* 'Y'  */
 	@Remarks("Length of the column in the database")
@@ -34,9 +34,9 @@ type AdProcessPara {
 	@Remarks("The parameter is a range of values")
 	IsRange YesNo;/* 'N'  */
 	@Remarks("Default value hierarchy, separated by ;")
-	?Defaultvalue Note;
+	?DefaultValue Note;
 	@Remarks("Default value hierarchy, separated by ;")
-	?Defaultvalue2 null;
+	?DefaultValue2 null;
 	@Remarks("Format of the value; Can contain fixed format elements, Variables: '_lLoOaAcCa09'")
 	?Vformat Description;
 	@Remarks("Minimum Value for a field")

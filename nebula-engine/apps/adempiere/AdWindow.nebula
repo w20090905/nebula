@@ -14,9 +14,9 @@ type AdWindow {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("Type or classification of a Window")
-	?Windowtype Attr;
+	?WindowType Attr;
 	@Remarks("This is a Sales Transaction")
-	IsSotrx YesNo;/* 'Y'  */
+	IsSoTrx YesNo;/* 'Y'  */
 	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
 	@Remarks("Process Now")
@@ -28,9 +28,9 @@ type AdWindow {
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N' */
 	@Remarks("Window Height")
-	?Winheight Height;
+	?WinHeight Height;
 	@Remarks("Window Width")
-	?Winwidth Width;
+	?WinWidth Width;
 	@Remarks("This functionality is considered Beta")
 	IsBetaFunctionality YesNo;/* 'N'  */
 };

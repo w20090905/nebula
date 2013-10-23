@@ -8,11 +8,11 @@ type IOrder {
 	@Remarks("Organizational entity within client")
 	?AdOrg;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrx AdOrg;
+	?AdOrgTrx AdOrg;
 	@Remarks("Has this import been processed")
 	IIsImported YesNo;/* 'N'  */
 	@Remarks("Messages generated from import process")
-	?IErrorMsg Note;
+	?IErrorMsg Msg;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("The document has been processed")
@@ -28,7 +28,7 @@ type IOrder {
 	@Remarks("Method or manner of product delivery")
 	?MShipper;
 	@Remarks("This is a Sales Transaction")
-	?IsSotrx YesNo;/* 'Y' */
+	?IsSoTrx YesNo;/* 'Y' */
 	@Remarks("Identifies a Business Partner")
 	?CBpartner;
 	@Remarks("Key of the Business Partner")
@@ -38,7 +38,7 @@ type IOrder {
 	@Remarks("Identifies the (ship to) address for this Business Partner")
 	?CBpartnerLocation;
 	@Remarks("Bill to Address")
-	?Billto CBpartnerLocation;
+	?BillTo CBpartnerLocation;
 	@Remarks("Location or Address")
 	?CLocation;
 	@Remarks("Address line 1 for this location")
@@ -52,7 +52,7 @@ type IOrder {
 	@Remarks("Identifies a geographical Region")
 	?CRegion;
 	@Remarks("Name of the Region")
-	?Regionname Name;
+	?RegionName Name;
 	@Remarks("Country")
 	?CCountry;
 	@Remarks("Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1 - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html")
@@ -60,7 +60,7 @@ type IOrder {
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
 	@Remarks("Business Partner Contact Name")
-	?Contactname Name;
+	?ContactName Name;
 	@Remarks("Electronic Mail Address")
 	?EMail;
 	@Remarks("Identifies a telephone number")
@@ -70,13 +70,13 @@ type IOrder {
 	@Remarks("Business Activity")
 	?CActivity;
 	@Remarks("Document type or rules")
-	?CDoctype;
+	?CDocType;
 	@Remarks("Name of the Document Type")
-	?DoctypeName Name;
+	?DocTypeName Name;
 	@Remarks("The terms of Payment (timing, discount)")
 	?CPaymentTerm;
 	@Remarks("Key of the Payment Term")
-	?PaymentTermvalue Note;
+	?PaymentTermValue Note;
 	@Remarks("Order")
 	?COrder;
 	@Remarks("Document sequence number of the document")
@@ -102,7 +102,7 @@ type IOrder {
 	@Remarks("Tax Amount for a document")
 	?TaxAmt Amount;/* 0 */
 	@Remarks("Sales Order Line")
-	?COrderline;
+	?COrderLine;
 	@Remarks("Description of the Line")
 	?LineDescription Description;
 	@Remarks("Unit of Measure")

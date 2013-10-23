@@ -16,6 +16,6 @@ tx KComment {
 	@Remarks("User Session Online or Web")
 	?AdSession;
 	@Remarks("Text Message")
-	TextMsg Note;
+	TextMsg Msg;
 };
 

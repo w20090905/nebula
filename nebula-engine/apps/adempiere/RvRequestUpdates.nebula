@@ -5,7 +5,7 @@ type RvRequestUpdates {
 	?AdOrgId ID;
 	?RRequestId ID;
 	?AdUserId ID;
-	?IsSelfservice YesNo;
+	?IsSelfService YesNo;
 	?RGroupId ID;
 	?RRequestTypeId ID;
 	?RCategoryId ID;

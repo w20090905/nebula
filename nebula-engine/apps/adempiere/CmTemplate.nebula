@@ -14,19 +14,19 @@ type CmTemplate {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("A web project is the main data container for Containers, URLs, Ads, Media etc.")
-	?CmWebproject;
+	?CmWebProject;
 	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
 	@Remarks("Defines whether this content / template is included into another one")
 	IsInclude YesNo;/* 'Y'  */
 	@Remarks("Whether or not this templates uses Ad_s")
-	IsUsead YesNo;/* 'Y'  */
+	IsUseAd YesNo;/* 'Y'  */
 	@Remarks("Template or container uses news channels")
 	IsNewS YesNo;/* 'Y'  */
 	@Remarks("Contains list of elements seperated by CR")
-	?Elements null;
+	?ElementS null;
 	@Remarks("Contains the template code itself")
-	?Templatexst Note;
+	?TemplateXst Note;
 	@Remarks("This is a summary entity")
 	IsSummary YesNo;/* 'N'  */
 	@Remarks("Element is valid")

@@ -12,7 +12,7 @@ type AdPrintFormat {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Table based List Reporting")
-	IsTablebased YesNo;/* 'Y'  */
+	IsTableBased YesNo;/* 'Y'  */
 	@Remarks("If Selected, a Form is printed, if not selected a columnar List report")
 	IsForm YesNo;/* 'N'  */
 	@Remarks("Database Table information")
@@ -24,23 +24,23 @@ type AdPrintFormat {
 	@Remarks("Maintain Print Font")
 	AdPrintFont;
 	@Remarks("The standard Header and Footer is used")
-	IsStandardHeaderfooter YesNo;/* 'Y'  */
+	IsStandardHeaderFooter YesNo;/* 'Y'  */
 	@Remarks("Margin of the Header in 1/72 of an inch")
 	HeaderMargin Length;
 	@Remarks("Margin of the Footer in 1/72 of an inch")
 	FooterMargin Length;
 	@Remarks("Create Copy")
-	?Createcopy YesNo;
+	?CreateCopy YesNo;
 	@Remarks("View used to generate this report")
-	?AdReportview;
+	?AdReportView;
 	@Remarks("Table Format in Reports")
-	?AdPrintTableformat;
+	?AdPrintTableFormat;
 	@Remarks("Name of the Printer")
-	?PrintErName Name;
+	?PrinterName Name;
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 	@Remarks("The Jasper Process used by the printengine if any process defined")
-	?Jasperprocess AdProcess;
+	?JasperProcess AdProcess;
 	@Remarks("ClassName")
 	?ClassName Name;
 	@Remarks("Args")

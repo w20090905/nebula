@@ -16,7 +16,7 @@ type RStatus {
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 	@Remarks("The status is closed")
-	IsOpen YesNo;/* 'N'  */
+	IsoPen YesNo;/* 'N'  */
 	@Remarks("The status is closed")
 	IsClosed YesNo;/* 'N'  */
 	@Remarks("Search key for the record in the format required - must be unique")
@@ -26,14 +26,14 @@ type RStatus {
 	@Remarks("Automatically change the status after entry from web")
 	?UpdateStatus RStatus;
 	@Remarks("Timeout in Days to change Status automatically")
-	?Timeoutdays Count;
+	?TimeOutdays Count;
 	@Remarks("Entry can be updated from the Web")
-	IsWebcanupdate YesNo;/* 'Y'  */
+	IsWebCanUpdate YesNo;/* 'Y'  */
 	@Remarks("Entries with Final Close cannot be re-opened")
-	IsFinalclose YesNo;/* 'N'  */
+	IsFinalClose YesNo;/* 'N'  */
 	@Remarks("Method of ordering records; lowest number comes first")
 	SeqNo;/* 0  */
 	@Remarks("Request Status Category")
-	RStatuscategory;
+	RStatusCategory;
 };
 

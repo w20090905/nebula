@@ -1,6 +1,6 @@
 @Remarks("Tree Node CM Template")
 @Refby("0")
-type AdTreenodecmt {
+type AdTreeNodeCmt {
 	@Remarks("Identifies a Tree")
 	!AdTree;
 	@Remarks("Node_ID")

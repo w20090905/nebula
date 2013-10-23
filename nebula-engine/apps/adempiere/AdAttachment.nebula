@@ -12,10 +12,10 @@ tx AdAttachment {
 	@Remarks("Direct internal record ID")
 	RecordId ID;
 	@Remarks("Name this entity is referred to as")
-	Title String;
+	Title;
 	@Remarks("Binary Data")
-	?Binarydata Note;
+	?BinaryData Note;
 	@Remarks("Text Message")
-	?TextMsg Note;
+	?TextMsg Msg;
 };
 

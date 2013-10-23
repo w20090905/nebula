@@ -2,9 +2,9 @@
 @Refby("0")
 type TReport {
 	@Remarks("Instance of the process")
-	!AdPinstance;
+	!AdPInstance;
 	@Remarks("Report Line")
-	!PaReportline;
+	!PaReportLine;
 	@Remarks("Direct internal record ID")
 	!RecordId ID;
 	@Remarks("Accounting Fact")
@@ -12,7 +12,7 @@ type TReport {
 	@Remarks("Method of ordering records; lowest number comes first")
 	?SeqNo;
 	@Remarks("Level no")
-	?Levelno Count;/* 0 */
+	?LevelNo Count;/* 0 */
 	@Remarks("Alphanumeric identifier of the entity")
 	?Name;
 	@Remarks("Optional short description of the record")

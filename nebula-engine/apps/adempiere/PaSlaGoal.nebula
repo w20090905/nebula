@@ -18,15 +18,15 @@ type PaSlaGoal {
 	@Remarks("Identifies a Business Partner")
 	CBpartner;
 	@Remarks("Valid from including this date (first day)")
-	?Validfrom Date;
+	?ValidFrom Date;
 	@Remarks("Valid to including this date (last day)")
-	?Validto Date;
+	?ValidTo Date;
 	@Remarks("Target value for measure")
-	Measuretarget Length;/* 0  */
+	MeasureTarget Length;/* 0  */
 	@Remarks("Actual value that has been measured.")
-	Measureactual Length;/* 0  */
+	MeasureActual Length;/* 0  */
 	@Remarks("Date the process was last run.")
-	?DateLastrun Date;
+	?DateLastRun Date;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("The document has been processed")

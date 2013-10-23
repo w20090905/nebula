@@ -1,8 +1,8 @@
 @Remarks("Payment Schedule Template")
 @Refby("1")
-tx CPayschedule {
+tx CPaySchedule {
 	@Remarks("Payment Schedule Template")
-	!CPayscheduleId ID;
+	!CPayScheduleId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -10,11 +10,11 @@ tx CPayschedule {
 	@Remarks("The terms of Payment (timing, discount)")
 	CPaymentTerm;
 	@Remarks("Percent of the entire amount")
-	Percentage Number;
+	PercentAge Number;
 	@Remarks("Net Days in which payment is due")
-	Netdays Count;
+	NetDays Count;
 	@Remarks("Day when payment is due net")
-	?Netday null;
+	?NetDay null;
 	@Remarks("Number of days from invoice date to be eligible for discount")
 	DiscountDays Count;
 	@Remarks("Discount in percent")
@@ -22,6 +22,6 @@ tx CPayschedule {
 	@Remarks("Element is valid")
 	IsValid YesNo;/* 'N'  */
 	@Remarks("Days after due date to send first dunning letter")
-	Gracedays Count;
+	GraceDays Count;
 };
 

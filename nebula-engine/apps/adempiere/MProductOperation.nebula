@@ -16,10 +16,10 @@ type MProductOperation {
 	@Remarks("Product, Service, Item")
 	MProduct;
 	@Remarks("Setup time before starting Production")
-	?Setuptime Count;/* 0 */
+	?SetUptime Count;/* 0 */
 	@Remarks("Time to produce one unit")
 	?Unitruntime Count;/* 0 */
 	@Remarks("Time at the end of the operation")
-	?Teardowntime Count;/* 0 */
+	?TeardownTime Count;/* 0 */
 };
 

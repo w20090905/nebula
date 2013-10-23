@@ -14,7 +14,7 @@ type AdAlert {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("Subject of the Alert")
-	AlertSubject Description;
+	AlertSubJect Description;
 	@Remarks("Message of the Alert")
 	AlertMessage Note;
 	@Remarks("Send alerts to recipient only if the client security rules of the role allows")

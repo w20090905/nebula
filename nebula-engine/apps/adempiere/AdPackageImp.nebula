@@ -28,11 +28,11 @@ type AdPackageImp {
 	@Remarks("Creator")
 	?Creator null;
 	@Remarks("CreatorContact")
-	?Creatorcontact null;
+	?CreatorContact null;
 	@Remarks("CreatedDate")
-	?Createddate String;
+	?CreatedDate String;
 	@Remarks("UpdatedDate")
-	?Updateddate String;
+	?UpdatedDate String;
 	@Remarks("Uninstall")
 	?Uninstall String;
 };

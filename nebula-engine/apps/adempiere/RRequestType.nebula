@@ -14,25 +14,25 @@ type RRequestType {
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
-	IsSelfservice YesNo;/* 'Y' */
+	IsSelfService YesNo;/* 'Y' */
 	@Remarks("Tolerance in days between the Date Next Action and the date the request is regarded as overdue")
-	Duedatetolerance Amount;/* 7  */
+	DueDateTolerance Amount;/* 7  */
 	@Remarks("Send EMail when Request becomes overdue")
-	IsEmailwhenoverdue YesNo;/* 'N'  */
+	IsEmailWhenOverdue YesNo;/* 'N'  */
 	@Remarks("Send EMail when Request becomes due")
-	IsEmailwhendue YesNo;/* 'N'  */
+	IsEmailWhenDue YesNo;/* 'N'  */
 	@Remarks("Is this invoiced?")
 	?IsInvoiceD YesNo;
 	@Remarks("Automatic Due Date Days")
-	?AutoDuedatedays Count;
+	?AutoDueDateDays Count;
 	@Remarks("Type of Confidentiality")
-	Confidentialtype Attr;/* 'C'  */
+	ConfidentialType Attr;/* 'C'  */
 	@Remarks("Automatically create BOM (Engineering) Change Request")
-	IsAutoChangerequest YesNo;/* 'N'  */
+	IsAutoChangeRequest YesNo;/* 'N'  */
 	@Remarks("Can enter confidential information")
-	IsConfidentialinfo YesNo;/* 'N'  */
+	IsConfidentialInfo YesNo;/* 'N'  */
 	@Remarks("Request Status Category")
-	RStatuscategory;
+	RStatusCategory;
 	@Remarks("Index the document for the internal search engine")
 	IsIndexed YesNo;/* 'Y'  */
 };

@@ -18,6 +18,6 @@ type KTopic {
 	@Remarks("Public can read entry")
 	IsPublic YesNo;/* 'Y'  */
 	@Remarks("Public can write entries")
-	IsPublicwrite YesNo;/* 'Y' */
+	IsPublicWrite YesNo;/* 'Y' */
 };
 

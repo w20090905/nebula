@@ -10,16 +10,16 @@ tx CmNewSitem {
 	@Remarks("News channel for rss feed")
 	CmNewSchannel;
 	@Remarks("Name this entity is referred to as")
-	?Title String;
+	?Title;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Author/Creator of the Entity")
 	?Author null;
 	@Remarks("Contains URL to a target")
-	?Linkurl URL;
+	?Linkurl Url;
 	@Remarks("Date on which this article will / should get published")
 	?Pubdate Date;
 	@Remarks("Contains the content itself")
-	?Contenthtml Note;
+	?ContentHtml Note;
 };
 

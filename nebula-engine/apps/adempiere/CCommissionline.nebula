@@ -1,8 +1,8 @@
 @Remarks("Commission Line")
 @Refby("1")
-tx CCommissionline {
+tx CCommissionLine {
 	@Remarks("Commission Line")
-	!CCommissionlineId ID;
+	!CCommissionLineId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -14,17 +14,17 @@ tx CCommissionline {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Subtract Amount for generating commissions")
-	AmtSubtract Amount;
+	AmtSubTract Amount;
 	@Remarks("Multiplier Amount for generating commissions")
 	AmtMultiplier Amount;
 	@Remarks("Quantity to subtract when generating commissions")
-	QtySubtract Quantity;
+	QtySubTract Quantity;
 	@Remarks("Value to multiply quantities by for generating commissions.")
 	QtyMultiplier Quantity;
 	@Remarks("Do not generate negative commissions")
-	IsPositiveonly YesNo;/* 'Y'  */
+	IsPositiveOnly YesNo;/* 'Y'  */
 	@Remarks("Commission only Orders or Invoices, where this Sales Rep is entered")
-	Commissionorders YesNo;/* 'N'  */
+	CommissionOrders YesNo;/* 'N'  */
 	@Remarks("Organizational entity within client")
 	?Org AdOrg;
 	@Remarks("Category of a Product")

@@ -1,8 +1,8 @@
 @Remarks("AD_Package_Imp_Backup_ID")
 @Refby("0")
-tx AdPackageImpBackup {
+tx AdPackageImpBackUp {
 	@Remarks("AD_Package_Imp_Backup_ID")
-	!AdPackageImpBackupId ID;
+	!AdPackageImpBackUpId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -22,7 +22,7 @@ tx AdPackageImpBackup {
 	@Remarks("AD_Package_Imp_Org_Dir")
 	?AdPackageImpOrgDir null;
 	@Remarks("ColValue")
-	?Colvalue Note;
+	?ColValue Note;
 	@Remarks("Uninstall")
 	?Uninstall String;
 };

@@ -1,8 +1,8 @@
 @Remarks("CM Template Table Link")
 @Refby("2")
-type CmTemplatetable {
+type CmTemplateTable {
 	@Remarks("CM Template Table Link")
-	!CmTemplatetableId ID;
+	!CmTemplateTableId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")

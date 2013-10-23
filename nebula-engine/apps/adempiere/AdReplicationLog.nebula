@@ -10,9 +10,9 @@ tx AdReplicationLog {
 	@Remarks("Data Replication Run")
 	AdReplicationRun;
 	@Remarks("Data Replication Strategy Table Info")
-	?AdReplicationtable;
+	?AdReplicationTable;
 	@Remarks("Process Message")
-	?PMsg Note;
+	?PMsg Msg;
 	@Remarks("The data is successfully replicated")
 	IsReplicated YesNo;/* 'N'  */
 };

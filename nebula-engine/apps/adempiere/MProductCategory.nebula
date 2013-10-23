@@ -20,11 +20,11 @@ type MProductCategory {
 	@Remarks("Group of Assets")
 	?AAssetGroup;
 	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
-	IsSelfservice YesNo;/* 'Y'  */
+	IsSelfService YesNo;/* 'Y'  */
 	@Remarks("Color used for printing and display")
 	?AdPrintColor;
 	@Remarks("Material Movement Policy")
-	Mmpolicy null;/* 'F'  */
+	MmPoLicy String;/* 'F'  */
 	@Remarks("Parent Product Category")
 	?MProductCategoryParent MProductCategory;
 };

@@ -1,8 +1,8 @@
 @Remarks("Desktop Workbench")
 @Refby("0")
-tx AdDesktopworkbench {
+tx AdDesktopWorkbench {
 	@Remarks("Desktop Workbench")
-	!AdDesktopworkbenchId ID;
+	!AdDesktopWorkbenchId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")

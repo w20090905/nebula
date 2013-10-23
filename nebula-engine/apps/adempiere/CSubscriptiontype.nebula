@@ -1,8 +1,8 @@
 @Remarks("Type of subscription")
 @Refby("2")
-type CSubscriptiontype {
+type CSubscriptionType {
 	@Remarks("Type of subscription")
-	!CSubscriptiontypeId ID;
+	!CSubscriptionTypeId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Alphanumeric identifier of the entity")

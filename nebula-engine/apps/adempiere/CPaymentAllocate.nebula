@@ -16,12 +16,12 @@ tx CPaymentAllocate {
 	@Remarks("Calculated amount of discount")
 	DiscountAmt Amount;/* 0  */
 	@Remarks("Amount to write-off")
-	WriteoffAmt Amount;/* 0  */
+	WriteOffAmt Amount;/* 0  */
 	@Remarks("Over-Payment (unallocated) or Under-Payment (partial payment) Amount")
-	Overunderamt Amount;/* 0  */
+	OverUnderAmt Amount;/* 0  */
 	@Remarks("Invoice Amt")
 	?InvoiceAmt Amount;/* 0 */
 	@Remarks("Allocation Line")
-	?CAllocationline;
+	?CAllocationLine;
 };
 

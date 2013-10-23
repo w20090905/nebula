@@ -1,8 +1,8 @@
 @Remarks("Web Broadcast Server")
 @Refby("1")
-type CmBroadcastserver {
+type CmBroadcastServer {
 	@Remarks("Web Broadcast Server")
-	!CmBroadcastserverId ID;
+	!CmBroadcastServerId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -16,8 +16,8 @@ type CmBroadcastserver {
 	@Remarks("Defines the IP address to transfer data to")
 	Address null;
 	@Remarks("Date when last synchronized")
-	?Lastsynchronized null;
+	?LastSyncHronized null;
 	@Remarks("A web project is the main data container for Containers, URLs, Ads, Media etc.")
-	?CmWebproject;
+	?CmWebProject;
 };
 

@@ -18,13 +18,13 @@ type CCommission {
 	@Remarks("Frequency of event")
 	FrequencyType Attr;
 	@Remarks("Basis for the calculation the commission")
-	Docbasistype Attr;
+	DocBasisType Attr;
 	@Remarks("List document details")
-	Listdetails YesNo;/* 'N'  */
+	ListDetails YesNo;/* 'N'  */
 	@Remarks("Date the process was last run.")
-	?DateLastrun Date;
+	?DateLastRun Date;
 	@Remarks("Process which will generate a new document lines based on an existing document")
-	?Createfrom YesNo;
+	?CreateFrom YesNo;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Additional document charges")

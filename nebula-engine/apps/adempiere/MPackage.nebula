@@ -16,12 +16,12 @@ tx MPackage {
 	@Remarks("Method or manner of product delivery")
 	MShipper;
 	@Remarks("Tracking Info")
-	?Trackinginfo Note;
+	?TrackingInfo Info;
 	@Remarks("Date a product was received")
 	?DateReceived Date;
 	@Remarks("Information of the receipt of the package (acknowledgement)")
-	?Receivedinfo Note;
+	?ReceivedInfo Info;
 	@Remarks("Shipment Date/Time")
-	?Shipdate Date;
+	?ShipDate Date;
 };
 

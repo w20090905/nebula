@@ -18,17 +18,17 @@ type AdPrintForm {
 	@Remarks("Print Format for separate Remittances")
 	?RemittancePrintFormat AdPrintFormat;
 	@Remarks("Print Format for Shipments, Receipts, Pick Lists")
-	?ShipmentPrintFormat AdPrintFormat;
+	?ShipMentPrintFormat AdPrintFormat;
 	@Remarks("Email text used for sending invoices")
-	?InvoiceMailtext RMailtext;
+	?InvoiceMailText RMailText;
 	@Remarks("Email text used for sending order acknowledgements or quotations")
-	?OrderMailtext RMailtext;
+	?OrderMailText RMailText;
 	@Remarks("Email text used for sending payment remittances")
-	?RemittanceMailtext RMailtext;
+	?RemittanceMailText RMailText;
 	@Remarks("Email text used for sending delivery notes")
-	?ShipmentMailtext RMailtext;
+	?ShipMentMailText RMailText;
 	@Remarks("Standard text for Project EMails")
-	?ProjectMailtext RMailtext;
+	?ProjectMailText RMailText;
 	@Remarks("Standard Project Print Format")
 	?ProjectPrintFormat AdPrintFormat;
 };

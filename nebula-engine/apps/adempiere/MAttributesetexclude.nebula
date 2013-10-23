@@ -1,17 +1,17 @@
 @Remarks("Exclude the ability to enter Attribute Sets")
 @Refby("0")
-tx MAttributesetexclude {
+tx MAttributeSetExclude {
 	@Remarks("Exclude the ability to enter Attribute Sets")
-	!MAttributesetexcludeId ID;
+	!MAttributeSetExcludeId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Product Attribute Set")
-	MAttributeset;
+	MAttributeSet;
 	@Remarks("Database Table information")
 	AdTable;
 	@Remarks("This is a Sales Transaction")
-	IsSotrx YesNo;/* 'Y'  */
+	IsSoTrx YesNo;/* 'Y'  */
 };
 

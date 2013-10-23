@@ -1,7 +1,7 @@
 @Remarks("")
 @Refby("0")
-type CRfqresponseV {
-	CRfqresponseId ID;
+type CRfqResponseV {
+	CRfqResponseId ID;
 	CRfqId ID;
 	AdClientId ID;
 	AdOrgId ID;
@@ -12,18 +12,18 @@ type CRfqresponseV {
 	?Description;
 	?Help;
 	CCurrencyId ID;
-	IsOCode Note;
+	IsoCode YesNo;
 	DateResponse Date;
-	?DateWorkstart Date;
+	?DateWorkStart Date;
 	?DeliveryDays Count;
 	CBpartnerId ID;
-	Bpname Name;
-	?Bpname2 null;
+	BpName Name;
+	?BpName2 null;
 	CBpartnerLocationId ID;
 	?CLocationId ID;
 	?AdUserId ID;
-	?Title String;
+	?Title;
 	?Phone;
-	?Contactname Name;
+	?ContactName Name;
 };
 

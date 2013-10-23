@@ -3,9 +3,9 @@
 type AdChangeLogV {
 	AdSessionId ID;
 	AdChangeLogId ID;
-	Tablename Name;
+	TableName Name;
 	RecordId ID;
-	Columnname Name;
+	ColumnName Name;
 	?OldValue Note;
 	?NewValue Note;
 	*Name;

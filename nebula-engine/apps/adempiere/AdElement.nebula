@@ -8,7 +8,7 @@ type AdElement {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;/* NULL */
 	@Remarks("Name of the column in the database")
-	Columnname Name;
+	ColumnName Name;
 	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
 	@Remarks("Alphanumeric identifier of the entity")
@@ -26,6 +26,6 @@ type AdElement {
 	@Remarks("Description in PO Screens")
 	?PoDescription Description;
 	@Remarks("Help for PO Screens")
-	?PoHelp Note;
+	?PoHelp Help;
 };
 

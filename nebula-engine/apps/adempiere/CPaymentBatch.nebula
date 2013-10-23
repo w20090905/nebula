@@ -14,7 +14,7 @@ type CPaymentBatch {
 	@Remarks("Document sequence number of the document")
 	?DocumentNo Code;
 	@Remarks("Processing date")
-	?Processingdate Date;
+	?ProcessingDate Date;
 	@Remarks("Process Now")
 	Processing YesNo;
 	@Remarks("The document has been processed")

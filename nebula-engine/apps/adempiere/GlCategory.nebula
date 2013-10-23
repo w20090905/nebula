@@ -12,10 +12,10 @@ type GlCategory {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Source of the Journal with this category")
-	Categorytype Attr;
+	CategoryType Attr;
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 	@Remarks("Logical type of document")
-	?Docbasetype Attr;
+	?DocBaseType Attr;
 };
 

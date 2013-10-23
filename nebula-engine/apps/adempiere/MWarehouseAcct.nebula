@@ -4,18 +4,18 @@ type MWarehouseAcct {
 	@Remarks("Storage Warehouse and Service Point")
 	!MWarehouse;
 	@Remarks("Rules for accounting")
-	!CAcctschema;
+	!CAcctSchema;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Warehouse Inventory Asset Account - Currently not used")
-	WInventoryAcct CValidcombination;
+	WInventoryAcct CValidCombination;
 	@Remarks("Account for Inventory value adjustments for Actual Costing")
-	WInvactualadjustAcct CValidcombination;
+	WInvActualAdjustAcct CValidCombination;
 	@Remarks("Warehouse Differences Account")
-	WDifferencesAcct CValidcombination;
+	WDifferencesAcct CValidCombination;
 	@Remarks("Account for Inventory Revaluation")
-	WRevaluationAcct CValidcombination;
+	WRevaluationAcct CValidCombination;
 };
 

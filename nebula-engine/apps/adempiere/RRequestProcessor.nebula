@@ -16,23 +16,23 @@ type RRequestProcessor {
 	@Remarks("Frequency of event")
 	FrequencyType Attr;
 	@Remarks("Date the process was last run.")
-	?DateLastrun Date;
+	?DateLastRun Date;
 	@Remarks("Date the process will run next")
-	?DateNextrun Date;
+	?DateNextRun Date;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Send email alert after number of days due (0=no alerts)")
-	Overduealertdays Count;
+	OverdueAlertDays Count;
 	@Remarks("Escalation to superior after number of due days (0 = no)")
-	Overdueassigndays Count;
+	OverdueAsSignDays Count;
 	@Remarks("Supervisor for this user/organization - used for escalation and approval")
 	Supervisor AdUser;
 	@Remarks("Number of days to keep the log entries")
-	KeepLogdays Count;
+	KeepLogDays Count;
 	@Remarks("Days between sending Reminder Emails for a due or inactive Document")
 	Reminddays Count;/* 7  */
 	@Remarks("Send Alert when there is no activity after days (0= no alert)")
-	Inactivityalertdays Count;/* 0  */
+	InactivityAlertDays Count;/* 0  */
 	@Remarks("Type of request (e.g. Inquiry, Complaint, ..)")
 	?RRequestType;
 };

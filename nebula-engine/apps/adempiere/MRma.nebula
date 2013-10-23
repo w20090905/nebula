@@ -22,13 +22,13 @@ type MRma {
 	@Remarks("Order")
 	?COrder;
 	@Remarks("Document type or rules")
-	CDoctype;
+	CDocType;
 	@Remarks("Sales Representative or Company Agent")
 	SalesRep AdUser;
 	@Remarks("The targeted status of the document")
-	Docaction Attr;
+	DocAction Attr;
 	@Remarks("The current status of the document")
-	Docstatus Attr;
+	DocStatus Attr;
 	@Remarks("Indicates if this document requires approval")
 	IsApproved YesNo;/* 'N'  */
 	@Remarks("Amount")
@@ -42,8 +42,8 @@ type MRma {
 	@Remarks("Identifies a Business Partner")
 	?CBpartner;
 	@Remarks("This is a Sales Transaction")
-	IsSotrx YesNo;/* 'Y'  */
+	IsSoTrx YesNo;/* 'Y'  */
 	@Remarks("Generate To")
-	?Generateto Attr;/* NULL */
+	?GenerateTo Attr;/* NULL */
 };
 

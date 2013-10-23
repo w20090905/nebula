@@ -16,7 +16,7 @@ type AdTabTrl {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("Warning displayed when saving")
-	?Commitwarning Note;
+	?CommitWarning Note;
 	@Remarks("This column is translated")
 	IsTranslated YesNo;/* 'N'  */
 };

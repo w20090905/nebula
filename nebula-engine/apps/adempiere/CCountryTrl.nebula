@@ -16,6 +16,6 @@ type CCountryTrl {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Name of the Region")
-	?Regionname Name;
+	?RegionName Name;
 };
 

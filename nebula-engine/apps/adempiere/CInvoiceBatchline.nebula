@@ -1,8 +1,8 @@
 @Remarks("Expense Invoice Batch Line")
 @Refby("0")
-tx CInvoiceBatchline {
+tx CInvoiceBatchLine {
 	@Remarks("Expense Invoice Batch Line")
-	!CInvoiceBatchlineId ID;
+	!CInvoiceBatchLineId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -12,7 +12,7 @@ tx CInvoiceBatchline {
 	@Remarks("Unique line for this document")
 	Line;/* 0  */
 	@Remarks("Document type or rules")
-	CDoctype;
+	CDocType;
 	@Remarks("Document sequence number of the document")
 	DocumentNo Code;
 	@Remarks("Date printed on Invoice")
@@ -34,7 +34,7 @@ tx CInvoiceBatchline {
 	@Remarks("Tax is included in the price")
 	IsTaxIncluded YesNo;/* 'N'  */
 	@Remarks("Line Extended Amount (Quantity * Actual Price) without Freight and Charges")
-	LineNetamt Amount;/* 0  */
+	LineNetAmt Amount;/* 0  */
 	@Remarks("Tax identifier")
 	CTax;
 	@Remarks("Tax Amount for a document")
@@ -46,11 +46,11 @@ tx CInvoiceBatchline {
 	@Remarks("Business Activity")
 	?CActivity;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrx AdOrg;
+	?AdOrgTrx AdOrg;
 	@Remarks("User defined list element #1")
-	?User1 CElementvalue;
+	?User1 CElementValue;
 	@Remarks("User defined list element #2")
-	?User2 CElementvalue;
+	?User2 CElementValue;
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("Invoice Identifier")

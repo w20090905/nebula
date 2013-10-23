@@ -18,7 +18,7 @@ type CBpGroup {
 	@Remarks("Color used for printing and display")
 	?AdPrintColor;
 	@Remarks("Can enter confidential information")
-	IsConfidentialinfo YesNo;/* 'N'  */
+	IsConfidentialInfo YesNo;/* 'N'  */
 	@Remarks("Base of Priority")
 	?PriorityBase null;
 	@Remarks("Unique identifier of a Price List")
@@ -30,9 +30,9 @@ type CBpGroup {
 	@Remarks("Schema to calculate the purchase trade discount percentage")
 	?PoDiscountSchema MDiscountSchema;
 	@Remarks("Credit Watch - Percent of Credit Limit when OK switches to Watch")
-	?Creditwatchpercent Percent;
+	?CreditWatchPercent Percent;
 	@Remarks("PO-Invoice Match Price Tolerance in percent of the purchase price")
-	?PriceMatchtolerance Number;
+	?PriceMatchTolerance Number;
 	@Remarks("Dunning Rules for overdue invoices")
 	?CDunning;
 };

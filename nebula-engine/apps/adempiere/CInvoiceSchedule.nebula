@@ -20,13 +20,13 @@ type CInvoiceSchedule {
 	@Remarks("Day to generate invoices")
 	?InvoiceWeekday null;
 	@Remarks("Last day in the week for shipments to be included")
-	?InvoiceWeekdaycutoff null;
+	?InvoiceWeekdayCutOff null;
 	@Remarks("Send invoices on even weeks")
-	?Eveninvoiceweek YesNo;/* 'Y'                              */
+	?EvenInvoiceWeek YesNo;/* 'Y'                              */
 	@Remarks("Day of Invoice Generation")
 	?InvoiceDay Number;
 	@Remarks("Last day for including shipments")
-	?InvoiceDaycutoff Number;
+	?InvoiceDayCutOff Number;
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 };

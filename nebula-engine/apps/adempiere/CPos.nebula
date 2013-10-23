@@ -22,15 +22,15 @@ type CPos {
 	@Remarks("Storage Warehouse and Service Point")
 	MWarehouse;
 	@Remarks("Name of the Printer")
-	?PrintErName Name;
+	?PrinterName Name;
 	@Remarks("POS Function Key Layout")
-	?CPoskeylayout;
+	?CPosKeyLayout;
 	@Remarks("Allow modifying the price")
-	IsModifyprice YesNo;/* 'N'  */
+	IsModifyPrice YesNo;/* 'N'  */
 	@Remarks("Business Partner used for creating new Business Partners on the fly")
 	?CBpartnerCashTrx CBpartner;
 	@Remarks("Document type or rules")
-	?CDoctype;
+	?CDocType;
 	@Remarks("CashDrawer")
 	?CashDrawer null;
 };

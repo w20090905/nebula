@@ -1,8 +1,8 @@
 @Remarks("Issue System")
 @Refby("2")
-tx RIsSueSYstem {
+tx RIssuesYstem {
 	@Remarks("System creating the issue")
-	!RIsSueSYstemId ID;
+	!RIssuesYstemId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -10,9 +10,9 @@ tx RIsSueSYstem {
 	@Remarks("JDBC URL of the database server")
 	Address Name;
 	@Remarks("Information to help profiling the system for solving support issues")
-	?Statisticsinfo Note;
+	?StatisticsInfo Info;
 	@Remarks("Information to help profiling the system for solving support issues")
-	?Profileinfo Note;
+	?ProfileInfo Info;
 	@Remarks("Status of the system - Support priority depends on system status")
 	SystemStatus Attr;
 	@Remarks("Asset used internally or by customers")

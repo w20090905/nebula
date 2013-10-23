@@ -16,11 +16,11 @@ type CBpRelation {
 	@Remarks("Identifies the (ship to) address for this Business Partner")
 	?CBpartnerLocation;
 	@Remarks("Business Partner Shipment Address")
-	IsShipto YesNo;/* 'N'  	  */
+	IsShipTo YesNo;/* 'N'  	  */
 	@Remarks("Business Partner Invoice/Bill Address")
-	IsBillto YesNo;/* 'N'  	  */
+	IsBillTo YesNo;/* 'N'  	  */
 	@Remarks("Business Partner pays from that address and we_ll send dunning letters there")
-	IsPayfrom YesNo;/* 'N'  	  */
+	IsPayFrom YesNo;/* 'N'  	  */
 	@Remarks("Business Partner payment address")
 	IsRemitto YesNo;/* 'N'  	  */
 	@Remarks("Related Business Partner")

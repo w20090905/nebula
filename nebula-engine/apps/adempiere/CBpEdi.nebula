@@ -16,11 +16,11 @@ type CBpEdi {
 	@Remarks("Storage Warehouse and Service Point")
 	MWarehouse;
 	@Remarks("EDI Type")
-	Editype Attr;
+	EdiType Attr;
 	@Remarks("Activate Audit Trail of what numbers are generated")
 	IsAudited YesNo;/* 'N'  */
 	@Remarks("EDI Identification Number")
-	Customerno Code;
+	CustomerNo Code;
 	@Remarks("Document Sequence")
 	AdSequence;
 	@Remarks("EMail address to send requests to - e.g. edi@manufacturer.com")
@@ -34,16 +34,16 @@ type CBpEdi {
 	@Remarks("Email address to send error messages to")
 	EmailErrorTo EMail;
 	@Remarks("Send informational messages and copies")
-	IsInfosent YesNo;/* 'N'  */
+	IsInfoSent YesNo;/* 'N'  */
 	@Remarks("EMail address to send informational messages and copies")
 	EmailInfoTo EMail;
 	@Remarks("Quantity Availability Inquiry")
-	Sendinquiry YesNo;/* 'Y'  */
+	SendInquiry YesNo;/* 'Y'  */
 	@Remarks("Received Inquiry Reply")
-	Receiveinquiryreply YesNo;/* 'Y'  */
+	ReceiveInquiryreply YesNo;/* 'Y'  */
 	@Remarks("Send Order")
-	Sendorder YesNo;/* 'Y'  */
+	SendOrder YesNo;/* 'Y'  */
 	@Remarks("Receive Order Reply")
-	Receiveorderreply YesNo;/* 'Y'  */
+	ReceiveOrderReply YesNo;/* 'Y'  */
 };
 

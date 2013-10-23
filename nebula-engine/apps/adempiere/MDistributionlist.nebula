@@ -1,8 +1,8 @@
 @Remarks("Distribution Lists allow to distribute products to a selected list of partners")
 @Refby("3")
-type MDistributionlist {
+type MDistributionList {
 	@Remarks("Distribution Lists allow to distribute products to a selected list of partners")
-	!MDistributionlistId ID;
+	!MDistributionListId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -14,7 +14,7 @@ type MDistributionlist {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("Total of relative weight in a distribution")
-	?Ratiototal Number;
+	?RatioTotal Number;
 	@Remarks("Process Now")
 	?Processing YesNo;
 };

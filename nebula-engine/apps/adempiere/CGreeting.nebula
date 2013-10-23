@@ -12,7 +12,7 @@ type CGreeting {
 	@Remarks("For letters, e.g. 'Dear {0}' or 'Dear Mr. {0}' - At runtime, '{0}' is replaced by the name")
 	?Greeting String;
 	@Remarks("Print only the first name in greetings")
-	IsFirstnameonly YesNo;/* 'N'  */
+	IsFirstNameOnly YesNo;/* 'N'  */
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 };

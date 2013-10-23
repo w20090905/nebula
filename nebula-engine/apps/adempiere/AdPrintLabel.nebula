@@ -14,7 +14,7 @@ type AdPrintLabel {
 	@Remarks("Database Table information")
 	AdTable;
 	@Remarks("Name of the Printer")
-	?PrintErName Name;
+	?PrinterName Name;
 	@Remarks("Landscape orientation")
 	IsLandscape YesNo;/* 'Y'  */
 	@Remarks("Height of the label")
@@ -22,6 +22,6 @@ type AdPrintLabel {
 	@Remarks("Width of the Label")
 	LabelWidth Width;
 	@Remarks("Label Printer Definition")
-	AdLabelPrintEr;
+	AdLabelPrinter;
 };
 

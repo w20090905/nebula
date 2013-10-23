@@ -10,15 +10,15 @@ type RvCost {
 	IsBom YesNo;
 	ProductType Attr;
 	MProductCategoryId ID;
-	MCosttypeId ID;
-	MCostelementId ID;
-	Costelementtype Attr;
-	?Costingmethod Attr;
+	MCostTypeId ID;
+	MCostElementId ID;
+	CostElementType Attr;
+	?CostingMethod Attr;
 	IsCalculated YesNo;
-	CAcctschemaId ID;
+	CAcctSchemaId ID;
 	CCurrencyId ID;
-	Currentcostprice Price;
-	?Futurecostprice Price;
+	CurrentCostPrice Price;
+	?FutureCostPrice Price;
 	?Description;
 };
 

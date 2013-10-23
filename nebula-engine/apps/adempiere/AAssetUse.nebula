@@ -5,8 +5,8 @@ tx AAssetUse {
 	AdClientId ID;
 	AdOrgId ID;
 	AAsset;
-	Usedate Date;
-	Useunits Number;
+	UsedAte Date;
+	UseUnits Number;
 	?Description;
 };
 

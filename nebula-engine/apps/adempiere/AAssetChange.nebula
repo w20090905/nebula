@@ -8,14 +8,14 @@ tx AAssetChange {
 	ChangeType Attr;
 	ChangeDate Date;
 	?ChangeAmt Amount;/* 0 */
-	?Uselifeyears Count;
-	?Uselifemonths Count;
-	?Lifeuseunits Number;
-	?Assetdepreciationdate Date;
+	?UseLifeYears Count;
+	?UseLifeMonths Count;
+	?LifeUseUnits Number;
+	?AssetDepreciationDate Date;
 	?AAssetRetirement;
 	?AAssetAddition;
-	?Serno Code;
+	?SerNo Code;
 	?LOT;
-	?Versionno Code;
+	?VersionNo Code;
 };
 

@@ -1,6 +1,6 @@
 @Remarks("Tree Node CM Container")
 @Refby("0")
-type AdTreenodecmc {
+type AdTreeNodeCmc {
 	@Remarks("Identifies a Tree")
 	!AdTree;
 	@Remarks("Node_ID")

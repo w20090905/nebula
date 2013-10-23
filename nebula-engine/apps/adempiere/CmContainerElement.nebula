@@ -16,7 +16,7 @@ type CmContainerElement {
 	@Remarks("Web Container contains content like images, text etc.")
 	CmContainer;
 	@Remarks("Contains the content itself")
-	?Contenthtml Note;
+	?ContentHtml Note;
 	@Remarks("Element is valid")
 	IsValid YesNo;/* 'Y'  */
 };

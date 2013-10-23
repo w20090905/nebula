@@ -3,16 +3,16 @@
 type RvMTransaction {
 	AdClientId ID;
 	AdOrgId ID;
-	Movementdate Date;
-	Movementqty Quantity;
+	MovementDate Date;
+	MovementQty Quantity;
 	MProductId ID;
 	MLocatorId ID;
-	MAttributesetinstanceId ID;
+	MAttributeSetInstanceId ID;
 	MProductCategoryId ID;
 	Value String;
 	CBpartnerId ID;
 	?PricePo Number;
-	?PriceLastpo Number;
+	?PriceLastPo Number;
 	?PriceList Number;
 };
 

@@ -26,7 +26,7 @@ type ARegistration {
 	@Remarks("The system is in production")
 	IsInproduction YesNo;/* 'N'  */
 	@Remarks("You allow to publish the information, not just statistical summary info")
-	IsAllowpublish YesNo;/* 'Y'  */
+	IsAllowPublish YesNo;/* 'Y'  */
 	@Remarks("Remote host Info")
 	?RemoteHost Host;
 	@Remarks("Remote Address")
@@ -34,7 +34,7 @@ type ARegistration {
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Date when Asset was put into service")
-	?Assetservicedate Date;
+	?AssetServiceDate Date;
 	@Remarks("Optional additional user defined information")
 	?Note;
 };

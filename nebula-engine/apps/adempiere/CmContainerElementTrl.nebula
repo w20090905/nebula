@@ -12,7 +12,7 @@ type CmContainerElementTrl {
 	@Remarks("This column is translated")
 	IsTranslated YesNo;/* 'N'  */
 	@Remarks("Contains the content itself")
-	?Contenthtml Note;
+	?ContentHtml Note;
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Optional short description of the record")

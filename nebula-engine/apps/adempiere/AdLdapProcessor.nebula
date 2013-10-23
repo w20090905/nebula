@@ -14,13 +14,13 @@ type AdLdapProcessor {
 	@Remarks("The port the server is listening")
 	LdapPort Port;/* 0  */
 	@Remarks("Date the process was last run.")
-	?DateLastrun Date;
+	?DateLastRun Date;
 	@Remarks("Date the process will run next")
-	?DateNextrun Date;
+	?DateNextRun Date;
 	@Remarks("Supervisor for this user/organization - used for escalation and approval")
 	Supervisor AdUser;
 	@Remarks("Number of days to keep the log entries")
-	KeepLogdays Count;/* 0  */
+	KeepLogDays Count;/* 0  */
 	@Remarks("Process Now")
 	?Processing YesNo;
 };

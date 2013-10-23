@@ -16,9 +16,9 @@ type MPriceListVersion {
 	@Remarks("Schema to calculate the trade discount percentage")
 	MDiscountSchema;
 	@Remarks("Valid from including this date (first day)")
-	Validfrom Date;
+	ValidFrom Date;
 	@Remarks("Create")
-	?Proccreate null;
+	?ProcCreate null;
 	@Remarks("Source for Price list calculations")
 	?MPriceListVersionBase MPriceListVersion;
 };

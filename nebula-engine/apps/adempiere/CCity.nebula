@@ -10,13 +10,13 @@ type CCity {
 	@Remarks("Alphanumeric identifier of the entity")
 	*Name;
 	@Remarks("Location code - UN/LOCODE")
-	?Locode Note;
+	?LoCode Note;
 	@Remarks("Location coordinate")
 	?Coordinates null;
 	@Remarks("Postal code")
 	?Postal;
 	@Remarks("Phone Area Code")
-	?Areacode Note;
+	?AreaCode Note;
 	@Remarks("Country")
 	?CCountry;
 	@Remarks("Identifies a geographical Region")

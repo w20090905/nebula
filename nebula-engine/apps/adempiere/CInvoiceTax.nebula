@@ -10,7 +10,7 @@ tx CInvoiceTax {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Base for calculating the tax amount")
-	TaxBaseamt Amount;/* 0  */
+	TaxBaseAmt Amount;/* 0  */
 	@Remarks("Tax Amount for a document")
 	TaxAmt Amount;/* 0  */
 	@Remarks("The document has been processed")

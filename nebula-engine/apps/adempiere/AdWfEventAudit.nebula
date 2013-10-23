@@ -24,9 +24,9 @@ tx AdWfEventAudit {
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
 	@Remarks("Elapsed Time in mili seconds")
-	Elapsedtimems Number;
+	ElapsedTimeMs Number;
 	@Remarks("Name of the Attribute")
-	?Attributename Name;
+	?AttributeName Name;
 	@Remarks("The old file data")
 	?OldValue Note;
 	@Remarks("New field value")
@@ -34,6 +34,6 @@ tx AdWfEventAudit {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Text Message")
-	?TextMsg Note;
+	?TextMsg Msg;
 };
 

@@ -8,23 +8,23 @@ tx MCost {
 	@Remarks("Product, Service, Item")
 	!MProduct;
 	@Remarks("Type of Cost (e.g. Current, Plan, Future)")
-	!MCosttype;
+	!MCostType;
 	@Remarks("Rules for accounting")
-	!CAcctschema;
+	!CAcctSchema;
 	@Remarks("Product Cost Element")
-	!MCostelement;
+	!MCostElement;
 	@Remarks("Product Attribute Set Instance")
-	!MAttributesetinstance;
+	!MAttributeSetInstance;
 	@Remarks("The currently used cost price")
-	Currentcostprice Price;
+	CurrentCostPrice Price;
 	@Remarks("Current Quantity")
-	Currentqty Quantity;/* 0  */
+	CurrentQty Quantity;/* 0  */
 	@Remarks("Total Amount")
-	?Cumulatedamt Amount;/* 0 */
+	?CumulatedAmt Amount;/* 0 */
 	@Remarks("Total Quantity")
-	?Cumulatedqty Quantity;/* 0 */
+	?CumulatedQty Quantity;/* 0 */
 	@Remarks("Future Cost Price")
-	?Futurecostprice Price;
+	?FutureCostPrice Price;
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Percentage")

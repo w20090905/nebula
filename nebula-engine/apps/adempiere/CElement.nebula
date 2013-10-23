@@ -14,11 +14,11 @@ type CElement {
 	@Remarks("Format of the value; Can contain fixed format elements, Variables: '_lLoOaAcCa09'")
 	?Vformat Description;
 	@Remarks("Element Type (account or user defined)")
-	Elementtype Attr;
+	ElementType Attr;
 	@Remarks("All transactions within an element value must balance (e.g. cost centers)")
 	IsBalancing YesNo;/* 'N'  */
 	@Remarks("The primary natural account")
-	IsNaturalaccount YesNo;/* 'Y'  */
+	IsNaturalAccount YesNo;/* 'Y'  */
 	@Remarks("Identifies a Tree")
 	?AdTree;
 };

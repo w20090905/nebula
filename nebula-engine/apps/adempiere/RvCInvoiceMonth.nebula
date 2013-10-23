@@ -5,13 +5,13 @@ type RvCInvoiceMonth {
 	AdOrgId ID;
 	?SalesRepId ID;
 	?DateInvoiceD Date;
-	?LineNetamt Amount;
-	?LineListamt Amount;
-	?LineLimitamt Amount;
-	?LineDiscountamt Amount;
+	?LineNetAmt Amount;
+	?LineListAmt Amount;
+	?LineLimitAmt Amount;
+	?LineDiscountAmt Amount;
 	?LineDiscount Count;
-	?LineOverlimitamt Amount;
-	?LineOverlimit Count;
-	IsSotrx YesNo;
+	?LineOverLimitAmt Amount;
+	?LineOverLimit Count;
+	IsSoTrx YesNo;
 };
 

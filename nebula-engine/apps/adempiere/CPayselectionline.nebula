@@ -1,14 +1,14 @@
 @Remarks("Payment Selection Line")
 @Refby("0")
-tx CPayselectionline {
+tx CPaySelectionLine {
 	@Remarks("Payment Selection Line")
-	!CPayselectionlineId ID;
+	!CPaySelectionLineId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Payment Selection")
-	CPayselection;
+	CPaySelection;
 	@Remarks("Unique line for this document")
 	Line;
 	@Remarks("Optional short description of the record")
@@ -20,18 +20,18 @@ tx CPayselectionline {
 	@Remarks("Invoice Identifier")
 	CInvoice;
 	@Remarks("Amount being paid")
-	Payamt Amount;/* 0  */
+	PayAmt Amount;/* 0  */
 	@Remarks("Difference Amount")
-	Differenceamt Amount;/* 0  */
+	DifferenceAmt Amount;/* 0  */
 	@Remarks("Payment Selection Check")
-	?CPayselectioncheck;
+	?CPaySelectionCheck;
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("Calculated amount of discount")
 	DiscountAmt Amount;/* 0  */
 	@Remarks("Open item amount")
-	Openamt Amount;/* 0  */
+	OpenAmt Amount;/* 0  */
 	@Remarks("This is a Sales Transaction")
-	IsSotrx YesNo;/* 'N'  */
+	IsSoTrx YesNo;/* 'N'  */
 };
 

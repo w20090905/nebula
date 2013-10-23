@@ -3,14 +3,14 @@
 type CProjectDetailsVt {
 	AdClientId ID;
 	AdOrgId ID;
-	AdLanguage String;
+	AdLanguage Code;
 	CProjectId ID;
 	CProjectLineId ID;
 	Line;
 	PlannedQty Quantity;
 	PlannedPrice Price;
 	PlannedAmt Amount;
-	PlannedMarginamt Amount;
+	PlannedMarginAmt Amount;
 	?CommittedAmt Amount;
 	?MProductId ID;
 	?Name;

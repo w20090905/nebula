@@ -14,49 +14,49 @@ type WStore {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("EMail address used as the sender (From)")
-	?Wstoreemail EMail;
+	?WstoreEmail EMail;
 	@Remarks("User ID of the Web Store EMail address")
-	?Wstoreuser null;
+	?WstoreUser null;
 	@Remarks("Password of the Web Store EMail address")
-	?Wstoreuserpw null;
+	?WstoreUserPw null;
 	@Remarks("Web Store Header Information")
-	?Webinfo Note;
+	?WebInfo Info;
 	@Remarks("Web Site Parameter 1 (default: header image)")
-	?Webparam1 String;
+	?WebParam1 String;
 	@Remarks("Web Site Parameter 2 (default index page)")
-	?Webparam2 String;
+	?WebParam2 String;
 	@Remarks("Web Site Parameter 3 (default left - menu)")
-	?Webparam3 String;
+	?WebParam3 String;
 	@Remarks("Web Site Parameter 4 (default footer left)")
-	?Webparam4 String;
+	?WebParam4 String;
 	@Remarks("Web Site Parameter 5 (default footer center)")
-	?Webparam5 String;
+	?WebParam5 String;
 	@Remarks("Web Site Parameter 6 (default footer right)")
-	?Webparam6 String;
+	?WebParam6 String;
 	@Remarks("Show Menu Assets")
-	IsMenuassets YesNo;/* 'Y'  */
+	IsMenuAssets YesNo;/* 'Y'  */
 	@Remarks("Show Menu Orders")
-	IsMenuorders YesNo;/* 'Y'  */
+	IsMenuOrders YesNo;/* 'Y'  */
 	@Remarks("Show Menu Invoices")
-	IsMenuinvoices YesNo;/* 'Y'  */
+	IsMenuInvoices YesNo;/* 'Y'  */
 	@Remarks("Show Menu Shipments")
-	IsMenushipments YesNo;/* 'Y'  */
+	IsMenuShipments YesNo;/* 'Y'  */
 	@Remarks("Show Menu Payments")
-	IsMenupayments YesNo;/* 'Y'  */
+	IsMenuPayments YesNo;/* 'Y'  */
 	@Remarks("Show Menu RfQs")
-	IsMenurfqs YesNo;/* 'Y'  */
+	IsMenuRfqs YesNo;/* 'Y'  */
 	@Remarks("Show Menu Requests")
-	IsMenurequests YesNo;/* 'Y'  */
+	IsMenuRequests YesNo;/* 'Y'  */
 	@Remarks("Show Menu Interests")
-	IsMenuinterests YesNo;/* 'Y'  */
+	IsMenuInterestS YesNo;/* 'Y'  */
 	@Remarks("Show Menu Registrations")
-	IsMenuregistrations YesNo;/* 'Y'  */
+	IsMenuRegistrations YesNo;/* 'Y'  */
 	@Remarks("Show Menu Contact")
-	IsMenucontact YesNo;/* 'Y'  */
+	IsMenuContact YesNo;/* 'Y'  */
 	@Remarks("Header added to EMails")
-	?Emailheader EMail;
+	?EmailHeader EMail;
 	@Remarks("Footer added to EMails")
-	?Emailfooter EMail;
+	?EmailFooter EMail;
 	@Remarks("Sales Representative or Company Agent")
 	SalesRep AdUser;
 	@Remarks("Storage Warehouse and Service Point")
@@ -64,15 +64,15 @@ type WStore {
 	@Remarks("Unique identifier of a Price List")
 	MPriceList;
 	@Remarks("Web Server Context - e.g. /wstore")
-	Webcontext Text;
+	WebContext Text;
 	@Remarks("EMail address to receive notifications when web orders were processed")
-	?Weborderemail EMail;
+	?WebOrderEmail EMail;
 	@Remarks("The terms of Payment (timing, discount)")
 	?CPaymentTerm;
 	@Remarks("Default value")
 	IsDefault YesNo;/* 'N'  */
 	@Remarks("Full URL address - e.g. http://www.adempiere.org")
-	URL;/* 'http://localhost'  */
+	Url;/* 'http://localhost'  */
 	@Remarks("CSS (Stylesheet) used")
 	?Stylesheet null;
 };

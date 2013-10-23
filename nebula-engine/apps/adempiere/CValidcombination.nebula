@@ -1,8 +1,8 @@
 @Remarks("Valid Account Combination")
 @Refby("142")
-tx CValidcombination {
+tx CValidCombination {
 	@Remarks("Valid Account Combination")
-	!CValidcombinationId ID;
+	!CValidCombinationId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClient;
 	@Remarks("Organizational entity within client")
@@ -14,21 +14,21 @@ tx CValidcombination {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("This account is fully qualified")
-	IsFullyqualified YesNo;/* 'Y'  */
+	IsFullYqualified YesNo;/* 'Y'  */
 	@Remarks("Rules for accounting")
-	CAcctschema;
+	CAcctSchema;
 	@Remarks("Account used")
-	Account CElementvalue;
+	Account CElementValue;
 	@Remarks("Product, Service, Item")
 	?MProduct;
 	@Remarks("Identifies a Business Partner")
 	?CBpartner;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrx AdOrg;
+	?AdOrgTrx AdOrg;
 	@Remarks("Location that inventory was moved from")
-	?CLocfrom CLocation;
+	?CLocFrom CLocation;
 	@Remarks("Location that inventory was moved to")
-	?CLocto CLocation;
+	?CLocTo CLocation;
 	@Remarks("Sales coverage region")
 	?CSalesRegion;
 	@Remarks("Financial Project")
@@ -38,14 +38,14 @@ tx CValidcombination {
 	@Remarks("Business Activity")
 	?CActivity;
 	@Remarks("User defined list element #1")
-	?User1 CElementvalue;
+	?User1 CElementValue;
 	@Remarks("User defined list element #2")
-	?User2 CElementvalue;
+	?User2 CElementValue;
 	@Remarks("Sub account for Element Value")
-	?CSubacct;
+	?CSubAcct;
 	@Remarks("User defined accounting Element")
-	?Userelement1Id ID;
+	?UserElement1Id ID;
 	@Remarks("User defined accounting Element")
-	?Userelement2Id ID;
+	?UserElement2Id ID;
 };
 

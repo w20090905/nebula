@@ -8,7 +8,7 @@ tx WClick {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("URL for the Target")
-	?Targeturl URL;
+	?TargetUrl Url;
 	@Remarks("Referring web address")
 	?Referrer String;
 	@Remarks("Remote host Info")
@@ -16,13 +16,13 @@ tx WClick {
 	@Remarks("Remote Address")
 	?RemoteAddr Name;
 	@Remarks("Browser Used")
-	?Useragent String;
+	?UserAgent String;
 	@Remarks("Language accepted based on browser information")
 	?AcceptLanguage String;
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("Web Click Management")
-	?WClickcount;
+	?WClickCount;
 	@Remarks("User within the system - Internal or Business Partner Contact")
 	?AdUser;
 	@Remarks("Electronic Mail Address")

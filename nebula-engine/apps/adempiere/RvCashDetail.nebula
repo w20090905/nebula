@@ -7,7 +7,7 @@ type RvCashDetail {
 	AdOrgId ID;
 	CCashBookId ID;
 	*Name;
-	Statementdate Date;
+	StatementDate Date;
 	DateAcct Date;
 	Processed YesNo;
 	PostEd YesNo;
@@ -16,8 +16,8 @@ type RvCashDetail {
 	CashType Attr;
 	?CCurrencyId ID;
 	Amount;
-	?Convertedamt Amount;
-	?CBankaccountId ID;
+	?ConvertedAmt Amount;
+	?CBankAccountId ID;
 	?CInvoiceId ID;
 	?CChargeId ID;
 };

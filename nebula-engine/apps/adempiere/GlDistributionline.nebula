@@ -1,8 +1,8 @@
 @Remarks("General Ledger Distribution Line")
 @Refby("0")
-tx GlDistributionline {
+tx GlDistributionLine {
 	@Remarks("General Ledger Distribution Line")
-	!GlDistributionlineId ID;
+	!GlDistributionLineId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -22,7 +22,7 @@ tx GlDistributionline {
 	@Remarks("Overwrite the account segment Account with the value specified")
 	OverwriteAcct YesNo;/* 'N'  */
 	@Remarks("Account used")
-	?Account CElementvalue;
+	?Account CElementValue;
 	@Remarks("Overwrite the account segment Product with the value specified")
 	OverwriteProduct YesNo;/* 'N'  */
 	@Remarks("Product, Service, Item")
@@ -48,24 +48,24 @@ tx GlDistributionline {
 	@Remarks("Sales coverage region")
 	?CSalesRegion;
 	@Remarks("Overwrite the account segment Transaction Organization with the value specified")
-	OverwriteOrgtrx YesNo;/* 'N'  */
+	OverwriteOrgTrx YesNo;/* 'N'  */
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrx AdOrg;
+	?AdOrgTrx AdOrg;
 	@Remarks("Overwrite the account segment Location From with the value specified")
-	OverwriteLocto YesNo;/* 'N'  */
+	OverwriteLocTo YesNo;/* 'N'  */
 	@Remarks("Location that inventory was moved to")
-	?CLocto CLocation;
+	?CLocTo CLocation;
 	@Remarks("Overwrite the account segment Location From with the value specified")
-	OverwriteLocfrom YesNo;/* 'N'  */
+	OverwriteLocFrom YesNo;/* 'N'  */
 	@Remarks("Location that inventory was moved from")
-	?CLocfrom CLocation;
+	?CLocFrom CLocation;
 	@Remarks("Overwrite the account segment User 1 with the value specified")
 	OverwriteUser1 YesNo;/* 'N'  */
 	@Remarks("User defined list element #1")
-	?User1 CElementvalue;
+	?User1 CElementValue;
 	@Remarks("Overwrite the account segment User 2 with the value specified")
 	OverwriteUser2 YesNo;/* 'N'  */
 	@Remarks("User defined list element #2")
-	?User2 CElementvalue;
+	?User2 CElementValue;
 };
 

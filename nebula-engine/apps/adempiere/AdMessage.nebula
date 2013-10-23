@@ -10,11 +10,11 @@ tx AdMessage {
 	@Remarks("Search key for the record in the format required - must be unique")
 	Value String;
 	@Remarks("Textual Informational, Menu or Error Message")
-	Msgtext Note;
+	MsgText Msg;
 	@Remarks("Additional tip or help for this message")
-	?Msgtip Note;
+	?MsgTip Msg;
 	@Remarks("Type of message (Informational, Menu or Error)")
-	Msgtype Attr;
+	MsgType Msg;
 	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
 	EntityType AdEntityType;/* 'D'  */
 };

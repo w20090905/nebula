@@ -1,12 +1,12 @@
 @Remarks("Product Related")
 @Refby("0")
-type MRelatedproduct {
+type MRelatedProduct {
 	@Remarks("Product, Service, Item")
 	!MProduct;
 	@Remarks("Related Product")
-	!Relatedproduct MProduct;
+	!RelatedProduct MProduct;
 	@Remarks("Related Product Type")
-	!Relatedproducttype Attr;
+	!RelatedProductType Attr;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")

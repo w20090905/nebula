@@ -18,7 +18,7 @@ type PaAchievement {
 	@Remarks("Concrete Performance Measurement")
 	PaMeasure;
 	@Remarks("Manually entered actual value")
-	Manualactual Number;/* 0  */
+	ManualActual Number;/* 0  */
 	@Remarks("The goal is achieved")
 	IsAchieved YesNo;
 	@Remarks("Date of the Document")

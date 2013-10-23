@@ -1,8 +1,8 @@
 @Remarks("M_AttributeInstance")
 @Refby("0")
-type MAttributeinstance {
+type MAttributeInstance {
 	@Remarks("Product Attribute Set Instance")
-	!MAttributesetinstance;/* 0 */
+	!MAttributeSetInstance;/* 0 */
 	@Remarks("Product Attribute")
 	!MAttribute;
 	@Remarks("Client/Tenant for this installation.")
@@ -10,7 +10,7 @@ type MAttributeinstance {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Product Attribute Value")
-	?MAttributevalue;
+	?MAttributeValue;
 	@Remarks("Search key for the record in the format required - must be unique")
 	?Value String;
 	@Remarks("Numeric Value")

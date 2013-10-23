@@ -2,7 +2,7 @@
 @Refby("0")
 type CBpVendorAcct {
 	@Remarks("Rules for accounting")
-	!CAcctschema;
+	!CAcctSchema;
 	@Remarks("Identifies a Business Partner")
 	!CBpartner;
 	@Remarks("Client/Tenant for this installation.")
@@ -10,10 +10,10 @@ type CBpVendorAcct {
 	@Remarks("Organizational entity within client")
 	AdOrgId ID;
 	@Remarks("Account for Vendor Liability")
-	?VLiabilityAcct CValidcombination;
+	?VLiabilityAcct CValidCombination;
 	@Remarks("Account for Vender Service Liability")
-	?VLiabilityServicesAcct CValidcombination;
+	?VLiabilityServiceSAcct CValidCombination;
 	@Remarks("Account for Vendor Prepayments")
-	?VPrepaymentAcct CValidcombination;
+	?VPrepaymentAcct CValidCombination;
 };
 

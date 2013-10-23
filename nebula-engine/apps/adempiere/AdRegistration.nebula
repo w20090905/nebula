@@ -20,21 +20,21 @@ type AdRegistration {
 	@Remarks("The system is in production")
 	IsInproduction YesNo;/* 'N'  */
 	@Remarks("The day you started the implementation (if implementing) - or production (went life) with Adempiere")
-	?Startproductiondate Date;
+	?StartProductionDate Date;
 	@Remarks("You allow to publish the information, not just statistical summary info")
-	IsAllowpublish YesNo;/* 'Y'  */
+	IsAllowPublish YesNo;/* 'Y'  */
 	@Remarks("Maintain general statistics")
-	IsAllowstatistics YesNo;/* 'Y'  */
+	IsAllowStatistics YesNo;/* 'Y'  */
 	@Remarks("Information about Server and Client Platform")
-	?Platforminfo Note;
+	?PlatformInfo Info;
 	@Remarks("Information of the industry (e.g. professional service, distribution of furnitures, ..)")
-	?Industryinfo Note;
+	?IndustryInfo Info;
 	@Remarks("Total Volume of Sales in Thousands of Currency")
 	?SalesVolume Volume;/* 0 */
 	@Remarks("The Currency for this record")
 	?CCurrency;
 	@Remarks("Number of employees")
-	?Numberemployees Number;/* 0 */
+	?NumberEmployees Number;/* 0 */
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("Remote host Info")

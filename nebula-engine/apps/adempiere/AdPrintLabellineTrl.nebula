@@ -1,8 +1,8 @@
 @Remarks("Print Label Line Format")
 @Refby("0")
-type AdPrintLabellineTrl {
+type AdPrintLabelLineTrl {
 	@Remarks("Print Label Line Format")
-	!AdPrintLabelline;
+	!AdPrintLabelLine;
 	@Remarks("Language for this entity")
 	!AdLanguage;
 	@Remarks("Client/Tenant for this installation.")

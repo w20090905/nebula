@@ -1,8 +1,8 @@
 @Remarks("Print Label Line Format")
 @Refby("1")
-type AdPrintLabelline {
+type AdPrintLabelLine {
 	@Remarks("Print Label Line Format")
-	!AdPrintLabellineId ID;
+	!AdPrintLabelLineId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -20,7 +20,7 @@ type AdPrintLabelline {
 	@Remarks("Column in the table")
 	?AdColumn;
 	@Remarks("Function of Label Printer")
-	AdLabelPrintErFunction;
+	AdLabelPrinterFunction;
 	@Remarks("Absolute X (horizontal) position in 1/72 of an inch")
 	Xposition Length;
 	@Remarks("Absolute Y (vertical) position in 1/72 of an inch")

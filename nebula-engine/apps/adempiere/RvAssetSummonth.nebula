@@ -10,14 +10,14 @@ type RvAssetSummonth {
 	*Name;
 	?Description;
 	?Help;
-	?Guaranteedate Date;
-	?Assetservicedate Date;
+	?GuaranteeDate Date;
+	?AssetServiceDate Date;
 	?CBpartnerId ID;
 	?AdUserId ID;
-	?Serno Code;
+	?SerNo Code;
 	?LOT;
-	?Versionno Code;
-	?Movementdate Date;
+	?VersionNo Code;
+	?MovementDate Date;
 	?DeliveryCount Count;
 };
 

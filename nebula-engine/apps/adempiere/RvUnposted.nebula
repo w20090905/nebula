@@ -8,6 +8,6 @@ type RvUnposted {
 	?DateAcct Date;
 	?AdTableId ID;
 	?RecordId ID;
-	?IsSotrx YesNo;
+	?IsSoTrx YesNo;
 };
 

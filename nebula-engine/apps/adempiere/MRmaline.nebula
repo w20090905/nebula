@@ -10,7 +10,7 @@ tx MRmaline {
 	@Remarks("Return Material Authorization")
 	MRma;
 	@Remarks("Line on Shipment or Receipt document")
-	?MInoutline;
+	?MInoutLine;
 	@Remarks("Quantity")
 	Qty Quantity;/* 0  	  */
 	@Remarks("Optional short description of the record")
@@ -24,7 +24,7 @@ tx MRmaline {
 	@Remarks("Unique line for this document")
 	Line;/* 0  */
 	@Remarks("Line Extended Amount (Quantity * Actual Price) without Freight and Charges")
-	?LineNetamt Amount;
+	?LineNetAmt Amount;
 	@Remarks("Delivered Quantity")
 	?QtyDelivered Quantity;
 };

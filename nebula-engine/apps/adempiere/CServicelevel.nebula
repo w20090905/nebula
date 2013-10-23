@@ -1,8 +1,8 @@
 @Remarks("Product Revenue Recognition Service Level")
 @Refby("1")
-tx CServicelevel {
+tx CServiceLevel {
 	@Remarks("Product Revenue Recognition Service Level")
-	!CServicelevelId ID;
+	!CServiceLevelId ID;
 	@Remarks("Client/Tenant for this installation.")
 	AdClientId ID;
 	@Remarks("Organizational entity within client")
@@ -12,9 +12,9 @@ tx CServicelevel {
 	@Remarks("Optional short description of the record")
 	?Description;
 	@Remarks("Quantity of service or product provided")
-	Servicelevelprovided Count;
+	ServiceLevelProvided Count;
 	@Remarks("Quantity of product or service invoiced")
-	Servicelevelinvoiced Number;
+	ServiceLevelInvoiceD Number;
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("The document has been processed")

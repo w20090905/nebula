@@ -22,15 +22,15 @@ type AdUser {
 	@Remarks("Process Now")
 	?Processing YesNo;
 	@Remarks("User Name (ID) in the Mail System")
-	?Emailuser EMail;
+	?EmailUser EMail;
 	@Remarks("Password of your email user id")
-	?Emailuserpw EMail;
+	?EmailUserPw EMail;
 	@Remarks("Identifies the (ship to) address for this Business Partner")
 	?CBpartnerLocation;
 	@Remarks("Greeting to print on correspondence")
 	?CGreeting;
 	@Remarks("Name this entity is referred to as")
-	?Title String;
+	?Title;
 	@Remarks("Comments or additional information")
 	?Comments Comment;
 	@Remarks("Identifies a telephone number")
@@ -40,30 +40,30 @@ type AdUser {
 	@Remarks("Facsimile number")
 	?Fax;
 	@Remarks("Date this individual was last contacted")
-	?Lastcontact Date;
+	?LastContact Date;
 	@Remarks("Result of last contact")
-	?Lastresult null;
+	?LastResult null;
 	@Remarks("Birthday or Anniversary day")
 	?Birthday;
 	@Remarks("Performing or initiating organization")
-	?AdOrgtrx AdOrg;
+	?AdOrgTrx AdOrg;
 	@Remarks("Verification information of EMail Address")
-	?Emailverify EMail;
+	?EmailVerify EMail;
 	@Remarks("Date Email was verified")
-	?Emailverifydate Date;
+	?EmailVerifyDate Date;
 	@Remarks("Type of Notifications")
 	NotificationType Attr;/* 'E'  */
 	@Remarks("The user/concat has full access to Business Partner information and resources")
-	IsFullbpaccess YesNo;/* 'Y'  */
+	IsFullBpAccess YesNo;/* 'Y'  */
 	@Remarks("Job Position")
 	?CJob;
 	@Remarks("User Name used for authorization via LDAP (directory) services")
 	?LdapUser null;
 	@Remarks("How a Java Client connects to the server(s)")
-	?Connectionprofile null;
+	?ConnectionProfile null;
 	@Remarks("Search key for the record in the format required - must be unique")
 	?Value String;/* NULL   */
 	@Remarks("UserPIN")
-	?Userpin null;
+	?UserPin null;
 };
 

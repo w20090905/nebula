@@ -1,6 +1,6 @@
 @Remarks("Tree Node CM Media")
 @Refby("0")
-type AdTreenodecmm {
+type AdTreeNodeCmm {
 	@Remarks("Identifies a Tree")
 	!AdTree;
 	@Remarks("Node_ID")

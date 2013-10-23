@@ -10,7 +10,7 @@ type MChangeRequest {
 	@Remarks("Bill of Material")
 	MBom;
 	@Remarks("Bill of Materials (Engineering) Change Notice (Version)")
-	?MChangeNotice;
+	?MChangeNotIce;
 	@Remarks("Document sequence number of the document")
 	DocumentNo Code;
 	@Remarks("Alphanumeric identifier of the entity")
@@ -20,9 +20,9 @@ type MChangeRequest {
 	@Remarks("Comment or Hint")
 	?Help;
 	@Remarks("Additional Detail Information")
-	?Detailinfo Note;
+	?DetailInfo Note;
 	@Remarks("Fixed in Change Notice")
-	?MFixchangenotice MChangeNotice;
+	?MFixChangeNotIce MChangeNotIce;
 	@Remarks("The document has been processed")
 	Processed YesNo;/* 'N'  */
 	@Remarks("Indicates if this document requires approval")

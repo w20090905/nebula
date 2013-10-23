@@ -16,7 +16,7 @@ type CmNewSchannel {
 	@Remarks("Language for this entity")
 	?AdLanguage;
 	@Remarks("A web project is the main data container for Containers, URLs, Ads, Media etc.")
-	CmWebproject;
+	CmWebProject;
 	@Remarks("Contains URL to a target")
 	?Link null;
 };
