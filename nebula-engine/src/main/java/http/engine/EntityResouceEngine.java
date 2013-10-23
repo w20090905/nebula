@@ -26,7 +26,6 @@ import nebula.data.json.JsonHelperProvider;
 import nebula.lang.EditableTypeLoader;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
-import nebula.lang.TypeStandalone;
 import nebula.server.Resource;
 import nebula.server.ResourceEngine;
 
@@ -109,7 +108,7 @@ public class EntityResouceEngine implements ResourceEngine {
 		Broker<Type> typeBroker = typeBrokers.getBroker(typeName);
 		Broker<DataStore<Entity>> storeHolder = dataRepos.define(Long.class, Entity.class, typeName);
 		Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getSimpleHelper(typeBroker);
-		return new EntityListResouce(jsonHolder, storeHolder);
+		return new EntityListResouce(typeBroker, jsonHolder, storeHolder);
 	}
 
 	private Resource makeEntityNewResouce(String typeName) {

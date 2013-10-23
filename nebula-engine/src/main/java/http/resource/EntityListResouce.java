@@ -22,6 +22,9 @@ import nebula.data.DataStore;
 import nebula.data.DataWatcher;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
+import nebula.lang.Field;
+import nebula.lang.Reference;
+import nebula.lang.Type;
 
 import org.eclipse.jetty.util.URIUtil;
 
@@ -30,23 +33,62 @@ import util.FileUtil;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.google.common.collect.Lists;
 
 public class EntityListResouce extends AbstractResouce {
 	private final Broker<DataHelper<Entity, Reader, Writer>> jsonHolder;
 	private final Broker<DataStore<Entity>> datastoreHolder;
 	final LoadingCache<String, DataHolder> dataCache;
 
-	class DataHolder {
+	class TreeDataHolder implements DataHolder {
+		String parentFieldName;
+		String value;
+
+		public TreeDataHolder(String parentFieldName, String value) {
+			this.parentFieldName = parentFieldName;
+			this.value = checkNotNull(value);
+		}
+
+		public byte[] get() {
+			List<Entity> dataList = datastoreHolder.get().listAll();
+			List<Entity> to = Lists.newArrayList();
+
+			for (Entity entity : dataList) {
+				if (value.equals(entity.getID())) {
+					to.add(entity);
+					addChildren(entity, dataList, to);
+				}
+			}
+
+			return buildFrom(to);
+		}
+
+		private List<Entity> addChildren(Entity root, List<Entity> from, List<Entity> to) {
+			String id = (String) root.getID();
+			for (Entity e : from) {
+				if (id.equals(e.get(parentFieldName))) {
+					to.add(e);
+					addChildren(e, from, to);
+				}
+			}
+			return to;
+		}
+	}
+
+	interface DataHolder {
+		byte[] get();
+	}
+
+	class DataHolderClassificator implements DataHolder {
 		Classificator<String, Entity> classificator;
 		String value;
-		byte[] buffer;
 
-		public DataHolder(Classificator<String, Entity> classificator, String value) {
+		public DataHolderClassificator(Classificator<String, Entity> classificator, String value) {
 			this.classificator = checkNotNull(classificator);
 			this.value = checkNotNull(value);
 		}
 
-		byte[] get() {
+		public byte[] get() {
 			List<Entity> dataList = classificator.getData(value);
 			return buildFrom(dataList);
 		}
@@ -73,7 +115,7 @@ public class EntityListResouce extends AbstractResouce {
 		return bout.toByteArray();
 	}
 
-	public EntityListResouce(Broker<DataHelper<Entity, Reader, Writer>> json, Broker<DataStore<Entity>> datas) {
+	public EntityListResouce(final Broker<Type> typeBroker, Broker<DataHelper<Entity, Reader, Writer>> json, Broker<DataStore<Entity>> datas) {
 		super("text/json", 0, 1000);
 		this.jsonHolder = json;
 		this.datastoreHolder = datas;
@@ -88,19 +130,26 @@ public class EntityListResouce extends AbstractResouce {
 					String[] kv = keyvalue.split("=");
 					String key = kv[0];
 					String value = kv[1];
-					if (classificatores.containsKey(key)) {
+					if ("root".equals(key)) {
+						Field c = null;
+						for (Field f : typeBroker.get().getDeclaredFields()) {
+							if (f.getRefer() == Reference.Cascade) {
+								c = f;
+							}
+						}
+						return new TreeDataHolder(c.getName() + typeBroker.get().getKeyField().getName(), value);
+					} else if (classificatores.containsKey(key)) {
 						cKey = key;
 						cValue = value;
-						break;
+						return new DataHolderClassificator(classificatores.get(checkNotNull(cKey)), cValue);
 					}
 				}
-
-				return new DataHolder(classificatores.get(checkNotNull(cKey)), cValue);
+				return null;
 			}
 		});
-		
-		json.addWatcher(new DataWatcher<DataHelper<Entity,Reader,Writer>>() {
-			
+
+		json.addWatcher(new DataWatcher<DataHelper<Entity, Reader, Writer>>() {
+
 			@Override
 			public boolean onUpdate(DataHelper<Entity, Reader, Writer> newData, DataHelper<Entity, Reader, Writer> oldData) {
 				dataCache.cleanUp();
