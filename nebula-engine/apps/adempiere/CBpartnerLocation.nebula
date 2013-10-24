@@ -1,0 +1,35 @@
+@Remarks("Identifies the (ship to) address for this Business Partner")
+@Refby("23")
+type CBpartnerLocation {
+	@Remarks("Identifies the (ship to) address for this Business Partner")
+	!CBpartnerLocationId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Business Partner Invoice/Bill Address")
+	IsBillTo YesNo;/* 'Y'  */
+	@Remarks("Business Partner Shipment Address")
+	IsShipTo YesNo;/* 'Y'  */
+	@Remarks("Business Partner pays from that address and we_ll send dunning letters there")
+	IsPayFrom YesNo;/* 'Y'  */
+	@Remarks("Business Partner payment address")
+	IsRemitto YesNo;/* 'Y'  */
+	@Remarks("Identifies a telephone number")
+	?Phone;
+	@Remarks("Identifies an alternate telephone number.")
+	?Phone2 Phone;
+	@Remarks("Facsimile number")
+	?Fax;
+	@Remarks("ISDN or modem line")
+	?ISDN;
+	@Remarks("Sales coverage region")
+	?CSalesRegion;
+	@Remarks("Identifies a Business Partner")
+	CBpartner;
+	@Remarks("Location or Address")
+	?CLocation;
+};
+

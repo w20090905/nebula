@@ -1,0 +1,24 @@
+@Remarks("Organization Info")
+@Refby("0")
+type AdOrgInfo {
+	@Remarks("Organizational entity within client")
+	!AdOrg;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Location or Address")
+	?CLocation;
+	@Remarks("Dun & Bradstreet Number")
+	DUNS String;
+	@Remarks("Tax Identification")
+	TaxId Code;
+	?PaGoalId ID;
+	@Remarks("Supervisor for this user/organization - used for escalation and approval")
+	?Supervisor AdUser;
+	@Remarks("Parent (superior) Organization")
+	?ParentOrg AdOrg;
+	@Remarks("Organization Type allows you to categorize your organizations")
+	?AdOrgType;
+	@Remarks("Storage Warehouse and Service Point")
+	?MWarehouse;
+};
+

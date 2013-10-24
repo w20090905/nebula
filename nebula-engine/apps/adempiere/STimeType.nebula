@@ -1,0 +1,17 @@
+@Remarks("Type of time recorded")
+@Refby("1")
+type STimeType {
+	@Remarks("Type of time recorded")
+	!STimeTypeId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+};
+

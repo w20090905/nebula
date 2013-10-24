@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+tx RIssuesOurce {
+	!RIssuesOurceId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	RIssuesYstem;
+	RIssueProject;
+	RIssueUser;
+	?StatisticsInfo Info;
+	?ProfileInfo Info;
+};
+

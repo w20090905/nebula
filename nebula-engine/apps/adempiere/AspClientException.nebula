@@ -1,0 +1,31 @@
+@Remarks("Client Exception")
+@Refby("0")
+tx AspClientException {
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;/* NULL   */
+	@Remarks("Field on a database table")
+	?AdField;
+	@Remarks("Special Form")
+	?AdForm;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;/* 0  */
+	@Remarks("Process or Report")
+	?AdProcess;
+	@Remarks("Process Parameter")
+	?AdProcessPara;
+	@Remarks("Tab within a Window")
+	?AdTab;
+	@Remarks("Operation System Task")
+	?AdTask;
+	@Remarks("Workflow Node (activity), step or process")
+	?AdWfNode;
+	@Remarks("Data entry or display window")
+	?AdWindow;
+	@Remarks("Workflow or combination of tasks")
+	?AdWorkflow;
+	@Remarks("Client Exception")
+	!AspClientExceptionId ID;
+	@Remarks("ASP Status")
+	AspStatus Attr;/* 'U'  */
+};
+

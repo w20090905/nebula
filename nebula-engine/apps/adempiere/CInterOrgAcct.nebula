@@ -1,0 +1,17 @@
+@Remarks("C_InterOrg_Acct")
+@Refby("0")
+type CInterOrgAcct {
+	@Remarks("Rules for accounting")
+	!CAcctSchema;
+	@Remarks("Organizational entity within client")
+	!AdOrg;
+	@Remarks("Organization valid for intercompany documents")
+	!AdOrgTo AdOrg;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Intercompany Due To / Payable Account")
+	InterCompanyDueToAcct CValidCombination;
+	@Remarks("Intercompany Due From / Receivables Account")
+	InterCompanyDueFromAcct CValidCombination;
+};
+

@@ -1,0 +1,33 @@
+@Remarks("Location or Address")
+@Refby("22")
+tx CLocation {
+	@Remarks("Location or Address")
+	!CLocationId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrg;
+	@Remarks("Address line 1 for this location")
+	?Address null;
+	@Remarks("Address line 2 for this location")
+	?Address null;
+	@Remarks("Identifies a City")
+	?City null;
+	@Remarks("Postal code")
+	?Postal;
+	@Remarks("Additional ZIP or Postal code")
+	?PostalAdd Postal;
+	@Remarks("Country")
+	CCountry;
+	@Remarks("Identifies a geographical Region")
+	?CRegion;
+	@Remarks("City")
+	?CCity;
+	@Remarks("Name of the Region")
+	?RegionName Name;
+	@Remarks("Address Line 3 for the location")
+	?Address null;
+	@Remarks("Address Line 4 for the location")
+	?Address null;
+};
+

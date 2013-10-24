@@ -1,0 +1,21 @@
+@Remarks("Tax Accounting Reconciliation")
+@Refby("0")
+tx CTaxDeclarationAcct {
+	@Remarks("Tax Accounting Reconciliation")
+	!CTaxDeclarationAcctId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Define the declaration to the tax authorities")
+	CTaxDeclaration;
+	@Remarks("Accounting Fact")
+	FactAcct;
+	@Remarks("Rules for accounting")
+	CAcctSchema;
+	@Remarks("Unique line for this document")
+	?Line;
+};
+

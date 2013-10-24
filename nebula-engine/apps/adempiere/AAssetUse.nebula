@@ -1,0 +1,12 @@
+@Remarks("")
+@Refby("0")
+tx AAssetUse {
+	!AAssetUseId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AAsset;
+	UsedAte Date;
+	UseUnits Number;
+	?Description;
+};
+

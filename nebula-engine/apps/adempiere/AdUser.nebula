@@ -1,0 +1,69 @@
+@Remarks("User within the system - Internal or Business Partner Contact")
+@Refby("94")
+type AdUser {
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	!AdUserId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Password of any length (case sensitive)")
+	?Password;
+	@Remarks("Electronic Mail Address")
+	?EMail;
+	@Remarks("Supervisor for this user/organization - used for escalation and approval")
+	?Supervisor AdUser;
+	@Remarks("Identifies a Business Partner")
+	?CBpartner;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("User Name (ID) in the Mail System")
+	?EmailUser EMail;
+	@Remarks("Password of your email user id")
+	?EmailUserPw EMail;
+	@Remarks("Identifies the (ship to) address for this Business Partner")
+	?CBpartnerLocation;
+	@Remarks("Greeting to print on correspondence")
+	?CGreeting;
+	@Remarks("Name this entity is referred to as")
+	?Title;
+	@Remarks("Comments or additional information")
+	?Comments Comment;
+	@Remarks("Identifies a telephone number")
+	?Phone;
+	@Remarks("Identifies an alternate telephone number.")
+	?Phone2 Phone;
+	@Remarks("Facsimile number")
+	?Fax;
+	@Remarks("Date this individual was last contacted")
+	?LastContact Date;
+	@Remarks("Result of last contact")
+	?LastResult null;
+	@Remarks("Birthday or Anniversary day")
+	?Birthday;
+	@Remarks("Performing or initiating organization")
+	?AdOrgTrx AdOrg;
+	@Remarks("Verification information of EMail Address")
+	?EmailVerify EMail;
+	@Remarks("Date Email was verified")
+	?EmailVerifyDate Date;
+	@Remarks("Type of Notifications")
+	NotificationType Attr;/* 'E'  */
+	@Remarks("The user/concat has full access to Business Partner information and resources")
+	IsFullBpAccess YesNo;/* 'Y'  */
+	@Remarks("Job Position")
+	?CJob;
+	@Remarks("User Name used for authorization via LDAP (directory) services")
+	?LdapUser null;
+	@Remarks("How a Java Client connects to the server(s)")
+	?ConnectionProfile null;
+	@Remarks("Search key for the record in the format required - must be unique")
+	?Value String;/* NULL   */
+	@Remarks("UserPIN")
+	?UserPin null;
+};
+

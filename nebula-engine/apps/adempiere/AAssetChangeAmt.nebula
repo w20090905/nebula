@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+type AAssetChangeAmt {
+	!AAssetChange;
+	!CAcctSchema;
+	AdClientId ID;
+	AdOrgId ID;
+	AssetValueAmt Amount;/* 0  */
+	AssetMarketValueAmt Amount;/* 0  */
+	AssetBookValueAmt Amount;/* 0  */
+	AssetAccumdePreciationAmt Amount;/* 0  */
+};
+

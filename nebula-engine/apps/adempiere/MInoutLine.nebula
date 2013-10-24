@@ -1,0 +1,67 @@
+@Remarks("Line on Shipment or Receipt document")
+@Refby("17")
+tx MInoutLine {
+	@Remarks("Line on Shipment or Receipt document")
+	!MInoutLineId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrg;
+	@Remarks("Unique line for this document")
+	Line;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Material Shipment Document")
+	MInout;
+	@Remarks("Sales Order Line")
+	?COrderLine;
+	@Remarks("Warehouse Locator")
+	?MLocator;
+	@Remarks("Product, Service, Item")
+	?MProduct;
+	@Remarks("Unit of Measure")
+	CUom;
+	@Remarks("Quantity of a product moved.")
+	MovementQty Quantity;/* 0  */
+	@Remarks("Is this invoiced?")
+	IsInvoiceD YesNo;/* 'N'  */
+	@Remarks("Product Attribute Set Instance")
+	?MAttributeSetInstance;/* 0 */
+	@Remarks("if true, the line is just description and no transaction")
+	IsDescription YesNo;/* 'N'  */
+	@Remarks("Confirmation of a received quantity")
+	?ConfirmedQty Quantity;/* 0 */
+	@Remarks("Picked Quantity")
+	?PickedQty Quantity;/* 0 */
+	@Remarks("The Quantity scrapped due to QA issues")
+	?ScrappedQty Quantity;/* 0 */
+	@Remarks("Target Movement Quantity")
+	?TargetQty Quantity;/* 0 */
+	@Remarks("Referenced Shipment Line")
+	?RefInoutLine MInoutLine;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("The Quantity Entered is based on the selected UoM")
+	QtyEntered Quantity;
+	@Remarks("Additional document charges")
+	?CCharge;
+	@Remarks("Financial Project")
+	?CProject;
+	@Remarks("Phase of a Project")
+	?CProjectPhase;
+	@Remarks("Actual Project Task in a Phase")
+	?CProjectTask;
+	@Remarks("Marketing Campaign")
+	?CCampaign;
+	@Remarks("Business Activity")
+	?CActivity;
+	@Remarks("User defined list element #1")
+	?User1 CElementValue;
+	@Remarks("User defined list element #2")
+	?User2 CElementValue;
+	@Remarks("Performing or initiating organization")
+	?AdOrgTrx AdOrg;
+	@Remarks("Return Material Authorization Line")
+	?MRmaline;/* NULL */
+};
+

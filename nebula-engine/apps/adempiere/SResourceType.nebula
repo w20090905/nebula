@@ -1,0 +1,51 @@
+@Remarks("Resource Type")
+@Refby("1")
+type SResourceType {
+	@Remarks("Resource Type")
+	!SResourceTypeId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Search key for the record in the format required - must be unique")
+	Value String;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Only one assignment at a time (no double-booking or overlapping)")
+	IsSingleAsSignment YesNo;/* 'N'  */
+	@Remarks("Unit of Measure")
+	CUom;
+	@Remarks("Allow Unit of Measure Fractions")
+	AllowUomFractions YesNo;/* 'N'  */
+	@Remarks("Time when timeslot starts")
+	?TimesLotStart Date;
+	@Remarks("Time when timeslot ends")
+	?TimesLotEnd Date;
+	@Remarks("Resource has time slot availability")
+	IsTimesLot YesNo;/* 'N'  */
+	@Remarks("Resource has day slot availability")
+	IsDateSlot YesNo;/* 'N'  */
+	@Remarks("Available on Sundays")
+	OnSunday YesNo;/* 'N'  */
+	@Remarks("Available on Mondays")
+	OnMonday YesNo;/* 'Y'  */
+	@Remarks("Available on Tuesdays")
+	OnTuesday YesNo;/* 'Y'  */
+	@Remarks("Available on Wednesdays")
+	OnWednesday YesNo;/* 'Y'  */
+	@Remarks("Available on Thursdays")
+	OnThursday YesNo;/* 'Y'  */
+	@Remarks("Available on Fridays")
+	OnFriday YesNo;/* 'Y'  */
+	@Remarks("Available on Saturday")
+	OnSaturday YesNo;/* 'N'  */
+	@Remarks("Category of a Product")
+	MProductCategory;
+	@Remarks("Tax Category")
+	CTaxCategory;
+	@Remarks("Chargeable Quantity")
+	?ChargeableQty Quantity;/* 0 */
+};
+

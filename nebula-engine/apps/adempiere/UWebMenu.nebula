@@ -1,0 +1,33 @@
+@Remarks("Web Menu")
+@Refby("2")
+type UWebMenu {
+	@Remarks("Web Menu")
+	!UWebMenuId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Menu Link")
+	MenuLink null;
+	@Remarks("Module")
+	Module null;
+	@Remarks("Parent Menu")
+	?ParentMenu UWebMenu;
+	@Remarks("Has SubMenu")
+	HasSubMenu YesNo;/* 'N'  */
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Image Link")
+	?ImageLink null;
+	@Remarks("Position")
+	?Position null;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Category")
+	?Category null;
+	@Remarks("Sequence")
+	?Sequence;
+};
+

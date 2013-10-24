@@ -1,0 +1,43 @@
+@Remarks("Recurring Document")
+@Refby("1")
+type CRecurring {
+	@Remarks("Recurring Document")
+	!CRecurringId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Type of Recurring Document")
+	RecurringType Attr;
+	@Remarks("Order")
+	?COrder;
+	@Remarks("Invoice Identifier")
+	?CInvoice;
+	@Remarks("Payment identifier")
+	?CPayment;
+	@Remarks("Financial Project")
+	?CProject;
+	@Remarks("General Ledger Journal Batch")
+	?GlJournalBatch;
+	@Remarks("Frequency of event")
+	FrequencyType Attr;
+	@Remarks("Number of recurring runs")
+	RunsMax Number;
+	@Remarks("Number of recurring runs remaining")
+	RunsRemaining Number;
+	@Remarks("Date the process was last run.")
+	?DateLastRun Date;
+	@Remarks("Date the process will run next")
+	?DateNextRun Date;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Frequency of events")
+	?Frequency;
+};
+

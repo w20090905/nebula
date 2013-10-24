@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+type MProductStockV {
+	Value String;
+	?Help;
+	?QtyAvailable Quantity;
+	QtyOnHand Quantity;
+	QtyReserved Quantity;
+	?Description;
+	Warehouse null;
+	MWarehouseId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	?DocumentNote Note;
+};
+

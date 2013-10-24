@@ -1,0 +1,29 @@
+@Remarks("Freight Rate")
+@Refby("0")
+tx MFreight {
+	@Remarks("Freight Rate")
+	!MFreightId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Method or manner of product delivery")
+	MShipper;
+	@Remarks("Category of the Freight")
+	MFreightCategory;
+	@Remarks("Valid from including this date (first day)")
+	ValidFrom Date;
+	@Remarks("Country")
+	?CCountry;
+	@Remarks("Receiving Country")
+	?ToCountry CCountry;
+	@Remarks("Identifies a geographical Region")
+	?CRegion;
+	@Remarks("Receiving Region")
+	?ToRegion CRegion;
+	@Remarks("The Currency for this record")
+	CCurrency;
+	@Remarks("Freight Amount")
+	FreightAmt Amount;/* 0  	  */
+};
+

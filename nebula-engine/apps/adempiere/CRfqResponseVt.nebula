@@ -1,0 +1,29 @@
+@Remarks("")
+@Refby("0")
+type CRfqResponseVt {
+	CRfqResponseId ID;
+	CRfqId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AdLanguage Code;
+	?OrgLocationId ID;
+	TaxId Code;
+	*Name;
+	?Description;
+	?Help;
+	CCurrencyId ID;
+	IsoCode YesNo;
+	DateResponse Date;
+	?DateWorkStart Date;
+	?DeliveryDays Count;
+	CBpartnerId ID;
+	BpName Name;
+	?BpName2 null;
+	CBpartnerLocationId ID;
+	?CLocationId ID;
+	?AdUserId ID;
+	?Title;
+	?Phone;
+	?ContactName Name;
+};
+

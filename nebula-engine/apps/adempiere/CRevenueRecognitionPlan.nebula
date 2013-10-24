@@ -1,0 +1,27 @@
+@Remarks("Plan for recognizing or recording revenue")
+@Refby("2")
+tx CRevenueRecognitionPlan {
+	@Remarks("Plan for recognizing or recording revenue")
+	!CRevenueRecognitionPlanId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Rules for accounting")
+	CAcctSchema;
+	@Remarks("Method for recording revenue")
+	CRevenueRecognition;
+	@Remarks("Invoice Detail Line")
+	CInvoiceLine;
+	@Remarks("Account for unearned revenue")
+	UnearnedRevenueAcct CValidCombination;
+	@Remarks("Account for Product Revenue (Sales Account)")
+	PRevenueAcct CValidCombination;
+	@Remarks("The Currency for this record")
+	CCurrency;
+	@Remarks("Total Amount")
+	TotalAmt Amount;/* 0  */
+	@Remarks("Recognized Amount")
+	Recognizedamt Amount;/* 0  */
+};
+

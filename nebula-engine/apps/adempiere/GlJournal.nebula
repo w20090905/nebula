@@ -1,0 +1,59 @@
+@Remarks("General Ledger Journal")
+@Refby("3")
+tx GlJournal {
+	@Remarks("General Ledger Journal")
+	!GlJournalId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Rules for accounting")
+	CAcctSchema;
+	@Remarks("Document type or rules")
+	CDocType;
+	@Remarks("Document sequence number of the document")
+	DocumentNo Code;
+	@Remarks("The current status of the document")
+	DocStatus Attr;
+	@Remarks("The targeted status of the document")
+	DocAction Attr;
+	@Remarks("Indicates if this document requires approval")
+	IsApproved YesNo;/* 'N'  */
+	@Remarks("Indicates if this document / line is printed")
+	IsPrinted YesNo;/* 'N'  */
+	@Remarks("Optional short description of the record")
+	Description;
+	@Remarks("The type of posted amount for the transaction")
+	PostingType YesNo;
+	@Remarks("General Ledger Budget")
+	?GlBudget;
+	@Remarks("General Ledger Category")
+	GlCategory;
+	@Remarks("Date of the Document")
+	DateDoc Date;
+	@Remarks("Accounting Date")
+	DateAcct Date;
+	@Remarks("Period of the Calendar")
+	CPeriod;
+	@Remarks("The Currency for this record")
+	?CCurrency;
+	@Remarks("Currency Conversion Rate")
+	CurrencyRate Rate;/* 0  */
+	@Remarks("General Ledger Journal Batch")
+	?GlJournalBatch;
+	@Remarks("Total debit in document currency")
+	TotalDr Number;/* 0  */
+	@Remarks("Total Credit in document currency")
+	TotalCr Number;/* 0  */
+	@Remarks("If not zero, the Debit amount of the document must be equal this amount")
+	?ControlAmt Amount;/* 0 */
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The document has been processed")
+	?Processed YesNo;/* 'N'                            */
+	@Remarks("Posting status")
+	PostEd YesNo;/* 'N'  */
+	@Remarks("Currency Conversion Rate Type")
+	CConversionType;
+};
+

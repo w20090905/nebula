@@ -1,0 +1,15 @@
+@Remarks("ASP Task")
+@Refby("0")
+type AspTask {
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;/* NULL   */
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;/* NULL   */
+	@Remarks("Operation System Task")
+	!AdTask;
+	@Remarks("ASP Level")
+	!AspLevel;
+	@Remarks("ASP Status")
+	AspStatus Attr;/* 'U'  */
+};
+

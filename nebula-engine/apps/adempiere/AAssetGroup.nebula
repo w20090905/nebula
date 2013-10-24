@@ -1,0 +1,27 @@
+@Remarks("Group of Assets")
+@Refby("3")
+type AAssetGroup {
+	@Remarks("Group of Assets")
+	!AAssetGroupId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("The asset is owned by the organization")
+	IsOwned YesNo;/* 'Y'  */
+	@Remarks("The asset will be depreciated")
+	IsDepreciated YesNo;/* 'Y'  */
+	@Remarks("Create one asset per UOM")
+	IsOneAssetPerUom YesNo;/* 'N'  */
+	@Remarks("Create Asset and activate it")
+	IsCreateAsActive YesNo;/* 'Y'  */
+	@Remarks("Enable tracking issues for this asset")
+	IsTrackIssues YesNo;/* 'N'  */
+};
+

@@ -1,0 +1,37 @@
+@Remarks("Identifies a Menu")
+@Refby("3")
+type AdMenu {
+	@Remarks("Identifies a Menu")
+	!AdMenuId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("This is a summary entity")
+	IsSummary YesNo;/* 'N'  */
+	@Remarks("This is a Sales Transaction")
+	IsSoTrx YesNo;/* 'Y'  */
+	@Remarks("Field is read only")
+	IsReadonly YesNo;/* 'N'  */
+	@Remarks("Indicates the Action to be performed")
+	?Action YesNo;
+	@Remarks("Data entry or display window")
+	?AdWindow;
+	@Remarks("Workflow or combination of tasks")
+	?AdWorkflow;
+	@Remarks("Operation System Task")
+	?AdTask;
+	@Remarks("Process or Report")
+	?AdProcess;
+	@Remarks("Special Form")
+	?AdForm;
+	@Remarks("Collection of windows, reports")
+	?AdWorkbench;
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
+	EntityType AdEntityType;/* 'D'  */
+};
+

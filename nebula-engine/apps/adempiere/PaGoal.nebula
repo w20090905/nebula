@@ -1,0 +1,49 @@
+@Remarks("Performance Goal")
+@Refby("3")
+type PaGoal {
+	@Remarks("Performance Goal")
+	!PaGoalId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Method of ordering records; lowest number comes first")
+	SeqNo;/* 0  */
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Optional additional user defined information")
+	?Note;
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	?AdUser;
+	@Remarks("Performance Color Schema")
+	PaColorSchema;
+	@Remarks("This is a summary entity")
+	IsSummary YesNo;/* 'N'  */
+	@Remarks("Parent Goal")
+	?PaGoalParent PaGoal;
+	@Remarks("Concrete Performance Measurement")
+	?PaMeasure;
+	@Remarks("Relative weight of this step (0 = ignored)")
+	?RelativeWeight Weight;
+	@Remarks("Target value for measure")
+	MeasureTarget Length;/* 0  */
+	@Remarks("Performance Measure Scope")
+	MeasureScope null;
+	@Remarks("Measure Scope initially displayed")
+	?MeasureDisplay null;
+	@Remarks("Starting date for a range")
+	?DateFrom Date;
+	@Remarks("End date of a date range")
+	?DateTo Date;
+	@Remarks("Actual value that has been measured.")
+	?MeasureActual Length;/* 0 */
+	@Remarks("Target achievement from 0..1")
+	?GoalPerFormAnce Number;
+	@Remarks("Date the process was last run.")
+	?DateLastRun Date;
+	@Remarks("Responsibility Role")
+	?AdRole;
+};
+

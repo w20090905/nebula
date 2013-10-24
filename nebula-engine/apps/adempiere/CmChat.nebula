@@ -1,0 +1,23 @@
+@Remarks("Chat")
+@Refby("2")
+tx CmChat {
+	@Remarks("Chat or discussion thread")
+	!CmChatId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Optional short description of the record")
+	Description;
+	@Remarks("Database Table information")
+	AdTable;
+	@Remarks("Direct internal record ID")
+	RecordId ID;
+	@Remarks("Type of Confidentiality")
+	ConfidentialType Attr;
+	@Remarks("Type of discussion / chat")
+	?CmChatType;
+	@Remarks("Type of moderation")
+	?ModerationType Attr;/* NULL   */
+};
+

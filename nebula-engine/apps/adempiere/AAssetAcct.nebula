@@ -1,0 +1,15 @@
+@Remarks("")
+@Refby("0")
+type AAssetAcct {
+	!AAsset;
+	!CAcctSchema;
+	AdClientId ID;
+	AdOrgId ID;
+	ADepreciation;
+	ADepreciationAcct Amount;
+	AAccumdePreciationAcct Amount;
+	ADisposalLoss Number;
+	ADisposalGain Number;
+	AAssetAcct Amount;
+};
+

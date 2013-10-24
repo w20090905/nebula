@@ -1,0 +1,19 @@
+@Remarks("Calendar Year")
+@Refby("3")
+tx CYear {
+	@Remarks("Calendar Year")
+	!CYearId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrg;
+	@Remarks("The Fiscal Year")
+	Fiscalyear null;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Accounting Calendar Name")
+	CCalendar;
+	@Remarks("Process Now")
+	?Processing YesNo;
+};
+

@@ -1,0 +1,19 @@
+@Remarks("Method or manner of product delivery")
+@Refby("6")
+type MShipper {
+	@Remarks("Method or manner of product delivery")
+	!MShipperId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Identifies a Business Partner")
+	?CBpartner;
+	@Remarks("URL of the shipper to track shipments")
+	?TrackingUrl Url;
+};
+

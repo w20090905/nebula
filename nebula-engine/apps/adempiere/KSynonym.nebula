@@ -1,0 +1,17 @@
+@Remarks("Knowlege Keyword Synonym")
+@Refby("0")
+type KSynonym {
+	@Remarks("Knowlege Keyword Synonym")
+	!KSynonymId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("The synonym for the name")
+	Synonymname Name;
+	@Remarks("Language for this entity")
+	AdLanguage;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+};
+

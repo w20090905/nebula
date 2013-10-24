@@ -1,0 +1,38 @@
+@Remarks("")
+@Refby("0")
+type RvCRfqResponse {
+	AdClientId ID;
+	AdOrgId ID;
+	CRfqId ID;
+	CRfqTopicId ID;
+	CBpartnerId ID;
+	CBpartnerLocationId ID;
+	?AdUserId ID;
+	CRfqResponseId ID;
+	CCurrencyId ID;
+	?DateResponse Date;
+	?DateWorkStart Date;
+	?DeliveryDays Count;
+	?DateWorkComplete Date;
+	Price;
+	?Ranking;
+	IsSelfService YesNo;
+	?Description;
+	?Help;
+	?MProductId ID;
+	?MAttributeSetInstanceId ID;
+	Line;
+	?LineDateWorkStart Date;
+	?LineDeliveryDays Count;
+	?LineDateWorkComplete Date;
+	?LineDescription Description;
+	?LineHelp Help;
+	CUomId ID;
+	Qty Quantity;
+	BenchmarkPrice Price;
+	?BenchmarkDifference Number;
+	QtyPrice Price;
+	?Discount Count;
+	?QtyRanking Ranking;
+};
+

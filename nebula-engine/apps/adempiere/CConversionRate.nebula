@@ -1,0 +1,25 @@
+@Remarks("Rate used for converting currencies")
+@Refby("1")
+tx CConversionRate {
+	@Remarks("Rate used for converting currencies")
+	!CConversionRateId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrg;
+	@Remarks("The Currency for this record")
+	CCurrency;
+	@Remarks("Target currency")
+	CCurrencyIdTo CCurrency;
+	@Remarks("Valid from including this date (first day)")
+	ValidFrom Date;
+	@Remarks("Valid to including this date (last day)")
+	?ValidTo Date;
+	@Remarks("Rate to multiple the source by to calculate the target.")
+	MultiPlyrate Rate;/* 0  */
+	@Remarks("To convert Source number to Target number, the Source is divided")
+	DivideRate Rate;/* 0  */
+	@Remarks("Currency Conversion Rate Type")
+	CConversionType;
+};
+

@@ -1,0 +1,46 @@
+@Remarks("")
+@Refby("0")
+type RvTransaction {
+	MTransactionId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	MovementType Attr;
+	MovementDate Date;
+	MovementQty Quantity;
+	MAttributeSetInstanceId ID;
+	?MAttributeSetId ID;
+	?SerNo Code;
+	?LOT;
+	?MLotId ID;
+	?GuaranteeDate Date;
+	MProductId ID;
+	Value String;
+	*Name;
+	?Description;
+	?UPC;
+	?SKU;
+	CUomId ID;
+	MProductCategoryId ID;
+	?ClassIfication YesNo;
+	?Weight;
+	?Volume;
+	?VersionNo Code;
+	MLocatorId ID;
+	MWarehouseId ID;
+	?X String;
+	?Y String;
+	?Z String;
+	?MInventoryLineId ID;
+	?MInventoryId ID;
+	?MMovementLineId ID;
+	?MMovementId ID;
+	?MInoutLineId ID;
+	?MInoutId ID;
+	?MProductionLineId ID;
+	?MProductionPlanId ID;
+	?MProductionId ID;
+	?CProjectIssueId ID;
+	?CProjectId ID;
+	?Line;
+};
+

@@ -1,0 +1,33 @@
+@Remarks("Rules for generating physical inventory")
+@Refby("1")
+type MPerPetualinv {
+	@Remarks("Rules for generating physical inventory")
+	!MPerPetualinvId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Frequency of inventory counts per year")
+	NoInventoryCount Count;
+	@Remarks("Frequency of product counts per year")
+	NoProductCount Count;
+	@Remarks("Count High Movement products")
+	CountHighMovement YesNo;/* 'N'  */
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Date the process was last run.")
+	?DateLastRun Date;
+	@Remarks("Date the process will run next")
+	DateNextRun Date;
+	@Remarks("Frequency of processing Perpetual Inventory")
+	NumberOfruns Number;
+	@Remarks("Category of a Product")
+	?MProductCategory;
+	@Remarks("Storage Warehouse and Service Point")
+	?MWarehouse;
+};
+

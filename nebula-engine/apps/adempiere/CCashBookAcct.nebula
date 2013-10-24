@@ -1,0 +1,23 @@
+@Remarks("C_CashBook_Acct")
+@Refby("0")
+type CCashBookAcct {
+	@Remarks("Cash Book for recording petty cash transactions")
+	!CCashBook;
+	@Remarks("Rules for accounting")
+	!CAcctSchema;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Cash Book Asset Account")
+	CbAssetAcct CValidCombination;
+	@Remarks("Cash Transfer Clearing Account")
+	CbCashTransferAcct CValidCombination;
+	@Remarks("Cash Book Differences Account")
+	CbDifferencesAcct CValidCombination;
+	@Remarks("Cash Book Expense Account")
+	CbExpenseAcct CValidCombination;
+	@Remarks("Cash Book Receipts Account")
+	CbReceiptAcct CValidCombination;
+};
+

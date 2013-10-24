@@ -1,0 +1,15 @@
+@Remarks("AD_Attribute_Value")
+@Refby("0")
+type AdAttributeValue {
+	@Remarks("System Attribute")
+	!AdAttribute;
+	@Remarks("Direct internal record ID")
+	!RecordId ID;
+	@Remarks("V_Number")
+	?VNumber Number;
+	@Remarks("V_Date")
+	?VDate Date;
+	@Remarks("V_String")
+	?VString Note;
+};
+

@@ -1,0 +1,21 @@
+@Remarks("Collection of Workbenches")
+@Refby("2")
+type AdDesktop {
+	@Remarks("Collection of Workbenches")
+	!AdDesktopId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Image or Icon")
+	?AdImage;
+	@Remarks("Color for backgrounds or indicators")
+	?AdColor;
+};
+

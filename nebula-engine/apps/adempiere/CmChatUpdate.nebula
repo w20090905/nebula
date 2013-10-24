@@ -1,0 +1,15 @@
+@Remarks("Chat Update")
+@Refby("0")
+type CmChatUpdate {
+	@Remarks("Chat or discussion thread")
+	!CmChat;
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	!AdUser;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
+	IsSelfService YesNo;/* 'N'  */
+};
+

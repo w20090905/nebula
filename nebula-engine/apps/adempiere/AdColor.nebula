@@ -1,0 +1,45 @@
+@Remarks("Color for backgrounds or indicators")
+@Refby("3")
+type AdColor {
+	@Remarks("Color for backgrounds or indicators")
+	!AdColorId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Default value")
+	IsDefault YesNo;/* 'N'  */
+	@Remarks("Color presentation for this color")
+	ColorType Attr;
+	@Remarks("RGB value")
+	Red Number;
+	@Remarks("RGB value")
+	Green Number;
+	@Remarks("Color RGB blue value")
+	Blue Number;
+	@Remarks("Color Alpha value 0-255")
+	Alpha Number;
+	@Remarks("Image or Icon")
+	?AdImage;
+	@Remarks("Image Texture Composite Alpha")
+	ImageAlpha Number;
+	@Remarks("RGB value for second color")
+	?Red1 Number;
+	@Remarks("RGB value for second color")
+	?Green1 Number;
+	@Remarks("RGB value for second color")
+	?Blue1 Number;
+	@Remarks("Alpha value for second color")
+	?Alpha1 Number;
+	@Remarks("Width of the lines")
+	?LineWidth Number;
+	@Remarks("Distance between lines")
+	?LineDistance Number;
+	@Remarks("Start point of the gradient colors")
+	?StartPoint Number;
+	@Remarks("Distance in points to repeat gradient color - or zero")
+	?RepeatDistance Number;
+};
+

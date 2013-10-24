@@ -1,0 +1,121 @@
+@Remarks("Invoice Identifier")
+@Refby("24")
+tx CInvoice {
+	@Remarks("Invoice Identifier")
+	!CInvoiceId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrg;
+	@Remarks("This is a Sales Transaction")
+	IsSoTrx YesNo;/* 'Y'  */
+	@Remarks("Document sequence number of the document")
+	DocumentNo Code;
+	@Remarks("The current status of the document")
+	DocStatus Attr;
+	@Remarks("The targeted status of the document")
+	DocAction Attr;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Posting status")
+	PostEd YesNo;/* 'N'  */
+	@Remarks("Document type or rules")
+	CDocType;
+	@Remarks("Target document type for conversing documents")
+	CDocTypeTarget CDocType;
+	@Remarks("Order")
+	?COrder;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Indicates if this document requires approval")
+	IsApproved YesNo;/* 'Y'  */
+	@Remarks("Transferred to General Ledger (i.e. accounted)")
+	IsTransferred YesNo;/* 'N'  */
+	@Remarks("Indicates if this document / line is printed")
+	IsPrinted YesNo;/* 'N'  */
+	@Remarks("Sales Representative or Company Agent")
+	?SalesRep AdUser;
+	@Remarks("Date printed on Invoice")
+	DateInvoiceD Date;
+	@Remarks("Date the document was printed.")
+	?DatePrinted Date;
+	@Remarks("Accounting Date")
+	DateAcct Date;
+	@Remarks("Identifies a Business Partner")
+	CBpartner;
+	@Remarks("Identifies the (ship to) address for this Business Partner")
+	CBpartnerLocation;
+	@Remarks("Transaction Reference Number (Sales Order, Purchase Order) of your Business Partner")
+	?PoReference Note;
+	@Remarks("Print Discount on Invoice and Order")
+	IsDiscountPrinted YesNo;/* 'Y'  */
+	@Remarks("Date of Order")
+	?DateOrdered Date;
+	@Remarks("The Currency for this record")
+	CCurrency;
+	@Remarks("How you pay the invoice")
+	PaymentRule Attr;
+	@Remarks("The terms of Payment (timing, discount)")
+	CPaymentTerm;
+	@Remarks("Additional document charges")
+	?CCharge;
+	@Remarks("Charge Amount")
+	?ChargeAmt Amount;/* 0 */
+	@Remarks("Total of all document lines")
+	TotalLines Line;/* 0  */
+	@Remarks("Total amount of document")
+	GrandTotal Amount;/* 0  */
+	@Remarks("Unique identifier of a Price List")
+	MPriceList;
+	@Remarks("Tax is included in the price")
+	IsTaxIncluded YesNo;/* 'N'  */
+	@Remarks("Marketing Campaign")
+	?CCampaign;
+	@Remarks("Financial Project")
+	?CProject;
+	@Remarks("Business Activity")
+	?CActivity;
+	@Remarks("The document is paid")
+	IsPaid YesNo;/* 'N'  */
+	@Remarks("Payment identifier")
+	?CPayment;
+	@Remarks("Cash Journal Line")
+	?CCashLine;
+	@Remarks("Process which will generate a new document lines based on an existing document")
+	?CreateFrom YesNo;
+	@Remarks("Generate To")
+	?GenerateTo Attr;
+	@Remarks("Enable sending Document EMail")
+	SendEmail YesNo;/* 'N'  */
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	?AdUser;
+	@Remarks("Copy From Record")
+	?CopyFrom null;
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
+	IsSelfService YesNo;/* 'N'  */
+	@Remarks("Performing or initiating organization")
+	?AdOrgTrx AdOrg;
+	@Remarks("User defined list element #1")
+	?User1 CElementValue;
+	@Remarks("User defined list element #2")
+	?User2 CElementValue;
+	@Remarks("Currency Conversion Rate Type")
+	?CConversionType;
+	@Remarks("Is the Payment Schedule is valid")
+	IsPayScheduleValid YesNo;/* 'N'  */
+	@Remarks("Referenced Invoice")
+	?RefInvoice CInvoice;
+	@Remarks("Document is in dispute")
+	IsIndispute YesNo;/* 'N'  */
+	@Remarks("Invoice Collection Status")
+	?InvoiceCollectionType Attr;/* NULL   */
+	@Remarks("Return Material Authorization")
+	?MRma;/* NULL */
+	@Remarks("Dunning Grace")
+	?DunningGrace Date;
+	@Remarks("Dunning Level")
+	?CDunningLevel;
+};
+

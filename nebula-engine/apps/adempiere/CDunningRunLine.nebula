@@ -1,0 +1,39 @@
+@Remarks("Dunning Run Line")
+@Refby("0")
+tx CDunningRunLine {
+	@Remarks("Dunning Run Line")
+	!CDunningRunLineId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Dunning Run Entry")
+	CDunningRunEntry;
+	@Remarks("Invoice Identifier")
+	?CInvoice;
+	@Remarks("Payment identifier")
+	?CPayment;
+	@Remarks("Amount")
+	Amt Amount;/* 0  */
+	@Remarks("Converted Amount")
+	ConvertedAmt Amount;/* 0  */
+	@Remarks("Number of days due (negative: due in number of days)")
+	DaysDue Count;/* 0  */
+	@Remarks("Number of times dunned previously")
+	TimesDunned Count;/* 0  */
+	@Remarks("Interest Amount")
+	InterestAmt Amount;/* 0  */
+	@Remarks("Fee amount in invoice currency")
+	FeeAmt Amount;/* 0  */
+	@Remarks("Total Amount")
+	TotalAmt Amount;/* 0  */
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Document is in dispute")
+	IsIndispute YesNo;/* 'N'  */
+	@Remarks("Open item amount")
+	OpenAmt Amount;
+	@Remarks("Invoice Payment Schedule")
+	?CInvoicePaySchedule;
+};
+

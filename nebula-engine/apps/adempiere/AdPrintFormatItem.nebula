@@ -1,0 +1,113 @@
+@Remarks("Item/Column in the Print format")
+@Refby("7")
+type AdPrintFormatItem {
+	@Remarks("Item/Column in the Print format")
+	!AdPrintFormatItemId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Data Print Format")
+	AdPrintFormat;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("The label text to be printed on a document or correspondence.")
+	?PrintName Name;
+	@Remarks("Indicates if this document / line is printed")
+	IsPrinted YesNo;/* 'Y'  */
+	@Remarks("Print Area")
+	PrintAreaType Attr;
+	@Remarks("Method of ordering records; lowest number comes first")
+	SeqNo;
+	@Remarks("Print Format Type")
+	PrintFormatType Attr;
+	@Remarks("Column in the table")
+	?AdColumn;
+	@Remarks("Print format that is included here.")
+	?AdPrintFormatChild AdPrintFormat;
+	@Remarks("The item is relative positioned (not absolute)")
+	IsRelativePosition YesNo;/* 'Y'  */
+	@Remarks("Print item on next line")
+	IsNextLine YesNo;/* 'Y'  */
+	@Remarks("Relative X (horizontal) space in 1/72 of an inch")
+	Xspace Length;
+	@Remarks("Relative Y (vertical) space in 1/72 of an inch")
+	Yspace Length;
+	@Remarks("Absolute X (horizontal) position in 1/72 of an inch")
+	Xposition Length;
+	@Remarks("Absolute Y (vertical) position in 1/72 of an inch")
+	Yposition Length;
+	@Remarks("Maximum Width in 1/72 if an inch - 0 = no restriction")
+	MaxWidth Width;
+	@Remarks("If selected, only one line is printed")
+	IsHeightOneLine YesNo;/* 'Y'  */
+	@Remarks("Maximum Height in 1/72 if an inch - 0 = no restriction")
+	MaxHeight Height;
+	@Remarks("Field Text Alignment")
+	FieldAlignmentType Attr;
+	@Remarks("Line Alignment")
+	LineAlignmentType Attr;
+	@Remarks("Color used for printing and display")
+	?AdPrintColor;
+	@Remarks("Maintain Print Font")
+	?AdPrintFont;
+	@Remarks("Include in sort order")
+	IsOrderBy YesNo;/* 'N'  */
+	@Remarks("Determines in what order the records are displayed")
+	SortNo SeqNo;
+	@Remarks("After a group change, totals, etc. are printed")
+	IsGroupBy YesNo;/* 'N'  */
+	@Remarks("Start with new page")
+	IsPageBreak YesNo;/* 'N'  */
+	@Remarks("Calculate the Sum of numeric content or length")
+	IsSummarized YesNo;/* 'N'  */
+	@Remarks("The image to be printed is attached to the record")
+	ImageIsAttached YesNo;/* 'N'  */
+	@Remarks("URL of  image")
+	?ImageUrl Url;
+	@Remarks("Calculate Average of numeric content or length")
+	IsAveraged YesNo;/* 'N'  */
+	@Remarks("Count number of not empty elements")
+	IsCounted YesNo;/* 'N'  */
+	@Remarks("Set New Line Position")
+	IsSetNlposition YesNo;/* 'N' */
+	@Remarks("Suppress columns or elements with NULL value")
+	IsSuppressNull YesNo;/* 'N' */
+	@Remarks("Print this column below the column index entered")
+	?BelowColumn Number;
+	@Remarks("Graph included in Reports")
+	?AdPrintGraph;
+	@Remarks("Column has a fixed width")
+	IsFixedWidth YesNo;/* 'N' */
+	@Remarks("The column is printed on the next page")
+	IsNextPage YesNo;/* 'N' */
+	@Remarks("The label text to be printed on a document or correspondence after the field")
+	?PrintNameSuffix Description;
+	@Remarks("Calculate the minimum amount")
+	IsMinCalc YesNo;/* 'N'  */
+	@Remarks("Calculate the maximim amount")
+	IsMaxCalc YesNo;/* 'N'  */
+	@Remarks("Create a running total (sum)")
+	IsRunningTotal YesNo;/* 'N'  */
+	@Remarks("Create Running Total Lines (page break) every x lines")
+	?RunningTotalLines Line;
+	@Remarks("Calculate Variance")
+	IsVariancecalc YesNo;/* 'N'  */
+	@Remarks("Calculate Standard Deviation")
+	IsDeviationCalc YesNo;/* 'N'  */
+	@Remarks("Fill the shape with the color selected")
+	IsFilledRectangle YesNo;/* 'N'  */
+	@Remarks("Width of the lines")
+	?LineWidth Number;
+	@Remarks("Arc Diameter for rounded Rectangles")
+	?ArcDiameter Number;
+	@Remarks("Type of the shape to be painted")
+	?Shapetype Attr;
+	@Remarks("Information maintained in System Element table")
+	IsCentrallyMaintained YesNo;/* 'Y'  */
+	@Remarks("The image is retrieved from the data column")
+	IsImageField YesNo;/* 'N'  */
+	@Remarks("Type of barcode")
+	?BarCodeType Attr;
+};
+

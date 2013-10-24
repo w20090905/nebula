@@ -1,0 +1,25 @@
+@Remarks("Issue Project")
+@Refby("2")
+type RIssueProject {
+	@Remarks("Implementation Projects")
+	!RIssueProjectId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Asset used internally or by customers")
+	?AAsset;
+	@Remarks("Financial Project")
+	?CProject;
+	@Remarks("Information to help profiling the system for solving support issues")
+	?StatisticsInfo Info;
+	@Remarks("Information to help profiling the system for solving support issues")
+	?ProfileInfo Info;
+	@Remarks("Status of the system - Support priority depends on system status")
+	SystemStatus Attr;
+};
+

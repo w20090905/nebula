@@ -1,0 +1,41 @@
+@Remarks("Product Costing")
+@Refby("0")
+type MProductCosting {
+	@Remarks("Product, Service, Item")
+	!MProduct;
+	@Remarks("Rules for accounting")
+	!CAcctSchema;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("The currently used cost price")
+	CurrentCostPrice Price;/* 0  */
+	@Remarks("Future Cost Price")
+	FutureCostPrice Price;/* 0  */
+	@Remarks("Standard Costs")
+	CostStandard Number;/* 0  */
+	@Remarks("Standard Cost Purchase Order Quantity Sum (internal)")
+	CostStandardPoQty Quantity;/* 0  */
+	@Remarks("Standard Cost Purchase Order Amount Sum (internal)")
+	CostStandardPoAmt Amount;/* 0  */
+	@Remarks("Standard Cost Invoice Quantity Sum (internal)")
+	CostStandardCumQty Quantity;/* 0  */
+	@Remarks("Standard Cost Invoice Amount Sum (internal)")
+	CostStandardCumAmt Amount;/* 0  */
+	@Remarks("Weighted average costs")
+	CostAverage Number;/* 0  */
+	@Remarks("Cumulative average cost quantities (internal)")
+	CostAverageCumQty Quantity;/* 0  */
+	@Remarks("Cumulative average cost amounts (internal)")
+	CostAverageCumAmt Amount;/* 0  */
+	@Remarks("Price of the last purchase order for the product")
+	PriceLastPo Number;/* 0  */
+	@Remarks("Price of the last invoice for the product")
+	PriceLastInv Number;/* 0  */
+	@Remarks("Cumulative total lifetime invoice quantity")
+	TotalInvQty Quantity;/* 0  */
+	@Remarks("Cumulative total lifetime invoice amount")
+	TotalInvAmt Amount;/* 0  */
+};
+

@@ -1,0 +1,17 @@
+@Remarks("M_Substitute")
+@Refby("0")
+type MSubstitute {
+	@Remarks("Product, Service, Item")
+	!MProduct;
+	@Remarks("Entity which can be used in place of this entity")
+	!Substitute MProduct;
+	@Remarks("Client/Tenant for this installation.")
+	AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
+	?Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+};
+

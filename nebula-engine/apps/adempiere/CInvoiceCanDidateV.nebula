@@ -1,0 +1,13 @@
+@Remarks("")
+@Refby("0")
+type CInvoiceCanDidateV {
+	AdClientId ID;
+	AdOrgId ID;
+	CBpartnerId ID;
+	COrderId ID;
+	DocumentNo Code;
+	DateOrdered Date;
+	CDocTypeId ID;
+	?TotalLines Line;
+};
+

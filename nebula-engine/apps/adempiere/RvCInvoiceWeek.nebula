@@ -1,0 +1,17 @@
+@Remarks("")
+@Refby("0")
+type RvCInvoiceWeek {
+	AdClientId ID;
+	AdOrgId ID;
+	?SalesRepId ID;
+	?DateInvoiceD Date;
+	?LineNetAmt Amount;
+	?LineListAmt Amount;
+	?LineLimitAmt Amount;
+	?LineDiscountAmt Amount;
+	?LineDiscount Count;
+	?LineOverLimitAmt Amount;
+	?LineOverLimit Count;
+	IsSoTrx YesNo;
+};
+

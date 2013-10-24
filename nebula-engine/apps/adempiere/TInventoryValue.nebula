@@ -1,0 +1,51 @@
+@Remarks("T_InventoryValue")
+@Refby("0")
+tx TInventoryValue {
+	@Remarks("Instance of the process")
+	!AdPInstance;
+	@Remarks("Storage Warehouse and Service Point")
+	!MWarehouse;
+	@Remarks("Product, Service, Item")
+	!MProduct;
+	@Remarks("Product Attribute Set Instance")
+	!MAttributeSetInstance;
+	@Remarks("Client/Tenant for this installation.")
+	?AdClientId ID;
+	@Remarks("Organizational entity within client")
+	?AdOrgId ID;
+	@Remarks("Identifies a unique instance of a Price List")
+	?MPriceListVersion;
+	@Remarks("Date of valuation")
+	?DateValue Date;
+	@Remarks("The Currency for this record")
+	?CCurrency;
+	@Remarks("On Hand Quantity")
+	?QtyOnHand Quantity;/* 0 */
+	@Remarks("Price based on a purchase order")
+	?PricePo Number;/* 0 */
+	@Remarks("List Price")
+	?PriceList Number;/* 0 */
+	@Remarks("Standard Price")
+	?PriceStd Number;/* 0 */
+	@Remarks("Lowest price for a product")
+	?PriceLimit Count;/* 0 */
+	@Remarks("Standard Costs")
+	?CostStandard Number;/* 0 */
+	@Remarks("Cost information")
+	?Cost;/* 0 */
+	@Remarks("Valuation with PO Price")
+	?PricePoAmt Amount;/* 0 */
+	@Remarks("Valuation with List Price")
+	?PriceListAmt Amount;/* 0 */
+	@Remarks("Valuation with standard price")
+	?PriceStdAmt Amount;/* 0 */
+	@Remarks("Value with limit price")
+	?PriceLimitAmt Amount;/* 0 */
+	@Remarks("Value in Standard Costs")
+	?CostStandardAmt Amount;/* 0 */
+	@Remarks("Value with Cost")
+	?CostAmt Amount;/* 0 */
+	@Remarks("Product Cost Element")
+	?MCostElement;
+};
+

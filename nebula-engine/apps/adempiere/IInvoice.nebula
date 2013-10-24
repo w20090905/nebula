@@ -1,0 +1,117 @@
+@Remarks("Import Invoice")
+@Refby("0")
+type IInvoice {
+	@Remarks("Import Invoice")
+	!IInvoiceId ID;
+	@Remarks("Client/Tenant for this installation.")
+	?AdClientId ID;
+	@Remarks("Organizational entity within client")
+	?AdOrg;
+	@Remarks("Performing or initiating organization")
+	?AdOrgTrx AdOrg;
+	@Remarks("Has this import been processed")
+	IIsImported YesNo;/* 'N'  */
+	@Remarks("Messages generated from import process")
+	?IErrorMsg Msg;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The document has been processed")
+	?Processed YesNo;/* 'N' */
+	@Remarks("Unique identifier of a Price List")
+	?MPriceList;
+	@Remarks("The Currency for this record")
+	?CCurrency;
+	@Remarks("Sales Representative or Company Agent")
+	?SalesRep AdUser;
+	@Remarks("This is a Sales Transaction")
+	?IsSoTrx YesNo;/* 'Y' */
+	@Remarks("Identifies a Business Partner")
+	?CBpartner;
+	@Remarks("Identifies the (ship to) address for this Business Partner")
+	?CBpartnerLocation;
+	@Remarks("Key of the Business Partner")
+	?BpartnerValue Note;
+	@Remarks("Alphanumeric identifier of the entity")
+	?Name;
+	@Remarks("Location or Address")
+	?CLocation;
+	@Remarks("Address line 1 for this location")
+	?Address null;
+	@Remarks("Address line 2 for this location")
+	?Address null;
+	@Remarks("Postal code")
+	?Postal;
+	@Remarks("Identifies a City")
+	?City null;
+	@Remarks("Identifies a geographical Region")
+	?CRegion;
+	@Remarks("Name of the Region")
+	?RegionName Name;
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	?AdUser;
+	@Remarks("Electronic Mail Address")
+	?EMail;
+	@Remarks("Business Partner Contact Name")
+	?ContactName Name;
+	@Remarks("Identifies a telephone number")
+	?Phone;
+	@Remarks("Country")
+	?CCountry;
+	@Remarks("Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1 - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html")
+	?CountryCode Code;
+	@Remarks("Document type or rules")
+	?CDocType;
+	@Remarks("Name of the Document Type")
+	?DocTypeName Name;
+	@Remarks("The terms of Payment (timing, discount)")
+	?CPaymentTerm;
+	@Remarks("Key of the Payment Term")
+	?PaymentTermValue Note;
+	@Remarks("Financial Project")
+	?CProject;
+	@Remarks("Marketing Campaign")
+	?CCampaign;
+	@Remarks("Business Activity")
+	?CActivity;
+	@Remarks("Invoice Identifier")
+	?CInvoice;
+	@Remarks("Document sequence number of the document")
+	?DocumentNo Code;
+	@Remarks("Date printed on Invoice")
+	?DateInvoiceD Date;
+	@Remarks("Accounting Date")
+	?DateAcct Date;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Product, Service, Item")
+	?MProduct;
+	@Remarks("Key of the Product")
+	?ProductValue Note;
+	@Remarks("Bar Code (Universal Product Code or its superset European Article Number)")
+	?UPC;
+	@Remarks("Stock Keeping Unit")
+	?SKU;
+	@Remarks("Tax identifier")
+	?CTax;
+	@Remarks("Short form for Tax to be printed on documents")
+	?TaxIndicator String;
+	@Remarks("Tax Amount for a document")
+	?TaxAmt Amount;/* 0 */
+	@Remarks("Invoice Detail Line")
+	?CInvoiceLine;
+	@Remarks("Description of the Line")
+	?LineDescription Description;
+	@Remarks("Ordered Quantity")
+	?QtyOrdered Quantity;/* 0 */
+	@Remarks("Actual Price")
+	?PriceActual Number;/* 0 */
+	@Remarks("Key of the Project")
+	?ProjectValue Note;
+	@Remarks("ActivityValue")
+	?ActivityValue Note;
+	@Remarks("Name of the Charge")
+	?ChargeName Name;
+	@Remarks("Additional document charges")
+	?CCharge;
+};
+

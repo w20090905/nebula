@@ -1,0 +1,69 @@
+@Remarks("Request for Quotation")
+@Refby("2")
+type CRfq {
+	@Remarks("Request for Quotation")
+	!CRfqId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Topic for Request for Quotations")
+	CRfqTopic;
+	@Remarks("The Currency for this record")
+	CCurrency;
+	@Remarks("Date of the Response")
+	DateResponse Date;
+	@Remarks("Are Resonses to the Request for Quotation accepted")
+	IsRfqResponseAcceptEd YesNo;/* 'Y'  */
+	@Remarks("Date when work is (planned to be) started")
+	?DateWorkStart Date;
+	@Remarks("Number of Days (planned) until Delivery")
+	?DeliveryDays Count;/* 0 */
+	@Remarks("Date when work is (planned to be) complete")
+	?DateWorkComplete Date;
+	@Remarks("Request for Quotation Type")
+	QuoteType Attr;
+	@Remarks("The respnse can have just the total amount for the RfQ")
+	IsQuoteTotalAmt YesNo;/* 'N'  */
+	@Remarks("Suppliers are requested to provide responses for all quantities")
+	IsQuoteAllQty YesNo;/* 'Y'  */
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
+	IsSelfService YesNo;/* 'N'  */
+	@Remarks("Only invited vendors can respond to an RfQ")
+	IsInvitedVendorsOnly YesNo;/* 'N'  */
+	@Remarks("Identifies a Business Partner")
+	?CBpartner;
+	@Remarks("Identifies the (ship to) address for this Business Partner")
+	?CBpartnerLocation;
+	@Remarks("User within the system - Internal or Business Partner Contact")
+	?AdUser;
+	@Remarks("Sales Representative or Company Agent")
+	SalesRep AdUser;
+	@Remarks("Margin for a product as a percentage")
+	?Margin Length;
+	@Remarks("Create SO")
+	?CreateSo YesNo;
+	@Remarks("Create Purchase Order")
+	?CreatePo YesNo;
+	@Remarks("Publish RfQ")
+	?PublishRfq null;
+	@Remarks("Order")
+	?COrder;
+	@Remarks("Copy Lines")
+	?CopyLines null;
+	@Remarks("Rank RfQ")
+	?Rankrfq null;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Document sequence number of the document")
+	DocumentNo Code;/* '.'  */
+};
+

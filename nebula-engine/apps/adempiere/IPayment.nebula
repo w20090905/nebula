@@ -1,0 +1,131 @@
+@Remarks("Import Payment")
+@Refby("0")
+tx IPayment {
+	@Remarks("Import Payment")
+	!IPaymentId ID;
+	@Remarks("Client/Tenant for this installation.")
+	?AdClientId ID;
+	@Remarks("Organizational entity within client")
+	?AdOrgId ID;
+	@Remarks("Has this import been processed")
+	IIsImported YesNo;/* 'N'  */
+	@Remarks("Messages generated from import process")
+	?IErrorMsg Msg;
+	@Remarks("The document has been processed")
+	?Processed YesNo;/* 'N' */
+	@Remarks("Payment identifier")
+	?CPayment;
+	@Remarks("Document sequence number of the document")
+	?DocumentNo Code;
+	@Remarks("Transaction Date")
+	?DateTrx Date;
+	@Remarks("This is a sales transaction (receipt)")
+	?IsReceipt YesNo;/* 'Y' */
+	@Remarks("Document type or rules")
+	?CDocType;
+	@Remarks("Name of the Document Type")
+	?DocTypeName Name;
+	@Remarks("Type of credit card transaction")
+	?TrxType Attr;
+	@Remarks("Account at the Bank")
+	?CBankAccount;
+	@Remarks("Bank Account Number")
+	?BankAccountNo Code;
+	@Remarks("Identifies a Business Partner")
+	?CBpartner;
+	@Remarks("Key of the Business Partner")
+	?BpartnerValue Note;
+	@Remarks("Invoice Identifier")
+	?CInvoice;
+	@Remarks("Document Number of the Invoice")
+	?InvoiceDocumentNo Code;
+	@Remarks("Method of Payment")
+	?TenderType Attr;
+	@Remarks("Credit Card (Visa, MC, AmEx)")
+	?CreditCardType Attr;
+	@Remarks("Credit Card Number")
+	?CreditCardNumber Code;
+	@Remarks("Credit Card Verification code on credit card")
+	?CreditCardVv String;
+	@Remarks("Expiry Month")
+	?CreditCardExpMm Number;
+	@Remarks("Expiry Year")
+	?CreditCardExpYy Number;
+	@Remarks("Combination of routing no, account and check no")
+	?Micr null;
+	@Remarks("Bank Routing Number")
+	?RoutingNo Code;
+	@Remarks("Account Number")
+	?AccountNo Code;
+	@Remarks("Check Number")
+	?CheckNo Code;
+	@Remarks("Name on Credit Card or Account holder")
+	?AName Name;
+	@Remarks("Street address of the Credit Card or Account holder")
+	?AStreet String;
+	@Remarks("City or the Credit Card or Account Holder")
+	?ACity String;
+	@Remarks("State of the Credit Card or Account holder")
+	?AState String;
+	@Remarks("Zip Code of the Credit Card or Account Holder")
+	?AZip String;
+	@Remarks("Country")
+	?ACountry String;
+	@Remarks("Payment Identification - Driver License")
+	?AIdentDl String;
+	@Remarks("Payment Identification - Social Security No")
+	?AIdentSsn String;
+	@Remarks("Email Address")
+	?AEmail EMail;
+	@Remarks("Voice Authorization Code from credit card company")
+	?VoiceAuthCode Note;
+	@Remarks("Track 1 and 2 of the Credit Card")
+	?SWIPE;
+	@Remarks("Original Transaction ID")
+	?OrigTrxId Code;
+	@Remarks("Purchase Order Number")
+	?PoNum Code;
+	@Remarks("The Currency for this record")
+	?CCurrency;
+	@Remarks("Amount being paid")
+	?PayAmt Amount;/* 0 */
+	@Remarks("Calculated amount of discount")
+	?DiscountAmt Amount;/* 0 */
+	@Remarks("Amount to write-off")
+	?WriteOffAmt Amount;/* 0 */
+	@Remarks("Over-Payment (unallocated) or Under-Payment (partial payment)")
+	?IsOverUnderPayment YesNo;/* 'N' */
+	@Remarks("Over-Payment (unallocated) or Under-Payment (partial payment) Amount")
+	?OverUnderAmt Amount;/* 0 */
+	@Remarks("Additional document charges")
+	?CCharge;
+	@Remarks("Name of the Charge")
+	?ChargeName Name;
+	@Remarks("Charge Amount")
+	?ChargeAmt Amount;/* 0 */
+	@Remarks("Tax Amount for a document")
+	?TaxAmt Amount;/* 0 */
+	@Remarks("Indicates if this document requires approval")
+	?IsApproved YesNo;/* 'N' */
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
+	?IsSelfService YesNo;/* 'N' */
+	@Remarks("Charge after Shipment")
+	?IsDelayedCapture YesNo;/* 'N' */
+	@Remarks("Payment reference")
+	?RPnref String;
+	@Remarks("Result of transmission")
+	?RResult String;
+	@Remarks("Response message")
+	?RRespmsg Msg;
+	@Remarks("Authorization Code returned")
+	?RAuthCode Note;
+	@Remarks("Response info")
+	?RInfo Info;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Three letter ISO 4217 Code of the Currency")
+	?IsoCode YesNo;
+	@Remarks("Accounting Date")
+	?DateAcct Date;
+};
+

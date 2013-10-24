@@ -1,0 +1,35 @@
+@Remarks("")
+@Refby("0")
+type CDunningHeaderV {
+	AdClientId ID;
+	AdOrgId ID;
+	?AdLanguage String;
+	CDunningRunId ID;
+	CDunningRunEntryId ID;
+	DunningDate Date;
+	PrintName Name;
+	?DocumentNote Note;
+	CBpartnerId ID;
+	BpValue Note;
+	?BpTaxId Code;
+	?NAICS;
+	?DUNS String;
+	?OrgLocationId ID;
+	TaxId Code;
+	SalesRepId ID;
+	?SalesRepName Name;
+	?BpGreeting String;
+	*Name;
+	?Name2 Name;
+	?BpContactGreeting String;
+	?Title;
+	?Phone;
+	?ContactName Name;
+	?CLocationId ID;
+	?ReferenceNo Code;
+	?Postal;
+	Amt Amount;
+	Qty Quantity;
+	?Note;
+};
+

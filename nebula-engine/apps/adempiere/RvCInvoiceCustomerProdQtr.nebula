@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+type RvCInvoiceCustomerProdQtr {
+	AdClientId ID;
+	AdOrgId ID;
+	CBpartnerId ID;
+	?MProductCategoryId ID;
+	?DateInvoiceD Date;
+	?LineNetAmt Amount;
+	?LineListAmt Amount;
+	?LineLimitAmt Amount;
+	?LineDiscountAmt Amount;
+	?LineDiscount Count;
+	?LineOverLimitAmt Amount;
+	?LineOverLimit Count;
+	?QtyInvoiceD Quantity;
+	IsSoTrx YesNo;
+};
+

@@ -1,0 +1,25 @@
+@Remarks("T_ReportStatement")
+@Refby("0")
+tx TReportStatement {
+	@Remarks("Instance of the process")
+	!AdPInstance;
+	@Remarks("Accounting Fact")
+	!FactAcctId ID;
+	@Remarks("Level no")
+	LevelNo Count;
+	@Remarks("Accounting Date")
+	DateAcct Date;
+	@Remarks("Alphanumeric identifier of the entity")
+	?Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Accounted Debit Amount")
+	?AmtAcctDr Amount;/* 0 */
+	@Remarks("Accounted Credit Amount")
+	?AmtAcctCr Amount;/* 0 */
+	@Remarks("Balance")
+	?Balance Number;/* 0 */
+	@Remarks("Quantity")
+	?Qty Quantity;/* 0 */
+};
+

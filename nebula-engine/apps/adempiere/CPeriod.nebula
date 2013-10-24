@@ -1,0 +1,25 @@
+@Remarks("Period of the Calendar")
+@Refby("8")
+type CPeriod {
+	@Remarks("Period of the Calendar")
+	!CPeriodId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Unique Period Number")
+	PeriodNo SeqNo;
+	@Remarks("Calendar Year")
+	CYear;
+	@Remarks("First effective day (inclusive)")
+	StartDate Date;
+	@Remarks("Last effective date (inclusive)")
+	?EndDate Date;
+	@Remarks("Period Type")
+	PeriodType Attr;
+	@Remarks("Process Now")
+	?Processing YesNo;
+};
+

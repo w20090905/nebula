@@ -1,0 +1,37 @@
+@Remarks("C_AcctSchema_GL")
+@Refby("0")
+type CAcctSchemaGl {
+	@Remarks("Rules for accounting")
+	!CAcctSchema;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Use Suspense Balancing")
+	UseSuspensebalancing YesNo;/* 'Y'  */
+	@Remarks("Suspense Balancing Acct")
+	?SuspensebalancingAcct CValidCombination;
+	@Remarks("Use Suspense Error")
+	UseSuspenseerror YesNo;/* 'Y'  */
+	@Remarks("Suspense Error Acct")
+	?SuspenseerrorAcct CValidCombination;
+	@Remarks("Use Currency Balancing")
+	UseCurrencyBalancing YesNo;/* 'Y'  */
+	@Remarks("Account used when a currency is out of balance")
+	?CurrencyBalancingAcct CValidCombination;
+	@Remarks("Retained Earning Acct")
+	RetainedEarningAcct CValidCombination;
+	@Remarks("Income Summary Account")
+	IncomeSummaryAcct CValidCombination;
+	@Remarks("Intercompany Due To / Payable Account")
+	InterCompanyDueToAcct CValidCombination;
+	@Remarks("Intercompany Due From / Receivables Account")
+	InterCompanyDueFromAcct CValidCombination;
+	@Remarks("Purchase Price Variance Offset Account")
+	PpvoffsetAcct CValidCombination;
+	@Remarks("Budgetary Commitment Offset Account")
+	CommitmentOffsetAcct Amount;
+	@Remarks("Budgetary Commitment Offset Account for Sales")
+	CommitmentOffsetSalesAcct Amount;
+};
+

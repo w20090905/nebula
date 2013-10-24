@@ -1,0 +1,45 @@
+@Remarks("Dunning Level")
+@Refby("3")
+type CDunningLevel {
+	@Remarks("Dunning Level")
+	!CDunningLevelId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Dunning Rules for overdue invoices")
+	CDunning;
+	@Remarks("The label text to be printed on a document or correspondence.")
+	PrintName Name;
+	@Remarks("Days after due date to dun (if negative days until due)")
+	DaysAfterDue Count;
+	@Remarks("Days between sending dunning notices")
+	DaysBetweenDunning Count;
+	@Remarks("Optional additional user defined information")
+	?Note;
+	@Remarks("Indicates if interest will be charged on overdue invoices")
+	ChargeInterest YesNo;/* 'Y'  */
+	@Remarks("Percentage interest to charge on overdue invoices")
+	?InterestPercent Percent;/* 0 */
+	@Remarks("Indicates if fees will be charged for overdue invoices")
+	ChargeFee YesNo;/* 'Y'  */
+	@Remarks("Fee amount in invoice currency")
+	?FeeAmt Amount;/* 0 */
+	@Remarks("Print Format for printing Dunning Letters")
+	?DunningPrintFormat AdPrintFormat;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;/* 'x'  */
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Show/print all due invoices")
+	IsShowAllDue YesNo;/* 'N'  */
+	@Remarks("Show/print all invoices which are not due (yet).")
+	IsShowNotDue YesNo;/* 'N'  */
+	@Remarks("Set the business partner to credit stop")
+	IsSetCreditStop YesNo;/* 'N'  */
+	@Remarks("Set the payment term of the Business Partner")
+	IsSetPaymentTerm YesNo;/* 'N'  */
+	@Remarks("The terms of Payment (timing, discount)")
+	?CPaymentTerm;/* NULL   */
+};
+

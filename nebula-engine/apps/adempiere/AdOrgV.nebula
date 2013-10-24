@@ -1,0 +1,19 @@
+@Remarks("")
+@Refby("0")
+type AdOrgV {
+	AdClientId ID;
+	AdOrgId ID;
+	Value String;
+	*Name;
+	?Description;
+	IsSummary YesNo;
+	?CLocationId ID;
+	DUNS String;
+	TaxId Code;
+	?SupervisorId ID;
+	?ParentOrgId ID;
+	?AdOrgTypeId ID;
+	?MWarehouseId ID;
+	?CBpartnerId ID;
+};
+

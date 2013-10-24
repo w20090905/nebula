@@ -1,0 +1,24 @@
+@Remarks("")
+@Refby("0")
+type RvCost {
+	AdClientId ID;
+	AdOrgId ID;
+	MProductId ID;
+	Value String;
+	*Name;
+	?UPC;
+	IsBom YesNo;
+	ProductType Attr;
+	MProductCategoryId ID;
+	MCostTypeId ID;
+	MCostElementId ID;
+	CostElementType Attr;
+	?CostingMethod Attr;
+	IsCalculated YesNo;
+	CAcctSchemaId ID;
+	CCurrencyId ID;
+	CurrentCostPrice Price;
+	?FutureCostPrice Price;
+	?Description;
+};
+

@@ -1,0 +1,23 @@
+@Remarks("")
+@Refby("0")
+type RvCInvoiceTax {
+	AdClientId ID;
+	AdOrgId ID;
+	CTaxId ID;
+	CInvoiceId ID;
+	CDocTypeId ID;
+	CBpartnerId ID;
+	?TaxId Code;
+	?IsTaxExempt YesNo;
+	DateAcct Date;
+	DateInvoiceD Date;
+	IsSoTrx YesNo;
+	DocumentNo Code;
+	IsPaid YesNo;
+	CCurrencyId ID;
+	?TaxBaseAmt Amount;
+	?TaxAmt Amount;
+	?TaxLineTotal Number;
+	?Multiplier Number;
+};
+

@@ -1,0 +1,31 @@
+@Remarks("Media Server list to which content should get transfered")
+@Refby("1")
+type CmMediaServer {
+	@Remarks("Media Server list to which content should get transfered")
+	!CmMediaServerId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("A web project is the main data container for Containers, URLs, Ads, Media etc.")
+	CmWebProject;
+	@Remarks("FTP passive transfer")
+	IsPassive YesNo;/* 'Y'  */
+	@Remarks("Full URL address - e.g. http://www.adempiere.org")
+	?Url;
+	@Remarks("Defines the IP address to transfer data to")
+	?Address null;
+	@Remarks("Email of the responsible for the System")
+	?UserName Name;
+	@Remarks("Password of any length (case sensitive)")
+	?Password;
+	@Remarks("A folder on a local or remote system to store data into")
+	?Folder String;
+};
+

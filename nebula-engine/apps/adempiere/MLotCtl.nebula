@@ -1,0 +1,25 @@
+@Remarks("Product Lot Control")
+@Refby("3")
+type MLotCtl {
+	@Remarks("Product Lot Control")
+	!MLotCtlId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Starting number/position")
+	StartNo SeqNo;
+	@Remarks("The number to increment the last document number by")
+	IncrementNo SeqNo;
+	@Remarks("The next number to be used")
+	CurrentNext Number;
+	@Remarks("Prefix before the sequence number")
+	?Prefix Description;
+	@Remarks("Suffix after the number")
+	?Suffix Description;
+};
+

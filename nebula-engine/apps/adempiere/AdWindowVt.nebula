@@ -1,0 +1,16 @@
+@Remarks("")
+@Refby("0")
+type AdWindowVt {
+	AdLanguage Code;
+	AdWindowId ID;
+	*Name;
+	?Description;
+	?Help;
+	?WindowType Attr;
+	?AdColorId ID;
+	?AdImageId ID;
+	?WinWidth Width;
+	?WinHeight Height;
+	IsSoTrx YesNo;
+};
+

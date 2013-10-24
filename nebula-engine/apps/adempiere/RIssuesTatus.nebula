@@ -1,0 +1,15 @@
+@Remarks("Issue Status")
+@Refby("1")
+type RIssuesTatus {
+	@Remarks("Status of an Issue")
+	!RIssuesTatusId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+};
+

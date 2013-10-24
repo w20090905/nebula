@@ -1,0 +1,33 @@
+@Remarks("Calculation method for measuring performance")
+@Refby("2")
+type PaMeasureCalc {
+	@Remarks("Calculation method for measuring performance")
+	!PaMeasureCalcId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("SQL SELECT clause")
+	SelectClause Note;
+	@Remarks("Fully qualified SQL WHERE clause")
+	WhereClause Note;
+	@Remarks("Fully qualified date column")
+	DateColumn String;
+	@Remarks("Fully qualified Organization column (AD_Org_ID)")
+	?OrgColumn String;
+	@Remarks("Fully qualified Business Partner key column (C_BPartner_ID)")
+	?BpartnerColumn null;
+	@Remarks("Fully qualified Product column (M_Product_ID)")
+	?ProductColumn null;
+	@Remarks("Database Table information")
+	AdTable;
+	@Remarks("Key Column for Table")
+	KeyColumn null;
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
+	EntityType AdEntityType;
+};
+

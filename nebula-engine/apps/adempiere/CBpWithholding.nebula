@@ -1,0 +1,19 @@
+@Remarks("C_BP_Withholding")
+@Refby("0")
+type CBpWithholding {
+	@Remarks("Identifies a Business Partner")
+	!CBpartner;
+	@Remarks("Withholding type defined")
+	!CWithholding;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Monies must be withheld")
+	IsMandatoryWithholding YesNo;/* 'N'  */
+	@Remarks("Temporarily do not withhold taxes")
+	IsTemporaryExempt YesNo;/* 'N'  */
+	@Remarks("Reason for not withholding")
+	?ExemptReason null;
+};
+

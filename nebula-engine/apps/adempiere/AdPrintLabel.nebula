@@ -1,0 +1,27 @@
+@Remarks("Label Format to print")
+@Refby("1")
+type AdPrintLabel {
+	@Remarks("Label Format to print")
+	!AdPrintLabelId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Database Table information")
+	AdTable;
+	@Remarks("Name of the Printer")
+	?PrinterName Name;
+	@Remarks("Landscape orientation")
+	IsLandscape YesNo;/* 'Y'  */
+	@Remarks("Height of the label")
+	LabelHeight Height;
+	@Remarks("Width of the Label")
+	LabelWidth Width;
+	@Remarks("Label Printer Definition")
+	AdLabelPrinter;
+};
+

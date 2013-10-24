@@ -1,0 +1,41 @@
+@Remarks("")
+@Refby("0")
+type COrderLineTaxV {
+	?AdClientId ID;
+	?AdOrgId ID;
+	?AdLanguage String;
+	?COrderId ID;
+	?COrderLineId ID;
+	?CTaxId ID;
+	?TaxIndicator String;
+	?CBpartnerId ID;
+	?CBpartnerLocationId ID;
+	?BpName Name;
+	?CLocationId ID;
+	?Line;
+	?MProductId ID;
+	?QtyOrdered Quantity;
+	?QtyEntered Quantity;
+	?UomSymbol Symbol;
+	?Name;
+	?Description;
+	?DocumentNote Note;
+	?UPC;
+	?SKU;
+	?ProductValue Note;
+	?ResourceDescription Description;
+	?PriceList Number;
+	?PriceEnteredList Number;
+	?Discount Count;
+	?PriceActual Number;
+	?PriceEntered Number;
+	?LineNetAmt Amount;
+	?ProductDescription Description;
+	?ImageUrl Url;
+	?CCampaignId ID;
+	?CProjectId ID;
+	?CActivityId ID;
+	?CProjectPhaseId ID;
+	?CProjectTaskId ID;
+};
+

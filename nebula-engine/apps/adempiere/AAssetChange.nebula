@@ -1,0 +1,21 @@
+@Remarks("")
+@Refby("1")
+tx AAssetChange {
+	!AAssetChangeId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AAsset;
+	ChangeType Attr;
+	ChangeDate Date;
+	?ChangeAmt Amount;/* 0 */
+	?UseLifeYears Count;
+	?UseLifeMonths Count;
+	?LifeUseUnits Number;
+	?AssetDepreciationDate Date;
+	?AAssetRetirement;
+	?AAssetAddition;
+	?SerNo Code;
+	?LOT;
+	?VersionNo Code;
+};
+

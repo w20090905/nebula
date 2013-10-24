@@ -1,0 +1,69 @@
+@Remarks("Tab within a Window")
+@Refby("8")
+type AdTab {
+	@Remarks("Tab within a Window")
+	!AdTabId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Database Table information")
+	AdTable;
+	@Remarks("Data entry or display window")
+	AdWindow;
+	@Remarks("Method of ordering records; lowest number comes first")
+	SeqNo;
+	@Remarks("Hierarchical Tab Level (0 = top)")
+	TableVel Number;
+	@Remarks("Default for toggle between Single- and Multi-Row (Grid) Layout")
+	IsSingleRow YesNo;/* 'Y'                          */
+	@Remarks("This Tab contains accounting information")
+	?IsInfoTab YesNo;/* 'N'                          */
+	@Remarks("This Tab contains translation information")
+	IsTranslationTab YesNo;/* 'N'                          */
+	@Remarks("Field is read only")
+	IsReadonly YesNo;/* 'N'                          */
+	@Remarks("Column in the table")
+	?AdColumn;
+	@Remarks("Window has Tree Graph")
+	HasTree YesNo;/* 'N'                          */
+	@Remarks("Fully qualified SQL WHERE clause")
+	?WhereClause Note;
+	@Remarks("Fully qualified ORDER BY clause")
+	?OrderByClause Note;
+	@Remarks("Warning displayed when saving")
+	?CommitWarning Note;
+	@Remarks("Process or Report")
+	?AdProcess;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Image or Icon")
+	?AdImage;
+	@Remarks("Create Fields from Table Columns")
+	?ImportFields null;
+	@Remarks("Column determining the order")
+	?AdColumnsOrTorder AdColumn;
+	@Remarks("Column determining if a Table Column is included in Ordering")
+	?AdColumnsOrTyesno AdColumn;
+	@Remarks("The Tab determines the Order")
+	IsSortTab YesNo;/* 'N'  */
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
+	EntityType AdEntityType;/* 'D'  */
+	@Remarks("Included Tab in this Tab (Master Dateail)")
+	?IncludedTab AdTab;
+	@Remarks("Logic to determine if field is read only (applies only when field is read-write)")
+	?ReadonlyLogic Note;
+	@Remarks("If the Field is displayed, the result determines if the field is actually displayed")
+	?DisplayLogic Note;
+	@Remarks("The user can insert a new Record")
+	IsInsertRecord YesNo;/* 'Y'  */
+	@Remarks("This Tab contains advanced Functionality")
+	IsAdvancedTab YesNo;/* 'N'  */
+};
+

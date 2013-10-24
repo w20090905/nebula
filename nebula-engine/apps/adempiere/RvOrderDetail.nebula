@@ -1,0 +1,57 @@
+@Remarks("")
+@Refby("0")
+type RvOrderDetail {
+	AdClientId ID;
+	AdOrgId ID;
+	COrderId ID;
+	DocStatus Attr;
+	DocAction Attr;
+	CDocTypeId ID;
+	IsApproved YesNo;
+	IsCreditApproved YesNo;
+	?SalesRepId ID;
+	?BillBpartnerId ID;
+	?BillLocationId ID;
+	?BillUserId ID;
+	IsDropShip YesNo;
+	?CBpartnerId ID;
+	?CBpartnerLocationId ID;
+	?AdUserId ID;
+	?PoReference Note;
+	CCurrencyId ID;
+	IsSoTrx YesNo;
+	?CCampaignId ID;
+	?CProjectId ID;
+	?CActivityId ID;
+	?CProjectPhaseId ID;
+	?CProjectTaskId ID;
+	COrderLineId ID;
+	DateOrdered Date;
+	?DatePromised Date;
+	?MProductId ID;
+	MWarehouseId ID;
+	?MAttributeSetInstanceId ID;
+	?ProductAttribute String;
+	?MAttributeSetId ID;
+	?MLotId ID;
+	?GuaranteeDate Date;
+	?LOT;
+	?SerNo Code;
+	CUomId ID;
+	QtyEntered Quantity;
+	QtyOrdered Quantity;
+	QtyReserved Quantity;
+	QtyDelivered Quantity;
+	QtyInvoiceD Quantity;
+	PriceActual Number;
+	PriceEntered Number;
+	?QtyTodeliver Quantity;
+	?QtyToinvoice Quantity;
+	?NetAmtToinvoice Number;
+	QtyLostSales Quantity;
+	?AmtLostSales Amount;
+	?Discount Count;
+	?Margin Length;
+	?MarginAmt Amount;
+};
+

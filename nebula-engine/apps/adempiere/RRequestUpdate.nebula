@@ -1,0 +1,27 @@
+@Remarks("Request Update")
+@Refby("0")
+tx RRequestUpdate {
+	@Remarks("Request Updates")
+	!RRequestUpdateId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Request from a Business Partner or Prospect")
+	RRequest;
+	@Remarks("Confidentiality of the individual entry")
+	ConfidentialTypeEntry null;
+	@Remarks("Time started")
+	?StartTime Date;
+	@Remarks("End of the time span")
+	?EndTime Date;
+	@Remarks("Quantity used for this event")
+	?QtySpent Quantity;/* 0 */
+	@Remarks("Invoiced Quantity")
+	?QtyInvoiceD Quantity;/* 0 */
+	@Remarks("Product/Resource/Service used in Request")
+	?MProductSpent MProduct;
+	@Remarks("Result of the action taken")
+	?Result null;
+};
+

@@ -1,0 +1,28 @@
+@Remarks("")
+@Refby("0")
+type RvAssetDelivery {
+	AAssetDeliveryId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AAssetId ID;
+	AAssetGroupId ID;
+	?MProductId ID;
+	?GuaranteeDate Date;
+	?AssetServiceDate Date;
+	?CBpartnerId ID;
+	?AdUserId ID;
+	MovementDate Date;
+	?SerNo Code;
+	?LOT;
+	?VersionNo Code;
+	?MInoutLineId ID;
+	?EMail;
+	?MessageId Message;
+	?DeliveryConfirmAtion null;
+	?Url;
+	?RemoteAddr Name;
+	?RemoteHost Host;
+	?Referrer String;
+	?Description;
+};
+

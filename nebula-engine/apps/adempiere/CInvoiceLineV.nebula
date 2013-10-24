@@ -1,0 +1,32 @@
+@Remarks("")
+@Refby("0")
+type CInvoiceLineV {
+	AdClientId ID;
+	AdOrgId ID;
+	CInvoiceLineId ID;
+	?CInvoiceId ID;
+	?SalesRepId ID;
+	?CBpartnerId ID;
+	?MProductId ID;
+	?DocumentNo Code;
+	?DateInvoiceD Date;
+	?DateAcct Date;
+	?IsSoTrx YesNo;
+	?DocStatus Attr;
+	?LineNetAmt Amount;
+	?LineListAmt Amount;
+	?LineLimitAmt Amount;
+	?LineDiscountAmt Amount;
+	?LineOverLimitAmt Amount;
+	QtyInvoiceD Quantity;
+	QtyEntered Quantity;
+	Line;
+	?COrderLineId ID;
+	?CUomId ID;
+	?CCampaignId ID;
+	?CProjectId ID;
+	?CActivityId ID;
+	?CProjectPhaseId ID;
+	?CProjectTaskId ID;
+};
+

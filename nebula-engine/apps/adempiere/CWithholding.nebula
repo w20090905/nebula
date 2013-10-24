@@ -1,0 +1,39 @@
+@Remarks("Withholding type defined")
+@Refby("2")
+type CWithholding {
+	@Remarks("Withholding type defined")
+	!CWithholdingId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("The terms of Payment (timing, discount)")
+	CPaymentTerm;
+	@Remarks("This is a tax related withholding")
+	IsTaxWithholding YesNo;/* 'Y'  */
+	@Remarks("Tax is Prorated")
+	IsTaxProrated YesNo;/* 'N'  */
+	@Remarks("Amount paid to someone other than the Business Partner")
+	IsPaidTo3party YesNo;/* 'Y'  */
+	@Remarks("Business Partner to whom payment is made")
+	?Beneficiary CBpartner;
+	@Remarks("Withholding amount is a percentage of the invoice amount")
+	IsPercentWithholding YesNo;/* 'Y'  */
+	@Remarks("Percentage")
+	?Percent;/* 0 */
+	@Remarks("Fix amounted amount to be levied or paid")
+	?FixAmt Amount;/* 0 */
+	@Remarks("Minimum gross amount for withholding calculation")
+	?Thresholdmin Number;/* 0 */
+	@Remarks("Maximum gross amount for withholding calculation  (0=no limit)")
+	?Thresholdmax Number;/* 0 */
+	@Remarks("Minimum Amount in invoice currency")
+	?MinAmt Amount;/* 0 */
+	@Remarks("Maximum Amount in invoice currency")
+	?MaxAmt Amount;/* 0 */
+};
+

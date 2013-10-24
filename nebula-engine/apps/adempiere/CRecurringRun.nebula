@@ -1,0 +1,25 @@
+@Remarks("Recurring Document Run")
+@Refby("0")
+tx CRecurringRun {
+	@Remarks("Recurring Document Run")
+	!CRecurringRunId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Payment identifier")
+	?CPayment;
+	@Remarks("Order")
+	?COrder;
+	@Remarks("Invoice Identifier")
+	?CInvoice;
+	@Remarks("Financial Project")
+	?CProject;
+	@Remarks("General Ledger Journal Batch")
+	?GlJournalBatch;
+	@Remarks("Recurring Document")
+	CRecurring;
+	@Remarks("Date of the Document")
+	?DateDoc Date;
+};
+

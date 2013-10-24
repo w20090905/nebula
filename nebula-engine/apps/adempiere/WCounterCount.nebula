@@ -1,0 +1,19 @@
+@Remarks("Web Counter Count Management")
+@Refby("2")
+type WCounterCount {
+	@Remarks("Web Counter Count Management")
+	!WCounterCountId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Page URL")
+	PageUrl Url;
+	@Remarks("Identifies a Business Partner")
+	?CBpartner;
+};
+

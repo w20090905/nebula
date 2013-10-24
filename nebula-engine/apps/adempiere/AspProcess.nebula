@@ -1,0 +1,15 @@
+@Remarks("ASP Process")
+@Refby("0")
+type AspProcess {
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;/* NULL   */
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;/* NULL   */
+	@Remarks("Process or Report")
+	!AdProcess;
+	@Remarks("ASP Level")
+	!AspLevel;
+	@Remarks("ASP Status")
+	AspStatus Attr;/* 'U'  */
+};
+

@@ -1,0 +1,31 @@
+@Remarks("Inventory Move Confirmation")
+@Refby("1")
+tx MMovementConfirm {
+	@Remarks("Inventory Move Confirmation")
+	!MMovementConfirmId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Movement of Inventory")
+	MMovement;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Indicates if this document requires approval")
+	IsApproved YesNo;/* 'N'  */
+	@Remarks("Document Approval Amount")
+	?ApprovalAmt Amount;/* 0 */
+	@Remarks("The targeted status of the document")
+	DocAction Attr;
+	@Remarks("The current status of the document")
+	DocStatus Attr;
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Parameters for a Physical Inventory")
+	?MInventory;
+	@Remarks("Document sequence number of the document")
+	DocumentNo Code;
+};
+

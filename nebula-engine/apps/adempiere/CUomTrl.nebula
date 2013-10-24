@@ -1,0 +1,21 @@
+@Remarks("Unit of Measure")
+@Refby("0")
+type CUomTrl {
+	@Remarks("Unit of Measure")
+	!CUom;
+	@Remarks("Language for this entity")
+	!AdLanguage;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Symbol for a Unit of Measure")
+	?UomSymbol Symbol;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("This column is translated")
+	IsTranslated YesNo;/* 'N'  */
+};
+

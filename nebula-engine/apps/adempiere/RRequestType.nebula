@@ -1,0 +1,39 @@
+@Remarks("Type of request (e.g. Inquiry, Complaint, ..)")
+@Refby("9")
+type RRequestType {
+	@Remarks("Type of request (e.g. Inquiry, Complaint, ..)")
+	!RRequestTypeId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Default value")
+	IsDefault YesNo;/* 'N'  */
+	@Remarks("This is a Self-Service entry or this entry can be changed via Self-Service")
+	IsSelfService YesNo;/* 'Y' */
+	@Remarks("Tolerance in days between the Date Next Action and the date the request is regarded as overdue")
+	DueDateTolerance Amount;/* 7  */
+	@Remarks("Send EMail when Request becomes overdue")
+	IsEmailWhenOverdue YesNo;/* 'N'  */
+	@Remarks("Send EMail when Request becomes due")
+	IsEmailWhenDue YesNo;/* 'N'  */
+	@Remarks("Is this invoiced?")
+	?IsInvoiceD YesNo;
+	@Remarks("Automatic Due Date Days")
+	?AutoDueDateDays Count;
+	@Remarks("Type of Confidentiality")
+	ConfidentialType Attr;/* 'C'  */
+	@Remarks("Automatically create BOM (Engineering) Change Request")
+	IsAutoChangeRequest YesNo;/* 'N'  */
+	@Remarks("Can enter confidential information")
+	IsConfidentialInfo YesNo;/* 'N'  */
+	@Remarks("Request Status Category")
+	RStatusCategory;
+	@Remarks("Index the document for the internal search engine")
+	IsIndexed YesNo;/* 'Y'  */
+};
+

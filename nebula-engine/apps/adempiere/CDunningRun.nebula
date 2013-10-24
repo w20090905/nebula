@@ -1,0 +1,23 @@
+@Remarks("Dunning Run")
+@Refby("1")
+tx CDunningRun {
+	@Remarks("Dunning Run")
+	!CDunningRunId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Date of Dunning")
+	DunningDate Date;
+	@Remarks("Dunning Level")
+	CDunningLevel;
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+	@Remarks("Process Now")
+	?Processing YesNo;
+	@Remarks("Send")
+	?SendIt null;
+	@Remarks("Optional short description of the record")
+	?Description;
+};
+

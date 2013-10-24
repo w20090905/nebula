@@ -1,0 +1,25 @@
+@Remarks("Operation System Task")
+@Refby("8")
+type AdTask {
+	@Remarks("Operation System Task")
+	!AdTaskId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClient;
+	@Remarks("Organizational entity within client")
+	AdOrg;
+	@Remarks("Alphanumeric identifier of the entity")
+	*Name;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Comment or Hint")
+	?Help;
+	@Remarks("Access Level required")
+	AccessLevel Attr;
+	@Remarks("Operating System Command")
+	OsCommand String;
+	@Remarks("Dictionary Entity Type; Determines ownership and synchronization")
+	EntityType AdEntityType;/* 'D'  */
+	@Remarks("Run this Process on Server only")
+	IsServerProcess YesNo;/* 'N'  */
+};
+

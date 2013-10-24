@@ -1,0 +1,37 @@
+@Remarks("Cash Journal Line")
+@Refby("3")
+tx CCashLine {
+	@Remarks("Cash Journal Line")
+	!CCashLineId ID;
+	@Remarks("Client/Tenant for this installation.")
+	AdClientId ID;
+	@Remarks("Organizational entity within client")
+	AdOrgId ID;
+	@Remarks("Cash Journal")
+	CCash;
+	@Remarks("Unique line for this document")
+	Line;
+	@Remarks("Optional short description of the record")
+	?Description;
+	@Remarks("Source of Cash")
+	CashType Attr;
+	@Remarks("Account at the Bank")
+	?CBankAccount;
+	@Remarks("Additional document charges")
+	?CCharge;
+	@Remarks("Invoice Identifier")
+	?CInvoice;
+	@Remarks("The Currency for this record")
+	?CCurrency;
+	@Remarks("Amount in a defined currency")
+	Amount;/* 0  */
+	@Remarks("Calculated amount of discount")
+	?DiscountAmt Amount;/* 0 */
+	@Remarks("Amount to write-off")
+	?WriteOffAmt Amount;/* 0 */
+	@Remarks("This Line is generated")
+	?IsGenerated YesNo;/* 'N'                          */
+	@Remarks("The document has been processed")
+	Processed YesNo;/* 'N'  */
+};
+
