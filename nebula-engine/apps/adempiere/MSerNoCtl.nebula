@@ -1,0 +1,15 @@
+@Remarks("Product Serial Number Control")
+@Refby("2")
+type MSerNoCtl {
+	!MSerNoCtlId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	?Description;
+	StartNo SeqNo;
+	IncrementNo SeqNo;
+	CurrentNext Number;
+	?Prefix Description;
+	?Suffix Description;
+};
+

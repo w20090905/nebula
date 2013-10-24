@@ -1,0 +1,45 @@
+@Remarks("Financial Project")
+@Refby("35")
+type CProject {
+	!CProjectId Number;
+	AdClient;
+	AdOrg;
+	Value String;
+	*Name;
+	?Description;
+	?Note;
+	IsSummary YesNo;/* 'N'  */
+	?AdUser;
+	?CBpartner;
+	?CBpartnerLocation;
+	?PoReference Note;
+	?CPaymentTerm;
+	CCurrency;
+	?MPriceListVersion;
+	?CCampaign;
+	IsCommitment YesNo;/* 'Y'  */
+	PlannedAmt Amount;/* 0  */
+	PlannedQty Quantity;/* 0  */
+	PlannedMarginAmt Amount;/* 0  */
+	CommittedAmt Amount;/* 0  */
+	?DateContract Date;
+	?DateFinish Date;
+	?GenerateTo Attr;
+	Processed YesNo;/* 'N'  */
+	?SalesRep AdUser;
+	?CopyFrom null;
+	?CProjectType;
+	CommittedQty Quantity;/* 0  */
+	InvoicedAmt Amount;/* 0  */
+	InvoicedQty Quantity;/* 0  */
+	ProjectBalanceAmt Amount;/* 0  */
+	?CPhase;
+	IsCommitCeiling YesNo;/* 'N'  */
+	?MWarehouse;
+	?ProjectCategory YesNo;/* 'N'  */
+	?Processing YesNo;
+	?CBpartnerSr CBpartner;
+	ProjInvoiceRule Attr;/* '-'  */
+	ProjectLineLevel Attr;/* 'P'  */
+};
+

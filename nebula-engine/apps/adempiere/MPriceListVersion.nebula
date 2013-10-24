@@ -1,0 +1,15 @@
+@Remarks("Identifies a unique instance of a Price List")
+@Refby("4")
+type MPriceListVersion {
+	!MPriceListVersionId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	?Description;
+	MPriceList;
+	MDiscountSchema;
+	ValidFrom Date;
+	?ProcCreate null;
+	?MPriceListVersionBase MPriceListVersion;
+};
+

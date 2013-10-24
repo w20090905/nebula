@@ -1,0 +1,16 @@
+@Remarks("Group of Assets")
+@Refby("3")
+type AAssetGroup {
+	!AAssetGroupId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	?Description;
+	?Help;
+	IsOwned YesNo;/* 'Y'  */
+	IsDepreciated YesNo;/* 'Y'  */
+	IsOneAssetPerUom YesNo;/* 'N'  */
+	IsCreateAsActive YesNo;/* 'Y'  */
+	IsTrackIssues YesNo;/* 'N'  */
+};
+

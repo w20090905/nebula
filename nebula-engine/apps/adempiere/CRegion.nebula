@@ -1,0 +1,12 @@
+@Remarks("Identifies a geographical Region")
+@Refby("9")
+type CRegion {
+	!CRegionId Number;
+	AdClient;
+	AdOrg;
+	*Name;
+	?Description;
+	CCountry;
+	?IsDefault YesNo;/* 'N'                      */
+};
+

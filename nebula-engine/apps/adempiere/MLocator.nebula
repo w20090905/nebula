@@ -1,0 +1,15 @@
+@Remarks("Warehouse Locator")
+@Refby("14")
+type MLocator {
+	!MLocatorId Number;
+	AdClient;
+	AdOrg;
+	Value String;
+	MWarehouse;
+	PriorityNo SeqNo;
+	IsDefault YesNo;/* 'N'  */
+	?X String;
+	?Y String;
+	?Z String;
+};
+

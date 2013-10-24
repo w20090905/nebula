@@ -1,0 +1,77 @@
+@Remarks("Order")
+@Refby("20")
+type COrder {
+	!COrderId Number;
+	AdClientId Number;
+	AdOrg;
+	IsSoTrx YesNo;/* 'Y'  */
+	DocumentNo Code;
+	DocStatus Attr;
+	DocAction Attr;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	CDocType;
+	CDocTypeTarget CDocType;
+	?Description;
+	IsApproved YesNo;/* 'Y'  */
+	IsCreditApproved YesNo;/* 'N'  */
+	IsDelivered YesNo;/* 'N'  */
+	IsInvoiced YesNo;/* 'N'  */
+	IsPrinted YesNo;/* 'N'  */
+	IsTransferred YesNo;/* 'N'  */
+	IsSelected YesNo;/* 'N'  */
+	?SalesRep AdUser;
+	DateOrdered Date;
+	?DatePromised Date;
+	?DatePrinted Date;
+	DateAcct Date;
+	CBpartner;
+	CBpartnerLocation;
+	?PoReference Note;
+	IsDiscountPrinted YesNo;/* 'Y'  */
+	CCurrency;
+	PaymentRule Attr;
+	CPaymentTerm;
+	InvoiceRule Attr;
+	DeliveryRule Attr;
+	FreightCostRule Attr;
+	?FreightAmt Amount;/* 0 */
+	DeliveryViaRule Attr;
+	?MShipper;
+	?CCharge;
+	?ChargeAmt Amount;/* 0 */
+	PriorityRule Attr;
+	TotalLines Line;/* 0  */
+	GrandTotal Amount;/* 0  */
+	MWarehouse;
+	MPriceList;
+	IsTaxIncluded YesNo;/* 'N'  */
+	?CCampaign;
+	?CProject;
+	?CActivity;
+	Posted YesNo;/* 'N'  */
+	?CPayment;
+	?CCashLine;
+	SendEmail EMail;/* 'N'  */
+	?AdUser;
+	?CopyFrom null;
+	IsSelfService YesNo;/* 'N'  */
+	?AdOrgTrx AdOrg;
+	?User1 CElementValue;
+	?User2 CElementValue;
+	?CConversionType;
+	?BillBpartner CBpartner;
+	?BillLocation CBpartnerLocation;
+	?BillUser AdUser;
+	?PayBpartner CBpartner;
+	?PayLocation CBpartnerLocation;
+	?RefOrder COrder;
+	IsDropShip YesNo;/* 'N'  */
+	?Volume;
+	?Weight;
+	?OrderType Attr;
+	?CPos;
+	?AmountTendered Number;
+	?AmountRefunded Number;
+};
+

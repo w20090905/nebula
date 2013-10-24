@@ -1,0 +1,13 @@
+@Remarks("Business Activity")
+@Refby("27")
+type CActivity {
+	!CActivityId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	Value String;
+	*Name;
+	?Description;
+	IsSummary YesNo;/* 'N'  */
+	?Help;
+};
+

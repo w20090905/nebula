@@ -1,0 +1,47 @@
+@Remarks("Workflow Node (activity), step or process")
+@Refby("8")
+type AdWfNode {
+	!AdWfNodeId Number;
+	AdClient;
+	AdOrg;
+	*Name;
+	?Description;
+	?Help;
+	AdWorkflow;
+	IsCentrallyMaintained YesNo;/* 'Y'  */
+	Action YesNo;
+	?AdWindow;
+	?Workflow AdWorkflow;
+	?AdTask;
+	?AdProcess;
+	?AdForm;
+	EntityType AdEntityType;/* 'D'  */
+	XPosition Length;/* 0 */
+	YPosition Length;/* 0 */
+	?AdWfBlock;
+	?SubFlowExecution null;
+	?StartMode null;
+	?FinishMode null;
+	Limit Count;/* 0 */
+	?Priority;
+	Duration Number;/* 0 */
+	Cost;/* 0 */
+	?WorkingTime Count;
+	WaitingTime Count;/* 0 */
+	?AdWfResponsible;
+	?AdImage;
+	JoinElement null;/* NULL */
+	SplitElement null;/* NULL */
+	?WaitTime Count;
+	?AdColumn;
+	?AttributeName Name;
+	?AttributeValue Note;
+	?DocAction Attr;
+	Value String;
+	?DynPriorityUnit null;
+	?DynPriorityChange Number;
+	?EmailRecipient EMail;
+	?EMail;
+	?RMailText;
+};
+

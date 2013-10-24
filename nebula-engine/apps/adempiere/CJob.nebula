@@ -1,0 +1,13 @@
+@Remarks("Position")
+@Refby("4")
+type CJob {
+	!CJobId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	?Description;
+	?Help;
+	CJobCategory;
+	IsEmployee YesNo;/* 'N'  */
+};
+

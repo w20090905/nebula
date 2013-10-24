@@ -1,0 +1,63 @@
+@Remarks("Invoice Identifier")
+@Refby("24")
+type CInvoice {
+	!CInvoiceId Number;
+	AdClientId Number;
+	AdOrg;
+	IsSoTrx YesNo;/* 'Y'  */
+	DocumentNo Code;
+	DocStatus Attr;
+	DocAction Attr;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	Posted YesNo;/* 'N'  */
+	CDocType;
+	CDocTypeTarget CDocType;
+	?COrder;
+	?Description;
+	IsApproved YesNo;/* 'Y'  */
+	IsTransferred YesNo;/* 'N'  */
+	IsPrinted YesNo;/* 'N'  */
+	?SalesRep AdUser;
+	DateInvoiced Date;
+	?DatePrinted Date;
+	DateAcct Date;
+	CBpartner;
+	CBpartnerLocation;
+	?PoReference Note;
+	IsDiscountPrinted YesNo;/* 'Y'  */
+	?DateOrdered Date;
+	CCurrency;
+	PaymentRule Attr;
+	CPaymentTerm;
+	?CCharge;
+	?ChargeAmt Amount;/* 0 */
+	TotalLines Line;/* 0  */
+	GrandTotal Amount;/* 0  */
+	MPriceList;
+	IsTaxIncluded YesNo;/* 'N'  */
+	?CCampaign;
+	?CProject;
+	?CActivity;
+	IsPaid YesNo;/* 'N'  */
+	?CPayment;
+	?CCashLine;
+	?CreateFrom YesNo;
+	?GenerateTo Attr;
+	SendEmail EMail;/* 'N'  */
+	?AdUser;
+	?CopyFrom null;
+	IsSelfService YesNo;/* 'N'  */
+	?AdOrgTrx AdOrg;
+	?User1 CElementValue;
+	?User2 CElementValue;
+	?CConversionType;
+	IsPayScheduleValid YesNo;/* 'N'  */
+	?RefInvoice CInvoice;
+	IsInDispute YesNo;/* 'N'  */
+	?InvoiceCollectionType Attr;/* NULL   */
+	?MRma;/* NULL */
+	?DunningGrace Date;
+	?CDunningLevel;
+};
+

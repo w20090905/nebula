@@ -1,0 +1,21 @@
+@Remarks("Point of Sales Terminal")
+@Refby("1")
+type CPos {
+	!CPosId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	?Description;
+	?Help;
+	SalesRep AdUser;
+	MPriceList;
+	CCashBook;
+	MWarehouse;
+	?PrinterName Name;
+	?CPosKeyLayout;
+	IsModifyPrice YesNo;/* 'N'  */
+	?CBpartnerCashTrx CBpartner;
+	?CDocType;
+	?CashDrawer null;
+};
+

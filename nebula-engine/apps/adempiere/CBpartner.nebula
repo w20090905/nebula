@@ -1,0 +1,66 @@
+@Remarks("Identifies a Business Partner")
+@Refby("75")
+type CBpartner {
+	!CBpartnerId Number;
+	AdClient;
+	AdOrg;
+	Value String;
+	*Name;
+	?Name;
+	?Description;
+	IsSummary YesNo;/* 'N' */
+	CBpGroup;
+	IsOneTime YesNo;/* 'N'  */
+	IsProspect YesNo;/* 'Y'  */
+	IsVendor YesNo;/* 'N'  */
+	IsCustomer YesNo;/* 'Y'  */
+	IsEmployee YesNo;/* 'N'  */
+	IsSalesRep YesNo;/* 'N'  */
+	?ReferenceNo Code;
+	?DUNS String;
+	?Url;
+	?AdLanguage;
+	?TaxId Code;
+	?IsTaxExempt YesNo;/* 'N'                                */
+	?CInvoiceSchedule;
+	?Rating null;
+	?SalesVolume Volume;
+	?NumberEmployees Number;
+	?NAICS;
+	?FirstSale Date;
+	?AcqusitionCost Cost;/* 0 */
+	?PotentialLifetimeValue Number;/* 0 */
+	?ActualLifetimeValue Number;/* 0 */
+	?ShareOfCustomer Number;
+	?PaymentRule Attr;
+	?SoCreditLimit Count;/* 0 */
+	?SoCreditUsed Number;/* 0 */
+	?CPaymentTerm;
+	?MPriceList;
+	?MDiscountSchema;
+	?CDunning;
+	?IsDiscountPrinted YesNo;/* 'Y'                                */
+	?SoDescription Description;
+	?PoReference Note;
+	?PaymentRulePo null;
+	?PoPriceList MPriceList;
+	?PoDiscountSchema MDiscountSchema;
+	?PoPaymentTerm CPaymentTerm;
+	?DocumentCopies Count;
+	?CGreeting;
+	?InvoiceRule Attr;
+	?DeliveryRule Attr;
+	?FreightCostRule Attr;
+	?DeliveryViaRule Attr;
+	?SalesRep AdUser;
+	SendEmail EMail;/* 'N'  */
+	?BpartnerParent CBpartner;
+	?InvoicePrintFormat AdPrintFormat;
+	?SoCreditStatus Attr;/* 'O' */
+	?ShelfLifeMinPct Number;
+	?AdOrgBp AdOrg;
+	?FlatDiscount Count;
+	?TotalOpenBalance Number;
+	?DunningGrace Date;
+};
+

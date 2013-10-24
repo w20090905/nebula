@@ -1,0 +1,37 @@
+@Remarks("User within the system - Internal or Business Partner Contact")
+@Refby("94")
+type AdUser {
+	!AdUserId Number;
+	AdClient;
+	AdOrg;
+	*Name;
+	?Description;
+	?Password;
+	?EMail;
+	?Supervisor AdUser;
+	?CBpartner;
+	?Processing YesNo;
+	?EmailUser EMail;
+	?EmailUserPw EMail;
+	?CBpartnerLocation;
+	?CGreeting;
+	?Title;
+	?Comments Comment;
+	?Phone;
+	?Phone2 Phone;
+	?Fax;
+	?LastContact Date;
+	?LastResult null;
+	?Birthday;
+	?AdOrgTrx AdOrg;
+	?EmailVerify EMail;
+	?EmailVerifyDate Date;
+	NotificationType Attr;/* 'E'  */
+	IsFullBpAccess YesNo;/* 'Y'  */
+	?CJob;
+	?LdapUser null;
+	?ConnectionProfile null;
+	?Value String;/* NULL   */
+	?UserPin null;
+};
+

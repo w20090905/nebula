@@ -1,0 +1,28 @@
+@Remarks("The terms for Payment of this transaction")
+@Refby("12")
+type CPaymentTerm {
+	!CPaymentTermId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	?Description;
+	?DocumentNote Note;
+	AfterDelivery YesNo;/* 'N'  */
+	IsDueFixed YesNo;/* 'N'  */
+	NetDays Count;
+	GraceDays Count;
+	?FixMonthCutOff Number;
+	?FixMonthDay Number;
+	?FixMonthOffset Number;
+	DiscountDays Count;
+	Discount Count;
+	DiscountDays2 Count;
+	Discount2 Count;
+	?IsNextBusinessDay YesNo;/* 'Y'                           */
+	?IsDefault YesNo;/* 'N' */
+	Value String;
+	?NetDay null;
+	IsValid YesNo;/* 'N'  */
+	?Processing YesNo;
+};
+

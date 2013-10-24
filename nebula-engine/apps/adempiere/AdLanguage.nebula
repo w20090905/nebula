@@ -1,0 +1,18 @@
+@Remarks("Language ID")
+@Refby("48")
+type AdLanguage {
+	!AdLanguage Code;
+	AdClient;
+	AdOrg;
+	*Name;
+	?LanguageIso Code;
+	?CountryCode Code;
+	IsBaseLanguage YesNo;/* 'N'  */
+	IsSystemLanguage YesNo;/* 'N'  */
+	?Processing YesNo;
+	AdLanguageId Number;
+	IsDecimalPoint YesNo;/* 'Y'  */
+	?DatePattern String;
+	?TimePattern String;
+};
+

@@ -1,0 +1,25 @@
+@Remarks("Color for backgrounds or indicators")
+@Refby("3")
+type AdColor {
+	!AdColorId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	IsDefault YesNo;/* 'N'  */
+	ColorType Attr;
+	Red Number;
+	Green Number;
+	Blue Number;
+	Alpha Number;
+	?AdImage;
+	ImageAlpha Number;
+	?Red1 Number;
+	?Green1 Number;
+	?Blue1 Number;
+	?Alpha1 Number;
+	?LineWidth Number;
+	?LineDistance Number;
+	?StartPoint Number;
+	?RepeatDistance Number;
+};
+

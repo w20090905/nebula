@@ -1,0 +1,41 @@
+@Remarks("Column in the table")
+@Refby("21")
+type AdColumn {
+	!AdColumnId Number;
+	AdClient;
+	AdOrg;
+	*Name;
+	?Description;
+	?Help;
+	Version Number;
+	EntityType AdEntityType;/* 'D'  */
+	ColumnName Name;
+	AdTable;
+	AdReference;
+	?AdReferenceValue AdReference;
+	?AdValRule;
+	?FieldLength Length;
+	?DefaultValue Note;
+	IsKey YesNo;/* 'N'  */
+	IsParent YesNo;/* 'N'  */
+	IsMandatory YesNo;/* 'N'  */
+	IsUpdateable YesNo;/* 'Y'  */
+	?ReadonlyLogic Note;
+	IsIdentifier YesNo;/* 'N'  */
+	?SeqNo;
+	IsTranslated YesNo;/* 'N'  */
+	IsEncrypted YesNo;/* 'N'  */
+	?Callout Note;
+	?VFormat Description;
+	?ValueMin String;
+	?ValueMax String;
+	IsSelectionColumn YesNo;/* 'N'  */
+	?AdElement;
+	?AdProcess;
+	?IsSyncDatabase YesNo;/* 'N'                               */
+	IsAlwaysUpdateable YesNo;/* 'N'  */
+	?ColumnSql Note;
+	?MandatoryLogic Note;
+	?InfoFactoryClass Info;
+};
+

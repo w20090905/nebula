@@ -1,0 +1,14 @@
+@Remarks("Responsible for Workflow Execution")
+@Refby("5")
+type AdWfResponsible {
+	!AdWfResponsibleId Number;
+	AdClientId Number;
+	AdOrg;
+	*Name;
+	?Description;
+	ResponsibleType Attr;
+	?AdUser;
+	?AdRole;
+	EntityType AdEntityType;/* 'D' */
+};
+

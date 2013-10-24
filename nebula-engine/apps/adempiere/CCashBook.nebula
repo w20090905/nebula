@@ -1,0 +1,12 @@
+@Remarks("Cash Book for recording petty cash transactions")
+@Refby("3")
+type CCashBook {
+	!CCashBookId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	?Description;
+	IsDefault YesNo;/* 'N'  */
+	CCurrency;
+};
+

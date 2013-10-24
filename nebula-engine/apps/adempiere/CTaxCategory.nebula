@@ -1,0 +1,12 @@
+@Remarks("Tax Category")
+@Refby("7")
+type CTaxCategory {
+	!CTaxCategoryId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	?Description;
+	?CommodityCode Note;
+	IsDefault YesNo;/* 'N'  */
+};
+

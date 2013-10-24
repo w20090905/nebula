@@ -1,0 +1,13 @@
+@Remarks("System Image or Icon")
+@Refby("6")
+type AdImage {
+	!AdImageId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	?ImageUrl Url;
+	?BinaryData Note;
+	EntityType AdEntityType;/* 'D'  */
+	?Description;
+};
+

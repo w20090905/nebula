@@ -1,0 +1,16 @@
+@Remarks("Special Form")
+@Refby("10")
+type AdForm {
+	!AdFormId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	?Description;
+	?Help;
+	AccessLevel Attr;
+	?ClassName Name;
+	EntityType AdEntityType;/* 'D'  */
+	IsBetaFunctionality YesNo;/* 'N'  */
+	?JspUrl Url;
+};
+

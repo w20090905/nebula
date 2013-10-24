@@ -1,0 +1,28 @@
+@Remarks("Cash Journal")
+@Refby("1")
+type CCash {
+	!CCashId Number;
+	AdClientId Number;
+	AdOrg;
+	CCashBook;
+	*Name;
+	?Description;
+	StatementDate Date;
+	DateAcct Date;
+	BeginningBalance Number;/* 0  */
+	EndingBalance Number;/* 0  */
+	?StatementDifference Number;/* 0 */
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	Posted YesNo;/* 'N'  */
+	?AdOrgTrx AdOrg;
+	?CProject;
+	?CCampaign;
+	?CActivity;
+	?User1 CElementValue;
+	?User2 CElementValue;
+	IsApproved YesNo;/* 'N'  */
+	DocStatus Attr;
+	DocAction Attr;
+};
+

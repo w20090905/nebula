@@ -1,0 +1,20 @@
+@Remarks("Workflow Processor Server")
+@Refby("2")
+type AdWorkflowProcessor {
+	!AdWorkflowProcessorId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	?Description;
+	FrequencyType Attr;
+	Frequency;
+	?DateLastRun Date;
+	?DateNextRun Date;
+	Supervisor AdUser;
+	KeepLogDays Count;
+	?Processing YesNo;
+	?InactivityAlertDays Count;/* 0 */
+	?RemindDays Count;/* 0 */
+	?AlertOverPriority Number;
+};
+

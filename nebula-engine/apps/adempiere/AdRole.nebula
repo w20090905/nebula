@@ -1,0 +1,43 @@
+@Remarks("Responsibility Role")
+@Refby("23")
+type AdRole {
+	!AdRoleId Number;
+	AdClient;
+	AdOrg;
+	*Name;
+	?Description;
+	UserLevel Attr;/* '  O'  */
+	?CCurrency;
+	?AmtApproval Amount;/* 0 */
+	?AdTreeMenu AdTree;
+	IsManual YesNo;/* 'N' */
+	IsShowAcct YesNo;/* 'Y' */
+	IsPersonalLock YesNo;/* 'N'  */
+	IsPersonalAccess YesNo;/* 'N'  */
+	IsCanExport YesNo;/* 'Y'  */
+	IsCanReport YesNo;/* 'Y'  */
+	?Supervisor AdUser;
+	IsCanApproveOwnDoc YesNo;/* 'Y'  */
+	IsAccessAllOrgs YesNo;/* 'N'  */
+	IsChangeLog YesNo;/* 'N'  */
+	PreferenceType Attr;/* 'C'  */
+	OverwritePriceLimit YesNo;/* 'N'  */
+	IsUseUserOrgAccess YesNo;/* 'N'  */
+	?AdTreeOrg AdTree;
+	ConfirmQueryRecords Number;/* 0  */
+	MaxQueryRecords Number;/* 0  */
+	?ConnectionProfile null;
+	?AllowInfoAccount YesNo;/* 'Y'  */
+	?AllowInfoAsset YesNo;/* 'Y'  */
+	?AllowInfoBpartner YesNo;/* 'Y'  */
+	?AllowInfoCashJournal YesNo;/* 'Y'  */
+	?AllowInfoInout YesNo;/* 'Y'  */
+	?AllowInfoInvoice YesNo;/* 'Y'  */
+	?AllowInfoOrder YesNo;/* 'Y'  */
+	?AllowInfoPayment YesNo;/* 'Y'  */
+	?AllowInfoProduct YesNo;/* 'Y'  */
+	?AllowInfoResource YesNo;/* 'Y'  */
+	?AllowInfoSchedule YesNo;/* 'Y'  */
+	?UserDiscount Count;
+};
+

@@ -1,0 +1,18 @@
+@Remarks("Account at the Bank")
+@Refby("11")
+type CBankAccount {
+	!CBankAccountId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	CBank;
+	CCurrency;
+	BankAccountType Attr;
+	AccountNo Code;
+	CurrentBalance Number;/* 0  */
+	CreditLimit Count;/* 0  */
+	IsDefault YesNo;/* 'N'  */
+	?IBAN;
+	?Description;
+	?BBAN;
+};
+

@@ -1,0 +1,20 @@
+@Remarks("Identifies the (ship to) address for this Business Partner")
+@Refby("23")
+type CBpartnerLocation {
+	!CBpartnerLocationId Number;
+	AdClient;
+	AdOrg;
+	*Name;
+	IsBillTo YesNo;/* 'Y'  */
+	IsShipTo YesNo;/* 'Y'  */
+	IsPayFrom YesNo;/* 'Y'  */
+	IsRemitTo YesNo;/* 'Y'  */
+	?Phone;
+	?Phone2 Phone;
+	?Fax;
+	?ISDN;
+	?CSalesRegion;
+	CBpartner;
+	?CLocation;
+};
+

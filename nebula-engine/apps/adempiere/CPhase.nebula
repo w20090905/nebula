@@ -1,0 +1,15 @@
+@Remarks("Standard Phase of the Project Type")
+@Refby("4")
+type CPhase {
+	AdClientId Number;
+	AdOrgId Number;
+	SeqNo;
+	*Name;
+	?Description;
+	?Help;
+	CProjectType;
+	StandardQty Quantity;/* 0  	  */
+	!CPhaseId Number;
+	?MProduct;
+};
+

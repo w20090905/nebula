@@ -1,0 +1,15 @@
+@Remarks("Product Lot Definition")
+@Refby("1")
+type MLot {
+	!MLotId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	?Description;
+	MProduct;
+	?Help;
+	?DateFrom Date;
+	?DateTo Date;
+	?MLotCtl;
+};
+

@@ -1,0 +1,28 @@
+@Remarks("Resource Type")
+@Refby("1")
+type SResourceType {
+	!SResourceTypeId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	Value String;
+	*Name;
+	?Description;
+	IsSingleAsSignment YesNo;/* 'N'  */
+	CUom;
+	AllowUomFractions YesNo;/* 'N'  */
+	?TimesLotStart Date;
+	?TimesLotEnd Date;
+	IsTimesLot YesNo;/* 'N'  */
+	IsDateSlot YesNo;/* 'N'  */
+	OnSunday YesNo;/* 'N'  */
+	OnMonday YesNo;/* 'Y'  */
+	OnTuesday YesNo;/* 'Y'  */
+	OnWednesday YesNo;/* 'Y'  */
+	OnThursday YesNo;/* 'Y'  */
+	OnFriday YesNo;/* 'Y'  */
+	OnSaturday YesNo;/* 'N'  */
+	MProductCategory;
+	CTaxCategory;
+	?ChargeableQty Quantity;/* 0 */
+};
+

@@ -1,0 +1,11 @@
+@Remarks("Organizational entity within client")
+@Refby("121")
+type AdOrg {
+	!AdOrgId Number;
+	AdClient;
+	Value String;
+	*Name;
+	?Description;
+	IsSummary YesNo;/* 'N'  */
+};
+

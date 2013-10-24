@@ -1,0 +1,21 @@
+@Remarks("Printer paper definition")
+@Refby("1")
+type AdPrintPaper {
+	!AdPrintPaperId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	?Description;
+	IsDefault YesNo;/* 'N'  */
+	IsLandscape YesNo;/* 'Y'  */
+	Code Note;
+	MarginTop Length;/* 36 */
+	MarginLeft Length;/* 36  */
+	MarginRight Length;/* 36  */
+	MarginBottom Length;/* 36  */
+	?Processing YesNo;
+	?SizeX Number;/* NULL  */
+	?SizeY Number;/* NULL  */
+	?DimensionUnits null;
+};
+

@@ -1,0 +1,16 @@
+@Remarks("Resource")
+@Refby("3")
+type SResource {
+	!SResourceId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	Value String;
+	*Name;
+	?Description;
+	SResourceType;
+	MWarehouse;
+	IsAvailable YesNo;/* 'Y'  */
+	?AdUser;
+	?ChargeableQty Quantity;/* 0 */
+};
+

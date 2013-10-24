@@ -1,0 +1,17 @@
+@Remarks("The Currency for this record")
+@Refby("49")
+type CCurrency {
+	!CCurrencyId Number;
+	AdClient;
+	AdOrg;
+	IsoCode YesNo;
+	?CurSymbol Symbol;
+	Description;
+	StdPrecision Precision;
+	CostingPrecision Precision;
+	IsEuro YesNo;/* 'N'  */
+	IsEmuMember YesNo;/* 'N'  */
+	?EmuEntryDate Date;
+	?EmuRate Rate;/* 0 */
+};
+

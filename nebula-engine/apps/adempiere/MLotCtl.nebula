@@ -1,0 +1,15 @@
+@Remarks("Product Lot Control")
+@Refby("3")
+type MLotCtl {
+	!MLotCtlId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	?Description;
+	StartNo SeqNo;
+	IncrementNo SeqNo;
+	CurrentNext Number;
+	?Prefix Description;
+	?Suffix Description;
+};
+

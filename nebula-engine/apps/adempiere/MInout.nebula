@@ -1,0 +1,62 @@
+@Remarks("Material Shipment Document")
+@Refby("8")
+type MInout {
+	!MInoutId Number;
+	AdClientId Number;
+	AdOrg;
+	IsSoTrx YesNo;/* 'Y'  */
+	DocumentNo Code;
+	DocAction Attr;
+	DocStatus Attr;
+	Posted YesNo;/* 'N'  */
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	CDocType;
+	?Description;
+	?COrder;
+	?DateOrdered Date;
+	IsPrinted YesNo;/* 'N'  */
+	MovementType Attr;
+	MovementDate Date;
+	DateAcct Date;
+	CBpartner;
+	CBpartnerLocation;
+	MWarehouse;
+	?PoReference Note;
+	DeliveryRule Attr;
+	FreightCostRule Attr;
+	?FreightAmt Amount;/* 0 */
+	DeliveryViaRule Attr;
+	?MShipper;
+	?CCharge;
+	?ChargeAmt Amount;/* 0 */
+	PriorityRule Attr;
+	?DatePrinted Date;
+	?CInvoice;
+	?CreateFrom YesNo;
+	?GenerateTo Attr;
+	SendEmail EMail;/* 'N'  */
+	?AdUser;
+	?SalesRep AdUser;
+	?NoPackageS Number;
+	?PickDate Date;
+	?ShipDate Date;
+	?TrackingNo null;
+	?AdOrgTrx AdOrg;
+	?CProject;
+	?CCampaign;
+	?CActivity;
+	?User1 CElementValue;
+	?User2 CElementValue;
+	?DateReceived Date;
+	IsInTransit YesNo;/* 'N'  */
+	?RefInout MInout;
+	?CreateConfirm YesNo;
+	?CreatePackage YesNo;
+	IsApproved YesNo;/* 'N'  */
+	IsInDispute YesNo;/* 'N'  */
+	?Volume;
+	?Weight;
+	?MRma;/* NULL */
+};
+

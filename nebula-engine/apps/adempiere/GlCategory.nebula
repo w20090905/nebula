@@ -1,0 +1,13 @@
+@Remarks("General Ledger Category")
+@Refby("5")
+type GlCategory {
+	!GlCategoryId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	?Description;
+	CategoryType Attr;
+	IsDefault YesNo;/* 'N'  */
+	?DocBaseType Attr;
+};
+

@@ -1,0 +1,22 @@
+@Remarks("Business Partner Group")
+@Refby("7")
+type CBpGroup {
+	!CBpGroupId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	Value String;
+	*Name;
+	?Description;
+	IsDefault YesNo;/* 'N'  */
+	?AdPrintColor;
+	IsConfidentialInfo Info;/* 'N'  */
+	?PriorityBase null;
+	?MPriceList;
+	?PoPriceList MPriceList;
+	?MDiscountSchema;
+	?PoDiscountSchema MDiscountSchema;
+	?CreditWatchPercent Percent;
+	?PriceMatchTolerance Number;
+	?CDunning;
+};
+

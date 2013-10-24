@@ -1,0 +1,26 @@
+@Remarks("Table for the Fields")
+@Refby("44")
+type AdTable {
+	!AdTableId Number;
+	AdClient;
+	AdOrg;
+	*Name;
+	?Description;
+	?Help;
+	TableName Name;
+	IsView YesNo;/* 'N'  */
+	AccessLevel Attr;
+	EntityType AdEntityType;/* 'D'  */
+	?AdWindow;
+	?AdValRule;
+	?LoadSeq Number;
+	IsSecurityEnabled YesNo;/* 'N'  */
+	IsDeleteable YesNo;/* 'Y'  */
+	IsHighVolume YesNo;/* 'N'  */
+	?ImportTable null;
+	IsChangeLog YesNo;/* 'N'  */
+	ReplicationType Attr;/* 'L' */
+	?PoWindow AdWindow;
+	?CopyColumnsFromTable null;
+};
+

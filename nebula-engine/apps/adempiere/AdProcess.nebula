@@ -1,0 +1,28 @@
+@Remarks("Process or Report")
+@Refby("19")
+type AdProcess {
+	!AdProcessId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	Value String;
+	*Name;
+	?Description;
+	?Help;
+	AccessLevel Attr;
+	EntityType AdEntityType;/* 'D'  */
+	?ProcedureName Name;
+	IsReport YesNo;/* 'Y'  */
+	?IsDirectPrint YesNo;/* 'N'                           */
+	?AdReportView;
+	?ClassName Name;
+	?StatisticCount Count;
+	?StatisticSeconds Number;
+	?AdPrintFormat;
+	?WorkflowValue Note;
+	?AdWorkflow;
+	IsBetaFunctionality YesNo;/* 'N'  */
+	IsServerProcess YesNo;/* 'N'  */
+	?ShowHelp Help;/* 'Y' */
+	?JasperReport null;
+};
+

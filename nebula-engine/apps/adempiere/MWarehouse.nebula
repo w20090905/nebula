@@ -1,0 +1,15 @@
+@Remarks("Storage Warehouse and Service Point")
+@Refby("24")
+type MWarehouse {
+	!MWarehouseId Number;
+	AdClient;
+	AdOrg;
+	Value String;
+	*Name;
+	?Description;
+	CLocation;
+	Separator null;
+	?MWarehouseSource MWarehouse;
+	?ReplenishmentClass null;
+};
+

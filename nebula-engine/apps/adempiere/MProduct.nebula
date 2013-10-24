@@ -1,0 +1,59 @@
+@Remarks("Product, Service, Item")
+@Refby("89")
+type MProduct {
+	!MProductId Number;
+	AdClient;
+	AdOrg;
+	Value String;
+	*Name;
+	?Description;
+	?DocumentNote Note;
+	?Help;
+	?UPC;
+	?SKU;
+	CUom;
+	?SalesRep AdUser;
+	IsSummary YesNo;/* 'N'  */
+	IsStocked YesNo;/* 'Y'  */
+	IsPurchased YesNo;/* 'Y'  */
+	IsSold YesNo;/* 'Y'  */
+	IsBom YesNo;/* 'N'  */
+	IsInvoicePrintDetails YesNo;/* 'N'  */
+	IsPickListPrintDetails YesNo;/* 'N'  */
+	IsVerified YesNo;/* 'N'  */
+	?CRevenueRecognition;
+	MProductCategory;
+	?Classification YesNo;
+	?Volume;/* 0 */
+	?Weight;/* 0 */
+	?ShelfWidth Width;
+	?ShelfHeight Height;
+	?ShelfDepth Depth;
+	?UnitsPerPallet Number;
+	CTaxCategory;
+	?SResource;
+	?Discontinued YesNo;/* 'N'                                 */
+	?DiscontinuedBy Date;
+	?Processing YesNo;
+	?SExpenseType;
+	ProductType Attr;/* 'I'  */
+	?ImageUrl Url;
+	?DescriptionUrl Description;
+	?GuaranteeDays Count;
+	?RMailText;
+	?VersionNo Code;
+	?MAttributeSet;
+	?MAttributeSetInstance;/* 0 */
+	?DownloadUrl Url;
+	?MFreightCategory;
+	?MLocator;
+	?GuaranteeDaysMin Number;
+	IsWebStoreFeatured YesNo;/* 'N'  */
+	IsSelfService YesNo;/* 'Y'  */
+	?CSubscriptionType;
+	IsDropShip YesNo;/* 'N'  */
+	IsExcludeAutoDelivery YesNo;/* 'N'  */
+	?Group1 null;
+	?Group2 null;
+};
+

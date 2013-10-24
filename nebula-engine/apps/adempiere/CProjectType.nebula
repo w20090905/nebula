@@ -1,0 +1,12 @@
+@Remarks("Type of the project")
+@Refby("3")
+type CProjectType {
+	!CProjectTypeId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	?Description;
+	?Help;
+	ProjectCategory YesNo;/* 'N'  */
+};
+

@@ -1,0 +1,11 @@
+@Remarks("Return Material Authorization Type")
+@Refby("1")
+type MRmaType {
+	!MRmaTypeId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	*Name;
+	?Description;
+	?Help;
+};
+

@@ -1,0 +1,15 @@
+@Remarks("Unit of Measure")
+@Refby("22")
+type CUom {
+	!CUomId Number;
+	AdClient;
+	AdOrg;
+	X12de355 String;
+	?UomSymbol Symbol;
+	*Name;
+	?Description;
+	StdPrecision Precision;
+	CostingPrecision Precision;
+	IsDefault YesNo;/* 'N'  */
+};
+

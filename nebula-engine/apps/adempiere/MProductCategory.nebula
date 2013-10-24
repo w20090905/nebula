@@ -1,0 +1,18 @@
+@Remarks("Category of a Product")
+@Refby("14")
+type MProductCategory {
+	!MProductCategoryId Number;
+	AdClientId Number;
+	AdOrgId Number;
+	Value String;
+	*Name;
+	?Description;
+	IsDefault YesNo;/* 'N'  */
+	PlannedMargin Length;
+	?AAssetGroup;
+	IsSelfService YesNo;/* 'Y'  */
+	?AdPrintColor;
+	MmPolicy String;/* 'F'  */
+	?MProductCategoryParent MProductCategory;
+};
+
