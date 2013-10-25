@@ -23,28 +23,16 @@ import nebula.lang.TypeStandalone;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 
 public class ImportHHTDataDefine extends DefaultImporter {
 	Log log = LogFactory.getLog(getClass());
 
 	public static void main(String[] args) throws IOException {
-		String inputFileName = "apps/hht/orcl.DMS2.xml";
-		String outputFolder = "apps/hht";
-
-		ImportHHTDataDefine parser = new ImportHHTDataDefine();
-		Document document = parser.parse(inputFileName);
-		// get root element
-		Element rootElement = document.getDocumentElement();
-		parser.readAll(outputFolder, rootElement);
-		parser.analyze(parser.types);
-		parser.outputAll(outputFolder);
+		new ImportHHTDataDefine().load();
 	}
 
 	public ImportHHTDataDefine() {
-		super(true, false);
+		super("hht", true, false);
 		// ID
 		when(EqualsIgnoreCase).with("ID").typeOf(Long).then().setTypeName("ID");
 		when(EndWithIgnoreCase).with("ID").typeOf(Long).then().setTypeName("ID");

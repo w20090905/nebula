@@ -1,8 +1,14 @@
 package typeimport;
 
-import static typeimport.DBColumnType.*;
+import static typeimport.DBColumnType.Char;
+import static typeimport.DBColumnType.Date;
+import static typeimport.DBColumnType.Decimal;
 import static typeimport.DBColumnType.Long;
-import static typeimport.MatchPattern.*;
+import static typeimport.DBColumnType.String;
+import static typeimport.MatchPattern.EndWith;
+import static typeimport.MatchPattern.Equals;
+import static typeimport.MatchPattern.Include;
+import static typeimport.MatchPattern.StartWith;
 
 import java.io.IOException;
 
@@ -15,29 +21,11 @@ public class ImportAdempiereDataDefine extends DefaultImporter {
 	Log log = LogFactory.getLog(getClass());
 
 	public static void main(String[] args) throws IOException {
-		String inputFileName = "apps/adempiere/orclqss.ADEMPIERE340.xml";
-		String outputFolder = "apps/adempiere";
-
-		ImportAdempiereDataDefine parser = new ImportAdempiereDataDefine();
-		Document document = parser.parse(inputFileName);
-		// get root element
-		Element rootElement = document.getDocumentElement();
-
-		// String rootType = "AdClient";
-		String rootType = "COrder";
-
-		parser.readByReations(outputFolder, rootElement, rootType);
-		parser.analyze(parser.types);
-		parser.outputByRelations(outputFolder, parser.typeMapByName.get(rootType));
-
-		// parser.readAll(outputFolder, rootElement);
-		// parser.analyze(parser.types);
-		// parser.outputAll(outputFolder);
-		parser.info();
+		new ImportAdempiereDataDefine().load();
 	}
 
 	public ImportAdempiereDataDefine() {
-		super(true, true);
+		super("adempiere", true, true);
 
 		when(Equals, EndWith).with("Id").typeOf(Long).then().setTypeName("ID");
 
@@ -132,5 +120,25 @@ public class ImportAdempiereDataDefine extends DefaultImporter {
 		super.addDefineWords("x y z xy");
 
 		super.addDefineWords("accumde VALUTA XST SETNL TTABLE maintenence 12DE355 chare");
+	}
+
+	@Override
+	public void load() throws IOException {
+
+		Document document = this.parse(importFile);
+		// get root element
+		Element rootElement = document.getDocumentElement();
+
+		// String rootType = "AdClient";
+		String rootType = "COrder";
+
+		this.readByReations(rootElement, rootType);
+		this.analyze(this.types);
+		this.outputByRelations(rootFolder, this.typeMapByName.get(rootType));
+
+		// parser.readAll(outputFolder, rootElement);
+		// parser.analyze(parser.types);
+		// parser.outputAll(outputFolder);
+		this.printInfo();
 	}
 }

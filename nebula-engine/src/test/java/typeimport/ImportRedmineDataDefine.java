@@ -22,28 +22,17 @@ import nebula.lang.TypeStandalone;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 
 public class ImportRedmineDataDefine extends DefaultImporter {
 	Log log = LogFactory.getLog(getClass());
 
 	public static void main(String[] args) throws IOException {
-		String inputFileName = "apps/redmine/redmine_baseline.xml";
-		String outputFolder = "apps/redmine";
-
-		ImportRedmineDataDefine parser = new ImportRedmineDataDefine();
-		Document document = parser.parse(inputFileName);
-		// get root element
-		Element rootElement = document.getDocumentElement();
-		parser.readAll(outputFolder, rootElement);
-		parser.analyze(parser.types);
-		parser.outputAll(outputFolder);
+		new ImportRedmineDataDefine().load();
 	}
 
 	public ImportRedmineDataDefine() {
-		super(false, true);
+		super("redmine",false, true);
 
 		when(EqualsIgnoreCase).with("repository_id").inTable("Changesets").then().setReferTo("Repositories");
 		when(EqualsIgnoreCase).with("status_id").inTable("issues").then().setReferTo("IssueStatuses");

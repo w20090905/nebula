@@ -40,8 +40,8 @@ import com.google.common.base.CaseFormat;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
-import com.google.common.collect.SortedMultiset;
 import com.google.common.collect.TreeMultiset;
+import com.google.common.io.PatternFilenameFilter;
 
 public class DefaultImporter {
 	int MAX = 1500;
@@ -58,11 +58,6 @@ public class DefaultImporter {
 	List<RuleBuilder> rules = Lists.newArrayList();
 
 	EnumMap<DBColumnType, List<String>> dbColumnMap = Maps.newEnumMap(DBColumnType.class);
-
-	public DefaultImporter(boolean manageRelationInDB, boolean seperateWithUnder) {
-		this(manageRelationInDB, seperateWithUnder, "ID");
-		this.loadWords();
-	}
 
 	final static String WORDS_File_NAME = "words.txt";
 
@@ -92,7 +87,28 @@ public class DefaultImporter {
 		}
 	}
 
-	public DefaultImporter(boolean manageRelationInDB, boolean seperateWithUnder, String indenfyKey) {
+	File importFile = null;
+	File rootFolder = null;
+
+	public void load() throws IOException {
+
+		Document document = this.parse(importFile);
+		// get root element
+		Element rootElement = document.getDocumentElement();
+		this.readAll(rootElement);
+		this.analyze(this.types);
+		this.outputAll(rootFolder);
+	}
+
+	final String legacyName;
+
+	public DefaultImporter(final String name, boolean manageRelationInDB, boolean seperateWithUnder) {
+		this(name, manageRelationInDB, seperateWithUnder, "ID");
+		this.loadWords();
+	}
+
+	public DefaultImporter(final String name, boolean manageRelationInDB, boolean seperateWithUnder, String indenfyKey) {
+		this.legacyName = name;
 		this.manageRelationInDB = manageRelationInDB;
 		this.seperateWithUnder = seperateWithUnder;
 		this.indenfyKey = indenfyKey;
@@ -110,6 +126,11 @@ public class DefaultImporter {
 		dbColumnMap.put(String, Lists.newArrayList("CHAR", "VARCHAR", "VARCHAR2", "NVARCHAR", "NVARCHAR2", "TEXT"));
 		dbColumnMap.put(Text, Lists.newArrayList("TEXT", "LONGTEXT"));
 		dbColumnMap.put(Blob, Lists.newArrayList("BLOB", "LONGBLOB", "CLOB"));
+
+		rootFolder = new File("apps/" + this.legacyName);
+		for (File file : rootFolder.listFiles(new PatternFilenameFilter(".*[.]xml"))) {
+			importFile = file;
+		}
 	}
 
 	public void initRules() {
@@ -117,13 +138,13 @@ public class DefaultImporter {
 	}
 
 	// Load and parse XML file into DOM
-	public Document parse(String filePath) {
+	public Document parse(File filePath) {
 		Document document = null;
 		try {
 			// DOM parser instance
 			DocumentBuilder builder = builderFactory.newDocumentBuilder();
 			// parse an XML file into a DOM tree
-			document = builder.parse(new File(filePath));
+			document = builder.parse(filePath);
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
@@ -400,6 +421,7 @@ public class DefaultImporter {
 		out = new OutputStreamWriter(new FileOutputStream(new File(outputFolder, type.name + ".nebula")));
 
 		sb.setLength(0);
+		sb.append("@Legacy(\"" + escape(type.remarks) + "\")\n");
 		sb.append("@Remarks(\"" + escape(type.remarks) + "\")\n");
 		sb.append("@Refby(\"" + type.cntReference + "\")\n");
 		if (type.standalone == TypeStandalone.Transaction) {
@@ -453,10 +475,7 @@ public class DefaultImporter {
 		out.close();
 	}
 
-	public void outputAll(String outputFolderName) throws IOException {
-
-		File outputFolder = new File(outputFolderName);
-
+	public void outputAll(File outputFolder) throws IOException {
 		if (!outputFolder.exists()) {
 			outputFolder.mkdir();
 		} else { //
@@ -494,9 +513,7 @@ public class DefaultImporter {
 
 	}
 
-	public void outputByRelations(String outputFolderName, Type rootType) throws IOException {
-
-		File outputFolder = new File(outputFolderName);
+	public void outputByRelations(File outputFolder, Type rootType) throws IOException {
 
 		if (!outputFolder.exists()) {
 			outputFolder.mkdir();
@@ -509,7 +526,7 @@ public class DefaultImporter {
 
 	}
 
-	public void readByReations(String outputFolderName, Element rootElement, String rootTable) throws IOException {
+	public void readByReations(Element rootElement, String rootTable) throws IOException {
 		NodeList nodeList = rootElement.getElementsByTagName("table");
 		if (nodeList == null) {
 			return;
@@ -551,7 +568,7 @@ public class DefaultImporter {
 		}
 	}
 
-	public void readAll(String outputFolderName, Element rootElement) throws IOException {
+	public void readAll(Element rootElement) throws IOException {
 		NodeList nodeList = rootElement.getElementsByTagName("table");
 		if (nodeList == null) {
 			return;
@@ -566,7 +583,7 @@ public class DefaultImporter {
 
 		for (int i = 0; i < nodeList.getLength() && i < MAX; i++) {
 			Element element = (Element) nodeList.item(i);
-			Type type = this.readTable(element);
+			this.readTable(element);
 			// System.out.println("reading... " + i + " " + type.name);
 		}
 	}
@@ -800,7 +817,7 @@ public class DefaultImporter {
 		return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name);
 	}
 
-	public void info() {
+	public void printInfo() {
 		System.out.println("=============================");
 		System.out.println("====        word       ====");
 		System.out.println("=============================\n");
@@ -818,12 +835,13 @@ public class DefaultImporter {
 		for (Type type : types) {
 			for (Field field : type.fields) {
 				if (field.skip) continue;
-				if(field.isForeignKey)continue;
+				if (field.isForeignKey) continue;
 				if (field.resultTypeName != null) {
 					fieldTypes.add(field.resultTypeName);
 				} else {
 					fieldTypes.add("NULL");
-					System.out.println(type.name + "\t" + field.name + "\t" + field.resultName + "\t" + field.typename + "\t" + field.size +"\t" + field.defaultValue + "\t" + field.remarks);
+					System.out.println(type.name + "\t" + field.name + "\t" + field.resultName + "\t" + field.typename + "\t" + field.size + "\t"
+							+ field.defaultValue + "\t" + field.remarks);
 				}
 			}
 		}
