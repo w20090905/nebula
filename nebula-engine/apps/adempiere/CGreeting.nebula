@@ -1,9 +1,9 @@
 @Remarks("Greeting to print on correspondence")
 @Refby("4")
 type CGreeting {
-	!CGreetingId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!CGreetingId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Greeting String;
 	IsFirstNameOnly YesNo;/* 'N'  */

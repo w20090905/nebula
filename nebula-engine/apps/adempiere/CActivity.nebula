@@ -1,9 +1,9 @@
 @Remarks("Business Activity")
 @Refby("27")
 type CActivity {
-	!CActivityId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!CActivityId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;

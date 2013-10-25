@@ -5,12 +5,12 @@ type AdLanguage {
 	AdClient;
 	AdOrg;
 	*Name;
-	?LanguageIso Code;
+	?LanguageIso String;
 	?CountryCode Code;
 	IsBaseLanguage YesNo;/* 'N'  */
 	IsSystemLanguage YesNo;/* 'N'  */
 	?Processing YesNo;
-	AdLanguageId Number;
+	AdLanguageId ID;
 	IsDecimalPoint YesNo;/* 'Y'  */
 	?DatePattern String;
 	?TimePattern String;

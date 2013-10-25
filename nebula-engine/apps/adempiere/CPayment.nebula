@@ -1,10 +1,10 @@
 @Remarks("Payment identifier")
 @Refby("16")
-type CPayment {
-	!CPaymentId Number;
-	AdClientId Number;
+tx CPayment {
+	!CPaymentId ID;
+	AdClientId ID;
 	AdOrg;
-	DocumentNo Code;
+	DocumentNo String;
 	DateTrx Date;
 	IsReceipt YesNo;/* 'Y'  */
 	CDocType;
@@ -16,40 +16,40 @@ type CPayment {
 	?CPaymentBatch;
 	TenderType Attr;
 	?CreditCardType Attr;
-	?CreditCardNumber Code;
+	?CreditCardNumber String;
 	?CreditCardVv String;
 	?CreditCardExpMm Number;
-	?CreditCardExpYY Number;
-	?Micr null;
-	?RoutingNo Code;
-	?AccountNo Code;
-	?CheckNo Code;
+	?CreditCardExpYY Length;
+	?Micr String;
+	?RoutingNo String;
+	?AccountNo String;
+	?CheckNo String;
 	?AName Name;
-	?AStreet null;
-	?ACity null;
-	?AState null;
-	?AZip null;
-	?AIdentDl null;
-	?AIdentSsn null;
-	?AEmail EMail;
-	?VoiceAuthCode Note;
-	?OrigTrxId Code;
-	?PoNum Code;
+	?AStreet String;
+	?ACity String;
+	?AState String;
+	?AZip String;
+	?AIdentDl String;
+	?AIdentSsn String;
+	?AEmail Email;
+	?VoiceAuthCode Code;
+	?OrigTrxId String;
+	?PoNum String;
 	CCurrency;
 	PayAmt Amount;/* 0  */
 	?DiscountAmt Amount;/* 0 */
 	?WriteOffAmt Amount;/* 0 */
 	?TaxAmt Amount;/* 0 */
 	IsApproved YesNo;/* 'N'  */
-	?RPnref null;
-	?RResult null;
-	?RRespMsg Msg;
-	?RAuthCode Note;
-	?RAvsAddr Address;
-	?RAvsZip null;
-	?RInfo Info;
+	?RPnref String;
+	?RResult String;
+	?RRespMsg Message;
+	?RAuthCode Code;
+	?RAvsAddr Message;
+	?RAvsZip String;
+	?RInfo String;
 	?Processing YesNo;
-	?OProcessing null;
+	?OProcessing YesNo;
 	DocStatus Attr;
 	DocAction Attr;
 	IsReconciled YesNo;/* 'N'  */
@@ -59,16 +59,16 @@ type CPayment {
 	Posted YesNo;/* 'N'  */
 	IsOverUnderPayment YesNo;/* 'N'  */
 	?OverUnderAmt Amount;/* 0 */
-	?ACountry null;
+	?ACountry String;
 	?CProject;
 	IsSelfService YesNo;/* 'N' */
 	?ChargeAmt Amount;/* 0 */
 	?CCharge;
 	IsDelayedCapture YesNo;/* 'N'  */
-	?RAuthCodeDc null;
-	?RCvv2Match null;
-	?RPnrefDc null;
-	?SWIPE;
+	?RAuthCodeDc String;
+	?RCvv2Match String;
+	?RPnrefDc String;
+	?Swipe;
 	?AdOrgTrx AdOrg;
 	?CCampaign;
 	?CActivity;

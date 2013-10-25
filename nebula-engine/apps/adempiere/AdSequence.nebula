@@ -1,23 +1,23 @@
 @Remarks("Document Sequence")
 @Refby("6")
 type AdSequence {
-	!AdSequenceId Number;
+	!AdSequenceId ID;
 	AdClient;
 	AdOrg;
 	*Name;
 	?Description;
-	?VFormat Description;
+	?VFormat String;
 	IsAutoSequence YesNo;/* 'Y'  */
 	IncrementNo SeqNo;
 	StartNo SeqNo;
 	CurrentNext Number;
 	CurrentNextSys Number;
 	?IsAudited YesNo;/* 'N'                        */
-	?IsTableId YesNo;/* 'N'                        */
-	?Prefix Description;/* NULL */
-	?Suffix Description;/* NULL */
-	?StartNewYear null;/* 'N'                        */
+	?IsTableId String;/* 'N'                        */
+	?Prefix String;/* NULL */
+	?Suffix String;/* NULL */
+	?StartNewYear YesNo;/* 'N'                        */
 	?DateColumn String;
-	?DecimalPattern null;
+	?DecimalPattern String;
 };
 

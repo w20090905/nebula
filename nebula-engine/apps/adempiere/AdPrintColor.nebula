@@ -1,11 +1,11 @@
 @Remarks("Color used for printing and display")
 @Refby("17")
 type AdPrintColor {
-	!AdPrintColorId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!AdPrintColorId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	IsDefault YesNo;/* 'N'  */
-	Code Note;
+	Code;
 };
 

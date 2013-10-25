@@ -1,9 +1,9 @@
 @Remarks("Special Form")
 @Refby("10")
 type AdForm {
-	!AdFormId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!AdFormId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;

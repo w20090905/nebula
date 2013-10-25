@@ -1,7 +1,7 @@
 @Remarks("Table for the Fields")
 @Refby("44")
 type AdTable {
-	!AdTableId Number;
+	!AdTableId ID;
 	AdClient;
 	AdOrg;
 	*Name;
@@ -17,10 +17,10 @@ type AdTable {
 	IsSecurityEnabled YesNo;/* 'N'  */
 	IsDeleteable YesNo;/* 'Y'  */
 	IsHighVolume YesNo;/* 'N'  */
-	?ImportTable null;
+	?ImportTable String;
 	IsChangeLog YesNo;/* 'N'  */
 	ReplicationType Attr;/* 'L' */
 	?PoWindow AdWindow;
-	?CopyColumnsFromTable null;
+	?CopyColumnsFromTable String;
 };
 

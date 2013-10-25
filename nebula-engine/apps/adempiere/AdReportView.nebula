@@ -1,14 +1,14 @@
 @Remarks("View used to generate this report")
 @Refby("5")
 type AdReportView {
-	!AdReportViewId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!AdReportViewId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	AdTable;
-	?WhereClause Note;
-	?OrderByClause Note;
+	?WhereClause String;
+	?OrderByClause String;
 	EntityType AdEntityType;/* 'D'  */
 };
 

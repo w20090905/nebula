@@ -1,14 +1,14 @@
 @Remarks("Account Element")
 @Refby("52")
 type CElementValue {
-	!CElementValueId Number;
+	!CElementValueId ID;
 	AdClient;
 	AdOrg;
 	Value String;
 	*Name;
 	?Description;
 	AccountType Attr;
-	AccountSign null;
+	AccountSign String;
 	?IsDocControlled YesNo;/* 'N'                           */
 	CElement;
 	IsSummary YesNo;/* 'N'  */

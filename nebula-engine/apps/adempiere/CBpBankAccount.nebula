@@ -1,32 +1,32 @@
 @Remarks("Bank Account of the Business Partner")
 @Refby("2")
-type CBpBankAccount {
-	!CBpBankAccountId Number;
-	AdClientId Number;
-	AdOrgId Number;
+tx CBpBankAccount {
+	!CBpBankAccountId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CBpartner;
 	?CBank;
 	IsAch YesNo;/* 'N'  */
 	?BankAccountType Attr;
-	?RoutingNo Code;
-	?AccountNo Code;
+	?RoutingNo String;
+	?AccountNo String;
 	?CreditCardType Attr;
-	?CreditCardNumber Code;
+	?CreditCardNumber String;
 	?CreditCardVv String;
 	?CreditCardExpMm Number;
-	?CreditCardExpYY Number;
+	?CreditCardExpYY Length;
 	?AName Name;
-	?AStreet null;
-	?ACity null;
-	?AState null;
-	?AZip null;
-	?AIdentDl null;
-	?AEmail EMail;
-	?AIdentSsn null;
-	?RAvsAddr Address;
-	?RAvsZip null;
-	?ACountry null;
+	?AStreet String;
+	?ACity String;
+	?AState String;
+	?AZip String;
+	?AIdentDl String;
+	?AEmail Email;
+	?AIdentSsn String;
+	?RAvsAddr Message;
+	?RAvsZip String;
+	?ACountry String;
 	?AdUser;
-	?BpBankAcctUse null;/* NULL   */
+	?BpBankAcctUse String;/* NULL   */
 };
 

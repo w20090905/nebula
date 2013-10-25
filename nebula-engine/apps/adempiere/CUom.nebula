@@ -1,11 +1,11 @@
 @Remarks("Unit of Measure")
 @Refby("22")
 type CUom {
-	!CUomId Number;
+	!CUomId ID;
 	AdClient;
 	AdOrg;
 	X12de355 String;
-	?UomSymbol Symbol;
+	?UomSymbol String;
 	*Name;
 	?Description;
 	StdPrecision Precision;

@@ -1,7 +1,7 @@
 @Remarks("Organizational entity within client")
 @Refby("121")
 type AdOrg {
-	!AdOrgId Number;
+	!AdOrgId ID;
 	AdClient;
 	Value String;
 	*Name;

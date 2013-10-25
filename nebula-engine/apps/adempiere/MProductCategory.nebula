@@ -1,9 +1,9 @@
 @Remarks("Category of a Product")
 @Refby("14")
 type MProductCategory {
-	!MProductCategoryId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!MProductCategoryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;
@@ -12,7 +12,7 @@ type MProductCategory {
 	?AAssetGroup;
 	IsSelfService YesNo;/* 'Y'  */
 	?AdPrintColor;
-	MmPolicy String;/* 'F'  */
+	MmPolicy Attr;/* 'F'  */
 	?MProductCategoryParent MProductCategory;
 };
 

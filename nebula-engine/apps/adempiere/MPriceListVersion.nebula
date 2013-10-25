@@ -1,15 +1,15 @@
 @Remarks("Identifies a unique instance of a Price List")
 @Refby("4")
 type MPriceListVersion {
-	!MPriceListVersionId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!MPriceListVersionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	MPriceList;
 	MDiscountSchema;
 	ValidFrom Date;
-	?ProcCreate null;
+	?ProcCreate String;
 	?MPriceListVersionBase MPriceListVersion;
 };
 

@@ -1,10 +1,10 @@
 @Remarks("Return Material Authorization")
 @Refby("5")
 type MRma {
-	!MRmaId Number;
-	AdClientId Number;
-	AdOrgId Number;
-	DocumentNo Code;
+	!MRmaId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	DocumentNo String;
 	*Name;
 	?Description;
 	Inout MInout;

@@ -1,11 +1,11 @@
 @Remarks("Order")
 @Refby("20")
-type COrder {
-	!COrderId Number;
-	AdClientId Number;
+tx COrder {
+	!COrderId ID;
+	AdClientId ID;
 	AdOrg;
 	IsSoTrx YesNo;/* 'Y'  */
-	DocumentNo Code;
+	DocumentNo String;
 	DocStatus Attr;
 	DocAction Attr;
 	?Processing YesNo;
@@ -27,22 +27,22 @@ type COrder {
 	DateAcct Date;
 	CBpartner;
 	CBpartnerLocation;
-	?PoReference Note;
+	?PoReference String;
 	IsDiscountPrinted YesNo;/* 'Y'  */
 	CCurrency;
-	PaymentRule Attr;
+	PaymentRule String;
 	CPaymentTerm;
-	InvoiceRule Attr;
-	DeliveryRule Attr;
-	FreightCostRule Attr;
+	InvoiceRule String;
+	DeliveryRule String;
+	FreightCostRule String;
 	?FreightAmt Amount;/* 0 */
-	DeliveryViaRule Attr;
+	DeliveryViaRule String;
 	?MShipper;
 	?CCharge;
 	?ChargeAmt Amount;/* 0 */
-	PriorityRule Attr;
-	TotalLines Line;/* 0  */
-	GrandTotal Amount;/* 0  */
+	PriorityRule String;
+	TotalLines Count;/* 0  */
+	GrandTotal Number;/* 0  */
 	MWarehouse;
 	MPriceList;
 	IsTaxIncluded YesNo;/* 'N'  */
@@ -52,9 +52,9 @@ type COrder {
 	Posted YesNo;/* 'N'  */
 	?CPayment;
 	?CCashLine;
-	SendEmail EMail;/* 'N'  */
+	SendEmail YesNo;/* 'N'  */
 	?AdUser;
-	?CopyFrom null;
+	?CopyFrom Attr;
 	IsSelfService YesNo;/* 'N'  */
 	?AdOrgTrx AdOrg;
 	?User1 CElementValue;
@@ -69,7 +69,7 @@ type COrder {
 	IsDropShip YesNo;/* 'N'  */
 	?Volume;
 	?Weight;
-	?OrderType Attr;
+	?OrderType String;
 	?CPos;
 	?AmountTendered Number;
 	?AmountRefunded Number;

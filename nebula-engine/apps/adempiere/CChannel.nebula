@@ -1,9 +1,9 @@
 @Remarks("Sales Channel")
 @Refby("1")
 type CChannel {
-	!CChannelId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!CChannelId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?AdPrintColor;

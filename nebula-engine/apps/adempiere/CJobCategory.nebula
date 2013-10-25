@@ -1,9 +1,9 @@
 @Remarks("Position Category")
 @Refby("1")
 type CJobCategory {
-	!CJobCategoryId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!CJobCategoryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;

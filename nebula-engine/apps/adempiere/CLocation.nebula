@@ -1,19 +1,19 @@
 @Remarks("Location or Address")
 @Refby("22")
-type CLocation {
-	!CLocationId Number;
+tx CLocation {
+	!CLocationId ID;
 	AdClient;
 	AdOrg;
-	?Address null;
-	?Address null;
-	?City null;
-	?Postal;
-	?PostalAdd Postal;
+	?Address1 Address;
+	?Address2 Address;
+	?City String;
+	?Postal Post;
+	?PostalAdd Post;
 	CCountry;
 	?CRegion;
 	?CCity;
 	?RegionName Name;
-	?Address null;
-	?Address null;
+	?Address3 Address;
+	?Address4 Address;
 };
 

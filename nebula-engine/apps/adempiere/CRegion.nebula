@@ -1,7 +1,7 @@
 @Remarks("Identifies a geographical Region")
 @Refby("9")
 type CRegion {
-	!CRegionId Number;
+	!CRegionId ID;
 	AdClient;
 	AdOrg;
 	*Name;

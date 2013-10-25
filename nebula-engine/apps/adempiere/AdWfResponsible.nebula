@@ -1,8 +1,8 @@
 @Remarks("Responsible for Workflow Execution")
 @Refby("5")
 type AdWfResponsible {
-	!AdWfResponsibleId Number;
-	AdClientId Number;
+	!AdWfResponsibleId ID;
+	AdClientId ID;
 	AdOrg;
 	*Name;
 	?Description;

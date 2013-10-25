@@ -1,9 +1,9 @@
 @Remarks("Point of Sales Terminal")
 @Refby("1")
 type CPos {
-	!CPosId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!CPosId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
@@ -16,6 +16,6 @@ type CPos {
 	IsModifyPrice YesNo;/* 'N'  */
 	?CBpartnerCashTrx CBpartner;
 	?CDocType;
-	?CashDrawer null;
+	?CashDrawer String;
 };
 

@@ -1,9 +1,9 @@
 @Remarks("The terms for Payment of this transaction")
 @Refby("12")
 type CPaymentTerm {
-	!CPaymentTermId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!CPaymentTermId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?DocumentNote Note;
@@ -12,16 +12,16 @@ type CPaymentTerm {
 	NetDays Count;
 	GraceDays Count;
 	?FixMonthCutOff Number;
-	?FixMonthDay Number;
+	?FixMonthDay Count;
 	?FixMonthOffset Number;
 	DiscountDays Count;
-	Discount Count;
+	Discount;
 	DiscountDays2 Count;
-	Discount2 Count;
+	Discount2 Discount;
 	?IsNextBusinessDay YesNo;/* 'Y'                           */
 	?IsDefault YesNo;/* 'N' */
 	Value String;
-	?NetDay null;
+	?NetDay String;
 	IsValid YesNo;/* 'N'  */
 	?Processing YesNo;
 };

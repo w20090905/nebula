@@ -1,14 +1,14 @@
 @Remarks("Operation System Task")
 @Refby("8")
 type AdTask {
-	!AdTaskId Number;
+	!AdTaskId ID;
 	AdClient;
 	AdOrg;
 	*Name;
 	?Description;
 	?Help;
 	AccessLevel Attr;
-	OsCommand null;
+	OsCommand String;
 	EntityType AdEntityType;/* 'D'  */
 	IsServerProcess YesNo;/* 'N'  */
 };

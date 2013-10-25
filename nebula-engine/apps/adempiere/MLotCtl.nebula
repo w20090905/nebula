@@ -1,15 +1,15 @@
 @Remarks("Product Lot Control")
 @Refby("3")
 type MLotCtl {
-	!MLotCtlId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!MLotCtlId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	StartNo SeqNo;
 	IncrementNo SeqNo;
 	CurrentNext Number;
-	?Prefix Description;
-	?Suffix Description;
+	?Prefix String;
+	?Suffix String;
 };
 

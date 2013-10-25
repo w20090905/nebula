@@ -1,7 +1,7 @@
 @Remarks("Financial Project")
 @Refby("35")
 type CProject {
-	!CProjectId Number;
+	!CProjectId ID;
 	AdClient;
 	AdOrg;
 	Value String;
@@ -12,7 +12,7 @@ type CProject {
 	?AdUser;
 	?CBpartner;
 	?CBpartnerLocation;
-	?PoReference Note;
+	?PoReference String;
 	?CPaymentTerm;
 	CCurrency;
 	?MPriceListVersion;
@@ -27,7 +27,7 @@ type CProject {
 	?GenerateTo Attr;
 	Processed YesNo;/* 'N'  */
 	?SalesRep AdUser;
-	?CopyFrom null;
+	?CopyFrom Attr;
 	?CProjectType;
 	CommittedQty Quantity;/* 0  */
 	InvoicedAmt Amount;/* 0  */
@@ -39,7 +39,7 @@ type CProject {
 	?ProjectCategory YesNo;/* 'N'  */
 	?Processing YesNo;
 	?CBpartnerSr CBpartner;
-	ProjInvoiceRule Attr;/* '-'  */
+	ProjInvoiceRule String;/* '-'  */
 	ProjectLineLevel Attr;/* 'P'  */
 };
 

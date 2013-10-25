@@ -1,16 +1,16 @@
 @Remarks("Marketing Campaign")
 @Refby("26")
 type CCampaign {
-	!CCampaignId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!CCampaignId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;
 	?CChannel;
 	?StartDate Date;
 	?EndDate Date;
-	Costs Number;/* 0  */
+	Costs Count;/* 0  */
 	IsSummary YesNo;/* 'N'  */
 };
 

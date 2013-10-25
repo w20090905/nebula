@@ -1,12 +1,12 @@
 @Remarks("Product Attribute Set Instance")
 @Refby("26")
-type MAttributeSetInstance {
-	!MAttributeSetInstanceId Number;
-	AdClientId Number;
-	AdOrgId Number;
+tx MAttributeSetInstance {
+	!MAttributeSetInstanceId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?MAttributeSet;
-	?SerNo Code;
-	?LOT;
+	?SerNo String;
+	?Lot;
 	?GuaranteeDate Date;
 	?Description;
 	?MLot;

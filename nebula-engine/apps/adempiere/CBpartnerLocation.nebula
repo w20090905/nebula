@@ -1,7 +1,7 @@
 @Remarks("Identifies the (ship to) address for this Business Partner")
 @Refby("23")
 type CBpartnerLocation {
-	!CBpartnerLocationId Number;
+	!CBpartnerLocationId ID;
 	AdClient;
 	AdOrg;
 	*Name;
@@ -12,7 +12,7 @@ type CBpartnerLocation {
 	?Phone;
 	?Phone2 Phone;
 	?Fax;
-	?ISDN;
+	?Isdn;
 	?CSalesRegion;
 	CBpartner;
 	?CLocation;

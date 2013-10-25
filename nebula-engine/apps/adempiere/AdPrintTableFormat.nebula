@@ -1,9 +1,9 @@
 @Remarks("Table Format in Reports")
 @Refby("1")
 type AdPrintTableFormat {
-	!AdPrintTableFormatId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!AdPrintTableFormatId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?HdrPrintFont AdPrintFont;
 	?HdrTextFgPrintColor AdPrintColor;
 	?HdrTextBgPrintColor AdPrintColor;
@@ -26,9 +26,9 @@ type AdPrintTableFormat {
 	?FooterLeft String;
 	?FooterCenter String;
 	?FooterRight String;
-	?ImageIsAttached null;/* 'N' */
-	?HdrStroke Number;
-	?LineStroke Line;
+	?ImageIsAttached YesNo;/* 'N' */
+	?HdrStroke Length;
+	?LineStroke Length;
 	?HdrStrokeType Attr;
 	?LineStrokeType Attr;
 	IsPaintHeaderLines YesNo;/* 'Y'  */

@@ -1,9 +1,9 @@
 @Remarks("Data Print Format")
 @Refby("16")
 type AdPrintFormat {
-	!AdPrintFormatId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!AdPrintFormatId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	IsTableBased YesNo;/* 'Y'  */
@@ -15,7 +15,7 @@ type AdPrintFormat {
 	IsStandardHeaderFooter YesNo;/* 'Y'  */
 	HeaderMargin Length;
 	FooterMargin Length;
-	?CreateCopy YesNo;
+	?CreateCopy String;
 	?AdReportView;
 	?AdPrintTableFormat;
 	?PrinterName Name;

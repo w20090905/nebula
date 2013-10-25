@@ -1,9 +1,9 @@
 @Remarks("Product Attribute Set")
 @Refby("4")
 type MAttributeSet {
-	!MAttributeSetId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!MAttributeSetId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	IsSerNo YesNo;/* 'Y'  */
@@ -13,13 +13,13 @@ type MAttributeSet {
 	IsGuaranteeDate YesNo;/* 'N'  */
 	?GuaranteeDays Count;
 	IsInstanceAttribute YesNo;/* 'N'  */
-	MandatoryType Attr;/* 'N'  */
+	MandatoryType YesNo;/* 'N'  */
 	IsGuaranteeDateMandatory YesNo;/* 'N'  */
 	IsLotMandatory YesNo;/* 'N'  */
 	IsSerNoMandatory YesNo;/* 'N'  */
-	?SerNoCharsOverwrite null;
-	?LotCharsOverwrite null;
-	?LotChareOverwrite null;
-	?SerNoChareOverwrite null;
+	?SerNoCharsOverwrite String;
+	?LotCharsOverwrite String;
+	?LotChareOverwrite String;
+	?SerNoChareOverwrite String;
 };
 

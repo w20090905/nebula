@@ -1,9 +1,9 @@
 @Remarks("Unique identifier of a Price List")
 @Refby("16")
 type MPriceList {
-	!MPriceListId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!MPriceListId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?BasePriceList MPriceList;

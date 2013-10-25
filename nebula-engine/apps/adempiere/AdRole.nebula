@@ -1,7 +1,7 @@
 @Remarks("Responsibility Role")
 @Refby("23")
 type AdRole {
-	!AdRoleId Number;
+	!AdRoleId ID;
 	AdClient;
 	AdOrg;
 	*Name;
@@ -24,9 +24,9 @@ type AdRole {
 	OverwritePriceLimit YesNo;/* 'N'  */
 	IsUseUserOrgAccess YesNo;/* 'N'  */
 	?AdTreeOrg AdTree;
-	ConfirmQueryRecords Number;/* 0  */
-	MaxQueryRecords Number;/* 0  */
-	?ConnectionProfile null;
+	ConfirmQueryRecords Count;/* 0  */
+	MaxQueryRecords Count;/* 0  */
+	?ConnectionProfile Attr;
 	?AllowInfoAccount YesNo;/* 'Y'  */
 	?AllowInfoAsset YesNo;/* 'Y'  */
 	?AllowInfoBpartner YesNo;/* 'Y'  */
@@ -38,6 +38,6 @@ type AdRole {
 	?AllowInfoProduct YesNo;/* 'Y'  */
 	?AllowInfoResource YesNo;/* 'Y'  */
 	?AllowInfoSchedule YesNo;/* 'Y'  */
-	?UserDiscount Count;
+	?UserDiscount Discount;
 };
 

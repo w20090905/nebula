@@ -11,21 +11,21 @@ type CCountry {
 	?RegionName Name;
 	?ExpRessionPhone Phone;
 	DisplaySequence String;
-	?ExpRessionPostal Postal;
+	?ExpRessionPostal String;
 	HasPostalAdd YesNo;/* 'N'  */
-	?ExpRessionPostalAdd null;
+	?ExpRessionPostalAdd String;
 	?AdLanguage;
 	?CCurrency;
 	?DisplaySequenceLocal String;
 	IsAddressLinesReverse YesNo;/* 'N'  */
 	IsAddressLinesLocalReverse YesNo;/* 'N'  */
-	?ExpRessionBankRoutingNo Code;
-	?ExpRessionBankAccountNo Code;
-	?MediaSize null;
+	?ExpRessionBankRoutingNo String;
+	?ExpRessionBankAccountNo String;
+	?MediaSize String;
 	IsPostCodeLookup YesNo;/* 'N'  */
 	?LookupClassName Name;/* NULL   */
 	?LookupClientId String;/* NULL   */
-	?LookupPassword Password;/* NULL   */
+	?LookupPassword String;/* NULL   */
 	?LookupUrl Url;/* NULL   */
 };
 

@@ -1,7 +1,7 @@
 @Remarks("Product, Service, Item")
 @Refby("89")
 type MProduct {
-	!MProductId Number;
+	!MProductId ID;
 	AdClient;
 	AdOrg;
 	Value String;
@@ -9,8 +9,8 @@ type MProduct {
 	?Description;
 	?DocumentNote Note;
 	?Help;
-	?UPC;
-	?SKU;
+	?Upc;
+	?Sku;
 	CUom;
 	?SalesRep AdUser;
 	IsSummary YesNo;/* 'N'  */
@@ -23,7 +23,7 @@ type MProduct {
 	IsVerified YesNo;/* 'N'  */
 	?CRevenueRecognition;
 	MProductCategory;
-	?Classification YesNo;
+	?Classification String;
 	?Volume;/* 0 */
 	?Weight;/* 0 */
 	?ShelfWidth Width;
@@ -38,22 +38,22 @@ type MProduct {
 	?SExpenseType;
 	ProductType Attr;/* 'I'  */
 	?ImageUrl Url;
-	?DescriptionUrl Description;
+	?DescriptionUrl Url;
 	?GuaranteeDays Count;
 	?RMailText;
-	?VersionNo Code;
+	?VersionNo String;
 	?MAttributeSet;
 	?MAttributeSetInstance;/* 0 */
 	?DownloadUrl Url;
 	?MFreightCategory;
 	?MLocator;
-	?GuaranteeDaysMin Number;
+	?GuaranteeDaysMin Count;
 	IsWebStoreFeatured YesNo;/* 'N'  */
 	IsSelfService YesNo;/* 'Y'  */
 	?CSubscriptionType;
 	IsDropShip YesNo;/* 'N'  */
 	IsExcludeAutoDelivery YesNo;/* 'N'  */
-	?Group1 null;
-	?Group2 null;
+	?Group1 String;
+	?Group2 String;
 };
 

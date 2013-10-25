@@ -1,9 +1,9 @@
 @Remarks("System Element enables the central maintenance of column description and help.")
 @Refby("4")
 type AdElement {
-	!AdElementId Number;
-	AdClientId Number;
-	AdOrgId Number;/* NULL */
+	!AdElementId ID;
+	AdClientId ID;
+	AdOrgId ID;/* NULL */
 	ColumnName Name;
 	EntityType AdEntityType;/* 'D'  */
 	*Name;/* NULL */

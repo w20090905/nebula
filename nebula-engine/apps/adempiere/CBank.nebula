@@ -1,13 +1,13 @@
 @Remarks("Bank")
 @Refby("2")
 type CBank {
-	!CBankId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!CBankId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
-	RoutingNo Code;
+	RoutingNo String;
 	?CLocation;
-	?SWIFTCode Note;
+	?SwiftCode Code;
 	IsOwnBank YesNo;/* 'N'  */
 	?Description;
 };

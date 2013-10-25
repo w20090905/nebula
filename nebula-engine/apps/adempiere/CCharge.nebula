@@ -1,9 +1,9 @@
 @Remarks("Additional document charges")
 @Refby("18")
 type CCharge {
-	!CChargeId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!CChargeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	ChargeAmt Amount;/* 0  */

@@ -1,9 +1,9 @@
 @Remarks("Process or Report")
 @Refby("19")
 type AdProcess {
-	!AdProcessId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!AdProcessId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;
@@ -16,13 +16,13 @@ type AdProcess {
 	?AdReportView;
 	?ClassName Name;
 	?StatisticCount Count;
-	?StatisticSeconds Number;
+	?StatisticSeconds Count;
 	?AdPrintFormat;
-	?WorkflowValue Note;
+	?WorkflowValue String;
 	?AdWorkflow;
 	IsBetaFunctionality YesNo;/* 'N'  */
 	IsServerProcess YesNo;/* 'N'  */
-	?ShowHelp Help;/* 'Y' */
-	?JasperReport null;
+	?ShowHelp YesNo;/* 'Y' */
+	?JasperReport String;
 };
 

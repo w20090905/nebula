@@ -1,7 +1,7 @@
 @Remarks("Workflow or combination of tasks")
 @Refby("13")
 type AdWorkflow {
-	!AdWorkflowId Number;
+	!AdWorkflowId ID;
 	AdClient;
 	AdOrg;
 	*Name;
@@ -10,14 +10,14 @@ type AdWorkflow {
 	AccessLevel Attr;
 	?AdWfNode;
 	EntityType AdEntityType;/* 'D'  */
-	?DurationUnit null;
-	Author null;/* 'ComPiere' */
-	Version Number;/* 0 */
+	?DurationUnit Attr;
+	Author String;/* 'ComPiere' */
+	Version;/* 0 */
 	?ValidFrom Date;
 	?ValidTo Date;
 	?Priority;
-	?Limit Count;
-	Duration Number;/* 0 */
+	?Limit Number;
+	Duration;/* 0 */
 	Cost;/* 0 */
 	WorkingTime Count;/* 0 */
 	WaitingTime Count;/* 0 */
@@ -27,9 +27,9 @@ type AdWorkflow {
 	Value String;
 	IsDefault YesNo;/* 'N'  */
 	?AdTable;
-	?ValidateWorkflow null;
+	?ValidateWorkflow String;
 	WorkflowType Attr;/* 'G'  */
-	?DocValueLogic Note;
+	?DocValueLogic String;
 	IsValid YesNo;/* 'N'  */
 };
 

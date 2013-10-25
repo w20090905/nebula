@@ -1,11 +1,11 @@
 @Remarks("Material Shipment Document")
 @Refby("8")
-type MInout {
-	!MInoutId Number;
-	AdClientId Number;
+tx MInout {
+	!MInoutId ID;
+	AdClientId ID;
 	AdOrg;
 	IsSoTrx YesNo;/* 'Y'  */
-	DocumentNo Code;
+	DocumentNo String;
 	DocAction Attr;
 	DocStatus Attr;
 	Posted YesNo;/* 'N'  */
@@ -22,26 +22,26 @@ type MInout {
 	CBpartner;
 	CBpartnerLocation;
 	MWarehouse;
-	?PoReference Note;
-	DeliveryRule Attr;
-	FreightCostRule Attr;
+	?PoReference String;
+	DeliveryRule String;
+	FreightCostRule String;
 	?FreightAmt Amount;/* 0 */
-	DeliveryViaRule Attr;
+	DeliveryViaRule String;
 	?MShipper;
 	?CCharge;
 	?ChargeAmt Amount;/* 0 */
-	PriorityRule Attr;
+	PriorityRule String;
 	?DatePrinted Date;
 	?CInvoice;
-	?CreateFrom YesNo;
+	?CreateFrom Attr;
 	?GenerateTo Attr;
-	SendEmail EMail;/* 'N'  */
+	SendEmail YesNo;/* 'N'  */
 	?AdUser;
 	?SalesRep AdUser;
 	?NoPackageS Number;
 	?PickDate Date;
 	?ShipDate Date;
-	?TrackingNo null;
+	?TrackingNo String;
 	?AdOrgTrx AdOrg;
 	?CProject;
 	?CCampaign;
@@ -51,8 +51,8 @@ type MInout {
 	?DateReceived Date;
 	IsInTransit YesNo;/* 'N'  */
 	?RefInout MInout;
-	?CreateConfirm YesNo;
-	?CreatePackage YesNo;
+	?CreateConfirm String;
+	?CreatePackage String;
 	IsApproved YesNo;/* 'N'  */
 	IsInDispute YesNo;/* 'N'  */
 	?Volume;

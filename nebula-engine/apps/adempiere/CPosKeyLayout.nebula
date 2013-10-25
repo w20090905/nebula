@@ -1,9 +1,9 @@
 @Remarks("POS Function Key Layout")
 @Refby("2")
 type CPosKeyLayout {
-	!CPosKeyLayoutId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!CPosKeyLayoutId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;

@@ -1,11 +1,11 @@
 @Remarks("The Currency for this record")
 @Refby("49")
-type CCurrency {
-	!CCurrencyId Number;
+tx CCurrency {
+	!CCurrencyId ID;
 	AdClient;
 	AdOrg;
-	IsoCode YesNo;
-	?CurSymbol Symbol;
+	IsoCode Code;
+	?CurSymbol String;
 	Description;
 	StdPrecision Precision;
 	CostingPrecision Precision;

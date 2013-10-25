@@ -1,14 +1,14 @@
 @Remarks("City")
 @Refby("1")
 type CCity {
-	!CCityId Number;
+	!CCityId ID;
 	AdClient;
 	AdOrg;
 	*Name;
-	?LoCode Note;
-	?Coordinates null;
-	?Postal;
-	?AreaCode Note;
+	?LoCode Code;
+	?Coordinates String;
+	?Postal Post;
+	?AreaCode Code;
 	?CCountry;
 	?CRegion;
 };

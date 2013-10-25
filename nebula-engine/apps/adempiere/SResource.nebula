@@ -1,9 +1,9 @@
 @Remarks("Resource")
 @Refby("3")
 type SResource {
-	!SResourceId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!SResourceId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;

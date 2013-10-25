@@ -1,17 +1,17 @@
 @Remarks("Dunning Level")
 @Refby("3")
 type CDunningLevel {
-	!CDunningLevelId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!CDunningLevelId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CDunning;
 	PrintName Name;
 	DaysAfterDue Count;
 	DaysBetweenDunning Count;
 	?Note;
-	ChargeInterest null;/* 'Y'  */
+	ChargeInterest YesNo;/* 'Y'  */
 	?InterestPercent Percent;/* 0 */
-	ChargeFee null;/* 'Y'  */
+	ChargeFee YesNo;/* 'Y'  */
 	?FeeAmt Amount;/* 0 */
 	?DunningPrintFormat AdPrintFormat;
 	*Name;/* 'x'  */

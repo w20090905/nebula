@@ -1,16 +1,16 @@
 @Remarks("Business Partner Group")
 @Refby("7")
 type CBpGroup {
-	!CBpGroupId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!CBpGroupId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;
 	IsDefault YesNo;/* 'N'  */
 	?AdPrintColor;
-	IsConfidentialInfo Info;/* 'N'  */
-	?PriorityBase null;
+	IsConfidentialInfo YesNo;/* 'N'  */
+	?PriorityBase String;
 	?MPriceList;
 	?PoPriceList MPriceList;
 	?MDiscountSchema;

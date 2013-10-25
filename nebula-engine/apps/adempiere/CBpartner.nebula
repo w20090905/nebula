@@ -1,12 +1,12 @@
 @Remarks("Identifies a Business Partner")
 @Refby("75")
 type CBpartner {
-	!CBpartnerId Number;
+	!CBpartnerId ID;
 	AdClient;
 	AdOrg;
 	Value String;
 	*Name;
-	?Name;
+	?Name2 Name;
 	?Description;
 	IsSummary YesNo;/* 'N' */
 	CBpGroup;
@@ -16,24 +16,24 @@ type CBpartner {
 	IsCustomer YesNo;/* 'Y'  */
 	IsEmployee YesNo;/* 'N'  */
 	IsSalesRep YesNo;/* 'N'  */
-	?ReferenceNo Code;
-	?DUNS String;
+	?ReferenceNo String;
+	?Duns;
 	?Url;
 	?AdLanguage;
-	?TaxId Code;
+	?TaxId String;
 	?IsTaxExempt YesNo;/* 'N'                                */
 	?CInvoiceSchedule;
-	?Rating null;
+	?Rating String;
 	?SalesVolume Volume;
 	?NumberEmployees Number;
-	?NAICS;
+	?Naics;
 	?FirstSale Date;
 	?AcqusitionCost Cost;/* 0 */
 	?PotentialLifetimeValue Number;/* 0 */
 	?ActualLifetimeValue Number;/* 0 */
 	?ShareOfCustomer Number;
-	?PaymentRule Attr;
-	?SoCreditLimit Count;/* 0 */
+	?PaymentRule String;
+	?SoCreditLimit Number;/* 0 */
 	?SoCreditUsed Number;/* 0 */
 	?CPaymentTerm;
 	?MPriceList;
@@ -41,25 +41,25 @@ type CBpartner {
 	?CDunning;
 	?IsDiscountPrinted YesNo;/* 'Y'                                */
 	?SoDescription Description;
-	?PoReference Note;
-	?PaymentRulePo null;
+	?PoReference String;
+	?PaymentRulePo String;
 	?PoPriceList MPriceList;
 	?PoDiscountSchema MDiscountSchema;
 	?PoPaymentTerm CPaymentTerm;
 	?DocumentCopies Count;
 	?CGreeting;
-	?InvoiceRule Attr;
-	?DeliveryRule Attr;
-	?FreightCostRule Attr;
-	?DeliveryViaRule Attr;
+	?InvoiceRule String;
+	?DeliveryRule String;
+	?FreightCostRule String;
+	?DeliveryViaRule String;
 	?SalesRep AdUser;
-	SendEmail EMail;/* 'N'  */
+	SendEmail YesNo;/* 'N'  */
 	?BpartnerParent CBpartner;
 	?InvoicePrintFormat AdPrintFormat;
 	?SoCreditStatus Attr;/* 'O' */
 	?ShelfLifeMinPct Number;
 	?AdOrgBp AdOrg;
-	?FlatDiscount Count;
+	?FlatDiscount Discount;
 	?TotalOpenBalance Number;
 	?DunningGrace Date;
 };

@@ -2,14 +2,14 @@
 @Refby("37")
 type AdEntityType {
 	!EntityType String;/* 'D'  */
-	AdClientId Number;
-	AdOrgId Number;
-	AdEntityTypeId Number;
+	AdClientId ID;
+	AdOrgId ID;
+	AdEntityTypeId ID;
 	*Name;
 	?Description;
 	?Help;
 	?Version String;
-	?ModelPackage Note;
+	?ModelPackage String;
 	?ClassPath Path;
 	?Processing YesNo;
 };

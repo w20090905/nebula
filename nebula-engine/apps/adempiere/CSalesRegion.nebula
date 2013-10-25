@@ -1,9 +1,9 @@
 @Remarks("Sales coverage region")
 @Refby("11")
 type CSalesRegion {
-	!CSalesRegionId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!CSalesRegionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;

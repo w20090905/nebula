@@ -1,13 +1,13 @@
 @Remarks("Method for recording revenue")
 @Refby("2")
 type CRevenueRecognition {
-	!CRevenueRecognitionId Number;
-	AdClientId Number;
-	AdOrgId Number;
+	!CRevenueRecognitionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	IsTimeBased YesNo;
-	?RecognitionFrequency null;
+	?RecognitionFrequency String;
 	?NoMonths Count;
 };
 
