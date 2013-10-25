@@ -67,7 +67,7 @@ tx COrder {
 	?PayLocation CBpartnerLocation;
 	?RefOrder COrder;
 	IsDropShip YesNo;/* 'N'  */
-	?Volume;
+	?Volume Number;
 	?Weight;
 	?OrderType String;
 	?CPos;

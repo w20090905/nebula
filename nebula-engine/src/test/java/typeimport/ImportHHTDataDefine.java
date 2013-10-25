@@ -13,7 +13,7 @@ import static typeimport.DBColumnType.Timestamp;
 import static typeimport.DBColumnType.Varchar;
 import static typeimport.MatchPattern.EndWithIgnoreCase;
 import static typeimport.MatchPattern.EqualsIgnoreCase;
-import static typeimport.MatchPattern.Include;
+import static typeimport.MatchPattern.IncludeIgnoreCase;
 import static typeimport.MatchPattern.StartWithIgnoreCase;
 
 import java.io.IOException;
@@ -112,7 +112,7 @@ public class ImportHHTDataDefine extends DefaultImporter {
 		when(EqualsIgnoreCase).with("DUNS", "BBAN", "NAICS", "APAR", "SKU", "UPC", "SWIPE", "IBAN", "ISDN", "LOT", "SWIFTCode").typeOf(Char, String).then()
 				.useMatchedNameAsTypeName().useMatchedNameAsFieldName();
 
-		when(Include).with("Text").typeOf(String).then().useMatchedNameAsTypeName();
+		when(IncludeIgnoreCase).with("Text").typeOf(String).then().useMatchedNameAsTypeName();
 
 		// Number
 

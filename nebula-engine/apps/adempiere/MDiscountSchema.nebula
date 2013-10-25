@@ -9,7 +9,7 @@ type MDiscountSchema {
 	ValidFrom Date;
 	DiscountType Attr;
 	?Script String;
-	?FlatDiscount Discount;
+	?FlatDiscount Percent;
 	IsQuantityBased YesNo;/* 'Y'  */
 	?CumulativeLevel Attr;
 	?Processing YesNo;

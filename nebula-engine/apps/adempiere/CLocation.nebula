@@ -7,8 +7,8 @@ tx CLocation {
 	?Address1 Address;
 	?Address2 Address;
 	?City String;
-	?Postal Post;
-	?PostalAdd Post;
+	?Postal String;
+	?PostalAdd String;
 	CCountry;
 	?CRegion;
 	?CCity;

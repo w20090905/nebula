@@ -7,16 +7,16 @@ type AdColor {
 	*Name;
 	IsDefault YesNo;/* 'N'  */
 	ColorType Attr;
-	Red;
-	Green;
-	Blue;
-	Alpha;
+	Red Number;
+	Green Number;
+	Blue Number;
+	Alpha Number;
 	?AdImage;
-	ImageAlpha Alpha;
-	?Red1 Red;
-	?Green1 Green;
-	?Blue1 Blue;
-	?Alpha1 Alpha;
+	ImageAlpha Number;
+	?Red1 Number;
+	?Green1 Number;
+	?Blue1 Number;
+	?Alpha1 Number;
 	?LineWidth Width;
 	?LineDistance Distance;
 	?StartPoint Number;

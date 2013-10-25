@@ -1,0 +1,5 @@
+@InputSize ("small")
+@Uom ("KM")
+@MaxLength (8)
+define Distance|zh:距离  extends Length {
+};

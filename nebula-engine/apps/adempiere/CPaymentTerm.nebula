@@ -15,9 +15,9 @@ type CPaymentTerm {
 	?FixMonthDay Count;
 	?FixMonthOffset Number;
 	DiscountDays Count;
-	Discount;
+	Discount Percent;
 	DiscountDays2 Count;
-	Discount2 Discount;
+	Discount2 Percent;
 	?IsNextBusinessDay YesNo;/* 'Y'                           */
 	?IsDefault YesNo;/* 'N' */
 	Value String;

@@ -7,7 +7,6 @@ import typeimport.DefaultImporter.Field;
 
 import nebula.lang.TypeStandalone;
 
-
 import com.google.common.collect.Lists;
 
 interface Rule {
@@ -16,44 +15,42 @@ interface Rule {
 
 	// 所在数据表
 	public Rule inTable(String tablenames);
-	
+
 	// 数据类型
 	public Rule typeOf(DBColumnType... dbTypes);
-	
+
 	// 字段长度
 	public Rule length(int length);
 
-
 	public Rule skip();
-	
+
 	public Rule defaultValue(String... values);
-	
+
 	public Actions then();
-	
+
 }
 
-interface Actions{
+interface Actions {
 	public Actions useMatchedNameAsTypeName();
 
 	public Actions useMatchedNameAsFieldName();
 
 	public Actions setAsMaster();
-	
+
 	public Actions setAsTransaction();
-	
+
 	public Actions setReferTo(String typename);
-	
+
 	public Actions setNullable();
-	
+
 	public Rule setTypeName(String type);
 }
 
-
 interface Action {
-	Field apply(Field input,String match, String... params);
+	Field apply(Field input, String match, String... params);
 }
 
-class RuleBuilder implements Rule,Actions {
+class RuleBuilder implements Rule, Actions {
 	DBColumnType[] dbTypes;
 	MatchPattern[] ruleTypes;
 	String[] defaultValues;
@@ -75,9 +72,17 @@ class RuleBuilder implements Rule,Actions {
 		this.tableName = tablename;
 		return this;
 	}
-	
+
 	public Rule with(String... strings) {
-		this.with = strings;
+		List<String> ss = Lists.newArrayList();
+		for (String string : strings) {
+			String[] instr = string.split(" ");
+			for (String string2 : instr) {
+				if (string2.length() == 0) continue;
+				ss.add(string2);
+			}
+		}
+		this.with = ss.toArray(new String[0]);
 		return this;
 	}
 
@@ -116,17 +121,19 @@ class RuleBuilder implements Rule,Actions {
 		this.actions.add(new SetStandalone(TypeStandalone.Transaction));
 		return this;
 	}
-	
+
 	@Override
 	public Rule skip() {
 		this.actions.add(new SkipField());
 		return this;
 	}
+
 	@Override
 	public Actions setNullable() {
 		this.actions.add(new NullableField());
 		return this;
 	}
+
 	@Override
 	public Actions setReferTo(String typename) {
 		this.actions.add(new SetReferTo(typename));
@@ -135,16 +142,17 @@ class RuleBuilder implements Rule,Actions {
 
 	class SetStandalone implements Action {
 		final TypeStandalone standalone;
+
 		SetStandalone(TypeStandalone standalone) {
 			this.standalone = standalone;
 		}
+
 		@Override
 		public DefaultImporter.Field apply(Field input, String match, String... params) {
 			input.resideType.standalone = this.standalone;
 			return input;
 		}
 	}
-	
 
 	class UseMatchedNameAsTypeName implements Action {
 		@Override
@@ -157,17 +165,19 @@ class RuleBuilder implements Rule,Actions {
 
 	class SetReferTo implements Action {
 		final String typename;
+
 		SetReferTo(String typename) {
 			this.typename = typename;
 		}
+
 		@Override
 		public DefaultImporter.Field apply(Field input, String match, String... params) {
-			if(input.name.toUpperCase().endsWith("_ID")){
-				input.name = input.name.substring(0,input.name.length() - 3);
+			if (input.name.toUpperCase().endsWith("_ID")) {
+				input.name = input.name.substring(0, input.name.length() - 3);
 			}
 			input.resultTypeName = typename; // Type Name
 			input.isForeignKey = true;
-			input.foreignKeyTable = typename;//Raw Table Name
+			input.foreignKeyTable = typename;// Raw Table Name
 			input.comment = input.comment + "\tset Type as foreign key \t" + typename;
 			return input;
 		}
@@ -205,9 +215,8 @@ class RuleBuilder implements Rule,Actions {
 			return input;
 		}
 	}
-	
 
-	class  NullableField implements Action {
+	class NullableField implements Action {
 		@Override
 		public DefaultImporter.Field apply(Field input, String match, String... params) {
 			input.nullable = true;
@@ -218,8 +227,8 @@ class RuleBuilder implements Rule,Actions {
 
 	@Override
 	public String toString() {
-		return "RuleBuilder [dbTypes=" + Arrays.toString(dbTypes) + ", ruleTypes=" + Arrays.toString(ruleTypes)
-				+ ", with=" + Arrays.toString(with) + ", tableName=" + tableName + ", actions=" + actions + "]";
+		return "RuleBuilder [dbTypes=" + Arrays.toString(dbTypes) + ", ruleTypes=" + Arrays.toString(ruleTypes) + ", with=" + Arrays.toString(with)
+				+ ", tableName=" + tableName + ", actions=" + actions + "]";
 	}
 
 	@Override
@@ -238,6 +247,5 @@ class RuleBuilder implements Rule,Actions {
 	public Actions then() {
 		return this;
 	}
-
 
 }

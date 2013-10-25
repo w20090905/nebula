@@ -24,11 +24,11 @@ type CBpartner {
 	?IsTaxExempt YesNo;/* 'N'                                */
 	?CInvoiceSchedule;
 	?Rating String;
-	?SalesVolume Volume;
+	?SalesVolume Number;
 	?NumberEmployees Number;
 	?Naics;
 	?FirstSale Date;
-	?AcqusitionCost Cost;/* 0 */
+	?AcqusitionCost Amount;/* 0 */
 	?PotentialLifetimeValue Number;/* 0 */
 	?ActualLifetimeValue Number;/* 0 */
 	?ShareOfCustomer Number;
@@ -59,7 +59,7 @@ type CBpartner {
 	?SoCreditStatus Attr;/* 'O' */
 	?ShelfLifeMinPct Number;
 	?AdOrgBp AdOrg;
-	?FlatDiscount Discount;
+	?FlatDiscount Percent;
 	?TotalOpenBalance Number;
 	?DunningGrace Date;
 };

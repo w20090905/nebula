@@ -7,7 +7,7 @@ type CCity {
 	*Name;
 	?LoCode Code;
 	?Coordinates String;
-	?Postal Post;
+	?Postal String;
 	?AreaCode Code;
 	?CCountry;
 	?CRegion;

@@ -24,8 +24,8 @@ type AdWfNode {
 	?FinishMode Attr;
 	Limit Number;/* 0 */
 	?Priority;
-	Duration;/* 0 */
-	Cost;/* 0 */
+	Duration Number;/* 0 */
+	Cost Amount;/* 0 */
 	?WorkingTime Count;
 	WaitingTime Count;/* 0 */
 	?AdWfResponsible;

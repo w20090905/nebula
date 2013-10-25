@@ -1,0 +1,5 @@
+@MaxLength(256)
+@Desc("消息")
+@SingleLine
+define Message|zh:消息 extends String {
+};

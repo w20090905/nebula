@@ -12,13 +12,13 @@ type AdWorkflow {
 	EntityType AdEntityType;/* 'D'  */
 	?DurationUnit Attr;
 	Author String;/* 'ComPiere' */
-	Version;/* 0 */
+	Version Number;/* 0 */
 	?ValidFrom Date;
 	?ValidTo Date;
 	?Priority;
 	?Limit Number;
-	Duration;/* 0 */
-	Cost;/* 0 */
+	Duration Number;/* 0 */
+	Cost Amount;/* 0 */
 	WorkingTime Count;/* 0 */
 	WaitingTime Count;/* 0 */
 	?AdWfResponsible;

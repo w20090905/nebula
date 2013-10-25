@@ -6,7 +6,7 @@ tx MAttributeSetInstance {
 	AdOrgId ID;
 	?MAttributeSet;
 	?SerNo String;
-	?Lot;
+	?Lot Code;
 	?GuaranteeDate Date;
 	?Description;
 	?MLot;

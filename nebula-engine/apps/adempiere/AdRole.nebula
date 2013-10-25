@@ -38,6 +38,6 @@ type AdRole {
 	?AllowInfoProduct YesNo;/* 'Y'  */
 	?AllowInfoResource YesNo;/* 'Y'  */
 	?AllowInfoSchedule YesNo;/* 'Y'  */
-	?UserDiscount Discount;
+	?UserDiscount Percent;
 };
 

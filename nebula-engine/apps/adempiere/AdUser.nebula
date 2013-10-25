@@ -16,7 +16,7 @@ type AdUser {
 	?CBpartnerLocation;
 	?CGreeting;
 	?Title;
-	?Comments;
+	?Comments Comment;
 	?Phone;
 	?Phone2 Phone;
 	?Fax;

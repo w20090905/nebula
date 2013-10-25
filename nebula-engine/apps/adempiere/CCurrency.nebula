@@ -12,6 +12,6 @@ tx CCurrency {
 	IsEuro YesNo;/* 'N'  */
 	IsEmuMember YesNo;/* 'N'  */
 	?EmuEntryDate Date;
-	?EmuRate Rate;/* 0 */
+	?EmuRate Amount;/* 0 */
 };
 

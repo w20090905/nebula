@@ -14,9 +14,11 @@ import static typeimport.DBColumnType.Time;
 import static typeimport.DBColumnType.Timestamp;
 import static typeimport.DBColumnType.Varchar;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.EnumMap;
 import java.util.List;
@@ -38,6 +40,7 @@ import com.google.common.base.CaseFormat;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
+import com.google.common.collect.SortedMultiset;
 import com.google.common.collect.TreeMultiset;
 
 public class DefaultImporter {
@@ -58,6 +61,35 @@ public class DefaultImporter {
 
 	public DefaultImporter(boolean manageRelationInDB, boolean seperateWithUnder) {
 		this(manageRelationInDB, seperateWithUnder, "ID");
+		this.loadWords();
+	}
+
+	final static String WORDS_File_NAME = "words.txt";
+
+	Map<String, String> definedWords = Maps.newHashMap();
+
+	private void loadWords() {
+		try {
+			BufferedReader in = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(WORDS_File_NAME)));
+			String line = null;
+			while ((line = in.readLine()) != null) {
+				String word = line.trim().toLowerCase();
+				if (word.length() == 0) continue;
+				definedWords.put(word, word);
+			}
+			in.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	protected void addDefineWords(String strWords) {
+		String[] words = strWords.split(" ");
+		for (int i = 0; i < words.length; i++) {
+			String word = words[i].toLowerCase();
+			if (word.length() == 0) continue;
+			definedWords.put(word, word);
+		}
 	}
 
 	public DefaultImporter(boolean manageRelationInDB, boolean seperateWithUnder, String indenfyKey) {
@@ -136,11 +168,10 @@ public class DefaultImporter {
 
 	public Field match(Field field) {
 		Field lastResult = null;
-		if ("Mail_Notification".equalsIgnoreCase(field.name)) {
-			System.out.println("sdfdsf");
-		}
+
 		for (RuleBuilder rule : rules) {
 
+			// Match db type
 			boolean matched = true;
 			DBColumnType matchedColumnType = null;
 			if (rule.dbTypes != null) {
@@ -154,6 +185,7 @@ public class DefaultImporter {
 				}
 			}
 
+			// match size
 			if (rule.length > 0) {
 				matched = false;
 				if (field.size == rule.length) {
@@ -161,6 +193,7 @@ public class DefaultImporter {
 				}
 			}
 
+			// match table name
 			if (!matched) continue;
 			if (rule.tableName != null) {
 				if (!field.resideType.rawName.equalsIgnoreCase(rule.tableName)) {
@@ -170,12 +203,13 @@ public class DefaultImporter {
 				}
 			}
 
+			// match name
 			MatchPattern matchedMatchPattern = null;
 			String matchedName = null;
 			if (rule.with != null) {
 				boolean machPattern = false;
 				for (MatchPattern pattern : rule.ruleTypes) {
-					matchedName = pattern.match(field.name, rule.with);
+					matchedName = pattern.match(field.resultName, rule.with);
 					if (matchedName != null) {
 						machPattern = true;
 						matchedMatchPattern = pattern;
@@ -187,13 +221,11 @@ public class DefaultImporter {
 
 			if (!matched) continue;
 
+			// match default value
 			if (rule.defaultValues != null) {
 				matched = false;
-				if (field.name.equalsIgnoreCase("EnforceClientSecurity")) {
-					System.out.println("dsfdsf");
-				}
 				for (String defaultValue : rule.defaultValues) {
-					if (defaultValue.equalsIgnoreCase(field.defaultValue.trim())) {
+					if (defaultValue.equalsIgnoreCase(field.defaultValue.replace("&#10;", "").trim())) {
 						matched = true;
 						break;
 					}
@@ -381,7 +413,7 @@ public class DefaultImporter {
 				continue;
 			}
 			if (field.remarks.length() > 0) {
-				sb.append("\t@Remarks(\"" + escape(field.remarks) + "\")\n");
+				// sb.append("\t@Remarks(\"" + escape(field.remarks) + "\")\n");
 			}
 			sb.append("\t");
 			if (field.nullable) {
@@ -488,9 +520,9 @@ public class DefaultImporter {
 			String tableName = element.getAttribute("name");
 			this.addType(element, tableName, refineName(tableName), element.getAttribute("remarks"));
 		}
-		System.out.println("preload reading " + nodeList.getLength());
+		// System.out.println("preload reading " + nodeList.getLength());
 
-		Type rootType = this.typesByRawName.get(rootTable);
+		Type rootType = this.typeMapByName.get(rootTable);
 
 		this.readByReations(rootType);
 
@@ -530,12 +562,12 @@ public class DefaultImporter {
 			String tableName = element.getAttribute("name");
 			this.addType(element, tableName, refineName(tableName), element.getAttribute("remarks"));
 		}
-		System.out.println("preload reading " + nodeList.getLength());
+		// System.out.println("preload reading " + nodeList.getLength());
 
 		for (int i = 0; i < nodeList.getLength() && i < MAX; i++) {
 			Element element = (Element) nodeList.item(i);
 			Type type = this.readTable(element);
-			System.out.println("reading... " + i + " " + type.name);
+			// System.out.println("reading... " + i + " " + type.name);
 		}
 	}
 
@@ -697,37 +729,41 @@ public class DefaultImporter {
 	static final Multiset<String> hadWords = TreeMultiset.create();
 	//@formatter:off
  static final String words = ("" +
- 		"AVS ARC A_P_A_R and_or ad_text adhoc add ACCUMULATION ALIGNMENT ACCUMDE ADVANCED ALL ALLOCATE ALLOCATED ANY APPROVAL AREA AUCTION AUTHOR AUTHORIZATION AVAILABLE AVERAGE As Asp activity Accept Access Account Acct Achievement Acqusition Actual Address After Alert Allocation Allow Always Amt Amount Approve Approved Archive Archived Asset Attachment Attachments Attribute Auto ALLOCATION Averaged ALLOCATION auth author authorization Addition Addr Address " +
- 		"branch BAR Build Building Best By BACK BASIS BEFORE BELOW BILL BIRTHDAY BOOK BREAK Balance bank Base Based basket batch Begin beginning benchmark Beta Between Bid binary black bom boundary bp Bpartner Bp_contact broadcast budget business Buyer " +
- 		"CANDIDATE C_BP CALENDAR COORDINATE COORDINATES CONVERTED COMPANY Chat cum CALCULATED CALCULATION CHARACTER CHECK CHEQUE CLOSE CLOSED CODE COL COLLAPSED COMMIT COMMITMENT COMPLETE CONFIG CONSTANT CONTENT CONTROL CORRECTS CORRECTION COUNT COUNTED C_STAGE CTL CUMULATED CUSTOM CUSTOMIZATION CUR CYCLE commodity current currency cumulative confidential Can Cash category Centrally Change Chare Charge chars Class Classes Click Client collection color column columns Commission Committed Confirm Connection contact container Conversion copies copy Cost Costs costing Country Counter create created created_by credit Credit_card currency Customer cut_off Configuration ConfirmEd Checked Close_date Cost_Standard currencies COMMITTED CONVERTED CHARGEABLE creator " +
- 		"do_pricing disposal divide delta deviation DAY DAYS DATA DB DECISION DEMAND DEPRECIATED DEPRECIATION DETAIL DEVELOPER DIFFERENCE DECISION Due direct discontinued dashboard dyn Database Date Days Declaration Decimal Definite Delayed default Delivery Dependent Description Desktop Dimension Discount Display distribution Doc Document Download Dunning Duration DISTRIBUTION DECLARATION Details Differences Controlled DEPRECIATION drop_ship " +
+ 		"AVS ARC A_P_A_R and_or ad_text adhoc add ACCUMULATION ALIGNMENT ACCUMDE ADVANCED ALL ALLOCATE ALLOCATED ANY APPROVAL AREA AUCTION AUTHOR AUTHORIZATION AVAILABLE AVERAGE As Asp activity Accept Access Account Acct Achievement Acqusition Actual Address After Alert Allocation Allow Always Amt Amount Approve Approved Archive Archived Asset Attachment Attachments Attribute Auto ALLOCATION Averaged ALLOCATION auth author authorization Addition Addr Address adjust ad_flag ASSOCIATION ACCEPTED ADJUSTMENT " +
+ 		"branch BAR Build Building Best By BACK BASIS BEFORE BELOW BILL BIRTHDAY BOOK BREAK Balance bank Base Based basket batch Begin beginning benchmark Beta Between Bid binary black bom boundary bp Bpartner Bp_contact broadcast budget business Buyer BALANCED " +
+ 		"CS CANDIDATE C_BP CALENDAR COORDINATE COORDINATES CONVERTED COMPANY Chat cum CALCULATED CALCULATION CHARACTER CHECK CHEQUE CLOSE CLOSED CODE COL COLLAPSED COMMIT COMMITMENT COMPLETE CONFIG CONSTANT CONTENT CONTROL CORRECTS CORRECTION COUNT COUNTED C_STAGE CTL CUMULATED CUSTOM CUSTOMIZATION CUR CYCLE commodity current currency cumulative confidential Can Cash category Centrally Change Chare Charge chars Class Classes Click Client collection color column columns Commission Committed Confirm Connection contact container Conversion copies copy Cost Costs costing Country Counter create created created_by credit Credit_card currency Customer cut_off Configuration ConfirmEd Checked Close_date Cost_Standard currencies COMMITTED CONVERTED CHARGEABLE creator CANDIDATE CONTAINERT COST_SUMMARY CS_TAGET COLUMN_SET COLUMN_SQL COLUMN_SORT CONFIRMATION CONTAINER CONFIRMATION CLASSIFICATION CVV_2_MATCH " +
+ 		"do_pricing disposal divide delta deviation DAY DAYS DATA DB DECISION DEMAND DEPRECIATED DEPRECIATION DETAIL DEVELOPER DIFFERENCE DECISION Due direct discontinued dashboard dyn Database Date Days Declaration Decimal Definite Delayed default Delivery Dependent Description Desktop Dimension Discount Display distribution Doc Document Download Dunning Duration DISTRIBUTION DECLARATION Details Differences Controlled DEPRECIATION drop_ship DISPLAYED " +
  		"EE ELAPSED ED EDI EFT EMU ENCRYPTION ENCRYPTED entry even exclude element Email Enforce End Ending entity Error Event expression Exp Expense export entered exempt " +
- 		"For Fail_on FILLED FINAL FUTURE func flat flow first Factory Fee Field File Files File_System Finish fix Footer Foreign Form Format Forecast FINANCIAL Freight Frequency From Full Function Functionality Functions Function_symbols fund Fixed fields " +
+ 		"fiscal For Fail_on FILLED FINAL FUTURE func flat flow first Factory Fee Field File Files File_System Finish fix Footer Foreign Form Format Forecast FINANCIAL Freight Frequency From Full Function Functionality Functions Function_symbols fund Fixed fields FUNCTION_SUFFIX FILE_SIZE " +
  		"GOOD GENERATE GENERATED GRAPH gl group Grand Gross Guarantee Goal Grace " +
- 		"HOST HEIGHT high has Hdr Header " +
- 		"imp import imported IF_CLEARING ID_RANGE INDUSTRY ITEM increment Image Immediate Info Inactivity Inout instance Interest inventory Invoice Interest Interests INVOICED " +
- 		"INCOME INDEX INDEXED INSERT INTER INTERNAL INV Invoice INVITED Is Iso IS_POSITIVE Is_Own Is_Online Is_Over Is_Overwrite Is_Owned Is_One Is_Order_by IS_OFFER Issue Issues Interest Inventory INSTITUTION " +
- 		"JAVA Jsp join journal Jasper job " +
+ 		"HOST HEIGHT high has Hdr Header HEADER_LINES " +
+ 		"industry income include inquiry imp import imported IF_CLEARING ID_RANGE INDUSTRY ITEM increment Image Immediate Info Inactivity Inout instance Interest inventory Invoice Interest Interests INVOICED " +
+ 		"INCOME INDEX INDEXED INSERT INTER INTERNAL INV Invoice INVITED Is Iso IS_POSITIVE Is_Own Is_Online Is_Over Is_Overwrite Is_Owned Is_One Is_Order_by IS_OFFER Issue Issues Interest Inventory INSTITUTION ISSUE_SOURCE ISSUE_STATUS ISSUE_SYSTEM ISSUE_SUMMARY INCLUDED INVOICED IN_WORDS in_dispute in_transit IN_PRODUCTION IN_POSESSION ISDN INVOICE_DAY INVOICE_DOCUMENT " +
+ 		"Just JAVA Jsp join journal Jasper job " +
  		"Key Keep " +
- 		"LEAD LEASE LICIT LIFE LIMIT LOAD LOC LOCK LOCATOR LOCATION LOG logged Logon Login Lost local lifetime Label Language Language_Iso Landed Last Ldap Level Levels Line Lines Line_Stroke Lingual List Logger lookup Lot Logic Loader Lo_code List_Invoices " +
- 		"MAINTENENCE MM MAINTENANCE MAINTAINED MANUAL MARK Market MEASURE MENU MESSAGE Min MINIMUM MODE month months mail mandatory Margin match Max Method migration Model modify Movement Msg Multi Maintenance Missing Moderator moderation Menu_Assets Menu_Payments Menu_Invoices MULTIPLIER " +
- 		"NEGATIVE NET NULL Name Natural New next No Non Not Node nodes Note notesq Notification number " +
- 		"OBSCURE OFFER OFFSET OPERATING Old On Online Only One Open Operation Or Order Order_by Ordered Org orgs Orig Other Over Overwrite own Owned OverDue Orders " +
- 		"PHONE PRECIATION PRIVATE PROC PROD PROFILE PUBLIC PAID PARAM PARAMETER PARENTELEMENT PASTDUE PHASE PLATFORM PURCHASE PURCHASED publish priority Package Paint Page paper Path Pay Payer payment Per PERIOD Percent Personal Pick Planned Po Point Port Pos Post postal P_instance Posting Position Preference Price Print Printed Printer Priority Procedure process Processor Processors Processing Processed Product Proj Project Proxy PRODUCTION Parent Picked POTENTIAL Payee " +
+ 		"Link LEAD LEASE LICIT LIFE LIMIT LOAD LOC LOCK LOCATOR LOCATION LOG logged Logon Login Lost local lifetime Label Language Language_Iso Landed Last Ldap Level Levels Line Lines Line_Stroke Lingual List Logger lookup Lot Logic Loader Lo_code List_Invoices LINE_SET loader stack size shape " +
+ 		"media MAINTENENCE MM MAINTENANCE MAINTAINED MANUAL MARK Market MEASURE MENU MESSAGE Min MINIMUM MODE month months mail mandatory Margin match Max Method migration Model modify Movement Msg Multi Maintenance Missing Moderator moderation Menu_Assets Menu_Payments Menu_Invoices MULTIPLIER MATCHER MULTIPLY maintenence " +
+ 		"NOT NEGATIVE NET NULL Name Natural New next No Non Not Node nodes Note notesq Notification number NEWS " +
+ 		"OF OPT OUT OBSCURE OFFER OFFSET OPERATING Old On Online Only One Open Operation Or Order Order_by Ordered Org orgs Orig Other Over Overwrite own Owned OverDue Orders O_PROCESSING ORIGINAL " +
+ 		"PPV partner PHONE PRECIATION PRIVATE PROC PROD PROFILE PUBLIC PAID PARAM PARAMETER PARENTELEMENT PASTDUE PHASE PLATFORM PURCHASE PURCHASED publish priority Package Paint Page paper Path Pay Payer payment Per PERIOD Percent Personal Pick Planned Po Point Port Pos Post postal P_instance Posting Position Preference Price Print Printed Printer Priority Procedure process Processor Processors Processing Processed Product Proj Project Proxy PRODUCTION Parent Picked POTENTIAL Payee POLICY PERPETUAL POSTED PAINTH PAINT PAINT_H PAINT_V PUBLISHER PUBLISHED PERFORMANCE PUB_DATE PAINT_HEADER_LINES " +
  		"QUALITY QUOTE Qa Qty Quantity Query Readonly " +
- 		"RECEIVE RECEIVED Recurring Relative Reval Revaluation RFQ Row RT Rule Run Running ratio repeat routing recognition Record Reference region registration related replenish release Remuneration replication report Request Require Required requisition Resource Response Responsible ression Revenue rfq_response Role runs remaining Reval_cr Reval_Dr Requests RfQs Registrations RESTRICTION RETAINED REALIZED " +
- 		"Step Schedule Scrapped Scribe Scriber Share Sign Signment SQL Statistics Structure Suppress SWIFT self same Sales scheduler schema script seconds security Select Selected Selection seller Send seq sequence sequentially ser_no Server service Set share shelf Ship Shipper Show Single Smtp So Sold Source Split Standard start Status statement Std Store sub subscription substitute Support Sync Sys System Sort Subscribe SubScriber Shipments " +
- 		"Term Termination Temporary Teardown Tandard Token Transition Transfer Trade Translation Translated tential track type table Target Task Trx Tax Tender Template Test Text time Times topic Total Tracking transaction tree Transferred " +
- 		"Until under Unearned units Unix Unrealized Uom Use used User Update Updated Updates Unallocated Updateable UNEARNED " +
- 		"valid validate Validation Value vendor Verify Version Voice vendors validator " +
- 		"waiting warehouse Watch web web_store Week Weekday When Where Willing Willing_To win wiki Wstore Window Windows Work workbench workflow Working Write_off winner");
+ 		"RENEWAL r_amt r_cost remit RR REPLENISHMENT RMI read readonly rank RMA RECEIVE RECEIVED Recurring Relative Reval Revaluation RFQ Row RT Rule Run Running ratio repeat routing recognition Record Reference region registration related replenish release Remuneration replication report Request Require Required requisition Resource Response Responsible ression Revenue rfq_response Role runs remaining Reval_cr Reval_Dr Requests RfQs Registrations RESTRICTION RETAINED REALIZED resp remind recognized reciprocal RR_AMT RESPONSE_TEXT RESPONSE RESPONSIBLE ROBOTS RANKING royalty REPLENISHMENT REMITTANCE Records " +
+ 		"stax Sum Summary Step Schedule Scrapped Scribe Scriber Share Sign Signment SQL Statistics Structure Suppress SWIFT self same Sales scheduler schema script seconds security Select Selected Selection seller Send seq sequence sequentially ser_no Server service Set share shelf Ship Shipper Show Single Smtp So Sold Source Split Standard start Status statement Std Store sub subscription substitute Support Sync Sys System Sort Subscribe SubScriber Shipments SUBJECT suspense style stroke stmt strategy SHIPMENT SUMMARIZED SETTLEMENT SYNONYM SYNCHRONIZED SETNL " +
+ 		"Term Termination Temporary Teardown Tandard Token Transition Transfer Trade Translation Translated tential track type table Target Task Trx Tax Tender Template Test Text time Times topic Total Tracking transaction tree Transferred TAGET TRIAL to_deliver to_invoice to_3_party TO_ORDER threshold TAB_LEVEL TENDERED " +
+ 		"UNIT Until under Unearned units Unix Unrealized Uom Use used User Update Updated Updates Unallocated Updateable UNEARNED USE_DATE " +
+ 		"VALUTA VIA VEND valid validate Validation Value vendor Verify Version Voice vendors validator V_FORMAT VARIANCE vanilla " +
+ 		"wf wait waiting warehouse Watch web web_store Week Weekday When Where Willing Willing_To win wiki Wstore Window Windows Work workbench workflow Working Write_off WINNER " +
+ 		"X XY XML XST " +
+ 		"Y YEAR YES_NO " +
+ 		"Z Zip");
   //@formatter:on
 
 	static final String[] finds = words.toUpperCase().replace("_", "").split(" ");
 
 	static final String[] replaces = words.toLowerCase().split(" ");
 
-	public String refineName(String name) {
+	public String refineName(String inname) {
+		String name = inname;
 		if (name == null) return null;
 
 		boolean isFind = false;
@@ -748,10 +784,14 @@ public class DefaultImporter {
 				}
 			}
 		} while (isFind);
-		name = name.replaceFirst("__", "_");
+		name = name.replaceAll("__", "_");
 
-		String[] sp = name.split("_");
+		String[] sp = name.toLowerCase().split("_");
 		for (String string : sp) {
+			if (string.length() == 0) continue;
+			if (!definedWords.containsKey(string)) {
+				System.out.println(string + "\t" + name + "\t" + inname);
+			}
 			hadWords.add(string);
 		}
 
@@ -761,7 +801,34 @@ public class DefaultImporter {
 	}
 
 	public void info() {
+		System.out.println("=============================");
+		System.out.println("====        word       ====");
+		System.out.println("=============================\n");
 		for (Multiset.Entry<String> set : hadWords.entrySet()) {
+			if (!definedWords.containsKey(set.getElement())) {
+				System.out.println(set.getElement() + "\t" + set.getCount());
+			}
+		}
+		System.out.println("=============================");
+		System.out.println("====        type       ====");
+		System.out.println("=============================\n");
+
+		Multiset<String> fieldTypes = TreeMultiset.create();
+
+		for (Type type : types) {
+			for (Field field : type.fields) {
+				if (field.skip) continue;
+				if(field.isForeignKey)continue;
+				if (field.resultTypeName != null) {
+					fieldTypes.add(field.resultTypeName);
+				} else {
+					fieldTypes.add("NULL");
+					System.out.println(type.name + "\t" + field.name + "\t" + field.resultName + "\t" + field.typename + "\t" + field.size +"\t" + field.defaultValue + "\t" + field.remarks);
+				}
+			}
+		}
+
+		for (Multiset.Entry<String> set : fieldTypes.entrySet()) {
 			System.out.println(set.getElement() + "\t" + set.getCount());
 		}
 	}

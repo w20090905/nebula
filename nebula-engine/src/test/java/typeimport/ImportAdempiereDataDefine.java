@@ -1,12 +1,8 @@
 package typeimport;
 
 import static typeimport.DBColumnType.*;
-import static typeimport.DBColumnType.Date;
 import static typeimport.DBColumnType.Long;
-import static typeimport.DBColumnType.String;
 import static typeimport.MatchPattern.*;
-import static typeimport.MatchPattern.EqualsIgnoreCase;
-import static typeimport.MatchPattern.StartWithIgnoreCase;
 
 import java.io.IOException;
 
@@ -26,221 +22,115 @@ public class ImportAdempiereDataDefine extends DefaultImporter {
 		Document document = parser.parse(inputFileName);
 		// get root element
 		Element rootElement = document.getDocumentElement();
-//		parser.readByReations(outputFolder, rootElement, "C_ORDER");
-		parser.readAll(outputFolder, rootElement);
 
+		// String rootType = "AdClient";
+		String rootType = "COrder";
+
+		parser.readByReations(outputFolder, rootElement, rootType);
 		parser.analyze(parser.types);
-//		parser.outputByRelations(outputFolder, parser.typeMapByName.get("COrder"));
-		parser.outputAll(outputFolder);
+		parser.outputByRelations(outputFolder, parser.typeMapByName.get(rootType));
+
+		// parser.readAll(outputFolder, rootElement);
+		// parser.analyze(parser.types);
+		// parser.outputAll(outputFolder);
 		parser.info();
 	}
 
 	public ImportAdempiereDataDefine() {
 		super(true, true);
 
-		// ID
-		when(EqualsIgnoreCase).with("ID").typeOf(Long).then().setTypeName("ID");
-		when(EndWithIgnoreCase).with("_ID").typeOf(Long).then().setTypeName("ID");
+		when(Equals, EndWith).with("Id").typeOf(Long).then().setTypeName("ID");
 
-		// YESNO
-		when(StartWithIgnoreCase).with("is").typeOf(Char).length(1).then().setTypeName("YesNo");
-		when(StartWithIgnoreCase).defaultValue("'Y'", "'N'").typeOf(Char).length(1).then().setTypeName("YesNo");
-		when(EqualsIgnoreCase).with("Action").typeOf(Char).length(1).then().setTypeName("YesNo");
+		when(Equals, EndWith).with("Id").typeOf(String).then().setTypeName("String");
 
-		// 默认字段
-		when(EqualsIgnoreCase)
-				.with("Name", "Description", "Comment", "Account", "Regexp", "Title", "Host", "Filename", "TimeZone", "Status", "Url", "Password", "Subject",
-						"Content", "Summary", "Revision", "Help", "Symbol", "Fax").typeOf(String).then().useMatchedNameAsTypeName().useMatchedNameAsFieldName();
-		when(EqualsIgnoreCase).with("Summary").typeOf(String).then().setTypeName("Summary");
+		when(StartWith).with("Is").typeOf(Char).length(1).then().setTypeName("YesNo");
+		when().defaultValue("'Y'", "'N'").typeOf(Char).length(1).then().setTypeName("YesNo");
 
-		when(EqualsIgnoreCase).with("Languageiso", "CountryCode").typeOf(String).then().setTypeName("Code");
+		// Start Or End
+		when(StartWith, EndWith).with("Email", "Host Path Url", "Phone Fax", "Upc Duns Naics Iban Bban Sku Isdn Swipe").typeOf(String).then()
+				.useMatchedNameAsTypeName();
 
-		when(StartWithIgnoreCase, EndWithIgnoreCase)
-				.with("Path", "Password", "Description", "FirstName", "FileName", "LastName", "Phone", "Postal", "Title", "Url", "Host", "Name", "Msg", "Info",
-						"Memo", "Notice", "Symbol", "Help").typeOf(String).then().useMatchedNameAsTypeName();
+		when(EndWith).with("Type Level Mode Status Action From To Profile Unit").typeOf(Char).then().setTypeName("Attr");
 
-		when(EndWithIgnoreCase).with("LANGUAGE").typeOf(Varchar).then().setTypeName("Code");
+		// End only
+		when(StartWith, EndWith).with("Name Title Description Code Help Note Text").typeOf(String).then().useMatchedNameAsTypeName();
+		when(StartWith, EndWith).with("Comments").typeOf(String).then().setTypeName("Comment");
 
-		// 垃圾字段
+		when(EndWith).with("SeqNo", "Distance  Count", "Length Weight   Width Height Depth Precision Frequency Position Percent", "Priority", "Port")
+				.typeOf(Long, Decimal).then().useMatchedNameAsTypeName();
 
-		when(EqualsIgnoreCase).with("Value", "LdapQuery", "DatePattern", "Timepattern", "Version", "Duns").typeOf(String).then().setTypeName("String");
-		when(EqualsIgnoreCase)
-				.with("RequestEmail", "RequestUser", "RequestUserpw", "RequestFolder", "DocumentDir", "ReleaseTag", "FieldGroup", "Constantvalue",
-						"FunctionColumn").typeOf(String).then().setTypeName("String");
+		when(EndWith).with("Discount Percent").typeOf(Long, Decimal).then().setTypeName("Percent");
 
-		when(EndWithIgnoreCase).with("classes", "Path").then().setTypeName("String");
-		when(EqualsIgnoreCase).with("Mmpolicy", "Emailtest").then().setTypeName("String");
+		when(EndWith).with("Amount Rate Ratio Rating Cost").typeOf(Long, Decimal).then().setTypeName("Amount");
 
-		// Boolean
-		when(EqualsIgnoreCase).with("PROCESSING", "PROCESSED", "POSTED").typeOf(Char).then().setTypeName("YesNo");
-		when(StartWithIgnoreCase).with("Is", "I_IS", "HAS", "POST", "ALLOW", "Create").typeOf(Char).then().setTypeName("YesNo");
-		when(StartWithIgnoreCase).with("On", "ACCEPT", "AFTER", "OVERWRITE", "ANY", "DISCONTINUED").typeOf(Char).then().setTypeName("YesNo");
-		when(EqualsIgnoreCase)
-				.with("DOPRICING", "CREATEPO", "CLASSIFICATION", "CREATESO", "PRIORITY", "PRIORITYUSER", "REQUIREVV", "PROJECTCATEGORY",
-						"REQUIRESTAXCERTIFICATE", "UPDATEQTY", "LISTTRX", "LISTSOURCES", "GENERATELIST", "ENFORCEPRICELIMIT", "CREATERECIPROCALRATE",
-						"COUNTHIGHMOVEMENT").typeOf(Char).then().setTypeName("YesNo");// TODO
+		when(EndWith).with("Red Green Blue Alpha Duration Volume").typeOf(Long, Decimal).then().setTypeName("Number");
 
-		/* NEW */
+		when(StartWith, EndWith).with("Margin Top Left Right Bottom Stroke SizeX SizeY X Y Z").typeOf(Long, Decimal).then().setTypeName("Length");
 
-		when(EqualsIgnoreCase).with("Dbaddress", "Remote_Addr").then().setTypeName("Name");
-
-		when(EndWithIgnoreCase).with("Msg").typeOf(String).then().setTypeName("Note");
-		when(EndWithIgnoreCase).with("Subject", "Version", "SupportEmail", "Prefix", "Suffix").typeOf(String).then().setTypeName("Description");
-
-		when(EndWithIgnoreCase)
-				.with("Message", "Reply", "Clause", "Path", "Help", "Preprocessing", "Modelpackage", "Code", "Logic", "Callout", "Sql", "Infofactoryclass",
-						"PostProcessing", "Value", "DisplayLogic", "Modelvalidationclasses", "info", "Trace", "Responsetext", "Script", "warning", "Msgtext",
-						"Msgtip", "Reference", "Modelvalidationclass").typeOf(String).then().setTypeName("Note");
-
-		when(EqualsIgnoreCase).with("Comments").typeOf(String).then().setTypeName("Comment");
-		when(EqualsIgnoreCase).with("Callout", "Vformat", "Value2").typeOf(String).then().setTypeName("Description");
-
-		when(EqualsIgnoreCase).with("Title", "EntityType", "Ad_Language", "Operation", "RequestDocumentNo").then().setTypeName("String");
-
-		when(EqualsIgnoreCase).with("V_String").typeOf(String).then().setTypeName("Note");
-		when(EqualsIgnoreCase).with("V_Number").typeOf(Long).then().setTypeName("Number");
-		when(EqualsIgnoreCase).with("LineNo").typeOf(Long).then().setTypeName("Long");
-
-		when(EqualsIgnoreCase).with("EVENTCHANGELOG", "Undo", "Redo").typeOf(Char).length(1).then().setTypeName("YesNo");
-		when(EndWithIgnoreCase).with("Type", "Level", "Status").typeOf(Char).then().setTypeName("Attr");
-		when(EndWithIgnoreCase).with("Jspurl").typeOf(Char).then().setTypeName("URL");
-
-		when(EqualsIgnoreCase).with("LineWidth").typeOf(Long).then().setTypeName("Number");
-		when(EqualsIgnoreCase).with("Version").typeOf(Long).then().setTypeName("Number");
-
-		/* End New */
-
-		when(StartWithIgnoreCase, EndWithIgnoreCase).with("EMail", "Name", "Phone", "Postal").typeOf(String).then().useMatchedNameAsTypeName();
-
-		when(EndWithIgnoreCase).with("Addr").typeOf(String).then().setTypeName("Address");
-		when(StartWithIgnoreCase, EndWithIgnoreCase).with("Address").typeOf(String).then().useMatchedNameAsFieldName();
-		when(StartWithIgnoreCase).with("Message", "Help").typeOf(String).then().useMatchedNameAsTypeName();
-
-		when(EndWithIgnoreCase).with("Text").typeOf(Text).then().useMatchedNameAsTypeName();
-
-		when(EndWithIgnoreCase)
-				.with("Value", "GREETING", "TERM", "PREFIX", "SUFFIX", "KEYWORD", "POREFERENCE", "REFERENCE", "REFERRER", "RELEASENO", "TAXINDICATOR",
-						"DIRECTORY", "CREATEDDATE", "UPDATEDDATE", "DATECOLUMN", "USERID").typeOf(String).then().setTypeName("String");
-
-		when(EndWithIgnoreCase)
-				.with("CREDITCARDNUMBER", "TAXID", "CHECKNO", "ACCOUNTNO", "DOCUMENTNO", "CUSTOMERNO", "CONFIRMATIONNO", "TRXID", "REFERENCENO", "ROUTINGNO",
-						"SERNO", "RPRODUCTNO", "VERSIONNO", "CODE", "PONUM").typeOf(String).then().setTypeName("Code");
-
-		when(EndWithIgnoreCase).with("Note").typeOf(NVarchar).then().setTypeName("Note");
-
-		when(StartWithIgnoreCase)
-				.with("WEBPARAM", "X", "Y", "WHERECLAUSE", "Z", "ARGS", "FOLDER", "CREDITCARDVV", "FOLDER", "PRODUCTATTRIBUTE", "LOOKUPCLIENTID")
+		when(EndWith)
+				.with("Value ValueMax ValueMin Format Callout Query Rule Logic Sql Package Class Version Clause Command Script Args MailHeader Symbol",
+						"Prefix Suffix", "Country City State Street Zip", "Greeting", "User Password Pw", "Folder", "Classes", "Dir", "Iso", "Pattern", "No")
 				.typeOf(String).then().setTypeName("String");
 
-		when(EqualsIgnoreCase).with("A_STREET", "A_CITY", "A_STATE", "A_ZIP", "A_IDENT_DL", "A_IDENT_SSN").typeOf(String).then().setTypeName("String");
-		when(EqualsIgnoreCase).with("UNINSTALL", "A_CITY", "A_STATE", "A_ZIP", "A_IDENT_DL", "A_IDENT_SSN").typeOf(String).then().setTypeName("String");
-
-		// HTML
-		when(EqualsIgnoreCase).with("HEADERLEFT", "HEADERCENTER", "HEADERRIGHT", "FOOTERLEFT", "FOOTERCENTER", "FOOTERRIGHT").typeOf(String).then()
+		// 垃圾
+		// String
+		when(EndWith).with("Separator", "HeaderLeft HeaderCenter HeaderRight FooterLeft FooterCenter FooterRight JasperReport").typeOf(String).then()
 				.setTypeName("String");
-		when(EqualsIgnoreCase, EndWithIgnoreCase)
-				.with("PROTOCOL", "ACCEPTLANGUAGE", "CONTENTHTML", "LOGIC", "DISPLAYSEQUENCE", "DISPLAYSEQUENCELOCAL", "FORMAT", "WEBSESSION", "USERAGENT",
-						"SESSION_ID", "SCRIPT", "REQUESTUSER", "REQUESTUSERPW", "REQUESTFOLDER", "REPLY_REMARKS", "REPLY").typeOf(String).then()
-				.setTypeName("String");
+		when(EndWith).with("Overwrite").typeOf(Char).length(2).then().setTypeName("String");
+		when(EndWith).with("DiscontinuedBy DunningGrace").typeOf(Date).then().setTypeName("Date");
+		when(EndWith).with("BinaryData").typeOf(String).length(4000).then().setTypeName("Text");
 
-		when(EqualsIgnoreCase).with("VALUEMIN", "VALUEMAX", "DISPLAYLOGIC", "DISPLAYSEQUENCE", "DISPLAYSEQUENCELOCAL", "CALLOUT").typeOf(String).then()
-				.setTypeName("String");
-
-		// SQL
-
-		when(EndWithIgnoreCase).with("CLAUSE", "SQL").typeOf(String).then().setTypeName("String");
-		when(EndWithIgnoreCase).with("XML").typeOf(String).then().setTypeName("Note");
-		when(StartWithIgnoreCase).with("META_", "VERSION").typeOf(String).then().setTypeName("String");
-
-		// Others
-		when(EndWithIgnoreCase).with("SUMMARY").typeOf(String).then().setTypeName("Comment");
-		when(EndWithIgnoreCase).with("COMMITWARNING").typeOf(String).then().setTypeName("Msg");
-
-		when(StartWithIgnoreCase).with("EFT", "R_", "A_").typeOf(String).then().setTypeName("String");
-		when(StartWithIgnoreCase).with("OS_COMMAND", "ORGCOLUMN", "NULLCOLUMNS").typeOf(String).then().setTypeName("String");
-
-		when(EqualsIgnoreCase).with("Redirects_to", "Homepage").typeOf(String).then().setTypeName("Url");
-
-		when(EqualsIgnoreCase).with("DUNS", "BBAN", "NAICS", "APAR", "SKU", "UPC", "SWIPE", "IBAN", "ISDN", "LOT", "SWIFTCode").typeOf(Char, String).then()
-				.useMatchedNameAsTypeName().useMatchedNameAsFieldName();
-
-		when(Include).with("Text").typeOf(String).then().useMatchedNameAsTypeName();
+		when(Equals).with("CurrentNext X Y Z").typeOf(String).then().setTypeName("String");
 
 		// Number
 
-		when(EqualsIgnoreCase).with("FileSize", "Port", "Status", "Version", "Position", "SeqNo", "Priority").typeOf(Long).then().useMatchedNameAsTypeName()
-				.useMatchedNameAsFieldName();
-		when(EndWithIgnoreCase).with("Port").typeOf(Long).then().useMatchedNameAsTypeName();
+		when(EndWith).with("Msg").typeOf(String).then().setTypeName("Message");
+		when(EndWith).with("Addr").typeOf(String).then().setTypeName("Message");
 
-		when(EndWithIgnoreCase)
-				.with("Count", "Length", "Height", "Width", "Size", "Weight", "Ratio", "Rate", "Rating", "Depth", "Price", "Line", "Cost", "Volume", "Amount",
-						"Percent", "Frequency", "Sequence", "Unit", "Precision", "Ranking").typeOf(Long).then().useMatchedNameAsTypeName();
+		when(Include).with("Address").typeOf(String).then().setTypeName("Address");
+		when(Equals).with("CreditCard Lot").typeOf(String).then().setTypeName("Code");
 
-		when(StartWithIgnoreCase, EndWithIgnoreCase).with("Days", "Months", "Years", "DELIVERYTIME").typeOf(Long).then().setTypeName("Count");
-		when(StartWithIgnoreCase).with("Level", "SERVICELEVELPROVIDED").typeOf(Long).then().setTypeName("Count");
-		when(EndWithIgnoreCase).with("Limit", "Copies").typeOf(Long).then().setTypeName("Count");
+		when(EndWith).with("Acct").typeOf(String).then().setTypeName("Account");
 
-		when(StartWithIgnoreCase, EndWithIgnoreCase).with("AMT", "GrandTotal").typeOf(Long).then().setTypeName("Amount");
-		when(StartWithIgnoreCase, EndWithIgnoreCase).with("Qty").typeOf(Long).then().setTypeName("Quantity");
-		when(StartWithIgnoreCase, EndWithIgnoreCase).with("Lines").typeOf(Long).then().setTypeName("Line");
-		when(EndWithIgnoreCase).with("No").typeOf(Long).then().setTypeName("SeqNo");
-		when(StartWithIgnoreCase, EndWithIgnoreCase).with("Due", "PASTDUE").typeOf(Long).then().setTypeName("Amount");// TODO
-		when(StartWithIgnoreCase, EndWithIgnoreCase).with("Acct").typeOf(Long).then().setTypeName("Amount");
-		when(StartWithIgnoreCase, EndWithIgnoreCase).with("Time").typeOf(Long).then().setTypeName("Count");
-		when(StartWithIgnoreCase).with("Measure").typeOf(Long).then().setTypeName("Length");
+		when(EndWith).with("Policy").typeOf(Char).then().setTypeName("Attr");
 
-		when(EndWithIgnoreCase).with("QTYAVAILABLE", "QTYCONFIRMED").typeOf(Long).then().setTypeName("Quantity");
+		when(StartWith, EndWith).with("Birthday Time Times Date").typeOf(Date).then().setTypeName("Date");
+		when(StartWith).with("Last First Begin Start End Stop From To").typeOf(Date).then().setTypeName("Date");
+		when(StartWith, EndWith).with("From To").typeOf(Date).then().setTypeName("Date");
 
-		// HTML
-		when(EndWithIgnoreCase).with("Margin", "Left", "Right", "Top", "Bottom", "Position", "Space").typeOf(Long).then().setTypeName("Length");
-		when(StartWithIgnoreCase).with("Col").typeOf(Long).then().setTypeName("Length");
+		// count
+		when(StartWith, EndWith).with("Lines Day Days DaysMin Months Years Seconds Minutes Records Copies Time Costs").typeOf(Long, Decimal).then()
+				.setTypeName("Count");
+		when(EndWith).with("SeqNo SerNo No").typeOf(Long).then().setTypeName("SeqNo");
+		// when(Include).with("Credit").typeOf(Long,
+		// Decimal).then().setTypeName("Amount");
+		when(StartWith, EndWith).with("Amt").typeOf(Long, Decimal).then().setTypeName("Amount");
+		when(EndWith).with("Qty").typeOf(Long, Decimal).then().setTypeName("Quantity");
 
-		// Date
+		// Special
+		when(EndWith).with("Processing").typeOf(Char).length(1).then().setTypeName("YesNo");
+		when(EndWith).with("Language").typeOf(String).then().setTypeName("Code");
+		when().typeOf(String).then().setTypeName("String");
+		when().typeOf(Long, Decimal).then().setTypeName("Number");
 
-		when(EqualsIgnoreCase).with("Birthday").typeOf(Date, Datetime).then().useMatchedNameAsTypeName().useMatchedNameAsFieldName();
+		// 垃圾
+		// when().typeOf(Char).length(1).then().setTypeName("YesNo");
 
-		when(EndWithIgnoreCase).with("_On").typeOf(Datetime).then().setTypeName(Datetime.name());
-		when(EndWithIgnoreCase).with("_On").typeOf(Date).then().setTypeName(Date.name());
-		when(EndWithIgnoreCase).with("_Date").typeOf(Date).then().setTypeName(Date.name());
-
-		when(StartWithIgnoreCase, EndWithIgnoreCase).with("Date", "Valid").typeOf(Date).then().setTypeName(Date.name());
-
-		when(EndWithIgnoreCase).with("_Timestamp").typeOf(Timestamp).then().setTypeName(Timestamp.name());
-
-		when(EqualsIgnoreCase)
-				.with("ASSIGNDATEFROM", "ASSIGNDATETO", "DISCONTINUEDBY", "DUNNINGGRACE", "ENDTIME", "FIRSTSALE", "LASTCONTACT", "LINEDATEWORKCOMPLETE",
-						"LINEDATEWORKSTART", "PRICEEFFECTIVE", "REPLY_RECEIVED", "SOURCEUPDATED", "STARTTIME", "T_DATETIME", "TIMESLOTEND", "TIMESLOTSTART",
-						"TRXRECEIVED", "TRXSENT").typeOf(Date).then().setTypeName("Date");
-
-		// Attr
-
-		when(EndWithIgnoreCase).with("Rule", "Status").typeOf(Char).then().setTypeName("Attr");
-		when(StartWithIgnoreCase, EndWithIgnoreCase, EqualsIgnoreCase).with("Type").typeOf(String).then().setTypeName("Attr");
-
-		when(EqualsIgnoreCase)
-				.with("AD_LANGUAGE", "COUNTRYCODE", "COSTINGMETHOD", "DOCACTION", "GENERATEORDER", "GENERATETO", "PROJECTLINELEVEL", "ACCESSLEVEL")
-				.typeOf(Char, Varchar).then().setTypeName("Attr");
-
-		// Spacial
-		when(EndWithIgnoreCase).with("Comments").typeOf(String).then().setTypeName("Note");
-		when(EndWithIgnoreCase).with("Mail").typeOf(String).then().setTypeName("EMail");
-		when(EndWithIgnoreCase).with("Hours").typeOf(Decimal).then().setTypeName("Number");
-		when(EndWithIgnoreCase).with("Encoding").typeOf(String).then().setTypeName("String");
-		when(EndWithIgnoreCase).with("Notes").typeOf(Text).then().setTypeName("Note");
-
-		// notsure
-
-		// when().is(Bit).then().setTypeName("YesNo");
-		// when().is(Varchar, NVarchar).then().setTypeName("String");
-		when().typeOf(Text, Blob).then().setTypeName("Note");
-		// when().is(Long).then().setTypeName("Count");
-		when().typeOf(Long).then().setTypeName("Number");
-
-		when(EqualsIgnoreCase).with("repository_id").inTable("Changesets").then().setReferTo("Repositories");
-
+		when(Equals).with("Processing").then().setTypeName("YesNo");
+		when(Equals).with("Value").typeOf(String).then().setTypeName("String");
 		// Skip System Column
-		when(EqualsIgnoreCase).with("ISACTIVE").typeOf(Char).skip();
-		when(EqualsIgnoreCase).with("CREATEDBY", "UPDATEDBY").typeOf(Long).skip();
-		when(EqualsIgnoreCase).with("CREATED", "UPDATED").typeOf(Date).skip();
+		when(Equals).with("IsActive").typeOf(Char).skip();
+		when(Equals).with("CreatedBy", "UpdatedBy").typeOf(Long).skip();
+		when(Equals).with("Created", "Updated").typeOf(Date).skip();
+
+		// Package name
+		super.addDefineWords("Ad A B CM C GL I K CH CB M PA RV R S T U W");
+		super.addDefineWords("BCK O LO AP E DC EFT VV CS CMC CMM CMS CMT FG BG TBG TFG OS DL RR PR CR QTR TRL V V1 VT LOG PARA INST MA MM VAL Wf U1 U2 U3 U4 RMA SLA P");
+		super.addDefineWords("0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 30 60 90 100 1percent 2percent 3percent 4percent");
+		super.addDefineWords("AMEX pub H MC PNREF CVV ppv ms oper cum stax QA IDENT WIP SR PK NUM MICR std addr dict diff db cur pwd REVAL uid loc yy avs so po pct pj rep amt trx rev ip sync xml meta seq");
+		super.addDefineWords("FQDN GAAP VIA ISDN iban bban NAICS upc sku ATM");
+		super.addDefineWords("x y z xy");
+
+		super.addDefineWords("accumde VALUTA XST SETNL TTABLE maintenence 12DE355 chare");
 	}
 }

@@ -24,7 +24,7 @@ type MProduct {
 	?CRevenueRecognition;
 	MProductCategory;
 	?Classification String;
-	?Volume;/* 0 */
+	?Volume Number;/* 0 */
 	?Weight;/* 0 */
 	?ShelfWidth Width;
 	?ShelfHeight Height;

@@ -55,7 +55,7 @@ tx MInout {
 	?CreatePackage String;
 	IsApproved YesNo;/* 'N'  */
 	IsInDispute YesNo;/* 'N'  */
-	?Volume;
+	?Volume Number;
 	?Weight;
 	?MRma;/* NULL */
 };
