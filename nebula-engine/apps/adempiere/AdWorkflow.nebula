@@ -1,14 +1,16 @@
+@Legacy("adempiere")
 @Remarks("Workflow or combination of tasks")
 @Refby("13")
+@Table("AD_WORKFLOW")
 type AdWorkflow {
-	!AdWorkflowId ID;
-	AdClient;
-	AdOrg;
+@Column("AD_WORKFLOW_ID") 	!AdWorkflowId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	?Help;
 	AccessLevel Attr;
-	?AdWfNode;
+@Column("AD_WF_NODE_ID") 	?AdWfNode;
 	EntityType AdEntityType;/* 'D'  */
 	?DurationUnit Attr;
 	Author String;/* 'ComPiere' */
@@ -21,12 +23,12 @@ type AdWorkflow {
 	Cost Amount;/* 0 */
 	WorkingTime Count;/* 0 */
 	WaitingTime Count;/* 0 */
-	?AdWfResponsible;
+@Column("AD_WF_RESPONSIBLE_ID") 	?AdWfResponsible;
 	PublishStatus Attr;/* NULL */
-	?AdWorkflowProcessor;
+@Column("AD_WORKFLOWPROCESSOR_ID") 	?AdWorkflowProcessor;
 	Value String;
 	IsDefault YesNo;/* 'N'  */
-	?AdTable;
+@Column("AD_TABLE_ID") 	?AdTable;
 	?ValidateWorkflow String;
 	WorkflowType Attr;/* 'G'  */
 	?DocValueLogic String;

@@ -1,12 +1,14 @@
+@Legacy("adempiere")
 @Remarks("View used to generate this report")
 @Refby("5")
+@Table("AD_REPORTVIEW")
 type AdReportView {
-	!AdReportViewId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("AD_REPORTVIEW_ID") 	!AdReportViewId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
-	AdTable;
+@Column("AD_TABLE_ID") 	AdTable;
 	?WhereClause String;
 	?OrderByClause String;
 	EntityType AdEntityType;/* 'D'  */

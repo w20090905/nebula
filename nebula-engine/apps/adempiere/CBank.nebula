@@ -1,12 +1,14 @@
+@Legacy("adempiere")
 @Remarks("Bank")
 @Refby("2")
+@Table("C_BANK")
 type CBank {
-	!CBankId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("C_BANK_ID") 	!CBankId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	RoutingNo String;
-	?CLocation;
+@Column("C_LOCATION_ID") 	?CLocation;
 	?SwiftCode Code;
 	IsOwnBank YesNo;/* 'N'  */
 	?Description;

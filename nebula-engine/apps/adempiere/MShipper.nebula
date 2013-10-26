@@ -1,12 +1,14 @@
+@Legacy("adempiere")
 @Remarks("Method or manner of product delivery")
 @Refby("6")
+@Table("M_SHIPPER")
 type MShipper {
-	!MShipperId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("M_SHIPPER_ID") 	!MShipperId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
-	?CBpartner;
+@Column("C_BPARTNER_ID") 	?CBpartner;
 	?TrackingUrl Url;
 };
 

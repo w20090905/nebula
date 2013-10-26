@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("Text templates for mailings")
 @Refby("10")
+@Table("R_MAILTEXT")
 type RMailText {
-	!RMailTextId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("R_MAILTEXT_ID") 	!RMailTextId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	IsHtml YesNo;/* 'N'  */
 	?MailHeader String;

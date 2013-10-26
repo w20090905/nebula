@@ -1,11 +1,13 @@
+@Legacy("adempiere")
 @Remarks("Workflow Transaction Execution Block")
 @Refby("1")
+@Table("AD_WF_BLOCK")
 type AdWfBlock {
-	!AdWfBlockId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("AD_WF_BLOCK_ID") 	!AdWfBlockId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
-	AdWorkflow;
+@Column("AD_WORKFLOW_ID") 	AdWorkflow;
 };
 

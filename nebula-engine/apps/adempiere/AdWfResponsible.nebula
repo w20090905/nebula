@@ -1,14 +1,16 @@
+@Legacy("adempiere")
 @Remarks("Responsible for Workflow Execution")
 @Refby("5")
+@Table("AD_WF_RESPONSIBLE")
 type AdWfResponsible {
-	!AdWfResponsibleId ID;
-	AdClientId ID;
-	AdOrg;
+@Column("AD_WF_RESPONSIBLE_ID") 	!AdWfResponsibleId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	ResponsibleType Attr;
-	?AdUser;
-	?AdRole;
+@Column("AD_USER_ID") 	?AdUser;
+@Column("AD_ROLE_ID") 	?AdRole;
 	EntityType AdEntityType;/* 'D' */
 };
 

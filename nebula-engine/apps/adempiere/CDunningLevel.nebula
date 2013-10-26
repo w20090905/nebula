@@ -1,10 +1,12 @@
+@Legacy("adempiere")
 @Remarks("Dunning Level")
 @Refby("3")
+@Table("C_DUNNINGLEVEL")
 type CDunningLevel {
-	!CDunningLevelId ID;
-	AdClientId ID;
-	AdOrgId ID;
-	CDunning;
+@Column("C_DUNNINGLEVEL_ID") 	!CDunningLevelId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("C_DUNNING_ID") 	CDunning;
 	PrintName Name;
 	DaysAfterDue Count;
 	DaysBetweenDunning Count;
@@ -13,13 +15,13 @@ type CDunningLevel {
 	?InterestPercent Percent;/* 0 */
 	ChargeFee YesNo;/* 'Y'  */
 	?FeeAmt Amount;/* 0 */
-	?DunningPrintFormat AdPrintFormat;
+@Column("DUNNING_PRINTFORMAT_ID") 	?DunningPrintFormat AdPrintFormat;
 	*Name;/* 'x'  */
 	?Description;
 	IsShowAllDue YesNo;/* 'N'  */
 	IsShowNotDue YesNo;/* 'N'  */
 	IsSetCreditStop YesNo;/* 'N'  */
 	IsSetPaymentTerm YesNo;/* 'N'  */
-	?CPaymentTerm;/* NULL   */
+@Column("C_PAYMENTTERM_ID") 	?CPaymentTerm;/* NULL   */
 };
 

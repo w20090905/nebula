@@ -1,19 +1,21 @@
+@Legacy("adempiere")
 @Remarks("Payment identifier")
 @Refby("16")
+@Table("C_PAYMENT")
 tx CPayment {
-	!CPaymentId ID;
-	AdClientId ID;
-	AdOrg;
+@Column("C_PAYMENT_ID") 	!CPaymentId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrg;
 	DocumentNo String;
 	DateTrx Date;
 	IsReceipt YesNo;/* 'Y'  */
-	CDocType;
+@Column("C_DOCTYPE_ID") 	CDocType;
 	TrxType Attr;
-	CBankAccount;
-	?CBpartner;
-	?CInvoice;
-	?CBpBankAccount;
-	?CPaymentBatch;
+@Column("C_BANKACCOUNT_ID") 	CBankAccount;
+@Column("C_BPARTNER_ID") 	?CBpartner;
+@Column("C_INVOICE_ID") 	?CInvoice;
+@Column("C_BP_BANKACCOUNT_ID") 	?CBpBankAccount;
+@Column("C_PAYMENTBATCH_ID") 	?CPaymentBatch;
 	TenderType Attr;
 	?CreditCardType Attr;
 	?CreditCardNumber String;
@@ -24,30 +26,30 @@ tx CPayment {
 	?RoutingNo String;
 	?AccountNo String;
 	?CheckNo String;
-	?AName Name;
-	?AStreet String;
-	?ACity String;
-	?AState String;
-	?AZip String;
-	?AIdentDl String;
-	?AIdentSsn String;
-	?AEmail Email;
+@Column("A_NAME") 	?AName Name;
+@Column("A_STREET") 	?AStreet String;
+@Column("A_CITY") 	?ACity String;
+@Column("A_STATE") 	?AState String;
+@Column("A_ZIP") 	?AZip String;
+@Column("A_IDENT_DL") 	?AIdentDl String;
+@Column("A_IDENT_SSN") 	?AIdentSsn String;
+@Column("A_EMAIL") 	?AEmail Email;
 	?VoiceAuthCode Code;
-	?OrigTrxId String;
+@Column("ORIG_TRXID") 	?OrigTrxId String;
 	?PoNum String;
-	CCurrency;
+@Column("C_CURRENCY_ID") 	CCurrency;
 	PayAmt Amount;/* 0  */
 	?DiscountAmt Amount;/* 0 */
 	?WriteOffAmt Amount;/* 0 */
 	?TaxAmt Amount;/* 0 */
 	IsApproved YesNo;/* 'N'  */
-	?RPnref String;
-	?RResult String;
-	?RRespMsg Message;
-	?RAuthCode Code;
-	?RAvsAddr Message;
-	?RAvsZip String;
-	?RInfo String;
+@Column("R_PNREF") 	?RPnref String;
+@Column("R_RESULT") 	?RResult String;
+@Column("R_RESPMSG") 	?RRespMsg Message;
+@Column("R_AUTHCODE") 	?RAuthCode Code;
+@Column("R_AVSADDR") 	?RAvsAddr Message;
+@Column("R_AVSZIP") 	?RAvsZip String;
+@Column("R_INFO") 	?RInfo String;
 	?Processing YesNo;
 	?OProcessing YesNo;
 	DocStatus Attr;
@@ -59,26 +61,26 @@ tx CPayment {
 	Posted YesNo;/* 'N'  */
 	IsOverUnderPayment YesNo;/* 'N'  */
 	?OverUnderAmt Amount;/* 0 */
-	?ACountry String;
-	?CProject;
+@Column("A_COUNTRY") 	?ACountry String;
+@Column("C_PROJECT_ID") 	?CProject;
 	IsSelfService YesNo;/* 'N' */
 	?ChargeAmt Amount;/* 0 */
-	?CCharge;
+@Column("C_CHARGE_ID") 	?CCharge;
 	IsDelayedCapture YesNo;/* 'N'  */
-	?RAuthCodeDc String;
-	?RCvv2Match String;
-	?RPnrefDc String;
+@Column("R_AUTHCODE_DC") 	?RAuthCodeDc String;
+@Column("R_CVV2MATCH") 	?RCvv2Match String;
+@Column("R_PNREF_DC") 	?RPnrefDc String;
 	?Swipe;
-	?AdOrgTrx AdOrg;
-	?CCampaign;
-	?CActivity;
-	?User1 CElementValue;
-	?User2 CElementValue;
-	?CConversionType;
+@Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
+@Column("C_CAMPAIGN_ID") 	?CCampaign;
+@Column("C_ACTIVITY_ID") 	?CActivity;
+@Column("USER1_ID") 	?User1 CElementValue;
+@Column("USER2_ID") 	?User2 CElementValue;
+@Column("C_CONVERSIONTYPE_ID") 	?CConversionType;
 	?Description;
 	DateAcct Date;
-	?COrder;
+@Column("C_ORDER_ID") 	?COrder;
 	IsPrepayment YesNo;/* 'N'  */
-	?RefPayment CPayment;
+@Column("REF_PAYMENT_ID") 	?RefPayment CPayment;
 };
 

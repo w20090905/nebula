@@ -1,10 +1,12 @@
+@Legacy("adempiere")
 @Remarks("The Currency for this record")
 @Refby("49")
+@Table("C_CURRENCY")
 tx CCurrency {
-	!CCurrencyId ID;
-	AdClient;
-	AdOrg;
-	IsoCode Code;
+@Column("C_CURRENCY_ID") 	!CCurrencyId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
+@Column("ISO_CODE") 	IsoCode Code;
 	?CurSymbol String;
 	Description;
 	StdPrecision Precision;

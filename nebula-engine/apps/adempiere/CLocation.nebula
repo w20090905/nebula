@@ -1,17 +1,19 @@
+@Legacy("adempiere")
 @Remarks("Location or Address")
 @Refby("22")
+@Table("C_LOCATION")
 tx CLocation {
-	!CLocationId ID;
-	AdClient;
-	AdOrg;
+@Column("C_LOCATION_ID") 	!CLocationId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	?Address1 Address;
 	?Address2 Address;
 	?City String;
 	?Postal String;
-	?PostalAdd String;
-	CCountry;
-	?CRegion;
-	?CCity;
+@Column("POSTAL_ADD") 	?PostalAdd String;
+@Column("C_COUNTRY_ID") 	CCountry;
+@Column("C_REGION_ID") 	?CRegion;
+@Column("C_CITY_ID") 	?CCity;
 	?RegionName Name;
 	?Address3 Address;
 	?Address4 Address;

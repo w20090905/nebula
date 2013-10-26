@@ -1,20 +1,22 @@
+@Legacy("adempiere")
 @Remarks("User within the system - Internal or Business Partner Contact")
 @Refby("94")
+@Table("AD_USER")
 type AdUser {
-	!AdUserId ID;
-	AdClient;
-	AdOrg;
+@Column("AD_USER_ID") 	!AdUserId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	?Password String;
 	?Email;
-	?Supervisor AdUser;
-	?CBpartner;
+@Column("SUPERVISOR_ID") 	?Supervisor AdUser;
+@Column("C_BPARTNER_ID") 	?CBpartner;
 	?Processing YesNo;
 	?EmailUser Email;
 	?EmailUserPw Email;
-	?CBpartnerLocation;
-	?CGreeting;
+@Column("C_BPARTNER_LOCATION_ID") 	?CBpartnerLocation;
+@Column("C_GREETING_ID") 	?CGreeting;
 	?Title;
 	?Comments Comment;
 	?Phone;
@@ -23,12 +25,12 @@ type AdUser {
 	?LastContact Date;
 	?LastResult String;
 	?Birthday Date;
-	?AdOrgTrx AdOrg;
+@Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
 	?EmailVerify Email;
 	?EmailVerifyDate Date;
 	NotificationType Attr;/* 'E'  */
 	IsFullBpAccess YesNo;/* 'Y'  */
-	?CJob;
+@Column("C_JOB_ID") 	?CJob;
 	?LdapUser String;
 	?ConnectionProfile Attr;
 	?Value String;/* NULL   */

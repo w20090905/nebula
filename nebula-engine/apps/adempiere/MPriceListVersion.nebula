@@ -1,15 +1,17 @@
+@Legacy("adempiere")
 @Remarks("Identifies a unique instance of a Price List")
 @Refby("4")
+@Table("M_PRICELIST_VERSION")
 type MPriceListVersion {
-	!MPriceListVersionId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("M_PRICELIST_VERSION_ID") 	!MPriceListVersionId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
-	MPriceList;
-	MDiscountSchema;
+@Column("M_PRICELIST_ID") 	MPriceList;
+@Column("M_DISCOUNTSCHEMA_ID") 	MDiscountSchema;
 	ValidFrom Date;
 	?ProcCreate String;
-	?MPriceListVersionBase MPriceListVersion;
+@Column("M_PRICELIST_VERSION_BASE_ID") 	?MPriceListVersionBase MPriceListVersion;
 };
 

@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("Data entry or display window")
 @Refby("17")
+@Table("AD_WINDOW")
 type AdWindow {
-	!AdWindowId ID;
-	AdClient;
-	AdOrg;
+@Column("AD_WINDOW_ID") 	!AdWindowId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	?Help;
@@ -11,8 +13,8 @@ type AdWindow {
 	IsSoTrx YesNo;/* 'Y'  */
 	EntityType AdEntityType;/* 'D'  */
 	?Processing YesNo;
-	?AdImage;
-	?AdColor;
+@Column("AD_IMAGE_ID") 	?AdImage;
+@Column("AD_COLOR_ID") 	?AdColor;
 	IsDefault YesNo;/* 'N' */
 	?WinHeight Height;
 	?WinWidth Width;

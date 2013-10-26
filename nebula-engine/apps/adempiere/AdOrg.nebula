@@ -1,8 +1,10 @@
+@Legacy("adempiere")
 @Remarks("Organizational entity within client")
 @Refby("121")
+@Table("AD_ORG")
 type AdOrg {
-	!AdOrgId ID;
-	AdClient;
+@Column("AD_ORG_ID") 	!AdOrgId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
 	Value String;
 	*Name;
 	?Description;

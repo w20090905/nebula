@@ -1,13 +1,15 @@
+@Legacy("adempiere")
 @Remarks("Position")
 @Refby("4")
+@Table("C_JOB")
 type CJob {
-	!CJobId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("C_JOB_ID") 	!CJobId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
-	CJobCategory;
+@Column("C_JOBCATEGORY_ID") 	CJobCategory;
 	IsEmployee YesNo;/* 'N'  */
 };
 

@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("Method for recording revenue")
 @Refby("2")
+@Table("C_REVENUERECOGNITION")
 type CRevenueRecognition {
-	!CRevenueRecognitionId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("C_REVENUERECOGNITION_ID") 	!CRevenueRecognitionId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
 	IsTimeBased YesNo;

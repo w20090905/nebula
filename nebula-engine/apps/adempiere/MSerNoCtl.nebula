@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("Product Serial Number Control")
 @Refby("2")
+@Table("M_SERNOCTL")
 type MSerNoCtl {
-	!MSerNoCtlId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("M_SERNOCTL_ID") 	!MSerNoCtlId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
 	StartNo SeqNo;

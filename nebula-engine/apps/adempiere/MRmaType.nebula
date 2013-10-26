@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("Return Material Authorization Type")
 @Refby("1")
+@Table("M_RMATYPE")
 type MRmaType {
-	!MRmaTypeId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("M_RMATYPE_ID") 	!MRmaTypeId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;

@@ -1,13 +1,15 @@
+@Legacy("adempiere")
 @Remarks("Payment processor for electronic payments")
 @Refby("1")
+@Table("C_PAYMENTPROCESSOR")
 type CPaymentProcessor {
-	!CPaymentProcessorId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("C_PAYMENTPROCESSOR_ID") 	!CPaymentProcessorId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
-	CBankAccount;
-	?AdSequence;
+@Column("C_BANKACCOUNT_ID") 	CBankAccount;
+@Column("AD_SEQUENCE_ID") 	?AdSequence;
 	?PayProcessorClass String;
 	?UserId String;
 	?Password String;
@@ -26,7 +28,7 @@ type CPaymentProcessor {
 	AcceptCheck YesNo;/* 'Y'  */
 	AcceptAtm YesNo;/* 'Y'  */
 	RequireVv YesNo;/* 'N'  */
-	?CCurrency;
+@Column("C_CURRENCY_ID") 	?CCurrency;
 	CostPerTrx Number;/* 0  */
 	Commission Number;
 	?PartnerId String;

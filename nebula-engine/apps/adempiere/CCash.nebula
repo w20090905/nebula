@@ -1,10 +1,12 @@
+@Legacy("adempiere")
 @Remarks("Cash Journal")
 @Refby("1")
+@Table("C_CASH")
 type CCash {
-	!CCashId ID;
-	AdClientId ID;
-	AdOrg;
-	CCashBook;
+@Column("C_CASH_ID") 	!CCashId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrg;
+@Column("C_CASHBOOK_ID") 	CCashBook;
 	*Name;
 	?Description;
 	StatementDate Date;
@@ -15,12 +17,12 @@ type CCash {
 	?Processing YesNo;
 	Processed YesNo;/* 'N'  */
 	Posted YesNo;/* 'N'  */
-	?AdOrgTrx AdOrg;
-	?CProject;
-	?CCampaign;
-	?CActivity;
-	?User1 CElementValue;
-	?User2 CElementValue;
+@Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
+@Column("C_PROJECT_ID") 	?CProject;
+@Column("C_CAMPAIGN_ID") 	?CCampaign;
+@Column("C_ACTIVITY_ID") 	?CActivity;
+@Column("USER1_ID") 	?User1 CElementValue;
+@Column("USER2_ID") 	?User2 CElementValue;
 	IsApproved YesNo;/* 'N'  */
 	DocStatus Attr;
 	DocAction Attr;

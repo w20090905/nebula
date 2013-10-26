@@ -1,15 +1,17 @@
+@Legacy("adempiere")
 @Remarks("Identifies a Business Partner")
 @Refby("75")
+@Table("C_BPARTNER")
 type CBpartner {
-	!CBpartnerId ID;
-	AdClient;
-	AdOrg;
+@Column("C_BPARTNER_ID") 	!CBpartnerId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	Value String;
 	*Name;
 	?Name2 Name;
 	?Description;
 	IsSummary YesNo;/* 'N' */
-	CBpGroup;
+@Column("C_BP_GROUP_ID") 	CBpGroup;
 	IsOneTime YesNo;/* 'N'  */
 	IsProspect YesNo;/* 'Y'  */
 	IsVendor YesNo;/* 'N'  */
@@ -19,10 +21,10 @@ type CBpartner {
 	?ReferenceNo String;
 	?Duns;
 	?Url;
-	?AdLanguage;
+@Column("AD_LANGUAGE") 	?AdLanguage;
 	?TaxId String;
 	?IsTaxExempt YesNo;/* 'N'                                */
-	?CInvoiceSchedule;
+@Column("C_INVOICESCHEDULE_ID") 	?CInvoiceSchedule;
 	?Rating String;
 	?SalesVolume Number;
 	?NumberEmployees Number;
@@ -33,32 +35,32 @@ type CBpartner {
 	?ActualLifetimeValue Number;/* 0 */
 	?ShareOfCustomer Number;
 	?PaymentRule String;
-	?SoCreditLimit Number;/* 0 */
-	?SoCreditUsed Number;/* 0 */
-	?CPaymentTerm;
-	?MPriceList;
-	?MDiscountSchema;
-	?CDunning;
+@Column("SO_CREDITLIMIT") 	?SoCreditLimit Number;/* 0 */
+@Column("SO_CREDITUSED") 	?SoCreditUsed Number;/* 0 */
+@Column("C_PAYMENTTERM_ID") 	?CPaymentTerm;
+@Column("M_PRICELIST_ID") 	?MPriceList;
+@Column("M_DISCOUNTSCHEMA_ID") 	?MDiscountSchema;
+@Column("C_DUNNING_ID") 	?CDunning;
 	?IsDiscountPrinted YesNo;/* 'Y'                                */
-	?SoDescription Description;
+@Column("SO_DESCRIPTION") 	?SoDescription Description;
 	?PoReference String;
 	?PaymentRulePo String;
-	?PoPriceList MPriceList;
-	?PoDiscountSchema MDiscountSchema;
-	?PoPaymentTerm CPaymentTerm;
+@Column("PO_PRICELIST_ID") 	?PoPriceList MPriceList;
+@Column("PO_DISCOUNTSCHEMA_ID") 	?PoDiscountSchema MDiscountSchema;
+@Column("PO_PAYMENTTERM_ID") 	?PoPaymentTerm CPaymentTerm;
 	?DocumentCopies Count;
-	?CGreeting;
+@Column("C_GREETING_ID") 	?CGreeting;
 	?InvoiceRule String;
 	?DeliveryRule String;
 	?FreightCostRule String;
 	?DeliveryViaRule String;
-	?SalesRep AdUser;
+@Column("SALESREP_ID") 	?SalesRep AdUser;
 	SendEmail YesNo;/* 'N'  */
-	?BpartnerParent CBpartner;
-	?InvoicePrintFormat AdPrintFormat;
+@Column("BPARTNER_PARENT_ID") 	?BpartnerParent CBpartner;
+@Column("INVOICE_PRINTFORMAT_ID") 	?InvoicePrintFormat AdPrintFormat;
 	?SoCreditStatus Attr;/* 'O' */
 	?ShelfLifeMinPct Number;
-	?AdOrgBp AdOrg;
+@Column("AD_ORGBP_ID") 	?AdOrgBp AdOrg;
 	?FlatDiscount Percent;
 	?TotalOpenBalance Number;
 	?DunningGrace Date;

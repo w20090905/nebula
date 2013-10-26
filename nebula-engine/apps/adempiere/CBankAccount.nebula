@@ -1,11 +1,13 @@
+@Legacy("adempiere")
 @Remarks("Account at the Bank")
 @Refby("11")
+@Table("C_BANKACCOUNT")
 tx CBankAccount {
-	!CBankAccountId ID;
-	AdClientId ID;
-	AdOrgId ID;
-	CBank;
-	CCurrency;
+@Column("C_BANKACCOUNT_ID") 	!CBankAccountId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("C_BANK_ID") 	CBank;
+@Column("C_CURRENCY_ID") 	CCurrency;
 	BankAccountType Attr;
 	AccountNo String;
 	CurrentBalance Number;/* 0  */

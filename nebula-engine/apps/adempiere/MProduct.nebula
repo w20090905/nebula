@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("Product, Service, Item")
 @Refby("89")
+@Table("M_PRODUCT")
 type MProduct {
-	!MProductId ID;
-	AdClient;
-	AdOrg;
+@Column("M_PRODUCT_ID") 	!MProductId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	Value String;
 	*Name;
 	?Description;
@@ -11,8 +13,8 @@ type MProduct {
 	?Help;
 	?Upc;
 	?Sku;
-	CUom;
-	?SalesRep AdUser;
+@Column("C_UOM_ID") 	CUom;
+@Column("SALESREP_ID") 	?SalesRep AdUser;
 	IsSummary YesNo;/* 'N'  */
 	IsStocked YesNo;/* 'Y'  */
 	IsPurchased YesNo;/* 'Y'  */
@@ -21,8 +23,8 @@ type MProduct {
 	IsInvoicePrintDetails YesNo;/* 'N'  */
 	IsPickListPrintDetails YesNo;/* 'N'  */
 	IsVerified YesNo;/* 'N'  */
-	?CRevenueRecognition;
-	MProductCategory;
+@Column("C_REVENUERECOGNITION_ID") 	?CRevenueRecognition;
+@Column("M_PRODUCT_CATEGORY_ID") 	MProductCategory;
 	?Classification String;
 	?Volume Number;/* 0 */
 	?Weight;/* 0 */
@@ -30,27 +32,27 @@ type MProduct {
 	?ShelfHeight Height;
 	?ShelfDepth Depth;
 	?UnitsPerPallet Number;
-	CTaxCategory;
-	?SResource;
+@Column("C_TAXCATEGORY_ID") 	CTaxCategory;
+@Column("S_RESOURCE_ID") 	?SResource;
 	?Discontinued YesNo;/* 'N'                                 */
 	?DiscontinuedBy Date;
 	?Processing YesNo;
-	?SExpenseType;
+@Column("S_EXPENSETYPE_ID") 	?SExpenseType;
 	ProductType Attr;/* 'I'  */
 	?ImageUrl Url;
 	?DescriptionUrl Url;
 	?GuaranteeDays Count;
-	?RMailText;
+@Column("R_MAILTEXT_ID") 	?RMailText;
 	?VersionNo String;
-	?MAttributeSet;
-	?MAttributeSetInstance;/* 0 */
+@Column("M_ATTRIBUTESET_ID") 	?MAttributeSet;
+@Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstance;/* 0 */
 	?DownloadUrl Url;
-	?MFreightCategory;
-	?MLocator;
+@Column("M_FREIGHTCATEGORY_ID") 	?MFreightCategory;
+@Column("M_LOCATOR_ID") 	?MLocator;
 	?GuaranteeDaysMin Count;
 	IsWebStoreFeatured YesNo;/* 'N'  */
 	IsSelfService YesNo;/* 'Y'  */
-	?CSubscriptionType;
+@Column("C_SUBSCRIPTIONTYPE_ID") 	?CSubscriptionType;
 	IsDropShip YesNo;/* 'N'  */
 	IsExcludeAutoDelivery YesNo;/* 'N'  */
 	?Group1 String;

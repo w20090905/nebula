@@ -1,15 +1,17 @@
+@Legacy("adempiere")
 @Remarks("Accounting Element")
 @Refby("3")
+@Table("C_ELEMENT")
 type CElement {
-	!CElementId ID;
-	AdClient;
-	AdOrg;
+@Column("C_ELEMENT_ID") 	!CElementId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	?VFormat String;
 	ElementType Attr;
 	IsBalancing YesNo;/* 'N'  */
 	IsNaturalAccount YesNo;/* 'Y'  */
-	?AdTree;
+@Column("AD_TREE_ID") 	?AdTree;
 };
 

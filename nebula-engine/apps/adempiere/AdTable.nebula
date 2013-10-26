@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("Table for the Fields")
 @Refby("44")
+@Table("AD_TABLE")
 type AdTable {
-	!AdTableId ID;
-	AdClient;
-	AdOrg;
+@Column("AD_TABLE_ID") 	!AdTableId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	?Help;
@@ -11,8 +13,8 @@ type AdTable {
 	IsView YesNo;/* 'N'  */
 	AccessLevel Attr;
 	EntityType AdEntityType;/* 'D'  */
-	?AdWindow;
-	?AdValRule;
+@Column("AD_WINDOW_ID") 	?AdWindow;
+@Column("AD_VAL_RULE_ID") 	?AdValRule;
 	?LoadSeq Number;
 	IsSecurityEnabled YesNo;/* 'N'  */
 	IsDeleteable YesNo;/* 'Y'  */
@@ -20,7 +22,7 @@ type AdTable {
 	?ImportTable String;
 	IsChangeLog YesNo;/* 'N'  */
 	ReplicationType Attr;/* 'L' */
-	?PoWindow AdWindow;
+@Column("PO_WINDOW_ID") 	?PoWindow AdWindow;
 	?CopyColumnsFromTable String;
 };
 

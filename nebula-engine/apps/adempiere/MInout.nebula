@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("Material Shipment Document")
 @Refby("8")
+@Table("M_INOUT")
 tx MInout {
-	!MInoutId ID;
-	AdClientId ID;
-	AdOrg;
+@Column("M_INOUT_ID") 	!MInoutId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrg;
 	IsSoTrx YesNo;/* 'Y'  */
 	DocumentNo String;
 	DocAction Attr;
@@ -11,52 +13,52 @@ tx MInout {
 	Posted YesNo;/* 'N'  */
 	?Processing YesNo;
 	Processed YesNo;/* 'N'  */
-	CDocType;
+@Column("C_DOCTYPE_ID") 	CDocType;
 	?Description;
-	?COrder;
+@Column("C_ORDER_ID") 	?COrder;
 	?DateOrdered Date;
 	IsPrinted YesNo;/* 'N'  */
 	MovementType Attr;
 	MovementDate Date;
 	DateAcct Date;
-	CBpartner;
-	CBpartnerLocation;
-	MWarehouse;
+@Column("C_BPARTNER_ID") 	CBpartner;
+@Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocation;
+@Column("M_WAREHOUSE_ID") 	MWarehouse;
 	?PoReference String;
 	DeliveryRule String;
 	FreightCostRule String;
 	?FreightAmt Amount;/* 0 */
 	DeliveryViaRule String;
-	?MShipper;
-	?CCharge;
+@Column("M_SHIPPER_ID") 	?MShipper;
+@Column("C_CHARGE_ID") 	?CCharge;
 	?ChargeAmt Amount;/* 0 */
 	PriorityRule String;
 	?DatePrinted Date;
-	?CInvoice;
+@Column("C_INVOICE_ID") 	?CInvoice;
 	?CreateFrom Attr;
 	?GenerateTo Attr;
 	SendEmail YesNo;/* 'N'  */
-	?AdUser;
-	?SalesRep AdUser;
+@Column("AD_USER_ID") 	?AdUser;
+@Column("SALESREP_ID") 	?SalesRep AdUser;
 	?NoPackageS Number;
 	?PickDate Date;
 	?ShipDate Date;
 	?TrackingNo String;
-	?AdOrgTrx AdOrg;
-	?CProject;
-	?CCampaign;
-	?CActivity;
-	?User1 CElementValue;
-	?User2 CElementValue;
+@Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
+@Column("C_PROJECT_ID") 	?CProject;
+@Column("C_CAMPAIGN_ID") 	?CCampaign;
+@Column("C_ACTIVITY_ID") 	?CActivity;
+@Column("USER1_ID") 	?User1 CElementValue;
+@Column("USER2_ID") 	?User2 CElementValue;
 	?DateReceived Date;
 	IsInTransit YesNo;/* 'N'  */
-	?RefInout MInout;
+@Column("REF_INOUT_ID") 	?RefInout MInout;
 	?CreateConfirm String;
 	?CreatePackage String;
 	IsApproved YesNo;/* 'N'  */
 	IsInDispute YesNo;/* 'N'  */
 	?Volume Number;
 	?Weight;
-	?MRma;/* NULL */
+@Column("M_RMA_ID") 	?MRma;/* NULL */
 };
 

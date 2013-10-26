@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("Dynamic Validation Rule")
 @Refby("5")
+@Table("AD_VAL_RULE")
 type AdValRule {
-	!AdValRuleId ID;
-	AdClient;
-	AdOrg;
+@Column("AD_VAL_RULE_ID") 	!AdValRuleId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	?Type Attr;/* NULL */

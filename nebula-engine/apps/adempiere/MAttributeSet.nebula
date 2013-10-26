@@ -1,15 +1,17 @@
+@Legacy("adempiere")
 @Remarks("Product Attribute Set")
 @Refby("4")
+@Table("M_ATTRIBUTESET")
 type MAttributeSet {
-	!MAttributeSetId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("M_ATTRIBUTESET_ID") 	!MAttributeSetId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
 	IsSerNo YesNo;/* 'Y'  */
-	?MSerNoCtl;
+@Column("M_SERNOCTL_ID") 	?MSerNoCtl;
 	IsLot YesNo;/* 'Y'  */
-	?MLotCtl;
+@Column("M_LOTCTL_ID") 	?MLotCtl;
 	IsGuaranteeDate YesNo;/* 'N'  */
 	?GuaranteeDays Count;
 	IsInstanceAttribute YesNo;/* 'N'  */

@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("Position Category")
 @Refby("1")
+@Table("C_JOBCATEGORY")
 type CJobCategory {
-	!CJobCategoryId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("C_JOBCATEGORY_ID") 	!CJobCategoryId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;

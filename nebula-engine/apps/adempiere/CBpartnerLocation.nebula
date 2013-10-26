@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("Identifies the (ship to) address for this Business Partner")
 @Refby("23")
+@Table("C_BPARTNER_LOCATION")
 type CBpartnerLocation {
-	!CBpartnerLocationId ID;
-	AdClient;
-	AdOrg;
+@Column("C_BPARTNER_LOCATION_ID") 	!CBpartnerLocationId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	IsBillTo YesNo;/* 'Y'  */
 	IsShipTo YesNo;/* 'Y'  */
@@ -13,8 +15,8 @@ type CBpartnerLocation {
 	?Phone2 Phone;
 	?Fax;
 	?Isdn;
-	?CSalesRegion;
-	CBpartner;
-	?CLocation;
+@Column("C_SALESREGION_ID") 	?CSalesRegion;
+@Column("C_BPARTNER_ID") 	CBpartner;
+@Column("C_LOCATION_ID") 	?CLocation;
 };
 

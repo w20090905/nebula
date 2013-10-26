@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("Schedule for generating Invoices")
 @Refby("1")
+@Table("C_INVOICESCHEDULE")
 type CInvoiceSchedule {
-	!CInvoiceScheduleId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("C_INVOICESCHEDULE_ID") 	!CInvoiceScheduleId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
 	IsAmount YesNo;/* 'N'  */

@@ -1,43 +1,45 @@
+@Legacy("adempiere")
 @Remarks("Responsibility Role")
 @Refby("23")
+@Table("AD_ROLE")
 type AdRole {
-	!AdRoleId ID;
-	AdClient;
-	AdOrg;
+@Column("AD_ROLE_ID") 	!AdRoleId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	UserLevel Attr;/* '  O'  */
-	?CCurrency;
+@Column("C_CURRENCY_ID") 	?CCurrency;
 	?AmtApproval Amount;/* 0 */
-	?AdTreeMenu AdTree;
+@Column("AD_TREE_MENU_ID") 	?AdTreeMenu AdTree;
 	IsManual YesNo;/* 'N' */
 	IsShowAcct YesNo;/* 'Y' */
 	IsPersonalLock YesNo;/* 'N'  */
 	IsPersonalAccess YesNo;/* 'N'  */
 	IsCanExport YesNo;/* 'Y'  */
 	IsCanReport YesNo;/* 'Y'  */
-	?Supervisor AdUser;
+@Column("SUPERVISOR_ID") 	?Supervisor AdUser;
 	IsCanApproveOwnDoc YesNo;/* 'Y'  */
 	IsAccessAllOrgs YesNo;/* 'N'  */
 	IsChangeLog YesNo;/* 'N'  */
 	PreferenceType Attr;/* 'C'  */
 	OverwritePriceLimit YesNo;/* 'N'  */
 	IsUseUserOrgAccess YesNo;/* 'N'  */
-	?AdTreeOrg AdTree;
+@Column("AD_TREE_ORG_ID") 	?AdTreeOrg AdTree;
 	ConfirmQueryRecords Count;/* 0  */
 	MaxQueryRecords Count;/* 0  */
 	?ConnectionProfile Attr;
-	?AllowInfoAccount YesNo;/* 'Y'  */
-	?AllowInfoAsset YesNo;/* 'Y'  */
-	?AllowInfoBpartner YesNo;/* 'Y'  */
-	?AllowInfoCashJournal YesNo;/* 'Y'  */
-	?AllowInfoInout YesNo;/* 'Y'  */
-	?AllowInfoInvoice YesNo;/* 'Y'  */
-	?AllowInfoOrder YesNo;/* 'Y'  */
-	?AllowInfoPayment YesNo;/* 'Y'  */
-	?AllowInfoProduct YesNo;/* 'Y'  */
-	?AllowInfoResource YesNo;/* 'Y'  */
-	?AllowInfoSchedule YesNo;/* 'Y'  */
+@Column("ALLOW_INFO_ACCOUNT") 	?AllowInfoAccount YesNo;/* 'Y'  */
+@Column("ALLOW_INFO_ASSET") 	?AllowInfoAsset YesNo;/* 'Y'  */
+@Column("ALLOW_INFO_BPARTNER") 	?AllowInfoBpartner YesNo;/* 'Y'  */
+@Column("ALLOW_INFO_CASHJOURNAL") 	?AllowInfoCashJournal YesNo;/* 'Y'  */
+@Column("ALLOW_INFO_INOUT") 	?AllowInfoInout YesNo;/* 'Y'  */
+@Column("ALLOW_INFO_INVOICE") 	?AllowInfoInvoice YesNo;/* 'Y'  */
+@Column("ALLOW_INFO_ORDER") 	?AllowInfoOrder YesNo;/* 'Y'  */
+@Column("ALLOW_INFO_PAYMENT") 	?AllowInfoPayment YesNo;/* 'Y'  */
+@Column("ALLOW_INFO_PRODUCT") 	?AllowInfoProduct YesNo;/* 'Y'  */
+@Column("ALLOW_INFO_RESOURCE") 	?AllowInfoResource YesNo;/* 'Y'  */
+@Column("ALLOW_INFO_SCHEDULE") 	?AllowInfoSchedule YesNo;/* 'Y'  */
 	?UserDiscount Percent;
 };
 

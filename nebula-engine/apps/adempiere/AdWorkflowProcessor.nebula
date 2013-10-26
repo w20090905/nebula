@@ -1,16 +1,18 @@
+@Legacy("adempiere")
 @Remarks("Workflow Processor Server")
 @Refby("2")
+@Table("AD_WORKFLOWPROCESSOR")
 type AdWorkflowProcessor {
-	!AdWorkflowProcessorId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("AD_WORKFLOWPROCESSOR_ID") 	!AdWorkflowProcessorId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
 	FrequencyType Attr;
 	Frequency;
 	?DateLastRun Date;
 	?DateNextRun Date;
-	Supervisor AdUser;
+@Column("SUPERVISOR_ID") 	Supervisor AdUser;
 	KeepLogDays Count;
 	?Processing YesNo;
 	?InactivityAlertDays Count;/* 0 */

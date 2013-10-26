@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("Document Sequence")
 @Refby("6")
+@Table("AD_SEQUENCE")
 type AdSequence {
-	!AdSequenceId ID;
-	AdClient;
-	AdOrg;
+@Column("AD_SEQUENCE_ID") 	!AdSequenceId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	?VFormat String;

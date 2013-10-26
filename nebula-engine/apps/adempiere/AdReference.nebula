@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("System Reference (Pick List)")
 @Refby("15")
+@Table("AD_REFERENCE")
 type AdReference {
-	!AdReferenceId ID;
-	AdClient;
-	AdOrg;
+@Column("AD_REFERENCE_ID") 	!AdReferenceId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	?Help;

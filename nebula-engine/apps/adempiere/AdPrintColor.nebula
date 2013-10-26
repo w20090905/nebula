@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("Color used for printing and display")
 @Refby("17")
+@Table("AD_PRINTCOLOR")
 type AdPrintColor {
-	!AdPrintColorId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("AD_PRINTCOLOR_ID") 	!AdPrintColorId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	IsDefault YesNo;/* 'N'  */
 	Code;

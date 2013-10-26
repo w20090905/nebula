@@ -1,16 +1,18 @@
+@Legacy("adempiere")
 @Remarks("Unique identifier of a Price List")
 @Refby("16")
+@Table("M_PRICELIST")
 type MPriceList {
-	!MPriceListId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("M_PRICELIST_ID") 	!MPriceListId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
-	?BasePriceList MPriceList;
+@Column("BASEPRICELIST_ID") 	?BasePriceList MPriceList;
 	IsTaxIncluded YesNo;/* 'N'  */
 	IsSoPriceList YesNo;/* 'Y'  */
 	IsDefault YesNo;/* 'N'  */
-	CCurrency;
+@Column("C_CURRENCY_ID") 	CCurrency;
 	EnforcePriceLimit YesNo;/* 'N'  */
 	PricePrecision Precision;/* 2  */
 };

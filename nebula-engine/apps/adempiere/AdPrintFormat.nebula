@@ -1,26 +1,28 @@
+@Legacy("adempiere")
 @Remarks("Data Print Format")
 @Refby("16")
+@Table("AD_PRINTFORMAT")
 type AdPrintFormat {
-	!AdPrintFormatId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("AD_PRINTFORMAT_ID") 	!AdPrintFormatId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
 	IsTableBased YesNo;/* 'Y'  */
 	IsForm YesNo;/* 'N'  */
-	AdTable;
-	AdPrintPaper;
-	AdPrintColor;
-	AdPrintFont;
+@Column("AD_TABLE_ID") 	AdTable;
+@Column("AD_PRINTPAPER_ID") 	AdPrintPaper;
+@Column("AD_PRINTCOLOR_ID") 	AdPrintColor;
+@Column("AD_PRINTFONT_ID") 	AdPrintFont;
 	IsStandardHeaderFooter YesNo;/* 'Y'  */
 	HeaderMargin Length;
 	FooterMargin Length;
 	?CreateCopy String;
-	?AdReportView;
-	?AdPrintTableFormat;
+@Column("AD_REPORTVIEW_ID") 	?AdReportView;
+@Column("AD_PRINTTABLEFORMAT_ID") 	?AdPrintTableFormat;
 	?PrinterName Name;
 	IsDefault YesNo;/* 'N'  */
-	?JasperProcess AdProcess;
+@Column("JASPERPROCESS_ID") 	?JasperProcess AdProcess;
 	?ClassName Name;
 	?Args String;
 };

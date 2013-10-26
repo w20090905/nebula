@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("Process or Report")
 @Refby("19")
+@Table("AD_PROCESS")
 type AdProcess {
-	!AdProcessId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("AD_PROCESS_ID") 	!AdProcessId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;
@@ -13,13 +15,13 @@ type AdProcess {
 	?ProcedureName Name;
 	IsReport YesNo;/* 'Y'  */
 	?IsDirectPrint YesNo;/* 'N'                           */
-	?AdReportView;
+@Column("AD_REPORTVIEW_ID") 	?AdReportView;
 	?ClassName Name;
-	?StatisticCount Count;
-	?StatisticSeconds Count;
-	?AdPrintFormat;
+@Column("STATISTIC_COUNT") 	?StatisticCount Count;
+@Column("STATISTIC_SECONDS") 	?StatisticSeconds Count;
+@Column("AD_PRINTFORMAT_ID") 	?AdPrintFormat;
 	?WorkflowValue String;
-	?AdWorkflow;
+@Column("AD_WORKFLOW_ID") 	?AdWorkflow;
 	IsBetaFunctionality YesNo;/* 'N'  */
 	IsServerProcess YesNo;/* 'N'  */
 	?ShowHelp YesNo;/* 'Y' */

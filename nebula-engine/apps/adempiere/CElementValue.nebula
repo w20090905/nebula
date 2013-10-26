@@ -1,16 +1,18 @@
+@Legacy("adempiere")
 @Remarks("Account Element")
 @Refby("52")
+@Table("C_ELEMENTVALUE")
 type CElementValue {
-	!CElementValueId ID;
-	AdClient;
-	AdOrg;
+@Column("C_ELEMENTVALUE_ID") 	!CElementValueId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	Value String;
 	*Name;
 	?Description;
 	AccountType Attr;
 	AccountSign String;
 	?IsDocControlled YesNo;/* 'N'                           */
-	CElement;
+@Column("C_ELEMENT_ID") 	CElement;
 	IsSummary YesNo;/* 'N'  */
 	?ValidFrom Date;
 	?ValidTo Date;
@@ -19,8 +21,8 @@ type CElementValue {
 	PostEncumbrance YesNo;/* 'Y'  */
 	PostStatistical YesNo;/* 'Y'  */
 	?IsBankAccount YesNo;/* 'N'                           */
-	?CBankAccount;
+@Column("C_BANKACCOUNT_ID") 	?CBankAccount;
 	?IsForeignCurrency YesNo;/* 'N'                           */
-	?CCurrency;
+@Column("C_CURRENCY_ID") 	?CCurrency;
 };
 

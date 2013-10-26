@@ -1,11 +1,13 @@
+@Legacy("adempiere")
 @Remarks("Bank Account of the Business Partner")
 @Refby("2")
+@Table("C_BP_BANKACCOUNT")
 tx CBpBankAccount {
-	!CBpBankAccountId ID;
-	AdClientId ID;
-	AdOrgId ID;
-	CBpartner;
-	?CBank;
+@Column("C_BP_BANKACCOUNT_ID") 	!CBpBankAccountId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("C_BPARTNER_ID") 	CBpartner;
+@Column("C_BANK_ID") 	?CBank;
 	IsAch YesNo;/* 'N'  */
 	?BankAccountType Attr;
 	?RoutingNo String;
@@ -15,18 +17,18 @@ tx CBpBankAccount {
 	?CreditCardVv String;
 	?CreditCardExpMm Number;
 	?CreditCardExpYY Length;
-	?AName Name;
-	?AStreet String;
-	?ACity String;
-	?AState String;
-	?AZip String;
-	?AIdentDl String;
-	?AEmail Email;
-	?AIdentSsn String;
-	?RAvsAddr Message;
-	?RAvsZip String;
-	?ACountry String;
-	?AdUser;
+@Column("A_NAME") 	?AName Name;
+@Column("A_STREET") 	?AStreet String;
+@Column("A_CITY") 	?ACity String;
+@Column("A_STATE") 	?AState String;
+@Column("A_ZIP") 	?AZip String;
+@Column("A_IDENT_DL") 	?AIdentDl String;
+@Column("A_EMAIL") 	?AEmail Email;
+@Column("A_IDENT_SSN") 	?AIdentSsn String;
+@Column("R_AVSADDR") 	?RAvsAddr Message;
+@Column("R_AVSZIP") 	?RAvsZip String;
+@Column("A_COUNTRY") 	?ACountry String;
+@Column("AD_USER_ID") 	?AdUser;
 	?BpBankAcctUse String;/* NULL   */
 };
 

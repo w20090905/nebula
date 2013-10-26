@@ -1,13 +1,15 @@
+@Legacy("adempiere")
 @Remarks("Marketing Campaign")
 @Refby("26")
+@Table("C_CAMPAIGN")
 type CCampaign {
-	!CCampaignId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("C_CAMPAIGN_ID") 	!CCampaignId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;
-	?CChannel;
+@Column("C_CHANNEL_ID") 	?CChannel;
 	?StartDate Date;
 	?EndDate Date;
 	Costs Count;/* 0  */

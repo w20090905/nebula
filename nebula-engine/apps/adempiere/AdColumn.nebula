@@ -1,19 +1,21 @@
+@Legacy("adempiere")
 @Remarks("Column in the table")
 @Refby("21")
+@Table("AD_COLUMN")
 type AdColumn {
-	!AdColumnId ID;
-	AdClient;
-	AdOrg;
+@Column("AD_COLUMN_ID") 	!AdColumnId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	?Help;
 	Version Number;
 	EntityType AdEntityType;/* 'D'  */
 	ColumnName Name;
-	AdTable;
-	AdReference;
-	?AdReferenceValue AdReference;
-	?AdValRule;
+@Column("AD_TABLE_ID") 	AdTable;
+@Column("AD_REFERENCE_ID") 	AdReference;
+@Column("AD_REFERENCE_VALUE_ID") 	?AdReferenceValue AdReference;
+@Column("AD_VAL_RULE_ID") 	?AdValRule;
 	?FieldLength Length;
 	?DefaultValue String;
 	IsKey YesNo;/* 'N'  */
@@ -30,8 +32,8 @@ type AdColumn {
 	?ValueMin String;
 	?ValueMax String;
 	IsSelectionColumn YesNo;/* 'N'  */
-	?AdElement;
-	?AdProcess;
+@Column("AD_ELEMENT_ID") 	?AdElement;
+@Column("AD_PROCESS_ID") 	?AdProcess;
 	?IsSyncDatabase YesNo;/* 'N'                               */
 	IsAlwaysUpdateable YesNo;/* 'N'  */
 	?ColumnSql String;

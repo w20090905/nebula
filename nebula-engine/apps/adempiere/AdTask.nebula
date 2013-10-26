@@ -1,14 +1,16 @@
+@Legacy("adempiere")
 @Remarks("Operation System Task")
 @Refby("8")
+@Table("AD_TASK")
 type AdTask {
-	!AdTaskId ID;
-	AdClient;
-	AdOrg;
+@Column("AD_TASK_ID") 	!AdTaskId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	?Help;
 	AccessLevel Attr;
-	OsCommand String;
+@Column("OS_COMMAND") 	OsCommand String;
 	EntityType AdEntityType;/* 'D'  */
 	IsServerProcess YesNo;/* 'N'  */
 };

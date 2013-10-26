@@ -1,21 +1,23 @@
+@Legacy("adempiere")
 @Remarks("Point of Sales Terminal")
 @Refby("1")
+@Table("C_POS")
 type CPos {
-	!CPosId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("C_POS_ID") 	!CPosId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
-	SalesRep AdUser;
-	MPriceList;
-	CCashBook;
-	MWarehouse;
+@Column("SALESREP_ID") 	SalesRep AdUser;
+@Column("M_PRICELIST_ID") 	MPriceList;
+@Column("C_CASHBOOK_ID") 	CCashBook;
+@Column("M_WAREHOUSE_ID") 	MWarehouse;
 	?PrinterName Name;
-	?CPosKeyLayout;
+@Column("C_POSKEYLAYOUT_ID") 	?CPosKeyLayout;
 	IsModifyPrice YesNo;/* 'N'  */
-	?CBpartnerCashTrx CBpartner;
-	?CDocType;
+@Column("C_BPARTNERCASHTRX_ID") 	?CBpartnerCashTrx CBpartner;
+@Column("C_DOCTYPE_ID") 	?CDocType;
 	?CashDrawer String;
 };
 

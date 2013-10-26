@@ -1,24 +1,26 @@
+@Legacy("adempiere")
 @Remarks("Workflow Node (activity), step or process")
 @Refby("8")
+@Table("AD_WF_NODE")
 type AdWfNode {
-	!AdWfNodeId ID;
-	AdClient;
-	AdOrg;
+@Column("AD_WF_NODE_ID") 	!AdWfNodeId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	?Help;
-	AdWorkflow;
+@Column("AD_WORKFLOW_ID") 	AdWorkflow;
 	IsCentrallyMaintained YesNo;/* 'Y'  */
 	Action Attr;
-	?AdWindow;
-	?Workflow AdWorkflow;
-	?AdTask;
-	?AdProcess;
-	?AdForm;
+@Column("AD_WINDOW_ID") 	?AdWindow;
+@Column("WORKFLOW_ID") 	?Workflow AdWorkflow;
+@Column("AD_TASK_ID") 	?AdTask;
+@Column("AD_PROCESS_ID") 	?AdProcess;
+@Column("AD_FORM_ID") 	?AdForm;
 	EntityType AdEntityType;/* 'D'  */
 	XPosition Position;/* 0 */
 	YPosition Position;/* 0 */
-	?AdWfBlock;
+@Column("AD_WF_BLOCK_ID") 	?AdWfBlock;
 	?SubFlowExecution String;
 	?StartMode Attr;
 	?FinishMode Attr;
@@ -28,12 +30,12 @@ type AdWfNode {
 	Cost Amount;/* 0 */
 	?WorkingTime Count;
 	WaitingTime Count;/* 0 */
-	?AdWfResponsible;
-	?AdImage;
+@Column("AD_WF_RESPONSIBLE_ID") 	?AdWfResponsible;
+@Column("AD_IMAGE_ID") 	?AdImage;
 	JoinElement String;/* NULL */
 	SplitElement String;/* NULL */
 	?WaitTime Count;
-	?AdColumn;
+@Column("AD_COLUMN_ID") 	?AdColumn;
 	?AttributeName Name;
 	?AttributeValue String;
 	?DocAction Attr;
@@ -42,6 +44,6 @@ type AdWfNode {
 	?DynPriorityChange Number;
 	?EmailRecipient Email;
 	?Email;
-	?RMailText;
+@Column("R_MAILTEXT_ID") 	?RMailText;
 };
 

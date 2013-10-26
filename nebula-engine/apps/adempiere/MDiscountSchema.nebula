@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("Schema to calculate the trade discount percentage")
 @Refby("7")
+@Table("M_DISCOUNTSCHEMA")
 type MDiscountSchema {
-	!MDiscountSchemaId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("M_DISCOUNTSCHEMA_ID") 	!MDiscountSchemaId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
 	ValidFrom Date;

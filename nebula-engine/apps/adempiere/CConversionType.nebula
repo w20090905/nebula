@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("Currency Conversion Rate Type")
 @Refby("11")
+@Table("C_CONVERSIONTYPE")
 type CConversionType {
-	!CConversionTypeId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("C_CONVERSIONTYPE_ID") 	!CConversionTypeId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;

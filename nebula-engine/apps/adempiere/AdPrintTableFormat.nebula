@@ -1,17 +1,19 @@
+@Legacy("adempiere")
 @Remarks("Table Format in Reports")
 @Refby("1")
+@Table("AD_PRINTTABLEFORMAT")
 type AdPrintTableFormat {
-	!AdPrintTableFormatId ID;
-	AdClientId ID;
-	AdOrgId ID;
-	?HdrPrintFont AdPrintFont;
-	?HdrTextFgPrintColor AdPrintColor;
-	?HdrTextBgPrintColor AdPrintColor;
-	?HdrLinePrintColor AdPrintColor;
-	?FuncTPrintFont AdPrintFont;
-	?FuncTbgPrintColor AdPrintColor;
-	?FuncTfgPrintColor AdPrintColor;
-	?LinePrintColor AdPrintColor;
+@Column("AD_PRINTTABLEFORMAT_ID") 	!AdPrintTableFormatId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("HDR_PRINTFONT_ID") 	?HdrPrintFont AdPrintFont;
+@Column("HDRTEXTFG_PRINTCOLOR_ID") 	?HdrTextFgPrintColor AdPrintColor;
+@Column("HDRTEXTBG_PRINTCOLOR_ID") 	?HdrTextBgPrintColor AdPrintColor;
+@Column("HDRLINE_PRINTCOLOR_ID") 	?HdrLinePrintColor AdPrintColor;
+@Column("FUNCT_PRINTFONT_ID") 	?FuncTPrintFont AdPrintFont;
+@Column("FUNCTBG_PRINTCOLOR_ID") 	?FuncTbgPrintColor AdPrintColor;
+@Column("FUNCTFG_PRINTCOLOR_ID") 	?FuncTfgPrintColor AdPrintColor;
+@Column("LINE_PRINTCOLOR_ID") 	?LinePrintColor AdPrintColor;
 	?Description;
 	IsPaintBoundaryLines YesNo;/* 'N'  */
 	IsPaintHLines YesNo;/* 'N'  */

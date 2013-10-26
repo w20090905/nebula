@@ -1,14 +1,16 @@
+@Legacy("adempiere")
 @Remarks("Resource Type")
 @Refby("1")
+@Table("S_RESOURCETYPE")
 type SResourceType {
-	!SResourceTypeId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("S_RESOURCETYPE_ID") 	!SResourceTypeId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;
 	IsSingleAsSignment YesNo;/* 'N'  */
-	CUom;
+@Column("C_UOM_ID") 	CUom;
 	AllowUomFractions YesNo;/* 'N'  */
 	?TimesLotStart Date;
 	?TimesLotEnd Date;
@@ -21,8 +23,8 @@ type SResourceType {
 	OnThursday YesNo;/* 'Y'  */
 	OnFriday YesNo;/* 'Y'  */
 	OnSaturday YesNo;/* 'N'  */
-	MProductCategory;
-	CTaxCategory;
+@Column("M_PRODUCT_CATEGORY_ID") 	MProductCategory;
+@Column("C_TAXCATEGORY_ID") 	CTaxCategory;
 	?ChargeableQty Quantity;/* 0 */
 };
 

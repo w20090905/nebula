@@ -1,9 +1,11 @@
+@Legacy("adempiere")
 @Remarks("System Image or Icon")
 @Refby("6")
+@Table("AD_IMAGE")
 type AdImage {
-	!AdImageId ID;
-	AdClientId ID;
-	AdOrgId ID;
+@Column("AD_IMAGE_ID") 	!AdImageId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?ImageUrl Url;
 	?BinaryData Text;

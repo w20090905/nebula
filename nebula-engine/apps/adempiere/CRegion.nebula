@@ -1,12 +1,14 @@
+@Legacy("adempiere")
 @Remarks("Identifies a geographical Region")
 @Refby("9")
+@Table("C_REGION")
 type CRegion {
-	!CRegionId ID;
-	AdClient;
-	AdOrg;
+@Column("C_REGION_ID") 	!CRegionId ID;
+@Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
-	CCountry;
+@Column("C_COUNTRY_ID") 	CCountry;
 	?IsDefault YesNo;/* 'N'                      */
 };
 
