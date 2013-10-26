@@ -140,7 +140,7 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 			for (Field field : type.fields) {
 				if (field.isForeignKey) {
 					if (typesByRawName.containsKey(field.foreignKeyTable)) {
-						field.resultTypeName = typesByRawName.get(field.foreignKeyTable).name;
+						field.resultTypeName = typesByRawName.get(field.foreignKeyTable).resultName;
 					}
 				} else if (!field.isKey && "ID".equals(field.resultTypeName)) {
 					String typename = field.name;
@@ -149,15 +149,15 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 						field.resultName = field.resultName.substring(0, field.resultName.length() - 2);
 					}
 					if (typesByRawName.containsKey(typename)) {
-						field.resultTypeName = typesByRawName.get(typename).name;
+						field.resultTypeName = typesByRawName.get(typename).resultName;
 						field.isForeignKey = true;
 						field.foreignKeyTable = typename;
 					} else if (typesByRawName.containsKey(typename + "s")) {
-						field.resultTypeName = typesByRawName.get(typename + "s").name;
+						field.resultTypeName = typesByRawName.get(typename + "s").resultName;
 						field.isForeignKey = true;
 						field.foreignKeyTable = typename + "s";
 					} else {
-						System.out.println("Fail check foreign key : " + type.name + " - " + field.name);
+						System.out.println("Fail check foreign key : " + type.resultName + " - " + field.name);
 					}
 				}
 			}
@@ -196,13 +196,13 @@ public class ImportRedmineDataDefine extends DefaultImporter {
 			if (type.standalone == TypeStandalone.Abstract) {
 				type.standalone = TypeStandalone.Master;
 				type.comment = "TODO Type not sure ！！ ";
-				System.out.println("## Type not sure  " + type.name);
+				System.out.println("## Type not sure  " + type.resultName);
 			}
 		}
 		System.out.println("\n\n\n=================================================\n\n\n");
 		for (Type type : types) {
 			for (Field field : type.fields) {
-				System.out.println(type.rawName + "\t" + type.name + "\t" + type.standalone.name() + "\t"
+				System.out.println(type.name + "\t" + type.resultName + "\t" + type.standalone.name() + "\t"
 						+ type.comment + "\t" + field);
 			}
 		}

@@ -61,9 +61,12 @@ public abstract class DbConfiguration {
 			dbEngine = new DerbyConfiguration(driverClass, url, userName, password);
 		} else if ("ORACLE".equals(dbms)) {
 			dbEngine = new OracleConfiguration(driverClass, url, userName, password);
+		} else if ("POSTGRESQL".equals(dbms)) {
+			dbEngine = new OracleConfiguration(driverClass, url, userName, password);
 		} else {
 			throw new UnsupportedOperationException();
 		}
+		
 		dbEngine.init();
 		return dbEngine;
 	}

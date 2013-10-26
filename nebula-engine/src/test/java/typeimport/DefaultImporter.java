@@ -217,7 +217,7 @@ public class DefaultImporter {
 			// match table name
 			if (!matched) continue;
 			if (rule.tableName != null) {
-				if (!field.resideType.rawName.equalsIgnoreCase(rule.tableName)) {
+				if (!field.resideType.name.equalsIgnoreCase(rule.tableName)) {
 					continue;
 				} else {
 					System.out.println("match table");
@@ -322,7 +322,7 @@ public class DefaultImporter {
 				for (Field field : type.fields) {
 					if (field.isForeignKey) {
 						if (typesByRawName.containsKey(field.foreignKeyTable)) {
-							field.resultTypeName = typesByRawName.get(field.foreignKeyTable).name;
+							field.resultTypeName = typesByRawName.get(field.foreignKeyTable).resultName;
 							if (field.name.toUpperCase().endsWith(key)) {
 								if (field.name.substring(0, field.name.length() - key.length()).equalsIgnoreCase(field.foreignKeyTable)) {
 									field.resultName = field.resultTypeName;
@@ -347,7 +347,7 @@ public class DefaultImporter {
 							field.isForeignKey = false;
 							field.foreignKeyTable = typename + "s";
 						} else {
-							System.out.println("Fail check foreign key : " + type.name + " - " + field.name);
+							System.out.println("Fail check foreign key : " + type.resultName + " - " + field.name);
 						}
 					}
 				}
@@ -363,11 +363,11 @@ public class DefaultImporter {
 							typename = typename.substring(0, typename.length() - 3);
 						}
 						if (typesByRawName.containsKey(typename)) {
-							field.resultTypeName = typesByRawName.get(typename).name;
+							field.resultTypeName = typesByRawName.get(typename).resultName;
 							field.isForeignKey = true;
 							field.foreignKeyTable = typename;
 						} else if (typesByRawName.containsKey(typename + "s")) {
-							field.resultTypeName = typesByRawName.get(typename + "s").name;
+							field.resultTypeName = typesByRawName.get(typename + "s").resultName;
 							field.isForeignKey = true;
 							field.foreignKeyTable = typename + "s";
 						} else {
@@ -418,16 +418,19 @@ public class DefaultImporter {
 	protected void outputToFile(File outputFolder, Type type) throws IOException {
 		OutputStreamWriter out = null;
 		StringBuilder sb = new StringBuilder(5000);
-		out = new OutputStreamWriter(new FileOutputStream(new File(outputFolder, type.name + ".nebula")));
+		out = new OutputStreamWriter(new FileOutputStream(new File(outputFolder, type.resultName + ".nebula")));
 
 		sb.setLength(0);
-		sb.append("@Legacy(\"" + escape(type.remarks) + "\")\n");
+		sb.append("@Legacy(\"" + escape(this.legacyName) + "\")\n");
 		sb.append("@Remarks(\"" + escape(type.remarks) + "\")\n");
 		sb.append("@Refby(\"" + type.cntReference + "\")\n");
+		if (!type.name.equalsIgnoreCase(type.resultName)) {
+			sb.append("@Table(\"" + type.name + "\")\n");
+		}
 		if (type.standalone == TypeStandalone.Transaction) {
-			sb.append("tx " + type.name + " {\n");
+			sb.append("tx " + type.resultName + " {\n");
 		} else {
-			sb.append("type " + type.name + " {\n");
+			sb.append("type " + type.resultName + " {\n");
 		}
 
 		for (Field field : type.fields) {
@@ -436,6 +439,9 @@ public class DefaultImporter {
 			}
 			if (field.remarks.length() > 0) {
 				// sb.append("\t@Remarks(\"" + escape(field.remarks) + "\")\n");
+			}
+			if (!field.name.equalsIgnoreCase(field.resultName)) {
+				sb.append("@Column(\"" + field.name + "\") ");
 			}
 			sb.append("\t");
 			if (field.nullable) {
@@ -492,12 +498,12 @@ public class DefaultImporter {
 	Map<String, Type> outputed = Maps.newHashMap();
 
 	protected void outputRelationType(final File outputFolder, Type rootType) throws IOException {
-		if (outputed.containsKey(rootType.name)) {
+		if (outputed.containsKey(rootType.resultName)) {
 			return;
 		}
-		outputed.put(rootType.name, rootType);
+		outputed.put(rootType.resultName, rootType);
 
-		System.out.println("#### Output " + rootType.name);
+		System.out.println("#### Output " + rootType.resultName);
 
 		outputToFile(outputFolder, rootType);
 
@@ -553,11 +559,11 @@ public class DefaultImporter {
 	Map<String, Type> readedTypes = Maps.newHashMap();
 
 	public void readByReations(Type rootType) throws IOException {
-		if (readedTypes.containsKey(rootType.rawName)) {
+		if (readedTypes.containsKey(rootType.name)) {
 			return;
 		}
-		readedTypes.put(rootType.rawName, rootType);
-		System.out.println("$$$$ Read   :  " + rootType.name);
+		readedTypes.put(rootType.name, rootType);
+		System.out.println("$$$$ Read   :  " + rootType.resultName);
 
 		readTable(rootType.element);
 
@@ -639,7 +645,7 @@ public class DefaultImporter {
 					field.foreignKeyTable = parent.getAttribute("table");
 
 					Type parentType = this.typesByRawName.get(parent.getAttribute("table"));
-					parentType.referby.put(type.name, type);
+					parentType.referby.put(type.resultName, type);
 				} else if ("child".equals(node.getNodeName())) {
 					type.cntReference++;
 					// type.referby.add(type);
@@ -653,8 +659,8 @@ public class DefaultImporter {
 	}
 
 	class Type {
-		String rawName;
 		String name;
+		String resultName;
 		String remarks;
 		long cntReference;
 		String comment = "";
@@ -664,8 +670,8 @@ public class DefaultImporter {
 
 		public Type(Element element, String rawName, String name, String remarks) {
 			this.element = element;
-			this.rawName = rawName;
-			this.name = name;
+			this.name = rawName;
+			this.resultName = name;
 			this.remarks = remarks;
 		}
 
@@ -840,7 +846,7 @@ public class DefaultImporter {
 					fieldTypes.add(field.resultTypeName);
 				} else {
 					fieldTypes.add("NULL");
-					System.out.println(type.name + "\t" + field.name + "\t" + field.resultName + "\t" + field.typename + "\t" + field.size + "\t"
+					System.out.println(type.resultName + "\t" + field.name + "\t" + field.resultName + "\t" + field.typename + "\t" + field.size + "\t"
 							+ field.defaultValue + "\t" + field.remarks);
 				}
 			}

@@ -240,7 +240,7 @@ public class ImportHHTDataDefine extends DefaultImporter {
 			for (Field field : type.fields) {
 				if (field.isForeignKey) {
 					if (typesByRawName.containsKey(field.foreignKeyTable)) {
-						field.resultTypeName = typesByRawName.get(field.foreignKeyTable).name;
+						field.resultTypeName = typesByRawName.get(field.foreignKeyTable).resultName;
 					}
 				} else if (!field.isKey && "ID".equals(field.resultTypeName)) {
 					String typename = field.name;
@@ -248,11 +248,11 @@ public class ImportHHTDataDefine extends DefaultImporter {
 						typename = typename.substring(0, typename.length() - 3);
 					}
 					if (typesByRawName.containsKey(typename)) {
-						field.resultTypeName = typesByRawName.get(typename).name;
+						field.resultTypeName = typesByRawName.get(typename).resultName;
 						field.isForeignKey = true;
 						field.foreignKeyTable = typename;
 					} else if (typesByRawName.containsKey(typename + "s")) {
-						field.resultTypeName = typesByRawName.get(typename + "s").name;
+						field.resultTypeName = typesByRawName.get(typename + "s").resultName;
 						field.isForeignKey = true;
 						field.foreignKeyTable = typename + "s";
 					} else {

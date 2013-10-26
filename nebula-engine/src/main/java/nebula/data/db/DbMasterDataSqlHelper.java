@@ -12,6 +12,7 @@ import util.NamesEncoding;
 
 public class DbMasterDataSqlHelper {
 
+	public static final String Table_Name = "Table";
 	public static final String Column_Name = "Column";
 	public static final String Column_Unique = "Unique";
 	public static final String Column_Nullable = "Nullable";
@@ -95,7 +96,12 @@ public class DbMasterDataSqlHelper {
 
 			this.clz = type;
 
-			tableName = decodeTypeName(type.getName());
+			if(type.getAttrs().containsKey(Table_Name)){
+				String schema =(String) type.getAttrs().get(Type.LEGACY);
+				tableName =schema + "." + (String)type.getAttrs().get(Table_Name);
+			}else{
+				tableName = decodeTypeName(type.getName());
+			}
 
 			List<DefaultFieldSerializer<?>> fieldSerializer = new ArrayList<DefaultFieldSerializer<?>>();
 

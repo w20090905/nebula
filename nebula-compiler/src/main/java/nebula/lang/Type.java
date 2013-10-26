@@ -10,6 +10,8 @@ import util.InheritHashMap;
 import com.google.common.collect.Lists;
 
 public class Type implements Timable {
+	public static final String LEGACY = "Legacy";
+	public static final String ForeignKey = "ForeignKey";
 	public static final String ATTACH_TO = "AttachTo";
 	public static final String ATTACH = "Attach";
 	public static final String GROUP_BY = "GroupBy";
