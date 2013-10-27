@@ -10,7 +10,7 @@ type CSalesRegion {
 	*Name;
 	?Description;
 	IsSummary YesNo;/* 'N'  */
-@Column("SALESREP_ID") 	?SalesRep AdUser;
+@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	?SalesRep AdUser;
 	IsDefault YesNo;/* 'N'  */
 };
 

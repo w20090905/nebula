@@ -9,9 +9,9 @@ type CPhase {
 	*Name;
 	?Description;
 	?Help;
-@Column("C_PROJECTTYPE_ID") 	CProjectType;
+@ForeignKeyColumn("C_PROJECTTYPE_ID") @Column("C_PROJECTTYPE_ID") 	CProjectType;
 	StandardQty Quantity;/* 0  	  */
 @Column("C_PHASE_ID") 	!CPhaseId ID;
-@Column("M_PRODUCT_ID") 	?MProduct;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
 };
 

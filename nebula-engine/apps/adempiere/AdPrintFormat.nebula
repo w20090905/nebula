@@ -10,19 +10,19 @@ type AdPrintFormat {
 	?Description;
 	IsTableBased YesNo;/* 'Y'  */
 	IsForm YesNo;/* 'N'  */
-@Column("AD_TABLE_ID") 	AdTable;
-@Column("AD_PRINTPAPER_ID") 	AdPrintPaper;
-@Column("AD_PRINTCOLOR_ID") 	AdPrintColor;
-@Column("AD_PRINTFONT_ID") 	AdPrintFont;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
+@ForeignKeyColumn("AD_PRINTPAPER_ID") @Column("AD_PRINTPAPER_ID") 	AdPrintPaper;
+@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("AD_PRINTCOLOR_ID") 	AdPrintColor;
+@ForeignKeyColumn("AD_PRINTFONT_ID") @Column("AD_PRINTFONT_ID") 	AdPrintFont;
 	IsStandardHeaderFooter YesNo;/* 'Y'  */
 	HeaderMargin Length;
 	FooterMargin Length;
 	?CreateCopy String;
-@Column("AD_REPORTVIEW_ID") 	?AdReportView;
-@Column("AD_PRINTTABLEFORMAT_ID") 	?AdPrintTableFormat;
+@ForeignKeyColumn("AD_REPORTVIEW_ID") @Column("AD_REPORTVIEW_ID") 	?AdReportView;
+@ForeignKeyColumn("AD_PRINTTABLEFORMAT_ID") @Column("AD_PRINTTABLEFORMAT_ID") 	?AdPrintTableFormat;
 	?PrinterName Name;
 	IsDefault YesNo;/* 'N'  */
-@Column("JASPERPROCESS_ID") 	?JasperProcess AdProcess;
+@ForeignKeyColumn("AD_PROCESS_ID") @Column("JASPERPROCESS_ID") 	?JasperProcess AdProcess;
 	?ClassName Name;
 	?Args String;
 };

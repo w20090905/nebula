@@ -8,10 +8,10 @@ type MLot {
 @Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
-@Column("M_PRODUCT_ID") 	MProduct;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
 	?Help;
 	?DateFrom Date;
 	?DateTo Date;
-@Column("M_LOTCTL_ID") 	?MLotCtl;
+@ForeignKeyColumn("M_LOTCTL_ID") @Column("M_LOTCTL_ID") 	?MLotCtl;
 };
 

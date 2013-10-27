@@ -13,7 +13,7 @@ type AdClient {
 	?RequestUser String;
 	?RequestUserPw String;
 	?RequestFolder String;
-@Column("AD_LANGUAGE") 	?AdLanguage;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	?AdLanguage;
 	IsMultiLingualDocument YesNo;/* 'N' */
 	IsSmtpAuthorization YesNo;/* 'N'  */
 	IsUseBetaFunctions YesNo;/* 'N'  */

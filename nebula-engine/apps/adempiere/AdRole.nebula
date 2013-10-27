@@ -4,28 +4,28 @@
 @Table("AD_ROLE")
 type AdRole {
 @Column("AD_ROLE_ID") 	!AdRoleId ID;
-@Column("AD_CLIENT_ID") 	AdClient;
-@Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	UserLevel Attr;/* '  O'  */
-@Column("C_CURRENCY_ID") 	?CCurrency;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
 	?AmtApproval Amount;/* 0 */
-@Column("AD_TREE_MENU_ID") 	?AdTreeMenu AdTree;
+@ForeignKeyColumn("AD_TREE_ID") @Column("AD_TREE_MENU_ID") 	?AdTreeMenu AdTree;
 	IsManual YesNo;/* 'N' */
 	IsShowAcct YesNo;/* 'Y' */
 	IsPersonalLock YesNo;/* 'N'  */
 	IsPersonalAccess YesNo;/* 'N'  */
 	IsCanExport YesNo;/* 'Y'  */
 	IsCanReport YesNo;/* 'Y'  */
-@Column("SUPERVISOR_ID") 	?Supervisor AdUser;
+@ForeignKeyColumn("AD_USER_ID") @Column("SUPERVISOR_ID") 	?Supervisor AdUser;
 	IsCanApproveOwnDoc YesNo;/* 'Y'  */
 	IsAccessAllOrgs YesNo;/* 'N'  */
 	IsChangeLog YesNo;/* 'N'  */
 	PreferenceType Attr;/* 'C'  */
 	OverwritePriceLimit YesNo;/* 'N'  */
 	IsUseUserOrgAccess YesNo;/* 'N'  */
-@Column("AD_TREE_ORG_ID") 	?AdTreeOrg AdTree;
+@ForeignKeyColumn("AD_TREE_ID") @Column("AD_TREE_ORG_ID") 	?AdTreeOrg AdTree;
 	ConfirmQueryRecords Count;/* 0  */
 	MaxQueryRecords Count;/* 0  */
 	?ConnectionProfile Attr;

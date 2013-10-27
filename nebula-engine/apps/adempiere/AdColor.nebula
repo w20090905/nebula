@@ -13,7 +13,7 @@ type AdColor {
 	Green Number;
 	Blue Number;
 	Alpha Number;
-@Column("AD_IMAGE_ID") 	?AdImage;
+@ForeignKeyColumn("AD_IMAGE_ID") @Column("AD_IMAGE_ID") 	?AdImage;
 	ImageAlpha Number;
 @Column("RED_1") 	?Red1 Number;
 @Column("GREEN_1") 	?Green1 Number;

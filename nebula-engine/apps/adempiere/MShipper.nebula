@@ -8,7 +8,7 @@ type MShipper {
 @Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
-@Column("C_BPARTNER_ID") 	?CBpartner;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
 	?TrackingUrl Url;
 };
 

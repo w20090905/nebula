@@ -4,14 +4,14 @@
 @Table("M_WAREHOUSE")
 type MWarehouse {
 @Column("M_WAREHOUSE_ID") 	!MWarehouseId ID;
-@Column("AD_CLIENT_ID") 	AdClient;
-@Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
 	Value String;
 	*Name;
 	?Description;
-@Column("C_LOCATION_ID") 	CLocation;
+@ForeignKeyColumn("C_LOCATION_ID") @Column("C_LOCATION_ID") 	CLocation;
 	Separator String;
-@Column("M_WAREHOUSESOURCE_ID") 	?MWarehouseSource MWarehouse;
+@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSESOURCE_ID") 	?MWarehouseSource MWarehouse;
 	?ReplenishmentClass String;
 };
 

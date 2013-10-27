@@ -11,7 +11,7 @@ type AdForm {
 	?Help;
 	AccessLevel Attr;
 	?ClassName Name;
-	EntityType AdEntityType;/* 'D'  */
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
 	IsBetaFunctionality YesNo;/* 'N'  */
 	?JspUrl Url;
 };

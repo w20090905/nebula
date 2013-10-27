@@ -9,7 +9,7 @@ type CJob {
 	*Name;
 	?Description;
 	?Help;
-@Column("C_JOBCATEGORY_ID") 	CJobCategory;
+@ForeignKeyColumn("C_JOBCATEGORY_ID") @Column("C_JOBCATEGORY_ID") 	CJobCategory;
 	IsEmployee YesNo;/* 'N'  */
 };
 

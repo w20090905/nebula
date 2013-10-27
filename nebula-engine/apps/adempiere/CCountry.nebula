@@ -3,9 +3,9 @@
 @Refby("12")
 @Table("C_COUNTRY")
 type CCountry {
-@Column("C_COUNTRY_ID") 	!CCountry;
-@Column("AD_CLIENT_ID") 	AdClient;
-@Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("C_COUNTRY_ID") @Column("C_COUNTRY_ID") 	!CCountry;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	CountryCode Code;
@@ -16,8 +16,8 @@ type CCountry {
 	?ExpRessionPostal String;
 @Column("HASPOSTAL_ADD") 	HasPostalAdd YesNo;/* 'N'  */
 @Column("EXPRESSIONPOSTAL_ADD") 	?ExpRessionPostalAdd String;
-@Column("AD_LANGUAGE") 	?AdLanguage;
-@Column("C_CURRENCY_ID") 	?CCurrency;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	?AdLanguage;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
 	?DisplaySequenceLocal String;
 	IsAddressLinesReverse YesNo;/* 'N'  */
 	IsAddressLinesLocalReverse YesNo;/* 'N'  */

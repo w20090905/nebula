@@ -11,17 +11,17 @@ type AdProcess {
 	?Description;
 	?Help;
 	AccessLevel Attr;
-	EntityType AdEntityType;/* 'D'  */
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
 	?ProcedureName Name;
 	IsReport YesNo;/* 'Y'  */
 	?IsDirectPrint YesNo;/* 'N'                           */
-@Column("AD_REPORTVIEW_ID") 	?AdReportView;
+@ForeignKeyColumn("AD_REPORTVIEW_ID") @Column("AD_REPORTVIEW_ID") 	?AdReportView;
 	?ClassName Name;
 @Column("STATISTIC_COUNT") 	?StatisticCount Count;
 @Column("STATISTIC_SECONDS") 	?StatisticSeconds Count;
-@Column("AD_PRINTFORMAT_ID") 	?AdPrintFormat;
+@ForeignKeyColumn("AD_PRINTFORMAT_ID") @Column("AD_PRINTFORMAT_ID") 	?AdPrintFormat;
 	?WorkflowValue String;
-@Column("AD_WORKFLOW_ID") 	?AdWorkflow;
+@ForeignKeyColumn("AD_WORKFLOW_ID") @Column("AD_WORKFLOW_ID") 	?AdWorkflow;
 	IsBetaFunctionality YesNo;/* 'N'  */
 	IsServerProcess YesNo;/* 'N'  */
 	?ShowHelp YesNo;/* 'Y' */

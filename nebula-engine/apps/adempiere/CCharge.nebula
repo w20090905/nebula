@@ -11,8 +11,8 @@ type CCharge {
 	ChargeAmt Amount;/* 0  */
 	IsSameTax YesNo;/* 'N'  */
 	IsSameCurrency YesNo;/* 'N'  */
-@Column("C_TAXCATEGORY_ID") 	?CTaxCategory;
+@ForeignKeyColumn("C_TAXCATEGORY_ID") @Column("C_TAXCATEGORY_ID") 	?CTaxCategory;
 	IsTaxIncluded YesNo;/* 'N' */
-@Column("C_BPARTNER_ID") 	?CBpartner;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
 };
 

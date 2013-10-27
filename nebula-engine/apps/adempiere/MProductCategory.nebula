@@ -11,10 +11,10 @@ type MProductCategory {
 	?Description;
 	IsDefault YesNo;/* 'N'  */
 	PlannedMargin Length;
-@Column("A_ASSET_GROUP_ID") 	?AAssetGroup;
+@ForeignKeyColumn("A_ASSET_GROUP_ID") @Column("A_ASSET_GROUP_ID") 	?AAssetGroup;
 	IsSelfService YesNo;/* 'Y'  */
-@Column("AD_PRINTCOLOR_ID") 	?AdPrintColor;
+@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("AD_PRINTCOLOR_ID") 	?AdPrintColor;
 	MmPolicy Attr;/* 'F'  */
-@Column("M_PRODUCT_CATEGORY_PARENT_ID") 	?MProductCategoryParent MProductCategory;
+@ForeignKeyColumn("M_PRODUCT_CATEGORY_ID") @Column("M_PRODUCT_CATEGORY_PARENT_ID") 	?MProductCategoryParent MProductCategory;
 };
 

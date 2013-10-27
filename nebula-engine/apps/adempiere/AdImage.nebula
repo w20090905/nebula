@@ -9,7 +9,7 @@ type AdImage {
 	*Name;
 	?ImageUrl Url;
 	?BinaryData Text;
-	EntityType AdEntityType;/* 'D'  */
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
 	?Description;
 };
 

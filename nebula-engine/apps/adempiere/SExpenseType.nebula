@@ -10,8 +10,8 @@ type SExpenseType {
 	*Name;
 	?Description;
 	IsInvoiced YesNo;/* 'Y'  */
-@Column("C_UOM_ID") 	CUom;
-@Column("M_PRODUCT_CATEGORY_ID") 	MProductCategory;
-@Column("C_TAXCATEGORY_ID") 	CTaxCategory;
+@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_ID") 	CUom;
+@ForeignKeyColumn("M_PRODUCT_CATEGORY_ID") @Column("M_PRODUCT_CATEGORY_ID") 	MProductCategory;
+@ForeignKeyColumn("C_TAXCATEGORY_ID") @Column("C_TAXCATEGORY_ID") 	CTaxCategory;
 };
 

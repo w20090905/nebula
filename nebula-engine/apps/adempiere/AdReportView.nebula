@@ -8,9 +8,9 @@ type AdReportView {
 @Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
-@Column("AD_TABLE_ID") 	AdTable;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
 	?WhereClause String;
 	?OrderByClause String;
-	EntityType AdEntityType;/* 'D'  */
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
 };
 

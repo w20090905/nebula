@@ -8,10 +8,10 @@ type MPriceListVersion {
 @Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
-@Column("M_PRICELIST_ID") 	MPriceList;
-@Column("M_DISCOUNTSCHEMA_ID") 	MDiscountSchema;
+@ForeignKeyColumn("M_PRICELIST_ID") @Column("M_PRICELIST_ID") 	MPriceList;
+@ForeignKeyColumn("M_DISCOUNTSCHEMA_ID") @Column("M_DISCOUNTSCHEMA_ID") 	MDiscountSchema;
 	ValidFrom Date;
 	?ProcCreate String;
-@Column("M_PRICELIST_VERSION_BASE_ID") 	?MPriceListVersionBase MPriceListVersion;
+@ForeignKeyColumn("M_PRICELIST_VERSION_ID") @Column("M_PRICELIST_VERSION_BASE_ID") 	?MPriceListVersionBase MPriceListVersion;
 };
 

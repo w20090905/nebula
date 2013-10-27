@@ -9,15 +9,15 @@ type CPos {
 	*Name;
 	?Description;
 	?Help;
-@Column("SALESREP_ID") 	SalesRep AdUser;
-@Column("M_PRICELIST_ID") 	MPriceList;
-@Column("C_CASHBOOK_ID") 	CCashBook;
-@Column("M_WAREHOUSE_ID") 	MWarehouse;
+@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	SalesRep AdUser;
+@ForeignKeyColumn("M_PRICELIST_ID") @Column("M_PRICELIST_ID") 	MPriceList;
+@ForeignKeyColumn("C_CASHBOOK_ID") @Column("C_CASHBOOK_ID") 	CCashBook;
+@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	MWarehouse;
 	?PrinterName Name;
-@Column("C_POSKEYLAYOUT_ID") 	?CPosKeyLayout;
+@ForeignKeyColumn("C_POSKEYLAYOUT_ID") @Column("C_POSKEYLAYOUT_ID") 	?CPosKeyLayout;
 	IsModifyPrice YesNo;/* 'N'  */
-@Column("C_BPARTNERCASHTRX_ID") 	?CBpartnerCashTrx CBpartner;
-@Column("C_DOCTYPE_ID") 	?CDocType;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNERCASHTRX_ID") 	?CBpartnerCashTrx CBpartner;
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	?CDocType;
 	?CashDrawer String;
 };
 

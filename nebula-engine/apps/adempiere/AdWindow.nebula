@@ -4,17 +4,17 @@
 @Table("AD_WINDOW")
 type AdWindow {
 @Column("AD_WINDOW_ID") 	!AdWindowId ID;
-@Column("AD_CLIENT_ID") 	AdClient;
-@Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	?Help;
 	?WindowType Attr;
 	IsSoTrx YesNo;/* 'Y'  */
-	EntityType AdEntityType;/* 'D'  */
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
 	?Processing YesNo;
-@Column("AD_IMAGE_ID") 	?AdImage;
-@Column("AD_COLOR_ID") 	?AdColor;
+@ForeignKeyColumn("AD_IMAGE_ID") @Column("AD_IMAGE_ID") 	?AdImage;
+@ForeignKeyColumn("AD_COLOR_ID") @Column("AD_COLOR_ID") 	?AdColor;
 	IsDefault YesNo;/* 'N' */
 	?WinHeight Height;
 	?WinWidth Width;

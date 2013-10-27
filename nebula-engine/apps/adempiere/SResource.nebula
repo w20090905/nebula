@@ -9,10 +9,10 @@ type SResource {
 	Value String;
 	*Name;
 	?Description;
-@Column("S_RESOURCETYPE_ID") 	SResourceType;
-@Column("M_WAREHOUSE_ID") 	MWarehouse;
+@ForeignKeyColumn("S_RESOURCETYPE_ID") @Column("S_RESOURCETYPE_ID") 	SResourceType;
+@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	MWarehouse;
 	IsAvailable YesNo;/* 'Y'  */
-@Column("AD_USER_ID") 	?AdUser;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
 	?ChargeableQty Quantity;/* 0 */
 };
 

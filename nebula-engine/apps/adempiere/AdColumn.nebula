@@ -4,18 +4,18 @@
 @Table("AD_COLUMN")
 type AdColumn {
 @Column("AD_COLUMN_ID") 	!AdColumnId ID;
-@Column("AD_CLIENT_ID") 	AdClient;
-@Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	?Help;
 	Version Number;
-	EntityType AdEntityType;/* 'D'  */
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
 	ColumnName Name;
-@Column("AD_TABLE_ID") 	AdTable;
-@Column("AD_REFERENCE_ID") 	AdReference;
-@Column("AD_REFERENCE_VALUE_ID") 	?AdReferenceValue AdReference;
-@Column("AD_VAL_RULE_ID") 	?AdValRule;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
+@ForeignKeyColumn("AD_REFERENCE_ID") @Column("AD_REFERENCE_ID") 	AdReference;
+@ForeignKeyColumn("AD_REFERENCE_ID") @Column("AD_REFERENCE_VALUE_ID") 	?AdReferenceValue AdReference;
+@ForeignKeyColumn("AD_VAL_RULE_ID") @Column("AD_VAL_RULE_ID") 	?AdValRule;
 	?FieldLength Length;
 	?DefaultValue String;
 	IsKey YesNo;/* 'N'  */
@@ -32,8 +32,8 @@ type AdColumn {
 	?ValueMin String;
 	?ValueMax String;
 	IsSelectionColumn YesNo;/* 'N'  */
-@Column("AD_ELEMENT_ID") 	?AdElement;
-@Column("AD_PROCESS_ID") 	?AdProcess;
+@ForeignKeyColumn("AD_ELEMENT_ID") @Column("AD_ELEMENT_ID") 	?AdElement;
+@ForeignKeyColumn("AD_PROCESS_ID") @Column("AD_PROCESS_ID") 	?AdProcess;
 	?IsSyncDatabase YesNo;/* 'N'                               */
 	IsAlwaysUpdateable YesNo;/* 'N'  */
 	?ColumnSql String;

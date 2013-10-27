@@ -5,8 +5,8 @@
 type CCash {
 @Column("C_CASH_ID") 	!CCashId ID;
 @Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrg;
-@Column("C_CASHBOOK_ID") 	CCashBook;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("C_CASHBOOK_ID") @Column("C_CASHBOOK_ID") 	CCashBook;
 	*Name;
 	?Description;
 	StatementDate Date;
@@ -17,12 +17,12 @@ type CCash {
 	?Processing YesNo;
 	Processed YesNo;/* 'N'  */
 	Posted YesNo;/* 'N'  */
-@Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
-@Column("C_PROJECT_ID") 	?CProject;
-@Column("C_CAMPAIGN_ID") 	?CCampaign;
-@Column("C_ACTIVITY_ID") 	?CActivity;
-@Column("USER1_ID") 	?User1 CElementValue;
-@Column("USER2_ID") 	?User2 CElementValue;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
+@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
+@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER1_ID") 	?User1 CElementValue;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER2_ID") 	?User2 CElementValue;
 	IsApproved YesNo;/* 'N'  */
 	DocStatus Attr;
 	DocAction Attr;

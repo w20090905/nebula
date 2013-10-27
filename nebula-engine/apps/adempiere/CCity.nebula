@@ -4,14 +4,14 @@
 @Table("C_CITY")
 type CCity {
 @Column("C_CITY_ID") 	!CCityId ID;
-@Column("AD_CLIENT_ID") 	AdClient;
-@Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?LoCode Code;
 	?Coordinates String;
 	?Postal String;
 	?AreaCode Code;
-@Column("C_COUNTRY_ID") 	?CCountry;
-@Column("C_REGION_ID") 	?CRegion;
+@ForeignKeyColumn("C_COUNTRY_ID") @Column("C_COUNTRY_ID") 	?CCountry;
+@ForeignKeyColumn("C_REGION_ID") @Column("C_REGION_ID") 	?CRegion;
 };
 

@@ -440,6 +440,9 @@ public class DefaultImporter {
 			if (field.remarks.length() > 0) {
 				// sb.append("\t@Remarks(\"" + escape(field.remarks) + "\")\n");
 			}
+			if (field.isForeignKey) {
+				sb.append("@ForeignKeyColumn(\"" + field.foreignKeyColumn + "\") ");
+			}
 			if (!field.name.equalsIgnoreCase(field.resultName)) {
 				sb.append("@Column(\"" + field.name + "\") ");
 			}
@@ -643,6 +646,7 @@ public class DefaultImporter {
 					field.resultTypeName = refineName(parent.getAttribute("table"));
 					field.isForeignKey = true;
 					field.foreignKeyTable = parent.getAttribute("table");
+					field.foreignKeyColumn = parent.getAttribute("column");
 
 					Type parentType = this.typesByRawName.get(parent.getAttribute("table"));
 					parentType.referby.put(type.resultName, type);
@@ -715,6 +719,7 @@ public class DefaultImporter {
 		boolean isKey = false;
 		boolean isForeignKey = false;
 		String foreignKeyTable;
+		String foreignKeyColumn;
 
 		public Field(Type resideType, String rawName, String name) {
 			this(resideType, rawName, name, name, null, false);

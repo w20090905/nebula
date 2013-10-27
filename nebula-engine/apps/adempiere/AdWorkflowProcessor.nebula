@@ -12,7 +12,7 @@ type AdWorkflowProcessor {
 	Frequency;
 	?DateLastRun Date;
 	?DateNextRun Date;
-@Column("SUPERVISOR_ID") 	Supervisor AdUser;
+@ForeignKeyColumn("AD_USER_ID") @Column("SUPERVISOR_ID") 	Supervisor AdUser;
 	KeepLogDays Count;
 	?Processing YesNo;
 	?InactivityAlertDays Count;/* 0 */

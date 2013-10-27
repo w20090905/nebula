@@ -8,11 +8,11 @@ type MPriceList {
 @Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
-@Column("BASEPRICELIST_ID") 	?BasePriceList MPriceList;
+@ForeignKeyColumn("M_PRICELIST_ID") @Column("BASEPRICELIST_ID") 	?BasePriceList MPriceList;
 	IsTaxIncluded YesNo;/* 'N'  */
 	IsSoPriceList YesNo;/* 'Y'  */
 	IsDefault YesNo;/* 'N'  */
-@Column("C_CURRENCY_ID") 	CCurrency;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
 	EnforcePriceLimit YesNo;/* 'N'  */
 	PricePrecision Precision;/* 2  */
 };

@@ -6,14 +6,14 @@ type AdPrintTableFormat {
 @Column("AD_PRINTTABLEFORMAT_ID") 	!AdPrintTableFormatId ID;
 @Column("AD_CLIENT_ID") 	AdClientId ID;
 @Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("HDR_PRINTFONT_ID") 	?HdrPrintFont AdPrintFont;
-@Column("HDRTEXTFG_PRINTCOLOR_ID") 	?HdrTextFgPrintColor AdPrintColor;
-@Column("HDRTEXTBG_PRINTCOLOR_ID") 	?HdrTextBgPrintColor AdPrintColor;
-@Column("HDRLINE_PRINTCOLOR_ID") 	?HdrLinePrintColor AdPrintColor;
-@Column("FUNCT_PRINTFONT_ID") 	?FuncTPrintFont AdPrintFont;
-@Column("FUNCTBG_PRINTCOLOR_ID") 	?FuncTbgPrintColor AdPrintColor;
-@Column("FUNCTFG_PRINTCOLOR_ID") 	?FuncTfgPrintColor AdPrintColor;
-@Column("LINE_PRINTCOLOR_ID") 	?LinePrintColor AdPrintColor;
+@ForeignKeyColumn("AD_PRINTFONT_ID") @Column("HDR_PRINTFONT_ID") 	?HdrPrintFont AdPrintFont;
+@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("HDRTEXTFG_PRINTCOLOR_ID") 	?HdrTextFgPrintColor AdPrintColor;
+@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("HDRTEXTBG_PRINTCOLOR_ID") 	?HdrTextBgPrintColor AdPrintColor;
+@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("HDRLINE_PRINTCOLOR_ID") 	?HdrLinePrintColor AdPrintColor;
+@ForeignKeyColumn("AD_PRINTFONT_ID") @Column("FUNCT_PRINTFONT_ID") 	?FuncTPrintFont AdPrintFont;
+@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("FUNCTBG_PRINTCOLOR_ID") 	?FuncTbgPrintColor AdPrintColor;
+@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("FUNCTFG_PRINTCOLOR_ID") 	?FuncTfgPrintColor AdPrintColor;
+@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("LINE_PRINTCOLOR_ID") 	?LinePrintColor AdPrintColor;
 	?Description;
 	IsPaintBoundaryLines YesNo;/* 'N'  */
 	IsPaintHLines YesNo;/* 'N'  */

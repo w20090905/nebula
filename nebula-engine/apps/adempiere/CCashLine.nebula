@@ -6,14 +6,14 @@ tx CCashLine {
 @Column("C_CASHLINE_ID") 	!CCashLineId ID;
 @Column("AD_CLIENT_ID") 	AdClientId ID;
 @Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("C_CASH_ID") 	CCash;
+@ForeignKeyColumn("C_CASH_ID") @Column("C_CASH_ID") 	CCash;
 	Line Number;
 	?Description;
 	CashType Attr;
-@Column("C_BANKACCOUNT_ID") 	?CBankAccount;
-@Column("C_CHARGE_ID") 	?CCharge;
-@Column("C_INVOICE_ID") 	?CInvoice;
-@Column("C_CURRENCY_ID") 	?CCurrency;
+@ForeignKeyColumn("C_BANKACCOUNT_ID") @Column("C_BANKACCOUNT_ID") 	?CBankAccount;
+@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	?CCharge;
+@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
 	Amount;/* 0  */
 	?DiscountAmt Amount;/* 0 */
 	?WriteOffAmt Amount;/* 0 */

@@ -5,7 +5,7 @@
 tx CInvoice {
 @Column("C_INVOICE_ID") 	!CInvoiceId ID;
 @Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
 	IsSoTrx YesNo;/* 'Y'  */
 	DocumentNo String;
 	DocStatus Attr;
@@ -13,53 +13,53 @@ tx CInvoice {
 	?Processing YesNo;
 	Processed YesNo;/* 'N'  */
 	Posted YesNo;/* 'N'  */
-@Column("C_DOCTYPE_ID") 	CDocType;
-@Column("C_DOCTYPETARGET_ID") 	CDocTypeTarget CDocType;
-@Column("C_ORDER_ID") 	?COrder;
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	CDocType;
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPETARGET_ID") 	CDocTypeTarget CDocType;
+@ForeignKeyColumn("C_ORDER_ID") @Column("C_ORDER_ID") 	?COrder;
 	?Description;
 	IsApproved YesNo;/* 'Y'  */
 	IsTransferred YesNo;/* 'N'  */
 	IsPrinted YesNo;/* 'N'  */
-@Column("SALESREP_ID") 	?SalesRep AdUser;
+@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	?SalesRep AdUser;
 	DateInvoiced Date;
 	?DatePrinted Date;
 	DateAcct Date;
-@Column("C_BPARTNER_ID") 	CBpartner;
-@Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocation;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
+@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocation;
 	?PoReference String;
 	IsDiscountPrinted YesNo;/* 'Y'  */
 	?DateOrdered Date;
-@Column("C_CURRENCY_ID") 	CCurrency;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
 	PaymentRule String;
-@Column("C_PAYMENTTERM_ID") 	CPaymentTerm;
-@Column("C_CHARGE_ID") 	?CCharge;
+@ForeignKeyColumn("C_PAYMENTTERM_ID") @Column("C_PAYMENTTERM_ID") 	CPaymentTerm;
+@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	?CCharge;
 	?ChargeAmt Amount;/* 0 */
 	TotalLines Count;/* 0  */
 	GrandTotal Number;/* 0  */
-@Column("M_PRICELIST_ID") 	MPriceList;
+@ForeignKeyColumn("M_PRICELIST_ID") @Column("M_PRICELIST_ID") 	MPriceList;
 	IsTaxIncluded YesNo;/* 'N'  */
-@Column("C_CAMPAIGN_ID") 	?CCampaign;
-@Column("C_PROJECT_ID") 	?CProject;
-@Column("C_ACTIVITY_ID") 	?CActivity;
+@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
+@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
 	IsPaid YesNo;/* 'N'  */
-@Column("C_PAYMENT_ID") 	?CPayment;
-@Column("C_CASHLINE_ID") 	?CCashLine;
+@ForeignKeyColumn("C_PAYMENT_ID") @Column("C_PAYMENT_ID") 	?CPayment;
+@ForeignKeyColumn("C_CASHLINE_ID") @Column("C_CASHLINE_ID") 	?CCashLine;
 	?CreateFrom Attr;
 	?GenerateTo Attr;
 	SendEmail YesNo;/* 'N'  */
-@Column("AD_USER_ID") 	?AdUser;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
 	?CopyFrom Attr;
 	IsSelfService YesNo;/* 'N'  */
-@Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
-@Column("USER1_ID") 	?User1 CElementValue;
-@Column("USER2_ID") 	?User2 CElementValue;
-@Column("C_CONVERSIONTYPE_ID") 	?CConversionType;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER1_ID") 	?User1 CElementValue;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER2_ID") 	?User2 CElementValue;
+@ForeignKeyColumn("C_CONVERSIONTYPE_ID") @Column("C_CONVERSIONTYPE_ID") 	?CConversionType;
 	IsPayScheduleValid YesNo;/* 'N'  */
-@Column("REF_INVOICE_ID") 	?RefInvoice CInvoice;
+@ForeignKeyColumn("C_INVOICE_ID") @Column("REF_INVOICE_ID") 	?RefInvoice CInvoice;
 	IsInDispute YesNo;/* 'N'  */
 	?InvoiceCollectionType Attr;/* NULL   */
-@Column("M_RMA_ID") 	?MRma;/* NULL */
+@ForeignKeyColumn("M_RMA_ID") @Column("M_RMA_ID") 	?MRma;/* NULL */
 	?DunningGrace Date;
-@Column("C_DUNNINGLEVEL_ID") 	?CDunningLevel;
+@ForeignKeyColumn("C_DUNNINGLEVEL_ID") @Column("C_DUNNINGLEVEL_ID") 	?CDunningLevel;
 };
 

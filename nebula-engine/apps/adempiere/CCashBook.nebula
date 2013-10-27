@@ -9,6 +9,6 @@ type CCashBook {
 	*Name;
 	?Description;
 	IsDefault YesNo;/* 'N'  */
-@Column("C_CURRENCY_ID") 	CCurrency;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
 };
 

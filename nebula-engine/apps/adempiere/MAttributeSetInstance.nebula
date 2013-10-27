@@ -6,11 +6,11 @@ tx MAttributeSetInstance {
 @Column("M_ATTRIBUTESETINSTANCE_ID") 	!MAttributeSetInstanceId ID;
 @Column("AD_CLIENT_ID") 	AdClientId ID;
 @Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("M_ATTRIBUTESET_ID") 	?MAttributeSet;
+@ForeignKeyColumn("M_ATTRIBUTESET_ID") @Column("M_ATTRIBUTESET_ID") 	?MAttributeSet;
 	?SerNo String;
 	?Lot Code;
 	?GuaranteeDate Date;
 	?Description;
-@Column("M_LOT_ID") 	?MLot;
+@ForeignKeyColumn("M_LOT_ID") @Column("M_LOT_ID") 	?MLot;
 };
 

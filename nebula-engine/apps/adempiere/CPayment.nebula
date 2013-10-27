@@ -5,17 +5,17 @@
 tx CPayment {
 @Column("C_PAYMENT_ID") 	!CPaymentId ID;
 @Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
 	DocumentNo String;
 	DateTrx Date;
 	IsReceipt YesNo;/* 'Y'  */
-@Column("C_DOCTYPE_ID") 	CDocType;
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	CDocType;
 	TrxType Attr;
-@Column("C_BANKACCOUNT_ID") 	CBankAccount;
-@Column("C_BPARTNER_ID") 	?CBpartner;
-@Column("C_INVOICE_ID") 	?CInvoice;
-@Column("C_BP_BANKACCOUNT_ID") 	?CBpBankAccount;
-@Column("C_PAYMENTBATCH_ID") 	?CPaymentBatch;
+@ForeignKeyColumn("C_BANKACCOUNT_ID") @Column("C_BANKACCOUNT_ID") 	CBankAccount;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
+@ForeignKeyColumn("C_BP_BANKACCOUNT_ID") @Column("C_BP_BANKACCOUNT_ID") 	?CBpBankAccount;
+@ForeignKeyColumn("C_PAYMENTBATCH_ID") @Column("C_PAYMENTBATCH_ID") 	?CPaymentBatch;
 	TenderType Attr;
 	?CreditCardType Attr;
 	?CreditCardNumber String;
@@ -37,7 +37,7 @@ tx CPayment {
 	?VoiceAuthCode Code;
 @Column("ORIG_TRXID") 	?OrigTrxId String;
 	?PoNum String;
-@Column("C_CURRENCY_ID") 	CCurrency;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
 	PayAmt Amount;/* 0  */
 	?DiscountAmt Amount;/* 0 */
 	?WriteOffAmt Amount;/* 0 */
@@ -62,25 +62,25 @@ tx CPayment {
 	IsOverUnderPayment YesNo;/* 'N'  */
 	?OverUnderAmt Amount;/* 0 */
 @Column("A_COUNTRY") 	?ACountry String;
-@Column("C_PROJECT_ID") 	?CProject;
+@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
 	IsSelfService YesNo;/* 'N' */
 	?ChargeAmt Amount;/* 0 */
-@Column("C_CHARGE_ID") 	?CCharge;
+@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	?CCharge;
 	IsDelayedCapture YesNo;/* 'N'  */
 @Column("R_AUTHCODE_DC") 	?RAuthCodeDc String;
 @Column("R_CVV2MATCH") 	?RCvv2Match String;
 @Column("R_PNREF_DC") 	?RPnrefDc String;
 	?Swipe;
-@Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
-@Column("C_CAMPAIGN_ID") 	?CCampaign;
-@Column("C_ACTIVITY_ID") 	?CActivity;
-@Column("USER1_ID") 	?User1 CElementValue;
-@Column("USER2_ID") 	?User2 CElementValue;
-@Column("C_CONVERSIONTYPE_ID") 	?CConversionType;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
+@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
+@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER1_ID") 	?User1 CElementValue;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER2_ID") 	?User2 CElementValue;
+@ForeignKeyColumn("C_CONVERSIONTYPE_ID") @Column("C_CONVERSIONTYPE_ID") 	?CConversionType;
 	?Description;
 	DateAcct Date;
-@Column("C_ORDER_ID") 	?COrder;
+@ForeignKeyColumn("C_ORDER_ID") @Column("C_ORDER_ID") 	?COrder;
 	IsPrepayment YesNo;/* 'N'  */
-@Column("REF_PAYMENT_ID") 	?RefPayment CPayment;
+@ForeignKeyColumn("C_PAYMENT_ID") @Column("REF_PAYMENT_ID") 	?RefPayment CPayment;
 };
 

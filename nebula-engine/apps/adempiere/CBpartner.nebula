@@ -4,14 +4,14 @@
 @Table("C_BPARTNER")
 type CBpartner {
 @Column("C_BPARTNER_ID") 	!CBpartnerId ID;
-@Column("AD_CLIENT_ID") 	AdClient;
-@Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
 	Value String;
 	*Name;
 	?Name2 Name;
 	?Description;
 	IsSummary YesNo;/* 'N' */
-@Column("C_BP_GROUP_ID") 	CBpGroup;
+@ForeignKeyColumn("C_BP_GROUP_ID") @Column("C_BP_GROUP_ID") 	CBpGroup;
 	IsOneTime YesNo;/* 'N'  */
 	IsProspect YesNo;/* 'Y'  */
 	IsVendor YesNo;/* 'N'  */
@@ -21,10 +21,10 @@ type CBpartner {
 	?ReferenceNo String;
 	?Duns;
 	?Url;
-@Column("AD_LANGUAGE") 	?AdLanguage;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	?AdLanguage;
 	?TaxId String;
 	?IsTaxExempt YesNo;/* 'N'                                */
-@Column("C_INVOICESCHEDULE_ID") 	?CInvoiceSchedule;
+@ForeignKeyColumn("C_INVOICESCHEDULE_ID") @Column("C_INVOICESCHEDULE_ID") 	?CInvoiceSchedule;
 	?Rating String;
 	?SalesVolume Number;
 	?NumberEmployees Number;
@@ -37,30 +37,30 @@ type CBpartner {
 	?PaymentRule String;
 @Column("SO_CREDITLIMIT") 	?SoCreditLimit Number;/* 0 */
 @Column("SO_CREDITUSED") 	?SoCreditUsed Number;/* 0 */
-@Column("C_PAYMENTTERM_ID") 	?CPaymentTerm;
-@Column("M_PRICELIST_ID") 	?MPriceList;
-@Column("M_DISCOUNTSCHEMA_ID") 	?MDiscountSchema;
-@Column("C_DUNNING_ID") 	?CDunning;
+@ForeignKeyColumn("C_PAYMENTTERM_ID") @Column("C_PAYMENTTERM_ID") 	?CPaymentTerm;
+@ForeignKeyColumn("M_PRICELIST_ID") @Column("M_PRICELIST_ID") 	?MPriceList;
+@ForeignKeyColumn("M_DISCOUNTSCHEMA_ID") @Column("M_DISCOUNTSCHEMA_ID") 	?MDiscountSchema;
+@ForeignKeyColumn("C_DUNNING_ID") @Column("C_DUNNING_ID") 	?CDunning;
 	?IsDiscountPrinted YesNo;/* 'Y'                                */
 @Column("SO_DESCRIPTION") 	?SoDescription Description;
 	?PoReference String;
 	?PaymentRulePo String;
-@Column("PO_PRICELIST_ID") 	?PoPriceList MPriceList;
-@Column("PO_DISCOUNTSCHEMA_ID") 	?PoDiscountSchema MDiscountSchema;
-@Column("PO_PAYMENTTERM_ID") 	?PoPaymentTerm CPaymentTerm;
+@ForeignKeyColumn("M_PRICELIST_ID") @Column("PO_PRICELIST_ID") 	?PoPriceList MPriceList;
+@ForeignKeyColumn("M_DISCOUNTSCHEMA_ID") @Column("PO_DISCOUNTSCHEMA_ID") 	?PoDiscountSchema MDiscountSchema;
+@ForeignKeyColumn("C_PAYMENTTERM_ID") @Column("PO_PAYMENTTERM_ID") 	?PoPaymentTerm CPaymentTerm;
 	?DocumentCopies Count;
-@Column("C_GREETING_ID") 	?CGreeting;
+@ForeignKeyColumn("C_GREETING_ID") @Column("C_GREETING_ID") 	?CGreeting;
 	?InvoiceRule String;
 	?DeliveryRule String;
 	?FreightCostRule String;
 	?DeliveryViaRule String;
-@Column("SALESREP_ID") 	?SalesRep AdUser;
+@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	?SalesRep AdUser;
 	SendEmail YesNo;/* 'N'  */
-@Column("BPARTNER_PARENT_ID") 	?BpartnerParent CBpartner;
-@Column("INVOICE_PRINTFORMAT_ID") 	?InvoicePrintFormat AdPrintFormat;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("BPARTNER_PARENT_ID") 	?BpartnerParent CBpartner;
+@ForeignKeyColumn("AD_PRINTFORMAT_ID") @Column("INVOICE_PRINTFORMAT_ID") 	?InvoicePrintFormat AdPrintFormat;
 	?SoCreditStatus Attr;/* 'O' */
 	?ShelfLifeMinPct Number;
-@Column("AD_ORGBP_ID") 	?AdOrgBp AdOrg;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGBP_ID") 	?AdOrgBp AdOrg;
 	?FlatDiscount Percent;
 	?TotalOpenBalance Number;
 	?DunningGrace Date;

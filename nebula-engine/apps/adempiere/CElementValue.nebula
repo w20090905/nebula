@@ -4,15 +4,15 @@
 @Table("C_ELEMENTVALUE")
 type CElementValue {
 @Column("C_ELEMENTVALUE_ID") 	!CElementValueId ID;
-@Column("AD_CLIENT_ID") 	AdClient;
-@Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
 	Value String;
 	*Name;
 	?Description;
 	AccountType Attr;
 	AccountSign String;
 	?IsDocControlled YesNo;/* 'N'                           */
-@Column("C_ELEMENT_ID") 	CElement;
+@ForeignKeyColumn("C_ELEMENT_ID") @Column("C_ELEMENT_ID") 	CElement;
 	IsSummary YesNo;/* 'N'  */
 	?ValidFrom Date;
 	?ValidTo Date;
@@ -21,8 +21,8 @@ type CElementValue {
 	PostEncumbrance YesNo;/* 'Y'  */
 	PostStatistical YesNo;/* 'Y'  */
 	?IsBankAccount YesNo;/* 'N'                           */
-@Column("C_BANKACCOUNT_ID") 	?CBankAccount;
+@ForeignKeyColumn("C_BANKACCOUNT_ID") @Column("C_BANKACCOUNT_ID") 	?CBankAccount;
 	?IsForeignCurrency YesNo;/* 'N'                           */
-@Column("C_CURRENCY_ID") 	?CCurrency;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
 };
 

@@ -9,20 +9,20 @@ type MRma {
 	DocumentNo String;
 	*Name;
 	?Description;
-@Column("INOUT_ID") 	Inout MInout;
+@ForeignKeyColumn("M_INOUT_ID") @Column("INOUT_ID") 	Inout MInout;
 	?Processing YesNo;
 	Processed YesNo;/* 'N'  	  */
-@Column("C_ORDER_ID") 	?COrder;
-@Column("C_DOCTYPE_ID") 	CDocType;
-@Column("SALESREP_ID") 	SalesRep AdUser;
+@ForeignKeyColumn("C_ORDER_ID") @Column("C_ORDER_ID") 	?COrder;
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	CDocType;
+@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	SalesRep AdUser;
 	DocAction Attr;
 	DocStatus Attr;
 	IsApproved YesNo;/* 'N'  */
 	?Amt Amount;
-@Column("M_RMATYPE_ID") 	?MRmaType;
+@ForeignKeyColumn("M_RMATYPE_ID") @Column("M_RMATYPE_ID") 	?MRmaType;
 	?Help;
-@Column("C_CURRENCY_ID") 	?CCurrency;
-@Column("C_BPARTNER_ID") 	?CBpartner;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
 	IsSoTrx YesNo;/* 'Y'  */
 	?GenerateTo Attr;/* NULL */
 };

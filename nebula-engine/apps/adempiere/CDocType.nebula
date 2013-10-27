@@ -13,27 +13,27 @@ type CDocType {
 	IsSoTrx YesNo;/* 'Y'  */
 	?DocSubTypeSo String;
 	?HasProforma YesNo;/* 'N'                                */
-@Column("C_DOCTYPEPROFORMA_ID") 	?CDocTypeProforma CDocType;
-@Column("C_DOCTYPESHIPMENT_ID") 	?CDocTypeShipment CDocType;
-@Column("C_DOCTYPEINVOICE_ID") 	?CDocTypeInvoice CDocType;
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPEPROFORMA_ID") 	?CDocTypeProforma CDocType;
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPESHIPMENT_ID") 	?CDocTypeShipment CDocType;
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPEINVOICE_ID") 	?CDocTypeInvoice CDocType;
 	IsDocNoControlled YesNo;/* 'N'  */
-@Column("DOCNOSEQUENCE_ID") 	?DocNoSequence AdSequence;
-@Column("GL_CATEGORY_ID") 	GlCategory;
+@ForeignKeyColumn("AD_SEQUENCE_ID") @Column("DOCNOSEQUENCE_ID") 	?DocNoSequence AdSequence;
+@ForeignKeyColumn("GL_CATEGORY_ID") @Column("GL_CATEGORY_ID") 	GlCategory;
 	HasChargeS YesNo;/* 'N'  */
 	?DocumentNote Note;
 	IsDefault YesNo;/* 'N'  */
 	DocumentCopies Count;
-@Column("AD_PRINTFORMAT_ID") 	?AdPrintFormat;
+@ForeignKeyColumn("AD_PRINTFORMAT_ID") @Column("AD_PRINTFORMAT_ID") 	?AdPrintFormat;
 	IsDefaultCounterDoc YesNo;/* 'N'  */
 	IsShipConfirm YesNo;/* 'N'  */
 	IsPickQaConfirm YesNo;/* 'N'  */
 	IsInTransit YesNo;/* 'N'  */
 	IsSplitWhenDifference YesNo;/* 'N'  */
-@Column("C_DOCTYPEDIFFERENCE_ID") 	?CDocTypeDifference CDocType;
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPEDIFFERENCE_ID") 	?CDocTypeDifference CDocType;
 	IsCreateCounter YesNo;/* 'Y'  */
 	IsIndexed YesNo;/* 'Y'  */
 	?IsOverwriteSeqOnComplete YesNo;/* 'N'  */
-@Column("DEFINITESEQUENCE_ID") 	?DefiniteSequence AdSequence;
+@ForeignKeyColumn("AD_SEQUENCE_ID") @Column("DEFINITESEQUENCE_ID") 	?DefiniteSequence AdSequence;
 	?IsOverwriteDateOnComplete YesNo;/* 'N'  */
 };
 

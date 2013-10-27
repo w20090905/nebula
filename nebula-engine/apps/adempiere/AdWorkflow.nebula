@@ -4,14 +4,14 @@
 @Table("AD_WORKFLOW")
 type AdWorkflow {
 @Column("AD_WORKFLOW_ID") 	!AdWorkflowId ID;
-@Column("AD_CLIENT_ID") 	AdClient;
-@Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	?Help;
 	AccessLevel Attr;
-@Column("AD_WF_NODE_ID") 	?AdWfNode;
-	EntityType AdEntityType;/* 'D'  */
+@ForeignKeyColumn("AD_WF_NODE_ID") @Column("AD_WF_NODE_ID") 	?AdWfNode;
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
 	?DurationUnit Attr;
 	Author String;/* 'ComPiere' */
 	Version Number;/* 0 */
@@ -23,12 +23,12 @@ type AdWorkflow {
 	Cost Amount;/* 0 */
 	WorkingTime Count;/* 0 */
 	WaitingTime Count;/* 0 */
-@Column("AD_WF_RESPONSIBLE_ID") 	?AdWfResponsible;
+@ForeignKeyColumn("AD_WF_RESPONSIBLE_ID") @Column("AD_WF_RESPONSIBLE_ID") 	?AdWfResponsible;
 	PublishStatus Attr;/* NULL */
-@Column("AD_WORKFLOWPROCESSOR_ID") 	?AdWorkflowProcessor;
+@ForeignKeyColumn("AD_WORKFLOWPROCESSOR_ID") @Column("AD_WORKFLOWPROCESSOR_ID") 	?AdWorkflowProcessor;
 	Value String;
 	IsDefault YesNo;/* 'N'  */
-@Column("AD_TABLE_ID") 	?AdTable;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	?AdTable;
 	?ValidateWorkflow String;
 	WorkflowType Attr;/* 'G'  */
 	?DocValueLogic String;

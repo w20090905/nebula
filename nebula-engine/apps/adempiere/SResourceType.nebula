@@ -10,7 +10,7 @@ type SResourceType {
 	*Name;
 	?Description;
 	IsSingleAsSignment YesNo;/* 'N'  */
-@Column("C_UOM_ID") 	CUom;
+@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_ID") 	CUom;
 	AllowUomFractions YesNo;/* 'N'  */
 	?TimesLotStart Date;
 	?TimesLotEnd Date;
@@ -23,8 +23,8 @@ type SResourceType {
 	OnThursday YesNo;/* 'Y'  */
 	OnFriday YesNo;/* 'Y'  */
 	OnSaturday YesNo;/* 'N'  */
-@Column("M_PRODUCT_CATEGORY_ID") 	MProductCategory;
-@Column("C_TAXCATEGORY_ID") 	CTaxCategory;
+@ForeignKeyColumn("M_PRODUCT_CATEGORY_ID") @Column("M_PRODUCT_CATEGORY_ID") 	MProductCategory;
+@ForeignKeyColumn("C_TAXCATEGORY_ID") @Column("C_TAXCATEGORY_ID") 	CTaxCategory;
 	?ChargeableQty Quantity;/* 0 */
 };
 

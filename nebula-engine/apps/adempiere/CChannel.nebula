@@ -8,6 +8,6 @@ type CChannel {
 @Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
-@Column("AD_PRINTCOLOR_ID") 	?AdPrintColor;
+@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("AD_PRINTCOLOR_ID") 	?AdPrintColor;
 };
 

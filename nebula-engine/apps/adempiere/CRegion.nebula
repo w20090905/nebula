@@ -4,11 +4,11 @@
 @Table("C_REGION")
 type CRegion {
 @Column("C_REGION_ID") 	!CRegionId ID;
-@Column("AD_CLIENT_ID") 	AdClient;
-@Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
-@Column("C_COUNTRY_ID") 	CCountry;
+@ForeignKeyColumn("C_COUNTRY_ID") @Column("C_COUNTRY_ID") 	CCountry;
 	?IsDefault YesNo;/* 'N'                      */
 };
 

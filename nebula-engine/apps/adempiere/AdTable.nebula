@@ -4,17 +4,17 @@
 @Table("AD_TABLE")
 type AdTable {
 @Column("AD_TABLE_ID") 	!AdTableId ID;
-@Column("AD_CLIENT_ID") 	AdClient;
-@Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	?Help;
 	TableName Name;
 	IsView YesNo;/* 'N'  */
 	AccessLevel Attr;
-	EntityType AdEntityType;/* 'D'  */
-@Column("AD_WINDOW_ID") 	?AdWindow;
-@Column("AD_VAL_RULE_ID") 	?AdValRule;
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+@ForeignKeyColumn("AD_WINDOW_ID") @Column("AD_WINDOW_ID") 	?AdWindow;
+@ForeignKeyColumn("AD_VAL_RULE_ID") @Column("AD_VAL_RULE_ID") 	?AdValRule;
 	?LoadSeq Number;
 	IsSecurityEnabled YesNo;/* 'N'  */
 	IsDeleteable YesNo;/* 'Y'  */
@@ -22,7 +22,7 @@ type AdTable {
 	?ImportTable String;
 	IsChangeLog YesNo;/* 'N'  */
 	ReplicationType Attr;/* 'L' */
-@Column("PO_WINDOW_ID") 	?PoWindow AdWindow;
+@ForeignKeyColumn("AD_WINDOW_ID") @Column("PO_WINDOW_ID") 	?PoWindow AdWindow;
 	?CopyColumnsFromTable String;
 };
 

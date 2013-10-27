@@ -10,15 +10,15 @@ type CBpGroup {
 	*Name;
 	?Description;
 	IsDefault YesNo;/* 'N'  */
-@Column("AD_PRINTCOLOR_ID") 	?AdPrintColor;
+@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("AD_PRINTCOLOR_ID") 	?AdPrintColor;
 	IsConfidentialInfo YesNo;/* 'N'  */
 	?PriorityBase String;
-@Column("M_PRICELIST_ID") 	?MPriceList;
-@Column("PO_PRICELIST_ID") 	?PoPriceList MPriceList;
-@Column("M_DISCOUNTSCHEMA_ID") 	?MDiscountSchema;
-@Column("PO_DISCOUNTSCHEMA_ID") 	?PoDiscountSchema MDiscountSchema;
+@ForeignKeyColumn("M_PRICELIST_ID") @Column("M_PRICELIST_ID") 	?MPriceList;
+@ForeignKeyColumn("M_PRICELIST_ID") @Column("PO_PRICELIST_ID") 	?PoPriceList MPriceList;
+@ForeignKeyColumn("M_DISCOUNTSCHEMA_ID") @Column("M_DISCOUNTSCHEMA_ID") 	?MDiscountSchema;
+@ForeignKeyColumn("M_DISCOUNTSCHEMA_ID") @Column("PO_DISCOUNTSCHEMA_ID") 	?PoDiscountSchema MDiscountSchema;
 	?CreditWatchPercent Percent;
 	?PriceMatchTolerance Number;
-@Column("C_DUNNING_ID") 	?CDunning;
+@ForeignKeyColumn("C_DUNNING_ID") @Column("C_DUNNING_ID") 	?CDunning;
 };
 

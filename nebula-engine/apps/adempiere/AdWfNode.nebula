@@ -4,23 +4,23 @@
 @Table("AD_WF_NODE")
 type AdWfNode {
 @Column("AD_WF_NODE_ID") 	!AdWfNodeId ID;
-@Column("AD_CLIENT_ID") 	AdClient;
-@Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
 	*Name;
 	?Description;
 	?Help;
-@Column("AD_WORKFLOW_ID") 	AdWorkflow;
+@ForeignKeyColumn("AD_WORKFLOW_ID") @Column("AD_WORKFLOW_ID") 	AdWorkflow;
 	IsCentrallyMaintained YesNo;/* 'Y'  */
 	Action Attr;
-@Column("AD_WINDOW_ID") 	?AdWindow;
-@Column("WORKFLOW_ID") 	?Workflow AdWorkflow;
-@Column("AD_TASK_ID") 	?AdTask;
-@Column("AD_PROCESS_ID") 	?AdProcess;
-@Column("AD_FORM_ID") 	?AdForm;
-	EntityType AdEntityType;/* 'D'  */
+@ForeignKeyColumn("AD_WINDOW_ID") @Column("AD_WINDOW_ID") 	?AdWindow;
+@ForeignKeyColumn("AD_WORKFLOW_ID") @Column("WORKFLOW_ID") 	?Workflow AdWorkflow;
+@ForeignKeyColumn("AD_TASK_ID") @Column("AD_TASK_ID") 	?AdTask;
+@ForeignKeyColumn("AD_PROCESS_ID") @Column("AD_PROCESS_ID") 	?AdProcess;
+@ForeignKeyColumn("AD_FORM_ID") @Column("AD_FORM_ID") 	?AdForm;
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
 	XPosition Position;/* 0 */
 	YPosition Position;/* 0 */
-@Column("AD_WF_BLOCK_ID") 	?AdWfBlock;
+@ForeignKeyColumn("AD_WF_BLOCK_ID") @Column("AD_WF_BLOCK_ID") 	?AdWfBlock;
 	?SubFlowExecution String;
 	?StartMode Attr;
 	?FinishMode Attr;
@@ -30,12 +30,12 @@ type AdWfNode {
 	Cost Amount;/* 0 */
 	?WorkingTime Count;
 	WaitingTime Count;/* 0 */
-@Column("AD_WF_RESPONSIBLE_ID") 	?AdWfResponsible;
-@Column("AD_IMAGE_ID") 	?AdImage;
+@ForeignKeyColumn("AD_WF_RESPONSIBLE_ID") @Column("AD_WF_RESPONSIBLE_ID") 	?AdWfResponsible;
+@ForeignKeyColumn("AD_IMAGE_ID") @Column("AD_IMAGE_ID") 	?AdImage;
 	JoinElement String;/* NULL */
 	SplitElement String;/* NULL */
 	?WaitTime Count;
-@Column("AD_COLUMN_ID") 	?AdColumn;
+@ForeignKeyColumn("AD_COLUMN_ID") @Column("AD_COLUMN_ID") 	?AdColumn;
 	?AttributeName Name;
 	?AttributeValue String;
 	?DocAction Attr;
@@ -44,6 +44,6 @@ type AdWfNode {
 	?DynPriorityChange Number;
 	?EmailRecipient Email;
 	?Email;
-@Column("R_MAILTEXT_ID") 	?RMailText;
+@ForeignKeyColumn("R_MAILTEXT_ID") @Column("R_MAILTEXT_ID") 	?RMailText;
 };
 

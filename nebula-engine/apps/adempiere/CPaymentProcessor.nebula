@@ -8,8 +8,8 @@ type CPaymentProcessor {
 @Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
-@Column("C_BANKACCOUNT_ID") 	CBankAccount;
-@Column("AD_SEQUENCE_ID") 	?AdSequence;
+@ForeignKeyColumn("C_BANKACCOUNT_ID") @Column("C_BANKACCOUNT_ID") 	CBankAccount;
+@ForeignKeyColumn("AD_SEQUENCE_ID") @Column("AD_SEQUENCE_ID") 	?AdSequence;
 	?PayProcessorClass String;
 	?UserId String;
 	?Password String;
@@ -28,7 +28,7 @@ type CPaymentProcessor {
 	AcceptCheck YesNo;/* 'Y'  */
 	AcceptAtm YesNo;/* 'Y'  */
 	RequireVv YesNo;/* 'N'  */
-@Column("C_CURRENCY_ID") 	?CCurrency;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
 	CostPerTrx Number;/* 0  */
 	Commission Number;
 	?PartnerId String;

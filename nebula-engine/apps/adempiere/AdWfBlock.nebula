@@ -8,6 +8,6 @@ type AdWfBlock {
 @Column("AD_ORG_ID") 	AdOrgId ID;
 	*Name;
 	?Description;
-@Column("AD_WORKFLOW_ID") 	AdWorkflow;
+@ForeignKeyColumn("AD_WORKFLOW_ID") @Column("AD_WORKFLOW_ID") 	AdWorkflow;
 };
 

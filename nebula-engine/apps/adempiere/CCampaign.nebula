@@ -9,7 +9,7 @@ type CCampaign {
 	Value String;
 	*Name;
 	?Description;
-@Column("C_CHANNEL_ID") 	?CChannel;
+@ForeignKeyColumn("C_CHANNEL_ID") @Column("C_CHANNEL_ID") 	?CChannel;
 	?StartDate Date;
 	?EndDate Date;
 	Costs Count;/* 0  */

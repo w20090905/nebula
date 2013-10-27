@@ -5,15 +5,15 @@
 tx COrder {
 @Column("C_ORDER_ID") 	!COrderId ID;
 @Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
 	IsSoTrx YesNo;/* 'Y'  */
 	DocumentNo String;
 	DocStatus Attr;
 	DocAction Attr;
 	?Processing YesNo;
 	Processed YesNo;/* 'N'  */
-@Column("C_DOCTYPE_ID") 	CDocType;
-@Column("C_DOCTYPETARGET_ID") 	CDocTypeTarget CDocType;
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	CDocType;
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPETARGET_ID") 	CDocTypeTarget CDocType;
 	?Description;
 	IsApproved YesNo;/* 'Y'  */
 	IsCreditApproved YesNo;/* 'N'  */
@@ -22,57 +22,57 @@ tx COrder {
 	IsPrinted YesNo;/* 'N'  */
 	IsTransferred YesNo;/* 'N'  */
 	IsSelected YesNo;/* 'N'  */
-@Column("SALESREP_ID") 	?SalesRep AdUser;
+@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	?SalesRep AdUser;
 	DateOrdered Date;
 	?DatePromised Date;
 	?DatePrinted Date;
 	DateAcct Date;
-@Column("C_BPARTNER_ID") 	CBpartner;
-@Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocation;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
+@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocation;
 	?PoReference String;
 	IsDiscountPrinted YesNo;/* 'Y'  */
-@Column("C_CURRENCY_ID") 	CCurrency;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
 	PaymentRule String;
-@Column("C_PAYMENTTERM_ID") 	CPaymentTerm;
+@ForeignKeyColumn("C_PAYMENTTERM_ID") @Column("C_PAYMENTTERM_ID") 	CPaymentTerm;
 	InvoiceRule String;
 	DeliveryRule String;
 	FreightCostRule String;
 	?FreightAmt Amount;/* 0 */
 	DeliveryViaRule String;
-@Column("M_SHIPPER_ID") 	?MShipper;
-@Column("C_CHARGE_ID") 	?CCharge;
+@ForeignKeyColumn("M_SHIPPER_ID") @Column("M_SHIPPER_ID") 	?MShipper;
+@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	?CCharge;
 	?ChargeAmt Amount;/* 0 */
 	PriorityRule String;
 	TotalLines Count;/* 0  */
 	GrandTotal Number;/* 0  */
-@Column("M_WAREHOUSE_ID") 	MWarehouse;
-@Column("M_PRICELIST_ID") 	MPriceList;
+@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	MWarehouse;
+@ForeignKeyColumn("M_PRICELIST_ID") @Column("M_PRICELIST_ID") 	MPriceList;
 	IsTaxIncluded YesNo;/* 'N'  */
-@Column("C_CAMPAIGN_ID") 	?CCampaign;
-@Column("C_PROJECT_ID") 	?CProject;
-@Column("C_ACTIVITY_ID") 	?CActivity;
+@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
+@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
 	Posted YesNo;/* 'N'  */
-@Column("C_PAYMENT_ID") 	?CPayment;
-@Column("C_CASHLINE_ID") 	?CCashLine;
+@ForeignKeyColumn("C_PAYMENT_ID") @Column("C_PAYMENT_ID") 	?CPayment;
+@ForeignKeyColumn("C_CASHLINE_ID") @Column("C_CASHLINE_ID") 	?CCashLine;
 	SendEmail YesNo;/* 'N'  */
-@Column("AD_USER_ID") 	?AdUser;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
 	?CopyFrom Attr;
 	IsSelfService YesNo;/* 'N'  */
-@Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
-@Column("USER1_ID") 	?User1 CElementValue;
-@Column("USER2_ID") 	?User2 CElementValue;
-@Column("C_CONVERSIONTYPE_ID") 	?CConversionType;
-@Column("BILL_BPARTNER_ID") 	?BillBpartner CBpartner;
-@Column("BILL_LOCATION_ID") 	?BillLocation CBpartnerLocation;
-@Column("BILL_USER_ID") 	?BillUser AdUser;
-@Column("PAY_BPARTNER_ID") 	?PayBpartner CBpartner;
-@Column("PAY_LOCATION_ID") 	?PayLocation CBpartnerLocation;
-@Column("REF_ORDER_ID") 	?RefOrder COrder;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER1_ID") 	?User1 CElementValue;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER2_ID") 	?User2 CElementValue;
+@ForeignKeyColumn("C_CONVERSIONTYPE_ID") @Column("C_CONVERSIONTYPE_ID") 	?CConversionType;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("BILL_BPARTNER_ID") 	?BillBpartner CBpartner;
+@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("BILL_LOCATION_ID") 	?BillLocation CBpartnerLocation;
+@ForeignKeyColumn("AD_USER_ID") @Column("BILL_USER_ID") 	?BillUser AdUser;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("PAY_BPARTNER_ID") 	?PayBpartner CBpartner;
+@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("PAY_LOCATION_ID") 	?PayLocation CBpartnerLocation;
+@ForeignKeyColumn("C_ORDER_ID") @Column("REF_ORDER_ID") 	?RefOrder COrder;
 	IsDropShip YesNo;/* 'N'  */
 	?Volume Number;
 	?Weight;
 	?OrderType String;
-@Column("C_POS_ID") 	?CPos;
+@ForeignKeyColumn("C_POS_ID") @Column("C_POS_ID") 	?CPos;
 	?AmountTendered Number;
 	?AmountRefunded Number;
 };

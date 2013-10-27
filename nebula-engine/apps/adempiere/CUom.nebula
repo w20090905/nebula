@@ -4,8 +4,8 @@
 @Table("C_UOM")
 type CUom {
 @Column("C_UOM_ID") 	!CUomId ID;
-@Column("AD_CLIENT_ID") 	AdClient;
-@Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
 	X12de355 String;
 	?UomSymbol String;
 	*Name;

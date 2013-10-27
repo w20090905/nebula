@@ -9,9 +9,9 @@ type MAttributeSet {
 	*Name;
 	?Description;
 	IsSerNo YesNo;/* 'Y'  */
-@Column("M_SERNOCTL_ID") 	?MSerNoCtl;
+@ForeignKeyColumn("M_SERNOCTL_ID") @Column("M_SERNOCTL_ID") 	?MSerNoCtl;
 	IsLot YesNo;/* 'Y'  */
-@Column("M_LOTCTL_ID") 	?MLotCtl;
+@ForeignKeyColumn("M_LOTCTL_ID") @Column("M_LOTCTL_ID") 	?MLotCtl;
 	IsGuaranteeDate YesNo;/* 'N'  */
 	?GuaranteeDays Count;
 	IsInstanceAttribute YesNo;/* 'N'  */
