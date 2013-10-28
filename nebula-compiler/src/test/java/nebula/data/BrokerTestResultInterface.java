@@ -1,4 +1,4 @@
-package nebula.data2;
+package nebula.data;
 
 public interface BrokerTestResultInterface{
 	String sayHello(String name);

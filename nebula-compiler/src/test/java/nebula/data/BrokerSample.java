@@ -1,4 +1,4 @@
-package nebula.data2;
+package nebula.data;
 
 public class BrokerSample extends Broker<BrokerTestInputInterface> implements BrokerTestInputInterface {
 	@Override

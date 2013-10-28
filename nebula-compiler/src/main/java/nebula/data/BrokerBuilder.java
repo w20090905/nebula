@@ -47,14 +47,13 @@ public class BrokerBuilder extends ClassLoader {
 			byte[] code = cw.toByteArray();
 
 			if (log.isDebugEnabled()) {
-				String filename = "tmp/" + innerTypeName + ".class";
+				String filename = "tmp/" + typeName + ".class";
 				String path = filename.substring(0, filename.lastIndexOf('/'));
 				File file = new File(path);
 				if (!file.exists()) {
 					file.mkdir();
 				}
-				String[] p = filename.split("/");
-				new FileOutputStream(p[p.length - 1]).write(code);
+				new FileOutputStream(filename).write(code);
 			}
 
 			broker = this.defineClass(typeName, code, 0, code.length);
