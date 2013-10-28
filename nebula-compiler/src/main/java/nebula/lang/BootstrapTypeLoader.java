@@ -21,63 +21,63 @@ class BootstrapTypeLoader extends TypeLoader {
 	}
 
 	private void init() {
-		Type typeRoot = new Type(this, Type.ROOT_TYPE);
-		Type basicType = new Type(this, TypeStandalone.Basic.name(), typeRoot, TypeStandalone.Abstract);
+		TypeImp typeRoot = new TypeImp(this, TypeImp.ROOT_TYPE);
+		TypeImp basicType = new TypeImp(this, TypeStandalone.Basic.name(), typeRoot, TypeStandalone.Abstract);
 
-		Type master = new Type(this, TypeStandalone.Master.name(), typeRoot, TypeStandalone.Abstract);
+		TypeImp master = new TypeImp(this, TypeStandalone.Master.name(), typeRoot, TypeStandalone.Abstract);
 		master.attrs.put("Layout", "Basic");
-		Type transaction = new Type(this, TypeStandalone.Transaction.name(), typeRoot, TypeStandalone.Abstract);
+		TypeImp transaction = new TypeImp(this, TypeStandalone.Transaction.name(), typeRoot, TypeStandalone.Abstract);
 		transaction.attrs.put("Layout", "Basic");
-		Type mixin = new Type(this, TypeStandalone.Mixin.name(), typeRoot, TypeStandalone.Abstract);
+		TypeImp mixin = new TypeImp(this, TypeStandalone.Mixin.name(), typeRoot, TypeStandalone.Abstract);
 
-		Type number = new Type(this, "Number", basicType, RawTypes.Long);
+		TypeImp number = new TypeImp(this, "Number", basicType, RawTypes.Long);
 		number.attrs.put("FormatType", "numeric");
 		number.attrs.put("Precision", 10L);
 		number.attrs.put("Scale", 2L);
 
-		Type typeBoolean = new Type(this, RawTypes.Boolean.name(), number, RawTypes.Boolean);
+		TypeImp typeBoolean = new TypeImp(this, RawTypes.Boolean.name(), number, RawTypes.Boolean);
 		typeBoolean.attrs.put("FormatType", "checkbox");
 
-		Type typeLong = new Type(this, RawTypes.Long.name(), number, RawTypes.Long);
+		TypeImp typeLong = new TypeImp(this, RawTypes.Long.name(), number, RawTypes.Long);
 
-		Type decimal = new Type(this, RawTypes.Decimal.name(), number, RawTypes.Decimal);
+		TypeImp decimal = new TypeImp(this, RawTypes.Decimal.name(), number, RawTypes.Decimal);
 		decimal.attrs.put("Precision", 10L);
 		decimal.attrs.put("Scale", 2L);
 
-		Type string = new Type(this, RawTypes.String.name(), basicType, RawTypes.String);
+		TypeImp string = new TypeImp(this, RawTypes.String.name(), basicType, RawTypes.String);
 		string.attrs.put("FormatType", "text");
 		string.attrs.put("MaxLength", 60L);
 
-		Type text = new Type(this, RawTypes.Text.name(), basicType, RawTypes.Text);
+		TypeImp text = new TypeImp(this, RawTypes.Text.name(), basicType, RawTypes.Text);
 		text.attrs.put("FormatType", "textarea");
 		text.attrs.put("MaxLength", 1024L);
 
-		Type date = new Type(this, RawTypes.Date.name(), basicType, RawTypes.Date);
+		TypeImp date = new TypeImp(this, RawTypes.Date.name(), basicType, RawTypes.Date);
 		date.attrs.put("FormatType", "date");
 		date.attrs.put("FormatString", "YYYY-MM-DD");
 
-		Type time = new Type(this, RawTypes.Time.name(), basicType, RawTypes.Time);
+		TypeImp time = new TypeImp(this, RawTypes.Time.name(), basicType, RawTypes.Time);
 		time.attrs.put("FormatType", "time");
 		time.attrs.put("FormatString", "HH:mm:ss");
 
-		Type datetime = new Type(this, RawTypes.Datetime.name(), basicType, RawTypes.Datetime);
+		TypeImp datetime = new TypeImp(this, RawTypes.Datetime.name(), basicType, RawTypes.Datetime);
 		datetime.attrs.put("FormatType", "datetime");
 		datetime.attrs.put("FormatString", "YYYY-MM-DD HH:mm:ss");
 
-		Type timestamp = new Type(this, RawTypes.Timestamp.name(), basicType, RawTypes.Timestamp);
+		TypeImp timestamp = new TypeImp(this, RawTypes.Timestamp.name(), basicType, RawTypes.Timestamp);
 		timestamp.attrs.put("FormatType", "timestamp");
 		timestamp.attrs.put("FormatString", "YYYY-MM-DD HH:mm:ss.S");
 
-		Type name = new Type(this, "Name", string);
+		TypeImp name = new TypeImp(this, "Name", string);
 		name.nameAlias= new Aliases("名称");
 		name.attrs.put("MaxLength", 60L);
 		name.attrs.put("ShouldBeLeader", "ShouldBeLeader");
 
-		Type attr = new Type(this, "Attr", string);
+		TypeImp attr = new TypeImp(this, "Attr", string);
 		attr.attrs.put("SP", "Attr");
 		attr.attrs.put("MaxLength", 60L);
 
-		List<Type> typeList = new ArrayList<Type>();
+		List<TypeImp> typeList = new ArrayList<TypeImp>();
 
 		typeList.add(typeRoot);
 
@@ -105,7 +105,7 @@ class BootstrapTypeLoader extends TypeLoader {
 		typeList.add(name);
 
 		long lastModified = System.currentTimeMillis();
-		for (Type type : typeList) {
+		for (TypeImp type : typeList) {
 			type.lastModified = lastModified;
 		}
 
@@ -130,7 +130,7 @@ class BootstrapTypeLoader extends TypeLoader {
 		}
 
 		Type typeAttribute = this.findType("Attribute");
-		typeAttribute.attrs.put("Layout", "Compact");
+		typeAttribute.getAttrs().put("Layout", "Compact");
 
 		//@formatter:off
 		String typeDefine = "" +

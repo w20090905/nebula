@@ -39,7 +39,7 @@ public abstract class TypeLoader {
 	Function<Type, String> typeIndexFunction =new Function<Type, String>() {
 		@Override
 		public String apply(Type from) {
-			return from.name;
+			return from.getName();
 		}
 	};
 	
@@ -94,14 +94,14 @@ public abstract class TypeLoader {
 		return this.classifyBy;
 	}
 
-	List<Type> defineNebula(Reader in) throws RecognitionException {
+	List<TypeImp> defineNebula(Reader in) throws RecognitionException {
 		try {
 			BufferedReader bin = new BufferedReader(in);
 			String code = FileUtil.readAllTextFrom(bin);
 			in = bin;
-			List<Type> typeList = parse(new ANTLRReaderStream(in));
+			List<TypeImp> typeList = parse(new ANTLRReaderStream(in));
 			this.lastModified = System.currentTimeMillis();
-			for (Type t : typeList) {
+			for (TypeImp t : typeList) {
 				t.code = code;
 				t.url = null;
 				link(t);
@@ -119,13 +119,13 @@ public abstract class TypeLoader {
 		}
 	}
 
-	List<Type> tryDefineNebula(Reader in) throws RecognitionException, IOException {
+	List<TypeImp> tryDefineNebula(Reader in) throws RecognitionException, IOException {
 		BufferedReader bin = new BufferedReader(in);
 		String code = FileUtil.readAllTextFrom(bin);
 		in = bin;
-		List<Type> typeList = parse(new ANTLRReaderStream(in));
+		List<TypeImp> typeList = parse(new ANTLRReaderStream(in));
 		this.lastModified = System.currentTimeMillis();
-		for (Type t : typeList) {
+		for (TypeImp t : typeList) {
 			t.code = code;
 			t.url = null;
 			t.lastModified = this.lastModified;
@@ -136,13 +136,13 @@ public abstract class TypeLoader {
 		return typeList;
 	}
 
-	List<Type> defineNebula(URL in) throws IOException, RecognitionException {
+	List<TypeImp> defineNebula(URL in) throws IOException, RecognitionException {
 		String code = FileUtil.readAllTextFrom(in);
-		List<Type> typeList = parse(new ANTLRInputStream(in.openStream(), "utf-8"));
+		List<TypeImp> typeList = parse(new ANTLRInputStream(in.openStream(), "utf-8"));
 		long lastModified = in.openConnection().getLastModified();
 		this.lastModified = lastModified > this.lastModified ? lastModified : this.lastModified;
-		Type topType = typeList.get(0);
-		for (Type type : typeList) {
+		TypeImp topType = typeList.get(0);
+		for (TypeImp type : typeList) {
 			type.code = code;
 			type.url = in;
 			type.lastModified = lastModified;
@@ -157,21 +157,21 @@ public abstract class TypeLoader {
 	}
 
 
-	protected void link(Type type) {
+	protected void link(TypeImp type) {
 		for (Field f : type.fields) {
-			f.type.references.add(f);
+			f.type.getReferences().add(f);
 			if(f.attrs.containsKey(Type.ATTACH)){
-				type.attrs.put(Type.ATTACH_TO, f.type.name);
-				f.type.attachedBy.add(type);
+				type.attrs.put(Type.ATTACH_TO, f.type.getName());
+				f.type.getAttachedBy().add(type);
 			}
 		}
 	}
 
-	private List<Type> parse(CharStream in) throws RecognitionException {
+	private List<TypeImp> parse(CharStream in) throws RecognitionException {
 		NebulaLexer assemblerLexer = new NebulaLexer(in);
 		CommonTokenStream tokens = new CommonTokenStream(assemblerLexer);
 		NebulaParser parser = new NebulaParser(tokens, this);
-		List<Type> typeList = parser.programDefinition();
+		List<TypeImp> typeList = parser.programDefinition();
 		if (parser.getNumberOfSyntaxErrors() > 0) {
 			log.error("Parser ERROR!");
 			throw new NebulaRuntimeException("Parser ERROR!");
@@ -208,7 +208,7 @@ public abstract class TypeLoader {
 			}
 			URL url = loadClassData(name);
 			if (url != null) {
-				List<Type> typeList = defineNebula(url);
+				List<TypeImp> typeList = defineNebula(url);
 				if (log.isDebugEnabled()) {
 					log.debug("loaded type [" + name + "]  \tfrom " + this.getClass().getName());
 				}

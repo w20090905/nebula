@@ -25,12 +25,12 @@ public class NebulaParser_BasicTest extends TestCase {
 		compiler = new TypeLoaderForTest(new SystemTypeLoader());
 	}
 
-	private Type parseType(String text) {
+	private TypeImp parseType(String text) {
 		try {
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, compiler);
-			Type type = parser.typeDefinition();
+			TypeImp type = parser.typeDefinition();
 
 			assertEquals(0, parser.getNumberOfSyntaxErrors());
 
@@ -50,13 +50,13 @@ public class NebulaParser_BasicTest extends TestCase {
 					"};";
 			//@formatter:on	
 
-		Type type = parseType(text);
+		TypeImp type = parseType(text);
 
-		assertEquals("Person", type.name);
+		assertEquals("Person", type.getName());
 
-		assertEquals(2, type.fields.size());
+		assertEquals(2, type.getFields().size());
 
-		Field f = type.fields.get(0);
+		Field f = type.getFields().get(0);
 
 		assertEquals("姓名", f.name);
 		assertEquals(ByVal, f.refer);
@@ -72,12 +72,12 @@ public class NebulaParser_BasicTest extends TestCase {
 					"};";
 			//@formatter:on	
 
-		Type type = parseType(text);
+		TypeImp type = parseType(text);
 
-		assertEquals(false, type.fields.get(0).isKey());
-		assertEquals(false, type.fields.get(0).isUnique());
-		assertEquals(false, type.fields.get(1).isKey());
-		assertEquals(false, type.fields.get(1).isUnique());
+		assertEquals(false, type.getFields().get(0).isKey());
+		assertEquals(false, type.getFields().get(0).isUnique());
+		assertEquals(false, type.getFields().get(1).isKey());
+		assertEquals(false, type.getFields().get(1).isUnique());
 
 		//@formatter:off
 		text = "" +
@@ -89,10 +89,10 @@ public class NebulaParser_BasicTest extends TestCase {
 
 		type = parseType(text);
 
-		assertEquals(true, type.fields.get(0).isKey());
-		assertEquals(true, type.fields.get(0).isUnique());
-		assertEquals(false, type.fields.get(1).isKey());
-		assertEquals(false, type.fields.get(1).isUnique());
+		assertEquals(true, type.getFields().get(0).isKey());
+		assertEquals(true, type.getFields().get(0).isUnique());
+		assertEquals(false, type.getFields().get(1).isKey());
+		assertEquals(false, type.getFields().get(1).isUnique());
 
 		//@formatter:off
 		text = "" +
@@ -104,10 +104,10 @@ public class NebulaParser_BasicTest extends TestCase {
 
 		type = parseType(text);
 
-		assertEquals(true, type.fields.get(0).isKey());
-		assertEquals(true, type.fields.get(0).isUnique());
-		assertEquals(false, type.fields.get(1).isKey());
-		assertEquals(false, type.fields.get(1).isUnique());
+		assertEquals(true, type.getFields().get(0).isKey());
+		assertEquals(true, type.getFields().get(0).isUnique());
+		assertEquals(false, type.getFields().get(1).isKey());
+		assertEquals(false, type.getFields().get(1).isUnique());
 
 		//@formatter:off
 		text = "" +
@@ -119,10 +119,10 @@ public class NebulaParser_BasicTest extends TestCase {
 
 		type = parseType(text);
 
-		assertEquals(true, type.fields.get(0).isKey());
-		assertEquals(true, type.fields.get(0).isUnique());
-		assertEquals(false, type.fields.get(1).isKey());
-		assertEquals(true, type.fields.get(1).isUnique());
+		assertEquals(true, type.getFields().get(0).isKey());
+		assertEquals(true, type.getFields().get(0).isUnique());
+		assertEquals(false, type.getFields().get(1).isKey());
+		assertEquals(true, type.getFields().get(1).isUnique());
 
 		//@formatter:off
 		text = "" +
@@ -134,10 +134,10 @@ public class NebulaParser_BasicTest extends TestCase {
 
 		type = parseType(text);
 
-		assertEquals(true, type.fields.get(0).isKey());
-		assertEquals(true, type.fields.get(0).isUnique());
-		assertEquals(false, type.fields.get(1).isKey());
-		assertEquals(true, type.fields.get(1).isUnique());
+		assertEquals(true, type.getFields().get(0).isKey());
+		assertEquals(true, type.getFields().get(0).isUnique());
+		assertEquals(false, type.getFields().get(1).isKey());
+		assertEquals(true, type.getFields().get(1).isUnique());
 	}
 
 	private Field parseField(String text) {
@@ -145,7 +145,7 @@ public class NebulaParser_BasicTest extends TestCase {
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, compiler);
-			Type type = new Type(compiler, "Test");
+			TypeImp type = new TypeImp(compiler, "Test");
 			Field field;
 			field = new Field(type, "Name");
 			field.type = parser.resolveType("Name");
@@ -182,12 +182,12 @@ public class NebulaParser_BasicTest extends TestCase {
 		Field f = parseField(text);
 
 		assertEquals("Detail", f.name);
-		assertEquals("Test$Detail", f.type.name);
+		assertEquals("Test$Detail", f.type.getName());
 		assertEquals(Inline, f.refer);
-		assertEquals("Name", f.type.fields.get(0).name);
-		assertEquals("Name", f.type.fields.get(0).type.name);
-		assertEquals("Age", f.type.fields.get(1).name);
-		assertEquals("Height", f.type.fields.get(1).type.name);
+		assertEquals("Name", f.type.getFields().get(0).name);
+		assertEquals("Name", f.type.getFields().get(0).type.getName());
+		assertEquals("Age", f.type.getFields().get(1).name);
+		assertEquals("Height", f.type.getFields().get(1).type.getName());
 	}
 
 	public void testFieldDefinition_default() {
@@ -368,26 +368,26 @@ public class NebulaParser_BasicTest extends TestCase {
 					"};";
 			//@formatter:on		
 
-		Type type = parseType(text);
+		TypeImp type = parseType(text);
 
-		assertEquals("Person", type.name);
-		assertEquals("员工", type.nameAlias.get("zh"));
+		assertEquals("Person", type.getName());
+		assertEquals("员工", type.getNameAlias().get("zh"));
 
-		assertEquals(3, type.fields.size());
+		assertEquals(3, type.getFields().size());
 		int i = 0;
-		assertEquals("Name", type.fields.get(i).name);
-		assertEquals(true, type.fields.get(i).isRequired());
-		assertEquals("姓名", type.fields.get(i).nameAlias.get("zh"));
+		assertEquals("Name", type.getFields().get(i).name);
+		assertEquals(true, type.getFields().get(i).isRequired());
+		assertEquals("姓名", type.getFields().get(i).nameAlias.get("zh"));
 
 		i++;
-		assertEquals("Detail", type.fields.get(i).name);
-		assertEquals(Inline, type.fields.get(i).refer);
-		assertEquals("明细", type.fields.get(i).nameAlias.get("zh"));
-		assertEquals("明细", type.fields.get(i).type.nameAlias.get("zh"));
+		assertEquals("Detail", type.getFields().get(i).name);
+		assertEquals(Inline, type.getFields().get(i).refer);
+		assertEquals("明细", type.getFields().get(i).nameAlias.get("zh"));
+		assertEquals("明细", type.getFields().get(i).type.getNameAlias().get("zh"));
 		i++;
-		assertEquals("Detail2", type.fields.get(i).name);
-		assertEquals(Inline, type.fields.get(i).refer);
-		assertEquals("Detail2", type.fields.get(i).nameAlias.getDefault());
+		assertEquals("Detail2", type.getFields().get(i).name);
+		assertEquals(Inline, type.getFields().get(i).refer);
+		assertEquals("Detail2", type.getFields().get(i).nameAlias.getDefault());
 	}
 
 	public void testProgramDefinition() {
@@ -406,27 +406,27 @@ public class NebulaParser_BasicTest extends TestCase {
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, compiler);
 
-			List<Type> types = parser.programDefinition();
+			List<TypeImp> types = parser.programDefinition();
 
 			Type type = types.get(0);
 
-			assertEquals("Person", type.name);
-			assertEquals("员工", type.nameAlias.get("zh"));
+			assertEquals("Person", type.getName());
+			assertEquals("员工", type.getNameAlias().get("zh"));
 
-			assertEquals(2, type.fields.size());
+			assertEquals(2, type.getFields().size());
 			int i = 0;
-			assertEquals("Name", type.fields.get(i).name);
-			assertEquals(true, type.fields.get(i).isRequired());
-			assertEquals("姓名", type.fields.get(i).nameAlias.get("zh"));
+			assertEquals("Name", type.getFields().get(i).name);
+			assertEquals(true, type.getFields().get(i).isRequired());
+			assertEquals("姓名", type.getFields().get(i).nameAlias.get("zh"));
 
 			i++;
-			assertEquals("Detail", type.fields.get(i).name);
-			assertEquals("明细", type.fields.get(i).nameAlias.get("zh"));
-			assertEquals("明细", type.fields.get(i).type.nameAlias.get("zh"));
+			assertEquals("Detail", type.getFields().get(i).getName());
+			assertEquals("明细", type.getFields().get(i).nameAlias.get("zh"));
+			assertEquals("明细", type.getFields().get(i).type.getNameAlias().get("zh"));
 
 			type = types.get(1);
-			assertEquals("Person$Detail", type.name);
-			assertEquals("明细", type.nameAlias.get("zh"));
+			assertEquals("Person$Detail", type.getName());
+			assertEquals("明细", type.getNameAlias().get("zh"));
 
 		} catch (RecognitionException e) {
 			fail(e.toString());

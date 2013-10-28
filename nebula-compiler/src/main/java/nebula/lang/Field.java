@@ -67,7 +67,7 @@ public class Field {
 
 	public void setType(Type type) {
 		this.type = type;
-		this.attrs.setDefaults(type.attrs);
+		this.attrs.setDefaults(type.getAttrs());
 	}
 
 	public Reference getRefer() {

@@ -226,7 +226,7 @@ public class Compiler {
 		}
 
 		protected void toObject(final MethodVisitor mv, Expr<Object> expr, CompilerContext context) {
-			switch (expr.getExprType(context).rawType) {
+			switch (expr.getExprType(context).getRawType()) {
 			case Boolean:
 				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");
 				break;
@@ -239,7 +239,7 @@ public class Compiler {
 		}
 
 		protected void fromObject(final MethodVisitor mv, Expr<Object> expr, CompilerContext context) {
-			switch (expr.getExprType(context).rawType) {
+			switch (expr.getExprType(context).getRawType()) {
 			case Boolean:
 				mv.visitTypeInsn(CHECKCAST, "java/lang/Boolean");
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Boolean", "booleanValue", "()Z");

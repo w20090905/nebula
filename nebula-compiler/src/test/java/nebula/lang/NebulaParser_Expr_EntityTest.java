@@ -14,7 +14,7 @@ public class NebulaParser_Expr_EntityTest extends TestCase {
 
 	TypeLoaderForTest compiler;
 	Entity data = new EditableEntity();
-	Type type;
+	TypeImp type;
 	long Age = 10;
 
 	@Override
@@ -56,7 +56,7 @@ public class NebulaParser_Expr_EntityTest extends TestCase {
 		NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(exprText));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		NebulaParser parser = new NebulaParser(tokens, compiler);
-		type = new Type(compiler, "Test");
+		type = new TypeImp(compiler, "Test");
 		Field field;
 		field = new Field(type, "Name");
 		field.type = parser.resolveType("Name");

@@ -18,7 +18,7 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 	RuntimeContext context = new RuntimeContext() {
 	};
 	TypeLoaderForTest typeLoader;
-	Type type;
+	TypeImp type;
 	Entity data;
 
 	DataRepos repos;
@@ -43,7 +43,7 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, typeLoader);
-			type = new Type(typeLoader, NamesEncoding.encode(this.getClass().getName(),false));
+			type = new TypeImp(typeLoader, NamesEncoding.encode(this.getClass().getName(),false));
 			Field field;
 			field = new Field(type, "Name");
 			field.type = parser.resolveType("Name");
@@ -73,12 +73,12 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 		}
 	}
 
-	private Type parseType(String text) {
+	private TypeImp parseType(String text) {
 		try {
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, typeLoader);
-			Type type = parser.typeDefinition();
+			TypeImp type = parser.typeDefinition();
 
 			return type;
 		} catch (RecognitionException e) {
@@ -244,7 +244,7 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 					"};";
 			//@formatter:on	
 
-		Type type = parseType(text);
+		TypeImp type = parseType(text);
 
 		assertEquals("Order", type.name);
 

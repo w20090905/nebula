@@ -11,7 +11,7 @@ import org.antlr.runtime.RecognitionException;
 public class TypeLoaderForFlowTest extends TypeLoader {
 	public TypeLoaderForFlowTest(TypeLoader parent) {
 		super(parent);
-		Type flow = new Type(this, TypeStandalone.Flow.name(), parent.findType(Type.ROOT_TYPE));
+		Type flow = new TypeImp(this, TypeStandalone.Flow.name(), parent.findType(Type.ROOT_TYPE));
 		this.types.add(flow);
 
 		try {

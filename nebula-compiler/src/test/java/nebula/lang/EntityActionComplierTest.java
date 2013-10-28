@@ -29,7 +29,7 @@ public class EntityActionComplierTest extends TestCase {
 	public final void testDoCompile() {
 
 		Code code = cp.opRelational(Operator.EQ, cp.opLongCst("10"), cp.opLongCst("100"));
-		Type type = new Type(loader, "test");
+		Type type = new TypeImp(loader, "test");
 
 		EntityAction action = funcCmp.compile(context, type, "test", code);
 		action.exec(null, null, null);

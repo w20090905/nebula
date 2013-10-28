@@ -98,7 +98,7 @@ public class EntityExpressionComplier implements Opcodes {
 
 			expr.compile(cw, mv, context);
 
-			switch (expr.getExprType(context).rawType) {
+			switch (expr.getExprType(context).getRawType()) {
 			case Boolean:
 				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");
 				break;
@@ -121,7 +121,7 @@ public class EntityExpressionComplier implements Opcodes {
 	static long count = 0;
 
 	public <T> EntityExpression compile(CompilerContext context, Type type, String actionName, Expr<T> exp) {
-		String name = this.getClass().getSimpleName() + "_" + type.name + "_" + NamesEncoding.encode(actionName) + "_" + String.valueOf(count++);
+		String name = this.getClass().getSimpleName() + "_" + type.getName() + "_" + NamesEncoding.encode(actionName) + "_" + String.valueOf(count++);
 		try {
 			byte[] b = this.doCompile(name, exp, context);
 			if (log.isDebugEnabled()) {

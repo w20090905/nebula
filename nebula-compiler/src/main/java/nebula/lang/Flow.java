@@ -7,7 +7,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 
-public class Flow extends Type {
+public class Flow extends TypeImp {
 	public static final String APPROVE = "Approve";
 
 	Multiset<String> names = HashMultiset.create();

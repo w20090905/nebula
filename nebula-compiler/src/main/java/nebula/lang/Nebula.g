@@ -24,8 +24,8 @@ options {
 }
 
 @members {
-//    Map<String,Type> typesMap = new HashMap<String,Type>();
-    List<Type> types = new ArrayList<Type>();
+//    Map<String,TypeImp> typesMap = new HashMap<String,TypeImp>();
+    List<TypeImp> types = new ArrayList<TypeImp>();
     
     Map<Field, Expr> derivedFields = new HashMap<Field, Expr>();
     Map<Field, Statement> actionFields = new HashMap<Field, Statement>();
@@ -49,7 +49,7 @@ options {
         this.typesLoading = loader.typesLoading;
     }
     
-    Type currentType;
+    TypeImp currentType;
     
     protected Type resolveType(String name){
         if("this".equals(name)){
@@ -67,13 +67,13 @@ options {
         }
     }
     
-    protected void loading(Type type){
+    protected void loading(TypeImp type){
         typesLoading.put(type.name,type);
         types.add(type);
         currentType = type;
     }
     
-     protected void makeSureHasKeyField(Type type){
+     protected void makeSureHasKeyField(TypeImp type){
             Field firstKey = null;
             Field firstUnique = null;
             for(Field f : type.fields){
@@ -88,7 +88,7 @@ options {
         }
     
     
-    protected void loadingFinish(Type resideType, Type type){
+    protected void loadingFinish(TypeImp resideType, TypeImp type){
         makeInitOnSaveAction ();
         
         typesLoading.remove(type.name);
@@ -96,7 +96,7 @@ options {
         makeSureHasKeyField(type);
         currentType = resideType;
     }
-    protected void loadingFinish(Type type){
+    protected void loadingFinish(TypeImp type){
         makeInitOnSaveAction ();
         
         typesLoading.remove(type.name);        
@@ -151,7 +151,7 @@ options {
     System.out.print(str);
   }
   
-  protected void enterMethod(Type type, String name) {
+  protected void enterMethod(TypeImp type, String name) {
     locals.clear();
     pushLocal("nop", (Type)null);
     pushLocal("context", (Type)null);
@@ -211,7 +211,7 @@ flowDefinition returns[Flow flow]
 
 stepDefinition[Flow resideFlow]  returns[Flow.Step step]
   @init{
-      Type stepType = null;
+      TypeImp stepType = null;
       Type superType = null;
     }
     :
@@ -232,7 +232,7 @@ stepDefinition[Flow resideFlow]  returns[Flow.Step step]
             '{'  NEWLINE?   
                 { 
                     String name = resideFlow.name + "$" + $stepID.text + ( superTypeID==null?(resideFlow.steps.size()+1) : "");
-                    stepType = new Type(loader,resideFlow,name, superType); 
+                    stepType = new TypeImp(loader,resideFlow,name, superType); 
                     loading(stepType);
                 }
                 fieldDefinition[stepType]* 
@@ -240,7 +240,7 @@ stepDefinition[Flow resideFlow]  returns[Flow.Step step]
         )?
         {          
             if(stepType==null){
-                stepType = superType;
+                stepType = (TypeImp)superType;
             }
             step = resideFlow.addStep($actorQuery.text,$stepID.text,stepType);            
         }
@@ -250,12 +250,12 @@ stepDefinition[Flow resideFlow]  returns[Flow.Step step]
 queryLiteral
     : ('[' ((~(']'))*) ']')  ;
 
-programDefinition returns[List<Type> retTypes]
+programDefinition returns[List<TypeImp> retTypes]
     : typeDefinition NEWLINE*
       {retTypes = this.types;}
     ;
     
-typeDefinition returns[Type type]
+typeDefinition returns[TypeImp type]
     :   (annotations = annotationListDefinition)?
         typeType=typeDefineKeyword 
         typeID=ID 
@@ -267,23 +267,23 @@ typeDefinition returns[Type type]
             if($superTypeID==null){
                 switch(typeType){
                   case Transaction:
-                      type = new Type(loader,$typeID.text,resolveType(TypeStandalone.Transaction.name()),typeType);
+                      type = new TypeImp(loader,$typeID.text,resolveType(TypeStandalone.Transaction.name()),typeType);
                       break;
                   case Master:
                   default:
-                      type = new Type(loader,$typeID.text,resolveType(TypeStandalone.Master.name()),typeType);
+                      type = new TypeImp(loader,$typeID.text,resolveType(TypeStandalone.Master.name()),typeType);
                       break;
                 }
             }else{
                 Type superType = resolveType($superTypeID.text);
-                if(typeType != superType.standalone){
-                    throw new RuntimeException("Type's standalone [" + typeType + "] not match super type's standalone [" + superType.standalone + "]");
+                if(typeType != superType.getStandalone()){
+                    throw new RuntimeException("TypeImp's standalone [" + typeType + "] not match super type's standalone [" + superType.getStandalone() + "]");
                 }
-                type = new Type(loader,$typeID.text,superType);
+                type = new TypeImp(loader,$typeID.text,superType);
 		            if(relations!=null){        
 			              type.relations.addAll(relations);
 			              for(Type rt : relations){
-					              Field field = new Field(type,rt.name);
+					              Field field = new Field(type,rt.getName());
 					              field.type = rt; 
 					              field.attrs.put("Attach","Attach");        
 					              field.refer = ByRef;    
@@ -316,18 +316,18 @@ typeDefineKeyword returns[TypeStandalone typeType]
       | ('cfg'|'config')     {typeType = TypeStandalone.Config;}
       | ('rt'|'relation')     {typeType = TypeStandalone.Relation;};
 
-nestedTypeDefinition[Type resideType,String name,Aliases nameAlias] returns[Type type]
+nestedTypeDefinition[TypeImp resideType,String name,Aliases nameAlias] returns[TypeImp type]
     :  
             {
               String typeName = resideType.name + "$" + name;
-              type = new Type(loader,resideType,typeName,resolveType(TypeStandalone.Mixin.name()));
+              type = new TypeImp(loader,resideType,typeName,resolveType(TypeStandalone.Mixin.name()));
               if(nameAlias!=null)type.setNameAlias(nameAlias);
               loading(type);
             }
             fieldDefinition[type]* 
         ;
 
-fieldDefinition[Type resideType] returns[Field field]
+fieldDefinition[TypeImp resideType] returns[Field field]
     :   (annotations = annotationListDefinition)?  
         modifiers=fieldImportance
         inline=inlineDefinition
@@ -349,7 +349,7 @@ fieldDefinition[Type resideType] returns[Field field]
         /* Array? */
         range=arrayDefinition
         
-        /* Field Type */
+        /* Field TypeImp */
         (
             typeText=ID { field.type = resolveType($typeText.text);}
             |   '{'     NEWLINE ? { if(aliases==null) aliases = new Aliases(field.name); } 
@@ -373,12 +373,12 @@ fieldDefinition[Type resideType] returns[Field field]
 
         {
             if(field.type!=null){
-                field.attrs.setDefaults(field.type.attrs);
+                field.attrs.setDefaults(field.type.getAttrs());
                 field.modifiers |= modifiers;
                 
-                if(field.type.standalone == TypeStandalone.Basic){
+                if(field.type.getStandalone() == TypeStandalone.Basic){
                     field.refer = ByVal;
-                }else if(field.type.standalone == TypeStandalone.Mixin){
+                }else if(field.type.getStandalone() == TypeStandalone.Mixin){
                     field.refer = Inline;
                 }else{
                     field.refer = ByRef;            

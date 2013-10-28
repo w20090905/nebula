@@ -89,7 +89,7 @@ public class TypesTest extends TestCase {
 				 " Zip;\n" + 
 				"};";
 		//@formatter:on		
-		Type type = compiler.load(text);
+		TypeImp type = (TypeImp)compiler.load(text);
 
 		assertEquals("Person", type.name);
 

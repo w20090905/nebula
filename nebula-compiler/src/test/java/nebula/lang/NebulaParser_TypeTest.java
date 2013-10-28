@@ -26,7 +26,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"define FullName extends Name { " +
 				"};";
 		//@formatter:on		
-		Type type = compiler.load(text);
+		TypeImp type = (TypeImp)compiler.load(text);
 
 		assertEquals("FullName", type.name);
 		assertEquals(TypeStandalone.Basic, type.standalone);
@@ -42,10 +42,10 @@ public class NebulaParser_TypeTest extends TestCase {
 				"};";
 		//@formatter:on
 
-		Type type = compiler.load(text);
+		TypeImp type = (TypeImp)compiler.load(text);
 
 		assertEquals("Name", type.name);
-		assertEquals("String", type.superType.name);
+		assertEquals("String", type.superType.getName());
 		assertEquals(TypeStandalone.Basic, type.standalone);
 
 		assertEquals(0, type.fields.size());
@@ -59,7 +59,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"	!ID;" +
 				"};";
 		//@formatter:on		
-		Type type = compiler.load(text);
+		TypeImp type = (TypeImp)compiler.load(text);
 
 		assertEquals("Order", type.name);
 		assertEquals(TypeStandalone.Transaction, type.standalone);
@@ -75,7 +75,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"	Name;" +
 				"};";
 		//@formatter:on		
-		Type type = compiler.load(text);
+		TypeImp type = (TypeImp)compiler.load(text);
 
 		assertEquals("Person", type.name);
 		assertEquals(TypeStandalone.Master, type.standalone);
@@ -85,7 +85,7 @@ public class NebulaParser_TypeTest extends TestCase {
 	}
 
 	public void test_type_File_import() throws Exception {
-		Type type = compiler.findType("PersonTest");
+		TypeImp type = (TypeImp)compiler.findType("PersonTest");
 
 		assertEquals("PersonTest", type.name);
 
@@ -101,7 +101,7 @@ public class NebulaParser_TypeTest extends TestCase {
 
 		i++;
 		assertEquals("Education", type.fields.get(i).name);
-		assertEquals("PersonTest$Education", type.fields.get(i).type.name);
+		assertEquals("PersonTest$Education", type.fields.get(i).type.getName());
 		assertEquals(Inline, type.fields.get(i).refer);
 		assertEquals(true, type.fields.get(i).array);
 		assertEquals(0, type.fields.get(i).rangeFrom);
@@ -109,7 +109,7 @@ public class NebulaParser_TypeTest extends TestCase {
 	}
 
 	public void test_type_Person() throws Exception {
-		Type type = compiler.findType("Person");
+		TypeImp type =  (TypeImp)compiler.findType("Person");
 
 		assertEquals("Person", type.name);
 
@@ -119,7 +119,7 @@ public class NebulaParser_TypeTest extends TestCase {
 
 		i = 8;
 		assertEquals("Education", type.fields.get(i).name);
-		assertEquals("Person$Education", type.fields.get(i).type.name);
+		assertEquals("Person$Education", type.fields.get(i).type.getName());
 		assertEquals(Inline, type.fields.get(i).refer);
 		assertEquals(true, type.fields.get(i).array);
 		assertEquals(0, type.fields.get(i).rangeFrom);
@@ -132,7 +132,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"rt CompanyPersonMemeber extends Member<Company,Person> { " +
 				"};";
 		//@formatter:on	
-		Type type = compiler.load(text);
+		TypeImp type = (TypeImp)compiler.load(text);
 
 		assertEquals("CompanyPersonMemeber", type.name);
 		assertEquals(2, type.relations.size());// TODO add relation function
@@ -159,7 +159,7 @@ public class NebulaParser_TypeTest extends TestCase {
 	}
 
 	public void test_type_PersonCircularDependency() throws Exception {
-		Type type = compiler.findType("PersonCircularDependency");
+		TypeImp type =  (TypeImp)compiler.findType("PersonCircularDependency");
 
 		assertEquals("PersonCircularDependency", type.name);
 
@@ -169,9 +169,9 @@ public class NebulaParser_TypeTest extends TestCase {
 
 		i = 1;
 		assertEquals("CompanyCircularDependency", type.fields.get(i).name);
-		assertEquals("CompanyCircularDependency", type.fields.get(i).type.name);
-		assertEquals("Manager", type.fields.get(i).type.fields.get(i).name);
-		assertEquals("PersonCircularDependency", type.fields.get(i).type.fields.get(i).type.name);
+		assertEquals("CompanyCircularDependency", type.fields.get(i).type.getName());
+		assertEquals("Manager", type.fields.get(i).type.getFields().get(i).name);
+		assertEquals("PersonCircularDependency", type.fields.get(i).type.getFields().get(i).type.getName());
 	}
 
 	public void test_type_with_importance() throws Exception {
@@ -185,7 +185,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"	Age;\n" +
 				"};";
 		//@formatter:on		
-		Type type = compiler.load(text);
+		TypeImp type = (TypeImp)compiler.load(text);
 
 		assertEquals("Person", type.name);
 
@@ -224,7 +224,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"	Age;\n" +
 				"};";
 		//@formatter:on
-		Type type = compiler.load(text);
+		TypeImp type = (TypeImp)compiler.load(text);
 
 		assertEquals("Person", type.name);
 
@@ -234,13 +234,13 @@ public class NebulaParser_TypeTest extends TestCase {
 		assertEquals("Name", type.fields.get(i).name);
 		assertEquals(true, type.fields.get(i).isKey());
 		assertEquals(true, type.fields.get(i).isUnique());
-		assertEquals("Text", type.fields.get(i).type.name);
+		assertEquals("Text", type.fields.get(i).type.getName());
 		assertEquals(ByVal, type.fields.get(i).refer);
 
 		++i;
 		assertEquals("Sex", type.fields.get(i).name);
 		assertEquals(true, type.fields.get(i).isRequired());
-		assertEquals("Sex", type.fields.get(i).type.name);
+		assertEquals("Sex", type.fields.get(i).type.getName());
 		assertEquals(ByVal, type.fields.get(i).refer);
 
 		++i;
@@ -256,7 +256,7 @@ public class NebulaParser_TypeTest extends TestCase {
 		++i;
 		assertEquals("Age", type.fields.get(i).name);
 		assertEquals(true, type.fields.get(i).isRequired());
-		assertEquals("Age", type.fields.get(i).type.name);
+		assertEquals("Age", type.fields.get(i).type.getName());
 	}
 
 	public void test_type_type() throws Exception {
@@ -270,7 +270,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"	Age;\n" +
 				"};";
 		//@formatter:on
-		Type type = compiler.load(text);
+		TypeImp type = (TypeImp)compiler.load(text);
 
 		assertEquals("Person", type.name);
 
@@ -280,23 +280,23 @@ public class NebulaParser_TypeTest extends TestCase {
 		assertEquals("Name", type.fields.get(i).name);
 		assertEquals(true, type.fields.get(i).isKey());
 		assertEquals(true, type.fields.get(i).isUnique());
-		assertEquals("Text", type.fields.get(i).type.name);
+		assertEquals("Text", type.fields.get(i).type.getName());
 
 		++i;
 		assertEquals("Sex", type.fields.get(i).name);
-		assertEquals("Sex", type.fields.get(i).type.name);
+		assertEquals("Sex", type.fields.get(i).type.getName());
 
 		++i;
 		assertEquals("Length", type.fields.get(i).name);
-		assertEquals("Length", type.fields.get(i).type.name);
+		assertEquals("Length", type.fields.get(i).type.getName());
 
 		++i;
 		assertEquals("Height", type.fields.get(i).name);
-		assertEquals("Height", type.fields.get(i).type.name);
+		assertEquals("Height", type.fields.get(i).type.getName());
 
 		++i;
 		assertEquals("Age", type.fields.get(i).name);
-		assertEquals("Age", type.fields.get(i).type.name);
+		assertEquals("Age", type.fields.get(i).type.getName());
 	}
 
 	public void test_type_array() throws Exception {
@@ -311,7 +311,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"};";
 
 		//@formatter:on
-		Type type = compiler.load(text);
+		TypeImp type = (TypeImp)compiler.load(text);
 
 		assertEquals("Person", type.name);
 
@@ -319,7 +319,7 @@ public class NebulaParser_TypeTest extends TestCase {
 		int i = 0;
 
 		assertEquals("Name", type.fields.get(i).name);
-		assertEquals("Text", type.fields.get(i).type.name);
+		assertEquals("Text", type.fields.get(i).type.getName());
 		assertEquals(false, type.fields.get(i).array);
 
 		++i;
@@ -344,7 +344,7 @@ public class NebulaParser_TypeTest extends TestCase {
 
 		++i;
 		assertEquals("Age", type.fields.get(i).name);
-		assertEquals("Age", type.fields.get(i).type.name);
+		assertEquals("Age", type.fields.get(i).type.getName());
 		assertEquals(0, type.fields.get(i).rangeFrom);
 		assertEquals(5, type.fields.get(i).rangeTo);
 		assertEquals(true, type.fields.get(i).array);
@@ -362,7 +362,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"};";
 		//@formatter:on
 
-		Type type = compiler.load(text);
+		TypeImp type = (TypeImp)compiler.load(text);
 
 		assertEquals("Person", type.name);
 

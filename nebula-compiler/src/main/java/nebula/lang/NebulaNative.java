@@ -35,7 +35,7 @@ public class NebulaNative {
 	}
 
 	public static void execMethod(RuntimeContext context, DataRepos dataRepos, Entity entity, Type type, String methodName) {
-		if (type.superType != null) execMethod(context, dataRepos, entity, type.superType, methodName);
+		if (type.getSuperType() != null) execMethod(context, dataRepos, entity, type.getSuperType(), methodName);
 
 		Field sysInitAction = type.getActionByName(methodName);
 		if (sysInitAction != null) sysInitAction.getCode().exec(context, dataRepos, entity);

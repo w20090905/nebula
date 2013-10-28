@@ -30,7 +30,7 @@ public class EntityFuncitonComplierTest extends TestCase {
 	public final void testDoCompile() {
 
 		Code code = cp.opRelational(Operator.EQ, cp.opLongCst("10"), cp.opLongCst("100"));
-		Type type = new Type(loader, "test");
+		Type type = new TypeImp(loader, "test");
 
 		String name = funcCmp.compile(context, type, code);
 		try {

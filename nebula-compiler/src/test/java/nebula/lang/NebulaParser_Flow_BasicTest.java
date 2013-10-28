@@ -32,12 +32,12 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 		}
 	}
 
-	private Type parseType(String text) {
+	private TypeImp parseType(String text) {
 		try {
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, typeLoader);
-			Type type = parser.typeDefinition();
+			TypeImp type = parser.typeDefinition();
 			assertEquals(0, parser.getNumberOfSyntaxErrors());
 			return type;
 		} catch (RecognitionException e) {
@@ -68,7 +68,7 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 				"type Flow { };";
 		//@formatter:on		
 
-		Type type = parseType(text);
+		TypeImp type = parseType(text);
 
 		assertNotNull(type);
 	}
@@ -99,23 +99,23 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 				"};";
 		//@formatter:on	
 
-		Type type = parseType(text);
+		TypeImp type = parseType(text);
 
 		EditableEntity entity = new EditableEntity();
 
 		assertNotNull(type);
 		int i = 0;
-		assertEquals("NextStep", type.fields.get(i).name);
-		assertEquals("String", type.fields.get(i).type.name);
-		entity.put("NextStep", type.fields.get(i).expr.eval(context, null, entity));
+		assertEquals("NextStep", type.getFields().get(i).name);
+		assertEquals("String", type.getFields().get(i).type.getName());
+		entity.put("NextStep", type.getFields().get(i).expr.eval(context, null, entity));
 
 		assertEquals("Next", entity.get("NextStep"));
 		assertEquals(null, entity.get("DoItNow"));
 
 		i++;
-		assertEquals("DoItNow", type.fields.get(i).name);
-		assertEquals("YesNo", type.fields.get(i).type.name);
-		entity.put("DoItNow", type.fields.get(i).expr.eval(context, null,entity));
+		assertEquals("DoItNow", type.getFields().get(i).name);
+		assertEquals("YesNo", type.getFields().get(i).type.getName());
+		entity.put("DoItNow", type.getFields().get(i).expr.eval(context, null,entity));
 
 		assertEquals("Next", entity.get("NextStep"));
 		assertEquals(false, entity.get("DoItNow"));
@@ -183,19 +183,19 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 		Flow.Step step = flow.steps.get(0);
 
 		assertEquals("Begin", step.name);
-		assertEquals("Issue$Begin1", step.type.name);
+		assertEquals("Issue$Begin1", step.type.getName());
 
-		assertEquals(2, step.type.fields.size());
+		assertEquals(2, step.type.getDeclaredFields().size());
 		int i = 0;
-		assertEquals("Name", step.type.fields.get(i++).name);
-		assertEquals("Age", step.type.fields.get(i++).name);
+		assertEquals("Name", step.type.getDeclaredFields().get(i++).name);
+		assertEquals("Age", step.type.getDeclaredFields().get(i++).name);
 
 		step = null;
 
 		step = flow.steps.get(1);
 
 		assertEquals("Approve", step.name);
-		assertEquals("Issue$Approve2", step.type.name);
+		assertEquals("Issue$Approve2", step.type.getName());
 		i = 0;
 
 		step = null;
@@ -203,29 +203,29 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 		step = flow.steps.get(2);
 
 		assertEquals("Approve2", step.name);
-		assertEquals("Issue$Approve3", step.type.name);
+		assertEquals("Issue$Approve3", step.type.getName());
 		i = 0;
 		step = null;
 
 		step = flow.steps.get(3);
 
 		assertEquals("Approve3", step.name);
-		assertEquals("Approve", step.type.name);
+		assertEquals("Approve", step.type.getName());
 		i = 0;
 		step = null;
 
 		step = flow.steps.get(4);
 
 		assertEquals("Step1", step.name);
-		assertEquals("Issue$Step1", step.type.name);
-		assertEquals("Approve", step.type.superType.name);
+		assertEquals("Issue$Step1", step.type.getName());
+		assertEquals("Approve", step.type.getSuperType().getName());
 		i = 0;
 		step = null;
 
 		step = flow.steps.get(5);
 
 		assertEquals("Step2", step.name);
-		assertEquals("Approve", step.type.name);
+		assertEquals("Approve", step.type.getName());
 		i = 0;
 		step = null;
 	}
@@ -259,19 +259,19 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 		Flow.Step step = flow.steps.get(0);
 
 		assertEquals("Begin", step.name);
-		assertEquals("Issue$Begin1", step.type.name);
+		assertEquals("Issue$Begin1", step.type.getName());
 
-		assertEquals(2, step.type.fields.size());
+		assertEquals(2, step.type.getDeclaredFields().size());
 		int i = 0;
-		assertEquals("Name", step.type.fields.get(i++).name);
-		assertEquals("Age", step.type.fields.get(i++).name);
+		assertEquals("Name", step.type.getDeclaredFields().get(i++).name);
+		assertEquals("Age", step.type.getDeclaredFields().get(i++).name);
 
 		step = null;
 
 		step = flow.steps.get(1);
 
 		assertEquals("Approve", step.name);
-		assertEquals("Issue$Approve2", step.type.name);
+		assertEquals("Issue$Approve2", step.type.getName());
 		i = 0;
 
 		step = null;
@@ -279,29 +279,29 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 		step = flow.steps.get(2);
 
 		assertEquals("Approve2", step.name);
-		assertEquals("Issue$Approve3", step.type.name);
+		assertEquals("Issue$Approve3", step.type.getName());
 		i = 0;
 		step = null;
 
 		step = flow.steps.get(3);
 
 		assertEquals("Approve3", step.name);
-		assertEquals("Approve", step.type.name);
+		assertEquals("Approve", step.type.getName());
 		i = 0;
 		step = null;
 
 		step = flow.steps.get(4);
 
 		assertEquals("Step1", step.name);
-		assertEquals("Issue$Step1", step.type.name);
-		assertEquals("Approve", step.type.superType.name);
+		assertEquals("Issue$Step1", step.type.getName());
+		assertEquals("Approve", step.type.getSuperType().getName());
 		i = 0;
 		step = null;
 
 		step = flow.steps.get(5);
 
 		assertEquals("Step2", step.name);
-		assertEquals("Approve", step.type.name);
+		assertEquals("Approve", step.type.getName());
 		i = 0;
 		step = null;
 
@@ -329,12 +329,12 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 		Flow.Step step = flow.steps.get(0);
 
 		assertEquals("Begin", step.name);
-		assertEquals("Issue$Begin1", step.type.name);
+		assertEquals("Issue$Begin1", step.type.getName());
 
-		assertEquals(2, step.type.fields.size());
+		assertEquals(2, step.type.getDeclaredFields().size());
 		int i = 0;
-		assertEquals("Name", step.type.fields.get(i++).name);
-		assertEquals("Age", step.type.fields.get(i++).name);
+		assertEquals("Name", step.type.getDeclaredFields().get(i++).name);
+		assertEquals("Age", step.type.getDeclaredFields().get(i++).name);
 
 	}
 
@@ -344,52 +344,52 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 
 		step = parseStep("Begin;");
 		assertEquals("Begin", step.name);
-		assertEquals("Begin", step.type.name);
+		assertEquals("Begin", step.type.getName());
 
 		step = parseStep("Approve;");
 		assertEquals("Approve2", step.name);
-		assertEquals("Approve", step.type.name);
+		assertEquals("Approve", step.type.getName());
 
 		step = parseStep("aa : Approve;");
 		assertEquals("aa", step.name);
-		assertEquals("Approve", step.type.name);
+		assertEquals("Approve", step.type.getName());
 
 		step = parseStep("aa extends Approve;");
 		assertEquals("aa", step.name);
-		assertEquals("Approve", step.type.name);
-		assertEquals("Step", step.type.superType.name);
+		assertEquals("Approve", step.type.getName());
+		assertEquals("Step", step.type.getSuperType().getName());
 
 		step = parseStep("AA extends Approve{};");
 		assertEquals("AA", step.name);
-		assertEquals(step.resideFlow.name + "$AA", step.type.name);
-		assertEquals("Approve", step.type.superType.name);
+		assertEquals(step.resideFlow.name + "$AA", step.type.getName());
+		assertEquals("Approve", step.type.getSuperType().getName());
 
 		step = parseStep("Begin{ };");
 		assertEquals("Begin", step.name);
-		assertEquals(step.resideFlow.name + "$Begin2", step.type.name);
-		assertEquals("Begin", step.type.superType.name);
+		assertEquals(step.resideFlow.name + "$Begin2", step.type.getName());
+		assertEquals("Begin", step.type.getSuperType().getName());
 
 		step = parseStep("Approve { };");
 		assertEquals("Approve2", step.name);
-		assertEquals(step.resideFlow.name + "$Approve2", step.type.name);
-		assertEquals("Approve", step.type.superType.name);
+		assertEquals(step.resideFlow.name + "$Approve2", step.type.getName());
+		assertEquals("Approve", step.type.getSuperType().getName());
 
 		String query = "dfdsf";
 
 		step = parseStep("[" + query + "] Approve { };");
 		assertEquals("Approve2", step.name);
 		assertEquals("[" + query + "]", step.actorQuery);
-		assertEquals(step.resideFlow.name + "$Approve2", step.type.name);
-		assertEquals("Approve", step.type.superType.name);
+		assertEquals(step.resideFlow.name + "$Approve2", step.type.getName());
+		assertEquals("Approve", step.type.getSuperType().getName());
 
 		step = parseStep("[" + query + "] Approve { Age; };");
 		assertEquals("Approve2", step.name);
 		assertEquals("[" + query + "]", step.actorQuery);
-		assertEquals(step.resideFlow.name + "$Approve2", step.type.name);
-		assertEquals("Approve", step.type.superType.name);
+		assertEquals(step.resideFlow.name + "$Approve2", step.type.getName());
+		assertEquals("Approve", step.type.getSuperType().getName());
 
-		assertEquals(1, step.type.fields.size());
-		assertEquals("Age", step.type.fields.get(0).name);
+		assertEquals(1, step.type.getDeclaredFields().size());
+		assertEquals("Age", step.type.getDeclaredFields().get(0).name);
 
 	}
 }

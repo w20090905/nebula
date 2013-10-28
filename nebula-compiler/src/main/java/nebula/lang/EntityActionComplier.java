@@ -79,7 +79,7 @@ public class EntityActionComplier implements Opcodes {
 			return this.noop;
 		}
 
-		String name = this.getClass().getSimpleName()+ "_" + type.name + "_" + NamesEncoding.encode(actionName) + "_" + String.valueOf(count++);
+		String name = this.getClass().getSimpleName()+ "_" + type.getName() + "_" + NamesEncoding.encode(actionName) + "_" + String.valueOf(count++);
 		try {
 			byte[] b = this.doCompile(name, code, context);
 			if (log.isDebugEnabled()) {

@@ -82,18 +82,19 @@ public class EditableTypeLoader extends TypeLoader implements Runnable {
 	}
 
 	@Override
-	List<Type> defineNebula(Reader in) throws RecognitionException {
-		List<Type> typeList = super.defineNebula(in);
+	List<TypeImp> defineNebula(Reader in) throws RecognitionException {
+		List<TypeImp> typeList = super.defineNebula(in);
 		for (Type t : typeList) {
-			t.mutable = true;
+			TypeImp ti = (TypeImp)t;
+			ti.mutable = true;
 		}
 		return typeList;
 	}
 
 	@Override
-	List<Type> defineNebula(URL in) throws IOException, RecognitionException {
-		List<Type> typeList = super.defineNebula(in);
-		for (Type t : typeList) {
+	List<TypeImp> defineNebula(URL in) throws IOException, RecognitionException {
+		List<TypeImp> typeList = super.defineNebula(in);
+		for (TypeImp t : typeList) {
 			t.mutable = true;
 		}
 		loadedTypes.put(in, typeList.get(0));
@@ -104,7 +105,7 @@ public class EditableTypeLoader extends TypeLoader implements Runnable {
 	@Override
 	public Type update(Type oldType, String newCode) {
 		try {
-			List<Type> newTypes = tryDefineNebula(new StringReader(newCode));
+			List<TypeImp> newTypes = tryDefineNebula(new StringReader(newCode));
 
 			File file;
 			if (oldType == null) {
@@ -114,7 +115,7 @@ public class EditableTypeLoader extends TypeLoader implements Runnable {
 				assert oldType.getName().equals(newTypes.get(0).getName());
 
 				oldType = this.findType(oldType.getName());
-				if (!oldType.mutable) {
+				if (!oldType.isMutable()) {
 					throw new RuntimeException("Cannot edit");
 				}
 
@@ -124,7 +125,7 @@ public class EditableTypeLoader extends TypeLoader implements Runnable {
 					return oldType.getTypeLoader().update(oldType, newCode);
 				}
 
-				URL url = oldType.url;
+				URL url = oldType.getUrl();
 				file = new File(url.getFile());
 
 				if (!"file".equals(url.getProtocol())) {
@@ -136,7 +137,8 @@ public class EditableTypeLoader extends TypeLoader implements Runnable {
 
 			newTypes = super.defineNebula(file.toURI().toURL());
 			for (Type t : newTypes) {
-				t.mutable = true;
+				TypeImp ti = (TypeImp)t;
+				ti.mutable = true;
 			}
 
 			return newTypes.get(0);
@@ -152,17 +154,18 @@ public class EditableTypeLoader extends TypeLoader implements Runnable {
 	}
 
 	protected void unlink(Type topType) {
-		for (Field f : topType.fields) {
-			f.type.references.remove(f);
+		for (Field f : topType.getFields()) {
+			f.type.getReferences().remove(f);
 			if (f.attrs.containsKey(Type.ATTACH)) {
-				f.type.attachedBy.remove(topType);
+				f.type.getAttachedBy().remove(topType);
 			}
 		}
-		for (Type oldType : topType.subTypes) {
-			for (Field f : oldType.fields) {
-				f.type.references.remove(f);
+
+		for (Type oldType : topType.getSubTypes()) {
+			for (Field f : oldType.getFields()) {
+				f.type.getReferences().remove(f);
 				if (f.attrs.containsKey(Type.ATTACH)) {
-					f.type.attachedBy.remove(oldType);
+					f.type.getAttachedBy().remove(oldType);
 				}
 			}
 		}

@@ -1,10 +1,10 @@
 package nebula.lang;
 
-public class ListType extends Type {
+public class ListType extends TypeImp {
 	Type underlyType;
 
 	ListType(Type type) {
-		super(type.loader, type.name);
+		super(((TypeImp)type).loader, type.getName());
 		this.underlyType = type;
 	}
 

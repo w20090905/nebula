@@ -9,7 +9,7 @@ public class TypeLoaderForTest extends SystemTypeLoader {
 	public TypeLoaderForTest() {
 	}
 	
-	public List<Type> testDefineNebula(Reader in) {
+	public List<TypeImp> testDefineNebula(Reader in) {
 		try {
 			return super.defineNebula(in);
 		} catch (RecognitionException e) {
