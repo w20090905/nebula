@@ -1,6 +1,9 @@
 package http.resource;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -11,7 +14,6 @@ import java.lang.reflect.Field;
 import javax.servlet.http.HttpServletRequest;
 
 import junit.framework.TestCase;
-import nebula.data.Broker;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
@@ -19,12 +21,9 @@ import nebula.data.json.DataHelper;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-@SuppressWarnings("unchecked")
 public class EntityResouceTest extends TestCase {
 	@Mock
-	Broker<DataStore<Entity>> datastoreHolder;
-	@Mock
-	Broker<DataHelper<Entity, Reader, Writer>> jsonHolder;
+	DataHelper<Entity, Reader, Writer> json;
 
 	@Mock
 	HttpServletRequest req;
@@ -45,24 +44,17 @@ public class EntityResouceTest extends TestCase {
 	}
 
 	public final void testGet() throws IOException, SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-		EntityResouce entityResouce = new EntityResouce(jsonHolder, datastoreHolder, key);
+		EntityResouce entityResouce = new EntityResouce(json, datastore, key);
 
-		when(datastoreHolder.get()).thenReturn(datastore);
 		when(datastore.get(key)).thenReturn(data);
 		long lastModified = 100L;
 		when(data.get("LastModified_")).thenReturn(lastModified);
 
-		DataHelper<Entity, Reader, Writer> dataHelper = mock(DataHelper.class);
-
-		when(jsonHolder.get()).thenReturn(dataHelper);
-
 		entityResouce.get(req);
 
-		verify(datastoreHolder).get();
 		verify(datastore).get(key);
 		verify(data).get("LastModified_");
-		verify(jsonHolder).get();
-		verify(dataHelper).stringifyTo(eq(data), any(OutputStreamWriter.class));
+		verify(json).stringifyTo(eq(data), any(OutputStreamWriter.class));
 
 		// Method method = targetClass.getDeclaredMethod(methodName,
 		// argClasses);

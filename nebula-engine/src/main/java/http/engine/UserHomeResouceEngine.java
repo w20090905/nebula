@@ -7,7 +7,6 @@ import http.resource.StaticTemplateResouce;
 
 import javax.inject.Inject;
 
-import nebula.data.Broker;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -18,12 +17,11 @@ import freemarker.template.Configuration;
 @SuppressWarnings("deprecation")
 public class UserHomeResouceEngine extends StaticResourceEngine {
 	private final Configuration templateConfig;
-	final Broker<DataStore<Entity>> attributes;
+	final DataStore<Entity> attributes;
 	final TypeLoader typeLoader;
 
 	@Inject
-	public UserHomeResouceEngine(Loader resourceLoader, TypeLoader typeLoader,
-			final DataRepos dataWareHouse, Configuration cfg) {
+	public UserHomeResouceEngine(Loader resourceLoader, TypeLoader typeLoader, final DataRepos dataWareHouse, Configuration cfg) {
 		super(resourceLoader);
 		this.templateConfig = cfg;
 		this.typeLoader = typeLoader;
@@ -34,7 +32,8 @@ public class UserHomeResouceEngine extends StaticResourceEngine {
 	public Resource resolve(String path) {
 		// HttpSession session = path.getSession();
 		String theme = "angularjs";// (String) session.getAttribute("Theme");
-		String skin = "clean";// (String) session.getAttribute("Skin"); TODO Not realized UserHome Skin
+		String skin = "clean";// (String) session.getAttribute("Skin"); TODO Not
+								// realized UserHome Skin
 		String extension = "text/html";
 		String[] segs = path.split("/");
 		String name = "index.html";

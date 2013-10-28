@@ -2,7 +2,6 @@ package http.resource;
 
 import java.util.List;
 
-import nebula.data.Broker;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -12,20 +11,20 @@ import freemarker.template.Configuration;
 
 public class AttachedTypeTemplateResouce extends TypeTemplateResouce {
 
-	final Broker<Type> attachedType;
+	final Type attachedType;
 
-	public AttachedTypeTemplateResouce(Configuration cfg, DataRepos dataWareHouse, Broker<DataStore<Entity>> attributes, String path, String theme,
-			String skin, Broker<Type> attachedType, Broker<Type> type, String specName, String layoutName, String actionName) {
+	public AttachedTypeTemplateResouce(Configuration cfg, DataRepos dataWareHouse, DataStore<Entity> attributes, String path, String theme, String skin,
+			Type attachedType, Type type, String specName, String layoutName, String actionName) {
 		super(cfg, dataWareHouse, attributes, path, theme, skin, type, makeName(attachedType, type, specName, layoutName, actionName));
 		this.attachedType = attachedType;
 	}
 
-	private static String makeName(Broker<Type> attachedType, Broker<Type> type, String specName, String layout, String actionName) {
-		String attachedEntityType = (String) attachedType.get().getStandalone().name().toLowerCase();
+	private static String makeName(Type attachedType, Type type, String specName, String layout, String actionName) {
+		String attachedEntityType = (String) attachedType.getStandalone().name().toLowerCase();
 
-		String entityType = (String) type.get().getStandalone().name().toLowerCase();
+		String entityType = (String) type.getStandalone().name().toLowerCase();
 
-		layout = layout != null ? layout : (String) type.get().getAttrs().get("Layout");
+		layout = layout != null ? layout : (String) type.getAttrs().get("Layout");
 
 		String name = attachedEntityType + "_" + entityType + "_" + layout.toLowerCase() + "_" + actionName.toLowerCase() + ".ftl";
 		name = specName != null ? specName + "_" + name : name;
@@ -34,7 +33,7 @@ public class AttachedTypeTemplateResouce extends TypeTemplateResouce {
 
 	@Override
 	protected void fillData() {
-		root.put("attachedType", layout(attachedType.get()));
+		root.put("attachedType", layout(attachedType));
 		super.fillData();
 	}
 

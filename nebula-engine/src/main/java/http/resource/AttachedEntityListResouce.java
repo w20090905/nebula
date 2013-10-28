@@ -14,15 +14,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nebula.data.Broker;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
 import util.FileUtil;
 
 public class AttachedEntityListResouce extends AbstractResouce {
-	private final Broker<DataHelper<Entity, Reader, Writer>> jsonHolder;
-	private final Broker<DataStore<Entity>> datastoreHolder;
+	private final DataHelper<Entity, Reader, Writer> jsonHolder;
+	private final DataStore<Entity> datastoreHolder;
 	// final LoadingCache<String, DataHolder> dataCache;
 	DataHolder dataCached;
 
@@ -31,13 +30,13 @@ public class AttachedEntityListResouce extends AbstractResouce {
 		String value;
 		byte[] buffer;
 
-		public DataHolder(Broker<DataStore<Entity>> datastoreHolder, String classificatorName, String value) {
+		public DataHolder(DataStore<Entity> datastoreHolder, String classificatorName, String value) {
 			this.classificatorName = classificatorName;
 			this.value = checkNotNull(value);
 		}
 
 		byte[] get() {
-			List<Entity> dataList = datastoreHolder.get().getClassificator(classificatorName).getData(value);
+			List<Entity> dataList = datastoreHolder.getClassificator(classificatorName).getData(value);
 			return buildFrom(dataList);
 		}
 	}
@@ -54,7 +53,7 @@ public class AttachedEntityListResouce extends AbstractResouce {
 			} else {
 				start = false;
 			}
-			jsonHolder.get().stringifyTo(data, new OutputStreamWriter(out));
+			jsonHolder.stringifyTo(data, new OutputStreamWriter(out));
 		}
 		out.append(']');
 
@@ -63,8 +62,7 @@ public class AttachedEntityListResouce extends AbstractResouce {
 		return bout.toByteArray();
 	}
 
-	public AttachedEntityListResouce(Broker<DataHelper<Entity, Reader, Writer>> json, Broker<DataStore<Entity>> datas, final String attachedToTypeName,
-			final String attachToID) {
+	public AttachedEntityListResouce(DataHelper<Entity, Reader, Writer> json, DataStore<Entity> datas, final String attachedToTypeName, final String attachToID) {
 		super("text/json", 0, 1000);
 		this.jsonHolder = json;
 		this.datastoreHolder = datas;
@@ -78,12 +76,12 @@ public class AttachedEntityListResouce extends AbstractResouce {
 
 	@Override
 	protected String post(HttpServletRequest req) throws IOException {
-		DataStore<Entity> store = datastoreHolder.get();
+		DataStore<Entity> store = datastoreHolder;
 		InputStream in = req.getInputStream();
 		if (log.isTraceEnabled()) {
 			in = FileUtil.print(in);
 		}
-		Entity inData = jsonHolder.get().readFrom(null, new InputStreamReader(in));
+		Entity inData = jsonHolder.readFrom(null, new InputStreamReader(in));
 
 		store.add(inData);
 		store.flush();

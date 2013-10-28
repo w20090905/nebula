@@ -13,7 +13,6 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 
 import junit.framework.TestCase;
-import nebula.data.Broker;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -34,7 +33,7 @@ public class TypeTemplateResouceTest extends TestCase {
 	Log log = LogFactory.getLog(this.getClass());
 
 	Configuration templateConfig;
-	Broker<DataStore<Entity>> attributes;
+	DataStore<Entity> attributes;
 	TypeLoader typeLoader;
 	DataRepos dataWareHouse;
 	TypeDatastore typeBrokers;
@@ -75,7 +74,6 @@ public class TypeTemplateResouceTest extends TestCase {
 
 		this.typeBrokers = new TypeDatastore(typeLoader);
 
-
 		DbConfiguration dbConfiguration = DbConfiguration.getEngine(driverclass, dburl, username, password);
 
 		dataWareHouse = new DbDataRepos(this.typeBrokers, dbConfiguration);
@@ -101,7 +99,7 @@ public class TypeTemplateResouceTest extends TestCase {
 		String path = "/theme/angularjs/unicorn/Project-Issue-basic-home.html";
 		String theme = "angularjs";
 		String skin = "unicorn";
-		Broker<Type> type = this.typeBrokers.getBroker("Person");
+		Type type = this.typeBrokers.getBroker("Person");
 		String specName = null;
 		String layoutName = "basic";
 		String actionName = "detail.html";
@@ -135,7 +133,7 @@ public class TypeTemplateResouceTest extends TestCase {
 		String path = "/theme/angularjs/unicorn/Project-Issue-basic-home.html";
 		String theme = "angularjs";
 		String skin = "unicorn";
-		Broker<Type> type = this.typeBrokers.getBroker("Person");
+		Type type = this.typeBrokers.getBroker("Person");
 		String specName = null;
 		String layoutName = "basic";
 		String actionName = "detail.html";
@@ -169,7 +167,7 @@ public class TypeTemplateResouceTest extends TestCase {
 		String path = "/theme/angularjs/unicorn/Organization-basic-detail.html";
 		String theme = "angularjs";
 		String skin = "unicorn";
-		Broker<Type> type = this.typeBrokers.getBroker("Organization");
+		Type type = this.typeBrokers.getBroker("Organization");
 		String specName = null;
 		String layoutName = "basic";
 		String actionName = "detail.html";

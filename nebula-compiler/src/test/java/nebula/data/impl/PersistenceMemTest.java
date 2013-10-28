@@ -13,7 +13,7 @@ public class PersistenceMemTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		p = new DefaultDataRepos(new TypeDatastore(new SystemTypeLoader()));
-		store = p.define(String.class, Entity.class, "Person").get();
+		store = p.define(String.class, Entity.class, "Person");
 	}
 
 	protected void tearDown() throws Exception {
@@ -21,7 +21,7 @@ public class PersistenceMemTest extends TestCase {
 	}
 
 	public final void testDefine() {
-		store = p.define(String.class, Entity.class, "Person").get();
+		store = p.define(String.class, Entity.class, "Person");
 		assertNotNull(store);
 		// assertEquals("Person", store.getID());
 

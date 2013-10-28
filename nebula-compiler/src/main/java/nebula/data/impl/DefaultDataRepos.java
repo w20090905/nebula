@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.locks.ReentrantLock;
 
 import nebula.data.Broker;
+import nebula.data.DataAdapter;
 import nebula.data.DataStore;
 import nebula.data.Editable;
 import nebula.data.Timable;
@@ -22,40 +23,34 @@ import com.google.common.cache.LoadingCache;
 public class DefaultDataRepos implements DataReposEx {
 	private Log log = LogFactory.getLog(this.getClass());
 
-	final TypeDatastore typeBrokers;
-	LoadingCache<String, BrokerEx> cachedDatastore;
+	final TypeDatastore types;
+	LoadingCache<String, DataStore<? extends Timable>> cachedDatastore;
 
 	ReentrantLock lock = new ReentrantLock();
 
 	public DefaultDataRepos(TypeDatastore loader) {
-		this.typeBrokers = loader;
-		this.cachedDatastore = CacheBuilder.newBuilder().build(new CacheLoader<String, BrokerEx>() {
-			public BrokerEx load(final String path) throws Exception {
+		this.types = loader;
+		this.cachedDatastore = CacheBuilder.newBuilder().build(new CacheLoader<String, DataStore<? extends Timable>>() {
+			public DataStore<? extends Timable> load(final String path) throws Exception {
 
-				Broker<Type> typeBroker = DefaultDataRepos.this.typeBrokers.getBroker(path);
+				Type type = types.getBroker(path);
 
-				DataStore datastore = DefaultDataRepos.this.loadDataStore(typeBroker.get().getName(),
-						typeBroker.get());
-
-				BrokerCascade<DataStore, Type> datastoreBroker = new BrokerCascade<DataStore, Type>(datastore) {
+				DataStore datastore = Broker.watch(type, new DataAdapter<Type, DataStore>() {
 					@Override
-					public boolean onUpdate(Type newData, Type oldData) {
-						DataStore datastore = DefaultDataRepos.this.loadDataStore(newData.getName(), newData);
-						this.put(datastore);
-						return false;
+					public DataStore watch(Type newData, Type oldData) {
+						return loadDataStore(newData.getName(), newData);
 					}
-				};
-				typeBroker.addWatcher(datastoreBroker);
+				});
 
-				return datastoreBroker;
+				return datastore;
 			}
 		});
 	}
 
 	@Override
-	public <V extends Timable, I> Broker<DataStore<V>> define(Class<I> clzIndex, Class<V> clz, String name) {
+	public <V extends Timable, I> DataStore<V> define(Class<I> clzIndex, Class<V> clz, String name) {
 		try {
-			return (BrokerEx<DataStore<V>>) cachedDatastore.get(name);
+			return (DataStore<V>)cachedDatastore.get(name);
 		} catch (ExecutionException e) {
 			log.error(e);
 			throw new RuntimeException(e);
@@ -65,7 +60,6 @@ public class DefaultDataRepos implements DataReposEx {
 	protected DataStore loadDataStore(String name, Type type) {
 		return new EntityDataStore(IdMakerBuilder.getIDReader(type), DefaultDataRepos.this, type);
 	}
-
 
 	List<Editable> changes = new ArrayList<Editable>();
 

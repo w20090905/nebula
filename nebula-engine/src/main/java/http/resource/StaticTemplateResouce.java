@@ -9,7 +9,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nebula.data.Broker;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.lang.TypeLoader;
@@ -26,10 +25,9 @@ public class StaticTemplateResouce extends AbstractResouce {
 	final String theme;
 	final String skin;
 	final String name;
-	final Broker<DataStore<Entity>> attributes;
+	final DataStore<Entity> attributes;
 
-	public StaticTemplateResouce(Configuration cfg, TypeLoader typeLoader, Broker<DataStore<Entity>> attributes,
-			String theme, String skin, String name) {
+	public StaticTemplateResouce(Configuration cfg, TypeLoader typeLoader, DataStore<Entity> attributes, String theme, String skin, String name) {
 		super("text/template", 1000, 1000);
 
 		this.cfg = cfg;
@@ -49,14 +47,13 @@ public class StaticTemplateResouce extends AbstractResouce {
 			} else if ((template = cfg.getTemplate("theme/" + theme + "/" + name)) != null) {
 			} else if ((template = cfg.getTemplate("theme/" + name)) != null) {
 			} else if ((template = cfg.getTemplate(name)) != null) {
-			}else{
-				throw new IOException(name + " can not find!");				
+			} else {
+				throw new IOException(name + " can not find!");
 			}
-			
-			
+
 			ByteArrayOutputStream bout = new ByteArrayOutputStream();
 			Writer w = new OutputStreamWriter(bout);
-			DataStore<Entity> attrs = attributes.get();
+			DataStore<Entity> attrs = attributes;
 			root.put("attrs", attrs);
 			template.process(root, w);
 			w.flush();

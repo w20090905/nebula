@@ -954,8 +954,7 @@ public class Compiler {
 			mv.visitLdcInsn(org.objectweb.asm.Type.getType("Ljava/lang/String;"));
 			mv.visitLdcInsn(org.objectweb.asm.Type.getType("Lnebula/data/Entity;"));
 			mv.visitLdcInsn(name);
-			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/DataRepos", "define", "(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)Lnebula/data/Broker;");
-			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Broker", "get", "()Ljava/lang/Object;");
+			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/DataRepos", "define", "(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)Lnebula/data/DataStore;");
 			mv.visitTypeInsn(CHECKCAST, "nebula/data/DataStore");
 			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/DataStore", "listAll", "()Ljava/util/List;");
 		}

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import nebula.data.Broker;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
@@ -22,18 +21,16 @@ import org.apache.commons.logging.LogFactory;
 public class LoginListResouce implements Resource {
 	protected Log log = LogFactory.getLog(this.getClass());
 
-	private final Broker<DataStore<Entity>> users;
+	private final DataStore<Entity> users;
 	final RedirectResouce redirectTo;
 
-	public LoginListResouce(Broker<DataHelper<Entity, Reader, Writer>> json, Broker<DataStore<Entity>> users,
-			Broker<DataStore<Entity>> datas) {
+	public LoginListResouce(DataHelper<Entity, Reader, Writer> json, DataStore<Entity> users, DataStore<Entity> datas) {
 		this.users = users;
 		redirectTo = new RedirectResouce("/index.html");
 	}
 
 	@Override
-	public void handle(HttpServletRequest req, HttpServletResponse resp) throws IOException,
-			ServletException {
+	public void handle(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		if (log.isTraceEnabled()) {
 			log.trace("\tMethod" + req.getMethod());
 		}
@@ -52,7 +49,7 @@ public class LoginListResouce implements Resource {
 		try {
 			String username = req.getParameter("username");
 			// String password = form.get("password");
-			Entity user = users.get().get(username);
+			Entity user = users.get(username);
 			if (user == null) {
 				resp.setStatus(403);
 				redirectTo.redirectTo(req, resp, "/login.html");
@@ -61,12 +58,12 @@ public class LoginListResouce implements Resource {
 
 			resp.setStatus(200);
 			HttpSession session = req.getSession();
-			
+
 			session.setAttribute("#currentUser", user);
 			session.setAttribute("Theme", "angularjs");
 			session.setAttribute("Skin", "unicorn");
-			 Cookie loginUserID = new Cookie("LoginUserID", username);
-			 loginUserID.setPath("/");
+			Cookie loginUserID = new Cookie("LoginUserID", username);
+			loginUserID.setPath("/");
 			resp.addCookie(loginUserID);
 			// normal parse
 			resp.addHeader("Cache-Control", "max-age=0");

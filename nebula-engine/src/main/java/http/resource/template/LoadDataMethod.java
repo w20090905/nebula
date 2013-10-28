@@ -2,7 +2,6 @@ package http.resource.template;
 
 import java.util.List;
 
-import nebula.data.Broker;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -38,13 +37,13 @@ public class LoadDataMethod implements TemplateMethodModel {
 	}
 
 	public TemplateModel doLoad(String key) throws TemplateModelException {
-		Broker<DataStore<Entity>> datastore = dataWareHouse.define(String.class, Entity.class, key);
-		return new DatastoreTemplateHashModel(datastore.get());
+		DataStore<Entity> datastore = dataWareHouse.define(String.class, Entity.class, key);
+		return new DatastoreTemplateHashModel(datastore);
 	}
 
 	public TemplateModel doLoad(String key, String classificatorName, String classificatorValue) throws TemplateModelException {
-		Broker<DataStore<Entity>> datastore = dataWareHouse.define(String.class, Entity.class, key);
-		List<Entity> list = datastore.get().getClassificator(classificatorName).getData(classificatorValue);
+		DataStore<Entity> datastore = dataWareHouse.define(String.class, Entity.class, key);
+		List<Entity> list = datastore.getClassificator(classificatorName).getData(classificatorValue);
 		return new CollectionModel(list, (BeansWrapper) ObjectWrapper.SIMPLE_WRAPPER);
 	}
 }

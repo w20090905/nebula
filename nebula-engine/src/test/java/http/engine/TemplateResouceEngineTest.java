@@ -7,7 +7,6 @@ import static org.mockito.Mockito.when;
 import http.io.Loader;
 import http.io.Source;
 import http.resource.StaticResource;
-import http.resource.StaticTemplateResouce;
 import http.resource.TypeTemplateResouce;
 
 import java.io.IOException;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import junit.framework.TestCase;
-import nebula.data.Broker;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -42,7 +40,7 @@ public class TemplateResouceEngineTest extends TestCase {
 	@Mock
 	Configuration templateConfig;
 	@Mock
-	Broker<DataStore<Entity>> attributes;
+	DataStore<Entity> attributes;
 	@Mock
 	TypeLoader typeLoader;
 	@Mock
@@ -177,12 +175,9 @@ public class TemplateResouceEngineTest extends TestCase {
 
 		String reqPath = "/theme/angularjs/Type-simple-list.html";
 
-		@SuppressWarnings("unchecked")
-		Broker<Type>  typeBroker = (Broker<Type>)mock(Broker.class);
 		Type type = mock(Type.class);
 
-		when(typeBrokers.getBroker("Type")).thenReturn(typeBroker);
-		when(typeBroker.get()).thenReturn(type);
+		when(typeBrokers.getBroker("Type")).thenReturn(type);
 
 		when(type.getStandalone()).thenReturn(TypeStandalone.Master);
 		when(type.getAttrs()).thenReturn(mock(InheritHashMap.class));

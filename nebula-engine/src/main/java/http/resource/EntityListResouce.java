@@ -36,8 +36,8 @@ import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Lists;
 
 public class EntityListResouce extends AbstractResouce {
-	private final Broker<DataHelper<Entity, Reader, Writer>> jsonHolder;
-	private final Broker<DataStore<Entity>> datastoreHolder;
+	private final DataHelper<Entity, Reader, Writer> jsonHolder;
+	private final DataStore<Entity> datastoreHolder;
 	final LoadingCache<String, DataHolder> dataCache;
 
 	class TreeDataHolder implements DataHolder {
@@ -50,7 +50,7 @@ public class EntityListResouce extends AbstractResouce {
 		}
 
 		public byte[] get() {
-			List<Entity> dataList = datastoreHolder.get().listAll();
+			List<Entity> dataList = datastoreHolder.listAll();
 			List<Entity> to = Lists.newArrayList();
 
 			for (Entity entity : dataList) {
@@ -106,7 +106,7 @@ public class EntityListResouce extends AbstractResouce {
 			} else {
 				start = false;
 			}
-			jsonHolder.get().stringifyTo(data, new OutputStreamWriter(out));
+			jsonHolder.stringifyTo(data, new OutputStreamWriter(out));
 		}
 		out.append(']');
 
@@ -115,14 +115,14 @@ public class EntityListResouce extends AbstractResouce {
 		return bout.toByteArray();
 	}
 
-	public EntityListResouce(final Broker<Type> typeBroker, Broker<DataHelper<Entity, Reader, Writer>> json, Broker<DataStore<Entity>> datas) {
+	public EntityListResouce(final Type typeBroker, DataHelper<Entity, Reader, Writer> json, DataStore<Entity> datas) {
 		super("text/json", 0, 1000);
 		this.jsonHolder = json;
 		this.datastoreHolder = datas;
 		this.dataCache = CacheBuilder.newBuilder().maximumSize(1000).build(new CacheLoader<String, DataHolder>() {
 			public DataHolder load(String query) {
 				String[] params = query.split("&");
-				DataStore<Entity> dataStore = datastoreHolder.get();
+				DataStore<Entity> dataStore = datastoreHolder;
 				Map<String, Classificator<String, Entity>> classificatores = dataStore.getClassificatores();
 				String cKey = null;
 				String cValue = null;
@@ -132,12 +132,12 @@ public class EntityListResouce extends AbstractResouce {
 					String value = kv[1];
 					if ("root".equals(key)) {
 						Field c = null;
-						for (Field f : typeBroker.get().getDeclaredFields()) {
+						for (Field f : typeBroker.getDeclaredFields()) {
 							if (f.getRefer() == Reference.Cascade) {
 								c = f;
 							}
 						}
-						return new TreeDataHolder(c.getName() + typeBroker.get().getKeyField().getName(), value);
+						return new TreeDataHolder(c.getName() + typeBroker.getKeyField().getName(), value);
 					} else if (classificatores.containsKey(key)) {
 						cKey = key;
 						cValue = value;
@@ -147,9 +147,8 @@ public class EntityListResouce extends AbstractResouce {
 				return null;
 			}
 		});
-
-		json.addWatcher(new DataWatcher<DataHelper<Entity, Reader, Writer>>() {
-
+		
+		Broker.brokerOf(json).addWatcher(new DataWatcher<DataHelper<Entity, Reader, Writer>>() {
 			@Override
 			public boolean onUpdate(DataHelper<Entity, Reader, Writer> newData, DataHelper<Entity, Reader, Writer> oldData) {
 				dataCache.cleanUp();
@@ -163,7 +162,7 @@ public class EntityListResouce extends AbstractResouce {
 			String query = URIUtil.decodePath(req.getQueryString());
 			List<Entity> dataList;
 			if (query == null || query.length() == 0) {
-				dataList = datastoreHolder.get().listAll();
+				dataList = datastoreHolder.listAll();
 				this.cache = buildFrom(dataList);
 			} else {
 				this.cache = dataCache.get(query).get();
@@ -177,12 +176,12 @@ public class EntityListResouce extends AbstractResouce {
 
 	@Override
 	protected String post(HttpServletRequest req) throws IOException {
-		DataStore<Entity> store = datastoreHolder.get();
+		DataStore<Entity> store = datastoreHolder;
 		InputStream in = req.getInputStream();
 		if (log.isTraceEnabled()) {
 			in = FileUtil.print(in);
 		}
-		Entity inData = jsonHolder.get().readFrom(null, new InputStreamReader(in));
+		Entity inData = jsonHolder.readFrom(null, new InputStreamReader(in));
 
 		store.add(inData);
 		store.flush();

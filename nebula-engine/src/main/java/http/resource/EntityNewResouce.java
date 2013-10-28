@@ -9,7 +9,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nebula.data.Broker;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -20,14 +19,14 @@ import nebula.lang.RuntimeContext;
 import nebula.lang.Type;
 
 public class EntityNewResouce extends AbstractResouce {
-	private final Broker<DataHelper<Entity, Reader, Writer>> jsonHolder;
+	private final DataHelper<Entity, Reader, Writer> jsonHolder;
 
 	// private final Broker<DataStore<Entity>> datastoreHolder;
 	final RuntimeContext context;
 	final DataRepos dataRepos;
-	final Broker<Type> typeBroker;
+	final Type typeBroker;
 
-	public EntityNewResouce(final RuntimeContext context, final DataRepos dataRepos,Broker<DataHelper<Entity, Reader, Writer>> json, Broker<Type> typeBroker,Broker<DataStore<Entity>> datas) {
+	public EntityNewResouce(final RuntimeContext context, final DataRepos dataRepos,DataHelper<Entity, Reader, Writer> json, Type typeBroker,DataStore<Entity> datas) {
 		super("text/json", 0, 0);
 		this.jsonHolder = json;
 		this.context = context;
@@ -41,7 +40,7 @@ public class EntityNewResouce extends AbstractResouce {
 		for (Map.Entry<String, String[]> entry : req.getParameterMap().entrySet()) {
 			data.put(entry.getKey(), entry.getValue()[0]);
 		}		
-		NebulaNative.ctor(context, dataRepos, data, typeBroker.get());
+		NebulaNative.ctor(context, dataRepos, data, typeBroker);
 		// long newModified = (Long) data.get("LastModified_");
 		// if (newModified == this.lastModified) return;
 		/*StringBuilder sb = new StringBuilder();
@@ -64,7 +63,7 @@ public class EntityNewResouce extends AbstractResouce {
 		try {
 			bout = new ByteArrayOutputStream();
 			Writer write = new OutputStreamWriter(bout);
-			jsonHolder.get().stringifyTo(data, new OutputStreamWriter(bout));
+			jsonHolder.stringifyTo(data, new OutputStreamWriter(bout));
 			write.flush();
 			// this.lastModified = newModified;
 			this.cache = bout.toByteArray();

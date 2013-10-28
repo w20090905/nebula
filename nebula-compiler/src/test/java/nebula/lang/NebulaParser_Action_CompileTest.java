@@ -28,7 +28,7 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 	protected void setUp() throws Exception {
 		typeLoader = new TypeLoaderForTest(new SystemTypeLoader());
 		repos = new DefaultDataRepos(new TypeDatastore(typeLoader));
-		store = repos.define(String.class, Entity.class, "Person").get();
+		store = repos.define(String.class, Entity.class, "Person");
 	}
 
 	private void eqValue(String fieldname, Object expectedResult, String exprText) {

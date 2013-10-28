@@ -16,7 +16,6 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import nebula.data.Broker;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -105,16 +104,16 @@ public class EntityResouceEngine implements ResourceEngine {
 	}
 
 	private Resource makeEntityListResouce(String typeName) {
-		Broker<Type> typeBroker = typeBrokers.getBroker(typeName);
-		Broker<DataStore<Entity>> storeHolder = dataRepos.define(Long.class, Entity.class, typeName);
-		Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getSimpleHelper(typeBroker);
+		Type typeBroker = typeBrokers.getBroker(typeName);
+		DataStore<Entity> storeHolder = dataRepos.define(Long.class, Entity.class, typeName);
+		DataHelper<Entity, Reader, Writer> jsonHolder = JsonHelperProvider.getSimpleHelper(typeBroker);
 		return new EntityListResouce(typeBroker, jsonHolder, storeHolder);
 	}
 
 	private Resource makeEntityNewResouce(String typeName) {
-		Broker<Type> typeBroker = typeBrokers.getBroker(typeName);
-		Broker<DataStore<Entity>> storeHolder = dataRepos.define(Long.class, Entity.class, typeName);
-		Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(typeBroker);
+		Type typeBroker = typeBrokers.getBroker(typeName);
+		DataStore<Entity> storeHolder = dataRepos.define(Long.class, Entity.class, typeName);
+		DataHelper<Entity, Reader, Writer> jsonHolder = JsonHelperProvider.getHelper(typeBroker);
 
 		// if (typeBroker.get().getStandalone() == TypeStandalone.Transaction) {
 		// // return new TxEntityResource(jsonHolder, storeHolder, id);
@@ -124,9 +123,9 @@ public class EntityResouceEngine implements ResourceEngine {
 	}
 
 	private Resource makeAttachedEntityNewResouce(String attachToTypeName, String attachToID, String typeName) {
-		Broker<Type> typeBroker = typeBrokers.getBroker(typeName);
-		Broker<DataStore<Entity>> storeHolder = dataRepos.define(Long.class, Entity.class, typeName);
-		Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(typeBroker);
+		Type typeBroker = typeBrokers.getBroker(typeName);
+		DataStore<Entity> storeHolder = dataRepos.define(Long.class, Entity.class, typeName);
+		DataHelper<Entity, Reader, Writer> jsonHolder = JsonHelperProvider.getHelper(typeBroker);
 
 		// if (typeBroker.get().getStandalone() == TypeStandalone.Transaction) {
 		// // return new TxEntityResource(jsonHolder, storeHolder, id);
@@ -136,11 +135,11 @@ public class EntityResouceEngine implements ResourceEngine {
 	}
 
 	private Resource makeEntityResouce(String typeName, String id) {
-		Broker<Type> typeBroker = typeBrokers.getBroker(typeName);
-		Broker<DataStore<Entity>> storeHolder = dataRepos.define(Long.class, Entity.class, typeName);
-		Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getHelper(typeBroker);
+		Type typeBroker = typeBrokers.getBroker(typeName);
+		DataStore<Entity> storeHolder = dataRepos.define(Long.class, Entity.class, typeName);
+		DataHelper<Entity, Reader, Writer> jsonHolder = JsonHelperProvider.getHelper(typeBroker);
 
-		switch (typeBroker.get().getStandalone()) {
+		switch (typeBroker.getStandalone()) {
 		case Transaction:
 		case Relation:
 			return new TxEntityResource(jsonHolder, storeHolder, id);
@@ -151,9 +150,9 @@ public class EntityResouceEngine implements ResourceEngine {
 	}
 
 	private Resource makeAttachedEntityListResouce(String attachToTypeName, String attachToID, String typeName) {
-		Broker<Type> typeBroker = typeBrokers.getBroker(typeName);
-		Broker<DataStore<Entity>> storeHolder = dataRepos.define(Long.class, Entity.class, typeName);
-		Broker<DataHelper<Entity, Reader, Writer>> jsonHolder = JsonHelperProvider.getSimpleHelper(typeBroker);
+		Type typeBroker = typeBrokers.getBroker(typeName);
+		DataStore<Entity> storeHolder = dataRepos.define(Long.class, Entity.class, typeName);
+		DataHelper<Entity, Reader, Writer> jsonHolder = JsonHelperProvider.getSimpleHelper(typeBroker);
 		return new AttachedEntityListResouce(jsonHolder, storeHolder, attachToTypeName, attachToID);
 	}
 }

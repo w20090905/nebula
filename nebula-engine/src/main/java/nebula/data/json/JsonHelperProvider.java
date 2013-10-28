@@ -5,8 +5,8 @@ import java.io.Reader;
 import java.io.Writer;
 
 import nebula.data.Broker;
+import nebula.data.DataAdapter;
 import nebula.data.Entity;
-import nebula.data.impl.BrokerCascade;
 import nebula.lang.Type;
 
 import org.codehaus.jackson.JsonFactory;
@@ -44,38 +44,30 @@ public class JsonHelperProvider {
 	// return new DefaultJsonHelper<>(factory, new EntityJsonDataDealer(type));
 	// }
 
-	public static Broker<DataHelper<Entity, Reader, Writer>> getHelper(final Broker<Type> typeHolder) {
-		DataHelper<Entity, Reader, Writer> lastJsonHelper = (DataHelper<Entity, Reader, Writer>) new DefaultJsonHelper<Entity>(
-				factory, new EntitySerializer(typeHolder.get()));
+	public static DataHelper<Entity, Reader, Writer> getHelper(final Type type) {
 
-		final BrokerCascade<DataHelper<Entity,Reader,Writer>, Type> broker = new BrokerCascade<DataHelper<Entity,Reader,Writer>, Type>(lastJsonHelper){
+		DataHelper<Entity, Reader, Writer> broker = Broker.watch(type, new DataAdapter<Type, DataHelper<Entity, Reader, Writer>>() {
+
 			@Override
-			public boolean onUpdate(Type newData, Type oldData) {
-				this.put(new DefaultJsonHelper<Entity>(factory, new EntitySerializer(newData)));
-				return false;
+			public DataHelper<Entity, Reader, Writer> watch(Type newData, Type oldData) {
+				return new DefaultJsonHelper<Entity>(factory, new EntitySerializer(newData));
 			}
-			
-		};
-		
-		typeHolder.addWatcher(broker);
+
+		});
 
 		return broker;
 	}
 
-	public static Broker<DataHelper<Entity, Reader, Writer>> getSimpleHelper(final Broker<Type> typeHolder) {
-		DataHelper<Entity, Reader, Writer> lastJsonHelper = (DataHelper<Entity, Reader, Writer>) new DefaultJsonHelper<Entity>(
-				factory, new SimpleEntitySerializer(typeHolder.get()));
+	public static DataHelper<Entity, Reader, Writer> getSimpleHelper(final Type type) {
 
-		final BrokerCascade<DataHelper<Entity,Reader,Writer>, Type> broker = new BrokerCascade<DataHelper<Entity,Reader,Writer>, Type>(lastJsonHelper){
+		DataHelper<Entity, Reader, Writer> broker = Broker.watch(type, new DataAdapter<Type, DataHelper<Entity, Reader, Writer>>() {
+
 			@Override
-			public boolean onUpdate(Type newData, Type oldData) {
-				this.put(new DefaultJsonHelper<Entity>(factory, new SimpleEntitySerializer(newData)));
-				return false;
+			public DataHelper<Entity, Reader, Writer> watch(Type newData, Type oldData) {
+				return new DefaultJsonHelper<Entity>(factory, new SimpleEntitySerializer(newData));
 			}
-			
-		};
-		
-		typeHolder.addWatcher(broker);
+
+		});
 
 		return broker;
 	}

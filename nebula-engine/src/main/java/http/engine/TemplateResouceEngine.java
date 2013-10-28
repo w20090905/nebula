@@ -9,7 +9,6 @@ import http.resource.TypeTemplateResouce;
 
 import javax.inject.Inject;
 
-import nebula.data.Broker;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -26,7 +25,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 	private final long dynamicAge;
 
 	private final Configuration templateConfig;
-	final Broker<DataStore<Entity>> attributes;
+	final DataStore<Entity> attributes;
 	final TypeLoader typeLoader;
 	final DataRepos dataWareHouse;
 	final TypeDatastore typeBrokers;
@@ -39,20 +38,20 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 		this.attributes = dataWareHouse.define(String.class, Entity.class, "Attribute");
 		this.dataWareHouse = dataWareHouse;
 		this.staticAge = 30L * 24L * 60L * 60L;
-		this.dynamicAge = 3L;//3 Seconds 
+		this.dynamicAge = 3L;// 3 Seconds
 		this.typeBrokers = typeBrokers;
 	}
 
 	@Override
 	public Resource resolve(String path) {
 		String extension = path.substring(path.lastIndexOf('.') + 1);
-		
+
 		long maxAge = 0;
-		
-		if("css js jpg png".indexOf(extension)>=0){
-			maxAge =  this.staticAge;
-		}else{
-			maxAge =  this.dynamicAge;			
+
+		if ("css js jpg png".indexOf(extension) >= 0) {
+			maxAge = this.staticAge;
+		} else {
+			maxAge = this.dynamicAge;
 		}
 
 		Source source = loader.findSource(path);
@@ -116,8 +115,8 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 			String typeName;
 			String layoutName;
 			String actionName;
-			Broker<Type> type;
-			Broker<Type> attachedType;
+			Type type;
+			Type attachedType;
 			switch (names.length - start) {
 			default:
 				return null;
@@ -128,7 +127,7 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 				actionName = names[start + 3];
 				attachedType = typeBrokers.getBroker(attachedTypeName);
 				type = typeBrokers.getBroker(typeName);
-				if (specName == null && type.get().getStandalone() != TypeStandalone.Transaction) {
+				if (specName == null && type.getStandalone() != TypeStandalone.Transaction) {
 					specName = "setting";
 				}
 				return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, path, theme, skin, attachedType, type, specName, layoutName,
@@ -138,15 +137,19 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 				layoutName = names[start + 1];
 				actionName = names[start + 2];
 				type = typeBrokers.getBroker(typeName);
-//				if (type.get().getAttrs().containsKey(Type.ATTACH_TO)) {
-//					attachedTypeName = (String) type.get().getAttrs().get(Type.ATTACH_TO);
-//					attachedType = typeBrokers.getBroker(attachedTypeName);
-//					if (specName == null && type.get().getStandalone() == TypeStandalone.Master) {
-//						specName = "setting";
-//					}
-//					return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, path, theme, skin, attachedType, type, specName,
-//							layoutName, actionName);
-//				}
+				// if (type.get().getAttrs().containsKey(Type.ATTACH_TO)) {
+				// attachedTypeName = (String)
+				// type.get().getAttrs().get(Type.ATTACH_TO);
+				// attachedType = typeBrokers.getBroker(attachedTypeName);
+				// if (specName == null && type.get().getStandalone() ==
+				// TypeStandalone.Master) {
+				// specName = "setting";
+				// }
+				// return new AttachedTypeTemplateResouce(templateConfig,
+				// dataWareHouse, attributes, path, theme, skin, attachedType,
+				// type, specName,
+				// layoutName, actionName);
+				// }
 				return new TypeTemplateResouce(templateConfig, dataWareHouse, attributes, path, theme, skin, type, specName, layoutName, actionName);
 
 			case 2:
@@ -155,15 +158,19 @@ public class TemplateResouceEngine extends StaticResourceEngine {
 				actionName = names[start + 1];
 
 				type = typeBrokers.getBroker(typeName);
-//				if (type.get().getAttrs().containsKey(Type.ATTACH_TO)) {
-//					attachedTypeName = (String) type.get().getAttrs().get(Type.ATTACH_TO);
-//					attachedType = typeBrokers.getBroker(attachedTypeName);
-//					if (specName == null && type.get().getStandalone() == TypeStandalone.Master) {
-//						specName = "setting";
-//					}
-//					return new AttachedTypeTemplateResouce(templateConfig, dataWareHouse, attributes, path, theme, skin, attachedType, type, specName,
-//							layoutName, actionName);
-//				}
+				// if (type.get().getAttrs().containsKey(Type.ATTACH_TO)) {
+				// attachedTypeName = (String)
+				// type.get().getAttrs().get(Type.ATTACH_TO);
+				// attachedType = typeBrokers.getBroker(attachedTypeName);
+				// if (specName == null && type.get().getStandalone() ==
+				// TypeStandalone.Master) {
+				// specName = "setting";
+				// }
+				// return new AttachedTypeTemplateResouce(templateConfig,
+				// dataWareHouse, attributes, path, theme, skin, attachedType,
+				// type, specName,
+				// layoutName, actionName);
+				// }
 				return new TypeTemplateResouce(templateConfig, dataWareHouse, attributes, path, theme, skin, type, specName, layoutName, actionName);
 			}
 

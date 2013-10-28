@@ -9,20 +9,17 @@ import java.io.Writer;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nebula.data.Broker;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
 
-
 public class EntityResouce extends AbstractResouce {
-	private final Broker<DataHelper<Entity, Reader, Writer>> jsonHolder;
+	private final DataHelper<Entity, Reader, Writer> jsonHolder;
 
 	private final String key;
-	private final Broker<DataStore<Entity>> datastoreHolder;
+	private final DataStore<Entity> datastoreHolder;
 
-	public EntityResouce(Broker<DataHelper<Entity, Reader, Writer>> json, Broker<DataStore<Entity>> datas,
-			String key) {
+	public EntityResouce(DataHelper<Entity, Reader, Writer> json, DataStore<Entity> datas, String key) {
 		super("text/json", 1, 1);
 		this.jsonHolder = json;
 		this.datastoreHolder = datas;
@@ -31,16 +28,16 @@ public class EntityResouce extends AbstractResouce {
 
 	@Override
 	protected void get(HttpServletRequest req) throws IOException {
-		Entity data = datastoreHolder.get().get(key);
+		Entity data = datastoreHolder.get(key);
 
-		long newModified = (Long)data.get("LastModified_");
+		long newModified = (Long) data.get("LastModified_");
 		// if (newModified == this.lastModified) return;
 
 		ByteArrayOutputStream bout = null;
 		try {
 			bout = new ByteArrayOutputStream();
 			Writer write = new OutputStreamWriter(bout);
-			jsonHolder.get().stringifyTo(data, new OutputStreamWriter(bout));
+			jsonHolder.stringifyTo(data, new OutputStreamWriter(bout));
 			write.flush();
 			this.lastModified = newModified;
 			this.cache = bout.toByteArray();
@@ -54,10 +51,10 @@ public class EntityResouce extends AbstractResouce {
 
 	@Override
 	protected void put(HttpServletRequest req) throws IOException {
-		Entity data = datastoreHolder.get().get(key).editable();
+		Entity data = datastoreHolder.get(key).editable();
 		if (data != null) {
-			jsonHolder.get().readFrom(data, new InputStreamReader(req.getInputStream()));
-			datastoreHolder.get().flush();
+			jsonHolder.readFrom(data, new InputStreamReader(req.getInputStream()));
+			datastoreHolder.flush();
 		} else {
 			throw new RuntimeException("Cann't find object " + key);
 		}

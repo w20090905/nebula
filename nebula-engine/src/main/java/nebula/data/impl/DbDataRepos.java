@@ -6,7 +6,6 @@ import nebula.data.DataStore;
 import nebula.data.db.DbConfiguration;
 import nebula.data.db.DbTxDataExecutor;
 import nebula.lang.Type;
-import nebula.lang.TypeStandalone;
 
 public class DbDataRepos extends DefaultDataRepos implements DataReposEx {
 

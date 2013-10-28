@@ -25,7 +25,7 @@ public class DbEntityDataPersisterTest extends TestCase {
 		dbconfig = DbConfiguration.getEngine(driverclass, url, username, password);
 		p = new DbDataRepos(new TypeDatastore(new SystemTypeLoader()), dbconfig);
 
-		store = p.define(String.class, Entity.class, "Person").get();
+		store = p.define(String.class, Entity.class, "Person");
 		store.clearChanges();
 	}
 

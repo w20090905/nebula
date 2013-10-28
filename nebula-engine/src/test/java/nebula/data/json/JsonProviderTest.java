@@ -56,10 +56,10 @@ public class JsonProviderTest extends TestCase {
 		// store = persistence.define(String.class,Entity.class,
 		// type.getName());
 
-		Broker<DataHelper<Entity, Reader, Writer>> json = JsonHelperProvider.getHelper(typeBrokers.getBroker(type.getName()));
+		DataHelper<Entity, Reader, Writer> json = JsonHelperProvider.getHelper(typeBrokers.getBroker(type.getName()));
 		Entity n = new EditableEntity();
 
-		n = json.get().readFrom(
+		n = json.readFrom(
 				n,
 				new StringReader("{" + "	\"Name\"		:\"wangshilian\",	" + "	\"Age\"			:12,					"
 						+ "	\"Decimal\"		:9876.5432,	" + "	\"Date\"		:\"2012-12-20\",	" + "	\"Time\"		:\"12:00:12\",	"
@@ -85,7 +85,7 @@ public class JsonProviderTest extends TestCase {
 		assertEquals(sdf.parseDateTime("2012-12-20 23:58:59.789").getMillis(), n.get("Timestamp"));
 
 		Writer out = new StringWriter();
-		json.get().stringifyTo(n, out);
+		json.stringifyTo(n, out);
 		assertEquals("{\"Name\":\"wangshilian\"," + "\"Age\":12,\"Decimal\":9876.5432," + "\"Date\":\"2012-12-20\","
 				+ "\"Time\":\"12:00:12\"," + "\"Datetime\":\"2012-12-20 23:58:59\","
 				+ "\"Timestamp\":\"2012-12-20 23:58:59.789\"}", out.toString());

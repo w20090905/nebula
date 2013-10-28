@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import nebula.data.Broker;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.impl.EditableEntity;
@@ -21,17 +20,16 @@ import org.apache.commons.logging.LogFactory;
 public class SignupResouce implements Resource {
 	protected Log log = LogFactory.getLog(this.getClass());
 
-	private final Broker<DataStore<Entity>> users;
+	private final DataStore<Entity> users;
 	final RedirectResouce redirectTo;
 
-	public SignupResouce(Broker<DataHelper<Entity, Reader, Writer>> json, Broker<DataStore<Entity>> users) {
+	public SignupResouce(DataHelper<Entity, Reader, Writer> json, DataStore<Entity> users) {
 		this.users = users;
 		redirectTo = new RedirectResouce("/index.html");
 	}
 
 	@Override
-	public void handle(HttpServletRequest req, HttpServletResponse resp) throws IOException,
-			ServletException {
+	public void handle(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		if (log.isTraceEnabled()) {
 			log.trace("\tMethod" + req.getMethod());
 		}
@@ -48,7 +46,7 @@ public class SignupResouce implements Resource {
 	// @SuppressWarnings("unchecked")
 	protected void post(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		try {
-			DataStore<Entity> store = users.get();
+			DataStore<Entity> store = users;
 			String username = req.getParameter("username");
 			String password = req.getParameter("password");
 			String email = req.getParameter("email");
@@ -59,8 +57,7 @@ public class SignupResouce implements Resource {
 				redirectTo.redirectTo(req, resp, "/signup.html");
 				return;
 			}
-			
-			
+
 			EditableEntity newuser = new EditableEntity();
 			newuser.put("Name", username);
 			newuser.put("Password", password);

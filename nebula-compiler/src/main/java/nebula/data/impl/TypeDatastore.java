@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import nebula.data.Broker;
+import nebula.data.BrokerHandler;
 import nebula.data.Classificator;
 import nebula.data.DataListener;
 import nebula.data.DataStore;
@@ -16,28 +17,49 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
-public class TypeDatastore implements DataStore<Type>, DataListener<Type> {
+public class TypeDatastore implements DataStore<Type> {
 	final TypeLoader typeLoader;
 
-	LoadingCache<String, BrokerEx<Type>> cachedTypes;
+	final LoadingCache<String, BrokerHandler<Type>> cachedTypes;
 
 	public TypeDatastore(TypeLoader typeLoader) {
 		this.typeLoader = typeLoader;
-		this.cachedTypes = CacheBuilder.newBuilder().build(new CacheLoader<String, BrokerEx<Type>>() {
-			public BrokerEx<Type> load(final String path) throws Exception {
-					return Brokers.of(TypeDatastore.this.typeLoader.findType(path));
+		this.cachedTypes = CacheBuilder.newBuilder().build(new CacheLoader<String, BrokerHandler<Type>>() {
+			public BrokerHandler<Type> load(final String path) throws Exception {
+				return Broker.broke(Type.class, TypeDatastore.this.typeLoader.findType(path));
 			}
 		});
-		this.typeLoader.addListener(this);
+		this.typeLoader.addListener(dataListener);
 	}
 
+	DataListener<Type> dataListener = new DataListener<Type>() {
+		@Override
+		public void onAdd(Type v) {
+			cachedTypes.put(v.getName(), Broker.broke(Type.class, v));
+		}
+
+		@Override
+		public void onUpdate(Type oldData, Type newData) {
+			try {
+				cachedTypes.get(oldData.getName()).setNewValue(newData);
+			} catch (ExecutionException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+		@Override
+		public void onRemove(Type v) {
+			cachedTypes.invalidate(v.getName());
+		}
+	};
+
 	public Type get(Object key) {
-		return typeLoader.findType((String)key);
+		return typeLoader.findType((String) key);
 	}
-	
-	public Broker<Type> getBroker(Object key) {
+
+	public Type getBroker(Object key) {
 		try {
-			return cachedTypes.get((String)key);
+			return cachedTypes.get((String) key).get();
 		} catch (ExecutionException e) {
 			throw new RuntimeException(e);
 		}
@@ -45,38 +67,19 @@ public class TypeDatastore implements DataStore<Type>, DataListener<Type> {
 
 	@Override
 	public Classificator<String, Type> getClassificator(String name) {
-		// TODO Not realized getClassificator(String name) 
+		// TODO Not realized getClassificator(String name)
 		return null;
 	}
 
 	@Override
 	public Map<String, Classificator<String, Entity>> getClassificatores() {
-		// TODO Not realized getClassificatores() 
+		// TODO Not realized getClassificatores()
 		return null;
 	}
 
 	@Override
 	public long getLastModified() {
 		return System.currentTimeMillis();
-	}
-
-	@Override
-	public void onAdd(Type v) {
-		this.cachedTypes.put(v.getName(), Brokers.of(v));
-	}
-
-	@Override
-	public void onUpdate(Type oldData, Type newData) {
-		try {
-			this.cachedTypes.get(oldData.getName()).put(newData);
-		} catch (ExecutionException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@Override
-	public void onRemove(Type v) {
-		this.cachedTypes.invalidate(v.getName());
 	}
 
 	@Override

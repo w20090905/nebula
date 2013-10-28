@@ -13,7 +13,6 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 
 import junit.framework.TestCase;
-import nebula.data.Broker;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
@@ -34,7 +33,7 @@ public class AttachedTypeTemplateResouceTest extends TestCase {
 	Log log = LogFactory.getLog(this.getClass());
 
 	Configuration templateConfig;
-	Broker<DataStore<Entity>> attributes;
+	DataStore<Entity> attributes;
 	TypeLoader typeLoader;
 	DataRepos dataWareHouse;
 	TypeDatastore typeBrokers;
@@ -101,8 +100,8 @@ public class AttachedTypeTemplateResouceTest extends TestCase {
 		String path = "/theme/angularjs/unicorn/Project-Issue-basic-home.html";
 		String theme = "angularjs";
 		String skin = "unicorn";
-		Broker<Type> attachedType = this.typeBrokers.getBroker("Project");
-		Broker<Type> type = this.typeBrokers.getBroker("Issue");
+		Type attachedType = this.typeBrokers.getBroker("Project");
+		Type type = this.typeBrokers.getBroker("Issue");
 		String specName = null;
 		String layoutName = "basic";
 		String actionName = "home.html";
@@ -135,8 +134,8 @@ public class AttachedTypeTemplateResouceTest extends TestCase {
 		String path = "/theme/angularjs/unicorn/Project-ProjectPersonMember-basic-home.html";
 		String theme = "angularjs";
 		String skin = "unicorn";
-		Broker<Type> attachedType = this.typeBrokers.getBroker("Project");
-		Broker<Type> type = this.typeBrokers.getBroker("ProjectPersonMember");
+		Type attachedType = this.typeBrokers.getBroker("Project");
+		Type type = this.typeBrokers.getBroker("ProjectPersonMember");
 		String specName = "setting";
 		String layoutName = "basic";
 		String actionName = "list.html";
@@ -164,12 +163,13 @@ public class AttachedTypeTemplateResouceTest extends TestCase {
 		System.out.println(" $$$$$$$$ " + (end - start) / Max);
 
 	}
+
 	public final void testLoadProjectVersion() throws Exception {
 		String path = "/theme/angularjs/unicorn/Project-Version-basic-home.html";
 		String theme = "angularjs";
 		String skin = "unicorn";
-		Broker<Type> attachedType = this.typeBrokers.getBroker("Project");
-		Broker<Type> type = this.typeBrokers.getBroker("Version");
+		Type attachedType = this.typeBrokers.getBroker("Project");
+		Type type = this.typeBrokers.getBroker("Version");
 		String specName = "setting";
 		String layoutName = "basic";
 		String actionName = "list.html";
