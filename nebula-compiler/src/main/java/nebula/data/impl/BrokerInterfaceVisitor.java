@@ -28,6 +28,7 @@ import static org.objectweb.asm.Opcodes.RETURN;
 import nebula.data.Broker;
 
 import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.Method;
@@ -173,5 +174,11 @@ public class BrokerInterfaceVisitor extends ClassVisitor {
 			mv.visitEnd();
 		}
 		super.visitEnd();
+	}
+
+	@Override
+	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
+//		return super.visitField(access, name, desc, signature, value);
+		return null;
 	}
 }
