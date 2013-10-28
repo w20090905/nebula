@@ -40,7 +40,7 @@ public class BrokerBuilder extends ClassLoader {
 
 			Class<?> ac = this.defineClass(bw.name.replace('/', '.'), code, 0, code.length);
 			@SuppressWarnings("unchecked")
-			Broker<T> ba = (Broker<T>) ac.newInstance();
+			BrokerHandler<T> ba = (BrokerHandler<T>) ac.newInstance();
 
 			// ba.actualValue = new A() {
 			//
