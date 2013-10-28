@@ -1,0 +1,5 @@
+tx WorkTime{
+!!ID;
+Project;
+Description;
+}
