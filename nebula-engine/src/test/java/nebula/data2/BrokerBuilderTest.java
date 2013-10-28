@@ -18,11 +18,11 @@ public class BrokerBuilderTest extends TestCase {
 
 	public final void testBuilder() {
 		builder = new BrokerBuilder();
-		A a= builder.builder(A.class);
+		BrokerInputInterface a= builder.builder(BrokerInputInterface.class);
 		
 		@SuppressWarnings("unchecked")
-		Broker<A> ba = (Broker<A>)a;
-		ba.actualValue = new A() {
+		Broker<BrokerInputInterface> ba = (Broker<BrokerInputInterface>)a;
+		ba.actualValue = new BrokerInputInterface() {
 			@Override
 			public String get(String name) {
 				return name + "____";
