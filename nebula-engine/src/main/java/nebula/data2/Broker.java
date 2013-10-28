@@ -81,7 +81,7 @@ public abstract class Broker<T> implements BrokerHandler<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	final public static <R, T> R watch(T watch, final Watcher<T, R> listener) {
+	final public static <R, T> R watch(T watch, final DataAdapter<T, R> listener) {
 		Method m = listener.getClass().getMethods()[0];
 		Preconditions.checkArgument("watch".equals(m.getName()));
 		final BrokerHandler<R> r = agent(m.getReturnType());

@@ -47,7 +47,7 @@ public class BrokerTest extends TestCase {
 		TT tt = new TT("Hello ");
 		BrokerHandler<BrokerTestInputInterface> ba = Broker.broke(BrokerTestInputInterface.class, tt);
 
-		BrokerTestResultInterface ge = Broker.watch(ba.get(), new Watcher<BrokerTestInputInterface, BrokerTestResultInterface>() {
+		BrokerTestResultInterface ge = Broker.watch(ba.get(), new DataAdapter<BrokerTestInputInterface, BrokerTestResultInterface>() {
 			@Override
 			public BrokerTestResultInterface watch(BrokerTestInputInterface newData, BrokerTestInputInterface oldData) {
 				return new Greeting(newData);
