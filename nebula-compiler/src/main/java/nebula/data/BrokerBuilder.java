@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
 
+import nebula.data.impl.BrokerInstanceBuilder;
+import nebula.data.impl.BrokerInstanceBuilderMaker;
 import nebula.data.impl.BrokerInterfaceVisitor;
 
 import org.apache.commons.logging.Log;
@@ -19,21 +21,22 @@ import com.google.common.collect.Maps;
 public class BrokerBuilder extends ClassLoader {
 	Log log = LogFactory.getLog(getClass());
 
-	private final Map<Class<?>, Class<?>> knownBrokeres;
+	private final Map<String, BrokerInstanceBuilder> knownBrokeres;
+	final BrokerInstanceBuilderMaker instanceBuilder;
 
 	public BrokerBuilder() {
 		knownBrokeres = Maps.newConcurrentMap();
+		instanceBuilder = new BrokerInstanceBuilderMaker();
 	}
 
 	public <T> T builder(Class<?> target) {
 
 		try {
-			Class<?> broker = knownBrokeres.get(target);
+			BrokerInstanceBuilder builder = knownBrokeres.get(target.getName());
 
-			if (broker != null) {
-				@SuppressWarnings("unchecked")
-				BrokerHandler<T> ba = (BrokerHandler<T>) broker.newInstance();
-				return ba.get();
+			if (builder != null) {
+				Broker<T> broker = builder.build();
+				return broker.get();
 			}
 
 			String typeName = target.getName() + "BrokerAuto";
@@ -47,25 +50,35 @@ public class BrokerBuilder extends ClassLoader {
 			byte[] code = cw.toByteArray();
 
 			if (log.isDebugEnabled()) {
-				String filename = "tmp/" + typeName + ".class";
-				String path = filename.substring(0, filename.lastIndexOf('/'));
-				File file = new File(path);
-				if (!file.exists()) {
-					file.mkdir();
+				try {
+					String filename = "tmp/" + typeName + ".class";
+					String path = filename.substring(0, filename.lastIndexOf('/'));
+					File file = new File(path);
+					if (!file.exists()) {
+						file.mkdir();
+					}
+					new FileOutputStream(filename).write(code);
+				} catch (FileNotFoundException e) {
+					log.error(e);
+					throw new RuntimeException(e);
 				}
-				new FileOutputStream(filename).write(code);
 			}
 
-			broker = this.defineClass(typeName, code, 0, code.length);
-			this.knownBrokeres.put(target, broker);
+			Class<?> clzBroker = this.defineClass(typeName, code, 0, code.length);
+			this.resolveClass(clzBroker);
 
-			@SuppressWarnings("unchecked")
-			BrokerHandler<T> ba = (BrokerHandler<T>) broker.newInstance();
-			return ba.get();
+			byte[] codeBuilder = instanceBuilder.dump(typeName);
+			String builderTypeName = typeName + "Builder";
 
-		} catch (FileNotFoundException e) {
-			log.error(e);
-			throw new RuntimeException(e);
+			Class<?> clzBuilder = this.defineClass(builderTypeName, codeBuilder, 0, codeBuilder.length);
+
+			builder = (BrokerInstanceBuilder) clzBuilder.newInstance();
+
+			this.knownBrokeres.put(target.getName(), builder);
+
+			Broker<T> broker = builder.build();
+			return broker.get();
+
 		} catch (ClassFormatError e) {
 			log.error(e);
 			throw new RuntimeException(e);
@@ -79,11 +92,5 @@ public class BrokerBuilder extends ClassLoader {
 			log.error(e);
 			throw new RuntimeException(e);
 		}
-	}
-
-	@Override
-	public Class<?> loadClass(String name) throws ClassNotFoundException {
-		// TODO Auto-generated method stub
-		return super.loadClass(name);
 	}
 }
