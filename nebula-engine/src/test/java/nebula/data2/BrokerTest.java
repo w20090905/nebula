@@ -12,7 +12,7 @@ public class BrokerTest extends TestCase {
 		super.tearDown();
 	}
 	
-	class TT implements BrokerInputInterface {
+	class TT implements BrokerTestInputInterface {
 		String prefix;
 
 		public TT(String prefix) {
@@ -23,12 +23,17 @@ public class BrokerTest extends TestCase {
 		public String get(String name) {
 			return this.prefix + name;
 		}
+
+		@Override
+		public String get(String name, String name2) {
+			return prefix +  name + name2;
+		}
 	}
 
 	class Greeting implements BrokerTestResultInterface {
-		BrokerInputInterface a;
+		BrokerTestInputInterface a;
 
-		public Greeting(BrokerInputInterface a) {
+		public Greeting(BrokerTestInputInterface a) {
 			this.a = a;
 		}
 
@@ -40,11 +45,11 @@ public class BrokerTest extends TestCase {
 
 	public final void testWatch() {
 		TT tt = new TT("Hello ");
-		BrokerHandler<BrokerInputInterface> ba = Broker.broke(BrokerInputInterface.class, tt);
+		BrokerHandler<BrokerTestInputInterface> ba = Broker.broke(BrokerTestInputInterface.class, tt);
 
-		BrokerTestResultInterface ge = Broker.watch(ba.get(), new Watcher<BrokerInputInterface, BrokerTestResultInterface>() {
+		BrokerTestResultInterface ge = Broker.watch(ba.get(), new Watcher<BrokerTestInputInterface, BrokerTestResultInterface>() {
 			@Override
-			public BrokerTestResultInterface watch(BrokerInputInterface newData, BrokerInputInterface oldData) {
+			public BrokerTestResultInterface watch(BrokerTestInputInterface newData, BrokerTestInputInterface oldData) {
 				return new Greeting(newData);
 			}
 		});

@@ -15,7 +15,7 @@ public abstract class Broker<T> implements BrokerHandler<T> {
 	protected Broker() {
 	}
 
-	static Log log = LogFactory.getLog(Broker.class);
+	final static Log log = LogFactory.getLog(Broker.class);
 
 	protected List<DataWatcher<T>> listeners;
 	protected T actualValue;
@@ -28,15 +28,16 @@ public abstract class Broker<T> implements BrokerHandler<T> {
 		listener.onUpdate(actualValue, null);
 	}
 
-	/* (non-Javadoc)
-	 * @see nebula.data2.BrokerHandler#setNewValue(T)
-	 */
 	@Override
 	public void setNewValue(T newValue) {
 		boolean hasLostReference = false;
+		T oldValue = this.actualValue;
+		this.actualValue = newValue;
+
+		if (listeners == null) return;
 		for (DataWatcher<T> listener : listeners) {
 			if (listener != null) {
-				boolean result = listener.onUpdate(newValue, this.actualValue);
+				boolean result = listener.onUpdate(this.actualValue, oldValue);
 				if (result) break;
 			} else {
 				hasLostReference = true;
@@ -51,26 +52,39 @@ public abstract class Broker<T> implements BrokerHandler<T> {
 			}
 		}
 	}
-	
-	public static <T> T of(T value){
-		BrokerHandler<T> b = agent(value.getClass());
-		b.setNewValue(value);
-		return b.get();
+
+	@Override
+	public T getActualValue() {
+		return this.actualValue;
 	}
-	
-	public static <T> T update(T value, T newvalue){
-		if(!(value instanceof BrokerHandler))throw new RuntimeException("Should be brokerhandle"); 
+
+	@Override
+	public abstract T get();
+
+	@SuppressWarnings("unchecked")
+	final public static <T> BrokerHandler<T> brokerOf(T value) {
+		return (BrokerHandler<T>) value;
+	}
+
+	final public static <T> BrokerHandler<T> broke(Class<T> clz, T value) {
+		BrokerHandler<T> b = agent(clz);
+		b.setNewValue(value);
+		return b;
+	}
+
+	final public static <T> T update(T value, T newvalue) {
+		if (!(value instanceof BrokerHandler)) throw new RuntimeException("Should be brokerhandle");
 		@SuppressWarnings("unchecked")
-		BrokerHandler<T> bt = (BrokerHandler<T>)value;
+		BrokerHandler<T> bt = (BrokerHandler<T>) value;
 		bt.setNewValue(newvalue);
 		return bt.get();
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <R, T> R watch(T watch, final Watcher<T,R> listener) {
+	final public static <R, T> R watch(T watch, final Watcher<T, R> listener) {
 		Method m = listener.getClass().getMethods()[0];
 		Preconditions.checkArgument("watch".equals(m.getName()));
-		final BrokerHandler<R> r = agent(m.getReturnType().getClass());
+		final BrokerHandler<R> r = agent(m.getReturnType());
 
 		Preconditions.checkState(watch instanceof Broker);
 		Broker<T> watchTo = (Broker<T>) watch;
@@ -85,23 +99,10 @@ public abstract class Broker<T> implements BrokerHandler<T> {
 		return (R) r;
 	}
 
-	private static BrokerBuilder brokerBuilder = new BrokerBuilder();
+	private final static BrokerBuilder brokerBuilder = new BrokerBuilder();
 
-	public static <R> BrokerHandler<R> agent(Class<?> clz) {
+	public final static <R> BrokerHandler<R> agent(Class<?> clz) {
 		return brokerBuilder.builder(clz);
 	}
 
-	/* (non-Javadoc)
-	 * @see nebula.data2.BrokerHandler#getActualValue()
-	 */
-	@Override
-	public T getActualValue() {
-		return this.actualValue;
-	}
-
-	/* (non-Javadoc)
-	 * @see nebula.data2.BrokerHandler#get()
-	 */
-	@Override
-	public abstract T get();
 }
