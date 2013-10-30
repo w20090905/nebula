@@ -25,12 +25,40 @@ angular.module('nebula', ['nebulaFilters', 'nebulaServices','nebulaDirectives','
 
 			when('/welcome', {templateUrl: '/theme/angularjs/unicorn/welcome.html', controller: DoNothingCtrl}).
 			otherwise({redirectTo: '/welcome'});
-	}])	.run(function($rootScope, $location,  $interpolate) {
-	 	$rootScope.$on('$routeChangeStart', function(event,next,last) {
-			if(next.$route && next.$route.templateUrlWP){
-	 			next.$route.templateUrl = $interpolate(next.$route.templateUrlWP)(next.pathParams);
-	 		}
-	});
+	}])
+	.config(['$httpProvider', function($httpProvider) {
+		// register the interceptor via an anonymous factory
+		if($httpProvider.interceptors){
+			$httpProvider.interceptors.push(function($q) {
+			  return {
+			   'request': function(config) {
+			       // same as above
+			    },
+			    'response': function(response) {
+//			      	alert(response);
+			    }
+			  };
+			});
+		}else if($httpProvider.responseInterceptors){
+			// register the interceptor via an anonymous factory
+			$httpProvider.responseInterceptors.push(function($q) {
+				  return function(promise) {
+					    return promise.then(function(response) {
+					      return response;
+					    }, function(response) {
+					    	alert(response.status);
+					      return $q.reject(response);
+					    });
+					  };
+			});
+		}
+	}])
+	.run(function($rootScope, $location,  $interpolate) {
+	 	$rootScope.$on('$routeChangeStart', function(event, next, last) {
+			if (next.$route && next.$route.templateUrlWP) {
+				next.$route.templateUrl = $interpolate(next.$route.templateUrlWP)(next.pathParams);
+			}
+	 	});
 });
 
 
