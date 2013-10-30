@@ -2,16 +2,11 @@ package nebula.data.db;
 
 import java.io.File;
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.Statement;
 
 import junit.framework.TestCase;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.lang.EditableTypeLoader;
-import nebula.lang.SystemTypeLoader;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 
