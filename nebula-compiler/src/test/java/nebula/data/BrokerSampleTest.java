@@ -20,6 +20,6 @@ public class BrokerSampleTest extends TestCase {
 		};
 
 		BrokerTestInputInterface a = (BrokerTestInputInterface) ba;
-		System.out.println(a.get("Stest"));
+		assertEquals("Stest____", a.get("Stest"));
 	}
 }

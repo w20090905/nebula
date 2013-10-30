@@ -1,11 +1,15 @@
 package nebula.data.impl;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import nebula.data.Broker;
 import nebula.data.BrokerTestInputInterface;
 import nebula.data.impl.BrokerBuilder;
 import junit.framework.TestCase;
 
 public class BrokerBuilderTest extends TestCase {
+	Log log = LogFactory.getLog(getClass());
 	BrokerBuilder builder;
 
 	protected void setUp() throws Exception {
@@ -60,11 +64,13 @@ public class BrokerBuilderTest extends TestCase {
 		assertEquals("testname", a.get("test", "name"));
 
 		int MAX;
-		long start, end, nanoAll, nanoEvery;
 
 		MAX = 1000 * 1000 * 1;
 
+		long rawNanoEvery;
+
 		{
+			long start, end, nanoAll, nanoEvery;
 			start = System.nanoTime();
 			for (int i = 0; i < MAX; i++) {
 				a = new BrokerTestInputInterfaceBrokerAuto();
@@ -72,47 +78,55 @@ public class BrokerBuilderTest extends TestCase {
 			end = System.nanoTime();
 			nanoAll = end - start;
 			nanoEvery = nanoAll / MAX;
+			rawNanoEvery = nanoEvery;
 
-			System.out.println("[   new             ]\tAll :" + (nanoAll / (1000 * 1000)) + "s  every : " + nanoEvery + " nano");
+			log.debug("[   new             ]\tAll :" + (nanoAll / (1000 * 1000)) + "s  every : " + nanoEvery + " nano");
 		}
-		{
+		// {
+		// long start, end, nanoAll, nanoEvery;
+		//
+		// a = builder.builder(BrokerTestInputInterface.class);
+		// BrokerInstanceBuilder bb=
+		// builder.knownBrokeres.get(BrokerTestInputInterface.class.getName());
+		//
+		// start = System.nanoTime();
+		// for (int i = 0; i < MAX; i++) {
+		// a = bb.build();
+		// }
+		// end = System.nanoTime();
+		// nanoAll = end - start;
+		// nanoEvery = nanoAll / MAX;
+		//
+		// log.debug("[   builder direct  ]\tAll :" + (nanoAll / (1000
+		// * 1000)) + "s  every : " + nanoEvery + " nano");
+		// }
 
-			a = builder.builder(BrokerTestInputInterface.class);
-			BrokerInstanceBuilder bb= builder.knownBrokeres.get(BrokerTestInputInterface.class.getName());
-			
+		// {
+		// long start, end, nanoAll, nanoEvery;
+		//
+		// a = builder.builder(BrokerTestInputInterface.class);
+		// BrokerInstanceBuilder bb=
+		// builder.knownBrokeres.get(BrokerTestInputInterface.class.getName());
+		//
+		// Class<?> clz = BrokerTestInputInterface.class;
+		// start = System.nanoTime();
+		// for (int i = 0; i < MAX; i++) {
+		// bb= builder.knownBrokeres.get(clz.getName());
+		// a = bb.build();
+		// }
+		// end = System.nanoTime();
+		// nanoAll = end - start;
+		// nanoEvery = nanoAll / MAX;
+		//
+		// log.debug("[   builder map     ]\tAll :" + (nanoAll / (1000
+		// * 1000)) + "s  every : " + nanoEvery + " nano");
+		// }
+
+		{
+			long start, end, nanoAll, nanoEvery;
 			start = System.nanoTime();
-			for (int i = 0; i < MAX; i++) {
-				a = bb.build();
-			}
-			end = System.nanoTime();
-			nanoAll = end - start;
-			nanoEvery = nanoAll / MAX;
-
-			System.out.println("[   builder direct  ]\tAll :" + (nanoAll / (1000 * 1000)) + "s  every : " + nanoEvery + " nano");
-		}
-
-		{
-
-			a = builder.builder(BrokerTestInputInterface.class);
-			BrokerInstanceBuilder bb= builder.knownBrokeres.get(BrokerTestInputInterface.class.getName());
-
 			Class<?> clz = BrokerTestInputInterface.class;
-			start = System.nanoTime();
-			for (int i = 0; i < MAX; i++) {
-				bb= builder.knownBrokeres.get(clz.getName());
-				a = bb.build();
-			}
-			end = System.nanoTime();
-			nanoAll = end - start;
-			nanoEvery = nanoAll / MAX;
 
-			System.out.println("[   builder map     ]\tAll :" + (nanoAll / (1000 * 1000)) + "s  every : " + nanoEvery + " nano");
-		}
-
-		{
-			start = System.nanoTime();
-			Class<?> clz = BrokerTestInputInterface.class;
-			
 			for (int i = 0; i < MAX; i++) {
 				a = builder.builder(clz);
 			}
@@ -120,20 +134,23 @@ public class BrokerBuilderTest extends TestCase {
 			nanoAll = end - start;
 			nanoEvery = nanoAll / MAX;
 
-			System.out.println("[   builder         ]\tAll :" + (nanoAll / (1000 * 1000)) + "s  every : " + nanoEvery + " nano");
+			log.debug("[   builder         ]\tAll :" + (nanoAll / (1000 * 1000)) + "s  every : " + nanoEvery + " nano");
+			assertTrue((nanoEvery / rawNanoEvery) < 5);
 		}
-		{
-			Class<?> clz = a.getClass();
-			start = System.nanoTime();
-			int max = MAX / 10;
-			for (int i = 0; i < max; i++) {
-				a = (BrokerTestInputInterface) clz.newInstance();
-			}
-			end = System.nanoTime();
-			nanoAll = end - start;
-			nanoEvery = nanoAll / max;
-
-			System.out.println("[   newinstance     ]\tAll :" + (nanoAll / (1000 * 1000)) + "s  every : " + nanoEvery + " nano");
-		}
+		// {
+		// long start, end, nanoAll, nanoEvery;
+		// Class<?> clz = a.getClass();
+		// start = System.nanoTime();
+		// int max = MAX / 10;
+		// for (int i = 0; i < max; i++) {
+		// a = (BrokerTestInputInterface) clz.newInstance();
+		// }
+		// end = System.nanoTime();
+		// nanoAll = end - start;
+		// nanoEvery = nanoAll / max;
+		//
+		// log.debug("[   newinstance     ]\tAll :" + (nanoAll / (1000
+		// * 1000)) + "s  every : " + nanoEvery + " nano");
+		// }
 	}
 }

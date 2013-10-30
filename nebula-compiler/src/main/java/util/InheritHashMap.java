@@ -24,9 +24,6 @@ public class InheritHashMap extends HashMap<String, Object> {
 
 	@Override
 	public Object get(Object key) {
-		if (Character.isLowerCase(key.toString().charAt(0))) {
-			System.out.println("%%%%%5 from attr : " + key);
-		}
 		Object oval = super.get(key);
 		return ((oval == null) && (defaults != null)) ? defaults.get(key) : oval;
 	}
