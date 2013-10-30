@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import nebula.data.DataWatcher;
+import nebula.data.impl.BrokerBuilder;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -67,7 +68,7 @@ public abstract class Broker<T> implements BrokerHandler<T> {
 	}
 
 	final public static <T> BrokerHandler<T> broke(Class<T> clz, T value) {
-		BrokerHandler<T> b = agent(clz);
+		BrokerHandler<T> b = brokerBuilder.builder(clz);
 		b.setNewValue(value);
 		return b;
 	}
@@ -84,7 +85,7 @@ public abstract class Broker<T> implements BrokerHandler<T> {
 	final public static <R, T> R watch(T watch, final DataAdapter<T, R> listener) {
 		Method m = listener.getClass().getMethods()[0];
 		Preconditions.checkArgument("watch".equals(m.getName()));
-		final BrokerHandler<R> r = agent(m.getReturnType());
+		final BrokerHandler<R> r = brokerBuilder.builder(m.getReturnType());
 
 		Preconditions.checkState(watch instanceof Broker);
 		Broker<T> watchTo = (Broker<T>) watch;
@@ -100,9 +101,4 @@ public abstract class Broker<T> implements BrokerHandler<T> {
 	}
 
 	private final static BrokerBuilder brokerBuilder = new BrokerBuilder();
-
-	public final static <R> BrokerHandler<R> agent(Class<?> clz) {
-		return brokerBuilder.builder(clz);
-	}
-
 }

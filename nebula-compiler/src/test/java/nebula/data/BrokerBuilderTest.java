@@ -1,5 +1,6 @@
 package nebula.data;
 
+import nebula.data.impl.BrokerBuilder;
 import junit.framework.TestCase;
 
 public class BrokerBuilderTest extends TestCase {

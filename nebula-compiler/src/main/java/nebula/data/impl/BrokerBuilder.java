@@ -1,0 +1,116 @@
+package nebula.data.impl;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Map;
+
+import nebula.data.Broker;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Opcodes;
+
+import com.google.common.collect.Maps;
+
+public class BrokerBuilder extends ClassLoader {
+	Log log = LogFactory.getLog(getClass());
+
+	private final Map<String, BrokerInstanceBuilder> knownBrokeres;
+	final BrokerInstanceBuilderClassMaker instanceBuilder;
+
+	public BrokerBuilder() {
+		knownBrokeres = Maps.newConcurrentMap();
+		instanceBuilder = new BrokerInstanceBuilderClassMaker();
+	}
+
+	public <T> T builder(Class<?> target) {
+
+		BrokerInstanceBuilder builder = knownBrokeres.get(target.getName());
+
+		if (builder != null) {
+			Broker<T> broker = builder.build();
+			return broker.get();
+		}
+
+		try {
+			String typeName = target.getName() + "BrokerAuto";
+
+			// 构建代理类
+			{
+				String innerTypeName = typeName.replace('.', '/');
+
+				ClassReader cr = new ClassReader(target.getName());
+				ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+
+				BrokerInterfaceClassVisitor bw = new BrokerInterfaceClassVisitor(Opcodes.ASM4, cw, innerTypeName);
+				cr.accept(bw, ClassReader.SKIP_CODE);
+				byte[] code = cw.toByteArray();
+
+				if (log.isDebugEnabled()) {
+					try {
+						String filename = "tmp/" + typeName + ".class";
+						String path = filename.substring(0, filename.lastIndexOf('/'));
+						File file = new File(path);
+						if (!file.exists()) {
+							file.mkdir();
+						}
+						new FileOutputStream(filename).write(code);
+					} catch (FileNotFoundException e) {
+						log.error(e);
+						throw new RuntimeException(e);
+					}
+				}
+
+				Class<?> clzBroker = this.defineClass(typeName, code, 0, code.length);
+				this.resolveClass(clzBroker);
+			}
+
+			// 构建代理构建类，主要是为了性能，避免每次都是用Class.newInstance() 来构建代理
+			{
+				String builderTypeName = BrokerInstanceBuilder.class.getName() +"_" + typeName.replace('.', '_');
+				byte[] codeBuilder = instanceBuilder.dump(typeName);
+				
+				if (log.isDebugEnabled()) {
+					try {
+						String filename = "tmp/" + builderTypeName + ".class";
+						String path = filename.substring(0, filename.lastIndexOf('/'));
+						File file = new File(path);
+						if (!file.exists()) {
+							file.mkdir();
+						}
+						new FileOutputStream(filename).write(codeBuilder);
+					} catch (FileNotFoundException e) {
+						log.error(e);
+						throw new RuntimeException(e);
+					}
+				}
+
+
+				Class<?> clzBuilder = this.defineClass(builderTypeName, codeBuilder, 0, codeBuilder.length);
+
+				builder = (BrokerInstanceBuilder) clzBuilder.newInstance();
+			}
+
+			this.knownBrokeres.put(target.getName(), builder);
+			Broker<T> broker = builder.build();
+			return broker.get();
+
+		} catch (ClassFormatError e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		} catch (InstantiationException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		}
+	}
+}

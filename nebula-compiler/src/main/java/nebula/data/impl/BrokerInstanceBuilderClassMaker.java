@@ -5,12 +5,12 @@ import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-public class BrokerInstanceBuilderClassMaker implements Opcodes {
+class BrokerInstanceBuilderClassMaker implements Opcodes {
 
 	private final static String interfaceName = BrokerInstanceBuilder.class.getName();
 
 	public byte[] dump(String brokerName) {
-		String name = brokerName + "Builder";
+		String name = interfaceName +"_" + brokerName.replace('.', '_');
 		String brokerInnerName = brokerName.replace('.', '/');
 		String nameInner = name.replace('.', '/');
 		String interfaceInnerName = interfaceName.replace('.', '/');
