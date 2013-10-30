@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.locks.ReentrantLock;
 
 import nebula.data.Broker;
 
@@ -14,16 +15,18 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.ImmutableMap;
 
 public class BrokerBuilder extends ClassLoader {
 	Log log = LogFactory.getLog(getClass());
 
-	private final Map<String, BrokerInstanceBuilder> knownBrokeres;
+	Map<String, BrokerInstanceBuilder> knownBrokeres;
 	final BrokerInstanceBuilderClassMaker instanceBuilder;
 
+	ReentrantLock lock = new ReentrantLock();
+
 	public BrokerBuilder() {
-		knownBrokeres = Maps.newConcurrentMap();
+		knownBrokeres = ImmutableMap.of();
 		instanceBuilder = new BrokerInstanceBuilderClassMaker();
 	}
 
@@ -36,7 +39,15 @@ public class BrokerBuilder extends ClassLoader {
 			return broker.get();
 		}
 
+		lock.lock();
 		try {
+
+			builder = knownBrokeres.get(target.getName());
+			if (builder != null) {
+				Broker<T> broker = builder.build();
+				return broker.get();
+			}
+
 			String typeName = target.getName() + "BrokerAuto";
 
 			// 构建代理类
@@ -71,9 +82,9 @@ public class BrokerBuilder extends ClassLoader {
 
 			// 构建代理构建类，主要是为了性能，避免每次都是用Class.newInstance() 来构建代理
 			{
-				String builderTypeName = BrokerInstanceBuilder.class.getName() +"_" + typeName.replace('.', '_');
+				String builderTypeName = BrokerInstanceBuilder.class.getName() + "_" + typeName.replace('.', '_');
 				byte[] codeBuilder = instanceBuilder.dump(typeName);
-				
+
 				if (log.isDebugEnabled()) {
 					try {
 						String filename = "tmp/" + builderTypeName + ".class";
@@ -89,13 +100,14 @@ public class BrokerBuilder extends ClassLoader {
 					}
 				}
 
-
 				Class<?> clzBuilder = this.defineClass(builderTypeName, codeBuilder, 0, codeBuilder.length);
 
 				builder = (BrokerInstanceBuilder) clzBuilder.newInstance();
 			}
+			
+			ImmutableMap.Builder<String, BrokerInstanceBuilder> mapBuilder =  ImmutableMap.builder();
 
-			this.knownBrokeres.put(target.getName(), builder);
+			this.knownBrokeres =mapBuilder.putAll(knownBrokeres).put(target.getName(), builder).build();
 			Broker<T> broker = builder.build();
 			return broker.get();
 
@@ -111,6 +123,8 @@ public class BrokerBuilder extends ClassLoader {
 		} catch (IllegalAccessException e) {
 			log.error(e);
 			throw new RuntimeException(e);
+		} finally {
+			lock.unlock();
 		}
 	}
 }

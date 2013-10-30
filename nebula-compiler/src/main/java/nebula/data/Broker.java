@@ -17,7 +17,6 @@ public abstract class Broker<T> implements BrokerHandler<T> {
 	}
 
 	final static Log log = LogFactory.getLog(Broker.class);
-
 	protected List<DataWatcher<T>> listeners;
 	protected T actualValue;
 
