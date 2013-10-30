@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.Map;
 
 import nebula.data.impl.BrokerInstanceBuilder;
-import nebula.data.impl.BrokerInstanceBuilderMaker;
-import nebula.data.impl.BrokerInterfaceVisitor;
+import nebula.data.impl.BrokerInstanceBuilderClassMaker;
+import nebula.data.impl.BrokerInterfaceClassVisitor;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -22,11 +22,11 @@ public class BrokerBuilder extends ClassLoader {
 	Log log = LogFactory.getLog(getClass());
 
 	private final Map<String, BrokerInstanceBuilder> knownBrokeres;
-	final BrokerInstanceBuilderMaker instanceBuilder;
+	final BrokerInstanceBuilderClassMaker instanceBuilder;
 
 	public BrokerBuilder() {
 		knownBrokeres = Maps.newConcurrentMap();
-		instanceBuilder = new BrokerInstanceBuilderMaker();
+		instanceBuilder = new BrokerInstanceBuilderClassMaker();
 	}
 
 	public <T> T builder(Class<?> target) {
@@ -45,7 +45,7 @@ public class BrokerBuilder extends ClassLoader {
 			ClassReader cr = new ClassReader(target.getName());
 			ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
 
-			BrokerInterfaceVisitor bw = new BrokerInterfaceVisitor(Opcodes.ASM4, cw, innerTypeName);
+			BrokerInterfaceClassVisitor bw = new BrokerInterfaceClassVisitor(Opcodes.ASM4, cw, innerTypeName);
 			cr.accept(bw, ClassReader.SKIP_CODE);
 			byte[] code = cw.toByteArray();
 

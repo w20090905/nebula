@@ -5,7 +5,7 @@ import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-public class BrokerInstanceBuilderMaker implements Opcodes {
+public class BrokerInstanceBuilderClassMaker implements Opcodes {
 
 	private final static String interfaceName = BrokerInstanceBuilder.class.getName();
 

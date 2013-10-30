@@ -33,16 +33,16 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.Method;
 
-public class BrokerInterfaceVisitor extends ClassVisitor {
+public class BrokerInterfaceClassVisitor extends ClassVisitor {
 	String name;
 	String targetTypeName;
 	final static String brokerTypeName = Broker.class.getName().replace('.', '/');
 
-	public BrokerInterfaceVisitor(int api) {
+	public BrokerInterfaceClassVisitor(int api) {
 		super(api);
 	}
 
-	public BrokerInterfaceVisitor(int api, ClassVisitor cv, String name) {
+	public BrokerInterfaceClassVisitor(int api, ClassVisitor cv, String name) {
 		super(api, cv);
 		this.name = name;
 	}
@@ -178,7 +178,7 @@ public class BrokerInterfaceVisitor extends ClassVisitor {
 
 	@Override
 	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
-//		return super.visitField(access, name, desc, signature, value);
+		// return super.visitField(access, name, desc, signature, value);
 		return null;
 	}
 }
