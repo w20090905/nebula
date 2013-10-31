@@ -1,4 +1,4 @@
-package nebula.simpletemplate;
+package org.stringtemplate.v4.test;
 
 /*
  [The "BSD license"]

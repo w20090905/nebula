@@ -25,7 +25,7 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package nebula.simpletemplate;
+package org.stringtemplate.v4.test;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -43,6 +43,7 @@ import junit.framework.TestCase;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.Token;
+import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroup;
 import org.stringtemplate.v4.compiler.STLexer;
 import org.stringtemplate.v4.misc.Misc;
@@ -121,22 +122,22 @@ public abstract class BaseTest extends TestCase {
      * @param dirName
      */
 	public void writeTestFile(String main, String dirName) {
-//		ST outputFileST = new ST(
-//			"import org.antlr.runtime.*;\n" +
-//			"import org.stringtemplate.v4.*;\n" +
-//			"import org.antlr.runtime.tree.*;\n" +
-//			"import java.io.*;\n" +
-//			"import java.net.*;\n" +
-//			"\n" +
-//			"public class Test {\n" +
-//			"    public static void main(String[] args) throws Exception {\n" +
-//			"        <code>\n"+
-//			"        System.out.println(result);\n"+
-//			"    }\n" +
-//			"}"
-//			);
-//		outputFileST.add("code", main);
-//		writeFile(dirName, "Test.java", outputFileST.render());
+		ST outputFileST = new ST(
+			"import org.antlr.runtime.*;\n" +
+			"import org.stringtemplate.v4.*;\n" +
+			"import org.antlr.runtime.tree.*;\n" +
+			"import java.io.*;\n" +
+			"import java.net.*;\n" +
+			"\n" +
+			"public class Test {\n" +
+			"    public static void main(String[] args) throws Exception {\n" +
+			"        <code>\n"+
+			"        System.out.println(result);\n"+
+			"    }\n" +
+			"}"
+			);
+		outputFileST.add("code", main);
+		writeFile(dirName, "Test.java", outputFileST.render());
 	}
 
 	public String java(String mainClassName, String extraCLASSPATH, String workingDirName) {

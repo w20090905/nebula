@@ -1,4 +1,4 @@
-package nebula.simpletemplate;
+package org.stringtemplate.v4.test;
 
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CharStream;

@@ -28,7 +28,6 @@
 
 package org.stringtemplate.v4.misc;
 
-import org.antlr.stringtemplate.language.ASTExpr;
 import java.util.HashMap;
 
 /** An automatically created aggregate of properties.
