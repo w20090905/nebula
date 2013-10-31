@@ -43,6 +43,9 @@ import junit.framework.TestCase;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.Token;
+import org.stringtemplate.v4.STGroup;
+import org.stringtemplate.v4.compiler.STLexer;
+import org.stringtemplate.v4.misc.Misc;
 
 
 public abstract class BaseTest extends TestCase {

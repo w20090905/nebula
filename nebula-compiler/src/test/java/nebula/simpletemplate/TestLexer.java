@@ -36,9 +36,9 @@ public class TestLexer extends BaseTest {
 		checkTokens(template, expected);
 	}
 	public void testOneExpr_Dollar() throws Exception {
-		String template = "{name}";
-		String expected = "[[@0,0:0='{',<LDELIM>,1:0], [@1,1:4='name',<ID>,1:1], " + "[@2,5:5='}',<RDELIM>,1:5]]";
-		checkTokens(template, expected,'{','}');
+		String template = "${name}";
+		String expected = "[[@0,0:1='${',<LDELIM>,1:0], [@1,2:5='name',<ID>,1:2], " + "[@2,6:6='}',<RDELIM>,1:6]]";
+		checkTokens(template, expected,'$','}');
 	}
 
 	public void testOneExprSurrounded() throws Exception {
