@@ -127,6 +127,8 @@ public class STLexer implements TokenSource {
     char delimiterStartChar = '<';
     /** The char which delimits the end of an expression. */
     char delimiterStopChar = '>';
+    
+    char delimiterLeadingChar = '<';
 
 	/**
 	 * This keeps track of the current mode of the lexer. Are we inside or
@@ -180,6 +182,24 @@ public class STLexer implements TokenSource {
 		this.templateToken = templateToken;
 		this.delimiterStartChar = delimiterStartChar;
 		this.delimiterStopChar = delimiterStopChar;
+		switch (delimiterStopChar) {
+		case '>':
+			this.delimiterLeadingChar = '<';
+			break;
+		case '}':
+			this.delimiterLeadingChar = '{';
+			break;
+		case ']':
+			this.delimiterLeadingChar = '[';
+			break;
+		case ')':
+			this.delimiterLeadingChar = '(';
+			break;
+
+		default:
+			this.delimiterLeadingChar =(char) -1;
+			break;
+		}
 	}
 
 	@Override
@@ -233,6 +253,7 @@ public class STLexer implements TokenSource {
         }
         if ( c==delimiterStartChar ) {
             consume();
+            if ( c== delimiterLeadingChar ) consume();
             if ( c=='!' ) return COMMENT();
             if ( c=='\\' ) return ESCAPE(); // <\\> <\uFFFF> <\n> etc...
             scanningInsideExpr = true;
