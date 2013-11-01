@@ -15,6 +15,8 @@ tokens {
 @header {
 package nebula.simpletemplate;
 
+import org.objectweb.asm.Type;
+
 import org.antlr.runtime.*;
 import org.stringtemplate.v4.misc.ErrorManager;
 
@@ -28,6 +30,7 @@ import java.util.ArrayList;
 @rulecatch {
    catch (RecognitionException re) { throw re; }
 }
+
 @members {
   ErrorManager errMgr;
   Token templateToken;
@@ -44,31 +47,26 @@ import java.util.ArrayList;
   private Map<String, Var> locals = new HashMap<String, Var>();
   protected int maxLocals = 0;
 
-  protected void initLocals() {
-    locals.clear();
-    pushLocal("this");
-    pushLocal("out");
-    pushLocal("object");
-    root = pushLocal("root");
-  }
-  
-  Var root;
-  
-  protected Var pushLocal(String name, String typeName) {
-    Var var = new Var(name,locals.size());
-    locals.put(var.name, var);
-    return var;
-  }
-  
-  protected Var pushLocal(String name) {
-    Var var = new Var(name,locals.size());
-    locals.put(var.name, var);
-    return var;
-  }
-  protected Var v(String name) {
-    Var var = locals.get(name);
-    return var;
-  };
+      protected void initLocals() {
+        locals.clear();
+        pushLocal("this",Type.getType(Action.class));
+        pushLocal("out",Type.getType(StringBuilder.class));
+        pushLocal("object",Type.getType(Object.class));
+        root = pushLocal("root",Type.getType(Object.class));
+      }
+      
+      Var root;
+      
+      protected Var pushLocal(String name, Type type) {
+        Var var = new Var(name,type,locals.size());
+        locals.put(var.name, var);
+        return var;
+      }
+      
+      protected Var v(String name) {
+        Var var = locals.get(name);
+        return var;
+      };
 }
 templateAndEOF returns[Statement s] 
 @init{initLocals();}

@@ -31,7 +31,7 @@ public class CompilerContext {
 						properties.put(name, m);
 
 					} else if (methodName.startsWith("is") && methodName.length() > 2 && Character.isUpperCase(methodName.charAt(2))
-							&& Boolean.class.equals(m.getReturnType())) {
+							&&  boolean.class.equals(m.getReturnType())) {
 						String name = methodName.substring(2, 3).toLowerCase();
 						if (methodName.length() > 3) name += methodName.substring(3);
 						properties.put(name, m);

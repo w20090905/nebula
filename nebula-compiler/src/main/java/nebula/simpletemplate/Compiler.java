@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 public class Compiler {
 	static Log log = LogFactory.getLog(Compiler.class);
@@ -21,10 +22,11 @@ public class Compiler {
 			this.statements = statements;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			for (Statement st : statements) {
 				st.compile(cw, mv, context);
 			}
+			return Type.VOID_TYPE;
 		}
 
 		@Override
@@ -64,12 +66,22 @@ public class Compiler {
 			this.expr = expr;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			mv.visitVarInsn(ALOAD, 1);
-			expr.compile(cw, mv, context);
-//			mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/Writer", "write", "(Ljava/lang/String;)V");
-			mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;");
+			Type type = expr.compile(cw, mv, context);
+
+			
+			if (String.class.getName().equals(type.getClassName())) {
+				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;");
+			} else if(type.getSort() != Type.OBJECT){
+				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + type.getDescriptor() + ")Ljava/lang/StringBuilder;");
+			}else{
+				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + type.getDescriptor() + ")Ljava/lang/StringBuilder;");				
+			}
+			
 			mv.visitInsn(POP);
+
+			return Type.VOID_TYPE;
 		}
 
 		@Override
@@ -103,11 +115,13 @@ public class Compiler {
 			this.text = text;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			mv.visitTypeInsn(NEW, "java/math/BigDecimal");
 			mv.visitInsn(DUP);
 			mv.visitLdcInsn(text);
 			mv.visitMethodInsn(INVOKESPECIAL, "java/math/BigDecimal", "<init>", "(Ljava/lang/String;)V");
+
+			return Type.getType(BigDecimal.class);
 		}
 
 		@Override
@@ -177,18 +191,22 @@ public class Compiler {
 			this.name = name;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			e1.compile(cw, mv, context);
-			
+
 			Method m = null;
 			if (context.isMap) {
-				mv.visitLdcInsn("name");
+				mv.visitLdcInsn(name);
 				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get", "(Ljava/lang/Object;)Ljava/lang/Object;");
-				mv.visitTypeInsn(CHECKCAST, "java/lang/String");
+				Type type = Type.getType(Object.class);
+				mv.visitTypeInsn(CHECKCAST, type.getInternalName());
+				return type;
 			} else if ((m = context.getProp(name)) != null) {
-				mv.visitMethodInsn(INVOKEVIRTUAL, context.getInternalName(), m.getName(), "()Ljava/lang/String;");
+				Type retType = Type.getReturnType(m);
+				mv.visitMethodInsn(INVOKEVIRTUAL, context.getInternalName(), m.getName(), "()"+retType.getDescriptor());
+				return retType;
 			} else {
-				throw new RuntimeException("dd");
+				throw new RuntimeException("Cannot find field " + name);
 			}
 		}
 
@@ -224,8 +242,9 @@ public class Compiler {
 			this.value = Long.parseLong(text);
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			mv.visitLdcInsn(value);
+			return Type.LONG_TYPE;
 		}
 
 		@Override
@@ -251,8 +270,9 @@ public class Compiler {
 			this.value = value;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			mv.visitLdcInsn(value);
+			return Type.getType(String.class);
 		}
 
 		@Override
@@ -281,8 +301,9 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
+		public Type compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
 			mv.visitVarInsn(ALOAD, var.index);
+			return var.type;
 		}
 
 		@Override
@@ -304,8 +325,9 @@ public class Compiler {
 			else this.value = 0;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			mv.visitLdcInsn(value);
+			return Type.BOOLEAN_TYPE;
 		}
 
 		@Override

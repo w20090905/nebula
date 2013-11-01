@@ -1,6 +1,6 @@
 package nebula.simpletemplate;
 
-import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Map;
 
 import junit.framework.TestCase;
@@ -13,24 +13,44 @@ public class ST_BasicTest extends TestCase {
 	protected void setUp() throws Exception {
 	}
 
-	private void parseType(String text) throws IOException {
-
-		String expected = "<html>\r\n<head>\r\n<title>wangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilian</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
-		text = "<html>\r\n<head>\r\n<title>${name}${name}${name}${name}${name}${name}${name}${name}${name}${name}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
+	public void testTypes() {
+		String text = "${name}\t${age}\t${male}\t${value}";
+		String expected = "wangshilian\t10\ttrue\t3.1415";
 
 		ST st = new ST(text);
 
+		// setUp
+		Person person = new Person();
+		person.setName("wangshilian");
+		person.setAge(10);
+		person.setMale(true);
+		person.setValue(new BigDecimal("3.1415"));
+
+		assertEquals(expected, st.render(person));
+	}
+
+	public void testTypesMap() {
+
+		String text = "${name}\t${age}\t${male}\t${value}";
+		String expected = "wangshilian\t10\ttrue\t3.1415";
+		
+		ST st = new ST(text);
+
+		// setUp
+		Map<String, Object> person = Maps.newHashMap();
+		person.put("name", "wangshilian");
+		person.put("age", 10);
+		person.put("male", true);
+		person.put("value", new BigDecimal("3.1415"));
+
 		int MAX = 1000 * 100;
 		{
-			String desc = "simple type";
+			String desc = "stringtemplate";
 			// setUp
-			Person person = new Person();
-			person.setName("wangshilian");
-
-			assertEquals(expected, st.render(person));
 
 			// prepare
 			long start, end, nanoAll, nanoEvery;
+
 			start = System.nanoTime();
 			for (int i = 0; i < MAX; i++) {
 				st.render(person);
@@ -39,60 +59,9 @@ public class ST_BasicTest extends TestCase {
 			nanoAll = end - start;
 			nanoEvery = nanoAll / MAX;
 
-			System.out.printf("[ %-20s ]\tAll :%8d ms; \tevery : %8d nano;\tone second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
-
-		{
-			String desc = "simple map";
-			// setUp
-			Map<String, String> root = Maps.newHashMap();
-			root.put("name", "wangshilian");
-
-			assertEquals(expected, st.render(root));
-			// prepare
-			long start, end, nanoAll, nanoEvery;
-			start = System.nanoTime();
-			for (int i = 0; i < MAX; i++) {
-				st.render(root);
-			}
-			end = System.nanoTime();
-			nanoAll = end - start;
-			nanoEvery = nanoAll / MAX;
-
-			System.out.printf("[ %-20s ]\tAll :%8d ms; \tevery : %8d nano;\tone second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
-					1000 * 1000 * 1000 / nanoEvery);
-		}
-		
-		{
-			String desc = "new StringBuilder(1024)";
-			// setUp
-
-			// prepare
-			long start, end, nanoAll, nanoEvery;
-
-			@SuppressWarnings("unused")
-			StringBuilder sb = null;
-			start = System.nanoTime();
-			for (int i = 0; i < MAX; i++) {
-				sb = new StringBuilder(1024);
-			}
-			end = System.nanoTime();
-			nanoAll = end - start;
-			nanoEvery = nanoAll / MAX;
-
-			System.out.printf("[ %-20s ]\tAll :%8d ms; \tevery : %8d nano;\tone second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
-					1000 * 1000 * 1000 / nanoEvery);
-		}
-
-		return;
-	}
-
-	public void testTypeDefinition() throws IOException {
-		//@formatter:off
-			String text = "" +
-					" Hello${name};";
-		//@formatter:on	
-		parseType(text);
+		assertEquals(expected, st.render(person));
 	}
 }
