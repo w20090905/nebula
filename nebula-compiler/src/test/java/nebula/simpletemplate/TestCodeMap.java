@@ -1,18 +1,18 @@
 package nebula.simpletemplate;
 
 import java.io.IOException;
-import java.io.Writer;
 import java.util.Map;
 
 public class TestCodeMap implements Action {
 
 	@Override
-	public void exec(Writer out, Object value) throws IOException {
-		Map<String, String> root = (Map<String, String>) value;
+	@SuppressWarnings("unchecked")
+	public void exec(StringBuilder out, Object value) throws IOException {
+		Map<String, Object> root = (Map<String, Object>) value;
 		{
-			out.write("Hello");
-			out.write(root.get("name"));
-			out.write(";");
+			out.append("Hello");
+			out.append(root.get("name"));
+			out.append(";");
 		}
 	}
 }

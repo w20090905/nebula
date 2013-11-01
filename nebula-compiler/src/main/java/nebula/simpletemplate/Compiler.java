@@ -67,7 +67,9 @@ public class Compiler {
 		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			mv.visitVarInsn(ALOAD, 1);
 			expr.compile(cw, mv, context);
-			mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/Writer", "write", "(Ljava/lang/String;)V");
+//			mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/Writer", "write", "(Ljava/lang/String;)V");
+			mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;");
+			mv.visitInsn(POP);
 		}
 
 		@Override

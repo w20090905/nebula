@@ -1,15 +1,9 @@
 package nebula.simpletemplate;
 
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.Map;
 
 import junit.framework.TestCase;
-import nebula.simpletemplate.Action;
-import nebula.simpletemplate.ActionComplier;
-import nebula.simpletemplate.CompilerContext;
-import nebula.simpletemplate.SParser;
-import nebula.simpletemplate.Statement;
 
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -48,17 +42,19 @@ public class STParser_BasicTest extends TestCase {
 				CompilerContext c = new CompilerContext(person.getClass());
 
 				Action action = ActionComplier.DEFAULT.compile(c, "test", r);
-				StringWriter out = new StringWriter();
-				out = new StringWriter();
+				StringBuilder out = new StringBuilder();
 
 				action.exec(out, person);
 				assertEquals(expected, out.toString());
 
+				out = new StringBuilder();
 				// prepare
 				long start, end, nanoAll, nanoEvery;
 				start = System.nanoTime();
 				for (int i = 0; i < MAX; i++) {
+					out.setLength(0);
 					action.exec(out, person);
+					out.toString();
 				}
 				end = System.nanoTime();
 				nanoAll = end - start;
@@ -77,17 +73,19 @@ public class STParser_BasicTest extends TestCase {
 				CompilerContext c = new CompilerContext(root.getClass());
 
 				Action action = ActionComplier.DEFAULT.compile(c, "test", r);
-				StringWriter out = new StringWriter();
-				out = new StringWriter();
+				StringBuilder out = new StringBuilder();
 
 				action.exec(out, root);
 				assertEquals(expected, out.toString());
-				out = new StringWriter();
+				out = new StringBuilder();
 				// prepare
 				long start, end, nanoAll, nanoEvery;
 				start = System.nanoTime();
+				out = new StringBuilder(1024);
 				for (int i = 0; i < MAX; i++) {
+					out.setLength(0);
 					action.exec(out, root);
+					out.toString();
 				}
 				end = System.nanoTime();
 				nanoAll = end - start;

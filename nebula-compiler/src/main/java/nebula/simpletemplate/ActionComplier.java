@@ -56,7 +56,7 @@ public class ActionComplier implements Opcodes {
 		}
 		
 		{
-			mv = cw.visitMethod(ACC_PUBLIC, "exec", "(Ljava/io/Writer;Ljava/lang/Object;)V", null, new String[] { "java/io/IOException" });
+			mv = cw.visitMethod(ACC_PUBLIC, "exec", "(Ljava/lang/StringBuilder;Ljava/lang/Object;)V", null, new String[] { "java/io/IOException" });
 			mv.visitCode();
 			mv.visitVarInsn(ALOAD, 2);
 			mv.visitTypeInsn(CHECKCAST, dataClassName);
