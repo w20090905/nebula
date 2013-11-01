@@ -41,29 +41,51 @@ public class TemplateImpl {
 
 	static int INITIAL_SIZE = 128;
 
-	static final int BUFFER_SIZE = 10;
-	final StringBuilder[] bufferes = new StringBuilder[BUFFER_SIZE];
+	static int BUFFER_SIZE = 1;
+	StringBuilder[] bufferes = new StringBuilder[BUFFER_SIZE];
 	final boolean[] used = new boolean[BUFFER_SIZE];
-	int lastCanuse = 0;
+	volatile int lastCanuse = 0;
+
+	int cntCount = 0;
+	int cntMiss = 0;
 
 	public String exec(Class<?> clz, Object root) {
+		cntCount++;
+
 		try {
 			StringBuilder sb = null;
+
 			int usedIndex = -1;
-			if (!used[lastCanuse]) {
-				usedIndex = lastCanuse;
-				used[usedIndex] = true;
-				if (bufferes[usedIndex] == null) {
-					bufferes[usedIndex] = new StringBuilder(bufferes[0].capacity());
+			{// buffer string builder
+				int lastc = lastCanuse++;
+				lastCanuse = lastCanuse < BUFFER_SIZE ? lastCanuse : 0;
+				
+				if (!used[lastc]) {//需要更加强健的代码，当然也要考量缓存机制是否划算。
+					usedIndex = lastc;
+					used[usedIndex] = true;
+					if (bufferes[usedIndex] == null) {
+						bufferes[usedIndex] = new StringBuilder(bufferes[0].capacity());
+					}
+					sb = bufferes[usedIndex];
+				} else {
+					sb = new StringBuilder(bufferes[0].capacity());
+					cntMiss++;
+					if (cntCount / cntMiss < 10) {
+						StringBuilder[] last = bufferes;  
+						bufferes = new StringBuilder[BUFFER_SIZE+1];
+						for (int i = 0; i < BUFFER_SIZE; i++) {
+							bufferes[i]=last[i];
+						}
+						BUFFER_SIZE++;
+						cntMiss = 0;
+					}
 				}
-				sb = bufferes[usedIndex];
-				lastCanuse = ++lastCanuse < BUFFER_SIZE ? lastCanuse : 0;
-			} else {
-				sb = new StringBuilder(bufferes[0].capacity());
 			}
+
 			get(clz).exec(sb, root);
 			String result = sb.toString();
-			{
+
+			{// clear string builder
 				if (usedIndex >= 0) {
 					sb.setLength(0);
 					used[usedIndex] = false;
