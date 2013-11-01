@@ -61,9 +61,9 @@ public class NamesEncoding {
 			nvs[posNv++] = '_';
 		}
 
-		if (log.isTraceEnabled()) {
-			log.trace("\t[" + value + "] > [" + new String(nvs, 0, posNv) + "]");
-		}
+//		if (log.isTraceEnabled()) {
+//			log.trace("\t[" + value + "] > [" + new String(nvs, 0, posNv) + "]");
+//		}
 		return new String(nvs, 0, posNv);
 	}
 

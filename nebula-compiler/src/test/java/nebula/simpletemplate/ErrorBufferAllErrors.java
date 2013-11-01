@@ -1,4 +1,4 @@
-package org.stringtemplate.v4.test;
+package nebula.simpletemplate;
 
 import org.stringtemplate.v4.misc.ErrorBuffer;
 import org.stringtemplate.v4.misc.STMessage;

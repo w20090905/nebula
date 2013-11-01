@@ -1,4 +1,4 @@
-package test.language.antlr.StringTemplate;
+package nebula.simpletemplate;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -42,7 +42,7 @@ public class StringTemplatePerformance extends TestCase {
 
 		int MAX = 1000 * 10;
 		{
-			String desc = "bean ST";
+			String desc = "stringtemplate";
 			// setUp
 
 			StringTemplateGroup templates = new StringTemplateGroup("mygroup", "src/test/java/test/language/antlr/StringTemplate");
@@ -61,11 +61,11 @@ public class StringTemplatePerformance extends TestCase {
 			nanoAll = end - start;
 			nanoEvery = nanoAll / MAX;
 
-			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc,(nanoAll / (1000 * 1000)) , + nanoEvery , 1000 * 1000 * 1000 /nanoEvery );
+			System.out.printf("[ %16s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc,(nanoAll / (1000 * 1000)) , + nanoEvery , 1000 * 1000 * 1000 /nanoEvery );
 		}
 
 		{
-			String desc = "bean Freemarker";
+			String desc = "stringtemplate";
 			// setUp
 
 			Configuration templateConfiguration = new Configuration();
@@ -89,10 +89,10 @@ public class StringTemplatePerformance extends TestCase {
 			nanoAll = end - start;
 			nanoEvery = nanoAll / MAX;
 
-			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc,(nanoAll / (1000 * 1000)) , + nanoEvery , 1000 * 1000 * 1000 /nanoEvery );
+			System.out.printf("[ %16s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc,(nanoAll / (1000 * 1000)) , + nanoEvery , 1000 * 1000 * 1000 /nanoEvery );
 		}
 		{
-			String desc = "bean javacode";
+			String desc = "stringtemplate";
 			// setUp
 
 			PageManual p = new PageManual();
@@ -112,7 +112,7 @@ public class StringTemplatePerformance extends TestCase {
 			nanoAll = end - start;
 			nanoEvery = nanoAll / MAX;
 
-			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc,(nanoAll / (1000 * 1000)) , + nanoEvery , 1000 * 1000 * 1000 /nanoEvery );
+			System.out.printf("[ %16s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc,(nanoAll / (1000 * 1000)) , + nanoEvery , 1000 * 1000 * 1000 /nanoEvery );
 		}
 
 	}
@@ -122,7 +122,7 @@ public class StringTemplatePerformance extends TestCase {
 
 		int MAX = 1000 * 10;
 		{
-			String desc = "string ST";
+			String desc = "stringtemplate";
 			// setUp
 			
 			StringTemplateGroup templates = new StringTemplateGroup("mygroup", "src/test/java/test/language/antlr/StringTemplate");
@@ -142,11 +142,11 @@ public class StringTemplatePerformance extends TestCase {
 			nanoAll = end - start;
 			nanoEvery = nanoAll / MAX;
 
-			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc,(nanoAll / (1000 * 1000)) , + nanoEvery , 1000 * 1000 * 1000 /nanoEvery );
+			System.out.printf("[ %16s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc,(nanoAll / (1000 * 1000)) , + nanoEvery , 1000 * 1000 * 1000 /nanoEvery );
 		}
 
 		{
-			String desc = "string freemarker";
+			String desc = "stringtemplate";
 			// setUp
 
 			Configuration templateConfiguration = new Configuration();
@@ -170,11 +170,11 @@ public class StringTemplatePerformance extends TestCase {
 			nanoAll = end - start;
 			nanoEvery = nanoAll / MAX;
 
-			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc,(nanoAll / (1000 * 1000)) , + nanoEvery , 1000 * 1000 * 1000 /nanoEvery );
+			System.out.printf("[ %16s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc,(nanoAll / (1000 * 1000)) , + nanoEvery , 1000 * 1000 * 1000 /nanoEvery );
 		}
 
 		{
-			String desc = "string javacode";
+			String desc = "stringtemplate";
 			// setUp
 			PageManual p = new PageManual();
 
@@ -193,7 +193,7 @@ public class StringTemplatePerformance extends TestCase {
 			nanoAll = end - start;
 			nanoEvery = nanoAll / MAX;
 
-			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc,(nanoAll / (1000 * 1000)) , + nanoEvery , 1000 * 1000 * 1000 /nanoEvery );
+			System.out.printf("[ %16s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc,(nanoAll / (1000 * 1000)) , + nanoEvery , 1000 * 1000 * 1000 /nanoEvery );
 		}
 	}
 };
