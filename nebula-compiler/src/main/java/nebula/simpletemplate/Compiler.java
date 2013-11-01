@@ -74,15 +74,14 @@ public class Compiler {
 			mv.visitVarInsn(ALOAD, 1);
 			Type type = expr.compile(cw, mv, context);
 
-			
 			if (String.class.getName().equals(type.getClassName())) {
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;");
-			} else if(type.getSort() != Type.OBJECT){
+			} else if (type.getSort() != Type.OBJECT) {
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + type.getDescriptor() + ")Ljava/lang/StringBuilder;");
-			}else{
-				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + type.getDescriptor() + ")Ljava/lang/StringBuilder;");				
+			} else {
+				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + type.getDescriptor() + ")Ljava/lang/StringBuilder;");
 			}
-			
+
 			mv.visitInsn(POP);
 
 			return Type.VOID_TYPE;
@@ -207,7 +206,7 @@ public class Compiler {
 				return type;
 			} else if ((m = context.getProp(name)) != null) {
 				Type retType = Type.getReturnType(m);
-				mv.visitMethodInsn(INVOKEVIRTUAL, context.getInternalName(), m.getName(), "()"+retType.getDescriptor());
+				mv.visitMethodInsn(INVOKEVIRTUAL, context.getInternalName(), m.getName(), "()" + retType.getDescriptor());
 				return retType;
 			} else {
 				throw new RuntimeException("Cannot find field " + name);
@@ -236,6 +235,63 @@ public class Compiler {
 			} else {
 				throw new RuntimeException("dd");
 			}
+		}
+	}
+
+	static class Include extends Expression<Object> {
+		final String name;
+		final List<Argument> args;
+
+		Include(String name, List<Argument> args) {
+			this.name = name;
+			this.args = args;
+		}
+
+		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+			// e1.compile(cw, mv, context);
+			//
+			// Method m = null;
+			// if (context.isMap) {
+			// mv.visitLdcInsn(name);
+			// mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get",
+			// "(Ljava/lang/Object;)Ljava/lang/Object;");
+			// Type type = Type.getType(Object.class);
+			// mv.visitTypeInsn(CHECKCAST, type.getInternalName());
+			// return type;
+			// } else if ((m = context.getProp(name)) != null) {
+			// Type retType = Type.getReturnType(m);
+			// mv.visitMethodInsn(INVOKEVIRTUAL, context.getInternalName(),
+			// m.getName(), "()"+retType.getDescriptor());
+			// return retType;
+			// } else {
+			// throw new RuntimeException("Cannot find field " + name);
+			// }
+			return Type.getType(String.class);
+		}
+
+		@Override
+		public Object eval(Object root) {
+			// return ((Entity) e1.eval()).get(name);
+			return null;
+		}
+
+		@Override
+		public String toString() {
+			return name.toString() + "(" + args.toString() + ")";
+		}
+
+		@Override
+		public String toString(CompilerContext context) {
+
+			// Method m = null;
+			// if (context.isMap) {
+			// return e1.toString() + ".get(\"" + name.toString() + "\")";
+			// } else if ((m = context.getProp(name)) != null) {
+			// return e1.toString() + "." + m.getName() + "()";
+			// } else {
+			// throw new RuntimeException("dd");
+			// }
+			return null;
 		}
 	}
 
@@ -385,6 +441,24 @@ public class Compiler {
 		return new FieldOf(e1, name);
 	}
 
+	public void opAddArgument(List<Argument> list, Argument arg) {
+		arg.index = list.size();
+		list.add(arg);
+	}
+
+	public Argument opArgument(String name, Argument arg) {
+		arg.name = name;
+		return arg;
+	}
+
+	public Argument opArgument(Expr<Object> arg) {
+		return new Argument(arg);
+	}
+
+	public Expr<Object> opInclude(String name, List<Argument> args) {
+		return new Include(name, args);
+	}
+
 	public Expr<Object> opLocal(Var var) {
 		Preconditions.checkNotNull(var);
 		return new VarRefer(var);
@@ -408,11 +482,11 @@ public class Compiler {
 		Preconditions.checkNotNull(statements);
 		return new Block(statements);
 	}
-	
-	public TemplateImpl tpTemplate(STGroup group,Statement statement) {
+
+	public TemplateImpl tpTemplate(STGroup group, Statement statement) {
 		Preconditions.checkNotNull(group);
 		Preconditions.checkNotNull(statement);
-		return new TemplateImpl(group,statement);
+		return new TemplateImpl(group, statement);
 	}
 
 	public Statement stOutput(Expr<?> expr) {

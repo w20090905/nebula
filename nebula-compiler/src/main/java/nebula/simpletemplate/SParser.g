@@ -241,7 +241,7 @@ options {k=2;} // prevent full LL(*), which fails, falling back on k=1; need k=2
 	:	{Compiler.funcs.containsKey(input.LT(1).getText())}? // predefined function
 		ID '(' expr? ')'						// -> ^(EXEC_FUNC ID expr?)
 	|	'super' '.' ID '(' args ')'				// -> ^(INCLUDE_SUPER ID args?)
-	|	ID '(' args ')'							// -> ^(INCLUDE ID args?)
+	|	ID '(' as=args ')'		{v=c.opInclude($ID.text,as);}					// -> ^(INCLUDE ID args?)
 	|	'@' 'super' '.' ID '(' rp=')'			// -> ^(INCLUDE_SUPER_REGION ID)
 	|	'@' ID '(' rp=')'						// -> ^(INCLUDE_REGION ID)
 	|	p=primary{v=p;}
@@ -261,17 +261,22 @@ primary returns[Expr v]
 		)
 	;
 
-args:	argExprList
-	|	namedArg ( ',' namedArg )* (',' '...')? // -> namedArg+ '...'?
+args returns[List<Argument> args]
+  :	as=argExprList {args=as;}
+	|	a=namedArg{c.opAddArgument(args,a);} ( ',' a=namedArg{c.opAddArgument(args,a);} )* (',' '...')? // -> namedArg+ '...'?
     |   '...'
 	|
 	;
 
-argExprList  returns[List<Expr> vl]  : arg ( ',' arg )* /* -> arg+ */;
+argExprList  returns[List<Argument> args] 
+@init{
+  args = new ArrayList();
+}
+: a=arg{c.opAddArgument(args,a);} ( ',' a=arg{c.opAddArgument(args,a);} )* /* -> arg+ */;
 
-arg returns[Expr v]   : e=exprNoComma {v=e;} ;
+arg returns[Argument v]   : e=exprNoComma {v=c.opArgument(e);} ;
 
-namedArg : ID '=' arg /* -> ^('=' ID arg) */;
+namedArg returns[Argument v]   : ID '=' a=arg {v=c.opArgument($ID.text,a);}/* -> ^('=' ID arg) */;
 
 list:	{input.LA(2)==RBRACK}? // hush warning; [] special case
 		lb='[' ']' // -> LIST[$lb]
