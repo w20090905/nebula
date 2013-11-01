@@ -14,7 +14,7 @@ public class TemplateImpl {
 	final static Log log = LogFactory.getLog(TemplateImpl.class);
 	STGroup group;
 
-	TemplateImpl(STGroup group, final String name, final Code code) {
+	TemplateImpl(STGroup group, final Code code) {
 		this.group = group;
 		this.code = code;
 		this.bytecodeWithKnownClass = ImmutableMap.of();

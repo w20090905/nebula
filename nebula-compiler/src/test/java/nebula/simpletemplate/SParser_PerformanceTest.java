@@ -13,23 +13,23 @@ import org.stringtemplate.v4.compiler.STLexer;
 
 import com.google.common.collect.Maps;
 
-public class STParser_BasicTest extends TestCase {
+public class SParser_PerformanceTest extends TestCase {
 
 	@Override
 	protected void setUp() throws Exception {
 	}
 
-	private void parseType(String text) throws IOException {
+	public void testparseType() throws IOException {
 		try {
 
-			text = "<html>\r\n<head>\r\n<title>${name}${name}${name}${name}${name}${name}${name}${name}${name}${name}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
+			String text = "<html>\r\n<head>\r\n<title>${name}${name}${name}${name}${name}${name}${name}${name}${name}${name}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
 
 			STLexer lexer = new STLexer(STGroup.DEFAULT_ERR_MGR, new ANTLRStringStream(text), null, '$', '}');
 
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			SParser p = new SParser(tokens);
+			SParser p = new SParser(tokens,nebula.simpletemplate.STGroup.defaultGroup);
 
-			Statement r = p.templateAndEOF();
+			TemplateImpl r = p.templateAndEOF();
 			System.out.println(r.toString());
 			String expected = "<html>\r\n<head>\r\n<title>wangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilian</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
 
@@ -41,7 +41,7 @@ public class STParser_BasicTest extends TestCase {
 				person.setName("wangshilian");
 				CompilerContext c = new CompilerContext(person.getClass());
 
-				Action action = ActionComplier.DEFAULT.compile(c, "test", r);
+				Action action = ActionComplier.DEFAULT.compile(c, "test", r.code);
 				StringBuilder out = new StringBuilder();
 
 				action.exec(out, person);
@@ -72,7 +72,7 @@ public class STParser_BasicTest extends TestCase {
 				root.put("name", "wangshilian");
 				CompilerContext c = new CompilerContext(root.getClass());
 
-				Action action = ActionComplier.DEFAULT.compile(c, "test", r);
+				Action action = ActionComplier.DEFAULT.compile(c, "test", r.code);
 				StringBuilder out = new StringBuilder();
 
 				action.exec(out, root);
@@ -102,13 +102,5 @@ public class STParser_BasicTest extends TestCase {
 			fail(e.toString());
 			return;
 		}
-	}
-
-	public void testTypeDefinition() throws IOException {
-		//@formatter:off
-			String text = "" +
-					" Hello${name};";
-		//@formatter:on	
-		parseType(text);
 	}
 }

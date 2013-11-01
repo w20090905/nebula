@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,6 +12,9 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
+
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 
 public class Compiler {
 	static Log log = LogFactory.getLog(Compiler.class);
@@ -363,6 +367,8 @@ public class Compiler {
 
 	public final static int THIS = 3;
 
+	public static final Map<String, String> funcs = ImmutableMap.of();
+
 	Compiler() {
 		if (log.isDebugEnabled()) {
 			if (!new File("tmp").exists()) new File("tmp/").mkdir();
@@ -370,22 +376,27 @@ public class Compiler {
 	}
 
 	public Expr<BigDecimal> opDecimalCst(String value) {
+		Preconditions.checkNotNull(value);
 		return new DecimalCst(value);
 	}
 
 	public Expr<Object> opFieldOf(Expr<Object> e1, String name) {
+		Preconditions.checkNotNull(e1);
 		return new FieldOf(e1, name);
 	}
 
 	public Expr<Object> opLocal(Var var) {
+		Preconditions.checkNotNull(var);
 		return new VarRefer(var);
 	}
 
 	public Expr<Long> opLongCst(String value) {
+		Preconditions.checkNotNull(value);
 		return new LongCst(value);
 	}
 
 	public Expr<String> opStringCst(String value) {
+		Preconditions.checkNotNull(value);
 		return new StringCst(value);
 	}
 
@@ -394,10 +405,18 @@ public class Compiler {
 	}
 
 	public Statement stBlock(List<Statement> statements) {
+		Preconditions.checkNotNull(statements);
 		return new Block(statements);
+	}
+	
+	public TemplateImpl tpTemplate(STGroup group,Statement statement) {
+		Preconditions.checkNotNull(group);
+		Preconditions.checkNotNull(statement);
+		return new TemplateImpl(group,statement);
 	}
 
 	public Statement stOutput(Expr<?> expr) {
+		Preconditions.checkNotNull(expr);
 		return new Output(expr);
 	}
 }

@@ -29,9 +29,8 @@ public class STGroup {
 		try {
 			STLexer lexer = new STLexer(org.stringtemplate.v4.STGroup.DEFAULT_ERR_MGR, new ANTLRStringStream(template), null, '$', '}');
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			SParser p = new SParser(tokens);
-			Statement code = p.templateAndEOF();
-			return new TemplateImpl(this, "", code);
+			SParser p = new SParser(tokens,this);
+			return p.templateAndEOF();
 		} catch (RecognitionException e) {
 			log.error(e);
 			throw new RuntimeException(e);
