@@ -59,17 +59,30 @@ import java.util.ArrayList;
 				locals.clear();
 				pushLocal("this",Type.getType(Action.class));
 				pushLocal("out",Type.getType(StringBuilder.class));
-				pushLocal("object",Type.getType(Object.class));
-				root = pushLocal("root",Type.getType(Object.class));
+//				pushLocal("object",Type.getType(Object.class));
+				argv = pushLocal("argv",Type.getType(Object.class));
 			}
 			
-			Var root;
+			private List<Var> arges =null;
+			Var argv;
 			
 			protected Var pushLocal(String name, Type type) {
 				Var var = new Var(name,type,locals.size());
 				locals.put(var.name, var);
 				return var;
 			}
+			
+			protected Var arg(String name) {
+			  for(Var var: arges){
+			    if(var.name.equals(name)){
+			      return var;
+			    }
+			  }
+			  
+        Var var = new Var(name,Type.getType(Object.class),arges.size());
+        arges.add(var);
+        return var;
+      }
 			
 			protected Var v(String name) {
 				Var var = locals.get(name);
@@ -87,8 +100,9 @@ template returns[TemplateImpl temp]
 @init{
       initLocals();
       List<Statement> statments = new ArrayList<Statement>();
+      arges = new ArrayList<Var>();
     }
-  : (e=element {if(e!=null)statments.add(e);} )* {Statement s=c.stBlock(statments);temp=c.tpTemplate(group,s);};
+  : (e=element {if(e!=null)statments.add(e);} )* {Statement s=c.stBlock(statments);temp=c.tpTemplate(group,s,arges);};
 
 element returns[Statement s]
 	:	{input.LT(1).getCharPositionInLine()==0}? INDENT? COMMENT NEWLINE // -> // throw away
@@ -231,7 +245,7 @@ mapTemplateRef
 
 memberExpr returns[Expr v]  
 	:	(ie=includeExpr {v=ie;}/*/ ->includeExpr*/)
-		(	p='.' ID							// -> ^(PROP[$p,"PROP"] $memberExpr ID)
+		(	p='.' ID	{v=c.opFieldOf(v,$ID.text);}						// -> ^(PROP[$p,"PROP"] $memberExpr ID)
 		|	p='.' '(' mapExpr ')'				// -> ^(PROP_IND[$p,"PROP_IND"] $memberExpr mapExpr)
 		)*
 	;
@@ -248,7 +262,7 @@ options {k=2;} // prevent full LL(*), which fails, falling back on k=1; need k=2
 	;
 
 primary returns[Expr v]  
-	:	ID           {v=c.opFieldOf(v=c.opLocal(root),$ID.text);}
+	:	ID           {v=c.opArg(argv,arg($ID.text));}
 	|	STRING   {v=c.opStringCst($STRING.text);}
 	|	TRUE       {v=c.opYesnoCst(true);}  
 	|	FALSE      {v=c.opYesnoCst(false);}

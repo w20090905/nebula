@@ -15,13 +15,12 @@ public class ST_PerformanceTest extends TestCase {
 
 	private void parseType(String text) throws IOException {
 
-		String expected = "<html>\r\n<head>\r\n<title>wangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilian</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
-		text = "<html>\r\n<head>\r\n<title>${name}${name}${name}${name}${name}${name}${name}${name}${name}${name}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
-
-		ST st = new ST(text);
-
 		int MAX = 1000 * 100;
 		{
+			String expected = "<html>\r\n<head>\r\n<title>wangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilian</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
+			text = "<html>\r\n<head>\r\n<title>${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
+
+			ST st = new ST(text);
 			String desc = "simple type";
 			// setUp
 			Person person = new Person();
@@ -44,17 +43,21 @@ public class ST_PerformanceTest extends TestCase {
 		}
 
 		{
+			String expected = "<html>\r\n<head>\r\n<title>wangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilian</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
+			text = "<html>\r\n<head>\r\n<title>${name}${name}${name}${name}${name}${name}${name}${name}${name}${name}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
+
+			ST st = new ST(text);
 			String desc = "simple map";
 			// setUp
 			Map<String, String> root = Maps.newHashMap();
 			root.put("name", "wangshilian");
 
-			assertEquals(expected, st.render(root));
+			assertEquals(expected, st.renderNamed(root));
 			// prepare
 			long start, end, nanoAll, nanoEvery;
 			start = System.nanoTime();
 			for (int i = 0; i < MAX; i++) {
-				st.render(root);
+				st.renderNamed(root);
 			}
 			end = System.nanoTime();
 			nanoAll = end - start;
@@ -63,7 +66,7 @@ public class ST_PerformanceTest extends TestCase {
 			System.out.printf("[ %-20s ]\tAll :%8d ms; \tevery : %8d nano;\tone second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
-		
+
 		{
 			String desc = "new StringBuilder(1024)";
 			// setUp

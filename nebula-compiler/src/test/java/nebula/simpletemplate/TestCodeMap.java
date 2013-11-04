@@ -7,11 +7,10 @@ public class TestCodeMap implements Action {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public void exec(StringBuilder out, Object value) throws IOException {
-		Map<String, Object> root = (Map<String, Object>) value;
+	public void exec(StringBuilder out, Object... argv) throws IOException {
 		{
 			out.append("Hello");
-			out.append(root.get("name"));
+			out.append(((Map<String, Object>) argv[0]).get("name"));
 			out.append(";");
 		}
 	}

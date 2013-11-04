@@ -11,7 +11,6 @@ import org.apache.commons.logging.LogFactory;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.Type;
 
 import util.NamesEncoding;
 
@@ -40,7 +39,8 @@ public class ActionComplier implements Opcodes {
 		// Class define
 		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, name, null, "java/lang/Object", new String[] { SUPER_NAME });
 
-		String dataClassName = Type.getType(context.getDataClass()).getInternalName();
+		// String dataClassName =
+		// Type.getType(context.getDataClass()).getInternalName();
 
 		// /}}}
 
@@ -54,26 +54,29 @@ public class ActionComplier implements Opcodes {
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
 		}
-		
+
 		{
-			mv = cw.visitMethod(ACC_PUBLIC, "exec", "(Ljava/lang/StringBuilder;Ljava/lang/Object;)V", null, new String[] { "java/io/IOException" });
+			mv = cw.visitMethod(ACC_PUBLIC, "exec", "(Ljava/lang/StringBuilder;[Ljava/lang/Object;)V", null,
+					new String[] { "java/io/IOException" });
+
 			mv.visitCode();
-			mv.visitVarInsn(ALOAD, 2);
-			mv.visitTypeInsn(CHECKCAST, dataClassName);
-			mv.visitVarInsn(ASTORE, 3);
-			
+
 			code.compile(cw, mv, context);
-//			mv.visitVarInsn(ALOAD, 1);
-//			mv.visitLdcInsn("Hello");
-//			mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/Writer", "write", "(Ljava/lang/String;)V");
-//			mv.visitVarInsn(ALOAD, 1);
-//			mv.visitVarInsn(ALOAD, 3);
-//			mv.visitMethodInsn(INVOKEVIRTUAL, dataClassName, "getName", "()Ljava/lang/String;");
-//			mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/Writer", "write", "(Ljava/lang/String;)V");
-//			mv.visitVarInsn(ALOAD, 1);
-//			mv.visitLdcInsn(";");
-//			mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/Writer", "write", "(Ljava/lang/String;)V");
-			
+			// mv.visitVarInsn(ALOAD, 1);
+			// mv.visitLdcInsn("Hello");
+			// mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/Writer", "write",
+			// "(Ljava/lang/String;)V");
+			// mv.visitVarInsn(ALOAD, 1);
+			// mv.visitVarInsn(ALOAD, 3);
+			// mv.visitMethodInsn(INVOKEVIRTUAL, dataClassName, "getName",
+			// "()Ljava/lang/String;");
+			// mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/Writer", "write",
+			// "(Ljava/lang/String;)V");
+			// mv.visitVarInsn(ALOAD, 1);
+			// mv.visitLdcInsn(";");
+			// mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/Writer", "write",
+			// "(Ljava/lang/String;)V");
+
 			mv.visitInsn(RETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();

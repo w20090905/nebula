@@ -5,13 +5,12 @@ import java.io.IOException;
 public class TestCodePrimary implements Action {
 
 	@Override
-	public void exec(StringBuilder out, Object value) throws IOException {
-		Person root = (Person) value;
+	public void exec(StringBuilder out, Object... argv) throws IOException {
 		{
 			out.append("Hello");
 			out.append("ddd");
-			out.append(root.getName());
-			out.append(value);
+			out.append(((Person) argv[0]).getName());
+			out.append(argv[0]);
 			out.append(1);
 			out.append(1L);
 			out.append(false);

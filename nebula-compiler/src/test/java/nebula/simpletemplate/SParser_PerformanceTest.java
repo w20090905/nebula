@@ -22,29 +22,31 @@ public class SParser_PerformanceTest extends TestCase {
 	public void testparseType() throws IOException {
 		try {
 
-			String text = "<html>\r\n<head>\r\n<title>${name}${name}${name}${name}${name}${name}${name}${name}${name}${name}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
-
-			STLexer lexer = new STLexer(STGroup.DEFAULT_ERR_MGR, new ANTLRStringStream(text), null, '$', '}');
-
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			SParser p = new SParser(tokens,nebula.simpletemplate.STGroup.defaultGroup);
-
-			TemplateImpl r = p.templateAndEOF();
-			System.out.println(r.toString());
-			String expected = "<html>\r\n<head>\r\n<title>wangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilian</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
 
 			{
+				String text = "<html>\r\n<head>\r\n<title>${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
+
+				STLexer lexer = new STLexer(STGroup.DEFAULT_ERR_MGR, new ANTLRStringStream(text), null, '$', '}');
+
+				CommonTokenStream tokens = new CommonTokenStream(lexer);
+				SParser p = new SParser(tokens,nebula.simpletemplate.STGroup.defaultGroup);
+
+				TemplateImpl r = p.templateAndEOF();
+				System.out.println(r.toString());
+				String expected = "<html>\r\n<head>\r\n<title>wangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilian</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
+
+				
 				int MAX = 1000 * 100;
 				String desc = "simple type";
 				// setUp
 				Person person = new Person();
 				person.setName("wangshilian");
-				CompilerContext c = new CompilerContext(person.getClass());
+				CompilerContext c = new CompilerContext(new Object[]{person});
 
 				Action action = ActionComplier.DEFAULT.compile(c, "test", r.code);
 				StringBuilder out = new StringBuilder();
 
-				action.exec(out, person);
+				action.exec(out, new Object[]{person});
 				assertEquals(expected, out.toString());
 
 				out = new StringBuilder();
@@ -53,7 +55,7 @@ public class SParser_PerformanceTest extends TestCase {
 				start = System.nanoTime();
 				for (int i = 0; i < MAX; i++) {
 					out.setLength(0);
-					action.exec(out, person);
+					action.exec(out, new Object[]{person});
 					out.toString();
 				}
 				end = System.nanoTime();
@@ -62,20 +64,33 @@ public class SParser_PerformanceTest extends TestCase {
 
 				System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 						1000 * 1000 * 1000 / nanoEvery);
+				assertEquals(0, p.getNumberOfSyntaxErrors());
 			}
 
 			{
+				String text = "<html>\r\n<head>\r\n<title>${name}${name}${name}${name}${name}${name}${name}${name}${name}${name}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
+
+				STLexer lexer = new STLexer(STGroup.DEFAULT_ERR_MGR, new ANTLRStringStream(text), null, '$', '}');
+
+				CommonTokenStream tokens = new CommonTokenStream(lexer);
+				SParser p = new SParser(tokens,nebula.simpletemplate.STGroup.defaultGroup);
+
+				TemplateImpl r = p.templateAndEOF();
+				System.out.println(r.toString());
+				String expected = "<html>\r\n<head>\r\n<title>wangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilian</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
+
+				
 				int MAX = 1000 * 100;
 				String desc = "simple map";
 				// setUp
 				Map<String, String> root = Maps.newHashMap();
 				root.put("name", "wangshilian");
-				CompilerContext c = new CompilerContext(root.getClass());
+				CompilerContext c = new CompilerContext(new Object[]{"wangshilian"});
 
 				Action action = ActionComplier.DEFAULT.compile(c, "test", r.code);
 				StringBuilder out = new StringBuilder();
 
-				action.exec(out, root);
+				action.exec(out, new Object[]{"wangshilian"});
 				assertEquals(expected, out.toString());
 				out = new StringBuilder();
 				// prepare
@@ -84,7 +99,7 @@ public class SParser_PerformanceTest extends TestCase {
 				out = new StringBuilder(1024);
 				for (int i = 0; i < MAX; i++) {
 					out.setLength(0);
-					action.exec(out, root);
+					action.exec(out, new Object[]{"wangshilian"});
 					out.toString();
 				}
 				end = System.nanoTime();
@@ -93,9 +108,9 @@ public class SParser_PerformanceTest extends TestCase {
 
 				System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 						1000 * 1000 * 1000 / nanoEvery);
+				assertEquals(0, p.getNumberOfSyntaxErrors());
 			}
 
-			assertEquals(0, p.getNumberOfSyntaxErrors());
 
 			return;
 		} catch (RecognitionException e) {

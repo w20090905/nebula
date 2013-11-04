@@ -59,16 +59,16 @@ public class ST {
 		return impl.name;
 	}
 
-	public String render(Object root) {
-		return impl.exec(root);
+	public String render(Object... argv) {
+		return impl.exec(argv);
 	}
 
-	public <T> String render(Map<String, T> root) {
-		return impl.exec(root);
+	public <T> String renderNamed(Map<String, T> namedParams) {
+		return impl.execNamed(namedParams);
 	}
 
-	public <T> String render(List<T> root) {
-		return impl.exec(root);
+	public <T> String renderList(List<T> dataList) {
+		return impl.execList(dataList);
 	}
 
 	@Override

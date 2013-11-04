@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+import nebula.simpletemplate.CompilerContext.Arg;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.objectweb.asm.ClassWriter;
@@ -15,6 +17,7 @@ import org.objectweb.asm.Type;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 
 public class Compiler {
 	static Log log = LogFactory.getLog(Compiler.class);
@@ -79,7 +82,7 @@ public class Compiler {
 			} else if (type.getSort() != Type.OBJECT) {
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + type.getDescriptor() + ")Ljava/lang/StringBuilder;");
 			} else {
-				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + type.getDescriptor() + ")Ljava/lang/StringBuilder;");
+				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + Type.getDescriptor(Object.class) + ")Ljava/lang/StringBuilder;");
 			}
 
 			mv.visitInsn(POP);
@@ -195,18 +198,19 @@ public class Compiler {
 		}
 
 		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			e1.compile(cw, mv, context);
+			Type objType = e1.compile(cw, mv, context);
 
 			Method m = null;
-			if (context.isMap) {
+
+			if (Map.class.isAssignableFrom(objType.getClass())) {
 				mv.visitLdcInsn(name);
 				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get", "(Ljava/lang/Object;)Ljava/lang/Object;");
 				Type type = Type.getType(Object.class);
 				mv.visitTypeInsn(CHECKCAST, type.getInternalName());
 				return type;
-			} else if ((m = context.getProp(name)) != null) {
+			} else if ((m = context.getProp(objType.getClassName(), name)) != null) {
 				Type retType = Type.getReturnType(m);
-				mv.visitMethodInsn(INVOKEVIRTUAL, context.getInternalName(), m.getName(), "()" + retType.getDescriptor());
+				mv.visitMethodInsn(INVOKEVIRTUAL, objType.getInternalName(), m.getName(), "()" + retType.getDescriptor());
 				return retType;
 			} else {
 				throw new RuntimeException("Cannot find field " + name);
@@ -226,15 +230,7 @@ public class Compiler {
 
 		@Override
 		public String toString(CompilerContext context) {
-
-			Method m = null;
-			if (context.isMap) {
-				return e1.toString() + ".get(\"" + name.toString() + "\")";
-			} else if ((m = context.getProp(name)) != null) {
-				return e1.toString() + "." + m.getName() + "()";
-			} else {
-				throw new RuntimeException("dd");
-			}
+			return e1.toString() + ".\"" + name.toString() + "\"";
 		}
 	}
 
@@ -377,6 +373,59 @@ public class Compiler {
 		}
 	}
 
+	static class ArgRefer extends Expression<Object> {
+		final Var argv;
+		final Var arg;
+
+		ArgRefer(final Var argv, final Var var) {
+			this.argv = argv;
+			this.arg = var;
+		}
+
+		@Override
+		public Type compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
+			mv.visitVarInsn(ALOAD, argv.index);
+			switch (arg.index) {
+			case 0:
+				mv.visitInsn(ICONST_0);
+				break;
+			case 1:
+				mv.visitInsn(ICONST_1);
+				break;
+			case 2:
+				mv.visitInsn(ICONST_2);
+				break;
+			case 3:
+				mv.visitInsn(ICONST_3);
+				break;
+			case 4:
+				mv.visitInsn(ICONST_4);
+				break;
+			case 5:
+				mv.visitInsn(ICONST_5);
+				break;
+			default:
+				mv.visitIntInsn(BIPUSH, arg.index);
+				break;
+			}
+
+			mv.visitInsn(AALOAD);
+			Arg a = context.getArg(arg.index);
+			mv.visitTypeInsn(CHECKCAST, Type.getInternalName(a.clz));
+			return Type.getType(a.clz);
+		}
+
+		@Override
+		public String toString() {
+			return arg.name;
+		}
+
+		@Override
+		public String toString(CompilerContext context) {
+			return this.toString();
+		}
+	}
+
 	static class YesnoCst extends Expression<Integer> {
 		final int value;
 
@@ -464,6 +513,11 @@ public class Compiler {
 		return new VarRefer(var);
 	}
 
+	public Expr<Object> opArg(Var argv, Var var) {
+		Preconditions.checkNotNull(var);
+		return new ArgRefer(argv, var);
+	}
+
 	public Expr<Long> opLongCst(String value) {
 		Preconditions.checkNotNull(value);
 		return new LongCst(value);
@@ -483,10 +537,14 @@ public class Compiler {
 		return new Block(statements);
 	}
 
-	public TemplateImpl tpTemplate(STGroup group, Statement statement) {
+	public TemplateImpl tpTemplate(STGroup group, Statement statement, List<Var> arges) {
 		Preconditions.checkNotNull(group);
 		Preconditions.checkNotNull(statement);
-		return new TemplateImpl(group, statement);
+		List<String> argNames = Lists.newArrayList();
+		for (Var var : arges) {
+			argNames.add(var.name);
+		}
+		return new TemplateImpl(group, statement, argNames);
 	}
 
 	public Statement stOutput(Expr<?> expr) {
