@@ -58,7 +58,9 @@ import java.util.ArrayList;
 			protected void initLocals() {
 				locals.clear();
 				pushLocal("this",Type.getType(Action.class));
-				pushLocal("out",Type.getType(StringBuilder.class));
+        pushLocal("group",Type.getType(StringBuilder.class));
+        pushLocal("template",Type.getType(StringBuilder.class));
+        pushLocal("sb",Type.getType(StringBuilder.class));
 //				pushLocal("object",Type.getType(Object.class));
 				argv = pushLocal("argv",Type.getType(Object.class));
 			}
@@ -112,9 +114,9 @@ element returns[Statement s]
 	;
 
 singleElement returns[Statement s]
-	:	e=exprTag  {s=c.stOutput(e);}
-	|	TEXT           {s=c.stOutput(c.opStringCst($TEXT.text));}
-	|	NEWLINE    {s=c.stOutput(c.opStringCst($NEWLINE.text));}
+	:	e=exprTag  {s=c.stOutput(c.opLocal(v("sb")),e);}
+	|	TEXT           {s=c.stOutput(c.opLocal(v("sb")),c.opStringCst($TEXT.text));}
+	|	NEWLINE    {s=c.stOutput(c.opLocal(v("sb")),c.opStringCst($NEWLINE.text));}
 	|	COMMENT // throw away
 	;
 
@@ -210,7 +212,7 @@ option
 	;
 
 exprNoComma returns[Expr v]
-	:	memberExpr
+	:	m=memberExpr {v=m;}
 		( ':' mapTemplateRef					// -> ^(MAP memberExpr mapTemplateRef)
 		|										// -> memberExpr
 		)
@@ -254,10 +256,10 @@ includeExpr returns[Expr v]
 options {k=2;} // prevent full LL(*), which fails, falling back on k=1; need k=2
 	:	{Compiler.funcs.containsKey(input.LT(1).getText())}? // predefined function
 		ID '(' expr? ')'						// -> ^(EXEC_FUNC ID expr?)
-	|	'super' '.' ID '(' args ')'				// -> ^(INCLUDE_SUPER ID args?)
-	|	ID '(' as=args ')'		{v=c.opInclude($ID.text,as);}					// -> ^(INCLUDE ID args?)
-	|	'@' 'super' '.' ID '(' rp=')'			// -> ^(INCLUDE_SUPER_REGION ID)
-	|	'@' ID '(' rp=')'						// -> ^(INCLUDE_REGION ID)
+//	|	'super' '.' ID '(' args ')'				// -> ^(INCLUDE_SUPER ID args?)
+	|	ID '(' as=args ')'		{v=c.opInclude(c.opLocal(v("group")),$ID.text,as);}					// -> ^(INCLUDE ID args?)
+//	|	'@' 'super' '.' ID '(' rp=')'			// -> ^(INCLUDE_SUPER_REGION ID)
+//	|	'@' ID '(' rp=')'						// -> ^(INCLUDE_REGION ID)
 	|	p=primary{v=p;}
 	;
 
@@ -276,6 +278,9 @@ primary returns[Expr v]
 	;
 
 args returns[List<Argument> args]
+@init{
+  args = new ArrayList();
+}
   :	as=argExprList {args=as;}
 	|	a=namedArg{c.opAddArgument(args,a);} ( ',' a=namedArg{c.opAddArgument(args,a);} )* (',' '...')? // -> namedArg+ '...'?
     |   '...'

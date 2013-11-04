@@ -8,6 +8,7 @@ import nebula.lang.NebulaClassLoader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.mockito.asm.Type;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -56,8 +57,9 @@ public class ActionComplier implements Opcodes {
 		}
 
 		{
-			mv = cw.visitMethod(ACC_PUBLIC, "exec", "(Ljava/lang/StringBuilder;[Ljava/lang/Object;)V", null,
-					new String[] { "java/io/IOException" });
+			mv = cw.visitMethod(ACC_PUBLIC, "exec",
+					"(" + Type.getDescriptor(STGroup.class) + "" + Type.getDescriptor(TemplateImpl.class) + "" + Type.getDescriptor(StringBuilder.class)
+							+ "[Ljava/lang/Object;)V", null, new String[] { "java/io/IOException" });
 
 			mv.visitCode();
 

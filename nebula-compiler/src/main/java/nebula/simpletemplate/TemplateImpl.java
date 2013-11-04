@@ -107,7 +107,7 @@ public class TemplateImpl {
 				}
 			}
 
-			get(paramsNames, argv).exec(sb, argv);
+			get(paramsNames, argv).exec(this.group, this, sb, argv);
 			String result = sb.toString();
 
 			{// clear string builder
@@ -180,7 +180,7 @@ public class TemplateImpl {
 
 			for (int i = 0; i < dataList.size(); i++) {
 				Object[] datas = new Object[] { dataList.get(i), argv, i };
-				get(paramsNames, datas).exec(sb, datas);
+				get(paramsNames, datas).exec(this.group, this, sb, datas);
 			}
 
 			String result = sb.toString();

@@ -87,12 +87,17 @@ public class ST_BasicTest extends TestCase {
 	String newline = "\n";
 
 	public void testInclude() throws Exception {
-		String template = "load ${box()};";
-		ST st = new ST(template);
-		// st.impl.nativeGroup.defineTemplate("box", "kewl" + newline +
-		// "daddy");
+		String template = "load ${box(xx)};";
 		String expected = "load kewl" + newline + "daddy;";
-		String result = st.render(new Object());
+		
+		ST st = new ST(template);
+		
+		 st.impl.group.defineTemplate("box", "kewl" + newline + "daddy");
+
+		Map<String, Object> root = Maps.newHashMap();
+		root.put("xx", "wangshilian");
+		
+		String result = st.renderNamed(root);
 		assertEquals(expected, result);
 	}
 }

@@ -41,8 +41,6 @@ import org.stringtemplate.v4.STGroup;
 import org.stringtemplate.v4.STGroupFile;
 import org.stringtemplate.v4.STGroupString;
 import org.stringtemplate.v4.misc.ErrorBuffer;
-import org.stringtemplate.v4.misc.STNoSuchPropertyException;
-import org.stringtemplate.v4.misc.STRuntimeMessage;
 
 public class TestCoreBasics extends BaseTest {
 	public void testNullAttr() throws Exception {

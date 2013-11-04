@@ -7,7 +7,7 @@ public class TestCodeMap implements Action {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public void exec(StringBuilder out, Object... argv) throws IOException {
+	public void exec(STGroup group, TemplateImpl template,StringBuilder out, Object[] argv) throws IOException {
 		{
 			out.append("Hello");
 			out.append(((Map<String, Object>) argv[0]).get("name"));

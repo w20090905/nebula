@@ -67,14 +67,17 @@ public class Compiler {
 	}
 
 	static class Output implements Opcodes, Statement {
+		final Expr<?> sb;
 		final Expr<?> expr;
 
-		Output(Expr<?> expr) {
+		Output(Expr<?> sb,Expr<?> expr) {
+			this.sb = sb;
 			this.expr = expr;
 		}
 
 		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			mv.visitVarInsn(ALOAD, 1);
+			sb.compile(cw, mv, context);
+			
 			Type type = expr.compile(cw, mv, context);
 
 			if (String.class.getName().equals(type.getClassName())) {
@@ -234,34 +237,38 @@ public class Compiler {
 		}
 	}
 
+
 	static class Include extends Expression<Object> {
+		final Expr<Object> group;
 		final String name;
 		final List<Argument> args;
 
-		Include(String name, List<Argument> args) {
+		Include( Expr<Object> group,String name, List<Argument> args) {
+			this.group = group;
 			this.name = name;
 			this.args = args;
 		}
 
 		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			// e1.compile(cw, mv, context);
-			//
-			// Method m = null;
-			// if (context.isMap) {
-			// mv.visitLdcInsn(name);
-			// mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get",
-			// "(Ljava/lang/Object;)Ljava/lang/Object;");
-			// Type type = Type.getType(Object.class);
-			// mv.visitTypeInsn(CHECKCAST, type.getInternalName());
-			// return type;
-			// } else if ((m = context.getProp(name)) != null) {
-			// Type retType = Type.getReturnType(m);
-			// mv.visitMethodInsn(INVOKEVIRTUAL, context.getInternalName(),
-			// m.getName(), "()"+retType.getDescriptor());
-			// return retType;
-			// } else {
-			// throw new RuntimeException("Cannot find field " + name);
-			// }
+
+
+
+			group.compile(cw, mv, context);
+			mv.visitLdcInsn(name);
+			mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(STGroup.class), "getTemplate", "(Ljava/lang/String;)" + Type.getDescriptor(TemplateImpl.class));
+			
+			mv.visitIntInsn(BIPUSH,args.size());
+			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+			
+			for (int i = 0; i < args.size(); i++) {
+				mv.visitInsn(DUP);
+				mv.visitIntInsn(BIPUSH,i);
+				args.get(i).value.compile(cw, mv, context);
+				mv.visitInsn(AASTORE);
+			}
+			
+			mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "exec", "([Ljava/lang/Object;)Ljava/lang/String;");
+			
 			return Type.getType(String.class);
 		}
 
@@ -504,8 +511,8 @@ public class Compiler {
 		return new Argument(arg);
 	}
 
-	public Expr<Object> opInclude(String name, List<Argument> args) {
-		return new Include(name, args);
+	public Expr<Object> opInclude(Expr<Object> group,String name, List<Argument> args) {
+		return new Include(group,name, args);
 	}
 
 	public Expr<Object> opLocal(Var var) {
@@ -547,8 +554,8 @@ public class Compiler {
 		return new TemplateImpl(group, statement, argNames);
 	}
 
-	public Statement stOutput(Expr<?> expr) {
+	public Statement stOutput(Expr<?> sb,Expr<?> expr) {
 		Preconditions.checkNotNull(expr);
-		return new Output(expr);
+		return new Output(sb,expr);
 	}
 }
