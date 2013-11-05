@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
 import nebula.data.Broker;
+import nebula.lang.NebulaClassLoader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,7 +18,7 @@ import org.objectweb.asm.Opcodes;
 
 import com.google.common.collect.ImmutableMap;
 
-public class BrokerBuilder extends ClassLoader {
+public class BrokerBuilder {
 	Log log = LogFactory.getLog(getClass());
 
 	Map<String, BrokerInstanceBuilder> knownBrokeres;
@@ -76,8 +77,8 @@ public class BrokerBuilder extends ClassLoader {
 					}
 				}
 
-				Class<?> clzBroker = this.defineClass(typeName, code, 0, code.length);
-				this.resolveClass(clzBroker);
+				Class<?> clzBroker = NebulaClassLoader.defineClass(typeName, code);
+				NebulaClassLoader.doResolveClass(clzBroker);
 			}
 
 			// 构建代理构建类，主要是为了性能，避免每次都是用Class.newInstance() 来构建代理
@@ -100,14 +101,14 @@ public class BrokerBuilder extends ClassLoader {
 					}
 				}
 
-				Class<?> clzBuilder = this.defineClass(builderTypeName, codeBuilder, 0, codeBuilder.length);
+				Class<?> clzBuilder = NebulaClassLoader.defineClass(builderTypeName, codeBuilder);
 
 				builder = (BrokerInstanceBuilder) clzBuilder.newInstance();
 			}
-			
-			ImmutableMap.Builder<String, BrokerInstanceBuilder> mapBuilder =  ImmutableMap.builder();
 
-			this.knownBrokeres =mapBuilder.putAll(knownBrokeres).put(target.getName(), builder).build();
+			ImmutableMap.Builder<String, BrokerInstanceBuilder> mapBuilder = ImmutableMap.builder();
+
+			this.knownBrokeres = mapBuilder.putAll(knownBrokeres).put(target.getName(), builder).build();
 			Broker<T> broker = builder.build();
 			return broker.get();
 

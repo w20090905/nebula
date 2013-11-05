@@ -65,7 +65,11 @@ public abstract class Broker<T> implements BrokerHandler<T> {
 	final public static <T> BrokerHandler<T> brokerOf(T value) {
 		return (BrokerHandler<T>) value;
 	}
-
+	@SuppressWarnings("unchecked")
+	final public static <T> T valueOf(T value) {
+		return ((BrokerHandler<T>) value).get();
+	}
+	
 	final public static <T> BrokerHandler<T> broke(Class<T> clz, T value) {
 		BrokerHandler<T> b = brokerBuilder.builder(clz);
 		b.setNewValue(value);

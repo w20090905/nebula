@@ -13,4 +13,9 @@ public class NebulaClassLoader extends ClassLoader {
 		if (instance == null) instance = new NebulaClassLoader();
 		return instance;
 	}
+
+	public static void doResolveClass(Class<?> clzBroker) {
+		if (instance == null) instance = new NebulaClassLoader();
+		instance.resolveClass(clzBroker);
+	}
 }
