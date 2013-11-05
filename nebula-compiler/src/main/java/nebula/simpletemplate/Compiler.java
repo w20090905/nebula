@@ -211,7 +211,7 @@ public class Compiler {
 				Type type = Type.getType(Object.class);
 				mv.visitTypeInsn(CHECKCAST, type.getInternalName());
 				return type;
-			} else if ((m = context.getProp(objType.getClassName(), name)) != null) {
+			} else if ((m = CompilerContext.getProp(objType.getClassName(), name)) != null) {
 				Type retType = Type.getReturnType(m);
 				mv.visitMethodInsn(INVOKEVIRTUAL, objType.getInternalName(), m.getName(), "()" + retType.getDescriptor());
 				return retType;
