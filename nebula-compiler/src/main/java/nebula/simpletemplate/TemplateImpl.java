@@ -67,16 +67,22 @@ public class TemplateImpl {
 
 	public String exec(Object... argv) {
 		cntCount++;
-
-		StringBuilder sbParams = new StringBuilder();
-		for (Object obj : argv) {
-			if (obj != null) {
-				sbParams.append(obj.getClass().getName());
-			} else {
-				sbParams.append("NULL");
+		String paramsNames = null;
+		if (argv.length == 1) {
+			paramsNames = argv[0].getClass().getName();
+		} else if (argv.length > 1) {
+			StringBuilder sbParams = new StringBuilder();
+			for (Object obj : argv) {
+				if (obj != null) {
+					sbParams.append(obj.getClass().getName());
+				} else {
+					sbParams.append("NULL");
+				}
 			}
+			paramsNames = sbParams.toString();
+		} else {
+			paramsNames = "nop";
 		}
-		String paramsNames = sbParams.toString();
 
 		try {
 			StringBuilder sb = null;
