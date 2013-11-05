@@ -223,4 +223,24 @@ public class TemplateImpl {
 		}
 
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("String tempalte");
+		if (formalArguments.size() > 0) {
+			sb.append("(");
+			for (String argName : formalArguments) {
+				sb.append(argName);
+				sb.append(',');
+			}
+			sb.setCharAt(sb.length() - 1, ')');
+		}else{
+			sb.append("()");
+		}
+		
+		sb.append(code);
+		sb.append("\n");
+		return sb.toString();
+	}
 }

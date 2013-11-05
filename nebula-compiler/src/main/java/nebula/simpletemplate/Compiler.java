@@ -70,14 +70,14 @@ public class Compiler {
 		final Expr<?> sb;
 		final Expr<?> expr;
 
-		Output(Expr<?> sb,Expr<?> expr) {
+		Output(Expr<?> sb, Expr<?> expr) {
 			this.sb = sb;
 			this.expr = expr;
 		}
 
 		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			sb.compile(cw, mv, context);
-			
+
 			Type type = expr.compile(cw, mv, context);
 
 			if (String.class.getName().equals(type.getClassName())) {
@@ -237,38 +237,35 @@ public class Compiler {
 		}
 	}
 
-
 	static class Include extends Expression<Object> {
 		final Expr<Object> group;
-		final String name;
+		final Expr<String> name;
 		final List<Argument> args;
 
-		Include( Expr<Object> group,String name, List<Argument> args) {
+		Include(Expr<Object> group, Expr<String> name, List<Argument> args) {
 			this.group = group;
 			this.name = name;
 			this.args = args;
 		}
 
 		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-
-
-
 			group.compile(cw, mv, context);
-			mv.visitLdcInsn(name);
-			mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(STGroup.class), "getTemplate", "(Ljava/lang/String;)" + Type.getDescriptor(TemplateImpl.class));
-			
-			mv.visitIntInsn(BIPUSH,args.size());
+			name.compile(cw, mv, context);
+			mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(STGroup.class), "getTemplate",
+					"(Ljava/lang/String;)" + Type.getDescriptor(TemplateImpl.class));
+
+			mv.visitIntInsn(BIPUSH, args.size());
 			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
-			
+
 			for (int i = 0; i < args.size(); i++) {
 				mv.visitInsn(DUP);
-				mv.visitIntInsn(BIPUSH,i);
+				mv.visitIntInsn(BIPUSH, i);
 				args.get(i).value.compile(cw, mv, context);
 				mv.visitInsn(AASTORE);
 			}
-			
+
 			mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "exec", "([Ljava/lang/Object;)Ljava/lang/String;");
-			
+
 			return Type.getType(String.class);
 		}
 
@@ -511,8 +508,13 @@ public class Compiler {
 		return new Argument(arg);
 	}
 
-	public Expr<Object> opInclude(Expr<Object> group,String name, List<Argument> args) {
-		return new Include(group,name, args);
+	public Expr<Object> opInclude(Expr<Object> group, Expr<String> name, Expr<Object> target, List<Argument> args) {
+		args.add(0, new Argument(target));
+		return new Include(group, name, args);
+	}
+
+	public Expr<Object> opInclude(Expr<Object> group, Expr<String> name, List<Argument> args) {
+		return new Include(group, name, args);
 	}
 
 	public Expr<Object> opLocal(Var var) {
@@ -554,8 +556,8 @@ public class Compiler {
 		return new TemplateImpl(group, statement, argNames);
 	}
 
-	public Statement stOutput(Expr<?> sb,Expr<?> expr) {
+	public Statement stOutput(Expr<?> sb, Expr<?> expr) {
 		Preconditions.checkNotNull(expr);
-		return new Output(sb,expr);
+		return new Output(sb, expr);
 	}
 }
