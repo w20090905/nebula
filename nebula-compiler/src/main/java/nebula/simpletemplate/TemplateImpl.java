@@ -9,14 +9,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 
 public class TemplateImpl {
 
 	final static Log log = LogFactory.getLog(TemplateImpl.class);
 	STGroup group;
 
-	List<String> formalArguments;
+	String[] formalArguments;
 
 	boolean hasFormalArgs;
 
@@ -29,7 +28,7 @@ public class TemplateImpl {
 		this.code = code;
 		this.bytecodeWithKnownClass = ImmutableMap.of();
 		bufferes[0] = new StringBuilder(INITIAL_SIZE);
-		this.formalArguments = Lists.newArrayList("at");
+		this.formalArguments = new String[] { "at" };
 	}
 
 	TemplateImpl(STGroup group, final Code code, List<String> arguments) {
@@ -37,7 +36,7 @@ public class TemplateImpl {
 		this.code = code;
 		this.bytecodeWithKnownClass = ImmutableMap.of();
 		bufferes[0] = new StringBuilder(INITIAL_SIZE);
-		this.formalArguments = arguments;
+		this.formalArguments = arguments.toArray(new String[0]);
 	}
 
 	TemplateImpl(STGroup group, final Code code, List<String> arguments, List<TemplateImpl> implicitlyDefinedTemplates) {
@@ -47,11 +46,12 @@ public class TemplateImpl {
 
 	// 命名参数形式数据
 	public <T> String execNamed(Map<String, T> data) {
-		List<Object> args = Lists.newArrayList();
-		for (String name : this.formalArguments) {
-			args.add(data.get(name));
+		Object[] args = new Object[this.formalArguments.length];
+		int max = this.formalArguments.length;
+		for (int i = 0; i < max; i++) {
+			args[i] = data.get(formalArguments[i]);
 		}
-		return this.exec(args.toArray(new Object[0]));
+		return this.exec(args);
 	}
 
 	static int INITIAL_SIZE = 128;
@@ -237,7 +237,7 @@ public class TemplateImpl {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("String tempalte");
-		if (formalArguments.size() > 0) {
+		if (formalArguments.length > 0) {
 			sb.append("(");
 			for (String argName : formalArguments) {
 				sb.append(argName);

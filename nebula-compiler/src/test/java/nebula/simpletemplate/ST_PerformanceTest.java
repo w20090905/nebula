@@ -66,7 +66,7 @@ public class ST_PerformanceTest extends TestCase {
 			System.out.printf("[ %-20s ]\tAll :%8d ms; \tevery : %8d nano;\tone second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
-
+		MAX = 1000 * 10;
 		{
 			String expected = "<html>\r\n<head>\r\n<title>wangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilian</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
 			String text = "<html>\r\n<head>\r\n<title>${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
