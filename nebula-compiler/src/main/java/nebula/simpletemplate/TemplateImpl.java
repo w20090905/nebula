@@ -7,7 +7,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.stringtemplate.v4.compiler.CompiledST;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
@@ -17,11 +16,13 @@ public class TemplateImpl {
 	final static Log log = LogFactory.getLog(TemplateImpl.class);
 	STGroup group;
 
-	public List<String> formalArguments;
+	List<String> formalArguments;
 
-	public boolean hasFormalArgs;
+	boolean hasFormalArgs;
 
-	public List<CompiledST> implicitlyDefinedTemplates;
+	public List<TemplateImpl> implicitlyDefinedTemplates;
+	String name;
+	Code code;
 
 	TemplateImpl(STGroup group, final Code code) {
 		this.group = group;
@@ -39,9 +40,10 @@ public class TemplateImpl {
 		this.formalArguments = arguments;
 	}
 
-	public String name;
-	Code code;
-	Map<String, Action> bytecodeWithKnownClass;
+	TemplateImpl(STGroup group, final Code code, List<String> arguments, List<TemplateImpl> implicitlyDefinedTemplates) {
+		this(group, code, arguments);
+		this.implicitlyDefinedTemplates = implicitlyDefinedTemplates;
+	}
 
 	// 命名参数形式数据
 	public <T> String execNamed(Map<String, T> data) {
@@ -52,11 +54,10 @@ public class TemplateImpl {
 		return this.exec(args.toArray(new Object[0]));
 	}
 
+	static int INITIAL_SIZE = 128;
+	static int BUFFER_SIZE = 1;
 	ReentrantLock lock = new ReentrantLock();
 
-	static int INITIAL_SIZE = 128;
-
-	static int BUFFER_SIZE = 1;
 	StringBuilder[] bufferes = new StringBuilder[BUFFER_SIZE];
 	final boolean[] used = new boolean[BUFFER_SIZE];
 	volatile int lastCanuse = 0;
@@ -198,23 +199,25 @@ public class TemplateImpl {
 		}
 	}
 
+	Map<String, Action> bytecodeWithKnownClass;
+
 	public Action get(String paramsNames, Object... argv) {
 
-		Action builder = bytecodeWithKnownClass.get(name);
+		Action builder = bytecodeWithKnownClass.get(paramsNames);
 
 		if (builder != null) return builder;
 
 		lock.lock();
 		try {
 
-			builder = bytecodeWithKnownClass.get(name);
+			builder = bytecodeWithKnownClass.get(paramsNames);
 			if (builder != null) return builder;
 
 			CompilerContext c = new CompilerContext(argv);
 			builder = ActionComplier.DEFAULT.compile(c, "test", code);
 
 			ImmutableMap.Builder<String, Action> mapBuilder = ImmutableMap.builder();
-			bytecodeWithKnownClass = mapBuilder.putAll(bytecodeWithKnownClass).put(name, builder).build();
+			bytecodeWithKnownClass = mapBuilder.putAll(bytecodeWithKnownClass).put(paramsNames, builder).build();
 
 			return builder;
 
@@ -235,10 +238,10 @@ public class TemplateImpl {
 				sb.append(',');
 			}
 			sb.setCharAt(sb.length() - 1, ')');
-		}else{
+		} else {
 			sb.append("()");
 		}
-		
+
 		sb.append(code);
 		sb.append("\n");
 		return sb.toString();

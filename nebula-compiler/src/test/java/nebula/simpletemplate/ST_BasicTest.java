@@ -100,4 +100,46 @@ public class ST_BasicTest extends TestCase {
 		String result = st.renderNamed(root);
 		assertEquals(expected, result);
 	}
+	
+
+	public void testIncludeSubTempalte() throws Exception {
+		String template = "load ${xx: {kewl\ndaddy}};";
+		String expected = "load kewl\ndaddy;";
+		
+		ST st = new ST(template);
+		
+		Map<String, Object> root = Maps.newHashMap();
+		root.put("xx", "wangshilian");
+		
+		String result = st.renderNamed(root);
+		assertEquals(expected, result);
+	}
+
+
+	public void testIncludeSubTempalteQueue() throws Exception {
+		String template = "load ${xx: {x1 | 111 ${x1}kewl\ndaddy}:{xx | 222 ${xx}}};";
+		String expected = "load 222 111 wangshiliankewl\ndaddy;";
+		
+		ST st = new ST(template);
+		
+		Map<String, Object> root = Maps.newHashMap();
+		root.put("xx", "wangshilian");
+		
+		String result = st.renderNamed(root);
+		assertEquals(expected, result);
+	}
+	
+	
+	public void testSubTempalte() throws Exception {
+		String template = "${{kewl\ndaddy}};";
+		String expected = "kewl\ndaddy;";
+		
+		ST st = new ST(template);
+		
+		Map<String, Object> root = Maps.newHashMap();
+		root.put("xx", "wangshilian");
+		
+		String result = st.renderNamed(root);
+		assertEquals(expected, result);
+	}
 }

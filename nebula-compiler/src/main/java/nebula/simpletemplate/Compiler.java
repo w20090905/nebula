@@ -277,7 +277,20 @@ public class Compiler {
 
 		@Override
 		public String toString() {
-			return name.toString() + "(" + args.toString() + ")";
+			StringBuilder sb = new StringBuilder();
+			sb.append(name.toString());
+			if (args != null && args.size() > 0) {
+				sb.append("(");
+				for (Argument arg : args) {
+					sb.append(arg.value.toString());
+					sb.append(',');
+				}
+				sb.setCharAt(sb.length() - 1, ')');
+			} else {
+				sb.append("()");
+			}
+
+			return sb.toString();
 		}
 
 		@Override
@@ -293,6 +306,72 @@ public class Compiler {
 			// }
 			return null;
 		}
+	}
+
+	static class IncludeSubTemplate extends Expression<Object> {
+		final Expr<Object> template;
+		final int subTemplateIndex;
+		final List<Argument> args;
+
+		IncludeSubTemplate(Expr<Object> template, int subTemplateIndex, List<Argument> args) {
+			this.template = template;
+			this.subTemplateIndex = subTemplateIndex;
+			this.args = args;
+		}
+
+		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+
+			String getInternalNameTemplateImpl = Type.getInternalName(TemplateImpl.class);
+
+			template.compile(cw, mv, context);
+			mv.visitFieldInsn(GETFIELD, getInternalNameTemplateImpl, "implicitlyDefinedTemplates", Type.getDescriptor(List.class));
+			mv.visitIntInsn(BIPUSH, subTemplateIndex);
+			mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
+			mv.visitTypeInsn(CHECKCAST, getInternalNameTemplateImpl);
+			mv.visitIntInsn(BIPUSH, args.size());
+			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+
+			for (int i = 0; i < args.size(); i++) {
+				mv.visitInsn(DUP);
+				mv.visitIntInsn(BIPUSH, i);
+				args.get(i).value.compile(cw, mv, context);
+				mv.visitInsn(AASTORE);
+			}
+
+			mv.visitMethodInsn(INVOKEVIRTUAL, getInternalNameTemplateImpl, "exec", "([Ljava/lang/Object;)Ljava/lang/String;");
+
+			return Type.getType(String.class);
+		}
+
+		@Override
+		public Object eval(Object root) {
+			return null;
+		}
+
+		@Override
+		public String toString() {
+			StringBuilder sb = new StringBuilder();
+			sb.append(template.toString());
+			sb.append("[" + this.subTemplateIndex + "]");
+			if (args != null && args.size() > 0) {
+				sb.append("(");
+				for (Argument arg : args) {
+					sb.append(arg.value.toString());
+					sb.append(',');
+				}
+				sb.setCharAt(sb.length() - 1, ')');
+			} else {
+				sb.append("()");
+			}
+
+			return sb.toString();
+		}
+
+		@Override
+		public String toString(CompilerContext context) {
+			return this.toString();
+		}
+
 	}
 
 	static class LongCst extends Expression<Long> {
@@ -314,11 +393,6 @@ public class Compiler {
 
 		@Override
 		public String toString(CompilerContext context) {
-			return this.toString();
-		}
-
-		@Override
-		public String toString() {
 			return String.valueOf(value);
 		}
 	}
@@ -348,6 +422,34 @@ public class Compiler {
 		@Override
 		public String toString() {
 			return "\"" + value + "\"";
+		}
+	}
+
+	static class Name extends Expression<String> {
+		final String value;
+
+		Name(String value) {
+			this.value = value;
+		}
+
+		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+			mv.visitLdcInsn(value);
+			return Type.getType(String.class);
+		}
+
+		@Override
+		public String eval(Object root) {
+			return this.value;
+		}
+
+		@Override
+		public String toString(CompilerContext context) {
+			return "'" + value.toString() + "'";
+		}
+
+		@Override
+		public String toString() {
+			return "'" + value.toString() + "'";
 		}
 	}
 
@@ -513,6 +615,36 @@ public class Compiler {
 		return new Include(group, name, args);
 	}
 
+	public Expr<Object> opInclude(Expr<Object> template, int subTemplateIndex) {
+		List<Argument> leading = Lists.newArrayList();
+		return new IncludeSubTemplate(template, subTemplateIndex, leading);
+	}
+
+	public Expr<Object> opInclude(Expr<Object> template, int subTemplateIndex, Expr<Object> target) {
+		List<Argument> leading = Lists.newArrayList();
+		leading.add(new Argument(target));
+		return new IncludeSubTemplate(template, subTemplateIndex, leading);
+	}
+
+	@SuppressWarnings("rawtypes")
+	public Expr<Object> opInclude(Expr<Object> template, int subTemplateIndex, List<Expr> target) {
+		List<Argument> leading = Lists.newArrayList();
+		for (Expr<Object> e : target) {
+			leading.add(new Argument(e));
+		}
+		return new IncludeSubTemplate(template, subTemplateIndex, leading);
+	}
+
+	@SuppressWarnings("rawtypes")
+	public Expr<Object> opInclude(Expr<Object> group, Expr<String> name, List<Expr> target, List<Argument> args) {
+		List<Argument> leading = Lists.newArrayList();
+		for (Expr<Object> e : target) {
+			leading.add(new Argument(e));
+		}
+		args.addAll(0, leading);
+		return new Include(group, name, args);
+	}
+
 	public Expr<Object> opInclude(Expr<Object> group, Expr<String> name, List<Argument> args) {
 		return new Include(group, name, args);
 	}
@@ -537,6 +669,11 @@ public class Compiler {
 		return new StringCst(value);
 	}
 
+	public Expr<String> opName(String value) {
+		Preconditions.checkNotNull(value);
+		return new Name(value);
+	}
+
 	public Expr<Integer> opYesnoCst(boolean b) {
 		return new YesnoCst(b);
 	}
@@ -546,14 +683,18 @@ public class Compiler {
 		return new Block(statements);
 	}
 
-	public TemplateImpl tpTemplate(STGroup group, Statement statement, List<Var> arges) {
+	public TemplateImpl tpTemplate(STGroup group, Statement statement, List<Var> arges, List<TemplateImpl> implicitlyDefinedTemplates) {
 		Preconditions.checkNotNull(group);
 		Preconditions.checkNotNull(statement);
 		List<String> argNames = Lists.newArrayList();
 		for (Var var : arges) {
 			argNames.add(var.name);
 		}
-		return new TemplateImpl(group, statement, argNames);
+		if (implicitlyDefinedTemplates.size() > 0) {
+			return new TemplateImpl(group, statement, argNames, implicitlyDefinedTemplates);
+		} else {
+			return new TemplateImpl(group, statement, argNames);
+		}
 	}
 
 	public Statement stOutput(Expr<?> sb, Expr<?> expr) {

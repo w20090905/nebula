@@ -2,7 +2,7 @@ package nebula.simpletemplate;
 
 import java.io.IOException;
 
-public class TestCode implements Action {
+public class SampleCode implements Action {
 
 	@Override
 	public void exec(STGroup group, TemplateImpl template,StringBuilder out, Object[] argv) throws IOException {
@@ -12,6 +12,8 @@ public class TestCode implements Action {
 			out.append(";");
 			
 			group.getTemplate("wangshilian").exec(argv);
+			
+			template.implicitlyDefinedTemplates.get(12).exec(argv);
 		}
 	}
 }

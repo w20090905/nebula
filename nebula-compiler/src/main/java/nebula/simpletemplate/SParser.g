@@ -65,7 +65,8 @@ import java.util.ArrayList;
         pushLocal("argv",Type.getType(Object.class));
       }
 			
-			private List<Var> arges = new ArrayList<Var>();
+      private List<Var> arges = new ArrayList<Var>();
+      private List<TemplateImpl> subTemplates = new ArrayList<TemplateImpl>();
 			
 			protected Var pushLocal(String name, Type type) {
 				Var var = new Var(name,type,locals.size());
@@ -103,7 +104,7 @@ template returns[TemplateImpl temp]
       initLocals();
       List<Statement> statments = new ArrayList<Statement>();
     }
-  : (e=element {if(e!=null)statments.add(e);} )* {Statement s=c.stBlock(statments);temp=c.tpTemplate(group,s,arges);};
+  : (e=element {if(e!=null)statments.add(e);} )* {Statement s=c.stBlock(statments);temp=c.tpTemplate(group,s,arges,subTemplates);};
 
 element returns[Statement s]
 	:	{input.LT(1).getCharPositionInLine()==0}? INDENT? COMMENT NEWLINE // -> // throw away
@@ -141,14 +142,24 @@ region
 		->                    ^(REGION[$x] ID template?)*/
 	;
 
-subtemplate returns[TemplateImpl temp] 
+subtemplate returns[int index] 
 @init {
+    Map<String, Var> outterLocals = locals;
     List<Var> outterArges =arges;
-    arges= new ArrayList<Var>();
+    List<TemplateImpl> outterSubTemplates = subTemplates;
+    
+    locals = new HashMap<String, Var>();
+    arges= new ArrayList<Var>();    
+    subTemplates = new ArrayList<TemplateImpl>();
  }
-	:	lc='{' (id=ID {arg($id.text);} ( ',' id=ID {arg($id.text);})* '|' )? t=template {temp=t;} INDENT?
+	:	lc='{' (id=ID {arg($id.text);} ( ',' id=ID {arg($id.text);})* '|' )? t=template INDENT?
 	{	
-	  arges = outterArges;
+    locals = outterLocals;
+    arges = outterArges;
+    subTemplates = outterSubTemplates;
+    
+	  subTemplates.add(t);	  
+	  index = subTemplates.size()-1;
 	}
 	 '}'
 		// ignore final INDENT before } as it's not part of outer indent
@@ -230,13 +241,16 @@ expr returns[Expr v]  : e=mapExpr {v=e;};
 // more complicated than necessary to avoid backtracking, which ruins
 // error handling
 mapExpr returns[Expr v]  
+@init{
+     List<Expr> params = new ArrayList<Expr>();
+}
 	:	me=memberExpr {v=me;}
-//		( (c=',' m=memberExpr)+ col=':' mt=mapTemplateRef[m] {v= mt;}
-//												// -> ^(ZIP[$col] ^(ELEMENTS memberExpr+) mapTemplateRef)
-//		|										// -> memberExpr
-//		)
+		( (c=',' {params.add(me);} me=memberExpr)+ {params.add(me);}  col=':' mt=mapTemplateRefListParams[params] {v= mt;}
+												// -> ^(ZIP[$col] ^(ELEMENTS memberExpr+) mapTemplateRef)
+		|										// -> memberExpr
+		)
 		(	// don't keep queueing x; new list for each iteration
-			col=':' mt=mapTemplateRef[v] {v=mt;} /*({$c==null}?=> ',' mt=mapTemplateRef[v]  {v=mt;} )**/
+			col=':' mt=mapTemplateRef[v] {v=mt;} ({$c==null}? ',' mt=mapTemplateRef[v]  {v=mt;} )*
 												// -> ^(MAP[$col] $mapExpr $x+)
 		)*
 	;
@@ -247,15 +261,21 @@ expr:{arg | ...}     apply subtemplate to expr
 expr:(e)(args)       convert e to a string template name and apply to expr
 */
 mapTemplateRef [ Expr data] returns[Expr v]
-	:	ID '(' as=args ')'				{v=c.opInclude(c.opLocal(v("group")),c.opStringCst($ID.text),data,as);}			// -> ^(INCLUDE ID args?)
-	|	subtemplate
+	:	ID '(' as=args ')'				{v=c.opInclude(c.opLocal(v("group")),c.opName($ID.text),data,as);}			// -> ^(INCLUDE ID args?)
+	|	st=subtemplate {v=c.opInclude(c.opLocal(v("template")),st,data);}    
 	|	lp='(' me=mapExpr rp=')' '(' as=argExprList? ')' {v=c.opInclude(c.opLocal(v("group")),me,data,as);}// -> ^(INCLUDE_IND mapExpr argExprList?)
 	;
+	
+mapTemplateRefListParams [ List<Expr> dataList] returns[Expr v]
+  : ID '(' as=args ')'        {v=c.opInclude(c.opLocal(v("group")),c.opName($ID.text),dataList,as);}     // -> ^(INCLUDE ID args?)
+  | st=subtemplate  {v=c.opInclude(c.opLocal(v("template")),st,dataList);}    
+  | lp='(' me=mapExpr rp=')' '(' as=argExprList? ')' {v=c.opInclude(c.opLocal(v("group")),me,dataList,as);}// -> ^(INCLUDE_IND mapExpr argExprList?)
+  ;
 
 memberExpr returns[Expr v]  
 	:	(ie=includeExpr {v=ie;}/*/ ->includeExpr*/)
 		(	p='.' ID	{v=c.opFieldOf(v,$ID.text);}						// -> ^(PROP[$p,"PROP"] $memberExpr ID)
-		|	p='.' '(' mapExpr ')'				// -> ^(PROP_IND[$p,"PROP_IND"] $memberExpr mapExpr)
+//		|	p='.' '(' mapExpr ')'				// -> ^(PROP_IND[$p,"PROP_IND"] $memberExpr mapExpr)
 		)*
 	;
 
@@ -264,7 +284,7 @@ options {k=2;} // prevent full LL(*), which fails, falling back on k=1; need k=2
 	:	{Compiler.funcs.containsKey(input.LT(1).getText())}? // predefined function
 		ID '(' expr? ')'						// -> ^(EXEC_FUNC ID expr?)
 //	|	'super' '.' ID '(' args ')'				// -> ^(INCLUDE_SUPER ID args?)
-	|	ID '(' as=args ')'		{v=c.opInclude(c.opLocal(v("group")),c.opStringCst($ID.text),as);}					// -> ^(INCLUDE ID args?)
+	|	ID '(' as=args ')'		{v=c.opInclude(c.opLocal(v("group")),c.opName($ID.text),as);}					// -> ^(INCLUDE ID args?)
 //	|	'@' 'super' '.' ID '(' rp=')'			// -> ^(INCLUDE_SUPER_REGION ID)
 //	|	'@' ID '(' rp=')'						// -> ^(INCLUDE_REGION ID)
 	|	p=primary{v=p;}
@@ -275,11 +295,10 @@ primary returns[Expr v]
 	|	STRING   {v=c.opStringCst($STRING.text);}
 	|	TRUE       {v=c.opYesnoCst(true);}  
 	|	FALSE      {v=c.opYesnoCst(false);}
-	|	subtemplate
+	|	st=subtemplate {v= c.opInclude(c.opLocal(v("template")),st);}
 	|	list
 	|	{$conditional.size()>0}?=>  '(' conditional ')'
-	|	{$conditional.size()==0}?=> lp='(' expr ')'
-		(	'(' argExprList? ')'		        // -> ^(INCLUDE_IND[$lp] expr argExprList?)
+	|	{$conditional.size()==0}?=> lp='(' name=expr ')'		(	'(' as=argExprList? ')'		{v=c.opInclude(c.opLocal(v("group")),name,as);}          // -> ^(INCLUDE_IND[$lp] expr argExprList?)
 		|										// -> ^(TO_STR[$lp] expr)
 		)
 	;
