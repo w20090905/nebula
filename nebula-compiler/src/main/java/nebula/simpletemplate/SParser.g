@@ -96,6 +96,24 @@ import java.util.ArrayList;
    catch (RecognitionException re) { throw re; }
 }
 
+templateGroupFile returns [STGroup group] :
+  templateGroupDef EOF /* -> template?*/ 
+  {group = this.group;}
+;
+
+templateGroupDef
+@init {
+    locals = new HashMap<String, Var>();
+    arges= new ArrayList<Var>();    
+    subTemplates = new ArrayList<TemplateImpl>();
+ }
+: (  /*'@' enclosing=ID '.' name=ID '(' ')' | */ 
+    name=ID '('')'
+    | name=ID '(' id=ID {arg($id.text);} ( ',' id=ID {arg($id.text);})*  ')'
+    )
+      (':'':''=')  LDELIM tmpl=template RDELIM { c.tpReferTemplate(group,$name.text,tmpl); }INDENT?
+      ;
+  
 templateAndEOF returns[TemplateImpl temp] 
      : t=template{temp=t;} EOF /* -> template?*/ ;
 

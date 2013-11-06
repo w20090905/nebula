@@ -261,32 +261,27 @@ public class Compiler {
 			mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(STGroup.class), "getTemplate",
 					"(Ljava/lang/String;)" + Type.getDescriptor(TemplateImpl.class));
 
-			if (!List.class.isAssignableFrom(context.getArg(0).clz)) {
-				mv.visitIntInsn(BIPUSH, args.size());
-				mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+			mv.visitIntInsn(BIPUSH, args.size());
+			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
 
-				for (int i = 0; i < args.size(); i++) {
-					mv.visitInsn(DUP);
-					mv.visitIntInsn(BIPUSH, i);
-					args.get(i).value.compile(cw, mv, context);
-					mv.visitInsn(AASTORE);
-				}
+			mv.visitInsn(DUP);
+			mv.visitIntInsn(BIPUSH, 0);
+			Class<?> firstType = args.get(0).value.compile(cw, mv, context);
 
-				mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "exec", "([Ljava/lang/Object;)Ljava/lang/String;");
-			} else {
-				mv.visitIntInsn(BIPUSH, args.size());
-				mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+			mv.visitInsn(AASTORE);
 
-				for (int i = 0; i < args.size(); i++) {
-					mv.visitInsn(DUP);
-					mv.visitIntInsn(BIPUSH, i);
-					args.get(i).value.compile(cw, mv, context);
-					mv.visitInsn(AASTORE);
-				}
-
-				mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "execList", "([Ljava/lang/Object;)Ljava/lang/String;");
+			for (int i = 1; i < args.size(); i++) {
+				mv.visitInsn(DUP);
+				mv.visitIntInsn(BIPUSH, i);
+				args.get(i).value.compile(cw, mv, context);
+				mv.visitInsn(AASTORE);
 			}
 
+			if (!List.class.isAssignableFrom(firstType)) {
+				mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "exec", "([Ljava/lang/Object;)Ljava/lang/String;");
+			} else {
+				mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "execList", "([Ljava/lang/Object;)Ljava/lang/String;");
+			}
 			return String.class;
 		}
 
@@ -725,6 +720,11 @@ public class Compiler {
 		} else {
 			return new TemplateImpl(group, statement, argNames);
 		}
+	}
+
+	public void tpReferTemplate(STGroup group, String name, TemplateImpl template) {
+		template.name = name;
+		group.knownsTemplate.put(name, template);
 	}
 
 	public Statement stOutput(Expr<?> sb, Expr<?> expr) {

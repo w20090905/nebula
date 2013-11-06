@@ -55,6 +55,12 @@ public class ST {
 		impl.name = UNKNOWN_NAME;
 	}
 
+	public ST(STGroup group, TemplateImpl template) {
+		this();
+		groupThatCreatedThisInstance = group;
+		impl = template;
+	}
+
 	public String getName() {
 		return impl.name;
 	}
@@ -89,7 +95,7 @@ public class ST {
 	public static String format(int lineWidth, String template, Object... attributes) {
 		template = template.replaceAll("%([0-9]+)", "arg$1");
 		ST st = new ST(template);
-//		int i = 1;
+		// int i = 1;
 		// for (Object a : attributes) {
 		// st.add("arg" + i, a);
 		// i++;

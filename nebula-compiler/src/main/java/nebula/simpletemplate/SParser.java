@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g 2013-11-05 14:38:53
+// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g 2013-11-06 13:50:16
 
 package nebula.simpletemplate;
 
@@ -165,8 +165,218 @@ public class SParser extends Parser {
 
 
 
+    // $ANTLR start "templateGroupFile"
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:99:1: templateGroupFile returns [STGroup group] : templateGroupDef EOF ;
+    public final STGroup templateGroupFile() throws RecognitionException {
+        STGroup group = null;
+
+
+        try {
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:99:43: ( templateGroupDef EOF )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:100:3: templateGroupDef EOF
+            {
+            pushFollow(FOLLOW_templateGroupDef_in_templateGroupFile128);
+            templateGroupDef();
+
+            state._fsp--;
+
+
+            match(input,EOF,FOLLOW_EOF_in_templateGroupFile130); 
+
+            group = this.group;
+
+            }
+
+        }
+
+           catch (RecognitionException re) { throw re; }
+
+        finally {
+        	// do for sure before leaving
+        }
+        return group;
+    }
+    // $ANTLR end "templateGroupFile"
+
+
+
+    // $ANTLR start "templateGroupDef"
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:104:1: templateGroupDef : (name= ID '(' ')' |name= ID '(' id= ID ( ',' id= ID )* ')' ) ( ':' ':' '=' ) LDELIM tmpl= template RDELIM ( INDENT )? ;
+    public final void templateGroupDef() throws RecognitionException {
+        CommonToken name=null;
+        CommonToken id=null;
+        TemplateImpl tmpl =null;
+
+
+
+            locals = new HashMap<String, Var>();
+            arges= new ArrayList<Var>();    
+            subTemplates = new ArrayList<TemplateImpl>();
+         
+        try {
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:110:3: ( (name= ID '(' ')' |name= ID '(' id= ID ( ',' id= ID )* ')' ) ( ':' ':' '=' ) LDELIM tmpl= template RDELIM ( INDENT )? )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:110:3: (name= ID '(' ')' |name= ID '(' id= ID ( ',' id= ID )* ')' ) ( ':' ':' '=' ) LDELIM tmpl= template RDELIM ( INDENT )?
+            {
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:110:3: (name= ID '(' ')' |name= ID '(' id= ID ( ',' id= ID )* ')' )
+            int alt2=2;
+            int LA2_0 = input.LA(1);
+
+            if ( (LA2_0==ID) ) {
+                int LA2_1 = input.LA(2);
+
+                if ( (LA2_1==LPAREN) ) {
+                    int LA2_2 = input.LA(3);
+
+                    if ( (LA2_2==RPAREN) ) {
+                        alt2=1;
+                    }
+                    else if ( (LA2_2==ID) ) {
+                        alt2=2;
+                    }
+                    else {
+                        NoViableAltException nvae =
+                            new NoViableAltException("", 2, 2, input);
+
+                        throw nvae;
+
+                    }
+                }
+                else {
+                    NoViableAltException nvae =
+                        new NoViableAltException("", 2, 1, input);
+
+                    throw nvae;
+
+                }
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 2, 0, input);
+
+                throw nvae;
+
+            }
+            switch (alt2) {
+                case 1 :
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:111:5: name= ID '(' ')'
+                    {
+                    name=(CommonToken)match(input,ID,FOLLOW_ID_in_templateGroupDef163); 
+
+                    match(input,LPAREN,FOLLOW_LPAREN_in_templateGroupDef165); 
+
+                    match(input,RPAREN,FOLLOW_RPAREN_in_templateGroupDef166); 
+
+                    }
+                    break;
+                case 2 :
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:112:7: name= ID '(' id= ID ( ',' id= ID )* ')'
+                    {
+                    name=(CommonToken)match(input,ID,FOLLOW_ID_in_templateGroupDef176); 
+
+                    match(input,LPAREN,FOLLOW_LPAREN_in_templateGroupDef178); 
+
+                    id=(CommonToken)match(input,ID,FOLLOW_ID_in_templateGroupDef182); 
+
+                    arg((id!=null?id.getText():null));
+
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:112:42: ( ',' id= ID )*
+                    loop1:
+                    do {
+                        int alt1=2;
+                        int LA1_0 = input.LA(1);
+
+                        if ( (LA1_0==COMMA) ) {
+                            alt1=1;
+                        }
+
+
+                        switch (alt1) {
+                    	case 1 :
+                    	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:112:44: ',' id= ID
+                    	    {
+                    	    match(input,COMMA,FOLLOW_COMMA_in_templateGroupDef188); 
+
+                    	    id=(CommonToken)match(input,ID,FOLLOW_ID_in_templateGroupDef192); 
+
+                    	    arg((id!=null?id.getText():null));
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop1;
+                        }
+                    } while (true);
+
+
+                    match(input,RPAREN,FOLLOW_RPAREN_in_templateGroupDef199); 
+
+                    }
+                    break;
+
+            }
+
+
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:114:7: ( ':' ':' '=' )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:114:8: ':' ':' '='
+            {
+            match(input,COLON,FOLLOW_COLON_in_templateGroupDef214); 
+
+            match(input,COLON,FOLLOW_COLON_in_templateGroupDef215); 
+
+            match(input,EQUALS,FOLLOW_EQUALS_in_templateGroupDef216); 
+
+            }
+
+
+            match(input,LDELIM,FOLLOW_LDELIM_in_templateGroupDef220); 
+
+            pushFollow(FOLLOW_template_in_templateGroupDef224);
+            tmpl=template();
+
+            state._fsp--;
+
+
+            match(input,RDELIM,FOLLOW_RDELIM_in_templateGroupDef226); 
+
+             c.tpReferTemplate(group,(name!=null?name.getText():null),tmpl); 
+
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:114:93: ( INDENT )?
+            int alt3=2;
+            int LA3_0 = input.LA(1);
+
+            if ( (LA3_0==INDENT) ) {
+                alt3=1;
+            }
+            switch (alt3) {
+                case 1 :
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:114:93: INDENT
+                    {
+                    match(input,INDENT,FOLLOW_INDENT_in_templateGroupDef229); 
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+        }
+
+           catch (RecognitionException re) { throw re; }
+
+        finally {
+        	// do for sure before leaving
+        }
+        return ;
+    }
+    // $ANTLR end "templateGroupDef"
+
+
+
     // $ANTLR start "templateAndEOF"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:99:1: templateAndEOF returns [TemplateImpl temp] : t= template EOF ;
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:117:1: templateAndEOF returns [TemplateImpl temp] : t= template EOF ;
     public final TemplateImpl templateAndEOF() throws RecognitionException {
         TemplateImpl temp = null;
 
@@ -175,10 +385,10 @@ public class SParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:100:6: (t= template EOF )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:100:8: t= template EOF
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:118:6: (t= template EOF )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:118:8: t= template EOF
             {
-            pushFollow(FOLLOW_template_in_templateAndEOF133);
+            pushFollow(FOLLOW_template_in_templateAndEOF258);
             t=template();
 
             state._fsp--;
@@ -186,7 +396,7 @@ public class SParser extends Parser {
 
             temp=t;
 
-            match(input,EOF,FOLLOW_EOF_in_templateAndEOF136); 
+            match(input,EOF,FOLLOW_EOF_in_templateAndEOF261); 
 
             }
 
@@ -204,7 +414,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "template"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:102:1: template returns [TemplateImpl temp] : (e= element )* ;
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:120:1: template returns [TemplateImpl temp] : (e= element )* ;
     public final TemplateImpl template() throws RecognitionException {
         TemplateImpl temp = null;
 
@@ -217,29 +427,29 @@ public class SParser extends Parser {
               List<Statement> statments = new ArrayList<Statement>();
             
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:107:3: ( (e= element )* )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:107:5: (e= element )*
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:125:3: ( (e= element )* )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:125:5: (e= element )*
             {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:107:5: (e= element )*
-            loop1:
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:125:5: (e= element )*
+            loop4:
             do {
-                int alt1=2;
+                int alt4=2;
                 switch ( input.LA(1) ) {
                 case INDENT:
                     {
-                    int LA1_2 = input.LA(2);
+                    int LA4_2 = input.LA(2);
 
-                    if ( (LA1_2==LDELIM) ) {
-                        int LA1_5 = input.LA(3);
+                    if ( (LA4_2==LDELIM) ) {
+                        int LA4_5 = input.LA(3);
 
-                        if ( (LA1_5==IF||LA1_5==LPAREN||LA1_5==LBRACK||LA1_5==LCURLY||(LA1_5 >= ID && LA1_5 <= STRING)||LA1_5==AT||(LA1_5 >= TRUE && LA1_5 <= FALSE)) ) {
-                            alt1=1;
+                        if ( (LA4_5==IF||LA4_5==LPAREN||LA4_5==LBRACK||LA4_5==LCURLY||(LA4_5 >= ID && LA4_5 <= STRING)||LA4_5==AT||(LA4_5 >= TRUE && LA4_5 <= FALSE)) ) {
+                            alt4=1;
                         }
 
 
                     }
-                    else if ( (LA1_2==TEXT||LA1_2==NEWLINE||LA1_2==COMMENT) ) {
-                        alt1=1;
+                    else if ( (LA4_2==TEXT||LA4_2==NEWLINE||LA4_2==COMMENT) ) {
+                        alt4=1;
                     }
 
 
@@ -247,10 +457,10 @@ public class SParser extends Parser {
                     break;
                 case LDELIM:
                     {
-                    int LA1_3 = input.LA(2);
+                    int LA4_3 = input.LA(2);
 
-                    if ( (LA1_3==IF||LA1_3==LPAREN||LA1_3==LBRACK||LA1_3==LCURLY||(LA1_3 >= ID && LA1_3 <= STRING)||LA1_3==AT||(LA1_3 >= TRUE && LA1_3 <= FALSE)) ) {
-                        alt1=1;
+                    if ( (LA4_3==IF||LA4_3==LPAREN||LA4_3==LBRACK||LA4_3==LCURLY||(LA4_3 >= ID && LA4_3 <= STRING)||LA4_3==AT||(LA4_3 >= TRUE && LA4_3 <= FALSE)) ) {
+                        alt4=1;
                     }
 
 
@@ -260,17 +470,17 @@ public class SParser extends Parser {
                 case NEWLINE:
                 case COMMENT:
                     {
-                    alt1=1;
+                    alt4=1;
                     }
                     break;
 
                 }
 
-                switch (alt1) {
+                switch (alt4) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:107:6: e= element
+            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:125:6: e= element
             	    {
-            	    pushFollow(FOLLOW_element_in_template160);
+            	    pushFollow(FOLLOW_element_in_template285);
             	    e=element();
 
             	    state._fsp--;
@@ -282,7 +492,7 @@ public class SParser extends Parser {
             	    break;
 
             	default :
-            	    break loop1;
+            	    break loop4;
                 }
             } while (true);
 
@@ -305,7 +515,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "element"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:109:1: element returns [Statement s] : ({...}? ( INDENT )? COMMENT NEWLINE | INDENT se= singleElement |se= singleElement | compoundElement );
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:127:1: element returns [Statement s] : ({...}? ( INDENT )? COMMENT NEWLINE | INDENT se= singleElement |se= singleElement | compoundElement );
     public final Statement element() throws RecognitionException {
         Statement s = null;
 
@@ -314,39 +524,39 @@ public class SParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:110:2: ({...}? ( INDENT )? COMMENT NEWLINE | INDENT se= singleElement |se= singleElement | compoundElement )
-            int alt3=4;
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:128:2: ({...}? ( INDENT )? COMMENT NEWLINE | INDENT se= singleElement |se= singleElement | compoundElement )
+            int alt6=4;
             switch ( input.LA(1) ) {
             case INDENT:
                 {
                 switch ( input.LA(2) ) {
                 case COMMENT:
                     {
-                    int LA3_5 = input.LA(3);
+                    int LA6_5 = input.LA(3);
 
-                    if ( (LA3_5==NEWLINE) ) {
-                        int LA3_10 = input.LA(4);
+                    if ( (LA6_5==NEWLINE) ) {
+                        int LA6_10 = input.LA(4);
 
                         if ( ((input.LT(1).getCharPositionInLine()==0)) ) {
-                            alt3=1;
+                            alt6=1;
                         }
                         else if ( (true) ) {
-                            alt3=2;
+                            alt6=2;
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 3, 10, input);
+                                new NoViableAltException("", 6, 10, input);
 
                             throw nvae;
 
                         }
                     }
-                    else if ( (LA3_5==EOF||(LA3_5 >= RCURLY && LA3_5 <= LDELIM)||LA3_5==INDENT||LA3_5==COMMENT) ) {
-                        alt3=2;
+                    else if ( (LA6_5==EOF||(LA6_5 >= RCURLY && LA6_5 <= RDELIM)||LA6_5==INDENT||LA6_5==COMMENT) ) {
+                        alt6=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 3, 5, input);
+                            new NoViableAltException("", 6, 5, input);
 
                         throw nvae;
 
@@ -355,17 +565,17 @@ public class SParser extends Parser {
                     break;
                 case LDELIM:
                     {
-                    int LA3_6 = input.LA(3);
+                    int LA6_6 = input.LA(3);
 
-                    if ( (LA3_6==IF||LA3_6==AT) ) {
-                        alt3=4;
+                    if ( (LA6_6==IF||LA6_6==AT) ) {
+                        alt6=4;
                     }
-                    else if ( (LA3_6==LPAREN||LA3_6==LBRACK||LA3_6==LCURLY||(LA3_6 >= ID && LA3_6 <= STRING)||(LA3_6 >= TRUE && LA3_6 <= FALSE)) ) {
-                        alt3=2;
+                    else if ( (LA6_6==LPAREN||LA6_6==LBRACK||LA6_6==LCURLY||(LA6_6 >= ID && LA6_6 <= STRING)||(LA6_6 >= TRUE && LA6_6 <= FALSE)) ) {
+                        alt6=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 3, 6, input);
+                            new NoViableAltException("", 6, 6, input);
 
                         throw nvae;
 
@@ -375,12 +585,12 @@ public class SParser extends Parser {
                 case TEXT:
                 case NEWLINE:
                     {
-                    alt3=2;
+                    alt6=2;
                     }
                     break;
                 default:
                     NoViableAltException nvae =
-                        new NoViableAltException("", 3, 1, input);
+                        new NoViableAltException("", 6, 1, input);
 
                     throw nvae;
 
@@ -390,31 +600,31 @@ public class SParser extends Parser {
                 break;
             case COMMENT:
                 {
-                int LA3_2 = input.LA(2);
+                int LA6_2 = input.LA(2);
 
-                if ( (LA3_2==NEWLINE) ) {
-                    int LA3_8 = input.LA(3);
+                if ( (LA6_2==NEWLINE) ) {
+                    int LA6_8 = input.LA(3);
 
                     if ( ((input.LT(1).getCharPositionInLine()==0)) ) {
-                        alt3=1;
+                        alt6=1;
                     }
                     else if ( (true) ) {
-                        alt3=3;
+                        alt6=3;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 3, 8, input);
+                            new NoViableAltException("", 6, 8, input);
 
                         throw nvae;
 
                     }
                 }
-                else if ( (LA3_2==EOF||(LA3_2 >= RCURLY && LA3_2 <= LDELIM)||LA3_2==INDENT||LA3_2==COMMENT) ) {
-                    alt3=3;
+                else if ( (LA6_2==EOF||(LA6_2 >= RCURLY && LA6_2 <= RDELIM)||LA6_2==INDENT||LA6_2==COMMENT) ) {
+                    alt6=3;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 3, 2, input);
+                        new NoViableAltException("", 6, 2, input);
 
                     throw nvae;
 
@@ -423,17 +633,17 @@ public class SParser extends Parser {
                 break;
             case LDELIM:
                 {
-                int LA3_3 = input.LA(2);
+                int LA6_3 = input.LA(2);
 
-                if ( (LA3_3==IF||LA3_3==AT) ) {
-                    alt3=4;
+                if ( (LA6_3==IF||LA6_3==AT) ) {
+                    alt6=4;
                 }
-                else if ( (LA3_3==LPAREN||LA3_3==LBRACK||LA3_3==LCURLY||(LA3_3 >= ID && LA3_3 <= STRING)||(LA3_3 >= TRUE && LA3_3 <= FALSE)) ) {
-                    alt3=3;
+                else if ( (LA6_3==LPAREN||LA6_3==LBRACK||LA6_3==LCURLY||(LA6_3 >= ID && LA6_3 <= STRING)||(LA6_3 >= TRUE && LA6_3 <= FALSE)) ) {
+                    alt6=3;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 3, 3, input);
+                        new NoViableAltException("", 6, 3, input);
 
                     throw nvae;
 
@@ -443,37 +653,37 @@ public class SParser extends Parser {
             case TEXT:
             case NEWLINE:
                 {
-                alt3=3;
+                alt6=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 3, 0, input);
+                    new NoViableAltException("", 6, 0, input);
 
                 throw nvae;
 
             }
 
-            switch (alt3) {
+            switch (alt6) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:110:4: {...}? ( INDENT )? COMMENT NEWLINE
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:128:4: {...}? ( INDENT )? COMMENT NEWLINE
                     {
                     if ( !((input.LT(1).getCharPositionInLine()==0)) ) {
                         throw new FailedPredicateException(input, "element", "input.LT(1).getCharPositionInLine()==0");
                     }
 
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:110:46: ( INDENT )?
-                    int alt2=2;
-                    int LA2_0 = input.LA(1);
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:128:46: ( INDENT )?
+                    int alt5=2;
+                    int LA5_0 = input.LA(1);
 
-                    if ( (LA2_0==INDENT) ) {
-                        alt2=1;
+                    if ( (LA5_0==INDENT) ) {
+                        alt5=1;
                     }
-                    switch (alt2) {
+                    switch (alt5) {
                         case 1 :
-                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:110:46: INDENT
+                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:128:46: INDENT
                             {
-                            match(input,INDENT,FOLLOW_INDENT_in_element181); 
+                            match(input,INDENT,FOLLOW_INDENT_in_element306); 
 
                             }
                             break;
@@ -481,18 +691,18 @@ public class SParser extends Parser {
                     }
 
 
-                    match(input,COMMENT,FOLLOW_COMMENT_in_element184); 
+                    match(input,COMMENT,FOLLOW_COMMENT_in_element309); 
 
-                    match(input,NEWLINE,FOLLOW_NEWLINE_in_element186); 
+                    match(input,NEWLINE,FOLLOW_NEWLINE_in_element311); 
 
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:111:4: INDENT se= singleElement
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:129:4: INDENT se= singleElement
                     {
-                    match(input,INDENT,FOLLOW_INDENT_in_element192); 
+                    match(input,INDENT,FOLLOW_INDENT_in_element317); 
 
-                    pushFollow(FOLLOW_singleElement_in_element196);
+                    pushFollow(FOLLOW_singleElement_in_element321);
                     se=singleElement();
 
                     state._fsp--;
@@ -503,9 +713,9 @@ public class SParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:112:4: se= singleElement
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:130:4: se= singleElement
                     {
-                    pushFollow(FOLLOW_singleElement_in_element205);
+                    pushFollow(FOLLOW_singleElement_in_element330);
                     se=singleElement();
 
                     state._fsp--;
@@ -516,9 +726,9 @@ public class SParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:113:4: compoundElement
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:131:4: compoundElement
                     {
-                    pushFollow(FOLLOW_compoundElement_in_element211);
+                    pushFollow(FOLLOW_compoundElement_in_element336);
                     compoundElement();
 
                     state._fsp--;
@@ -542,7 +752,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "singleElement"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:116:1: singleElement returns [Statement s] : (e= exprTag | TEXT | NEWLINE | COMMENT );
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:134:1: singleElement returns [Statement s] : (e= exprTag | TEXT | NEWLINE | COMMENT );
     public final Statement singleElement() throws RecognitionException {
         Statement s = null;
 
@@ -553,42 +763,42 @@ public class SParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:117:2: (e= exprTag | TEXT | NEWLINE | COMMENT )
-            int alt4=4;
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:135:2: (e= exprTag | TEXT | NEWLINE | COMMENT )
+            int alt7=4;
             switch ( input.LA(1) ) {
             case LDELIM:
                 {
-                alt4=1;
+                alt7=1;
                 }
                 break;
             case TEXT:
                 {
-                alt4=2;
+                alt7=2;
                 }
                 break;
             case NEWLINE:
                 {
-                alt4=3;
+                alt7=3;
                 }
                 break;
             case COMMENT:
                 {
-                alt4=4;
+                alt7=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 4, 0, input);
+                    new NoViableAltException("", 7, 0, input);
 
                 throw nvae;
 
             }
 
-            switch (alt4) {
+            switch (alt7) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:117:4: e= exprTag
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:135:4: e= exprTag
                     {
-                    pushFollow(FOLLOW_exprTag_in_singleElement227);
+                    pushFollow(FOLLOW_exprTag_in_singleElement352);
                     e=exprTag();
 
                     state._fsp--;
@@ -599,27 +809,27 @@ public class SParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:118:4: TEXT
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:136:4: TEXT
                     {
-                    TEXT1=(CommonToken)match(input,TEXT,FOLLOW_TEXT_in_singleElement235); 
+                    TEXT1=(CommonToken)match(input,TEXT,FOLLOW_TEXT_in_singleElement360); 
 
                     s=c.stOutput(c.opLocal(v("sb")),c.opStringCst((TEXT1!=null?TEXT1.getText():null)));
 
                     }
                     break;
                 case 3 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:119:4: NEWLINE
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:137:4: NEWLINE
                     {
-                    NEWLINE2=(CommonToken)match(input,NEWLINE,FOLLOW_NEWLINE_in_singleElement252); 
+                    NEWLINE2=(CommonToken)match(input,NEWLINE,FOLLOW_NEWLINE_in_singleElement377); 
 
                     s=c.stOutput(c.opLocal(v("sb")),c.opStringCst((NEWLINE2!=null?NEWLINE2.getText():null)));
 
                     }
                     break;
                 case 4 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:120:4: COMMENT
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:138:4: COMMENT
                     {
-                    match(input,COMMENT,FOLLOW_COMMENT_in_singleElement262); 
+                    match(input,COMMENT,FOLLOW_COMMENT_in_singleElement387); 
 
                     }
                     break;
@@ -639,28 +849,28 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "compoundElement"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:123:1: compoundElement : ( ifstat | region );
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:141:1: compoundElement : ( ifstat | region );
     public final void compoundElement() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:124:2: ( ifstat | region )
-            int alt5=2;
-            int LA5_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:142:2: ( ifstat | region )
+            int alt8=2;
+            int LA8_0 = input.LA(1);
 
-            if ( (LA5_0==INDENT) ) {
-                int LA5_1 = input.LA(2);
+            if ( (LA8_0==INDENT) ) {
+                int LA8_1 = input.LA(2);
 
-                if ( (LA5_1==LDELIM) ) {
-                    int LA5_2 = input.LA(3);
+                if ( (LA8_1==LDELIM) ) {
+                    int LA8_2 = input.LA(3);
 
-                    if ( (LA5_2==IF) ) {
-                        alt5=1;
+                    if ( (LA8_2==IF) ) {
+                        alt8=1;
                     }
-                    else if ( (LA5_2==AT) ) {
-                        alt5=2;
+                    else if ( (LA8_2==AT) ) {
+                        alt8=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 5, 2, input);
+                            new NoViableAltException("", 8, 2, input);
 
                         throw nvae;
 
@@ -668,24 +878,24 @@ public class SParser extends Parser {
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 5, 1, input);
+                        new NoViableAltException("", 8, 1, input);
 
                     throw nvae;
 
                 }
             }
-            else if ( (LA5_0==LDELIM) ) {
-                int LA5_2 = input.LA(2);
+            else if ( (LA8_0==LDELIM) ) {
+                int LA8_2 = input.LA(2);
 
-                if ( (LA5_2==IF) ) {
-                    alt5=1;
+                if ( (LA8_2==IF) ) {
+                    alt8=1;
                 }
-                else if ( (LA5_2==AT) ) {
-                    alt5=2;
+                else if ( (LA8_2==AT) ) {
+                    alt8=2;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 5, 2, input);
+                        new NoViableAltException("", 8, 2, input);
 
                     throw nvae;
 
@@ -693,16 +903,16 @@ public class SParser extends Parser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 5, 0, input);
+                    new NoViableAltException("", 8, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt5) {
+            switch (alt8) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:124:4: ifstat
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:142:4: ifstat
                     {
-                    pushFollow(FOLLOW_ifstat_in_compoundElement274);
+                    pushFollow(FOLLOW_ifstat_in_compoundElement399);
                     ifstat();
 
                     state._fsp--;
@@ -711,9 +921,9 @@ public class SParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:125:4: region
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:143:4: region
                     {
-                    pushFollow(FOLLOW_region_in_compoundElement279);
+                    pushFollow(FOLLOW_region_in_compoundElement404);
                     region();
 
                     state._fsp--;
@@ -737,7 +947,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "exprTag"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:128:1: exprTag returns [Expr v] : LDELIM e= expr ( ';' exprOptions )? RDELIM ;
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:146:1: exprTag returns [Expr v] : LDELIM e= expr ( ';' exprOptions )? RDELIM ;
     public final Expr exprTag() throws RecognitionException {
         Expr v = null;
 
@@ -746,31 +956,31 @@ public class SParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:129:2: ( LDELIM e= expr ( ';' exprOptions )? RDELIM )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:129:4: LDELIM e= expr ( ';' exprOptions )? RDELIM
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:147:2: ( LDELIM e= expr ( ';' exprOptions )? RDELIM )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:147:4: LDELIM e= expr ( ';' exprOptions )? RDELIM
             {
-            match(input,LDELIM,FOLLOW_LDELIM_in_exprTag293); 
+            match(input,LDELIM,FOLLOW_LDELIM_in_exprTag418); 
 
-            pushFollow(FOLLOW_expr_in_exprTag297);
+            pushFollow(FOLLOW_expr_in_exprTag422);
             e=expr();
 
             state._fsp--;
 
 
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:129:18: ( ';' exprOptions )?
-            int alt6=2;
-            int LA6_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:147:18: ( ';' exprOptions )?
+            int alt9=2;
+            int LA9_0 = input.LA(1);
 
-            if ( (LA6_0==SEMI) ) {
-                alt6=1;
+            if ( (LA9_0==SEMI) ) {
+                alt9=1;
             }
-            switch (alt6) {
+            switch (alt9) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:129:20: ';' exprOptions
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:147:20: ';' exprOptions
                     {
-                    match(input,SEMI,FOLLOW_SEMI_in_exprTag301); 
+                    match(input,SEMI,FOLLOW_SEMI_in_exprTag426); 
 
-                    pushFollow(FOLLOW_exprOptions_in_exprTag303);
+                    pushFollow(FOLLOW_exprOptions_in_exprTag428);
                     exprOptions();
 
                     state._fsp--;
@@ -782,7 +992,7 @@ public class SParser extends Parser {
             }
 
 
-            match(input,RDELIM,FOLLOW_RDELIM_in_exprTag308); 
+            match(input,RDELIM,FOLLOW_RDELIM_in_exprTag433); 
 
             v=e;
 
@@ -805,7 +1015,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "region"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:133:1: region : (i= INDENT )? x= LDELIM '@' ID RDELIM template ( INDENT )? LDELIM '@end' RDELIM ({...}? => NEWLINE )? ;
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:151:1: region : (i= INDENT )? x= LDELIM '@' ID RDELIM template ( INDENT )? LDELIM '@end' RDELIM ({...}? => NEWLINE )? ;
     public final SParser.region_return region() throws RecognitionException {
         SParser.region_return retval = new SParser.region_return();
         retval.start = input.LT(1);
@@ -816,21 +1026,21 @@ public class SParser extends Parser {
 
         Token indent=null;
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:135:2: ( (i= INDENT )? x= LDELIM '@' ID RDELIM template ( INDENT )? LDELIM '@end' RDELIM ({...}? => NEWLINE )? )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:135:4: (i= INDENT )? x= LDELIM '@' ID RDELIM template ( INDENT )? LDELIM '@end' RDELIM ({...}? => NEWLINE )?
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:153:2: ( (i= INDENT )? x= LDELIM '@' ID RDELIM template ( INDENT )? LDELIM '@end' RDELIM ({...}? => NEWLINE )? )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:153:4: (i= INDENT )? x= LDELIM '@' ID RDELIM template ( INDENT )? LDELIM '@end' RDELIM ({...}? => NEWLINE )?
             {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:135:5: (i= INDENT )?
-            int alt7=2;
-            int LA7_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:153:5: (i= INDENT )?
+            int alt10=2;
+            int LA10_0 = input.LA(1);
 
-            if ( (LA7_0==INDENT) ) {
-                alt7=1;
+            if ( (LA10_0==INDENT) ) {
+                alt10=1;
             }
-            switch (alt7) {
+            switch (alt10) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:135:5: i= INDENT
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:153:5: i= INDENT
                     {
-                    i=(CommonToken)match(input,INDENT,FOLLOW_INDENT_in_region331); 
+                    i=(CommonToken)match(input,INDENT,FOLLOW_INDENT_in_region456); 
 
                     }
                     break;
@@ -838,34 +1048,34 @@ public class SParser extends Parser {
             }
 
 
-            x=(CommonToken)match(input,LDELIM,FOLLOW_LDELIM_in_region336); 
+            x=(CommonToken)match(input,LDELIM,FOLLOW_LDELIM_in_region461); 
 
-            match(input,AT,FOLLOW_AT_in_region338); 
+            match(input,AT,FOLLOW_AT_in_region463); 
 
-            match(input,ID,FOLLOW_ID_in_region340); 
+            match(input,ID,FOLLOW_ID_in_region465); 
 
-            match(input,RDELIM,FOLLOW_RDELIM_in_region342); 
+            match(input,RDELIM,FOLLOW_RDELIM_in_region467); 
 
             if (input.LA(1)!=NEWLINE) indent=i;
 
-            pushFollow(FOLLOW_template_in_region348);
+            pushFollow(FOLLOW_template_in_region473);
             template();
 
             state._fsp--;
 
 
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:137:3: ( INDENT )?
-            int alt8=2;
-            int LA8_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:155:3: ( INDENT )?
+            int alt11=2;
+            int LA11_0 = input.LA(1);
 
-            if ( (LA8_0==INDENT) ) {
-                alt8=1;
+            if ( (LA11_0==INDENT) ) {
+                alt11=1;
             }
-            switch (alt8) {
+            switch (alt11) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:137:3: INDENT
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:155:3: INDENT
                     {
-                    match(input,INDENT,FOLLOW_INDENT_in_region352); 
+                    match(input,INDENT,FOLLOW_INDENT_in_region477); 
 
                     }
                     break;
@@ -873,32 +1083,32 @@ public class SParser extends Parser {
             }
 
 
-            match(input,LDELIM,FOLLOW_LDELIM_in_region355); 
+            match(input,LDELIM,FOLLOW_LDELIM_in_region480); 
 
-            match(input,END,FOLLOW_END_in_region357); 
+            match(input,END,FOLLOW_END_in_region482); 
 
-            match(input,RDELIM,FOLLOW_RDELIM_in_region359); 
+            match(input,RDELIM,FOLLOW_RDELIM_in_region484); 
 
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:139:3: ({...}? => NEWLINE )?
-            int alt9=2;
-            int LA9_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:157:3: ({...}? => NEWLINE )?
+            int alt12=2;
+            int LA12_0 = input.LA(1);
 
-            if ( (LA9_0==NEWLINE) ) {
-                int LA9_1 = input.LA(2);
+            if ( (LA12_0==NEWLINE) ) {
+                int LA12_1 = input.LA(2);
 
                 if ( ((((CommonToken)retval.start).getLine()!=input.LT(1).getLine())) ) {
-                    alt9=1;
+                    alt12=1;
                 }
             }
-            switch (alt9) {
+            switch (alt12) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:139:4: {...}? => NEWLINE
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:157:4: {...}? => NEWLINE
                     {
                     if ( !((((CommonToken)retval.start).getLine()!=input.LT(1).getLine())) ) {
                         throw new FailedPredicateException(input, "region", "$region.start.getLine()!=input.LT(1).getLine()");
                     }
 
-                    match(input,NEWLINE,FOLLOW_NEWLINE_in_region370); 
+                    match(input,NEWLINE,FOLLOW_NEWLINE_in_region495); 
 
                     }
                     break;
@@ -925,7 +1135,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "subtemplate"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:145:1: subtemplate returns [int index] : lc= '{' (id= ID ( ',' id= ID )* '|' )? t= template ( INDENT )? '}' ;
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:163:1: subtemplate returns [int index] : lc= '{' (id= ID ( ',' id= ID )* '|' )? t= template ( INDENT )? '}' ;
     public final int subtemplate() throws RecognitionException {
         int index = 0;
 
@@ -945,44 +1155,44 @@ public class SParser extends Parser {
             subTemplates = new ArrayList<TemplateImpl>();
          
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:155:2: (lc= '{' (id= ID ( ',' id= ID )* '|' )? t= template ( INDENT )? '}' )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:155:4: lc= '{' (id= ID ( ',' id= ID )* '|' )? t= template ( INDENT )? '}'
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:173:2: (lc= '{' (id= ID ( ',' id= ID )* '|' )? t= template ( INDENT )? '}' )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:173:4: lc= '{' (id= ID ( ',' id= ID )* '|' )? t= template ( INDENT )? '}'
             {
-            lc=(CommonToken)match(input,LCURLY,FOLLOW_LCURLY_in_subtemplate398); 
+            lc=(CommonToken)match(input,LCURLY,FOLLOW_LCURLY_in_subtemplate523); 
 
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:155:11: (id= ID ( ',' id= ID )* '|' )?
-            int alt11=2;
-            int LA11_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:173:11: (id= ID ( ',' id= ID )* '|' )?
+            int alt14=2;
+            int LA14_0 = input.LA(1);
 
-            if ( (LA11_0==ID) ) {
-                alt11=1;
+            if ( (LA14_0==ID) ) {
+                alt14=1;
             }
-            switch (alt11) {
+            switch (alt14) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:155:12: id= ID ( ',' id= ID )* '|'
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:173:12: id= ID ( ',' id= ID )* '|'
                     {
-                    id=(CommonToken)match(input,ID,FOLLOW_ID_in_subtemplate403); 
+                    id=(CommonToken)match(input,ID,FOLLOW_ID_in_subtemplate528); 
 
                     arg((id!=null?id.getText():null));
 
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:155:35: ( ',' id= ID )*
-                    loop10:
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:173:35: ( ',' id= ID )*
+                    loop13:
                     do {
-                        int alt10=2;
-                        int LA10_0 = input.LA(1);
+                        int alt13=2;
+                        int LA13_0 = input.LA(1);
 
-                        if ( (LA10_0==COMMA) ) {
-                            alt10=1;
+                        if ( (LA13_0==COMMA) ) {
+                            alt13=1;
                         }
 
 
-                        switch (alt10) {
+                        switch (alt13) {
                     	case 1 :
-                    	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:155:37: ',' id= ID
+                    	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:173:37: ',' id= ID
                     	    {
-                    	    match(input,COMMA,FOLLOW_COMMA_in_subtemplate409); 
+                    	    match(input,COMMA,FOLLOW_COMMA_in_subtemplate534); 
 
-                    	    id=(CommonToken)match(input,ID,FOLLOW_ID_in_subtemplate413); 
+                    	    id=(CommonToken)match(input,ID,FOLLOW_ID_in_subtemplate538); 
 
                     	    arg((id!=null?id.getText():null));
 
@@ -990,12 +1200,12 @@ public class SParser extends Parser {
                     	    break;
 
                     	default :
-                    	    break loop10;
+                    	    break loop13;
                         }
                     } while (true);
 
 
-                    match(input,PIPE,FOLLOW_PIPE_in_subtemplate419); 
+                    match(input,PIPE,FOLLOW_PIPE_in_subtemplate544); 
 
                     }
                     break;
@@ -1003,24 +1213,24 @@ public class SParser extends Parser {
             }
 
 
-            pushFollow(FOLLOW_template_in_subtemplate426);
+            pushFollow(FOLLOW_template_in_subtemplate551);
             t=template();
 
             state._fsp--;
 
 
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:155:84: ( INDENT )?
-            int alt12=2;
-            int LA12_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:173:84: ( INDENT )?
+            int alt15=2;
+            int LA15_0 = input.LA(1);
 
-            if ( (LA12_0==INDENT) ) {
-                alt12=1;
+            if ( (LA15_0==INDENT) ) {
+                alt15=1;
             }
-            switch (alt12) {
+            switch (alt15) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:155:84: INDENT
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:173:84: INDENT
                     {
-                    match(input,INDENT,FOLLOW_INDENT_in_subtemplate428); 
+                    match(input,INDENT,FOLLOW_INDENT_in_subtemplate553); 
 
                     }
                     break;
@@ -1037,7 +1247,7 @@ public class SParser extends Parser {
             	  index = subTemplates.size()-1;
             	
 
-            match(input,RCURLY,FOLLOW_RCURLY_in_subtemplate436); 
+            match(input,RCURLY,FOLLOW_RCURLY_in_subtemplate561); 
 
             }
 
@@ -1058,7 +1268,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "ifstat"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:169:1: ifstat : (i= INDENT )? LDELIM 'if' '(' c1= conditional ')' RDELIM t1= template ( ( INDENT )? LDELIM 'elseif' '(' conditional ')' RDELIM template )* ( ( INDENT )? LDELIM 'else' RDELIM t3= template )? ( INDENT )? endif= LDELIM 'endif' RDELIM ({...}? => NEWLINE )? ;
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:187:1: ifstat : (i= INDENT )? LDELIM 'if' '(' c1= conditional ')' RDELIM t1= template ( ( INDENT )? LDELIM 'elseif' '(' conditional ')' RDELIM template )* ( ( INDENT )? LDELIM 'else' RDELIM t3= template )? ( INDENT )? endif= LDELIM 'endif' RDELIM ({...}? => NEWLINE )? ;
     public final SParser.ifstat_return ifstat() throws RecognitionException {
         SParser.ifstat_return retval = new SParser.ifstat_return();
         retval.start = input.LT(1);
@@ -1073,21 +1283,21 @@ public class SParser extends Parser {
 
         Token indent=null;
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:171:2: ( (i= INDENT )? LDELIM 'if' '(' c1= conditional ')' RDELIM t1= template ( ( INDENT )? LDELIM 'elseif' '(' conditional ')' RDELIM template )* ( ( INDENT )? LDELIM 'else' RDELIM t3= template )? ( INDENT )? endif= LDELIM 'endif' RDELIM ({...}? => NEWLINE )? )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:171:4: (i= INDENT )? LDELIM 'if' '(' c1= conditional ')' RDELIM t1= template ( ( INDENT )? LDELIM 'elseif' '(' conditional ')' RDELIM template )* ( ( INDENT )? LDELIM 'else' RDELIM t3= template )? ( INDENT )? endif= LDELIM 'endif' RDELIM ({...}? => NEWLINE )?
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:189:2: ( (i= INDENT )? LDELIM 'if' '(' c1= conditional ')' RDELIM t1= template ( ( INDENT )? LDELIM 'elseif' '(' conditional ')' RDELIM template )* ( ( INDENT )? LDELIM 'else' RDELIM t3= template )? ( INDENT )? endif= LDELIM 'endif' RDELIM ({...}? => NEWLINE )? )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:189:4: (i= INDENT )? LDELIM 'if' '(' c1= conditional ')' RDELIM t1= template ( ( INDENT )? LDELIM 'elseif' '(' conditional ')' RDELIM template )* ( ( INDENT )? LDELIM 'else' RDELIM t3= template )? ( INDENT )? endif= LDELIM 'endif' RDELIM ({...}? => NEWLINE )?
             {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:171:5: (i= INDENT )?
-            int alt13=2;
-            int LA13_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:189:5: (i= INDENT )?
+            int alt16=2;
+            int LA16_0 = input.LA(1);
 
-            if ( (LA13_0==INDENT) ) {
-                alt13=1;
+            if ( (LA16_0==INDENT) ) {
+                alt16=1;
             }
-            switch (alt13) {
+            switch (alt16) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:171:5: i= INDENT
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:189:5: i= INDENT
                     {
-                    i=(CommonToken)match(input,INDENT,FOLLOW_INDENT_in_ifstat460); 
+                    i=(CommonToken)match(input,INDENT,FOLLOW_INDENT_in_ifstat585); 
 
                     }
                     break;
@@ -1095,44 +1305,44 @@ public class SParser extends Parser {
             }
 
 
-            match(input,LDELIM,FOLLOW_LDELIM_in_ifstat463); 
+            match(input,LDELIM,FOLLOW_LDELIM_in_ifstat588); 
 
-            match(input,IF,FOLLOW_IF_in_ifstat465); 
+            match(input,IF,FOLLOW_IF_in_ifstat590); 
 
-            match(input,LPAREN,FOLLOW_LPAREN_in_ifstat467); 
+            match(input,LPAREN,FOLLOW_LPAREN_in_ifstat592); 
 
-            pushFollow(FOLLOW_conditional_in_ifstat471);
+            pushFollow(FOLLOW_conditional_in_ifstat596);
             conditional();
 
             state._fsp--;
 
 
-            match(input,RPAREN,FOLLOW_RPAREN_in_ifstat473); 
+            match(input,RPAREN,FOLLOW_RPAREN_in_ifstat598); 
 
-            match(input,RDELIM,FOLLOW_RDELIM_in_ifstat475); 
+            match(input,RDELIM,FOLLOW_RDELIM_in_ifstat600); 
 
             if (input.LA(1)!=NEWLINE) indent=i;
 
-            pushFollow(FOLLOW_template_in_ifstat484);
+            pushFollow(FOLLOW_template_in_ifstat609);
             t1=template();
 
             state._fsp--;
 
 
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:173:4: ( ( INDENT )? LDELIM 'elseif' '(' conditional ')' RDELIM template )*
-            loop15:
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:191:4: ( ( INDENT )? LDELIM 'elseif' '(' conditional ')' RDELIM template )*
+            loop18:
             do {
-                int alt15=2;
-                int LA15_0 = input.LA(1);
+                int alt18=2;
+                int LA18_0 = input.LA(1);
 
-                if ( (LA15_0==INDENT) ) {
-                    int LA15_1 = input.LA(2);
+                if ( (LA18_0==INDENT) ) {
+                    int LA18_1 = input.LA(2);
 
-                    if ( (LA15_1==LDELIM) ) {
-                        int LA15_2 = input.LA(3);
+                    if ( (LA18_1==LDELIM) ) {
+                        int LA18_2 = input.LA(3);
 
-                        if ( (LA15_2==ELSEIF) ) {
-                            alt15=1;
+                        if ( (LA18_2==ELSEIF) ) {
+                            alt18=1;
                         }
 
 
@@ -1140,33 +1350,33 @@ public class SParser extends Parser {
 
 
                 }
-                else if ( (LA15_0==LDELIM) ) {
-                    int LA15_2 = input.LA(2);
+                else if ( (LA18_0==LDELIM) ) {
+                    int LA18_2 = input.LA(2);
 
-                    if ( (LA15_2==ELSEIF) ) {
-                        alt15=1;
+                    if ( (LA18_2==ELSEIF) ) {
+                        alt18=1;
                     }
 
 
                 }
 
 
-                switch (alt15) {
+                switch (alt18) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:173:6: ( INDENT )? LDELIM 'elseif' '(' conditional ')' RDELIM template
+            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:191:6: ( INDENT )? LDELIM 'elseif' '(' conditional ')' RDELIM template
             	    {
-            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:173:6: ( INDENT )?
-            	    int alt14=2;
-            	    int LA14_0 = input.LA(1);
+            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:191:6: ( INDENT )?
+            	    int alt17=2;
+            	    int LA17_0 = input.LA(1);
 
-            	    if ( (LA14_0==INDENT) ) {
-            	        alt14=1;
+            	    if ( (LA17_0==INDENT) ) {
+            	        alt17=1;
             	    }
-            	    switch (alt14) {
+            	    switch (alt17) {
             	        case 1 :
-            	            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:173:6: INDENT
+            	            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:191:6: INDENT
             	            {
-            	            match(input,INDENT,FOLLOW_INDENT_in_ifstat491); 
+            	            match(input,INDENT,FOLLOW_INDENT_in_ifstat616); 
 
             	            }
             	            break;
@@ -1174,23 +1384,23 @@ public class SParser extends Parser {
             	    }
 
 
-            	    match(input,LDELIM,FOLLOW_LDELIM_in_ifstat494); 
+            	    match(input,LDELIM,FOLLOW_LDELIM_in_ifstat619); 
 
-            	    match(input,ELSEIF,FOLLOW_ELSEIF_in_ifstat496); 
+            	    match(input,ELSEIF,FOLLOW_ELSEIF_in_ifstat621); 
 
-            	    match(input,LPAREN,FOLLOW_LPAREN_in_ifstat498); 
+            	    match(input,LPAREN,FOLLOW_LPAREN_in_ifstat623); 
 
-            	    pushFollow(FOLLOW_conditional_in_ifstat500);
+            	    pushFollow(FOLLOW_conditional_in_ifstat625);
             	    conditional();
 
             	    state._fsp--;
 
 
-            	    match(input,RPAREN,FOLLOW_RPAREN_in_ifstat502); 
+            	    match(input,RPAREN,FOLLOW_RPAREN_in_ifstat627); 
 
-            	    match(input,RDELIM,FOLLOW_RDELIM_in_ifstat504); 
+            	    match(input,RDELIM,FOLLOW_RDELIM_in_ifstat629); 
 
-            	    pushFollow(FOLLOW_template_in_ifstat506);
+            	    pushFollow(FOLLOW_template_in_ifstat631);
             	    template();
 
             	    state._fsp--;
@@ -1200,49 +1410,49 @@ public class SParser extends Parser {
             	    break;
 
             	default :
-            	    break loop15;
+            	    break loop18;
                 }
             } while (true);
 
 
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:174:4: ( ( INDENT )? LDELIM 'else' RDELIM t3= template )?
-            int alt17=2;
-            int LA17_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:192:4: ( ( INDENT )? LDELIM 'else' RDELIM t3= template )?
+            int alt20=2;
+            int LA20_0 = input.LA(1);
 
-            if ( (LA17_0==INDENT) ) {
-                int LA17_1 = input.LA(2);
+            if ( (LA20_0==INDENT) ) {
+                int LA20_1 = input.LA(2);
 
-                if ( (LA17_1==LDELIM) ) {
-                    int LA17_2 = input.LA(3);
+                if ( (LA20_1==LDELIM) ) {
+                    int LA20_2 = input.LA(3);
 
-                    if ( (LA17_2==ELSE) ) {
-                        alt17=1;
+                    if ( (LA20_2==ELSE) ) {
+                        alt20=1;
                     }
                 }
             }
-            else if ( (LA17_0==LDELIM) ) {
-                int LA17_2 = input.LA(2);
+            else if ( (LA20_0==LDELIM) ) {
+                int LA20_2 = input.LA(2);
 
-                if ( (LA17_2==ELSE) ) {
-                    alt17=1;
+                if ( (LA20_2==ELSE) ) {
+                    alt20=1;
                 }
             }
-            switch (alt17) {
+            switch (alt20) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:174:6: ( INDENT )? LDELIM 'else' RDELIM t3= template
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:192:6: ( INDENT )? LDELIM 'else' RDELIM t3= template
                     {
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:174:6: ( INDENT )?
-                    int alt16=2;
-                    int LA16_0 = input.LA(1);
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:192:6: ( INDENT )?
+                    int alt19=2;
+                    int LA19_0 = input.LA(1);
 
-                    if ( (LA16_0==INDENT) ) {
-                        alt16=1;
+                    if ( (LA19_0==INDENT) ) {
+                        alt19=1;
                     }
-                    switch (alt16) {
+                    switch (alt19) {
                         case 1 :
-                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:174:6: INDENT
+                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:192:6: INDENT
                             {
-                            match(input,INDENT,FOLLOW_INDENT_in_ifstat516); 
+                            match(input,INDENT,FOLLOW_INDENT_in_ifstat641); 
 
                             }
                             break;
@@ -1250,13 +1460,13 @@ public class SParser extends Parser {
                     }
 
 
-                    match(input,LDELIM,FOLLOW_LDELIM_in_ifstat519); 
+                    match(input,LDELIM,FOLLOW_LDELIM_in_ifstat644); 
 
-                    match(input,ELSE,FOLLOW_ELSE_in_ifstat521); 
+                    match(input,ELSE,FOLLOW_ELSE_in_ifstat646); 
 
-                    match(input,RDELIM,FOLLOW_RDELIM_in_ifstat523); 
+                    match(input,RDELIM,FOLLOW_RDELIM_in_ifstat648); 
 
-                    pushFollow(FOLLOW_template_in_ifstat527);
+                    pushFollow(FOLLOW_template_in_ifstat652);
                     t3=template();
 
                     state._fsp--;
@@ -1268,18 +1478,18 @@ public class SParser extends Parser {
             }
 
 
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:175:4: ( INDENT )?
-            int alt18=2;
-            int LA18_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:193:4: ( INDENT )?
+            int alt21=2;
+            int LA21_0 = input.LA(1);
 
-            if ( (LA18_0==INDENT) ) {
-                alt18=1;
+            if ( (LA21_0==INDENT) ) {
+                alt21=1;
             }
-            switch (alt18) {
+            switch (alt21) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:175:4: INDENT
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:193:4: INDENT
                     {
-                    match(input,INDENT,FOLLOW_INDENT_in_ifstat535); 
+                    match(input,INDENT,FOLLOW_INDENT_in_ifstat660); 
 
                     }
                     break;
@@ -1287,32 +1497,32 @@ public class SParser extends Parser {
             }
 
 
-            endif=(CommonToken)match(input,LDELIM,FOLLOW_LDELIM_in_ifstat541); 
+            endif=(CommonToken)match(input,LDELIM,FOLLOW_LDELIM_in_ifstat666); 
 
-            match(input,ENDIF,FOLLOW_ENDIF_in_ifstat543); 
+            match(input,ENDIF,FOLLOW_ENDIF_in_ifstat668); 
 
-            match(input,RDELIM,FOLLOW_RDELIM_in_ifstat547); 
+            match(input,RDELIM,FOLLOW_RDELIM_in_ifstat672); 
 
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:178:3: ({...}? => NEWLINE )?
-            int alt19=2;
-            int LA19_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:196:3: ({...}? => NEWLINE )?
+            int alt22=2;
+            int LA22_0 = input.LA(1);
 
-            if ( (LA19_0==NEWLINE) ) {
-                int LA19_1 = input.LA(2);
+            if ( (LA22_0==NEWLINE) ) {
+                int LA22_1 = input.LA(2);
 
                 if ( ((((CommonToken)retval.start).getLine()!=input.LT(1).getLine())) ) {
-                    alt19=1;
+                    alt22=1;
                 }
             }
-            switch (alt19) {
+            switch (alt22) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:178:4: {...}? => NEWLINE
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:196:4: {...}? => NEWLINE
                     {
                     if ( !((((CommonToken)retval.start).getLine()!=input.LT(1).getLine())) ) {
                         throw new FailedPredicateException(input, "ifstat", "$ifstat.start.getLine()!=input.LT(1).getLine()");
                     }
 
-                    match(input,NEWLINE,FOLLOW_NEWLINE_in_ifstat558); 
+                    match(input,NEWLINE,FOLLOW_NEWLINE_in_ifstat683); 
 
                     }
                     break;
@@ -1345,37 +1555,37 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "conditional"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:184:1: conditional : andConditional ( '||' andConditional )* ;
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:202:1: conditional : andConditional ( '||' andConditional )* ;
     public final void conditional() throws RecognitionException {
         conditional_stack.push(new conditional_scope());
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:188:2: ( andConditional ( '||' andConditional )* )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:188:4: andConditional ( '||' andConditional )*
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:206:2: ( andConditional ( '||' andConditional )* )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:206:4: andConditional ( '||' andConditional )*
             {
-            pushFollow(FOLLOW_andConditional_in_conditional579);
+            pushFollow(FOLLOW_andConditional_in_conditional704);
             andConditional();
 
             state._fsp--;
 
 
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:188:19: ( '||' andConditional )*
-            loop20:
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:206:19: ( '||' andConditional )*
+            loop23:
             do {
-                int alt20=2;
-                int LA20_0 = input.LA(1);
+                int alt23=2;
+                int LA23_0 = input.LA(1);
 
-                if ( (LA20_0==OR) ) {
-                    alt20=1;
+                if ( (LA23_0==OR) ) {
+                    alt23=1;
                 }
 
 
-                switch (alt20) {
+                switch (alt23) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:188:21: '||' andConditional
+            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:206:21: '||' andConditional
             	    {
-            	    match(input,OR,FOLLOW_OR_in_conditional583); 
+            	    match(input,OR,FOLLOW_OR_in_conditional708); 
 
-            	    pushFollow(FOLLOW_andConditional_in_conditional585);
+            	    pushFollow(FOLLOW_andConditional_in_conditional710);
             	    andConditional();
 
             	    state._fsp--;
@@ -1385,7 +1595,7 @@ public class SParser extends Parser {
             	    break;
 
             	default :
-            	    break loop20;
+            	    break loop23;
                 }
             } while (true);
 
@@ -1407,248 +1617,37 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "andConditional"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:191:1: andConditional : notConditional ( '&&' notConditional )* ;
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:209:1: andConditional : notConditional ( '&&' notConditional )* ;
     public final void andConditional() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:191:16: ( notConditional ( '&&' notConditional )* )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:191:18: notConditional ( '&&' notConditional )*
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:209:16: ( notConditional ( '&&' notConditional )* )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:209:18: notConditional ( '&&' notConditional )*
             {
-            pushFollow(FOLLOW_notConditional_in_andConditional598);
+            pushFollow(FOLLOW_notConditional_in_andConditional723);
             notConditional();
 
             state._fsp--;
 
 
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:191:33: ( '&&' notConditional )*
-            loop21:
-            do {
-                int alt21=2;
-                int LA21_0 = input.LA(1);
-
-                if ( (LA21_0==AND) ) {
-                    alt21=1;
-                }
-
-
-                switch (alt21) {
-            	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:191:35: '&&' notConditional
-            	    {
-            	    match(input,AND,FOLLOW_AND_in_andConditional602); 
-
-            	    pushFollow(FOLLOW_notConditional_in_andConditional604);
-            	    notConditional();
-
-            	    state._fsp--;
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop21;
-                }
-            } while (true);
-
-
-            }
-
-        }
-
-           catch (RecognitionException re) { throw re; }
-
-        finally {
-        	// do for sure before leaving
-        }
-        return ;
-    }
-    // $ANTLR end "andConditional"
-
-
-
-    // $ANTLR start "notConditional"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:193:1: notConditional : ( '!' notConditional | memberExpr );
-    public final void notConditional() throws RecognitionException {
-        try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:194:2: ( '!' notConditional | memberExpr )
-            int alt22=2;
-            int LA22_0 = input.LA(1);
-
-            if ( (LA22_0==BANG) ) {
-                alt22=1;
-            }
-            else if ( (LA22_0==LBRACK||LA22_0==LCURLY||(LA22_0 >= ID && LA22_0 <= STRING)||(LA22_0 >= TRUE && LA22_0 <= FALSE)) ) {
-                alt22=2;
-            }
-            else if ( (LA22_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
-                alt22=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 22, 0, input);
-
-                throw nvae;
-
-            }
-            switch (alt22) {
-                case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:194:4: '!' notConditional
-                    {
-                    match(input,BANG,FOLLOW_BANG_in_notConditional617); 
-
-                    pushFollow(FOLLOW_notConditional_in_notConditional619);
-                    notConditional();
-
-                    state._fsp--;
-
-
-                    }
-                    break;
-                case 2 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:195:4: memberExpr
-                    {
-                    pushFollow(FOLLOW_memberExpr_in_notConditional624);
-                    memberExpr();
-
-                    state._fsp--;
-
-
-                    }
-                    break;
-
-            }
-        }
-
-           catch (RecognitionException re) { throw re; }
-
-        finally {
-        	// do for sure before leaving
-        }
-        return ;
-    }
-    // $ANTLR end "notConditional"
-
-
-
-    // $ANTLR start "notConditionalExpr"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:198:1: notConditionalExpr : ( ID ) (p= '.' prop= ID |p= '.' '(' mapExpr ')' )* ;
-    public final void notConditionalExpr() throws RecognitionException {
-        CommonToken p=null;
-        CommonToken prop=null;
-
-        try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:199:2: ( ( ID ) (p= '.' prop= ID |p= '.' '(' mapExpr ')' )* )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:199:4: ( ID ) (p= '.' prop= ID |p= '.' '(' mapExpr ')' )*
-            {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:199:4: ( ID )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:199:5: ID
-            {
-            match(input,ID,FOLLOW_ID_in_notConditionalExpr636); 
-
-            }
-
-
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:200:3: (p= '.' prop= ID |p= '.' '(' mapExpr ')' )*
-            loop23:
-            do {
-                int alt23=3;
-                int LA23_0 = input.LA(1);
-
-                if ( (LA23_0==DOT) ) {
-                    int LA23_2 = input.LA(2);
-
-                    if ( (LA23_2==ID) ) {
-                        alt23=1;
-                    }
-                    else if ( (LA23_2==LPAREN) ) {
-                        alt23=2;
-                    }
-
-
-                }
-
-
-                switch (alt23) {
-            	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:200:5: p= '.' prop= ID
-            	    {
-            	    p=(CommonToken)match(input,DOT,FOLLOW_DOT_in_notConditionalExpr646); 
-
-            	    prop=(CommonToken)match(input,ID,FOLLOW_ID_in_notConditionalExpr650); 
-
-            	    }
-            	    break;
-            	case 2 :
-            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:201:5: p= '.' '(' mapExpr ')'
-            	    {
-            	    p=(CommonToken)match(input,DOT,FOLLOW_DOT_in_notConditionalExpr664); 
-
-            	    match(input,LPAREN,FOLLOW_LPAREN_in_notConditionalExpr666); 
-
-            	    pushFollow(FOLLOW_mapExpr_in_notConditionalExpr668);
-            	    mapExpr();
-
-            	    state._fsp--;
-
-
-            	    match(input,RPAREN,FOLLOW_RPAREN_in_notConditionalExpr670); 
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop23;
-                }
-            } while (true);
-
-
-            }
-
-        }
-
-           catch (RecognitionException re) { throw re; }
-
-        finally {
-        	// do for sure before leaving
-        }
-        return ;
-    }
-    // $ANTLR end "notConditionalExpr"
-
-
-
-    // $ANTLR start "exprOptions"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:205:1: exprOptions : option ( ',' option )* ;
-    public final void exprOptions() throws RecognitionException {
-        try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:205:13: ( option ( ',' option )* )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:205:15: option ( ',' option )*
-            {
-            pushFollow(FOLLOW_option_in_exprOptions689);
-            option();
-
-            state._fsp--;
-
-
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:205:22: ( ',' option )*
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:209:33: ( '&&' notConditional )*
             loop24:
             do {
                 int alt24=2;
                 int LA24_0 = input.LA(1);
 
-                if ( (LA24_0==COMMA) ) {
+                if ( (LA24_0==AND) ) {
                     alt24=1;
                 }
 
 
                 switch (alt24) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:205:24: ',' option
+            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:209:35: '&&' notConditional
             	    {
-            	    match(input,COMMA,FOLLOW_COMMA_in_exprOptions693); 
+            	    match(input,AND,FOLLOW_AND_in_andConditional727); 
 
-            	    pushFollow(FOLLOW_option_in_exprOptions695);
-            	    option();
+            	    pushFollow(FOLLOW_notConditional_in_andConditional729);
+            	    notConditional();
 
             	    state._fsp--;
 
@@ -1673,40 +1672,25 @@ public class SParser extends Parser {
         }
         return ;
     }
-    // $ANTLR end "exprOptions"
+    // $ANTLR end "andConditional"
 
 
 
-    // $ANTLR start "option"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:207:1: option : ID ( '=' exprNoComma |) ;
-    public final void option() throws RecognitionException {
-        CommonToken ID3=null;
-
-
-        	//String id = input.LT(1).getText();
-        	//String defVal = Compiler.defaultOptionValues.get(id);
-        	//boolean validOption = Compiler.supportedOptions.get(id)!=null;
-
+    // $ANTLR start "notConditional"
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:211:1: notConditional : ( '!' notConditional | memberExpr );
+    public final void notConditional() throws RecognitionException {
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:213:2: ( ID ( '=' exprNoComma |) )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:213:4: ID ( '=' exprNoComma |)
-            {
-            ID3=(CommonToken)match(input,ID,FOLLOW_ID_in_option714); 
-
-
-            		//if ( !validOption ) {
-                        //errMgr.compileTimeError(ErrorType.NO_SUCH_OPTION, templateToken, ID3, (ID3!=null?ID3.getText():null));
-            		//}
-            		
-
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:219:3: ( '=' exprNoComma |)
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:212:2: ( '!' notConditional | memberExpr )
             int alt25=2;
             int LA25_0 = input.LA(1);
 
-            if ( (LA25_0==EQUALS) ) {
+            if ( (LA25_0==BANG) ) {
                 alt25=1;
             }
-            else if ( (LA25_0==COMMA||LA25_0==RDELIM) ) {
+            else if ( (LA25_0==LBRACK||LA25_0==LCURLY||(LA25_0 >= ID && LA25_0 <= STRING)||(LA25_0 >= TRUE && LA25_0 <= FALSE)) ) {
+                alt25=2;
+            }
+            else if ( (LA25_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
                 alt25=2;
             }
             else {
@@ -1718,11 +1702,237 @@ public class SParser extends Parser {
             }
             switch (alt25) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:219:5: '=' exprNoComma
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:212:4: '!' notConditional
                     {
-                    match(input,EQUALS,FOLLOW_EQUALS_in_option724); 
+                    match(input,BANG,FOLLOW_BANG_in_notConditional742); 
 
-                    pushFollow(FOLLOW_exprNoComma_in_option726);
+                    pushFollow(FOLLOW_notConditional_in_notConditional744);
+                    notConditional();
+
+                    state._fsp--;
+
+
+                    }
+                    break;
+                case 2 :
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:213:4: memberExpr
+                    {
+                    pushFollow(FOLLOW_memberExpr_in_notConditional749);
+                    memberExpr();
+
+                    state._fsp--;
+
+
+                    }
+                    break;
+
+            }
+        }
+
+           catch (RecognitionException re) { throw re; }
+
+        finally {
+        	// do for sure before leaving
+        }
+        return ;
+    }
+    // $ANTLR end "notConditional"
+
+
+
+    // $ANTLR start "notConditionalExpr"
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:216:1: notConditionalExpr : ( ID ) (p= '.' prop= ID |p= '.' '(' mapExpr ')' )* ;
+    public final void notConditionalExpr() throws RecognitionException {
+        CommonToken p=null;
+        CommonToken prop=null;
+
+        try {
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:217:2: ( ( ID ) (p= '.' prop= ID |p= '.' '(' mapExpr ')' )* )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:217:4: ( ID ) (p= '.' prop= ID |p= '.' '(' mapExpr ')' )*
+            {
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:217:4: ( ID )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:217:5: ID
+            {
+            match(input,ID,FOLLOW_ID_in_notConditionalExpr761); 
+
+            }
+
+
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:218:3: (p= '.' prop= ID |p= '.' '(' mapExpr ')' )*
+            loop26:
+            do {
+                int alt26=3;
+                int LA26_0 = input.LA(1);
+
+                if ( (LA26_0==DOT) ) {
+                    int LA26_2 = input.LA(2);
+
+                    if ( (LA26_2==ID) ) {
+                        alt26=1;
+                    }
+                    else if ( (LA26_2==LPAREN) ) {
+                        alt26=2;
+                    }
+
+
+                }
+
+
+                switch (alt26) {
+            	case 1 :
+            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:218:5: p= '.' prop= ID
+            	    {
+            	    p=(CommonToken)match(input,DOT,FOLLOW_DOT_in_notConditionalExpr771); 
+
+            	    prop=(CommonToken)match(input,ID,FOLLOW_ID_in_notConditionalExpr775); 
+
+            	    }
+            	    break;
+            	case 2 :
+            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:219:5: p= '.' '(' mapExpr ')'
+            	    {
+            	    p=(CommonToken)match(input,DOT,FOLLOW_DOT_in_notConditionalExpr789); 
+
+            	    match(input,LPAREN,FOLLOW_LPAREN_in_notConditionalExpr791); 
+
+            	    pushFollow(FOLLOW_mapExpr_in_notConditionalExpr793);
+            	    mapExpr();
+
+            	    state._fsp--;
+
+
+            	    match(input,RPAREN,FOLLOW_RPAREN_in_notConditionalExpr795); 
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop26;
+                }
+            } while (true);
+
+
+            }
+
+        }
+
+           catch (RecognitionException re) { throw re; }
+
+        finally {
+        	// do for sure before leaving
+        }
+        return ;
+    }
+    // $ANTLR end "notConditionalExpr"
+
+
+
+    // $ANTLR start "exprOptions"
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:223:1: exprOptions : option ( ',' option )* ;
+    public final void exprOptions() throws RecognitionException {
+        try {
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:223:13: ( option ( ',' option )* )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:223:15: option ( ',' option )*
+            {
+            pushFollow(FOLLOW_option_in_exprOptions814);
+            option();
+
+            state._fsp--;
+
+
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:223:22: ( ',' option )*
+            loop27:
+            do {
+                int alt27=2;
+                int LA27_0 = input.LA(1);
+
+                if ( (LA27_0==COMMA) ) {
+                    alt27=1;
+                }
+
+
+                switch (alt27) {
+            	case 1 :
+            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:223:24: ',' option
+            	    {
+            	    match(input,COMMA,FOLLOW_COMMA_in_exprOptions818); 
+
+            	    pushFollow(FOLLOW_option_in_exprOptions820);
+            	    option();
+
+            	    state._fsp--;
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop27;
+                }
+            } while (true);
+
+
+            }
+
+        }
+
+           catch (RecognitionException re) { throw re; }
+
+        finally {
+        	// do for sure before leaving
+        }
+        return ;
+    }
+    // $ANTLR end "exprOptions"
+
+
+
+    // $ANTLR start "option"
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:225:1: option : ID ( '=' exprNoComma |) ;
+    public final void option() throws RecognitionException {
+        CommonToken ID3=null;
+
+
+        	//String id = input.LT(1).getText();
+        	//String defVal = Compiler.defaultOptionValues.get(id);
+        	//boolean validOption = Compiler.supportedOptions.get(id)!=null;
+
+        try {
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:231:2: ( ID ( '=' exprNoComma |) )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:231:4: ID ( '=' exprNoComma |)
+            {
+            ID3=(CommonToken)match(input,ID,FOLLOW_ID_in_option839); 
+
+
+            		//if ( !validOption ) {
+                        //errMgr.compileTimeError(ErrorType.NO_SUCH_OPTION, templateToken, ID3, (ID3!=null?ID3.getText():null));
+            		//}
+            		
+
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:237:3: ( '=' exprNoComma |)
+            int alt28=2;
+            int LA28_0 = input.LA(1);
+
+            if ( (LA28_0==EQUALS) ) {
+                alt28=1;
+            }
+            else if ( (LA28_0==COMMA||LA28_0==RDELIM) ) {
+                alt28=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 28, 0, input);
+
+                throw nvae;
+
+            }
+            switch (alt28) {
+                case 1 :
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:237:5: '=' exprNoComma
+                    {
+                    match(input,EQUALS,FOLLOW_EQUALS_in_option849); 
+
+                    pushFollow(FOLLOW_exprNoComma_in_option851);
                     exprNoComma();
 
                     state._fsp--;
@@ -1731,7 +1941,7 @@ public class SParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:221:5: 
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:239:5: 
                     {
 
                     			//if ( defVal==null ) {
@@ -1761,7 +1971,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "exprNoComma"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:232:1: exprNoComma returns [Expr v] : m= memberExpr ( ':' mt= mapTemplateRef[v] |) ;
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:250:1: exprNoComma returns [Expr v] : m= memberExpr ( ':' mt= mapTemplateRef[v] |) ;
     public final Expr exprNoComma() throws RecognitionException {
         Expr v = null;
 
@@ -1772,10 +1982,10 @@ public class SParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:233:2: (m= memberExpr ( ':' mt= mapTemplateRef[v] |) )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:233:4: m= memberExpr ( ':' mt= mapTemplateRef[v] |)
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:251:2: (m= memberExpr ( ':' mt= mapTemplateRef[v] |) )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:251:4: m= memberExpr ( ':' mt= mapTemplateRef[v] |)
             {
-            pushFollow(FOLLOW_memberExpr_in_exprNoComma785);
+            pushFollow(FOLLOW_memberExpr_in_exprNoComma910);
             m=memberExpr();
 
             state._fsp--;
@@ -1783,30 +1993,30 @@ public class SParser extends Parser {
 
             v=m;
 
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:234:3: ( ':' mt= mapTemplateRef[v] |)
-            int alt26=2;
-            int LA26_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:252:3: ( ':' mt= mapTemplateRef[v] |)
+            int alt29=2;
+            int LA29_0 = input.LA(1);
 
-            if ( (LA26_0==COLON) ) {
-                alt26=1;
+            if ( (LA29_0==COLON) ) {
+                alt29=1;
             }
-            else if ( (LA26_0==RPAREN||(LA26_0 >= RBRACK && LA26_0 <= COMMA)||LA26_0==RDELIM) ) {
-                alt26=2;
+            else if ( (LA29_0==RPAREN||(LA29_0 >= RBRACK && LA29_0 <= COMMA)||LA29_0==RDELIM) ) {
+                alt29=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 26, 0, input);
+                    new NoViableAltException("", 29, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt26) {
+            switch (alt29) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:234:5: ':' mt= mapTemplateRef[v]
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:252:5: ':' mt= mapTemplateRef[v]
                     {
-                    match(input,COLON,FOLLOW_COLON_in_exprNoComma793); 
+                    match(input,COLON,FOLLOW_COLON_in_exprNoComma918); 
 
-                    pushFollow(FOLLOW_mapTemplateRef_in_exprNoComma797);
+                    pushFollow(FOLLOW_mapTemplateRef_in_exprNoComma922);
                     mt=mapTemplateRef(v);
 
                     state._fsp--;
@@ -1817,7 +2027,7 @@ public class SParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:236:3: 
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:254:3: 
                     {
                     }
                     break;
@@ -1841,7 +2051,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "expr"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:239:1: expr returns [Expr v] : e= mapExpr ;
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:257:1: expr returns [Expr v] : e= mapExpr ;
     public final Expr expr() throws RecognitionException {
         Expr v = null;
 
@@ -1850,10 +2060,10 @@ public class SParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:239:23: (e= mapExpr )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:239:25: e= mapExpr
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:257:23: (e= mapExpr )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:257:25: e= mapExpr
             {
-            pushFollow(FOLLOW_mapExpr_in_expr838);
+            pushFollow(FOLLOW_mapExpr_in_expr963);
             e=mapExpr();
 
             state._fsp--;
@@ -1877,7 +2087,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "mapExpr"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:243:1: mapExpr returns [Expr v] : me= memberExpr ( (c= ',' me= memberExpr )+ col= ':' mt= mapTemplateRefListParams[params] |) (col= ':' mt= mapTemplateRef[v] ({...}? ',' mt= mapTemplateRef[v] )* )* ;
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:261:1: mapExpr returns [Expr v] : me= memberExpr ( (c= ',' me= memberExpr )+ col= ':' mt= mapTemplateRefListParams[params] |) (col= ':' mt= mapTemplateRef[v] ({...}? ',' mt= mapTemplateRef[v] )* )* ;
     public final Expr mapExpr() throws RecognitionException {
         Expr v = null;
 
@@ -1893,10 +2103,10 @@ public class SParser extends Parser {
              List<Expr> params = new ArrayList<Expr>();
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:247:2: (me= memberExpr ( (c= ',' me= memberExpr )+ col= ':' mt= mapTemplateRefListParams[params] |) (col= ':' mt= mapTemplateRef[v] ({...}? ',' mt= mapTemplateRef[v] )* )* )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:247:4: me= memberExpr ( (c= ',' me= memberExpr )+ col= ':' mt= mapTemplateRefListParams[params] |) (col= ':' mt= mapTemplateRef[v] ({...}? ',' mt= mapTemplateRef[v] )* )*
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:265:2: (me= memberExpr ( (c= ',' me= memberExpr )+ col= ':' mt= mapTemplateRefListParams[params] |) (col= ':' mt= mapTemplateRef[v] ({...}? ',' mt= mapTemplateRef[v] )* )* )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:265:4: me= memberExpr ( (c= ',' me= memberExpr )+ col= ':' mt= mapTemplateRefListParams[params] |) (col= ':' mt= mapTemplateRef[v] ({...}? ',' mt= mapTemplateRef[v] )* )*
             {
-            pushFollow(FOLLOW_memberExpr_in_mapExpr862);
+            pushFollow(FOLLOW_memberExpr_in_mapExpr987);
             me=memberExpr();
 
             state._fsp--;
@@ -1904,48 +2114,48 @@ public class SParser extends Parser {
 
             v=me;
 
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:248:3: ( (c= ',' me= memberExpr )+ col= ':' mt= mapTemplateRefListParams[params] |)
-            int alt28=2;
-            int LA28_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:266:3: ( (c= ',' me= memberExpr )+ col= ':' mt= mapTemplateRefListParams[params] |)
+            int alt31=2;
+            int LA31_0 = input.LA(1);
 
-            if ( (LA28_0==COMMA) ) {
-                alt28=1;
+            if ( (LA31_0==COMMA) ) {
+                alt31=1;
             }
-            else if ( (LA28_0==SEMI||LA28_0==COLON||LA28_0==RPAREN||LA28_0==RDELIM) ) {
-                alt28=2;
+            else if ( (LA31_0==SEMI||LA31_0==COLON||LA31_0==RPAREN||LA31_0==RDELIM) ) {
+                alt31=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 28, 0, input);
+                    new NoViableAltException("", 31, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt28) {
+            switch (alt31) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:248:5: (c= ',' me= memberExpr )+ col= ':' mt= mapTemplateRefListParams[params]
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:266:5: (c= ',' me= memberExpr )+ col= ':' mt= mapTemplateRefListParams[params]
                     {
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:248:5: (c= ',' me= memberExpr )+
-                    int cnt27=0;
-                    loop27:
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:266:5: (c= ',' me= memberExpr )+
+                    int cnt30=0;
+                    loop30:
                     do {
-                        int alt27=2;
-                        int LA27_0 = input.LA(1);
+                        int alt30=2;
+                        int LA30_0 = input.LA(1);
 
-                        if ( (LA27_0==COMMA) ) {
-                            alt27=1;
+                        if ( (LA30_0==COMMA) ) {
+                            alt30=1;
                         }
 
 
-                        switch (alt27) {
+                        switch (alt30) {
                     	case 1 :
-                    	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:248:6: c= ',' me= memberExpr
+                    	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:266:6: c= ',' me= memberExpr
                     	    {
-                    	    c=(CommonToken)match(input,COMMA,FOLLOW_COMMA_in_mapExpr873); 
+                    	    c=(CommonToken)match(input,COMMA,FOLLOW_COMMA_in_mapExpr998); 
 
                     	    params.add(me);
 
-                    	    pushFollow(FOLLOW_memberExpr_in_mapExpr879);
+                    	    pushFollow(FOLLOW_memberExpr_in_mapExpr1004);
                     	    me=memberExpr();
 
                     	    state._fsp--;
@@ -1955,20 +2165,20 @@ public class SParser extends Parser {
                     	    break;
 
                     	default :
-                    	    if ( cnt27 >= 1 ) break loop27;
+                    	    if ( cnt30 >= 1 ) break loop30;
                                 EarlyExitException eee =
-                                    new EarlyExitException(27, input);
+                                    new EarlyExitException(30, input);
                                 throw eee;
                         }
-                        cnt27++;
+                        cnt30++;
                     } while (true);
 
 
                     params.add(me);
 
-                    col=(CommonToken)match(input,COLON,FOLLOW_COLON_in_mapExpr888); 
+                    col=(CommonToken)match(input,COLON,FOLLOW_COLON_in_mapExpr1013); 
 
-                    pushFollow(FOLLOW_mapTemplateRefListParams_in_mapExpr892);
+                    pushFollow(FOLLOW_mapTemplateRefListParams_in_mapExpr1017);
                     mt=mapTemplateRefListParams(params);
 
                     state._fsp--;
@@ -1979,7 +2189,7 @@ public class SParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:251:3: 
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:269:3: 
                     {
                     }
                     break;
@@ -1987,24 +2197,24 @@ public class SParser extends Parser {
             }
 
 
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:252:3: (col= ':' mt= mapTemplateRef[v] ({...}? ',' mt= mapTemplateRef[v] )* )*
-            loop30:
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:270:3: (col= ':' mt= mapTemplateRef[v] ({...}? ',' mt= mapTemplateRef[v] )* )*
+            loop33:
             do {
-                int alt30=2;
-                int LA30_0 = input.LA(1);
+                int alt33=2;
+                int LA33_0 = input.LA(1);
 
-                if ( (LA30_0==COLON) ) {
-                    alt30=1;
+                if ( (LA33_0==COLON) ) {
+                    alt33=1;
                 }
 
 
-                switch (alt30) {
+                switch (alt33) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:253:4: col= ':' mt= mapTemplateRef[v] ({...}? ',' mt= mapTemplateRef[v] )*
+            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:271:4: col= ':' mt= mapTemplateRef[v] ({...}? ',' mt= mapTemplateRef[v] )*
             	    {
-            	    col=(CommonToken)match(input,COLON,FOLLOW_COLON_in_mapExpr938); 
+            	    col=(CommonToken)match(input,COLON,FOLLOW_COLON_in_mapExpr1063); 
 
-            	    pushFollow(FOLLOW_mapTemplateRef_in_mapExpr942);
+            	    pushFollow(FOLLOW_mapTemplateRef_in_mapExpr1067);
             	    mt=mapTemplateRef(v);
 
             	    state._fsp--;
@@ -2012,28 +2222,28 @@ public class SParser extends Parser {
 
             	    v=mt;
 
-            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:253:41: ({...}? ',' mt= mapTemplateRef[v] )*
-            	    loop29:
+            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:271:41: ({...}? ',' mt= mapTemplateRef[v] )*
+            	    loop32:
             	    do {
-            	        int alt29=2;
-            	        int LA29_0 = input.LA(1);
+            	        int alt32=2;
+            	        int LA32_0 = input.LA(1);
 
-            	        if ( (LA29_0==COMMA) ) {
-            	            alt29=1;
+            	        if ( (LA32_0==COMMA) ) {
+            	            alt32=1;
             	        }
 
 
-            	        switch (alt29) {
+            	        switch (alt32) {
             	    	case 1 :
-            	    	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:253:42: {...}? ',' mt= mapTemplateRef[v]
+            	    	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:271:42: {...}? ',' mt= mapTemplateRef[v]
             	    	    {
             	    	    if ( !((c==null)) ) {
             	    	        throw new FailedPredicateException(input, "mapExpr", "$c==null");
             	    	    }
 
-            	    	    match(input,COMMA,FOLLOW_COMMA_in_mapExpr950); 
+            	    	    match(input,COMMA,FOLLOW_COMMA_in_mapExpr1075); 
 
-            	    	    pushFollow(FOLLOW_mapTemplateRef_in_mapExpr954);
+            	    	    pushFollow(FOLLOW_mapTemplateRef_in_mapExpr1079);
             	    	    mt=mapTemplateRef(v);
 
             	    	    state._fsp--;
@@ -2045,7 +2255,7 @@ public class SParser extends Parser {
             	    	    break;
 
             	    	default :
-            	    	    break loop29;
+            	    	    break loop32;
             	        }
             	    } while (true);
 
@@ -2054,7 +2264,7 @@ public class SParser extends Parser {
             	    break;
 
             	default :
-            	    break loop30;
+            	    break loop33;
                 }
             } while (true);
 
@@ -2075,7 +2285,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "mapTemplateRef"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:263:1: mapTemplateRef[ Expr data] returns [Expr v] : ( ID '(' as= args ')' |st= subtemplate |lp= '(' me= mapExpr rp= ')' '(' (as= argExprList )? ')' );
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:281:1: mapTemplateRef[ Expr data] returns [Expr v] : ( ID '(' as= args ')' |st= subtemplate |lp= '(' me= mapExpr rp= ')' '(' (as= argExprList )? ')' );
     public final Expr mapTemplateRef(Expr data) throws RecognitionException {
         Expr v = null;
 
@@ -2091,56 +2301,56 @@ public class SParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:264:2: ( ID '(' as= args ')' |st= subtemplate |lp= '(' me= mapExpr rp= ')' '(' (as= argExprList )? ')' )
-            int alt32=3;
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:282:2: ( ID '(' as= args ')' |st= subtemplate |lp= '(' me= mapExpr rp= ')' '(' (as= argExprList )? ')' )
+            int alt35=3;
             switch ( input.LA(1) ) {
             case ID:
                 {
-                alt32=1;
+                alt35=1;
                 }
                 break;
             case LCURLY:
                 {
-                alt32=2;
+                alt35=2;
                 }
                 break;
             case LPAREN:
                 {
-                alt32=3;
+                alt35=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 32, 0, input);
+                    new NoViableAltException("", 35, 0, input);
 
                 throw nvae;
 
             }
 
-            switch (alt32) {
+            switch (alt35) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:264:4: ID '(' as= args ')'
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:282:4: ID '(' as= args ')'
                     {
-                    ID4=(CommonToken)match(input,ID,FOLLOW_ID_in_mapTemplateRef997); 
+                    ID4=(CommonToken)match(input,ID,FOLLOW_ID_in_mapTemplateRef1122); 
 
-                    match(input,LPAREN,FOLLOW_LPAREN_in_mapTemplateRef999); 
+                    match(input,LPAREN,FOLLOW_LPAREN_in_mapTemplateRef1124); 
 
-                    pushFollow(FOLLOW_args_in_mapTemplateRef1003);
+                    pushFollow(FOLLOW_args_in_mapTemplateRef1128);
                     as=args();
 
                     state._fsp--;
 
 
-                    match(input,RPAREN,FOLLOW_RPAREN_in_mapTemplateRef1005); 
+                    match(input,RPAREN,FOLLOW_RPAREN_in_mapTemplateRef1130); 
 
                     v=c.opInclude(c.opLocal(v("group")),c.opName((ID4!=null?ID4.getText():null)),data,as);
 
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:265:4: st= subtemplate
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:283:4: st= subtemplate
                     {
-                    pushFollow(FOLLOW_subtemplate_in_mapTemplateRef1020);
+                    pushFollow(FOLLOW_subtemplate_in_mapTemplateRef1145);
                     st=subtemplate();
 
                     state._fsp--;
@@ -2151,35 +2361,35 @@ public class SParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:266:4: lp= '(' me= mapExpr rp= ')' '(' (as= argExprList )? ')'
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:284:4: lp= '(' me= mapExpr rp= ')' '(' (as= argExprList )? ')'
                     {
-                    lp=(CommonToken)match(input,LPAREN,FOLLOW_LPAREN_in_mapTemplateRef1033); 
+                    lp=(CommonToken)match(input,LPAREN,FOLLOW_LPAREN_in_mapTemplateRef1158); 
 
-                    pushFollow(FOLLOW_mapExpr_in_mapTemplateRef1037);
+                    pushFollow(FOLLOW_mapExpr_in_mapTemplateRef1162);
                     me=mapExpr();
 
                     state._fsp--;
 
 
-                    rp=(CommonToken)match(input,RPAREN,FOLLOW_RPAREN_in_mapTemplateRef1041); 
+                    rp=(CommonToken)match(input,RPAREN,FOLLOW_RPAREN_in_mapTemplateRef1166); 
 
-                    match(input,LPAREN,FOLLOW_LPAREN_in_mapTemplateRef1043); 
+                    match(input,LPAREN,FOLLOW_LPAREN_in_mapTemplateRef1168); 
 
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:266:35: (as= argExprList )?
-                    int alt31=2;
-                    int LA31_0 = input.LA(1);
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:284:35: (as= argExprList )?
+                    int alt34=2;
+                    int LA34_0 = input.LA(1);
 
-                    if ( (LA31_0==LBRACK||LA31_0==LCURLY||(LA31_0 >= ID && LA31_0 <= STRING)||(LA31_0 >= TRUE && LA31_0 <= FALSE)) ) {
-                        alt31=1;
+                    if ( (LA34_0==LBRACK||LA34_0==LCURLY||(LA34_0 >= ID && LA34_0 <= STRING)||(LA34_0 >= TRUE && LA34_0 <= FALSE)) ) {
+                        alt34=1;
                     }
-                    else if ( (LA31_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
-                        alt31=1;
+                    else if ( (LA34_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
+                        alt34=1;
                     }
-                    switch (alt31) {
+                    switch (alt34) {
                         case 1 :
-                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:266:35: as= argExprList
+                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:284:35: as= argExprList
                             {
-                            pushFollow(FOLLOW_argExprList_in_mapTemplateRef1047);
+                            pushFollow(FOLLOW_argExprList_in_mapTemplateRef1172);
                             as=argExprList();
 
                             state._fsp--;
@@ -2191,7 +2401,7 @@ public class SParser extends Parser {
                     }
 
 
-                    match(input,RPAREN,FOLLOW_RPAREN_in_mapTemplateRef1050); 
+                    match(input,RPAREN,FOLLOW_RPAREN_in_mapTemplateRef1175); 
 
                     v=c.opInclude(c.opLocal(v("group")),me,data,as);
 
@@ -2213,7 +2423,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "mapTemplateRefListParams"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:269:1: mapTemplateRefListParams[ List<Expr> dataList] returns [Expr v] : ( ID '(' as= args ')' |st= subtemplate |lp= '(' me= mapExpr rp= ')' '(' (as= argExprList )? ')' );
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:287:1: mapTemplateRefListParams[ List<Expr> dataList] returns [Expr v] : ( ID '(' as= args ')' |st= subtemplate |lp= '(' me= mapExpr rp= ')' '(' (as= argExprList )? ')' );
     public final Expr mapTemplateRefListParams(List<Expr> dataList) throws RecognitionException {
         Expr v = null;
 
@@ -2229,56 +2439,56 @@ public class SParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:270:3: ( ID '(' as= args ')' |st= subtemplate |lp= '(' me= mapExpr rp= ')' '(' (as= argExprList )? ')' )
-            int alt34=3;
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:288:3: ( ID '(' as= args ')' |st= subtemplate |lp= '(' me= mapExpr rp= ')' '(' (as= argExprList )? ')' )
+            int alt37=3;
             switch ( input.LA(1) ) {
             case ID:
                 {
-                alt34=1;
+                alt37=1;
                 }
                 break;
             case LCURLY:
                 {
-                alt34=2;
+                alt37=2;
                 }
                 break;
             case LPAREN:
                 {
-                alt34=3;
+                alt37=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 34, 0, input);
+                    new NoViableAltException("", 37, 0, input);
 
                 throw nvae;
 
             }
 
-            switch (alt34) {
+            switch (alt37) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:270:5: ID '(' as= args ')'
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:288:5: ID '(' as= args ')'
                     {
-                    ID5=(CommonToken)match(input,ID,FOLLOW_ID_in_mapTemplateRefListParams1070); 
+                    ID5=(CommonToken)match(input,ID,FOLLOW_ID_in_mapTemplateRefListParams1195); 
 
-                    match(input,LPAREN,FOLLOW_LPAREN_in_mapTemplateRefListParams1072); 
+                    match(input,LPAREN,FOLLOW_LPAREN_in_mapTemplateRefListParams1197); 
 
-                    pushFollow(FOLLOW_args_in_mapTemplateRefListParams1076);
+                    pushFollow(FOLLOW_args_in_mapTemplateRefListParams1201);
                     as=args();
 
                     state._fsp--;
 
 
-                    match(input,RPAREN,FOLLOW_RPAREN_in_mapTemplateRefListParams1078); 
+                    match(input,RPAREN,FOLLOW_RPAREN_in_mapTemplateRefListParams1203); 
 
                     v=c.opInclude(c.opLocal(v("group")),c.opName((ID5!=null?ID5.getText():null)),dataList,as);
 
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:271:5: st= subtemplate
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:289:5: st= subtemplate
                     {
-                    pushFollow(FOLLOW_subtemplate_in_mapTemplateRefListParams1100);
+                    pushFollow(FOLLOW_subtemplate_in_mapTemplateRefListParams1225);
                     st=subtemplate();
 
                     state._fsp--;
@@ -2289,35 +2499,35 @@ public class SParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:272:5: lp= '(' me= mapExpr rp= ')' '(' (as= argExprList )? ')'
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:290:5: lp= '(' me= mapExpr rp= ')' '(' (as= argExprList )? ')'
                     {
-                    lp=(CommonToken)match(input,LPAREN,FOLLOW_LPAREN_in_mapTemplateRefListParams1115); 
+                    lp=(CommonToken)match(input,LPAREN,FOLLOW_LPAREN_in_mapTemplateRefListParams1240); 
 
-                    pushFollow(FOLLOW_mapExpr_in_mapTemplateRefListParams1119);
+                    pushFollow(FOLLOW_mapExpr_in_mapTemplateRefListParams1244);
                     me=mapExpr();
 
                     state._fsp--;
 
 
-                    rp=(CommonToken)match(input,RPAREN,FOLLOW_RPAREN_in_mapTemplateRefListParams1123); 
+                    rp=(CommonToken)match(input,RPAREN,FOLLOW_RPAREN_in_mapTemplateRefListParams1248); 
 
-                    match(input,LPAREN,FOLLOW_LPAREN_in_mapTemplateRefListParams1125); 
+                    match(input,LPAREN,FOLLOW_LPAREN_in_mapTemplateRefListParams1250); 
 
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:272:36: (as= argExprList )?
-                    int alt33=2;
-                    int LA33_0 = input.LA(1);
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:290:36: (as= argExprList )?
+                    int alt36=2;
+                    int LA36_0 = input.LA(1);
 
-                    if ( (LA33_0==LBRACK||LA33_0==LCURLY||(LA33_0 >= ID && LA33_0 <= STRING)||(LA33_0 >= TRUE && LA33_0 <= FALSE)) ) {
-                        alt33=1;
+                    if ( (LA36_0==LBRACK||LA36_0==LCURLY||(LA36_0 >= ID && LA36_0 <= STRING)||(LA36_0 >= TRUE && LA36_0 <= FALSE)) ) {
+                        alt36=1;
                     }
-                    else if ( (LA33_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
-                        alt33=1;
+                    else if ( (LA36_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
+                        alt36=1;
                     }
-                    switch (alt33) {
+                    switch (alt36) {
                         case 1 :
-                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:272:36: as= argExprList
+                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:290:36: as= argExprList
                             {
-                            pushFollow(FOLLOW_argExprList_in_mapTemplateRefListParams1129);
+                            pushFollow(FOLLOW_argExprList_in_mapTemplateRefListParams1254);
                             as=argExprList();
 
                             state._fsp--;
@@ -2329,7 +2539,7 @@ public class SParser extends Parser {
                     }
 
 
-                    match(input,RPAREN,FOLLOW_RPAREN_in_mapTemplateRefListParams1132); 
+                    match(input,RPAREN,FOLLOW_RPAREN_in_mapTemplateRefListParams1257); 
 
                     v=c.opInclude(c.opLocal(v("group")),me,dataList,as);
 
@@ -2351,7 +2561,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "memberExpr"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:275:1: memberExpr returns [Expr v] : (ie= includeExpr ) (p= '.' ID )* ;
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:293:1: memberExpr returns [Expr v] : (ie= includeExpr ) (p= '.' ID )* ;
     public final Expr memberExpr() throws RecognitionException {
         Expr v = null;
 
@@ -2362,13 +2572,13 @@ public class SParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:276:2: ( (ie= includeExpr ) (p= '.' ID )* )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:276:4: (ie= includeExpr ) (p= '.' ID )*
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:294:2: ( (ie= includeExpr ) (p= '.' ID )* )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:294:4: (ie= includeExpr ) (p= '.' ID )*
             {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:276:4: (ie= includeExpr )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:276:5: ie= includeExpr
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:294:4: (ie= includeExpr )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:294:5: ie= includeExpr
             {
-            pushFollow(FOLLOW_includeExpr_in_memberExpr1154);
+            pushFollow(FOLLOW_includeExpr_in_memberExpr1279);
             ie=includeExpr();
 
             state._fsp--;
@@ -2379,24 +2589,24 @@ public class SParser extends Parser {
             }
 
 
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:277:3: (p= '.' ID )*
-            loop35:
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:295:3: (p= '.' ID )*
+            loop38:
             do {
-                int alt35=2;
-                int LA35_0 = input.LA(1);
+                int alt38=2;
+                int LA38_0 = input.LA(1);
 
-                if ( (LA35_0==DOT) ) {
-                    alt35=1;
+                if ( (LA38_0==DOT) ) {
+                    alt38=1;
                 }
 
 
-                switch (alt35) {
+                switch (alt38) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:277:5: p= '.' ID
+            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:295:5: p= '.' ID
             	    {
-            	    p=(CommonToken)match(input,DOT,FOLLOW_DOT_in_memberExpr1166); 
+            	    p=(CommonToken)match(input,DOT,FOLLOW_DOT_in_memberExpr1291); 
 
-            	    ID6=(CommonToken)match(input,ID,FOLLOW_ID_in_memberExpr1168); 
+            	    ID6=(CommonToken)match(input,ID,FOLLOW_ID_in_memberExpr1293); 
 
             	    v=c.opFieldOf(v,(ID6!=null?ID6.getText():null));
 
@@ -2404,7 +2614,7 @@ public class SParser extends Parser {
             	    break;
 
             	default :
-            	    break loop35;
+            	    break loop38;
                 }
             } while (true);
 
@@ -2425,7 +2635,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "includeExpr"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:282:1: includeExpr returns [Expr v] options {k=2; } : ({...}? ID '(' ( expr )? ')' | ID '(' as= args ')' |p= primary );
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:300:1: includeExpr returns [Expr v] options {k=2; } : ({...}? ID '(' ( expr )? ')' | ID '(' as= args ')' |p= primary );
     public final Expr includeExpr() throws RecognitionException {
         Expr v = null;
 
@@ -2437,81 +2647,81 @@ public class SParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:284:2: ({...}? ID '(' ( expr )? ')' | ID '(' as= args ')' |p= primary )
-            int alt37=3;
-            int LA37_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:302:2: ({...}? ID '(' ( expr )? ')' | ID '(' as= args ')' |p= primary )
+            int alt40=3;
+            int LA40_0 = input.LA(1);
 
-            if ( (LA37_0==ID) ) {
-                int LA37_1 = input.LA(2);
+            if ( (LA40_0==ID) ) {
+                int LA40_1 = input.LA(2);
 
-                if ( (LA37_1==LPAREN) ) {
-                    int LA37_8 = input.LA(3);
+                if ( (LA40_1==LPAREN) ) {
+                    int LA40_8 = input.LA(3);
 
                     if ( ((Compiler.funcs.containsKey(input.LT(1).getText()))) ) {
-                        alt37=1;
+                        alt40=1;
                     }
                     else if ( (true) ) {
-                        alt37=2;
+                        alt40=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 37, 8, input);
+                            new NoViableAltException("", 40, 8, input);
 
                         throw nvae;
 
                     }
                 }
-                else if ( (LA37_1==SEMI||LA37_1==COLON||LA37_1==RPAREN||(LA37_1 >= RBRACK && LA37_1 <= DOT)||LA37_1==RDELIM||(LA37_1 >= OR && LA37_1 <= AND)) ) {
-                    alt37=3;
+                else if ( (LA40_1==SEMI||LA40_1==COLON||LA40_1==RPAREN||(LA40_1 >= RBRACK && LA40_1 <= DOT)||LA40_1==RDELIM||(LA40_1 >= OR && LA40_1 <= AND)) ) {
+                    alt40=3;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 37, 1, input);
+                        new NoViableAltException("", 40, 1, input);
 
                     throw nvae;
 
                 }
             }
-            else if ( (LA37_0==LBRACK||LA37_0==LCURLY||LA37_0==STRING||(LA37_0 >= TRUE && LA37_0 <= FALSE)) ) {
-                alt37=3;
+            else if ( (LA40_0==LBRACK||LA40_0==LCURLY||LA40_0==STRING||(LA40_0 >= TRUE && LA40_0 <= FALSE)) ) {
+                alt40=3;
             }
-            else if ( (LA37_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
-                alt37=3;
+            else if ( (LA40_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
+                alt40=3;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 37, 0, input);
+                    new NoViableAltException("", 40, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt37) {
+            switch (alt40) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:284:4: {...}? ID '(' ( expr )? ')'
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:302:4: {...}? ID '(' ( expr )? ')'
                     {
                     if ( !((Compiler.funcs.containsKey(input.LT(1).getText()))) ) {
                         throw new FailedPredicateException(input, "includeExpr", "Compiler.funcs.containsKey(input.LT(1).getText())");
                     }
 
-                    match(input,ID,FOLLOW_ID_in_includeExpr1211); 
+                    match(input,ID,FOLLOW_ID_in_includeExpr1336); 
 
-                    match(input,LPAREN,FOLLOW_LPAREN_in_includeExpr1213); 
+                    match(input,LPAREN,FOLLOW_LPAREN_in_includeExpr1338); 
 
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:285:10: ( expr )?
-                    int alt36=2;
-                    int LA36_0 = input.LA(1);
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:303:10: ( expr )?
+                    int alt39=2;
+                    int LA39_0 = input.LA(1);
 
-                    if ( (LA36_0==LBRACK||LA36_0==LCURLY||(LA36_0 >= ID && LA36_0 <= STRING)||(LA36_0 >= TRUE && LA36_0 <= FALSE)) ) {
-                        alt36=1;
+                    if ( (LA39_0==LBRACK||LA39_0==LCURLY||(LA39_0 >= ID && LA39_0 <= STRING)||(LA39_0 >= TRUE && LA39_0 <= FALSE)) ) {
+                        alt39=1;
                     }
-                    else if ( (LA36_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
-                        alt36=1;
+                    else if ( (LA39_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
+                        alt39=1;
                     }
-                    switch (alt36) {
+                    switch (alt39) {
                         case 1 :
-                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:285:10: expr
+                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:303:10: expr
                             {
-                            pushFollow(FOLLOW_expr_in_includeExpr1215);
+                            pushFollow(FOLLOW_expr_in_includeExpr1340);
                             expr();
 
                             state._fsp--;
@@ -2523,33 +2733,33 @@ public class SParser extends Parser {
                     }
 
 
-                    match(input,RPAREN,FOLLOW_RPAREN_in_includeExpr1218); 
+                    match(input,RPAREN,FOLLOW_RPAREN_in_includeExpr1343); 
 
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:287:4: ID '(' as= args ')'
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:305:4: ID '(' as= args ')'
                     {
-                    ID7=(CommonToken)match(input,ID,FOLLOW_ID_in_includeExpr1230); 
+                    ID7=(CommonToken)match(input,ID,FOLLOW_ID_in_includeExpr1355); 
 
-                    match(input,LPAREN,FOLLOW_LPAREN_in_includeExpr1232); 
+                    match(input,LPAREN,FOLLOW_LPAREN_in_includeExpr1357); 
 
-                    pushFollow(FOLLOW_args_in_includeExpr1236);
+                    pushFollow(FOLLOW_args_in_includeExpr1361);
                     as=args();
 
                     state._fsp--;
 
 
-                    match(input,RPAREN,FOLLOW_RPAREN_in_includeExpr1238); 
+                    match(input,RPAREN,FOLLOW_RPAREN_in_includeExpr1363); 
 
                     v=c.opInclude(c.opLocal(v("group")),c.opName((ID7!=null?ID7.getText():null)),as);
 
                     }
                     break;
                 case 3 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:290:4: p= primary
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:308:4: p= primary
                     {
-                    pushFollow(FOLLOW_primary_in_includeExpr1255);
+                    pushFollow(FOLLOW_primary_in_includeExpr1380);
                     p=primary();
 
                     state._fsp--;
@@ -2575,7 +2785,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "primary"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:293:1: primary returns [Expr v] : ( ID | STRING | TRUE | FALSE |st= subtemplate | list |{...}? => '(' conditional ')' |{...}? =>lp= '(' name= expr ')' ( '(' (as= argExprList )? ')' |) );
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:311:1: primary returns [Expr v] : ( ID | STRING | TRUE | FALSE |st= subtemplate | list |{...}? => '(' conditional ')' |{...}? =>lp= '(' name= expr ')' ( '(' (as= argExprList )? ')' |) );
     public final Expr primary() throws RecognitionException {
         Expr v = null;
 
@@ -2591,40 +2801,40 @@ public class SParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:294:2: ( ID | STRING | TRUE | FALSE |st= subtemplate | list |{...}? => '(' conditional ')' |{...}? =>lp= '(' name= expr ')' ( '(' (as= argExprList )? ')' |) )
-            int alt40=8;
-            int LA40_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:312:2: ( ID | STRING | TRUE | FALSE |st= subtemplate | list |{...}? => '(' conditional ')' |{...}? =>lp= '(' name= expr ')' ( '(' (as= argExprList )? ')' |) )
+            int alt43=8;
+            int LA43_0 = input.LA(1);
 
-            if ( (LA40_0==ID) ) {
-                alt40=1;
+            if ( (LA43_0==ID) ) {
+                alt43=1;
             }
-            else if ( (LA40_0==STRING) ) {
-                alt40=2;
+            else if ( (LA43_0==STRING) ) {
+                alt43=2;
             }
-            else if ( (LA40_0==TRUE) ) {
-                alt40=3;
+            else if ( (LA43_0==TRUE) ) {
+                alt43=3;
             }
-            else if ( (LA40_0==FALSE) ) {
-                alt40=4;
+            else if ( (LA43_0==FALSE) ) {
+                alt43=4;
             }
-            else if ( (LA40_0==LCURLY) ) {
-                alt40=5;
+            else if ( (LA43_0==LCURLY) ) {
+                alt43=5;
             }
-            else if ( (LA40_0==LBRACK) ) {
-                alt40=6;
+            else if ( (LA43_0==LBRACK) ) {
+                alt43=6;
             }
-            else if ( (LA40_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
-                int LA40_7 = input.LA(2);
+            else if ( (LA43_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
+                int LA43_7 = input.LA(2);
 
                 if ( ((conditional_stack.size()>0)) ) {
-                    alt40=7;
+                    alt43=7;
                 }
                 else if ( ((conditional_stack.size()==0)) ) {
-                    alt40=8;
+                    alt43=8;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 40, 7, input);
+                        new NoViableAltException("", 43, 7, input);
 
                     throw nvae;
 
@@ -2632,52 +2842,52 @@ public class SParser extends Parser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 40, 0, input);
+                    new NoViableAltException("", 43, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt40) {
+            switch (alt43) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:294:4: ID
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:312:4: ID
                     {
-                    ID8=(CommonToken)match(input,ID,FOLLOW_ID_in_primary1272); 
+                    ID8=(CommonToken)match(input,ID,FOLLOW_ID_in_primary1397); 
 
                     v=c.opArg(v("argv"),arg((ID8!=null?ID8.getText():null)));
 
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:295:4: STRING
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:313:4: STRING
                     {
-                    STRING9=(CommonToken)match(input,STRING,FOLLOW_STRING_in_primary1289); 
+                    STRING9=(CommonToken)match(input,STRING,FOLLOW_STRING_in_primary1414); 
 
                     v=c.opStringCst((STRING9!=null?STRING9.getText():null));
 
                     }
                     break;
                 case 3 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:296:4: TRUE
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:314:4: TRUE
                     {
-                    match(input,TRUE,FOLLOW_TRUE_in_primary1298); 
+                    match(input,TRUE,FOLLOW_TRUE_in_primary1423); 
 
                     v=c.opYesnoCst(true);
 
                     }
                     break;
                 case 4 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:297:4: FALSE
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:315:4: FALSE
                     {
-                    match(input,FALSE,FOLLOW_FALSE_in_primary1313); 
+                    match(input,FALSE,FOLLOW_FALSE_in_primary1438); 
 
                     v=c.opYesnoCst(false);
 
                     }
                     break;
                 case 5 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:298:4: st= subtemplate
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:316:4: st= subtemplate
                     {
-                    pushFollow(FOLLOW_subtemplate_in_primary1327);
+                    pushFollow(FOLLOW_subtemplate_in_primary1452);
                     st=subtemplate();
 
                     state._fsp--;
@@ -2688,9 +2898,9 @@ public class SParser extends Parser {
                     }
                     break;
                 case 6 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:299:4: list
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:317:4: list
                     {
-                    pushFollow(FOLLOW_list_in_primary1334);
+                    pushFollow(FOLLOW_list_in_primary1459);
                     list();
 
                     state._fsp--;
@@ -2699,79 +2909,79 @@ public class SParser extends Parser {
                     }
                     break;
                 case 7 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:300:4: {...}? => '(' conditional ')'
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:318:4: {...}? => '(' conditional ')'
                     {
                     if ( !((conditional_stack.size()>0)) ) {
                         throw new FailedPredicateException(input, "primary", "$conditional.size()>0");
                     }
 
-                    match(input,LPAREN,FOLLOW_LPAREN_in_primary1343); 
+                    match(input,LPAREN,FOLLOW_LPAREN_in_primary1468); 
 
-                    pushFollow(FOLLOW_conditional_in_primary1345);
+                    pushFollow(FOLLOW_conditional_in_primary1470);
                     conditional();
 
                     state._fsp--;
 
 
-                    match(input,RPAREN,FOLLOW_RPAREN_in_primary1347); 
+                    match(input,RPAREN,FOLLOW_RPAREN_in_primary1472); 
 
                     }
                     break;
                 case 8 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:301:4: {...}? =>lp= '(' name= expr ')' ( '(' (as= argExprList )? ')' |)
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:319:4: {...}? =>lp= '(' name= expr ')' ( '(' (as= argExprList )? ')' |)
                     {
                     if ( !((conditional_stack.size()==0)) ) {
                         throw new FailedPredicateException(input, "primary", "$conditional.size()==0");
                     }
 
-                    lp=(CommonToken)match(input,LPAREN,FOLLOW_LPAREN_in_primary1357); 
+                    lp=(CommonToken)match(input,LPAREN,FOLLOW_LPAREN_in_primary1482); 
 
-                    pushFollow(FOLLOW_expr_in_primary1361);
+                    pushFollow(FOLLOW_expr_in_primary1486);
                     name=expr();
 
                     state._fsp--;
 
 
-                    match(input,RPAREN,FOLLOW_RPAREN_in_primary1363); 
+                    match(input,RPAREN,FOLLOW_RPAREN_in_primary1488); 
 
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:301:54: ( '(' (as= argExprList )? ')' |)
-                    int alt39=2;
-                    int LA39_0 = input.LA(1);
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:319:54: ( '(' (as= argExprList )? ')' |)
+                    int alt42=2;
+                    int LA42_0 = input.LA(1);
 
-                    if ( (LA39_0==LPAREN) ) {
-                        alt39=1;
+                    if ( (LA42_0==LPAREN) ) {
+                        alt42=1;
                     }
-                    else if ( (LA39_0==SEMI||LA39_0==COLON||LA39_0==RPAREN||(LA39_0 >= RBRACK && LA39_0 <= DOT)||LA39_0==RDELIM||(LA39_0 >= OR && LA39_0 <= AND)) ) {
-                        alt39=2;
+                    else if ( (LA42_0==SEMI||LA42_0==COLON||LA42_0==RPAREN||(LA42_0 >= RBRACK && LA42_0 <= DOT)||LA42_0==RDELIM||(LA42_0 >= OR && LA42_0 <= AND)) ) {
+                        alt42=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 39, 0, input);
+                            new NoViableAltException("", 42, 0, input);
 
                         throw nvae;
 
                     }
-                    switch (alt39) {
+                    switch (alt42) {
                         case 1 :
-                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:301:56: '(' (as= argExprList )? ')'
+                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:319:56: '(' (as= argExprList )? ')'
                             {
-                            match(input,LPAREN,FOLLOW_LPAREN_in_primary1368); 
+                            match(input,LPAREN,FOLLOW_LPAREN_in_primary1493); 
 
-                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:301:62: (as= argExprList )?
-                            int alt38=2;
-                            int LA38_0 = input.LA(1);
+                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:319:62: (as= argExprList )?
+                            int alt41=2;
+                            int LA41_0 = input.LA(1);
 
-                            if ( (LA38_0==LBRACK||LA38_0==LCURLY||(LA38_0 >= ID && LA38_0 <= STRING)||(LA38_0 >= TRUE && LA38_0 <= FALSE)) ) {
-                                alt38=1;
+                            if ( (LA41_0==LBRACK||LA41_0==LCURLY||(LA41_0 >= ID && LA41_0 <= STRING)||(LA41_0 >= TRUE && LA41_0 <= FALSE)) ) {
+                                alt41=1;
                             }
-                            else if ( (LA38_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
-                                alt38=1;
+                            else if ( (LA41_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
+                                alt41=1;
                             }
-                            switch (alt38) {
+                            switch (alt41) {
                                 case 1 :
-                                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:301:62: as= argExprList
+                                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:319:62: as= argExprList
                                     {
-                                    pushFollow(FOLLOW_argExprList_in_primary1372);
+                                    pushFollow(FOLLOW_argExprList_in_primary1497);
                                     as=argExprList();
 
                                     state._fsp--;
@@ -2783,14 +2993,14 @@ public class SParser extends Parser {
                             }
 
 
-                            match(input,RPAREN,FOLLOW_RPAREN_in_primary1375); 
+                            match(input,RPAREN,FOLLOW_RPAREN_in_primary1500); 
 
                             v=c.opInclude(c.opLocal(v("group")),name,as);
 
                             }
                             break;
                         case 2 :
-                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:303:3: 
+                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:321:3: 
                             {
                             }
                             break;
@@ -2816,7 +3026,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "args"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:306:1: args returns [List<Argument> args] : (as= argExprList |a= namedArg ( ',' a= namedArg )* ( ',' '...' )? | '...' |);
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:324:1: args returns [List<Argument> args] : (as= argExprList |a= namedArg ( ',' a= namedArg )* ( ',' '...' )? | '...' |);
     public final List<Argument> args() throws RecognitionException {
         List<Argument> args = null;
 
@@ -2830,51 +3040,51 @@ public class SParser extends Parser {
           args = new ArrayList();
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:310:3: (as= argExprList |a= namedArg ( ',' a= namedArg )* ( ',' '...' )? | '...' |)
-            int alt43=4;
-            int LA43_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:328:3: (as= argExprList |a= namedArg ( ',' a= namedArg )* ( ',' '...' )? | '...' |)
+            int alt46=4;
+            int LA46_0 = input.LA(1);
 
-            if ( (LA43_0==ID) ) {
-                int LA43_1 = input.LA(2);
+            if ( (LA46_0==ID) ) {
+                int LA46_1 = input.LA(2);
 
-                if ( ((LA43_1 >= COLON && LA43_1 <= RPAREN)||(LA43_1 >= COMMA && LA43_1 <= DOT)) ) {
-                    alt43=1;
+                if ( ((LA46_1 >= COLON && LA46_1 <= RPAREN)||(LA46_1 >= COMMA && LA46_1 <= DOT)) ) {
+                    alt46=1;
                 }
-                else if ( (LA43_1==EQUALS) ) {
-                    alt43=2;
+                else if ( (LA46_1==EQUALS) ) {
+                    alt46=2;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 43, 1, input);
+                        new NoViableAltException("", 46, 1, input);
 
                     throw nvae;
 
                 }
             }
-            else if ( (LA43_0==LBRACK||LA43_0==LCURLY||LA43_0==STRING||(LA43_0 >= TRUE && LA43_0 <= FALSE)) ) {
-                alt43=1;
+            else if ( (LA46_0==LBRACK||LA46_0==LCURLY||LA46_0==STRING||(LA46_0 >= TRUE && LA46_0 <= FALSE)) ) {
+                alt46=1;
             }
-            else if ( (LA43_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
-                alt43=1;
+            else if ( (LA46_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
+                alt46=1;
             }
-            else if ( (LA43_0==ELLIPSIS) ) {
-                alt43=3;
+            else if ( (LA46_0==ELLIPSIS) ) {
+                alt46=3;
             }
-            else if ( (LA43_0==RPAREN) ) {
-                alt43=4;
+            else if ( (LA46_0==RPAREN) ) {
+                alt46=4;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 43, 0, input);
+                    new NoViableAltException("", 46, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt43) {
+            switch (alt46) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:310:5: as= argExprList
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:328:5: as= argExprList
                     {
-                    pushFollow(FOLLOW_argExprList_in_args1427);
+                    pushFollow(FOLLOW_argExprList_in_args1552);
                     as=argExprList();
 
                     state._fsp--;
@@ -2885,9 +3095,9 @@ public class SParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:311:4: a= namedArg ( ',' a= namedArg )* ( ',' '...' )?
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:329:4: a= namedArg ( ',' a= namedArg )* ( ',' '...' )?
                     {
-                    pushFollow(FOLLOW_namedArg_in_args1436);
+                    pushFollow(FOLLOW_namedArg_in_args1561);
                     a=namedArg();
 
                     state._fsp--;
@@ -2895,30 +3105,30 @@ public class SParser extends Parser {
 
                     c.opAddArgument(args,a);
 
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:311:41: ( ',' a= namedArg )*
-                    loop41:
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:329:41: ( ',' a= namedArg )*
+                    loop44:
                     do {
-                        int alt41=2;
-                        int LA41_0 = input.LA(1);
+                        int alt44=2;
+                        int LA44_0 = input.LA(1);
 
-                        if ( (LA41_0==COMMA) ) {
-                            int LA41_1 = input.LA(2);
+                        if ( (LA44_0==COMMA) ) {
+                            int LA44_1 = input.LA(2);
 
-                            if ( (LA41_1==ID) ) {
-                                alt41=1;
+                            if ( (LA44_1==ID) ) {
+                                alt44=1;
                             }
 
 
                         }
 
 
-                        switch (alt41) {
+                        switch (alt44) {
                     	case 1 :
-                    	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:311:43: ',' a= namedArg
+                    	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:329:43: ',' a= namedArg
                     	    {
-                    	    match(input,COMMA,FOLLOW_COMMA_in_args1441); 
+                    	    match(input,COMMA,FOLLOW_COMMA_in_args1566); 
 
-                    	    pushFollow(FOLLOW_namedArg_in_args1445);
+                    	    pushFollow(FOLLOW_namedArg_in_args1570);
                     	    a=namedArg();
 
                     	    state._fsp--;
@@ -2930,25 +3140,25 @@ public class SParser extends Parser {
                     	    break;
 
                     	default :
-                    	    break loop41;
+                    	    break loop44;
                         }
                     } while (true);
 
 
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:311:87: ( ',' '...' )?
-                    int alt42=2;
-                    int LA42_0 = input.LA(1);
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:329:87: ( ',' '...' )?
+                    int alt45=2;
+                    int LA45_0 = input.LA(1);
 
-                    if ( (LA42_0==COMMA) ) {
-                        alt42=1;
+                    if ( (LA45_0==COMMA) ) {
+                        alt45=1;
                     }
-                    switch (alt42) {
+                    switch (alt45) {
                         case 1 :
-                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:311:88: ',' '...'
+                            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:329:88: ',' '...'
                             {
-                            match(input,COMMA,FOLLOW_COMMA_in_args1452); 
+                            match(input,COMMA,FOLLOW_COMMA_in_args1577); 
 
-                            match(input,ELLIPSIS,FOLLOW_ELLIPSIS_in_args1454); 
+                            match(input,ELLIPSIS,FOLLOW_ELLIPSIS_in_args1579); 
 
                             }
                             break;
@@ -2959,14 +3169,14 @@ public class SParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:312:9: '...'
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:330:9: '...'
                     {
-                    match(input,ELLIPSIS,FOLLOW_ELLIPSIS_in_args1467); 
+                    match(input,ELLIPSIS,FOLLOW_ELLIPSIS_in_args1592); 
 
                     }
                     break;
                 case 4 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:314:2: 
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:332:2: 
                     {
                     }
                     break;
@@ -2986,7 +3196,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "argExprList"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:316:1: argExprList returns [List<Argument> args] : a= arg ( ',' a= arg )* ;
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:334:1: argExprList returns [List<Argument> args] : a= arg ( ',' a= arg )* ;
     public final List<Argument> argExprList() throws RecognitionException {
         List<Argument> args = null;
 
@@ -2998,10 +3208,10 @@ public class SParser extends Parser {
           args = new ArrayList();
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:320:3: (a= arg ( ',' a= arg )* )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:320:3: a= arg ( ',' a= arg )*
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:338:3: (a= arg ( ',' a= arg )* )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:338:3: a= arg ( ',' a= arg )*
             {
-            pushFollow(FOLLOW_arg_in_argExprList1491);
+            pushFollow(FOLLOW_arg_in_argExprList1616);
             a=arg();
 
             state._fsp--;
@@ -3009,24 +3219,24 @@ public class SParser extends Parser {
 
             c.opAddArgument(args,a);
 
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:320:35: ( ',' a= arg )*
-            loop44:
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:338:35: ( ',' a= arg )*
+            loop47:
             do {
-                int alt44=2;
-                int LA44_0 = input.LA(1);
+                int alt47=2;
+                int LA47_0 = input.LA(1);
 
-                if ( (LA44_0==COMMA) ) {
-                    alt44=1;
+                if ( (LA47_0==COMMA) ) {
+                    alt47=1;
                 }
 
 
-                switch (alt44) {
+                switch (alt47) {
             	case 1 :
-            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:320:37: ',' a= arg
+            	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:338:37: ',' a= arg
             	    {
-            	    match(input,COMMA,FOLLOW_COMMA_in_argExprList1496); 
+            	    match(input,COMMA,FOLLOW_COMMA_in_argExprList1621); 
 
-            	    pushFollow(FOLLOW_arg_in_argExprList1500);
+            	    pushFollow(FOLLOW_arg_in_argExprList1625);
             	    a=arg();
 
             	    state._fsp--;
@@ -3038,7 +3248,7 @@ public class SParser extends Parser {
             	    break;
 
             	default :
-            	    break loop44;
+            	    break loop47;
                 }
             } while (true);
 
@@ -3059,7 +3269,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "arg"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:322:1: arg returns [Argument v] : e= exprNoComma ;
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:340:1: arg returns [Argument v] : e= exprNoComma ;
     public final Argument arg() throws RecognitionException {
         Argument v = null;
 
@@ -3068,10 +3278,10 @@ public class SParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:322:27: (e= exprNoComma )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:322:29: e= exprNoComma
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:340:27: (e= exprNoComma )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:340:29: e= exprNoComma
             {
-            pushFollow(FOLLOW_exprNoComma_in_arg1521);
+            pushFollow(FOLLOW_exprNoComma_in_arg1646);
             e=exprNoComma();
 
             state._fsp--;
@@ -3095,7 +3305,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "namedArg"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:324:1: namedArg returns [Argument v] : ID '=' a= arg ;
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:342:1: namedArg returns [Argument v] : ID '=' a= arg ;
     public final Argument namedArg() throws RecognitionException {
         Argument v = null;
 
@@ -3105,14 +3315,14 @@ public class SParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:324:32: ( ID '=' a= arg )
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:324:34: ID '=' a= arg
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:342:32: ( ID '=' a= arg )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:342:34: ID '=' a= arg
             {
-            ID10=(CommonToken)match(input,ID,FOLLOW_ID_in_namedArg1537); 
+            ID10=(CommonToken)match(input,ID,FOLLOW_ID_in_namedArg1662); 
 
-            match(input,EQUALS,FOLLOW_EQUALS_in_namedArg1539); 
+            match(input,EQUALS,FOLLOW_EQUALS_in_namedArg1664); 
 
-            pushFollow(FOLLOW_arg_in_namedArg1543);
+            pushFollow(FOLLOW_arg_in_namedArg1668);
             a=arg();
 
             state._fsp--;
@@ -3136,41 +3346,41 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "list"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:326:1: list : ({...}?lb= '[' ']' |lb= '[' listElement ( ',' listElement )* ']' );
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:344:1: list : ({...}?lb= '[' ']' |lb= '[' listElement ( ',' listElement )* ']' );
     public final void list() throws RecognitionException {
         CommonToken lb=null;
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:326:5: ({...}?lb= '[' ']' |lb= '[' listElement ( ',' listElement )* ']' )
-            int alt46=2;
-            int LA46_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:344:5: ({...}?lb= '[' ']' |lb= '[' listElement ( ',' listElement )* ']' )
+            int alt49=2;
+            int LA49_0 = input.LA(1);
 
-            if ( (LA46_0==LBRACK) ) {
-                int LA46_1 = input.LA(2);
+            if ( (LA49_0==LBRACK) ) {
+                int LA49_1 = input.LA(2);
 
-                if ( (LA46_1==RBRACK) ) {
-                    int LA46_2 = input.LA(3);
+                if ( (LA49_1==RBRACK) ) {
+                    int LA49_2 = input.LA(3);
 
                     if ( ((input.LA(2)==RBRACK)) ) {
-                        alt46=1;
+                        alt49=1;
                     }
                     else if ( (true) ) {
-                        alt46=2;
+                        alt49=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 46, 2, input);
+                            new NoViableAltException("", 49, 2, input);
 
                         throw nvae;
 
                     }
                 }
-                else if ( (LA46_1==LPAREN||LA46_1==LBRACK||LA46_1==COMMA||LA46_1==LCURLY||(LA46_1 >= ID && LA46_1 <= STRING)||(LA46_1 >= TRUE && LA46_1 <= FALSE)) ) {
-                    alt46=2;
+                else if ( (LA49_1==LPAREN||LA49_1==LBRACK||LA49_1==COMMA||LA49_1==LCURLY||(LA49_1 >= ID && LA49_1 <= STRING)||(LA49_1 >= TRUE && LA49_1 <= FALSE)) ) {
+                    alt49=2;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 46, 1, input);
+                        new NoViableAltException("", 49, 1, input);
 
                     throw nvae;
 
@@ -3178,54 +3388,54 @@ public class SParser extends Parser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 46, 0, input);
+                    new NoViableAltException("", 49, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt46) {
+            switch (alt49) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:326:7: {...}?lb= '[' ']'
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:344:7: {...}?lb= '[' ']'
                     {
                     if ( !((input.LA(2)==RBRACK)) ) {
                         throw new FailedPredicateException(input, "list", "input.LA(2)==RBRACK");
                     }
 
-                    lb=(CommonToken)match(input,LBRACK,FOLLOW_LBRACK_in_list1560); 
+                    lb=(CommonToken)match(input,LBRACK,FOLLOW_LBRACK_in_list1685); 
 
-                    match(input,RBRACK,FOLLOW_RBRACK_in_list1562); 
+                    match(input,RBRACK,FOLLOW_RBRACK_in_list1687); 
 
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:328:4: lb= '[' listElement ( ',' listElement )* ']'
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:346:4: lb= '[' listElement ( ',' listElement )* ']'
                     {
-                    lb=(CommonToken)match(input,LBRACK,FOLLOW_LBRACK_in_list1570); 
+                    lb=(CommonToken)match(input,LBRACK,FOLLOW_LBRACK_in_list1695); 
 
-                    pushFollow(FOLLOW_listElement_in_list1572);
+                    pushFollow(FOLLOW_listElement_in_list1697);
                     listElement();
 
                     state._fsp--;
 
 
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:328:23: ( ',' listElement )*
-                    loop45:
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:346:23: ( ',' listElement )*
+                    loop48:
                     do {
-                        int alt45=2;
-                        int LA45_0 = input.LA(1);
+                        int alt48=2;
+                        int LA48_0 = input.LA(1);
 
-                        if ( (LA45_0==COMMA) ) {
-                            alt45=1;
+                        if ( (LA48_0==COMMA) ) {
+                            alt48=1;
                         }
 
 
-                        switch (alt45) {
+                        switch (alt48) {
                     	case 1 :
-                    	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:328:25: ',' listElement
+                    	    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:346:25: ',' listElement
                     	    {
-                    	    match(input,COMMA,FOLLOW_COMMA_in_list1576); 
+                    	    match(input,COMMA,FOLLOW_COMMA_in_list1701); 
 
-                    	    pushFollow(FOLLOW_listElement_in_list1578);
+                    	    pushFollow(FOLLOW_listElement_in_list1703);
                     	    listElement();
 
                     	    state._fsp--;
@@ -3235,12 +3445,12 @@ public class SParser extends Parser {
                     	    break;
 
                     	default :
-                    	    break loop45;
+                    	    break loop48;
                         }
                     } while (true);
 
 
-                    match(input,RBRACK,FOLLOW_RBRACK_in_list1583); 
+                    match(input,RBRACK,FOLLOW_RBRACK_in_list1708); 
 
                     }
                     break;
@@ -3260,7 +3470,7 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "listElement"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:331:1: listElement returns [Expr v] : (e= exprNoComma |);
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:349:1: listElement returns [Expr v] : (e= exprNoComma |);
     public final Expr listElement() throws RecognitionException {
         Expr v = null;
 
@@ -3269,31 +3479,31 @@ public class SParser extends Parser {
 
 
         try {
-            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:331:29: (e= exprNoComma |)
-            int alt47=2;
-            int LA47_0 = input.LA(1);
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:349:29: (e= exprNoComma |)
+            int alt50=2;
+            int LA50_0 = input.LA(1);
 
-            if ( (LA47_0==LBRACK||LA47_0==LCURLY||(LA47_0 >= ID && LA47_0 <= STRING)||(LA47_0 >= TRUE && LA47_0 <= FALSE)) ) {
-                alt47=1;
+            if ( (LA50_0==LBRACK||LA50_0==LCURLY||(LA50_0 >= ID && LA50_0 <= STRING)||(LA50_0 >= TRUE && LA50_0 <= FALSE)) ) {
+                alt50=1;
             }
-            else if ( (LA47_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
-                alt47=1;
+            else if ( (LA50_0==LPAREN) && (((conditional_stack.size()==0)||(conditional_stack.size()>0)))) {
+                alt50=1;
             }
-            else if ( ((LA47_0 >= RBRACK && LA47_0 <= COMMA)) ) {
-                alt47=2;
+            else if ( ((LA50_0 >= RBRACK && LA50_0 <= COMMA)) ) {
+                alt50=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 47, 0, input);
+                    new NoViableAltException("", 50, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt47) {
+            switch (alt50) {
                 case 1 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:331:31: e= exprNoComma
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:349:31: e= exprNoComma
                     {
-                    pushFollow(FOLLOW_exprNoComma_in_listElement1599);
+                    pushFollow(FOLLOW_exprNoComma_in_listElement1724);
                     e=exprNoComma();
 
                     state._fsp--;
@@ -3304,7 +3514,7 @@ public class SParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:331:66: 
+                    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:349:66: 
                     {
                     }
                     break;
@@ -3326,177 +3536,195 @@ public class SParser extends Parser {
 
  
 
-    public static final BitSet FOLLOW_template_in_templateAndEOF133 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_templateAndEOF136 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_element_in_template160 = new BitSet(new long[]{0x0000002180C00002L});
-    public static final BitSet FOLLOW_INDENT_in_element181 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_COMMENT_in_element184 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_NEWLINE_in_element186 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_INDENT_in_element192 = new BitSet(new long[]{0x0000002100C00000L});
-    public static final BitSet FOLLOW_singleElement_in_element196 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_singleElement_in_element205 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_compoundElement_in_element211 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_exprTag_in_singleElement227 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TEXT_in_singleElement235 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_NEWLINE_in_singleElement252 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_COMMENT_in_singleElement262 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ifstat_in_compoundElement274 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_region_in_compoundElement279 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LDELIM_in_exprTag293 = new BitSet(new long[]{0x0000001806114000L});
-    public static final BitSet FOLLOW_expr_in_exprTag297 = new BitSet(new long[]{0x0000000001000200L});
-    public static final BitSet FOLLOW_SEMI_in_exprTag301 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_exprOptions_in_exprTag303 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_RDELIM_in_exprTag308 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_INDENT_in_region331 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_LDELIM_in_region336 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_AT_in_region338 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_ID_in_region340 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_RDELIM_in_region342 = new BitSet(new long[]{0x0000002180C00000L});
-    public static final BitSet FOLLOW_template_in_region348 = new BitSet(new long[]{0x0000000080800000L});
-    public static final BitSet FOLLOW_INDENT_in_region352 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_LDELIM_in_region355 = new BitSet(new long[]{0x0000000400000000L});
-    public static final BitSet FOLLOW_END_in_region357 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_RDELIM_in_region359 = new BitSet(new long[]{0x0000000100000002L});
-    public static final BitSet FOLLOW_NEWLINE_in_region370 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LCURLY_in_subtemplate398 = new BitSet(new long[]{0x0000002182E00000L});
-    public static final BitSet FOLLOW_ID_in_subtemplate403 = new BitSet(new long[]{0x0000000010040000L});
-    public static final BitSet FOLLOW_COMMA_in_subtemplate409 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_ID_in_subtemplate413 = new BitSet(new long[]{0x0000000010040000L});
-    public static final BitSet FOLLOW_PIPE_in_subtemplate419 = new BitSet(new long[]{0x0000002180E00000L});
-    public static final BitSet FOLLOW_template_in_subtemplate426 = new BitSet(new long[]{0x0000000080200000L});
-    public static final BitSet FOLLOW_INDENT_in_subtemplate428 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_RCURLY_in_subtemplate436 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_INDENT_in_ifstat460 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_LDELIM_in_ifstat463 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_IF_in_ifstat465 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_LPAREN_in_ifstat467 = new BitSet(new long[]{0x0000001806114400L});
-    public static final BitSet FOLLOW_conditional_in_ifstat471 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RPAREN_in_ifstat473 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_RDELIM_in_ifstat475 = new BitSet(new long[]{0x0000002180C00000L});
-    public static final BitSet FOLLOW_template_in_ifstat484 = new BitSet(new long[]{0x0000000080800000L});
-    public static final BitSet FOLLOW_INDENT_in_ifstat491 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_LDELIM_in_ifstat494 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_ELSEIF_in_ifstat496 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_LPAREN_in_ifstat498 = new BitSet(new long[]{0x0000001806114400L});
-    public static final BitSet FOLLOW_conditional_in_ifstat500 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RPAREN_in_ifstat502 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_RDELIM_in_ifstat504 = new BitSet(new long[]{0x0000002180C00000L});
-    public static final BitSet FOLLOW_template_in_ifstat506 = new BitSet(new long[]{0x0000000080800000L});
-    public static final BitSet FOLLOW_INDENT_in_ifstat516 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_LDELIM_in_ifstat519 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ELSE_in_ifstat521 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_RDELIM_in_ifstat523 = new BitSet(new long[]{0x0000002180C00000L});
-    public static final BitSet FOLLOW_template_in_ifstat527 = new BitSet(new long[]{0x0000000080800000L});
-    public static final BitSet FOLLOW_INDENT_in_ifstat535 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_LDELIM_in_ifstat541 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_ENDIF_in_ifstat543 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_RDELIM_in_ifstat547 = new BitSet(new long[]{0x0000000100000002L});
-    public static final BitSet FOLLOW_NEWLINE_in_ifstat558 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_andConditional_in_conditional579 = new BitSet(new long[]{0x0000000020000002L});
-    public static final BitSet FOLLOW_OR_in_conditional583 = new BitSet(new long[]{0x0000001806114400L});
-    public static final BitSet FOLLOW_andConditional_in_conditional585 = new BitSet(new long[]{0x0000000020000002L});
-    public static final BitSet FOLLOW_notConditional_in_andConditional598 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_AND_in_andConditional602 = new BitSet(new long[]{0x0000001806114400L});
-    public static final BitSet FOLLOW_notConditional_in_andConditional604 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_BANG_in_notConditional617 = new BitSet(new long[]{0x0000001806114400L});
-    public static final BitSet FOLLOW_notConditional_in_notConditional619 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_memberExpr_in_notConditional624 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_notConditionalExpr636 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_DOT_in_notConditionalExpr646 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_ID_in_notConditionalExpr650 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_DOT_in_notConditionalExpr664 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_LPAREN_in_notConditionalExpr666 = new BitSet(new long[]{0x0000001806114000L});
-    public static final BitSet FOLLOW_mapExpr_in_notConditionalExpr668 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RPAREN_in_notConditionalExpr670 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_option_in_exprOptions689 = new BitSet(new long[]{0x0000000000040002L});
-    public static final BitSet FOLLOW_COMMA_in_exprOptions693 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_option_in_exprOptions695 = new BitSet(new long[]{0x0000000000040002L});
-    public static final BitSet FOLLOW_ID_in_option714 = new BitSet(new long[]{0x0000000000001002L});
-    public static final BitSet FOLLOW_EQUALS_in_option724 = new BitSet(new long[]{0x0000001806114000L});
-    public static final BitSet FOLLOW_exprNoComma_in_option726 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_memberExpr_in_exprNoComma785 = new BitSet(new long[]{0x0000000000002002L});
-    public static final BitSet FOLLOW_COLON_in_exprNoComma793 = new BitSet(new long[]{0x0000000002104000L});
-    public static final BitSet FOLLOW_mapTemplateRef_in_exprNoComma797 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_mapExpr_in_expr838 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_memberExpr_in_mapExpr862 = new BitSet(new long[]{0x0000000000042002L});
-    public static final BitSet FOLLOW_COMMA_in_mapExpr873 = new BitSet(new long[]{0x0000001806114000L});
-    public static final BitSet FOLLOW_memberExpr_in_mapExpr879 = new BitSet(new long[]{0x0000000000042000L});
-    public static final BitSet FOLLOW_COLON_in_mapExpr888 = new BitSet(new long[]{0x0000000002104000L});
-    public static final BitSet FOLLOW_mapTemplateRefListParams_in_mapExpr892 = new BitSet(new long[]{0x0000000000002002L});
-    public static final BitSet FOLLOW_COLON_in_mapExpr938 = new BitSet(new long[]{0x0000000002104000L});
-    public static final BitSet FOLLOW_mapTemplateRef_in_mapExpr942 = new BitSet(new long[]{0x0000000000042002L});
-    public static final BitSet FOLLOW_COMMA_in_mapExpr950 = new BitSet(new long[]{0x0000000002104000L});
-    public static final BitSet FOLLOW_mapTemplateRef_in_mapExpr954 = new BitSet(new long[]{0x0000000000042002L});
-    public static final BitSet FOLLOW_ID_in_mapTemplateRef997 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_LPAREN_in_mapTemplateRef999 = new BitSet(new long[]{0x000000180611C800L});
-    public static final BitSet FOLLOW_args_in_mapTemplateRef1003 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RPAREN_in_mapTemplateRef1005 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_subtemplate_in_mapTemplateRef1020 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LPAREN_in_mapTemplateRef1033 = new BitSet(new long[]{0x0000001806114000L});
-    public static final BitSet FOLLOW_mapExpr_in_mapTemplateRef1037 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RPAREN_in_mapTemplateRef1041 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_LPAREN_in_mapTemplateRef1043 = new BitSet(new long[]{0x000000180611C000L});
-    public static final BitSet FOLLOW_argExprList_in_mapTemplateRef1047 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RPAREN_in_mapTemplateRef1050 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_mapTemplateRefListParams1070 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_LPAREN_in_mapTemplateRefListParams1072 = new BitSet(new long[]{0x000000180611C800L});
-    public static final BitSet FOLLOW_args_in_mapTemplateRefListParams1076 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RPAREN_in_mapTemplateRefListParams1078 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_subtemplate_in_mapTemplateRefListParams1100 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LPAREN_in_mapTemplateRefListParams1115 = new BitSet(new long[]{0x0000001806114000L});
-    public static final BitSet FOLLOW_mapExpr_in_mapTemplateRefListParams1119 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RPAREN_in_mapTemplateRefListParams1123 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_LPAREN_in_mapTemplateRefListParams1125 = new BitSet(new long[]{0x000000180611C000L});
-    public static final BitSet FOLLOW_argExprList_in_mapTemplateRefListParams1129 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RPAREN_in_mapTemplateRefListParams1132 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_includeExpr_in_memberExpr1154 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_DOT_in_memberExpr1166 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_ID_in_memberExpr1168 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_ID_in_includeExpr1211 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_LPAREN_in_includeExpr1213 = new BitSet(new long[]{0x000000180611C000L});
-    public static final BitSet FOLLOW_expr_in_includeExpr1215 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RPAREN_in_includeExpr1218 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_includeExpr1230 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_LPAREN_in_includeExpr1232 = new BitSet(new long[]{0x000000180611C800L});
-    public static final BitSet FOLLOW_args_in_includeExpr1236 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RPAREN_in_includeExpr1238 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_primary_in_includeExpr1255 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_primary1272 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_STRING_in_primary1289 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TRUE_in_primary1298 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_FALSE_in_primary1313 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_subtemplate_in_primary1327 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_list_in_primary1334 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LPAREN_in_primary1343 = new BitSet(new long[]{0x0000001806114400L});
-    public static final BitSet FOLLOW_conditional_in_primary1345 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RPAREN_in_primary1347 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LPAREN_in_primary1357 = new BitSet(new long[]{0x0000001806114000L});
-    public static final BitSet FOLLOW_expr_in_primary1361 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RPAREN_in_primary1363 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_LPAREN_in_primary1368 = new BitSet(new long[]{0x000000180611C000L});
-    public static final BitSet FOLLOW_argExprList_in_primary1372 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RPAREN_in_primary1375 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_argExprList_in_args1427 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_namedArg_in_args1436 = new BitSet(new long[]{0x0000000000040002L});
-    public static final BitSet FOLLOW_COMMA_in_args1441 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_namedArg_in_args1445 = new BitSet(new long[]{0x0000000000040002L});
-    public static final BitSet FOLLOW_COMMA_in_args1452 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_ELLIPSIS_in_args1454 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ELLIPSIS_in_args1467 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_arg_in_argExprList1491 = new BitSet(new long[]{0x0000000000040002L});
-    public static final BitSet FOLLOW_COMMA_in_argExprList1496 = new BitSet(new long[]{0x0000001806114000L});
-    public static final BitSet FOLLOW_arg_in_argExprList1500 = new BitSet(new long[]{0x0000000000040002L});
-    public static final BitSet FOLLOW_exprNoComma_in_arg1521 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_namedArg1537 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_EQUALS_in_namedArg1539 = new BitSet(new long[]{0x0000001806114000L});
-    public static final BitSet FOLLOW_arg_in_namedArg1543 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LBRACK_in_list1560 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_RBRACK_in_list1562 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LBRACK_in_list1570 = new BitSet(new long[]{0x0000001806174000L});
-    public static final BitSet FOLLOW_listElement_in_list1572 = new BitSet(new long[]{0x0000000000060000L});
-    public static final BitSet FOLLOW_COMMA_in_list1576 = new BitSet(new long[]{0x0000001806174000L});
-    public static final BitSet FOLLOW_listElement_in_list1578 = new BitSet(new long[]{0x0000000000060000L});
-    public static final BitSet FOLLOW_RBRACK_in_list1583 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_exprNoComma_in_listElement1599 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_templateGroupDef_in_templateGroupFile128 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_templateGroupFile130 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_templateGroupDef163 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_LPAREN_in_templateGroupDef165 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_templateGroupDef166 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_ID_in_templateGroupDef176 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_LPAREN_in_templateGroupDef178 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_ID_in_templateGroupDef182 = new BitSet(new long[]{0x0000000000048000L});
+    public static final BitSet FOLLOW_COMMA_in_templateGroupDef188 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_ID_in_templateGroupDef192 = new BitSet(new long[]{0x0000000000048000L});
+    public static final BitSet FOLLOW_RPAREN_in_templateGroupDef199 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_COLON_in_templateGroupDef214 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_COLON_in_templateGroupDef215 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_EQUALS_in_templateGroupDef216 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_LDELIM_in_templateGroupDef220 = new BitSet(new long[]{0x0000002181C00000L});
+    public static final BitSet FOLLOW_template_in_templateGroupDef224 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_RDELIM_in_templateGroupDef226 = new BitSet(new long[]{0x0000000080000002L});
+    public static final BitSet FOLLOW_INDENT_in_templateGroupDef229 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_template_in_templateAndEOF258 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_templateAndEOF261 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_element_in_template285 = new BitSet(new long[]{0x0000002180C00002L});
+    public static final BitSet FOLLOW_INDENT_in_element306 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_COMMENT_in_element309 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_NEWLINE_in_element311 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_INDENT_in_element317 = new BitSet(new long[]{0x0000002100C00000L});
+    public static final BitSet FOLLOW_singleElement_in_element321 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_singleElement_in_element330 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_compoundElement_in_element336 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_exprTag_in_singleElement352 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TEXT_in_singleElement360 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NEWLINE_in_singleElement377 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_COMMENT_in_singleElement387 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ifstat_in_compoundElement399 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_region_in_compoundElement404 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LDELIM_in_exprTag418 = new BitSet(new long[]{0x0000001806114000L});
+    public static final BitSet FOLLOW_expr_in_exprTag422 = new BitSet(new long[]{0x0000000001000200L});
+    public static final BitSet FOLLOW_SEMI_in_exprTag426 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_exprOptions_in_exprTag428 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_RDELIM_in_exprTag433 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_INDENT_in_region456 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_LDELIM_in_region461 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_AT_in_region463 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_ID_in_region465 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_RDELIM_in_region467 = new BitSet(new long[]{0x0000002180C00000L});
+    public static final BitSet FOLLOW_template_in_region473 = new BitSet(new long[]{0x0000000080800000L});
+    public static final BitSet FOLLOW_INDENT_in_region477 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_LDELIM_in_region480 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_END_in_region482 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_RDELIM_in_region484 = new BitSet(new long[]{0x0000000100000002L});
+    public static final BitSet FOLLOW_NEWLINE_in_region495 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LCURLY_in_subtemplate523 = new BitSet(new long[]{0x0000002182E00000L});
+    public static final BitSet FOLLOW_ID_in_subtemplate528 = new BitSet(new long[]{0x0000000010040000L});
+    public static final BitSet FOLLOW_COMMA_in_subtemplate534 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_ID_in_subtemplate538 = new BitSet(new long[]{0x0000000010040000L});
+    public static final BitSet FOLLOW_PIPE_in_subtemplate544 = new BitSet(new long[]{0x0000002180E00000L});
+    public static final BitSet FOLLOW_template_in_subtemplate551 = new BitSet(new long[]{0x0000000080200000L});
+    public static final BitSet FOLLOW_INDENT_in_subtemplate553 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_RCURLY_in_subtemplate561 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_INDENT_in_ifstat585 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_LDELIM_in_ifstat588 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_IF_in_ifstat590 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_LPAREN_in_ifstat592 = new BitSet(new long[]{0x0000001806114400L});
+    public static final BitSet FOLLOW_conditional_in_ifstat596 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_ifstat598 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_RDELIM_in_ifstat600 = new BitSet(new long[]{0x0000002180C00000L});
+    public static final BitSet FOLLOW_template_in_ifstat609 = new BitSet(new long[]{0x0000000080800000L});
+    public static final BitSet FOLLOW_INDENT_in_ifstat616 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_LDELIM_in_ifstat619 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_ELSEIF_in_ifstat621 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_LPAREN_in_ifstat623 = new BitSet(new long[]{0x0000001806114400L});
+    public static final BitSet FOLLOW_conditional_in_ifstat625 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_ifstat627 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_RDELIM_in_ifstat629 = new BitSet(new long[]{0x0000002180C00000L});
+    public static final BitSet FOLLOW_template_in_ifstat631 = new BitSet(new long[]{0x0000000080800000L});
+    public static final BitSet FOLLOW_INDENT_in_ifstat641 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_LDELIM_in_ifstat644 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ELSE_in_ifstat646 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_RDELIM_in_ifstat648 = new BitSet(new long[]{0x0000002180C00000L});
+    public static final BitSet FOLLOW_template_in_ifstat652 = new BitSet(new long[]{0x0000000080800000L});
+    public static final BitSet FOLLOW_INDENT_in_ifstat660 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_LDELIM_in_ifstat666 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_ENDIF_in_ifstat668 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_RDELIM_in_ifstat672 = new BitSet(new long[]{0x0000000100000002L});
+    public static final BitSet FOLLOW_NEWLINE_in_ifstat683 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_andConditional_in_conditional704 = new BitSet(new long[]{0x0000000020000002L});
+    public static final BitSet FOLLOW_OR_in_conditional708 = new BitSet(new long[]{0x0000001806114400L});
+    public static final BitSet FOLLOW_andConditional_in_conditional710 = new BitSet(new long[]{0x0000000020000002L});
+    public static final BitSet FOLLOW_notConditional_in_andConditional723 = new BitSet(new long[]{0x0000000040000002L});
+    public static final BitSet FOLLOW_AND_in_andConditional727 = new BitSet(new long[]{0x0000001806114400L});
+    public static final BitSet FOLLOW_notConditional_in_andConditional729 = new BitSet(new long[]{0x0000000040000002L});
+    public static final BitSet FOLLOW_BANG_in_notConditional742 = new BitSet(new long[]{0x0000001806114400L});
+    public static final BitSet FOLLOW_notConditional_in_notConditional744 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_memberExpr_in_notConditional749 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_notConditionalExpr761 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_DOT_in_notConditionalExpr771 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_ID_in_notConditionalExpr775 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_DOT_in_notConditionalExpr789 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_LPAREN_in_notConditionalExpr791 = new BitSet(new long[]{0x0000001806114000L});
+    public static final BitSet FOLLOW_mapExpr_in_notConditionalExpr793 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_notConditionalExpr795 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_option_in_exprOptions814 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_COMMA_in_exprOptions818 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_option_in_exprOptions820 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_ID_in_option839 = new BitSet(new long[]{0x0000000000001002L});
+    public static final BitSet FOLLOW_EQUALS_in_option849 = new BitSet(new long[]{0x0000001806114000L});
+    public static final BitSet FOLLOW_exprNoComma_in_option851 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_memberExpr_in_exprNoComma910 = new BitSet(new long[]{0x0000000000002002L});
+    public static final BitSet FOLLOW_COLON_in_exprNoComma918 = new BitSet(new long[]{0x0000000002104000L});
+    public static final BitSet FOLLOW_mapTemplateRef_in_exprNoComma922 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_mapExpr_in_expr963 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_memberExpr_in_mapExpr987 = new BitSet(new long[]{0x0000000000042002L});
+    public static final BitSet FOLLOW_COMMA_in_mapExpr998 = new BitSet(new long[]{0x0000001806114000L});
+    public static final BitSet FOLLOW_memberExpr_in_mapExpr1004 = new BitSet(new long[]{0x0000000000042000L});
+    public static final BitSet FOLLOW_COLON_in_mapExpr1013 = new BitSet(new long[]{0x0000000002104000L});
+    public static final BitSet FOLLOW_mapTemplateRefListParams_in_mapExpr1017 = new BitSet(new long[]{0x0000000000002002L});
+    public static final BitSet FOLLOW_COLON_in_mapExpr1063 = new BitSet(new long[]{0x0000000002104000L});
+    public static final BitSet FOLLOW_mapTemplateRef_in_mapExpr1067 = new BitSet(new long[]{0x0000000000042002L});
+    public static final BitSet FOLLOW_COMMA_in_mapExpr1075 = new BitSet(new long[]{0x0000000002104000L});
+    public static final BitSet FOLLOW_mapTemplateRef_in_mapExpr1079 = new BitSet(new long[]{0x0000000000042002L});
+    public static final BitSet FOLLOW_ID_in_mapTemplateRef1122 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_LPAREN_in_mapTemplateRef1124 = new BitSet(new long[]{0x000000180611C800L});
+    public static final BitSet FOLLOW_args_in_mapTemplateRef1128 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_mapTemplateRef1130 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_subtemplate_in_mapTemplateRef1145 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LPAREN_in_mapTemplateRef1158 = new BitSet(new long[]{0x0000001806114000L});
+    public static final BitSet FOLLOW_mapExpr_in_mapTemplateRef1162 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_mapTemplateRef1166 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_LPAREN_in_mapTemplateRef1168 = new BitSet(new long[]{0x000000180611C000L});
+    public static final BitSet FOLLOW_argExprList_in_mapTemplateRef1172 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_mapTemplateRef1175 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_mapTemplateRefListParams1195 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_LPAREN_in_mapTemplateRefListParams1197 = new BitSet(new long[]{0x000000180611C800L});
+    public static final BitSet FOLLOW_args_in_mapTemplateRefListParams1201 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_mapTemplateRefListParams1203 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_subtemplate_in_mapTemplateRefListParams1225 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LPAREN_in_mapTemplateRefListParams1240 = new BitSet(new long[]{0x0000001806114000L});
+    public static final BitSet FOLLOW_mapExpr_in_mapTemplateRefListParams1244 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_mapTemplateRefListParams1248 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_LPAREN_in_mapTemplateRefListParams1250 = new BitSet(new long[]{0x000000180611C000L});
+    public static final BitSet FOLLOW_argExprList_in_mapTemplateRefListParams1254 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_mapTemplateRefListParams1257 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_includeExpr_in_memberExpr1279 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_DOT_in_memberExpr1291 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_ID_in_memberExpr1293 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_ID_in_includeExpr1336 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_LPAREN_in_includeExpr1338 = new BitSet(new long[]{0x000000180611C000L});
+    public static final BitSet FOLLOW_expr_in_includeExpr1340 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_includeExpr1343 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_includeExpr1355 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_LPAREN_in_includeExpr1357 = new BitSet(new long[]{0x000000180611C800L});
+    public static final BitSet FOLLOW_args_in_includeExpr1361 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_includeExpr1363 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_primary_in_includeExpr1380 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_primary1397 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_STRING_in_primary1414 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TRUE_in_primary1423 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_FALSE_in_primary1438 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_subtemplate_in_primary1452 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_list_in_primary1459 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LPAREN_in_primary1468 = new BitSet(new long[]{0x0000001806114400L});
+    public static final BitSet FOLLOW_conditional_in_primary1470 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_primary1472 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LPAREN_in_primary1482 = new BitSet(new long[]{0x0000001806114000L});
+    public static final BitSet FOLLOW_expr_in_primary1486 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_primary1488 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_LPAREN_in_primary1493 = new BitSet(new long[]{0x000000180611C000L});
+    public static final BitSet FOLLOW_argExprList_in_primary1497 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RPAREN_in_primary1500 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_argExprList_in_args1552 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_namedArg_in_args1561 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_COMMA_in_args1566 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_namedArg_in_args1570 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_COMMA_in_args1577 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_ELLIPSIS_in_args1579 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ELLIPSIS_in_args1592 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_arg_in_argExprList1616 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_COMMA_in_argExprList1621 = new BitSet(new long[]{0x0000001806114000L});
+    public static final BitSet FOLLOW_arg_in_argExprList1625 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_exprNoComma_in_arg1646 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_namedArg1662 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_EQUALS_in_namedArg1664 = new BitSet(new long[]{0x0000001806114000L});
+    public static final BitSet FOLLOW_arg_in_namedArg1668 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LBRACK_in_list1685 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_RBRACK_in_list1687 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LBRACK_in_list1695 = new BitSet(new long[]{0x0000001806174000L});
+    public static final BitSet FOLLOW_listElement_in_list1697 = new BitSet(new long[]{0x0000000000060000L});
+    public static final BitSet FOLLOW_COMMA_in_list1701 = new BitSet(new long[]{0x0000001806174000L});
+    public static final BitSet FOLLOW_listElement_in_list1703 = new BitSet(new long[]{0x0000000000060000L});
+    public static final BitSet FOLLOW_RBRACK_in_list1708 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_exprNoComma_in_listElement1724 = new BitSet(new long[]{0x0000000000000002L});
 
 }

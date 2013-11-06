@@ -1,6 +1,9 @@
 package http.resource;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 
 import junit.framework.TestCase;
@@ -14,11 +17,14 @@ import nebula.lang.SystemTypeLoader;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
 import nebula.simpletemplate.ST;
+import nebula.simpletemplate.STGroup;
+import nebula.simpletemplate.TemplateImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public class TypeSimpleTemplateResouceTest extends TestCase {
+    public static final String tmpdir = "tmp";//System.getProperty("java.io.tmpdir");
 	Log log = LogFactory.getLog(this.getClass());
 
 	// Configuration templateConfig;
@@ -95,30 +101,9 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 
 		ST st = new ST(template);
 		assertEquals(expected, st.render(type));
-		//
-		// int MAX = 1000;
-		// {
-		// String desc = "stringtemplate";
-		// // setUp
-		//
-		// // prepare
-		// long start, end, nanoAll, nanoEvery;
-		//
-		// start = System.nanoTime();
-		// for (int i = 0; i < MAX; i++) {
-		// st.render(type);
-		// }
-		// end = System.nanoTime();
-		// nanoAll = end - start;
-		// nanoEvery = nanoAll / MAX;
-		//
-		// System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n",
-		// desc, (nanoAll / (1000 * 1000)), +nanoEvery,
-		// 1000 * 1000 * 1000 / nanoEvery);
-		// }
 	}
 
-	public final void testLoadIssueType() throws Exception {
+	public final void testWithSubTemplate() throws Exception {
 		Type type = this.typeBrokers.getBroker("Person");
 		String template = "${type.fields : {f| { ${f.name} , ${f.type.name} ${f.key} ,${f.core} \\} }}";
 		String expected = "{ Name , Name true ,false } { Birthday , Birthday false ,false } { Height , Height false ,false } { Age , Age false ,false } { Sex , Sex false ,false } { Detail , Person$Detail false ,false } { Company , Company false ,false } { Roles1 , Text false ,false } { Roles2 , Long false ,false } { Roles3 , Date false ,false } { Roles4 , Time false ,false } { Education , Person$Education false ,false } ";
@@ -129,7 +114,63 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 		assertEquals(expected, st.render(type));
 	}
 
-	public final void testLoadIssueTypePer() throws Exception {
+	public final void testWithGroupFile() throws Exception {
+		Type type = this.typeBrokers.getBroker("Person");
+		// @formatter:off
+		String template = "type(type) ::= << ${type.name} ${type.fields : field()}>>\n" +
+				"field(f) ::= <<{ ${f.name} , ${f.type.name} ${f.key} ,${f.core} } >>\n";
+		// @formatter:on
+		String expected = "Person { Name , Name true ,false } { Birthday , Birthday false ,false } { Height , Height false ,false } { Age , Age false ,false } { Sex , Sex false ,false } { Detail , Person$Detail false ,false } { Company , Company false ,false } { Roles1 , Text false ,false } { Roles2 , Long false ,false } { Roles3 , Date false ,false } { Roles4 , Time false ,false } { Education , Person$Education false ,false } ";
+
+		writeFile(tmpdir, "type.stg", template);
+
+		STGroup group =STGroup.fromGroupFile(tmpdir + "/" + "type.stg");
+		TemplateImpl tmp = group.getTemplate("type");
+		
+		type = Broker.brokerOf(type).get();
+
+		assertEquals(expected, tmp.exec(type));
+	}
+
+
+	public final void testWithGroupFilePer() throws Exception {
+		Type type = this.typeBrokers.getBroker("Person");
+		// @formatter:off
+		String template = "type(type) ::= << ${type.name} ${type.fields : field()}>>\n" +
+				"field(f) ::= <<{ ${f.name} , ${f.type.name} ${f.key} ,${f.core} } >>\n";
+		// @formatter:on
+		String expected = "Person { Name , Name true ,false } { Birthday , Birthday false ,false } { Height , Height false ,false } { Age , Age false ,false } { Sex , Sex false ,false } { Detail , Person$Detail false ,false } { Company , Company false ,false } { Roles1 , Text false ,false } { Roles2 , Long false ,false } { Roles3 , Date false ,false } { Roles4 , Time false ,false } { Education , Person$Education false ,false } ";
+
+		writeFile(tmpdir, "type.stg", template);
+
+		STGroup group =STGroup.fromGroupFile(tmpdir + "/" + "type.stg");
+		TemplateImpl tmp = group.getTemplate("type");
+		
+		type = Broker.brokerOf(type).get();
+
+		assertEquals(expected, tmp.exec(type));
+		
+		int MAX=1000 *100;
+		{
+			String desc = "stringtemplate";
+			// setUp
+
+			// prepare
+			long start, end, nanoAll, nanoEvery;
+
+			start = System.nanoTime();
+			for (int i = 0; i < MAX; i++) {
+				tmp.exec(type);
+			}
+			end = System.nanoTime();
+			nanoAll = end - start;
+			nanoEvery = nanoAll / MAX;
+
+			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+					1000 * 1000 * 1000 / nanoEvery);
+		}
+	}
+/*	public final void testLoadIssueTypePer() throws Exception {
 		Type type = this.typeBrokers.getBroker("Person");
 		String template = "${type.fields : {f| { ${f.name} , ${f.type.name} ${f.key} ,${f.core} \\} }}";
 		String expected = "{ Name , Name true ,false } { Birthday , Birthday false ,false } { Height , Height false ,false } { Age , Age false ,false } { Sex , Sex false ,false } { Detail , Person$Detail false ,false } { Company , Company false ,false } { Roles1 , Text false ,false } { Roles2 , Long false ,false } { Roles3 , Date false ,false } { Roles4 , Time false ,false } { Education , Person$Education false ,false } ";
@@ -137,7 +178,7 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 		type = Broker.brokerOf(type).get();
 
 		ST st = new ST(template);
-		
+
 		int MAX = 1000 * 10;
 		{
 			String desc = "stringtemplate";
@@ -156,6 +197,23 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 
 			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
+		}
+	}
+*/
+
+	public static void writeFile(String dir, String fileName, String content) {
+		try {
+			File f = new File(dir, fileName);
+	        if ( !f.getParentFile().exists() ) f.getParentFile().mkdirs();
+			FileWriter w = new FileWriter(f);
+			BufferedWriter bw = new BufferedWriter(w);
+			bw.write(content);
+			bw.close();
+			w.close();
+		}
+		catch (IOException ioe) {
+			System.err.println("can't write file");
+			ioe.printStackTrace(System.err);
 		}
 	}
 }
