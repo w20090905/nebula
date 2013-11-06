@@ -29,6 +29,9 @@ public class TemplateImpl {
 		this.bytecodeWithKnownClass = ImmutableMap.of();
 		bufferes[0] = new StringBuilder(INITIAL_SIZE);
 		this.formalArguments = new String[] { "at" };
+		for (int i = 0; i < BUFFER_SIZE; i++) {
+			canuse[i] = true;
+		}
 	}
 
 	TemplateImpl(STGroup group, final Code code, List<String> arguments) {
@@ -37,6 +40,9 @@ public class TemplateImpl {
 		this.bytecodeWithKnownClass = ImmutableMap.of();
 		bufferes[0] = new StringBuilder(INITIAL_SIZE);
 		this.formalArguments = arguments.toArray(new String[0]);
+		for (int i = 0; i < BUFFER_SIZE; i++) {
+			canuse[i] = true;
+		}
 	}
 
 	TemplateImpl(STGroup group, final Code code, List<String> arguments, List<TemplateImpl> implicitlyDefinedTemplates) {
@@ -56,17 +62,19 @@ public class TemplateImpl {
 
 	static int INITIAL_SIZE = 128;
 	static int BUFFER_SIZE = 1;
+	static int BUFFER_MASK = BUFFER_SIZE - 1;
+
 	ReentrantLock lock = new ReentrantLock();
 
 	StringBuilder[] bufferes = new StringBuilder[BUFFER_SIZE];
-	final boolean[] used = new boolean[BUFFER_SIZE];
+	boolean[] canuse = new boolean[BUFFER_SIZE];
 	volatile int lastCanuse = 0;
 
-	int cntCount = 0;
+	int cntExec = 0;
 	int cntMiss = 0;
 
 	public String exec(Object... argv) {
-		cntCount++;
+		cntExec++;
 		String paramsNames = null;
 		if (argv.length == 1) {
 			paramsNames = argv[0].getClass().getName();
@@ -89,26 +97,37 @@ public class TemplateImpl {
 
 			int usedIndex = -1;
 			{// buffer string builder
-				int lastc = lastCanuse++;
-				lastCanuse = lastCanuse < BUFFER_SIZE ? lastCanuse : 0;
+				int lastc = lastCanuse++ & BUFFER_MASK;
 
-				if (!used[lastc]) {// 需要更加强健的代码，当然也要考量缓存机制是否划算。
+				if (canuse[lastc]) {// 需要更加强健的代码，当然也要考量缓存机制是否划算。
 					usedIndex = lastc;
-					used[usedIndex] = true;
-					if (bufferes[usedIndex] == null) {
-						bufferes[usedIndex] = new StringBuilder(bufferes[0].capacity());
-					}
+					canuse[usedIndex] = false;
 					sb = bufferes[usedIndex];
 				} else {
 					sb = new StringBuilder(bufferes[0].capacity());
 					cntMiss++;
-					if (cntCount / cntMiss < 10) {
-						StringBuilder[] last = bufferes;
-						bufferes = new StringBuilder[BUFFER_SIZE + 1];
-						for (int i = 0; i < BUFFER_SIZE; i++) {
-							bufferes[i] = last[i];
+					if (cntExec / cntMiss < 10) {
+						int lastBUFFER_SIZE = BUFFER_SIZE;
+						StringBuilder[] lastBufferes = bufferes;
+						boolean[] lastCanuse = canuse;
+
+						BUFFER_SIZE = BUFFER_SIZE + BUFFER_SIZE;
+
+						bufferes = new StringBuilder[BUFFER_SIZE];
+						canuse = new boolean[BUFFER_SIZE];
+
+						for (int i = 0; i < lastBUFFER_SIZE; i++) {
+							bufferes[i] = lastBufferes[i];
+							canuse[i] = lastCanuse[i];
+
 						}
-						BUFFER_SIZE++;
+						for (int i = lastBUFFER_SIZE; i < BUFFER_SIZE; i++) {
+							bufferes[i] = new StringBuilder(bufferes[0].capacity());
+							canuse[i] = true;
+						}
+
+						BUFFER_MASK = BUFFER_SIZE - 1;
+
 						cntMiss = 0;
 					}
 				}
@@ -120,7 +139,74 @@ public class TemplateImpl {
 			{// clear string builder
 				if (usedIndex >= 0) {
 					sb.setLength(0);
-					used[usedIndex] = false;
+					canuse[usedIndex] = true;
+				}
+			}
+			return result;
+		} catch (IOException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		}
+	}
+
+	public <T> String execList(Object... argv) {
+		cntExec++;
+		@SuppressWarnings("unchecked")
+		List<T> dataList = (List<T>) argv[0];
+		String paramsNames = dataList.get(0).getClass().getName();
+
+		try {
+			StringBuilder sb = null;
+
+			int usedIndex = -1;
+			{// buffer string builder
+				int lastc = lastCanuse++ & BUFFER_MASK;
+
+				if (canuse[lastc]) {// 需要更加强健的代码，当然也要考量缓存机制是否划算。
+					usedIndex = lastc;
+					canuse[usedIndex] = false;
+					sb = bufferes[usedIndex];
+				} else {
+					sb = new StringBuilder(bufferes[0].capacity());
+					cntMiss++;
+					if (cntExec / cntMiss < 10) {
+						int lastBUFFER_SIZE = BUFFER_SIZE;
+						StringBuilder[] lastBufferes = bufferes;
+						boolean[] lastCanuse = canuse;
+
+						BUFFER_SIZE = BUFFER_SIZE + BUFFER_SIZE;
+
+						bufferes = new StringBuilder[BUFFER_SIZE];
+						canuse = new boolean[BUFFER_SIZE];
+
+						for (int i = 0; i < lastBUFFER_SIZE; i++) {
+							bufferes[i] = lastBufferes[i];
+							canuse[i] = lastCanuse[i];
+
+						}
+						for (int i = lastBUFFER_SIZE; i < BUFFER_SIZE; i++) {
+							bufferes[i] = new StringBuilder(bufferes[0].capacity());
+							canuse[i] = true;
+						}
+
+						BUFFER_MASK = BUFFER_SIZE - 1;
+
+						cntMiss = 0;
+					}
+				}
+			}
+
+			for (int i = 0; i < dataList.size(); i++) {
+				argv[0] = dataList.get(i);
+				get(paramsNames, argv).exec(this.group, this, sb, argv);
+			}
+
+			String result = sb.toString();
+
+			{// clear string builder
+				if (usedIndex >= 0) {
+					sb.setLength(0);
+					canuse[usedIndex] = true;
 				}
 			}
 			return result;
@@ -132,7 +218,7 @@ public class TemplateImpl {
 
 	// 遍历对象
 	public <T> String execList(List<T> dataList, Object... argv) {
-		cntCount++;
+		cntExec++;
 
 		StringBuilder sbParams = new StringBuilder();
 		{
@@ -160,26 +246,37 @@ public class TemplateImpl {
 
 			int usedIndex = -1;
 			{// buffer string builder
-				int lastc = lastCanuse++;
-				lastCanuse = lastCanuse < BUFFER_SIZE ? lastCanuse : 0;
+				int lastc = lastCanuse++ & BUFFER_MASK;
 
-				if (!used[lastc]) {// 需要更加强健的代码，当然也要考量缓存机制是否划算。
+				if (canuse[lastc]) {// 需要更加强健的代码，当然也要考量缓存机制是否划算。
 					usedIndex = lastc;
-					used[usedIndex] = true;
-					if (bufferes[usedIndex] == null) {
-						bufferes[usedIndex] = new StringBuilder(bufferes[0].capacity());
-					}
+					canuse[usedIndex] = false;
 					sb = bufferes[usedIndex];
 				} else {
 					sb = new StringBuilder(bufferes[0].capacity());
 					cntMiss++;
-					if (cntCount / cntMiss < 10) {
-						StringBuilder[] last = bufferes;
-						bufferes = new StringBuilder[BUFFER_SIZE + 1];
-						for (int i = 0; i < BUFFER_SIZE; i++) {
-							bufferes[i] = last[i];
+					if (cntExec / cntMiss < 10) {
+						int lastBUFFER_SIZE = BUFFER_SIZE;
+						StringBuilder[] lastBufferes = bufferes;
+						boolean[] lastCanuse = canuse;
+
+						BUFFER_SIZE = BUFFER_SIZE + BUFFER_SIZE;
+
+						bufferes = new StringBuilder[BUFFER_SIZE];
+						canuse = new boolean[BUFFER_SIZE];
+
+						for (int i = 0; i < lastBUFFER_SIZE; i++) {
+							bufferes[i] = lastBufferes[i];
+							canuse[i] = lastCanuse[i];
+
 						}
-						BUFFER_SIZE++;
+						for (int i = lastBUFFER_SIZE; i < BUFFER_SIZE; i++) {
+							bufferes[i] = new StringBuilder(bufferes[0].capacity());
+							canuse[i] = true;
+						}
+
+						BUFFER_MASK = BUFFER_SIZE - 1;
+
 						cntMiss = 0;
 					}
 				}
@@ -195,7 +292,7 @@ public class TemplateImpl {
 			{// clear string builder
 				if (usedIndex >= 0) {
 					sb.setLength(0);
-					used[usedIndex] = false;
+					canuse[usedIndex] = true;
 				}
 			}
 			return result;

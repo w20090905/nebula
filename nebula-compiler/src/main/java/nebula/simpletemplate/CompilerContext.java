@@ -38,6 +38,7 @@ public class CompilerContext {
 			lock.unlock();
 		}
 	}
+
 	static public Arg get(Class<?> clz) {
 
 		Arg builder = bytecodeWithKnownClass.get(clz.getName());
@@ -138,6 +139,10 @@ public class CompilerContext {
 
 	public static Method getProp(String className, String name) {
 		return get(className).properties.get(name);
+	}
+
+	public static Method getProp(Class<?> clz, String name) {
+		return get(clz).properties.get(name);
 	}
 
 	public Arg getArg(int index) {

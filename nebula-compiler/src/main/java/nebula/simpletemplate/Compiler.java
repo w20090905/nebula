@@ -29,11 +29,11 @@ public class Compiler {
 			this.statements = statements;
 		}
 
-		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			for (Statement st : statements) {
 				st.compile(cw, mv, context);
 			}
-			return Type.VOID_TYPE;
+			return Void.TYPE;
 		}
 
 		@Override
@@ -75,22 +75,24 @@ public class Compiler {
 			this.expr = expr;
 		}
 
-		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			sb.compile(cw, mv, context);
 
-			Type type = expr.compile(cw, mv, context);
+			Class<?> clz = expr.compile(cw, mv, context);
 
-			if (String.class.getName().equals(type.getClassName())) {
+			if (String.class == clz) {
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;");
-			} else if (type.getSort() != Type.OBJECT) {
-				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + type.getDescriptor() + ")Ljava/lang/StringBuilder;");
+			} else if (clz.isPrimitive()) {
+				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + Type.getDescriptor(clz) + ")Ljava/lang/StringBuilder;");
+			} else if (StringBuilder.class == clz) {
+				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + Type.getDescriptor(clz) + ")Ljava/lang/StringBuilder;");
 			} else {
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + Type.getDescriptor(Object.class) + ")Ljava/lang/StringBuilder;");
 			}
 
 			mv.visitInsn(POP);
 
-			return Type.VOID_TYPE;
+			return Void.TYPE;
 		}
 
 		@Override
@@ -124,13 +126,13 @@ public class Compiler {
 			this.text = text;
 		}
 
-		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			mv.visitTypeInsn(NEW, "java/math/BigDecimal");
 			mv.visitInsn(DUP);
 			mv.visitLdcInsn(text);
 			mv.visitMethodInsn(INVOKESPECIAL, "java/math/BigDecimal", "<init>", "(Ljava/lang/String;)V");
 
-			return Type.getType(BigDecimal.class);
+			return BigDecimal.class;
 		}
 
 		@Override
@@ -200,21 +202,25 @@ public class Compiler {
 			this.name = name;
 		}
 
-		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			Type objType = e1.compile(cw, mv, context);
+		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+			Class<?> clz = e1.compile(cw, mv, context);
 
 			Method m = null;
-
-			if (Map.class.isAssignableFrom(objType.getClass())) {
+			if (Map.class.isAssignableFrom(clz)) {
 				mv.visitLdcInsn(name);
 				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get", "(Ljava/lang/Object;)Ljava/lang/Object;");
-				Type type = Type.getType(Object.class);
-				mv.visitTypeInsn(CHECKCAST, type.getInternalName());
-				return type;
-			} else if ((m = CompilerContext.getProp(objType.getClassName(), name)) != null) {
-				Type retType = Type.getReturnType(m);
-				mv.visitMethodInsn(INVOKEVIRTUAL, objType.getInternalName(), m.getName(), "()" + retType.getDescriptor());
-				return retType;
+				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(Object.class));
+				return Object.class;
+			} else if ((m = CompilerContext.getProp(clz, name)) != null) {
+				if (clz.isInterface()) {
+					Class<?> retClass = m.getReturnType();
+					mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(clz), m.getName(), "()" + Type.getDescriptor(retClass));
+					return retClass;
+				} else {
+					Class<?> retClass = m.getReturnType();
+					mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(clz), m.getName(), "()" + Type.getDescriptor(retClass));
+					return retClass;
+				}
 			} else {
 				throw new RuntimeException("Cannot find field " + name);
 			}
@@ -248,25 +254,40 @@ public class Compiler {
 			this.args = args;
 		}
 
-		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+
 			group.compile(cw, mv, context);
 			name.compile(cw, mv, context);
 			mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(STGroup.class), "getTemplate",
 					"(Ljava/lang/String;)" + Type.getDescriptor(TemplateImpl.class));
 
-			mv.visitIntInsn(BIPUSH, args.size());
-			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+			if (!List.class.isAssignableFrom(context.getArg(0).clz)) {
+				mv.visitIntInsn(BIPUSH, args.size());
+				mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
 
-			for (int i = 0; i < args.size(); i++) {
-				mv.visitInsn(DUP);
-				mv.visitIntInsn(BIPUSH, i);
-				args.get(i).value.compile(cw, mv, context);
-				mv.visitInsn(AASTORE);
+				for (int i = 0; i < args.size(); i++) {
+					mv.visitInsn(DUP);
+					mv.visitIntInsn(BIPUSH, i);
+					args.get(i).value.compile(cw, mv, context);
+					mv.visitInsn(AASTORE);
+				}
+
+				mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "exec", "([Ljava/lang/Object;)Ljava/lang/String;");
+			} else {
+				mv.visitIntInsn(BIPUSH, args.size());
+				mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+
+				for (int i = 0; i < args.size(); i++) {
+					mv.visitInsn(DUP);
+					mv.visitIntInsn(BIPUSH, i);
+					args.get(i).value.compile(cw, mv, context);
+					mv.visitInsn(AASTORE);
+				}
+
+				mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "execList", "([Ljava/lang/Object;)Ljava/lang/String;");
 			}
 
-			mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "exec", "([Ljava/lang/Object;)Ljava/lang/String;");
-
-			return Type.getType(String.class);
+			return String.class;
 		}
 
 		@Override
@@ -319,28 +340,37 @@ public class Compiler {
 			this.args = args;
 		}
 
-		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-
-			String getInternalNameTemplateImpl = Type.getInternalName(TemplateImpl.class);
+		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 
 			template.compile(cw, mv, context);
-			mv.visitFieldInsn(GETFIELD, getInternalNameTemplateImpl, "implicitlyDefinedTemplates", Type.getDescriptor(List.class));
+			mv.visitFieldInsn(GETFIELD, Type.getInternalName(TemplateImpl.class), "implicitlyDefinedTemplates", Type.getDescriptor(List.class));
 			mv.visitIntInsn(BIPUSH, subTemplateIndex);
 			mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
-			mv.visitTypeInsn(CHECKCAST, getInternalNameTemplateImpl);
+			mv.visitTypeInsn(CHECKCAST, Type.getInternalName(TemplateImpl.class));
+
 			mv.visitIntInsn(BIPUSH, args.size());
 			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
 
-			for (int i = 0; i < args.size(); i++) {
+			mv.visitInsn(DUP);
+			mv.visitIntInsn(BIPUSH, 0);
+			Class<?> firstType = args.get(0).value.compile(cw, mv, context);
+
+			mv.visitInsn(AASTORE);
+
+			for (int i = 1; i < args.size(); i++) {
 				mv.visitInsn(DUP);
 				mv.visitIntInsn(BIPUSH, i);
 				args.get(i).value.compile(cw, mv, context);
 				mv.visitInsn(AASTORE);
 			}
 
-			mv.visitMethodInsn(INVOKEVIRTUAL, getInternalNameTemplateImpl, "exec", "([Ljava/lang/Object;)Ljava/lang/String;");
+			if (!List.class.isAssignableFrom(firstType)) {
+				mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "exec", "([Ljava/lang/Object;)Ljava/lang/String;");
+			} else {
+				mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "execList", "([Ljava/lang/Object;)Ljava/lang/String;");
+			}
 
-			return Type.getType(String.class);
+			return String.class;
 		}
 
 		@Override
@@ -381,9 +411,9 @@ public class Compiler {
 			this.value = Long.parseLong(text);
 		}
 
-		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			mv.visitLdcInsn(value);
-			return Type.LONG_TYPE;
+			return Long.TYPE;
 		}
 
 		@Override
@@ -404,9 +434,9 @@ public class Compiler {
 			this.value = value;
 		}
 
-		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			mv.visitLdcInsn(value);
-			return Type.getType(String.class);
+			return String.class;
 		}
 
 		@Override
@@ -432,9 +462,9 @@ public class Compiler {
 			this.value = value;
 		}
 
-		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			mv.visitLdcInsn(value);
-			return Type.getType(String.class);
+			return String.class;
 		}
 
 		@Override
@@ -463,9 +493,9 @@ public class Compiler {
 		}
 
 		@Override
-		public Type compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
 			mv.visitVarInsn(ALOAD, var.index);
-			return var.type;
+			return null;
 		}
 
 		@Override
@@ -489,7 +519,7 @@ public class Compiler {
 		}
 
 		@Override
-		public Type compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
 			mv.visitVarInsn(ALOAD, argv.index);
 			switch (arg.index) {
 			case 0:
@@ -518,7 +548,7 @@ public class Compiler {
 			mv.visitInsn(AALOAD);
 			Arg a = context.getArg(arg.index);
 			mv.visitTypeInsn(CHECKCAST, Type.getInternalName(a.clz));
-			return Type.getType(a.clz);
+			return a.clz;
 		}
 
 		@Override
@@ -540,9 +570,9 @@ public class Compiler {
 			else this.value = 0;
 		}
 
-		public Type compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			mv.visitLdcInsn(value);
-			return Type.BOOLEAN_TYPE;
+			return Boolean.TYPE;
 		}
 
 		@Override

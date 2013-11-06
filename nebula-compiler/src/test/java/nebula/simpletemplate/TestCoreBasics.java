@@ -257,27 +257,27 @@ public class TestCoreBasics extends BaseTest {
 		assertEquals(expected, result);
 	}
 
-	public void testIncludeWithArg() throws Exception {
-		String template = "load <box(\"arg\")>;";
-		ST st = new ST(template);
-		st.impl.nativeGroup.defineTemplate("box", "x", "kewl <x> daddy");
-		st.impl.dump();
-		st.add("name", "Ter");
-		String expected = "load kewl arg daddy;";
-		String result = st.render();
-		assertEquals(expected, result);
-	}
-
-	public void testIncludeWithEmptySubtemplateArg() throws Exception {
-		String template = "load <box({})>;";
-		ST st = new ST(template);
-		st.impl.nativeGroup.defineTemplate("box", "x", "kewl <x> daddy");
-		st.impl.dump();
-		st.add("name", "Ter");
-		String expected = "load kewl  daddy;";
-		String result = st.render();
-		assertEquals(expected, result);
-	}
+//	public void testIncludeWithArg() throws Exception {
+//		String template = "load <box(\"arg\")>;";
+//		ST st = new ST(template);
+//		st.impl.nativeGroup.defineTemplate("box", "x", "kewl <x> daddy");
+//		st.impl.dump();
+//		st.add("name", "Ter");
+//		String expected = "load kewl arg daddy;";
+//		String result = st.render();
+//		assertEquals(expected, result);
+//	}
+//
+//	public void testIncludeWithEmptySubtemplateArg() throws Exception {
+//		String template = "load <box({})>;";
+//		ST st = new ST(template);
+//		st.impl.nativeGroup.defineTemplate("box", "x", "kewl <x> daddy");
+//		st.impl.dump();
+//		st.add("name", "Ter");
+//		String expected = "load kewl  daddy;";
+//		String result = st.render();
+//		assertEquals(expected, result);
+//	}
 
 	// public void testIncludeWithArg2() throws Exception {
 	// String template = "load <box(\"arg\", foo())>;";
