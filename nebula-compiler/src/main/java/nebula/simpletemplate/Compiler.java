@@ -636,6 +636,9 @@ public class Compiler {
 	}
 
 	public Expr<Object> opInclude(Expr<Object> group, Expr<String> name, Expr<Object> target, List<Argument> args) {
+		if (args == null) {
+			args = Lists.newArrayList();
+		}
 		args.add(0, new Argument(target));
 		return new Include(group, name, args);
 	}

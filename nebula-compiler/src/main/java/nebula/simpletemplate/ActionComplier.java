@@ -95,8 +95,9 @@ public class ActionComplier implements Opcodes {
 		if (code instanceof Compiler.Block && ((Compiler.Block) code).statements.size() == 0) {
 			return this.noop;
 		}
+		actionName = actionName.replace('.', '_');
 
-		String name = this.getClass().getSimpleName() + "_" + actionName + "_" + NamesEncoding.encode(actionName) + "_" + String.valueOf(count++);
+		String name = this.getClass().getSimpleName() + "_" + NamesEncoding.encode(actionName, false) + "_" + String.valueOf(count++);
 		try {
 			byte[] b = this.doCompile(name, code, context);
 			if (log.isDebugEnabled()) {

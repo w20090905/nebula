@@ -317,7 +317,11 @@ public class TemplateImpl {
 			if (builder != null) return builder;
 
 			CompilerContext c = new CompilerContext(argv);
-			builder = ActionComplier.DEFAULT.compile(c, "test", code);
+			if (this.name != null) {
+				builder = ActionComplier.DEFAULT.compile(c, this.name + "__" + paramsNames, code);
+			} else {
+				builder = ActionComplier.DEFAULT.compile(c, paramsNames, code);
+			}
 
 			ImmutableMap.Builder<String, Action> mapBuilder = ImmutableMap.builder();
 			bytecodeWithKnownClass = mapBuilder.putAll(bytecodeWithKnownClass).put(paramsNames, builder).build();
