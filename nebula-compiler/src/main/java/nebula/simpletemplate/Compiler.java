@@ -1,6 +1,7 @@
 package nebula.simpletemplate;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.List;
@@ -63,11 +64,26 @@ public class Compiler {
 			if (arg.index < context.arges.size()) {
 				a = context.getArg(arg.index);
 				if (a != null) {
-					mv.visitTypeInsn(CHECKCAST, Type.getInternalName(a.clz));
-					return a.clz;
+					if (Map.class.isAssignableFrom(a.clz)) {
+						mv.visitTypeInsn(CHECKCAST, Type.getInternalName(Map.class));
+						return a.clz;
+					} else if (List.class.isAssignableFrom(a.clz)) {
+						mv.visitTypeInsn(CHECKCAST, Type.getInternalName(List.class));
+						return a.clz;
+					} else if (String.class.isAssignableFrom(a.clz)) {
+						mv.visitTypeInsn(CHECKCAST, Type.getInternalName(String.class));
+						return String.class;
+					} else if (StringBuilder.class.isAssignableFrom(a.clz)) {
+						mv.visitTypeInsn(CHECKCAST, Type.getInternalName(StringBuilder.class));
+						return StringBuilder.class;
+					} else {
+						// mv.visitTypeInsn(CHECKCAST,
+						// Type.getInternalName(Object.class));
+						return a.clz;
+					}
 				}
 			}
-			return Void.TYPE;
+			return Object.class;
 		}
 
 		@Override
@@ -260,23 +276,31 @@ public class Compiler {
 			Class<?> clz = e1.compile(cw, mv, context);
 
 			Method m = null;
+			Field f = null;
 			if (Map.class.isAssignableFrom(clz)) {
 				mv.visitLdcInsn(name);
 				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get", "(Ljava/lang/Object;)Ljava/lang/Object;");
 				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(Object.class));
 				return Object.class;
 			} else if ((m = CompilerContext.getProp(clz, name)) != null) {
+				Class<?> retClass = m.getReturnType();
+				Class<?> defineClass = m.getDeclaringClass();
+				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(defineClass));
 				if (clz.isInterface()) {
-					Class<?> retClass = m.getReturnType();
-					mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(clz), m.getName(), "()" + Type.getDescriptor(retClass));
+					mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(defineClass), m.getName(), "()" + Type.getDescriptor(retClass));
 					return retClass;
 				} else {
-					Class<?> retClass = m.getReturnType();
-					mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(clz), m.getName(), "()" + Type.getDescriptor(retClass));
+					mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(defineClass), m.getName(), "()" + Type.getDescriptor(retClass));
 					return retClass;
 				}
+			} else if ((f = CompilerContext.getField(clz, name)) != null) {
+				Class<?> retClass = f.getType();
+				Class<?> defineClass = f.getDeclaringClass();
+				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(defineClass));
+				mv.visitFieldInsn(GETFIELD, Type.getInternalName(defineClass), name, Type.getDescriptor(retClass));
+				return retClass;
 			} else {
-				throw new RuntimeException("Cannot find field " + name);
+				throw new RuntimeException("Cannot find " + e1.toString(context) + "." + name);
 			}
 		}
 
@@ -318,23 +342,28 @@ public class Compiler {
 			mv.visitIntInsn(BIPUSH, args.size());
 			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
 
-			mv.visitInsn(DUP);
-			mv.visitIntInsn(BIPUSH, 0);
-			Class<?> firstType = args.get(0).value.compile(cw, mv, context);
+			if (args.size() > 0) {
 
-			mv.visitInsn(AASTORE);
-
-			for (int i = 1; i < args.size(); i++) {
 				mv.visitInsn(DUP);
-				mv.visitIntInsn(BIPUSH, i);
-				args.get(i).value.compile(cw, mv, context);
-				mv.visitInsn(AASTORE);
-			}
+				mv.visitIntInsn(BIPUSH, 0);
+				Class<?> firstType = args.get(0).value.compile(cw, mv, context);
 
-			if (!List.class.isAssignableFrom(firstType)) {
-				mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "exec", "([Ljava/lang/Object;)Ljava/lang/String;");
+				mv.visitInsn(AASTORE);
+
+				for (int i = 1; i < args.size(); i++) {
+					mv.visitInsn(DUP);
+					mv.visitIntInsn(BIPUSH, i);
+					args.get(i).value.compile(cw, mv, context);
+					mv.visitInsn(AASTORE);
+				}
+
+				if (!List.class.isAssignableFrom(firstType)) {
+					mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "exec", "([Ljava/lang/Object;)Ljava/lang/String;");
+				} else {
+					mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "execList", "([Ljava/lang/Object;)Ljava/lang/String;");
+				}
 			} else {
-				mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "execList", "([Ljava/lang/Object;)Ljava/lang/String;");
+				mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "exec", "([Ljava/lang/Object;)Ljava/lang/String;");
 			}
 			return String.class;
 		}
@@ -687,15 +716,75 @@ public class Compiler {
 
 			if (String.class == clz) {
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;");
+				mv.visitInsn(POP);
 			} else if (clz.isPrimitive()) {
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + Type.getDescriptor(clz) + ")Ljava/lang/StringBuilder;");
+				mv.visitInsn(POP);
 			} else if (StringBuilder.class == clz) {
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + Type.getDescriptor(clz) + ")Ljava/lang/StringBuilder;");
-			} else {
-				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + Type.getDescriptor(Object.class) + ")Ljava/lang/StringBuilder;");
-			}
+				mv.visitInsn(POP);
+			} else if (List.class.isAssignableFrom(clz)) {
 
-			mv.visitInsn(POP);
+				int locals = context.locals;
+
+				int listLocal = locals++;
+
+				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "iterator", "()Ljava/util/Iterator;");
+
+				mv.visitVarInsn(ASTORE, listLocal);
+				Label forCompare = new Label();
+				mv.visitJumpInsn(GOTO, forCompare);
+
+				Label forBegin = new Label();
+				mv.visitLabel(forBegin);
+				{
+					mv.visitVarInsn(ALOAD, listLocal);
+					mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "next", "()Ljava/lang/Object;");
+					mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/Object;)Ljava/lang/StringBuilder;");
+				}
+				mv.visitLabel(forCompare);
+				mv.visitVarInsn(ALOAD, listLocal);
+				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "hasNext", "()Z");
+				mv.visitJumpInsn(IFNE, forBegin);
+				// }
+				mv.visitInsn(POP); // pop StringBuilder from stack
+			} else if (Map.class.isAssignableFrom(clz)) {
+
+				int locals = context.locals;
+
+				int listLocal = locals++;
+
+				// // initial
+				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "values", "()Ljava/util/Collection;");
+				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Collection", "iterator", "()Ljava/util/Iterator;");
+
+				mv.visitVarInsn(ASTORE, listLocal);
+				Label forCompare = new Label();
+				mv.visitJumpInsn(GOTO, forCompare);
+
+				Label forBegin = new Label();
+				mv.visitLabel(forBegin);
+				{
+					mv.visitVarInsn(ALOAD, listLocal);
+					mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "next", "()Ljava/lang/Object;");
+					mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/Object;)Ljava/lang/StringBuilder;");
+				}
+				mv.visitLabel(forCompare);
+				mv.visitVarInsn(ALOAD, listLocal);
+				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "hasNext", "()Z");
+				mv.visitJumpInsn(IFNE, forBegin);
+				
+				mv.visitInsn(POP); // pop StringBuilder from stack
+			} else if (ST.class.isAssignableFrom(clz)) {
+				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(ST.class));
+				mv.visitMethodInsn(INVOKEVIRTUAL,  Type.getInternalName(ST.class), "render", "()Ljava/lang/String;");
+				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + Type.getDescriptor(String.class) + ")Ljava/lang/StringBuilder;");
+				mv.visitInsn(POP);
+			} else {
+				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(Object.class));
+				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + Type.getDescriptor(Object.class) + ")Ljava/lang/StringBuilder;");
+				mv.visitInsn(POP);
+			}
 
 			return Void.TYPE;
 		}
@@ -835,6 +924,24 @@ public class Compiler {
 	public void opAddArgument(List<Argument> list, Argument arg) {
 		arg.index = list.size();
 		list.add(arg);
+	}
+	
+	public void opAddArgument(final Var argv,final List<Argument> list, List<Var> srcArgs) {
+		
+		for(Var sa : srcArgs){
+//			boolean find = false;
+//			for (Argument da : list) {
+//				if(da.name.equals(sa.name) ){
+//					find=true;
+//					break;
+//				}
+//			}
+//			if(!find){
+				Argument da = new Argument(new ArgRefer(argv, sa));				
+				list.add(da);
+//			}
+		}
+		//TODO
 	}
 
 	public Expr<Object> opArg(Var argv, Var var) {

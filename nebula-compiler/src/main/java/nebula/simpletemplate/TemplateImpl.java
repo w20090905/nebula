@@ -13,7 +13,7 @@ import com.google.common.collect.ImmutableMap;
 public class TemplateImpl {
 
 	final static Log log = LogFactory.getLog(TemplateImpl.class);
-	STGroup group;
+	STGroup nativeGroup;
 
 	String[] formalArguments;
 
@@ -24,7 +24,7 @@ public class TemplateImpl {
 	Code code;
 
 	TemplateImpl(STGroup group, final Code code) {
-		this.group = group;
+		this.nativeGroup = group;
 		this.code = code;
 		this.bytecodeWithKnownClass = ImmutableMap.of();
 		bufferes[0] = new StringBuilder(INITIAL_SIZE);
@@ -35,7 +35,7 @@ public class TemplateImpl {
 	}
 
 	TemplateImpl(STGroup group, final Code code, List<String> arguments) {
-		this.group = group;
+		this.nativeGroup = group;
 		this.code = code;
 		this.bytecodeWithKnownClass = ImmutableMap.of();
 		bufferes[0] = new StringBuilder(INITIAL_SIZE);
@@ -76,7 +76,7 @@ public class TemplateImpl {
 	public String exec(Object... argv) {
 		cntExec++;
 		String paramsNames = null;
-		if (argv.length == 1 && argv[0] !=null) {
+		if (argv.length == 1 && argv[0] != null) {
 			paramsNames = argv[0].getClass().getName();
 		} else if (argv.length > 1) {
 			StringBuilder sbParams = new StringBuilder();
@@ -138,7 +138,7 @@ public class TemplateImpl {
 				argv = new Object[this.formalArguments.length];
 				System.arraycopy(lastArgv, 0, argv, 0, lastArgv.length);
 			}
-			get(paramsNames, argv).exec(this.group, this, sb, argv);
+			get(paramsNames, argv).exec(this.nativeGroup, this, sb, argv);
 			String result = sb.toString();
 
 			{// clear string builder
@@ -203,7 +203,7 @@ public class TemplateImpl {
 
 			for (int i = 0; i < dataList.size(); i++) {
 				argv[0] = dataList.get(i);
-				get(paramsNames, argv).exec(this.group, this, sb, argv);
+				get(paramsNames, argv).exec(this.nativeGroup, this, sb, argv);
 			}
 
 			String result = sb.toString();
@@ -289,7 +289,7 @@ public class TemplateImpl {
 
 			for (int i = 0; i < dataList.size(); i++) {
 				Object[] datas = new Object[] { dataList.get(i), argv, i };
-				get(paramsNames, datas).exec(this.group, this, sb, datas);
+				get(paramsNames, datas).exec(this.nativeGroup, this, sb, datas);
 			}
 
 			String result = sb.toString();

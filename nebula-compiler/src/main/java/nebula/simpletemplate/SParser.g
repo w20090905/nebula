@@ -327,7 +327,7 @@ options {k=2;} // prevent full LL(*), which fails, falling back on k=1; need k=2
 
 primary returns[Expr v]  
 	:	ID           {v=c.opArg(v("argv"),arg($ID.text));}
-	|	STRING   {v=c.opStringCst($STRING.text);}
+	|	STRING   {v=c.opStringCst(Misc.strip($STRING.text,1));}
 	|	TRUE       {v=c.opYesnoCst(true);}  
 	|	FALSE      {v=c.opYesnoCst(false);}
 	|	st=subtemplate {v= c.opInclude(c.opLocal(v("template")),st);}
@@ -344,7 +344,7 @@ args returns[List<Argument> args]
 }
   :	as=argExprList {args=as;}
 	|	a=namedArg{c.opAddArgument(args,a);} ( ',' a=namedArg{c.opAddArgument(args,a);} )* (',' '...')? // -> namedArg+ '...'?
-    |   '...'
+    |   '...'{c.opAddArgument(v("argv"),args,arges);}
 	|
 	;
 

@@ -1,6 +1,8 @@
 package nebula.simpletemplate;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -78,20 +80,29 @@ public class CompilerContext {
 						if (methodName.length() > 4) name += methodName.substring(4);
 						properties.put(name, m);
 					} else if (methodName.startsWith("has") && methodName.length() > 3 && Character.isUpperCase(methodName.charAt(3))
-							&& Boolean.class.equals(m.getReturnType())) {
+							&& Boolean.TYPE == m.getReturnType() ) {
 						String name = methodName.substring(3, 4).toLowerCase();
 						if (methodName.length() > 4) name += methodName.substring(4);
 						properties.put(name, m);
 
 					} else if (methodName.startsWith("is") && methodName.length() > 2 && Character.isUpperCase(methodName.charAt(2))
-							&& boolean.class.equals(m.getReturnType())) {
+							&& Boolean.TYPE ==m.getReturnType()) {
 						String name = methodName.substring(2, 3).toLowerCase();
 						if (methodName.length() > 3) name += methodName.substring(3);
 						properties.put(name, m);
 					}
 				}
+
+			}
+
+			Map<String, Field> fields = Maps.newHashMap();
+			for (Field m : clz.getFields()) {
+				if (Modifier.isPublic(m.getModifiers())) {
+					fields.put(m.getName(), m);
+				}
 			}
 			arg.properties = properties;
+			arg.fields = fields;
 		}
 		return arg;
 	}
@@ -135,6 +146,7 @@ public class CompilerContext {
 				this.arges.add(null);
 			}
 		}
+		this.locals = 5;
 	}
 
 	public static Method getProp(String className, String name) {
@@ -145,6 +157,10 @@ public class CompilerContext {
 		return get(clz).properties.get(name);
 	}
 
+	public static Field getField(Class<?> clz, String name) {
+		return get(clz).fields.get(name);
+	}
+
 	public Arg getArg(int index) {
 		return arges.get(index);
 	}
@@ -152,10 +168,12 @@ public class CompilerContext {
 	static class Arg {
 		Class<?> clz;
 		Map<String, Method> properties;
+		Map<String, Field> fields;
 		boolean map;
 		boolean list;
 	}
 
 	final List<Arg> arges;
+	int locals;
 
 }

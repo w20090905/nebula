@@ -14,22 +14,23 @@ import org.apache.commons.logging.LogFactory;
 import org.stringtemplate.v4.compiler.STLexer;
 import org.stringtemplate.v4.misc.ErrorManager;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 public class STGroup {
 	final static Log log = LogFactory.getLog(STGroup.class);
 
 	public static STGroup fromGroupFile(String filename) {
-		return fromGroupFile(filename, '$', '}');
+		return fromGroupFile(filename, '<', '>');
 	}
 
 	public static STGroup fromGroupFile(String filename, char delimiterStartChar, char delimiterStopChar) {
 		STGroup group = new STGroup(delimiterStartChar, delimiterStopChar);
-		group.parseGroupFile(filename, group);
+		group.parseGroupFile(filename);
 		return group;
 	}
 
-	private void parseGroupFile(String filename, STGroup group) {
+	protected void parseGroupFile(String filename) {
 		try {
 			GroupLexer lexer = new GroupLexer(new ANTLRFileStream(filename));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -42,8 +43,20 @@ public class STGroup {
 			log.error(e);
 			throw new RuntimeException(e);
 		}
-
 	}
+	
+	protected void parseGroupString(String template) {
+		try {
+			GroupLexer lexer = new GroupLexer(new ANTLRStringStream(template));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			GroupParser p = new GroupParser(tokens);
+			p.group(this, "");
+		} catch (RecognitionException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		}
+	}
+
 
 	public ErrorManager errMgr;
 	char delimiterStartChar, delimiterStopChar;
@@ -52,7 +65,7 @@ public class STGroup {
 	public static final String DEFAULT_KEY = "default";
 
 	public STGroup() {
-		this('$', '}');
+		this('<', '>');
 	}
 
 	public STGroup(char delimiterStartChar, char delimiterStopChar) {
@@ -90,7 +103,7 @@ public class STGroup {
 
 	public TemplateImpl parse(String name, String filepath) {
 		try {
-			STLexer lexer = new STLexer(org.stringtemplate.v4.STGroup.DEFAULT_ERR_MGR, new ANTLRFileStream(filepath), null, '$', '}');
+			STLexer lexer = new STLexer(org.stringtemplate.v4.STGroup.DEFAULT_ERR_MGR, new ANTLRFileStream(filepath), null, delimiterStartChar, delimiterStopChar);
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			SParser p = new SParser(tokens, this);
 			return p.templateAndEOF();
@@ -247,8 +260,21 @@ public class STGroup {
 		// }
 		// }
 		// }
-		code.group = this;
+		code.nativeGroup = this;
 		knownsTemplate.put(name, code);
 	}
 
+	public ST getInstanceOf(String string) {
+		return new ST(getTemplate(string));
+	}
+
+	public void defineTemplate(String name, String args, String template) {
+		List<FormalArgument> arges = Lists.newArrayList();
+		for (String n : args.split(",")) {
+			arges.add(new FormalArgument(n, null));
+		}
+
+		TemplateImpl code= this.parse(name, name, arges, template);
+		knownsTemplate.put(name, code);
+	}
 }

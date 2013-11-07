@@ -93,7 +93,7 @@ public class ST_BasicTest extends BasicTest {
 		
 		ST st = new ST(template,'$','}');
 		
-		 st.impl.group.defineTemplate("box", "kewl" + newline + "daddy");
+		 st.impl.nativeGroup.defineTemplate("box", "kewl" + newline + "daddy");
 
 		Map<String, Object> root = Maps.newHashMap();
 		root.put("xx", "wangshilian");

@@ -1,9 +1,10 @@
 package nebula.simpletemplate;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Map;
 
 public class TestCodePrimary implements Action {
-
 	@Override
 	public void exec(STGroup group, TemplateImpl template, StringBuilder out, Object[] argv) throws IOException {
 		{
@@ -15,22 +16,14 @@ public class TestCodePrimary implements Action {
 			out.append(1L);
 			out.append(false);
 			out.append(";");
-			int i = 1000;
-			if(group == null){
-				i = 1;
-			}else{
-				i = -9999;
-			}
+			Person p = new Person();
+			p.name = "1000";
+			String s = p.name;
 			
-			out.append("------");
-			boolean a = false;
-			
-			if(a){
-				i = 333;
-				
-			}else{
-
-				i = 0;
+			Map<String,Object> maps = null;
+			Collection<Object> c =  maps.values();
+			for (Object object : c) {
+				out.append(object);
 			}
 		}
 	}

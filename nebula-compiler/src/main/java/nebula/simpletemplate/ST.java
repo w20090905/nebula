@@ -1,8 +1,10 @@
 package nebula.simpletemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 public class ST {
@@ -48,6 +50,11 @@ public class ST {
 	 */
 	public ST(String template) {
 		this(STGroup.defaultGroup, template, '<', '>');
+	}
+
+	public ST(TemplateImpl template) {
+		groupThatCreatedThisInstance = template.nativeGroup;
+		impl = template;
 	}
 
 	public ST(String template, char delimiterStartChar, char delimiterStopChar) {
@@ -122,8 +129,59 @@ public class ST {
 
 	private Map<String, Object> datas = null;
 
-	public void add(String key, Object value) {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public ST add(String key, Object value) {
+		if (value == null) return this;
 		if (datas == null) datas = Maps.newHashMap();
-		datas.put(key, value);
+
+		if (!datas.containsKey(key)) {
+			if (value instanceof List) {
+				CustomList<Object> list = new CustomList();
+				List listValue = (List) value;
+				for (Object v : listValue) {
+					list.add(v);
+				}
+				datas.put(key, list);
+			} else if (value.getClass().isArray()) {
+				CustomList<Object> list = new CustomList();
+				Object[] listValue = (Object[]) value;
+				for (int i = 0; i < listValue.length; i++) {
+					list.add(listValue[i]);
+				}
+				datas.put(key, list);
+			} else {
+				datas.put(key, value);
+			}
+		} else {
+			Object o = datas.get(key);
+
+			CustomList<Object> list = null;
+			if (o instanceof CustomList) {
+				list = (CustomList) o;
+			} else {
+				list = new CustomList();
+				list.add(o);
+				datas.put(key, list);
+			}
+
+			if (value instanceof List) {
+				List listValue = (List) value;
+				for (Object v : listValue) {
+					list.add(v);
+				}
+			} else if (value.getClass().isArray()) {
+				Object[] listValue = (Object[]) value;
+				for (int i = 0; i < listValue.length; i++) {
+					list.add(listValue[i]);
+				}
+			} else {
+				list.add(value);
+			}
+		}
+		return this;
+	}
+
+	static public class CustomList<T> extends ArrayList<T> {
+		private static final long serialVersionUID = -5819856302643555224L;
 	}
 }
