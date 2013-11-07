@@ -31,6 +31,7 @@ public class BrokerBuilder {
 		instanceBuilder = new BrokerInstanceBuilderClassMaker();
 	}
 
+	static int count = 0;
 	public <T> T builder(Class<?> target) {
 
 		BrokerInstanceBuilder builder = knownBrokeres.get(target.getName());
@@ -49,7 +50,8 @@ public class BrokerBuilder {
 				return broker.get();
 			}
 
-			String typeName = target.getName() + "BrokerAuto";
+			count++;
+			String typeName = target.getName() + "BrokerAuto" + count;
 
 			// 构建代理类
 			{

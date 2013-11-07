@@ -72,7 +72,7 @@ public class TemplatePerformanceNow extends TestCase {
 
 		type = Broker.brokerOf(type).get();
 
-		ST st = new ST(template);
+		ST st = new ST(template,'$','}');
 
 		int MAX = 1000 * 5;
 		{

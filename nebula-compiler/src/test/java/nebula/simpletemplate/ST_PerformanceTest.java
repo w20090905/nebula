@@ -20,7 +20,7 @@ public class ST_PerformanceTest extends TestCase {
 			String expected = "<html>\r\n<head>\r\n<title>wangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilian</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
 			String text = "<html>\r\n<head>\r\n<title>${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
 
-			ST st = new ST(text);
+			ST st = new ST(text,'$','}');
 			String desc = "type";
 			// setUp
 			Person person = new Person();
@@ -46,7 +46,7 @@ public class ST_PerformanceTest extends TestCase {
 			String expected = "<html>\r\n<head>\r\n<title>wangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilian</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
 			String text = "<html>\r\n<head>\r\n<title>${name}${name}${name}${name}${name}${name}${name}${name}${name}${name}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
 
-			ST st = new ST(text);
+			ST st = new ST(text,'$','}');
 			String desc = "map";
 			// setUp
 			Map<String, String> root = Maps.newHashMap();
@@ -66,7 +66,8 @@ public class ST_PerformanceTest extends TestCase {
 			System.out.printf("[ %-20s ]\tAll :%8d ms; \tevery : %8d nano;\tone second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
-		MAX = 1000 * 10;
+		
+		MAX = 1000 * 1;
 		{
 			String expected = "<html>\r\n<head>\r\n<title>wangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilianwangshilian</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
 			String text = "<html>\r\n<head>\r\n<title>${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}${at.name}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
@@ -143,10 +144,10 @@ public class ST_PerformanceTest extends TestCase {
 		String expected = "<html>\r\n<head>\r\n<title>print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
 		String text = "<html>\r\n<head>\r\n<title>${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
 
-		int MAX = 1000 * 10;
+		int MAX = 1000 * 1;
 		{
 
-			ST st = new ST(text);
+			ST st = new ST(text,'$','}');
 			String desc = "sub temp";
 			// setUp
 			Map<String, String> root = Maps.newHashMap();

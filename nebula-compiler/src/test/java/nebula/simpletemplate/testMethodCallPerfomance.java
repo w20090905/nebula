@@ -15,7 +15,7 @@ public class testMethodCallPerfomance extends TestCase {
 
 		String name = (String) m.invoke(p);
 		assertEquals("wangshilian", name);
-		int MAX = 1000 * 1000 * 10;
+		int MAX = 1000 * 100;
 		{
 			String desc = "invoke";
 			// setUp

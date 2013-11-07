@@ -23,7 +23,7 @@ public class ActionComplier implements Opcodes {
 	static ActionComplier DEFAULT = new ActionComplier();
 
 	private ActionComplier() {
-		String name = "EntityActionNoop";
+		String name = this.getClass().getSimpleName() + "_nop_" + String.valueOf(count++);
 		try {
 			byte[] code = doCompile(name, new Compiler.Block(new ArrayList<Statement>()), null);
 			Class<?> expClass = NebulaClassLoader.defineClass(name, code);
