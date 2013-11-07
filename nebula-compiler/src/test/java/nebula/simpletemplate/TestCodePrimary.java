@@ -15,6 +15,23 @@ public class TestCodePrimary implements Action {
 			out.append(1L);
 			out.append(false);
 			out.append(";");
+			int i = 1000;
+			if(group == null){
+				i = 1;
+			}else{
+				i = -9999;
+			}
+			
+			out.append("------");
+			boolean a = false;
+			
+			if(a){
+				i = 333;
+				
+			}else{
+
+				i = 0;
+			}
 		}
 	}
 }

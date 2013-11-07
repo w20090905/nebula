@@ -156,6 +156,6 @@ public class CompilerContext {
 		boolean list;
 	}
 
-	final private List<Arg> arges;
+	final List<Arg> arges;
 
 }

@@ -65,9 +65,14 @@ public class STGroup {
 
 	protected Map<String, TemplateImpl> knownsTemplate = Maps.newHashMap();
 
-	public TemplateImpl parse(String srcName, String name, List<FormalArgument> args, String template, Token templateToken) {
+	public TemplateImpl parse(String srcName, String name, List<FormalArgument> args, String template) {
+		return this.parse(srcName, name, args, template, delimiterStartChar, delimiterStopChar);
+	}
+
+	public TemplateImpl parse(String srcName, String name, List<FormalArgument> args, String template, char delimiterStartChar, char delimiterStopChar) {
 		try {
-			STLexer lexer = new STLexer(org.stringtemplate.v4.STGroup.DEFAULT_ERR_MGR, new ANTLRStringStream(template), null, '$', '}');
+			STLexer lexer = new STLexer(org.stringtemplate.v4.STGroup.DEFAULT_ERR_MGR, new ANTLRStringStream(template), null, delimiterStartChar,
+					delimiterStopChar);
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			SParser p = new SParser(tokens, this);
 			if (args != null && args.size() > 0) {
@@ -107,7 +112,7 @@ public class STGroup {
 	}
 
 	public void defineTemplate(String name, String template) {
-		TemplateImpl temp = parse(null, null, null, template, null);
+		TemplateImpl temp = parse(null, null, null, template);
 		temp.name = name;
 		knownsTemplate.put(name, temp);
 	}
@@ -178,7 +183,7 @@ public class STGroup {
 		// template = Misc.trimOneTrailingNewline(template);
 		// compile, passing in templateName as enclosing name for any embedded
 		// regions
-		TemplateImpl code = parse(getFileName(), fullyQualifiedTemplateName, args, template, null);
+		TemplateImpl code = parse(getFileName(), fullyQualifiedTemplateName, args, template);
 
 		code.name = fullyQualifiedTemplateName;
 		rawDefineTemplate(fullyQualifiedTemplateName, code, nameT);

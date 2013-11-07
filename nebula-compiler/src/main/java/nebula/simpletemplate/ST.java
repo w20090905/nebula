@@ -3,6 +3,8 @@ package nebula.simpletemplate;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Maps;
+
 public class ST {
 	public final static String VERSION = "4.0.7-SNAPSHOT";
 
@@ -45,14 +47,21 @@ public class ST {
 	 * records. No formal arguments are set and there is no enclosing instance.
 	 */
 	public ST(String template) {
-		this(STGroup.defaultGroup, template);
+		this(STGroup.defaultGroup, template, '<', '>');
+	}
+
+	public ST(String template, char delimiterStartChar, char delimiterStopChar) {
+		this(STGroup.defaultGroup, template, delimiterStartChar, delimiterStopChar);
+	}
+
+	public ST(STGroup group, String template, char delimiterStartChar, char delimiterStopChar) {
+		groupThatCreatedThisInstance = group;
+		impl = groupThatCreatedThisInstance.parse(null, null, null, template, delimiterStartChar, delimiterStopChar);
+		impl.name = UNKNOWN_NAME;
 	}
 
 	public ST(STGroup group, String template) {
-		this();
-		groupThatCreatedThisInstance = group;
-		impl = groupThatCreatedThisInstance.parse(null, null, null, template, null);
-		impl.name = UNKNOWN_NAME;
+		this(group, template, '<', '>');
 	}
 
 	public ST(STGroup group, TemplateImpl template) {
@@ -63,6 +72,14 @@ public class ST {
 
 	public String getName() {
 		return impl.name;
+	}
+
+	public String render() {
+		if (this.datas != null) {
+			return impl.execNamed(datas);
+		} else {
+			return impl.exec();
+		}
 	}
 
 	public String render(Object... argv) {
@@ -101,5 +118,12 @@ public class ST {
 		// i++;
 		// }
 		return st.render(lineWidth);
+	}
+
+	private Map<String, Object> datas = null;
+
+	public void add(String key, Object value) {
+		if (datas == null) datas = Maps.newHashMap();
+		datas.put(key, value);
 	}
 }

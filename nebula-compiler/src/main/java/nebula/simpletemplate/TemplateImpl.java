@@ -76,7 +76,7 @@ public class TemplateImpl {
 	public String exec(Object... argv) {
 		cntExec++;
 		String paramsNames = null;
-		if (argv.length == 1) {
+		if (argv.length == 1 && argv[0] !=null) {
 			paramsNames = argv[0].getClass().getName();
 		} else if (argv.length > 1) {
 			StringBuilder sbParams = new StringBuilder();
@@ -133,6 +133,11 @@ public class TemplateImpl {
 				}
 			}
 
+			if (argv.length < this.formalArguments.length) {
+				Object[] lastArgv = argv;
+				argv = new Object[this.formalArguments.length];
+				System.arraycopy(lastArgv, 0, argv, 0, lastArgv.length);
+			}
 			get(paramsNames, argv).exec(this.group, this, sb, argv);
 			String result = sb.toString();
 

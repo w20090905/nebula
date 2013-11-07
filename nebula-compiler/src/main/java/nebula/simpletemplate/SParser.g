@@ -17,6 +17,8 @@ package nebula.simpletemplate;
 
 import org.objectweb.asm.Type;
 
+import nebula.lang.Operator;
+
 import org.antlr.runtime.*;
 import org.stringtemplate.v4.misc.ErrorManager;
 
@@ -124,11 +126,18 @@ template returns[TemplateImpl temp]
     }
   : (e=element {if(e!=null)statments.add(e);} )* {Statement s=c.stBlock(statments);temp=c.tpTemplate(group,s,arges,subTemplates);};
 
+block returns[Statement s] 
+@init{
+      List<Statement> statments = new ArrayList<Statement>();
+    }
+  : (e=element {if(e!=null)statments.add(e);} )* {s=c.stBlock(statments);};
+
+
 element returns[Statement s]
 	:	{input.LT(1).getCharPositionInLine()==0}? INDENT? COMMENT NEWLINE // -> // throw away
 	|	INDENT se=singleElement{s=se;} // -> ^(INDENTED_EXPR INDENT singleElement?) // singleElement is optional to handle error returning nil
 	|	se=singleElement{s=se;}
-	|	compoundElement
+	|	ce=compoundElement{s=ce;}
 	;
 
 singleElement returns[Statement s]
@@ -138,8 +147,8 @@ singleElement returns[Statement s]
 	|	COMMENT // throw away
 	;
 
-compoundElement
-	:	ifstat
+compoundElement returns[Statement s]
+	:	i=ifstat { s = i.statement;} 
 	|	region
 	;
 
@@ -184,12 +193,19 @@ subtemplate returns[int index]
 		// -> ^(SUBTEMPLATE[$lc,"SUBTEMPLATE"] ^(ARGS $ids)* template?)
 	;
 
-ifstat
-@init {Token indent=null;}
-	:	i=INDENT? LDELIM 'if' '(' c1=conditional ')' RDELIM {if (input.LA(1)!=NEWLINE) indent=$i;}
-			t1=template
-			( INDENT? LDELIM 'elseif' '(' conditional ')' RDELIM template )*
-			( INDENT? LDELIM 'else' RDELIM t3=template )?
+ifstat returns[Statement statement] 
+@init {
+      Token indent=null;
+      List<Expr<?>> conditions = new ArrayList<Expr<?>>();
+      List<Statement> statements = new ArrayList<Statement>();
+    }
+@after{
+    retval.statement = c.stIf(conditions,statements, blockElse);
+}
+	:	i=INDENT? LDELIM 'if' '(' c1=conditional')' RDELIM {if (input.LA(1)!=NEWLINE) indent=$i;}
+			t1=block {conditions.add(c1);  statements.add(t1); }
+			( INDENT? LDELIM 'elseif' '(' c2=conditional ')' RDELIM t2=block {conditions.add(c2);  statements.add(t2); })*
+			( INDENT? LDELIM 'else' RDELIM blockElse=block)?
 			INDENT? endif= LDELIM 'endif'
 		RDELIM
 		// kill \n for <endif> on line by itself if multi-line IF
@@ -197,28 +213,29 @@ ifstat
 		/*-> {indent!=null}?
 		   ^(INDENTED_EXPR $i ^('if' $c1 $t1? ^('elseif' $c2 $t2)* ^('else' $t3?)?))
 		->                    ^('if' $c1 $t1? ^('elseif' $c2 $t2)* ^('else' $t3?)?)*/
+
 	;
 
-conditional
+conditional returns [Expr v]
 scope {
 	boolean inside;
 }
-	: andConditional ( '||' andConditional )*
+	: a=andConditional {v=a;}( '||' a=andConditional {v=c.opConditional(Operator.OR,v,a); })*
 	;
 
-andConditional : notConditional ( '&&' notConditional )* ;
+andConditional returns [Expr v] : n=notConditional{v=n;} ( '&&' n=notConditional {v=c.opConditional(Operator.AND,v,n); })* ;
 
-notConditional
-	:	'!' notConditional
-	|	memberExpr
+notConditional returns [Expr v] 
+	:	'!' n=notConditional {v=c.opNot(n);}
+	|	m=memberExpr{v=m;}
 	;
 
-notConditionalExpr
-	:	(ID/* ->ID*/)
-		(	p='.' prop=ID						// -> ^(PROP[$p,"PROP"] $notConditionalExpr $prop)
-		|	p='.' '(' mapExpr ')'				// -> ^(PROP_IND[$p,"PROP_IND"] $notConditionalExpr mapExpr)
-		)*
-	;
+//notConditionalExpr
+//	:	(ID/* ->ID*/)
+//		(	p='.' prop=ID						// -> ^(PROP[$p,"PROP"] $notConditionalExpr $prop)
+//		|	p='.' '(' mapExpr ')'				// -> ^(PROP_IND[$p,"PROP_IND"] $notConditionalExpr mapExpr)
+//		)*
+//	;
 
 exprOptions : option ( ',' option )* /*/ -> ^(OPTIONS option*) */;
 
@@ -315,12 +332,12 @@ primary returns[Expr v]
 	|	FALSE      {v=c.opYesnoCst(false);}
 	|	st=subtemplate {v= c.opInclude(c.opLocal(v("template")),st);}
 	|	list
-	|	{$conditional.size()>0}?=>  '(' conditional ')'
+	|	{$conditional.size()>0}?=>  '(' cd=conditional {v=cd;}')'
 	|	{$conditional.size()==0}?=> lp='(' name=expr ')'		(	'(' as=argExprList? ')'		{v=c.opInclude(c.opLocal(v("group")),name,as);}          // -> ^(INCLUDE_IND[$lp] expr argExprList?)
 		|										// -> ^(TO_STR[$lp] expr)
 		)
 	;
-
+	
 args returns[List<Argument> args]
 @init{
   args = new ArrayList();

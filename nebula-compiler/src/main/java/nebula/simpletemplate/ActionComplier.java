@@ -3,7 +3,7 @@ package nebula.simpletemplate;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
+import java.util.ArrayList;
 import nebula.lang.NebulaClassLoader;
 
 import org.apache.commons.logging.Log;
@@ -16,16 +16,28 @@ import org.objectweb.asm.Opcodes;
 import util.NamesEncoding;
 
 public class ActionComplier implements Opcodes {
+	private static final String SUPER_NAME = Action.class.getName().replace('.', '/');
 	Log log = LogFactory.getLog(getClass());
 	private Action noop;
 
 	static ActionComplier DEFAULT = new ActionComplier();
 
 	private ActionComplier() {
-
+		String name = "EntityActionNoop";
+		try {
+			byte[] code = doCompile(name, new Compiler.Block(new ArrayList<Statement>()), null);
+			Class<?> expClass = NebulaClassLoader.defineClass(name, code);
+			// instantiates this compiled expression class...
+			this.noop = (Action) expClass.newInstance();
+		} catch (InstantiationException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		}
 	}
 
-	private static final String SUPER_NAME = Action.class.getName().replace('.', '/');
 
 	/*
 	 * Returns the byte code of an Expression class corresponding to this
@@ -34,7 +46,7 @@ public class ActionComplier implements Opcodes {
 	<T> byte[] doCompile(final String name, final Code code, CompilerContext context) {
 
 		// class header
-		ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
 		MethodVisitor mv;
 
 		// Class define
