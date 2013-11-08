@@ -104,13 +104,27 @@ public class ST_BasicTest extends BasicTest {
 	
 
 	public void testIncludeSubTempalte() throws Exception {
-		String template = "load ${xx: {kewl\ndaddy}};";
-		String expected = "load kewl\ndaddy;";
+		String template = "load ${xx: { 11(${xx})11 } : {x | 22(${x})22}};";
+		String expected = "load 22( 11(wangshilian)11 )22;";
 		
 		ST st = new ST(template,'$','}');
 		
 		Map<String, Object> root = Maps.newHashMap();
 		root.put("xx", "wangshilian");
+		
+		String result = st.renderNamed(root);
+		assertEquals(expected, result);
+	}
+	
+	public void testIncludeSubTempalte2() throws Exception {
+		String template = "lo yy:${yy} ad ${xx: {kewl\nxx:${xx}daddy}} xx:${xx} yy:${yy};";
+		String expected = "lo yy:yy ad kewl\nxx:xxdaddy xx:xx yy:yy;";
+		
+		ST st = new ST(template,'$','}');
+		
+		Map<String, Object> root = Maps.newHashMap();
+		root.put("xx", "xx");
+		root.put("yy", "yy");
 		
 		String result = st.renderNamed(root);
 		assertEquals(expected, result);
@@ -145,9 +159,9 @@ public class ST_BasicTest extends BasicTest {
 	}
 	
 	public void testGroupFile() throws Exception {		
-		String template = "t(xx) ::= <<load ${data(xx)}>>\n" +
+		String template = "t(xx) ::= <<load <data(xx)> >>\n" +
 				"data(name) ::= <<kewl\ndaddy;>>";
-		String expected = "load kewl\ndaddy;";
+		String expected = "load kewl\ndaddy; ";
 		writeFile(tmpdir, "t.stg", template);
 
 		STGroup group =STGroup.fromGroupFile(tmpdir + "/" + "t.stg");
@@ -162,7 +176,7 @@ public class ST_BasicTest extends BasicTest {
 	
 	
 	public void testGroupPath() throws Exception {		
-		String templateT = "load ${data(xx)}";
+		String templateT = "load <data(xx)>";
 		String templateData	=	"kewl\ndaddy;";
 		
 		String expected = "load kewl\ndaddy;";

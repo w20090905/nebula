@@ -135,19 +135,19 @@ public class TestSimpleTempalteCoreBasics extends BaseTest {
 		assertEquals(expected, result);
 	}
 
-	public void testMapAcrossDictionaryUsesKeys() throws Exception {
-		String template = "<foo:{f | <f>}>"; // checks field and method getter
-		ST st = new ST(template);
-		st.add("foo", new LinkedHashMap<String, String>() {
-			{
-				put("a", "b");
-				put("c", "d");
-			}
-		});
-		String expected = "bd";
-		String result = st.render();
-		assertEquals(expected, result);
-	}
+//	public void testMapAcrossDictionaryUsesKeys() throws Exception {
+//		String template = "<foo:{f | <f>}>"; // checks field and method getter
+//		ST st = new ST(template);
+//		st.add("foo", new LinkedHashMap<String, String>() {
+//			{
+//				put("a", "b");
+//				put("c", "d");
+//			}
+//		});
+//		String expected = "bd";
+//		String result = st.render();
+//		assertEquals(expected, result);
+//	}
 	
 //Don't Support this
 //	public void testSTProp() throws Exception {
@@ -179,13 +179,13 @@ public class TestSimpleTempalteCoreBasics extends BaseTest {
 		assertEquals(expected, result);
 	}
 
-	public void testNullAttrProp() throws Exception {
-		String template = "<u.id>: <u.name>";
-		ST st = new ST(template);
-		String expected = ": ";
-		String result = st.render();
-		assertEquals(expected, result);
-	}
+//	public void testNullAttrProp() throws Exception {
+//		String template = "<u.id>: <u.name>";
+//		ST st = new ST(template);
+//		String expected = ": ";
+//		String result = st.render();
+//		assertEquals(expected, result);
+//	}
 
 //	 public void testNoSuchProp() throws Exception {
 //	 ErrorBufferAllErrors errors = new ErrorBufferAllErrors();

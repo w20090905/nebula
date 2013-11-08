@@ -179,7 +179,7 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 		String expected = "Person { Name , Name true ,false } { Birthday , Birthday false ,false } { Height , Height false ,false } { Age , Age false ,false } { Sex , Sex false ,false } { Detail , Person$Detail false ,false } { Company , Company false ,false } { Roles1 , Text false ,false } { Roles2 , Long false ,false } { Roles3 , Date false ,false } { Roles4 , Time false ,false } { Education , Person$Education false ,false } ";
 
 
-		STGroup group = new STGroupPath("tmp");
+		STGroup group = new STGroupPath("tmp",'$','$');
 		TemplateImpl tmp = group.getTemplate("type");
 		
 		type = Broker.brokerOf(type).get();

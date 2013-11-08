@@ -38,7 +38,6 @@ public class ActionComplier implements Opcodes {
 		}
 	}
 
-
 	/*
 	 * Returns the byte code of an Expression class corresponding to this
 	 * expression.
@@ -103,10 +102,26 @@ public class ActionComplier implements Opcodes {
 
 	static long count = 0;
 
-	public Action compile(CompilerContext context, String actionName, Code code) {
+	public Action compileAndGetInstance(CompilerContext context, String actionName, Code code) {
 		if (code instanceof Compiler.Block && ((Compiler.Block) code).statements.size() == 0) {
 			return this.noop;
 		}
+		try {
+			Class<Action> action = compile(context, actionName, code);
+			// instantiates this compiled expression class...
+			Action expr = (Action) action.newInstance();
+			return expr;
+		} catch (InstantiationException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		}
+	}
+
+	public Class<Action> compile(CompilerContext context, String actionName, Code code) {
+
 		actionName = actionName.replace('.', '_');
 
 		String name = this.getClass().getSimpleName() + "_" + NamesEncoding.encode(actionName, false) + "_" + String.valueOf(count++);
@@ -125,15 +140,12 @@ public class ActionComplier implements Opcodes {
 					throw new RuntimeException(e);
 				}
 			}
-			Class<?> expClass = NebulaClassLoader.defineClass(name, b);
-			// instantiates this compiled expression class...
-			Action expr = (Action) expClass.newInstance();
-			return expr;
+			@SuppressWarnings("unchecked")
+			Class<Action> action = (Class<Action>) NebulaClassLoader.defineClass(name, b);
+			NebulaClassLoader.doResolveClass(action);
+
+			return action;
 		} catch (ClassFormatError e) {
-			throw new RuntimeException(e);
-		} catch (InstantiationException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
 			throw new RuntimeException(e);
 		}
 	}

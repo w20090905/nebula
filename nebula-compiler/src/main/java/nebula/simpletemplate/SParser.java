@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g 2013-11-07 17:41:23
+// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g 2013-11-08 15:06:26
 
 package nebula.simpletemplate;
 
@@ -2433,7 +2433,7 @@ public class SParser extends Parser {
                     state._fsp--;
 
 
-                    v=c.opInclude(c.opLocal(v("template")),st,data);
+                    v=c.opIncludeSub(v("argv"),v("sb"),c.opLocal(v("template")),st,data);
 
                     }
                     break;
@@ -2571,7 +2571,7 @@ public class SParser extends Parser {
                     state._fsp--;
 
 
-                    v=c.opInclude(c.opLocal(v("template")),st,dataList);
+                    v=c.opIncludeSub(v("argv"),v("sb"),c.opLocal(v("template")),st,dataList);
 
                     }
                     break;
@@ -2972,7 +2972,7 @@ public class SParser extends Parser {
                     state._fsp--;
 
 
-                    v= c.opInclude(c.opLocal(v("template")),st);
+                    v= c.opIncludeSub(v("argv"),v("sb"),c.opLocal(v("template")),st);
 
                     }
                     break;

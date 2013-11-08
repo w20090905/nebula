@@ -297,13 +297,13 @@ expr:(e)(args)       convert e to a string template name and apply to expr
 */
 mapTemplateRef [ Expr data] returns[Expr v]
 	:	ID '(' as=args ')'				{v=c.opInclude(c.opLocal(v("group")),c.opName($ID.text),data,as);}			// -> ^(INCLUDE ID args?)
-	|	st=subtemplate {v=c.opInclude(c.opLocal(v("template")),st,data);}    
+	|	st=subtemplate {v=c.opIncludeSub(v("argv"),v("sb"),c.opLocal(v("template")),st,data);}    
 	|	lp='(' me=mapExpr rp=')' '(' as=argExprList? ')' {v=c.opInclude(c.opLocal(v("group")),me,data,as);}// -> ^(INCLUDE_IND mapExpr argExprList?)
 	;
 	
 mapTemplateRefListParams [ List<Expr> dataList] returns[Expr v]
   : ID '(' as=args ')'        {v=c.opInclude(c.opLocal(v("group")),c.opName($ID.text),dataList,as);}     // -> ^(INCLUDE ID args?)
-  | st=subtemplate  {v=c.opInclude(c.opLocal(v("template")),st,dataList);}    
+  | st=subtemplate  {v=c.opIncludeSub(v("argv"),v("sb"),c.opLocal(v("template")),st,dataList);}    
   | lp='(' me=mapExpr rp=')' '(' as=argExprList? ')' {v=c.opInclude(c.opLocal(v("group")),me,dataList,as);}// -> ^(INCLUDE_IND mapExpr argExprList?)
   ;
 
@@ -330,7 +330,7 @@ primary returns[Expr v]
 	|	STRING   {v=c.opStringCst(Misc.strip($STRING.text,1));}
 	|	TRUE       {v=c.opYesnoCst(true);}  
 	|	FALSE      {v=c.opYesnoCst(false);}
-	|	st=subtemplate {v= c.opInclude(c.opLocal(v("template")),st);}
+	|	st=subtemplate {v= c.opIncludeSub(v("argv"),v("sb"),c.opLocal(v("template")),st);}
 	|	list
 	|	{$conditional.size()>0}?=>  '(' cd=conditional {v=cd;}')'
 	|	{$conditional.size()==0}?=> lp='(' name=expr ')'		(	'(' as=argExprList? ')'		{v=c.opInclude(c.opLocal(v("group")),name,as);}          // -> ^(INCLUDE_IND[$lp] expr argExprList?)

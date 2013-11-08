@@ -6,6 +6,10 @@ public class STGroupPath extends STGroup {
 	public STGroupPath(String root) {
 		this.root = root;
 	}
+	public STGroupPath(String root,char delimiterStartChar, char delimiterStopChar) {
+		super(delimiterStartChar, delimiterStopChar);
+		this.root = root;
+	}
 
 	@Override
 	public TemplateImpl getTemplate(String name) {

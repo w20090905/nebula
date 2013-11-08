@@ -346,14 +346,14 @@ public class Compiler {
 
 				mv.visitInsn(DUP);
 				mv.visitIntInsn(BIPUSH, 0);
-				Class<?> firstType = args.get(0).value.compile(cw, mv, context);
+				Class<?> firstType = evalValue(args.get(0).value, cw, mv, context);
 
 				mv.visitInsn(AASTORE);
 
 				for (int i = 1; i < args.size(); i++) {
 					mv.visitInsn(DUP);
 					mv.visitIntInsn(BIPUSH, i);
-					args.get(i).value.compile(cw, mv, context);
+					evalValue(args.get(i).value, cw, mv, context);
 					mv.visitInsn(AASTORE);
 				}
 
@@ -366,6 +366,16 @@ public class Compiler {
 				mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "exec", "([Ljava/lang/Object;)Ljava/lang/String;");
 			}
 			return String.class;
+		}
+
+		private Class<?> evalValue(Expr<Object> value, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+			if (value instanceof IncludeSubTemplate) {
+				IncludeSubTemplate sub = (IncludeSubTemplate) value;
+				sub.compileInlineToString(cw, mv, context);
+				return String.class;
+			} else {
+				return value.compile(cw, mv, context);
+			}
 		}
 
 		@Override
@@ -408,11 +418,15 @@ public class Compiler {
 	}
 
 	static class IncludeSubTemplate extends Expression<Object> {
+		final Var argv;
+		final Var sb;
 		final List<Argument> args;
 		final int subTemplateIndex;
 		final Expr<Object> template;
 
-		IncludeSubTemplate(Expr<Object> template, int subTemplateIndex, List<Argument> args) {
+		IncludeSubTemplate(Var argv, Var sb, Expr<Object> template, int subTemplateIndex, List<Argument> args) {
+			this.sb = sb;
+			this.argv = argv;
 			this.template = template;
 			this.subTemplateIndex = subTemplateIndex;
 			this.args = args;
@@ -433,14 +447,14 @@ public class Compiler {
 				mv.visitInsn(DUP);
 				mv.visitIntInsn(BIPUSH, 0);
 
-				Class<?> firstType = args.get(0).value.compile(cw, mv, context);
+				Class<?> firstType = evalValue(args.get(0).value,cw, mv, context);
 
 				mv.visitInsn(AASTORE);
 
 				for (int i = 1; i < args.size(); i++) {
 					mv.visitInsn(DUP);
 					mv.visitIntInsn(BIPUSH, i);
-					args.get(i).value.compile(cw, mv, context);
+					evalValue(args.get(i).value,cw, mv, context);
 					mv.visitInsn(AASTORE);
 				}
 
@@ -454,6 +468,106 @@ public class Compiler {
 			}
 
 			return String.class;
+		}
+
+		private Class<?> evalValue(Expr<Object> value, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+			if (value instanceof IncludeSubTemplate) {
+				IncludeSubTemplate sub = (IncludeSubTemplate) value;
+				sub.compileInlineToString(cw, mv, context);
+				return String.class;
+			} else {
+				return value.compile(cw, mv, context);
+			}
+		}
+		
+		public Class<?> compileInlineToString(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+			mv.visitVarInsn(ALOAD, argv.index); // backup parent argv to stack
+			mv.visitVarInsn(ALOAD, sb.index);
+
+			mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
+			mv.visitInsn(DUP);
+			mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V");
+			mv.visitVarInsn(ASTORE, sb.index);
+
+			mv.visitIntInsn(BIPUSH, args.size());
+			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+
+			List<Class<?>> clzes = Lists.newArrayList();
+
+			if (args.size() > 0) {
+				mv.visitInsn(DUP);
+				mv.visitIntInsn(BIPUSH, 0);
+
+				Class<?> firstType = evalValue(args.get(0).value,cw, mv, context);
+				clzes.add(firstType);
+
+				mv.visitInsn(AASTORE);
+
+				for (int i = 1; i < args.size(); i++) {
+					mv.visitInsn(DUP);
+					mv.visitIntInsn(BIPUSH, i);
+					Class<?> clz =evalValue(args.get(i).value,cw, mv, context);
+					mv.visitInsn(AASTORE);
+					clzes.add(clz);
+				}
+			}
+			mv.visitVarInsn(ASTORE, argv.index); // store sub argv to argv
+
+			CompilerContext subContext = new CompilerContext(context.impl, clzes);
+			Code code = subContext.impl.implicitlyDefinedTemplates.get(subTemplateIndex).code;
+			code.compile(cw, mv, subContext);
+			
+			mv.visitVarInsn(ALOAD, sb.index);
+			mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(StringBuilder.class), "toString", "()Ljava/lang/String;");
+			int locals = context.locals;			
+			mv.visitVarInsn(ASTORE, locals);
+
+			mv.visitVarInsn(ASTORE, sb.index); // store parent argv to argv
+			mv.visitVarInsn(ASTORE, argv.index); // store parent argv to argv
+													// locate
+
+			mv.visitVarInsn(ALOAD, locals);
+			return String.class;
+		}
+
+		public Class<?> compileInlineAppend(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+			mv.visitVarInsn(ALOAD, argv.index); // backup parent argv to stack
+
+
+			mv.visitIntInsn(BIPUSH, args.size());
+			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+
+			List<Class<?>> clzes = Lists.newArrayList();
+
+			if (args.size() > 0) {
+				mv.visitInsn(DUP);
+				mv.visitIntInsn(BIPUSH, 0);
+
+				Class<?> firstType = evalValue(args.get(0).value,cw, mv, context);
+				clzes.add(firstType);
+
+				mv.visitInsn(AASTORE);
+
+				for (int i = 1; i < args.size(); i++) {
+					mv.visitInsn(DUP);
+					mv.visitIntInsn(BIPUSH, i);
+					Class<?> clz = evalValue(args.get(i).value,cw, mv, context);
+					mv.visitInsn(AASTORE);
+					clzes.add(clz);
+				}
+			}
+			mv.visitVarInsn(ASTORE, argv.index); // store sub argv to argv
+
+			CompilerContext subContext = new CompilerContext(context.impl, clzes);
+			Code code = subContext.impl.implicitlyDefinedTemplates.get(subTemplateIndex).code;
+			code.compile(cw, mv, subContext);
+						
+//			mv.visitInsn(POP);
+//			int locals = context.locals;			
+//			mv.visitVarInsn(ASTORE, locals);
+
+			mv.visitVarInsn(ASTORE, argv.index); // store parent argv to argv
+			return Void.class;
 		}
 
 		@Override
@@ -710,8 +824,14 @@ public class Compiler {
 		}
 
 		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+			if(expr instanceof IncludeSubTemplate){
+				IncludeSubTemplate sub = (IncludeSubTemplate)expr;
+				return sub.compileInlineAppend(cw, mv, context);
+			}
+			
 			sb.compile(cw, mv, context);
-
+			
+			
 			Class<?> clz = expr.compile(cw, mv, context);
 
 			if (String.class == clz) {
@@ -773,11 +893,11 @@ public class Compiler {
 				mv.visitVarInsn(ALOAD, listLocal);
 				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "hasNext", "()Z");
 				mv.visitJumpInsn(IFNE, forBegin);
-				
+
 				mv.visitInsn(POP); // pop StringBuilder from stack
 			} else if (ST.class.isAssignableFrom(clz)) {
 				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(ST.class));
-				mv.visitMethodInsn(INVOKEVIRTUAL,  Type.getInternalName(ST.class), "render", "()Ljava/lang/String;");
+				mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(ST.class), "render", "()Ljava/lang/String;");
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + Type.getDescriptor(String.class) + ")Ljava/lang/StringBuilder;");
 				mv.visitInsn(POP);
 			} else {
@@ -916,32 +1036,33 @@ public class Compiler {
 		}
 	}
 
-	public Action compile(Class<?> rootClass, String name, Statement statement) {
-		CompilerContext context = new CompilerContext(rootClass);
-		return actionComplier.compile(context, name, statement);
-	}
+	// public Action compile(Class<?> rootClass, String name, Statement
+	// statement) {
+	// CompilerContext context = new CompilerContext(rootClass);
+	// return actionComplier.compile(context, name, statement);
+	// }
 
 	public void opAddArgument(List<Argument> list, Argument arg) {
 		arg.index = list.size();
 		list.add(arg);
 	}
-	
-	public void opAddArgument(final Var argv,final List<Argument> list, List<Var> srcArgs) {
-		
-		for(Var sa : srcArgs){
-//			boolean find = false;
-//			for (Argument da : list) {
-//				if(da.name.equals(sa.name) ){
-//					find=true;
-//					break;
-//				}
-//			}
-//			if(!find){
-				Argument da = new Argument(new ArgRefer(argv, sa));				
-				list.add(da);
-//			}
+
+	public void opAddArgument(final Var argv, final List<Argument> list, List<Var> srcArgs) {
+
+		for (Var sa : srcArgs) {
+			// boolean find = false;
+			// for (Argument da : list) {
+			// if(da.name.equals(sa.name) ){
+			// find=true;
+			// break;
+			// }
+			// }
+			// if(!find){
+			Argument da = new Argument(new ArgRefer(argv, sa));
+			list.add(da);
+			// }
 		}
-		//TODO
+		// TODO
 	}
 
 	public Expr<Object> opArg(Var argv, Var var) {
@@ -996,24 +1117,24 @@ public class Compiler {
 		return new Include(group, name, args);
 	}
 
-	public Expr<Object> opInclude(Expr<Object> template, int subTemplateIndex) {
+	public Expr<Object> opIncludeSub(Var argv, Var sb, Expr<Object> template, int subTemplateIndex) {
 		List<Argument> leading = Lists.newArrayList();
-		return new IncludeSubTemplate(template, subTemplateIndex, leading);
+		return new IncludeSubTemplate(argv, sb, template, subTemplateIndex, leading);
 	}
 
-	public Expr<Object> opInclude(Expr<Object> template, int subTemplateIndex, Expr<Object> target) {
+	public Expr<Object> opIncludeSub(Var argv, Var sb, Expr<Object> template, int subTemplateIndex, Expr<Object> target) {
 		List<Argument> leading = Lists.newArrayList();
 		leading.add(new Argument(target));
-		return new IncludeSubTemplate(template, subTemplateIndex, leading);
+		return new IncludeSubTemplate(argv, sb, template, subTemplateIndex, leading);
 	}
 
 	@SuppressWarnings("rawtypes")
-	public Expr<Object> opInclude(Expr<Object> template, int subTemplateIndex, List<Expr> target) {
+	public Expr<Object> opIncludeSub(Var argv, Var sb, Expr<Object> template, int subTemplateIndex, List<Expr> target) {
 		List<Argument> leading = Lists.newArrayList();
 		for (Expr<Object> e : target) {
 			leading.add(new Argument(e));
 		}
-		return new IncludeSubTemplate(template, subTemplateIndex, leading);
+		return new IncludeSubTemplate(argv, sb, template, subTemplateIndex, leading);
 	}
 
 	public Expr<Object> opLocal(Var var) {
