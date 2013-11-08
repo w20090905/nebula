@@ -144,7 +144,7 @@ public class ST_PerformanceTest extends TestCase {
 		String expected = "<html>\r\n<head>\r\n<title>print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
 		String text = "<html>\r\n<head>\r\n<title>${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
 
-		int MAX = 1000 * 10;
+		int MAX = 1000 * 1;
 		{
 
 			String desc = "javacode sub temp";

@@ -7,4 +7,9 @@ public class STGroupFile extends STGroup {
 		this.parseGroupFile(string);
 	}
 
+	public STGroupFile(String string, char delimiterStartChar, char delimiterStopChar) {
+		super(delimiterStartChar, delimiterStopChar);
+		this.parseGroupFile(string);
+	}
+
 }

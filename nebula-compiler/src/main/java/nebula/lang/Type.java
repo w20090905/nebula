@@ -58,7 +58,7 @@ public interface Type extends Timable {
 
 	public boolean isArray();
 
-	public boolean isMutable() ;
+	public boolean isMutable();
 
 	public List<Type> getRelations();
 

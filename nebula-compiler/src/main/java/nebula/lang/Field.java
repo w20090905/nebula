@@ -113,7 +113,27 @@ public class Field {
 	public EntityExpression getDerivedExpr() {
 		return expr;
 	}
-
+	
+	public boolean isPrimaryType(){
+		return this.type.getStandalone() == TypeStandalone.Basic;
+	}
+	
+	public boolean isInline(){
+		return this.refer == Reference.Inline;
+	}
+	
+	public boolean isByVal(){
+		return this.refer ==Reference.ByVal;		
+	}
+	
+	public boolean isByRef(){
+		return this.refer ==Reference.ByRef;
+	}
+	
+	public boolean isCascade(){
+		return this.refer == Reference.Cascade;
+	}
+	
 
 	public void setNameAlias(Aliases nameAlias) {
 		this.nameAlias = nameAlias;

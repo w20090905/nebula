@@ -1104,11 +1104,17 @@ public class Compiler {
 	}
 
 	public Expr<Object> opInclude(Expr<Object> group, Expr<String> name, List<Argument> args) {
+		if(args ==null){
+			args = Lists.newArrayList();
+		}
 		return new Include(group, name, args);
 	}
 
 	@SuppressWarnings("rawtypes")
 	public Expr<Object> opInclude(Expr<Object> group, Expr<String> name, List<Expr> target, List<Argument> args) {
+		if(args ==null){
+			args = Lists.newArrayList();
+		}
 		List<Argument> leading = Lists.newArrayList();
 		for (Expr<Object> e : target) {
 			leading.add(new Argument(e));
