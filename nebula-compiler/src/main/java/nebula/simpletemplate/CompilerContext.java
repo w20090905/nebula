@@ -147,7 +147,7 @@ public class CompilerContext {
 		this.arges = Lists.newArrayList();
 		for (Class<?> clz : clzes) {
 			if (clz != null) {
-				Arg arg = get(clz.getClass());
+				Arg arg = get(clz);
 				this.arges.add(arg);
 			} else {
 				this.arges.add(null);
