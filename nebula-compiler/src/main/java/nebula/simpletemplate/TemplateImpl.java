@@ -281,6 +281,7 @@ public class TemplateImpl {
 
 			for (int i = 0; i < dataList.size(); i++) {
 				argv[0] = dataList.get(i);
+				System.out.println(this.name);
 				get(paramsNames, argv).exec(this.nativeGroup, this, sb, argv);
 			}
 
@@ -323,9 +324,9 @@ public class TemplateImpl {
 
 			CompilerContext c = new CompilerContext(this,argv);
 			if (this.name != null) {
-				builder = ActionComplier.DEFAULT.compileAndGetInstance(c, this.name + "__" + paramsNames, code);
+				builder = ActionComplier.DEFAULT.compileAndGetInstance(c, this.name + "__" + paramsNames, this);
 			} else {
-				builder = ActionComplier.DEFAULT.compileAndGetInstance(c, paramsNames, code);
+				builder = ActionComplier.DEFAULT.compileAndGetInstance(c, paramsNames, this);
 			}
 
 			ImmutableMap.Builder<String, Action> mapBuilder = ImmutableMap.builder();

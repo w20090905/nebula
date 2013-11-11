@@ -3,15 +3,17 @@ package nebula.simpletemplate;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
+
 import nebula.lang.NebulaClassLoader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.mockito.asm.Type;
 import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 import util.NamesEncoding;
 
@@ -23,38 +25,21 @@ public class ActionComplier implements Opcodes {
 	static ActionComplier DEFAULT = new ActionComplier();
 
 	private ActionComplier() {
-		String name = this.getClass().getSimpleName() + "_nop_" + String.valueOf(count++);
-		try {
-			byte[] code = doCompile(name, new Compiler.Block(new ArrayList<Statement>()), null);
-			Class<?> expClass = NebulaClassLoader.defineClass(name, code);
-			// instantiates this compiled expression class...
-			this.noop = (Action) expClass.newInstance();
-		} catch (InstantiationException e) {
-			log.error(e);
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
-			log.error(e);
-			throw new RuntimeException(e);
-		}
 	}
 
 	/*
 	 * Returns the byte code of an Expression class corresponding to this
 	 * expression.
 	 */
-	<T> byte[] doCompile(final String name, final Code code, CompilerContext context) {
+	<T> byte[] doCompile(final String name, final TemplateImpl template, CompilerContext context) {
 
 		// class header
 		ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
 		MethodVisitor mv;
+		FieldVisitor fv;
 
 		// Class define
 		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, name, null, "java/lang/Object", new String[] { SUPER_NAME });
-
-		// String dataClassName =
-		// Type.getType(context.getDataClass()).getInternalName();
-
-		// /}}}
 
 		// Init method
 		{
@@ -67,6 +52,20 @@ public class ActionComplier implements Opcodes {
 			mv.visitEnd();
 		}
 
+		if (template.implicitlyDefinedTemplates != null) {
+			List<TemplateImpl> list = template.implicitlyDefinedTemplates;
+			for (int i = 0; i < list.size(); i++) {
+				{
+					fv = cw.visitField(0, "tempalte" + i + "LeadingClass", "Ljava/lang/Class;", "Ljava/lang/Class<*>;", null);
+					fv.visitEnd();
+				}
+				{
+					fv = cw.visitField(0, "template" + i + "Action", Type.getDescriptor(Action.class), null, null);
+					fv.visitEnd();
+				}
+			}
+		}
+
 		{
 			mv = cw.visitMethod(ACC_PUBLIC, "exec",
 					"(" + Type.getDescriptor(STGroup.class) + "" + Type.getDescriptor(TemplateImpl.class) + "" + Type.getDescriptor(StringBuilder.class)
@@ -74,21 +73,7 @@ public class ActionComplier implements Opcodes {
 
 			mv.visitCode();
 
-			code.compile(cw, mv, context);
-			// mv.visitVarInsn(ALOAD, 1);
-			// mv.visitLdcInsn("Hello");
-			// mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/Writer", "write",
-			// "(Ljava/lang/String;)V");
-			// mv.visitVarInsn(ALOAD, 1);
-			// mv.visitVarInsn(ALOAD, 3);
-			// mv.visitMethodInsn(INVOKEVIRTUAL, dataClassName, "getName",
-			// "()Ljava/lang/String;");
-			// mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/Writer", "write",
-			// "(Ljava/lang/String;)V");
-			// mv.visitVarInsn(ALOAD, 1);
-			// mv.visitLdcInsn(";");
-			// mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/Writer", "write",
-			// "(Ljava/lang/String;)V");
+			template.code.compile(cw, mv, context);
 
 			mv.visitInsn(RETURN);
 			mv.visitMaxs(0, 0);
@@ -102,12 +87,20 @@ public class ActionComplier implements Opcodes {
 
 	static long count = 0;
 
-	public Action compileAndGetInstance(CompilerContext context, String actionName, Code code) {
-		if (code instanceof Compiler.Block && ((Compiler.Block) code).statements.size() == 0) {
-			return this.noop;
-		}
+	public Action compileAndGetInstance(CompilerContext context, String actionName, final TemplateImpl template) {
 		try {
-			Class<Action> action = compile(context, actionName, code);
+			if (template.code instanceof Compiler.Block && ((Compiler.Block) template.code).statements.size() == 0) {
+				if (this.noop != null) {
+					return this.noop;
+				} else {
+					Class<Action> action = compile(context, actionName, template);
+					// instantiates this compiled expression class...
+					this.noop = (Action) action.newInstance();
+					return this.noop;
+				}
+			}
+
+			Class<Action> action = compile(context, actionName, template);
 			// instantiates this compiled expression class...
 			Action expr = (Action) action.newInstance();
 			return expr;
@@ -120,13 +113,13 @@ public class ActionComplier implements Opcodes {
 		}
 	}
 
-	public Class<Action> compile(CompilerContext context, String actionName, Code code) {
+	public Class<Action> compile(CompilerContext context, String actionName, final TemplateImpl template) {
 
 		actionName = actionName.replace('.', '_');
 
 		String name = this.getClass().getSimpleName() + "_" + NamesEncoding.encode(actionName, false) + "_" + String.valueOf(count++);
 		try {
-			byte[] b = this.doCompile(name, code, context);
+			byte[] b = this.doCompile(name, template, context);
 			if (log.isDebugEnabled()) {
 				try {
 					FileOutputStream fos = new FileOutputStream("tmp/" + name + ".class");
