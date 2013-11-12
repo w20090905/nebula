@@ -13,6 +13,7 @@ import nebula.simpletemplate.CompilerContext.Arg;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -33,7 +34,7 @@ public class Compiler {
 		}
 
 		@Override
-		public Class<?> compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(String clzName, ClassWriter cw, MethodVisitor mv, CompilerContext context) {
 			mv.visitVarInsn(ALOAD, argv.index);
 			switch (arg.index) {
 			case 0:
@@ -104,9 +105,9 @@ public class Compiler {
 			this.statements = statements;
 		}
 
-		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			for (Statement st : statements) {
-				st.compile(cw, mv, context);
+				st.compile(clzName, cw, mv, context);
 			}
 			return Void.TYPE;
 		}
@@ -155,9 +156,9 @@ public class Compiler {
 			this.e2 = e2;
 		}
 
-		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			// compiles e1
-			e1.compile(cw, mv, context);
+			e1.compile(clzName, cw, mv, context);
 			// tests if e1 is false
 			mv.visitInsn(DUP);
 			Label end = new Label();
@@ -170,7 +171,7 @@ public class Compiler {
 			}
 			// case where e1 is true : e1 && e2 is equal to e2
 			mv.visitInsn(POP);
-			e2.compile(cw, mv, context);
+			e2.compile(clzName, cw, mv, context);
 			// if e1 is false, e1 && e2 is equal to e1:
 			// we jump directly to this label, without evaluating e2
 			mv.visitLabel(end);
@@ -196,7 +197,7 @@ public class Compiler {
 			this.text = text;
 		}
 
-		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			mv.visitTypeInsn(NEW, "java/math/BigDecimal");
 			mv.visitInsn(DUP);
 			mv.visitLdcInsn(text);
@@ -272,8 +273,8 @@ public class Compiler {
 			this.name = name;
 		}
 
-		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			Class<?> clz = e1.compile(cw, mv, context);
+		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+			Class<?> clz = e1.compile(clzName, cw, mv, context);
 
 			Method m = null;
 			Field f = null;
@@ -332,10 +333,10 @@ public class Compiler {
 			this.args = args;
 		}
 
-		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 
-			group.compile(cw, mv, context);
-			name.compile(cw, mv, context);
+			group.compile(clzName, cw, mv, context);
+			name.compile(clzName, cw, mv, context);
 			mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(STGroup.class), "getTemplate",
 					"(Ljava/lang/String;)" + Type.getDescriptor(TemplateImpl.class));
 
@@ -346,14 +347,14 @@ public class Compiler {
 
 				mv.visitInsn(DUP);
 				mv.visitIntInsn(BIPUSH, 0);
-				Class<?> firstType = evalValue(args.get(0).value, cw, mv, context);
+				Class<?> firstType = evalValue(clzName, args.get(0).value, cw, mv, context);
 
 				mv.visitInsn(AASTORE);
 
 				for (int i = 1; i < args.size(); i++) {
 					mv.visitInsn(DUP);
 					mv.visitIntInsn(BIPUSH, i);
-					evalValue(args.get(i).value, cw, mv, context);
+					evalValue(clzName, args.get(i).value, cw, mv, context);
 					mv.visitInsn(AASTORE);
 				}
 
@@ -368,13 +369,13 @@ public class Compiler {
 			return String.class;
 		}
 
-		private Class<?> evalValue(Expr<Object> value, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		private Class<?> evalValue(String clzName, Expr<Object> value, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			if (value instanceof IncludeSubTemplate) {
 				IncludeSubTemplate sub = (IncludeSubTemplate) value;
-				sub.compileInlineToString(cw, mv, context);
+				sub.compileInlineToString(clzName, cw, mv, context);
 				return String.class;
 			} else {
-				return value.compile(cw, mv, context);
+				return value.compile(clzName, cw, mv, context);
 			}
 		}
 
@@ -432,73 +433,41 @@ public class Compiler {
 			this.args = args;
 		}
 
-		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-
-			template.compile(cw, mv, context);
-			mv.visitFieldInsn(GETFIELD, Type.getInternalName(TemplateImpl.class), "implicitlyDefinedTemplates", Type.getDescriptor(List.class));
-			mv.visitIntInsn(BIPUSH, subTemplateIndex);
-			mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
-			mv.visitTypeInsn(CHECKCAST, Type.getInternalName(TemplateImpl.class));
-
-			mv.visitIntInsn(BIPUSH, args.size());
-			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
-
-			if (args.size() > 0) {
-				mv.visitInsn(DUP);
-				mv.visitIntInsn(BIPUSH, 0);
-
-				Class<?> firstType = evalValue(args.get(0).value,cw, mv, context);
-
-				mv.visitInsn(AASTORE);
-
-				for (int i = 1; i < args.size(); i++) {
-					mv.visitInsn(DUP);
-					mv.visitIntInsn(BIPUSH, i);
-					evalValue(args.get(i).value,cw, mv, context);
-					mv.visitInsn(AASTORE);
-				}
-
-				if (!List.class.isAssignableFrom(firstType)) {
-					mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "exec", "([Ljava/lang/Object;)Ljava/lang/String;");
-				} else {
-					mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "execList", "([Ljava/lang/Object;)Ljava/lang/String;");
-				}
-			} else {
-				mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "exec", "([Ljava/lang/Object;)Ljava/lang/String;");
-			}
-
-			return String.class;
+		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+			return this.compileInlineToString(clzName, cw, mv, context);
 		}
 
-		private Class<?> evalValue(Expr<Object> value, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		private Class<?> evalValue(String clzName, Expr<Object> value, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			if (value instanceof IncludeSubTemplate) {
 				IncludeSubTemplate sub = (IncludeSubTemplate) value;
-				sub.compileInlineToString(cw, mv, context);
+				sub.compileInlineToString(clzName, cw, mv, context);
 				return String.class;
 			} else {
-				return value.compile(cw, mv, context);
+				return value.compile(clzName, cw, mv, context);
 			}
 		}
-		
-		public Class<?> compileInlineToString(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			mv.visitVarInsn(ALOAD, argv.index); // backup parent argv to stack
-			mv.visitVarInsn(ALOAD, sb.index);
 
+		static final int THIS = 0;
+		static final int TEMPLATE = 2;
+
+		public Class<?> compileInlineToString(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+
+			int localStringBuilder = context.locals++; // 0 + 1 = 1
 			mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
 			mv.visitInsn(DUP);
 			mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V");
-			mv.visitVarInsn(ASTORE, sb.index);
+			mv.visitVarInsn(ASTORE, localStringBuilder);
 
 			mv.visitIntInsn(BIPUSH, args.size());
 			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
 
 			List<Class<?>> clzes = Lists.newArrayList();
-
+			Class<?> firstType = null;
 			if (args.size() > 0) {
 				mv.visitInsn(DUP);
 				mv.visitIntInsn(BIPUSH, 0);
 
-				Class<?> firstType = evalValue(args.get(0).value,cw, mv, context);
+				firstType = evalValue(clzName, args.get(0).value, cw, mv, context);
 				clzes.add(firstType);
 
 				mv.visitInsn(AASTORE);
@@ -506,44 +475,251 @@ public class Compiler {
 				for (int i = 1; i < args.size(); i++) {
 					mv.visitInsn(DUP);
 					mv.visitIntInsn(BIPUSH, i);
-					Class<?> clz =evalValue(args.get(i).value,cw, mv, context);
+					Class<?> clz = evalValue(clzName, args.get(i).value, cw, mv, context);
 					mv.visitInsn(AASTORE);
 					clzes.add(clz);
 				}
 			}
-			mv.visitVarInsn(ASTORE, argv.index); // store sub argv to argv
 
-			CompilerContext subContext = new CompilerContext(context.impl, clzes);
-			Code code = subContext.impl.implicitlyDefinedTemplates.get(subTemplateIndex).code;
-			code.compile(cw, mv, subContext);
-			
-			mv.visitVarInsn(ALOAD, sb.index);
+			int localSubArgv = context.locals++; // 1 + 1 = 2
+
+			mv.visitVarInsn(ASTORE, localSubArgv); // store sub argv to argv
+
+			if (args.size() == 0) {
+				mv.visitVarInsn(ALOAD, argv.index); // store parent argv to argv
+				mv.visitVarInsn(ALOAD, localSubArgv);
+				mv.visitVarInsn(ASTORE, argv.index);
+				
+				mv.visitVarInsn(ALOAD, sb.index); // store parent argv to argv
+				mv.visitVarInsn(ALOAD, localStringBuilder);
+				mv.visitVarInsn(ASTORE, sb.index);
+
+				CompilerContext subContext = new CompilerContext(context.impl, clzes);
+				Code code = subContext.impl.implicitlyDefinedTemplates.get(subTemplateIndex).code;
+				code.compile(clzName, cw, mv, subContext);
+
+				mv.visitVarInsn(ASTORE, sb.index); // store parent argv to argv
+				mv.visitVarInsn(ASTORE, argv.index); // store parent argv to argv
+				
+			} else if (List.class.isAssignableFrom(firstType)) {
+				int listLocal = context.locals++; // 2+1=3
+
+				mv.visitVarInsn(ALOAD, localSubArgv);
+				mv.visitIntInsn(BIPUSH, 0);
+				mv.visitInsn(AALOAD);
+				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "iterator", "()Ljava/util/Iterator;");
+
+				mv.visitVarInsn(ASTORE, listLocal);
+				Label forCompare = new Label();
+				mv.visitJumpInsn(GOTO, forCompare);
+
+				Label forBegin = new Label();
+				mv.visitLabel(forBegin);
+				{
+					// subArgv[0] = list.next()
+					mv.visitVarInsn(ALOAD, localSubArgv);
+					mv.visitIntInsn(BIPUSH, 0);
+
+					mv.visitVarInsn(ALOAD, listLocal);
+					mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "next", "()Ljava/lang/Object;");
+					mv.visitInsn(AASTORE);
+
+					mv.visitVarInsn(ALOAD, localSubArgv);
+					mv.visitIntInsn(BIPUSH, 0);
+					mv.visitInsn(AALOAD);
+
+					int localFirstArg = context.locals++; // 3+1 =4
+					{
+						mv.visitVarInsn(ASTORE, localFirstArg);
+						doCall(clzName, cw, mv, context, localStringBuilder, localSubArgv, localFirstArg);
+					}
+					context.locals--;// localFirstArg 4-1 = 3
+				}
+				mv.visitLabel(forCompare);
+				mv.visitVarInsn(ALOAD, listLocal);
+				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "hasNext", "()Z");
+				mv.visitJumpInsn(IFNE, forBegin);
+
+				context.locals--;// listLocal 3-1 = 2
+			} else {
+				mv.visitVarInsn(ALOAD, argv.index); // store parent argv to argv
+				mv.visitVarInsn(ALOAD, localSubArgv);
+				mv.visitVarInsn(ASTORE, argv.index);
+				
+				mv.visitVarInsn(ALOAD, sb.index); // store parent argv to argv
+				mv.visitVarInsn(ALOAD, localStringBuilder);
+				mv.visitVarInsn(ASTORE, sb.index);
+
+				CompilerContext subContext = new CompilerContext(context.impl, clzes);
+				Code code = subContext.impl.implicitlyDefinedTemplates.get(subTemplateIndex).code;
+				code.compile(clzName, cw, mv, subContext);
+
+				mv.visitVarInsn(ASTORE, sb.index); // store parent argv to argv
+				mv.visitVarInsn(ASTORE, argv.index); // store parent argv to argv
+			}
+			context.locals--;// localSubArgv // 2-1 = 1
+
+			mv.visitVarInsn(ALOAD, localStringBuilder);
 			mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(StringBuilder.class), "toString", "()Ljava/lang/String;");
-			int locals = context.locals;			
-			mv.visitVarInsn(ASTORE, locals);
-
-			mv.visitVarInsn(ASTORE, sb.index); // store parent argv to argv
-			mv.visitVarInsn(ASTORE, argv.index); // store parent argv to argv
-													// locate
-
-			mv.visitVarInsn(ALOAD, locals);
+			context.locals--; // localStringBuilder 1-1=0
 			return String.class;
 		}
 
-		public Class<?> compileInlineAppend(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			mv.visitVarInsn(ALOAD, argv.index); // backup parent argv to stack
+		private void doCall(String thisClassName, ClassWriter cw, final MethodVisitor mv, CompilerContext context, int localStringBuilder, int localSubArgv,
+				int localFirstArg) {
+			{
+				FieldVisitor fv;
+
+				String templateActionFieldName = "temp" + subTemplateIndex;
+				fv = cw.visitField(ACC_PRIVATE, templateActionFieldName, Type.getDescriptor(Action.class), null, null);
+				fv.visitEnd();
+
+				String templateClzFieldName = "clz" + subTemplateIndex;
+				fv = cw.visitField(ACC_PRIVATE, templateClzFieldName, "Ljava/lang/Class;", "Ljava/lang/Class<*>;", null);
+				fv.visitEnd();
+
+				// prepare first arg
+				mv.visitVarInsn(ALOAD, localFirstArg);
+
+				Label lblAllEnd = new Label();
+				{
+					Label lblNotNull = new Label();
+					mv.visitJumpInsn(IFNULL, lblNotNull); // if(o != null)
+					{
+						// this.clz1
+						mv.visitVarInsn(ALOAD, THIS);
+						mv.visitFieldInsn(GETFIELD, thisClassName, templateClzFieldName, "Ljava/lang/Class;");
+
+						// arg1.getClass()
+						mv.visitVarInsn(ALOAD, localFirstArg);
+						mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Object", "getClass", "()Ljava/lang/Class;");
+
+						// if this.clz1 = arg1.getClas()
+						Label lblIfNotEq = new Label();
+						mv.visitJumpInsn(IF_ACMPNE, lblIfNotEq);
+						{
+							// template1.exec(group, template, out, argv);
+							doInvokeActionExec(mv, thisClassName, templateActionFieldName, localStringBuilder, localSubArgv);
+							mv.visitJumpInsn(GOTO, lblAllEnd);
+						}
+						// else
+						mv.visitLabel(lblIfNotEq);
+						{
+
+							{// this.clz1 = arg1.getClass()
+								mv.visitVarInsn(ALOAD, THIS);
+								mv.visitVarInsn(ALOAD, localFirstArg);
+								mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Object", "getClass", "()Ljava/lang/Class;");
+								mv.visitFieldInsn(PUTFIELD, thisClassName, templateClzFieldName, "Ljava/lang/Class;");
+							}
+
+							{// template1Action =
+								// template.get(o.getClass().getName(),
+								// tempalte1LeadingClass);
+								mv.visitVarInsn(ALOAD, THIS);
+								mv.visitVarInsn(ALOAD, TEMPLATE);
+								mv.visitFieldInsn(GETFIELD, Type.getInternalName(TemplateImpl.class), "implicitlyDefinedTemplates",
+										Type.getDescriptor(List.class));
+								mv.visitIntInsn(BIPUSH, subTemplateIndex);
+								mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
+								mv.visitTypeInsn(CHECKCAST, Type.getInternalName(TemplateImpl.class));
+
+								{// arg1.getClass().getName
+									mv.visitVarInsn(ALOAD, localFirstArg);
+									mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Object", "getClass", "()Ljava/lang/Class;");
+									mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Class", "getName", "()Ljava/lang/String;");
+								}
+
+								mv.visitVarInsn(ALOAD, localSubArgv);
+
+								mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "get", "(Ljava/lang/String;[Ljava/lang/Object;)"
+										+ Type.getDescriptor(Action.class));
+								mv.visitFieldInsn(PUTFIELD, thisClassName, templateActionFieldName, Type.getDescriptor(Action.class));
+							}
+
+							doInvokeActionExec(mv, thisClassName, templateActionFieldName, localStringBuilder, localSubArgv);
+
+						}
+						mv.visitJumpInsn(GOTO, lblAllEnd);
+					}
+					mv.visitLabel(lblNotNull);
+					{// if (this.clz1 == Void.class) {
+						mv.visitVarInsn(ALOAD, THIS);
+						mv.visitFieldInsn(GETFIELD, thisClassName, templateClzFieldName, "Ljava/lang/Class;");
+						mv.visitLdcInsn(Type.getType("Ljava/lang/Void;"));
+						Label _notEq = new Label();
+						mv.visitJumpInsn(IF_ACMPNE, _notEq);
+						{
+							doInvokeActionExec(mv, thisClassName, templateActionFieldName, localStringBuilder, localSubArgv);
+							mv.visitJumpInsn(GOTO, lblAllEnd);
+						}
+						mv.visitLabel(_notEq);
+						{
+
+							{ // this.clz1 = Void.class;
+								mv.visitVarInsn(ALOAD, THIS);
+								mv.visitLdcInsn(Type.getType("Ljava/lang/Void;"));
+								mv.visitFieldInsn(PUTFIELD, thisClassName, templateClzFieldName, "Ljava/lang/Class;");
+							}
+
+							{
+								// template1 =
+								// template.get(Void.class.getName(), );
+								mv.visitVarInsn(ALOAD, THIS);
+
+								mv.visitVarInsn(ALOAD, TEMPLATE);
+								mv.visitFieldInsn(GETFIELD, Type.getInternalName(TemplateImpl.class), "implicitlyDefinedTemplates",
+										Type.getDescriptor(List.class));
+								mv.visitIntInsn(BIPUSH, subTemplateIndex);
+								mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
+								mv.visitTypeInsn(CHECKCAST, Type.getInternalName(TemplateImpl.class));
+
+								// Void.class.getName
+								mv.visitLdcInsn(Type.getType("Ljava/lang/Void;"));
+								mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Class", "getName", "()Ljava/lang/String;");
+
+								mv.visitVarInsn(ALOAD, localSubArgv);
+
+								// template.get
+								mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "get", "(Ljava/lang/String;[Ljava/lang/Object;)"
+										+ Type.getDescriptor(Action.class));
+								mv.visitFieldInsn(PUTFIELD, thisClassName, templateActionFieldName, Type.getDescriptor(Action.class));
+							}
+
+							doInvokeActionExec(mv, thisClassName, templateActionFieldName, localStringBuilder, localSubArgv);
+						}
+
+					}
+				}
+				mv.visitLabel(lblAllEnd);
+			}
+		}
+
+		private void doInvokeActionExec(MethodVisitor mv, String thisClassName, String templateFieldName, int localStringBuilder, int localSubArgv) {
+			mv.visitVarInsn(ALOAD, 0);
+			mv.visitFieldInsn(GETFIELD, thisClassName, templateFieldName, Type.getDescriptor(Action.class));
+			mv.visitVarInsn(ALOAD, 1);
+			mv.visitVarInsn(ALOAD, 2);
+			mv.visitVarInsn(ALOAD, localStringBuilder);
+			mv.visitVarInsn(ALOAD, localSubArgv);
+			mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(Action.class), "exec",
+					"(" + Type.getDescriptor(STGroup.class) + Type.getDescriptor(TemplateImpl.class) + Type.getDescriptor(StringBuilder.class)
+							+ "[Ljava/lang/Object;)V");
+		}
+
+		public Class<?> compileInlineAppend(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 
 
 			mv.visitIntInsn(BIPUSH, args.size());
 			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
 
 			List<Class<?>> clzes = Lists.newArrayList();
-
+			Class<?> firstType = null;
 			if (args.size() > 0) {
 				mv.visitInsn(DUP);
 				mv.visitIntInsn(BIPUSH, 0);
 
-				Class<?> firstType = evalValue(args.get(0).value,cw, mv, context);
+				firstType = evalValue(clzName, args.get(0).value, cw, mv, context);
 				clzes.add(firstType);
 
 				mv.visitInsn(AASTORE);
@@ -551,22 +727,82 @@ public class Compiler {
 				for (int i = 1; i < args.size(); i++) {
 					mv.visitInsn(DUP);
 					mv.visitIntInsn(BIPUSH, i);
-					Class<?> clz = evalValue(args.get(i).value,cw, mv, context);
+					Class<?> clz = evalValue(clzName, args.get(i).value, cw, mv, context);
 					mv.visitInsn(AASTORE);
 					clzes.add(clz);
 				}
 			}
-			mv.visitVarInsn(ASTORE, argv.index); // store sub argv to argv
 
-			CompilerContext subContext = new CompilerContext(context.impl, clzes);
-			Code code = subContext.impl.implicitlyDefinedTemplates.get(subTemplateIndex).code;
-			code.compile(cw, mv, subContext);
-						
-//			mv.visitInsn(POP);
-//			int locals = context.locals;			
-//			mv.visitVarInsn(ASTORE, locals);
+			int localSubArgv = context.locals++; // 1 + 1 = 2
 
-			mv.visitVarInsn(ASTORE, argv.index); // store parent argv to argv
+			mv.visitVarInsn(ASTORE, localSubArgv); // store sub argv to argv
+
+			if (args.size() == 0) {
+
+				mv.visitVarInsn(ALOAD, argv.index); // store parent argv to argv
+				
+				mv.visitVarInsn(ALOAD, localSubArgv);
+				mv.visitVarInsn(ASTORE, argv.index);
+				
+				CompilerContext subContext = new CompilerContext(context.impl, clzes);
+				Code code = subContext.impl.implicitlyDefinedTemplates.get(subTemplateIndex).code;
+				code.compile(clzName, cw, mv, subContext);
+
+				mv.visitVarInsn(ASTORE, argv.index); // store parent argv to argv
+			} else if (List.class.isAssignableFrom(firstType)) {
+				int localStringBuilder = 3; // 0 + 1 = 1
+				int listLocal = context.locals++; // 2+1=3
+
+				mv.visitVarInsn(ALOAD, localSubArgv);
+				mv.visitIntInsn(BIPUSH, 0);
+				mv.visitInsn(AALOAD);
+				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "iterator", "()Ljava/util/Iterator;");
+
+				mv.visitVarInsn(ASTORE, listLocal);
+				Label forCompare = new Label();
+				mv.visitJumpInsn(GOTO, forCompare);
+
+				Label forBegin = new Label();
+				mv.visitLabel(forBegin);
+				{
+					// subArgv[0] = list.next()
+					mv.visitVarInsn(ALOAD, localSubArgv);
+					mv.visitIntInsn(BIPUSH, 0);
+
+					mv.visitVarInsn(ALOAD, listLocal);
+					mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "next", "()Ljava/lang/Object;");
+					mv.visitInsn(AASTORE);
+
+					mv.visitVarInsn(ALOAD, localSubArgv);
+					mv.visitIntInsn(BIPUSH, 0);
+					mv.visitInsn(AALOAD);
+
+					int localFirstArg = context.locals++; // 3+1 =4
+					{
+						mv.visitVarInsn(ASTORE, localFirstArg);
+						doCall(clzName, cw, mv, context, localStringBuilder, localSubArgv, localFirstArg);
+					}
+					context.locals--;// localFirstArg 4-1 = 3
+				}
+				mv.visitLabel(forCompare);
+				mv.visitVarInsn(ALOAD, listLocal);
+				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "hasNext", "()Z");
+				mv.visitJumpInsn(IFNE, forBegin);
+
+				context.locals--;// listLocal 3-1 = 2
+			} else {
+				mv.visitVarInsn(ALOAD, argv.index); // store parent argv to argv
+				mv.visitVarInsn(ALOAD, localSubArgv);
+				mv.visitVarInsn(ASTORE, argv.index);				
+
+				CompilerContext subContext = new CompilerContext(context.impl, clzes);
+				Code code = subContext.impl.implicitlyDefinedTemplates.get(subTemplateIndex).code;
+				code.compile(clzName, cw, mv, subContext);
+
+				mv.visitVarInsn(ASTORE, argv.index); // store parent argv to argv
+			}
+			context.locals--;// localSubArgv // 2-1 = 1
+
 			return Void.class;
 		}
 
@@ -608,7 +844,7 @@ public class Compiler {
 			this.value = Long.parseLong(text);
 		}
 
-		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			mv.visitLdcInsn(value);
 			return Long.TYPE;
 		}
@@ -631,7 +867,7 @@ public class Compiler {
 			this.value = value;
 		}
 
-		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			mv.visitLdcInsn(value);
 			return String.class;
 		}
@@ -659,10 +895,10 @@ public class Compiler {
 			this.e1 = e1;
 		}
 
-		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			// computes !e1 by evaluating 1 - e1
 			mv.visitInsn(ICONST_1);
-			e1.compile(cw, mv, context);
+			e1.compile(clzName, cw, mv, context);
 			mv.visitInsn(ISUB);
 			return Boolean.TYPE;
 		}
@@ -685,8 +921,8 @@ public class Compiler {
 			this.e1 = e1;
 		}
 
-		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			Class<?> clz = e1.compile(cw, mv, context);
+		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+			Class<?> clz = e1.compile(clzName, cw, mv, context);
 			if (clz == Boolean.TYPE) {
 				return clz;
 			} else {
@@ -725,7 +961,7 @@ public class Compiler {
 			this.blockelse = blockelse;
 		}
 
-		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			Label ifEnd = new Label();
 			Label ifFalse = null;
 
@@ -743,13 +979,13 @@ public class Compiler {
 				Expr<?> e = conditions.get(i);
 				Statement block = statements.get(i);
 
-				Class<?> clz = e.compile(cw, mv, context);
+				Class<?> clz = e.compile(clzName, cw, mv, context);
 				if (clz == Boolean.TYPE) {
 					mv.visitJumpInsn(IFEQ, ifFalse);
-					block.compile(cw, mv, context);
+					block.compile(clzName, cw, mv, context);
 				} else {
 					mv.visitJumpInsn(IFNULL, ifFalse);
-					block.compile(cw, mv, context);
+					block.compile(clzName, cw, mv, context);
 				}
 				if (cnt > 1) {
 					mv.visitJumpInsn(GOTO, ifEnd);
@@ -759,7 +995,7 @@ public class Compiler {
 			}
 
 			if (blockelse != null) {
-				blockelse.compile(cw, mv, context);
+				blockelse.compile(clzName, cw, mv, context);
 			}
 
 			mv.visitLabel(ifEnd);
@@ -823,16 +1059,15 @@ public class Compiler {
 			this.expr = expr;
 		}
 
-		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			if(expr instanceof IncludeSubTemplate){
-				IncludeSubTemplate sub = (IncludeSubTemplate)expr;
-				return sub.compileInlineAppend(cw, mv, context);
+		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+			if (expr instanceof IncludeSubTemplate) {
+				IncludeSubTemplate sub = (IncludeSubTemplate) expr;
+				return sub.compileInlineAppend(clzName, cw, mv, context);
 			}
-			
-			sb.compile(cw, mv, context);
-			
-			
-			Class<?> clz = expr.compile(cw, mv, context);
+
+			sb.compile(clzName, cw, mv, context);
+
+			Class<?> clz = expr.compile(clzName, cw, mv, context);
 
 			if (String.class == clz) {
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;");
@@ -940,7 +1175,7 @@ public class Compiler {
 			this.value = value;
 		}
 
-		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			mv.visitLdcInsn(value);
 			return String.class;
 		}
@@ -969,7 +1204,7 @@ public class Compiler {
 		}
 
 		@Override
-		public Class<?> compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(String clzName, ClassWriter cw, MethodVisitor mv, CompilerContext context) {
 			mv.visitVarInsn(ALOAD, var.index);
 			return null;
 		}
@@ -993,7 +1228,7 @@ public class Compiler {
 			else this.value = 0;
 		}
 
-		public Class<?> compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			mv.visitLdcInsn(value);
 			return Boolean.TYPE;
 		}
@@ -1104,7 +1339,7 @@ public class Compiler {
 	}
 
 	public Expr<Object> opInclude(Expr<Object> group, Expr<String> name, List<Argument> args) {
-		if(args ==null){
+		if (args == null) {
 			args = Lists.newArrayList();
 		}
 		return new Include(group, name, args);
@@ -1112,7 +1347,7 @@ public class Compiler {
 
 	@SuppressWarnings("rawtypes")
 	public Expr<Object> opInclude(Expr<Object> group, Expr<String> name, List<Expr> target, List<Argument> args) {
-		if(args ==null){
+		if (args == null) {
 			args = Lists.newArrayList();
 		}
 		List<Argument> leading = Lists.newArrayList();

@@ -3,15 +3,35 @@ package nebula.simpletemplate;
 import java.io.IOException;
 import java.util.Map;
 
+import nebula.lang.Type;
+
 public class TestCodeMap implements Action {
 
+	Class<?> tempalte1LeadingClass;
+	Action template1Action;
+
 	@Override
-	@SuppressWarnings("unchecked")
-	public void exec(STGroup group, TemplateImpl template,StringBuilder out, Object[] argv) throws IOException {
+	public void exec(STGroup group, TemplateImpl template, StringBuilder out, Object[] argv) throws IOException {
 		{
-			out.append("Hello");
-			out.append(((Map<String, Object>) argv[0]).get("name"));
-			out.append(";");
+
+			Object o = argv[0];
+			if (o != null) {
+				if (tempalte1LeadingClass == o.getClass()) {
+					template1Action.exec(group, template, out, argv);
+				} else {
+					tempalte1LeadingClass = o.getClass();
+					template1Action = template.get(o.getClass().getName(), tempalte1LeadingClass);
+					template1Action.exec(group, template, out, argv);
+				}
+			} else {
+				if (tempalte1LeadingClass == Void.class) {
+					template1Action.exec(group, template, out, argv);
+				} else {
+					tempalte1LeadingClass = Void.class;
+					template1Action = template.get(Void.class.getName(), tempalte1LeadingClass);
+					template1Action.exec(group, template, out, argv);
+				}
+			}
 		}
 	}
 }

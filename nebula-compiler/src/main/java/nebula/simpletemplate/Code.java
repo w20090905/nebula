@@ -5,6 +5,6 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
 
 public interface Code {
-    Class<?> compile(ClassWriter cw, MethodVisitor mv, CompilerContext context);
+    Class<?> compile(String clzName, ClassWriter cw, MethodVisitor mv, CompilerContext context);
     String toString(CompilerContext context);
 }

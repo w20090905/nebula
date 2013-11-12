@@ -31,7 +31,7 @@ public class ActionComplier implements Opcodes {
 	 * Returns the byte code of an Expression class corresponding to this
 	 * expression.
 	 */
-	<T> byte[] doCompile(final String name, final TemplateImpl template, CompilerContext context) {
+	<T> byte[] doCompile(final String clzInternalName, final TemplateImpl template, CompilerContext context) {
 
 		// class header
 		ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
@@ -39,7 +39,7 @@ public class ActionComplier implements Opcodes {
 		FieldVisitor fv;
 
 		// Class define
-		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, name, null, "java/lang/Object", new String[] { SUPER_NAME });
+		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, clzInternalName, null, "java/lang/Object", new String[] { SUPER_NAME });
 
 		// Init method
 		{
@@ -52,19 +52,21 @@ public class ActionComplier implements Opcodes {
 			mv.visitEnd();
 		}
 
-		if (template.implicitlyDefinedTemplates != null) {
-			List<TemplateImpl> list = template.implicitlyDefinedTemplates;
-			for (int i = 0; i < list.size(); i++) {
-				{
-					fv = cw.visitField(0, "tempalte" + i + "LeadingClass", "Ljava/lang/Class;", "Ljava/lang/Class<*>;", null);
-					fv.visitEnd();
-				}
-				{
-					fv = cw.visitField(0, "template" + i + "Action", Type.getDescriptor(Action.class), null, null);
-					fv.visitEnd();
-				}
-			}
-		}
+//		if (template.implicitlyDefinedTemplates != null) {
+//			List<TemplateImpl> list = template.implicitlyDefinedTemplates;
+//			for (int i = 0; i < list.size(); i++) {
+//				{
+//					String templateClzFieldName = "clz" + i;
+//					fv = cw.visitField(ACC_PRIVATE, templateClzFieldName, "Ljava/lang/Class;", "Ljava/lang/Class<*>;", null);
+//					fv.visitEnd();
+//				}
+//				{
+//					String templateActionFieldName = "temp" + i;
+//					fv = cw.visitField(ACC_PRIVATE, templateActionFieldName, Type.getDescriptor(Action.class), null, null);
+//					fv.visitEnd();
+//				}
+//			}
+//		}
 
 		{
 			mv = cw.visitMethod(ACC_PUBLIC, "exec",
@@ -73,7 +75,7 @@ public class ActionComplier implements Opcodes {
 
 			mv.visitCode();
 
-			template.code.compile(cw, mv, context);
+			template.code.compile(clzInternalName, cw, mv, context);
 
 			mv.visitInsn(RETURN);
 			mv.visitMaxs(0, 0);

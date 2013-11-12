@@ -129,6 +129,26 @@ public class ST_BasicTest extends BasicTest {
 		String result = st.renderNamed(root);
 		assertEquals(expected, result);
 	}
+	
+
+	public void testIncludeSubTempalteList() throws Exception {
+		String template = "lo yy:${yy} ad ${xx: {kewl( xx:${xx}daddy)}} xx:${xx} yy:${yy};";
+		String expected = "lo yy:yy ad kewl( xx:xx001daddy)kewl( xx:xx002daddy)kewl( xx:xx003daddy) xx:xx001xx002xx003 yy:yy;";
+		
+		ST st = new ST(template,'$','}');
+		
+		Map<String, Object> root = Maps.newHashMap();
+		
+		List<String> list = Lists.newArrayList();
+		list.add("xx001");
+		list.add("xx002");
+		list.add("xx003");		
+		root.put("xx", list);
+		root.put("yy", "yy");
+		
+		String result = st.renderNamed(root);
+		assertEquals(expected, result);
+	}
 
 
 	public void testIncludeSubTempalteQueue() throws Exception {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 public class ST {
@@ -103,13 +102,7 @@ public class ST {
 
 	@Override
 	public String toString() {
-		if (impl == null) return "bad-template()";
-		String name = impl.name + "()";
-		// if (this.impl.isRegion) {
-		// name = "@" + STGroup.getUnMangledTemplateName(name);
-		// }
-
-		return name;
+		return this.render();
 	}
 
 	public static String format(String template, Object... attributes) {

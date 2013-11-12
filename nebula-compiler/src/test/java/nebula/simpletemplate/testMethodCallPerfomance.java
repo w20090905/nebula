@@ -169,6 +169,23 @@ public class testMethodCallPerfomance extends TestCase {
 			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
+		{
+			String desc = "getClass";
+			// setUp
+			// prepare
+			long start, end, nanoAll, nanoEvery;
+			Class<?> z = null;
+			start = System.nanoTime();
+			for (int i = 0; i < MAX; i++) {
+				z = desc.getClass();
+			}
+			end = System.nanoTime();
+			nanoAll = end - start;
+			nanoEvery = nanoAll / MAX;
+
+			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+					1000 * 1000 * 1000 / nanoEvery);
+		}
 	}
 
 	interface Call {
