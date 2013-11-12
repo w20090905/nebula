@@ -327,6 +327,12 @@ public class Compiler {
 		final Expr<Object> group;
 		final Expr<String> name;
 
+		static final int THIS = 0;
+		static final int GROUP = 1;
+		static final int TEMPLATE = 2;
+		static final int STRINGBILDER = 3;
+		static final int ARGV = 4;
+
 		Include(Expr<Object> group, Expr<String> name, List<Argument> args) {
 			this.group = group;
 			this.name = name;
@@ -334,107 +340,48 @@ public class Compiler {
 		}
 
 		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-
-			group.compile(clzName, cw, mv, context);
-			name.compile(clzName, cw, mv, context);
-			mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(STGroup.class), "getTemplate",
-					"(Ljava/lang/String;)" + Type.getDescriptor(TemplateImpl.class));
-
-			mv.visitIntInsn(BIPUSH, args.size());
-			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
-
-			if (args.size() > 0) {
-
-				mv.visitInsn(DUP);
-				mv.visitIntInsn(BIPUSH, 0);
-				Class<?> firstType = evalValue(clzName, args.get(0).value, cw, mv, context);
-
-				mv.visitInsn(AASTORE);
-
-				for (int i = 1; i < args.size(); i++) {
-					mv.visitInsn(DUP);
-					mv.visitIntInsn(BIPUSH, i);
-					evalValue(clzName, args.get(i).value, cw, mv, context);
-					mv.visitInsn(AASTORE);
-				}
-
-				if (!List.class.isAssignableFrom(firstType)) {
-					mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "exec", "([Ljava/lang/Object;)Ljava/lang/String;");
-				} else {
-					mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "execList", "([Ljava/lang/Object;)Ljava/lang/String;");
-				}
-			} else {
-				mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "exec", "([Ljava/lang/Object;)Ljava/lang/String;");
-			}
-			return String.class;
-		}
-
-		private Class<?> evalValue(String clzName, Expr<Object> value, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			if (value instanceof IncludeSubTemplate) {
-				IncludeSubTemplate sub = (IncludeSubTemplate) value;
-				sub.compileInlineToString(clzName, cw, mv, context);
-				return String.class;
-			} else {
-				return value.compile(clzName, cw, mv, context);
-			}
-		}
-
-		@Override
-		public Object eval(Object root) {
-			// return ((Entity) e1.eval()).get(name);
-			return null;
-		}
-
-		@Override
-		public String toString() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(name.toString());
-			if (args != null && args.size() > 0) {
-				sb.append("(");
-				for (Argument arg : args) {
-					sb.append(arg.value.toString());
-					sb.append(',');
-				}
-				sb.setCharAt(sb.length() - 1, ')');
-			} else {
-				sb.append("()");
-			}
-
-			return sb.toString();
-		}
-
-		@Override
-		public String toString(CompilerContext context) {
-
-			// Method m = null;
-			// if (context.isMap) {
-			// return e1.toString() + ".get(\"" + name.toString() + "\")";
-			// } else if ((m = context.getProp(name)) != null) {
-			// return e1.toString() + "." + m.getName() + "()";
-			// } else {
-			// throw new RuntimeException("dd");
+			//
+			// group.compile(clzName, cw, mv, context);
+			// name.compile(clzName, cw, mv, context);
+			// mv.visitMethodInsn(INVOKEVIRTUAL,
+			// Type.getInternalName(STGroup.class), "getTemplate",
+			// "(Ljava/lang/String;)" + Type.getDescriptor(TemplateImpl.class));
+			//
+			// mv.visitIntInsn(BIPUSH, args.size());
+			// mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+			//
+			// if (args.size() > 0) {
+			//
+			// mv.visitInsn(DUP);
+			// mv.visitIntInsn(BIPUSH, 0);
+			// Class<?> firstType = evalValue(clzName, args.get(0).value, cw,
+			// mv, context);
+			//
+			// mv.visitInsn(AASTORE);
+			//
+			// for (int i = 1; i < args.size(); i++) {
+			// mv.visitInsn(DUP);
+			// mv.visitIntInsn(BIPUSH, i);
+			// evalValue(clzName, args.get(i).value, cw, mv, context);
+			// mv.visitInsn(AASTORE);
 			// }
-			return null;
-		}
-	}
-
-	static class IncludeSubTemplate extends Expression<Object> {
-		final Var argv;
-		final Var sb;
-		final List<Argument> args;
-		final int subTemplateIndex;
-		final Expr<Object> template;
-
-		IncludeSubTemplate(Var argv, Var sb, Expr<Object> template, int subTemplateIndex, List<Argument> args) {
-			this.sb = sb;
-			this.argv = argv;
-			this.template = template;
-			this.subTemplateIndex = subTemplateIndex;
-			this.args = args;
-		}
-
-		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			return this.compileInlineToString(clzName, cw, mv, context);
+			//
+			// if (!List.class.isAssignableFrom(firstType)) {
+			// mv.visitMethodInsn(INVOKEVIRTUAL,
+			// Type.getInternalName(TemplateImpl.class), "exec",
+			// "([Ljava/lang/Object;)Ljava/lang/String;");
+			// } else {
+			// mv.visitMethodInsn(INVOKEVIRTUAL,
+			// Type.getInternalName(TemplateImpl.class), "execList",
+			// "([Ljava/lang/Object;)Ljava/lang/String;");
+			// }
+			// } else {
+			// mv.visitMethodInsn(INVOKEVIRTUAL,
+			// Type.getInternalName(TemplateImpl.class), "exec",
+			// "([Ljava/lang/Object;)Ljava/lang/String;");
+			// }
+			// return String.class;
+			return compileInlineToString(clzName, cw, mv, context);
 		}
 
 		private Class<?> evalValue(String clzName, Expr<Object> value, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
@@ -446,13 +393,11 @@ public class Compiler {
 				return value.compile(clzName, cw, mv, context);
 			}
 		}
-
-		static final int THIS = 0;
-		static final int TEMPLATE = 2;
 
 		public Class<?> compileInlineToString(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 
 			int localStringBuilder = context.locals++; // 0 + 1 = 1
+
 			mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
 			mv.visitInsn(DUP);
 			mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V");
@@ -486,21 +431,77 @@ public class Compiler {
 			mv.visitVarInsn(ASTORE, localSubArgv); // store sub argv to argv
 
 			if (args.size() == 0) {
-				mv.visitVarInsn(ALOAD, argv.index); // store parent argv to argv
-				mv.visitVarInsn(ALOAD, localSubArgv);
-				mv.visitVarInsn(ASTORE, argv.index);
-				
-				mv.visitVarInsn(ALOAD, sb.index); // store parent argv to argv
-				mv.visitVarInsn(ALOAD, localStringBuilder);
-				mv.visitVarInsn(ASTORE, sb.index);
+				if (this.name instanceof Name) {
+					String templateName = ((Name) this.name).value;
 
-				CompilerContext subContext = new CompilerContext(context.impl, clzes);
-				Code code = subContext.impl.implicitlyDefinedTemplates.get(subTemplateIndex).code;
-				code.compile(clzName, cw, mv, subContext);
+					mv.visitVarInsn(ALOAD, ARGV); // store parent argv to argv
+					mv.visitVarInsn(ALOAD, localSubArgv);
+					mv.visitVarInsn(ASTORE, ARGV);
 
-				mv.visitVarInsn(ASTORE, sb.index); // store parent argv to argv
-				mv.visitVarInsn(ASTORE, argv.index); // store parent argv to argv
-				
+					mv.visitVarInsn(ALOAD, STRINGBILDER); // store parent argv
+															// to
+															// argv
+					mv.visitVarInsn(ALOAD, localStringBuilder);
+					mv.visitVarInsn(ASTORE, STRINGBILDER);
+
+					TemplateImpl subImpl = context.impl.nativeGroup.getTemplate(templateName);
+
+					boolean needSubTemplate = subImpl.implicitlyDefinedTemplates != null && subImpl.implicitlyDefinedTemplates.size() > 0;
+
+					if (needSubTemplate) {
+						mv.visitVarInsn(ALOAD, TEMPLATE);
+
+						group.compile(clzName, cw, mv, context);
+						name.compile(clzName, cw, mv, context);
+						mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(STGroup.class), "getTemplate",
+								"(Ljava/lang/String;)" + Type.getDescriptor(TemplateImpl.class));
+						mv.visitTypeInsn(CHECKCAST, Type.getInternalName(TemplateImpl.class));
+						mv.visitVarInsn(ASTORE, TEMPLATE);
+					}
+
+					CompilerContext subContext = new CompilerContext(subImpl, clzes);
+					subContext.locals = context.locals;
+					subImpl.code.compile(clzName, cw, mv, subContext);
+
+					if (needSubTemplate) {
+						mv.visitVarInsn(ASTORE, TEMPLATE); // store parent argv
+															// to
+					}
+
+					mv.visitVarInsn(ASTORE, STRINGBILDER);
+					mv.visitVarInsn(ASTORE, ARGV);
+				} else {
+					// String templateName = ((StringCst)this.name).value;
+					//
+					// mv.visitVarInsn(ALOAD, ARGV); // store parent argv to
+					// argv
+					// mv.visitVarInsn(ALOAD, localSubArgv);
+					// mv.visitVarInsn(ASTORE, ARGV);
+					//
+					// mv.visitVarInsn(ALOAD, STRINGBILDER); // store parent
+					// argv
+					// // to
+					// // argv
+					// mv.visitVarInsn(ALOAD, localStringBuilder);
+					// mv.visitVarInsn(ASTORE, STRINGBILDER);
+					//
+					// CompilerContext subContext = new
+					// CompilerContext(context.impl, clzes);
+					// Code code =
+					// subContext.impl.nativeGroup.getTemplate(templateName).code;
+					// code.compile(clzName, cw, mv, subContext);
+					//
+					// group.compile(clzName, cw, mv, context);
+					// name.compile(clzName, cw, mv, context);
+					// mv.visitMethodInsn(INVOKEVIRTUAL,
+					// Type.getInternalName(STGroup.class), "getTemplate",
+					// "(Ljava/lang/String;)" +
+					// Type.getDescriptor(TemplateImpl.class));
+					//
+					// mv.visitVarInsn(ASTORE, STRINGBILDER);
+					// mv.visitVarInsn(ASTORE, ARGV);
+				}
+
 			} else if (List.class.isAssignableFrom(firstType)) {
 				int listLocal = context.locals++; // 2+1=3
 
@@ -529,11 +530,13 @@ public class Compiler {
 					mv.visitInsn(AALOAD);
 
 					int localFirstArg = context.locals++; // 3+1 =4
+
 					{
 						mv.visitVarInsn(ASTORE, localFirstArg);
 						doCall(clzName, cw, mv, context, localStringBuilder, localSubArgv, localFirstArg);
 					}
 					context.locals--;// localFirstArg 4-1 = 3
+
 				}
 				mv.visitLabel(forCompare);
 				mv.visitVarInsn(ALOAD, listLocal);
@@ -541,42 +544,111 @@ public class Compiler {
 				mv.visitJumpInsn(IFNE, forBegin);
 
 				context.locals--;// listLocal 3-1 = 2
+
 			} else {
-				mv.visitVarInsn(ALOAD, argv.index); // store parent argv to argv
-				mv.visitVarInsn(ALOAD, localSubArgv);
-				mv.visitVarInsn(ASTORE, argv.index);
-				
-				mv.visitVarInsn(ALOAD, sb.index); // store parent argv to argv
-				mv.visitVarInsn(ALOAD, localStringBuilder);
-				mv.visitVarInsn(ASTORE, sb.index);
+				if (this.name instanceof Name) {
+					String templateName = ((Name) this.name).value;
 
-				CompilerContext subContext = new CompilerContext(context.impl, clzes);
-				Code code = subContext.impl.implicitlyDefinedTemplates.get(subTemplateIndex).code;
-				code.compile(clzName, cw, mv, subContext);
+					mv.visitVarInsn(ALOAD, ARGV); // store parent argv to argv
+					mv.visitVarInsn(ALOAD, localSubArgv);
+					mv.visitVarInsn(ASTORE, ARGV);
 
-				mv.visitVarInsn(ASTORE, sb.index); // store parent argv to argv
-				mv.visitVarInsn(ASTORE, argv.index); // store parent argv to argv
+					mv.visitVarInsn(ALOAD, STRINGBILDER); // store parent argv
+															// to
+															// argv
+					mv.visitVarInsn(ALOAD, localStringBuilder);
+					mv.visitVarInsn(ASTORE, STRINGBILDER);
+
+					TemplateImpl subImpl = context.impl.nativeGroup.getTemplate(templateName);
+					boolean needSubTemplate = subImpl.implicitlyDefinedTemplates != null && subImpl.implicitlyDefinedTemplates.size() > 0;
+
+					if (needSubTemplate) {
+						mv.visitVarInsn(ALOAD, TEMPLATE);
+
+						group.compile(clzName, cw, mv, context);
+						name.compile(clzName, cw, mv, context);
+						mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(STGroup.class), "getTemplate",
+								"(Ljava/lang/String;)" + Type.getDescriptor(TemplateImpl.class));
+						mv.visitTypeInsn(CHECKCAST, Type.getInternalName(TemplateImpl.class));
+						mv.visitVarInsn(ASTORE, TEMPLATE);
+					}
+
+					CompilerContext subContext = new CompilerContext(subImpl, clzes);
+					subContext.locals = context.locals;
+					subImpl.code.compile(clzName, cw, mv, subContext);
+
+					if (needSubTemplate) {
+						mv.visitVarInsn(ASTORE, TEMPLATE); // store parent argv
+															// to
+					}
+
+					mv.visitVarInsn(ASTORE, STRINGBILDER);
+					mv.visitVarInsn(ASTORE, ARGV);
+				} else {
+					// String templateName = ((StringCst)this.name).value;
+					//
+					// mv.visitVarInsn(ALOAD, ARGV); // store parent argv to
+					// argv
+					// mv.visitVarInsn(ALOAD, localSubArgv);
+					// mv.visitVarInsn(ASTORE, ARGV);
+					//
+					// mv.visitVarInsn(ALOAD, STRINGBILDER); // store parent
+					// argv
+					// // to
+					// // argv
+					// mv.visitVarInsn(ALOAD, localStringBuilder);
+					// mv.visitVarInsn(ASTORE, STRINGBILDER);
+					//
+					// CompilerContext subContext = new
+					// CompilerContext(context.impl, clzes);
+					// Code code =
+					// subContext.impl.nativeGroup.getTemplate(templateName).code;
+					// code.compile(clzName, cw, mv, subContext);
+					//
+					// group.compile(clzName, cw, mv, context);
+					// name.compile(clzName, cw, mv, context);
+					// mv.visitMethodInsn(INVOKEVIRTUAL,
+					// Type.getInternalName(STGroup.class), "getTemplate",
+					// "(Ljava/lang/String;)" +
+					// Type.getDescriptor(TemplateImpl.class));
+					//
+					// mv.visitVarInsn(ASTORE, STRINGBILDER);
+					// mv.visitVarInsn(ASTORE, ARGV);
+				}
 			}
 			context.locals--;// localSubArgv // 2-1 = 1
 
 			mv.visitVarInsn(ALOAD, localStringBuilder);
 			mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(StringBuilder.class), "toString", "()Ljava/lang/String;");
 			context.locals--; // localStringBuilder 1-1=0
+
 			return String.class;
 		}
 
-		private void doCall(String thisClassName, ClassWriter cw, final MethodVisitor mv, CompilerContext context, int localStringBuilder, int localSubArgv,
+		static int cntInclude = 0;
+
+		private void doCall(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context, int localStringBuilder, int localSubArgv,
 				int localFirstArg) {
 			{
 				FieldVisitor fv;
-
-				String templateActionFieldName = "temp" + subTemplateIndex;
-				fv = cw.visitField(ACC_PRIVATE, templateActionFieldName, Type.getDescriptor(Action.class), null, null);
-				fv.visitEnd();
-
-				String templateClzFieldName = "clz" + subTemplateIndex;
-				fv = cw.visitField(ACC_PRIVATE, templateClzFieldName, "Ljava/lang/Class;", "Ljava/lang/Class<*>;", null);
-				fv.visitEnd();
+				String templateActionFieldName, templateTemplateFieldName, templateClzFieldName;
+				if (this.name instanceof Name) {
+					templateActionFieldName = "action_" + ((Name) this.name).value + "_" + cntInclude;
+					templateTemplateFieldName = "temp_" + ((Name) this.name).value + "_" + cntInclude;
+					templateClzFieldName = "clz_" + ((Name) this.name).value + "_" + cntInclude++;
+				} else {
+					templateActionFieldName = "temp_" + cntInclude;
+					templateTemplateFieldName = "temp_" + cntInclude;
+					templateClzFieldName = "clz_" + this.name + cntInclude++;
+				}
+				{// Define field
+					fv = cw.visitField(ACC_PRIVATE, templateActionFieldName, Type.getDescriptor(Action.class), null, null);
+					fv.visitEnd();
+					fv = cw.visitField(ACC_PRIVATE, templateTemplateFieldName, Type.getDescriptor(TemplateImpl.class), null, null);
+					fv.visitEnd();
+					fv = cw.visitField(ACC_PRIVATE, templateClzFieldName, "Ljava/lang/Class;", "Ljava/lang/Class<*>;", null);
+					fv.visitEnd();
+				}
 
 				// prepare first arg
 				mv.visitVarInsn(ALOAD, localFirstArg);
@@ -588,7 +660,7 @@ public class Compiler {
 					{
 						// this.clz1
 						mv.visitVarInsn(ALOAD, THIS);
-						mv.visitFieldInsn(GETFIELD, thisClassName, templateClzFieldName, "Ljava/lang/Class;");
+						mv.visitFieldInsn(GETFIELD, clzName, templateClzFieldName, "Ljava/lang/Class;");
 
 						// arg1.getClass()
 						mv.visitVarInsn(ALOAD, localFirstArg);
@@ -599,7 +671,7 @@ public class Compiler {
 						mv.visitJumpInsn(IF_ACMPNE, lblIfNotEq);
 						{
 							// template1.exec(group, template, out, argv);
-							doInvokeActionExec(mv, thisClassName, templateActionFieldName, localStringBuilder, localSubArgv);
+							doInvokeActionExec(mv, clzName, templateActionFieldName, templateTemplateFieldName, localStringBuilder, localSubArgv);
 							mv.visitJumpInsn(GOTO, lblAllEnd);
 						}
 						// else
@@ -610,19 +682,27 @@ public class Compiler {
 								mv.visitVarInsn(ALOAD, THIS);
 								mv.visitVarInsn(ALOAD, localFirstArg);
 								mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Object", "getClass", "()Ljava/lang/Class;");
-								mv.visitFieldInsn(PUTFIELD, thisClassName, templateClzFieldName, "Ljava/lang/Class;");
+								mv.visitFieldInsn(PUTFIELD, clzName, templateClzFieldName, "Ljava/lang/Class;");
 							}
 
 							{// template1Action =
 								// template.get(o.getClass().getName(),
 								// tempalte1LeadingClass);
 								mv.visitVarInsn(ALOAD, THIS);
-								mv.visitVarInsn(ALOAD, TEMPLATE);
-								mv.visitFieldInsn(GETFIELD, Type.getInternalName(TemplateImpl.class), "implicitlyDefinedTemplates",
-										Type.getDescriptor(List.class));
-								mv.visitIntInsn(BIPUSH, subTemplateIndex);
-								mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
+
+								mv.visitInsn(DUP);
+
+								group.compile(clzName, cw, mv, context);
+								name.compile(clzName, cw, mv, context);
+								mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(STGroup.class), "getTemplate",
+										"(Ljava/lang/String;)" + Type.getDescriptor(TemplateImpl.class));
 								mv.visitTypeInsn(CHECKCAST, Type.getInternalName(TemplateImpl.class));
+
+								// cost this
+								mv.visitFieldInsn(PUTFIELD, clzName, templateTemplateFieldName, Type.getDescriptor(TemplateImpl.class));
+
+								mv.visitInsn(DUP); // dup this
+								mv.visitFieldInsn(GETFIELD, clzName, templateTemplateFieldName, Type.getDescriptor(TemplateImpl.class));// cost
 
 								{// arg1.getClass().getName
 									mv.visitVarInsn(ALOAD, localFirstArg);
@@ -634,10 +714,10 @@ public class Compiler {
 
 								mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "get", "(Ljava/lang/String;[Ljava/lang/Object;)"
 										+ Type.getDescriptor(Action.class));
-								mv.visitFieldInsn(PUTFIELD, thisClassName, templateActionFieldName, Type.getDescriptor(Action.class));
+								mv.visitFieldInsn(PUTFIELD, clzName, templateActionFieldName, Type.getDescriptor(Action.class));
 							}
 
-							doInvokeActionExec(mv, thisClassName, templateActionFieldName, localStringBuilder, localSubArgv);
+							doInvokeActionExec(mv, clzName, templateActionFieldName, templateTemplateFieldName, localStringBuilder, localSubArgv);
 
 						}
 						mv.visitJumpInsn(GOTO, lblAllEnd);
@@ -645,12 +725,12 @@ public class Compiler {
 					mv.visitLabel(lblNotNull);
 					{// if (this.clz1 == Void.class) {
 						mv.visitVarInsn(ALOAD, THIS);
-						mv.visitFieldInsn(GETFIELD, thisClassName, templateClzFieldName, "Ljava/lang/Class;");
+						mv.visitFieldInsn(GETFIELD, clzName, templateClzFieldName, "Ljava/lang/Class;");
 						mv.visitLdcInsn(Type.getType("Ljava/lang/Void;"));
 						Label _notEq = new Label();
 						mv.visitJumpInsn(IF_ACMPNE, _notEq);
 						{
-							doInvokeActionExec(mv, thisClassName, templateActionFieldName, localStringBuilder, localSubArgv);
+							doInvokeActionExec(mv, clzName, templateActionFieldName, templateTemplateFieldName, localStringBuilder, localSubArgv);
 							mv.visitJumpInsn(GOTO, lblAllEnd);
 						}
 						mv.visitLabel(_notEq);
@@ -659,7 +739,7 @@ public class Compiler {
 							{ // this.clz1 = Void.class;
 								mv.visitVarInsn(ALOAD, THIS);
 								mv.visitLdcInsn(Type.getType("Ljava/lang/Void;"));
-								mv.visitFieldInsn(PUTFIELD, thisClassName, templateClzFieldName, "Ljava/lang/Class;");
+								mv.visitFieldInsn(PUTFIELD, clzName, templateClzFieldName, "Ljava/lang/Class;");
 							}
 
 							{
@@ -667,12 +747,20 @@ public class Compiler {
 								// template.get(Void.class.getName(), );
 								mv.visitVarInsn(ALOAD, THIS);
 
-								mv.visitVarInsn(ALOAD, TEMPLATE);
-								mv.visitFieldInsn(GETFIELD, Type.getInternalName(TemplateImpl.class), "implicitlyDefinedTemplates",
-										Type.getDescriptor(List.class));
-								mv.visitIntInsn(BIPUSH, subTemplateIndex);
-								mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
+								mv.visitInsn(DUP); // dup this
+
+								// group.getTemplate(name)
+								group.compile(clzName, cw, mv, context);
+								name.compile(clzName, cw, mv, context);
+								mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(STGroup.class), "getTemplate",
+										"(Ljava/lang/String;)" + Type.getDescriptor(TemplateImpl.class));
 								mv.visitTypeInsn(CHECKCAST, Type.getInternalName(TemplateImpl.class));
+
+								// cost this
+								mv.visitFieldInsn(PUTFIELD, clzName, templateTemplateFieldName, Type.getDescriptor(TemplateImpl.class));
+
+								mv.visitInsn(DUP); // dup this
+								mv.visitFieldInsn(GETFIELD, clzName, templateTemplateFieldName, Type.getDescriptor(TemplateImpl.class));// cost
 
 								// Void.class.getName
 								mv.visitLdcInsn(Type.getType("Ljava/lang/Void;"));
@@ -683,10 +771,10 @@ public class Compiler {
 								// template.get
 								mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "get", "(Ljava/lang/String;[Ljava/lang/Object;)"
 										+ Type.getDescriptor(Action.class));
-								mv.visitFieldInsn(PUTFIELD, thisClassName, templateActionFieldName, Type.getDescriptor(Action.class));
+								mv.visitFieldInsn(PUTFIELD, clzName, templateActionFieldName, Type.getDescriptor(Action.class));
 							}
 
-							doInvokeActionExec(mv, thisClassName, templateActionFieldName, localStringBuilder, localSubArgv);
+							doInvokeActionExec(mv, clzName, templateActionFieldName, templateTemplateFieldName, localStringBuilder, localSubArgv);
 						}
 
 					}
@@ -695,11 +783,16 @@ public class Compiler {
 			}
 		}
 
-		private void doInvokeActionExec(MethodVisitor mv, String thisClassName, String templateFieldName, int localStringBuilder, int localSubArgv) {
+		private void doInvokeActionExec(MethodVisitor mv, String thisClassName, String templateFieldName, String templateTemplateFieldName,
+				int localStringBuilder, int localSubArgv) {
 			mv.visitVarInsn(ALOAD, 0);
 			mv.visitFieldInsn(GETFIELD, thisClassName, templateFieldName, Type.getDescriptor(Action.class));
+
 			mv.visitVarInsn(ALOAD, 1);
-			mv.visitVarInsn(ALOAD, 2);
+
+			mv.visitVarInsn(ALOAD, 0);
+			mv.visitFieldInsn(GETFIELD, thisClassName, templateTemplateFieldName, Type.getDescriptor(TemplateImpl.class));
+
 			mv.visitVarInsn(ALOAD, localStringBuilder);
 			mv.visitVarInsn(ALOAD, localSubArgv);
 			mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(Action.class), "exec",
@@ -708,7 +801,6 @@ public class Compiler {
 		}
 
 		public Class<?> compileInlineAppend(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-
 
 			mv.visitIntInsn(BIPUSH, args.size());
 			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
@@ -738,17 +830,65 @@ public class Compiler {
 			mv.visitVarInsn(ASTORE, localSubArgv); // store sub argv to argv
 
 			if (args.size() == 0) {
+				if (this.name instanceof StringCst) {
+					String templateName = ((StringCst) this.name).value;
 
-				mv.visitVarInsn(ALOAD, argv.index); // store parent argv to argv
-				
-				mv.visitVarInsn(ALOAD, localSubArgv);
-				mv.visitVarInsn(ASTORE, argv.index);
-				
-				CompilerContext subContext = new CompilerContext(context.impl, clzes);
-				Code code = subContext.impl.implicitlyDefinedTemplates.get(subTemplateIndex).code;
-				code.compile(clzName, cw, mv, subContext);
+					mv.visitVarInsn(ALOAD, ARGV); // store parent argv to argv
+					mv.visitVarInsn(ALOAD, localSubArgv);
+					mv.visitVarInsn(ASTORE, ARGV);
 
-				mv.visitVarInsn(ASTORE, argv.index); // store parent argv to argv
+					TemplateImpl subImpl = context.impl.nativeGroup.getTemplate(templateName);
+
+					boolean needSubTemplate = subImpl.implicitlyDefinedTemplates != null && subImpl.implicitlyDefinedTemplates.size() > 0;
+					if (needSubTemplate) {
+						mv.visitVarInsn(ALOAD, TEMPLATE);
+
+						group.compile(clzName, cw, mv, context);
+						name.compile(clzName, cw, mv, context);
+						mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(STGroup.class), "getTemplate",
+								"(Ljava/lang/String;)" + Type.getDescriptor(TemplateImpl.class));
+						mv.visitTypeInsn(CHECKCAST, Type.getInternalName(TemplateImpl.class));
+						mv.visitVarInsn(ASTORE, TEMPLATE);
+					}
+					CompilerContext subContext = new CompilerContext(subImpl, clzes);
+					subContext.locals = context.locals;
+					subImpl.code.compile(clzName, cw, mv, subContext);
+
+					if (needSubTemplate) {
+						mv.visitVarInsn(ASTORE, TEMPLATE);
+					}
+					mv.visitVarInsn(ASTORE, ARGV);
+				} else {
+					// String templateName = ((StringCst)this.name).value;
+					//
+					// mv.visitVarInsn(ALOAD, ARGV); // store parent argv to
+					// argv
+					// mv.visitVarInsn(ALOAD, localSubArgv);
+					// mv.visitVarInsn(ASTORE, ARGV);
+					//
+					// mv.visitVarInsn(ALOAD, STRINGBILDER); // store parent
+					// argv
+					// // to
+					// // argv
+					// mv.visitVarInsn(ALOAD, localStringBuilder);
+					// mv.visitVarInsn(ASTORE, STRINGBILDER);
+					//
+					// CompilerContext subContext = new
+					// CompilerContext(context.impl, clzes);
+					// Code code =
+					// subContext.impl.nativeGroup.getTemplate(templateName).code;
+					// code.compile(clzName, cw, mv, subContext);
+					//
+					// group.compile(clzName, cw, mv, context);
+					// name.compile(clzName, cw, mv, context);
+					// mv.visitMethodInsn(INVOKEVIRTUAL,
+					// Type.getInternalName(STGroup.class), "getTemplate",
+					// "(Ljava/lang/String;)" +
+					// Type.getDescriptor(TemplateImpl.class));
+					//
+					// mv.visitVarInsn(ASTORE, STRINGBILDER);
+					// mv.visitVarInsn(ASTORE, ARGV);
+				}
 			} else if (List.class.isAssignableFrom(firstType)) {
 				int localStringBuilder = 3; // 0 + 1 = 1
 				int listLocal = context.locals++; // 2+1=3
@@ -791,15 +931,607 @@ public class Compiler {
 
 				context.locals--;// listLocal 3-1 = 2
 			} else {
-				mv.visitVarInsn(ALOAD, argv.index); // store parent argv to argv
+				if (this.name instanceof StringCst) {
+					String templateName = ((StringCst) this.name).value;
+
+					mv.visitVarInsn(ALOAD, ARGV); // store parent argv to argv
+					mv.visitVarInsn(ALOAD, localSubArgv);
+					mv.visitVarInsn(ASTORE, ARGV);
+
+					TemplateImpl subImpl = context.impl.nativeGroup.getTemplate(templateName);
+
+					boolean needSubTemplate = subImpl.implicitlyDefinedTemplates != null && subImpl.implicitlyDefinedTemplates.size() > 0;
+					if (needSubTemplate) {
+						mv.visitVarInsn(ALOAD, TEMPLATE);
+
+						group.compile(clzName, cw, mv, context);
+						name.compile(clzName, cw, mv, context);
+						mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(STGroup.class), "getTemplate",
+								"(Ljava/lang/String;)" + Type.getDescriptor(TemplateImpl.class));
+						mv.visitTypeInsn(CHECKCAST, Type.getInternalName(TemplateImpl.class));
+						mv.visitVarInsn(ASTORE, TEMPLATE);
+					}
+					CompilerContext subContext = new CompilerContext(subImpl, clzes);
+					subContext.locals = context.locals;
+					subImpl.code.compile(clzName, cw, mv, subContext);
+
+					if (needSubTemplate) {
+						mv.visitVarInsn(ASTORE, TEMPLATE); // store parent argv
+															// to
+					}
+					mv.visitVarInsn(ASTORE, ARGV);
+				} else {
+					// String templateName = ((StringCst)this.name).value;
+					//
+					// mv.visitVarInsn(ALOAD, ARGV); // store parent argv to
+					// argv
+					// mv.visitVarInsn(ALOAD, localSubArgv);
+					// mv.visitVarInsn(ASTORE, ARGV);
+					//
+					// mv.visitVarInsn(ALOAD, STRINGBILDER); // store parent
+					// argv
+					// // to
+					// // argv
+					// mv.visitVarInsn(ALOAD, localStringBuilder);
+					// mv.visitVarInsn(ASTORE, STRINGBILDER);
+					//
+					// CompilerContext subContext = new
+					// CompilerContext(context.impl, clzes);
+					// Code code =
+					// subContext.impl.nativeGroup.getTemplate(templateName).code;
+					// code.compile(clzName, cw, mv, subContext);
+					//
+					// group.compile(clzName, cw, mv, context);
+					// name.compile(clzName, cw, mv, context);
+					// mv.visitMethodInsn(INVOKEVIRTUAL,
+					// Type.getInternalName(STGroup.class), "getTemplate",
+					// "(Ljava/lang/String;)" +
+					// Type.getDescriptor(TemplateImpl.class));
+					//
+					// mv.visitVarInsn(ASTORE, STRINGBILDER);
+					// mv.visitVarInsn(ASTORE, ARGV);
+				}
+			}
+			context.locals--;// localSubArgv // 2-1 = 1
+
+			return Void.class;
+		}
+
+		@Override
+		public Object eval(Object root) {
+			// return ((Entity) e1.eval()).get(name);
+			return null;
+		}
+
+		@Override
+		public String toString() {
+			StringBuilder sb = new StringBuilder();
+			sb.append(name.toString());
+			if (args != null && args.size() > 0) {
+				sb.append("(");
+				for (Argument arg : args) {
+					sb.append(arg.value.toString());
+					sb.append(',');
+				}
+				sb.setCharAt(sb.length() - 1, ')');
+			} else {
+				sb.append("()");
+			}
+
+			return sb.toString();
+		}
+
+		@Override
+		public String toString(CompilerContext context) {
+
+			// Method m = null;
+			// if (context.isMap) {
+			// return e1.toString() + ".get(\"" + name.toString() + "\")";
+			// } else if ((m = context.getProp(name)) != null) {
+			// return e1.toString() + "." + m.getName() + "()";
+			// } else {
+			// throw new RuntimeException("dd");
+			// }
+			return null;
+		}
+	}
+
+	static class IncludeSubTemplate extends Expression<Object> {
+		// final Var argv;
+		// final Var sb;s
+		final Expr<Object> template;
+		final int subTemplateIndex;
+		final List<Argument> args;
+
+		IncludeSubTemplate(Var argv, Var sb, Expr<Object> template, int subTemplateIndex, List<Argument> args) {
+			// this.sb = sb;
+			// this.argv = argv;
+			this.template = template;
+			this.subTemplateIndex = subTemplateIndex;
+			this.args = args;
+		}
+
+		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+			return this.compileInlineToString(clzName, cw, mv, context);
+		}
+
+		private Class<?> evalValue(String clzName, Expr<Object> value, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+			if (value instanceof IncludeSubTemplate) {
+				IncludeSubTemplate sub = (IncludeSubTemplate) value;
+				sub.compileInlineToString(clzName, cw, mv, context);
+				return String.class;
+			} else {
+				return value.compile(clzName, cw, mv, context);
+			}
+		}
+
+		static final int THIS = 0;
+		static final int GROUP = 1;
+		static final int TEMPLATE = 2;
+		static final int STRINGBILDER = 3;
+		static final int ARGV = 4;
+
+		public Class<?> compileInlineToString(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+
+			int localStringBuilder = context.locals++; // 0 + 1 = 1
+			mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
+			mv.visitInsn(DUP);
+			mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V");
+			mv.visitVarInsn(ASTORE, localStringBuilder);
+
+			mv.visitIntInsn(BIPUSH, args.size());
+			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+
+			List<Class<?>> clzes = Lists.newArrayList();
+			Class<?> firstType = null;
+			if (args.size() > 0) {
+				mv.visitInsn(DUP);
+				mv.visitIntInsn(BIPUSH, 0);
+
+				firstType = evalValue(clzName, args.get(0).value, cw, mv, context);
+				clzes.add(firstType);
+
+				mv.visitInsn(AASTORE);
+
+				for (int i = 1; i < args.size(); i++) {
+					mv.visitInsn(DUP);
+					mv.visitIntInsn(BIPUSH, i);
+					Class<?> clz = evalValue(clzName, args.get(i).value, cw, mv, context);
+					mv.visitInsn(AASTORE);
+					clzes.add(clz);
+				}
+			}
+
+			int localSubArgv = context.locals++; // 1 + 1 = 2
+
+			mv.visitVarInsn(ASTORE, localSubArgv); // store sub argv to argv
+
+			if (args.size() == 0) {
+				mv.visitVarInsn(ALOAD, ARGV); // store parent argv to argv
 				mv.visitVarInsn(ALOAD, localSubArgv);
-				mv.visitVarInsn(ASTORE, argv.index);				
+				mv.visitVarInsn(ASTORE, ARGV);
 
-				CompilerContext subContext = new CompilerContext(context.impl, clzes);
-				Code code = subContext.impl.implicitlyDefinedTemplates.get(subTemplateIndex).code;
-				code.compile(clzName, cw, mv, subContext);
+				mv.visitVarInsn(ALOAD, STRINGBILDER); // store parent argv to
+														// argv
+				mv.visitVarInsn(ALOAD, localStringBuilder);
+				mv.visitVarInsn(ASTORE, STRINGBILDER);
 
-				mv.visitVarInsn(ASTORE, argv.index); // store parent argv to argv
+				TemplateImpl subImpl = context.impl.implicitlyDefinedTemplates.get(subTemplateIndex);
+				boolean needSubTemplate = subImpl.implicitlyDefinedTemplates != null && subImpl.implicitlyDefinedTemplates.size() > 0;
+
+				if (needSubTemplate) {
+					mv.visitVarInsn(ALOAD, TEMPLATE);
+					mv.visitInsn(DUP);
+					mv.visitFieldInsn(GETFIELD, Type.getInternalName(TemplateImpl.class), "implicitlyDefinedTemplates", Type.getDescriptor(List.class));
+
+					mv.visitIntInsn(BIPUSH, subTemplateIndex);
+					mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
+					mv.visitTypeInsn(CHECKCAST, Type.getInternalName(TemplateImpl.class));
+					mv.visitVarInsn(ASTORE, TEMPLATE);
+				}
+
+				CompilerContext subContext = new CompilerContext(subImpl, clzes);
+				subContext.locals = context.locals;
+				subImpl.code.compile(clzName, cw, mv, subContext);
+
+				if (needSubTemplate) {
+					mv.visitVarInsn(ASTORE, TEMPLATE); // store parent argv to
+				}
+
+				mv.visitVarInsn(ASTORE, STRINGBILDER); // store parent argv to
+														// argv
+				mv.visitVarInsn(ASTORE, ARGV); // store parent argv to
+												// argv
+
+			} else if (List.class.isAssignableFrom(firstType)) {
+				int listLocal = context.locals++; // 2+1=3
+
+				mv.visitVarInsn(ALOAD, localSubArgv);
+				mv.visitIntInsn(BIPUSH, 0);
+				mv.visitInsn(AALOAD);
+				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "iterator", "()Ljava/util/Iterator;");
+
+				mv.visitVarInsn(ASTORE, listLocal);
+				Label forCompare = new Label();
+				mv.visitJumpInsn(GOTO, forCompare);
+
+				Label forBegin = new Label();
+				mv.visitLabel(forBegin);
+				{
+					// subArgv[0] = list.next()
+					mv.visitVarInsn(ALOAD, localSubArgv);
+					mv.visitIntInsn(BIPUSH, 0);
+
+					mv.visitVarInsn(ALOAD, listLocal);
+					mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "next", "()Ljava/lang/Object;");
+					mv.visitTypeInsn(CHECKCAST, Type.getInternalName(Object.class));
+					mv.visitInsn(AASTORE);
+
+					mv.visitVarInsn(ALOAD, localSubArgv);
+					mv.visitIntInsn(BIPUSH, 0);
+					mv.visitInsn(AALOAD);
+
+					int localFirstArg = context.locals++; // 3+1 =4
+					{
+						mv.visitVarInsn(ASTORE, localFirstArg);
+						doCall(clzName, cw, mv, context, localStringBuilder, localSubArgv, localFirstArg);
+					}
+					context.locals--;// localFirstArg 4-1 = 3
+				}
+				mv.visitLabel(forCompare);
+				mv.visitVarInsn(ALOAD, listLocal);
+				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "hasNext", "()Z");
+				mv.visitJumpInsn(IFNE, forBegin);
+
+				context.locals--;// listLocal 3-1 = 2
+			} else {
+				mv.visitVarInsn(ALOAD, ARGV); // store parent argv to argv
+				mv.visitVarInsn(ALOAD, localSubArgv);
+				mv.visitVarInsn(ASTORE, ARGV);
+
+				mv.visitVarInsn(ALOAD, STRINGBILDER); // store parent argv to
+														// argv
+				mv.visitVarInsn(ALOAD, localStringBuilder);
+				mv.visitVarInsn(ASTORE, STRINGBILDER);
+
+				TemplateImpl subImpl = context.impl.implicitlyDefinedTemplates.get(subTemplateIndex);
+				boolean needSubTemplate = subImpl.implicitlyDefinedTemplates != null && subImpl.implicitlyDefinedTemplates.size() > 0;
+
+				if (needSubTemplate) {
+					mv.visitVarInsn(ALOAD, TEMPLATE);
+					mv.visitInsn(DUP);
+					mv.visitFieldInsn(GETFIELD, Type.getInternalName(TemplateImpl.class), "implicitlyDefinedTemplates", Type.getDescriptor(List.class));
+
+					mv.visitIntInsn(BIPUSH, subTemplateIndex);
+					mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
+					mv.visitTypeInsn(CHECKCAST, Type.getInternalName(TemplateImpl.class));
+					mv.visitVarInsn(ASTORE, TEMPLATE);
+				}
+
+				CompilerContext subContext = new CompilerContext(subImpl, clzes);
+				subContext.locals = context.locals;
+				subImpl.code.compile(clzName, cw, mv, subContext);
+
+				if (needSubTemplate) {
+					mv.visitVarInsn(ASTORE, TEMPLATE); // store parent argv to
+				}
+				mv.visitVarInsn(ASTORE, STRINGBILDER); // store parent argv to
+														// argv
+				mv.visitVarInsn(ASTORE, ARGV); // store parent argv to
+												// argv
+			}
+			context.locals--;// localSubArgv // 2-1 = 1
+
+			mv.visitVarInsn(ALOAD, localStringBuilder);
+			mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(StringBuilder.class), "toString", "()Ljava/lang/String;");
+			context.locals--; // localStringBuilder 1-1=0
+			return String.class;
+		}
+
+		static int cnt = 0;
+
+		private void doCall(String thisClassName, ClassWriter cw, final MethodVisitor mv, CompilerContext context, int localStringBuilder, int localSubArgv,
+				int localFirstArg) {
+			{
+				FieldVisitor fv;
+
+				String templateTemplateFieldName = "temp_" + subTemplateIndex + "_" + cnt;
+				fv = cw.visitField(ACC_PRIVATE, templateTemplateFieldName, Type.getDescriptor(TemplateImpl.class), null, null);
+				fv.visitEnd();
+
+				String templateActionFieldName = "action_" + subTemplateIndex + "_" + cnt;
+				fv = cw.visitField(ACC_PRIVATE, templateActionFieldName, Type.getDescriptor(Action.class), null, null);
+				fv.visitEnd();
+
+				String templateClzFieldName = "clz_" + subTemplateIndex + "_" + cnt++;
+				fv = cw.visitField(ACC_PRIVATE, templateClzFieldName, "Ljava/lang/Class;", "Ljava/lang/Class<*>;", null);
+				fv.visitEnd();
+
+				// prepare first arg
+				mv.visitVarInsn(ALOAD, localFirstArg);
+
+				Label lblAllEnd = new Label();
+				{
+					Label lblNotNull = new Label();
+					mv.visitJumpInsn(IFNULL, lblNotNull); // if(o != null)
+					{
+
+						// this.clz1
+						mv.visitVarInsn(ALOAD, THIS);
+						mv.visitFieldInsn(GETFIELD, thisClassName, templateClzFieldName, "Ljava/lang/Class;");
+
+						// arg1.getClass()
+						mv.visitVarInsn(ALOAD, localFirstArg);
+						mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Object", "getClass", "()Ljava/lang/Class;");
+
+						// if this.clz1 = arg1.getClas()
+						Label lblIfNotEq = new Label();
+						mv.visitJumpInsn(IF_ACMPNE, lblIfNotEq);
+						{
+							// template1.exec(group, template, out, argv);
+							doInvokeActionExec(mv, thisClassName, templateActionFieldName, templateTemplateFieldName, localStringBuilder, localSubArgv);
+							mv.visitJumpInsn(GOTO, lblAllEnd);
+						}
+						// else
+						mv.visitLabel(lblIfNotEq);
+						{
+
+							{// this.clz1 = arg1.getClass()
+								mv.visitVarInsn(ALOAD, THIS);
+								mv.visitVarInsn(ALOAD, localFirstArg);
+								mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Object", "getClass", "()Ljava/lang/Class;");
+								mv.visitFieldInsn(PUTFIELD, thisClassName, templateClzFieldName, "Ljava/lang/Class;");
+							}
+
+							{// template1Action =
+								// template.get(o.getClass().getName(),
+								// tempalte1LeadingClass);
+								mv.visitVarInsn(ALOAD, THIS);
+								mv.visitInsn(DUP);
+
+								mv.visitVarInsn(ALOAD, TEMPLATE);
+								mv.visitFieldInsn(GETFIELD, Type.getInternalName(TemplateImpl.class), "implicitlyDefinedTemplates",
+										Type.getDescriptor(List.class));
+
+								mv.visitIntInsn(BIPUSH, subTemplateIndex);
+								mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
+								mv.visitTypeInsn(CHECKCAST, Type.getInternalName(TemplateImpl.class));
+
+								// cost this
+								mv.visitFieldInsn(PUTFIELD, thisClassName, templateTemplateFieldName, Type.getDescriptor(TemplateImpl.class));
+
+								mv.visitInsn(DUP); // dup this
+								mv.visitFieldInsn(GETFIELD, thisClassName, templateTemplateFieldName, Type.getDescriptor(TemplateImpl.class));// cost
+																																				// this
+
+								{// arg1.getClass().getName
+									mv.visitVarInsn(ALOAD, localFirstArg);
+									mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Object", "getClass", "()Ljava/lang/Class;");
+									mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Class", "getName", "()Ljava/lang/String;");
+								}
+								mv.visitVarInsn(ALOAD, localSubArgv);
+								mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "get", "(Ljava/lang/String;[Ljava/lang/Object;)"
+										+ Type.getDescriptor(Action.class));
+								mv.visitFieldInsn(PUTFIELD, thisClassName, templateActionFieldName, Type.getDescriptor(Action.class));
+							}
+							doInvokeActionExec(mv, thisClassName, templateActionFieldName, templateTemplateFieldName, localStringBuilder, localSubArgv);
+
+						}
+						mv.visitJumpInsn(GOTO, lblAllEnd);
+					}
+					mv.visitLabel(lblNotNull);
+					{// if (this.clz1 == Void.class) {
+						mv.visitVarInsn(ALOAD, THIS);
+						mv.visitFieldInsn(GETFIELD, thisClassName, templateClzFieldName, "Ljava/lang/Class;");
+						mv.visitLdcInsn(Type.getType("Ljava/lang/Void;"));
+						Label _notEq = new Label();
+						mv.visitJumpInsn(IF_ACMPNE, _notEq);
+						{
+							doInvokeActionExec(mv, thisClassName, templateActionFieldName, templateTemplateFieldName, localStringBuilder, localSubArgv);
+							mv.visitJumpInsn(GOTO, lblAllEnd);
+						}
+						mv.visitLabel(_notEq);
+						{
+
+							{ // this.clz1 = Void.class;
+								mv.visitVarInsn(ALOAD, THIS);
+								mv.visitLdcInsn(Type.getType("Ljava/lang/Void;"));
+								mv.visitFieldInsn(PUTFIELD, thisClassName, templateClzFieldName, "Ljava/lang/Class;");
+							}
+
+							{
+								// template1 =
+								// template.get(Void.class.getName(), );
+								mv.visitVarInsn(ALOAD, THIS);
+								mv.visitInsn(DUP);// dup this
+
+								mv.visitVarInsn(ALOAD, TEMPLATE);
+								mv.visitFieldInsn(GETFIELD, Type.getInternalName(TemplateImpl.class), "implicitlyDefinedTemplates",
+										Type.getDescriptor(List.class));
+								mv.visitIntInsn(BIPUSH, subTemplateIndex);
+								mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
+								mv.visitTypeInsn(CHECKCAST, Type.getInternalName(TemplateImpl.class));
+
+								// cost this
+								mv.visitFieldInsn(PUTFIELD, thisClassName, templateTemplateFieldName, Type.getDescriptor(TemplateImpl.class));
+
+								mv.visitInsn(DUP); // dup this
+								mv.visitFieldInsn(GETFIELD, thisClassName, templateTemplateFieldName, Type.getDescriptor(TemplateImpl.class));// cost
+																																				// this
+
+								// Void.class.getName
+								mv.visitLdcInsn(Type.getType("Ljava/lang/Void;"));
+								mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Class", "getName", "()Ljava/lang/String;");
+
+								mv.visitVarInsn(ALOAD, localSubArgv);
+
+								// template.get
+								mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(TemplateImpl.class), "get", "(Ljava/lang/String;[Ljava/lang/Object;)"
+										+ Type.getDescriptor(Action.class));
+								mv.visitFieldInsn(PUTFIELD, thisClassName, templateActionFieldName, Type.getDescriptor(Action.class));
+							}
+
+							doInvokeActionExec(mv, thisClassName, templateActionFieldName, templateTemplateFieldName, localStringBuilder, localSubArgv);
+						}
+
+					}
+				}
+				mv.visitLabel(lblAllEnd);
+			}
+		}
+
+		private void doInvokeActionExec(MethodVisitor mv, String thisClassName, String tempalteActionFieldName, String tempalteTemplateFieldName,
+				int localStringBuilder, int localSubArgv) {
+
+			// action
+			mv.visitVarInsn(ALOAD, 0);
+			mv.visitFieldInsn(GETFIELD, thisClassName, tempalteActionFieldName, Type.getDescriptor(Action.class));
+
+			// stgroup
+			mv.visitVarInsn(ALOAD, 1);
+
+			// template
+			mv.visitVarInsn(ALOAD, 0);
+			mv.visitFieldInsn(GETFIELD, thisClassName, tempalteTemplateFieldName, Type.getDescriptor(TemplateImpl.class));
+
+			mv.visitVarInsn(ALOAD, localStringBuilder);
+			mv.visitVarInsn(ALOAD, localSubArgv);
+			mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(Action.class), "exec",
+					"(" + Type.getDescriptor(STGroup.class) + Type.getDescriptor(TemplateImpl.class) + Type.getDescriptor(StringBuilder.class)
+							+ "[Ljava/lang/Object;)V");
+		}
+
+		public Class<?> compileInlineAppend(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+
+			mv.visitIntInsn(BIPUSH, args.size());
+			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+
+			List<Class<?>> clzes = Lists.newArrayList();
+			Class<?> firstType = null;
+			if (args.size() > 0) {
+				mv.visitInsn(DUP);
+				mv.visitIntInsn(BIPUSH, 0);
+
+				firstType = evalValue(clzName, args.get(0).value, cw, mv, context);
+				clzes.add(firstType);
+
+				mv.visitInsn(AASTORE);
+
+				for (int i = 1; i < args.size(); i++) {
+					mv.visitInsn(DUP);
+					mv.visitIntInsn(BIPUSH, i);
+					Class<?> clz = evalValue(clzName, args.get(i).value, cw, mv, context);
+					mv.visitInsn(AASTORE);
+					clzes.add(clz);
+				}
+			}
+
+			int localSubArgv = context.locals++; // 1 + 1 = 2
+
+			mv.visitVarInsn(ASTORE, localSubArgv); // store sub argv to argv
+
+			if (args.size() == 0) {
+				mv.visitVarInsn(ALOAD, ARGV); // store parent argv to argv
+				mv.visitVarInsn(ALOAD, localSubArgv);
+				mv.visitVarInsn(ASTORE, ARGV);
+
+				TemplateImpl subImpl = context.impl.implicitlyDefinedTemplates.get(subTemplateIndex);
+
+				boolean needSubTemplate = subImpl.implicitlyDefinedTemplates != null && subImpl.implicitlyDefinedTemplates.size() > 0;
+
+				if (needSubTemplate) {
+					mv.visitVarInsn(ALOAD, TEMPLATE);
+					mv.visitInsn(DUP);
+					mv.visitFieldInsn(GETFIELD, Type.getInternalName(TemplateImpl.class), "implicitlyDefinedTemplates", Type.getDescriptor(List.class));
+
+					mv.visitIntInsn(BIPUSH, subTemplateIndex);
+					mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
+					mv.visitTypeInsn(CHECKCAST, Type.getInternalName(TemplateImpl.class));
+					mv.visitVarInsn(ASTORE, TEMPLATE);
+				}
+				CompilerContext subContext = new CompilerContext(subImpl, clzes);
+				subContext.locals = context.locals;
+				subImpl.code.compile(clzName, cw, mv, subContext);
+
+				if (needSubTemplate) {
+					mv.visitVarInsn(ASTORE, TEMPLATE); // store parent argv to
+				}
+				mv.visitVarInsn(ASTORE, ARGV); // store parent argv to
+
+				// argv
+			} else if (List.class.isAssignableFrom(firstType)) {
+				int localStringBuilder = 3; // 0 + 1 = 1
+				int listLocal = context.locals++; // 2+1=3
+
+				mv.visitVarInsn(ALOAD, localSubArgv);
+				mv.visitIntInsn(BIPUSH, 0);
+				mv.visitInsn(AALOAD);
+				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "iterator", "()Ljava/util/Iterator;");
+
+				mv.visitVarInsn(ASTORE, listLocal);
+				Label forCompare = new Label();
+				mv.visitJumpInsn(GOTO, forCompare);
+
+				Label forBegin = new Label();
+				mv.visitLabel(forBegin);
+				{
+
+					// subArgv[0] = list.next()
+					mv.visitVarInsn(ALOAD, localSubArgv);
+					mv.visitIntInsn(BIPUSH, 0);
+
+					mv.visitVarInsn(ALOAD, listLocal);
+					mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "next", "()Ljava/lang/Object;");
+					mv.visitTypeInsn(CHECKCAST, Type.getInternalName(Object.class));
+					mv.visitInsn(AASTORE);
+
+					mv.visitVarInsn(ALOAD, localSubArgv);
+					mv.visitIntInsn(BIPUSH, 0);
+					mv.visitInsn(AALOAD);
+					int localFirstArg = context.locals++; // 3+1 =4
+
+					{
+						mv.visitVarInsn(ASTORE, localFirstArg);
+						doCall(clzName, cw, mv, context, localStringBuilder, localSubArgv, localFirstArg);
+					}
+					context.locals--;// localFirstArg 4-1 = 3
+
+				}
+				mv.visitLabel(forCompare);
+				mv.visitVarInsn(ALOAD, listLocal);
+				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "hasNext", "()Z");
+				mv.visitJumpInsn(IFNE, forBegin);
+
+				context.locals--;// listLocal 3-1 = 2
+
+			} else {
+				mv.visitVarInsn(ALOAD, ARGV); // store parent argv to argv
+				mv.visitVarInsn(ALOAD, localSubArgv);
+				mv.visitVarInsn(ASTORE, ARGV);
+
+				TemplateImpl subImpl = context.impl.implicitlyDefinedTemplates.get(subTemplateIndex);
+
+				boolean needSubTemplate = subImpl.implicitlyDefinedTemplates != null && subImpl.implicitlyDefinedTemplates.size() > 0;
+
+				if (needSubTemplate) {
+					mv.visitVarInsn(ALOAD, TEMPLATE);
+					mv.visitInsn(DUP);
+					mv.visitFieldInsn(GETFIELD, Type.getInternalName(TemplateImpl.class), "implicitlyDefinedTemplates", Type.getDescriptor(List.class));
+
+					mv.visitIntInsn(BIPUSH, subTemplateIndex);
+					mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
+					mv.visitTypeInsn(CHECKCAST, Type.getInternalName(TemplateImpl.class));
+					mv.visitVarInsn(ASTORE, TEMPLATE);
+				}
+				CompilerContext subContext = new CompilerContext(subImpl, clzes);
+				subContext.locals = context.locals;
+				subImpl.code.compile(clzName, cw, mv, subContext);
+
+				if (needSubTemplate) {
+					mv.visitVarInsn(ASTORE, TEMPLATE); // store parent argv to
+				}
+				mv.visitVarInsn(ASTORE, ARGV); // store parent argv to
+												// argv
 			}
 			context.locals--;// localSubArgv // 2-1 = 1
 
@@ -1095,6 +1827,7 @@ public class Compiler {
 				{
 					mv.visitVarInsn(ALOAD, listLocal);
 					mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "next", "()Ljava/lang/Object;");
+					mv.visitTypeInsn(CHECKCAST, Type.getInternalName(Object.class));
 					mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/Object;)Ljava/lang/StringBuilder;");
 				}
 				mv.visitLabel(forCompare);

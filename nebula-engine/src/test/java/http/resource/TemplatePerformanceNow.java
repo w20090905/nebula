@@ -74,7 +74,7 @@ public class TemplatePerformanceNow extends TestCase {
 
 		ST st = new ST(template,'$','}');
 
-		int MAX = 10;
+		int MAX = 10 * 1;
 		{
 			String desc = "type simpletempl";
 			// setUp

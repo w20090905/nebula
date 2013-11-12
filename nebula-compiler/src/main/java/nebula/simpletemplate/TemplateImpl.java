@@ -281,7 +281,7 @@ public class TemplateImpl {
 
 			for (int i = 0; i < dataList.size(); i++) {
 				argv[0] = dataList.get(i);
-				System.out.println(this.name);
+//				System.out.println(this.name);
 				get(paramsNames, argv).exec(this.nativeGroup, this, sb, argv);
 			}
 

@@ -32,6 +32,8 @@ public class TestCodeMap implements Action {
 					template1Action.exec(group, template, out, argv);
 				}
 			}
+			
+			System.out.println("a");
 		}
 	}
 }
