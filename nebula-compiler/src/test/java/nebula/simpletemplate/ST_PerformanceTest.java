@@ -144,7 +144,7 @@ public class ST_PerformanceTest extends TestCase {
 		String expected = "<html>\r\n<head>\r\n<title>print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
 		String text = "<html>\r\n<head>\r\n<title>${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
 
-		int MAX = 1000 * 1;
+		int MAX = 1000 * 10;
 		{
 
 			String desc = "javacode sub temp";
@@ -158,7 +158,7 @@ public class ST_PerformanceTest extends TestCase {
 			Object[] params = new Object[] { "wangshilian" };
 			a.exec(null, null, sb, params);
 
-			// assertEquals(expected, sb.toString());
+			assertEquals(expected, sb.toString());
 			// prepare
 			long start, end, nanoAll, nanoEvery;
 			start = System.nanoTime();
@@ -174,6 +174,36 @@ public class ST_PerformanceTest extends TestCase {
 			System.out.printf("[ %-20s ]\tAll :%8d ms; \tevery : %8d nano;\tone second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
+		{
+
+			String desc = "created javacode sub temp";
+			// setUp
+			Map<String, String> root = Maps.newHashMap();
+			root.put("name", "wangshilian");
+
+			ActionComplier_anonymous__java_lang_String_0 a = new ActionComplier_anonymous__java_lang_String_0();
+			StringBuilder sb = new StringBuilder();
+
+			Object[] params = new Object[] { "wangshilian" };
+			a.exec(null, null, sb, params);
+
+			assertEquals(expected, sb.toString());
+			// prepare
+			long start, end, nanoAll, nanoEvery;
+			start = System.nanoTime();
+			for (int i = 0; i < MAX; i++) {
+				sb.setLength(0);
+				a.exec(null, null, sb, params);
+				sb.toString();
+			}
+			end = System.nanoTime();
+			nanoAll = end - start;
+			nanoEvery = nanoAll / MAX;
+
+			System.out.printf("[ %-20s ]\tAll :%8d ms; \tevery : %8d nano;\tone second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+					1000 * 1000 * 1000 / nanoEvery);
+		}
+
 		{
 
 			ST st = new ST(text, '$', '}');
@@ -198,6 +228,7 @@ public class ST_PerformanceTest extends TestCase {
 		}
 
 		{
+			MAX = MAX / 10;
 			org.stringtemplate.v4.ST st = new org.stringtemplate.v4.ST(text, '$', '}');
 			String desc = "ST sub temp";
 			// setUp
@@ -219,6 +250,7 @@ public class ST_PerformanceTest extends TestCase {
 		}
 		return;
 	}
+
 	public void testSubSimpleTemplate() throws IOException {
 		String expected = "<html>\r\n<head>\r\n<title>print(wangshilian)</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
 		String text = "<html>\r\n<head>\r\n<title>${name:{x| print(${x})}}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
@@ -301,9 +333,10 @@ public class ST_PerformanceTest extends TestCase {
 
 	public void testSubTemplate_javacode() throws IOException {
 		String expected = "<html>\r\n<head>\r\n<title>print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)print(wangshilian)</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
-//		String text = "<html>\r\n<head>\r\n<title>${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
+		// String text =
+		// "<html>\r\n<head>\r\n<title>${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}${name:{x| print(${x})}}</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>";
 
-		int MAX = 1000*10;
+		int MAX = 1000 * 10;
 
 		{
 
