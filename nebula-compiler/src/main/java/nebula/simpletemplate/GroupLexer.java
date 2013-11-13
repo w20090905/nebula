@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g 2013-11-08 09:57:04
+// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g 2013-11-13 19:00:21
 
 
 package nebula.simpletemplate;
@@ -28,6 +28,7 @@ public class GroupLexer extends Lexer {
     public static final int T__25=25;
     public static final int T__26=26;
     public static final int T__27=27;
+    public static final int T__28=28;
     public static final int ANONYMOUS_TEMPLATE=4;
     public static final int BIGSTRING=5;
     public static final int BIGSTRING_NO_NL=6;
@@ -427,6 +428,29 @@ public class GroupLexer extends Lexer {
         }
     }
     // $ANTLR end "T__27"
+
+    // $ANTLR start "T__28"
+    public final void mT__28() throws RecognitionException {
+        try {
+            int _type = T__28;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:56:7: ( 'import' )
+            // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:56:9: 'import'
+            {
+            match("import"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__28"
 
     // $ANTLR start "ID"
     public final void mID() throws RecognitionException {
@@ -1011,8 +1035,8 @@ public class GroupLexer extends Lexer {
     // $ANTLR end "WS"
 
     public void mTokens() throws RecognitionException {
-        // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:8: ( FALSE | LBRACK | RBRACK | TRUE | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | ID | STRING | BIGSTRING_NO_NL | BIGSTRING | ANONYMOUS_TEMPLATE | COMMENT | LINE_COMMENT | WS )
-        int alt8=24;
+        // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:8: ( FALSE | LBRACK | RBRACK | TRUE | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | ID | STRING | BIGSTRING_NO_NL | BIGSTRING | ANONYMOUS_TEMPLATE | COMMENT | LINE_COMMENT | WS )
+        int alt8=25;
         alt8 = dfa8.predict(input);
         switch (alt8) {
             case 1 :
@@ -1144,63 +1168,71 @@ public class GroupLexer extends Lexer {
                 }
                 break;
             case 17 :
-                // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:107: ID
+                // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:107: T__28
+                {
+                mT__28(); 
+
+
+                }
+                break;
+            case 18 :
+                // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:113: ID
                 {
                 mID(); 
 
 
                 }
                 break;
-            case 18 :
-                // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:110: STRING
+            case 19 :
+                // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:116: STRING
                 {
                 mSTRING(); 
 
 
                 }
                 break;
-            case 19 :
-                // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:117: BIGSTRING_NO_NL
+            case 20 :
+                // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:123: BIGSTRING_NO_NL
                 {
                 mBIGSTRING_NO_NL(); 
 
 
                 }
                 break;
-            case 20 :
-                // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:133: BIGSTRING
+            case 21 :
+                // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:139: BIGSTRING
                 {
                 mBIGSTRING(); 
 
 
                 }
                 break;
-            case 21 :
-                // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:143: ANONYMOUS_TEMPLATE
+            case 22 :
+                // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:149: ANONYMOUS_TEMPLATE
                 {
                 mANONYMOUS_TEMPLATE(); 
 
 
                 }
                 break;
-            case 22 :
-                // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:162: COMMENT
+            case 23 :
+                // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:168: COMMENT
                 {
                 mCOMMENT(); 
 
 
                 }
                 break;
-            case 23 :
-                // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:170: LINE_COMMENT
+            case 24 :
+                // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:176: LINE_COMMENT
                 {
                 mLINE_COMMENT(); 
 
 
                 }
                 break;
-            case 24 :
-                // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:183: WS
+            case 25 :
+                // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\Group.g:1:189: WS
                 {
                 mWS(); 
 
@@ -1216,29 +1248,32 @@ public class GroupLexer extends Lexer {
     protected DFA8 dfa8 = new DFA8(this);
     static final String DFA8_eotS =
         "\1\uffff\1\20\2\uffff\1\20\4\uffff\1\31\3\uffff\3\20\6\uffff\2\20"+
-        "\2\uffff\3\20\4\uffff\6\20\1\54\3\20\1\60\1\uffff\1\20\1\62\1\20"+
-        "\1\uffff\1\20\1\uffff\7\20\1\74\1\75\2\uffff";
+        "\2\uffff\3\20\4\uffff\6\20\1\55\4\20\1\62\1\uffff\1\20\1\64\2\20"+
+        "\1\uffff\1\20\1\uffff\1\20\1\71\2\20\1\uffff\4\20\1\100\1\101\2"+
+        "\uffff";
     static final String DFA8_eofS =
-        "\76\uffff";
+        "\102\uffff";
     static final String DFA8_minS =
         "\1\11\1\141\2\uffff\1\162\4\uffff\1\72\3\uffff\1\145\1\162\1\155"+
         "\2\uffff\1\45\1\uffff\1\52\1\uffff\1\154\1\165\2\uffff\1\154\1\157"+
         "\1\160\4\uffff\1\163\1\145\1\151\1\165\1\154\1\145\1\55\1\155\1"+
-        "\160\1\145\1\55\1\uffff\1\151\1\55\1\155\1\uffff\1\164\1\uffff\2"+
-        "\145\1\156\1\162\1\164\2\163\2\55\2\uffff";
+        "\160\1\145\1\162\1\55\1\uffff\1\151\1\55\1\155\1\164\1\uffff\1\164"+
+        "\1\uffff\1\145\1\55\1\145\1\156\1\uffff\1\162\1\164\2\163\2\55\2"+
+        "\uffff";
     static final String DFA8_maxS =
         "\1\173\1\141\2\uffff\1\162\4\uffff\1\72\3\uffff\1\145\1\162\1\155"+
         "\2\uffff\1\74\1\uffff\1\57\1\uffff\1\154\1\165\2\uffff\1\154\1\157"+
-        "\1\160\4\uffff\1\163\1\145\1\151\1\165\1\154\1\145\1\172\1\155\1"+
-        "\160\1\145\1\172\1\uffff\1\151\1\172\1\155\1\uffff\1\164\1\uffff"+
-        "\2\145\1\156\1\162\1\164\2\163\2\172\2\uffff";
+        "\1\160\4\uffff\1\163\1\145\1\151\1\165\1\157\1\145\1\172\1\155\1"+
+        "\160\1\145\1\162\1\172\1\uffff\1\151\1\172\1\155\1\164\1\uffff\1"+
+        "\164\1\uffff\1\145\1\172\1\145\1\156\1\uffff\1\162\1\164\2\163\2"+
+        "\172\2\uffff";
     static final String DFA8_acceptS =
         "\2\uffff\1\2\1\3\1\uffff\1\5\1\6\1\7\1\10\1\uffff\1\13\1\14\1\15"+
-        "\3\uffff\1\21\1\22\1\uffff\1\25\1\uffff\1\30\2\uffff\1\12\1\11\3"+
-        "\uffff\1\23\1\24\1\26\1\27\13\uffff\1\4\3\uffff\1\1\1\uffff\1\17"+
-        "\11\uffff\1\16\1\20";
+        "\3\uffff\1\22\1\23\1\uffff\1\26\1\uffff\1\31\2\uffff\1\12\1\11\3"+
+        "\uffff\1\24\1\25\1\27\1\30\14\uffff\1\4\4\uffff\1\1\1\uffff\1\17"+
+        "\4\uffff\1\21\6\uffff\1\16\1\20";
     static final String DFA8_specialS =
-        "\76\uffff}>";
+        "\102\uffff}>";
     static final String[] DFA8_transitionS = {
             "\2\25\2\uffff\1\25\22\uffff\1\25\1\uffff\1\21\5\uffff\1\5\1"+
             "\6\2\uffff\1\7\1\uffff\1\10\1\24\12\uffff\1\11\1\12\1\22\1\13"+
@@ -1280,27 +1315,31 @@ public class GroupLexer extends Lexer {
             "\1\47",
             "\1\50",
             "\1\51",
-            "\1\52",
-            "\1\53",
+            "\1\52\2\uffff\1\53",
+            "\1\54",
             "\1\20\2\uffff\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
-            "\1\55",
             "\1\56",
             "\1\57",
-            "\1\20\2\uffff\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
-            "",
+            "\1\60",
             "\1\61",
             "\1\20\2\uffff\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
+            "",
             "\1\63",
-            "",
-            "\1\64",
-            "",
+            "\1\20\2\uffff\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
             "\1\65",
             "\1\66",
+            "",
             "\1\67",
+            "",
             "\1\70",
-            "\1\71",
+            "\1\20\2\uffff\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
             "\1\72",
             "\1\73",
+            "",
+            "\1\74",
+            "\1\75",
+            "\1\76",
+            "\1\77",
             "\1\20\2\uffff\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
             "\1\20\2\uffff\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
             "",
@@ -1337,7 +1376,7 @@ public class GroupLexer extends Lexer {
             this.transition = DFA8_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( FALSE | LBRACK | RBRACK | TRUE | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | ID | STRING | BIGSTRING_NO_NL | BIGSTRING | ANONYMOUS_TEMPLATE | COMMENT | LINE_COMMENT | WS );";
+            return "1:1: Tokens : ( FALSE | LBRACK | RBRACK | TRUE | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | ID | STRING | BIGSTRING_NO_NL | BIGSTRING | ANONYMOUS_TEMPLATE | COMMENT | LINE_COMMENT | WS );";
         }
     }
  

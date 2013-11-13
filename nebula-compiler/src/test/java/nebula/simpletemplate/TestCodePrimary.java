@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class TestCodePrimary implements Action {
 	@Override
-	public void exec(STGroup group, TemplateImpl template, StringBuilder out, Object[] argv) throws IOException {
+	public void exec(STGroup group, CompiledST template, StringBuilder out, Object[] argv) throws IOException {
 		{
 			out.append("Hello");
 			out.append("ddd");

@@ -2,9 +2,13 @@ package http.resource;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 
 import junit.framework.TestCase;
@@ -20,16 +24,19 @@ import nebula.lang.TypeLoader;
 import nebula.simpletemplate.ST;
 import nebula.simpletemplate.STGroup;
 import nebula.simpletemplate.STGroupFile;
-import nebula.simpletemplate.STGroupPath;
-import nebula.simpletemplate.TemplateImpl;
+import nebula.simpletemplate.STGroupDir;
+import nebula.simpletemplate.CompiledST;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.google.common.collect.Maps;
 
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+
 public class TypeSimpleTemplateResouceTest extends TestCase {
-    public static final String tmpdir = "tmp";//System.getProperty("java.io.tmpdir");
+	public static final String tmpdir = "tmp";// System.getProperty("java.io.tmpdir");
 	Log log = LogFactory.getLog(this.getClass());
 
 	// Configuration templateConfig;
@@ -48,10 +55,10 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 
 	protected void setUp() throws Exception {
 
-//		String driverclass = "org.apache.derby.jdbc.EmbeddedDriver";
-//		String dburl = "jdbc:derby:memory:eh;create = true";
-//		String username = "user";
-//		String password = "password";
+		// String driverclass = "org.apache.derby.jdbc.EmbeddedDriver";
+		// String dburl = "jdbc:derby:memory:eh;create = true";
+		// String username = "user";
+		// String password = "password";
 
 		// ROOT Folder
 		File root = null;
@@ -74,7 +81,8 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 
 		this.typeBrokers = new TypeDatastore(typeLoader);
 
-//		DbConfiguration dbConfiguration = DbConfiguration.getEngine(driverclass, dburl, username, password);
+		// DbConfiguration dbConfiguration =
+		// DbConfiguration.getEngine(driverclass, dburl, username, password);
 
 		// dataWareHouse = new DbDataRepos(this.typeBrokers, dbConfiguration);
 
@@ -104,7 +112,7 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 
 		type = Broker.valueOf(type);
 
-		ST st = new ST(template,'$','}');
+		ST st = new ST(template, '$', '}');
 		assertEquals(expected, st.render(type));
 	}
 
@@ -115,10 +123,10 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 
 		type = Broker.brokerOf(type).get();
 
-		ST st = new ST(template,'$','}');
+		ST st = new ST(template, '$', '}');
 		assertEquals(expected, st.render(type));
 	}
-	
+
 	public final void testWithSubSubTemplate() throws Exception {
 		Type type = this.typeBrokers.getBroker("Person");
 		String template = "${type.fields : {f| { ${f.name} , ${f.type.name} ${f.key} ,${f.core} ${f,f.name : {f,n | ${f.name} n } } \\} }}";
@@ -126,10 +134,9 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 
 		type = Broker.brokerOf(type).get();
 
-		ST st = new ST(template,'$','}');
+		ST st = new ST(template, '$', '}');
 		assertEquals(expected, st.render(type));
 	}
-	
 
 	public final void testWithGroupFile() throws Exception {
 		Type type = this.typeBrokers.getBroker("Person");
@@ -141,16 +148,16 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 
 		writeFile(tmpdir, "type.stg", template);
 
-		STGroup group =STGroup.fromGroupFile(tmpdir + "/" + "type.stg",'$','}');
-		TemplateImpl tmp = group.getTemplate("type");
-		
+		STGroup group = new STGroupFile(tmpdir + "/" + "type.stg", '$', '}');
+		CompiledST tmp = group.lookupTemplate("type");
+
 		type = Broker.brokerOf(type).get();
 
 		assertEquals(expected, tmp.exec(type));
 	}
 
-//	STGroup group = new STGroupPath("tmp");
-	
+	// STGroup group = new STGroupPath("tmp");
+
 	public final void testWithGroupFilePer() throws Exception {
 		Type type = this.typeBrokers.getBroker("Person");
 		// @formatter:off
@@ -161,107 +168,105 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 
 		writeFile(tmpdir, "type.stg", template);
 
-		STGroup group =STGroup.fromGroupFile(tmpdir + "/" + "type.stg",'$','}');
-		TemplateImpl tmp = group.getTemplate("type");
-		
+		STGroup group = new STGroupFile(tmpdir + "/" + "type.stg", '$', '}');
+		CompiledST tmp = group.lookupTemplate("type");
 
 		assertEquals(expected, tmp.exec(type));
 	}
-	
-	public void testGroupPath() throws Exception {		
+
+	public void testGroupPath() throws Exception {
 		Type type = this.typeBrokers.getBroker("Person");
-		
+
 		String templateType = " ${type.name} ${type.fields : field()}";
-		String templateField	=	" { ${f.name} , ${f.type.name} ${f.key} ,${f.core} } ";
+		String templateField = " { ${f.name} , ${f.type.name} ${f.key} ,${f.core} } ";
 		String expected = "Person { Name , Name true ,false } { Birthday , Birthday false ,false } { Height , Height false ,false } { Age , Age false ,false } { Sex , Sex false ,false } { Detail , Person$Detail false ,false } { Company , Company false ,false } { Roles1 , Text false ,false } { Roles2 , Long false ,false } { Roles3 , Date false ,false } { Roles4 , Time false ,false } { Education , Person$Education false ,false } ";
 
 		writeFile(tmpdir, "type.st", templateType);
 		writeFile(tmpdir, "field.st", templateField);
 
-		STGroup group = new STGroupPath("tmp",'$','}');
-		TemplateImpl tmp = group.getTemplate("type");
-		
+		STGroup group = new STGroupDir("tmp", '$', '}');
+		CompiledST tmp = group.lookupTemplate("type");
+
 		type = Broker.brokerOf(type).get();
 
 		assertEquals(expected, tmp.exec(type));
 	}
 
-	public void testGroupPath_real() throws Exception {		
+	public void testGroupPath_real() throws Exception {
 		Type type = this.typeBrokers.getBroker("Person");
-		
+
 		String expected = "Person { Name , Name true ,false } { Birthday , Birthday false ,false } { Height , Height false ,false } { Age , Age false ,false } { Sex , Sex false ,false } { Detail , Person$Detail false ,false } { Company , Company false ,false } { Roles1 , Text false ,false } { Roles2 , Long false ,false } { Roles3 , Date false ,false } { Roles4 , Time false ,false } { Education , Person$Education false ,false } ";
 
+		STGroup group = new STGroupFile("tmp/typeList.stg", '$', '$');
+		CompiledST tmpl = group.lookupTemplate("type");
 
-		STGroup group = new STGroupFile("tmp/typeList_test.stg",'$','$');
-		TemplateImpl tmpl = group.getTemplate("type");
-		
 		type = Broker.brokerOf(type).get();
 
 //		assertEquals(expected, tmpl.exec(type));
-		
-		int MAX = 1000 * 10;
-		{
-			String desc = "simpletemplate real";
-			// setUp
-
-			// prepare
-			long start, end, nanoAll, nanoEvery;
-
-			start = System.nanoTime();
-			for (int i = 0; i < MAX; i++) {
-				tmpl.exec(type);
-			}
-			end = System.nanoTime();
-			nanoAll = end - start;
-			nanoEvery = nanoAll / MAX;
-
-			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
-					1000 * 1000 * 1000 / nanoEvery);
-		}
+//		System.out.println(trim(tmpl.exec(type)));
+		System.out.println(tmpl.exec(type));
 	}
-	
-/*	public final void testLoadIssueTypePer() throws Exception {
+
+	public void testFreeMarker_real() throws Exception {
 		Type type = this.typeBrokers.getBroker("Person");
-		String template = "${type.fields : {f| { ${f.name} , ${f.type.name} ${f.key} ,${f.core} \\} }}";
-		String expected = "{ Name , Name true ,false } { Birthday , Birthday false ,false } { Height , Height false ,false } { Age , Age false ,false } { Sex , Sex false ,false } { Detail , Person$Detail false ,false } { Company , Company false ,false } { Roles1 , Text false ,false } { Roles2 , Long false ,false } { Roles3 , Date false ,false } { Roles4 , Time false ,false } { Education , Person$Education false ,false } ";
 
-		type = Broker.brokerOf(type).get();
-
-		ST st = new ST(template);
-
-		int MAX = 1000 * 10;
 		{
-			String desc = "stringtemplate";
-			// setUp
+			String desc = "type freemarker";
 
-			// prepare
-			long start, end, nanoAll, nanoEvery;
+			Configuration templateConfiguration = new Configuration();
+			Template ft = new Template("test", new FileReader("tmp/master_basic_list.html.ftl"), templateConfiguration);
 
-			start = System.nanoTime();
-			for (int i = 0; i < MAX; i++) {
-				st.render(type);
-			}
-			end = System.nanoTime();
-			nanoAll = end - start;
-			nanoEvery = nanoAll / MAX;
+			Map<String, Object> root = new HashMap<String, Object>();
+			root.put("type", type);
 
-			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
-					1000 * 1000 * 1000 / nanoEvery);
+			StringWriter sw = new StringWriter();
+			ft.process(root, sw);
+			System.out.println(trim(sw.toString()));
+
 		}
+
 	}
-*/
+
+	private String trim(String source){
+		return source.toString().replaceAll("\r\n", "\n").replaceAll("\n\n", "\n").replaceAll("\n\n", "\n").replaceAll("\n\n", "\n").replaceAll("\n\n", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("  ", " ").replaceAll("  ", " ").replaceAll("  ", " ").replaceAll("  ", " ").replaceAll("  ", " ").replaceAll("  ", " ").replaceAll("\n ", "\n");
+	}
+
+	/*
+	 * public final void testLoadIssueTypePer() throws Exception { Type type =
+	 * this.typeBrokers.getBroker("Person"); String template =
+	 * "${type.fields : {f| { ${f.name} , ${f.type.name} ${f.key} ,${f.core} \\} }}"
+	 * ; String expected =
+	 * "{ Name , Name true ,false } { Birthday , Birthday false ,false } { Height , Height false ,false } { Age , Age false ,false } { Sex , Sex false ,false } { Detail , Person$Detail false ,false } { Company , Company false ,false } { Roles1 , Text false ,false } { Roles2 , Long false ,false } { Roles3 , Date false ,false } { Roles4 , Time false ,false } { Education , Person$Education false ,false } "
+	 * ;
+	 * 
+	 * type = Broker.brokerOf(type).get();
+	 * 
+	 * ST st = new ST(template);
+	 * 
+	 * int MAX = 1000 * 10; { String desc = "stringtemplate"; // setUp
+	 * 
+	 * // prepare long start, end, nanoAll, nanoEvery;
+	 * 
+	 * start = System.nanoTime(); for (int i = 0; i < MAX; i++) {
+	 * st.render(type); } end = System.nanoTime(); nanoAll = end - start;
+	 * nanoEvery = nanoAll / MAX;
+	 * 
+	 * System.out.printf(
+	 * "[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n"
+	 * , desc, (nanoAll / (1000 * 1000)), +nanoEvery, 1000 * 1000 * 1000 /
+	 * nanoEvery); } }
+	 */
 
 	public static void writeFile(String dir, String fileName, String content) {
 		try {
 			File f = new File(dir, fileName);
-	        if ( !f.getParentFile().exists() ) f.getParentFile().mkdirs();
+			if (!f.getParentFile().exists()) f.getParentFile().mkdirs();
 			FileWriter w = new FileWriter(f);
 			BufferedWriter bw = new BufferedWriter(w);
 			bw.write(content);
 			bw.close();
 			w.close();
-		}
-		catch (IOException ioe) {
+		} catch (IOException ioe) {
 			System.err.println("can't write file");
 			ioe.printStackTrace(System.err);
 		}

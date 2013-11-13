@@ -4,13 +4,13 @@ import java.io.IOException;
 import nebula.lang.Field;
 import nebula.simpletemplate.Action;
 import nebula.simpletemplate.STGroup;
-import nebula.simpletemplate.TemplateImpl;
+import nebula.simpletemplate.CompiledST;
 
 public class ActionComplier_test_TEST_1
   implements Action
 {
 	static ActionComplier_test_TEST_1 instance = new ActionComplier_test_TEST_1();
-  public void exec(STGroup paramSTGroup, TemplateImpl paramTemplateImpl, StringBuilder paramStringBuilder, Object[] paramArrayOfObject)
+  public void exec(STGroup paramSTGroup, CompiledST paramTemplateImpl, StringBuilder paramStringBuilder, Object[] paramArrayOfObject)
     throws IOException
   {
 	    paramStringBuilder.append("{ ");

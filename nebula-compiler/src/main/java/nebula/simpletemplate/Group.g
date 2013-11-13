@@ -113,14 +113,14 @@ this.group = lexer.group = $group;
 }
 	:	oldStyleHeader?
 		delimiters?
-/*	    (	'import' STRING {group.importTemplates($STRING);}
+	    (	'import' STRING {group.importTemplates($STRING);}
 		|	'import' // common error: name not in string
 			{
 			MismatchedTokenException e = new MismatchedTokenException(STRING, input);
 			reportError(e);
 			}
 			ID ('.' ID)* // might be a.b.c.d
-		)**/
+		)*
 		def[prefix]*
 		EOF
 	;
@@ -188,7 +188,7 @@ templateDef[String prefix]
 										 template, $name, $formalArgs.args);
 		}
 	    }
-	|   alias=ID '::=' target=ID  {group.defineTemplateAlias($alias.text, $target.text);}
+	|   alias=ID '::=' target=ID  {group.defineTemplateAlias($alias, $target);}
 	;
 
 formalArgs returns[List<FormalArgument> args = new ArrayList<FormalArgument>()]

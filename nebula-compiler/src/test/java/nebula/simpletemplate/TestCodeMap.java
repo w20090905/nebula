@@ -11,7 +11,7 @@ public class TestCodeMap implements Action {
 	Action template1Action;
 
 	@Override
-	public void exec(STGroup group, TemplateImpl template, StringBuilder out, Object[] argv) throws IOException {
+	public void exec(STGroup group, CompiledST template, StringBuilder out, Object[] argv) throws IOException {
 		{
 
 			Object o = argv[0];
@@ -33,7 +33,7 @@ public class TestCodeMap implements Action {
 				}
 			}
 			
-			System.out.println("a");
+			System.out.println("abc");
 		}
 	}
 }

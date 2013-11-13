@@ -140,9 +140,9 @@ public class CompilerContext {
 	}
 
 	final List<Arg> arges;
-	final TemplateImpl impl;
+	final CompiledST impl;
 	int locals;
-	public CompilerContext(TemplateImpl impl,List<Class<?>> clzes) {
+	public CompilerContext(CompiledST impl,List<Class<?>> clzes) {
 		this.impl = impl;
 		this.arges = Lists.newArrayList();
 		for (Class<?> clz : clzes) {
@@ -156,7 +156,7 @@ public class CompilerContext {
 		this.locals = DEFAULT_LOCALS;
 	}
 
-	public CompilerContext(TemplateImpl impl,Object target) {
+	public CompilerContext(CompiledST impl,Object target) {
 		this.impl = impl;
 		this.arges = Lists.newArrayList();
 		if (target != null) {
@@ -168,7 +168,7 @@ public class CompilerContext {
 		this.locals = DEFAULT_LOCALS;
 	}
 
-	public CompilerContext(TemplateImpl impl,Object... argv) {
+	public CompilerContext(CompiledST impl,Object... argv) {
 		this.impl = impl;
 		this.arges = Lists.newArrayList();
 		for (Object o : argv) {
@@ -182,7 +182,7 @@ public class CompilerContext {
 		this.locals = DEFAULT_LOCALS;
 	}
 
-	public CompilerContext(TemplateImpl impl,Object target, Object... argv) {
+	public CompilerContext(CompiledST impl,Object target, Object... argv) {
 		this.impl = impl;
 		this.arges = Lists.newArrayList();
 		if (target != null) {

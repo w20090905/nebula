@@ -68,7 +68,7 @@ import java.util.ArrayList;
       }
 			
       private List<Var> arges = new ArrayList<Var>();
-      private List<TemplateImpl> subTemplates = new ArrayList<TemplateImpl>();
+      private List<CompiledST> subTemplates = new ArrayList<CompiledST>();
 			
 			protected Var pushLocal(String name, Type type) {
 				Var var = new Var(name,type,locals.size());
@@ -107,7 +107,7 @@ templateGroupDef
 @init {
     locals = new HashMap<String, Var>();
     arges= new ArrayList<Var>();    
-    subTemplates = new ArrayList<TemplateImpl>();
+    subTemplates = new ArrayList<CompiledST>();
  }
 : (  /*'@' enclosing=ID '.' name=ID '(' ')' | */ 
     name=ID '('')'
@@ -116,10 +116,10 @@ templateGroupDef
       (':'':''=')  LDELIM tmpl=template RDELIM { c.tpReferTemplate(group,$name.text,tmpl); }INDENT?
       ;
   
-templateAndEOF returns[TemplateImpl temp] 
+templateAndEOF returns[CompiledST temp] 
      : t=template{temp=t;} EOF /* -> template?*/ ;
 
-template returns[TemplateImpl temp] 
+template returns[CompiledST temp] 
 @init{
       initLocals();
       List<Statement> statments = new ArrayList<Statement>();
@@ -173,11 +173,11 @@ subtemplate returns[int index]
 @init {
     Map<String, Var> outterLocals = locals;
     List<Var> outterArges =arges;
-    List<TemplateImpl> outterSubTemplates = subTemplates;
+    List<CompiledST> outterSubTemplates = subTemplates;
     
     locals = new HashMap<String, Var>();
     arges= new ArrayList<Var>();    
-    subTemplates = new ArrayList<TemplateImpl>();
+    subTemplates = new ArrayList<CompiledST>();
  }
 	:	lc='{' (id=ID {arg($id.text);} ( ',' id=ID {arg($id.text);})* '|' )? t=template INDENT?
 	{	

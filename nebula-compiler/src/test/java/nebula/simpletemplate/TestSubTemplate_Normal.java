@@ -4,7 +4,7 @@ import java.io.IOException;
 public class TestSubTemplate_Normal
   implements Action
 {
-  public void exec(STGroup paramSTGroup, TemplateImpl paramTemplateImpl, StringBuilder paramStringBuilder, Object[] paramArrayOfObject)
+  public void exec(STGroup paramSTGroup, CompiledST paramTemplateImpl, StringBuilder paramStringBuilder, Object[] paramArrayOfObject)
     throws IOException
   {
 	  ActionComplier_java_lang_String_Normal a = new ActionComplier_java_lang_String_Normal();

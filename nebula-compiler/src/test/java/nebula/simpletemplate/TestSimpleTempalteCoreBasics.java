@@ -646,6 +646,23 @@ public class TestSimpleTempalteCoreBasics extends BaseTest {
 		String result = st.render();
 		assertEquals(expected, result);
 	}
+	
+	public void testElseIfNewLine() throws Exception {
+		String template = "<if(x)>\n" +
+				"fail1\n" +
+				"<elseif(y)>\n" +
+				"fail2\n" +
+				"<elseif(z)>" +
+				"\nworks\n" +
+				"<else>\n" +
+				"fail3\n" +
+				"<endif>";
+		ST st = new ST(template);
+		st.add("z", "blort");
+		String expected = "works";
+		String result = st.render();
+		assertEquals(expected, result);
+	}
 
 	public void testElseIf3() throws Exception {
 		String template = "<if(x)><elseif(y)><elseif(z)>works<else><endif>";

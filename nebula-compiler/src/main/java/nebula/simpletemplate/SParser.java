@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g 2013-11-08 15:37:21
+// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g 2013-11-13 18:58:02
 
 package nebula.simpletemplate;
 
@@ -140,7 +140,7 @@ public class SParser extends Parser {
           }
     			
           private List<Var> arges = new ArrayList<Var>();
-          private List<TemplateImpl> subTemplates = new ArrayList<TemplateImpl>();
+          private List<CompiledST> subTemplates = new ArrayList<CompiledST>();
     			
     			protected Var pushLocal(String name, Type type) {
     				Var var = new Var(name,type,locals.size());
@@ -207,13 +207,13 @@ public class SParser extends Parser {
     public final void templateGroupDef() throws RecognitionException {
         CommonToken name=null;
         CommonToken id=null;
-        TemplateImpl tmpl =null;
+        CompiledST tmpl =null;
 
 
 
             locals = new HashMap<String, Var>();
             arges= new ArrayList<Var>();    
-            subTemplates = new ArrayList<TemplateImpl>();
+            subTemplates = new ArrayList<CompiledST>();
          
         try {
             // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:112:3: ( (name= ID '(' ')' |name= ID '(' id= ID ( ',' id= ID )* ')' ) ( ':' ':' '=' ) LDELIM tmpl= template RDELIM ( INDENT )? )
@@ -378,12 +378,12 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "templateAndEOF"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:119:1: templateAndEOF returns [TemplateImpl temp] : t= template EOF ;
-    public final TemplateImpl templateAndEOF() throws RecognitionException {
-        TemplateImpl temp = null;
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:119:1: templateAndEOF returns [CompiledST temp] : t= template EOF ;
+    public final CompiledST templateAndEOF() throws RecognitionException {
+        CompiledST temp = null;
 
 
-        TemplateImpl t =null;
+        CompiledST t =null;
 
 
         try {
@@ -416,9 +416,9 @@ public class SParser extends Parser {
 
 
     // $ANTLR start "template"
-    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:122:1: template returns [TemplateImpl temp] : (e= element )* ;
-    public final TemplateImpl template() throws RecognitionException {
-        TemplateImpl temp = null;
+    // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:122:1: template returns [CompiledST temp] : (e= element )* ;
+    public final CompiledST template() throws RecognitionException {
+        CompiledST temp = null;
 
 
         Statement e =null;
@@ -1256,17 +1256,17 @@ public class SParser extends Parser {
 
         CommonToken lc=null;
         CommonToken id=null;
-        TemplateImpl t =null;
+        CompiledST t =null;
 
 
 
             Map<String, Var> outterLocals = locals;
             List<Var> outterArges =arges;
-            List<TemplateImpl> outterSubTemplates = subTemplates;
+            List<CompiledST> outterSubTemplates = subTemplates;
             
             locals = new HashMap<String, Var>();
             arges= new ArrayList<Var>();    
-            subTemplates = new ArrayList<TemplateImpl>();
+            subTemplates = new ArrayList<CompiledST>();
          
         try {
             // D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g:182:2: (lc= '{' (id= ID ( ',' id= ID )* '|' )? t= template ( INDENT )? '}' )

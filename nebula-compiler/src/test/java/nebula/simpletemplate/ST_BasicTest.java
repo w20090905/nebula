@@ -184,8 +184,8 @@ public class ST_BasicTest extends BasicTest {
 		String expected = "load kewl\ndaddy; ";
 		writeFile(tmpdir, "t.stg", template);
 
-		STGroup group =STGroup.fromGroupFile(tmpdir + "/" + "t.stg");
-		TemplateImpl tmp = group.getTemplate("t");
+		STGroup group =new STGroupFile(tmpdir + "/" + "t.stg");
+		CompiledST tmp = group.lookupTemplate("t");
 		
 		
 		Map<String, Object> root = Maps.newHashMap();
@@ -203,8 +203,8 @@ public class ST_BasicTest extends BasicTest {
 		writeFile(tmpdir, "t.st", templateT);
 		writeFile(tmpdir, "data.st", templateData);
 
-		STGroup group = new STGroupPath("tmp");
-		TemplateImpl tmp = group.getTemplate("t");
+		STGroup group = new STGroupDir("tmp");
+		CompiledST tmp = group.lookupTemplate("t");
 		
 		
 		Map<String, Object> root = Maps.newHashMap();

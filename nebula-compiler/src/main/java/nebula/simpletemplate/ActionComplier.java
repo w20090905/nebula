@@ -31,7 +31,7 @@ public class ActionComplier implements Opcodes {
 	 * Returns the byte code of an Expression class corresponding to this
 	 * expression.
 	 */
-	<T> byte[] doCompile(final String clzInternalName, final TemplateImpl template, CompilerContext context) {
+	<T> byte[] doCompile(final String clzInternalName, final CompiledST template, CompilerContext context) {
 
 		// class header
 		ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
@@ -70,7 +70,7 @@ public class ActionComplier implements Opcodes {
 
 		{
 			mv = cw.visitMethod(ACC_PUBLIC, "exec",
-					"(" + Type.getDescriptor(STGroup.class) + "" + Type.getDescriptor(TemplateImpl.class) + "" + Type.getDescriptor(StringBuilder.class)
+					"(" + Type.getDescriptor(STGroup.class) + "" + Type.getDescriptor(CompiledST.class) + "" + Type.getDescriptor(StringBuilder.class)
 							+ "[Ljava/lang/Object;)V", null, new String[] { "java/io/IOException" });
 
 			mv.visitCode();
@@ -89,7 +89,7 @@ public class ActionComplier implements Opcodes {
 
 	static long count = 0;
 
-	public Action compileAndGetInstance(CompilerContext context, String actionName, final TemplateImpl template) {
+	public Action compileAndGetInstance(CompilerContext context, String actionName, final CompiledST template) {
 		try {
 			if (template.code instanceof Compiler.Block && ((Compiler.Block) template.code).statements.size() == 0) {
 				if (this.noop != null) {
@@ -115,7 +115,7 @@ public class ActionComplier implements Opcodes {
 		}
 	}
 
-	public Class<Action> compile(CompilerContext context, String actionName, final TemplateImpl template) {
+	public Class<Action> compile(CompilerContext context, String actionName, final CompiledST template) {
 
 		actionName = actionName.replace('.', '_');
 

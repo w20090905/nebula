@@ -3,10 +3,10 @@ package nebula.simpletemplate;
 import java.io.IOException;
 import nebula.simpletemplate.Action;
 import nebula.simpletemplate.STGroup;
-import nebula.simpletemplate.TemplateImpl;
+import nebula.simpletemplate.CompiledST;
 
 public class ActionComplier_anonymous__java_lang_String_0 implements Action {
-	public void exec(STGroup paramSTGroup, TemplateImpl paramTemplateImpl, StringBuilder paramStringBuilder, Object[] paramArrayOfObject) throws IOException {
+	public void exec(STGroup paramSTGroup, CompiledST paramTemplateImpl, StringBuilder paramStringBuilder, Object[] paramArrayOfObject) throws IOException {
 		paramStringBuilder.append("<html>");
 		paramStringBuilder.append("\r\n");
 		paramStringBuilder.append("<head>");

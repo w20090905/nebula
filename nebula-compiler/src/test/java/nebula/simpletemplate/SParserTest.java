@@ -23,7 +23,7 @@ public class SParserTest extends TestCase {
 
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
-		TemplateImpl template = p.templateAndEOF();
+		CompiledST template = p.templateAndEOF();
 		System.out.println(template.toString());
 
 		//@formatter:off
@@ -42,7 +42,7 @@ public class SParserTest extends TestCase {
 
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
-		TemplateImpl template = p.templateAndEOF();
+		CompiledST template = p.templateAndEOF();
 		System.out.println(template.toString());
 
 		//@formatter:off
@@ -62,7 +62,7 @@ public class SParserTest extends TestCase {
 
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
-		TemplateImpl template = p.templateAndEOF();
+		CompiledST template = p.templateAndEOF();
 		System.out.println(template.toString());
 		//@formatter:off
 		String expected = "String tempalte(at){\n" +
@@ -83,7 +83,7 @@ public class SParserTest extends TestCase {
 
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
-		TemplateImpl template = p.templateAndEOF();
+		CompiledST template = p.templateAndEOF();
 		System.out.println(template.toString());
 
 		//@formatter:off
@@ -102,7 +102,7 @@ public class SParserTest extends TestCase {
 
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
-		TemplateImpl template = p.templateAndEOF();
+		CompiledST template = p.templateAndEOF();
 		System.out.println(template.toString());
 
 		//@formatter:off
@@ -121,7 +121,7 @@ public class SParserTest extends TestCase {
 
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
-		TemplateImpl template = p.templateAndEOF();
+		CompiledST template = p.templateAndEOF();
 		System.out.println(template.toString());
 
 		//@formatter:off
@@ -140,7 +140,7 @@ public class SParserTest extends TestCase {
 
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
-		TemplateImpl template = p.templateAndEOF();
+		CompiledST template = p.templateAndEOF();
 		System.out.println(template.toString());
 
 		//@formatter:off
@@ -159,7 +159,7 @@ public class SParserTest extends TestCase {
 
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
-		TemplateImpl template = p.templateAndEOF();
+		CompiledST template = p.templateAndEOF();
 		System.out.println(template.toString());
 
 		//@formatter:off
@@ -178,7 +178,7 @@ public class SParserTest extends TestCase {
 
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
-		TemplateImpl template = p.templateAndEOF();
+		CompiledST template = p.templateAndEOF();
 		System.out.println(template.toString());
 
 		//@formatter:off
@@ -197,7 +197,7 @@ public class SParserTest extends TestCase {
 
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
-		TemplateImpl template = p.templateAndEOF();
+		CompiledST template = p.templateAndEOF();
 		System.out.println(template.toString());
 
 		//@formatter:off
@@ -216,7 +216,7 @@ public class SParserTest extends TestCase {
 
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
-		TemplateImpl template = p.templateAndEOF();
+		CompiledST template = p.templateAndEOF();
 		System.out.println(template.toString());
 
 		//@formatter:off
@@ -235,7 +235,7 @@ public class SParserTest extends TestCase {
 
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
-		TemplateImpl template = p.templateAndEOF();
+		CompiledST template = p.templateAndEOF();
 		System.out.println(template.toString());
 
 		//@formatter:off

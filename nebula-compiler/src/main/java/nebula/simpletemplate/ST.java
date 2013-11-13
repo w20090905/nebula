@@ -35,7 +35,7 @@ public class ST {
 	 * The implementation for this template among all instances of same template
 	 * .
 	 */
-	public TemplateImpl impl;
+	public CompiledST impl;
 
 	public STGroup groupThatCreatedThisInstance;
 
@@ -51,7 +51,7 @@ public class ST {
 		this(STGroup.defaultGroup, template, '<', '>');
 	}
 
-	public ST(TemplateImpl template) {
+	public ST(CompiledST template) {
 		groupThatCreatedThisInstance = template.nativeGroup;
 		impl = template;
 	}
@@ -61,8 +61,11 @@ public class ST {
 	}
 
 	public ST(STGroup group, String template, char delimiterStartChar, char delimiterStopChar) {
+		group.delimiterStartChar = delimiterStartChar;
+		group.delimiterStopChar  = delimiterStopChar;
 		groupThatCreatedThisInstance = group;
-		impl = groupThatCreatedThisInstance.parse(null, null, null, template, delimiterStartChar, delimiterStopChar);
+		impl = groupThatCreatedThisInstance.compile(group.getFileName(), null,
+				null, template, null);
 		impl.name = UNKNOWN_NAME;
 	}
 
@@ -70,10 +73,16 @@ public class ST {
 		this(group, template, '<', '>');
 	}
 
-	public ST(STGroup group, TemplateImpl template) {
+	public ST(STGroup group, CompiledST template) {
 		this();
 		groupThatCreatedThisInstance = group;
 		impl = template;
+	}
+
+	public ST(ST proto) {
+		this();
+		groupThatCreatedThisInstance = proto.groupThatCreatedThisInstance;
+		impl = proto.impl;
 	}
 
 	public String getName() {

@@ -3,7 +3,7 @@ package nebula.simpletemplate;
 import java.io.IOException;
 
 public class TestSubTemplate_FinalStatic {
-	final static public void exec(STGroup paramSTGroup, TemplateImpl paramTemplateImpl, StringBuilder paramStringBuilder, Object[] paramArrayOfObject)
+	final static public void exec(STGroup paramSTGroup, CompiledST paramTemplateImpl, StringBuilder paramStringBuilder, Object[] paramArrayOfObject)
 			throws IOException {
 		paramStringBuilder.append("<html>");
 		paramStringBuilder.append("\r\n");

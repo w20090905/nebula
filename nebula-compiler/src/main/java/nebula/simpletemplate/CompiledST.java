@@ -10,14 +10,14 @@ import org.apache.commons.logging.LogFactory;
 
 import com.google.common.collect.ImmutableMap;
 
-public class TemplateImpl {
+public class CompiledST {
 
 	static int BUFFER_SIZE = 1;
 	static int BUFFER_MASK = BUFFER_SIZE - 1;
 
 	static int INITIAL_SIZE = 128;
 
-	final static Log log = LogFactory.getLog(TemplateImpl.class);
+	final static Log log = LogFactory.getLog(CompiledST.class);
 
 	StringBuilder[] bufferes = new StringBuilder[BUFFER_SIZE];
 	Map<String, Action> bytecodeWithKnownClass;
@@ -32,14 +32,18 @@ public class TemplateImpl {
 	String[] formalArguments;
 
 	boolean hasFormalArgs;
-	public List<TemplateImpl> implicitlyDefinedTemplates;
+	public List<CompiledST> implicitlyDefinedTemplates;
 	volatile int lastCanuse = 0;
 
 	ReentrantLock lock = new ReentrantLock();
 
 	String name;
 	STGroup nativeGroup;
-	TemplateImpl(STGroup group, final Code code) {
+	public String prefix;
+	public boolean isAnonSubtemplate;
+	CompiledST() {		
+	}
+	CompiledST(STGroup group, final Code code) {
 		this.nativeGroup = group;
 		this.code = code;
 		this.bytecodeWithKnownClass = ImmutableMap.of();
@@ -50,7 +54,7 @@ public class TemplateImpl {
 		}
 	}
 
-	TemplateImpl(STGroup group, final Code code, List<String> arguments) {
+	CompiledST(STGroup group, final Code code, List<String> arguments) {
 		this.nativeGroup = group;
 		this.code = code;
 		this.bytecodeWithKnownClass = ImmutableMap.of();
@@ -60,7 +64,7 @@ public class TemplateImpl {
 			canuse[i] = true;
 		}
 	}
-	TemplateImpl(STGroup group, final Code code, List<String> arguments, List<TemplateImpl> implicitlyDefinedTemplates) {
+	CompiledST(STGroup group, final Code code, List<String> arguments, List<CompiledST> implicitlyDefinedTemplates) {
 		this(group, code, arguments);
 		this.implicitlyDefinedTemplates = implicitlyDefinedTemplates;
 	}
