@@ -32,28 +32,10 @@ public class Compiler implements Opcodes {
 	}
 
 	static void _IConst_(MethodVisitor mv, int i) {
-		switch (i) {
-		case 0:
-			mv.visitInsn(ICONST_0);
-			break;
-		case 1:
-			mv.visitInsn(ICONST_1);
-			break;
-		case 2:
-			mv.visitInsn(ICONST_2);
-			break;
-		case 3:
-			mv.visitInsn(ICONST_3);
-			break;
-		case 4:
-			mv.visitInsn(ICONST_4);
-			break;
-		case 5:
-			mv.visitInsn(ICONST_5);
-			break;
-		default:
+		if (i <= 5) {
+			mv.visitInsn(ICONST_0 + i);
+		} else {
 			mv.visitIntInsn(BIPUSH, i);
-			break;
 		}
 	}
 
@@ -433,15 +415,15 @@ public class Compiler implements Opcodes {
 				} else {
 					mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(defineClass), m.getName(), "()" + Type.getDescriptor(retClz));
 				}
-//				if (!retClz.isPrimitive()) {
-//					mv.visitTypeInsn(CHECKCAST, Type.getInternalName(retClz));
-//				}
+				// if (!retClz.isPrimitive()) {
+				// mv.visitTypeInsn(CHECKCAST, Type.getInternalName(retClz));
+				// }
 			} else if ((f = CompilerContext.getField(parentClz, name)) != null) {
 				retClz = f.getType();
 				Class<?> defineClass = f.getDeclaringClass();
 				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(defineClass));
 				mv.visitFieldInsn(GETFIELD, Type.getInternalName(defineClass), name, Type.getDescriptor(retClz));
-//				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(retClz));
+				// mv.visitTypeInsn(CHECKCAST, Type.getInternalName(retClz));
 			} else {
 				throw new RuntimeException("Cannot find " + e1.toString(context) + "." + name);
 			}
@@ -519,14 +501,14 @@ public class Compiler implements Opcodes {
 			mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V");
 			mv.visitVarInsn(ASTORE, localStringBuilder);
 
-			mv.visitIntInsn(BIPUSH, args.size());
+			_IConst_(mv, args.size());
 			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
 
 			List<Class<?>> clzes = Lists.newArrayList();
 			Class<?> firstType = null;
 			if (args.size() > 0) {
 				mv.visitInsn(DUP);
-				mv.visitIntInsn(BIPUSH, 0);
+				_IConst_(mv, 0);
 
 				firstType = evalValue(clzName, args.get(0).value, cw, mv, context);
 				clzes.add(firstType);
@@ -535,7 +517,7 @@ public class Compiler implements Opcodes {
 
 				for (int i = 1; i < args.size(); i++) {
 					mv.visitInsn(DUP);
-					mv.visitIntInsn(BIPUSH, i);
+					_IConst_(mv, i);
 					Class<?> clz = evalValue(clzName, args.get(i).value, cw, mv, context);
 					mv.visitInsn(AASTORE);
 					clzes.add(clz);
@@ -622,7 +604,7 @@ public class Compiler implements Opcodes {
 				int listLocal = context.locals++; // 2+1=3
 
 				mv.visitVarInsn(ALOAD, localSubArgv);
-				mv.visitIntInsn(BIPUSH, 0);
+				_IConst_(mv, 0);
 				mv.visitInsn(AALOAD);
 				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "iterator", "()Ljava/util/Iterator;");
 
@@ -635,14 +617,14 @@ public class Compiler implements Opcodes {
 				{
 					// subArgv[0] = list.next()
 					mv.visitVarInsn(ALOAD, localSubArgv);
-					mv.visitIntInsn(BIPUSH, 0);
+					_IConst_(mv, 0);
 
 					mv.visitVarInsn(ALOAD, listLocal);
 					mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "next", "()Ljava/lang/Object;");
 					mv.visitInsn(AASTORE);
 
 					mv.visitVarInsn(ALOAD, localSubArgv);
-					mv.visitIntInsn(BIPUSH, 0);
+					_IConst_(mv, 0);
 					mv.visitInsn(AALOAD);
 
 					int localFirstArg = context.locals++; // 3+1 =4
@@ -918,14 +900,14 @@ public class Compiler implements Opcodes {
 
 		public Class<?> compileInlineAppend(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 
-			mv.visitIntInsn(BIPUSH, args.size());
+			_IConst_(mv, args.size());
 			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
 
 			List<Class<?>> clzes = Lists.newArrayList();
 			Class<?> firstType = null;
 			if (args.size() > 0) {
 				mv.visitInsn(DUP);
-				mv.visitIntInsn(BIPUSH, 0);
+				_IConst_(mv, 0);
 
 				firstType = evalValue(clzName, args.get(0).value, cw, mv, context);
 				clzes.add(firstType);
@@ -934,7 +916,7 @@ public class Compiler implements Opcodes {
 
 				for (int i = 1; i < args.size(); i++) {
 					mv.visitInsn(DUP);
-					mv.visitIntInsn(BIPUSH, i);
+					_IConst_(mv, i);
 					Class<?> clz = evalValue(clzName, args.get(i).value, cw, mv, context);
 					mv.visitInsn(AASTORE);
 					clzes.add(clz);
@@ -1010,7 +992,7 @@ public class Compiler implements Opcodes {
 				int listLocal = context.locals++; // 2+1=3
 
 				mv.visitVarInsn(ALOAD, localSubArgv);
-				mv.visitIntInsn(BIPUSH, 0);
+				_IConst_(mv, 0);
 				mv.visitInsn(AALOAD);
 				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "iterator", "()Ljava/util/Iterator;");
 
@@ -1023,14 +1005,14 @@ public class Compiler implements Opcodes {
 				{
 					// subArgv[0] = list.next()
 					mv.visitVarInsn(ALOAD, localSubArgv);
-					mv.visitIntInsn(BIPUSH, 0);
+					_IConst_(mv, 0);
 
 					mv.visitVarInsn(ALOAD, listLocal);
 					mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "next", "()Ljava/lang/Object;");
 					mv.visitInsn(AASTORE);
 
 					mv.visitVarInsn(ALOAD, localSubArgv);
-					mv.visitIntInsn(BIPUSH, 0);
+					_IConst_(mv, 0);
 					mv.visitInsn(AALOAD);
 
 					int localFirstArg = context.locals++; // 3+1 =4
@@ -1208,14 +1190,14 @@ public class Compiler implements Opcodes {
 			mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V");
 			mv.visitVarInsn(ASTORE, localStringBuilder);
 
-			mv.visitIntInsn(BIPUSH, args.size());
+			_IConst_(mv, args.size());
 			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
 
 			List<Class<?>> clzes = Lists.newArrayList();
 			Class<?> firstType = null;
 			if (args.size() > 0) {
 				mv.visitInsn(DUP);
-				mv.visitIntInsn(BIPUSH, 0);
+				_IConst_(mv, 0);
 
 				firstType = evalValue(clzName, args.get(0).value, cw, mv, context);
 				clzes.add(firstType);
@@ -1224,7 +1206,7 @@ public class Compiler implements Opcodes {
 
 				for (int i = 1; i < args.size(); i++) {
 					mv.visitInsn(DUP);
-					mv.visitIntInsn(BIPUSH, i);
+					_IConst_(mv, i);
 					Class<?> clz = evalValue(clzName, args.get(i).value, cw, mv, context);
 					mv.visitInsn(AASTORE);
 					clzes.add(clz);
@@ -1253,7 +1235,7 @@ public class Compiler implements Opcodes {
 					mv.visitInsn(DUP);
 					mv.visitFieldInsn(GETFIELD, Type.getInternalName(CompiledST.class), "implicitlyDefinedTemplates", Type.getDescriptor(List.class));
 
-					mv.visitIntInsn(BIPUSH, subTemplateIndex);
+					_IConst_(mv, subTemplateIndex);
 					mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
 					mv.visitTypeInsn(CHECKCAST, Type.getInternalName(CompiledST.class));
 					mv.visitVarInsn(ASTORE, TEMPLATE);
@@ -1276,7 +1258,7 @@ public class Compiler implements Opcodes {
 				int listLocal = context.locals++; // 2+1=3
 
 				mv.visitVarInsn(ALOAD, localSubArgv);
-				mv.visitIntInsn(BIPUSH, 0);
+				_IConst_(mv, 0);
 				mv.visitInsn(AALOAD);
 				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "iterator", "()Ljava/util/Iterator;");
 
@@ -1289,7 +1271,7 @@ public class Compiler implements Opcodes {
 				{
 					// subArgv[0] = list.next()
 					mv.visitVarInsn(ALOAD, localSubArgv);
-					mv.visitIntInsn(BIPUSH, 0);
+					_IConst_(mv, 0);
 
 					mv.visitVarInsn(ALOAD, listLocal);
 					mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "next", "()Ljava/lang/Object;");
@@ -1297,7 +1279,7 @@ public class Compiler implements Opcodes {
 					mv.visitInsn(AASTORE);
 
 					mv.visitVarInsn(ALOAD, localSubArgv);
-					mv.visitIntInsn(BIPUSH, 0);
+					_IConst_(mv, 0);
 					mv.visitInsn(AALOAD);
 
 					int localFirstArg = context.locals++; // 3+1 =4
@@ -1331,7 +1313,7 @@ public class Compiler implements Opcodes {
 					mv.visitInsn(DUP);
 					mv.visitFieldInsn(GETFIELD, Type.getInternalName(CompiledST.class), "implicitlyDefinedTemplates", Type.getDescriptor(List.class));
 
-					mv.visitIntInsn(BIPUSH, subTemplateIndex);
+					_IConst_(mv, subTemplateIndex);
 					mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
 					mv.visitTypeInsn(CHECKCAST, Type.getInternalName(CompiledST.class));
 					mv.visitVarInsn(ASTORE, TEMPLATE);
@@ -1421,7 +1403,7 @@ public class Compiler implements Opcodes {
 								mv.visitFieldInsn(GETFIELD, Type.getInternalName(CompiledST.class), "implicitlyDefinedTemplates",
 										Type.getDescriptor(List.class));
 
-								mv.visitIntInsn(BIPUSH, subTemplateIndex);
+								_IConst_(mv, subTemplateIndex);
 								mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
 								mv.visitTypeInsn(CHECKCAST, Type.getInternalName(CompiledST.class));
 
@@ -1476,7 +1458,7 @@ public class Compiler implements Opcodes {
 								mv.visitVarInsn(ALOAD, TEMPLATE);
 								mv.visitFieldInsn(GETFIELD, Type.getInternalName(CompiledST.class), "implicitlyDefinedTemplates",
 										Type.getDescriptor(List.class));
-								mv.visitIntInsn(BIPUSH, subTemplateIndex);
+								_IConst_(mv, subTemplateIndex);
 								mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
 								mv.visitTypeInsn(CHECKCAST, Type.getInternalName(CompiledST.class));
 
@@ -1531,14 +1513,14 @@ public class Compiler implements Opcodes {
 
 		public Class<?> compileInlineAppend(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 
-			mv.visitIntInsn(BIPUSH, args.size());
+			_IConst_(mv, args.size());
 			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
 
 			List<Class<?>> clzes = Lists.newArrayList();
 			Class<?> firstType = null;
 			if (args.size() > 0) {
 				mv.visitInsn(DUP);
-				mv.visitIntInsn(BIPUSH, 0);
+				_IConst_(mv, 0);
 
 				firstType = evalValue(clzName, args.get(0).value, cw, mv, context);
 				clzes.add(firstType);
@@ -1547,7 +1529,7 @@ public class Compiler implements Opcodes {
 
 				for (int i = 1; i < args.size(); i++) {
 					mv.visitInsn(DUP);
-					mv.visitIntInsn(BIPUSH, i);
+					_IConst_(mv, i);
 					Class<?> clz = evalValue(clzName, args.get(i).value, cw, mv, context);
 					mv.visitInsn(AASTORE);
 					clzes.add(clz);
@@ -1572,7 +1554,7 @@ public class Compiler implements Opcodes {
 					mv.visitInsn(DUP);
 					mv.visitFieldInsn(GETFIELD, Type.getInternalName(CompiledST.class), "implicitlyDefinedTemplates", Type.getDescriptor(List.class));
 
-					mv.visitIntInsn(BIPUSH, subTemplateIndex);
+					_IConst_(mv, subTemplateIndex);
 					mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
 					mv.visitTypeInsn(CHECKCAST, Type.getInternalName(CompiledST.class));
 					mv.visitVarInsn(ASTORE, TEMPLATE);
@@ -1592,7 +1574,7 @@ public class Compiler implements Opcodes {
 				int listLocal = context.locals++; // 2+1=3
 
 				mv.visitVarInsn(ALOAD, localSubArgv);
-				mv.visitIntInsn(BIPUSH, 0);
+				_IConst_(mv, 0);
 				mv.visitInsn(AALOAD);
 				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "iterator", "()Ljava/util/Iterator;");
 
@@ -1606,7 +1588,7 @@ public class Compiler implements Opcodes {
 
 					// subArgv[0] = list.next()
 					mv.visitVarInsn(ALOAD, localSubArgv);
-					mv.visitIntInsn(BIPUSH, 0);
+					_IConst_(mv, 0);
 
 					mv.visitVarInsn(ALOAD, listLocal);
 					mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "next", "()Ljava/lang/Object;");
@@ -1614,7 +1596,7 @@ public class Compiler implements Opcodes {
 					mv.visitInsn(AASTORE);
 
 					mv.visitVarInsn(ALOAD, localSubArgv);
-					mv.visitIntInsn(BIPUSH, 0);
+					_IConst_(mv, 0);
 					mv.visitInsn(AALOAD);
 					int localFirstArg = context.locals++; // 3+1 =4
 
@@ -1646,7 +1628,7 @@ public class Compiler implements Opcodes {
 					mv.visitInsn(DUP);
 					mv.visitFieldInsn(GETFIELD, Type.getInternalName(CompiledST.class), "implicitlyDefinedTemplates", Type.getDescriptor(List.class));
 
-					mv.visitIntInsn(BIPUSH, subTemplateIndex);
+					_IConst_(mv, subTemplateIndex);
 					mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(List.class), "get", "(I)Ljava/lang/Object;");
 					mv.visitTypeInsn(CHECKCAST, Type.getInternalName(CompiledST.class));
 					mv.visitVarInsn(ASTORE, TEMPLATE);
