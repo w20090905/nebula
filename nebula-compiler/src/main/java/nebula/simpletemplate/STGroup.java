@@ -20,10 +20,10 @@ import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
-import org.stringtemplate.v4.compiler.STException;
-import org.stringtemplate.v4.compiler.STLexer;
 import org.stringtemplate.v4.misc.ErrorManager;
 import org.stringtemplate.v4.misc.ErrorType;
+import org.stringtemplate.v4.compiler.STException;
+import org.stringtemplate.v4.compiler.STLexer;
 
 /**
  * A directory or directory tree of {@code .st} template files and/or group
@@ -668,7 +668,7 @@ public class STGroup {
 	public CompiledST parse(String srcName, String name, List<FormalArgument> args, String template,
 			Token templateToken, char delimiterStartChar, char delimiterStopChar) {
 		try {
-			STLexer lexer = new STLexer(org.stringtemplate.v4.STGroup.DEFAULT_ERR_MGR, new ANTLRStringStream(template),
+			STLexer lexer = new STLexer(STGroup.DEFAULT_ERR_MGR, new ANTLRStringStream(template),
 					null, delimiterStartChar, delimiterStopChar);
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			SParser p = new SParser(tokens, this);

@@ -175,7 +175,7 @@ public class Misc {
 					return urlClassLoader.findResource(jarURLConnection.getEntryName()) != null;
 				}
 				finally {
-					urlClassLoader.close();
+//					urlClassLoader.close();
 				}
 			}
 

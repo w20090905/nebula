@@ -7,7 +7,6 @@ import junit.framework.TestCase;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
-import org.stringtemplate.v4.STGroup;
 import org.stringtemplate.v4.compiler.STLexer;
 
 public class SParserTest extends TestCase {
