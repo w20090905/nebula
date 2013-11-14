@@ -196,10 +196,10 @@ public class ST_BasicTest extends BasicTest {
 	
 	
 	public void testGroupPath() throws Exception {		
-		String templateT = "load <data(xx)>";
-		String templateData	=	"kewl\ndaddy;";
+		String templateT = "t(xx) ::= << load <data(xx)> >>";
+		String templateData	=	"data() ::= << kewl\ndaddy; >>";
 		
-		String expected = "load kewl\ndaddy;";
+		String expected = "load kewl\ndaddy;  ";
 		writeFile(tmpdir, "t.st", templateT);
 		writeFile(tmpdir, "data.st", templateData);
 

@@ -26,6 +26,7 @@ import nebula.simpletemplate.STGroup;
 import nebula.simpletemplate.STGroupFile;
 import nebula.simpletemplate.STGroupDir;
 import nebula.simpletemplate.CompiledST;
+import nebula.simpletemplate.STGroupString;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -177,20 +178,42 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 	public void testGroupPath() throws Exception {
 		Type type = this.typeBrokers.getBroker("Person");
 
-		String templateType = " ${type.name} ${type.fields : field()}";
-		String templateField = " { ${f.name} , ${f.type.name} ${f.key} ,${f.core} } ";
-		String expected = "Person { Name , Name true ,false } { Birthday , Birthday false ,false } { Height , Height false ,false } { Age , Age false ,false } { Sex , Sex false ,false } { Detail , Person$Detail false ,false } { Company , Company false ,false } { Roles1 , Text false ,false } { Roles2 , Long false ,false } { Roles3 , Date false ,false } { Roles4 , Time false ,false } { Education , Person$Education false ,false } ";
+		String templateType = "type(type) ::= << <type.name> <type.fields : field()> >>";
+		String templateField = "field(f) ::= << { <f.name> , <f.type.name> <f.key> ,<f.core> } >>";
+		String expected = "Person { Name , Name true ,false } { Birthday , Birthday false ,false } { Height , Height false ,false } { Age , Age false ,false } { Sex , Sex false ,false } { Detail , Person$Detail false ,false } { Company , Company false ,false } { Roles1 , Text false ,false } { Roles2 , Long false ,false } { Roles3 , Date false ,false } { Roles4 , Time false ,false } { Education , Person$Education false ,false }  ";
 
 		writeFile(tmpdir, "type.st", templateType);
 		writeFile(tmpdir, "field.st", templateField);
 
-		STGroup group = new STGroupDir("tmp", '$', '}');
+		STGroup group = new STGroupDir(tmpdir);
 		CompiledST tmp = group.lookupTemplate("type");
 
 		type = Broker.brokerOf(type).get();
 
 		assertEquals(expected, tmp.exec(type));
 	}
+	
+	public void testSimpleGroupFromString() throws Exception {
+		String g =
+			"a(x) ::= <<foo>>\n"+
+			"b() ::= <<bar>>\n";
+		STGroup group = new STGroupString(g);
+		ST st = group.getInstanceOf("a");
+		String expected = "foo";
+		String result = st.render();
+		assertEquals(expected, result);
+	}
+
+    public void testGroupWithTwoTemplates() throws Exception {
+		writeFile(tmpdir, "a.st", "a(x) ::= <<foo>>");
+		writeFile(tmpdir, "b.st", "b() ::= \"bar\"");
+        STGroup group = new STGroupDir(tmpdir);
+        ST st1 = group.getInstanceOf("a");
+        ST st2 = group.getInstanceOf("b");
+        String expected = "foobar";
+        String result = st1.render()+st2.render();
+        assertEquals(expected, result);
+    }
 
 	public void testGroupPath_real() throws Exception {
 		Type type = this.typeBrokers.getBroker("Person");
