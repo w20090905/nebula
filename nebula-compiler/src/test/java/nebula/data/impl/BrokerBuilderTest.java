@@ -135,7 +135,7 @@ public class BrokerBuilderTest extends TestCase {
 			nanoEvery = nanoAll / MAX;
 
 			log.debug("[   builder         ]\tAll :" + (nanoAll / (1000 * 1000)) + "s  every : " + nanoEvery + " nano");
-			assertTrue((nanoEvery / rawNanoEvery) < 5);
+			assertTrue((nanoEvery / rawNanoEvery) < 10);
 		}
 		// {
 		// long start, end, nanoAll, nanoEvery;
