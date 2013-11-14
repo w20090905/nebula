@@ -652,8 +652,7 @@ public class TestSimpleTempalteCoreBasics extends BaseTest {
 				"fail1\n" +
 				"<elseif(y)>\n" +
 				"fail2\n" +
-				"<elseif(z)>" +
-				"\nworks\n" +
+				"<elseif(z)>works\n" +
 				"<else>\n" +
 				"fail3\n" +
 				"<endif>";

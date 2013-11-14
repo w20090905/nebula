@@ -203,9 +203,9 @@ ifstat returns[Statement statement]
     retval.statement = c.stIf(conditions,statements, blockElse);
 }
 	:	i=INDENT? LDELIM 'if' '(' c1=conditional')' RDELIM {if (input.LA(1)!=NEWLINE) indent=$i;}
-			t1=block {conditions.add(c1);  statements.add(t1); }
-			( INDENT? LDELIM 'elseif' '(' c2=conditional ')' RDELIM t2=block {conditions.add(c2);  statements.add(t2); })*
-			( INDENT? LDELIM 'else' RDELIM blockElse=block)?
+			t1=block {conditions.add(c1);  statements.add(t1); /*TRIM LAST NEWLINE*/if($ifstat.start.getLine()!=input.LT(1).getLine() && input.LA(-1)==NEWLINE){c.trimLastNEWLINE(t1);}}
+			( INDENT? LDELIM 'elseif' '(' c2=conditional ')' RDELIM t2=block {conditions.add(c2);  statements.add(t2); /*TRIM LAST NEWLINE*/if($ifstat.start.getLine()!=input.LT(1).getLine() && input.LA(-1)==NEWLINE){c.trimLastNEWLINE(t2);}})*
+			( INDENT? LDELIM 'else' RDELIM blockElse=block /*TRIM LAST NEWLINE*/{if($ifstat.start.getLine()!=input.LT(1).getLine() && input.LA(-1)==NEWLINE){c.trimLastNEWLINE(blockElse);}})?
 			INDENT? endif= LDELIM 'endif'
 		RDELIM
 		// kill \n for <endif> on line by itself if multi-line IF
