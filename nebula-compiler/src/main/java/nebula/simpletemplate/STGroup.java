@@ -24,7 +24,6 @@ import org.stringtemplate.v4.STErrorListener;
 import org.stringtemplate.v4.misc.ErrorBuffer;
 import org.stringtemplate.v4.misc.ErrorManager;
 import org.stringtemplate.v4.misc.ErrorType;
-import org.stringtemplate.v4.test.ErrorBufferAllErrors;
 import org.stringtemplate.v4.compiler.STException;
 import org.stringtemplate.v4.compiler.STLexer;
 
@@ -233,38 +232,39 @@ public class STGroup {
 		return templates.get(name);
 	}
 
-//	/** for testing */
-//	public CompiledST defineTemplate(String templateName, String template) {
-//		if (templateName.charAt(0) != '/') templateName = "/" + templateName;
-//		try {
-//			CompiledST impl = defineTemplate(templateName, new CommonToken(GroupParser.ID, templateName), null,
-//					template, null);
-//			return impl;
-//		} catch (STException se) {
-//			// we have reported the error; the exception just blasts us
-//			// out of parsing this template
-//		}
-//		return null;
-//	}
-//
-//	/** for testing */
-//	public CompiledST defineTemplate(String name, String argsS, String template) {
-//		if (name.charAt(0) != '/') name = "/" + name;
-//		String[] args = argsS.split(",");
-//		List<FormalArgument> a = new ArrayList<FormalArgument>();
-//		for (String arg : args) {
-//			a.add(new FormalArgument(arg));
-//		}
-//		return defineTemplate(name, new CommonToken(GroupParser.ID, name), a, template, null);
-//	}
-
+	// /** for testing */
+	// public CompiledST defineTemplate(String templateName, String template) {
+	// if (templateName.charAt(0) != '/') templateName = "/" + templateName;
+	// try {
+	// CompiledST impl = defineTemplate(templateName, new
+	// CommonToken(GroupParser.ID, templateName), null,
+	// template, null);
+	// return impl;
+	// } catch (STException se) {
+	// // we have reported the error; the exception just blasts us
+	// // out of parsing this template
+	// }
+	// return null;
+	// }
+	//
+	// /** for testing */
+	// public CompiledST defineTemplate(String name, String argsS, String
+	// template) {
+	// if (name.charAt(0) != '/') name = "/" + name;
+	// String[] args = argsS.split(",");
+	// List<FormalArgument> a = new ArrayList<FormalArgument>();
+	// for (String arg : args) {
+	// a.add(new FormalArgument(arg));
+	// }
+	// return defineTemplate(name, new CommonToken(GroupParser.ID, name), a,
+	// template, null);
+	// }
 
 	/** for testing */
 	public CompiledST defineTemplate(String templateName, String template) {
 		if (templateName.charAt(0) != '/') templateName = "/" + templateName;
 		try {
-			CompiledST impl = defineTemplate(templateName, new CommonToken(GroupParser.ID, templateName), null,
-					template, null);
+			CompiledST impl = defineTemplate(templateName, new CommonToken(GroupParser.ID, templateName), null, template, null);
 			return impl;
 		} catch (STException se) {
 			// we have reported the error; the exception just blasts us
@@ -284,8 +284,7 @@ public class STGroup {
 		return defineTemplate(name, new CommonToken(GroupParser.ID, name), a, template, null);
 	}
 
-	public CompiledST defineTemplate(String fullyQualifiedTemplateName, Token nameT, List<FormalArgument> args,
-			String template, Token templateToken) {
+	public CompiledST defineTemplate(String fullyQualifiedTemplateName, Token nameT, List<FormalArgument> args, String template, Token templateToken) {
 		if (verbose) System.out.println("defineTemplate(" + fullyQualifiedTemplateName + ")");
 		if (fullyQualifiedTemplateName == null || fullyQualifiedTemplateName.length() == 0) {
 			throw new IllegalArgumentException("empty template name");
@@ -320,8 +319,8 @@ public class STGroup {
 		return targetCode;
 	}
 
-	public void defineTemplateOrRegion(String fullyQualifiedTemplateName, String regionSurroundingTemplateName,
-			Token templateToken, String template, Token nameToken, List<FormalArgument> args) {
+	public void defineTemplateOrRegion(String fullyQualifiedTemplateName, String regionSurroundingTemplateName, Token templateToken, String template,
+			Token nameToken, List<FormalArgument> args) {
 		try {
 			if (regionSurroundingTemplateName != null) {
 				// defineRegion(regionSurroundingTemplateName, nameToken,
@@ -367,8 +366,9 @@ public class STGroup {
 	}
 
 	/** Compile a template. */
-	public CompiledST compile(String srcName, String name, List<FormalArgument> args, String template,
-			Token templateToken) // for error location
+	public CompiledST compile(String srcName, String name, List<FormalArgument> args, String template, Token templateToken) // for
+																															// error
+																															// location
 	{
 		// System.out.println("STGroup.compile: "+enclosingTemplateName);
 		// Compiler c = new Compiler(this);
@@ -503,9 +503,7 @@ public class STGroup {
 	 * by {@code prefix}.
 	 */
 	public void loadGroupFile(String prefix, String fileName) {
-		if (verbose)
-			System.out.println(this.getClass().getSimpleName() + ".loadGroupFile(group-file-prefix=" + prefix
-					+ ", fileName=" + fileName + ")");
+		if (verbose) System.out.println(this.getClass().getSimpleName() + ".loadGroupFile(group-file-prefix=" + prefix + ", fileName=" + fileName + ")");
 		GroupParser parser;
 		try {
 			URL f = new URL(fileName);
@@ -668,11 +666,10 @@ public class STGroup {
 		return this.parse(srcName, name, args, template, templateToken, delimiterStartChar, delimiterStopChar);
 	}
 
-	public CompiledST parse(String srcName, String name, List<FormalArgument> args, String template,
-			Token templateToken, char delimiterStartChar, char delimiterStopChar) {
+	public CompiledST parse(String srcName, String name, List<FormalArgument> args, String template, Token templateToken, char delimiterStartChar,
+			char delimiterStopChar) {
 		try {
-			STLexer lexer = new STLexer(STGroup.DEFAULT_ERR_MGR, new ANTLRStringStream(template),
-					null, delimiterStartChar, delimiterStopChar);
+			STLexer lexer = new STLexer(STGroup.DEFAULT_ERR_MGR, new ANTLRStringStream(template), null, delimiterStartChar, delimiterStopChar);
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			SParser p = new SParser(tokens, this);
 			if (args != null && args.size() > 0) {
@@ -686,6 +683,7 @@ public class STGroup {
 			throw new RuntimeException(e);
 		}
 	}
+
 	/*
 	 * protected void parseGroupFile(String filename) { try { GroupLexer lexer =
 	 * new GroupLexer(new ANTLRFileStream(filename)); CommonTokenStream tokens =
@@ -710,11 +708,11 @@ public class STGroup {
 
 	public void setListener(ErrorBuffer errors) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void setListener(STErrorListener errors) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
