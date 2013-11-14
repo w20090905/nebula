@@ -407,6 +407,48 @@ public class Compiler implements Opcodes {
 			return retClz;
 		}
 
+		public Class<?> compile(Label ifAllFalse, String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
+			Class<?> retClz = null;
+			Class<?> parentClz = null;
+			if (e1 instanceof FieldOf) {
+				parentClz = ((FieldOf) e1).compile(ifAllFalse, clzName, cw, mv, context);
+			} else {
+				parentClz = e1.compile(clzName, cw, mv, context);
+			}
+			mv.visitInsn(DUP);
+			mv.visitJumpInsn(IFNULL, ifAllFalse);
+
+			Method m = null;
+			Field f = null;
+			if (Map.class.isAssignableFrom(parentClz)) {
+				mv.visitLdcInsn(name);
+				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get", "(Ljava/lang/Object;)Ljava/lang/Object;");
+				retClz = Object.class;
+			} else if ((m = CompilerContext.getProp(parentClz, name)) != null) {
+				retClz = m.getReturnType();
+				Class<?> defineClass = m.getDeclaringClass();
+				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(defineClass));
+				if (parentClz.isInterface()) {
+					mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(defineClass), m.getName(), "()" + Type.getDescriptor(retClz));
+				} else {
+					mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(defineClass), m.getName(), "()" + Type.getDescriptor(retClz));
+				}
+//				if (!retClz.isPrimitive()) {
+//					mv.visitTypeInsn(CHECKCAST, Type.getInternalName(retClz));
+//				}
+			} else if ((f = CompilerContext.getField(parentClz, name)) != null) {
+				retClz = f.getType();
+				Class<?> defineClass = f.getDeclaringClass();
+				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(defineClass));
+				mv.visitFieldInsn(GETFIELD, Type.getInternalName(defineClass), name, Type.getDescriptor(retClz));
+//				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(retClz));
+			} else {
+				throw new RuntimeException("Cannot find " + e1.toString(context) + "." + name);
+			}
+
+			return retClz;
+		}
+
 		@Override
 		public Object eval(Object root) {
 			// return ((Entity) e1.eval()).get(name);
@@ -451,21 +493,18 @@ public class Compiler implements Opcodes {
 				sub.compileInlineToString(clzName, cw, mv, context);
 				return String.class;
 			} else {
-				Class<?> retClass = value.compile(clzName, cw, mv, context);
-				if (value instanceof FieldOf && retClass.isPrimitive()) {
-					Label ifFalse = new Label();
-					Label ifEnd = new Label();
-					mv.visitJumpInsn(IFNULL, ifFalse);
+				Class<?> retClass = null;
+				if (value instanceof FieldOf) {
+					Label ifNull = new Label();
+					retClass = ((FieldOf) value).compile(ifNull, clzName, cw, mv, context);
 					{
-						retClass = _box_(mv, retClass);
-						mv.visitJumpInsn(GOTO, ifEnd);
+						if (retClass.isPrimitive()) {
+							retClass = _box_(mv, retClass);
+						}
 					}
-					mv.visitLabel(ifFalse);
-					{
-						mv.visitInsn(POP); // pop primary
-						mv.visitInsn(ACONST_NULL); // push object
-					}
-					mv.visitLabel(ifEnd);
+					mv.visitLabel(ifNull);
+				} else {
+					retClass = value.compile(clzName, cw, mv, context);
 				}
 				return retClass;
 			}
@@ -1138,24 +1177,19 @@ public class Compiler implements Opcodes {
 				sub.compileInlineToString(clzName, cw, mv, context);
 				return String.class;
 			} else {
-				Class<?> retClass = value.compile(clzName, cw, mv, context);
-				if (value instanceof FieldOf && retClass.isPrimitive()) {
-
-					Label ifFalse = new Label();
-					Label ifEnd = new Label();
-					mv.visitJumpInsn(IFNULL, ifFalse);
+				Class<?> retClass = null;
+				if (value instanceof FieldOf) {
+					Label ifNull = new Label();
+					retClass = ((FieldOf) value).compile(ifNull, clzName, cw, mv, context);
 					{
-						retClass = _box_(mv, retClass);
-						mv.visitJumpInsn(GOTO, ifEnd);
+						if (retClass.isPrimitive()) {
+							retClass = _box_(mv, retClass);
+						}
 					}
-					mv.visitLabel(ifFalse);
-					{
-						mv.visitInsn(POP); // pop primary
-						mv.visitInsn(ACONST_NULL); // push object
-					}
-					mv.visitLabel(ifEnd);
+					mv.visitLabel(ifNull);
+				} else {
+					retClass = value.compile(clzName, cw, mv, context);
 				}
-
 				return retClass;
 			}
 		}
@@ -1923,38 +1957,20 @@ public class Compiler implements Opcodes {
 				mv.visitInsn(POP); // pop Stringbuilder
 			} else if (expr instanceof FieldOf) {
 				sb.compile(clzName, cw, mv, context);
-				Class<?> clz = expr.compile(clzName, cw, mv, context);
+				Label ifEnd = new Label();
+				Label ifNull = new Label();
 
-				if (clz.isPrimitive()) {
-					Label ifEnd = new Label();
-					Label ifFalse = new Label();
-					mv.visitJumpInsn(IFNULL, ifFalse);
-					{
-						output(clz, clzName, cw, mv, context); // consume
-																// sb,primary
-																// push sb
-						mv.visitJumpInsn(GOTO, ifEnd);
-					}
-					mv.visitLabel(ifFalse);
-					{
-						mv.visitInsn(POP);// pop primary
-					}
-					mv.visitLabel(ifEnd);
-				} else {
-					Label ifFalse = new Label();
-					Label ifEnd = new Label();
-					mv.visitInsn(DUP);
-					mv.visitJumpInsn(IFNULL, ifFalse);
-					{
-						output(clz, clzName, cw, mv, context);
-						mv.visitJumpInsn(GOTO, ifEnd);
-					}
-					mv.visitLabel(ifFalse);
-					{
-						mv.visitInsn(POP); // pop object
-					}
-					mv.visitLabel(ifEnd);
+				Class<?> clz = ((FieldOf) expr).compile(ifNull, clzName, cw, mv, context);
+				{
+					output(clz, clzName, cw, mv, context);
+					mv.visitJumpInsn(GOTO, ifEnd);
 				}
+				mv.visitLabel(ifNull);
+				{
+					mv.visitInsn(POP); // pop object
+				}
+				mv.visitLabel(ifEnd);
+
 				mv.visitInsn(POP); // pop Stringbuilder
 			} else {
 				sb.compile(clzName, cw, mv, context);
