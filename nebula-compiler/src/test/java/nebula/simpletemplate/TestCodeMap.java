@@ -33,7 +33,21 @@ public class TestCodeMap implements Action {
 				}
 			}
 			
-			System.out.println("abc");
+			if(o==null){
+				System.out.println("abc");
+			}
+			
+			Person person=null;
+			
+			if(person!=null){
+				out.append(person.name);
+			}else{
+				
+			}
+			
+			if(o!=null){
+				out.append(o);
+			}
 		}
 	}
 }

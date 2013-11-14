@@ -286,35 +286,98 @@ public class Compiler implements Opcodes {
 		}
 
 		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			Class<?> clz = e1.compile(clzName, cw, mv, context);
+			Class<?> retClz = null;
+			Class<?> parentClz = e1.compile(clzName, cw, mv, context);
 
 			Method m = null;
 			Field f = null;
-			if (Map.class.isAssignableFrom(clz)) {
-				mv.visitLdcInsn(name);
-				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get", "(Ljava/lang/Object;)Ljava/lang/Object;");
-				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(Object.class));
-				return Object.class;
-			} else if ((m = CompilerContext.getProp(clz, name)) != null) {
-				Class<?> retClass = m.getReturnType();
-				Class<?> defineClass = m.getDeclaringClass();
-				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(defineClass));
-				if (clz.isInterface()) {
-					mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(defineClass), m.getName(), "()" + Type.getDescriptor(retClass));
-					return retClass;
-				} else {
-					mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(defineClass), m.getName(), "()" + Type.getDescriptor(retClass));
-					return retClass;
+			if (Map.class.isAssignableFrom(parentClz)) {
+				mv.visitInsn(DUP);
+				Label ifEnd = new Label();
+				mv.visitJumpInsn(IFNULL, ifEnd);
+				{
+					mv.visitLdcInsn(name);
+					mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "get", "(Ljava/lang/Object;)Ljava/lang/Object;");
 				}
-			} else if ((f = CompilerContext.getField(clz, name)) != null) {
-				Class<?> retClass = f.getType();
+				mv.visitLabel(ifEnd);
+				retClz = Object.class;
+			} else if ((m = CompilerContext.getProp(parentClz, name)) != null) {
+				retClz = m.getReturnType();
+				Class<?> defineClass = m.getDeclaringClass();
+				if (retClz.isPrimitive()) {
+					mv.visitInsn(DUP);
+					Label ifEnd = new Label();
+					Label ifFalse = new Label();
+					mv.visitJumpInsn(IFNULL, ifFalse);
+					{
+						mv.visitTypeInsn(CHECKCAST, Type.getInternalName(defineClass));
+						if (parentClz.isInterface()) {
+							mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(defineClass), m.getName(), "()" + Type.getDescriptor(retClz));
+						} else {
+							mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(defineClass), m.getName(), "()" + Type.getDescriptor(retClz));
+						}
+						mv.visitVarInsn(ALOAD, 0); // push not null
+						mv.visitJumpInsn(GOTO, ifEnd);
+					}
+					mv.visitLabel(ifFalse);
+					{
+						mv.visitInsn(POP);
+						mv.visitLdcInsn(0);
+						mv.visitInsn(ACONST_NULL);
+					}
+					mv.visitLabel(ifEnd);
+				} else {
+					mv.visitInsn(DUP);
+					Label ifEnd = new Label();
+					mv.visitJumpInsn(IFNULL, ifEnd);
+					{
+						mv.visitTypeInsn(CHECKCAST, Type.getInternalName(defineClass));
+						if (parentClz.isInterface()) {
+							mv.visitMethodInsn(INVOKEINTERFACE, Type.getInternalName(defineClass), m.getName(), "()" + Type.getDescriptor(retClz));
+						} else {
+							mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(defineClass), m.getName(), "()" + Type.getDescriptor(retClz));
+						}
+					}
+					mv.visitLabel(ifEnd);
+				}
+			} else if ((f = CompilerContext.getField(parentClz, name)) != null) {
+				retClz = f.getType();
 				Class<?> defineClass = f.getDeclaringClass();
-				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(defineClass));
-				mv.visitFieldInsn(GETFIELD, Type.getInternalName(defineClass), name, Type.getDescriptor(retClass));
-				return retClass;
+
+				if (retClz.isPrimitive()) {
+					mv.visitInsn(DUP);
+					Label ifEnd = new Label();
+					Label ifFalse = new Label();
+					mv.visitJumpInsn(IFNULL, ifFalse);
+					{
+						mv.visitTypeInsn(CHECKCAST, Type.getInternalName(defineClass));
+						mv.visitFieldInsn(GETFIELD, Type.getInternalName(defineClass), name, Type.getDescriptor(retClz));
+						mv.visitVarInsn(ALOAD, 0); // push not null
+						mv.visitJumpInsn(GOTO, ifEnd);
+					}
+					mv.visitLabel(ifFalse);
+					{
+						mv.visitInsn(POP);
+						mv.visitLdcInsn(0);
+						mv.visitInsn(ACONST_NULL);
+					}
+					mv.visitLabel(ifEnd);
+				} else {
+					mv.visitInsn(DUP);
+					Label ifEnd = new Label();
+					mv.visitJumpInsn(IFNULL, ifEnd);
+					{
+						mv.visitTypeInsn(CHECKCAST, Type.getInternalName(defineClass));
+						mv.visitFieldInsn(GETFIELD, Type.getInternalName(defineClass), name, Type.getDescriptor(retClz));
+						mv.visitTypeInsn(CHECKCAST, Type.getInternalName(retClz));
+					}
+					mv.visitLabel(ifEnd);
+				}
 			} else {
 				throw new RuntimeException("Cannot find " + e1.toString(context) + "." + name);
 			}
+
+			return retClz;
 		}
 
 		@Override
@@ -1272,7 +1335,7 @@ public class Compiler implements Opcodes {
 
 								mv.visitInsn(DUP); // dup this
 								mv.visitFieldInsn(GETFIELD, thisClassName, templateTemplateFieldName, Type.getDescriptor(CompiledST.class));// cost
-																																				// this
+																																			// this
 
 								{// arg1.getClass().getName
 									mv.visitVarInsn(ALOAD, localFirstArg);
@@ -1327,7 +1390,7 @@ public class Compiler implements Opcodes {
 
 								mv.visitInsn(DUP); // dup this
 								mv.visitFieldInsn(GETFIELD, thisClassName, templateTemplateFieldName, Type.getDescriptor(CompiledST.class));// cost
-																																				// this
+																																			// this
 
 								// Void.class.getName
 								mv.visitLdcInsn(Type.getType("Ljava/lang/Void;"));
@@ -1539,7 +1602,11 @@ public class Compiler implements Opcodes {
 
 	}
 
-	static class LongCst extends Expression<Long> {
+	static abstract class Const<T> extends Expression<T> {
+
+	}
+
+	static class LongCst extends Const<Long> {
 		final Long value;
 
 		LongCst(String text) {
@@ -1762,30 +1829,112 @@ public class Compiler implements Opcodes {
 		}
 
 		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			if (expr instanceof IncludeSubTemplate) {
+			if (expr instanceof Const) {
+				sb.compile(clzName, cw, mv, context);// push sb
+				Class<?> clz = expr.compile(clzName, cw, mv, context);
+				output(clz, clzName, cw, mv, context);
+				mv.visitInsn(POP); // pop sb
+			} else if (expr instanceof IncludeSubTemplate) {
 				IncludeSubTemplate sub = (IncludeSubTemplate) expr;
-				return sub.compileInlineAppend(clzName, cw, mv, context);
+				sub.compileInlineAppend(clzName, cw, mv, context);
+			} else if (expr instanceof ArgRefer) {
+				sb.compile(clzName, cw, mv, context);
+				Class<?> clz = expr.compile(clzName, cw, mv, context);
+
+				if (clz.isPrimitive()) {
+					output(clz, clzName, cw, mv, context);
+				} else {
+					Label ifFalse = new Label();
+					Label ifEnd = new Label();
+					mv.visitInsn(DUP);
+					mv.visitJumpInsn(IFNULL, ifFalse);
+					{
+						output(clz, clzName, cw, mv, context);
+						mv.visitJumpInsn(GOTO, ifEnd);
+					}
+					mv.visitLabel(ifFalse);
+					{
+						mv.visitInsn(POP); // pop object
+
+					}
+					mv.visitLabel(ifEnd);
+				}
+				mv.visitInsn(POP); // pop Stringbuilder
+			} else if (expr instanceof FieldOf) {
+				sb.compile(clzName, cw, mv, context);
+				Class<?> clz = expr.compile(clzName, cw, mv, context);
+
+				if (clz.isPrimitive()) {
+					Label ifEnd = new Label();
+					Label ifFalse = new Label();
+					mv.visitJumpInsn(IFNULL, ifFalse);
+					{
+						output(clz, clzName, cw, mv, context); // consume
+																// sb,primary
+																// push sb
+						mv.visitJumpInsn(GOTO, ifEnd);
+					}
+					mv.visitLabel(ifFalse);
+					{
+						mv.visitInsn(POP);// pop primary
+					}
+					mv.visitLabel(ifEnd);
+				} else {
+					Label ifFalse = new Label();
+					Label ifEnd = new Label();
+					mv.visitInsn(DUP);
+					mv.visitJumpInsn(IFNULL, ifFalse);
+					{
+						output(clz, clzName, cw, mv, context);
+						mv.visitJumpInsn(GOTO, ifEnd);
+					}
+					mv.visitLabel(ifFalse);
+					{
+						mv.visitInsn(POP); // pop object
+					}
+					mv.visitLabel(ifEnd);
+				}
+				mv.visitInsn(POP); // pop Stringbuilder
+			} else {
+				sb.compile(clzName, cw, mv, context);
+				Class<?> clz = expr.compile(clzName, cw, mv, context);
+
+				Label ifFalse = new Label();
+				Label ifEnd = new Label();
+				mv.visitInsn(DUP);
+				mv.visitJumpInsn(IFNULL, ifFalse);
+				{
+					output(clz, clzName, cw, mv, context);
+					mv.visitJumpInsn(GOTO, ifEnd);
+				}
+				mv.visitLabel(ifFalse);
+				{
+					mv.visitInsn(POP); // pop object
+				}
+				mv.visitLabel(ifEnd);
+
+				mv.visitInsn(POP); // pop Stringbuilder
 			}
 
-			sb.compile(clzName, cw, mv, context);
+			return Void.TYPE;
+		}
 
-			Class<?> clz = expr.compile(clzName, cw, mv, context);
-
+		private void output(Class<?> clz, String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			if (String.class == clz) {
+				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(String.class));
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;");
-				mv.visitInsn(POP);
 			} else if (clz.isPrimitive()) {
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + Type.getDescriptor(clz) + ")Ljava/lang/StringBuilder;");
-				mv.visitInsn(POP);
 			} else if (StringBuilder.class == clz) {
+				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(StringBuilder.class));
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + Type.getDescriptor(clz) + ")Ljava/lang/StringBuilder;");
-				mv.visitInsn(POP);
 			} else if (List.class.isAssignableFrom(clz)) {
 
 				int locals = context.locals;
 
 				int listLocal = locals++;
 
+				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(List.class));
 				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "iterator", "()Ljava/util/Iterator;");
 
 				mv.visitVarInsn(ASTORE, listLocal);
@@ -1805,7 +1954,6 @@ public class Compiler implements Opcodes {
 				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "hasNext", "()Z");
 				mv.visitJumpInsn(IFNE, forBegin);
 				// }
-				mv.visitInsn(POP); // pop StringBuilder from stack
 			} else if (Map.class.isAssignableFrom(clz)) {
 
 				int locals = context.locals;
@@ -1813,6 +1961,7 @@ public class Compiler implements Opcodes {
 				int listLocal = locals++;
 
 				// // initial
+				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(Map.class));
 				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Map", "values", "()Ljava/util/Collection;");
 				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Collection", "iterator", "()Ljava/util/Iterator;");
 
@@ -1832,19 +1981,14 @@ public class Compiler implements Opcodes {
 				mv.visitMethodInsn(INVOKEINTERFACE, "java/util/Iterator", "hasNext", "()Z");
 				mv.visitJumpInsn(IFNE, forBegin);
 
-				mv.visitInsn(POP); // pop StringBuilder from stack
 			} else if (ST.class.isAssignableFrom(clz)) {
 				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(ST.class));
 				mv.visitMethodInsn(INVOKEVIRTUAL, Type.getInternalName(ST.class), "render", "()Ljava/lang/String;");
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + Type.getDescriptor(String.class) + ")Ljava/lang/StringBuilder;");
-				mv.visitInsn(POP);
 			} else {
 				mv.visitTypeInsn(CHECKCAST, Type.getInternalName(Object.class));
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + Type.getDescriptor(Object.class) + ")Ljava/lang/StringBuilder;");
-				mv.visitInsn(POP);
 			}
-
-			return Void.TYPE;
 		}
 
 		@Override
@@ -1871,7 +2015,7 @@ public class Compiler implements Opcodes {
 		}
 	}
 
-	static class StringCst extends Expression<String> {
+	static class StringCst extends Const<String> {
 		final String value;
 
 		StringCst(String value) {
@@ -1923,7 +2067,7 @@ public class Compiler implements Opcodes {
 		}
 	}
 
-	static class YesnoCst extends Expression<Integer> {
+	static class YesnoCst extends Const<Integer> {
 		final int value;
 
 		YesnoCst(boolean v) {
@@ -2144,19 +2288,19 @@ public class Compiler implements Opcodes {
 	}
 
 	public Statement trimLastNEWLINE(Statement t1) {
-		Block block = (Block)t1;
-		if(block.statements.size()==0)return t1;
-		int last = block.statements.size()-1;
-		
+		Block block = (Block) t1;
+		if (block.statements.size() == 0) return t1;
+		int last = block.statements.size() - 1;
+
 		Statement lastStatement = block.statements.get(last);
-		if(!(lastStatement instanceof Output))return t1;
-		
-		Output output = (Output)lastStatement;
-		if(!(output.expr instanceof StringCst))return t1;
-		
-		StringCst s = (StringCst)output.expr;
-		if(!("\n".equals(s.value) || "\r\n".equals(s)))return t1;		
-		block.statements.remove(block.statements.size()-1);
-		return t1;		 
+		if (!(lastStatement instanceof Output)) return t1;
+
+		Output output = (Output) lastStatement;
+		if (!(output.expr instanceof StringCst)) return t1;
+
+		StringCst s = (StringCst) output.expr;
+		if (!("\n".equals(s.value) || "\r\n".equals(s))) return t1;
+		block.statements.remove(block.statements.size() - 1);
+		return t1;
 	}
 }

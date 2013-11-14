@@ -38,7 +38,7 @@ public class CompiledST {
 	ReentrantLock lock = new ReentrantLock();
 
 	String name;
-	STGroup nativeGroup;
+	public STGroup nativeGroup;
 	public String prefix;
 	public boolean isAnonSubtemplate;
 	CompiledST() {		
@@ -362,5 +362,8 @@ public class CompiledST {
 		sb.append(code);
 		sb.append("\n");
 		return sb.toString();
+	}
+	public void dump() {
+		System.out.println(this.toString());		
 	}
 }

@@ -20,8 +20,11 @@ import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
+import org.stringtemplate.v4.STErrorListener;
+import org.stringtemplate.v4.misc.ErrorBuffer;
 import org.stringtemplate.v4.misc.ErrorManager;
 import org.stringtemplate.v4.misc.ErrorType;
+import org.stringtemplate.v4.test.ErrorBufferAllErrors;
 import org.stringtemplate.v4.compiler.STException;
 import org.stringtemplate.v4.compiler.STLexer;
 
@@ -704,4 +707,14 @@ public class STGroup {
 	 * GroupParser(tokens); p.group(this, ""); } catch (RecognitionException e)
 	 * { throw new RuntimeException(e); } }
 	 */
+
+	public void setListener(ErrorBuffer errors) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setListener(STErrorListener errors) {
+		// TODO Auto-generated method stub
+		
+	}
 }

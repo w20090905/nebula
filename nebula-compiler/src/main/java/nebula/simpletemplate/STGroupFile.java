@@ -3,6 +3,7 @@ package nebula.simpletemplate;
 import java.io.File;
 import java.net.*;
 
+import org.stringtemplate.v4.STErrorListener;
 import org.stringtemplate.v4.compiler.STException;
 import org.stringtemplate.v4.misc.ErrorType;
 
@@ -136,5 +137,10 @@ public class STGroupFile extends STGroup {
 			errMgr.runTimeError(null, null, ErrorType.INVALID_TEMPLATE_NAME, mue, parent);
 		}
 		return null;
+	}
+
+	public void setListener(STErrorListener errors) {
+		// TODO Auto-generated method stub
+		
 	}
 }
