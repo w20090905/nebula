@@ -31,8 +31,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import nebula.simpletemplate.STParser;
-
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.NoViableAltException;
@@ -48,6 +46,7 @@ import org.stringtemplate.v4.compiler.FormalArgument;
 import org.stringtemplate.v4.compiler.GroupParser;
 import org.stringtemplate.v4.compiler.STException;
 import org.stringtemplate.v4.compiler.STLexer;
+import org.stringtemplate.v4.compiler.STParser;
 import org.stringtemplate.v4.misc.ErrorType;
 
 /** A compiler for a single template. */
