@@ -37,7 +37,7 @@ public class TestSimpleTempalteCoreBasics extends BaseTest {
 	public void testNullAttr() throws Exception {
 		String template = "hi ${name}!";
 		ST st = new ST(template, '$', '}');
-		String expected = "hi null!";
+		String expected = "hi !";
 		String result = st.render();
 		assertEquals(expected, result);
 	}
@@ -130,7 +130,7 @@ public class TestSimpleTempalteCoreBasics extends BaseTest {
 				put("a", "b");
 			}
 		});
-		String expected = "b: null";
+		String expected = "b: ";
 		String result = st.render();
 		assertEquals(expected, result);
 	}

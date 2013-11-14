@@ -57,6 +57,33 @@ public class Compiler implements Opcodes {
 		}
 	}
 
+	static Class<?> _box_(MethodVisitor mv, Class<?> clz) {
+		Class<?> pclz = null;
+		if (clz == Boolean.TYPE) {
+			pclz = Boolean.class;
+		} else if (clz == Byte.TYPE) {
+			pclz = Byte.class;
+		} else if (clz == Character.TYPE) {
+			pclz = Character.class;
+		} else if (clz == Double.TYPE) {
+			pclz = Double.class;
+		} else if (clz == Float.TYPE) {
+			pclz = Float.class;
+		} else if (clz == Short.TYPE) {
+			pclz = Short.class;
+		} else if (clz == Integer.TYPE) {
+			pclz = Integer.class;
+		} else if (clz == Long.TYPE) {
+			pclz = Integer.class;
+		} else {
+			throw new RuntimeException("not primary type");
+		}
+
+		mv.visitMethodInsn(INVOKESTATIC, Type.getInternalName(pclz), "valueOf", "(" + Type.getDescriptor(clz) + ")" + Type.getDescriptor(pclz));
+
+		return pclz;
+	}
+
 	static class ArgRefer extends Expression<Object> {
 		final Var arg;
 		final Var argv;
@@ -424,7 +451,23 @@ public class Compiler implements Opcodes {
 				sub.compileInlineToString(clzName, cw, mv, context);
 				return String.class;
 			} else {
-				return value.compile(clzName, cw, mv, context);
+				Class<?> retClass = value.compile(clzName, cw, mv, context);
+				if (value instanceof FieldOf && retClass.isPrimitive()) {
+					Label ifFalse = new Label();
+					Label ifEnd = new Label();
+					mv.visitJumpInsn(IFNULL, ifFalse);
+					{
+						retClass = _box_(mv, retClass);
+						mv.visitJumpInsn(GOTO, ifEnd);
+					}
+					mv.visitLabel(ifFalse);
+					{
+						mv.visitInsn(POP); // pop primary
+						mv.visitInsn(ACONST_NULL); // push object
+					}
+					mv.visitLabel(ifEnd);
+				}
+				return retClass;
 			}
 		}
 
@@ -1095,7 +1138,25 @@ public class Compiler implements Opcodes {
 				sub.compileInlineToString(clzName, cw, mv, context);
 				return String.class;
 			} else {
-				return value.compile(clzName, cw, mv, context);
+				Class<?> retClass = value.compile(clzName, cw, mv, context);
+				if (value instanceof FieldOf && retClass.isPrimitive()) {
+
+					Label ifFalse = new Label();
+					Label ifEnd = new Label();
+					mv.visitJumpInsn(IFNULL, ifFalse);
+					{
+						retClass = _box_(mv, retClass);
+						mv.visitJumpInsn(GOTO, ifEnd);
+					}
+					mv.visitLabel(ifFalse);
+					{
+						mv.visitInsn(POP); // pop primary
+						mv.visitInsn(ACONST_NULL); // push object
+					}
+					mv.visitLabel(ifEnd);
+				}
+
+				return retClass;
 			}
 		}
 

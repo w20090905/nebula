@@ -44,6 +44,7 @@ public class TestCodeMap implements Action {
 			}else{
 				
 			}
+			argv[0] = 1098;
 			
 			if(o!=null){
 				out.append(o);
