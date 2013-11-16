@@ -1,0 +1,8 @@
+<!--#set(test.language.antlr.StringTemplate.StringTemplatePerformance.Person person)-->
+<html>
+<head>
+<title>${person.name}${person.name}${person.name}${person.name}${person.name}${person.name}${person.name}${person.name}${person.name}${person.name}</title>
+<body>
+<hr>
+</body>
+</html>
