@@ -590,6 +590,16 @@ public class TestSimpleTempalteCoreBasics extends BaseTest {
 		String result = st.render();
 		assertEquals(expected, result);
 	}
+	
+	public void testTrueCondFieldOf() throws Exception {
+		String template = "<if(user.manager)>works<endif>";
+		User user = new User(0, "wangshilian");
+		ST st = new ST(template);
+		st.add("user", user);
+		String expected = "works";
+		String result = st.render();
+		assertEquals(expected, result);
+	}
 
 	public void testEmptyIFTemplate() throws Exception {
 		String template = "<if(x)>fail<elseif(name)><endif>";

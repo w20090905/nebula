@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g 2013-11-14 10:04:37
+// $ANTLR 3.4 D:\\Projects\\nebula\\nebula-compiler\\src\\main\\java\\nebula\\simpletemplate\\SParser.g 2013-11-16 19:21:58
 
 package nebula.simpletemplate;
 
@@ -1887,7 +1887,7 @@ public class SParser extends Parser {
                     state._fsp--;
 
 
-                    v=m;
+                    v=c.opBoolean(m);
 
                     }
                     break;

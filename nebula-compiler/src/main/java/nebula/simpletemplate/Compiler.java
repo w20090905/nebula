@@ -1769,25 +1769,48 @@ public class Compiler implements Opcodes {
 
 		public Class<?> compile(String clzName, ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
 			Class<?> clz = e1.compile(clzName, cw, mv, context);
-			if (clz == Boolean.TYPE) {
-				return clz;
-			} else {
+			if (e1 instanceof FieldOf && clz.isPrimitive() ) {
 				Label ifFalse = new Label();
 				Label ifEnd = new Label();
 
 				mv.visitJumpInsn(IFNULL, ifFalse);
-				mv.visitInsn(ICONST_1);
-				mv.visitJumpInsn(GOTO, ifEnd);
+				{
+					if (clz == Boolean.TYPE) {
+						mv.visitInsn(NOP);
+					} else {
+						mv.visitInsn(POP);
+						mv.visitInsn(ICONST_1);
+					}
+					mv.visitJumpInsn(GOTO, ifEnd);
+				}
 				mv.visitLabel(ifFalse);
-				mv.visitInsn(ICONST_0);
+				{
+					mv.visitInsn(POP);
+					mv.visitInsn(ICONST_0);
+				}
 				mv.visitLabel(ifEnd);
+
+			} else {
+				if (clz == Boolean.TYPE) {
+					return clz;
+				} else {
+					Label ifFalse = new Label();
+					Label ifEnd = new Label();
+
+					mv.visitJumpInsn(IFNULL, ifFalse);
+					mv.visitInsn(ICONST_1);
+					mv.visitJumpInsn(GOTO, ifEnd);
+					mv.visitLabel(ifFalse);
+					mv.visitInsn(ICONST_0);
+					mv.visitLabel(ifEnd);
+				}
 			}
 			return Boolean.TYPE;
 		}
 
 		@Override
 		public String toString() {
-			return "(!" + e1.toString() + ")";
+			return "(" + e1.toString() + ")";
 		}
 
 		@Override
@@ -2220,10 +2243,8 @@ public class Compiler implements Opcodes {
 		return arg;
 	}
 
-	public Expr<Boolean> opConditional(Operator op, Expr<?> e1, Expr<?> e2) {
-		Expr<Boolean> eBoolean1 = new EvalBoolean(e1);
-		Expr<Boolean> eBoolean2 = new EvalBoolean(e2);
-		return new Conditional(op, eBoolean1, eBoolean2);
+	public Expr<Boolean> opConditional(Operator op, Expr<Boolean> e1, Expr<Boolean> e2) {
+		return new Conditional(op, e1, e2);
 	}
 
 	public Expr<BigDecimal> opDecimalCst(String value) {
@@ -2299,9 +2320,13 @@ public class Compiler implements Opcodes {
 		return new Name(value);
 	}
 
-	public Expr<Boolean> opNot(Expr<?> e1) {
+	public Expr<Boolean> opNot(Expr<Boolean> e1) {
+		return new Not(e1);
+	}
+
+	public Expr<Boolean> opBoolean(Expr<?> e1) {
 		Expr<Boolean> eBoolean = new EvalBoolean(e1);
-		return new Not(eBoolean);
+		return eBoolean;
 	}
 
 	public Expr<String> opStringCst(String value) {

@@ -227,7 +227,7 @@ andConditional returns [Expr v] : n=notConditional{v=n;} ( '&&' n=notConditional
 
 notConditional returns [Expr v] 
 	:	'!' n=notConditional {v=c.opNot(n);}
-	|	m=memberExpr{v=m;}
+	|	m=memberExpr{v=c.opBoolean(m);}
 	;
 
 //notConditionalExpr
