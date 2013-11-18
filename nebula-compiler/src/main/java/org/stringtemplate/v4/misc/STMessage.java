@@ -27,8 +27,9 @@
  */
 package org.stringtemplate.v4.misc;
 
+import nebula.simpletemplate.ST;
+
 import org.antlr.runtime.Token;
-import org.stringtemplate.v4.ST;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

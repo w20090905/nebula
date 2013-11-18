@@ -28,10 +28,10 @@
 
 package org.stringtemplate.v4.misc;
 
-import org.stringtemplate.v4.InstanceScope;
 import org.stringtemplate.v4.compiler.STException;
 
 /** {@code <name>} where {@code name} is not found up the dynamic scoping chain. */
+@SuppressWarnings("serial")
 public class STNoSuchAttributeException extends STException {
 	public InstanceScope scope;
 	public String name;

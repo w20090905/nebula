@@ -27,12 +27,12 @@
  */
 package org.stringtemplate.v4.misc;
 
+import nebula.simpletemplate.Misc;
+import nebula.simpletemplate.ST;
+
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
-import org.stringtemplate.v4.InstanceScope;
-import org.stringtemplate.v4.Interpreter;
-import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STErrorListener;
 
 public class ErrorManager {
@@ -61,7 +61,8 @@ public class ErrorManager {
                 // throw new Error("internal error", msg.cause);
             }
 
-            public void error(String s) { error(s, null); }
+            @SuppressWarnings("unused")
+			public void error(String s) { error(s, null); }
             public void error(String s, Throwable e) {
                 System.err.println(s);
                 if ( e!=null ) {
@@ -112,6 +113,7 @@ public class ErrorManager {
         );
     }
 
+	@SuppressWarnings("unused")
 	public void groupSyntaxError(ErrorType error, String srcName, RecognitionException e, String msg) {
 		Token t = e.token;
 		listener.compileTimeError(

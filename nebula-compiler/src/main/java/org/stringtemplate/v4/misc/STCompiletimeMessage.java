@@ -27,9 +27,10 @@
  */
 package org.stringtemplate.v4.misc;
 
+import nebula.simpletemplate.GroupParser;
+
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
-import org.stringtemplate.v4.compiler.GroupParser;
 
 /** Used for semantic errors that occur at compile time not during
  *  interpretation. For ST parsing ONLY not group parsing.
@@ -61,6 +62,7 @@ public class STCompiletimeMessage extends STMessage {
 		this.srcName = srcName;
     }
 
+	@SuppressWarnings("unused")
 	@Override
     public String toString() {
         RecognitionException re = (RecognitionException)cause;

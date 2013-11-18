@@ -27,6 +27,8 @@
  */
 package org.stringtemplate.v4.misc;
 
+import nebula.simpletemplate.Misc;
+
 import org.stringtemplate.v4.STErrorListener;
 
 import java.util.ArrayList;

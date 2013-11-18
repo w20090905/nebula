@@ -27,7 +27,6 @@
  */
 package org.stringtemplate.v4.misc;
 
-import org.stringtemplate.v4.*;
 
 /** Used to track errors that occur in the ST interpreter. */
 public class STRuntimeMessage extends STMessage {
@@ -66,28 +65,30 @@ public class STRuntimeMessage extends STMessage {
      *  return it's template line:col.
      */
     public String getSourceLocation() {
-        if ( ip<0 || self.impl==null ) return null;
-        Interval I = self.impl.sourceMap[ip];
-        if ( I==null ) return null;
-        // get left edge and get line/col
-        int i = I.a;
-        Coordinate loc = Misc.getLineCharPosition(self.impl.template, i);
-        return loc.toString();
+//        if ( ip<0 || self.impl==null ) return null;
+//        Interval I = self.impl.sourceMap[ip];
+//        if ( I==null ) return null;
+//        // get left edge and get line/col
+//        int i = I.a;
+//        Coordinate loc = Misc.getLineCharPosition(self.impl.template, i);
+//        return loc.toString();
+    	return null;
     }
 
     @Override
     public String toString() {
-        StringBuilder buf = new StringBuilder();
-        String loc = getSourceLocation();
-        if ( self!=null ) {
-            buf.append("context [");
-            if ( interp!=null ) {
-				buf.append( Interpreter.getEnclosingInstanceStackString(scope) );
-			}
-            buf.append("]");
-        }
-        if ( loc!=null ) buf.append(" "+loc);
-        buf.append(" "+super.toString());
-        return buf.toString();
+//        StringBuilder buf = new StringBuilder();
+//        String loc = getSourceLocation();
+//        if ( self!=null ) {
+//            buf.append("context [");
+//            if ( interp!=null ) {
+//				buf.append( Interpreter.getEnclosingInstanceStackString(scope) );
+//			}
+//            buf.append("]");
+//        }
+//        if ( loc!=null ) buf.append(" "+loc);
+//        buf.append(" "+super.toString());
+//        return buf.toString();
+        return null;
     }
 }

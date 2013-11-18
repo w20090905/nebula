@@ -31,6 +31,7 @@ package org.stringtemplate.v4.misc;
 import org.stringtemplate.v4.compiler.STException;
 
 /** For {@code <a.b>}, object {@code a} does not have a property {@code b}. */
+@SuppressWarnings("serial")
 public class STNoSuchPropertyException extends STException {
 	public Object o;
 	public String propertyName;

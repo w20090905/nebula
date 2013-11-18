@@ -28,9 +28,10 @@
 
 package org.stringtemplate.v4.misc;
 
+import nebula.simpletemplate.GroupParser;
+
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
-import org.stringtemplate.v4.compiler.GroupParser;
 
 /** */
 public class STLexerMessage extends STMessage {
