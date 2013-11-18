@@ -192,11 +192,9 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 
 		assertEquals(expected, tmp.exec(type));
 	}
-	
+
 	public void testSimpleGroupFromString() throws Exception {
-		String g =
-			"a(x) ::= <<foo>>\n"+
-			"b() ::= <<bar>>\n";
+		String g = "a(x) ::= <<foo>>\n" + "b() ::= <<bar>>\n";
 		STGroup group = new STGroupString(g);
 		ST st = group.getInstanceOf("a");
 		String expected = "foo";
@@ -204,36 +202,57 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 		assertEquals(expected, result);
 	}
 
-    public void testGroupWithTwoTemplates() throws Exception {
+	public void testGroupWithTwoTemplates() throws Exception {
 		writeFile(tmpdir, "a.st", "a(x) ::= <<foo>>");
 		writeFile(tmpdir, "b.st", "b() ::= \"bar\"");
-        STGroup group = new STGroupDir(tmpdir);
-        ST st1 = group.getInstanceOf("a");
-        ST st2 = group.getInstanceOf("b");
-        String expected = "foobar";
-        String result = st1.render()+st2.render();
-        assertEquals(expected, result);
-    }
+		STGroup group = new STGroupDir(tmpdir);
+		ST st1 = group.getInstanceOf("a");
+		ST st2 = group.getInstanceOf("b");
+		String expected = "foobar";
+		String result = st1.render() + st2.render();
+		assertEquals(expected, result);
+	}
 
 	public void testGroupPath_real() throws Exception {
 		Type type = this.typeBrokers.getBroker("Person");
 
 		String expected = "Person { Name , Name true ,false } { Birthday , Birthday false ,false } { Height , Height false ,false } { Age , Age false ,false } { Sex , Sex false ,false } { Detail , Person$Detail false ,false } { Company , Company false ,false } { Roles1 , Text false ,false } { Roles2 , Long false ,false } { Roles3 , Date false ,false } { Roles4 , Time false ,false } { Education , Person$Education false ,false } ";
 
-		STGroup group = new STGroupFile("tmp/typeList.stg", '$', '$');
+		STGroup group = new STGroupFile("template/typeList.stg", '$', '$');
 		CompiledST tmpl = group.lookupTemplate("type");
 
 		type = Broker.brokerOf(type).get();
 
-//		assertEquals(expected, tmpl.exec(type));
-//		System.out.println(trim(tmpl.exec(type)));
 		System.out.println(tmpl.exec(type));
+		
+		int MAX =1000 * 10;
+		{
+			String desc = "stringtemplate";
+			// setUp
+
+			// prepare
+			long start, end, nanoAll, nanoEvery;
+
+			start = System.nanoTime();
+			for (int i = 0; i < MAX; i++) {
+				tmpl.exec(type);
+			}
+			end = System.nanoTime();
+			nanoAll = end - start;
+			nanoEvery = nanoAll / MAX;
+
+			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+					1000 * 1000 * 1000 / nanoEvery);
+		}
 	}
 
 	public void testFreeMarker_real() throws Exception {
 		Type type = this.typeBrokers.getBroker("Person");
+		
+		int MAX = 1000 * 1;
 
 		{
+			// setUp
 			String desc = "type freemarker";
 
 			Configuration templateConfiguration = new Configuration();
@@ -246,12 +265,28 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 			ft.process(root, sw);
 			System.out.println(trim(sw.toString()));
 
-		}
+			// prepare
+			long start, end, nanoAll, nanoEvery;
 
+			start = System.nanoTime();
+			for (int i = 0; i < MAX; i++) {
+				sw = new StringWriter(2048);
+				ft.process(root, sw);
+			}
+			end = System.nanoTime();
+			nanoAll = end - start;
+			nanoEvery = nanoAll / MAX;
+
+			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+					1000 * 1000 * 1000 / nanoEvery);
+		}
 	}
 
-	private String trim(String source){
-		return source.toString().replaceAll("\r\n", "\n").replaceAll("\n\n", "\n").replaceAll("\n\n", "\n").replaceAll("\n\n", "\n").replaceAll("\n\n", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("  ", " ").replaceAll("  ", " ").replaceAll("  ", " ").replaceAll("  ", " ").replaceAll("  ", " ").replaceAll("  ", " ").replaceAll("\n ", "\n");
+	private String trim(String source) {
+		return source.toString().replaceAll("\r\n", "\n").replaceAll("\n\n", "\n").replaceAll("\n\n", "\n").replaceAll("\n\n", "\n").replaceAll("\n\n", "\n")
+				.replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n")
+				.replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("\n\t", "\n").replaceAll("  ", " ").replaceAll("  ", " ").replaceAll("  ", " ")
+				.replaceAll("  ", " ").replaceAll("  ", " ").replaceAll("  ", " ").replaceAll("\n ", "\n");
 	}
 
 	/*
