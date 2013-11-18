@@ -95,32 +95,32 @@ public class TemplatePerformanceNow extends TestCase {
 			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
-		{
-			String desc = "type ST";
-			// setUp
-			// template =
-			// "<type.fields : { f | \\{ <f.name> , <f.type.name> \\} }>";
-			// template = "<type.name>";
-
-			org.stringtemplate.v4.ST t = new org.stringtemplate.v4.ST(template, '$', '}');
-			// manually ask for an ST instance
-			t.add("type", type);
-			assertEquals(expected, t.render());
-
-			// prepare
-			long start, end, nanoAll, nanoEvery;
-
-			start = System.nanoTime();
-			for (int i = 0; i < MAX; i++) {
-				t.render();
-			}
-			end = System.nanoTime();
-			nanoAll = end - start;
-			nanoEvery = nanoAll / MAX;
-
-			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
-					1000 * 1000 * 1000 / nanoEvery);
-		}
+//		{
+//			String desc = "type ST";
+//			// setUp
+//			// template =
+//			// "<type.fields : { f | \\{ <f.name> , <f.type.name> \\} }>";
+//			// template = "<type.name>";
+//
+//			org.stringtemplate.v4.ST t = new org.stringtemplate.v4.ST(template, '$', '}');
+//			// manually ask for an ST instance
+//			t.add("type", type);
+//			assertEquals(expected, t.render());
+//
+//			// prepare
+//			long start, end, nanoAll, nanoEvery;
+//
+//			start = System.nanoTime();
+//			for (int i = 0; i < MAX; i++) {
+//				t.render();
+//			}
+//			end = System.nanoTime();
+//			nanoAll = end - start;
+//			nanoEvery = nanoAll / MAX;
+//
+//			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+//					1000 * 1000 * 1000 / nanoEvery);
+//		}
 		{
 			String desc = "type freemarker";
 			// setUp

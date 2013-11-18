@@ -174,6 +174,7 @@ public class testMethodCallPerfomance extends TestCase {
 			// setUp
 			// prepare
 			long start, end, nanoAll, nanoEvery;
+			@SuppressWarnings("unused")
 			Class<?> z = null;
 			start = System.nanoTime();
 			for (int i = 0; i < MAX; i++) {

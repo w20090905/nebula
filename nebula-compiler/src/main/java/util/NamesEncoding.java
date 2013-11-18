@@ -1,11 +1,6 @@
 package util;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-
 public class NamesEncoding {
-	private static final Log log = LogFactory.getLog(NamesEncoding.class);
 	static char[] e = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 	static final int SPAC = e.length;
 
@@ -15,7 +10,7 @@ public class NamesEncoding {
 		int posV = 0;
 		int posNv = 0;
 		boolean special = false;
-		for (; posV < vs.length; ) {
+		for (; posV < vs.length;) {
 			if (vs[posV] < 0xFF) {
 				char v = vs[posV++];
 				if ('0' <= v && v <= '9') {
@@ -61,14 +56,14 @@ public class NamesEncoding {
 			nvs[posNv++] = '_';
 		}
 
-//		if (log.isTraceEnabled()) {
-//			log.trace("\t[" + value + "] > [" + new String(nvs, 0, posNv) + "]");
-//		}
+		// if (log.isTraceEnabled()) {
+		// log.trace("\t[" + value + "] > [" + new String(nvs, 0, posNv) + "]");
+		// }
 		return new String(nvs, 0, posNv);
 	}
 
-	public static String encode(String value,boolean toUpcase) {
-		if(toUpcase){
+	public static String encode(String value, boolean toUpcase) {
+		if (toUpcase) {
 			encode(value);
 		}
 		char[] vs = value.toCharArray();
@@ -76,7 +71,7 @@ public class NamesEncoding {
 		int posV = 0;
 		int posNv = 0;
 		boolean special = false;
-		for (; posV < vs.length; ) {
+		for (; posV < vs.length;) {
 			if (vs[posV] < 0xFF) {
 				char v = vs[posV++];
 				if ('0' <= v && v <= '9') {
@@ -88,7 +83,7 @@ public class NamesEncoding {
 					nvs[posNv++] = v;
 					break;
 				} else if ('a' <= v && v <= 'z') {
-					nvs[posNv++] =v;
+					nvs[posNv++] = v;
 					break;
 				} else {
 				}
@@ -122,9 +117,9 @@ public class NamesEncoding {
 			nvs[posNv++] = '_';
 		}
 
-//		if (log.isTraceEnabled()) {
-//			log.trace("\t[" + value + "] > [" + new String(nvs, 0, posNv) + "]");
-//		}
+		// if (log.isTraceEnabled()) {
+		// log.trace("\t[" + value + "] > [" + new String(nvs, 0, posNv) + "]");
+		// }
 		return new String(nvs, 0, posNv);
 	}
 }

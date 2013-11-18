@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.URL;
 import java.util.HashMap;
@@ -15,23 +14,20 @@ import junit.framework.TestCase;
 import nebula.data.Broker;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.db.DbConfiguration;
 import nebula.data.impl.TypeDatastore;
 import nebula.lang.EditableTypeLoader;
 import nebula.lang.SystemTypeLoader;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
+import nebula.simpletemplate.CompiledST;
 import nebula.simpletemplate.ST;
 import nebula.simpletemplate.STGroup;
-import nebula.simpletemplate.STGroupFile;
 import nebula.simpletemplate.STGroupDir;
-import nebula.simpletemplate.CompiledST;
+import nebula.simpletemplate.STGroupFile;
 import nebula.simpletemplate.STGroupString;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.google.common.collect.Maps;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -213,6 +209,7 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 		assertEquals(expected, result);
 	}
 
+	@SuppressWarnings("unused")
 	public void testGroupPath_real() throws Exception {
 		Type type = this.typeBrokers.getBroker("Person");
 

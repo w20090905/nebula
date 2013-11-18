@@ -1,11 +1,12 @@
 package nebula.simpletemplate;
 
 import java.io.File;
-import java.net.*;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 
 import org.stringtemplate.v4.STErrorListener;
 import org.stringtemplate.v4.compiler.STException;
-import org.stringtemplate.v4.misc.ErrorType;
 
 /**
  * The internal representation of a single group file (which must end in

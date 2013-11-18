@@ -15,7 +15,7 @@ public class ActionComplier_anonymous__nop_0Dump implements Opcodes {
 
 			Class<?> expClass = NebulaClassLoader.defineClass("ActionComplier_anonymous__nop_0", b);
 			// instantiates this compiled expression class...
-			Action expr = (Action) expClass.newInstance();
+			expClass.newInstance();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

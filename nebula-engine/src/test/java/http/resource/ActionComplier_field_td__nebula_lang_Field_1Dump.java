@@ -2,7 +2,6 @@ package http.resource;
 
 import nebula.lang.NebulaClassLoader;
 
-import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Label;
@@ -17,7 +16,6 @@ public class ActionComplier_field_td__nebula_lang_Field_1Dump implements Opcodes
 		ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
 		FieldVisitor fv;
 		MethodVisitor mv;
-		AnnotationVisitor av0;
 
 		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, "ActionComplier_field_td__nebula_lang_Field_1", null, "java/lang/Object",
 				new String[] { "nebula/simpletemplate/Action" });
@@ -76,7 +74,6 @@ public class ActionComplier_field_td__nebula_lang_Field_1Dump implements Opcodes
 			mv.visitVarInsn(ASTORE, 3);
 			{
 				int TMP_sub_sub_ARGV = 7;
-				int TMP_sub_sub_SB = 8;
 				int tmpList= 9;
 				mv.visitIntInsn(BIPUSH, 1);
 				mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");

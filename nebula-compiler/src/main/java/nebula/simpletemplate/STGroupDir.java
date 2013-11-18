@@ -9,7 +9,6 @@ import java.net.URL;
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.Token;
 import org.stringtemplate.v4.compiler.STException;
-import org.stringtemplate.v4.misc.ErrorType;
 
 /**
  * A directory or directory tree full of templates and/or group files. We load
@@ -69,8 +68,7 @@ public class STGroupDir extends STGroup {
 
 	@Override
 	public void importTemplates(Token fileNameToken) {
-		String msg = "import illegal in group files embedded in STGroupDirs; " + "import " + fileNameToken.getText()
-				+ " in STGroupDir " + this.getName();
+		String msg = "import illegal in group files embedded in STGroupDirs; " + "import " + fileNameToken.getText() + " in STGroupDir " + this.getName();
 		throw new UnsupportedOperationException(msg);
 	}
 
@@ -122,14 +120,13 @@ public class STGroupDir extends STGroup {
 
 	/** Load .st as relative file name relative to root by {@code prefix}. */
 	public CompiledST loadTemplateFile(String prefix, String unqualifiedFileName) {
-		if (verbose)
-			System.out.println("loadTemplateFile(" + unqualifiedFileName + ") in groupdir " + "from " + root
-					+ " prefix=" + prefix);
+		if (verbose) System.out.println("loadTemplateFile(" + unqualifiedFileName + ") in groupdir " + "from " + root + " prefix=" + prefix);
 		URL f = null;
 		try {
 			f = new URL(root + prefix + unqualifiedFileName);
 		} catch (MalformedURLException me) {
-//			errMgr.runTimeError(null, null, ErrorType.INVALID_TEMPLATE_NAME, me, root + unqualifiedFileName);
+			// errMgr.runTimeError(null, null, ErrorType.INVALID_TEMPLATE_NAME,
+			// me, root + unqualifiedFileName);
 			return null;
 		}
 

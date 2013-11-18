@@ -1,6 +1,5 @@
 package nebula.simpletemplate;
 
-import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Label;
@@ -15,7 +14,6 @@ public class TestCodeMapDump implements Opcodes {
 		ClassWriter cw = new ClassWriter(0);
 		FieldVisitor fv;
 		MethodVisitor mv;
-		AnnotationVisitor av0;
 
 		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, "nebula/simpletemplate/TestCodeMap", null, "java/lang/Object", new String[] { "nebula/simpletemplate/Action" });
 

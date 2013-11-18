@@ -1,8 +1,6 @@
 package nebula.simpletemplate;
 
-import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
@@ -11,9 +9,7 @@ public class ActionComplier_anonymous__nop_0 implements Opcodes {
 	public static byte[] dump() throws Exception {
 
 		ClassWriter cw = new ClassWriter(0);
-		FieldVisitor fv;
 		MethodVisitor mv;
-		AnnotationVisitor av0;
 
 		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, "ActionComplier_anonymous__nop_0", null, "java/lang/Object", new String[] { "nebula/simpletemplate/Action" });
 
@@ -45,7 +41,7 @@ public class ActionComplier_anonymous__nop_0 implements Opcodes {
 			mv.visitIntInsn(BIPUSH, 0);
 			mv.visitVarInsn(ALOAD, 4);
 			mv.visitVarInsn(ALOAD, 4);
-			
+
 			mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
 			mv.visitInsn(DUP);
 			mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V");

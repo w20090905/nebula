@@ -1,8 +1,6 @@
 package nebula.simpletemplate;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Map;
 
 public class TestCodePrimary implements Action {
 	@Override
@@ -18,17 +16,6 @@ public class TestCodePrimary implements Action {
 			out.append(";");
 			Person p = new Person();
 			p.name = "1000";
-			String s = p.name;
-			
-			p.name = "<<<<<<";
-			StringBuilder sb = new StringBuilder();
-			p.name = ">>>>>>";
-			
-			Map<String,Object> maps = null;
-			Collection<Object> c =  maps.values();
-			for (Object object : c) {
-				out.append(object);
-			}
 		}
 	}
 }

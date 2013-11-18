@@ -1,9 +1,6 @@
 package nebula.simpletemplate;
 
 import java.io.IOException;
-import java.util.Map;
-
-import nebula.lang.Type;
 
 public class TestCodeMap implements Action {
 
@@ -37,13 +34,13 @@ public class TestCodeMap implements Action {
 				System.out.println("abc");
 			}
 			
-			Person person=null;
-			
-			if(person!=null){
-				out.append(person.name);
-			}else{
-				
-			}
+//			Person person=null;
+//			
+//			if(person!=null){
+//				out.append(person.name);
+//			}else{
+//				
+//			}
 			argv[0] = 1098;
 			
 			if(o!=null){

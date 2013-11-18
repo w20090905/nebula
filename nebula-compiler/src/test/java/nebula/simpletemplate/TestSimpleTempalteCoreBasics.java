@@ -29,7 +29,6 @@ package nebula.simpletemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -122,6 +121,7 @@ public class TestSimpleTempalteCoreBasics extends BaseTest {
 		assertEquals(expected, result);
 	}
 
+	@SuppressWarnings("serial")
 	public void testPropWithNoAttr() throws Exception {
 		String template = "<foo.a>: <ick>";
 		ST st = new ST(template);
@@ -1002,6 +1002,7 @@ public class TestSimpleTempalteCoreBasics extends BaseTest {
 		assertEquals(expected, result);
 	}
 
+	@SuppressWarnings("serial")
 	public void testListOfTemplates() throws Exception {
 		String template = "<foo>!";
 		ST st = new ST(template);
@@ -1017,6 +1018,7 @@ public class TestSimpleTempalteCoreBasics extends BaseTest {
 		assertEquals(expected, result);
 	}
 
+	@SuppressWarnings("serial")
 	public void testListOfTemplatesInTemplate() throws Exception {
 		String template = "<foo>!";
 		ST st = new ST(template);

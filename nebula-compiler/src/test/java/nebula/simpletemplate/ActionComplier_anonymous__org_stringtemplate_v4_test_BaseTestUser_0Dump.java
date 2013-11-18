@@ -2,10 +2,7 @@ package nebula.simpletemplate;
 
 import nebula.lang.NebulaClassLoader;
 
-import org.mockito.asm.Type;
-import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -17,7 +14,7 @@ public class ActionComplier_anonymous__org_stringtemplate_v4_test_BaseTestUser_0
 
 			Class<?> expClass = NebulaClassLoader.defineClass("ActionComplier_anonymous__org_stringtemplate_v4_test_BaseTestUser_0", b);
 			// instantiates this compiled expression class...
-			Action expr = (Action) expClass.newInstance();
+			expClass.newInstance();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -26,9 +23,7 @@ public class ActionComplier_anonymous__org_stringtemplate_v4_test_BaseTestUser_0
 	public static byte[] dump1() throws Exception {
 
 		ClassWriter cw = new ClassWriter(0);
-		FieldVisitor fv;
 		MethodVisitor mv;
-		AnnotationVisitor av0;
 
 		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, "ActionComplier_anonymous__org_stringtemplate_v4_test_BaseTestUser_0", null, "java/lang/Object",
 				new String[] { "nebula/simpletemplate/Action" });
@@ -97,9 +92,7 @@ public class ActionComplier_anonymous__org_stringtemplate_v4_test_BaseTestUser_0
 	public static byte[] dump() throws Exception {
 
 		ClassWriter cw = new ClassWriter(0);
-		FieldVisitor fv;
 		MethodVisitor mv;
-		AnnotationVisitor av0;
 
 		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, "ActionComplier_anonymous__org_stringtemplate_v4_test_BaseTestUser_0", null, "java/lang/Object",
 				new String[] { "nebula/simpletemplate/Action" });

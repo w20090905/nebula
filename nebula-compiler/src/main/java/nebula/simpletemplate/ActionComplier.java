@@ -3,14 +3,12 @@ package nebula.simpletemplate;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 
 import nebula.lang.NebulaClassLoader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -36,7 +34,6 @@ public class ActionComplier implements Opcodes {
 		// class header
 		ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
 		MethodVisitor mv;
-		FieldVisitor fv;
 
 		// Class define
 		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, clzInternalName, null, "java/lang/Object", new String[] { SUPER_NAME });
@@ -52,21 +49,23 @@ public class ActionComplier implements Opcodes {
 			mv.visitEnd();
 		}
 
-//		if (template.implicitlyDefinedTemplates != null) {
-//			List<TemplateImpl> list = template.implicitlyDefinedTemplates;
-//			for (int i = 0; i < list.size(); i++) {
-//				{
-//					String templateClzFieldName = "clz" + i;
-//					fv = cw.visitField(ACC_PRIVATE, templateClzFieldName, "Ljava/lang/Class;", "Ljava/lang/Class<*>;", null);
-//					fv.visitEnd();
-//				}
-//				{
-//					String templateActionFieldName = "temp" + i;
-//					fv = cw.visitField(ACC_PRIVATE, templateActionFieldName, Type.getDescriptor(Action.class), null, null);
-//					fv.visitEnd();
-//				}
-//			}
-//		}
+		// if (template.implicitlyDefinedTemplates != null) {
+		// List<TemplateImpl> list = template.implicitlyDefinedTemplates;
+		// for (int i = 0; i < list.size(); i++) {
+		// {
+		// String templateClzFieldName = "clz" + i;
+		// fv = cw.visitField(ACC_PRIVATE, templateClzFieldName,
+		// "Ljava/lang/Class;", "Ljava/lang/Class<*>;", null);
+		// fv.visitEnd();
+		// }
+		// {
+		// String templateActionFieldName = "temp" + i;
+		// fv = cw.visitField(ACC_PRIVATE, templateActionFieldName,
+		// Type.getDescriptor(Action.class), null, null);
+		// fv.visitEnd();
+		// }
+		// }
+		// }
 
 		{
 			mv = cw.visitMethod(ACC_PUBLIC, "exec",
