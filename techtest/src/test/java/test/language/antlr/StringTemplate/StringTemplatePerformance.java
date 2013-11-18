@@ -3,7 +3,6 @@ package test.language.antlr.StringTemplate;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
-import java.util.HashMap;
 import java.util.Map;
 
 import junit.framework.TestCase;
@@ -14,6 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.lilystudio.smarty4j.Context;
 import org.lilystudio.smarty4j.Engine;
+import org.lilystudio.smarty4j.IParser;
 
 import com.google.common.collect.Maps;
 
@@ -66,29 +66,32 @@ public class StringTemplatePerformance extends TestCase {
 			System.out.printf("[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
-//		{
-//			String desc = "bean MyST";
-//			// setUp
-//
-////			STGroupDir templates = new STGroupDir("src/test/java/test/language/antlr/StringTemplate",'$','$');
-//			// manually ask for an ST instance
-//			ST t = new ST("<html>\r\n<head>\r\n<title>$person.name$$person.name$$person.name$$person.name$$person.name$$person.name$$person.name$$person.name$$person.name$$person.name$</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>",'$','$');
-//			t.add("person", person);
-//			assertEquals(expected, t.toString());
-//
-//			long start, end, nanoAll, nanoEvery;
-//
-//			start = System.nanoTime();
-//			for (int i = 0; i < MAX; i++) {
-//				t.render();
-//			}
-//			end = System.nanoTime();
-//			nanoAll = end - start;
-//			nanoEvery = nanoAll / MAX;
-//
-//			System.out.printf("[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
-//					1000 * 1000 * 1000 / nanoEvery);
-//		}
+		// {
+		// String desc = "bean MyST";
+		// // setUp
+		//
+		// // STGroupDir templates = new
+		// STGroupDir("src/test/java/test/language/antlr/StringTemplate",'$','$');
+		// // manually ask for an ST instance
+		// ST t = new
+		// ST("<html>\r\n<head>\r\n<title>$person.name$$person.name$$person.name$$person.name$$person.name$$person.name$$person.name$$person.name$$person.name$$person.name$</title>\r\n<body>\r\n<hr>\r\n</body>\r\n</html>",'$','$');
+		// t.add("person", person);
+		// assertEquals(expected, t.toString());
+		//
+		// long start, end, nanoAll, nanoEvery;
+		//
+		// start = System.nanoTime();
+		// for (int i = 0; i < MAX; i++) {
+		// t.render();
+		// }
+		// end = System.nanoTime();
+		// nanoAll = end - start;
+		// nanoEvery = nanoAll / MAX;
+		//
+		// System.out.printf("[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n",
+		// desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+		// 1000 * 1000 * 1000 / nanoEvery);
+		// }
 		{
 			String desc = "bean smarty4j";
 			// setUp
@@ -104,7 +107,7 @@ public class StringTemplatePerformance extends TestCase {
 
 			start = System.nanoTime();
 			for (int i = 0; i < MAX; i++) {
-				out = new ByteArrayOutputStream();
+				out = new ByteArrayOutputStream(1024);
 				template.merge(context, out);
 				// out.toString("utf-8");
 			}
@@ -115,33 +118,25 @@ public class StringTemplatePerformance extends TestCase {
 			System.out.printf("[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
-
 		{
-			String desc = "bean httl";
+			String desc = "bean smarty4j asm";
 			// setUp
-//			Engine smartyEngine = new Engine();
-//			org.lilystudio.smarty4j.Template template = smartyEngine.getTemplate("/src/test/java/test/language/antlr/StringTemplate/smarty4jBean.tpl");
-//			Context context = new Context();
-//			context.set("person", person);
-
-			Map<String, Object> parameters = new HashMap<String, Object>();
-			parameters.put("person", person);
-
-			httl.Engine engine = httl.Engine.getEngine();
-			httl.Template template = engine.getTemplate("httlBean.httl");
-
+			Engine smartyEngine = new Engine();
+			org.lilystudio.smarty4j.Template template = smartyEngine.getTemplate("/src/test/java/test/language/antlr/StringTemplate/smarty4jBean.tpl");
+			Context context = new Context();
+			context.set("person", person);
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
-//			template.merge(context, out);
-			template.render(parameters, out);
-			
+			IParser p = template.toParser("myfirst");
+			StringWriter sw = new StringWriter();
+			p.merge(context, sw);
+
 			// prepare
 			long start, end, nanoAll, nanoEvery;
 
 			start = System.nanoTime();
 			for (int i = 0; i < MAX; i++) {
-				out = new ByteArrayOutputStream();
-//				template.merge(context, out);
-				template.render(parameters, out);
+				sw = new StringWriter(1024);
+				p.merge(context, sw);
 				// out.toString("utf-8");
 			}
 			end = System.nanoTime();
@@ -151,7 +146,35 @@ public class StringTemplatePerformance extends TestCase {
 			System.out.printf("[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
-
+		/*
+		 * { String desc = "bean httl"; // setUp // Engine smartyEngine = new
+		 * Engine(); // org.lilystudio.smarty4j.Template template =
+		 * smartyEngine.getTemplate(
+		 * "/src/test/java/test/language/antlr/StringTemplate/smarty4jBean.tpl"
+		 * ); // Context context = new Context(); // context.set("person",
+		 * person);
+		 * 
+		 * Map<String, Object> parameters = new HashMap<String, Object>();
+		 * parameters.put("person", person);
+		 * 
+		 * httl.Engine engine = httl.Engine.getEngine(); httl.Template template
+		 * = engine.getTemplate("httlBean.httl");
+		 * 
+		 * ByteArrayOutputStream out = new ByteArrayOutputStream(); //
+		 * template.merge(context, out); template.render(parameters, out);
+		 * 
+		 * // prepare long start, end, nanoAll, nanoEvery;
+		 * 
+		 * start = System.nanoTime(); for (int i = 0; i < MAX; i++) { out = new
+		 * ByteArrayOutputStream(); // template.merge(context, out);
+		 * template.render(parameters, out); // out.toString("utf-8"); } end =
+		 * System.nanoTime(); nanoAll = end - start; nanoEvery = nanoAll / MAX;
+		 * 
+		 * System.out.printf(
+		 * "[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n"
+		 * , desc, (nanoAll / (1000 * 1000)), +nanoEvery, 1000 * 1000 * 1000 /
+		 * nanoEvery); }
+		 */
 		{
 			String desc = "bean Freemarker";
 			// setUp
@@ -170,6 +193,7 @@ public class StringTemplatePerformance extends TestCase {
 
 			start = System.nanoTime();
 			for (int i = 0; i < MAX; i++) {
+				sw = new StringWriter(1024);
 				ft.process(root, sw);
 				// sw.toString();
 			}
@@ -239,7 +263,7 @@ public class StringTemplatePerformance extends TestCase {
 			String desc = "string smarty4j";
 			// setUp
 			Engine smartyEngine = new Engine();
-			org.lilystudio.smarty4j.Template template = smartyEngine.getTemplate("/src/test/java/test/language/antlr/StringTemplate/smarty4jBean.tpl");
+			org.lilystudio.smarty4j.Template template = smartyEngine.getTemplate("/src/test/java/test/language/antlr/StringTemplate/smarty4jStringValue.tpl");
 			Context context = new Context();
 			context.set("name", "wangshilian");
 
@@ -248,8 +272,36 @@ public class StringTemplatePerformance extends TestCase {
 
 			start = System.nanoTime();
 			for (int i = 0; i < MAX; i++) {
-				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				ByteArrayOutputStream out = new ByteArrayOutputStream(1024);
 				template.merge(context, out);
+				// out.toString("utf-8");
+			}
+			end = System.nanoTime();
+			nanoAll = end - start;
+			nanoEvery = nanoAll / MAX;
+
+			System.out.printf("[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+					1000 * 1000 * 1000 / nanoEvery);
+		}
+		{
+			String desc = "string smarty4j asm";
+			// setUp
+			Engine smartyEngine = new Engine();
+			org.lilystudio.smarty4j.Template template = smartyEngine.getTemplate("/src/test/java/test/language/antlr/StringTemplate/smarty4jStringValue.tpl");
+			Context context = new Context();
+			context.set("name", "wangshilian");
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			IParser p = template.toParser("myfirst");
+			StringWriter sw = new StringWriter();
+			p.merge(context, sw);
+
+			// prepare
+			long start, end, nanoAll, nanoEvery;
+
+			start = System.nanoTime();
+			for (int i = 0; i < MAX; i++) {
+				sw = new StringWriter(1024);
+				p.merge(context, sw);
 				// out.toString("utf-8");
 			}
 			end = System.nanoTime();
@@ -277,6 +329,7 @@ public class StringTemplatePerformance extends TestCase {
 
 			start = System.nanoTime();
 			for (int i = 0; i < MAX; i++) {
+				sw = new StringWriter(1024);
 				ft.process(root, sw);
 				// sw.toString();
 			}
