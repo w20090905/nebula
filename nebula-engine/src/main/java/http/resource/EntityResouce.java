@@ -12,17 +12,21 @@ import javax.servlet.http.HttpServletRequest;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
+import nebula.lang.NebulaNative;
+import nebula.lang.Type;
 
 public class EntityResouce extends AbstractResouce {
 	private final DataHelper<Entity, Reader, Writer> jsonHolder;
 
 	private final String key;
+	private final Type type;
 	private final DataStore<Entity> datastoreHolder;
 
-	public EntityResouce(DataHelper<Entity, Reader, Writer> json, DataStore<Entity> datas, String key) {
+	public EntityResouce(DataHelper<Entity, Reader, Writer> json, DataStore<Entity> datas, Type type, String key) {
 		super("text/json", 1, 1);
 		this.jsonHolder = json;
 		this.datastoreHolder = datas;
+		this.type = type;
 		this.key = key;
 	}
 
@@ -54,6 +58,10 @@ public class EntityResouce extends AbstractResouce {
 		Entity data = datastoreHolder.get(key).editable();
 		if (data != null) {
 			jsonHolder.readFrom(data, new InputStreamReader(req.getInputStream()));
+			String action = req.getParameter("$action");
+			if(action!=null && !"save".equals(action)){
+				NebulaNative.execMethod(null, null, data, type, action);
+			}
 			datastoreHolder.flush();
 		} else {
 			throw new RuntimeException("Cann't find object " + key);

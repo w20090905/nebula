@@ -145,7 +145,7 @@ public class EntityResouceEngine implements ResourceEngine {
 			return new TxEntityResource(jsonHolder, storeHolder, id);
 		case Master:
 		default:
-			return new EntityResouce(jsonHolder, storeHolder, id);
+			return new EntityResouce(jsonHolder, storeHolder,typeBroker, id);
 		}
 	}
 

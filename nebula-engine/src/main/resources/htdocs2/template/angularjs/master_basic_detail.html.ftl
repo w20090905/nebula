@@ -7,7 +7,7 @@
 [@nl.simple title="${type.displayName}"]
 					
 <!-- Start Form -->
-	<form name="form" x-ng-submit="$save()"  class="form-horizontal" novalidate>
+	<form name="form" class="form-horizontal" novalidate>
 
 	[#list type.fields as of][#t]
 				[#if !of.array]
@@ -241,7 +241,10 @@
 			[/#list]
 	
 		<div class="form-actions">
-	  		<input type="submit" class="btn btn-primary" x-ng-disabled="form.$invalid" value="Save changes">
+	[#list type.actions as a][#if !a.internal][#t]
+	  		<input type="submit" class="btn" x-ng-disabled="form.$invalid"   x-ng-click="$save('${a.name}')"  value="${a.displayName}">
+	[/#if][/#list]
+	  		<input type="submit" class="btn btn-primary" x-ng-disabled="form.$invalid"  x-ng-click="$save()"  value="Save changes">
 	  		<a href="" class="btn" x-ng-click="$back()">返回</a>
 			<!-- button type="button" class="btn">Cancel</button--> 
 		</div>

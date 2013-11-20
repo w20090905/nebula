@@ -201,8 +201,12 @@ angular.module('nebula.controllers', []).
 		//$scope.$dataReady();
 	});
 	$scope.update = true;
-	$scope.$save = function() {
-		$scope.data.$save(function(u, getResponseHeaders) {
+	$scope.$save = function(action) {
+		var $action = 'save';
+		if(action){
+			$action = action;
+		}
+		$scope.data.$save({$action: $action},function(u, getResponseHeaders) {
 			$location.url($interpolate('/d/{{typename}}/')($routeParams));
 		});
 	};

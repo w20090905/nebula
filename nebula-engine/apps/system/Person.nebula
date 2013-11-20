@@ -21,4 +21,5 @@ type Person|人员 {
 	};
 	@GroupBy Company;
 	EMail|邮件;
+        Refine|改年龄() { this.Age =31;}
 };

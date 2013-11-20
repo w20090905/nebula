@@ -123,14 +123,17 @@ options {
     }
     Field fInit = new Field(currentType, Type.CTOR);
     actionFields.put(fInit, op.stBlock(stList_Ctor_));
+    fInit.internal = true;
     currentType.actions.add(fInit);
 
-    Field onSave = new Field(currentType, Type.ONSAVE);
-    actionFields.put(onSave, op.stBlock(stList_onSave_));
-    currentType.actions.add(onSave);
+    Field fOnSave = new Field(currentType, Type.ONSAVE);
+    actionFields.put(fOnSave, op.stBlock(stList_onSave_));
+    fOnSave.internal = true;
+    currentType.actions.add(fOnSave);
     
     Field fOnLoad = new Field(currentType, Type.ONLOAD);
     actionFields.put(fOnLoad, op.stBlock(stList_onLoad_));
+    fOnLoad.internal = true;
     currentType.actions.add(fOnLoad);
   }
     
