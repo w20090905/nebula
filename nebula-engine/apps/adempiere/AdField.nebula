@@ -1,0 +1,36 @@
+@Legacy("adempiere")
+@Remarks("Field on a database table")
+@Refby("4")
+@Table("AD_FIELD")
+type AdField {
+@Column("AD_FIELD_ID") 	!AdFieldId ID;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	*Name;
+	?Description;
+	?Help;
+	IsCentrallyMaintained YesNo;/* 'Y' */
+@ForeignKeyColumn("AD_TAB_ID") @Column("AD_TAB_ID") 	AdTab;
+@ForeignKeyColumn("AD_COLUMN_ID") @Column("AD_COLUMN_ID") 	?AdColumn;
+@ForeignKeyColumn("AD_FIELDGROUP_ID") @Column("AD_FIELDGROUP_ID") 	?AdFieldGroup;
+	IsDisplayed YesNo;/* 'Y'  */
+	?DisplayLogic String;
+	?DisplayLength Length;
+	IsReadonly YesNo;/* 'N'  */
+	?SeqNo;
+	?SortNo SeqNo;
+	IsSameLine YesNo;/* 'N'  */
+	IsHeading YesNo;/* 'N'  */
+	IsFieldOnly YesNo;/* 'N'  */
+	IsEncrypted YesNo;/* 'N'  */
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+	?ObscureType Attr;
+@ForeignKeyColumn("AD_REFERENCE_ID") @Column("AD_REFERENCE_ID") 	?AdReference;
+	?IsMandatory YesNo;
+@Column("INCLUDED_TAB_ID") 	?IncludedTabId ID;
+	?DefaultValue String;
+@ForeignKeyColumn("AD_REFERENCE_ID") @Column("AD_REFERENCE_VALUE_ID") 	?AdReferenceValue AdReference;/* NULL */
+@ForeignKeyColumn("AD_VAL_RULE_ID") @Column("AD_VAL_RULE_ID") 	?AdValRule;/* NULL */
+	?InfoFactoryClass String;
+};
+

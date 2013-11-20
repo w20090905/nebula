@@ -23,7 +23,7 @@ type CBpartner {
 	?Url;
 @ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	?AdLanguage;
 	?TaxId String;
-	?IsTaxExempt YesNo;/* 'N'                                */
+	?IsTaxExempt YesNo;/* 'N'  */
 @ForeignKeyColumn("C_INVOICESCHEDULE_ID") @Column("C_INVOICESCHEDULE_ID") 	?CInvoiceSchedule;
 	?Rating String;
 	?SalesVolume Number;
@@ -41,7 +41,7 @@ type CBpartner {
 @ForeignKeyColumn("M_PRICELIST_ID") @Column("M_PRICELIST_ID") 	?MPriceList;
 @ForeignKeyColumn("M_DISCOUNTSCHEMA_ID") @Column("M_DISCOUNTSCHEMA_ID") 	?MDiscountSchema;
 @ForeignKeyColumn("C_DUNNING_ID") @Column("C_DUNNING_ID") 	?CDunning;
-	?IsDiscountPrinted YesNo;/* 'Y'                                */
+	?IsDiscountPrinted YesNo;/* 'Y'  */
 @Column("SO_DESCRIPTION") 	?SoDescription Description;
 	?PoReference String;
 	?PaymentRulePo String;

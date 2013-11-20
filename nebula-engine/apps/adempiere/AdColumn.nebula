@@ -34,7 +34,7 @@ type AdColumn {
 	IsSelectionColumn YesNo;/* 'N'  */
 @ForeignKeyColumn("AD_ELEMENT_ID") @Column("AD_ELEMENT_ID") 	?AdElement;
 @ForeignKeyColumn("AD_PROCESS_ID") @Column("AD_PROCESS_ID") 	?AdProcess;
-	?IsSyncDatabase YesNo;/* 'N'                               */
+	?IsSyncDatabase YesNo;/* 'N' */
 	IsAlwaysUpdateable YesNo;/* 'N'  */
 	?ColumnSql String;
 	?MandatoryLogic String;
