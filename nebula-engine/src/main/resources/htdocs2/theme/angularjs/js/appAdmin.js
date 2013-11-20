@@ -1,68 +1,39 @@
 'use strict';
 
-/* App Module */
-angular.module('nebula', ['nebulaFilters', 'nebulaServices','nebulaDirectives','angularTree','ngResource','ngCookies']).
-	config(['$routeProvider', function($routeProvider) {
-		$routeProvider.
-			/* Template edit */
-			when('/t/template/:typename-:cat.html.ftl', {templateUrl: '/theme/angularjs/unicorn/Theme-edit.html', controller: FreeMarkerCtrl}).
-			when('/t/theme/:theme/:skin/:typename-:cat.html', {templateUrl: '/theme/angularjs/unicorn/Theme-edit.html', controller: AngularJSCtrl}).
 
-			/* Type edit */
-			when('/d/Type/', {templateUrlWP: '/theme/angularjs/unicorn/Type-list.html',   controller: TypeListCtrl}).
-			when('/d/Type/!new', {templateUrlWP: '/theme/angularjs/unicorn/Type-detail.html', controller: NewTypeCtrl}).
-			when('/d/Type/:id', {templateUrlWP: '/theme/angularjs/unicorn/Type-detail.html', controller: TypeCtrl}).
+// Declare app level module which depends on filters, and services
+angular.module('nebula', [
+  'ngRoute','ngResource','ngAnimate','ngCookies','angularTree',
+  'nebula.filters',
+  'nebula.services',
+  'nebula.directives',
+  'nebula.controllers'
+]).config(['$routeProvider', function($routeProvider) {
+	/* Template edit */
+	$routeProvider.when('/t/template/:typename-:cat.html.ftl', {templateUrl: '/theme/angularjs/unicorn/Theme-edit.html', controller: "FreeMarkerCtrl"});
+	$routeProvider.when('/t/theme/:theme/:skin/:typename-:cat.html', {templateUrl: '/theme/angularjs/unicorn/Theme-edit.html', controller: "AngularJSCtrl"});
 
-			/* Attached Entity edit */
-			when('/d/:typename/:id/setting/info', {templateUrlWP: '/theme/angularjs/unicorn/setting-{{typename}}-basic-info.html',   controller: EntityCtrl}).
-			when('/d/:attachedtypename/:attachedid/setting/:typename/', {templateUrlWP: '/theme/angularjs/unicorn/setting-{{attachedtypename}}-{{typename}}-basic-list.html',   controller: AttachedEntityListCtrl}).
-			when('/d/:attachedtypename/:attachedid/:typename/', {templateUrlWP: '/theme/angularjs/unicorn/{{attachedtypename}}-{{typename}}-basic-list.html',   controller: AttachedEntityListCtrl}).
+	/* Type edit */
+	$routeProvider.when('/d/Type/', {templateUrl: '/theme/angularjs/unicorn/Type-list.html',   controller: "TypeListCtrl"});
+	$routeProvider.when('/d/Type/!new', {templateUrl: '/theme/angularjs/unicorn/Type-detail.html', controller: "NewTypeCtrl"});
+	$routeProvider.when('/d/Type/:id', {templateUrl: '/theme/angularjs/unicorn/Type-detail.html', controller: "TypeCtrl"});
 
-			/* Basic Entity edit */
-			when('/d/:typename', {templateUrlWP: '/theme/angularjs/unicorn/{{typename}}-list.html',   controller: EntityListCtrl}).
-			when('/d/:typename/!new', {templateUrlWP: '/theme/angularjs/unicorn/{{typename}}-detail.html', controller: NewEntityCtrl}).
-			when('/d/:typename/:id', {templateUrlWP: '/theme/angularjs/unicorn/{{typename}}-detail.html', controller: EntityCtrl}).
+	/* Attached Entity edit */
+	$routeProvider.when('/d/:typename/:id/setting/info', {templateUrlWP: '/theme/angularjs/unicorn/setting-{{typename}}-basic-info.html',   controller: "EntityCtrl"});
+	$routeProvider.when('/d/:attachedtypename/:attachedid/setting/:typename/', {templateUrlWP: '/theme/angularjs/unicorn/setting-{{attachedtypename}}-{{typename}}-basic-list.html',   controller: "AttachedEntityListCtrl"});
+	$routeProvider.when('/d/:attachedtypename/:attachedid/:typename/', {templateUrlWP: '/theme/angularjs/unicorn/{{attachedtypename}}-{{typename}}-basic-list.html',   controller: "AttachedEntityListCtrl"});
 
-			when('/welcome', {templateUrl: '/theme/angularjs/unicorn/welcome.html', controller: DoNothingCtrl}).
-			otherwise({redirectTo: '/welcome'});
-	}])
-	.config(['$httpProvider', function($httpProvider) {
-		// register the interceptor via an anonymous factory
-		if($httpProvider.interceptors){
-			$httpProvider.interceptors.push(function($q) {
-			  return {
-			   'request': function(config) {
-			       // same as above
-			    },
-			    'response': function(response) {
-//			      	alert(response);
-			    }
-			  };
-			});
-		}else if($httpProvider.responseInterceptors){
-			// register the interceptor via an anonymous factory
-			$httpProvider.responseInterceptors.push(function($q) {
-				  return function(promise) {
-					    return promise.then(function(response) {
-					      return response;
-					    }, function(response) {
-					    	alert(response.status);
-					      return $q.reject(response);
-					    });
-					  };
-			});
+	/* Basic Entity edit */
+	$routeProvider.when('/d/:typename', {templateUrlWP: '/theme/angularjs/unicorn/{{typename}}-list.html',   controller: "EntityListCtrl"});
+	$routeProvider.when('/d/:typename/!new', {templateUrlWP: '/theme/angularjs/unicorn/{{typename}}-detail.html', controller: "NewEntityCtrl"});
+	$routeProvider.when('/d/:typename/:id', {templateUrlWP: '/theme/angularjs/unicorn/{{typename}}-detail.html', controller: "EntityCtrl"});
+
+	$routeProvider.when('/welcome', {templateUrl: '/theme/angularjs/unicorn/welcome.html', controller: "DoNothingCtrl"});
+	$routeProvider.otherwise({redirectTo: '/welcome'});
+}]).run(function($rootScope, $location,  $interpolate) {
+ 	$rootScope.$on('$routeChangeStart', function(event, next, last) {
+		if (next.templateUrlWP) {
+			next.templateUrl = $interpolate(next.templateUrlWP)(next.pathParams);
 		}
-	}])
-	.run(function($rootScope, $location,  $interpolate) {
-	 	$rootScope.$on('$routeChangeStart', function(event, next, last) {
-			if (next.$route && next.$route.templateUrlWP) {
-				next.$route.templateUrl = $interpolate(next.$route.templateUrlWP)(next.pathParams);
-			}
-	 	});
+ 	});
 });
-
-
-(function($) { 
-	$("input[required]").parents(".control-group").find(".control-label").addClass("required");
-})(jQuery);
-

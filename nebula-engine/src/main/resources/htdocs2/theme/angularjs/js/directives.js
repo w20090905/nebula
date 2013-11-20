@@ -1,5 +1,4 @@
 'use strict';
-
 /* Directives */
 function PopupListCtrl($scope,$resource,urlParams){
 	if(urlParams.attachedtypename){
@@ -60,6 +59,18 @@ var PathMatchProvider = function(when) {
   }
 } 
 
+
+
+var nbDatepickerDirective = [
+                           function() {
+			return {
+				restrict : 'C',
+				link : function(scope, element, attrs) {
+					element.datepicker();
+				}
+			};
+		} ];
+                   	
 var neFromListDirective = [ 
    		'$http',
 		'$templateCache',
@@ -396,8 +407,10 @@ var nbInlineShowDataDirective = [ '$http', '$controller', '$resource', function(
 	};
 } ];
 
-angular.module('nebulaDirectives', [])
+/* Directives */
+angular.module('nebula.directives', [])
 .directive('nbView', nbViewDirective)
 .directive('popup', neFromListDirective)
 .directive('jsondataurl', nbJsonDataDirective)
-.directive('inlineshow', nbInlineShowDataDirective);
+.directive('inlineshow', nbInlineShowDataDirective)
+.directive('datepicker', nbDatepickerDirective);

@@ -3,7 +3,7 @@
 		<h1 class="tabs_involved" x-ng-show="data.Name">
 			Type-{{data.Name}} <span x-ng-repeat="(key, value) in data.NameAlias">&nbsp; {{key}}: {{value}}</span>
 		</h1>
-		<h1 class="tabs_involved" x-ng-show="!data.Name">Type-New</h1>
+		<h1 class="tabs_involved" x-ng-show="!data.Name">Type</h1>
 		<div class="buttons btn-toolbar" x-ng-show="data.standealone='Master'">
 			<div class="btn-group">
 				<a href="#/d/{{data.Name}}/" class="btn"><i class="icon-edit"></i> Edit Data</a>

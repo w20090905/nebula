@@ -2,9 +2,7 @@
 
 /* Services */
 
-angular.module('nebulaServices', ['ngResource']).
-    factory('Phone', function($resource){
-  return $resource('phones/:phoneId.json', {}, {
-    query: {method:'GET', params:{phoneId:'phones'}, isArray:true}
-  });
-});
+// Demonstrate how to register services
+// In this case it is a simple value service.
+angular.module('nebula.services', []).
+  value('version', '0.1');

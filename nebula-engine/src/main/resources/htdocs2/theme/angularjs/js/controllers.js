@@ -1,30 +1,30 @@
 /* Controllers */
-function DoNothingCtrl($scope, $routeParams) {
+
+angular.module('nebula.controllers', []).
+  controller('MyCtrl1', ['$scope','$routeParams','$resource',function($scope,$routeParams,$resource) {
+		var MenuResource = $resource('css/app.css', $routeParams);
+		$scope.MenuData = MenuResource.get($routeParams);
+}]).controller('DoNothingCtrl', ['$scope', '$routeParams',function($scope, $routeParams) {
 	'use strict';
 	$scope.$routeParams = $routeParams;
-}
-function AppControl($scope, $cookies, $location) {
+}]).controller('AppControl', ['$scope', '$cookies','$location',function($scope, $cookies, $location) {
 	'use strict';
 	$scope.base = $location;
 	$scope.LoginUserID = $cookies.LoginUserID;
-}
 
-function PaginationCtrl($scope){
+}]).controller('PaginationCtrl', ['$scope', function($scope){
     $scope.currentPage = 1;
     $scope.pageSize = 20;
     $scope.$setCurrentPage = function(cur){
     	$scope.currentPage = cur;
     }
-} 
-
-function TreeListCtrl($scope){
+}]).controller('TreeListCtrl', ['$scope', function($scope){
 	$scope.data = null;
 	$scope.selectData = function(data,selected){
 		if(selected)$scope.data = data;
 	}
-}
-
-function TypeQuickEditCtrl($scope, $resource, $routeParams, $location) {
+}]).controller('TypeQuickEditCtrl', ['$scope','$resource','$routeParams', '$location',
+                                     function($scope, $resource, $routeParams, $location) {
 
 	'use strict';
 	/*
@@ -55,9 +55,8 @@ function TypeQuickEditCtrl($scope, $resource, $routeParams, $location) {
 		});
 		MenuData.$save();
 	}
-}
-
-function NewUserCtrl($scope, $resource, $routeParams, $location) {
+}]).controller('NewUserCtrl', ['$scope', '$resource','$routeParams', '$location',
+                               function($scope, $resource, $routeParams, $location) {
 	'use strict';
 	$scope.typename = $routeParams.typename;
 	var DataResource = $resource('/d/User/', $routeParams);
@@ -67,15 +66,14 @@ function NewUserCtrl($scope, $resource, $routeParams, $location) {
 			$location.url("/login.html");
 		});
 	};
-}
-
-function AttachedEntityListCtrl($scope, $route, $resource, $routeParams) {
+}]).controller('AttachedEntityListCtrl', ['$scope', '$route','$resource','$routeParams',
+                                          function($scope, $route, $resource, $routeParams) {
 	'use strict';
 	$scope.attachedTypename = $routeParams.attachedtypename;
 	$scope.attachedID = $routeParams.attachedid;
 	var DataResource = $scope.resource = $resource('/d/:attachedtypename/:attachedid',$routeParams, {});
 	$scope.attachedData = DataResource.get($routeParams,function() {
-		$scope.$dataReady();
+		//$scope.$dataReady();
 	});
 	
 	$scope.typename = $routeParams.typename;
@@ -87,16 +85,15 @@ function AttachedEntityListCtrl($scope, $route, $resource, $routeParams) {
 		}
 	});
 	$scope.datalist = DataResource.query(function() {
-		$scope.$dataReady();
+		//$scope.$dataReady();
 	});
 	$scope.$reload = function() {
 		$scope.datalist = DataResource.query(function() {
-			$scope.$dataReady();
+			//$scope.$dataReady();
 		});
 	};
-}
-
-function AttachedNewEntityCtrl($scope, $route, $resource, $routeParams, $location,$interpolate) {
+}]).controller('AttachedNewEntityCtrl', ['$scope', '$route','$resource','$routeParams', '$location','$interpolate',
+                                         function($scope, $route, $resource, $routeParams, $location,$interpolate) {
 	'use strict';
 	$scope.attachedTypename = $routeParams.attachedtypename;
 	$scope.attachedID = $routeParams.attachedid;	
@@ -122,15 +119,14 @@ function AttachedNewEntityCtrl($scope, $route, $resource, $routeParams, $locatio
 			$location.url($interpolate('/d/{{attachedtypename}}/{{attachedid}}/{{typename}}/')($routeParams));
 		});
 	};
-}
-
-function AttachedEntityCtrl($scope, $route, $resource, $routeParams, $location,$interpolate) {
+}]).controller('AttachedEntityCtrl', ['$scope', '$route','$resource','$routeParams', '$location','$interpolate',
+                                      function($scope, $route, $resource, $routeParams, $location,$interpolate) {
 	'use strict';
 	$scope.attachedTypename = $routeParams.attachedtypename;
 	$scope.attachedID = $routeParams.attachedid;
 	var DataResource = $scope.resource = $resource('/d/:attachedtypename/:attachedid',$routeParams, {});
 	$scope.attachedData = DataResource.get($routeParams,function() {
-		$scope.$dataReady();
+		//$scope.$dataReady();
 	});
 	
 	$scope.typename = $routeParams.typename;
@@ -141,7 +137,7 @@ function AttachedEntityCtrl($scope, $route, $resource, $routeParams, $location,$
 				}
 			});
 	$scope.data = DataResource.get($routeParams,function() {
-		$scope.$dataReady();
+		//$scope.$dataReady();
 	});
 	$scope.update = true;
 	$scope.$save = function() {
@@ -152,10 +148,8 @@ function AttachedEntityCtrl($scope, $route, $resource, $routeParams, $location,$
 	$scope.$back = function() {
 		$location.url($interpolate('/d/{{attachedtypename}}/{{attachedid}}/{{typename}}/')($routeParams));
 	};
-}
-
-
-function EntityListCtrl($scope, $route, $resource, $routeParams) {
+}]).controller('EntityListCtrl', ['$scope', '$route','$resource','$routeParams',
+                                  function($scope, $route, $resource, $routeParams) {
 	'use strict';
 	$scope.typename = $routeParams.typename;
 	var DataResource = $resource('/d/:typename/', $routeParams, {
@@ -166,16 +160,15 @@ function EntityListCtrl($scope, $route, $resource, $routeParams) {
 		}
 	});
 	$scope.datalist = DataResource.query(function() {
-		$scope.$dataReady();
+		//$scope.$dataReady();
 	});
 	$scope.$reload = function() {
 		$scope.datalist = DataResource.query(function() {
-			$scope.$dataReady();
+			//$scope.$dataReady();
 		});
 	};
-}
-
-function NewEntityCtrl($scope, $resource, $routeParams, $location, $interpolate) {
+}]).controller('NewEntityCtrl', ['$scope', '$route','$resource','$routeParams', '$location','$interpolate',
+                                 function($scope, $route, $resource, $routeParams,$location, $interpolate) {
 	'use strict';
 	$scope.typename = $routeParams.typename;
 
@@ -194,9 +187,8 @@ function NewEntityCtrl($scope, $resource, $routeParams, $location, $interpolate)
 	$scope.$back = function() {
 		$location.url($interpolate('/d/{{typename}}/')($routeParams));
 	};
-}
-
-function EntityCtrl($scope, $resource, $routeParams, $location, $interpolate) {
+}]).controller('EntityCtrl', ['$scope', '$resource', '$routeParams', '$location', '$interpolate',
+                              function($scope, $resource, $routeParams, $location, $interpolate) {
 	'use strict';
 	$scope.typename = $routeParams.typename;
 	var DataResource = $scope.resource = $resource('/d/:typename/:id',
@@ -206,7 +198,7 @@ function EntityCtrl($scope, $resource, $routeParams, $location, $interpolate) {
 				}
 			});
 	$scope.data = DataResource.get($routeParams,function() {
-		$scope.$dataReady();
+		//$scope.$dataReady();
 	});
 	$scope.update = true;
 	$scope.$save = function() {
@@ -217,9 +209,8 @@ function EntityCtrl($scope, $resource, $routeParams, $location, $interpolate) {
 	$scope.$back = function() {
 		$location.url($interpolate('/d/{{typename}}/')($routeParams));
 	};
-}
-
-function TypeListCtrl($scope, $route, $resource, $routeParams) {
+}]).controller('TypeListCtrl', ['$scope', '$route','$resource','$routeParams',
+                                function($scope, $route, $resource, $routeParams) {
 	'use strict';
 	$scope.typename = "Type";
 	var DataResource = $resource('/d/Type/', $routeParams, {
@@ -230,12 +221,10 @@ function TypeListCtrl($scope, $route, $resource, $routeParams) {
 		}
 	});
 	$scope.datalist = DataResource.query(function() {
-		$scope.$dataReady();
+		//$scope.$dataReady();
 	});
-}
-
-function NewTypeCtrl($scope, $resource, $routeParams, $http, $location,
-		$interpolate, $templateCache) {
+}]).controller('NewTypeCtrl', ['$scope', '$route','$resource','$routeParams', '$location','$interpolate','$templateCache',
+                               function($scope, $route, $resource, $routeParams, $location,$interpolate,$templateCache) {
 	'use strict';
 	$scope.typename = "Type";
 	var DataResource = $resource('/d/Type/', $routeParams);
@@ -251,10 +240,8 @@ function NewTypeCtrl($scope, $resource, $routeParams, $http, $location,
 	$scope.$back = function() {
 		$location.url($interpolate('d/Type/')($routeParams));
 	};
-}
-
-function TypeCtrl($scope, $resource, $routeParams, $http, $location,
-		$interpolate, $templateCache) {
+}]).controller('TypeCtrl', ['$scope', '$resource','$routeParams','$http', '$location','$interpolate','$templateCache',
+                            function($scope, $resource, $routeParams, $http, $location,	$interpolate, $templateCache) {
 	'use strict';
 	$scope.typename = "Type";
 	$scope.resourcename = $interpolate('/d/Type/{{id}}')($routeParams);
@@ -265,7 +252,7 @@ function TypeCtrl($scope, $resource, $routeParams, $http, $location,
 				}
 			});
 	$scope.data = DataResource.get($routeParams,function() {
-		$scope.$dataReady();
+		//$scope.$dataReady();
 	});
 	$scope.update = true;
 	$scope.$save = function() {
@@ -278,9 +265,7 @@ function TypeCtrl($scope, $resource, $routeParams, $http, $location,
 	$scope.$back = function() {
 		$location.url($interpolate('d/Type/')($routeParams));
 	};
-}
-
-function AttributeEditCtrl($scope, $resource) {
+}]).controller('AttributeEditCtrl', ['$scope','$resource',function($scope, $resource) {
 	'use strict';
 	$scope.$parent.$loadChild = function(name) {
 		var AttributeDataResource = $scope.resource = $resource('/d/Attribute/'
@@ -291,7 +276,7 @@ function AttributeEditCtrl($scope, $resource) {
 		});
 		$scope.entityData = {};
 		$scope.entityData = AttributeDataResource.get({},function() {
-			$scope.$dataReady();
+			//$scope.$dataReady();
 		});
 		$scope.update = true;
 		$scope.$save = function() {
@@ -317,18 +302,8 @@ function AttributeEditCtrl($scope, $resource) {
 		};
 	};
 	$scope.$parent.$newChild();
-}
-
-function extractParams(url, params) {
-	'use strict';
-	var newurl = url;
-	angular.forEach(params || {}, function(value, key) {
-		newurl = newurl.replace(":" + key, value);
-	});
-	return newurl;
-}
-function AngularJSCtrl($scope, $route, $location, $http, $routeParams,
-		$templateCache) {
+}]).controller('AngularJSCtrl',  ['$scope', '$route','$location', '$http','$routeParams','$templateCache',
+                                  function($scope, $route, $location, $http, $routeParams,$templateCache) {
 	'use strict';
 	$scope.resourcename = extractParams(
 			"/theme/:theme/:skin/:typename-:cat.html", $routeParams);
@@ -348,10 +323,8 @@ function AngularJSCtrl($scope, $route, $location, $http, $routeParams,
 					$templateCache.removeAll();
 				});
 	};
-}
-
-function FreeMarkerCtrl($scope, $route, $location, $http, $routeParams,
-		$templateCache) {
+}]).controller('FreeMarkerCtrl', ['$scope', '$route','$location', '$http','$routeParams','$templateCache',
+                                  function($scope, $route, $location, $http, $routeParams,$templateCache) {
 	'use strict';
 	$scope.resourcename = extractParams("/template/:typename-:cat.html.ftl",
 			$routeParams);
@@ -371,35 +344,7 @@ function FreeMarkerCtrl($scope, $route, $location, $http, $routeParams,
 					$templateCache.removeAll();
 				});
 	};
-}
-
-Date.prototype.format = function(format) {
-	'use strict';
-	var o = {
-		"M+" : this.getMonth() + 1, // month
-		"d+" : this.getDate(), // day
-		"h+" : this.getHours(), // hour
-		"m+" : this.getMinutes(), // minute
-		"s+" : this.getSeconds(), // second
-		"q+" : Math.floor((this.getMonth() + 3) / 3), // quarter
-		"S" : this.getMilliseconds()
-	// millisecond
-	};
-
-	if (/(y+)/.test(format)) {
-		format = format.replace(RegExp.$1, (this.getFullYear() + "")
-				.substr(4 - RegExp.$1.length));
-	}
-	for ( var k in o) {
-		if (new RegExp("(" + k + ")").test(format)) {
-			format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k]
-					: ("00" + o[k]).substr(("" + o[k]).length));
-		}
-	}
-	return format;
-}
-
-function ContactRecordsCtrl($scope, $resource) {
+}]).controller('ContactRecordsCtrl', ['$scope', '$resource',function($scope, $resource) {
 	'use strict';
 	$scope.data = {};
 
@@ -511,6 +456,40 @@ function ContactRecordsCtrl($scope, $resource) {
 			record.$remove();
 		});
 	}
-}
+}]);
 
+Date.prototype.format = function(format) {
+	'use strict';
+	var o = {
+		"M+" : this.getMonth() + 1, // month
+		"d+" : this.getDate(), // day
+		"h+" : this.getHours(), // hour
+		"m+" : this.getMinutes(), // minute
+		"s+" : this.getSeconds(), // second
+		"q+" : Math.floor((this.getMonth() + 3) / 3), // quarter
+		"S" : this.getMilliseconds()
+	// millisecond
+	};
+
+	if (/(y+)/.test(format)) {
+		format = format.replace(RegExp.$1, (this.getFullYear() + "")
+				.substr(4 - RegExp.$1.length));
+	}
+	for ( var k in o) {
+		if (new RegExp("(" + k + ")").test(format)) {
+			format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k]
+					: ("00" + o[k]).substr(("" + o[k]).length));
+		}
+	}
+	return format;
+}
 // PhoneDetailCtrl.$inject = ['$scope', '$routeParams', 'Phone'];
+function extractParams(url, params) {
+		'use strict';
+		var newurl = url;
+		angular.forEach(params || {}, function(value, key) {
+			newurl = newurl.replace(":" + key, value);
+		});
+		return newurl;
+}
+	

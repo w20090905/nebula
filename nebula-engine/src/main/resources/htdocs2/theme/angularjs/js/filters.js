@@ -2,7 +2,7 @@
 
 /* Filters */
 
-angular.module('nebulaFilters', []).filter('checkmark', function() {
+angular.module('nebula.filters', []).filter('checkmark', function() {
   return function(input) {
     return input ? '\u2713' : '\u2718';
   };

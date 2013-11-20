@@ -34,18 +34,31 @@
     $script([
 		'/lib/jquery/jquery-1.7.2.min.js',
 		'/lib/angular/angular.js',
+    ], function() {
+        $script([
+	    '/lib/angular/angular-route.js',
 		'/lib/angular/angular-resource.js',
 		"/lib/angular/angular-cookies.js",
+		"/lib/angular/angular-animate.js",		
 		'/lib/angular-plugins/angular.tree.js',
 		'/theme/angularjs/clean/js/appAdmin.js',
 		'/theme/angularjs/clean/js/services.js',
 		'/theme/angularjs/clean/js/controllers.js',
 		'/theme/angularjs/clean/js/filters.js',
-		'/theme/angularjs/clean/js/directives.js'
+		'/theme/angularjs/clean/js/directives.js',
+	   	'/js/jquery.ui.custom.js',
+	    '/js/bootstrap.min.js',
+	   	'/js/bootstrap-colorpicker.js',
+	   	'/js/bootstrap-datepicker.js',
+	   	'/js/jquery.uniform.js',
+	   	'/js/select2.min.js',
+	   	'/theme/angularjs/clean/js/unicorn.form_common.js',
+	   	'/theme/angularjs/clean/js/unicorn.js'
     ], function() {
 	      // when all is done, execute bootstrap angular application
 	      angular.bootstrap(document, ['nebula']);
-	      
+        });
+	      /*
 	      $script([
 	               '/js/jquery.ui.custom.js',
 		    	  '/js/bootstrap.min.js',
@@ -55,7 +68,7 @@
 		    	  '/js/select2.min.js',
 		    	  '/theme/angularjs/clean/js/unicorn.form_common.js',
 		    	  '/theme/angularjs/clean/js/unicorn.js'
-		   	], 'plugins');
+		   	] 'plugins');*/
     });
   </script>
 <link rel="stylesheet" href="/css/jquery-ui.css" />
@@ -130,7 +143,8 @@
 			style="background-image: url('/img/red-green.png'); background-repeat: no-repeat;"
 		></a>
 	</div>
-	<div id="content" x-nb-view>
+	<div id="content" >
+	<div x-ng-view>
 		<article class="module width_full">
 			<header>
 				<h1 class="tabs_involved" ng-cloak>Welcome</h1>
@@ -155,6 +169,7 @@
 				</div>
 			</div>
 		</article>
+		</div>
 	</div>
 </body>
 </html>
