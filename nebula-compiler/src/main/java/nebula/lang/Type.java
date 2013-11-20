@@ -12,6 +12,8 @@ public interface Type extends Timable {
 	public static final String CTOR = "<ctor>";
 	public static final String ForeignKey = "ForeignKey";
 	public static final String GROUP_BY = "GroupBy";
+	public static final String FormatType = "FormatType";
+	
 
 	public static final String LEGACY = "Legacy";
 	public static final String ONLOAD = "<onLoad>";

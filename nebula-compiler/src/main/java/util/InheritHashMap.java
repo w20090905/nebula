@@ -2,15 +2,18 @@ package util;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class InheritHashMap extends HashMap<String, Object> {
-	private static final long serialVersionUID = 2504234689413219141L;
+import com.google.common.collect.ForwardingMap;
+
+public class InheritHashMap extends ForwardingMap<String, Object> {
 	private InheritHashMap defaults = null;
 
 	public InheritHashMap() {
 		super();
+		_delegate = new HashMap<String, Object>();
 	}
 
 	public InheritHashMap(InheritHashMap defaults) {
@@ -79,6 +82,12 @@ public class InheritHashMap extends HashMap<String, Object> {
 	@Override
 	public Set<java.util.Map.Entry<String, Object>> entrySet() {
 		return super.entrySet();
+	}
+
+	Map<String, Object> _delegate;
+	@Override
+	public Map<String, Object> delegate() {
+		return _delegate;
 	}
 
 }

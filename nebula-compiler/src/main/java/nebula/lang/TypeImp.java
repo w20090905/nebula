@@ -230,4 +230,9 @@ public class TypeImp implements Type {
 		return subTypes;
 	}
 
+	@Override
+	public int hashCode() {
+		return this.name.hashCode();
+	}
+
 }

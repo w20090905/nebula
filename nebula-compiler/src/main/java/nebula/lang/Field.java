@@ -3,6 +3,9 @@ package nebula.lang;
 import util.InheritHashMap;
 
 public class Field {
+	public static final String SingleLine = "SingleLine";
+	public static final String Heading = "Heading";	
+	
 	final String name;
 	Aliases nameAlias;
 	int modifiers = 0;

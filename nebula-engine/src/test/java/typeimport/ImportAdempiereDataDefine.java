@@ -129,16 +129,18 @@ public class ImportAdempiereDataDefine extends DefaultImporter {
 		// get root element
 		Element rootElement = document.getDocumentElement();
 
-		// String rootType = "AdClient";
-		String rootType = "COrder";
+//		 String rootType = "AdClient";
+//		String rootType = "COrder";
+		String rootType = "AdField";
 
 		this.readByReations(rootElement, rootType);
 		this.analyze(this.types);
 		this.outputByRelations(rootFolder, this.typeMapByName.get(rootType));
 
-		// parser.readAll(outputFolder, rootElement);
-		// parser.analyze(parser.types);
-		// parser.outputAll(outputFolder);
+//		 this.readAll(rootElement);
+//		 this.analyze(this.types);
+//		 this.outputAll(rootFolder);
+		 
 		this.printInfo();
 	}
 }
