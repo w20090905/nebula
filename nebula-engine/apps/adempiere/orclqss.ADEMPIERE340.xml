@@ -670,7 +670,7 @@
          <column autoUpdated="false" digits="0" id="35" name="AD_PROCESS_ID" nullable="true" remarks="Process or Report" size="10" type="NUMBER">
             <parent column="AD_PROCESS_ID" foreignKey="ADPROCESS_ADCOLUMN" implied="false" onDeleteCascade="false" table="AD_PROCESS"/>
          </column>
-         <column autoUpdated="false" defaultValue="'N'&#10;                             " digits="0" id="36" name="ISSYNCDATABASE" nullable="true" remarks="Change database table definition when changing dictionary definition" size="1" type="CHAR"/>
+         <column autoUpdated="false" defaultValue="'N'" digits="0" id="36" name="ISSYNCDATABASE" nullable="true" remarks="Change database table definition when changing dictionary definition" size="1" type="CHAR"/>
          <column autoUpdated="false" defaultValue="'N' " digits="0" id="37" name="ISALWAYSUPDATEABLE" nullable="false" remarks="The column is always updateable, even if the record is not active or processed" size="1" type="CHAR"/>
          <column autoUpdated="false" digits="0" id="38" name="COLUMNSQL" nullable="true" remarks="Virtual Column (r/o)" size="4000" type="NVARCHAR2"/>
          <column autoUpdated="false" digits="0" id="39" name="MANDATORYLOGIC" nullable="true" remarks="Mandatory Logic" size="4000" type="NVARCHAR2"/>
@@ -994,7 +994,7 @@
          <column autoUpdated="false" digits="0" id="8" name="NAME" nullable="false" remarks="Alphanumeric identifier of the entity" size="120" type="NVARCHAR2"/>
          <column autoUpdated="false" digits="0" id="9" name="DESCRIPTION" nullable="true" remarks="Optional short description of the record" size="510" type="NVARCHAR2"/>
          <column autoUpdated="false" digits="0" id="10" name="HELP" nullable="true" remarks="Comment or Hint" size="4000" type="NVARCHAR2"/>
-         <column autoUpdated="false" defaultValue="'Y'&#10;                             " digits="0" id="11" name="ISCENTRALLYMAINTAINED" nullable="false" remarks="Information maintained in System Element table" size="1" type="CHAR"/>
+         <column autoUpdated="false" defaultValue="'Y'" digits="0" id="11" name="ISCENTRALLYMAINTAINED" nullable="false" remarks="Information maintained in System Element table" size="1" type="CHAR"/>
          <column autoUpdated="false" digits="0" id="12" name="AD_TAB_ID" nullable="false" remarks="Tab within a Window" size="10" type="NUMBER">
             <parent column="AD_TAB_ID" foreignKey="AD_TAB_FIELD" implied="false" onDeleteCascade="false" table="AD_TAB"/>
          </column>
@@ -9425,7 +9425,7 @@
             <parent column="AD_LANGUAGE" foreignKey="AD_LANGUAGE_C_BUSPARTNER" implied="false" onDeleteCascade="false" table="AD_LANGUAGE"/>
          </column>
          <column autoUpdated="false" digits="0" id="24" name="TAXID" nullable="true" remarks="Tax Identification" size="20" type="VARCHAR2"/>
-         <column autoUpdated="false" defaultValue="'N'&#10;                              " digits="0" id="25" name="ISTAXEXEMPT" nullable="true" remarks="Business partner is exempt from tax" size="1" type="CHAR"/>
+         <column autoUpdated="false" defaultValue="'N' " digits="0" id="25" name="ISTAXEXEMPT" nullable="true" remarks="Business partner is exempt from tax" size="1" type="CHAR"/>
          <column autoUpdated="false" digits="0" id="26" name="C_INVOICESCHEDULE_ID" nullable="true" remarks="Schedule for generating Invoices" size="10" type="NUMBER">
             <parent column="C_INVOICESCHEDULE_ID" foreignKey="CINVOICESCHEDULE_CBPARTNER" implied="false" onDeleteCascade="false" table="C_INVOICESCHEDULE"/>
          </column>
@@ -9453,7 +9453,7 @@
          <column autoUpdated="false" digits="0" id="42" name="C_DUNNING_ID" nullable="true" remarks="Dunning Rules for overdue invoices" size="10" type="NUMBER">
             <parent column="C_DUNNING_ID" foreignKey="CDUNNING_CBPARTNER" implied="false" onDeleteCascade="false" table="C_DUNNING"/>
          </column>
-         <column autoUpdated="false" defaultValue="'Y'&#10;                              " digits="0" id="43" name="ISDISCOUNTPRINTED" nullable="true" remarks="Print Discount on Invoice and Order" size="1" type="CHAR"/>
+         <column autoUpdated="false" defaultValue="'Y' " digits="0" id="43" name="ISDISCOUNTPRINTED" nullable="true" remarks="Print Discount on Invoice and Order" size="1" type="CHAR"/>
          <column autoUpdated="false" digits="0" id="44" name="SO_DESCRIPTION" nullable="true" remarks="Description to be used on orders" size="510" type="NVARCHAR2"/>
          <column autoUpdated="false" digits="0" id="45" name="POREFERENCE" nullable="true" remarks="Transaction Reference Number (Sales Order, Purchase Order) of your Business Partner" size="40" type="NVARCHAR2"/>
          <column autoUpdated="false" digits="0" id="46" name="PAYMENTRULEPO" nullable="true" remarks="Purchase payment option" size="1" type="CHAR"/>
@@ -10897,7 +10897,7 @@
          <column autoUpdated="false" digits="0" id="11" name="DOCBASETYPE" nullable="false" remarks="Logical type of document" size="3" type="CHAR"/>
          <column autoUpdated="false" defaultValue="'Y' " digits="0" id="12" name="ISSOTRX" nullable="false" remarks="This is a Sales Transaction" size="1" type="CHAR"/>
          <column autoUpdated="false" digits="0" id="13" name="DOCSUBTYPESO" nullable="true" remarks="Sales Order Sub Type" size="2" type="CHAR"/>
-         <column autoUpdated="false" defaultValue="'N'&#10;                              " digits="0" id="14" name="HASPROFORMA" nullable="true" remarks="Indicates if Pro Forma Invoices can be generated from this document" size="1" type="CHAR"/>
+         <column autoUpdated="false" defaultValue="'N' " digits="0" id="14" name="HASPROFORMA" nullable="true" remarks="Indicates if Pro Forma Invoices can be generated from this document" size="1" type="CHAR"/>
          <column autoUpdated="false" digits="0" id="15" name="C_DOCTYPEPROFORMA_ID" nullable="true" remarks="Document type used for pro forma invoices generated from this sales document" size="10" type="NUMBER">
             <parent column="C_DOCTYPE_ID" foreignKey="CDOCTYPE_PROFORMA" implied="false" onDeleteCascade="false" table="C_DOCTYPE"/>
          </column>
@@ -15302,7 +15302,7 @@
          <column autoUpdated="false" digits="0" id="10" name="SERVICELEVELPROVIDED" nullable="false" remarks="Quantity of service or product provided" size="22" type="NUMBER"/>
          <column autoUpdated="false" digits="0" id="11" name="SERVICELEVELINVOICED" nullable="false" remarks="Quantity of product or service invoiced" size="22" type="NUMBER"/>
          <column autoUpdated="false" digits="0" id="12" name="PROCESSING" nullable="true" remarks="Process Now" size="1" type="CHAR"/>
-         <column autoUpdated="false" defaultValue="'N'&#10;                                    " digits="0" id="13" name="PROCESSED" nullable="true" remarks="The document has been processed" size="1" type="CHAR"/>
+         <column autoUpdated="false" defaultValue="'N'       " digits="0" id="13" name="PROCESSED" nullable="true" remarks="The document has been processed" size="1" type="CHAR"/>
          <column autoUpdated="false" digits="0" id="14" name="C_REVENUERECOGNITION_PLAN_ID" nullable="false" remarks="Plan for recognizing or recording revenue" size="10" type="NUMBER">
             <parent column="C_REVENUERECOGNITION_PLAN_ID" foreignKey="CREVRECPLAN_CSERVICELEVEL" implied="false" onDeleteCascade="false" table="C_REVENUERECOGNITION_PLAN"/>
          </column>
@@ -15326,7 +15326,7 @@
          <column autoUpdated="false" digits="0" id="9" name="DESCRIPTION" nullable="true" remarks="Optional short description of the record" size="510" type="NVARCHAR2"/>
          <column autoUpdated="false" digits="0" id="10" name="SERVICELEVELPROVIDED" nullable="false" remarks="Quantity of service or product provided" size="22" type="NUMBER"/>
          <column autoUpdated="false" digits="0" id="11" name="SERVICEDATE" nullable="false" remarks="Date service was provided" size="7" type="DATE"/>
-         <column autoUpdated="false" defaultValue="'N'&#10;                             " digits="0" id="12" name="PROCESSED" nullable="true" remarks="The document has been processed" size="1" type="CHAR"/>
+         <column autoUpdated="false" defaultValue="'N'" digits="0" id="12" name="PROCESSED" nullable="true" remarks="The document has been processed" size="1" type="CHAR"/>
          <primaryKey column="C_SERVICELEVELLINE_ID" sequenceNumberInPK="1"/>
          <index name="C_SERVICELEVELLINE_KEY" unique="true">
             <column ascending="true" name="C_SERVICELEVELLINE_ID"/>
@@ -20694,7 +20694,7 @@
          <column autoUpdated="false" digits="0" id="35" name="S_RESOURCE_ID" nullable="true" remarks="Resource" size="10" type="NUMBER">
             <parent column="S_RESOURCE_ID" foreignKey="SRESOURCE_MPRODUCT" implied="false" onDeleteCascade="false" table="S_RESOURCE"/>
          </column>
-         <column autoUpdated="false" defaultValue="'N'&#10;                               " digits="0" id="36" name="DISCONTINUED" nullable="true" remarks="This product is no longer available" size="1" type="CHAR"/>
+         <column autoUpdated="false" defaultValue="'N'  " digits="0" id="36" name="DISCONTINUED" nullable="true" remarks="This product is no longer available" size="1" type="CHAR"/>
          <column autoUpdated="false" digits="0" id="37" name="DISCONTINUEDBY" nullable="true" remarks="Discontinued By" size="7" type="DATE"/>
          <column autoUpdated="false" digits="0" id="38" name="PROCESSING" nullable="true" remarks="Process Now" size="1" type="CHAR"/>
          <column autoUpdated="false" digits="0" id="39" name="S_EXPENSETYPE_ID" nullable="true" remarks="Expense report type" size="10" type="NUMBER">
@@ -21201,7 +21201,7 @@
          <column autoUpdated="false" digits="0" id="17" name="VENDORPRODUCTNO" nullable="false" remarks="Product Key of the Business Partner" size="60" type="NVARCHAR2"/>
          <column autoUpdated="false" digits="0" id="18" name="UPC" nullable="true" remarks="Bar Code (Universal Product Code or its superset European Article Number)" size="40" type="NVARCHAR2"/>
          <column autoUpdated="false" digits="0" id="19" name="VENDORCATEGORY" nullable="true" remarks="Product Category of the Business Partner" size="60" type="NVARCHAR2"/>
-         <column autoUpdated="false" defaultValue="'N'&#10;                             " digits="0" id="20" name="DISCONTINUED" nullable="true" remarks="This product is no longer available" size="1" type="CHAR"/>
+         <column autoUpdated="false" defaultValue="'N'" digits="0" id="20" name="DISCONTINUED" nullable="true" remarks="This product is no longer available" size="1" type="CHAR"/>
          <column autoUpdated="false" digits="0" id="21" name="DISCONTINUEDBY" nullable="true" remarks="Discontinued By" size="7" type="DATE"/>
          <column autoUpdated="false" defaultValue="0" digits="0" id="22" name="ORDER_MIN" nullable="true" remarks="Minimum order quantity in UOM" size="22" type="NUMBER"/>
          <column autoUpdated="false" defaultValue="0" digits="0" id="23" name="ORDER_PACK" nullable="true" remarks="Package order size in UOM (e.g. order set of 5 units)" size="22" type="NUMBER"/>
