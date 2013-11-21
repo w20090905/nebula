@@ -13,7 +13,6 @@ import nebula.data.impl.EditableEntity;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
-import org.joda.time.format.DateTimeFormat;
 
 import util.InheritHashMap;
 
@@ -333,23 +332,23 @@ public class NebulaParser_BasicTest extends TestCase {
 	}
 
 	public void testConstExpr() {
-		assertEquals(1234L, parseCst("1234").eval());
-		assertEquals(new BigDecimal("1.1"), parseCst("1.1").eval());
-		assertEquals("1.1", parseCst("\"1.1\"").eval());
+		assertEquals(String.valueOf(1234L), parseCst("1234").toString());
+		assertEquals(String.valueOf(new BigDecimal("1.1")), parseCst("1.1").toString());
+		assertEquals(String.valueOf("1.1"), parseCst("\"1.1\"").toString());
 
-		assertEquals("QWEQWEQWEWQE", parseCst("\"QWEQWEQWEWQE\"").eval());
-		assertEquals("QWEQWEQWEWQE", parseCst("\'QWEQWEQWEWQE\'").eval());
+		assertEquals(String.valueOf("QWEQWEQWEWQE"), parseCst("\"QWEQWEQWEWQE\"").toString());
+		assertEquals(String.valueOf("QWEQWEQWEWQE"), parseCst("\'QWEQWEQWEWQE\'").toString());
 
-		assertEquals("", parseCst("``````").eval());
-		assertEquals("1234567890", parseCst("```1234567890```").eval());
-		assertEquals("12345\n67890", parseCst("```12345\n67890```").eval());
-		assertEquals("12345\n67890", parseCst("```\n12345\n67890```").eval());
-		assertEquals("12345\n67890", parseCst("```\r\n12345\n67890```").eval());
+		assertEquals(String.valueOf(""), parseCst("``````").toString());
+		assertEquals(String.valueOf("1234567890"), parseCst("```1234567890```").toString());
+		assertEquals(String.valueOf("12345\n67890"), parseCst("```12345\n67890```").toString());
+		assertEquals(String.valueOf("12345\n67890"), parseCst("```\n12345\n67890```").toString());
+		assertEquals(String.valueOf("12345\n67890"), parseCst("```\r\n12345\n67890```").toString());
 
-		assertEquals(DateTimeFormat.forPattern("HH:mm:ss").parseDateTime("12:23:00"), parseCst("12:23:00").eval());
-		assertEquals(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS").parseDateTime("2006-11-23 12:23:00.234"), parseCst("2006-11-23 12:23:00.234").eval());
-		assertEquals(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss").parseDateTime("2006-11-23 12:23:00"), parseCst("2006-11-23 12:23:00").eval());
-		assertEquals(DateTimeFormat.forPattern("yyyy-MM-dd").parseDateTime("2006-11-23"), parseCst("2006-11-23").eval());
+		assertEquals("12:23:00", parseCst("12:23:00").toString());
+		assertEquals("2006-11-23 12:23:00.234", parseCst("2006-11-23 12:23:00.234").toString());
+		assertEquals("2006-11-23 12:23:00", parseCst("2006-11-23 12:23:00").toString());
+		assertEquals("2006-11-23", parseCst("2006-11-23").toString());
 	}
 
 	public void testNestTypeAliasDefinition() {

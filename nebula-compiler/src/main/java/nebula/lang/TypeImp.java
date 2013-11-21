@@ -35,6 +35,7 @@ public class TypeImp implements Type {
 	long lastModified;
 
 	final List<Type> subTypes;
+	
 	final List<Field> references;
 	final List<Type> attachedBy;
 	Field keyField;

@@ -9,15 +9,15 @@ import java.util.TreeSet;
 import com.google.common.collect.ForwardingMap;
 
 public class InheritHashMap extends ForwardingMap<String, Object> {
-	private InheritHashMap defaults = null;
+	private InheritHashMap defaults;
 
 	public InheritHashMap() {
-		super();
-		_delegate = new HashMap<String, Object>();
+		this(null);
 	}
 
 	public InheritHashMap(InheritHashMap defaults) {
 		super();
+		_delegate = new HashMap<String, Object>();
 		this.defaults = defaults;
 	}
 
@@ -84,7 +84,8 @@ public class InheritHashMap extends ForwardingMap<String, Object> {
 		return super.entrySet();
 	}
 
-	Map<String, Object> _delegate;
+	final Map<String, Object> _delegate;
+
 	@Override
 	public Map<String, Object> delegate() {
 		return _delegate;

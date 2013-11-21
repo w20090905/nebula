@@ -25,13 +25,14 @@ public class NebulaParser_Expr_EntityTest extends TestCase {
 	@SuppressWarnings("unchecked")
 	private <T> T compute(Expr<T> expr, Entity entity) {
 		EntityExpressionComplier complier = EntityExpressionComplier.DEFAULT;
-		return (T) complier.compile(new CompilerContext() {
+		expr.scan(new CompilerContext() {
 
 			@Override
 			public Type resolveType(String name) {
 				return compiler.findType(name);
 			}
-		}, type, "test", expr).eval(context, null, entity);
+		});
+		return (T) complier.compile( type, "test", expr).eval(context, null, entity);
 	}
 
 	private void eqValue(Object result, String exprText) {

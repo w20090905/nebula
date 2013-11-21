@@ -1,11 +1,8 @@
 package nebula.lang;
 
-import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
-import nebula.data.DataRepos;
 import nebula.data.Entity;
 
 import org.apache.commons.logging.Log;
@@ -13,13 +10,9 @@ import org.apache.commons.logging.LogFactory;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.Label;
-import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
 
 public class Compiler {
 	Log log = LogFactory.getLog(getClass());
@@ -31,21 +24,9 @@ public class Compiler {
 
 	CompilerContext context;
 
-	static Map<String, OperatorExpr> opTypes = Maps.newHashMap();
-
-	static OperatorExpr resolveOperator(Type type) {
-		OperatorExpr op = opTypes.get(type.getName());
-		if (op == null && type.getSuperType() != null) op = resolveOperator(type.getSuperType());
-		Preconditions.checkNotNull(op);
-		return op;
-	}
-
 	Compiler(CompilerContext context) {
 		this.context = context;
-		opTypes.put(RawTypes.Long.name(), new LongOperator());
-		if (log.isDebugEnabled()) {
-			if (!new File("tmp").exists()) new File("tmp/").mkdir();
-		}
+
 	}
 
 	EntityExpressionComplier exprCompiler = EntityExpressionComplier.DEFAULT;
@@ -68,15 +49,17 @@ public class Compiler {
 	// }
 	//
 	// EntityExpression compile() {
-	// return exprCompiler.compile(expr, type);
+	// return exprreturn compiler.compile(expr, type);
 	// }
 	// }
 
-	public <T> EntityExpression compile(Type type, String name,Expr<T> expr) {
-		return exprCompiler.compile(context, type, name, expr);
+	public <T> EntityExpression compile(Type type, String name, Expr<T> expr) {
+		expr.scan(context);
+		return exprCompiler.compile(type, name, expr);
 	}
 
-	public EntityAction compile( Type type, String name,Statement statement) {
+	public EntityAction compile(Type type, String name, Statement statement) {
+		statement.scan(context);
 		return stCompiler.compile(context, type, name, statement);
 	}
 
@@ -103,7 +86,7 @@ public class Compiler {
 	}
 
 	public Expr<Object> index(Expr<Object> from) {
-		return new Index(from);
+		return new RangeSingle(from);
 	}
 
 	public Expr<Object> entities(Expr<Object> repos, String string) {
@@ -111,15 +94,15 @@ public class Compiler {
 	}
 
 	public Expr<Object> list(Expr<Object> list, List<Expr<Object>> ranges) {
-		if (ranges.size() == 1 && ranges.get(0) instanceof Index) {
-			return new ListGet(list, (Index) ranges.get(0));
+		if (ranges.size() == 1 && ranges.get(0) instanceof RangeSingle) {
+			return new ListGetItemByIndexExpr(list, (RangeSingle) ranges.get(0));
 		} else {
-			return new ListRanges(list, ranges);
+			return new ListFilterByRanger(list, ranges);
 		}
 	}
 
 	public Expr<Object> list(Expr<Object> list, Expr<Object> clause, List<Expr<Object>> params) {
-		return new ListClause(list, clause, params);
+		return new ListFilterByClause(list, clause, params);
 	}
 
 	public Expr<Object> opUnit(Expr<Object> v, String string) {
@@ -128,7 +111,7 @@ public class Compiler {
 	}
 
 	public Expr<Object> opFieldInList(Expr<Object> list, String name) {
-		return new FieldOf(new ListThisRefer(list, THIS), name);
+		return new FieldOf(new ListGetItemByIndex(list, THIS), name);
 	}
 
 	public Expr<Object> opArithmetic(Operator op, Expr<Object> e1, Expr<Object> e2) {
@@ -225,42 +208,12 @@ public class Compiler {
 			throw new UnsupportedOperationException();
 		}
 
-		protected void toObject(final MethodVisitor mv, Expr<Object> expr, CompilerContext context) {
-			switch (expr.getExprType(context).getRawType()) {
-			case Boolean:
-				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");
-				break;
-			case Long:
-				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Long", "valueOf", "(J)Ljava/lang/Long;");
-				break;
-			default:
-				break;
-			}
-		}
-
-		protected void fromObject(final MethodVisitor mv, Expr<Object> expr, CompilerContext context) {
-			switch (expr.getExprType(context).getRawType()) {
-			case Boolean:
-				mv.visitTypeInsn(CHECKCAST, "java/lang/Boolean");
-				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Boolean", "booleanValue", "()Z");
-				break;
-			case Long:
-				mv.visitTypeInsn(CHECKCAST, "java/lang/Long");
-				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Long", "longValue", "()J");
-				break;
-			case String:
-				mv.visitTypeInsn(CHECKCAST, "java/lang/String");
-				break;
-			default:
-				break;
-			}
-		}
 	}
 
 	abstract static class LogicExpr extends Expression<Boolean> {
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return context.resolveType(RawTypes.Boolean.name());
+		public Type getType() {
+			return BootstrapTypeLoader.BOOLEAN;
 		}
 	}
 
@@ -278,35 +231,19 @@ public class Compiler {
 			this.e2 = e2;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			// compiles e1
-			e1.compile(cw, mv, context);
-			// tests if e1 is false
-			mv.visitInsn(DUP);
-			Label end = new Label();
-			if (op == Operator.AND) {
-				mv.visitJumpInsn(IFEQ, end);
-			} else if (op == Operator.OR) {
-				mv.visitJumpInsn(IFNE, end);
-			} else {
-				throw new UnsupportedOperationException();
-			}
-			// case where e1 is true : e1 && e2 is equal to e2
-			mv.visitInsn(POP);
-			e2.compile(cw, mv, context);
-			// if e1 is false, e1 && e2 is equal to e1:
-			// we jump directly to this label, without evaluating e2
-			mv.visitLabel(end);
-		}
-
-		@Override
-		public Boolean eval() {
-			return e1.eval() && e2.eval();
+		public void compile(AsmCompiler compiler) {
+			compiler.conditional(op, e1, e2);
 		}
 
 		@Override
 		public String toString() {
 			return "(" + e1.toString() + " " + op.getSign() + " " + e2.toString() + ")";
+		}
+
+		@Override
+		public void scan(CompilerContext context) {
+			e1.scan(context);
+			e2.scan(context);
 		}
 	}
 
@@ -320,21 +257,18 @@ public class Compiler {
 			this.e1 = e1;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			// computes !e1 by evaluating 1 - e1
-			mv.visitLdcInsn(new Integer(1));
-			e1.compile(cw, mv, context);
-			mv.visitInsn(ISUB);
-		}
-
-		@Override
-		public Boolean eval() {
-			return !e1.eval();
+		public void compile(AsmCompiler compiler) {
+			compiler.not(e1);
 		}
 
 		@Override
 		public String toString() {
 			return "(!" + e1.toString() + ")";
+		}
+
+		@Override
+		public void scan(CompilerContext context) {
+			Preconditions.checkArgument(e1.getType() == BootstrapTypeLoader.BOOLEAN);
 		}
 	}
 
@@ -353,13 +287,8 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			resolveOperator(e1.getExprType(context)).relational(cw, mv, context, op, e1, e2);
-		}
-
-		@Override
-		public Boolean eval() {
-			return e1.eval().compareTo(e2.eval()) >= 0;
+		public void compile(AsmCompiler compiler) {
+			compiler.relational(op, e1, e2);
 		}
 
 		@Override
@@ -368,8 +297,16 @@ public class Compiler {
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return context.resolveType(RawTypes.Boolean.name());
+		public void scan(CompilerContext context) {
+			e1.scan(context);
+			e2.scan(context);
+//			Preconditions.checkArgument(e1.getType() == BootstrapTypeLoader.BOOLEAN);
+//			Preconditions.checkArgument(e2.getType() == BootstrapTypeLoader.BOOLEAN);
+		}
+
+		@Override
+		public Type getType() {
+			return BootstrapTypeLoader.BOOLEAN;
 		}
 	}
 
@@ -384,8 +321,8 @@ public class Compiler {
 			this.op = op;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			resolveOperator(e1.getExprType(context)).arithmetic(cw, mv, context, op, e1, e2);
+		public void compile(AsmCompiler compiler) {
+			compiler.arithmetic(op, e1, e2);
 		}
 
 		@Override
@@ -394,13 +331,22 @@ public class Compiler {
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return e1.getExprType(context);
+		public void scan(CompilerContext context) {
+			e1.scan(context);
+			e2.scan(context);
+			Type type1 = e1.getType();
+			Type type2 = e2.getType();
+			Preconditions.checkArgument(type1.getRawType() == type2.getRawType());
 		}
 
 		@Override
 		public String toString() {
 			return "(" + e1.toString() + " " + op.getSign() + " " + e2.toString() + ")";
+		}
+
+		@Override
+		public Type getType() {
+			return e1.getType();
 		}
 	}
 
@@ -412,8 +358,8 @@ public class Compiler {
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return e1.getExprType(context);
+		public Type getType() {
+			return e1.getType();
 		}
 	}
 
@@ -422,13 +368,18 @@ public class Compiler {
 			super(e1);
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			resolveOperator(e1.getExprType(context)).increment(cw, mv, context, e1);
+		public void compile(AsmCompiler compiler) {
+			compiler.increment(e1);
 		}
 
 		@Override
 		public String toString() {
 			return "(++" + e1.toString() + ")";
+		}
+
+		@Override
+		public void scan(CompilerContext context) {
+
 		}
 	}
 
@@ -437,13 +388,17 @@ public class Compiler {
 			super(e1);
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			resolveOperator(e1.getExprType(context)).decrement(cw, mv, context, e1);
+		public void compile(AsmCompiler compiler) {
+			compiler.decrement(e1);
 		}
 
 		@Override
 		public String toString() {
 			return "(--" + e1.toString() + ")";
+		}
+
+		@Override
+		public void scan(CompilerContext context) {
 		}
 	}
 
@@ -452,13 +407,18 @@ public class Compiler {
 			super(e1);
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			resolveOperator(e1.getExprType(context)).positive(cw, mv, context, e1);
+		public void compile(AsmCompiler compiler) {
+			compiler.positive(e1);
 		}
 
 		@Override
 		public String toString() {
 			return "(+" + e1.toString() + ")";
+		}
+
+		@Override
+		public void scan(CompilerContext context) {
+
 		}
 	}
 
@@ -467,13 +427,17 @@ public class Compiler {
 			super(e1);
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			resolveOperator(e1.getExprType(context)).negates(cw, mv, context, e1);
+		public void compile(AsmCompiler compiler) {
+			compiler.negates(e1);
 		}
 
 		@Override
 		public String toString() {
 			return "(-" + e1.toString() + ")";
+		}
+
+		@Override
+		public void scan(CompilerContext context) {
 		}
 	}
 
@@ -484,13 +448,8 @@ public class Compiler {
 			this.value = value;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			mv.visitLdcInsn(value);
-		}
-
-		@Override
-		public String eval() {
-			return this.value;
+		public void compile(AsmCompiler compiler) {
+			compiler.constString(value);
 		}
 
 		@Override
@@ -499,8 +458,12 @@ public class Compiler {
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return context.resolveType(RawTypes.String.name());
+		public void scan(CompilerContext context) {
+		}
+
+		@Override
+		public Type getType() {
+			return BootstrapTypeLoader.STRING;
 		}
 	}
 
@@ -511,16 +474,8 @@ public class Compiler {
 			this.text = text;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			mv.visitTypeInsn(NEW, "java/math/BigDecimal");
-			mv.visitInsn(DUP);
-			mv.visitLdcInsn(text);
-			mv.visitMethodInsn(INVOKESPECIAL, "java/math/BigDecimal", "<init>", "(Ljava/lang/String;)V");
-		}
-
-		@Override
-		public BigDecimal eval() {
-			return new BigDecimal(this.text);
+		public void compile(AsmCompiler compiler) {
+			compiler.constDecimal(text);
 		}
 
 		@Override
@@ -529,8 +484,12 @@ public class Compiler {
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return context.resolveType(RawTypes.Decimal.name());
+		public void scan(CompilerContext context) {
+		}
+
+		@Override
+		public Type getType() {
+			return BootstrapTypeLoader.DECIMAL;
 		}
 	}
 
@@ -542,13 +501,8 @@ public class Compiler {
 			else this.value = 0;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			mv.visitLdcInsn(value);
-		}
-
-		@Override
-		public Integer eval() {
-			return this.value;
+		public void compile(AsmCompiler compiler) {
+			compiler.constYesno(value);
 		}
 
 		@Override
@@ -557,8 +511,13 @@ public class Compiler {
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return context.resolveType(RawTypes.Boolean.name());
+		public void scan(CompilerContext context) {
+		}
+
+		@Override
+		public Type getType() {
+			// TODO Auto-generated method stub
+			return BootstrapTypeLoader.BOOLEAN;
 		}
 	}
 
@@ -569,13 +528,8 @@ public class Compiler {
 			this.value = Long.parseLong(text);
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			mv.visitLdcInsn(value);
-		}
-
-		@Override
-		public Long eval() {
-			return this.value;
+		public void compile(AsmCompiler compiler) {
+			compiler.constLong(value);
 		}
 
 		@Override
@@ -584,8 +538,12 @@ public class Compiler {
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return context.resolveType(RawTypes.Long.name());
+		public void scan(CompilerContext context) {
+		}
+
+		@Override
+		public Type getType() {
+			return BootstrapTypeLoader.LONG;
 		}
 	}
 
@@ -602,13 +560,6 @@ public class Compiler {
 			this.value = formater.parseDateTime(text).getMillis();
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			mv.visitTypeInsn(NEW, "org/joda/time/DateTime");
-			mv.visitInsn(DUP);
-			mv.visitLdcInsn(this.value);
-			mv.visitMethodInsn(INVOKESPECIAL, "org/joda/time/DateTime", "<init>", "(J)V");
-		}
-
 		@Override
 		public String toString() {
 			return formater.print(value);
@@ -622,13 +573,17 @@ public class Compiler {
 		}
 
 		@Override
-		public DateTime eval() {
-			return new DateTime(this.value);
+		public void scan(CompilerContext context) {
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return context.resolveType(RawTypes.Timestamp.name());
+		public void compile(AsmCompiler compiler) {
+			compiler.constTimestamp(super.value);
+		}
+
+		@Override
+		public Type getType() {
+			return BootstrapTypeLoader.TIMESTAMP;
 		}
 	}
 
@@ -638,13 +593,17 @@ public class Compiler {
 		}
 
 		@Override
-		public DateTime eval() {
-			return new DateTime(this.value);
+		public void scan(CompilerContext context) {
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return context.resolveType(RawTypes.Datetime.name());
+		public void compile(AsmCompiler compiler) {
+			compiler.constDatetime(super.value);
+		}
+
+		@Override
+		public Type getType() {
+			return BootstrapTypeLoader.DATETIME;
 		}
 	}
 
@@ -654,13 +613,17 @@ public class Compiler {
 		}
 
 		@Override
-		public DateTime eval() {
-			return new DateTime(this.value);
+		public void compile(AsmCompiler compiler) {
+			compiler.constDate(super.value);
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return context.resolveType(RawTypes.Date.name());
+		public void scan(CompilerContext context) {
+		}
+
+		@Override
+		public Type getType() {
+			return BootstrapTypeLoader.DATE;
 		}
 	}
 
@@ -670,13 +633,17 @@ public class Compiler {
 		}
 
 		@Override
-		public DateTime eval() {
-			return new DateTime(this.value);
+		public void compile(AsmCompiler compiler) {
+			compiler.constTime(super.value);
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return context.resolveType(RawTypes.Time.name());
+		public void scan(CompilerContext context) {
+		}
+
+		@Override
+		public Type getType() {
+			return BootstrapTypeLoader.TIME;
 		}
 	}
 
@@ -699,18 +666,8 @@ public class Compiler {
 			this.name = name;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			mv.visitVarInsn(ALOAD, Compiler.REPOS); // DataRepos
-			// NebulaNative.execMethod(null, null, null, null, name) (null,
-			// e1.getExprType(context), name, null);
-			// compiles e1, e2, and adds an instruction to multiply the two
-			// values
-			// mv.visitLdcInsn(value);
-		}
-
-		@Override
-		public Long eval() {
-			return null;
+		public void compile(AsmCompiler compiler) {
+			compiler.callMethod(e1, name);
 		}
 
 		@Override
@@ -719,88 +676,79 @@ public class Compiler {
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			Type type = e1.getExprType(context);
-			for (Field f : type.getFields()) {
-				if (f.name.equals(name)) {
-					return f.getType();
-				}
-			}
-			throw new RuntimeException("Cannot find field");
+		public void scan(CompilerContext context) {
+			// Type type = e1.scan(context);
+			// for (Field f : type.getFields()) {
+			// if (f.name.equals(name)) {
+			// return f.getType();
+			// }
+			// }
+			// throw new RuntimeException("Cannot find field");
+		}
+
+		@Override
+		public Type getType() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 	}
 
 	static class TypeRefer extends Expression<Object> {
 		final String name;
+		Type type;
 
 		TypeRefer(final String name) {
 			this.name = name;
 		}
 
 		@Override
-		public void compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
-			mv.visitVarInsn(ALOAD, Compiler.REPOS);
-			mv.visitLdcInsn(org.objectweb.asm.Type.getType("Ljava/lang/String;"));
-			mv.visitLdcInsn(org.objectweb.asm.Type.getType("Lnebula/data/Entity;"));
-			mv.visitLdcInsn(name);
-			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/DataRepos", "define", "(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)Lnebula/data/Broker;");
-			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Broker", "get", "()Ljava/lang/Object;");
-			mv.visitTypeInsn(CHECKCAST, "nebula/data/DataStore");
-
-			//
-			//
-			// mv.visitVarInsn(ALOAD, 3);
-			// mv.visitLdcInsn("wangshilian");
-			// mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/DataStore",
-			// "get", "(Ljava/lang/Object;)Lnebula/data/Timable;");
-			// mv.visitTypeInsn(CHECKCAST, "nebula/data/Entity");
-			// mv.visitVarInsn(ASTORE, 4);
-			//
-			//
-			// mv.visitVarInsn(ALOAD, 1);
-			// mv.visitLdcInsn("Age");
-			// mv.visitVarInsn(ALOAD, 4);
-			// mv.visitLdcInsn("Age");
-			// mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "get",
-			// "(Ljava/lang/String;)Ljava/lang/Object;");
-			// mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "put",
-			// "(Ljava/lang/String;Ljava/lang/Object;)V");
-
+		public void compile(AsmCompiler compiler) {
+			compiler.typeRefer(name);
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return context.resolveType("Type");
+		public void scan(CompilerContext context) {
+			type = context.resolveType("Type");
 		}
 
 		@Override
 		public String toString() {
 			return "$" + name;
 		}
-	}
-
-	static class Index extends Expression<Object> {
-		final Expr<Object> index;
-
-		Index(final Expr<Object> index) {
-			this.index = index;
-		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return this.index.getExprType(context);
-		}
-
-		@Override
-		public void compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
-			index.compile(cw, mv, context);
-			mv.visitInsn(L2I);
-			mv.visitInsn(DUP);
-			mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/Range", "closed", "(II)Lnebula/lang/Range;");
+		public Type getType() {
+			return this.type;
 		}
 	}
 
-	static class Range_0_To extends Expression<Object> {
+	static abstract class AbstractRange extends Expression<Object> {
+		@Override
+		public Type getType() {
+			throw new UnsupportedOperationException("Index");
+		}
+	}
+
+	static class RangeSingle extends AbstractRange {
+		final Expr<Object> value;
+
+		RangeSingle(final Expr<Object> index) {
+			this.value = index;
+		}
+
+		@Override
+		public void scan(CompilerContext context) {
+			this.value.scan(context);
+		}
+
+		@Override
+		public void compile(AsmCompiler compiler) {
+			compiler.makeRangeIndex(value);
+		}
+
+	}
+
+	static class Range_0_To extends AbstractRange {
 		final Expr<Object> to;
 
 		Range_0_To(final Expr<Object> index) {
@@ -808,19 +756,17 @@ public class Compiler {
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return this.to.getExprType(context);
+		public void scan(CompilerContext context) {
+			to.scan(context);
 		}
 
 		@Override
-		public void compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
-			to.compile(cw, mv, context);
-			mv.visitInsn(L2I);
-			mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/Range", "atMost", "(I)Lnebula/lang/Range;");
+		public void compile(AsmCompiler compiler) {
+			compiler.makeRange_0_To(to);
 		}
 	}
 
-	static class Range_From_ extends Expression<Object> {
+	static class Range_From_ extends AbstractRange {
 		final Expr<Object> from;
 
 		Range_From_(final Expr<Object> index) {
@@ -828,19 +774,18 @@ public class Compiler {
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return this.from.getExprType(context);
+		public void scan(CompilerContext context) {
+			from.scan(context);
+			Preconditions.checkArgument(from.getType().getRawType() == RawTypes.Long);
 		}
 
 		@Override
-		public void compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
-			from.compile(cw, mv, context);
-			mv.visitInsn(L2I);
-			mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/Range", "atLeast", "(I)Lnebula/lang/Range;");
+		public void compile(AsmCompiler compiler) {
+			compiler.makeRange_From(from);
 		}
 	}
 
-	static class Range extends Expression<Object> {
+	static class Range extends AbstractRange {
 		final Expr<Object> from;
 		final Expr<Object> to;
 
@@ -850,93 +795,89 @@ public class Compiler {
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			if (from != null) return this.from.getExprType(context);
-			else return this.to.getExprType(context);
+		public void scan(CompilerContext context) {
+			from.scan(context);
+			Preconditions.checkArgument(from.getType().getRawType() == RawTypes.Long);
+
+			to.scan(context);
+			Preconditions.checkArgument(to.getType().getRawType() == RawTypes.Long);
 		}
 
 		@Override
-		public void compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
-			from.compile(cw, mv, context);
-			mv.visitInsn(L2I);
-			to.compile(cw, mv, context);
-			mv.visitInsn(L2I);
-
-			mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/Range", "closed", "(II)Lnebula/lang/Range;");
+		public void compile(AsmCompiler compiler) {
+			compiler.makeRange_From_To(from, to);
 		}
 	}
 
-	static class ListClause extends Expression<Object> {
+	static class ListFilterByClause extends Expression<Object> {
 		final Expr<Object> list;
 		final Expr<Object> clause;
 		final List<Expr<Object>> params;
 
-		ListClause(final Expr<Object> list, final Expr<Object> clause, final List<Expr<Object>> params) {
+		Type type;
+
+		ListFilterByClause(final Expr<Object> list, final Expr<Object> clause, final List<Expr<Object>> params) {
 			this.list = list;
 			this.clause = clause;
 			this.params = params;
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return list.getExprType(context);
+		public void scan(CompilerContext context) {
+			list.scan(context);
+			clause.scan(context);
+			for (Expr<Object> param : params) {
+				param.scan(context);
+			}
 		}
 
 		@Override
-		public void compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
-			list.compile(cw, mv, context);
-			String clauseName = EntityClauseComplier.DEFAULT.compile(context, this.list.getExprType(context), clause); //(clause, context);
-			mv.visitTypeInsn(NEW, clauseName);
-			mv.visitInsn(DUP);
-			mv.visitMethodInsn(INVOKESPECIAL, clauseName, "<init>", "()V");
-
-			mv.visitIntInsn(BIPUSH, params.size());
-			mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
-
-			for (int i = 0; i < params.size(); i++) {
-				mv.visitInsn(DUP);
-				mv.visitIntInsn(BIPUSH, i);
-
-				params.get(i).compile(cw, mv, context);
-				toObject(mv, params.get(i), context);
-
-				mv.visitInsn(AASTORE);
-			}
-
-			mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/NebulaNative", "filter", "(Ljava/util/List;Lnebula/lang/Clause;[Ljava/lang/Object;)Ljava/util/List;");
+		public void compile(AsmCompiler compiler) {
+			compiler.listFilterByClause(list, clause, params);
 		}
 
+		@Override
+		public Type getType() {
+			return list.getType();
+		}
 	}
 
-	static class ListGet extends Expression<Object> {
+	static class ListGetItemByIndexExpr extends Expression<Object> {
 		final Expr<Object> list;
-		final Index index;
+		final RangeSingle index;
+		Type type;
 
-		ListGet(final Expr<Object> list, final Index index) {
+		ListGetItemByIndexExpr(final Expr<Object> list, final RangeSingle index) {
 			this.list = list;
 			this.index = index;
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return ((ListType) list.getExprType(context)).getUnderlyType();
+		public void scan(CompilerContext context) {
+			list.scan(context);
+			Type listType = list.getType();
+			Preconditions.checkArgument(listType instanceof ListType);
+			type = ((ListType) list.getType()).getUnderlyType();
+
+			Type indexType = index.value.getType();
+			Preconditions.checkArgument(indexType.getRawType() == RawTypes.Long);
 		}
 
 		@Override
-		public void compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
-			list.compile(cw, mv, context);
-			mv.visitTypeInsn(CHECKCAST, "java/util/List");
-			index.index.compile(cw, mv, context);
-			mv.visitInsn(L2I);
-			mv.visitMethodInsn(INVOKEINTERFACE, "java/util/List", "get", "(I)Ljava/lang/Object;");
-			mv.visitTypeInsn(CHECKCAST, "nebula/data/Entity");
-			// mv.visitInsn(POP);
+		public void compile(AsmCompiler compiler) {
+			compiler.get(list, index.value);
+		}
+
+		@Override
+		public Type getType() {
+			return this.type;
 		}
 	}
 
 	static class DatastoreGet extends Expression<Object> {
 		final Expr<Object> repos;
 		final String name;
+		Type type;
 
 		DatastoreGet(final Expr<Object> repos, final String name) {
 			this.repos = repos;
@@ -944,51 +885,47 @@ public class Compiler {
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return new ListType(context.resolveType(name));
+		public void scan(CompilerContext context) {
+			type = new ListType(context.resolveType(name));
 		}
 
 		@Override
-		public void compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
-			repos.compile(cw, mv, context);
-			mv.visitLdcInsn(org.objectweb.asm.Type.getType("Ljava/lang/String;"));
-			mv.visitLdcInsn(org.objectweb.asm.Type.getType("Lnebula/data/Entity;"));
-			mv.visitLdcInsn(name);
-			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/DataRepos", "define", "(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)Lnebula/data/DataStore;");
-			mv.visitTypeInsn(CHECKCAST, "nebula/data/DataStore");
-			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/DataStore", "listAll", "()Ljava/util/List;");
+		public void compile(AsmCompiler compiler) {
+			compiler.datastoreGet(repos, name);
+		}
+
+		@Override
+		public Type getType() {
+			return this.type;
 		}
 	}
 
-	static class ListRanges extends Expression<Object> {
+	static class ListFilterByRanger extends Expression<Object> {
 		final Expr<Object> list;
 		final List<Expr<Object>> ranges;
 
-		ListRanges(final Expr<Object> list, final List<Expr<Object>> ranges) {
+		ListFilterByRanger(final Expr<Object> list, final List<Expr<Object>> ranges) {
 			this.list = list;
 			this.ranges = ranges;
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return list.getExprType(context);
+		public void scan(CompilerContext context) {
+			list.scan(context);
+			for (Expr<Object> expr : ranges) {
+				expr.scan(context);
+			}
+			Preconditions.checkArgument(list.getType() instanceof ListType);
 		}
 
 		@Override
-		public void compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
-			list.compile(cw, mv, context);
+		public void compile(AsmCompiler compiler) {
+			compiler.listFilter(list, ranges);
+		}
 
-			mv.visitIntInsn(BIPUSH, ranges.size());
-			mv.visitTypeInsn(ANEWARRAY, "nebula/lang/Range");
-
-			for (int i = 0; i < ranges.size(); i++) {
-				mv.visitInsn(DUP);
-				mv.visitIntInsn(BIPUSH, i);
-				ranges.get(i).compile(cw, mv, context);
-				mv.visitInsn(AASTORE);
-			}
-
-			mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/NebulaNative", "filter", "(Ljava/util/List;[Lnebula/lang/Range;)Ljava/util/List;");
+		@Override
+		public Type getType() {
+			return list.getType();
 		}
 	}
 
@@ -1000,18 +937,22 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
-			mv.visitVarInsn(ALOAD, var.index);
+		public void compile(AsmCompiler compiler) {
+			compiler.varRefer(var.index);
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return var.type;
+		public void scan(CompilerContext context) {
 		}
 
 		@Override
 		public String toString() {
 			return var.name;
+		}
+
+		@Override
+		public Type getType() {
+			return var.type;
 		}
 	}
 
@@ -1027,46 +968,56 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
-			mv.visitVarInsn(ALOAD, params);
-			mv.visitIntInsn(SIPUSH, index);
-			mv.visitInsn(AALOAD);
-			fromObject(mv, in, context);
+		public void compile(AsmCompiler compiler) {
+			compiler.paramsRefer(in, params, index);
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return in.getExprType(context);
+		public void scan(CompilerContext context) {
+			in.scan(context);
 		}
 
 		@Override
 		public String toString() {
 			return "params[" + String.valueOf(index) + "]";
 		}
+
+		@Override
+		public Type getType() {
+			return in.getType();
+		}
 	}
 
-	static class ListThisRefer extends Expression<Object> {
+	static class ListGetItemByIndex extends Expression<Object> {
 		final Expr<Object> list;
 		final int index;
+		Type type;
 
-		ListThisRefer(final Expr<Object> list, int index) {
+		ListGetItemByIndex(final Expr<Object> list, int index) {
 			this.list = list;
 			this.index = index;
 		}
 
 		@Override
-		public void compile(ClassWriter cw, MethodVisitor mv, CompilerContext context) {
-			mv.visitVarInsn(ALOAD, index);
+		public void compile(AsmCompiler compiler) {
+			compiler.listGetItem(list, index);
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			return ((ListType) list.getExprType(context)).getUnderlyType();
+		public void scan(CompilerContext context) {
+			Type listType = list.getType();
+			Preconditions.checkArgument(listType instanceof ListType);
+			type = ((ListType) list.getType()).getUnderlyType();
 		}
 
 		@Override
 		public String toString() {
-			return "this";// TODO
+			return "this[" + index + "]";
+		}
+
+		@Override
+		public Type getType() {
+			return this.type;
 		}
 	}
 
@@ -1077,17 +1028,8 @@ public class Compiler {
 			this.statements = statements;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			for (Statement st : statements) {
-				st.compile(cw, mv, context);
-			}
-		}
-
-		@Override
-		public void exec(Entity entity, DataRepos repos) {
-			for (Statement st : statements) {
-				st.exec(entity, repos);
-			}
+		public void compile(AsmCompiler compiler) {
+			compiler.block(statements);
 		}
 
 		@Override
@@ -1099,6 +1041,13 @@ public class Compiler {
 			}
 			sb.append("}");
 			return sb.toString();
+		}
+
+		@Override
+		public void scan(CompilerContext context) {
+			for (Statement st : statements) {
+				st.scan(context);
+			}			
 		}
 	}
 
@@ -1112,95 +1061,93 @@ public class Compiler {
 			this.initExpr = initExpr;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			// compiles e1, e2, and adds an instruction to multiply the two
-			// values
-			// mv.visitLdcInsn(value);
-
-		}
-
-		@Override
-		public void exec(Entity entity, DataRepos repos) {
-			// return (Long) e1.exec().get(name);
+		public void compile(AsmCompiler compiler) {
+			compiler.putVar(var, initExpr);
 		}
 
 		@Override
 		public String toString() {
 			return var.name + " = " + initExpr.toString() + ";";
 		}
+
+		@Override
+		public void scan(CompilerContext context) {
+			initExpr.scan(context);			
+		}
 	}
 
 	static class FieldOf extends Expression<Object> {
-		final Expr<Object> e1;
+		final Expr<Object> entity;
 		final String name;
+		Type fieldType;
 
-		FieldOf(Expr<Object> e1, String name) {
-			this.e1 = e1;
+		FieldOf(Expr<Object> entity, String name) {
+			this.entity = entity;
 			this.name = name;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			e1.compile(cw, mv, context);
-			mv.visitLdcInsn(this.name);
-			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "get", "(Ljava/lang/String;)Ljava/lang/Object;");
-			fromObject(mv, this, context);
-		}
-
-		@Override
-		public Object eval() {
-			return ((Entity) e1.eval()).get(name);
+		public void compile(AsmCompiler compiler) {
+			compiler.getField(entity, name, fieldType);
 		}
 
 		@Override
 		public String toString() {
-			return e1.toString() + "." + name.toString();
+			return entity.toString() + "." + name.toString();
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			Type type = e1.getExprType(context);
+		public void scan(CompilerContext context) {
+			entity.scan(context);
+			Type type = entity.getType();
 			for (Field f : type.getFields()) {
 				if (f.name.equals(name)) {
-					return f.getType();
+					this.fieldType = f.getType();
 				}
 			}
-			throw new RuntimeException("Cannot find field");
+		}
+
+		@Override
+		public Type getType() {
+			return fieldType;
 		}
 	}
 
 	static class PutField extends Expression<Object> implements Opcodes, Statement {
-		final Expr<Object> parent;
+		final Expr<Object> entity;
 		final Expr<Object> value;
 		final String name;
+		Type fieldType;
 
 		PutField(FieldOf field, Expr<Object> value) {
-			this.parent = field.e1;
+			this.entity = field.entity;
 			this.name = field.name;
 			this.value = value;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			parent.compile(cw, mv, context);
-			mv.visitLdcInsn(this.name);
-			value.compile(cw, mv, context);
-			toObject(mv, value, context);
-			mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "put", "(Ljava/lang/String;Ljava/lang/Object;)V");
+		public void compile(AsmCompiler compiler) {
+			compiler.setField(entity, name, fieldType, value);
 		}
 
 		@Override
-		public void exec(Entity entity, DataRepos repos) {
-			entity.put(name, value.eval());
+		public void scan(CompilerContext context) {
+			entity.scan(context);
+			Type type = entity.getType();
+			for (Field f : type.getFields()) {
+				if (f.name.equals(name)) {
+					this.fieldType = f.getType();
+				}
+			}
+			value.scan(context);
 		}
 
 		@Override
 		public String toString() {
-			return parent.toString() + "." + name.toString() + " = " + value.toString() + ";";
+			return entity.toString() + "." + name.toString() + " = " + value.toString() + ";";
 		}
 
 		@Override
-		public Type getExprType(CompilerContext context) {
-			// TODO Auto-generated method stub
-			return null;
+		public Type getType() {
+			return fieldType;
 		}
 	}
 
@@ -1212,20 +1159,18 @@ public class Compiler {
 			this.value = value;
 		}
 
-		public void compile(ClassWriter cw, final MethodVisitor mv, CompilerContext context) {
-			// compiles e1, e2, and adds an instruction to multiply the two
-			// values
-			// mv.visitLdcInsn(value);
-		}
-
-		@Override
-		public void exec(Entity entity, DataRepos repos) {
-			// return (Long) e1.exec().get(name);
+		public void compile(AsmCompiler compiler) {
+			compiler.call(value);
 		}
 
 		@Override
 		public String toString() {
 			return value.toString() + ";";
+		}
+
+		@Override
+		public void scan(CompilerContext context) {
+			value.scan(context);			
 		}
 	}
 

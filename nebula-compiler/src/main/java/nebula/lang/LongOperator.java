@@ -1,14 +1,22 @@
 package nebula.lang;
 
+import static nebula.lang.Operator.ADD;
+import static nebula.lang.Operator.DIV;
+import static nebula.lang.Operator.EQ;
+import static nebula.lang.Operator.GE;
+import static nebula.lang.Operator.GT;
+import static nebula.lang.Operator.LE;
+import static nebula.lang.Operator.LT;
+import static nebula.lang.Operator.MUL;
+import static nebula.lang.Operator.NE;
+import static nebula.lang.Operator.REM;
+import static nebula.lang.Operator.SUB;
+
 import java.util.EnumMap;
 
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.Label;
-import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import com.google.common.collect.Maps;
-import static nebula.lang.Operator.*;
 
 public class LongOperator implements OperatorExpr, Opcodes {
 	EnumMap<Operator, Integer> ops = Maps.newEnumMap(Operator.class);
@@ -28,55 +36,32 @@ public class LongOperator implements OperatorExpr, Opcodes {
 		ops.put(LT, IFGE);// '<';
 	}
 
-	public void arithmetic(ClassWriter cw, MethodVisitor mv, CompilerContext context, Operator op, Expr<Object> e1, Expr<Object> e2) {
-		e1.compile(cw, mv, context);
-		e2.compile(cw, mv, context);
-		mv.visitInsn(ops.get(op));
-	}
-
-
-	@Override
-	public void increment(ClassWriter cw, MethodVisitor mv, CompilerContext context, Expr<Object> e1) {
-		e1.compile(cw, mv, context);
-		mv.visitInsn(LCONST_1);
-		mv.visitInsn(LADD);
+	public void arithmetic(AsmCompiler compiler, Operator op, Expr<Object> e1, Expr<Object> e2) {
+		compiler.longArithmetic(e1, e2, ops.get(op));
 	}
 
 	@Override
-	public void decrement(ClassWriter cw, MethodVisitor mv, CompilerContext context, Expr<Object> e1) {
-		e1.compile(cw, mv, context);
-		mv.visitInsn(LCONST_1);
-		mv.visitInsn(LSUB);
+	public void increment(final AsmCompiler compiler, Expr<Object> e1) {
+		compiler.longIncrement(e1);
 	}
 
 	@Override
-	public void positive(ClassWriter cw, MethodVisitor mv, CompilerContext context, Expr<Object> e1) {
-		e1.compile(cw, mv, context);
+	public void decrement(final AsmCompiler compiler, Expr<Object> e1) {
+		compiler.longDecrement(e1);
 	}
 
 	@Override
-	public void negates(ClassWriter cw, MethodVisitor mv, CompilerContext context, Expr<Object> e1) {
-		e1.compile(cw, mv, context);
-		mv.visitInsn(LNEG);
+	public void positive(final AsmCompiler compiler, Expr<Object> e1) {
+		e1.compile(compiler);
 	}
 
-	public <V> void relational(ClassWriter cw, MethodVisitor mv, CompilerContext context, Operator op, Expr<V> e1, Expr<V> e2) {
-		cmp(cw, mv, context, e1, e2, ops.get(op));
+	@Override
+	public void negates(final AsmCompiler compiler, Expr<Object> e1) {
+		compiler.longNegates(e1);
 	}
 
-	public <V> void cmp(ClassWriter cw, MethodVisitor mv, CompilerContext context, Expr<V> e1, Expr<V> e2, int op) {
-		e1.compile(cw, mv, context);
-		e2.compile(cw, mv, context);
-
-		mv.visitInsn(LCMP);
-		Label ifFalse = new Label();
-		mv.visitJumpInsn(op, ifFalse);
-		mv.visitInsn(ICONST_1);
-		Label end = new Label();
-		mv.visitJumpInsn(GOTO, end);
-		mv.visitLabel(ifFalse);
-		mv.visitInsn(ICONST_0);
-		mv.visitLabel(end);
+	public <V> void relational(final AsmCompiler compiler, Operator op, Expr<V> e1, Expr<V> e2) {
+		compiler.longRelational(compiler, e1, e2, ops.get(op));
 	}
 
 }

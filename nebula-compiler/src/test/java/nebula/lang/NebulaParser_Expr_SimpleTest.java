@@ -41,7 +41,7 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 
 			// eval method
 			mv = cw.visitMethod(ACC_PUBLIC, "eval", "(JJ)J", null, null);
-			expr.compile(cw, mv, context);
+			expr.compile(new AsmCompiler(cw, mv));
 			mv.visitInsn(LRETURN);
 			// max stack and max locals automatically computed
 			mv.visitMaxs(0, 0);
@@ -69,7 +69,7 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 
 			// eval method
 			mv = cw.visitMethod(ACC_PUBLIC, "eval", "(JJ)I", null, null);
-			expr.compile(cw, mv, context);
+			expr.compile(new AsmCompiler(cw, mv));
 			mv.visitInsn(IRETURN);
 			// max stack and max locals automatically computed
 			mv.visitMaxs(0, 0);
@@ -103,6 +103,7 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 
 		protected Integer computeBoolean(Expr<?> exp, CompilerContext context) {
 			try {
+				exp.scan(context);
 				byte[] b = this.compileBoolean("Example", exp, context);
 				FileOutputStream fos = new FileOutputStream("tmp\\Example.class");
 				fos.write(b);

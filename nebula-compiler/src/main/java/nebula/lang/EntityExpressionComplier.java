@@ -27,7 +27,7 @@ public class EntityExpressionComplier implements Opcodes {
 	 * Returns the byte code of an Expression class corresponding to this
 	 * expression.
 	 */
-	<T> byte[] doCompile(final String name, final Expr<T> expr, CompilerContext context) {
+	<T> byte[] doCompile(final String name, final Expr<T> expr) {
 		String actualClass = null;
 
 		Class<?> cls = expr.getClass();
@@ -96,9 +96,9 @@ public class EntityExpressionComplier implements Opcodes {
 		{
 			mv = cw.visitMethod(ACC_PUBLIC, "eval", "(Lnebula/lang/RuntimeContext;Lnebula/data/DataRepos;Lnebula/data/Entity;)Ljava/lang/Object;", null, null);
 
-			expr.compile(cw, mv, context);
+			expr.compile(new AsmCompiler(cw, mv));
 
-			switch (expr.getExprType(context).getRawType()) {
+			switch (expr.getType().getRawType()) {
 			case Boolean:
 				mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");
 				break;
@@ -120,10 +120,10 @@ public class EntityExpressionComplier implements Opcodes {
 
 	static long count = 0;
 
-	public <T> EntityExpression compile(CompilerContext context, Type type, String actionName, Expr<T> exp) {
+	public <T> EntityExpression compile(Type type, String actionName, Expr<T> exp) {
 		String name = this.getClass().getSimpleName() + "_" + type.getName() + "_" + NamesEncoding.encode(actionName) + "_" + String.valueOf(count++);
 		try {
-			byte[] b = this.doCompile(name, exp, context);
+			byte[] b = this.doCompile(name, exp);
 			if (log.isDebugEnabled()) {
 				try {
 					FileOutputStream fos = new FileOutputStream("tmp/" + name + ".class");

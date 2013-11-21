@@ -62,7 +62,7 @@ public class EntityActionComplier implements Opcodes {
 		// method
 		{
 			mv = cw.visitMethod(ACC_PUBLIC, "exec", "(Lnebula/lang/RuntimeContext;Lnebula/data/DataRepos;Lnebula/data/Entity;)V", null, null);
-			code.compile(cw, mv, context);
+			code.compile(new AsmCompiler(cw, mv));
 			mv.visitInsn(RETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
@@ -79,7 +79,7 @@ public class EntityActionComplier implements Opcodes {
 			return this.noop;
 		}
 
-		String name = this.getClass().getSimpleName()+ "_" + type.getName() + "_" + NamesEncoding.encode(actionName) + "_" + String.valueOf(count++);
+		String name = this.getClass().getSimpleName() + "_" + type.getName() + "_" + NamesEncoding.encode(actionName) + "_" + String.valueOf(count++);
 		try {
 			byte[] b = this.doCompile(name, code, context);
 			if (log.isDebugEnabled()) {

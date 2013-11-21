@@ -23,7 +23,7 @@ public class EntityClauseComplier implements Opcodes {
 	 * Returns the byte code of an Expression class corresponding to this
 	 * expression.
 	 */
-	<T> byte[] doCompile(final String name, final Code code, CompilerContext context) {
+	<T> byte[] doCompile(final String name, final Code code) {
 
 		// class header
 		ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
@@ -48,7 +48,7 @@ public class EntityClauseComplier implements Opcodes {
 			mv = cw.visitMethod(ACC_PUBLIC + ACC_VARARGS, "apply",
 					"(Lnebula/lang/RuntimeContext;Lnebula/data/DataRepos;Lnebula/data/Entity;[Ljava/lang/Object;)Z", null, null);
 			mv.visitCode();
-			code.compile(cw, mv, context);
+			code.compile(new AsmCompiler(cw, mv));
 			mv.visitInsn(IRETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
@@ -77,10 +77,10 @@ public class EntityClauseComplier implements Opcodes {
 
 	static long count = 0;
 
-	public String compile(CompilerContext context, Type type, Code code) {
-		String name = this.getClass().getSimpleName()+ "_" + type.getName() + "_" + "_" + String.valueOf(count++);
+	public String compile(Type type, Code code) {
+		String name = this.getClass().getSimpleName() + "_" + type.getName() + "_" + "_" + String.valueOf(count++);
 		try {
-			byte[] b = this.doCompile(name, code, context);
+			byte[] b = this.doCompile(name, code);
 			if (log.isDebugEnabled()) {
 				try {
 					FileOutputStream fos = new FileOutputStream("tmp/" + name + ".class");
