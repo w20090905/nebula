@@ -938,7 +938,7 @@ public class Compiler {
 
 		@Override
 		public void compile(AsmCompiler compiler) {
-			compiler.varRefer(var.index);
+			compiler.varRefer(var);
 		}
 
 		@Override

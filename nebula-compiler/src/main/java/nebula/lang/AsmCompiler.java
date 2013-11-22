@@ -308,9 +308,8 @@ public class AsmCompiler implements Opcodes {
 		mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/NebulaNative", "filter", "(Ljava/util/List;[Lnebula/lang/Range;)Ljava/util/List;");
 	}
 
-	public void varRefer(int index) {
-		mv.visitVarInsn(ALOAD, index);
-
+	public void varRefer(Var var) {
+		mv.visitVarInsn(ALOAD, var.index);
 	}
 
 	public void paramsRefer(Expr<Object> in, int params, int index) {
