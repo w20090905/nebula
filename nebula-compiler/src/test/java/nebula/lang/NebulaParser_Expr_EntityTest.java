@@ -23,7 +23,7 @@ public class NebulaParser_Expr_EntityTest extends TestCase {
 	}
 
 	@SuppressWarnings("unchecked")
-	private <T> T compute(Expr<T> expr, Entity entity) {
+	private <T> T compute(Expr<?> expr, Entity entity) {
 		EntityExpressionComplier complier = EntityExpressionComplier.DEFAULT;
 		expr.scan(new CompilerContext() {
 
@@ -75,7 +75,7 @@ public class NebulaParser_Expr_EntityTest extends TestCase {
 
 		parser.currentType = type;
 
-		parser.enterMethod(type, "");
+		parser.enterMethod(type);
 		return parser.expression();
 	}
 

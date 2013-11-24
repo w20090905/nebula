@@ -34,7 +34,7 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 	private void eqValue(String fieldname, Object expectedResult, String exprText) {
 		Field fieldTest = parseField(exprText);
 
-		fieldTest.code.exec(context, repos, data);
+		fieldTest.actionAsm.exec(context, repos, data);
 		assertEquals(expectedResult, data.get(fieldname));
 	}
 
@@ -61,7 +61,7 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 
 			parser.currentType = type;
 
-			parser.enterMethod(type, text);
+			parser.enterMethod(type);
 			field = parser.fieldDefinition(type);
 			parser.exitMethod();
 			parser.exitTopType();

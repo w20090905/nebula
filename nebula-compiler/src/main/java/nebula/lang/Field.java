@@ -4,14 +4,16 @@ import util.InheritHashMap;
 
 public class Field {
 	public static final String SingleLine = "SingleLine";
-	public static final String Heading = "Heading";	
+	public static final String Heading = "Heading";
+	public static final String OnSave = "OnSave";
 	
 	final String name;
 	Aliases nameAlias;
 	int modifiers = 0;
 
-	EntityExpression expr;
-	EntityAction code;
+	Code code;
+	EntityExpression exprAsm;
+	EntityAction actionAsm;
 
 	final Type resideType;
 	boolean array = false;
@@ -117,10 +119,6 @@ public class Field {
 		return Modifier.isDefaultValue(modifiers);
 	}
 
-	public EntityExpression getDerivedExpr() {
-		return expr;
-	}
-
 	public boolean isPrimaryType() {
 		return this.type.getStandalone() == TypeStandalone.Basic;
 	}
@@ -145,15 +143,19 @@ public class Field {
 		this.nameAlias = nameAlias;
 	}
 
-	public EntityExpression getExpr() {
-		return expr;
+	public boolean isInternal() {
+		return internal;
 	}
 
-	public EntityAction getCode() {
+	public Code getCode() {
 		return code;
 	}
 
-	public boolean isInternal() {
-		return internal;
+	public EntityExpression getExprAsm() {
+		return exprAsm;
+	}
+
+	public EntityAction getActionAsm() {
+		return actionAsm;
 	}
 }

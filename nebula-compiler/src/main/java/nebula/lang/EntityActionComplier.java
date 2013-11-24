@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import nebula.lang.Compiler.Action;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.objectweb.asm.ClassWriter;
@@ -14,18 +16,20 @@ import org.objectweb.asm.Opcodes;
 import util.NamesEncoding;
 
 public class EntityActionComplier implements Opcodes {
-	Log log = LogFactory.getLog(getClass());
-	private EntityAction noop;
+	static Log log = LogFactory.getLog(EntityActionComplier.class);
+	static EntityAction DONOTHING;
 
 	static EntityActionComplier DEFAULT = new EntityActionComplier();
 
 	private EntityActionComplier() {
 		String name = this.getClass().getSimpleName() + "_nop_" + String.valueOf(count++);
 		try {
-			byte[] code = doCompile(name, new Compiler.Block(new ArrayList<Statement>()), null);
-			Class<?> expClass = NebulaClassLoader.defineClass(name, code);
-			// instantiates this compiled expression class...
-			this.noop = (EntityAction) expClass.newInstance();
+			if (DONOTHING == null) {
+				byte[] code = doCompile(name, new Compiler.Block(new ArrayList<Statement>()), null);
+				Class<?> expClass = NebulaClassLoader.defineClass(name, code);
+				// instantiates this compiled expression class...
+				EntityActionComplier.DONOTHING = (EntityAction) expClass.newInstance();
+			}
 		} catch (InstantiationException e) {
 			log.error(e);
 			throw new RuntimeException(e);
@@ -62,7 +66,7 @@ public class EntityActionComplier implements Opcodes {
 		// method
 		{
 			mv = cw.visitMethod(ACC_PUBLIC, "exec", "(Lnebula/lang/RuntimeContext;Lnebula/data/DataRepos;Lnebula/data/Entity;)V", null, null);
-			code.compile(new AsmCompiler(cw, mv));
+			code.compile(new MethodAsmCompiler(cw, mv));
 			mv.visitInsn(RETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();
@@ -74,14 +78,14 @@ public class EntityActionComplier implements Opcodes {
 
 	static long count = 0;
 
-	public EntityAction compile(CompilerContext context, Type type, String actionName, Code code) {
-		if (code instanceof Compiler.Block && ((Compiler.Block) code).statements.size() == 0) {
-			return this.noop;
+	public EntityAction compile(CompilerContext context, Type type, String actionName, Action action) {
+		if (action.st instanceof Compiler.Block && ((Compiler.Block) action.st).statements.size() == 0) {
+			return DONOTHING;
 		}
 
 		String name = this.getClass().getSimpleName() + "_" + type.getName() + "_" + NamesEncoding.encode(actionName) + "_" + String.valueOf(count++);
 		try {
-			byte[] b = this.doCompile(name, code, context);
+			byte[] b = this.doCompile(name, action, context);
 			if (log.isDebugEnabled()) {
 				try {
 					FileOutputStream fos = new FileOutputStream("tmp/" + name + ".class");

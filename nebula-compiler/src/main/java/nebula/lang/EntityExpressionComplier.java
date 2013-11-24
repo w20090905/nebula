@@ -96,7 +96,7 @@ public class EntityExpressionComplier implements Opcodes {
 		{
 			mv = cw.visitMethod(ACC_PUBLIC, "eval", "(Lnebula/lang/RuntimeContext;Lnebula/data/DataRepos;Lnebula/data/Entity;)Ljava/lang/Object;", null, null);
 
-			expr.compile(new AsmCompiler(cw, mv));
+			expr.compile(new MethodAsmCompiler(cw, mv));
 
 			switch (expr.getType().getRawType()) {
 			case Boolean:

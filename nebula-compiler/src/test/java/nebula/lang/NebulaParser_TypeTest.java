@@ -26,7 +26,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"define FullName extends Name { " +
 				"};";
 		//@formatter:on		
-		TypeImp type = (TypeImp)compiler.load(text);
+		TypeImp type = (TypeImp) compiler.load(text);
 
 		assertEquals("FullName", type.name);
 		assertEquals(TypeStandalone.Basic, type.standalone);
@@ -42,7 +42,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"};";
 		//@formatter:on
 
-		TypeImp type = (TypeImp)compiler.load(text);
+		TypeImp type = (TypeImp) compiler.load(text);
 
 		assertEquals("Name", type.name);
 		assertEquals("String", type.superType.getName());
@@ -59,7 +59,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"	!ID;" +
 				"};";
 		//@formatter:on		
-		TypeImp type = (TypeImp)compiler.load(text);
+		TypeImp type = (TypeImp) compiler.load(text);
 
 		assertEquals("Order", type.name);
 		assertEquals(TypeStandalone.Transaction, type.standalone);
@@ -75,7 +75,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"	Name;" +
 				"};";
 		//@formatter:on		
-		TypeImp type = (TypeImp)compiler.load(text);
+		TypeImp type = (TypeImp) compiler.load(text);
 
 		assertEquals("Person", type.name);
 		assertEquals(TypeStandalone.Master, type.standalone);
@@ -85,7 +85,7 @@ public class NebulaParser_TypeTest extends TestCase {
 	}
 
 	public void test_type_File_import() throws Exception {
-		TypeImp type = (TypeImp)compiler.findType("PersonTest");
+		TypeImp type = (TypeImp) compiler.findType("PersonTest");
 
 		assertEquals("PersonTest", type.name);
 
@@ -97,7 +97,7 @@ public class NebulaParser_TypeTest extends TestCase {
 		assertEquals("Welcome", type.fields.get(i).name);
 
 		assertEquals("#	this is a <h1> tag\n## this is a <h2> tag\n###### this is a <h6> tag\n",
-				((String) type.fields.get(i).expr.eval(context, null, null)).replaceAll("\r\n", "\n"));
+				((String) type.fields.get(i).getExprAsm().eval(context, null, null)).replaceAll("\r\n", "\n"));
 
 		i++;
 		assertEquals("Education", type.fields.get(i).name);
@@ -109,7 +109,7 @@ public class NebulaParser_TypeTest extends TestCase {
 	}
 
 	public void test_type_Person() throws Exception {
-		TypeImp type =  (TypeImp)compiler.findType("Person");
+		TypeImp type = (TypeImp) compiler.findType("Person");
 
 		assertEquals("Person", type.name);
 
@@ -132,7 +132,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"rt CompanyPersonMemeber extends Member<Company,Person> { " +
 				"};";
 		//@formatter:on	
-		TypeImp type = (TypeImp)compiler.load(text);
+		TypeImp type = (TypeImp) compiler.load(text);
 
 		assertEquals("CompanyPersonMemeber", type.name);
 		assertEquals(2, type.relations.size());// TODO add relation function
@@ -145,7 +145,7 @@ public class NebulaParser_TypeTest extends TestCase {
 		i = 0;
 		assertEquals(true, type.getDeclaredFields().get(i).isCore());
 		assertEquals("Attach", type.getDeclaredFields().get(i++).attrs.get("Attach"));
-		
+
 		assertEquals(true, type.getDeclaredFields().get(i).isCore());
 		assertEquals("Attach", type.getDeclaredFields().get(i++).attrs.get("Attach"));
 
@@ -159,7 +159,7 @@ public class NebulaParser_TypeTest extends TestCase {
 	}
 
 	public void test_type_PersonCircularDependency() throws Exception {
-		TypeImp type =  (TypeImp)compiler.findType("PersonCircularDependency");
+		TypeImp type = (TypeImp) compiler.findType("PersonCircularDependency");
 
 		assertEquals("PersonCircularDependency", type.name);
 
@@ -185,7 +185,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"	Age;\n" +
 				"};";
 		//@formatter:on		
-		TypeImp type = (TypeImp)compiler.load(text);
+		TypeImp type = (TypeImp) compiler.load(text);
 
 		assertEquals("Person", type.name);
 
@@ -224,7 +224,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"	Age;\n" +
 				"};";
 		//@formatter:on
-		TypeImp type = (TypeImp)compiler.load(text);
+		TypeImp type = (TypeImp) compiler.load(text);
 
 		assertEquals("Person", type.name);
 
@@ -270,7 +270,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"	Age;\n" +
 				"};";
 		//@formatter:on
-		TypeImp type = (TypeImp)compiler.load(text);
+		TypeImp type = (TypeImp) compiler.load(text);
 
 		assertEquals("Person", type.name);
 
@@ -311,7 +311,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"};";
 
 		//@formatter:on
-		TypeImp type = (TypeImp)compiler.load(text);
+		TypeImp type = (TypeImp) compiler.load(text);
 
 		assertEquals("Person", type.name);
 
@@ -362,7 +362,7 @@ public class NebulaParser_TypeTest extends TestCase {
 				"};";
 		//@formatter:on
 
-		TypeImp type = (TypeImp)compiler.load(text);
+		TypeImp type = (TypeImp) compiler.load(text);
 
 		assertEquals("Person", type.name);
 

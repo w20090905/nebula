@@ -37,7 +37,7 @@ public class FlowEngine {
 
 		Field action = step.getType().getActionByName(Step.Init);
 		Preconditions.checkNotNull(action);
-		action.getCode().exec(context, datarepos, currentStepEntity);
+		action.getActionAsm().exec(context, datarepos, currentStepEntity);
 
 		if ((Boolean) currentStepEntity.get(Step.DoItNow) != null && (Boolean) currentStepEntity.get(Step.DoItNow)) {
 			String next = (String) currentStepEntity.get(Step.NextStep);
@@ -64,7 +64,7 @@ public class FlowEngine {
 
 		Field action = currentStep.getType().getActionByName(actionName);
 		Preconditions.checkNotNull(action);
-		action.getCode().exec(context, datarepos, currentStepEntity);
+		action.getActionAsm().exec(context, datarepos, currentStepEntity);
 
 		if ((Boolean) currentStepEntity.get(Step.DoItNow) != null && (Boolean) currentStepEntity.get(Step.DoItNow)) {
 			String next = (String) currentStepEntity.get(Step.NextStep);

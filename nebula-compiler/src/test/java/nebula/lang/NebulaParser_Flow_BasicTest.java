@@ -107,7 +107,7 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 		int i = 0;
 		assertEquals("NextStep", type.getFields().get(i).name);
 		assertEquals("String", type.getFields().get(i).type.getName());
-		entity.put("NextStep", type.getFields().get(i).expr.eval(context, null, entity));
+		entity.put("NextStep", type.getFields().get(i).exprAsm.eval(context, null, entity));
 
 		assertEquals("Next", entity.get("NextStep"));
 		assertEquals(null, entity.get("DoItNow"));
@@ -115,7 +115,7 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 		i++;
 		assertEquals("DoItNow", type.getFields().get(i).name);
 		assertEquals("YesNo", type.getFields().get(i).type.getName());
-		entity.put("DoItNow", type.getFields().get(i).expr.eval(context, null,entity));
+		entity.put("DoItNow", type.getFields().get(i).exprAsm.eval(context, null,entity));
 
 		assertEquals("Next", entity.get("NextStep"));
 		assertEquals(false, entity.get("DoItNow"));
@@ -124,7 +124,7 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 
 		assertEquals("init", type.actions.get(i).name);
 
-		type.actions.get(i).code.exec(context, null,entity);
+		type.actions.get(i).actionAsm.exec(context, null,entity);
 		assertEquals("Next", entity.get("NextStep"));
 		assertEquals(false, entity.get("DoItNow"));
 
@@ -132,7 +132,7 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 
 		assertEquals("next", type.actions.get(i).name);
 
-		type.actions.get(i).code.exec(context, null,entity);
+		type.actions.get(i).actionAsm.exec(context, null,entity);
 
 		assertEquals("Next", entity.get("NextStep"));
 		assertEquals(true, entity.get("DoItNow"));
@@ -141,7 +141,7 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 
 		assertEquals("end", type.actions.get(i).name);
 
-		type.actions.get(i).code.exec(context, null,entity);
+		type.actions.get(i).actionAsm.exec(context, null,entity);
 		assertEquals("End", entity.get("NextStep"));
 		assertEquals(true, entity.get("DoItNow"));
 
@@ -149,7 +149,7 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 
 		assertEquals("skip", type.actions.get(i).name);
 
-		type.actions.get(i).code.exec(context, null,entity);
+		type.actions.get(i).actionAsm.exec(context, null,entity);
 		assertEquals("Next", entity.get("NextStep"));
 		assertEquals(true, entity.get("DoItNow"));
 	}

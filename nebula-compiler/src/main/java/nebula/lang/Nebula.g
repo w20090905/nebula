@@ -14,6 +14,7 @@ options {
     import java.util.Map;
     import util.InheritHashMap;
     
+    import java.util.LinkedHashMap;
   import static nebula.lang.Reference.*;  
   import static nebula.lang.Modifier.*;
   
@@ -24,170 +25,217 @@ options {
 }
 
 @members {
-//    Map<String,TypeImp> typesMap = new HashMap<String,TypeImp>();
-    List<TypeImp> types = new ArrayList<TypeImp>();
-    
-    Map<Field, Expr> derivedFields = new HashMap<Field, Expr>();
-    Map<Field, Statement> actionFields = new HashMap<Field, Statement>();
-  
-    Compiler op = new Compiler(new CompilerContext() {
-    
-      @Override
-      public Type resolveType(String name) {
-              return NebulaParser.this.resolveType(name);
-      }
-    });
 
-    InheritHashMap attrsBuffer = new InheritHashMap();
-    
-    TypeLoader loader;
-    
-    Map<String, Type> typesLoading;
-    public NebulaParser(TokenStream input,TypeLoader loader) {
-        this(input);
-        this.loader = loader;
-        this.typesLoading = loader.typesLoading;
-    }
-    
-    TypeImp currentType;
-    
-    protected Type resolveType(String name){
-        if("this".equals(name)){
-            return currentType;
-        }
-        
-        Type type = typesLoading.get(name);
-        if(type!=null)
-            return type;
-        type = loader.findType(name);
-        if(type!=null){
-            return type;
-        } else {
-            throw new RuntimeException("Can't find type :" + name);
-        }
-    }
-    
-    protected void loading(TypeImp type){
-        typesLoading.put(type.name,type);
-        types.add(type);
-        currentType = type;
-    }
-    
-     protected void makeSureHasKeyField(TypeImp type){
-            Field firstKey = null;
-            Field firstUnique = null;
-            for(Field f : type.fields){
-                if(f.isKey()){firstKey = f;break;}
-                if(f.isUnique()){firstUnique = f;break;}
-            }
-            
-            if(firstKey==null && firstUnique!=null){
-              firstUnique.modifiers |= Key;
-            }
-            type.keyField = firstKey!=null?firstKey:firstUnique;
-        }
-    
-    
-    protected void loadingFinish(TypeImp resideType, TypeImp type){
-        makeInitOnSaveAction ();
-        
-        typesLoading.remove(type.name);
-        
-        makeSureHasKeyField(type);
-        currentType = resideType;
-    }
-    protected void loadingFinish(TypeImp type){
-        makeInitOnSaveAction ();
-        
-        typesLoading.remove(type.name);        
-        makeSureHasKeyField(type);
-        currentType = null;
-    }
-    
-  protected void makeInitOnSaveAction() {
-    List<Statement> stList_Ctor_ = new ArrayList<Statement>();
-    List<Statement> stList_onLoad_ = new ArrayList<Statement>();
-    List<Statement> stList_onSave_ = new ArrayList<Statement>();
-    Expr<Object> thisType = op.opLocal(new Var("this", currentType, Compiler.THIS));
+  // Map<String,TypeImp> typesMap = new HashMap<String,TypeImp>();
+  List<TypeImp> types = new ArrayList<TypeImp>();
 
-    for (Map.Entry<Field, Expr> e : derivedFields.entrySet()) {
-      if (e.getKey().resideType != currentType) continue;
+  Map<Field, Expr> derivedFields = new HashMap<Field, Expr>();
+  List<Field> cachedActions = new ArrayList<Field>();
 
-      Expr<Object> fieldof = op.opFieldOf(thisType, e.getKey().name);
-      Statement statement = op.stPut(fieldof, e.getValue());
-      if (e.getKey().isDefaultValue()) {
-        stList_Ctor_.add(statement);
-      } else if (e.getKey().isDerived()) {
-        stList_onLoad_.add(statement);
-      }
+  Compiler op = new Compiler(new CompilerContext() {
+    @Override
+    public Type resolveType(String name) {
+      return NebulaParser.this.resolveType(name);
     }
-    Field fInit = new Field(currentType, Type.CTOR);
-    actionFields.put(fInit, op.stBlock(stList_Ctor_));
-    fInit.internal = true;
-    currentType.actions.add(fInit);
+  });
 
-    Field fOnSave = new Field(currentType, Type.ONSAVE);
-    actionFields.put(fOnSave, op.stBlock(stList_onSave_));
-    fOnSave.internal = true;
-    currentType.actions.add(fOnSave);
-    
-    Field fOnLoad = new Field(currentType, Type.ONLOAD);
-    actionFields.put(fOnLoad, op.stBlock(stList_onLoad_));
-    fOnLoad.internal = true;
-    currentType.actions.add(fOnLoad);
+  InheritHashMap attrsBuffer = new InheritHashMap();
+
+  TypeLoader loader;
+
+  Map<String, Type> typesLoading;
+
+  public NebulaParser(TokenStream input, TypeLoader loader) {
+    this(input);
+    this.loader = loader;
+    this.typesLoading = loader.typesLoading;
   }
-    
+
+  TypeImp currentType;
+
+  protected Type resolveType(String name) {
+    if ("this".equals(name)) {
+      return currentType;
+    }
+
+    Type type = typesLoading.get(name);
+    if (type != null) return type;
+    type = loader.findType(name);
+    if (type != null) {
+      return type;
+    } else {
+      throw new RuntimeException("Can't find type :" + name);
+    }
+  }
+
+  protected void makeSureHasKeyField(TypeImp type) {
+    Field firstKey = null;
+    Field firstUnique = null;
+    for (Field f : type.fields) {
+      if (f.isKey()) {
+        firstKey = f;
+        break;
+      }
+      if (f.isUnique()) {
+        firstUnique = f;
+        break;
+      }
+    }
+
+    if (firstKey == null && firstUnique != null) {
+      firstUnique.modifiers |= Key;
+    }
+    type.keyField = firstKey != null ? firstKey : firstUnique;
+  }
+
+  protected void enterType(TypeImp type) {
+    typesLoading.put(type.name, type);
+    types.add(type);
+    currentType = type;
+  }
+
+  protected void exitType(TypeImp resideType, TypeImp type) {
+    makeInitOnSaveAction();
+
+    typesLoading.remove(type.name);
+
+    makeSureHasKeyField(type);
+    currentType = resideType;
+  }
+
+  protected void exitType(TypeImp type) {
+    makeInitOnSaveAction();
+
+    typesLoading.remove(type.name);
+    makeSureHasKeyField(type);
+    currentType = null;
+  }
+
+  protected void makeInitOnSaveAction() {
+
+    {// ctor
+      Field field = new Field(currentType, Type.CTOR);
+      field.internal = true;
+
+      enterMethod(currentType);
+      List<Statement> stList = new ArrayList<Statement>();
+      {
+        String ctorMethodName = Type.CTOR;
+        Expr<Object> thisType = op.opLocal(v("this"));
+        for (Map.Entry<Field, Expr> e : derivedFields.entrySet()) {
+          if (e.getKey().resideType != currentType) continue;
+
+          if (e.getKey().isDefaultValue()) {
+            Expr<Object> fieldof = op.opFieldOf(thisType, e.getKey().name);
+            Statement statement = op.stPut(fieldof, e.getValue());
+            stList.add(statement);
+          }
+        }
+        field.code = op.action(locals, op.stBlock(stList));
+      }
+      exitMethod();
+      currentType.actions.add(field);
+      cachedActions.add(field);
+
+    }
+    { // on save
+      Field field = new Field(currentType, Type.ONSAVE);
+      field.internal = true;
+
+      enterMethod(currentType);
+      List<Statement> stList = new ArrayList<Statement>();
+      {
+        Expr<Object> thisType = op.opLocal(v("this"));
+        for (Map.Entry<Field, Expr> e : derivedFields.entrySet()) {
+          if (e.getKey().resideType != currentType) continue;
+
+          if (e.getKey().attrs.containsKey(Field.OnSave)) {
+            Expr<Object> fieldof = op.opFieldOf(thisType, e.getKey().name);
+            Statement statement = op.stPut(fieldof, e.getValue());
+            stList.add(statement);
+          }
+        }
+        field.code = op.action(locals, op.stBlock(stList));
+      }
+      exitMethod();
+      currentType.actions.add(field);
+      cachedActions.add(field);
+    }
+
+    // on load
+    {
+      Field field = new Field(currentType, Type.ONLOAD);
+      field.internal = true;
+
+      enterMethod(currentType);
+      List<Statement> stList = new ArrayList<Statement>();
+      {
+        Expr<Object> thisType = op.opLocal(v("this"));
+        for (Map.Entry<Field, Expr> e : derivedFields.entrySet()) {
+          if (e.getKey().resideType != currentType) continue;
+
+          if (e.getKey().isDerived()) {
+            Expr<Object> fieldof = op.opFieldOf(thisType, e.getKey().name);
+            Statement statement = op.stPut(fieldof, e.getValue());
+            stList.add(statement);
+          }
+        }
+        field.code = op.action(locals, op.stBlock(stList));
+      }
+      exitMethod();
+      currentType.actions.add(field);
+      cachedActions.add(field);
+    }
+  }
 
   protected void exitTopType() {
     for (Map.Entry<Field, Expr> e : derivedFields.entrySet()) {
-      e.getKey().expr = op.compile(e.getKey().getResideType(), e.getKey().name, e.getValue());
+      e.getKey().exprAsm = op.compile(e.getKey().getResideType(), e.getKey().name, (Expr<?>) e.getKey().code);
     }
-    for (Map.Entry<Field, Statement> e : actionFields.entrySet()) {
-      e.getKey().code = op.compile(e.getKey().getResideType(), e.getKey().name, e.getValue());
+    for (Field action : cachedActions) {
+      action.actionAsm = op.compileToJavaBytecode(action.getResideType(), action.name, (Compiler.Action) action.code);
     }
   }
-  
-    protected void info(String str) {
+
+  protected void info(String str) {
     if (str.charAt(str.length() - 1) == '\n') {
-    ;
+      ;
     }
     System.out.print(str);
   }
-  
-  protected void enterMethod(TypeImp type, String name) {
-    locals.clear();
-    pushLocal("nop", (Type)null);
-    pushLocal("context", (Type)null);
-    pushLocal("repos",  (Type)null);
+
+  protected void enterMethod(TypeImp type) {
+    locals = new LinkedHashMap<String, Var>();
+    pushLocal("nop", (Type) null);
+    pushLocal("context", (Type) null);
+    pushLocal("repos", (Type) null);
     pushLocal("this", type);
   };
 
   protected void exitMethod() {
-    locals.clear();
+    locals = null;
   };
 
-  private Map<String, Var> locals = new HashMap<String, Var>();
+  LinkedHashMap<String, Var> locals;
   protected int maxLocals = 0;
 
-  protected void initLocals() {
-    locals.clear();
+  protected Var pushLocal(String name, String typeName) {
+    Var var = new Var(name, resolveType(typeName));
+    locals.put(var.name, var);
+    return var;
   }
 
-      protected Var pushLocal(String name, String typeName) {
-        Var var = new Var(name, resolveType(typeName),locals.size());
-        locals.put(var.name, var);
-        return var;
-      }
-      protected Var pushLocal(String name, Type type) {
-          Var var = new Var(name, type, locals.size());
-          locals.put(var.name, var);
-          return var;
-        }
+  protected Var pushLocal(String name, Type type) {
+    Var var = new Var(name, type);
+    locals.put(var.name, var);
+    return var;
+  }
 
   protected Var v(String name) {
     Var var = locals.get(name);
     return var;
   };
+
 }
 
 flowDefinition returns[Flow flow]
@@ -205,10 +253,10 @@ flowDefinition returns[Flow flow]
                 superType = resolveType($superTypeID.text);                
             }
        } 
-      { flow = new Flow(loader,superType,$typeID.text);  loading(flow); }
+      { flow = new Flow(loader,superType,$typeID.text);  enterType(flow); }
       '{' NEWLINE?
           stepDefinition[flow]* 
-      '}' {loadingFinish(flow);exitTopType();}  (';' NEWLINE?| NEWLINE)
+      '}' {exitType(flow);exitTopType();}  (';' NEWLINE?| NEWLINE)
     
     ;
 
@@ -236,10 +284,10 @@ stepDefinition[Flow resideFlow]  returns[Flow.Step step]
                 { 
                     String name = resideFlow.name + "$" + $stepID.text + ( superTypeID==null?(resideFlow.steps.size()+1) : "");
                     stepType = new TypeImp(loader,resideFlow,name, superType); 
-                    loading(stepType);
+                    enterType(stepType);
                 }
                 fieldDefinition[stepType]* 
-            '}'     {loadingFinish(resideFlow,stepType);} 
+            '}'     {exitType(resideFlow,stepType);} 
         )?
         {          
             if(stepType==null){
@@ -301,7 +349,7 @@ typeDefinition returns[TypeImp type]
                 type.attrs.putAll(annotations);
             }
             
-            loading(type);
+            enterType(type);
             type.nameAlias.extend(aliases);
         }
         (
@@ -309,7 +357,7 @@ typeDefinition returns[TypeImp type]
         )
                 
         // Finish
-        {loadingFinish(type);exitTopType();}
+        {exitType(type);exitTopType();}
         ;
 
 typeDefineKeyword returns[TypeStandalone typeType]
@@ -325,7 +373,7 @@ nestedTypeDefinition[TypeImp resideType,String name,Aliases nameAlias] returns[T
               String typeName = resideType.name + "$" + name;
               type = new TypeImp(loader,resideType,typeName,resolveType(TypeStandalone.Mixin.name()));
               if(nameAlias!=null)type.setNameAlias(nameAlias);
-              loading(type);
+              enterType(type);
             }
             fieldDefinition[type]* 
         ;
@@ -348,7 +396,7 @@ fieldDefinition[TypeImp resideType] returns[Field field]
           }       
                 
         /* Actions */
-        ( '()' { enterMethod(currentType,"");} action=block { exitMethod();} {actionFields.put(field, action);} )?
+        ( '()' { enterMethod(currentType);} action=block {  field.code =op.action(locals,action);  cachedActions.add(field); exitMethod();} )?
         /* Array? */
         range=arrayDefinition
         
@@ -357,7 +405,7 @@ fieldDefinition[TypeImp resideType] returns[Field field]
             typeText=ID { field.type = resolveType($typeText.text);}
             |   '{'     NEWLINE ? { if(aliases==null) aliases = new Aliases(field.name); } 
                     nestedType = nestedTypeDefinition[resideType,$name.text,aliases] 
-                '}'   { field.type = nestedType; loadingFinish(resideType,nestedType);}
+                '}'   { field.type = nestedType; exitType(resideType,nestedType);}
            |            {
                             if(field.type==null && action==null)  {
                                 field.type = resolveType(field.name);  
@@ -367,10 +415,10 @@ fieldDefinition[TypeImp resideType] returns[Field field]
         )
         
         /* Default value */
-        (':=' { enterMethod(currentType,"");} defaultExpr=expression  { exitMethod();}    {   field.modifiers |=DefaultValue;   derivedFields.put(field, defaultExpr); })?
+        (':=' { enterMethod(currentType);} defaultExpr=expression  { field.modifiers |=DefaultValue;   field.code = defaultExpr;      derivedFields.put(field, (Expr)field.code); exitMethod(); })?
         
         /* Derived expr */
-        ('='  { enterMethod(currentType,"");} derivedExpr=expression  { exitMethod();}    {   field.modifiers |=Derived;            derivedFields.put(field, derivedExpr); } )?
+        ('='  { enterMethod(currentType);} derivedExpr=expression  { field.modifiers |=Derived;         field.code = derivedExpr;     derivedFields.put(field,(Expr)field.code); exitMethod(); } )?
         
           (';' NEWLINE?| NEWLINE)
 

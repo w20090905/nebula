@@ -182,6 +182,7 @@ public class NebulaParser_Expr_SimpleTest extends TestCase {
 		NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(exprText));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		NebulaParser parser = new NebulaParser(tokens, compiler);
+		parser.enterMethod(null);
 		parser.pushLocal("a", (Type) null);
 		parser.pushLocal("b", (Type) null);
 		parser.pushLocal("n", (Type) null);

@@ -38,7 +38,7 @@ public class NebulaNative {
 		if (type.getSuperType() != null) execMethod(context, dataRepos, entity, type.getSuperType(), methodName);
 		// TODO
 		Field sysInitAction = type.getActionByName(methodName);
-		if (sysInitAction != null) sysInitAction.getCode().exec(context, dataRepos, entity);
+		if (sysInitAction != null) sysInitAction.actionAsm.exec(context, dataRepos, entity);
 	}
 
 	public static void ctor(RuntimeContext context, DataRepos dataRepos, Entity entity, Type type) {

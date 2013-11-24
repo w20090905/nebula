@@ -48,7 +48,7 @@ public class EntityClauseComplier implements Opcodes {
 			mv = cw.visitMethod(ACC_PUBLIC + ACC_VARARGS, "apply",
 					"(Lnebula/lang/RuntimeContext;Lnebula/data/DataRepos;Lnebula/data/Entity;[Ljava/lang/Object;)Z", null, null);
 			mv.visitCode();
-			code.compile(new AsmCompiler(cw, mv));
+			code.compile(new MethodAsmCompiler(cw, mv));
 			mv.visitInsn(IRETURN);
 			mv.visitMaxs(0, 0);
 			mv.visitEnd();

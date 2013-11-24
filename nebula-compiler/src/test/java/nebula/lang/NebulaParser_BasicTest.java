@@ -190,14 +190,14 @@ public class NebulaParser_BasicTest extends TestCase {
 	}
 
 	public void testFieldDefinition_default() {
-		assertEquals(1014L * 1024L, parseField("!MyAge Age := 1014 * 1024;").expr.eval(null, null, null));
-		assertEquals("test", parseField("!MyAge Age := \"test\";").expr.eval(null, null, null));
-		assertEquals("test", parseField("!Name := ```test``` ;").expr.eval(null, null, null));
+		assertEquals(1014L * 1024L, parseField("!MyAge Age := 1014 * 1024;").exprAsm.eval(null, null, null));
+		assertEquals("test", parseField("!MyAge Age := \"test\";").exprAsm.eval(null, null, null));
+		assertEquals("test", parseField("!Name := ```test``` ;").exprAsm.eval(null, null, null));
 
-		assertEquals("# Title\n## firstline\ntest content", parseField("!Name := ```\n# Title\n## firstline\ntest content``` ;").expr.eval(null, null, null));
+		assertEquals("# Title\n## firstline\ntest content", parseField("!Name := ```\n# Title\n## firstline\ntest content``` ;").exprAsm.eval(null, null, null));
 
-		assertEquals(new BigDecimal("1.3"), parseField("!MyAge Age := 1.3;").expr.eval(null, null, null));
-		assertEquals(4 > 5, parseField("!MyAge Age := 4 > 5;").expr.eval(null, null, null));
+		assertEquals(new BigDecimal("1.3"), parseField("!MyAge Age := 1.3;").exprAsm.eval(null, null, null));
+		assertEquals(4 > 5, parseField("!MyAge Age := 4 > 5;").exprAsm.eval(null, null, null));
 
 	}
 
@@ -208,10 +208,10 @@ public class NebulaParser_BasicTest extends TestCase {
 		e.put("Name", name);
 		e.put("Age", Age);
 
-		assertEquals(Age, parseField("!MyAge Age = this.Age;").expr.eval(null, null, e));
-		assertEquals(Age + 10 * 1000, parseField("!MyAge Age = this.Age + 10 * 1000;").expr.eval(null, null, e));
+		assertEquals(Age, parseField("!MyAge Age = this.Age;").exprAsm.eval(null, null, e));
+		assertEquals(Age + 10 * 1000, parseField("!MyAge Age = this.Age + 10 * 1000;").exprAsm.eval(null, null, e));
 
-		assertEquals(name, parseField("!MyAge Name = this.Name;").expr.eval(null, null, e));
+		assertEquals(name, parseField("!MyAge Name = this.Name;").exprAsm.eval(null, null, e));
 	}
 
 	public void testFieldDefinition_quicktype() {
