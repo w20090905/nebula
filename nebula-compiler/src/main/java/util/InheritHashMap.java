@@ -4,31 +4,30 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
-import com.google.common.collect.ForwardingMap;
-
-public class InheritHashMap extends ForwardingMap<String, Object> {
-	private InheritHashMap defaults;
+public class InheritHashMap extends HashMap<String, Object> {
+	private static final long serialVersionUID = 2504234689413219141L;
+	private InheritHashMap defaults = null;
 
 	public InheritHashMap() {
-		this(null);
+		super();
+		this.makeAll();
 	}
 
 	public InheritHashMap(InheritHashMap defaults) {
 		super();
-		_delegate = new HashMap<String, Object>();
 		this.defaults = defaults;
+		this.makeAll();
 	}
 
 	public void setDefaults(InheritHashMap defaults) {
 		this.defaults = defaults;
+		this.makeAll();
 	}
 
 	@Override
 	public Object get(Object key) {
-		Object oval = super.get(key);
-		return ((oval == null) && (defaults != null)) ? defaults.get(key) : oval;
+		return cachedAll.get(key);
 	}
 
 	public Object get(Object key, Object defaultValue) {
@@ -37,16 +36,7 @@ public class InheritHashMap extends ForwardingMap<String, Object> {
 	}
 
 	public Set<String> getNames() {
-		Set<String> names = null;
-		if (defaults == null) {
-			names = new TreeSet<String>();
-		} else {
-			names = defaults.getNames();
-		}
-
-		names.addAll(super.keySet());
-
-		return names;
+		return cachedAll.keySet();
 	}
 
 	@Override
@@ -56,39 +46,71 @@ public class InheritHashMap extends ForwardingMap<String, Object> {
 
 	@Override
 	public boolean isEmpty() {
-		return super.isEmpty() && (defaults != null ? defaults.isEmpty() : true);
+		return cachedAll.isEmpty();
 	}
 
 	@Override
 	public boolean containsKey(Object key) {
-		return super.containsKey(key) || (defaults != null ? defaults.containsKey(key) : false);
+		return cachedAll.containsKey(key);
 	}
 
 	@Override
 	public boolean containsValue(Object value) {
-		return super.containsValue(value) || (defaults != null ? defaults.containsValue(value) : false);
+		return cachedAll.containsValue(value);
 	}
 
 	@Override
 	public Set<String> keySet() {
-		return super.keySet();
+		return cachedAll.keySet();
 	}
 
 	@Override
 	public Collection<Object> values() {
-		return super.values();
+		return cachedAll.values();
 	}
+
+	Map<String, Object> cachedAll;
 
 	@Override
 	public Set<java.util.Map.Entry<String, Object>> entrySet() {
-		return super.entrySet();
+		return cachedAll.entrySet();
 	}
 
-	final Map<String, Object> _delegate;
+	private void makeAll() {
+		if (defaults != null) {
+			cachedAll = new HashMap<String, Object>(defaults);
+		} else {
+			cachedAll = new HashMap<String, Object>();
+		}
+		
+		for (Map.Entry<String, Object> entry : super.entrySet()) {
+			cachedAll.put(entry.getKey(), entry.getValue());
+		}
+	}
 
 	@Override
-	public Map<String, Object> delegate() {
-		return _delegate;
+	public Object put(String key, Object value) {
+		super.put(key, value);
+		return cachedAll.put(key, value);
+	}
+
+	@Override
+	public void putAll(Map<? extends String, ? extends Object> m) {
+		super.putAll(m);
+		cachedAll.putAll(m);
+	}
+
+	@Override
+	public Object remove(Object key) {
+		super.remove(key);
+		return cachedAll.remove(key);
+	}
+
+	@Override
+	public Object clone() {
+		InheritHashMap clone = (InheritHashMap) super.clone();
+		this.makeAll();
+		return clone;
 	}
 
 }

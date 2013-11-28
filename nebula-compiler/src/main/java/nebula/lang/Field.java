@@ -6,7 +6,7 @@ public class Field {
 	public static final String SingleLine = "SingleLine";
 	public static final String Heading = "Heading";
 	public static final String OnSave = "OnSave";
-	
+
 	final String name;
 	Aliases nameAlias;
 	int modifiers = 0;
@@ -51,15 +51,15 @@ public class Field {
 	}
 
 	public boolean isIgnorable() {
-		return Modifier.isNullable(modifiers);
+		return Modifier.isNullable(modifiers) || (!Modifier.isRequired(modifiers) && Modifier.isDefaultValue(modifiers));
 	}
 
 	public boolean isRequired() {
-		return !Modifier.isNullable(modifiers);
+		return !isIgnorable();
 	}
 
 	public boolean isNullable() {
-		return Modifier.isNullable(modifiers);
+		return isIgnorable();
 	}
 
 	public boolean isArray() {

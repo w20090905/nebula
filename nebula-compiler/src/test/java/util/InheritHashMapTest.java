@@ -56,9 +56,9 @@ public class InheritHashMapTest extends TestCase {
 		Set<String> names = maps.getNames();
 		Iterator<String> i =   names.iterator();
 		assertEquals(3, names.size());
-		assertEquals("a", i.next());
 		assertEquals("b", i.next());
 		assertEquals("c", i.next());
+		assertEquals("a", i.next());
 	}
 	
 
@@ -73,9 +73,9 @@ public class InheritHashMapTest extends TestCase {
 		Set<String> names = maps.getNames();
 		Iterator<String> i =   names.iterator();
 		assertEquals(3, names.size());
-		assertEquals("a", i.next());
 		assertEquals("b", i.next());
 		assertEquals("c", i.next());
+		assertEquals("a", i.next());
 		
 		assertEquals("a1",maps.get("a"));
 	}

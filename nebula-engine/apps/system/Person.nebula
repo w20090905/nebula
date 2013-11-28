@@ -5,10 +5,12 @@ type Person|人员 {
 	?Family-Name|姓;
 	?AlternateNames|别名[] Name;
 	?Description;
+        Good YesNo;
 	Sex|性别 Attr;
 	?DateOfBirth|出生日期 Date;
-	?Age;
-          Age2|年龄假 Age=this.Age + 10;
+	?Age:=10;
+          AgeDerived Age=this.Age + 10;
+          AgeDefault Age:=this.Age+1;
 	?Home{
 		Street Name;
 		Neighborhood String;

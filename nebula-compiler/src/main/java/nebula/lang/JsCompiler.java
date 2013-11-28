@@ -1,15 +1,28 @@
 package nebula.lang;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import nebula.data.Entity;
 
 public class JsCompiler implements CompilerBase {
 
 	StringBuilder sb;
+	Map<String, String> locals;
 
-	public JsCompiler() {
+	public JsCompiler(String... names) {
 		sb = new StringBuilder();
+		locals  = new HashMap<String, String>();
+		for (int i = 0; i < names.length; i+=2) {
+			locals.put(names[i], names[i+1]);
+		}
+	}
+	
+	public static String compiler(Code code,String... names){
+		JsCompiler c = new JsCompiler(names);
+		code.compile(c);
+		return c.sb.toString();
 	}
 
 	@Override
@@ -239,7 +252,7 @@ public class JsCompiler implements CompilerBase {
 
 	@Override
 	public void varRefer(Var var) {
-		sb.append(var.name);
+		sb.append( locals.get(var.name));
 	}
 
 	@Override

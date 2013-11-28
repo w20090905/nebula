@@ -16,6 +16,7 @@ import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.lang.Field;
+import nebula.lang.JsCompiler;
 import nebula.lang.Type;
 import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
@@ -139,6 +140,12 @@ public class TypeTemplateResouce extends AbstractResouce {
 					}
 				}
 				lastField = field;
+			}
+			if (field.isDerived()) {
+				field.getAttrs().put("DerivedExpression", JsCompiler.compiler(field.getCode(), "this", "data"));
+			}
+			if (field.isDefaultValue()) {
+				field.getAttrs().put("DefaultExpression", JsCompiler.compiler(field.getCode(), "this", "data"));
 			}
 		}
 		return type;

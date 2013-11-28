@@ -23,7 +23,7 @@
 	[#assign optTitle][@compress single_line=true]
 		[#if field.attrs.Remarks??]
 			title="${field.attrs.Remarks}"
-		[#elseif field.attrs.Desc??]]
+		[#elseif field.attrs.Desc??]
 			title="${field.attrs.Desc}"
 		[#else]]
 			title="${field.displayName}"
@@ -55,6 +55,14 @@
 	[#elseif field.attrs.FormatType! = "checkbox"]
 		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
 				${optReadonly} ${optValidateRule} 	${optTitle}	 class="${optClass}"	
+			/>
+	[#elseif field.derived]
+		<input ${optType} id="${id}"  placeholder="${placeholder}"  ${ex}
+				readonly ${optTitle}	class="${optClass}"	value="{{${field.attrs.DerivedExpression}}}"
+			/>
+	[#elseif field.defaultValue]
+		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="{{${field.attrs.DefaultExpression}}}"  ${ex}
+				${optReadonly} ${optRequired}  ${optValidateRule} ${optTitle}	class="${optClass}"	
 			/>
 	[#else]
 		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
