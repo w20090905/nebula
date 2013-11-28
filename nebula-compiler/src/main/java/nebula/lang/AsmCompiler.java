@@ -14,7 +14,7 @@ import org.objectweb.asm.Opcodes;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 
-public class AsmCompiler implements Opcodes {
+public class AsmCompiler implements Opcodes, CompilerBase {
 	static Map<String, OperatorExpr> opTypes = Maps.newHashMap();
 
 	static OperatorExpr resolveOperator(Type type) {
@@ -39,16 +39,19 @@ public class AsmCompiler implements Opcodes {
 		// }
 	}
 
+	@Override
 	public void arithmetic(Operator op, Expr<Object> e1, Expr<Object> e2) {
 		resolveOperator(e1.getType()).arithmetic(this, op, e1, e2);
 	}
 
+	@Override
 	public void block(List<Statement> statements) {
 		for (Statement st : statements) {
 			st.compile(this);
 		}
 	}
 
+	@Override
 	public void call(Expr<Object> value) {
 
 		// compiles e1, e2, and adds an instruction to multiply the two
@@ -57,6 +60,7 @@ public class AsmCompiler implements Opcodes {
 
 	}
 
+	@Override
 	public void callMethod(Expr<Entity> e1, String name) {
 		mv.visitVarInsn(ALOAD, Compiler.REPOS); // DataRepos
 		// NebulaNative.execMethod(null, null, null, null, name) (null,
@@ -67,7 +71,8 @@ public class AsmCompiler implements Opcodes {
 
 	}
 
-	public Type conditional(Operator op, Expr<Boolean> e1, Expr<Boolean> e2) {
+	@Override
+	public void conditional(Operator op, Expr<Boolean> e1, Expr<Boolean> e2) {
 		// compiles e1
 		e1.compile(this);
 		// tests if e1 is false
@@ -86,35 +91,33 @@ public class AsmCompiler implements Opcodes {
 		// if e1 is false, e1 && e2 is equal to e1:
 		// we jump directly to this label, without evaluating e2
 		mv.visitLabel(end);
-		return BootstrapTypeLoader.BOOLEAN;
 	}
-
-	public Type constDate(long value) {
+	@Override
+	public void constDate(long value) {
 		constTempral(value);
-		return BootstrapTypeLoader.DATE;
 	}
 
-	public Type constDatetime(long value) {
+	@Override
+	public void constDatetime(long value) {
 		constTempral(value);
-		return BootstrapTypeLoader.DATETIME;
 	}
 
-	public Type constDecimal(String text) {
+	@Override
+	public void constDecimal(String text) {
 		mv.visitTypeInsn(NEW, "java/math/BigDecimal");
 		mv.visitInsn(DUP);
 		mv.visitLdcInsn(text);
 		mv.visitMethodInsn(INVOKESPECIAL, "java/math/BigDecimal", "<init>", "(Ljava/lang/String;)V");
-		return BootstrapTypeLoader.DECIMAL;
 	}
 
-	public Type constLong(Long value) {
+	@Override
+	public void constLong(Long value) {
 		mv.visitLdcInsn(value);
-		return BootstrapTypeLoader.LONG;
 	}
-
-	public Type constString(String value) {
+	
+	@Override
+	public void constString(String value) {
 		mv.visitLdcInsn(value);
-		return BootstrapTypeLoader.STRING;
 	}
 
 	private void constTempral(long value) {
@@ -124,21 +127,22 @@ public class AsmCompiler implements Opcodes {
 		mv.visitMethodInsn(INVOKESPECIAL, "org/joda/time/DateTime", "<init>", "(J)V");
 	}
 
-	public Type constTime(long value) {
+	@Override
+	public void constTime(long value) {
 		constTempral(value);
-		return BootstrapTypeLoader.TIME;
 	}
 
-	public Type constTimestamp(long value) {
+	@Override
+	public void constTimestamp(long value) {
 		constTempral(value);
-		return BootstrapTypeLoader.TIMESTAMP;
 	}
 
-	public Type constYesno(int value) {
+	@Override
+	public void constYesno(int value) {
 		mv.visitLdcInsn(value);
-		return BootstrapTypeLoader.BOOLEAN;
 	}
 
+	@Override
 	public void datastoreGet(Expr<Object> repos, String name) {
 		repos.compile(this);
 		mv.visitLdcInsn(org.objectweb.asm.Type.getType("Ljava/lang/String;"));
@@ -149,6 +153,7 @@ public class AsmCompiler implements Opcodes {
 		mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/DataStore", "listAll", "()Ljava/util/List;");
 	}
 
+	@Override
 	public void decrement(Expr<Object> e1) {
 		resolveOperator(e1.getType()).decrement(this, e1);
 	}
@@ -171,6 +176,7 @@ public class AsmCompiler implements Opcodes {
 		}
 	}
 
+	@Override
 	public void get(Expr<Object> list, Expr<Object> index) {
 		list.compile(this);
 		mv.visitTypeInsn(CHECKCAST, "java/util/List");
@@ -183,6 +189,7 @@ public class AsmCompiler implements Opcodes {
 
 	}
 
+	@Override
 	public void getField(Expr<Object> entity, String name, Type fieldType) {
 		entity.compile(this);
 		mv.visitLdcInsn(name);
@@ -190,10 +197,12 @@ public class AsmCompiler implements Opcodes {
 		fromObject(mv, fieldType);
 	}
 
+	@Override
 	public void increment(Expr<Object> e1) {
 		resolveOperator(e1.getType()).increment(this, e1);
 	}
 
+	@Override
 	public void listFilter(Expr<Object> list, List<Expr<Object>> ranges) {
 		list.compile(this);
 
@@ -210,6 +219,7 @@ public class AsmCompiler implements Opcodes {
 		mv.visitMethodInsn(INVOKESTATIC, "nebula/lang/NebulaNative", "filter", "(Ljava/util/List;[Lnebula/lang/Range;)Ljava/util/List;");
 	}
 
+	@Override
 	public void listFilterByClause(Expr<Object> list, Expr<Object> clause, List<Expr<Object>> params) {
 		list.compile(this);
 		String clauseName = EntityClauseComplier.DEFAULT.compile(list.getType(), clause); // (clause,
@@ -235,6 +245,7 @@ public class AsmCompiler implements Opcodes {
 
 	}
 
+	@Override
 	public void listGetItem(Expr<Object> list, int index) {
 		// list TODO
 		mv.visitVarInsn(ALOAD, index);
@@ -279,6 +290,7 @@ public class AsmCompiler implements Opcodes {
 		mv.visitLabel(end);
 	}
 
+	@Override
 	public void makeRange_0_To(Expr<Object> to) {
 		to.compile(this);
 		mv.visitInsn(L2I);
@@ -286,6 +298,7 @@ public class AsmCompiler implements Opcodes {
 
 	}
 
+	@Override
 	public void makeRange_From(Expr<Object> from) {
 		from.compile(this);
 		mv.visitInsn(L2I);
@@ -293,6 +306,7 @@ public class AsmCompiler implements Opcodes {
 
 	}
 
+	@Override
 	public void makeRange_From_To(Expr<Object> from, Expr<Object> to) {
 		from.compile(this);
 		mv.visitInsn(L2I);
@@ -303,6 +317,7 @@ public class AsmCompiler implements Opcodes {
 
 	}
 
+	@Override
 	public void makeRangeIndex(Expr<Object> index) {
 		index.compile(this);
 		mv.visitInsn(L2I);
@@ -311,10 +326,12 @@ public class AsmCompiler implements Opcodes {
 
 	}
 
+	@Override
 	public void negates(Expr<Object> e1) {
 		resolveOperator(e1.getType()).negates(this, e1);
 	}
 
+	@Override
 	public void not(Expr<Boolean> e1) {
 		// computes !e1 by evaluating 1 - e1
 		mv.visitLdcInsn(new Integer(1));
@@ -322,6 +339,7 @@ public class AsmCompiler implements Opcodes {
 		mv.visitInsn(ISUB);
 	}
 
+	@Override
 	public void paramsRefer(Expr<Object> in, int params, int index) {
 		mv.visitVarInsn(ALOAD, params);
 		mv.visitIntInsn(SIPUSH, index);
@@ -329,20 +347,24 @@ public class AsmCompiler implements Opcodes {
 		fromObject(mv, in.getType());
 	}
 
+	@Override
 	public void positive(Expr<Object> e1) {
 		resolveOperator(e1.getType()).positive(this, e1);
 	}
 
+	@Override
 	public void putVar(Var var, Expr<Object> initExpr) {
 		// compiles e1, e2, and adds an instruction to multiply the two
 		// values
 		// mv.visitLdcInsn(value);
 	}
 
-	<V> void relational(final Operator op, Expr<V> e1, Expr<V> e2) {
+	@Override
+	public <V> void relational(final Operator op, Expr<V> e1, Expr<V> e2) {
 		resolveOperator(e1.getType()).relational(this, op, e1, e2);
 	}
 
+	@Override
 	public void setField(Expr<Object> parent, String name, Type fieldType, Expr<Object> value) {
 		parent.compile(this);
 		mv.visitLdcInsn(name);
@@ -364,6 +386,7 @@ public class AsmCompiler implements Opcodes {
 		}
 	}
 
+	@Override
 	public void typeRefer(String name) {
 		mv.visitVarInsn(ALOAD, Compiler.REPOS);
 		mv.visitLdcInsn(org.objectweb.asm.Type.getType("Ljava/lang/String;"));
@@ -398,6 +421,7 @@ public class AsmCompiler implements Opcodes {
 		mv.visitVarInsn(ALOAD, index);
 	}
 
+	@Override
 	public void varRefer(Var var) {
 		mv.visitVarInsn(ALOAD, var.index);
 	}

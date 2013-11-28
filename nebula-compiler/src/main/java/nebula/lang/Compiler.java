@@ -33,7 +33,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			st.compile(compiler);
 		}
 
@@ -54,7 +54,7 @@ public class Compiler {
 			this.op = op;
 		}
 
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.arithmetic(op, e1, e2);
 		}
 
@@ -90,7 +90,7 @@ public class Compiler {
 			this.statements = statements;
 		}
 
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.block(statements);
 		}
 
@@ -121,7 +121,7 @@ public class Compiler {
 			this.value = value;
 		}
 
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.call(value);
 		}
 
@@ -150,7 +150,7 @@ public class Compiler {
 			this.e2 = e2;
 		}
 
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.conditional(op, e1, e2);
 		}
 
@@ -177,7 +177,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.datastoreGet(repos, name);
 		}
 
@@ -198,7 +198,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.constDate(super.value);
 		}
 
@@ -218,7 +218,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.constDatetime(super.value);
 		}
 
@@ -239,7 +239,7 @@ public class Compiler {
 			this.text = text;
 		}
 
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.constDecimal(text);
 		}
 
@@ -263,7 +263,7 @@ public class Compiler {
 			super(e1);
 		}
 
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.decrement(e1);
 		}
 
@@ -316,7 +316,7 @@ public class Compiler {
 			this.name = name;
 		}
 
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.getField(entity, name, fieldType);
 		}
 
@@ -347,7 +347,7 @@ public class Compiler {
 			super(e1);
 		}
 
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.increment(e1);
 		}
 
@@ -376,7 +376,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.listFilterByClause(list, clause, params);
 		}
 
@@ -405,7 +405,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.listFilter(list, ranges);
 		}
 
@@ -433,7 +433,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.varRefer(new Var("this", type));
 		}
 
@@ -466,7 +466,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.get(list, index.value);
 		}
 
@@ -501,7 +501,7 @@ public class Compiler {
 			this.value = Long.parseLong(text);
 		}
 
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.constLong(value);
 		}
 
@@ -530,7 +530,7 @@ public class Compiler {
 			this.name = name;
 		}
 
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.callMethod(e1, name);
 		}
 
@@ -562,7 +562,7 @@ public class Compiler {
 			super(e1);
 		}
 
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.negates(e1);
 		}
 
@@ -586,7 +586,7 @@ public class Compiler {
 			this.e1 = e1;
 		}
 
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.not(e1);
 		}
 
@@ -613,7 +613,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.paramsRefer(in, params, index);
 		}
 
@@ -638,7 +638,7 @@ public class Compiler {
 			super(e1);
 		}
 
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.positive(e1);
 		}
 
@@ -665,7 +665,7 @@ public class Compiler {
 			this.value = value;
 		}
 
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.setField(entity, name, fieldType, value);
 		}
 
@@ -702,7 +702,7 @@ public class Compiler {
 			this.initExpr = initExpr;
 		}
 
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.putVar(var, initExpr);
 		}
 
@@ -727,7 +727,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.makeRange_From_To(from, to);
 		}
 
@@ -749,7 +749,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.makeRange_0_To(to);
 		}
 
@@ -767,7 +767,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.makeRange_From(from);
 		}
 
@@ -786,7 +786,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.makeRangeIndex(value);
 		}
 
@@ -812,7 +812,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.relational(op, e1, e2);
 		}
 
@@ -844,7 +844,7 @@ public class Compiler {
 			this.value = value;
 		}
 
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.constString(value);
 		}
 
@@ -888,7 +888,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.constTime(super.value);
 		}
 
@@ -909,7 +909,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.constTimestamp(super.value);
 		}
 
@@ -932,7 +932,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.typeRefer(name);
 		}
 
@@ -973,7 +973,7 @@ public class Compiler {
 		}
 
 		@Override
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.varRefer(var);
 		}
 
@@ -1000,7 +1000,7 @@ public class Compiler {
 			else this.value = 0;
 		}
 
-		public void compile(AsmCompiler compiler) {
+		public void compile(CompilerBase compiler) {
 			compiler.constYesno(value);
 		}
 
