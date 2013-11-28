@@ -103,7 +103,7 @@ public class FileUtil {
 
 			if (file.exists()) {
 				String abpath = file.getAbsolutePath();
-				File newFile = new File(abpath + "." + format.format(new Date(file.lastModified())));
+				File newFile = new File(abpath + "." + format.format(new Date(file.lastModified())) + ".bak");
 
 				// backup old file
 				if (newFile.exists()) {
