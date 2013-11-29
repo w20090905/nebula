@@ -98,15 +98,29 @@ class DateJsonDataDealer extends DefaultTypeAdapter<DateTime> {
 }
 
 class TimeJsonDataDealer extends DefaultTypeAdapter<DateTime> {
-	final DateTimeFormatter formater = DateTimeFormat.forPattern("kk:mm:ss");
+	final DateTimeFormatter formaterHHMMSS = DateTimeFormat.forPattern("kk:mm:ss");
+	final DateTimeFormatter formaterHHMM = DateTimeFormat.forPattern("kk:mm");
+	final DateTimeFormatter formaterHH = DateTimeFormat.forPattern("kk");
 	public DateTime readFrom(JsonParser parser, String name) throws Exception {
 		JsonToken token = parser.getCurrentToken();
 		assert token == JsonToken.VALUE_STRING;
-		return parser.getText().length() >= 8 ? formater.parseDateTime(parser.getText()) : null;
+		String value = parser.getText();
+		int len = value.length();
+		if(len==8){
+			return formaterHHMMSS.parseDateTime(parser.getText());	
+		}else 		if(len==5){
+			return formaterHHMM.parseDateTime(parser.getText());	
+		}else 		if(len==2){
+			return formaterHH.parseDateTime(parser.getText());	
+		}else 		if(len==1){
+			return formaterHH.parseDateTime(parser.getText());	
+		}else {
+			return null;
+		}
 	}
 
 	public void writeTo(String name, Object value, JsonGenerator gen) throws Exception {
-		gen.writeString(value != null ? formater.print((ReadableInstant)value) : "");
+		gen.writeString(value != null ? formaterHHMMSS.print((ReadableInstant)value) : "");
 	}
 }
 

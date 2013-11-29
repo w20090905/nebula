@@ -1,5 +1,7 @@
 tx WorkTime{
 !!ID;
-Project;
+@SingleLine @Attach Project;
+From-Time;
+To-Time;
 Description;
 }

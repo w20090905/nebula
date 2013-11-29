@@ -4,6 +4,7 @@ import util.InheritHashMap;
 
 public class Field {
 	public static final String SingleLine = "SingleLine";
+	public static final String ShouldBeLeader = "ShouldBeLeader";
 	public static final String Heading = "Heading";
 	public static final String OnSave = "OnSave";
 	public static final String ComputeBackend = "ComputeBackend";

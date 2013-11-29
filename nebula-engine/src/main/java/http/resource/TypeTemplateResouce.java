@@ -123,22 +123,23 @@ public class TypeTemplateResouce extends AbstractResouce {
 		}
 	}
 
+	public static final String HasFollowing = "HasFollowing";
 	private Type layout(Type type) {
 		List<Field> fields = type.getFields();
 		Field lastField = null;
 		for (int i = 0; i < fields.size(); i++) {
 			Field field = fields.get(i);
-			if (field.getAttrs().containsKey("SingleLine")) {
+			if (field.getAttrs().containsKey(Field.SingleLine)) {
 				if (lastField != null) {
-					lastField.getAttrs().remove("HasFollowing");
+					lastField.getAttrs().remove(HasFollowing);
 				}
 				lastField = null;
 			} else {
 				if (lastField != null) {
-					if (field.getAttrs().containsKey("ShouldBeLeader")) {
-						lastField.getAttrs().remove("HasFollowing");
+					if (field.getAttrs().containsKey(Field.ShouldBeLeader)) {
+						lastField.getAttrs().remove(HasFollowing);
 					} else {
-						lastField.getAttrs().put("HasFollowing", "HasFollowing");
+						lastField.getAttrs().put(HasFollowing, HasFollowing);
 					}
 				}
 				lastField = field;
