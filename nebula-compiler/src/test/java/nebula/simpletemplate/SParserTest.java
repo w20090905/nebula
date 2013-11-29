@@ -23,10 +23,9 @@ public class SParserTest extends TestCase {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
 		CompiledST template = p.templateAndEOF();
-		System.out.println(template.toString());
 
 		//@formatter:off
-		String expected = "String tempalte(){\n" +
+		String expected = "String template(){\n" +
 				"	sb.append(\"OnlyStaticText\");\n" +
 				"}\n";
 		//@formatter:on
@@ -42,10 +41,9 @@ public class SParserTest extends TestCase {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
 		CompiledST template = p.templateAndEOF();
-		System.out.println(template.toString());
 
 		//@formatter:off
-		String expected = "String tempalte(name,age,male){\n" +
+		String expected = "String template(name,age,male){\n" +
 				"	sb.append(name);\n" +
 				"	sb.append(age);\n" +
 				"	sb.append(male);\n" +
@@ -62,9 +60,8 @@ public class SParserTest extends TestCase {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
 		CompiledST template = p.templateAndEOF();
-		System.out.println(template.toString());
 		//@formatter:off
-		String expected = "String tempalte(at){\n" +
+		String expected = "String template(at){\n" +
 				"	sb.append(\"<title>\");\n" +
 				"	sb.append(at.name);\n" +
 				"	sb.append(at.name);\n" +
@@ -83,10 +80,9 @@ public class SParserTest extends TestCase {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
 		CompiledST template = p.templateAndEOF();
-		System.out.println(template.toString());
 
 		//@formatter:off
-		String expected = "String tempalte(){\n" +
+		String expected = "String template(){\n" +
 				"	sb.append('data'());\n" +
 				"}\n";
 		//@formatter:on
@@ -102,10 +98,9 @@ public class SParserTest extends TestCase {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
 		CompiledST template = p.templateAndEOF();
-		System.out.println(template.toString());
 
 		//@formatter:off
-		String expected = "String tempalte(data){\n" +
+		String expected = "String template(data){\n" +
 				"	sb.append(data());\n" +
 				"}\n";
 		//@formatter:on
@@ -121,10 +116,9 @@ public class SParserTest extends TestCase {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
 		CompiledST template = p.templateAndEOF();
-		System.out.println(template.toString());
 
 		//@formatter:off
-		String expected = "String tempalte(name,age){\n" +
+		String expected = "String template(name,age){\n" +
 				"	sb.append('data'(name,age));\n" +
 				"}\n";
 		//@formatter:on
@@ -140,10 +134,9 @@ public class SParserTest extends TestCase {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
 		CompiledST template = p.templateAndEOF();
-		System.out.println(template.toString());
 
 		//@formatter:off
-		String expected = "String tempalte(name,age,male){\n" +
+		String expected = "String template(name,age,male){\n" +
 				"	sb.append('data'(name,age,male));\n" +
 				"}\n";
 		//@formatter:on
@@ -159,10 +152,9 @@ public class SParserTest extends TestCase {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
 		CompiledST template = p.templateAndEOF();
-		System.out.println(template.toString());
 
 		//@formatter:off
-		String expected = "String tempalte(name,age,male,birthday){\n" +
+		String expected = "String template(name,age,male,birthday){\n" +
 				"	sb.append('data'(name,age,male,birthday));\n" +
 				"}\n";
 		//@formatter:on
@@ -178,10 +170,9 @@ public class SParserTest extends TestCase {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
 		CompiledST template = p.templateAndEOF();
-		System.out.println(template.toString());
 
 		//@formatter:off
-		String expected = "String tempalte(name,age,male,birthday){\n" +
+		String expected = "String template(name,age,male,birthday){\n" +
 				"	sb.append('good'('data'(name,age,male,birthday)));\n" +
 				"}\n";
 		//@formatter:on
@@ -189,7 +180,7 @@ public class SParserTest extends TestCase {
 		assertEquals(expected, template.toString());
 	}
 
-	public void test_IncludeSubTempalteNoArgs() throws IOException, RecognitionException {
+	public void test_IncludeSubtemplateNoArgs() throws IOException, RecognitionException {
 
 		String text = "${{ssss}}";
 		STLexer lexer = new STLexer(STGroup.DEFAULT_ERR_MGR, new ANTLRStringStream(text), null, '$', '}');
@@ -197,10 +188,9 @@ public class SParserTest extends TestCase {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
 		CompiledST template = p.templateAndEOF();
-		System.out.println(template.toString());
 
 		//@formatter:off
-		String expected = "String tempalte(){\n" +
+		String expected = "String template(){\n" +
 				"	sb.append(template[0]());\n" +
 				"}\n";
 		//@formatter:on
@@ -208,7 +198,7 @@ public class SParserTest extends TestCase {
 		assertEquals(expected, template.toString());
 	}
 	
-	public void test_IncludeSubTempalte() throws IOException, RecognitionException {
+	public void test_IncludeSubtemplate() throws IOException, RecognitionException {
 
 		String text = "${name:{ssss}}";
 		STLexer lexer = new STLexer(STGroup.DEFAULT_ERR_MGR, new ANTLRStringStream(text), null, '$', '}');
@@ -216,10 +206,9 @@ public class SParserTest extends TestCase {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
 		CompiledST template = p.templateAndEOF();
-		System.out.println(template.toString());
 
 		//@formatter:off
-		String expected = "String tempalte(name){\n" +
+		String expected = "String template(name){\n" +
 				"	sb.append(template[0](name));\n" +
 				"}\n";
 		//@formatter:on
@@ -227,7 +216,7 @@ public class SParserTest extends TestCase {
 		assertEquals(expected, template.toString());
 	}
 
-	public void test_IncludeSubTempalteWithArgName() throws IOException, RecognitionException {
+	public void test_IncludeSubtemplateWithArgName() throws IOException, RecognitionException {
 
 		String text = "${name:{x| ${x}}}";
 		STLexer lexer = new STLexer(STGroup.DEFAULT_ERR_MGR, new ANTLRStringStream(text), null, '$', '}');
@@ -235,10 +224,9 @@ public class SParserTest extends TestCase {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SParser p = new SParser(tokens, nebula.simpletemplate.STGroup.defaultGroup);
 		CompiledST template = p.templateAndEOF();
-		System.out.println(template.toString());
 
 		//@formatter:off
-		String expected = "String tempalte(name){\n" +
+		String expected = "String template(name){\n" +
 				"	sb.append(template[0](name));\n" +
 				"}\n";
 		//@formatter:on

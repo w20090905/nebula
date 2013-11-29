@@ -31,7 +31,6 @@ public class TestCodeMap implements Action {
 			}
 			
 			if(o==null){
-				System.out.println("abc");
 			}
 			
 //			Person person=null;

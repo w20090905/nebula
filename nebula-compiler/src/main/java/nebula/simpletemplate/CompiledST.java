@@ -285,7 +285,6 @@ public class CompiledST {
 
 			for (int i = 0; i < dataList.size(); i++) {
 				argv[0] = dataList.get(i);
-//				System.out.println(this.name);
 				get(paramsNames, argv).exec(this.nativeGroup, this, sb, argv);
 			}
 
@@ -347,7 +346,7 @@ public class CompiledST {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("String tempalte");
+		sb.append("String template");
 		if (formalArguments.length > 0) {
 			sb.append("(");
 			for (String argName : formalArguments) {

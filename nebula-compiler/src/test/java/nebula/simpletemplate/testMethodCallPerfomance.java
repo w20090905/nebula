@@ -2,6 +2,7 @@ package nebula.simpletemplate;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class testMethodCallPerfomance extends TestCase {
 			nanoAll = end - start;
 			nanoEvery = nanoAll / MAX;
 
-			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+			System.out.printf("[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
 
@@ -50,7 +51,7 @@ public class testMethodCallPerfomance extends TestCase {
 			nanoAll = end - start;
 			nanoEvery = nanoAll / MAX;
 
-			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+			System.out.printf("[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
 		{
@@ -84,7 +85,7 @@ public class testMethodCallPerfomance extends TestCase {
 			nanoAll = end - start;
 			nanoEvery = nanoAll / MAX;
 
-			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+			System.out.printf("[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
 
@@ -113,7 +114,7 @@ public class testMethodCallPerfomance extends TestCase {
 			nanoAll = end - start;
 			nanoEvery = nanoAll / MAX;
 
-			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+			System.out.printf("[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
 		{
@@ -147,7 +148,7 @@ public class testMethodCallPerfomance extends TestCase {
 			nanoAll = end - start;
 			nanoEvery = nanoAll / MAX;
 
-			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+			System.out.printf("[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
 
@@ -166,7 +167,7 @@ public class testMethodCallPerfomance extends TestCase {
 			nanoAll = end - start;
 			nanoEvery = nanoAll / MAX;
 
-			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+			System.out.printf("[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
 		{
@@ -184,7 +185,7 @@ public class testMethodCallPerfomance extends TestCase {
 			nanoAll = end - start;
 			nanoEvery = nanoAll / MAX;
 
-			System.out.printf("[ %20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+			System.out.printf("[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
 	}

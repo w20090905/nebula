@@ -110,8 +110,8 @@ public abstract class TypeLoader {
 
 			types.addAll(typeList);
 
-			if (log.isTraceEnabled()) {
-				log.trace("\tload type define succeed - " + typeList.get(0).getName());
+			if (log.isDebugEnabled()) {
+				log.debug("[ " + typeList.get(0).getName() + " ] loaded succeed");
 			}
 			return typeList;
 		} catch (IOException e) {
@@ -131,7 +131,7 @@ public abstract class TypeLoader {
 			t.lastModified = this.lastModified;
 		}
 		if (log.isTraceEnabled()) {
-			log.trace("\tload type [" + typeList.get(0).getName() + "] succeed from reader ");
+			log.trace("[ " + typeList.get(0).getName() + " ] loaded succeed from reader ");
 		}
 		return typeList;
 	}
@@ -150,8 +150,8 @@ public abstract class TypeLoader {
 			topType.subTypes.add(type);
 		}
 		types.addAll(typeList);
-		if (log.isTraceEnabled()) {
-			log.trace("\tload type [" + typeList.get(0).getName() + "]  succeed  from url - " + typeList.get(0).url);
+		if (log.isDebugEnabled()) {
+			log.debug("[ " + typeList.get(0).getName() + " ] loaded succeed  from url - " + typeList.get(0).url);
 		}
 		return typeList;
 	}
@@ -202,24 +202,24 @@ public abstract class TypeLoader {
 				}
 				return type;
 			}
-			if (log.isDebugEnabled()) {
-				log.debug("[ " + ++cntLevel + " ] " + name + " - try     loadClassData within "
+			if (log.isTraceEnabled()) {
+				log.trace("[ " + ++cntLevel + " ] " + name + " - try     loadClassData within "
 						+ this.getClass().getName());
 			}
 			URL url = loadClassData(name);
 			if (url != null) {
 				List<TypeImp> typeList = defineNebula(url);
-				if (log.isDebugEnabled()) {
-					log.debug("loaded type [" + name + "]  \tfrom " + this.getClass().getName());
+				if (log.isTraceEnabled()) {
+					log.trace("loaded type [" + name + "]  \tfrom " + this.getClass().getName());
 				}
-				if (log.isDebugEnabled()) {
-					log.debug("[ " + cntLevel-- + " ] " + name + " - succeed loadClassData within "
+				if (log.isTraceEnabled()) {
+					log.trace("[ " + cntLevel-- + " ] " + name + " - succeed loadClassData within "
 							+ this.getClass().getName());
 				}
 				return typeList.get(0);
 			} else {
-				if (log.isDebugEnabled()) {
-					log.debug("[ " + cntLevel-- + " ] " + name + " - cannot   loadClassData within "
+				if (log.isTraceEnabled()) {
+					log.trace("[ " + cntLevel-- + " ] " + name + " - cannot   loadClassData within "
 							+ this.getClass().getName());
 				}
 				return null;

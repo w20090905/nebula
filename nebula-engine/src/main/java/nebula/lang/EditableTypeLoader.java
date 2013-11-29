@@ -53,7 +53,7 @@ public class EditableTypeLoader extends TypeLoader implements Runnable {
 	}
 
 	public void registerPath(File folder) {
-		this.paths.add(0, folder);
+		this.paths.add(folder);
 		if (log.isDebugEnabled()) {
 			log.debug("register folder - " + folder.getPath());
 		}
@@ -65,8 +65,8 @@ public class EditableTypeLoader extends TypeLoader implements Runnable {
 
 			for (File f : d.listFiles()) {
 				if (f.isFile() && f.getName().endsWith(".nebula")) {
-					if (log.isDebugEnabled()) {
-						log.debug("load type define from  - " + f.toURI().toURL());
+					if (log.isTraceEnabled()) {
+						log.trace("load : " + f.toURI().toURL());
 					}
 					URL url = f.toURI().toURL();
 					if (!loadedTypes.containsKey(url)) {
