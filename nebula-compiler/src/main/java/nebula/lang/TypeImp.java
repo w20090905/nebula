@@ -200,7 +200,7 @@ public class TypeImp implements Type {
 		this.lastModified = lastModified;
 	}
 
-	public List<Field> getActions() {
+	public List<Field> getDeclaredActions() {
 		return actions;
 	}
 
@@ -246,6 +246,23 @@ public class TypeImp implements Type {
 	@Override
 	public int hashCode() {
 		return this.name.hashCode();
+	}
+
+	@Override
+	public List<Field> getActions() {
+		List<Field> allActions = null;
+		if (this.superType == null) {
+			allActions = Lists.newArrayList();
+		} else {
+			allActions = this.superType.getActions();
+		}
+		allActions.addAll(this.actions);
+		return allActions;
+	}
+
+	@Override
+	public String getFullName() {
+		return this.superType!=null?this.superType.getFullName() + "." + this.name: this.name;
 	}
 
 }

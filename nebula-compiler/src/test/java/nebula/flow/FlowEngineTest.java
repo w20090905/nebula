@@ -1,7 +1,9 @@
 package nebula.flow;
 
 import junit.framework.TestCase;
+import nebula.lang.Field;
 import nebula.lang.Flow;
+import nebula.lang.NebulaClassLoader;
 import nebula.lang.NebulaLexer;
 import nebula.lang.NebulaParser;
 import nebula.lang.RuntimeContext;
@@ -19,11 +21,12 @@ public class FlowEngineTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		typeLoader = new TypeLoaderForFlowTest(new SystemTypeLoader());
-		
+
 	}
 
 	private Flow parseFlow(String text) {
 		try {
+			NebulaClassLoader.clear();
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, typeLoader);
@@ -46,8 +49,7 @@ public class FlowEngineTest extends TestCase {
 				"flow Issue { \n" +
 				"	[employee] Begin{ \n" +
 				"		Name;\n" +
-				"		Age :=0;\n" +
-				"		init(){this.Age=10;}\n" +
+				"		Age :=10;\n" +
 				"	};\n" +
 				"	[employee] Approve;\n" +
 				"	[employee] Approve;\n" +
@@ -67,6 +69,11 @@ public class FlowEngineTest extends TestCase {
 		assertEquals("Begin", engine.currentStep.getName());
 		assertNull(engine.data.get("Name"));
 		assertNull(engine.data.get("Age"));
+		for (Field field : engine.currentStep.getType().getActions()) {
+			if (!field.isInternal()) {
+				System.out.println("Action : " + field.getName());
+			}
+		}
 
 		// 录入数据，提交
 		engine.currentStepEntity.put("Name", name);
@@ -94,7 +101,7 @@ public class FlowEngineTest extends TestCase {
 		assertEquals(name, engine.data.get("Name"));
 		assertEquals(age, engine.data.get("Age"));
 	}
-//
+
 //	public final void testFlowEngine_Skip() {
 //		//@formatter:off
 //		String text = "" +
@@ -104,7 +111,7 @@ public class FlowEngineTest extends TestCase {
 //				"		Age :=0;\n" +
 //				"		init(){this.Age=10;}\n" +
 //				"	};\n" +
-//				"	[employee] Approve{ init(){skip();};\n" +
+//				"	[employee] Approve{ init(){}};\n" +
 //				"	[employee] Approve;\n" +
 //				"	[employee] End{ };\n" +
 //				"};\n";
@@ -149,17 +156,17 @@ public class FlowEngineTest extends TestCase {
 //		assertEquals(name, engine.data.get("Name"));
 //		assertEquals(age, engine.data.get("Age"));
 //	}
-	//
-	// public final void testStart() {
-	// fail("Not yet implemented"); 
-	// }
-	//
-	// public final void testStartSubmitString() {
-	// fail("Not yet implemented"); 
-	// }
-	//
-	// public final void testStartSubmit() {
-	// fail("Not yet implemented"); 
-	// }
+//
+//	public final void testStart() {
+//		fail("Not yet implemented");
+//	}
+//
+//	public final void testStartSubmitString() {
+//		fail("Not yet implemented");
+//	}
+//
+//	public final void testStartSubmit() {
+//		fail("Not yet implemented");
+//	}
 
 }

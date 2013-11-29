@@ -78,7 +78,7 @@ public class EntityClauseComplier implements Opcodes {
 	static long count = 0;
 
 	public String compile(Type type, Code code) {
-		String name = this.getClass().getSimpleName() + "_" + type.getName() + "_" + "_" + String.valueOf(count++);
+		String name = Clause.class.getSimpleName() + "_" + type.getName() + "_" + "_" + String.valueOf(count++);
 		try {
 			byte[] b = this.doCompile(name, code);
 			if (log.isDebugEnabled()) {

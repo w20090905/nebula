@@ -118,7 +118,7 @@ public class ActionComplier implements Opcodes {
 
 		actionName = actionName.replace('.', '_');
 
-		String name = this.getClass().getSimpleName() + "_" + NamesEncoding.encode(actionName, false) + "_" + String.valueOf(count++);
+		String name = Action.class.getSimpleName() + "_" + NamesEncoding.encode(actionName, false) + "_" + String.valueOf(count++);
 		try {
 			byte[] b = this.doCompile(name, template, context);
 			if (log.isDebugEnabled()) {

@@ -31,6 +31,9 @@ public class BrokerBuilder {
 		instanceBuilder = new BrokerInstanceBuilderClassMaker();
 	}
 
+	public void clear(){
+		knownBrokeres = ImmutableMap.of();
+	}
 	static int count = 0;
 	public <T> T builder(Class<?> target) {
 

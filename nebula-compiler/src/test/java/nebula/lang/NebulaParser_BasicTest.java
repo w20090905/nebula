@@ -22,6 +22,7 @@ public class NebulaParser_BasicTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		compiler = new TypeLoaderForTest(new SystemTypeLoader());
+		NebulaClassLoader.clear();
 	}
 
 	private TypeImp parseType(String text) {
@@ -141,6 +142,7 @@ public class NebulaParser_BasicTest extends TestCase {
 
 	private Field parseField(String text) {
 		try {
+			NebulaClassLoader.clear();
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, compiler);
@@ -198,7 +200,6 @@ public class NebulaParser_BasicTest extends TestCase {
 
 		assertEquals(new BigDecimal("1.3"), parseField("!MyAge Age := 1.3;").exprAsm.eval(null, null, null));
 		assertEquals(4 > 5, parseField("!MyAge Age := 4 > 5;").exprAsm.eval(null, null, null));
-
 	}
 
 	public void testFieldDefinition_derived() {

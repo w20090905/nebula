@@ -22,7 +22,7 @@ public class EntityActionComplier implements Opcodes {
 	static EntityActionComplier DEFAULT = new EntityActionComplier();
 
 	private EntityActionComplier() {
-		String name = this.getClass().getSimpleName() + "_nop_" + String.valueOf(count++);
+		String name = this.getClass().getSimpleName() + "_nop_";
 		try {
 			if (DONOTHING == null) {
 				byte[] code = doCompile(name, new Compiler.Block(new ArrayList<Statement>()), null);
@@ -82,13 +82,13 @@ public class EntityActionComplier implements Opcodes {
 		if (action.st instanceof Compiler.Block && ((Compiler.Block) action.st).statements.size() == 0) {
 			return DONOTHING;
 		}
-
-		String name = this.getClass().getSimpleName() + "_" + type.getName() + "_" + NamesEncoding.encode(actionName) + "_" + String.valueOf(count++);
+		String name = EntityAction.class.getSimpleName() + "_" + NamesEncoding.encode(type.getFullName(), false) + "_"
+				+ NamesEncoding.encode(actionName, false);
 		try {
 			byte[] b = this.doCompile(name, action, context);
 			if (log.isDebugEnabled()) {
 				try {
-					FileOutputStream fos = new FileOutputStream("tmp/" + name + ".class");
+					FileOutputStream fos = new FileOutputStream("tmp/" + name + "_" + String.valueOf(count++) + ".class");
 					fos.write(b);
 					fos.close();
 				} catch (FileNotFoundException e) {

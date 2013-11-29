@@ -5,6 +5,7 @@ import java.net.URL;
 
 import junit.framework.TestCase;
 import nebula.lang.EditableTypeLoader;
+import nebula.lang.NebulaClassLoader;
 import nebula.lang.SystemTypeLoader;
 import nebula.lang.TypeLoader;
 
@@ -24,6 +25,7 @@ public class AdempiereTest extends TestCase {
 	static final String DB_PASSWORD = "db_password";
 
 	protected void setUp() throws Exception {
+		NebulaClassLoader.clear();
 
 		// ROOT Folder
 		File root = null;

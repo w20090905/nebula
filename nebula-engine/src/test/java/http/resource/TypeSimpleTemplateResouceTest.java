@@ -16,6 +16,7 @@ import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.impl.TypeDatastore;
 import nebula.lang.EditableTypeLoader;
+import nebula.lang.NebulaClassLoader;
 import nebula.lang.SystemTypeLoader;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -51,6 +52,8 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 	// static final String DB_PASSWORD = "db_password";
 
 	protected void setUp() throws Exception {
+		NebulaClassLoader.clear();
+		Broker.clear();
 
 		// String driverclass = "org.apache.derby.jdbc.EmbeddedDriver";
 		// String dburl = "jdbc:derby:memory:eh;create = true";

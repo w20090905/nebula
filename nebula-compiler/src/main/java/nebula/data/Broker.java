@@ -15,6 +15,10 @@ import com.google.common.base.Preconditions;
 public abstract class Broker<T> implements BrokerHandler<T> {
 	protected Broker() {
 	}
+	
+	public  static void clear(){
+		brokerBuilder.clear();
+	}
 
 	final static Log log = LogFactory.getLog(Broker.class);
 	protected List<DataWatcher<T>> listeners;

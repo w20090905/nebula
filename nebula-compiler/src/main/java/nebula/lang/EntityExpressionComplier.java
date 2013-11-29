@@ -120,13 +120,14 @@ public class EntityExpressionComplier implements Opcodes {
 
 	static long count = 0;
 
-	public <T> EntityExpression compile(Type type, String actionName, Expr<T> exp) {
-		String name = this.getClass().getSimpleName() + "_" + type.getName() + "_" + NamesEncoding.encode(actionName) + "_" + String.valueOf(count++);
+	public <T> EntityExpression compile(Type type, String exprName, Expr<T> exp) {
+		String name = EntityExpression.class.getSimpleName() + "_" + NamesEncoding.encode(type.getFullName(), false) + "_"
+				+ NamesEncoding.encode(exprName, false);
 		try {
 			byte[] b = this.doCompile(name, exp);
 			if (log.isDebugEnabled()) {
 				try {
-					FileOutputStream fos = new FileOutputStream("tmp/" + name + ".class");
+					FileOutputStream fos = new FileOutputStream("tmp/" + name + "_" + String.valueOf(count++) + ".class");
 					fos.write(b);
 					fos.close();
 				} catch (FileNotFoundException e) {

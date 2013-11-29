@@ -40,8 +40,10 @@ public interface Type extends Timable {
 	public Field getKeyField();
 
 	public long getLastModified() ;
-	
+
 	public String getName() ;
+	
+	public String getFullName() ;
 
 	public Aliases getNameAlias();
 
