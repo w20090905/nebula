@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
+import nebula.lang.Code;
 import nebula.lang.Field;
 import nebula.lang.JsCallCompiler;
 import nebula.lang.JsCompiler;
@@ -148,6 +149,12 @@ public class TypeTemplateResouce extends AbstractResouce {
 			if (field.isDefaultValue()) {
 				field.getAttrs().put("DefaultExpression", JsCompiler.compiler(field.getCode(), "this", "data"));
 			}
+			if (field.getAttrs().containsKey(Field.DisplayOn)) {
+				field.getAttrs().put(Field.DisplayOn + "Expression", JsCompiler.compiler((Code)field.getAttrs().get(Field.DisplayOn), "this", "data"));
+			}
+			if (field.getAttrs().containsKey(Field.RequiredOn)) {
+				field.getAttrs().put(Field.RequiredOn + "Expression", JsCompiler.compiler((Code)field.getAttrs().get(Field.RequiredOn), "this", "data"));
+			}
 		}
 
 //		if (!type.getAttrs().containsKey("AjaxExpressionName")) {
@@ -164,6 +171,8 @@ public class TypeTemplateResouce extends AbstractResouce {
 			type.getAttrs().put("AjaxExpressionName", ctrlName);
 			type.getAttrs().put("AjaxExpression", sb.toString());
 //		}
+			
+			
 
 		return type;
 	}

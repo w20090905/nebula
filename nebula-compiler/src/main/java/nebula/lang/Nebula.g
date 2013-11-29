@@ -578,8 +578,13 @@ annotationListDefinition returns[InheritHashMap annotations]
 ;
 
 annotationItemDefinition[InheritHashMap annotations]
-    :   ID ('(' v=constValueDefinition ')')? NEWLINE?
-    {      
+    :   ID ('(' 
+    (
+    ('#' {enterMethod(currentType);}  v=expression {exitMethod();}  '#')
+    |  v=constValueDefinition
+    ) 
+    ')')? NEWLINE?
+    {
         if(v!=null)annotations.put($ID.text,v);
         else annotations.put($ID.text,$ID.text);
       }

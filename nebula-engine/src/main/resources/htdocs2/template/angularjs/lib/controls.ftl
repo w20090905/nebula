@@ -29,7 +29,7 @@
 			title="${field.displayName}"
 		[/#if]			
 	[/@compress][/#assign]
-	
+	[#assign opt][#if field.attrs.DisplayOn??]x-ng-show="${field.attrs.DisplayOnExpression}"[/#if][/#assign]
 	[#assign optReadonly][#if key && !field.attrs.Auto??] x-ng-readonly ="update"[#elseif key || field.derived] readonly [#elseif readonly]readonly[/#if][/#assign]
 	[#assign optValidateRule][@compress single_line=true]
 			[#if field.attrs.Min??		] min		="${field.attrs.Min}" 			[/#if]
@@ -37,35 +37,35 @@
 			[#if field.attrs.MinLength??] minLength	="${field.attrs.MinLength}" [/#if]
 			[#if field.attrs.MaxLength??] maxLength	="${field.attrs.MaxLength}" [/#if]
 	[/@compress][/#assign]
-	[#assign optRequired][#if key && !field.attrs.Auto??] x-ng-required ="update" [#elseif field.derived] [#elseif !key && required] required[/#if][/#assign]
+	[#assign optRequired][#if key && !field.attrs.Auto??] x-ng-required ="update" [#elseif field.derived] [#elseif field.attrs.RequiredOn??]x-ng-required="${field.attrs.RequiredOnExpression}" [#elseif !key && required] required[/#if][/#assign]
 	[#if field.type.attrs.SP?? &&  field.type.attrs.SP = "Attr"]
 		[#assign attrValues][@compress single_line=true]			
 			[#list (attrs[field.name].Values)![] as attr],{'name':'${attr.Name}'}[/#list]
 		[/@compress] [/#assign]
 		
-		<select id="${id}" x-ng-init="${id}values = [${attrValues?substring(1)}];"  ${ex}
+		<select id="${id}" x-ng-init="${id}values = [${attrValues?substring(1)}];"  ${ex} ${opt}
 				${optReadonly} ${optRequired}  ${optValidateRule} 	${optTitle}	 class="${optClass}"
 				x-ng-model="${ngModel}" x-ng-options="c.name as c.name for c in ${id}values" placeholder="${placeholder}">	
 			<option value="">-- 选择 ${field.displayName} --</option>
 		</select>
 	[#elseif field.attrs.FormatType! = "textarea"]
-		<textarea id="${id}"  x-ng-model="${ngModel}" rows="8" placeholder="${placeholder}"  ${ex}
+		<textarea id="${id}"  x-ng-model="${ngModel}" rows="8" placeholder="${placeholder}"  ${ex} ${opt} 
 			${optReadonly} ${optRequired}  ${optValidateRule} 	${optTitle}	 class="${optClass} input-xxlarge "
 			></textarea>		
 	[#elseif field.attrs.FormatType! = "checkbox"]
-		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
+		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex} ${opt} 
 				${optReadonly} ${optValidateRule} 	${optTitle}	 class="${optClass}"	
 			/>
 	[#elseif field.derived]
-		<input ${optType} id="${id}"  placeholder="${placeholder}"  ${ex}
+		<input ${optType} id="${id}"  placeholder="${placeholder}"  ${ex}  ${opt} 
 				readonly ${optTitle}	class="${optClass}"	value="{{${field.attrs.DerivedExpression}}}"
 			/>
 	[#elseif field.defaultValue]
-		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="{{${field.attrs.DefaultExpression}}}"  ${ex}
+		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="{{${field.attrs.DefaultExpression}}}"  ${ex}  ${opt} 
 				${optReadonly} ${optRequired}  ${optValidateRule} ${optTitle}	class="${optClass}"	
 			/>
 	[#else]
-		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}
+		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}  ${opt}
 				${optReadonly} ${optRequired}  ${optValidateRule} ${optTitle}	class="${optClass}"	
 			/>
 	[/#if]

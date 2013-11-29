@@ -381,4 +381,50 @@ public class NebulaParser_TypeTest extends TestCase {
 		assertEquals(new BigDecimal("3.8"), type.attrs.get("Max"));
 	}
 
+	public void test_type_attr_Code() throws Exception {
+		//@formatter:off
+		String text = "" +
+				"type Person { \n" +
+				"	Name;" +
+				"	Age;" +
+				"  @DisplayOn(#this.Age>0#)" +
+				"	AgeDefault Age;" +
+				"  @ReqiredOn(#this.Age>10#)" +
+				"	AgeDerived Age;" +
+				"};";
+		//@formatter:on
+
+		TypeImp type = (TypeImp) compiler.load(text);
+
+		assertEquals("Person", type.name);
+
+		int i = 0;
+		assertEquals("Name", type.fields.get(i).name);
+		i++;
+
+		assertEquals("Age", type.fields.get(i).name);
+		i++;
+
+		assertEquals("AgeDefault", type.fields.get(i).name);
+		assertEquals("(this.Age > 0)", String.valueOf(type.fields.get(i).attrs.get("DisplayOn")));
+		i++;
+
+		assertEquals("AgeDerived", type.fields.get(i).name);
+		assertEquals("(this.Age > 10)", String.valueOf(type.fields.get(i).attrs.get("ReqiredOn")));
+		i++;
+
+		assertEquals(i, type.fields.size());
+
+		// @formatter:off
+		/*
+            script: scriptDirective,
+            ngHide: ngHideDirective,
+            ngShow: ngShowDirective,
+            required: requiredDirective,
+            ngRequired: requiredDirective,
+            ngValue: ngValueDirective
+            */
+		  //@formatter:on
+	}
+
 }

@@ -4,13 +4,13 @@ type Person|人员 {
 	?Given-Name|名;
 	?Family-Name|姓;
 	?AlternateNames|别名[] Name;
-	?Description;
+	@RequiredOn(#this.Age>10#)?Description;
         Good YesNo;
 	Sex|性别 Attr;
 	?DateOfBirth|出生日期 Date;
 	?Age:=10;
         @ComputeBackend   AgeDerived Age=this.Age + 10;
-          AgeDefault Age:=this.Age+1;
+          @DisplayOn(#this.Age>10#) AgeDefault Age:=this.Age+1;
 	?Home{
 		Street Name;
 		Neighborhood String;

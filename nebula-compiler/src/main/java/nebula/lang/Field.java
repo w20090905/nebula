@@ -7,7 +7,9 @@ public class Field {
 	public static final String Heading = "Heading";
 	public static final String OnSave = "OnSave";
 	public static final String ComputeBackend = "ComputeBackend";
-
+	public static final String RequiredOn = "RequiredOn";
+	public static final String DisplayOn = "DisplayOn";
+		
 	final String name;
 	Aliases nameAlias;
 	int modifiers = 0;
