@@ -247,7 +247,7 @@ options {
       e.getKey().exprAsm = op.compile(e.getKey().getResideType(), e.getKey().name, (Expr<?>) e.getKey().code);
     }
     for (Map.Entry<Field, List<Statement>> e : cacheOnChange.entrySet()) {
-      e.getKey().onChangAsm = op.compileToJavaBytecode(e.getKey().getResideType(), e.getKey().name, (Compiler.Action) e.getKey().onChangeCode);
+      e.getKey().onChangeAsm = op.compileToJavaBytecode(e.getKey().getResideType(), e.getKey().name, (Compiler.Action) e.getKey().onChangeCode);
     }
     for (Field action : cachedActions) {
       action.actionAsm = op.compileToJavaBytecode(action.getResideType(), action.name, (Compiler.Action) action.code);
