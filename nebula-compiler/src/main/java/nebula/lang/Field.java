@@ -6,12 +6,15 @@ public class Field {
 	public static final String SingleLine = "SingleLine";
 	public static final String Heading = "Heading";
 	public static final String OnSave = "OnSave";
+	public static final String ComputeBackend = "ComputeBackend";
 
 	final String name;
 	Aliases nameAlias;
 	int modifiers = 0;
 
 	Code code;
+	Code onChangeCode;
+	EntityAction onChangeAsm;
 	EntityExpression exprAsm;
 	EntityAction actionAsm;
 
@@ -157,5 +160,9 @@ public class Field {
 
 	public EntityAction getActionAsm() {
 		return actionAsm;
+	}
+
+	public Code getOnChangeCode() {
+		return onChangeCode;
 	}
 }

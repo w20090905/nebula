@@ -31,6 +31,7 @@ options {
 
   Map<Field, Expr> derivedFields = new HashMap<Field, Expr>();
   List<Field> cachedActions = new ArrayList<Field>();
+  Map<Field, List<Statement>> cacheOnChange = new HashMap<Field, List<Statement>>();
 
   Compiler op = new Compiler(new CompilerContext() {
     @Override
@@ -111,8 +112,8 @@ options {
     currentType = null;
   }
 
-  protected void makeInitOnSaveAction() {
 
+  protected void makeInitOnSaveAction() {
     {// ctor
       Field field = new Field(currentType, Type.CTOR);
       field.internal = true;
@@ -129,8 +130,32 @@ options {
             Expr<Object> fieldof = op.opFieldOf(thisType, e.getKey().name);
             Statement statement = op.stPut(fieldof, e.getValue());
             stList.add(statement);
+            
+            {// onchange
+              Field cpField = e.getKey();
+              if (cpField.getAttrs().containsKey(Field.ComputeBackend)) {
+                CompilerContext cc = new CompilerContext() {
+                  @Override
+                  public Type resolveType(String name) {
+                    return this.resolveType(name);
+                  }
+                };
+                statement.scan(cc);
+
+                for (Field f : cc.refFields) {
+                  List<Statement> ss = cacheOnChange.get(f);
+                  if (ss != null) {
+                    ss.add(statement);
+                  } else {
+                    cacheOnChange.put(f, new ArrayList<Statement>());
+                    cacheOnChange.get(f).add(statement);
+                  }
+                }
+              }
+            }
           }
         }
+
         field.code = op.action(locals, op.stBlock(stList));
       }
       exitMethod();
@@ -138,7 +163,8 @@ options {
       cachedActions.add(field);
 
     }
-    { // on save
+    { // derived on save
+
       Field field = new Field(currentType, Type.ONSAVE);
       field.internal = true;
 
@@ -152,6 +178,7 @@ options {
           if (e.getKey().attrs.containsKey(Field.OnSave)) {
             Expr<Object> fieldof = op.opFieldOf(thisType, e.getKey().name);
             Statement statement = op.stPut(fieldof, e.getValue());
+
             stList.add(statement);
           }
         }
@@ -172,13 +199,40 @@ options {
       {
         Expr<Object> thisType = op.opLocal(v("this"));
         for (Map.Entry<Field, Expr> e : derivedFields.entrySet()) {
-          if (e.getKey().resideType != currentType) continue;
+          Field cpField = e.getKey();
+          if (cpField.resideType != currentType) continue;
 
-          if (e.getKey().isDerived()) {
+          if (cpField.isDerived()) {
             Expr<Object> fieldof = op.opFieldOf(thisType, e.getKey().name);
             Statement statement = op.stPut(fieldof, e.getValue());
             stList.add(statement);
+
+            {// onchange
+              if (cpField.getAttrs().containsKey(Field.ComputeBackend)) {
+                CompilerContext cc = new CompilerContext() {
+                  @Override
+                  public Type resolveType(String name) {
+                    return this.resolveType(name);
+                  }
+                };
+                statement.scan(cc);
+
+                for (Field f : cc.refFields) {
+                  List<Statement> ss = cacheOnChange.get(f);
+                  if (ss != null) {
+                    ss.add(statement);
+                  } else {
+                    cacheOnChange.put(f, new ArrayList<Statement>());
+                    cacheOnChange.get(f).add(statement);
+                  }
+                }
+              }
+            }
           }
+        }
+
+        for (Map.Entry<Field, List<Statement>> e : cacheOnChange.entrySet()) {
+          e.getKey().onChangeCode = op.action(locals, op.stBlock(e.getValue()));
         }
         field.code = op.action(locals, op.stBlock(stList));
       }
@@ -191,6 +245,9 @@ options {
   protected void exitTopType() {
     for (Map.Entry<Field, Expr> e : derivedFields.entrySet()) {
       e.getKey().exprAsm = op.compile(e.getKey().getResideType(), e.getKey().name, (Expr<?>) e.getKey().code);
+    }
+    for (Map.Entry<Field, List<Statement>> e : cacheOnChange.entrySet()) {
+      e.getKey().onChangAsm = op.compileToJavaBytecode(e.getKey().getResideType(), e.getKey().name, (Compiler.Action) e.getKey().onChangeCode);
     }
     for (Field action : cachedActions) {
       action.actionAsm = op.compileToJavaBytecode(action.getResideType(), action.name, (Compiler.Action) action.code);

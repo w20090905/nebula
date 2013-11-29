@@ -10,6 +10,7 @@ public class JsCompiler implements CompilerBase {
 
 	StringBuilder sb;
 	Map<String, String> locals;
+	
 
 	public JsCompiler(String... names) {
 		sb = new StringBuilder();

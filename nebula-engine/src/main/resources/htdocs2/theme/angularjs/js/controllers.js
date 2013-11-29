@@ -200,6 +200,13 @@ angular.module('nebula.controllers', []).
 	$scope.data = DataResource.get($routeParams,function() {
 		//$scope.$dataReady();
 	});
+	
+	$scope.$ajaxCall = function(params,onSucceed){
+		var callData = DataResource.get(params,function() {
+			onSucceed($scope,callData);
+		});
+	};
+	
 	$scope.update = true;
 	$scope.$save = function(action) {
 		var $action = 'save';

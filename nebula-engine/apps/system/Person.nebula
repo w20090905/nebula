@@ -9,7 +9,7 @@ type Person|人员 {
 	Sex|性别 Attr;
 	?DateOfBirth|出生日期 Date;
 	?Age:=10;
-          AgeDerived Age=this.Age + 10;
+        @ComputeBackend   AgeDerived Age=this.Age + 10;
           AgeDefault Age:=this.Age+1;
 	?Home{
 		Street Name;

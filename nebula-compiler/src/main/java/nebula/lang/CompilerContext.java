@@ -1,5 +1,11 @@
 package nebula.lang;
 
-public interface CompilerContext {
-	Type resolveType(String name);
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class CompilerContext {
+	public abstract Type resolveType(String name);
+	boolean isTopLevelGet = true;
+	List<Field> refFields = new ArrayList<Field>();
+	Field field;
 }

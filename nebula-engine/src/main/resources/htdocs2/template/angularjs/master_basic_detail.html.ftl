@@ -7,7 +7,8 @@
 [@nl.simple title="${type.displayName}"]
 					
 <!-- Start Form -->
-	<form name="form" class="form-horizontal" novalidate>
+ [#if type.attrs.AjaxExpression??]${type.attrs.AjaxExpression}[/#if]
+	<form name="form" class="form-horizontal" novalidate [#if type.attrs.AjaxExpressionName??]x-ng-controller="${type.attrs.AjaxExpressionName}"[/#if]>
 
 	[#list type.fields as of][#t]
 				[#if !of.array]

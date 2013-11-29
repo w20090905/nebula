@@ -214,6 +214,18 @@ public class TypeImp implements Type {
 
 		return null;
 	}
+	
+
+	public Field getField(String name) {
+		for (Field f : fields) {
+			if (name.equals(f.name)) {
+				return f;
+			}
+		}
+		if (this.superType != null) return this.superType.getField(name);
+
+		return null;		
+	}
 
 	public List<Type> getAttachedBy() {
 		return attachedBy;

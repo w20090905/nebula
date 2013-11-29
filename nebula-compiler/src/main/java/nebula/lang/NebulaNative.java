@@ -41,6 +41,13 @@ public class NebulaNative {
 		if (sysInitAction != null) sysInitAction.actionAsm.exec(context, dataRepos, entity);
 	}
 
+	public static void execOnChangeMethod(RuntimeContext context, DataRepos dataRepos, Entity entity, Type type, String methodName) {
+		if (type.getSuperType() != null) execOnChangeMethod(context, dataRepos, entity, type.getSuperType(), methodName);
+		// TODO
+		Field onchange = type.getField(methodName);
+		if (onchange != null) onchange.onChangeAsm.exec(context, dataRepos, entity);
+	}
+
 	public static void ctor(RuntimeContext context, DataRepos dataRepos, Entity entity, Type type) {
 		execMethod(context, dataRepos, entity, type, Type.CTOR);
 	}

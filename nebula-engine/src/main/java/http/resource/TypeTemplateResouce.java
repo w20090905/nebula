@@ -16,6 +16,7 @@ import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.lang.Field;
+import nebula.lang.JsCallCompiler;
 import nebula.lang.JsCompiler;
 import nebula.lang.Type;
 import freemarker.cache.TemplateLoader;
@@ -148,6 +149,22 @@ public class TypeTemplateResouce extends AbstractResouce {
 				field.getAttrs().put("DefaultExpression", JsCompiler.compiler(field.getCode(), "this", "data"));
 			}
 		}
+
+//		if (!type.getAttrs().containsKey("AjaxExpressionName")) {
+			StringBuilder sb = new StringBuilder();
+			String ctrlName = type.getName() + "_OnChangeCtrl";
+			sb.append("<script>function " + ctrlName + "($scope){var doCall = function( $scope ){");
+			for (int i = 0; i < fields.size(); i++) {
+				Field field = fields.get(i);
+				if (field.getOnChangeCode() != null) {
+					sb.append(JsCallCompiler.compiler("data." + field.getName(), field.getOnChangeCode(), "this", "data"));
+				}
+			}
+			sb.append("};doCall( $scope.$parent );}</script>");
+			type.getAttrs().put("AjaxExpressionName", ctrlName);
+			type.getAttrs().put("AjaxExpression", sb.toString());
+//		}
+
 		return type;
 	}
 }

@@ -22,6 +22,7 @@ public interface Type extends Timable {
 	public static String ROOT_TYPE = "T";
 
 	public Field getActionByName(String name) ;
+	public Field getField(String name);
 
 	public List<Field> getActions() ;
 

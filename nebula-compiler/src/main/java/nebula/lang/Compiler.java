@@ -303,7 +303,6 @@ public class Compiler {
 		public T eval() {
 			throw new UnsupportedOperationException();
 		}
-
 	}
 
 	static class FieldOf extends Expression<Object> {
@@ -327,11 +326,28 @@ public class Compiler {
 
 		@Override
 		public void scan(CompilerContext context) {
-			entity.scan(context);
-			Type type = entity.getType();
-			for (Field f : type.getFields()) {
-				if (f.name.equals(name)) {
-					this.fieldType = f.getType();
+			if (context.isTopLevelGet) {
+				context.isTopLevelGet = false;
+				entity.scan(context);
+				Type type = entity.getType();
+				for (Field f : type.getFields()) {
+					if (f.name.equals(name)) {
+						this.fieldType = f.getType();
+						context.field = f;
+						break;
+					}
+				}
+				context.refFields.add(context.field);
+				context.isTopLevelGet = true;
+			} else {
+				entity.scan(context);
+				Type type = entity.getType();
+				for (Field f : type.getFields()) {
+					if (f.name.equals(name)) {
+						this.fieldType = f.getType();
+						context.field = f;
+						break;
+					}
 				}
 			}
 		}
@@ -676,14 +692,31 @@ public class Compiler {
 
 		@Override
 		public void scan(CompilerContext context) {
-			entity.scan(context);
-			Type type = entity.getType();
-			for (Field f : type.getFields()) {
-				if (f.name.equals(name)) {
-					this.fieldType = f.getType();
+			if (context.isTopLevelGet) {
+				context.isTopLevelGet = false;
+				
+				entity.scan(context);
+				Type type = entity.getType();
+				for (Field f : type.getFields()) {
+					if (f.name.equals(name)) {
+						this.fieldType = f.getType();
+						context.field = f;
+					}
 				}
+				context.isTopLevelGet = true;
+				
+				value.scan(context);
+				
+			} else {
+				entity.scan(context);
+				Type type = entity.getType();
+				for (Field f : type.getFields()) {
+					if (f.name.equals(name)) {
+						this.fieldType = f.getType();
+					}
+				}
+				value.scan(context);
 			}
-			value.scan(context);
 		}
 
 		@Override
