@@ -13,6 +13,9 @@ public interface CompilerBase {
 
 	public void call(Expr<Object> value);
 
+	public void stIf(Expr<Object> expr, final Statement stIf, final Statement stElse);
+	public void stIf(Expr<Object> expr, final Statement stIf);
+
 	public void callMethod(Expr<Entity> e1, String name);
 
 	public void conditional(Operator op, Expr<Boolean> e1, Expr<Boolean> e2);

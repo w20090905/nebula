@@ -630,10 +630,17 @@ statements returns [List<Statement> statments]
 
 statement returns [Statement s]:
   stBlock = block   {s = stBlock;}
+  | stIf=ifStatement {s = stIf;}
   | stVar=varDeclaration {s = stVar;}
   | stExpr=exprStatement {s = stExpr;}
   ;
   
+ifStatement returns [Statement s]:
+     'if' '(' e=expression ')' st=statement
+      ('else' se=statement)?
+      {s = op.stIf(e,st,se);}
+    ; 
+    
 varDeclaration returns [Statement s]:
   type=ID name=ID ('=' from=expression)? (';' (NEWLINE)?|NEWLINE) 
     {

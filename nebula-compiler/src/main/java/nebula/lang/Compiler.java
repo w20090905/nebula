@@ -136,6 +136,39 @@ public class Compiler {
 		}
 	}
 
+	// TODO Not realized CallStatment
+	static class IfStatment implements Opcodes, Statement {
+		final Expr<Object> expr;
+		final Statement stIf;
+		final Statement stElse;
+
+		IfStatment(Expr<Object> expr, final Statement stIf, final Statement stElse) {
+			this.expr = expr;
+			this.stIf = stIf;
+			this.stElse = stElse;
+		}
+
+		public void compile(CompilerBase compiler) {
+			if (stElse != null) {
+				compiler.stIf(expr, stIf, stElse);
+			} else {
+				compiler.stIf(expr, stIf);
+			}
+		}
+
+		@Override
+		public void scan(CompilerContext context) {
+			expr.scan(context);
+			stIf.scan(context);
+			if (stElse != null) stElse.scan(context);
+		}
+
+		@Override
+		public String toString() {
+			return "if(" + expr.toString() + ")" + stIf.toString() + (stElse != null ? stElse.toString() : "") + ";";
+		}
+	}
+
 	/**
 	 * A logical "and" expression.
 	 */
@@ -1024,15 +1057,15 @@ public class Compiler {
 		}
 	}
 
-//	public final static int CONTEXT = 1;
-//
+	// public final static int CONTEXT = 1;
+	//
 	public final static int PARAMS = 4;
-//
-//	public final static int REPOS = 2;
-//
-//	public final static int SYSTEM_THIS = 0;
-//
-//	public final static int THIS = 3;
+	//
+	// public final static int REPOS = 2;
+	//
+	// public final static int SYSTEM_THIS = 0;
+	//
+	// public final static int THIS = 3;
 
 	CompilerContext context;
 
@@ -1195,6 +1228,10 @@ public class Compiler {
 
 	public Statement stCall(Expr<Object> e1) {
 		return new CallStatment(e1);
+	}
+
+	public Statement stIf(Expr<Object> expr, final Statement stIf, final Statement stElse) {
+		return new IfStatment(expr, stIf, stElse);
 	}
 
 	public Statement stPut(Expr<Object> field, Expr<Object> value) {

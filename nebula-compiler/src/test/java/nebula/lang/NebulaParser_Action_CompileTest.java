@@ -102,6 +102,44 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 		eqValue("Age", 30L * 10L, "Test(){this.Age = this.Age * 10;};");
 		eqValue("Height", Height + Height / 10 - 1, "Test(){this.Height=this.Height +  this.Height / 10 - 1;};");
 	}
+	
+	public void testIf() {
+		data = new EditableEntity();
+		String Name = "wangshilian";
+		data.put("Name", Name);
+
+		long Age = 10;
+		long Height = 120;
+		
+		data.put("Age", Age);
+		data.put("Height", Height);
+		eqValue("Age", 30L, "Test(){ if(this.Age==10)this.Age=30;else this.Age=300;};");
+
+		data.put("Age", Age);
+		data.put("Height", Height);
+		eqValue("Age", 300L, "Test(){ if(this.Age!=10)this.Age=30;else this.Age=300;};");
+
+
+		data.put("Age", Age);
+		data.put("Height", Height);
+		eqValue("Age", 30L, "Test(){ if(this.Age==10){this.Age=30;}else this.Age=300;};");
+
+		data.put("Age", Age);
+		data.put("Height", Height);
+		eqValue("Age", 300L, "Test(){ if(this.Age!=10)this.Age=30;else{this.Age=300;}};");
+
+		data.put("Age", Age);
+		data.put("Height", Height);
+		eqValue("Age", 300L, "Test(){ if(this.Age!=10){this.Age=30;}else{this.Age=300;}};");
+
+		data.put("Age", Age);
+		data.put("Height", Height);
+		eqValue("Age", 30L, "Test(){ if(this.Age==10)this.Age=30;};");
+
+		data.put("Age", Age);
+		data.put("Height", Height);
+		eqValue("Age",Age, "Test(){ if(this.Age!=10)this.Age=30;};");
+	}
 
 	public void testTypeDefinition_Repos_getByIndex() {
 		EditableEntity person = new EditableEntity();

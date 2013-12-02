@@ -10,17 +10,16 @@ public class JsCompiler implements CompilerBase {
 
 	StringBuilder sb;
 	Map<String, String> locals;
-	
 
 	public JsCompiler(String... names) {
 		sb = new StringBuilder();
-		locals  = new HashMap<String, String>();
-		for (int i = 0; i < names.length; i+=2) {
-			locals.put(names[i], names[i+1]);
+		locals = new HashMap<String, String>();
+		for (int i = 0; i < names.length; i += 2) {
+			locals.put(names[i], names[i + 1]);
 		}
 	}
-	
-	public static String compiler(Code code,String... names){
+
+	public static String compiler(Code code, String... names) {
 		JsCompiler c = new JsCompiler(names);
 		code.compile(c);
 		return c.sb.toString();
@@ -248,11 +247,29 @@ public class JsCompiler implements CompilerBase {
 
 	@Override
 	public void varRefer(Var var) {
-		sb.append( locals.get(var.name));
+		sb.append(locals.get(var.name));
 	}
 
 	@Override
 	public String toString() {
 		return sb.toString();
+	}
+
+	@Override
+	public void stIf(Expr<Object> expr, Statement stIf, Statement stElse) {
+		sb.append("if(");
+		expr.compile(this);
+		sb.append(')');
+		stIf.compile(this);
+		sb.append("else");
+		stElse.compile(this);
+	}
+
+	@Override
+	public void stIf(Expr<Object> expr, Statement stIf) {
+		sb.append("if(");
+		expr.compile(this);
+		sb.append(')');
+		stIf.compile(this);
 	}
 }

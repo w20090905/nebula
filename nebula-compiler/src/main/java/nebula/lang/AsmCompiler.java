@@ -432,4 +432,27 @@ public class AsmCompiler implements Opcodes, CompilerBase {
 	public void varRefer(Var var) {
 		mv.visitVarInsn(ALOAD, var.index);
 	}
+
+	@Override
+	public void stIf(Expr<Object> expr, Statement stIf, Statement stElse) {
+		expr.compile(this);
+		Label ifFalse = new Label();
+		Label ifEnd = new Label();
+		mv.visitJumpInsn(IFEQ, ifFalse); // if false goto iffalse
+		stIf.compile(this);
+		mv.visitJumpInsn(GOTO, ifEnd);
+		mv.visitLabel(ifFalse);
+		stElse.compile(this);
+		mv.visitLabel(ifEnd);
+	}
+
+	@Override
+	public void stIf(Expr<Object> expr, Statement stIf) {
+		expr.compile(this);
+		Label ifEnd = new Label();
+		mv.visitJumpInsn(IFEQ, ifEnd); // if false goto iffalse
+		stIf.compile(this);
+		mv.visitLabel(ifEnd);
+
+	}
 }
