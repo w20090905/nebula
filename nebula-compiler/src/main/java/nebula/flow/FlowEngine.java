@@ -25,13 +25,18 @@ public class FlowEngine {
 	}
 
 	void start() {
-		stepIn(flow.getSteps().get(Step.Begin));
 		data = new EditableEntity();
+		stepIn(flow.getSteps().get(Step.Begin));
 	}
 
 	void stepIn(Step step) {
 		currentStep = step;
 		currentStepEntity = new EditableEntity();
+
+		// copy data from flow
+		for (Field f : currentStep.getType().getFields()) {
+			currentStepEntity.put(f.getName(), data.get(f.getName()));
+		}
 
 		NebulaNative.ctor(context, datarepos, currentStepEntity, step.getType());
 
@@ -57,6 +62,7 @@ public class FlowEngine {
 	}
 
 	void stepSubmit(String actionName) {
+		// copy data to flow
 		for (Field f : currentStep.getType().getFields()) {
 			data.put(f.getName(), currentStepEntity.get(f.getName()));
 			System.out.println("entity." + f.getName() + " = this." + f.getName());

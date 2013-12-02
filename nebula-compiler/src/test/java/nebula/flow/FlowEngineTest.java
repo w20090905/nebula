@@ -112,8 +112,9 @@ public class FlowEngineTest extends TestCase {
 				"		init(){this.Age=10;}\n" +
 				"	};\n" +
 				"	[employee] Approve{ \n" +
+				"		Age;" +
 				"	init() {\n" +
-				" 		this.skip();\n" +
+				" 		if(this.Age==10)this.skip();\n" +
 				"	};\n" +
 				"};\n" +
 				"	[employee] Approve;\n" +
