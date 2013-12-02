@@ -2,7 +2,6 @@ package nebula.simpletemplate;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -88,7 +87,64 @@ public class testMethodCallPerfomance extends TestCase {
 			System.out.printf("[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
 					1000 * 1000 * 1000 / nanoEvery);
 		}
+		{
+			String desc = "new class";
+			// setUp
 
+
+			// prepare
+			long start, end, nanoAll, nanoEvery;
+
+			start = System.nanoTime();
+			for (int i = 0; i < MAX; i++) {
+//				name = (String) new Caller().call(p);
+				new Caller();
+			}
+			end = System.nanoTime();
+			nanoAll = end - start;
+			nanoEvery = nanoAll / MAX;
+
+			System.out.printf("[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+					1000 * 1000 * 1000 / nanoEvery);
+		}
+		{
+			String desc = "new call";
+			// setUp
+
+			// prepare
+			long start, end, nanoAll, nanoEvery;
+
+			start = System.nanoTime();
+			for (int i = 0; i < MAX; i++) {
+				name = (String) new Caller().call(p);
+			}
+			end = System.nanoTime();
+			nanoAll = end - start;
+			nanoEvery = nanoAll / MAX;
+
+			System.out.printf("[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+					1000 * 1000 * 1000 / nanoEvery);
+		}
+		{
+			String desc = "static instance call";
+			// setUp
+
+
+			// prepare
+			long start, end, nanoAll, nanoEvery;
+
+			start = System.nanoTime();
+			for (int i = 0; i < MAX; i++) {
+//				name = (String) new Caller().call(p);
+				Caller.instance.call(p);
+			}
+			end = System.nanoTime();
+			nanoAll = end - start;
+			nanoEvery = nanoAll / MAX;
+
+			System.out.printf("[ %-20s ]    All :%8d ms;    every : %8d nano;    one second : %8d times;\n", desc, (nanoAll / (1000 * 1000)), +nanoEvery,
+					1000 * 1000 * 1000 / nanoEvery);
+		}
 		{
 			String desc = "map get";
 			// setUp
@@ -193,4 +249,11 @@ public class testMethodCallPerfomance extends TestCase {
 	interface Call {
 		Object call(Object obj);
 	}
+	static class Caller implements Call {
+		static Call instance = new Caller();
+		@Override
+		public Object call(Object obj) {
+			return ((Person) obj).getName();
+		}
+	};
 }

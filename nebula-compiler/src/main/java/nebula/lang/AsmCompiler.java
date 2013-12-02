@@ -63,18 +63,16 @@ public class AsmCompiler implements Opcodes, CompilerBase {
 	public void callMethod(Expr<Entity> e1, String actionName) {
 		Type type = e1.getType();
 		type = type.getActionByName(actionName).getResideType();
-		
+
 		String name = EntityAction.class.getSimpleName() + "_" + NamesEncoding.encode(type.getFullName(), false) + "_"
 				+ NamesEncoding.encode(actionName, false);
 		String internalName = name.replace('.', '/');
 
-		mv.visitTypeInsn(NEW, internalName);
-		mv.visitInsn(DUP);
-		mv.visitMethodInsn(INVOKESPECIAL, internalName, "<init>", "()V");
+		mv.visitFieldInsn(GETSTATIC, internalName, "instance", "Lnebula/lang/EntityAction;");
 		mv.visitVarInsn(ALOAD, 1);
 		mv.visitVarInsn(ALOAD, 2);
 		e1.compile(this);
-		mv.visitMethodInsn(INVOKEVIRTUAL, internalName, "exec", "(Lnebula/lang/RuntimeContext;Lnebula/data/DataRepos;Lnebula/data/Entity;)V");
+		mv.visitMethodInsn(INVOKEINTERFACE, "nebula/lang/EntityAction", "exec", "(Lnebula/lang/RuntimeContext;Lnebula/data/DataRepos;Lnebula/data/Entity;)V");
 	}
 
 	@Override
