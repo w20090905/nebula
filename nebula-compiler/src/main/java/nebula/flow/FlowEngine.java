@@ -44,11 +44,13 @@ public class FlowEngine {
 		Preconditions.checkNotNull(action);
 		action.getActionAsm().exec(context, datarepos, currentStepEntity);
 
-		if ((Boolean) currentStepEntity.get(Step.DoItNow) != null && (Boolean) currentStepEntity.get(Step.DoItNow)) {
-			String next = (String) currentStepEntity.get(Step.NextStep);
+		if ((Boolean) currentStepEntity.get(Step.Field_DoItNow) != null && (Boolean) currentStepEntity.get(Step.Field_DoItNow)) {
+			String next = (String) currentStepEntity.get(Step.Field_NextStep);
 			Step nextStep = null;
 			if (Step.Next.equals(next)) {
 				nextStep = flow.getSteps().get(currentStep.getIndex() + 1);
+			} else if (Step.Previous.equals(next)) {
+				nextStep = flow.getSteps().get(currentStep.getIndex() - 1);
 			} else {
 				nextStep = flow.getSteps().get(next);
 			}
@@ -72,8 +74,8 @@ public class FlowEngine {
 		Preconditions.checkNotNull(action);
 		action.getActionAsm().exec(context, datarepos, currentStepEntity);
 
-		if ((Boolean) currentStepEntity.get(Step.DoItNow) != null && (Boolean) currentStepEntity.get(Step.DoItNow)) {
-			String next = (String) currentStepEntity.get(Step.NextStep);
+		if ((Boolean) currentStepEntity.get(Step.Field_DoItNow) != null && (Boolean) currentStepEntity.get(Step.Field_DoItNow)) {
+			String next = (String) currentStepEntity.get(Step.Field_NextStep);
 			Step nextStep = null;
 			if (Step.Next.equals(next)) {
 				nextStep = flow.getSteps().get(currentStep.getIndex() + 1);

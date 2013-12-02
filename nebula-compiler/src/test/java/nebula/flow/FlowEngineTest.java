@@ -71,7 +71,7 @@ public class FlowEngineTest extends TestCase {
 		assertNull(engine.data.get("Age"));
 		for (Field field : engine.currentStep.getType().getActions()) {
 			if (!field.isInternal()) {
-				System.out.println("Action : " + field.getName());
+				System.out.println("Action : " + field.getDisplayName());
 			}
 		}
 

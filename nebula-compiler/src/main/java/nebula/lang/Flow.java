@@ -41,15 +41,20 @@ public class Flow extends TypeImp {
 
 	public class Step implements Timable {
 		// Runtime Field
-		public final static String NextStep = "NextStep";
-		public final static String DoItNow = "DoItNow";
+		public final static String Field_NextStep = "NextStep";
+		public final static String Field_DoItNow = "DoItNow";
+		
+		
 		// Actions
 		public final static String Init = "init";
 		public final static String Submit = "submit";
 		
 		// Steps
 		public final static String Begin = "Begin";
+		public final static String Previous = "Previous";
 		public final static String Next = "Next";
+		public final static String Cancel = "Cancel";
+		public final static String Terminal = "Terminal";
 		public final static String End = "End";
 		
 		final Flow resideFlow;

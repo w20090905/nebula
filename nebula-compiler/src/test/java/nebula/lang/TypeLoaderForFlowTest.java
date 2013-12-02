@@ -6,6 +6,8 @@ import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import nebula.lang.Flow.Step;
+
 import org.antlr.runtime.RecognitionException;
 
 public class TypeLoaderForFlowTest extends TypeLoader {
@@ -18,31 +20,43 @@ public class TypeLoaderForFlowTest extends TypeLoader {
 			parent.defineNebula(new StringReader(
 //@formatter:off
 				"type Step {" +
-				"		@Runtime NextStep String := \"Next\";" +
-				"		@Runtime DoItNow YesNo := false;" +
-				"		@Runtime init(){" +
+				"		<NextStep> String := \"" + Step.Next + "\";" +
+				"		<DoItNow> YesNo := false;" +
+				"		<init>(){" +
 				"		}; " +
-				"		@Runtime next(){" +
+				"		<next>(){" +
 				"			this.DoItNow = true;" +
 				"		};" +
-				"		@Runtime end(){" +
+				"		<previous>(){" +
+				"			this.DoItNow = true;" +
+				"			this.NextStep = \"" + Step.Previous + "\";" +
+				"		};" +
+				"		<end>(){" +
 				"			this.NextStep = \"End\";" +
 				"			this.DoItNow = true;" +
 				"		};" +
-				"		@Runtime skip(){" +
-				"			this.NextStep = \"Next\";" +
+				"		<skip>(){" +
+				"			this.NextStep = \"" + Step.Next + "\";" +
 				"			this.DoItNow = true;" +
 				"		};" +
-				"		@Runtime submit(){" +
+				"		<terminal>(){" +
+				"			this.NextStep = \"" + Step.Terminal + "\";" +
+				"			this.DoItNow = true;" +
+				"		};" +
+				"		<cancel>(){" +
+				"			this.NextStep = \"" + Step.Cancel + "\";" +
+				"			this.DoItNow = true;" +
+				"		};" +
+				"		<submit>(){" +
 				"			this.DoItNow = true;" +
 				"		};" +
 				"};"
 			//@formatter:on
 			));
 
-			parent.defineNebula(new StringReader("type Begin extends Step { };"));
+			parent.defineNebula(new StringReader("type Begin extends Step {" + "		submit | 提交(){" + "			this.next();" + "		};" + " };"));
 			parent.defineNebula(new StringReader("type End extends Step { @Runtime submit(){}; };"));
-			parent.defineNebula(new StringReader("type Approve extends Step {};"));
+			parent.defineNebula(new StringReader("type Approve extends Step {" + "		submit | 通过(){" + "			this.next();" + "		};" + "};"));
 
 		} catch (RecognitionException e) {
 			log.error(e);
