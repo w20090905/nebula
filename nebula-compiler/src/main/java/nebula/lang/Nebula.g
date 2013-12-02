@@ -439,7 +439,10 @@ fieldDefinition[TypeImp resideType] returns[Field field]
     :   (annotations = annotationListDefinition)?  
         modifiers=fieldImportance
         inline=inlineDefinition
-        name=ID ('-' qtype=ID)?  
+        (
+        signInternal='<' name=ID ('-' qtype=ID)? '>'
+        | name=ID ('-' qtype=ID)? 
+        )  
         /* Aliases */
          ('|' aliases=aliasesLiteral[$name.text])?
        
@@ -450,10 +453,11 @@ fieldDefinition[TypeImp resideType] returns[Field field]
               } else {
                   field = new Field(resideType,$name.text);
               }
+              if($signInternal!=null) field.internal = true;
           }       
                 
         /* Actions */
-        ( '()' { enterMethod(currentType);} action=block {  field.code =op.action(locals,action);  cachedActions.add(field); exitMethod();} )?
+        ( '()' { enterMethod(currentType);} action=block { field.code =op.action(locals,action);  cachedActions.add(field); exitMethod();} )?
         /* Array? */
         range=arrayDefinition
         
