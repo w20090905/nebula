@@ -247,11 +247,6 @@ public class JsCompiler implements CompilerBase {
 	}
 
 	@Override
-	public void typeRefer(String name) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	public void varRefer(Var var) {
 		sb.append( locals.get(var.name));
 	}

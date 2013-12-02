@@ -644,7 +644,7 @@ varDeclaration returns [Statement s]:
 
 exprStatement returns [Statement s]
     :   expr=postfixExpr
-        ('=' from=expression  )? (';' NEWLINE?|NEWLINE) {if(from!=null) s=op.stPut(expr,from);else op.stCall(expr);}
+        ('=' from=expression  )? (';' NEWLINE?|NEWLINE) {if(from!=null) s=op.stPut(expr,from);else s=op.stCall(expr);}
     ;
 
 paramList:

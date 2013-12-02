@@ -20,13 +20,13 @@ public class FlowEngineTest extends TestCase {
 	};
 
 	protected void setUp() throws Exception {
+		NebulaClassLoader.clear();
 		typeLoader = new TypeLoaderForFlowTest(new SystemTypeLoader());
 
 	}
 
 	private Flow parseFlow(String text) {
 		try {
-			NebulaClassLoader.clear();
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, typeLoader);
@@ -102,60 +102,64 @@ public class FlowEngineTest extends TestCase {
 		assertEquals(age, engine.data.get("Age"));
 	}
 
-//	public final void testFlowEngine_Skip() {
-//		//@formatter:off
-//		String text = "" +
-//				"flow Issue { \n" +
-//				"	[employee] Begin{ \n" +
-//				"		Name;\n" +
-//				"		Age :=0;\n" +
-//				"		init(){this.Age=10;}\n" +
-//				"	};\n" +
-//				"	[employee] Approve{ init(){}};\n" +
-//				"	[employee] Approve;\n" +
-//				"	[employee] End{ };\n" +
-//				"};\n";
-//		//@formatter:on		
-//
-//		String name = "wangshilian";
-//		Long age = 10L;
-//		Flow flow = parseFlow(text);
-//
-//		FlowEngine engine = new FlowEngine(context, flow);
-//		// 启动流程
-//		engine.start();
-//
-//		// 初始画面
-//		assertEquals("Begin", engine.currentStep.getName());
-//		assertNull(engine.data.get("Name"));
-//		assertNull(engine.data.get("Age"));
-//
-//		// 录入数据，提交
-//		engine.currentStepEntity.put("Name", name);
-//		engine.currentStepEntity.put("Age", age);
-//		engine.stepSubmit();
-//
-//		// 进入审批画面
+	public final void testFlowEngine_Skip() {
+		//@formatter:off
+		String text = "" +
+				"flow Issue { \n" +
+				"	[employee] Begin{ \n" +
+				"		Name;\n" +
+				"		Age :=0;\n" +
+				"		init(){this.Age=10;}\n" +
+				"	};\n" +
+				"	[employee] Approve{ \n" +
+				"	init() {\n" +
+				" 		this.skip();\n" +
+				"	};\n" +
+				"};\n" +
+				"	[employee] Approve;\n" +
+				"	[employee] End{ };\n" +
+				"};\n";
+		//@formatter:on		
+
+		String name = "wangshilian";
+		Long age = 10L;
+		Flow flow = parseFlow(text);
+
+		FlowEngine engine = new FlowEngine(context, flow);
+		// 启动流程
+		engine.start();
+
+		// 初始画面
+		assertEquals("Begin", engine.currentStep.getName());
+		assertNull(engine.data.get("Name"));
+		assertNull(engine.data.get("Age"));
+
+		// 录入数据，提交
+		engine.currentStepEntity.put("Name", name);
+		engine.currentStepEntity.put("Age", age);
+		engine.stepSubmit();
+
+		// 跳过第一级审批画面
 //		assertEquals("Approve", engine.currentStep.getName());
 //		assertEquals(name, engine.data.get("Name"));
 //		assertEquals(age, engine.data.get("Age"));
-//
-//		// 审批通过
+
+		// 审批通过
 //		engine.stepSubmit();
-//
-//		// 进入审批画面
-//		assertEquals("Approve2", engine.currentStep.getName());
-//		assertEquals(name, engine.data.get("Name"));
-//		assertEquals(age, engine.data.get("Age"));
-//
-//		// 审批通过
-//		engine.stepSubmit();
-//
-//		// 进入结束Step
-//		assertEquals("End", engine.currentStep.getName());
-//		assertEquals(name, engine.data.get("Name"));
-//		assertEquals(age, engine.data.get("Age"));
-//	}
+
+		// 进入第二级审批画面
+		assertEquals("Approve2", engine.currentStep.getName());
+		assertEquals(name, engine.data.get("Name"));
+		assertEquals(age, engine.data.get("Age"));
+
+		// 审批通过
+		engine.stepSubmit();
+
+		// 进入结束Step
+		assertEquals("End", engine.currentStep.getName());
+		assertEquals(name, engine.data.get("Name"));
+		assertEquals(age, engine.data.get("Age"));
+	}
 //
 //	public final void testStart() {
 //		fail("Not yet implemented");

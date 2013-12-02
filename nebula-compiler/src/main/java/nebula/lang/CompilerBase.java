@@ -69,7 +69,5 @@ public interface CompilerBase {
 
 	public void setField(Expr<Object> parent, String name, Type fieldType, Expr<Object> value);
 
-	public void typeRefer(String name);
-
 	public void varRefer(Var var);
 }

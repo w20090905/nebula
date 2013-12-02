@@ -67,10 +67,6 @@ public class JsCallCompiler extends JsCompiler {
 	}
 
 	@Override
-	public void typeRefer(String name) {
-	}
-
-	@Override
 	public void varRefer(Var var) {
 		sb.append(locals.get(var.name));
 	}

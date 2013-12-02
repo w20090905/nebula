@@ -11,6 +11,8 @@ import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
+import util.NamesEncoding;
+
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 
@@ -23,6 +25,7 @@ public class AsmCompiler implements Opcodes, CompilerBase {
 		Preconditions.checkNotNull(op);
 		return op;
 	}
+
 	final ClassWriter cw;
 
 	// final CompilerContext context;
@@ -53,22 +56,25 @@ public class AsmCompiler implements Opcodes, CompilerBase {
 
 	@Override
 	public void call(Expr<Object> value) {
-
-		// compiles e1, e2, and adds an instruction to multiply the two
-		// values
-		// mv.visitLdcInsn(value);
-
+		value.compile(this);
 	}
 
 	@Override
-	public void callMethod(Expr<Entity> e1, String name) {
-		mv.visitVarInsn(ALOAD, Compiler.REPOS); // DataRepos
-		// NebulaNative.execMethod(null, null, null, null, name) (null,
-		// e1.getExprType(context), name, null);
-		// compiles e1, e2, and adds an instruction to multiply the two
-		// values
-		// mv.visitLdcInsn(value);
+	public void callMethod(Expr<Entity> e1, String actionName) {
+		Type type = e1.getType();
+		type = type.getActionByName(actionName).getResideType();
+		
+		String name = EntityAction.class.getSimpleName() + "_" + NamesEncoding.encode(type.getFullName(), false) + "_"
+				+ NamesEncoding.encode(actionName, false);
+		String internalName = name.replace('.', '/');
 
+		mv.visitTypeInsn(NEW, internalName);
+		mv.visitInsn(DUP);
+		mv.visitMethodInsn(INVOKESPECIAL, internalName, "<init>", "()V");
+		mv.visitVarInsn(ALOAD, 1);
+		mv.visitVarInsn(ALOAD, 2);
+		e1.compile(this);
+		mv.visitMethodInsn(INVOKEVIRTUAL, internalName, "exec", "(Lnebula/lang/RuntimeContext;Lnebula/data/DataRepos;Lnebula/data/Entity;)V");
 	}
 
 	@Override
@@ -92,6 +98,7 @@ public class AsmCompiler implements Opcodes, CompilerBase {
 		// we jump directly to this label, without evaluating e2
 		mv.visitLabel(end);
 	}
+
 	@Override
 	public void constDate(long value) {
 		constTempral(value);
@@ -114,7 +121,7 @@ public class AsmCompiler implements Opcodes, CompilerBase {
 	public void constLong(Long value) {
 		mv.visitLdcInsn(value);
 	}
-	
+
 	@Override
 	public void constString(String value) {
 		mv.visitLdcInsn(value);
@@ -386,36 +393,38 @@ public class AsmCompiler implements Opcodes, CompilerBase {
 		}
 	}
 
-	@Override
-	public void typeRefer(String name) {
-		mv.visitVarInsn(ALOAD, Compiler.REPOS);
-		mv.visitLdcInsn(org.objectweb.asm.Type.getType("Ljava/lang/String;"));
-		mv.visitLdcInsn(org.objectweb.asm.Type.getType("Lnebula/data/Entity;"));
-		mv.visitLdcInsn(name);
-		mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/DataRepos", "define", "(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)Lnebula/data/Broker;");
-		mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Broker", "get", "()Ljava/lang/Object;");
-		mv.visitTypeInsn(CHECKCAST, "nebula/data/DataStore");
-
-		//
-		//
-		// mv.visitVarInsn(ALOAD, 3);
-		// mv.visitLdcInsn("wangshilian");
-		// mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/DataStore",
-		// "get", "(Ljava/lang/Object;)Lnebula/data/Timable;");
-		// mv.visitTypeInsn(CHECKCAST, "nebula/data/Entity");
-		// mv.visitVarInsn(ASTORE, 4);
-		//
-		//
-		// mv.visitVarInsn(ALOAD, 1);
-		// mv.visitLdcInsn("Age");
-		// mv.visitVarInsn(ALOAD, 4);
-		// mv.visitLdcInsn("Age");
-		// mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "get",
-		// "(Ljava/lang/String;)Ljava/lang/Object;");
-		// mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "put",
-		// "(Ljava/lang/String;Ljava/lang/Object;)V");
-
-	}
+	// @Override
+	// public void typeRefer(String name) {
+	// mv.visitVarInsn(ALOAD, Compiler.REPOS);
+	// mv.visitLdcInsn(org.objectweb.asm.Type.getType("Ljava/lang/String;"));
+	// mv.visitLdcInsn(org.objectweb.asm.Type.getType("Lnebula/data/Entity;"));
+	// mv.visitLdcInsn(name);
+	// mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/DataRepos", "define",
+	// "(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)Lnebula/data/Broker;");
+	// mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Broker", "get",
+	// "()Ljava/lang/Object;");
+	// mv.visitTypeInsn(CHECKCAST, "nebula/data/DataStore");
+	//
+	// //
+	// //
+	// // mv.visitVarInsn(ALOAD, 3);
+	// // mv.visitLdcInsn("wangshilian");
+	// // mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/DataStore",
+	// // "get", "(Ljava/lang/Object;)Lnebula/data/Timable;");
+	// // mv.visitTypeInsn(CHECKCAST, "nebula/data/Entity");
+	// // mv.visitVarInsn(ASTORE, 4);
+	// //
+	// //
+	// // mv.visitVarInsn(ALOAD, 1);
+	// // mv.visitLdcInsn("Age");
+	// // mv.visitVarInsn(ALOAD, 4);
+	// // mv.visitLdcInsn("Age");
+	// // mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "get",
+	// // "(Ljava/lang/String;)Ljava/lang/Object;");
+	// // mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "put",
+	// // "(Ljava/lang/String;Ljava/lang/Object;)V");
+	//
+	// }
 
 	public void varRefer(int index) {
 		mv.visitVarInsn(ALOAD, index);

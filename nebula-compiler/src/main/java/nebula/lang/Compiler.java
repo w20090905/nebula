@@ -537,7 +537,7 @@ public class Compiler {
 	}
 
 	// TODO Not realized MethodCall
-	static class MethodCall extends Expression<Object> {
+	static class MethodCall extends Expression<Object> implements Statement {
 		final Expr<Entity> e1;
 		final String name;
 
@@ -694,7 +694,7 @@ public class Compiler {
 		public void scan(CompilerContext context) {
 			if (context.isTopLevelGet) {
 				context.isTopLevelGet = false;
-				
+
 				entity.scan(context);
 				Type type = entity.getType();
 				for (Field f : type.getFields()) {
@@ -704,9 +704,9 @@ public class Compiler {
 					}
 				}
 				context.isTopLevelGet = true;
-				
+
 				value.scan(context);
-				
+
 			} else {
 				entity.scan(context);
 				Type type = entity.getType();
@@ -956,35 +956,6 @@ public class Compiler {
 		}
 	}
 
-	static class TypeRefer extends Expression<Object> {
-		final String name;
-		Type type;
-
-		TypeRefer(final String name) {
-			this.name = name;
-		}
-
-		@Override
-		public void compile(CompilerBase compiler) {
-			compiler.typeRefer(name);
-		}
-
-		@Override
-		public Type getType() {
-			return this.type;
-		}
-
-		@Override
-		public void scan(CompilerContext context) {
-			type = context.resolveType("Type");
-		}
-
-		@Override
-		public String toString() {
-			return "$" + name;
-		}
-	}
-
 	abstract static class UnaryArithmeticExpr extends Expression<Object> {
 		final Expr<Object> e1;
 
@@ -1053,15 +1024,15 @@ public class Compiler {
 		}
 	}
 
-	public final static int CONTEXT = 1;
-
+//	public final static int CONTEXT = 1;
+//
 	public final static int PARAMS = 4;
-
-	public final static int REPOS = 2;
-
-	public final static int SYSTEM_THIS = 0;
-
-	public final static int THIS = 3;
+//
+//	public final static int REPOS = 2;
+//
+//	public final static int SYSTEM_THIS = 0;
+//
+//	public final static int THIS = 3;
 
 	CompilerContext context;
 
@@ -1197,10 +1168,6 @@ public class Compiler {
 
 	public Expr<DateTime> opTimestampCst(String value) {
 		return new TimestampCst(value);
-	}
-
-	public Expr<Object> opType(String text) {
-		return new TypeRefer(text);
 	}
 
 	public Expr<Object> opUnit(Expr<Object> v, String string) {
