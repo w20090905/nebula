@@ -9,6 +9,7 @@ import java.io.Writer;
 
 import javax.servlet.http.HttpServletRequest;
 
+import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.json.DataHelper;
@@ -16,15 +17,17 @@ import nebula.data.json.DataHelper;
 public class TxEntityResource extends AbstractResouce {
 	private final DataHelper<Entity, Reader, Writer> jsonHolder;
 
+	final DataRepos dataRepos;
 	private final Long key;
 	private final DataStore<Entity> datastoreHolder;
 
-	public TxEntityResource(DataHelper<Entity, Reader, Writer> json, DataStore<Entity> datas, String key) {
-		this(json, datas, Long.parseLong(key));
+	public TxEntityResource(final DataRepos dataRepos,DataHelper<Entity, Reader, Writer> json, DataStore<Entity> datas, String key) {
+		this(dataRepos,json, datas, Long.parseLong(key));
 	}
 
-	public TxEntityResource(DataHelper<Entity, Reader, Writer> json, DataStore<Entity> datas, Long key) {
+	public TxEntityResource(final DataRepos dataRepos,DataHelper<Entity, Reader, Writer> json, DataStore<Entity> datas, Long key) {
 		super("text/json", 0, 0);
+		this.dataRepos = dataRepos;
 		this.jsonHolder = json;
 		this.datastoreHolder = datas;
 		this.key = key;

@@ -44,7 +44,7 @@ public class EntityResouceTest extends TestCase {
 	}
 
 	public final void testGet() throws IOException, SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-		EntityResouce entityResouce = new EntityResouce(json, datastore, null,key);
+		EntityResouce entityResouce = new EntityResouce(null, json, datastore, null, key);
 
 		when(datastore.get(key)).thenReturn(data);
 		long lastModified = 100L;

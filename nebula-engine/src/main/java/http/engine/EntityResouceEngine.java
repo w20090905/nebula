@@ -142,10 +142,10 @@ public class EntityResouceEngine implements ResourceEngine {
 		switch (typeBroker.getStandalone()) {
 		case Transaction:
 		case Relation:
-			return new TxEntityResource(jsonHolder, storeHolder, id);
+			return new TxEntityResource(dataRepos,jsonHolder, storeHolder, id);
 		case Master:
 		default:
-			return new EntityResouce(jsonHolder, storeHolder,typeBroker, id);
+			return new EntityResouce(dataRepos,jsonHolder, storeHolder,typeBroker, id);
 		}
 	}
 
