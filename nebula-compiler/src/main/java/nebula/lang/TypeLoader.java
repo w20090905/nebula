@@ -2,8 +2,10 @@ package nebula.lang;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
 
@@ -138,24 +140,34 @@ public abstract class TypeLoader {
 
 	List<TypeImp> defineNebula(URL in) throws IOException, RecognitionException {
 		String code = FileUtil.readAllTextFrom(in);
-		List<TypeImp> typeList = parse(new ANTLRInputStream(in.openStream(), "utf-8"));
-		long lastModified = in.openConnection().getLastModified();
-		this.lastModified = lastModified > this.lastModified ? lastModified : this.lastModified;
-		TypeImp topType = typeList.get(0);
-		for (TypeImp type : typeList) {
-			type.code = code;
-			type.url = in;
-			type.lastModified = lastModified;
-			link(type);
-			topType.subTypes.add(type);
-		}
-		types.addAll(typeList);
-		if (log.isDebugEnabled()) {
-			log.debug("[ " + typeList.get(0).getName() + " ] loaded succeed  from url - " + typeList.get(0).url);
+		InputStream inputStream = null;
+		URLConnection urlConnection = null;
+		List<TypeImp> typeList = null;
+		try {
+			urlConnection = in.openConnection();
+			inputStream = urlConnection.getInputStream();
+			long lastModified = urlConnection.getLastModified();
+			typeList = parse(new ANTLRInputStream(in.openStream(), "utf-8"));
+			this.lastModified = lastModified > this.lastModified ? lastModified : this.lastModified;
+			TypeImp topType = typeList.get(0);
+			for (TypeImp type : typeList) {
+				type.code = code;
+				type.url = in;
+				type.lastModified = lastModified;
+				link(type);
+				topType.subTypes.add(type);
+			}
+			types.addAll(typeList);
+			if (log.isDebugEnabled()) {
+				log.debug("[ " + typeList.get(0).getName() + " ] loaded succeed  from url - " + typeList.get(0).url);
+			}
+		} finally {
+			if (inputStream != null) {
+				inputStream.close();
+			}
 		}
 		return typeList;
 	}
-
 
 	protected void link(TypeImp type) {
 		for (Field f : type.fields) {

@@ -46,11 +46,22 @@ public class FileUtil {
 	}
 
 	public static String readAllTextFrom(URL url) {
+		InputStream in = null;
 		try {
-			return readAllTextFrom(new InputStreamReader(url.openStream()));
+			in = url.openStream();
+			return readAllTextFrom(new InputStreamReader(in));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
+		}finally{
+			if(in!=null){
+				try {
+					in.close();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+			}
 		}
+		
 	}
 
 	public static String readAllTextFrom(InputStream in) {

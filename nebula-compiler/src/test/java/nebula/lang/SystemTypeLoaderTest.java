@@ -14,18 +14,13 @@ import junit.framework.TestCase;
 
 public class SystemTypeLoaderTest extends TestCase {
 
-	SystemTypeLoader loader;
-	File root1;
-	File root2;
+	SystemTypeLoader loader = new SystemTypeLoader();
 
+	File tmp = new File("tmp/SystemTypeLoaderTest");
+	File root1 = new File(tmp,"test-nebula");
+	File root2 = new File(tmp,"test-nebula2");
+	
 	protected void setUp() throws Exception {
-		loader = new SystemTypeLoader();
-		
-
-
-		File tmp = new File("tmp");
-		root1 = new File(tmp,"test-nebula");
-		root2 = new File(tmp,"test-nebula2");
 		if(tmp.exists()){
 			if(root1.exists()){
 				for(File f : root1.listFiles()){
@@ -44,10 +39,10 @@ public class SystemTypeLoaderTest extends TestCase {
 			for(File f : tmp.listFiles()){
 				f.delete();
 			}
-//			tmp.delete();
+			tmp.delete();
 		}
 		
-//		tmp.mkdir();
+		tmp.mkdir();
 		root1.mkdir();
 		root2.mkdir();
 
@@ -67,11 +62,6 @@ public class SystemTypeLoaderTest extends TestCase {
 	}
 
 	protected void tearDown() throws Exception {
-
-		File tmp = new File("tmp");
-		root1 = new File(tmp,"test-nebula");
-		root2 = new File(tmp,"test-nebula2");
-		
 		if(tmp.exists()){
 
 			if(root1.exists()){
