@@ -3,7 +3,6 @@ package nebula.flow;
 import junit.framework.TestCase;
 import nebula.lang.Field;
 import nebula.lang.Flow;
-import nebula.lang.NebulaClassLoader;
 import nebula.lang.NebulaLexer;
 import nebula.lang.NebulaParser;
 import nebula.lang.RuntimeContext;
@@ -20,7 +19,6 @@ public class FlowEngineTest extends TestCase {
 	};
 
 	protected void setUp() throws Exception {
-		NebulaClassLoader.clear();
 		typeLoader = new TypeLoaderForFlowTest(new SystemTypeLoader());
 
 	}
@@ -141,12 +139,12 @@ public class FlowEngineTest extends TestCase {
 		engine.stepSubmit();
 
 		// 跳过第一级审批画面
-//		assertEquals("Approve", engine.currentStep.getName());
-//		assertEquals(name, engine.data.get("Name"));
-//		assertEquals(age, engine.data.get("Age"));
+		// assertEquals("Approve", engine.currentStep.getName());
+		// assertEquals(name, engine.data.get("Name"));
+		// assertEquals(age, engine.data.get("Age"));
 
 		// 审批通过
-//		engine.stepSubmit();
+		// engine.stepSubmit();
 
 		// 进入第二级审批画面
 		assertEquals("Approve2", engine.currentStep.getName());
@@ -161,17 +159,17 @@ public class FlowEngineTest extends TestCase {
 		assertEquals(name, engine.data.get("Name"));
 		assertEquals(age, engine.data.get("Age"));
 	}
-//
-//	public final void testStart() {
-//		fail("Not yet implemented");
-//	}
-//
-//	public final void testStartSubmitString() {
-//		fail("Not yet implemented");
-//	}
-//
-//	public final void testStartSubmit() {
-//		fail("Not yet implemented");
-//	}
+	//
+	// public final void testStart() {
+	// fail("Not yet implemented");
+	// }
+	//
+	// public final void testStartSubmitString() {
+	// fail("Not yet implemented");
+	// }
+	//
+	// public final void testStartSubmit() {
+	// fail("Not yet implemented");
+	// }
 
 }

@@ -378,7 +378,13 @@ public class AsmCompiler implements Opcodes, CompilerBase {
 		mv.visitMethodInsn(INVOKEINTERFACE, "nebula/data/Entity", "put", "(Ljava/lang/String;Ljava/lang/Object;)V");
 	}
 
-	protected void toObject(final MethodVisitor mv, Type type) {
+	static protected void print(final MethodVisitor mv, String msg) {
+		mv.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
+		mv.visitLdcInsn(msg);
+		mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V");
+	}
+
+	static protected void toObject(final MethodVisitor mv, Type type) {
 		switch (type.getRawType()) {
 		case Boolean:
 			mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");

@@ -13,7 +13,6 @@ import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.impl.TypeDatastore;
 import nebula.lang.EditableTypeLoader;
-import nebula.lang.NebulaClassLoader;
 import nebula.lang.SystemTypeLoader;
 import nebula.lang.Type;
 import nebula.lang.TypeLoader;
@@ -38,7 +37,6 @@ public class TemplatePerformanceNow extends TestCase {
 
 	protected void setUp() throws Exception {
 		Broker.clear();
-		NebulaClassLoader.clear();
 
 		// ROOT Folder
 		File root = null;

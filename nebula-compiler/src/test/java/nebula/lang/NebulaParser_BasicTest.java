@@ -22,7 +22,6 @@ public class NebulaParser_BasicTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		compiler = new TypeLoaderForTest(new SystemTypeLoader());
-		NebulaClassLoader.clear();
 	}
 
 	private TypeImp parseType(String text) {
@@ -142,7 +141,6 @@ public class NebulaParser_BasicTest extends TestCase {
 
 	private Field parseField(String text) {
 		try {
-			NebulaClassLoader.clear();
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, compiler);

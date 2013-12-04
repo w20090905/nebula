@@ -15,13 +15,11 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 
 	@Override
 	protected void setUp() throws Exception {
-		NebulaClassLoader.clear();
 		typeLoader = new TypeLoaderForFlowTest(new SystemTypeLoader());
 	}
 
 	private Flow parseFlow(String text) {
 		try {
-			NebulaClassLoader.clear();
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, typeLoader);
@@ -36,7 +34,6 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 
 	private TypeImp parseType(String text) {
 		try {
-			NebulaClassLoader.clear();
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, typeLoader);
@@ -51,7 +48,6 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 
 	private Step parseStep(String text) {
 		try {
-			NebulaClassLoader.clear();
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, typeLoader);

@@ -40,7 +40,6 @@ public class NebulaParser_Action_CompileTest extends TestCase {
 
 	private Field parseField(String text) {
 		try {
-			NebulaClassLoader.clear();
 			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NebulaParser parser = new NebulaParser(tokens, typeLoader);

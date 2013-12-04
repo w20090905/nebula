@@ -118,16 +118,16 @@ public class EntityExpressionComplier implements Opcodes {
 		return cw.toByteArray();
 	}
 
-	static long count = 0;
+	private static long count = 0;
 
 	public <T> EntityExpression compile(Type type, String exprName, Expr<T> exp) {
 		String name = EntityExpression.class.getSimpleName() + "_" + NamesEncoding.encode(type.getFullName(), false) + "_"
-				+ NamesEncoding.encode(exprName, false);
+				+ NamesEncoding.encode(exprName, false) + "_" + String.valueOf(count++);
 		try {
 			byte[] b = this.doCompile(name, exp);
 			if (log.isDebugEnabled()) {
 				try {
-					FileOutputStream fos = new FileOutputStream("tmp/" + name + "_" + String.valueOf(count++) + ".class");
+					FileOutputStream fos = new FileOutputStream("tmp/" + name + ".class");
 					fos.write(b);
 					fos.close();
 				} catch (FileNotFoundException e) {

@@ -1,5 +1,5 @@
 package nebula.lang;
 
-public interface RuntimeContext {
+public class RuntimeContext {
 
 }
