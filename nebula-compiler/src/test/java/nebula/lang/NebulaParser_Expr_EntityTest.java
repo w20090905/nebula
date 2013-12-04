@@ -1,8 +1,12 @@
 package nebula.lang;
 
 import junit.framework.TestCase;
+import nebula.data.DataRepos;
+import nebula.data.DataStore;
 import nebula.data.Entity;
+import nebula.data.impl.DefaultDataRepos;
 import nebula.data.impl.EditableEntity;
+import nebula.data.impl.TypeDatastore;
 
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -15,11 +19,14 @@ public class NebulaParser_Expr_EntityTest extends TestCase {
 	TypeLoaderForTest compiler;
 	Entity data = new EditableEntity();
 	TypeImp type;
+	DataRepos repos;
 	long Age = 10;
 
 	@Override
 	protected void setUp() throws Exception {
 		compiler = new TypeLoaderForTest(new SystemTypeLoader());
+		repos = new DefaultDataRepos(new TypeDatastore(compiler));
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -32,7 +39,7 @@ public class NebulaParser_Expr_EntityTest extends TestCase {
 				return compiler.findType(name);
 			}
 		});
-		return (T) complier.compile( type, "test", expr).eval(context, null, entity);
+		return (T) complier.compile(type, "test", expr).eval(context, repos, entity);
 	}
 
 	private void eqValue(Object result, String exprText) {
@@ -135,5 +142,28 @@ public class NebulaParser_Expr_EntityTest extends TestCase {
 		eqValue(this.Age > 20 && this.Age <= 40, "this.Age > 20 && this.Age <= 40");
 		eqValue(this.Age > 40 && this.Age == 30, "this.Age > 40 && this.Age == 30");
 		eqValue(this.Age > 40 || this.Age == 30, "this.Age > 40 || this.Age == 30");
+	}
+
+	public void testComputeWithRepos() {
+		data.put("Age", Age);
+
+		DataStore<Entity> dataStore = repos.define(String.class, Entity.class, "Person");
+		EditableEntity person = new EditableEntity();
+		person.put("Name", "wangshilian1");
+		person.put("Age", 10L);
+		dataStore.add(person);
+		
+		person = new EditableEntity();
+		person.put("Name", "wangshilian2");
+		person.put("Age", 10L);
+		dataStore.add(person);
+		
+		person = new EditableEntity();
+		person.put("Name", "wangshilian3");
+		person.put("Age", 10L);
+		dataStore.add(person);
+		dataStore.flush();
+
+		eqValue(this.Age+10, "$Person[0].Age + 10");
 	}
 }

@@ -49,7 +49,7 @@ public class FileUtil {
 		InputStream in = null;
 		try {
 			in = url.openStream();
-			return readAllTextFrom(new InputStreamReader(in));
+			return readAllTextFrom(in);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}finally{

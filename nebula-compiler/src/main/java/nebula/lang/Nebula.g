@@ -32,13 +32,15 @@ options {
   Map<Field, Expr> derivedFields = new HashMap<Field, Expr>();
   List<Field> cachedActions = new ArrayList<Field>();
   Map<Field, List<Statement>> cacheOnChange = new HashMap<Field, List<Statement>>();
-
-  Compiler op = new Compiler(new CompilerContext() {
+  
+CompilerContext context = new CompilerContext() {
     @Override
     public Type resolveType(String name) {
       return NebulaParser.this.resolveType(name);
     }
-  });
+  };
+
+  Compiler op = new Compiler(context);
 
   InheritHashMap attrsBuffer = new InheritHashMap();
 
@@ -134,15 +136,9 @@ options {
             {// onchange
               Field cpField = e.getKey();
               if (cpField.getAttrs().containsKey(Field.ComputeBackend)) {
-                CompilerContext cc = new CompilerContext() {
-                  @Override
-                  public Type resolveType(String name) {
-                    return this.resolveType(name);
-                  }
-                };
-                statement.scan(cc);
+                statement.scan(context);
 
-                for (Field f : cc.refFields) {
+                for (Field f : context.refFields) {
                   List<Statement> ss = cacheOnChange.get(f);
                   if (ss != null) {
                     ss.add(statement);

@@ -1071,7 +1071,7 @@ public class Compiler {
 
 	EntityExpressionComplier exprCompiler = EntityExpressionComplier.DEFAULT;
 
-	Log log = LogFactory.getLog(getClass());
+	Log log = LogFactory.getLog(Compiler.class);
 
 	EntityActionComplier stCompiler = EntityActionComplier.DEFAULT;
 
