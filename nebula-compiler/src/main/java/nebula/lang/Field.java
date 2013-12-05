@@ -57,7 +57,7 @@ public class Field {
 	}
 
 	public boolean isIgnorable() {
-		return Modifier.isNullable(modifiers) || (!Modifier.isRequired(modifiers) && Modifier.isDefaultValue(modifiers));
+		return Modifier.isNullable(modifiers);// || (!Modifier.isRequired(modifiers) && Modifier.isDefaultValue(modifiers));
 	}
 
 	public boolean isRequired() {

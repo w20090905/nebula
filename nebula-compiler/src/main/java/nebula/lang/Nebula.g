@@ -100,7 +100,7 @@ CompilerContext context = new CompilerContext() {
   protected void exitType(TypeImp resideType, TypeImp type) {
     makeInitOnSaveAction();
 
-    typesLoading.remove(type.name);
+//    typesLoading.remove(type.name);
 
     makeSureHasKeyField(type);
     currentType = resideType;
@@ -109,7 +109,7 @@ CompilerContext context = new CompilerContext() {
   protected void exitType(TypeImp type) {
     makeInitOnSaveAction();
 
-    typesLoading.remove(type.name);
+//    typesLoading.remove(type.name);
     makeSureHasKeyField(type);
     currentType = null;
   }
@@ -132,19 +132,31 @@ CompilerContext context = new CompilerContext() {
             Expr<Object> fieldof = op.opFieldOf(thisType, e.getKey().name);
             Statement statement = op.stPut(fieldof, e.getValue());
             stList.add(statement);
-            
+
             {// onchange
               Field cpField = e.getKey();
-              if (cpField.getAttrs().containsKey(Field.ComputeBackend)) {
-                statement.scan(context);
+              CompilerContext context = new CompilerContext() {
+                @Override
+                public Type resolveType(String name) {
+                  return NebulaParser.this.resolveType(name);
+                }
+              };
 
+              statement.scan(context);
+
+              if (context.referRepos) {
+                cpField.getAttrs().put(Field.ComputeBackend, Field.ComputeBackend);
+              }
+              if (cpField.getAttrs().containsKey(Field.ComputeBackend)) {
                 for (Field f : context.refFields) {
-                  List<Statement> ss = cacheOnChange.get(f);
-                  if (ss != null) {
-                    ss.add(statement);
-                  } else {
-                    cacheOnChange.put(f, new ArrayList<Statement>());
-                    cacheOnChange.get(f).add(statement);
+                  if (f.getResideType() == thisType.getType()) {
+                    List<Statement> ss = cacheOnChange.get(f);
+                    if (ss != null) {
+                      ss.add(statement);
+                    } else {
+                      cacheOnChange.put(f, new ArrayList<Statement>());
+                      cacheOnChange.get(f).add(statement);
+                    }
                   }
                 }
               }
@@ -204,16 +216,19 @@ CompilerContext context = new CompilerContext() {
             stList.add(statement);
 
             {// onchange
-              if (cpField.getAttrs().containsKey(Field.ComputeBackend)) {
-                CompilerContext cc = new CompilerContext() {
-                  @Override
-                  public Type resolveType(String name) {
-                    return this.resolveType(name);
-                  }
-                };
-                statement.scan(cc);
+              CompilerContext context = new CompilerContext() {
+                @Override
+                public Type resolveType(String name) {
+                  return NebulaParser.this.resolveType(name);
+                }
+              };
 
-                for (Field f : cc.refFields) {
+              statement.scan(context);
+              if (context.referRepos) {
+                throw new RuntimeException("Derived expr can only refer himself");
+              }
+              if (cpField.getAttrs().containsKey(Field.ComputeBackend)) {
+                for (Field f : context.refFields) {
                   List<Statement> ss = cacheOnChange.get(f);
                   if (ss != null) {
                     ss.add(statement);

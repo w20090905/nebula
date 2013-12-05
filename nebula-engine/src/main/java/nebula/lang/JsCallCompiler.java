@@ -5,16 +5,18 @@ import java.util.List;
 import java.util.Map;
 
 import nebula.data.Entity;
+import nebula.lang.Compiler.VarRefer;
 
 public class JsCallCompiler extends JsCompiler {
 	StringBuilder sbPut;
+	StringBuilder sbGet;
 	Map<String, String> localsPutResult;
 	Map<String, String> localsPutSet;
 	Map<String, String> localsGetName;
 	Map<String, String> localsGetValue;
 
 	public JsCallCompiler(String... names) {
-		sb = new StringBuilder();
+		sbGet = new StringBuilder();
 		sbPut = new StringBuilder();
 		locals = new HashMap<String, String>();
 		for (int i = 0; i < names.length; i += 2) {
@@ -50,7 +52,7 @@ public class JsCallCompiler extends JsCompiler {
 				sb.append(name);
 			}
 			sb.append('=');
-			
+
 			locals = localsPutResult;
 			{
 				parent.compile(this);
@@ -62,7 +64,7 @@ public class JsCallCompiler extends JsCompiler {
 		isTopLevel = true;
 		sb = sbBackup;
 		locals = localsBackup;
-		
+
 		value.compile(this);
 	}
 
@@ -75,32 +77,41 @@ public class JsCallCompiler extends JsCompiler {
 
 	@Override
 	public void getField(Expr<Object> entity, String name, Type fieldType) {
-		if (isTopLevel) {
-			isTopLevel = false;
+		if (entity instanceof VarRefer && "this".equals(((VarRefer) entity).var.name)) {
+			StringBuilder sbBackup = sb;
+			sb = sbGet;
+			if (isTopLevel) {
+				isTopLevel = false;
 
-			Map<String, String> localsBackup = locals;
-			locals = localsGetName;
-			{
-				sb.append('\'');
+				Map<String, String> localsBackup = locals;
+				locals = localsGetName;
+				{
+					sb.append('\'');
+					entity.compile(this);
+					sb.append('.');
+					sb.append(name);
+					sb.append('\'');
+				}
+				sb.append(':');
+				locals = localsGetValue;
+				{
+					entity.compile(this);
+					sb.append('.');
+					sb.append(name);
+				}
+				sb.append(',');
+				isTopLevel = true;
+				locals = localsBackup;
+				sb = sbBackup;
+			} else {
 				entity.compile(this);
 				sb.append('.');
 				sb.append(name);
-				sb.append('\'');
 			}
-			sb.append(':');
-			locals = localsGetValue;
-			{
-				entity.compile(this);
-				sb.append('.');
-				sb.append(name);
-			}
-			sb.append(',');
-			isTopLevel = true;
-			locals = localsBackup;
-		} else {
+		}else{
 			entity.compile(this);
 			sb.append('.');
-			sb.append(name);
+			sb.append(name);			
 		}
 	}
 
@@ -264,8 +275,8 @@ public class JsCallCompiler extends JsCompiler {
 			{
 				call.append("$scope.$ajaxCall({");
 				{
-					call.append("'$action' : '" + name + "',");
-					call.append(sb);
+					call.append("'$getaction' : '" + name + "',");
+					call.append(sbGet);
 					call.setCharAt(call.length() - 1, '}');
 					call.append(",function($scope,result){");
 					call.append(sbPut);

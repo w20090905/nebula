@@ -221,6 +221,7 @@ public class Compiler {
 
 		@Override
 		public void scan(CompilerContext context) {
+			context.referRepos = true;
 			type = new ListType(context.resolveType(name));
 		}
 	}
@@ -361,6 +362,7 @@ public class Compiler {
 		public void scan(CompilerContext context) {
 			if (context.isTopLevelGet) {
 				context.isTopLevelGet = false;
+				context.from = entity;
 				entity.scan(context);
 				Type type = entity.getType();
 				for (Field f : type.getFields()) {
@@ -370,7 +372,9 @@ public class Compiler {
 						break;
 					}
 				}
-				context.refFields.add(context.field);
+				if(context.from instanceof VarRefer && "this".equals(((VarRefer)context.from).var.name)){
+					context.refFields.add(context.field);					
+				}
 				context.isTopLevelGet = true;
 			} else {
 				entity.scan(context);

@@ -4,6 +4,4 @@ tx ProductPrice|产品价格{
 !From-Date;
 ?To-Date;
 @Attach Price;
-Age;
-Age2 Age = this.Age + 10;
 }

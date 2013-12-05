@@ -39,7 +39,7 @@ public class EntityResouce extends AbstractResouce {
 	@Override
 	protected void get(HttpServletRequest req) throws IOException {
 		Entity data;
-		String action = req.getParameter("$action");
+		String action = req.getParameter("$getaction");
 		long newModified;
 		if (action == null) {
 			data = datastore.get(key);

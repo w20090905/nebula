@@ -144,10 +144,10 @@ public class TypeTemplateResouce extends AbstractResouce {
 				}
 				lastField = field;
 			}
-			if (field.isDerived()) {
+			if (field.isDerived() && !field.getAttrs().containsKey(Field.ComputeBackend)) {
 				field.getAttrs().put("DerivedExpression", JsCompiler.compiler(field.getCode(), "this", "data"));
 			}
-			if (field.isDefaultValue()) {
+			if (field.isDefaultValue() && !field.getAttrs().containsKey(Field.ComputeBackend)) {
 				field.getAttrs().put("DefaultExpression", JsCompiler.compiler(field.getCode(), "this", "data"));
 			}
 			if (field.getAttrs().containsKey(Field.DisplayOn)) {

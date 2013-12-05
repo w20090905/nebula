@@ -56,11 +56,11 @@
 		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex} ${opt} 
 				${optReadonly} ${optValidateRule} 	${optTitle}	 class="${optClass}"	
 			/>
-	[#elseif field.derived]
+	[#elseif field.derived&& !field.attrs.ComputeBackend??]
 		<input ${optType} id="${id}"  placeholder="${placeholder}"  ${ex}  ${opt} 
 				readonly ${optTitle}	class="${optClass}"	value="{{${field.attrs.DerivedExpression}}}"
 			/>
-	[#elseif field.defaultValue]
+	[#elseif field.defaultValue && !field.attrs.ComputeBackend??]
 		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="{{${field.attrs.DefaultExpression}}}"  ${ex}  ${opt} 
 				${optReadonly} ${optRequired}  ${optValidateRule} ${optTitle}	class="${optClass}"	
 			/>
