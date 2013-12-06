@@ -8,10 +8,10 @@ class BrokerInstanceBuilderClassMaker implements Opcodes {
 
 	private final static String interfaceName = BrokerInstanceBuilder.class.getName();
 
-	public byte[] dump(String brokerName) {
-		String name = interfaceName +"_" + brokerName.replace('.', '_');
+	public byte[] dump(String brokerName,String builderName) {
+//		String name = interfaceName +"_" + brokerName.replace('.', '_');
 		String brokerInnerName = brokerName.replace('.', '/');
-		String nameInner = name.replace('.', '/');
+		String nameInner = builderName.replace('.', '/');
 		String interfaceInnerName = interfaceName.replace('.', '/');
 
 		ClassWriter cw = new ClassWriter(0);
@@ -19,7 +19,7 @@ class BrokerInstanceBuilderClassMaker implements Opcodes {
 
 		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, nameInner, null, "java/lang/Object", new String[] { interfaceInnerName });
 
-		cw.visitSource(name, null);
+		cw.visitSource(builderName, null);
 
 		{
 			mv = cw.visitMethod(ACC_PUBLIC, "<init>", "()V", null, null);

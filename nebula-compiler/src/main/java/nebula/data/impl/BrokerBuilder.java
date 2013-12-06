@@ -54,7 +54,7 @@ public class BrokerBuilder {
 			}
 
 			count++;
-			String typeName = target.getName() + "BrokerAuto" + count;
+			String typeName = target.getName() + "_BrokerAuto" + count;
 
 			// 构建代理类
 			{
@@ -88,8 +88,8 @@ public class BrokerBuilder {
 
 			// 构建代理构建类，主要是为了性能，避免每次都是用Class.newInstance() 来构建代理
 			{
-				String builderTypeName = BrokerInstanceBuilder.class.getName() + "_" + typeName.replace('.', '_');
-				byte[] codeBuilder = instanceBuilder.dump(typeName);
+				String builderTypeName = typeName + "_Builder";
+				byte[] codeBuilder = instanceBuilder.dump(typeName,builderTypeName);
 
 				if (log.isDebugEnabled()) {
 					try {
