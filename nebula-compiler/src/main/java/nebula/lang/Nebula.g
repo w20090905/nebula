@@ -333,7 +333,8 @@ stepDefinition[Flow resideFlow]  returns[Flow.Step step]
       TypeImp stepType = null;
       Type superType = null;
     }
-    :
+    : 
+      (annotations = annotationListDefinition)?
       actorQuery = queryLiteral?
       stepID = ID
         (('extends' | ':') superTypeID=ID )?    
@@ -354,6 +355,7 @@ stepDefinition[Flow resideFlow]  returns[Flow.Step step]
                     stepType = new TypeImp(loader,resideFlow,name, superType); 
                     enterType(stepType);
                 }
+                ('data.*' (';' NEWLINE?| NEWLINE) {stepType.attrs.put("WithAllField","WithAllField");})?
                 fieldDefinition[stepType]* 
             '}'     {exitType(resideFlow,stepType);} 
         )?
@@ -361,7 +363,10 @@ stepDefinition[Flow resideFlow]  returns[Flow.Step step]
             if(stepType==null){
                 stepType = (TypeImp)superType;
             }
-            step = resideFlow.addStep($actorQuery.text,$stepID.text,stepType);            
+            step = resideFlow.addStep($actorQuery.text,$stepID.text,stepType);
+            if(annotations != null){
+                step.attrs.putAll(annotations);
+            }   
         }
          (';' NEWLINE?| NEWLINE)
     ;

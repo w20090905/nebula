@@ -1,5 +1,6 @@
 package nebula.lang;
 
+import util.InheritHashMap;
 import nebula.data.SmartList;
 import nebula.data.Timable;
 
@@ -62,6 +63,7 @@ public class Flow extends TypeImp {
 		final String name;
 		final String actorQuery;
 		final int index;
+		final InheritHashMap attrs;
 
 		Step(Flow resideFlow, int index, String name, String actorQuery, Type stepType) {
 			this.resideFlow = resideFlow;
@@ -69,6 +71,7 @@ public class Flow extends TypeImp {
 			this.type = stepType;
 			this.name = name;
 			this.actorQuery = actorQuery;
+			this.attrs = new InheritHashMap();
 		}
 
 		@Override
@@ -78,7 +81,6 @@ public class Flow extends TypeImp {
 
 		@Override
 		public String toString() {
-			// TODO Auto-generated method stub
 			return this.name + "[" + type.toString() + "]";
 		}
 
@@ -96,6 +98,10 @@ public class Flow extends TypeImp {
 
 		public int getIndex() {
 			return index;
+		}
+
+		public InheritHashMap getAttrs() {
+			return attrs;
 		}
 	}
 

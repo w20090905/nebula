@@ -350,6 +350,11 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 		assertEquals("Approve2", step.name);
 		assertEquals("Approve", step.type.getName());
 
+		step = parseStep("@Next(\"GP\") Approve;");
+		assertEquals("Approve2", step.name);
+		assertEquals("Approve", step.type.getName());
+		assertEquals("GP", step.getAttrs().get(Step.Next));
+
 		step = parseStep("aa : Approve;");
 		assertEquals("aa", step.name);
 		assertEquals("Approve", step.type.getName());
@@ -368,6 +373,12 @@ public class NebulaParser_Flow_BasicTest extends TestCase {
 		assertEquals("Begin", step.name);
 		assertEquals(step.resideFlow.name + "$Begin2", step.type.getName());
 		assertEquals("Begin", step.type.getSuperType().getName());
+		
+		step = parseStep("Begin{data.*; };");
+		assertEquals("Begin", step.name);
+		assertEquals(step.resideFlow.name + "$Begin2", step.type.getName());
+		assertEquals("Begin", step.type.getSuperType().getName());
+		assertEquals("WithAllField", step.type.getAttrs().get("WithAllField"));
 
 		step = parseStep("Approve { };");
 		assertEquals("Approve2", step.name);
