@@ -254,7 +254,7 @@ public class TypeSimpleTemplateResouceTest extends TestCase {
 			String desc = "type freemarker";
 
 			Configuration templateConfiguration = new Configuration();
-			Template ft = new Template("test", new FileReader("tmp/master_basic_list.html.ftl"), templateConfiguration);
+			Template ft = new Template("test", new FileReader("src/test/resources/template/master_basic_list.html.ftl"), templateConfiguration);
 
 			Map<String, Object> root = new HashMap<String, Object>();
 			root.put("type", type);
