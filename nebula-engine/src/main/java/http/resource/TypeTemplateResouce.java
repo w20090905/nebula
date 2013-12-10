@@ -17,6 +17,7 @@ import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.lang.Code;
 import nebula.lang.Field;
+import nebula.lang.Flow.Step;
 import nebula.lang.JsCallCompiler;
 import nebula.lang.JsCompiler;
 import nebula.lang.Type;
@@ -173,6 +174,12 @@ public class TypeTemplateResouce extends AbstractResouce {
 			type.getAttrs().put("AjaxExpression", sb.toString());
 //		}
 			
+			List<Step> steps = type.getSteps();
+			if(steps!=null){
+				for (Step step : steps) {
+					layout(step.getType());
+				}
+			}
 			
 
 		return type;

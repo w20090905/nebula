@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.List;
 
 import nebula.data.Timable;
+import nebula.lang.Flow.Step;
 import util.InheritHashMap;
 
 public interface Type extends Timable {
@@ -68,4 +69,6 @@ public interface Type extends Timable {
 	public List<Type> getRelations();
 
 	public List<Type> getSubTypes();
+	
+	public List<Step> getSteps();
 }

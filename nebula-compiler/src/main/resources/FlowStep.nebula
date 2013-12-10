@@ -1,0 +1,34 @@
+type FlowStep {
+		<ActualCurrentStep> String := "Begin";
+		<ActualNextStep> String := "End";
+		<NextStep> String := "<Next>";
+		<DoItNow> YesNo := false;
+		<init>(){
+		}; 
+		<next>(){
+			this.DoItNow = true;
+		};
+		<previous>(){
+			this.DoItNow = true;
+			this.NextStep = "<Previous>";
+		};
+		<end>(){
+			this.NextStep = "<End>";
+			this.DoItNow = true;
+		};
+		<skip>(){
+			this.NextStep = "<Next>";
+			this.DoItNow = true;
+		};
+		<terminal>(){
+			this.NextStep = "<Terminal>";
+			this.DoItNow = true;
+		};
+		<cancel>(){
+			this.NextStep = "<Cancel>";
+			this.DoItNow = true;
+		};
+		<submit>(){
+			this.DoItNow = true;
+		};
+};

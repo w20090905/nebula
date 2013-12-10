@@ -38,16 +38,16 @@
 							</thead>
 							<tbody>
 		<tr 
-			x-ng-repeat="data in datalist | filter:'!Abstract' | filter:query | orderBy:predicate:reverse | startFrom:(currentPage-1)*pageSize+1 | limitTo:pageSize"	>
+			x-ng-repeat="data in datalist | filter:'!Abstract' | filter:query | orderBy:predicate:reverse | startFrom:(currentPage-1)*pageSize | limitTo:pageSize"	>
 			<td> {{(currentPage-1)*pageSize+1 + $index}}</td>
 			<td><a href="#/d/{{typename}}/{{data.Name}}">{{data.Name}}</a> <span x-ng-repeat="(key, value) in data.NameAlias">&nbsp;
 					{{key}}: {{value}}</span></td>
 									<td>{{data.Standalone}}</td>
 									<td><a href="#/d/{{typename}}/{{data.SuperType}}">{{data.SuperType}}</a></td>
-			<td><a href="#/d/{{data.Name}}/" x-ng-show="data.Standalone=='Master' || data.Standalone=='Transaction'"><i class="icon-edit"></i>
+			<td><a href="#/d/{{data.Name}}/" x-ng-show="data.Standalone=='Master' || data.Standalone=='Transaction'|| data.Standalone=='Flow'"><i class="icon-edit"></i>
 					Data</a></td>
-			<td><a href="#/t/angularjs/unicorn/{{data.Name}}-list.html" x-ng-show="data.Standalone=='Master' || data.Standalone=='Transaction'">List</a>
-				<a href="#/t/angularjs/unicorn/{{data.Name}}-detail.html" x-ng-show="data.Standalone=='Master' || data.Standalone=='Transaction'">Detail</a></td>
+			<td><a href="#/t/angularjs/unicorn/{{data.Name}}-list.html" x-ng-show="data.Standalone=='Master' || data.Standalone=='Transaction' || data.Standalone=='Flow'">List</a>
+				<a href="#/t/angularjs/unicorn/{{data.Name}}-detail.html" x-ng-show="data.Standalone=='Master' || data.Standalone=='Transaction'|| data.Standalone=='Flow'">Detail</a></td>
 								</tr>
 							</tbody>
 	<tfoot>

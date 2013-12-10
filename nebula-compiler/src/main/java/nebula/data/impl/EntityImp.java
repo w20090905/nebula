@@ -19,14 +19,16 @@ public class EntityImp implements Entity {
 		this(store, new HashMap<String, Object>());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public String getID() {
-		return (String) this.get(PRIMARY_KEY);
+	public <T> T getID() {
+		return (T)this.get(PRIMARY_KEY);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Object get(String name) {
-		return data.get(name);
+	public <T> T get(String name) {
+		return (T)data.get(name);
 	}
 
 	@Override

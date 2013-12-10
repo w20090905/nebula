@@ -10,7 +10,9 @@ public class Field {
 	public static final String ComputeBackend = "ComputeBackend";
 	public static final String RequiredOn = "RequiredOn";
 	public static final String DisplayOn = "DisplayOn";
-		
+	public static final String Transparent = "Transparent";
+	
+
 	final String name;
 	Aliases nameAlias;
 	int modifiers = 0;
@@ -57,7 +59,10 @@ public class Field {
 	}
 
 	public boolean isIgnorable() {
-		return Modifier.isNullable(modifiers);// || (!Modifier.isRequired(modifiers) && Modifier.isDefaultValue(modifiers));
+		return Modifier.isNullable(modifiers);// ||
+												// (!Modifier.isRequired(modifiers)
+												// &&
+												// Modifier.isDefaultValue(modifiers));
 	}
 
 	public boolean isRequired() {
@@ -119,6 +124,10 @@ public class Field {
 
 	public boolean isDerived() {
 		return Modifier.isDerived(modifiers);
+	}
+
+	public boolean isTransparent() {
+		return Modifier.isTransparent(modifiers) || Modifier.isDerived(modifiers);
 	}
 
 	public boolean isDefaultValue() {

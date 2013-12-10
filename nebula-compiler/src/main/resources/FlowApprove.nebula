@@ -1,0 +1,6 @@
+type FlowApprove | 审批  extends FlowStep {
+	Comment | 备注;
+	submit | 通过(){
+		this.next();
+	};
+};

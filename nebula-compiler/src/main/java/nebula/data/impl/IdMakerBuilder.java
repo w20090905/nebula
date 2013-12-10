@@ -50,6 +50,7 @@ public class IdMakerBuilder {
 			}
 		case Transaction:
 		case Relation:
+		case Flow:
 			for (Field f : type.getFields()) {
 				if (f.getType().getStandalone() == TypeStandalone.Basic && f.isKey()) {
 					keys.add(f.getName());

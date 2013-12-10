@@ -336,37 +336,45 @@ stepDefinition[Flow resideFlow]  returns[Flow.Step step]
     : 
       (annotations = annotationListDefinition)?
       actorQuery = queryLiteral?
-      stepID = ID
+      stepID = ID        
+         ('|' aliases=aliasesLiteral[$stepID.text])?
         (('extends' | ':') superTypeID=ID )?    
         {
             if($superTypeID==null){
-                superType = resolveType($stepID.text);
+                superType = resolveType("Flow" + $stepID.text);
                 if(superType==null){
                     superType = resolveType(Flow.APPROVE);
                  } 
             }else{
-                superType = resolveType($superTypeID.text);                
+                superType = resolveType("Flow" + $superTypeID.text);                
             }
         } 
         (
             '{'  NEWLINE?   
-                { 
+                {   
                     String name = resideFlow.name + "$" + $stepID.text + ( superTypeID==null?(resideFlow.steps.size()+1) : "");
                     stepType = new TypeImp(loader,resideFlow,name, superType); 
+                    stepType.getNameAlias().extend(superType.getNameAlias());                                        
                     enterType(stepType);
                 }
                 ('data.*' (';' NEWLINE?| NEWLINE) {stepType.attrs.put("WithAllField","WithAllField");})?
                 fieldDefinition[stepType]* 
             '}'     {exitType(resideFlow,stepType);} 
         )?
-        {          
+        {  
             if(stepType==null){
-                stepType = (TypeImp)superType;
+                String name = resideFlow.name + "$" + $stepID.text + ( superTypeID==null?(resideFlow.steps.size()+1) : "");
+                stepType = new TypeImp(loader,resideFlow,name, superType); 
             }
             step = resideFlow.addStep($actorQuery.text,$stepID.text,stepType);
             if(annotations != null){
                 step.attrs.putAll(annotations);
             }   
+            
+            if(aliases==null && step.type.getNameAlias() !=null) aliases = step.type.getNameAlias();
+            if(aliases==null) aliases = new Aliases(step.name); 
+                   
+            step.setNameAlias(aliases);
         }
          (';' NEWLINE?| NEWLINE)
     ;
@@ -375,7 +383,7 @@ queryLiteral
     : ('[' ((~(']'))*) ']')  ;
 
 programDefinition returns[List<TypeImp> retTypes]
-    : typeDefinition NEWLINE*
+    : (typeDefinition | flowDefinition) NEWLINE*
       {retTypes = this.types;}
     ;
     
@@ -557,6 +565,10 @@ fieldDefinition[TypeImp resideType] returns[Field field]
             }else{
               resideType.actions.add(field);            
             }
+            
+              if (field.getAttrs().containsKey(Field.Transparent)) {
+                field.modifiers |= Modifier.Transparent;
+              }
             
         }
         ;

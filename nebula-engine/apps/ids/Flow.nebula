@@ -1,5 +1,0 @@
-type Flow{
-  !!ID;
-  @Attach Type;
- !Name;
-}

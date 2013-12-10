@@ -58,6 +58,20 @@ public class JsonHelperProvider {
 		return broker;
 	}
 
+	public static DataHelper<Entity, Reader, Writer> getFlowHelper(final Type flow, final Type step) {
+
+		DataHelper<Entity, Reader, Writer> broker = Broker.watch(flow, new DataAdapter<Type, DataHelper<Entity, Reader, Writer>>() {
+
+			@Override
+			public DataHelper<Entity, Reader, Writer> watch(Type newData, Type oldData) {
+				return new DefaultJsonHelper<Entity>(factory, new FlowEntitySerializer(new EntitySerializer(newData), new EntitySerializer(step)));
+			}
+
+		});
+
+		return broker;
+	}
+
 	public static DataHelper<Entity, Reader, Writer> getSimpleHelper(final Type type) {
 
 		DataHelper<Entity, Reader, Writer> broker = Broker.watch(type, new DataAdapter<Type, DataHelper<Entity, Reader, Writer>>() {

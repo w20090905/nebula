@@ -125,6 +125,8 @@ class BootstrapTypeLoader extends TypeLoader {
 		master.attrs.put("Layout", "Basic");
 		TypeImp transaction = new TypeImp(this, TypeStandalone.Transaction.name(), ROOT, TypeStandalone.Abstract);
 		transaction.attrs.put("Layout", "Basic");
+		TypeImp flow = new TypeImp(this, TypeStandalone.Flow.name(), ROOT, TypeStandalone.Abstract);
+		flow.attrs.put("Layout", "Flow");
 		TypeImp mixin = new TypeImp(this, TypeStandalone.Mixin.name(), ROOT, TypeStandalone.Abstract);
 		
 		TypeImp number = new TypeImp(this, "Number", LONG);
@@ -140,6 +142,7 @@ class BootstrapTypeLoader extends TypeLoader {
 		attr.attrs.put("MaxLength", 60L);
 		typeList.add(master);
 		typeList.add(transaction);
+		typeList.add(flow);
 		typeList.add(mixin);
 		
 		typeList.add(attr);

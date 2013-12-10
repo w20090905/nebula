@@ -38,9 +38,10 @@ public class EditableEntity extends EntityImp implements Editable {
 		this.data = source.data;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Object get(String name) {
-		return newData.containsKey(name) || data == null ? newData.get(name) : data.get(name);
+	public <T> T get(String name) {
+		return newData.containsKey(name) || data == null ?  (T)newData.get(name) : (T)data.get(name);
 	}
 
 	public void put(String name, Object v) {

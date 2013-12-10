@@ -71,7 +71,7 @@ public abstract class Broker<T> implements BrokerHandler<T> {
 	}
 	@SuppressWarnings("unchecked")
 	final public static <T> T valueOf(T value) {
-		return ((BrokerHandler<T>) value).get();
+		return ((BrokerHandler<T>) value).getActualValue();
 	}
 	
 	final public static <T> BrokerHandler<T> broke(Class<T> clz, T value) {
@@ -90,11 +90,12 @@ public abstract class Broker<T> implements BrokerHandler<T> {
 
 	@SuppressWarnings("unchecked")
 	final public static <R, T> R watch(T watch, final DataAdapter<T, R> listener) {
+		if(watch instanceof Broker){
+		
 		Method m = listener.getClass().getMethods()[0];
 		Preconditions.checkArgument("watch".equals(m.getName()));
 		final BrokerHandler<R> r = brokerBuilder.builder(m.getReturnType());
 
-		Preconditions.checkState(watch instanceof Broker);
 		Broker<T> watchTo = (Broker<T>) watch;
 		watchTo.addWatcher(new DataWatcher<T>() {
 			@Override
@@ -105,6 +106,9 @@ public abstract class Broker<T> implements BrokerHandler<T> {
 			}
 		});
 		return (R) r;
+		}else{
+			return listener.watch(watch, watch);
+		}
 	}
 
 	private final static BrokerBuilder brokerBuilder = new BrokerBuilder();

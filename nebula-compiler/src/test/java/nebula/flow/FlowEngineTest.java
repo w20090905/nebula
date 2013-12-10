@@ -1,41 +1,36 @@
 package nebula.flow;
 
+import java.util.List;
+
 import junit.framework.TestCase;
+import nebula.data.DataRepos;
+import nebula.data.DataStore;
+import nebula.data.Entity;
+import nebula.data.impl.DefaultDataRepos;
+import nebula.data.impl.EditableEntity;
+import nebula.data.impl.TypeDatastore;
 import nebula.lang.Field;
 import nebula.lang.Flow;
-import nebula.lang.NebulaLexer;
-import nebula.lang.NebulaParser;
+import nebula.lang.Flow.Step;
 import nebula.lang.RuntimeContext;
 import nebula.lang.SystemTypeLoader;
 import nebula.lang.TypeLoaderForFlowTest;
-import nebula.lang.Flow.Step;
-
-import org.antlr.runtime.ANTLRStringStream;
-import org.antlr.runtime.CommonTokenStream;
-import org.antlr.runtime.RecognitionException;
 
 public class FlowEngineTest extends TestCase {
 	TypeLoaderForFlowTest typeLoader;
+	DataRepos datarepos;
+	TypeDatastore types;
 	RuntimeContext context = new RuntimeContext() {
 	};
 
 	protected void setUp() throws Exception {
 		typeLoader = new TypeLoaderForFlowTest(new SystemTypeLoader());
-
+		types = new TypeDatastore(typeLoader);
+		datarepos = new DefaultDataRepos(types);
 	}
 
 	private Flow parseFlow(String text) {
-		try {
-			NebulaLexer lexer = new NebulaLexer(new ANTLRStringStream(text));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NebulaParser parser = new NebulaParser(tokens, typeLoader);
-			Flow flow = parser.flowDefinition();
-			assertEquals(0, parser.getNumberOfSyntaxErrors());
-			return flow;
-		} catch (RecognitionException e) {
-			fail(e.toString());
-			return null;
-		}
+		return (Flow) typeLoader.load(text);
 	}
 
 	protected void tearDown() throws Exception {
@@ -61,56 +56,78 @@ public class FlowEngineTest extends TestCase {
 		Long age = 10L;
 		Flow flow = parseFlow(text);
 
-		FlowEngine engine = new FlowEngine(context, flow);
+		FlowEngine engine = new FlowEngine(datarepos, flow);
 		// 启动流程
-		engine.start();
+		EditableEntity data = engine.start(context);
 
 		// 初始画面
-		assertEquals("Begin", engine.currentStep.getName());
-		assertEquals("GP", engine.currentStep.getAttrs().get(Step.Next));
-		assertNull(engine.data.get("Name"));
-		assertNull(engine.data.get("Age"));
-		for (Field field : engine.currentStep.getType().getActions()) {
+		List<Entity> steps = data.get("steps");
+		Entity currentStepEntity = steps.get(steps.size() - 1);
+		Step currentStep = flow.getSteps().get((String) currentStepEntity.get(Step.Field_ActualCurrrentStep));
+
+		assertEquals("Begin", currentStep.getName());
+		assertEquals("GP", currentStep.getAttrs().get(Step.NextAnnotation));
+		assertNull(data.get("Name"));
+		assertNull(data.get("Age"));
+		for (Field field : currentStep.getType().getActions()) {
 			if (!field.isInternal()) {
 				System.out.println("Action : " + field.getDisplayName());
 			}
 		}
 
 		// 录入数据，提交
-		engine.currentStepEntity.put("Name", name);
-		engine.currentStepEntity.put("Age", age);
-		engine.stepSubmit();
+		currentStepEntity.put("Name", name);
+		currentStepEntity.put("Age", age);
+		engine.stepSubmit(context, data);
 
 		// 进入审批画面
-		assertEquals("Approve", engine.currentStep.getName());
-		assertEquals(name, engine.data.get("Name"));
-		assertEquals(age, engine.data.get("Age"));
-		for (Field field : engine.currentStep.getType().getActions()) {
+		steps = data.get("steps");
+		currentStepEntity = steps.get(steps.size() - 1);
+		currentStep = flow.getSteps().get((String) currentStepEntity.get(Step.Field_ActualCurrrentStep));
+		
+		assertEquals("Approve", currentStep.getName());
+		assertEquals(name, data.get("Name"));
+		assertEquals(age, data.get("Age"));
+		for (Field field : currentStep.getType().getActions()) {
 			if (!field.isInternal()) {
 				System.out.println("Action : " + field.getDisplayName());
 			}
 		}
 
 		// 审批通过
-		engine.stepSubmit();
+		assertNull(currentStepEntity.get("Comment"));
+		currentStepEntity.put("Comment", "Approve2 OK");
+		engine.stepSubmit(context, data);
 
 		// 进入审批画面
-		assertEquals("Approve2", engine.currentStep.getName());
-		assertEquals(name, engine.data.get("Name"));
-		assertEquals(age, engine.data.get("Age"));
-		for (Field field : engine.currentStep.getType().getActions()) {
+		steps = data.get("steps");
+		currentStepEntity = steps.get(steps.size() - 1);
+		currentStep = flow.getSteps().get((String) currentStepEntity.get(Step.Field_ActualCurrrentStep));
+		assertEquals("Approve2", currentStep.getName());
+		assertEquals(name, data.get("Name"));
+		assertEquals(age, data.get("Age"));
+		for (Field field : currentStep.getType().getActions()) {
 			if (!field.isInternal()) {
 				System.out.println("Action : " + field.getDisplayName());
 			}
 		}
 
 		// 审批通过
-		engine.stepSubmit();
+		assertNull(currentStepEntity.get("Comment"));
+		currentStepEntity.put("Comment", "Approve3 OK");
+		engine.stepSubmit(context, data);
 
 		// 进入结束Step
-		assertEquals("End", engine.currentStep.getName());
-		assertEquals(name, engine.data.get("Name"));
-		assertEquals(age, engine.data.get("Age"));
+		steps = data.get("steps");
+		currentStepEntity = steps.get(steps.size() - 1);
+		currentStep = flow.getSteps().get((String) currentStepEntity.get(Step.Field_ActualCurrrentStep));
+		assertEquals("End", currentStep.getName());
+		assertEquals(name, data.get("Name"));
+		assertEquals(age, data.get("Age"));
+
+		DataStore<Entity> d = datarepos.define(String.class, Entity.class, flow.getName());
+		Entity entity = d.listAll().get(0);
+		System.out.println(entity);
 	}
 
 	public final void testFlowEngine_Skip() {
@@ -137,50 +154,62 @@ public class FlowEngineTest extends TestCase {
 		Long age = 10L;
 		Flow flow = parseFlow(text);
 
-		FlowEngine engine = new FlowEngine(context, flow);
+		FlowEngine engine = new FlowEngine(datarepos, flow);
 		// 启动流程
-		engine.start();
+		EditableEntity data = engine.start(context);
 
-		// 初始画面
-		assertEquals("Begin", engine.currentStep.getName());
-		assertNull(engine.data.get("Name"));
-		assertNull(engine.data.get("Age"));
-		for (Field field : engine.currentStep.getType().getActions()) {
+		// 初始画面		
+		List<Entity> steps = data.get("steps");
+		Entity currentStepEntity = steps.get(steps.size() - 1);
+		Step currentStep = flow.getSteps().get((String) currentStepEntity.get(Step.Field_ActualCurrrentStep));
+
+		assertEquals("Begin", currentStep.getName());
+		assertNull(data.get("Name"));
+		assertNull(data.get("Age"));
+		for (Field field : currentStep.getType().getActions()) {
 			if (!field.isInternal()) {
 				System.out.println("Action : " + field.getDisplayName());
 			}
 		}
 
 		// 录入数据，提交
-		engine.currentStepEntity.put("Name", name);
-		engine.currentStepEntity.put("Age", age);
-		engine.stepSubmit();
+		currentStepEntity.put("Name", name);
+		currentStepEntity.put("Age", age);
+		engine.stepSubmit(context,data);
 
 		// 跳过第一级审批画面
-		// assertEquals("Approve", engine.currentStep.getName());
-		// assertEquals(name, engine.data.get("Name"));
-		// assertEquals(age, engine.data.get("Age"));
+		// assertEquals("Approve", currentStep.getName());
+		// assertEquals(name, data.get("Name"));
+		// assertEquals(age, data.get("Age"));
 
 		// 审批通过
 		// engine.stepSubmit();
 
 		// 进入第二级审批画面
-		assertEquals("Approve2", engine.currentStep.getName());
-		assertEquals(name, engine.data.get("Name"));
-		assertEquals(age, engine.data.get("Age"));
-		for (Field field : engine.currentStep.getType().getActions()) {
+		steps = data.get("steps");
+		currentStepEntity = steps.get(steps.size() - 1);
+		currentStep = flow.getSteps().get((String) currentStepEntity.get(Step.Field_ActualCurrrentStep));
+
+		assertEquals("Approve2", currentStep.getName());
+		assertEquals(name, data.get("Name"));
+		assertEquals(age, data.get("Age"));
+		for (Field field : currentStep.getType().getActions()) {
 			if (!field.isInternal()) {
 				System.out.println("Action : " + field.getDisplayName());
 			}
 		}
 
 		// 审批通过
-		engine.stepSubmit();
+		engine.stepSubmit(context,data);
 
 		// 进入结束Step
-		assertEquals("End", engine.currentStep.getName());
-		assertEquals(name, engine.data.get("Name"));
-		assertEquals(age, engine.data.get("Age"));
+		steps = data.get("steps");
+		currentStepEntity = steps.get(steps.size() - 1);
+		currentStep = flow.getSteps().get((String) currentStepEntity.get(Step.Field_ActualCurrrentStep));
+
+		assertEquals("End", currentStep.getName());
+		assertEquals(name, data.get("Name"));
+		assertEquals(age, data.get("Age"));
 	}
 	//
 	// public final void testStart() {

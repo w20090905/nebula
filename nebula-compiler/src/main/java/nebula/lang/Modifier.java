@@ -30,8 +30,8 @@ public class Modifier {
 		return (mod & Required) != 0;
 	}
 
-	public static boolean isTransient(int mod) {
-		return (mod & TRANSIENT) != 0;
+	public static boolean isTransparent(int mod) {
+		return (mod & Transparent) != 0;
 	}
 
 	public static boolean isNative(int mod) {
@@ -58,7 +58,7 @@ public class Modifier {
 		if ((mod & ABSTRACT) != 0) sb.append("abstract ");
 		if ((mod & Nullable) != 0) sb.append("static ");
 		if ((mod & Derived) != 0) sb.append("final ");
-		if ((mod & TRANSIENT) != 0) sb.append("transient ");
+		if ((mod & Transparent) != 0) sb.append("transient ");
 		if ((mod & Required) != 0) sb.append("volatile ");
 		if ((mod & DefaultValue) != 0) sb.append("synchronized ");
 		if ((mod & NATIVE) != 0) sb.append("native ");
@@ -113,7 +113,7 @@ public class Modifier {
 	 * The <code>int</code> value representing the <code>transient</code>
 	 * modifier.
 	 */
-	public static final int TRANSIENT = 0x00000080;
+	public static final int Transparent = 0x00000080;
 
 	/**
 	 * The <code>int</code> value representing the <code>native</code> modifier.

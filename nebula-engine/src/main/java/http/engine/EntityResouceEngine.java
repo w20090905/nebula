@@ -5,6 +5,9 @@ import http.resource.AttachedEntityNewResouce;
 import http.resource.EntityListResouce;
 import http.resource.EntityNewResouce;
 import http.resource.EntityResouce;
+import http.resource.FlowListResouce;
+import http.resource.FlowNewResouce;
+import http.resource.FlowResouce;
 import http.resource.TxEntityResource;
 import http.resource.TypeEditableResouce;
 import http.resource.TypeListResouce;
@@ -107,7 +110,16 @@ public class EntityResouceEngine implements ResourceEngine {
 		Type typeBroker = typeBrokers.getBroker(typeName);
 		DataStore<Entity> storeHolder = dataRepos.define(Long.class, Entity.class, typeName);
 		DataHelper<Entity, Reader, Writer> jsonHolder = JsonHelperProvider.getSimpleHelper(typeBroker);
-		return new EntityListResouce(typeBroker, jsonHolder, storeHolder);
+		switch (typeBroker.getStandalone()) {
+		case Transaction:
+		case Relation:
+			return new EntityListResouce(typeBroker, jsonHolder, storeHolder);
+		case Flow:
+			return new FlowListResouce(dataRepos, jsonHolder, storeHolder, typeBroker);
+		case Master:
+		default:
+			return new EntityListResouce(typeBroker, jsonHolder, storeHolder);
+		}
 	}
 
 	private Resource makeEntityNewResouce(String typeName) {
@@ -115,11 +127,16 @@ public class EntityResouceEngine implements ResourceEngine {
 		DataStore<Entity> storeHolder = dataRepos.define(Long.class, Entity.class, typeName);
 		DataHelper<Entity, Reader, Writer> jsonHolder = JsonHelperProvider.getHelper(typeBroker);
 
-		// if (typeBroker.get().getStandalone() == TypeStandalone.Transaction) {
-		// // return new TxEntityResource(jsonHolder, storeHolder, id);
-		// } else {
-		return new EntityNewResouce(null, dataRepos, jsonHolder, typeBroker, storeHolder);
-		// }
+		switch (typeBroker.getStandalone()) {
+		case Transaction:
+		case Relation:
+			return new EntityNewResouce(null, dataRepos, jsonHolder, typeBroker, storeHolder);
+		case Flow:
+			return new FlowNewResouce(dataRepos, storeHolder, typeBroker);
+		case Master:
+		default:
+			return new EntityNewResouce(null, dataRepos, jsonHolder, typeBroker, storeHolder);
+		}
 	}
 
 	private Resource makeAttachedEntityNewResouce(String attachToTypeName, String attachToID, String typeName) {
@@ -142,10 +159,12 @@ public class EntityResouceEngine implements ResourceEngine {
 		switch (typeBroker.getStandalone()) {
 		case Transaction:
 		case Relation:
-			return new TxEntityResource(dataRepos,jsonHolder, storeHolder, id);
+			return new TxEntityResource(dataRepos, jsonHolder, storeHolder, id);
+		case Flow:
+			return new FlowResouce(dataRepos, storeHolder, typeBroker,id);
 		case Master:
 		default:
-			return new EntityResouce(dataRepos,jsonHolder, storeHolder,typeBroker, id);
+			return new EntityResouce(dataRepos, jsonHolder, storeHolder, typeBroker, id);
 		}
 	}
 

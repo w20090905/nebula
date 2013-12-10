@@ -4,6 +4,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import nebula.data.SmartList;
+import nebula.lang.Flow.Step;
+
 import util.InheritHashMap;
 
 import com.google.common.collect.Lists;
@@ -263,6 +266,11 @@ public class TypeImp implements Type {
 	@Override
 	public String getFullName() {
 		return this.superType!=null?this.superType.getFullName() + "." + this.name: this.name;
+	}
+
+	@Override
+	public SmartList<String, Step> getSteps() {
+		return null;
 	}
 
 }

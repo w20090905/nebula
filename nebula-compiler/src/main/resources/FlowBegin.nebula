@@ -1,0 +1,5 @@
+type FlowBegin|启动 extends FlowStep {
+	submit | 提交(){			
+		this.next();		
+	}; 
+};

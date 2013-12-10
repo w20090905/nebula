@@ -8,7 +8,7 @@ flow Qingjia {
 
 	[me.department.leader] Approve{
 		init(){
-			Days < 3 => skip();
+			Days < 3 ? skip();
 		}
 	};
 

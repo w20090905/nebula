@@ -21,6 +21,8 @@ public class DbDataRepos extends DefaultDataRepos implements DataReposEx {
 	@SuppressWarnings("rawtypes")
 	protected DataStore loadDataStore(String name, Type type) {
 		switch (type.getStandalone()) {
+		case Flow:
+			return new EntityDataStore(IdMakerBuilder.getIDReader(type), this, type);
 		case Transaction:
 		case Relation:
 			return new DbTransactionEntityDataStore(this, type, (DbTxDataExecutor) dbConfig.getPersister(type));
