@@ -1,6 +1,6 @@
-package nebula.data;
+package nebula.data.sample;
 
-public interface BrokerTestInputInterface {
+public interface BrokerIII {
 	String get(String name);
 	String get(String name,String name2);
 }

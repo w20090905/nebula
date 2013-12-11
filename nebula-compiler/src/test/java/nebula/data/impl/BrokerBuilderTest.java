@@ -4,8 +4,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import nebula.data.Broker;
-import nebula.data.BrokerTestInputInterface;
 import nebula.data.impl.BrokerBuilder;
+import nebula.data.sample.BrokerIII;
 import junit.framework.TestCase;
 
 public class BrokerBuilderTest extends TestCase {
@@ -26,9 +26,9 @@ public class BrokerBuilderTest extends TestCase {
 
 	public final void testBuilder() {
 		builder = new BrokerBuilder();
-		BrokerTestInputInterface a = builder.builder(BrokerTestInputInterface.class);
+		BrokerIII a = builder.builder(BrokerIII.class);
 
-		Broker.update(a, new BrokerTestInputInterface() {
+		Broker.update(a, new BrokerIII() {
 			@Override
 			public String get(String name) {
 				return name + "____";
@@ -46,9 +46,9 @@ public class BrokerBuilderTest extends TestCase {
 
 	public final void testBuilder_Performance() throws InstantiationException, IllegalAccessException {
 		builder = new BrokerBuilder();
-		BrokerTestInputInterface a = builder.builder(BrokerTestInputInterface.class);
+		BrokerIII a = builder.builder(BrokerIII.class);
 
-		Broker.update(a, new BrokerTestInputInterface() {
+		Broker.update(a, new BrokerIII() {
 			@Override
 			public String get(String name) {
 				return name + "____";
@@ -125,7 +125,7 @@ public class BrokerBuilderTest extends TestCase {
 		{
 			long start, end, nanoAll, nanoEvery;
 			start = System.nanoTime();
-			Class<?> clz = BrokerTestInputInterface.class;
+			Class<?> clz = BrokerIII.class;
 
 			for (int i = 0; i < MAX; i++) {
 				a = builder.builder(clz);

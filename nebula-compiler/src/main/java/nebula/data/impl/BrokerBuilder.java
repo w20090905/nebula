@@ -8,11 +8,13 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
 import nebula.data.Broker;
+import nebula.data.BrokerHandler;
 import nebula.lang.NebulaClassLoader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 
@@ -63,7 +65,13 @@ public class BrokerBuilder {
 				ClassReader cr = new ClassReader(target.getName());
 				ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
 
-				BrokerInterfaceClassVisitor bw = new BrokerInterfaceClassVisitor(Opcodes.ASM4, cw, innerTypeName);
+				ClassVisitor bw;
+				if(target.isInterface()){
+					bw= new BrokerForInterfaceClassVisitor(Opcodes.ASM4, cw, innerTypeName);
+				}else{
+					target.getConstructor();
+					bw= new BrokerForClassClassVisitor(Opcodes.ASM4, cw, innerTypeName);					
+				}
 				cr.accept(bw, ClassReader.SKIP_CODE);
 				byte[] code = cw.toByteArray();
 
@@ -114,7 +122,7 @@ public class BrokerBuilder {
 			ImmutableMap.Builder<String, BrokerInstanceBuilder> mapBuilder = ImmutableMap.builder();
 
 			this.knownBrokeres = mapBuilder.putAll(knownBrokeres).put(target.getName(), builder).build();
-			Broker<T> broker = builder.build();
+			BrokerHandler<T> broker = builder.build();
 			return broker.get();
 
 		} catch (ClassFormatError e) {
@@ -129,6 +137,12 @@ public class BrokerBuilder {
 		} catch (IllegalAccessException e) {
 			log.error(e);
 			throw new RuntimeException(e);
+		} catch (SecurityException e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		} catch (NoSuchMethodException e) {
+			log.error(e);
+			throw new RuntimeException("Must has default constructor",e);
 		} finally {
 			lock.unlock();
 		}
