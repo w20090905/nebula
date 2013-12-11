@@ -23,7 +23,6 @@ import nebula.data.json.JsonHelperProvider;
 import nebula.flow.FlowEngine;
 import nebula.lang.Flow;
 import nebula.lang.Flow.Step;
-import nebula.lang.NebulaNative;
 import nebula.lang.RuntimeContext;
 import nebula.lang.Type;
 import nebula.server.Resource;
@@ -39,12 +38,12 @@ public class FlowResouce extends AbstractResouce implements ResourceEngine {
 	private Flow flow;
 	private final DataStore<Entity> datastore;
 	private final Map<String, DataHelper<Entity, Reader, Writer>> stepJsons;
-	private final DataRepos dataRepos;
+//	private final DataRepos dataRepos;
 	private long id;
 
 	public FlowResouce(final DataRepos dataRepos, DataStore<Entity> datas, Type type, String id) {
 		super("text/json", 1, 1);
-		this.dataRepos = dataRepos;
+//		this.dataRepos = dataRepos;
 		this.datastore = datas;
 		this.id = Long.parseLong(id);
 		Broker.brokerOf(type).addWatcher(new DataWatcher<Type>() {
