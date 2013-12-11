@@ -37,6 +37,7 @@ public class EntityNewResouce extends AbstractResouce {
 	@Override
 	protected void get(HttpServletRequest req) throws IOException {
 		Entity data = new EditableEntity();
+		long newModified;
 		for (Map.Entry<String, String[]> entry : req.getParameterMap().entrySet()) {
 			data.put(entry.getKey(), entry.getValue()[0]);
 		}		
@@ -56,6 +57,7 @@ public class EntityNewResouce extends AbstractResouce {
 			sb.append(',');
 		}
 		sb.setCharAt(sb.length() - 1, '}');*/
+		newModified = System.currentTimeMillis();
 		
 
 
@@ -65,7 +67,7 @@ public class EntityNewResouce extends AbstractResouce {
 			Writer write = new OutputStreamWriter(bout);
 			jsonHolder.stringifyTo(data, new OutputStreamWriter(bout));
 			write.flush();
-			// this.lastModified = newModified;
+			this.lastModified = newModified;
 			this.cache = bout.toByteArray();
 		} finally {
 			try {
