@@ -34,13 +34,13 @@ public class FlowEntitySerializer implements JsonDataHelper<Entity> {
 
 			@SuppressWarnings("unused")
 			String frontName = in.getCurrentName();// Flow
-			in.nextToken();
+//			in.nextToken();
 			flow.readFrom(entity, in);
 			in.nextToken();
 
 			Preconditions.checkArgument(token == JsonToken.FIELD_NAME);
 			frontName = in.getCurrentName();// Flow
-			in.nextToken();
+		
 			EditableEntity stepEntity = null;
 			stepEntity = entity.get(Flow.Field_CurrrentStepEntity);
 			stepEntity = (EditableEntity)step.readFrom(stepEntity, in);

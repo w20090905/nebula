@@ -43,11 +43,11 @@ public class FlowEngineTest extends TestCase {
 				"flow Issue { \n" +
 				"	@Next(\"GP\") [employee] Begin{ \n" +
 				"	data.*;	" +
-				"	Name;\n" +
+				"		Name;\n" +
 				"		Age :=10;\n" +
 				"	};\n" +
-				"	[employee] Approve;\n" +
-				"	[employee] Approve;\n" +
+				"	[employee] Approve | 审批;\n" +
+				"	[employee] Approve | 审批审批;\n" +
 				"	[employee] End{ };\n" +
 				"};\n";
 		//@formatter:on		
@@ -82,6 +82,10 @@ public class FlowEngineTest extends TestCase {
 
 		// 进入审批画面
 		steps = data.get("steps");
+
+		assertEquals("审批", data.get("curStep"));
+		assertEquals(name, data.get("Name"));
+		
 		currentStepEntity = steps.get(steps.size() - 1);
 		currentStep = flow.getSteps().get((String) currentStepEntity.get(Step.Field_ActualCurrrentStep));
 		

@@ -194,6 +194,10 @@ form {
 	margin-bottom: 0;
 }
 
+.form-horizontal fieldset>legend {
+	margin-bottom: 0px;
+}
+
 .widget-box form.form-horizontal {
 	margin-bottom: 0px;
 }
@@ -229,7 +233,7 @@ form {
 }
 
 .form-horizontal .control-group:last-child {
-	border-bottom: 0;
+	border-bottom: 1px solid #eeeeee;
 }
 
 .form-horizontal .control-label {
@@ -249,6 +253,9 @@ form {
 	margin-left: 135px;
 }
 
+.widget-box legend+.control-group {
+	margin-top: 0px;
+}
 /*
 .form-horizontal input[type=text],.form-horizontal input[type=password],.form-horizontal textarea
 	{
@@ -282,13 +289,15 @@ form.form-horizontal input.ng-valid.ng-dirty {
 }
 
 .form-horizontal {
-	padding-top: 10px;
+	padding-top: 3px;
 }
 
 .form-horizontal  fieldset>legend {
+	border-top: 1px solid #ffffff;
 	width: 98%;
-	margin-bottom: 4px;
+	margin-bottom: 0px;
 	padding-left: 2%;
+	border-bottom: 1px solid #C9C9C9;
 }
 
 /* modal */
@@ -305,7 +314,7 @@ form.form-horizontal input.ng-valid.ng-dirty {
 
 .table th.id {
 	text-align: right;
-	width: 8%;
+	width: 12%;
 	min-width: 100px;
 }
 

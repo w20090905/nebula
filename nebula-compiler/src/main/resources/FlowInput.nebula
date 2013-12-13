@@ -1,0 +1,8 @@
+@FlowInput
+type FlowInput | 启动 extends FlowStep {
+	submit | 提交(){			
+		this.next();		
+	}; 
+	save | 暂存(){
+	}; 
+};

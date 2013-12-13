@@ -38,12 +38,13 @@ public class FlowResouce extends AbstractResouce implements ResourceEngine {
 	private Flow flow;
 	private final DataStore<Entity> datastore;
 	private final Map<String, DataHelper<Entity, Reader, Writer>> stepJsons;
-//	private final DataRepos dataRepos;
+	private final Map<String, DataHelper<Entity, Reader, Writer>> stepRawJsons;
+	// private final DataRepos dataRepos;
 	private long id;
 
 	public FlowResouce(final DataRepos dataRepos, DataStore<Entity> datas, Type type, String id) {
 		super("text/json", 1, 1);
-//		this.dataRepos = dataRepos;
+		// this.dataRepos = dataRepos;
 		this.datastore = datas;
 		this.id = Long.parseLong(id);
 		Broker.brokerOf(type).addWatcher(new DataWatcher<Type>() {
@@ -59,35 +60,86 @@ public class FlowResouce extends AbstractResouce implements ResourceEngine {
 		for (Step step : this.flow.getSteps()) {
 			stepJsons.put(step.getName(), JsonHelperProvider.getFlowHelper(type, step.getType()));
 		}
+		stepRawJsons = new HashMap<String, DataHelper<Entity, Reader, Writer>>();
+		for (Step step : this.flow.getSteps()) {
+			stepRawJsons.put(step.getName(), JsonHelperProvider.getHelper(step.getType()));
+		}
 		// jsonflow = JsonHelperProvider.getHelper(type);
 	}
 
 	@Override
 	protected void get(HttpServletRequest req) throws IOException {
 		Entity data = datastore.get(id).editable();
-		List<Entity> steps = data.get("steps");
-		Entity currentStepEntity = steps.get(steps.size() - 1);
-		Step currentStep = flow.getSteps().get((String) currentStepEntity.get(Step.Field_ActualCurrrentStep));
-		DataHelper<Entity, Reader, Writer> jsonStep = this.stepJsons.get(currentStep.getName());
-		data.put(Flow.Field_CurrrentStepEntity, currentStepEntity);
-		datastore.clearChanges();
-		
-		long newModified = System.currentTimeMillis();
+		if (!req.getParameterMap().containsKey("history")) {
+			List<Entity> steps = data.get("steps");
+			Entity currentStepEntity = steps.get(steps.size() - 1);
+			Step currentStep = flow.getSteps().get((String) currentStepEntity.get(Step.Field_ActualCurrrentStep));
+			DataHelper<Entity, Reader, Writer> jsonStep = this.stepJsons.get(currentStep.getName());
+			data.put(Flow.Field_CurrrentStepEntity, currentStepEntity);
+			datastore.clearChanges();
 
-		ByteArrayOutputStream bout = null;
-		try {
-			bout = new ByteArrayOutputStream();
-			Writer write = new OutputStreamWriter(bout);
-			jsonStep.stringifyTo(data, write);
-			write.flush();
-			this.lastModified = newModified;
-			this.cache = bout.toByteArray();
-		} finally {
+			long newModified = System.currentTimeMillis();
+
+			ByteArrayOutputStream bout = null;
 			try {
-				if (bout != null) bout.close();
-			} catch (Exception e) {
+				bout = new ByteArrayOutputStream();
+				Writer write = new OutputStreamWriter(bout);
+				jsonStep.stringifyTo(data, write);
+				write.flush();
+				this.lastModified = newModified;
+				this.cache = bout.toByteArray();
+			} finally {
+				try {
+					if (bout != null) bout.close();
+				} catch (Exception e) {
+				}
+			}
+		} else {
+			List<Entity> steps = data.get("steps");
+			datastore.clearChanges();
+
+			long newModified = System.currentTimeMillis();
+
+			ByteArrayOutputStream bout = null;
+			boolean start = true;
+			try {
+				bout = new ByteArrayOutputStream();
+				Writer write = new OutputStreamWriter(bout);
+				write.write('{');
+				write.write("\"ID\":");
+				write.write(String.valueOf(data.getID()));
+				write.write(',');
+				write.write("\"steps\":[");				
+				for (Entity entity : steps) {
+					if(!start){
+						write.write(',');
+					}
+					write.write('{');
+					Step currentStep = flow.getSteps().get((String) entity.get(Step.Field_ActualCurrrentStep));
+					DataHelper<Entity, Reader, Writer> jsonStep = this.stepRawJsons.get(currentStep.getName());
+					write.write("\"StepName\":");
+					write.write('\"');
+					write.write(currentStep.getName());
+					write.write('\"');
+					write.write(',');
+					write.write("\"StepData\":");
+					jsonStep.stringifyTo(entity, write);	
+					write.write("}");
+					start = false;
+				}
+				write.write("]");		
+				write.write("}");
+				write.flush();
+				this.lastModified = newModified;
+				this.cache = bout.toByteArray();
+			} finally {
+				try {
+					if (bout != null) bout.close();
+				} catch (Exception e) {
+				}
 			}
 		}
+
 	}
 
 	@Override
@@ -99,15 +151,15 @@ public class FlowResouce extends AbstractResouce implements ResourceEngine {
 			Entity currentStepEntity = steps.get(steps.size() - 1);
 			Step currentStep = flow.getSteps().get((String) currentStepEntity.get(Step.Field_ActualCurrrentStep));
 			DataHelper<Entity, Reader, Writer> jsonStep = this.stepJsons.get(currentStep.getName());
-			
-			data.put(Flow.Field_CurrrentStepEntity, currentStepEntity);			
+
+			data.put(Flow.Field_CurrrentStepEntity, currentStepEntity);
 			jsonStep.readFrom(data, new InputStreamReader(req.getInputStream()));
 			currentStepEntity = data.getEntity(Flow.Field_CurrrentStepEntity);
-			
+
 			String action = req.getParameter("$action");
 			if (action != null && !"save".equals(action)) {
 				RuntimeContext context = new RuntimeContext();
-				engine.stepSubmit(context, action, (EditableEntity)data);
+				engine.stepSubmit(context, action, (EditableEntity) data);
 			}
 		} else {
 			throw new RuntimeException("Cann't find object " + id);

@@ -27,11 +27,22 @@ public class Flow extends TypeImp {
 				return input.name;
 			}
 		});
-		Field id = new Field(this, "ID");
-		id.type = typeLoader.findType("ID");
-		id.modifiers = Modifier.Key;	
-		id.refer = Reference.ByVal;
-		fields.add(id);
+		{
+			Field id = new Field(this, "ID");
+			id.type = typeLoader.findType("ID");
+			id.modifiers = Modifier.Key;
+			id.refer = Reference.ByVal;
+			id.nameAlias = new Aliases(id.name);
+			fields.add(id);
+		}
+		{
+			Field id = new Field(this,"curStep");
+			id.type = typeLoader.findType("Name");
+			id.refer = Reference.ByVal;
+			id.nameAlias = new Aliases("当前状态");
+			fields.add(id);
+		}
+		
 	}
 
 	public Step addStep(String actorQuery, String name, Type stepType) {
@@ -40,10 +51,14 @@ public class Flow extends TypeImp {
 		if (cnt > 1) {
 			name = name + cnt;
 		}
-		
+
 		Step step = new Step(this, this.steps.size(), name, actorQuery, stepType);
-		
+
 		this.steps.add(step);
+
+		if (Step.Begin.equals(step.name)) {
+			this.fields.addAll(step.type.getDeclaredFields()); // 需设定为无需持久化
+		}
 		return step;
 	}
 
@@ -53,13 +68,12 @@ public class Flow extends TypeImp {
 		public final static String Field_ActualNextStep = "ActualNextStep";
 		public final static String Field_NextStep = "NextStep";
 		public final static String Field_DoItNow = "DoItNow";
-		
-		
+
 		// Actions
 		public final static String Init = "init";
 		public final static String Submit = "submit";
-		//Annotation
-		public final static String NextAnnotation = "Next";		
+		// Annotation
+		public final static String NextAnnotation = "Next";
 		// Steps
 		public final static String Begin = "Begin";
 		public final static String Previous = "<Previous>";
@@ -67,7 +81,7 @@ public class Flow extends TypeImp {
 		public final static String Cancel = "<Cancel>";
 		public final static String Terminal = "<Terminal>";
 		public final static String End = "End";
-		
+
 		final Flow resideFlow;
 		final Type type;
 		final String name;

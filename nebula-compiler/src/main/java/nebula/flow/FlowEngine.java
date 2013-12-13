@@ -46,6 +46,7 @@ public class FlowEngine {
 		NebulaNative.ctor(context, datarepos, currentStepEntity, step.getType());
 
 		currentStepEntity.put(Step.Field_ActualCurrrentStep, currentStep.getName());
+		data.put("curStep", currentStep.getDisplayName());
 
 		Field action = step.getType().getActionByName(Step.Init);
 		Preconditions.checkNotNull(action);

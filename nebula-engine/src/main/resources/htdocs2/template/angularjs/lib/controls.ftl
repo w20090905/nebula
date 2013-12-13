@@ -25,7 +25,7 @@
 			title="${field.attrs.Remarks}"
 		[#elseif field.attrs.Desc??]
 			title="${field.attrs.Desc}"
-		[#else]]
+		[#else]
 			title="${field.displayName}"
 		[/#if]			
 	[/@compress][/#assign]
@@ -67,6 +67,70 @@
 	[#else]
 		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}  ${opt}
 				${optReadonly} ${optRequired}  ${optValidateRule} ${optTitle}	class="${optClass}"	
+			/>
+	[/#if]
+[/#macro]
+
+[#macro view field id ngModel placeholder key=false required=true readonly=false ex=""]
+	[#assign optType][@compress single_line=true]
+		[#switch field.attrs.FormatType!"text"]
+			[#case "text"]		type="text"		[#break]
+			[#case "numeric"]	type="number"	[#break]
+			[#case "email"]		type="email"	[#break]
+			[#case "checkbox"]		type="checkbox"	[#break]
+			[#case "date"]		type="text"	data-date-format="yyyy-mm-dd" [#break]
+			[#default]			type="text"		[#break]				
+		[/#switch]			
+	[/@compress][/#assign]
+	[#assign optClass][@compress single_line=true]
+		[#switch field.attrs.FormatType!"text"]
+			[#case "date"]datepicker [#break]
+		[/#switch]
+		[#if field.attrs.SingleLine??]
+			input-xxlarge 
+		[/#if]		
+	[/@compress][/#assign]
+	
+	[#assign optTitle][@compress single_line=true]
+		[#if field.attrs.Remarks??]
+			title="${field.attrs.Remarks}"
+		[#elseif field.attrs.Desc??]
+			title="${field.attrs.Desc}"
+		[#else]]
+			title="${field.displayName}"
+		[/#if]			
+	[/@compress][/#assign]
+	[#assign opt][#if field.attrs.DisplayOn??]x-ng-show="${field.attrs.DisplayOnExpression}"[/#if][/#assign]
+	[#assign optReadonly]readonly[/#assign]
+	[#if field.type.attrs.SP?? &&  field.type.attrs.SP = "Attr"]
+		[#assign attrValues][@compress single_line=true]			
+			[#list (attrs[field.name].Values)![] as attr],{'name':'${attr.Name}'}[/#list]
+		[/@compress] [/#assign]
+		
+		<select id="${id}" x-ng-init="${id}values = [${attrValues?substring(1)}];"  ${ex} ${opt}
+				${optReadonly}  	${optTitle}	 class="${optClass}"
+				x-ng-model="${ngModel}" x-ng-options="c.name as c.name for c in ${id}values" placeholder="${placeholder}">	
+			<option value="">-- 选择 ${field.displayName} --</option>
+		</select>
+	[#elseif field.attrs.FormatType! = "textarea"]
+		<textarea id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex} ${opt} 
+			${optReadonly}  	${optTitle}	 class="${optClass} input-xxlarge "
+			></textarea>		
+	[#elseif field.attrs.FormatType! = "checkbox"]
+		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex} ${opt} 
+				${optReadonly}  	${optTitle}	 class="${optClass}"	
+			/>
+	[#elseif field.derived&& !field.attrs.ComputeBackend??]
+		<input ${optType} id="${id}"  placeholder="${placeholder}"  ${ex}  ${opt} 
+				readonly ${optTitle}	class="${optClass}"	value="{{${field.attrs.DerivedExpression}}}"
+			/>
+	[#elseif field.defaultValue && !field.attrs.ComputeBackend??]
+		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="{{${field.attrs.DefaultExpression}}}"  ${ex}  ${opt} 
+				${optReadonly}  ${optTitle}	class="${optClass}"	
+			/>
+	[#else]
+		<input ${optType} id="${id}"  x-ng-model="${ngModel}" placeholder="${placeholder}"  ${ex}  ${opt}
+				${optReadonly}  ${optTitle}	class="${optClass}"	
 			/>
 	[/#if]
 [/#macro]

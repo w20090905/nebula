@@ -238,6 +238,23 @@ angular.module('nebula.controllers', []).
 	$scope.datalist = DataResource.query(function() {
 		//$scope.$dataReady();
 	});
+}]).controller('FlowHistoryCtrl', ['$scope','$resource',
+                                function($scope, $resource) {
+	'use strict';
+	$scope.$watch('$parent.data.flow', function(newValue, oldValue) {
+		if(newValue){
+			var DataResource = $resource('/d/:typename/:id', {"typename" : $scope.$parent.typename, "id" : newValue.ID}, {
+				query : {
+					method : 'GET',
+					params : {"history" : "history"},
+					isArray : false
+				}
+			});
+			$scope.datafull = DataResource.query(function() {
+				//$scope.$dataReady();
+			});
+		}
+	});
 }]).controller('NewTypeCtrl', ['$scope', '$route','$resource','$routeParams', '$location','$interpolate','$templateCache',
                                function($scope, $route, $resource, $routeParams, $location,$interpolate,$templateCache) {
 	'use strict';

@@ -41,10 +41,11 @@ import com.google.common.cache.LoadingCache;
 
 public class FlowListResouce extends AbstractResouce {
 	private final DataHelper<Entity, Reader, Writer> jsonHolder;
+	private final DataHelper<Entity, Reader, Writer> jsonStepBegin;
+	
 	private final DataStore<Entity> datastoreHolder;
 	final LoadingCache<String, DataHolder> dataCache;
 	final Type type;
-	private Flow flow;
 
 	interface DataHolder {
 		byte[] get();
@@ -115,13 +116,7 @@ public class FlowListResouce extends AbstractResouce {
 			}
 		});
 
-		Broker.brokerOf(type).addWatcher(new DataWatcher<Type>() {
-			@Override
-			public boolean onUpdate(Type newData, Type oldData) {
-				flow = (Flow) newData;
-				return false;
-			}
-		});
+
 		Broker.brokerOf(type).addWatcher(new DataWatcher<Type>() {
 			@Override
 			public boolean onUpdate(Type newData, Type oldData) {
@@ -129,11 +124,8 @@ public class FlowListResouce extends AbstractResouce {
 				return false;
 			}
 		});		
-		
-
-//			stepJsons.put(step.getName(), JsonHelperProvider.getHelper(step.getType()));
-		
-		json= JsonHelperProvider.getFlowHelper(type, flow.getSteps().get(Step.Begin).getType());
+		Flow flow = (Flow)Broker.valueOf(type);
+		jsonStepBegin = JsonHelperProvider.getFlowHelper(type, flow.getSteps().get(Step.Begin).getType());
 	}
 
 	protected void get(HttpServletRequest req) {
@@ -162,11 +154,20 @@ public class FlowListResouce extends AbstractResouce {
 		}
 		FlowEngine engine = new FlowEngine(dataRepos, (Flow) Broker.valueOf(type));
 		RuntimeContext context = new RuntimeContext();
-		EditableEntity data = engine.start(context);
-		
-		jsonHolder.readFrom(data, new InputStreamReader(in));
-		engine.stepSubmit(context, data);
+		EditableEntity data = engine.start(context);		
+				
+		List<Entity> steps = data.get("steps");
+		Entity currentStepEntity = steps.get(steps.size() - 1);
 
+		data.put(Flow.Field_CurrrentStepEntity, currentStepEntity);
+		jsonStepBegin.readFrom(data, new InputStreamReader(req.getInputStream()));
+
+		String action = req.getParameter("$action");
+		if (action != null) {
+			engine.stepSubmit(context, action, (EditableEntity) data);
+		}else{
+			engine.stepSubmit(context, (EditableEntity) data);			
+		}
 		return req.getPathInfo() + data.getID();
 	}
 }

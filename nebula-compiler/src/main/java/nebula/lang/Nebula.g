@@ -348,6 +348,7 @@ stepDefinition[Flow resideFlow]  returns[Flow.Step step]
             }else{
                 superType = resolveType("Flow" + $superTypeID.text);                
             }
+            if(aliases==null && !superType.getName().equals(superType.getDisplayName())) aliases = superType.getNameAlias();
         } 
         (
             '{'  NEWLINE?   
@@ -371,7 +372,6 @@ stepDefinition[Flow resideFlow]  returns[Flow.Step step]
                 step.attrs.putAll(annotations);
             }   
             
-            if(aliases==null && step.type.getNameAlias() !=null) aliases = step.type.getNameAlias();
             if(aliases==null) aliases = new Aliases(step.name); 
                    
             step.setNameAlias(aliases);

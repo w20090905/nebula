@@ -242,10 +242,12 @@
 			[/#list]
 	
 		<div class="form-actions">
+			[#assign primary]btn-primary[/#assign]
 	[#list type.actions as a][#if !a.internal][#t]
-	  		<input type="submit" class="btn" x-ng-disabled="form.$invalid"   x-ng-click="$save('${a.name}')"  value="${a.displayName}">
+	  		<input type="submit" class="btn  ${primary}" x-ng-disabled="form.$invalid"   x-ng-click="$save('${a.name}')"  value="${a.displayName}">
+	  					[#assign primary][/#assign]
 	[/#if][/#list]
-	  		<input type="submit" class="btn btn-primary" x-ng-disabled="form.$invalid"  x-ng-click="$save()"  value="Save changes">
+	  		<input type="submit" class="btn  ${primary}" x-ng-disabled="form.$invalid"  x-ng-click="$save()"  value="Save changes">
 	  		<a href="" class="btn" x-ng-click="$back()">返回</a>
 			<!-- button type="button" class="btn">Cancel</button--> 
 		</div>
