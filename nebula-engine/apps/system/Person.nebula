@@ -5,24 +5,13 @@ type Person|人员 {
 	?Family-Name|姓;
 	?AlternateNames|别名[] Name;
 	@RequiredOn(#this.Age>10#)?Description;
-        Good YesNo;
 	Sex|性别 Attr;
 	?DateOfBirth|出生日期 Date;
-        @ComputeBackend  TestName Name := $Person[0].Name;
+	@ComputeBackend  TestName Name := $Person[0].Name;
 	?Age:=10;
-        @ComputeBackend   AgeDerived Age:=$Person[0].Age + 10;
-          @DisplayOn(#this.Age>10#) AgeDefault Age:=this.Age+1;
-	?Home{
-		Street Name;
-		Neighborhood String;
-		City Name;
-		State Name;
-		PostalCode Name;
-		Country Name;
-		PhotoURL URL;
-		ProfileURLs[] URL;
-	};
+	@ComputeBackend   AgeDerived Age:=$Person[0].Age + 10;
+	@DisplayOn(#this.Age>10#) AgeDefault Age:=this.Age+1;
 	@GroupBy Company;
 	EMail|邮件;
-        Refine|改年龄() { this.Age =31;}
+	Refine|改年龄() { this.Age =31;}
 };

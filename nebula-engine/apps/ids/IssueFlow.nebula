@@ -8,7 +8,7 @@ flow IssueFlow {
 	};
 	[employee] Approve | 部门审批{
               Age;
-        };
+    };
 	[employee] Approve | 技术统括部审批;
 	[employee] End;
 };
