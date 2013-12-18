@@ -15,20 +15,19 @@ import org.eclipse.jetty.io.EofException;
 public abstract class AbstractResouce implements Resource {
 	protected Log log = LogFactory.getLog(this.getClass());
 
-	public AbstractResouce(final String mime, long maxAge, int delayTime) {
+	public AbstractResouce(final String mime, long maxAge, int checkIntervalTimeMillis) {
 		super();
 		this.mime = mime != null ? mime : "text/html";
 		this.maxAge = maxAge;
-		this.delayTime = delayTime;
+		this.checkIntervalTimeMillis = checkIntervalTimeMillis;
 	}
 
 	private final String mime;
 	private final long maxAge;
-	@SuppressWarnings("unused")
-	private final int delayTime;
+	private final int checkIntervalTimeMillis;
 	protected byte[] cache;
 	protected long lastModified;
-	protected long lastChecked;
+	protected long lastCheckedTimeMillis;
 
 	protected abstract void get(HttpServletRequest req) throws IOException;
 
@@ -59,17 +58,14 @@ public abstract class AbstractResouce implements Resource {
 
 		try {
 			if ("GET".equals(method)) {
-				// if (currentTimeMillis - this.lastChecked > delayTime) {
-				// if (log.isTraceEnabled()) {
-				// log.trace("check updated time at currentTimeMillis:\t" +
-				// currentTimeMillis
-				// + " - lastChecked:\t" + this.lastChecked + "  = "
-				// + (currentTimeMillis - this.lastChecked) + "  delayTime:\t" +
-				// delayTime);
-				// }
-				get(req);
-				this.lastChecked = currentTimeMillis;
-				// }
+				if (currentTimeMillis > this.lastCheckedTimeMillis  + checkIntervalTimeMillis) {
+					if (log.isTraceEnabled()) {
+						log.trace("check updated time at currentTimeMillis:\t" + currentTimeMillis + " - lastChecked:\t" + this.lastCheckedTimeMillis + "  = "
+								+ (currentTimeMillis - this.lastCheckedTimeMillis) + "  delayTime:\t" + checkIntervalTimeMillis);
+					}
+					get(req);
+					this.lastCheckedTimeMillis = currentTimeMillis;
+				}
 
 				// normal parse
 				resp.setStatus(200);

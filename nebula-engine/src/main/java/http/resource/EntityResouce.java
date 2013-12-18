@@ -28,7 +28,7 @@ public class EntityResouce extends AbstractResouce {
 	private final DataStore<Entity> datastore;
 
 	public EntityResouce(final DataRepos dataRepos, DataHelper<Entity, Reader, Writer> json, DataStore<Entity> datas, Type type, String key) {
-		super("text/json", 1, 1);
+		super("text/json", 1000, 100);
 		this.dataRepos = dataRepos;
 		this.json = json;
 		this.datastore = datas;

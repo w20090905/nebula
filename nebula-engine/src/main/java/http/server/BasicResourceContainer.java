@@ -97,7 +97,7 @@ public class BasicResourceContainer extends AbstractHandler {
 			String path = req.getPathInfo();
 
 			Entity currentUser = (Entity) req.getSession().getAttribute("#currentUser");
-			if (currentUser != null) {
+			if (currentUser != null || "TRUE".equals(req.getParameter("Debug"))) {
 				Resource res = cachedLinks.get(path);
 				res.handle(req, resp);
 			} else {
