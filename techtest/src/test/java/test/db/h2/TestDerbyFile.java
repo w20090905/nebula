@@ -5,10 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class TestH2 {
+public class TestDerbyFile {
 	public static void main(String[] a) throws Exception {
-		Class.forName("org.h2.Driver");
-		Connection conn = DriverManager.getConnection("jdbc:h2:db/test", "sa", "");
+		String driverclass = "org.apache.derby.jdbc.EmbeddedDriver";
+		String dburl = "jdbc:derby:TestDerbyFile;create=true";
+		String username = "user";
+		String password = "password";
+		
+		Class.forName(driverclass);
+		Connection conn = DriverManager.getConnection(dburl, username,password);
 		Statement s;
 		conn.setAutoCommit(false);
 		s = conn.createStatement();
@@ -18,11 +23,11 @@ public class TestH2 {
 		} catch (Exception e) {
 		}
 		
-		int MAX = 1000 * 10;
+		int MAX = 100;
 		{ // warm
 			// setUp
 			conn.setAutoCommit(true);
-			s.execute("create table test(id VARCHAR(255),name  VARCHAR(255));");
+			s.execute("create table test(id VARCHAR(255),name  VARCHAR(255))");
 			// prepare
 			long start, end, nanoAll, nanoEvery;
 
@@ -30,7 +35,7 @@ public class TestH2 {
 
 			conn.setAutoCommit(false);
 			for (int i = 0; i < 1; i++) {
-				s.execute("insert into test(id,name) values(\'wanshilian" + i + "\',\'test\');");
+				s.execute("insert into test(id,name) values(\'wanshilian" + i + "\',\'test\')");
 			}			
 			conn.commit();
 			
@@ -48,10 +53,10 @@ public class TestH2 {
 			}
 		}
 		{
-			String desc = "手工提交 无Key";
+			String desc = "DerbyFile 手工提交 无Key";
 			// setUp
 			conn.setAutoCommit(true);
-			s.execute("create table test(id VARCHAR(255),name  VARCHAR(255));");
+			s.execute("create table test(id VARCHAR(255),name  VARCHAR(255))");
 			// prepare
 			long start, end, nanoAll, nanoEvery;
 
@@ -59,7 +64,7 @@ public class TestH2 {
 
 			conn.setAutoCommit(false);
 			for (int i = 0; i < MAX; i++) {
-				s.execute("insert into test(id,name) values(\'wanshilian" + i + "\',\'test\');");
+				s.execute("insert into test(id,name) values(\'wanshilian" + i + "\',\'test\')");
 			}			
 			conn.commit();
 			
@@ -80,10 +85,10 @@ public class TestH2 {
 		}
 
 		{
-			String desc = "自动提交 无Key";
+			String desc = "DerbyFile 自动提交 无Key";
 			// setUp
 			conn.setAutoCommit(true);
-			s.execute("create table test(id VARCHAR(255),name  VARCHAR(255));");
+			s.execute("create table test(id VARCHAR(255),name  VARCHAR(255))");
 			// prepare
 			long start, end, nanoAll, nanoEvery;
 
@@ -91,7 +96,7 @@ public class TestH2 {
 
 			conn.setAutoCommit(true);
 			for (int i = 0; i < MAX; i++) {
-				s.execute("insert into test(id,name) values(\'wanshilian" + i + "\',\'test\');");
+				s.execute("insert into test(id,name) values(\'wanshilian" + i + "\',\'test\')");
 			}
 			
 			end = System.nanoTime();
@@ -129,10 +134,10 @@ public class TestH2 {
 //		}
 		
 		{
-			String desc = "批量执行 无Key";
+			String desc = "DerbyFile 批量执行 无Key";
 			// setUp
 			conn.setAutoCommit(true);
-			s.execute("create table test(id VARCHAR(255),name  VARCHAR(255));");
+			s.execute("create table test(id VARCHAR(255),name  VARCHAR(255))");
 			conn.setAutoCommit(false);
 
 			// prepare
@@ -140,7 +145,7 @@ public class TestH2 {
 
 			start = System.nanoTime();
 
-			PreparedStatement p = conn.prepareStatement("insert into test(id,name) values(?,?);");
+			PreparedStatement p = conn.prepareStatement("insert into test(id,name) values(?,?)");
 			for (int i = 0; i < MAX; i++) {
 				p.setString(1, "wanshilian" + i + "");
 				p.setString(2, "test");
@@ -158,7 +163,7 @@ public class TestH2 {
 					1000 * 1000 * 1000 / nanoEvery);
 			
 			s= conn.createStatement();
-			ResultSet r = s.executeQuery("select * from test;");
+			ResultSet r = s.executeQuery("select * from test");
 			int cnt = 0;
 			while (r.next()) {
 				//System.out.println(r.getString("id"));
