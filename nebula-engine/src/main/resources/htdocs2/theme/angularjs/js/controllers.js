@@ -255,8 +255,8 @@ angular.module('nebula.controllers', []).
 			});
 		}
 	});
-}]).controller('NewTypeCtrl', ['$scope', '$route','$resource','$routeParams', '$location','$interpolate','$templateCache',
-                               function($scope, $route, $resource, $routeParams, $location,$interpolate,$templateCache) {
+}]).controller('NewTypeCtrl', ['$scope', '$route','$resource','$routeParams','$http', '$location','$interpolate','$templateCache',
+                               function($scope, $route, $resource, $routeParams, $http,$location,$interpolate,$templateCache) {
 	'use strict';
 	$scope.typename = "Type";
 	var DataResource = $resource('/d/Type/', $routeParams);
