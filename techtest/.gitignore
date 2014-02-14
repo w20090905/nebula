@@ -1,7 +1,8 @@
 /target
-
+TestDerbyFile
 /.settings
 *.class
 /bin
 /db
 *.log
+log4j.*
