@@ -54,8 +54,7 @@ public class DbTransactionDataExecutor implements DbTxDataExecutor {
 
 	// final private String[] systemFields = new String[] { "TIMESTAMP_" };
 
-	public DbTransactionDataExecutor(final DbConfiguration config, final Connection conn, final Type type,
-			final DbMasterDataSqlHelper helper) {
+	public DbTransactionDataExecutor(final DbConfiguration config, final Connection conn, final Type type, final DbMasterDataSqlHelper helper) {
 		this.config = config;
 		this.type = type;
 		this.conn = conn;
@@ -69,7 +68,9 @@ public class DbTransactionDataExecutor implements DbTxDataExecutor {
 
 		serializer = builder.getEntitySerializer();
 
-		this.ensureDBSchema();
+		if (!type.getAttrs().containsKey(Type.LEGACY)) {
+			this.ensureDBSchema();
+		}
 
 		try {
 			SQL_GET = conn.prepareStatement(builder.builderGet());
@@ -90,13 +91,12 @@ public class DbTransactionDataExecutor implements DbTxDataExecutor {
 		ResultSet rs = null;
 		try {
 
-			final SmartList<String, DatabaseColumn> mapColumns = new SmartList<String, DatabaseColumn>(
-					new Function<DatabaseColumn, String>() {
-						@Override
-						public String apply(DatabaseColumn data) {
-							return data.columnName;
-						}
-					});
+			final SmartList<String, DatabaseColumn> mapColumns = new SmartList<String, DatabaseColumn>(new Function<DatabaseColumn, String>() {
+				@Override
+				public String apply(DatabaseColumn data) {
+					return data.columnName;
+				}
+			});
 
 			for (int i = 0; i < userColumns.length; i++) {
 				mapColumns.add(userColumns[i]);
@@ -132,8 +132,7 @@ public class DbTransactionDataExecutor implements DbTxDataExecutor {
 					DatabaseColumn newColumn = mapColumns.get(columnName);
 					if (newColumn == null) {
 						if (log.isTraceEnabled())
-							log.trace("\t\t" + metaData.getColumnName(i)
-									+ "\t column type not exist in type or is system column \t- "
+							log.trace("\t\t" + metaData.getColumnName(i) + "\t column type not exist in type or is system column \t- "
 									+ metaData.getColumnTypeName(i) + "\t" + metaData.getColumnDisplaySize(i));
 						if (!columnName.endsWith("_")) {
 							needDeletedColumns.add(columnName);
@@ -148,8 +147,7 @@ public class DbTransactionDataExecutor implements DbTxDataExecutor {
 
 						if (jdbcType != newColumn.jdbcType) {
 							if (log.isTraceEnabled())
-								log.trace("\t\t" + metaData.getColumnName(i)
-										+ "\t column type not match,need update \t- " + metaData.getColumnTypeName(i)
+								log.trace("\t\t" + metaData.getColumnName(i) + "\t column type not match,need update \t- " + metaData.getColumnTypeName(i)
 										+ "\t" + metaData.getColumnDisplaySize(i));
 							typeNotMatchColumns.add(newColumn);
 
@@ -161,24 +159,18 @@ public class DbTransactionDataExecutor implements DbTxDataExecutor {
 								} else if (newColumn.precision > precision && newColumn.scale > scale) {
 
 									if (log.isTraceEnabled())
-										log.trace("\t" + metaData.getColumnName(i)
-												+ "\t\t column size not match,need update \t- "
-												+ metaData.getColumnTypeName(i) + "\t"
-												+ metaData.getColumnDisplaySize(i));
+										log.trace("\t" + metaData.getColumnName(i) + "\t\t column size not match,need update \t- "
+												+ metaData.getColumnTypeName(i) + "\t" + metaData.getColumnDisplaySize(i));
 									typeSizeNotMatchColumns.add(newColumn);
 								} else if (newColumn.precision > precision || newColumn.scale > scale) {
-									int newPrecision = newColumn.precision > precision ? newColumn.precision
-											: precision;
+									int newPrecision = newColumn.precision > precision ? newColumn.precision : precision;
 									int newScale = newColumn.scale > scale ? newColumn.scale : scale;
-									typeSizeNotMatchColumns.add(new DatabaseColumn(newColumn.fieldName,
-											newColumn.columnName, newColumn.key, newColumn.nullable, false,
-											newColumn.rawType, newColumn.size, newPrecision, newScale));
+									typeSizeNotMatchColumns.add(new DatabaseColumn(newColumn.fieldName, newColumn.columnName, newColumn.key,
+											newColumn.nullable, false, newColumn.rawType, newColumn.size, newPrecision, newScale));
 
 									if (log.isTraceEnabled())
-										log.trace("\t" + metaData.getColumnName(i)
-												+ "\t\tcolumn precision not match,need update \t- "
-												+ metaData.getColumnTypeName(i) + "\t"
-												+ metaData.getColumnDisplaySize(i));
+										log.trace("\t" + metaData.getColumnName(i) + "\t\tcolumn precision not match,need update \t- "
+												+ metaData.getColumnTypeName(i) + "\t" + metaData.getColumnDisplaySize(i));
 								}
 								break;
 							case Types.VARCHAR:
@@ -232,14 +224,12 @@ public class DbTransactionDataExecutor implements DbTxDataExecutor {
 					log.trace("\t[" + builder.tableName + "] reconstruct finished table  finished");
 
 					if (log.isTraceEnabled()) {
-						if (log.isTraceEnabled())
-							log.trace("\t[" + builder.tableName + "] table layout after add not exist column");
+						if (log.isTraceEnabled()) log.trace("\t[" + builder.tableName + "] table layout after add not exist column");
 						rs = statement.executeQuery(builder.builderGetMeta());
 						metaData = rs.getMetaData();
 						columnsSize = metaData.getColumnCount();
 						for (int i = 1; i <= columnsSize; i++) {
-							log.trace("\t\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t"
-									+ metaData.getColumnDisplaySize(i));
+							log.trace("\t\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t" + metaData.getColumnDisplaySize(i));
 						}
 						rs.close();
 					}
@@ -256,14 +246,12 @@ public class DbTransactionDataExecutor implements DbTxDataExecutor {
 
 						if (log.isTraceEnabled()) log.trace("\tadd not exist column finished");
 						if (log.isTraceEnabled()) {
-							if (log.isTraceEnabled())
-								log.trace("\t[" + builder.tableName + "] table layout after add not exist column");
+							if (log.isTraceEnabled()) log.trace("\t[" + builder.tableName + "] table layout after add not exist column");
 							rs = statement.executeQuery(builder.builderGetMeta());
 							metaData = rs.getMetaData();
 							columnsSize = metaData.getColumnCount();
 							for (int i = 1; i <= columnsSize; i++) {
-								log.trace("\t\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i)
-										+ "\t" + metaData.getColumnDisplaySize(i));
+								log.trace("\t\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t" + metaData.getColumnDisplaySize(i));
 							}
 							rs.close();
 						}
@@ -281,14 +269,12 @@ public class DbTransactionDataExecutor implements DbTxDataExecutor {
 						statement.executeBatch();
 						if (log.isTraceEnabled()) log.trace("\tupdate don't match column finished");
 						if (log.isTraceEnabled()) {
-							if (log.isTraceEnabled())
-								log.trace("\t[" + builder.tableName + "] table layout after update don't match column");
+							if (log.isTraceEnabled()) log.trace("\t[" + builder.tableName + "] table layout after update don't match column");
 							rs = statement.executeQuery(builder.builderGetMeta());
 							metaData = rs.getMetaData();
 							columnsSize = metaData.getColumnCount();
 							for (int i = 1; i <= columnsSize; i++) {
-								log.trace("\t\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i)
-										+ "\t" + metaData.getColumnDisplaySize(i));
+								log.trace("\t\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t" + metaData.getColumnDisplaySize(i));
 							}
 							rs.close();
 						}
@@ -306,15 +292,12 @@ public class DbTransactionDataExecutor implements DbTxDataExecutor {
 						if (log.isTraceEnabled()) log.trace("\tupdate size don't match column finished");
 
 						if (log.isTraceEnabled()) {
-							if (log.isTraceEnabled())
-								log.trace("\t[" + builder.tableName
-										+ "] table layout after update size don't match column");
+							if (log.isTraceEnabled()) log.trace("\t[" + builder.tableName + "] table layout after update size don't match column");
 							rs = statement.executeQuery(builder.builderGetMeta());
 							metaData = rs.getMetaData();
 							columnsSize = metaData.getColumnCount();
 							for (int i = 1; i <= columnsSize; i++) {
-								log.debug("\t\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i)
-										+ "\t" + metaData.getColumnDisplaySize(i));
+								log.debug("\t\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t" + metaData.getColumnDisplaySize(i));
 							}
 							rs.close();
 						}
@@ -332,14 +315,12 @@ public class DbTransactionDataExecutor implements DbTxDataExecutor {
 						if (log.isTraceEnabled()) log.trace("\tremove unused column finished");
 
 						if (log.isTraceEnabled()) {
-							if (log.isTraceEnabled())
-								log.trace("\t[" + builder.tableName + "] table layout after  remove unused column");
+							if (log.isTraceEnabled()) log.trace("\t[" + builder.tableName + "] table layout after  remove unused column");
 							rs = statement.executeQuery(builder.builderGetMeta());
 							metaData = rs.getMetaData();
 							columnsSize = metaData.getColumnCount();
 							for (int i = 1; i <= columnsSize; i++) {
-								log.trace("\t\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i)
-										+ "\t" + metaData.getColumnDisplaySize(i));
+								log.trace("\t\t" + metaData.getColumnName(i) + "\t" + metaData.getColumnTypeName(i) + "\t" + metaData.getColumnDisplaySize(i));
 							}
 							rs.close();
 						}

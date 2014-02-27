@@ -12,82 +12,29 @@ import util.NamesEncoding;
 
 public class DbMasterDataSqlHelper {
 
-	public static final String Table_Name = "Table";
-	public static final String Column_Name = "Column";
-	public static final String Column_Unique = "Unique";
-	public static final String Column_Nullable = "Nullable";
+	public static final String Column_ColumnDefinition = "ColumnDefinition";
 	public static final String Column_Insertable = "Insertable";
-	public static final String Column_Updatable = "Updatable";
-	public static final String Column_columnDefinition = "ColumnDefinition";
-	public static final String Column_table = "ColumnTable";
 	public static final String Column_Length = "MaxLength";
+	public static final String Column_Name = "Column";
+	public static final String Column_Nullable = "Nullable";
 	public static final String Column_Precision = "Precision";
 	public static final String Column_Scale = "Scale";
+	public static final String Column_Table = "ColumnTable";
+	public static final String Column_Unique = "Unique";
+	public static final String Column_Updatable = "Updatable";
+	public static final String Table_Name = "Table";
 
 	Type clz;
-	final DatabaseColumn[] userColumns;
-	final DatabaseColumn[] systemColumns;
-	final DatabaseColumn[] keyColumns;
-	final String tableName;
+	final DbConfiguration config;
+	final EntityFieldSerializer entitySerializer;
 	final String fieldlist_comma;
 	final String fieldlist_questions;
+	final DatabaseColumn[] keyColumns;
+	final DatabaseColumn[] systemColumns;
+	final String tableName;
+	final DatabaseColumn[] userColumns;
+
 	final String wherekeys;
-	final DbConfiguration config;
-
-	final EntityFieldSerializer entitySerializer;
-
-	private void addColumn(ArrayList<DatabaseColumn> list, String fieldName, String columnName, boolean array, Field field, boolean key) {
-		InheritHashMap attrs = field.getAttrs();
-		Object v;
-
-		RawTypes rawType = field.getType().getRawType();
-
-		v = attrs.get(Column_Length);
-		long size = v != null ? (Long) v : 0;
-
-		v = attrs.get(Column_Precision);
-		int precision = v != null ? ((Long) v).intValue() : 0;
-
-		v = attrs.get(Column_Scale);
-		int scale = v != null ? ((Long) v).intValue() : 0;
-
-		boolean nullable = field.isNullable();
-
-		DatabaseColumn c = new DatabaseColumn(fieldName, columnName, key, nullable, array, rawType, size, precision, scale);
-		list.add(c);
-	}
-
-	private String cOf(Field field) {
-		return field.getAttrs().containsKey(Column_Name) ? (String) field.getAttrs().get(Column_Name) : field.getName();
-	}
-
-	private String toF(String resideName) {
-		return resideName;
-	}
-
-	private String toF(String resideName, String fieldName) {
-		return resideName + fieldName;
-	}
-
-	private String toC(Field field) {
-		return NamesEncoding.encode(cOf(field));
-	}
-
-	private String toC(Field field, Field in1f) {
-		return NamesEncoding.encode(cOf(field) + "_" + cOf(in1f));
-	}
-
-	private String toC(String resideName, String fieldName) {
-		return NamesEncoding.encode(resideName + "_" + fieldName);
-	}
-
-	private String decodeTypeName(String typeName) {
-		return 'N' + typeName.replace('.', '_');
-	}
-
-	public String getTableName() {
-		return this.tableName;
-	}
 
 	public DbMasterDataSqlHelper(final DbConfiguration config, Type type) {
 
@@ -287,25 +234,42 @@ public class DbMasterDataSqlHelper {
 		}
 	}
 
-	public String builderMaxId() {
-		// 需要ID表肯定只有一个Key，所以可以直接使用keyColumn[0]
-		return "SELECT max(" + this.keyColumns[0].columnName + ") FROM " + this.tableName + " ";
+	private void addColumn(ArrayList<DatabaseColumn> list, String fieldName, String columnName, boolean array, Field field, boolean key) {
+		InheritHashMap attrs = field.getAttrs();
+		Object v;
+
+		RawTypes rawType = field.getType().getRawType();
+
+		v = attrs.get(Column_Length);
+		long size = v != null ? (Long) v : 0;
+
+		v = attrs.get(Column_Precision);
+		int precision = v != null ? ((Long) v).intValue() : 0;
+
+		v = attrs.get(Column_Scale);
+		int scale = v != null ? ((Long) v).intValue() : 0;
+
+		boolean nullable = field.isNullable();
+
+		DatabaseColumn c = new DatabaseColumn(fieldName, columnName, key, nullable, array, rawType, size, precision, scale);
+		list.add(c);
+	}
+
+	public String builderAddColumn(DatabaseColumn column) {
+		if (column.key) {
+			return "ALTER TABLE " + this.tableName + " ADD COLUMN " + column.columnName + " " + config.toColumnDefine(column) + " NOT NULL";
+		} else {
+			return "ALTER TABLE " + this.tableName + " ADD COLUMN " + column.columnName + " " + config.toColumnDefine(column);
+
+		}
+	}
+
+	public String builderAddPrimaryKey(String keys) {
+		return "ALTER TABLE " + this.tableName + " ADD PRIMARY KEY ( " + keys + ") ";
 	}
 
 	public String builderCount() {
 		return "SELECT count(1) FROM " + this.tableName + " ";
-	}
-
-	public String builderList() {
-		return "SELECT " + this.fieldlist_comma + ",TIMESTAMP_ FROM " + this.tableName + " ";
-	}
-
-	public String builderDrop() {
-		return "DROP TABLE " + this.tableName + " ";
-	}
-
-	public String builderGetMeta() {
-		return "SELECT * FROM " + this.tableName + " WHERE 0=1";
 	}
 
 	public String builderCreate() {
@@ -337,9 +301,50 @@ public class DbMasterDataSqlHelper {
 
 	}
 
+	public String builderDelete() {
+		return "DELETE FROM " + this.tableName + " WHERE " + wherekeys + "";
+	}
+
+	public String builderDeleteAll() {
+		return "DELETE FROM " + this.tableName + " ";
+	}
+
+	public String builderDrop() {
+		return "DROP TABLE " + this.tableName + " ";
+	}
+
+	public String builderDropPrimaryKey() {
+		return "ALTER TABLE " + this.tableName + " DROP PRIMARY KEY";
+	}
+
+	public String builderGet() {
+		return "SELECT " + fieldlist_comma + ",TIMESTAMP_  FROM " + this.tableName + " WHERE " + wherekeys + "";
+	}
+
+	public String builderGetMeta() {
+		return "SELECT * FROM " + this.tableName + " WHERE 0=1";
+	}
+
 	public String builderInsert() {
 		return "INSERT INTO  " + this.tableName + "(" + fieldlist_comma + ",TIMESTAMP_) values(" + fieldlist_questions + ",CURRENT_TIMESTAMP)";
 
+	}
+
+	public String builderList() {
+		return "SELECT " + this.fieldlist_comma + ",TIMESTAMP_ FROM " + this.tableName + " ";
+	}
+
+	public String builderMaxId() {
+		// ID表肯定只有一个Key，所以可以直接使用keyColumn[0]
+		return "SELECT max(" + this.keyColumns[0].columnName + ") FROM " + this.tableName + " ";
+	}
+
+	public String builderModifyColumnDateType(DatabaseColumn column) {
+		return "ALTER TABLE " + this.tableName + " ALTER COLUMN " + column.columnName + " SET DATA TYPE " + config.toColumnDefine(column);
+	}
+
+	public String builderRemoveColumn(String columnName) {
+		return "ALTER TABLE " + this.tableName + " DROP COLUMN " + columnName + " ";
 	}
 
 	public String builderUpdate() {
@@ -353,57 +358,52 @@ public class DbMasterDataSqlHelper {
 		return sb.toString();
 	}
 
-	public String builderDelete() {
-		return "DELETE FROM " + this.tableName + " WHERE " + wherekeys + "";
+	private String cOf(Field field) {
+		return field.getAttrs().containsKey(Column_Name) ? (String) field.getAttrs().get(Column_Name) : field.getName();
 	}
 
-	public String builderAddColumn(DatabaseColumn column) {
-		if (column.key) {
-			return "ALTER TABLE " + this.tableName + " ADD COLUMN " + column.columnName + " " + config.toColumnDefine(column) + " NOT NULL";
-		} else {
-			return "ALTER TABLE " + this.tableName + " ADD COLUMN " + column.columnName + " " + config.toColumnDefine(column);
-
-		}
+	private String decodeTypeName(String typeName) {
+		return 'N' + typeName.replace('.', '_');
 	}
 
-	public String builderDropPrimaryKey() {
-		return "ALTER TABLE " + this.tableName + " DROP PRIMARY KEY";
-	}
-
-	public String builderAddPrimaryKey(String keys) {
-		return "ALTER TABLE " + this.tableName + " ADD PRIMARY KEY ( " + keys + ") ";
-	}
-
-	public String builderModifyColumnDateType(DatabaseColumn column) {
-		return "ALTER TABLE " + this.tableName + " ALTER COLUMN " + column.columnName + " SET DATA TYPE " + config.toColumnDefine(column);
-	}
-
-	public String builderRemoveColumn(String columnName) {
-		return "ALTER TABLE " + this.tableName + " DROP COLUMN " + columnName + " ";
-	}
-
-	public String builderDeleteAll() {
-		return "DELETE FROM " + this.tableName + " ";
-	}
-
-	public String builderGet() {
-		return "SELECT " + fieldlist_comma + ",TIMESTAMP_  FROM " + this.tableName + " WHERE " + wherekeys + "";
-	}
-
-	public DatabaseColumn[] getUserColumns() {
-		return this.userColumns;
-	}
-
-	public DatabaseColumn[] getSystemColumns() {
-		return this.systemColumns;
+	public EntityFieldSerializer getEntitySerializer() {
+		return entitySerializer;
 	}
 
 	public DatabaseColumn[] getKeyColumns() {
 		return this.keyColumns;
 	}
 
-	public EntityFieldSerializer getEntitySerializer() {
-		return entitySerializer;
+	public DatabaseColumn[] getSystemColumns() {
+		return this.systemColumns;
+	}
+
+	public String getTableName() {
+		return this.tableName;
+	}
+
+	public DatabaseColumn[] getUserColumns() {
+		return this.userColumns;
+	}
+
+	private String toC(Field field) {
+		return NamesEncoding.encode(cOf(field));
+	}
+
+	private String toC(Field field, Field in1f) {
+		return NamesEncoding.encode(cOf(field) + "_" + cOf(in1f));
+	}
+
+	private String toC(String resideName, String fieldName) {
+		return NamesEncoding.encode(resideName + "_" + fieldName);
+	}
+
+	private String toF(String resideName) {
+		return resideName;
+	}
+
+	private String toF(String resideName, String fieldName) {
+		return resideName + fieldName;
 	}
 
 }
