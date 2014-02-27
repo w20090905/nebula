@@ -6,6 +6,12 @@ flow IssueFlow {
 		Name2 Name;
 		Age2 Age :=10;
 	};
+	[employee] Approve | 组内审批{
+          Age;
+<init>() {
+if(this.Age==10)this.skip();
+};
+    };
 	[employee] Approve | 部门审批{
               Age;
     };
