@@ -1,4 +1,4 @@
-package nebula.data.db;
+package nebula.data.db.serializer;
 
 import nebula.data.Entity;
 

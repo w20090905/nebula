@@ -3,6 +3,12 @@ package nebula.data.db;
 import java.util.ArrayList;
 import java.util.List;
 
+import nebula.data.db.serializer.BasicTypeFieldSerializer;
+import nebula.data.db.serializer.DefaultFieldSerializer;
+import nebula.data.db.serializer.EntityFieldSerializer;
+import nebula.data.db.serializer.EntityListFieldSerializer;
+import nebula.data.db.serializer.ListTypeAdapter;
+import nebula.data.db.serializer.SystemTypeFieldSerializer;
 import nebula.lang.Field;
 import nebula.lang.RawTypes;
 import nebula.lang.Reference;
@@ -10,7 +16,7 @@ import nebula.lang.Type;
 import util.InheritHashMap;
 import util.NamesEncoding;
 
-public class DbMasterDataSqlHelper {
+public class DbSqlHelper {
 
 	public static final String Column_ColumnDefinition = "ColumnDefinition";
 	public static final String Column_Insertable = "Insertable";
@@ -29,14 +35,14 @@ public class DbMasterDataSqlHelper {
 	final EntityFieldSerializer entitySerializer;
 	final String fieldlist_comma;
 	final String fieldlist_questions;
-	final DatabaseColumn[] keyColumns;
-	final DatabaseColumn[] systemColumns;
+	final DbColumn[] keyColumns;
+	final DbColumn[] systemColumns;
 	final String tableName;
-	final DatabaseColumn[] userColumns;
+	final DbColumn[] userColumns;
 
 	final String wherekeys;
 
-	public DbMasterDataSqlHelper(final DbConfiguration config, Type type) {
+	public DbSqlHelper(final DbConfiguration config, Type type) {
 
 		try {
 			this.config = config;
@@ -55,7 +61,7 @@ public class DbMasterDataSqlHelper {
 			List<DefaultFieldSerializer<?>> subFieldSerializer;
 
 			List<Field> fl = type.getFields();
-			ArrayList<DatabaseColumn> listUserColumns = new ArrayList<DatabaseColumn>();
+			ArrayList<DbColumn> listUserColumns = new ArrayList<DbColumn>();
 			for (Field of : fl) {
 				if (of.isTransparent()) continue;
 
@@ -199,10 +205,10 @@ public class DbMasterDataSqlHelper {
 
 			StringBuilder sbForSelect = new StringBuilder();
 			StringBuilder sbForWhere = new StringBuilder();
-			ArrayList<DatabaseColumn> listKeyColumns = new ArrayList<DatabaseColumn>();
+			ArrayList<DbColumn> listKeyColumns = new ArrayList<DbColumn>();
 			String sql = "";
 
-			for (DatabaseColumn column : listUserColumns) {
+			for (DbColumn column : listUserColumns) {
 				sbForSelect.append(column.columnName);
 				sbForSelect.append(',');
 				sbForWhere.append("?,");
@@ -213,19 +219,19 @@ public class DbMasterDataSqlHelper {
 				}
 			}
 
-			ArrayList<DatabaseColumn> listSystemColumns = new ArrayList<DatabaseColumn>();
-			DatabaseColumn col = new DatabaseColumn("LastModified_", "TIMESTAMP_", false, false, false, RawTypes.Timestamp, 0, 0, 0);
+			ArrayList<DbColumn> listSystemColumns = new ArrayList<DbColumn>();
+			DbColumn col = new DbColumn("LastModified_", "TIMESTAMP_", false, false, false, RawTypes.Timestamp, 0, 0, 0);
 			listSystemColumns.add(col);
 
 			fieldSerializer.add(new SystemTypeFieldSerializer("LastModified_", "LastModified_", false, RawTypes.Timestamp));
 
 			this.entitySerializer = new EntityFieldSerializer(fieldSerializer);
 
-			this.keyColumns = listKeyColumns.toArray(new DatabaseColumn[0]);
+			this.keyColumns = listKeyColumns.toArray(new DbColumn[0]);
 			this.wherekeys = sql.substring(0, sql.length() - 4);
 
-			this.userColumns = listUserColumns.toArray(new DatabaseColumn[0]);
-			this.systemColumns = listSystemColumns.toArray(new DatabaseColumn[0]);
+			this.userColumns = listUserColumns.toArray(new DbColumn[0]);
+			this.systemColumns = listSystemColumns.toArray(new DbColumn[0]);
 			this.fieldlist_comma = sbForSelect.substring(0, sbForSelect.length() - 1);
 			this.fieldlist_questions = sbForWhere.substring(0, sbForWhere.length() - 1);
 
@@ -234,7 +240,7 @@ public class DbMasterDataSqlHelper {
 		}
 	}
 
-	private void addColumn(ArrayList<DatabaseColumn> list, String fieldName, String columnName, boolean array, Field field, boolean key) {
+	private void addColumn(ArrayList<DbColumn> list, String fieldName, String columnName, boolean array, Field field, boolean key) {
 		InheritHashMap attrs = field.getAttrs();
 		Object v;
 
@@ -251,11 +257,11 @@ public class DbMasterDataSqlHelper {
 
 		boolean nullable = field.isNullable();
 
-		DatabaseColumn c = new DatabaseColumn(fieldName, columnName, key, nullable, array, rawType, size, precision, scale);
+		DbColumn c = new DbColumn(fieldName, columnName, key, nullable, array, rawType, size, precision, scale);
 		list.add(c);
 	}
 
-	public String builderAddColumn(DatabaseColumn column) {
+	public String builderAddColumn(DbColumn column) {
 		if (column.key) {
 			return "ALTER TABLE " + this.tableName + " ADD COLUMN " + column.columnName + " " + config.toColumnDefine(column) + " NOT NULL";
 		} else {
@@ -277,7 +283,7 @@ public class DbMasterDataSqlHelper {
 
 		sb.append("CREATE TABLE ").append(this.tableName).append("(");
 
-		for (DatabaseColumn column : this.userColumns) {
+		for (DbColumn column : this.userColumns) {
 			if (column.key) {
 				sb.append(column.columnName).append(' ').append(config.toColumnDefine(column)).append(" NOT NULL").append(",");
 			} else {
@@ -286,7 +292,7 @@ public class DbMasterDataSqlHelper {
 		}
 
 		sb.append("PRIMARY KEY ( ");
-		for (DatabaseColumn column : this.userColumns) {
+		for (DbColumn column : this.userColumns) {
 			if (column.key) {
 				sb.append(column.columnName).append(",");
 			}
@@ -339,7 +345,7 @@ public class DbMasterDataSqlHelper {
 		return "SELECT max(" + this.keyColumns[0].columnName + ") FROM " + this.tableName + " ";
 	}
 
-	public String builderModifyColumnDateType(DatabaseColumn column) {
+	public String builderModifyColumnDateType(DbColumn column) {
 		return "ALTER TABLE " + this.tableName + " ALTER COLUMN " + column.columnName + " SET DATA TYPE " + config.toColumnDefine(column);
 	}
 
@@ -350,7 +356,7 @@ public class DbMasterDataSqlHelper {
 	public String builderUpdate() {
 		String sb = "UPDATE " + this.tableName + " SET ";
 
-		for (DatabaseColumn column : this.userColumns) {
+		for (DbColumn column : this.userColumns) {
 			sb += column.columnName + " = ? ,";
 		}
 		sb += " TIMESTAMP_= CURRENT_TIMESTAMP ";
@@ -370,11 +376,11 @@ public class DbMasterDataSqlHelper {
 		return entitySerializer;
 	}
 
-	public DatabaseColumn[] getKeyColumns() {
+	public DbColumn[] getKeyColumns() {
 		return this.keyColumns;
 	}
 
-	public DatabaseColumn[] getSystemColumns() {
+	public DbColumn[] getSystemColumns() {
 		return this.systemColumns;
 	}
 
@@ -382,7 +388,7 @@ public class DbMasterDataSqlHelper {
 		return this.tableName;
 	}
 
-	public DatabaseColumn[] getUserColumns() {
+	public DbColumn[] getUserColumns() {
 		return this.userColumns;
 	}
 

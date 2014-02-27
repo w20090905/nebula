@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import nebula.data.Entity;
 import nebula.data.db.derby.DerbyConfiguration;
 import nebula.data.db.oracle.OracleConfiguration;
 import nebula.lang.RawTypes;
@@ -43,8 +44,8 @@ public abstract class DbConfiguration {
 	public void init() {
 		try {
 			Class.forName(driverClass).newInstance();
-			if(log.isTraceEnabled()){
-				log.trace("\tload driverClass - " + driverClass);				
+			if (log.isTraceEnabled()) {
+				log.trace("\tload driverClass - " + driverClass);
 			}
 			conn = DriverManager.getConnection(this.url, this.userName, this.userPassword);
 			log.info("== open database - " + this.url);
@@ -66,7 +67,7 @@ public abstract class DbConfiguration {
 		} else {
 			throw new UnsupportedOperationException();
 		}
-		
+
 		dbEngine.init();
 		return dbEngine;
 	}
@@ -75,7 +76,7 @@ public abstract class DbConfiguration {
 		typeNames.put(jdbcType, columnTypeName);
 	}
 
-	protected String toColumnDefine(DatabaseColumn column) {
+	protected String toColumnDefine(DbColumn column) {
 		if (column.array) {
 			return typeNames.get(RawTypes.Text).replaceFirst("\\$l", String.valueOf(column.size));
 		} else {
@@ -101,7 +102,35 @@ public abstract class DbConfiguration {
 	// public abstract <T extends HasID> Persistence<T> getPersister(Class<T> t,
 	// Type type);
 
-	public abstract DbDataExecutor getPersister(Type type);
+	@SuppressWarnings("unchecked")
+	public <T> DbDataExecutor<T> getPersister(Type type, Class<T> clz) {
+		if (log.isTraceEnabled()) {
+			log.trace("\tload persister [" + type.getName() + "] from connection - " + conn);
+		}
+		DbDataExecutor<T> executor = null;
+
+		DbSqlHelper helper = builderSQLHelper(type);
+		DbSerializer<T> serializer = null;
+		if (clz == Entity.class) {
+			DbSerializer<Entity> entitySerializer = helper.getEntitySerializer();
+			serializer = (DbSerializer<T>) entitySerializer;
+		}
+
+		switch (type.getStandalone()) {
+		case Transaction:
+		case Relation:
+			executor = new DbDefaultExecutor<T>(conn, type, helper, serializer);
+			break;
+
+		default:
+			executor = new DbDefaultExecutor<T>(conn, type, helper, serializer);
+			break;
+		}
+
+		return executor;
+	}
+
+	public abstract DbSqlHelper builderSQLHelper(Type type);
 
 	public void shutdown() {
 		try {

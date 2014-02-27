@@ -1,4 +1,4 @@
-package nebula.data.db;
+package nebula.data.db.serializer;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import nebula.data.Entity;
+import nebula.data.db.DbSerializer;
 import nebula.data.impl.EditableEntity;
 
-public class EntityFieldSerializer extends DefaultFieldSerializer<Entity> {
+public class EntityFieldSerializer extends DefaultFieldSerializer<Entity> implements DbSerializer<Entity> {
 
 	final List<DefaultFieldSerializer<?>> fieldSerializer;
 
@@ -73,6 +74,16 @@ public class EntityFieldSerializer extends DefaultFieldSerializer<Entity> {
 			}
 		}
 		return pos;
+	}
+
+	@Override
+	public EditableEntity fromDb(ResultSet result) throws Exception {
+		return this.toEntity(result);
+	}
+
+	@Override
+	public int toDb(PreparedStatement prepareStatement, Entity entity) throws Exception {
+		return this.fromEntity(prepareStatement, entity);
 	}
 
 }

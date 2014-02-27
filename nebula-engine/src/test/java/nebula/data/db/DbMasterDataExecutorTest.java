@@ -11,19 +11,19 @@ import junit.framework.TestCase;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.db.DbConfiguration;
-import nebula.data.db.DbMasterDataExecutor;
+import nebula.data.db.derby.DerbySQLHelper;
 import nebula.data.impl.EditableEntity;
 import nebula.lang.Type;
 import nebula.lang.TypeLoaderForTest;
 
 public class DbMasterDataExecutorTest extends TestCase {
 	TypeLoaderForTest loader;
-	Type t;
-	DbMasterDataExecutor dbExec;
+	Type type;
+	DbDataExecutor<Entity> dbExec;
 	DbConfiguration config;
+	DbSqlHelper helper;
 
-	DataRepos p;
+	DataRepos repos;
 	DataStore<Entity> store;
 
 	protected void setUp() throws Exception {
@@ -62,17 +62,19 @@ public class DbMasterDataExecutorTest extends TestCase {
 				"};";
 		//@formatter:on		
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		EditableEntity data;
-		dbExec = (DbMasterDataExecutor) (DbMasterDataExecutor)config.getPersister(t);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
+		Entity data;
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 		dbExec.drop();
 		dbExec = null;
 
-		dbExec =  (DbMasterDataExecutor) (DbMasterDataExecutor)config.getPersister(t);
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(3, metaData.getColumnCount());
@@ -130,13 +132,14 @@ public class DbMasterDataExecutorTest extends TestCase {
 				"};";
 		// @formatter:on
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec =  (DbMasterDataExecutor) (DbMasterDataExecutor)config.getPersister(t);
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(12, metaData.getColumnCount());
@@ -205,16 +208,17 @@ public class DbMasterDataExecutorTest extends TestCase {
 				"};";
 		// @formatter:on
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec =  (DbMasterDataExecutor) (DbMasterDataExecutor)config.getPersister(t);
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(5, metaData.getColumnCount());
@@ -255,15 +259,16 @@ public class DbMasterDataExecutorTest extends TestCase {
 				"};";
 		// @formatter:on
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec =  (DbMasterDataExecutor) (DbMasterDataExecutor)config.getPersister(t);
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(4, metaData.getColumnCount());
@@ -300,8 +305,9 @@ public class DbMasterDataExecutorTest extends TestCase {
 
 		assertEquals(1, dbExec.getAll().size());
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		dbExec =  (DbMasterDataExecutor) (DbMasterDataExecutor)config.getPersister(t);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 
 		assertEquals(0, dbExec.getAll().size());
 
@@ -318,7 +324,7 @@ public class DbMasterDataExecutorTest extends TestCase {
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(5, metaData.getColumnCount());
@@ -370,17 +376,19 @@ public class DbMasterDataExecutorTest extends TestCase {
 				"};";
 		//@formatter:on		
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		EditableEntity data;
-		dbExec =  (DbMasterDataExecutor)config.getPersister(t);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
+		Entity data;
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 		dbExec.drop();
 		dbExec = null;
 
-		dbExec =  (DbMasterDataExecutor)config.getPersister(t);
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(5, metaData.getColumnCount());
@@ -480,17 +488,19 @@ public class DbMasterDataExecutorTest extends TestCase {
 				"};";
 		//@formatter:on		
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		EditableEntity data;
-		dbExec =  (DbMasterDataExecutor)config.getPersister(t);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
+		Entity data;
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 		dbExec.drop();
 		dbExec = null;
 
-		dbExec =  (DbMasterDataExecutor)config.getPersister(t);
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(3, metaData.getColumnCount());
@@ -533,9 +543,8 @@ public class DbMasterDataExecutorTest extends TestCase {
 		assertEquals((Long) 10L, ages.get(0));
 		assertEquals((Long) 200L, ages.get(1));
 		assertEquals((Long) 30000L, ages.get(2));
-		
+
 		assertNotNull(data.get("LastModified_"));
-		
 
 		assertNotNull(data);
 
@@ -562,13 +571,14 @@ public class DbMasterDataExecutorTest extends TestCase {
 				"};";
 		// @formatter:on
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec =  (DbMasterDataExecutor)config.getPersister(t);
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(12, metaData.getColumnCount());
@@ -637,16 +647,17 @@ public class DbMasterDataExecutorTest extends TestCase {
 				"};";
 		// @formatter:on
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec =  (DbMasterDataExecutor)config.getPersister(t);
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(5, metaData.getColumnCount());
@@ -686,15 +697,16 @@ public class DbMasterDataExecutorTest extends TestCase {
 				"};";
 		// @formatter:on
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec =  (DbMasterDataExecutor)config.getPersister(t);
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(4, metaData.getColumnCount());
@@ -731,8 +743,9 @@ public class DbMasterDataExecutorTest extends TestCase {
 
 		assertEquals(1, dbExec.getAll().size());
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		dbExec =  (DbMasterDataExecutor)config.getPersister(t);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 
 		assertEquals(0, dbExec.getAll().size());
 
@@ -749,7 +762,7 @@ public class DbMasterDataExecutorTest extends TestCase {
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(5, metaData.getColumnCount());
@@ -826,18 +839,20 @@ public class DbMasterDataExecutorTest extends TestCase {
 				"};";
 		//@formatter:on		
 
-		t = loader.testDefineNebula(new StringReader(textRef)).get(0);
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		EditableEntity data;
-		dbExec =  (DbMasterDataExecutor)config.getPersister(t);
+		type = loader.testDefineNebula(new StringReader(textRef)).get(0);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
+		Entity data;
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 		dbExec.drop();
 		dbExec = null;
 
-		dbExec =  (DbMasterDataExecutor)config.getPersister(t);
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		// assertEquals(15, metaData.getColumnCount());
@@ -983,9 +998,10 @@ public class DbMasterDataExecutorTest extends TestCase {
 				"};";
 		//@formatter:on		
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		EditableEntity data;
-		dbExec =  (DbMasterDataExecutor)config.getPersister(t);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
+		Entity data;
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 		// dbExec.init();
 
 		try {
@@ -1007,9 +1023,10 @@ public class DbMasterDataExecutorTest extends TestCase {
 		text = "" + "type Person { " + "	!Name;" + "};";
 		// @formatter:on
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec =  (DbMasterDataExecutor)config.getPersister(t);
+		dbExec = config.getPersister(type, Entity.class);
+		helper = new DerbySQLHelper(config, type);
 		// dbExec.init();
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);

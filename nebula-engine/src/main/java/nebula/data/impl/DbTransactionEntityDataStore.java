@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import nebula.data.Entity;
-import nebula.data.db.DbTxDataExecutor;
+import nebula.data.db.DbDataExecutor;
 import nebula.lang.Field;
 import nebula.lang.NebulaNative;
 import nebula.lang.Type;
@@ -14,12 +14,12 @@ import nebula.lang.TypeStandalone;
 
 class DbTransactionEntityDataStore extends EntityDataStore {
 
-	final DbTxDataExecutor db;
+	final DbDataExecutor<Entity> db;
 
 	final IDGenerator idGenerator;
 	final String key;
 
-	DbTransactionEntityDataStore(final DbDataRepos dataRepos, Type type, final DbTxDataExecutor exec) {
+	DbTransactionEntityDataStore(final DbDataRepos dataRepos, Type type, final DbDataExecutor<Entity> exec) {
 		super(IdMakerBuilder.getIDReader(type), dataRepos, type);
 		this.db = exec;
 
@@ -39,9 +39,9 @@ class DbTransactionEntityDataStore extends EntityDataStore {
 		idGenerator.init(exec.getCurrentMaxID());
 		idGenerator.setSeed((long) type.getName().hashCode() % (1 << 8));
 
-		List<EditableEntity> list = exec.getAll();
-		for (EditableEntity data : list) {
-			loadin(data);
+		List<Entity> list = exec.getAll();
+		for (Entity data : list) {
+			loadin((EditableEntity) data);
 		}
 	}
 
@@ -62,7 +62,7 @@ class DbTransactionEntityDataStore extends EntityDataStore {
 
 				NebulaNative.onSave(null, dataRepos, newEntity, type);
 				db.update(newEntity, id);
-				EntityImp newSource = loadin(sourceEntity, db.get(id));
+				EntityImp newSource = loadin(sourceEntity, (EditableEntity) db.get(id));
 
 				newEntity.resetWith(newSource);
 			} finally {
@@ -80,7 +80,7 @@ class DbTransactionEntityDataStore extends EntityDataStore {
 
 				// DB
 				db.insert(newEntity);
-				EntityImp newSource = loadin(db.get(id));
+				EntityImp newSource = loadin((EditableEntity) db.get(id));
 				newEntity.resetWith(newSource);
 			} finally {
 				lock.unlock();

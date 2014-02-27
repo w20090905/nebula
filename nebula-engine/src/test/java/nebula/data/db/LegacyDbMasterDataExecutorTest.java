@@ -8,19 +8,20 @@ import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.lang.Type;
-import nebula.lang.TypeLoader;
+import nebula.lang.TypeLoaderForTest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public class LegacyDbMasterDataExecutorTest extends TestCase {
-	TypeLoader loader;
-	Type t;
-	DbMasterDataExecutor dbExec;
+	TypeLoaderForTest loader;
+	Type type;
+	DbDataExecutor<Entity> dbExec;
 	DbConfiguration config;
 
 	DataRepos p;
 	DataStore<Entity> store;
+	
 
 	Log log = LogFactory.getLog(this.getClass());
 

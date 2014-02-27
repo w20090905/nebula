@@ -6,7 +6,7 @@ import java.util.EnumMap;
 import nebula.data.Timable;
 import nebula.lang.RawTypes;
 
-public class DatabaseColumn implements Timable{
+public class DbColumn implements Timable{
 	public final int jdbcType;
 
 	static EnumMap<RawTypes, Integer> dbTypeMap = new EnumMap<RawTypes, Integer>(RawTypes.class);
@@ -22,7 +22,7 @@ public class DatabaseColumn implements Timable{
 		dbTypeMap.put(RawTypes.Timestamp, Types.TIMESTAMP);
 	}
 
-	public DatabaseColumn(String fieldName, String columnName, boolean key, boolean nullable, boolean array,
+	public DbColumn(String fieldName, String columnName, boolean key, boolean nullable, boolean array,
 			RawTypes rawType, long size, int precision, int scale) {
 
 		this.fieldName = fieldName;

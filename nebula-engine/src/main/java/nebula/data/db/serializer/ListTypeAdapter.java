@@ -1,4 +1,4 @@
-package nebula.data.db;
+package nebula.data.db.serializer;
 
 import java.math.BigDecimal;
 import java.sql.Date;

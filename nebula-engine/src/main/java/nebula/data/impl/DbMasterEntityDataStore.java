@@ -16,17 +16,17 @@ import com.google.common.base.Function;
 
 class DbMasterEntityDataStore extends EntityDataStore {
 
-	final DbDataExecutor db;
+	final DbDataExecutor<Entity> db;
 
 	final IDGenerator idGenerator;
 	final String key;
 	boolean withID = false;
 
-	DbMasterEntityDataStore(final DbDataRepos dataRepos, Type type, final DbDataExecutor exec) {
+	DbMasterEntityDataStore(final DbDataRepos dataRepos, Type type, final DbDataExecutor<Entity> exec) {
 		this(IdMakerBuilder.getIDReader(type), dataRepos, type, exec);
 	}
 
-	DbMasterEntityDataStore(Function<Entity, Object> keyMaker, final DbDataRepos dataRepos, Type type, final DbDataExecutor exec) {
+	DbMasterEntityDataStore(Function<Entity, Object> keyMaker, final DbDataRepos dataRepos, Type type, final DbDataExecutor<Entity> exec) {
 		super(keyMaker, dataRepos, type);
 		this.db = exec;
 
@@ -51,9 +51,9 @@ class DbMasterEntityDataStore extends EntityDataStore {
 			idGenerator = null;
 		}
 
-		List<EditableEntity> list = exec.getAll();
-		for (EditableEntity data : list) {
-			loadin(data);
+		List<Entity> list = exec.getAll();
+		for (Entity data : list) {
+			loadin((EditableEntity)data);
 		}
 	}
 
@@ -75,7 +75,7 @@ class DbMasterEntityDataStore extends EntityDataStore {
 
 				NebulaNative.onSave(null, dataRepos, newEntity, type);
 				db.update(newEntity, id);
-				EntityImp newSource = loadin(sourceEntity, db.get(id));
+				EntityImp newSource = loadin(sourceEntity, (EditableEntity)db.get(id));
 
 				newEntity.resetWith(newSource);
 			} finally {
@@ -97,7 +97,7 @@ class DbMasterEntityDataStore extends EntityDataStore {
 
 				// DB
 				db.insert(newEntity);
-				EntityImp newSource = loadin(db.get(id));
+				EntityImp newSource = loadin((EditableEntity)db.get(id));
 				newEntity.resetWith(newSource);
 			} finally {
 				lock.unlock();

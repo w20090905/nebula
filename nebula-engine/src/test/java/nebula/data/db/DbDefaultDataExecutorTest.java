@@ -11,16 +11,15 @@ import junit.framework.TestCase;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.db.DbConfiguration;
-import nebula.data.db.DbTransactionDataExecutor;
+import nebula.data.db.derby.DerbySQLHelper;
 import nebula.data.impl.EditableEntity;
 import nebula.lang.Type;
 import nebula.lang.TypeLoaderForTest;
 
-public class DbTransactionDataExecutorTest extends TestCase {
+public class DbDefaultDataExecutorTest extends TestCase {
 	TypeLoaderForTest loader;
-	Type t;
-	DbTransactionDataExecutor dbExec;
+	Type type;
+	DbDataExecutor<Entity> dbExec;
 	DbConfiguration config;
 
 	DataRepos p;
@@ -56,29 +55,30 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		String text = "" +
-				"tx Order { " +
-				"	!OrderName Name;" + 
+				"type Person { " +
+				"	!PersonName Name;" + 
 				"	Age;" + 
 				"};";
 		//@formatter:on		
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		EditableEntity data;
-		dbExec = (DbTransactionDataExecutor) config.getPersister(t);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
+		Entity data;
+		DbSqlHelper helper = new DerbySQLHelper(config, type);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 		dbExec.drop();
 		dbExec = null;
 
-		dbExec =  (DbTransactionDataExecutor) config.getPersister(t);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(3, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("Varchar".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
@@ -98,7 +98,7 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		}
 
 		data = new EditableEntity();
-		data.put("OrderName", "wangshilian");
+		data.put("PersonName", "wangshilian");
 		data.put("Age", 10L);
 
 		dbExec.insert(data);
@@ -115,8 +115,8 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
-				"tx Order { " + 
-				"	!OrderName Name;" + 
+				"type Person { " + 
+				"	!PersonName Name;" + 
 				"	Age;" + 
 				"	Active;" +
 				"	Height;" +
@@ -130,19 +130,20 @@ public class DbTransactionDataExecutorTest extends TestCase {
 				"};";
 		// @formatter:on
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec =  (DbTransactionDataExecutor) config.getPersister(t);
+		helper = new DerbySQLHelper(config, type);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(12, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("Varchar".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
@@ -197,30 +198,31 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
-				"tx Order { " + 
-				"	@MaxLength(250)!OrderName Name;" + 
+				"type Person { " + 
+				"	@MaxLength(250)!PersonName Name;" + 
 				"	Age Name;" + 
 				"	Height;" + 
 				"	Date;" + 
 				"};";
 		// @formatter:on
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec =  (DbTransactionDataExecutor) config.getPersister(t);
+		helper = new DerbySQLHelper(config, type);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(5, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(250, metaData.getColumnDisplaySize(i));
 		i++;
@@ -248,28 +250,29 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
-				"tx Order { " + 
-				"	!OrderName Name;" + 
+				"type Person { " + 
+				"	!PersonName Name;" + 
 				"	Height;" + 
 				"	Date;" + 
 				"};";
 		// @formatter:on
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec =  (DbTransactionDataExecutor) config.getPersister(t);
+		helper = new DerbySQLHelper(config, type);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(4, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(250, metaData.getColumnDisplaySize(i));
 		i++;
@@ -290,9 +293,9 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
-				"tx Order { " + 
+				"type Person { " + 
 				"	!Name;" + 
-				"	OrderName Name;" + 
+				"	PersonName Name;" + 
 				"	Height;" + 
 				"	Date;" + 
 				"};";
@@ -300,8 +303,9 @@ public class DbTransactionDataExecutorTest extends TestCase {
 
 		assertEquals(1, dbExec.getAll().size());
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		dbExec =  (DbTransactionDataExecutor) config.getPersister(t);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
+		helper = new DerbySQLHelper(config, type);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		assertEquals(0, dbExec.getAll().size());
 
@@ -318,7 +322,7 @@ public class DbTransactionDataExecutorTest extends TestCase {
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(5, metaData.getColumnCount());
@@ -328,7 +332,7 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
-		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
@@ -362,31 +366,33 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		String text = "" +
-				"tx Order { " +
-				"	!OrderName Name;" + 
+				"type Person { " +
+				"	!PersonName Name;" + 
 				"	Age[1..10];" +
 				"	Alies[1..1000] Name;" + 
 				"	Comment[1..1000];" + 
 				"};";
 		//@formatter:on		
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		EditableEntity data;
-		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
+		Entity data;
+		DbSqlHelper helper = new DerbySQLHelper(config, type);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 		dbExec.drop();
 		dbExec = null;
 
-		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
+		helper = new DerbySQLHelper(config, type);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(5, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("Varchar".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
@@ -412,7 +418,7 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		}
 
 		data = new EditableEntity();
-		data.put("OrderName", "wangshilian");
+		data.put("PersonName", "wangshilian");
 		List<Long> ages = new ArrayList<Long>();
 		ages.add(10L);
 		ages.add(200L);
@@ -474,29 +480,31 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		String text = "" +
-				"tx Order { " +
-				"	!OrderName Name;" + 
+				"type Person { " +
+				"	!PersonName Name;" + 
 				"	Age[1..10];" + 
 				"};";
 		//@formatter:on		
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		EditableEntity data;
-		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
+		Entity data;
+		DbSqlHelper helper = new DerbySQLHelper(config, type);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 		dbExec.drop();
 		dbExec = null;
 
-		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
+		helper = new DerbySQLHelper(config, type);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(3, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("Varchar".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
@@ -516,7 +524,7 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		}
 
 		data = new EditableEntity();
-		data.put("OrderName", "wangshilian");
+		data.put("PersonName", "wangshilian");
 		List<Long> ages = new ArrayList<Long>();
 		ages.add(10L);
 		ages.add(200L);
@@ -534,6 +542,8 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		assertEquals((Long) 200L, ages.get(1));
 		assertEquals((Long) 30000L, ages.get(2));
 
+		assertNotNull(data.get("LastModified_"));
+
 		assertNotNull(data);
 
 		dbExec.close();
@@ -544,8 +554,8 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
-				"tx Order { " + 
-				"	!OrderName Name;" + 
+				"type Person { " + 
+				"	!PersonName Name;" + 
 				"	Age[1..10];" + 
 				"	Active[1..10];" +
 				"	Height[1..10];" +
@@ -559,19 +569,20 @@ public class DbTransactionDataExecutorTest extends TestCase {
 				"};";
 		// @formatter:on
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
+		helper = new DerbySQLHelper(config, type);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(12, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("Varchar".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
@@ -626,30 +637,31 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
-				"tx Order { " + 
-				"	@MaxLength(250)!OrderName Name;" + 
+				"type Person { " + 
+				"	@MaxLength(250)!PersonName Name;" + 
 				"	Age;" + 
 				"	Height[1..10];" + 
 				"	Date[1..10];" + 
 				"};";
 		// @formatter:on
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
+		helper = new DerbySQLHelper(config, type);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(5, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(250, metaData.getColumnDisplaySize(i));
 		i++;
@@ -676,28 +688,29 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
-				"tx Order { " + 
-				"	!OrderName Name;" + 
+				"type Person { " + 
+				"	!PersonName Name;" + 
 				"	Height;" + 
 				"	Date;" + 
 				"};";
 		// @formatter:on
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
+		helper = new DerbySQLHelper(config, type);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(4, metaData.getColumnCount());
 
 		i = 1;
-		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(250, metaData.getColumnDisplaySize(i));
 		i++;
@@ -718,9 +731,9 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		/*********************************************************/
 		//@formatter:off
 		text = "" + 
-				"tx Order { " + 
+				"type Person { " + 
 				"	!Name;" + 
-				"	OrderName Name;" + 
+				"	PersonName Name;" + 
 				"	Height;" + 
 				"	Date;" + 
 				"};";
@@ -728,8 +741,9 @@ public class DbTransactionDataExecutorTest extends TestCase {
 
 		assertEquals(1, dbExec.getAll().size());
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
+		helper = new DerbySQLHelper(config, type);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		assertEquals(0, dbExec.getAll().size());
 
@@ -746,7 +760,7 @@ public class DbTransactionDataExecutorTest extends TestCase {
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		assertEquals(5, metaData.getColumnCount());
@@ -756,7 +770,7 @@ public class DbTransactionDataExecutorTest extends TestCase {
 		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
-		assertEquals("OrderName".toUpperCase(), metaData.getColumnName(i));
+		assertEquals("PersonName".toUpperCase(), metaData.getColumnName(i));
 		assertEquals("VARCHAR".toUpperCase(), metaData.getColumnTypeName(i));
 		assertEquals(60, metaData.getColumnDisplaySize(i));
 		i++;
@@ -791,11 +805,11 @@ public class DbTransactionDataExecutorTest extends TestCase {
 
 		//@formatter:off
 		String textRef = "" +
-				"tx Company { " +
+				"type Company { " +
 				"	!Rb1 Name;" +
 				"};";
 		String text = "" +
-				"tx TestOrder { " +
+				"type TestPerson { " +
 				"	!A1 Name;" +
 				"   A2{" +
 				"		!B1 Name;" +
@@ -823,18 +837,20 @@ public class DbTransactionDataExecutorTest extends TestCase {
 				"};";
 		//@formatter:on		
 
-		t = loader.testDefineNebula(new StringReader(textRef)).get(0);
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		EditableEntity data;
-		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
+		type = loader.testDefineNebula(new StringReader(textRef)).get(0);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
+		Entity data;
+		DbSqlHelper helper = new DerbySQLHelper(config, type);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 		dbExec.drop();
 		dbExec = null;
 
-		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
+		helper = new DerbySQLHelper(config, type);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
-		rs = statement.executeQuery(dbExec.builder.builderGetMeta());
+		rs = statement.executeQuery(helper.builderGetMeta());
 		metaData = rs.getMetaData();
 
 		// assertEquals(15, metaData.getColumnCount());
@@ -974,15 +990,16 @@ public class DbTransactionDataExecutorTest extends TestCase {
 	public final void testRemoveColumn() {
 		//@formatter:off
 		String text = "" +
-				"tx Order { " +
+				"type Person { " +
 				"	!Name;" +
 				"	Age;" +
 				"};";
 		//@formatter:on		
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		EditableEntity data;
-		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
+		Entity data;
+		DbSqlHelper helper = new DerbySQLHelper(config, type);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 		// dbExec.init();
 
 		try {
@@ -1001,12 +1018,13 @@ public class DbTransactionDataExecutorTest extends TestCase {
 
 		assertNotNull(data);
 
-		text = "" + "tx Order { " + "	!Name;" + "};";
+		text = "" + "type Person { " + "	!Name;" + "};";
 		// @formatter:on
 
-		t = loader.testDefineNebula(new StringReader(text)).get(0);
+		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		dbExec =  (DbTransactionDataExecutor)config.getPersister(t);
+		helper = new DerbySQLHelper(config, type);
+		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 		// dbExec.init();
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);

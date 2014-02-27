@@ -4,7 +4,7 @@ import java.io.StringReader;
 
 import junit.framework.TestCase;
 import nebula.data.db.DbConfiguration;
-import nebula.data.db.DbMasterDataSqlHelper;
+import nebula.data.db.DbSqlHelper;
 import nebula.data.db.derby.DerbyConfiguration;
 import nebula.lang.Type;
 import nebula.lang.TypeLoaderForTest;
@@ -12,7 +12,7 @@ import nebula.lang.TypeLoaderForTest;
 public class DbMasterDataSqlHelperTest extends TestCase {
 	TypeLoaderForTest loader;
 	Type t;
-	DbMasterDataSqlHelper h;
+	DbSqlHelper h;
 	DbConfiguration config;
 
 	protected void setUp() throws Exception {
@@ -46,7 +46,7 @@ public class DbMasterDataSqlHelperTest extends TestCase {
 		//@formatter:on		
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		h = new DbMasterDataSqlHelper(config, t);
+		h = new DbSqlHelper(config, t);
 		assertEquals("NPerson", h.getTableName());
 
 		assertEquals(5, h.userColumns.length);
@@ -94,7 +94,7 @@ public class DbMasterDataSqlHelperTest extends TestCase {
 		//@formatter:on		
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		h = new DbMasterDataSqlHelper(config, t);
+		h = new DbSqlHelper(config, t);
 		assertEquals("NTestPerson", h.getTableName());
 
 		int i = 0;
@@ -147,7 +147,7 @@ public class DbMasterDataSqlHelperTest extends TestCase {
 		//@formatter:on		
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		h = new DbMasterDataSqlHelper(config, t);
+		h = new DbSqlHelper(config, t);
 		assertEquals("NTestPerson", h.getTableName());
 
 		int i = 0;
@@ -221,7 +221,7 @@ public class DbMasterDataSqlHelperTest extends TestCase {
 
 		t = loader.testDefineNebula(new StringReader(textRef)).get(0);
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		h = new DbMasterDataSqlHelper(config, t);
+		h = new DbSqlHelper(config, t);
 		assertEquals("NTestPerson", h.getTableName());
 
 		int i = 0;
@@ -322,7 +322,7 @@ public class DbMasterDataSqlHelperTest extends TestCase {
 		//@formatter:on		
 
 		t = loader.testDefineNebula(new StringReader(text)).get(0);
-		h = new DbMasterDataSqlHelper(config, t);
+		h = new DbSqlHelper(config, t);
 		assertEquals("NTestPerson", h.getTableName());
 
 		int i = 0;

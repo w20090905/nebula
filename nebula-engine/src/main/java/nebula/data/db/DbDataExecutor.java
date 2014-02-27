@@ -2,22 +2,20 @@ package nebula.data.db;
 
 import java.util.List;
 
-import nebula.data.Entity;
-import nebula.data.impl.EditableEntity;
+public interface DbDataExecutor<T> {
+	DbSqlHelper getHelper();
+	
+	T get(Object... keys);
 
-public interface DbDataExecutor {
+	void insert(T value);
 
-	EditableEntity get(Object... keys);
-
-	void insert(Entity value);
-
-	void update(Entity value, Object... keys);
+	void update(T value, Object... keys);
 
 	void deleteAll();
 
-	List<EditableEntity> getAll();
+	List<T> getAll();
 
-	void delete(Entity value);
+	void delete(T value);
 
 	void drop();
 
