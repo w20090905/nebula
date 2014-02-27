@@ -28,7 +28,9 @@ table {
 	margin-top: -9px;
 	margin-left: -3px;
 }
-
+#style-switcher{
+	display: none;
+}
 /* change top level menu font */
 #sidebar>ul>li.section a {
 	text-transform: uppercase;
