@@ -1,4 +1,4 @@
-package nebula.data.db;
+package nebula.data.db.mapping;
 
 import java.sql.Types;
 import java.util.EnumMap;
@@ -50,15 +50,15 @@ public class DbColumn implements Timable{
 	// RawTypes rawType,long size,
 	// int precision, int scale
 
-	protected final String fieldName;
-	protected final String columnName;
-	protected final boolean key;
-	protected final boolean nullable;
-	protected final boolean array;
-	protected final RawTypes rawType;
-	protected final long size;
-	protected final int precision;
-	protected final int scale;
+	public final String fieldName;
+	public final String columnName;
+	public final boolean key;
+	public final boolean nullable;
+	public final boolean array;
+	public final RawTypes rawType;
+	public final long size;
+	public final int precision;
+	public final int scale;
 
 	@Override
 	public String toString() {

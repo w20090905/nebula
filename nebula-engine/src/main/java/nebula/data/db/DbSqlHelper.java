@@ -3,6 +3,7 @@ package nebula.data.db;
 import java.util.ArrayList;
 import java.util.List;
 
+import nebula.data.db.mapping.DbColumn;
 import nebula.data.db.serializer.BasicTypeFieldSerializer;
 import nebula.data.db.serializer.DefaultFieldSerializer;
 import nebula.data.db.serializer.EntityFieldSerializer;

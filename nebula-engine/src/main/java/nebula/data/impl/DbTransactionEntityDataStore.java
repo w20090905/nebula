@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import nebula.data.Entity;
-import nebula.data.db.DbDataExecutor;
+import nebula.data.db.DbPersister;
 import nebula.lang.Field;
 import nebula.lang.NebulaNative;
 import nebula.lang.Type;
@@ -14,12 +14,12 @@ import nebula.lang.TypeStandalone;
 
 class DbTransactionEntityDataStore extends EntityDataStore {
 
-	final DbDataExecutor<Entity> db;
+	final DbPersister<Entity> db;
 
 	final IDGenerator idGenerator;
 	final String key;
 
-	DbTransactionEntityDataStore(final DbDataRepos dataRepos, Type type, final DbDataExecutor<Entity> exec) {
+	DbTransactionEntityDataStore(final DbDataRepos dataRepos, Type type, final DbPersister<Entity> exec) {
 		super(IdMakerBuilder.getIDReader(type), dataRepos, type);
 		this.db = exec;
 

@@ -16,7 +16,7 @@ import org.apache.commons.logging.LogFactory;
 public class LegacyDbMasterDataExecutorTest extends TestCase {
 	TypeLoaderForTest loader;
 	Type type;
-	DbDataExecutor<Entity> dbExec;
+	DbPersister<Entity> dbExec;
 	DbConfiguration config;
 
 	DataRepos p;

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import nebula.data.Entity;
 import nebula.data.db.derby.DerbyConfiguration;
+import nebula.data.db.mapping.DbColumn;
 import nebula.data.db.oracle.OracleConfiguration;
 import nebula.lang.RawTypes;
 import nebula.lang.Type;
@@ -103,34 +104,36 @@ public abstract class DbConfiguration {
 	// Type type);
 
 	@SuppressWarnings("unchecked")
-	public <T> DbDataExecutor<T> getPersister(Type type, Class<T> clz) {
+	public <T> DbPersister<T> getPersister(Type type, Class<T> clz) {
 		if (log.isTraceEnabled()) {
 			log.trace("\tload persister [" + type.getName() + "] from connection - " + conn);
 		}
-		DbDataExecutor<T> executor = null;
+		DbPersister<T> executor = null;
 
 		DbSqlHelper helper = builderSQLHelper(type);
-		DbSerializer<T> serializer = null;
+		BO2DBSerializer<T> serializer = null;
 		if (clz == Entity.class) {
-			DbSerializer<Entity> entitySerializer = helper.getEntitySerializer();
-			serializer = (DbSerializer<T>) entitySerializer;
+			BO2DBSerializer<Entity> entitySerializer = helper.getEntitySerializer();
+			serializer = (BO2DBSerializer<T>) entitySerializer;
 		}
 
 		switch (type.getStandalone()) {
 		case Transaction:
 		case Relation:
-			executor = new DbDefaultExecutor<T>(conn, type, helper, serializer);
+			executor = new DbDefaultPersister<T>(conn, type, helper, serializer);
 			break;
 
 		default:
-			executor = new DbDefaultExecutor<T>(conn, type, helper, serializer);
+			executor = new DbDefaultPersister<T>(conn, type, helper, serializer);
 			break;
 		}
 
 		return executor;
 	}
 
-	public abstract DbSqlHelper builderSQLHelper(Type type);
+	public DbSqlHelper builderSQLHelper(Type type) {
+		return new DbSqlHelper(this, type);
+	}
 
 	public void shutdown() {
 		try {

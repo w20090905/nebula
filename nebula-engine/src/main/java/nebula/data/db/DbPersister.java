@@ -2,7 +2,13 @@ package nebula.data.db;
 
 import java.util.List;
 
-public interface DbDataExecutor<T> {
+/**
+ * 简单和外部持久化设备交互，不包含复杂缓存机制等 
+ * @author wanglocal
+ *
+ * @param <T>
+ */
+public interface DbPersister<T> {
 	T get(Object... keys);
 
 	void insert(T value);

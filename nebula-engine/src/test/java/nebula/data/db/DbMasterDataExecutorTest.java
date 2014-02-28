@@ -11,7 +11,6 @@ import junit.framework.TestCase;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.db.derby.DerbySQLHelper;
 import nebula.data.impl.EditableEntity;
 import nebula.lang.Type;
 import nebula.lang.TypeLoaderForTest;
@@ -19,7 +18,7 @@ import nebula.lang.TypeLoaderForTest;
 public class DbMasterDataExecutorTest extends TestCase {
 	TypeLoaderForTest loader;
 	Type type;
-	DbDataExecutor<Entity> dbExec;
+	DbPersister<Entity> dbExec;
 	DbConfiguration config;
 	DbSqlHelper helper;
 
@@ -65,12 +64,12 @@ public class DbMasterDataExecutorTest extends TestCase {
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 		Entity data;
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 		dbExec.drop();
 		dbExec = null;
 
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -135,7 +134,7 @@ public class DbMasterDataExecutorTest extends TestCase {
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -211,7 +210,7 @@ public class DbMasterDataExecutorTest extends TestCase {
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
@@ -262,7 +261,7 @@ public class DbMasterDataExecutorTest extends TestCase {
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
@@ -307,7 +306,7 @@ public class DbMasterDataExecutorTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 
 		assertEquals(0, dbExec.getAll().size());
 
@@ -379,12 +378,12 @@ public class DbMasterDataExecutorTest extends TestCase {
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 		Entity data;
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 		dbExec.drop();
 		dbExec = null;
 
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -491,12 +490,12 @@ public class DbMasterDataExecutorTest extends TestCase {
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 		Entity data;
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 		dbExec.drop();
 		dbExec = null;
 
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -574,7 +573,7 @@ public class DbMasterDataExecutorTest extends TestCase {
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -650,7 +649,7 @@ public class DbMasterDataExecutorTest extends TestCase {
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
@@ -700,7 +699,7 @@ public class DbMasterDataExecutorTest extends TestCase {
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
@@ -745,7 +744,7 @@ public class DbMasterDataExecutorTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 
 		assertEquals(0, dbExec.getAll().size());
 
@@ -843,12 +842,12 @@ public class DbMasterDataExecutorTest extends TestCase {
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 		Entity data;
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 		dbExec.drop();
 		dbExec = null;
 
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -1001,7 +1000,7 @@ public class DbMasterDataExecutorTest extends TestCase {
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 		Entity data;
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 		// dbExec.init();
 
 		try {
@@ -1026,7 +1025,7 @@ public class DbMasterDataExecutorTest extends TestCase {
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
 		dbExec = config.getPersister(type, Entity.class);
-		helper = new DerbySQLHelper(config, type);
+		helper = new DbSqlHelper(config, type);
 		// dbExec.init();
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);

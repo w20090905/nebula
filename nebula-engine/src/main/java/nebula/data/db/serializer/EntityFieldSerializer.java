@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import nebula.data.Entity;
-import nebula.data.db.DbSerializer;
+import nebula.data.db.BO2DBSerializer;
 import nebula.data.impl.EditableEntity;
 
-public class EntityFieldSerializer extends DefaultFieldSerializer<Entity> implements DbSerializer<Entity> {
+public class EntityFieldSerializer extends DefaultFieldSerializer<Entity> implements BO2DBSerializer<Entity> {
 
 	final List<DefaultFieldSerializer<?>> fieldSerializer;
 

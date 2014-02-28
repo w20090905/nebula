@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import nebula.data.SmartList;
+import nebula.data.db.mapping.DbColumn;
 import nebula.lang.Type;
 
 import org.apache.commons.logging.Log;
@@ -21,14 +22,19 @@ import org.apache.commons.logging.LogFactory;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
-
-class DbDefaultExecutor<T> implements DbDataExecutor<T> {
+/**
+ * 同时多表持久化，实现中
+ * @author wanglocal
+ *
+ * @param <T>
+ */
+class DbComplexPersister<T> implements DbPersister<T> {
 	private final Log log;
 
 	final private Connection conn;
 	final private DbSqlHelper helper;
 
-	final DbSerializer<T> serializer;
+	final BO2DBSerializer<T> serializer;
 
 	final private String SQL_GET;
 	final private String SQL_INSERT;
@@ -37,13 +43,13 @@ class DbDefaultExecutor<T> implements DbDataExecutor<T> {
 	final private String SQL_LIST;
 	final private String SQL_MAX_ID;
 
-	public DbDefaultExecutor(Connection conn, Type type, DbSqlHelper helper, DbSerializer<T> serializer) {
+	public DbComplexPersister(Connection conn, Type type, DbSqlHelper helper, BO2DBSerializer<T> serializer) {
 		super();
 		this.conn = conn;
 		this.helper = helper;
 		this.serializer = serializer;
 
-		log = LogFactory.getLog(DbDefaultExecutor.class + "_" + type.getName());
+		log = LogFactory.getLog(DbComplexPersister.class + "_" + type.getName());
 
 		SQL_GET = helper.builderGet();
 		SQL_INSERT = helper.builderInsert();

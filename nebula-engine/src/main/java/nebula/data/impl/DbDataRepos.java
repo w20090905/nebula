@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.db.DbConfiguration;
-import nebula.data.db.DbDataExecutor;
+import nebula.data.db.DbPersister;
 import nebula.lang.Type;
 
 public class DbDataRepos extends DefaultDataRepos implements DataReposEx {
@@ -26,7 +26,7 @@ public class DbDataRepos extends DefaultDataRepos implements DataReposEx {
 			return new EntityDataStore(IdMakerBuilder.getIDReader(type), this, type);
 		case Transaction:
 		case Relation:
-			return new DbTransactionEntityDataStore(this, type, (DbDataExecutor<Entity>) dbConfig.getPersister(type,Entity.class));
+			return new DbTransactionEntityDataStore(this, type, (DbPersister<Entity>) dbConfig.getPersister(type,Entity.class));
 		case Master:
 		default:
 			return new DbMasterEntityDataStore(this, type, dbConfig.getPersister(type,Entity.class));

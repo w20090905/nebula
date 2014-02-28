@@ -4,8 +4,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import nebula.data.db.DbConfiguration;
-import nebula.data.db.DbSqlHelper;
-import nebula.lang.Type;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,11 +33,6 @@ public class DerbyConfiguration extends DbConfiguration {
 	@Override
 	protected void finalize() throws Throwable {
 		this.shutdown();
-	}
-
-	@Override
-	public DbSqlHelper builderSQLHelper(Type type) {
-		return new DerbySQLHelper(this, type);
 	}
 
 }

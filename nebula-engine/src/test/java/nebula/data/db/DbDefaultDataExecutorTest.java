@@ -11,7 +11,6 @@ import junit.framework.TestCase;
 import nebula.data.DataRepos;
 import nebula.data.DataStore;
 import nebula.data.Entity;
-import nebula.data.db.derby.DerbySQLHelper;
 import nebula.data.impl.EditableEntity;
 import nebula.lang.Type;
 import nebula.lang.TypeLoaderForTest;
@@ -19,7 +18,7 @@ import nebula.lang.TypeLoaderForTest;
 public class DbDefaultDataExecutorTest extends TestCase {
 	TypeLoaderForTest loader;
 	Type type;
-	DbDataExecutor<Entity> dbExec;
+	DbPersister<Entity> dbExec;
 	DbConfiguration config;
 
 	DataRepos p;
@@ -63,12 +62,12 @@ public class DbDefaultDataExecutorTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 		Entity data;
-		DbSqlHelper helper = new DerbySQLHelper(config, type);
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		DbSqlHelper helper = new DbSqlHelper(config, type);
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 		dbExec.drop();
 		dbExec = null;
 
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -132,8 +131,8 @@ public class DbDefaultDataExecutorTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		helper = new DerbySQLHelper(config, type);
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		helper = new DbSqlHelper(config, type);
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -208,8 +207,8 @@ public class DbDefaultDataExecutorTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		helper = new DerbySQLHelper(config, type);
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		helper = new DbSqlHelper(config, type);
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
@@ -259,8 +258,8 @@ public class DbDefaultDataExecutorTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		helper = new DerbySQLHelper(config, type);
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		helper = new DbSqlHelper(config, type);
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
@@ -304,8 +303,8 @@ public class DbDefaultDataExecutorTest extends TestCase {
 		assertEquals(1, dbExec.getAll().size());
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
-		helper = new DerbySQLHelper(config, type);
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		helper = new DbSqlHelper(config, type);
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		assertEquals(0, dbExec.getAll().size());
 
@@ -376,13 +375,13 @@ public class DbDefaultDataExecutorTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 		Entity data;
-		DbSqlHelper helper = new DerbySQLHelper(config, type);
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		DbSqlHelper helper = new DbSqlHelper(config, type);
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 		dbExec.drop();
 		dbExec = null;
 
-		helper = new DerbySQLHelper(config, type);
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		helper = new DbSqlHelper(config, type);
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -488,13 +487,13 @@ public class DbDefaultDataExecutorTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 		Entity data;
-		DbSqlHelper helper = new DerbySQLHelper(config, type);
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		DbSqlHelper helper = new DbSqlHelper(config, type);
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 		dbExec.drop();
 		dbExec = null;
 
-		helper = new DerbySQLHelper(config, type);
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		helper = new DbSqlHelper(config, type);
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -571,8 +570,8 @@ public class DbDefaultDataExecutorTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		helper = new DerbySQLHelper(config, type);
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		helper = new DbSqlHelper(config, type);
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -647,8 +646,8 @@ public class DbDefaultDataExecutorTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		helper = new DerbySQLHelper(config, type);
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		helper = new DbSqlHelper(config, type);
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
@@ -697,8 +696,8 @@ public class DbDefaultDataExecutorTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		helper = new DerbySQLHelper(config, type);
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		helper = new DbSqlHelper(config, type);
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
 
@@ -742,8 +741,8 @@ public class DbDefaultDataExecutorTest extends TestCase {
 		assertEquals(1, dbExec.getAll().size());
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
-		helper = new DerbySQLHelper(config, type);
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		helper = new DbSqlHelper(config, type);
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		assertEquals(0, dbExec.getAll().size());
 
@@ -840,13 +839,13 @@ public class DbDefaultDataExecutorTest extends TestCase {
 		type = loader.testDefineNebula(new StringReader(textRef)).get(0);
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 		Entity data;
-		DbSqlHelper helper = new DerbySQLHelper(config, type);
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		DbSqlHelper helper = new DbSqlHelper(config, type);
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 		dbExec.drop();
 		dbExec = null;
 
-		helper = new DerbySQLHelper(config, type);
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		helper = new DbSqlHelper(config, type);
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 
 		// ************ Check Database table Layout *************/
 		statement = config.conn.createStatement();
@@ -998,8 +997,8 @@ public class DbDefaultDataExecutorTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 		Entity data;
-		DbSqlHelper helper = new DerbySQLHelper(config, type);
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		DbSqlHelper helper = new DbSqlHelper(config, type);
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 		// dbExec.init();
 
 		try {
@@ -1023,8 +1022,8 @@ public class DbDefaultDataExecutorTest extends TestCase {
 
 		type = loader.testDefineNebula(new StringReader(text)).get(0);
 
-		helper = new DerbySQLHelper(config, type);
-		dbExec = new DbDefaultExecutor<Entity>(config.conn, type, helper, helper.getEntitySerializer());
+		helper = new DbSqlHelper(config, type);
+		dbExec = new DbDefaultPersister<Entity>(config.conn, type, helper, helper.getEntitySerializer());
 		// dbExec.init();
 		data = dbExec.get("wangshilian");
 		assertNotNull(data);
