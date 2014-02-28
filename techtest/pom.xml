@@ -69,6 +69,11 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.3.1.Final</version>
+		</dependency>
+		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.16</version>
@@ -98,16 +103,12 @@
 			<artifactId>javax.servlet.jsp-api</artifactId>
 			<version>2.2.1</version>
 		</dependency>
-        <dependency>
-            <groupId>asm</groupId>
-            <artifactId>asm-all</artifactId>
-            <version>3.3.1</version>
-        </dependency><!-- 
 		<dependency>
-			<groupId>org.ow2.asm</groupId>
+			<groupId>asm</groupId>
 			<artifactId>asm-all</artifactId>
-			<version>4.0</version>
-		</dependency> -->
+			<version>3.3.1</version>
+		</dependency><!-- <dependency> <groupId>org.ow2.asm</groupId> <artifactId>asm-all</artifactId> 
+			<version>4.0</version> </dependency> -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
