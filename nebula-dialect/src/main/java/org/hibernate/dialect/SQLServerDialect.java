@@ -27,12 +27,12 @@ import java.sql.Types;
 
 import org.hibernate.LockMode;
 import org.hibernate.LockOptions;
-import org.hibernate.dialect.function.AnsiTrimEmulationFunction;
-import org.hibernate.dialect.function.SQLFunctionTemplate;
-import org.hibernate.dialect.function.StandardSQLFunction;
-import org.hibernate.type.StandardBasicTypes;
-import org.hibernate.type.descriptor.sql.SmallIntTypeDescriptor;
-import org.hibernate.type.descriptor.sql.SqlTypeDescriptor;
+//import org.hibernate.dialect.function.AnsiTrimEmulationFunction;
+//import org.hibernate.dialect.function.SQLFunctionTemplate;
+//import org.hibernate.dialect.function.StandardSQLFunction;
+//import org.hibernate.type.StandardBasicTypes;
+//import org.hibernate.type.descriptor.sql.SmallIntTypeDescriptor;
+//import org.hibernate.type.descriptor.sql.SqlTypeDescriptor;
 
 /**
  * A dialect for Microsoft SQL Server 2000
@@ -53,18 +53,18 @@ public class SQLServerDialect extends AbstractTransactSQLDialect {
 		registerColumnType( Types.LONGVARCHAR, "text" );
 		registerColumnType( Types.BOOLEAN, "bit" );
 
-		registerFunction( "second", new SQLFunctionTemplate( StandardBasicTypes.INTEGER, "datepart(second, ?1)" ) );
-		registerFunction( "minute", new SQLFunctionTemplate( StandardBasicTypes.INTEGER, "datepart(minute, ?1)" ) );
-		registerFunction( "hour", new SQLFunctionTemplate( StandardBasicTypes.INTEGER, "datepart(hour, ?1)" ) );
-		registerFunction( "locate", new StandardSQLFunction( "charindex", StandardBasicTypes.INTEGER ) );
-
-		registerFunction( "extract", new SQLFunctionTemplate( StandardBasicTypes.INTEGER, "datepart(?1, ?3)" ) );
-		registerFunction( "mod", new SQLFunctionTemplate( StandardBasicTypes.INTEGER, "?1 % ?2" ) );
-		registerFunction( "bit_length", new SQLFunctionTemplate( StandardBasicTypes.INTEGER, "datalength(?1) * 8" ) );
-
-		registerFunction( "trim", new AnsiTrimEmulationFunction() );
-
-		registerKeyword( "top" );
+//		registerFunction( "second", new SQLFunctionTemplate( StandardBasicTypes.INTEGER, "datepart(second, ?1)" ) );
+//		registerFunction( "minute", new SQLFunctionTemplate( StandardBasicTypes.INTEGER, "datepart(minute, ?1)" ) );
+//		registerFunction( "hour", new SQLFunctionTemplate( StandardBasicTypes.INTEGER, "datepart(hour, ?1)" ) );
+//		registerFunction( "locate", new StandardSQLFunction( "charindex", StandardBasicTypes.INTEGER ) );
+//
+//		registerFunction( "extract", new SQLFunctionTemplate( StandardBasicTypes.INTEGER, "datepart(?1, ?3)" ) );
+//		registerFunction( "mod", new SQLFunctionTemplate( StandardBasicTypes.INTEGER, "?1 % ?2" ) );
+//		registerFunction( "bit_length", new SQLFunctionTemplate( StandardBasicTypes.INTEGER, "datalength(?1) * 8" ) );
+//
+//		registerFunction( "trim", new AnsiTrimEmulationFunction() );
+//
+//		registerKeyword( "top" );
 	}
 
 	@Override
@@ -196,13 +196,13 @@ public class SQLServerDialect extends AbstractTransactSQLDialect {
 		// here assume SQLServer2005 using snapshot isolation, which does not have this problem
 		return false;
 	}
-
-	@Override
-	protected SqlTypeDescriptor getSqlTypeDescriptorOverride(int sqlCode) {
-		return sqlCode == Types.TINYINT ?
-				SmallIntTypeDescriptor.INSTANCE :
-				super.getSqlTypeDescriptorOverride( sqlCode );
-	}
+//
+//	@Override
+//	protected SqlTypeDescriptor getSqlTypeDescriptorOverride(int sqlCode) {
+//		return sqlCode == Types.TINYINT ?
+//				SmallIntTypeDescriptor.INSTANCE :
+//				super.getSqlTypeDescriptorOverride( sqlCode );
+//	}
 
 	@Override
 	public int getInExpressionCountLimit() {

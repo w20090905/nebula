@@ -27,18 +27,11 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.Iterator;
-import java.util.Map;
 
 import org.hibernate.LockMode;
 import org.hibernate.LockOptions;
-import org.hibernate.cfg.Environment;
-import org.hibernate.dialect.function.CharIndexFunction;
-import org.hibernate.dialect.function.NoArgSQLFunction;
-import org.hibernate.dialect.function.SQLFunctionTemplate;
-import org.hibernate.dialect.function.StandardSQLFunction;
-import org.hibernate.dialect.function.VarArgsSQLFunction;
-import org.hibernate.type.StandardBasicTypes;
+//import org.hibernate.cfg.Environment;
+//import org.hibernate.type.StandardBasicTypes;
 
 /**
  * An abstract base class for Sybase and MS SQL Server dialects.
@@ -66,64 +59,7 @@ abstract class AbstractTransactSQLDialect extends Dialect {
 		registerColumnType( Types.BLOB, "image" );
 		registerColumnType( Types.CLOB, "text" );
 
-		registerFunction( "ascii", new StandardSQLFunction( "ascii", StandardBasicTypes.INTEGER ) );
-		registerFunction( "char", new StandardSQLFunction( "char", StandardBasicTypes.CHARACTER ) );
-		registerFunction( "len", new StandardSQLFunction( "len", StandardBasicTypes.LONG ) );
-		registerFunction( "lower", new StandardSQLFunction( "lower" ) );
-		registerFunction( "upper", new StandardSQLFunction( "upper" ) );
-		registerFunction( "str", new StandardSQLFunction( "str", StandardBasicTypes.STRING ) );
-		registerFunction( "ltrim", new StandardSQLFunction( "ltrim" ) );
-		registerFunction( "rtrim", new StandardSQLFunction( "rtrim" ) );
-		registerFunction( "reverse", new StandardSQLFunction( "reverse" ) );
-		registerFunction( "space", new StandardSQLFunction( "space", StandardBasicTypes.STRING ) );
-
-		registerFunction( "user", new NoArgSQLFunction( "user", StandardBasicTypes.STRING ) );
-
-		registerFunction( "current_timestamp", new NoArgSQLFunction( "getdate", StandardBasicTypes.TIMESTAMP ) );
-		registerFunction( "current_time", new NoArgSQLFunction( "getdate", StandardBasicTypes.TIME ) );
-		registerFunction( "current_date", new NoArgSQLFunction( "getdate", StandardBasicTypes.DATE ) );
-
-		registerFunction( "getdate", new NoArgSQLFunction( "getdate", StandardBasicTypes.TIMESTAMP ) );
-		registerFunction( "getutcdate", new NoArgSQLFunction( "getutcdate", StandardBasicTypes.TIMESTAMP ) );
-		registerFunction( "day", new StandardSQLFunction( "day", StandardBasicTypes.INTEGER ) );
-		registerFunction( "month", new StandardSQLFunction( "month", StandardBasicTypes.INTEGER ) );
-		registerFunction( "year", new StandardSQLFunction( "year", StandardBasicTypes.INTEGER ) );
-		registerFunction( "datename", new StandardSQLFunction( "datename", StandardBasicTypes.STRING ) );
-
-		registerFunction( "abs", new StandardSQLFunction( "abs" ) );
-		registerFunction( "sign", new StandardSQLFunction( "sign", StandardBasicTypes.INTEGER ) );
-
-		registerFunction( "acos", new StandardSQLFunction( "acos", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "asin", new StandardSQLFunction( "asin", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "atan", new StandardSQLFunction( "atan", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "cos", new StandardSQLFunction( "cos", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "cot", new StandardSQLFunction( "cot", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "exp", new StandardSQLFunction( "exp", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "log", new StandardSQLFunction( "log", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "log10", new StandardSQLFunction( "log10", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "sin", new StandardSQLFunction( "sin", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "sqrt", new StandardSQLFunction( "sqrt", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "tan", new StandardSQLFunction( "tan", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "pi", new NoArgSQLFunction( "pi", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "square", new StandardSQLFunction( "square" ) );
-		registerFunction( "rand", new StandardSQLFunction( "rand", StandardBasicTypes.FLOAT ) );
-
-		registerFunction( "radians", new StandardSQLFunction( "radians", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "degrees", new StandardSQLFunction( "degrees", StandardBasicTypes.DOUBLE ) );
-
-		registerFunction( "round", new StandardSQLFunction( "round" ) );
-		registerFunction( "ceiling", new StandardSQLFunction( "ceiling" ) );
-		registerFunction( "floor", new StandardSQLFunction( "floor" ) );
-
-		registerFunction( "isnull", new StandardSQLFunction( "isnull" ) );
-
-		registerFunction( "concat", new VarArgsSQLFunction( StandardBasicTypes.STRING, "(", "+", ")" ) );
-
-		registerFunction( "length", new StandardSQLFunction( "len", StandardBasicTypes.INTEGER ) );
-		registerFunction( "trim", new SQLFunctionTemplate( StandardBasicTypes.STRING, "ltrim(rtrim(?1))" ) );
-		registerFunction( "locate", new CharIndexFunction() );
-
-		getDefaultProperties().setProperty( Environment.STATEMENT_BATCH_SIZE, NO_BATCH );
+//		getDefaultProperties().setProperty( Environment.STATEMENT_BATCH_SIZE, NO_BATCH );
 	}
 
 	@Override
@@ -176,44 +112,44 @@ abstract class AbstractTransactSQLDialect extends Dialect {
 	public String appendLockHint(LockOptions lockOptions, String tableName) {
 		return lockOptions.getLockMode().greaterThan( LockMode.READ ) ? tableName + " holdlock" : tableName;
 	}
-
-	@Override
-	public String applyLocksToSql(String sql, LockOptions aliasedLockOptions, Map<String, String[]> keyColumnNames) {
-		// TODO:  merge additional lockoptions support in Dialect.applyLocksToSql
-		final Iterator itr = aliasedLockOptions.getAliasLockIterator();
-		final StringBuilder buffer = new StringBuilder( sql );
-		int correction = 0;
-		while ( itr.hasNext() ) {
-			final Map.Entry entry = (Map.Entry) itr.next();
-			final LockMode lockMode = (LockMode) entry.getValue();
-			if ( lockMode.greaterThan( LockMode.READ ) ) {
-				final String alias = (String) entry.getKey();
-				int start = -1;
-				int end = -1;
-				if ( sql.endsWith( " " + alias ) ) {
-					start = ( sql.length() - alias.length() ) + correction;
-					end = start + alias.length();
-				}
-				else {
-					int position = sql.indexOf( " " + alias + " " );
-					if ( position <= -1 ) {
-						position = sql.indexOf( " " + alias + "," );
-					}
-					if ( position > -1 ) {
-						start = position + correction + 1;
-						end = start + alias.length();
-					}
-				}
-
-				if ( start > -1 ) {
-					final String lockHint = appendLockHint( lockMode, alias );
-					buffer.replace( start, end, lockHint );
-					correction += ( lockHint.length() - alias.length() );
-				}
-			}
-		}
-		return buffer.toString();
-	}
+//
+//	@Override
+//	public String applyLocksToSql(String sql, LockOptions aliasedLockOptions, Map<String, String[]> keyColumnNames) {
+//		// TODO:  merge additional lockoptions support in Dialect.applyLocksToSql
+//		final Iterator itr = aliasedLockOptions.getAliasLockIterator();
+//		final StringBuilder buffer = new StringBuilder( sql );
+//		int correction = 0;
+//		while ( itr.hasNext() ) {
+//			final Map.Entry entry = (Map.Entry) itr.next();
+//			final LockMode lockMode = (LockMode) entry.getValue();
+//			if ( lockMode.greaterThan( LockMode.READ ) ) {
+//				final String alias = (String) entry.getKey();
+//				int start = -1;
+//				int end = -1;
+//				if ( sql.endsWith( " " + alias ) ) {
+//					start = ( sql.length() - alias.length() ) + correction;
+//					end = start + alias.length();
+//				}
+//				else {
+//					int position = sql.indexOf( " " + alias + " " );
+//					if ( position <= -1 ) {
+//						position = sql.indexOf( " " + alias + "," );
+//					}
+//					if ( position > -1 ) {
+//						start = position + correction + 1;
+//						end = start + alias.length();
+//					}
+//				}
+//
+//				if ( start > -1 ) {
+//					final String lockHint = appendLockHint( lockMode, alias );
+//					buffer.replace( start, end, lockHint );
+//					correction += ( lockHint.length() - alias.length() );
+//				}
+//			}
+//		}
+//		return buffer.toString();
+//	}
 
 	@Override
 	public int registerResultSetOutParameter(CallableStatement statement, int col) throws SQLException {

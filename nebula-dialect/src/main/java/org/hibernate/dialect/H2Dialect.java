@@ -23,27 +23,21 @@
  */
 package org.hibernate.dialect;
 
-import java.sql.SQLException;
 import java.sql.Types;
 
-import org.hibernate.JDBCException;
-import org.hibernate.PessimisticLockException;
+//import org.hibernate.JDBCException;
+//import org.hibernate.PessimisticLockException;
 import org.hibernate.cfg.AvailableSettings;
-import org.hibernate.dialect.function.AvgWithArgumentCastFunction;
-import org.hibernate.dialect.function.NoArgSQLFunction;
-import org.hibernate.dialect.function.StandardSQLFunction;
-import org.hibernate.dialect.function.VarArgsSQLFunction;
-import org.hibernate.exception.ConstraintViolationException;
-import org.hibernate.exception.LockAcquisitionException;
-import org.hibernate.exception.spi.SQLExceptionConversionDelegate;
-import org.hibernate.exception.spi.TemplatedViolatedConstraintNameExtracter;
-import org.hibernate.exception.spi.ViolatedConstraintNameExtracter;
-import org.hibernate.internal.CoreMessageLogger;
-import org.hibernate.internal.util.JdbcExceptionHelper;
+//import org.hibernate.exception.ConstraintViolationException;
+//import org.hibernate.exception.LockAcquisitionException;
+//import org.hibernate.exception.spi.SQLExceptionConversionDelegate;
+//import org.hibernate.exception.spi.TemplatedViolatedConstraintNameExtracter;
+//import org.hibernate.exception.spi.ViolatedConstraintNameExtracter;
+//import org.hibernate.internal.CoreMessageLogger;
+//import org.hibernate.internal.util.JdbcExceptionHelper;
 import org.hibernate.internal.util.ReflectHelper;
-import org.hibernate.type.StandardBasicTypes;
 
-import org.jboss.logging.Logger;
+//import org.jboss.logging.Logger;
 
 /**
  * A dialect compatible with the H2 database.
@@ -51,10 +45,10 @@ import org.jboss.logging.Logger;
  * @author Thomas Mueller
  */
 public class H2Dialect extends Dialect {
-	private static final CoreMessageLogger LOG = Logger.getMessageLogger(
-			CoreMessageLogger.class,
-			H2Dialect.class.getName()
-	);
+//	private static final CoreMessageLogger LOG = Logger.getMessageLogger(
+//			CoreMessageLogger.class,
+//			H2Dialect.class.getName()
+//	);
 
 	private final String querySequenceString;
 
@@ -75,13 +69,13 @@ public class H2Dialect extends Dialect {
 				querySequenceString = "select name from information_schema.sequences";
 			}
 			if ( ! ( majorVersion > 1 || minorVersion > 2 || buildId >= 139 ) ) {
-				LOG.unsupportedMultiTableBulkHqlJpaql( majorVersion, minorVersion, buildId );
+//				LOG.unsupportedMultiTableBulkHqlJpaql( majorVersion, minorVersion, buildId );
 			}
 		}
 		catch ( Exception e ) {
 			// probably H2 not in the classpath, though in certain app server environments it might just mean we are
 			// not using the correct classloader
-			LOG.undeterminedH2Version();
+//			LOG.undeterminedH2Version();
 		}
 
 		this.querySequenceString = querySequenceString;
@@ -109,92 +103,11 @@ public class H2Dialect extends Dialect {
 		registerColumnType( Types.BLOB, "blob" );
 		registerColumnType( Types.CLOB, "clob" );
 
-		// Aggregations ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		registerFunction( "avg", new AvgWithArgumentCastFunction( "double" ) );
-
 		// select topic, syntax from information_schema.help
 		// where section like 'Function%' order by section, topic
 		//
 		// see also ->  http://www.h2database.com/html/functions.html
-
-		// Numeric Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		registerFunction( "acos", new StandardSQLFunction( "acos", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "asin", new StandardSQLFunction( "asin", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "atan", new StandardSQLFunction( "atan", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "atan2", new StandardSQLFunction( "atan2", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "bitand", new StandardSQLFunction( "bitand", StandardBasicTypes.INTEGER ) );
-		registerFunction( "bitor", new StandardSQLFunction( "bitor", StandardBasicTypes.INTEGER ) );
-		registerFunction( "bitxor", new StandardSQLFunction( "bitxor", StandardBasicTypes.INTEGER ) );
-		registerFunction( "ceiling", new StandardSQLFunction( "ceiling", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "cos", new StandardSQLFunction( "cos", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "compress", new StandardSQLFunction( "compress", StandardBasicTypes.BINARY ) );
-		registerFunction( "cot", new StandardSQLFunction( "cot", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "decrypt", new StandardSQLFunction( "decrypt", StandardBasicTypes.BINARY ) );
-		registerFunction( "degrees", new StandardSQLFunction( "degrees", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "encrypt", new StandardSQLFunction( "encrypt", StandardBasicTypes.BINARY ) );
-		registerFunction( "exp", new StandardSQLFunction( "exp", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "expand", new StandardSQLFunction( "compress", StandardBasicTypes.BINARY ) );
-		registerFunction( "floor", new StandardSQLFunction( "floor", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "hash", new StandardSQLFunction( "hash", StandardBasicTypes.BINARY ) );
-		registerFunction( "log", new StandardSQLFunction( "log", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "log10", new StandardSQLFunction( "log10", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "pi", new NoArgSQLFunction( "pi", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "power", new StandardSQLFunction( "power", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "radians", new StandardSQLFunction( "radians", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "rand", new NoArgSQLFunction( "rand", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "round", new StandardSQLFunction( "round", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "roundmagic", new StandardSQLFunction( "roundmagic", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "sign", new StandardSQLFunction( "sign", StandardBasicTypes.INTEGER ) );
-		registerFunction( "sin", new StandardSQLFunction( "sin", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "tan", new StandardSQLFunction( "tan", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "truncate", new StandardSQLFunction( "truncate", StandardBasicTypes.DOUBLE ) );
-
-		// String Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		registerFunction( "ascii", new StandardSQLFunction( "ascii", StandardBasicTypes.INTEGER ) );
-		registerFunction( "char", new StandardSQLFunction( "char", StandardBasicTypes.CHARACTER ) );
-		registerFunction( "concat", new VarArgsSQLFunction( StandardBasicTypes.STRING, "(", "||", ")" ) );
-		registerFunction( "difference", new StandardSQLFunction( "difference", StandardBasicTypes.INTEGER ) );
-		registerFunction( "hextoraw", new StandardSQLFunction( "hextoraw", StandardBasicTypes.STRING ) );
-		registerFunction( "insert", new StandardSQLFunction( "lower", StandardBasicTypes.STRING ) );
-		registerFunction( "left", new StandardSQLFunction( "left", StandardBasicTypes.STRING ) );
-		registerFunction( "lcase", new StandardSQLFunction( "lcase", StandardBasicTypes.STRING ) );
-		registerFunction( "ltrim", new StandardSQLFunction( "ltrim", StandardBasicTypes.STRING ) );
-		registerFunction( "octet_length", new StandardSQLFunction( "octet_length", StandardBasicTypes.INTEGER ) );
-		registerFunction( "position", new StandardSQLFunction( "position", StandardBasicTypes.INTEGER ) );
-		registerFunction( "rawtohex", new StandardSQLFunction( "rawtohex", StandardBasicTypes.STRING ) );
-		registerFunction( "repeat", new StandardSQLFunction( "repeat", StandardBasicTypes.STRING ) );
-		registerFunction( "replace", new StandardSQLFunction( "replace", StandardBasicTypes.STRING ) );
-		registerFunction( "right", new StandardSQLFunction( "right", StandardBasicTypes.STRING ) );
-		registerFunction( "rtrim", new StandardSQLFunction( "rtrim", StandardBasicTypes.STRING ) );
-		registerFunction( "soundex", new StandardSQLFunction( "soundex", StandardBasicTypes.STRING ) );
-		registerFunction( "space", new StandardSQLFunction( "space", StandardBasicTypes.STRING ) );
-		registerFunction( "stringencode", new StandardSQLFunction( "stringencode", StandardBasicTypes.STRING ) );
-		registerFunction( "stringdecode", new StandardSQLFunction( "stringdecode", StandardBasicTypes.STRING ) );
-		registerFunction( "stringtoutf8", new StandardSQLFunction( "stringtoutf8", StandardBasicTypes.BINARY ) );
-		registerFunction( "ucase", new StandardSQLFunction( "ucase", StandardBasicTypes.STRING ) );
-		registerFunction( "utf8tostring", new StandardSQLFunction( "utf8tostring", StandardBasicTypes.STRING ) );
-
-		// Time and Date Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		registerFunction( "curdate", new NoArgSQLFunction( "curdate", StandardBasicTypes.DATE ) );
-		registerFunction( "curtime", new NoArgSQLFunction( "curtime", StandardBasicTypes.TIME ) );
-		registerFunction( "curtimestamp", new NoArgSQLFunction( "curtimestamp", StandardBasicTypes.TIME ) );
-		registerFunction( "current_date", new NoArgSQLFunction( "current_date", StandardBasicTypes.DATE ) );
-		registerFunction( "current_time", new NoArgSQLFunction( "current_time", StandardBasicTypes.TIME ) );
-		registerFunction( "current_timestamp", new NoArgSQLFunction( "current_timestamp", StandardBasicTypes.TIMESTAMP ) );
-		registerFunction( "datediff", new StandardSQLFunction( "datediff", StandardBasicTypes.INTEGER ) );
-		registerFunction( "dayname", new StandardSQLFunction( "dayname", StandardBasicTypes.STRING ) );
-		registerFunction( "dayofmonth", new StandardSQLFunction( "dayofmonth", StandardBasicTypes.INTEGER ) );
-		registerFunction( "dayofweek", new StandardSQLFunction( "dayofweek", StandardBasicTypes.INTEGER ) );
-		registerFunction( "dayofyear", new StandardSQLFunction( "dayofyear", StandardBasicTypes.INTEGER ) );
-		registerFunction( "monthname", new StandardSQLFunction( "monthname", StandardBasicTypes.STRING ) );
-		registerFunction( "now", new NoArgSQLFunction( "now", StandardBasicTypes.TIMESTAMP ) );
-		registerFunction( "quarter", new StandardSQLFunction( "quarter", StandardBasicTypes.INTEGER ) );
-		registerFunction( "week", new StandardSQLFunction( "week", StandardBasicTypes.INTEGER ) );
-
-		// System Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		registerFunction( "database", new NoArgSQLFunction( "database", StandardBasicTypes.STRING ) );
-		registerFunction( "user", new NoArgSQLFunction( "user", StandardBasicTypes.STRING ) );
-
+//
 		getDefaultProperties().setProperty( AvailableSettings.STATEMENT_BATCH_SIZE, DEFAULT_BATCH_SIZE );
 		// http://code.google.com/p/h2database/issues/detail?id=235
 		getDefaultProperties().setProperty( AvailableSettings.NON_CONTEXTUAL_LOB_CREATION, "true" );
@@ -296,64 +209,64 @@ public class H2Dialect extends Dialect {
 		return querySequenceString;
 	}
 
-	@Override
-	public ViolatedConstraintNameExtracter getViolatedConstraintNameExtracter() {
-		return EXTRACTER;
-	}
-
-	private static final ViolatedConstraintNameExtracter EXTRACTER = new TemplatedViolatedConstraintNameExtracter() {
-		/**
-		 * Extract the name of the violated constraint from the given SQLException.
-		 *
-		 * @param sqle The exception that was the result of the constraint violation.
-		 * @return The extracted constraint name.
-		 */
-		public String extractConstraintName(SQLException sqle) {
-			String constraintName = null;
-			// 23000: Check constraint violation: {0}
-			// 23001: Unique index or primary key violation: {0}
-			if ( sqle.getSQLState().startsWith( "23" ) ) {
-				final String message = sqle.getMessage();
-				final int idx = message.indexOf( "violation: " );
-				if ( idx > 0 ) {
-					constraintName = message.substring( idx + "violation: ".length() );
-				}
-			}
-			return constraintName;
-		}
-	};
-
-	@Override
-	public SQLExceptionConversionDelegate buildSQLExceptionConversionDelegate() {
-		SQLExceptionConversionDelegate delegate = super.buildSQLExceptionConversionDelegate();
-		if (delegate == null) {
-			delegate = new SQLExceptionConversionDelegate() {
-				@Override
-				public JDBCException convert(SQLException sqlException, String message, String sql) {
-					final int errorCode = JdbcExceptionHelper.extractErrorCode( sqlException );
-
-					if (40001 == errorCode) {
-						// DEADLOCK DETECTED
-						return new LockAcquisitionException(message, sqlException, sql);
-					}
-
-					if (50200 == errorCode) {
-						// LOCK NOT AVAILABLE
-						return new PessimisticLockException(message, sqlException, sql);
-					}
-
-					if ( 90006 == errorCode ) {
-						// NULL not allowed for column [90006-145]
-						final String constraintName = getViolatedConstraintNameExtracter().extractConstraintName( sqlException );
-						return new ConstraintViolationException( message, sqlException, sql, constraintName );
-					}
-
-					return null;
-				}
-			};
-		}
-		return delegate;
-	}
+//	@Override
+//	public ViolatedConstraintNameExtracter getViolatedConstraintNameExtracter() {
+//		return EXTRACTER;
+//	}
+//
+//	private static final ViolatedConstraintNameExtracter EXTRACTER = new TemplatedViolatedConstraintNameExtracter() {
+//		/**
+//		 * Extract the name of the violated constraint from the given SQLException.
+//		 *
+//		 * @param sqle The exception that was the result of the constraint violation.
+//		 * @return The extracted constraint name.
+//		 */
+//		public String extractConstraintName(SQLException sqle) {
+//			String constraintName = null;
+//			// 23000: Check constraint violation: {0}
+//			// 23001: Unique index or primary key violation: {0}
+//			if ( sqle.getSQLState().startsWith( "23" ) ) {
+//				final String message = sqle.getMessage();
+//				final int idx = message.indexOf( "violation: " );
+//				if ( idx > 0 ) {
+//					constraintName = message.substring( idx + "violation: ".length() );
+//				}
+//			}
+//			return constraintName;
+//		}
+//	};
+//
+//	@Override
+//	public SQLExceptionConversionDelegate buildSQLExceptionConversionDelegate() {
+//		SQLExceptionConversionDelegate delegate = super.buildSQLExceptionConversionDelegate();
+//		if (delegate == null) {
+//			delegate = new SQLExceptionConversionDelegate() {
+//				@Override
+//				public JDBCException convert(SQLException sqlException, String message, String sql) {
+//					final int errorCode = JdbcExceptionHelper.extractErrorCode( sqlException );
+//
+//					if (40001 == errorCode) {
+//						// DEADLOCK DETECTED
+//						return new LockAcquisitionException(message, sqlException, sql);
+//					}
+//
+//					if (50200 == errorCode) {
+//						// LOCK NOT AVAILABLE
+//						return new PessimisticLockException(message, sqlException, sql);
+//					}
+//
+//					if ( 90006 == errorCode ) {
+//						// NULL not allowed for column [90006-145]
+//						final String constraintName = getViolatedConstraintNameExtracter().extractConstraintName( sqlException );
+//						return new ConstraintViolationException( message, sqlException, sql, constraintName );
+//					}
+//
+//					return null;
+//				}
+//			};
+//		}
+//		return delegate;
+//	}
 
 	@Override
 	public boolean supportsTemporaryTables() {

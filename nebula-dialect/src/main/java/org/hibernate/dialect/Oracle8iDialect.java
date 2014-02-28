@@ -29,31 +29,11 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 
-import org.hibernate.JDBCException;
-import org.hibernate.QueryTimeoutException;
-import org.hibernate.annotations.common.util.StringHelper;
-import org.hibernate.cfg.Environment;
-import org.hibernate.dialect.function.NoArgSQLFunction;
-import org.hibernate.dialect.function.NvlFunction;
-import org.hibernate.dialect.function.SQLFunctionTemplate;
-import org.hibernate.dialect.function.StandardSQLFunction;
-import org.hibernate.dialect.function.VarArgsSQLFunction;
-import org.hibernate.exception.ConstraintViolationException;
-import org.hibernate.exception.LockAcquisitionException;
-import org.hibernate.exception.LockTimeoutException;
-import org.hibernate.exception.spi.SQLExceptionConversionDelegate;
-import org.hibernate.exception.spi.TemplatedViolatedConstraintNameExtracter;
-import org.hibernate.exception.spi.ViolatedConstraintNameExtracter;
-import org.hibernate.internal.util.JdbcExceptionHelper;
-import org.hibernate.procedure.internal.StandardCallableStatementSupport;
-import org.hibernate.procedure.spi.CallableStatementSupport;
-import org.hibernate.sql.CaseFragment;
-import org.hibernate.sql.DecodeCaseFragment;
-import org.hibernate.sql.JoinFragment;
-import org.hibernate.sql.OracleJoinFragment;
-import org.hibernate.type.StandardBasicTypes;
-import org.hibernate.type.descriptor.sql.BitTypeDescriptor;
-import org.hibernate.type.descriptor.sql.SqlTypeDescriptor;
+
+import org.hibernate.cfg.AvailableSettings;
+import org.hibernate.internal.util.StringHelper;
+//import org.hibernate.type.descriptor.sql.BitTypeDescriptor;
+//import org.hibernate.type.descriptor.sql.SqlTypeDescriptor;
 
 /**
  * A dialect for Oracle 8i.
@@ -74,7 +54,7 @@ public class Oracle8iDialect extends Dialect {
 		registerDateTimeTypeMappings();
 		registerLargeObjectTypeMappings();
 		registerReverseHibernateTypeMappings();
-		registerFunctions();
+		
 		registerDefaultProperties();
 	}
 
@@ -122,126 +102,44 @@ public class Oracle8iDialect extends Dialect {
 	protected void registerReverseHibernateTypeMappings() {
 	}
 
-	protected void registerFunctions() {
-		registerFunction( "abs", new StandardSQLFunction("abs") );
-		registerFunction( "sign", new StandardSQLFunction("sign", StandardBasicTypes.INTEGER) );
-
-		registerFunction( "acos", new StandardSQLFunction("acos", StandardBasicTypes.DOUBLE) );
-		registerFunction( "asin", new StandardSQLFunction("asin", StandardBasicTypes.DOUBLE) );
-		registerFunction( "atan", new StandardSQLFunction("atan", StandardBasicTypes.DOUBLE) );
-		registerFunction( "bitand", new StandardSQLFunction("bitand") );
-		registerFunction( "cos", new StandardSQLFunction("cos", StandardBasicTypes.DOUBLE) );
-		registerFunction( "cosh", new StandardSQLFunction("cosh", StandardBasicTypes.DOUBLE) );
-		registerFunction( "exp", new StandardSQLFunction("exp", StandardBasicTypes.DOUBLE) );
-		registerFunction( "ln", new StandardSQLFunction("ln", StandardBasicTypes.DOUBLE) );
-		registerFunction( "sin", new StandardSQLFunction("sin", StandardBasicTypes.DOUBLE) );
-		registerFunction( "sinh", new StandardSQLFunction("sinh", StandardBasicTypes.DOUBLE) );
-		registerFunction( "stddev", new StandardSQLFunction("stddev", StandardBasicTypes.DOUBLE) );
-		registerFunction( "sqrt", new StandardSQLFunction("sqrt", StandardBasicTypes.DOUBLE) );
-		registerFunction( "tan", new StandardSQLFunction("tan", StandardBasicTypes.DOUBLE) );
-		registerFunction( "tanh", new StandardSQLFunction("tanh", StandardBasicTypes.DOUBLE) );
-		registerFunction( "variance", new StandardSQLFunction("variance", StandardBasicTypes.DOUBLE) );
-
-		registerFunction( "round", new StandardSQLFunction("round") );
-		registerFunction( "trunc", new StandardSQLFunction("trunc") );
-		registerFunction( "ceil", new StandardSQLFunction("ceil") );
-		registerFunction( "floor", new StandardSQLFunction("floor") );
-
-		registerFunction( "chr", new StandardSQLFunction("chr", StandardBasicTypes.CHARACTER) );
-		registerFunction( "initcap", new StandardSQLFunction("initcap") );
-		registerFunction( "lower", new StandardSQLFunction("lower") );
-		registerFunction( "ltrim", new StandardSQLFunction("ltrim") );
-		registerFunction( "rtrim", new StandardSQLFunction("rtrim") );
-		registerFunction( "soundex", new StandardSQLFunction("soundex") );
-		registerFunction( "upper", new StandardSQLFunction("upper") );
-		registerFunction( "ascii", new StandardSQLFunction("ascii", StandardBasicTypes.INTEGER) );
-
-		registerFunction( "to_char", new StandardSQLFunction("to_char", StandardBasicTypes.STRING) );
-		registerFunction( "to_date", new StandardSQLFunction("to_date", StandardBasicTypes.TIMESTAMP) );
-
-		registerFunction( "current_date", new NoArgSQLFunction("current_date", StandardBasicTypes.DATE, false) );
-		registerFunction( "current_time", new NoArgSQLFunction("current_timestamp", StandardBasicTypes.TIME, false) );
-		registerFunction( "current_timestamp", new NoArgSQLFunction("current_timestamp", StandardBasicTypes.TIMESTAMP, false) );
-
-		registerFunction( "last_day", new StandardSQLFunction("last_day", StandardBasicTypes.DATE) );
-		registerFunction( "sysdate", new NoArgSQLFunction("sysdate", StandardBasicTypes.DATE, false) );
-		registerFunction( "systimestamp", new NoArgSQLFunction("systimestamp", StandardBasicTypes.TIMESTAMP, false) );
-		registerFunction( "uid", new NoArgSQLFunction("uid", StandardBasicTypes.INTEGER, false) );
-		registerFunction( "user", new NoArgSQLFunction("user", StandardBasicTypes.STRING, false) );
-
-		registerFunction( "rowid", new NoArgSQLFunction("rowid", StandardBasicTypes.LONG, false) );
-		registerFunction( "rownum", new NoArgSQLFunction("rownum", StandardBasicTypes.LONG, false) );
-
-		// Multi-param string dialect functions...
-		registerFunction( "concat", new VarArgsSQLFunction(StandardBasicTypes.STRING, "", "||", "") );
-		registerFunction( "instr", new StandardSQLFunction("instr", StandardBasicTypes.INTEGER) );
-		registerFunction( "instrb", new StandardSQLFunction("instrb", StandardBasicTypes.INTEGER) );
-		registerFunction( "lpad", new StandardSQLFunction("lpad", StandardBasicTypes.STRING) );
-		registerFunction( "replace", new StandardSQLFunction("replace", StandardBasicTypes.STRING) );
-		registerFunction( "rpad", new StandardSQLFunction("rpad", StandardBasicTypes.STRING) );
-		registerFunction( "substr", new StandardSQLFunction("substr", StandardBasicTypes.STRING) );
-		registerFunction( "substrb", new StandardSQLFunction("substrb", StandardBasicTypes.STRING) );
-		registerFunction( "translate", new StandardSQLFunction("translate", StandardBasicTypes.STRING) );
-
-		registerFunction( "substring", new StandardSQLFunction( "substr", StandardBasicTypes.STRING ) );
-		registerFunction( "locate", new SQLFunctionTemplate( StandardBasicTypes.INTEGER, "instr(?2,?1)" ) );
-		registerFunction( "bit_length", new SQLFunctionTemplate( StandardBasicTypes.INTEGER, "vsize(?1)*8" ) );
-		registerFunction( "coalesce", new NvlFunction() );
-
-		// Multi-param numeric dialect functions...
-		registerFunction( "atan2", new StandardSQLFunction("atan2", StandardBasicTypes.FLOAT) );
-		registerFunction( "log", new StandardSQLFunction("log", StandardBasicTypes.INTEGER) );
-		registerFunction( "mod", new StandardSQLFunction("mod", StandardBasicTypes.INTEGER) );
-		registerFunction( "nvl", new StandardSQLFunction("nvl") );
-		registerFunction( "nvl2", new StandardSQLFunction("nvl2") );
-		registerFunction( "power", new StandardSQLFunction("power", StandardBasicTypes.FLOAT) );
-
-		// Multi-param date dialect functions...
-		registerFunction( "add_months", new StandardSQLFunction("add_months", StandardBasicTypes.DATE) );
-		registerFunction( "months_between", new StandardSQLFunction("months_between", StandardBasicTypes.FLOAT) );
-		registerFunction( "next_day", new StandardSQLFunction("next_day", StandardBasicTypes.DATE) );
-
-		registerFunction( "str", new StandardSQLFunction("to_char", StandardBasicTypes.STRING) );
-	}
-
 	protected void registerDefaultProperties() {
-		getDefaultProperties().setProperty( Environment.USE_STREAMS_FOR_BINARY, "true" );
-		getDefaultProperties().setProperty( Environment.STATEMENT_BATCH_SIZE, DEFAULT_BATCH_SIZE );
+		getDefaultProperties().setProperty( AvailableSettings.USE_STREAMS_FOR_BINARY, "true" );
+		getDefaultProperties().setProperty( AvailableSettings.STATEMENT_BATCH_SIZE, DEFAULT_BATCH_SIZE );
 		// Oracle driver reports to support getGeneratedKeys(), but they only
 		// support the version taking an array of the names of the columns to
 		// be returned (via its RETURNING clause).  No other driver seems to
 		// support this overloaded version.
-		getDefaultProperties().setProperty( Environment.USE_GET_GENERATED_KEYS, "false" );
+		getDefaultProperties().setProperty( AvailableSettings.USE_GET_GENERATED_KEYS, "false" );
 	}
 
-	@Override
-	protected SqlTypeDescriptor getSqlTypeDescriptorOverride(int sqlCode) {
-		return sqlCode == Types.BOOLEAN ? BitTypeDescriptor.INSTANCE : super.getSqlTypeDescriptorOverride( sqlCode );
-	}
+//	@Override
+//	protected SqlTypeDescriptor getSqlTypeDescriptorOverride(int sqlCode) {
+//		return sqlCode == Types.BOOLEAN ? BitTypeDescriptor.INSTANCE : super.getSqlTypeDescriptorOverride( sqlCode );
+//	}
 
 
 	// features which change between 8i, 9i, and 10g ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	@Override
-	public JoinFragment createOuterJoinFragment() {
-		return new OracleJoinFragment();
-	}
+//	@Override
+//	public JoinFragment createOuterJoinFragment() {
+//		return new OracleJoinFragment();
+//	}
 
 	@Override
 	public String getCrossJoinSeparator() {
 		return ", ";
 	}
 
-	/**
-	 * Map case support to the Oracle DECODE function.  Oracle did not
-	 * add support for CASE until 9i.
-	 * <p/>
-	 * {@inheritDoc}
-	 */
-	@Override
-	public CaseFragment createCaseFragment() {
-		return new DecodeCaseFragment();
-	}
+//	/**
+//	 * Map case support to the Oracle DECODE function.  Oracle did not
+//	 * add support for CASE until 9i.
+//	 * <p/>
+//	 * {@inheritDoc}
+//	 */
+//	@Override
+//	public CaseFragment createCaseFragment() {
+//		return new DecodeCaseFragment();
+//	}
 
 	@Override
 	public String getLimitString(String sql, boolean hasOffset) {
@@ -409,93 +307,93 @@ public class Oracle8iDialect extends Dialect {
 		return "select rawtohex(sys_guid()) from dual";
 	}
 
-	@Override
-	public ViolatedConstraintNameExtracter getViolatedConstraintNameExtracter() {
-		return EXTRACTER;
-	}
-
-	private static final ViolatedConstraintNameExtracter EXTRACTER = new TemplatedViolatedConstraintNameExtracter() {
-
-		/**
-		 * Extract the name of the violated constraint from the given SQLException.
-		 *
-		 * @param sqle The exception that was the result of the constraint violation.
-		 * @return The extracted constraint name.
-		 */
-		public String extractConstraintName(SQLException sqle) {
-			final int errorCode = JdbcExceptionHelper.extractErrorCode( sqle );
-			if ( errorCode == 1 || errorCode == 2291 || errorCode == 2292 ) {
-				return extractUsingTemplate( "(", ")", sqle.getMessage() );
-			}
-			else if ( errorCode == 1400 ) {
-				// simple nullability constraint
-				return null;
-			}
-			else {
-				return null;
-			}
-		}
-
-	};
-
-	@Override
-	public SQLExceptionConversionDelegate buildSQLExceptionConversionDelegate() {
-		return new SQLExceptionConversionDelegate() {
-			@Override
-			public JDBCException convert(SQLException sqlException, String message, String sql) {
-				// interpreting Oracle exceptions is much much more precise based on their specific vendor codes.
-
-				final int errorCode = JdbcExceptionHelper.extractErrorCode( sqlException );
-
-
-				// lock timeouts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-				if ( errorCode == 30006 ) {
-					// ORA-30006: resource busy; acquire with WAIT timeout expired
-					throw new LockTimeoutException( message, sqlException, sql );
-				}
-				else if ( errorCode == 54 ) {
-					// ORA-00054: resource busy and acquire with NOWAIT specified or timeout expired
-					throw new LockTimeoutException( message, sqlException, sql );
-				}
-				else if ( 4021 == errorCode ) {
-					// ORA-04021 timeout occurred while waiting to lock object
-					throw new LockTimeoutException( message, sqlException, sql );
-				}
-
-
-				// deadlocks ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-				if ( 60 == errorCode ) {
-					// ORA-00060: deadlock detected while waiting for resource
-					return new LockAcquisitionException( message, sqlException, sql );
-				}
-				else if ( 4020 == errorCode ) {
-					// ORA-04020 deadlock detected while trying to lock object
-					return new LockAcquisitionException( message, sqlException, sql );
-				}
-
-
-				// query cancelled ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-				if ( 1013 == errorCode ) {
-					// ORA-01013: user requested cancel of current operation
-					throw new QueryTimeoutException(  message, sqlException, sql );
-				}
-
-
-				// data integrity violation ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-				if ( 1407 == errorCode ) {
-					// ORA-01407: cannot update column to NULL
-					final String constraintName = getViolatedConstraintNameExtracter().extractConstraintName( sqlException );
-					return new ConstraintViolationException( message, sqlException, sql, constraintName );
-				}
-
-				return null;
-			}
-		};
-	}
+//	@Override
+//	public ViolatedConstraintNameExtracter getViolatedConstraintNameExtracter() {
+//		return EXTRACTER;
+//	}
+//
+//	private static final ViolatedConstraintNameExtracter EXTRACTER = new TemplatedViolatedConstraintNameExtracter() {
+//
+//		/**
+//		 * Extract the name of the violated constraint from the given SQLException.
+//		 *
+//		 * @param sqle The exception that was the result of the constraint violation.
+//		 * @return The extracted constraint name.
+//		 */
+//		public String extractConstraintName(SQLException sqle) {
+//			final int errorCode = JdbcExceptionHelper.extractErrorCode( sqle );
+//			if ( errorCode == 1 || errorCode == 2291 || errorCode == 2292 ) {
+//				return extractUsingTemplate( "(", ")", sqle.getMessage() );
+//			}
+//			else if ( errorCode == 1400 ) {
+//				// simple nullability constraint
+//				return null;
+//			}
+//			else {
+//				return null;
+//			}
+//		}
+//
+//	};
+//
+//	@Override
+//	public SQLExceptionConversionDelegate buildSQLExceptionConversionDelegate() {
+//		return new SQLExceptionConversionDelegate() {
+//			@Override
+//			public JDBCException convert(SQLException sqlException, String message, String sql) {
+//				// interpreting Oracle exceptions is much much more precise based on their specific vendor codes.
+//
+//				final int errorCode = JdbcExceptionHelper.extractErrorCode( sqlException );
+//
+//
+//				// lock timeouts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//				if ( errorCode == 30006 ) {
+//					// ORA-30006: resource busy; acquire with WAIT timeout expired
+//					throw new LockTimeoutException( message, sqlException, sql );
+//				}
+//				else if ( errorCode == 54 ) {
+//					// ORA-00054: resource busy and acquire with NOWAIT specified or timeout expired
+//					throw new LockTimeoutException( message, sqlException, sql );
+//				}
+//				else if ( 4021 == errorCode ) {
+//					// ORA-04021 timeout occurred while waiting to lock object
+//					throw new LockTimeoutException( message, sqlException, sql );
+//				}
+//
+//
+//				// deadlocks ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//				if ( 60 == errorCode ) {
+//					// ORA-00060: deadlock detected while waiting for resource
+//					return new LockAcquisitionException( message, sqlException, sql );
+//				}
+//				else if ( 4020 == errorCode ) {
+//					// ORA-04020 deadlock detected while trying to lock object
+//					return new LockAcquisitionException( message, sqlException, sql );
+//				}
+//
+//
+//				// query cancelled ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//				if ( 1013 == errorCode ) {
+//					// ORA-01013: user requested cancel of current operation
+//					throw new QueryTimeoutException(  message, sqlException, sql );
+//				}
+//
+//
+//				// data integrity violation ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//				if ( 1407 == errorCode ) {
+//					// ORA-01407: cannot update column to NULL
+//					final String constraintName = getViolatedConstraintNameExtracter().extractConstraintName( sqlException );
+//					return new ConstraintViolationException( message, sqlException, sql, constraintName );
+//				}
+//
+//				return null;
+//			}
+//		};
+//	}
 
 	@Override
 	public int registerResultSetOutParameter(CallableStatement statement, int col) throws SQLException {
@@ -615,9 +513,9 @@ public class Oracle8iDialect extends Dialect {
 		return 20;
 	}
 
-	@Override
-	public CallableStatementSupport getCallableStatementSupport() {
-		// Oracle supports returning cursors
-		return StandardCallableStatementSupport.REF_CURSOR_INSTANCE;
-	}
+//	@Override
+//	public CallableStatementSupport getCallableStatementSupport() {
+//		// Oracle supports returning cursors
+//		return StandardCallableStatementSupport.REF_CURSOR_INSTANCE;
+//	}
 }

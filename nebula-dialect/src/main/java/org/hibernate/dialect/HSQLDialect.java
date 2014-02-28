@@ -27,32 +27,20 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import org.hibernate.JDBCException;
+//import org.hibernate.JDBCException;
 import org.hibernate.LockMode;
-import org.hibernate.StaleObjectStateException;
-import org.hibernate.cfg.Environment;
-import org.hibernate.dialect.function.AvgWithArgumentCastFunction;
-import org.hibernate.dialect.function.NoArgSQLFunction;
-import org.hibernate.dialect.function.SQLFunctionTemplate;
-import org.hibernate.dialect.function.StandardSQLFunction;
-import org.hibernate.dialect.function.VarArgsSQLFunction;
-import org.hibernate.dialect.lock.LockingStrategy;
-import org.hibernate.dialect.lock.OptimisticForceIncrementLockingStrategy;
-import org.hibernate.dialect.lock.OptimisticLockingStrategy;
-import org.hibernate.dialect.lock.PessimisticForceIncrementLockingStrategy;
-import org.hibernate.dialect.lock.PessimisticReadSelectLockingStrategy;
-import org.hibernate.dialect.lock.PessimisticWriteSelectLockingStrategy;
-import org.hibernate.dialect.lock.SelectLockingStrategy;
-import org.hibernate.engine.spi.SessionImplementor;
-import org.hibernate.exception.spi.TemplatedViolatedConstraintNameExtracter;
-import org.hibernate.exception.spi.ViolatedConstraintNameExtracter;
-import org.hibernate.internal.CoreMessageLogger;
-import org.hibernate.internal.util.JdbcExceptionHelper;
+//import org.hibernate.StaleObjectStateException;
+import org.hibernate.cfg.AvailableSettings;
+//import org.hibernate.engine.spi.SessionImplementor;
+//import org.hibernate.exception.spi.TemplatedViolatedConstraintNameExtracter;
+//import org.hibernate.exception.spi.ViolatedConstraintNameExtracter;
+//import org.hibernate.internal.CoreMessageLogger;
+//import org.hibernate.internal.util.JdbcExceptionHelper;
 import org.hibernate.internal.util.ReflectHelper;
-import org.hibernate.persister.entity.Lockable;
-import org.hibernate.type.StandardBasicTypes;
+//import org.hibernate.persister.entity.Lockable;
+//import org.hibernate.type.StandardBasicTypes;
 
-import org.jboss.logging.Logger;
+//import org.jboss.logging.Logger;
 
 /**
  * An SQL dialect compatible with HSQLDB (HyperSQL).
@@ -68,10 +56,10 @@ import org.jboss.logging.Logger;
  */
 @SuppressWarnings("deprecation")
 public class HSQLDialect extends Dialect {
-	private static final CoreMessageLogger LOG = Logger.getMessageLogger(
-			CoreMessageLogger.class,
-			HSQLDialect.class.getName()
-	);
+//	private static final CoreMessageLogger LOG = Logger.getMessageLogger(
+//			CoreMessageLogger.class,
+//			HSQLDialect.class.getName()
+//	);
 
 	/**
 	 * version is 18 for 1.8 or 20 for 2.0
@@ -133,96 +121,7 @@ public class HSQLDialect extends Dialect {
 			registerColumnType( Types.CLOB, "clob($l)" );
 		}
 
-		// aggregate functions
-		registerFunction( "avg", new AvgWithArgumentCastFunction( "double" ) );
-
-		// string functions
-		registerFunction( "ascii", new StandardSQLFunction( "ascii", StandardBasicTypes.INTEGER ) );
-		registerFunction( "char", new StandardSQLFunction( "char", StandardBasicTypes.CHARACTER ) );
-		registerFunction( "lower", new StandardSQLFunction( "lower" ) );
-		registerFunction( "upper", new StandardSQLFunction( "upper" ) );
-		registerFunction( "lcase", new StandardSQLFunction( "lcase" ) );
-		registerFunction( "ucase", new StandardSQLFunction( "ucase" ) );
-		registerFunction( "soundex", new StandardSQLFunction( "soundex", StandardBasicTypes.STRING ) );
-		registerFunction( "ltrim", new StandardSQLFunction( "ltrim" ) );
-		registerFunction( "rtrim", new StandardSQLFunction( "rtrim" ) );
-		registerFunction( "reverse", new StandardSQLFunction( "reverse" ) );
-		registerFunction( "space", new StandardSQLFunction( "space", StandardBasicTypes.STRING ) );
-		registerFunction( "str", new SQLFunctionTemplate( StandardBasicTypes.STRING, "cast(?1 as varchar(256))" ) );
-		registerFunction( "to_char", new StandardSQLFunction( "to_char", StandardBasicTypes.STRING ) );
-		registerFunction( "rawtohex", new StandardSQLFunction( "rawtohex" ) );
-		registerFunction( "hextoraw", new StandardSQLFunction( "hextoraw" ) );
-
-		// system functions
-		registerFunction( "user", new NoArgSQLFunction( "user", StandardBasicTypes.STRING ) );
-		registerFunction( "database", new NoArgSQLFunction( "database", StandardBasicTypes.STRING ) );
-
-		// datetime functions
-		if ( hsqldbVersion < 20 ) {
-			registerFunction( "sysdate", new NoArgSQLFunction( "sysdate", StandardBasicTypes.DATE, false ) );
-		}
-		else {
-			registerFunction( "sysdate", new NoArgSQLFunction( "sysdate", StandardBasicTypes.TIMESTAMP, false ) );
-		}
-		registerFunction( "current_date", new NoArgSQLFunction( "current_date", StandardBasicTypes.DATE, false ) );
-		registerFunction( "curdate", new NoArgSQLFunction( "curdate", StandardBasicTypes.DATE ) );
-		registerFunction(
-				"current_timestamp", new NoArgSQLFunction( "current_timestamp", StandardBasicTypes.TIMESTAMP, false )
-		);
-		registerFunction( "now", new NoArgSQLFunction( "now", StandardBasicTypes.TIMESTAMP ) );
-		registerFunction( "current_time", new NoArgSQLFunction( "current_time", StandardBasicTypes.TIME, false ) );
-		registerFunction( "curtime", new NoArgSQLFunction( "curtime", StandardBasicTypes.TIME ) );
-		registerFunction( "day", new StandardSQLFunction( "day", StandardBasicTypes.INTEGER ) );
-		registerFunction( "dayofweek", new StandardSQLFunction( "dayofweek", StandardBasicTypes.INTEGER ) );
-		registerFunction( "dayofyear", new StandardSQLFunction( "dayofyear", StandardBasicTypes.INTEGER ) );
-		registerFunction( "dayofmonth", new StandardSQLFunction( "dayofmonth", StandardBasicTypes.INTEGER ) );
-		registerFunction( "month", new StandardSQLFunction( "month", StandardBasicTypes.INTEGER ) );
-		registerFunction( "year", new StandardSQLFunction( "year", StandardBasicTypes.INTEGER ) );
-		registerFunction( "week", new StandardSQLFunction( "week", StandardBasicTypes.INTEGER ) );
-		registerFunction( "quarter", new StandardSQLFunction( "quarter", StandardBasicTypes.INTEGER ) );
-		registerFunction( "hour", new StandardSQLFunction( "hour", StandardBasicTypes.INTEGER ) );
-		registerFunction( "minute", new StandardSQLFunction( "minute", StandardBasicTypes.INTEGER ) );
-		registerFunction( "second", new SQLFunctionTemplate( StandardBasicTypes.INTEGER, "cast(second(?1) as int)" ) );
-		registerFunction( "dayname", new StandardSQLFunction( "dayname", StandardBasicTypes.STRING ) );
-		registerFunction( "monthname", new StandardSQLFunction( "monthname", StandardBasicTypes.STRING ) );
-
-		// numeric functions
-		registerFunction( "abs", new StandardSQLFunction( "abs" ) );
-		registerFunction( "sign", new StandardSQLFunction( "sign", StandardBasicTypes.INTEGER ) );
-
-		registerFunction( "acos", new StandardSQLFunction( "acos", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "asin", new StandardSQLFunction( "asin", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "atan", new StandardSQLFunction( "atan", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "cos", new StandardSQLFunction( "cos", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "cot", new StandardSQLFunction( "cot", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "exp", new StandardSQLFunction( "exp", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "log", new StandardSQLFunction( "log", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "log10", new StandardSQLFunction( "log10", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "sin", new StandardSQLFunction( "sin", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "sqrt", new StandardSQLFunction( "sqrt", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "tan", new StandardSQLFunction( "tan", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "pi", new NoArgSQLFunction( "pi", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "rand", new StandardSQLFunction( "rand", StandardBasicTypes.FLOAT ) );
-
-		registerFunction( "radians", new StandardSQLFunction( "radians", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "degrees", new StandardSQLFunction( "degrees", StandardBasicTypes.DOUBLE ) );
-		registerFunction( "round", new StandardSQLFunction( "round" ) );
-		registerFunction( "roundmagic", new StandardSQLFunction( "roundmagic" ) );
-		registerFunction( "truncate", new StandardSQLFunction( "truncate" ) );
-
-		registerFunction( "ceiling", new StandardSQLFunction( "ceiling" ) );
-		registerFunction( "floor", new StandardSQLFunction( "floor" ) );
-
-		// special functions
-		// from v. 2.2.0 ROWNUM() is supported in all modes as the equivalent of Oracle ROWNUM
-		if ( hsqldbVersion > 21 ) {
-			registerFunction( "rownum", new NoArgSQLFunction( "rownum", StandardBasicTypes.INTEGER ) );
-		}
-
-		// function templates
-		registerFunction( "concat", new VarArgsSQLFunction( StandardBasicTypes.STRING, "(", "||", ")" ) );
-
-		getDefaultProperties().setProperty( Environment.STATEMENT_BATCH_SIZE, DEFAULT_BATCH_SIZE );
+		getDefaultProperties().setProperty( AvailableSettings.STATEMENT_BATCH_SIZE, DEFAULT_BATCH_SIZE );
 	}
 
 	@Override
@@ -338,78 +237,78 @@ public class HSQLDialect extends Dialect {
 		return "select sequence_name from information_schema.system_sequences";
 	}
 
-	@Override
-	public ViolatedConstraintNameExtracter getViolatedConstraintNameExtracter() {
-		return hsqldbVersion < 20 ? EXTRACTER_18 : EXTRACTER_20;
-	}
-
-	private static final ViolatedConstraintNameExtracter EXTRACTER_18 = new TemplatedViolatedConstraintNameExtracter() {
-		@Override
-		public String extractConstraintName(SQLException sqle) {
-			String constraintName = null;
-
-			final int errorCode = JdbcExceptionHelper.extractErrorCode( sqle );
-
-			if ( errorCode == -8 ) {
-				constraintName = extractUsingTemplate(
-						"Integrity constraint violation ", " table:", sqle.getMessage()
-				);
-			}
-			else if ( errorCode == -9 ) {
-				constraintName = extractUsingTemplate(
-						"Violation of unique index: ", " in statement [", sqle.getMessage()
-				);
-			}
-			else if ( errorCode == -104 ) {
-				constraintName = extractUsingTemplate(
-						"Unique constraint violation: ", " in statement [", sqle.getMessage()
-				);
-			}
-			else if ( errorCode == -177 ) {
-				constraintName = extractUsingTemplate(
-						"Integrity constraint violation - no parent ", " table:",
-						sqle.getMessage()
-				);
-			}
-			return constraintName;
-		}
-
-	};
-
-	/**
-	 * HSQLDB 2.0 messages have changed
-	 * messages may be localized - therefore use the common, non-locale element " table: "
-	 */
-	private static final ViolatedConstraintNameExtracter EXTRACTER_20 = new TemplatedViolatedConstraintNameExtracter() {
-		@Override
-		public String extractConstraintName(SQLException sqle) {
-			String constraintName = null;
-
-			final int errorCode = JdbcExceptionHelper.extractErrorCode( sqle );
-
-			if ( errorCode == -8 ) {
-				constraintName = extractUsingTemplate(
-						"; ", " table: ", sqle.getMessage()
-				);
-			}
-			else if ( errorCode == -9 ) {
-				constraintName = extractUsingTemplate(
-						"; ", " table: ", sqle.getMessage()
-				);
-			}
-			else if ( errorCode == -104 ) {
-				constraintName = extractUsingTemplate(
-						"; ", " table: ", sqle.getMessage()
-				);
-			}
-			else if ( errorCode == -177 ) {
-				constraintName = extractUsingTemplate(
-						"; ", " table: ", sqle.getMessage()
-				);
-			}
-			return constraintName;
-		}
-	};
+//	@Override
+//	public ViolatedConstraintNameExtracter getViolatedConstraintNameExtracter() {
+//		return hsqldbVersion < 20 ? EXTRACTER_18 : EXTRACTER_20;
+//	}
+//
+//	private static final ViolatedConstraintNameExtracter EXTRACTER_18 = new TemplatedViolatedConstraintNameExtracter() {
+//		@Override
+//		public String extractConstraintName(SQLException sqle) {
+//			String constraintName = null;
+//
+//			final int errorCode = JdbcExceptionHelper.extractErrorCode( sqle );
+//
+//			if ( errorCode == -8 ) {
+//				constraintName = extractUsingTemplate(
+//						"Integrity constraint violation ", " table:", sqle.getMessage()
+//				);
+//			}
+//			else if ( errorCode == -9 ) {
+//				constraintName = extractUsingTemplate(
+//						"Violation of unique index: ", " in statement [", sqle.getMessage()
+//				);
+//			}
+//			else if ( errorCode == -104 ) {
+//				constraintName = extractUsingTemplate(
+//						"Unique constraint violation: ", " in statement [", sqle.getMessage()
+//				);
+//			}
+//			else if ( errorCode == -177 ) {
+//				constraintName = extractUsingTemplate(
+//						"Integrity constraint violation - no parent ", " table:",
+//						sqle.getMessage()
+//				);
+//			}
+//			return constraintName;
+//		}
+//
+//	};
+//
+//	/**
+//	 * HSQLDB 2.0 messages have changed
+//	 * messages may be localized - therefore use the common, non-locale element " table: "
+//	 */
+//	private static final ViolatedConstraintNameExtracter EXTRACTER_20 = new TemplatedViolatedConstraintNameExtracter() {
+//		@Override
+//		public String extractConstraintName(SQLException sqle) {
+//			String constraintName = null;
+//
+//			final int errorCode = JdbcExceptionHelper.extractErrorCode( sqle );
+//
+//			if ( errorCode == -8 ) {
+//				constraintName = extractUsingTemplate(
+//						"; ", " table: ", sqle.getMessage()
+//				);
+//			}
+//			else if ( errorCode == -9 ) {
+//				constraintName = extractUsingTemplate(
+//						"; ", " table: ", sqle.getMessage()
+//				);
+//			}
+//			else if ( errorCode == -104 ) {
+//				constraintName = extractUsingTemplate(
+//						"; ", " table: ", sqle.getMessage()
+//				);
+//			}
+//			else if ( errorCode == -177 ) {
+//				constraintName = extractUsingTemplate(
+//						"; ", " table: ", sqle.getMessage()
+//				);
+//			}
+//			return constraintName;
+//		}
+//	};
 
 	@Override
 	public String getSelectClauseNullString(int sqlType) {
@@ -556,52 +455,52 @@ public class HSQLDialect extends Dialect {
 		// the standard SQL function name is current_timestamp...
 		return "current_timestamp";
 	}
-
-	/**
-	 * For HSQLDB 2.0, this is a copy of the base class implementation.
-	 * For HSQLDB 1.8, only READ_UNCOMMITTED is supported.
-	 * <p/>
-	 * {@inheritDoc}
-	 */
-	@Override
-	public LockingStrategy getLockingStrategy(Lockable lockable, LockMode lockMode) {
-		if ( lockMode == LockMode.PESSIMISTIC_FORCE_INCREMENT ) {
-			return new PessimisticForceIncrementLockingStrategy( lockable, lockMode );
-		}
-		else if ( lockMode == LockMode.PESSIMISTIC_WRITE ) {
-			return new PessimisticWriteSelectLockingStrategy( lockable, lockMode );
-		}
-		else if ( lockMode == LockMode.PESSIMISTIC_READ ) {
-			return new PessimisticReadSelectLockingStrategy( lockable, lockMode );
-		}
-		else if ( lockMode == LockMode.OPTIMISTIC ) {
-			return new OptimisticLockingStrategy( lockable, lockMode );
-		}
-		else if ( lockMode == LockMode.OPTIMISTIC_FORCE_INCREMENT ) {
-			return new OptimisticForceIncrementLockingStrategy( lockable, lockMode );
-		}
-
-		if ( hsqldbVersion < 20 ) {
-			return new ReadUncommittedLockingStrategy( lockable, lockMode );
-		}
-		else {
-			return new SelectLockingStrategy( lockable, lockMode );
-		}
-	}
-
-	private static class ReadUncommittedLockingStrategy extends SelectLockingStrategy {
-		public ReadUncommittedLockingStrategy(Lockable lockable, LockMode lockMode) {
-			super( lockable, lockMode );
-		}
-
-		public void lock(Serializable id, Object version, Object object, int timeout, SessionImplementor session)
-				throws StaleObjectStateException, JDBCException {
-			if ( getLockMode().greaterThan( LockMode.READ ) ) {
-				LOG.hsqldbSupportsOnlyReadCommittedIsolation();
-			}
-			super.lock( id, version, object, timeout, session );
-		}
-	}
+//
+//	/**
+//	 * For HSQLDB 2.0, this is a copy of the base class implementation.
+//	 * For HSQLDB 1.8, only READ_UNCOMMITTED is supported.
+//	 * <p/>
+//	 * {@inheritDoc}
+//	 */
+//	@Override
+//	public LockingStrategy getLockingStrategy(Lockable lockable, LockMode lockMode) {
+//		if ( lockMode == LockMode.PESSIMISTIC_FORCE_INCREMENT ) {
+//			return new PessimisticForceIncrementLockingStrategy( lockable, lockMode );
+//		}
+//		else if ( lockMode == LockMode.PESSIMISTIC_WRITE ) {
+//			return new PessimisticWriteSelectLockingStrategy( lockable, lockMode );
+//		}
+//		else if ( lockMode == LockMode.PESSIMISTIC_READ ) {
+//			return new PessimisticReadSelectLockingStrategy( lockable, lockMode );
+//		}
+//		else if ( lockMode == LockMode.OPTIMISTIC ) {
+//			return new OptimisticLockingStrategy( lockable, lockMode );
+//		}
+//		else if ( lockMode == LockMode.OPTIMISTIC_FORCE_INCREMENT ) {
+//			return new OptimisticForceIncrementLockingStrategy( lockable, lockMode );
+//		}
+//
+//		if ( hsqldbVersion < 20 ) {
+//			return new ReadUncommittedLockingStrategy( lockable, lockMode );
+//		}
+//		else {
+//			return new SelectLockingStrategy( lockable, lockMode );
+//		}
+//	}
+//
+//	private static class ReadUncommittedLockingStrategy extends SelectLockingStrategy {
+//		public ReadUncommittedLockingStrategy(Lockable lockable, LockMode lockMode) {
+//			super( lockable, lockMode );
+//		}
+//
+//		public void lock(Serializable id, Object version, Object object, int timeout, SessionImplementor session)
+//				throws StaleObjectStateException, JDBCException {
+//			if ( getLockMode().greaterThan( LockMode.READ ) ) {
+//				LOG.hsqldbSupportsOnlyReadCommittedIsolation();
+//			}
+//			super.lock( id, version, object, timeout, session );
+//		}
+//	}
 
 	@Override
 	public boolean supportsCommentOn() {

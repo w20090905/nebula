@@ -23,21 +23,21 @@
  */
 package org.hibernate.dialect;
 
-import java.sql.SQLException;
+//import java.sql.SQLException;
 import java.sql.Types;
 
-import org.hibernate.JDBCException;
+//import org.hibernate.JDBCException;
 import org.hibernate.LockMode;
 import org.hibernate.LockOptions;
-import org.hibernate.QueryTimeoutException;
-import org.hibernate.dialect.function.NoArgSQLFunction;
-import org.hibernate.dialect.pagination.LimitHandler;
-import org.hibernate.dialect.pagination.SQLServer2005LimitHandler;
-import org.hibernate.engine.spi.RowSelection;
-import org.hibernate.exception.LockTimeoutException;
-import org.hibernate.exception.spi.SQLExceptionConversionDelegate;
-import org.hibernate.internal.util.JdbcExceptionHelper;
-import org.hibernate.type.StandardBasicTypes;
+//import org.hibernate.QueryTimeoutException;
+//import org.hibernate.dialect.function.NoArgSQLFunction;
+//import org.hibernate.dialect.pagination.LimitHandler;
+//import org.hibernate.dialect.pagination.SQLServer2005LimitHandler;
+//import org.hibernate.engine.spi.RowSelection;
+//import org.hibernate.exception.LockTimeoutException;
+//import org.hibernate.exception.spi.SQLExceptionConversionDelegate;
+//import org.hibernate.internal.util.JdbcExceptionHelper;
+//import org.hibernate.type.StandardBasicTypes;
 
 /**
  * A dialect for Microsoft SQL 2005. (HHH-3936 fix)
@@ -70,13 +70,13 @@ public class SQLServer2005Dialect extends SQLServerDialect {
 		registerColumnType( Types.BIT, "bit" );
 
 
-		registerFunction( "row_number", new NoArgSQLFunction( "row_number", StandardBasicTypes.INTEGER, true ) );
+//		registerFunction( "row_number", new NoArgSQLFunction( "row_number", StandardBasicTypes.INTEGER, true ) );
 	}
 
-	@Override
-	public LimitHandler buildLimitHandler(String sql, RowSelection selection) {
-		return new SQLServer2005LimitHandler( sql, selection );
-	}
+//	@Override
+//	public LimitHandler buildLimitHandler(String sql, RowSelection selection) {
+//		return new SQLServer2005LimitHandler( sql, selection );
+//	}
 
 	@Override
 	public String appendLockHint(LockOptions lockOptions, String tableName) {
@@ -102,21 +102,21 @@ public class SQLServer2005Dialect extends SQLServerDialect {
 		}
 	}
 
-	@Override
-	public SQLExceptionConversionDelegate buildSQLExceptionConversionDelegate() {
-		return new SQLExceptionConversionDelegate() {
-			@Override
-			public JDBCException convert(SQLException sqlException, String message, String sql) {
-				final String sqlState = JdbcExceptionHelper.extractSqlState( sqlException );
-				final int errorCode = JdbcExceptionHelper.extractErrorCode( sqlException );
-				if ( "HY008".equals( sqlState ) ) {
-					throw new QueryTimeoutException( message, sqlException, sql );
-				}
-				if (1222 == errorCode ) {
-					throw new LockTimeoutException( message, sqlException, sql );
-				}
-				return null;
-			}
-		};
-	}
+//	@Override
+//	public SQLExceptionConversionDelegate buildSQLExceptionConversionDelegate() {
+//		return new SQLExceptionConversionDelegate() {
+//			@Override
+//			public JDBCException convert(SQLException sqlException, String message, String sql) {
+//				final String sqlState = JdbcExceptionHelper.extractSqlState( sqlException );
+//				final int errorCode = JdbcExceptionHelper.extractErrorCode( sqlException );
+//				if ( "HY008".equals( sqlState ) ) {
+//					throw new QueryTimeoutException( message, sqlException, sql );
+//				}
+//				if (1222 == errorCode ) {
+//					throw new LockTimeoutException( message, sqlException, sql );
+//				}
+//				return null;
+//			}
+//		};
+//	}
 }

@@ -27,14 +27,12 @@ import java.lang.reflect.Method;
 import java.sql.Types;
 
 import org.hibernate.MappingException;
-import org.hibernate.dialect.function.AnsiTrimFunction;
-import org.hibernate.dialect.function.DerbyConcatFunction;
-import org.hibernate.internal.CoreMessageLogger;
+//import org.hibernate.internal.CoreMessageLogger;
 import org.hibernate.internal.util.ReflectHelper;
-import org.hibernate.sql.CaseFragment;
-import org.hibernate.sql.DerbyCaseFragment;
+//import org.hibernate.sql.CaseFragment;
+//import org.hibernate.sql.DerbyCaseFragment;
 
-import org.jboss.logging.Logger;
+//import org.jboss.logging.Logger;
 
 /**
  * Hibernate Dialect for Cloudscape 10 - aka Derby. This implements both an
@@ -48,11 +46,6 @@ import org.jboss.logging.Logger;
  */
 @Deprecated
 public class DerbyDialect extends DB2Dialect {
-	@SuppressWarnings("deprecation")
-	private static final CoreMessageLogger LOG = Logger.getMessageLogger(
-			CoreMessageLogger.class,
-			DerbyDialect.class.getName()
-	);
 
 	private int driverVersionMajor;
 	private int driverVersionMinor;
@@ -63,12 +56,6 @@ public class DerbyDialect extends DB2Dialect {
 	@SuppressWarnings("deprecation")
 	public DerbyDialect() {
 		super();
-		if ( this.getClass() == DerbyDialect.class ) {
-			LOG.deprecatedDerbyDialect();
-		}
-
-		registerFunction( "concat", new DerbyConcatFunction() );
-		registerFunction( "trim", new AnsiTrimFunction() );
 		registerColumnType( Types.BLOB, "blob" );
 		determineDriverVersion();
 
@@ -87,7 +74,7 @@ public class DerbyDialect extends DB2Dialect {
 			driverVersionMinor = (Integer) minorVersionGetter.invoke( null, ReflectHelper.NO_PARAMS );
 		}
 		catch ( Exception e ) {
-			LOG.unableToLoadDerbyDriver( e.getMessage() );
+//			LOG.unableToLoadDerbyDriver( e.getMessage() );
 			driverVersionMajor = -1;
 			driverVersionMinor = -1;
 		}
@@ -102,10 +89,10 @@ public class DerbyDialect extends DB2Dialect {
 		return ", ";
 	}
 
-	@Override
-	public CaseFragment createCaseFragment() {
-		return new DerbyCaseFragment();
-	}
+//	@Override
+//	public CaseFragment createCaseFragment() {
+//		return new DerbyCaseFragment();
+//	}
 
 	@Override
 	public boolean dropConstraints() {

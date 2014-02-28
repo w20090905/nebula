@@ -25,8 +25,8 @@ package org.hibernate.dialect;
 
 import java.sql.Types;
 
-import org.hibernate.dialect.function.NoArgSQLFunction;
-import org.hibernate.type.StandardBasicTypes;
+//import org.hibernate.dialect.function.NoArgSQLFunction;
+//import org.hibernate.type.StandardBasicTypes;
 
 /**
  * A dialect for Microsoft SQL Server 2008 with JDBC Driver 3.0 and above
@@ -42,8 +42,8 @@ public class SQLServer2008Dialect extends SQLServer2005Dialect {
 		registerColumnType( Types.TIME, "time" );
 		registerColumnType( Types.TIMESTAMP, "datetime2" );
 
-		registerFunction(
-				"current_timestamp", new NoArgSQLFunction( "current_timestamp", StandardBasicTypes.TIMESTAMP, false )
-		);
+//		registerFunction(
+//				"current_timestamp", new NoArgSQLFunction( "current_timestamp", StandardBasicTypes.TIMESTAMP, false )
+//		);
 	}
 }

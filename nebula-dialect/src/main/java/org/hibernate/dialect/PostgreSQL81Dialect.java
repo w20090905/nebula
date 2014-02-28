@@ -28,27 +28,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import org.hibernate.JDBCException;
+//import org.hibernate.JDBCException;
 import org.hibernate.LockOptions;
-import org.hibernate.PessimisticLockException;
-import org.hibernate.cfg.Environment;
-import org.hibernate.dialect.function.NoArgSQLFunction;
-import org.hibernate.dialect.function.PositionSubstringFunction;
-import org.hibernate.dialect.function.SQLFunctionTemplate;
-import org.hibernate.dialect.function.StandardSQLFunction;
-import org.hibernate.dialect.function.VarArgsSQLFunction;
-import org.hibernate.exception.LockAcquisitionException;
-import org.hibernate.exception.spi.SQLExceptionConversionDelegate;
-import org.hibernate.exception.spi.TemplatedViolatedConstraintNameExtracter;
-import org.hibernate.exception.spi.ViolatedConstraintNameExtracter;
-import org.hibernate.id.SequenceGenerator;
-import org.hibernate.internal.util.JdbcExceptionHelper;
-import org.hibernate.procedure.internal.PostgresCallableStatementSupport;
-import org.hibernate.procedure.spi.CallableStatementSupport;
-import org.hibernate.type.StandardBasicTypes;
-import org.hibernate.type.descriptor.sql.BlobTypeDescriptor;
-import org.hibernate.type.descriptor.sql.ClobTypeDescriptor;
-import org.hibernate.type.descriptor.sql.SqlTypeDescriptor;
+//import org.hibernate.PessimisticLockException;
+import org.hibernate.cfg.AvailableSettings;
+
+//import org.hibernate.exception.LockAcquisitionException;
+//import org.hibernate.exception.spi.SQLExceptionConversionDelegate;
+//import org.hibernate.exception.spi.TemplatedViolatedConstraintNameExtracter;
+//import org.hibernate.exception.spi.ViolatedConstraintNameExtracter;
+//import org.hibernate.id.SequenceGenerator;
+//import org.hibernate.internal.util.JdbcExceptionHelper;
+//import org.hibernate.procedure.internal.PostgresCallableStatementSupport;
+//import org.hibernate.procedure.spi.CallableStatementSupport;
+//import org.hibernate.type.StandardBasicTypes;
+//import org.hibernate.type.descriptor.sql.BlobTypeDescriptor;
+//import org.hibernate.type.descriptor.sql.ClobTypeDescriptor;
+//import org.hibernate.type.descriptor.sql.SqlTypeDescriptor;
 
 /**
  * An SQL dialect for Postgres
@@ -88,103 +84,33 @@ public class PostgreSQL81Dialect extends Dialect {
 		registerColumnType( Types.NUMERIC, "numeric($p, $s)" );
 		registerColumnType( Types.OTHER, "uuid" );
 
-		registerFunction( "abs", new StandardSQLFunction("abs") );
-		registerFunction( "sign", new StandardSQLFunction("sign", StandardBasicTypes.INTEGER) );
-
-		registerFunction( "acos", new StandardSQLFunction("acos", StandardBasicTypes.DOUBLE) );
-		registerFunction( "asin", new StandardSQLFunction("asin", StandardBasicTypes.DOUBLE) );
-		registerFunction( "atan", new StandardSQLFunction("atan", StandardBasicTypes.DOUBLE) );
-		registerFunction( "cos", new StandardSQLFunction("cos", StandardBasicTypes.DOUBLE) );
-		registerFunction( "cot", new StandardSQLFunction("cot", StandardBasicTypes.DOUBLE) );
-		registerFunction( "exp", new StandardSQLFunction("exp", StandardBasicTypes.DOUBLE) );
-		registerFunction( "ln", new StandardSQLFunction("ln", StandardBasicTypes.DOUBLE) );
-		registerFunction( "log", new StandardSQLFunction("log", StandardBasicTypes.DOUBLE) );
-		registerFunction( "sin", new StandardSQLFunction("sin", StandardBasicTypes.DOUBLE) );
-		registerFunction( "sqrt", new StandardSQLFunction("sqrt", StandardBasicTypes.DOUBLE) );
-		registerFunction( "cbrt", new StandardSQLFunction("cbrt", StandardBasicTypes.DOUBLE) );
-		registerFunction( "tan", new StandardSQLFunction("tan", StandardBasicTypes.DOUBLE) );
-		registerFunction( "radians", new StandardSQLFunction("radians", StandardBasicTypes.DOUBLE) );
-		registerFunction( "degrees", new StandardSQLFunction("degrees", StandardBasicTypes.DOUBLE) );
-
-		registerFunction( "stddev", new StandardSQLFunction("stddev", StandardBasicTypes.DOUBLE) );
-		registerFunction( "variance", new StandardSQLFunction("variance", StandardBasicTypes.DOUBLE) );
-
-		registerFunction( "random", new NoArgSQLFunction("random", StandardBasicTypes.DOUBLE) );
-		registerFunction( "rand", new NoArgSQLFunction("random", StandardBasicTypes.DOUBLE) );
-
-		registerFunction( "round", new StandardSQLFunction("round") );
-		registerFunction( "trunc", new StandardSQLFunction("trunc") );
-		registerFunction( "ceil", new StandardSQLFunction("ceil") );
-		registerFunction( "floor", new StandardSQLFunction("floor") );
-
-		registerFunction( "chr", new StandardSQLFunction("chr", StandardBasicTypes.CHARACTER) );
-		registerFunction( "lower", new StandardSQLFunction("lower") );
-		registerFunction( "upper", new StandardSQLFunction("upper") );
-		registerFunction( "substr", new StandardSQLFunction("substr", StandardBasicTypes.STRING) );
-		registerFunction( "initcap", new StandardSQLFunction("initcap") );
-		registerFunction( "to_ascii", new StandardSQLFunction("to_ascii") );
-		registerFunction( "quote_ident", new StandardSQLFunction("quote_ident", StandardBasicTypes.STRING) );
-		registerFunction( "quote_literal", new StandardSQLFunction("quote_literal", StandardBasicTypes.STRING) );
-		registerFunction( "md5", new StandardSQLFunction("md5", StandardBasicTypes.STRING) );
-		registerFunction( "ascii", new StandardSQLFunction("ascii", StandardBasicTypes.INTEGER) );
-		registerFunction( "char_length", new StandardSQLFunction("char_length", StandardBasicTypes.LONG) );
-		registerFunction( "bit_length", new StandardSQLFunction("bit_length", StandardBasicTypes.LONG) );
-		registerFunction( "octet_length", new StandardSQLFunction("octet_length", StandardBasicTypes.LONG) );
-
-		registerFunction( "age", new StandardSQLFunction("age") );
-		registerFunction( "current_date", new NoArgSQLFunction("current_date", StandardBasicTypes.DATE, false) );
-		registerFunction( "current_time", new NoArgSQLFunction("current_time", StandardBasicTypes.TIME, false) );
-		registerFunction( "current_timestamp", new NoArgSQLFunction("current_timestamp", StandardBasicTypes.TIMESTAMP, false) );
-		registerFunction( "date_trunc", new StandardSQLFunction( "date_trunc", StandardBasicTypes.TIMESTAMP ) );
-		registerFunction( "localtime", new NoArgSQLFunction("localtime", StandardBasicTypes.TIME, false) );
-		registerFunction( "localtimestamp", new NoArgSQLFunction("localtimestamp", StandardBasicTypes.TIMESTAMP, false) );
-		registerFunction( "now", new NoArgSQLFunction("now", StandardBasicTypes.TIMESTAMP) );
-		registerFunction( "timeofday", new NoArgSQLFunction("timeofday", StandardBasicTypes.STRING) );
-
-		registerFunction( "current_user", new NoArgSQLFunction("current_user", StandardBasicTypes.STRING, false) );
-		registerFunction( "session_user", new NoArgSQLFunction("session_user", StandardBasicTypes.STRING, false) );
-		registerFunction( "user", new NoArgSQLFunction("user", StandardBasicTypes.STRING, false) );
-		registerFunction( "current_database", new NoArgSQLFunction("current_database", StandardBasicTypes.STRING, true) );
-		registerFunction( "current_schema", new NoArgSQLFunction("current_schema", StandardBasicTypes.STRING, true) );
-		
-		registerFunction( "to_char", new StandardSQLFunction("to_char", StandardBasicTypes.STRING) );
-		registerFunction( "to_date", new StandardSQLFunction("to_date", StandardBasicTypes.DATE) );
-		registerFunction( "to_timestamp", new StandardSQLFunction("to_timestamp", StandardBasicTypes.TIMESTAMP) );
-		registerFunction( "to_number", new StandardSQLFunction("to_number", StandardBasicTypes.BIG_DECIMAL) );
-
-		registerFunction( "concat", new VarArgsSQLFunction( StandardBasicTypes.STRING, "(","||",")" ) );
-
-		registerFunction( "locate", new PositionSubstringFunction() );
-
-		registerFunction( "str", new SQLFunctionTemplate(StandardBasicTypes.STRING, "cast(?1 as varchar)") );
-
-		getDefaultProperties().setProperty( Environment.STATEMENT_BATCH_SIZE, DEFAULT_BATCH_SIZE );
-		getDefaultProperties().setProperty( Environment.NON_CONTEXTUAL_LOB_CREATION, "true" );
+		getDefaultProperties().setProperty( AvailableSettings.STATEMENT_BATCH_SIZE, DEFAULT_BATCH_SIZE );
+		getDefaultProperties().setProperty( AvailableSettings.NON_CONTEXTUAL_LOB_CREATION, "true" );
 	}
-
-	@Override
-	public SqlTypeDescriptor getSqlTypeDescriptorOverride(int sqlCode) {
-		SqlTypeDescriptor descriptor;
-		switch ( sqlCode ) {
-			case Types.BLOB: {
-				// Force BLOB binding.  Otherwise, byte[] fields annotated
-				// with @Lob will attempt to use
-				// BlobTypeDescriptor.PRIMITIVE_ARRAY_BINDING.  Since the
-				// dialect uses oid for Blobs, byte arrays cannot be used.
-				descriptor = BlobTypeDescriptor.BLOB_BINDING;
-				break;
-			}
-			case Types.CLOB: {
-				descriptor = ClobTypeDescriptor.CLOB_BINDING;
-				break;
-			}
-			default: {
-				descriptor = super.getSqlTypeDescriptorOverride( sqlCode );
-				break;
-			}
-		}
-		return descriptor;
-	}
+//
+//	@Override
+//	public SqlTypeDescriptor getSqlTypeDescriptorOverride(int sqlCode) {
+//		SqlTypeDescriptor descriptor;
+//		switch ( sqlCode ) {
+//			case Types.BLOB: {
+//				// Force BLOB binding.  Otherwise, byte[] fields annotated
+//				// with @Lob will attempt to use
+//				// BlobTypeDescriptor.PRIMITIVE_ARRAY_BINDING.  Since the
+//				// dialect uses oid for Blobs, byte arrays cannot be used.
+//				descriptor = BlobTypeDescriptor.BLOB_BINDING;
+//				break;
+//			}
+//			case Types.CLOB: {
+//				descriptor = ClobTypeDescriptor.CLOB_BINDING;
+//				break;
+//			}
+//			default: {
+//				descriptor = super.getSqlTypeDescriptorOverride( sqlCode );
+//				break;
+//			}
+//		}
+//		return descriptor;
+//	}
 
 	@Override
 	public String getAddColumnString() {
@@ -288,11 +214,11 @@ public class PostgreSQL81Dialect extends Dialect {
 	public boolean supportsCaseInsensitiveLike() {
 		return true;
 	}
-
-	@Override
-	public Class getNativeIdentifierGeneratorClass() {
-		return SequenceGenerator.class;
-	}
+//
+//	@Override
+//	public Class getNativeIdentifierGeneratorClass() {
+//		return SequenceGenerator.class;
+//	}
 
 	@Override
 	public boolean supportsOuterJoinForUpdate() {
@@ -369,63 +295,63 @@ public class PostgreSQL81Dialect extends Dialect {
 	public String toBooleanValueString(boolean bool) {
 		return bool ? "true" : "false";
 	}
-
-	@Override
-	public ViolatedConstraintNameExtracter getViolatedConstraintNameExtracter() {
-		return EXTRACTER;
-	}
-
-	/**
-	 * Constraint-name extractor for Postgres constraint violation exceptions.
-	 * Orginally contributed by Denny Bartelt.
-	 */
-	private static final ViolatedConstraintNameExtracter EXTRACTER = new TemplatedViolatedConstraintNameExtracter() {
-		public String extractConstraintName(SQLException sqle) {
-			try {
-				final int sqlState = Integer.valueOf( JdbcExceptionHelper.extractSqlState( sqle ) );
-				switch (sqlState) {
-					// CHECK VIOLATION
-					case 23514: return extractUsingTemplate( "violates check constraint \"","\"", sqle.getMessage() );
-					// UNIQUE VIOLATION
-					case 23505: return extractUsingTemplate( "violates unique constraint \"","\"", sqle.getMessage() );
-					// FOREIGN KEY VIOLATION
-					case 23503: return extractUsingTemplate( "violates foreign key constraint \"","\"", sqle.getMessage() );
-					// NOT NULL VIOLATION
-					case 23502: return extractUsingTemplate( "null value in column \"","\" violates not-null constraint", sqle.getMessage() );
-					// TODO: RESTRICT VIOLATION
-					case 23001: return null;
-					// ALL OTHER
-					default: return null;
-				}
-			}
-			catch (NumberFormatException nfe) {
-				return null;
-			}
-		}
-	};
-	
-	@Override
-	public SQLExceptionConversionDelegate buildSQLExceptionConversionDelegate() {
-		return new SQLExceptionConversionDelegate() {
-			@Override
-			public JDBCException convert(SQLException sqlException, String message, String sql) {
-				final String sqlState = JdbcExceptionHelper.extractSqlState( sqlException );
-
-				if ( "40P01".equals( sqlState ) ) {
-					// DEADLOCK DETECTED
-					return new LockAcquisitionException( message, sqlException, sql );
-				}
-
-				if ( "55P03".equals( sqlState ) ) {
-					// LOCK NOT AVAILABLE
-					return new PessimisticLockException( message, sqlException, sql );
-				}
-
-				// returning null allows other delegates to operate
-				return null;
-			}
-		};
-	}
+//
+//	@Override
+//	public ViolatedConstraintNameExtracter getViolatedConstraintNameExtracter() {
+//		return EXTRACTER;
+//	}
+//
+//	/**
+//	 * Constraint-name extractor for Postgres constraint violation exceptions.
+//	 * Orginally contributed by Denny Bartelt.
+//	 */
+//	private static final ViolatedConstraintNameExtracter EXTRACTER = new TemplatedViolatedConstraintNameExtracter() {
+//		public String extractConstraintName(SQLException sqle) {
+//			try {
+//				final int sqlState = Integer.valueOf( JdbcExceptionHelper.extractSqlState( sqle ) );
+//				switch (sqlState) {
+//					// CHECK VIOLATION
+//					case 23514: return extractUsingTemplate( "violates check constraint \"","\"", sqle.getMessage() );
+//					// UNIQUE VIOLATION
+//					case 23505: return extractUsingTemplate( "violates unique constraint \"","\"", sqle.getMessage() );
+//					// FOREIGN KEY VIOLATION
+//					case 23503: return extractUsingTemplate( "violates foreign key constraint \"","\"", sqle.getMessage() );
+//					// NOT NULL VIOLATION
+//					case 23502: return extractUsingTemplate( "null value in column \"","\" violates not-null constraint", sqle.getMessage() );
+//					// TODO: RESTRICT VIOLATION
+//					case 23001: return null;
+//					// ALL OTHER
+//					default: return null;
+//				}
+//			}
+//			catch (NumberFormatException nfe) {
+//				return null;
+//			}
+//		}
+//	};
+//	
+//	@Override
+//	public SQLExceptionConversionDelegate buildSQLExceptionConversionDelegate() {
+//		return new SQLExceptionConversionDelegate() {
+//			@Override
+//			public JDBCException convert(SQLException sqlException, String message, String sql) {
+//				final String sqlState = JdbcExceptionHelper.extractSqlState( sqlException );
+//
+//				if ( "40P01".equals( sqlState ) ) {
+//					// DEADLOCK DETECTED
+//					return new LockAcquisitionException( message, sqlException, sql );
+//				}
+//
+//				if ( "55P03".equals( sqlState ) ) {
+//					// LOCK NOT AVAILABLE
+//					return new PessimisticLockException( message, sqlException, sql );
+//				}
+//
+//				// returning null allows other delegates to operate
+//				return null;
+//			}
+//		};
+//	}
 
 	@Override
 	public int registerResultSetOutParameter(CallableStatement statement, int col) throws SQLException {
@@ -517,10 +443,10 @@ public class PostgreSQL81Dialect extends Dialect {
 		return getForUpdateString( aliases ) + " nowait ";
 	}
 
-	@Override
-	public CallableStatementSupport getCallableStatementSupport() {
-		return PostgresCallableStatementSupport.INSTANCE;
-	}
+//	@Override
+//	public CallableStatementSupport getCallableStatementSupport() {
+//		return PostgresCallableStatementSupport.INSTANCE;
+//	}
 
 	@Override
 	public ResultSet getResultSet(CallableStatement statement, int position) throws SQLException {

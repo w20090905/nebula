@@ -25,13 +25,13 @@ package org.hibernate.dialect;
 
 import java.sql.Types;
 
-import org.hibernate.internal.CoreMessageLogger;
-import org.hibernate.sql.CaseFragment;
-import org.hibernate.sql.DecodeCaseFragment;
-import org.hibernate.sql.JoinFragment;
-import org.hibernate.sql.OracleJoinFragment;
+//import org.hibernate.internal.CoreMessageLogger;
+//import org.hibernate.sql.CaseFragment;
+//import org.hibernate.sql.DecodeCaseFragment;
+//import org.hibernate.sql.JoinFragment;
+//import org.hibernate.sql.OracleJoinFragment;
 
-import org.jboss.logging.Logger;
+//import org.jboss.logging.Logger;
 
 /**
  * An SQL dialect for Oracle, compatible with Oracle 8.
@@ -42,17 +42,17 @@ import org.jboss.logging.Logger;
 @SuppressWarnings("deprecation")
 @Deprecated
 public class OracleDialect extends Oracle9Dialect {
-	private static final CoreMessageLogger LOG = Logger.getMessageLogger(
-			CoreMessageLogger.class,
-			OracleDialect.class.getName()
-	);
+//	private static final CoreMessageLogger LOG = Logger.getMessageLogger(
+//			CoreMessageLogger.class,
+//			OracleDialect.class.getName()
+//	);
 
 	/**
 	 * Constructs a (DEPRECATED) Oracle9Dialect
 	 */
 	public OracleDialect() {
 		super();
-		LOG.deprecatedOracleDialect();
+//		LOG.deprecatedOracleDialect();
 		// Oracle8 and previous define only a "DATE" type which
 		//      is used to represent all aspects of date/time
 		registerColumnType( Types.TIMESTAMP, "date" );
@@ -60,15 +60,15 @@ public class OracleDialect extends Oracle9Dialect {
 		registerColumnType( Types.VARCHAR, 4000, "varchar2($l)" );
 	}
 
-	@Override
-	public JoinFragment createOuterJoinFragment() {
-		return new OracleJoinFragment();
-	}
-
-	@Override
-	public CaseFragment createCaseFragment() {
-		return new DecodeCaseFragment();
-	}
+//	@Override
+//	public JoinFragment createOuterJoinFragment() {
+//		return new OracleJoinFragment();
+//	}
+//
+//	@Override
+//	public CaseFragment createCaseFragment() {
+//		return new DecodeCaseFragment();
+//	}
 
 	@Override
 	public String getLimitString(String sql, boolean hasOffset) {

@@ -26,8 +26,8 @@ package org.hibernate.dialect;
 import java.sql.Types;
 
 import org.hibernate.LockOptions;
-import org.hibernate.sql.ANSICaseFragment;
-import org.hibernate.sql.CaseFragment;
+//import org.hibernate.sql.ANSICaseFragment;
+//import org.hibernate.sql.CaseFragment;
 
 /**
  * A dialect for Oracle 9i databases.
@@ -51,11 +51,11 @@ public class Oracle9iDialect extends Oracle8iDialect {
 		registerColumnType( Types.TIMESTAMP, "timestamp" );
 	}
 
-	@Override
-	public CaseFragment createCaseFragment() {
-		// Oracle did add support for ANSI CASE statements in 9i
-		return new ANSICaseFragment();
-	}
+//	@Override
+//	public CaseFragment createCaseFragment() {
+//		// Oracle did add support for ANSI CASE statements in 9i
+//		return new ANSICaseFragment();
+//	}
 
 	@Override
 	public String getLimitString(String sql, boolean hasOffset) {

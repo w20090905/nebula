@@ -24,10 +24,10 @@
 package org.hibernate.dialect;
 
 import org.hibernate.HibernateException;
-import org.hibernate.internal.CoreMessageLogger;
+//import org.hibernate.internal.CoreMessageLogger;
 import org.hibernate.internal.util.ReflectHelper;
 
-import org.jboss.logging.Logger;
+//import org.jboss.logging.Logger;
 
 /**
  * A Helper for dealing with the OracleTypes class
@@ -35,7 +35,7 @@ import org.jboss.logging.Logger;
  * @author Steve Ebersole
  */
 public class OracleTypesHelper {
-	private static final CoreMessageLogger log = Logger.getMessageLogger( CoreMessageLogger.class, OracleTypesHelper.class.getName() );
+//	private static final CoreMessageLogger log = Logger.getMessageLogger( CoreMessageLogger.class, OracleTypesHelper.class.getName() );
 
 	/**
 	 * Singleton access
@@ -53,7 +53,7 @@ public class OracleTypesHelper {
 			typeCode = extractOracleCursorTypeValue();
 		}
 		catch (Exception e) {
-			log.warn( "Unable to resolve Oracle CURSOR JDBC type code", e );
+//			log.warn( "Unable to resolve Oracle CURSOR JDBC type code", e );
 		}
 		oracleCursorTypeSqlType = typeCode;
 	}

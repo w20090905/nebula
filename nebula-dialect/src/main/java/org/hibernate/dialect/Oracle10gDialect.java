@@ -24,8 +24,8 @@
 package org.hibernate.dialect;
 
 import org.hibernate.LockOptions;
-import org.hibernate.sql.ANSIJoinFragment;
-import org.hibernate.sql.JoinFragment;
+//import org.hibernate.sql.ANSIJoinFragment;
+//import org.hibernate.sql.JoinFragment;
 
 /**
  * A dialect specifically for use with Oracle 10g.
@@ -43,10 +43,10 @@ public class Oracle10gDialect extends Oracle9iDialect {
 		super();
 	}
 
-	@Override
-	public JoinFragment createOuterJoinFragment() {
-		return new ANSIJoinFragment();
-	}
+//	@Override
+//	public JoinFragment createOuterJoinFragment() {
+//		return new ANSIJoinFragment();
+//	}
 
 	@Override
 	public String getWriteLockString(int timeout) {

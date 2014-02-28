@@ -23,12 +23,13 @@
  */
 package org.hibernate.dialect;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.sql.Blob;
+//import java.io.InputStream;
+//import java.io.OutputStream;
+//import java.sql.Blob;
 import java.sql.CallableStatement;
-import java.sql.Clob;
-import java.sql.NClob;
+//import java.sql.Clob;
+//import java.sql.NClob;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -46,54 +47,49 @@ import org.hibernate.LockOptions;
 import org.hibernate.MappingException;
 import org.hibernate.NullPrecedence;
 import org.hibernate.ScrollMode;
+//import org.hibernate.cfg.Environment;
+//import org.hibernate.dialect.lock.LockingStrategy;
+//import org.hibernate.dialect.lock.OptimisticForceIncrementLockingStrategy;
+//import org.hibernate.dialect.lock.OptimisticLockingStrategy;
+//import org.hibernate.dialect.lock.PessimisticForceIncrementLockingStrategy;
+//import org.hibernate.dialect.lock.PessimisticReadSelectLockingStrategy;
+//import org.hibernate.dialect.lock.PessimisticWriteSelectLockingStrategy;
+//import org.hibernate.dialect.lock.SelectLockingStrategy;
+//import org.hibernate.dialect.pagination.LegacyLimitHandler;
+//import org.hibernate.dialect.pagination.LimitHandler;
+//import org.hibernate.engine.jdbc.LobCreator;
+//import org.hibernate.engine.spi.RowSelection;
+//import org.hibernate.engine.spi.SessionImplementor;
+//import org.hibernate.exception.spi.ConversionContext;
+//import org.hibernate.exception.spi.SQLExceptionConversionDelegate;
+//import org.hibernate.exception.spi.SQLExceptionConverter;
+//import org.hibernate.exception.spi.ViolatedConstraintNameExtracter;
+//import org.hibernate.id.IdentityGenerator;
+//import org.hibernate.id.SequenceGenerator;
+//import org.hibernate.id.TableHiLoGenerator;
+//import org.hibernate.internal.CoreMessageLogger;
+import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Environment;
-import org.hibernate.dialect.function.CastFunction;
-import org.hibernate.dialect.function.SQLFunction;
-import org.hibernate.dialect.function.SQLFunctionTemplate;
-import org.hibernate.dialect.function.StandardAnsiSqlAggregationFunctions;
-import org.hibernate.dialect.function.StandardSQLFunction;
-import org.hibernate.dialect.lock.LockingStrategy;
-import org.hibernate.dialect.lock.OptimisticForceIncrementLockingStrategy;
-import org.hibernate.dialect.lock.OptimisticLockingStrategy;
-import org.hibernate.dialect.lock.PessimisticForceIncrementLockingStrategy;
-import org.hibernate.dialect.lock.PessimisticReadSelectLockingStrategy;
-import org.hibernate.dialect.lock.PessimisticWriteSelectLockingStrategy;
-import org.hibernate.dialect.lock.SelectLockingStrategy;
-import org.hibernate.dialect.pagination.LegacyLimitHandler;
-import org.hibernate.dialect.pagination.LimitHandler;
-import org.hibernate.dialect.unique.DefaultUniqueDelegate;
-import org.hibernate.dialect.unique.UniqueDelegate;
-import org.hibernate.engine.jdbc.LobCreator;
-import org.hibernate.engine.spi.RowSelection;
-import org.hibernate.engine.spi.SessionImplementor;
-import org.hibernate.exception.spi.ConversionContext;
-import org.hibernate.exception.spi.SQLExceptionConversionDelegate;
-import org.hibernate.exception.spi.SQLExceptionConverter;
-import org.hibernate.exception.spi.ViolatedConstraintNameExtracter;
-import org.hibernate.id.IdentityGenerator;
-import org.hibernate.id.SequenceGenerator;
-import org.hibernate.id.TableHiLoGenerator;
-import org.hibernate.internal.CoreMessageLogger;
 import org.hibernate.internal.util.ReflectHelper;
 import org.hibernate.internal.util.StringHelper;
-import org.hibernate.internal.util.collections.ArrayHelper;
-import org.hibernate.internal.util.io.StreamCopier;
-import org.hibernate.mapping.Column;
-import org.hibernate.metamodel.spi.TypeContributions;
-import org.hibernate.persister.entity.Lockable;
-import org.hibernate.procedure.internal.StandardCallableStatementSupport;
-import org.hibernate.procedure.spi.CallableStatementSupport;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.sql.ANSICaseFragment;
-import org.hibernate.sql.ANSIJoinFragment;
-import org.hibernate.sql.CaseFragment;
-import org.hibernate.sql.ForUpdateFragment;
-import org.hibernate.sql.JoinFragment;
-import org.hibernate.type.StandardBasicTypes;
-import org.hibernate.type.descriptor.sql.ClobTypeDescriptor;
-import org.hibernate.type.descriptor.sql.SqlTypeDescriptor;
+//import org.hibernate.internal.util.collections.ArrayHelper;
+//import org.hibernate.internal.util.io.StreamCopier;
+//import org.hibernate.mapping.Column;
+//import org.hibernate.metamodel.spi.TypeContributions;
+//import org.hibernate.persister.entity.Lockable;
+//import org.hibernate.procedure.internal.StandardCallableStatementSupport;
+//import org.hibernate.procedure.spi.CallableStatementSupport;
+//import org.hibernate.service.ServiceRegistry;
+//import org.hibernate.sql.ANSICaseFragment;
+//import org.hibernate.sql.ANSIJoinFragment;
+//import org.hibernate.sql.CaseFragment;
+//import org.hibernate.sql.ForUpdateFragment;
+//import org.hibernate.sql.JoinFragment;
+//import org.hibernate.type.StandardBasicTypes;
+//import org.hibernate.type.descriptor.sql.ClobTypeDescriptor;
+//import org.hibernate.type.descriptor.sql.SqlTypeDescriptor;
 
-import org.jboss.logging.Logger;
+//import org.jboss.logging.Logger;
 
 /**
  * Represents a dialect of SQL implemented by a particular RDBMS.  Subclasses implement Hibernate compatibility
@@ -103,12 +99,14 @@ import org.jboss.logging.Logger;
  * @author Gavin King, David Channon
  */
 @SuppressWarnings("deprecation")
-public abstract class Dialect implements ConversionContext {
-	private static final CoreMessageLogger LOG = Logger.getMessageLogger(
-			CoreMessageLogger.class,
-			Dialect.class.getName()
-	);
+public abstract class Dialect /*implements ConversionContext */ {
+//	private static final CoreMessageLogger LOG = Logger.getMessageLogger(
+//			CoreMessageLogger.class,
+//			Dialect.class.getName()
+//	);
 
+	protected static Map<String, Dialect> driverClass2Dialect = new HashMap<String, Dialect>();
+	
 	/**
 	 * Defines a default batch size constant
 	 */
@@ -130,46 +128,16 @@ public abstract class Dialect implements ConversionContext {
 	public static final String CLOSED_QUOTE = "`\"]";
 
 	private final TypeNames typeNames = new TypeNames();
-	private final TypeNames hibernateTypeNames = new TypeNames();
+//	private final TypeNames hibernateTypeNames = new TypeNames();
 
 	private final Properties properties = new Properties();
-	private final Map<String, SQLFunction> sqlFunctions = new HashMap<String, SQLFunction>();
+//	private final Map<String, SQLFunction> sqlFunctions = new HashMap<String, SQLFunction>();
 	private final Set<String> sqlKeywords = new HashSet<String>();
-
-	private final UniqueDelegate uniqueDelegate;
 
 
 	// constructors and factory methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	protected Dialect() {
-		LOG.usingDialect( this );
-		StandardAnsiSqlAggregationFunctions.primeFunctionMap( sqlFunctions );
-
-		// standard sql92 functions (can be overridden by subclasses)
-		registerFunction( "substring", new SQLFunctionTemplate( StandardBasicTypes.STRING, "substring(?1, ?2, ?3)" ) );
-		registerFunction( "locate", new SQLFunctionTemplate( StandardBasicTypes.INTEGER, "locate(?1, ?2, ?3)" ) );
-		registerFunction( "trim", new SQLFunctionTemplate( StandardBasicTypes.STRING, "trim(?1 ?2 ?3 ?4)" ) );
-		registerFunction( "length", new StandardSQLFunction( "length", StandardBasicTypes.INTEGER ) );
-		registerFunction( "bit_length", new StandardSQLFunction( "bit_length", StandardBasicTypes.INTEGER ) );
-		registerFunction( "coalesce", new StandardSQLFunction( "coalesce" ) );
-		registerFunction( "nullif", new StandardSQLFunction( "nullif" ) );
-		registerFunction( "abs", new StandardSQLFunction( "abs" ) );
-		registerFunction( "mod", new StandardSQLFunction( "mod", StandardBasicTypes.INTEGER) );
-		registerFunction( "sqrt", new StandardSQLFunction( "sqrt", StandardBasicTypes.DOUBLE) );
-		registerFunction( "upper", new StandardSQLFunction("upper") );
-		registerFunction( "lower", new StandardSQLFunction("lower") );
-		registerFunction( "cast", new CastFunction() );
-		registerFunction( "extract", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "extract(?1 ?2 ?3)") );
-
-		//map second/minute/hour/day/month/year to ANSI extract(), override on subclasses
-		registerFunction( "second", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "extract(second from ?1)") );
-		registerFunction( "minute", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "extract(minute from ?1)") );
-		registerFunction( "hour", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "extract(hour from ?1)") );
-		registerFunction( "day", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "extract(day from ?1)") );
-		registerFunction( "month", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "extract(month from ?1)") );
-		registerFunction( "year", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "extract(year from ?1)") );
-
-		registerFunction( "str", new SQLFunctionTemplate(StandardBasicTypes.STRING, "cast(?1 as char)") );
 
 		registerColumnType( Types.BIT, "bit" );
 		registerColumnType( Types.BOOLEAN, "boolean" );
@@ -199,34 +167,6 @@ public abstract class Dialect implements ConversionContext {
 		registerColumnType( Types.NVARCHAR, "nvarchar($l)" );
 		registerColumnType( Types.LONGNVARCHAR, "nvarchar($l)" );
 		registerColumnType( Types.NCLOB, "nclob" );
-
-		// register hibernate types for default use in scalar sqlquery type auto detection
-		registerHibernateType( Types.BIGINT, StandardBasicTypes.BIG_INTEGER.getName() );
-		registerHibernateType( Types.BINARY, StandardBasicTypes.BINARY.getName() );
-		registerHibernateType( Types.BIT, StandardBasicTypes.BOOLEAN.getName() );
-		registerHibernateType( Types.BOOLEAN, StandardBasicTypes.BOOLEAN.getName() );
-		registerHibernateType( Types.CHAR, StandardBasicTypes.CHARACTER.getName() );
-		registerHibernateType( Types.CHAR, 1, StandardBasicTypes.CHARACTER.getName() );
-		registerHibernateType( Types.CHAR, 255, StandardBasicTypes.STRING.getName() );
-		registerHibernateType( Types.DATE, StandardBasicTypes.DATE.getName() );
-		registerHibernateType( Types.DOUBLE, StandardBasicTypes.DOUBLE.getName() );
-		registerHibernateType( Types.FLOAT, StandardBasicTypes.FLOAT.getName() );
-		registerHibernateType( Types.INTEGER, StandardBasicTypes.INTEGER.getName() );
-		registerHibernateType( Types.SMALLINT, StandardBasicTypes.SHORT.getName() );
-		registerHibernateType( Types.TINYINT, StandardBasicTypes.BYTE.getName() );
-		registerHibernateType( Types.TIME, StandardBasicTypes.TIME.getName() );
-		registerHibernateType( Types.TIMESTAMP, StandardBasicTypes.TIMESTAMP.getName() );
-		registerHibernateType( Types.VARCHAR, StandardBasicTypes.STRING.getName() );
-		registerHibernateType( Types.VARBINARY, StandardBasicTypes.BINARY.getName() );
-		registerHibernateType( Types.LONGVARCHAR, StandardBasicTypes.TEXT.getName() );
-		registerHibernateType( Types.LONGVARBINARY, StandardBasicTypes.IMAGE.getName() );
-		registerHibernateType( Types.NUMERIC, StandardBasicTypes.BIG_DECIMAL.getName() );
-		registerHibernateType( Types.DECIMAL, StandardBasicTypes.BIG_DECIMAL.getName() );
-		registerHibernateType( Types.BLOB, StandardBasicTypes.BLOB.getName() );
-		registerHibernateType( Types.CLOB, StandardBasicTypes.CLOB.getName() );
-		registerHibernateType( Types.REAL, StandardBasicTypes.FLOAT.getName() );
-
-		uniqueDelegate = new DefaultUniqueDelegate( this );
 	}
 
 	/**
@@ -235,26 +175,26 @@ public abstract class Dialect implements ConversionContext {
 	 * @return The specified Dialect
 	 * @throws HibernateException If no dialect was specified, or if it could not be instantiated.
 	 */
-	public static Dialect getDialect() throws HibernateException {
-		return instantiateDialect( Environment.getProperties().getProperty( Environment.DIALECT ) );
+	public static Dialect getDialect(Connection conn) throws HibernateException {
+		return instantiateDialect( Environment.getProperties().getProperty( AvailableSettings.DIALECT ) );
 	}
 
 
-	/**
-	 * Get an instance of the dialect specified by the given properties or by
-	 * the current <tt>System</tt> properties.
-	 *
-	 * @param props The properties to use for finding the dialect class to use.
-	 * @return The specified Dialect
-	 * @throws HibernateException If no dialect was specified, or if it could not be instantiated.
-	 */
-	public static Dialect getDialect(Properties props) throws HibernateException {
-		final String dialectName = props.getProperty( Environment.DIALECT );
-		if ( dialectName == null ) {
-			return getDialect();
-		}
-		return instantiateDialect( dialectName );
-	}
+//	/**
+//	 * Get an instance of the dialect specified by the given properties or by
+//	 * the current <tt>System</tt> properties.
+//	 *
+//	 * @param props The properties to use for finding the dialect class to use.
+//	 * @return The specified Dialect
+//	 * @throws HibernateException If no dialect was specified, or if it could not be instantiated.
+//	 */
+//	public static Dialect getDialect(Properties props) throws HibernateException {
+//		final String dialectName = props.getProperty( Environment.DIALECT );
+//		if ( dialectName == null ) {
+//			return getDialect();
+//		}
+//		return instantiateDialect( dialectName );
+//	}
 
 	private static Dialect instantiateDialect(String dialectName) throws HibernateException {
 		if ( dialectName == null ) {
@@ -288,15 +228,15 @@ public abstract class Dialect implements ConversionContext {
 
 	// database type mapping support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	/**
-	 * Allows the Dialect to contribute additional types
-	 *
-	 * @param typeContributions Callback to contribute the types
-	 * @param serviceRegistry The service registry
-	 */
-	public void contributeTypes(TypeContributions typeContributions, ServiceRegistry serviceRegistry) {
-		// by default, nothing to do
-	}
+//	/**
+//	 * Allows the Dialect to contribute additional types
+//	 *
+//	 * @param typeContributions Callback to contribute the types
+//	 * @param serviceRegistry The service registry
+//	 */
+//	public void contributeTypes(TypeContributions typeContributions, ServiceRegistry serviceRegistry) {
+//		// by default, nothing to do
+//	}
 
 	/**
 	 * Get the name of the database type associated with the given
@@ -336,16 +276,16 @@ public abstract class Dialect implements ConversionContext {
 		return result;
 	}
 
-	/**
-	 * Get the name of the database type appropriate for casting operations
-	 * (via the CAST() SQL function) for the given {@link java.sql.Types} typecode.
-	 *
-	 * @param code The {@link java.sql.Types} typecode
-	 * @return The database type name
-	 */
-	public String getCastTypeName(int code) {
-		return getTypeName( code, Column.DEFAULT_LENGTH, Column.DEFAULT_PRECISION, Column.DEFAULT_SCALE );
-	}
+//	/**
+//	 * Get the name of the database type appropriate for casting operations
+//	 * (via the CAST() SQL function) for the given {@link java.sql.Types} typecode.
+//	 *
+//	 * @param code The {@link java.sql.Types} typecode
+//	 * @return The database type name
+//	 */
+//	public String getCastTypeName(int code) {
+//		return getTypeName( code, Column.DEFAULT_LENGTH, Column.DEFAULT_PRECISION, Column.DEFAULT_SCALE );
+//	}
 
 	/**
 	 * Return an expression casting the value to the specified type
@@ -366,36 +306,36 @@ public abstract class Dialect implements ConversionContext {
 			return "cast(" + value + "as " + getTypeName( jdbcTypeCode, length, precision, scale ) + ")";
 		}
 	}
+//
+//	/**
+//	 * Return an expression casting the value to the specified type.  Simply calls
+//	 * {@link #cast(String, int, int, int, int)} passing {@link Column#DEFAULT_PRECISION} and
+//	 * {@link Column#DEFAULT_SCALE} as the precision/scale.
+//	 *
+//	 * @param value The value to cast
+//	 * @param jdbcTypeCode The JDBC type code to cast to
+//	 * @param length The type length
+//	 *
+//	 * @return The cast expression
+//	 */
+//	public String cast(String value, int jdbcTypeCode, int length) {
+//		return cast( value, jdbcTypeCode, length, Column.DEFAULT_PRECISION, Column.DEFAULT_SCALE );
+//	}
 
-	/**
-	 * Return an expression casting the value to the specified type.  Simply calls
-	 * {@link #cast(String, int, int, int, int)} passing {@link Column#DEFAULT_PRECISION} and
-	 * {@link Column#DEFAULT_SCALE} as the precision/scale.
-	 *
-	 * @param value The value to cast
-	 * @param jdbcTypeCode The JDBC type code to cast to
-	 * @param length The type length
-	 *
-	 * @return The cast expression
-	 */
-	public String cast(String value, int jdbcTypeCode, int length) {
-		return cast( value, jdbcTypeCode, length, Column.DEFAULT_PRECISION, Column.DEFAULT_SCALE );
-	}
-
-	/**
-	 * Return an expression casting the value to the specified type.  Simply calls
-	 * {@link #cast(String, int, int, int, int)} passing {@link Column#DEFAULT_LENGTH} as the length
-	 *
-	 * @param value The value to cast
-	 * @param jdbcTypeCode The JDBC type code to cast to
-	 * @param precision The type precision
-	 * @param scale The type scale
-	 *
-	 * @return The cast expression
-	 */
-	public String cast(String value, int jdbcTypeCode, int precision, int scale) {
-		return cast( value, jdbcTypeCode, Column.DEFAULT_LENGTH, precision, scale );
-	}
+//	/**
+//	 * Return an expression casting the value to the specified type.  Simply calls
+//	 * {@link #cast(String, int, int, int, int)} passing {@link Column#DEFAULT_LENGTH} as the length
+//	 *
+//	 * @param value The value to cast
+//	 * @param jdbcTypeCode The JDBC type code to cast to
+//	 * @param precision The type precision
+//	 * @param scale The type scale
+//	 *
+//	 * @return The cast expression
+//	 */
+//	public String cast(String value, int jdbcTypeCode, int precision, int scale) {
+//		return cast( value, jdbcTypeCode, Column.DEFAULT_LENGTH, precision, scale );
+//	}
 
 	/**
 	 * Subclasses register a type name for the given type code and maximum
@@ -420,290 +360,290 @@ public abstract class Dialect implements ConversionContext {
 	protected void registerColumnType(int code, String name) {
 		typeNames.put( code, name );
 	}
+//
+//	/**
+//	 * Allows the dialect to override a {@link SqlTypeDescriptor}.
+//	 * <p/>
+//	 * If the passed {@code sqlTypeDescriptor} allows itself to be remapped (per
+//	 * {@link org.hibernate.type.descriptor.sql.SqlTypeDescriptor#canBeRemapped()}), then this method uses
+//	 * {@link #getSqlTypeDescriptorOverride}  to get an optional override based on the SQL code returned by
+//	 * {@link SqlTypeDescriptor#getSqlType()}.
+//	 * <p/>
+//	 * If this dialect does not provide an override or if the {@code sqlTypeDescriptor} doe not allow itself to be
+//	 * remapped, then this method simply returns the original passed {@code sqlTypeDescriptor}
+//	 *
+//	 * @param sqlTypeDescriptor The {@link SqlTypeDescriptor} to override
+//	 * @return The {@link SqlTypeDescriptor} that should be used for this dialect;
+//	 *         if there is no override, then original {@code sqlTypeDescriptor} is returned.
+//	 * @throws IllegalArgumentException if {@code sqlTypeDescriptor} is null.
+//	 *
+//	 * @see #getSqlTypeDescriptorOverride
+//	 */
+//	public SqlTypeDescriptor remapSqlTypeDescriptor(SqlTypeDescriptor sqlTypeDescriptor) {
+//		if ( sqlTypeDescriptor == null ) {
+//			throw new IllegalArgumentException( "sqlTypeDescriptor is null" );
+//		}
+//		if ( ! sqlTypeDescriptor.canBeRemapped() ) {
+//			return sqlTypeDescriptor;
+//		}
+//
+//		final SqlTypeDescriptor overridden = getSqlTypeDescriptorOverride( sqlTypeDescriptor.getSqlType() );
+//		return overridden == null ? sqlTypeDescriptor : overridden;
+//	}
 
-	/**
-	 * Allows the dialect to override a {@link SqlTypeDescriptor}.
-	 * <p/>
-	 * If the passed {@code sqlTypeDescriptor} allows itself to be remapped (per
-	 * {@link org.hibernate.type.descriptor.sql.SqlTypeDescriptor#canBeRemapped()}), then this method uses
-	 * {@link #getSqlTypeDescriptorOverride}  to get an optional override based on the SQL code returned by
-	 * {@link SqlTypeDescriptor#getSqlType()}.
-	 * <p/>
-	 * If this dialect does not provide an override or if the {@code sqlTypeDescriptor} doe not allow itself to be
-	 * remapped, then this method simply returns the original passed {@code sqlTypeDescriptor}
-	 *
-	 * @param sqlTypeDescriptor The {@link SqlTypeDescriptor} to override
-	 * @return The {@link SqlTypeDescriptor} that should be used for this dialect;
-	 *         if there is no override, then original {@code sqlTypeDescriptor} is returned.
-	 * @throws IllegalArgumentException if {@code sqlTypeDescriptor} is null.
-	 *
-	 * @see #getSqlTypeDescriptorOverride
-	 */
-	public SqlTypeDescriptor remapSqlTypeDescriptor(SqlTypeDescriptor sqlTypeDescriptor) {
-		if ( sqlTypeDescriptor == null ) {
-			throw new IllegalArgumentException( "sqlTypeDescriptor is null" );
-		}
-		if ( ! sqlTypeDescriptor.canBeRemapped() ) {
-			return sqlTypeDescriptor;
-		}
-
-		final SqlTypeDescriptor overridden = getSqlTypeDescriptorOverride( sqlTypeDescriptor.getSqlType() );
-		return overridden == null ? sqlTypeDescriptor : overridden;
-	}
-
-	/**
-	 * Returns the {@link SqlTypeDescriptor} that should be used to handle the given JDBC type code.  Returns
-	 * {@code null} if there is no override.
-	 *
-	 * @param sqlCode A {@link Types} constant indicating the SQL column type
-	 * @return The {@link SqlTypeDescriptor} to use as an override, or {@code null} if there is no override.
-	 */
-	protected SqlTypeDescriptor getSqlTypeDescriptorOverride(int sqlCode) {
-		SqlTypeDescriptor descriptor;
-		switch ( sqlCode ) {
-			case Types.CLOB: {
-				descriptor = useInputStreamToInsertBlob() ? ClobTypeDescriptor.STREAM_BINDING : null;
-				break;
-			}
-			default: {
-				descriptor = null;
-				break;
-			}
-		}
-		return descriptor;
-	}
-
-	/**
-	 * The legacy behavior of Hibernate.  LOBs are not processed by merge
-	 */
-	@SuppressWarnings( {"UnusedDeclaration"})
-	protected static final LobMergeStrategy LEGACY_LOB_MERGE_STRATEGY = new LobMergeStrategy() {
-		@Override
-		public Blob mergeBlob(Blob original, Blob target, SessionImplementor session) {
-			return target;
-		}
-
-		@Override
-		public Clob mergeClob(Clob original, Clob target, SessionImplementor session) {
-			return target;
-		}
-
-		@Override
-		public NClob mergeNClob(NClob original, NClob target, SessionImplementor session) {
-			return target;
-		}
-	};
-
-	/**
-	 * Merge strategy based on transferring contents based on streams.
-	 */
-	@SuppressWarnings( {"UnusedDeclaration"})
-	protected static final LobMergeStrategy STREAM_XFER_LOB_MERGE_STRATEGY = new LobMergeStrategy() {
-		@Override
-		public Blob mergeBlob(Blob original, Blob target, SessionImplementor session) {
-			if ( original != target ) {
-				try {
-					// the BLOB just read during the load phase of merge
-					final OutputStream connectedStream = target.setBinaryStream( 1L );
-					// the BLOB from the detached state
-					final InputStream detachedStream = original.getBinaryStream();
-					StreamCopier.copy( detachedStream, connectedStream );
-					return target;
-				}
-				catch (SQLException e ) {
-					throw session.getFactory().getSQLExceptionHelper().convert( e, "unable to merge BLOB data" );
-				}
-			}
-			else {
-				return NEW_LOCATOR_LOB_MERGE_STRATEGY.mergeBlob( original, target, session );
-			}
-		}
-
-		@Override
-		public Clob mergeClob(Clob original, Clob target, SessionImplementor session) {
-			if ( original != target ) {
-				try {
-					// the CLOB just read during the load phase of merge
-					final OutputStream connectedStream = target.setAsciiStream( 1L );
-					// the CLOB from the detached state
-					final InputStream detachedStream = original.getAsciiStream();
-					StreamCopier.copy( detachedStream, connectedStream );
-					return target;
-				}
-				catch (SQLException e ) {
-					throw session.getFactory().getSQLExceptionHelper().convert( e, "unable to merge CLOB data" );
-				}
-			}
-			else {
-				return NEW_LOCATOR_LOB_MERGE_STRATEGY.mergeClob( original, target, session );
-			}
-		}
-
-		@Override
-		public NClob mergeNClob(NClob original, NClob target, SessionImplementor session) {
-			if ( original != target ) {
-				try {
-					// the NCLOB just read during the load phase of merge
-					final OutputStream connectedStream = target.setAsciiStream( 1L );
-					// the NCLOB from the detached state
-					final InputStream detachedStream = original.getAsciiStream();
-					StreamCopier.copy( detachedStream, connectedStream );
-					return target;
-				}
-				catch (SQLException e ) {
-					throw session.getFactory().getSQLExceptionHelper().convert( e, "unable to merge NCLOB data" );
-				}
-			}
-			else {
-				return NEW_LOCATOR_LOB_MERGE_STRATEGY.mergeNClob( original, target, session );
-			}
-		}
-	};
-
-	/**
-	 * Merge strategy based on creating a new LOB locator.
-	 */
-	protected static final LobMergeStrategy NEW_LOCATOR_LOB_MERGE_STRATEGY = new LobMergeStrategy() {
-		@Override
-		public Blob mergeBlob(Blob original, Blob target, SessionImplementor session) {
-			if ( original == null && target == null ) {
-				return null;
-			}
-			try {
-				final LobCreator lobCreator = session.getFactory().getJdbcServices().getLobCreator( session );
-				return original == null
-						? lobCreator.createBlob( ArrayHelper.EMPTY_BYTE_ARRAY )
-						: lobCreator.createBlob( original.getBinaryStream(), original.length() );
-			}
-			catch (SQLException e) {
-				throw session.getFactory().getSQLExceptionHelper().convert( e, "unable to merge BLOB data" );
-			}
-		}
-
-		@Override
-		public Clob mergeClob(Clob original, Clob target, SessionImplementor session) {
-			if ( original == null && target == null ) {
-				return null;
-			}
-			try {
-				final LobCreator lobCreator = session.getFactory().getJdbcServices().getLobCreator( session );
-				return original == null
-						? lobCreator.createClob( "" )
-						: lobCreator.createClob( original.getCharacterStream(), original.length() );
-			}
-			catch (SQLException e) {
-				throw session.getFactory().getSQLExceptionHelper().convert( e, "unable to merge CLOB data" );
-			}
-		}
-
-		@Override
-		public NClob mergeNClob(NClob original, NClob target, SessionImplementor session) {
-			if ( original == null && target == null ) {
-				return null;
-			}
-			try {
-				final LobCreator lobCreator = session.getFactory().getJdbcServices().getLobCreator( session );
-				return original == null
-						? lobCreator.createNClob( "" )
-						: lobCreator.createNClob( original.getCharacterStream(), original.length() );
-			}
-			catch (SQLException e) {
-				throw session.getFactory().getSQLExceptionHelper().convert( e, "unable to merge NCLOB data" );
-			}
-		}
-	};
-
-	public LobMergeStrategy getLobMergeStrategy() {
-		return NEW_LOCATOR_LOB_MERGE_STRATEGY;
-	}
-
-
-	// hibernate type mapping support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-	/**
-	 * Get the name of the Hibernate {@link org.hibernate.type.Type} associated with the given
-	 * {@link java.sql.Types} type code.
-	 *
-	 * @param code The {@link java.sql.Types} type code
-	 * @return The Hibernate {@link org.hibernate.type.Type} name.
-	 * @throws HibernateException If no mapping was specified for that type.
-	 */
-	@SuppressWarnings( {"UnusedDeclaration"})
-	public String getHibernateTypeName(int code) throws HibernateException {
-		final String result = hibernateTypeNames.get( code );
-		if ( result == null ) {
-			throw new HibernateException( "No Hibernate type mapping for java.sql.Types code: " + code );
-		}
-		return result;
-	}
-
-	/**
-	 * Get the name of the Hibernate {@link org.hibernate.type.Type} associated
-	 * with the given {@link java.sql.Types} typecode with the given storage
-	 * specification parameters.
-	 *
-	 * @param code The {@link java.sql.Types} typecode
-	 * @param length The datatype length
-	 * @param precision The datatype precision
-	 * @param scale The datatype scale
-	 * @return The Hibernate {@link org.hibernate.type.Type} name.
-	 * @throws HibernateException If no mapping was specified for that type.
-	 */
-	public String getHibernateTypeName(int code, int length, int precision, int scale) throws HibernateException {
-		final String result = hibernateTypeNames.get( code, length, precision, scale );
-		if ( result == null ) {
-			throw new HibernateException(
-					String.format(
-							"No Hibernate type mapping for type [code=%s, length=%s]",
-							code,
-							length
-					)
-			);
-		}
-		return result;
-	}
-
-	/**
-	 * Registers a Hibernate {@link org.hibernate.type.Type} name for the given
-	 * {@link java.sql.Types} type code and maximum column length.
-	 *
-	 * @param code The {@link java.sql.Types} typecode
-	 * @param capacity The maximum length of database type
-	 * @param name The Hibernate {@link org.hibernate.type.Type} name
-	 */
-	protected void registerHibernateType(int code, long capacity, String name) {
-		hibernateTypeNames.put( code, capacity, name);
-	}
-
-	/**
-	 * Registers a Hibernate {@link org.hibernate.type.Type} name for the given
-	 * {@link java.sql.Types} type code.
-	 *
-	 * @param code The {@link java.sql.Types} typecode
-	 * @param name The Hibernate {@link org.hibernate.type.Type} name
-	 */
-	protected void registerHibernateType(int code, String name) {
-		hibernateTypeNames.put( code, name);
-	}
+//	/**
+//	 * Returns the {@link SqlTypeDescriptor} that should be used to handle the given JDBC type code.  Returns
+//	 * {@code null} if there is no override.
+//	 *
+//	 * @param sqlCode A {@link Types} constant indicating the SQL column type
+//	 * @return The {@link SqlTypeDescriptor} to use as an override, or {@code null} if there is no override.
+//	 */
+//	protected SqlTypeDescriptor getSqlTypeDescriptorOverride(int sqlCode) {
+//		SqlTypeDescriptor descriptor;
+//		switch ( sqlCode ) {
+//			case Types.CLOB: {
+//				descriptor = useInputStreamToInsertBlob() ? ClobTypeDescriptor.STREAM_BINDING : null;
+//				break;
+//			}
+//			default: {
+//				descriptor = null;
+//				break;
+//			}
+//		}
+//		return descriptor;
+//	}
+//
+//	/**
+//	 * The legacy behavior of Hibernate.  LOBs are not processed by merge
+//	 */
+//	@SuppressWarnings( {"UnusedDeclaration"})
+//	protected static final LobMergeStrategy LEGACY_LOB_MERGE_STRATEGY = new LobMergeStrategy() {
+//		@Override
+//		public Blob mergeBlob(Blob original, Blob target, SessionImplementor session) {
+//			return target;
+//		}
+//
+//		@Override
+//		public Clob mergeClob(Clob original, Clob target, SessionImplementor session) {
+//			return target;
+//		}
+//
+//		@Override
+//		public NClob mergeNClob(NClob original, NClob target, SessionImplementor session) {
+//			return target;
+//		}
+//	};
+//
+//	/**
+//	 * Merge strategy based on transferring contents based on streams.
+//	 */
+//	@SuppressWarnings( {"UnusedDeclaration"})
+//	protected static final LobMergeStrategy STREAM_XFER_LOB_MERGE_STRATEGY = new LobMergeStrategy() {
+//		@Override
+//		public Blob mergeBlob(Blob original, Blob target, SessionImplementor session) {
+//			if ( original != target ) {
+//				try {
+//					// the BLOB just read during the load phase of merge
+//					final OutputStream connectedStream = target.setBinaryStream( 1L );
+//					// the BLOB from the detached state
+//					final InputStream detachedStream = original.getBinaryStream();
+//					StreamCopier.copy( detachedStream, connectedStream );
+//					return target;
+//				}
+//				catch (SQLException e ) {
+//					throw session.getFactory().getSQLExceptionHelper().convert( e, "unable to merge BLOB data" );
+//				}
+//			}
+//			else {
+//				return NEW_LOCATOR_LOB_MERGE_STRATEGY.mergeBlob( original, target, session );
+//			}
+//		}
+//
+//		@Override
+//		public Clob mergeClob(Clob original, Clob target, SessionImplementor session) {
+//			if ( original != target ) {
+//				try {
+//					// the CLOB just read during the load phase of merge
+//					final OutputStream connectedStream = target.setAsciiStream( 1L );
+//					// the CLOB from the detached state
+//					final InputStream detachedStream = original.getAsciiStream();
+//					StreamCopier.copy( detachedStream, connectedStream );
+//					return target;
+//				}
+//				catch (SQLException e ) {
+//					throw session.getFactory().getSQLExceptionHelper().convert( e, "unable to merge CLOB data" );
+//				}
+//			}
+//			else {
+//				return NEW_LOCATOR_LOB_MERGE_STRATEGY.mergeClob( original, target, session );
+//			}
+//		}
+//
+//		@Override
+//		public NClob mergeNClob(NClob original, NClob target, SessionImplementor session) {
+//			if ( original != target ) {
+//				try {
+//					// the NCLOB just read during the load phase of merge
+//					final OutputStream connectedStream = target.setAsciiStream( 1L );
+//					// the NCLOB from the detached state
+//					final InputStream detachedStream = original.getAsciiStream();
+//					StreamCopier.copy( detachedStream, connectedStream );
+//					return target;
+//				}
+//				catch (SQLException e ) {
+//					throw session.getFactory().getSQLExceptionHelper().convert( e, "unable to merge NCLOB data" );
+//				}
+//			}
+//			else {
+//				return NEW_LOCATOR_LOB_MERGE_STRATEGY.mergeNClob( original, target, session );
+//			}
+//		}
+//	};
+//
+//	/**
+//	 * Merge strategy based on creating a new LOB locator.
+//	 */
+//	protected static final LobMergeStrategy NEW_LOCATOR_LOB_MERGE_STRATEGY = new LobMergeStrategy() {
+//		@Override
+//		public Blob mergeBlob(Blob original, Blob target, SessionImplementor session) {
+//			if ( original == null && target == null ) {
+//				return null;
+//			}
+//			try {
+//				final LobCreator lobCreator = session.getFactory().getJdbcServices().getLobCreator( session );
+//				return original == null
+//						? lobCreator.createBlob( ArrayHelper.EMPTY_BYTE_ARRAY )
+//						: lobCreator.createBlob( original.getBinaryStream(), original.length() );
+//			}
+//			catch (SQLException e) {
+//				throw session.getFactory().getSQLExceptionHelper().convert( e, "unable to merge BLOB data" );
+//			}
+//		}
+//
+//		@Override
+//		public Clob mergeClob(Clob original, Clob target, SessionImplementor session) {
+//			if ( original == null && target == null ) {
+//				return null;
+//			}
+//			try {
+//				final LobCreator lobCreator = session.getFactory().getJdbcServices().getLobCreator( session );
+//				return original == null
+//						? lobCreator.createClob( "" )
+//						: lobCreator.createClob( original.getCharacterStream(), original.length() );
+//			}
+//			catch (SQLException e) {
+//				throw session.getFactory().getSQLExceptionHelper().convert( e, "unable to merge CLOB data" );
+//			}
+//		}
+//
+//		@Override
+//		public NClob mergeNClob(NClob original, NClob target, SessionImplementor session) {
+//			if ( original == null && target == null ) {
+//				return null;
+//			}
+//			try {
+//				final LobCreator lobCreator = session.getFactory().getJdbcServices().getLobCreator( session );
+//				return original == null
+//						? lobCreator.createNClob( "" )
+//						: lobCreator.createNClob( original.getCharacterStream(), original.length() );
+//			}
+//			catch (SQLException e) {
+//				throw session.getFactory().getSQLExceptionHelper().convert( e, "unable to merge NCLOB data" );
+//			}
+//		}
+//	};
+//
+//	public LobMergeStrategy getLobMergeStrategy() {
+//		return NEW_LOCATOR_LOB_MERGE_STRATEGY;
+//	}
 
 
-	// function support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-	protected void registerFunction(String name, SQLFunction function) {
-		// HHH-7721: SQLFunctionRegistry expects all lowercase.  Enforce,
-		// just in case a user's customer dialect uses mixed cases.
-		sqlFunctions.put( name.toLowerCase(), function );
-	}
-
-	/**
-	 * Retrieves a map of the dialect's registered functions
-	 * (functionName => {@link org.hibernate.dialect.function.SQLFunction}).
-	 *
-	 * @return The map of registered functions.
-	 */
-	public final Map<String, SQLFunction> getFunctions() {
-		return sqlFunctions;
-	}
+//	// hibernate type mapping support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//	/**
+//	 * Get the name of the Hibernate {@link org.hibernate.type.Type} associated with the given
+//	 * {@link java.sql.Types} type code.
+//	 *
+//	 * @param code The {@link java.sql.Types} type code
+//	 * @return The Hibernate {@link org.hibernate.type.Type} name.
+//	 * @throws HibernateException If no mapping was specified for that type.
+//	 */
+//	@SuppressWarnings( {"UnusedDeclaration"})
+//	public String getHibernateTypeName(int code) throws HibernateException {
+//		final String result = hibernateTypeNames.get( code );
+//		if ( result == null ) {
+//			throw new HibernateException( "No Hibernate type mapping for java.sql.Types code: " + code );
+//		}
+//		return result;
+//	}
+//
+//	/**
+//	 * Get the name of the Hibernate {@link org.hibernate.type.Type} associated
+//	 * with the given {@link java.sql.Types} typecode with the given storage
+//	 * specification parameters.
+//	 *
+//	 * @param code The {@link java.sql.Types} typecode
+//	 * @param length The datatype length
+//	 * @param precision The datatype precision
+//	 * @param scale The datatype scale
+//	 * @return The Hibernate {@link org.hibernate.type.Type} name.
+//	 * @throws HibernateException If no mapping was specified for that type.
+//	 */
+//	public String getHibernateTypeName(int code, int length, int precision, int scale) throws HibernateException {
+//		final String result = hibernateTypeNames.get( code, length, precision, scale );
+//		if ( result == null ) {
+//			throw new HibernateException(
+//					String.format(
+//							"No Hibernate type mapping for type [code=%s, length=%s]",
+//							code,
+//							length
+//					)
+//			);
+//		}
+//		return result;
+//	}
+//
+//	/**
+//	 * Registers a Hibernate {@link org.hibernate.type.Type} name for the given
+//	 * {@link java.sql.Types} type code and maximum column length.
+//	 *
+//	 * @param code The {@link java.sql.Types} typecode
+//	 * @param capacity The maximum length of database type
+//	 * @param name The Hibernate {@link org.hibernate.type.Type} name
+//	 */
+//	protected void registerHibernateType(int code, long capacity, String name) {
+//		hibernateTypeNames.put( code, capacity, name);
+//	}
+//
+//	/**
+//	 * Registers a Hibernate {@link org.hibernate.type.Type} name for the given
+//	 * {@link java.sql.Types} type code.
+//	 *
+//	 * @param code The {@link java.sql.Types} typecode
+//	 * @param name The Hibernate {@link org.hibernate.type.Type} name
+//	 */
+//	protected void registerHibernateType(int code, String name) {
+//		hibernateTypeNames.put( code, name);
+//	}
+//
+//
+//	// function support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//	protected void registerFunction(String name, SQLFunction function) {
+//		// HHH-7721: SQLFunctionRegistry expects all lowercase.  Enforce,
+//		// just in case a user's customer dialect uses mixed cases.
+//		sqlFunctions.put( name.toLowerCase(), function );
+//	}
+//
+//	/**
+//	 * Retrieves a map of the dialect's registered functions
+//	 * (functionName => {@link org.hibernate.dialect.function.SQLFunction}).
+//	 *
+//	 * @return The map of registered functions.
+//	 */
+//	public final Map<String, SQLFunction> getFunctions() {
+//		return sqlFunctions;
+//	}
 
 
 	// keyword support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -718,26 +658,26 @@ public abstract class Dialect implements ConversionContext {
 
 
 	// native identifier generation ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-	/**
-	 * The class (which implements {@link org.hibernate.id.IdentifierGenerator})
-	 * which acts as this dialects native generation strategy.
-	 * <p/>
-	 * Comes into play whenever the user specifies the native generator.
-	 *
-	 * @return The native generator class.
-	 */
-	public Class getNativeIdentifierGeneratorClass() {
-		if ( supportsIdentityColumns() ) {
-			return IdentityGenerator.class;
-		}
-		else if ( supportsSequences() ) {
-			return SequenceGenerator.class;
-		}
-		else {
-			return TableHiLoGenerator.class;
-		}
-	}
+//
+//	/**
+//	 * The class (which implements {@link org.hibernate.id.IdentifierGenerator})
+//	 * which acts as this dialects native generation strategy.
+//	 * <p/>
+//	 * Comes into play whenever the user specifies the native generator.
+//	 *
+//	 * @return The native generator class.
+//	 */
+//	public Class getNativeIdentifierGeneratorClass() {
+//		if ( supportsIdentityColumns() ) {
+//			return IdentityGenerator.class;
+//		}
+//		else if ( supportsSequences() ) {
+//			return SequenceGenerator.class;
+//		}
+//		else {
+//			return TableHiLoGenerator.class;
+//		}
+//	}
 
 
 	// IDENTITY support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1171,16 +1111,16 @@ public abstract class Dialect implements ConversionContext {
 		return zeroBasedFirstResult;
 	}
 
-	/**
-	 * Build delegate managing LIMIT clause.
-	 *
-	 * @param sql SQL query.
-	 * @param selection Selection criteria. {@code null} in case of unlimited number of rows.
-	 * @return LIMIT clause delegate.
-	 */
-	public LimitHandler buildLimitHandler(String sql, RowSelection selection) {
-		return new LegacyLimitHandler( this, sql, selection );
-	}
+//	/**
+//	 * Build delegate managing LIMIT clause.
+//	 *
+//	 * @param sql SQL query.
+//	 * @param selection Selection criteria. {@code null} in case of unlimited number of rows.
+//	 * @return LIMIT clause delegate.
+//	 */
+//	public LimitHandler buildLimitHandler(String sql, RowSelection selection) {
+//		return new LegacyLimitHandler( this, sql, selection );
+//	}
 
 
 	// lock acquisition support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1213,31 +1153,31 @@ public abstract class Dialect implements ConversionContext {
 		return false;
 	}
 
-	/**
-	 * Get a strategy instance which knows how to acquire a database-level lock
-	 * of the specified mode for this dialect.
-	 *
-	 * @param lockable The persister for the entity to be locked.
-	 * @param lockMode The type of lock to be acquired.
-	 * @return The appropriate locking strategy.
-	 * @since 3.2
-	 */
-	public LockingStrategy getLockingStrategy(Lockable lockable, LockMode lockMode) {
-		switch ( lockMode ) {
-			case PESSIMISTIC_FORCE_INCREMENT:
-				return new PessimisticForceIncrementLockingStrategy( lockable, lockMode );
-			case PESSIMISTIC_WRITE:
-				return new PessimisticWriteSelectLockingStrategy( lockable, lockMode );
-			case PESSIMISTIC_READ:
-				return new PessimisticReadSelectLockingStrategy( lockable, lockMode );
-			case OPTIMISTIC:
-				return new OptimisticLockingStrategy( lockable, lockMode );
-			case OPTIMISTIC_FORCE_INCREMENT:
-				return new OptimisticForceIncrementLockingStrategy( lockable, lockMode );
-			default:
-				return new SelectLockingStrategy( lockable, lockMode );
-		}
-	}
+//	/**
+//	 * Get a strategy instance which knows how to acquire a database-level lock
+//	 * of the specified mode for this dialect.
+//	 *
+//	 * @param lockable The persister for the entity to be locked.
+//	 * @param lockMode The type of lock to be acquired.
+//	 * @return The appropriate locking strategy.
+//	 * @since 3.2
+//	 */
+//	public LockingStrategy getLockingStrategy(Lockable lockable, LockMode lockMode) {
+//		switch ( lockMode ) {
+//			case PESSIMISTIC_FORCE_INCREMENT:
+//				return new PessimisticForceIncrementLockingStrategy( lockable, lockMode );
+//			case PESSIMISTIC_WRITE:
+//				return new PessimisticWriteSelectLockingStrategy( lockable, lockMode );
+//			case PESSIMISTIC_READ:
+//				return new PessimisticReadSelectLockingStrategy( lockable, lockMode );
+//			case OPTIMISTIC:
+//				return new OptimisticLockingStrategy( lockable, lockMode );
+//			case OPTIMISTIC_FORCE_INCREMENT:
+//				return new OptimisticForceIncrementLockingStrategy( lockable, lockMode );
+//			default:
+//				return new SelectLockingStrategy( lockable, lockMode );
+//		}
+//	}
 
 	/**
 	 * Given LockOptions (lockMode, timeout), determine the appropriate for update fragment to use.
@@ -1443,23 +1383,23 @@ public abstract class Dialect implements ConversionContext {
 	public String appendLockHint(LockOptions lockOptions, String tableName){
 		return tableName;
 	}
-
-	/**
-	 * Modifies the given SQL by applying the appropriate updates for the specified
-	 * lock modes and key columns.
-	 * <p/>
-	 * The behavior here is that of an ANSI SQL <tt>SELECT FOR UPDATE</tt>.  This
-	 * method is really intended to allow dialects which do not support
-	 * <tt>SELECT FOR UPDATE</tt> to achieve this in their own fashion.
-	 *
-	 * @param sql the SQL string to modify
-	 * @param aliasedLockOptions lock options indexed by aliased table names.
-	 * @param keyColumnNames a map of key columns indexed by aliased table names.
-	 * @return the modified SQL string.
-	 */
-	public String applyLocksToSql(String sql, LockOptions aliasedLockOptions, Map<String, String[]> keyColumnNames) {
-		return sql + new ForUpdateFragment( this, aliasedLockOptions, keyColumnNames ).toFragmentString();
-	}
+//
+//	/**
+//	 * Modifies the given SQL by applying the appropriate updates for the specified
+//	 * lock modes and key columns.
+//	 * <p/>
+//	 * The behavior here is that of an ANSI SQL <tt>SELECT FOR UPDATE</tt>.  This
+//	 * method is really intended to allow dialects which do not support
+//	 * <tt>SELECT FOR UPDATE</tt> to achieve this in their own fashion.
+//	 *
+//	 * @param sql the SQL string to modify
+//	 * @param aliasedLockOptions lock options indexed by aliased table names.
+//	 * @param keyColumnNames a map of key columns indexed by aliased table names.
+//	 * @return the modified SQL string.
+//	 */
+//	public String applyLocksToSql(String sql, LockOptions aliasedLockOptions, Map<String, String[]> keyColumnNames) {
+//		return sql + new ForUpdateFragment( this, aliasedLockOptions, keyColumnNames ).toFragmentString();
+//	}
 
 
 	// table support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1711,81 +1651,44 @@ public abstract class Dialect implements ConversionContext {
 	}
 
 
-	// SQLException support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-	/**
-	 * Build an instance of the SQLExceptionConverter preferred by this dialect for
-	 * converting SQLExceptions into Hibernate's JDBCException hierarchy.
-	 * <p/>
-	 * The preferred method is to not override this method; if possible,
-	 * {@link #buildSQLExceptionConversionDelegate()} should be overridden
-	 * instead.
-	 *
-	 * If this method is not overridden, the default SQLExceptionConverter
-	 * implementation executes 3 SQLException converter delegates:
-	 * <ol>
-	 *     <li>a "static" delegate based on the JDBC 4 defined SQLException hierarchy;</li>
-	 *     <li>the vendor-specific delegate returned by {@link #buildSQLExceptionConversionDelegate()};
-	 *         (it is strongly recommended that specific Dialect implementations
-	 *         override {@link #buildSQLExceptionConversionDelegate()})</li>
-	 *     <li>a delegate that interprets SQLState codes for either X/Open or SQL-2003 codes,
-	 *         depending on java.sql.DatabaseMetaData#getSQLStateType</li>
-	 * </ol>
-	 * <p/>
-	 * If this method is overridden, it is strongly recommended that the
-	 * returned {@link SQLExceptionConverter} interpret SQL errors based on
-	 * vendor-specific error codes rather than the SQLState since the
-	 * interpretation is more accurate when using vendor-specific ErrorCodes.
-	 *
-	 * @return The Dialect's preferred SQLExceptionConverter, or null to
-	 * indicate that the default {@link SQLExceptionConverter} should be used.
-	 *
-	 * @see {@link #buildSQLExceptionConversionDelegate()}
-	 * @deprecated {@link #buildSQLExceptionConversionDelegate()} should be
-	 * overridden instead.
-	 */
-	@Deprecated
-	public SQLExceptionConverter buildSQLExceptionConverter() {
-		return null;
-	}
-
-	/**
-	 * Build an instance of a {@link SQLExceptionConversionDelegate} for
-	 * interpreting dialect-specific error or SQLState codes.
-	 * <p/>
-	 * When {@link #buildSQLExceptionConverter} returns null, the default 
-	 * {@link SQLExceptionConverter} is used to interpret SQLState and
-	 * error codes. If this method is overridden to return a non-null value,
-	 * the default {@link SQLExceptionConverter} will use the returned
-	 * {@link SQLExceptionConversionDelegate} in addition to the following 
-	 * standard delegates:
-	 * <ol>
-	 *     <li>a "static" delegate based on the JDBC 4 defined SQLException hierarchy;</li>
-	 *     <li>a delegate that interprets SQLState codes for either X/Open or SQL-2003 codes,
-	 *         depending on java.sql.DatabaseMetaData#getSQLStateType</li>
-	 * </ol>
-	 * <p/>
-	 * It is strongly recommended that specific Dialect implementations override this
-	 * method, since interpretation of a SQL error is much more accurate when based on
-	 * the a vendor-specific ErrorCode rather than the SQLState.
-	 * <p/>
-	 * Specific Dialects may override to return whatever is most appropriate for that vendor.
-	 *
-	 * @return The SQLExceptionConversionDelegate for this dialect
-	 */
-	public SQLExceptionConversionDelegate buildSQLExceptionConversionDelegate() {
-		return null;
-	}
-
-	private static final ViolatedConstraintNameExtracter EXTRACTER = new ViolatedConstraintNameExtracter() {
-		public String extractConstraintName(SQLException sqle) {
-			return null;
-		}
-	};
-
-	public ViolatedConstraintNameExtracter getViolatedConstraintNameExtracter() {
-		return EXTRACTER;
-	}
+//
+//	/**
+//	 * Build an instance of a {@link SQLExceptionConversionDelegate} for
+//	 * interpreting dialect-specific error or SQLState codes.
+//	 * <p/>
+//	 * When {@link #buildSQLExceptionConverter} returns null, the default 
+//	 * {@link SQLExceptionConverter} is used to interpret SQLState and
+//	 * error codes. If this method is overridden to return a non-null value,
+//	 * the default {@link SQLExceptionConverter} will use the returned
+//	 * {@link SQLExceptionConversionDelegate} in addition to the following 
+//	 * standard delegates:
+//	 * <ol>
+//	 *     <li>a "static" delegate based on the JDBC 4 defined SQLException hierarchy;</li>
+//	 *     <li>a delegate that interprets SQLState codes for either X/Open or SQL-2003 codes,
+//	 *         depending on java.sql.DatabaseMetaData#getSQLStateType</li>
+//	 * </ol>
+//	 * <p/>
+//	 * It is strongly recommended that specific Dialect implementations override this
+//	 * method, since interpretation of a SQL error is much more accurate when based on
+//	 * the a vendor-specific ErrorCode rather than the SQLState.
+//	 * <p/>
+//	 * Specific Dialects may override to return whatever is most appropriate for that vendor.
+//	 *
+//	 * @return The SQLExceptionConversionDelegate for this dialect
+//	 */
+//	public SQLExceptionConversionDelegate buildSQLExceptionConversionDelegate() {
+//		return null;
+//	}
+//
+//	private static final ViolatedConstraintNameExtracter EXTRACTER = new ViolatedConstraintNameExtracter() {
+//		public String extractConstraintName(SQLException sqle) {
+//			return null;
+//		}
+//	};
+//
+//	public ViolatedConstraintNameExtracter getViolatedConstraintNameExtracter() {
+//		return EXTRACTER;
+//	}
 
 
 	// union subclass support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1818,27 +1721,27 @@ public abstract class Dialect implements ConversionContext {
 
 	// miscellaneous support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-	/**
-	 * Create a {@link org.hibernate.sql.JoinFragment} strategy responsible
-	 * for handling this dialect's variations in how joins are handled.
-	 *
-	 * @return This dialect's {@link org.hibernate.sql.JoinFragment} strategy.
-	 */
-	public JoinFragment createOuterJoinFragment() {
-		return new ANSIJoinFragment();
-	}
-
-	/**
-	 * Create a {@link org.hibernate.sql.CaseFragment} strategy responsible
-	 * for handling this dialect's variations in how CASE statements are
-	 * handled.
-	 *
-	 * @return This dialect's {@link org.hibernate.sql.CaseFragment} strategy.
-	 */
-	public CaseFragment createCaseFragment() {
-		return new ANSICaseFragment();
-	}
+//
+//	/**
+//	 * Create a {@link org.hibernate.sql.JoinFragment} strategy responsible
+//	 * for handling this dialect's variations in how joins are handled.
+//	 *
+//	 * @return This dialect's {@link org.hibernate.sql.JoinFragment} strategy.
+//	 */
+//	public JoinFragment createOuterJoinFragment() {
+//		return new ANSIJoinFragment();
+//	}
+//
+//	/**
+//	 * Create a {@link org.hibernate.sql.CaseFragment} strategy responsible
+//	 * for handling this dialect's variations in how CASE statements are
+//	 * handled.
+//	 *
+//	 * @return This dialect's {@link org.hibernate.sql.CaseFragment} strategy.
+//	 */
+//	public CaseFragment createCaseFragment() {
+//		return new ANSICaseFragment();
+//	}
 
 	/**
 	 * The fragment used to insert a row without specifying any column values.
@@ -2620,14 +2523,6 @@ public abstract class Dialect implements ConversionContext {
 		return "not " + expression;
 	}
 
-	/**
-	 * Get the UniqueDelegate supported by this dialect
-	 *
-	 * @return The UniqueDelegate
-	 */
-	public UniqueDelegate getUniqueDelegate() {
-		return uniqueDelegate;
-	}
 
 	/**
 	 * Does this dialect support the <tt>UNIQUE</tt> column syntax?
@@ -2708,10 +2603,10 @@ public abstract class Dialect implements ConversionContext {
 	public boolean supportsTuplesInSubqueries() {
 		return true;
 	}
-
-	public CallableStatementSupport getCallableStatementSupport() {
-		// most databases do not support returning cursors (ref_cursor)...
-		return StandardCallableStatementSupport.NO_REF_CURSOR_INSTANCE;
-	}
+//
+//	public CallableStatementSupport getCallableStatementSupport() {
+//		// most databases do not support returning cursors (ref_cursor)...
+//		return StandardCallableStatementSupport.NO_REF_CURSOR_INSTANCE;
+//	}
 
 }
