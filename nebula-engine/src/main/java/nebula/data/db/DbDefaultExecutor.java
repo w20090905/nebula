@@ -477,10 +477,4 @@ class DbDefaultExecutor<T> implements DbDataExecutor<T> {
 			}
 		}
 	}
-
-	@Override
-	public DbSqlHelper getHelper() {
-		return this.helper;
-	}
-
 }

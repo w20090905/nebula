@@ -3,8 +3,6 @@ package nebula.data.db;
 import java.util.List;
 
 public interface DbDataExecutor<T> {
-	DbSqlHelper getHelper();
-	
 	T get(Object... keys);
 
 	void insert(T value);
