@@ -24,7 +24,7 @@ public abstract class DbConfiguration {
 
 	TypeNames typeNames = new TypeNames();
 
-	public DbConfiguration(String driverClass, String url, String userName, String password) {
+	protected DbConfiguration(String driverClass, String url, String userName, String password) {
 		this.driverClass = driverClass;
 		this.url = url;
 		this.userName = userName;
@@ -140,7 +140,7 @@ public abstract class DbConfiguration {
 			}
 			log.debug("== database disconnect");
 		} catch (SQLException e) {
-			log.debug("Exception When destroy db");
+			log.debug("Exception When disconnect db");
 			log.debug(e);
 		}
 	}

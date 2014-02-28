@@ -5,6 +5,9 @@ import java.util.TreeMap;
 
 import nebula.lang.RawTypes;
 
+/*
+ * 根据内部类型构建实际DB类型的字段说明
+ */
 public class TypeNames {
 
 	private Map<RawTypes, Map<Long, String>> weighted = new HashMap<RawTypes, Map<Long, String>>();
