@@ -24,8 +24,6 @@
  */
 package org.hibernate.internal.util;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Iterator;
@@ -79,6 +77,7 @@ public final class StringHelper {
 		return buf.toString();
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static String join(String seperator, Iterator objects) {
 		StringBuilder buf = new StringBuilder();
 		if ( objects.hasNext() ) buf.append( objects.next() );
@@ -364,6 +363,7 @@ public final class StringHelper {
 		return buf.append( array[len - 1] ).toString();
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static String[] multiply(String string, Iterator placeholders, Iterator replacements) {
 		String[] result = new String[]{string};
 		while ( placeholders.hasNext() ) {

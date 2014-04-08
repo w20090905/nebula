@@ -32,6 +32,7 @@ import org.hibernate.internal.util.StringHelper;
  * @see ImprovedNamingStrategy a better alternative
  * @author Gavin King
  */
+@SuppressWarnings("serial")
 public class DefaultNamingStrategy implements NamingStrategy, Serializable {
 
 	/**
