@@ -1,5 +1,6 @@
 package http.engine;
 
+import http.HTTP;
 import http.resource.AttachedEntityListResouce;
 import http.resource.AttachedEntityNewResouce;
 import http.resource.EntityListResouce;
@@ -62,13 +63,13 @@ public class EntityResouceEngine implements ResourceEngine {
 			log.trace("resolve path : " + path);
 		}
 
-		String[] paths = path.split("/");
+		String[] paths = path.split(HTTP.Href_Seperator);
 
 		String typeName = null;
 
 		switch (paths.length) {
 		case 6:
-			if ("!new".equalsIgnoreCase(paths[ATTACH_ID])) {
+			if (HTTP.Method_NEW.equalsIgnoreCase(paths[ATTACH_ID])) {
 				return makeAttachedEntityNewResouce(paths[ATTACHTO_TYPENAME], paths[ATTACHTO_ID], paths[ATTACH_TYPENAME]);
 			}
 		case 5:
@@ -76,18 +77,18 @@ public class EntityResouceEngine implements ResourceEngine {
 		case 4:
 			typeName = paths[TYPENAME];
 
-			if ("!new".equalsIgnoreCase(paths[ID])) {
+			if (HTTP.Method_NEW.equalsIgnoreCase(paths[ID])) {
 				return makeEntityNewResouce(typeName);
 			}
 
-			if ("Type".equals(typeName)) {
+			if (HTTP.Type_Type.equals(typeName)) {
 				return makeTypeResouce(typeName, paths[ID]);
 			} else {
 				return makeEntityResouce(typeName, paths[ID]);
 			}
 		case 3:
 			typeName = paths[TYPENAME];
-			if ("Type".equals(typeName)) {
+			if (HTTP.Type_Type.equals(typeName)) {
 				return makeTypeResouce(typeName);
 			} else {
 				return makeEntityListResouce(typeName);
@@ -161,7 +162,7 @@ public class EntityResouceEngine implements ResourceEngine {
 		case Relation:
 			return new TxEntityResource(dataRepos, jsonHolder, storeHolder, id);
 		case Flow:
-			return new FlowResouce(dataRepos, storeHolder, typeBroker,id);
+			return new FlowResouce(dataRepos, storeHolder, typeBroker, id);
 		case Master:
 		default:
 			return new EntityResouce(dataRepos, jsonHolder, storeHolder, typeBroker, id);

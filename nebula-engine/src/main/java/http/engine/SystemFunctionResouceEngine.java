@@ -1,5 +1,6 @@
 package http.engine;
 
+import http.HTTP;
 import http.resource.LoginListResouce;
 import http.resource.SignupResouce;
 
@@ -30,17 +31,17 @@ public class SystemFunctionResouceEngine implements ResourceEngine {
 		this.persistence = dataWareHouse;
 		this.typeBrokers = typeBrokers;
 
-		String typeUserName = "User";
-		String typeUserAccessLogName = "UserAccessLog";
+		String typeUserName = HTTP.Type_User;
+		String typeUserAccessLogName = HTTP.Type_UserAccessLog;
 		Type typeBrokerUser = typeBrokers.getBroker(typeUserName);
 		Type typeBrokerAccessLog = typeBrokers.getBroker(typeUserAccessLogName);
 		DataHelper<Entity, Reader, Writer> jsonBrokerUser = JsonHelperProvider.getHelper(typeBrokerUser);
 		DataHelper<Entity, Reader, Writer> jsonBrokerAccessLog = JsonHelperProvider.getHelper(typeBrokerAccessLog);
-		DataStore<Entity> users = persistence.define(String.class, Entity.class, "User");
-		DataStore<Entity> datas = persistence.define(Long.class, Entity.class, "UserAccessLog");
+		DataStore<Entity> users = persistence.define(String.class, Entity.class, typeUserName);
+		DataStore<Entity> datas = persistence.define(Long.class, Entity.class, typeUserAccessLogName);
 
-		cachedLinks.put("login", new LoginListResouce(jsonBrokerUser, users, datas));
-		cachedLinks.put("signup", new SignupResouce(jsonBrokerAccessLog, users));
+		cachedLinks.put(HTTP.Href_Login, new LoginListResouce(jsonBrokerUser, users, datas));
+		cachedLinks.put(HTTP.Href_Signup, new SignupResouce(jsonBrokerAccessLog, users));
 	}
 
 	@Override
