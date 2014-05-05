@@ -1,5 +1,6 @@
-package nebula.data.impl;
+package nebula.data.impl.id;
 
+import nebula.data.impl.id.CurrentTimeIDGenerator;
 import junit.framework.TestCase;
 
 public class CurrentTimeIDGeneratorTest extends TestCase {

@@ -1,6 +1,8 @@
-package nebula.data.impl;
+package nebula.data.impl.id;
 
-class NativeIDGenerator implements IDGenerator {
+import nebula.data.impl.IDGenerator;
+
+public class NativeIDGenerator implements IDGenerator {
 	private long currentMaxValue;
 
 	public NativeIDGenerator() {

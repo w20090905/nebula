@@ -1,6 +1,8 @@
 package nebula.data.impl;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import nebula.data.impl.id.CurrentTimeIDGenerator;
+import nebula.data.impl.id.NativeIDGenerator;
 import nebula.lang.Field;
 import nebula.lang.Type;
 import nebula.lang.TypeStandalone;
@@ -23,7 +25,7 @@ class IDGenerators {
 			}
 			checkNotNull(keyField);
 
-			idGenerationStrategy = (String) keyField.getAttrs().get("IDGenerationStrategy");
+			idGenerationStrategy = (String) keyField.getAttrs().get(Type.IDGenerationStrategy);
 
 			if ("default".equals(idGenerationStrategy)) {
 				return new CurrentTimeIDGenerator();
@@ -44,7 +46,7 @@ class IDGenerators {
 			}
 			checkNotNull(keyField);
 
-			idGenerationStrategy = (String) keyField.getAttrs().get("IDGenerationStrategy");
+			idGenerationStrategy = (String) keyField.getAttrs().get(Type.IDGenerationStrategy);
 
 			if ("default".equals(idGenerationStrategy)) {
 				return new CurrentTimeIDGenerator();

@@ -14,6 +14,7 @@ public interface Type extends Timable {
 	public static final String ForeignKey = "ForeignKey";
 	public static final String GROUP_BY = "GroupBy";
 	public static final String FormatType = "FormatType";
+	public static final String IDGenerationStrategy="IDGenerationStrategy";
 	
 
 	public static final String LEGACY = "Legacy";

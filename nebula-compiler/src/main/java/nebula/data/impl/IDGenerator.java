@@ -1,6 +1,6 @@
 package nebula.data.impl;
 
-interface IDGenerator {
+public interface IDGenerator {
 	void init(Long initValue);
 	void setSeed(Long seed);
 	Long nextValue(Long seed);

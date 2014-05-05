@@ -1,8 +1,9 @@
-package nebula.data.impl;
+package nebula.data.impl.id;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import nebula.data.impl.IDGenerator;
 
-class CurrentTimeIDGenerator implements IDGenerator {
+public class CurrentTimeIDGenerator implements IDGenerator {
 	long seed;
 
 	public static final long MAX_STEP = 10;
