@@ -169,4 +169,9 @@ public class EntityDataStore implements DataStoreEx<Entity> {
 	public Map<String, Classificator<String, Entity>> getClassificatores() {
 		return this.classificatores;
 	}
+
+	@Override
+	public Type getType() {
+		return this.type;
+	}
 }

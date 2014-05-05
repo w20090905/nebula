@@ -107,5 +107,10 @@ public class TypeDatastore implements DataStore<Type> {
 	public List<Type> listAll() {
 		return this.listAll();
 	}
+	
+	@Override
+	public Type getType() {
+		throw new UnsupportedOperationException();
+	}
 
 }

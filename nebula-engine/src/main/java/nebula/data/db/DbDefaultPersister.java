@@ -25,8 +25,9 @@ import com.google.common.base.Joiner;
 
 /**
  * 单表持久化
+ * 
  * @author wanglocal
- *
+ * 
  * @param <T>
  */
 class DbDefaultPersister<T> implements DbPersister<T> {
@@ -346,7 +347,9 @@ class DbDefaultPersister<T> implements DbPersister<T> {
 
 	@Override
 	public void insert(T value) {
-		log.debug("\tSQL_INSERT : " + value);
+		if (log.isDebugEnabled()) {
+			log.debug("\t" + SQL_INSERT + ": " + value);
+		}
 		executeUpdate(SQL_INSERT, value);
 	}
 

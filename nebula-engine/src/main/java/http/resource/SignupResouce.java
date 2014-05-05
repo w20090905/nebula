@@ -1,8 +1,6 @@
 package http.resource;
 
 import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import nebula.data.DataStore;
 import nebula.data.Entity;
 import nebula.data.impl.EditableEntity;
-import nebula.data.json.DataHelper;
 import nebula.server.Resource;
 
 import org.apache.commons.logging.Log;
@@ -20,11 +17,13 @@ import org.apache.commons.logging.LogFactory;
 public class SignupResouce implements Resource {
 	protected Log log = LogFactory.getLog(this.getClass());
 
+	private final DataStore<Entity> userAccessLogs;
 	private final DataStore<Entity> users;
 	final RedirectResouce redirectTo;
 
-	public SignupResouce(DataHelper<Entity, Reader, Writer> json, DataStore<Entity> users) {
+	public SignupResouce(DataStore<Entity> users, DataStore<Entity> userAccessLogs) {
 		this.users = users;
+		this.userAccessLogs = userAccessLogs;
 		redirectTo = new RedirectResouce("/index.html");
 	}
 
@@ -64,6 +63,12 @@ public class SignupResouce implements Resource {
 			newuser.put("EMail", email);
 			store.add(newuser);
 			store.flush();
+
+			// Log access info
+			EditableEntity accessLog = new EditableEntity();
+			accessLog.put("User_ID", newuser.getID());
+			accessLog.put("Timestamp", System.currentTimeMillis());
+			userAccessLogs.add(accessLog);
 
 			redirectTo.redirectTo(req, resp, "/login.html");
 
