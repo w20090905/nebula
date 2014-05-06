@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Import Format")
+@Refby("3")
+@Table("AD_IMPFORMAT")
+type AdImpFormat {
+@Column("AD_IMPFORMAT_ID") 	!AdImpFormatId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
+	FormatType Attr;
+	Processing YesNo;
+};
+

@@ -1,0 +1,16 @@
+@Legacy("adempiere")
+@Remarks("C_Tax_Acct")
+@Refby("0")
+@Table("C_TAX_ACCT")
+type CTaxAcct {
+@ForeignKeyColumn("C_TAX_ID") @Column("C_TAX_ID") 	!CTax;
+@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	!CAcctSchema;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("T_DUE_ACCT") 	TDueAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("T_LIABILITY_ACCT") 	TLiabilityAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("T_CREDIT_ACCT") 	TCreditAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("T_RECEIVABLES_ACCT") 	TReceivablesAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("T_EXPENSE_ACCT") 	TExpenseAcct CValidCombination;
+};
+

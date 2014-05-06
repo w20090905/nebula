@@ -1,0 +1,20 @@
+@Legacy("adempiere")
+@Remarks("Knowledge Entry")
+@Refby("4")
+@Table("K_ENTRY")
+type KEntry {
+@Column("K_ENTRY_ID") 	!KEntryId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+@ForeignKeyColumn("K_TOPIC_ID") @Column("K_TOPIC_ID") 	KTopic;
+	Rating Amount;
+	IsPublic YesNo;/* 'Y'  */
+	?KeyWords String;
+@ForeignKeyColumn("K_SOURCE_ID") @Column("K_SOURCE_ID") 	?KSource;
+	?DescriptionUrl Url;
+	?ValidTo Date;
+@ForeignKeyColumn("AD_SESSION_ID") @Column("AD_SESSION_ID") 	?AdSession;
+	TextMsg Text;
+};
+

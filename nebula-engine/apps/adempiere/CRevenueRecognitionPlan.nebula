@@ -1,0 +1,18 @@
+@Legacy("adempiere")
+@Remarks("Plan for recognizing or recording revenue")
+@Refby("2")
+@Table("C_REVENUERECOGNITION_PLAN")
+tx CRevenueRecognitionPlan {
+@Column("C_REVENUERECOGNITION_PLAN_ID") 	!CRevenueRecognitionPlanId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	CAcctSchema;
+@ForeignKeyColumn("C_REVENUERECOGNITION_ID") @Column("C_REVENUERECOGNITION_ID") 	CRevenueRecognition;
+@ForeignKeyColumn("C_INVOICELINE_ID") @Column("C_INVOICELINE_ID") 	CInvoiceLine;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("UNEARNEDREVENUE_ACCT") 	UnearnedRevenueAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("P_REVENUE_ACCT") 	PRevenueAcct CValidCombination;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
+	TotalAmt Amount;/* 0  */
+	RecognizedAmt Amount;/* 0  */
+};
+

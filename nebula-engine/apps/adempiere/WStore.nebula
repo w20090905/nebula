@@ -1,0 +1,44 @@
+@Legacy("adempiere")
+@Remarks("A Web Store of the Client")
+@Refby("2")
+@Table("W_STORE")
+type WStore {
+@Column("W_STORE_ID") 	!WStoreId ID;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+	?WstoreEmail Email;
+	?WstoreUser String;
+	?WstoreUserPw String;
+	?WebInfo String;
+	?WebParam1 String;
+	?WebParam2 String;
+	?WebParam3 String;
+	?WebParam4 String;
+	?WebParam5 String;
+	?WebParam6 String;
+	IsMenuAssets YesNo;/* 'Y'  */
+	IsMenuOrders YesNo;/* 'Y'  */
+	IsMenuInvoices YesNo;/* 'Y'  */
+	IsMenuShipmentS YesNo;/* 'Y'  */
+	IsMenuPayments YesNo;/* 'Y'  */
+	IsMenuRfqs YesNo;/* 'Y'  */
+	IsMenuRequests YesNo;/* 'Y'  */
+	IsMenuInterestS YesNo;/* 'Y'  */
+	IsMenuRegistrations YesNo;/* 'Y'  */
+	IsMenuContact YesNo;/* 'Y'  */
+	?EmailHeader Email;
+	?EmailFooter Email;
+@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	SalesRep AdUser;
+@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	MWarehouse;
+@ForeignKeyColumn("M_PRICELIST_ID") @Column("M_PRICELIST_ID") 	MPriceList;
+	WebContext String;
+	?WebOrderEmail Email;
+@ForeignKeyColumn("C_PAYMENTTERM_ID") @Column("C_PAYMENTTERM_ID") 	?CPaymentTerm;
+	IsDefault YesNo;/* 'N'  */
+	Url;/* 'http://localhost'  */
+	?StyleSheet String;
+};
+

@@ -1,0 +1,27 @@
+@Legacy("adempiere")
+@Remarks("System Registration")
+@Refby("0")
+@Table("AD_REGISTRATION")
+type AdRegistration {
+@Column("AD_REGISTRATION_ID") 	!AdRegistrationId ID;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	!AdClient AdSystem;
+@ForeignKeyColumn("AD_SYSTEM_ID") @Column("AD_SYSTEM_ID") 	!AdSystem;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	IsRegistered YesNo;/* 'N'  */
+@Column("RECORD_ID") 	?RecordId ID;
+	?Description;
+@Column("C_LOCATION_ID") 	?CLocationId ID;
+	IsInProduction YesNo;/* 'N'  */
+	?StartProductionDate Date;
+	IsAllowPublish YesNo;/* 'Y'  */
+	IsAllowStatistics YesNo;/* 'Y'  */
+	?PlatformInfo String;
+	?IndustryInfo String;
+	?SalesVolume Number;/* 0 */
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
+	?NumberEmployees Number;/* 0 */
+	?Processing YesNo;
+@Column("REMOTE_HOST") 	?RemoteHost Host;
+@Column("REMOTE_ADDR") 	?RemoteAddr Message;
+};
+

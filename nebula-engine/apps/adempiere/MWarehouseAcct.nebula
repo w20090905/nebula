@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("M_Warehouse_Acct")
+@Refby("0")
+@Table("M_WAREHOUSE_ACCT")
+type MWarehouseAcct {
+@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	!MWarehouse;
+@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	!CAcctSchema;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("W_INVENTORY_ACCT") 	WInventoryAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("W_INVACTUALADJUST_ACCT") 	WInvActualAdjustAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("W_DIFFERENCES_ACCT") 	WDifferencesAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("W_REVALUATION_ACCT") 	WRevaluationAcct CValidCombination;
+};
+

@@ -1,0 +1,18 @@
+@Legacy("adempiere")
+@Remarks("Web Container Stage contains the staging content like images, text etc.")
+@Refby("0")
+@Table("CM_CSTAGE_TRL")
+type CmCStageTrl {
+@ForeignKeyColumn("CM_CSTAGE_ID") @Column("CM_CSTAGE_ID") 	!CmCStage;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	IsTranslated YesNo;/* 'N'  */
+	*Name;
+	?Title;
+@Column("META_DESCRIPTION") 	?MetaDescription Description;
+@Column("META_KEYWORDS") 	?MetaKeyWords String;
+	?StructureXml String;
+	?ContainerXml String;
+};
+

@@ -1,0 +1,57 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("AD_FIELD_VT")
+type AdFieldVt {
+@Column("AD_LANGUAGE") 	?AdLanguage Code;
+@Column("AD_WINDOW_ID") 	?AdWindowId ID;
+@Column("AD_TAB_ID") 	AdTabId ID;
+@Column("AD_FIELD_ID") 	AdFieldId ID;
+@Column("AD_TABLE_ID") 	?AdTableId ID;
+@Column("AD_COLUMN_ID") 	?AdColumnId ID;
+	?Name;
+	?Description;
+	?Help;
+	IsDisplayed YesNo;
+	?DisplayLogic String;
+	?DisplayLength Length;
+	?SeqNo;
+	?SortNo SeqNo;
+	?IsSameLine YesNo;
+	IsHeading YesNo;
+	?IsFieldOnly YesNo;
+	IsReadonly YesNo;
+	?IsEncryptedField YesNo;
+	?ObscureType Attr;
+	?ColumnName Name;
+	?ColumnSql String;
+	?FieldLength Length;
+	?VFormat String;
+	?DefaultValue String;
+	?IsKey YesNo;
+	?IsParent YesNo;
+	?IsMandatory YesNo;
+	?IsIdentifier YesNo;
+	?IsTranslated YesNo;
+@Column("AD_REFERENCE_VALUE_ID") 	?AdReferenceValueId ID;
+	?Callout String;
+@Column("AD_REFERENCE_ID") 	?AdReferenceId ID;
+@Column("AD_VAL_RULE_ID") 	?AdValRuleId ID;
+@Column("AD_PROCESS_ID") 	?AdProcessId ID;
+	?IsAlwaysUpdateable YesNo;
+	?ReadonlyLogic String;
+	?MandatoryLogic String;
+	?IsUpdateable YesNo;
+	?IsEncryptedColumn YesNo;
+	?IsSelectionColumn YesNo;
+	?TableName Name;
+	?ValueMin String;
+	?ValueMax String;
+	?FieldGroup String;
+	?ValidationCode Code;
+@Column("INCLUDED_TAB_ID") 	?IncludedTabId ID;
+	?FieldGroupType Attr;
+	?IsCollapsedByDefault YesNo;
+	?InfoFactoryClass String;
+};
+

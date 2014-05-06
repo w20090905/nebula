@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Period Control")
+@Refby("0")
+@Table("C_PERIODCONTROL")
+tx CPeriodControl {
+@Column("C_PERIODCONTROL_ID") 	!CPeriodControlId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_PERIOD_ID") @Column("C_PERIOD_ID") 	CPeriod;
+	DocBaseType Attr;
+	?PeriodStatus Attr;
+	PeriodAction Attr;
+	?Processing YesNo;
+};
+

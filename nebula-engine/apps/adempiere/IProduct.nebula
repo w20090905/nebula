@@ -1,0 +1,55 @@
+@Legacy("adempiere")
+@Remarks("Import Item or Service")
+@Refby("0")
+@Table("I_PRODUCT")
+type IProduct {
+@Column("I_PRODUCT_ID") 	!IProductId ID;
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@Column("AD_ORG_ID") 	?AdOrgId ID;
+@Column("I_ISIMPORTED") 	IIsImported YesNo;/* 'N'  */
+@Column("I_ERRORMSG") 	?IErrorMsg Message;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+	?Value String;
+	?Name;
+	?Description;
+	?DocumentNote Note;
+	?Help;
+	?Upc;
+	?Sku;
+	?X12de355 String;
+@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_ID") 	?CUom;
+@Column("PRODUCTCATEGORY_VALUE") 	?ProductCategoryValue String;
+@ForeignKeyColumn("M_PRODUCT_CATEGORY_ID") @Column("M_PRODUCT_CATEGORY_ID") 	?MProductCategory;
+	?ProductType Attr;/* 'I' */
+	?Classification String;
+	?Volume Number;/* 0 */
+	?Weight;/* 0 */
+	?ShelfWidth Width;
+	?ShelfHeight Height;
+	?ShelfDepth Depth;
+	?UnitsPerPallet Number;
+	?Discontinued YesNo;/* 'N' */
+	?DiscontinuedBy Date;
+	?ImageUrl Url;
+	?DescriptionUrl Url;
+@Column("BPARTNER_VALUE") 	?BpartnerValue String;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+@Column("ISO_CODE") 	?IsoCode Code;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
+	?PriceList Number;/* 0 */
+	?PricePo Number;/* 0 */
+	?RoyaltyAmt Amount;/* 0 */
+	?PriceEffective null;
+	?VendorProductNo String;
+	?VendorCategory String;
+	?Manufacturer String;
+@Column("ORDER_MIN") 	?OrderMin Number;/* 0 */
+@Column("ORDER_PACK") 	?OrderPack Number;/* 0 */
+	?CostPerOrder Number;/* 0 */
+@Column("DELIVERYTIME_PROMISED") 	?DeliveryTimePromised Number;
+	?Processing YesNo;
+	?Processed YesNo;/* 'N' */
+	?PriceStd Number;
+	?PriceLimit Number;
+};
+

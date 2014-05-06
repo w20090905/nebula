@@ -1,0 +1,54 @@
+@Legacy("adempiere")
+@Remarks("Asset used internally or by customers")
+@Refby("15")
+@Table("A_ASSET")
+type AAsset {
+@Column("A_ASSET_ID") 	!AAssetId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	Value String;
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("A_ASSET_GROUP_ID") @Column("A_ASSET_GROUP_ID") 	AAssetGroup;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+	?SerNo String;
+	?Lot Code;
+	?VersionNo String;
+	?GuaranteeDate Date;
+	?AssetServiceDate Date;
+	IsOwned YesNo;/* 'Y'  */
+	?AssetDepreciationDate Date;
+	?UseLifeYearS Number;
+	?UseLifeMonths Count;
+	?LifeUseUnits Number;
+	?UseUnits Number;
+	IsDisposed YesNo;/* 'N'  */
+	?AssetDisposalDate Date;
+	IsInPosession YesNo;/* 'Y'  */
+	?LocationComment String;
+@ForeignKeyColumn("M_LOCATOR_ID") @Column("M_LOCATOR_ID") 	?MLocator;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNER_LOCATION_ID") 	?CBpartnerLocation;
+@ForeignKeyColumn("C_LOCATION_ID") @Column("C_LOCATION_ID") 	?CLocation;
+	?Processing YesNo;
+	IsDepreciated YesNo;/* 'Y'  */
+	IsFullYDepreciated YesNo;/* 'N'  */
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstance;/* 0 */
+	?Qty Quantity;
+@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNERSR_ID") 	?CBpartnerSr CBpartner;
+@ForeignKeyColumn("M_INOUTLINE_ID") @Column("M_INOUTLINE_ID") 	?MInoutLine;
+	?LastMaintenenceDate Date;
+	?NextMaintenenceDate Date;/* NULL  */
+	?LastMaintenanceUseUnit Number;
+	?NextMaintenanceUseUnit Number;
+	?LeaseTerminationDate Date;/* NULL  */
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("LEASE_BPARTNER_ID") 	?LeaseBpartner CBpartner;/* NULL  */
+	?LastMaintenanceNote Note;/* NULL  */
+	?LastMaintenanceDate Date;/* NULL  */
+	?LastMaintenanceUnit Number;/* NULL  */
+	?NextMaintenenceUnit Number;/* NULL  */
+};
+

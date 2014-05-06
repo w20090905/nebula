@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Collection of windows, reports")
+@Refby("0")
+@Table("AD_WORKBENCH_TRL")
+type AdWorkbenchTrl {
+@ForeignKeyColumn("AD_WORKBENCH_ID") @Column("AD_WORKBENCH_ID") 	!AdWorkbench;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+	IsTranslated YesNo;/* 'N'  */
+};
+

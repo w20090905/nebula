@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Contains info on used URLs")
+@Refby("0")
+@Table("CM_CONTAINER_URL")
+tx CmContainerUrl {
+@Column("CM_CONTAINER_URL_ID") 	!CmContainerUrlId ID;/* NULL  */
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("CM_CONTAINER_ID") @Column("CM_CONTAINER_ID") 	CmContainer;
+	Checked null;
+	Status Attr;
+@Column("LAST_RESULT") 	LastResult String;
+};
+

@@ -1,0 +1,12 @@
+@Legacy("adempiere")
+@Remarks("Issue Status")
+@Refby("1")
+@Table("R_ISSUESTATUS")
+type RIssueStatus {
+@Column("R_ISSUESTATUS_ID") 	!RIssueStatusId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+};
+

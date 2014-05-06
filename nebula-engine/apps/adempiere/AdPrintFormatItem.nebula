@@ -1,0 +1,61 @@
+@Legacy("adempiere")
+@Remarks("Item/Column in the Print format")
+@Refby("7")
+@Table("AD_PRINTFORMATITEM")
+type AdPrintFormatItem {
+@Column("AD_PRINTFORMATITEM_ID") 	!AdPrintFormatItemId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("AD_PRINTFORMAT_ID") @Column("AD_PRINTFORMAT_ID") 	AdPrintFormat;
+	*Name;
+	?PrintName Name;
+	IsPrinted YesNo;/* 'Y'  */
+	PrintAreaType Attr;
+	SeqNo;
+	PrintFormatType Attr;
+@ForeignKeyColumn("AD_COLUMN_ID") @Column("AD_COLUMN_ID") 	?AdColumn;
+@ForeignKeyColumn("AD_PRINTFORMAT_ID") @Column("AD_PRINTFORMATCHILD_ID") 	?AdPrintFormatChild AdPrintFormat;
+	IsRelativePosition YesNo;/* 'Y'  */
+	IsNextLine YesNo;/* 'Y'  */
+	XSpace Length;
+	YSpace Length;
+	XPosition Position;
+	YPosition Position;
+	MaxWidth Width;
+	IsHeightOneLine YesNo;/* 'Y'  */
+	MaxHeight Height;
+	FieldAlignmentType Attr;
+	LineAlignmentType Attr;
+@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("AD_PRINTCOLOR_ID") 	?AdPrintColor;
+@ForeignKeyColumn("AD_PRINTFONT_ID") @Column("AD_PRINTFONT_ID") 	?AdPrintFont;
+	IsOrderBy YesNo;/* 'N'  */
+	SortNo SeqNo;
+	IsGroupBy YesNo;/* 'N'  */
+	IsPageBreak YesNo;/* 'N'  */
+	IsSummarized YesNo;/* 'N'  */
+	ImageIsAttached YesNo;/* 'N'  */
+	?ImageUrl Url;
+	IsAveraged YesNo;/* 'N'  */
+	IsCounted YesNo;/* 'N'  */
+	IsSetnlPosition YesNo;/* 'N' */
+	IsSuppressNull YesNo;/* 'N' */
+	?BelowColumn Number;
+@ForeignKeyColumn("AD_PRINTGRAPH_ID") @Column("AD_PRINTGRAPH_ID") 	?AdPrintGraph;
+	IsFixedWidth YesNo;/* 'N' */
+	IsNextPage YesNo;/* 'N' */
+	?PrintNameSuffix String;
+	IsMinCalc YesNo;/* 'N'  */
+	IsMaxCalc YesNo;/* 'N'  */
+	IsRunningTotal YesNo;/* 'N'  */
+	?RunningTotalLines Count;
+	IsVarianceCalc YesNo;/* 'N'  */
+	IsDeviationCalc YesNo;/* 'N'  */
+	IsFilledRectangle YesNo;/* 'N'  */
+	?LineWidth Width;
+	?ArcDiameter Number;
+	?ShapeType Attr;
+	IsCentrallyMaintained YesNo;/* 'Y'  */
+	IsImageField YesNo;/* 'N'  */
+	?BarCodeType Attr;
+};
+

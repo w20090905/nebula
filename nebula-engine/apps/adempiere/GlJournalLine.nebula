@@ -1,0 +1,26 @@
+@Legacy("adempiere")
+@Remarks("General Ledger Journal Line")
+@Refby("1")
+@Table("GL_JOURNALLINE")
+tx GlJournalLine {
+@Column("GL_JOURNALLINE_ID") 	!GlJournalLineId ID;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("GL_JOURNAL_ID") @Column("GL_JOURNAL_ID") 	GlJournal;
+	Line Number;
+	IsGenerated YesNo;/* 'N'  */
+	?Description;
+	AmtSourceDr Amount;/* 0  */
+	AmtSourceCr Amount;/* 0  */
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
+	CurrencyRate Amount;/* 0  */
+	DateAcct Date;
+	AmtAcctDr Amount;/* 0  */
+	AmtAcctCr Amount;/* 0  */
+@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_ID") 	?CUom;
+	?Qty Quantity;/* 0 */
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("C_VALIDCOMBINATION_ID") 	CValidCombination;
+@ForeignKeyColumn("C_CONVERSIONTYPE_ID") @Column("C_CONVERSIONTYPE_ID") 	CConversionType;
+	Processed YesNo;/* 'N'  */
+};
+

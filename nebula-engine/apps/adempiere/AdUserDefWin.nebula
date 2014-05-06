@@ -1,0 +1,20 @@
+@Legacy("adempiere")
+@Remarks("User defined Window")
+@Refby("1")
+@Table("AD_USERDEF_WIN")
+type AdUserDefWin {
+@Column("AD_USERDEF_WIN_ID") 	!AdUserDefWinId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("AD_ROLE_ID") @Column("AD_ROLE_ID") 	?AdRole;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+@ForeignKeyColumn("AD_WINDOW_ID") @Column("AD_WINDOW_ID") 	AdWindow;
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	?AdLanguage;
+	IsDefault YesNo;/* 'N'  */
+	IsReadonly YesNo;/* 'N'  */
+	IsUserUpdateable YesNo;/* 'Y'  */
+};
+

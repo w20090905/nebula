@@ -1,0 +1,26 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("RV_CASH_DETAIL")
+type RvCashDetail {
+@Column("C_CASH_ID") 	CCashId ID;
+@Column("C_CASHLINE_ID") 	CCashLineId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("C_CASHBOOK_ID") 	CCashBookId ID;
+	*Name;
+	StatementDate Date;
+	DateAcct Date;
+	Processed String;
+	Posted String;
+	Line Number;
+	?Description;
+	CashType Attr;
+@Column("C_CURRENCY_ID") 	?CCurrencyId ID;
+	Amount;
+	?ConvertedAmt Amount;
+@Column("C_BANKACCOUNT_ID") 	?CBankAccountId ID;
+@Column("C_INVOICE_ID") 	?CInvoiceId ID;
+@Column("C_CHARGE_ID") 	?CChargeId ID;
+};
+

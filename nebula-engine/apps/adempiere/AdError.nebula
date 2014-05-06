@@ -1,0 +1,13 @@
+@Legacy("adempiere")
+@Remarks("Error")
+@Refby("0")
+@Table("AD_ERROR")
+type AdError {
+@Column("AD_ERROR_ID") 	!AdErrorId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Code;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	?AdLanguage;
+};
+

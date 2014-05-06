@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("POS Function Key")
+@Refby("0")
+@Table("C_POSKEY")
+type CPosKey {
+@Column("C_POSKEY_ID") 	!CPosKeyId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+@ForeignKeyColumn("C_POSKEYLAYOUT_ID") @Column("C_POSKEYLAYOUT_ID") 	CPosKeyLayout;
+	SeqNo;/* 0  */
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+	Qty Quantity;
+@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("AD_PRINTCOLOR_ID") 	?AdPrintColor;
+};
+

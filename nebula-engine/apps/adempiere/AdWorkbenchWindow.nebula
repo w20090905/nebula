@@ -1,0 +1,18 @@
+@Legacy("adempiere")
+@Remarks("Workbench Window")
+@Refby("0")
+@Table("AD_WORKBENCHWINDOW")
+tx AdWorkbenchWindow {
+@Column("AD_WORKBENCHWINDOW_ID") 	!AdWorkbenchWindowId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("AD_WORKBENCH_ID") @Column("AD_WORKBENCH_ID") 	AdWorkbench;
+	SeqNo;
+	IsPrimary YesNo;/* 'N'  */
+@ForeignKeyColumn("AD_WINDOW_ID") @Column("AD_WINDOW_ID") 	?AdWindow;
+@ForeignKeyColumn("AD_FORM_ID") @Column("AD_FORM_ID") 	?AdForm;
+@ForeignKeyColumn("AD_PROCESS_ID") @Column("AD_PROCESS_ID") 	?AdProcess;
+@ForeignKeyColumn("AD_TASK_ID") @Column("AD_TASK_ID") 	?AdTask;
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+};
+

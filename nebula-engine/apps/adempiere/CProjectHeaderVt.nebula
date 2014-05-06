@@ -1,0 +1,58 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("C_PROJECT_HEADER_VT")
+type CProjectHeaderVt {
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("AD_LANGUAGE") 	?AdLanguage Code;
+@Column("C_PROJECT_ID") 	CProjectId ID;
+	Value String;
+	ProjectName Name;
+	?Description;
+	?Note;
+	IsSummary YesNo;
+	?ProjectCategory String;
+@Column("ORG_LOCATION_ID") 	?OrgLocationId ID;
+	TaxId String;
+@Column("C_PROJECTTYPE_ID") 	?CProjectTypeId ID;
+	?ProjectTypeName Name;
+@Column("C_PHASE_ID") 	?CPhaseId ID;
+	?ProjectPhaseName Name;
+@Column("SALESREP_ID") 	?SalesRepId ID;
+@Column("SALESREP_NAME") 	?SalesRepName Name;
+@Column("C_BPARTNER_ID") 	?CBpartnerId ID;
+	?BpValue String;
+	?BpTaxId String;
+	?Naics;
+	?Duns;
+	?BpGreeting String;
+	?Name;
+	?Name2 Name;
+	?BpContactGreeting String;
+	?Title;
+	?Phone;
+	?ContactName Name;
+@Column("C_LOCATION_ID") 	?CLocationId ID;
+	?ReferenceNo String;
+	?PaymentTerm String;
+	?PaymentTermNote Note;
+	?PoReference String;
+@Column("C_CURRENCY_ID") 	CCurrencyId ID;
+@Column("M_PRICELIST_VERSION_ID") 	?MPriceListVersionId ID;
+@Column("C_CAMPAIGN_ID") 	?CCampaignId ID;
+	PlannedAmt Amount;
+	PlannedQty Quantity;
+	PlannedMarginAmt Amount;
+	InvoicedAmt Amount;
+	InvoicedQty Quantity;
+	ProjectBalanceAmt Amount;
+	IsCommitment YesNo;
+	CommittedAmt Amount;
+	CommittedQty Quantity;
+	?DateContract Date;
+	?DateFinish Date;
+	IsCommitCeiling YesNo;
+@Column("M_WAREHOUSE_ID") 	?MWarehouseId ID;
+};
+

@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Result of the execution of the Accounting Processor")
+@Refby("0")
+@Table("C_ACCTPROCESSORLOG")
+type CAcctProcessorLog {
+@ForeignKeyColumn("C_ACCTPROCESSOR_ID") @Column("C_ACCTPROCESSOR_ID") 	!CAcctProcessor;
+@Column("C_ACCTPROCESSORLOG_ID") 	!CAcctProcessorLogId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	IsError YesNo;/* 'N'  	  */
+	?Summary String;
+	?Reference String;
+	?Description;
+	?TextMsg Text;
+	?BinaryData Text;
+};
+

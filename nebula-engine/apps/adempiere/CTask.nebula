@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Standard Project Type Task")
+@Refby("1")
+@Table("C_TASK")
+type CTask {
+@Column("C_TASK_ID") 	!CTaskId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	SeqNo;
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("C_PHASE_ID") @Column("C_PHASE_ID") 	CPhase;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+	StandardQty Quantity;/* 0  	  */
+};
+

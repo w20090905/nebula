@@ -1,0 +1,27 @@
+@Legacy("adempiere")
+@Remarks("An Advertisement is something like a banner")
+@Refby("0")
+@Table("CM_AD")
+type CmAd {
+@Column("CM_AD_ID") 	!CmAdId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("CM_AD_CAT_ID") @Column("CM_AD_CAT_ID") 	CmAdCat;
+@ForeignKeyColumn("CM_MEDIA_ID") @Column("CM_MEDIA_ID") 	CmMedia;
+	?TargetUrl Url;
+@Column("TARGET_FRAME") 	TargetFrame String;
+	ActualClick Number;/* 0  */
+	MaxClick Number;/* 0  */
+	ActualImpRession Number;/* 0  */
+	MaxImpRession Number;/* 0  */
+	StartImpRession Number;/* 0  */
+	StartDate Date;
+	?EndDate Date;
+	?ContentHtml String;
+	IsAdFlag YesNo;/* 'Y'  */
+	IsLogged YesNo;/* 'Y'  */
+};
+

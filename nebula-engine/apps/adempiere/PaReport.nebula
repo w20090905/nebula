@@ -1,0 +1,22 @@
+@Legacy("adempiere")
+@Remarks("Financial Report")
+@Refby("0")
+@Table("PA_REPORT")
+type PaReport {
+@Column("PA_REPORT_ID") 	!PaReportId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	?AdOrg;
+	*Name;
+	?Description;
+@ForeignKeyColumn("PA_REPORTLINESET_ID") @Column("PA_REPORTLINESET_ID") 	PaReportLineSet;
+@ForeignKeyColumn("PA_REPORTCOLUMNSET_ID") @Column("PA_REPORTCOLUMNSET_ID") 	PaReportColumnSet;
+@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	CAcctSchema;
+@ForeignKeyColumn("C_CALENDAR_ID") @Column("C_CALENDAR_ID") 	CCalendar;
+	Processing YesNo;
+@ForeignKeyColumn("AD_PRINTFORMAT_ID") @Column("AD_PRINTFORMAT_ID") 	?AdPrintFormat;
+	ListSourceS YesNo;/* 'N'  */
+	ListTrx YesNo;/* 'N'  */
+@ForeignKeyColumn("AD_PROCESS_ID") @Column("JASPERPROCESS_ID") 	?JasperProcess AdProcess;
+	?JasperProcessing YesNo;
+};
+

@@ -1,0 +1,18 @@
+@Legacy("adempiere")
+@Remarks("Log of Access to the System")
+@Refby("0")
+@Table("AD_ACCESSLOG")
+tx AdAccessLog {
+@Column("AD_ACCESSLOG_ID") 	!AdAccessLogId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	?AdTable;
+@ForeignKeyColumn("AD_COLUMN_ID") @Column("AD_COLUMN_ID") 	?AdColumn;
+@Column("RECORD_ID") 	?RecordId ID;
+@Column("REMOTE_ADDR") 	?RemoteAddr Message;
+@Column("REMOTE_HOST") 	?RemoteHost Host;
+	?Description;
+	?TextMsg Text;
+	?Reply String;
+};
+

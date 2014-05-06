@@ -1,0 +1,20 @@
+@Legacy("adempiere")
+@Remarks("Request for Quotation Line Quantity")
+@Refby("1")
+@Table("C_RFQLINEQTY")
+tx CRfqLineQty {
+@Column("C_RFQLINEQTY_ID") 	!CRfqLineQtyId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_RFQLINE_ID") @Column("C_RFQLINE_ID") 	CRfqLine;
+@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_ID") 	CUom;
+	Qty Quantity;/* 0  */
+	?Margin Length;
+	IsPurchaseQty YesNo;/* 'N'  */
+	?BestResponseAmt Amount;/* 0 */
+	IsOfferQty YesNo;/* 'N'  */
+	?OfferAmt Amount;/* 0 */
+	BenchmarkPrice Number;/* 0  */
+	IsRfqQty YesNo;/* 'Y'  */
+};
+

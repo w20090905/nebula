@@ -1,0 +1,66 @@
+@Legacy("adempiere")
+@Remarks("Request from a Business Partner or Prospect")
+@Refby("6")
+@Table("R_REQUEST")
+tx RRequest {
+@Column("R_REQUEST_ID") 	!RRequestId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	DocumentNo String;
+@ForeignKeyColumn("R_REQUESTTYPE_ID") @Column("R_REQUESTTYPE_ID") 	RRequestType;
+@ForeignKeyColumn("R_GROUP_ID") @Column("R_GROUP_ID") 	?RGroup;
+@ForeignKeyColumn("R_CATEGORY_ID") @Column("R_CATEGORY_ID") 	?RCategory;
+@ForeignKeyColumn("R_STATUS_ID") @Column("R_STATUS_ID") 	?RStatus;
+@ForeignKeyColumn("R_RESOLUTION_ID") @Column("R_RESOLUTION_ID") 	?RResolution;
+@ForeignKeyColumn("R_REQUEST_ID") @Column("R_REQUESTRELATED_ID") 	?RRequestRelated RRequest;
+	Priority String;
+	?PriorityUser String;
+	DueType Attr;
+	Summary String;
+	ConfidentialType Attr;/* 'C' */
+	IsEscalated YesNo;/* 'N'  */
+	IsSelfService YesNo;/* 'N'  */
+@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	?SalesRep AdUser;
+@ForeignKeyColumn("AD_ROLE_ID") @Column("AD_ROLE_ID") 	?AdRole;
+	?DateLastAction Date;
+	?DateLastAlert Date;
+	?LastResult String;
+	Processed YesNo;/* 'N'  */
+	IsInvoiced YesNo;/* 'N'  */
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
+@ForeignKeyColumn("C_ORDER_ID") @Column("C_ORDER_ID") 	?COrder;
+@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
+@ForeignKeyColumn("C_PAYMENT_ID") @Column("C_PAYMENT_ID") 	?CPayment;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+@ForeignKeyColumn("A_ASSET_ID") @Column("A_ASSET_ID") 	?AAsset;
+@ForeignKeyColumn("M_INOUT_ID") @Column("M_INOUT_ID") 	?MInout;
+@ForeignKeyColumn("M_RMA_ID") @Column("M_RMA_ID") 	?MRma;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	?AdTable;
+@Column("RECORD_ID") 	?RecordId ID;
+	RequestAmt Amount;/* 0  */
+@ForeignKeyColumn("R_MAILTEXT_ID") @Column("R_MAILTEXT_ID") 	?RMailText;
+	?Result String;
+	ConfidentialTypeEntry String;
+@ForeignKeyColumn("R_STANDARDRESPONSE_ID") @Column("R_STANDARDRESPONSE_ID") 	?RStandardResponse;
+	?NextAction Attr;
+	?DateNextAction Date;
+	?StartTime Date;
+	?EndTime Date;
+	?QtySpent Number;/* 0 */
+	?QtyInvoiced Number;/* 0 */
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCTSPENT_ID") 	?MProductSpent MProduct;
+@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
+	?StartDate Date;
+	?CloseDate Date;
+@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICEREQUEST_ID") 	?CInvoiceRequest CInvoice;
+@ForeignKeyColumn("M_CHANGEREQUEST_ID") @Column("M_CHANGEREQUEST_ID") 	?MChangeRequest;
+	?TaskStatus Attr;
+	?QtyPlan Number;
+	?DateCompletePlan Date;
+	?DateStartPlan Date;
+@ForeignKeyColumn("M_CHANGENOTICE_ID") @Column("M_FIXCHANGENOTICE_ID") 	?MFixChangeNotIce MChangeNotIce;
+};
+

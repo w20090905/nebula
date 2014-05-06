@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Request Category")
+@Refby("3")
+@Table("R_CATEGORY")
+type RCategory {
+@Column("R_CATEGORY_ID") 	!RCategoryId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+};
+

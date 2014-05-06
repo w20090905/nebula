@@ -1,0 +1,29 @@
+@Legacy("adempiere")
+@Remarks("Movement of Inventory")
+@Refby("2")
+@Table("M_MOVEMENT")
+tx MMovement {
+@Column("M_MOVEMENT_ID") 	!MMovementId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	DocumentNo String;
+	?Description;
+	MovementDate Date;
+	Posted YesNo;/* 'N'  */
+	Processed YesNo;/* 'N'  */
+	?Processing YesNo;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
+@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
+@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER1_ID") 	?User1 CElementValue;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER2_ID") 	?User2 CElementValue;
+	?DateReceived Date;
+	DocAction Attr;
+	DocStatus Attr;
+	IsInTransit YesNo;/* 'N'  */
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	CDocType;
+	IsApproved YesNo;/* 'N'  */
+	?ApprovalAmt Amount;
+};
+

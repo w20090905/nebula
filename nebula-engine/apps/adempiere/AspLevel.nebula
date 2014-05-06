@@ -1,0 +1,16 @@
+@Legacy("adempiere")
+@Remarks("ASP Level")
+@Refby("9")
+@Table("ASP_LEVEL")
+type AspLevel {
+@Column("AD_CLIENT_ID") 	AdClientId ID;/* NULL   */
+@Column("AD_ORG_ID") 	AdOrgId ID;/* NULL   */
+@Column("ASP_LEVEL_ID") 	!AspLevelId ID;
+@ForeignKeyColumn("ASP_MODULE_ID") @Column("ASP_MODULE_ID") 	AspModule;
+	?Description;
+	?Help;
+	*Name;
+	?Processing YesNo;
+	Value String;
+};
+

@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Web Counter Count Management")
+@Refby("2")
+@Table("W_COUNTERCOUNT")
+type WCounterCount {
+@Column("W_COUNTERCOUNT_ID") 	!WCounterCountId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	PageUrl Url;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+};
+

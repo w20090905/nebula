@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("System Message")
+@Refby("0")
+@Table("AD_MESSAGE_TRL")
+tx AdMessageTrl {
+@ForeignKeyColumn("AD_MESSAGE_ID") @Column("AD_MESSAGE_ID") 	!AdMessage;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	MsgText Text;
+	?MsgTip String;
+	IsTranslated YesNo;/* 'N'  */
+};
+

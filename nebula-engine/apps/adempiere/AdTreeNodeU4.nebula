@@ -1,0 +1,13 @@
+@Legacy("adempiere")
+@Remarks("User defined tree 4")
+@Refby("0")
+@Table("AD_TREENODEU4")
+type AdTreeNodeU4 {
+@ForeignKeyColumn("AD_TREE_ID") @Column("AD_TREE_ID") 	!AdTree;
+@Column("NODE_ID") 	!NodeId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("PARENT_ID") 	ParentId ID;
+	SeqNo;/* 0  */
+};
+

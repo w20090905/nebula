@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Document type or rules")
+@Refby("0")
+@Table("C_DOCTYPE_TRL")
+type CDocTypeTrl {
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	!CDocType;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	PrintName Name;
+	?DocumentNote Note;
+	IsTranslated YesNo;/* 'N'  */
+};
+

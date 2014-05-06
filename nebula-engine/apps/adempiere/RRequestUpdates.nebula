@@ -1,0 +1,12 @@
+@Legacy("adempiere")
+@Remarks("Request Update Recipiants")
+@Refby("0")
+@Table("R_REQUESTUPDATES")
+tx RRequestUpdates {
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	!AdUser;
+@ForeignKeyColumn("R_REQUEST_ID") @Column("R_REQUEST_ID") 	!RRequest;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	IsSelfService YesNo;/* 'N'  */
+};
+

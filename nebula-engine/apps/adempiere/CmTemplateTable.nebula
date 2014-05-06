@@ -1,0 +1,16 @@
+@Legacy("adempiere")
+@Remarks("CM Template Table Link")
+@Refby("2")
+@Table("CM_TEMPLATETABLE")
+type CmTemplateTable {
+@Column("CM_TEMPLATETABLE_ID") 	!CmTemplateTableId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+@ForeignKeyColumn("CM_TEMPLATE_ID") @Column("CM_TEMPLATE_ID") 	CmTemplate;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
+	?WhereClause String;
+	?OtherClause String;
+};
+

@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("C_BP_Withholding")
+@Refby("0")
+@Table("C_BP_WITHHOLDING")
+type CBpWithholding {
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	!CBpartner;
+@ForeignKeyColumn("C_WITHHOLDING_ID") @Column("C_WITHHOLDING_ID") 	!CWithholding;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	IsMandatoryWithholding YesNo;/* 'N'  */
+	IsTemporaryExempt YesNo;/* 'N'  */
+	?ExemptReason String;
+};
+

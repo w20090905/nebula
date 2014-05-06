@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Offer for a Topic")
+@Refby("0")
+@Table("B_OFFER")
+type BOffer {
+@Column("B_OFFER_ID") 	!BOfferId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+@ForeignKeyColumn("B_TOPIC_ID") @Column("B_TOPIC_ID") 	BTopic;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	AdUser BSeller;
+	IsWillingToCommit YesNo;/* 'Y'  */
+@ForeignKeyColumn("B_SELLERFUNDS_ID") @Column("B_SELLERFUNDS_ID") 	BSellerFundS;
+	?TextMsg Text;
+	?PrivateNote Note;
+};
+

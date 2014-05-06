@@ -1,0 +1,20 @@
+@Legacy("adempiere")
+@Remarks("Client Exception")
+@Refby("0")
+@Table("ASP_CLIENTEXCEPTION")
+tx AspClientException {
+@Column("AD_CLIENT_ID") 	AdClientId ID;/* NULL   */
+@ForeignKeyColumn("AD_FIELD_ID") @Column("AD_FIELD_ID") 	?AdField;
+@ForeignKeyColumn("AD_FORM_ID") @Column("AD_FORM_ID") 	?AdForm;
+@Column("AD_ORG_ID") 	AdOrgId ID;/* 0  */
+@ForeignKeyColumn("AD_PROCESS_ID") @Column("AD_PROCESS_ID") 	?AdProcess;
+@ForeignKeyColumn("AD_PROCESS_PARA_ID") @Column("AD_PROCESS_PARA_ID") 	?AdProcessPara;
+@ForeignKeyColumn("AD_TAB_ID") @Column("AD_TAB_ID") 	?AdTab;
+@ForeignKeyColumn("AD_TASK_ID") @Column("AD_TASK_ID") 	?AdTask;
+@ForeignKeyColumn("AD_WF_NODE_ID") @Column("AD_WF_NODE_ID") 	?AdWfNode;
+@ForeignKeyColumn("AD_WINDOW_ID") @Column("AD_WINDOW_ID") 	?AdWindow;
+@ForeignKeyColumn("AD_WORKFLOW_ID") @Column("AD_WORKFLOW_ID") 	?AdWorkflow;
+@Column("ASP_CLIENTEXCEPTION_ID") 	!AspClientExceptionId ID;
+@Column("ASP_STATUS") 	AspStatus Attr;/* 'U'  */
+};
+

@@ -1,0 +1,16 @@
+@Legacy("adempiere")
+@Remarks("Modification")
+@Refby("0")
+@Table("AD_MODIFICATION")
+type AdModification {
+@Column("AD_MODIFICATION_ID") 	!AdModificationId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	SeqNo;/* 0  */
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+	?Version String;
+};
+

@@ -1,0 +1,24 @@
+@Legacy("adempiere")
+@Remarks("Report Line")
+@Refby("6")
+@Table("PA_REPORTLINE")
+type PaReportLine {
+@Column("PA_REPORTLINE_ID") 	!PaReportLineId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("PA_REPORTLINESET_ID") @Column("PA_REPORTLINESET_ID") 	PaReportLineSet;
+	*Name;
+	SeqNo;
+	?Description;
+	IsPrinted YesNo;/* 'Y'  */
+@ForeignKeyColumn("PA_REPORTLINE_ID") @Column("PARENT_ID") 	?Parent PaReportLine;
+	IsSummary YesNo;/* 'N'  */
+	LineType Attr;
+	?CalculationType Attr;
+@ForeignKeyColumn("PA_REPORTLINE_ID") @Column("OPER_1_ID") 	?Oper1 PaReportLine;
+@ForeignKeyColumn("PA_REPORTLINE_ID") @Column("OPER_2_ID") 	?Oper2 PaReportLine;
+	?PostingType Attr;
+@ForeignKeyColumn("GL_BUDGET_ID") @Column("GL_BUDGET_ID") 	?GlBudget;
+	?AmountType Attr;
+};
+

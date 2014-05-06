@@ -1,0 +1,47 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("C_INVOICE_LINETAX_VT")
+type CInvoiceLineTaxVt {
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@Column("AD_ORG_ID") 	?AdOrgId ID;
+@Column("AD_LANGUAGE") 	?AdLanguage Code;
+@Column("C_INVOICE_ID") 	?CInvoiceId ID;
+@Column("C_INVOICELINE_ID") 	?CInvoiceLineId ID;
+@Column("C_TAX_ID") 	?CTaxId ID;
+	?TaxAmt Amount;
+	?LineTotalAmt Amount;
+	?TaxIndicator String;
+	?Line Number;
+@Column("M_PRODUCT_ID") 	?MProductId ID;
+	?QtyInvoiced Number;
+	?QtyEntered Number;
+	?UomSymbol String;
+	?Name;
+	?Description;
+	?DocumentNote Note;
+	?Upc;
+	?Sku;
+	?ProductValue String;
+	?ResourceDescription Description;
+	?PriceList Number;
+	?PriceEnteredList Number;
+	?Discount Percent;
+	?PriceActual Number;
+	?PriceEntered Number;
+	?LineNetAmt Amount;
+@Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstanceId ID;
+@Column("M_ATTRIBUTESET_ID") 	?MAttributeSetId ID;
+	?SerNo String;
+	?Lot Code;
+@Column("M_LOT_ID") 	?MLotId ID;
+	?GuaranteeDate Date;
+	?ProductDescription Description;
+	?ImageUrl Url;
+@Column("C_CAMPAIGN_ID") 	?CCampaignId ID;
+@Column("C_PROJECT_ID") 	?CProjectId ID;
+@Column("C_ACTIVITY_ID") 	?CActivityId ID;
+@Column("C_PROJECTPHASE_ID") 	?CProjectPhaseId ID;
+@Column("C_PROJECTTASK_ID") 	?CProjectTaskId ID;
+};
+

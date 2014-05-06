@@ -1,0 +1,21 @@
+@Legacy("adempiere")
+@Remarks("Commission")
+@Refby("2")
+@Table("C_COMMISSION")
+type CCommission {
+@Column("C_COMMISSION_ID") 	!CCommissionId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
+	FrequencyType Attr;
+	DocBasisType Attr;
+	ListDetails YesNo;/* 'N'  */
+	?DateLastRun Date;
+	?CreateFrom Attr;
+	?Processing YesNo;
+@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	CCharge;
+};
+

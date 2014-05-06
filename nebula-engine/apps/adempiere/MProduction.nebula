@@ -1,0 +1,23 @@
+@Legacy("adempiere")
+@Remarks("Plan for producing a product")
+@Refby("1")
+@Table("M_PRODUCTION")
+type MProduction {
+@Column("M_PRODUCTION_ID") 	!MProductionId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	*Name;
+	?Description;
+	MovementDate Date;
+	IsCreated YesNo;/* 'N'  */
+	Posted YesNo;/* 'N'  */
+	Processed YesNo;/* 'N'  */
+	?Processing YesNo;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
+@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
+@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER1_ID") 	?User1 CElementValue;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER2_ID") 	?User2 CElementValue;
+};
+

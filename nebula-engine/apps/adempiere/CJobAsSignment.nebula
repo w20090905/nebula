@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Position Assignment")
+@Refby("0")
+@Table("C_JOBASSIGNMENT")
+tx CJobAsSignment {
+@Column("C_JOBASSIGNMENT_ID") 	!CJobAsSignmentId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	AdUser;
+@ForeignKeyColumn("C_JOB_ID") @Column("C_JOB_ID") 	CJob;
+	ValidFrom Date;
+	?ValidTo Date;
+	?Description;
+};
+

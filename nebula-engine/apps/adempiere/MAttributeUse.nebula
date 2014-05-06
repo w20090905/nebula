@@ -1,0 +1,12 @@
+@Legacy("adempiere")
+@Remarks("M_AttributeUse")
+@Refby("0")
+@Table("M_ATTRIBUTEUSE")
+type MAttributeUse {
+@ForeignKeyColumn("M_ATTRIBUTE_ID") @Column("M_ATTRIBUTE_ID") 	!MAttribute;
+@ForeignKeyColumn("M_ATTRIBUTESET_ID") @Column("M_ATTRIBUTESET_ID") 	!MAttributeSet;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	SeqNo;
+};
+

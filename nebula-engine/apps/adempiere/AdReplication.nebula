@@ -1,0 +1,25 @@
+@Legacy("adempiere")
+@Remarks("Data Replication Target")
+@Refby("1")
+@Table("AD_REPLICATION")
+type AdReplication {
+@Column("AD_REPLICATION_ID") 	!AdReplicationId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+	HostAddress Host;
+	HostPort Port;
+@ForeignKeyColumn("AD_REPLICATIONSTRATEGY_ID") @Column("AD_REPLICATIONSTRATEGY_ID") 	AdReplicationStrategy;
+	IsRmiOverHttp YesNo;/* 'Y' */
+	?Processing YesNo;
+	?IdRangeStart Number;
+	?IdRangeEnd Number;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("REMOTE_CLIENT_ID") 	?RemoteClient AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("REMOTE_ORG_ID") 	?RemoteOrg AdOrg;
+	?Prefix String;
+	?Suffix String;
+	?DateLastRun Date;
+};
+

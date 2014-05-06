@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Client Share")
+@Refby("0")
+@Table("AD_CLIENTSHARE")
+type AdClientShare {
+@Column("AD_CLIENTSHARE_ID") 	!AdClientShareId ID;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	*Name;
+	?Description;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
+	ShareType Attr;
+};
+

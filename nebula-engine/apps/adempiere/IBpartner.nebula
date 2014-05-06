@@ -1,0 +1,49 @@
+@Legacy("adempiere")
+@Remarks("Import Business Partner")
+@Refby("0")
+@Table("I_BPARTNER")
+type IBpartner {
+@Column("I_BPARTNER_ID") 	!IBpartnerId ID;
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@Column("AD_ORG_ID") 	?AdOrgId ID;
+@Column("I_ISIMPORTED") 	IIsImported YesNo;/* 'N'  */
+@Column("I_ERRORMSG") 	?IErrorMsg Message;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+	?Value String;
+	?Name;
+	?Name2 Name;
+	?Description;
+	?Duns;
+	?TaxId String;
+	?Naics;
+	?GroupValue String;
+@ForeignKeyColumn("C_BP_GROUP_ID") @Column("C_BP_GROUP_ID") 	?CBpGroup;
+@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNER_LOCATION_ID") 	?CBpartnerLocation;
+	?Address1 Address;
+	?Address2 Address;
+	?Postal String;
+@Column("POSTAL_ADD") 	?PostalAdd String;
+	?City String;
+@ForeignKeyColumn("C_REGION_ID") @Column("C_REGION_ID") 	?CRegion;
+	?RegionName Name;
+@ForeignKeyColumn("C_COUNTRY_ID") @Column("C_COUNTRY_ID") 	?CCountry;
+	?CountryCode Code;
+	?Title;
+	?ContactName Name;
+	?ContactDescription Description;
+	?Comments Comment;
+	?Phone;
+	?Phone2 Phone;
+	?Fax;
+	?Email;
+	?Password String;
+	?Birthday Date;
+@ForeignKeyColumn("C_GREETING_ID") @Column("C_GREETING_ID") 	?CGreeting;
+	?BpContactGreeting String;
+	?Processing YesNo;
+	?Processed YesNo;/* 'N' */
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+@ForeignKeyColumn("R_INTERESTAREA_ID") @Column("R_INTERESTAREA_ID") 	?RInterestArea;
+	?InterestAreaName Name;
+};
+

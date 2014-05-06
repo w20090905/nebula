@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Index Stop")
+@Refby("0")
+@Table("K_INDEXSTOP")
+tx KIndexStop {
+@Column("K_INDEXSTOP_ID") 	!KIndexStopId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	KeyWord String;
+	IsManual YesNo;/* 'Y'  */
+@ForeignKeyColumn("CM_WEBPROJECT_ID") @Column("CM_WEBPROJECT_ID") 	?CmWebProject;
+@ForeignKeyColumn("R_REQUESTTYPE_ID") @Column("R_REQUESTTYPE_ID") 	?RRequestType;
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	?CDocType;
+};
+

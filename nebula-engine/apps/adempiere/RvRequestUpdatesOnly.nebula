@@ -1,0 +1,11 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("RV_REQUESTUPDATES_ONLY")
+type RvRequestUpdatesOnly {
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@Column("AD_ORG_ID") 	?AdOrgId ID;
+@Column("R_REQUEST_ID") 	?RRequestId ID;
+@Column("AD_USER_ID") 	?AdUserId ID;
+};
+

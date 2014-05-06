@@ -1,0 +1,63 @@
+@Legacy("adempiere")
+@Remarks("Import Invoice")
+@Refby("0")
+@Table("I_INVOICE")
+type IInvoice {
+@Column("I_INVOICE_ID") 	!IInvoiceId ID;
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	?AdOrg;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
+@Column("I_ISIMPORTED") 	IIsImported YesNo;/* 'N'  */
+@Column("I_ERRORMSG") 	?IErrorMsg Message;
+	?Processing YesNo;
+	?Processed YesNo;/* 'N' */
+@ForeignKeyColumn("M_PRICELIST_ID") @Column("M_PRICELIST_ID") 	?MPriceList;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
+@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	?SalesRep AdUser;
+	?IsSoTrx YesNo;/* 'Y' */
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNER_LOCATION_ID") 	?CBpartnerLocation;
+	?BpartnerValue String;
+	?Name;
+@ForeignKeyColumn("C_LOCATION_ID") @Column("C_LOCATION_ID") 	?CLocation;
+	?Address1 Address;
+	?Address2 Address;
+	?Postal String;
+	?City String;
+@ForeignKeyColumn("C_REGION_ID") @Column("C_REGION_ID") 	?CRegion;
+	?RegionName Name;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+	?Email;
+	?ContactName Name;
+	?Phone;
+@ForeignKeyColumn("C_COUNTRY_ID") @Column("C_COUNTRY_ID") 	?CCountry;
+	?CountryCode Code;
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	?CDocType;
+	?DocTypeName Name;
+@ForeignKeyColumn("C_PAYMENTTERM_ID") @Column("C_PAYMENTTERM_ID") 	?CPaymentTerm;
+	?PaymentTermValue String;
+@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
+@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
+@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
+	?DocumentNo String;
+	?DateInvoiced Date;
+	?DateAcct Date;
+	?Description;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+	?ProductValue String;
+	?Upc;
+	?Sku;
+@ForeignKeyColumn("C_TAX_ID") @Column("C_TAX_ID") 	?CTax;
+	?TaxIndicator String;
+	?TaxAmt Amount;/* 0 */
+@ForeignKeyColumn("C_INVOICELINE_ID") @Column("C_INVOICELINE_ID") 	?CInvoiceLine;
+	?LineDescription Description;
+	?QtyOrdered Number;/* 0 */
+	?PriceActual Number;/* 0 */
+	?ProjectValue String;
+	?ActivityValue String;
+	?ChargeName Name;
+@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	?CCharge;
+};
+

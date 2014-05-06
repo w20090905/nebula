@@ -1,0 +1,28 @@
+@Legacy("adempiere")
+@Remarks("Web Access Log")
+@Refby("0")
+@Table("CM_WEBACCESSLOG")
+tx CmWebAccessLog {
+@Column("CM_WEBACCESSLOG_ID") 	!CmWebAccessLogId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	LogType Attr;
+@ForeignKeyColumn("CM_WEBPROJECT_ID") @Column("CM_WEBPROJECT_ID") 	?CmWebProject;
+@Column("IP_ADDRESS") 	IpAddress Address;
+@ForeignKeyColumn("CM_BROADCASTSERVER_ID") @Column("CM_BROADCASTSERVER_ID") 	?CmBroadcastServer;
+	RequestType String;
+	?PageUrl Url;
+	?Referrer String;
+@Column("REMOTE_HOST") 	?RemoteHost Host;
+@Column("REMOTE_ADDR") 	?RemoteAddr Message;
+	?UserAgent String;
+	?AcceptLanguage Code;
+	?WebSession String;
+	?Hyphen String;
+	Protocol String;
+	?StatusCode Number;/* 0 */
+	?FileSize Number;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+@ForeignKeyColumn("CM_MEDIA_ID") @Column("CM_MEDIA_ID") 	?CmMedia;
+};
+

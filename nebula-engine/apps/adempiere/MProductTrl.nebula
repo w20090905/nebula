@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Product, Service, Item")
+@Refby("0")
+@Table("M_PRODUCT_TRL")
+type MProductTrl {
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	!MProduct;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;/* NULL */
+	?DocumentNote Note;
+	IsTranslated YesNo;/* 'N'  */
+	?Description;
+};
+

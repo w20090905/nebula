@@ -1,0 +1,26 @@
+@Legacy("adempiere")
+@Remarks("Gain/Loss - actual data shown id T_InvoiceGL_v")
+@Refby("0")
+@Table("T_INVOICEGL")
+tx TInvoiceGl {
+@ForeignKeyColumn("AD_PINSTANCE_ID") @Column("AD_PINSTANCE_ID") 	!AdPInstance;
+@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	!CInvoice;
+@ForeignKeyColumn("FACT_ACCT_ID") @Column("FACT_ACCT_ID") 	!FactAcct;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	GrandTotal Number;/* 0  */
+	OpenAmt Amount;/* 0  */
+	?Percent;
+	?APAR String;
+	AmtSourceBalance Amount;/* 0  */
+	AmtAcctBalance Amount;/* 0  */
+@ForeignKeyColumn("C_CONVERSIONTYPE_ID") @Column("C_CONVERSIONTYPEREVAL_ID") 	CConversionTypeReval CConversionType;
+	AmtRevalDr Amount;/* 0  */
+	AmtRevalCr Amount;/* 0  */
+	DateReval Date;
+	AmtRevalDrDiff Amount;/* 0  */
+	AmtRevalCrDiff Amount;/* 0  */
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPEREVAL_ID") 	?CDocTypeReval CDocType;
+	IsAllCurrencies YesNo;/* 'N'  */
+};
+

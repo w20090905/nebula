@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("2")
+@Table("A_DEPRECIATION")
+type ADepreciation {
+@Column("A_DEPRECIATION_ID") 	!ADepreciationId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	DepreciationType Attr;
+	?Script String;
+};
+

@@ -1,0 +1,20 @@
+@Legacy("adempiere")
+@Remarks("Dunning Run Entry")
+@Refby("1")
+@Table("C_DUNNINGRUNENTRY")
+tx CDunningRunEntry {
+@Column("C_DUNNINGRUNENTRY_ID") 	!CDunningRunEntryId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
+@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocation;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+@ForeignKeyColumn("C_DUNNINGRUN_ID") @Column("C_DUNNINGRUN_ID") 	CDunningRun;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
+@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	SalesRep AdUser;
+	Amt Amount;/* 0  */
+	Qty Quantity;/* 0  */
+	?Note;
+	Processed YesNo;/* 'N'  */
+};
+

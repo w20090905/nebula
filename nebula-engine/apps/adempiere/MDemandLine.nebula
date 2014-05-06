@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Material Demand Line")
+@Refby("1")
+@Table("M_DEMANDLINE")
+tx MDemandLine {
+@Column("M_DEMANDLINE_ID") 	!MDemandLineId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_DEMAND_ID") @Column("M_DEMAND_ID") 	MDemand;
+@ForeignKeyColumn("C_PERIOD_ID") @Column("C_PERIOD_ID") 	CPeriod;
+	Qty Quantity;/* 0  */
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+	QtyCalculated Number;/* 0  */
+};
+

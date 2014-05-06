@@ -1,0 +1,21 @@
+@Legacy("adempiere")
+@Remarks("Calculation method for measuring performance")
+@Refby("2")
+@Table("PA_MEASURECALC")
+type PaMeasureCalc {
+@Column("PA_MEASURECALC_ID") 	!PaMeasureCalcId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	SelectClause String;
+	WhereClause String;
+	DateColumn String;
+	?OrgColumn String;
+	?BpartnerColumn String;
+	?ProductColumn String;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
+	KeyColumn String;
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;
+};
+

@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("M_AttributeInstance")
+@Refby("0")
+@Table("M_ATTRIBUTEINSTANCE")
+type MAttributeInstance {
+@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	!MAttributeSetInstance;/* 0 */
+@ForeignKeyColumn("M_ATTRIBUTE_ID") @Column("M_ATTRIBUTE_ID") 	!MAttribute;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_ATTRIBUTEVALUE_ID") @Column("M_ATTRIBUTEVALUE_ID") 	?MAttributeValue;
+	?Value String;
+	?ValueNumber Number;
+};
+

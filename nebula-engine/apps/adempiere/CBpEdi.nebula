@@ -1,0 +1,29 @@
+@Legacy("adempiere")
+@Remarks("Electronic Data Interchange")
+@Refby("1")
+@Table("C_BP_EDI")
+type CBpEdi {
+@Column("C_BP_EDI_ID") 	!CBpEdiId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
+@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	MWarehouse;
+	EdiType Attr;
+	IsAudited YesNo;/* 'N'  */
+	CustomerNo String;
+@ForeignKeyColumn("AD_SEQUENCE_ID") @Column("AD_SEQUENCE_ID") 	AdSequence;
+@Column("EMAIL_TO") 	?EmailTo Email;
+@Column("EMAIL_FROM") 	?EmailFrom Email;
+@Column("EMAIL_FROM_UID") 	?EmailFromUid Email;
+@Column("EMAIL_FROM_PWD") 	?EmailFromPwd Email;
+@Column("EMAIL_ERROR_TO") 	EmailErrorTo Email;
+	IsInfoSent YesNo;/* 'N'  */
+@Column("EMAIL_INFO_TO") 	EmailInfoTo Email;
+	SendInquiry YesNo;/* 'Y'  */
+	ReceiveInquiryReply YesNo;/* 'Y'  */
+	SendOrder YesNo;/* 'Y'  */
+	ReceiveOrderReply YesNo;/* 'Y'  */
+};
+

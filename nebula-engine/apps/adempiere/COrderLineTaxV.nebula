@@ -1,0 +1,43 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("C_ORDER_LINETAX_V")
+type COrderLineTaxV {
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@Column("AD_ORG_ID") 	?AdOrgId ID;
+@Column("AD_LANGUAGE") 	?AdLanguage Code;
+@Column("C_ORDER_ID") 	?COrderId ID;
+@Column("C_ORDERLINE_ID") 	?COrderLineId ID;
+@Column("C_TAX_ID") 	?CTaxId ID;
+	?TaxIndicator String;
+@Column("C_BPARTNER_ID") 	?CBpartnerId ID;
+@Column("C_BPARTNER_LOCATION_ID") 	?CBpartnerLocationId ID;
+	?BpName Name;
+@Column("C_LOCATION_ID") 	?CLocationId ID;
+	?Line Number;
+@Column("M_PRODUCT_ID") 	?MProductId ID;
+	?QtyOrdered Number;
+	?QtyEntered Number;
+	?UomSymbol String;
+	?Name;
+	?Description;
+	?DocumentNote Note;
+	?Upc;
+	?Sku;
+	?ProductValue String;
+	?ResourceDescription Description;
+	?PriceList Number;
+	?PriceEnteredList Number;
+	?Discount Percent;
+	?PriceActual Number;
+	?PriceEntered Number;
+	?LineNetAmt Amount;
+	?ProductDescription Description;
+	?ImageUrl Url;
+@Column("C_CAMPAIGN_ID") 	?CCampaignId ID;
+@Column("C_PROJECT_ID") 	?CProjectId ID;
+@Column("C_ACTIVITY_ID") 	?CActivityId ID;
+@Column("C_PROJECTPHASE_ID") 	?CProjectPhaseId ID;
+@Column("C_PROJECTTASK_ID") 	?CProjectTaskId ID;
+};
+

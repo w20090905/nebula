@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Account Element")
+@Refby("0")
+@Table("C_ELEMENTVALUE_TRL")
+type CElementValueTrl {
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("C_ELEMENTVALUE_ID") 	!CElementValue;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	IsTranslated YesNo;/* 'N'  */
+};
+

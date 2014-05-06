@@ -1,0 +1,12 @@
+@Legacy("adempiere")
+@Remarks("Web Properties")
+@Refby("0")
+@Table("U_WEB_PROPERTIES")
+tx UWebProperties {
+@Column("U_WEB_PROPERTIES_ID") 	!UWebPropertiesId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("U_KEY") 	UKey String;
+@Column("U_VALUE") 	UValue String;
+};
+

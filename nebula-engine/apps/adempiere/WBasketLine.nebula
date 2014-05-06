@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Web Basket Line")
+@Refby("0")
+@Table("W_BASKETLINE")
+tx WBasketLine {
+@Column("W_BASKETLINE_ID") 	!WBasketLineId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("W_BASKET_ID") @Column("W_BASKET_ID") 	WBasket;
+	Line Number;
+	Qty Quantity;/* 0  */
+	Price Number;/* 0  */
+	Product String;
+	Description;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+};
+

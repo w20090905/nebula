@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Distribution Run Lines define Distribution List, the Product and Quantiries")
+@Refby("1")
+@Table("M_DISTRIBUTIONRUNLINE")
+tx MDistributionRunLine {
+@Column("M_DISTRIBUTIONRUNLINE_ID") 	!MDistributionRunLineId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_DISTRIBUTIONRUN_ID") @Column("M_DISTRIBUTIONRUN_ID") 	MDistributionRun;
+	Line Number;
+	?Description;
+@ForeignKeyColumn("M_DISTRIBUTIONLIST_ID") @Column("M_DISTRIBUTIONLIST_ID") 	MDistributionList;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+	TotalQty Quantity;/* 0  */
+	MinQty Quantity;/* 0  */
+};
+

@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("C_InvoiceTax")
+@Refby("0")
+@Table("C_INVOICETAX")
+tx CInvoiceTax {
+@ForeignKeyColumn("C_TAX_ID") @Column("C_TAX_ID") 	!CTax;
+@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	!CInvoice;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	TaxBaseAmt Amount;/* 0  */
+	TaxAmt Amount;/* 0  */
+	Processed YesNo;/* 'N'  */
+	IsTaxIncluded YesNo;/* 'N'  */
+};
+

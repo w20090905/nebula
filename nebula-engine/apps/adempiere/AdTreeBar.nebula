@@ -1,0 +1,12 @@
+@Legacy("adempiere")
+@Remarks("User Selected tree nodes")
+@Refby("0")
+@Table("AD_TREEBAR")
+type AdTreeBar {
+@ForeignKeyColumn("AD_TREE_ID") @Column("AD_TREE_ID") 	!AdTree;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	!AdUser;
+@Column("NODE_ID") 	!NodeId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+};
+

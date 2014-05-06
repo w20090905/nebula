@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Tax identifier")
+@Refby("0")
+@Table("C_TAX_TRL")
+type CTaxTrl {
+@ForeignKeyColumn("C_TAX_ID") @Column("C_TAX_ID") 	!CTax;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	IsTranslated YesNo;/* 'N'  */
+	*Name;
+	?Description;
+	?TaxIndicator String;
+};
+

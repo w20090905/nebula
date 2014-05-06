@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("AD_Record_Access")
+@Refby("0")
+@Table("AD_RECORD_ACCESS")
+type AdRecordAccess {
+@ForeignKeyColumn("AD_ROLE_ID") @Column("AD_ROLE_ID") 	!AdRole;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	!AdTable;
+@Column("RECORD_ID") 	!RecordId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	IsReadonly YesNo;/* 'N'  	  */
+	IsExclude YesNo;/* 'Y'  	  */
+	IsDependentEntities YesNo;/* 'N'  */
+};
+

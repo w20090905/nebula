@@ -1,0 +1,22 @@
+@Legacy("adempiere")
+@Remarks("AD_Package_Exp_ID")
+@Refby("0")
+@Table("AD_PACKAGE_EXP")
+type AdPackageExp {
+@Column("AD_PACKAGE_EXP_ID") 	!AdPackageExpId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("AD_PACKAGE_TYPE") 	?AdPackageType String;
+	Email;
+	Instructions String;
+	*Name;
+	?Processed String;
+	ReleaseNo String;
+	Version String;
+	UserName Name;
+	Processing YesNo;
+@Column("PK_VERSION") 	PkVersion String;
+@Column("FILE_DIRECTORY") 	FileDirectOrY String;
+	Description;
+};
+

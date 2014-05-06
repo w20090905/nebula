@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Web Access Profile")
+@Refby("6")
+@Table("CM_ACCESSPROFILE")
+type CmAccessProfile {
+@Column("CM_ACCESSPROFILE_ID") 	!CmAccessProfileId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+	IsExclude YesNo;/* 'Y'  */
+};
+

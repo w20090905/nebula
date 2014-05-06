@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Item/Column in the Print format")
+@Refby("0")
+@Table("AD_PRINTFORMATITEM_TRL")
+type AdPrintFormatItemTrl {
+@ForeignKeyColumn("AD_PRINTFORMATITEM_ID") @Column("AD_PRINTFORMATITEM_ID") 	!AdPrintFormatItem;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	?PrintName Name;
+	IsTranslated YesNo;/* 'N'  */
+	?PrintNameSuffix String;
+};
+

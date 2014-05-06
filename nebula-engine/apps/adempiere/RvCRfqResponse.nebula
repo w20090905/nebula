@@ -1,0 +1,40 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("RV_C_RFQRESPONSE")
+type RvCRfqResponse {
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("C_RFQ_ID") 	CRfqId ID;
+@Column("C_RFQ_TOPIC_ID") 	CRfqTopicId ID;
+@Column("C_BPARTNER_ID") 	CBpartnerId ID;
+@Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocationId ID;
+@Column("AD_USER_ID") 	?AdUserId ID;
+@Column("C_RFQRESPONSE_ID") 	CRfqResponseId ID;
+@Column("C_CURRENCY_ID") 	CCurrencyId ID;
+	?DateResponse Date;
+	?DateWorkStart Date;
+	?DeliveryDays Count;
+	?DateWorkComplete Date;
+	Price Number;
+	?Ranking Number;
+	IsSelfService YesNo;
+	?Description;
+	?Help;
+@Column("M_PRODUCT_ID") 	?MProductId ID;
+@Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstanceId ID;
+	Line Number;
+	?LineDateWorkStart null;
+	?LineDeliveryDays Count;
+	?LineDateWorkComplete null;
+	?LineDescription Description;
+	?LineHelp Help;
+@Column("C_UOM_ID") 	CUomId ID;
+	Qty Quantity;
+	BenchmarkPrice Number;
+	?BenchmarkDifference Number;
+	QtyPrice Number;
+	?Discount Percent;
+	?QtyRanking Number;
+};
+

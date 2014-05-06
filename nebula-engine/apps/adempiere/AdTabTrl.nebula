@@ -1,0 +1,16 @@
+@Legacy("adempiere")
+@Remarks("Tab within a Window")
+@Refby("0")
+@Table("AD_TAB_TRL")
+type AdTabTrl {
+@ForeignKeyColumn("AD_TAB_ID") @Column("AD_TAB_ID") 	!AdTab;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+	?CommitWarning String;
+	IsTranslated YesNo;/* 'N'  */
+};
+

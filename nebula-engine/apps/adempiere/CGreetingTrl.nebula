@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Greeting to print on correspondence")
+@Refby("0")
+@Table("C_GREETING_TRL")
+type CGreetingTrl {
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
+@ForeignKeyColumn("C_GREETING_ID") @Column("C_GREETING_ID") 	!CGreeting;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Greeting String;
+	IsTranslated YesNo;/* 'N'  */
+};
+

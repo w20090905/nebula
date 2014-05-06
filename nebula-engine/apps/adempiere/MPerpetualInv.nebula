@@ -1,0 +1,21 @@
+@Legacy("adempiere")
+@Remarks("Rules for generating physical inventory")
+@Refby("1")
+@Table("M_PERPETUALINV")
+type MPerpetualInv {
+@Column("M_PERPETUALINV_ID") 	!MPerpetualInvId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	NoInventoryCount Count;
+	NoProductCount Count;
+	CountHighMovement YesNo;/* 'N'  */
+	?Processing YesNo;
+	?DateLastRun Date;
+	DateNextRun Date;
+	NumberOfRuns Number;
+@ForeignKeyColumn("M_PRODUCT_CATEGORY_ID") @Column("M_PRODUCT_CATEGORY_ID") 	?MProductCategory;
+@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	?MWarehouse;
+};
+

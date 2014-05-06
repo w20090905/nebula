@@ -1,0 +1,36 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("M_INOUTCONFIRM_V")
+type MInoutConfirmV {
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("AD_LANGUAGE") 	?AdLanguage Code;
+@Column("M_INOUTCONFIRM_ID") 	MInoutConfirmId ID;
+	DocumentNo String;
+	ConfirmType Attr;
+	IsApproved YesNo;
+	IsCanCelled YesNo;
+	?Description;
+@Column("M_INOUT_ID") 	MInoutId ID;
+	?ShipDescription Description;
+@Column("C_BPARTNER_ID") 	CBpartnerId ID;
+@Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocationId ID;
+@Column("AD_USER_ID") 	?AdUserId ID;
+@Column("SALESREP_ID") 	?SalesRepId ID;
+@Column("C_DOCTYPE_ID") 	CDocTypeId ID;
+	DocumentType String;
+@Column("C_ORDER_ID") 	?COrderId ID;
+	?DateOrdered Date;
+	MovementDate Date;
+	MovementType Attr;
+@Column("M_WAREHOUSE_ID") 	MWarehouseId ID;
+	?PoReference String;
+	DeliveryRule String;
+	FreightCostRule String;
+	DeliveryViaRule String;
+@Column("M_SHIPPER_ID") 	?MShipperId ID;
+	PriorityRule String;
+	Processed String;
+};
+

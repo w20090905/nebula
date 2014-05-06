@@ -1,0 +1,36 @@
+@Legacy("adempiere")
+@Remarks("Web Container contains content like images, text etc.")
+@Refby("7")
+@Table("CM_CONTAINER")
+type CmContainer {
+@Column("CM_CONTAINER_ID") 	!CmContainerId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("CM_WEBPROJECT_ID") @Column("CM_WEBPROJECT_ID") 	CmWebProject;
+@ForeignKeyColumn("CM_TEMPLATE_ID") @Column("CM_TEMPLATE_ID") 	?CmTemplate;
+	?Title;
+	?NotIce String;
+	?ContainerType Attr;
+	?ContainerLinkUrl Url;
+	?RelativeUrl Url;
+	?Priority;/* 0  */
+	IsIndexed YesNo;/* 'Y'  */
+	IsSecure YesNo;/* 'Y'  */
+@Column("META_ROBOTSTAG") 	?MetaRobotsTag String;
+@Column("META_AUTHOR") 	?MetaAuthor String;
+@Column("META_COPYRIGHT") 	?MetaCopyRight String;
+@Column("META_CONTENT") 	?MetaContent String;
+@Column("META_DESCRIPTION") 	?MetaDescription Description;
+@Column("META_KEYWORDS") 	?MetaKeyWords String;
+@Column("META_PUBLISHER") 	?MetaPublisher String;
+	?StructureXml String;
+	?ContainerXml String;
+@ForeignKeyColumn("CM_CONTAINER_ID") @Column("CM_CONTAINERLINK_ID") 	?CmContainerLink CmContainer;
+	IsSummary YesNo;/* 'N'  */
+@Column("META_LANGUAGE") 	?MetaLanguage Code;
+	IsValid YesNo;/* 'Y'  */
+};
+

@@ -1,0 +1,36 @@
+@Legacy("adempiere")
+@Remarks("Rules for accounting")
+@Refby("39")
+@Table("C_ACCTSCHEMA")
+type CAcctSchema {
+@Column("C_ACCTSCHEMA_ID") 	!CAcctSchemaId ID;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	*Name;
+	?Description;
+	Gaap String;
+	IsAccrual YesNo;/* 'Y'  */
+	CostingMethod String;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
+	AutoPeriodControl YesNo;/* 'N'  */
+@ForeignKeyColumn("C_PERIOD_ID") @Column("C_PERIOD_ID") 	?CPeriod;
+@Column("PERIOD_OPENHISTORY") 	?PeriodOpenHistory Number;
+@Column("PERIOD_OPENFUTURE") 	?PeriodOpenFuture Number;
+	Separator String;
+	HasAlias YesNo;/* 'Y'  */
+	HasCombination YesNo;/* 'Y'  */
+	IsTradeDiscountPosted YesNo;/* 'N'  */
+	IsDiscountCorrectsTax YesNo;/* 'N'  */
+@ForeignKeyColumn("M_COSTTYPE_ID") @Column("M_COSTTYPE_ID") 	?MCostType;
+	CostingLevel Attr;/* 'C'  */
+	IsAdjustCogs YesNo;/* 'N'  */
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGONLY_ID") 	?AdOrgOnly AdOrg;
+	IsPostServiceS YesNo;/* ('N')  */
+	IsExpLicitCostAdjustment YesNo;/* ('N')  */
+	CommitmentType YesNo;/* 'N'  */
+	?Processing YesNo;
+	?TaxCorrectionType Attr;
+	?IsAllowNegativePosting YesNo;/* 'Y'  */
+	?IsPostIfClearingEqual YesNo;/* 'Y'  */
+};
+

@@ -34,7 +34,7 @@ type MProduct {
 	?UnitsPerPallet Number;
 @ForeignKeyColumn("C_TAXCATEGORY_ID") @Column("C_TAXCATEGORY_ID") 	CTaxCategory;
 @ForeignKeyColumn("S_RESOURCE_ID") @Column("S_RESOURCE_ID") 	?SResource;
-	?Discontinued YesNo;/* 'N'                                 */
+	?Discontinued YesNo;/* 'N'   */
 	?DiscontinuedBy Date;
 	?Processing YesNo;
 @ForeignKeyColumn("S_EXPENSETYPE_ID") @Column("S_EXPENSETYPE_ID") 	?SExpenseType;

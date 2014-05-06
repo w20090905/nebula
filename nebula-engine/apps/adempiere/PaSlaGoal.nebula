@@ -1,0 +1,22 @@
+@Legacy("adempiere")
+@Remarks("Service Level Agreement Goal")
+@Refby("1")
+@Table("PA_SLA_GOAL")
+type PaSlaGoal {
+@Column("PA_SLA_GOAL_ID") 	!PaSlaGoalId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("PA_SLA_CRITERIA_ID") @Column("PA_SLA_CRITERIA_ID") 	PaSlaCriteria;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
+	?ValidFrom Date;
+	?ValidTo Date;
+	MeasureTarget Number;/* 0  */
+	MeasureActual Number;/* 0  */
+	?DateLastRun Date;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+};
+

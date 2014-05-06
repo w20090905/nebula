@@ -1,0 +1,46 @@
+@Legacy("adempiere")
+@Remarks("Invoice Detail Line")
+@Refby("15")
+@Table("C_INVOICELINE")
+tx CInvoiceLine {
+@Column("C_INVOICELINE_ID") 	!CInvoiceLineId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	CInvoice;
+@ForeignKeyColumn("C_ORDERLINE_ID") @Column("C_ORDERLINE_ID") 	?COrderLine;
+@ForeignKeyColumn("M_INOUTLINE_ID") @Column("M_INOUTLINE_ID") 	?MInoutLine;
+	Line Number;
+	?Description;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+	QtyInvoiced Number;/* 0  */
+	PriceList Number;/* 0  */
+	PriceActual Number;/* 0  */
+	PriceLimit Number;/* 0  */
+	LineNetAmt Amount;/* 0  */
+@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	?CCharge;
+@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_ID") 	?CUom;
+@ForeignKeyColumn("C_TAX_ID") @Column("C_TAX_ID") 	?CTax;
+@ForeignKeyColumn("S_RESOURCEASSIGNMENT_ID") @Column("S_RESOURCEASSIGNMENT_ID") 	?SResourceAsSignment;
+@ForeignKeyColumn("A_ASSET_ID") @Column("A_ASSET_ID") 	?AAsset;
+	?TaxAmt Amount;/* 0 */
+@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstance;/* 0 */
+	IsDescription YesNo;/* 'N'  */
+	IsPrinted YesNo;/* 'Y' */
+	?LineTotalAmt Amount;/* 0 */
+@ForeignKeyColumn("C_INVOICELINE_ID") @Column("REF_INVOICELINE_ID") 	?RefInvoiceLine CInvoiceLine;
+	Processed YesNo;/* 'N'  */
+	QtyEntered Number;
+	PriceEntered Number;
+@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+@ForeignKeyColumn("C_PROJECTPHASE_ID") @Column("C_PROJECTPHASE_ID") 	?CProjectPhase;
+@ForeignKeyColumn("C_PROJECTTASK_ID") @Column("C_PROJECTTASK_ID") 	?CProjectTask;
+	?RrStartDate Date;
+	?RrAmt Amount;
+@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
+@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER1_ID") 	?User1 CElementValue;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER2_ID") 	?User2 CElementValue;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
+@ForeignKeyColumn("M_RMALINE_ID") @Column("M_RMALINE_ID") 	?MRmaLine;/* NULL */
+};
+

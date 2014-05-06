@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("T_ReportStatement")
+@Refby("0")
+@Table("T_REPORTSTATEMENT")
+tx TReportStatement {
+@ForeignKeyColumn("AD_PINSTANCE_ID") @Column("AD_PINSTANCE_ID") 	!AdPInstance;
+@Column("FACT_ACCT_ID") 	!FactAcctId ID;
+	LevelNo SeqNo;
+	DateAcct Date;
+	?Name;
+	?Description;
+	?AmtAcctDr Amount;/* 0 */
+	?AmtAcctCr Amount;/* 0 */
+	?Balance Number;/* 0 */
+	?Qty Quantity;/* 0 */
+};
+

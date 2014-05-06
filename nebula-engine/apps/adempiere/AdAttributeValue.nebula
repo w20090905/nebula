@@ -1,0 +1,12 @@
+@Legacy("adempiere")
+@Remarks("AD_Attribute_Value")
+@Refby("0")
+@Table("AD_ATTRIBUTE_VALUE")
+type AdAttributeValue {
+@ForeignKeyColumn("AD_ATTRIBUTE_ID") @Column("AD_ATTRIBUTE_ID") 	!AdAttribute;
+@Column("RECORD_ID") 	!RecordId ID;
+@Column("V_NUMBER") 	?VNumber Number;
+@Column("V_DATE") 	?VDate Date;
+@Column("V_STRING") 	?VString String;
+};
+

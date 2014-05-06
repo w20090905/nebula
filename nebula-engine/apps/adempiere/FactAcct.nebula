@@ -1,0 +1,48 @@
+@Legacy("adempiere")
+@Remarks("Accounting Fact")
+@Refby("2")
+@Table("FACT_ACCT")
+tx FactAcct {
+@Column("FACT_ACCT_ID") 	!FactAcctId ID;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	CAcctSchema;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("ACCOUNT_ID") 	Account CElementValue;
+	DateTrx Date;
+	DateAcct Date;
+@ForeignKeyColumn("C_PERIOD_ID") @Column("C_PERIOD_ID") 	?CPeriod;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
+@Column("RECORD_ID") 	RecordId ID;
+@Column("LINE_ID") 	?LineId ID;
+@ForeignKeyColumn("GL_CATEGORY_ID") @Column("GL_CATEGORY_ID") 	?GlCategory;
+@ForeignKeyColumn("GL_BUDGET_ID") @Column("GL_BUDGET_ID") 	?GlBudget;
+@ForeignKeyColumn("C_TAX_ID") @Column("C_TAX_ID") 	?CTax;
+@ForeignKeyColumn("M_LOCATOR_ID") @Column("M_LOCATOR_ID") 	?MLocator;
+	PostingType Attr;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
+	AmtSourceDr Amount;/* 0  */
+	AmtSourceCr Amount;/* 0  */
+	AmtAcctDr Amount;/* 0  */
+	AmtAcctCr Amount;/* 0  */
+@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_ID") 	?CUom;
+	?Qty Quantity;/* 0 */
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
+@ForeignKeyColumn("C_LOCATION_ID") @Column("C_LOCFROM_ID") 	?CLocFrom CLocation;
+@ForeignKeyColumn("C_LOCATION_ID") @Column("C_LOCTO_ID") 	?CLocTo CLocation;
+@ForeignKeyColumn("C_SALESREGION_ID") @Column("C_SALESREGION_ID") 	?CSalesRegion;
+@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
+@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER1_ID") 	?User1 CElementValue;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER2_ID") 	?User2 CElementValue;
+	?Description;
+@ForeignKeyColumn("A_ASSET_ID") @Column("A_ASSET_ID") 	?AAsset;
+@ForeignKeyColumn("C_SUBACCT_ID") @Column("C_SUBACCT_ID") 	?CSubAcct;
+@Column("USERELEMENT1_ID") 	?UserElement1Id ID;
+@Column("USERELEMENT2_ID") 	?UserElement2Id ID;
+@ForeignKeyColumn("C_PROJECTPHASE_ID") @Column("C_PROJECTPHASE_ID") 	?CProjectPhase;
+@ForeignKeyColumn("C_PROJECTTASK_ID") @Column("C_PROJECTTASK_ID") 	?CProjectTask;
+};
+

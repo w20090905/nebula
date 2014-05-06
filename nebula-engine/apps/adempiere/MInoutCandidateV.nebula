@@ -1,0 +1,19 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("M_INOUT_CANDIDATE_V")
+type MInoutCandidateV {
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("C_BPARTNER_ID") 	CBpartnerId ID;
+@Column("C_ORDER_ID") 	COrderId ID;
+	DocumentNo String;
+	DateOrdered Date;
+@Column("C_DOCTYPE_ID") 	CDocTypeId ID;
+	?PoReference String;
+	?Description;
+@Column("SALESREP_ID") 	?SalesRepId ID;
+@Column("M_WAREHOUSE_ID") 	MWarehouseId ID;
+	?TotalLines Count;
+};
+

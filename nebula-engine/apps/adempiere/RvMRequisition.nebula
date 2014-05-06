@@ -1,0 +1,30 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("RV_M_REQUISITION")
+type RvMRequisition {
+@Column("M_REQUISITION_ID") 	MRequisitionId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	DocumentNo String;
+	?Description;
+	?Help;
+@Column("AD_USER_ID") 	AdUserId ID;
+@Column("M_PRICELIST_ID") 	MPriceListId ID;
+@Column("M_WAREHOUSE_ID") 	MWarehouseId ID;
+	IsApproved YesNo;
+	PriorityRule String;
+	DateRequired Date;
+	TotalLines Count;
+	DocAction Attr;
+	DocStatus Attr;
+	Processed String;
+@Column("M_REQUISITIONLINE_ID") 	MRequisitionLineId ID;
+	Line Number;
+	Qty Quantity;
+@Column("M_PRODUCT_ID") 	?MProductId ID;
+	?LineDescription Description;
+	PriceActual Number;
+	LineNetAmt Amount;
+};
+

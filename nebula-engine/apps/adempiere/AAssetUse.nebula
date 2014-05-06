@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("A_ASSET_USE")
+tx AAssetUse {
+@Column("A_ASSET_USE_ID") 	!AAssetUseId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("A_ASSET_ID") @Column("A_ASSET_ID") 	AAsset;
+	UseDate Date;
+	UseUnits Number;
+	?Description;
+};
+

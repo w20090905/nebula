@@ -1,0 +1,19 @@
+@Legacy("adempiere")
+@Remarks("Rule")
+@Refby("1")
+@Table("AD_RULE")
+type AdRule {
+@Column("AD_CLIENT_ID") 	AdClientId ID;/* NULL   */
+@Column("AD_ORG_ID") 	AdOrgId ID;/* NULL   */
+@Column("AD_RULE_ID") 	!AdRuleId ID;
+	?AccessLevel Attr;
+	?Description;
+@ForeignKeyColumn("ENTITYTYPE") 	?EntityType AdEntityType;/* 'U' */
+	?EventType Attr;
+	?Help;
+	*Name;
+	?RuleType Attr;
+	?Script String;
+	Value String;
+};
+

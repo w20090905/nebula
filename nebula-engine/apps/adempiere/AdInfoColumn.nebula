@@ -1,0 +1,21 @@
+@Legacy("adempiere")
+@Remarks("Info Column")
+@Refby("1")
+@Table("AD_INFOCOLUMN")
+type AdInfoColumn {
+@Column("AD_INFOCOLUMN_ID") 	!AdInfoColumnId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("AD_INFOWINDOW_ID") @Column("AD_INFOWINDOW_ID") 	AdInfoWindow;
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+	SelectClause String;
+	SeqNo;/* 0  */
+	IsDisplayed YesNo;/* 'Y'  */
+	IsQueryCriteria YesNo;/* 'N'  */
+@ForeignKeyColumn("AD_ELEMENT_ID") @Column("AD_ELEMENT_ID") 	?AdElement;
+@ForeignKeyColumn("AD_REFERENCE_ID") @Column("AD_REFERENCE_ID") 	AdReference;
+};
+

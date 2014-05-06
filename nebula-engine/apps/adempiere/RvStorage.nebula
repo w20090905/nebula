@@ -1,0 +1,42 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("RV_STORAGE")
+type RvStorage {
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("M_PRODUCT_ID") 	MProductId ID;
+	Value String;
+	*Name;
+	?Description;
+	?Upc;
+	?Sku;
+@Column("C_UOM_ID") 	CUomId ID;
+@Column("M_PRODUCT_CATEGORY_ID") 	MProductCategoryId ID;
+	?Classification String;
+	?Weight;
+	?Volume Number;
+	?VersionNo String;
+	?GuaranteeDays Count;
+	?GuaranteeDaysMin Count;
+@Column("M_LOCATOR_ID") 	MLocatorId ID;
+@Column("M_WAREHOUSE_ID") 	MWarehouseId ID;
+	?X String;
+	?Y String;
+	?Z String;
+	QtyOnHand Number;
+	QtyReserved Number;
+	?QtyAvailable Number;
+	QtyOrdered Number;
+	?DateLastInventory Date;
+@Column("M_ATTRIBUTESETINSTANCE_ID") 	MAttributeSetInstanceId ID;
+@Column("M_ATTRIBUTESET_ID") 	?MAttributeSetId ID;
+	?SerNo String;
+	?Lot Code;
+@Column("M_LOT_ID") 	?MLotId ID;
+	?GuaranteeDate Date;
+	?ShelfLifeDays Count;
+	?GoodForDays Count;
+	?ShelfLifeRemainingPct Number;
+};
+

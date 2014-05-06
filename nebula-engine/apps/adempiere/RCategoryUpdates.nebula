@@ -1,0 +1,12 @@
+@Legacy("adempiere")
+@Remarks("R_CategoryUpdates")
+@Refby("0")
+@Table("R_CATEGORYUPDATES")
+type RCategoryUpdates {
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	!AdUser;
+@ForeignKeyColumn("R_CATEGORY_ID") @Column("R_CATEGORY_ID") 	!RCategory;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	IsSelfService YesNo;/* 'N'  */
+};
+

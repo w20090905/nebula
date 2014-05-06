@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Knowledge Entry Comment")
+@Refby("0")
+@Table("K_COMMENT")
+tx KComment {
+@Column("K_COMMENT_ID") 	!KCommentId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("K_ENTRY_ID") @Column("K_ENTRY_ID") 	KEntry;
+	Rating Amount;
+	IsPublic YesNo;/* 'Y'  */
+@ForeignKeyColumn("AD_SESSION_ID") @Column("AD_SESSION_ID") 	?AdSession;
+	TextMsg Text;
+};
+

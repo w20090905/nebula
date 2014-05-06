@@ -1,0 +1,24 @@
+@Legacy("adempiere")
+@Remarks("Dunning Run Line")
+@Refby("0")
+@Table("C_DUNNINGRUNLINE")
+tx CDunningRunLine {
+@Column("C_DUNNINGRUNLINE_ID") 	!CDunningRunLineId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_DUNNINGRUNENTRY_ID") @Column("C_DUNNINGRUNENTRY_ID") 	CDunningRunEntry;
+@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
+@ForeignKeyColumn("C_PAYMENT_ID") @Column("C_PAYMENT_ID") 	?CPayment;
+	Amt Amount;/* 0  */
+	ConvertedAmt Amount;/* 0  */
+	DaysDue Count;/* 0  */
+	TimesDunned Count;/* 0  */
+	InterestAmt Amount;/* 0  */
+	FeeAmt Amount;/* 0  */
+	TotalAmt Amount;/* 0  */
+	Processed YesNo;/* 'N'  */
+	IsInDispute YesNo;/* 'N'  */
+	OpenAmt Amount;
+@ForeignKeyColumn("C_INVOICEPAYSCHEDULE_ID") @Column("C_INVOICEPAYSCHEDULE_ID") 	?CInvoicePaySchedule;
+};
+

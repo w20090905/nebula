@@ -1,0 +1,11 @@
+@Legacy("adempiere")
+@Remarks("AD_User_Roles")
+@Refby("0")
+@Table("AD_USER_ROLES")
+type AdUserRoleS {
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	!AdUser;
+@ForeignKeyColumn("AD_ROLE_ID") @Column("AD_ROLE_ID") 	!AdRole;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+};
+

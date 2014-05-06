@@ -1,0 +1,23 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("RV_INOUTCONFIRM")
+type RvInoutConfirm {
+@Column("M_INOUTCONFIRM_ID") 	MInoutConfirmId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("M_INOUT_ID") 	MInoutId ID;
+	DocumentNo String;
+	ConfirmType Attr;
+	IsApproved YesNo;
+	IsCanCelled YesNo;
+	?Description;
+	?Processing YesNo;
+	Processed String;
+@Column("C_BPARTNER_ID") 	CBpartnerId ID;
+@Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocationId ID;
+@Column("M_WAREHOUSE_ID") 	MWarehouseId ID;
+@Column("C_ORDER_ID") 	?COrderId ID;
+	IsSoTrx YesNo;
+};
+

@@ -1,0 +1,18 @@
+@Legacy("adempiere")
+@Remarks("Allocate Payment to Invoices")
+@Refby("0")
+@Table("C_PAYMENTALLOCATE")
+tx CPaymentAllocate {
+@Column("C_PAYMENTALLOCATE_ID") 	!CPaymentAllocateId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_PAYMENT_ID") @Column("C_PAYMENT_ID") 	CPayment;
+@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	CInvoice;
+	Amount;/* 0  */
+	DiscountAmt Amount;/* 0  */
+	WriteOffAmt Amount;/* 0  */
+	OverUnderAmt Amount;/* 0  */
+	?InvoiceAmt Amount;/* 0 */
+@ForeignKeyColumn("C_ALLOCATIONLINE_ID") @Column("C_ALLOCATIONLINE_ID") 	?CAllocationLine;
+};
+

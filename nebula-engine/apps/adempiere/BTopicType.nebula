@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Auction Topic Type")
+@Refby("2")
+@Table("B_TOPICTYPE")
+type BTopicType {
+@Column("B_TOPICTYPE_ID") 	!BTopicTypeId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("M_PRICELIST_ID") @Column("M_PRICELIST_ID") 	MPriceList;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+	AuctionType Attr;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCTMEMBER_ID") 	MProductMember MProduct;
+};
+

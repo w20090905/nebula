@@ -1,0 +1,13 @@
+@Legacy("adempiere")
+@Remarks("Exclude the ability to enter Attribute Sets")
+@Refby("0")
+@Table("M_ATTRIBUTESETEXCLUDE")
+tx MAttributeSetExclude {
+@Column("M_ATTRIBUTESETEXCLUDE_ID") 	!MAttributeSetExcludeId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_ATTRIBUTESET_ID") @Column("M_ATTRIBUTESET_ID") 	MAttributeSet;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
+	IsSoTrx YesNo;/* 'Y'  */
+};
+

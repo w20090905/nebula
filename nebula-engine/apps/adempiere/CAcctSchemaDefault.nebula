@@ -1,0 +1,71 @@
+@Legacy("adempiere")
+@Remarks("C_AcctSchema_Default")
+@Refby("0")
+@Table("C_ACCTSCHEMA_DEFAULT")
+type CAcctSchemaDefault {
+@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	!CAcctSchema;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("W_INVENTORY_ACCT") 	WInventoryAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("W_INVACTUALADJUST_ACCT") 	WInvActualAdjustAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("W_DIFFERENCES_ACCT") 	WDifferencesAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("W_REVALUATION_ACCT") 	WRevaluationAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("P_REVENUE_ACCT") 	PRevenueAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("P_EXPENSE_ACCT") 	PExpenseAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("P_ASSET_ACCT") 	PAssetAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("P_PURCHASEPRICEVARIANCE_ACCT") 	PPurchasePriceVarianceAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("P_INVOICEPRICEVARIANCE_ACCT") 	PInvoicePriceVarianceAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("P_TRADEDISCOUNTREC_ACCT") 	PTradeDiscountRecAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("P_TRADEDISCOUNTGRANT_ACCT") 	PTradeDiscountGrantAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("P_COGS_ACCT") 	PCogsAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("C_RECEIVABLE_ACCT") 	CReceivableAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("C_PREPAYMENT_ACCT") 	CPrepaymentAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("V_LIABILITY_ACCT") 	VLiabilityAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("V_LIABILITY_SERVICES_ACCT") 	VLiabilityServiceSAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("V_PREPAYMENT_ACCT") 	VPrepaymentAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("PAYDISCOUNT_EXP_ACCT") 	PayDiscountExpAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("WRITEOFF_ACCT") 	WriteOffAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("PAYDISCOUNT_REV_ACCT") 	PayDiscountRevAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("UNREALIZEDGAIN_ACCT") 	UnrealizedGainAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("UNREALIZEDLOSS_ACCT") 	UnrealizedLossAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("REALIZEDGAIN_ACCT") 	RealizedGainAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("REALIZEDLOSS_ACCT") 	RealizedLossAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("WITHHOLDING_ACCT") 	WithholdingAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("E_PREPAYMENT_ACCT") 	EPrepaymentAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("E_EXPENSE_ACCT") 	EExpenseAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("PJ_ASSET_ACCT") 	PjAssetAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("PJ_WIP_ACCT") 	PjWipAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("T_EXPENSE_ACCT") 	TExpenseAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("T_LIABILITY_ACCT") 	TLiabilityAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("T_RECEIVABLES_ACCT") 	TReceivablesAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("T_DUE_ACCT") 	TDueAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("T_CREDIT_ACCT") 	TCreditAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_INTRANSIT_ACCT") 	BInTransitAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_ASSET_ACCT") 	BAssetAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_EXPENSE_ACCT") 	BExpenseAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_INTERESTREV_ACCT") 	BInterestRevAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_INTERESTEXP_ACCT") 	BInterestExpAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_UNIDENTIFIED_ACCT") 	BUnidentifiedAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_UNALLOCATEDCASH_ACCT") 	BUnallocatedCashAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_PAYMENTSELECT_ACCT") 	BPaymentSelectAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_SETTLEMENTGAIN_ACCT") 	BSettlementGainAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_SETTLEMENTLOSS_ACCT") 	BSettlementLossAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_REVALUATIONGAIN_ACCT") 	BRevaluationGainAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_REVALUATIONLOSS_ACCT") 	BRevaluationLossAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("CH_EXPENSE_ACCT") 	ChExpenseAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("CH_REVENUE_ACCT") 	ChRevenueAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("UNEARNEDREVENUE_ACCT") 	UnearnedRevenueAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("NOTINVOICEDRECEIVABLES_ACCT") 	NotInvoicedReceivablesAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("NOTINVOICEDREVENUE_ACCT") 	NotInvoicedRevenueAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("NOTINVOICEDRECEIPTS_ACCT") 	NotInvoicedReceiptsAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("CB_ASSET_ACCT") 	CbAssetAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("CB_CASHTRANSFER_ACCT") 	CbCashTransferAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("CB_DIFFERENCES_ACCT") 	CbDifferencesAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("CB_EXPENSE_ACCT") 	CbExpenseAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("CB_RECEIPT_ACCT") 	CbReceiptAcct CValidCombination;
+	?Processing YesNo;
+@Column("C_RECEIVABLE_SERVICES_ACCT") 	CReceivableServiceSAcct Number;
+@Column("P_INVENTORYCLEARING_ACCT") 	PInventoryClearingAcct Number;
+@Column("P_COSTADJUSTMENT_ACCT") 	PCostAdjustmentAcct Number;
+};
+

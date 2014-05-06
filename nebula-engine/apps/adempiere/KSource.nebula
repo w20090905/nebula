@@ -1,0 +1,12 @@
+@Legacy("adempiere")
+@Remarks("Source of a Knowledge Entry")
+@Refby("1")
+@Table("K_SOURCE")
+type KSource {
+@Column("K_SOURCE_ID") 	!KSourceId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?DescriptionUrl Url;
+};
+

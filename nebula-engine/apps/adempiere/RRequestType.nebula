@@ -1,0 +1,24 @@
+@Legacy("adempiere")
+@Remarks("Type of request (e.g. Inquiry, Complaint, ..)")
+@Refby("9")
+@Table("R_REQUESTTYPE")
+type RRequestType {
+@Column("R_REQUESTTYPE_ID") 	!RRequestTypeId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	IsDefault YesNo;/* 'N'  */
+	IsSelfService YesNo;/* 'Y' */
+	DueDateTolerance Number;/* 7  */
+	IsEmailWhenOverdue YesNo;/* 'N'  */
+	IsEmailWhenDue YesNo;/* 'N'  */
+	?IsInvoiced YesNo;
+	?AutoDueDateDays Count;
+	ConfidentialType Attr;/* 'C'  */
+	IsAutoChangeRequest YesNo;/* 'N'  */
+	IsConfidentialInfo YesNo;/* 'N'  */
+@ForeignKeyColumn("R_STATUSCATEGORY_ID") @Column("R_STATUSCATEGORY_ID") 	RStatusCategory;
+	IsIndexed YesNo;/* 'Y'  */
+};
+

@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Reference Table Definitions")
+@Refby("0")
+@Table("AD_REF_TABLE")
+type AdRefTable {
+@ForeignKeyColumn("AD_REFERENCE_ID") @Column("AD_REFERENCE_ID") 	!AdReference;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
+@ForeignKeyColumn("AD_COLUMN_ID") @Column("AD_KEY") 	AdKey AdColumn;
+@ForeignKeyColumn("AD_COLUMN_ID") @Column("AD_DISPLAY") 	AdDisplay AdColumn;
+	IsValueDisplayed YesNo;/* 'N'  */
+	?WhereClause String;
+	?OrderByClause String;
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+};
+

@@ -1,0 +1,16 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("M_INOUTLINEMA_VT")
+type MInoutLineMaVt {
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@Column("AD_ORG_ID") 	?AdOrgId ID;
+@Column("M_INOUT_ID") 	?MInoutId ID;
+@Column("M_INOUTLINE_ID") 	?MInoutLineId ID;
+	?Line Number;
+@Column("M_PRODUCT_ID") 	?MProductId ID;
+@Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstanceId ID;
+	?MovementQty Quantity;
+@Column("M_LOCATOR_ID") 	?MLocatorId ID;
+};
+

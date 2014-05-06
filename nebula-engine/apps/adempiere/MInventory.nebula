@@ -1,0 +1,31 @@
+@Legacy("adempiere")
+@Remarks("Parameters for a Physical Inventory")
+@Refby("4")
+@Table("M_INVENTORY")
+tx MInventory {
+@Column("M_INVENTORY_ID") 	!MInventoryId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	DocumentNo String;
+	?Description;
+@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	MWarehouse;
+	MovementDate Date;
+	Posted YesNo;/* 'N'  */
+	Processed YesNo;/* 'N'  */
+	?Processing YesNo;
+	?UpdateQty YesNo;/* 'N'                           */
+	?GenerateList YesNo;/* 'Y'                           */
+@ForeignKeyColumn("M_PERPETUALINV_ID") @Column("M_PERPETUALINV_ID") 	?MPerpetualInv;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
+@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
+@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER1_ID") 	?User1 CElementValue;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER2_ID") 	?User2 CElementValue;
+	IsApproved YesNo;/* 'N'  */
+	DocStatus Attr;
+	DocAction Attr;
+	?ApprovalAmt Amount;
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	CDocType;
+};
+

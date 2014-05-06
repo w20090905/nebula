@@ -1,0 +1,20 @@
+@Legacy("adempiere")
+@Remarks("Change Request")
+@Refby("1")
+@Table("M_CHANGEREQUEST")
+type MChangeRequest {
+@Column("M_CHANGEREQUEST_ID") 	!MChangeRequestId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_BOM_ID") @Column("M_BOM_ID") 	MBom;
+@ForeignKeyColumn("M_CHANGENOTICE_ID") @Column("M_CHANGENOTICE_ID") 	?MChangeNotIce;
+	DocumentNo String;
+	*Name;
+	?Description;
+	?Help;
+	?DetailInfo null;
+@ForeignKeyColumn("M_CHANGENOTICE_ID") @Column("M_FIXCHANGENOTICE_ID") 	?MFixChangeNotIce MChangeNotIce;
+	Processed YesNo;/* 'N'  */
+	IsApproved YesNo;/* 'N'  */
+};
+

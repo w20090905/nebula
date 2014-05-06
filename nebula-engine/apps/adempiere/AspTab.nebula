@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("ASP Tab")
+@Refby("0")
+@Table("ASP_TAB")
+type AspTab {
+@Column("AD_CLIENT_ID") 	AdClientId ID;/* NULL   */
+@Column("AD_ORG_ID") 	AdOrgId ID;/* NULL   */
+@ForeignKeyColumn("AD_TAB_ID") @Column("AD_TAB_ID") 	!AdTab;
+@ForeignKeyColumn("AD_WINDOW_ID") @Column("AD_WINDOW_ID") 	!AdWindow;
+@ForeignKeyColumn("ASP_LEVEL_ID") @Column("ASP_LEVEL_ID") 	!AspLevel;
+@Column("ASP_STATUS") 	AspStatus Attr;/* 'U'  */
+	?AllFields YesNo;/* 'Y'  */
+	?Processing YesNo;
+};
+

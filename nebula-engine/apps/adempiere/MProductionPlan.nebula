@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Plan for how a product is produced")
+@Refby("1")
+@Table("M_PRODUCTIONPLAN")
+tx MProductionPlan {
+@Column("M_PRODUCTIONPLAN_ID") 	!MProductionPlanId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_PRODUCTION_ID") @Column("M_PRODUCTION_ID") 	MProduction;
+	Line Number;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+	ProductionQty Quantity;/* 0  */
+@ForeignKeyColumn("M_LOCATOR_ID") @Column("M_LOCATOR_ID") 	MLocator;
+	?Description;
+	Processed YesNo;/* 'N'  */
+};
+

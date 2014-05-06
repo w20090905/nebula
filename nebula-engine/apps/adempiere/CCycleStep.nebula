@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("The step for this Cycle")
+@Refby("1")
+@Table("C_CYCLESTEP")
+type CCycleStep {
+@Column("C_CYCLESTEP_ID") 	!CCycleStepId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_CYCLE_ID") @Column("C_CYCLE_ID") 	CCycle;
+	SeqNo;
+	RelativeWeight Weight;
+	*Name;
+};
+

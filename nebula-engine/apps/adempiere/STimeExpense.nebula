@@ -1,0 +1,22 @@
+@Legacy("adempiere")
+@Remarks("Time and Expense Report")
+@Refby("1")
+@Table("S_TIMEEXPENSE")
+tx STimeExpense {
+@Column("S_TIMEEXPENSE_ID") 	!STimeExpenseId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	DocumentNo String;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
+	DateReport Date;
+	?Description;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+@ForeignKeyColumn("M_PRICELIST_ID") @Column("M_PRICELIST_ID") 	MPriceList;
+@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	MWarehouse;
+	IsApproved YesNo;/* 'N'  */
+	DocStatus Attr;
+	DocAction Attr;
+	?ApprovalAmt Amount;
+};
+

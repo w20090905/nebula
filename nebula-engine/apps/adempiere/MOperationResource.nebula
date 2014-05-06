@@ -1,0 +1,19 @@
+@Legacy("adempiere")
+@Remarks("Product Operation Resource")
+@Refby("0")
+@Table("M_OPERATIONRESOURCE")
+type MOperationResource {
+@Column("M_OPERATIONRESOURCE_ID") 	!MOperationResourceId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_PRODUCTOPERATION_ID") @Column("M_PRODUCTOPERATION_ID") 	MProductOperation;
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("A_ASSET_ID") @Column("A_ASSET_ID") 	?AAsset;
+@ForeignKeyColumn("C_JOB_ID") @Column("C_JOB_ID") 	?CJob;
+	SetUptime Number;/* 0  */
+	UnitRunTime Count;/* 0  */
+	TeardownTime Count;/* 0  */
+};
+

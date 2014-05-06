@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("A_ASSET_CHANGE_AMT")
+type AAssetChangeAmt {
+@ForeignKeyColumn("A_ASSET_CHANGE_ID") @Column("A_ASSET_CHANGE_ID") 	!AAssetChange;
+@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	!CAcctSchema;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	AssetValueAmt Amount;/* 0  */
+	AssetMarketValueAmt Amount;/* 0  */
+	AssetBookValueAmt Amount;/* 0  */
+	AssetAccumdePreciationAmt Amount;/* 0  */
+};
+

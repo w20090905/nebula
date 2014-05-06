@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Identifies a Menu")
+@Refby("0")
+@Table("AD_MENU_TRL")
+type AdMenuTrl {
+@ForeignKeyColumn("AD_MENU_ID") @Column("AD_MENU_ID") 	!AdMenu;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	IsTranslated YesNo;/* 'N'  */
+};
+

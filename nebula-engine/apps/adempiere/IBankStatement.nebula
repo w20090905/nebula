@@ -1,0 +1,60 @@
+@Legacy("adempiere")
+@Remarks("Import of the Bank Statement")
+@Refby("0")
+@Table("I_BANKSTATEMENT")
+type IBankStatement {
+@Column("I_BANKSTATEMENT_ID") 	!IBankStatementId ID;
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@Column("AD_ORG_ID") 	?AdOrgId ID;
+@Column("I_ISIMPORTED") 	IIsImported YesNo;/* 'N'  */
+@Column("I_ERRORMSG") 	?IErrorMsg Message;
+	?Processed YesNo;/* 'N' */
+@ForeignKeyColumn("C_BANKSTATEMENT_ID") @Column("C_BANKSTATEMENT_ID") 	?CBankStatement;
+	?StatementDate Date;
+	?Description;
+@ForeignKeyColumn("C_BANKACCOUNT_ID") @Column("C_BANKACCOUNT_ID") 	?CBankAccount;
+	?RoutingNo String;
+	?BankAccountNo String;
+@ForeignKeyColumn("C_PAYMENT_ID") @Column("C_PAYMENT_ID") 	?CPayment;
+	?PaymentDocumentNo String;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
+@Column("ISO_CODE") 	?IsoCode Code;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+	?Name;
+	?BpartnerValue String;
+@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
+	?InvoiceDocumentNo String;
+@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	?CCharge;
+	?ChargeName Name;
+	?ChargeAmt Amount;/* 0 */
+@ForeignKeyColumn("C_BANKSTATEMENTLINE_ID") @Column("C_BANKSTATEMENTLINE_ID") 	?CBankStatementLine;
+	?Line Number;
+	?DateAcct Date;
+	?ValutaDate Date;
+	?StatementLineDate Date;
+	?TrxType String;
+	?ReferenceNo String;
+	?Memo String;
+	?IsReversal YesNo;/* 'N' */
+	?InterestAmt Amount;/* 0 */
+	?TrxAmt Amount;/* 0 */
+	?LineDescription Description;
+	?StmtAmt Amount;/* 0 */
+	?EftStatementDate Date;
+	?EftStatementReference String;
+	?EftStatementLineDate Date;
+	?EftValutaDate Date;
+	?EftReference String;
+	?EftCheckNo String;
+	?EftTrxId String;
+	?EftTrxType String;
+	?EftMemo String;
+	?EftPayee String;
+	?EftPayeeAccount String;
+	?EftAmt Amount;/* 0 */
+	?EftCurrency String;
+	?CreatePayment String;
+	?Processing YesNo;
+	?MatchStatement String;
+};
+

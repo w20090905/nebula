@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Operation System Task")
+@Refby("0")
+@Table("AD_TASK_TRL")
+type AdTaskTrl {
+@ForeignKeyColumn("AD_TASK_ID") @Column("AD_TASK_ID") 	!AdTask;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+	IsTranslated YesNo;/* 'N'  */
+};
+

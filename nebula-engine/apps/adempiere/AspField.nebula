@@ -1,0 +1,13 @@
+@Legacy("adempiere")
+@Remarks("ASP Field")
+@Refby("0")
+@Table("ASP_FIELD")
+type AspField {
+@Column("AD_CLIENT_ID") 	AdClientId ID;/* NULL   */
+@ForeignKeyColumn("AD_FIELD_ID") @Column("AD_FIELD_ID") 	!AdField;
+@Column("AD_ORG_ID") 	AdOrgId ID;/* NULL   */
+@ForeignKeyColumn("AD_TAB_ID") @Column("AD_TAB_ID") 	!AdTab;
+@ForeignKeyColumn("ASP_LEVEL_ID") @Column("ASP_LEVEL_ID") 	!AspLevel;
+@Column("ASP_STATUS") 	AspStatus Attr;/* 'U'  */
+};
+

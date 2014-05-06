@@ -1,0 +1,18 @@
+@Legacy("adempiere")
+@Remarks("Landed Cost")
+@Refby("0")
+@Table("C_LANDEDCOST")
+tx CLandedCost {
+@Column("C_LANDEDCOST_ID") 	!CLandedCostId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	?Description;
+@ForeignKeyColumn("C_INVOICELINE_ID") @Column("C_INVOICELINE_ID") 	CInvoiceLine;
+@ForeignKeyColumn("M_COSTELEMENT_ID") @Column("M_COSTELEMENT_ID") 	MCostElement;
+@ForeignKeyColumn("M_INOUTLINE_ID") @Column("M_INOUTLINE_ID") 	?MInoutLine;
+@ForeignKeyColumn("M_INOUT_ID") @Column("M_INOUT_ID") 	?MInout;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+	LandedCostDistribution String;
+	?Processing YesNo;
+};
+

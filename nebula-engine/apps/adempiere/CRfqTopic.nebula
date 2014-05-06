@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Topic for Request for Quotations")
+@Refby("2")
+@Table("C_RFQ_TOPIC")
+type CRfqTopic {
+@Column("C_RFQ_TOPIC_ID") 	!CRfqTopicId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	IsSelfService YesNo;/* 'N'  */
+@ForeignKeyColumn("AD_PRINTFORMAT_ID") @Column("AD_PRINTFORMAT_ID") 	?AdPrintFormat;
+};
+

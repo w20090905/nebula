@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Product Price")
+@Refby("0")
+@Table("M_PRODUCTPRICE")
+type MProductPrice {
+@ForeignKeyColumn("M_PRICELIST_VERSION_ID") @Column("M_PRICELIST_VERSION_ID") 	!MPriceListVersion;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	!MProduct;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	PriceList Number;/* 0  */
+	PriceStd Number;/* 0  */
+	PriceLimit Number;/* 0  */
+};
+

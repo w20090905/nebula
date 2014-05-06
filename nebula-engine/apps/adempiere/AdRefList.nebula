@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Reference List based on Table")
+@Refby("2")
+@Table("AD_REF_LIST")
+type AdRefList {
+@Column("AD_REF_LIST_ID") 	!AdRefListId ID;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	Value String;
+	*Name;
+	?Description;
+@ForeignKeyColumn("AD_REFERENCE_ID") @Column("AD_REFERENCE_ID") 	AdReference;
+	?ValidFrom Date;
+	?ValidTo Date;
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+};
+

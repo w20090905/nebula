@@ -1,0 +1,26 @@
+@Legacy("adempiere")
+@Remarks("Import Currency Conversion Rate")
+@Refby("0")
+@Table("I_CONVERSION_RATE")
+tx IConversionRate {
+@Column("I_CONVERSION_RATE_ID") 	!IConversionRateId ID;
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@Column("AD_ORG_ID") 	?AdOrgId ID;
+@ForeignKeyColumn("C_CONVERSION_RATE_ID") @Column("C_CONVERSION_RATE_ID") 	?CConversionRate;
+@Column("ISO_CODE") 	?IsoCode Code;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
+@Column("ISO_CODE_TO") 	?IsoCodeTo Attr;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID_TO") 	?CCurrencyIdTo CCurrency;
+	?ConversionTypeValue String;
+@ForeignKeyColumn("C_CONVERSIONTYPE_ID") @Column("C_CONVERSIONTYPE_ID") 	?CConversionType;
+	?ValidFrom Date;
+	?ValidTo Date;
+	?MultiplyRate Amount;
+	?DivideRate Amount;
+	?CreateReciprocalRate YesNo;/* 'N'                               */
+@Column("I_ISIMPORTED") 	?IIsImported YesNo;/* 'N'  */
+@Column("I_ERRORMSG") 	?IErrorMsg Message;
+	?Processing YesNo;
+	?Processed YesNo;/* 'N' */
+};
+

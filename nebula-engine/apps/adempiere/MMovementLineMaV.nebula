@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("M_MOVEMENTLINEMA_V")
+type MMovementLineMaV {
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@Column("AD_ORG_ID") 	?AdOrgId ID;
+@Column("M_MOVEMENT_ID") 	?MMovementId ID;
+@Column("M_MOVEMENTLINE_ID") 	?MMovementLineId ID;
+	?Line Number;
+@Column("M_PRODUCT_ID") 	?MProductId ID;
+@Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstanceId ID;
+	?MovementQty Quantity;
+@Column("M_LOCATOR_ID") 	?MLocatorId ID;
+@Column("M_LOCATORTO_ID") 	?MLocatorToId ID;
+};
+

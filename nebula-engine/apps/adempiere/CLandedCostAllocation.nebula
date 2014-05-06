@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Landed Cost Allocation")
+@Refby("0")
+@Table("C_LANDEDCOSTALLOCATION")
+tx CLandedCostAllocation {
+@Column("C_LANDEDCOSTALLOCATION_ID") 	!CLandedCostAllocationId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_INVOICELINE_ID") @Column("C_INVOICELINE_ID") 	CInvoiceLine;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstance;
+@ForeignKeyColumn("M_COSTELEMENT_ID") @Column("M_COSTELEMENT_ID") 	MCostElement;
+	Amt Amount;/* 0  */
+	Qty Quantity;/* 0  */
+	Base Number;/* 0  */
+};
+

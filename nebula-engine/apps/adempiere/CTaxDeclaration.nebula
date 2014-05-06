@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Define the declaration to the tax authorities")
+@Refby("2")
+@Table("C_TAXDECLARATION")
+type CTaxDeclaration {
+@Column("C_TAXDECLARATION_ID") 	!CTaxDeclarationId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	DateTrx Date;
+	DateFrom Date;
+	DateTo Date;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+};
+

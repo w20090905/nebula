@@ -1,0 +1,29 @@
+@Legacy("adempiere")
+@Remarks("Definition of Bank Statement Loader (SWIFT, OFX)")
+@Refby("0")
+@Table("C_BANKSTATEMENTLOADER")
+type CBankStatementLoader {
+@Column("C_BANKSTATEMENTLOADER_ID") 	!CBankStatementLoaderId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+@ForeignKeyColumn("C_BANKACCOUNT_ID") @Column("C_BANKACCOUNT_ID") 	CBankAccount;
+	?StmtLoaderClass String;
+	?FinancialInstitutionId String;
+	?BranchId String;
+	?UserId String;
+	?Password String;
+	?Pin String;
+	?AccountNo String;
+	?HostAddress Host;
+	?HostPort Port;
+	?ProxyAddress Address;
+	?ProxyPort Port;
+	?ProxyLogon String;
+	?ProxyPassword String;
+	?FileName Name;
+	?DateLastRun Date;
+	?DateFormat String;
+};
+

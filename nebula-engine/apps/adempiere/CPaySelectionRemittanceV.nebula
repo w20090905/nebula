@@ -1,0 +1,24 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("C_PAYSELECTION_REMITTANCE_V")
+type CPaySelectionRemittanceV {
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("AD_LANGUAGE") 	?AdLanguage Code;
+@Column("C_PAYSELECTION_ID") 	CPaySelectionId ID;
+@Column("C_PAYSELECTIONLINE_ID") 	CPaySelectionLineId ID;
+@Column("C_PAYSELECTIONCHECK_ID") 	?CPaySelectionCheckId ID;
+	PaymentRule String;
+	Line Number;
+	OpenAmt Amount;
+	PayAmt Amount;
+	DiscountAmt Amount;
+	DifferenceAmt Amount;
+@Column("C_BPARTNER_ID") 	CBpartnerId ID;
+	DocumentNo String;
+	DateInvoiced Date;
+	GrandTotal Number;
+	AmtInWords Amount;
+};
+

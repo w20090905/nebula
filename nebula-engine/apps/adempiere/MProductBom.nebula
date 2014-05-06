@@ -1,0 +1,16 @@
+@Legacy("adempiere")
+@Remarks("BOM Line")
+@Refby("0")
+@Table("M_PRODUCT_BOM")
+tx MProductBom {
+@Column("M_PRODUCT_BOM_ID") 	!MProductBomId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	Line Number;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCTBOM_ID") 	MProductBom MProduct;
+	BomQty Quantity;/* 0  */
+	?Description;
+	?BomType Attr;
+};
+

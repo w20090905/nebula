@@ -1,0 +1,29 @@
+@Legacy("adempiere")
+@Remarks("Web Advertisement")
+@Refby("0")
+@Table("W_ADVERTISEMENT")
+type WAdvertisement {
+@Column("W_ADVERTISEMENT_ID") 	!WAdvertisementId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+	IsSelfService YesNo;/* 'N'  	  */
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+@ForeignKeyColumn("W_CLICKCOUNT_ID") @Column("W_CLICKCOUNT_ID") 	?WClickCount;
+@ForeignKeyColumn("W_COUNTERCOUNT_ID") @Column("W_COUNTERCOUNT_ID") 	?WCounterCount;
+	?ValidFrom Date;
+	?ValidTo Date;
+	?ImageUrl Url;
+	?AdText Text;
+	?WebParam1 String;
+	?WebParam2 String;
+	?WebParam3 String;
+	?WebParam4 String;
+	PublishStatus Attr;/* NULL */
+	?Version Number;
+	?Processing YesNo;
+};
+

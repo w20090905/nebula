@@ -1,0 +1,13 @@
+@Legacy("adempiere")
+@Remarks("Type of time recorded")
+@Refby("1")
+@Table("S_TIMETYPE")
+type STimeType {
+@Column("S_TIMETYPE_ID") 	!STimeTypeId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+};
+

@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Attachment for the document")
+@Refby("1")
+@Table("AD_ATTACHMENT")
+tx AdAttachment {
+@Column("AD_ATTACHMENT_ID") 	!AdAttachmentId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
+@Column("RECORD_ID") 	RecordId ID;
+	Title;
+	?BinaryData Text;
+	?TextMsg Text;
+};
+

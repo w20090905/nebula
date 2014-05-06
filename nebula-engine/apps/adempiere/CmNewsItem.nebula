@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("News item or article defines base content")
+@Refby("0")
+@Table("CM_NEWSITEM")
+tx CmNewsItem {
+@Column("CM_NEWSITEM_ID") 	!CmNewsItemId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("CM_NEWSCHANNEL_ID") @Column("CM_NEWSCHANNEL_ID") 	CmNewsChannel;
+	?Title;
+	?Description;
+	?Author String;
+	?LinkUrl Url;
+	?PubDate Date;
+	?ContentHtml null;
+};
+

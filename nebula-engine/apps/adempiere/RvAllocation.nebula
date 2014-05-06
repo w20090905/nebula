@@ -1,0 +1,30 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("RV_ALLOCATION")
+type RvAllocation {
+@Column("C_ALLOCATIONHDR_ID") 	CAllocationHdrId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	DocumentNo String;
+	?Description;
+	DateTrx Date;
+	DateAcct Date;
+@Column("C_CURRENCY_ID") 	CCurrencyId ID;
+	ApprovalAmt Amount;
+	IsManual YesNo;
+	DocStatus Attr;
+	DocAction Attr;
+	Processed String;
+@Column("C_ALLOCATIONLINE_ID") 	CAllocationLineId ID;
+@Column("C_INVOICE_ID") 	?CInvoiceId ID;
+@Column("C_BPARTNER_ID") 	?CBpartnerId ID;
+@Column("C_ORDER_ID") 	?COrderId ID;
+@Column("C_PAYMENT_ID") 	?CPaymentId ID;
+@Column("C_CASHLINE_ID") 	?CCashLineId ID;
+	Amount;
+	DiscountAmt Amount;
+	WriteOffAmt Amount;
+	?OverUnderAmt Amount;
+};
+

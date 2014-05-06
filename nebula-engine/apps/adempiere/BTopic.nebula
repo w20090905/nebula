@@ -1,0 +1,23 @@
+@Legacy("adempiere")
+@Remarks("Auction Topic")
+@Refby("3")
+@Table("B_TOPIC")
+type BTopic {
+@Column("B_TOPIC_ID") 	!BTopicId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	DocumentNo String;
+	*Name;
+	?Description;
+	?TextMsg Text;
+	TopicStatus Attr;
+	TopicAction Attr;
+	IsPublished YesNo;/* 'Y'  */
+	?TextDetails null;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+@ForeignKeyColumn("B_TOPICTYPE_ID") @Column("B_TOPICTYPE_ID") 	BTopicType;
+@ForeignKeyColumn("B_TOPICCATEGORY_ID") @Column("B_TOPICCATEGORY_ID") 	BTopicCategory;
+	DecisionDate Date;
+};
+

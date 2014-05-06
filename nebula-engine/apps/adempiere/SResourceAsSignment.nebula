@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Resource Assignment")
+@Refby("3")
+@Table("S_RESOURCEASSIGNMENT")
+type SResourceAsSignment {
+@Column("S_RESOURCEASSIGNMENT_ID") 	!SResourceAsSignmentId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("S_RESOURCE_ID") @Column("S_RESOURCE_ID") 	SResource;
+	*Name;
+	?Description;
+	AsSignDateFrom Date;
+	?AsSignDateTo Date;
+	?Qty Quantity;/* 0 */
+	IsConfirmed YesNo;/* 'N'  */
+};
+

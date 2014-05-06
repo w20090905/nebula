@@ -1,0 +1,23 @@
+@Legacy("adempiere")
+@Remarks("M_TransactionAllocation")
+@Refby("0")
+@Table("M_TRANSACTIONALLOCATION")
+tx MTransactionAllocation {
+@ForeignKeyColumn("M_TRANSACTION_ID") @Column("M_TRANSACTION_ID") 	!MTransaction;
+	!AllocationStrategyType Attr;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	MAttributeSetInstance;/* 0 */
+	IsAllocated YesNo;/* 'N'  */
+	Qty Quantity;/* 0  */
+	IsManual YesNo;/* 'N'  */
+@ForeignKeyColumn("M_INOUTLINE_ID") @Column("M_INOUTLINE_ID") 	?MInoutLine;
+@ForeignKeyColumn("M_PRODUCTIONLINE_ID") @Column("M_PRODUCTIONLINE_ID") 	?MProductionLine;
+@ForeignKeyColumn("M_INVENTORYLINE_ID") @Column("M_INVENTORYLINE_ID") 	?MInventoryLine;
+@ForeignKeyColumn("M_TRANSACTION_ID") @Column("OUT_M_TRANSACTION_ID") 	?OutMTransaction MTransaction;
+@ForeignKeyColumn("M_INOUTLINE_ID") @Column("OUT_M_INOUTLINE_ID") 	?OutMInoutLine MInoutLine;
+@ForeignKeyColumn("M_PRODUCTIONLINE_ID") @Column("OUT_M_PRODUCTIONLINE_ID") 	?OutMProductionLine MProductionLine;
+@ForeignKeyColumn("M_INVENTORYLINE_ID") @Column("OUT_M_INVENTORYLINE_ID") 	?OutMInventoryLine MInventoryLine;
+};
+

@@ -1,0 +1,32 @@
+@Legacy("adempiere")
+@Remarks("Import Account Value")
+@Refby("0")
+@Table("I_ELEMENTVALUE")
+type IElementValue {
+@Column("I_ELEMENTVALUE_ID") 	!IElementValueId ID;
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@Column("AD_ORG_ID") 	?AdOrgId ID;
+@Column("I_ISIMPORTED") 	IIsImported YesNo;/* 'N'  */
+@Column("I_ERRORMSG") 	?IErrorMsg Message;
+@ForeignKeyColumn("C_ELEMENT_ID") @Column("C_ELEMENT_ID") 	?CElement;
+	?ElementName Name;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("C_ELEMENTVALUE_ID") 	?CElementValue;
+	?Value String;
+	?Name;
+	?Description;
+	?AccountType Attr;
+	?AccountSign String;
+	?IsDocControlled YesNo;/* 'N' */
+	?IsSummary YesNo;/* 'N' */
+	?ParentValue String;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("PARENTELEMENTVALUE_ID") 	?ParentElementValue CElementValue;
+	?PostActual YesNo;/* 'Y' */
+	?PostBudget YesNo;/* 'Y' */
+	?PostStatistical YesNo;/* 'Y' */
+	?PostEncumbrance YesNo;/* 'Y' */
+@Column("DEFAULT_ACCOUNT") 	?DefaultAccount String;
+@ForeignKeyColumn("AD_COLUMN_ID") @Column("AD_COLUMN_ID") 	?AdColumn;
+	?Processing YesNo;
+	?Processed YesNo;/* 'N' */
+};
+

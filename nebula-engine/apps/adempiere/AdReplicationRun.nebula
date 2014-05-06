@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Data Replication Run")
+@Refby("1")
+@Table("AD_REPLICATION_RUN")
+type AdReplicationRun {
+@Column("AD_REPLICATION_RUN_ID") 	!AdReplicationRunId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+@ForeignKeyColumn("AD_REPLICATION_ID") @Column("AD_REPLICATION_ID") 	AdReplication;
+	IsReplicated YesNo;/* 'N'  */
+	?Description;
+};
+

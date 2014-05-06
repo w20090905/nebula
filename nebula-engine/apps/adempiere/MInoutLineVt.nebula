@@ -1,0 +1,44 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("M_INOUT_LINE_VT")
+type MInoutLineVt {
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@Column("AD_ORG_ID") 	?AdOrgId ID;
+@Column("AD_LANGUAGE") 	?AdLanguage Code;
+@Column("M_INOUT_ID") 	?MInoutId ID;
+@Column("M_INOUTLINE_ID") 	?MInoutLineId ID;
+	?Line Number;
+@Column("M_PRODUCT_ID") 	?MProductId ID;
+	?MovementQty Quantity;
+	?QtyEntered Number;
+	?UomSymbol String;
+	?QtyOrdered Number;
+	?QtyDelivered Number;
+	?QtyBackOrdered Number;
+	?Name;
+	?Description;
+	?DocumentNote Note;
+	?Upc;
+	?Sku;
+	?ProductValue String;
+@Column("M_LOCATOR_ID") 	?MLocatorId ID;
+@Column("M_WAREHOUSE_ID") 	?MWarehouseId ID;
+	?X String;
+	?Y String;
+	?Z String;
+@Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstanceId ID;
+@Column("M_ATTRIBUTESET_ID") 	?MAttributeSetId ID;
+	?SerNo String;
+	?Lot Code;
+@Column("M_LOT_ID") 	?MLotId ID;
+	?GuaranteeDate Date;
+	?ProductDescription Description;
+	?ImageUrl Url;
+@Column("C_CAMPAIGN_ID") 	?CCampaignId ID;
+@Column("C_PROJECT_ID") 	?CProjectId ID;
+@Column("C_ACTIVITY_ID") 	?CActivityId ID;
+@Column("C_PROJECTPHASE_ID") 	?CProjectPhaseId ID;
+@Column("C_PROJECTTASK_ID") 	?CProjectTaskId ID;
+};
+

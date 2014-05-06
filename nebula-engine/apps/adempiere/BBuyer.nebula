@@ -1,0 +1,13 @@
+@Legacy("adempiere")
+@Remarks("B_Buyer")
+@Refby("2")
+@Table("B_BUYER")
+type BBuyer {
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	!AdUser;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	ValidTo Date;
+};
+

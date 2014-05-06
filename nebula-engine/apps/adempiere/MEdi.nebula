@@ -1,0 +1,29 @@
+@Legacy("adempiere")
+@Remarks("EDI Transaction")
+@Refby("1")
+@Table("M_EDI")
+tx MEdi {
+@Column("M_EDI_ID") 	!MEdiId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_BP_EDI_ID") @Column("C_BP_EDI_ID") 	CBpEdi;
+	DocumentNo String;
+	Line Number;
+	TrxType Attr;
+	EdiStatus Attr;
+@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	MWarehouse;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+@Column("REQUEST_QTY") 	RequestQty Quantity;/* 0  */
+@Column("REQUEST_SHIPDATE") 	RequestShipDate Date;
+@Column("REQUEST_PRICE") 	?RequestPrice Number;/* 0 */
+	TrxSent null;
+	?TrxReceived null;
+@Column("REPLY_RECEIVED") 	?ReplyReceived null;
+@Column("REPLY_QTYCONFIRMED") 	?ReplyQtyConfirmed Number;/* 0 */
+@Column("REPLY_QTYAVAILABLE") 	?ReplyQtyAvailable Number;/* 0 */
+@Column("REPLY_SHIPDATE") 	?ReplyShipDate Date;
+@Column("REPLY_PRICE") 	?ReplyPrice Number;/* 0 */
+@Column("REPLY_REMARKS") 	?ReplyRemarks String;
+	Processed YesNo;/* 'N'  */
+};
+

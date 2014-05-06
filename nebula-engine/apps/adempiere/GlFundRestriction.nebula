@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Restriction of Funds")
+@Refby("0")
+@Table("GL_FUNDRESTRICTION")
+type GlFundRestriction {
+@Column("GL_FUNDRESTRICTION_ID") 	!GlFundRestrictionId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+@ForeignKeyColumn("GL_FUND_ID") @Column("GL_FUND_ID") 	GlFund;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("C_ELEMENTVALUE_ID") 	CElementValue;
+};
+

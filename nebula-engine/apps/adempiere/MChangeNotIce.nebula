@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Change Notice")
+@Refby("6")
+@Table("M_CHANGENOTICE")
+type MChangeNotIce {
+@Column("M_CHANGENOTICE_ID") 	!MChangeNotIceId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+	?DetailInfo null;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	IsApproved YesNo;/* 'N'  */
+};
+

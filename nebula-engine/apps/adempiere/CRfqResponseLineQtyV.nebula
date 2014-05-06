@@ -1,0 +1,18 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("C_RFQRESPONSELINEQTY_V")
+type CRfqResponseLineQtyV {
+@Column("C_RFQRESPONSELINE_ID") 	CRfqResponseLineId ID;
+@Column("C_RFQRESPONSELINEQTY_ID") 	CRfqResponseLineQtyId ID;
+@Column("C_RFQLINEQTY_ID") 	CRfqLineQtyId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("AD_LANGUAGE") 	?AdLanguage Code;
+@Column("C_UOM_ID") 	CUomId ID;
+	?UomSymbol String;
+	Qty Quantity;
+	Price Number;
+	?Discount Percent;
+};
+

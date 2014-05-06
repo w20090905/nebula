@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("AD_Column_Access")
+@Refby("0")
+@Table("AD_COLUMN_ACCESS")
+type AdColumnAccess {
+@ForeignKeyColumn("AD_ROLE_ID") @Column("AD_ROLE_ID") 	!AdRole;
+@ForeignKeyColumn("AD_COLUMN_ID") @Column("AD_COLUMN_ID") 	!AdColumn;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	IsReadonly YesNo;/* 'N'  	  */
+	IsExclude YesNo;/* 'Y'  	  */
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	?AdTable;
+};
+

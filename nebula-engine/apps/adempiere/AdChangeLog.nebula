@@ -1,0 +1,22 @@
+@Legacy("adempiere")
+@Remarks("Log of data changes")
+@Refby("0")
+@Table("AD_CHANGELOG")
+type AdChangeLog {
+@Column("AD_CHANGELOG_ID") 	!AdChangeLogId ID;
+@ForeignKeyColumn("AD_SESSION_ID") @Column("AD_SESSION_ID") 	!AdSession;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	!AdTable;
+@ForeignKeyColumn("AD_COLUMN_ID") @Column("AD_COLUMN_ID") 	!AdColumn;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("RECORD_ID") 	RecordId ID;
+	?OldValue String;
+	?NewValue String;
+	?Undo String;
+	?Redo String;
+	IsCustomization YesNo;/* 'N'  */
+	?TrxName Name;
+	?Description;
+	?EventChangeLog String;
+};
+

@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("A_ASSET_ACCT")
+type AAssetAcct {
+@ForeignKeyColumn("A_ASSET_ID") @Column("A_ASSET_ID") 	!AAsset;
+@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	!CAcctSchema;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("A_DEPRECIATION_ID") @Column("A_DEPRECIATION_ID") 	ADepreciation;
+@Column("A_DEPRECIATION_ACCT") 	ADepreciationAcct Number;
+@Column("A_ACCUMDEPRECIATION_ACCT") 	AAccumdePreciationAcct Number;
+@Column("A_DISPOSAL_LOSS") 	ADisposalLoss Number;
+@Column("A_DISPOSAL_GAIN") 	ADisposalGain Number;
+@Column("A_ASSET_ACCT") 	AAssetAcct Number;
+};
+

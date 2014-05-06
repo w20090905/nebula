@@ -1,0 +1,31 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("C_RFQRESPONSE_V")
+type CRfqResponseV {
+@Column("C_RFQRESPONSE_ID") 	CRfqResponseId ID;
+@Column("C_RFQ_ID") 	CRfqId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("AD_LANGUAGE") 	?AdLanguage Code;
+@Column("ORG_LOCATION_ID") 	?OrgLocationId ID;
+	TaxId String;
+	*Name;
+	?Description;
+	?Help;
+@Column("C_CURRENCY_ID") 	CCurrencyId ID;
+@Column("ISO_CODE") 	IsoCode Code;
+	DateResponse Date;
+	?DateWorkStart Date;
+	?DeliveryDays Count;
+@Column("C_BPARTNER_ID") 	CBpartnerId ID;
+	BpName Name;
+	?BpName2 Name;
+@Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocationId ID;
+@Column("C_LOCATION_ID") 	?CLocationId ID;
+@Column("AD_USER_ID") 	?AdUserId ID;
+	?Title;
+	?Phone;
+	?ContactName Name;
+};
+

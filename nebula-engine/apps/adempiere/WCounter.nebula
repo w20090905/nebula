@@ -1,0 +1,20 @@
+@Legacy("adempiere")
+@Remarks("Individual Count hit")
+@Refby("0")
+@Table("W_COUNTER")
+tx WCounter {
+@Column("W_COUNTER_ID") 	!WCounterId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	PageUrl Url;
+	?Referrer String;
+@Column("REMOTE_HOST") 	?RemoteHost Host;
+@Column("REMOTE_ADDR") 	?RemoteAddr Message;
+	?UserAgent String;
+	?AcceptLanguage Code;
+	Processed YesNo;/* 'N'  */
+@ForeignKeyColumn("W_COUNTERCOUNT_ID") @Column("W_COUNTERCOUNT_ID") 	?WCounterCount;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+	?Email;
+};
+

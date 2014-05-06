@@ -1,0 +1,38 @@
+@Legacy("adempiere")
+@Remarks("Line of the pricelist trade discount schema")
+@Refby("0")
+@Table("M_DISCOUNTSCHEMALINE")
+tx MDiscountSchemaLine {
+@Column("M_DISCOUNTSCHEMALINE_ID") 	!MDiscountSchemaLineId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_DISCOUNTSCHEMA_ID") @Column("M_DISCOUNTSCHEMA_ID") 	MDiscountSchema;
+	SeqNo;
+@ForeignKeyColumn("M_PRODUCT_CATEGORY_ID") @Column("M_PRODUCT_CATEGORY_ID") 	?MProductCategory;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+	ConversionDate Date;
+@Column("LIST_BASE") 	ListBase String;
+@Column("LIST_ADDAMT") 	ListAddAmt Amount;/* 0  */
+@Column("LIST_DISCOUNT") 	ListDiscount Percent;
+@Column("LIST_ROUNDING") 	ListRounding String;
+@Column("LIST_MINAMT") 	ListMinAmt Amount;/* 0  */
+@Column("LIST_MAXAMT") 	ListMaxAmt Amount;/* 0  */
+@Column("LIST_FIXED") 	?ListFixed Number;/* 0 */
+@Column("STD_BASE") 	StdBase String;
+@Column("STD_ADDAMT") 	StdAddAmt Amount;/* 0  */
+@Column("STD_DISCOUNT") 	StdDiscount Percent;
+@Column("STD_ROUNDING") 	StdRounding String;
+@Column("STD_MINAMT") 	StdMinAmt Amount;/* 0  */
+@Column("STD_MAXAMT") 	StdMaxAmt Amount;/* 0  */
+@Column("STD_FIXED") 	?StdFixed Number;/* 0 */
+@Column("LIMIT_BASE") 	LimitBase String;
+@Column("LIMIT_ADDAMT") 	LimitAddAmt Amount;/* 0  */
+@Column("LIMIT_DISCOUNT") 	LimitDiscount Percent;
+@Column("LIMIT_ROUNDING") 	LimitRounding String;
+@Column("LIMIT_MINAMT") 	LimitMinAmt Amount;/* 0  */
+@Column("LIMIT_MAXAMT") 	LimitMaxAmt Amount;/* 0  */
+@Column("LIMIT_FIXED") 	?LimitFixed Number;/* 0 */
+@ForeignKeyColumn("C_CONVERSIONTYPE_ID") @Column("C_CONVERSIONTYPE_ID") 	CConversionType;
+};
+

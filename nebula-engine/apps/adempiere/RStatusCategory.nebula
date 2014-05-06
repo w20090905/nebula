@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Request Status Category")
+@Refby("2")
+@Table("R_STATUSCATEGORY")
+type RStatusCategory {
+@Column("R_STATUSCATEGORY_ID") 	!RStatusCategoryId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+	IsDefault YesNo;/* 'N'  */
+};
+

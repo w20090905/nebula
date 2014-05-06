@@ -1,0 +1,20 @@
+@Legacy("adempiere")
+@Remarks("Graph included in Reports")
+@Refby("1")
+@Table("AD_PRINTGRAPH")
+type AdPrintGraph {
+@Column("AD_PRINTGRAPH_ID") 	!AdPrintGraphId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	GraphType Attr;
+@ForeignKeyColumn("AD_PRINTFORMATITEM_ID") @Column("DESCRIPTION_PRINTFORMATITEM_ID") 	DescriptionPrintFormatItem AdPrintFormatItem;
+@ForeignKeyColumn("AD_PRINTFORMATITEM_ID") @Column("DATA_PRINTFORMATITEM_ID") 	DataPrintFormatItem AdPrintFormatItem;
+@ForeignKeyColumn("AD_PRINTFORMATITEM_ID") @Column("DATA1_PRINTFORMATITEM_ID") 	?Data1PrintFormatItem AdPrintFormatItem;
+@ForeignKeyColumn("AD_PRINTFORMATITEM_ID") @Column("DATA2_PRINTFORMATITEM_ID") 	?Data2PrintFormatItem AdPrintFormatItem;
+@ForeignKeyColumn("AD_PRINTFORMATITEM_ID") @Column("DATA3_PRINTFORMATITEM_ID") 	?Data3PrintFormatItem AdPrintFormatItem;
+@ForeignKeyColumn("AD_PRINTFORMATITEM_ID") @Column("DATA4_PRINTFORMATITEM_ID") 	?Data4PrintFormatItem AdPrintFormatItem;
+@ForeignKeyColumn("AD_PRINTFORMAT_ID") @Column("AD_PRINTFORMAT_ID") 	AdPrintFormat;
+};
+

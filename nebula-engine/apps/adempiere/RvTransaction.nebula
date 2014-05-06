@@ -1,0 +1,48 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("RV_TRANSACTION")
+type RvTransaction {
+@Column("M_TRANSACTION_ID") 	MTransactionId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	MovementType Attr;
+	MovementDate Date;
+	MovementQty Quantity;
+@Column("M_ATTRIBUTESETINSTANCE_ID") 	MAttributeSetInstanceId ID;
+@Column("M_ATTRIBUTESET_ID") 	?MAttributeSetId ID;
+	?SerNo String;
+	?Lot Code;
+@Column("M_LOT_ID") 	?MLotId ID;
+	?GuaranteeDate Date;
+@Column("M_PRODUCT_ID") 	MProductId ID;
+	Value String;
+	*Name;
+	?Description;
+	?Upc;
+	?Sku;
+@Column("C_UOM_ID") 	CUomId ID;
+@Column("M_PRODUCT_CATEGORY_ID") 	MProductCategoryId ID;
+	?Classification String;
+	?Weight;
+	?Volume Number;
+	?VersionNo String;
+@Column("M_LOCATOR_ID") 	MLocatorId ID;
+@Column("M_WAREHOUSE_ID") 	MWarehouseId ID;
+	?X String;
+	?Y String;
+	?Z String;
+@Column("M_INVENTORYLINE_ID") 	?MInventoryLineId ID;
+@Column("M_INVENTORY_ID") 	?MInventoryId ID;
+@Column("M_MOVEMENTLINE_ID") 	?MMovementLineId ID;
+@Column("M_MOVEMENT_ID") 	?MMovementId ID;
+@Column("M_INOUTLINE_ID") 	?MInoutLineId ID;
+@Column("M_INOUT_ID") 	?MInoutId ID;
+@Column("M_PRODUCTIONLINE_ID") 	?MProductionLineId ID;
+@Column("M_PRODUCTIONPLAN_ID") 	?MProductionPlanId ID;
+@Column("M_PRODUCTION_ID") 	?MProductionId ID;
+@Column("C_PROJECTISSUE_ID") 	?CProjectIssueId ID;
+@Column("C_PROJECT_ID") 	?CProjectId ID;
+	?Line Number;
+};
+

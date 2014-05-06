@@ -1,0 +1,30 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("RV_ASSET_DELIVERY")
+type RvAssetDelivery {
+@Column("A_ASSET_DELIVERY_ID") 	AAssetDeliveryId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("A_ASSET_ID") 	AAssetId ID;
+@Column("A_ASSET_GROUP_ID") 	AAssetGroupId ID;
+@Column("M_PRODUCT_ID") 	?MProductId ID;
+	?GuaranteeDate Date;
+	?AssetServiceDate Date;
+@Column("C_BPARTNER_ID") 	?CBpartnerId ID;
+@Column("AD_USER_ID") 	?AdUserId ID;
+	MovementDate Date;
+	?SerNo String;
+	?Lot Code;
+	?VersionNo String;
+@Column("M_INOUTLINE_ID") 	?MInoutLineId ID;
+	?Email;
+	?MessageId String;
+	?DeliveryConfirmation String;
+	?Url;
+@Column("REMOTE_ADDR") 	?RemoteAddr Message;
+@Column("REMOTE_HOST") 	?RemoteHost Host;
+	?Referrer String;
+	?Description;
+};
+

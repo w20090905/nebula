@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Performance Benchmark Data Point")
+@Refby("0")
+@Table("PA_BENCHMARKDATA")
+type PaBenchmarkData {
+@Column("PA_BENCHMARKDATA_ID") 	!PaBenchmarkDataId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+@ForeignKeyColumn("PA_BENCHMARK_ID") @Column("PA_BENCHMARK_ID") 	PaBenchmark;
+	BenchmarkDate Date;
+	BenchmarkValue Number;
+};
+

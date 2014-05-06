@@ -1,0 +1,20 @@
+@Legacy("adempiere")
+@Remarks("Material Shipment or Receipt Confirmation Import Line")
+@Refby("0")
+@Table("I_INOUTLINECONFIRM")
+tx IInoutLineConfirm {
+@Column("I_INOUTLINECONFIRM_ID") 	!IInoutLineConfirmId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("I_ISIMPORTED") 	IIsImported YesNo;/* 'N'  */
+@Column("I_ERRORMSG") 	?IErrorMsg Message;
+@ForeignKeyColumn("M_INOUTLINECONFIRM_ID") @Column("M_INOUTLINECONFIRM_ID") 	?MInoutLineConfirm;
+	?ConfirmationNo String;
+	?Description;
+	?ConfirmedQty Quantity;/* 0 */
+	?ScrappedQty Quantity;/* 0 */
+	?DifferenceQty Quantity;/* 0 */
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+};
+

@@ -1,0 +1,16 @@
+@Legacy("adempiere")
+@Remarks("PA_DashboardContent_ID")
+@Refby("0")
+@Table("PA_DASHBOARDCONTENT")
+type PaDashboardContent {
+@Column("PA_DASHBOARDCONTENT_ID") 	!PaDashboardContentId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+@ForeignKeyColumn("AD_WINDOW_ID") @Column("AD_WINDOW_ID") 	?AdWindow;
+	?Description;
+	?Html null;
+	?Line Number;
+@ForeignKeyColumn("PA_GOAL_ID") @Column("PA_GOAL_ID") 	?PaGoal;
+};
+

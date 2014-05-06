@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Distribution Lists allow to distribute products to a selected list of partners")
+@Refby("3")
+@Table("M_DISTRIBUTIONLIST")
+type MDistributionList {
+@Column("M_DISTRIBUTIONLIST_ID") 	!MDistributionListId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+	?RatioTotal Number;
+	?Processing YesNo;
+};
+

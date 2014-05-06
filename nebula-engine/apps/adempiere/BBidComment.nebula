@@ -1,0 +1,13 @@
+@Legacy("adempiere")
+@Remarks("Make a comment to a Bid Topic")
+@Refby("0")
+@Table("B_BIDCOMMENT")
+type BBidComment {
+@ForeignKeyColumn("B_TOPIC_ID") @Column("B_TOPIC_ID") 	!BTopic;
+@Column("B_BIDCOMMENT_ID") 	!BBidCommentId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	AdUser;
+	TextMsg Text;
+};
+

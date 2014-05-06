@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Collection of Workbenches")
+@Refby("2")
+@Table("AD_DESKTOP")
+type AdDesktop {
+@Column("AD_DESKTOP_ID") 	!AdDesktopId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("AD_IMAGE_ID") @Column("AD_IMAGE_ID") 	?AdImage;
+@ForeignKeyColumn("AD_COLOR_ID") @Column("AD_COLOR_ID") 	?AdColor;
+};
+

@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("M_Replenish")
+@Refby("0")
+@Table("M_REPLENISH")
+type MReplenish {
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	!MProduct;
+@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	!MWarehouse;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	ReplenishType Attr;
+@Column("LEVEL_MIN") 	LevelMin Number;/* 0  */
+@Column("LEVEL_MAX") 	LevelMax Number;/* 0  */
+@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSESOURCE_ID") 	?MWarehouseSource MWarehouse;
+};
+

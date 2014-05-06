@@ -1,0 +1,28 @@
+@Legacy("adempiere")
+@Remarks("General Ledger Journal Batch")
+@Refby("4")
+@Table("GL_JOURNALBATCH")
+tx GlJournalBatch {
+@Column("GL_JOURNALBATCH_ID") 	!GlJournalBatchId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	DocumentNo String;
+	Description;
+	PostingType Attr;
+@ForeignKeyColumn("GL_CATEGORY_ID") @Column("GL_CATEGORY_ID") 	?GlCategory;
+	?DateDoc Date;
+	?DateAcct Date;
+@ForeignKeyColumn("C_PERIOD_ID") @Column("C_PERIOD_ID") 	?CPeriod;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
+	TotalDr Number;/* 0  */
+	TotalCr Number;/* 0  */
+	?ControlAmt Amount;/* 0 */
+	Processing YesNo;/* 'N'  */
+	Processed YesNo;/* 'N'  */
+	?CopyFrom Attr;
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	CDocType;
+	DocStatus Attr;
+	DocAction Attr;
+	?IsApproved YesNo;
+};
+

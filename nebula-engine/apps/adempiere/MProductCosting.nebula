@@ -1,0 +1,25 @@
+@Legacy("adempiere")
+@Remarks("Product Costing")
+@Refby("0")
+@Table("M_PRODUCT_COSTING")
+type MProductCosting {
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	!MProduct;
+@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	!CAcctSchema;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	CurrentCostPrice Number;/* 0  */
+	FutureCostPrice Number;/* 0  */
+	CostStandard Number;/* 0  */
+	CostStandardPoQty Quantity;/* 0  */
+	CostStandardPoAmt Amount;/* 0  */
+	CostStandardCumQty Quantity;/* 0  */
+	CostStandardCumAmt Amount;/* 0  */
+	CostAverage Number;/* 0  */
+	CostAverageCumQty Quantity;/* 0  */
+	CostAverageCumAmt Amount;/* 0  */
+	PriceLastPo Number;/* 0  */
+	PriceLastInv Number;/* 0  */
+	TotalInvQty Quantity;/* 0  */
+	TotalInvAmt Amount;/* 0  */
+};
+

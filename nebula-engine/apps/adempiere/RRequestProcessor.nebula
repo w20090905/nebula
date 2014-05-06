@@ -1,0 +1,24 @@
+@Legacy("adempiere")
+@Remarks("Request Processor")
+@Refby("2")
+@Table("R_REQUESTPROCESSOR")
+type RRequestProcessor {
+@Column("R_REQUESTPROCESSOR_ID") 	!RRequestProcessorId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	Frequency;
+	FrequencyType Attr;
+	?DateLastRun Date;
+	?DateNextRun Date;
+	?Processing YesNo;
+	OverdueAlertDays Count;
+	OverdueAsSignDays Count;
+@ForeignKeyColumn("AD_USER_ID") @Column("SUPERVISOR_ID") 	Supervisor AdUser;
+	KeepLogDays Count;
+	RemindDays Count;/* 7  */
+	InactivityAlertDays Count;/* 0  */
+@ForeignKeyColumn("R_REQUESTTYPE_ID") @Column("R_REQUESTTYPE_ID") 	?RRequestType;
+};
+

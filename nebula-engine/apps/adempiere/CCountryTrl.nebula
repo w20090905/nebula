@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Country")
+@Refby("0")
+@Table("C_COUNTRY_TRL")
+type CCountryTrl {
+@ForeignKeyColumn("C_COUNTRY_ID") @Column("C_COUNTRY_ID") 	!CCountry;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	IsTranslated YesNo;/* 'N'  */
+	*Name;
+	?Description;
+	?RegionName Name;
+};
+

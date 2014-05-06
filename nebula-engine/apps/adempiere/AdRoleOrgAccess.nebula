@@ -1,0 +1,11 @@
+@Legacy("adempiere")
+@Remarks("AD_Role_OrgAccess")
+@Refby("0")
+@Table("AD_ROLE_ORGACCESS")
+type AdRoleOrgAccess {
+@ForeignKeyColumn("AD_ROLE_ID") @Column("AD_ROLE_ID") 	!AdRole;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	!AdOrg;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+	IsReadonly YesNo;/* 'N'  */
+};
+

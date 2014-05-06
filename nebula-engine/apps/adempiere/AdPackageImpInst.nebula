@@ -1,0 +1,24 @@
+@Legacy("adempiere")
+@Remarks("Packages Installed")
+@Refby("0")
+@Table("AD_PACKAGE_IMP_INST")
+type AdPackageImpInst {
+@Column("AD_PACKAGE_IMP_INST_ID") 	!AdPackageImpInstId ID;
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@Column("AD_ORG_ID") 	?AdOrgId ID;
+	?Name;
+@Column("PK_STATUS") 	?PkStatus String;
+	?ReleaseNo String;
+@Column("PK_VERSION") 	?PkVersion String;
+	?Version String;
+	?Description;
+	?Email;
+	?Processed YesNo;/* 'N' */
+	?Processing YesNo;/* 'N' */
+	?Creator String;
+	?CreatorContact String;
+	?CreatedDate String;
+	?UpdatedDate String;
+	?Uninstall String;
+};
+

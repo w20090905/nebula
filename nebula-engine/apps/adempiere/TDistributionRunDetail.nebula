@@ -1,0 +1,19 @@
+@Legacy("adempiere")
+@Remarks("T_DistributionRunDetail")
+@Refby("0")
+@Table("T_DISTRIBUTIONRUNDETAIL")
+tx TDistributionRunDetail {
+@ForeignKeyColumn("M_DISTRIBUTIONRUN_ID") @Column("M_DISTRIBUTIONRUN_ID") 	!MDistributionRun;
+@ForeignKeyColumn("M_DISTRIBUTIONRUNLINE_ID") @Column("M_DISTRIBUTIONRUNLINE_ID") 	!MDistributionRunLine;
+@ForeignKeyColumn("M_DISTRIBUTIONLIST_ID") @Column("M_DISTRIBUTIONLIST_ID") 	!MDistributionList;
+@ForeignKeyColumn("M_DISTRIBUTIONLISTLINE_ID") @Column("M_DISTRIBUTIONLISTLINE_ID") 	!MDistributionListLine;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	Ratio Amount;
+	MinQty Quantity;/* 0  */
+	Qty Quantity;/* 0  */
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
+@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocation;
+};
+

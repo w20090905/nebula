@@ -1,0 +1,18 @@
+@Legacy("adempiere")
+@Remarks("Document Line representing a production")
+@Refby("6")
+@Table("M_PRODUCTIONLINE")
+tx MProductionLine {
+@Column("M_PRODUCTIONLINE_ID") 	!MProductionLineId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_PRODUCTIONPLAN_ID") @Column("M_PRODUCTIONPLAN_ID") 	MProductionPlan;
+	Line Number;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+	MovementQty Quantity;/* 0  */
+@ForeignKeyColumn("M_LOCATOR_ID") @Column("M_LOCATOR_ID") 	MLocator;
+	?Description;
+@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstance;/* 0 */
+	Processed YesNo;/* 'N'  */
+};
+

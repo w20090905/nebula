@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Tax Accounting Reconciliation")
+@Refby("0")
+@Table("C_TAXDECLARATIONACCT")
+tx CTaxDeclarationAcct {
+@Column("C_TAXDECLARATIONACCT_ID") 	!CTaxDeclarationAcctId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	?Description;
+@ForeignKeyColumn("C_TAXDECLARATION_ID") @Column("C_TAXDECLARATION_ID") 	CTaxDeclaration;
+@ForeignKeyColumn("FACT_ACCT_ID") @Column("FACT_ACCT_ID") 	FactAcct;
+@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	CAcctSchema;
+	?Line Number;
+};
+

@@ -1,0 +1,12 @@
+@Legacy("adempiere")
+@Remarks("K_EntryCategory")
+@Refby("0")
+@Table("K_ENTRYCATEGORY")
+type KEntryCategory {
+@ForeignKeyColumn("K_CATEGORY_ID") @Column("K_CATEGORY_ID") 	!KCategory;
+@ForeignKeyColumn("K_ENTRY_ID") @Column("K_ENTRY_ID") 	!KEntry;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("K_CATEGORYVALUE_ID") @Column("K_CATEGORYVALUE_ID") 	KCategoryValue;
+};
+

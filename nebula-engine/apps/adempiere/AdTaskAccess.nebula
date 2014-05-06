@@ -1,0 +1,12 @@
+@Legacy("adempiere")
+@Remarks("AD_Task_Access")
+@Refby("0")
+@Table("AD_TASK_ACCESS")
+type AdTaskAccess {
+@ForeignKeyColumn("AD_TASK_ID") @Column("AD_TASK_ID") 	!AdTask;
+@ForeignKeyColumn("AD_ROLE_ID") @Column("AD_ROLE_ID") 	!AdRole;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	IsReadWrite YesNo;/* 'Y'  */
+};
+

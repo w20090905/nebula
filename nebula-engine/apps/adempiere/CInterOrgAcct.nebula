@@ -1,0 +1,13 @@
+@Legacy("adempiere")
+@Remarks("C_InterOrg_Acct")
+@Refby("0")
+@Table("C_INTERORG_ACCT")
+type CInterOrgAcct {
+@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	!CAcctSchema;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	!AdOrg;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTO_ID") 	!AdOrgTo AdOrg;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("INTERCOMPANYDUETO_ACCT") 	InterCompanyDueToAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("INTERCOMPANYDUEFROM_ACCT") 	InterCompanyDueFromAcct CValidCombination;
+};
+

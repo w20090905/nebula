@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Performance Benchmark")
+@Refby("2")
+@Table("PA_BENCHMARK")
+type PaBenchmark {
+@Column("PA_BENCHMARK_ID") 	!PaBenchmarkId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+	AccumulationType Attr;
+};
+

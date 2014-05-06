@@ -1,0 +1,18 @@
+@Legacy("adempiere")
+@Remarks("Performance Goal Restriction")
+@Refby("0")
+@Table("PA_GOALRESTRICTION")
+type PaGoalRestriction {
+@Column("PA_GOALRESTRICTION_ID") 	!PaGoalRestrictionId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	*Name;
+	GoalRestrictionType Attr;
+@ForeignKeyColumn("PA_GOAL_ID") @Column("PA_GOAL_ID") 	PaGoal;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+@ForeignKeyColumn("AD_ORG_ID") @Column("ORG_ID") 	?Org AdOrg;
+@ForeignKeyColumn("C_BP_GROUP_ID") @Column("C_BP_GROUP_ID") 	?CBpGroup;
+@ForeignKeyColumn("M_PRODUCT_CATEGORY_ID") @Column("M_PRODUCT_CATEGORY_ID") 	?MProductCategory;
+};
+

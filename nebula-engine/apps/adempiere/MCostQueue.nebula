@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("FiFo/LiFo Cost Queue")
+@Refby("0")
+@Table("M_COSTQUEUE")
+tx MCostQueue {
+@Column("M_COSTQUEUE_ID") 	!MCostQueueId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_COSTTYPE_ID") @Column("M_COSTTYPE_ID") 	MCostType;
+@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	CAcctSchema;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	MAttributeSetInstance;
+@ForeignKeyColumn("M_COSTELEMENT_ID") @Column("M_COSTELEMENT_ID") 	MCostElement;
+	CurrentCostPrice Number;/* 0  */
+	CurrentQty Quantity;/* 0  */
+};
+

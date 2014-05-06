@@ -1,0 +1,19 @@
+@Legacy("adempiere")
+@Remarks("Chat Entry")
+@Refby("2")
+@Table("CM_CHATENTRY")
+tx CmChatEntry {
+@Column("CM_CHATENTRY_ID") 	!CmChatEntryId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("CM_CHAT_ID") @Column("CM_CHAT_ID") 	CmChat;
+	ConfidentialType Attr;
+	?CharacterData null;
+@ForeignKeyColumn("CM_CHATENTRY_ID") @Column("CM_CHATENTRYPARENT_ID") 	?CmChatEntryParent CmChatEntry;/* NULL   */
+@ForeignKeyColumn("CM_CHATENTRY_ID") @Column("CM_CHATENTRYGRANDPARENT_ID") 	?CmChatEntryGrandParent CmChatEntry;/* NULL   */
+	ChatEntryType Attr;/* NULL  */
+	?ModeratorStatus Attr;/* NULL   */
+	?Subject String;/* NULL   */
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;/* NULL   */
+};
+

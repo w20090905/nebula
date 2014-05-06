@@ -1,0 +1,13 @@
+@Legacy("adempiere")
+@Remarks("Exclude the ability to create Lots in Attribute Sets")
+@Refby("0")
+@Table("M_LOTCTLEXCLUDE")
+tx MLotCtlExclude {
+@Column("M_LOTCTLEXCLUDE_ID") 	!MLotCtlExcludeId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_LOTCTL_ID") @Column("M_LOTCTL_ID") 	MLotCtl;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
+	IsSoTrx YesNo;/* 'N'  */
+};
+

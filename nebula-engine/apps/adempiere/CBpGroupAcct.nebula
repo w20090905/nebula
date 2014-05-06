@@ -1,0 +1,25 @@
+@Legacy("adempiere")
+@Remarks("Business Partner Group Acct")
+@Refby("0")
+@Table("C_BP_GROUP_ACCT")
+type CBpGroupAcct {
+@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	!CAcctSchema;
+@ForeignKeyColumn("C_BP_GROUP_ID") @Column("C_BP_GROUP_ID") 	!CBpGroup;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("C_RECEIVABLE_ACCT") 	CReceivableAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("C_PREPAYMENT_ACCT") 	CPrepaymentAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("V_LIABILITY_ACCT") 	VLiabilityAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("V_LIABILITY_SERVICES_ACCT") 	VLiabilityServiceSAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("V_PREPAYMENT_ACCT") 	VPrepaymentAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("PAYDISCOUNT_EXP_ACCT") 	PayDiscountExpAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("PAYDISCOUNT_REV_ACCT") 	PayDiscountRevAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("WRITEOFF_ACCT") 	WriteOffAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("NOTINVOICEDRECEIPTS_ACCT") 	NotInvoicedReceiptsAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("UNEARNEDREVENUE_ACCT") 	UnearnedRevenueAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("NOTINVOICEDREVENUE_ACCT") 	NotInvoicedRevenueAcct CValidCombination;
+@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("NOTINVOICEDRECEIVABLES_ACCT") 	NotInvoicedReceivablesAcct CValidCombination;
+	?Processing YesNo;
+@Column("C_RECEIVABLE_SERVICES_ACCT") 	?CReceivableServiceSAcct Number;
+};
+

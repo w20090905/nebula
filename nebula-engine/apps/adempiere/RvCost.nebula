@@ -1,0 +1,26 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("RV_COST")
+type RvCost {
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("M_PRODUCT_ID") 	MProductId ID;
+	Value String;
+	*Name;
+	?Upc;
+	IsBom YesNo;
+	ProductType Attr;
+@Column("M_PRODUCT_CATEGORY_ID") 	MProductCategoryId ID;
+@Column("M_COSTTYPE_ID") 	MCostTypeId ID;
+@Column("M_COSTELEMENT_ID") 	MCostElementId ID;
+	CostElementType Attr;
+	?CostingMethod String;
+	IsCalculated YesNo;
+@Column("C_ACCTSCHEMA_ID") 	CAcctSchemaId ID;
+@Column("C_CURRENCY_ID") 	CCurrencyId ID;
+	CurrentCostPrice Number;
+	?FutureCostPrice Number;
+	?Description;
+};
+

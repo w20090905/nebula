@@ -1,0 +1,10 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("T_SELECTION2")
+tx TSelection2 {
+@Column("AD_PINSTANCE_ID") 	!AdPInstanceId ID;
+@Column("QUERY_ID") 	!QueryId ID;
+@Column("T_SELECTION_ID") 	!TSelectionId ID;
+};
+

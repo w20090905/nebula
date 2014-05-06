@@ -1,0 +1,13 @@
+@Legacy("adempiere")
+@Remarks("(Non Standard Table)")
+@Refby("0")
+@Table("AD_PINSTANCE_LOG")
+tx AdPInstanceLog {
+@ForeignKeyColumn("AD_PINSTANCE_ID") @Column("AD_PINSTANCE_ID") 	!AdPInstance;
+@Column("LOG_ID") 	!LogId ID;
+@Column("P_DATE") 	?PDate Date;/* SYSDATE      */
+@Column("P_ID") 	?PId ID;
+@Column("P_NUMBER") 	?PNumber Number;
+@Column("P_MSG") 	?PMsg Message;
+};
+

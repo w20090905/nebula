@@ -1,0 +1,23 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("1")
+@Table("A_ASSET_CHANGE")
+tx AAssetChange {
+@Column("A_ASSET_CHANGE_ID") 	!AAssetChangeId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("A_ASSET_ID") @Column("A_ASSET_ID") 	AAsset;
+	ChangeType Attr;
+	ChangeDate Date;
+	?ChangeAmt Amount;/* 0 */
+	?UseLifeYearS Number;
+	?UseLifeMonths Count;
+	?LifeUseUnits Number;
+	?AssetDepreciationDate Date;
+@ForeignKeyColumn("A_ASSET_RETIREMENT_ID") @Column("A_ASSET_RETIREMENT_ID") 	?AAssetRetirement;
+@ForeignKeyColumn("A_ASSET_ADDITION_ID") @Column("A_ASSET_ADDITION_ID") 	?AAssetAddition;
+	?SerNo String;
+	?Lot Code;
+	?VersionNo String;
+};
+

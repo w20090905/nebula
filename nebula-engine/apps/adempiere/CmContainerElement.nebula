@@ -1,0 +1,16 @@
+@Legacy("adempiere")
+@Remarks("Container element i.e. Headline, Content, Footer etc.")
+@Refby("1")
+@Table("CM_CONTAINER_ELEMENT")
+type CmContainerElement {
+@Column("CM_CONTAINER_ELEMENT_ID") 	!CmContainerElementId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("CM_CONTAINER_ID") @Column("CM_CONTAINER_ID") 	CmContainer;
+	?ContentHtml null;
+	IsValid YesNo;/* 'Y'  */
+};
+

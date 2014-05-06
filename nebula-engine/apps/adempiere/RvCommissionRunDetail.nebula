@@ -1,0 +1,37 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("RV_COMMISSIONRUNDETAIL")
+type RvCommissionRunDetail {
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("C_COMMISSIONRUN_ID") 	CCommissionRunId ID;
+	DocumentNo String;
+	?Description;
+	StartDate Date;
+	GrandTotal Number;
+	Processed String;
+@Column("C_COMMISSION_ID") 	CCommissionId ID;
+@Column("COMMISSION_BPARTNER_ID") 	CommissionBpartnerId ID;
+@Column("C_COMMISSIONAMT_ID") 	CCommissionAmtId ID;
+	CommissionConvertedAmt Amount;
+	CommissionQty Quantity;
+	CommissionAmt Amount;
+@Column("C_COMMISSIONDETAIL_ID") 	CCommissionDetailId ID;
+	?Reference String;
+@Column("C_ORDERLINE_ID") 	?COrderLineId ID;
+@Column("C_INVOICELINE_ID") 	?CInvoiceLineId ID;
+	?Info String;
+@Column("C_CURRENCY_ID") 	CCurrencyId ID;
+	ActualAmt Amount;
+	ConvertedAmt Amount;
+	ActualQty Quantity;
+	?InvoiceDocumentNo String;
+	?DateDoc Date;
+@Column("M_PRODUCT_ID") 	?MProductId ID;
+@Column("C_BPARTNER_ID") 	?CBpartnerId ID;
+@Column("C_BPARTNER_LOCATION_ID") 	?CBpartnerLocationId ID;
+@Column("AD_USER_ID") 	?AdUserId ID;
+@Column("C_DOCTYPE_ID") 	?CDocTypeId ID;
+};
+

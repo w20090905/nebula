@@ -1,0 +1,51 @@
+@Legacy("adempiere")
+@Remarks("System Issue")
+@Refby("0")
+@Table("AD_ISSUE")
+type AdIssue {
+@Column("AD_ISSUE_ID") 	!AdIssueId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	ReleaseNo String;
+	Version String;
+	*Name;
+	UserName Name;
+	?SupportEmail Email;
+	?DbAddress Address;
+@Column("LOCAL_HOST") 	?LocalHost Host;
+	?OperatingSystemInfo String;/* NULL  */
+	?ReleaseTag String;
+	?DatabaseInfo String;/* NULL  */
+	?JavaInfo String;/* NULL  */
+@Column("REMOTE_ADDR") 	?RemoteAddr Message;
+@Column("REMOTE_HOST") 	?RemoteHost Host;
+	IssueSummary String;/* NULL  */
+	?Comments Comment;
+	?SourceClassName Name;
+	?SourceMethodName Name;
+	?LoggerName Name;
+	?LineNo SeqNo;/* 0 */
+	?StackTrace String;
+	?ErrorTrace String;
+@Column("RECORD_ID") 	?RecordId ID;
+	?RequestDocumentNo String;
+@ForeignKeyColumn("A_ASSET_ID") @Column("A_ASSET_ID") 	?AAsset;
+@ForeignKeyColumn("R_REQUEST_ID") @Column("R_REQUEST_ID") 	?RRequest;
+	?ResponseText Text;
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	?IsVanillaSystem YesNo;/* 'N'                              */
+	?IsReproducible YesNo;/* 'N'                              */
+@ForeignKeyColumn("R_ISSUEKNOWN_ID") @Column("R_ISSUEKNOWN_ID") 	?RIssueKnown;
+	?StatisticsInfo String;/* NULL  */
+	?ProfileInfo String;/* NULL  */
+	SystemStatus Attr;
+@ForeignKeyColumn("R_ISSUEPROJECT_ID") @Column("R_ISSUEPROJECT_ID") 	?RIssueProject;
+@ForeignKeyColumn("R_ISSUEUSER_ID") @Column("R_ISSUEUSER_ID") 	?RIssueUser;
+@ForeignKeyColumn("R_ISSUESYSTEM_ID") @Column("R_ISSUESYSTEM_ID") 	?RIssueSystem;
+	?IssueSource YesNo;
+@ForeignKeyColumn("AD_WINDOW_ID") @Column("AD_WINDOW_ID") 	?AdWindow;
+@ForeignKeyColumn("AD_PROCESS_ID") @Column("AD_PROCESS_ID") 	?AdProcess;
+@ForeignKeyColumn("AD_FORM_ID") @Column("AD_FORM_ID") 	?AdForm;
+};
+

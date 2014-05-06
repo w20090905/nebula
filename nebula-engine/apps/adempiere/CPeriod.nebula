@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Period of the Calendar")
+@Refby("8")
+@Table("C_PERIOD")
+type CPeriod {
+@Column("C_PERIOD_ID") 	!CPeriodId ID;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	*Name;
+	PeriodNo SeqNo;
+@ForeignKeyColumn("C_YEAR_ID") @Column("C_YEAR_ID") 	CYear;
+	StartDate Date;
+	?EndDate Date;
+	PeriodType Attr;
+	?Processing YesNo;
+};
+

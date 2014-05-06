@@ -1,0 +1,12 @@
+@Legacy("adempiere")
+@Remarks("ASP Process")
+@Refby("0")
+@Table("ASP_PROCESS")
+type AspProcess {
+@Column("AD_CLIENT_ID") 	AdClientId ID;/* NULL   */
+@Column("AD_ORG_ID") 	AdOrgId ID;/* NULL   */
+@ForeignKeyColumn("AD_PROCESS_ID") @Column("AD_PROCESS_ID") 	!AdProcess;
+@ForeignKeyColumn("ASP_LEVEL_ID") @Column("ASP_LEVEL_ID") 	!AspLevel;
+@Column("ASP_STATUS") 	AspStatus Attr;/* 'U'  */
+};
+

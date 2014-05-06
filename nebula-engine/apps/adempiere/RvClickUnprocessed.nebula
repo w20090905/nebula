@@ -1,0 +1,20 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("RV_CLICK_UNPROCESSED")
+type RvClickUnprocessed {
+@Column("W_CLICK_ID") 	WClickId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	?TargetUrl Url;
+	?Referrer String;
+@Column("REMOTE_HOST") 	?RemoteHost Host;
+@Column("REMOTE_ADDR") 	?RemoteAddr Message;
+	?UserAgent String;
+	?AcceptLanguage Code;
+	Processed String;
+@Column("W_CLICKCOUNT_ID") 	?WClickCountId ID;
+@Column("AD_USER_ID") 	?AdUserId ID;
+	?Email;
+};
+

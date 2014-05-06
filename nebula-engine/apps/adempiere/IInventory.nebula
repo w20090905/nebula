@@ -1,0 +1,32 @@
+@Legacy("adempiere")
+@Remarks("Import Inventory Transactions")
+@Refby("0")
+@Table("I_INVENTORY")
+tx IInventory {
+@Column("I_INVENTORY_ID") 	!IInventoryId ID;
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@Column("AD_ORG_ID") 	?AdOrgId ID;
+@Column("I_ISIMPORTED") 	IIsImported YesNo;/* 'N'  */
+@Column("I_ERRORMSG") 	?IErrorMsg Message;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+	?Upc;
+	?Value String;
+	?Lot Code;
+	?SerNo String;
+@ForeignKeyColumn("M_LOCATOR_ID") @Column("M_LOCATOR_ID") 	?MLocator;
+@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	?MWarehouse;
+	?WarehouseValue String;
+	?LocatorValue String;
+	?X String;
+	?Y String;
+	?Z String;
+@ForeignKeyColumn("M_INVENTORY_ID") @Column("M_INVENTORY_ID") 	?MInventory;
+@ForeignKeyColumn("M_INVENTORYLINE_ID") @Column("M_INVENTORYLINE_ID") 	?MInventoryLine;
+	?QtyBook Number;/* 0 */
+	?QtyCount Count;/* 0 */
+	?MovementDate Date;
+	?Description;
+	?Processing YesNo;
+	?Processed YesNo;/* 'N' */
+};
+

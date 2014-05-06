@@ -1,0 +1,11 @@
+@Legacy("adempiere")
+@Remarks("Task Instance")
+@Refby("0")
+@Table("AD_TASKINSTANCE")
+tx AdTaskInstance {
+@Column("AD_TASKINSTANCE_ID") 	!AdTaskInstanceId ID;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_TASK_ID") @Column("AD_TASK_ID") 	AdTask;
+};
+

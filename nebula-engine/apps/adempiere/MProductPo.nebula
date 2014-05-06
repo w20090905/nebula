@@ -1,0 +1,32 @@
+@Legacy("adempiere")
+@Remarks("Product Purchasing")
+@Refby("0")
+@Table("M_PRODUCT_PO")
+type MProductPo {
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	!MProduct;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	!CBpartner;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	IsCurrentVendor YesNo;/* 'Y'  */
+@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_ID") 	?CUom;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
+	?PriceList Number;/* 0 */
+	?PricePo Number;/* 0 */
+	?PriceEffective null;
+	?PriceLastPo Number;/* 0 */
+	?PriceLastInv Number;/* 0 */
+	VendorProductNo String;
+	?Upc;
+	?VendorCategory String;
+	?Discontinued YesNo;/* 'N' */
+	?DiscontinuedBy Date;
+@Column("ORDER_MIN") 	?OrderMin Number;/* 0 */
+@Column("ORDER_PACK") 	?OrderPack Number;/* 0 */
+	?CostPerOrder Number;/* 0 */
+@Column("DELIVERYTIME_PROMISED") 	?DeliveryTimePromised Number;
+@Column("DELIVERYTIME_ACTUAL") 	?DeliveryTimeActual Number;
+	?QualityRating Amount;
+	?RoyaltyAmt Amount;/* 0 */
+	?Manufacturer String;
+};
+

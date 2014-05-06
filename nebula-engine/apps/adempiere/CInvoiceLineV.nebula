@@ -1,0 +1,34 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("C_INVOICELINE_V")
+type CInvoiceLineV {
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("C_INVOICELINE_ID") 	CInvoiceLineId ID;
+@Column("C_INVOICE_ID") 	?CInvoiceId ID;
+@Column("SALESREP_ID") 	?SalesRepId ID;
+@Column("C_BPARTNER_ID") 	?CBpartnerId ID;
+@Column("M_PRODUCT_ID") 	?MProductId ID;
+	?DocumentNo String;
+	?DateInvoiced Date;
+	?DateAcct Date;
+	?IsSoTrx YesNo;
+	?DocStatus Attr;
+	?LineNetAmt Amount;
+	?LineListAmt Amount;
+	?LineLimitAmt Amount;
+	?LineDiscountAmt Amount;
+	?LineOverLimitAmt Amount;
+	QtyInvoiced Number;
+	QtyEntered Number;
+	Line Number;
+@Column("C_ORDERLINE_ID") 	?COrderLineId ID;
+@Column("C_UOM_ID") 	?CUomId ID;
+@Column("C_CAMPAIGN_ID") 	?CCampaignId ID;
+@Column("C_PROJECT_ID") 	?CProjectId ID;
+@Column("C_ACTIVITY_ID") 	?CActivityId ID;
+@Column("C_PROJECTPHASE_ID") 	?CProjectPhaseId ID;
+@Column("C_PROJECTTASK_ID") 	?CProjectTaskId ID;
+};
+

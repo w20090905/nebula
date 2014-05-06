@@ -1,0 +1,39 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("GL_JOURNALLINE_ACCT_V")
+type GlJournalLineAcctV {
+@Column("GL_JOURNALLINE_ID") 	GlJournalLineId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("GL_JOURNAL_ID") 	GlJournalId ID;
+	Line Number;
+	IsGenerated YesNo;
+	?Description;
+	AmtSourceDr Amount;
+	AmtSourceCr Amount;
+@Column("C_CURRENCY_ID") 	CCurrencyId ID;
+@Column("C_CONVERSIONTYPE_ID") 	CConversionTypeId ID;
+	CurrencyRate Amount;
+	DateAcct Date;
+	AmtAcctDr Amount;
+	AmtAcctCr Amount;
+@Column("C_UOM_ID") 	?CUomId ID;
+	?Qty Quantity;
+@Column("C_VALIDCOMBINATION_ID") 	CValidCombinationId ID;
+@Column("C_ACCTSCHEMA_ID") 	CAcctSchemaId ID;
+@Column("ACCOUNT_ID") 	AccountId ID;
+@Column("M_PRODUCT_ID") 	?MProductId ID;
+@Column("C_BPARTNER_ID") 	?CBpartnerId ID;
+@Column("AD_ORGTRX_ID") 	?AdOrgTrxId ID;
+@Column("C_LOCFROM_ID") 	?CLocFromId ID;
+@Column("C_LOCTO_ID") 	?CLocToId ID;
+@Column("C_SALESREGION_ID") 	?CSalesRegionId ID;
+@Column("C_PROJECT_ID") 	?CProjectId ID;
+@Column("C_CAMPAIGN_ID") 	?CCampaignId ID;
+@Column("USER1_ID") 	?User1Id ID;
+@Column("USER2_ID") 	?User2Id ID;
+	IsFullYQualified YesNo;
+@Column("C_ACTIVITY_ID") 	?CActivityId ID;
+};
+

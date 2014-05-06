@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Sub account for Element Value")
+@Refby("3")
+@Table("C_SUBACCT")
+type CSubAcct {
+@Column("C_SUBACCT_ID") 	!CSubAcctId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	Value String;
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("C_ELEMENTVALUE_ID") 	CElementValue;
+};
+

@@ -1,0 +1,25 @@
+@Legacy("adempiere")
+@Remarks("User Asset Registration")
+@Refby("1")
+@Table("A_REGISTRATION")
+type ARegistration {
+@Column("A_REGISTRATION_ID") 	!ARegistrationId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("A_ASSET_ID") @Column("A_ASSET_ID") 	?AAsset;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+	IsRegistered YesNo;/* 'N'  */
+	IsInProduction YesNo;/* 'N'  */
+	IsAllowPublish YesNo;/* 'Y'  */
+@Column("REMOTE_HOST") 	?RemoteHost Host;
+@Column("REMOTE_ADDR") 	?RemoteAddr Message;
+	?Processing YesNo;
+	?AssetServiceDate Date;
+	?Note;
+};
+

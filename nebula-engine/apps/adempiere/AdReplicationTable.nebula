@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Data Replication Strategy Table Info")
+@Refby("1")
+@Table("AD_REPLICATIONTABLE")
+tx AdReplicationTable {
+@Column("AD_REPLICATIONTABLE_ID") 	!AdReplicationTableId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("AD_REPLICATIONSTRATEGY_ID") @Column("AD_REPLICATIONSTRATEGY_ID") 	AdReplicationStrategy;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
+	ReplicationType Attr;/* 'L'  */
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+};
+

@@ -1,0 +1,33 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("C_RFQRESPONSELINE_V")
+type CRfqResponseLineV {
+@Column("C_RFQRESPONSE_ID") 	CRfqResponseId ID;
+@Column("C_RFQRESPONSELINE_ID") 	CRfqResponseLineId ID;
+@Column("C_RFQLINE_ID") 	CRfqLineId ID;
+@Column("C_RFQRESPONSELINEQTY_ID") 	CRfqResponseLineQtyId ID;
+@Column("C_RFQLINEQTY_ID") 	CRfqLineQtyId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("AD_LANGUAGE") 	?AdLanguage Code;
+	Line Number;
+@Column("M_PRODUCT_ID") 	?MProductId ID;
+@Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstanceId ID;
+	?Name;
+	?Description;
+	?DocumentNote Note;
+	?Upc;
+	?Sku;
+	?ProductValue String;
+	?Help;
+	?DateWorkStart Date;
+	?DeliveryDays Count;
+@Column("C_UOM_ID") 	CUomId ID;
+	?UomSymbol String;
+	BenchmarkPrice Number;
+	Qty Quantity;
+	Price Number;
+	?Discount Percent;
+};
+

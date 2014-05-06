@@ -1,0 +1,26 @@
+@Legacy("adempiere")
+@Remarks("Recurring Document")
+@Refby("1")
+@Table("C_RECURRING")
+type CRecurring {
+@Column("C_RECURRING_ID") 	!CRecurringId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+	RecurringType Attr;
+@ForeignKeyColumn("C_ORDER_ID") @Column("C_ORDER_ID") 	?COrder;
+@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
+@ForeignKeyColumn("C_PAYMENT_ID") @Column("C_PAYMENT_ID") 	?CPayment;
+@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+@ForeignKeyColumn("GL_JOURNALBATCH_ID") @Column("GL_JOURNALBATCH_ID") 	?GlJournalBatch;
+	FrequencyType Attr;
+	RunsMax Number;
+	RunsRemaining Number;
+	?DateLastRun Date;
+	?DateNextRun Date;
+	?Processing YesNo;
+	?Frequency;
+};
+

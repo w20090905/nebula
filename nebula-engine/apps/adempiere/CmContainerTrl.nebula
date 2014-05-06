@@ -1,0 +1,18 @@
+@Legacy("adempiere")
+@Remarks("Web Container contains content like images, text etc.")
+@Refby("0")
+@Table("CM_CONTAINER_TRL")
+type CmContainerTrl {
+@ForeignKeyColumn("CM_CONTAINER_ID") @Column("CM_CONTAINER_ID") 	!CmContainer;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	IsTranslated YesNo;/* 'N'  */
+	*Name;
+	?Title;
+@Column("META_DESCRIPTION") 	?MetaDescription Description;
+@Column("META_KEYWORDS") 	?MetaKeyWords String;
+	?StructureXml String;
+	?ContainerXml String;
+};
+

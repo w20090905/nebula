@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("RV_M_TRANSACTION_SUM")
+type RvMTransactionSum {
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	MovementType Attr;
+@Column("M_WAREHOUSE_ID") 	MWarehouseId ID;
+@Column("M_LOCATOR_ID") 	MLocatorId ID;
+@Column("M_PRODUCT_ID") 	MProductId ID;
+	MovementDate Date;
+	?MovementQty Quantity;
+};
+

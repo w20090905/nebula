@@ -1,0 +1,19 @@
+@Legacy("adempiere")
+@Remarks("Document Archive")
+@Refby("0")
+@Table("AD_ARCHIVE")
+type AdArchive {
+@Column("AD_ARCHIVE_ID") 	!AdArchiveId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	?AdTable;
+@Column("RECORD_ID") 	?RecordId ID;
+@ForeignKeyColumn("AD_PROCESS_ID") @Column("AD_PROCESS_ID") 	?AdProcess;
+	?BinaryData Text;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+	IsReport YesNo;/* 'Y'  */
+};
+

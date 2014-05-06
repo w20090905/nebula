@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Request for Quotation Response Line Quantity")
+@Refby("0")
+@Table("C_RFQRESPONSELINEQTY")
+tx CRfqResponseLineQty {
+@Column("C_RFQRESPONSELINEQTY_ID") 	!CRfqResponseLineQtyId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_RFQRESPONSELINE_ID") @Column("C_RFQRESPONSELINE_ID") 	CRfqResponseLine;
+@ForeignKeyColumn("C_RFQLINEQTY_ID") @Column("C_RFQLINEQTY_ID") 	CRfqLineQty;
+	Price Number;/* 0  */
+	?Discount Percent;
+	?Ranking Number;/* 0 */
+};
+

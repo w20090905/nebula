@@ -1,0 +1,16 @@
+@Legacy("adempiere")
+@Remarks("Dunning Run")
+@Refby("1")
+@Table("C_DUNNINGRUN")
+tx CDunningRun {
+@Column("C_DUNNINGRUN_ID") 	!CDunningRunId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	DunningDate Date;
+@ForeignKeyColumn("C_DUNNINGLEVEL_ID") @Column("C_DUNNINGLEVEL_ID") 	CDunningLevel;
+	Processed YesNo;/* 'N'  */
+	?Processing YesNo;
+	?SendIt String;
+	?Description;
+};
+

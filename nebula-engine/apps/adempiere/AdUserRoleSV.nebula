@@ -1,0 +1,9 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("AD_USER_ROLES_V")
+type AdUserRoleSV {
+	*Name;
+	RoleName Name;
+};
+

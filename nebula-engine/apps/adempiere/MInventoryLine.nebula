@@ -1,0 +1,22 @@
+@Legacy("adempiere")
+@Remarks("Unique line in an Inventory document")
+@Refby("9")
+@Table("M_INVENTORYLINE")
+tx MInventoryLine {
+@Column("M_INVENTORYLINE_ID") 	!MInventoryLineId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_INVENTORY_ID") @Column("M_INVENTORY_ID") 	MInventory;
+@ForeignKeyColumn("M_LOCATOR_ID") @Column("M_LOCATOR_ID") 	MLocator;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+	?Line Number;
+	QtyBook Number;/* 0  */
+	QtyCount Count;/* 0  */
+	?Description;
+@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstance;/* 0 */
+@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	?CCharge;
+	InventoryType Attr;/* 'D'  */
+	Processed YesNo;/* 'N'  */
+	?QtyInternalUse Number;
+};
+

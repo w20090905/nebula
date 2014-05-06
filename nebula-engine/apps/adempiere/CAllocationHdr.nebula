@@ -1,0 +1,23 @@
+@Legacy("adempiere")
+@Remarks("Payment allocation")
+@Refby("1")
+@Table("C_ALLOCATIONHDR")
+tx CAllocationHdr {
+@Column("C_ALLOCATIONHDR_ID") 	!CAllocationHdrId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	DocumentNo String;
+	?Description;
+	DateTrx Date;
+	DateAcct Date;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
+	ApprovalAmt Amount;/* 0  */
+	IsManual YesNo;/* 'N'  */
+	DocStatus Attr;
+	DocAction Attr;
+	IsApproved YesNo;/* 'N'  */
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	Posted YesNo;/* 'N'  */
+};
+

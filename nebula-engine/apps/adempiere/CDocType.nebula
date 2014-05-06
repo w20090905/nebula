@@ -12,7 +12,7 @@ type CDocType {
 	DocBaseType Attr;
 	IsSoTrx YesNo;/* 'Y'  */
 	?DocSubTypeSo String;
-	?HasProforma YesNo;/* 'N'                                */
+	?HasProforma YesNo;/* 'N'  */
 @ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPEPROFORMA_ID") 	?CDocTypeProforma CDocType;
 @ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPESHIPMENT_ID") 	?CDocTypeShipment CDocType;
 @ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPEINVOICE_ID") 	?CDocTypeInvoice CDocType;

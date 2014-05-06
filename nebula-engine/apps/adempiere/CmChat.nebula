@@ -1,0 +1,16 @@
+@Legacy("adempiere")
+@Remarks("Chat")
+@Refby("2")
+@Table("CM_CHAT")
+tx CmChat {
+@Column("CM_CHAT_ID") 	!CmChatId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	Description;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
+@Column("RECORD_ID") 	RecordId ID;
+	ConfidentialType Attr;
+@ForeignKeyColumn("CM_CHATTYPE_ID") @Column("CM_CHATTYPE_ID") 	?CmChatType;
+	?ModerationType Attr;/* NULL   */
+};
+

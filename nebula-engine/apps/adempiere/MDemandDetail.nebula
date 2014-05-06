@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Material Demand Line Source Detail")
+@Refby("0")
+@Table("M_DEMANDDETAIL")
+tx MDemandDetail {
+@Column("M_DEMANDDETAIL_ID") 	!MDemandDetailId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_DEMANDLINE_ID") @Column("M_DEMANDLINE_ID") 	MDemandLine;
+@ForeignKeyColumn("M_FORECASTLINE_ID") @Column("M_FORECASTLINE_ID") 	?MForecastLine;
+@ForeignKeyColumn("M_REQUISITIONLINE_ID") @Column("M_REQUISITIONLINE_ID") 	?MRequisitionLine;
+@ForeignKeyColumn("C_ORDERLINE_ID") @Column("C_ORDERLINE_ID") 	?COrderLine;
+};
+

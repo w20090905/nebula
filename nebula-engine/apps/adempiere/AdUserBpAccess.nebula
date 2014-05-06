@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("User/concat access to Business Partner information and resources")
+@Refby("0")
+@Table("AD_USERBPACCESS")
+tx AdUserBpAccess {
+@Column("AD_USERBPACCESS_ID") 	!AdUserBpAccessId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	AdUser;
+	BpAccessType Attr;
+@ForeignKeyColumn("R_REQUESTTYPE_ID") @Column("R_REQUESTTYPE_ID") 	?RRequestType;
+	?DocBaseType Attr;
+};
+

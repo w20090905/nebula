@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Trade Discount Break")
+@Refby("0")
+@Table("M_DISCOUNTSCHEMABREAK")
+tx MDiscountSchemaBreak {
+@Column("M_DISCOUNTSCHEMABREAK_ID") 	!MDiscountSchemaBreakId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_DISCOUNTSCHEMA_ID") @Column("M_DISCOUNTSCHEMA_ID") 	MDiscountSchema;
+	SeqNo;
+	BreakValue Number;
+	BreakDiscount Percent;
+@ForeignKeyColumn("M_PRODUCT_CATEGORY_ID") @Column("M_PRODUCT_CATEGORY_ID") 	?MProductCategory;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+	IsBpartnerFlatDiscount YesNo;/* 'N'  */
+};
+

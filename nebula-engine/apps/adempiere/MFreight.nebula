@@ -1,0 +1,19 @@
+@Legacy("adempiere")
+@Remarks("Freight Rate")
+@Refby("0")
+@Table("M_FREIGHT")
+tx MFreight {
+@Column("M_FREIGHT_ID") 	!MFreightId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_SHIPPER_ID") @Column("M_SHIPPER_ID") 	MShipper;
+@ForeignKeyColumn("M_FREIGHTCATEGORY_ID") @Column("M_FREIGHTCATEGORY_ID") 	MFreightCategory;
+	ValidFrom Date;
+@ForeignKeyColumn("C_COUNTRY_ID") @Column("C_COUNTRY_ID") 	?CCountry;
+@ForeignKeyColumn("C_COUNTRY_ID") @Column("TO_COUNTRY_ID") 	?ToCountry CCountry;
+@ForeignKeyColumn("C_REGION_ID") @Column("C_REGION_ID") 	?CRegion;
+@ForeignKeyColumn("C_REGION_ID") @Column("TO_REGION_ID") 	?ToRegion CRegion;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
+	FreightAmt Amount;/* 0  	  */
+};
+

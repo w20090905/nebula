@@ -1,0 +1,23 @@
+@Legacy("adempiere")
+@Remarks("Template defines how content is displayed")
+@Refby("4")
+@Table("CM_TEMPLATE")
+type CmTemplate {
+@Column("CM_TEMPLATE_ID") 	!CmTemplateId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("CM_WEBPROJECT_ID") @Column("CM_WEBPROJECT_ID") 	?CmWebProject;
+	Value String;
+	IsInclude YesNo;/* 'Y'  */
+	IsUseAd YesNo;/* 'Y'  */
+	IsNews YesNo;/* 'Y'  */
+	?ElementS String;
+	?TemplateXst null;
+	IsSummary YesNo;/* 'N'  */
+	IsValid YesNo;/* 'N'  */
+	?Processing YesNo;
+};
+

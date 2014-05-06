@@ -1,0 +1,16 @@
+@Legacy("adempiere")
+@Remarks("Global Model Validator")
+@Refby("0")
+@Table("AD_MODELVALIDATOR")
+type AdModelValidator {
+@Column("AD_CLIENT_ID") 	AdClientId ID;/* 0  */
+@Column("AD_MODELVALIDATOR_ID") 	!AdModelValidatorId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;/* 0  */
+	*Name;
+	?Description;
+	?Help;
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;
+	ModelValidationClass String;
+	?SeqNo;
+};
+

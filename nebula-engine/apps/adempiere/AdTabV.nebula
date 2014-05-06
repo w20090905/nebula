@@ -1,0 +1,42 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("AD_TAB_V")
+type AdTabV {
+@Column("AD_TAB_ID") 	AdTabId ID;
+@Column("AD_WINDOW_ID") 	AdWindowId ID;
+@Column("AD_TABLE_ID") 	AdTableId ID;
+	*Name;
+	?Description;
+	?Help;
+	SeqNo;
+	IsSingleRow YesNo;
+	HasTree String;
+	?IsInfoTab YesNo;
+	ReplicationType Attr;
+	TableName Name;
+	AccessLevel Attr;
+	IsSecurityEnabled YesNo;
+	IsDeleteable YesNo;
+	IsHighVolume YesNo;
+	IsView YesNo;
+	?HasAssociation String;
+	IsTranslationTab YesNo;
+	IsReadonly YesNo;
+@Column("AD_IMAGE_ID") 	?AdImageId ID;
+	TabLevel Number;
+	?WhereClause String;
+	?OrderByClause String;
+	?CommitWarning String;
+	?ReadonlyLogic String;
+	?DisplayLogic String;
+@Column("AD_COLUMN_ID") 	?AdColumnId ID;
+@Column("AD_PROCESS_ID") 	?AdProcessId ID;
+	IsSortTab YesNo;
+	IsInsertRecord YesNo;
+	IsAdvancedTab YesNo;
+@Column("AD_COLUMNSORTORDER_ID") 	?AdColumnSortOrderId ID;
+@Column("AD_COLUMNSORTYESNO_ID") 	?AdColumnSortYesNoId ID;
+@Column("INCLUDED_TAB_ID") 	?IncludedTabId ID;
+};
+

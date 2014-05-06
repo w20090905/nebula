@@ -1,0 +1,70 @@
+@Legacy("adempiere")
+@Remarks("Import Payment")
+@Refby("0")
+@Table("I_PAYMENT")
+tx IPayment {
+@Column("I_PAYMENT_ID") 	!IPaymentId ID;
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@Column("AD_ORG_ID") 	?AdOrgId ID;
+@Column("I_ISIMPORTED") 	IIsImported YesNo;/* 'N'  */
+@Column("I_ERRORMSG") 	?IErrorMsg Message;
+	?Processed YesNo;/* 'N' */
+@ForeignKeyColumn("C_PAYMENT_ID") @Column("C_PAYMENT_ID") 	?CPayment;
+	?DocumentNo String;
+	?DateTrx Date;
+	?IsReceipt YesNo;/* 'Y' */
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	?CDocType;
+	?DocTypeName Name;
+	?TrxType Attr;
+@ForeignKeyColumn("C_BANKACCOUNT_ID") @Column("C_BANKACCOUNT_ID") 	?CBankAccount;
+	?BankAccountNo String;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+	?BpartnerValue String;
+@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
+	?InvoiceDocumentNo String;
+	?TenderType Attr;
+	?CreditCardType Attr;
+	?CreditCardNumber String;
+	?CreditCardVv String;
+	?CreditCardExpMm Number;
+	?CreditCardExpYY Length;
+	?Micr String;
+	?RoutingNo String;
+	?AccountNo String;
+	?CheckNo String;
+@Column("A_NAME") 	?AName Name;
+@Column("A_STREET") 	?AStreet String;
+@Column("A_CITY") 	?ACity String;
+@Column("A_STATE") 	?AState String;
+@Column("A_ZIP") 	?AZip String;
+@Column("A_COUNTRY") 	?ACountry String;
+@Column("A_IDENT_DL") 	?AIdentDl String;
+@Column("A_IDENT_SSN") 	?AIdentSsn String;
+@Column("A_EMAIL") 	?AEmail Email;
+	?VoiceAuthCode Code;
+	?Swipe;
+@Column("ORIG_TRXID") 	?OrigTrxId String;
+	?PoNum String;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
+	?PayAmt Amount;/* 0 */
+	?DiscountAmt Amount;/* 0 */
+	?WriteOffAmt Amount;/* 0 */
+	?IsOverUnderPayment YesNo;/* 'N' */
+	?OverUnderAmt Amount;/* 0 */
+@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	?CCharge;
+	?ChargeName Name;
+	?ChargeAmt Amount;/* 0 */
+	?TaxAmt Amount;/* 0 */
+	?IsApproved YesNo;/* 'N' */
+	?IsSelfService YesNo;/* 'N' */
+	?IsDelayedCapture YesNo;/* 'N' */
+@Column("R_PNREF") 	?RPnref String;
+@Column("R_RESULT") 	?RResult String;
+@Column("R_RESPMSG") 	?RRespMsg Message;
+@Column("R_AUTHCODE") 	?RAuthCode Code;
+@Column("R_INFO") 	?RInfo String;
+	?Processing YesNo;
+@Column("ISO_CODE") 	?IsoCode Code;
+	?DateAcct Date;
+};
+

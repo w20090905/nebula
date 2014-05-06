@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Result of the execution of the Scheduler")
+@Refby("0")
+@Table("AD_SCHEDULERLOG")
+type AdSchedulerLog {
+@ForeignKeyColumn("AD_SCHEDULER_ID") @Column("AD_SCHEDULER_ID") 	!AdScheduler;
+@Column("AD_SCHEDULERLOG_ID") 	!AdSchedulerLogId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	IsError YesNo;/* 'N'  	  */
+	?Summary String;
+	?Reference String;
+	?Description;
+	?TextMsg Text;
+	?BinaryData Text;
+};
+

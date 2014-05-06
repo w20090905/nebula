@@ -1,0 +1,21 @@
+@Legacy("adempiere")
+@Remarks("A Web Store of the Client")
+@Refby("0")
+@Table("W_STORE_TRL")
+type WStoreTrl {
+@ForeignKeyColumn("W_STORE_ID") @Column("W_STORE_ID") 	!WStore;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	IsTranslated YesNo;/* 'N'  */
+	?WebInfo String;
+	?WebParam1 String;
+	?WebParam2 String;
+	?WebParam3 String;
+	?WebParam4 String;
+	?WebParam5 String;
+	?WebParam6 String;
+	?EmailHeader Email;
+	?EmailFooter Email;
+};
+

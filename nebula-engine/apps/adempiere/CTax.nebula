@@ -1,0 +1,28 @@
+@Legacy("adempiere")
+@Remarks("Tax identifier")
+@Refby("13")
+@Table("C_TAX")
+type CTax {
+@Column("C_TAX_ID") 	!CTaxId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?TaxIndicator String;
+	IsDocumentLevel YesNo;/* 'Y'  */
+	ValidFrom Date;
+	IsSummary YesNo;/* 'N'  */
+	RequireStaxCertificate YesNo;/* 'N'  */
+	Rate Amount;
+@ForeignKeyColumn("C_TAX_ID") @Column("PARENT_TAX_ID") 	?ParentTax CTax;
+@ForeignKeyColumn("C_COUNTRY_ID") @Column("C_COUNTRY_ID") 	?CCountry;
+@ForeignKeyColumn("C_REGION_ID") @Column("C_REGION_ID") 	?CRegion;
+@ForeignKeyColumn("C_COUNTRY_ID") @Column("TO_COUNTRY_ID") 	?ToCountry CCountry;
+@ForeignKeyColumn("C_REGION_ID") @Column("TO_REGION_ID") 	?ToRegion CRegion;
+@ForeignKeyColumn("C_TAXCATEGORY_ID") @Column("C_TAXCATEGORY_ID") 	CTaxCategory;
+	IsDefault YesNo;/* 'N'  */
+	IsTaxExempt YesNo;/* 'N'  */
+	SoPoType Attr;/* 'B'  */
+	IsSalesTax YesNo;/* 'N'  */
+};
+

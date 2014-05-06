@@ -1,0 +1,12 @@
+@Legacy("adempiere")
+@Remarks("Production Line MA")
+@Refby("0")
+@Table("M_PRODUCTIONLINEMA")
+tx MProductionLineMa {
+@ForeignKeyColumn("M_PRODUCTIONLINE_ID") @Column("M_PRODUCTIONLINE_ID") 	!MProductionLine;
+@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	!MAttributeSetInstance;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	MovementQty Quantity;/* 0  */
+};
+

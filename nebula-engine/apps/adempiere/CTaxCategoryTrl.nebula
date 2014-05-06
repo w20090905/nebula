@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Tax Category")
+@Refby("0")
+@Table("C_TAXCATEGORY_TRL")
+type CTaxCategoryTrl {
+@ForeignKeyColumn("C_TAXCATEGORY_ID") @Column("C_TAXCATEGORY_ID") 	!CTaxCategory;
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	IsTranslated YesNo;/* 'N'  */
+};
+

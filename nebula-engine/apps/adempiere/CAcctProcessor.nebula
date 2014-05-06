@@ -1,0 +1,21 @@
+@Legacy("adempiere")
+@Remarks("Accounting Processor/Server Parameters")
+@Refby("1")
+@Table("C_ACCTPROCESSOR")
+type CAcctProcessor {
+@Column("C_ACCTPROCESSOR_ID") 	!CAcctProcessorId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	FrequencyType Attr;
+	Frequency;
+	?DateLastRun Date;
+	?DateNextRun Date;
+@ForeignKeyColumn("AD_USER_ID") @Column("SUPERVISOR_ID") 	Supervisor AdUser;
+	KeepLogDays Count;
+	?Processing YesNo;
+@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	?CAcctSchema;
+@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	?AdTable;
+};
+

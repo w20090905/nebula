@@ -1,0 +1,19 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("M_PRODUCT_SUBSTITUTERELATED_V")
+type MProductSubstituteRelatedV {
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@Column("AD_ORG_ID") 	?AdOrgId ID;
+@Column("M_PRODUCT_ID") 	?MProductId ID;
+@Column("SUBSTITUTE_ID") 	?SubstituteId ID;
+	?Description;
+	?RowType Attr;
+	?QtyAvailable Number;
+	?QtyOnHand Number;
+	?QtyReserved Number;
+	?PriceStd Number;
+@Column("M_PRICELIST_VERSION_ID") 	?MPriceListVersionId ID;
+@Column("M_WAREHOUSE_ID") 	?MWarehouseId ID;
+};
+

@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Cost Element")
+@Refby("6")
+@Table("M_COSTELEMENT")
+type MCostElement {
+@Column("M_COSTELEMENT_ID") 	!MCostElementId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	CostElementType Attr;
+	?CostingMethod String;
+	IsCalculated YesNo;/* 'N'  */
+};
+

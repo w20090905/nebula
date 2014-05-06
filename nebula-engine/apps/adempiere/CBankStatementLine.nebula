@@ -1,0 +1,43 @@
+@Legacy("adempiere")
+@Remarks("Line on a statement from this Bank")
+@Refby("1")
+@Table("C_BANKSTATEMENTLINE")
+tx CBankStatementLine {
+@Column("C_BANKSTATEMENTLINE_ID") 	!CBankStatementLineId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_BANKSTATEMENT_ID") @Column("C_BANKSTATEMENT_ID") 	CBankStatement;
+	Line Number;
+	?Description;
+	IsReversal YesNo;/* 'N'  */
+@ForeignKeyColumn("C_PAYMENT_ID") @Column("C_PAYMENT_ID") 	?CPayment;
+	ValutaDate Date;
+	DateAcct Date;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
+	TrxAmt Amount;/* 0  */
+	StmtAmt Amount;/* 0  */
+@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	?CCharge;
+	ChargeAmt Amount;/* 0  */
+	InterestAmt Amount;/* 0  */
+	?Memo String;
+	?ReferenceNo String;
+	IsManual YesNo;/* 'N' */
+	?EftTrxId String;
+	?EftTrxType String;
+	?EftMemo String;
+	?EftPayee String;
+	?EftPayeeAccount String;
+	?CreatePayment String;
+	StatementLineDate Date;
+	?EftStatementLineDate Date;
+	?EftValutaDate Date;
+	?EftReference String;
+	?EftCurrency String;
+	?EftAmt Amount;/* 0 */
+	?EftCheckNo String;
+	?MatchStatement String;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
+	Processed YesNo;/* 'N'  */
+};
+

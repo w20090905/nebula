@@ -1,0 +1,20 @@
+@Legacy("adempiere")
+@Remarks("AD_Package_Imp_Detail_ID")
+@Refby("0")
+@Table("AD_PACKAGE_IMP_DETAIL")
+type AdPackageImpDetail {
+@Column("AD_PACKAGE_IMP_DETAIL_ID") 	!AdPackageImpDetailId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	?Name;
+@Column("AD_PACKAGE_IMP_ID") 	AdPackageImpId ID;
+@Column("AD_ORIGINAL_ID") 	AdOriginalId ID;
+@Column("AD_BACKUP_ID") 	?AdBackUpId ID;
+	?Action String;
+	?Success String;
+	?Type String;
+	?TableName Name;
+@Column("AD_TABLE_ID") 	?AdTableId ID;
+	?Uninstall String;
+};
+

@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Workflow Node Transition")
+@Refby("1")
+@Table("AD_WF_NODENEXT")
+tx AdWfNodeNext {
+@Column("AD_WF_NODENEXT_ID") 	!AdWfNodeNextId ID;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("AD_WF_NODE_ID") @Column("AD_WF_NODE_ID") 	AdWfNode;
+@ForeignKeyColumn("AD_WF_NODE_ID") @Column("AD_WF_NEXT_ID") 	AdWfNext AdWfNode;
+	?Description;
+	SeqNo;
+@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+	?TransitionCode Code;
+	IsStdUserWorkflow YesNo;/* 'N'  */
+};
+

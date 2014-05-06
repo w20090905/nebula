@@ -1,0 +1,36 @@
+@Legacy("adempiere")
+@Remarks("Expense Invoice Batch Line")
+@Refby("0")
+@Table("C_INVOICEBATCHLINE")
+tx CInvoiceBatchLine {
+@Column("C_INVOICEBATCHLINE_ID") 	!CInvoiceBatchLineId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+@ForeignKeyColumn("C_INVOICEBATCH_ID") @Column("C_INVOICEBATCH_ID") 	CInvoiceBatch;
+	Line Number;/* 0  */
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	CDocType;
+	DocumentNo String;
+	DateInvoiced Date;
+	DateAcct Date;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
+@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocation;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	CCharge;
+	QtyEntered Number;/* 0  */
+	PriceEntered Number;/* 0  */
+	IsTaxIncluded YesNo;/* 'N'  */
+	LineNetAmt Amount;/* 0  */
+@ForeignKeyColumn("C_TAX_ID") @Column("C_TAX_ID") 	CTax;
+	TaxAmt Amount;/* 0  */
+	LineTotalAmt Amount;/* 0  */
+@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER1_ID") 	?User1 CElementValue;
+@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER2_ID") 	?User2 CElementValue;
+	Processed YesNo;/* 'N'  */
+@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
+@ForeignKeyColumn("C_INVOICELINE_ID") @Column("C_INVOICELINE_ID") 	?CInvoiceLine;
+	?Description;
+};
+

@@ -1,0 +1,25 @@
+@Legacy("adempiere")
+@Remarks("T_Replenish")
+@Refby("0")
+@Table("T_REPLENISH")
+type TReplenish {
+@ForeignKeyColumn("AD_PINSTANCE_ID") @Column("AD_PINSTANCE_ID") 	!AdPInstance;
+@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	!MWarehouse;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	!MProduct;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	QtyOnHand Number;/* 0  */
+	QtyReserved Number;/* 0  */
+	QtyOrdered Number;/* 0  */
+	ReplenishType Attr;
+@Column("LEVEL_MIN") 	LevelMin Number;/* 0  */
+@Column("LEVEL_MAX") 	LevelMax Number;/* 0  */
+@Column("C_BPARTNER_ID") 	CBpartnerId ID;
+@Column("ORDER_MIN") 	OrderMin Number;/* 0  */
+@Column("ORDER_PACK") 	OrderPack Number;/* 0  */
+	QtyToOrder Number;/* 0  */
+	?ReplenishmentCreate String;
+@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSESOURCE_ID") 	?MWarehouseSource MWarehouse;
+@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	?CDocType;
+};
+

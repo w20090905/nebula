@@ -1,0 +1,39 @@
+@Legacy("adempiere")
+@Remarks("Time and Expense Report Line")
+@Refby("1")
+@Table("S_TIMEEXPENSELINE")
+tx STimeExpenseLine {
+@Column("S_TIMEEXPENSELINE_ID") 	!STimeExpenseLineId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("S_TIMEEXPENSE_ID") @Column("S_TIMEEXPENSE_ID") 	STimeExpense;
+	Line Number;
+	IsTimeReport YesNo;/* 'N'  */
+	?DateExpense Date;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+	?Qty Quantity;/* 0 */
+	?ExpenseAmt Amount;/* 0 */
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
+	?ConvertedAmt Amount;/* 0 */
+@ForeignKeyColumn("S_RESOURCEASSIGNMENT_ID") @Column("S_RESOURCEASSIGNMENT_ID") 	?SResourceAsSignment;
+	?Description;
+	?Note;
+	IsInvoiced YesNo;/* 'N'  */
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
+@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
+@ForeignKeyColumn("C_INVOICELINE_ID") @Column("C_INVOICELINE_ID") 	?CInvoiceLine;
+	?InvoicePrice Number;/* 0 */
+@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_ID") 	?CUom;
+@ForeignKeyColumn("C_ORDERLINE_ID") @Column("C_ORDERLINE_ID") 	?COrderLine;
+@ForeignKeyColumn("C_PROJECTPHASE_ID") @Column("C_PROJECTPHASE_ID") 	?CProjectPhase;
+@ForeignKeyColumn("C_PROJECTTASK_ID") @Column("C_PROJECTTASK_ID") 	?CProjectTask;
+@ForeignKeyColumn("S_TIMETYPE_ID") @Column("S_TIMETYPE_ID") 	?STimeType;
+	Processed YesNo;/* 'N'  */
+	?QtyInvoiced Number;
+	?QtyReimbursed Number;
+	?PriceInvoiced Number;
+	?PriceReimbursed Number;
+};
+

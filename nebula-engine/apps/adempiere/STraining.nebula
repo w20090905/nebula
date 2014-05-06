@@ -1,0 +1,20 @@
+@Legacy("adempiere")
+@Remarks("Repeated Training")
+@Refby("1")
+@Table("S_TRAINING")
+type STraining {
+@Column("S_TRAINING_ID") 	!STrainingId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	?Help;
+	?DocumentNote Note;
+	?ImageUrl Url;
+	?DescriptionUrl Url;
+@ForeignKeyColumn("M_PRODUCT_CATEGORY_ID") @Column("M_PRODUCT_CATEGORY_ID") 	MProductCategory;
+@ForeignKeyColumn("C_TAXCATEGORY_ID") @Column("C_TAXCATEGORY_ID") 	CTaxCategory;
+@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_ID") 	CUom;
+	?Processing YesNo;
+};
+

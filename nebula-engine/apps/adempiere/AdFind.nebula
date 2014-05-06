@@ -1,0 +1,16 @@
+@Legacy("adempiere")
+@Remarks("Find")
+@Refby("0")
+@Table("AD_FIND")
+tx AdFind {
+@Column("AD_FIND_ID") 	!AdFindId ID;
+@Column("FIND_ID") 	FindId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	AndOr String;
+@ForeignKeyColumn("AD_COLUMN_ID") @Column("AD_COLUMN_ID") 	AdColumn;
+	Operation String;
+	Value String;
+	?Value2 String;
+};
+

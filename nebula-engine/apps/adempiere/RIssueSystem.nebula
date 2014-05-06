@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Issue System")
+@Refby("2")
+@Table("R_ISSUESYSTEM")
+tx RIssueSystem {
+@Column("R_ISSUESYSTEM_ID") 	!RIssueSystemId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	DbAddress Address;
+	?StatisticsInfo String;
+	?ProfileInfo String;
+	SystemStatus Attr;
+@ForeignKeyColumn("A_ASSET_ID") @Column("A_ASSET_ID") 	?AAsset;
+};
+

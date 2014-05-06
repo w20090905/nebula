@@ -1,0 +1,18 @@
+@Legacy("adempiere")
+@Remarks("LDAP Server")
+@Refby("2")
+@Table("AD_LDAPPROCESSOR")
+type AdLdapProcessor {
+@Column("AD_LDAPPROCESSOR_ID") 	!AdLdapProcessorId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+	LdapPort Port;/* 0  */
+	?DateLastRun Date;
+	?DateNextRun Date;
+@ForeignKeyColumn("AD_USER_ID") @Column("SUPERVISOR_ID") 	Supervisor AdUser;
+	KeepLogDays Count;/* 0  */
+	?Processing YesNo;
+};
+

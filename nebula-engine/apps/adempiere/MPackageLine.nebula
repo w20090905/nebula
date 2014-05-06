@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("The detail content of the Package")
+@Refby("0")
+@Table("M_PACKAGELINE")
+tx MPackageLine {
+@Column("M_PACKAGELINE_ID") 	!MPackageLineId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_PACKAGE_ID") @Column("M_PACKAGE_ID") 	MPackage;
+@ForeignKeyColumn("M_INOUTLINE_ID") @Column("M_INOUTLINE_ID") 	MInoutLine;
+	Qty Quantity;/* 0  	  */
+	?Description;
+};
+

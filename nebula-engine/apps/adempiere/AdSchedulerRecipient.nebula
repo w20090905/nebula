@@ -1,0 +1,13 @@
+@Legacy("adempiere")
+@Remarks("Recipient of the Scheduler Notification")
+@Refby("0")
+@Table("AD_SCHEDULERRECIPIENT")
+tx AdSchedulerRecipient {
+@Column("AD_SCHEDULERRECIPIENT_ID") 	!AdSchedulerRecipientId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("AD_SCHEDULER_ID") @Column("AD_SCHEDULER_ID") 	AdScheduler;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+@ForeignKeyColumn("AD_ROLE_ID") @Column("AD_ROLE_ID") 	?AdRole;
+};
+

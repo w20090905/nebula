@@ -1,0 +1,12 @@
+@Legacy("adempiere")
+@Remarks("Accounting Calendar Name")
+@Refby("6")
+@Table("C_CALENDAR")
+type CCalendar {
+@Column("C_CALENDAR_ID") 	!CCalendarId ID;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	*Name;
+	?Description;
+};
+

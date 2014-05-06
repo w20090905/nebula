@@ -1,0 +1,18 @@
+@Legacy("adempiere")
+@Remarks("Mail sent to the user")
+@Refby("0")
+@Table("AD_USERMAIL")
+tx AdUserMail {
+@Column("AD_USERMAIL_ID") 	!AdUserMailId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	AdUser;
+@ForeignKeyColumn("R_MAILTEXT_ID") @Column("R_MAILTEXT_ID") 	?RMailText;
+@ForeignKeyColumn("W_MAILMSG_ID") @Column("W_MAILMSG_ID") 	?WMailMsg;
+	?MessageId String;
+	?DeliveryConfirmation String;
+	?IsDelivered YesNo;
+	?Subject String;
+	?MailText Text;
+};
+

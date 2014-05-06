@@ -1,0 +1,15 @@
+@Legacy("adempiere")
+@Remarks("Position Remuneration")
+@Refby("0")
+@Table("C_JOBREMUNERATION")
+tx CJobRemuneration {
+@Column("C_JOBREMUNERATION_ID") 	!CJobRemunerationId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_JOB_ID") @Column("C_JOB_ID") 	CJob;
+@ForeignKeyColumn("C_REMUNERATION_ID") @Column("C_REMUNERATION_ID") 	CRemuneration;
+	ValidFrom Date;
+	?ValidTo Date;
+	?Description;
+};
+

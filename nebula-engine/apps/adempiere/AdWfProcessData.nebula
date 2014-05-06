@@ -1,0 +1,13 @@
+@Legacy("adempiere")
+@Remarks("Workflow Process Context")
+@Refby("0")
+@Table("AD_WF_PROCESSDATA")
+tx AdWfProcessData {
+@Column("AD_WF_PROCESSDATA_ID") 	!AdWfProcessDataId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("AD_WF_PROCESS_ID") @Column("AD_WF_PROCESS_ID") 	AdWfProcess;
+	AttributeName Name;
+	?AttributeValue String;
+};
+

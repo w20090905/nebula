@@ -1,0 +1,13 @@
+@Legacy("adempiere")
+@Remarks("Day on which business is not transacted")
+@Refby("0")
+@Table("C_NONBUSINESSDAY")
+type CNonBusinessDay {
+@Column("C_NONBUSINESSDAY_ID") 	!CNonBusinessDayId ID;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	?Name;
+	Date1 Date;
+@ForeignKeyColumn("C_CALENDAR_ID") @Column("C_CALENDAR_ID") 	CCalendar;
+};
+

@@ -1,0 +1,28 @@
+@Legacy("adempiere")
+@Remarks("Bank Statement of account")
+@Refby("2")
+@Table("C_BANKSTATEMENT")
+type CBankStatement {
+@Column("C_BANKSTATEMENT_ID") 	!CBankStatementId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_BANKACCOUNT_ID") @Column("C_BANKACCOUNT_ID") 	CBankAccount;
+	*Name;
+	?Description;
+	IsManual YesNo;/* 'Y'  */
+	StatementDate Date;
+	?BeginningBalance Number;/* 0 */
+	EndingBalance Number;/* 0  */
+	?StatementDifference Number;/* 0 */
+	?CreateFrom YesNo;/* 'N'                             */
+	?Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	Posted YesNo;/* 'N'  */
+	?EftStatementReference String;
+	?EftStatementDate Date;
+	?MatchStatement String;
+	IsApproved YesNo;/* 'N'  */
+	DocStatus Attr;
+	DocAction Attr;
+};
+

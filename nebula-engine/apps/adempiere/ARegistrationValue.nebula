@@ -1,0 +1,13 @@
+@Legacy("adempiere")
+@Remarks("A_RegistrationValue")
+@Refby("0")
+@Table("A_REGISTRATIONVALUE")
+type ARegistrationValue {
+@ForeignKeyColumn("A_REGISTRATION_ID") @Column("A_REGISTRATION_ID") 	!ARegistration;
+@ForeignKeyColumn("A_REGISTRATIONATTRIBUTE_ID") @Column("A_REGISTRATIONATTRIBUTE_ID") 	!ARegistrationAttribute;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	?Description;
+};
+

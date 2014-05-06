@@ -1,0 +1,45 @@
+@Legacy("adempiere")
+@Remarks("T_Aging")
+@Refby("0")
+@Table("T_AGING")
+tx TAging {
+@ForeignKeyColumn("AD_PINSTANCE_ID") @Column("AD_PINSTANCE_ID") 	!AdPInstance;
+@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	!CBpartner;
+@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	!CCurrency;
+@Column("C_INVOICE_ID") 	!CInvoiceId ID;
+@Column("C_INVOICEPAYSCHEDULE_ID") 	!CInvoicePayScheduleId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	StatementDate Date;
+	DueDate Date;
+	?DaysDue Count;/* 0 */
+	IsListInvoices YesNo;/* 'N'  */
+	IsSoTrx YesNo;/* 'Y'  */
+@ForeignKeyColumn("C_BP_GROUP_ID") @Column("C_BP_GROUP_ID") 	CBpGroup;
+	InvoicedAmt Amount;/* 0  */
+	OpenAmt Amount;/* 0  */
+@Column("PASTDUE91_PLUS") 	Pastdue91Plus Number;/* 0  */
+@Column("PASTDUE61_90") 	Pastdue6190 Number;/* 0  */
+@Column("PASTDUE61_PLUS") 	Pastdue61Plus Number;/* 0  */
+@Column("PASTDUE31_60") 	Pastdue3160 Number;/* 0  */
+@Column("PASTDUE31_PLUS") 	Pastdue31Plus Number;/* 0  */
+@Column("PASTDUE1_30") 	Pastdue130 Number;/* 0  */
+@Column("PASTDUE8_30") 	Pastdue830 Number;/* 0  */
+@Column("PASTDUE1_7") 	Pastdue17 Number;/* 0  */
+	PastdueAmt Amount;/* 0  */
+	DueAmt Amount;/* 0  */
+	Due0 Number;/* 0  */
+@Column("DUE0_7") 	Due07 Number;/* 0  */
+@Column("DUE1_7") 	Due17 Number;/* 0  */
+@Column("DUE8_30") 	Due830 Number;/* 0  */
+@Column("DUE0_30") 	Due030 Number;/* 0  */
+@Column("DUE31_PLUS") 	Due31Plus Number;/* 0  */
+@Column("DUE31_60") 	Due3160 Number;/* 0  */
+@Column("DUE61_PLUS") 	Due61Plus Number;/* 0  */
+@Column("DUE61_90") 	Due6190 Number;/* 0  */
+@Column("DUE91_PLUS") 	Due91Plus Number;/* 0  */
+@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
+@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
+};
+

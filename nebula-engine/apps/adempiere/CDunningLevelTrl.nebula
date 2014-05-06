@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Dunning Level Trl")
+@Refby("0")
+@Table("C_DUNNINGLEVEL_TRL")
+type CDunningLevelTrl {
+@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
+@ForeignKeyColumn("C_DUNNINGLEVEL_ID") @Column("C_DUNNINGLEVEL_ID") 	!CDunningLevel;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	PrintName Name;
+	?Note;
+	IsTranslated YesNo;/* 'N'  */
+};
+

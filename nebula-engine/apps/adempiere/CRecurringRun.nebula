@@ -1,0 +1,17 @@
+@Legacy("adempiere")
+@Remarks("Recurring Document Run")
+@Refby("0")
+@Table("C_RECURRING_RUN")
+tx CRecurringRun {
+@Column("C_RECURRING_RUN_ID") 	!CRecurringRunId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("C_PAYMENT_ID") @Column("C_PAYMENT_ID") 	?CPayment;
+@ForeignKeyColumn("C_ORDER_ID") @Column("C_ORDER_ID") 	?COrder;
+@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
+@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+@ForeignKeyColumn("GL_JOURNALBATCH_ID") @Column("GL_JOURNALBATCH_ID") 	?GlJournalBatch;
+@ForeignKeyColumn("C_RECURRING_ID") @Column("C_RECURRING_ID") 	CRecurring;
+	?DateDoc Date;
+};
+

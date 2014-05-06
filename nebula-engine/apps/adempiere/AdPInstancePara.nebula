@@ -1,0 +1,20 @@
+@Legacy("adempiere")
+@Remarks("AD_PInstance_Para")
+@Refby("0")
+@Table("AD_PINSTANCE_PARA")
+tx AdPInstancePara {
+@ForeignKeyColumn("AD_PINSTANCE_ID") @Column("AD_PINSTANCE_ID") 	!AdPInstance;
+	!SeqNo;
+	?ParameterName Name;
+@Column("P_STRING") 	?PString String;/* NULL */
+@Column("P_STRING_TO") 	?PStringTo String;/* NULL */
+@Column("P_NUMBER") 	?PNumber Number;/* NULL */
+@Column("P_NUMBER_TO") 	?PNumberTo Number;/* NULL */
+@Column("P_DATE") 	?PDate Date;
+@Column("P_DATE_TO") 	?PDateTo Date;
+	?Info String;
+@Column("INFO_TO") 	?InfoTo String;
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@Column("AD_ORG_ID") 	?AdOrgId ID;
+};
+

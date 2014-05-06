@@ -1,0 +1,34 @@
+@Legacy("adempiere")
+@Remarks("")
+@Refby("0")
+@Table("RV_PROJECTLINEISSUE")
+type RvProjectLineIssue {
+@Column("AD_CLIENT_ID") 	?AdClientId ID;
+@Column("AD_ORG_ID") 	?AdOrgId ID;
+@Column("C_PROJECT_ID") 	?CProjectId ID;
+@Column("M_PRODUCT_ID") 	?MProductId ID;
+@Column("C_PROJECTLINE_ID") 	?CProjectLineId ID;
+	?Line Number;
+	?Description;
+	?PlannedQty Quantity;
+	?PlannedPrice Number;
+	?PlannedAmt Amount;
+	?PlannedMarginAmt Amount;
+	?CommittedQty Quantity;
+@Column("C_PROJECTISSUE_ID") 	?CProjectIssueId ID;
+@Column("M_LOCATOR_ID") 	?MLocatorId ID;
+	?MovementQty Quantity;
+	?MovementDate Date;
+	?IssueLine Number;
+	?IssueDescription Description;
+@Column("M_INOUTLINE_ID") 	?MInoutLineId ID;
+@Column("S_TIMEEXPENSELINE_ID") 	?STimeExpenseLineId ID;
+@Column("C_ACCTSCHEMA_ID") 	?CAcctSchemaId ID;
+@Column("ACCOUNT_ID") 	?AccountId ID;
+	?AmtSourceDr Amount;
+	?AmtSourceCr Amount;
+	?AmtAcctDr Amount;
+	?AmtAcctCr Amount;
+	?LineMargin Length;
+};
+

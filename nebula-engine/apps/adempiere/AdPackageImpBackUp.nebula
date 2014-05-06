@@ -1,0 +1,19 @@
+@Legacy("adempiere")
+@Remarks("AD_Package_Imp_Backup_ID")
+@Refby("0")
+@Table("AD_PACKAGE_IMP_BACKUP")
+tx AdPackageImpBackUp {
+@Column("AD_PACKAGE_IMP_BACKUP_ID") 	!AdPackageImpBackUpId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@Column("AD_PACKAGE_IMP_ID") 	AdPackageImpId ID;
+@Column("AD_PACKAGE_IMP_DETAIL_ID") 	AdPackageImpDetailId ID;
+@Column("AD_TABLE_ID") 	?AdTableId ID;
+@ForeignKeyColumn("AD_COLUMN_ID") @Column("AD_COLUMN_ID") 	?AdColumn;
+@ForeignKeyColumn("AD_REFERENCE_ID") @Column("AD_REFERENCE_ID") 	?AdReference;
+@Column("AD_PACKAGE_IMP_BCK_DIR") 	?AdPackageImpBckDir String;
+@Column("AD_PACKAGE_IMP_ORG_DIR") 	?AdPackageImpOrgDir String;
+	?ColValue String;
+	?Uninstall String;
+};
+

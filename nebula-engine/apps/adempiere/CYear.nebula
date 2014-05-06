@@ -1,0 +1,14 @@
+@Legacy("adempiere")
+@Remarks("Calendar Year")
+@Refby("3")
+@Table("C_YEAR")
+tx CYear {
+@Column("C_YEAR_ID") 	!CYearId ID;
+@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	FiscalYear String;
+	?Description;
+@ForeignKeyColumn("C_CALENDAR_ID") @Column("C_CALENDAR_ID") 	CCalendar;
+	?Processing YesNo;
+};
+

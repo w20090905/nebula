@@ -1,0 +1,43 @@
+@Legacy("adempiere")
+@Remarks("System Definition")
+@Refby("2")
+@Table("AD_SYSTEM")
+type AdSystem {
+@Column("AD_SYSTEM_ID") 	!AdSystemId ID;
+@Column("AD_CLIENT_ID") 	!AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+	*Name;
+	UserName Name;
+	?Info String;
+	?Version String;
+	ReleaseNo String;
+	?SupportUnits Number;
+	?Password String;
+	ReplicationType Attr;/* 'L' */
+	?IdRangeStart Number;
+	?IdRangeEnd Number;
+	?LdapHost Host;
+	?CustomPrefix String;
+	?IsJustMigrated YesNo;/* 'N'  */
+	?DbInstance String;
+	?DbAddress Address;
+	?NoProcessors Number;
+	?Summary String;
+	?EncryptionKey String;
+	?LdapDomain String;
+	IsAutoErrorReport YesNo;/* 'Y'  */
+@Column("RECORD_ID") 	?RecordId ID;
+	?SupportExpDate Date;
+	?Processing YesNo;
+	?SupportEmail Email;
+	IsAllowStatistics YesNo;/* 'Y'  */
+	?StatisticsInfo String;
+	?ProfileInfo String;
+	?OldName Name;
+	?Description;
+	SystemStatus Attr;/* 'E'  */
+	IsFailOnMissingModelValidator YesNo;/* 'Y'  */
+	?LastBuildInfo String;
+	IsFailOnBuildDiffer YesNo;/* 'N'  */
+};
+

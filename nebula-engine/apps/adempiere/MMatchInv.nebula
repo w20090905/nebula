@@ -1,0 +1,22 @@
+@Legacy("adempiere")
+@Remarks("Match Shipment/Receipt to Invoice")
+@Refby("0")
+@Table("M_MATCHINV")
+tx MMatchInv {
+@Column("M_MATCHINV_ID") 	!MMatchInvId ID;
+@Column("AD_CLIENT_ID") 	AdClientId ID;
+@Column("AD_ORG_ID") 	AdOrgId ID;
+@ForeignKeyColumn("M_INOUTLINE_ID") @Column("M_INOUTLINE_ID") 	MInoutLine;
+@ForeignKeyColumn("C_INVOICELINE_ID") @Column("C_INVOICELINE_ID") 	CInvoiceLine;
+@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+	DateTrx Date;
+	Qty Quantity;/* 0  */
+	Processing YesNo;
+	Processed YesNo;/* 'N'  */
+	Posted YesNo;/* 'N'  */
+	?DocumentNo String;
+	?DateAcct Date;
+@Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstanceId ID;
+	?Description;
+};
+
