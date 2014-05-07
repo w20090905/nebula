@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("RV_REQUESTUPDATES")
 type RvRequestUpdates {
-@Column("AD_CLIENT_ID") 	?AdClientId ID;
-@Column("AD_ORG_ID") 	?AdOrgId ID;
-@Column("R_REQUEST_ID") 	?RRequestId ID;
-@Column("AD_USER_ID") 	?AdUserId ID;
+	?AdClientId ID;
+	?AdOrgId ID;
+	?RRequestId ID;
+	?AdUserId ID;
 	?IsSelfService YesNo;
-@Column("R_GROUP_ID") 	?RGroupId ID;
-@Column("R_REQUESTTYPE_ID") 	?RRequestTypeId ID;
-@Column("R_CATEGORY_ID") 	?RCategoryId ID;
+	?RGroupId ID;
+	?RRequestTypeId ID;
+	?RCategoryId ID;
 };
 

@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("Knowlege Keyword Synonym")
-@Refby("0")
 @Table("K_SYNONYM")
 type KSynonym {
-@Column("K_SYNONYM_ID") 	!KSynonymId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
+	!KSynonymId ID;
+	AdClientId ID;
 	*Name;
 	SynonymName Name;
-@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	AdLanguage;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	AdLanguage;
+	AdOrgId ID;
 };
 

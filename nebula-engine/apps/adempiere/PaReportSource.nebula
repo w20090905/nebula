@@ -1,22 +1,20 @@
-@Legacy("adempiere")
 @Remarks("Restriction of what will be shown in Report Line")
-@Refby("1")
 @Table("PA_REPORTSOURCE")
 tx PaReportSource {
-@Column("PA_REPORTSOURCE_ID") 	!PaReportSourceId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!PaReportSourceId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?Description;
-@ForeignKeyColumn("PA_REPORTLINE_ID") @Column("PA_REPORTLINE_ID") 	PaReportLine;
+	PaReportLine;
 	ElementType Attr;
-@ForeignKeyColumn("AD_ORG_ID") @Column("ORG_ID") 	?Org AdOrg;
-@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("C_ELEMENTVALUE_ID") 	?CElementValue;
-@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
-@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
-@ForeignKeyColumn("C_LOCATION_ID") @Column("C_LOCATION_ID") 	?CLocation;
-@ForeignKeyColumn("C_SALESREGION_ID") @Column("C_SALESREGION_ID") 	?CSalesRegion;
-@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
+	?Org AdOrg;
+	?CElementValue;
+	?CProject;
+	?CBpartner;
+	?MProduct;
+	?CCampaign;
+	?CLocation;
+	?CSalesRegion;
+	?CActivity;
 };
 

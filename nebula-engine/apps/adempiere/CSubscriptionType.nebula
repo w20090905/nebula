@@ -1,14 +1,12 @@
-@Legacy("adempiere")
 @Remarks("Type of subscription")
-@Refby("2")
 @Table("C_SUBSCRIPTIONTYPE")
 type CSubscriptionType {
-@Column("C_SUBSCRIPTIONTYPE_ID") 	!CSubscriptionTypeId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
+	!CSubscriptionTypeId ID;
+	AdClientId ID;
 	*Name;
 	?Description;
 	FrequencyType Attr;
 	Frequency;
-@Column("AD_ORG_ID") 	?AdOrgId ID;
+	?AdOrgId ID;
 };
 

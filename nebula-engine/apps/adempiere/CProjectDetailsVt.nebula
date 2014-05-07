@@ -1,27 +1,25 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("C_PROJECT_DETAILS_VT")
 type CProjectDetailsVt {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("AD_LANGUAGE") 	AdLanguage Code;
-@Column("C_PROJECT_ID") 	CProjectId ID;
-@Column("C_PROJECTLINE_ID") 	CProjectLineId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AdLanguage Code;
+	CProjectId ID;
+	CProjectLineId ID;
 	Line Number;
 	PlannedQty Quantity;
 	PlannedPrice Number;
 	PlannedAmt Amount;
 	PlannedMarginAmt Amount;
 	?CommittedAmt Amount;
-@Column("M_PRODUCT_ID") 	?MProductId ID;
+	?MProductId ID;
 	?Name;
 	?Description;
 	?DocumentNote Note;
 	?Upc;
 	?Sku;
 	?ProductValue String;
-@Column("M_PRODUCT_CATEGORY_ID") 	?MProductCategoryId ID;
+	?MProductCategoryId ID;
 	InvoicedAmt Amount;
 	InvoicedQty Quantity;
 	?CommittedQty Quantity;

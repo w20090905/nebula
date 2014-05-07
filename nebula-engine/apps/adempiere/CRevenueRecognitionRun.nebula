@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("Revenue Recognition Run or Process")
-@Refby("0")
 @Table("C_REVENUERECOGNITION_RUN")
 tx CRevenueRecognitionRun {
-@Column("C_REVENUERECOGNITION_RUN_ID") 	!CRevenueRecognitionRunId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_REVENUERECOGNITION_PLAN_ID") @Column("C_REVENUERECOGNITION_PLAN_ID") 	CRevenueRecognitionPlan;
-@ForeignKeyColumn("GL_JOURNAL_ID") @Column("GL_JOURNAL_ID") 	GlJournal;
+	!CRevenueRecognitionRunId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CRevenueRecognitionPlan;
+	GlJournal;
 	RecognizedAmt Amount;/* 0  */
 };
 

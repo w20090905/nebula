@@ -1,17 +1,15 @@
-@Legacy("adempiere")
 @Remarks("T_InventoryValue")
-@Refby("0")
 @Table("T_INVENTORYVALUE")
 tx TInventoryValue {
-@ForeignKeyColumn("AD_PINSTANCE_ID") @Column("AD_PINSTANCE_ID") 	!AdPInstance;
-@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	!MWarehouse;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	!MProduct;
-@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	!MAttributeSetInstance;
-@Column("AD_CLIENT_ID") 	?AdClientId ID;
-@Column("AD_ORG_ID") 	?AdOrgId ID;
-@ForeignKeyColumn("M_PRICELIST_VERSION_ID") @Column("M_PRICELIST_VERSION_ID") 	?MPriceListVersion;
+	!AdPInstance;
+	!MWarehouse;
+	!MProduct;
+	!MAttributeSetInstance;
+	?AdClientId ID;
+	?AdOrgId ID;
+	?MPriceListVersion;
 	?DateValue Date;
-@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
+	?CCurrency;
 	?QtyOnHand Number;/* 0 */
 	?PricePo Number;/* 0 */
 	?PriceList Number;/* 0 */
@@ -25,6 +23,6 @@ tx TInventoryValue {
 	?PriceLimitAmt Amount;/* 0 */
 	?CostStandardAmt Amount;/* 0 */
 	?CostAmt Amount;/* 0 */
-@ForeignKeyColumn("M_COSTELEMENT_ID") @Column("M_COSTELEMENT_ID") 	?MCostElement;
+	?MCostElement;
 };
 

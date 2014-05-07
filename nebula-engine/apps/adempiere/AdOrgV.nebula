@@ -1,21 +1,19 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("AD_ORG_V")
 type AdOrgV {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;
 	IsSummary YesNo;
-@Column("C_LOCATION_ID") 	?CLocationId ID;
+	?CLocationId ID;
 	Duns;
 	TaxId String;
-@Column("SUPERVISOR_ID") 	?SupervisorId ID;
-@Column("PARENT_ORG_ID") 	?ParentOrgId ID;
-@Column("AD_ORGTYPE_ID") 	?AdOrgTypeId ID;
-@Column("M_WAREHOUSE_ID") 	?MWarehouseId ID;
-@Column("C_BPARTNER_ID") 	?CBpartnerId ID;
+	?SupervisorId ID;
+	?ParentOrgId ID;
+	?AdOrgTypeId ID;
+	?MWarehouseId ID;
+	?CBpartnerId ID;
 };
 

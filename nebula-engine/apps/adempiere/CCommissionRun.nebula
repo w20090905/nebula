@@ -1,14 +1,12 @@
-@Legacy("adempiere")
 @Remarks("Commission Run or Process")
-@Refby("1")
 @Table("C_COMMISSIONRUN")
 tx CCommissionRun {
-@Column("C_COMMISSIONRUN_ID") 	!CCommissionRunId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CCommissionRunId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo String;
 	?Description;
-@ForeignKeyColumn("C_COMMISSION_ID") @Column("C_COMMISSION_ID") 	CCommission;
+	CCommission;
 	StartDate Date;
 	GrandTotal Number;/* 0  */
 	?Processing YesNo;

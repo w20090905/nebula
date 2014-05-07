@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Process or Report")
-@Refby("0")
 @Table("AD_PROCESS_TRL")
 type AdProcessTrl {
-@ForeignKeyColumn("AD_PROCESS_ID") @Column("AD_PROCESS_ID") 	!AdProcess;
-@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdProcess;
+	!AdLanguage;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;

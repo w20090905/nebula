@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("Material Shipment or Receipt Confirmation")
-@Refby("1")
 @Table("M_INOUTCONFIRM")
 tx MInoutConfirm {
-@Column("M_INOUTCONFIRM_ID") 	!MInoutConfirmId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MInoutConfirmId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo String;
-@ForeignKeyColumn("M_INOUT_ID") @Column("M_INOUT_ID") 	MInout;
+	MInout;
 	ConfirmType Attr;
 	IsApproved YesNo;/* 'N'  */
 	?Description;
@@ -18,8 +16,8 @@ tx MInoutConfirm {
 	DocStatus Attr;
 	DocAction Attr;
 	IsInDispute YesNo;/* 'N'  */
-@ForeignKeyColumn("M_INVENTORY_ID") @Column("M_INVENTORY_ID") 	?MInventory;
-@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
+	?MInventory;
+	?CInvoice;
 	?ApprovalAmt Amount;
 	?ConfirmationNo String;
 };

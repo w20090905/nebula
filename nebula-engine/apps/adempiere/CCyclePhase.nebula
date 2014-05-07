@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("C_CyclePhase")
-@Refby("0")
 @Table("C_CYCLEPHASE")
 type CCyclePhase {
-@ForeignKeyColumn("C_CYCLESTEP_ID") @Column("C_CYCLESTEP_ID") 	!CCycleStep;
-@ForeignKeyColumn("C_PHASE_ID") @Column("C_PHASE_ID") 	!CPhase;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CCycleStep;
+	!CPhase;
+	AdClientId ID;
+	AdOrgId ID;
 };
 

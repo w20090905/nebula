@@ -1,24 +1,22 @@
-@Legacy("adempiere")
 @Remarks("Allocation Line")
-@Refby("2")
 @Table("C_ALLOCATIONLINE")
 tx CAllocationLine {
-@Column("C_ALLOCATIONLINE_ID") 	!CAllocationLineId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CAllocationLineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?AllocationNo SeqNo;
 	?DateTrx Date;
 	?IsManual YesNo;/* 'N'  */
-@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
-@ForeignKeyColumn("C_ORDER_ID") @Column("C_ORDER_ID") 	?COrder;
-@ForeignKeyColumn("C_PAYMENT_ID") @Column("C_PAYMENT_ID") 	?CPayment;
-@ForeignKeyColumn("C_CASHLINE_ID") @Column("C_CASHLINE_ID") 	?CCashLine;
+	?CInvoice;
+	?CBpartner;
+	?COrder;
+	?CPayment;
+	?CCashLine;
 	Amount;/* 0  */
 	DiscountAmt Amount;/* 0  */
 	WriteOffAmt Amount;/* 0  */
 	?Posted YesNo;/* 'N'  */
 	?OverUnderAmt Amount;/* 0 */
-@ForeignKeyColumn("C_ALLOCATIONHDR_ID") @Column("C_ALLOCATIONHDR_ID") 	CAllocationHdr;
+	CAllocationHdr;
 };
 

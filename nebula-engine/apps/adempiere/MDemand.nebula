@@ -1,17 +1,15 @@
-@Legacy("adempiere")
 @Remarks("Material Demand")
-@Refby("1")
 @Table("M_DEMAND")
 type MDemand {
-@Column("M_DEMAND_ID") 	!MDemandId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MDemandId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
 	IsDefault YesNo;/* 'N'  */
-@ForeignKeyColumn("C_CALENDAR_ID") @Column("C_CALENDAR_ID") 	CCalendar;
-@ForeignKeyColumn("C_YEAR_ID") @Column("C_YEAR_ID") 	CYear;
+	CCalendar;
+	CYear;
 	?Processing YesNo;
 };
 

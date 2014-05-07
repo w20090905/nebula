@@ -1,17 +1,15 @@
-@Legacy("adempiere")
 @Remarks("Rate used for converting currencies")
-@Refby("1")
 @Table("C_CONVERSION_RATE")
 tx CConversionRate {
-@Column("C_CONVERSION_RATE_ID") 	!CConversionRateId ID;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
-@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
-@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID_TO") 	CCurrencyIdTo CCurrency;
+	!CConversionRateId ID;
+	AdClient;
+	AdOrg;
+	CCurrency;
+	CCurrencyIdTo CCurrency;
 	ValidFrom Date;
 	?ValidTo Date;
 	MultiplyRate Amount;/* 0  */
 	DivideRate Amount;/* 0  */
-@ForeignKeyColumn("C_CONVERSIONTYPE_ID") @Column("C_CONVERSIONTYPE_ID") 	CConversionType;
+	CConversionType;
 };
 

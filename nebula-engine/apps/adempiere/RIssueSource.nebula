@@ -1,14 +1,12 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("R_ISSUESOURCE")
 tx RIssueSource {
-@Column("R_ISSUESOURCE_ID") 	!RIssueSourceId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("R_ISSUESYSTEM_ID") @Column("R_ISSUESYSTEM_ID") 	RIssueSystem;
-@ForeignKeyColumn("R_ISSUEPROJECT_ID") @Column("R_ISSUEPROJECT_ID") 	RIssueProject;
-@ForeignKeyColumn("R_ISSUEUSER_ID") @Column("R_ISSUEUSER_ID") 	RIssueUser;
+	!RIssueSourceId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	RIssueSystem;
+	RIssueProject;
+	RIssueUser;
 	?StatisticsInfo String;
 	?ProfileInfo String;
 };

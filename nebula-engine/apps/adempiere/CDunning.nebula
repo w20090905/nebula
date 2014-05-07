@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Dunning Rules for overdue invoices")
-@Refby("3")
 @Table("C_DUNNING")
 type CDunning {
-@Column("C_DUNNING_ID") 	!CDunningId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CDunningId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	SendDunningLetter YesNo;/* 'Y'  */

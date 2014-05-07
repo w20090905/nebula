@@ -1,36 +1,34 @@
-@Legacy("adempiere")
 @Remarks("Temporary Reporting Table")
-@Refby("0")
 @Table("T_REPORT")
 type TReport {
-@ForeignKeyColumn("AD_PINSTANCE_ID") @Column("AD_PINSTANCE_ID") 	!AdPInstance;
-@ForeignKeyColumn("PA_REPORTLINE_ID") @Column("PA_REPORTLINE_ID") 	!PaReportLine;
-@Column("RECORD_ID") 	!RecordId ID;
-@Column("FACT_ACCT_ID") 	!FactAcctId ID;
+	!AdPInstance;
+	!PaReportLine;
+	!RecordId ID;
+	!FactAcctId ID;
 	?SeqNo;
 	?LevelNo SeqNo;/* 0 */
 	?Name;
 	?Description;
-@Column("COL_0") 	?Col0 Number;
-@Column("COL_2") 	?Col2 Number;
-@Column("COL_1") 	?Col1 Number;
-@Column("COL_3") 	?Col3 Number;
-@Column("COL_4") 	?Col4 Number;
-@Column("COL_5") 	?Col5 Number;
-@Column("COL_6") 	?Col6 Number;
-@Column("COL_7") 	?Col7 Number;
-@Column("COL_8") 	?Col8 Number;
-@Column("COL_9") 	?Col9 Number;
-@Column("COL_10") 	?Col10 Number;
-@Column("COL_11") 	?Col11 Number;
-@Column("COL_12") 	?Col12 Number;
-@Column("COL_13") 	?Col13 Number;
-@Column("COL_14") 	?Col14 Number;
-@Column("COL_15") 	?Col15 Number;
-@Column("COL_16") 	?Col16 Number;
-@Column("COL_17") 	?Col17 Number;
-@Column("COL_18") 	?Col18 Number;
-@Column("COL_19") 	?Col19 Number;
-@Column("COL_20") 	?Col20 Number;
+	?Col0 Number;
+	?Col2 Number;
+	?Col1 Number;
+	?Col3 Number;
+	?Col4 Number;
+	?Col5 Number;
+	?Col6 Number;
+	?Col7 Number;
+	?Col8 Number;
+	?Col9 Number;
+	?Col10 Number;
+	?Col11 Number;
+	?Col12 Number;
+	?Col13 Number;
+	?Col14 Number;
+	?Col15 Number;
+	?Col16 Number;
+	?Col17 Number;
+	?Col18 Number;
+	?Col19 Number;
+	?Col20 Number;
 };
 

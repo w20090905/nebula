@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("General Ledger Journal")
-@Refby("3")
 @Table("GL_JOURNAL")
 tx GlJournal {
-@Column("GL_JOURNAL_ID") 	!GlJournalId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	CAcctSchema;
-@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	CDocType;
+	!GlJournalId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CAcctSchema;
+	CDocType;
 	DocumentNo String;
 	DocStatus Attr;
 	DocAction Attr;
@@ -15,20 +13,20 @@ tx GlJournal {
 	IsPrinted YesNo;/* 'N'  */
 	Description;
 	PostingType Attr;
-@ForeignKeyColumn("GL_BUDGET_ID") @Column("GL_BUDGET_ID") 	?GlBudget;
-@ForeignKeyColumn("GL_CATEGORY_ID") @Column("GL_CATEGORY_ID") 	GlCategory;
+	?GlBudget;
+	GlCategory;
 	DateDoc Date;
 	DateAcct Date;
-@ForeignKeyColumn("C_PERIOD_ID") @Column("C_PERIOD_ID") 	CPeriod;
-@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
+	CPeriod;
+	?CCurrency;
 	CurrencyRate Amount;/* 0  */
-@ForeignKeyColumn("GL_JOURNALBATCH_ID") @Column("GL_JOURNALBATCH_ID") 	?GlJournalBatch;
+	?GlJournalBatch;
 	TotalDr Number;/* 0  */
 	TotalCr Number;/* 0  */
 	?ControlAmt Amount;/* 0 */
 	?Processing YesNo;
 	?Processed YesNo;/* 'N'                            */
 	Posted YesNo;/* 'N'  */
-@ForeignKeyColumn("C_CONVERSIONTYPE_ID") @Column("C_CONVERSIONTYPE_ID") 	CConversionType;
+	CConversionType;
 };
 

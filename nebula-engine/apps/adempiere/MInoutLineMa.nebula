@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("M_InOutLineMA")
-@Refby("0")
 @Table("M_INOUTLINEMA")
 tx MInoutLineMa {
-@ForeignKeyColumn("M_INOUTLINE_ID") @Column("M_INOUTLINE_ID") 	!MInoutLine;
-@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	!MAttributeSetInstance;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MInoutLine;
+	!MAttributeSetInstance;
+	AdClientId ID;
+	AdOrgId ID;
 	MovementQty Quantity;/* 0  */
 };
 

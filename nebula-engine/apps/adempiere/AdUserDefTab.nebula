@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("User defined Tab")
-@Refby("1")
 @Table("AD_USERDEF_TAB")
 type AdUserDefTab {
-@Column("AD_USERDEF_TAB_ID") 	!AdUserDefTabId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("AD_USERDEF_WIN_ID") @Column("AD_USERDEF_WIN_ID") 	AdUserDefWin;
-@ForeignKeyColumn("AD_TAB_ID") @Column("AD_TAB_ID") 	AdTab;
+	!AdUserDefTabId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AdUserDefWin;
+	AdTab;
 	IsMultiRowOnly YesNo;/* 'N'  */
 	*Name;
 	?Description;

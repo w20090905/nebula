@@ -1,23 +1,21 @@
-@Legacy("adempiere")
 @Remarks("Payment Selection Check")
-@Refby("1")
 @Table("C_PAYSELECTIONCHECK")
 tx CPaySelectionCheck {
-@Column("C_PAYSELECTIONCHECK_ID") 	!CPaySelectionCheckId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_PAYSELECTION_ID") @Column("C_PAYSELECTION_ID") 	CPaySelection;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
+	!CPaySelectionCheckId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CPaySelection;
+	CBpartner;
 	PayAmt Amount;/* 0  */
 	Qty Quantity;/* 0  */
-@ForeignKeyColumn("C_PAYMENT_ID") @Column("C_PAYMENT_ID") 	?CPayment;
+	?CPayment;
 	?DocumentNo String;
 	IsPrinted YesNo;/* 'N'  */
 	PaymentRule String;
 	Processed YesNo;/* 'N'  */
 	DiscountAmt Amount;/* 0  */
 	IsReceipt YesNo;/* 'N'  */
-@ForeignKeyColumn("C_BP_BANKACCOUNT_ID") @Column("C_BP_BANKACCOUNT_ID") 	?CBpBankAccount;/* NULL   */
+	?CBpBankAccount;/* NULL   */
 	IsGeneratedDraft YesNo;/* 'N'  */
 };
 

@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Category of the Freight")
-@Refby("2")
 @Table("M_FREIGHTCATEGORY")
 type MFreightCategory {
-@Column("M_FREIGHTCATEGORY_ID") 	!MFreightCategoryId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MFreightCategoryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;

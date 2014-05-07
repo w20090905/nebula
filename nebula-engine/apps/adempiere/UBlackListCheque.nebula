@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Black List Cheque")
-@Refby("0")
 @Table("U_BLACKLISTCHEQUE")
 tx UBlackListCheque {
-@Column("U_BLACKLISTCHEQUE_ID") 	!UBlackListChequeId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!UBlackListChequeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	BankName Name;
 	ChequeNo String;
 };

@@ -1,26 +1,24 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("M_TRANSACTION_V")
 type MTransactionV {
-@Column("M_TRANSACTION_ID") 	MTransactionId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	MTransactionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MovementType Attr;
-@Column("M_LOCATOR_ID") 	MLocatorId ID;
-@Column("M_PRODUCT_ID") 	MProductId ID;
+	MLocatorId ID;
+	MProductId ID;
 	MovementDate Date;
 	MovementQty Quantity;
-@Column("M_INVENTORYLINE_ID") 	?MInventoryLineId ID;
-@Column("M_INVENTORY_ID") 	?MInventoryId ID;
-@Column("M_MOVEMENTLINE_ID") 	?MMovementLineId ID;
-@Column("M_MOVEMENT_ID") 	?MMovementId ID;
-@Column("M_INOUTLINE_ID") 	?MInoutLineId ID;
-@Column("M_INOUT_ID") 	?MInoutId ID;
-@Column("M_PRODUCTIONLINE_ID") 	?MProductionLineId ID;
-@Column("M_PRODUCTION_ID") 	?MProductionId ID;
-@Column("C_PROJECTISSUE_ID") 	?CProjectIssueId ID;
-@Column("C_PROJECT_ID") 	?CProjectId ID;
-@Column("M_ATTRIBUTESETINSTANCE_ID") 	MAttributeSetInstanceId ID;
+	?MInventoryLineId ID;
+	?MInventoryId ID;
+	?MMovementLineId ID;
+	?MMovementId ID;
+	?MInoutLineId ID;
+	?MInoutId ID;
+	?MProductionLineId ID;
+	?MProductionId ID;
+	?CProjectIssueId ID;
+	?CProjectId ID;
+	MAttributeSetInstanceId ID;
 };
 

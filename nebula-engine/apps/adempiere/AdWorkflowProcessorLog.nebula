@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Result of the execution of the Workflow Processor")
-@Refby("0")
 @Table("AD_WORKFLOWPROCESSORLOG")
 type AdWorkflowProcessorLog {
-@ForeignKeyColumn("AD_WORKFLOWPROCESSOR_ID") @Column("AD_WORKFLOWPROCESSOR_ID") 	!AdWorkflowProcessor;
-@Column("AD_WORKFLOWPROCESSORLOG_ID") 	!AdWorkflowProcessorLogId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdWorkflowProcessor;
+	!AdWorkflowProcessorLogId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IsError YesNo;/* 'N'  	  */
 	?Summary String;
 	?Reference String;

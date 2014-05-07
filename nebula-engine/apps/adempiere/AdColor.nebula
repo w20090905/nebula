@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Color for backgrounds or indicators")
-@Refby("3")
 @Table("AD_COLOR")
 type AdColor {
-@Column("AD_COLOR_ID") 	!AdColorId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdColorId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	IsDefault YesNo;/* 'N'  */
 	ColorType Attr;
@@ -13,12 +11,12 @@ type AdColor {
 	Green Number;
 	Blue Number;
 	Alpha Number;
-@ForeignKeyColumn("AD_IMAGE_ID") @Column("AD_IMAGE_ID") 	?AdImage;
+	?AdImage;
 	ImageAlpha Number;
-@Column("RED_1") 	?Red1 Number;
-@Column("GREEN_1") 	?Green1 Number;
-@Column("BLUE_1") 	?Blue1 Number;
-@Column("ALPHA_1") 	?Alpha1 Number;
+	?Red1 Number;
+	?Green1 Number;
+	?Blue1 Number;
+	?Alpha1 Number;
 	?LineWidth Width;
 	?LineDistance Distance;
 	?StartPoint Number;

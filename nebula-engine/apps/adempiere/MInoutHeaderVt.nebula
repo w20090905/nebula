@@ -1,28 +1,26 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("M_INOUT_HEADER_VT")
 type MInoutHeaderVt {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("AD_LANGUAGE") 	?AdLanguage Code;
-@Column("M_INOUT_ID") 	MInoutId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	?AdLanguage Code;
+	MInoutId ID;
 	IsSoTrx YesNo;
 	DocumentNo String;
 	DocStatus Attr;
-@Column("C_DOCTYPE_ID") 	CDocTypeId ID;
-@Column("C_BPARTNER_ID") 	?CBpartnerId ID;
+	CDocTypeId ID;
+	?CBpartnerId ID;
 	?BpValue String;
 	?BpTaxId String;
 	?Naics;
 	?Duns;
-@Column("ORG_LOCATION_ID") 	?OrgLocationId ID;
+	?OrgLocationId ID;
 	TaxId String;
-@Column("M_WAREHOUSE_ID") 	MWarehouseId ID;
-@Column("WAREHOUSE_LOCATION_ID") 	WarehouseLocationId ID;
+	MWarehouseId ID;
+	WarehouseLocationId ID;
 	?DocumentType String;
 	?DocumentTypeNote Note;
-@Column("C_ORDER_ID") 	?COrderId ID;
+	?COrderId ID;
 	?Phone;
 	?MovementDate Date;
 	MovementType Attr;
@@ -32,7 +30,7 @@ type MInoutHeaderVt {
 	?BpContactGreeting String;
 	?Title;
 	?ContactName Name;
-@Column("C_LOCATION_ID") 	?CLocationId ID;
+	?CLocationId ID;
 	?Postal String;
 	?ReferenceNo String;
 	?Description;
@@ -40,7 +38,7 @@ type MInoutHeaderVt {
 	?DateOrdered Date;
 	?Volume Number;
 	?Weight;
-@Column("M_SHIPPER_ID") 	?MShipperId ID;
+	?MShipperId ID;
 	DeliveryRule String;
 	DeliveryViaRule String;
 	PriorityRule String;

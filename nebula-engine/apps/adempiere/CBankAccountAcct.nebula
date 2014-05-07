@@ -1,23 +1,21 @@
-@Legacy("adempiere")
 @Remarks("C_BankAccount_Acct")
-@Refby("0")
 @Table("C_BANKACCOUNT_ACCT")
 type CBankAccountAcct {
-@ForeignKeyColumn("C_BANKACCOUNT_ID") @Column("C_BANKACCOUNT_ID") 	!CBankAccount;
-@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	!CAcctSchema;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_INTRANSIT_ACCT") 	BInTransitAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_ASSET_ACCT") 	BAssetAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_EXPENSE_ACCT") 	BExpenseAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_INTERESTREV_ACCT") 	BInterestRevAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_INTERESTEXP_ACCT") 	BInterestExpAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_UNIDENTIFIED_ACCT") 	BUnidentifiedAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_UNALLOCATEDCASH_ACCT") 	BUnallocatedCashAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_PAYMENTSELECT_ACCT") 	BPaymentSelectAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_SETTLEMENTGAIN_ACCT") 	BSettlementGainAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_SETTLEMENTLOSS_ACCT") 	BSettlementLossAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_REVALUATIONGAIN_ACCT") 	BRevaluationGainAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("B_REVALUATIONLOSS_ACCT") 	BRevaluationLossAcct CValidCombination;
+	!CBankAccount;
+	!CAcctSchema;
+	AdClientId ID;
+	AdOrgId ID;
+	BInTransitAcct CValidCombination;
+	BAssetAcct CValidCombination;
+	BExpenseAcct CValidCombination;
+	BInterestRevAcct CValidCombination;
+	BInterestExpAcct CValidCombination;
+	BUnidentifiedAcct CValidCombination;
+	BUnallocatedCashAcct CValidCombination;
+	BPaymentSelectAcct CValidCombination;
+	BSettlementGainAcct CValidCombination;
+	BSettlementLossAcct CValidCombination;
+	BRevaluationGainAcct CValidCombination;
+	BRevaluationLossAcct CValidCombination;
 };
 

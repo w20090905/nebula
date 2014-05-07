@@ -1,23 +1,21 @@
-@Legacy("adempiere")
 @Remarks("Workflow Activity")
-@Refby("2")
 @Table("AD_WF_ACTIVITY")
 tx AdWfActivity {
-@Column("AD_WF_ACTIVITY_ID") 	!AdWfActivityId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("AD_WF_PROCESS_ID") @Column("AD_WF_PROCESS_ID") 	AdWfProcess;
-@ForeignKeyColumn("AD_WF_NODE_ID") @Column("AD_WF_NODE_ID") 	AdWfNode;
-@ForeignKeyColumn("AD_WF_RESPONSIBLE_ID") @Column("AD_WF_RESPONSIBLE_ID") 	?AdWfResponsible;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+	!AdWfActivityId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AdWfProcess;
+	AdWfNode;
+	?AdWfResponsible;
+	?AdUser;
 	WfState String;
-@ForeignKeyColumn("AD_MESSAGE_ID") @Column("AD_MESSAGE_ID") 	?AdMessage;
+	?AdMessage;
 	?Processing YesNo;
 	Processed YesNo;/* 'N'  */
 	?TextMsg Text;
-@ForeignKeyColumn("AD_WORKFLOW_ID") @Column("AD_WORKFLOW_ID") 	AdWorkflow;
-@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
-@Column("RECORD_ID") 	RecordId ID;
+	AdWorkflow;
+	AdTable;
+	RecordId ID;
 	?Priority;
 	?EndWaitTime Date;
 	?DateLastAlert Date;

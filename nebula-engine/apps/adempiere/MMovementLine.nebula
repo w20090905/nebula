@@ -1,23 +1,21 @@
-@Legacy("adempiere")
 @Remarks("Inventory Move document Line")
-@Refby("5")
 @Table("M_MOVEMENTLINE")
 tx MMovementLine {
-@Column("M_MOVEMENTLINE_ID") 	!MMovementLineId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("M_MOVEMENT_ID") @Column("M_MOVEMENT_ID") 	MMovement;
-@ForeignKeyColumn("M_LOCATOR_ID") @Column("M_LOCATOR_ID") 	MLocator;
-@ForeignKeyColumn("M_LOCATOR_ID") @Column("M_LOCATORTO_ID") 	MLocatorTo MLocator;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+	!MMovementLineId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	MMovement;
+	MLocator;
+	MLocatorTo MLocator;
+	MProduct;
 	?Line Number;
 	MovementQty Quantity;/* 0  */
 	?Description;
-@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstance;/* 0 */
+	?MAttributeSetInstance;/* 0 */
 	?ConfirmedQty Quantity;/* 0 */
 	?ScrappedQty Quantity;/* 0 */
 	?TargetQty Quantity;/* 0 */
 	Processed YesNo;/* 'N'  */
-@Column("M_ATTRIBUTESETINSTANCETO_ID") 	?MAttributeSetInstanceToId ID;
+	?MAttributeSetInstanceToId ID;
 };
 

@@ -1,18 +1,16 @@
-@Legacy("adempiere")
 @Remarks("Contains media content like images, flash movies etc.")
-@Refby("4")
 @Table("CM_MEDIA")
 type CmMedia {
-@Column("CM_MEDIA_ID") 	!CmMediaId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CmMediaId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?MediaType Attr;
 	*Name;
 	?Description;
 	?Help;
 	IsSummary YesNo;/* 'N'  */
-@ForeignKeyColumn("CM_WEBPROJECT_ID") @Column("CM_WEBPROJECT_ID") 	CmWebProject;
-@Column("AD_IMAGE_ID") 	?AdImageId ID;
+	CmWebProject;
+	?AdImageId ID;
 	?ContentText null;
 	?DirectDeploy String;
 };

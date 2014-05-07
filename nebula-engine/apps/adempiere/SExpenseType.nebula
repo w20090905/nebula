@@ -1,17 +1,15 @@
-@Legacy("adempiere")
 @Remarks("Expense report type")
-@Refby("1")
 @Table("S_EXPENSETYPE")
 type SExpenseType {
-@Column("S_EXPENSETYPE_ID") 	!SExpenseTypeId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!SExpenseTypeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;
 	IsInvoiced YesNo;/* 'Y'  */
-@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_ID") 	CUom;
-@ForeignKeyColumn("M_PRODUCT_CATEGORY_ID") @Column("M_PRODUCT_CATEGORY_ID") 	MProductCategory;
-@ForeignKeyColumn("C_TAXCATEGORY_ID") @Column("C_TAXCATEGORY_ID") 	CTaxCategory;
+	CUom;
+	MProductCategory;
+	CTaxCategory;
 };
 

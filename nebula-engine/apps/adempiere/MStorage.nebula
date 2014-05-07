@@ -1,16 +1,14 @@
-@Legacy("adempiere")
 @Remarks("M_Storage")
-@Refby("0")
 @Table("M_STORAGE")
 tx MStorage {
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	!MProduct;
-@ForeignKeyColumn("M_LOCATOR_ID") @Column("M_LOCATOR_ID") 	!MLocator;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	!MProduct;
+	!MLocator;
+	AdClient;
+	AdOrg;
 	QtyOnHand Number;/* 0  */
 	QtyReserved Number;/* 0  */
 	QtyOrdered Number;/* 0  */
 	?DateLastInventory Date;
-@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	!MAttributeSetInstance;/* 0 */
+	!MAttributeSetInstance;/* 0 */
 };
 

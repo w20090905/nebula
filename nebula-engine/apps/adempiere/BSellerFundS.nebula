@@ -1,14 +1,12 @@
-@Legacy("adempiere")
 @Remarks("Seller Funds from Offers on Topics")
-@Refby("1")
 @Table("B_SELLERFUNDS")
 tx BSellerFundS {
-@Column("B_SELLERFUNDS_ID") 	!BSellerFundSId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	AdUser BSeller;
-@ForeignKeyColumn("C_ORDER_ID") @Column("C_ORDER_ID") 	?COrder;
-@ForeignKeyColumn("C_PAYMENT_ID") @Column("C_PAYMENT_ID") 	?CPayment;
+	!BSellerFundSId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AdUser BSeller;
+	?COrder;
+	?CPayment;
 	CommittedAmt Amount;/* 0  */
 	NonCommittedAmt Amount;/* 0  */
 };

@@ -1,16 +1,14 @@
-@Legacy("adempiere")
 @Remarks("Product Attribute")
-@Refby("3")
 @Table("M_ATTRIBUTE")
 type MAttribute {
-@Column("M_ATTRIBUTE_ID") 	!MAttributeId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MAttributeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	IsMandatory YesNo;/* 'N'  */
 	IsInstanceAttribute YesNo;/* 'N'  */
-@ForeignKeyColumn("M_ATTRIBUTESEARCH_ID") @Column("M_ATTRIBUTESEARCH_ID") 	?MAttributeSearch;
+	?MAttributeSearch;
 	AttributeValueType Attr;/* 'S'  */
 };
 

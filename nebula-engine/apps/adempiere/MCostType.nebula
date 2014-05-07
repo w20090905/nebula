@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Type of Cost")
-@Refby("3")
 @Table("M_COSTTYPE")
 type MCostType {
-@Column("M_COSTTYPE_ID") 	!MCostTypeId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MCostTypeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;

@@ -1,14 +1,12 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("RV_CLICK_MONTH")
 type RvClickMonth {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	TargetUrl Url;
-@Column("C_BPARTNER_ID") 	?CBpartnerId ID;
+	?CBpartnerId ID;
 	?Counter Number;
 };
 

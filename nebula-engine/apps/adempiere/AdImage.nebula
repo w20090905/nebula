@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("System Image or Icon")
-@Refby("6")
 @Table("AD_IMAGE")
 type AdImage {
-@Column("AD_IMAGE_ID") 	!AdImageId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdImageId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?ImageUrl Url;
 	?BinaryData Text;
-@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+	EntityType AdEntityType;/* 'D'  */
 	?Description;
 };
 

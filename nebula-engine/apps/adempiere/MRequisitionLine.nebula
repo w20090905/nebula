@@ -1,20 +1,18 @@
-@Legacy("adempiere")
 @Remarks("Material Requisition Line")
-@Refby("1")
 @Table("M_REQUISITIONLINE")
 tx MRequisitionLine {
-@Column("M_REQUISITIONLINE_ID") 	!MRequisitionLineId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MRequisitionLineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Line Number;
-@ForeignKeyColumn("M_REQUISITION_ID") @Column("M_REQUISITION_ID") 	MRequisition;
+	MRequisition;
 	Qty Quantity;/* 0  */
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+	?MProduct;
 	?Description;
 	PriceActual Number;/* 0  */
 	LineNetAmt Amount;/* 0  */
-@ForeignKeyColumn("C_ORDERLINE_ID") @Column("C_ORDERLINE_ID") 	?COrderLine;
-@Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstanceId ID;
-@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	?CCharge;
+	?COrderLine;
+	?MAttributeSetInstanceId ID;
+	?CCharge;
 };
 

@@ -1,20 +1,18 @@
-@Legacy("adempiere")
 @Remarks("Performance Goal")
-@Refby("3")
 @Table("PA_GOAL")
 type PaGoal {
-@Column("PA_GOAL_ID") 	!PaGoalId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!PaGoalId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	SeqNo;/* 0  */
 	*Name;
 	?Description;
 	?Note;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
-@ForeignKeyColumn("PA_COLORSCHEMA_ID") @Column("PA_COLORSCHEMA_ID") 	PaColorSchema;
+	?AdUser;
+	PaColorSchema;
 	IsSummary YesNo;/* 'N'  */
-@ForeignKeyColumn("PA_GOAL_ID") @Column("PA_GOALPARENT_ID") 	?PaGoalParent PaGoal;
-@ForeignKeyColumn("PA_MEASURE_ID") @Column("PA_MEASURE_ID") 	?PaMeasure;
+	?PaGoalParent PaGoal;
+	?PaMeasure;
 	?RelativeWeight Weight;
 	MeasureTarget Number;/* 0  */
 	MeasureScope String;
@@ -24,6 +22,6 @@ type PaGoal {
 	?MeasureActual Number;/* 0 */
 	?GoalPerformance Number;
 	?DateLastRun Date;
-@ForeignKeyColumn("AD_ROLE_ID") @Column("AD_ROLE_ID") 	?AdRole;
+	?AdRole;
 };
 

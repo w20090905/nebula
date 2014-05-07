@@ -1,28 +1,26 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("C_INVOICE_HEADER_V")
 type CInvoiceHeaderV {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("AD_LANGUAGE") 	?AdLanguage Code;
-@Column("C_INVOICE_ID") 	CInvoiceId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	?AdLanguage Code;
+	CInvoiceId ID;
 	IsSoTrx YesNo;
 	DocumentNo String;
 	DocStatus Attr;
-@Column("C_DOCTYPE_ID") 	CDocTypeId ID;
-@Column("C_BPARTNER_ID") 	CBpartnerId ID;
+	CDocTypeId ID;
+	CBpartnerId ID;
 	BpValue String;
 	?BpTaxId String;
 	?Naics;
 	?Duns;
-@Column("ORG_LOCATION_ID") 	?OrgLocationId ID;
+	?OrgLocationId ID;
 	TaxId String;
 	DocumentType String;
 	?DocumentTypeNote Note;
-@Column("C_ORDER_ID") 	?COrderId ID;
-@Column("SALESREP_ID") 	?SalesRepId ID;
-@Column("SALESREP_NAME") 	?SalesRepName Name;
+	?COrderId ID;
+	?SalesRepId ID;
+	?SalesRepName Name;
 	DateInvoiced Date;
 	?BpGreeting String;
 	*Name;
@@ -31,25 +29,25 @@ type CInvoiceHeaderV {
 	?Title;
 	?Phone;
 	?ContactName Name;
-@Column("C_LOCATION_ID") 	?CLocationId ID;
+	?CLocationId ID;
 	?ReferenceNo String;
 	?Postal String;
 	?Description;
 	?PoReference String;
 	?DateOrdered Date;
-@Column("C_CURRENCY_ID") 	CCurrencyId ID;
+	CCurrencyId ID;
 	PaymentTerm String;
 	?PaymentTermNote Note;
-@Column("C_CHARGE_ID") 	?CChargeId ID;
+	?CChargeId ID;
 	?ChargeAmt Amount;
 	TotalLines Count;
 	GrandTotal Number;
 	AmtInWords Amount;
-@Column("M_PRICELIST_ID") 	MPriceListId ID;
+	MPriceListId ID;
 	IsTaxIncluded YesNo;
-@Column("C_CAMPAIGN_ID") 	?CCampaignId ID;
-@Column("C_PROJECT_ID") 	?CProjectId ID;
-@Column("C_ACTIVITY_ID") 	?CActivityId ID;
+	?CCampaignId ID;
+	?CProjectId ID;
+	?CActivityId ID;
 	IsPaid YesNo;
 };
 

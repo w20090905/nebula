@@ -1,18 +1,16 @@
-@Legacy("adempiere")
 @Remarks("Resource")
-@Refby("3")
 @Table("S_RESOURCE")
 type SResource {
-@Column("S_RESOURCE_ID") 	!SResourceId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!SResourceId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;
-@ForeignKeyColumn("S_RESOURCETYPE_ID") @Column("S_RESOURCETYPE_ID") 	SResourceType;
-@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	MWarehouse;
+	SResourceType;
+	MWarehouse;
 	IsAvailable YesNo;/* 'Y'  */
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+	?AdUser;
 	?ChargeableQty Quantity;/* 0 */
 };
 

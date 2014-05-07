@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("System Configurator")
-@Refby("0")
 @Table("AD_SYSCONFIG")
 type AdSysConfig {
-@Column("AD_SYSCONFIG_ID") 	!AdSysConfigId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdSysConfigId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	Value String;
 	?Description;
-@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'U'  */
+	EntityType AdEntityType;/* 'U'  */
 	?ConfigurationLevel Attr;/* 'S' */
 };
 

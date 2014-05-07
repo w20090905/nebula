@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Product Costing")
-@Refby("0")
 @Table("M_PRODUCT_COSTING")
 type MProductCosting {
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	!MProduct;
-@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	!CAcctSchema;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MProduct;
+	!CAcctSchema;
+	AdClientId ID;
+	AdOrgId ID;
 	CurrentCostPrice Number;/* 0  */
 	FutureCostPrice Number;/* 0  */
 	CostStandard Number;/* 0  */

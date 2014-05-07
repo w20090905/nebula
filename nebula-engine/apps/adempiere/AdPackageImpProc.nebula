@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("AD_Package_Imp_Proc_ID")
-@Refby("0")
 @Table("AD_PACKAGE_IMP_PROC")
 tx AdPackageImpProc {
-@Column("AD_PACKAGE_IMP_PROC_ID") 	!AdPackageImpProcId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("AD_OVERRIDE_DICT") 	?AdOverRideDict String;
-@Column("AD_PACKAGE_DIR") 	?AdPackageDir String;
-@Column("AD_PACKAGE_SOURCE") 	?AdPackageSource String;
-@Column("AD_PACKAGE_SOURCE_TYPE") 	AdPackageSourceType String;
+	!AdPackageImpProcId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	?AdOverRideDict String;
+	?AdPackageDir String;
+	?AdPackageSource String;
+	AdPackageSourceType String;
 	?Processing YesNo;
 };
 

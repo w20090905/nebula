@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Registration Product")
-@Refby("0")
 @Table("A_REGISTRATIONPRODUCT")
 type ARegistrationProduct {
-@ForeignKeyColumn("A_REGISTRATIONATTRIBUTE_ID") @Column("A_REGISTRATIONATTRIBUTE_ID") 	!ARegistrationAttribute;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	!MProduct;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!ARegistrationAttribute;
+	!MProduct;
+	AdClientId ID;
+	AdOrgId ID;
 	?Description;
 };
 

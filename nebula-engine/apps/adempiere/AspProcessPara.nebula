@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("ASP Process Parameter")
-@Refby("0")
 @Table("ASP_PROCESS_PARA")
 type AspProcessPara {
-@Column("AD_CLIENT_ID") 	AdClientId ID;/* NULL   */
-@Column("AD_ORG_ID") 	AdOrgId ID;/* NULL   */
-@ForeignKeyColumn("AD_PROCESS_ID") @Column("AD_PROCESS_ID") 	!AdProcess;
-@ForeignKeyColumn("AD_PROCESS_PARA_ID") @Column("AD_PROCESS_PARA_ID") 	!AdProcessPara;
-@ForeignKeyColumn("ASP_LEVEL_ID") @Column("ASP_LEVEL_ID") 	!AspLevel;
-@Column("ASP_STATUS") 	AspStatus Attr;/* 'U'  */
+	AdClientId ID;/* NULL   */
+	AdOrgId ID;/* NULL   */
+	!AdProcess;
+	!AdProcessPara;
+	!AspLevel;
+	AspStatus Attr;/* 'U'  */
 };
 

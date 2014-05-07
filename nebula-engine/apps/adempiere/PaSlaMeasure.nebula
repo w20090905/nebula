@@ -1,17 +1,15 @@
-@Legacy("adempiere")
 @Remarks("Service Level Agreement Measure")
-@Refby("0")
 @Table("PA_SLA_MEASURE")
 tx PaSlaMeasure {
-@Column("PA_SLA_MEASURE_ID") 	!PaSlaMeasureId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("PA_SLA_GOAL_ID") @Column("PA_SLA_GOAL_ID") 	PaSlaGoal;
+	!PaSlaMeasureId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	PaSlaGoal;
 	DateTrx Date;
 	MeasureActual Number;/* 0  */
 	?Description;
-@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	?AdTable;
-@Column("RECORD_ID") 	?RecordId ID;
+	?AdTable;
+	?RecordId ID;
 	Processed YesNo;/* 'N'  */
 	?Processing YesNo;
 };

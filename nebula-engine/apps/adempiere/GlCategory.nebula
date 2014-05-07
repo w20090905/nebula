@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("General Ledger Category")
-@Refby("5")
 @Table("GL_CATEGORY")
 type GlCategory {
-@Column("GL_CATEGORY_ID") 	!GlCategoryId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!GlCategoryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	CategoryType Attr;

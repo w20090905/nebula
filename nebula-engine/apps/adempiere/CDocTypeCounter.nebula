@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("Counter Document Relationship")
-@Refby("0")
 @Table("C_DOCTYPECOUNTER")
 type CDocTypeCounter {
-@Column("C_DOCTYPECOUNTER_ID") 	!CDocTypeCounterId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CDocTypeCounterId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
-@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	CDocType;
-@ForeignKeyColumn("C_DOCTYPE_ID") @Column("COUNTER_C_DOCTYPE_ID") 	?CounterCDocType CDocType;
+	CDocType;
+	?CounterCDocType CDocType;
 	IsValid YesNo;/* 'N'  */
 	?Processing YesNo;
 	?DocAction Attr;

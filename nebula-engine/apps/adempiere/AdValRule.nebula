@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("Dynamic Validation Rule")
-@Refby("5")
 @Table("AD_VAL_RULE")
 type AdValRule {
-@Column("AD_VAL_RULE_ID") 	!AdValRuleId ID;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	!AdValRuleId ID;
+	AdClient;
+	AdOrg;
 	*Name;
 	?Description;
 	?Type Attr;/* NULL */
 	?Code;
-@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+	EntityType AdEntityType;/* 'D'  */
 };
 

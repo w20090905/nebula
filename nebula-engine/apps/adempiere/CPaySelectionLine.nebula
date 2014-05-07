@@ -1,20 +1,18 @@
-@Legacy("adempiere")
 @Remarks("Payment Selection Line")
-@Refby("0")
 @Table("C_PAYSELECTIONLINE")
 tx CPaySelectionLine {
-@Column("C_PAYSELECTIONLINE_ID") 	!CPaySelectionLineId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_PAYSELECTION_ID") @Column("C_PAYSELECTION_ID") 	CPaySelection;
+	!CPaySelectionLineId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CPaySelection;
 	Line Number;
 	?Description;
 	PaymentRule String;
 	IsManual YesNo;/* 'Y'  */
-@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	CInvoice;
+	CInvoice;
 	PayAmt Amount;/* 0  */
 	DifferenceAmt Amount;/* 0  */
-@ForeignKeyColumn("C_PAYSELECTIONCHECK_ID") @Column("C_PAYSELECTIONCHECK_ID") 	?CPaySelectionCheck;
+	?CPaySelectionCheck;
 	Processed YesNo;/* 'N'  */
 	DiscountAmt Amount;/* 0  */
 	OpenAmt Amount;/* 0  */

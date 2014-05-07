@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Commission Line")
-@Refby("1")
 @Table("C_COMMISSIONLINE")
 tx CCommissionLine {
-@Column("C_COMMISSIONLINE_ID") 	!CCommissionLineId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_COMMISSION_ID") @Column("C_COMMISSION_ID") 	CCommission;
+	!CCommissionLineId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CCommission;
 	Line Number;
 	?Description;
 	AmtSubTract Amount;
@@ -15,11 +13,11 @@ tx CCommissionLine {
 	QtyMultiplier Number;
 	IsPositiveOnly YesNo;/* 'Y'  */
 	CommissionOrders YesNo;/* 'N'  */
-@ForeignKeyColumn("AD_ORG_ID") @Column("ORG_ID") 	?Org AdOrg;
-@ForeignKeyColumn("M_PRODUCT_CATEGORY_ID") @Column("M_PRODUCT_CATEGORY_ID") 	?MProductCategory;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
-@ForeignKeyColumn("C_BP_GROUP_ID") @Column("C_BP_GROUP_ID") 	?CBpGroup;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
-@ForeignKeyColumn("C_SALESREGION_ID") @Column("C_SALESREGION_ID") 	?CSalesRegion;
+	?Org AdOrg;
+	?MProductCategory;
+	?MProduct;
+	?CBpGroup;
+	?CBpartner;
+	?CSalesRegion;
 };
 

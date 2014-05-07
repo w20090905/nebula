@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("Employee Wage or Salary Overwrite")
-@Refby("0")
 @Table("C_USERREMUNERATION")
 tx CUserRemuneration {
-@Column("C_USERREMUNERATION_ID") 	!CUserRemunerationId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	AdUser;
-@ForeignKeyColumn("C_REMUNERATION_ID") @Column("C_REMUNERATION_ID") 	CRemuneration;
+	!CUserRemunerationId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AdUser;
+	CRemuneration;
 	ValidFrom Date;
 	?ValidTo Date;
 	GrossRAmt Amount;/* 0  */

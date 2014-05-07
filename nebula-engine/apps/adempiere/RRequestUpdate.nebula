@@ -1,18 +1,16 @@
-@Legacy("adempiere")
 @Remarks("Request Update")
-@Refby("0")
 @Table("R_REQUESTUPDATE")
 tx RRequestUpdate {
-@Column("R_REQUESTUPDATE_ID") 	!RRequestUpdateId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("R_REQUEST_ID") @Column("R_REQUEST_ID") 	RRequest;
+	!RRequestUpdateId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	RRequest;
 	ConfidentialTypeEntry String;
 	?StartTime Date;
 	?EndTime Date;
 	?QtySpent Number;/* 0 */
 	?QtyInvoiced Number;/* 0 */
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCTSPENT_ID") 	?MProductSpent MProduct;
+	?MProductSpent MProduct;
 	?Result String;
 };
 

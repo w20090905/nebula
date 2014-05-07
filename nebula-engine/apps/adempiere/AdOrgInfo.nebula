@@ -1,17 +1,15 @@
-@Legacy("adempiere")
 @Remarks("Organization Info")
-@Refby("0")
 @Table("AD_ORGINFO")
 type AdOrgInfo {
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	!AdOrg;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@ForeignKeyColumn("C_LOCATION_ID") @Column("C_LOCATION_ID") 	?CLocation;
+	!AdOrg;
+	AdClientId ID;
+	?CLocation;
 	Duns;
 	TaxId String;
-@Column("PA_GOAL_ID") 	?PaGoalId ID;
-@ForeignKeyColumn("AD_USER_ID") @Column("SUPERVISOR_ID") 	?Supervisor AdUser;
-@ForeignKeyColumn("AD_ORG_ID") @Column("PARENT_ORG_ID") 	?ParentOrg AdOrg;
-@ForeignKeyColumn("AD_ORGTYPE_ID") @Column("AD_ORGTYPE_ID") 	?AdOrgType;
-@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	?MWarehouse;
+	?PaGoalId ID;
+	?Supervisor AdUser;
+	?ParentOrg AdOrg;
+	?AdOrgType;
+	?MWarehouse;
 };
 

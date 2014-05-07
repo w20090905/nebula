@@ -1,16 +1,14 @@
-@Legacy("adempiere")
 @Remarks("Web Project Domain handling")
-@Refby("0")
 @Table("CM_WEBPROJECT_DOMAIN")
 type CmWebProjectDomain {
-@Column("CM_WEBPROJECT_DOMAIN_ID") 	!CmWebProjectDomainId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CmWebProjectDomainId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
-@ForeignKeyColumn("CM_WEBPROJECT_ID") @Column("CM_WEBPROJECT_ID") 	CmWebProject;
-@ForeignKeyColumn("CM_CONTAINER_ID") @Column("CM_CONTAINER_ID") 	?CmContainer;
+	CmWebProject;
+	?CmContainer;
 	Fqdn String;
 };
 

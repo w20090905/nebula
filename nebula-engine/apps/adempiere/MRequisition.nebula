@@ -1,17 +1,15 @@
-@Legacy("adempiere")
 @Remarks("Material Requisition")
-@Refby("1")
 @Table("M_REQUISITION")
 tx MRequisition {
-@Column("M_REQUISITION_ID") 	!MRequisitionId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MRequisitionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo String;
 	?Description;
 	?Help;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	AdUser;
-@ForeignKeyColumn("M_PRICELIST_ID") @Column("M_PRICELIST_ID") 	MPriceList;
-@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	MWarehouse;
+	AdUser;
+	MPriceList;
+	MWarehouse;
 	IsApproved YesNo;/* 'Y'  */
 	PriorityRule String;
 	DateRequired Date;
@@ -22,6 +20,6 @@ tx MRequisition {
 	Processed YesNo;/* 'N'  */
 	Posted YesNo;/* 'N'  */
 	DateDoc Date;/* sysDate  */
-@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	CDocType;
+	CDocType;
 };
 

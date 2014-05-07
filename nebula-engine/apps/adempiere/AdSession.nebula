@@ -1,17 +1,15 @@
-@Legacy("adempiere")
 @Remarks("User Session Online or Web")
-@Refby("3")
 @Table("AD_SESSION")
 tx AdSession {
-@Column("AD_SESSION_ID") 	!AdSessionId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdSessionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?WebSession String;
-@Column("REMOTE_ADDR") 	?RemoteAddr Message;
-@Column("REMOTE_HOST") 	?RemoteHost Host;
+	?RemoteAddr Message;
+	?RemoteHost Host;
 	Processed YesNo;/* 'N' */
 	?Description;
-@ForeignKeyColumn("AD_ROLE_ID") @Column("AD_ROLE_ID") 	?AdRole;
+	?AdRole;
 	?LoginDate Date;
 };
 

@@ -1,9 +1,7 @@
-@Legacy("adempiere")
 @Remarks("Temporary Spool Table")
-@Refby("0")
 @Table("T_SPOOL")
 tx TSpool {
-@ForeignKeyColumn("AD_PINSTANCE_ID") @Column("AD_PINSTANCE_ID") 	!AdPInstance;
+	!AdPInstance;
 	!SeqNo;
 	MsgText Text;
 };

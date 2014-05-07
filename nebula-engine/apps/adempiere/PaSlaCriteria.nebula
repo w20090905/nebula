@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Service Level Agreement Criteria")
-@Refby("1")
 @Table("PA_SLA_CRITERIA")
 type PaSlaCriteria {
-@Column("PA_SLA_CRITERIA_ID") 	!PaSlaCriteriaId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!PaSlaCriteriaId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;

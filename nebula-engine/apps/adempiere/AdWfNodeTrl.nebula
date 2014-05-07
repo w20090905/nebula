@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Workflow Node (activity), step or process")
-@Refby("0")
 @Table("AD_WF_NODE_TRL")
 type AdWfNodeTrl {
-@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
-@ForeignKeyColumn("AD_WF_NODE_ID") @Column("AD_WF_NODE_ID") 	!AdWfNode;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdLanguage;
+	!AdWfNode;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;

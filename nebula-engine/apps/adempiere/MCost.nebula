@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("Product Cost")
-@Refby("0")
 @Table("M_COST")
 tx MCost {
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	!AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	!AdOrg;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	!MProduct;
-@ForeignKeyColumn("M_COSTTYPE_ID") @Column("M_COSTTYPE_ID") 	!MCostType;
-@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	!CAcctSchema;
-@ForeignKeyColumn("M_COSTELEMENT_ID") @Column("M_COSTELEMENT_ID") 	!MCostElement;
-@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	!MAttributeSetInstance;
+	!AdClient;
+	!AdOrg;
+	!MProduct;
+	!MCostType;
+	!CAcctSchema;
+	!MCostElement;
+	!MAttributeSetInstance;
 	CurrentCostPrice Number;
 	CurrentQty Quantity;/* 0  */
 	?CumulatedAmt Amount;/* 0 */

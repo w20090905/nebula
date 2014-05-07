@@ -1,19 +1,17 @@
-@Legacy("adempiere")
 @Remarks("Performance Ratio Element")
-@Refby("0")
 @Table("PA_RATIOELEMENT")
 type PaRatioElement {
-@Column("PA_RATIOELEMENT_ID") 	!PaRatioElementId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!PaRatioElementId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
-@ForeignKeyColumn("PA_RATIO_ID") @Column("PA_RATIO_ID") 	PaRatio;
+	PaRatio;
 	RatioOperand String;
 	RatioElementType Attr;
-@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("ACCOUNT_ID") 	?Account CElementValue;
-@ForeignKeyColumn("PA_RATIO_ID") @Column("PA_RATIOUSED_ID") 	?PaRatioUsed PaRatio;
-@ForeignKeyColumn("PA_MEASURECALC_ID") @Column("PA_MEASURECALC_ID") 	?PaMeasureCalc;
+	?Account CElementValue;
+	?PaRatioUsed PaRatio;
+	?PaMeasureCalc;
 	?ConstantValue Number;
 	SeqNo;
 	?PostingType Attr;

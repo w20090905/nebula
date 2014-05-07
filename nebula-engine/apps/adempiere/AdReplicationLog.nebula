@@ -1,14 +1,12 @@
-@Legacy("adempiere")
 @Remarks("Data Replication Log Details")
-@Refby("0")
 @Table("AD_REPLICATION_LOG")
 tx AdReplicationLog {
-@Column("AD_REPLICATION_LOG_ID") 	!AdReplicationLogId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("AD_REPLICATION_RUN_ID") @Column("AD_REPLICATION_RUN_ID") 	AdReplicationRun;
-@ForeignKeyColumn("AD_REPLICATIONTABLE_ID") @Column("AD_REPLICATIONTABLE_ID") 	?AdReplicationTable;
-@Column("P_MSG") 	?PMsg Message;
+	!AdReplicationLogId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AdReplicationRun;
+	?AdReplicationTable;
+	?PMsg Message;
 	IsReplicated YesNo;/* 'N'  */
 };
 

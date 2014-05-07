@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Country")
-@Refby("12")
 @Table("C_COUNTRY")
 type CCountry {
-@ForeignKeyColumn("C_COUNTRY_ID") @Column("C_COUNTRY_ID") 	!CCountry;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	!CCountry;
+	AdClient;
+	AdOrg;
 	*Name;
 	?Description;
 	CountryCode Code;
@@ -14,10 +12,10 @@ type CCountry {
 	?ExpRessionPhone Phone;
 	DisplaySequence String;
 	?ExpRessionPostal String;
-@Column("HASPOSTAL_ADD") 	HasPostalAdd YesNo;/* 'N'  */
-@Column("EXPRESSIONPOSTAL_ADD") 	?ExpRessionPostalAdd String;
-@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	?AdLanguage;
-@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
+	HasPostalAdd YesNo;/* 'N'  */
+	?ExpRessionPostalAdd String;
+	?AdLanguage;
+	?CCurrency;
 	?DisplaySequenceLocal String;
 	IsAddressLinesReverse YesNo;/* 'N'  */
 	IsAddressLinesLocalReverse YesNo;/* 'N'  */

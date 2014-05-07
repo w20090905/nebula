@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Migration Scripts for the System")
-@Refby("0")
 @Table("AD_MIGRATIONSCRIPT_ISAPPLY_CHK")
 type AdMigrationScriptIsApplyChk {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_MIGRATIONSCRIPT_ID") 	!AdMigrationScriptId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	AdClientId ID;
+	!AdMigrationScriptId ID;
+	AdOrgId ID;
 	?Description;
 	?DeveloperName Name;/* NULL */
 	*Name;

@@ -1,16 +1,14 @@
-@Legacy("adempiere")
 @Remarks("Checks, Transfers, etc.")
-@Refby("0")
 @Table("C_BANKACCOUNTDOC")
 type CBankAccountDoc {
-@Column("C_BANKACCOUNTDOC_ID") 	!CBankAccountDocId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_BANKACCOUNT_ID") @Column("C_BANKACCOUNT_ID") 	CBankAccount;
+	!CBankAccountDocId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CBankAccount;
 	*Name;
 	?Description;
 	PaymentRule String;
 	CurrentNext Number;
-@ForeignKeyColumn("AD_PRINTFORMAT_ID") @Column("CHECK_PRINTFORMAT_ID") 	?CheckPrintFormat AdPrintFormat;
+	?CheckPrintFormat AdPrintFormat;
 };
 

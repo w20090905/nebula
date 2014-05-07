@@ -1,23 +1,21 @@
-@Legacy("adempiere")
 @Remarks("C_AcctSchema_GL")
-@Refby("0")
 @Table("C_ACCTSCHEMA_GL")
 type CAcctSchemaGl {
-@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	!CAcctSchema;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CAcctSchema;
+	AdClientId ID;
+	AdOrgId ID;
 	UseSuspenseBalancing YesNo;/* 'Y'  */
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("SUSPENSEBALANCING_ACCT") 	?SuspenseBalancingAcct CValidCombination;
+	?SuspenseBalancingAcct CValidCombination;
 	UseSuspenseError YesNo;/* 'Y'  */
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("SUSPENSEERROR_ACCT") 	?SuspenseErrorAcct CValidCombination;
+	?SuspenseErrorAcct CValidCombination;
 	UseCurrencyBalancing YesNo;/* 'Y'  */
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("CURRENCYBALANCING_ACCT") 	?CurrencyBalancingAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("RETAINEDEARNING_ACCT") 	RetainedEarningAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("INCOMESUMMARY_ACCT") 	IncomeSummaryAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("INTERCOMPANYDUETO_ACCT") 	InterCompanyDueToAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("INTERCOMPANYDUEFROM_ACCT") 	InterCompanyDueFromAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("PPVOFFSET_ACCT") 	PpvOffsetAcct CValidCombination;
-@Column("COMMITMENTOFFSET_ACCT") 	CommitmentOffsetAcct Number;
-@Column("COMMITMENTOFFSETSALES_ACCT") 	CommitmentOffsetSalesAcct Number;
+	?CurrencyBalancingAcct CValidCombination;
+	RetainedEarningAcct CValidCombination;
+	IncomeSummaryAcct CValidCombination;
+	InterCompanyDueToAcct CValidCombination;
+	InterCompanyDueFromAcct CValidCombination;
+	PpvOffsetAcct CValidCombination;
+	CommitmentOffsetAcct Number;
+	CommitmentOffsetSalesAcct Number;
 };
 

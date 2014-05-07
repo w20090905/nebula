@@ -1,14 +1,12 @@
-@Legacy("adempiere")
 @Remarks("Performace Ratio")
-@Refby("3")
 @Table("PA_RATIO")
 type PaRatio {
-@Column("PA_RATIO_ID") 	!PaRatioId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!PaRatioId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
-@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	CAcctSchema;
+	CAcctSchema;
 };
 

@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Product Attribute Value")
-@Refby("1")
 @Table("M_ATTRIBUTEVALUE")
 type MAttributeValue {
-@Column("M_ATTRIBUTEVALUE_ID") 	!MAttributeValueId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("M_ATTRIBUTE_ID") @Column("M_ATTRIBUTE_ID") 	MAttribute;
+	!MAttributeValueId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	MAttribute;
 	Value String;
 	*Name;
 	?Description;

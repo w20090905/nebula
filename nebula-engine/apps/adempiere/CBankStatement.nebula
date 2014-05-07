@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Bank Statement of account")
-@Refby("2")
 @Table("C_BANKSTATEMENT")
 type CBankStatement {
-@Column("C_BANKSTATEMENT_ID") 	!CBankStatementId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_BANKACCOUNT_ID") @Column("C_BANKACCOUNT_ID") 	CBankAccount;
+	!CBankStatementId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CBankAccount;
 	*Name;
 	?Description;
 	IsManual YesNo;/* 'Y'  */

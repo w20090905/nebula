@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Knowledge Type")
-@Refby("1")
 @Table("K_TYPE")
 type KType {
-@Column("K_TYPE_ID") 	!KTypeId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!KTypeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;

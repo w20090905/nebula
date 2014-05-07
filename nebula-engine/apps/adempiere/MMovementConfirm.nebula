@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Inventory Move Confirmation")
-@Refby("1")
 @Table("M_MOVEMENTCONFIRM")
 tx MMovementConfirm {
-@Column("M_MOVEMENTCONFIRM_ID") 	!MMovementConfirmId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("M_MOVEMENT_ID") @Column("M_MOVEMENT_ID") 	MMovement;
+	!MMovementConfirmId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	MMovement;
 	?Description;
 	IsApproved YesNo;/* 'N'  */
 	?ApprovalAmt Amount;/* 0 */
@@ -14,7 +12,7 @@ tx MMovementConfirm {
 	DocStatus Attr;
 	?Processing YesNo;
 	Processed YesNo;/* 'N'  */
-@ForeignKeyColumn("M_INVENTORY_ID") @Column("M_INVENTORY_ID") 	?MInventory;
+	?MInventory;
 	DocumentNo String;
 };
 

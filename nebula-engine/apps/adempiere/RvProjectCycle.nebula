@@ -1,31 +1,29 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("RV_PROJECTCYCLE")
 type RvProjectCycle {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("C_CYCLE_ID") 	CCycleId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CCycleId ID;
 	CycleName Name;
-@Column("C_CURRENCY_ID") 	CCurrencyId ID;
-@Column("C_CYCLESTEP_ID") 	CCycleStepId ID;
+	CCurrencyId ID;
+	CCycleStepId ID;
 	CycleStepName Name;
 	SeqNo;
 	RelativeWeight Weight;
-@Column("C_PHASE_ID") 	CPhaseId ID;
+	CPhaseId ID;
 	ProjectPhaseName Name;
-@Column("C_PROJECTTYPE_ID") 	CProjectTypeId ID;
+	CProjectTypeId ID;
 	ProjectTypeName Name;
 	ProjectValue String;
 	ProjectName Name;
 	?Description;
 	?Note;
-@Column("C_BPARTNER_ID") 	?CBpartnerId ID;
-@Column("C_BPARTNER_LOCATION_ID") 	?CBpartnerLocationId ID;
-@Column("AD_USER_ID") 	?AdUserId ID;
+	?CBpartnerId ID;
+	?CBpartnerLocationId ID;
+	?AdUserId ID;
 	?PoReference String;
-@Column("SALESREP_ID") 	?SalesRepId ID;
-@Column("M_WAREHOUSE_ID") 	?MWarehouseId ID;
+	?SalesRepId ID;
+	?MWarehouseId ID;
 	?ProjectCategory String;
 	?DateContract Date;
 	?DateFinish Date;

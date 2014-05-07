@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("Product Related")
-@Refby("0")
 @Table("M_RELATEDPRODUCT")
 type MRelatedProduct {
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	!MProduct;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("RELATEDPRODUCT_ID") 	!RelatedProduct MProduct;
+	!MProduct;
+	!RelatedProduct MProduct;
 	!RelatedProductType Attr;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 };

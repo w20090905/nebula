@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Material Shipment Document")
-@Refby("8")
 @Table("M_INOUT")
 tx MInout {
-@Column("M_INOUT_ID") 	!MInoutId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	!MInoutId ID;
+	AdClientId ID;
+	AdOrg;
 	IsSoTrx YesNo;/* 'Y'  */
 	DocumentNo String;
 	DocAction Attr;
@@ -13,52 +11,52 @@ tx MInout {
 	Posted YesNo;/* 'N'  */
 	?Processing YesNo;
 	Processed YesNo;/* 'N'  */
-@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	CDocType;
+	CDocType;
 	?Description;
-@ForeignKeyColumn("C_ORDER_ID") @Column("C_ORDER_ID") 	?COrder;
+	?COrder;
 	?DateOrdered Date;
 	IsPrinted YesNo;/* 'N'  */
 	MovementType Attr;
 	MovementDate Date;
 	DateAcct Date;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
-@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocation;
-@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	MWarehouse;
+	CBpartner;
+	CBpartnerLocation;
+	MWarehouse;
 	?PoReference String;
 	DeliveryRule String;
 	FreightCostRule String;
 	?FreightAmt Amount;/* 0 */
 	DeliveryViaRule String;
-@ForeignKeyColumn("M_SHIPPER_ID") @Column("M_SHIPPER_ID") 	?MShipper;
-@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	?CCharge;
+	?MShipper;
+	?CCharge;
 	?ChargeAmt Amount;/* 0 */
 	PriorityRule String;
 	?DatePrinted Date;
-@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
+	?CInvoice;
 	?CreateFrom Attr;
 	?GenerateTo Attr;
 	SendEmail YesNo;/* 'N'  */
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
-@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	?SalesRep AdUser;
+	?AdUser;
+	?SalesRep AdUser;
 	?NoPackageS Number;
 	?PickDate Date;
 	?ShipDate Date;
 	?TrackingNo String;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
-@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
-@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
-@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
-@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER1_ID") 	?User1 CElementValue;
-@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER2_ID") 	?User2 CElementValue;
+	?AdOrgTrx AdOrg;
+	?CProject;
+	?CCampaign;
+	?CActivity;
+	?User1 CElementValue;
+	?User2 CElementValue;
 	?DateReceived Date;
 	IsInTransit YesNo;/* 'N'  */
-@ForeignKeyColumn("M_INOUT_ID") @Column("REF_INOUT_ID") 	?RefInout MInout;
+	?RefInout MInout;
 	?CreateConfirm String;
 	?CreatePackage String;
 	IsApproved YesNo;/* 'N'  */
 	IsInDispute YesNo;/* 'N'  */
 	?Volume Number;
 	?Weight;
-@ForeignKeyColumn("M_RMA_ID") @Column("M_RMA_ID") 	?MRma;/* NULL */
+	?MRma;/* NULL */
 };
 

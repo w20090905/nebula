@@ -1,21 +1,19 @@
-@Legacy("adempiere")
 @Remarks("Column in the table")
-@Refby("21")
 @Table("AD_COLUMN")
 type AdColumn {
-@Column("AD_COLUMN_ID") 	!AdColumnId ID;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	!AdColumnId ID;
+	AdClient;
+	AdOrg;
 	*Name;
 	?Description;
 	?Help;
 	Version Number;
-@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+	EntityType AdEntityType;/* 'D'  */
 	ColumnName Name;
-@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
-@ForeignKeyColumn("AD_REFERENCE_ID") @Column("AD_REFERENCE_ID") 	AdReference;
-@ForeignKeyColumn("AD_REFERENCE_ID") @Column("AD_REFERENCE_VALUE_ID") 	?AdReferenceValue AdReference;
-@ForeignKeyColumn("AD_VAL_RULE_ID") @Column("AD_VAL_RULE_ID") 	?AdValRule;
+	AdTable;
+	AdReference;
+	?AdReferenceValue AdReference;
+	?AdValRule;
 	?FieldLength Length;
 	?DefaultValue String;
 	IsKey YesNo;/* 'N'  */
@@ -32,8 +30,8 @@ type AdColumn {
 	?ValueMin String;
 	?ValueMax String;
 	IsSelectionColumn YesNo;/* 'N'  */
-@ForeignKeyColumn("AD_ELEMENT_ID") @Column("AD_ELEMENT_ID") 	?AdElement;
-@ForeignKeyColumn("AD_PROCESS_ID") @Column("AD_PROCESS_ID") 	?AdProcess;
+	?AdElement;
+	?AdProcess;
 	?IsSyncDatabase YesNo;/* 'N' */
 	IsAlwaysUpdateable YesNo;/* 'N'  */
 	?ColumnSql String;

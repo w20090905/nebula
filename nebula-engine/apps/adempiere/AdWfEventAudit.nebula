@@ -1,19 +1,17 @@
-@Legacy("adempiere")
 @Remarks("Workflow Process Activity Event Audit Information")
-@Refby("0")
 @Table("AD_WF_EVENTAUDIT")
 tx AdWfEventAudit {
-@Column("AD_WF_EVENTAUDIT_ID") 	!AdWfEventAuditId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdWfEventAuditId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	EventType Attr;
 	WfState String;
-@ForeignKeyColumn("AD_WF_PROCESS_ID") @Column("AD_WF_PROCESS_ID") 	AdWfProcess;
-@ForeignKeyColumn("AD_WF_NODE_ID") @Column("AD_WF_NODE_ID") 	AdWfNode;
-@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
-@Column("RECORD_ID") 	RecordId ID;
-@ForeignKeyColumn("AD_WF_RESPONSIBLE_ID") @Column("AD_WF_RESPONSIBLE_ID") 	AdWfResponsible;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+	AdWfProcess;
+	AdWfNode;
+	AdTable;
+	RecordId ID;
+	AdWfResponsible;
+	?AdUser;
 	ElapsedTimeMs Number;
 	?AttributeName Name;
 	?OldValue String;

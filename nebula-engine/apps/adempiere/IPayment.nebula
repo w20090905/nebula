@@ -1,26 +1,24 @@
-@Legacy("adempiere")
 @Remarks("Import Payment")
-@Refby("0")
 @Table("I_PAYMENT")
 tx IPayment {
-@Column("I_PAYMENT_ID") 	!IPaymentId ID;
-@Column("AD_CLIENT_ID") 	?AdClientId ID;
-@Column("AD_ORG_ID") 	?AdOrgId ID;
-@Column("I_ISIMPORTED") 	IIsImported YesNo;/* 'N'  */
-@Column("I_ERRORMSG") 	?IErrorMsg Message;
+	!IPaymentId ID;
+	?AdClientId ID;
+	?AdOrgId ID;
+	IIsImported YesNo;/* 'N'  */
+	?IErrorMsg Message;
 	?Processed YesNo;/* 'N' */
-@ForeignKeyColumn("C_PAYMENT_ID") @Column("C_PAYMENT_ID") 	?CPayment;
+	?CPayment;
 	?DocumentNo String;
 	?DateTrx Date;
 	?IsReceipt YesNo;/* 'Y' */
-@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	?CDocType;
+	?CDocType;
 	?DocTypeName Name;
 	?TrxType Attr;
-@ForeignKeyColumn("C_BANKACCOUNT_ID") @Column("C_BANKACCOUNT_ID") 	?CBankAccount;
+	?CBankAccount;
 	?BankAccountNo String;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+	?CBpartner;
 	?BpartnerValue String;
-@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
+	?CInvoice;
 	?InvoiceDocumentNo String;
 	?TenderType Attr;
 	?CreditCardType Attr;
@@ -32,39 +30,39 @@ tx IPayment {
 	?RoutingNo String;
 	?AccountNo String;
 	?CheckNo String;
-@Column("A_NAME") 	?AName Name;
-@Column("A_STREET") 	?AStreet String;
-@Column("A_CITY") 	?ACity String;
-@Column("A_STATE") 	?AState String;
-@Column("A_ZIP") 	?AZip String;
-@Column("A_COUNTRY") 	?ACountry String;
-@Column("A_IDENT_DL") 	?AIdentDl String;
-@Column("A_IDENT_SSN") 	?AIdentSsn String;
-@Column("A_EMAIL") 	?AEmail Email;
+	?AName Name;
+	?AStreet String;
+	?ACity String;
+	?AState String;
+	?AZip String;
+	?ACountry String;
+	?AIdentDl String;
+	?AIdentSsn String;
+	?AEmail Email;
 	?VoiceAuthCode Code;
 	?Swipe;
-@Column("ORIG_TRXID") 	?OrigTrxId String;
+	?OrigTrxId String;
 	?PoNum String;
-@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
+	?CCurrency;
 	?PayAmt Amount;/* 0 */
 	?DiscountAmt Amount;/* 0 */
 	?WriteOffAmt Amount;/* 0 */
 	?IsOverUnderPayment YesNo;/* 'N' */
 	?OverUnderAmt Amount;/* 0 */
-@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	?CCharge;
+	?CCharge;
 	?ChargeName Name;
 	?ChargeAmt Amount;/* 0 */
 	?TaxAmt Amount;/* 0 */
 	?IsApproved YesNo;/* 'N' */
 	?IsSelfService YesNo;/* 'N' */
 	?IsDelayedCapture YesNo;/* 'N' */
-@Column("R_PNREF") 	?RPnref String;
-@Column("R_RESULT") 	?RResult String;
-@Column("R_RESPMSG") 	?RRespMsg Message;
-@Column("R_AUTHCODE") 	?RAuthCode Code;
-@Column("R_INFO") 	?RInfo String;
+	?RPnref String;
+	?RResult String;
+	?RRespMsg Message;
+	?RAuthCode Code;
+	?RInfo String;
 	?Processing YesNo;
-@Column("ISO_CODE") 	?IsoCode Code;
+	?IsoCode Code;
 	?DateAcct Date;
 };
 

@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("AD_FIELD_V")
 type AdFieldV {
-@Column("AD_WINDOW_ID") 	?AdWindowId ID;
-@Column("AD_TAB_ID") 	AdTabId ID;
-@Column("AD_FIELD_ID") 	AdFieldId ID;
-@Column("AD_TABLE_ID") 	?AdTableId ID;
-@Column("AD_COLUMN_ID") 	?AdColumnId ID;
+	?AdWindowId ID;
+	AdTabId ID;
+	AdFieldId ID;
+	?AdTableId ID;
+	?AdColumnId ID;
 	*Name;
 	?Description;
 	?Help;
@@ -32,11 +30,11 @@ type AdFieldV {
 	?IsMandatory YesNo;
 	?IsIdentifier YesNo;
 	?IsTranslated YesNo;
-@Column("AD_REFERENCE_VALUE_ID") 	?AdReferenceValueId ID;
+	?AdReferenceValueId ID;
 	?Callout String;
-@Column("AD_REFERENCE_ID") 	?AdReferenceId ID;
-@Column("AD_VAL_RULE_ID") 	?AdValRuleId ID;
-@Column("AD_PROCESS_ID") 	?AdProcessId ID;
+	?AdReferenceId ID;
+	?AdValRuleId ID;
+	?AdProcessId ID;
 	?IsAlwaysUpdateable YesNo;
 	?ReadonlyLogic String;
 	?MandatoryLogic String;
@@ -48,7 +46,7 @@ type AdFieldV {
 	?ValueMax String;
 	?FieldGroup String;
 	?ValidationCode Code;
-@Column("INCLUDED_TAB_ID") 	?IncludedTabId ID;
+	?IncludedTabId ID;
 	?FieldGroupType Attr;
 	?IsCollapsedByDefault YesNo;
 	?InfoFactoryClass String;

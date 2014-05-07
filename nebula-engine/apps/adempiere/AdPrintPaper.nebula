@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Printer paper definition")
-@Refby("1")
 @Table("AD_PRINTPAPER")
 type AdPrintPaper {
-@Column("AD_PRINTPAPER_ID") 	!AdPrintPaperId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdPrintPaperId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	IsDefault YesNo;/* 'N'  */

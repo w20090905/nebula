@@ -1,19 +1,17 @@
-@Legacy("adempiere")
 @Remarks("Inventory Move Line Confirmation")
-@Refby("0")
 @Table("M_MOVEMENTLINECONFIRM")
 tx MMovementLineConfirm {
-@Column("M_MOVEMENTLINECONFIRM_ID") 	!MMovementLineConfirmId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("M_MOVEMENTCONFIRM_ID") @Column("M_MOVEMENTCONFIRM_ID") 	MMovementConfirm;
-@ForeignKeyColumn("M_MOVEMENTLINE_ID") @Column("M_MOVEMENTLINE_ID") 	MMovementLine;
+	!MMovementLineConfirmId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	MMovementConfirm;
+	MMovementLine;
 	?Description;
 	TargetQty Quantity;/* 0  */
 	ConfirmedQty Quantity;/* 0  */
 	DifferenceQty Quantity;/* 0  */
 	ScrappedQty Quantity;/* 0  */
 	Processed YesNo;/* 'N'  */
-@ForeignKeyColumn("M_INVENTORYLINE_ID") @Column("M_INVENTORYLINE_ID") 	?MInventoryLine;
+	?MInventoryLine;
 };
 

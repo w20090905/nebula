@@ -1,17 +1,15 @@
-@Legacy("adempiere")
 @Remarks("Storage Warehouse and Service Point")
-@Refby("24")
 @Table("M_WAREHOUSE")
 type MWarehouse {
-@Column("M_WAREHOUSE_ID") 	!MWarehouseId ID;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	!MWarehouseId ID;
+	AdClient;
+	AdOrg;
 	Value String;
 	*Name;
 	?Description;
-@ForeignKeyColumn("C_LOCATION_ID") @Column("C_LOCATION_ID") 	CLocation;
+	CLocation;
 	Separator String;
-@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSESOURCE_ID") 	?MWarehouseSource MWarehouse;
+	?MWarehouseSource MWarehouse;
 	?ReplenishmentClass String;
 };
 

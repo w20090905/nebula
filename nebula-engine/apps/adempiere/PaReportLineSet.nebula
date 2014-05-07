@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Report Line Set")
-@Refby("3")
 @Table("PA_REPORTLINESET")
 type PaReportLineSet {
-@Column("PA_REPORTLINESET_ID") 	!PaReportLineSetId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!PaReportLineSetId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	Processing YesNo;

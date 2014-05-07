@@ -1,16 +1,14 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("AD_WINDOW_VT")
 type AdWindowVt {
-@Column("AD_LANGUAGE") 	AdLanguage Code;
-@Column("AD_WINDOW_ID") 	AdWindowId ID;
+	AdLanguage Code;
+	AdWindowId ID;
 	*Name;
 	?Description;
 	?Help;
 	?WindowType Attr;
-@Column("AD_COLOR_ID") 	?AdColorId ID;
-@Column("AD_IMAGE_ID") 	?AdImageId ID;
+	?AdColorId ID;
+	?AdImageId ID;
 	?WinWidth Width;
 	?WinHeight Height;
 	IsSoTrx YesNo;

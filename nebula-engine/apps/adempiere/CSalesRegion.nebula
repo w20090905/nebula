@@ -1,16 +1,14 @@
-@Legacy("adempiere")
 @Remarks("Sales coverage region")
-@Refby("11")
 @Table("C_SALESREGION")
 type CSalesRegion {
-@Column("C_SALESREGION_ID") 	!CSalesRegionId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CSalesRegionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;
 	IsSummary YesNo;/* 'N'  */
-@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	?SalesRep AdUser;
+	?SalesRep AdUser;
 	IsDefault YesNo;/* 'N'  */
 };
 

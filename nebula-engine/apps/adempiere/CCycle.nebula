@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("Identifier for this Project Reporting Cycle")
-@Refby("1")
 @Table("C_CYCLE")
 type CCycle {
-@Column("C_CYCLE_ID") 	!CCycleId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CCycleId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
-@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
+	CCurrency;
 };
 

@@ -1,21 +1,19 @@
-@Legacy("adempiere")
 @Remarks("Tax Declaration Document Information")
-@Refby("0")
 @Table("C_TAXDECLARATIONLINE")
 tx CTaxDeclarationLine {
-@Column("C_TAXDECLARATIONLINE_ID") 	!CTaxDeclarationLineId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CTaxDeclarationLineId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Line Number;/* 0  */
 	?Description;
 	IsManual YesNo;/* 'N'  */
-@ForeignKeyColumn("C_TAXDECLARATION_ID") @Column("C_TAXDECLARATION_ID") 	CTaxDeclaration;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
-@ForeignKeyColumn("C_TAX_ID") @Column("C_TAX_ID") 	CTax;
-@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
-@ForeignKeyColumn("C_INVOICELINE_ID") @Column("C_INVOICELINE_ID") 	?CInvoiceLine;
-@ForeignKeyColumn("C_ALLOCATIONLINE_ID") @Column("C_ALLOCATIONLINE_ID") 	?CAllocationLine;
-@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
+	CTaxDeclaration;
+	CBpartner;
+	CTax;
+	?CInvoice;
+	?CInvoiceLine;
+	?CAllocationLine;
+	CCurrency;
 	TaxBaseAmt Amount;/* 0  */
 	TaxAmt Amount;/* 0  */
 	DateAcct Date;

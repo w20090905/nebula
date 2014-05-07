@@ -1,28 +1,26 @@
-@Legacy("adempiere")
 @Remarks("Return Material Authorization")
-@Refby("5")
 @Table("M_RMA")
 type MRma {
-@Column("M_RMA_ID") 	!MRmaId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MRmaId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo String;
 	*Name;
 	?Description;
-@ForeignKeyColumn("M_INOUT_ID") @Column("INOUT_ID") 	Inout MInout;
+	Inout MInout;
 	?Processing YesNo;
 	Processed YesNo;/* 'N'  	  */
-@ForeignKeyColumn("C_ORDER_ID") @Column("C_ORDER_ID") 	?COrder;
-@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	CDocType;
-@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	SalesRep AdUser;
+	?COrder;
+	CDocType;
+	SalesRep AdUser;
 	DocAction Attr;
 	DocStatus Attr;
 	IsApproved YesNo;/* 'N'  */
 	?Amt Amount;
-@ForeignKeyColumn("M_RMATYPE_ID") @Column("M_RMATYPE_ID") 	?MRmaType;
+	?MRmaType;
 	?Help;
-@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	?CCurrency;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+	?CCurrency;
+	?CBpartner;
 	IsSoTrx YesNo;/* 'Y'  */
 	?GenerateTo Attr;/* NULL */
 };

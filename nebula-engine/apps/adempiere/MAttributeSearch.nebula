@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Common Search Attribute")
-@Refby("1")
 @Table("M_ATTRIBUTESEARCH")
 type MAttributeSearch {
-@Column("M_ATTRIBUTESEARCH_ID") 	!MAttributeSearchId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MAttributeSearchId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 };

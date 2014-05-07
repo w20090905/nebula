@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Collection of Columns for Report")
-@Refby("2")
 @Table("PA_REPORTCOLUMNSET")
 type PaReportColumnSet {
-@Column("PA_REPORTCOLUMNSET_ID") 	!PaReportColumnSetId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!PaReportColumnSetId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	Processing YesNo;

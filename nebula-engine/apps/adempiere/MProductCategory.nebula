@@ -1,20 +1,18 @@
-@Legacy("adempiere")
 @Remarks("Category of a Product")
-@Refby("14")
 @Table("M_PRODUCT_CATEGORY")
 type MProductCategory {
-@Column("M_PRODUCT_CATEGORY_ID") 	!MProductCategoryId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MProductCategoryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;
 	IsDefault YesNo;/* 'N'  */
 	PlannedMargin Length;
-@ForeignKeyColumn("A_ASSET_GROUP_ID") @Column("A_ASSET_GROUP_ID") 	?AAssetGroup;
+	?AAssetGroup;
 	IsSelfService YesNo;/* 'Y'  */
-@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("AD_PRINTCOLOR_ID") 	?AdPrintColor;
+	?AdPrintColor;
 	MmPolicy Attr;/* 'F'  */
-@ForeignKeyColumn("M_PRODUCT_CATEGORY_ID") @Column("M_PRODUCT_CATEGORY_PARENT_ID") 	?MProductCategoryParent MProductCategory;
+	?MProductCategoryParent MProductCategory;
 };
 

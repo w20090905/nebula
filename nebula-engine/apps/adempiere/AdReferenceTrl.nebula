@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("System Reference and Validation")
-@Refby("0")
 @Table("AD_REFERENCE_TRL")
 type AdReferenceTrl {
-@ForeignKeyColumn("AD_REFERENCE_ID") @Column("AD_REFERENCE_ID") 	!AdReference;
-@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdReference;
+	!AdLanguage;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;

@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("Request for Quotation Line")
-@Refby("2")
 @Table("C_RFQLINE")
 tx CRfqLine {
-@Column("C_RFQLINE_ID") 	!CRfqLineId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_RFQ_ID") @Column("C_RFQ_ID") 	CRfq;
+	!CRfqLineId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CRfq;
 	Line Number;/* 0  */
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
-@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstance;/* 0 */
+	?MProduct;
+	?MAttributeSetInstance;/* 0 */
 	?Description;
 	?Help;
 	?DeliveryDays Count;/* 0 */

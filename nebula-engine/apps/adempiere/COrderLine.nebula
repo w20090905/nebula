@@ -1,55 +1,53 @@
-@Legacy("adempiere")
 @Remarks("Sales Order Line")
-@Refby("10")
 @Table("C_ORDERLINE")
 tx COrderLine {
-@Column("C_ORDERLINE_ID") 	!COrderLineId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
-@ForeignKeyColumn("C_ORDER_ID") @Column("C_ORDER_ID") 	COrder;
+	!COrderLineId ID;
+	AdClientId ID;
+	AdOrg;
+	COrder;
 	Line Number;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
-@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNER_LOCATION_ID") 	?CBpartnerLocation;
+	?CBpartner;
+	?CBpartnerLocation;
 	DateOrdered Date;
 	?DatePromised Date;
 	?DateDelivered Date;
 	?DateInvoiced Date;
 	?Description;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
-@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	MWarehouse;
-@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_ID") 	CUom;
+	?MProduct;
+	MWarehouse;
+	CUom;
 	QtyOrdered Number;/* 0  */
 	QtyReserved Number;/* 0  */
 	QtyDelivered Number;/* 0  */
 	QtyInvoiced Number;/* 0  */
-@ForeignKeyColumn("M_SHIPPER_ID") @Column("M_SHIPPER_ID") 	?MShipper;
-@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
+	?MShipper;
+	CCurrency;
 	PriceList Number;/* 0  */
 	PriceActual Number;/* 0  */
 	PriceLimit Number;/* 0  */
 	LineNetAmt Amount;/* 0  */
 	?Discount Percent;
 	FreightAmt Amount;/* 0  */
-@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	?CCharge;
-@ForeignKeyColumn("C_TAX_ID") @Column("C_TAX_ID") 	CTax;
-@ForeignKeyColumn("S_RESOURCEASSIGNMENT_ID") @Column("S_RESOURCEASSIGNMENT_ID") 	?SResourceAsSignment;
-@ForeignKeyColumn("C_ORDERLINE_ID") @Column("REF_ORDERLINE_ID") 	?RefOrderLine COrderLine;
-@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstance;/* 0 */
+	?CCharge;
+	CTax;
+	?SResourceAsSignment;
+	?RefOrderLine COrderLine;
+	?MAttributeSetInstance;/* 0 */
 	IsDescription YesNo;/* 'N'  */
 	Processed YesNo;/* 'N'  */
 	QtyEntered Number;
 	PriceEntered Number;
-@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+	?CProject;
 	?PriceCost Amount;
 	QtyLostSales Number;/* 0  */
-@ForeignKeyColumn("C_PROJECTPHASE_ID") @Column("C_PROJECTPHASE_ID") 	?CProjectPhase;
-@ForeignKeyColumn("C_PROJECTTASK_ID") @Column("C_PROJECTTASK_ID") 	?CProjectTask;
+	?CProjectPhase;
+	?CProjectTask;
 	?RrStartDate Date;
 	?RrAmt Amount;
-@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
-@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
-@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER1_ID") 	?User1 CElementValue;
-@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER2_ID") 	?User2 CElementValue;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
+	?CCampaign;
+	?CActivity;
+	?User1 CElementValue;
+	?User2 CElementValue;
+	?AdOrgTrx AdOrg;
 };
 

@@ -1,16 +1,14 @@
-@Legacy("adempiere")
 @Remarks("Performance Achievement")
-@Refby("0")
 @Table("PA_ACHIEVEMENT")
 type PaAchievement {
-@Column("PA_ACHIEVEMENT_ID") 	!PaAchievementId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!PaAchievementId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Note;
 	SeqNo;/* 0  */
-@ForeignKeyColumn("PA_MEASURE_ID") @Column("PA_MEASURE_ID") 	PaMeasure;
+	PaMeasure;
 	ManualActual Number;/* 0  */
 	IsAchieved YesNo;
 	?DateDoc Date;

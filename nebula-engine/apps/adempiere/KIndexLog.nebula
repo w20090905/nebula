@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Index Log")
-@Refby("0")
 @Table("K_INDEXLOG")
 tx KIndexLog {
-@Column("K_INDEXLOG_ID") 	!KIndexLogId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!KIndexLogId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IndexQuery String;
 	IndexQueryResult Number;/* 0  */
 	QuerySource String;

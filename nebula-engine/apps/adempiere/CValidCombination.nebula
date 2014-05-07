@@ -1,30 +1,28 @@
-@Legacy("adempiere")
 @Remarks("Valid Account Combination")
-@Refby("142")
 @Table("C_VALIDCOMBINATION")
 tx CValidCombination {
-@Column("C_VALIDCOMBINATION_ID") 	!CValidCombinationId ID;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	!CValidCombinationId ID;
+	AdClient;
+	AdOrg;
 	?Alias String;
 	?Combination String;
 	?Description;
 	IsFullYQualified YesNo;/* 'Y'  */
-@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	CAcctSchema;
-@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("ACCOUNT_ID") 	Account CElementValue;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
-@ForeignKeyColumn("C_LOCATION_ID") @Column("C_LOCFROM_ID") 	?CLocFrom CLocation;
-@ForeignKeyColumn("C_LOCATION_ID") @Column("C_LOCTO_ID") 	?CLocTo CLocation;
-@ForeignKeyColumn("C_SALESREGION_ID") @Column("C_SALESREGION_ID") 	?CSalesRegion;
-@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
-@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
-@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
-@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER1_ID") 	?User1 CElementValue;
-@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER2_ID") 	?User2 CElementValue;
-@ForeignKeyColumn("C_SUBACCT_ID") @Column("C_SUBACCT_ID") 	?CSubAcct;
-@Column("USERELEMENT1_ID") 	?UserElement1Id ID;
-@Column("USERELEMENT2_ID") 	?UserElement2Id ID;
+	CAcctSchema;
+	Account CElementValue;
+	?MProduct;
+	?CBpartner;
+	?AdOrgTrx AdOrg;
+	?CLocFrom CLocation;
+	?CLocTo CLocation;
+	?CSalesRegion;
+	?CProject;
+	?CCampaign;
+	?CActivity;
+	?User1 CElementValue;
+	?User2 CElementValue;
+	?CSubAcct;
+	?UserElement1Id ID;
+	?UserElement2Id ID;
 };
 

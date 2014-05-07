@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("Media Deployment Log")
-@Refby("0")
 @Table("CM_MEDIADEPLOY")
 tx CmMediaDeploy {
-@Column("CM_MEDIADEPLOY_ID") 	!CmMediaDeployId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("CM_MEDIA_SERVER_ID") @Column("CM_MEDIA_SERVER_ID") 	CmMediaServer;
-@ForeignKeyColumn("CM_MEDIA_ID") @Column("CM_MEDIA_ID") 	CmMedia;
+	!CmMediaDeployId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CmMediaServer;
+	CmMedia;
 	IsDeployed YesNo;/* 'N'  */
 	?LastSynchronized Date;
 	?Description;

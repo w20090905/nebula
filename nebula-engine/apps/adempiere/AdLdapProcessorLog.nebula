@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("LDAP Server Log")
-@Refby("0")
 @Table("AD_LDAPPROCESSORLOG")
 type AdLdapProcessorLog {
-@ForeignKeyColumn("AD_LDAPPROCESSOR_ID") @Column("AD_LDAPPROCESSOR_ID") 	!AdLdapProcessor;
-@Column("AD_LDAPPROCESSORLOG_ID") 	!AdLdapProcessorLogId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdLdapProcessor;
+	!AdLdapProcessorLogId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?Summary String;
 	IsError YesNo;/* 'N'  */
 	?Reference String;

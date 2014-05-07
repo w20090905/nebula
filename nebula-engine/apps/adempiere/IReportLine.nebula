@@ -1,17 +1,15 @@
-@Legacy("adempiere")
 @Remarks("Import Report Line Set values")
-@Refby("0")
 @Table("I_REPORTLINE")
 type IReportLine {
-@Column("I_REPORTLINE_ID") 	!IReportLineId ID;
-@Column("AD_CLIENT_ID") 	?AdClientId ID;
-@Column("AD_ORG_ID") 	?AdOrgId ID;
-@Column("I_ISIMPORTED") 	IIsImported YesNo;/* 'N'  */
-@Column("I_ERRORMSG") 	?IErrorMsg Message;
+	!IReportLineId ID;
+	?AdClientId ID;
+	?AdOrgId ID;
+	IIsImported YesNo;/* 'N'  */
+	?IErrorMsg Message;
 	?ReportLineSetName Name;
-@ForeignKeyColumn("PA_REPORTLINESET_ID") @Column("PA_REPORTLINESET_ID") 	?PaReportLineSet;
+	?PaReportLineSet;
 	?Name;
-@ForeignKeyColumn("PA_REPORTLINE_ID") @Column("PA_REPORTLINE_ID") 	?PaReportLine;
+	?PaReportLine;
 	?Description;
 	?SeqNo;
 	?IsSummary YesNo;/* 'N' */
@@ -20,8 +18,8 @@ type IReportLine {
 	?CalculationType Attr;
 	?AmountType Attr;
 	?PostingType Attr;
-@ForeignKeyColumn("PA_REPORTSOURCE_ID") @Column("PA_REPORTSOURCE_ID") 	?PaReportSource;
-@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("C_ELEMENTVALUE_ID") 	?CElementValue;
+	?PaReportSource;
+	?CElementValue;
 	?ElementValue String;
 	?Processing YesNo;
 	?Processed YesNo;/* 'N' */

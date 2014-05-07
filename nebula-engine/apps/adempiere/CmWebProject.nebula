@@ -1,22 +1,20 @@
-@Legacy("adempiere")
 @Remarks("A web project is the main data container for Containers, URLs, Ads, Media etc.")
-@Refby("12")
 @Table("CM_WEBPROJECT")
 type CmWebProject {
-@Column("CM_WEBPROJECT_ID") 	!CmWebProjectId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CmWebProjectId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
-@Column("META_COPYRIGHT") 	MetaCopyRight String;
-@Column("META_PUBLISHER") 	MetaPublisher String;
-@Column("META_ROBOTSTAG") 	MetaRobotsTag String;
-@Column("META_AUTHOR") 	MetaAuthor String;
-@Column("META_CONTENT") 	MetaContent String;
-@ForeignKeyColumn("AD_TREE_ID") @Column("AD_TREECMC_ID") 	AdTreeCmc AdTree;
-@ForeignKeyColumn("AD_TREE_ID") @Column("AD_TREECMS_ID") 	AdTreeCms AdTree;
-@ForeignKeyColumn("AD_TREE_ID") @Column("AD_TREECMM_ID") 	AdTreeCmm AdTree;
-@ForeignKeyColumn("AD_TREE_ID") @Column("AD_TREECMT_ID") 	AdTreeCmt AdTree;
+	MetaCopyRight String;
+	MetaPublisher String;
+	MetaRobotsTag String;
+	MetaAuthor String;
+	MetaContent String;
+	AdTreeCmc AdTree;
+	AdTreeCms AdTree;
+	AdTreeCmm AdTree;
+	AdTreeCmt AdTree;
 };
 

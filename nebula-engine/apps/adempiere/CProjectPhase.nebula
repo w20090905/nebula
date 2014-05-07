@@ -1,21 +1,19 @@
-@Legacy("adempiere")
 @Remarks("Phase of a Project")
-@Refby("8")
 @Table("C_PROJECTPHASE")
 type CProjectPhase {
-@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	CProject;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	CProject;
+	AdClientId ID;
+	AdOrgId ID;
 	?Description;
 	?StartDate Date;
 	?EndDate Date;
 	IsComplete YesNo;/* 'N'  	  */
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+	?MProduct;
 	?PriceActual Number;/* 0  	  */
 	?GenerateOrder String;
-@ForeignKeyColumn("C_ORDER_ID") @Column("C_ORDER_ID") 	?COrder;
-@ForeignKeyColumn("C_PHASE_ID") @Column("C_PHASE_ID") 	?CPhase;
-@Column("C_PROJECTPHASE_ID") 	!CProjectPhaseId ID;
+	?COrder;
+	?CPhase;
+	!CProjectPhaseId ID;
 	?Help;
 	*Name;
 	?Qty Quantity;/* 0  */

@@ -1,47 +1,45 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("C_INVOICE_V1")
 type CInvoiceV1 {
-@Column("C_INVOICE_ID") 	CInvoiceId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	CInvoiceId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IsSoTrx YesNo;
 	DocumentNo String;
 	DocStatus Attr;
 	DocAction Attr;
 	?Processing YesNo;
 	Processed String;
-@Column("C_DOCTYPE_ID") 	CDocTypeId ID;
-@Column("C_DOCTYPETARGET_ID") 	CDocTypeTargetId ID;
-@Column("C_ORDER_ID") 	?COrderId ID;
+	CDocTypeId ID;
+	CDocTypeTargetId ID;
+	?COrderId ID;
 	?Description;
 	IsApproved YesNo;
 	IsTransferred YesNo;
-@Column("SALESREP_ID") 	?SalesRepId ID;
+	?SalesRepId ID;
 	DateInvoiced Date;
 	?DatePrinted Date;
 	DateAcct Date;
-@Column("C_BPARTNER_ID") 	CBpartnerId ID;
-@Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocationId ID;
-@Column("AD_USER_ID") 	?AdUserId ID;
+	CBpartnerId ID;
+	CBpartnerLocationId ID;
+	?AdUserId ID;
 	?PoReference String;
 	?DateOrdered Date;
-@Column("C_CURRENCY_ID") 	CCurrencyId ID;
-@Column("C_CONVERSIONTYPE_ID") 	?CConversionTypeId ID;
+	CCurrencyId ID;
+	?CConversionTypeId ID;
 	PaymentRule String;
-@Column("C_PAYMENTTERM_ID") 	CPaymentTermId ID;
-@Column("C_CHARGE_ID") 	?CChargeId ID;
-@Column("M_PRICELIST_ID") 	MPriceListId ID;
-@Column("C_CAMPAIGN_ID") 	?CCampaignId ID;
-@Column("C_PROJECT_ID") 	?CProjectId ID;
-@Column("C_ACTIVITY_ID") 	?CActivityId ID;
+	CPaymentTermId ID;
+	?CChargeId ID;
+	MPriceListId ID;
+	?CCampaignId ID;
+	?CProjectId ID;
+	?CActivityId ID;
 	IsPrinted YesNo;
 	IsDiscountPrinted YesNo;
 	IsPaid YesNo;
 	IsInDispute YesNo;
 	IsPayScheduleValid YesNo;
-@Column("C_INVOICEPAYSCHEDULE_ID") 	?CInvoicePayScheduleId String;
+	?CInvoicePayScheduleId String;
 	?InvoiceCollectionType Attr;
 	?ChargeAmt Amount;
 	?TotalLines Count;

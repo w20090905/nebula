@@ -1,30 +1,28 @@
-@Legacy("adempiere")
 @Remarks("T_Transaction")
-@Refby("0")
 @Table("T_TRANSACTION")
 tx TTransaction {
-@ForeignKeyColumn("AD_PINSTANCE_ID") @Column("AD_PINSTANCE_ID") 	!AdPInstance;
-@ForeignKeyColumn("M_TRANSACTION_ID") @Column("M_TRANSACTION_ID") 	!MTransaction;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdPInstance;
+	!MTransaction;
+	AdClientId ID;
+	AdOrgId ID;
 	MovementType Attr;
-@ForeignKeyColumn("M_LOCATOR_ID") @Column("M_LOCATOR_ID") 	MLocator;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
-@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	MAttributeSetInstance;
+	MLocator;
+	MProduct;
+	MAttributeSetInstance;
 	MovementDate Date;
 	MovementQty Quantity;/* 0  */
-@ForeignKeyColumn("M_INOUTLINE_ID") @Column("M_INOUTLINE_ID") 	?MInoutLine;
-@Column("M_INOUT_ID") 	?MInoutId ID;
-@ForeignKeyColumn("M_MOVEMENTLINE_ID") @Column("M_MOVEMENTLINE_ID") 	?MMovementLine;
-@Column("M_MOVEMENT_ID") 	?MMovementId ID;
-@ForeignKeyColumn("M_INVENTORYLINE_ID") @Column("M_INVENTORYLINE_ID") 	?MInventoryLine;
-@Column("M_INVENTORY_ID") 	?MInventoryId ID;
-@ForeignKeyColumn("M_PRODUCTIONLINE_ID") @Column("M_PRODUCTIONLINE_ID") 	?MProductionLine;
-@Column("M_PRODUCTION_ID") 	?MProductionId ID;
-@ForeignKeyColumn("C_PROJECTISSUE_ID") @Column("C_PROJECTISSUE_ID") 	?CProjectIssue;
-@Column("C_PROJECT_ID") 	?CProjectId ID;
-@Column("SEARCH_ORDER_ID") 	?SearchOrderId ID;
-@Column("SEARCH_INVOICE_ID") 	?SearchInvoiceId ID;
-@Column("SEARCH_INOUT_ID") 	?SearchInoutId ID;
+	?MInoutLine;
+	?MInoutId ID;
+	?MMovementLine;
+	?MMovementId ID;
+	?MInventoryLine;
+	?MInventoryId ID;
+	?MProductionLine;
+	?MProductionId ID;
+	?CProjectIssue;
+	?CProjectId ID;
+	?SearchOrderId ID;
+	?SearchInvoiceId ID;
+	?SearchInoutId ID;
 };
 

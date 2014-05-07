@@ -1,17 +1,15 @@
-@Legacy("adempiere")
 @Remarks("Product Revenue Recognition Service Level")
-@Refby("1")
 @Table("C_SERVICELEVEL")
 tx CServiceLevel {
-@Column("C_SERVICELEVEL_ID") 	!CServiceLevelId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+	!CServiceLevelId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	MProduct;
 	?Description;
 	ServiceLevelProvided Number;
 	ServiceLevelInvoiced Number;
 	?Processing YesNo;
 	?Processed YesNo;/* 'N'        */
-@ForeignKeyColumn("C_REVENUERECOGNITION_PLAN_ID") @Column("C_REVENUERECOGNITION_PLAN_ID") 	CRevenueRecognitionPlan;
+	CRevenueRecognitionPlan;
 };
 

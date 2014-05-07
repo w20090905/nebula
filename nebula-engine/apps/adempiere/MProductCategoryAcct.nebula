@@ -1,24 +1,22 @@
-@Legacy("adempiere")
 @Remarks("Product Category Acct")
-@Refby("0")
 @Table("M_PRODUCT_CATEGORY_ACCT")
 type MProductCategoryAcct {
-@ForeignKeyColumn("M_PRODUCT_CATEGORY_ID") @Column("M_PRODUCT_CATEGORY_ID") 	!MProductCategory;
-@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	!CAcctSchema;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("P_REVENUE_ACCT") 	PRevenueAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("P_EXPENSE_ACCT") 	PExpenseAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("P_ASSET_ACCT") 	PAssetAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("P_COGS_ACCT") 	PCogsAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("P_PURCHASEPRICEVARIANCE_ACCT") 	PPurchasePriceVarianceAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("P_INVOICEPRICEVARIANCE_ACCT") 	PInvoicePriceVarianceAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("P_TRADEDISCOUNTREC_ACCT") 	PTradeDiscountRecAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("P_TRADEDISCOUNTGRANT_ACCT") 	PTradeDiscountGrantAcct CValidCombination;
+	!MProductCategory;
+	!CAcctSchema;
+	AdClientId ID;
+	AdOrgId ID;
+	PRevenueAcct CValidCombination;
+	PExpenseAcct CValidCombination;
+	PAssetAcct CValidCombination;
+	PCogsAcct CValidCombination;
+	PPurchasePriceVarianceAcct CValidCombination;
+	PInvoicePriceVarianceAcct CValidCombination;
+	PTradeDiscountRecAcct CValidCombination;
+	PTradeDiscountGrantAcct CValidCombination;
 	?Processing YesNo;
 	?CostingMethod String;
 	?CostingLevel Attr;
-@Column("P_INVENTORYCLEARING_ACCT") 	?PInventoryClearingAcct Number;
-@Column("P_COSTADJUSTMENT_ACCT") 	?PCostAdjustmentAcct Number;
+	?PInventoryClearingAcct Number;
+	?PCostAdjustmentAcct Number;
 };
 

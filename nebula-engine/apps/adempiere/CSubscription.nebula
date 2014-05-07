@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("Subscription of a Business Partner of a Product to renew")
-@Refby("1")
 @Table("C_SUBSCRIPTION")
 type CSubscription {
-@Column("C_SUBSCRIPTION_ID") 	!CSubscriptionId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CSubscriptionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
-@ForeignKeyColumn("C_SUBSCRIPTIONTYPE_ID") @Column("C_SUBSCRIPTIONTYPE_ID") 	CSubscriptionType;
+	CBpartner;
+	MProduct;
+	CSubscriptionType;
 	StartDate Date;
 	PaidUntilDate Date;
 	IsDue YesNo;/* 'N'  	  */

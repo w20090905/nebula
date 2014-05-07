@@ -1,17 +1,15 @@
-@Legacy("adempiere")
 @Remarks("Product Lot Definition")
-@Refby("1")
 @Table("M_LOT")
 type MLot {
-@Column("M_LOT_ID") 	!MLotId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MLotId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+	MProduct;
 	?Help;
 	?DateFrom Date;
 	?DateTo Date;
-@ForeignKeyColumn("M_LOTCTL_ID") @Column("M_LOTCTL_ID") 	?MLotCtl;
+	?MLotCtl;
 };
 

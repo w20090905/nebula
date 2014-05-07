@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("Exclude the ability to create Serial Numbers in Attribute Sets")
-@Refby("0")
 @Table("M_SERNOCTLEXCLUDE")
 tx MSerNoCtlExclude {
-@Column("M_SERNOCTLEXCLUDE_ID") 	!MSerNoCtlExcludeId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("M_SERNOCTL_ID") @Column("M_SERNOCTL_ID") 	MSerNoCtl;
-@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
+	!MSerNoCtlExcludeId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	MSerNoCtl;
+	AdTable;
 	IsSoTrx YesNo;/* 'N'  */
 };
 

@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("C_Withholding_Acct")
-@Refby("0")
 @Table("C_WITHHOLDING_ACCT")
 type CWithholdingAcct {
-@ForeignKeyColumn("C_WITHHOLDING_ID") @Column("C_WITHHOLDING_ID") 	!CWithholding;
-@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	!CAcctSchema;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("WITHHOLDING_ACCT") 	WithholdingAcct CValidCombination;
+	!CWithholding;
+	!CAcctSchema;
+	AdClientId ID;
+	AdOrgId ID;
+	WithholdingAcct CValidCombination;
 };
 

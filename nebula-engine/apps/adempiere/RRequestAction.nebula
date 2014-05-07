@@ -1,38 +1,36 @@
-@Legacy("adempiere")
 @Remarks("Request History")
-@Refby("0")
 @Table("R_REQUESTACTION")
 tx RRequestAction {
-@Column("R_REQUESTACTION_ID") 	!RRequestActionId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("R_REQUEST_ID") @Column("R_REQUEST_ID") 	RRequest;
-@ForeignKeyColumn("R_GROUP_ID") @Column("R_GROUP_ID") 	?RGroup;
-@ForeignKeyColumn("R_CATEGORY_ID") @Column("R_CATEGORY_ID") 	?RCategory;
-@ForeignKeyColumn("R_STATUS_ID") @Column("R_STATUS_ID") 	?RStatus;
-@ForeignKeyColumn("R_RESOLUTION_ID") @Column("R_RESOLUTION_ID") 	?RResolution;
-@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	?SalesRep AdUser;
-@ForeignKeyColumn("AD_ROLE_ID") @Column("AD_ROLE_ID") 	?AdRole;
+	!RRequestActionId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	RRequest;
+	?RGroup;
+	?RCategory;
+	?RStatus;
+	?RResolution;
+	?SalesRep AdUser;
+	?AdRole;
 	?IsEscalated YesNo;
 	?IsInvoiced YesNo;
 	?ConfidentialType Attr;
 	?IsSelfService YesNo;
 	?Priority String;
 	?PriorityUser String;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
-@ForeignKeyColumn("C_ORDER_ID") @Column("C_ORDER_ID") 	?COrder;
-@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
-@ForeignKeyColumn("C_PAYMENT_ID") @Column("C_PAYMENT_ID") 	?CPayment;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
-@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+	?CBpartner;
+	?AdUser;
+	?COrder;
+	?CInvoice;
+	?CPayment;
+	?MProduct;
+	?CProject;
 	?Summary String;
 	?DateNextAction Date;
-@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
-@ForeignKeyColumn("R_REQUESTTYPE_ID") @Column("R_REQUESTTYPE_ID") 	?RRequestType;
-@ForeignKeyColumn("A_ASSET_ID") @Column("A_ASSET_ID") 	?AAsset;
-@ForeignKeyColumn("M_INOUT_ID") @Column("M_INOUT_ID") 	?MInout;
-@ForeignKeyColumn("M_RMA_ID") @Column("M_RMA_ID") 	?MRma;
+	?CActivity;
+	?RRequestType;
+	?AAsset;
+	?MInout;
+	?MRma;
 	?NullColumns String;
 	?TaskStatus Attr;
 	?DateCompletePlan Date;
@@ -42,6 +40,6 @@ tx RRequestAction {
 	?EndDate Date;
 	?DateStartPlan Date;
 	?QtyInvoiced Number;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCTSPENT_ID") 	?MProductSpent MProduct;
+	?MProductSpent MProduct;
 };
 

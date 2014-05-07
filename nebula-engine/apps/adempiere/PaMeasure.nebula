@@ -1,23 +1,21 @@
-@Legacy("adempiere")
 @Remarks("Concrete Performance Measurement")
-@Refby("2")
 @Table("PA_MEASURE")
 type PaMeasure {
-@Column("PA_MEASURE_ID") 	!PaMeasureId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!PaMeasureId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	MeasureType Attr;
 	?ManualActual Number;
 	?ManualNote Note;
 	?CalculationClass String;
-@ForeignKeyColumn("PA_MEASURECALC_ID") @Column("PA_MEASURECALC_ID") 	?PaMeasureCalc;
-@ForeignKeyColumn("PA_BENCHMARK_ID") @Column("PA_BENCHMARK_ID") 	?PaBenchmark;
-@ForeignKeyColumn("PA_RATIO_ID") @Column("PA_RATIO_ID") 	?PaRatio;
-@ForeignKeyColumn("PA_HIERARCHY_ID") @Column("PA_HIERARCHY_ID") 	?PaHierarchy;
+	?PaMeasureCalc;
+	?PaBenchmark;
+	?PaRatio;
+	?PaHierarchy;
 	MeasureDataType Attr;
-@ForeignKeyColumn("R_REQUESTTYPE_ID") @Column("R_REQUESTTYPE_ID") 	?RRequestType;
-@ForeignKeyColumn("C_PROJECTTYPE_ID") @Column("C_PROJECTTYPE_ID") 	?CProjectType;
+	?RRequestType;
+	?CProjectType;
 };
 

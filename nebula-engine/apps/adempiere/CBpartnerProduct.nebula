@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Product Business Partner")
-@Refby("0")
 @Table("C_BPARTNER_PRODUCT")
 type CBpartnerProduct {
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	!CBpartner;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	!MProduct;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CBpartner;
+	!MProduct;
+	AdClientId ID;
+	AdOrgId ID;
 	?Description;
 	ShelfLifeMinPct Number;
 	ShelfLifeMinDays Count;

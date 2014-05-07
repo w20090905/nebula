@@ -1,23 +1,21 @@
-@Legacy("adempiere")
 @Remarks("Bill of Material Component (Product)")
-@Refby("0")
 @Table("M_BOMPRODUCT")
 tx MBomProduct {
-@Column("M_BOMPRODUCT_ID") 	!MBomProductId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MBomProductId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Line Number;/* 0  */
-@ForeignKeyColumn("M_BOM_ID") @Column("M_BOM_ID") 	MBom;
+	MBom;
 	BomProductType Attr;
 	IsPhantom YesNo;/* 'N'  */
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCTBOM_ID") 	?MProductBom MProduct;
-@ForeignKeyColumn("M_CHANGENOTICE_ID") @Column("M_CHANGENOTICE_ID") 	?MChangeNotIce;
-@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstance;
-@ForeignKeyColumn("M_BOMALTERNATIVE_ID") @Column("M_BOMALTERNATIVE_ID") 	?MBomAlternative;
+	?MProductBom MProduct;
+	?MChangeNotIce;
+	?MAttributeSetInstance;
+	?MBomAlternative;
 	BomQty Quantity;/* 0  */
 	?Description;
 	?Help;
-@ForeignKeyColumn("M_PRODUCTOPERATION_ID") @Column("M_PRODUCTOPERATION_ID") 	?MProductOperation;
+	?MProductOperation;
 	?SeqNo;/* 0 */
 	LeadTimeOffset Number;/* 0  */
 };

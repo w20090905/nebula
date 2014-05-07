@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("Product Operation")
-@Refby("2")
 @Table("M_PRODUCTOPERATION")
 type MProductOperation {
-@Column("M_PRODUCTOPERATION_ID") 	!MProductOperationId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MProductOperationId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+	MProduct;
 	?SetUptime Number;/* 0 */
 	?UnitRunTime Count;/* 0 */
 	?TeardownTime Count;/* 0 */

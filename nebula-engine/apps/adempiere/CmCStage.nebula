@@ -1,16 +1,14 @@
-@Legacy("adempiere")
 @Remarks("Container Stage contains the staging content like images, text etc.")
-@Refby("5")
 @Table("CM_CSTAGE")
 type CmCStage {
-@Column("CM_CSTAGE_ID") 	!CmCStageId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CmCStageId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
-@ForeignKeyColumn("CM_WEBPROJECT_ID") @Column("CM_WEBPROJECT_ID") 	CmWebProject;
-@ForeignKeyColumn("CM_TEMPLATE_ID") @Column("CM_TEMPLATE_ID") 	?CmTemplate;
+	CmWebProject;
+	?CmTemplate;
 	?Title;
 	?NotIce String;
 	?ContainerType Attr;
@@ -19,20 +17,20 @@ type CmCStage {
 	?Priority;/* 0  */
 	IsIndexed YesNo;/* 'Y'  */
 	IsSecure YesNo;/* 'Y'  */
-@Column("META_ROBOTSTAG") 	?MetaRobotsTag String;
-@Column("META_AUTHOR") 	?MetaAuthor String;
-@Column("META_COPYRIGHT") 	?MetaCopyRight String;
-@Column("META_CONTENT") 	?MetaContent String;
-@Column("META_DESCRIPTION") 	?MetaDescription Description;
-@Column("META_KEYWORDS") 	?MetaKeyWords String;
-@Column("META_PUBLISHER") 	?MetaPublisher String;
+	?MetaRobotsTag String;
+	?MetaAuthor String;
+	?MetaCopyRight String;
+	?MetaContent String;
+	?MetaDescription Description;
+	?MetaKeyWords String;
+	?MetaPublisher String;
 	?StructureXml String;
 	?ContainerXml String;
-@ForeignKeyColumn("CM_CSTAGE_ID") @Column("CM_CSTAGELINK_ID") 	?CmCStageLink CmCStage;
+	?CmCStageLink CmCStage;
 	IsModified YesNo;
 	?Processing YesNo;
 	IsSummary YesNo;/* 'N'  */
-@Column("META_LANGUAGE") 	?MetaLanguage Code;
+	?MetaLanguage Code;
 	?IsValid YesNo;/* 'N'  */
 };
 

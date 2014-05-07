@@ -1,16 +1,14 @@
-@Legacy("adempiere")
 @Remarks("Wiki Token")
-@Refby("0")
 @Table("CM_WIKITOKEN")
 type CmWikiToken {
-@Column("CM_WIKITOKEN_ID") 	!CmWikiTokenId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CmWikiTokenId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	TokenType Attr;
 	?SelectClause String;
-@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	?AdTable;
+	?AdTable;
 	?WhereClause String;
 	?Macro String;
 };

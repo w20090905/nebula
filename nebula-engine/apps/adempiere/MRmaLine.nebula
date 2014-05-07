@@ -1,18 +1,16 @@
-@Legacy("adempiere")
 @Remarks("Return Material Authorization Line")
-@Refby("2")
 @Table("M_RMALINE")
 tx MRmaLine {
-@Column("M_RMALINE_ID") 	!MRmaLineId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("M_RMA_ID") @Column("M_RMA_ID") 	MRma;
-@ForeignKeyColumn("M_INOUTLINE_ID") @Column("M_INOUTLINE_ID") 	?MInoutLine;
+	!MRmaLineId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	MRma;
+	?MInoutLine;
 	Qty Quantity;/* 0  	  */
 	?Description;
 	Processed YesNo;/* 'N'  */
 	?Amt Amount;
-@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	?CCharge;
+	?CCharge;
 	Line Number;/* 0  */
 	?LineNetAmt Amount;
 	?QtyDelivered Number;

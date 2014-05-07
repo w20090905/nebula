@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("Request for Quotation Topic Subscriber")
-@Refby("1")
 @Table("C_RFQ_TOPICSUBSCRIBER")
 tx CRfqTopicSubscriber {
-@Column("C_RFQ_TOPICSUBSCRIBER_ID") 	!CRfqTopicSubscriberId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_RFQ_TOPIC_ID") @Column("C_RFQ_TOPIC_ID") 	CRfqTopic;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
-@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocation;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+	!CRfqTopicSubscriberId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CRfqTopic;
+	CBpartner;
+	CBpartnerLocation;
+	?AdUser;
 	?SubscribeDate Date;
 	?OptOutDate Date;
 };

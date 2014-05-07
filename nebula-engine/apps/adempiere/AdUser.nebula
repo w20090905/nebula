@@ -1,22 +1,20 @@
-@Legacy("adempiere")
 @Remarks("User within the system - Internal or Business Partner Contact")
-@Refby("94")
 @Table("AD_USER")
 type AdUser {
-@Column("AD_USER_ID") 	!AdUserId ID;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	!AdUserId ID;
+	AdClient;
+	AdOrg;
 	*Name;
 	?Description;
 	?Password String;
 	?Email;
-@ForeignKeyColumn("AD_USER_ID") @Column("SUPERVISOR_ID") 	?Supervisor AdUser;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+	?Supervisor AdUser;
+	?CBpartner;
 	?Processing YesNo;
 	?EmailUser Email;
 	?EmailUserPw Email;
-@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNER_LOCATION_ID") 	?CBpartnerLocation;
-@ForeignKeyColumn("C_GREETING_ID") @Column("C_GREETING_ID") 	?CGreeting;
+	?CBpartnerLocation;
+	?CGreeting;
 	?Title;
 	?Comments Comment;
 	?Phone;
@@ -25,12 +23,12 @@ type AdUser {
 	?LastContact Date;
 	?LastResult String;
 	?Birthday Date;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
+	?AdOrgTrx AdOrg;
 	?EmailVerify Email;
 	?EmailVerifyDate Date;
 	NotificationType Attr;/* 'E'  */
 	IsFullBpAccess YesNo;/* 'Y'  */
-@ForeignKeyColumn("C_JOB_ID") @Column("C_JOB_ID") 	?CJob;
+	?CJob;
 	?LdapUser String;
 	?ConnectionProfile Attr;
 	?Value String;/* NULL   */

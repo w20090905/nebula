@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("System Entity Type")
-@Refby("37")
 @Table("AD_ENTITYTYPE")
 type AdEntityType {
 	!EntityType String;/* 'D'  */
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("AD_ENTITYTYPE_ID") 	AdEntityTypeId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AdEntityTypeId ID;
 	*Name;
 	?Description;
 	?Help;

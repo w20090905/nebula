@@ -1,20 +1,18 @@
-@Legacy("adempiere")
 @Remarks("Business Partner Relation")
-@Refby("0")
 @Table("C_BP_RELATION")
 type CBpRelation {
-@Column("C_BP_RELATION_ID") 	!CBpRelationId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CBpRelationId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
-@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNER_LOCATION_ID") 	?CBpartnerLocation;
+	CBpartner;
+	?CBpartnerLocation;
 	IsShipTo YesNo;/* 'N'  	  */
 	IsBillTo YesNo;/* 'N'  	  */
 	IsPayFrom YesNo;/* 'N'  	  */
 	IsRemitTo YesNo;/* 'N'  	  */
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNERRELATION_ID") 	CBpartnerRelation CBpartner;
-@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNERRELATION_LOCATION_ID") 	CBpartnerRelationLocation CBpartnerLocation;
+	CBpartnerRelation CBpartner;
+	CBpartnerRelationLocation CBpartnerLocation;
 };
 

@@ -421,9 +421,9 @@ public class DefaultImporter {
 		out = new OutputStreamWriter(new FileOutputStream(new File(outputFolder, type.resultName + ".nebula")));
 
 		sb.setLength(0);
-		sb.append("@Legacy(\"" + escape(this.legacyName) + "\")\n");
+//		sb.append("@Legacy(\"" + escape(this.legacyName) + "\")\n");
 		sb.append("@Remarks(\"" + escape(type.remarks) + "\")\n");
-		sb.append("@Refby(\"" + type.cntReference + "\")\n");
+//		sb.append("@Refby(\"" + type.cntReference + "\")\n");
 		if (!type.name.equalsIgnoreCase(type.resultName)) {
 			sb.append("@Table(\"" + type.name + "\")\n");
 		}
@@ -440,12 +440,12 @@ public class DefaultImporter {
 			if (field.remarks.length() > 0) {
 				// sb.append("\t@Remarks(\"" + escape(field.remarks) + "\")\n");
 			}
-			if (field.isForeignKey) {
-				sb.append("@ForeignKeyColumn(\"" + field.foreignKeyColumn + "\") ");
-			}
-			if (!field.name.equalsIgnoreCase(field.resultName)) {
-				sb.append("@Column(\"" + field.name + "\") ");
-			}
+//			if (field.isForeignKey) {
+//				sb.append("@ForeignKeyColumn(\"" + field.foreignKeyColumn + "\") ");
+//			}
+//			if (!field.name.equalsIgnoreCase(field.resultName)) {
+//				sb.append("@Column(\"" + field.name + "\") ");
+//			}
 			sb.append("\t");
 			if (field.nullable) {
 				sb.append("?");

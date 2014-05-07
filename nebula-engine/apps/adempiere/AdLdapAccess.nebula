@@ -1,14 +1,12 @@
-@Legacy("adempiere")
 @Remarks("Ldap Access Log")
-@Refby("0")
 @Table("AD_LDAPACCESS")
 tx AdLdapAccess {
-@Column("AD_LDAPACCESS_ID") 	!AdLdapAccessId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("AD_LDAPPROCESSOR_ID") @Column("AD_LDAPPROCESSOR_ID") 	AdLdapProcessor;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
-@ForeignKeyColumn("R_INTERESTAREA_ID") @Column("R_INTERESTAREA_ID") 	?RInterestArea;
+	!AdLdapAccessId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AdLdapProcessor;
+	?AdUser;
+	?RInterestArea;
 	IsError YesNo;/* 'N'  */
 	?Summary String;
 	?Description;

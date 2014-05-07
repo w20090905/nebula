@@ -1,10 +1,8 @@
-@Legacy("adempiere")
 @Remarks("Client/Tenant for this installation.")
-@Refby("67")
 @Table("AD_CLIENT")
 type AdClient {
-@Column("AD_CLIENT_ID") 	!AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;
@@ -13,7 +11,7 @@ type AdClient {
 	?RequestUser String;
 	?RequestUserPw String;
 	?RequestFolder String;
-@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	?AdLanguage;
+	?AdLanguage;
 	IsMultiLingualDocument YesNo;/* 'N' */
 	IsSmtpAuthorization YesNo;/* 'N'  */
 	IsUseBetaFunctions YesNo;/* 'N'  */

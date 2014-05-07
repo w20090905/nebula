@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Print Label Line Format")
-@Refby("0")
 @Table("AD_PRINTLABELLINE_TRL")
 type AdPrintLabelLineTrl {
-@ForeignKeyColumn("AD_PRINTLABELLINE_ID") @Column("AD_PRINTLABELLINE_ID") 	!AdPrintLabelLine;
-@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdPrintLabelLine;
+	!AdLanguage;
+	AdClientId ID;
+	AdOrgId ID;
 	?PrintName Name;
 	IsTranslated YesNo;/* 'N'  */
 };

@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Chat Update")
-@Refby("0")
 @Table("CM_CHATUPDATE")
 type CmChatUpdate {
-@ForeignKeyColumn("CM_CHAT_ID") @Column("CM_CHAT_ID") 	!CmChat;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	!AdUser;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CmChat;
+	!AdUser;
+	AdClientId ID;
+	AdOrgId ID;
 	IsSelfService YesNo;/* 'N'  */
 };
 

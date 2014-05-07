@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("AD_CHANGELOG_V")
 type AdChangeLogV {
-@Column("AD_SESSION_ID") 	AdSessionId ID;
-@Column("AD_CHANGELOG_ID") 	AdChangeLogId ID;
+	AdSessionId ID;
+	AdChangeLogId ID;
 	TableName Name;
-@Column("RECORD_ID") 	RecordId ID;
+	RecordId ID;
 	ColumnName Name;
 	?OldValue String;
 	?NewValue String;

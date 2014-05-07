@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("RV_C_INVOICE_WEEK")
 type RvCInvoiceWeek {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("SALESREP_ID") 	?SalesRepId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	?SalesRepId ID;
 	?DateInvoiced Date;
 	?LineNetAmt Amount;
 	?LineListAmt Amount;

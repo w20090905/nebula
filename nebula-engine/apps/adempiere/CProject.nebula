@@ -1,24 +1,22 @@
-@Legacy("adempiere")
 @Remarks("Financial Project")
-@Refby("35")
 @Table("C_PROJECT")
 type CProject {
-@Column("C_PROJECT_ID") 	!CProjectId ID;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	!CProjectId ID;
+	AdClient;
+	AdOrg;
 	Value String;
 	*Name;
 	?Description;
 	?Note;
 	IsSummary YesNo;/* 'N'  */
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
-@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNER_LOCATION_ID") 	?CBpartnerLocation;
+	?AdUser;
+	?CBpartner;
+	?CBpartnerLocation;
 	?PoReference String;
-@ForeignKeyColumn("C_PAYMENTTERM_ID") @Column("C_PAYMENTTERM_ID") 	?CPaymentTerm;
-@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
-@ForeignKeyColumn("M_PRICELIST_VERSION_ID") @Column("M_PRICELIST_VERSION_ID") 	?MPriceListVersion;
-@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
+	?CPaymentTerm;
+	CCurrency;
+	?MPriceListVersion;
+	?CCampaign;
 	IsCommitment YesNo;/* 'Y'  */
 	PlannedAmt Amount;/* 0  */
 	PlannedQty Quantity;/* 0  */
@@ -28,19 +26,19 @@ type CProject {
 	?DateFinish Date;
 	?GenerateTo Attr;
 	Processed YesNo;/* 'N'  */
-@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	?SalesRep AdUser;
+	?SalesRep AdUser;
 	?CopyFrom Attr;
-@ForeignKeyColumn("C_PROJECTTYPE_ID") @Column("C_PROJECTTYPE_ID") 	?CProjectType;
+	?CProjectType;
 	CommittedQty Quantity;/* 0  */
 	InvoicedAmt Amount;/* 0  */
 	InvoicedQty Quantity;/* 0  */
 	ProjectBalanceAmt Amount;/* 0  */
-@ForeignKeyColumn("C_PHASE_ID") @Column("C_PHASE_ID") 	?CPhase;
+	?CPhase;
 	IsCommitCeiling YesNo;/* 'N'  */
-@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	?MWarehouse;
+	?MWarehouse;
 	?ProjectCategory YesNo;/* 'N'  */
 	?Processing YesNo;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNERSR_ID") 	?CBpartnerSr CBpartner;
+	?CBpartnerSr CBpartner;
 	ProjInvoiceRule String;/* '-'  */
 	ProjectLineLevel Attr;/* 'P'  */
 };

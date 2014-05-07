@@ -1,14 +1,12 @@
-@Legacy("adempiere")
 @Remarks("Distribution List Line with Business Partner and Quantity/Percentage")
-@Refby("1")
 @Table("M_DISTRIBUTIONLISTLINE")
 tx MDistributionListLine {
-@Column("M_DISTRIBUTIONLISTLINE_ID") 	!MDistributionListLineId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("M_DISTRIBUTIONLIST_ID") @Column("M_DISTRIBUTIONLIST_ID") 	MDistributionList;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
-@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocation;
+	!MDistributionListLineId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	MDistributionList;
+	CBpartner;
+	CBpartnerLocation;
 	MinQty Quantity;/* 0  */
 	?Ratio Amount;
 	?Description;

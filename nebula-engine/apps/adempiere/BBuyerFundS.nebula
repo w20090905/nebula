@@ -1,14 +1,12 @@
-@Legacy("adempiere")
 @Remarks("Buyer Funds for Bids on Topics")
-@Refby("1")
 @Table("B_BUYERFUNDS")
 tx BBuyerFundS {
-@Column("B_BUYERFUNDS_ID") 	!BBuyerFundSId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	AdUser BBuyer;
-@ForeignKeyColumn("C_ORDER_ID") @Column("C_ORDER_ID") 	?COrder;
-@ForeignKeyColumn("C_PAYMENT_ID") @Column("C_PAYMENT_ID") 	?CPayment;
+	!BBuyerFundSId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AdUser BBuyer;
+	?COrder;
+	?CPayment;
 	CommittedAmt Amount;/* 0  */
 	NonCommittedAmt Amount;/* 0  */
 };

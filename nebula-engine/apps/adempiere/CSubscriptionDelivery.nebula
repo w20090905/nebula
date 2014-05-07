@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Optional Delivery Record for a Subscription")
-@Refby("0")
 @Table("C_SUBSCRIPTION_DELIVERY")
 tx CSubscriptionDelivery {
-@Column("C_SUBSCRIPTION_DELIVERY_ID") 	!CSubscriptionDeliveryId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_SUBSCRIPTION_ID") @Column("C_SUBSCRIPTION_ID") 	CSubscription;
+	!CSubscriptionDeliveryId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CSubscription;
 };
 

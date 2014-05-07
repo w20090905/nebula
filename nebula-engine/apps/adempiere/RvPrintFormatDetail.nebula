@@ -1,27 +1,25 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("RV_PRINTFORMATDETAIL")
 type RvPrintFormatDetail {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("AD_PRINTFORMAT_ID") 	AdPrintFormatId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AdPrintFormatId ID;
 	*Name;
 	?Description;
 	IsTableBased YesNo;
 	IsForm YesNo;
-@Column("AD_TABLE_ID") 	AdTableId ID;
-@Column("AD_REPORTVIEW_ID") 	?AdReportViewId ID;
-@Column("AD_PRINTPAPER_ID") 	AdPrintPaperId ID;
-@Column("DEFAULT_AD_PRINTCOLOR_ID") 	DefaultAdPrintColorId ID;
-@Column("DEFAULT_AD_PRINTFONT_ID") 	DefaultAdPrintFontId ID;
+	AdTableId ID;
+	?AdReportViewId ID;
+	AdPrintPaperId ID;
+	DefaultAdPrintColorId ID;
+	DefaultAdPrintFontId ID;
 	IsStandardHeaderFooter YesNo;
-@Column("AD_PRINTTABLEFORMAT_ID") 	?AdPrintTableFormatId ID;
+	?AdPrintTableFormatId ID;
 	HeaderMargin Length;
 	FooterMargin Length;
 	?PrinterName Name;
 	IsDefault YesNo;
-@Column("AD_PRINTFORMATITEM_ID") 	AdPrintFormatItemId ID;
+	AdPrintFormatItemId ID;
 	ItemName Name;
 	?PrintName Name;
 	?PrintNameSuffix String;
@@ -29,8 +27,8 @@ type RvPrintFormatDetail {
 	PrintAreaType Attr;
 	SeqNo;
 	PrintFormatType Attr;
-@Column("AD_COLUMN_ID") 	?AdColumnId ID;
-@Column("AD_PRINTFORMATCHILD_ID") 	?AdPrintFormatChildId ID;
+	?AdColumnId ID;
+	?AdPrintFormatChildId ID;
 	ImageIsAttached String;
 	?ImageUrl Url;
 	IsRelativePosition YesNo;
@@ -48,8 +46,8 @@ type RvPrintFormatDetail {
 	?BelowColumn Number;
 	FieldAlignmentType Attr;
 	LineAlignmentType Attr;
-@Column("AD_PRINTCOLOR_ID") 	?AdPrintColorId ID;
-@Column("AD_PRINTFONT_ID") 	?AdPrintFontId ID;
+	?AdPrintColorId ID;
+	?AdPrintFontId ID;
 	IsOrderBy YesNo;
 	SortNo SeqNo;
 	IsGroupBy YesNo;
@@ -64,6 +62,6 @@ type RvPrintFormatDetail {
 	IsDeviationCalc YesNo;
 	IsRunningTotal YesNo;
 	?RunningTotalLines Count;
-@Column("AD_PRINTGRAPH_ID") 	?AdPrintGraphId ID;
+	?AdPrintGraphId ID;
 };
 

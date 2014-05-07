@@ -1,16 +1,14 @@
-@Legacy("adempiere")
 @Remarks("Info Window")
-@Refby("2")
 @Table("AD_INFOWINDOW")
 type AdInfoWindow {
-@Column("AD_INFOWINDOW_ID") 	!AdInfoWindowId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdInfoWindowId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
-@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
-@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+	AdTable;
+	EntityType AdEntityType;/* 'D'  */
 	FromClause String;
 	?OtherClause String;
 	?Processing YesNo;

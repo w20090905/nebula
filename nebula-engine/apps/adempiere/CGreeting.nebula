@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Greeting to print on correspondence")
-@Refby("4")
 @Table("C_GREETING")
 type CGreeting {
-@Column("C_GREETING_ID") 	!CGreetingId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CGreetingId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Greeting String;
 	IsFirstNameOnly YesNo;/* 'N'  */

@@ -1,16 +1,14 @@
-@Legacy("adempiere")
 @Remarks("Workflow Node Transition Condition")
-@Refby("0")
 @Table("AD_WF_NEXTCONDITION")
 tx AdWfNextCondition {
-@Column("AD_WF_NEXTCONDITION_ID") 	!AdWfNextConditionId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("AD_WF_NODENEXT_ID") @Column("AD_WF_NODENEXT_ID") 	AdWfNodeNext;
+	!AdWfNextConditionId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AdWfNodeNext;
 	SeqNo;
-@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+	EntityType AdEntityType;/* 'D'  */
 	AndOr String;
-@ForeignKeyColumn("AD_COLUMN_ID") @Column("AD_COLUMN_ID") 	AdColumn;
+	AdColumn;
 	Operation String;
 	Value String;
 	?Value2 String;

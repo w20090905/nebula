@@ -1,21 +1,19 @@
-@Legacy("adempiere")
 @Remarks("Inventory Transaction")
-@Refby("3")
 @Table("M_TRANSACTION")
 tx MTransaction {
-@Column("M_TRANSACTION_ID") 	!MTransactionId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MTransactionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MovementType Attr;
-@ForeignKeyColumn("M_LOCATOR_ID") @Column("M_LOCATOR_ID") 	MLocator;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+	MLocator;
+	MProduct;
 	MovementDate Date;
 	MovementQty Quantity;/* 0  */
-@ForeignKeyColumn("M_INVENTORYLINE_ID") @Column("M_INVENTORYLINE_ID") 	?MInventoryLine;
-@ForeignKeyColumn("M_MOVEMENTLINE_ID") @Column("M_MOVEMENTLINE_ID") 	?MMovementLine;
-@ForeignKeyColumn("M_INOUTLINE_ID") @Column("M_INOUTLINE_ID") 	?MInoutLine;
-@ForeignKeyColumn("M_PRODUCTIONLINE_ID") @Column("M_PRODUCTIONLINE_ID") 	?MProductionLine;
-@ForeignKeyColumn("C_PROJECTISSUE_ID") @Column("C_PROJECTISSUE_ID") 	?CProjectIssue;
-@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	MAttributeSetInstance;/* 0 */
+	?MInventoryLine;
+	?MMovementLine;
+	?MInoutLine;
+	?MProductionLine;
+	?CProjectIssue;
+	MAttributeSetInstance;/* 0 */
 };
 

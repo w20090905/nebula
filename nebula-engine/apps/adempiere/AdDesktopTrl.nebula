@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Collection of Workbenches")
-@Refby("0")
 @Table("AD_DESKTOP_TRL")
 type AdDesktopTrl {
-@ForeignKeyColumn("AD_DESKTOP_ID") @Column("AD_DESKTOP_ID") 	!AdDesktop;
-@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdDesktop;
+	!AdLanguage;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;

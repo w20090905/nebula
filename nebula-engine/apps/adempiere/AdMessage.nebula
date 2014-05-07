@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("System Message")
-@Refby("5")
 @Table("AD_MESSAGE")
 tx AdMessage {
-@Column("AD_MESSAGE_ID") 	!AdMessageId ID;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	!AdMessageId ID;
+	AdClient;
+	AdOrg;
 	Value String;
 	MsgText Text;
 	?MsgTip String;
 	MsgType Attr;
-@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+	EntityType AdEntityType;/* 'D'  */
 };
 

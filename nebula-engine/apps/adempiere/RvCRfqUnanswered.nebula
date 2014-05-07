@@ -1,27 +1,25 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("RV_C_RFQ_UNANSWERED")
 type RvCRfqUnanswered {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("C_RFQ_ID") 	CRfqId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CRfqId ID;
 	*Name;
 	?Description;
 	?Help;
-@Column("SALESREP_ID") 	SalesRepId ID;
-@Column("C_RFQ_TOPIC_ID") 	CRfqTopicId ID;
+	SalesRepId ID;
+	CRfqTopicId ID;
 	QuoteType Attr;
 	IsQuoteTotalAmt YesNo;
 	IsQuoteAllQty YesNo;
-@Column("C_CURRENCY_ID") 	CCurrencyId ID;
+	CCurrencyId ID;
 	DateResponse Date;
 	IsRfqResponseAccepted YesNo;
 	?DateWorkStart Date;
 	?DeliveryDays Count;
 	?DateWorkComplete Date;
-@Column("C_BPARTNER_ID") 	CBpartnerId ID;
-@Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocationId ID;
-@Column("AD_USER_ID") 	?AdUserId ID;
+	CBpartnerId ID;
+	CBpartnerLocationId ID;
+	?AdUserId ID;
 };
 

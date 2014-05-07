@@ -1,25 +1,23 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("C_DUNNING_HEADER_V")
 type CDunningHeaderV {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("AD_LANGUAGE") 	?AdLanguage Code;
-@Column("C_DUNNINGRUN_ID") 	CDunningRunId ID;
-@Column("C_DUNNINGRUNENTRY_ID") 	CDunningRunEntryId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	?AdLanguage Code;
+	CDunningRunId ID;
+	CDunningRunEntryId ID;
 	DunningDate Date;
 	PrintName Name;
 	?DocumentNote Note;
-@Column("C_BPARTNER_ID") 	CBpartnerId ID;
+	CBpartnerId ID;
 	BpValue String;
 	?BpTaxId String;
 	?Naics;
 	?Duns;
-@Column("ORG_LOCATION_ID") 	?OrgLocationId ID;
+	?OrgLocationId ID;
 	TaxId String;
-@Column("SALESREP_ID") 	SalesRepId ID;
-@Column("SALESREP_NAME") 	?SalesRepName Name;
+	SalesRepId ID;
+	?SalesRepName Name;
 	?BpGreeting String;
 	*Name;
 	?Name2 Name;
@@ -27,7 +25,7 @@ type CDunningHeaderV {
 	?Title;
 	?Phone;
 	?ContactName Name;
-@Column("C_LOCATION_ID") 	?CLocationId ID;
+	?CLocationId ID;
 	?ReferenceNo String;
 	?Postal String;
 	Amt Amount;

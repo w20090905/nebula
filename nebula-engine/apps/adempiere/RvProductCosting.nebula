@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("RV_PRODUCT_COSTING")
 type RvProductCosting {
-@Column("M_PRODUCT_ID") 	MProductId ID;
-@Column("C_ACCTSCHEMA_ID") 	CAcctSchemaId ID;
+	MProductId ID;
+	CAcctSchemaId ID;
 	Value String;
 	*Name;
-@Column("M_PRODUCT_CATEGORY_ID") 	MProductCategoryId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	MProductCategoryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	CurrentCostPrice Number;
 	FutureCostPrice Number;
 	CostStandard Number;

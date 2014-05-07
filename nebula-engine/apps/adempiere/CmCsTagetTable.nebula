@@ -1,16 +1,14 @@
-@Legacy("adempiere")
 @Remarks("Containet Stage Template Table")
-@Refby("0")
 @Table("CM_CSTAGETTABLE")
 type CmCsTagetTable {
-@Column("CM_CSTAGETTABLE_ID") 	!CmCsTagetTableId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CmCsTagetTableId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
-@ForeignKeyColumn("CM_CSTAGE_ID") @Column("CM_CSTAGE_ID") 	CmCStage;
-@ForeignKeyColumn("CM_TEMPLATETABLE_ID") @Column("CM_TEMPLATETABLE_ID") 	CmTemplateTable;
-@Column("RECORD_ID") 	?RecordId ID;
+	CmCStage;
+	CmTemplateTable;
+	?RecordId ID;
 	?WhereClause String;
 	?OtherClause String;
 };

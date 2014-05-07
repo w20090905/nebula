@@ -1,16 +1,14 @@
-@Legacy("adempiere")
 @Remarks("C_CashBook_Acct")
-@Refby("0")
 @Table("C_CASHBOOK_ACCT")
 type CCashBookAcct {
-@ForeignKeyColumn("C_CASHBOOK_ID") @Column("C_CASHBOOK_ID") 	!CCashBook;
-@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	!CAcctSchema;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("CB_ASSET_ACCT") 	CbAssetAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("CB_CASHTRANSFER_ACCT") 	CbCashTransferAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("CB_DIFFERENCES_ACCT") 	CbDifferencesAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("CB_EXPENSE_ACCT") 	CbExpenseAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("CB_RECEIPT_ACCT") 	CbReceiptAcct CValidCombination;
+	!CCashBook;
+	!CAcctSchema;
+	AdClientId ID;
+	AdOrgId ID;
+	CbAssetAcct CValidCombination;
+	CbCashTransferAcct CValidCombination;
+	CbDifferencesAcct CValidCombination;
+	CbExpenseAcct CValidCombination;
+	CbReceiptAcct CValidCombination;
 };
 

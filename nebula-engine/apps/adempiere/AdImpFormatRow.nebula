@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("Format Field")
-@Refby("0")
 @Table("AD_IMPFORMAT_ROW")
 type AdImpFormatRow {
-@Column("AD_IMPFORMAT_ROW_ID") 	!AdImpFormatRowId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("AD_IMPFORMAT_ID") @Column("AD_IMPFORMAT_ID") 	AdImpFormat;
+	!AdImpFormatRowId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AdImpFormat;
 	SeqNo;
 	*Name;
-@ForeignKeyColumn("AD_COLUMN_ID") @Column("AD_COLUMN_ID") 	AdColumn;
+	AdColumn;
 	?StartNo SeqNo;
 	?EndNo SeqNo;
 	DataType Attr;

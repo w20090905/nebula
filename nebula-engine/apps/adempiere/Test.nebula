@@ -1,27 +1,25 @@
-@Legacy("adempiere")
 @Remarks("Test ID")
-@Refby("0")
 type Test {
-@Column("TEST_ID") 	!TestId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!TestId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
-@Column("T_INTEGER") 	?TInteger Number;
-@Column("T_NUMBER") 	?TNumber Number;/* 0 */
-@Column("T_DATE") 	?TDate Date;
-@Column("T_DATETIME") 	?TDateTime Date;
-@Column("C_UOM_ID") 	?CUomId ID;
-@Column("T_QTY") 	?TQty Quantity;/* 0 */
-@Column("C_CURRENCY_ID") 	?CCurrencyId ID;
-@Column("T_AMOUNT") 	?TAmount Amount;/* 0 */
-@Column("C_LOCATION_ID") 	?CLocationId ID;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("ACCOUNT_ACCT") 	?AccountAcct CValidCombination;
-@Column("C_PAYMENT_ID") 	?CPaymentId ID;
-@Column("M_PRODUCT_ID") 	?MProductId ID;
-@Column("C_BPARTNER_ID") 	?CBpartnerId ID;
-@Column("M_LOCATOR_ID") 	?MLocatorId ID;
+	?TInteger Number;
+	?TNumber Number;/* 0 */
+	?TDate Date;
+	?TDateTime Date;
+	?CUomId ID;
+	?TQty Quantity;/* 0 */
+	?CCurrencyId ID;
+	?TAmount Amount;/* 0 */
+	?CLocationId ID;
+	?AccountAcct CValidCombination;
+	?CPaymentId ID;
+	?MProductId ID;
+	?CBpartnerId ID;
+	?MLocatorId ID;
 	?Processing YesNo;
 	?BinaryData Text;
 	?Processed YesNo;/* 'N'                        */

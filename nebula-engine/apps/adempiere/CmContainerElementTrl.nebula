@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Container element i.e. Headline, Content, Footer etc.")
-@Refby("0")
 @Table("CM_CONTAINER_ELEMENT_TRL")
 type CmContainerElementTrl {
-@ForeignKeyColumn("CM_CONTAINER_ELEMENT_ID") @Column("CM_CONTAINER_ELEMENT_ID") 	!CmContainerElement;
-@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CmContainerElement;
+	!AdLanguage;
+	AdClientId ID;
+	AdOrgId ID;
 	IsTranslated YesNo;/* 'N'  */
 	?ContentHtml null;
 	*Name;

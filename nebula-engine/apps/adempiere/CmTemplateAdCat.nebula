@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Get together the Template and the Advertising Category")
-@Refby("0")
 @Table("CM_TEMPLATE_AD_CAT")
 type CmTemplateAdCat {
-@ForeignKeyColumn("CM_AD_CAT_ID") @Column("CM_AD_CAT_ID") 	!CmAdCat;
-@ForeignKeyColumn("CM_TEMPLATE_ID") @Column("CM_TEMPLATE_ID") 	!CmTemplate;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CmAdCat;
+	!CmTemplate;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 };

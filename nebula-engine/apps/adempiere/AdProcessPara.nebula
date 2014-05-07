@@ -1,19 +1,17 @@
-@Legacy("adempiere")
 @Remarks("Process Parameter")
-@Refby("5")
 @Table("AD_PROCESS_PARA")
 type AdProcessPara {
-@Column("AD_PROCESS_PARA_ID") 	!AdProcessParaId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdProcessParaId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
-@ForeignKeyColumn("AD_PROCESS_ID") @Column("AD_PROCESS_ID") 	AdProcess;
+	AdProcess;
 	SeqNo;
-@ForeignKeyColumn("AD_REFERENCE_ID") @Column("AD_REFERENCE_ID") 	AdReference;
-@ForeignKeyColumn("AD_REFERENCE_ID") @Column("AD_REFERENCE_VALUE_ID") 	?AdReferenceValue AdReference;
-@ForeignKeyColumn("AD_VAL_RULE_ID") @Column("AD_VAL_RULE_ID") 	?AdValRule;
+	AdReference;
+	?AdReferenceValue AdReference;
+	?AdValRule;
 	ColumnName Name;
 	IsCentrallyMaintained YesNo;/* 'Y'  */
 	FieldLength Length;
@@ -24,7 +22,7 @@ type AdProcessPara {
 	?VFormat String;
 	?ValueMin String;
 	?ValueMax String;
-@ForeignKeyColumn("AD_ELEMENT_ID") @Column("AD_ELEMENT_ID") 	?AdElement;
-@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+	?AdElement;
+	EntityType AdEntityType;/* 'D'  */
 };
 

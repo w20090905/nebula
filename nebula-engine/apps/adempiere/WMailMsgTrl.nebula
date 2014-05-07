@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Web Store Mail Message Template")
-@Refby("0")
 @Table("W_MAILMSG_TRL")
 type WMailMsgTrl {
-@ForeignKeyColumn("W_MAILMSG_ID") @Column("W_MAILMSG_ID") 	!WMailMsg;
-@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!WMailMsg;
+	!AdLanguage;
+	AdClientId ID;
+	AdOrgId ID;
 	IsTranslated YesNo;/* 'N'  */
 	Subject String;
 	Message String;

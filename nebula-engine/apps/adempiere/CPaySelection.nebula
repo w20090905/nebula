@@ -1,14 +1,12 @@
-@Legacy("adempiere")
 @Remarks("Payment Selection")
-@Refby("2")
 @Table("C_PAYSELECTION")
 type CPaySelection {
-@Column("C_PAYSELECTION_ID") 	!CPaySelectionId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CPaySelectionId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
-@ForeignKeyColumn("C_BANKACCOUNT_ID") @Column("C_BANKACCOUNT_ID") 	CBankAccount;
+	CBankAccount;
 	PayDate Date;
 	IsApproved YesNo;/* 'Y'  */
 	TotalAmt Amount;/* 0  */

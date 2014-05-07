@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Unit of Measure")
-@Refby("22")
 @Table("C_UOM")
 type CUom {
-@Column("C_UOM_ID") 	!CUomId ID;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	!CUomId ID;
+	AdClient;
+	AdOrg;
 	X12de355 String;
 	?UomSymbol String;
 	*Name;

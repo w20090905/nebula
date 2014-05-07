@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("The Currency for this record")
-@Refby("0")
 @Table("C_CURRENCY_TRL")
 tx CCurrencyTrl {
-@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	!CCurrency;
-@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CCurrency;
+	!AdLanguage;
+	AdClientId ID;
+	AdOrgId ID;
 	IsTranslated YesNo;/* 'N'  */
 	?CurSymbol String;
 	Description;

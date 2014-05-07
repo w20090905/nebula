@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Reference List based on Table")
-@Refby("0")
 @Table("AD_REF_LIST_TRL")
 type AdRefListTrl {
-@ForeignKeyColumn("AD_REF_LIST_ID") @Column("AD_REF_LIST_ID") 	!AdRefList;
-@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdRefList;
+	!AdLanguage;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	IsTranslated YesNo;/* 'N'  */

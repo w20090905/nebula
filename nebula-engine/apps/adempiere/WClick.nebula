@@ -1,20 +1,18 @@
-@Legacy("adempiere")
 @Remarks("Individual Web Click")
-@Refby("0")
 @Table("W_CLICK")
 tx WClick {
-@Column("W_CLICK_ID") 	!WClickId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!WClickId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?TargetUrl Url;
 	?Referrer String;
-@Column("REMOTE_HOST") 	?RemoteHost Host;
-@Column("REMOTE_ADDR") 	?RemoteAddr Message;
+	?RemoteHost Host;
+	?RemoteAddr Message;
 	?UserAgent String;
 	?AcceptLanguage Code;
 	Processed YesNo;/* 'N'  */
-@ForeignKeyColumn("W_CLICKCOUNT_ID") @Column("W_CLICKCOUNT_ID") 	?WClickCount;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+	?WClickCount;
+	?AdUser;
 	?Email;
 };
 

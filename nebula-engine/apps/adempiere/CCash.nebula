@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Cash Journal")
-@Refby("1")
 @Table("C_CASH")
 type CCash {
-@Column("C_CASH_ID") 	!CCashId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
-@ForeignKeyColumn("C_CASHBOOK_ID") @Column("C_CASHBOOK_ID") 	CCashBook;
+	!CCashId ID;
+	AdClientId ID;
+	AdOrg;
+	CCashBook;
 	*Name;
 	?Description;
 	StatementDate Date;
@@ -17,12 +15,12 @@ type CCash {
 	?Processing YesNo;
 	Processed YesNo;/* 'N'  */
 	Posted YesNo;/* 'N'  */
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
-@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
-@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
-@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
-@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER1_ID") 	?User1 CElementValue;
-@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER2_ID") 	?User2 CElementValue;
+	?AdOrgTrx AdOrg;
+	?CProject;
+	?CCampaign;
+	?CActivity;
+	?User1 CElementValue;
+	?User2 CElementValue;
 	IsApproved YesNo;/* 'N'  */
 	DocStatus Attr;
 	DocAction Attr;

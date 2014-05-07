@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("AD_Package_Imp_ID")
-@Refby("0")
 @Table("AD_PACKAGE_IMP")
 type AdPackageImp {
-@Column("AD_PACKAGE_IMP_ID") 	!AdPackageImpId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdPackageImpId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
-@Column("PK_STATUS") 	?PkStatus String;
+	?PkStatus String;
 	?ReleaseNo String;
-@Column("PK_VERSION") 	?PkVersion String;
+	?PkVersion String;
 	?Version String;
 	Description;
 	?Email;

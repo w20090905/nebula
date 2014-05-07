@@ -1,20 +1,18 @@
-@Legacy("adempiere")
 @Remarks("System Element enables the central maintenance of column description and help.")
-@Refby("0")
 @Table("AD_ELEMENT_TRL")
 type AdElementTrl {
-@ForeignKeyColumn("AD_ELEMENT_ID") @Column("AD_ELEMENT_ID") 	!AdElement;
-@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdElement;
+	!AdLanguage;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	PrintName Name;
 	?Description;
 	?Help;
-@Column("PO_NAME") 	?PoName Name;
-@Column("PO_PRINTNAME") 	?PoPrintName Name;
-@Column("PO_DESCRIPTION") 	?PoDescription Description;
-@Column("PO_HELP") 	?PoHelp Help;
+	?PoName Name;
+	?PoPrintName Name;
+	?PoDescription Description;
+	?PoHelp Help;
 	IsTranslated YesNo;/* 'N'  */
 };
 

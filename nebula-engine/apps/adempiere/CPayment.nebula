@@ -1,21 +1,19 @@
-@Legacy("adempiere")
 @Remarks("Payment identifier")
-@Refby("16")
 @Table("C_PAYMENT")
 tx CPayment {
-@Column("C_PAYMENT_ID") 	!CPaymentId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	!CPaymentId ID;
+	AdClientId ID;
+	AdOrg;
 	DocumentNo String;
 	DateTrx Date;
 	IsReceipt YesNo;/* 'Y'  */
-@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	CDocType;
+	CDocType;
 	TrxType Attr;
-@ForeignKeyColumn("C_BANKACCOUNT_ID") @Column("C_BANKACCOUNT_ID") 	CBankAccount;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
-@ForeignKeyColumn("C_INVOICE_ID") @Column("C_INVOICE_ID") 	?CInvoice;
-@ForeignKeyColumn("C_BP_BANKACCOUNT_ID") @Column("C_BP_BANKACCOUNT_ID") 	?CBpBankAccount;
-@ForeignKeyColumn("C_PAYMENTBATCH_ID") @Column("C_PAYMENTBATCH_ID") 	?CPaymentBatch;
+	CBankAccount;
+	?CBpartner;
+	?CInvoice;
+	?CBpBankAccount;
+	?CPaymentBatch;
 	TenderType Attr;
 	?CreditCardType Attr;
 	?CreditCardNumber String;
@@ -26,30 +24,30 @@ tx CPayment {
 	?RoutingNo String;
 	?AccountNo String;
 	?CheckNo String;
-@Column("A_NAME") 	?AName Name;
-@Column("A_STREET") 	?AStreet String;
-@Column("A_CITY") 	?ACity String;
-@Column("A_STATE") 	?AState String;
-@Column("A_ZIP") 	?AZip String;
-@Column("A_IDENT_DL") 	?AIdentDl String;
-@Column("A_IDENT_SSN") 	?AIdentSsn String;
-@Column("A_EMAIL") 	?AEmail Email;
+	?AName Name;
+	?AStreet String;
+	?ACity String;
+	?AState String;
+	?AZip String;
+	?AIdentDl String;
+	?AIdentSsn String;
+	?AEmail Email;
 	?VoiceAuthCode Code;
-@Column("ORIG_TRXID") 	?OrigTrxId String;
+	?OrigTrxId String;
 	?PoNum String;
-@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
+	CCurrency;
 	PayAmt Amount;/* 0  */
 	?DiscountAmt Amount;/* 0 */
 	?WriteOffAmt Amount;/* 0 */
 	?TaxAmt Amount;/* 0 */
 	IsApproved YesNo;/* 'N'  */
-@Column("R_PNREF") 	?RPnref String;
-@Column("R_RESULT") 	?RResult String;
-@Column("R_RESPMSG") 	?RRespMsg Message;
-@Column("R_AUTHCODE") 	?RAuthCode Code;
-@Column("R_AVSADDR") 	?RAvsAddr Message;
-@Column("R_AVSZIP") 	?RAvsZip String;
-@Column("R_INFO") 	?RInfo String;
+	?RPnref String;
+	?RResult String;
+	?RRespMsg Message;
+	?RAuthCode Code;
+	?RAvsAddr Message;
+	?RAvsZip String;
+	?RInfo String;
 	?Processing YesNo;
 	?OProcessing YesNo;
 	DocStatus Attr;
@@ -61,26 +59,26 @@ tx CPayment {
 	Posted YesNo;/* 'N'  */
 	IsOverUnderPayment YesNo;/* 'N'  */
 	?OverUnderAmt Amount;/* 0 */
-@Column("A_COUNTRY") 	?ACountry String;
-@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+	?ACountry String;
+	?CProject;
 	IsSelfService YesNo;/* 'N' */
 	?ChargeAmt Amount;/* 0 */
-@ForeignKeyColumn("C_CHARGE_ID") @Column("C_CHARGE_ID") 	?CCharge;
+	?CCharge;
 	IsDelayedCapture YesNo;/* 'N'  */
-@Column("R_AUTHCODE_DC") 	?RAuthCodeDc String;
-@Column("R_CVV2MATCH") 	?RCvv2Match String;
-@Column("R_PNREF_DC") 	?RPnrefDc String;
+	?RAuthCodeDc String;
+	?RCvv2Match String;
+	?RPnrefDc String;
 	?Swipe;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORGTRX_ID") 	?AdOrgTrx AdOrg;
-@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
-@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
-@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER1_ID") 	?User1 CElementValue;
-@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("USER2_ID") 	?User2 CElementValue;
-@ForeignKeyColumn("C_CONVERSIONTYPE_ID") @Column("C_CONVERSIONTYPE_ID") 	?CConversionType;
+	?AdOrgTrx AdOrg;
+	?CCampaign;
+	?CActivity;
+	?User1 CElementValue;
+	?User2 CElementValue;
+	?CConversionType;
 	?Description;
 	DateAcct Date;
-@ForeignKeyColumn("C_ORDER_ID") @Column("C_ORDER_ID") 	?COrder;
+	?COrder;
 	IsPrepayment YesNo;/* 'N'  */
-@ForeignKeyColumn("C_PAYMENT_ID") @Column("REF_PAYMENT_ID") 	?RefPayment CPayment;
+	?RefPayment CPayment;
 };
 

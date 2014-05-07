@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Product, Service, Item")
-@Refby("89")
 @Table("M_PRODUCT")
 type MProduct {
-@Column("M_PRODUCT_ID") 	!MProductId ID;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	!MProductId ID;
+	AdClient;
+	AdOrg;
 	Value String;
 	*Name;
 	?Description;
@@ -13,8 +11,8 @@ type MProduct {
 	?Help;
 	?Upc;
 	?Sku;
-@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_ID") 	CUom;
-@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	?SalesRep AdUser;
+	CUom;
+	?SalesRep AdUser;
 	IsSummary YesNo;/* 'N'  */
 	IsStocked YesNo;/* 'Y'  */
 	IsPurchased YesNo;/* 'Y'  */
@@ -23,8 +21,8 @@ type MProduct {
 	IsInvoicePrintDetails YesNo;/* 'N'  */
 	IsPickListPrintDetails YesNo;/* 'N'  */
 	IsVerified YesNo;/* 'N'  */
-@ForeignKeyColumn("C_REVENUERECOGNITION_ID") @Column("C_REVENUERECOGNITION_ID") 	?CRevenueRecognition;
-@ForeignKeyColumn("M_PRODUCT_CATEGORY_ID") @Column("M_PRODUCT_CATEGORY_ID") 	MProductCategory;
+	?CRevenueRecognition;
+	MProductCategory;
 	?Classification String;
 	?Volume Number;/* 0 */
 	?Weight;/* 0 */
@@ -32,27 +30,27 @@ type MProduct {
 	?ShelfHeight Height;
 	?ShelfDepth Depth;
 	?UnitsPerPallet Number;
-@ForeignKeyColumn("C_TAXCATEGORY_ID") @Column("C_TAXCATEGORY_ID") 	CTaxCategory;
-@ForeignKeyColumn("S_RESOURCE_ID") @Column("S_RESOURCE_ID") 	?SResource;
+	CTaxCategory;
+	?SResource;
 	?Discontinued YesNo;/* 'N'   */
 	?DiscontinuedBy Date;
 	?Processing YesNo;
-@ForeignKeyColumn("S_EXPENSETYPE_ID") @Column("S_EXPENSETYPE_ID") 	?SExpenseType;
+	?SExpenseType;
 	ProductType Attr;/* 'I'  */
 	?ImageUrl Url;
 	?DescriptionUrl Url;
 	?GuaranteeDays Count;
-@ForeignKeyColumn("R_MAILTEXT_ID") @Column("R_MAILTEXT_ID") 	?RMailText;
+	?RMailText;
 	?VersionNo String;
-@ForeignKeyColumn("M_ATTRIBUTESET_ID") @Column("M_ATTRIBUTESET_ID") 	?MAttributeSet;
-@ForeignKeyColumn("M_ATTRIBUTESETINSTANCE_ID") @Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstance;/* 0 */
+	?MAttributeSet;
+	?MAttributeSetInstance;/* 0 */
 	?DownloadUrl Url;
-@ForeignKeyColumn("M_FREIGHTCATEGORY_ID") @Column("M_FREIGHTCATEGORY_ID") 	?MFreightCategory;
-@ForeignKeyColumn("M_LOCATOR_ID") @Column("M_LOCATOR_ID") 	?MLocator;
+	?MFreightCategory;
+	?MLocator;
 	?GuaranteeDaysMin Count;
 	IsWebStoreFeatured YesNo;/* 'N'  */
 	IsSelfService YesNo;/* 'Y'  */
-@ForeignKeyColumn("C_SUBSCRIPTIONTYPE_ID") @Column("C_SUBSCRIPTIONTYPE_ID") 	?CSubscriptionType;
+	?CSubscriptionType;
 	IsDropShip YesNo;/* 'N'  */
 	IsExcludeAutoDelivery YesNo;/* 'N'  */
 	?Group1 String;

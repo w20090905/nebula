@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("EDI Log")
-@Refby("0")
 @Table("M_EDI_INFO")
 tx MEdiInfo {
-@Column("M_EDI_INFO_ID") 	!MEdiInfoId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("M_EDI_ID") @Column("M_EDI_ID") 	MEdi;
+	!MEdiInfoId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	MEdi;
 	Info null;
 };
 

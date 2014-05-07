@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Workflow or combination of tasks")
-@Refby("0")
 @Table("AD_WORKFLOW_TRL")
 type AdWorkflowTrl {
-@ForeignKeyColumn("AD_WORKFLOW_ID") @Column("AD_WORKFLOW_ID") 	!AdWorkflow;
-@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdWorkflow;
+	!AdLanguage;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;

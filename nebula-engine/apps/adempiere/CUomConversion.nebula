@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("Unit of Measure Conversion")
-@Refby("0")
 @Table("C_UOM_CONVERSION")
 tx CUomConversion {
-@Column("C_UOM_CONVERSION_ID") 	!CUomConversionId ID;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
-@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_ID") 	CUom;
-@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_TO_ID") 	CUomTo CUom;
+	!CUomConversionId ID;
+	AdClient;
+	AdOrg;
+	CUom;
+	CUomTo CUom;
 	MultiplyRate Amount;/* 0  */
 	DivideRate Amount;/* 0  */
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
+	?MProduct;
 };
 

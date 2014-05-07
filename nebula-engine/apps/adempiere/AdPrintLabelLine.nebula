@@ -1,18 +1,16 @@
-@Legacy("adempiere")
 @Remarks("Print Label Line Format")
-@Refby("1")
 @Table("AD_PRINTLABELLINE")
 type AdPrintLabelLine {
-@Column("AD_PRINTLABELLINE_ID") 	!AdPrintLabelLineId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("AD_PRINTLABEL_ID") @Column("AD_PRINTLABEL_ID") 	AdPrintLabel;
+	!AdPrintLabelLineId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AdPrintLabel;
 	*Name;
 	SeqNo;
 	LabelFormatType Attr;
 	?PrintName Name;
-@ForeignKeyColumn("AD_COLUMN_ID") @Column("AD_COLUMN_ID") 	?AdColumn;
-@ForeignKeyColumn("AD_LABELPRINTERFUNCTION_ID") @Column("AD_LABELPRINTERFUNCTION_ID") 	AdLabelPrinterFunction;
+	?AdColumn;
+	AdLabelPrinterFunction;
 	XPosition Position;
 	YPosition Position;
 };

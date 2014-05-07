@@ -1,17 +1,15 @@
-@Legacy("adempiere")
 @Remarks("Asset Registration Attribute")
-@Refby("2")
 @Table("A_REGISTRATIONATTRIBUTE")
 type ARegistrationAttribute {
-@Column("A_REGISTRATIONATTRIBUTE_ID") 	!ARegistrationAttributeId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!ARegistrationAttributeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	SeqNo;/* 0  */
-@ForeignKeyColumn("AD_REFERENCE_ID") @Column("AD_REFERENCE_ID") 	AdReference;
+	AdReference;
 	?ColumnName Name;
-@ForeignKeyColumn("AD_REFERENCE_ID") @Column("AD_REFERENCE_VALUE_ID") 	?AdReferenceValue AdReference;
+	?AdReferenceValue AdReference;
 	IsSelfService YesNo;/* 'Y'  */
 };
 

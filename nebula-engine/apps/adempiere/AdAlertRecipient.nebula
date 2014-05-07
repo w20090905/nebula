@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("Recipient of the Alert Notification")
-@Refby("0")
 @Table("AD_ALERTRECIPIENT")
 tx AdAlertRecipient {
-@Column("AD_ALERTRECIPIENT_ID") 	!AdAlertRecipientId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("AD_ALERT_ID") @Column("AD_ALERT_ID") 	AdAlert;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
-@ForeignKeyColumn("AD_ROLE_ID") @Column("AD_ROLE_ID") 	?AdRole;
+	!AdAlertRecipientId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AdAlert;
+	?AdUser;
+	?AdRole;
 };
 

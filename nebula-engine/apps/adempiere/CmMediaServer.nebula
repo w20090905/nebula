@@ -1,18 +1,16 @@
-@Legacy("adempiere")
 @Remarks("Media Server list to which content should get transfered")
-@Refby("1")
 @Table("CM_MEDIA_SERVER")
 type CmMediaServer {
-@Column("CM_MEDIA_SERVER_ID") 	!CmMediaServerId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CmMediaServerId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
-@ForeignKeyColumn("CM_WEBPROJECT_ID") @Column("CM_WEBPROJECT_ID") 	CmWebProject;
+	CmWebProject;
 	IsPassive YesNo;/* 'Y'  */
 	?Url;
-@Column("IP_ADDRESS") 	?IpAddress Address;
+	?IpAddress Address;
 	?UserName Name;
 	?Password String;
 	?Folder String;

@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Known Issue")
-@Refby("1")
 @Table("R_ISSUEKNOWN")
 tx RIssueKnown {
-@Column("R_ISSUEKNOWN_ID") 	!RIssueKnownId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!RIssueKnownId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	IssueSummary String;
 	ReleaseNo String;
 	?SourceClassName Name;
@@ -14,9 +12,9 @@ tx RIssueKnown {
 	?LineNo SeqNo;/* 0 */
 	?Description;
 	?IssueStatus String;
-@ForeignKeyColumn("R_ISSUESTATUS_ID") @Column("R_ISSUESTATUS_ID") 	?RIssueStatus;
-@ForeignKeyColumn("R_REQUEST_ID") @Column("R_REQUEST_ID") 	?RRequest;
+	?RIssueStatus;
+	?RRequest;
 	?Processing YesNo;
-@Column("R_ISSUERECOMMENDATION_ID") 	?RIssueRecommendationId ID;
+	?RIssueRecommendationId ID;
 };
 

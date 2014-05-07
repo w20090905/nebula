@@ -1,18 +1,16 @@
-@Legacy("adempiere")
 @Remarks("Language ID")
-@Refby("48")
 @Table("AD_LANGUAGE")
 type AdLanguage {
-@Column("AD_LANGUAGE") 	!AdLanguage Code;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	!AdLanguage Code;
+	AdClient;
+	AdOrg;
 	*Name;
 	?LanguageIso String;
 	?CountryCode Code;
 	IsBaseLanguage YesNo;/* 'N'  */
 	IsSystemLanguage YesNo;/* 'N'  */
 	?Processing YesNo;
-@Column("AD_LANGUAGE_ID") 	AdLanguageId ID;
+	AdLanguageId ID;
 	IsDecimalPoint YesNo;/* 'Y'  */
 	?DatePattern String;
 	?TimePattern String;

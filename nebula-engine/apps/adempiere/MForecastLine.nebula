@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("Forecast Line")
-@Refby("1")
 @Table("M_FORECASTLINE")
 tx MForecastLine {
-@Column("M_FORECASTLINE_ID") 	!MForecastLineId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("M_FORECAST_ID") @Column("M_FORECAST_ID") 	MForecast;
-@ForeignKeyColumn("C_PERIOD_ID") @Column("C_PERIOD_ID") 	CPeriod;
+	!MForecastLineId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	MForecast;
+	CPeriod;
 	Qty Quantity;/* 0  */
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	MProduct;
+	MProduct;
 	QtyCalculated Number;/* 0  */
 };
 

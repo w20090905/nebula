@@ -1,16 +1,14 @@
-@Legacy("adempiere")
 @Remarks("Request for Quotation")
-@Refby("2")
 @Table("C_RFQ")
 type CRfq {
-@Column("C_RFQ_ID") 	!CRfqId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CRfqId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
-@ForeignKeyColumn("C_RFQ_TOPIC_ID") @Column("C_RFQ_TOPIC_ID") 	CRfqTopic;
-@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
+	CRfqTopic;
+	CCurrency;
 	DateResponse Date;
 	IsRfqResponseAccepted YesNo;/* 'Y'  */
 	?DateWorkStart Date;
@@ -21,15 +19,15 @@ type CRfq {
 	IsQuoteAllQty YesNo;/* 'Y'  */
 	IsSelfService YesNo;/* 'N'  */
 	IsInvitedVendorsOnly YesNo;/* 'N'  */
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
-@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNER_LOCATION_ID") 	?CBpartnerLocation;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
-@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	SalesRep AdUser;
+	?CBpartner;
+	?CBpartnerLocation;
+	?AdUser;
+	SalesRep AdUser;
 	?Margin Length;
 	?CreateSo String;
 	?CreatePo String;
 	?PublishRfq String;
-@ForeignKeyColumn("C_ORDER_ID") @Column("C_ORDER_ID") 	?COrder;
+	?COrder;
 	?CopyLines String;
 	?RankRfq String;
 	?Processing YesNo;

@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("AD_Sequence_Audit")
-@Refby("0")
 @Table("AD_SEQUENCE_AUDIT")
 type AdSequenceAudit {
-@ForeignKeyColumn("AD_SEQUENCE_ID") @Column("AD_SEQUENCE_ID") 	!AdSequence;
+	!AdSequence;
 	!DocumentNo String;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
-@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
-@Column("RECORD_ID") 	RecordId ID;
+	AdClient;
+	AdOrg;
+	AdTable;
+	RecordId ID;
 };
 

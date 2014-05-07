@@ -1,17 +1,15 @@
-@Legacy("adempiere")
 @Remarks("City")
-@Refby("1")
 @Table("C_CITY")
 type CCity {
-@Column("C_CITY_ID") 	!CCityId ID;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	!CCityId ID;
+	AdClient;
+	AdOrg;
 	*Name;
 	?LoCode Code;
 	?Coordinates String;
 	?Postal String;
 	?AreaCode Code;
-@ForeignKeyColumn("C_COUNTRY_ID") @Column("C_COUNTRY_ID") 	?CCountry;
-@ForeignKeyColumn("C_REGION_ID") @Column("C_REGION_ID") 	?CRegion;
+	?CCountry;
+	?CRegion;
 };
 

@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("Web Menu")
-@Refby("2")
 @Table("U_WEBMENU")
 type UWebMenu {
-@Column("U_WEBMENU_ID") 	!UWebMenuId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!UWebMenuId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	MenuLink String;
 	Module String;
-@ForeignKeyColumn("U_WEBMENU_ID") @Column("PARENTMENU_ID") 	?ParentMenu UWebMenu;
+	?ParentMenu UWebMenu;
 	HasSubMenu YesNo;/* 'N'  */
 	?Description;
 	?ImageLink String;

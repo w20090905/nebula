@@ -1,27 +1,25 @@
-@Legacy("adempiere")
 @Remarks("AD_ClientInfo")
-@Refby("0")
 @Table("AD_CLIENTINFO")
 type AdClientInfo {
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	!AdClient;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdClient;
+	AdOrgId ID;
 	IsDiscountLineAmt YesNo;/* 'Y'  */
-@ForeignKeyColumn("C_CALENDAR_ID") @Column("C_CALENDAR_ID") 	?CCalendar;
-@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA1_ID") 	?CAcctSchema1 CAcctSchema;
-@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_VOLUME_ID") 	?CUomVolume CUom;
-@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_WEIGHT_ID") 	?CUomWeight CUom;
-@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_LENGTH_ID") 	?CUomLength CUom;
-@ForeignKeyColumn("C_UOM_ID") @Column("C_UOM_TIME_ID") 	?CUomTime CUom;
-@ForeignKeyColumn("AD_TREE_ID") @Column("AD_TREE_MENU_ID") 	?AdTreeMenu AdTree;
-@ForeignKeyColumn("AD_TREE_ID") @Column("AD_TREE_ORG_ID") 	?AdTreeOrg AdTree;
-@ForeignKeyColumn("AD_TREE_ID") @Column("AD_TREE_BPARTNER_ID") 	?AdTreeBpartner AdTree;
-@ForeignKeyColumn("AD_TREE_ID") @Column("AD_TREE_PROJECT_ID") 	?AdTreeProject AdTree;
-@ForeignKeyColumn("AD_TREE_ID") @Column("AD_TREE_SALESREGION_ID") 	?AdTreeSalesRegion AdTree;
-@ForeignKeyColumn("AD_TREE_ID") @Column("AD_TREE_PRODUCT_ID") 	?AdTreeProduct AdTree;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCTFREIGHT_ID") 	?MProductFreight MProduct;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNERCASHTRX_ID") 	?CBpartnerCashTrx CBpartner;
+	?CCalendar;
+	?CAcctSchema1 CAcctSchema;
+	?CUomVolume CUom;
+	?CUomWeight CUom;
+	?CUomLength CUom;
+	?CUomTime CUom;
+	?AdTreeMenu AdTree;
+	?AdTreeOrg AdTree;
+	?AdTreeBpartner AdTree;
+	?AdTreeProject AdTree;
+	?AdTreeSalesRegion AdTree;
+	?AdTreeProduct AdTree;
+	?MProductFreight MProduct;
+	?CBpartnerCashTrx CBpartner;
 	?KeepLogDays Count;
-@ForeignKeyColumn("AD_TREE_ID") @Column("AD_TREE_ACTIVITY_ID") 	?AdTreeActivity AdTree;
-@ForeignKeyColumn("AD_TREE_ID") @Column("AD_TREE_CAMPAIGN_ID") 	?AdTreeCampaign AdTree;
+	?AdTreeActivity AdTree;
+	?AdTreeCampaign AdTree;
 };
 

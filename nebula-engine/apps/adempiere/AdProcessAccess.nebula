@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Process Access")
-@Refby("0")
 @Table("AD_PROCESS_ACCESS")
 type AdProcessAccess {
-@ForeignKeyColumn("AD_PROCESS_ID") @Column("AD_PROCESS_ID") 	!AdProcess;
-@ForeignKeyColumn("AD_ROLE_ID") @Column("AD_ROLE_ID") 	!AdRole;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	!AdProcess;
+	!AdRole;
+	AdClient;
+	AdOrg;
 	IsReadWrite YesNo;/* 'Y'  */
 };
 

@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Adempiere Alert")
-@Refby("2")
 @Table("AD_ALERT")
 type AdAlert {
-@Column("AD_ALERT_ID") 	!AdAlertId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdAlertId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
@@ -13,7 +11,7 @@ type AdAlert {
 	AlertMessage String;
 	EnforceClientSecurity YesNo;/* 'Y'  */
 	EnforceRoleSecurity YesNo;/* 'Y'  */
-@ForeignKeyColumn("AD_ALERTPROCESSOR_ID") @Column("AD_ALERTPROCESSOR_ID") 	?AdAlertProcessor;
+	?AdAlertProcessor;
 	IsValid YesNo;/* 'Y'  */
 };
 

@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("C_DUNNING_LINE_V")
 type CDunningLineV {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("AD_LANGUAGE") 	?AdLanguage Code;
-@Column("C_DUNNINGRUNLINE_ID") 	CDunningRunLineId ID;
-@Column("C_DUNNINGRUNENTRY_ID") 	CDunningRunEntryId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	?AdLanguage Code;
+	CDunningRunLineId ID;
+	CDunningRunEntryId ID;
 	Amt Amount;
 	ConvertedAmt Amount;
 	DaysDue Count;
@@ -15,34 +13,34 @@ type CDunningLineV {
 	InterestAmt Amount;
 	FeeAmt Amount;
 	TotalAmt Amount;
-@Column("C_INVOICE_ID") 	?CInvoiceId ID;
+	?CInvoiceId ID;
 	?IsSoTrx YesNo;
 	?DocumentNo String;
 	?DocStatus Attr;
 	?DateTrx Date;
-@Column("C_DOCTYPE_ID") 	?CDocTypeId ID;
+	?CDocTypeId ID;
 	?DocumentType String;
 	?Description;
-@Column("C_CURRENCY_ID") 	?CCurrencyId ID;
-@Column("C_CAMPAIGN_ID") 	?CCampaignId ID;
-@Column("C_PROJECT_ID") 	?CProjectId ID;
-@Column("C_ACTIVITY_ID") 	?CActivityId ID;
-@Column("USER1_ID") 	?User1Id ID;
-@Column("USER2_ID") 	?User2Id ID;
+	?CCurrencyId ID;
+	?CCampaignId ID;
+	?CProjectId ID;
+	?CActivityId ID;
+	?User1Id ID;
+	?User2Id ID;
 	?DateAcct Date;
-@Column("C_CONVERSIONTYPE_ID") 	?CConversionTypeId ID;
-@Column("AD_ORGTRX_ID") 	?AdOrgTrxId ID;
+	?CConversionTypeId ID;
+	?AdOrgTrxId ID;
 	?PoReference String;
 	?DateOrdered Date;
 	?DateInvoiced Date;
 	?IsInDispute YesNo;
 	?PaymentTerm String;
-@Column("C_CHARGE_ID") 	?CChargeId ID;
+	?CChargeId ID;
 	?ChargeAmt Amount;
 	?TotalLines Count;
 	?GrandTotal Number;
 	?AmtInWords Amount;
-@Column("M_PRICELIST_ID") 	?MPriceListId ID;
+	?MPriceListId ID;
 	?IsPaid YesNo;
 	?IsAllocated YesNo;
 	?TenderType Attr;

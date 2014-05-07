@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("Warehouse Locator")
-@Refby("14")
 @Table("M_LOCATOR")
 tx MLocator {
-@Column("M_LOCATOR_ID") 	!MLocatorId ID;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
+	!MLocatorId ID;
+	AdClient;
+	AdOrg;
 	Value String;
-@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	MWarehouse;
+	MWarehouse;
 	PriorityNo SeqNo;
 	IsDefault YesNo;/* 'N'  */
 	?X String;

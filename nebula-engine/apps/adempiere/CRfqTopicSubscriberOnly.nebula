@@ -1,14 +1,12 @@
-@Legacy("adempiere")
 @Remarks("Include Subscriber only for certain products or product categories")
-@Refby("0")
 @Table("C_RFQ_TOPICSUBSCRIBERONLY")
 tx CRfqTopicSubscriberOnly {
-@Column("C_RFQ_TOPICSUBSCRIBERONLY_ID") 	!CRfqTopicSubscriberOnlyId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_RFQ_TOPICSUBSCRIBER_ID") @Column("C_RFQ_TOPICSUBSCRIBER_ID") 	CRfqTopicSubscriber;
+	!CRfqTopicSubscriberOnlyId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CRfqTopicSubscriber;
 	?Description;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
-@ForeignKeyColumn("M_PRODUCT_CATEGORY_ID") @Column("M_PRODUCT_CATEGORY_ID") 	?MProductCategory;
+	?MProduct;
+	?MProductCategory;
 };
 

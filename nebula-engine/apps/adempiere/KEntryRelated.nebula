@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Related Entry for this Enntry")
-@Refby("0")
 @Table("K_ENTRYRELATED")
 type KEntryRelated {
-@ForeignKeyColumn("K_ENTRY_ID") @Column("K_ENTRY_ID") 	!KEntry;
-@ForeignKeyColumn("K_ENTRY_ID") @Column("K_ENTRYRELATED_ID") 	!KEntryRelated KEntry;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!KEntry;
+	!KEntryRelated KEntry;
+	AdClientId ID;
+	AdOrgId ID;
 	?Name;
 };
 

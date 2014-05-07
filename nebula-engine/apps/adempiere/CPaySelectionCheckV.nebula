@@ -1,17 +1,15 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("C_PAYSELECTION_CHECK_V")
 type CPaySelectionCheckV {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("AD_LANGUAGE") 	?AdLanguage Code;
-@Column("C_PAYSELECTION_ID") 	CPaySelectionId ID;
-@Column("C_PAYSELECTIONCHECK_ID") 	CPaySelectionCheckId ID;
-@Column("ORG_LOCATION_ID") 	?OrgLocationId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	?AdLanguage Code;
+	CPaySelectionId ID;
+	CPaySelectionCheckId ID;
+	?OrgLocationId ID;
 	TaxId String;
-@Column("C_DOCTYPE_ID") 	?CDocTypeId ID;
-@Column("C_BPARTNER_ID") 	CBpartnerId ID;
+	?CDocTypeId ID;
+	CBpartnerId ID;
 	BpValue String;
 	?BpTaxId String;
 	?Naics;
@@ -19,7 +17,7 @@ type CPaySelectionCheckV {
 	?BpGreeting String;
 	*Name;
 	?Name2 Name;
-@Column("C_LOCATION_ID") 	?CLocationId ID;
+	?CLocationId ID;
 	?ReferenceNo String;
 	?PoReference String;
 	PayDate Date;

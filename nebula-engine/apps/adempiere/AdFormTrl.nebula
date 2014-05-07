@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Special Form")
-@Refby("0")
 @Table("AD_FORM_TRL")
 type AdFormTrl {
-@ForeignKeyColumn("AD_FORM_ID") @Column("AD_FORM_ID") 	!AdForm;
-@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdForm;
+	!AdLanguage;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;

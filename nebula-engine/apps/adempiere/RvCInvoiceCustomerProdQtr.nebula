@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("RV_C_INVOICE_CUSTOMERPRODQTR")
 type RvCInvoiceCustomerProdQtr {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("C_BPARTNER_ID") 	CBpartnerId ID;
-@Column("M_PRODUCT_CATEGORY_ID") 	?MProductCategoryId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CBpartnerId ID;
+	?MProductCategoryId ID;
 	?DateInvoiced Date;
 	?LineNetAmt Amount;
 	?LineListAmt Amount;

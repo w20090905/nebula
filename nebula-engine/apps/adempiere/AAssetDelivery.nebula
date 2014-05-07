@@ -1,26 +1,24 @@
-@Legacy("adempiere")
 @Remarks("Delivery of Asset")
-@Refby("0")
 @Table("A_ASSET_DELIVERY")
 tx AAssetDelivery {
-@Column("A_ASSET_DELIVERY_ID") 	!AAssetDeliveryId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("A_ASSET_ID") @Column("A_ASSET_ID") 	AAsset;
+	!AAssetDeliveryId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	AAsset;
 	MovementDate Date;
 	?SerNo String;
 	?Lot Code;
 	?VersionNo String;
-@ForeignKeyColumn("M_INOUTLINE_ID") @Column("M_INOUTLINE_ID") 	?MInoutLine;
+	?MInoutLine;
 	?Email;
 	?MessageId String;
 	?DeliveryConfirmation String;
 	?Url;
-@Column("REMOTE_ADDR") 	?RemoteAddr Message;
-@Column("REMOTE_HOST") 	?RemoteHost Host;
+	?RemoteAddr Message;
+	?RemoteHost Host;
 	?Referrer String;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+	?AdUser;
 	?Description;
-@ForeignKeyColumn("M_PRODUCTDOWNLOAD_ID") @Column("M_PRODUCTDOWNLOAD_ID") 	?MProductDownload;
+	?MProductDownload;
 };
 

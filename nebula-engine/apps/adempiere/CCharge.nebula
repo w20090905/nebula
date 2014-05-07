@@ -1,18 +1,16 @@
-@Legacy("adempiere")
 @Remarks("Additional document charges")
-@Refby("18")
 @Table("C_CHARGE")
 type CCharge {
-@Column("C_CHARGE_ID") 	!CChargeId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CChargeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	ChargeAmt Amount;/* 0  */
 	IsSameTax YesNo;/* 'N'  */
 	IsSameCurrency YesNo;/* 'N'  */
-@ForeignKeyColumn("C_TAXCATEGORY_ID") @Column("C_TAXCATEGORY_ID") 	?CTaxCategory;
+	?CTaxCategory;
 	IsTaxIncluded YesNo;/* 'N' */
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
+	?CBpartner;
 };
 

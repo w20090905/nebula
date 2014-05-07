@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Product Lot Control")
-@Refby("3")
 @Table("M_LOTCTL")
 type MLotCtl {
-@Column("M_LOTCTL_ID") 	!MLotCtlId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MLotCtlId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	StartNo SeqNo;

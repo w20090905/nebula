@@ -1,23 +1,21 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("M_INOUT_LINECONFIRM_VT")
 type MInoutLineConfirmVt {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("AD_LANGUAGE") 	?AdLanguage Code;
-@Column("M_INOUTLINECONFIRM_ID") 	MInoutLineConfirmId ID;
-@Column("M_INOUTCONFIRM_ID") 	MInoutConfirmId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	?AdLanguage Code;
+	MInoutLineConfirmId ID;
+	MInoutConfirmId ID;
 	TargetQty Quantity;
 	ConfirmedQty Quantity;
 	?DifferenceQty Quantity;
 	?ScrappedQty Quantity;
 	?Description;
 	Processed String;
-@Column("M_INOUT_ID") 	?MInoutId ID;
-@Column("M_INOUTLINE_ID") 	?MInoutLineId ID;
+	?MInoutId ID;
+	?MInoutLineId ID;
 	?Line Number;
-@Column("M_PRODUCT_ID") 	?MProductId ID;
+	?MProductId ID;
 	?MovementQty Quantity;
 	?UomSymbol String;
 	?QtyBackOrdered Number;
@@ -27,16 +25,16 @@ type MInoutLineConfirmVt {
 	?Upc;
 	?Sku;
 	?ProductValue String;
-@Column("M_LOCATOR_ID") 	?MLocatorId ID;
-@Column("M_WAREHOUSE_ID") 	?MWarehouseId ID;
+	?MLocatorId ID;
+	?MWarehouseId ID;
 	?X String;
 	?Y String;
 	?Z String;
-@Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstanceId ID;
-@Column("M_ATTRIBUTESET_ID") 	?MAttributeSetId ID;
+	?MAttributeSetInstanceId ID;
+	?MAttributeSetId ID;
 	?SerNo String;
 	?Lot Code;
-@Column("M_LOT_ID") 	?MLotId ID;
+	?MLotId ID;
 	?GuaranteeDate Date;
 };
 

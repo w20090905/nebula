@@ -1,16 +1,14 @@
-@Legacy("adempiere")
 @Remarks("Budget Control")
-@Refby("0")
 @Table("GL_BUDGETCONTROL")
 type GlBudgetControl {
-@Column("GL_BUDGETCONTROL_ID") 	!GlBudgetControlId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!GlBudgetControlId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
-@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	CAcctSchema;
-@ForeignKeyColumn("GL_BUDGET_ID") @Column("GL_BUDGET_ID") 	GlBudget;
+	CAcctSchema;
+	GlBudget;
 	CommitmentType Attr;
 	IsBeforeApproval YesNo;/* 'N'  */
 	BudgetControlScope String;

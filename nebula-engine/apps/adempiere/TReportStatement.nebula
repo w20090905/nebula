@@ -1,10 +1,8 @@
-@Legacy("adempiere")
 @Remarks("T_ReportStatement")
-@Refby("0")
 @Table("T_REPORTSTATEMENT")
 tx TReportStatement {
-@ForeignKeyColumn("AD_PINSTANCE_ID") @Column("AD_PINSTANCE_ID") 	!AdPInstance;
-@Column("FACT_ACCT_ID") 	!FactAcctId ID;
+	!AdPInstance;
+	!FactAcctId ID;
 	LevelNo SeqNo;
 	DateAcct Date;
 	?Name;

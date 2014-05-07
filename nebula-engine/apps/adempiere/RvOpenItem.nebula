@@ -1,14 +1,12 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("RV_OPENITEM")
 type RvOpenItem {
-@Column("AD_ORG_ID") 	?AdOrgId ID;
-@Column("AD_CLIENT_ID") 	?AdClientId ID;
+	?AdOrgId ID;
+	?AdClientId ID;
 	?DocumentNo String;
-@Column("C_INVOICE_ID") 	?CInvoiceId ID;
-@Column("C_ORDER_ID") 	?COrderId ID;
-@Column("C_BPARTNER_ID") 	?CBpartnerId ID;
+	?CInvoiceId ID;
+	?COrderId ID;
+	?CBpartnerId ID;
 	?IsSoTrx YesNo;
 	?DateInvoiced Date;
 	?DateAcct Date;
@@ -20,14 +18,14 @@ type RvOpenItem {
 	?GrandTotal Number;
 	?PaidAmt Amount;
 	?OpenAmt Amount;
-@Column("C_CURRENCY_ID") 	?CCurrencyId ID;
-@Column("C_CONVERSIONTYPE_ID") 	?CConversionTypeId ID;
-@Column("C_PAYMENTTERM_ID") 	?CPaymentTermId ID;
+	?CCurrencyId ID;
+	?CConversionTypeId ID;
+	?CPaymentTermId ID;
 	?IsPayScheduleValid YesNo;
-@Column("C_INVOICEPAYSCHEDULE_ID") 	?CInvoicePayScheduleId ID;
+	?CInvoicePayScheduleId ID;
 	?InvoiceCollectionType Attr;
-@Column("C_CAMPAIGN_ID") 	?CCampaignId ID;
-@Column("C_PROJECT_ID") 	?CProjectId ID;
-@Column("C_ACTIVITY_ID") 	?CActivityId ID;
+	?CCampaignId ID;
+	?CProjectId ID;
+	?CActivityId ID;
 };
 

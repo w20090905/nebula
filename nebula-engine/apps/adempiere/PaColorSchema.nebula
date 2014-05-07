@@ -1,21 +1,19 @@
-@Legacy("adempiere")
 @Remarks("Performance Color Schema")
-@Refby("1")
 @Table("PA_COLORSCHEMA")
 type PaColorSchema {
-@Column("PA_COLORSCHEMA_ID") 	!PaColorSchemaId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!PaColorSchemaId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	Mark1percent Number;/* 0  */
-@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("AD_PRINTCOLOR1_ID") 	AdPrintColor1 AdPrintColor;
+	AdPrintColor1 AdPrintColor;
 	Mark2percent Number;/* 0  */
-@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("AD_PRINTCOLOR2_ID") 	AdPrintColor2 AdPrintColor;
+	AdPrintColor2 AdPrintColor;
 	?Mark3percent Number;/* 0 */
-@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("AD_PRINTCOLOR3_ID") 	?AdPrintColor3 AdPrintColor;
+	?AdPrintColor3 AdPrintColor;
 	?Mark4percent Number;/* 0 */
-@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("AD_PRINTCOLOR4_ID") 	?AdPrintColor4 AdPrintColor;
-@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;
+	?AdPrintColor4 AdPrintColor;
+	EntityType AdEntityType;
 };
 

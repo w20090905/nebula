@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("C_Project_Acct")
-@Refby("0")
 @Table("C_PROJECT_ACCT")
 type CProjectAcct {
-@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	!CProject;
-@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	!CAcctSchema;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("PJ_ASSET_ACCT") 	PjAssetAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("PJ_WIP_ACCT") 	PjWipAcct CValidCombination;
+	!CProject;
+	!CAcctSchema;
+	AdClientId ID;
+	AdOrgId ID;
+	PjAssetAcct CValidCombination;
+	PjWipAcct CValidCombination;
 };
 

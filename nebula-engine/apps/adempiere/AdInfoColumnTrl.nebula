@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Info Window Column")
-@Refby("0")
 @Table("AD_INFOCOLUMN_TRL")
 type AdInfoColumnTrl {
-@ForeignKeyColumn("AD_INFOCOLUMN_ID") @Column("AD_INFOCOLUMN_ID") 	!AdInfoColumn;
-@ForeignKeyColumn("AD_LANGUAGE") @Column("AD_LANGUAGE") 	!AdLanguage;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdInfoColumn;
+	!AdLanguage;
+	AdClientId ID;
+	AdOrgId ID;
 	IsTranslated YesNo;/* 'N'  */
 	*Name;
 	?Description;

@@ -1,6 +1,4 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("M_PRODUCT_STOCK_V")
 type MProductStockV {
 	Value String;
@@ -10,9 +8,9 @@ type MProductStockV {
 	QtyReserved Number;
 	?Description;
 	Warehouse String;
-@Column("M_WAREHOUSE_ID") 	MWarehouseId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	MWarehouseId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	?DocumentNote Note;
 };
 

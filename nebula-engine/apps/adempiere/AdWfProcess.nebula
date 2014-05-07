@@ -1,21 +1,19 @@
-@Legacy("adempiere")
 @Remarks("Actual Workflow Process Instance")
-@Refby("4")
 @Table("AD_WF_PROCESS")
 tx AdWfProcess {
-@ForeignKeyColumn("AD_WF_PROCESS_ID") @Column("AD_WF_PROCESS_ID") 	!AdWfProcess;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
-@ForeignKeyColumn("AD_WORKFLOW_ID") @Column("AD_WORKFLOW_ID") 	AdWorkflow;
-@ForeignKeyColumn("AD_WF_RESPONSIBLE_ID") @Column("AD_WF_RESPONSIBLE_ID") 	AdWfResponsible;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+	!AdWfProcess;
+	AdClient;
+	AdOrg;
+	AdWorkflow;
+	AdWfResponsible;
+	?AdUser;
 	WfState String;
-@ForeignKeyColumn("AD_MESSAGE_ID") @Column("AD_MESSAGE_ID") 	?AdMessage;
+	?AdMessage;
 	?Processing YesNo;
 	Processed YesNo;/* 'N'  */
 	?TextMsg Text;
-@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	AdTable;
-@Column("RECORD_ID") 	RecordId ID;
+	AdTable;
+	RecordId ID;
 	?Priority;
 };
 

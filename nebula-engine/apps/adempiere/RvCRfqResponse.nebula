@@ -1,17 +1,15 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("RV_C_RFQRESPONSE")
 type RvCRfqResponse {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("C_RFQ_ID") 	CRfqId ID;
-@Column("C_RFQ_TOPIC_ID") 	CRfqTopicId ID;
-@Column("C_BPARTNER_ID") 	CBpartnerId ID;
-@Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocationId ID;
-@Column("AD_USER_ID") 	?AdUserId ID;
-@Column("C_RFQRESPONSE_ID") 	CRfqResponseId ID;
-@Column("C_CURRENCY_ID") 	CCurrencyId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CRfqId ID;
+	CRfqTopicId ID;
+	CBpartnerId ID;
+	CBpartnerLocationId ID;
+	?AdUserId ID;
+	CRfqResponseId ID;
+	CCurrencyId ID;
 	?DateResponse Date;
 	?DateWorkStart Date;
 	?DeliveryDays Count;
@@ -21,15 +19,15 @@ type RvCRfqResponse {
 	IsSelfService YesNo;
 	?Description;
 	?Help;
-@Column("M_PRODUCT_ID") 	?MProductId ID;
-@Column("M_ATTRIBUTESETINSTANCE_ID") 	?MAttributeSetInstanceId ID;
+	?MProductId ID;
+	?MAttributeSetInstanceId ID;
 	Line Number;
 	?LineDateWorkStart null;
 	?LineDeliveryDays Count;
 	?LineDateWorkComplete null;
 	?LineDescription Description;
 	?LineHelp Help;
-@Column("C_UOM_ID") 	CUomId ID;
+	CUomId ID;
 	Qty Quantity;
 	BenchmarkPrice Number;
 	?BenchmarkDifference Number;

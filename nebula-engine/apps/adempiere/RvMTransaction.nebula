@@ -1,18 +1,16 @@
-@Legacy("adempiere")
 @Remarks("")
-@Refby("0")
 @Table("RV_M_TRANSACTION")
 type RvMTransaction {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	MovementDate Date;
 	MovementQty Quantity;
-@Column("M_PRODUCT_ID") 	MProductId ID;
-@Column("M_LOCATOR_ID") 	MLocatorId ID;
-@Column("M_ATTRIBUTESETINSTANCE_ID") 	MAttributeSetInstanceId ID;
-@Column("M_PRODUCT_CATEGORY_ID") 	MProductCategoryId ID;
+	MProductId ID;
+	MLocatorId ID;
+	MAttributeSetInstanceId ID;
+	MProductCategoryId ID;
 	Value String;
-@Column("C_BPARTNER_ID") 	CBpartnerId ID;
+	CBpartnerId ID;
 	?PricePo Number;
 	?PriceLastPo Number;
 	?PriceList Number;

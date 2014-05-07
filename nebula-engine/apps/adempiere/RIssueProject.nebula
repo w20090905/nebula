@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("Issue Project")
-@Refby("2")
 @Table("R_ISSUEPROJECT")
 type RIssueProject {
-@Column("R_ISSUEPROJECT_ID") 	!RIssueProjectId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!RIssueProjectId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
-@ForeignKeyColumn("A_ASSET_ID") @Column("A_ASSET_ID") 	?AAsset;
-@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
+	?AAsset;
+	?CProject;
 	?StatisticsInfo String;
 	?ProfileInfo String;
 	SystemStatus Attr;

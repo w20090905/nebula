@@ -1,18 +1,16 @@
-@Legacy("adempiere")
 @Remarks("Withholding type defined")
-@Refby("2")
 @Table("C_WITHHOLDING")
 type CWithholding {
-@Column("C_WITHHOLDING_ID") 	!CWithholdingId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CWithholdingId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
-@ForeignKeyColumn("C_PAYMENTTERM_ID") @Column("C_PAYMENTTERM_ID") 	CPaymentTerm;
+	CPaymentTerm;
 	IsTaxWithholding YesNo;/* 'Y'  */
 	IsTaxProrated YesNo;/* 'N'  */
 	IsPaidTo3Party YesNo;/* 'Y'  */
-@ForeignKeyColumn("C_BPARTNER_ID") 	?Beneficiary CBpartner;
+	?Beneficiary CBpartner;
 	IsPercentWithholding YesNo;/* 'Y'  */
 	?Percent;/* 0 */
 	?FixAmt Amount;/* 0 */

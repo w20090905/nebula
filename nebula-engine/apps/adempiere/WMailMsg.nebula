@@ -1,14 +1,12 @@
-@Legacy("adempiere")
 @Remarks("Web Store Mail Message Template")
-@Refby("2")
 @Table("W_MAILMSG")
 type WMailMsg {
-@Column("W_MAILMSG_ID") 	!WMailMsgId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!WMailMsgId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
-@ForeignKeyColumn("W_STORE_ID") @Column("W_STORE_ID") 	WStore;
+	WStore;
 	MailMsgType Attr;
 	Subject String;
 	Message String;

@@ -1,27 +1,25 @@
-@Legacy("adempiere")
 @Remarks("Acct.Schema Element")
-@Refby("0")
 @Table("C_ACCTSCHEMA_ELEMENT")
 type CAcctSchemaElement {
-@Column("C_ACCTSCHEMA_ELEMENT_ID") 	!CAcctSchemaElementId ID;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
-@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	CAcctSchema;
+	!CAcctSchemaElementId ID;
+	AdOrg;
+	CAcctSchema;
 	ElementType Attr;
 	*Name;
 	SeqNo;
-@ForeignKeyColumn("C_ELEMENT_ID") @Column("C_ELEMENT_ID") 	?CElement;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
+	?CElement;
+	AdClient;
 	IsMandatory YesNo;/* 'N'  */
 	IsBalanced YesNo;/* 'N'  */
-@ForeignKeyColumn("AD_ORG_ID") @Column("ORG_ID") 	?Org AdOrg;
-@ForeignKeyColumn("C_ELEMENTVALUE_ID") @Column("C_ELEMENTVALUE_ID") 	?CElementValue;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
-@ForeignKeyColumn("C_LOCATION_ID") @Column("C_LOCATION_ID") 	?CLocation;
-@ForeignKeyColumn("C_SALESREGION_ID") @Column("C_SALESREGION_ID") 	?CSalesRegion;
-@ForeignKeyColumn("C_PROJECT_ID") @Column("C_PROJECT_ID") 	?CProject;
-@ForeignKeyColumn("C_CAMPAIGN_ID") @Column("C_CAMPAIGN_ID") 	?CCampaign;
-@ForeignKeyColumn("C_ACTIVITY_ID") @Column("C_ACTIVITY_ID") 	?CActivity;
-@ForeignKeyColumn("AD_COLUMN_ID") @Column("AD_COLUMN_ID") 	?AdColumn;
+	?Org AdOrg;
+	?CElementValue;
+	?MProduct;
+	?CBpartner;
+	?CLocation;
+	?CSalesRegion;
+	?CProject;
+	?CCampaign;
+	?CActivity;
+	?AdColumn;
 };
 

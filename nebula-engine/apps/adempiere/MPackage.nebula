@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("Shipment Package")
-@Refby("1")
 @Table("M_PACKAGE")
 tx MPackage {
-@Column("M_PACKAGE_ID") 	!MPackageId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!MPackageId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo String;
-@ForeignKeyColumn("M_INOUT_ID") @Column("M_INOUT_ID") 	MInout;
+	MInout;
 	?Description;
-@ForeignKeyColumn("M_SHIPPER_ID") @Column("M_SHIPPER_ID") 	MShipper;
+	MShipper;
 	?TrackingInfo String;
 	?DateReceived Date;
 	?ReceivedInfo String;

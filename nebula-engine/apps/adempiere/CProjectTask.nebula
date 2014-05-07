@@ -1,18 +1,16 @@
-@Legacy("adempiere")
 @Remarks("Actual Project Task in a Phase")
-@Refby("7")
 @Table("C_PROJECTTASK")
 type CProjectTask {
-@Column("C_PROJECTTASK_ID") 	!CProjectTaskId ID;
-@ForeignKeyColumn("C_TASK_ID") @Column("C_TASK_ID") 	?CTask;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CProjectTaskId ID;
+	?CTask;
+	AdClientId ID;
+	AdOrgId ID;
 	SeqNo;
 	*Name;
 	?Description;
 	?Help;
-@ForeignKeyColumn("M_PRODUCT_ID") @Column("M_PRODUCT_ID") 	?MProduct;
-@ForeignKeyColumn("C_PROJECTPHASE_ID") @Column("C_PROJECTPHASE_ID") 	CProjectPhase;
+	?MProduct;
+	CProjectPhase;
 	?Qty Quantity;/* 0  	  */
 	?ProjInvoiceRule String;
 	PlannedAmt Amount;/* 0  */

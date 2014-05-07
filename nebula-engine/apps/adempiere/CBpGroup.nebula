@@ -1,24 +1,22 @@
-@Legacy("adempiere")
 @Remarks("Business Partner Group")
-@Refby("7")
 @Table("C_BP_GROUP")
 type CBpGroup {
-@Column("C_BP_GROUP_ID") 	!CBpGroupId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CBpGroupId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	Value String;
 	*Name;
 	?Description;
 	IsDefault YesNo;/* 'N'  */
-@ForeignKeyColumn("AD_PRINTCOLOR_ID") @Column("AD_PRINTCOLOR_ID") 	?AdPrintColor;
+	?AdPrintColor;
 	IsConfidentialInfo YesNo;/* 'N'  */
 	?PriorityBase String;
-@ForeignKeyColumn("M_PRICELIST_ID") @Column("M_PRICELIST_ID") 	?MPriceList;
-@ForeignKeyColumn("M_PRICELIST_ID") @Column("PO_PRICELIST_ID") 	?PoPriceList MPriceList;
-@ForeignKeyColumn("M_DISCOUNTSCHEMA_ID") @Column("M_DISCOUNTSCHEMA_ID") 	?MDiscountSchema;
-@ForeignKeyColumn("M_DISCOUNTSCHEMA_ID") @Column("PO_DISCOUNTSCHEMA_ID") 	?PoDiscountSchema MDiscountSchema;
+	?MPriceList;
+	?PoPriceList MPriceList;
+	?MDiscountSchema;
+	?PoDiscountSchema MDiscountSchema;
 	?CreditWatchPercent Percent;
 	?PriceMatchTolerance Number;
-@ForeignKeyColumn("C_DUNNING_ID") @Column("C_DUNNING_ID") 	?CDunning;
+	?CDunning;
 };
 

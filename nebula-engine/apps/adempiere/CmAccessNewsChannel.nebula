@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Web Access NewsChannel")
-@Refby("0")
 @Table("CM_ACCESSNEWSCHANNEL")
 type CmAccessNewsChannel {
-@ForeignKeyColumn("CM_ACCESSPROFILE_ID") @Column("CM_ACCESSPROFILE_ID") 	!CmAccessProfile;
-@ForeignKeyColumn("CM_NEWSCHANNEL_ID") @Column("CM_NEWSCHANNEL_ID") 	!CmNewsChannel;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CmAccessProfile;
+	!CmNewsChannel;
+	AdClientId ID;
+	AdOrgId ID;
 };
 

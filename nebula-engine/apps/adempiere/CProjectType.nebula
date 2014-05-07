@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Type of the project")
-@Refby("3")
 @Table("C_PROJECTTYPE")
 type CProjectType {
-@Column("C_PROJECTTYPE_ID") 	!CProjectTypeId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CProjectTypeId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;

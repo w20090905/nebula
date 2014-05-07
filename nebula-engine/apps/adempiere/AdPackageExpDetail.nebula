@@ -1,40 +1,38 @@
-@Legacy("adempiere")
 @Remarks("AD_Package_Exp_Detail_ID")
-@Refby("0")
 @Table("AD_PACKAGE_EXP_DETAIL")
 tx AdPackageExpDetail {
-@Column("AD_PACKAGE_EXP_DETAIL_ID") 	!AdPackageExpDetailId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("AD_FORM_ID") @Column("AD_FORM_ID") 	?AdForm;
-@ForeignKeyColumn("AD_IMPFORMAT_ID") @Column("AD_IMPFORMAT_ID") 	?AdImpFormat;
-@ForeignKeyColumn("AD_MENU_ID") @Column("AD_MENU_ID") 	?AdMenu;
-@ForeignKeyColumn("AD_PROCESS_ID") @Column("AD_PROCESS_ID") 	?AdProcess;
-@ForeignKeyColumn("AD_ROLE_ID") @Column("AD_ROLE_ID") 	?AdRole;
-@ForeignKeyColumn("AD_WINDOW_ID") @Column("AD_WINDOW_ID") 	?AdWindow;
-@ForeignKeyColumn("AD_WORKFLOW_ID") @Column("AD_WORKFLOW_ID") 	?AdWorkflow;
-@Column("FILE_DIRECTORY") 	?FileDirectOrY String;
+	!AdPackageExpDetailId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	?AdForm;
+	?AdImpFormat;
+	?AdMenu;
+	?AdProcess;
+	?AdRole;
+	?AdWindow;
+	?AdWorkflow;
+	?FileDirectOrY String;
 	?FileName Name;
-@Column("DESTINATION_FILENAME") 	?DestinationFileName Name;
-@Column("DESTINATION_DIRECTORY") 	?DestinationDirectOrY String;
+	?DestinationFileName Name;
+	?DestinationDirectOrY String;
 	Description;
 	?DbType String;
 	Type String;
-@Column("TARGET_DIRECTORY") 	?TargetDirectOrY String;
+	?TargetDirectOrY String;
 	?SqlStatement String;
 	?ReleaseNo String;
 	Processing YesNo;
 	?Processed String;
 	?Name2 Name;
 	?Line Number;
-@ForeignKeyColumn("AD_WORKBENCH_ID") @Column("AD_WORKBENCH_ID") 	?AdWorkbench;
-@ForeignKeyColumn("AD_TABLE_ID") @Column("AD_TABLE_ID") 	?AdTable;
-@ForeignKeyColumn("AD_REPORTVIEW_ID") @Column("AD_REPORTVIEW_ID") 	?AdReportView;
-@Column("AD_PACKAGE_EXP_ID") 	AdPackageExpId ID;
-@Column("AD_PACKAGE_CODE_NEW") 	?AdPackageCodeNew String;
-@Column("AD_PACKAGE_CODE_OLD") 	?AdPackageCodeOld String;
-@Column("AD_VAL_RULE_ID") 	?AdValRuleId ID;
-@ForeignKeyColumn("AD_MESSAGE_ID") @Column("AD_MESSAGE_ID") 	?AdMessage;
-@ForeignKeyColumn("AD_PRINTFORMAT_ID") @Column("AD_PRINTFORMAT_ID") 	?AdPrintFormat;
+	?AdWorkbench;
+	?AdTable;
+	?AdReportView;
+	AdPackageExpId ID;
+	?AdPackageCodeNew String;
+	?AdPackageCodeOld String;
+	?AdValRuleId ID;
+	?AdMessage;
+	?AdPrintFormat;
 };
 

@@ -1,12 +1,10 @@
-@Legacy("adempiere")
 @Remarks("Define access to document type / document action / role combinations.")
-@Refby("0")
 @Table("AD_DOCUMENT_ACTION_ACCESS")
 type AdDocumentActionAccess {
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_DOCTYPE_ID") @Column("C_DOCTYPE_ID") 	CDocType;
-@ForeignKeyColumn("AD_ROLE_ID") @Column("AD_ROLE_ID") 	AdRole;
-@ForeignKeyColumn("AD_REF_LIST_ID") @Column("AD_REF_LIST_ID") 	AdRefList;
+	AdClientId ID;
+	AdOrgId ID;
+	CDocType;
+	AdRole;
+	AdRefList;
 };
 

@@ -1,13 +1,11 @@
-@Legacy("adempiere")
 @Remarks("Personal Preference")
-@Refby("0")
 @Table("AD_PREFERENCE")
 tx AdPreference {
-@Column("AD_PREFERENCE_ID") 	!AdPreferenceId ID;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@ForeignKeyColumn("AD_ORG_ID") @Column("AD_ORG_ID") 	AdOrg;
-@ForeignKeyColumn("AD_WINDOW_ID") @Column("AD_WINDOW_ID") 	?AdWindow;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
+	!AdPreferenceId ID;
+	AdClient;
+	AdOrg;
+	?AdWindow;
+	?AdUser;
 	Attribute String;
 	Value String;
 };

@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("C_Currency_Acct")
-@Refby("0")
 @Table("C_CURRENCY_ACCT")
 tx CCurrencyAcct {
-@ForeignKeyColumn("C_ACCTSCHEMA_ID") @Column("C_ACCTSCHEMA_ID") 	!CAcctSchema;
-@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	!CCurrency;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("UNREALIZEDGAIN_ACCT") 	UnrealizedGainAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("UNREALIZEDLOSS_ACCT") 	UnrealizedLossAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("REALIZEDGAIN_ACCT") 	RealizedGainAcct CValidCombination;
-@ForeignKeyColumn("C_VALIDCOMBINATION_ID") @Column("REALIZEDLOSS_ACCT") 	RealizedLossAcct CValidCombination;
+	!CAcctSchema;
+	!CCurrency;
+	AdClientId ID;
+	AdOrgId ID;
+	UnrealizedGainAcct CValidCombination;
+	UnrealizedLossAcct CValidCombination;
+	RealizedGainAcct CValidCombination;
+	RealizedLossAcct CValidCombination;
 };
 

@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("A Web Store of the Client")
-@Refby("2")
 @Table("W_STORE")
 type WStore {
-@Column("W_STORE_ID") 	!WStoreId ID;
-@ForeignKeyColumn("AD_CLIENT_ID") @Column("AD_CLIENT_ID") 	AdClient;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!WStoreId ID;
+	AdClient;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
@@ -31,12 +29,12 @@ type WStore {
 	IsMenuContact YesNo;/* 'Y'  */
 	?EmailHeader Email;
 	?EmailFooter Email;
-@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	SalesRep AdUser;
-@ForeignKeyColumn("M_WAREHOUSE_ID") @Column("M_WAREHOUSE_ID") 	MWarehouse;
-@ForeignKeyColumn("M_PRICELIST_ID") @Column("M_PRICELIST_ID") 	MPriceList;
+	SalesRep AdUser;
+	MWarehouse;
+	MPriceList;
 	WebContext String;
 	?WebOrderEmail Email;
-@ForeignKeyColumn("C_PAYMENTTERM_ID") @Column("C_PAYMENTTERM_ID") 	?CPaymentTerm;
+	?CPaymentTerm;
 	IsDefault YesNo;/* 'N'  */
 	Url;/* 'http://localhost'  */
 	?StyleSheet String;

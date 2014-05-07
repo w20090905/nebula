@@ -1,11 +1,9 @@
-@Legacy("adempiere")
 @Remarks("Tax Category")
-@Refby("7")
 @Table("C_TAXCATEGORY")
 type CTaxCategory {
-@Column("C_TAXCATEGORY_ID") 	!CTaxCategoryId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CTaxCategoryId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?CommodityCode Code;

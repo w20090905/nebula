@@ -1,15 +1,13 @@
-@Legacy("adempiere")
 @Remarks("Web Basket")
-@Refby("1")
 @Table("W_BASKET")
 tx WBasket {
-@Column("W_BASKET_ID") 	!WBasketId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@Column("SESSION_ID") 	SessionId String;
+	!WBasketId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	SessionId String;
 	?Email;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	?CBpartner;
-@ForeignKeyColumn("M_PRICELIST_ID") @Column("M_PRICELIST_ID") 	?MPriceList;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	AdUser;
+	?CBpartner;
+	?MPriceList;
+	AdUser;
 };
 

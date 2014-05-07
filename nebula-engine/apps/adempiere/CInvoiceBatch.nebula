@@ -1,18 +1,16 @@
-@Legacy("adempiere")
 @Remarks("Expense Invoice Batch Header")
-@Refby("1")
 @Table("C_INVOICEBATCH")
 tx CInvoiceBatch {
-@Column("C_INVOICEBATCH_ID") 	!CInvoiceBatchId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!CInvoiceBatchId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	DocumentNo String;
 	?Description;
 	DateDoc Date;
 	IsSoTrx YesNo;/* 'N'  */
-@ForeignKeyColumn("AD_USER_ID") @Column("SALESREP_ID") 	SalesRep AdUser;
-@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
-@ForeignKeyColumn("C_CONVERSIONTYPE_ID") @Column("C_CONVERSIONTYPE_ID") 	?CConversionType;
+	SalesRep AdUser;
+	CCurrency;
+	?CConversionType;
 	ControlAmt Amount;/* 0  */
 	DocumentAmt Amount;/* 0  */
 	?Processing YesNo;

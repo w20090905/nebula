@@ -1,20 +1,18 @@
-@Legacy("adempiere")
 @Remarks("System Element enables the central maintenance of column description and help.")
-@Refby("4")
 @Table("AD_ELEMENT")
 type AdElement {
-@Column("AD_ELEMENT_ID") 	!AdElementId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;/* NULL */
+	!AdElementId ID;
+	AdClientId ID;
+	AdOrgId ID;/* NULL */
 	ColumnName Name;
-@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+	EntityType AdEntityType;/* 'D'  */
 	*Name;/* NULL */
 	PrintName Name;
 	?Description;
 	?Help;
-@Column("PO_NAME") 	?PoName Name;
-@Column("PO_PRINTNAME") 	?PoPrintName Name;
-@Column("PO_DESCRIPTION") 	?PoDescription Description;
-@Column("PO_HELP") 	?PoHelp Help;
+	?PoName Name;
+	?PoPrintName Name;
+	?PoDescription Description;
+	?PoHelp Help;
 };
 

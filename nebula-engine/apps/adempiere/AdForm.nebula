@@ -1,17 +1,15 @@
-@Legacy("adempiere")
 @Remarks("Special Form")
-@Refby("10")
 @Table("AD_FORM")
 type AdForm {
-@Column("AD_FORM_ID") 	!AdFormId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
+	!AdFormId ID;
+	AdClientId ID;
+	AdOrgId ID;
 	*Name;
 	?Description;
 	?Help;
 	AccessLevel Attr;
 	?ClassName Name;
-@ForeignKeyColumn("ENTITYTYPE") 	EntityType AdEntityType;/* 'D'  */
+	EntityType AdEntityType;/* 'D'  */
 	IsBetaFunctionality YesNo;/* 'N'  */
 	?JspUrl Url;
 };

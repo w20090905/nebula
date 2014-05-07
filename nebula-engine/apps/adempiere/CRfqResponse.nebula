@@ -1,19 +1,17 @@
-@Legacy("adempiere")
 @Remarks("Request for Quotation Response from a potential Vendor")
-@Refby("1")
 @Table("C_RFQRESPONSE")
 type CRfqResponse {
-@Column("C_RFQRESPONSE_ID") 	!CRfqResponseId ID;
-@Column("AD_CLIENT_ID") 	AdClientId ID;
-@Column("AD_ORG_ID") 	AdOrgId ID;
-@ForeignKeyColumn("C_RFQ_ID") @Column("C_RFQ_ID") 	CRfq;
+	!CRfqResponseId ID;
+	AdClientId ID;
+	AdOrgId ID;
+	CRfq;
 	*Name;
 	?Description;
 	?Help;
-@ForeignKeyColumn("C_BPARTNER_ID") @Column("C_BPARTNER_ID") 	CBpartner;
-@ForeignKeyColumn("C_BPARTNER_LOCATION_ID") @Column("C_BPARTNER_LOCATION_ID") 	CBpartnerLocation;
-@ForeignKeyColumn("AD_USER_ID") @Column("AD_USER_ID") 	?AdUser;
-@ForeignKeyColumn("C_CURRENCY_ID") @Column("C_CURRENCY_ID") 	CCurrency;
+	CBpartner;
+	CBpartnerLocation;
+	?AdUser;
+	CCurrency;
 	?DateInvited Date;
 	?DateResponse Date;
 	?DateWorkStart Date;
@@ -25,7 +23,7 @@ type CRfqResponse {
 	IsSelectedWinner YesNo;/* 'N'  */
 	?Ranking Number;/* 0 */
 	?Processing YesNo;
-@ForeignKeyColumn("C_ORDER_ID") @Column("C_ORDER_ID") 	?COrder;
+	?COrder;
 	Processed YesNo;/* 'N'  */
 	?CheckComplete String;
 };
