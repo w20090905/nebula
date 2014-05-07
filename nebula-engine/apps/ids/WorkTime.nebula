@@ -1,4 +1,4 @@
-tx WorkTime{
+tx WorkTime|工时表{
 !!ID;
 @SingleLine @Attach Project;
 From-Time;

@@ -4,7 +4,7 @@ tx Issue|问题{
 	@InlineShow *IssueType;
 	@InlineShow DataStatus|状态 :="Draft";
 	*Subject:="test";
-	?Note = this.Subject;
+	?Note;
 	 AssignTo Person;
 	?Date;
 	@InlineShow ?Version;
