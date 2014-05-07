@@ -1,6 +1,8 @@
 tx UserAccessLog{
 	!ID;
 	User;
-        UserAction Attr;
+	?UserAction Attr;
+	?RemoteAddr String;
+	?RemoteHost Host;
 	Timestamp;
 };

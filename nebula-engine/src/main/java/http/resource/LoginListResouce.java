@@ -81,6 +81,8 @@ public class LoginListResouce implements Resource {
 			EditableEntity accessLog = new EditableEntity();
 			accessLog.put(userKey, user.getID());
 			accessLog.put("UserAction", "Login");
+			accessLog.put("RemoteAddr", req.getRemoteAddr());
+			accessLog.put("RemoteHost", req.getRemoteHost());
 			accessLog.put("Timestamp", System.currentTimeMillis());
 			userAccessLogs.add(accessLog);
 			userAccessLogs.flush();
