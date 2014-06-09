@@ -1,0 +1,7 @@
+/logs
+
+/target
+/tmp
+.settings
+/db-test
+*.log
