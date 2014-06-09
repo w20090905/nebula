@@ -45,8 +45,8 @@ public class AdempiereTest extends TestCase {
 
 		// Type Define locator
 		EditableTypeLoader typeLoader = new EditableTypeLoader(new SystemTypeLoader(), new File("apps/system"));
-		typeLoader.registerPath(new File("apps/adempiere"));
-		typeLoader.loadAllImmediately();
+		//typeLoader.registerPath(new File("apps/adempiere"));
+		//typeLoader.loadAllImmediately();
 	}
 
 }

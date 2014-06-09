@@ -16,7 +16,8 @@ public class RealDBTypeDefineBuilder {
 	private Map<RawTypes, String> normalTypes = new HashMap<RawTypes, String>();
 
 	// 带精度类型
-//	private Map<RawTypes, Map<Integer, String>> weightedTypes = new HashMap<RawTypes, Map<Integer, String>>();
+	// private Map<RawTypes, Map<Integer, String>> weightedTypes = new
+	// HashMap<RawTypes, Map<Integer, String>>();
 
 	// 生成用于构建实际类型的说明字符串
 	public String build(RawTypes typecode) {
@@ -25,15 +26,16 @@ public class RealDBTypeDefineBuilder {
 
 	// 生成用于构建实际类型的说明字符串
 	public String build(RawTypes typeCode, Integer size, int precision, int scale) {
-//		Map<Integer, String> map = weightedTypes.get(typeCode);
-//		if (map == null) return replace(normalTypes.get(typeCode), size, precision, scale);
+		// Map<Integer, String> map = weightedTypes.get(typeCode);
+		// if (map == null) return replace(normalTypes.get(typeCode), size,
+		// precision, scale);
 
-//		// iterate entries ordered by capacity to find first fit
-//		for (Map.Entry<Integer, String> entry : map.entrySet()) {
-//			if (size <= entry.getKey()) {
-//				return replace(entry.getValue(), size, precision, scale);
-//			}
-//		}
+		// // iterate entries ordered by capacity to find first fit
+		// for (Map.Entry<Integer, String> entry : map.entrySet()) {
+		// if (size <= entry.getKey()) {
+		// return replace(entry.getValue(), size, precision, scale);
+		// }
+		// }
 
 		return replace(normalTypes.get(typeCode), size, precision, scale);
 	}
@@ -47,18 +49,18 @@ public class RealDBTypeDefineBuilder {
 		return type.replace("$p", Integer.toString(precision));
 	}
 
-//	/**
-//	 * 可以根据原始类型长度的不同，选择映射到不同的类型
-//	 */
-//	@Deprecated
-//	public void register(RawTypes typecode, int capacity, String value) {
-//		Map<Integer, String> map = weightedTypes.get(typecode);
-//		if (map == null) {// add new ordered map
-//			map = new TreeMap<Integer, String>();
-//			weightedTypes.put(typecode, map);
-//		}
-//		map.put(capacity, value);
-//	}
+	// /**
+	// * 可以根据原始类型长度的不同，选择映射到不同的类型
+	// */
+	// @Deprecated
+	// public void register(RawTypes typecode, int capacity, String value) {
+	// Map<Integer, String> map = weightedTypes.get(typecode);
+	// if (map == null) {// add new ordered map
+	// map = new TreeMap<Integer, String>();
+	// weightedTypes.put(typecode, map);
+	// }
+	// map.put(capacity, value);
+	// }
 
 	public void register(RawTypes typecode, String value) {
 		normalTypes.put(typecode, value);
