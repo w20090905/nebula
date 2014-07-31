@@ -1,4 +1,5 @@
- package test.db.h2;
+package test.db.h2;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,7 +14,7 @@ public class TestDerbyFile {
 		String password = "password";
 		
 		Class.forName(driverclass);
-		Connection conn = DriverManager.getConnection(dburl, username,password);
+		Connection conn = DriverManager.getConnection(dburl, username, password);
 		Statement s;
 		conn.setAutoCommit(false);
 		s = conn.createStatement();
@@ -22,13 +23,14 @@ public class TestDerbyFile {
 			conn.commit();
 		} catch (Exception e) {
 		}
-		
-		int MAX = 100;
+
+		int MAX = 1000 * 10;
 		{ // warm
 			// setUp
 			conn.setAutoCommit(true);
 			s.execute("create table test(id VARCHAR(255),name  VARCHAR(255))");
 			// prepare
+			@SuppressWarnings("unused")
 			long start, end, nanoAll, nanoEvery;
 
 			start = System.nanoTime();
@@ -36,13 +38,12 @@ public class TestDerbyFile {
 			conn.setAutoCommit(false);
 			for (int i = 0; i < 1; i++) {
 				s.execute("insert into test(id,name) values(\'wanshilian" + i + "\',\'test\')");
-			}			
+			}
 			conn.commit();
-			
+
 			end = System.nanoTime();
 			nanoAll = end - start;
 			nanoEvery = nanoAll / MAX;
-
 
 			conn.setAutoCommit(true);
 			s = conn.createStatement();
@@ -53,7 +54,7 @@ public class TestDerbyFile {
 			}
 		}
 		{
-			String desc = "DerbyFile 手工提交 无Key";
+			String desc = "手工提交 无Key";
 			// setUp
 			conn.setAutoCommit(true);
 			s.execute("create table test(id VARCHAR(255),name  VARCHAR(255))");
@@ -65,7 +66,7 @@ public class TestDerbyFile {
 			conn.setAutoCommit(false);
 			for (int i = 0; i < MAX; i++) {
 				s.execute("insert into test(id,name) values(\'wanshilian" + i + "\',\'test\')");
-			}			
+			}
 			conn.commit();
 			
 			end = System.nanoTime();
@@ -85,7 +86,7 @@ public class TestDerbyFile {
 		}
 
 		{
-			String desc = "DerbyFile 自动提交 无Key";
+			String desc = "自动提交 无Key";
 			// setUp
 			conn.setAutoCommit(true);
 			s.execute("create table test(id VARCHAR(255),name  VARCHAR(255))");
@@ -114,8 +115,7 @@ public class TestDerbyFile {
 			} catch (Exception e) {
 			}
 		}
-		
-		
+
 //		s= conn.createStatement();
 //		ResultSet r = s.executeQuery("select * from test;");
 //		int cnt = 0;
@@ -134,7 +134,7 @@ public class TestDerbyFile {
 //		}
 		
 		{
-			String desc = "DerbyFile 批量执行 无Key";
+			String desc = "批量执行 无Key";
 			// setUp
 			conn.setAutoCommit(true);
 			s.execute("create table test(id VARCHAR(255),name  VARCHAR(255))");
@@ -169,7 +169,8 @@ public class TestDerbyFile {
 				//System.out.println(r.getString("id"));
 				cnt ++;
 			}
-			
+
+			assert cnt == MAX;
 			conn.setAutoCommit(true);
 			s = conn.createStatement();
 			try {
@@ -177,11 +178,8 @@ public class TestDerbyFile {
 				conn.commit();
 			} catch (Exception e) {
 			}
-			
-			
-		}
-		
 
+		}
 
 		conn.close();
 	}
