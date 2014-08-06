@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import nebula.lang.RawTypes;
+import nebula.lang.RawTypes;
 
 import com.google.common.base.Preconditions;
 
@@ -25,7 +26,7 @@ public class RealDBTypeDefineBuilder {
 	}
 
 	// 生成用于构建实际类型的说明字符串
-	public String build(RawTypes typeCode, Integer size, int precision, int scale) {
+	public String buildName(RawTypes typeCode, Integer size, int precision, int scale) {
 		// Map<Integer, String> map = weightedTypes.get(typeCode);
 		// if (map == null) return replace(normalTypes.get(typeCode), size,
 		// precision, scale);
