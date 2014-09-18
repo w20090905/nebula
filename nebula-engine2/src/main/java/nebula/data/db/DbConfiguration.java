@@ -31,7 +31,7 @@ public class DbConfiguration {
 	/**
 	 * 初始化默认字段类型映射逻辑
 	 */
-	protected void initDefaultMapping() {
+	public void initDefaultMapping() {
 		registerColumnType(RawTypes.Boolean, "smallint");// .BIGINT
 		registerColumnType(RawTypes.Long, "bigint");// .BIGINT
 		registerColumnType(RawTypes.Decimal, "numeric($p,$s)");
@@ -64,7 +64,7 @@ public class DbConfiguration {
 	}
 
 	@Override
-	protected void finalize() {
+	public void finalize() {
 		try {
 			if (conn != null) {
 				conn.commit();

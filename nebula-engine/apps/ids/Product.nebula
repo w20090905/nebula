@@ -1,3 +1,5 @@
 type Product|产品{
 !Name;
+ProductType;
+?Description;
 }
